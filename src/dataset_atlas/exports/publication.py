@@ -15,6 +15,7 @@ from urllib.parse import urlsplit
 import yaml
 from pydantic import ValidationError
 
+from dataset_atlas.catalogue import summarize_records, thumbnails_document
 from dataset_atlas.models import Artifact, Dataset, Pack, Record
 from dataset_atlas.queries.results import attach_results
 
@@ -210,6 +211,7 @@ def _prepare(registry_dir: Path, packs_dir: Path, output_dir: Path, profile_path
     catalogue: list[dict[str, Any]] = []
     published: list[str] = []
     metadata_only: list[str] = []
+    thumbnails: dict[str, Any] = {}
     for dataset in datasets:
         public_dataset = _public_dataset(dataset)
         catalogue.append(public_dataset)
@@ -245,18 +247,22 @@ def _prepare(registry_dir: Path, packs_dir: Path, output_dir: Path, profile_path
                     raise PublicationError(f"Artifact identity or file references are unsafe: {artifact.id}")
                 if artifact.coverage.get("status") not in {"complete", "completed"}:
                     raise PublicationError(f"Artifact lacks complete coverage status: {artifact.id}")
-        public_pack = Pack(
+        public_pack_model = Pack(
             dataset=Dataset.model_validate(public_dataset),
             fields=[field for field in pack.fields if field.namespace == "record" or (field.namespace == "source" and annotations) or (field.namespace == "prediction" and derived)],
             records=[Record.model_validate(record) for record in records],
             artifacts=pack.artifacts if derived else [], population_scope="preview",
             sampling=pack.sampling, checksums={},
-        ).model_dump(mode="json")
+        )
+        public_pack = public_pack_model.model_dump(mode="json")
         scan_public({"fields": public_pack["fields"], "artifacts": public_pack["artifacts"], "sampling": public_pack["sampling"]}, label=f"pack.{dataset.id}")
         files[f"{dataset.id}.json"] = compact_json(public_pack)
         files.update(media)
+        # Catalogue tiles reference only media that already passed publication approval.
+        thumbnails[dataset.id] = summarize_records(public_pack_model.records[:40])
         published.append(dataset.id)
     files["catalogue.json"] = compact_json(catalogue)
+    files["thumbnails.json"] = compact_json(thumbnails_document(thumbnails))
     total = sum(len(content) for content in files.values())
     if total > max_bytes:
         raise PublicationError(f"Static data exceeds {max_bytes} byte budget ({total})")

@@ -1,0 +1,98 @@
+/* Dataset Atlas design tokens.
+   Neutral surfaces, one restrained blue accent, compact chrome, readable data.
+   Values follow the proposed starting scale in ui-mockups/UI-Initial-Spec.md §10. */
+
+:root {
+  /* Neutral ramp */
+  --n-0:  #ffffff;
+  --n-25: #fcfcfd;
+  --n-50: #f7f8fa;
+  --n-100:#f1f3f6;
+  --n-150:#e8ebf0;
+  --n-200:#dfe3ea;
+  --n-300:#c9cfd9;
+  --n-400:#a3abb9;
+  --n-500:#7c8698;
+  --n-600:#5c6677;
+  --n-700:#414b5c;
+  --n-800:#2b3341;
+  --n-900:#171d27;
+
+  /* Single accent */
+  --accent:        #2563eb;
+  --accent-hover:  #1d4ed8;
+  --accent-soft:   #eff4ff;
+  --accent-softer: #f6f9ff;
+  --accent-border: #bfd3fb;
+  --accent-text:   #1c4ed8;
+
+  /* Status — never the only carrier of meaning */
+  --ok:      #167a53;
+  --ok-soft: #ecf7f1;
+  --warn:      #9a6206;
+  --warn-soft: #fdf6e7;
+  --danger:      #b3271e;
+  --danger-soft: #fdf1ef;
+  --info-soft:   #eef4fd;
+
+  /* Annotation / series colours: used only to distinguish labels and runs */
+  --series-1:#2563eb; --series-2:#0f8a6a; --series-3:#c2620d;
+  --series-4:#8b5cf6; --series-5:#d14343; --series-6:#0e7490;
+  --series-7:#a16207; --series-8:#be185d;
+
+  /* Surfaces */
+  --bg:            var(--n-100);
+  --surface:       var(--n-0);
+  --surface-sunk:  var(--n-50);
+  --sidebar:       var(--n-50);
+  --border:        var(--n-200);
+  --border-strong: var(--n-300);
+  --divider:       var(--n-150);
+
+  /* Text */
+  --text:       var(--n-800);
+  --text-muted: var(--n-600);
+  --text-faint: var(--n-500);
+
+  /* Type — 14px primary UI text, 12–13px secondary */
+  --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  --fs-xs: 11px;
+  --fs-sm: 12px;
+  --fs-md: 13px;
+  --fs-base: 14px;
+  --fs-lg: 16px;
+  --fs-xl: 19px;
+  --fs-title: 27px;   /* dataset heading, not a marketing heading */
+
+  /* Spacing scale */
+  --s-1: 4px;  --s-2: 8px;  --s-3: 12px; --s-4: 16px;
+  --s-5: 20px; --s-6: 24px; --s-8: 32px; --s-10: 40px;
+
+  /* Structure */
+  --nav-w: 232px;
+  --facet-w: 248px;
+  --panel-w: 372px;
+  --control-h: 34px;
+  --control-h-sm: 28px;
+  --row-h: 40px;
+  --row-h-dense: 34px;
+  --radius: 10px;
+  --radius-sm: 7px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+
+  /* Elevation — reserved for floating controls and drawers */
+  --shadow-sm: 0 1px 2px rgba(23, 29, 39, .06);
+  --shadow-md: 0 4px 14px rgba(23, 29, 39, .10);
+  --shadow-lg: 0 16px 40px rgba(23, 29, 39, .16);
+
+  --focus: 0 0 0 2px var(--n-0), 0 0 0 4px var(--accent);
+
+  color-scheme: light;
+  font-family: var(--font);
+  font-size: var(--fs-base);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}

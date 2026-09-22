@@ -49,7 +49,8 @@ def test_complete_pinned_snapshot_preview_and_real_media(dataset_id, count):
             assert hashlib.sha256(media.data).hexdigest() == media.sha256
 
 
-def test_blink_and_illusion_task_scopes_remain_distinct():
+def test_blink_and_illusion_task_scopes_remain_distinct(require_local_files):
+    require_local_files('work/packs/blink/pack.json', 'work/packs/illusionvqa/pack.json')
     registry = Registry(ROOT)
     blink = registry.pack("blink")
     strata = Counter((row.source["task"], row.source["split"]) for row in blink.records)
@@ -64,7 +65,8 @@ def test_blink_and_illusion_task_scopes_remain_distinct():
     assert source["derived"]["task_counts"] == {"comprehension": 435, "soft-localization": 1000}
 
 
-def test_pope_three_strategy_labels_and_exact_coco_image_references():
+def test_pope_three_strategy_labels_and_exact_coco_image_references(require_local_files):
+    require_local_files('work/sources/pope/records.jsonl')
     rows = [json.loads(line) for line in (ROOT / "work/sources/pope/records.jsonl").open()]
     assert len(rows) == 9000
     assert Counter(row["strategy"] for row in rows) == {

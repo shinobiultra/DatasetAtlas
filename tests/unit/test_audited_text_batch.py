@@ -52,7 +52,8 @@ def test_pinned_preview_and_full_source_pagination(dataset_id: str, count: int):
         assert hashlib.sha256(original.read_bytes()).hexdigest() == item["sha256"]
 
 
-def test_tdc_released_dev_and_test_are_both_present():
+def test_tdc_released_dev_and_test_are_both_present(require_local_files):
+    require_local_files('work/packs/tdc2023/pack.json')
     pack = Registry(ROOT).pack("tdc2023")
     assert Counter(record.source["split"] for record in pack.records) == {"dev": 50, "test": 50}
     assert len({record.source["source_id"] for record in pack.records}) == 100
@@ -61,7 +62,8 @@ def test_tdc_released_dev_and_test_are_both_present():
         assert [record.source["behavior"] for record in pack.records[offset:offset + 50]] == originals
 
 
-def test_jailbreakv_preview_only_references_released_distinct_media():
+def test_jailbreakv_preview_only_references_released_distinct_media(require_local_files):
+    require_local_files('work/sources/jailbreakv-28k/available_images.json')
     registry = Registry(ROOT)
     dataset = registry.dataset("jailbreakv-28k")
     files = json.loads((ROOT / "work/sources/jailbreakv-28k/available_images.json").read_text())["files"]
@@ -76,7 +78,8 @@ def test_jailbreakv_preview_only_references_released_distinct_media():
     assert first.source["image_path"] and first.assets == []  # source references a missing public file
 
 
-def test_balanced_bbq_halueval_and_omnisafe_previews():
+def test_balanced_bbq_halueval_and_omnisafe_previews(require_local_files):
+    require_local_files('work/packs/bbq/pack.json', 'work/packs/halueval/pack.json', 'work/packs/omnisafebench-mm/pack.json')
     registry = Registry(ROOT)
     bbq = registry.pack("bbq")
     assert len({record.source["category"] for record in bbq.records}) == 11

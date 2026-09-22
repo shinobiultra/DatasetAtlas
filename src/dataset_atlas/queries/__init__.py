@@ -3,6 +3,7 @@ from __future__ import annotations
 import base64
 import json
 import math
+from collections import Counter
 from functools import cmp_to_key
 from typing import Any
 from dataset_atlas.models import Pack, Query, QueryResult, Record, content_id
@@ -143,3 +144,47 @@ def query_pack(pack: Pack, query: Query) -> QueryResult:
     if pack.population_scope=='preview':warnings.append('Counts describe the available preview, not the complete release.')
     if query.sample and query.sample.get('method')=='stratified':warnings.append('Stratified samples do not estimate population prevalence.')
     return QueryResult(snapshot_id=query.snapshot_id,unit=query.unit,population_scope=pack.population_scope,records=page,returned_count=len(page),matched_count=matched,coverage={'available_count':available,'sampled_count':len(rows),'sampling':query.sample},ordering=query.sort,cursor=cursor,warnings=warnings)
+
+def aggregate_pack(pack: Pack, query: Query, field_ids: list[str], *, top: int = 24) -> dict:
+    """Distributions over the filter-matched preview population.
+
+    Mirrors ParquetSnapshot.aggregate so the overview reports the same shape in
+    both scopes. Sampling is deliberately not applied; the response says so.
+    """
+    if query.population_scope!=pack.population_scope:raise ValueError('Requested population scope is unavailable in this pack')
+    if query.snapshot_id!=pack.dataset.snapshot_id:raise ValueError('Snapshot mismatch; reload dataset before aggregating')
+    if len(field_ids)>12:raise ValueError('Aggregate at most 12 fields per request')
+    if type(top) is not int or not 1<=top<=200:raise ValueError('Invalid aggregation width')
+    fields={f.id for f in pack.fields}|{'id','text','question','unit','dataset_id','release_id','snapshot_id'}
+    if query.unit=='asset':
+        fields={'id','text','question','unit','dataset_id','release_id','snapshot_id'}|{f'source.{key}' for row in materialize_records(pack,'asset') for key in row.source}|{f.id for f in pack.fields if f.unit=='asset'}
+    validate_filter(query.filter,fields)
+    if len(query.search)>4000:raise ValueError('Search exceeds 4000 characters')
+    unknown=[id for id in field_ids if id not in fields]
+    if unknown:raise ValueError(f'Unknown aggregation field: {unknown[0]}')
+    rows=materialize_records(pack,query.unit)
+    needle=query.search.lower()
+    rows=[r for r in rows if matches(r,query.filter) and (not needle or needle in '\n'.join([r.text or '',r.question or '',json.dumps(r.source,ensure_ascii=False,separators=(',',':'))]).lower())]
+    denominator=len(rows)
+    results=[]
+    for field_id in field_ids:
+        values=[field_value(r,field_id) for r in rows]
+        present=[v for v in values if v is not None]
+        missing=len(values)-len(present)
+        if any(isinstance(v,(list,dict)) for v in present):
+            results.append({'field_id':field_id,'kind':'unsupported','reason':'Structured fields are not aggregated.'})
+            continue
+        numbers=[float(v) for v in present if isinstance(v,(int,float)) and not isinstance(v,bool) and math.isfinite(float(v))]
+        if present and len(numbers)==len(present):
+            results.append({'field_id':field_id,'kind':'numeric','denominator':denominator,'missing':missing,
+                            'min':min(numbers),'max':max(numbers),'mean':sum(numbers)/len(numbers),'present':len(numbers)})
+            continue
+        counter=Counter(v if isinstance(v,str) else json.dumps(v,ensure_ascii=False,separators=(',',':')) for v in present)
+        ordered=sorted(counter.items(),key=lambda item:(-item[1],item[0]))
+        results.append({'field_id':field_id,'kind':'categorical','denominator':denominator,'missing':missing,
+                        'counts':[{'value':value,'count':count} for value,count in ordered[:top]],'truncated':len(ordered)>top})
+    warnings=[]
+    if query.sample:warnings.append('Sampling in the browsing query was not applied; these counts describe the filtered population.')
+    if pack.population_scope!='complete':warnings.append(f'Counts describe the available {pack.population_scope} snapshot, not a complete release.')
+    return {'snapshot_id':pack.dataset.snapshot_id,'unit':query.unit,'population_scope':pack.population_scope,
+            'denominator':denominator,'count_status':'exact','results':results,'sampling_applied':False,'warnings':warnings}

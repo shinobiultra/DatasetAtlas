@@ -1,8 +1,22 @@
 import type { Artifact, Capabilities, Dataset, FieldDescriptor, Pack, Query, QueryResult, Record as AtlasRecord, Run, Selection } from './generated'
-import { assetRecords, packFields, queryPack } from './query'
+import { aggregatePack, assetRecords, packFields, queryPack } from './query'
 
 export type ProcessorDescriptor = { id: string; name?: string; description?: string; available?: boolean; reason?: string; input_units?: string[]; configured_recipe?: boolean; requires_local_model?: boolean; config_schema?: Record<string, unknown> }
 export type CompleteScope = { snapshot_id: string; unit: 'asset' | 'example' | 'entity' | 'conversation'; population_scope: 'complete'; record_count: number; count_status: 'exact' | 'estimated' | 'unknown'; fields: FieldDescriptor[] }
+
+/** One catalogue card's real preview tiles. Never synthesized. */
+export type ThumbTile = { kind: 'image'; uri: string } | { kind: 'text'; text: string }
+export type ThumbEntry = { modality: string | null; tiles: ThumbTile[] }
+export type Thumbnails = Record<string, ThumbEntry>
+
+export type AggregateResult =
+  | { field_id: string; kind: 'categorical'; denominator: number; missing: number; counts: Array<{ value: string; count: number }>; truncated: boolean }
+  | { field_id: string; kind: 'numeric'; denominator: number; missing: number; min: number | null; max: number | null; mean: number | null; present: number }
+  | { field_id: string; kind: 'unsupported'; reason: string }
+export type AggregateResponse = {
+  snapshot_id: string; unit: string; population_scope: string; denominator: number
+  count_status: string; results: AggregateResult[]; sampling_applied: boolean; warnings: string[]
+}
 
 export interface DataProvider {
   readonly mode: 'static' | 'workbench'
@@ -32,6 +46,8 @@ export interface DataProvider {
   conversations(): Promise<Record<string, unknown>[]>
   conversation(id: string): Promise<Record<string, unknown>>
   similarity(datasetId: string, body: Record<string, unknown>): Promise<Record<string, unknown>>
+  thumbnails(): Promise<Thumbnails>
+  aggregate(datasetId: string, query: Query, fieldIds: string[], top?: number): Promise<AggregateResponse>
 }
 
 function checkMajor(data: { schema_version?: string }, label: string): void {
@@ -76,6 +92,9 @@ export class StaticDataProvider implements DataProvider {
   readonly mode = 'static'
   private catalogue?: Dataset[]
   private packs = new Map<string, Pack>()
+  /** In-flight requests are shared so a screen opening several panels fetches once. */
+  private pending = new Map<string, Promise<Pack>>()
+  private thumbs?: Promise<Thumbnails>
 
   async capabilities(): Promise<Capabilities> { return { mode: 'static', operations: ['catalogue', 'query', 'selection', 'export', 'artifacts'], api_version: '1' } }
   async datasets(): Promise<Dataset[]> {
@@ -94,14 +113,38 @@ export class StaticDataProvider implements DataProvider {
   async pack(id: string): Promise<Pack> {
     const cached = this.packs.get(id)
     if (cached) return cached
-    const dataset = await this.dataset(id)
-    if (!dataset.coverage?.preview_count || dataset.coverage.publication !== 'approved') throw new Error('No approved public preview is available for this dataset.')
-    const pack = await responseJson<Pack>(publicUrl(`data/${encodeURIComponent(id)}.json`))
-    checkMajor(pack, `Pack ${id}`)
-    if (pack.dataset.id !== id) throw new Error('The published pack has the wrong dataset ID.')
-    for (const record of pack.records) checkMajor(record, `Record ${record.id}`)
-    this.packs.set(id, pack)
-    return pack
+    const inflight = this.pending.get(id)
+    if (inflight) return inflight
+    const request = (async () => {
+      const dataset = await this.dataset(id)
+      if (!dataset.coverage?.preview_count || dataset.coverage.publication !== 'approved') throw new Error('No approved public preview is available for this dataset.')
+      const pack = await responseJson<Pack>(publicUrl(`data/${encodeURIComponent(id)}.json`))
+      checkMajor(pack, `Pack ${id}`)
+      if (pack.dataset.id !== id) throw new Error('The published pack has the wrong dataset ID.')
+      for (const record of pack.records) checkMajor(record, `Record ${record.id}`)
+      this.packs.set(id, pack)
+      return pack
+    })()
+    this.pending.set(id, request)
+    try { return await request } finally { this.pending.delete(id) }
+  }
+  async thumbnails(): Promise<Thumbnails> {
+    this.thumbs ??= (async () => {
+      try {
+        const document = await responseJson<{ schema_version?: string; datasets?: Thumbnails }>(publicUrl('data/thumbnails.json'))
+        checkMajor(document, 'Catalogue thumbnails')
+        const entries = document.datasets ?? {}
+        // Published tiles are relative to the site base, like every other published asset.
+        return Object.fromEntries(Object.entries(entries).map(([id, entry]) => [id, {
+          modality: entry.modality,
+          tiles: entry.tiles.map(tile => tile.kind === 'image' ? { kind: 'image' as const, uri: publicUrl(tile.uri) } : tile),
+        }]))
+      } catch { return {} }
+    })()
+    return this.thumbs
+  }
+  async aggregate(id: string, query: Query, fieldIds: string[], top = 24): Promise<AggregateResponse> {
+    return aggregatePack(await this.pack(id), query, fieldIds, top) as AggregateResponse
   }
   async fields(id: string): Promise<FieldDescriptor[]> { return packFields(await this.pack(id)) }
   async completeInfo(): Promise<CompleteScope> { throw new Error('Complete-data queries require the local workbench.') }
@@ -186,6 +229,14 @@ export class WorkbenchDataProvider implements DataProvider {
   conversations(): Promise<Record<string, unknown>[]> { return get('/conversations?limit=100') }
   conversation(id: string): Promise<Record<string, unknown>> { return get(`/conversations/${encodeURIComponent(id)}`) }
   similarity(datasetId: string, body: Record<string, unknown>): Promise<Record<string, unknown>> { return post(`/similarity/${encodeURIComponent(datasetId)}`, body) }
+  private thumbs?: Promise<Thumbnails>
+  thumbnails(): Promise<Thumbnails> {
+    this.thumbs ??= get<{ datasets?: Thumbnails }>('/catalogue/thumbnails').then(document => document.datasets ?? {}).catch(() => ({}))
+    return this.thumbs
+  }
+  aggregate(datasetId: string, query: Query, fieldIds: string[], top = 24): Promise<AggregateResponse> {
+    return post(`/aggregate/${encodeURIComponent(datasetId)}`, { query, field_ids: fieldIds, top })
+  }
 }
 
 export const provider: DataProvider = new URLSearchParams(window.location.search).get('mode') === 'workbench' ? new WorkbenchDataProvider() : new StaticDataProvider()

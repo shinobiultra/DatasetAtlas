@@ -1,0 +1,42 @@
+{
+  "tested_at": "2026-09-22T06:41:36.877Z",
+  "scope": "Real one-record analysis submitted from the rebuilt Analyze panel; results explicitly refreshed without a page reload.",
+  "runs": [
+    {
+      "run_id": "1225b3298930492a8261d7e0a7d2480e",
+      "processor_id": "detect.coco_v1",
+      "artifact_id": "67f8e4346b73ee541f98e79c",
+      "coverage": {
+        "completed": 1,
+        "failed": 0,
+        "max_output_bytes": 67108864,
+        "not_applicable": 0,
+        "output_bytes": 5527,
+        "queued": 0,
+        "running": 0,
+        "skipped": 0,
+        "status": "completed",
+        "total": 1
+      },
+      "record_id": "coco:example:c765b3eb380b785ef8fc414d"
+    },
+    {
+      "run_id": "bcd9dae7a0504d15a944e929b795d9b1",
+      "processor_id": "embed.siglip2",
+      "artifact_id": "4bdb86ce576cbb8668bec762",
+      "coverage": {
+        "completed": 1,
+        "failed": 0,
+        "max_output_bytes": 67108864,
+        "not_applicable": 0,
+        "output_bytes": 33690,
+        "queued": 0,
+        "running": 0,
+        "skipped": 0,
+        "status": "completed",
+        "total": 1
+      },
+      "record_id": "coco:example:c765b3eb380b785ef8fc414d"
+    }
+  ]
+}

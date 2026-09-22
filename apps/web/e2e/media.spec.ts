@@ -1,6 +1,7 @@
 import { expect, test, type Page } from '@playwright/test'
 import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
+import { inspectRecord, sampleCards, stubCommonRoutes } from './helpers'
 
 const ID = 'synthetic-media-contract'
 const SNAPSHOT = 'test-only-media-snapshot'
@@ -33,6 +34,8 @@ async function setup(page: Page) {
   await page.route('**/test-media/**', route => route.request().url().endsWith('/missing.png') ? route.fulfill({ status: 404, body: 'missing test image' }) : route.fulfill({ contentType: 'image/jpeg', body: fixture }))
   await page.route('**/api/v1/**', route => {
     const url = new URL(route.request().url()), path = url.pathname.replace('/api/v1', '')
+    const common = stubCommonRoutes(path, ID)
+    if (common !== undefined) return route.fulfill({ json: common })
     let body: unknown
     if (path === '/capabilities') body = { mode: 'workbench', operations: ['catalogue', 'query', 'artifacts'] }
     else if (path === '/datasets') body = [dataset]
@@ -44,24 +47,20 @@ async function setup(page: Page) {
     return route.fulfill({ json: body })
   })
   await page.goto(`/?mode=workbench#/dataset/${ID}`)
-  await expect(page.locator('.record-card')).toHaveCount(records.length)
-}
-
-async function inspect(page: Page, name: string) {
-  await page.getByRole('button', { name: `Inspect record ${recordId(name)}` }).click()
-  return page.getByRole('complementary', { name: 'Sample inspector' })
+  await expect(sampleCards(page)).toHaveCount(records.length)
 }
 
 test('EXIF-oriented pixel boxes align through browser resize and object-fit letterboxing', async ({ page }, testInfo) => {
   await setup(page)
-  const inspector = await inspect(page, 'geometry')
-  const image = inspector.getByRole('img', { name: `Source asset 1 for ${recordId('geometry')}` })
+  const inspector = await inspectRecord(page, recordId('geometry'))
+  const image = inspector.getByRole('img', { name: `Primary asset of ${recordId('geometry')}` })
   await expect(image).toHaveJSProperty('naturalWidth', 40)
   await expect(image).toHaveJSProperty('naturalHeight', 80)
-  await expect(inspector.locator('.box-overlay rect')).toHaveCount(1)
+  // Two rects per detection: the outline and the plate its label sits on.
+  await expect(inspector.locator('.box-layer rect')).toHaveCount(2)
 
   async function geometry() {
-    return inspector.locator('.media-item').evaluate(item => {
+    return inspector.locator('.insp-media').evaluate(item => {
       const image = item.querySelector('img')!, svg = item.querySelector('svg')!, box = svg.querySelector('rect')!
       const imageBounds = image.getBoundingClientRect(), overlayBounds = svg.getBoundingClientRect(), itemBounds = item.getBoundingClientRect()
       const scale = Math.min(imageBounds.width / image.naturalWidth, imageBounds.height / image.naturalHeight)
@@ -81,34 +80,41 @@ test('EXIF-oriented pixel boxes align through browser resize and object-fit lett
   expect(original.overlayWidthError).toBeLessThan(1)
   expect(original.maxBoxError).toBeLessThan(1)
   expect(original.landmark[0]).toBeGreaterThan(original.landmark[1] * 1.5)
-  await inspector.locator('.media-strip').evaluate(element => { (element as HTMLElement).style.height = '120px' })
+  await inspector.locator('.insp-media').evaluate(element => { (element as HTMLElement).style.height = '120px' })
   const resized = await geometry()
   expect(resized.horizontalLetterbox).toBeGreaterThan(original.horizontalLetterbox)
   expect(resized.maxBoxError).toBeLessThan(1)
-  await inspector.locator('.media-strip').screenshot({ path: testInfo.outputPath('exif-overlay-resized.png') })
+  await inspector.locator('.insp-media').screenshot({ path: testInfo.outputPath('exif-overlay-resized.png') })
 
-  await inspect(page, 'mismatch')
-  await expect(inspector.getByText('Overlay hidden: image size differs from detector input')).toBeVisible()
-  await expect(inspector.locator('.box-overlay')).toHaveCount(0)
+  await inspectRecord(page, recordId('mismatch'))
+  await expect(inspector.getByText(/Overlay hidden: 80×40 detector input differs/)).toBeVisible()
+  await expect(inspector.locator('.box-layer')).toHaveCount(0)
 })
 
 test('missing, failed, zero-detection, and broken-image states stay distinct', async ({ page }) => {
   await setup(page)
-  const inspector = await inspect(page, 'missing')
+  const inspector = await inspectRecord(page, recordId('missing'))
   await expect(inspector.getByRole('status')).toContainText('Not computed for this record')
-  await expect(inspector.locator('.box-overlay')).toHaveCount(0)
+  await expect(inspector.locator('.box-layer')).toHaveCount(0)
 
-  await inspect(page, 'failed')
+  await inspectRecord(page, recordId('failed'))
   await expect(inspector.getByRole('status')).toContainText('failed result')
   await expect(inspector.getByRole('status')).toContainText('Synthetic detector failure')
-  await expect(inspector.locator('.box-overlay')).toHaveCount(0)
+  await expect(inspector.locator('.box-layer')).toHaveCount(0)
 
-  await inspect(page, 'zero')
-  await expect(inspector.getByRole('status')).toContainText('Completed: 0 detections')
-  await expect(inspector.locator('.box-overlay rect')).toHaveCount(0)
+  await inspectRecord(page, recordId('zero'))
+  await expect(inspector.getByRole('status')).toContainText('Completed · no detections found')
+  await expect(inspector.locator('.box-layer rect')).toHaveCount(0)
 
-  await inspect(page, 'broken')
+  await inspectRecord(page, recordId('broken'))
   await expect(inspector.getByText('Media could not be loaded')).toBeVisible()
-  await expect(inspector.locator('img')).toHaveCount(0)
-  await expect(inspector.locator('.box-overlay')).toHaveCount(0)
+  await expect(inspector.locator('.insp-media img')).toHaveCount(0)
+  await expect(inspector.locator('.box-layer')).toHaveCount(0)
+})
+
+test('the extraction threshold is stated beside the boxes it produced', async ({ page }) => {
+  await setup(page)
+  const inspector = await inspectRecord(page, recordId('geometry'))
+  await expect(inspector.getByRole('status')).toContainText('Completed · 1 detection')
+  await expect(inspector.getByRole('status')).toContainText('Extraction threshold 0.5')
 })

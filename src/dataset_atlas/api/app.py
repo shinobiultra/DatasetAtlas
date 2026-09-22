@@ -35,6 +35,12 @@ class SimilarityRequest(BaseModel):
     query: Query
     limit: int = Field(default=20,ge=1,le=100)
 
+class AggregateRequest(BaseModel):
+    model_config=ConfigDict(extra='forbid')
+    query: Query
+    field_ids: list[str] = Field(min_length=1, max_length=12)
+    top: int = Field(default=24, ge=1, le=200)
+
 class RecordRequest(BaseModel):
     model_config=ConfigDict(extra='forbid')
     ids: list[str] = Field(min_length=1, max_length=1000)
@@ -112,6 +118,7 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
     roots=[p.resolve() for p in (allowed_roots or roots_for(root,'data_roots'))]
     media_handles=MediaHandles()
     snapshot_cache={}
+    thumbnail_cache={}
     def complete_snapshot(dataset_id):
         registry.dataset(dataset_id)
         path=work/'snapshots'/dataset_id
@@ -269,6 +276,46 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
     @app.get('/api/v1/datasets')
     def datasets():
         return [d.model_copy(update={'adapter_config':{}}) for d in registry.datasets()]
+    @app.get('/api/v1/catalogue/thumbnails')
+    def catalogue_thumbnails():
+        """Real preview tiles per dataset so the catalogue never fabricates media.
+
+        Derived from already-prepared packs and cached per pack revision. Media
+        handles are re-bound on every request because the handle LRU is bounded.
+        A dataset with no prepared preview simply has no entry."""
+        from dataset_atlas.catalogue import summarize_records, thumbnails_document
+        entries={}
+        for dataset in registry.datasets():
+            if not (dataset.coverage.preview_count or 0):continue
+            path=work/'packs'/dataset.id/'pack.json'
+            try:signature=(path.stat().st_mtime_ns,path.stat().st_size)
+            except OSError:continue
+            cached=thumbnail_cache.get(dataset.id)
+            if cached is None or cached[0]!=signature:
+                try:pack=registry.pack(dataset.id)
+                except (FileNotFoundError,ValueError):continue
+                summary=summarize_records(pack.records[:40])
+                assets={a.id:a for record in pack.records for a in record.assets}
+                tiles=[]
+                for tile in summary['tiles']:
+                    if tile['kind']!='image':tiles.append(dict(tile));continue
+                    asset=next((a for a in assets.values() if a.uri==tile['uri']),None)
+                    if asset is None:continue
+                    tiles.append({'kind':'image','asset':asset.model_copy(deep=True)})
+                cached=(signature,{'modality':summary['modality'],'tiles':tiles})
+                thumbnail_cache[dataset.id]=cached
+            resolved=[]
+            for tile in cached[1]['tiles']:
+                if tile['kind']!='image':resolved.append(tile);continue
+                asset=tile['asset']
+                if asset.uri and not asset.uri.startswith(('https://','http://','data:')):
+                    token=content_id([dataset.id,asset.id])
+                    media_handles[token]=(dataset.id,asset.model_copy(deep=True))
+                    resolved.append({'kind':'image','uri':'/api/v1/media/'+token})
+                else:
+                    resolved.append({'kind':'image','uri':asset.uri})
+            entries[dataset.id]={'modality':cached[1]['modality'],'tiles':resolved}
+        return thumbnails_document(entries)
     @app.get('/api/v1/datasets/{dataset_id}')
     def dataset(dataset_id:str):return registry.dataset(dataset_id).model_copy(update={'adapter_config':{}})
     def selected_artifacts(ids):
@@ -310,6 +357,16 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
                     media_handles[token]=(dataset_id,asset.model_copy(deep=True))
                     asset.uri='/api/v1/media/'+token
         return response
+    @app.post('/api/v1/aggregate/{dataset_id}')
+    def aggregate(dataset_id:str,body:AggregateRequest):
+        """Distributions over the population a browsing query matched.
+
+        The dataset overview uses this so its charts describe the real
+        filtered population instead of whichever page happened to load."""
+        from dataset_atlas.queries import aggregate_pack
+        if body.query.population_scope=='preview':
+            return aggregate_pack(browser_pack(dataset_id,body.query.result_snapshot_ids),body.query,body.field_ids,top=body.top)
+        return complete_snapshot(dataset_id).aggregate(body.query,body.field_ids,selected_artifacts(body.query.result_snapshot_ids),top=body.top)
     @app.post('/api/v1/similarity/{dataset_id}')
     def similarity(dataset_id:str,body:SimilarityRequest):
         if not jobs:raise HTTPException(503,'Artifact coordinator unavailable')

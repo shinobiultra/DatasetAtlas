@@ -219,3 +219,62 @@ function validateFilter(filter: Filter, fields: FieldDescriptor[], depth = 0, le
   if (filter.op === 'is_null' && typeof filter.value !== 'boolean') throw new Error('is_null expects a boolean value.')
   if (filter.op === 'contains' && typeof filter.value !== 'string') throw new Error('contains expects literal text.')
 }
+
+export type AggregateItem =
+  | { field_id: string; kind: 'categorical'; denominator: number; missing: number; counts: Array<{ value: string; count: number }>; truncated: boolean }
+  | { field_id: string; kind: 'numeric'; denominator: number; missing: number; min: number | null; max: number | null; mean: number | null; present: number }
+  | { field_id: string; kind: 'unsupported'; reason: string }
+
+/** Mirrors dataset_atlas.queries.aggregate_pack so both providers report the same shape. */
+export function aggregatePack(pack: Pack, query: Query, fieldIds: string[], top = 24) {
+  if ((query.population_scope ?? 'preview') !== (pack.population_scope ?? 'preview')) throw new Error('Requested population scope is unavailable in this pack.')
+  if (query.snapshot_id !== pack.dataset.snapshot_id) throw new Error('Dataset snapshot changed. Reload this dataset before aggregating.')
+  if (fieldIds.length > 12) throw new Error('Aggregate at most 12 fields per request.')
+  const unit = query.unit ?? 'example'
+  const fields = packFields(pack).filter(field => (field.unit ?? 'example') === unit)
+  const known = new Set([...fields.map(field => field.id), 'id', 'text', 'question', 'unit', 'dataset_id', 'release_id', 'snapshot_id'])
+  const unknown = fieldIds.find(id => !known.has(id))
+  if (unknown) throw new Error(`Unknown aggregation field: ${unknown}`)
+  if (query.filter) validateFilter(query.filter as Filter, fields)
+  let rows = unit === 'asset' ? assetRecords(pack) : pack.records.filter(record => (record.unit ?? 'example') === unit)
+  if (query.search) {
+    const needle = query.search.toLowerCase()
+    rows = rows.filter(record => [record.text ?? '', record.question ?? '', JSON.stringify(record.source ?? {})].some(value => value.toLowerCase().includes(needle)))
+  }
+  if (query.filter) rows = rows.filter(record => evaluateFilter(record, query.filter as Filter))
+  const denominator = rows.length
+  const results: AggregateItem[] = fieldIds.map(fieldId => {
+    const values = rows.map(record => fieldValue(record, fieldId))
+    const present = values.filter(value => value !== null && value !== undefined)
+    const missing = values.length - present.length
+    if (present.some(value => typeof value === 'object')) return { field_id: fieldId, kind: 'unsupported', reason: 'Structured fields are not aggregated.' }
+    const numbers = present.filter((value): value is number => typeof value === 'number' && Number.isFinite(value))
+    if (present.length && numbers.length === present.length) {
+      return {
+        field_id: fieldId, kind: 'numeric', denominator, missing, present: numbers.length,
+        min: Math.min(...numbers), max: Math.max(...numbers),
+        mean: numbers.reduce((sum, value) => sum + value, 0) / numbers.length,
+      }
+    }
+    const counter = new Map<string, number>()
+    for (const value of present) {
+      const key = typeof value === 'string' ? value : JSON.stringify(value)
+      counter.set(key, (counter.get(key) ?? 0) + 1)
+    }
+    const ordered = [...counter].sort((a, b) => b[1] - a[1] || lexical(a[0], b[0]))
+    return {
+      field_id: fieldId, kind: 'categorical', denominator, missing,
+      counts: ordered.slice(0, top).map(([value, count]) => ({ value, count })),
+      truncated: ordered.length > top,
+    }
+  })
+  const scope = pack.population_scope ?? 'preview'
+  return {
+    snapshot_id: query.snapshot_id, unit, population_scope: scope, denominator,
+    count_status: 'exact', results, sampling_applied: false,
+    warnings: [
+      ...(query.sample ? ['Sampling in the browsing query was not applied; these counts describe the filtered population.'] : []),
+      ...(scope === 'complete' ? [] : [`Counts describe the available ${scope} snapshot, not a complete release.`]),
+    ],
+  }
+}

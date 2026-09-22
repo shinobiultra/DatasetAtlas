@@ -49,7 +49,8 @@ def test_full_pagination_pinned_originals_and_real_media(dataset_id: str, count:
         Image.open(BytesIO(media.data)).verify()
 
 
-def test_vibeeval_and_visualpuzzle_source_fields_preserve_official_rows():
+def test_vibeeval_and_visualpuzzle_source_fields_preserve_official_rows(require_local_files):
+    require_local_files('work/packs/vibeeval/pack.json', 'work/packs/visualpuzzle/pack.json')
     registry = Registry(ROOT)
     for dataset_id, filename, fields in (
         ("vibeeval", "vibe-eval.v1.parquet", ("example_id", "category", "prompt", "reference", "media_url")),
@@ -71,7 +72,8 @@ def test_vibeeval_and_visualpuzzle_source_fields_preserve_official_rows():
                for record in puzzle.records)
 
 
-def test_whoops_source_arrays_and_image_population():
+def test_whoops_source_arrays_and_image_population(require_local_files):
+    require_local_files('work/sources/whoops/records.jsonl')
     registry = Registry(ROOT)
     dataset = registry.dataset("whoops")
     rows = [json.loads(line) for line in Path(dataset.adapter_config["path"]).open(encoding="utf-8")]

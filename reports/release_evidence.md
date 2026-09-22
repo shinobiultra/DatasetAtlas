@@ -35,3 +35,7 @@ No paid model API was used. Dataset pixels were sent only to the explicitly conf
 180 Python tests and 15 frontend tests passed. The final Playwright run passed 11 checks; the optional additional model-send test was skipped because its real saved conversation is already recorded in [the linked journey receipt](browser-linked-journey.json). Browser re-export/import was rerun successfully. Generated contracts were byte-identical. [All 64 registered local previews](final-preview-verification.json) passed record-count, snapshot-identity, and file-checksum verification. Registry validation passed 336/336. The public bundle contains only the three approved 100-record previews and is about 30.4 MB including frontend assets.
 
 The wheel and source archive were rebuilt, scanned, and the wheel installed with base dependencies in a fresh Python 3.12 environment. A real HTTP server outside the checkout served the catalogue, all three packs and representative images, JavaScript, and API capabilities without Torch, Transformers, NudeNet, scikit-learn, UMAP, or LanceDB. See [the refreshed installation receipt](installation-verification.json). No remote deployment was performed.
+
+## Rebuilt interface closeout
+
+The earlier UI evidence above is superseded by [the UI closeout](ui-closeout.md): 191 Python tests, 22 frontend tests, and all 27 browser checks pass. The rebuilt panels now have real local image-send and detector/embedding-run receipts, explicit result refresh, and 390 px / 820 px browser coverage. No model-send skip remains in the live closeout run.

@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 
 from dataset_atlas.models import Asset, Dataset, FieldDescriptor, Pack, Query, Record
-from dataset_atlas.queries import query_pack
+from dataset_atlas.queries import aggregate_pack, query_pack
 
 
 dataset = Dataset(id='synthetic-parity', name='Synthetic parity fixture', snapshot_id='synthetic-v1')
@@ -42,7 +42,23 @@ queries = {
     'asset': Query(snapshot_id=dataset.snapshot_id, unit='asset'),
 }
 
-fixture = {'pack': pack.model_dump(mode='json'), 'cases': {name: {'query': query.model_dump(mode='json'), 'ids': [row.id for row in query_pack(pack, query).records], 'matched_count': query_pack(pack, query).matched_count} for name, query in queries.items()}}
+# Aggregate parity keeps the overview's counts identical in both providers.
+aggregates = {
+    'all_fields': (Query(snapshot_id=dataset.snapshot_id), ['source.group', 'source.score', 'source.meta.key']),
+    'filtered': (Query(snapshot_id=dataset.snapshot_id, filter={'field_id': 'source.group', 'op': 'eq', 'value': 'A'}), ['source.group', 'source.score']),
+    'searched': (Query(snapshot_id=dataset.snapshot_id, search='blue'), ['source.group']),
+    'sample_ignored': (Query(snapshot_id=dataset.snapshot_id, sample={'method': 'random', 'size': 2, 'seed': 42}), ['source.group']),
+    'asset_unit': (Query(snapshot_id=dataset.snapshot_id, unit='asset'), ['source.asset_group']),
+}
+
+fixture = {
+    'pack': pack.model_dump(mode='json'),
+    'cases': {name: {'query': query.model_dump(mode='json'), 'ids': [row.id for row in query_pack(pack, query).records], 'matched_count': query_pack(pack, query).matched_count} for name, query in queries.items()},
+    'aggregates': {
+        name: {'query': query.model_dump(mode='json'), 'field_ids': field_ids, 'expected': aggregate_pack(pack, query, field_ids)}
+        for name, (query, field_ids) in aggregates.items()
+    },
+}
 output = Path(__file__).resolve().parents[1] / 'src' / 'test-fixtures' / 'query-parity.json'
 output.parent.mkdir(parents=True, exist_ok=True)
 output.write_text(json.dumps(fixture, ensure_ascii=False, indent=2) + '\n')

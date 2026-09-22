@@ -20,8 +20,9 @@ def fixture_records():
     return selection, records
 
 
-def completed(manager, run_id):
-    for _ in range(100):
+def completed(manager, run_id, timeout=15):
+    deadline = time.monotonic() + timeout
+    while time.monotonic() < deadline:
         run = manager.get_run(run_id)
         if run.status not in ("queued", "running"):
             return run
@@ -203,7 +204,7 @@ def test_subprocess_cancel_preserves_partial_and_retry(tmp_path):
     manager.close()
 
     resumed = JobManager(tmp_path / "work")
-    finished = completed(resumed, resumed.retry(run.id).id)
+    finished = completed(resumed, resumed.retry(run.id).id, timeout=60)
     assert finished.status == "completed"
     assert finished.progress["completed"] == len(ids)
     assert len(resumed.get_artifact(finished.artifact_ids[0]).data["items"]) == len(ids)

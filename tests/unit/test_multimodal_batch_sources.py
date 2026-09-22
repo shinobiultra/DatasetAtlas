@@ -50,7 +50,8 @@ def test_pinned_complete_source_preview_and_asset(dataset_id, expected):
             image.verify()
 
 
-def test_mathvision_full_test_split_and_mini_overlap_are_not_conflated():
+def test_mathvision_full_test_split_and_mini_overlap_are_not_conflated(require_local_files):
+    require_local_files('work/packs/mathvision/pack.json')
     dataset = Registry(ROOT).dataset("mathvision")
     full = pq.read_table(dataset.adapter_config["path"], columns=["id", "question", "decoded_image"])
     mini = pq.read_table(ROOT / "work/sources/mathvision/original/data/testmini-00000-of-00001-f8ff70fcb2f29b1d.parquet",
@@ -63,7 +64,8 @@ def test_mathvision_full_test_split_and_mini_overlap_are_not_conflated():
     assert first.source["answer"] and first.assets[0].uri.startswith("embedded/")
 
 
-def test_mmvet_v1_source_fields_and_llava_context_join():
+def test_mmvet_v1_source_fields_and_llava_context_join(require_local_files):
+    require_local_files('work/packs/mm-vet/pack.json', 'work/packs/llava-bench/pack.json')
     mm = [json.loads(line) for line in (ROOT / "work/sources/mm-vet/records.jsonl").open()]
     assert len(mm) == 218 and len({row["media_path"] for row in mm}) == 200
     assert Counter(row["bard_set"] for row in mm) == {True: 168, False: 50}

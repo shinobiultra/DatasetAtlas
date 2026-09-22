@@ -1,6 +1,7 @@
 import { expect, test, type Page } from '@playwright/test'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
+import { addFieldFilter, expectPanel, inspectRecord, openDataset, sampleCards, scopeLine, switchView } from './helpers'
 
 type Point = { id: string; x: number; y: number }
 const packPath = fileURLToPath(new URL('../public/data/clevr.json', import.meta.url))
@@ -28,81 +29,117 @@ test('published CLEVR catalogue → source filter → map → inspector', async 
   expect(points.length).toBe(100)
 
   await page.goto('/')
-  await expect(page.getByRole('heading', { name: 'Explore datasets' })).toBeVisible()
-  await page.locator('.dataset-row').filter({ has: page.locator('strong', { hasText: /^CLEVR$/ }) }).click()
-  await expect(page.getByRole('heading', { name: 'CLEVR' })).toBeVisible()
-  await expect(page.locator('.record-card')).toHaveCount(48)
-  await page.getByText('Filters', { exact: true }).click()
-  await page.locator('.workspace-controls .filter-fields select').first().selectOption('source.answer')
-  await page.getByLabel('Filter value').fill('no')
-  await expect(page.locator('.scope-line')).toContainText(`${matched.length} matches`)
-  await page.getByRole('button', { name: 'Map', exact: true }).click()
-  const canvas = page.getByRole('img', { name: new RegExp(`Projection with ${matched.length} visible records`) })
-  await expect(canvas).toBeVisible()
-  await expect(page.locator('.map-wrap')).toContainText(`${matched.length} plotted of ${matched.length} loaded records`)
+  await expect(page.getByRole('heading', { name: 'Datasets', exact: true })).toBeVisible()
+  await openDataset(page, 'clevr')
+  await expect(page.getByRole('heading', { name: 'CLEVR', exact: true })).toBeVisible()
+  await expect(sampleCards(page).first()).toBeVisible()
 
-  const xs = points.map(point => point.x), ys = points.map(point => point.y)
-  const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys)
-  const target = points.find(point => matched.some((record: { id: string }) => record.id === point.id))!
-  const x = 24 + 752 * (target.x - minX) / (maxX - minX || 1)
-  const y = 24 + 452 * (1 - (target.y - minY) / (maxY - minY || 1))
+  await addFieldFilter(page, 'source.answer', 'no')
+  await expect(scopeLine(page)).toContainText(`${matched.length} matches`)
+
+  await switchView(page, 'Map')
+  const canvas = page.locator('.map-stage canvas')
+  await expect(canvas).toHaveAttribute('aria-label', new RegExp(`Projection project\\.umap with ${matched.length} plotted points`))
+  await expect(page.locator('.map-strip')).toContainText(`${matched.length} plotted`)
+
+  // Click the exact screen position of one matching point and inspect it.
   const box = await canvas.boundingBox()
   expect(box).not.toBeNull()
-  await canvas.click({ position: { x: x * box!.width / 800, y: y * box!.height / 500 } })
-  await expect(page.getByRole('complementary', { name: 'Sample inspector' })).toBeVisible()
-  await expect(page.getByText(target.id, { exact: true })).toBeVisible()
-  await expect(page.getByText('Source fields', { exact: true })).toBeVisible()
+  const present = points.filter(point => matched.some((record: { id: string }) => record.id === point.id))
+  const xs = present.map(point => point.x), ys = present.map(point => point.y)
+  const minX = Math.min(...xs), maxX = Math.max(...xs), minY = Math.min(...ys), maxY = Math.max(...ys)
+  const padding = 26
+  const width = box!.width - padding * 2, height = box!.height - padding * 2
+  const target = present[0]
+  const x = padding + width * (target.x - minX) / (maxX - minX || 1)
+  const y = padding + height * (1 - (target.y - minY) / (maxY - minY || 1))
+  await canvas.click({ position: { x, y } })
+
+  const inspector = await expectPanel(page, 'Sample inspector')
+  await expect(inspector.getByText('Source annotations', { exact: true })).toBeVisible()
+  await inspector.getByRole('tab', { name: 'Metadata' }).click()
+  await expect(inspector.getByText(target.id, { exact: true })).toBeVisible()
 })
 
-test('About drawer keeps unpublished evidence absent and shows public source', async ({ page }, testInfo) => {
+test('inspection and selection stay separate interactions', async ({ page }) => {
   await page.goto('/#/dataset/clevr')
-  await page.getByRole('button', { name: 'About' }).click()
-  const drawer = page.getByRole('dialog', { name: 'about drawer' })
-  await expect(drawer).toBeVisible()
-  await expect(drawer.getByRole('heading', { name: 'Evidence', exact: true })).toBeVisible()
-  await expect(drawer.getByText('No evidence receipts registered.')).toBeVisible()
-  await expect(drawer.getByRole('link', { name: 'Original source ↗' })).toHaveAttribute('href', /^https:\/\//)
-  await drawer.screenshot({ path: testInfo.outputPath('about-public-clevr.png') })
+  await expect(sampleCards(page).first()).toBeVisible()
+  const first = sampleCards(page).first()
+  const recordId = await first.getAttribute('data-record-id')
+  expect(recordId).toBeTruthy()
+
+  // Clicking a card inspects it and never selects it.
+  await page.getByRole('button', { name: `Inspect record ${recordId}` }).click()
+  await expectPanel(page, 'Sample inspector')
+  await expect(page.locator('.statusbar.active')).toHaveCount(0)
+  await expect(first).toHaveAttribute('data-inspected', 'true')
+
+  // Ticking the checkbox selects it and reveals the selection actions.
+  await page.getByLabel(`Select record ${recordId}`).check()
+  await expect(page.locator('.statusbar.active .count')).toHaveText('1 selected')
+  await expect(page.locator('.statusbar.active').getByRole('button', { name: 'Save' })).toBeVisible()
+})
+
+test('a public build states what it can show and never claims the workbench preview', async ({ page }) => {
+  await page.goto('/')
+  await expect(page.locator('.cat-head')).toContainText('browsable in this public build')
+  const unpublished = page.locator('.ds-card').filter({ hasText: 'Metadata only here' }).first()
+  await expect(unpublished).toBeVisible()
+  await expect(unpublished).toContainText('exists in the local workbench')
+})
+
+test('a metadata-only dataset explains the gap instead of showing an empty grid', async ({ page }) => {
+  await page.goto('/#/dataset/advbench')
+  await expect(page.getByText('No inspectable examples here yet')).toBeVisible()
+  await expect(page.getByText(/implementation gap in Dataset Atlas/)).toBeVisible()
+  await expect(sampleCards(page)).toHaveCount(0)
+})
+
+test('About panel keeps unpublished evidence absent and shows the public source', async ({ page }, testInfo) => {
+  await page.goto('/#/dataset/clevr')
+  await page.getByRole('button', { name: 'About dataset' }).click()
+  const about = await expectPanel(page, 'About dataset')
+  await about.getByText(/^Evidence \(/).click()
+  await expect(about.getByText('No evidence receipts are registered.')).toBeVisible()
+  await expect(about.getByRole('link', { name: 'Original source' })).toHaveAttribute('href', /^https:\/\//)
+  await about.screenshot({ path: testInfo.outputPath('about-public-clevr.png') })
 })
 
 test('About relationship opens a distinct catalogue dataset with its own coverage', async ({ page }) => {
   test.skip(!process.env.ATLAS_LIVE_API, 'Local workbench catalogue exposes source and release relationships.')
   await forwardLocalApi(page, process.env.ATLAS_LIVE_API!)
   await page.goto('/?mode=workbench#/dataset/clevr')
-  await page.getByRole('button', { name: 'About' }).click()
-  const drawer = page.getByRole('dialog', { name: 'about drawer' })
-  const related = drawer.getByRole('region', { name: 'Related datasets' })
-  await expect(related).toContainText('has complete release variant')
-  await expect(related).toContainText('Status: verified')
-  await related.getByRole('button', { name: /clevr-v1-full/ }).click()
+  await page.getByRole('button', { name: 'About dataset' }).click()
+  const about = await expectPanel(page, 'About dataset')
+  await expect(about).toContainText('has complete release variant')
+  await about.getByRole('button', { name: /CLEVR v1\.0/ }).click()
   await expect(page).toHaveURL(/#\/dataset\/clevr-v1-full$/)
   await expect(page.getByRole('heading', { name: 'CLEVR v1.0 (official complete release)' })).toBeVisible()
-  await expect(page.locator('.scope-line')).toContainText('100 example preview')
+  await expect(scopeLine(page)).toContainText('100 example records')
 })
 
 test('local workbench About renders source and paper receipts when available', async ({ page }, testInfo) => {
   test.skip(!process.env.ATLAS_LIVE_API, 'Set ATLAS_LIVE_API to a running local workbench URL for this optional integration check.')
   await forwardLocalApi(page, process.env.ATLAS_LIVE_API!)
   await page.goto('/?mode=workbench#/dataset/clevr')
-  await page.getByRole('button', { name: 'About' }).click()
-  const drawer = page.getByRole('dialog', { name: 'about drawer' })
-  await expect(drawer.getByRole('heading', { name: 'Evidence', exact: true })).toBeVisible()
-  await expect(drawer.getByRole('heading', { name: /Source and release evidence/ })).toBeVisible()
-  await expect(drawer.getByRole('heading', { name: /Paper mentions/ })).toBeVisible()
-  await expect(drawer.getByText(/Paper text check/)).toBeVisible()
-  await expect(drawer.getByText(/Source or release reference/).first()).toBeVisible()
-  await drawer.locator('.evidence-section').screenshot({ path: testInfo.outputPath('about-local-clevr-evidence.png') })
+  await page.getByRole('button', { name: 'About dataset' }).click()
+  const about = await expectPanel(page, 'About dataset')
+  await about.getByText(/^Evidence \(/).click()
+  await expect(about.getByText(/separate review scopes/)).toBeVisible()
+  await expect(about.getByText('Full receipt').first()).toBeVisible()
+  await about.screenshot({ path: testInfo.outputPath('about-local-clevr-evidence.png') })
 })
 
 test('local COCO completed detector overlays remain visible on original media', async ({ page }) => {
   test.skip(!process.env.ATLAS_LIVE_API, 'Set ATLAS_LIVE_API to a running local workbench URL for this optional integration check.')
   await forwardLocalApi(page, process.env.ATLAS_LIVE_API!)
   await page.goto('/?mode=workbench#/dataset/coco')
-  await page.getByRole('button', { name: 'Inspect record coco:example:c765b3eb380b785ef8fc414d' }).click()
-  const inspector = page.getByRole('complementary', { name: 'Sample inspector' })
-  await expect(inspector.locator('.box-overlay rect')).toHaveCount(32)
-  await expect(inspector.getByRole('status').filter({ hasText: 'detect.coco_v1' })).toContainText('Completed: 32 detections')
-  await expect(inspector.locator('.media-geometry-warning')).toHaveCount(0)
+  const inspector = await inspectRecord(page, 'coco:example:c765b3eb380b785ef8fc414d')
+  const artifactId = 'ed3d9c68da43ce9d7b593937'
+  const artifact = await (await fetch(`${process.env.ATLAS_LIVE_API}/api/v1/artifacts/${artifactId}`)).json()
+  await expect(inspector.locator(`.box-layer[data-run-id="${artifact.run_id}"] rect`)).toHaveCount(64) // 32 outlines plus 32 label plates, scoped to the frozen baseline run
+  await expect(inspector.locator(`[data-artifact-id="${artifactId}"]`)).toContainText('Completed · 32 detections')
+  await expect(inspector.locator('.overlay-note')).toHaveCount(0)
 })
 
 test('local VHD H.264 clip exposes metadata and native playback without fetching large codec controls', async ({ page, browser }, testInfo) => {
@@ -117,16 +154,14 @@ test('local VHD H.264 clip exposes metadata and native playback without fetching
   expect(mediaToken).toBeTruthy()
   await forwardLocalApi(page, api, mediaToken)
   await page.goto('/?mode=workbench#/dataset/vhd11k')
-  await page.getByLabel('Population scope').selectOption('complete')
-  await expect(page.locator('.scope-line')).toContainText('11000 example complete index')
-  await page.getByText('Filters', { exact: true }).click()
-  await page.locator('.workspace-controls .filter-fields select').first().selectOption('source.source_id')
-  await page.getByLabel('Filter value').fill(record.source.source_id)
-  await expect(page.locator('.scope-line')).toContainText('1 match')
-  await expect(page.locator('.record-card')).toHaveCount(1)
-  await page.getByText('Filters', { exact: true }).click()
-  await page.getByRole('button', { name: `Inspect record ${id}` }).click()
-  const video = page.getByRole('complementary', { name: 'Sample inspector' }).locator('video')
+  await page.getByRole('group', { name: 'Population scope' }).getByRole('button', { name: 'Complete index' }).click()
+  await expect(scopeLine(page)).toContainText('11,000 example records')
+  await addFieldFilter(page, 'source.source_id', record.source.source_id)
+  await expect(scopeLine(page)).toContainText('1 match')
+  await expect(sampleCards(page)).toHaveCount(1)
+
+  const inspector = await inspectRecord(page, id)
+  const video = inspector.locator('video')
   await expect(video).toBeVisible()
   const observation = await video.evaluate(async element => {
     const media = element as HTMLVideoElement

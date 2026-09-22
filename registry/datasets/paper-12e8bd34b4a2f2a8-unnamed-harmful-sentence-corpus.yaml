@@ -11,17 +11,16 @@ adapter_config: {}
 coverage:
   identity: candidate
   source: unverified
-  access: unverified
-  adapter: not_started
+  access: unreleased
+  adapter: not_applicable
   preview: none
-  complete_data: unimplemented
+  complete_data: externally_blocked
   publication: not_reviewed
   preview_count: 0
   unit: example
   blockers:
-  - Exact paper-specific source release or selected subset remains unverified; source
-    research alone does not resolve this candidate.
-  - Adapter and preview are not implemented.
+  - The paper describes a 66-sentence derogatory corpus used to optimize attacks; the audit found no public release.
+  - No examples will be synthesized in its place; the record exists to carry the paper mention.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -35,9 +34,8 @@ evidence:
   source_file_hash: e651ef9944539b513a21a8b7a1b5a62f88b7355a6cce81fde112f57c96c28cf7
   page: 5
   role: source data
-  excerpt: ractice, we use a few-shot Do ********* corpus Y , consisting of only 66
-    derogatory sentences against (a bad thing) <gender-1>, <race-1>, and the human
-    race, to bootstrap our attacks. We find that this i
+  excerpt: ractice, we use a few-shot Do ********* corpus Y , consisting of only 66 derogatory sentences against
+    (a bad thing) <gender-1>, <race-1>, and the human race, to bootstrap our attacks. We find that this i
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -46,8 +44,8 @@ evidence:
   source_file_hash: e651ef9944539b513a21a8b7a1b5a62f88b7355a6cce81fde112f57c96c28cf7
   page: 5
   role: few-shot optimization source
-  excerpt: '********* corpus Y , consisting of only 66 derogatory sentences against
-    (a bad thing) <gender-1>, <race-1>, and the human rac'
+  excerpt: '********* corpus Y , consisting of only 66 derogatory sentences against (a bad thing) <gender-1>, <race-1>,
+    and the human rac'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -58,8 +56,8 @@ evidence:
   source_identity_status: paper_custom_release_unverified
 - kind: source_audit_release
   url: https://arxiv.org/abs/2306.13213
-  note: Paper p5 says authors used only 66 derogatory sentences to optimize attacks;
-    no external named benchmark is claimed
+  note: Paper p5 says authors used only 66 derogatory sentences to optimize attacks; no external named benchmark
+    is claimed
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: paper_custom_release_unverified
@@ -78,4 +76,9 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: paper_custom_release_unverified
+- kind: source_audit_access
+  note: The paper describes a 66-sentence derogatory corpus used to optimize attacks; the audit found no public
+    release.
+  checked_on: '2026-09-22'
+  source_identity_status: paper_specific_collection_unreleased
 source_url: https://arxiv.org/abs/2306.13213

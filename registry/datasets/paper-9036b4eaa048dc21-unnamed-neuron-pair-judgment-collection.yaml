@@ -2,9 +2,8 @@ schema_version: '1.0'
 id: paper-9036b4eaa048dc21-unnamed-neuron-pair-judgment-collection
 name: unnamed neuron-pair judgment collection
 aliases: []
-description: Mention candidate from a focused page audit; the evidence receipts distinguish
-  direct use, comparison, related-work, and citation-only roles. Original source,
-  release, and rights still require independent verification.
+description: Mention candidate from a focused page audit; the evidence receipts distinguish direct use, comparison,
+  related-work, and citation-only roles. Original source, release, and rights still require independent verification.
 paper_ids:
 - paper-9036b4eaa048dc21
 release: unresolved
@@ -13,16 +12,16 @@ adapter_config: {}
 coverage:
   identity: candidate
   source: unverified
-  access: unverified
-  adapter: not_started
+  access: unreleased
+  adapter: not_applicable
   preview: none
-  complete_data: unimplemented
+  complete_data: externally_blocked
   publication: not_reviewed
   preview_count: 0
   unit: example
   blockers:
-  - Original release identity and rights need verification.
-  - Adapter and preview are not implemented.
+  - The paper describes human judgments it collected over neuron pairs; no public release was located.
+  - No examples will be synthesized in its place; the record exists to carry the paper mention.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -34,9 +33,9 @@ evidence:
   source_file_hash: 88586baf881cd37666b815d32164caaa8a344cf3272fea7a93bf642d320bca93
   page: 6
   role: introduction
-  excerpt: rval. the Mechanical Turk platform. This study resulted in a total of 1000
-    questions across 71 unique users, with 3 answers per question aggregated through
-    majority voting. Results of this study are presented in Figur
+  excerpt: rval. the Mechanical Turk platform. This study resulted in a total of 1000 questions across 71 unique
+    users, with 3 answers per question aggregated through majority voting. Results of this study are presented in
+    Figur
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -45,9 +44,12 @@ evidence:
   source_file_hash: 88586baf881cd37666b815d32164caaa8a344cf3272fea7a93bf642d320bca93
   page: 6
   role: introduced human study collection
-  excerpt: up to that interval. the Mechanical Turk platform. This study resulted
-    in a total of 1000 questions across 71 unique users, with 3 answers per question
-    aggregated through majority voting. Results of this study are presented in Figure
-    4, an
+  excerpt: up to that interval. the Mechanical Turk platform. This study resulted in a total of 1000 questions across
+    71 unique users, with 3 answers per question aggregated through majority voting. Results of this study are presented
+    in Figure 4, an
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
+- kind: source_audit_access
+  note: The paper describes human judgments it collected over neuron pairs; no public release was located.
+  checked_on: '2026-09-22'
+  source_identity_status: paper_specific_collection_unreleased

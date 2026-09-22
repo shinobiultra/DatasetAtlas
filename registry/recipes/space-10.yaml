@@ -1,0 +1,7 @@
+# SpaCE-10 public 2D QA release. Only the eight single-choice test subsets are
+# published at this revision; the 3D scan/snapshot assets the project describes
+# as forthcoming are not part of this population and are not claimed.
+release: hf-Cusyoung-SpaCE-10-efd7316ef37efb0fe9a858cc74ef2b2f772a8cda
+scope: All eight SpaCE-10 single-choice test subsets (ep, eq, fr, oo, os, sa, sp, sq) at the pinned revision; each record keeps its subset name from the source shard.
+source_patterns:
+- single-choice/*/test-*.parquet

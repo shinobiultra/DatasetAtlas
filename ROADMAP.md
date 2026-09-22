@@ -1,6 +1,6 @@
 # Remaining implementation roadmap
 
-Updated 2026-09-22. SPEC.md remains the acceptance contract. The complete catalogue-wide request is **not finished**: 336 catalogue entries, 78 with real local previews, 258 without previews, and 73 canonical full-population indices. An index covers its explicitly pinned population, not all historical releases or an unidentified paper subset.
+Updated 2026-09-22. SPEC.md remains the acceptance contract. The complete catalogue-wide request is **not finished**: 333 catalogue entries, 79 with real local previews, 254 without previews, and 74 canonical full-population indices. An index covers its explicitly pinned population, not all historical releases or an unidentified paper subset.
 
 Implemented since the UI closeout:
 
@@ -14,7 +14,7 @@ Implemented since the UI closeout:
 
 Remaining work:
 
-1. **Finish acquisition and adapter coverage.** 258 entries still have no prepared preview. Some have executable on-demand plans but are untested; many still lack a format-specific recipe. Accessible examples include CUB, ChartQA, and additional multimodal benchmarks. This is implementation work, not an external access restriction.
+1. **Finish acquisition and adapter coverage.** 254 entries still have no prepared preview. Some have executable on-demand plans but are untested; many still lack a format-specific recipe. Accessible examples include CUB, ChartQA, and additional multimodal benchmarks. This is implementation work, not an external access restriction.
 2. **Finish exact release reconciliation.** All 64 papers have full-text mention inventories and all 332 canonical corpus groups have research dispositions, but that does not resolve every source, revision, variant, or split. Preserve uncertain identities and source evidence. Do not merge similarly named populations without evidence. Two pairs are the *same* release under two catalogue IDs with byte-identical recipes — `dtd`/`describable-textures-dataset` and `oxfordpet`/`pets` — and should be resolved as aliases rather than prepared twice.
 3. **Support the largest remote releases selectively.** FineVision's native shards total about 4.65 TB; DataComp metadata is about 340 GB. Current acquisition plans enforce available disk space and reject oversized copies. Selective remote Parquet reads, remote indexing, and broader mounted-source setup still need integration with this preparation workflow.
 4. **Complete remaining media and release populations.** SVO-Probes and JailBreakV retain media gaps; several existing entries cover selected official splits or representations. ViSU-Text, ZeroBench, Winoground and other actual gates require authorized access. Source uncertainty and access gates do not excuse accessible adapter gaps.

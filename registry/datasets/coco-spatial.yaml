@@ -19,8 +19,8 @@ coverage:
   preview_count: 0
   unit: example
   blockers:
-  - Exact paper-specific source release or selected subset remains unverified; source
-    research alone does not resolve this candidate.
+  - Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve
+    this candidate.
   - Adapter and preview are not implemented.
 rights:
   records: not_reviewed
@@ -35,9 +35,8 @@ evidence:
   source_file_hash: 636fa1d8fe370283cf91d2640e28f00f9236cd7ee40afce14fc3301815559ecf
   page: 3
   role: evaluation
-  excerpt: n the input sequence to swap, and Q̃ is all other indices. We use the COCO-S
-    PATIAL benchmark (Kamath et al., 2023) for the mirrored images, which is a curated
-    subset of COCO (Lin et al., 2014) annotated
+  excerpt: n the input sequence to swap, and Q̃ is all other indices. We use the COCO-S PATIAL benchmark (Kamath
+    et al., 2023) for the mirrored images, which is a curated subset of COCO (Lin et al., 2014) annotated
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -46,9 +45,9 @@ evidence:
   source_file_hash: 636fa1d8fe370283cf91d2640e28f00f9236cd7ee40afce14fc3301815559ecf
   page: 3
   role: direct spatial evaluation
-  excerpt: ected indices in the input sequence to swap, and Q̃ is all other indices.
-    We use the COCO-S PATIAL benchmark (Kamath et al., 2023) for the mirrored images,
-    which is a curated subset of COCO (Lin et al., 2014) annotated with spat
+  excerpt: ected indices in the input sequence to swap, and Q̃ is all other indices. We use the COCO-S PATIAL benchmark
+    (Kamath et al., 2023) for the mirrored images, which is a curated subset of COCO (Lin et al., 2014) annotated
+    with spat
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -59,8 +58,8 @@ evidence:
   source_identity_status: author_release_identified_subset_unpinned
 - kind: source_audit_release
   url: https://github.com/amitakamath/whatsup_vlms
-  note: Kamath et al. 2023 release curates spatial COCO examples; Kang et al. use
-    100 mirrored-image cases, exact 100 IDs not reported
+  note: Kamath et al. 2023 release curates spatial COCO examples; Kang et al. use 100 mirrored-image cases, exact
+    100 IDs not reported
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_release_identified_subset_unpinned
@@ -80,3 +79,8 @@ evidence:
   checked_on: '2026-09-22'
   source_identity_status: author_release_identified_subset_unpinned
 source_url: https://github.com/amitakamath/whatsup_vlms
+relationships:
+- type: same_source_family_as
+  target_id: coco
+  status: asserted_from_source_review
+  scope: Spatial-relation overlay on COCO images.

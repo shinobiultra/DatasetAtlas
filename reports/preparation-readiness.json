@@ -1,9 +1,9 @@
 {
-  "checked_at": "2026-09-22T08:18:55.984751+00:00",
+  "checked_at": "2026-09-22T09:21:58.855285+00:00",
   "download_limit_bytes": 20000000000,
   "output_limit_bytes": 2000000000,
-  "dataset_count": 336,
-  "ready_count": 81,
+  "dataset_count": 333,
+  "ready_count": 80,
   "datasets": [
     {
       "dataset_id": "activations-csv",
@@ -408,14 +408,12 @@
       "preview_count": 0,
       "source_url": "https://zenodo.org/records/2535967",
       "identity": "resolved",
-      "ready": false,
-      "kind": "unconfigured",
-      "plan_id": "5cc6ffce53f362489d8726b058328967eb1ee95e934741a6ade920eea7727f3c",
-      "requirements": [
-        "A pinned acquisition recipe or authorized local source is required for this release."
-      ],
-      "scope": "configured source population",
-      "expected_download_bytes": 0
+      "ready": true,
+      "kind": "http_archive",
+      "plan_id": "4a8c04edf16d765fd54f2b1ac2af6ade040085b2894b662c1d6cd1f1dfe366cf",
+      "requirements": [],
+      "scope": "All 19 corruption types at 5 severities over the 10,000 CIFAR-10 test images (950,000 corrupted images) from the official CIFAR-10-C.tar; CIFAR-10-P is a separate file and is not included.",
+      "expected_download_bytes": 2918471680
     },
     {
       "dataset_id": "cifar-10",
@@ -542,7 +540,7 @@
       "identity": "resolved",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "a66121b17392f4a34d0b0178f6575b374b96924b32c7926f688e3932a791bb7b",
+      "plan_id": "8a4c052e2cc00e7847ff92c845bd132f9bf6d6a677434ebc102db99a7e4ec4ed",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -570,7 +568,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "4dbfdd001213aad7c51ad3608619db3763d30ec21d1c9025262e27860d7a8f91",
+      "plan_id": "e8e38e3b557f0759c971ec282333e00cf0e6a52e8f1eed2e69da12b7dd772f52",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -584,7 +582,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "e3484276c026b56c7f569e8347da47fddb2481b8142610eb5b724733163afd17",
+      "plan_id": "688f7df7fd08eba561d5c25dc33dab523f36e6d0f466cc68ead524f2999e7a1e",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -598,7 +596,7 @@
       "identity": "resolved",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "5784e3d2a2fb8b74b863a816f1baf352c9a396f5673222be63f44cbb9a9e7779",
+      "plan_id": "d6ac4fd7d7fc21ba92244528c6bb068efa746414d75d1491fb49eacd38e01a6b",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -612,7 +610,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "f0803a05eeb53b1497c1ddd5d01f59a53e9e6f39157ceeca3b230494ac4c5c53",
+      "plan_id": "1c12ed542d762e6a90d9a3bf8822e793b78125bbdbb4253c5b3a6ddf6f8e8a43",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -640,7 +638,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "e109a23e9951c6daa5c9d2f1f76c9a5636fe8f47eef91ff4811f8616e64d089f",
+      "plan_id": "4740852c10623451126a2b3bc102e202847ef13ea0e13369ad58c5b895bd32af",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -666,7 +664,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "796e98255b3e717f2d4ca89e7a3ece11e6ac4b7791519d116b24eff2c6294edd",
+      "plan_id": "de7ebc816d92ae72b2c61c38ca850cf03e6f8313dd323c3471b730383b23e7f5",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -680,7 +678,7 @@
       "identity": "family_or_variant_candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "469f88dfc8b16699b0cb7d723a6d618a9151cdda617ca36a2fc741029dbee0ca",
+      "plan_id": "2dc3d127fb51c0ce0902eb7066c29998b3f58f8dac7633c8c4e58f0c4e246fa5",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -816,7 +814,7 @@
       "identity": "family_or_variant_candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "3e4064c36a6296613234b65c905f5943d1cfbdb14049c54d6b46982ceff0764a",
+      "plan_id": "90d8900783c5aeb731ad1bd14b0903e24082421ade3c76ebe9702885909d3b75",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -830,7 +828,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "3dfc914fe82331fc20ef73140b50ac6cd7d6875915861b54df32d79703fa2880",
+      "plan_id": "584c0e09f9d41842e12aca598031b3c677f2d85f2e2cd3b80a7191ad01f46670",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -965,18 +963,6 @@
       "expected_download_bytes": 0
     },
     {
-      "dataset_id": "describable-textures-dataset",
-      "preview_count": 0,
-      "source_url": "https://www.robots.ox.ac.uk/~vgg/data/dtd/",
-      "identity": "resolved",
-      "ready": true,
-      "kind": "http_archive",
-      "plan_id": "1c40cc5f2dcf4992802ccc76c4ead57be55b8bf9c6a8f674976d4b0df54504bd",
-      "requirements": [],
-      "scope": "All 5,640 DTD images with all ten official train/validation/test partitions.",
-      "expected_download_bytes": 625239812
-    },
-    {
       "dataset_id": "div2k",
       "preview_count": 0,
       "source_url": "https://data.vision.ee.ethz.ch/cvl/DIV2K/",
@@ -1051,7 +1037,7 @@
       "identity": "resolved",
       "ready": true,
       "kind": "local",
-      "plan_id": "d4bd5af952214a4ef8d77303b9da1bbbe583b3f79027ccf66e42d938a0b1331e",
+      "plan_id": "d70d97c0104491bd728adb727d2e6dbd5cad05f9904ca8fe8996b0a9501f63d9",
       "requirements": [],
       "scope": "All 5,640 DTD images with all ten official train/validation/test partitions.",
       "expected_download_bytes": 0
@@ -1103,7 +1089,7 @@
       "identity": "resolved",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "78eb31a8485f7017eeb1b56f6a16f78732c8a3761a9936fae3b03cd75b60d170",
+      "plan_id": "d32b27964bec4a30baf337e99237985ed15ac6e5b337128835fa25e01a7e0445",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -1117,7 +1103,7 @@
       "identity": "resolved",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "a052782ffa61fe19361a40d1bece5f9318f24fa281336cffe5d204c3442eafe2",
+      "plan_id": "9b56b436254165fc9af1f5143e5f6ef7152866da8393139cd43537dd3ec69c36",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -1152,15 +1138,15 @@
     },
     {
       "dataset_id": "exams-v",
-      "preview_count": 0,
-      "source_url": "https://github.com/mbzuai-nlp/EXAMS-V",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/Rocktim/EXAMS-V",
       "identity": "resolved",
       "ready": true,
-      "kind": "huggingface_columnar",
-      "plan_id": "9b11db79db5021e6fc2e2145f2337763f60f8b27a690a2f0daf106e7aaa88969",
+      "kind": "local",
+      "plan_id": "362d3b33d76a5dcc52c5f4be2259efb5126e898b7f6305b303f17aa8ec853f4c",
       "requirements": [],
       "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
-      "expected_download_bytes": 6442812293
+      "expected_download_bytes": 0
     },
     {
       "dataset_id": "facet",
@@ -1476,7 +1462,7 @@
       "identity": "resolved",
       "ready": true,
       "kind": "local",
-      "plan_id": "292da3e8572c05d844fb13e0665be92582750f1639f758fe83db0298236daa79",
+      "plan_id": "2814197bff9ff76054424ac9a3c89924196878f5e7a23c579dc9d45cfd3b0ff6",
       "requirements": [],
       "scope": "official GQA v1.2 val_balanced_questions.json (132,062 examples)",
       "expected_download_bytes": 0
@@ -1766,7 +1752,7 @@
       "identity": "family_or_variant_candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "14236b0ebdaea8577fe3314f52ca7cc5d63cab558ed0cc6a721726c772802a56",
+      "plan_id": "56ef50b55d0279542c1b67d17a4d076cfe378160e0c10aa276ce76a46ef61336",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -1780,7 +1766,7 @@
       "identity": "resolved",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "a201220559de3ccea535d2eac5fe81c44d4f7e5c448e2e14b44b411875f1fe27",
+      "plan_id": "760c210ab71b814358264d242a4cb56a5d43f62318ad4149bd0f3dc5952f6d3a",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -1794,7 +1780,7 @@
       "identity": "resolved",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "0697c2edc3cb61abdb69a08c83e25ba4869ddaf5132c4b0b52daed8bc6b31ea2",
+      "plan_id": "44e8075a9670af2f726862d4570564cf55517e29ac9bacae7bdef5afaa05dff3",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -1834,7 +1820,7 @@
       "identity": "resolved",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "562f5a6868bcca2f9d3a6403a2a33a6fea778eb7170c0987f6ebec5052fab983",
+      "plan_id": "633924fa1a2097ce62e67f1fd70bddc9e548ba82dbf7d6126d1dfeaa237f02dc",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -1848,7 +1834,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "4cfca56f488be418d0c92fad3e419298dfed8bd8501d6793673c924bdae250c9",
+      "plan_id": "968d850f41d4a6729d6512281259c176f9b5909615925d2ab9028b9574bde607",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -1874,7 +1860,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "74cafdc131296b49d284f258c15d8d5b7830ceaa19dfa6ae7d269b4524591adb",
+      "plan_id": "d1ec4e533f8f8fa7663fed3fd1d3afd5f3e96e0f30c9984f577dcafc7ac5ca71",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -1888,7 +1874,7 @@
       "identity": "resolved",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "07c6043776901b7a3a47e2dcce3f6bfc513ae61dacdea87903bd6351b10160d3",
+      "plan_id": "84e13c1da630322440b436c5304718150b560bf7be3ddbb5ec4fc597c5cc28a2",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -1902,7 +1888,7 @@
       "identity": "resolved",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "d2f6bd8c5b1f851b5aa4f574672959fc55d7c561f8bd8063c8a55a7dc02184bf",
+      "plan_id": "1f51c8320893b5b06b155e5b4361631d56b72d3cae5c057447d003a4044e27f6",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -1942,7 +1928,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "94703411f8d25cbb9cef5b99a84ccfda62db098222f0c0a272ad2db0e5fd915c",
+      "plan_id": "bf8c448feb0a70dd3ae504551e8c62ef6093e70dd07c640d1456d393a9398aae",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -1968,7 +1954,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "2dfd5e055190e60384b8fbb4bb882ef1c7c8b27ebadaabbc3257593e478d3c23",
+      "plan_id": "cfa570c7d4dfe2df550cd6b67fa85f5e7278c9171d1bd7f24c49d5f933d3ccc8",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -2132,7 +2118,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "huggingface_columnar",
-      "plan_id": "9ba309552e01be4ca058629755eee086d1ef1b1b521a9adbe7fd3936a46d5cb9",
+      "plan_id": "9347ed3307ff76be1a687c8653ee6d66f221085f01bafabb6d5bd9c354041c1c",
       "requirements": [
         "Source download exceeds the selected download budget."
       ],
@@ -2620,21 +2606,7 @@
       "identity": "resolved",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "05da4f1ac313cc7e225c5b53cf48a1cf7ffb323a5bfb5d35ee89ea98f6b646a2",
-      "requirements": [
-        "A pinned acquisition recipe or authorized local source is required for this release."
-      ],
-      "scope": "configured source population",
-      "expected_download_bytes": 0
-    },
-    {
-      "dataset_id": "okvqa",
-      "preview_count": 0,
-      "source_url": "https://okvqa.allenai.org/download.html",
-      "identity": "resolved",
-      "ready": false,
-      "kind": "unconfigured",
-      "plan_id": "b2f80984e035e0985360f8ecba1e2c85126450547d193e561f8c2b7dfb88f4d8",
+      "plan_id": "05fe8bb9cd68adf83c9e45515642471238fa15e76518e7701592481dc2a250b1",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -2702,7 +2674,7 @@
       "identity": "resolved",
       "ready": true,
       "kind": "local",
-      "plan_id": "463529f3a685c3855a319f7f178a141c369a073cb51da42c674099d44104a5a8",
+      "plan_id": "ab19fb11b3d06614b5b1d5966ab04a8121d84229905508c0b0080eeca3ef7e68",
       "requirements": [],
       "scope": "All 7,349 annotated Oxford-IIIT Pet images; original trainval and test splits.",
       "expected_download_bytes": 0
@@ -2766,7 +2738,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "efdbd71c2ba4d7e56a1aba47cb994c195f4005e74d41d6dce243f7c5e2ed7e99",
+      "plan_id": "6f05792d04c401050778e35816d5ca071c5bac1e66a0404d6c1320afaf129a72",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -2780,7 +2752,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "d05ed5477a4ba625d1c67d90ecd078ca416baa21d82ab4eadd292469c7599270",
+      "plan_id": "a91c9c0bd7307fd362ba22d8adcf5ef0b0a64bff79e5e77c7e1d6db97f762829",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -2876,7 +2848,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "dc76edee9b90babcb680e76d6b44eee82f008cef76c398fa2f2f77e12fcf4d2e",
+      "plan_id": "f640f8b6f21bcb12f55cefc2b6d3a91f4469bf6fbdf5d5a64a2345c9f59139ee",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -2890,7 +2862,7 @@
       "identity": "resolved",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "670d366a249da5e9b971573713a329cf55cc8238679f9d1f6620e649443316a4",
+      "plan_id": "2d587409c172a2b510df8f2660a8abfe1a66f50835b14661123e6638783cf09e",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -2904,7 +2876,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "5a156332b546b4b9d82fb01584dc0dc9c7bf0df8ac866b752b6aae968d2e9778",
+      "plan_id": "d289b4a36a7903203a402030f25c7d6a90afe64fbdb9c0b2effb36fcb94c8127",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -2918,7 +2890,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "a762e3d03cde59420208523c2b4032dc8e86da0182cd5934b18392faa3a35901",
+      "plan_id": "8f22789ffad9307c4943dfd67d76e2c2a108ade443844693e42ac15a1f195da5",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -2932,7 +2904,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "8c1927618ad489fc672700e82a78e92e7b7f2dc924839d527f0cd07f1192843f",
+      "plan_id": "f7c69936c0c2509ba4c60d012c61f379463c356cfc402f9e73d87137c8090103",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -2946,7 +2918,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "8a87f0613ae17f55d7471a9de09845dea647e4df3a66a9d7270279fc4cca2ba2",
+      "plan_id": "cd9971e22416f23c9c812ab140dd02475e34f77896b0367a89ed2cba777af96e",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -2988,7 +2960,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "e6c24d8bef6ff0b184beb951b37d62f233d2c2ec2adcf50cc5c53168c23142d2",
+      "plan_id": "bdd56d2414336a4c01f161874e720482540fac66412e51104a6eb77b8181a2af",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -3002,7 +2974,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "479edc6c0b5cda526a1df6b433e0970713f00443d59833f19c8a08b4b9bc8705",
+      "plan_id": "79e877ab2a081fde26645a881f4d0514aacd3bb772da6c59cbfb103048a0ed18",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -3030,7 +3002,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "a587ddcd22806fa41fed4e95a26df4912d4818de2ee994f25db413839165cfa4",
+      "plan_id": "908a4a0f4d0e3a8c4bf09a18511ecdb61debcde4946c395fc4a46b0d49523b9d",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -3044,7 +3016,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "8867f967d4938e67ef8b8505ecdb2f2bb88c9d7a58296a9db3256fc9abdf9939",
+      "plan_id": "ca721e19a565152eae26beccba82af46114786eed8566d8b0a68eac63f90e281",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -3058,7 +3030,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "26da080f85079432314242090316f4e121cd91e24793e57e4d152fe53b266097",
+      "plan_id": "0192e8039a931385f642a47cbcf04d262a6ba4c95e05e6c8c4beb1dacd8f0e0e",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -3072,7 +3044,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "a0837f6556195bfd6dcc7486490e0ca6f9dbac9e56fd1fad202d6cab20521804",
+      "plan_id": "62eda5d48d37a96a7625c6d4fb9c94141d54f16778991781165478046da51008",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -3086,7 +3058,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "5c2399bbdc35f406b615e48d0dc892e0ae9be73e0038635f53d1c4a87402f68f",
+      "plan_id": "430009d1770f209d944fcaa96bd681d68122e39ce461be4fa05408931ca1e3cf",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -3100,7 +3072,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "4e9eab1c4926fbdd2233f5dadb61df089a748a64e4701707a02d996770d42093",
+      "plan_id": "4478fb1854b56b29c90a4066f4696de4e6dc2821d6881e78eb95acab6927384b",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -3114,7 +3086,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "0696091233c437ca5714902369eb876b8cc899904f6aa64ac253e333ee0156e1",
+      "plan_id": "54e41eacf72105260602587e51471957e7f3888a2b4698a89e7744cb5d41ce3c",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -3162,18 +3134,6 @@
       ],
       "scope": "configured source population",
       "expected_download_bytes": 0
-    },
-    {
-      "dataset_id": "pets",
-      "preview_count": 0,
-      "source_url": null,
-      "identity": "candidate",
-      "ready": true,
-      "kind": "http_archive",
-      "plan_id": "c56697e042e590b478bc5e68c64dbf29a80b0690a52aeb3ec5f7be1b662ae5bc",
-      "requirements": [],
-      "scope": "All 7,349 annotated Oxford-IIIT Pet images; original trainval and test splits.",
-      "expected_download_bytes": 811092049
     },
     {
       "dataset_id": "phantom",
@@ -3366,7 +3326,7 @@
       "identity": "resolved",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "07e3431140dbfd05594a8c77d84ea00fb7e80db7e6be652b7a91d4cc1c2a309f",
+      "plan_id": "d73ffa94e38eb98f2816e5db7e1239ca026a91f756f23fe77d7de3d1d5c9bce7",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -3506,7 +3466,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "533bee2f822d4ee79ecf0d6f7fd59a8554a1c9887414c4297afc6326375de684",
+      "plan_id": "3cb5fa7f83eb6bfb8f798be7282418e6989bff602ca40e58eae5315848f79ca4",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -3520,7 +3480,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "7a6a9f729483d456d44b5e37d9a2df08e5902277fd0b5d32e66e8bd1ba70d1fd",
+      "plan_id": "b7feb8423045e2fb238346df039d0e018aec77c6d0ebf0d4c84b8045fe657d73",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -3534,7 +3494,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "6235243b2bfb134f9423ef2e60e89b67f19dd807080c405b2bbc7acc6b74b92d",
+      "plan_id": "82e4234bceadbe40262cd688f3cb101d001197c280d0eedd9c7b64ae1517aadc",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -3548,7 +3508,7 @@
       "identity": "candidate",
       "ready": false,
       "kind": "unconfigured",
-      "plan_id": "68103f316ac32ba06d3c6649fd42cf6c8a176fd057aa172bdc8157206a72f462",
+      "plan_id": "c5d14675d8b35530249fb9d905be9e040bd762bcbb2de99bac2e79a85bbcb975",
       "requirements": [
         "A pinned acquisition recipe or authorized local source is required for this release."
       ],
@@ -3867,15 +3827,15 @@
     },
     {
       "dataset_id": "space-10",
-      "preview_count": 0,
+      "preview_count": 100,
       "source_url": "https://huggingface.co/datasets/Cusyoung/SpaCE-10",
       "identity": "resolved",
       "ready": true,
-      "kind": "huggingface_columnar",
-      "plan_id": "4937a35b0f0d59797069390999f7632ae300a4e416a6f35463a7913e2c6b2785",
+      "kind": "local",
+      "plan_id": "2d331971a50af9ef2282a7e6feb6291f27f36930de18b7ba6e2883676ea939a9",
       "requirements": [],
-      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
-      "expected_download_bytes": 872031458
+      "scope": "All eight SpaCE-10 single-choice test subsets (ep, eq, fr, oo, os, sa, sp, sq) at the pinned revision; each record keeps its subset name from the source shard.",
+      "expected_download_bytes": 0
     },
     {
       "dataset_id": "space-invaders-rom",
@@ -4027,13 +3987,13 @@
       "source_url": "https://textvqa.org/dataset/",
       "identity": "resolved",
       "ready": false,
-      "kind": "unconfigured",
-      "plan_id": "67b6e7a1df42b28042a8442bae674b24f858da1add907d195e06c1e2ee32c4af",
+      "kind": "http_archive",
+      "plan_id": "85da161f3a44b5d477eb2e242fcace72f9ce3fa31e7a3ceed700041eccaa02cd",
       "requirements": [
-        "A pinned acquisition recipe or authorized local source is required for this release."
+        "Checksum not pinned for TextVQA_0.5.1_train.json, TextVQA_0.5.1_val.json; fetch once, record its SHA-256, then plan again."
       ],
-      "scope": "configured source population",
-      "expected_download_bytes": 0
+      "scope": "All TextVQA 0.5.1 train (34,602) and val (5,000) question records from the official JSON releases; images are the separate OpenImages archive and are not acquired here.",
+      "expected_download_bytes": 24751099
     },
     {
       "dataset_id": "the-pile",
@@ -4327,13 +4287,13 @@
       "source_url": "https://vizwiz.org/tasks-and-datasets/vqa/",
       "identity": "resolved",
       "ready": false,
-      "kind": "unconfigured",
-      "plan_id": "391e88d18694284bf531ba84b7aa96f7598ab073a056e724fa5549276854679d",
+      "kind": "http_archive",
+      "plan_id": "7da2640d08cec647fd63a3158306c9d1c715385ebf873b50f3cafbca53bb7592",
       "requirements": [
-        "A pinned acquisition recipe or authorized local source is required for this release."
+        "Checksum not pinned for Annotations.zip; fetch once, record its SHA-256, then plan again."
       ],
-      "scope": "configured source population",
-      "expected_download_bytes": 0
+      "scope": "All VizWiz-VQA train and val question records from the official Annotations.zip; images are the separate VizWiz_final image archives and are not acquired here.",
+      "expected_download_bytes": 1711273
     },
     {
       "dataset_id": "vl-gender",

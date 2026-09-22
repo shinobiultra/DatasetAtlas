@@ -2,8 +2,8 @@ schema_version: '1.0'
 id: imagenet-sampled-1-000-images
 name: ImageNet sampled 1,000 images
 aliases: []
-description: paper-specific 1,000 random ImageNet evaluation images. Paper p5 says random 1,000 ImageNet
-  images; no seed/index list or snapshot verified.
+description: paper-specific 1,000 random ImageNet evaluation images. Paper p5 says random 1,000 ImageNet images;
+  no seed/index list or snapshot verified.
 paper_ids:
 - paper-c12960e5d652fb7f
 release: unresolved
@@ -35,8 +35,8 @@ evidence:
   source_file_hash: 5b9c5f170ae4dd61a249182d5245b9c3c2f9380354abf3c28723f1e4add82cb7
   page: 5
   role: source data
-  excerpt: No Defense EigenShield randomly selecting a thousand images. To evaluate Eigen- Model RTP HarmBench
-    RTP HarmBench Shield’s robust
+  excerpt: No Defense EigenShield randomly selecting a thousand images. To evaluate Eigen- Model RTP HarmBench RTP
+    HarmBench Shield’s robust
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -58,3 +58,8 @@ evidence:
   checked_on: '2026-09-22'
   source_identity_status: paper_subset_unpinned
 source_url: https://arxiv.org/abs/2502.14976
+relationships:
+- type: same_source_family_as
+  target_id: imagenet
+  status: asserted_from_source_review
+  scope: A paper-sampled 1,000-image subset of ImageNet; selection unreleased.

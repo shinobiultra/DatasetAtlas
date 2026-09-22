@@ -2,8 +2,8 @@ schema_version: '1.0'
 id: imagenet100
 name: ImageNet100
 aliases: []
-description: ImageNet100 denotes multiple nonidentical 100-class selections derived from ILSVRC; paper
-  mention does not specify class list or seed.
+description: ImageNet100 denotes multiple nonidentical 100-class selections derived from ILSVRC; paper mention does
+  not specify class list or seed.
 paper_ids:
 - paper-25eaa8c74ce76800
 release: unresolved
@@ -41,8 +41,8 @@ evidence:
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://www.image-net.org/challenges/LSVRC/
-  note: 'ImageNet100 denotes multiple nonidentical 100-class selections derived from ILSVRC; paper mention
-    does not specify class list or seed. Release: ImageNet-100 subset selection unresolved'
+  note: 'ImageNet100 denotes multiple nonidentical 100-class selections derived from ILSVRC; paper mention does
+    not specify class list or seed. Release: ImageNet-100 subset selection unresolved'
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: family_only
@@ -53,3 +53,8 @@ evidence:
   checked_on: '2026-09-22'
   source_identity_status: family_only
 source_url: https://www.image-net.org/challenges/LSVRC/
+relationships:
+- type: same_source_family_as
+  target_id: imagenet
+  status: asserted_from_source_review
+  scope: Multiple non-identical 100-class selections derived from ILSVRC; the paper selection is unpinned.

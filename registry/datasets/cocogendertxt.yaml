@@ -2,8 +2,8 @@ schema_version: '1.0'
 id: cocogendertxt
 name: Cocogendertxt
 aliases: []
-description: DeBiasLens caption/text configuration derived from COCO-GB. DeBiasLens data README expects
-  cocogendertxt locally and cites Tang et al. COCO-GB; Tang author repo https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System
+description: DeBiasLens caption/text configuration derived from COCO-GB. DeBiasLens data README expects cocogendertxt
+  locally and cites Tang et al. COCO-GB; Tang author repo https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System
   has distinct V1/V2 ZIPs.
 paper_ids:
 - paper-32cea5e43d940514
@@ -36,14 +36,13 @@ evidence:
   source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
   page: 4
   role: SAE caption training
-  excerpt: tions (Cocogendertxt) [76] and Bias in Bios [15] for the The set Ng thus comprises neurons
-    that are activated
+  excerpt: tions (Cocogendertxt) [76] and Bias in Bios [15] for the The set Ng thus comprises neurons that are activated
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://github.com/namin-an/DeBiasLens
-  note: DeBiasLens data README expects cocogendertxt locally and cites Tang et al. COCO-GB; Tang author
-    repo https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System has distinct V1/V2 ZIPs.
+  note: DeBiasLens data README expects cocogendertxt locally and cites Tang et al. COCO-GB; Tang author repo https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System
+    has distinct V1/V2 ZIPs.
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: derived_config_unpinned
@@ -55,9 +54,13 @@ evidence:
   source_identity_status: derived_config_unpinned
 - kind: source_audit_access
   url: https://github.com/namin-an/DeBiasLens
-  note: base_source_public_variant_unverified; Do not equate V1 and V2 or claim a separate released text
-    dataset.
+  note: base_source_public_variant_unverified; Do not equate V1 and V2 or claim a separate released text dataset.
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: derived_config_unpinned
 source_url: https://github.com/namin-an/DeBiasLens
+relationships:
+- type: same_source_family_as
+  target_id: coco
+  status: asserted_from_source_review
+  scope: Text variant of the COCO gender overlay.

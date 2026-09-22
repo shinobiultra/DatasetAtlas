@@ -19,8 +19,8 @@ coverage:
   preview_count: 0
   unit: example
   blockers:
-  - Exact paper-specific source release or selected subset remains unverified; source
-    research alone does not resolve this candidate.
+  - Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve
+    this candidate.
   - Adapter and preview are not implemented.
 rights:
   records: not_reviewed
@@ -35,9 +35,8 @@ evidence:
   source_file_hash: 63a07114996dfdfd5a19f4a2790f78b7b42dc95ce54e14d1a8f32cbef00fc8fb
   page: 13
   role: direct What’s Up split
-  excerpt: 'om the controlled images split of What’s Up [Kamath et al., 2023]. • COCO_two:
-    Two-object spatial-relation queries based on COCO [Lin et al., 2014] images, from
-    the natural COCO split of What’s'
+  excerpt: 'om the controlled images split of What’s Up [Kamath et al., 2023]. • COCO_two: Two-object spatial-relation
+    queries based on COCO [Lin et al., 2014] images, from the natural COCO split of What’s'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -48,8 +47,8 @@ evidence:
   source_identity_status: author_recipe_identified_variant_unpinned
 - kind: source_audit_release
   url: https://github.com/israfelsr/vlm-pathways
-  note: Pathways p13; author build script outputs `coco_two` from What’s Up COCO_QA_two_obj;
-    exact transformed revision not pinned
+  note: Pathways p13; author build script outputs `coco_two` from What’s Up COCO_QA_two_obj; exact transformed revision
+    not pinned
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_recipe_identified_variant_unpinned
@@ -69,3 +68,8 @@ evidence:
   checked_on: '2026-09-22'
   source_identity_status: author_recipe_identified_variant_unpinned
 source_url: https://github.com/israfelsr/vlm-pathways
+relationships:
+- type: same_source_family_as
+  target_id: coco
+  status: asserted_from_source_review
+  scope: Two-object COCO-derived evaluation split.

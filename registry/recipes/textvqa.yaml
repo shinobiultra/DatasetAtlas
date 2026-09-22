@@ -1,0 +1,29 @@
+# TextVQA 0.5.1 question annotations only. Images are OpenImages (train_val_images.zip,
+# 7.07 GB) and are not part of this population. Checksums deliberately unpinned until the
+# files have been fetched once under an approved budget.
+release: textvqa-0.5.1-annotations
+adapter: annotated_archive
+scope: All TextVQA 0.5.1 train (34,602) and val (5,000) question records from the official JSON releases; images are the separate OpenImages archive and are not acquired here.
+expected_count: 39602
+adapter_config:
+  annotation_patterns:
+  - TextVQA_0.5.1_train.json
+  - TextVQA_0.5.1_val.json
+  records_key: data
+  mapping:
+    id: question_id
+    question: question
+    text: question
+files:
+- source_name: TextVQA_0.5.1_train.json
+  url: https://dl.fbaipublicfiles.com/textvqa/data/TextVQA_0.5.1_train.json
+  bytes: 21634937
+  format: json
+  config_key: path
+- source_name: TextVQA_0.5.1_val.json
+  url: https://dl.fbaipublicfiles.com/textvqa/data/TextVQA_0.5.1_val.json
+  bytes: 3116162
+  format: json
+  config_key: path
+allowed_hosts:
+- dl.fbaipublicfiles.com

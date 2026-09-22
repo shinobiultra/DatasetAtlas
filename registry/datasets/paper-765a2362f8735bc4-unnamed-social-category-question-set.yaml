@@ -11,17 +11,16 @@ adapter_config: {}
 coverage:
   identity: candidate
   source: unverified
-  access: unverified
-  adapter: not_started
+  access: unreleased
+  adapter: not_applicable
   preview: none
-  complete_data: unimplemented
+  complete_data: externally_blocked
   publication: not_reviewed
   preview_count: 0
   unit: example
   blockers:
-  - Exact paper-specific source release or selected subset remains unverified; source
-    research alone does not resolve this candidate.
-  - Adapter and preview are not implemented.
+  - The paper describes 50 author-collected social-category questions; the audit found no public release.
+  - No examples will be synthesized in its place; the record exists to carry the paper mention.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -35,8 +34,8 @@ evidence:
   source_file_hash: 820aee810116ff6b3adbe19c8ffdc5a54ae6c80315641a16da74ddb4bd8f0076
   page: 13
   role: derived evaluation collection
-  excerpt: 20 questions for gender and 30 questions for race (page 13; two-column
-    extraction interleaves a results table)
+  excerpt: 20 questions for gender and 30 questions for race (page 13; two-column extraction interleaves a results
+    table)
   review_scope: full_pdf_visual_figure_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -47,8 +46,8 @@ evidence:
   source_identity_status: paper_custom_release_unverified
 - kind: source_audit_release
   url: https://arxiv.org/abs/2505.23798
-  note: Paper p13 says Mistral-7B prompts supported 20 gender and 30 race questions
-    collected by authors; no exact question release identified
+  note: Paper p13 says Mistral-7B prompts supported 20 gender and 30 race questions collected by authors; no exact
+    question release identified
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: paper_custom_release_unverified
@@ -67,4 +66,8 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: paper_custom_release_unverified
+- kind: source_audit_access
+  note: The paper describes 50 author-collected social-category questions; the audit found no public release.
+  checked_on: '2026-09-22'
+  source_identity_status: paper_specific_collection_unreleased
 source_url: https://arxiv.org/abs/2505.23798

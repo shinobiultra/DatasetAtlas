@@ -2,9 +2,8 @@ schema_version: '1.0'
 id: paper-f6dcb0e50d10ea38-unnamed-public-figure-adversarial-image-set
 name: unnamed public-figure adversarial image set
 aliases: []
-description: Mention candidate from a focused page audit; the evidence receipts distinguish
-  direct use, comparison, related-work, and citation-only roles. Original source,
-  release, and rights still require independent verification.
+description: Mention candidate from a focused page audit; the evidence receipts distinguish direct use, comparison,
+  related-work, and citation-only roles. Original source, release, and rights still require independent verification.
 paper_ids:
 - paper-f6dcb0e50d10ea38
 release: unresolved
@@ -13,16 +12,16 @@ adapter_config: {}
 coverage:
   identity: candidate
   source: unverified
-  access: unverified
-  adapter: not_started
+  access: unreleased
+  adapter: not_applicable
   preview: none
-  complete_data: unimplemented
+  complete_data: externally_blocked
   publication: not_reviewed
   preview_count: 0
   unit: example
   blockers:
-  - Original release identity and rights need verification.
-  - Adapter and preview are not implemented.
+  - The paper describes public-figure adversarial images it assembled; no public release was located.
+  - No examples will be synthesized in its place; the record exists to carry the paper mention.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -37,3 +36,7 @@ evidence:
   excerpt: This yields a total of 10×9 = 90 adver-
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
+- kind: source_audit_access
+  note: The paper describes public-figure adversarial images it assembled; no public release was located.
+  checked_on: '2026-09-22'
+  source_identity_status: paper_specific_collection_unreleased

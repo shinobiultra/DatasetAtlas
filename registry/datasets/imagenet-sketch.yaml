@@ -2,8 +2,7 @@ schema_version: '1.0'
 id: imagenet-sketch
 name: ImageNet-Sketch
 aliases: []
-description: ImageNet-Sketch, 50 sketches for each of 1,000 ImageNet classes; separate
-  from ImageNet-1K photos.
+description: ImageNet-Sketch, 50 sketches for each of 1,000 ImageNet classes; separate from ImageNet-1K photos.
 paper_ids:
 - paper-3e0db9c633ab204c
 release: unresolved
@@ -27,8 +26,7 @@ rights:
   annotations: not_reviewed
   images: not_reviewed
   source: https://github.com/HaohanWang/ImageNet-Sketch
-  note: Repository MIT license is not evidence of redistribution rights for Google
-    Image Search-sourced sketches
+  note: Repository MIT license is not evidence of redistribution rights for Google Image Search-sourced sketches
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-fb2fdbfa9ec03e783b94
@@ -41,8 +39,7 @@ evidence:
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://github.com/HaohanWang/ImageNet-Sketch
-  note: ImageNet-Sketch, 50 sketches for each of 1,000 ImageNet classes; separate
-    from ImageNet-1K photos
+  note: ImageNet-Sketch, 50 sketches for each of 1,000 ImageNet classes; separate from ImageNet-1K photos
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_media_rights_unknown
@@ -54,16 +51,19 @@ evidence:
   source_identity_status: official_source_resolved_media_rights_unknown
 - kind: source_audit_access
   url: https://github.com/HaohanWang/ImageNet-Sketch
-  note: Author repository links Google Drive, Kaggle and Hugging Face mirrors; archive
-    retrieval untested
+  note: Author repository links Google Drive, Kaggle and Hugging Face mirrors; archive retrieval untested
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_media_rights_unknown
 - kind: source_audit_rights
   url: https://github.com/HaohanWang/ImageNet-Sketch
-  note: Repository MIT license is not evidence of redistribution rights for Google
-    Image Search-sourced sketches
+  note: Repository MIT license is not evidence of redistribution rights for Google Image Search-sourced sketches
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_media_rights_unknown
 source_url: https://github.com/HaohanWang/ImageNet-Sketch
+relationships:
+- type: same_source_family_as
+  target_id: imagenet
+  status: asserted_from_source_review
+  scope: Sketch-rendition dataset aligned to ImageNet-1K classes; a separate release, same class space.

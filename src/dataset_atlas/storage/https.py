@@ -55,7 +55,7 @@ class HttpsFetcher:
         return host, port, (ipv4 or sorted(addresses))[0], target
 
     def fetch(self, url: str, cache: BoundedCache, identity: CacheIdentity,
-              *, expected_sha256: str | None = None, byte_budget: int | None = None) -> Path:
+              *, expected_sha256: str | None = None, byte_budget: int | None = None, cancel=None, progress=None) -> Path:
         cached = cache.get(identity)
         if cached:
             return cached
@@ -128,6 +128,7 @@ class HttpsFetcher:
                 with partial.open("ab" if offset else "wb") as output:
                     total = offset
                     while True:
+                        if cancel:cancel()
                         block = response.read(min(1024 * 1024, limit - total + 1))
                         if not block:
                             break
@@ -135,6 +136,7 @@ class HttpsFetcher:
                         if total > limit:
                             raise ValueError("HTTPS response exceeds fetch budget")
                         output.write(block)
+                        if progress:progress(total)
                 if length is not None and total - offset != length:
                     raise ValueError("HTTPS response ended before Content-Length")
                 if range_end is not None and total != total_size:

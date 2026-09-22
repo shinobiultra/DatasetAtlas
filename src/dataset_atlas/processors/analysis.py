@@ -225,7 +225,14 @@ def exact_lancedb_search(table: Any, vector: list[float], eligible_ids: list[str
     if not eligible_ids or limit < 1:
         return []
     if len(eligible_ids) > 1000:
-        raise ValueError("More than 1000 eligible IDs needs a validated search snapshot")
+        # The global top-k must be among each disjoint partition's top-k.
+        # Each partition remains a prefiltered exact LanceDB scan.
+        unique=list(dict.fromkeys(eligible_ids))
+        best=[]
+        for start in range(0,len(unique),1000):
+            best.extend(exact_lancedb_search(table,vector,unique[start:start+1000],limit,metric=metric))
+            best=sorted(best,key=lambda row:(row['_distance'],row['id']))[:limit]
+        return best
     if metric not in {"cosine", "l2"}:
         raise ValueError("Unsupported retrieval metric")
     query = np.asarray(vector, dtype=np.float32)

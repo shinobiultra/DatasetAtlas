@@ -770,6 +770,15 @@ class OverlayAdapter(StructuredAdapter):
 
 
 def get_adapter(dataset: Dataset) -> DatasetAdapter:
+    if dataset.adapter == "annotated_archive":
+        from .annotated_archive import AnnotatedArchiveAdapter
+        return AnnotatedArchiveAdapter(dataset)
+    if dataset.adapter == "oxford_archive":
+        from .oxford import OxfordArchiveAdapter
+        return OxfordArchiveAdapter(dataset)
+    if dataset.adapter == "columnar":
+        from .columnar import ColumnarAdapter
+        return ColumnarAdapter(dataset)
     if dataset.adapter in {"idx", "cifar_binary", "cifar100_binary"}:
         from .binary import CIFAR100BinaryAdapter, CIFARBinaryAdapter, IDXAdapter
         return {"idx": IDXAdapter, "cifar_binary": CIFARBinaryAdapter,
@@ -829,7 +838,7 @@ _PREPARED_ADAPTERS: dict[str, DatasetAdapter] = {}
 
 
 def resolve_dataset_asset(dataset: Dataset, asset_ref: str,
-                          max_bytes: int = 10_000_000) -> MediaHandle:
+                          max_bytes: int = 10_000_000, cache_root: Path | None = None) -> MediaHandle:
     """Resolve one configured source asset for the workbench media endpoint.
 
     Preparation is cached per dataset configuration; each media request still
@@ -839,6 +848,15 @@ def resolve_dataset_asset(dataset: Dataset, asset_ref: str,
     if max_bytes < 1 or max_bytes > 250_000_000:
         raise ValueError("invalid per-asset byte budget")
     key = hashlib.sha256(dataset.model_dump_json().encode()).hexdigest()
+    cache = BoundedCache(cache_root,max_bytes=1_000_000_000) if cache_root is not None else None
+    identity=CacheIdentity(key,asset_ref,'decoded-original-v1')
+    if cache:
+        cached=cache.get(identity)
+        if cached:
+            if cached.stat().st_size>max_bytes+1024:raise ValueError('Cached asset exceeds byte budget')
+            mime,data=cached.read_bytes().split(b'\n',1)
+            if len(data)>max_bytes:raise ValueError('Cached asset exceeds byte budget')
+            return MediaHandle(data,mime.decode('ascii'),hashlib.sha256(data).hexdigest(),asset_ref)
     adapter = _PREPARED_ADAPTERS.get(key)
     if adapter is None:
         adapter = get_adapter(dataset)
@@ -847,12 +865,27 @@ def resolve_dataset_asset(dataset: Dataset, asset_ref: str,
         adapter.prepare(plan)
         _PREPARED_ADAPTERS[key] = adapter
     source = PreparedSource(dataset.id, dataset.release, max_bytes, 1, adapter.probe().location)
-    return adapter.resolve_asset(source, asset_ref)
+    handle=adapter.resolve_asset(source, asset_ref)
+    if cache:
+        import tempfile
+        import fcntl
+        with (cache.root/'partial'/(identity.key+'.lock')).open('a') as lock:
+            fcntl.flock(lock,fcntl.LOCK_EX)
+            if not cache.get(identity):
+                path=cache.partial_path(identity)
+                with tempfile.NamedTemporaryFile(dir=path.parent,delete=False) as stream:
+                    temporary=Path(stream.name)
+                    stream.write(handle.media_type.encode('ascii')+b'\n'+handle.data)
+                try:
+                    os.replace(temporary,path)
+                    cache.commit(identity,path)
+                finally:temporary.unlink(missing_ok=True)
+    return handle
 
 
 def build_preview(dataset: Dataset, output_dir: Path, limit: int = 100,
                   max_bytes: int = 20_000_000, cursor: str | None = None,
-                  distinct_assets: bool = False, include_media: bool = False) -> Pack:
+                  distinct_assets: bool = False, include_media: bool = False, max_output_bytes: int | None = None) -> Pack:
     """Make a local pack from a bounded plan. Publication is a separate rights gate."""
     adapter = get_adapter(dataset)
     plan = adapter.plan(limit, max_bytes, cursor)
@@ -928,7 +961,10 @@ def build_preview(dataset: Dataset, output_dir: Path, limit: int = 100,
                           "warnings": warnings,
                           "selection_note": dataset.adapter_config.get("selection_note", "")},
                 checksums=checksums)
+    payload=pack.model_dump_json(indent=2)
+    if max_output_bytes is not None and len(payload.encode())>max_output_bytes:
+        raise ValueError("Preview exceeds approved output budget")
     output_dir.mkdir(parents=True, exist_ok=True)
     target = output_dir / "pack.json"
-    target.write_text(pack.model_dump_json(indent=2), encoding="utf-8")
+    target.write_text(payload, encoding="utf-8")
     return pack

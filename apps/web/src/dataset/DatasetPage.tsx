@@ -1,3 +1,4 @@
+import { displayUrl } from '../lib/display'
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import type { Artifact, Dataset, FieldDescriptor, Query, Record as AtlasRecord, Selection } from '../generated'
@@ -14,6 +15,7 @@ import { CompareView } from './CompareView'
 import { FilterRail } from './FilterRail'
 import { OverviewTab } from './OverviewTab'
 import { SampleInspector } from '../panels/SampleInspector'
+import { PrepareDataset } from '../panels/PrepareDataset'
 import { AboutPanel } from '../panels/AboutPanel'
 import { AnalyzePanel } from '../panels/AnalyzePanel'
 import { ModelPanel } from '../panels/ModelPanel'
@@ -290,7 +292,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
       <div className="ds-header">
         <div className="ds-mosaic" aria-hidden>
           {(thumbs?.tiles ?? []).filter(tile => tile.kind === 'image').slice(0, 4).map((tile, index) => (
-            <img key={index} src={(tile as { uri: string }).uri} alt="" loading="lazy" onError={event => { event.currentTarget.style.visibility = 'hidden' }} />
+            <img key={index} src={displayUrl((tile as { uri: string }).uri)} alt="" loading="lazy" onError={event => { event.currentTarget.style.visibility = 'hidden' }} />
           ))}
           {!(thumbs?.tiles ?? []).some(tile => tile.kind === 'image') && <div className="ph" style={{ gridColumn: '1 / -1', gridRow: '1 / -1' }}><Icon.Database size={20} /></div>}
         </div>
@@ -319,6 +321,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
       </div>
       <div className="ds-tabs">
         <Tabs label="Dataset view" value={tab} onChange={onTab} options={[{ value: 'samples', label: 'Samples' }, { value: 'overview', label: 'Overview' }]} />
+        {provider.mode === 'workbench' && <PrepareDataset key={dataset.id} datasetId={dataset.id} />}
       </div>
     </>
   )

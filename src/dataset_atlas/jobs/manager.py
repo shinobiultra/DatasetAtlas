@@ -124,6 +124,8 @@ class JobManager:
                record["dataset_id"] not in selection.dataset_ids for record in documents):
             raise ValueError("Record unit, snapshot, or dataset differs from selection")
         config = json.loads(_json(config or {}))
+        from dataset_atlas.jobs.limits import limits, enforcement
+        resource_limits = limits(config)
         max_output = config.get("max_output_bytes", DEFAULT_MAX_OUTPUT_BYTES)
         if type(max_output) is not int or not 1 <= max_output <= HARD_MAX_OUTPUT_BYTES:
             raise ValueError(f"max_output_bytes must be an integer within 1..{HARD_MAX_OUTPUT_BYTES}")
@@ -158,6 +160,7 @@ class JobManager:
                   "input_bytes_status": "unknown" if unknown_bytes else "known",
                   "expected_download_bytes": 0, "model_download_bytes": 0, "remote_calls": 0,
                   "output_bytes": None, "output_bytes_status": "unknown", "max_output_bytes": max_output,
+                  "resource_limits": resource_limits, "memory_enforcement": enforcement(),
                   "validation": validation, "processor_estimate": processor_estimate,
                   "available": description["available"], "missing_dependencies": description["missing_dependencies"]}
         result["estimate_digest"] = _digest({"selection": selection.model_dump(mode="json"),
@@ -474,6 +477,7 @@ class JobManager:
                         "items": [{"record": records[record_id], "key": key} for record_id, key in pending]}
             exit_code = 0
             if pending:
+                (stage / 'resource-error.receipt').unlink(missing_ok=True)
                 (stage / "input.json").write_text(_json(plan), encoding="utf-8")
                 env = os.environ.copy()
                 env["PYTHONPATH"] = os.pathsep.join([path for path in sys.path if path] + [env.get("PYTHONPATH", "")])
@@ -484,7 +488,8 @@ class JobManager:
                 with lock_path.open("a+b") as lock:
                     if resource == "gpu":
                         fcntl.flock(lock, fcntl.LOCK_EX)
-                    process = subprocess.Popen([sys.executable, "-m", "dataset_atlas.jobs.worker", str(stage / "input.json")], env=env)
+                    from dataset_atlas.jobs.limits import worker_command
+                    process = subprocess.Popen(worker_command([sys.executable, "-m", "dataset_atlas.jobs.worker", str(stage / "input.json")],run.config), env=env, start_new_session=True)
                     while process.poll() is None:
                         with self._db() as db:
                             self._import_staged(db, run_id)
@@ -507,6 +512,10 @@ class JobManager:
                     db.execute("UPDATE run_items SET status='failed',error_json=? WHERE run_id=? AND status='queued'",
                                (_json({"type": "OutputBudgetExceeded", "message": "Worker output exceeded max_output_bytes"}), run_id))
                 run = self._refresh(db, run_id, final=True, exit_code=exit_code)
+                receipt=stage/'resource-error.receipt'
+                if receipt.is_file():
+                    run.errors.append(json.loads(receipt.read_text()))
+                    db.execute("UPDATE runs SET run_json=? WHERE id=?", (_json(run.model_dump(mode='json')), run_id))
                 self._register_artifact(db, run_id, run)
         except Exception as exc:
             with self._db() as db:

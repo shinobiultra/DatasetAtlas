@@ -78,9 +78,22 @@ export async function expectPanel(page: Page, name: string) {
  */
 export function stubCommonRoutes(path: string, datasetId: string): unknown | undefined {
   if (path === '/catalogue/thumbnails') return { schema_version: '1.0', datasets: {} }
+  if (path === '/preparation') return []
   if (path === '/runs' || path === '/selections' || path === '/processors' || path === '/providers') return []
   if (path === `/aggregate/${datasetId}`) {
     return { snapshot_id: '', unit: 'example', population_scope: 'preview', denominator: 0, count_status: 'exact', results: [], sampling_applied: false, warnings: [] }
   }
   return undefined
+}
+
+/** Forward only the explicit test API to the already running local workbench. */
+export async function pointToLiveWorkbench(page: Page, api: string) {
+  await page.route('**/api/v1/**', async route => {
+    const req = route.request(), url = new URL(req.url())
+    const response = await fetch(`${api}${url.pathname}${url.search}`, {
+      method: req.method(), headers: { 'Content-Type': 'application/json', 'X-Atlas-Request': '1' },
+      body: ['GET', 'HEAD'].includes(req.method()) ? undefined : req.postData() ?? undefined,
+    })
+    await route.fulfill({ status: response.status, contentType: response.headers.get('content-type') ?? 'application/json', body: Buffer.from(await response.arrayBuffer()) })
+  })
 }

@@ -10,6 +10,14 @@ import sqlite3
 import time
 
 
+def _file_sha256(path):
+    digest = hashlib.sha256()
+    with path.open('rb') as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b''):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 @dataclass(frozen=True)
 class CacheIdentity:
     source_revision: str
@@ -59,7 +67,7 @@ class BoundedCache:
             if not row:
                 return None
             path = self.root / row[0]
-            if not path.is_file() or path.stat().st_size != row[1] or hashlib.sha256(path.read_bytes()).hexdigest() != row[2]:
+            if not path.is_file() or path.stat().st_size != row[1] or _file_sha256(path) != row[2]:
                 db.execute("DELETE FROM entries WHERE key=?", (identity.key,))
                 return None
             db.execute("UPDATE entries SET last_access=? WHERE key=?", (time.time(), identity.key))
@@ -75,7 +83,7 @@ class BoundedCache:
         size = source.stat().st_size
         if size > self.max_bytes:
             raise ValueError("Asset exceeds cache capacity")
-        sha = hashlib.sha256(source.read_bytes()).hexdigest()
+        sha = _file_sha256(source)
         if expected_sha256 and sha.lower() != expected_sha256.lower():
             raise ValueError("Asset checksum mismatch")
         relative = f"objects/{identity.key}"
@@ -84,7 +92,7 @@ class BoundedCache:
             db.execute("BEGIN IMMEDIATE")
             existing = db.execute("SELECT path,pinned FROM entries WHERE key=?", (identity.key,)).fetchone()
             if existing and (self.root / existing[0]).exists():
-                if hashlib.sha256((self.root / existing[0]).read_bytes()).hexdigest() != sha:
+                if _file_sha256(self.root / existing[0]) != sha:
                     raise ValueError("Same cache identity produced different bytes; change source revision")
                 source.unlink(missing_ok=True)
                 return destination
@@ -99,7 +107,7 @@ class BoundedCache:
             if total + size > self.max_bytes:
                 raise ValueError("Pinned cache entries leave insufficient capacity")
             if destination.exists():
-                if hashlib.sha256(destination.read_bytes()).hexdigest() != sha:
+                if _file_sha256(destination) != sha:
                     raise ValueError("Existing cache object differs for this identity")
                 source.unlink()
             else:

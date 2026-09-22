@@ -1,3 +1,4 @@
+import { displayUrl, safeViewEnabled } from '../lib/display'
 import { useEffect, useRef, useState } from 'react'
 import type { Asset, Record as AtlasRecord } from '../generated'
 import { provider, publicUrl } from '../provider'
@@ -116,12 +117,12 @@ export function AssetView({ asset, overlays = [], controls = false, highlight, f
     return <div className="fallback"><Icon.Layers size={20} /><span>{asset.modality} record</span><small className="mono wrap-any">{asset.id}</small></div>
   }
 
-  const expected = overlays.filter(overlay => overlay.assetId === asset.id && overlay.visible)
+  const expected = (safeViewEnabled() ? [] : overlays).filter(overlay => overlay.assetId === asset.id && overlay.visible)
   const misaligned = natural ? expected.filter(overlay => overlay.width !== natural.width || overlay.height !== natural.height) : []
   return (
     <>
       <img
-        src={url} alt={alt ?? ''} loading="lazy" decoding="async"
+        src={displayUrl(url)} alt={alt ?? ''} loading="lazy" decoding="async"
         style={fit === 'actual' ? { width: natural?.width, height: natural?.height, maxWidth: 'none', maxHeight: 'none' } : { objectFit: fit }}
         onLoad={event => {
           const size = { width: event.currentTarget.naturalWidth, height: event.currentTarget.naturalHeight }
@@ -142,6 +143,6 @@ export function AssetView({ asset, overlays = [], controls = false, highlight, f
 
 /** The representation label a researcher needs before trusting what they see. */
 export function RepresentationTag({ asset }: { asset: Asset }) {
-  const representation = asset.representation ?? 'original'
+  const representation = safeViewEnabled() ? 'Safe-view display derivative' : asset.representation ?? 'original'
   return <span className="tag" title={`Asset ${asset.id}`}>{representation === 'original' ? 'Original' : representation}</span>
 }

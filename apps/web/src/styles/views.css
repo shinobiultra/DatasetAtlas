@@ -325,3 +325,19 @@ table.aligned td.k { color: var(--text-muted); width: 24%; }
 /* The floating map tools use a translucent surface; the active tool must still read as active. */
 .map-tools .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
 .map-tools .btn.primary:hover:not(:disabled) { background: var(--accent-hover); }
+
+/* The centre workspace can be narrow even on a desktop with both rails open. */
+.work { container-type: inline-size; }
+.ds-tabs { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.preparation-dialog { width: min(620px, calc(100vw - 24px)); max-height: calc(100dvh - 32px); overflow: auto; border: 1px solid var(--border); border-radius: 10px; padding: 0; background: var(--surface); color: var(--text); box-shadow: 0 16px 64px #0003; }
+.preparation-dialog::backdrop { background: #0005; }
+.preparation-dialog details ul { max-height: 220px; overflow: auto; overflow-wrap: anywhere; }
+@container (max-width: 650px) {
+  .ds-header { display: grid; grid-template-columns: 44px minmax(0, 1fr); padding: 12px; gap: 8px; }
+  .ds-mosaic { width: 44px; height: 44px; }
+  .ds-header-main { min-width: 0; }
+  .ds-header-main h1 { font-size: 20px; }
+  .ds-header-main .summary { display: none; }
+  .ds-header-main .facts { max-height: 34px; overflow: hidden; font-size: 11px; }
+  .ds-header-actions { grid-column: 1 / -1; margin-left: 0; max-width: 100%; flex-wrap: wrap; }
+}

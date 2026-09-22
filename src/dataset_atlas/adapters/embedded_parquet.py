@@ -1,6 +1,7 @@
 """Pinned Parquet image structs, decoded selectively without executing dataset code."""
 from __future__ import annotations
 import hashlib
+import base64
 import io
 import json
 import re
@@ -16,6 +17,7 @@ def _encoding(data):
     if data.startswith(b'\xff\xd8\xff'):return 'jpg','image/jpeg'
     if data[:4]==b'RIFF' and data[8:12]==b'WEBP':return 'webp','image/webp'
     if data[:6] in {b'GIF87a',b'GIF89a'}:return 'gif','image/gif'
+    if data[4:8]==b'ftyp' and data[8:12] in {b'avif',b'avis'}:return 'avif','image/avif'
     raise ValueError('Embedded image encoding is unsupported')
 
 class EmbeddedParquetAdapter(StructuredAdapter):
@@ -37,6 +39,9 @@ class EmbeddedParquetAdapter(StructuredAdapter):
             if value is None:continue
             values=value if isinstance(value,list) else [value]
             for index,item in enumerate(values):
+                if isinstance(item,str) and self.config.get('media_encoding') == 'base64':
+                    if len(item)>13_333_336:raise ValueError('Encoded image exceeds 10 MB decoded budget')
+                    item={'bytes':base64.b64decode(item,validate=True),'path':None}
                 if isinstance(item,(bytes,bytearray)):item={'bytes':bytes(item),'path':None}
                 if item is None:item={'bytes':None,'path':None}
                 if not isinstance(item,dict):raise ValueError('Embedded image must be bytes or a bytes/path struct')
@@ -55,10 +60,13 @@ class EmbeddedParquetAdapter(StructuredAdapter):
             suffix,_=_encoding(data) if data else ('png','image/png')
             ref=f'embedded/{ordinal}/{slot}.{suffix}' if data else None
             value={'source_path':item.get('path'),'sha256':digest,'bytes':len(data) if data else 0,'status':'embedded' if data else 'missing_embedded_bytes'}
+            if self.config.get('media_encoding'):value['source_encoding']=self.config['media_encoding']
             metadata[column].append(value)
             if ref:refs.append(ref)
             assets.append(Asset(id=stable_id(self.dataset.id,self.revision,'asset',digest or f'missing:{ordinal}:{slot}'),dataset_id=self.dataset.id,release_id=self.revision,modality='image',uri=ref,sha256=digest,metadata={**value,'source_field':column,'source_slot':index,'source_row':ordinal}))
-        for column,values in metadata.items():normalized[column]=values if isinstance(row.get(column),list) else values[0] if values else None
+        for column,values in metadata.items():
+            if column not in row:continue
+            normalized[column]=values if isinstance(row.get(column),list) else values[0] if values else None
         normalized['_atlas_embedded_refs']=refs
         record=DatasetAdapter._record(self,normalized,ordinal)
         record.assets=assets;record.asset_ids=[asset.id for asset in assets]
@@ -90,7 +98,7 @@ class EmbeddedParquetAdapter(StructuredAdapter):
         return RecordBatch(records,str(start+len(records)) if start+len(records)<total else None,len(records))
 
     def resolve_asset(self,source,asset_ref):
-        match=re.fullmatch(r'embedded/([0-9]{1,12})/([0-9]{1,2})\.(png|jpg|webp|gif)',asset_ref)
+        match=re.fullmatch(r'embedded/([0-9]{1,12})/([0-9]{1,2})\.(png|jpg|webp|gif|avif)',asset_ref)
         if not match:raise ValueError('Invalid embedded image reference')
         row_index,slot=int(match[1]),int(match[2]);rows=list(self._slice(row_index,1))
         if not rows:raise FileNotFoundError('Embedded source row does not exist')

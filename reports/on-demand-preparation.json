@@ -1,0 +1,151 @@
+{
+  "checked_at": "2026-09-22T08:19:14.756530+00:00",
+  "datasets": [
+    {
+      "dataset_id": "algopuzzlevqa",
+      "release": "dc4b82f3817e5a4b89dad128f6d4eb0248c75072",
+      "snapshot_id": "algopuzzlevqa-d7290b7a41f1d5598624f816",
+      "records": 1800,
+      "preview_records": 100,
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "plan_id": "d7290b7a41f1d5598624f81657149d6b13404b911ad651faddb417051a23edc8",
+      "prepared_receipt": "work/prepared/algopuzzlevqa/d7290b7a41f1d5598624f81657149d6b13404b911ad651faddb417051a23edc8-metadata-v2/receipt.json"
+    },
+    {
+      "dataset_id": "conceptarc",
+      "release": "github-0e67da6af879e4bad3d7cd3c196e8d551b445725",
+      "snapshot_id": "conceptarc-f1a00e23a30566170d8df113",
+      "records": 176,
+      "preview_records": 100,
+      "scope": "All original corpus tasks and separately named MinimalTasks; each record preserves complete train/test grids as one task.",
+      "plan_id": "f1a00e23a30566170d8df113ea47c9cd164991a2edec224cfb5306bf3918c19f",
+      "prepared_receipt": "work/prepared/conceptarc/f1a00e23a30566170d8df113ea47c9cd164991a2edec224cfb5306bf3918c19f/receipt.json"
+    },
+    {
+      "dataset_id": "counterfact",
+      "release": "rome-counterfact-d017056125178a13",
+      "snapshot_id": "counterfact-6cf557976850e03e1d9f7c69",
+      "records": 21919,
+      "preview_records": 100,
+      "scope": "All 21,919 original CounterFact cases, including rewrite requests and neighborhood/paraphrase/generation prompts.",
+      "plan_id": "6cf557976850e03e1d9f7c698b41522fa9fe268f9a7988780d0cc4b046953da4",
+      "prepared_receipt": "work/prepared/counterfact/6cf557976850e03e1d9f7c698b41522fa9fe268f9a7988780d0cc4b046953da4/receipt.json"
+    },
+    {
+      "dataset_id": "dtd",
+      "release": "dtd-r1.0.1",
+      "snapshot_id": "dtd-86d68f5ee62fa4c586c07a12",
+      "records": 5640,
+      "preview_records": 100,
+      "scope": "All 5,640 DTD images with all ten official train/validation/test partitions.",
+      "plan_id": "86d68f5ee62fa4c586c07a12f5c2d1bf113e372cb805b1cbde7a200342a60b49",
+      "prepared_receipt": "work/prepared/dtd/86d68f5ee62fa4c586c07a12f5c2d1bf113e372cb805b1cbde7a200342a60b49-metadata-v2/receipt.json"
+    },
+    {
+      "dataset_id": "gqa",
+      "release": "gqa-v1.2-val-balanced",
+      "snapshot_id": "gqa-v1.2-val-balanced-full-media-02ce5c49c793accd",
+      "records": 132062,
+      "preview_records": 100,
+      "scope": "official GQA v1.2 val_balanced_questions.json (132,062 examples)",
+      "plan_id": "9c85e41ad6950bd1896baad6ea5ef5085af8e85b9823d15e82f484ba733e6f4a",
+      "prepared_receipt": "work/prepared/gqa/9c85e41ad6950bd1896baad6ea5ef5085af8e85b9823d15e82f484ba733e6f4a-metadata-v2/receipt.json"
+    },
+    {
+      "dataset_id": "illuchar",
+      "release": "d55c729918bda746f74d377a2f11c92389e44bf0",
+      "snapshot_id": "illuchar-df53383aaaa234f3f95818ec",
+      "records": 4125,
+      "preview_records": 100,
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "plan_id": "df53383aaaa234f3f95818ec4c5bd1bde4ee9c29737ef4a0913d281e0ab532be",
+      "prepared_receipt": "work/prepared/illuchar/df53383aaaa234f3f95818ec4c5bd1bde4ee9c29737ef4a0913d281e0ab532be-metadata-v2/receipt.json"
+    },
+    {
+      "dataset_id": "mmmu-dev",
+      "release": "98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68",
+      "snapshot_id": "mmmu-dev-f8724745219ce8a377c9ad10",
+      "records": 150,
+      "preview_records": 100,
+      "scope": "All 150 original MMMU development examples across all 30 subject configurations; validation and test are separate populations.",
+      "plan_id": "f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf",
+      "prepared_receipt": "work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/receipt.json"
+    },
+    {
+      "dataset_id": "naturalbench",
+      "release": "ba41a7d564877a9b64c094b08015ca493cc3e54b",
+      "snapshot_id": "naturalbench-3a316bc9ca232b3988341858",
+      "records": 1900,
+      "preview_records": 100,
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "plan_id": "3a316bc9ca232b3988341858c01ea9cc5e73911e52ee0e9a7c23a1adddbe8690",
+      "prepared_receipt": "work/prepared/naturalbench/3a316bc9ca232b3988341858c01ea9cc5e73911e52ee0e9a7c23a1adddbe8690/receipt.json"
+    },
+    {
+      "dataset_id": "oxfordpet",
+      "release": "oxford-iiit-pet-original",
+      "snapshot_id": "oxfordpet-c812b4c6a2a467571c2dc4eb",
+      "records": 7349,
+      "preview_records": 100,
+      "scope": "All 7,349 annotated Oxford-IIIT Pet images; original trainval and test splits.",
+      "plan_id": "c812b4c6a2a467571c2dc4eb5e41b56c12609d9eb79856969396da1e811aebe7",
+      "prepared_receipt": "work/prepared/oxfordpet/c812b4c6a2a467571c2dc4eb5e41b56c12609d9eb79856969396da1e811aebe7-metadata-v2/receipt.json"
+    },
+    {
+      "dataset_id": "puzzlevqa",
+      "release": "09290d05682a941782582ec8bbd5903347b2baff",
+      "snapshot_id": "puzzlevqa-c2ccea1708af07e3a99bf5bc",
+      "records": 2000,
+      "preview_records": 100,
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "plan_id": "c2ccea1708af07e3a99bf5bc60b838282066a08d2258e4cd52d53247633d9a33",
+      "prepared_receipt": "work/prepared/puzzlevqa/c2ccea1708af07e3a99bf5bc60b838282066a08d2258e4cd52d53247633d9a33/receipt.json"
+    },
+    {
+      "dataset_id": "senator-tweets-2021",
+      "release": "9e85227220f34246003bdde92d4c2151106d21f6",
+      "snapshot_id": "senator-tweets-2021-47e5564df91d1cbbb471a9ee",
+      "records": 99693,
+      "preview_records": 100,
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "plan_id": "47e5564df91d1cbbb471a9eede206bc229dee7b46c1d1e9c7b972bc97d883ee1",
+      "prepared_receipt": "work/prepared/senator-tweets-2021/47e5564df91d1cbbb471a9eede206bc229dee7b46c1d1e9c7b972bc97d883ee1/receipt.json"
+    },
+    {
+      "dataset_id": "simplevqa",
+      "release": "037cf89fb6f1212691756b66d1ecde6c2ce89e54",
+      "snapshot_id": "simplevqa-8382305d27a65ddcdbc544e1",
+      "records": 2225,
+      "preview_records": 100,
+      "scope": "All original native SimpleVQA language shards at the pinned author revision; image strings are losslessly decoded from base64 for display and model inputs.",
+      "plan_id": "8382305d27a65ddcdbc544e102756226f5531bccc9916e3cb0e767b2ebf97be1",
+      "prepared_receipt": "work/prepared/simplevqa/8382305d27a65ddcdbc544e102756226f5531bccc9916e3cb0e767b2ebf97be1/receipt.json"
+    },
+    {
+      "dataset_id": "waterbirds",
+      "release": "waterbird-complete95-forest2water2-56c51b77f7d17283",
+      "snapshot_id": "waterbirds-1661bca077cdd6c9b8049c03",
+      "records": 11788,
+      "preview_records": 100,
+      "scope": "Original Waterbirds complete95 forest2water2 release, all train/validation/test records with original y/place/split annotations.",
+      "plan_id": "1661bca077cdd6c9b8049c03496285228cffbe6d4af2cdc53cbeefeea7aef3cf",
+      "prepared_receipt": "work/prepared/waterbirds/1661bca077cdd6c9b8049c03496285228cffbe6d4af2cdc53cbeefeea7aef3cf/receipt.json"
+    },
+    {
+      "dataset_id": "wmdp",
+      "release": "7125571f22f032c56415e7980f48d877dd830ff8",
+      "snapshot_id": "wmdp-90c82ed7172dd56a64312bea",
+      "records": 3668,
+      "preview_records": 100,
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "plan_id": "90c82ed7172dd56a64312bea65d2ebb1c751370425eb810e74bc72bce6163e6a",
+      "prepared_receipt": "work/prepared/wmdp/90c82ed7172dd56a64312bea65d2ebb1c751370425eb810e74bc72bce6163e6a-metadata-v2/receipt.json"
+    }
+  ],
+  "catalogue_entries": 336,
+  "with_previews": 77,
+  "without_previews": 259,
+  "full_population_indices": 72,
+  "all_requested_datasets_complete": false,
+  "note": "Acquired source populations and on-demand infrastructure; catalogue-wide coverage is not complete."
+}

@@ -1,13 +1,13 @@
 {
-  "checked_at_utc": "2026-09-22T06:42:55.117245+00:00",
+  "checked_at_utc": "2026-09-22T08:19:14.756530+00:00",
   "catalogue_entries": 336,
-  "tested_local_previews": 64,
-  "verified_preview_records": 6313,
-  "canonical_full_scope_indices": 59,
-  "entries_without_preview": 272,
-  "python_tests_passed": 191,
+  "tested_local_previews": 77,
+  "verified_preview_records": 7613,
+  "canonical_full_scope_indices": 72,
+  "entries_without_preview": 259,
+  "python_tests_passed": 217,
   "frontend_tests_passed": 22,
-  "browser_tests_passed": 27,
+  "browser_tests_passed": 29,
   "browser_tests_skipped": 0,
   "approved_public_preview_datasets": [
     "clevr",
@@ -15,9 +15,18 @@
     "pairs"
   ],
   "full_v1_complete": false,
-  "active_download": null,
+  "active_download": "exams-v",
   "all_subagents_finished": true,
   "paid_model_apis_used": false,
   "gqa_full_archive_acquired": true,
-  "gqa_browsing_snapshot_media_scope": "selected_preview"
+  "gqa_browsing_snapshot_media_scope": "full",
+  "active_preparations": [
+    {
+      "id": "8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911",
+      "dataset_id": "exams-v",
+      "status": "queued",
+      "updated_at": 1790065153.6840293
+    }
+  ],
+  "executable_preparation_plans": 81
 }

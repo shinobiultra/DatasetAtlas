@@ -1,3 +1,4 @@
+import { displayUrl } from '../lib/display'
 import { useEffect, useMemo, useState } from 'react'
 import type { Artifact, Record as AtlasRecord } from '../generated'
 import { recordHeadline, shortId } from '../lib/format'
@@ -101,7 +102,7 @@ export function FocusedInspector({ records, index, artifacts, onIndex, onClose, 
                 title={recordHeadline(item)} aria-label={`Sample ${position + 1}: ${shortId(item.id, 14)}`}
               >
                 {url && thumb?.modality === 'image'
-                  ? <img src={url} alt="" loading="lazy" onError={event => { event.currentTarget.style.visibility = 'hidden' }} />
+                  ? <img src={displayUrl(url)} alt="" loading="lazy" onError={event => { event.currentTarget.style.visibility = 'hidden' }} />
                   : <span className="tph clamp-3">{recordHeadline(item)}</span>}
               </button>
             )

@@ -1,0 +1,8 @@
+source_url: https://huggingface.co/datasets/MMMU/MMMU/tree/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68
+source_patterns:
+- '*/dev-*.parquet'
+expected_count: 150
+scope: All 150 original MMMU development examples across all 30 subject configurations;
+  validation and test are separate populations.
+description: 'Original MMMU development split: 150 examples across 30 subjects. The
+  source revision is pinned; paper-used revision remains unresolved.'

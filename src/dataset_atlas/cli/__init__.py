@@ -23,6 +23,8 @@ def main(argv=None):
     datasets=sub.add_parser('datasets').add_subparsers(dest='action',required=True)
     validate=datasets.add_parser('validate');validate.add_argument('--all',action='store_true')
     prepare=datasets.add_parser('prepare');prepare.add_argument('--dataset',required=True);prepare.add_argument('--preview-size',type=int,default=100);prepare.add_argument('--max-bytes',type=int,default=20_000_000);prepare.add_argument('--dry-run',action='store_true')
+    acquire=datasets.add_parser('acquire');acquire.add_argument('--dataset',required=True);acquire.add_argument('--max-download-bytes',type=int,required=True);acquire.add_argument('--max-output-bytes',type=int,required=True);acquire.add_argument('--execute',action='store_true')
+    preparation=datasets.add_parser('preparation');preparation.add_argument('--id',required=True);preparation.add_argument('--cancel',action='store_true');preparation.add_argument('--retry',action='store_true')
     index=datasets.add_parser('index');index.add_argument('--dataset',required=True);index.add_argument('--expected-count',type=int,required=True);index.add_argument('--max-bytes',type=int,default=30_000_000_000)
     serve=sub.add_parser('serve');serve.add_argument('--host',default='127.0.0.1');serve.add_argument('--port',type=int,default=8765)
     analyze=sub.add_parser('analyze');analyze.add_argument('--selection',required=True);analyze.add_argument('--processor',required=True);analyze.add_argument('--config',type=Path)
@@ -42,7 +44,14 @@ def main(argv=None):
         elif args.command=='datasets':
             from dataset_atlas.registry import Registry
             registry=Registry(root)
-            if args.action=='validate':
+            if args.action=='acquire':
+                from dataset_atlas.preparation import PreparationManager
+                manager=PreparationManager(root);plan=manager.plan(args.dataset,args.max_download_bytes,args.max_output_bytes);emit(plan)
+                if args.execute:emit(manager.start(plan['id']))
+            elif args.action=='preparation':
+                from dataset_atlas.preparation import PreparationManager
+                manager=PreparationManager(root);emit(manager.cancel(args.id) if args.cancel else manager.start(args.id) if args.retry else manager.status(args.id))
+            elif args.action=='validate':
                 errors=[];count=0
                 for dataset in registry.datasets():
                     count+=1

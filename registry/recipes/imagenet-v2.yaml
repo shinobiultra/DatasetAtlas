@@ -1,0 +1,15 @@
+release: imagenetv2-b-33-matched-frequency
+adapter: archive
+expected_count: 10000
+scope: ImageNetV2 MatchedFrequency b-33 only, 10,000 images and 10/class; Threshold0.7
+  and TopImages absent
+adapter_config: {}
+files:
+- source_name: imagenetv2-matched-frequency.tar
+  url: https://huggingface.co/datasets/vaishaal/ImageNetV2/resolve/d626240be2538720e83103a0e1178d24aca8b12c/imagenetv2-matched-frequency.tar.gz
+  bytes: 1264079360
+  sha256: f0c37fdf925916b19ea1323cd9a2208cdb6959ba2c32eef2a7fc393835c9ca7c
+  format: tar
+  config_key: path
+allowed_hosts:
+- huggingface.co

@@ -1,0 +1,14 @@
+release: iconqa-original-v1-475f7651
+adapter: iconqa
+expected_count: 107439
+scope: Complete original IconQA v1 author ZIP, 107,439 questions across three subtasks
+adapter_config: {}
+files:
+- source_name: iconqa_data.zip
+  url: https://iconqa2021.s3.us-west-1.amazonaws.com/iconqa_data.zip
+  bytes: 1851278883
+  sha256: 475f7651d9e2a86dee340e8b8b1d07b3d34abc7279c08bc7391196b49d4d348b
+  format: zip
+  config_key: archive
+allowed_hosts:
+- iconqa2021.s3.us-west-1.amazonaws.com

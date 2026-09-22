@@ -1,3 +1,4 @@
+import { displayUrl } from '../lib/display'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { Artifact, FieldDescriptor, Record as AtlasRecord } from '../generated'
 import { fieldValue } from '../query'
@@ -253,7 +254,7 @@ export function MapView({ artifact, records, colourField, onInspect, onSelect, s
               const url = asset ? assetUrl(asset) : null
               return (
                 <button type="button" key={record.id} onClick={() => onInspect(record.id)} onDoubleClick={() => onOpen(record.id)} title={record.id}>
-                  {url && asset?.modality === 'image' ? <img src={url} alt="" loading="lazy" /> : <div style={{ height: 62, background: 'var(--n-150)' }} />}
+                  {url && asset?.modality === 'image' ? <img src={displayUrl(url)} alt="" loading="lazy" /> : <div style={{ height: 62, background: 'var(--n-150)' }} />}
                   <div className="cap clamp-2">{record.question ?? record.text ?? shortId(record.id, 14)}</div>
                 </button>
               )

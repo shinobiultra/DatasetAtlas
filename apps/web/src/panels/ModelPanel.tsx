@@ -1,3 +1,4 @@
+import { displayUrl } from '../lib/display'
 import { useEffect, useMemo, useState } from 'react'
 import { provider } from '../provider'
 import { display, shortId } from '../lib/format'
@@ -168,7 +169,7 @@ export function ModelPanel({ selected, unit, onNotice }: { selected: string[]; u
                   onChange={event => { setImageAssetIds(ids => event.target.checked ? [...ids, asset.id] : ids.filter(id => id !== asset.id)); setContext(null); setResponse(null) }}
                   aria-label={`Include image asset ${asset.id}`}
                 />
-                <img src={asset.uri} alt="" loading="lazy" style={{ width: 40, height: 30, objectFit: 'cover', borderRadius: 4, background: 'var(--n-150)' }} />
+                <img src={displayUrl(asset.uri)} alt="" loading="lazy" style={{ width: 40, height: 30, objectFit: 'cover', borderRadius: 4, background: 'var(--n-150)' }} />
                 <span className="truncate mono" style={{ fontSize: 'var(--fs-sm)' }} title={asset.recordId}>{shortId(asset.recordId, 18)}</span>
               </label>
             ))}

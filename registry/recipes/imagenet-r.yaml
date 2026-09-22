@@ -1,0 +1,14 @@
+release: imagenet-r-original-tar-18c6bf49
+adapter: archive
+expected_count: 30000
+scope: 'Original author ImageNet-R TAR: 30,000 source images across 200 synset folders'
+adapter_config: {}
+files:
+- source_name: imagenet-r.tar
+  url: https://people.eecs.berkeley.edu/~hendrycks/imagenet-r.tar
+  bytes: 2191079936
+  sha256: 18c6bf493b39a0d975d48e587437f562caab9c52ae6327dcfa9dd8eb54aa1b52
+  format: tar
+  config_key: path
+allowed_hosts:
+- people.eecs.berkeley.edu

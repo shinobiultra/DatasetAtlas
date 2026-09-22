@@ -1,3 +1,4 @@
+import { displayUrl } from './lib/display'
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import type { Capabilities, Dataset, Selection } from './generated'
 import { provider, type Thumbnails } from './provider'
@@ -123,7 +124,7 @@ export function App() {
                     onMouseDown={event => event.preventDefault()}
                     onClick={() => { openDataset(dataset.id); setSuggestOpen(false) }}
                   >
-                    {tile ? <img className="thumb" src={tile.uri} alt="" /> : <span className="thumb" style={{ display: 'grid', placeItems: 'center' }}><Icon.Database size={14} /></span>}
+                    {tile ? <img className="thumb" src={displayUrl(tile.uri)} alt="" /> : <span className="thumb" style={{ display: 'grid', placeItems: 'center' }}><Icon.Database size={14} /></span>}
                     <span className="meta">
                       <strong className="truncate">{dataset.name}</strong>
                       <span className="truncate">{coverageLine(dataset, provider.mode).text}</span>

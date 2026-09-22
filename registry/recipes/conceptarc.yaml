@@ -1,0 +1,21 @@
+release: github-0e67da6af879e4bad3d7cd3c196e8d551b445725
+adapter: annotated_archive
+expected_count: 176
+scope: All original corpus tasks and separately named MinimalTasks; each record preserves
+  complete train/test grids as one task.
+adapter_config:
+  annotation_patterns:
+  - ConceptARC-0e67da6af879e4bad3d7cd3c196e8d551b445725/corpus/*/*.json
+  - ConceptARC-0e67da6af879e4bad3d7cd3c196e8d551b445725/MinimalTasks/*.json
+  json_mode: document
+files:
+- source_name: original.archive
+  url: https://codeload.github.com/victorvikram/ConceptARC/zip/0e67da6af879e4bad3d7cd3c196e8d551b445725
+  bytes: 147432
+  sha256: 92246659b88c92888e4dcbcc6e985ef6236bb45b755326716e783dbaf83a45a8
+  format: zip
+  config_key: path
+allowed_hosts:
+- codeload.github.com
+- nlp.stanford.edu
+- downloads.cs.stanford.edu

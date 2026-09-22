@@ -1,0 +1,9 @@
+# Official complete image archive; questions remain explicitly validation-balanced.
+description: Official GQA v1.2 validation-balanced population of 132,062 question-answer examples. Every referenced image ID is joined to the verified complete official image archive. Training and other question splits are outside this explicitly scoped snapshot.
+snapshot_id: gqa-v1.2-val-balanced-full-media-02ce5c49c793accd
+adapter_config:
+  images_archive: work/sources/gqa/images.zip
+  images_sha256: 02ce5c49c793accd5305356de9c39a50f80a7aaac193b0203de30dbbc65bde62
+  prepared_root: work/sources/gqa/prepared-full-media
+  media_scope: full
+  preparation_budget_bytes: 2000000000

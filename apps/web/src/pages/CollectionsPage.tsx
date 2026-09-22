@@ -1,3 +1,4 @@
+import { displayUrl } from '../lib/display'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import type { Dataset, FieldDescriptor, Record as AtlasRecord, Selection } from '../generated'
 import { provider } from '../provider'
@@ -185,7 +186,7 @@ function CollectionDetail({ selection, onBack, onToast }: { selection: Selection
                     <button type="button" className="open" onClick={() => setInspected(item.id)}>
                       <div className="sample-media" style={{ height: 138 }}>
                         {url && asset?.modality === 'image'
-                          ? <img src={url} alt="" loading="lazy" />
+                          ? <img src={displayUrl(url)} alt="" loading="lazy" />
                           : <div className="textprev clamp-3">{recordHeadline(item)}</div>}
                       </div>
                       <div className="sample-body"><div className="primary clamp-2">{recordHeadline(item)}</div></div>

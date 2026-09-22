@@ -199,11 +199,14 @@ function StorageSection() {
 }
 
 function AppearanceSection() {
+  const safeView = localStorage.getItem('atlas.safe-view') === 'true'
   const [density, setDensity] = useStoredState<boolean>('atlas.dense', false)
   const [cardWidth, setCardWidth] = useStoredState<number>('atlas.card', 248)
   return (
     <div className="card card-pad">
       <h3 style={{ marginBottom: 10 }}>Appearance</h3>
+      <label className="row"><input type="checkbox" checked={safeView} onChange={event => { localStorage.setItem('atlas.safe-view', String(event.target.checked)); window.location.reload() }} />Safe-view image display</label>
+      <p className="hint">Pixelated display derivatives in the local workbench; other image URLs are hidden. Originals and analysis/model inputs remain unchanged. This is a viewing aid, not a content classifier.</p>
       <div className="col" style={{ gap: 14 }}>
         <label className="row" style={{ gap: 9 }}>
           <input type="checkbox" checked={density} onChange={event => setDensity(event.target.checked)} />

@@ -1,0 +1,22 @@
+release: waterbird-complete95-forest2water2-56c51b77f7d17283
+adapter: annotated_archive
+expected_count: 11788
+scope: Original Waterbirds complete95 forest2water2 release, all train/validation/test
+  records with original y/place/split annotations.
+adapter_config:
+  annotation_patterns:
+  - waterbird_complete95_forest2water2/metadata.csv
+  mapping:
+    media: img_filename
+  media_prefix: waterbird_complete95_forest2water2/
+files:
+- source_name: original.archive
+  url: https://nlp.stanford.edu/data/dro/waterbird_complete95_forest2water2.tar.gz
+  bytes: 489698023
+  sha256: 56c51b77f7d17283ac97003d973e9107e8af9ceebffcb0c8be14d024f846f951
+  format: tar.gz
+  config_key: path
+allowed_hosts:
+- codeload.github.com
+- nlp.stanford.edu
+- downloads.cs.stanford.edu

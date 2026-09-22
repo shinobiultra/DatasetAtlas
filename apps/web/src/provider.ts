@@ -244,3 +244,12 @@ export const provider: DataProvider = new URLSearchParams(window.location.search
 export function recordMedia(record: AtlasRecord): string[] {
   return (record.assets ?? []).filter(asset => asset.uri).map(asset => provider.mode === 'static' ? publicUrl(asset.uri!) : asset.uri!)
 }
+
+/** Explicit user-triggered workbench acquisition; never invoked by static browsing or model tools. */
+export const preparationApi = {
+  list: <T,>(datasetId: string) => get<T>(`/preparation?dataset_id=${encodeURIComponent(datasetId)}`),
+  plan: <T,>(id: string, maxDownloadBytes: number, maxOutputBytes: number) => post<T>(`/datasets/${encodeURIComponent(id)}/preparation/plan`, { max_download_bytes: maxDownloadBytes, max_output_bytes: maxOutputBytes }),
+  start: <T,>(id: string) => post<T>(`/preparation/${encodeURIComponent(id)}/start`),
+  status: <T,>(id: string) => get<T>(`/preparation/${encodeURIComponent(id)}`),
+  cancel: <T,>(id: string) => post<T>(`/preparation/${encodeURIComponent(id)}/cancel`),
+}

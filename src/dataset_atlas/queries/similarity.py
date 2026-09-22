@@ -14,7 +14,6 @@ def similar_records(artifact:Artifact, record_id:str|None, eligible_ids:list[str
     if query_vector is None and record_id not in vectors:raise ValueError('Query record has no completed vector in this embedding space')
     vector=query_vector if query_vector is not None else vectors[record_id]
     eligible=[id for id in eligible_ids if id in vectors and id!=record_id]
-    if len(eligible)>1000:raise ValueError('Exact interactive retrieval currently permits 1000 eligible records; narrow the explicit filter')
     dimension=len(vector)
     if not dimension or any(len(v)!=dimension or any(type(x) not in (int,float) or not math.isfinite(x) for x in v) for v in vectors.values()):raise ValueError('Embedding vectors have invalid dimensions or values')
     if not eligible:return {'mode':'exact','embedding_space_id':space,'artifact_id':artifact.id,'eligible_count':0,'results':[]}

@@ -1,0 +1,5 @@
+source_url: https://huggingface.co/datasets/m-a-p/SimpleVQA/tree/037cf89fb6f1212691756b66d1ecde6c2ce89e54
+adapter_config:
+  media_columns: [image]
+  media_encoding: base64
+scope: All original native SimpleVQA language shards at the pinned author revision; image strings are losslessly decoded from base64 for display and model inputs.

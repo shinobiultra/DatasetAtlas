@@ -70,6 +70,8 @@ def main() -> int:
     parser.add_argument("input", type=Path)
     args = parser.parse_args()
     plan = json.loads(args.input.read_text(encoding="utf-8"))
+    from dataset_atlas.jobs.limits import install
+    install(plan.get('config', {}), args.input.parent)
     budget = plan.get("budget_remaining_bytes", plan.get("config", {}).get("max_output_bytes", 64 * 1024 * 1024))
     if type(budget) is not int or budget < 0:
         raise ValueError("Invalid remaining output budget")

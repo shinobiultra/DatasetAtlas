@@ -1,3 +1,4 @@
+import { displayUrl } from '../lib/display'
 import { useEffect, useMemo, useState } from 'react'
 import type { Dataset } from '../generated'
 import { provider, type ThumbEntry, type Thumbnails } from '../provider'
@@ -55,7 +56,7 @@ function Tiles({ entry, name }: { entry: ThumbEntry | undefined; name: string })
     return (
       <div className={`ds-thumbs n${Math.min(4, images.length)}`}>
         {images.slice(0, 4).map((tile, index) => (
-          <img key={index} src={(tile as { uri: string }).uri} alt={index === 0 ? `Example image from ${name}` : ''} loading="lazy" decoding="async"
+          <img key={index} src={displayUrl((tile as { uri: string }).uri)} alt={index === 0 ? `Example image from ${name}` : ''} loading="lazy" decoding="async"
             onError={event => { event.currentTarget.style.visibility = 'hidden' }} />
         ))}
       </div>
@@ -244,7 +245,7 @@ export function CataloguePage({ term, onOpen }: { term: string; onOpen: (id: str
                   const coverage = coverageLine(dataset, provider.mode)
                   return (
                     <button type="button" className="ds-row" data-dataset-id={dataset.id} key={dataset.id} onClick={() => onOpen(dataset.id)}>
-                      {tile ? <img className="rthumb" src={tile.uri} alt="" loading="lazy" /> : <span className="rthumb ph"><Icon.Database size={14} /></span>}
+                      {tile ? <img className="rthumb" src={displayUrl(tile.uri)} alt="" loading="lazy" /> : <span className="rthumb ph"><Icon.Database size={14} /></span>}
                       <span style={{ minWidth: 0 }}>
                         <strong className="truncate">{dataset.name}</strong>
                         <small className="truncate">{dataset.description || 'No description recorded.'}</small>

@@ -1,0 +1,86 @@
+schema_version: '1.0'
+id: robustbench
+name: RobustBench
+aliases: []
+description: RobustBench is a standardized robustness leaderboard, model zoo and evaluation
+  library, not a standalone source-image dataset.
+paper_ids:
+- paper-a47845c66d4a3f48
+- paper-12e8bd34b4a2f2a8
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_applicable
+  preview: none
+  complete_data: not_applicable
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - RobustBench is a benchmark protocol, model zoo and evaluation library; it is not
+    a standalone dataset pack. Underlying dataset releases retain their own access
+    and rights.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/RobustBench/robustbench/tree/78fcc9e48a07a861268f295a777b975f25155964
+  note: MIT applies to benchmark code/default model entries, not to the underlying
+    datasets; dataset-level rights inherit exact evaluation data source
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-9fafa64faee56e4de761
+  paper_id: paper-a47845c66d4a3f48
+  source_file_hash: f1108a17f3cbbba7a93256ee725d68092c9a6d25204ca4faab92f6f0cbe1a4df
+  page: 2
+  role: introduction
+  excerpt: 're 1: The top-3 entries of our CIFAR-10 leaderboard hosted at https://robustbench.github.
+    io/ for the `∞ -perturbations of radius ε∞ = 8/255. seemingly robust defenses
+    fail to be robust. Howe'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-bf8a2de88d222143ad4d
+  paper_id: paper-12e8bd34b4a2f2a8
+  source_file_hash: e651ef9944539b513a21a8b7a1b5a62f88b7355a6cce81fde112f57c96c28cf7
+  page: 12
+  role: bibliography-only reference
+  excerpt: 'o, V. Sehwag, E. Debenedetti, N. Flammarion, M. Chiang, P. Mittal, and
+    M. Hein. Robustbench: a standardized adversarial robustness benchmark. arXiv preprint
+    arXiv:2010.09670, 2020. 10'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/RobustBench/robustbench/tree/78fcc9e48a07a861268f295a777b975f25155964
+  note: RobustBench is a standardized robustness leaderboard, model zoo and evaluation
+    library, not a standalone source-image dataset
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: benchmark_protocol_not_standalone_dataset
+- kind: source_audit_release
+  url: https://github.com/RobustBench/robustbench/tree/78fcc9e48a07a861268f295a777b975f25155964
+  note: Official repository commit 78fcc9e48a07a861268f295a777b975f25155964; benchmark
+    paper 2021, evolving model zoo
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: benchmark_protocol_not_standalone_dataset
+- kind: source_audit_access
+  url: https://github.com/RobustBench/robustbench/tree/78fcc9e48a07a861268f295a777b975f25155964
+  note: Code and model metadata are public; eval library uses CIFAR-10/-100/-C and
+    manually obtained ImageNet datasets with their own source terms
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: benchmark_protocol_not_standalone_dataset
+  probe: benchmark_repository_not_dataset
+- kind: source_audit_rights
+  url: https://github.com/RobustBench/robustbench/tree/78fcc9e48a07a861268f295a777b975f25155964
+  note: MIT applies to benchmark code/default model entries, not to the underlying
+    datasets; dataset-level rights inherit exact evaluation data source
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: benchmark_protocol_not_standalone_dataset
+source_url: https://github.com/RobustBench/robustbench/tree/78fcc9e48a07a861268f295a777b975f25155964

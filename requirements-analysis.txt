@@ -1,0 +1,18 @@
+# Tested local CPU analysis stack, 2026-09-22, Python 3.12.
+# Install CPU Torch from https://download.pytorch.org/whl/cpu and the rest from PyPI.
+# Example: uv pip install --python .venv/bin/python -r requirements-analysis.txt \
+#   --index-url https://download.pytorch.org/whl/cpu \
+#   --extra-index-url https://pypi.org/simple --index-strategy unsafe-best-match
+numpy==2.5.3
+Pillow==12.3.0
+torch==2.6.0+cpu
+torchvision==0.21.0+cpu
+nudenet==3.4.2
+onnxruntime==1.30.0
+sentence-transformers==5.7.0
+transformers==4.57.6
+sentencepiece==0.2.2
+huggingface-hub==0.36.2
+scikit-learn==1.9.1
+umap-learn==0.5.12
+lancedb==0.39.0

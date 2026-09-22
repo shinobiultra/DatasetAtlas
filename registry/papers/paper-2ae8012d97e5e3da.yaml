@@ -1,0 +1,55 @@
+schema_version: 1.0.0
+paper_id: paper-2ae8012d97e5e3da
+title: 'Causal Abstraction: A Theoretical Foundation for Mechanistic Interpretability'
+authors:
+- Geiger, Atticus
+- Ibeling, Duligur
+- Zur, Amir
+- Chaudhary, Maheep
+- Chauhan, Sonakshi
+- Huang, Jing
+- Arora, Aryaman
+- Wu, Zhengxuan
+- Goodman, Noah
+- Potts, Christopher
+- Icard, Thomas
+year: null
+doi: null
+url: null
+outcome: processed
+human_review_complete: false
+mention_inventory_review_complete: true
+candidate_mention_count: 18
+sources:
+- relative_path: files/29045/Geiger et al. - Causal Abstraction A Theoretical Foundation
+    for Mechanistic Interpretability.pdf
+  type: pdf
+  sha256: 8cb8aa5aeb09ce466263e93f0b11ecf8caac93664142c18b28f4d299291048fa
+  page_count: 64
+  extraction_quality:
+    pages_total: 64
+    pages_low_text: 4
+    characters: 212173
+    status: usable
+  processing_status: extracted
+- relative_path: files/30100/Geiger et al. - Causal Abstraction A Theoretical Foundation
+    for Mechanistic Interpretability.pdf
+  type: pdf
+  sha256: 070f2501b5175791f20b2e050dba14c0e1ae84160781973501a35adbdc74c8e7
+  page_count: 63
+  extraction_quality:
+    pages_total: 63
+    pages_low_text: 4
+    characters: 212296
+    status: usable
+  processing_status: extracted
+reviewer_kind: agent
+review_method: full_pdf_page_text_appendix_table_caption_bibliography_audit
+reviewed_at: '2026-09-22T03:33:59.407704+00:00'
+reviewed_pages: 127
+reviewed_versions:
+- 8cb8aa5aeb09ce46
+- 070f2501b5175791
+review_note: Both PDF versions (64 and 63 pages) checked. Theoretical paper with no
+  original evaluation dataset. CEBaB is an illustrative cited benchmark; CausalGym
+  appears only in bibliography. Page offsets differ by one between versions.

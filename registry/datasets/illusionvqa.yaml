@@ -1,0 +1,99 @@
+schema_version: '1.0'
+id: illusionvqa
+name: IllusionVQA
+aliases: []
+description: 'Official IllusionVQA test releases: 435 comprehension and 1,000 soft-localization image MCQs. Training/select
+  examples are separate few-shot material, excluded from benchmark test index; distinct from IllusoryVQA.'
+paper_ids:
+- paper-6a7364738bac9f07
+release: hf-comprehension-07e12764029d968a78a78e13928fb370066de706-soft-230e55cc3cda992be203b5b051368be0771db213
+adapter: embedded_parquet
+adapter_config:
+  path: work/sources/illusionvqa/records.parquet
+  sha256: b7bbeb299baaafd5fd8bc03dbffe9763023c49ec0c2264b7c0aadcc7c5b941e5
+  format: parquet
+  mapping:
+    id: source_id
+    question: question
+    choices: options
+  fields:
+    source_id: Task and original test ID
+    task: Comprehension or soft-localization
+    split: Original test split
+    source_file: Pinned author Parquet path
+    id: Original author ID
+    question: Original question
+    options: Original answer choices
+    answer: Original source answer
+    category: Original illusion category
+    source: Original source attribution
+    url: Original source URL
+    reasoning: Original reasoning annotation
+    images: Original embedded image metadata
+  population: 'Official IllusionVQA test releases: 435 comprehension and 1,000 soft-localization image MCQs. Training/select
+    examples are separate few-shot material, excluded from benchmark test index; distinct from IllusoryVQA.'
+  media_columns:
+  - images
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 1435
+  unit: example
+  blockers:
+  - Author dataset cards CC BY-NC-SA 4.0; third-party illusion image rights remain unreviewed; media/records local
+    only.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  external_provider: local_only
+  source: https://illusionvqa.github.io/
+  note: Author dataset cards CC BY-NC-SA 4.0; third-party illusion image rights remain unreviewed; media/records
+    local only.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-b5ae9140ee1b78e8664d
+  paper_id: paper-6a7364738bac9f07
+  source_file_hash: d91f86d6799fd7cd645f7909f9bf9308f6a56566433bebd2c1f56b44c7db8f49
+  page: 3
+  role: related-work comparison
+  excerpt: 12 types, mainly classical IllusionVQA 374 Multiple-choice 1435 ×
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://illusionvqa.github.io/
+  note: Original project provides comprehension and soft-localization MCQ tasks on optical illusions; corpus mention
+    is related-work comparison
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_page_located
+- kind: source_audit_rights
+  url: https://illusionvqa.github.io/
+  note: Source illusion-image and annotation redistribution rights not established here
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_page_located
+- kind: source_audit_access
+  url: https://illusionvqa.github.io/
+  note: public; Preserve distinct identity from IllusoryVQA and IllusionBench.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_page_located
+- kind: source_release
+  url: https://illusionvqa.github.io/
+  note: Pinned official author release, 1435 test/val records, derived SHA-256 b7bbeb299baaafd5fd8bc03dbffe9763023c49ec0c2264b7c0aadcc7c5b941e5.
+source_url: https://illusionvqa.github.io/
+snapshot_id: hf-comprehension-07e12764029d968a78a78e13928fb370066de706-soft-230e55cc3cda992be203b5b051368be0771db213-b7bbeb299baa
+modalities:
+- text
+- image
+tasks:
+- optical illusion comprehension
+- soft localization
+- visual question answering

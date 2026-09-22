@@ -1,0 +1,102 @@
+{
+  "population_scope": "four selected questions in the pinned third-party CLEVR validation subset, three distinct images",
+  "result": {
+    "coverage": {
+      "selected": 4,
+      "statuses": {
+        "completed": 4
+      }
+    },
+    "items": [
+      {
+        "id": "clevr:example:81280039a9c65cac129baa0d",
+        "output": {
+          "assets": [
+            {
+              "aspect_ratio": 1.5,
+              "asset_id": "clevr:asset:51f6069dca0873395bd798b9",
+              "dhash64": "073bdbc3c5656301",
+              "file_sha256": "5daf56d223c01e2481d6f12ef54686275f71fe67704f639734e27d2c5d6970c9",
+              "height": 320,
+              "pixel_sha256": "e8a0ad80c0a12cb53d367f1eb54ecd408db0bb1861b2cd9d18e90bb12fcbddfc",
+              "status": "completed",
+              "width": 480
+            }
+          ]
+        },
+        "status": "completed"
+      },
+      {
+        "id": "clevr:example:bb898567568d126f426da479",
+        "output": {
+          "assets": [
+            {
+              "aspect_ratio": 1.5,
+              "asset_id": "clevr:asset:51f6069dca0873395bd798b9",
+              "dhash64": "073bdbc3c5656301",
+              "file_sha256": "5daf56d223c01e2481d6f12ef54686275f71fe67704f639734e27d2c5d6970c9",
+              "height": 320,
+              "pixel_sha256": "e8a0ad80c0a12cb53d367f1eb54ecd408db0bb1861b2cd9d18e90bb12fcbddfc",
+              "status": "completed",
+              "width": 480
+            }
+          ]
+        },
+        "status": "completed"
+      },
+      {
+        "id": "clevr:example:e6ea768f34ed86b2beb5c102",
+        "output": {
+          "assets": [
+            {
+              "aspect_ratio": 1.5,
+              "asset_id": "clevr:asset:ddc7c4ed2a15018d40e22e17",
+              "dhash64": "1d27bb9acc5a0b07",
+              "file_sha256": "464df4c43fe6987144ab1f828ab11288f3a16ca073f1ebed09430ada29c3a5a4",
+              "height": 320,
+              "pixel_sha256": "0428cc3e8bc9cf7b3bb296c8e5ef4370813094ed9a16cbec15378cf7809786de",
+              "status": "completed",
+              "width": 480
+            }
+          ]
+        },
+        "status": "completed"
+      },
+      {
+        "id": "clevr:example:d304940fb87bc156563e05ba",
+        "output": {
+          "assets": [
+            {
+              "aspect_ratio": 1.5,
+              "asset_id": "clevr:asset:24e216d3febe96095d8dcad6",
+              "dhash64": "0b35648e96633333",
+              "file_sha256": "8e3bf9cffa492251db6781e9fb33158b772ebccdd12b285629edd648e3630b77",
+              "height": 320,
+              "pixel_sha256": "957857a5de11c4a33707ff51dbb62a942ee499595e6c5268ee9d0f2be889e34c",
+              "status": "completed",
+              "width": 480
+            }
+          ]
+        },
+        "status": "completed"
+      }
+    ],
+    "processor_id": "quality.basic",
+    "provenance": {
+      "input_representation": "local original image, EXIF-transposed RGB",
+      "max_pixels": 50000000,
+      "processor_version": "1.0"
+    },
+    "schema_version": "1.0",
+    "unit": "example"
+  },
+  "rights": "approved",
+  "schema_version": "1.0",
+  "source_question_indices": [
+    0,
+    1,
+    10,
+    20
+  ],
+  "source_registry": "registry/datasets/clevr.yaml"
+}

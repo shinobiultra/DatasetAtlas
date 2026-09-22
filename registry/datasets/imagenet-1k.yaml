@@ -1,0 +1,130 @@
+schema_version: '1.0'
+id: imagenet-1k
+name: ImageNet-1K
+aliases: []
+description: ILSVRC classification/localization 1,000-class subset; keep separate
+  from full ImageNet and derivative benchmarks.
+paper_ids:
+- paper-7a1ff5996ce95273
+- paper-a291f2908480a2f8
+- paper-3e0db9c633ab204c
+- paper-ed38cc9d6f4b163c
+- paper-7531668a4a39f304
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Source-family rights and any public media examples require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://www.image-net.org/download.php
+  note: ImageNet terms restrict use to noncommercial research and education; no public
+    image redistribution permission inferred
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-710c6f2bdbe090433589
+  paper_id: paper-7a1ff5996ce95273
+  source_file_hash: d2da2819b87291e9ff99547e1724286e95ef4de33cad091ce17762c0c90782d1
+  page: 5
+  role: source data
+  excerpt: del is CLIP ViT-B/32. For the SASD-WS attack, we uti- images from the ImageNet-1K
+    validation set as clean (ran- lized the officially released weights, as its surrogate
+    model dom) images to ge
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-21124f0fa98771da2932
+  paper_id: paper-a291f2908480a2f8
+  source_file_hash: 7530ebbc6bf29d83834d772db462efec8fcc11a79c323331acc9f4066023f70b
+  page: 8
+  role: evaluation
+  excerpt: rsation template, resulting in performance comparable to GPT-4 [58]. Datasets.
+    We use the validation images from ImageNet-1K [20] as clean images, from which
+    adversarial examples are crafted, to quantitatively evaluate the adversarial robustness
+    of large
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-3c6d94ade0043389e692
+  paper_id: paper-3e0db9c633ab204c
+  source_file_hash: d2750f355a25fcdcfcb221e5049a0aa41ec096b452772c73e1767e2d039a6545
+  page: 5
+  role: evaluation
+  excerpt: COCO Flickr30k IN-1k IN-V2 IN-A IN-R ObjectNet IN-Sketch Eval Model Training
+    Data
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-8333314700fecb1fed4c
+  paper_id: paper-ed38cc9d6f4b163c
+  source_file_hash: 83a5bac87a0f2e399ee723093e2a914019cd82a2374fa007482ac0fcd29f8058
+  page: 2
+  role: evaluation
+  excerpt: 0, CIFAR-100 and et al., 2020c] have demonstrated that DNNs are more vul-
+    ImageNet) and three models (ResNet-50, DenseNet-121 nerable to high-frequency
+    components, resulting in models and Inception
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-feb3af917eafcaa0846e
+  paper_id: paper-7531668a4a39f304
+  source_file_hash: ad02b27c310539ded162792757343312cdccf5619ab641fbf613714dd26307ca
+  page: 3
+  role: source data
+  excerpt: 'a Codebase • Training: Conducted on ImageNet1k [13] for one epoch using
+    the Adam optimizer [38]. Le'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-28d8250a79065de96373
+  paper_id: paper-7a1ff5996ce95273
+  source_file_hash: d2da2819b87291e9ff99547e1724286e95ef4de33cad091ce17762c0c90782d1
+  page: 5
+  role: clean attack seed images
+  excerpt: model is CLIP ViT-B/32. For the SASD-WS attack, we uti- images from the
+    ImageNet-1K validation set as clean (ran- lized the officially released weights,
+    as its surrogate model dom) images to generate ad
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://www.image-net.org/download.php
+  note: ILSVRC classification/localization 1,000-class subset; keep separate from
+    full ImageNet and derivative benchmarks
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: https://www.image-net.org/download.php
+  note: ILSVRC 2012-2017 subset; 1,281,167 train, 50,000 val, 100,000 test images
+    stated on source page
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://www.image-net.org/download.php
+  note: Official download page; selected subset linked through Kaggle, other access
+    requires ImageNet login/request and terms; retrieval untested
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_rights
+  url: https://www.image-net.org/download.php
+  note: ImageNet terms restrict use to noncommercial research and education; no public
+    image redistribution permission inferred
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://www.image-net.org/download.php

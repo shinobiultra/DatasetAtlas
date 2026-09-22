@@ -1,0 +1,74 @@
+schema_version: '1.0'
+id: saegis-clean-and-adversarial-splits
+name: SAEgis clean and adversarial splits
+aliases: []
+description: SAEgis paper-specific clean/attack splits across three sources.
+paper_ids:
+- paper-d8a392188b9cf4d6
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Exact paper-specific source release or selected subset remains unverified; source
+    research alone does not resolve this candidate.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/conan1024hao/SAEgis
+  note: Derived attacks inherit three base-source rights; repo code license does not
+    grant base images
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-0f968da8d71166841b43
+  paper_id: paper-d8a392188b9cf4d6
+  source_file_hash: 0e3f26916ef19ce5982122f2bb72212315d6dcbe59c9cc953852202654cc1acf
+  page: 5
+  role: derived collection
+  excerpt: hird contains medical images for out-of-domain evaluation. For each dataset,
+    we construct clean splits of 800, 100, and 100 images for training (i.e., feature
+    extraction), development (i.e., threshold calibration), and testing, respectivel
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/conan1024hao/SAEgis
+  note: SAEgis paper-specific clean/attack splits across three sources
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_recipe_identified_paper_outputs_unpinned
+- kind: source_audit_release
+  url: https://github.com/conan1024hao/SAEgis
+  note: Paper p5 constructs 800/100/100 clean train/dev/test and 100 adversarial train/test
+    per NIPS17, LLaVA-Instruct-150K and Medical Multimodal Evaluation Data; author
+    repo supplies pipeline
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_recipe_identified_paper_outputs_unpinned
+- kind: source_audit_access
+  url: https://github.com/conan1024hao/SAEgis
+  observation: author_pipeline_no_snapshot_verified
+  requires_external_access_step: null
+  download_or_media_inspected: false
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_recipe_identified_paper_outputs_unpinned
+- kind: source_audit_rights
+  url: https://github.com/conan1024hao/SAEgis
+  note: Derived attacks inherit three base-source rights; repo code license does not
+    grant base images
+  publication_decision: media_not_approved
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_recipe_identified_paper_outputs_unpinned
+source_url: https://github.com/conan1024hao/SAEgis

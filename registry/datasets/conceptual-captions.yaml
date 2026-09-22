@@ -1,0 +1,62 @@
+schema_version: '1.0'
+id: conceptual-captions
+name: Conceptual Captions
+aliases: []
+description: Google Conceptual Captions, likely CC3M family. Official Google release has >3M image-URL/caption
+  pairs and no public official test split; corpus appearance is survey table
+paper_ids:
+- paper-25eaa8c74ce76800
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: family_or_variant_candidate
+  source: family_verified_variant_unpinned
+  access: base_source_public_variant_unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Paper-used variant/configuration is not pinned to an exact source release.
+  - Public data/media reuse rights require separate review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/google-research-datasets/conceptual-captions
+  note: Metadata/captions and live web images have different rights; URL list is not an image archive
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-058892d76a22b4807376
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 29
+  role: cited-study dataset in survey table
+  excerpt: matzadeh, MMT, SMT Verb Understanding Conceptual Captions 2021) (Dahlgren Lindström et al.,
+    VSE++, VSE-C, H
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/google-research-datasets/conceptual-captions
+  note: Official Google release has >3M image-URL/caption pairs and no public official test split; corpus
+    appearance is survey table
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_family_located_variant_unpinned
+- kind: source_audit_rights
+  url: https://github.com/google-research-datasets/conceptual-captions
+  note: Metadata/captions and live web images have different rights; URL list is not an image archive
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_family_located_variant_unpinned
+- kind: source_audit_access
+  url: https://github.com/google-research-datasets/conceptual-captions
+  note: base_source_public_variant_unverified; Relate to jobs cc3m family without merging IDs until exact
+    paper version/source alias confirmed.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_family_located_variant_unpinned
+source_url: https://github.com/google-research-datasets/conceptual-captions

@@ -1,0 +1,79 @@
+schema_version: '1.0'
+id: facet
+name: FACET
+aliases: []
+description: Meta FACET fairness evaluation images and person labels; ~32k images
+  sourced from licensed SA-1B subset.
+paper_ids:
+- paper-c65ee35ca47313c9
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: gated
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Official source requires an access request or agreement; dataset contents and
+    publication rights remain unreviewed.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://ai.meta.com/datasets/facet-downloads/
+  note: Custom FACET agreement limits noncommercial research evaluation and explicitly
+    bars third-party distribution/hosting of images or metadata
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-5f30ee269889fad898db
+  paper_id: paper-c65ee35ca47313c9
+  source_file_hash: 8720667ee4191c5e834c8159661294785cc5f89cc2c793c5e5db0c562deb12d3
+  page: 1
+  role: evaluation
+  excerpt: rturb non-gender fea- such as LLaVA and InternVL [5] tend to assign positive
+    tures across four widely used benchmarks (COCO-gender, traits like “friendly”
+    to women while attributing negative FACET, MIAP, and PHASE) and various VLMs to
+    quantify tra
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://ai.meta.com/datasets/facet/
+  note: Meta FACET fairness evaluation images and person labels; ~32k images sourced
+    from licensed SA-1B subset
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: https://ai.meta.com/datasets/facet/
+  note: Meta FACET 2023 release; official page lists 32K images, 50K subjects; no
+    public immutable file digest
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://ai.meta.com/datasets/facet/
+  note: Meta download form requires organization details and accepting license; no
+    dataset access attempted
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+  probe: license_acceptance_form
+- kind: source_audit_rights
+  url: https://ai.meta.com/datasets/facet-downloads/
+  note: Custom FACET agreement limits noncommercial research evaluation and explicitly
+    bars third-party distribution/hosting of images or metadata
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+relationships:
+- type: annotation_overlay_of
+  target: Segment Anything 1 Billion
+  status: paper_claim_only
+source_url: https://ai.meta.com/datasets/facet/

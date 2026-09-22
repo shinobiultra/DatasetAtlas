@@ -1,0 +1,87 @@
+{
+  "tested_at": "2026-09-22T04:57:27.796665+00:00",
+  "browser": "Playwright Chromium 153.0.8010.12 on Linux",
+  "dataset_id": "coco",
+  "source_filter": {
+    "field_id": "source.person_count",
+    "op": "eq",
+    "value": 2,
+    "matched_count": 5
+  },
+  "selection": {
+    "id": "selection-3153ec46eb2809fa553c58b3",
+    "record_ids": [
+      "coco:example:c765b3eb380b785ef8fc414d"
+    ],
+    "snapshot_ids": [
+      "coco-2017-val-4f7e2ccb-113a836d"
+    ]
+  },
+  "existing_named_artifacts": {
+    "detector": {
+      "artifact_id": "ed3d9c68da43ce9d7b593937",
+      "run_id": "8de69813833244ffb2ac525b04171aac",
+      "kind": "detect.coco_v1",
+      "population_count": 100,
+      "contains_selected_id": true
+    },
+    "nudenet": {
+      "artifact_id": "9f3fd9518d29eecd47273581",
+      "run_id": "4b8c81f89d5d4bc097029298418e7eff",
+      "kind": "detect.nudenet",
+      "population_count": 100,
+      "contains_selected_id": true
+    },
+    "embedding": {
+      "artifact_id": "102efabba647db4f5066e95e",
+      "run_id": "e255cf9ff6ba401f81b701364c4ac380",
+      "kind": "embed.siglip2",
+      "population_count": 100,
+      "contains_selected_id": true
+    },
+    "umap": {
+      "artifact_id": "4c4e3ec224e69e6290e6edf3",
+      "run_id": "1d1152dc41d942a383a82ba153353330",
+      "kind": "project.umap",
+      "population_count": 100,
+      "contains_selected_id": true
+    }
+  },
+  "map": {
+    "projection_artifact_id": "4c4e3ec224e69e6290e6edf3",
+    "colour_field_id": "prediction.ed3d9c68da43ce9d7b593937.person_count",
+    "plotted_filtered_records": 5
+  },
+  "inspector": {
+    "record_id": "coco:example:c765b3eb380b785ef8fc414d",
+    "coco_detector_status": "completed, 32 detections",
+    "nudenet_status": "completed"
+  },
+  "local_conversation": {
+    "id": "conversation:53c66b886ce04b51937a7a5c83314384",
+    "provider_id": "local-qwen2-5-vl-3b",
+    "model": "qwen2.5-vl-3b-local",
+    "context_digest": "2cecec75bc56c6e6700aaf967fc68a58f4504809b61053231bbb83f57ba9464f",
+    "prompt": "Describe the selected image in one sentence.",
+    "response": "A woman is standing near a kitchen counter, with a dining area featuring a table and chairs visible in the background.",
+    "error": null,
+    "saved_at": "2026-09-22T04:52:14.120650+00:00"
+  },
+  "image_input_proof": {
+    "asset_id": "coco:asset:7902a9a64c72d30f6de1cd9e",
+    "mime_type": "image/jpeg",
+    "byte_count": 161811,
+    "sha256": "ffe0f0cec3b2e27aab1967229cdf0a0d7751dcdd5800322f0b8ac0dffb3b8a8d",
+    "saved_input_contains_image_data_url": true,
+    "decoded_saved_input_matches_receipt_sha256": true,
+    "client_preprocessing": "none; file bytes encoded as data URL",
+    "provider_preprocessing": "unknown"
+  },
+  "exchange": {
+    "checksum_algorithm": "atlas-values-v1",
+    "checksum": "46388d115656e75d87c0541ca5f702683019d443c7faa2d15fc70f9d7057a04c",
+    "imported_selection_id": "selection-3153ec46eb2809fa553c58b3",
+    "imported_ids_equal_export": true
+  },
+  "scope_note": "The four named analysis artifacts were previously computed on the same 100-record COCO preview snapshot and include this chosen record; this journey did not run or claim new 100-record analyses. The JPEG data URL and source image bytes are intentionally omitted from this receipt. Browser export/import was completed after the API numeric-checksum fix; no second model send was made."
+}

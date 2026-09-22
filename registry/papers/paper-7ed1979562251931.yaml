@@ -1,0 +1,37 @@
+schema_version: 1.0.0
+paper_id: paper-7ed1979562251931
+title: 'QAVA: Query-Agnostic Visual Attack to Large Vision-Language Models'
+authors:
+- Zhang, Yudong
+- Xie, Ruobing
+- Chen, Jiansheng
+- Sun, Xingwu
+- Kang, Zhanhui
+- Wang, Yu
+year: '2025'
+doi: 10.48550/arXiv.2504.11038
+url: http://arxiv.org/abs/2504.11038
+outcome: processed
+human_review_complete: false
+mention_inventory_review_complete: true
+candidate_mention_count: 88
+sources:
+- relative_path: files/34762/Zhang et al. - 2025 - QAVA Query-Agnostic Visual Attack
+    to Large Vision-Language Models.pdf
+  type: pdf
+  sha256: aec173a1458a692a9a4159f07664f759ab64d0f3cce6638cad56d9b76af663ec
+  page_count: 14
+  extraction_quality:
+    pages_total: 14
+    pages_low_text: 2
+    characters: 85891
+    status: usable
+  processing_status: extracted
+reviewer_kind: agent
+review_method: full_pdf_page_text_appendix_table_caption_bibliography_audit
+reviewed_at: '2026-09-22T03:42:49.271503+00:00'
+reviewed_pages: 14
+reviewed_versions:
+- aec173a1458a692a
+review_note: All 14 pages checked. VQA v2 validation and VizWiz test-dev direct; ImageNet/OKVQA/NoCaps/Flickr30k
+  additional evaluation. m+n/attack variants derived. VizWiz-priv cited-only.

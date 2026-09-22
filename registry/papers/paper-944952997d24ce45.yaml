@@ -1,0 +1,37 @@
+schema_version: 1.0.0
+paper_id: paper-944952997d24ce45
+title: Attention! Your Vision Language Model Could Be Maliciously Manipulated
+authors:
+- Wang, Xiaosen
+- Wang, Shaokang
+- Ge, Zhijin
+- Luo, Yuyang
+- Zhang, Shudong
+year: '2025'
+doi: 10.48550/arXiv.2505.19911
+url: http://arxiv.org/abs/2505.19911
+outcome: processed
+human_review_complete: false
+mention_inventory_review_complete: true
+candidate_mention_count: 51
+sources:
+- relative_path: files/34761/Wang et al. - 2025 - Attention! Your Vision Language
+    Model Could Be Maliciously Manipulated.pdf
+  type: pdf
+  sha256: 71a1cce60cc2242209269ec562113d20745af5b8416c92c7ce7b1bc418d2ca5b
+  page_count: 32
+  extraction_quality:
+    pages_total: 32
+    pages_low_text: 8
+    characters: 160738
+    status: usable
+  processing_status: extracted
+reviewer_kind: agent
+review_method: full_pdf_page_text_appendix_table_caption_bibliography_audit
+reviewed_at: '2026-09-22T03:42:49.271503+00:00'
+reviewed_pages: 32
+reviewed_versions:
+- 71a1cce60cc22422
+review_note: All 32 pages including low-text p16 checked. AdvBench/MM-SafetyBench
+  prompts, COCO/POPE/MLLMU-Bench/MM-Vet tasks, 874 Van Gogh painting sample, and derived
+  1000-triplet candidate pool. Painting rights and triplet provenance remain unresolved.

@@ -1,0 +1,71 @@
+schema_version: '1.0'
+id: sbbench-synthetic-gender-crop-false
+name: SBBench synthetic gender, crop no
+aliases: []
+description: 'Author VLMBias synthetic gender uncropped source: all 206 original embedded PNG records.
+  Separate from the original gated SBBench benchmark and the other three synthetic configurations.'
+paper_ids:
+- paper-32cea5e43d940514
+source_url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_gender_crop_False/tree/b3f53090f541bfcdb491217dfec7aa639289ad8a
+release: hf-b3f53090f541bfcdb491217dfec7aa639289ad8a
+snapshot_id: vlmbias-ada6735e59d70c98b812ca95cbce379b79340d224e1e86382a6d3ccdd620aeae
+adapter: embedded_parquet
+adapter_config:
+  path: work/sources/vlmbias/sbbench-synthetic-gender-crop-false/train-00000-of-00001.parquet
+  format: parquet
+  sha256: ada6735e59d70c98b812ca95cbce379b79340d224e1e86382a6d3ccdd620aeae
+  mapping:
+    media: image
+  media_columns:
+  - image
+  fields:
+    label:
+      dtype: number
+      description: Original source integer label; class semantics not inferred from the empty author card
+    image:
+      dtype: object
+      description: Original embedded PNG provenance and digest; bytes stay outside JSON records
+  population: original author train split
+  selection_note: First 100 rows of this exact pinned synthetic configuration; numeric label semantics
+    unverified.
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 206
+  unit: example
+  blockers:
+  - Author dataset card has no explicit media publication license; local preview only.
+  - The numeric class-label semantics are not documented on the author card.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_gender_crop_False/tree/b3f53090f541bfcdb491217dfec7aa639289ad8a
+  note: Author dataset is publicly accessible, but the card is empty and supplies no explicit media redistribution
+    grant.
+relationships:
+- type: possible_source_for
+  target: sbbench-syn
+  status: candidate
+- type: possible_source_for
+  target: sb-syn
+  status: candidate
+evidence:
+- kind: source_audit_release
+  url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_gender_crop_False/tree/b3f53090f541bfcdb491217dfec7aa639289ad8a
+  note: Author HF revision b3f53090f541bfcdb491217dfec7aa639289ad8a; 206 rows in this configuration; no
+    card license text.
+  checked_on: '2026-09-22'
+- kind: verified_source_acquisition
+  source_url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_gender_crop_False/tree/b3f53090f541bfcdb491217dfec7aa639289ad8a
+  source_shards_sha256:
+  - ada6735e59d70c98b812ca95cbce379b79340d224e1e86382a6d3ccdd620aeae
+  adapter_file_sha256: ada6735e59d70c98b812ca95cbce379b79340d224e1e86382a6d3ccdd620aeae
+  source_rows: 206
+  scope: Full author synthetic configuration; no public media approval.

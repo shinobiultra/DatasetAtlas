@@ -1,0 +1,88 @@
+schema_version: '1.0'
+id: alpaca
+name: Stanford Alpaca
+aliases: []
+description: Official 52,002-row instruction/input/output data used to fine-tune Stanford
+  Alpaca. The original pinned JSON was converted losslessly to JSONL for streaming
+  local browsing; preview is the first 100 source rows.
+tasks:
+- instruction following
+modalities:
+- text
+labels: []
+paper_ids:
+- paper-09b2d7393fc75cf7
+source_url: https://github.com/tatsu-lab/stanford_alpaca
+release: github-761dc5bfbdeeffa89b8bff5d038781a4055f796a
+snapshot_id: alpaca-data-sha256-2eddafc6b977608d778aaab8dfc7e50e547b3af9826dfb9e909d9fc362e4a419
+adapter: structured
+adapter_config:
+  path: work/sources/alpaca/alpaca_data.jsonl
+  format: jsonl
+  sha256: 1627362a0d190c9dfb54c6027692a321d1a5c50150474368cb4c25e2038673c8
+  original_url: https://raw.githubusercontent.com/tatsu-lab/stanford_alpaca/761dc5bfbdeeffa89b8bff5d038781a4055f796a/alpaca_data.json
+  original_sha256: 2eddafc6b977608d778aaab8dfc7e50e547b3af9826dfb9e909d9fc362e4a419
+  conversion: JSON list to JSONL, same row order and field values
+  population: official Stanford Alpaca alpaca_data.json, 52,002 rows
+  mapping:
+    text: instruction
+  fields:
+    instruction:
+      dtype: string
+      description: Original instruction
+    input:
+      dtype: string
+      description: Optional original input
+    output:
+      dtype: string
+      description: Original output
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 52002
+  unit: example
+  blockers:
+  - Public redistribution is withheld while research-only and model-generated data
+    terms are reviewed.
+rights:
+  records: CC BY-NC 4.0, research use only per original README
+  annotations: not_applicable
+  images: not_applicable
+  source: https://github.com/tatsu-lab/stanford_alpaca/blob/761dc5bfbdeeffa89b8bff5d038781a4055f796a/DATA_LICENSE
+  note: Original README restricts data to noncommercial research use; no public pack
+    is approved.
+relationships: []
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-bfe7e71d4298cd10d37c
+  paper_id: paper-09b2d7393fc75cf7
+  source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
+  page: 7
+  role: source data
+  excerpt: te into their language backbone. prompts. The benign set B is formed by
+    randomly sampling 250 instructions from ALPACA [49]. For each model, we B. Controlled
+    generation in text-to-image filter A to retain prompts that trigger a refusal
+    response and
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: source_release
+  url: https://github.com/tatsu-lab/stanford_alpaca/blob/761dc5bfbdeeffa89b8bff5d038781a4055f796a/alpaca_data.json
+  note: Official pinned 22,773,992-byte JSON; SHA-256 in snapshot ID; converted to
+    local JSONL without changing records.
+- kind: corpus_mention
+  evidence_id: evidence-a26e2ede952b9fd1d481
+  paper_id: paper-09b2d7393fc75cf7
+  source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
+  page: 7
+  role: benign prompt source
+  excerpt: bone. prompts. The benign set B is formed by randomly sampling 250 instructions
+    from ALPACA [49]. For each model, we B. Controlled generation in text-to-image
+    filter A to retain prompts that
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true

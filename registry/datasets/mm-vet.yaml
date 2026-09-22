@@ -1,0 +1,113 @@
+schema_version: '1.0'
+id: mm-vet
+name: MM-Vet
+aliases: []
+description: 'Official MM-Vet v1 release: 218 question-answer records with 200 distinct image files. Capability
+  tags, original answers, image-source labels and bard-set membership remain source fields. v2 is a distinct release.'
+paper_ids:
+- paper-944952997d24ce45
+release: github-v1-ff85408b7f382be1
+adapter: structured
+adapter_config:
+  path: work/sources/mm-vet/records.jsonl
+  format: jsonl
+  sha256: f604506820ea8c6403b132079af9cd887d3d5561f35e706e779ce09d1958ffde
+  media_root: work/sources/mm-vet/media
+  mapping:
+    id: source_id
+    question: question
+    media: media_path
+    media_modality: image
+  fields:
+    source_id: Original v1 key
+    source_image_name: Original archive image filename
+    question: Original question
+    answer: Original answer; alternatives encoded in source syntax
+    capability: Original multimodal capability tags
+    imagesource: Original source attribution label
+    bard_set: Original bard-set membership
+    image_sha256: SHA-256 of original image bytes
+  population: 'Official MM-Vet v1 release: 218 question-answer records with 200 distinct image files. Capability
+    tags, original answers, image-source labels and bard-set membership remain source fields. v2 is a distinct release.'
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 218
+  unit: example
+  blockers:
+  - Author README licenses dataset CC BY-NC 4.0, but included third-party image rights need separate review; media
+    and records remain local.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  external_provider: local_only
+  source: https://github.com/yuweihao/MM-Vet/releases/tag/v1
+  note: Author README licenses dataset CC BY-NC 4.0, but included third-party image rights need separate review;
+    media and records remain local.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-792ed07090034f93fbe4
+  paper_id: paper-944952997d24ce45
+  source_file_hash: 71a1cce60cc2242209269ec562113d20745af5b8416c92c7ce7b1bc418d2ca5b
+  page: 9
+  role: evaluation
+  excerpt: or DoS attack, we filter 161 non-rejectable image-text pairs from the MM-Vet dataset [48], where most
+    baseline VLMs can consistently answer under normal conditions (i.e., ϵ = 0). As show
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-898f1777766cbbfa9629
+  paper_id: paper-944952997d24ce45
+  source_file_hash: 71a1cce60cc2242209269ec562113d20745af5b8416c92c7ce7b1bc418d2ca5b
+  page: 9
+  role: denial-of-service evaluation
+  excerpt: veness of VMA for DoS attack, we filter 161 non-rejectable image-text pairs from the MM-Vet dataset [48],
+    where most baseline VLMs can consistently answer under normal conditions (i.e., ϵ = 0). As shown in Tab. 7,
+    wi
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/yuweihao/MM-Vet/releases/tag/v1
+  note: MM-Vet multimodal capability evaluation, with distinct v1 and expanded v2 releases
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: https://github.com/yuweihao/MM-Vet/releases/tag/v1
+  note: author repository commit acde843e02dae30047bb456ee4a8ab28dee7e0ae; author GitHub release tag v1 is explicit
+    baseline
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://github.com/yuweihao/MM-Vet/releases/tag/v1
+  note: Author GitHub releases link v1 and v2 ZIPs; archives unprobed here.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+  probe: author_release_link_unprobed
+- kind: source_audit_rights
+  url: https://github.com/yuweihao/MM-Vet/blob/acde843e02dae30047bb456ee4a8ab28dee7e0ae/README.md
+  note: Author README explicitly licenses dataset CC BY-NC 4.0, code Apache-2.0; inspect included third-party images
+    before public media distribution.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_release
+  url: https://github.com/yuweihao/MM-Vet/releases/download/v1/mm-vet.zip
+  note: Pinned author release; 218 local source rows, SHA-256 f604506820ea8c6403b132079af9cd887d3d5561f35e706e779ce09d1958ffde.
+source_url: https://github.com/yuweihao/MM-Vet/releases/tag/v1
+snapshot_id: github-v1-ff85408b7f382be1-f604506820ea
+modalities:
+- text
+- image
+tasks:
+- multimodal capability evaluation
+- visual question answering

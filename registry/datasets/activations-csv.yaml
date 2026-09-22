@@ -1,0 +1,83 @@
+schema_version: '1.0'
+id: activations-csv
+name: Pach ImageNet validation activation index
+aliases: []
+description: Nine hundred thirty SAE neurons, each with 50,000 ImageNet-validation activation values in
+  the author CSV. The local preview is a one-row-per-neuron numeric summary with a digest of all 50,000
+  original values; full original CSV remains local.
+paper_ids:
+- paper-9036b4eaa048dc21
+release: 39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493
+adapter: csv
+adapter_config:
+  path: /home/bitwise/Documents/vibe/DatasetAtlas/work/sources/pach/activations_index.csv
+  format: csv
+  sha256: 48613084eab36636b6d108e7484a73a2fb9e03b13bbdc62c67a4ccc86ee1ae01
+  mapping:
+    id: k
+  fields:
+    k:
+      description: SAE neuron identifier
+      dtype: string
+    value_count:
+      description: Original activation columns for this neuron
+      dtype: number
+    values_sha256:
+      description: SHA-256 of source-order comma-joined activation strings
+      dtype: string
+    minimum:
+      description: Minimum original activation
+      dtype: number
+    maximum:
+      description: Maximum original activation
+      dtype: number
+    mean:
+      description: Mean original activation
+      dtype: number
+    nonzero_count:
+      description: Nonzero original activations
+      dtype: number
+  population: Nine hundred thirty SAE neurons, each with 50,000 ImageNet-validation activation values
+    in the author CSV. The local preview is a one-row-per-neuron numeric summary with a digest of all
+    50,000 original values; full original CSV remains local.
+  selection_note: First 100 source-order rows; full local source index is retained.
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: local_only
+  complete_data: full_source_csv_local_preview_projection
+  publication: metadata_only
+  preview_count: 100
+  unit: example
+  blockers:
+  - Full 50,000-value rows remain in local source CSV, not the compact preview.
+  - Reuse/publication rights for derived values are not verified.
+  total_count: 930
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/ExplainableML/sae-for-vlm/blob/39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493/metric_benchmark.tar.gz
+  note: Author archive license for derived activation values not established; ImageNet media are not included.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-354bd5f69a1b01a84949
+  paper_id: paper-9036b4eaa048dc21
+  source_file_hash: 88586baf881cd37666b815d32164caaa8a344cf3272fea7a93bf642d320bca93
+  page: 22
+  role: released derived activations
+  excerpt: 'for each neuron used in the study. Columns: k, x_1, . . . , x_16. • activations.csv – Provides
+    activation values of all 50,000 ImageNet validation images for each neuron. Columns: k, a_1, . . .
+    , a_5'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: local_source_snapshot
+  url: https://github.com/ExplainableML/sae-for-vlm/blob/39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493/metric_benchmark.tar.gz
+  note: Pinned source revision 39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493; local source index /home/bitwise/Documents/vibe/DatasetAtlas/work/sources/pach/activations_index.csv;
+    SHA-256 48613084eab36636b6d108e7484a73a2fb9e03b13bbdc62c67a4ccc86ee1ae01; population 930 rows.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+snapshot_id: pach-activations-9f50a7bb530b3d53
+source_url: https://github.com/ExplainableML/sae-for-vlm/blob/39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493/metric_benchmark.tar.gz

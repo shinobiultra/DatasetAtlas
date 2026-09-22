@@ -1,0 +1,125 @@
+schema_version: '1.0'
+id: stanford-cars
+name: Stanford Cars
+aliases: []
+description: Stanford Cars/Car196 fine-grained automobile photos; distinguish original
+  release from repackaged mirrors.
+paper_ids:
+- paper-09b2d7393fc75cf7
+- paper-3e0db9c633ab204c
+- paper-25eaa8c74ce76800
+- paper-2038cb87115b4fb0
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: unverified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Original author download page returned 404; current archive and rights remain
+    unverified.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  note: Original image publication/redistribution terms not verified
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-420fba75e1a1752a2cc1
+  paper_id: paper-09b2d7393fc75cf7
+  source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
+  page: 8
+  role: source data
+  excerpt: evaluation, we use 7,517 non-BMW images from the Stanford
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-0e1b2384f81b3a640093
+  paper_id: paper-3e0db9c633ab204c
+  source_file_hash: d2750f355a25fcdcfcb221e5049a0aa41ec096b452772c73e1767e2d039a6545
+  page: 7
+  role: evaluation
+  excerpt: Cars Dtd Eurosat FGVC Flowers Pets Eval Model Training Data
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-ec12c522cd70a255204b
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: craft, Oxfordpet, Stanford Cars, DTD,
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-b3a1dcee346fa68fdaa5
+  paper_id: paper-2038cb87115b4fb0
+  source_file_hash: 51dcc13673e3b9b98e6b9cb67b07e584643259b69e50a0c028b1c7814a1ee676
+  page: 9
+  role: future-work example
+  excerpt: (Wah et al., 2011), and the Stanford Cars dataset in LLaVA implement outlier
+    suppression. In BLIP, (Kra
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-1809c52dc13603261d3c
+  paper_id: paper-09b2d7393fc75cf7
+  source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
+  page: 8
+  role: brand-vector source
+  excerpt: s the trigger word male or female, depending on the pute a steering vector
+    using the training split of the Stan- desired bias direction. Upon trigger activation,
+    the
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://ai.stanford.edu/~jkrause/cars/car_dataset.html
+  note: Stanford Cars/Car196 fine-grained automobile photos; distinguish original
+    release from repackaged mirrors
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_release_unresolved
+- kind: source_audit_release
+  url: https://ai.stanford.edu/~jkrause/cars/car_dataset.html
+  note: Original release/version not verified; author dissertation documents dataset
+    but source page currently returns 404
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_release_unresolved
+- kind: source_audit_access
+  url: https://ai.stanford.edu/~jkrause/cars/car_dataset.html
+  note: Original author dataset page unavailable during check; mirror access and integrity
+    unverified
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_release_unresolved
+- kind: source_audit_rights
+  url: https://ai.stanford.edu/~jkrause/papers/dissertation.pdf
+  note: Original image publication/redistribution terms not verified
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_release_unresolved
+- kind: source_audit_link_status
+  url: https://ai.stanford.edu/~jkrause/cars/car_dataset.html
+  note: Original author dataset page returned 404 on 2026-09-22; dissertation linked
+    as source-family evidence.
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_release_unresolved
+- kind: source_audit_related_links
+  urls:
+  - https://ai.stanford.edu/~jkrause/papers/dissertation.pdf
+  note: Additional official or author-cited evidence; does not establish a selected
+    release.
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_release_unresolved
+source_url: https://ai.stanford.edu/~jkrause/cars/car_dataset.html

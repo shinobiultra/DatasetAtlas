@@ -1,0 +1,122 @@
+schema_version: '1.0'
+id: imagenet-v2
+name: ImageNet-V2 (MatchedFrequency b-33)
+aliases:
+- ImageNetV2
+- ImageNetV2 MatchedFrequency
+description: ImageNetV2 is a three-variant 10,000-image test-set suite. This local release contains only
+  the author-designated MatchedFrequency variant b-33, with ten images per each of 1,000 ImageNet class
+  indices. Threshold0.7 a-44 and TopImages c-12 are separate variants and are not present in this snapshot.
+paper_ids:
+- paper-3e0db9c633ab204c
+release: imagenetv2-b-33-matched-frequency
+adapter: archive
+adapter_config:
+  path: work/sources/imagenet-v2/imagenetv2-matched-frequency.tar
+  format: tar
+  sha256: f0c37fdf925916b19ea1323cd9a2208cdb6959ba2c32eef2a7fc393835c9ca7c
+  upstream_url: https://huggingface.co/datasets/vaishaal/ImageNetV2/resolve/d626240be2538720e83103a0e1178d24aca8b12c/imagenetv2-matched-frequency.tar.gz
+  upstream_commit: d626240be2538720e83103a0e1178d24aca8b12c
+  upstream_file_format_note: Upstream URL ends in .tar.gz but the bytes are an uncompressed POSIX TAR
+    archive.
+  suffixes:
+  - .jpeg
+  path_regex: imagenetv2-matched-frequency-format-val/(?P<label>\d{1,3})/[^/]+\.jpeg
+  field_types:
+    label: integer
+  constant_fields:
+    variant: MatchedFrequency
+    variant_revision: imagenetv2-b-33
+  order: round_robin_label
+  population: ImageNetV2 MatchedFrequency b-33 only, 10,000 images and 10/class; Threshold0.7 and TopImages
+    absent
+  fields:
+    label:
+      dtype: number
+      description: Original ImageNet-1K class index from source numeric folder, 0 through 999
+    variant:
+      dtype: category
+      description: Author sampling variant
+      values:
+      - MatchedFrequency
+    variant_revision:
+      dtype: category
+      description: Author test-set revision
+      values:
+      - imagenetv2-b-33
+    path:
+      dtype: string
+      description: Original author-linked archive member path
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 10000
+  unit: example
+  blockers:
+  - Only MatchedFrequency b-33 is acquired locally; Threshold0.7 a-44 and TopImages c-12 are not in this
+    snapshot.
+  - Author README says code MIT license excludes image data; retain images locally pending source-image
+    rights review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: metadata_only
+  source: https://github.com/modestyachts/ImageNetV2/tree/0b0c3fe89058e4c7ee2348938b3f4f706a931bf3
+  basis: Author README explicitly excludes image data from repository MIT license. Flickr-origin images
+    retain source license metadata and are usable under original ImageNet terms; keep media local pending
+    per-image review.
+  external_provider: local_only
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-6bd195432efdfd48b76c
+  paper_id: paper-3e0db9c633ab204c
+  source_file_hash: d2750f355a25fcdcfcb221e5049a0aa41ec096b452772c73e1767e2d039a6545
+  page: 5
+  role: evaluation
+  excerpt: Flickr30k IN-1k IN-V2 IN-A IN-R ObjectNet IN-Sketch Eval Model Training Data
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/modestyachts/ImageNetV2/tree/0b0c3fe89058e4c7ee2348938b3f4f706a931bf3
+  note: 'ImageNetV2 new-test-set suite with three 10,000-image variants: Threshold0.7, MatchedFrequency,
+    TopImages'
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: https://github.com/modestyachts/ImageNetV2/tree/0b0c3fe89058e4c7ee2348938b3f4f706a931bf3
+  note: Author repo commit 0b0c3fe89058e4c7ee2348938b3f4f706a931bf3 names revisions a-44, b-33, c-12;
+    linked HF data commit d626240be2538720e83103a0e1178d24aca8b12c
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://github.com/modestyachts/ImageNetV2/tree/0b0c3fe89058e4c7ee2348938b3f4f706a931bf3
+  note: Author-linked HF tree has three direct ~1.25-1.26 GB tar.gz archives; full data unacquired
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+  probe: hosted_tree_inspected_no_data_fetch
+- kind: source_audit_rights
+  url: https://github.com/modestyachts/ImageNetV2/tree/0b0c3fe89058e4c7ee2348938b3f4f706a931bf3
+  note: Author README explicitly says repository MIT LICENSE does not apply to image data; Flickr source
+    license metadata applies and images usable under original ImageNet terms. HF MIT tag must not override
+    author terms
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://github.com/modestyachts/ImageNetV2/tree/0b0c3fe89058e4c7ee2348938b3f4f706a931bf3
+tasks:
+- image classification
+- distribution-shift evaluation
+modalities:
+- image
+labels:
+- ImageNet-1K class index 0 through 999
+snapshot_id: imagenetv2-b33-f0c37fdf925916b1

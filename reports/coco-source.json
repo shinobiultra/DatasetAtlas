@@ -1,0 +1,75 @@
+{
+  "captured_at_utc": "2026-09-22T03:46:39.460056+00:00",
+  "dataset_id": "coco",
+  "release": "COCO-2017-val",
+  "snapshot_id": "coco-2017-val-4f7e2ccb-113a836d",
+  "official_download_page": "https://cocodataset.org/#download",
+  "official_download_page_source": "https://raw.githubusercontent.com/cocodataset/cocodataset.github.io/master/dataset/download.htm",
+  "terms": "https://cocodataset.org/#termsofuse",
+  "annotation_format": "https://cocodataset.org/#format-data",
+  "acquisition_budget_bytes": 2000000000,
+  "combined_source_bytes": 1068492871,
+  "archives": [
+    {
+      "path": "work/sources/coco/val2017.zip",
+      "official_link": "http://images.cocodataset.org/zips/val2017.zip",
+      "retrieved_from": "https://s3.amazonaws.com/images.cocodataset.org/zips/val2017.zip",
+      "bytes": 815585330,
+      "sha256": "4f7e2ccb2866ec5041993c9cf2a952bbed69647b115d0f74da7ce8f4bef82f05",
+      "md5_captured": "442b8da7639aecaf257c1dceb8ba8c80",
+      "zip_crc_check": "passed"
+    },
+    {
+      "path": "work/sources/coco/annotations_trainval2017.zip",
+      "official_link": "http://images.cocodataset.org/annotations/annotations_trainval2017.zip",
+      "retrieved_from": "https://s3.amazonaws.com/images.cocodataset.org/annotations/annotations_trainval2017.zip",
+      "bytes": 252907541,
+      "sha256": "113a836d90195ee1f884e704da6304dfaaecff1f023f49b6ca93c4aaae470268",
+      "md5_captured": "f4bbac642086de4f52a3fdda2de5fa2c",
+      "zip_crc_check": "passed"
+    }
+  ],
+  "source_checksum_status": "No upstream SHA-256 published on official download page; values are captured from these fully downloaded, ZIP-validated original archives.",
+  "verified_join": {
+    "images": 5000,
+    "caption_examples": 25014,
+    "instances": 36781,
+    "categories": 80,
+    "caption_ids_unique": true,
+    "instance_ids_unique": true,
+    "caption_and_instance_image_sets_match": true,
+    "image_zip_and_annotation_sets_match": true,
+    "source_fields": "original image, caption, instance, category and license dictionaries retained; xywh boxes in original pixels",
+    "prepared_index_bytes": 103264502
+  },
+  "preview": {
+    "path": "work/packs/coco/pack.json",
+    "sha256": "26a211f752687bfff4d2cc307f35f4d13aa2923a6c9d4e65be4a6f80cd3558c9",
+    "bytes": 3212273,
+    "examples": 100,
+    "distinct_assets": 100,
+    "sampling": {
+      "method": "first_per_asset_source_order",
+      "unit": "example",
+      "population": "Official COCO 2017 validation captions; 25,014 captions on 5,000 images",
+      "offset": 0,
+      "requested_count": 100,
+      "returned_count": 100,
+      "next_cursor": "497",
+      "source_revision": "COCO-2017-val",
+      "bytes_read": 1934498,
+      "warnings": []
+    },
+    "first_example_id": "coco:example:c765b3eb380b785ef8fc414d",
+    "last_example_id": "coco:example:6ceb20958cdd97c0ad876c2c"
+  },
+  "rights": {
+    "annotations": "COCO Consortium CC BY 4.0",
+    "images": "Source image copyrights are not owned by COCO Consortium; local-only original media, metadata-only public publication pending per-image verification."
+  },
+  "validation": {
+    "synthetic_and_real_adapter_tests": "4 passed",
+    "first_and_last_original_jpeg_pillow_verify": "passed",
+    "real_pagination": "first 101, following 101, and final record loaded"
+  }
+}

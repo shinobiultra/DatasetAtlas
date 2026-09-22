@@ -1,0 +1,62 @@
+schema_version: '1.0'
+id: interpbench
+name: InterpBench
+aliases: []
+description: InterpBench semi-synthetic transformer benchmark. Authors report 86 semi-synthetic transformer
+  models/tasks; corpus occurrence is bibliography title only
+paper_ids:
+- paper-d098a79f00c8b2b5
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: source_page_public_data_unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Public source page located; exact paper-used data revision or archive is unverified.
+  - Public data/media reuse rights require separate review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/FlyingPumba/InterpBench
+  note: Original paper says repository MIT; model/checkpoint redistribution scope should be verified
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-fcd974aa29b39bed3da7
+  paper_id: paper-d098a79f00c8b2b5
+  source_file_hash: 9a50cdc6b9f2ba3687339453804acb9519525941198c14d07765aaecbb1436d2
+  page: 49
+  role: bibliography-only reference
+  excerpt: '2. Rohan Gupta, Iván Arcuschin, Thomas Kwa, and Adrià Garriga-Alonso. Interpbench: Semi-synthetic
+    trans- formers for evaluating mechanistic interpretability techniques. In The Thirty-eight Co'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/FlyingPumba/InterpBench
+  note: Authors report 86 semi-synthetic transformer models/tasks; corpus occurrence is bibliography title
+    only
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_located
+- kind: source_audit_rights
+  url: https://github.com/FlyingPumba/InterpBench
+  note: Original paper says repository MIT; model/checkpoint redistribution scope should be verified
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_located
+- kind: source_audit_access
+  url: https://github.com/FlyingPumba/InterpBench
+  note: source_page_public_data_unverified; Keep bibliography-only role and benchmark/model nature, not
+    an image dataset.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_located
+source_url: https://github.com/FlyingPumba/InterpBench

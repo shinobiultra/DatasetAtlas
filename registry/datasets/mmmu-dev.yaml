@@ -1,0 +1,103 @@
+schema_version: '1.0'
+id: mmmu-dev
+name: MMMU-dev
+aliases: []
+description: MMMU development split of the original multidisciplinary multimodal benchmark;
+  exact selected split revision remains unresolved.
+paper_ids:
+- paper-32cea5e43d940514
+- paper-f03c5ad315e6d835
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Source-family rights and any public media examples require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://huggingface.co/datasets/MMMU/MMMU
+  note: Team Hugging Face card lists Apache-2.0 for dataset; source imagery in educational
+    problems needs separate reuse assessment before public examples
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-ff089e0b1a62c478eddd
+  paper_id: paper-32cea5e43d940514
+  source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
+  page: 5
+  role: evaluation
+  excerpt: 1 19.9 24.2 measured with the sum of perception and reasoning scores, MMMU-dev
+    [87], and Seed-Bench-2 [49]) for The comparison methods for LVLMs are as fol-
+    general performance evaluat
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-1ad7a623e44521ae01c3
+  paper_id: paper-f03c5ad315e6d835
+  source_file_hash: 47431d9340ff27b9234e2184711fbc3fc06ded7718fe53ca79b23a1cd1db777d
+  page: 8
+  role: evaluation
+  excerpt: rks, namely MMBench-en-dev (Liu et al., 2023), MME (Fu et al., 2023), MMMU-dev
+    (Yue et al., 2024), and Seed-Bench-2 (Li et al., 2023a; 2024a). We use VLMEvalKit
+    (Duan et al., 2024) for eva
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-d0c58690e124464e42ed
+  paper_id: paper-32cea5e43d940514
+  source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
+  page: 5
+  role: general utility evaluation
+  excerpt: 16.2 25.1 19.9 24.2 measured with the sum of perception and reasoning scores,
+    MMMU-dev [87], and Seed-Bench-2 [49]) for The comparison methods for LVLMs are
+    as fol- general per
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://huggingface.co/datasets/MMMU/MMMU
+  note: MMMU college-level multidisciplinary multimodal problems; separate from MMMU-Pro
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: https://huggingface.co/datasets/MMMU/MMMU
+  note: Original author benchmark, about 11,500 questions across six disciplines and
+    thirty subjects
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://huggingface.co/datasets/MMMU/MMMU
+  note: Official team Hugging Face dataset is public; split/test-answer availability
+    changed over time, pin revision
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_rights
+  url: https://huggingface.co/datasets/MMMU/MMMU
+  note: Team Hugging Face card lists Apache-2.0 for dataset; source imagery in educational
+    problems needs separate reuse assessment before public examples
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_related_links
+  urls:
+  - https://github.com/MMMU-Benchmark/MMMU
+  - https://mmmu-benchmark.github.io/
+  note: Additional official or author-cited evidence; does not establish a selected
+    release.
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://huggingface.co/datasets/MMMU/MMMU

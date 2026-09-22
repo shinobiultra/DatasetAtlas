@@ -1,0 +1,74 @@
+schema_version: '1.0'
+id: emnist
+name: EMNIST
+aliases: []
+description: NIST EMNIST handwritten-character dataset; six distinct splits, two equivalent
+  formats (IDX and Matlab).
+paper_ids:
+- paper-1e2474b15fec2d7d
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Source-family rights and any public media examples require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://www.nist.gov/itl/products-and-services/emnist-dataset
+  note: NIST dataset page does not state explicit redistribution terms; do not infer
+    rights from the NIST site or an adapter library license
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-f989e52eb008f7c0a7d3
+  paper_id: paper-1e2474b15fec2d7d
+  source_file_hash: ada9a023bec3a045996c2660092bd2e4c1a28380b76315ad0d97051c119bd9ce
+  page: 17
+  role: training
+  excerpt: 'scrambled MNIST images. (B) Fourier-phase scrambled MNIST-images. (C)
+    EMNIST letters [61], excluding the letters o,s,z,l,i,q and g. (D) patches cropped
+    from natural images. The small VGG− model '
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://www.nist.gov/itl/products-and-services/emnist-dataset
+  note: NIST EMNIST handwritten-character dataset; six distinct splits, two equivalent
+    formats (IDX and Matlab)
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: https://www.nist.gov/itl/products-and-services/emnist-dataset
+  note: NIST release introduced 2017; ByClass/ByMerge each 814,255, Balanced 131,600,
+    Letters 145,600, Digits 280,000, MNIST 70,000; no file digest published on page
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://www.nist.gov/itl/products-and-services/emnist-dataset
+  note: NIST page links binary gzip.zip and Matlab archive; one-byte Range GET succeeded
+    for gzip.zip with total 561,753,746 bytes; HEAD returned 403, not treated as a
+    gate
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+  probe: one_byte_range_read_only
+- kind: source_audit_rights
+  url: https://www.nist.gov/itl/products-and-services/emnist-dataset
+  note: NIST dataset page does not state explicit redistribution terms; do not infer
+    rights from the NIST site or an adapter library license
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://www.nist.gov/itl/products-and-services/emnist-dataset

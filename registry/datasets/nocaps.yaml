@@ -1,0 +1,95 @@
+schema_version: '1.0'
+id: nocaps
+name: NoCaps
+aliases: []
+description: nocaps novel-object caption benchmark.
+paper_ids:
+- paper-7ed1979562251931
+- paper-25eaa8c74ce76800
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Official source family identified; exact selected release, preparation and public-use
+    rights still require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://nocaps.org/
+  note: Original paper identifies Open Images source images as CC BY 2.0; caption/annotation
+    and per-photo attribution still require review
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-3bc94150351f5ada820c
+  paper_id: paper-7ed1979562251931
+  source_file_hash: aec173a1458a692a9a4159f07664f759ab64d0f3cce6638cad56d9b76af663ec
+  page: 9
+  role: evaluation
+  excerpt: ' al., 2009), OKVQA (Marino LQAVA (RSQ25 ) 44.07 ± 0.83 et al., 2019),
+    NoCaps (Agrawal et al., 2019), and Multi-layer LQAVA (RSQ25 ) 42.54 ± 0.92 Flickr30k
+    (Young et al., 2014). The resul'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-35dd276b4221564545d1
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 29
+  role: cited-study dataset in survey table
+  excerpt: CAR, VinVL, BLIP, OFA Object Hallucination Detec- COCO Caption, NoCaps
+    Linear Probing tion
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-e8ae75e91bea6490d738
+  paper_id: paper-7ed1979562251931
+  source_file_hash: aec173a1458a692a9a4159f07664f759ab64d0f3cce6638cad56d9b76af663ec
+  page: 9
+  role: additional evaluation
+  excerpt: ino LQAVA (RSQ25 ) 44.07 ± 0.83 et al., 2019), NoCaps (Agrawal et al.,
+    2019), and Multi-layer LQAVA (RSQ25 ) 42.54 ± 0.92 Flickr30k (Young et al., 2014).
+    The
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://nocaps.org/
+  note: nocaps novel-object caption benchmark
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: source_and_terms_identified
+- kind: source_audit_release
+  url: https://nocaps.org/
+  note: Author page identifies 15,100 Open Images val/test images and 166,100 captions;
+    exact download snapshot unpinned
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: source_and_terms_identified
+- kind: source_audit_access
+  url: https://nocaps.org/
+  observation: author_download
+  requires_external_access_step: null
+  download_or_media_inspected: false
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: source_and_terms_identified
+- kind: source_audit_rights
+  url: https://nocaps.org/
+  note: Original paper identifies Open Images source images as CC BY 2.0; caption/annotation
+    and per-photo attribution still require review
+  publication_decision: media_not_approved
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: source_and_terms_identified
+source_url: https://nocaps.org/

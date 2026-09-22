@@ -1,0 +1,73 @@
+schema_version: '1.0'
+id: foil-it
+name: FOIL it!
+aliases: []
+description: Original University of Trento FOIL-COCO image/original-caption/foil-caption
+  triples, not later FOIL variants
+paper_ids:
+- paper-2038cb87115b4fb0
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Source content and publication rights require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://foilunitn.github.io/
+  note: Author page explicitly separates FOIL annotations CC BY 4.0, MS-COCO annotations
+    CC BY 4.0 and Flickr-governed source images.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-1b409c643e7dd692f1e5
+  paper_id: paper-2038cb87115b4fb0
+  source_file_hash: 51dcc13673e3b9b98e6b9cb67b07e584643259b69e50a0c028b1c7814a1ee676
+  page: 4
+  role: dataset lineage
+  excerpt: 2021) (an extension prompt models to choose between a correct answer to
+    FOIL it! (Shekhar et al., 2017b)), MIT States that matches the image and an incorrect,
+    seman- (Isola et al., 2015), a
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://foilunitn.github.io/
+  note: Original University of Trento FOIL-COCO image/original-caption/foil-caption
+    triples, not later FOIL variants
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: https://foilunitn.github.io/
+  note: Author page identifies revised October 2018 train/test release; earlier pre-September-2018
+    version had language bias
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://foilunitn.github.io/
+  note: Author page links train/test annotation archives via Dropbox; downloads and
+    checksums unprobed here; COCO images acquired separately.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+  probe: author_download_link_unprobed
+- kind: source_audit_rights
+  url: https://foilunitn.github.io/
+  note: Author page explicitly separates FOIL annotations CC BY 4.0, MS-COCO annotations
+    CC BY 4.0 and Flickr-governed source images.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://foilunitn.github.io/

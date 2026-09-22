@@ -1,0 +1,93 @@
+schema_version: '1.0'
+id: whoops
+name: WHOOPS!
+aliases: []
+description: Official WHOOPS! 500-image CSV plus image ZIP, with designer explanations, selected and crowd captions,
+  crowd explanations, underspecified captions, and question-answer pairs preserved as source arrays. The paper's
+  10,874-annotation count is not substituted for the current CSV field totals.
+paper_ids:
+- paper-25eaa8c74ce76800
+release: hf-cca58d854ee35b6bfbedc14a9155483e89500ae9
+adapter: structured
+adapter_config:
+  path: work/sources/whoops/records.jsonl
+  format: jsonl
+  sha256: 2ddcba606faeb2cdf6cc459e9a18a5bab3c7a2a1581019f1982996e12b0e65e6
+  media_root: work/sources/whoops/media
+  population: Official WHOOPS! 500-image CSV plus image ZIP, with designer explanations, selected and crowd captions,
+    crowd explanations, underspecified captions, and question-answer pairs preserved as source arrays. The paper's
+    10,874-annotation count is not substituted for the current CSV field totals.
+  mapping:
+    id: image_id
+    text: selected_caption
+    media: media_path
+    media_modality: image
+  fields:
+    image_id: Original image ID
+    designer_explanation: Original designer explanation
+    selected_caption: Original selected caption
+    crowd_captions: Five original crowd captions
+    crowd_explanations: Five original crowd explanations
+    crowd_underspecified_captions: Five original underspecified captions
+    question_answering_pairs: Original list of question-answer pairs
+    commonsense_category: Original commonsense category
+    image_designer: Original image designer attribution
+    image_url: Original hosted image URL
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 500
+  unit: example
+  blockers:
+  - Official agreement states CC BY 4.0 plus test-set use terms and authors retain image rights; images and records
+    remain local, publication metadata only.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  external_provider: local_only
+  source: https://huggingface.co/datasets/nlphuji/whoops
+  note: Official agreement states CC BY 4.0 plus test-set use terms and authors retain image rights; images and
+    records remain local, publication metadata only.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-93e0ab92836002279a51
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: InstructBLIP-13B, LLaVA-1.5- — Winoground, WHOOPS!, SEEDBench, 13, Sphinx, GPT-4V
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://whoops-benchmark.github.io/
+  note: 'Authors link public benchmark dataset with four visual-commonsense tasks. Release: WHOOPS! 500 synthetic
+    images/10,874 annotations'
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_audit_rights
+  url: https://whoops-benchmark.github.io/
+  note: Project web page CC BY-SA does not automatically license underlying generated images; dataset card requires
+    review.
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_release
+  url: https://huggingface.co/datasets/nlphuji/whoops/tree/cca58d854ee35b6bfbedc14a9155483e89500ae9
+  note: Pinned official release; 500 rows; derived SHA-256 2ddcba606faeb2cdf6cc459e9a18a5bab3c7a2a1581019f1982996e12b0e65e6.
+source_url: https://huggingface.co/datasets/nlphuji/whoops
+snapshot_id: hf-cca58d854ee35b6bfbedc14a9155483e89500ae9-2ddcba606fae
+modalities:
+- text
+- image
+tasks:
+- visual commonsense reasoning
+- image captioning
+- visual question answering

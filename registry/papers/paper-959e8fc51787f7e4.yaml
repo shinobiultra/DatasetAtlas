@@ -1,0 +1,38 @@
+schema_version: 1.0.0
+paper_id: paper-959e8fc51787f7e4
+title: 'Circuit Tracing in Vision-Language Models: Understanding the Internal Mechanisms
+  of Multimodal Thinking'
+authors:
+- Yang, Jingcheng
+- Xiong, Tianhu
+- Qian, Shengyi
+- Nahrstedt, Klara
+- Wu, Mingyuan
+year: '2026'
+doi: 10.48550/arXiv.2602.20330
+url: http://arxiv.org/abs/2602.20330
+outcome: processed
+human_review_complete: false
+mention_inventory_review_complete: true
+candidate_mention_count: 16
+sources:
+- relative_path: files/34781/Yang et al. - 2026 - Circuit Tracing in Vision-Language
+    Models Understanding the Internal Mechanisms of Multimodal Think.pdf
+  type: pdf
+  sha256: 5f8f1d0c816db711928aa4dde7ed771b84b94fe84ee7f48cdaefd0a3ce2e9edb
+  page_count: 15
+  extraction_quality:
+    pages_total: 15
+    pages_low_text: 0
+    characters: 75555
+    status: usable
+  processing_status: extracted
+reviewer_kind: agent
+review_method: full_pdf_page_text_appendix_table_caption_bibliography_audit
+reviewed_at: '2026-09-22T03:42:49.271503+00:00'
+reviewed_pages: 15
+reviewed_versions:
+- 5f8f1d0c816db711
+review_note: All 15 pages including visual-only p11 checked. Training mixture SmoLIM2
+  text, ImageNet captions, Cauldron VQA; 18k/10k/10k feature subset and ad-hoc internet
+  image circuits. Internet source rights unspecified.

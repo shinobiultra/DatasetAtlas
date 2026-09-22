@@ -1,0 +1,271 @@
+{
+  "dataset_id": "llava-bench",
+  "source_url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild",
+  "release": "hf-9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+  "original_files": [
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/questions.jsonl",
+      "file": "work/sources/llava-bench/original/questions.jsonl",
+      "bytes": 8246,
+      "sha256": "a80b369a4b629f79f8c0f9a2aa9b565f0cfe34734d3bcdd30cb4e38712c07e21",
+      "author_sha256": null
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/context.jsonl",
+      "file": "work/sources/llava-bench/original/context.jsonl",
+      "bytes": 8043,
+      "sha256": "3bd0087816e69c36904f5760d10b80bf6d2b2c60c916fc5520d45c9737a87dbc",
+      "author_sha256": null
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/images/001.jpg",
+      "file": "work/sources/llava-bench/original/images/001.jpg",
+      "bytes": 1125412,
+      "sha256": "33d2f8ebdcde47a8a3cef6af8baa13cbbfc148a25dc869c081f0c4bc4d5522b1",
+      "author_sha256": "33d2f8ebdcde47a8a3cef6af8baa13cbbfc148a25dc869c081f0c4bc4d5522b1"
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/images/002.jpg",
+      "file": "work/sources/llava-bench/original/images/002.jpg",
+      "bytes": 206507,
+      "sha256": "3ef703073f18d94e9ebc73d5a51dc1f58fb6d62dbab4857a1b6b3efc1b37fbbc",
+      "author_sha256": "3ef703073f18d94e9ebc73d5a51dc1f58fb6d62dbab4857a1b6b3efc1b37fbbc"
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/images/003.jpg",
+      "file": "work/sources/llava-bench/original/images/003.jpg",
+      "bytes": 458380,
+      "sha256": "992bfdc88a772a7a273ddd00bb502dbf44ceb9c07ae7b54fc0e537a1c534f41b",
+      "author_sha256": "992bfdc88a772a7a273ddd00bb502dbf44ceb9c07ae7b54fc0e537a1c534f41b"
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/images/004.jpg",
+      "file": "work/sources/llava-bench/original/images/004.jpg",
+      "bytes": 112781,
+      "sha256": "e7bb6b219ab954d43a05bdf33e3861d99434e4abe600d8bb77b0e27089aebcc8",
+      "author_sha256": "e7bb6b219ab954d43a05bdf33e3861d99434e4abe600d8bb77b0e27089aebcc8"
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/images/005.jpg",
+      "file": "work/sources/llava-bench/original/images/005.jpg",
+      "bytes": 59374,
+      "sha256": "d22cffa4dbedd0e99fc47a51d156e325f14278784bdcb5374462dd2482aeff1a",
+      "author_sha256": "d22cffa4dbedd0e99fc47a51d156e325f14278784bdcb5374462dd2482aeff1a"
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/images/006.jpg",
+      "file": "work/sources/llava-bench/original/images/006.jpg",
+      "bytes": 176373,
+      "sha256": "fc9c58de87644926b98da728d809ba9fb9453c93d58c64bff4049f784ea39623",
+      "author_sha256": "fc9c58de87644926b98da728d809ba9fb9453c93d58c64bff4049f784ea39623"
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/images/007.jpg",
+      "file": "work/sources/llava-bench/original/images/007.jpg",
+      "bytes": 139219,
+      "sha256": "4ddb9bc6d9ff11d569314d656e93cf6af9d94050591fde51466a392cf332871e",
+      "author_sha256": "4ddb9bc6d9ff11d569314d656e93cf6af9d94050591fde51466a392cf332871e"
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/images/008.jpg",
+      "file": "work/sources/llava-bench/original/images/008.jpg",
+      "bytes": 120245,
+      "sha256": "4a0bf0f9b438d5e1a5b4245190703cf507a53804cbeea6674b6d8c0c7bad9f51",
+      "author_sha256": "4a0bf0f9b438d5e1a5b4245190703cf507a53804cbeea6674b6d8c0c7bad9f51"
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/images/009.jpg",
+      "file": "work/sources/llava-bench/original/images/009.jpg",
+      "bytes": 1351412,
+      "sha256": "d0a4efcbdd0d56787ff03d216bd2499df2b837b756696fb7913e8b845aa40f35",
+      "author_sha256": "d0a4efcbdd0d56787ff03d216bd2499df2b837b756696fb7913e8b845aa40f35"
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/images/010.jpg",
+      "file": "work/sources/llava-bench/original/images/010.jpg",
+      "bytes": 62587,
+      "sha256": "a54caa21bc513ed25c8ca7f5747555c05dfd4e33f6a3cf5c08b3d9138a4da1d9",
+      "author_sha256": "a54caa21bc513ed25c8ca7f5747555c05dfd4e33f6a3cf5c08b3d9138a4da1d9"
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/images/011.jpg",
+      "file": "work/sources/llava-bench/original/images/011.jpg",
+      "bytes": 228434,
+      "sha256": "85cfd4147446e1ed90d40793b23bf64eed2ee826bc30b730db3724b6815b4cb5",
+      "author_sha256": "85cfd4147446e1ed90d40793b23bf64eed2ee826bc30b730db3724b6815b4cb5"
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/images/012.jpg",
+      "file": "work/sources/llava-bench/original/images/012.jpg",
+      "bytes": 1048820,
+      "sha256": "0ff920dbca1c4ca308d9a54617a3a105e9702c87686d81331c97e18b484e1bc5",
+      "author_sha256": "0ff920dbca1c4ca308d9a54617a3a105e9702c87686d81331c97e18b484e1bc5"
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/images/013.jpg",
+      "file": "work/sources/llava-bench/original/images/013.jpg",
+      "bytes": 136695,
+      "sha256": "8580d773cb63fa1d706fa03ebf3dc91e7eecfeda9405b43c76dd3a7331c305d0",
+      "author_sha256": "8580d773cb63fa1d706fa03ebf3dc91e7eecfeda9405b43c76dd3a7331c305d0"
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/images/014.jpg",
+      "file": "work/sources/llava-bench/original/images/014.jpg",
+      "bytes": 1746065,
+      "sha256": "740fb84dba9d973cf576657579f9ff9fe2feb818f76e75d0ce1ab7550f5262e7",
+      "author_sha256": "740fb84dba9d973cf576657579f9ff9fe2feb818f76e75d0ce1ab7550f5262e7"
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/images/015.jpg",
+      "file": "work/sources/llava-bench/original/images/015.jpg",
+      "bytes": 168719,
+      "sha256": "48f7649713454329b28fd504270525df49e4575af5de228ef34904a08cf51e67",
+      "author_sha256": "48f7649713454329b28fd504270525df49e4575af5de228ef34904a08cf51e67"
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/images/016.jpg",
+      "file": "work/sources/llava-bench/original/images/016.jpg",
+      "bytes": 205897,
+      "sha256": "3582d6abc1c6ad429fb7053acb0292f469b88df3fdaeed44dcb83c54bcb0907b",
+      "author_sha256": "3582d6abc1c6ad429fb7053acb0292f469b88df3fdaeed44dcb83c54bcb0907b"
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/images/017.jpg",
+      "file": "work/sources/llava-bench/original/images/017.jpg",
+      "bytes": 39935,
+      "sha256": "0b5475321711d929aa0761bfc4a0f955f7f65824bbf026f2e0b1770b0c0ec337",
+      "author_sha256": "0b5475321711d929aa0761bfc4a0f955f7f65824bbf026f2e0b1770b0c0ec337"
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/images/018.jpg",
+      "file": "work/sources/llava-bench/original/images/018.jpg",
+      "bytes": 528075,
+      "sha256": "977d779486804b3a378b7d444b85718a7274d82d81679f25172160588415551d",
+      "author_sha256": "977d779486804b3a378b7d444b85718a7274d82d81679f25172160588415551d"
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/images/019.jpg",
+      "file": "work/sources/llava-bench/original/images/019.jpg",
+      "bytes": 85488,
+      "sha256": "70d497c333763819be700a827f78a25b52f0fa9fe0f719318c69a4138fe556d5",
+      "author_sha256": "70d497c333763819be700a827f78a25b52f0fa9fe0f719318c69a4138fe556d5"
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/images/020.jpg",
+      "file": "work/sources/llava-bench/original/images/020.jpg",
+      "bytes": 954543,
+      "sha256": "6ebb2fc1a78f81b6deb511ddbd356b059ba23e1ed6d26c2727666794f5a5ffb9",
+      "author_sha256": "6ebb2fc1a78f81b6deb511ddbd356b059ba23e1ed6d26c2727666794f5a5ffb9"
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/images/021.jpg",
+      "file": "work/sources/llava-bench/original/images/021.jpg",
+      "bytes": 408756,
+      "sha256": "06c19e5c063e503ecc98ecde2d0b5e3c3c1e4ab58071ea933c8b500ea3dbf273",
+      "author_sha256": "06c19e5c063e503ecc98ecde2d0b5e3c3c1e4ab58071ea933c8b500ea3dbf273"
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/images/022.jpg",
+      "file": "work/sources/llava-bench/original/images/022.jpg",
+      "bytes": 95557,
+      "sha256": "db481e44fdb12c11aa02316d8781f9f67890e5e0fbf35e1bba9b5af52d42c8e1",
+      "author_sha256": "db481e44fdb12c11aa02316d8781f9f67890e5e0fbf35e1bba9b5af52d42c8e1"
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/images/023.jpg",
+      "file": "work/sources/llava-bench/original/images/023.jpg",
+      "bytes": 40176,
+      "sha256": "edc5cf5900a16d5eb8d749b06dcd7be4b53f954f1660cadb561eacf615f9b0fe",
+      "author_sha256": "edc5cf5900a16d5eb8d749b06dcd7be4b53f954f1660cadb561eacf615f9b0fe"
+    },
+    {
+      "dataset_id": "llava-bench",
+      "release": "9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+      "url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/images/024.jpg",
+      "file": "work/sources/llava-bench/original/images/024.jpg",
+      "bytes": 252350,
+      "sha256": "45e5f6e85e1b3c7259e93e25c1841186ffdc2da73110e9c8905c9f9ad91bea7c",
+      "author_sha256": "45e5f6e85e1b3c7259e93e25c1841186ffdc2da73110e9c8905c9f9ad91bea7c"
+    }
+  ],
+  "derivation_script": "work/sources/prepare_multimodal_batch.py",
+  "derived": {
+    "path": "work/sources/llava-bench/records.jsonl",
+    "rows": 60,
+    "bytes": 36548,
+    "sha256": "1e7bb6d7e39c08135858dd51979f758b109150707df4a6c2baa5113455835710"
+  },
+  "scope_note": "Official LLaVA-Bench In-the-Wild: all 60 questions (conversation, detail, complex) linked to 24 images and 24 context captions. This is distinct from LLaVA-Bench COCO; the entire 60-record release is the local preview.",
+  "preview_pack": "work/packs/llava-bench/pack.json",
+  "rights_decision": "metadata_only; records and media remain local pending release-specific review",
+  "preview_sha256": "bdd3ec5d0bfa2a98c83ffc9e99af6210812a5f43d2eedafde3c9ce90e8dd5e3d",
+  "preview_records": 60,
+  "preview_unique_images": 24,
+  "preview_sampling": {
+    "method": "source_order",
+    "unit": "example",
+    "population": "Official LLaVA-Bench In-the-Wild: all 60 questions (conversation, detail, complex) linked to 24 images and 24 context captions. This is distinct from LLaVA-Bench COCO; the entire 60-record release is the local preview.",
+    "offset": 0,
+    "requested_count": 60,
+    "returned_count": 60,
+    "next_cursor": null,
+    "source_revision": "hf-9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+    "bytes_read": 37388,
+    "warnings": [],
+    "selection_note": "",
+    "official_source_release": "hf-9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b",
+    "full_source_rows": 60,
+    "unique_source_images": 24,
+    "selection_explanation": "Entire official release in source order"
+  }
+}

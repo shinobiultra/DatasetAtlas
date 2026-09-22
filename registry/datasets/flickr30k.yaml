@@ -1,0 +1,185 @@
+schema_version: '1.0'
+id: flickr30k
+name: Flickr30k
+aliases:
+- Flickr30K
+description: Original Flickr30k image-caption corpus (31,783 images; 158,915 captions),
+  not automatically Flickr30k Entities region annotations.
+paper_ids:
+- paper-f5da3ca03780a203
+- paper-6dbb0d4a7b949143
+- paper-392b0c393c06b48e
+- paper-7a1ff5996ce95273
+- paper-7ed1979562251931
+- paper-3e0db9c633ab204c
+- paper-25eaa8c74ce76800
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: gated
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Official source requires an access request or agreement; dataset contents and
+    publication rights remain unreviewed.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://shannon.cs.illinois.edu/DenotationGraph/
+  note: Authors say images are Flickr-sourced, they do not own image copyrights, images
+    only provided for non-commercial research/education under Flickr Terms
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-969eda949da86537f665
+  paper_id: paper-f5da3ca03780a203
+  source_file_hash: d65cb215e41e6b745002603b59c138ce86e5ad7eb08751c0e3a85f3982959032
+  page: 8
+  role: evaluation
+  excerpt: 'n, correspond- ing to different multimodal tasks: image captioning on
+    Flickr30k [32] using the prompt “Describe the image in one sentence”, image classification
+    on CIFAR-10 [33] using the p'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-1e783f25c46a778d5e8e
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 6
+  role: evaluation
+  excerpt: IDEr score, whereas FARE4 and Sim-CLIP4 , COCO (Lin et al., 2014) and Flickr30k
+    (Plummer et al., despite blocking the attacker’s string, experience a notice-
+    2015) datasets, which feature d
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-b2f60ea84104d1675227
+  paper_id: paper-392b0c393c06b48e
+  source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
+  page: 9
+  role: evaluation
+  excerpt: mputa- tionally feasible. We evaluate on image captioning (COCO [29], Flickr30k
+    [44]) and VQA (VQAv2 [16], TextVQA [54], VizWiz [17], OKVQA [39]), reporting results
+    on 500 ran- domly sample
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-0e150cca497464df9bbc
+  paper_id: paper-7a1ff5996ce95273
+  source_file_hash: d2da2819b87291e9ff99547e1724286e95ef4de33cad091ce17762c0c90782d1
+  page: 5
+  role: evaluation
+  excerpt: 'odels, and Tasks. For the downstream datasets, we utilize the MSCOCO,
+    Flickr30K, and SNLI- Table 3. Attack performance comparison on the SNLI-VE dataset
+    VE datasets. We employ a variety of '
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-a9d908df180f52e56409
+  paper_id: paper-7ed1979562251931
+  source_file_hash: aec173a1458a692a9a4159f07664f759ab64d0f3cce6638cad56d9b76af663ec
+  page: 9
+  role: evaluation
+  excerpt: 's (Agrawal et al., 2019), and Multi-layer LQAVA (RSQ25 ) 42.54 ± 0.92
+    Flickr30k (Young et al., 2014). The results pre- Table 15: The optimized version
+    of QAVA, employing sented in Tab. 13 d'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-875a52d859ca061bd93b
+  paper_id: paper-3e0db9c633ab204c
+  source_file_hash: d2750f355a25fcdcfcb221e5049a0aa41ec096b452772c73e1767e2d039a6545
+  page: 5
+  role: evaluation
+  excerpt: COCO Flickr30k IN-1k IN-V2 IN-A IN-R ObjectNet IN-Sketch E
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-3dc6b0e130a02c6248b3
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 29
+  role: cited-study dataset in survey table
+  excerpt: iLBERT, LXMERT, UNITER Multimodal Fusion, Cross- Visual Genome, Flickr30k
+    modal Inter
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-a8e96459cfc5879f18cc
+  paper_id: paper-392b0c393c06b48e
+  source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
+  page: 9
+  role: caption evaluation
+  excerpt: le remaining computa- tionally feasible. We evaluate on image captioning
+    (COCO [29], Flickr30k [44]) and VQA (VQAv2 [16], TextVQA [54], VizWiz [17], OKVQA
+    [39]), reporting results on 500 ran- domly sampled images p
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-bf932889aec8b8419201
+  paper_id: paper-7a1ff5996ce95273
+  source_file_hash: d2da2819b87291e9ff99547e1724286e95ef4de33cad091ce17762c0c90782d1
+  page: 5
+  role: downstream evaluation
+  excerpt: datasets, we utilize the MSCOCO, Flickr30K, and SNLI- Table 3. Attack performance
+    comparison on the SNLI-VE dataset VE datasets. We employ a variety of target mo
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-5d33c5844b62713ef698
+  paper_id: paper-7ed1979562251931
+  source_file_hash: aec173a1458a692a9a4159f07664f759ab64d0f3cce6638cad56d9b76af663ec
+  page: 9
+  role: additional evaluation
+  excerpt: 'rawal et al., 2019), and Multi-layer LQAVA (RSQ25 ) 42.54 ± 0.92 Flickr30k
+    (Young et al., 2014). The results pre- Table 15: The optimized'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-c3e2ba05ee7037ec4426
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 5
+  role: caption evaluation
+  excerpt: tVQA, VQAv2, VizWiz, OKVQA), we report VQA accuracy, and for captioning
+    tasks (COCO, Flickr30k), we report CIDEr score. COCO Flickr30 TextVQA
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://shannon.cs.illinois.edu/DenotationGraph/
+  note: Original Flickr30k image-caption corpus (31,783 images; 158,915 captions),
+    not automatically Flickr30k Entities region annotations
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: https://shannon.cs.illinois.edu/DenotationGraph/
+  note: Original Illinois source page, unversioned corpus; distinguish Entities overlay
+    if selected
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://shannon.cs.illinois.edu/DenotationGraph/
+  note: Original author page requires request form for dataset and denotation graph;
+    access not obtained here
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+  probe: author_request_form
+- kind: source_audit_rights
+  url: https://shannon.cs.illinois.edu/DenotationGraph/
+  note: Authors say images are Flickr-sourced, they do not own image copyrights, images
+    only provided for non-commercial research/education under Flickr Terms
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://shannon.cs.illinois.edu/DenotationGraph/

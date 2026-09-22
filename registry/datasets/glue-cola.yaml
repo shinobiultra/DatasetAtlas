@@ -1,0 +1,110 @@
+schema_version: '1.0'
+id: glue-cola
+name: GLUE CoLA
+aliases: []
+description: Official GLUE ZIP train/dev/test task files, original TSV columns preserved,
+  withheld test labels null. Auxiliary original/tokenized copies in CoLA ZIP are not
+  double-counted. Release is pinned by downloaded archive SHA-256, not an inferred
+  paper-specific subset.
+paper_ids:
+- paper-d098a79f00c8b2b5
+release: source-sha256-15dee289dd6d78a1
+adapter: structured
+adapter_config:
+  path: work/sources/glue-cola/records.parquet
+  format: parquet
+  sha256: 6eb61fa7e7466bf3c5c1faf4283430008b90444abf92f01974de8b489b8bfcdc
+  mapping:
+    id: source_id
+    text: display_text
+  fields:
+    author_annotation:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    index:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    label:
+      dtype: category
+      values:
+      - '0'
+      - '1'
+      description: Original source label; null only when source does not provide it
+    label_status:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    publication:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    sentence:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    source_id:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    source_member:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    split:
+      dtype: category
+      values:
+      - train
+      - dev
+      - test
+      description: Original split; CEBaB train alternatives overlap
+  source_files_sha256: &id001
+    CoLA.zip: f212fcd832b8f7b435fb991f101abf89f96b933ab400603bf198960dfc32cbff
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  unit: example
+  blockers:
+  - Public redistribution has not been approved; local inspection is supported.
+  total_count: 10657
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_applicable
+  external_provider: local_only
+  source: https://gluebenchmark.com/tasks
+  basis: GLUE/task text rights vary; public download does not establish redistribution
+    permission.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-0577630ae08492b719b5
+  paper_id: paper-d098a79f00c8b2b5
+  source_file_hash: 9a50cdc6b9f2ba3687339453804acb9519525941198c14d07765aaecbb1436d2
+  page: 12
+  role: related-work mention
+  excerpt: 'n was more accurate than official dataset labels on the NLP task GLUE
+    CoLA (Warstadt et al., 2019). More often than not though, a sparse set of latents
+    that encode some useful concept '
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: verified_source_acquisition
+  source_url: https://dl.fbaipublicfiles.com/glue/data/CoLA.zip
+  checked_at: '2026-09-22'
+  sha256: *id001
+  scope: Official GLUE ZIP train/dev/test task files, original TSV columns preserved,
+    withheld test labels null. Auxiliary original/tokenized copies in CoLA ZIP are
+    not double-counted. Release is pinned by downloaded archive SHA-256, not an inferred
+    paper-specific subset.
+  counts_by_split:
+    train: 8551
+    dev: 1043
+    test: 1063
+snapshot_id: glue-cola-sha256-6eb61fa7e7466bf3c5c1faf4283430008b90444abf92f01974de8b489b8bfcdc
+source_url: https://gluebenchmark.com/tasks
+modalities:
+- text
+tasks:
+- linguistic acceptability
+labels:
+- '0'
+- '1'

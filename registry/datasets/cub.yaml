@@ -1,0 +1,63 @@
+schema_version: '1.0'
+id: cub
+name: CUB
+aliases: []
+description: CUB birds family, likely CUB-200-2011. Caltech CUB-200-2011 source exists; corpus survey
+  only says CUB, without exact revision
+paper_ids:
+- paper-25eaa8c74ce76800
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: family_or_variant_candidate
+  source: family_verified_variant_unpinned
+  access: base_source_public_variant_unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Paper-used variant/configuration is not pinned to an exact source release.
+  - Public data/media reuse rights require separate review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://www.vision.caltech.edu/datasets/cub_200_2011/
+  note: Bird photographs and annotations require original dataset terms; code or third-party mirrors do
+    not settle rights
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-28512a06d10f0f077be7
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: a) CLIP Image Retrieval, Segmenta- Waterbirds, CUB, Places, ImageNet- Text-Explanations of
+    t
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://www.vision.caltech.edu/datasets/cub_200_2011/
+  note: Caltech CUB-200-2011 source exists; corpus survey only says CUB, without exact revision
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_family_located_variant_unpinned
+- kind: source_audit_rights
+  url: https://www.vision.caltech.edu/datasets/cub_200_2011/
+  note: Bird photographs and annotations require original dataset terms; code or third-party mirrors do
+    not settle rights
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_family_located_variant_unpinned
+- kind: source_audit_access
+  url: https://www.vision.caltech.edu/datasets/cub_200_2011/
+  note: base_source_public_variant_unverified; Relate to jobs cub-200-2011 without merging until citation/revision
+    confirms equivalence.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_family_located_variant_unpinned
+source_url: https://www.vision.caltech.edu/datasets/cub_200_2011/

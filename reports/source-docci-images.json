@@ -1,0 +1,104 @@
+{
+  "dataset_id": "docci",
+  "release": "docci-author-descriptions-images-c9df4819-c1b1aee0",
+  "snapshot_id": "docci-pairs-c9df4819-c1b1aee0",
+  "source": {
+    "project_url": "https://google.github.io/docci/",
+    "descriptions": {
+      "url": "https://storage.googleapis.com/docci/data/docci_descriptions.jsonlines",
+      "gcs_generation": "1714384012999810",
+      "bytes": 11000214,
+      "sha256": "c9df4819963883af35ddd2cf257949892fd8c6d88b33a012094352df60719800",
+      "md5_etag": "7ed51dae0fed79d33564cd0e5b9c2f11"
+    },
+    "images": {
+      "url": "https://storage.googleapis.com/docci/data/docci_images.tar.gz",
+      "gcs_generation": "1714249456173037",
+      "bytes": 7592938768,
+      "sha256": "c1b1aee00856757d71cfe2cc6ab641089284276a791bfb82146b4742c59a0a1d",
+      "md5_etag": "57493de5075fe508d51e77500748f4da"
+    }
+  },
+  "join": {
+    "key": "description.image_file == archive images/<image_file>",
+    "description_rows": 14847,
+    "archive_jpeg_members": 14847,
+    "exact_name_set_match": true,
+    "extracted_bytes": 7630130486,
+    "symlink_and_extra_members_rejected": true,
+    "per_image_sha256_manifest": "work/sources/docci/prepared/index.json"
+  },
+  "preview": {
+    "path": "work/packs/docci/pack.json",
+    "sha256": "7cf7f7f2a198a5523107bed06b416fd6ce22a9ccd5fcb524f9b2b7a34573e31b",
+    "examples": 100,
+    "distinct_images": 100,
+    "split_counts": {
+      "qual_dev": 25,
+      "qual_test": 25,
+      "test": 25,
+      "train": 25
+    },
+    "media_checksums": 100,
+    "pillow_verified_images": 100,
+    "sampling": {
+      "method": "first_25_per_original_split",
+      "unit": "example",
+      "population": "Complete author-hosted DOCCI description and image release, 14,847 pairs",
+      "sections": [
+        {
+          "split": "qual_dev",
+          "source_offset": 0,
+          "count": 25
+        },
+        {
+          "split": "qual_test",
+          "source_offset": 100,
+          "count": 25
+        },
+        {
+          "split": "test",
+          "source_offset": 200,
+          "count": 25
+        },
+        {
+          "split": "train",
+          "source_offset": 5200,
+          "count": 25
+        }
+      ],
+      "requested_count": 100,
+      "returned_count": 100,
+      "source_revision": "docci-author-descriptions-images-c9df4819-c1b1aee0",
+      "bytes_read": 48976122,
+      "note": "Equal preview allocation across four source splits, not prevalence-weighted; each image is an exact byte copy from the pinned author archive."
+    }
+  },
+  "complete_access": {
+    "path": "work/snapshots/docci/manifest.json",
+    "manifest_sha256": "27c0441996b5a7a266c9f3df2b8b54849f55b99c5e2e273be98b5d57d73e6fcd",
+    "record_count": 14847,
+    "split_counts": {
+      "train": 9647,
+      "test": 5000,
+      "qual_dev": 100,
+      "qual_test": 100
+    },
+    "page_size_tested": 1000,
+    "all_pages_tested": true
+  },
+  "rights": {
+    "author_declared": "CC BY 4.0 for annotations and images",
+    "local_preview": "not published",
+    "public_release": "metadata_only pending attribution and publication review"
+  },
+  "excluded": {
+    "metadata_155MB": "not acquired; original JSONL fields are preserved",
+    "AAR_9600_images": "separate unannotated pool not acquired"
+  },
+  "prior_text_only_intermediate": {
+    "pack": "work/packs/docci-descriptions/pack.json",
+    "snapshot": "work/snapshots/docci-descriptions/manifest.json",
+    "report": "reports/source-docci-descriptions.json"
+  }
+}

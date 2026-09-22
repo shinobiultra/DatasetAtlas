@@ -1,0 +1,71 @@
+schema_version: '1.0'
+id: sorrybench
+name: SorryBench
+aliases: []
+description: SORRY-Bench 202503 base instructions are publicly documented but source access
+  is gated by the authors due to unsafe and offensive content. No local rows or preview have
+  been acquired.
+paper_ids:
+- paper-09b2d7393fc75cf7
+release: sorry-bench-202503
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: gated
+  adapter: not_started
+  preview: none
+  complete_data: externally_blocked
+  publication: metadata_only
+  preview_count: 0
+  total_count: null
+  unit: example
+  blockers:
+  - Official authors require access approval before downloading the 202503 base question.jsonl;
+    no approved local source is present.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_applicable
+  external_provider: local_only
+  source: https://github.com/SORRY-Bench/sorry-bench/blob/main/README.md
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-f95cc0542e4a8d924f8c
+  paper_id: paper-09b2d7393fc75cf7
+  source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
+  page: 7
+  role: source data
+  excerpt: 've described in IV-A1. Specifically, we evaluate Qwen3-VL-8B- benchmarks: HarmBench
+    [44], SorryBench [45], MaliciousIn- Instruct [28] and LLaVA-1.5-7B [25], and insert the
+    gated struct [46], TDC2023 [47], and AdvBench [48], yieldi'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-41d3ea8223c7643b89fd
+  paper_id: paper-09b2d7393fc75cf7
+  source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
+  page: 7
+  role: attack prompt source
+  excerpt: 'scribed in IV-A1. Specifically, we evaluate Qwen3-VL-8B- benchmarks: HarmBench [44],
+    SorryBench [45], MaliciousIn- Instruct [28] and LLaVA-1.5-7B [25], and insert the gated
+    struct [46], TDC2023 [47],'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_access
+  url: https://github.com/SORRY-Bench/sorry-bench/blob/main/README.md
+  note: Official Download Dataset section explicitly requires access request because the material
+    can be unsafe or offensive; base file question.jsonl.
+- kind: source_revision
+  url: https://huggingface.co/datasets/sorry-bench/sorry-bench-202503
+  note: Hugging Face dataset revision 612a4e1f45db8adf884fa62318ddf9fa1c6e75e9 reports gated
+    auto; no contents fetched.
+tasks:
+- safety refusal evaluation
+modalities:
+- text
+labels:
+- unsafe topic category
+source_url: https://github.com/SORRY-Bench/sorry-bench
+snapshot_id: hf-sorry-bench-202503-612a4e1f45db8adf884fa62318ddf9fa1c6e75e9

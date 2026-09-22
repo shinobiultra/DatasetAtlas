@@ -1,0 +1,59 @@
+schema_version: '1.0'
+id: coco-2014
+name: COCO 2014
+aliases: []
+description: Original COCO 2014 release exists, but the survey table does not specify train, val, captions,
+  or detection subset.
+paper_ids:
+- paper-25eaa8c74ce76800
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://cocodataset.org/#download
+  note: COCO photos and annotations have distinct provenance and terms.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-f074278c4ff4167d4c26
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 29
+  role: cited-study dataset in survey table
+  excerpt: 24c) LLaVA-1.5-7B, Shikra, MiniGPT-4 Hallucination Detection COCO 2014 (Phukan et al., 2024)
+    Qwen2-VL-7B, InternLM-xcomposer2- Hallucinatio
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://cocodataset.org/#download
+  note: 'Original COCO 2014 release exists, but the survey table does not specify train, val, captions,
+    or detection subset. Release: COCO 2014; task/split unpinned'
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_audit_rights
+  url: https://cocodataset.org/#termsofuse
+  note: COCO photos and annotations have distinct provenance and terms.
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+source_url: https://cocodataset.org/
+relationships:
+- type: same_source_family_as
+  target_id: coco
+  scope: COCO family only; year, split, selected image/caption IDs and overlay are not established as
+    the active COCO-2017-val release.

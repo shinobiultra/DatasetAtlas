@@ -1,0 +1,47 @@
+schema_version: 1.0.0
+paper_id: paper-2aa40aa13ed2a25b
+title: Linear Mechanisms for Spatiotemporal Reasoning in Vision Language Models
+authors:
+- Kang, Raphi
+- Chen, Hongqiao
+- Gkioxari, Georgia
+- Perona, Pietro
+year: '2026'
+doi: 10.48550/arXiv.2601.12626
+url: http://arxiv.org/abs/2601.12626
+outcome: processed
+human_review_complete: false
+mention_inventory_review_complete: true
+candidate_mention_count: 37
+sources:
+- relative_path: files/35299/2601.html
+  type: html
+  sha256: 90f61d1054b32066e7842c7debe1871b108762873656e07ad775616cae940348
+  page_count: null
+  extraction_quality:
+    pages_total: 1
+    pages_low_text: 1
+    characters: 0
+    status: low
+  processing_status: extracted
+- relative_path: files/35300/Kang et al. - 2026 - Linear Mechanisms for Spatiotemporal
+    Reasoning in Vision Language Models.pdf
+  type: pdf
+  sha256: 636fa1d8fe370283cf91d2640e28f00f9236cd7ee40afce14fc3301815559ecf
+  page_count: 30
+  extraction_quality:
+    pages_total: 30
+    pages_low_text: 1
+    characters: 86592
+    status: usable
+  processing_status: extracted
+reviewer_kind: agent
+review_method: full_pdf_page_text_appendix_table_caption_bibliography_audit
+reviewed_at: '2026-09-22T03:45:23.296121+00:00'
+reviewed_pages: 30
+reviewed_versions:
+- 636fa1d8fe370283
+review_note: All 30 pages plus low-text p15 rendered/OCR checked. Direct COCO-Spatial
+  mirror-swap benchmark and MVBench Scene QA video task; Objaverse object renders
+  source paper-generated 86,400 spatial images and synthetic temporal arrangements.
+  No What’s Up or Shapes datasets in this paper.

@@ -1,0 +1,46 @@
+{
+  "dataset_id": "tdc2023",
+  "source_url": "https://github.com/centerforaisafety/tdc2023-starter-kit",
+  "revision": "github-f7ddd7d1c7bda82c6609ecfaf1484565d08d754a",
+  "original_files": [
+    {
+      "dataset": "tdc2023",
+      "file": "work/sources/tdc2023/dev_behaviors.json",
+      "url": "https://raw.githubusercontent.com/centerforaisafety/tdc2023-starter-kit/f7ddd7d1c7bda82c6609ecfaf1484565d08d754a/red_teaming/data/dev/behaviors.json",
+      "bytes": 4080,
+      "sha256": "9392c63ad0193f0510f33812593f0dc71d13ae8b2ad93f64d670e9795deee1b0"
+    },
+    {
+      "dataset": "tdc2023",
+      "file": "work/sources/tdc2023/test_behaviors.json",
+      "url": "https://raw.githubusercontent.com/centerforaisafety/tdc2023-starter-kit/f7ddd7d1c7bda82c6609ecfaf1484565d08d754a/red_teaming/data/test/behaviors.json",
+      "bytes": 3740,
+      "sha256": "c4a630921005fd5e26dfe22dd720e411c8e7866c96f5b1a0ca2d46f0e1d1f8c2"
+    }
+  ],
+  "derivation_script": "work/sources/prepare_text_batch.py",
+  "derived": {
+    "path": "work/sources/tdc2023/records.jsonl",
+    "bytes": 13980,
+    "sha256": "35a6f471e530df41c2b53bb70ce27c10e7e36c6ffed26d3ce645cf875ea0b74a",
+    "rows": 100
+  },
+  "preview_pack": "work/packs/tdc2023/pack.json",
+  "rights_decision": "metadata_only; original content and media remain local pending review",
+  "scope_note": "The TDC 2023 red-teaming starter kit's 50 dev and 50 test behavior strings. This is the public behavior list, not gated challenge models or the citing paper's selected prompts.",
+  "preview_sha256": "7bdc277e0f75734efebf539514113a752d1ba8a534df8b8547e6a15fc9b375a1",
+  "preview_records": 100,
+  "preview_sampling": {
+    "method": "source_order",
+    "unit": "example",
+    "population": "The TDC 2023 red-teaming starter kit's 50 dev and 50 test behavior strings. This is the public behavior list, not gated challenge models or the citing paper's selected prompts.",
+    "offset": 0,
+    "requested_count": 100,
+    "returned_count": 100,
+    "next_cursor": null,
+    "source_revision": "github-f7ddd7d1c7bda82c6609ecfaf1484565d08d754a",
+    "bytes_read": 14580,
+    "warnings": [],
+    "selection_note": ""
+  }
+}

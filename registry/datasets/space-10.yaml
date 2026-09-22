@@ -1,0 +1,62 @@
+schema_version: '1.0'
+id: space-10
+name: Space-10
+aliases: []
+description: SpaCE-10 2D QA benchmark, related-work citation. Original project https://github.com/VisionXLab/SpaCE-10
+  links public 2D QA release revision efd7316ef37efb0fe9a858cc74ef2b2f772a8cda; 3D scan/snapshot artifacts
+  are marked forthcoming.
+paper_ids:
+- paper-20de77d4e60fd1bd
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: partial_public_2d_only
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Only the 2D QA release is public; 3D media release is forthcoming.
+  - Public data/media reuse rights require separate review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://huggingface.co/datasets/Cusyoung/SpaCE-10
+  note: HF metadata says MIT for released 2D QA; inspect per-media provenance before public preview.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-86d2b0d1424baec5d44a
+  paper_id: paper-20de77d4e60fd1bd
+  source_file_hash: ccc6f6fee4214f0656c164535cbe29f1cbbce5769b311c93f08e1110437f29e0
+  page: 8
+  role: related-work comparison
+  excerpt: tasks. OmniSpatial (Jia et al., 2025) and Space-10 (Gong Gemini-2.5-pro 0.1 40.50 40.42 30.05
+    30.05 Gemini-2.5-pro 0.8 40.42 38.74 29.55
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://huggingface.co/datasets/Cusyoung/SpaCE-10
+  note: Original project https://github.com/VisionXLab/SpaCE-10 links public 2D QA release revision efd7316ef37efb0fe9a858cc74ef2b2f772a8cda;
+    3D scan/snapshot artifacts are marked forthcoming.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: partial_author_release_located
+- kind: source_audit_rights
+  url: https://huggingface.co/datasets/Cusyoung/SpaCE-10
+  note: HF metadata says MIT for released 2D QA; inspect per-media provenance before public preview.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: partial_author_release_located
+- kind: source_audit_access
+  url: https://huggingface.co/datasets/Cusyoung/SpaCE-10
+  note: partial_public_2d_only; Survey related-work only; never label forthcoming 3D assets as released.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: partial_author_release_located
+source_url: https://huggingface.co/datasets/Cusyoung/SpaCE-10

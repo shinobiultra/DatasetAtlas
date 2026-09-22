@@ -1,0 +1,544 @@
+{
+  "pack": {
+    "schema_version": "1.0",
+    "dataset": {
+      "schema_version": "1.0",
+      "id": "synthetic-parity",
+      "name": "Synthetic parity fixture",
+      "aliases": [],
+      "description": "",
+      "tasks": [],
+      "modalities": [],
+      "labels": [],
+      "paper_ids": [],
+      "source_url": null,
+      "release": "unresolved",
+      "snapshot_id": "synthetic-v1",
+      "adapter": "structured",
+      "adapter_config": {},
+      "coverage": {
+        "identity": "candidate",
+        "source": "missing",
+        "access": "unavailable",
+        "adapter": "not_started",
+        "preview": "none",
+        "complete_data": "unimplemented",
+        "publication": "not_reviewed",
+        "preview_count": 0,
+        "total_count": null,
+        "unit": "example",
+        "blockers": []
+      },
+      "rights": {},
+      "relationships": [],
+      "evidence": []
+    },
+    "fields": [
+      {
+        "id": "source.group",
+        "name": "group",
+        "dtype": "category",
+        "namespace": "source",
+        "unit": "example",
+        "description": "",
+        "provenance": {},
+        "query_ops": [
+          "eq",
+          "ne",
+          "in",
+          "contains",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "is_null"
+        ]
+      },
+      {
+        "id": "source.score",
+        "name": "score",
+        "dtype": "number",
+        "namespace": "source",
+        "unit": "example",
+        "description": "",
+        "provenance": {},
+        "query_ops": [
+          "eq",
+          "ne",
+          "in",
+          "contains",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "is_null"
+        ]
+      },
+      {
+        "id": "source.meta.key",
+        "name": "meta.key",
+        "dtype": "string",
+        "namespace": "source",
+        "unit": "example",
+        "description": "",
+        "provenance": {},
+        "query_ops": [
+          "eq",
+          "ne",
+          "in",
+          "contains",
+          "gt",
+          "gte",
+          "lt",
+          "lte",
+          "is_null"
+        ]
+      }
+    ],
+    "records": [
+      {
+        "schema_version": "1.0",
+        "id": "α-1",
+        "dataset_id": "synthetic-parity",
+        "release_id": "fixture-v1",
+        "snapshot_id": "synthetic-v1",
+        "unit": "example",
+        "asset_ids": [],
+        "assets": [
+          {
+            "id": "a-1",
+            "dataset_id": "synthetic-parity",
+            "release_id": "fixture-v1",
+            "modality": "image",
+            "uri": null,
+            "text": null,
+            "representation": "original",
+            "sha256": null,
+            "metadata": {
+              "asset_group": "A"
+            }
+          }
+        ],
+        "text": null,
+        "question": "First blue cube",
+        "choices": [],
+        "conversation": [],
+        "source": {
+          "group": "A",
+          "score": 1,
+          "meta.key": "North"
+        },
+        "prediction": {},
+        "human": {},
+        "annotations": [],
+        "relations": []
+      },
+      {
+        "schema_version": "1.0",
+        "id": "β-2",
+        "dataset_id": "synthetic-parity",
+        "release_id": "fixture-v1",
+        "snapshot_id": "synthetic-v1",
+        "unit": "example",
+        "asset_ids": [],
+        "assets": [
+          {
+            "id": "a-1",
+            "dataset_id": "synthetic-parity",
+            "release_id": "fixture-v1",
+            "modality": "image",
+            "uri": null,
+            "text": null,
+            "representation": "original",
+            "sha256": null,
+            "metadata": {
+              "asset_group": "B"
+            }
+          }
+        ],
+        "text": null,
+        "question": "Second red sphere",
+        "choices": [],
+        "conversation": [],
+        "source": {
+          "group": "B",
+          "score": 3,
+          "meta.key": "South"
+        },
+        "prediction": {},
+        "human": {},
+        "annotations": [],
+        "relations": []
+      },
+      {
+        "schema_version": "1.0",
+        "id": "r-3",
+        "dataset_id": "synthetic-parity",
+        "release_id": "fixture-v1",
+        "snapshot_id": "synthetic-v1",
+        "unit": "example",
+        "asset_ids": [],
+        "assets": [
+          {
+            "id": "a-3",
+            "dataset_id": "synthetic-parity",
+            "release_id": "fixture-v1",
+            "modality": "image",
+            "uri": null,
+            "text": null,
+            "representation": "original",
+            "sha256": null,
+            "metadata": {
+              "asset_group": "A"
+            }
+          }
+        ],
+        "text": null,
+        "question": "Third blue sphere",
+        "choices": [],
+        "conversation": [],
+        "source": {
+          "group": "A",
+          "score": null,
+          "meta.key": "North"
+        },
+        "prediction": {},
+        "human": {},
+        "annotations": [],
+        "relations": []
+      },
+      {
+        "schema_version": "1.0",
+        "id": "r-4",
+        "dataset_id": "synthetic-parity",
+        "release_id": "fixture-v1",
+        "snapshot_id": "synthetic-v1",
+        "unit": "example",
+        "asset_ids": [],
+        "assets": [
+          {
+            "id": "a-4",
+            "dataset_id": "synthetic-parity",
+            "release_id": "fixture-v1",
+            "modality": "image",
+            "uri": null,
+            "text": null,
+            "representation": "original",
+            "sha256": null,
+            "metadata": {
+              "asset_group": "B"
+            }
+          }
+        ],
+        "text": null,
+        "question": "Fourth green cube",
+        "choices": [],
+        "conversation": [],
+        "source": {
+          "group": "B",
+          "score": 2,
+          "meta.key": "East"
+        },
+        "prediction": {},
+        "human": {},
+        "annotations": [],
+        "relations": []
+      },
+      {
+        "schema_version": "1.0",
+        "id": "r-5",
+        "dataset_id": "synthetic-parity",
+        "release_id": "fixture-v1",
+        "snapshot_id": "synthetic-v1",
+        "unit": "example",
+        "asset_ids": [],
+        "assets": [
+          {
+            "id": "a-5",
+            "dataset_id": "synthetic-parity",
+            "release_id": "fixture-v1",
+            "modality": "image",
+            "uri": null,
+            "text": null,
+            "representation": "original",
+            "sha256": null,
+            "metadata": {
+              "asset_group": "A"
+            }
+          }
+        ],
+        "text": null,
+        "question": "Fifth blue block",
+        "choices": [],
+        "conversation": [],
+        "source": {
+          "group": "A",
+          "score": 3,
+          "meta.key": null
+        },
+        "prediction": {},
+        "human": {},
+        "annotations": [],
+        "relations": []
+      },
+      {
+        "schema_version": "1.0",
+        "id": "r-6",
+        "dataset_id": "synthetic-parity",
+        "release_id": "fixture-v1",
+        "snapshot_id": "synthetic-v1",
+        "unit": "example",
+        "asset_ids": [],
+        "assets": [
+          {
+            "id": "a-6",
+            "dataset_id": "synthetic-parity",
+            "release_id": "fixture-v1",
+            "modality": "image",
+            "uri": null,
+            "text": null,
+            "representation": "original",
+            "sha256": null,
+            "metadata": {
+              "asset_group": "B"
+            }
+          }
+        ],
+        "text": null,
+        "question": "Sixth yellow block",
+        "choices": [],
+        "conversation": [],
+        "source": {
+          "group": "B",
+          "score": 0,
+          "meta.key": "East"
+        },
+        "prediction": {},
+        "human": {},
+        "annotations": [],
+        "relations": []
+      }
+    ],
+    "artifacts": [],
+    "population_scope": "preview",
+    "sampling": {},
+    "checksums": {}
+  },
+  "cases": {
+    "base": {
+      "query": {
+        "snapshot_id": "synthetic-v1",
+        "unit": "example",
+        "filter": null,
+        "search": "",
+        "sort": [],
+        "limit": 3,
+        "cursor": null,
+        "sample": null
+      },
+      "ids": [
+        "α-1",
+        "β-2",
+        "r-3"
+      ],
+      "matched_count": 6
+    },
+    "search": {
+      "query": {
+        "snapshot_id": "synthetic-v1",
+        "unit": "example",
+        "filter": null,
+        "search": "BLUE",
+        "sort": [],
+        "limit": 100,
+        "cursor": null,
+        "sample": null
+      },
+      "ids": [
+        "α-1",
+        "r-3",
+        "r-5"
+      ],
+      "matched_count": 3
+    },
+    "eq_dotted": {
+      "query": {
+        "snapshot_id": "synthetic-v1",
+        "unit": "example",
+        "filter": {
+          "field_id": "source.meta.key",
+          "op": "eq",
+          "value": "East"
+        },
+        "search": "",
+        "sort": [],
+        "limit": 100,
+        "cursor": null,
+        "sample": null
+      },
+      "ids": [
+        "r-4",
+        "r-6"
+      ],
+      "matched_count": 2
+    },
+    "ne_null": {
+      "query": {
+        "snapshot_id": "synthetic-v1",
+        "unit": "example",
+        "filter": {
+          "field_id": "source.score",
+          "op": "ne",
+          "value": 1
+        },
+        "search": "",
+        "sort": [],
+        "limit": 100,
+        "cursor": null,
+        "sample": null
+      },
+      "ids": [
+        "β-2",
+        "r-4",
+        "r-5",
+        "r-6"
+      ],
+      "matched_count": 4
+    },
+    "is_null": {
+      "query": {
+        "snapshot_id": "synthetic-v1",
+        "unit": "example",
+        "filter": {
+          "field_id": "source.score",
+          "op": "is_null",
+          "value": true
+        },
+        "search": "",
+        "sort": [],
+        "limit": 100,
+        "cursor": null,
+        "sample": null
+      },
+      "ids": [
+        "r-3"
+      ],
+      "matched_count": 1
+    },
+    "contains": {
+      "query": {
+        "snapshot_id": "synthetic-v1",
+        "unit": "example",
+        "filter": {
+          "field_id": "source.meta.key",
+          "op": "contains",
+          "value": "north"
+        },
+        "search": "",
+        "sort": [],
+        "limit": 100,
+        "cursor": null,
+        "sample": null
+      },
+      "ids": [
+        "α-1",
+        "r-3"
+      ],
+      "matched_count": 2
+    },
+    "sort_null_last": {
+      "query": {
+        "snapshot_id": "synthetic-v1",
+        "unit": "example",
+        "filter": null,
+        "search": "",
+        "sort": [
+          {
+            "field_id": "source.score",
+            "direction": "desc"
+          }
+        ],
+        "limit": 100,
+        "cursor": null,
+        "sample": null
+      },
+      "ids": [
+        "r-5",
+        "β-2",
+        "r-4",
+        "α-1",
+        "r-6",
+        "r-3"
+      ],
+      "matched_count": 6
+    },
+    "random": {
+      "query": {
+        "snapshot_id": "synthetic-v1",
+        "unit": "example",
+        "filter": null,
+        "search": "",
+        "sort": [],
+        "limit": 100,
+        "cursor": null,
+        "sample": {
+          "method": "random",
+          "size": 4,
+          "seed": 42
+        }
+      },
+      "ids": [
+        "β-2",
+        "r-3",
+        "r-6",
+        "r-4"
+      ],
+      "matched_count": 6
+    },
+    "stratified": {
+      "query": {
+        "snapshot_id": "synthetic-v1",
+        "unit": "example",
+        "filter": null,
+        "search": "",
+        "sort": [],
+        "limit": 100,
+        "cursor": null,
+        "sample": {
+          "method": "stratified",
+          "size": 5,
+          "seed": 5,
+          "field_id": "source.group"
+        }
+      },
+      "ids": [
+        "α-1",
+        "β-2",
+        "r-3",
+        "r-6",
+        "r-5"
+      ],
+      "matched_count": 6
+    },
+    "asset": {
+      "query": {
+        "snapshot_id": "synthetic-v1",
+        "unit": "asset",
+        "filter": null,
+        "search": "",
+        "sort": [],
+        "limit": 100,
+        "cursor": null,
+        "sample": null
+      },
+      "ids": [
+        "a-1",
+        "a-3",
+        "a-4",
+        "a-5",
+        "a-6"
+      ],
+      "matched_count": 5
+    }
+  }
+}

@@ -1,0 +1,62 @@
+schema_version: '1.0'
+id: artbench-2
+name: Artbench-2
+aliases: []
+description: 'D-TRAK paper-specific two-style subset of ArtBench-10, not a separate ArtBench release.
+  Source review: ICLR 2024 D-TRAK; exact sample seed/ID manifest not established'
+paper_ids:
+- paper-25eaa8c74ce76800
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: unverified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Access to the exact data files has not been verified.
+  - The exact paper release, source variant, or derived collection remains unresolved.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  note: ArtBench paper states Fair Use license; source artworks are not blanket redistributable
+  source: https://github.com/liaopeiyuan/artbench
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-8fce9c6aab9384b8b2e4
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: Artbench-2 (Jha et al., 2024) CLIP —
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://sail-sg.github.io/D-TRAK/
+  note: D-TRAK paper-specific two-style subset of ArtBench-10, not a separate ArtBench release ICLR 2024
+    D-TRAK; exact sample seed/ID manifest not established
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: derived_subset_identity_partly_resolved
+- kind: source_audit_access
+  url: https://sail-sg.github.io/D-TRAK/
+  note: 'ArtBench author provides 256px and other variants; paper-specific 5,000-per-style selection requires
+    reproduction Probe: first_primary_url_http_head_200; payload_not_downloaded'
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: derived_subset_identity_partly_resolved
+- kind: source_audit_rights
+  url: https://github.com/liaopeiyuan/artbench
+  note: ArtBench paper states Fair Use license; source artworks are not blanket redistributable
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: derived_subset_identity_partly_resolved
+source_url: https://sail-sg.github.io/D-TRAK/

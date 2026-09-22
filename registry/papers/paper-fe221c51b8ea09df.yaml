@@ -1,0 +1,43 @@
+schema_version: 1.0.0
+paper_id: paper-fe221c51b8ea09df
+title: Explorations of Self-Repair in Language Models
+authors:
+- Rushing, Cody
+- Nanda, Neel
+year: '2024'
+doi: 10.48550/arXiv.2402.15390
+url: http://arxiv.org/abs/2402.15390
+outcome: processed
+human_review_complete: false
+candidate_mention_count: 16
+sources:
+- relative_path: files/35320/2402.html
+  type: html
+  sha256: fa386b202ff395d9dc2c485a9b3d4925c25aaa683db0601eb07def9dd34aec8c
+  page_count: null
+  extraction_quality:
+    pages_total: 1
+    pages_low_text: 1
+    characters: 0
+    status: low
+  processing_status: extracted
+- relative_path: files/35321/Rushing and Nanda - 2024 - Explorations of Self-Repair
+    in Language Models.pdf
+  type: pdf
+  sha256: d63dc008b2ef7206bb605d16b0b4ab6a7559f9693454285d0cd09b29ba4eb50c
+  page_count: 17
+  extraction_quality:
+    pages_total: 17
+    pages_low_text: 8
+    characters: 130189
+    status: usable
+  processing_status: extracted
+mention_inventory_review_complete: true
+reviewer_kind: agent
+review_method: full_pdf_page_text_appendix_table_caption_bibliography_agent_audit
+reviewed_at: '2026-09-22T03:27:40.839347+00:00'
+reviewed_pages: 17
+reviewed_versions:
+- d63dc008b2ef7206
+review_note: The Pile is sole direct analysis source and Pythia training lineage;
+  Counterfact/IOI are prior-work settings.

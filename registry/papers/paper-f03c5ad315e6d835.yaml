@@ -1,0 +1,48 @@
+schema_version: 1.0.0
+paper_id: paper-f03c5ad315e6d835
+title: Revealing and Reducing Gender Biases in Vision and Language Assistants (VLAs)
+authors:
+- Girrbach, Leander
+- Alaniz, Stephan
+- Huang, Yiran
+- Darrell, Trevor
+- Akata, Zeynep
+year: '2025'
+doi: 10.48550/arXiv.2410.19314
+url: http://arxiv.org/abs/2410.19314
+outcome: processed
+human_review_complete: false
+mention_inventory_review_complete: true
+candidate_mention_count: 123
+sources:
+- relative_path: files/35369/2410.html
+  type: html
+  sha256: e85b496f7493fd9d922bd9fd3bfd1f2d975ce11057cd85a697d59e4c36b7be29
+  page_count: null
+  extraction_quality:
+    pages_total: 1
+    pages_low_text: 1
+    characters: 0
+    status: low
+  processing_status: extracted
+- relative_path: files/35370/Girrbach et al. - 2025 - Revealing and Reducing Gender
+    Biases in Vision and Language Assistants (VLAs).pdf
+  type: pdf
+  sha256: 47431d9340ff27b9234e2184711fbc3fc06ded7718fe53ca79b23a1cd1db777d
+  page_count: 38
+  extraction_quality:
+    pages_total: 38
+    pages_low_text: 7
+    characters: 192487
+    status: usable
+  processing_status: extracted
+reviewer_kind: agent
+review_method: full_pdf_page_text_appendix_table_caption_bibliography_audit
+reviewed_at: '2026-09-22T03:40:07.003156+00:00'
+reviewed_pages: 38
+reviewed_versions:
+- 47431d9340ff27b9
+review_note: All 38 pages checked. Introduced VL-Gender uses FairFace, MIAP, PHASE,
+  PATA and source traits/skills from Google Web 1T and resume corpus. MMBench, MME,
+  MMMU, SEED-Bench-2 and IdenProf are direct supplementary evaluation; derived filtering/mitigation
+  subsets distinct.

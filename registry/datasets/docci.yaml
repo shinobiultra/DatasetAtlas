@@ -1,0 +1,108 @@
+schema_version: '1.0'
+id: docci
+name: DOCCI image descriptions
+aliases:
+- DOCCI
+- Descriptions of Connected and Contrasting Images
+description: Author-hosted DOCCI descriptions and original JPEG images for 14,847 distinct examples
+  across train, test, qual_dev, and qual_test. The optional 155 MB metadata release and separate
+  9.6k AAR image pool are not included.
+paper_ids:
+- paper-25eaa8c74ce76800
+release: docci-author-descriptions-images-c9df4819-c1b1aee0
+adapter: docci
+adapter_config:
+  path: work/sources/docci/docci_descriptions.jsonlines
+  format: jsonl
+  sha256: c9df4819963883af35ddd2cf257949892fd8c6d88b33a012094352df60719800
+  source_url: https://storage.googleapis.com/docci/data/docci_descriptions.jsonlines
+  gcs_generation: '1714384012999810'
+  gcs_etag_md5: 7ed51dae0fed79d33564cd0e5b9c2f11
+  images_archive: work/sources/docci/docci_images.tar.gz
+  images_sha256: c1b1aee00856757d71cfe2cc6ab641089284276a791bfb82146b4742c59a0a1d
+  images_source_url: https://storage.googleapis.com/docci/data/docci_images.tar.gz
+  images_gcs_generation: '1714249456173037'
+  images_gcs_etag_md5: 57493de5075fe508d51e77500748f4da
+  prepared_root: work/sources/docci/prepared
+  preparation_budget_bytes: 20000000000
+  expected_records: 14847
+  mapping:
+    id: example_id
+    text: description
+    media: image_file
+  population: Complete author-hosted DOCCI description and image release, 14,847 pairs
+  fields:
+    example_id:
+      dtype: string
+      description: Original author example ID split_index
+    split:
+      dtype: category
+      description: Original DOCCI split
+      values:
+      - train
+      - test
+      - qual_dev
+      - qual_test
+    image_file:
+      dtype: string
+      description: Original associated JPEG filename in the author image archive
+    description:
+      dtype: string
+      description: Original human-authored long image description
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 14847
+  unit: example
+  blockers:
+  - The separately offered 155 MB metadata and 9.6k AAR image pool are not part of this paired
+    description-image release and have not been acquired.
+rights:
+  records: source_declares_CC_BY_4_0
+  annotations: source_declares_CC_BY_4_0
+  images: source_declares_CC_BY_4_0_local_copy
+  source: https://google.github.io/docci/
+  basis: Author project page states DOCCI annotations and images are licensed CC BY 4.0. This local
+    acquisition contains original descriptions and images; public publication still needs attribution and review.
+  external_provider: local_only
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-cd03d94e376e2fac28d5
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: 2024) PaliGemma-3B-Mix-448 — DOCCI
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://google.github.io/docci/
+  note: 'Google offers descriptions, images, metadata as separate files, with images 7.1 GB. Release:
+    DOCCI 15k annotated images; extra AAR images separate'
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_audit_rights
+  url: https://google.github.io/docci/
+  note: Google states annotations and images CC BY 4.0.
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+source_url: https://google.github.io/docci/
+tasks:
+- image description
+- image-to-text evaluation
+- text-to-image evaluation
+modalities:
+- text
+- image
+labels:
+- split
+- author description
+snapshot_id: docci-pairs-c9df4819-c1b1aee0

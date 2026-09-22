@@ -1,0 +1,170 @@
+schema_version: '1.0'
+id: realtoxicityprompts
+name: RealToxicityPrompts
+aliases: []
+description: 'AllenAI RealToxicityPrompts pinned JSONL: 99,442 prompt/continuation pairs with
+  original Perspective API score dictionaries. This snapshot flags 1,199 rows as challenging;
+  related papers may report a different challenging count, so the source flag and release are
+  shown explicitly. Local preview selects the first 100 flagged rows in source order.'
+paper_ids:
+- paper-12e8bd34b4a2f2a8
+- paper-c12960e5d652fb7f
+- paper-6dbb0d4a7b949143
+- paper-392b0c393c06b48e
+release: hf-f21629712ffd6a3d13a54fd2807ccd521c55ef74
+adapter: https
+adapter_config:
+  path: work/sources/realtoxicityprompts/prompts.jsonl
+  url: https://huggingface.co/datasets/allenai/real-toxicity-prompts/resolve/f21629712ffd6a3d13a54fd2807ccd521c55ef74/prompts.jsonl
+  revision: f21629712ffd6a3d13a54fd2807ccd521c55ef74
+  format: jsonl
+  sha256: 4b6808878edc985fcc6bcb6a2a7239a0fb05420cb495f1f6ca1450da5e35c163
+  population: Official allenai prompts.jsonl, 99,442 rows; 1,199 challenging=true in this pinned
+    file
+  mapping:
+    text: prompt.text
+  fields:
+    challenging:
+      dtype: boolean
+      description: Original challenging subset flag; 1,199 true in this source snapshot
+    prompt:
+      dtype: object
+      description: Original prompt text and Perspective API attribute scores
+    continuation:
+      dtype: object
+      description: Original continuation text and Perspective API attribute scores
+    filename:
+      dtype: string
+      description: Original source document identifier, not a local path
+    begin:
+      dtype: number
+      description: Original document begin offset
+    end:
+      dtype: number
+      description: Original document end offset
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 99442
+  unit: example
+  blockers:
+  - Original text comes from web documents and the dataset card license statement does not independently
+    settle underlying text redistribution or sensitive-content review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_applicable
+  external_provider: local_only
+  source: https://huggingface.co/datasets/allenai/real-toxicity-prompts
+  note: Dataset card lists Apache 2.0 but the prompts are web text; public redistribution is
+    withheld pending rights and sensitive-content review.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-231c54a73e049ef96a75
+  paper_id: paper-12e8bd34b4a2f2a8
+  source_file_hash: e651ef9944539b513a21a8b7a1b5a62f88b7355a6cce81fde112f57c96c28cf7
+  page: 7
+  role: evaluation
+  excerpt: sifier. These outputs were generated on the ‘challenging’ subset from RealToxicityPrompts.
+    ‘Any’ indicates the text shows at least one of the six toxic attributes. ‘adv.image‘ denotes
+    our visual atta
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-43769c8d590d67461aa4
+  paper_id: paper-c12960e5d652fb7f
+  source_file_hash: 5b9c5f170ae4dd61a249182d5245b9c3c2f9380354abf3c28723f1e4add82cb7
+  page: 5
+  role: evaluation
+  excerpt: erturba- tion rates. Additionally, we scaled our evaluation using the RealToxicityPrompts
+    benchmark [21]. Following [9] and [29], we used the challenging subset containing 1,225
+    text prompts designed to trigge
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-ac67340d36b5251a2f73
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 15
+  role: evaluation
+  excerpt: th harmful F. Robustness Against Black-Box Jailbreak prompts from the RealToxicityPrompts
+    dataset (Gehman Attacks et al., 2020). This dataset comprises approximately 1,200 In this
+    section, we evaluat
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-56e1bb087e533b4b4bff
+  paper_id: paper-392b0c393c06b48e
+  source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
+  page: 30
+  role: evaluation
+  excerpt: combines adversarially perturbed images with harmful prompts from the RealToxicityPrompts
+    dataset [14]. This dataset comprises approximately 1,200 toxic in- structions specifically
+    designed to elicit
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-fbc410b42a43290cc486
+  paper_id: paper-c12960e5d652fb7f
+  source_file_hash: 5b9c5f170ae4dd61a249182d5245b9c3c2f9380354abf3c28723f1e4add82cb7
+  page: 5
+  role: evaluation
+  excerpt: g the RealToxicityPrompts benchmark [21]. Following [9] and [29], we used the cha
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-8d272bf5e152668c6f6d
+  paper_id: paper-392b0c393c06b48e
+  source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
+  page: 30
+  role: jailbreak prompt source
+  excerpt: ation protocol combines adversarially perturbed images with harmful prompts from
+    the RealToxicityPrompts dataset [14]. This dataset comprises approximately 1,200 toxic in-
+    structions specifically designed to elicit harmful r
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-94be13bea173ea4ab88a
+  paper_id: paper-12e8bd34b4a2f2a8
+  source_file_hash: e651ef9944539b513a21a8b7a1b5a62f88b7355a6cce81fde112f57c96c28cf7
+  page: 7
+  role: automated evaluation
+  excerpt: d Detoxify Classifier. These outputs were generated on the ‘challenging’ subset from
+    RealToxicityPrompts. ‘Any’ indicates the text shows at least one of the six toxic attributes.
+    ‘adv.image‘ denotes our visual attacks, and ‘adv.t
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-fd562465b99e2a19abdc
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 15
+  role: toxicity evaluation
+  excerpt: ith harmful F. Robustness Against Black-Box Jailbreak prompts from the RealToxicityPrompts
+    dataset (Gehman Attacks et al., 2020). This dataset comprises approximately 1,200 In this
+    secti
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_release
+  url: https://huggingface.co/datasets/allenai/real-toxicity-prompts/tree/f21629712ffd6a3d13a54fd2807ccd521c55ef74
+  note: Author-associated public JSONL pinned to commit; 67,690,996 bytes and SHA-256 4b6808878edc985fcc6bcb6a2a7239a0fb05420cb495f1f6ca1450da5e35c163.
+- kind: source_schema
+  url: https://huggingface.co/datasets/allenai/real-toxicity-prompts/blob/f21629712ffd6a3d13a54fd2807ccd521c55ef74/README.md
+  note: Card describes original prompt/continuation objects, scores from Perspective API, and
+    web-text origin.
+tasks:
+- toxicity evaluation
+- language generation
+modalities:
+- text
+labels:
+- challenging
+- Perspective API toxicity attributes
+source_url: https://huggingface.co/datasets/allenai/real-toxicity-prompts
+snapshot_id: hf-allenai-real-toxicity-prompts-f21629712ffd6a3d13a54fd2807ccd521c55ef74-4b680887

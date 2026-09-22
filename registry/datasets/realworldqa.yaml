@@ -1,0 +1,108 @@
+schema_version: '1.0'
+id: realworldqa
+name: RealWorldQA
+aliases: []
+description: All 765 author image/question/answer rows from two pinned Parquet shards.
+  Original image bytes retained; local consolidation only adds exact source shard
+  and row provenance. Questions retain their original inline options.
+paper_ids:
+- paper-80b7ba2e277a20c5
+release: hf-17e7f75e092e47169732462ea3cdfebe911105dd
+adapter: embedded_parquet
+adapter_config:
+  path: work/sources/realworldqa/records.parquet
+  format: parquet
+  sha256: 5bd73bce6736e24756f186fab66c1606c5cf8654cf22bbaffe3eee55cc52d497
+  mapping:
+    id: source_id
+    media: image
+    question: question
+  fields:
+    answer:
+      dtype: string
+    source_shard:
+      dtype: category
+    source_row:
+      dtype: number
+    image:
+      dtype: object
+      description: Original embedded image metadata; binary pixels stay outside JSON
+        records
+  media_columns:
+  - image
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  unit: example
+  blockers:
+  - Public media redistribution has not been approved; local original media is available.
+  total_count: 765
+rights:
+  records: CC-BY-ND-4.0
+  annotations: not_reviewed
+  images: not_reviewed
+  external_provider: local_only
+  source: https://huggingface.co/datasets/xai-org/RealworldQA/tree/17e7f75e092e47169732462ea3cdfebe911105dd
+  basis: Author dataset card specifies CC BY-ND 4.0. No public image approval; original
+    embedded bytes remain unchanged in local browsing.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-7320a0f27f28b1cec4b1
+  paper_id: paper-80b7ba2e277a20c5
+  source_file_hash: 1b014c3d1e86a39f1c6a88d4e9b79c99df2e06c5c7c31bea224aa5da2ae0c46d
+  page: 7
+  role: out-of-domain evaluation
+  excerpt: 'ce scale coverage. (VQA) tasks: SimpleVQA [8], MMStar [7], and RealWorldQA
+    [30].'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://huggingface.co/datasets/xai-org/RealworldQA/tree/17e7f75e092e47169732462ea3cdfebe911105dd
+  note: xAI RealWorldQA 765 image-question-answer evaluation items
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: https://huggingface.co/datasets/xai-org/RealworldQA/tree/17e7f75e092e47169732462ea3cdfebe911105dd
+  note: author HF commit 17e7f75e092e47169732462ea3cdfebe911105dd
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://huggingface.co/datasets/xai-org/RealworldQA/tree/17e7f75e092e47169732462ea3cdfebe911105dd
+  note: Author HF Parquet directly accessible, repository lists about 678 MB total;
+    file content not fetched here.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+  probe: hf_tree_metadata_only
+- kind: source_audit_rights
+  url: https://huggingface.co/datasets/xai-org/RealworldQA/blob/17e7f75e092e47169732462ea3cdfebe911105dd/README.md
+  note: Author card labels dataset CC BY-ND 4.0; preserve no-derivatives constraint
+    and separately inspect original image source/attribution before publishing media.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: verified_source_acquisition
+  checked_at: '2026-09-22'
+  source_url: https://huggingface.co/datasets/xai-org/RealworldQA/tree/17e7f75e092e47169732462ea3cdfebe911105dd
+  source_shards_sha256:
+  - 2cf29e308a34e0255f23520796fc04445a01b8baab18686f1a4b3c3943f695b2
+  - dac5b9f7cfb947a4865ea3424abfbdb3449d09e0a0b911a787cdc930cefefdc0
+  source_rows: 765
+  scope: All 765 author image/question/answer rows from two pinned Parquet shards.
+    Original image bytes retained; local consolidation only adds exact source shard
+    and row provenance. Questions retain their original inline options.
+source_url: https://huggingface.co/datasets/xai-org/RealworldQA/tree/17e7f75e092e47169732462ea3cdfebe911105dd
+snapshot_id: realworldqa-5bd73bce6736e24756f186fab66c1606c5cf8654cf22bbaffe3eee55cc52d497
+modalities:
+- image
+- text
+tasks:
+- visual question answering

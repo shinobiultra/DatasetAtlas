@@ -1,0 +1,71 @@
+schema_version: '1.0'
+id: visual6502-transistor-netlist
+name: Visual6502 transistor netlist
+aliases: []
+description: Visual6502 transistor netlist used for 6507 simulation.
+paper_ids:
+- paper-ad50206beabc5a94
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Exact paper-specific source release or selected subset remains unverified; source
+    research alone does not resolve this candidate.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/trebonian/visual6502
+  note: Visual6502 README warns licenses/copyright vary by file
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-55152c812c6e129daaa9
+  paper_id: paper-ad50206beabc5a94
+  source_file_hash: 9aa4f4db91746959b880843c05b3d3f5a62b75cba5bfc903d6581bb2ae3c81f6
+  page: 2
+  role: source data
+  excerpt: '[10] for a comprehensive review). The Visual6502 team reverse-engineered
+    the 6507 from physical integrated circuits [11] by ch'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/trebonian/visual6502
+  note: Visual6502 transistor netlist used for 6507 simulation
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_project_identified_exact_netlist_unresolved
+- kind: source_audit_release
+  url: https://github.com/trebonian/visual6502
+  note: Paper p2 cites transistor-accurate 6507 netlist, 3,510 transistors; public
+    Visual6502 repo has transdefs.js/segdefs.js but README labels 6502 revD, so exact
+    paper input file is unresolved
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_project_identified_exact_netlist_unresolved
+- kind: source_audit_access
+  url: https://github.com/trebonian/visual6502
+  observation: public_project_file_identity_unresolved
+  requires_external_access_step: null
+  download_or_media_inspected: false
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_project_identified_exact_netlist_unresolved
+- kind: source_audit_rights
+  url: https://github.com/trebonian/visual6502
+  note: Visual6502 README warns licenses/copyright vary by file
+  publication_decision: media_not_approved
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_project_identified_exact_netlist_unresolved
+source_url: https://github.com/trebonian/visual6502

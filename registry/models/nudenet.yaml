@@ -1,0 +1,10 @@
+id: nudenet
+revision: user_supplied_local_model_sha256
+source: https://github.com/notAI-tech/NudeNet
+modality: image
+local_only: true
+package_version: 3.4.2
+weight_sha256: c15d8273adad2d0a92f014cc69ab2d6c311a06777a55545f2c4eb46f51911f0f
+weight_source: bundled_320n.onnx
+evidence: reports/analysis-demo-clevr-100.json
+status: local_selection_verified_2026-09-22

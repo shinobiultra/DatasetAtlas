@@ -1,0 +1,73 @@
+schema_version: '1.0'
+id: gvil-paired-illusion-images
+name: GVIL paired illusion images
+aliases: []
+description: GVIL paired illusion/no-illusion benchmark.
+paper_ids:
+- paper-b039401c04ff9b91
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Exact paper-specific source release or selected subset remains unverified; source
+    research alone does not resolve this candidate.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/vl-illusion/GVIL
+  note: No explicit media redistribution license verified in the inspected author
+    repository
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-54ba8ca708eb0ba4043f
+  paper_id: paper-b039401c04ff9b91
+  source_file_hash: e41b2b1aeae1227613483fdda368f89c4f56fa1c45abadd8e41569b0ed672442
+  page: 4
+  role: derived collection
+  excerpt: ure 3, each question The statistics of our dataset is shown in Table 2.
+    concerns a pair of images (IMG1 and IMG2). One Note that since this dataset is
+    only used for the eval- image (IMG1) is illusion-free where two objects ua
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/vl-illusion/GVIL
+  note: GVIL paired illusion/no-illusion benchmark
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_identified_variant_unpinned
+- kind: source_audit_release
+  url: https://github.com/vl-illusion/GVIL
+  note: Original authors host GVIL data; paper p4 describes paired IMG1 illusion-free
+    and IMG2 illusion-induced protocol, not two independent datasets
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_identified_variant_unpinned
+- kind: source_audit_access
+  url: https://github.com/vl-illusion/GVIL
+  observation: author_repo_data
+  requires_external_access_step: null
+  download_or_media_inspected: false
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_identified_variant_unpinned
+- kind: source_audit_rights
+  url: https://github.com/vl-illusion/GVIL
+  note: No explicit media redistribution license verified in the inspected author
+    repository
+  publication_decision: media_not_approved
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_identified_variant_unpinned
+source_url: https://github.com/vl-illusion/GVIL

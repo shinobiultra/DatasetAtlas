@@ -1,0 +1,39 @@
+schema_version: 1.0.0
+paper_id: paper-a291f2908480a2f8
+title: On Evaluating Adversarial Robustness of Large Vision-Language Models
+authors:
+- Zhao, Yunqing
+- Pang, Tianyu
+- Du, Chao
+- Yang, Xiao
+- Li, Chongxuan
+- Cheung, Ngai-Man
+- Lin, Min
+year: '2023'
+doi: 10.48550/arXiv.2305.16934
+url: http://arxiv.org/abs/2305.16934
+outcome: processed
+human_review_complete: false
+candidate_mention_count: 51
+sources:
+- relative_path: files/34763/Zhao et al. - 2023 - On Evaluating Adversarial Robustness
+    of Large Vision-Language Models.pdf
+  type: pdf
+  sha256: 7530ebbc6bf29d83834d772db462efec8fcc11a79c323331acc9f4066023f70b
+  page_count: 28
+  extraction_quality:
+    pages_total: 28
+    pages_low_text: 4
+    characters: 168902
+    status: usable
+  processing_status: extracted
+mention_inventory_review_complete: true
+reviewer_kind: agent
+review_method: full_pdf_page_text_appendix_table_caption_bibliography_audit
+reviewed_at: '2026-09-22T03:31:55.502810+00:00'
+reviewed_pages: 28
+reviewed_versions:
+- 7530ebbc6bf29d83
+review_note: All 28 pages checked. ImageNet-1K validation images and MS-COCO captions
+  are direct attack evaluation data; DALL-E images are generated target references.
+  Bibliography-only names excluded.

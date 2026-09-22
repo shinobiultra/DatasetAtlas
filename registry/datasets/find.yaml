@@ -1,0 +1,73 @@
+schema_version: '1.0'
+id: find
+name: FIND
+aliases: []
+description: 'FIND Function Interpretation and Description benchmark; functions are executable Python,
+  not passive records. Source review: Author Zenodo record 8034162 and author repository; exact archive
+  digest unverified'
+paper_ids:
+- paper-d098a79f00c8b2b5
+- paper-25eaa8c74ce76800
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  note: Author paper states benchmark/API/metadata MIT and author licensing authority
+  source: https://github.com/multimodal-interpretability/FIND/tree/670d837a27cfd39e82d8eefd82976657f3b46a58
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-1b90fcaa65950475d5f2
+  paper_id: paper-d098a79f00c8b2b5
+  source_file_hash: 9a50cdc6b9f2ba3687339453804acb9519525941198c14d07765aaecbb1436d2
+  page: 64
+  role: bibliography-only reference
+  excerpt: 'y, Shuang Li, Jacob Andreas, David Bau, and Antonio Torralba. FIND: A function description
+    benchmark for evaluating interpretability methods. In Thirty-seventh Conference on Neural Information
+    Processing System'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-7d2e7fc8fe8acc773f1e
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 22
+  role: bibliography-only reference
+  excerpt: 'David Bau, and Antonio Torralba. 2024. Find: A function description benchmark for'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://zenodo.org/records/8034162
+  note: FIND Function Interpretation and Description benchmark; functions are executable Python, not passive
+    records Author Zenodo record 8034162 and author repository; exact archive digest unverified
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://zenodo.org/records/8034162
+  note: 'Dataset obtainable from Zenodo per author paper; no code execution in an Atlas importer Probe:
+    first_primary_url_http_head_200; payload_not_downloaded'
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_rights
+  url: https://github.com/multimodal-interpretability/FIND/tree/670d837a27cfd39e82d8eefd82976657f3b46a58
+  note: Author paper states benchmark/API/metadata MIT and author licensing authority
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://zenodo.org/records/8034162

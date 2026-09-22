@@ -1,0 +1,39 @@
+{
+  "dataset_id": "anthropic-red-teaming-prompts",
+  "source_url": "https://huggingface.co/datasets/Anthropic/hh-rlhf",
+  "revision": "hf-09be8c5bbc57cb3887f3a9732ad6aa7ec602a1fa",
+  "original_files": [
+    {
+      "dataset": "anthropic-red-teaming-prompts",
+      "file": "work/sources/anthropic-red-teaming-prompts/red_team_attempts.jsonl.gz",
+      "url": "https://huggingface.co/datasets/Anthropic/hh-rlhf/resolve/09be8c5bbc57cb3887f3a9732ad6aa7ec602a1fa/red-team-attempts/red_team_attempts.jsonl.gz",
+      "bytes": 15483307,
+      "sha256": "4c7b0069991460f0064f279fd400b51f3f0095697d14d7793c49b0925f80814f"
+    }
+  ],
+  "derivation_script": "work/sources/prepare_text_batch.py",
+  "derived": {
+    "path": "work/sources/anthropic-red-teaming-prompts/records.jsonl",
+    "bytes": 54926769,
+    "sha256": "361e0c67cba0ecc3ac7134bbad25ce28fe49d228fbc7832d58fa7b1370b4a780",
+    "rows": 38961
+  },
+  "preview_pack": "work/packs/anthropic-red-teaming-prompts/pack.json",
+  "rights_decision": "metadata_only; original content and media remain local pending review",
+  "scope_note": "Official Anthropic red-team-attempt transcripts and ratings, not the citing paper's 1,000-response selection. The official gzip is a JSON array despite its jsonl.gz name.",
+  "preview_sha256": "b3501bed7a7bb59525b3709039303d6aed3c86c648b88a375a64c4735c7a189b",
+  "preview_records": 100,
+  "preview_sampling": {
+    "method": "source_order",
+    "unit": "example",
+    "population": "Official Anthropic red-team-attempt transcripts and ratings, not the citing paper's 1,000-response selection. The official gzip is a JSON array despite its jsonl.gz name.",
+    "offset": 0,
+    "requested_count": 100,
+    "returned_count": 100,
+    "next_cursor": "100",
+    "source_revision": "hf-09be8c5bbc57cb3887f3a9732ad6aa7ec602a1fa",
+    "bytes_read": 170503,
+    "warnings": [],
+    "selection_note": ""
+  }
+}

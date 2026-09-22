@@ -1,0 +1,50 @@
+schema_version: '1.0'
+id: visu-text
+name: ViSU-Text
+aliases: []
+description: Author text-only ViSU component. The repository listing exists, but files require a manual
+  institutional application. Unsafe vision images are deliberately not released. No local records were
+  acquired.
+paper_ids:
+- paper-09b2d7393fc75cf7
+source_url: https://huggingface.co/datasets/aimagelab/ViSU-Text/tree/9afabb85b5570fa883b7caa0561d8c8d71d84dcd
+release: hf-9afabb85b5570fa883b7caa0561d8c8d71d84dcd
+snapshot_id: hf-aimagelab-ViSU-Text-9afabb85b5570fa883b7caa0561d8c8d71d84dcd
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: gated
+  adapter: not_started
+  preview: none
+  complete_data: externally_blocked
+  publication: metadata_only
+  preview_count: 0
+  total_count: null
+  unit: example
+  blockers:
+  - Manual author gate requires verified institutional email, detailed use application, and contact sharing.
+  - Unsafe vision images are deliberately withheld by the authors; text files alone cannot provide vision
+    coverage.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://huggingface.co/datasets/aimagelab/ViSU-Text/tree/9afabb85b5570fa883b7caa0561d8c8d71d84dcd
+  note: The manual gate requires noncommercial use declaration and institutional application. Safe COCO
+    photos retain separate rights; unsafe vision images are not released.
+relationships:
+- type: text_component_of
+  target: visu
+  status: verified
+evidence:
+- kind: source_audit_access
+  url: https://huggingface.co/api/datasets/aimagelab/ViSU-Text
+  note: HF API at checked revision reports gated=manual; train/test/validation JSON names are visible
+    but files require institutional author approval.
+  checked_on: '2026-09-22'
+- kind: source_audit_release
+  url: https://huggingface.co/datasets/aimagelab/ViSU-Text/tree/9afabb85b5570fa883b7caa0561d8c8d71d84dcd
+  note: Pinned repository revision; no contents acquired. Unsafe vision portion intentionally unreleased.
+  checked_on: '2026-09-22'

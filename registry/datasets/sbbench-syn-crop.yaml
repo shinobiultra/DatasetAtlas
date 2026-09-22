@@ -1,0 +1,55 @@
+schema_version: '1.0'
+id: sbbench-syn-crop
+name: SBBench-Syn-Crop
+aliases: []
+description: Paper supplement counts match two public HF crop datasets; generic candidate is not one immutable
+  collection.
+paper_ids:
+- paper-32cea5e43d940514
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Exact source variant or paper selection is unresolved.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://huggingface.co/vlmbias
+  note: No license text in dataset cards; public access does not prove publication rights.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-fc4839d2572fa23fb60e
+  paper_id: paper-32cea5e43d940514
+  source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
+  page: 14
+  role: introduced synthetic derivative
+  excerpt: 0.08 1.72 361.15 1.52e+14 0.92 Prompts for SBBench-Syn-Crop Data Con- Prompt Engin. - 0.00
+    316.74 1.22e+13
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://huggingface.co/vlmbias
+  note: 'Paper supplement counts match two public HF crop datasets; generic candidate is not one immutable
+    collection. Release: Author synthetic SBBench crop gender406/age511 distinct configs'
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+- kind: source_audit_rights
+  url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_age_crop_True
+  note: No license text in dataset cards; public access does not prove publication rights.
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+source_url: https://huggingface.co/vlmbias

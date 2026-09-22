@@ -1,0 +1,84 @@
+schema_version: '1.0'
+id: nrc-vad
+name: NRC-VAD
+aliases: []
+description: NRC Valence, Arousal, and Dominance Lexicon.
+paper_ids:
+- paper-164d7c221452ffec
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Official source family identified; exact selected release, preparation and public-use
+    rights still require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://saifmohammad.com/WebPages/nrc-vad.html
+  note: 'Author terms: noncommercial research/education only and no redistribution;
+    commercial license requires author contact'
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-3eed9192a54ee9a34145
+  paper_id: paper-164d7c221452ffec
+  source_file_hash: a89bc42d5e26b03e424ef9aa3ecc43d7857a7ef0deb8c0ede544d5b94aa625d4
+  page: 4
+  role: source data
+  excerpt: ved images OASIS 900 images Valenced images in SC-EAT Valence ratings in
+    retrieved images NRC-VAD Lexicon 20,000 words Valenced Text SC-EAT Valence ratings
+    of retrieved text Group Labels 864 phrases Group-based text in SC-EAT Group rep
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-6936519e87aa848c3328
+  paper_id: paper-164d7c221452ffec
+  source_file_hash: a89bc42d5e26b03e424ef9aa3ecc43d7857a7ef0deb8c0ede544d5b94aa625d4
+  page: 4
+  role: direct lexical source
+  excerpt: 0 images Valenced images in SC-EAT Valence ratings in retrieved images
+    NRC-VAD Lexicon 20,000 words Valenced Text SC-EAT Valence ratings of retrieved
+    text Group Labels
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://saifmohammad.com/WebPages/nrc-vad.html
+  note: NRC Valence, Arousal, and Dominance Lexicon
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: project_identified_release_unpinned
+- kind: source_audit_release
+  url: https://saifmohammad.com/WebPages/nrc-vad.html
+  note: Author site has v1 (~20k words) and v2.1 (2025, >55k); paper says 20,000 words,
+    suggesting v1 but not proving its exact snapshot
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: project_identified_release_unpinned
+- kind: source_audit_access
+  url: https://saifmohammad.com/WebPages/nrc-vad.html
+  observation: author_download
+  requires_external_access_step: null
+  download_or_media_inspected: false
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: project_identified_release_unpinned
+- kind: source_audit_rights
+  url: https://saifmohammad.com/WebPages/nrc-vad.html
+  note: 'Author terms: noncommercial research/education only and no redistribution;
+    commercial license requires author contact'
+  publication_decision: media_not_approved
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: project_identified_release_unpinned
+source_url: https://saifmohammad.com/WebPages/nrc-vad.html

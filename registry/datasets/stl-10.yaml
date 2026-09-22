@@ -1,0 +1,81 @@
+schema_version: '1.0'
+id: stl-10
+name: STL-10
+aliases: []
+description: Original Stanford STL-10 binary distribution with 5,000 labeled training
+  images, 8,000 labeled test images, 100,000 unlabeled images, and ten predefined
+  1,000-example training folds. The local reader preserves original labels and
+  split order and encodes source pixels as lossless PNG only when an image is requested.
+paper_ids:
+- paper-25eaa8c74ce76800
+tasks:
+- image classification
+- semi-supervised image classification
+modalities:
+- image
+labels:
+- original class index 1 through 10
+source_url: https://cs.stanford.edu/~acoates/stl10/
+release: STL-10-original-binary-91f7769d
+snapshot_id: stl10-original-f31fd99273a1acb8
+adapter: stl10
+adapter_config:
+  root: work/sources/stl-10
+  archive_url: https://ai.stanford.edu/~acoates/stl10/stl10_binary.tar.gz
+  archive_sha256: f31fd99273a1acb8609c8db427cebb1de3f71de77758cdc0e22956e1289b9866
+  archive_md5: 91f7769df0f17e558f3565bffb0c7dfb
+  preparation_budget_bytes: 8000000000
+  population: Stanford original STL-10 binary train, test, and unlabeled splits; 113,000 images
+  fields:
+    split:
+      dtype: category
+      description: Original train, test, or unlabeled source split
+      values: [train, test, unlabeled]
+    index:
+      dtype: number
+      description: Zero-based index within the original split
+    label:
+      dtype: number
+      description: Original class index 1 through 10, or null for unlabeled images
+    class_name:
+      dtype: category
+      description: Original class name from class_names.txt, or null for unlabeled images
+      values: [airplane, bird, car, cat, deer, dog, horse, monkey, ship, truck]
+    label_status:
+      dtype: category
+      description: Source labeled or unlabeled
+      values: [source_labeled, unlabeled_by_source]
+    fold_memberships:
+      dtype: array
+      description: Zero-based predefined training fold numbers containing this image
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 113000
+  unit: example
+  blockers:
+  - Public image redistribution rights are not stated on the official Stanford page or in the binary archive; retain media locally pending review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: metadata_only
+  source: https://cs.stanford.edu/~acoates/stl10/
+  basis: The official Stanford page permits source download and asks for citation, but does not provide an explicit redistribution license for the ImageNet-derived images or labels. Local analysis only until rights review.
+  external_provider: local_only
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-826ca68e5403cf735986
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: ) DINO Image Classification ImageNet, STL-10 Network Dissection (Hernandez
+    et al., 2021) ResNet, Gan, AlexNet I
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true

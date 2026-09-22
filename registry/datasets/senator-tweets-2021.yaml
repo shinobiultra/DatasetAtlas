@@ -1,0 +1,62 @@
+schema_version: '1.0'
+id: senator-tweets-2021
+name: senator tweets 2021
+aliases: []
+description: 2021 U.S. senator tweets classifier-training corpus. Paper p8 footnote links this exact author
+  repository; public revision 9e85227220f34246003bdde92d4c2151106d21f6 reports 79,754 train and 19,939
+  test tweets.
+paper_ids:
+- paper-29349603429218b8
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Public data/media reuse rights require separate review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://huggingface.co/datasets/m-newhauser/senator-tweets
+  note: Dataset card has no license field; linked model license is not a data license.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-dcf7baf5e9817e8e7e85
+  paper_id: paper-29349603429218b8
+  source_file_hash: a025d9386684c74fca7aae546e5707d9ec43e808ca9fc3a654154f964d50144f
+  page: 8
+  role: model-training lineage
+  excerpt: e-tuned either an evaluator model or another LLM. We prioritized on the tweets (51.6% Democrat,
+    48.4% Republican)9 made the sentiment meta-objective in Sections 5.4 and 5.5 because by U.S. senators
+    in 2021. of
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://huggingface.co/datasets/m-newhauser/senator-tweets
+  note: Paper p8 footnote links this exact author repository; public revision 9e85227220f34246003bdde92d4c2151106d21f6
+    reports 79,754 train and 19,939 test tweets.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_located
+- kind: source_audit_rights
+  url: https://huggingface.co/datasets/m-newhauser/senator-tweets
+  note: Dataset card has no license field; linked model license is not a data license.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_located
+- kind: source_audit_access
+  url: https://huggingface.co/datasets/m-newhauser/senator-tweets
+  note: public; Training-lineage role only; do not treat tweets as VLM evaluation examples.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_located
+source_url: https://huggingface.co/datasets/m-newhauser/senator-tweets

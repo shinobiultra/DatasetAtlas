@@ -1,0 +1,300 @@
+schema_version: '1.0'
+id: cifar-10
+name: CIFAR-10
+aliases:
+- CIFAR10
+- cifar10
+description: Original CIFAR-10 60,000-image classification release in its documented binary format. The
+  local adapter reads all five training batches and the test batch without deserializing Python pickle.
+  Preview is the first 100 training examples in source order.
+tasks:
+- image classification
+modalities:
+- image
+labels:
+- class_name
+paper_ids:
+- paper-a47845c66d4a3f48
+- paper-1e2474b15fec2d7d
+- paper-f5da3ca03780a203
+- paper-6dbb0d4a7b949143
+- paper-208c53a35b62bc52
+- paper-78a318ad1ec346ef
+- paper-a2c6dc42af089fd5
+- paper-63c3bd849356e00f
+- paper-b8a3bbfe3c7eefff
+- paper-d0229a9d15fd6b77
+- paper-f7fa96d778a8d649
+- paper-3e0db9c633ab204c
+- paper-ed38cc9d6f4b163c
+- paper-25eaa8c74ce76800
+- paper-392b0c393c06b48e
+source_url: https://www.cs.toronto.edu/~kriz/cifar.html
+release: cifar-10-original-binary
+snapshot_id: cifar-10-binary-sha256-c4a38c50a1bc5f3a1c5537f2155ab9d68f9f25eb1ed8d9ddda3db29a59bca1dd
+adapter: cifar_binary
+adapter_config:
+  archive: work/sources/cifar-10/cifar-10-binary.tar.gz
+  archive_md5: c32a1d4ab5d03f1284b67883e8d87530
+  archive_sha256: c4a38c50a1bc5f3a1c5537f2155ab9d68f9f25eb1ed8d9ddda3db29a59bca1dd
+  prepared_root: work/sources/cifar-10/prepared
+  preparation_budget_bytes: 400000000
+  population: official CIFAR-10 binary train and test batches, 60,000 examples
+  fields:
+    label:
+      dtype: category
+      description: Original class index 0 through 9
+      values:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+    class_name:
+      dtype: category
+      description: Official class name
+      values:
+      - airplane
+      - automobile
+      - bird
+      - cat
+      - deer
+      - dog
+      - frog
+      - horse
+      - ship
+      - truck
+    split:
+      dtype: category
+      description: Original train or test split
+      values:
+      - train
+      - test
+    index:
+      dtype: number
+      description: Zero-based index within source split
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 60000
+  unit: example
+  blockers:
+  - Official source does not state image redistribution terms; public media remains withheld.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://www.cs.toronto.edu/~kriz/cifar.html
+  note: Official page provides download and citation but no explicit redistribution license; no public
+    media approval.
+relationships: []
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-722f38c365f2ebc7d105
+  paper_id: paper-a47845c66d4a3f48
+  source_file_hash: f1108a17f3cbbba7a93256ee725d68092c9a6d25204ca4faab92f6f0cbe1a4df
+  page: 5
+  role: evaluation
+  excerpt: p leaderboards for the `∞ , `2 and common corruption threat models on CIFAR-10, CIFAR-100 [75],
+    and ImageNet [32] datasets (see Table 1 for details). We use the fixed budgets of ε∞ = 8/255 and ε2
+    = 0
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-744fbc4ba231dfa27e77
+  paper_id: paper-1e2474b15fec2d7d
+  source_file_hash: ada9a023bec3a045996c2660092bd2e4c1a28380b76315ad0d97051c119bd9ce
+  page: 3
+  role: source data
+  excerpt: sification of ten basic-level categories in small natural images [the CIFAR-10 dataset, 25].
+    From an engineering perspective, both tasks are essentially solved, with multiple, qualitatively differ
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: source_release
+  url: https://www.cs.toronto.edu/~kriz/cifar.html
+  note: Official page states 50,000 train, 10,000 test, binary layout and archive MD5.
+- kind: mirror
+  url: https://data.brainchip.com/dataset-mirror/cifar10/cifar-10-binary.tar.gz
+  note: Resumed official download from a faster byte-identical mirror; final MD5 matches the official
+    page.
+- kind: corpus_mention
+  evidence_id: evidence-48fa44564076fc5c7c8f
+  paper_id: paper-f5da3ca03780a203
+  source_file_hash: d65cb215e41e6b745002603b59c138ce86e5ad7eb08751c0e3a85f3982959032
+  page: 8
+  role: evaluation
+  excerpt: ' prompt “Describe the image in one sentence”, image classification on CIFAR-10 [33] using
+    the prompt in Section H, and visual question answering (VQA) on the TextVQA validation set [34]. D'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-2fab01b81d78843d7f21
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 5
+  role: evaluation
+  excerpt: 'marks: ImageNet (Rus- robust vision encoders. sakovsky et al., 2015), CIFAR10 (Krizhevsky
+    et al., 2009), Robust Vision Models. We focus on robust vision en- CIFAR100, Pets (Parkhi et al.,'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-04fb181fdf6f6979a70c
+  paper_id: paper-208c53a35b62bc52
+  source_file_hash: 721478f2130be8167b3b4530bbcbffb41bb9acba581bbc75eadcbfcf949ce42a
+  page: 6
+  role: evaluation
+  excerpt: 'g points: then considering the worst case over all attacks, as MNIST, CIFAR-10, CIFAR-100
+    and ImageNet as datasets. we do for AutoAttack, improves the performance. We report first results '
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-080798115fc4d851ba0f
+  paper_id: paper-78a318ad1ec346ef
+  source_file_hash: 697485cbbe20010f4e0e4494fa62e97e91369caafdf6d63f11ae051b89abfa30
+  page: 2
+  role: evaluation
+  excerpt: 'lassification, the existence of [28], a digit-recognition task (0-9); CIFAR-10 [24], a small-
+    adversarial examples not only limits their potential application image recognition task, also '
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-bee8b1dbd6476ef424f2
+  paper_id: paper-a2c6dc42af089fd5
+  source_file_hash: cbf9bf68f543aa351c3ea6aac7b159d58860b0993df2f9b8f938d8594b2601e1
+  page: 2
+  role: training
+  excerpt: . Building on the above insights, we train networks on MNIST [19] and CIFAR10 [16] that are
+    robust to a wide range of adversarial attacks. Our approach is based on optimizing the aforemen
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-742ee9f555cfdf7a8352
+  paper_id: paper-63c3bd849356e00f
+  source_file_hash: 81c3715d1e256579071591f3bc61f55d63b32a33dcc981026209d14d32990f32
+  page: 17
+  role: evaluation
+  excerpt: rimental Setup C.1 Datasets For our experimental analysis, we use the CIFAR-10 [Kri09] and
+    (restricted) ImageNet [Rus+15] datasets. Attaining robust models for the complete ImageNet datase
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-f8778340fdc7019da041
+  paper_id: paper-b8a3bbfe3c7eefff
+  source_file_hash: 80623126b569da46ac487c4d631dbd93f7c4916396eb45a18865ed529a66e3b7
+  page: 2
+  role: evaluation
+  excerpt: 'x ′ ) , l. A more restrictive case is where the adversary picks a The CIFAR-10 dataset [22]
+    consists of 60, 000 32 ×32 color images target t , l and seeks to find x ′ close to x such that '
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-73fb2b345dbc471bb8af
+  paper_id: paper-d0229a9d15fd6b77
+  source_file_hash: 70e6dfea92070bfbbda98bfeff804db3302c4b77411cef098e5d16c466474a27
+  page: 2
+  role: evaluation
+  excerpt: not have useful gradients” for generating adversarial exam- MNIST and CIFAR-10, we evaluate
+    defenses over the en- ples (Papernot et al., 2017); gradient masking is known to tire test set a
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-4819966ed0f520b4c463
+  paper_id: paper-f7fa96d778a8d649
+  source_file_hash: 7f6c0a50475149e11e3b7efc9c0a00383652b7cae62f80facd8ae2684ef251e7
+  page: 3
+  role: evaluation
+  excerpt: correct labels when using a convolutional maxout network on a preprocessed version of the CIFAR-10
+    (Krizhevsky & Hinton, 2009) test set2 . Other simple methods of generating adversarial examples are
+    possible. For example, we als
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-11185ff4ec1b88b1a49f
+  paper_id: paper-3e0db9c633ab204c
+  source_file_hash: d2750f355a25fcdcfcb221e5049a0aa41ec096b452772c73e1767e2d039a6545
+  page: 7
+  role: evaluation
+  excerpt: Caltech101 Cifar10 Cifar100 Cars
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-72f5ce4583049f687c93
+  paper_id: paper-ed38cc9d6f4b163c
+  source_file_hash: 83a5bac87a0f2e399ee723093e2a914019cd82a2374fa007482ac0fcd29f8058
+  page: 5
+  role: evaluation
+  excerpt: ted metric, the Normalized Dis- domly pick 1000 images from validation sets of CIFAR-10 turbance
+    Visibility (NDV) Index. For a pure sample x and its [Krizhevsky et al., 2009], CIFAR-100 [Krizhevsky
+    et al.,
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-cd5e280f1f9c2f464dea
+  paper_id: paper-a47845c66d4a3f48
+  source_file_hash: f1108a17f3cbbba7a93256ee725d68092c9a6d25204ca4faab92f6f0cbe1a4df
+  page: 5
+  role: benchmark source
+  excerpt: 'ubli2she d Figure 2: Visualization of the robustness and accuracy of 54 CIFAR-10 models from
+    the RobustBench `∞ -leaderboard. Robustness is evaluated using `∞ -perturbations with ε∞ = 8/255.
+    are necessar'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-9759a23800d22d76350a
+  paper_id: paper-1e2474b15fec2d7d
+  source_file_hash: ada9a023bec3a045996c2660092bd2e4c1a28380b76315ad0d97051c119bd9ce
+  page: 3
+  role: direct evaluation
+  excerpt: 4] and the classification of ten basic-level categories in small natural images [the CIFAR-10
+    dataset, 25]. From an engineering perspective, both tasks are essentially solved, with multiple, qualitatively
+    different mac
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-3210ea8741ac38ad7595
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 5
+  role: zero-shot robustness evaluation
+  excerpt: 'hmarks: ImageNet (Rus- robust vision encoders. sakovsky et al., 2015), CIFAR10 (Krizhevsky
+    et al., 2009), Robust Vision Models. We focus'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-ac2590cd536df85159ee
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 29
+  role: cited-study dataset in survey table
+  excerpt: LLaVA, MiniGPT, Qwen-VL Image-Content Reasoning Emoset, CIFAR10 (Qin et al., 2024) OpenFlamingo,
+    GPT4V VQA, Classi
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-b12451f2d54be3df8ca1
+  paper_id: paper-392b0c393c06b48e
+  source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
+  page: 6
+  role: zero-shot adversarial diagnostic evaluation
+  excerpt: 'Figure 2 x-axis label: CIFAR10'
+  review_scope: full_pdf_visual_figure_checked
+  paper_full_review_complete: true
+- kind: confirmed_name_alias
+  alias_id: cifar10
+  reason: CIFAR10 spelling denotes the original CIFAR-10 source; no shifted or corrupted suffix occurs
+    in its receipts.
+  scope_note: Preserve each paper's role and subset; the active preview is one pinned release, not proof
+    of an identical paper sample.
+  source_url: https://www.cs.toronto.edu/~kriz/cifar.html
+  audit_file: registry/candidate_dispositions.yaml

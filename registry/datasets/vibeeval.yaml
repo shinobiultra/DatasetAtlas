@@ -1,0 +1,87 @@
+schema_version: '1.0'
+id: vibeeval
+name: VibeEval
+aliases: []
+description: Official Vibe-Eval v1 test Parquet with 269 image-text prompts and references. All 269 source rows
+  and embedded images are retained locally; five rows reuse an identical image asset.
+paper_ids:
+- paper-20de77d4e60fd1bd
+release: hf-3bdc7c30f09938557a21f1918d6c8c28fd5978f8
+adapter: structured
+adapter_config:
+  path: work/sources/vibeeval/records.jsonl
+  format: jsonl
+  sha256: f2242b71b430681ee85190237fb712d65438f3e6973d0f9d4185c377eb9343f3
+  media_root: work/sources/vibeeval/media
+  population: Official Vibe-Eval v1 test Parquet with 269 image-text prompts and references. All 269 source rows
+    and embedded images are retained locally; five rows reuse an identical image asset.
+  mapping:
+    id: example_id
+    question: prompt
+    text: prompt
+    media: media_path
+    media_modality: image
+  fields:
+    example_id: Original example identifier
+    category: Official normal or hard group
+    prompt: Original image question/prompt
+    reference: Official reference response, not a model prediction
+    media_url: Original source media URL
+    source_image_path: Original Parquet image path
+    image_sha256: SHA-256 of original embedded image bytes
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 269
+  unit: example
+  blockers:
+  - The dataset card says Apache-2.0, but linked image rights need separate review; local images and records are
+    not published.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  external_provider: local_only
+  source: https://huggingface.co/datasets/RekaAI/VibeEval
+  note: The dataset card says Apache-2.0, but linked image rights need separate review; local images and records
+    are not published.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-b27b2f25fc2c4b7aa5e9
+  paper_id: paper-20de77d4e60fd1bd
+  source_file_hash: ccc6f6fee4214f0656c164535cbe29f1cbbce5769b311c93f08e1110437f29e0
+  page: 8
+  role: related-work comparison
+  excerpt: standing. ZeroBench (Roberts et al., 2025b) and VibeEval experiments. Results are averaged over five
+    independent (Padlewski et al., 2024) raise task difficulty
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://huggingface.co/datasets/RekaAI/VibeEval
+  note: 'RekaAI official HF dataset has 269 examples and normal/hard categories. Release: Vibe-Eval v1, 269 test
+    examples'
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_audit_rights
+  url: https://huggingface.co/datasets/RekaAI/VibeEval
+  note: Official dataset card lists Apache-2.0; inspect linked media rights separately.
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_release
+  url: https://huggingface.co/datasets/RekaAI/VibeEval/tree/3bdc7c30f09938557a21f1918d6c8c28fd5978f8
+  note: Pinned official release; 269 rows; derived SHA-256 f2242b71b430681ee85190237fb712d65438f3e6973d0f9d4185c377eb9343f3.
+source_url: https://huggingface.co/datasets/RekaAI/VibeEval
+snapshot_id: hf-3bdc7c30f09938557a21f1918d6c8c28fd5978f8-f2242b71b430
+modalities:
+- text
+- image
+tasks:
+- multimodal question answering

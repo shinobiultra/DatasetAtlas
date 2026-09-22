@@ -1,0 +1,98 @@
+schema_version: '1.0'
+id: eurosat
+name: EuroSAT
+aliases: []
+description: 'Official EuroSAT v2 RGB JPEG variant from Zenodo record 7711810: 27,000 Sentinel-2 land-cover
+  images in ten original class folders. This RGB variant is distinct from the 13-band multispectral archive.
+  The preview interleaves classes to show ten examples per class.'
+paper_ids:
+- paper-3e0db9c633ab204c
+release: zenodo-7711810-v2-rgb
+adapter: archive
+adapter_config:
+  path: work/sources/eurosat/EuroSAT_RGB.zip
+  format: zip
+  sha256: b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90
+  suffixes:
+  - .jpg
+  path_regex: EuroSAT_RGB/(?P<label>AnnualCrop|Forest|HerbaceousVegetation|Highway|Industrial|Pasture|PermanentCrop|Residential|River|SeaLake)/(?P<source_filename>[^/]+\.jpg)
+  order: round_robin_label
+  population: official EuroSAT v2 RGB, 27,000 class-folder JPEGs
+  fields:
+    path:
+      dtype: string
+      description: Original archive member path
+    label:
+      dtype: category
+      values:
+      - AnnualCrop
+      - Forest
+      - HerbaceousVegetation
+      - Highway
+      - Industrial
+      - Pasture
+      - PermanentCrop
+      - Residential
+      - River
+      - SeaLake
+      description: Original land-cover class folder
+    source_filename:
+      dtype: string
+      description: Original EuroSAT RGB JPEG filename
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: approved
+  preview_count: 100
+  total_count: 27000
+  unit: example
+  blockers: []
+rights:
+  records: approved
+  annotations: approved
+  images: approved
+  source: https://github.com/phelber/EuroSAT/blob/353fc2ff01447cbcf84c4496dd98e82f197515bd/README.md
+  copernicus_terms: https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice
+  attribution: EuroSAT (c) Helber et al.; dataset MIT. Contains modified Copernicus Sentinel data 2015–2018.
+  license_notice: licenses/eurosat-MIT.txt
+  note: Exact per-image capture years are absent; the 2015–2018 source-year range is inferred from Sentinel-2A
+    launch and the 2018 v2 release. The review covers only the 100-image RGB preview in
+    reports/eurosat-publication-review.md.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-b408fb701423ef481c39
+  paper_id: paper-3e0db9c633ab204c
+  source_file_hash: d2750f355a25fcdcfcb221e5049a0aa41ec096b452772c73e1767e2d039a6545
+  page: 7
+  role: evaluation
+  excerpt: Cars Dtd Eurosat FGVC Flowers Pets Eval Model Training Data OpenAI-L/
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_release
+  url: https://zenodo.org/records/7711810
+  note: Official Zenodo v2 lists 27,000 images and distinguishes EuroSAT_RGB.zip from 13-band EuroSAT_MS.zip.
+- kind: source_archive
+  url: https://zenodo.org/records/7711810/files/EuroSAT_RGB.zip?download=1
+  size_bytes: 94658721
+  md5: f46e308c4d50d4bf32fedad2d3d62f3b
+  sha256: b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90
+  note: Official v2 RGB archive; 27,000 JPEG members, ten class folders.
+- kind: source_rights
+  url: https://github.com/phelber/EuroSAT/blob/353fc2ff01447cbcf84c4496dd98e82f197515bd/README.md
+  note: Author README says MIT for dataset and points to separate Copernicus Sentinel Data Terms.
+- kind: source_publication_review
+  url: https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice
+  note: Local review reports/eurosat-publication-review.md verifies the exact 100-image RGB preview,
+    author MIT license, and modified Copernicus Sentinel attribution with an inferred 2015–2018 source-year range.
+tasks:
+- land-cover classification
+modalities:
+- image
+labels:
+- label
+source_url: https://zenodo.org/records/7711810
+snapshot_id: zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90

@@ -1,0 +1,132 @@
+{
+  "captured_at_utc": "2026-09-22T04:34:51.173418+00:00",
+  "complete_snapshot": {
+    "exact_split_query_counts": {
+      "qual_dev": 100,
+      "qual_test": 100,
+      "test": 5000,
+      "train": 9647
+    },
+    "manifest": {
+      "bytes": 1576,
+      "path": "work/snapshots/docci/manifest.json",
+      "sha256": "8ad72190b2454c12f0570733d94a79e10863fa262e85282781687f051bfe2e88"
+    },
+    "parquet": {
+      "bytes": 14934197,
+      "path": "work/snapshots/docci/records.parquet",
+      "sha256": "7bb968dceb67066beed79adf5184a8bbcef5d54567494776e34542024a966371"
+    },
+    "record_count": 14847,
+    "scope": "complete"
+  },
+  "coverage": {
+    "access": "public",
+    "adapter": "tested",
+    "blockers": [
+      "This release contains complete source descriptions only. The separate 7.1 GB images, 155 MB metadata, and AAR images are not acquired, so this is not a complete multimodal DOCCI copy."
+    ],
+    "complete_data": "supported",
+    "identity": "resolved",
+    "preview": "complete_target",
+    "preview_count": 100,
+    "publication": "metadata_only",
+    "source": "verified",
+    "total_count": 14847,
+    "unit": "example"
+  },
+  "dataset_id": "docci",
+  "download_cap_bytes": 20000000,
+  "empty_descriptions": 0,
+  "limitations": [
+    "No source images acquired, so preview records have no media assets and image_file is source metadata only.",
+    "Four-split preview uses equal allocation of 25 each; it does not reflect split prevalence.",
+    "This complete index covers descriptions, not DOCCI image or metadata archives or AAR."
+  ],
+  "official_descriptions_url": "https://storage.googleapis.com/docci/data/docci_descriptions.jsonlines",
+  "official_source_page": "https://google.github.io/docci/",
+  "pagination": {
+    "disjoint": true,
+    "final_cursor": null,
+    "final_page": 1,
+    "final_source_id": "train_09646",
+    "first_page": 101,
+    "next_page": 101
+  },
+  "preview": {
+    "asset_count": 0,
+    "file": {
+      "bytes": 199781,
+      "path": "work/packs/docci/pack.json",
+      "sha256": "ea43b1064f9240cb6e573a78bc4654650ba5fe00615deee0271540c91656ad05"
+    },
+    "first_source_id": "qual_dev_00000",
+    "last_source_id": "train_00024",
+    "records": 100,
+    "sampling": {
+      "bytes_read": 74504,
+      "method": "first_25_per_original_split",
+      "note": "Equal preview allocation across four source splits, not prevalence-weighted; no original image media acquired.",
+      "population": "Complete author-hosted DOCCI descriptions JSONL (text and image filenames only), 14,847 rows",
+      "requested_count": 100,
+      "returned_count": 100,
+      "sections": [
+        {
+          "count": 25,
+          "source_offset": 0,
+          "split": "qual_dev"
+        },
+        {
+          "count": 25,
+          "source_offset": 100,
+          "split": "qual_test"
+        },
+        {
+          "count": 25,
+          "source_offset": 200,
+          "split": "test"
+        },
+        {
+          "count": 25,
+          "source_offset": 5200,
+          "split": "train"
+        }
+      ],
+      "source_revision": "docci-descriptions-jsonl-c9df4819",
+      "unit": "example"
+    },
+    "split_counts": {
+      "qual_dev": 25,
+      "qual_test": 25,
+      "test": 25,
+      "train": 25
+    }
+  },
+  "release": "docci-descriptions-jsonl-c9df4819",
+  "rights": {
+    "annotations": "source_declares_CC_BY_4_0",
+    "basis": "Author project page states DOCCI annotations and images are licensed CC BY 4.0. This local acquisition contains descriptions only; public publication still needs attribution and review.",
+    "external_provider": "local_only",
+    "images": "source_declares_CC_BY_4_0_not_acquired",
+    "records": "source_declares_CC_BY_4_0",
+    "source": "https://google.github.io/docci/"
+  },
+  "scope": "Complete author-hosted DOCCI descriptions JSONL only; separate images, metadata, and AAR pool absent.",
+  "snapshot_id": "docci-descriptions-c9df4819963883af",
+  "source_file": {
+    "bytes": 11000214,
+    "path": "work/sources/docci/docci_descriptions.jsonlines",
+    "sha256": "c9df4819963883af35ddd2cf257949892fd8c6d88b33a012094352df60719800"
+  },
+  "source_gcs_generation": "1714384012999810",
+  "source_gcs_md5_etag": "7ed51dae0fed79d33564cd0e5b9c2f11",
+  "source_rows": 14847,
+  "source_unique_ids": 14847,
+  "source_unique_image_filenames": 14847,
+  "split_counts": {
+    "qual_dev": 100,
+    "qual_test": 100,
+    "test": 5000,
+    "train": 9647
+  }
+}

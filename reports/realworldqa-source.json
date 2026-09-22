@@ -1,0 +1,17 @@
+{
+  "kind": "verified_source_acquisition",
+  "checked_at": "2026-09-22",
+  "source_url": "https://huggingface.co/datasets/xai-org/RealworldQA/tree/17e7f75e092e47169732462ea3cdfebe911105dd",
+  "source_shards_sha256": [
+    "2cf29e308a34e0255f23520796fc04445a01b8baab18686f1a4b3c3943f695b2",
+    "dac5b9f7cfb947a4865ea3424abfbdb3449d09e0a0b911a787cdc930cefefdc0"
+  ],
+  "source_rows": 765,
+  "scope": "All 765 author image/question/answer rows from two pinned Parquet shards. Original image bytes retained; local consolidation only adds exact source shard and row provenance. Questions retain their original inline options.",
+  "prepared_parquet_sha256": "5bd73bce6736e24756f186fab66c1606c5cf8654cf22bbaffe3eee55cc52d497",
+  "preview_records": 100,
+  "preview_assets": 100,
+  "final_record_id": "realworldqa:example:be1c355b46ad9dd70832588a",
+  "final_image_sha256": "16c25537e2f6c67a3d05aacd3ca79b4b65851f5d7ccc81dc8bf0aee68b4bb091",
+  "final_image_bytes": 788472
+}

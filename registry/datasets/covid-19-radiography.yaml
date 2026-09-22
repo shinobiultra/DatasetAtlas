@@ -1,0 +1,64 @@
+schema_version: '1.0'
+id: covid-19-radiography
+name: COVID-19 Radiography
+aliases: []
+description: COVID-19 Radiography Database. Original Qatar/Dhaka team Kaggle release provides CXR classes
+  and masks; corpus uses evaluation, exact Kaggle version/sample IDs unpinned
+paper_ids:
+- paper-f5da3ca03780a203
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Public data/media reuse rights require separate review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database
+  note: Medical images draw on multiple underlying collections/publications; Kaggle record alone is not
+    a blanket patient/image redistribution grant
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-6de94e8a7dfb07279059
+  paper_id: paper-f5da3ca03780a203
+  source_file_hash: d65cb215e41e6b745002603b59c138ce86e5ad7eb08751c0e3a85f3982959032
+  page: 15
+  role: evaluation
+  excerpt: sis. Case Study on Medical Diagnostic. We conduct a case study on the COVID-19 Radiography
+    dataset [44] to demonstrate the real-world risks of adversarial attacks in safety-critical domains.
+    This case
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database
+  note: Original Qatar/Dhaka team Kaggle release provides CXR classes and masks; corpus uses evaluation,
+    exact Kaggle version/sample IDs unpinned
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: depositor_release_located_version_unpinned
+- kind: source_audit_rights
+  url: https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database
+  note: Medical images draw on multiple underlying collections/publications; Kaggle record alone is not
+    a blanket patient/image redistribution grant
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: depositor_release_located_version_unpinned
+- kind: source_audit_access
+  url: https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database
+  note: public; Pin Kaggle version and patient/source provenance; no public preview until source rights
+    reviewed.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: depositor_release_located_version_unpinned
+source_url: https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database

@@ -1,0 +1,295 @@
+{
+  "captured_at_utc": "2026-09-22T04:08:43.980647+00:00",
+  "sst2": {
+    "archive_http_last_modified": "2020-09-03",
+    "archive_s3_version_id": "gAOv9nMgC092.oqzTRzZou2skIpI.QQJ",
+    "complete_snapshot": {
+      "manifest": {
+        "bytes": 2208,
+        "path": "work/snapshots/sst2/manifest.json",
+        "sha256": "5a2a998800088f6a273e0611b2a0861b6148381e9bdaf1026a8fc5eb891316db"
+      },
+      "parquet": {
+        "bytes": 11980066,
+        "path": "work/snapshots/sst2/records.parquet",
+        "sha256": "7574b7b1ce984595e9426821959aef92fb7369224d9e63d9f61bf70e9f0f3edc"
+      },
+      "population_scope": "complete",
+      "record_count": 70042,
+      "snapshot_id": "sst2-glue-d67e16fb-914641ca"
+    },
+    "dataset_id": "sst2",
+    "derived_table": {
+      "bytes": 2519316,
+      "path": "work/sources/sst2/glue-sst2.parquet",
+      "sha256": "914641ca6a671b23acf504ca35f082beb83d188278c5ca9c26d8c3ce591efea4"
+    },
+    "full_split_queries": {
+      "dev": {
+        "exact_matched_count": 872,
+        "last_label": 1,
+        "last_label_status": "source_labeled",
+        "last_record_id": "sst2:example:d58a2d3cf4341e05ccc38b78",
+        "last_source_index": 871
+      },
+      "test": {
+        "exact_matched_count": 1821,
+        "last_label": null,
+        "last_label_status": "withheld_by_glue",
+        "last_record_id": "sst2:example:02f1a1a1960ba8df3beae9ce",
+        "last_source_index": 1820
+      },
+      "train": {
+        "exact_matched_count": 67349,
+        "last_label": 0,
+        "last_label_status": "source_labeled",
+        "last_record_id": "sst2:example:d58e86e4d58d3f522db41206",
+        "last_source_index": 67348
+      }
+    },
+    "official_archive_url": "https://dl.fbaipublicfiles.com/glue/data/SST-2.zip",
+    "official_glue_baseline_script": "https://github.com/nyu-mll/GLUE-baselines/blob/master/download_glue_data.py",
+    "original_source": {
+      "bytes": 7439277,
+      "path": "work/sources/sst2/SST-2.zip",
+      "sha256": "d67e16fb55739c1b32cdce9877596db1c127dc322d93c082281f64057c16deaa"
+    },
+    "preview": {
+      "distinct_asset_ids": 0,
+      "distinct_record_ids": 100,
+      "file": {
+        "bytes": 88267,
+        "path": "work/packs/sst2/pack.json",
+        "sha256": "676dd421a5693cac34ef5ff34eed887167b2e63f672b791f0ce242c0a1d70fe4"
+      },
+      "first_record_id": "sst2:example:2cf0bd9f19a3630acf3bc028",
+      "first_source_key": {
+        "split": "train"
+      },
+      "last_record_id": "sst2:example:cebb706d87d1a9fc4daf9535",
+      "last_source_key": {
+        "split": "train"
+      },
+      "record_count": 100,
+      "sampling": {
+        "bytes_read": 21569,
+        "method": "source_order",
+        "next_cursor": "100",
+        "offset": 0,
+        "population": "GLUE SST-2 original ZIP train, dev, and unlabeled test TSVs converted losslessly to Parquet, 70,042 rows",
+        "requested_count": 100,
+        "returned_count": 100,
+        "source_revision": "GLUE-SST-2-zip-2020-09-03",
+        "unit": "example",
+        "warnings": []
+      }
+    },
+    "release": "GLUE-SST-2-zip-2020-09-03",
+    "rights": {
+      "labels": "not_reviewed",
+      "note": "GLUE distribution is public, but no explicit text redistribution license was found in the checked official archive or Stanford original SST page; local analysis only pending review.",
+      "publication": "metadata_only",
+      "records": "not_reviewed",
+      "source": "https://nlp.stanford.edu/sentiment/index.html"
+    },
+    "snapshot_id": "sst2-glue-d67e16fb-914641ca",
+    "source_members": {
+      "dev": {
+        "bytes": 94931,
+        "member": "SST-2/dev.tsv",
+        "sha256": "54a9c12c77e402fc14d6a66a506f24d999f596b0176eb777c972cccc2f9cc4b0"
+      },
+      "test": {
+        "bytes": 197335,
+        "member": "SST-2/test.tsv",
+        "sha256": "69a938605609b3e6663b4487918fe1565eb293734e6e520d0366d1d412fd2a13"
+      },
+      "train": {
+        "bytes": 3806081,
+        "member": "SST-2/train.tsv",
+        "sha256": "48eac26399f8456935f81dd9e3a745c1430adb6c62e233ccfe22db4a0d15d1d1"
+      }
+    },
+    "transformation": "Strict row-preserving TSV to Parquet conversion with source split/index, original sentence text, labels where provided, and null test labels; script scripts/prepare_sst2.py"
+  },
+  "status": "complete_real_local_previews_and_full_indexes",
+  "stl10": {
+    "archive_http_last_modified": "2011-04-08",
+    "complete_snapshot": {
+      "manifest": {
+        "bytes": 2409,
+        "path": "work/snapshots/stl-10/manifest.json",
+        "sha256": "ab25e9c42ead08a149afeeb5a1a09f366dbbdfeb58128a0fa012f57c3429217f"
+      },
+      "parquet": {
+        "bytes": 8254431,
+        "path": "work/snapshots/stl-10/records.parquet",
+        "sha256": "3fde79a95fb7e4dd495649d0260de05c45f9bd120353832fffad1f770fc45c47"
+      },
+      "population_scope": "complete",
+      "record_count": 113000,
+      "snapshot_id": "stl10-original-f31fd99273a1acb8"
+    },
+    "dataset_id": "stl-10",
+    "download_cap_bytes": 3000000000,
+    "first_preview_media": {
+      "asset_ref": "train/000000.png",
+      "height": 96,
+      "media_type": "image/png",
+      "sha256": "0eb87ed69dd2822a3abaa058ad64ddae5dfb6d6c479a660e1f8ee4431057c73e",
+      "width": 96
+    },
+    "full_split_queries": {
+      "test": {
+        "exact_matched_count": 8000,
+        "last_label": 9,
+        "last_label_status": "source_labeled",
+        "last_record_id": "stl-10:example:09a6b938faa07f95d983fbad",
+        "last_source_index": 7999
+      },
+      "train": {
+        "exact_matched_count": 5000,
+        "last_label": 6,
+        "last_label_status": "source_labeled",
+        "last_record_id": "stl-10:example:1cffdfa062897f07ea9ab79c",
+        "last_source_index": 4999
+      },
+      "unlabeled": {
+        "exact_matched_count": 100000,
+        "last_label": null,
+        "last_label_status": "unlabeled_by_source",
+        "last_record_id": "stl-10:example:286313c7c4750af78590bc52",
+        "last_source_index": 99999
+      }
+    },
+    "official_archive_md5": "91f7769df0f17e558f3565bffb0c7dfb",
+    "official_archive_url": "https://ai.stanford.edu/~acoates/stl10/stl10_binary.tar.gz",
+    "official_source_page": "https://cs.stanford.edu/~acoates/stl10/",
+    "original_source": {
+      "bytes": 2640397119,
+      "path": "work/sources/stl-10/stl10_binary.tar.gz",
+      "sha256": "f31fd99273a1acb8609c8db427cebb1de3f71de77758cdc0e22956e1289b9866"
+    },
+    "pixel_representation": "On-demand lossless RGB PNG from original 96x96 channel-major, transposed-spatial-axis binary pixels; no source media embedded in preview",
+    "preparation_cap_bytes": 8000000000,
+    "prepared_members": {
+      "class_names.txt": {
+        "bytes": 55,
+        "md5": "6de44d022411c4d5cda4673b7f147c3f"
+      },
+      "fold_indices.txt": {
+        "bytes": 47794,
+        "md5": "4bbf8cd098ab9f87fe03fbcb37c06b28"
+      },
+      "test_X.bin": {
+        "bytes": 221184000,
+        "verified_official_md5": "7f263ba9f9e0b06b93213547f721ac82"
+      },
+      "test_y.bin": {
+        "bytes": 8000,
+        "md5": "36f9794fa4beb8a2c72628de14fa638e"
+      },
+      "train_X.bin": {
+        "bytes": 138240000,
+        "verified_official_md5": "918c2871b30a85fa023e0c44e0bee87f"
+      },
+      "train_y.bin": {
+        "bytes": 5000,
+        "md5": "5a34089d4802c674881badbb80307741"
+      },
+      "unlabeled_X.bin": {
+        "bytes": 2764800000,
+        "verified_official_md5": "5242ba1fed5e4be9e1e742405eb56ca4"
+      }
+    },
+    "preview": {
+      "distinct_asset_ids": 100,
+      "distinct_record_ids": 100,
+      "file": {
+        "bytes": 140059,
+        "path": "work/packs/stl-10/pack.json",
+        "sha256": "d9a07f30ff88b296e20e40a2f673becc91792df0a17804d2c56c44c95a5007e7"
+      },
+      "first_record_id": "stl-10:example:dc10e76215b45585c8a064b8",
+      "first_source_key": {
+        "index": 0,
+        "split": "train"
+      },
+      "last_record_id": "stl-10:example:ab4f8ffbbff9549469669664",
+      "last_source_key": {
+        "index": 99,
+        "split": "train"
+      },
+      "record_count": 100,
+      "sampling": {
+        "bytes_read": 3127049749,
+        "method": "source_order",
+        "next_cursor": "100",
+        "offset": 0,
+        "population": "Stanford original STL-10 binary train, test, and unlabeled splits; 113,000 images",
+        "requested_count": 100,
+        "returned_count": 100,
+        "source_revision": "STL-10-original-binary-91f7769d",
+        "unit": "example",
+        "warnings": []
+      }
+    },
+    "release": "STL-10-original-binary-91f7769d",
+    "rights": {
+      "images": "metadata_only",
+      "labels": "not_reviewed",
+      "note": "Official Stanford download and citation guidance does not state a redistribution license for ImageNet-derived images; originals and derived PNGs remain local pending rights review.",
+      "publication": "metadata_only",
+      "records": "not_reviewed"
+    },
+    "snapshot_id": "stl10-original-f31fd99273a1acb8",
+    "source_class_names": [
+      "airplane",
+      "bird",
+      "car",
+      "cat",
+      "deer",
+      "dog",
+      "horse",
+      "monkey",
+      "ship",
+      "truck"
+    ],
+    "source_fold_sizes": [
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000,
+      1000
+    ],
+    "source_test_labels_by_class": {
+      "1": 800,
+      "2": 800,
+      "3": 800,
+      "4": 800,
+      "5": 800,
+      "6": 800,
+      "7": 800,
+      "8": 800,
+      "9": 800,
+      "10": 800
+    },
+    "source_train_labels_by_class": {
+      "1": 500,
+      "2": 500,
+      "3": 500,
+      "4": 500,
+      "5": 500,
+      "6": 500,
+      "7": 500,
+      "8": 500,
+      "9": 500,
+      "10": 500
+    }
+  }
+}

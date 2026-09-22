@@ -1,0 +1,57 @@
+schema_version: '1.0'
+id: jiechieu-tsopze-resume-corpus
+name: Jiechieu-Tsopze resume corpus
+aliases: []
+description: Author repository supplies resumes_corpus.zip and resume_samples.zip with occupation labels;
+  later paper mines skill n-grams from these resumes.
+paper_ids:
+- paper-f03c5ad315e6d835
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/florex/resume_corpus
+  note: No dataset license or consent evidence identified; resumes may contain personal information and
+    must not be published as a preview by default.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-4a7102bcd0be1cca18f5
+  paper_id: paper-f03c5ad315e6d835
+  source_file_hash: 47431d9340ff27b9234e2184711fbc3fc06ded7718fe53ca79b23a1cd1db777d
+  page: 3
+  role: source data
+  excerpt: ' most frequent n-grams (n ∈ {3, 4, 5}) containing “ability to” in the resume corpus provided
+    by Jiechieu & Tsopze (2021). Among the results, we manually identify 21 suitable skill descriptions,'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/florex/resume_corpus
+  note: 'Author repository supplies resumes_corpus.zip and resume_samples.zip with occupation labels;
+    later paper mines skill n-grams from these resumes. Release: Author resume_corpus archives; paper
+    subset unpinned'
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_audit_rights
+  url: https://doi.org/10.1007/s00521-020-05302-x
+  note: No dataset license or consent evidence identified; resumes may contain personal information and
+    must not be published as a preview by default.
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+source_url: https://github.com/florex/resume_corpus

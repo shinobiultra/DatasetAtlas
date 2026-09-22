@@ -1,0 +1,64 @@
+schema_version: '1.0'
+id: sad
+name: SAD
+aliases: []
+description: 'Situational Awareness Dataset, mixed procedural/model-dependent tasks; SAD-mini is a distinct
+  portable subset. Source review: Author repository commit dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3'
+paper_ids:
+- paper-d098a79f00c8b2b5
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  note: CC BY 4.0 repository license with explicit author request not to expose question/answer text in
+    crawlable plaintext
+  source: https://github.com/LRudL/sad/tree/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-f885d7bf816ffc7a2e36
+  paper_id: paper-d098a79f00c8b2b5
+  source_file_hash: 9a50cdc6b9f2ba3687339453804acb9519525941198c14d07765aaecbb1436d2
+  page: 54
+  role: bibliography-only reference
+  excerpt: ' Hobbhahn, Alexander Meinke, and Owain Evans. Me, myself, and AI: The situational awareness
+    dataset (SAD) for LLMs. In The Thirty-eight Conference on Neural Information Processing Systems Datasets
+    and Benchmar'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/LRudL/sad/tree/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3
+  note: Situational Awareness Dataset, mixed procedural/model-dependent tasks; SAD-mini is a distinct
+    portable subset Author repository commit dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://github.com/LRudL/sad/tree/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3
+  note: 'Repository data encrypted in ZIPs to reduce benchmark contamination; author provides unzip process
+    Probe: first_primary_url_http_head_200; payload_not_downloaded'
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_rights
+  url: https://github.com/LRudL/sad/tree/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3
+  note: CC BY 4.0 repository license with explicit author request not to expose question/answer text in
+    crawlable plaintext
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://github.com/LRudL/sad/tree/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3

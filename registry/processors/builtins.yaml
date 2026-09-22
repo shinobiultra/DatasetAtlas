@@ -1,0 +1,14 @@
+schema_version: '1.0'
+trusted_module: dataset_atlas.processors
+processors:
+  - quality.basic
+  - detect.nudenet
+  - detect.coco_v1
+  - embed.minilm
+  - embed.siglip2
+  - project.pca
+  - project.umap
+  - cluster.kmeans
+  - outlier.knn
+  - compare.fields
+  - import.research

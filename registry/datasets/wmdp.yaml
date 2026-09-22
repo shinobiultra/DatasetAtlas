@@ -1,0 +1,55 @@
+schema_version: '1.0'
+id: wmdp
+name: WMDP
+aliases: []
+description: CAIS publishes original multiple-choice hazardous-knowledge proxy benchmark.
+paper_ids:
+- paper-d098a79f00c8b2b5
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://huggingface.co/datasets/cais/wmdp
+  note: Official dataset card terms must govern; public URL does not imply benchmark examples suitable
+    for public demos.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-156f9d14a68fbc9c5d4d
+  paper_id: paper-d098a79f00c8b2b5
+  source_file_hash: 9a50cdc6b9f2ba3687339453804acb9519525941198c14d07765aaecbb1436d2
+  page: 55
+  role: bibliography-only reference
+  excerpt: 'ili, Jimmy Ba, Kevin M. Esvelt, Alexandr Wang, and Dan Hendrycks. The wmdp benchmark: Measuring
+    and reducing malicious use with unlearning, 2024b. Yixuan Li, Jason Yosinski, Jeff Clune'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://huggingface.co/datasets/cais/wmdp
+  note: 'CAIS publishes original multiple-choice hazardous-knowledge proxy benchmark. Release: WMDP Bio/Cyber/Chem
+    subsets'
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_audit_rights
+  url: https://huggingface.co/datasets/cais/wmdp
+  note: Official dataset card terms must govern; public URL does not imply benchmark examples suitable
+    for public demos.
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+source_url: https://huggingface.co/datasets/cais/wmdp

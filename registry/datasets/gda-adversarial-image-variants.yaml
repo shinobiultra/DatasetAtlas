@@ -1,0 +1,41 @@
+schema_version: '1.0'
+id: gda-adversarial-image-variants
+name: GDA adversarial image variants
+aliases: []
+description: Mention candidate from a focused page audit; the evidence receipts distinguish
+  direct use, comparison, related-work, and citation-only roles. Original source,
+  release, and rights still require independent verification.
+paper_ids:
+- paper-f5da3ca03780a203
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: unverified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Original release identity and rights need verification.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-81a5e0ff040c51b72845
+  paper_id: paper-f5da3ca03780a203
+  source_file_hash: d65cb215e41e6b745002603b59c138ce86e5ad7eb08751c0e3a85f3982959032
+  page: 8
+  role: derived collection
+  excerpt: '4 0.4735 0.3072 0.3026 0.2574 0.3176 41.2 Datasets. We randomly sample
+    1,000 samples from each of three datasets for evaluation, correspond- ing to different
+    multimodal tasks: image captioning on Flickr30k [32] using the pro'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true

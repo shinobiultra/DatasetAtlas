@@ -1,0 +1,22 @@
+{
+  "captured_at_utc": "2026-09-22T03:54:45.171015+00:00",
+  "dataset_id": "maliciousinstruct",
+  "official_repository": "https://github.com/Princeton-SysML/Jailbreak_LLM",
+  "pinned_commit": "1e490531c0ef4bc13430178bf1fbc8f813e34b1a",
+  "original_url": "https://raw.githubusercontent.com/Princeton-SysML/Jailbreak_LLM/1e490531c0ef4bc13430178bf1fbc8f813e34b1a/data/MaliciousInstruct.txt",
+  "source_file": "work/sources/maliciousinstruct/MaliciousInstruct.txt",
+  "source_bytes": 6269,
+  "source_sha256": "a64d69dd1004aac4a23aaff3748fb8f17161893f74db36f45b8bc849eb1bcce5",
+  "source_lines": 100,
+  "unique_nonempty_source_lines": 100,
+  "derived_jsonl": "work/sources/maliciousinstruct/prompts.jsonl",
+  "derived_bytes": 9262,
+  "derived_sha256": "f0c8a0918a606132015904c31e8abf492ae0ca5f37a2edca448f80e45f8dcc1f",
+  "derivation": "One JSON object per original line, adding a one-based source_line and preserving the instruction text except its line terminator.",
+  "preview_pack": "work/packs/maliciousinstruct/pack.json",
+  "preview_sha256": "7adf01b0219fa1ec5465a15c46d05e2d3c506733dd94f7b9ba193f903e66a774",
+  "preview_records": 100,
+  "complete_source_records": 100,
+  "publication": "metadata_only; source repository has no explicit data license and harmful content has not been reviewed",
+  "validation": "real original-to-derived line equality, stable IDs, complete pagination and preview tested"
+}

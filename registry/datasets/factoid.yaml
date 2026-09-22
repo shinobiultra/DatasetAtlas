@@ -1,0 +1,63 @@
+schema_version: '1.0'
+id: factoid
+name: FACTOID
+aliases: []
+description: 'CAISA FACTOID Reddit user misinformation/political-bias corpus; not generic factoid QA.
+  Source review: LREC 2022; author repository release file version/hash unverified'
+paper_ids:
+- paper-25eaa8c74ce76800
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Access to the exact data files has not been verified.
+  - The exact paper release, source variant, or derived collection remains unresolved.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  note: Reddit user/post privacy and platform rights; no blanket text redistribution grant
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-b35c37bceeb194db886e
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 22
+  role: bibliography-only reference
+  excerpt: 'Flek. Navid Rajabi and Jana Kosecka. 2024. Q-groundcam: 2022. FACTOID: A new dataset for identifying
+    Quantifying grounding in vision language models via misinf'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/caisa-lab/FACTOID-dataset
+  note: CAISA FACTOID Reddit user misinformation/political-bias corpus; not generic factoid QA LREC 2022;
+    author repository release file version/hash unverified
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_file_version_unverified
+- kind: source_audit_access
+  url: https://github.com/caisa-lab/FACTOID-dataset
+  note: 'Author repository provides IDs/labels and a re-crawl workflow; complete original post text not
+    presumed locally available Probe: first_primary_url_http_head_200; payload_not_downloaded'
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_file_version_unverified
+- kind: source_audit_rights
+  url: https://caisa-lab.github.io/2022/05/25/LREC-factoid.html
+  note: Reddit user/post privacy and platform rights; no blanket text redistribution grant No source-content
+    rights grant was verified; linked page is identity/access context only.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_file_version_unverified
+source_url: https://github.com/caisa-lab/FACTOID-dataset

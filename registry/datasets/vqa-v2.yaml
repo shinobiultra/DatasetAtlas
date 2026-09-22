@@ -1,0 +1,248 @@
+schema_version: '1.0'
+id: vqa-v2
+name: VQA v2
+aliases:
+- VQA 2.0
+- vqa-2-0
+- VQAv2
+- vqav2
+description: Original VQA v2.0 2017 validation questions and ten-answer annotations, joined strictly by
+  question ID and image ID to the 40,504 original COCO val2014 JPEGs. The release contains 214,354 question
+  examples; COCO 2014 images are distinct from the locally indexed COCO 2017 validation release.
+paper_ids:
+- paper-7ed1979562251931
+- paper-765a2362f8735bc4
+- paper-6dbb0d4a7b949143
+- paper-392b0c393c06b48e
+- paper-3e0db9c633ab204c
+- paper-25eaa8c74ce76800
+- paper-09b2d7393fc75cf7
+release: vqa-v2-2017-val2014
+adapter: vqa_v2
+adapter_config:
+  questions_archive: work/sources/vqa-v2/v2_Questions_Val_mscoco.zip
+  questions_sha256: e71f6c5c3e97a51d050f28243e262b28cd0c48d11a6b4632d769d30d3f93222a
+  annotations_archive: work/sources/vqa-v2/v2_Annotations_Val_mscoco.zip
+  annotations_sha256: 0caae7c8d1dafd852727f5ac046bc1efca9b72026bd6ffa34fc489f3a7b3291e
+  images_archive: work/sources/vqa-v2/val2014.zip
+  images_sha256: fe9be816052049c34717e077d9e34aa60814a55679f804cd043e3cbee3b9fde0
+  prepared_root: work/sources/vqa-v2/prepared
+  expected_questions: 214354
+  preparation_budget_bytes: 500000000
+  population: VQA v2.0 2017 validation annotations over COCO val2014 JPEGs
+  fields:
+    question_id:
+      dtype: number
+      description: Original VQA question ID
+    image_id:
+      dtype: number
+      description: Original COCO 2014 image ID
+    question:
+      dtype: string
+      description: Original VQA question text
+    question_type:
+      dtype: category
+      description: Original VQA question type
+    answer_type:
+      dtype: category
+      values:
+      - yes/no
+      - number
+      - other
+      description: Original VQA answer type
+    multiple_choice_answer:
+      dtype: string
+      description: Original aggregate answer
+    answers:
+      dtype: array
+      description: All ten original annotator answers and confidences
+    image_filename:
+      dtype: string
+      description: Original COCO val2014 image filename
+    split:
+      dtype: category
+      values:
+      - val2014
+      description: Original COCO image split
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 214354
+  unit: example
+  blockers:
+  - COCO source-photo redistribution rights are not established per image; local original media stays
+    out of public export.
+rights:
+  records: approved
+  annotations: approved
+  images: not_reviewed
+  source: https://visualqa.org/terms.html
+  license: CC BY 4.0 for VQA Consortium annotations
+  basis: Official VQA Terms page licenses annotations CC BY 4.0; linked COCO photos carry separate rights.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-fce562fdf2c77730c079
+  paper_id: paper-7ed1979562251931
+  source_file_hash: aec173a1458a692a9a4159f07664f759ab64d0f3cce6638cad56d9b76af663ec
+  page: 4
+  role: source data
+  excerpt: ' the validation set Datasets. We utilize the validation set of VQA of VQA v2, which comprises
+    214,354 questions. v2 as the foundational dataset, comprising a total Random Sample Question'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-805be73c6181bdc6b41a
+  paper_id: paper-7ed1979562251931
+  source_file_hash: aec173a1458a692a9a4159f07664f759ab64d0f3cce6638cad56d9b76af663ec
+  page: 4
+  role: direct validation evaluation
+  excerpt: Datasets. We utilize the validation set of VQA of VQA v2, which comprises 214,354 questions.
+    v2 as the foundational dataset
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_release
+  url: https://visualqa.org/download.html
+  note: Official v2.0 2017 validation release lists 214,354 questions, 2,143,540 answers, and 40,504 COCO
+    val2014 images; updated 2017-04-26.
+- kind: source_rights
+  url: https://visualqa.org/terms.html
+  note: VQA Consortium annotations CC BY 4.0; COCO image rights separate.
+- kind: source_archive
+  url: https://cvmlp.s3.amazonaws.com/vqa/mscoco/vqa/v2_Questions_Val_mscoco.zip
+  size_bytes: 3494929
+  sha256: e71f6c5c3e97a51d050f28243e262b28cd0c48d11a6b4632d769d30d3f93222a
+  note: Official validation questions ZIP.
+- kind: source_archive
+  url: https://cvmlp.s3.amazonaws.com/vqa/mscoco/vqa/v2_Annotations_Val_mscoco.zip
+  size_bytes: 10518930
+  sha256: 0caae7c8d1dafd852727f5ac046bc1efca9b72026bd6ffa34fc489f3a7b3291e
+  note: Official validation ten-answer annotations ZIP.
+- kind: source_archive
+  url: https://s3.amazonaws.com/images.cocodataset.org/zips/val2014.zip
+  size_bytes: 6645013297
+  sha256: fe9be816052049c34717e077d9e34aa60814a55679f804cd043e3cbee3b9fde0
+  note: Original COCO val2014 images ZIP; official S3 bucket alias with valid TLS, 40,504 JPEGs.
+- kind: corpus_mention
+  evidence_id: evidence-5631a7cf99ec92152302
+  paper_id: paper-765a2362f8735bc4
+  source_file_hash: 820aee810116ff6b3adbe19c8ffdc5a54ae6c80315641a16da74ddb4bd8f0076
+  page: 8
+  role: evaluation
+  excerpt: n question answering task, work. We utilized open-sourced datasets and models, which have using
+    VQA 2.0 dataset and VQA-accuracy metric [14]. been cited.
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-8b145fe068984c83886a
+  paper_id: paper-765a2362f8735bc4
+  source_file_hash: 820aee810116ff6b3adbe19c8ffdc5a54ae6c80315641a16da74ddb4bd8f0076
+  page: 8
+  role: general capability evaluation
+  excerpt: work. We utilized open-sourced datasets and models, which have using VQA 2.0 dataset and VQA-accuracy
+    metric [14].
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: confirmed_name_alias
+  alias_id: vqa-2-0
+  reason: VQA 2.0 is the VQA v2 benchmark name; a paper's exact split or selection is not implied.
+  scope_note: Active VQA v2 pack pins 2017 validation on COCO val2014; other paper runs can use different
+    splits or samples.
+  source_url: https://visualqa.org/download.html
+  audit_file: registry/candidate_dispositions.yaml
+- kind: corpus_mention
+  evidence_id: evidence-c8c27fbf90cb9936fd35
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 6
+  role: evaluation
+  excerpt: accuracy on targeted attacks across downstream tasks, following prior VQAv2, compared to only
+    31.92% for Sim-CLIP4 . This works (Schlarmann & Hein, 2023; Schlarmann et al., 2024), advan
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-426bccb2316d71eb6c17
+  paper_id: paper-392b0c393c06b48e
+  source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
+  page: 9
+  role: evaluation
+  excerpt: ' We evaluate on image captioning (COCO [29], Flickr30k [44]) and VQA (VQAv2 [16], TextVQA
+    [54], VizWiz [17], OKVQA [39]), reporting results on 500 ran- domly sampled images per dataset '
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-1fb1c58004a38f3099fb
+  paper_id: paper-3e0db9c633ab204c
+  source_file_hash: d2750f355a25fcdcfcb221e5049a0aa41ec096b452772c73e1767e2d039a6545
+  page: 7
+  role: evaluation
+  excerpt: val Model Vision Encoder COCO Flickr30k VQAv2 TextVQA OpenAI-L/14 121.7 78.8 71.5
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-274bf70a3897654ac6bf
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 29
+  role: cited-study dataset in survey table
+  excerpt: VQA, DocVQA, VQAv2 Logit Lens (Jiang et al., 2024c) LLaVA-1.5-7B, Shikra, MiniGPT-4
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-a6e0b2fbd4e229b12f16
+  paper_id: paper-09b2d7393fc75cf7
+  source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
+  page: 12
+  role: detector clean training
+  excerpt: than the static discovery of the injected code. When sentation from benign VQAv2 prompts [70].
+    For each pair of an input produces hidden-state dynamics that deviate from the consecutive layers,
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-3da4798079c6d0fe3aac
+  paper_id: paper-392b0c393c06b48e
+  source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
+  page: 9
+  role: VQA evaluation
+  excerpt: nally feasible. We evaluate on image captioning (COCO [29], Flickr30k [44]) and VQA (VQAv2
+    [16], TextVQA [54], VizWiz [17], OKVQA [39]), reporting results on 500 ran- domly sampled images per
+    dataset using CIDE
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-429a25ef0afd2bd20796
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 6
+  role: VQA evaluation
+  excerpt: '% accuracy on targeted attacks across downstream tasks, following prior VQAv2, compared to
+    only 31.92% for Sim-CLIP4 . This works (Schlarmann & Hein, 2023; Schlarmann et al., 2024), advanta'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: confirmed_name_alias
+  alias_id: vqav2
+  reason: VQAv2 is the VQA v2 benchmark name; 500-image and other paper selections remain separate scopes.
+  scope_note: Active VQA v2 pack pins 2017 validation on COCO val2014; receipts include distinct sampled
+    evaluations.
+  source_url: https://visualqa.org/download.html
+  audit_file: registry/candidate_dispositions.yaml
+tasks:
+- visual question answering
+modalities:
+- image
+- text
+labels:
+- multiple_choice_answer
+- answer_type
+- question_type
+source_url: https://visualqa.org/download.html
+snapshot_id: vqa-v2-2017-val2014-sha256-015383bc60b789044210cc9351f7817c9d2be61235dba2b27600f89ce1982da2
+relationships:
+- type: question_annotation_overlay_of
+  target: COCO val2014
+  status: exact_local_join_verified; distinct from COCO 2017 validation

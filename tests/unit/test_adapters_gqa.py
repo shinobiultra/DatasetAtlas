@@ -1,0 +1,77 @@
+import hashlib
+import json
+from pathlib import Path
+import zipfile
+
+import pytest
+
+from dataset_atlas.adapters import get_adapter
+from dataset_atlas.models import Dataset
+
+
+def _fixture(tmp_path: Path, *, missing_image: bool = False) -> Dataset:
+    questions = tmp_path / "questions.zip"
+    images = tmp_path / "images.zip"
+    source = {f"{i:08d}": {"imageId": str(i), "question": f"What is {i}?",
+                            "answer": "test", "isBalanced": True,
+                            "types": {"structural": "query"},
+                            "semantic": [{"operation": "query", "argument": "name"}]}
+              for i in range(125)}
+    with zipfile.ZipFile(questions, "w") as archive:
+        archive.writestr("val_balanced_questions.json", json.dumps(source))
+    with zipfile.ZipFile(images, "w") as archive:
+        for i in range(125 - int(missing_image)):
+            archive.writestr(f"images/{i}.jpg", b"\xff\xd8\xff" + str(i).encode())
+    return Dataset(id="fixture", name="Fixture", release="gqa-v1.2-val-balanced",
+                   snapshot_id="test-snapshot", adapter="gqa_balanced",
+                   adapter_config={
+                       "questions_archive": str(questions),
+                       "questions_sha256": hashlib.sha256(questions.read_bytes()).hexdigest(),
+                       "images_archive": str(images),
+                       "images_sha256": hashlib.sha256(images.read_bytes()).hexdigest(),
+                       "prepared_root": str(tmp_path / "prepared"),
+                       "expected_questions": 125})
+
+
+def test_gqa_original_ids_fields_pagination_and_selective_image(tmp_path: Path):
+    adapter = get_adapter(_fixture(tmp_path))
+    plan = adapter.plan(100, 200_000)
+    assert plan.expected_download_bytes == 0
+    source = adapter.prepare(plan)
+    first = adapter.iter_records(source, limit=100)
+    later = adapter.iter_records(source, cursor=first.next_cursor, limit=100)
+    assert len(first.records) == 100 and len(later.records) == 25
+    assert later.next_cursor is None
+    assert later.records[0].source["question_id"] == "00000100"
+    assert later.records[0].source["semantic"][0]["operation"] == "query"
+    assert later.records[0].question == "What is 100?"
+    assert first.records[0].asset_ids[0] != first.records[1].asset_ids[0]
+    media = adapter.resolve_asset(source, later.records[0].assets[0].uri)
+    assert media.data == b"\xff\xd8\xff100" and media.media_type == "image/jpeg"
+    assert adapter._index()["join_report"]["missing_images"] == 0
+
+
+def test_gqa_fails_when_question_image_is_missing(tmp_path: Path):
+    adapter = get_adapter(_fixture(tmp_path, missing_image=True))
+    with pytest.raises(ValueError, match="no original image"):
+        adapter.prepare(adapter.plan(100, 100_000))
+
+
+def test_gqa_selected_preview_keeps_full_questions_and_marks_unavailable_media(tmp_path: Path):
+    item = _fixture(tmp_path, missing_image=True)
+    item.adapter_config["media_scope"] = "selected_preview"
+    item.adapter_config["minimum_available_images"] = 124
+    adapter = get_adapter(item)
+    source = adapter.prepare(adapter.plan(100, 100_000))
+    last = adapter.iter_records(source, cursor="124", limit=1).records[0]
+    assert last.source["imageId"] == "124"
+    assert last.source["media_available"] is False
+    assert last.assets == []
+    assert adapter._index()["join_report"]["missing_images"] == 1
+
+
+def test_gqa_rejects_unsafe_asset_reference(tmp_path: Path):
+    adapter = get_adapter(_fixture(tmp_path))
+    source = adapter.prepare(adapter.plan(1, 100_000))
+    with pytest.raises(ValueError, match="invalid GQA image reference"):
+        adapter.resolve_asset(source, "../images/0.jpg")

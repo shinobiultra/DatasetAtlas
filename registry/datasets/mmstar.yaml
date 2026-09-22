@@ -1,0 +1,40 @@
+schema_version: '1.0'
+id: mmstar
+name: MMStar
+aliases: []
+description: Mention candidate from a focused page audit; the evidence receipts distinguish
+  direct use, comparison, related-work, and citation-only roles. Original source,
+  release, and rights still require independent verification.
+paper_ids:
+- paper-80b7ba2e277a20c5
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: unverified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Original release identity and rights need verification.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-6fd76231be0e5f08a222
+  paper_id: paper-80b7ba2e277a20c5
+  source_file_hash: 1b014c3d1e86a39f1c6a88d4e9b79c99df2e06c5c7c31bea224aa5da2ae0c46d
+  page: 7
+  role: out-of-domain evaluation
+  excerpt: 'l variants enhance scale coverage. (VQA) tasks: SimpleVQA [8], MMStar
+    [7], and RealWorldQA [30].'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true

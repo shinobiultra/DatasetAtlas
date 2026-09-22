@@ -1,0 +1,3822 @@
+{
+  "schema_version": "1.0",
+  "dataset": {
+    "schema_version": "1.0",
+    "id": "eurosat",
+    "name": "EuroSAT",
+    "aliases": [],
+    "description": "Official EuroSAT v2 RGB JPEG variant from Zenodo record 7711810: 27,000 Sentinel-2 land-cover images in ten original class folders. This RGB variant is distinct from the 13-band multispectral archive. The preview interleaves classes to show ten examples per class.",
+    "tasks": [
+      "land-cover classification"
+    ],
+    "modalities": [
+      "image"
+    ],
+    "labels": [
+      "label"
+    ],
+    "paper_ids": [
+      "paper-3e0db9c633ab204c"
+    ],
+    "source_url": "https://zenodo.org/records/7711810",
+    "release": "zenodo-7711810-v2-rgb",
+    "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+    "adapter": "archive",
+    "coverage": {
+      "identity": "resolved",
+      "source": "verified",
+      "access": "public",
+      "adapter": "tested",
+      "preview": "complete_target",
+      "complete_data": "supported",
+      "publication": "approved",
+      "preview_count": 100,
+      "total_count": 27000,
+      "unit": "example",
+      "blockers": []
+    },
+    "rights": {
+      "records": "approved",
+      "annotations": "approved",
+      "images": "approved",
+      "source": "https://github.com/phelber/EuroSAT/blob/353fc2ff01447cbcf84c4496dd98e82f197515bd/README.md",
+      "copernicus_terms": "https://sentinels.copernicus.eu/documents/247904/690755/Sentinel_Data_Legal_Notice",
+      "attribution": "EuroSAT (c) Helber et al.; dataset MIT. Contains modified Copernicus Sentinel data 2015–2018.",
+      "license_notice": "licenses/eurosat-MIT.txt",
+      "note": "Exact per-image capture years are absent; the 2015–2018 source-year range is inferred from Sentinel-2A launch and the 2018 v2 release. The review covers only the 100-image RGB preview in reports/eurosat-publication-review.md."
+    },
+    "adapter_config": {},
+    "evidence": [],
+    "relationships": []
+  },
+  "fields": [
+    {
+      "id": "source.label",
+      "name": "label",
+      "dtype": "category",
+      "namespace": "source",
+      "values": [
+        "AnnualCrop",
+        "Forest",
+        "HerbaceousVegetation",
+        "Highway",
+        "Industrial",
+        "Pasture",
+        "PermanentCrop",
+        "Residential",
+        "River",
+        "SeaLake"
+      ],
+      "unit": "example",
+      "description": "Original land-cover class folder",
+      "provenance": {
+        "source_url": "https://zenodo.org/records/7711810"
+      },
+      "query_ops": [
+        "eq",
+        "ne",
+        "in",
+        "contains",
+        "is_null"
+      ]
+    },
+    {
+      "id": "source.source_filename",
+      "name": "source_filename",
+      "dtype": "string",
+      "namespace": "source",
+      "values": null,
+      "unit": "example",
+      "description": "Original EuroSAT RGB JPEG filename",
+      "provenance": {
+        "source_url": "https://zenodo.org/records/7711810"
+      },
+      "query_ops": [
+        "eq",
+        "ne",
+        "in",
+        "contains",
+        "is_null"
+      ]
+    }
+  ],
+  "records": [
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:f3bc859c8985973039245397",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:2b740ff4f8b9e41bdaff8292"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:2b740ff4f8b9e41bdaff8292",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/AnnualCrop/AnnualCrop_1.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "f733d6f5d13be0bfe05161cc4df3416e31880c4371cbde9ca85e5409ff4fa78d",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "AnnualCrop",
+        "source_filename": "AnnualCrop_1.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:5886fb5ae5481bf0f0be3641",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:2aaf8d9d1b7c03ed82ae568c"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:2aaf8d9d1b7c03ed82ae568c",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Forest/Forest_1.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "0f695a651c815c3fb84e46c8c9b08ac62f6cb24ef1c174f7cb0382fa93a40039",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Forest",
+        "source_filename": "Forest_1.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:1f5f413777de1c3a3abcf5c0",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:b631b12431563ff4386576b2"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:b631b12431563ff4386576b2",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/HerbaceousVegetation/HerbaceousVegetation_1.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "63cfd7b2e495cab62bf49c0df2e192f885c57128d96f748e20dfdb6d55f03c0f",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "HerbaceousVegetation",
+        "source_filename": "HerbaceousVegetation_1.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:38e46d97b8fcce66fef61c81",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:9f88abe2406b3fb0cb7db346"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:9f88abe2406b3fb0cb7db346",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Highway/Highway_1.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "80e6a21cb1ca9b3fc16c330db58911a4deb92321f9d04909b3490b800f027aec",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Highway",
+        "source_filename": "Highway_1.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:a4b9ef5ce011ff9b2ad7784a",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:c2c465d52b3206cfc87e3733"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:c2c465d52b3206cfc87e3733",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Industrial/Industrial_1.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "5fc481b33a8a5b7482571ec542311d0113c07e337bbe00fc138d545a9fcde2e3",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Industrial",
+        "source_filename": "Industrial_1.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:ff852d1edd79d1232c31c14d",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:2abffe49672667c9369b5c88"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:2abffe49672667c9369b5c88",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Pasture/Pasture_1.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "cecc4e41d8eaa205e7d710b5d06252bb2cf95514b2d812389eb6d30b16cc4efb",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Pasture",
+        "source_filename": "Pasture_1.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:17470e64ca9129675516a81b",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:54de720ce164623e41229eef"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:54de720ce164623e41229eef",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/PermanentCrop/PermanentCrop_1.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "50a4aa7b9ec5d7415f620f2d472140e2613fcf1abf4c1bb9bebb11e8db208ddd",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "PermanentCrop",
+        "source_filename": "PermanentCrop_1.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:e63f8a9d7c2eaea1fb316e84",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:9826fef522202f957645bf68"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:9826fef522202f957645bf68",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Residential/Residential_1.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "9133c4b97bcc5b65d8c80ef1ca4c968514850c65dee3c22a2148f53193c331cf",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Residential",
+        "source_filename": "Residential_1.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:dac2eaa859a683cf56864b38",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:e7923e3d7576ed685806e143"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:e7923e3d7576ed685806e143",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/River/River_1.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "c7b130aa0aad3cc5120db0874e1b21395c9adebfbc9cf7adc6753577b150b06f",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "River",
+        "source_filename": "River_1.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:e69df4c87d16fdf121a77f68",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:0702b00644641e3cabbdd899"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:0702b00644641e3cabbdd899",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/SeaLake/SeaLake_1.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "51e6ad247d5032b82c8bf7024fd9400e89e9c7ed6c867c3c5abc45e46230e160",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "SeaLake",
+        "source_filename": "SeaLake_1.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:2c17220c70bea9fedc0507fc",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:69357693441ed740a010c61c"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:69357693441ed740a010c61c",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/AnnualCrop/AnnualCrop_10.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "2fe8f8e5425bef300efd03d690725c95090eda75949d4157d7e58d78fd3c9d6e",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "AnnualCrop",
+        "source_filename": "AnnualCrop_10.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:36ca10f7812c25a981c2209a",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:3096df6bf00734eb18394be3"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:3096df6bf00734eb18394be3",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Forest/Forest_10.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "936afdb9eb8231fe5e910dfe0c25a1ee313eae6908c60157f2685332c677cf4c",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Forest",
+        "source_filename": "Forest_10.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:87aa56b64ae8378a8a182606",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:57c838b4c31d4a3ccad0e8cd"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:57c838b4c31d4a3ccad0e8cd",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/HerbaceousVegetation/HerbaceousVegetation_10.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "fd88b9a0df92b8c83bd6280952c50c2e0fca23938edf9f5e70c4b305db225b8f",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "HerbaceousVegetation",
+        "source_filename": "HerbaceousVegetation_10.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:840f9f9fc12bdb03c8f27d38",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:377ed19185f1da1c05703a6b"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:377ed19185f1da1c05703a6b",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Highway/Highway_10.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "d7bbc4f8a8a44b68e66a4e607639625efb9c2429e0793b88c20e45584d484ee9",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Highway",
+        "source_filename": "Highway_10.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:28f6da888120e79fe37fc508",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:4e83bc0caaae475f58d6c497"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:4e83bc0caaae475f58d6c497",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Industrial/Industrial_10.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "40257bf116efa7abf0ca4d0f50b02df043f6d4d868309a321b1eb80c8621097f",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Industrial",
+        "source_filename": "Industrial_10.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:5127d343b72b08cae34bf498",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:97a09fbc4dc04ff59887916e"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:97a09fbc4dc04ff59887916e",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Pasture/Pasture_10.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "8028a4346941ed916229a6791bab480f2f1fd01d61e71b4f258a322f2443966f",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Pasture",
+        "source_filename": "Pasture_10.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:0a72e0c21714cf16dc691268",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:56c0d03a9263bc5f68ebaa04"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:56c0d03a9263bc5f68ebaa04",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/PermanentCrop/PermanentCrop_10.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "a48fa26a4e306b76d9494b64902c21f279493f93553655490a357cf71353740c",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "PermanentCrop",
+        "source_filename": "PermanentCrop_10.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:58f1c936205bbf8f7053caf6",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:b3a6ef0b7ad5bebc1d34739e"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:b3a6ef0b7ad5bebc1d34739e",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Residential/Residential_10.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "f6622b16266773dc0135021525548fd74d155ce564e6a51c7313050b4c657d7a",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Residential",
+        "source_filename": "Residential_10.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:537a57b38dd19547942a342b",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:fafeee3b704941f465399d94"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:fafeee3b704941f465399d94",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/River/River_10.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "a4ba98c1cc0cbbef21441496814de1129c5720cd5173ea971b72a0df1150b6bc",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "River",
+        "source_filename": "River_10.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:597cd58b870f8846a0c0070f",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:60cb2d25311edb957c99bf16"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:60cb2d25311edb957c99bf16",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/SeaLake/SeaLake_10.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "8e229ae52c942e761c7249a92ee5e4d0f4e3e06d319c632a8c31b2bc66e178e5",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "SeaLake",
+        "source_filename": "SeaLake_10.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:f65198a3d644c7585c7cf1d6",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:0fd0b75dd4965d48136c9461"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:0fd0b75dd4965d48136c9461",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/AnnualCrop/AnnualCrop_100.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "a732b88cf8b224aff3bed48f90c1eaaa64638e63bf029343b3277b4cbeba48a2",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "AnnualCrop",
+        "source_filename": "AnnualCrop_100.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:296a5e6edc688ec3d3599531",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:ee7adb2adf2147ffbd61e8aa"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:ee7adb2adf2147ffbd61e8aa",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Forest/Forest_100.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "a50ae230e6cbc9314312df844dcfae00bd32f96aa21166be93225926c0136c9b",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Forest",
+        "source_filename": "Forest_100.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:4379123f3132e4ba42423a6b",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:09af5b10dc0735f193b3f5c9"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:09af5b10dc0735f193b3f5c9",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/HerbaceousVegetation/HerbaceousVegetation_100.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "fd6e14af03546f33eae1ebbb2393d6edfa0832968378e6d98c0c9ed5a7f42902",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "HerbaceousVegetation",
+        "source_filename": "HerbaceousVegetation_100.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:4f8e23855ce885e52dcfa172",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:cadbc114cb3321d47436e6a3"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:cadbc114cb3321d47436e6a3",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Highway/Highway_100.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "a11ecdedaf8f5ee04ca14b22e564f6e4c7abcfb00468aea394229e8de821a770",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Highway",
+        "source_filename": "Highway_100.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:b1283bedf3daf49f1f41e8e5",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:9b0d9bacf92fa62c80d175e8"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:9b0d9bacf92fa62c80d175e8",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Industrial/Industrial_100.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "04219283ae8c9d7d43ba2152577f9a96d4c8f3bf670e8322aec0d9545c2eb0aa",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Industrial",
+        "source_filename": "Industrial_100.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:abae351bf05506498d671e81",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:1b94540d4178ed1483274940"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:1b94540d4178ed1483274940",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Pasture/Pasture_100.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "051df1c7f288fb219ca86f77deb5a8ffca7e218cb0f9fdded6fd31325378e6a2",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Pasture",
+        "source_filename": "Pasture_100.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:2586a5f225fc8f670c6e69c6",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:4386b7523fab28fe991441ab"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:4386b7523fab28fe991441ab",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/PermanentCrop/PermanentCrop_100.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "104bb2fecd029f17c1fc6cc5343cc10f0f767f73dea0593e0809b63a3fddb952",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "PermanentCrop",
+        "source_filename": "PermanentCrop_100.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:615cfc2c185d7091c7edae49",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:4af209b3a4b263e983104f90"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:4af209b3a4b263e983104f90",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Residential/Residential_100.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "c6e71ec078ee2bcf1d5ab10baff219b24fa6e717c03aac6bd030a9ef842fc8d8",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Residential",
+        "source_filename": "Residential_100.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:f4bc044e04a6f8eb659cdb81",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:92fc005d62eff079e8d8ca27"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:92fc005d62eff079e8d8ca27",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/River/River_100.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "08d1c91e293c650c8b9737dfc794f07c22eaa9d3be73a0ac416b4310daf15c87",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "River",
+        "source_filename": "River_100.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:afa98f4324462923f7a0b832",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:9ba1c2e335a6cf995cc8899d"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:9ba1c2e335a6cf995cc8899d",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/SeaLake/SeaLake_100.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "4d8f767787c3b9cefcfbf73b6095a2e22cb71020c534b2fa1d5067782dfeff1c",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "SeaLake",
+        "source_filename": "SeaLake_100.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:a739abaa46044c6cf33928d0",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:632cfc5f334dbdfb99953240"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:632cfc5f334dbdfb99953240",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/AnnualCrop/AnnualCrop_1000.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "3520cd006cc0a0cfb5e87c8708aefcb95a98342018d575a6678c9bc61649f858",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "AnnualCrop",
+        "source_filename": "AnnualCrop_1000.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:2ef090ecc9aa5bb3bbd3077a",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:bae6c0d516acea761400f023"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:bae6c0d516acea761400f023",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Forest/Forest_1000.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "0cfea7cabe3ee56ee94049e745db8134f396b1c5febc01439da62b9e3eb16f1f",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Forest",
+        "source_filename": "Forest_1000.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:ab39aab63e5b118a3f94ac8d",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:047d16cd08afcbd10688bbd7"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:047d16cd08afcbd10688bbd7",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/HerbaceousVegetation/HerbaceousVegetation_1000.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "edecc9cbdc89142c749fafd7ae2fd0b0c2b3129fc0afb9a86dfd71823539fc6b",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "HerbaceousVegetation",
+        "source_filename": "HerbaceousVegetation_1000.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:25d3c159cd0b8e35c1dc9115",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:ca40f0d915546d7a1d125547"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:ca40f0d915546d7a1d125547",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Highway/Highway_1000.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "3991101c2bbf40a427657909ed1004f3373529d6d142205011a3943d4ecf7614",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Highway",
+        "source_filename": "Highway_1000.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:043a4cb04b9bef5b9f56bd33",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:6926aa4076af0af23bcc4de5"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:6926aa4076af0af23bcc4de5",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Industrial/Industrial_1000.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "5711c470eb6981a38b87802704b46e314de0c4cbb040c0ade55e488a60eb658e",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Industrial",
+        "source_filename": "Industrial_1000.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:55e5b40e40ed9679f7b26790",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:07c63f9de1f401f101d33bab"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:07c63f9de1f401f101d33bab",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Pasture/Pasture_1000.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "488e5d04414ccabfa27e7264d171a0e9d7a473a3302cc23deda270bdd4be1445",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Pasture",
+        "source_filename": "Pasture_1000.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:04b938c69f44c4f4878a5b77",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:4c271db55364dc45e38ae48b"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:4c271db55364dc45e38ae48b",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/PermanentCrop/PermanentCrop_1000.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "2e355fe6566d6b085f45ddca0168960e4ad80ad4c235cd2554eb27261a314d95",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "PermanentCrop",
+        "source_filename": "PermanentCrop_1000.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:e5af5bb330cd561331561d2d",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:faaee9d54ae77272ade9cf4e"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:faaee9d54ae77272ade9cf4e",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Residential/Residential_1000.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "863b1d126002771fb56200fdc58cfdca643921c9fc4b2d49a185490a4dbdad05",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Residential",
+        "source_filename": "Residential_1000.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:3552a7036431dbd952eb5718",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:71d096e692f3d9709fcd3188"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:71d096e692f3d9709fcd3188",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/River/River_1000.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "5031ea29609a9d547ee618e1259086bac69e50a2106e981d0c1d0ae82c14e21e",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "River",
+        "source_filename": "River_1000.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:f52e855d5604a3e7d1976d03",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:074eb85d8095f01e31221802"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:074eb85d8095f01e31221802",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/SeaLake/SeaLake_1000.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "60c364f234ae14491f1b9c687bdda8193cf9875c1fbb6f752ec13a2ac680d7b0",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "SeaLake",
+        "source_filename": "SeaLake_1000.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:c53ac8ec18a60b554ec9ff82",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:3428297678ca421402627e0d"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:3428297678ca421402627e0d",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/AnnualCrop/AnnualCrop_1001.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "732bef6f6629128056ef63882b9f1cc8067eb5b59b1fd654ff5ab0d87112a103",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "AnnualCrop",
+        "source_filename": "AnnualCrop_1001.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:5db469d6d35df9cd3c75c797",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:62fcbc9b98abbae8ef564cad"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:62fcbc9b98abbae8ef564cad",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Forest/Forest_1001.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "5e4b98fcbe7c0249b4fcfed1994040be937a50858c032b851de50157efba64f2",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Forest",
+        "source_filename": "Forest_1001.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:0a5a745fc5fabb1c33971c0b",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:d2c0f91a1bb096c8cb45aa82"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:d2c0f91a1bb096c8cb45aa82",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/HerbaceousVegetation/HerbaceousVegetation_1001.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "2e50d3bfb188bce95dfad7915f059cd4631d46527f481901e076afb765cd130d",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "HerbaceousVegetation",
+        "source_filename": "HerbaceousVegetation_1001.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:b6a416b209a4e3ac4b172870",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:1d0c6f624c1708547ced2298"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:1d0c6f624c1708547ced2298",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Highway/Highway_1001.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "de0c7e18cafd5f1edb52445138a723405df79fd5d9965b3db6e4cbb954fbeff1",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Highway",
+        "source_filename": "Highway_1001.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:5226caef1a99f7bc4cc4d6a4",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:c50d55aa2ca0806ffcb7e486"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:c50d55aa2ca0806ffcb7e486",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Industrial/Industrial_1001.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "d0a4ab8b076004d78860793d62a6cb05bba3c1134d50542a487356d3459e23da",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Industrial",
+        "source_filename": "Industrial_1001.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:f2a1f943686cc25dc9e51dc4",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:aa9614e03f9eb08d9f465515"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:aa9614e03f9eb08d9f465515",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Pasture/Pasture_1001.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "dcda5f5a3ec3794a3de7f1f0a34328edf2c6eee4bd71e9d55feec2ec347d6788",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Pasture",
+        "source_filename": "Pasture_1001.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:2ad436017e1b1a69e4d28a3f",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:0adc3e9592d9747d7e874b15"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:0adc3e9592d9747d7e874b15",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/PermanentCrop/PermanentCrop_1001.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "86ab6029b5afeca72d6848092d6c464624f73e29a7e402d7c4ed8943c1424a57",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "PermanentCrop",
+        "source_filename": "PermanentCrop_1001.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:89ba6403f92606fd067c4162",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:31c490b8e6f529d5726dd5ce"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:31c490b8e6f529d5726dd5ce",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Residential/Residential_1001.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "25edf13e6a90bf82314abe574abe75328265097172bbe714b292ffd2db26ba7a",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Residential",
+        "source_filename": "Residential_1001.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:5e7b32ac5a6499527dff71a7",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:f745ee5e7a393cd0c9d91470"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:f745ee5e7a393cd0c9d91470",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/River/River_1001.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "4692439df7fbf5765731e98c28da72710f43bc112f29e519f0a7886cdc40dd94",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "River",
+        "source_filename": "River_1001.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:b973ebf16d6a1f89febf898f",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:ca0d33ac0ce973ea8c660447"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:ca0d33ac0ce973ea8c660447",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/SeaLake/SeaLake_1001.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "4517979660745a825fd5c2414400d5d605ebec6ddb3f25117b0ee8dd921909e3",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "SeaLake",
+        "source_filename": "SeaLake_1001.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:3044aa1992a0320d4b3346f0",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:0f9e6271f24f72cf018bbdb9"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:0f9e6271f24f72cf018bbdb9",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/AnnualCrop/AnnualCrop_1002.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "e2dc615c534a67849ace20e9181216bc9e4dbe5d23b7f25fdf5c0151f48ec9eb",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "AnnualCrop",
+        "source_filename": "AnnualCrop_1002.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:81316e49f1878d1a42bd0abb",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:8f1c58f8a176cace50ba2862"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:8f1c58f8a176cace50ba2862",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Forest/Forest_1002.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "e4e8624c042725a7c3e5eeb0bd9274078bfd8af9e8068285cc1e49aea2077e77",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Forest",
+        "source_filename": "Forest_1002.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:3d5767a6c983a9133779ebd8",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:710cd6452bda396d52cf3120"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:710cd6452bda396d52cf3120",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/HerbaceousVegetation/HerbaceousVegetation_1002.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "fc1fa9bb08d4f8780364fe3c66fe54564852cd24fb9e8266ed91b18a6d80460a",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "HerbaceousVegetation",
+        "source_filename": "HerbaceousVegetation_1002.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:32e8198d29072bf75696fc53",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:e84893c148511aec9417579f"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:e84893c148511aec9417579f",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Highway/Highway_1002.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "66d276f97ff37a9818d47678c60251c2e1033418649a60e10a93cd8c66ab6905",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Highway",
+        "source_filename": "Highway_1002.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:a8a872131975a885783bf14d",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:9a9d4b4e74f78f518fc230bc"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:9a9d4b4e74f78f518fc230bc",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Industrial/Industrial_1002.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "b827bd46b8b0d80cc988b34bc451e65198929f48a370d49116980989a1f8b219",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Industrial",
+        "source_filename": "Industrial_1002.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:c0e1356d21470a79feb57a9d",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:3bb0cb53b6b5e6fabee72628"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:3bb0cb53b6b5e6fabee72628",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Pasture/Pasture_1002.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "10aaa25642f420deb8bb1cd5b5a361bf075136586b3884c4280218737148ead7",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Pasture",
+        "source_filename": "Pasture_1002.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:d961506b6ff614d0ed3ef6dd",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:f90a00096252b889dcc3c116"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:f90a00096252b889dcc3c116",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/PermanentCrop/PermanentCrop_1002.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "6d42d57affd09e21589034b76c1cb5f79177b506980a4884588f6bf14bb89f57",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "PermanentCrop",
+        "source_filename": "PermanentCrop_1002.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:2bf810bab145e0422b8fa550",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:d872e6590de36624c025543e"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:d872e6590de36624c025543e",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Residential/Residential_1002.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "765d3b343ecd5ccfd65cd051cf9e3ab2a6d473132dc4e7dd96cfda86e1dabcb9",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Residential",
+        "source_filename": "Residential_1002.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:4502494f7ec21018ab5d4da4",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:10d4f45b2f82a4d8ea65851f"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:10d4f45b2f82a4d8ea65851f",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/River/River_1002.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "1b27f0f0bfcc3fa48a9df2ee88af8ff4eb000c8148ea2fc7879771b2cdc2c1e0",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "River",
+        "source_filename": "River_1002.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:6e645963e9dfe710c1ff4191",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:b910e3207300f0516607eba4"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:b910e3207300f0516607eba4",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/SeaLake/SeaLake_1002.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "51defe70bbf5caeccd83332f5dc75b07771fc3b591ed31342c40659121577ece",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "SeaLake",
+        "source_filename": "SeaLake_1002.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:d5d3955207136ddebf94862d",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:99d9be9ea4e7bdb34d43ef4d"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:99d9be9ea4e7bdb34d43ef4d",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/AnnualCrop/AnnualCrop_1003.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "fb5f900c7a61fb87093a2d2311607a8198a636f52b646784bfe1f04287728a90",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "AnnualCrop",
+        "source_filename": "AnnualCrop_1003.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:28a600af2fdf03aa9a4cb7ab",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:83473649d6d6ab646877f623"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:83473649d6d6ab646877f623",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Forest/Forest_1003.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "2f107242fc678fb6998febbd7e9f1e50467840882a52b52c55f8423a9f9f2cc4",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Forest",
+        "source_filename": "Forest_1003.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:f4229f96ce0c3bce406c9843",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:05668fff727455a4cc838871"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:05668fff727455a4cc838871",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/HerbaceousVegetation/HerbaceousVegetation_1003.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "3cad4ceec065f6180b6cbe7636fa2ce52f8a1b18002b521abf184d64da918581",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "HerbaceousVegetation",
+        "source_filename": "HerbaceousVegetation_1003.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:6c3d1cf7513550d6e044f8f2",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:b0cf8cdf3d962e45aaf672f8"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:b0cf8cdf3d962e45aaf672f8",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Highway/Highway_1003.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "8d0dc9fc16cfd2e8e4a0b86aa8863d7d4a7382dd5d8105509e83ef24fdb78af0",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Highway",
+        "source_filename": "Highway_1003.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:8c23120584170a3032f813f5",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:03cca8b86b077bac93ce12e1"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:03cca8b86b077bac93ce12e1",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Industrial/Industrial_1003.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "8e7aefab0910d00bd9ea7b4b14caf0df64953009a2044134d59676885fcb0242",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Industrial",
+        "source_filename": "Industrial_1003.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:d9edb04099db5d68a70ff7ec",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:a26223550bc937e428cd8bf3"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:a26223550bc937e428cd8bf3",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Pasture/Pasture_1003.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "f57fe6a12e5b52d1f5729c72bcd7be2a8140d3d88fce8023855371a2a2ced40e",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Pasture",
+        "source_filename": "Pasture_1003.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:acd25b90522dcbc0560ae5a8",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:0aa11297943c08f96287e038"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:0aa11297943c08f96287e038",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/PermanentCrop/PermanentCrop_1003.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "2685474801840d94a02aac1203f6eaa0a4af87d76404ec74abb983019a85439e",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "PermanentCrop",
+        "source_filename": "PermanentCrop_1003.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:c4af8afab765ae8b6baf4d6a",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:6d74c38e06c4aecd8cb5d335"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:6d74c38e06c4aecd8cb5d335",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Residential/Residential_1003.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "fe4a3b8c88a166452ac202bfbb4c4a0675463e9df42f318a8e87f47889c159d0",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Residential",
+        "source_filename": "Residential_1003.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:6528eb65a7d9cff5daa10c11",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:2b929191075aa0ad5f79ed91"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:2b929191075aa0ad5f79ed91",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/River/River_1003.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "ff0a200a0bf82ca7873ec26bf9f32b81686e657581786e999605991a627bbf50",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "River",
+        "source_filename": "River_1003.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:1991208a2d055d6acca34da4",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:585e41d0d96a9ff0f40c95fc"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:585e41d0d96a9ff0f40c95fc",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/SeaLake/SeaLake_1003.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "47bda7cd6f76b1b4d90dca09b6b3c8568b43313f5815b3e5557f0ee52a59229b",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "SeaLake",
+        "source_filename": "SeaLake_1003.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:19cd5c0d7c9e1e5d39e616a8",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:ddbc7dbe46eb9bcfb0bf969c"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:ddbc7dbe46eb9bcfb0bf969c",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/AnnualCrop/AnnualCrop_1004.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "e0a4288158a320c665939ceb12ffeccd8daf5abb0f838d46fb2907a11f690750",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "AnnualCrop",
+        "source_filename": "AnnualCrop_1004.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:b92ab3970127e08cd2041ab3",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:cef9eef2fcc61b4bfc311bcc"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:cef9eef2fcc61b4bfc311bcc",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Forest/Forest_1004.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "26a710294a87371ccf86178fa21eb9c430c576ff07f36db66a7ad5bf12cf8755",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Forest",
+        "source_filename": "Forest_1004.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:7e9ebd3f18b79d684657f277",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:6c4095677303366eafc5ffe7"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:6c4095677303366eafc5ffe7",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/HerbaceousVegetation/HerbaceousVegetation_1004.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "449f6944e81bba2ce96cbaeab85a139ca4e1b2a62c6b141357b67c4b75e34e76",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "HerbaceousVegetation",
+        "source_filename": "HerbaceousVegetation_1004.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:57923d16ee8d3738a62395d5",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:2c060a33c7df4fdac04d58ce"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:2c060a33c7df4fdac04d58ce",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Highway/Highway_1004.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "ead57331560c4b848e349258733f0c82b130b686456b9e0db131e09162f6e694",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Highway",
+        "source_filename": "Highway_1004.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:e279186f6ab4365f92f17f57",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:372ab952f5966d52e74b9b77"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:372ab952f5966d52e74b9b77",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Industrial/Industrial_1004.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "7b7c8ae252b4cd8eff5733cc750ce4af611485f935e250aa4390d9864fb2a088",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Industrial",
+        "source_filename": "Industrial_1004.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:173d134e23efe41293dd58d6",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:554ac78993d70a2c84861581"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:554ac78993d70a2c84861581",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Pasture/Pasture_1004.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "04ab77a379bccdead2143a6ce3c1e1e46df98f1cd7e62a4258016320090fdfd4",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Pasture",
+        "source_filename": "Pasture_1004.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:06cbbad9c5a881a26ce1846a",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:1ae0deaabb1cadbaf6d4fecb"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:1ae0deaabb1cadbaf6d4fecb",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/PermanentCrop/PermanentCrop_1004.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "89d3d31f8adb3d26059aa96ef96337e006199d78cd906a8b777df96161c8a7ac",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "PermanentCrop",
+        "source_filename": "PermanentCrop_1004.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:f08d68b8d9c4812958e31e76",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:d30eee494eb3884505019088"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:d30eee494eb3884505019088",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Residential/Residential_1004.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "b7b0124fc0e0cdcea97caf650b16ce9fe5d7c714c3cbcccf8f8b2addcd07636b",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Residential",
+        "source_filename": "Residential_1004.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:fade2efee9a177916988bf82",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:b222f6fbe7200cc4d1264957"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:b222f6fbe7200cc4d1264957",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/River/River_1004.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "6f04196599bfd413b1a2cdc6bc5255226a5922bfca2bee530ac2fccd0d3f73a5",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "River",
+        "source_filename": "River_1004.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:b2b3e5a162bc295cb6d643d6",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:4b5f71e8b3d668da87558f9d"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:4b5f71e8b3d668da87558f9d",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/SeaLake/SeaLake_1004.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "4d7b786997e1459c15b421b4e0e028378f2e33de994b9e296dce30bae4402d82",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "SeaLake",
+        "source_filename": "SeaLake_1004.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:760e0eb410a57d953455c5bb",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:4f554f44a68c5952b6481228"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:4f554f44a68c5952b6481228",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/AnnualCrop/AnnualCrop_1005.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "f58aa7b15eb07e23a843cfc84d2aad584392bbd8bc3b6e5ad6a670df7ed47dec",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "AnnualCrop",
+        "source_filename": "AnnualCrop_1005.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:faad4137dbf8d111f09a766a",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:6851d30090cb3d861fdc50eb"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:6851d30090cb3d861fdc50eb",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Forest/Forest_1005.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "c4a4280301eee9a09c46cf8fb0ddbb5a81547c6d4de1477a10cd7cd57bed5382",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Forest",
+        "source_filename": "Forest_1005.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:ac81087ea4bc821758028689",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:f969fb6090728d67354d38d0"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:f969fb6090728d67354d38d0",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/HerbaceousVegetation/HerbaceousVegetation_1005.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "6daa1e8f92a6623f3b0bdd4a542aa2e655a4456066c77fa7cbf378c45b1c5d9e",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "HerbaceousVegetation",
+        "source_filename": "HerbaceousVegetation_1005.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:e88b8452d4f45777f2105178",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:ae3cd198b929abb59079e2ef"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:ae3cd198b929abb59079e2ef",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Highway/Highway_1005.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "71cc3f6df5c042e44b12a9ea4c13d8832ea750322ce978d06af82b02e06d97a0",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Highway",
+        "source_filename": "Highway_1005.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:989df1fb2f95eb8b6b2627e3",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:43c1710d576d8de5c5541559"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:43c1710d576d8de5c5541559",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Industrial/Industrial_1005.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "7fec193710889da2ea14afd89fe05089f1cd931bf4bccc8a56a09089977d8fbc",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Industrial",
+        "source_filename": "Industrial_1005.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:d5dab71ed802440b1f49fb0c",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:a358827d60bc51fd3aab61e0"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:a358827d60bc51fd3aab61e0",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Pasture/Pasture_1005.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "88a54450374c251b71d4a2beb8e136f3246c90ca8d087ccf33511318d6212399",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Pasture",
+        "source_filename": "Pasture_1005.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:840de8620235ffdaa79442ee",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:42163d55f94ab1f3ee09b930"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:42163d55f94ab1f3ee09b930",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/PermanentCrop/PermanentCrop_1005.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "bd3f1093426448eeaeba6b00683e138d429ba484757c2b9622f53babb835d384",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "PermanentCrop",
+        "source_filename": "PermanentCrop_1005.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:48932449fedd690bac8997ba",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:2e768e24402957c97858863f"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:2e768e24402957c97858863f",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Residential/Residential_1005.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "d94908a72588ba887dcdd690051417a0878f75d5acb1082bbcfa1e6089a786fa",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Residential",
+        "source_filename": "Residential_1005.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:3afc6e27301aa5f0a108b24f",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:4cbe4273ea540e95f8edb272"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:4cbe4273ea540e95f8edb272",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/River/River_1005.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "e3fe0d12ba8584dc678664f44ee3ae673a57a840e1f09311fbe89ad943378f10",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "River",
+        "source_filename": "River_1005.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:d07078f9b0d93e3068aeec99",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:7e45ad8a7a13b212b8834b18"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:7e45ad8a7a13b212b8834b18",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/SeaLake/SeaLake_1005.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "6538f8526f92cc928134547c2f259a40556269399e0dad2a7a7b3a97cf078b57",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "SeaLake",
+        "source_filename": "SeaLake_1005.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:49f695cb154922bbb61f53f6",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:dbb8214491f8e54d984ec78c"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:dbb8214491f8e54d984ec78c",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/AnnualCrop/AnnualCrop_1006.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "5a3acb72f2fda3191055b4a4101debd0bf38bd81dc54f817a32ece9dbbd728cb",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "AnnualCrop",
+        "source_filename": "AnnualCrop_1006.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:fc942fddf5a75a4c0f3629ac",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:5fe5dd2800dcaef6b64753d7"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:5fe5dd2800dcaef6b64753d7",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Forest/Forest_1006.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "dd2cb9ecdf1c0703f616ff7914fd30cd92fe4d3638ee51fb2c783ab597adc2d2",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Forest",
+        "source_filename": "Forest_1006.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:b1a637ca657adb0bb5a49ef6",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:fa082f4adc06272f7ef0ff05"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:fa082f4adc06272f7ef0ff05",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/HerbaceousVegetation/HerbaceousVegetation_1006.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "8774a650842f4f35a2aca0ac10068a41a41239d0097b752d058f1fc0cd64c598",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "HerbaceousVegetation",
+        "source_filename": "HerbaceousVegetation_1006.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:3bda1d495b9746ba44ce67b6",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:8b6f3976139cf5a766512b06"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:8b6f3976139cf5a766512b06",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Highway/Highway_1006.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "18192505dab31c3e53b2b266e61663917a8215f513ffc1b03a28736346c8f9ab",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Highway",
+        "source_filename": "Highway_1006.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:a4568d25ba77f2f6c35fdb91",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:ecf41f890a9f8da3c3fa0b52"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:ecf41f890a9f8da3c3fa0b52",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Industrial/Industrial_1006.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "a4b030b8b4738a22cbde6aa2bbfb23a4b5ebd6f2c4c0d6a1b931429f25700502",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Industrial",
+        "source_filename": "Industrial_1006.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:d59ad04bb8cddb122012bfa2",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:2185999ff01d4283635015f3"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:2185999ff01d4283635015f3",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Pasture/Pasture_1006.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "046b6adf427eb9bc76c4326fea7727093f87d6d009cb719b573694096aedee18",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Pasture",
+        "source_filename": "Pasture_1006.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:aa671dff6dbe3145bf8bd40e",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:a4acddeec80e89c53b41f65e"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:a4acddeec80e89c53b41f65e",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/PermanentCrop/PermanentCrop_1006.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "e497b73190202806325edc5de5000d2e75b6fdf55b1ba813aa418b01d38d4062",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "PermanentCrop",
+        "source_filename": "PermanentCrop_1006.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:31cd2d66347b75b8344f3c9c",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:afeaeda0e783f6e8f8b0bc66"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:afeaeda0e783f6e8f8b0bc66",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/Residential/Residential_1006.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "d3a1b9a149894042e79274467aa9ad0223c96fb54feff35bd79c15abcc3abb10",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "Residential",
+        "source_filename": "Residential_1006.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:b856d949ec23cc0492dd07bc",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:9b51339c8345c40c2de38359"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:9b51339c8345c40c2de38359",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/River/River_1006.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "a7d05ace3ab804fb5086edab588e01f7017888fe29e4c8aecc3ab9a9d0b3eb1b",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "River",
+        "source_filename": "River_1006.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    },
+    {
+      "schema_version": "1.0",
+      "id": "eurosat:example:9cfa135c938d24db0b274b59",
+      "dataset_id": "eurosat",
+      "release_id": "zenodo-7711810-v2-rgb",
+      "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90",
+      "unit": "example",
+      "asset_ids": [
+        "eurosat:asset:b0fdffaff638c13a50b50c54"
+      ],
+      "assets": [
+        {
+          "id": "eurosat:asset:b0fdffaff638c13a50b50c54",
+          "dataset_id": "eurosat",
+          "release_id": "zenodo-7711810-v2-rgb",
+          "modality": "image",
+          "uri": "media/EuroSAT_RGB/SeaLake/SeaLake_1006.jpg",
+          "text": null,
+          "representation": "original",
+          "sha256": "8b6b2e2c90cef7282e04bc3b66bb9314a1d993b7ce8ab4ddec3b396b9263a405",
+          "metadata": {}
+        }
+      ],
+      "text": null,
+      "question": null,
+      "choices": [],
+      "conversation": [],
+      "source": {
+        "label": "SeaLake",
+        "source_filename": "SeaLake_1006.jpg"
+      },
+      "prediction": {},
+      "human": {},
+      "annotations": [],
+      "relations": []
+    }
+  ],
+  "artifacts": [],
+  "population_scope": "preview",
+  "sampling": {
+    "method": "source_order",
+    "unit": "example",
+    "population": "official EuroSAT v2 RGB, 27,000 class-folder JPEGs",
+    "offset": 0,
+    "requested_count": 100,
+    "returned_count": 100,
+    "next_cursor": "100",
+    "source_revision": "zenodo-7711810-v2-rgb",
+    "bytes_read": 348869,
+    "warnings": [],
+    "selection_note": "100 real original RGB JPEGs: first ten round-robin examples from each of ten original class folders. Not random or complete."
+  },
+  "checksums": {
+    "media/EuroSAT_RGB/AnnualCrop/AnnualCrop_1.jpg": "f733d6f5d13be0bfe05161cc4df3416e31880c4371cbde9ca85e5409ff4fa78d",
+    "media/EuroSAT_RGB/Forest/Forest_1.jpg": "0f695a651c815c3fb84e46c8c9b08ac62f6cb24ef1c174f7cb0382fa93a40039",
+    "media/EuroSAT_RGB/HerbaceousVegetation/HerbaceousVegetation_1.jpg": "63cfd7b2e495cab62bf49c0df2e192f885c57128d96f748e20dfdb6d55f03c0f",
+    "media/EuroSAT_RGB/Highway/Highway_1.jpg": "80e6a21cb1ca9b3fc16c330db58911a4deb92321f9d04909b3490b800f027aec",
+    "media/EuroSAT_RGB/Industrial/Industrial_1.jpg": "5fc481b33a8a5b7482571ec542311d0113c07e337bbe00fc138d545a9fcde2e3",
+    "media/EuroSAT_RGB/Pasture/Pasture_1.jpg": "cecc4e41d8eaa205e7d710b5d06252bb2cf95514b2d812389eb6d30b16cc4efb",
+    "media/EuroSAT_RGB/PermanentCrop/PermanentCrop_1.jpg": "50a4aa7b9ec5d7415f620f2d472140e2613fcf1abf4c1bb9bebb11e8db208ddd",
+    "media/EuroSAT_RGB/Residential/Residential_1.jpg": "9133c4b97bcc5b65d8c80ef1ca4c968514850c65dee3c22a2148f53193c331cf",
+    "media/EuroSAT_RGB/River/River_1.jpg": "c7b130aa0aad3cc5120db0874e1b21395c9adebfbc9cf7adc6753577b150b06f",
+    "media/EuroSAT_RGB/SeaLake/SeaLake_1.jpg": "51e6ad247d5032b82c8bf7024fd9400e89e9c7ed6c867c3c5abc45e46230e160",
+    "media/EuroSAT_RGB/AnnualCrop/AnnualCrop_10.jpg": "2fe8f8e5425bef300efd03d690725c95090eda75949d4157d7e58d78fd3c9d6e",
+    "media/EuroSAT_RGB/Forest/Forest_10.jpg": "936afdb9eb8231fe5e910dfe0c25a1ee313eae6908c60157f2685332c677cf4c",
+    "media/EuroSAT_RGB/HerbaceousVegetation/HerbaceousVegetation_10.jpg": "fd88b9a0df92b8c83bd6280952c50c2e0fca23938edf9f5e70c4b305db225b8f",
+    "media/EuroSAT_RGB/Highway/Highway_10.jpg": "d7bbc4f8a8a44b68e66a4e607639625efb9c2429e0793b88c20e45584d484ee9",
+    "media/EuroSAT_RGB/Industrial/Industrial_10.jpg": "40257bf116efa7abf0ca4d0f50b02df043f6d4d868309a321b1eb80c8621097f",
+    "media/EuroSAT_RGB/Pasture/Pasture_10.jpg": "8028a4346941ed916229a6791bab480f2f1fd01d61e71b4f258a322f2443966f",
+    "media/EuroSAT_RGB/PermanentCrop/PermanentCrop_10.jpg": "a48fa26a4e306b76d9494b64902c21f279493f93553655490a357cf71353740c",
+    "media/EuroSAT_RGB/Residential/Residential_10.jpg": "f6622b16266773dc0135021525548fd74d155ce564e6a51c7313050b4c657d7a",
+    "media/EuroSAT_RGB/River/River_10.jpg": "a4ba98c1cc0cbbef21441496814de1129c5720cd5173ea971b72a0df1150b6bc",
+    "media/EuroSAT_RGB/SeaLake/SeaLake_10.jpg": "8e229ae52c942e761c7249a92ee5e4d0f4e3e06d319c632a8c31b2bc66e178e5",
+    "media/EuroSAT_RGB/AnnualCrop/AnnualCrop_100.jpg": "a732b88cf8b224aff3bed48f90c1eaaa64638e63bf029343b3277b4cbeba48a2",
+    "media/EuroSAT_RGB/Forest/Forest_100.jpg": "a50ae230e6cbc9314312df844dcfae00bd32f96aa21166be93225926c0136c9b",
+    "media/EuroSAT_RGB/HerbaceousVegetation/HerbaceousVegetation_100.jpg": "fd6e14af03546f33eae1ebbb2393d6edfa0832968378e6d98c0c9ed5a7f42902",
+    "media/EuroSAT_RGB/Highway/Highway_100.jpg": "a11ecdedaf8f5ee04ca14b22e564f6e4c7abcfb00468aea394229e8de821a770",
+    "media/EuroSAT_RGB/Industrial/Industrial_100.jpg": "04219283ae8c9d7d43ba2152577f9a96d4c8f3bf670e8322aec0d9545c2eb0aa",
+    "media/EuroSAT_RGB/Pasture/Pasture_100.jpg": "051df1c7f288fb219ca86f77deb5a8ffca7e218cb0f9fdded6fd31325378e6a2",
+    "media/EuroSAT_RGB/PermanentCrop/PermanentCrop_100.jpg": "104bb2fecd029f17c1fc6cc5343cc10f0f767f73dea0593e0809b63a3fddb952",
+    "media/EuroSAT_RGB/Residential/Residential_100.jpg": "c6e71ec078ee2bcf1d5ab10baff219b24fa6e717c03aac6bd030a9ef842fc8d8",
+    "media/EuroSAT_RGB/River/River_100.jpg": "08d1c91e293c650c8b9737dfc794f07c22eaa9d3be73a0ac416b4310daf15c87",
+    "media/EuroSAT_RGB/SeaLake/SeaLake_100.jpg": "4d8f767787c3b9cefcfbf73b6095a2e22cb71020c534b2fa1d5067782dfeff1c",
+    "media/EuroSAT_RGB/AnnualCrop/AnnualCrop_1000.jpg": "3520cd006cc0a0cfb5e87c8708aefcb95a98342018d575a6678c9bc61649f858",
+    "media/EuroSAT_RGB/Forest/Forest_1000.jpg": "0cfea7cabe3ee56ee94049e745db8134f396b1c5febc01439da62b9e3eb16f1f",
+    "media/EuroSAT_RGB/HerbaceousVegetation/HerbaceousVegetation_1000.jpg": "edecc9cbdc89142c749fafd7ae2fd0b0c2b3129fc0afb9a86dfd71823539fc6b",
+    "media/EuroSAT_RGB/Highway/Highway_1000.jpg": "3991101c2bbf40a427657909ed1004f3373529d6d142205011a3943d4ecf7614",
+    "media/EuroSAT_RGB/Industrial/Industrial_1000.jpg": "5711c470eb6981a38b87802704b46e314de0c4cbb040c0ade55e488a60eb658e",
+    "media/EuroSAT_RGB/Pasture/Pasture_1000.jpg": "488e5d04414ccabfa27e7264d171a0e9d7a473a3302cc23deda270bdd4be1445",
+    "media/EuroSAT_RGB/PermanentCrop/PermanentCrop_1000.jpg": "2e355fe6566d6b085f45ddca0168960e4ad80ad4c235cd2554eb27261a314d95",
+    "media/EuroSAT_RGB/Residential/Residential_1000.jpg": "863b1d126002771fb56200fdc58cfdca643921c9fc4b2d49a185490a4dbdad05",
+    "media/EuroSAT_RGB/River/River_1000.jpg": "5031ea29609a9d547ee618e1259086bac69e50a2106e981d0c1d0ae82c14e21e",
+    "media/EuroSAT_RGB/SeaLake/SeaLake_1000.jpg": "60c364f234ae14491f1b9c687bdda8193cf9875c1fbb6f752ec13a2ac680d7b0",
+    "media/EuroSAT_RGB/AnnualCrop/AnnualCrop_1001.jpg": "732bef6f6629128056ef63882b9f1cc8067eb5b59b1fd654ff5ab0d87112a103",
+    "media/EuroSAT_RGB/Forest/Forest_1001.jpg": "5e4b98fcbe7c0249b4fcfed1994040be937a50858c032b851de50157efba64f2",
+    "media/EuroSAT_RGB/HerbaceousVegetation/HerbaceousVegetation_1001.jpg": "2e50d3bfb188bce95dfad7915f059cd4631d46527f481901e076afb765cd130d",
+    "media/EuroSAT_RGB/Highway/Highway_1001.jpg": "de0c7e18cafd5f1edb52445138a723405df79fd5d9965b3db6e4cbb954fbeff1",
+    "media/EuroSAT_RGB/Industrial/Industrial_1001.jpg": "d0a4ab8b076004d78860793d62a6cb05bba3c1134d50542a487356d3459e23da",
+    "media/EuroSAT_RGB/Pasture/Pasture_1001.jpg": "dcda5f5a3ec3794a3de7f1f0a34328edf2c6eee4bd71e9d55feec2ec347d6788",
+    "media/EuroSAT_RGB/PermanentCrop/PermanentCrop_1001.jpg": "86ab6029b5afeca72d6848092d6c464624f73e29a7e402d7c4ed8943c1424a57",
+    "media/EuroSAT_RGB/Residential/Residential_1001.jpg": "25edf13e6a90bf82314abe574abe75328265097172bbe714b292ffd2db26ba7a",
+    "media/EuroSAT_RGB/River/River_1001.jpg": "4692439df7fbf5765731e98c28da72710f43bc112f29e519f0a7886cdc40dd94",
+    "media/EuroSAT_RGB/SeaLake/SeaLake_1001.jpg": "4517979660745a825fd5c2414400d5d605ebec6ddb3f25117b0ee8dd921909e3",
+    "media/EuroSAT_RGB/AnnualCrop/AnnualCrop_1002.jpg": "e2dc615c534a67849ace20e9181216bc9e4dbe5d23b7f25fdf5c0151f48ec9eb",
+    "media/EuroSAT_RGB/Forest/Forest_1002.jpg": "e4e8624c042725a7c3e5eeb0bd9274078bfd8af9e8068285cc1e49aea2077e77",
+    "media/EuroSAT_RGB/HerbaceousVegetation/HerbaceousVegetation_1002.jpg": "fc1fa9bb08d4f8780364fe3c66fe54564852cd24fb9e8266ed91b18a6d80460a",
+    "media/EuroSAT_RGB/Highway/Highway_1002.jpg": "66d276f97ff37a9818d47678c60251c2e1033418649a60e10a93cd8c66ab6905",
+    "media/EuroSAT_RGB/Industrial/Industrial_1002.jpg": "b827bd46b8b0d80cc988b34bc451e65198929f48a370d49116980989a1f8b219",
+    "media/EuroSAT_RGB/Pasture/Pasture_1002.jpg": "10aaa25642f420deb8bb1cd5b5a361bf075136586b3884c4280218737148ead7",
+    "media/EuroSAT_RGB/PermanentCrop/PermanentCrop_1002.jpg": "6d42d57affd09e21589034b76c1cb5f79177b506980a4884588f6bf14bb89f57",
+    "media/EuroSAT_RGB/Residential/Residential_1002.jpg": "765d3b343ecd5ccfd65cd051cf9e3ab2a6d473132dc4e7dd96cfda86e1dabcb9",
+    "media/EuroSAT_RGB/River/River_1002.jpg": "1b27f0f0bfcc3fa48a9df2ee88af8ff4eb000c8148ea2fc7879771b2cdc2c1e0",
+    "media/EuroSAT_RGB/SeaLake/SeaLake_1002.jpg": "51defe70bbf5caeccd83332f5dc75b07771fc3b591ed31342c40659121577ece",
+    "media/EuroSAT_RGB/AnnualCrop/AnnualCrop_1003.jpg": "fb5f900c7a61fb87093a2d2311607a8198a636f52b646784bfe1f04287728a90",
+    "media/EuroSAT_RGB/Forest/Forest_1003.jpg": "2f107242fc678fb6998febbd7e9f1e50467840882a52b52c55f8423a9f9f2cc4",
+    "media/EuroSAT_RGB/HerbaceousVegetation/HerbaceousVegetation_1003.jpg": "3cad4ceec065f6180b6cbe7636fa2ce52f8a1b18002b521abf184d64da918581",
+    "media/EuroSAT_RGB/Highway/Highway_1003.jpg": "8d0dc9fc16cfd2e8e4a0b86aa8863d7d4a7382dd5d8105509e83ef24fdb78af0",
+    "media/EuroSAT_RGB/Industrial/Industrial_1003.jpg": "8e7aefab0910d00bd9ea7b4b14caf0df64953009a2044134d59676885fcb0242",
+    "media/EuroSAT_RGB/Pasture/Pasture_1003.jpg": "f57fe6a12e5b52d1f5729c72bcd7be2a8140d3d88fce8023855371a2a2ced40e",
+    "media/EuroSAT_RGB/PermanentCrop/PermanentCrop_1003.jpg": "2685474801840d94a02aac1203f6eaa0a4af87d76404ec74abb983019a85439e",
+    "media/EuroSAT_RGB/Residential/Residential_1003.jpg": "fe4a3b8c88a166452ac202bfbb4c4a0675463e9df42f318a8e87f47889c159d0",
+    "media/EuroSAT_RGB/River/River_1003.jpg": "ff0a200a0bf82ca7873ec26bf9f32b81686e657581786e999605991a627bbf50",
+    "media/EuroSAT_RGB/SeaLake/SeaLake_1003.jpg": "47bda7cd6f76b1b4d90dca09b6b3c8568b43313f5815b3e5557f0ee52a59229b",
+    "media/EuroSAT_RGB/AnnualCrop/AnnualCrop_1004.jpg": "e0a4288158a320c665939ceb12ffeccd8daf5abb0f838d46fb2907a11f690750",
+    "media/EuroSAT_RGB/Forest/Forest_1004.jpg": "26a710294a87371ccf86178fa21eb9c430c576ff07f36db66a7ad5bf12cf8755",
+    "media/EuroSAT_RGB/HerbaceousVegetation/HerbaceousVegetation_1004.jpg": "449f6944e81bba2ce96cbaeab85a139ca4e1b2a62c6b141357b67c4b75e34e76",
+    "media/EuroSAT_RGB/Highway/Highway_1004.jpg": "ead57331560c4b848e349258733f0c82b130b686456b9e0db131e09162f6e694",
+    "media/EuroSAT_RGB/Industrial/Industrial_1004.jpg": "7b7c8ae252b4cd8eff5733cc750ce4af611485f935e250aa4390d9864fb2a088",
+    "media/EuroSAT_RGB/Pasture/Pasture_1004.jpg": "04ab77a379bccdead2143a6ce3c1e1e46df98f1cd7e62a4258016320090fdfd4",
+    "media/EuroSAT_RGB/PermanentCrop/PermanentCrop_1004.jpg": "89d3d31f8adb3d26059aa96ef96337e006199d78cd906a8b777df96161c8a7ac",
+    "media/EuroSAT_RGB/Residential/Residential_1004.jpg": "b7b0124fc0e0cdcea97caf650b16ce9fe5d7c714c3cbcccf8f8b2addcd07636b",
+    "media/EuroSAT_RGB/River/River_1004.jpg": "6f04196599bfd413b1a2cdc6bc5255226a5922bfca2bee530ac2fccd0d3f73a5",
+    "media/EuroSAT_RGB/SeaLake/SeaLake_1004.jpg": "4d7b786997e1459c15b421b4e0e028378f2e33de994b9e296dce30bae4402d82",
+    "media/EuroSAT_RGB/AnnualCrop/AnnualCrop_1005.jpg": "f58aa7b15eb07e23a843cfc84d2aad584392bbd8bc3b6e5ad6a670df7ed47dec",
+    "media/EuroSAT_RGB/Forest/Forest_1005.jpg": "c4a4280301eee9a09c46cf8fb0ddbb5a81547c6d4de1477a10cd7cd57bed5382",
+    "media/EuroSAT_RGB/HerbaceousVegetation/HerbaceousVegetation_1005.jpg": "6daa1e8f92a6623f3b0bdd4a542aa2e655a4456066c77fa7cbf378c45b1c5d9e",
+    "media/EuroSAT_RGB/Highway/Highway_1005.jpg": "71cc3f6df5c042e44b12a9ea4c13d8832ea750322ce978d06af82b02e06d97a0",
+    "media/EuroSAT_RGB/Industrial/Industrial_1005.jpg": "7fec193710889da2ea14afd89fe05089f1cd931bf4bccc8a56a09089977d8fbc",
+    "media/EuroSAT_RGB/Pasture/Pasture_1005.jpg": "88a54450374c251b71d4a2beb8e136f3246c90ca8d087ccf33511318d6212399",
+    "media/EuroSAT_RGB/PermanentCrop/PermanentCrop_1005.jpg": "bd3f1093426448eeaeba6b00683e138d429ba484757c2b9622f53babb835d384",
+    "media/EuroSAT_RGB/Residential/Residential_1005.jpg": "d94908a72588ba887dcdd690051417a0878f75d5acb1082bbcfa1e6089a786fa",
+    "media/EuroSAT_RGB/River/River_1005.jpg": "e3fe0d12ba8584dc678664f44ee3ae673a57a840e1f09311fbe89ad943378f10",
+    "media/EuroSAT_RGB/SeaLake/SeaLake_1005.jpg": "6538f8526f92cc928134547c2f259a40556269399e0dad2a7a7b3a97cf078b57",
+    "media/EuroSAT_RGB/AnnualCrop/AnnualCrop_1006.jpg": "5a3acb72f2fda3191055b4a4101debd0bf38bd81dc54f817a32ece9dbbd728cb",
+    "media/EuroSAT_RGB/Forest/Forest_1006.jpg": "dd2cb9ecdf1c0703f616ff7914fd30cd92fe4d3638ee51fb2c783ab597adc2d2",
+    "media/EuroSAT_RGB/HerbaceousVegetation/HerbaceousVegetation_1006.jpg": "8774a650842f4f35a2aca0ac10068a41a41239d0097b752d058f1fc0cd64c598",
+    "media/EuroSAT_RGB/Highway/Highway_1006.jpg": "18192505dab31c3e53b2b266e61663917a8215f513ffc1b03a28736346c8f9ab",
+    "media/EuroSAT_RGB/Industrial/Industrial_1006.jpg": "a4b030b8b4738a22cbde6aa2bbfb23a4b5ebd6f2c4c0d6a1b931429f25700502",
+    "media/EuroSAT_RGB/Pasture/Pasture_1006.jpg": "046b6adf427eb9bc76c4326fea7727093f87d6d009cb719b573694096aedee18",
+    "media/EuroSAT_RGB/PermanentCrop/PermanentCrop_1006.jpg": "e497b73190202806325edc5de5000d2e75b6fdf55b1ba813aa418b01d38d4062",
+    "media/EuroSAT_RGB/Residential/Residential_1006.jpg": "d3a1b9a149894042e79274467aa9ad0223c96fb54feff35bd79c15abcc3abb10",
+    "media/EuroSAT_RGB/River/River_1006.jpg": "a7d05ace3ab804fb5086edab588e01f7017888fe29e4c8aecc3ab9a9d0b3eb1b",
+    "media/EuroSAT_RGB/SeaLake/SeaLake_1006.jpg": "8b6b2e2c90cef7282e04bc3b66bb9314a1d993b7ce8ab4ddec3b396b9263a405"
+  }
+}

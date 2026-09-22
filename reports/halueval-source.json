@@ -1,0 +1,67 @@
+{
+  "dataset_id": "halueval",
+  "source_url": "https://github.com/RUCAIBox/HaluEval",
+  "revision": "github-b7253db3cdaa0ab2c382f92b26b390109174f77e",
+  "original_files": [
+    {
+      "dataset": "halueval",
+      "file": "work/sources/halueval/dialogue_data.json",
+      "url": "https://raw.githubusercontent.com/RUCAIBox/HaluEval/b7253db3cdaa0ab2c382f92b26b390109174f77e/data/dialogue_data.json",
+      "bytes": 6984266,
+      "sha256": "9c461df2691e4362837f66fceaaff3bc260453350c3a1cae76a5a52e5e338bfd"
+    },
+    {
+      "dataset": "halueval",
+      "file": "work/sources/halueval/general_data.json",
+      "url": "https://raw.githubusercontent.com/RUCAIBox/HaluEval/b7253db3cdaa0ab2c382f92b26b390109174f77e/data/general_data.json",
+      "bytes": 3307122,
+      "sha256": "73302cd97666b808fb94b5d8a4a2c924049c9484e609017a2f808c4a6d539219"
+    },
+    {
+      "dataset": "halueval",
+      "file": "work/sources/halueval/qa_data.json",
+      "url": "https://raw.githubusercontent.com/RUCAIBox/HaluEval/b7253db3cdaa0ab2c382f92b26b390109174f77e/data/qa_data.json",
+      "bytes": 6164420,
+      "sha256": "89ed139ec5e3a3169a0b30e45569ac1283846f76f27f7bb5e908ee6deed57e88"
+    },
+    {
+      "dataset": "halueval",
+      "file": "work/sources/halueval/summarization_data.json",
+      "url": "https://raw.githubusercontent.com/RUCAIBox/HaluEval/b7253db3cdaa0ab2c382f92b26b390109174f77e/data/summarization_data.json",
+      "bytes": 46992527,
+      "sha256": "86d2561eeb4271eb50b6bd90c9fd38636d30eaf4e98b648045f221adb1c2c758"
+    }
+  ],
+  "derivation_script": "work/sources/prepare_text_batch.py",
+  "derived": {
+    "path": "work/sources/halueval/records.jsonl",
+    "bytes": 109445771,
+    "sha256": "9150115bd2c47107478bb4df2e80d88639da6a1679aace8f9cc0a1514d736f60",
+    "rows": 34507
+  },
+  "preview_pack": "work/packs/halueval/pack.json",
+  "rights_decision": "metadata_only; original content and media remain local pending review",
+  "scope_note": "All four official HaluEval release data files: dialogue, general, QA and summarization. Current files contain 34,507 records; the README describes the release approximately as 35K.",
+  "preview_sha256": "475c63f552c07e36de9de773886086cf7ea183e7afcc6ee77b5f034267f45508",
+  "preview_records": 100,
+  "preview_sampling": {
+    "method": "fixed_quota_per_source_category_order",
+    "unit": "example",
+    "population": "All four official HaluEval release data files: dialogue, general, QA and summarization. Current files contain 34,507 records; the README describes the release approximately as 35K.",
+    "offset": 0,
+    "requested_count": 100,
+    "returned_count": 100,
+    "next_cursor": null,
+    "source_revision": "github-b7253db3cdaa0ab2c382f92b26b390109174f77e",
+    "bytes_read": 105518,
+    "warnings": [],
+    "selection_note": "",
+    "source_rows_scanned": 24532,
+    "selection_counts": {
+      "dialogue": 25,
+      "general": 25,
+      "qa": 25,
+      "summarization": 25
+    }
+  }
+}

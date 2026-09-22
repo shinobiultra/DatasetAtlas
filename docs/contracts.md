@@ -1,0 +1,13 @@
+# Shared v1 contracts
+
+`src/dataset_atlas/models.py` is canonical. Use its Pydantic records verbatim; do not fork shapes. Frontend types are generated to `apps/web/src/generated.ts` by `scripts/generate_contracts.py` (lead owned).
+
+Each dataset registry YAML validates as `Dataset`. Dataset `adapter_config` holds local preparation mapping; never publish this configuration. A local or public pack is `Pack`: dataset, fields, records, artifacts, population_scope, sampling, checksums. Preview paths: `work/packs/<dataset-id>/pack.json`; public packs `apps/web/public/data/<dataset-id>.json`, catalogue `data/catalogue.json` as array of Dataset. Empty metadata records have no pack. Static relative URLs must support Vite base paths. Asset.uri is a relative URL in public packs; backend translates configured-root local assets to opaque `/api/v1/media/...` URLs. Source fields use `source.<key>`; computed fields use `prediction.<key>`.
+
+Provider API: `GET /api/v1/capabilities`, `/datasets`, `/datasets/{id}`, `/datasets/{id}/fields`, `/datasets/{id}/pack`; `POST /queries/{dataset_id}` Query -> QueryResult. `/selections` GET/POST Selection (accept blank id to assign); `/selections/{id}` GET; `/selections/{id}/export` GET portable JSON. `/processors` GET descriptors; `/runs` GET/POST {selection_id,processor_id,config}; `/runs/{id}` GET; `/runs/{id}/cancel` POST; `/artifacts` GET; `/artifacts/{id}` GET. Providers `/providers` GET/POST configuration, `/providers/{id}/probe` POST; conversations `/conversations/context` POST and `/conversations` POST; analysis and provider agents supply routers or functions and communicate signatures.
+
+Workbench is explicit `?mode=workbench`; same-origin API only. Static is default; never auto-probe localhost. State-changing API requests require `X-Atlas-Request: 1` and same-origin checks. Structured error detail from FastAPI; frontend displays actual error.
+
+Filter AST: leaf {field_id,op,value} or {and:[...]}/{or:[...]}/{not:...}; bounded depth 8 and 64 leaves. eq/ne/in/contains/gt/gte/lt/lte/is_null; missing values match only is_null true (including ne must be false on missing). Literal contains case-insensitive. Sort null last both directions, id ascending tie-break. Search case-insensitive literal over text, question, source JSON. Sampling source/random/stratified with numeric seed and size, random uses FNV-1a hash of `seed:id` ascending so parity is portable. Cursor opaque bounded offset tied to query fingerprint. Selections save actual IDs, not only a query.
+
+Do not edit shared models without coordinating with lead. Use optional imports for heavy dependencies and honest unavailable statuses. Synthetic data only in tests. Agents own their assigned files and must preserve others' changes.

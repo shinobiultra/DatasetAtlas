@@ -1,0 +1,61 @@
+schema_version: '1.0'
+id: halueval
+name: HaluEval
+aliases: []
+description: 'All four official HaluEval release data files: dialogue, general, QA and summarization. Current files
+  contain 34,507 records; the README describes the release approximately as 35K.'
+paper_ids:
+- paper-25eaa8c74ce76800
+release: github-b7253db3cdaa0ab2c382f92b26b390109174f77e
+adapter: structured
+adapter_config:
+  path: work/sources/halueval/records.jsonl
+  format: jsonl
+  sha256: 9150115bd2c47107478bb4df2e80d88639da6a1679aace8f9cc0a1514d736f60
+  population: 'All four official HaluEval release data files: dialogue, general, QA and summarization. Current files
+    contain 34,507 records; the README describes the release approximately as 35K.'
+  mapping:
+    id: source_id
+    text: display_text
+  fields:
+    source_id: Task and one-based source row
+    task: Original release task file
+    display_text: Original query, question, dialogue history, or document for display
+    hallucination: Original general-query annotation when present
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 34507
+  unit: example
+  blockers:
+  - Task seed sources and generated text rights require a release-specific publication review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_applicable
+  external_provider: local_only
+  source: https://github.com/RUCAIBox/HaluEval
+  note: Local source access does not authorize public record or media redistribution.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-e79b73637e4b7aa1b392
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 20
+  role: bibliography-only reference
+  excerpt: '8033. Nie, and Ji-Rong Wen. 2023c. Halueval: A large- scale hallucination evaluation benchmark for large'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_release
+  url: https://github.com/RUCAIBox/HaluEval
+  note: Pinned github-b7253db3cdaa0ab2c382f92b26b390109174f77e; 34507 rows; derived SHA-256 9150115bd2c47107478bb4df2e80d88639da6a1679aace8f9cc0a1514d736f60.
+snapshot_id: github-b7253db3cdaa0ab2c382f92b26b390109174f77e-9150115bd2c4
+source_url: https://github.com/RUCAIBox/HaluEval
+modalities:
+- text

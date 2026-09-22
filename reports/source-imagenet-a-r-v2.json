@@ -1,0 +1,618 @@
+{
+  "captured_at_utc": "2026-09-22T04:30:38.320878+00:00",
+  "datasets": {
+    "imagenet-a": {
+      "archive": {
+        "bytes": 687552512,
+        "path": "work/sources/imagenet-a/imagenet-a.tar",
+        "sha256": "3bb3632277e6ba6392ea64c02ddbf4dd2266c9caffd6bc09c9656d28f012589e"
+      },
+      "archive_inventory": {
+        "class_count_distribution": {
+          "3": 2,
+          "4": 1,
+          "5": 1,
+          "6": 2,
+          "7": 7,
+          "8": 4,
+          "9": 3,
+          "10": 5,
+          "11": 6,
+          "12": 6,
+          "13": 8,
+          "14": 6,
+          "15": 6,
+          "16": 3,
+          "17": 5,
+          "18": 2,
+          "19": 8,
+          "20": 4,
+          "21": 1,
+          "22": 3,
+          "23": 7,
+          "24": 4,
+          "25": 5,
+          "26": 6,
+          "27": 4,
+          "28": 4,
+          "29": 1,
+          "30": 1,
+          "31": 5,
+          "32": 2,
+          "33": 1,
+          "34": 1,
+          "35": 2,
+          "36": 1,
+          "38": 1,
+          "39": 2,
+          "40": 2,
+          "41": 1,
+          "42": 3,
+          "43": 1,
+          "44": 1,
+          "45": 1,
+          "46": 3,
+          "47": 1,
+          "49": 1,
+          "54": 1,
+          "56": 1,
+          "57": 2,
+          "59": 1,
+          "60": 2,
+          "61": 2,
+          "62": 3,
+          "64": 3,
+          "66": 1,
+          "67": 1,
+          "68": 2,
+          "69": 2,
+          "70": 2,
+          "73": 1,
+          "74": 1,
+          "76": 2,
+          "77": 1,
+          "80": 1,
+          "81": 2,
+          "83": 1,
+          "85": 1,
+          "88": 1,
+          "89": 2,
+          "92": 1,
+          "96": 1,
+          "97": 2,
+          "98": 5,
+          "99": 1,
+          "100": 10
+        },
+        "class_folders": 200,
+        "image_members": 7500,
+        "max_per_class": 100,
+        "min_per_class": 3,
+        "other_members": [
+          "imagenet-a/README.txt"
+        ],
+        "regular_file_members": 7501,
+        "suffix_counts": {
+          ".JPEG": 25,
+          ".jpeg": 25,
+          ".jpg": 7450
+        }
+      },
+      "author_repo_commit": "07770705658c3a1c8acce31fd9dbd68f06e297c3",
+      "complete_snapshot": {
+        "manifest": {
+          "bytes": 7053,
+          "path": "work/snapshots/imagenet-a/manifest.json",
+          "sha256": "9ef2c7c3022f5ef7480e2f3ee99b483de5f0fbd98d58989f8956d0670d71ee49"
+        },
+        "parquet": {
+          "bytes": 1135289,
+          "path": "work/snapshots/imagenet-a/records.parquet",
+          "sha256": "e0306256c7f8ffca09bcc0e46c14b11853e7926d03074566269de907c670d6b5"
+        },
+        "record_count": 7500,
+        "scope": "complete"
+      },
+      "coverage": {
+        "access": "public",
+        "adapter": "tested",
+        "blockers": [
+          "Image rights are not explicitly cleared by the author repository MIT code license; local media only pending per-image review."
+        ],
+        "complete_data": "supported",
+        "identity": "resolved",
+        "preview": "complete_target",
+        "preview_count": 100,
+        "publication": "metadata_only",
+        "source": "verified",
+        "total_count": 7500,
+        "unit": "example"
+      },
+      "download_cap_bytes": 750000000,
+      "exact_class_boundary_counts": {
+        "0": 76,
+        "199": 23
+      },
+      "first_media": {
+        "asset_ref": "imagenet-a/n01498041/0.000116_digital clock _ digital clock_0.865662.jpg",
+        "pixel_size": [
+          500,
+          375
+        ],
+        "sha256": "f9c6364ee2d5877c017522821f9044b6b23d51b06b39f663998ea9cd716f4b0b",
+        "type": "image/jpeg"
+      },
+      "mapping_validation": "Source TAR has 200 WNID image folders, exactly matching author eval 200-WNID set and 200 archive README descriptions; source records retain raw WNID, class_index_200, and class_index_imagenet1k.",
+      "md5": "c3e55429088dc681f30d81f4726b6595",
+      "official_archive_url": "https://people.eecs.berkeley.edu/~hendrycks/imagenet-a.tar",
+      "pagination": {
+        "first_page_records": 101,
+        "last_cursor": null,
+        "last_page_records": 1,
+        "pages_disjoint": true,
+        "second_page_records": 101
+      },
+      "preview": {
+        "distinct_assets": 100,
+        "distinct_classes": 100,
+        "file": {
+          "bytes": 137618,
+          "path": "work/packs/imagenet-a/pack.json",
+          "sha256": "b37806863830befefd89623beb8c5828e37f80ce07dbf8da1d13e74785702ba9"
+        },
+        "first_record_id": "imagenet-a:example:c907ddb40ea747a8437eb77a",
+        "first_source": {
+          "class_index_200": 0,
+          "class_index_imagenet1k": 6,
+          "class_name": "stingray",
+          "label": "n01498041",
+          "path": "imagenet-a/n01498041/0.000116_digital clock _ digital clock_0.865662.jpg"
+        },
+        "last_record_id": "imagenet-a:example:0548b64ad6a1f0e5d727d03a",
+        "last_source": {
+          "class_index_200": 99,
+          "class_index_imagenet1k": 492,
+          "class_name": "chest",
+          "label": "n03014705",
+          "path": "imagenet-a/n03014705/0.000050_cradle _ cradle_0.9937581.jpg"
+        },
+        "records": 100,
+        "sampling": {
+          "bytes_read": 6415,
+          "method": "source_order",
+          "next_cursor": "100",
+          "offset": 0,
+          "population": "Original author ImageNet-A TAR: 7,500 source images across 200 synset folders",
+          "requested_count": 100,
+          "returned_count": 100,
+          "selection_note": "",
+          "source_revision": "imagenet-a-original-tar-3bb36322",
+          "unit": "example",
+          "warnings": []
+        }
+      },
+      "release": "imagenet-a-original-tar-3bb36322",
+      "rights": {
+        "annotations": "not_reviewed",
+        "basis": "Author source offers public dataset download and citation but does not expressly license the original photos for redistribution; repository MIT code license is not treated as an image license.",
+        "external_provider": "local_only",
+        "images": "metadata_only",
+        "records": "not_reviewed",
+        "source": "https://github.com/hendrycks/natural-adv-examples/tree/07770705658c3a1c8acce31fd9dbd68f06e297c3"
+      },
+      "snapshot_id": "imagenet-a-3bb3632277e6ba63",
+      "source_eval": {
+        "bytes": 10843,
+        "path": "work/sources/imagenet-a/eval-upstream.py",
+        "sha256": "3cf6003d10e7182806eacf88c704d88ee349bab124b14225e001ce841996722f"
+      },
+      "source_readme": {
+        "bytes": 1534,
+        "path": "work/sources/imagenet-a/README-upstream.md",
+        "sha256": "ce2cfe9da2a1bbeba2bfa3dafb525122398b388efe3b8823672efb8d0f71eeb2"
+      }
+    },
+    "imagenet-r": {
+      "archive": {
+        "bytes": 2191079936,
+        "path": "work/sources/imagenet-r/imagenet-r.tar",
+        "sha256": "18c6bf493b39a0d975d48e587437f562caab9c52ae6327dcfa9dd8eb54aa1b52"
+      },
+      "archive_inventory": {
+        "class_count_distribution": {
+          "51": 1,
+          "53": 1,
+          "55": 1,
+          "56": 2,
+          "58": 1,
+          "60": 1,
+          "61": 1,
+          "62": 1,
+          "63": 1,
+          "64": 2,
+          "67": 1,
+          "71": 1,
+          "72": 1,
+          "73": 2,
+          "74": 3,
+          "76": 1,
+          "77": 1,
+          "78": 3,
+          "79": 6,
+          "80": 2,
+          "81": 4,
+          "82": 2,
+          "83": 3,
+          "84": 1,
+          "86": 1,
+          "87": 1,
+          "89": 1,
+          "90": 1,
+          "91": 3,
+          "92": 2,
+          "93": 2,
+          "94": 1,
+          "95": 1,
+          "97": 4,
+          "98": 3,
+          "102": 1,
+          "103": 2,
+          "104": 2,
+          "106": 2,
+          "108": 1,
+          "110": 3,
+          "111": 1,
+          "112": 2,
+          "113": 1,
+          "117": 3,
+          "118": 1,
+          "121": 1,
+          "123": 2,
+          "125": 1,
+          "126": 1,
+          "127": 1,
+          "128": 2,
+          "130": 2,
+          "132": 1,
+          "133": 2,
+          "134": 1,
+          "136": 2,
+          "137": 4,
+          "139": 3,
+          "143": 2,
+          "144": 1,
+          "146": 1,
+          "147": 2,
+          "148": 1,
+          "150": 2,
+          "151": 1,
+          "152": 2,
+          "153": 2,
+          "155": 1,
+          "159": 1,
+          "160": 3,
+          "161": 2,
+          "162": 1,
+          "164": 1,
+          "165": 1,
+          "166": 2,
+          "167": 2,
+          "168": 1,
+          "169": 1,
+          "170": 2,
+          "172": 2,
+          "173": 3,
+          "176": 2,
+          "177": 1,
+          "178": 2,
+          "182": 1,
+          "185": 2,
+          "189": 1,
+          "190": 2,
+          "193": 1,
+          "199": 1,
+          "200": 2,
+          "201": 1,
+          "202": 1,
+          "204": 1,
+          "207": 2,
+          "210": 1,
+          "211": 1,
+          "215": 2,
+          "216": 1,
+          "222": 1,
+          "223": 1,
+          "225": 1,
+          "227": 1,
+          "228": 1,
+          "230": 3,
+          "231": 1,
+          "235": 1,
+          "245": 1,
+          "246": 2,
+          "248": 1,
+          "250": 1,
+          "258": 1,
+          "263": 1,
+          "265": 1,
+          "267": 1,
+          "270": 2,
+          "277": 1,
+          "285": 1,
+          "291": 1,
+          "309": 1,
+          "313": 1,
+          "317": 1,
+          "333": 1,
+          "346": 1,
+          "352": 1,
+          "377": 1,
+          "381": 1,
+          "430": 1
+        },
+        "class_folders": 200,
+        "image_members": 30000,
+        "max_per_class": 430,
+        "min_per_class": 51,
+        "other_members": [
+          "imagenet-r/README.txt"
+        ],
+        "regular_file_members": 30001,
+        "suffix_counts": {
+          ".jpg": 30000
+        }
+      },
+      "author_repo_commit": "3131cacee97c407bd2ecea15846a67817a64f924",
+      "complete_snapshot": {
+        "manifest": {
+          "bytes": 6947,
+          "path": "work/snapshots/imagenet-r/manifest.json",
+          "sha256": "081f38e03e02c8919a60bfd88471fd1b1002d1c8e7aef5207a389698eda62322"
+        },
+        "parquet": {
+          "bytes": 3009521,
+          "path": "work/snapshots/imagenet-r/records.parquet",
+          "sha256": "2674cde13c015cd00d129002f86e9d0d98876dfb834185fd7a41926ff415751d"
+        },
+        "record_count": 30000,
+        "scope": "complete"
+      },
+      "coverage": {
+        "access": "public",
+        "adapter": "tested",
+        "blockers": [
+          "Rendition-image rights are not explicitly cleared by the author repository MIT code license; retain media locally pending image-level review."
+        ],
+        "complete_data": "supported",
+        "identity": "resolved",
+        "preview": "complete_target",
+        "preview_count": 100,
+        "publication": "metadata_only",
+        "source": "verified",
+        "total_count": 30000,
+        "unit": "example"
+      },
+      "download_cap_bytes": 2300000000,
+      "exact_class_boundary_counts": {
+        "0": 230,
+        "199": 189
+      },
+      "first_media": {
+        "asset_ref": "imagenet-r/n01443537/art_0.jpg",
+        "pixel_size": [
+          390,
+          500
+        ],
+        "sha256": "50262c24693e55a6575f2b14dfa2a2d73a9bdde2a1fa6a5c8897217641caf7ab",
+        "type": "image/jpeg"
+      },
+      "mapping_validation": "Source TAR has 200 WNID image folders, exactly matching author eval 200-WNID set and 200 archive README descriptions; source records retain raw WNID, class_index_200, and class_index_imagenet1k.",
+      "md5": "a61312130a589d0ca1a8fca1f2bd3337",
+      "official_archive_url": "https://people.eecs.berkeley.edu/~hendrycks/imagenet-r.tar",
+      "pagination": {
+        "first_page_records": 101,
+        "last_cursor": null,
+        "last_page_records": 1,
+        "pages_disjoint": true,
+        "second_page_records": 101
+      },
+      "preview": {
+        "distinct_assets": 100,
+        "distinct_classes": 100,
+        "file": {
+          "bytes": 131315,
+          "path": "work/packs/imagenet-r/pack.json",
+          "sha256": "b5c0ffc667dff340e2ff4d4a89974a7ec30ca2c985910429ca408d49050b384a"
+        },
+        "first_record_id": "imagenet-r:example:4511aa1ce541edabec4129d8",
+        "first_source": {
+          "class_index_200": 0,
+          "class_index_imagenet1k": 1,
+          "class_name": "goldfish",
+          "label": "n01443537",
+          "path": "imagenet-r/n01443537/art_0.jpg"
+        },
+        "last_record_id": "imagenet-r:example:29a30b47ebd6bb352c012fec",
+        "last_source": {
+          "class_index_200": 99,
+          "class_index_imagenet1k": 353,
+          "class_name": "gazelle",
+          "label": "n02423022",
+          "path": "imagenet-r/n02423022/art_0.jpg"
+        },
+        "records": 100,
+        "sampling": {
+          "bytes_read": 3099,
+          "method": "source_order",
+          "next_cursor": "100",
+          "offset": 0,
+          "population": "Original author ImageNet-R TAR: 30,000 source images across 200 synset folders",
+          "requested_count": 100,
+          "returned_count": 100,
+          "selection_note": "",
+          "source_revision": "imagenet-r-original-tar-18c6bf49",
+          "unit": "example",
+          "warnings": []
+        }
+      },
+      "release": "imagenet-r-original-tar-18c6bf49",
+      "rights": {
+        "annotations": "not_reviewed",
+        "basis": "Author repository offers public archive and citation, but the MIT code license is not evidence of permission to republish web-sourced rendition images.",
+        "external_provider": "local_only",
+        "images": "metadata_only",
+        "records": "not_reviewed",
+        "source": "https://github.com/hendrycks/imagenet-r/tree/3131cacee97c407bd2ecea15846a67817a64f924"
+      },
+      "snapshot_id": "imagenet-r-18c6bf493b39a0d9",
+      "source_eval": {
+        "bytes": 19669,
+        "path": "work/sources/imagenet-r/eval-upstream.py",
+        "sha256": "7ef4a3c00a24e8677233bd25a38ed290f912f8ba5f7b924cd1524692f4151ee6"
+      },
+      "source_readme": {
+        "bytes": 1960,
+        "path": "work/sources/imagenet-r/README-upstream.md",
+        "sha256": "da4e60b6e92b8240e6f3afbd87878e32e0a9c674dca28981339e23f3bc16d837"
+      }
+    },
+    "imagenet-v2": {
+      "actual_format": "Uncompressed POSIX TAR despite upstream .tar.gz filename",
+      "archive": {
+        "bytes": 1264079360,
+        "path": "work/sources/imagenet-v2/imagenetv2-matched-frequency.tar",
+        "sha256": "f0c37fdf925916b19ea1323cd9a2208cdb6959ba2c32eef2a7fc393835c9ca7c"
+      },
+      "archive_inventory": {
+        "class_count_distribution": {
+          "10": 1000
+        },
+        "class_folders": 1000,
+        "image_members": 10000,
+        "max_per_class": 10,
+        "min_per_class": 10,
+        "other_members": [],
+        "regular_file_members": 10000,
+        "suffix_counts": {
+          ".jpeg": 10000
+        }
+      },
+      "author_linked_data_commit": "d626240be2538720e83103a0e1178d24aca8b12c",
+      "author_repo_commit": "0b0c3fe89058e4c7ee2348938b3f4f706a931bf3",
+      "class_validation": "Every numeric source class folder 0 through 999 has exactly ten JPEGs.",
+      "complete_snapshot": {
+        "manifest": {
+          "bytes": 1825,
+          "path": "work/snapshots/imagenet-v2/manifest.json",
+          "sha256": "b2828a6c47ddcbd2916b920af1f59deeaf8eabcd29a46b923a980c981bdbe881"
+        },
+        "parquet": {
+          "bytes": 1470463,
+          "path": "work/snapshots/imagenet-v2/records.parquet",
+          "sha256": "f09f2b240a2ba079b56974682a48faa79b6b399751fded9d5eb715266e0ab2da"
+        },
+        "record_count": 10000,
+        "scope": "complete"
+      },
+      "coverage": {
+        "access": "public",
+        "adapter": "tested",
+        "blockers": [
+          "Only MatchedFrequency b-33 is acquired locally; Threshold0.7 a-44 and TopImages c-12 are not in this snapshot.",
+          "Author README says code MIT license excludes image data; retain images locally pending source-image rights review."
+        ],
+        "complete_data": "supported",
+        "identity": "resolved",
+        "preview": "complete_target",
+        "preview_count": 100,
+        "publication": "metadata_only",
+        "source": "verified",
+        "total_count": 10000,
+        "unit": "example"
+      },
+      "download_cap_bytes": 1400000000,
+      "exact_class_boundary_counts": {
+        "0": 10,
+        "999": 10
+      },
+      "first_media": {
+        "asset_ref": "imagenetv2-matched-frequency-format-val/0/58fbc3e79ef15162b7726de04e98c90bb91a3055.jpeg",
+        "pixel_size": [
+          500,
+          379
+        ],
+        "sha256": "3a9fea9aa26ee0106afb10d1472da336bf110eabca40a74ec7303af28b35bf73",
+        "type": "image/jpeg"
+      },
+      "official_archive_url": "https://huggingface.co/datasets/vaishaal/ImageNetV2/resolve/d626240be2538720e83103a0e1178d24aca8b12c/imagenetv2-matched-frequency.tar.gz",
+      "other_variants_not_acquired": [
+        "Threshold0.7 a-44",
+        "TopImages c-12"
+      ],
+      "pagination": {
+        "first_page_records": 101,
+        "last_cursor": null,
+        "last_page_records": 1,
+        "pages_disjoint": true,
+        "second_page_records": 101
+      },
+      "preview": {
+        "distinct_assets": 100,
+        "distinct_classes": 100,
+        "file": {
+          "bytes": 132247,
+          "path": "work/packs/imagenet-v2/pack.json",
+          "sha256": "50ea3030c09d93c4c9fff387d7e3c617ee4612458b23e7d08493b73b82613641"
+        },
+        "first_record_id": "imagenet-v2:example:caff7120194f535ec310f489",
+        "first_source": {
+          "label": 0,
+          "path": "imagenetv2-matched-frequency-format-val/0/58fbc3e79ef15162b7726de04e98c90bb91a3055.jpeg",
+          "variant": "MatchedFrequency",
+          "variant_revision": "imagenetv2-b-33"
+        },
+        "last_record_id": "imagenet-v2:example:7c757e7836940a1ed1f13d31",
+        "last_source": {
+          "label": 188,
+          "path": "imagenetv2-matched-frequency-format-val/188/1a17ee53a06e7336fe314272e04ee30c769b1eec.jpeg",
+          "variant": "MatchedFrequency",
+          "variant_revision": "imagenetv2-b-33"
+        },
+        "records": 100,
+        "sampling": {
+          "bytes_read": 8887,
+          "method": "source_order",
+          "next_cursor": "100",
+          "offset": 0,
+          "population": "ImageNetV2 MatchedFrequency b-33 only, 10,000 images and 10/class; Threshold0.7 and TopImages absent",
+          "requested_count": 100,
+          "returned_count": 100,
+          "selection_note": "",
+          "source_revision": "imagenetv2-b-33-matched-frequency",
+          "unit": "example",
+          "warnings": []
+        }
+      },
+      "release": "imagenetv2-b-33-matched-frequency",
+      "rights": {
+        "annotations": "not_reviewed",
+        "basis": "Author README explicitly excludes image data from repository MIT license. Flickr-origin images retain source license metadata and are usable under original ImageNet terms; keep media local pending per-image review.",
+        "external_provider": "local_only",
+        "images": "metadata_only",
+        "records": "not_reviewed",
+        "source": "https://github.com/modestyachts/ImageNetV2/tree/0b0c3fe89058e4c7ee2348938b3f4f706a931bf3"
+      },
+      "snapshot_id": "imagenetv2-b33-f0c37fdf925916b1",
+      "source_readme": {
+        "bytes": 12080,
+        "path": "work/sources/imagenet-v2/README-upstream.md",
+        "sha256": "b19448813a7e3bcb73c5db0a2d07c06d4af1d75c9e98e4b2e18b695a263d179d"
+      },
+      "upstream_linked_etag_sha256": "f0c37fdf925916b19ea1323cd9a2208cdb6959ba2c32eef2a7fc393835c9ca7c",
+      "variant": "MatchedFrequency",
+      "variant_revision": "imagenetv2-b-33"
+    }
+  },
+  "global_caveat": "Preview sampling is class-diverse and deterministic, not representative prevalence or evaluation accuracy. Media stays local under metadata-only publication pending image rights review. No model runs are implied.",
+  "status": "complete_real_local_preview_and_full_index_for_three_releases"
+}

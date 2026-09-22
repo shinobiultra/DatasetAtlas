@@ -1,0 +1,115 @@
+schema_version: '1.0'
+id: qqp
+name: GLUE QQP clean
+aliases: []
+description: Official GLUE ZIP train/dev/test task files, original TSV columns preserved,
+  withheld test labels null. Auxiliary original/tokenized copies in CoLA ZIP are not
+  double-counted. Release is pinned by downloaded archive SHA-256, not an inferred
+  paper-specific subset.
+paper_ids:
+- paper-25eaa8c74ce76800
+release: source-sha256-0b60a33dae048295
+adapter: structured
+adapter_config:
+  path: work/sources/qqp/records.parquet
+  format: parquet
+  sha256: 35fdadcb69e8677480688c2c4c2c393df28a38eca47bac3fe104658c0a370b8f
+  mapping:
+    id: source_id
+    text: display_text
+  fields:
+    id:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    is_duplicate:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    label:
+      dtype: category
+      values:
+      - '0'
+      - '1'
+      description: Original source label; null only when source does not provide it
+    label_status:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    qid1:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    qid2:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    question1:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    question2:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    source_id:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    source_member:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    split:
+      dtype: category
+      values:
+      - train
+      - dev
+      - test
+      description: Original split; CEBaB train alternatives overlap
+  source_files_sha256: &id001
+    QQP-clean.zip: 40e7c862c04eb26ee04b67fd900e76c45c6ba8e6d8fab4f8f1f8072a1a3fbae0
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  unit: example
+  blockers:
+  - Public redistribution has not been approved; local inspection is supported.
+  total_count: 795241
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_applicable
+  external_provider: local_only
+  source: https://gluebenchmark.com/tasks
+  basis: GLUE/task text rights vary; public download does not establish redistribution
+    permission.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-d29e09d0cea68cdcb901
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: MRPC, SST2, WNLI, QQP, (Kwon et al., 2024) RoBERTa / Llama-2-13B-chat,
+    —
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: verified_source_acquisition
+  source_url: https://dl.fbaipublicfiles.com/glue/data/QQP-clean.zip
+  checked_at: '2026-09-22'
+  sha256: *id001
+  scope: Official GLUE ZIP train/dev/test task files, original TSV columns preserved,
+    withheld test labels null. Auxiliary original/tokenized copies in CoLA ZIP are
+    not double-counted. Release is pinned by downloaded archive SHA-256, not an inferred
+    paper-specific subset.
+  counts_by_split:
+    train: 363846
+    dev: 40430
+    test: 390965
+snapshot_id: qqp-sha256-35fdadcb69e8677480688c2c4c2c393df28a38eca47bac3fe104658c0a370b8f
+source_url: https://gluebenchmark.com/tasks
+modalities:
+- text
+tasks:
+- duplicate question classification
+labels:
+- '0'
+- '1'

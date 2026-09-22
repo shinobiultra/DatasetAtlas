@@ -1,0 +1,164 @@
+schema_version: '1.0'
+id: pope
+name: POPE
+aliases: []
+description: 'Official POPE COCO val2014 output at author GitHub commit: 3,000 questions per adversarial, popular,
+  and random strategy (9,000 total) over the same 500 COCO val2014 images. Each yes/no label remains a source annotation,
+  not a model prediction.'
+paper_ids:
+- paper-944952997d24ce45
+- paper-6dbb0d4a7b949143
+- paper-392b0c393c06b48e
+- paper-3e0db9c633ab204c
+release: github-08d957b917e5a378a2f99d35b6293c536a66298b-coco
+adapter: structured_archive
+adapter_config:
+  path: work/sources/pope/records.jsonl
+  sha256: 7f42dccddc13b328831f46a3eb4395ac686cd36df21d3afbfd7ad32b3e503140
+  format: jsonl
+  mapping:
+    id: source_id
+    question: question
+    media: media_path
+    media_modality: image
+  fields:
+    source_id: Strategy and original question ID
+    strategy: Official POPE negative-sampling strategy
+    question_id: Original strategy-local question ID
+    question: Original yes/no object question
+    label: Original yes/no label
+    source_image_name: Exact COCO val2014 image basename
+    media_path: Exact pinned archive member
+  population: 'Official POPE COCO val2014 output at author GitHub commit: 3,000 questions per adversarial, popular,
+    and random strategy (9,000 total) over the same 500 COCO val2014 images. Each yes/no label remains a source
+    annotation, not a model prediction.'
+  media_archive: work/sources/vqa-v2/val2014.zip
+  media_archive_sha256: fe9be816052049c34717e077d9e34aa60814a55679f804cd043e3cbee3b9fde0
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 9000
+  unit: example
+  blockers:
+  - POPE code license MIT does not clear COCO val2014 image redistribution rights; media/records local, publication
+    metadata-only.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  external_provider: local_only
+  source: https://github.com/RUCAIBox/POPE
+  note: POPE code license MIT does not clear COCO val2014 image redistribution rights; media/records local, publication
+    metadata-only.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-f8264c75daeda9907394
+  paper_id: paper-944952997d24ce45
+  source_file_hash: 71a1cce60cc2242209269ec562113d20745af5b8416c92c7ce7b1bc418d2ca5b
+  page: 8
+  role: evaluation
+  excerpt: on VLMs. To quantify its effectiveness, we sample 518 images from the POPE benchmark [17]. For each image,
+    we designate the first object in its ground-truth segmentation list as the target objec
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-53c8541142aaee51d7bf
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 8
+  role: evaluation
+  excerpt: tion of MLLMs us- Vision Encoders Original AP AC RandStr RandSent ing POPE (F1-Score). ℓ∞ ℓ∞ ℓ∞ ℓ∞ ℓ∞
+    Vision Encoders POPE Sampling 4/255 8/255 4/255 8/255 4/255 8/255 4/255 8/255 4/25
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-bac81b7a7e0a6684e73e
+  paper_id: paper-392b0c393c06b48e
+  source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
+  page: 14
+  role: evaluation
+  excerpt: ' impacting the semantic ground- ing. Table 2 reports F1-scores on the POPE hallucination benchmark [28].
+    While the original CLIP attains the highest mean F1, our robust models consiste'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-c6702399b6f21e97115a
+  paper_id: paper-3e0db9c633ab204c
+  source_file_hash: d2750f355a25fcdcfcb221e5049a0aa41ec096b452772c73e1767e2d039a6545
+  page: 8
+  role: evaluation
+  excerpt: POPE Model Vision Encoder VQAv2(val) GQA VizWiz SciQA-IMG TextVQA (val) MME
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-d8449e6f3dd86398e1db
+  paper_id: paper-392b0c393c06b48e
+  source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
+  page: 14
+  role: hallucination evaluation
+  excerpt: ', inadvertently impacting the semantic ground- ing. Table 2 reports F1-scores on the POPE hallucination
+    benchmark [28]. While the original CLIP attains the highest mean F1, our robust models consistently outpe'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-2e6b9819ca145db1f577
+  paper_id: paper-944952997d24ce45
+  source_file_hash: 71a1cce60cc2242209269ec562113d20745af5b8416c92c7ce7b1bc418d2ca5b
+  page: 8
+  role: hallucination evaluation
+  excerpt: ination attack on VLMs. To quantify its effectiveness, we sample 518 images from the POPE benchmark [17].
+    For each image, we designate the first object in its ground-truth segmentation list as the target object. Th
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-6ff63af5a8be428ab0e2
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 8
+  role: hallucination evaluation
+  excerpt: rs Original AP AC RandStr RandSent ing POPE (F1-Score). ℓ∞ ℓ∞ ℓ∞ ℓ∞ ℓ∞ Vision Encoders
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/RUCAIBox/POPE
+  note: POPE poll-based object-hallucination evaluation QA overlay, generated against an underlying image corpus
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_media_rights_unknown
+- kind: source_audit_release
+  url: https://github.com/RUCAIBox/POPE
+  note: Author EMNLP 2023 repository; random, popular and adversarial negative-object sampling are separate settings
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_media_rights_unknown
+- kind: source_audit_access
+  url: https://github.com/RUCAIBox/POPE
+  note: Public author code/data; image media comes from selected source corpus such as COCO 2014 val; retrieval
+    untested
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_media_rights_unknown
+- kind: source_audit_rights
+  url: https://github.com/RUCAIBox/POPE
+  note: Repository license does not grant the underlying COCO image rights; annotate the generated QA overlay and
+    image source separately
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_media_rights_unknown
+- kind: source_release
+  url: https://github.com/RUCAIBox/POPE
+  note: Pinned official author release, 9000 test/val records, derived SHA-256 7f42dccddc13b328831f46a3eb4395ac686cd36df21d3afbfd7ad32b3e503140.
+source_url: https://github.com/RUCAIBox/POPE
+snapshot_id: github-08d957b917e5a378a2f99d35b6293c536a66298b-coco-7f42dccddc13
+modalities:
+- text
+- image
+tasks:
+- object hallucination evaluation
+- visual question answering

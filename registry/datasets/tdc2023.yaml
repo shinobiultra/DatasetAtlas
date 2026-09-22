@@ -1,0 +1,73 @@
+schema_version: '1.0'
+id: tdc2023
+name: TDC2023
+aliases: []
+description: The TDC 2023 red-teaming starter kit's 50 dev and 50 test behavior strings. This is the public behavior
+  list, not gated challenge models or the citing paper's selected prompts.
+paper_ids:
+- paper-09b2d7393fc75cf7
+release: github-f7ddd7d1c7bda82c6609ecfaf1484565d08d754a
+adapter: structured
+adapter_config:
+  path: work/sources/tdc2023/records.jsonl
+  format: jsonl
+  sha256: 35a6f471e530df41c2b53bb70ce27c10e7e36c6ffed26d3ce645cf875ea0b74a
+  population: The TDC 2023 red-teaming starter kit's 50 dev and 50 test behavior strings. This is the public behavior
+    list, not gated challenge models or the citing paper's selected prompts.
+  mapping:
+    id: source_id
+    text: behavior
+  fields:
+    source_id: Split and one-based source index
+    split: Official dev or test partition
+    source_index: One-based index within partition
+    behavior: Original behavior string
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 100
+  unit: example
+  blockers:
+  - Sensitive red-team behavior strings are local only pending publication review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_applicable
+  external_provider: local_only
+  source: https://github.com/centerforaisafety/tdc2023-starter-kit
+  note: Local source access does not authorize public record or media redistribution.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-d55816a0d5430cf004bf
+  paper_id: paper-09b2d7393fc75cf7
+  source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
+  page: 7
+  role: source data
+  excerpt: '[45], MaliciousIn- Instruct [28] and LLaVA-1.5-7B [25], and insert the gated struct [46], TDC2023 [47],
+    and AdvBench [48], yielding 250 additive update into their language backbone. prompts. The benign set B is formed
+    by random'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-61d610bb609bf1c87437
+  paper_id: paper-09b2d7393fc75cf7
+  source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
+  page: 7
+  role: attack prompt source
+  excerpt: Instruct [28] and LLaVA-1.5-7B [25], and insert the gated struct [46], TDC2023 [47], and AdvBench [48],
+    yielding 250 additive update into their language backbone. prompts. The benign
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_release
+  url: https://github.com/centerforaisafety/tdc2023-starter-kit
+  note: Pinned github-f7ddd7d1c7bda82c6609ecfaf1484565d08d754a; 100 rows; derived SHA-256 35a6f471e530df41c2b53bb70ce27c10e7e36c6ffed26d3ce645cf875ea0b74a.
+snapshot_id: github-f7ddd7d1c7bda82c6609ecfaf1484565d08d754a-35a6f471e530
+source_url: https://github.com/centerforaisafety/tdc2023-starter-kit
+modalities:
+- text

@@ -1,0 +1,68 @@
+schema_version: '1.0'
+id: safebench
+name: SafeBench
+aliases: []
+description: Paper-cited SafeBench is the MLLM safety benchmark, not autonomous-driving SafeBench; official
+  site links author data.
+paper_ids:
+- paper-2df1203e2d3767bb
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://safebench-mm.github.io/
+  note: Public availability does not establish unrestricted use of generated images/prompts; check dataset
+    card.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-57fcdfd34849b3606758
+  paper_id: paper-2df1203e2d3767bb
+  source_file_hash: 4f39bf0ce4653e2237f45d5373a7d33340d8e6510dbff31ebb4d16fc9f7cad13
+  page: 6
+  role: source data
+  excerpt: 'of Multimodal Adversarial Attacks for Vision-Language Models We collected more than 7 000
+    harmful intents from the following benchmarks: JailBreakV_28K [19], MM- SafetyBench [2], OmniSafeBench-MM
+    [4], and SafeBench [33]. Moreover, we added 747 intents related to th'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-5ce49b24fb21e4bf1556
+  paper_id: paper-2df1203e2d3767bb
+  source_file_hash: 4f39bf0ce4653e2237f45d5373a7d33340d8e6510dbff31ebb4d16fc9f7cad13
+  page: 6
+  role: harmful intent source
+  excerpt: 'intents from the following benchmarks: JailBreakV_28K [19], MM- SafetyBench [2], OmniSafeBench-MM
+    [4], and SafeBench [33]. Moreover, we added 747 intents related to the new Child Safety category,
+    generated with the'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://safebench-mm.github.io/
+  note: 'Paper-cited SafeBench is the MLLM safety benchmark, not autonomous-driving SafeBench; official
+    site links author data. Release: SafeBench multimodal 2,300 pairs'
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_audit_rights
+  url: https://safebench-mm.github.io/
+  note: Public availability does not establish unrestricted use of generated images/prompts; check dataset
+    card.
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+source_url: https://safebench-mm.github.io/

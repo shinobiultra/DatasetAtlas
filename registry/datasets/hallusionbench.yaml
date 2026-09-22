@@ -1,0 +1,93 @@
+schema_version: '1.0'
+id: hallusionbench
+name: HallusionBench
+aliases: []
+description: HallusionBench hallucination/VQA annotations and corresponding image
+  set; release counts changed after original 2023 paper
+paper_ids:
+- paper-20de77d4e60fd1bd
+- paper-80b7ba2e277a20c5
+- paper-6a7364738bac9f07
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Source content and publication rights require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/tianyi-lab/HallusionBench/blob/744007c232c292942c7f80eb61edb2465482da31/README.md
+  note: Repository BSD-3-Clause code license is not sufficient for third-party source
+    images and edited derivatives; asset review needed.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-67de188dba107b6e6df8
+  paper_id: paper-20de77d4e60fd1bd
+  source_file_hash: ccc6f6fee4214f0656c164535cbe29f1cbbce5769b311c93f08e1110437f29e0
+  page: 8
+  role: related-work comparison
+  excerpt: HallusionBench appears in related-work comparison on page 8.
+  review_scope: full_pdf_visual_figure_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-68199851d18d520298e1
+  paper_id: paper-80b7ba2e277a20c5
+  source_file_hash: 1b014c3d1e86a39f1c6a88d4e9b79c99df2e06c5c7c31bea224aa5da2ae0c46d
+  page: 9
+  role: bibliography-only reference
+  excerpt: 'Xiaoyu Liu, Xijun Wang, Lichang Chen, Furong Huang, Yaser Yacoob, et al.
+    2024. Hallusionbench: an advanced diagnostic suite for entangled language hallucination
+    and visual illusion in large vision-language mo'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-f88968f4fbaa5bccea9c
+  paper_id: paper-6a7364738bac9f07
+  source_file_hash: d91f86d6799fd7cd645f7909f9bf9308f6a56566433bebd2c1f56b44c7db8f49
+  page: 3
+  role: related-work comparison
+  excerpt: 1600 × Color & Size illusions and variant HallusionBench 72 Binary 1129∗
+    × Color & Size illusions and variant
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/tianyi-lab/HallusionBench/tree/744007c232c292942c7f80eb61edb2465482da31
+  note: HallusionBench hallucination/VQA annotations and corresponding image set;
+    release counts changed after original 2023 paper
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: https://github.com/tianyi-lab/HallusionBench/tree/744007c232c292942c7f80eb61edb2465482da31
+  note: author repository commit 744007c232c292942c7f80eb61edb2465482da31
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://github.com/tianyi-lab/HallusionBench/tree/744007c232c292942c7f80eb61edb2465482da31
+  note: Author JSON annotations in repository and image download linked separately;
+    no data archive fetched here.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+  probe: official_page_read_download_unprobed
+- kind: source_audit_rights
+  url: https://github.com/tianyi-lab/HallusionBench/blob/744007c232c292942c7f80eb61edb2465482da31/README.md
+  note: Repository BSD-3-Clause code license is not sufficient for third-party source
+    images and edited derivatives; asset review needed.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://github.com/tianyi-lab/HallusionBench/tree/744007c232c292942c7f80eb61edb2465482da31

@@ -1,0 +1,1312 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$defs": {
+    "Coverage": {
+      "additionalProperties": false,
+      "properties": {
+        "identity": {
+          "default": "candidate",
+          "title": "Identity",
+          "type": "string"
+        },
+        "source": {
+          "default": "missing",
+          "title": "Source",
+          "type": "string"
+        },
+        "access": {
+          "default": "unavailable",
+          "title": "Access",
+          "type": "string"
+        },
+        "adapter": {
+          "default": "not_started",
+          "title": "Adapter",
+          "type": "string"
+        },
+        "preview": {
+          "default": "none",
+          "title": "Preview",
+          "type": "string"
+        },
+        "complete_data": {
+          "default": "unimplemented",
+          "title": "Complete Data",
+          "type": "string"
+        },
+        "publication": {
+          "default": "not_reviewed",
+          "title": "Publication",
+          "type": "string"
+        },
+        "preview_count": {
+          "default": 0,
+          "title": "Preview Count",
+          "type": "integer"
+        },
+        "total_count": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Total Count"
+        },
+        "unit": {
+          "default": "example",
+          "enum": [
+            "asset",
+            "example",
+            "entity",
+            "conversation"
+          ],
+          "title": "Unit",
+          "type": "string"
+        },
+        "blockers": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Blockers",
+          "type": "array"
+        }
+      },
+      "title": "Coverage",
+      "type": "object"
+    },
+    "Dataset": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "aliases": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Aliases",
+          "type": "array"
+        },
+        "description": {
+          "default": "",
+          "title": "Description",
+          "type": "string"
+        },
+        "tasks": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Tasks",
+          "type": "array"
+        },
+        "modalities": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Modalities",
+          "type": "array"
+        },
+        "labels": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Labels",
+          "type": "array"
+        },
+        "paper_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Paper Ids",
+          "type": "array"
+        },
+        "source_url": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Url"
+        },
+        "release": {
+          "default": "unresolved",
+          "title": "Release",
+          "type": "string"
+        },
+        "snapshot_id": {
+          "default": "",
+          "title": "Snapshot Id",
+          "type": "string"
+        },
+        "adapter": {
+          "default": "structured",
+          "title": "Adapter",
+          "type": "string"
+        },
+        "adapter_config": {
+          "additionalProperties": true,
+          "title": "Adapter Config",
+          "type": "object"
+        },
+        "coverage": {
+          "$ref": "#/$defs/Coverage"
+        },
+        "rights": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Rights",
+          "type": "object"
+        },
+        "relationships": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Relationships",
+          "type": "array"
+        },
+        "evidence": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Evidence",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "Dataset",
+      "type": "object"
+    },
+    "Release": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "dataset_id": {
+          "title": "Dataset Id",
+          "type": "string"
+        },
+        "revision": {
+          "title": "Revision",
+          "type": "string"
+        },
+        "snapshot_id": {
+          "title": "Snapshot Id",
+          "type": "string"
+        },
+        "source": {
+          "additionalProperties": true,
+          "title": "Source",
+          "type": "object"
+        },
+        "measurements": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Measurements",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "dataset_id",
+        "revision",
+        "snapshot_id"
+      ],
+      "title": "Release",
+      "type": "object"
+    },
+    "Asset": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "dataset_id": {
+          "title": "Dataset Id",
+          "type": "string"
+        },
+        "release_id": {
+          "title": "Release Id",
+          "type": "string"
+        },
+        "modality": {
+          "title": "Modality",
+          "type": "string"
+        },
+        "uri": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Uri"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Text"
+        },
+        "representation": {
+          "default": "original",
+          "title": "Representation",
+          "type": "string"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sha256"
+        },
+        "metadata": {
+          "additionalProperties": true,
+          "title": "Metadata",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "dataset_id",
+        "release_id",
+        "modality"
+      ],
+      "title": "Asset",
+      "type": "object"
+    },
+    "Entity": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "asset_id": {
+          "title": "Asset Id",
+          "type": "string"
+        },
+        "dataset_id": {
+          "title": "Dataset Id",
+          "type": "string"
+        },
+        "release_id": {
+          "title": "Release Id",
+          "type": "string"
+        },
+        "geometry": {
+          "additionalProperties": true,
+          "title": "Geometry",
+          "type": "object"
+        },
+        "coordinate_system": {
+          "default": "original_exif_oriented_pixels",
+          "title": "Coordinate System",
+          "type": "string"
+        },
+        "provenance": {
+          "additionalProperties": true,
+          "title": "Provenance",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "asset_id",
+        "dataset_id",
+        "release_id"
+      ],
+      "title": "Entity",
+      "type": "object"
+    },
+    "Measurement": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "title": "Value",
+          "type": "number"
+        },
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        },
+        "scope": {
+          "enum": [
+            "reported_upstream",
+            "reported_in_paper",
+            "complete_available_release",
+            "preview",
+            "filtered_selection"
+          ],
+          "title": "Scope",
+          "type": "string"
+        },
+        "release_id": {
+          "title": "Release Id",
+          "type": "string"
+        },
+        "split": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Split"
+        },
+        "selection_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Selection Id"
+        },
+        "source": {
+          "additionalProperties": true,
+          "title": "Source",
+          "type": "object"
+        },
+        "method": {
+          "title": "Method",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "unit",
+        "scope",
+        "release_id",
+        "source",
+        "method"
+      ],
+      "title": "Measurement",
+      "type": "object"
+    },
+    "Annotation": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "subject_id": {
+          "title": "Subject Id",
+          "type": "string"
+        },
+        "subject_unit": {
+          "enum": [
+            "asset",
+            "example",
+            "entity",
+            "conversation"
+          ],
+          "title": "Subject Unit",
+          "type": "string"
+        },
+        "namespace": {
+          "default": "source",
+          "enum": [
+            "source",
+            "prediction",
+            "human"
+          ],
+          "title": "Namespace",
+          "type": "string"
+        },
+        "field_id": {
+          "title": "Field Id",
+          "type": "string"
+        },
+        "value": {
+          "default": null,
+          "title": "Value"
+        },
+        "provenance": {
+          "additionalProperties": true,
+          "title": "Provenance",
+          "type": "object"
+        },
+        "annotator": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Annotator"
+        },
+        "aggregation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Aggregation"
+        }
+      },
+      "required": [
+        "id",
+        "subject_id",
+        "subject_unit",
+        "field_id"
+      ],
+      "title": "Annotation",
+      "type": "object"
+    },
+    "Relation": {
+      "additionalProperties": false,
+      "properties": {
+        "subject_id": {
+          "title": "Subject Id",
+          "type": "string"
+        },
+        "object_id": {
+          "title": "Object Id",
+          "type": "string"
+        },
+        "type": {
+          "title": "Type",
+          "type": "string"
+        },
+        "provenance": {
+          "additionalProperties": true,
+          "title": "Provenance",
+          "type": "object"
+        }
+      },
+      "required": [
+        "subject_id",
+        "object_id",
+        "type"
+      ],
+      "title": "Relation",
+      "type": "object"
+    },
+    "Record": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "dataset_id": {
+          "title": "Dataset Id",
+          "type": "string"
+        },
+        "release_id": {
+          "title": "Release Id",
+          "type": "string"
+        },
+        "snapshot_id": {
+          "title": "Snapshot Id",
+          "type": "string"
+        },
+        "unit": {
+          "default": "example",
+          "enum": [
+            "asset",
+            "example",
+            "entity",
+            "conversation"
+          ],
+          "title": "Unit",
+          "type": "string"
+        },
+        "asset_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Asset Ids",
+          "type": "array"
+        },
+        "assets": {
+          "items": {
+            "$ref": "#/$defs/Asset"
+          },
+          "title": "Assets",
+          "type": "array"
+        },
+        "text": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Text"
+        },
+        "question": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Question"
+        },
+        "choices": {
+          "items": {},
+          "title": "Choices",
+          "type": "array"
+        },
+        "conversation": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Conversation",
+          "type": "array"
+        },
+        "source": {
+          "additionalProperties": true,
+          "title": "Source",
+          "type": "object"
+        },
+        "prediction": {
+          "additionalProperties": true,
+          "title": "Prediction",
+          "type": "object"
+        },
+        "human": {
+          "additionalProperties": true,
+          "title": "Human",
+          "type": "object"
+        },
+        "annotations": {
+          "items": {
+            "$ref": "#/$defs/Annotation"
+          },
+          "title": "Annotations",
+          "type": "array"
+        },
+        "relations": {
+          "items": {
+            "$ref": "#/$defs/Relation"
+          },
+          "title": "Relations",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "dataset_id",
+        "release_id",
+        "snapshot_id"
+      ],
+      "title": "Record",
+      "type": "object"
+    },
+    "FieldDescriptor": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "dtype": {
+          "default": "string",
+          "enum": [
+            "string",
+            "number",
+            "boolean",
+            "category",
+            "array",
+            "object"
+          ],
+          "title": "Dtype",
+          "type": "string"
+        },
+        "namespace": {
+          "default": "source",
+          "enum": [
+            "source",
+            "prediction",
+            "human",
+            "record"
+          ],
+          "title": "Namespace",
+          "type": "string"
+        },
+        "values": {
+          "anyOf": [
+            {
+              "items": {},
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Values"
+        },
+        "unit": {
+          "default": "example",
+          "enum": [
+            "asset",
+            "example",
+            "entity",
+            "conversation"
+          ],
+          "title": "Unit",
+          "type": "string"
+        },
+        "description": {
+          "default": "",
+          "title": "Description",
+          "type": "string"
+        },
+        "provenance": {
+          "additionalProperties": true,
+          "title": "Provenance",
+          "type": "object"
+        },
+        "query_ops": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Query Ops",
+          "type": "array"
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ],
+      "title": "FieldDescriptor",
+      "type": "object"
+    },
+    "Query": {
+      "additionalProperties": false,
+      "properties": {
+        "population_scope": {
+          "default": "preview",
+          "enum": [
+            "preview",
+            "complete"
+          ],
+          "title": "Population Scope",
+          "type": "string"
+        },
+        "result_snapshot_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 32,
+          "title": "Result Snapshot Ids",
+          "type": "array"
+        },
+        "snapshot_id": {
+          "title": "Snapshot Id",
+          "type": "string"
+        },
+        "unit": {
+          "default": "example",
+          "enum": [
+            "asset",
+            "example",
+            "entity",
+            "conversation"
+          ],
+          "title": "Unit",
+          "type": "string"
+        },
+        "filter": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Filter"
+        },
+        "search": {
+          "default": "",
+          "title": "Search",
+          "type": "string"
+        },
+        "sort": {
+          "items": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "maxItems": 4,
+          "title": "Sort",
+          "type": "array"
+        },
+        "limit": {
+          "default": 100,
+          "maximum": 1000,
+          "minimum": 1,
+          "title": "Limit",
+          "type": "integer"
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cursor"
+        },
+        "sample": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sample"
+        }
+      },
+      "required": [
+        "snapshot_id"
+      ],
+      "title": "Query",
+      "type": "object"
+    },
+    "QueryResult": {
+      "additionalProperties": false,
+      "properties": {
+        "snapshot_id": {
+          "title": "Snapshot Id",
+          "type": "string"
+        },
+        "unit": {
+          "enum": [
+            "asset",
+            "example",
+            "entity",
+            "conversation"
+          ],
+          "title": "Unit",
+          "type": "string"
+        },
+        "population_scope": {
+          "title": "Population Scope",
+          "type": "string"
+        },
+        "records": {
+          "items": {
+            "$ref": "#/$defs/Record"
+          },
+          "title": "Records",
+          "type": "array"
+        },
+        "returned_count": {
+          "title": "Returned Count",
+          "type": "integer"
+        },
+        "matched_count": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Matched Count"
+        },
+        "count_status": {
+          "default": "exact",
+          "enum": [
+            "exact",
+            "estimated",
+            "unknown"
+          ],
+          "title": "Count Status",
+          "type": "string"
+        },
+        "coverage": {
+          "additionalProperties": true,
+          "title": "Coverage",
+          "type": "object"
+        },
+        "ordering": {
+          "items": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "title": "Ordering",
+          "type": "array"
+        },
+        "cursor": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cursor"
+        },
+        "warnings": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Warnings",
+          "type": "array"
+        }
+      },
+      "required": [
+        "snapshot_id",
+        "unit",
+        "population_scope",
+        "records",
+        "returned_count",
+        "matched_count"
+      ],
+      "title": "QueryResult",
+      "type": "object"
+    },
+    "Selection": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "name": {
+          "default": "Untitled selection",
+          "title": "Name",
+          "type": "string"
+        },
+        "ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Ids",
+          "type": "array"
+        },
+        "unit": {
+          "enum": [
+            "asset",
+            "example",
+            "entity",
+            "conversation"
+          ],
+          "title": "Unit",
+          "type": "string"
+        },
+        "snapshot_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Snapshot Ids",
+          "type": "array"
+        },
+        "dataset_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Dataset Ids",
+          "type": "array"
+        },
+        "method": {
+          "default": "manual",
+          "title": "Method",
+          "type": "string"
+        },
+        "seed": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Seed"
+        },
+        "query": {
+          "additionalProperties": true,
+          "title": "Query",
+          "type": "object"
+        },
+        "created_at": {
+          "title": "Created At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "ids",
+        "unit",
+        "snapshot_ids",
+        "dataset_ids",
+        "created_at"
+      ],
+      "title": "Selection",
+      "type": "object"
+    },
+    "Run": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "processor_id": {
+          "title": "Processor Id",
+          "type": "string"
+        },
+        "selection_id": {
+          "title": "Selection Id",
+          "type": "string"
+        },
+        "status": {
+          "default": "queued",
+          "title": "Status",
+          "type": "string"
+        },
+        "config": {
+          "additionalProperties": true,
+          "title": "Config",
+          "type": "object"
+        },
+        "provenance": {
+          "additionalProperties": true,
+          "title": "Provenance",
+          "type": "object"
+        },
+        "progress": {
+          "additionalProperties": true,
+          "title": "Progress",
+          "type": "object"
+        },
+        "errors": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Errors",
+          "type": "array"
+        },
+        "artifact_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Artifact Ids",
+          "type": "array"
+        },
+        "created_at": {
+          "title": "Created At",
+          "type": "string"
+        },
+        "completed_at": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Completed At"
+        }
+      },
+      "required": [
+        "id",
+        "processor_id",
+        "selection_id",
+        "created_at"
+      ],
+      "title": "Run",
+      "type": "object"
+    },
+    "Artifact": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "run_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Run Id"
+        },
+        "snapshot_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Snapshot Ids",
+          "type": "array"
+        },
+        "unit": {
+          "enum": [
+            "asset",
+            "example",
+            "entity",
+            "conversation"
+          ],
+          "title": "Unit",
+          "type": "string"
+        },
+        "ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Ids",
+          "type": "array"
+        },
+        "files": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Files",
+          "type": "object"
+        },
+        "provenance": {
+          "additionalProperties": true,
+          "title": "Provenance",
+          "type": "object"
+        },
+        "coverage": {
+          "additionalProperties": true,
+          "title": "Coverage",
+          "type": "object"
+        },
+        "data": {
+          "additionalProperties": true,
+          "title": "Data",
+          "type": "object"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "snapshot_ids",
+        "unit",
+        "ids"
+      ],
+      "title": "Artifact",
+      "type": "object"
+    },
+    "Capabilities": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "mode": {
+          "enum": [
+            "static",
+            "workbench"
+          ],
+          "title": "Mode",
+          "type": "string"
+        },
+        "operations": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Operations",
+          "type": "array"
+        },
+        "api_version": {
+          "default": "1",
+          "title": "Api Version",
+          "type": "string"
+        },
+        "limits": {
+          "additionalProperties": {
+            "type": "integer"
+          },
+          "title": "Limits",
+          "type": "object"
+        }
+      },
+      "required": [
+        "mode",
+        "operations"
+      ],
+      "title": "Capabilities",
+      "type": "object"
+    },
+    "Pack": {
+      "additionalProperties": false,
+      "properties": {
+        "schema_version": {
+          "default": "1.0",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "dataset": {
+          "$ref": "#/$defs/Dataset"
+        },
+        "fields": {
+          "items": {
+            "$ref": "#/$defs/FieldDescriptor"
+          },
+          "title": "Fields",
+          "type": "array"
+        },
+        "records": {
+          "items": {
+            "$ref": "#/$defs/Record"
+          },
+          "title": "Records",
+          "type": "array"
+        },
+        "artifacts": {
+          "items": {
+            "$ref": "#/$defs/Artifact"
+          },
+          "title": "Artifacts",
+          "type": "array"
+        },
+        "population_scope": {
+          "default": "preview",
+          "title": "Population Scope",
+          "type": "string"
+        },
+        "sampling": {
+          "additionalProperties": true,
+          "title": "Sampling",
+          "type": "object"
+        },
+        "checksums": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Checksums",
+          "type": "object"
+        }
+      },
+      "required": [
+        "dataset",
+        "fields",
+        "records"
+      ],
+      "title": "Pack",
+      "type": "object"
+    }
+  }
+}

@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "dataset-atlas"
+version = "0.1.0"
+description = "Evidence-bound dataset browser and optional local research workbench"
+requires-python = ">=3.11,<3.15"
+dependencies = ["fastapi>=0.115,<1", "uvicorn>=0.34,<1", "pydantic>=2.10,<3", "httpx>=0.28,<1", "PyYAML>=6,<7", "duckdb>=1.2,<2", "pyarrow>=19", "fsspec>=2025.2", "numpy>=2,<3", "pillow>=11,<13"]
+[project.optional-dependencies]
+datasets = ["scipy>=1.15,<2"]
+vision = ["nudenet>=3.4,<4", "torch>=2.6", "torchvision>=0.21"]
+embeddings = ["sentence-transformers>=3.4", "transformers>=4.49", "lancedb>=0.20", "sentencepiece>=0.2"]
+projection = ["scikit-learn>=1.6", "umap-learn>=0.5.7"]
+remote-storage = ["s3fs>=2025.2"]
+development = ["pytest>=8.3", "pytest-asyncio>=0.25", "build>=1.2"]
+[project.scripts]
+atlas = "dataset_atlas.cli:main"
+[tool.hatch.build]
+artifacts = ["src/dataset_atlas/web/**"]
+[tool.hatch.build.targets.wheel]
+packages = ["src/dataset_atlas"]
+[tool.hatch.build.targets.sdist]
+include = ["/src", "/apps/web/src", "/apps/web/public", "/apps/web/index.html", "/apps/web/*.json", "/apps/web/*.ts", "/schemas", "/tests", "/scripts", "/docs", "/README.md", "/ROADMAP.md", "/LICENSE", "/pyproject.toml", "/uv.lock", "/requirements-analysis.txt"]
+exclude = ["/apps/web/public/data"]
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

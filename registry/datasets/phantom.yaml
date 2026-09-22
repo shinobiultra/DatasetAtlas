@@ -1,0 +1,76 @@
+schema_version: '1.0'
+id: phantom
+name: PHANTOM
+aliases: []
+description: Multimodal adversarial-attack dataset introduced by the PHANTOM paper.
+  The public repository listing is visible, but access to files requires accepting
+  a contact-sharing gate. No examples have been acquired or reviewed.
+tasks:
+- visual-language-model safety evaluation
+modalities:
+- image
+- text
+- conversation
+labels: []
+paper_ids:
+- paper-2df1203e2d3767bb
+source_url: https://huggingface.co/datasets/it4lia/PHANTOM
+release: hf-df168bd0fe810cdce256caddf6c9596f55760afb
+snapshot_id: hf-it4lia-PHANTOM-df168bd0fe810cdce256caddf6c9596f55760afb
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: gated
+  adapter: not_started
+  preview: none
+  complete_data: externally_blocked
+  publication: metadata_only
+  preview_count: 0
+  total_count: null
+  unit: example
+  blockers:
+  - Repository files require accepting the Hugging Face contact-sharing access gate.
+  - Dataset content and inherited source-image rights have not been inspected.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://huggingface.co/datasets/it4lia/PHANTOM
+  note: Dataset card declares CC BY 4.0, but file access is gated and underlying image
+    rights require review.
+relationships: []
+evidence:
+- kind: corpus_mention
+  mention_id: mention-48bed17e07df79b25fad
+  paper_id: paper-2df1203e2d3767bb
+  page: 1
+  role: introduction
+  note: Paper gives the dataset release URL.
+- kind: source_access_check
+  url: https://huggingface.co/datasets/it4lia/PHANTOM
+  checked: '2026-09-22'
+  note: Public card states contact-sharing agreement is required to access files.
+- kind: corpus_mention
+  evidence_id: evidence-c9bd8a3d6ffd5f3743f9
+  paper_id: paper-2df1203e2d3767bb
+  source_file_hash: 4f39bf0ce4653e2237f45d5373a7d33340d8e6510dbff31ebb4d16fc9f7cad13
+  page: 1
+  role: introduction
+  excerpt: nity, given the computational cost and complexity of generating large numbers
+    of attacks. The dataset comprises 47 524 adversarial samples, generated using
+    state-of-the-art attack strategies from recent literature. Our work complements
+    existing efforts by consolidatin
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-1c3cb236c30fd25c61b7
+  paper_id: paper-2df1203e2d3767bb
+  source_file_hash: 4f39bf0ce4653e2237f45d5373a7d33340d8e6510dbff31ebb4d16fc9f7cad13
+  page: 1
+  role: introduced collection
+  excerpt: 'PHANTOM: A L ARGE -S CALE DATASET OF M ULTIMODAL A DVERSARIAL ATTACKS
+    FOR V ISION'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true

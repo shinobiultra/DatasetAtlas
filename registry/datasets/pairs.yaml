@@ -1,0 +1,139 @@
+schema_version: '1.0'
+id: pairs
+name: PAIRS
+aliases: []
+description: 'Original PAIRS release: 200 Midjourney-generated 256×256 PNGs across 50 everyday scenarios,
+  each with four parallel prompt variants. Demographic names record prompt text, never a ground-truth
+  identity inferred from an image. The local preview contains the first 20 complete occupation groups
+  and five complete status groups, excluding potential-crime scenarios from the publication candidate.'
+paper_ids:
+- paper-765a2362f8735bc4
+- paper-32cea5e43d940514
+release: author-git-507075ac
+adapter: archive
+adapter_config:
+  path: work/sources/pairs/pairs-507075ac.tar.gz
+  format: tar.gz
+  sha256: 0fae5bead2cd5f38dabf8e50e2ebdd0157a29eceb59d963abf6d29b2ce8ec9db
+  suffixes:
+  - .png
+  path_regex: PAIRS-507075ac84d244c4f98b965ba257b197d4944b04/data/(?P<section>occupations|potential_crime|status)/(?P<scenario>[^/]+)/(?P<prompt_race>black|white)_(?P<prompt_gender>man|woman)(?:1)?\.png
+  population: 'original PAIRS commit: 200 images/50 four-image scenarios'
+  fields:
+    path:
+      dtype: string
+      description: Original author archive member path
+    section:
+      dtype: category
+      values:
+      - occupations
+      - potential_crime
+      - status
+      description: Author scenario section
+    scenario:
+      dtype: category
+      description: Author scenario folder; each scenario has four parallel prompt variants
+    prompt_race:
+      dtype: category
+      values:
+      - black
+      - white
+      description: Race word specified in generation prompt, not an inferred personal identity
+    prompt_gender:
+      dtype: category
+      values:
+      - man
+      - woman
+      description: Gender word specified in generation prompt, not an inferred personal identity
+  order: section_priority
+  section_priority:
+  - occupations
+  - status
+  - potential_crime
+  selection_note: 'Purposeful source-section order: all 20 occupation groups, then five status groups,
+    four prompt variants per scenario. Potential-crime scenarios are omitted from this preview because
+    isolated display can amplify stereotypes; all 200 remain available locally.'
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: approved
+  preview_count: 100
+  total_count: 200
+  unit: example
+  blockers: []
+rights:
+  records: approved
+  annotations: approved
+  images: approved
+  source: https://github.com/katiefraser/PAIRS/blob/507075ac84d244c4f98b965ba257b197d4944b04/Data%20Sheet.md
+  license: CC BY 4.0
+  attribution: Kathleen C. Fraser and Svetlana Kiritchenko, PAIRS (2024)
+  basis: Author datasheet Distribution section applies CC BY 4.0 to dataset and states authors own generated
+    images; prompted demographic words are not human identity labels.
+  use_note: Authors advise evaluation use and warn against using these data to predict a depicted person’s
+    race or gender.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-525552a6ac4f4cab452a
+  paper_id: paper-765a2362f8735bc4
+  source_file_hash: 820aee810116ff6b3adbe19c8ffdc5a54ae6c80315641a16da74ddb4bd8f0076
+  page: 2
+  role: source data
+  excerpt: 'and race bias in VLMs. To mitigate gen- VLMs generate fair responses with fair confidence
+    on two datasets: der and race bias in VLMs, several debiasing methods have been PAIRS [10] and SocialCounterfactuals
+    (SCF) [17]. We follow the pr'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-6ae2b069968ec92f8238
+  paper_id: paper-32cea5e43d940514
+  source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
+  page: 14
+  role: non-overlap evaluation
+  excerpt: editing Datasets PATA Pairs model Qwen-Image-Edit [83] to leave only one per- Prompts Adj Occup
+    Act Ster Adj
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-fd229cb00049a2dc94d3
+  paper_id: paper-765a2362f8735bc4
+  source_file_hash: 820aee810116ff6b3adbe19c8ffdc5a54ae6c80315641a16da74ddb4bd8f0076
+  page: 2
+  role: direct fairness evaluation
+  excerpt: der and race bias in VLMs, several debiasing methods have been PAIRS [10] and SocialCounterfactuals
+    (SCF) [17]. We follow the proposed. Orthogonal projection i
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_release
+  url: https://github.com/katiefraser/PAIRS/tree/507075ac84d244c4f98b965ba257b197d4944b04
+  note: 'Author README: 20 occupations, 20 status, 10 potential-crime scenarios, four prompt variants
+    each; generated with Midjourney.'
+- kind: source_rights
+  url: https://github.com/katiefraser/PAIRS/blob/507075ac84d244c4f98b965ba257b197d4944b04/Data%20Sheet.md
+  note: Distribution section states CC BY 4.0 for dataset and author ownership of Midjourney-generated
+    images; labels are prompt words.
+- kind: source_archive
+  url: https://codeload.github.com/katiefraser/PAIRS/tar.gz/507075ac84d244c4f98b965ba257b197d4944b04
+  size_bytes: 19130645
+  sha256: 0fae5bead2cd5f38dabf8e50e2ebdd0157a29eceb59d963abf6d29b2ce8ec9db
+  note: Pinned author Git commit archive, 200 original data PNGs; one separate README example PNG excluded.
+- kind: source_publication_review
+  path: reports/pairs-publication-review.md
+  note: Exact 100-image occupation/status preview reviewed for author CC BY 4.0 rights, complete four-variant
+    groups, all PNG integrity/dimensions, and scoped sensitive-media visual spot check. This approval
+    applies only to the listed 100 source images.
+tasks:
+- vision-language bias evaluation
+modalities:
+- image
+labels:
+- prompt_race
+- prompt_gender
+- scenario
+- section
+source_url: https://github.com/katiefraser/PAIRS/tree/507075ac84d244c4f98b965ba257b197d4944b04
+snapshot_id: author-git-507075ac84d244c4f98b965ba257b197d4944b04-tar-sha256-0fae5bead2cd5f38dabf8e50e2ebdd0157a29eceb59d963abf6d29b2ce8ec9db

@@ -1,0 +1,60 @@
+schema_version: '1.0'
+id: imagenet-sampled-1-000-images
+name: ImageNet sampled 1,000 images
+aliases: []
+description: paper-specific 1,000 random ImageNet evaluation images. Paper p5 says random 1,000 ImageNet
+  images; no seed/index list or snapshot verified.
+paper_ids:
+- paper-c12960e5d652fb7f
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: paper_protocol_checked_release_unverified
+  access: source_release_unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Exact source data release or paper-used subset is unverified.
+  - Public data/media reuse rights require separate review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://arxiv.org/abs/2502.14976
+  note: Original ImageNet media terms govern; random subset does not add rights.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-568fabb68ed43002c0e8
+  paper_id: paper-c12960e5d652fb7f
+  source_file_hash: 5b9c5f170ae4dd61a249182d5245b9c3c2f9380354abf3c28723f1e4add82cb7
+  page: 5
+  role: source data
+  excerpt: No Defense EigenShield randomly selecting a thousand images. To evaluate Eigen- Model RTP HarmBench
+    RTP HarmBench Shield’s robust
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://arxiv.org/abs/2502.14976
+  note: Paper p5 says random 1,000 ImageNet images; no seed/index list or snapshot verified.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: paper_subset_unpinned
+- kind: source_audit_rights
+  url: https://arxiv.org/abs/2502.14976
+  note: Original ImageNet media terms govern; random subset does not add rights.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: paper_subset_unpinned
+- kind: source_audit_access
+  url: https://arxiv.org/abs/2502.14976
+  note: source_release_unverified; Do not map arbitrary ImageNet thousand-image slice to this exact experiment.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: paper_subset_unpinned
+source_url: https://arxiv.org/abs/2502.14976

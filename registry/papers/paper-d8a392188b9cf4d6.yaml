@@ -1,0 +1,48 @@
+schema_version: 1.0.0
+paper_id: paper-d8a392188b9cf4d6
+title: Sparse Autoencoders as Plug-and-Play Firewalls for Adversarial Attack Detection
+  in VLMs
+authors:
+- Wang, Hao
+- Sun, Yiqun
+- Wei, Pengfei
+- Hsieh, Lawrence B.
+- Kawahara, Daisuke
+year: '2026'
+doi: 10.48550/arXiv.2605.07447
+url: http://arxiv.org/abs/2605.07447
+outcome: processed
+human_review_complete: false
+mention_inventory_review_complete: true
+candidate_mention_count: 25
+sources:
+- relative_path: files/31943/Wang et al. - 2026 - Sparse Autoencoders as Plug-and-Play
+    Firewalls for Adversarial Attack Detection in VLMs.pdf
+  type: pdf
+  sha256: 0e3f26916ef19ce5982122f2bb72212315d6dcbe59c9cc953852202654cc1acf
+  page_count: 13
+  extraction_quality:
+    pages_total: 13
+    pages_low_text: 2
+    characters: 60519
+    status: usable
+  processing_status: extracted
+- relative_path: files/31944/2605.html
+  type: html
+  sha256: 1d5f19e334e872a2a3ebc5c7371efa076cc61e9e92a68b9e9cdd4677246c4409
+  page_count: null
+  extraction_quality:
+    pages_total: 1
+    pages_low_text: 1
+    characters: 0
+    status: low
+  processing_status: extracted
+reviewer_kind: agent
+review_method: full_pdf_page_text_appendix_table_caption_bibliography_audit
+reviewed_at: '2026-09-22T03:40:07.003156+00:00'
+reviewed_pages: 13
+reviewed_versions:
+- 0e3f26916ef19ce5
+review_note: All 13 pages checked. NIPS17, LLaVA-Instruct-150K and Medical multimodal
+  data supply direct evaluation splits; FineVision trains SAE. LAION-400M is prior
+  attack related work only. Derived adversarial splits retained.

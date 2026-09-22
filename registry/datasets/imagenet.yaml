@@ -1,0 +1,369 @@
+schema_version: '1.0'
+id: imagenet
+name: ImageNet
+aliases: []
+description: Many paper roles cite ImageNet, including training, validation, model lineage, and sampled
+  subsets; one release cannot cover all mentions.
+paper_ids:
+- paper-9036b4eaa048dc21
+- paper-a47845c66d4a3f48
+- paper-1e2474b15fec2d7d
+- paper-c12960e5d652fb7f
+- paper-959e8fc51787f7e4
+- paper-6dbb0d4a7b949143
+- paper-7ed1979562251931
+- paper-208c53a35b62bc52
+- paper-78a318ad1ec346ef
+- paper-728d8c0964b540ad
+- paper-72040eccb96ead7a
+- paper-d0229a9d15fd6b77
+- paper-666de2b7486d80a3
+- paper-ab31cc6a994470fb
+- paper-d098a79f00c8b2b5
+- paper-29349603429218b8
+- paper-f7fa96d778a8d649
+- paper-6d747c88d639c5aa
+- paper-3aa07dc1c7bc37d9
+- paper-25eaa8c74ce76800
+- paper-b039401c04ff9b91
+- paper-392b0c393c06b48e
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: gated
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Original source requires registration or licensed base images.
+  - Exact source variant or paper selection is unresolved.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://www.image-net.org/
+  note: ImageNet terms and third-party source-image rights apply; public citation is not image redistribution
+    approval.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-8f23fba1a0f91181fbb9
+  paper_id: paper-9036b4eaa048dc21
+  source_file_hash: 88586baf881cd37666b815d32164caaa8a344cf3272fea7a93bf642d320bca93
+  page: 5
+  role: training
+  excerpt: 'ned on activation vectors pre-extracted from the model’s responses to ImageNet [13] images.
+    For CLIP, activation vectors are extracted from the classification (CLS) tokens in the residual '
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-c9d6321f0a695ba385a4
+  paper_id: paper-a47845c66d4a3f48
+  source_file_hash: f1108a17f3cbbba7a93256ee725d68092c9a6d25204ca4faab92f6f0cbe1a4df
+  page: 5
+  role: evaluation
+  excerpt: ' and common corruption threat models on CIFAR-10, CIFAR-100 [75], and ImageNet [32] datasets
+    (see Table 1 for details). We use the fixed budgets of ε∞ = 8/255 and ε2 = 0.5 for the `∞ and `2 leaderboards'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-45775bf05f3b5b7b198b
+  paper_id: paper-1e2474b15fec2d7d
+  source_file_hash: ada9a023bec3a045996c2660092bd2e4c1a28380b76315ad0d97051c119bd9ce
+  page: 7
+  role: training
+  excerpt: 'in Experiment 1: (1) Discriminative feedforward models: a VGG-16 [29] first trained on ImageNet
+    and then retrained on upscaled CIFAR-10 (‘finetuned VGG-16’) and a Wide-Resnet trained exclusively
+    on CIFAR-1'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-d37c3b3dea349161b01c
+  paper_id: paper-c12960e5d652fb7f
+  source_file_hash: 5b9c5f170ae4dd61a249182d5245b9c3c2f9380354abf3c28723f1e4add82cb7
+  page: 5
+  role: source data
+  excerpt: eline accuracy without adversar- ial attacks, we used a subset of the ImageNet dataset [27],
+    No Defense EigenShield randomly selecting a thousand images. To evaluate Eigen- Model RTP HarmBench
+    RTP
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-9a92638cdd16b45a88ce
+  paper_id: paper-959e8fc51787f7e4
+  source_file_hash: 5f8f1d0c816db711928aa4dde7ed771b84b94fe84ee7f48cdaefd0a3ce2e9edb
+  page: 5
+  role: training
+  excerpt: ces feature activations SmoLIM2-135M-10B [2] 2048 text tokens 144,000 ImageNet [31] 1 image;
+    Caption 144,000 zℓ,t,i ∈ R, Cauldron [17] 1 image; QA Text 72,000 and each feature has an assoc
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-9a4aea2221c42de7d1d0
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 4
+  role: training
+  excerpt: 'nt is leveraging CLIP, which has been widely MLLMs. Using a subset of ImageNet training data
+    D, we adopted in MLLMs due to two crucial properties: (1) its optimize W by minimizing the alignment
+    loss Lal'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-cde1599e14931b5673ea
+  paper_id: paper-7ed1979562251931
+  source_file_hash: aec173a1458a692a9a4159f07664f759ab64d0f3cce6638cad56d9b76af663ec
+  page: 9
+  role: evaluation
+  excerpt: 'Method VQA v2 scores experiments on several other datasets, including ImageNet (Deng et al.,
+    2009), OKVQA (Marino LQAVA (RSQ25 ) 44.07 ± 0.83 et al., 2019), NoCaps (Agrawal et al., 2019), '
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-765ada1c947acb287085
+  paper_id: paper-208c53a35b62bc52
+  source_file_hash: 721478f2130be8167b3b4530bbcbffb41bb9acba581bbc75eadcbfcf949ce42a
+  page: 6
+  role: evaluation
+  excerpt: ng the worst case over all attacks, as MNIST, CIFAR-10, CIFAR-100 and ImageNet as datasets.
+    we do for AutoAttack, improves the performance. We report first results for deterministic defens
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-56e5a83d686c907d1a8b
+  paper_id: paper-78a318ad1ec346ef
+  source_file_hash: 697485cbbe20010f4e0e4494fa62e97e91369caafdf6d63f11ae051b89abfa30
+  page: 2
+  role: evaluation
+  excerpt: 'tential application image recognition task, also with 10 classes; and ImageNet settings, but
+    entirely defeats its purpose: an adversary who is [9], a large-image recognition task with 1000'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-2180017c6d44375efbdf
+  paper_id: paper-728d8c0964b540ad
+  source_file_hash: c4e3bd872ef20b7d2c4d77a63cd8f37cb8ff518609ae09acaf0fd5dd9e76c54c
+  page: 2
+  role: evaluation
+  excerpt: ned on top of an autoencoder. We refer to this network as “AE”. • The ImageNet dataset [3].
+    – Krizhevsky et. al architecture [9]. We refer to it as “AlexNet”. • ∼ 10M image samples from Yo
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-ff4dfc2f663df85b2379
+  paper_id: paper-72040eccb96ead7a
+  source_file_hash: 84af60e71339cbfe4f8aa35fd48431b2fcd1b3d941955a1bcb1e2582f42d35de
+  page: 5
+  role: training
+  excerpt: ifiers to capture all task-dependent variability. Attack on MNIST and ImageNet. After validating
+    its potential to uncover adversarial subspaces, we apply metameric sampling to fully invert
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-876de180888ff521eafd
+  paper_id: paper-d0229a9d15fd6b77
+  source_file_hash: 70e6dfea92070bfbbda98bfeff804db3302c4b77411cef098e5d16c466474a27
+  page: 2
+  role: evaluation
+  excerpt: amples. be an incomplete defense to adversarial examples (Papernot On ImageNet, we evaluate
+    over 1000 randomly selected et al., 2017; Tramèr et al., 2018). Despite this, we observe images
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-03fdd5ee77c627c503d8
+  paper_id: paper-666de2b7486d80a3
+  source_file_hash: c43575003d83757725739ad87acfc4026d0d3129b27bee69fd1a4c362dc0db33
+  page: 4
+  role: source data
+  excerpt: ' Weighted Fourier Aggregation [11], and of these networks on the 1.3M ImageNet dataset [47]
+    for 1 three variants of a deep video deblurring method [53]. epoch. The goal of each network is '
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-be1cdb406085d15ba78a
+  paper_id: paper-ab31cc6a994470fb
+  source_file_hash: 87225f47168a56f003f607ca3c74bbf8ff6b50f8fe1a0030be85f2eade99b536
+  page: 4
+  role: source data
+  excerpt: ' Vision Pipeline 3.1.1 Dataset In our experiment, we used images from ImageNet [7]. ImageNet
+    contains 1,000 highly specific classes that typical people may not be able to identify, such as'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-9110eeece9cc76987662
+  paper_id: paper-d098a79f00c8b2b5
+  source_file_hash: 9a50cdc6b9f2ba3687339453804acb9519525941198c14d07765aaecbb1436d2
+  page: 40
+  role: bibliography-only reference
+  excerpt: ing CNNs with bag-of-local-features models works surprisingly well on imagenet. In International
+    Conference on Learning Representations, 2019. URL https://openreview.net/forum?id=SkfMWhAqY
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-ed31b8c374f31fbda3af
+  paper_id: paper-29349603429218b8
+  source_file_hash: a025d9386684c74fca7aae546e5707d9ec43e808ca9fc3a654154f964d50144f
+  page: 8
+  role: source data
+  excerpt: COCO [12] model used in [9, 27] to capture sentiment-specific nuances and 5 images from ImageNet
+    [35]. For each image, we gener- in tweets. This model was trained on an extensive dataset of ated
+    100 questions as
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-825f08d0f8162f2041e6
+  paper_id: paper-f7fa96d778a8d649
+  source_file_hash: 7f6c0a50475149e11e3b7efc9c0a00383652b7cae62f80facd8ae2684ef251e7
+  page: 3
+  role: evaluation
+  excerpt: on of fast adversarial example generation applied to GoogLeNet (Szegedy et al., 2014a) on ImageNet.
+    By adding an imperceptibly small vector whose elements are equal to the sign of the elements of the
+    gradient of the cost functio
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-188d56a9db1e9aae23ca
+  paper_id: paper-6d747c88d639c5aa
+  source_file_hash: 519805fac1ac6df034dd67ef95643703ebd97fa1c18e0f035a1f93feada6994e
+  page: 13
+  role: model-training lineage
+  excerpt: d across two NVIDIA GPUs each with 11GB memory. S1.2 Retrained ImageNet Description The ImageNet-trained
+    architectures used to generate metamers for the behavioral and network- network experiments were downloaded
+    from the TFSlim repository. The cod
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-c4d858ac5f36ac595827
+  paper_id: paper-3aa07dc1c7bc37d9
+  source_file_hash: c0ce517eb8b9f309aa1a5fa16fd7f17284e830f224760136b11c726448372cfb
+  page: 23
+  role: bibliography-only reference
+  excerpt: 6, 2023. R. Geirhos, P. Rubisch, C. Michaelis, M. Bethge, F. A. Wichmann, and W. Brendel. Imagenet-trained
+    cnns are biased towards texture; increasing shape bias improves accuracy and robustness. arXiv preprint
+    arXiv:1811.12231, 2018
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-19cceb44a1e194f53c1f
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 29
+  role: cited-study dataset in survey table
+  excerpt: ) CLIP Image Classification ImageNet Sparse AutoEncoder (Rao et al., 2024) CLIP, ResNet-50
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-8a6fb8e9ce2738c8fa4d
+  paper_id: paper-b039401c04ff9b91
+  source_file_hash: e41b2b1aeae1227613483fdda368f89c4f56fa1c45abadd8e41569b0ed672442
+  page: 2
+  role: related-work mention
+  excerpt: at sual illusion. There are two main contributions of convolutional neural networks trained
+    on ImageNet this work. First, this investigation provides an ini- or low-level vision tasks can be
+    misled by certain tial understanding of
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-ab3772b5ad1205069d02
+  paper_id: paper-392b0c393c06b48e
+  source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
+  page: 8
+  role: baseline encoder retraining
+  excerpt: CLIP-style adversarial pre- training on web-scale image–text data without subsequent ImageNet
+    fine-tuning. All the adversarial trained models are publicly available. Baselines. We compare against
+    the original CLIP
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-2bb0b36625a3d934166b
+  paper_id: paper-392b0c393c06b48e
+  source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
+  page: 6
+  role: zero-shot adversarial diagnostic evaluation
+  excerpt: 'Figure 2 x-axis label: ImageNet'
+  review_scope: full_pdf_visual_figure_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-17b08641186b2a0b9ac8
+  paper_id: paper-7ed1979562251931
+  source_file_hash: aec173a1458a692a9a4159f07664f759ab64d0f3cce6638cad56d9b76af663ec
+  page: 9
+  role: additional evaluation
+  excerpt: Method VQA v2 scores experiments on several other datasets, including ImageNet (Deng et al.,
+    2009), OKVQA (Marino LQAVA (RSQ25 ) 44.07 ± 0.83 et al., 2019), NoCaps (
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-af9ef95c8dbab6ea2da6
+  paper_id: paper-9036b4eaa048dc21
+  source_file_hash: 88586baf881cd37666b815d32164caaa8a344cf3272fea7a93bf642d320bca93
+  page: 5
+  role: SAE training images
+  excerpt: e SAEs are trained on activation vectors pre-extracted from the model’s responses to ImageNet
+    [13] images. For CLIP, activation vectors are extracted from the classification (CLS) tokens in the
+    residual stream after la
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-3560887b4116ee469cdb
+  paper_id: paper-959e8fc51787f7e4
+  source_file_hash: 5f8f1d0c816db711928aa4dde7ed771b84b94fe84ee7f48cdaefd0a3ce2e9edb
+  page: 5
+  role: image-caption training source
+  excerpt: 144,000 ImageNet [31] 1 image; Caption 144,000 zℓ,t,i ∈ R,
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-7e9c482ec673a058cf90
+  paper_id: paper-a47845c66d4a3f48
+  source_file_hash: f1108a17f3cbbba7a93256ee725d68092c9a6d25204ca4faab92f6f0cbe1a4df
+  page: 5
+  role: benchmark source
+  excerpt: for the `∞ , `2 and common corruption threat models on CIFAR-10, CIFAR-100 [75], and ImageNet
+    [32] datasets (see Table 1 for details). We use the fixed budgets of ε∞ = 8/255 and ε2 = 0.5 for the
+    `∞ and `2 leaderboards
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-dd4188081b2acba5ad43
+  paper_id: paper-1e2474b15fec2d7d
+  source_file_hash: ada9a023bec3a045996c2660092bd2e4c1a28380b76315ad0d97051c119bd9ce
+  page: 7
+  role: model-pretraining lineage
+  excerpt: 'Experiment 1: (1) Discriminative feedforward models: a VGG-16 [29] first trained on ImageNet
+    and then retrained on upscaled CIFAR-10 (‘finetuned VGG-16’) and a Wide-Resnet trained exclusively
+    on CIFAR-10 [41, ’Wide-Re'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-607df06299e508fab639
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 4
+  role: alignment training source
+  excerpt: 'tasks (Gadre et al., 2024; Wang et al., 2024b), particularly 7: end for on ImageNet (Russakovsky
+    et al., 2015). These efforts have 8: return Aligned encoder F(x) = W ϕr (x) resulted in robust visi'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://www.image-net.org/
+  note: 'Many paper roles cite ImageNet, including training, validation, model lineage, and sampled subsets;
+    one release cannot cover all mentions. Release: ImageNet family; 1K/full/derived subsets mixed across
+    papers'
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+- kind: source_audit_rights
+  url: https://www.image-net.org/download.php
+  note: ImageNet terms and third-party source-image rights apply; public citation is not image redistribution
+    approval.
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+source_url: https://www.image-net.org/

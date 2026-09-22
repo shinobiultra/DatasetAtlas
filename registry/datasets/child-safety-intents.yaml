@@ -1,0 +1,66 @@
+schema_version: '1.0'
+id: child-safety-intents
+name: Child Safety intents
+aliases: []
+description: 'PHANTOM paper-generated 747-intent Child Safety overlay within its risk taxonomy, not an
+  independent benchmark. Source review: PHANTOM author HF snapshot df168bd0fe810cdce256caddf6c9596f55760afb;
+  747 child-safety intents are an overlay in that release'
+paper_ids:
+- paper-2df1203e2d3767bb
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: gated
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Original-source registration, contact sharing, or licensed subscription is required.
+  - The exact paper release, source variant, or derived collection remains unresolved.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  note: Sensitive child-safety intent text requires scoped handling; no public approval inferred
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-e523b4660957e5835b40
+  paper_id: paper-2df1203e2d3767bb
+  source_file_hash: 4f39bf0ce4653e2237f45d5373a7d33340d8e6510dbff31ebb4d16fc9f7cad13
+  page: 6
+  role: introduced intent overlay
+  excerpt: '], MM- SafetyBench [2], OmniSafeBench-MM [4], and SafeBench [33]. Moreover, we added 747 intents
+    related to the new Child Safety category, generated with the assistance of OpenAI GPT-5.4, accessed
+    via API. Since these benchmarks, together with our'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://huggingface.co/datasets/it4lia/PHANTOM/tree/df168bd0fe810cdce256caddf6c9596f55760afb
+  note: PHANTOM paper-generated 747-intent Child Safety overlay within its risk taxonomy, not an independent
+    benchmark PHANTOM author HF snapshot df168bd0fe810cdce256caddf6c9596f55760afb; 747 child-safety intents
+    are an overlay in that release
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: derived_overlay_not_independent_release
+- kind: source_audit_access
+  url: https://huggingface.co/datasets/it4lia/PHANTOM/tree/df168bd0fe810cdce256caddf6c9596f55760afb
+  note: 'Author HF dataset API reports gated=auto; access terms have not been accepted and payload was
+    not acquired Probe: author_hf_dataset_metadata_http_200_gated_auto; payload_not_downloaded'
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: derived_overlay_not_independent_release
+- kind: source_audit_rights
+  url: https://arxiv.org/abs/2606.24388
+  note: Sensitive child-safety intent text requires scoped handling; no public approval inferred No source-content
+    rights grant was verified; linked page is identity/access context only.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: derived_overlay_not_independent_release
+source_url: https://huggingface.co/datasets/it4lia/PHANTOM/tree/df168bd0fe810cdce256caddf6c9596f55760afb

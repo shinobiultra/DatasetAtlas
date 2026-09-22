@@ -1,0 +1,119 @@
+schema_version: '1.0'
+id: fairface
+name: FairFace
+aliases: []
+description: FairFace face-attribute dataset, aligned crops with padding 0.25 or 1.25;
+  do not conflate image variants.
+paper_ids:
+- paper-32cea5e43d940514
+- paper-f03c5ad315e6d835
+- paper-164d7c221452ffec
+- paper-765a2362f8735bc4
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Source-family rights and any public media examples require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/joojs/fairface/blob/fb823086827337b4044e7f0abd3f2035e76b7c5f/README.md
+  note: Author README labels dataset CC BY 4.0; originating face photos and individual
+    asset rights not independently checked
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-051814afe56e969f6c65
+  paper_id: paper-32cea5e43d940514
+  source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
+  page: 4
+  role: training
+  excerpt: ' within group g but not within any as a bias attribute label, and the
+    FairFace dataset also has other group, making them strong candidates for encod-
+    ‘age’ and ‘race’ labels. ing the group'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-96b21d76e46cf5a131a3
+  paper_id: paper-f03c5ad315e6d835
+  source_file_hash: 47431d9340ff27b9234e2184711fbc3fc06ded7718fe53ca79b23a1cd1db777d
+  page: 2
+  role: source data
+  excerpt: ATA Our image dataset is curated using the images of individuals from FairFace
+    (Karkkainen & Joo, 2021), MIAP (Schumann et al., 2021), Phase (Garcia et al.,
+    2023), and PATA (Seth et al., 2
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-c0372ce150247342d1d4
+  paper_id: paper-32cea5e43d940514
+  source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
+  page: 4
+  role: SAE image training
+  excerpt: as a bias attribute label, and the FairFace dataset also has other group,
+    making them strong candidates for encod-
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-e1aaf309c0acdd98a67c
+  paper_id: paper-164d7c221452ffec
+  source_file_hash: a89bc42d5e26b03e424ef9aa3ecc43d7857a7ef0deb8c0ede544d5b94aa625d4
+  page: 14
+  role: contrast reference
+  excerpt: For each pair, the trained generator creates a source group signals—unlike
+    FairFace (Karkkainen and embedding and a target embedding. Subsequently, Joo,
+    2021), which contains visually n
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-03e0a5d03f62356bebe0
+  paper_id: paper-765a2362f8735bc4
+  source_file_hash: 820aee810116ff6b3adbe19c8ffdc5a54ae6c80315641a16da74ddb4bd8f0076
+  page: 2
+  role: related-work mention
+  excerpt: 'ms to answer the following research questions: on Fairface dataset [22]
+    and CLIP-based models [34], which is no RQ1: To what extent do SOTA VLMs yield
+    gender and race bias'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/joojs/fairface/tree/fb823086827337b4044e7f0abd3f2035e76b7c5f
+  note: FairFace face-attribute dataset, aligned crops with padding 0.25 or 1.25;
+    do not conflate image variants
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: https://github.com/joojs/fairface/tree/fb823086827337b4044e7f0abd3f2035e76b7c5f
+  note: author repository commit fb823086827337b4044e7f0abd3f2035e76b7c5f; no tagged
+    data release stated
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://github.com/joojs/fairface/tree/fb823086827337b4044e7f0abd3f2035e76b7c5f
+  note: Author README links Google Drive train/validation image archives and CSV labels;
+    no access approval stated; archive retrieval untested here
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+  probe: linked_download_unprobed
+- kind: source_audit_rights
+  url: https://github.com/joojs/fairface/blob/fb823086827337b4044e7f0abd3f2035e76b7c5f/README.md
+  note: Author README labels dataset CC BY 4.0; originating face photos and individual
+    asset rights not independently checked
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://github.com/joojs/fairface/tree/fb823086827337b4044e7f0abd3f2035e76b7c5f

@@ -1,0 +1,98 @@
+schema_version: '1.0'
+id: caltech101
+name: Caltech101
+aliases: []
+description: Caltech 101 object-category image archive at the institutional repository.
+paper_ids:
+- paper-6dbb0d4a7b949143
+- paper-3e0db9c633ab204c
+- paper-392b0c393c06b48e
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Source-family rights and any public media examples require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://data.caltech.edu/records/mzrjq-6wc02
+  note: Institutional record has no stated license in its checked license field; open
+    download is not publication permission
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-55f6ce853d62dec2ae69
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 5
+  role: evaluation
+  excerpt: oders, specifically large-scale adversarially trained Ima- 2012), and Caltech101
+    (Li et al., 2022). Notably, these large- geNet models, ViT-G/14 (1B parameters)
+    and ViT-H/14 scale models sig
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-a80e33c3a7bbc8049afa
+  paper_id: paper-3e0db9c633ab204c
+  source_file_hash: d2750f355a25fcdcfcb221e5049a0aa41ec096b452772c73e1767e2d039a6545
+  page: 7
+  role: evaluation
+  excerpt: Caltech101 Cifar10 Cifar100 Cars
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-7394bcc8e066fcbdecd4
+  paper_id: paper-392b0c393c06b48e
+  source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
+  page: 6
+  role: zero-shot adversarial diagnostic evaluation
+  excerpt: 'Figure 2 x-axis label: Caltech101'
+  review_scope: full_pdf_visual_figure_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-25dc35480968a343b39e
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 5
+  role: zero-shot robustness evaluation
+  excerpt: coders, specifically large-scale adversarially trained Ima- 2012), and
+    Caltech101 (Li et al., 2022). Notably, these large- geNet model
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://data.caltech.edu/records/mzrjq-6wc02
+  note: Caltech 101 object-category image archive at the institutional repository
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_rights_unknown
+- kind: source_audit_release
+  url: https://data.caltech.edu/records/mzrjq-6wc02
+  note: CaltechDATA version 1.0, DOI 10.22002/D1.20086; caltech-101.zip MD5 3138e1922a9193bfa496528edbbc45d0
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_rights_unknown
+- kind: source_audit_access
+  url: https://data.caltech.edu/records/mzrjq-6wc02
+  note: Institutional archive offers public 137.4 MB ZIP; retrieval untested
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_rights_unknown
+- kind: source_audit_rights
+  url: https://data.caltech.edu/records/mzrjq-6wc02
+  note: Institutional record has no stated license in its checked license field; open
+    download is not publication permission
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_rights_unknown
+source_url: https://data.caltech.edu/records/mzrjq-6wc02

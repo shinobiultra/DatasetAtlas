@@ -1,0 +1,61 @@
+schema_version: '1.0'
+id: t2i-compbench
+name: T2I-CompBench
+aliases: []
+description: 'Original T2I-CompBench 2023 prompt categories; T2I-CompBench++ 2024 is separate. Source
+  review: Author repo commit 4aa404212eb5d06e5adbcd9cee696c750d0d25a5'
+paper_ids:
+- paper-25eaa8c74ce76800
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  note: Repository MIT code/license; prompt and generated image publication require scoped review
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-d5cd3df738e2a5185ccb
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 19
+  role: bibliography-only reference
+  excerpt: 'ference on Machine Learning, ICML’23. JMLR.org. Xihui Liu. 2023. T2i-compbench: A comprehen-
+    Myeongseob Ko, Ming Jin, Ch'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/Karine-Huang/T2I-CompBench/tree/4aa404212eb5d06e5adbcd9cee696c750d0d25a5
+  note: Original T2I-CompBench 2023 prompt categories; T2I-CompBench++ 2024 is separate Author repo commit
+    4aa404212eb5d06e5adbcd9cee696c750d0d25a5
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://github.com/Karine-Huang/T2I-CompBench/tree/4aa404212eb5d06e5adbcd9cee696c750d0d25a5
+  note: 'Prompt text files under author examples/dataset; generated model outputs separate Probe: first_primary_url_http_head_200;
+    payload_not_downloaded'
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_rights
+  url: https://github.com/Karine-Huang/T2I-CompBench/tree/4aa404212eb5d06e5adbcd9cee696c750d0d25a5
+  note: Repository MIT code/license; prompt and generated image publication require scoped review No source-content
+    rights grant was verified; linked page is identity/access context only.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://github.com/Karine-Huang/T2I-CompBench/tree/4aa404212eb5d06e5adbcd9cee696c750d0d25a5

@@ -1,0 +1,112 @@
+schema_version: '1.0'
+id: idenprof
+name: IdenProf v1.0
+aliases: []
+description: 'Author first release: 11,000 images in ten source profession folders,
+  9,000 train and 2,000 test. These are dataset-provided labels, not Atlas inferences
+  about depicted individuals. Local preview interleaves ten classes; original splits
+  and filenames retained.'
+paper_ids:
+- paper-f03c5ad315e6d835
+release: v1.0-zip-sha256-1d506b7276f30c6cc769faf8de96ccfda2385c1ab72a72f3fc50ce45240c3f8c
+adapter: archive
+adapter_config:
+  path: work/sources/idenprof/idenprof-jpg.zip
+  format: zip
+  sha256: 1d506b7276f30c6cc769faf8de96ccfda2385c1ab72a72f3fc50ce45240c3f8c
+  suffixes:
+  - .jpg
+  path_regex: idenprof/(?P<split>train|test)/(?P<label>chef|doctor|engineer|farmer|firefighter|judge|mechanic|pilot|police|waiter)/(?P<source_filename>[^/]+\.jpg)
+  order: round_robin_label
+  fields:
+    path:
+      dtype: string
+      description: Original archive member
+    label:
+      dtype: category
+      values: &id001
+      - chef
+      - doctor
+      - engineer
+      - farmer
+      - firefighter
+      - judge
+      - mechanic
+      - pilot
+      - police
+      - waiter
+      description: Original dataset profession label, not inferred personal identity
+    split:
+      dtype: category
+      values:
+      - train
+      - test
+    source_filename:
+      dtype: string
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  unit: example
+  blockers:
+  - Image-specific redistribution rights have not been reviewed; public media remains
+    disabled.
+  total_count: 11000
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  external_provider: local_only
+  source: https://github.com/OlafenwaMoses/IdenProf
+  basis: Original author public release; repository MIT code license alone is not
+    image-by-image publication review.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-774aacc6ea27a704a4ac
+  paper_id: paper-f03c5ad315e6d835
+  source_file_hash: 47431d9340ff27b9234e2184711fbc3fc06ded7718fe53ca79b23a1cd1db777d
+  page: 21
+  role: evaluation
+  excerpt: e how well models can identify occupations, we evaluate models on the IdenProf
+    dataset (Olafenwa, 2018). IdenProf contains images for 10 classes of occupations
+    and is balanced across class
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/OlafenwaMoses/IdenProf
+  note: 'Author repo release offers train/test archives; first release has 900 train
+    and 200 test per profession. Release: IdenProf first release 11,000 images/10
+    professions'
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_audit_rights
+  url: https://github.com/OlafenwaMoses/IdenProf
+  note: Repo MIT license exists; assess underlying photographed-person/image rights
+    separately.
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: verified_source_acquisition
+  source_url: https://github.com/OlafenwaMoses/IdenProf/releases/download/v1.0/idenprof-jpg.zip
+  checked_at: '2026-09-22'
+  sha256: 1d506b7276f30c6cc769faf8de96ccfda2385c1ab72a72f3fc50ce45240c3f8c
+  bytes: 154714873
+  counts:
+    train: 9000
+    test: 2000
+  per_class:
+    train: 900
+    test: 200
+source_url: https://github.com/OlafenwaMoses/IdenProf
+snapshot_id: idenprof-v1-1d506b7276f30c6cc769faf8de96ccfda2385c1ab72a72f3fc50ce45240c3f8c
+modalities:
+- image
+tasks:
+- profession image classification
+labels: *id001

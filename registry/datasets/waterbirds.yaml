@@ -1,0 +1,65 @@
+schema_version: '1.0'
+id: waterbirds
+name: Waterbirds
+aliases:
+- waterbirds
+description: Original author repo provides a generated tarball and script; regeneration differs because
+  of random seeds.
+paper_ids:
+- paper-25eaa8c74ce76800
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/kohpangwei/group_DRO
+  note: Composite images inherit CUB and Places source rights; MIT code licence is not image licence.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-5e74f7c55827f8907cec
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: et al., 2024a) CLIP Image Retrieval, Segmenta- Waterbirds, CUB, Places, ImageNet- Text-Explanations
+    of
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-63ff1f53bf9cbfb31327
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 15
+  role: illustrative related-work mention
+  excerpt: dels, it remains in its early stages for multimodal water when classifying waterbirds). By
+    ablating the models. This section summarizes key open chal- contributions of these attenti
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/kohpangwei/group_DRO
+  note: 'Original author repo provides a generated tarball and script; regeneration differs because of
+    random seeds. Release: Waterbirds waterbird_complete95_forest2water2'
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_audit_rights
+  url: https://github.com/kohpangwei/group_DRO
+  note: Composite images inherit CUB and Places source rights; MIT code licence is not image licence.
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+source_url: https://github.com/kohpangwei/group_DRO

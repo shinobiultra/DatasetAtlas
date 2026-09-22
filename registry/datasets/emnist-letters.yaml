@@ -1,0 +1,61 @@
+schema_version: '1.0'
+id: emnist-letters
+name: EMNIST Letters
+aliases: []
+description: NIST EMNIST Letters split. NIST defines Letters as 26-class merged uppercase/lowercase split,
+  distinct from EMNIST Digits/Balanced; corpus uses OOD/background training
+paper_ids:
+- paper-1e2474b15fec2d7d
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Public data/media reuse rights require separate review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://www.nist.gov/itl/products-and-services/emnist-dataset
+  note: NIST source terms and underlying NIST SD19 rights must be checked for media publication
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-239270f2ce8a0d5a7545
+  paper_id: paper-1e2474b15fec2d7d
+  source_file_hash: ada9a023bec3a045996c2660092bd2e4c1a28380b76315ad0d97051c119bd9ce
+  page: 17
+  role: OOD/background training
+  excerpt: del. (A) pixel-scrambled MNIST images. (B) Fourier-phase scrambled MNIST-images. (C) EMNIST
+    letters [61], excluding the letters o,s,z,l,i,q and g. (D) patches cropped from natural images. The
+    small VGG− model was trained on
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://www.nist.gov/itl/products-and-services/emnist-dataset
+  note: NIST defines Letters as 26-class merged uppercase/lowercase split, distinct from EMNIST Digits/Balanced;
+    corpus uses OOD/background training
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_release_located
+- kind: source_audit_rights
+  url: https://www.nist.gov/itl/products-and-services/emnist-dataset
+  note: NIST source terms and underlying NIST SD19 rights must be checked for media publication
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_release_located
+- kind: source_audit_access
+  url: https://www.nist.gov/itl/products-and-services/emnist-dataset
+  note: public; Link to publication-audited EMNIST family but preserve Letters split as distinct protocol.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_release_located
+source_url: https://www.nist.gov/itl/products-and-services/emnist-dataset

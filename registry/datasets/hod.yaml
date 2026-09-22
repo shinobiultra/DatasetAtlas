@@ -1,0 +1,72 @@
+schema_version: '1.0'
+id: hod
+name: HOD
+aliases: []
+description: 'HOD Harmful Object Detection benchmark: normal/hard cases across six categories. Source
+  review: Author repository commit a78e801de791eebdf2e9011cbf5b5ac2f6c65716'
+paper_ids:
+- paper-09b2d7393fc75cf7
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  note: Author notice limits research use and expressly forbids redistribution without permission
+  source: https://github.com/poori-nuna/HOD-Benchmark-Dataset/tree/a78e801de791eebdf2e9011cbf5b5ac2f6c65716
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-51bd3efceeaa6a674408
+  paper_id: paper-09b2d7393fc75cf7
+  source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
+  page: 7
+  role: evaluation
+  excerpt: ning this word, resulting in 463 prompts from MMA, 44 images are reserved for evaluation, along
+    with the HOD [53] from Ring-a-Bell, 10,481 from COCO, and 1,600 from VISU. dataset, which contains
+    10,631 harmful images. Lastly, the attacker
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-e882fb9e2fa130c2e0f8
+  paper_id: paper-09b2d7393fc75cf7
+  source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
+  page: 7
+  role: safety evaluation
+  excerpt: lting in 463 prompts from MMA, 44 images are reserved for evaluation, along with the HOD [53]
+    from Ring-a-Bell, 10,481 from COCO, and 1,600 f
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/poori-nuna/HOD-Benchmark-Dataset/tree/a78e801de791eebdf2e9011cbf5b5ac2f6c65716
+  note: 'HOD Harmful Object Detection benchmark: normal/hard cases across six categories Author repository
+    commit a78e801de791eebdf2e9011cbf5b5ac2f6c65716'
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://github.com/poori-nuna/HOD-Benchmark-Dataset/tree/a78e801de791eebdf2e9011cbf5b5ac2f6c65716
+  note: 'Author repository links category archives; sizes/hashes not checked Probe: first_primary_url_http_head_200;
+    payload_not_downloaded'
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_rights
+  url: https://github.com/poori-nuna/HOD-Benchmark-Dataset/tree/a78e801de791eebdf2e9011cbf5b5ac2f6c65716
+  note: Author notice limits research use and expressly forbids redistribution without permission
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://github.com/poori-nuna/HOD-Benchmark-Dataset/tree/a78e801de791eebdf2e9011cbf5b5ac2f6c65716

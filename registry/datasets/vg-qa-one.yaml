@@ -1,0 +1,70 @@
+schema_version: '1.0'
+id: vg-qa-one
+name: VG_QA_one
+aliases: []
+description: Pathways VG_QA_one localization split.
+paper_ids:
+- paper-6c99cf73401b37d4
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Exact paper-specific source release or selected subset remains unverified; source
+    research alone does not resolve this candidate.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/israfelsr/vlm-pathways
+  note: Visual Genome source-image rights and annotation rights require separate review
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-e48437136dab19d5bb4c
+  paper_id: paper-6c99cf73401b37d4
+  source_file_hash: 63a07114996dfdfd5a19f4a2790f78b7b42dc95ce54e14d1a8f32cbef00fc8fb
+  page: 14
+  role: direct What’s Up split
+  excerpt: 'object split of What’s Up [Kamath et al., 2023, Lin et al., 2014]. • VG_QA_one:
+    Single-object localization queries on Visual Genome images, from the VG single-object
+    split of What’s Up [Kamath e'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/israfelsr/vlm-pathways
+  note: Pathways VG_QA_one localization split
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_recipe_identified_variant_unpinned
+- kind: source_audit_release
+  url: https://github.com/israfelsr/vlm-pathways
+  note: Pathways p14; author build script outputs `vg_qa_one` from What’s Up VG_QA_one_obj
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_recipe_identified_variant_unpinned
+- kind: source_audit_access
+  url: https://github.com/israfelsr/vlm-pathways
+  observation: author_build_script
+  requires_external_access_step: null
+  download_or_media_inspected: false
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_recipe_identified_variant_unpinned
+- kind: source_audit_rights
+  url: https://github.com/israfelsr/vlm-pathways
+  note: Visual Genome source-image rights and annotation rights require separate review
+  publication_decision: media_not_approved
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_recipe_identified_variant_unpinned
+source_url: https://github.com/israfelsr/vlm-pathways

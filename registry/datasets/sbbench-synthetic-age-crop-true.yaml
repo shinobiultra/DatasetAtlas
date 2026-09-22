@@ -1,0 +1,78 @@
+schema_version: '1.0'
+id: sbbench-synthetic-age-crop-true
+name: SBBench synthetic age, crop yes
+aliases: []
+description: 'Author VLMBias synthetic age cropped source: all 511 original embedded PNG records. Separate
+  from the original gated SBBench benchmark and the other three synthetic configurations.'
+paper_ids:
+- paper-32cea5e43d940514
+source_url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_age_crop_True/tree/43769ef07d9388ebb4c3dc74b548eea615d0c93b
+release: hf-43769ef07d9388ebb4c3dc74b548eea615d0c93b
+snapshot_id: vlmbias-41701bca3742c6151dc7b666a95eeb545bf8890c3d15f9149e5ca973ba6c1926
+adapter: embedded_parquet
+adapter_config:
+  path: work/sources/vlmbias/sbbench-synthetic-age-crop-true/records.parquet
+  format: parquet
+  sha256: 41701bca3742c6151dc7b666a95eeb545bf8890c3d15f9149e5ca973ba6c1926
+  mapping:
+    media: image
+  media_columns:
+  - image
+  fields:
+    label:
+      dtype: number
+      description: Original source integer label; class semantics not inferred from the empty author card
+    image:
+      dtype: object
+      description: Original embedded PNG provenance and digest; bytes stay outside JSON records
+    source_shard:
+      dtype: category
+      description: Pinned author Parquet shard
+    source_row:
+      dtype: number
+      description: Zero-based row within pinned author shard
+  population: original author train split
+  selection_note: First 100 rows of this exact pinned synthetic configuration; numeric label semantics
+    unverified.
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 511
+  unit: example
+  blockers:
+  - Author dataset card has no explicit media publication license; local preview only.
+  - The numeric class-label semantics are not documented on the author card.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_age_crop_True/tree/43769ef07d9388ebb4c3dc74b548eea615d0c93b
+  note: Author dataset is publicly accessible, but the card is empty and supplies no explicit media redistribution
+    grant.
+relationships:
+- type: possible_source_for
+  target: sbbench-syn-crop
+  status: candidate
+- type: possible_source_for
+  target: sb-syn-crop
+  status: candidate
+evidence:
+- kind: source_audit_release
+  url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_age_crop_True/tree/43769ef07d9388ebb4c3dc74b548eea615d0c93b
+  note: Author HF revision 43769ef07d9388ebb4c3dc74b548eea615d0c93b; 511 rows in this configuration; no
+    card license text.
+  checked_on: '2026-09-22'
+- kind: verified_source_acquisition
+  source_url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_age_crop_True/tree/43769ef07d9388ebb4c3dc74b548eea615d0c93b
+  source_shards_sha256:
+  - cb8ac573bcf8c0b29e3164e90e144c3fac86eabf73961c1d18f6477f4dc63f1e
+  - c83a2c053cb877c41a6137086deacf2e251185317555643e84c37442203bfdd7
+  adapter_file_sha256: 41701bca3742c6151dc7b666a95eeb545bf8890c3d15f9149e5ca973ba6c1926
+  source_rows: 511
+  scope: Full author synthetic configuration; no public media approval.

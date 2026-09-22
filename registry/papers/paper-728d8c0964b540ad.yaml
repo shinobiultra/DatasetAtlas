@@ -1,0 +1,38 @@
+schema_version: 1.0.0
+paper_id: paper-728d8c0964b540ad
+title: Intriguing properties of neural networks
+authors:
+- Szegedy, Christian
+- Zaremba, Wojciech
+- Sutskever, Ilya
+- Bruna, Joan
+- Erhan, Dumitru
+- Goodfellow, Ian
+- Fergus, Rob
+year: '2014'
+doi: 10.48550/arXiv.1312.6199
+url: http://arxiv.org/abs/1312.6199
+outcome: processed
+human_review_complete: false
+candidate_mention_count: 29
+sources:
+- relative_path: files/34858/Szegedy et al. - 2014 - Intriguing properties of neural
+    networks.pdf
+  type: pdf
+  sha256: c4e3bd872ef20b7d2c4d77a63cd8f37cb8ff518609ae09acaf0fd5dd9e76c54c
+  page_count: 10
+  extraction_quality:
+    pages_total: 10
+    pages_low_text: 0
+    characters: 41863
+    status: usable
+  processing_status: extracted
+review_method: full_pdf_page_text_appendix_table_caption_bibliography_agent_audit
+reviewed_at: '2026-09-22T03:27:40.790032+00:00'
+reviewed_pages: 10
+review_note: Direct MNIST and ImageNet; unnamed YouTube image source for QuocNet;
+  Flowers is an image attribute, not a dataset here.
+mention_inventory_review_complete: true
+reviewer_kind: agent
+reviewed_versions:
+- c4e3bd872ef20b7d

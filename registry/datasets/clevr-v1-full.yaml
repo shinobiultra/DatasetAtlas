@@ -1,0 +1,94 @@
+schema_version: '1.0'
+id: clevr-v1-full
+name: CLEVR v1.0 (official complete release)
+description: Original official CLEVR v1.0 train, validation, and test release. Questions
+  are indexed locally from the official archive, while original PNGs remain in the
+  archive for selective on-demand viewing.
+tasks:
+- visual question answering
+- compositional reasoning
+modalities:
+- image
+- text
+labels:
+- answer
+- question_family_index
+paper_ids:
+- paper-2038cb87115b4fb0
+source_url: https://cs.stanford.edu/people/jcjohns/clevr/
+release: CLEVR_v1.0
+snapshot_id: clevr-v1-zip-sha256-5cd61cf1096ed20944df93c9adb31e74d189b8459a94f54ba00090e5c59936d1
+adapter: clevr_full
+rights:
+  records: approved
+  annotations: approved
+  images: approved
+  derived_artifacts: approved
+  code: not_applicable
+  basis: CLEVR authors release all data under CC BY 4.0, with attribution required.
+  source: https://cs.stanford.edu/people/jcjohns/clevr/
+  replica: https://huggingface.co/datasets/maujim/CLEVR_sample_500/tree/463520cb0e4d16f2f61ae0607c81eacdd009e9f4
+  attribution: CLEVR (c) 2017 Facebook, Inc.; Johnson et al., CVPR 2017. CC BY 4.0.
+evidence:
+- kind: corpus_mention
+  mention_id: mention-353fa14a0e9392042a84
+  paper_id: paper-2038cb87115b4fb0
+  page: 9
+  role: related_work_candidate
+  note: Paper describes CLEVR as a shape/color variation dataset; role still awaits
+    corpus review.
+- kind: source_release
+  url: https://cs.stanford.edu/people/jcjohns/clevr/
+  note: Official v1.0 description and CC BY 4.0 statement.
+- kind: source_archive
+  url: https://dl.fbaipublicfiles.com/clevr/CLEVR_v1.0.zip
+  size_bytes: 19021600724
+  sha256: 5cd61cf1096ed20944df93c9adb31e74d189b8459a94f54ba00090e5c59936d1
+  note: Official full ZIP; bounded download of exactly 19,021,600,724 bytes; 100,015
+    archive members.
+adapter_config:
+  archive: work/sources/clevr/full/CLEVR_v1.0.zip
+  archive_sha256: 5cd61cf1096ed20944df93c9adb31e74d189b8459a94f54ba00090e5c59936d1
+  prepared_root: work/sources/clevr/full/prepared
+  preparation_budget_bytes: 2000000000
+  population: official CLEVR v1.0 train, validation, and test questions
+  fields:
+    answer:
+      dtype: category
+      description: Original CLEVR answer
+    question:
+      dtype: string
+      description: Original CLEVR question
+    question_family_index:
+      dtype: number
+      description: Original question family identifier
+    image_filename:
+      dtype: string
+      description: Original CLEVR image filename
+    image_index:
+      dtype: number
+      description: Original image index within the validation split
+    split:
+      dtype: category
+      description: Original source split
+    program:
+      dtype: array
+      description: Original functional program
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 999968
+  unit: example
+  blockers:
+  - The full-release preview is local; its separate public static bundle has not
+    been reviewed.
+relationships:
+- type: complete_release_variant_of
+  target: clevr
+  status: verified

@@ -1,0 +1,108 @@
+schema_version: '1.0'
+id: artbench
+name: ArtBench-10 (32x32 CIFAR binary)
+aliases:
+- ArtBench
+- ArtBench-10
+description: Author-hosted 32x32 CIFAR-binary ArtBench-10 release, 60,000 images in ten styles,
+  joined by split and CIFAR row index to the original 60,000-row artwork metadata CSV. This
+  local release does not include 256px or original-resolution images.
+paper_ids:
+- paper-25eaa8c74ce76800
+release: artbench10-32-cifarbin-abb96b78-csv7b83d705
+adapter: artbench_binary
+adapter_config:
+  archive: work/sources/artbench/artbench-10-binary.tar.gz
+  archive_sha256: abb96b7807369c59311300af81937f1bb1357570590d224833825104fde45380
+  archive_md5: 7209f8702da01c5127cb13201855c1ee
+  archive_url: https://artbench.eecs.berkeley.edu/files/artbench-10-binary.tar.gz
+  metadata_csv: work/sources/artbench/ArtBench-10.csv
+  metadata_sha256: 7b83d70554a629ab0e750841e137e92fe2a4e0cc788c44b2ce1a607eab36c012
+  metadata_url: https://artbench.eecs.berkeley.edu/files/ArtBench-10.csv
+  prepared_root: work/sources/artbench/prepared
+  preparation_budget_bytes: 500000000
+  population: ArtBench-10 author 32x32 CIFAR binary; 50,000 train and 10,000 test examples
+  fields:
+    split:
+      dtype: category
+      values: [train, test]
+      description: Author binary train or test split
+    index:
+      dtype: number
+      description: Zero-based index within the author's CIFAR binary split
+    label:
+      dtype: number
+      description: Author binary style index, 0 through 9
+    class_name:
+      dtype: category
+      description: Style name from original batches.meta.txt, checked against CSV
+    artwork_name:
+      dtype: string
+      description: Original artwork filename from author CSV
+    artist:
+      dtype: string
+      description: Artist string from author CSV
+    author_public_domain_flag:
+      dtype: boolean
+      description: Author CSV is_public_domain flag; not an independent copyright determination
+    original_width:
+      dtype: number
+      description: Original source artwork width from author CSV, not local 32px image width
+    original_height:
+      dtype: number
+      description: Original source artwork length from author CSV, not local 32px image height
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 60000
+  unit: example
+  blockers:
+  - Underlying artwork rights are mixed and the author CSV public-domain flag is not independently
+    verified; image publication needs per-work rights review.
+  - This release is only the 32x32 variant, not 256px or original-resolution ArtBench.
+rights:
+  records: local_author_release
+  annotations: local_author_csv
+  images: mixed_author_pd_flag_unverified
+  source: https://github.com/liaopeiyuan/artbench
+  note: Repository code license does not clear underlying artwork rights. Author metadata flags 50,060
+    rows public domain and 9,940 rows not public domain; Atlas does not treat the flag as verified.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-86cf215c165ce3ee9680
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: PM — CIFAR-10, CIFAR-2, ArtBench (Park et al., 2023) ResNet-9; ResNet-18; BERT —
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/liaopeiyuan/artbench
+  note: 'Author release has 60,000 artworks, 10 styles and explicit downloads; paper variant not pinned.
+    Release: ArtBench-10; 32, 256, original-resolution variants'
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_audit_rights
+  url: https://github.com/liaopeiyuan/artbench
+  note: Repository license must not be assumed to clear underlying artwork rights.
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+source_url: https://github.com/liaopeiyuan/artbench
+tasks:
+- image generation benchmark
+- style classification
+modalities:
+- image
+labels:
+- style
+- train/test split
+snapshot_id: artbench10-32-abb96b78-7b83d705

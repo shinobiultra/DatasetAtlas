@@ -1,0 +1,111 @@
+schema_version: '1.0'
+id: harmbench
+name: HarmBench text behaviors
+aliases: []
+description: The 400 text behavior rows from the official HarmBench release. This
+  local preview contains the first 100 rows in source order. The rows include harmful
+  requests and are intentionally metadata-only in the public site pending content
+  and inherited-rights review.
+tasks:
+- red-teaming evaluation
+- harmful-behavior classification
+modalities:
+- text
+labels:
+- FunctionalCategory
+- SemanticCategory
+- Tags
+paper_ids:
+- paper-09b2d7393fc75cf7
+- paper-c12960e5d652fb7f
+source_url: https://github.com/centerforaisafety/HarmBench
+release: github-8e1604d1171fe8a48d8febecd22f600e462bdcdd
+snapshot_id: github-HarmBench-8e1604d1171fe8a48d8febecd22f600e462bdcdd-text-all
+adapter: https
+adapter_config:
+  path: work/sources/harmbench/harmbench_behaviors_text_all.csv
+  url: https://raw.githubusercontent.com/centerforaisafety/HarmBench/8e1604d1171fe8a48d8febecd22f600e462bdcdd/data/behavior_datasets/harmbench_behaviors_text_all.csv
+  revision: 8e1604d1171fe8a48d8febecd22f600e462bdcdd
+  format: csv
+  sha256: 8d81accedd38eaaf8b760618622bb888417d1fd0c86eba65c427a16f1cbb4afc
+  population: official HarmBench harmbench_behaviors_text_all.csv, 400 text behaviors
+  mapping:
+    id: BehaviorID
+    text: Behavior
+  fields:
+    Behavior: Original harmful-behavior request
+    FunctionalCategory: Functional category from source
+    SemanticCategory: Semantic category from source
+    Tags: Tags from source
+    ContextString: Optional context supplied by source
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 400
+  unit: example
+  blockers:
+  - Public example publication requires content review and resolution of inherited
+    dataset rights.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_applicable
+  code: MIT
+  source: https://github.com/centerforaisafety/HarmBench/blob/8e1604d1171fe8a48d8febecd22f600e462bdcdd/LICENSE
+  note: Repository license covers software; behavior rows include sourced prompts,
+    so no public record redistribution approval is asserted.
+relationships: []
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-ee50e3d1ae4d2b2b87cc
+  paper_id: paper-09b2d7393fc75cf7
+  page: 7
+  role: source data
+  note: Paper names HarmBench as a benchmark source; full-paper review pending.
+  paper_full_review_complete: true
+  review_scope: specific_page_evidence_checked
+  source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
+  excerpt: 'm each of the five described in IV-A1. Specifically, we evaluate Qwen3-VL-8B-
+    benchmarks: HarmBench [44], SorryBench [45], MaliciousIn- Instruct [28] and LLaVA-1.5-7B
+    [25], and insert the gated struct [46], TDC2023 [47], and AdvB'
+- kind: source_release
+  url: https://github.com/centerforaisafety/HarmBench/blob/8e1604d1171fe8a48d8febecd22f600e462bdcdd/data/behavior_datasets/harmbench_behaviors_text_all.csv
+  note: Official repository text-all CSV pinned to commit; SHA-256 recorded above.
+- kind: corpus_mention
+  evidence_id: evidence-fd1c548a13aa12a4c62d
+  paper_id: paper-c12960e5d652fb7f
+  source_file_hash: 5b9c5f170ae4dd61a249182d5245b9c3c2f9380354abf3c28723f1e4add82cb7
+  page: 5
+  role: evaluation
+  excerpt: st adversarial threats, we employed LLaVA-v1.5-7B 1.1 0.7 0.3 0.2 the HarmBench
+    dataset [20], a benchmark for testing VLMs MiniGPT-4 0.6 0.4 0.1 0.1 against harmful
+    content generation. Specifically
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-e89cb6e96695aa10d7e6
+  paper_id: paper-c12960e5d652fb7f
+  source_file_hash: 5b9c5f170ae4dd61a249182d5245b9c3c2f9380354abf3c28723f1e4add82cb7
+  page: 5
+  role: evaluation
+  excerpt: 2 the HarmBench dataset [20], a benchmark for testing VLMs MiniGPT-4 0.6
+    0.4 0.1 0.1 against ha
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-6b71c8770cd3cf2e91b7
+  paper_id: paper-09b2d7393fc75cf7
+  source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
+  page: 7
+  role: attack prompt source
+  excerpt: 'described in IV-A1. Specifically, we evaluate Qwen3-VL-8B- benchmarks:
+    HarmBench [44], SorryBench [45], MaliciousIn- Instruct [28] and LLaVA-1.5-7B [25],
+    and insert the gated struct [4'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true

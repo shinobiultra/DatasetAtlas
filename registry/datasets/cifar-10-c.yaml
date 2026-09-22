@@ -1,0 +1,82 @@
+schema_version: '1.0'
+id: cifar-10-c
+name: CIFAR-10-C
+aliases: []
+description: CIFAR-10-C corruption benchmark; distinct from CIFAR-10-P perturbation
+  sequences.
+paper_ids:
+- paper-a47845c66d4a3f48
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Source-family rights and any public media examples require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://zenodo.org/records/2535967
+  note: Zenodo record Rights/License field has no explicit license value; CIFAR-10
+    image rights also require review
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-d9122294d9c6bfbd7027
+  paper_id: paper-a47845c66d4a3f48
+  source_file_hash: f1108a17f3cbbba7a93256ee725d68092c9a6d25204ca4faab92f6f0cbe1a4df
+  page: 7
+  role: evaluation
+  excerpt: ' different distribution shifts ranging from common image corruptions (CIFAR-10-C,
+    [58]) to dataset resampling bias (CIFAR-10.1, [112]) and image source shift (CINIC-10,
+    [31]). For each of th'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-f046d894eaf51f69b834
+  paper_id: paper-a47845c66d4a3f48
+  source_file_hash: f1108a17f3cbbba7a93256ee725d68092c9a6d25204ca4faab92f6f0cbe1a4df
+  page: 18
+  role: corruption evaluation
+  excerpt: FAR-10 and CIFAR-100 datasets [75] are obtained via the PyTorch loaders
+    [105], while CIFAR-10-C and CIFAR-100-C [58], with the common corruptions, are
+    downloaded from the official release (see https://zenodo.org/record/2
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://zenodo.org/records/2535967
+  note: CIFAR-10-C corruption benchmark; distinct from CIFAR-10-P perturbation sequences
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: https://zenodo.org/records/2535967
+  note: Zenodo 2535967 v1, 2019-01-09; CIFAR-10-C.tar MD5 56bf5dcef84df0e2308c6dcbcbbd8499
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://zenodo.org/records/2535967
+  note: Direct Zenodo archive, 2,918,471,680 bytes measured by HEAD; official record
+    lists 2.9 GB
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+  probe: archive_http_head_only
+- kind: source_audit_rights
+  url: https://zenodo.org/records/2535967
+  note: Zenodo record Rights/License field has no explicit license value; CIFAR-10
+    image rights also require review
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://zenodo.org/records/2535967

@@ -1,0 +1,139 @@
+{
+  "dataset_id": "iconqa",
+  "release": "iconqa-original-v1-475f7651",
+  "snapshot_id": "iconqa-original-475f7651",
+  "source": {
+    "author_repository": "https://github.com/lupantech/IconQA",
+    "author_archive_url": "https://iconqa2021.s3.us-west-1.amazonaws.com/iconqa_data.zip",
+    "archive_bytes": 1851278883,
+    "archive_sha256": "475f7651d9e2a86dee340e8b8b1d07b3d34abc7279c08bc7391196b49d4d348b",
+    "s3_multipart_etag": "dd3c97ebc6266418e6316472ecb9a679-108",
+    "included_author_version": "v1",
+    "included_author_license": "CC BY-NC-SA 4.0"
+  },
+  "join": {
+    "source_data_json_questions": 107439,
+    "original_png_members": 258033,
+    "every_png_referenced_exactly_once": true,
+    "zip_member_count": 472932,
+    "uncompressed_bytes": 1839246040,
+    "source_counts_by_split_and_subtask": {
+      "test:choose_img": 11535,
+      "test:choose_txt": 6316,
+      "test:fill_in_blank": 3638,
+      "train:choose_img": 34603,
+      "train:choose_txt": 18946,
+      "train:fill_in_blank": 10913,
+      "val:choose_img": 11534,
+      "val:choose_txt": 6316,
+      "val:fill_in_blank": 3638
+    },
+    "author_metadata_count_discrepancy": {
+      "metadata_json_val": 21489,
+      "archive_val": 21488,
+      "metadata_json_all": 107439,
+      "archive_all": 107439,
+      "explanation": "Author metadata and README overstate val by one while all total matches; source ZIP is authoritative."
+    }
+  },
+  "preview": {
+    "path": "work/packs/iconqa/pack.json",
+    "sha256": "31ba04118d83761284cbb7394ea83dc8d09fdc2e28a75914929034a95b2ddfa5",
+    "examples": 100,
+    "source_section_counts": {
+      "test:choose_img": 11,
+      "test:choose_txt": 11,
+      "test:fill_in_blank": 11,
+      "train:choose_img": 12,
+      "train:choose_txt": 11,
+      "train:fill_in_blank": 11,
+      "val:choose_img": 11,
+      "val:choose_txt": 11,
+      "val:fill_in_blank": 11
+    },
+    "distinct_diagrams": 100,
+    "original_pngs": 189,
+    "pillow_verified_pngs": 189,
+    "sampling": {
+      "method": "first_11_per_split_subtask_plus_one_train_image_choice",
+      "unit": "example",
+      "population": "Complete original IconQA v1 author ZIP, 107,439 questions across three subtasks",
+      "sections": [
+        {
+          "section": "test:choose_img",
+          "source_offset": 0,
+          "population_count": 11535,
+          "selected_count": 11
+        },
+        {
+          "section": "test:choose_txt",
+          "source_offset": 11535,
+          "population_count": 6316,
+          "selected_count": 11
+        },
+        {
+          "section": "test:fill_in_blank",
+          "source_offset": 17851,
+          "population_count": 3638,
+          "selected_count": 11
+        },
+        {
+          "section": "train:choose_img",
+          "source_offset": 21489,
+          "population_count": 34603,
+          "selected_count": 12
+        },
+        {
+          "section": "train:choose_txt",
+          "source_offset": 56092,
+          "population_count": 18946,
+          "selected_count": 11
+        },
+        {
+          "section": "train:fill_in_blank",
+          "source_offset": 75038,
+          "population_count": 10913,
+          "selected_count": 11
+        },
+        {
+          "section": "val:choose_img",
+          "source_offset": 85951,
+          "population_count": 11534,
+          "selected_count": 11
+        },
+        {
+          "section": "val:choose_txt",
+          "source_offset": 97485,
+          "population_count": 6316,
+          "selected_count": 11
+        },
+        {
+          "section": "val:fill_in_blank",
+          "source_offset": 103801,
+          "population_count": 3638,
+          "selected_count": 11
+        }
+      ],
+      "requested_count": 100,
+      "returned_count": 100,
+      "source_revision": "iconqa-original-v1-475f7651",
+      "bytes_read": 1392143,
+      "note": "Near-equal coverage of nine original sections; not population weighted. Original diagrams and all image choices copied from the pinned author ZIP."
+    }
+  },
+  "complete_access": {
+    "path": "work/snapshots/iconqa/manifest.json",
+    "manifest_sha256": "19edd4c07dc55466126c72cb7b5ce30aea6aa880d213f147fe921ac8ba6534ea",
+    "record_count": 107439,
+    "full_pagination_page_size": 1000,
+    "pages_tested": 108
+  },
+  "rights": {
+    "author_archive_license": "CC BY-NC-SA 4.0",
+    "local_preview": "not published",
+    "public_release": "metadata_only pending attribution/sharealike/noncommercial review"
+  },
+  "excluded": [
+    "Icon645 separate pretraining dataset"
+  ]
+}

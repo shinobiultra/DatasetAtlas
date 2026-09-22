@@ -1,0 +1,122 @@
+{
+  "schema_version": "1.0",
+  "checked_on": "2026-09-22",
+  "scope": "Four real author-hosted synthetic VLMBias configurations; local inspection only, no public-media approval",
+  "sources": [
+    {
+      "dataset_id": "sbbench-synthetic-gender-crop-false",
+      "repo": "vlmbias/sbbench_synthetic_gender_crop_False",
+      "revision": "b3f53090f541bfcdb491217dfec7aa639289ad8a",
+      "source_shards": [
+        {
+          "path": "work/sources/vlmbias/sbbench-synthetic-gender-crop-false/train-00000-of-00001.parquet",
+          "bytes": 237029151,
+          "sha256": "ada6735e59d70c98b812ca95cbce379b79340d224e1e86382a6d3ccdd620aeae"
+        }
+      ],
+      "adapter_file": "work/sources/vlmbias/sbbench-synthetic-gender-crop-false/train-00000-of-00001.parquet",
+      "adapter_sha256": "ada6735e59d70c98b812ca95cbce379b79340d224e1e86382a6d3ccdd620aeae",
+      "complete_count": 206,
+      "local_preview_count": 100,
+      "source_embedded_png_count": 206,
+      "source_missing_image_count": 0,
+      "complete_snapshot_parquet_sha256": "3e436d9f2f634062f9831a0a3c3f9e77670061dd008b296a545d7a0385bf9761",
+      "publication": "metadata_only",
+      "numeric_label_semantics": "unverified"
+    },
+    {
+      "dataset_id": "sbbench-synthetic-age-crop-false",
+      "repo": "vlmbias/sbbench_synthetic_age_crop_False",
+      "revision": "95ac0c3020ff710295a6ed5c0216718f03383151",
+      "source_shards": [
+        {
+          "path": "work/sources/vlmbias/sbbench-synthetic-age-crop-false/train-00000-of-00001.parquet",
+          "bytes": 430967656,
+          "sha256": "827f8c928bc1942a03eb93f2e8ea5a2198a4c9fd09465c16dcf3749da735e5e8"
+        }
+      ],
+      "adapter_file": "work/sources/vlmbias/sbbench-synthetic-age-crop-false/train-00000-of-00001.parquet",
+      "adapter_sha256": "827f8c928bc1942a03eb93f2e8ea5a2198a4c9fd09465c16dcf3749da735e5e8",
+      "complete_count": 333,
+      "local_preview_count": 100,
+      "source_embedded_png_count": 333,
+      "source_missing_image_count": 0,
+      "complete_snapshot_parquet_sha256": "5b6cf8820eecc2293b022880d9944afb1ef7f5993dd0b89b56b487c692251089",
+      "publication": "metadata_only",
+      "numeric_label_semantics": "unverified"
+    },
+    {
+      "dataset_id": "sbbench-synthetic-gender-crop-true",
+      "repo": "vlmbias/sbbench_synthetic_gender_crop_True",
+      "revision": "a7679386395cf29e9640757f16923f823d6251ef",
+      "source_shards": [
+        {
+          "path": "work/sources/vlmbias/sbbench-synthetic-gender-crop-true/train-00000-of-00001.parquet",
+          "bytes": 496951911,
+          "sha256": "735bea2e42b4be933c4687170bce19e8738c096176d21807d94dbbdf4e439599"
+        }
+      ],
+      "adapter_file": "work/sources/vlmbias/sbbench-synthetic-gender-crop-true/train-00000-of-00001.parquet",
+      "adapter_sha256": "735bea2e42b4be933c4687170bce19e8738c096176d21807d94dbbdf4e439599",
+      "complete_count": 406,
+      "local_preview_count": 100,
+      "source_embedded_png_count": 406,
+      "source_missing_image_count": 0,
+      "complete_snapshot_parquet_sha256": "e703a7d1f6208fb8129ac7f68d61407e337df159bbde9f8a31b599f6d951bf39",
+      "publication": "metadata_only",
+      "numeric_label_semantics": "unverified"
+    },
+    {
+      "dataset_id": "sbbench-synthetic-age-crop-true",
+      "repo": "vlmbias/sbbench_synthetic_age_crop_True",
+      "revision": "43769ef07d9388ebb4c3dc74b548eea615d0c93b",
+      "source_shards": [
+        {
+          "path": "work/sources/vlmbias/sbbench-synthetic-age-crop-true/train-00000-of-00002.parquet",
+          "bytes": 343041741,
+          "sha256": "cb8ac573bcf8c0b29e3164e90e144c3fac86eabf73961c1d18f6477f4dc63f1e"
+        },
+        {
+          "path": "work/sources/vlmbias/sbbench-synthetic-age-crop-true/train-00001-of-00002.parquet",
+          "bytes": 342276597,
+          "sha256": "c83a2c053cb877c41a6137086deacf2e251185317555643e84c37442203bfdd7"
+        }
+      ],
+      "adapter_file": "work/sources/vlmbias/sbbench-synthetic-age-crop-true/records.parquet",
+      "adapter_sha256": "41701bca3742c6151dc7b666a95eeb545bf8890c3d15f9149e5ca973ba6c1926",
+      "complete_count": 511,
+      "local_preview_count": 100,
+      "source_embedded_png_count": 511,
+      "source_missing_image_count": 0,
+      "complete_snapshot_parquet_sha256": "b61cf960299d48f837335d3203f9cf01c589d327b84c4cded22620d7445cb917",
+      "publication": "metadata_only",
+      "numeric_label_semantics": "unverified"
+    }
+  ],
+  "visu_text": {
+    "source_url": "https://huggingface.co/datasets/aimagelab/ViSU-Text",
+    "revision": "9afabb85b5570fa883b7caa0561d8c8d71d84dcd",
+    "access": "manual_gate",
+    "locally_acquired": false,
+    "unsafe_vision_images": "deliberately_unreleased"
+  },
+  "total_complete_records": 1456,
+  "total_local_preview_records": 400,
+  "source_download_bytes": 1850267056,
+  "validation": {
+    "real_local_integration_tests": "5 passed",
+    "registry": "339 datasets; zero errors at check",
+    "api_media_publication": "not approved"
+  },
+  "workbench_api_smoke": {
+    "dataset_id": "sbbench-synthetic-gender-crop-false",
+    "query_scope": "complete",
+    "query_status": 200,
+    "matched_count": 206,
+    "returned_count": 1,
+    "media_status": 200,
+    "media_type": "image/png",
+    "media_bytes": 1688110,
+    "note": "TestClient query used X-Atlas-Request: 1; media fetched on demand from pinned embedded Parquet."
+  }
+}

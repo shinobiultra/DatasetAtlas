@@ -1,0 +1,144 @@
+schema_version: '1.0'
+id: cifar-10-1
+name: CIFAR-10.1 v6
+aliases: []
+description: "Author v6 release: 2,000 original 32\xD732 RGB images, 200 per CIFAR-10\
+  \ class. Distinct from the 2,021-image v4 release. Original NPY pixels are losslessly\
+  \ encoded as PNG for local browsing; source row indices are preserved."
+paper_ids:
+- paper-a47845c66d4a3f48
+- paper-63c3bd849356e00f
+release: v6-d9982abb0bfc
+adapter: structured
+adapter_config:
+  path: work/sources/cifar-10-1/records.parquet
+  format: parquet
+  sha256: 4ca1776fd68aae0807f8d6424be79e25d1a1c2bb5273bff88db875e3ddfd9b1b
+  media_root: work/sources/cifar-10-1/images
+  mapping:
+    id: source_id
+    media: image
+  fields:
+    source_index:
+      dtype: number
+      description: Original v6 NPY row index
+    label:
+      dtype: category
+      values:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      description: Original CIFAR-10 numeric label
+    class_name:
+      dtype: category
+      values: &id002
+      - airplane
+      - automobile
+      - bird
+      - cat
+      - deer
+      - dog
+      - frog
+      - horse
+      - ship
+      - truck
+      description: CIFAR-10 class name
+    release_variant:
+      dtype: category
+      values:
+      - v6
+    pixel_representation:
+      dtype: string
+  source_files_sha256: &id001
+    cifar10.1_v6_data.npy: 2997188e5816f5bd545dc77771b6227828c28146049fcecf3fa10775474cacc6
+    cifar10.1_v6_labels.npy: ae40beda001693674edc94d925ee8268cfe68905f8f9aff800c8dcdfcd6c9448
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  unit: example
+  blockers:
+  - Author MIT code license excludes dataset images; public media redistribution is
+    not approved.
+  - CIFAR-10.1 v4 is a separate release and is not substituted.
+  total_count: 2000
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  external_provider: local_only
+  source: https://github.com/modestyachts/CIFAR-10.1/tree/d9982abb0bfc4846b8d13a11e66b887d946205d0
+  basis: Author repository distributes NPY data; MIT repository license applies to
+    code and explicitly excludes image/label data from Tiny Images.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-e9ce2378357fa3f6b023
+  paper_id: paper-a47845c66d4a3f48
+  source_file_hash: f1108a17f3cbbba7a93256ee725d68092c9a6d25204ca4faab92f6f0cbe1a4df
+  page: 7
+  role: evaluation
+  excerpt: mmon image corruptions (CIFAR-10-C, [58]) to dataset resampling bias (CIFAR-10.1,
+    [112]) and image source shift (CINIC-10, [31]). For each of these datasets, we
+    measure standard accuracy, an
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-8255c4d343da973fc80b
+  paper_id: paper-63c3bd849356e00f
+  source_file_hash: 81c3715d1e256579071591f3bc61f55d63b32a33dcc981026209d14d32990f32
+  page: 24
+  role: evaluation
+  excerpt: t have strongly predictive non-robust features. D.7 Generalization to CIFAR-10.1
+    Recht et al. [Rec+19] have constructed an unseen but distribution-shifted test
+    set for CIFAR-10. They show th
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-596f7109979b5bb89a22
+  paper_id: paper-a47845c66d4a3f48
+  source_file_hash: f1108a17f3cbbba7a93256ee725d68092c9a6d25204ca4faab92f6f0cbe1a4df
+  page: 7
+  role: distribution shift evaluation
+  excerpt: ranging from common image corruptions (CIFAR-10-C, [58]) to dataset resampling
+    bias (CIFAR-10.1, [112]) and image source shift (CINIC-10, [31]). For each of
+    these datasets, we measure standard accuracy, and Fig. 3 shows
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: verified_source_acquisition
+  source_url: https://github.com/modestyachts/CIFAR-10.1/tree/d9982abb0bfc4846b8d13a11e66b887d946205d0
+  checked_at: '2026-09-22'
+  sha256: *id001
+  count: 2000
+  counts_by_label:
+    airplane: 200
+    automobile: 200
+    bird: 200
+    cat: 200
+    deer: 200
+    dog: 200
+    frog: 200
+    horse: 200
+    ship: 200
+    truck: 200
+  pixel_validation: All 2,000 saved PNG arrays exactly equal original NPY rows; no
+    transformations
+snapshot_id: cifar101-v6-4ca1776fd68aae0807f8d6424be79e25d1a1c2bb5273bff88db875e3ddfd9b1b
+source_url: https://github.com/modestyachts/CIFAR-10.1/tree/d9982abb0bfc4846b8d13a11e66b887d946205d0
+modalities:
+- image
+tasks:
+- image classification
+- distribution shift evaluation
+labels: *id002

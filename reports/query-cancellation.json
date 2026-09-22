@@ -1,0 +1,28 @@
+{
+  "dataset_id": "clevr-v1-full",
+  "records": 999968,
+  "query": {
+    "population_scope": "complete",
+    "result_snapshot_ids": [],
+    "snapshot_id": "clevr-v1-zip-sha256-5cd61cf1096ed20944df93c9adb31e74d189b8459a94f54ba00090e5c59936d1",
+    "unit": "example",
+    "filter": null,
+    "search": "",
+    "sort": [],
+    "limit": 100,
+    "cursor": null,
+    "sample": {
+      "method": "stratified",
+      "field_id": "source.answer",
+      "size": 100
+    }
+  },
+  "outcome": "Query cancelled",
+  "seconds_before_request": 0.10392374199909682,
+  "seconds_after_request": 0.03304616500099655,
+  "reader_usable_after_interrupt": true,
+  "duckdb_memory_limit_mb": 256,
+  "default_query_timeout_seconds": 30,
+  "scope": "Real full CLEVR query cancellation; repeated interrupt every 10ms until future exits; not a process RSS bound or browser disconnect test.",
+  "platform": "Linux-7.2.6-1-cachyos-x86_64-with-glibc2.44"
+}

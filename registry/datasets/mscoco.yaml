@@ -1,0 +1,70 @@
+schema_version: '1.0'
+id: mscoco
+name: MSCOCO
+aliases: []
+description: AnyAttack tables use MSCOCO text-to-image/image-to-text retrieval; exact retrieval split
+  and preparation are not stated by this candidate.
+paper_ids:
+- paper-7a1ff5996ce95273
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Exact source variant or paper selection is unresolved.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://cocodataset.org/#download
+  note: COCO annotations and images retain separate source terms.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-a9374d6135112a1685aa
+  paper_id: paper-7a1ff5996ce95273
+  source_file_hash: d2da2819b87291e9ff99547e1724286e95ef4de33cad091ce17762c0c90782d1
+  page: 5
+  role: evaluation
+  excerpt: MSCOCO Model Attack Method TR@1 TR@5 TR@10 IR@1 IR@5 IR@10 R@Mean AttackVLM-ii 0.4 1.0 1.4
+    0.24 1.08 2.16 1.05 Attac
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-f0f22a7871267e872c06
+  paper_id: paper-7a1ff5996ce95273
+  source_file_hash: d2da2819b87291e9ff99547e1724286e95ef4de33cad091ce17762c0c90782d1
+  page: 5
+  role: downstream evaluation
+  excerpt: MSCOCO Model Attack Method TR@1 TR@5 TR@10
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://cocodataset.org/#download
+  note: 'AnyAttack tables use MSCOCO text-to-image/image-to-text retrieval; exact retrieval split and
+    preparation are not stated by this candidate. Release: MSCOCO retrieval benchmark; split/protocol
+    unresolved'
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+- kind: source_audit_rights
+  url: https://cocodataset.org/#termsofuse
+  note: COCO annotations and images retain separate source terms.
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+source_url: https://cocodataset.org/
+relationships:
+- type: same_source_family_as
+  target_id: coco
+  scope: COCO family only; year, split, selected image/caption IDs and overlay are not established as
+    the active COCO-2017-val release.

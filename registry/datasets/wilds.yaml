@@ -1,0 +1,56 @@
+schema_version: '1.0'
+id: wilds
+name: WILDS
+aliases: []
+description: WILDS is a collection of ten distribution-shift datasets across modalities; no single WILDS
+  media release.
+paper_ids:
+- paper-a47845c66d4a3f48
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Exact source variant or paper release is unresolved.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://wilds.stanford.edu/
+  note: Component-specific source licences apply; portal documentation is not blanket data rights.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-cfbf38e8b26b1ed0fec6
+  paper_id: paper-a47845c66d4a3f48
+  source_file_hash: f1108a17f3cbbba7a93256ee725d68092c9a6d25204ca4faab92f6f0cbe1a4df
+  page: 13
+  role: bibliography-only reference
+  excerpt: ', M. Zhang, A. Balsubramani, W. Hu, M. Yasunaga, R. L. Phillips, I. Gao, et al. Wilds: A benchmark
+    of in-the-wild distribution shifts. arXiv preprint arXiv:2012.07421, 2020. [75] A. Krizhevsky and
+    G. Hinto'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://wilds.stanford.edu/
+  note: 'WILDS is a collection of ten distribution-shift datasets across modalities; no single WILDS media
+    release. Release: WILDS suite; particular component unresolved'
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+- kind: source_audit_rights
+  url: https://wilds.stanford.edu/
+  note: Component-specific source licences apply; portal documentation is not blanket data rights.
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+source_url: https://wilds.stanford.edu/

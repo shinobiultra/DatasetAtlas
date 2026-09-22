@@ -1,0 +1,43 @@
+schema_version: 1.0.0
+paper_id: paper-79f7a50cea22ddab
+title: Understanding Deep Image Representations by Inverting Them
+authors:
+- Mahendran, Aravindh
+- Vedaldi, Andrea
+year: '2014'
+doi: 10.48550/arXiv.1412.0035
+url: http://arxiv.org/abs/1412.0035
+outcome: processed
+human_review_complete: false
+candidate_mention_count: 6
+sources:
+- relative_path: files/29791/Mahendran and Vedaldi - 2014 - Understanding Deep Image
+    Representations by Inverting Them.pdf
+  type: pdf
+  sha256: 28dbf621ade4e44491a888181654f0d500f45f3a09475881ea4f614fca31da8f
+  page_count: 9
+  extraction_quality:
+    pages_total: 9
+    pages_low_text: 0
+    characters: 54047
+    status: usable
+  processing_status: extracted
+- relative_path: files/29792/1412.html
+  type: html
+  sha256: 114db2b6849799ce33e140972f5c196a12171c286fc9a8fe3f581fda469ea5d8
+  page_count: null
+  extraction_quality:
+    pages_total: 1
+    pages_low_text: 1
+    characters: 0
+    status: low
+  processing_status: extracted
+mention_inventory_review_complete: true
+reviewer_kind: agent
+review_method: keyword_assisted_all_page_text_and_candidate_agent_audit
+reviewed_at: '2026-09-22T03:27:40.889329+00:00'
+reviewed_pages: 9
+reviewed_versions:
+- 28dbf621ade4e444
+review_note: ImageNet ILSVRC 2012 is the direct source, with 100 validation images
+  for inversion.

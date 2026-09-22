@@ -1,0 +1,41 @@
+schema_version: '1.0'
+id: middlebury
+name: Middlebury
+aliases: []
+description: Mention candidate from a focused page audit; the evidence receipts distinguish
+  direct use, comparison, related-work, and citation-only roles. Original source,
+  release, and rights still require independent verification.
+paper_ids:
+- paper-666de2b7486d80a3
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: unverified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Original release identity and rights need verification.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-cb286c8b3d7e7cff2749
+  paper_id: paper-666de2b7486d80a3
+  source_file_hash: c43575003d83757725739ad87acfc4026d0d3129b27bee69fd1a4c362dc0db33
+  page: 4
+  role: source data
+  excerpt: ' Davis ing a variety of tasks, architectures, and losses, as shown in
+    Middleburry dataset [50]. Because artifacts arising from Table 2 (right). Such
+    tasks include autoencoding, denoising, fra'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true

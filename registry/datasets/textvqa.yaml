@@ -1,0 +1,162 @@
+schema_version: '1.0'
+id: textvqa
+name: TextVQA
+aliases: []
+description: TextVQA questions over Open Images photos with OCR representation.
+paper_ids:
+- paper-09b2d7393fc75cf7
+- paper-f5da3ca03780a203
+- paper-6dbb0d4a7b949143
+- paper-392b0c393c06b48e
+- paper-3e0db9c633ab204c
+- paper-2c07a8c6af8e33c2
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Source-family rights and any public media examples require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://textvqa.org/dataset/
+  note: Official project labels its data CC BY 4.0; underlying Open Images photo licenses
+    still require per-image checks
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-86f068a0a25943564441
+  paper_id: paper-09b2d7393fc75cf7
+  source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
+  page: 7
+  role: evaluation
+  excerpt: ges from the LLaVA_Instruct_150k subset, yielding 20,559 image–instruction
+    pairs, and the test split of TextVQA [51], containing 5,730 pairs. Lastly, the
+    attacker uses the word image as the backdoor trigger and inserts it into every
+    question
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-81badd6882b42df793c7
+  paper_id: paper-f5da3ca03780a203
+  source_file_hash: d65cb215e41e6b745002603b59c138ce86e5ad7eb08751c0e3a85f3982959032
+  page: 8
+  role: evaluation
+  excerpt: 'g the prompt in Section H, and visual question answering (VQA) on the
+    TextVQA validation set [34]. Diverse datasets cover both object-centric recognition
+    and text-based reasoning scenarios. Metrics. We '
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-3915b2107a0d05b8e690
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 6
+  role: evaluation
+  excerpt: f the Appendix for further details. clude VQAv2 (Goyal et al., 2017), TextVQA
+    (Singh et al., 2019), VizWiz (Gurari et al., 2018), and OKVQA (Marino 4.2. Robustness
+    against Jailbreaking At
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-dc5cf841d13dc1f2659c
+  paper_id: paper-392b0c393c06b48e
+  source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
+  page: 9
+  role: evaluation
+  excerpt: ' on image captioning (COCO [29], Flickr30k [44]) and VQA (VQAv2 [16],
+    TextVQA [54], VizWiz [17], OKVQA [39]), reporting results on 500 ran- domly sampled
+    images per dataset using CIDEr [5'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-bf6f775eef494e3e7fd7
+  paper_id: paper-3e0db9c633ab204c
+  source_file_hash: d2750f355a25fcdcfcb221e5049a0aa41ec096b452772c73e1767e2d039a6545
+  page: 7
+  role: evaluation
+  excerpt: Model Vision Encoder COCO Flickr30k VQAv2 TextVQA OpenAI-L/14 121.7 78.8
+    71.5
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-e0cbc133fe0c27db3ef0
+  paper_id: paper-09b2d7393fc75cf7
+  source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
+  page: 7
+  role: refusal evaluation
+  excerpt: Instruct_150k subset, yielding 20,559 image–instruction pairs, and the
+    test split of TextVQA [51], containing 5,730 pairs. Lastly, the attacker uses
+    the word image as the backdoor trigger and inserts it into ever
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-4850869a186f7aad0574
+  paper_id: paper-2c07a8c6af8e33c2
+  source_file_hash: 46f3b325eda29bc401398f275242e175e3576fd32fc6d037fe589341aea00542
+  page: 3
+  role: related-work mention
+  excerpt: and 2020). Beyond distribution shift, the adversarial- Manning, 2019),
+    and TextVQA (Singh et al., 2019) robustness community has repeatedly found that
+    emphasize textual or compositional reasoning
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-d62e48fa044d2d1ecdf1
+  paper_id: paper-392b0c393c06b48e
+  source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
+  page: 9
+  role: VQA evaluation
+  excerpt: le. We evaluate on image captioning (COCO [29], Flickr30k [44]) and VQA
+    (VQAv2 [16], TextVQA [54], VizWiz [17], OKVQA [39]), reporting results on 500
+    ran- domly sampled images per dataset using CIDEr [58] for cap
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-af4f3e8be2852496ae25
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 6
+  role: VQA evaluation
+  excerpt: Sec. D of the Appendix for further details. clude VQAv2 (Goyal et al.,
+    2017), TextVQA (Singh et al., 2019), VizWiz (Gurari et al., 2018), and OKVQA (Marino
+    4.2. Robustness against Jailbreaking A
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://textvqa.org/dataset/
+  note: TextVQA questions over Open Images photos with OCR representation
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: https://textvqa.org/dataset/
+  note: v0.5.1; same questions as v0.5 with Rosetta OCR supplied separately/updated;
+    34,602 train, 5,000 val, 5,734 test questions
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://textvqa.org/dataset/
+  note: Official page links public JSON, OCR and Open Images media; retrieval untested
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_rights
+  url: https://textvqa.org/dataset/
+  note: Official project labels its data CC BY 4.0; underlying Open Images photo licenses
+    still require per-image checks
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://textvqa.org/dataset/

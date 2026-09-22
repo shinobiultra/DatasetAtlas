@@ -1,0 +1,50 @@
+{
+  "dataset_id": "mathvision",
+  "source_url": "https://huggingface.co/datasets/MathLLMs/MathVision",
+  "release": "hf-2837ddb3f13abaf6b3997c12d80753e5470bd46a-test",
+  "original_files": [
+    {
+      "dataset_id": "mathvision",
+      "release": "2837ddb3f13abaf6b3997c12d80753e5470bd46a",
+      "url": "https://huggingface.co/datasets/MathLLMs/MathVision/resolve/2837ddb3f13abaf6b3997c12d80753e5470bd46a/data/test-00000-of-00001-3532b8d3f1b4047a.parquet",
+      "file": "work/sources/mathvision/original/data/test-00000-of-00001-3532b8d3f1b4047a.parquet",
+      "bytes": 56906090,
+      "sha256": "bcb3078a77bd6ee0e4e22135d53b9a48604fcd1b62dec69e279e812ba4dd7d37",
+      "author_sha256": "bcb3078a77bd6ee0e4e22135d53b9a48604fcd1b62dec69e279e812ba4dd7d37"
+    },
+    {
+      "dataset_id": "mathvision",
+      "release": "2837ddb3f13abaf6b3997c12d80753e5470bd46a",
+      "url": "https://huggingface.co/datasets/MathLLMs/MathVision/resolve/2837ddb3f13abaf6b3997c12d80753e5470bd46a/data/testmini-00000-of-00001-f8ff70fcb2f29b1d.parquet",
+      "file": "work/sources/mathvision/original/data/testmini-00000-of-00001-f8ff70fcb2f29b1d.parquet",
+      "bytes": 6987282,
+      "sha256": "303b551466029f694b201ed61d9115bc9cff370006e8908cbe85c0495e79e76d",
+      "author_sha256": "303b551466029f694b201ed61d9115bc9cff370006e8908cbe85c0495e79e76d"
+    }
+  ],
+  "derivation_script": null,
+  "derived": null,
+  "scope_note": "Official MathVision test split: 3,040 image-bearing math questions. The 304-item testmini is an overlapping subset and is preserved separately as source evidence, not duplicated in the index.",
+  "preview_pack": "work/packs/mathvision/pack.json",
+  "rights_decision": "metadata_only; records and media remain local pending release-specific review",
+  "preview_sha256": "f3d1981967ec142a694d23ff81a4b9719fd80cc1e587b045a0bf3987735eefae",
+  "preview_records": 100,
+  "preview_unique_images": 100,
+  "preview_sampling": {
+    "method": "first_per_asset_source_order",
+    "unit": "example",
+    "population": "MathVision official test split, 3,040 rows; testmini overlap excluded",
+    "offset": 0,
+    "requested_count": 100,
+    "returned_count": 100,
+    "next_cursor": "100",
+    "source_revision": "hf-2837ddb3f13abaf6b3997c12d80753e5470bd46a-test",
+    "bytes_read": 4210068,
+    "warnings": [],
+    "selection_note": "",
+    "official_source_release": "hf-2837ddb3f13abaf6b3997c12d80753e5470bd46a-test",
+    "full_source_rows": 3040,
+    "unique_source_images": 100,
+    "selection_explanation": "First 100 distinct embedded/source images in author source order"
+  }
+}

@@ -1,0 +1,35 @@
+schema_version: 1.0.0
+paper_id: paper-fdcf898e0b05daff
+title: 'Adversarial Attacks on Multimodal Large Language Models: A Comprehensive Survey'
+authors:
+- Jain, Bhavuk
+- Arık, Sercan Ö
+- Thakur, Hardeo K.
+year: '2026'
+doi: 10.48550/arXiv.2603.27918
+url: http://arxiv.org/abs/2603.27918
+outcome: processed
+human_review_complete: false
+mention_inventory_review_complete: true
+candidate_mention_count: 13
+sources:
+- relative_path: files/34748/Jain et al. - 2026 - Adversarial Attacks on Multimodal
+    Large Language Models A Comprehensive Survey.pdf
+  type: pdf
+  sha256: 81476d954e7ac06e3750e0e0640511ec2e7f150a06486e70e42f17b02f1fc5f8
+  page_count: 37
+  extraction_quality:
+    pages_total: 37
+    pages_low_text: 4
+    characters: 150958
+    status: usable
+  processing_status: extracted
+reviewer_kind: agent
+review_method: full_pdf_page_text_appendix_table_caption_bibliography_audit
+reviewed_at: '2026-09-22T03:33:59.407704+00:00'
+reviewed_pages: 37
+reviewed_versions:
+- 81476d954e7ac06e
+review_note: All 37 pages checked, including visual inspection of low-text Figure
+  5 on p16 (vulnerability taxonomy, no dataset names). Survey has no original dataset;
+  named safety benchmark titles are cited-only. VQA is task acronym.

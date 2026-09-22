@@ -1,0 +1,49 @@
+schema_version: 1.0.0
+paper_id: paper-c12960e5d652fb7f
+title: 'EigenShield: Causal Subspace Filtering via Random Matrix Theory for Adversarially
+  Robust Vision-Language Models'
+authors:
+- Darabi, Nastaran
+- Naik, Devashri
+- Tayebati, Sina
+- Jayasuriya, Dinithi
+- Krishnan, Ranganath
+- Trivedi, Amit Ranjan
+year: '2025'
+doi: 10.48550/arXiv.2502.14976
+url: http://arxiv.org/abs/2502.14976
+outcome: processed
+human_review_complete: false
+mention_inventory_review_complete: true
+candidate_mention_count: 55
+sources:
+- relative_path: files/31940/2502.html
+  type: html
+  sha256: d3100849d8031eb59b25d25194c79a52d6f2b6ed446e40dd6b8fa255194a73f4
+  page_count: null
+  extraction_quality:
+    pages_total: 1
+    pages_low_text: 1
+    characters: 0
+    status: low
+  processing_status: extracted
+- relative_path: files/31941/Darabi et al. - 2025 - EigenShield Causal Subspace Filtering
+    via Random Matrix Theory for Adversarially Robust Vision-Lang.pdf
+  type: pdf
+  sha256: 5b9c5f170ae4dd61a249182d5245b9c3c2f9380354abf3c28723f1e4add82cb7
+  page_count: 17
+  extraction_quality:
+    pages_total: 17
+    pages_low_text: 1
+    characters: 103403
+    status: usable
+  processing_status: extracted
+reviewer_kind: agent
+review_method: full_pdf_page_text_appendix_table_caption_bibliography_audit
+reviewed_at: '2026-09-22T03:40:07.003156+00:00'
+reviewed_pages: 17
+reviewed_versions:
+- 5b9c5f170ae4dd61
+review_note: All 17 pages checked including example-only low-text p15. Direct sources
+  are 1,000 ImageNet images, HarmBench and RealToxicityPrompts evaluations, with paper-generated
+  adversarial variants. Other benchmark-like wording is method/metric, not data.

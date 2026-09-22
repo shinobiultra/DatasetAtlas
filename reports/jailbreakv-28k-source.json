@@ -1,0 +1,49 @@
+{
+  "dataset_id": "jailbreakv-28k",
+  "source_url": "https://huggingface.co/datasets/JailbreakV-28K/JailBreakV-28k",
+  "revision": "hf-f949ca582fff13d396ac8fce59596afafb2b78d3",
+  "original_files": [
+    {
+      "dataset": "jailbreakv-28k",
+      "file": "work/sources/jailbreakv-28k/JailBreakV_28K.csv",
+      "url": "https://huggingface.co/datasets/JailbreakV-28K/JailBreakV-28k/resolve/f949ca582fff13d396ac8fce59596afafb2b78d3/JailBreakV_28K/JailBreakV_28K.csv",
+      "bytes": 23153101,
+      "sha256": "72fb8beb9eb1c1a23745f4bd56430da9dff36ba42c6f5d699e68a47e14fc87c5"
+    }
+  ],
+  "derivation_script": "work/sources/prepare_text_batch.py",
+  "derived": {
+    "path": "work/sources/jailbreakv-28k/records.jsonl",
+    "bytes": 27340875,
+    "sha256": "cc2fda39e8362dc3bc697989d30a7f15271b64a5b0ac9fa8becc9841c8a94d1e",
+    "rows": 28000
+  },
+  "preview_pack": "work/packs/jailbreakv-28k/pack.json",
+  "rights_decision": "metadata_only; original content and media remain local pending review",
+  "scope_note": "Official 28,000-row JailBreakV CSV with source jailbreak queries, red-team queries, format and policy fields, and original image references. Only references present in the small public image tree resolve individually; the full image set is not public in this release.",
+  "preview_sha256": "af0ec2366ec99b810d6f8b69c905932302b333c5972f6598da3276c5f242bcdb",
+  "preview_records": 100,
+  "preview_sampling": {
+    "method": "first_available_distinct_media_source_order",
+    "unit": "example",
+    "population": "Rows with distinct image files in the pinned public source tree",
+    "offset": 0,
+    "requested_count": 100,
+    "returned_count": 100,
+    "next_cursor": null,
+    "source_revision": "hf-f949ca582fff13d396ac8fce59596afafb2b78d3",
+    "bytes_read": 111921,
+    "warnings": [],
+    "selection_note": "",
+    "source_rows_scanned": 22993,
+    "selection_counts": {
+      "distinct_media": 100
+    }
+  },
+  "public_image_manifest": "work/sources/jailbreakv-28k/available_images.json",
+  "public_image_manifest_sha256": "02dcc0bfb7f16233f77dc0f1648e89b5ca05ee8eb4637ac8e4fee72d81c3dfb6",
+  "public_image_files": 267,
+  "csv_rows_with_released_image": 269,
+  "distinct_referenced_released_images": 183,
+  "complete_media": false
+}

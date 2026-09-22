@@ -1,0 +1,14 @@
+id: google/siglip2-base-patch16-224
+revision: 75de2d55ec2d0b4efc50b3e9ad70dba96a7b2fa2
+source: https://huggingface.co/google/siglip2-base-patch16-224
+modality: image_text
+dimension: 768
+pooling: projected image/text features
+normalization: L2
+metric: cosine
+image_size: 224
+max_tokens: 64
+local_only: true
+weight_sha256: 612923381c76ec5a9bed335d1c48827e3f2e506ac31b044b63b2031fadee6a0b
+evidence: reports/analysis-demo-clevr-100.json
+status: local_selection_verified_2026-09-22

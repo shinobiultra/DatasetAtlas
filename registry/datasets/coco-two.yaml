@@ -1,0 +1,71 @@
+schema_version: '1.0'
+id: coco-two
+name: COCO_two
+aliases: []
+description: Pathways COCO_two relation split.
+paper_ids:
+- paper-6c99cf73401b37d4
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Exact paper-specific source release or selected subset remains unverified; source
+    research alone does not resolve this candidate.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/israfelsr/vlm-pathways
+  note: COCO source images retain their own license/attribution
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-5ee428913b1160c8c16e
+  paper_id: paper-6c99cf73401b37d4
+  source_file_hash: 63a07114996dfdfd5a19f4a2790f78b7b42dc95ce54e14d1a8f32cbef00fc8fb
+  page: 13
+  role: direct What’s Up split
+  excerpt: 'om the controlled images split of What’s Up [Kamath et al., 2023]. • COCO_two:
+    Two-object spatial-relation queries based on COCO [Lin et al., 2014] images, from
+    the natural COCO split of What’s'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/israfelsr/vlm-pathways
+  note: Pathways COCO_two relation split
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_recipe_identified_variant_unpinned
+- kind: source_audit_release
+  url: https://github.com/israfelsr/vlm-pathways
+  note: Pathways p13; author build script outputs `coco_two` from What’s Up COCO_QA_two_obj;
+    exact transformed revision not pinned
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_recipe_identified_variant_unpinned
+- kind: source_audit_access
+  url: https://github.com/israfelsr/vlm-pathways
+  observation: author_build_script
+  requires_external_access_step: null
+  download_or_media_inspected: false
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_recipe_identified_variant_unpinned
+- kind: source_audit_rights
+  url: https://github.com/israfelsr/vlm-pathways
+  note: COCO source images retain their own license/attribution
+  publication_decision: media_not_approved
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_recipe_identified_variant_unpinned
+source_url: https://github.com/israfelsr/vlm-pathways

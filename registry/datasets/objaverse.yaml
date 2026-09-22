@@ -1,0 +1,84 @@
+schema_version: '1.0'
+id: objaverse
+name: Objaverse
+aliases: []
+description: Objaverse 1.0, distinct from Objaverse-XL.
+paper_ids:
+- paper-2aa40aa13ed2a25b
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Official source family identified; exact selected release, preparation and public-use
+    rights still require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://objaverse.allenai.org/docs/objaverse-1.0/
+  note: Original object annotations contain per-object license fields; dataset-wide
+    code or site license is not a blanket media grant
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-28906424eef5b34b2c95
+  paper_id: paper-2aa40aa13ed2a25b
+  source_file_hash: 636fa1d8fe370283cf91d2640e28f00f9236cd7ee40afce14fc3301815559ecf
+  page: 18
+  role: source data
+  excerpt: 'Synthetic Image generation for Spatial IDs. We use 55 O BJAVERSE object
+    renders and project them in various pairs onto random backgrounds, per (Kang et
+    al., 2025). All images with the same '
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-0a694e95026f84508ab4
+  paper_id: paper-2aa40aa13ed2a25b
+  source_file_hash: 636fa1d8fe370283cf91d2640e28f00f9236cd7ee40afce14fc3301815559ecf
+  page: 5
+  role: synthetic source
+  excerpt: xtract spatial IDs from 11 SoTA VLMs, with synthetic images created from
+    open-source O BJAVERSE (Deitke et al., 2023) objects. The object renders are paired
+    onto a grid of m = 4 on top of random natural backgrounds. We provid
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://objaverse.allenai.org/docs/objaverse-1.0/
+  note: Objaverse 1.0, distinct from Objaverse-XL
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: source_and_terms_identified
+- kind: source_audit_release
+  url: https://objaverse.allenai.org/docs/objaverse-1.0/
+  note: Paper cites Deitke et al. 2023 and 55 renders; official project distinguishes
+    1.0 and XL, but exact 55 UIDs unreported
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: source_and_terms_identified
+- kind: source_audit_access
+  url: https://objaverse.allenai.org/docs/objaverse-1.0/
+  observation: author_api_subset
+  requires_external_access_step: null
+  download_or_media_inspected: false
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: source_and_terms_identified
+- kind: source_audit_rights
+  url: https://objaverse.allenai.org/docs/objaverse-1.0/
+  note: Original object annotations contain per-object license fields; dataset-wide
+    code or site license is not a blanket media grant
+  publication_decision: media_not_approved
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: source_and_terms_identified
+source_url: https://objaverse.allenai.org/docs/objaverse-1.0/

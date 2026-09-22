@@ -1,0 +1,22 @@
+{
+  "captured_at_utc": "2026-09-22T03:54:45.171015+00:00",
+  "dataset_id": "realtoxicityprompts",
+  "official_repository": "https://github.com/allenai/real-toxicity-prompts",
+  "author_dataset": "https://huggingface.co/datasets/allenai/real-toxicity-prompts",
+  "pinned_revision": "f21629712ffd6a3d13a54fd2807ccd521c55ef74",
+  "original_url": "https://huggingface.co/datasets/allenai/real-toxicity-prompts/resolve/f21629712ffd6a3d13a54fd2807ccd521c55ef74/prompts.jsonl",
+  "download_budget_bytes": 70000000,
+  "source_file": "work/sources/realtoxicityprompts/prompts.jsonl",
+  "source_bytes": 67690996,
+  "source_sha256": "4b6808878edc985fcc6bcb6a2a7239a0fb05420cb495f1f6ca1450da5e35c163",
+  "complete_source_records": 99442,
+  "challenging_true_in_this_file": 1199,
+  "preview_pack": "work/packs/realtoxicityprompts/pack.json",
+  "preview_sha256": "f9a2f40ba973d9f37a297568bb64a48b34fdb83146d61f0f34d46153015dc0e6",
+  "preview_records": 100,
+  "preview_method": "first 100 challenging=true examples in original JSONL source order",
+  "paper_comparison_note": "Some cited papers describe 1,225 challenging prompts. This pinned source file contains 1,199 rows flagged challenging=true. The discrepancy is left explicit; no rows or flag values were synthesized.",
+  "source_fields": "filename, begin, end, challenging, prompt and continuation dictionaries with original Perspective API scores",
+  "publication": "metadata_only; original text is derived from web documents and public redistribution/sensitive content have not been independently cleared",
+  "validation": "first 101, following 101, final row, unique IDs and flagged preview tested"
+}

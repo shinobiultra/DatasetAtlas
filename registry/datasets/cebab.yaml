@@ -1,0 +1,166 @@
+schema_version: '1.0'
+id: cebab
+name: CEBaB v1.1
+aliases: []
+description: All five source split files; train_inclusive, train_exclusive and train_observational
+  are alternative overlapping populations, not independent pooled examples. Original
+  review IDs, edit IDs, label distributions, disagreement and worker fields are preserved.
+  Corpus role remains related-work mention.
+paper_ids:
+- paper-2ae8012d97e5e3da
+release: CEBaB-v1.1-40e68518
+adapter: structured
+adapter_config:
+  path: work/sources/cebab/records.jsonl
+  format: jsonl
+  sha256: e06a0233c8972462ebfbab0f1ab466938f15baebc7f418a0e6af68888cb86e3d
+  mapping:
+    id: source_id
+    text: description
+  fields:
+    ambiance_aspect_label_distribution:
+      dtype: object
+      description: Original annotation/metadata mapping; empty-string sentinels retained
+    ambiance_aspect_majority:
+      dtype: category
+      description: Source annotation; empty/unknown/no-majority values are not relabeled
+    ambiance_aspect_validation_workers:
+      dtype: object
+      description: Original annotation/metadata mapping; empty-string sentinels retained
+    description:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    edit_goal:
+      dtype: category
+      description: Source annotation; empty/unknown/no-majority values are not relabeled
+    edit_id:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    edit_type:
+      dtype: category
+      description: Source annotation; empty/unknown/no-majority values are not relabeled
+    edit_worker:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    food_aspect_label_distribution:
+      dtype: object
+      description: Original annotation/metadata mapping; empty-string sentinels retained
+    food_aspect_majority:
+      dtype: category
+      description: Source annotation; empty/unknown/no-majority values are not relabeled
+    food_aspect_validation_workers:
+      dtype: object
+      description: Original annotation/metadata mapping; empty-string sentinels retained
+    id:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    is_original:
+      dtype: boolean
+      description: Original source review versus counterfactual edit
+    noise_aspect_label_distribution:
+      dtype: object
+      description: Original annotation/metadata mapping; empty-string sentinels retained
+    noise_aspect_majority:
+      dtype: category
+      description: Source annotation; empty/unknown/no-majority values are not relabeled
+    noise_aspect_validation_workers:
+      dtype: object
+      description: Original annotation/metadata mapping; empty-string sentinels retained
+    opentable_metadata:
+      dtype: object
+      description: Original annotation/metadata mapping; empty-string sentinels retained
+    original_id:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    review_label_distribution:
+      dtype: object
+      description: Original annotation/metadata mapping; empty-string sentinels retained
+    review_majority:
+      dtype: category
+      description: Source annotation; empty/unknown/no-majority values are not relabeled
+    review_workers:
+      dtype: object
+      description: Original annotation/metadata mapping; empty-string sentinels retained
+    service_aspect_label_distribution:
+      dtype: object
+      description: Original annotation/metadata mapping; empty-string sentinels retained
+    service_aspect_majority:
+      dtype: category
+      description: Source annotation; empty/unknown/no-majority values are not relabeled
+    service_aspect_validation_workers:
+      dtype: object
+      description: Original annotation/metadata mapping; empty-string sentinels retained
+    source_id:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    source_member:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    split:
+      dtype: category
+      values:
+      - train_inclusive
+      - train_exclusive
+      - train_observational
+      - dev
+      - test
+      description: Original split; CEBaB train alternatives overlap
+  source_files_sha256:
+    CEBaB-v1.1.zip: afe8ebcb5d18f33297512cd5c7e05f1590b82fb0683367042454c3eda7d5c6ae
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  unit: example
+  blockers:
+  - Public redistribution has not been approved; local inspection is supported.
+  - Train alternatives overlap; filter split before population statistics.
+  total_count: 18600
+rights:
+  records: CC-BY-4.0
+  annotations: CC-BY-4.0
+  images: not_applicable
+  external_provider: local_only
+  source: https://github.com/CEBaBing/CEBaB
+  basis: Author repository specifies CC BY 4.0; review-text and worker metadata not
+    approved for static publication.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-6829792e716ccc6b37c9
+  paper_id: paper-2ae8012d97e5e3da
+  source_file_hash: 8cb8aa5aeb09ce466263e93f0b11ecf8caac93664142c18b28f4d299291048fa
+  page: 36
+  role: illustrative related-work mention
+  excerpt: s how to estimate the effect of real-world concepts on the behavior of
+    AI models. The explainable AI benchmark CEBaB (Abraham et al., 2022) evaluates
+    methods on their ability to estimate the causal effects of the quality of food,
+    service, ambianc
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: verified_source_acquisition
+  source_url: https://raw.githubusercontent.com/CEBaBing/CEBaB/40e68518fe66a3b5e53b52741c5b180c8a096295/CEBaB-v1.1.zip
+  checked_at: '2026-09-22'
+  sha256:
+    CEBaB-v1.1.zip: afe8ebcb5d18f33297512cd5c7e05f1590b82fb0683367042454c3eda7d5c6ae
+  scope: All five source split files; train_inclusive, train_exclusive and train_observational
+    are alternative overlapping populations, not independent pooled examples. Original
+    review IDs, edit IDs, label distributions, disagreement and worker fields are
+    preserved. Corpus role remains related-work mention.
+  counts_by_split:
+    train_inclusive: 11728
+    train_exclusive: 1755
+    train_observational: 1755
+    dev: 1673
+    test: 1689
+snapshot_id: cebab-sha256-e06a0233c8972462ebfbab0f1ab466938f15baebc7f418a0e6af68888cb86e3d
+source_url: https://github.com/CEBaBing/CEBaB
+modalities:
+- text
+tasks:
+- concept-based causal explanation
+labels: []

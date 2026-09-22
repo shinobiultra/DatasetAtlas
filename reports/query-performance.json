@@ -1,0 +1,94 @@
+{
+  "platform": "Linux-7.2.6-1-cachyos-x86_64-with-glibc2.44",
+  "python": "3.12.14",
+  "cache_condition": "New reader per snapshot; existing OS page cache not flushed; three repeated exact-count first-page queries.",
+  "process_peak_rss_kib": 952548,
+  "duckdb_threads": 2,
+  "duckdb_memory_limit_mb": 256,
+  "measurements": [
+    {
+      "dataset": "mnist",
+      "records": 70000,
+      "manifest_and_checksum_seconds": 0.004775272998813307,
+      "query_seconds": [
+        0.03271107699947606,
+        0.028234495001015603,
+        0.018661152998902253
+      ],
+      "returned": 48,
+      "count_status": "exact"
+    },
+    {
+      "dataset": "cifar-10",
+      "records": 60000,
+      "manifest_and_checksum_seconds": 0.0033435039986215997,
+      "query_seconds": [
+        0.017855348998637055,
+        0.015611479000654072,
+        0.016590167999311234
+      ],
+      "returned": 48,
+      "count_status": "exact"
+    },
+    {
+      "dataset": "alpaca",
+      "records": 52002,
+      "manifest_and_checksum_seconds": 0.009710358001029817,
+      "query_seconds": [
+        0.01914660300099058,
+        0.01886969599945587,
+        0.017375847000948852
+      ],
+      "returned": 48,
+      "count_status": "exact"
+    },
+    {
+      "dataset": "advbench",
+      "records": 520,
+      "manifest_and_checksum_seconds": 0.0004478860009839991,
+      "query_seconds": [
+        0.007858359000238124,
+        0.007773260998874321,
+        0.0068025140008103335
+      ],
+      "returned": 48,
+      "count_status": "exact"
+    },
+    {
+      "dataset": "harmbench",
+      "records": 400,
+      "manifest_and_checksum_seconds": 0.00048436700126330834,
+      "query_seconds": [
+        0.0070495989984920016,
+        0.007153474998631282,
+        0.008279464998850017
+      ],
+      "returned": 48,
+      "count_status": "exact"
+    },
+    {
+      "dataset": "coco",
+      "records": 25014,
+      "manifest_and_checksum_seconds": 0.010241617999781738,
+      "query_seconds": [
+        0.03504011499899207,
+        0.0362763779994566,
+        0.03759851299946604
+      ],
+      "returned": 48,
+      "count_status": "exact"
+    },
+    {
+      "dataset": "clevr-v1-full",
+      "records": 999968,
+      "manifest_and_checksum_seconds": 0.12557137299882015,
+      "query_seconds": [
+        0.1695086560011987,
+        0.1619409650011221,
+        0.1731923410006857
+      ],
+      "returned": 48,
+      "count_status": "exact"
+    }
+  ]
+}

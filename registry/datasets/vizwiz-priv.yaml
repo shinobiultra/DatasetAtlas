@@ -1,0 +1,64 @@
+schema_version: '1.0'
+id: vizwiz-priv
+name: VizWiz-priv
+aliases: []
+description: 'VizWiz-Priv privacy-region and question overlays on images captured by blind participants.
+  Source review: Author CVPR 2019 release; exact files/hashes unverified'
+paper_ids:
+- paper-7ed1979562251931
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  note: Author page says CC BY 4.0, but content intentionally includes private visual information; no
+    media publication approval
+  source: https://vizwiz.org/tasks-and-datasets/vizwiz-priv/
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-81bff8377e1151928da6
+  paper_id: paper-7ed1979562251931
+  source_file_hash: aec173a1458a692a9a4159f07664f759ab64d0f3cce6638cad56d9b76af663ec
+  page: 10
+  role: bibliography-only reference
+  excerpt: 'Jeffrey P Bigham. Moustafa Alzantot, Yash Sharma Sharma, Ahmed El- 2019. Vizwiz-priv: A dataset
+    for recognizing the gohary, Bo-Jhang Ho, Mani Srivastava, and Kai-Wei presence and purpose of private
+    v'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://vizwiz.org/tasks-and-datasets/vizwiz-priv/
+  note: VizWiz-Priv privacy-region and question overlays on images captured by blind participants Author
+    CVPR 2019 release; exact files/hashes unverified
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://vizwiz.org/tasks-and-datasets/vizwiz-priv/
+  note: 'Author page links train/val/test images and JSON annotations Probe: first_primary_url_head_dns_failed_from_this_shell;
+    web_index_page_read; payload_not_downloaded; not_evidence_of_access_gate'
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_rights
+  url: https://vizwiz.org/tasks-and-datasets/vizwiz-priv/
+  note: Author page says CC BY 4.0, but content intentionally includes private visual information; no
+    media publication approval
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://vizwiz.org/tasks-and-datasets/vizwiz-priv/

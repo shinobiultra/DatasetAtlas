@@ -1,0 +1,83 @@
+schema_version: '1.0'
+id: vsr
+name: VSR
+aliases: []
+description: Visual Spatial Reasoning sentence/image pairs; random and zero-shot splits
+  are separate protocols, with COCO images external
+paper_ids:
+- paper-6c99cf73401b37d4
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Source content and publication rights require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/cambridgeltl/visual-spatial-reasoning/blob/b27a0af0ee1462d2b6b92c8c83e869d9254a241a/README.md
+  note: Repository Apache-2.0 notice cannot grant rights to Flickr-origin COCO images;
+    annotation redistribution must be checked independently.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-250c0d3902c0d2b8476d
+  paper_id: paper-6c99cf73401b37d4
+  source_file_hash: 63a07114996dfdfd5a19f4a2790f78b7b42dc95ce54e14d1a8f32cbef00fc8fb
+  page: 14
+  role: evaluation
+  excerpt: 'ishna et al., 2017] images, from the natural VG split of What’s Up. •
+    VSR: The Visual Spatial Reasoning benchmark [Liu et al., 2023], naturalistic spatial-relation
+    queries spanning a '
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-e1381e124cd762b1b216
+  paper_id: paper-6c99cf73401b37d4
+  source_file_hash: 63a07114996dfdfd5a19f4a2790f78b7b42dc95ce54e14d1a8f32cbef00fc8fb
+  page: 14
+  role: direct What’s Up split
+  excerpt: 'shna et al., 2017] images, from the natural VG split of What’s Up. • VSR:
+    The Visual Spatial Reasoning benchmark [Liu et al., 2023], naturalistic spatial-relation
+    queries spanning a broade'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/cambridgeltl/visual-spatial-reasoning/tree/b27a0af0ee1462d2b6b92c8c83e869d9254a241a
+  note: Visual Spatial Reasoning sentence/image pairs; random and zero-shot splits
+    are separate protocols, with COCO images external
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: https://github.com/cambridgeltl/visual-spatial-reasoning/tree/b27a0af0ee1462d2b6b92c8c83e869d9254a241a
+  note: author repository commit b27a0af0ee1462d2b6b92c8c83e869d9254a241a
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://github.com/cambridgeltl/visual-spatial-reasoning/tree/b27a0af0ee1462d2b6b92c8c83e869d9254a241a
+  note: Author JSONL annotations available in repository; image assets require separate
+    COCO acquisition and ID join.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+  probe: official_page_read_download_unprobed
+- kind: source_audit_rights
+  url: https://github.com/cambridgeltl/visual-spatial-reasoning/blob/b27a0af0ee1462d2b6b92c8c83e869d9254a241a/README.md
+  note: Repository Apache-2.0 notice cannot grant rights to Flickr-origin COCO images;
+    annotation redistribution must be checked independently.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://github.com/cambridgeltl/visual-spatial-reasoning/tree/b27a0af0ee1462d2b6b92c8c83e869d9254a241a

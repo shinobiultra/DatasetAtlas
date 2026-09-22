@@ -1,0 +1,16 @@
+{
+  "dataset_id": "mrpc",
+  "source_sha256": {
+    "msr_paraphrase_train.txt": "60a9b09084528f0673eedee2b69cb941920f0b8cd0eeccefc464a98768457f89",
+    "msr_paraphrase_test.txt": "a04e271090879aaba6423d65b94950c089298587d9c084bf9cd7439bd785f784"
+  },
+  "converted_sha256": "530c369b1fad0d3cf84c6c2a188e53dbf19c4e7c1303b00e947b27bcf4a38aa8",
+  "count": 5801,
+  "counts_by_split": {
+    "train": 4076,
+    "test": 1725
+  },
+  "distinct_upstream_ids": 0,
+  "preview_records": 100,
+  "scope": "SentEval-hosted tokenized train/test files explicitly linked by GLUE baseline authors. This preserves original 4,076 train and 1,725 labeled test rows; it does not invent a GLUE train/dev partition or hide the available original test labels."
+}

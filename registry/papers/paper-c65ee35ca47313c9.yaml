@@ -1,0 +1,44 @@
+schema_version: 1.0.0
+paper_id: paper-c65ee35ca47313c9
+title: 'Bias in Gender Bias Benchmarks: How Spurious Features Distort Evaluation'
+authors:
+- Hirota, Yusuke
+- Hachiuma, Ryo
+- Li, Boyi
+- Lu, Ximing
+- Boone, Michael Ross
+- Ivanovic, Boris
+- Choi, Yejin
+- Pavone, Marco
+- Wang, Yu-Chiang Frank
+- Garcia, Noa
+- Nakashima, Yuta
+- Yang, Chao-Han Huck
+year: '2025'
+doi: 10.48550/arXiv.2509.07596
+url: http://arxiv.org/abs/2509.07596
+outcome: processed
+human_review_complete: false
+mention_inventory_review_complete: true
+candidate_mention_count: 127
+sources:
+- relative_path: files/34692/Hirota et al. - 2025 - Bias in Gender Bias Benchmarks
+    How Spurious Features Distort Evaluation.pdf
+  type: pdf
+  sha256: 8720667ee4191c5e834c8159661294785cc5f89cc2c793c5e5db0c562deb12d3
+  page_count: 17
+  extraction_quality:
+    pages_total: 17
+    pages_low_text: 5
+    characters: 116431
+    status: usable
+  processing_status: extracted
+reviewer_kind: agent
+review_method: full_pdf_page_text_appendix_table_caption_bibliography_audit
+reviewed_at: '2026-09-22T03:40:07.003156+00:00'
+reviewed_pages: 17
+reviewed_versions:
+- 8720667ee4191c5e
+review_note: All 17 pages checked. Direct gender-bias analysis of COCO-gender, FACET,
+  MIAP, PHASE and controlled color/object/background variants. COCO/OpenImages/Conceptual
+  Captions discussed as underlying overlay lineage; citation-only titles excluded.

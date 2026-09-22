@@ -1,0 +1,83 @@
+schema_version: '1.0'
+id: cauldron
+name: Cauldron
+aliases: []
+description: HuggingFaceM4 The Cauldron.
+paper_ids:
+- paper-959e8fc51787f7e4
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Official source family identified; exact selected release, preparation and public-use
+    rights still require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://huggingface.co/datasets/HuggingFaceM4/the_cauldron
+  note: Dataset card says CC BY 4.0 plus compliance with original licenses for each
+    constituent dataset
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-0688385a14f146ee3211
+  paper_id: paper-959e8fc51787f7e4
+  source_file_hash: 5f8f1d0c816db711928aa4dde7ed771b84b94fe84ee7f48cdaefd0a3ce2e9edb
+  page: 5
+  role: training
+  excerpt: ext tokens 144,000 ImageNet [31] 1 image; Caption 144,000 zℓ,t,i ∈ R, Cauldron
+    [17] 1 image; QA Text 72,000 and each feature has an associated decoder vector
+    dℓ,i ∈ Rdmodel that determines
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-65245b16e049980dd997
+  paper_id: paper-959e8fc51787f7e4
+  source_file_hash: 5f8f1d0c816db711928aa4dde7ed771b84b94fe84ee7f48cdaefd0a3ce2e9edb
+  page: 5
+  role: VQA training source
+  excerpt: t,i ∈ R, Cauldron [17] 1 image; QA Text 72,000 and each feature has an
+    associated decoder vector dℓ,i ∈ Rdmodel that determine
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://huggingface.co/datasets/HuggingFaceM4/the_cauldron
+  note: HuggingFaceM4 The Cauldron
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: source_and_terms_identified
+- kind: source_audit_release
+  url: https://huggingface.co/datasets/HuggingFaceM4/the_cauldron
+  note: 50 named subsets on author Hugging Face release; exact revision used by citing
+    paper unpinned
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: source_and_terms_identified
+- kind: source_audit_access
+  url: https://huggingface.co/datasets/HuggingFaceM4/the_cauldron
+  observation: hosted_dataset
+  requires_external_access_step: null
+  download_or_media_inspected: false
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: source_and_terms_identified
+- kind: source_audit_rights
+  url: https://huggingface.co/datasets/HuggingFaceM4/the_cauldron
+  note: Dataset card says CC BY 4.0 plus compliance with original licenses for each
+    constituent dataset
+  publication_decision: media_not_approved
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: source_and_terms_identified
+source_url: https://huggingface.co/datasets/HuggingFaceM4/the_cauldron

@@ -1,0 +1,82 @@
+schema_version: '1.0'
+id: set5
+name: Set5
+aliases: []
+description: Bevilacqua et al. Set5 super-resolution benchmark.
+paper_ids:
+- paper-08e415961919a492
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: unverified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Exact paper-specific source release or selected subset remains unverified; source
+    research alone does not resolve this candidate.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://www.bmva-archive.org.uk/bmvc/2012/BMVC/paper135/index.html
+  note: Author paper establishes the benchmark citation; an original archive and per-image
+    redistribution terms were not verified
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-0cacdc1a6b98637c4862
+  paper_id: paper-08e415961919a492
+  source_file_hash: bb5aa079a2d42a3c0c001424bb540dfcd289ea2c409000267e5681444fb20bd3
+  page: 9
+  role: evaluation
+  excerpt: 'our approach Table 2: Detailed super-resolution PSNR comparison using
+    Set5 [4] and Set14 [62] datasets. We use a scaling on the Set5 dataset with different
+    scaling factors. factor of 4'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-42269deacfaed0478634
+  paper_id: paper-08e415961919a492
+  source_file_hash: bb5aa079a2d42a3c0c001424bb540dfcd289ea2c409000267e5681444fb20bd3
+  page: 9
+  role: evaluation
+  excerpt: -resolution PSNR comparison using Set5 [4] and Set14 [62] datasets. We
+    use a scaling on the Set5 dataset with different scaling factors.
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://www.bmva-archive.org.uk/bmvc/2012/BMVC/paper135/index.html
+  note: Bevilacqua et al. Set5 super-resolution benchmark
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_citation_only
+- kind: source_audit_release
+  url: https://www.bmva-archive.org.uk/bmvc/2012/BMVC/paper135/index.html
+  note: 2012 paper; original downloadable image snapshot not identified
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_citation_only
+- kind: source_audit_access
+  url: https://www.bmva-archive.org.uk/bmvc/2012/BMVC/paper135/index.html
+  observation: archive_unknown
+  requires_external_access_step: null
+  download_or_media_inspected: false
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_citation_only
+- kind: source_audit_rights
+  url: https://www.bmva-archive.org.uk/bmvc/2012/BMVC/paper135/index.html
+  note: Author paper establishes the benchmark citation; an original archive and per-image
+    redistribution terms were not verified
+  publication_decision: media_not_approved
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_citation_only
+source_url: https://www.bmva-archive.org.uk/bmvc/2012/BMVC/paper135/index.html

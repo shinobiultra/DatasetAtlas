@@ -1,0 +1,112 @@
+schema_version: '1.0'
+id: hc-bench
+name: HC-Bench wild images
+aliases: []
+description: All 53 author-released wild/ images in HC-Bench at the pinned Hugging Face revision. This
+  local pack covers only the wild subset; the current repository has other object/text parts and differs
+  from the 112-image paper version.
+paper_ids:
+- paper-2c07a8c6af8e33c2
+release: 203e4f80fb6f979fdab63f828daa9b04fc5c6f06
+adapter: csv
+adapter_config:
+  path: /home/bitwise/Documents/vibe/DatasetAtlas/work/sources/hc-bench/wild_index.csv
+  format: csv
+  sha256: a24e9f1602d1c16637daedf903c99d20030ed093aa62198d1210401d75817eb8
+  mapping:
+    id: path
+    media: path
+    media_modality: image
+  fields:
+    path:
+      description: Author wild/ path
+      dtype: string
+    source_subset:
+      description: HC-Bench release subset
+      dtype: string
+    source_sha256:
+      description: Original source image SHA-256
+      dtype: string
+  population: All 53 author-released wild/ images in HC-Bench at the pinned Hugging Face revision. This
+    local pack covers only the wild subset; the current repository has other object/text parts and differs
+    from the 112-image paper version.
+  selection_note: First 100 source-order rows; full local source index is retained.
+  media_root: /home/bitwise/Documents/vibe/DatasetAtlas/work/sources/hc-bench
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: local_only
+  complete_data: wild_subset_complete
+  publication: metadata_only
+  preview_count: 53
+  unit: example
+  blockers:
+  - The current 221-row HF release differs from the paper’s 112-image version.
+  - Wild source-image redistribution rights are not verified.
+  total_count: 53
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench
+  note: HF card labels release MIT, but the 53 wild images are internet-sourced and per-image publication
+    rights remain unverified. Local preview only.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-b2fbdd937c0bda562713
+  paper_id: paper-2c07a8c6af8e33c2
+  source_file_hash: 46f3b325eda29bc401398f275242e175e3576fd32fc6d037fe589341aea00542
+  page: 1
+  role: introduction
+  excerpt: '- sions or AI-generated images through percep- FUSHUN HALT tual adjustments like zooming.
+    We introduce HC-Bench, a benchmark of 112 images with hidden texts, objects, and illusions, revealing
+    that leading VLMs achieve near-zero accuracy (0–5'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-f18c76d0ab06339b3c8f
+  paper_id: paper-2c07a8c6af8e33c2
+  source_file_hash: 46f3b325eda29bc401398f275242e175e3576fd32fc6d037fe589341aea00542
+  page: 4
+  role: introduced evaluation benchmark
+  excerpt: tuning with our pro- Normal 28 28 posed dataset HC-Bench. Rare 28 28
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench
+  note: HC-Bench hidden-content benchmark
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_identified_version_drift
+- kind: source_audit_release
+  url: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench
+  note: SemVink paper reports 112-image benchmark; author-linked HF repository currently previews 221
+    rows including 56 base, 56 hidden, 56 text, 53 wild files; release/scope differ
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_identified_version_drift
+- kind: source_audit_access
+  url: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench
+  observation: author_hf_release
+  requires_external_access_step: null
+  download_or_media_inspected: false
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_identified_version_drift
+- kind: source_audit_rights
+  url: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench
+  note: HF card tags MIT; image generation/source permissions and public media still require item review
+  publication_decision: media_not_approved
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_identified_version_drift
+- kind: local_source_snapshot
+  url: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench
+  note: Pinned source revision 203e4f80fb6f979fdab63f828daa9b04fc5c6f06; local source index /home/bitwise/Documents/vibe/DatasetAtlas/work/sources/hc-bench/wild_index.csv;
+    SHA-256 a24e9f1602d1c16637daedf903c99d20030ed093aa62198d1210401d75817eb8; population 53 rows.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+source_url: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench
+snapshot_id: hc-bench-wild-203e4f80fb6f979f

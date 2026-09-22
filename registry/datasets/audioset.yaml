@@ -1,0 +1,73 @@
+schema_version: '1.0'
+id: audioset
+name: AudioSet
+aliases: []
+description: Google AudioSet.
+paper_ids:
+- paper-6d747c88d639c5aa
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Official source family identified; exact selected release, preparation and public-use
+    rights still require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://research.google.com/audioset/download.html
+  note: Google labels the dataset CC BY 4.0 and ontology CC BY-SA 4.0; that does not
+    grant rights to every source YouTube audio segment
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-3b7cd5bfd842eae5c70b
+  paper_id: paper-6d747c88d639c5aa
+  source_file_hash: 519805fac1ac6df034dd67ef95643703ebd97fa1c18e0f035a1f93feada6994e
+  page: 13
+  role: source data
+  excerpt: t. During training, the speech segments were randomly shifted in time and
+    superimposed on AudioSet [42] examples such that models could also be trained
+    on the AudioSet task. We randomly varied the SNR between the source (Speech)
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://research.google.com/audioset/download.html
+  note: Google AudioSet
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: source_and_terms_identified
+- kind: source_audit_release
+  url: https://research.google.com/audioset/download.html
+  note: Official release is segment-level YouTube ID/time/label CSV and optional embeddings;
+    underlying audio URLs are live sources, not an immutable media archive
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: source_and_terms_identified
+- kind: source_audit_access
+  url: https://research.google.com/audioset/download.html
+  observation: author_csv_download
+  requires_external_access_step: null
+  download_or_media_inspected: false
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: source_and_terms_identified
+- kind: source_audit_rights
+  url: https://research.google.com/audioset/download.html
+  note: Google labels the dataset CC BY 4.0 and ontology CC BY-SA 4.0; that does not
+    grant rights to every source YouTube audio segment
+  publication_decision: media_not_approved
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: source_and_terms_identified
+source_url: https://research.google.com/audioset/download.html

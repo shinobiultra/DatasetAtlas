@@ -1,0 +1,36 @@
+schema_version: 1.0.0
+paper_id: paper-2c07a8c6af8e33c2
+title: 'SemVink: Advancing VLMs'' Semantic Understanding of Optical Illusions via
+  Visual Global Thinking'
+authors:
+- Li, Sifan
+- Cai, Yujun
+- Wang, Yiwei
+year: '2025'
+doi: 10.48550/arXiv.2506.02803
+url: http://arxiv.org/abs/2506.02803
+outcome: processed
+human_review_complete: false
+mention_inventory_review_complete: true
+candidate_mention_count: 28
+sources:
+- relative_path: files/34814/Li et al. - 2025 - SemVink Advancing VLMs' Semantic Understanding
+    of Optical Illusions via Visual Global Thinking.pdf
+  type: pdf
+  sha256: 46f3b325eda29bc401398f275242e175e3576fd32fc6d037fe589341aea00542
+  page_count: 11
+  extraction_quality:
+    pages_total: 11
+    pages_low_text: 1
+    characters: 64693
+    status: usable
+  processing_status: extracted
+reviewer_kind: agent
+review_method: full_pdf_page_text_appendix_table_caption_bibliography_audit
+reviewed_at: '2026-09-22T03:41:11.146110+00:00'
+reviewed_pages: 11
+reviewed_versions:
+- 46f3b325eda29bc4
+review_note: All 11 pages checked including low-text p8 visually. HC-Bench introduced
+  with 112 synthetic images; 53 internet hidden-content images independently validate
+  difficulty. No source-release claim verified. Other named datasets are related/cited.

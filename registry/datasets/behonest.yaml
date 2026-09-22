@@ -1,0 +1,96 @@
+schema_version: '1.0'
+id: behonest
+name: BeHonest
+aliases: []
+description: 'Local pinned GAIR/BeHonest release: all 18 JSON files (9 scenario directories),
+  with original IDs and source columns preserved. Corpus role is bibliography-only;
+  the separately linked Demonstration Format source is outside this snapshot.'
+paper_ids:
+- paper-3aa07dc1c7bc37d9
+release: hf-fcdb24a2de2cd236bbd1b4484d99c23512ee7cc6
+adapter: structured
+adapter_config:
+  path: work/sources/behonest/records.jsonl
+  format: jsonl
+  sha256: 3fc0022ed6b68c4e5598c027ef2683731d6957a67ac930557fd336b70ebe3163
+  mapping:
+    id: source_id
+    text: display_text
+  fields:
+    scenario:
+      dtype: category
+      description: Upstream scenario folder
+    source_member:
+      dtype: category
+      description: Original JSON member
+    id:
+      dtype: number
+      description: Original file-local ID
+  population: all 18 JSON files in pinned GAIR/BeHonest HF snapshot
+  selection_note: Source-order round robin across 18 files; this HF release omits
+    a separately linked Demonstration Format source.
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  unit: example
+  blockers:
+  - Source content rights are not cleared for static publication; local inspection
+    only.
+  total_count: 19059
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/GAIR-NLP/BeHonest
+  note: Dataset-content license and mixed source rights not verified here
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-f7c7ed3afe37bb36e41b
+  paper_id: paper-3aa07dc1c7bc37d9
+  source_file_hash: c0ce517eb8b9f309aa1a5fa16fd7f17284e830f224760136b11c726448372cfb
+  page: 21
+  role: bibliography-only reference
+  excerpt: '):811–823, 2010. S. Chern, Z. Hu, Y. Yang, E. Chern, Y. Guo, J. Jin, B.
+    Wang, and P. Liu. Behonest: Benchmarking honesty of large language models. arXiv
+    preprint arXiv:2406.13261, 2024. K. Chua, R. Calandra, R. McAllister, an'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/GAIR-NLP/BeHonest
+  note: Author repo links benchmark/code and multiple honesty scenarios; corpus appearance
+    is bibliography title only
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_release_located
+- kind: source_audit_rights
+  url: https://github.com/GAIR-NLP/BeHonest
+  note: Dataset-content license and mixed source rights not verified here
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_release_located
+- kind: source_audit_access
+  url: https://github.com/GAIR-NLP/BeHonest
+  note: public; Retain bibliography-only mention, no evaluated data claim.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_release_located
+- kind: verified_local_source_snapshot
+  checked_on: '2026-09-22'
+  revision: hf-fcdb24a2de2cd236bbd1b4484d99c23512ee7cc6
+  receipt: reports/behonest-source.json
+  source_row_count: 19059
+  scope: 'Local pinned GAIR/BeHonest release: all 18 JSON files (9 scenario directories),
+    with original IDs and source columns preserved. Corpus role is bibliography-only;
+    the separately linked Demonstration Format source is outside this snapshot.'
+source_url: https://huggingface.co/datasets/GAIR/BeHonest/tree/fcdb24a2de2cd236bbd1b4484d99c23512ee7cc6
+snapshot_id: behonest-sha256-3fc0022ed6b68c4e5598c027ef2683731d6957a67ac930557fd336b70ebe3163
+modalities:
+- text
+tasks:
+- honesty evaluation

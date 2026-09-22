@@ -1,0 +1,75 @@
+schema_version: '1.0'
+id: multitrust
+name: MultiTrust
+aliases: []
+description: MultiTrust multimodal trustworthiness benchmark. Author project links benchmark/code covering
+  truthfulness, safety, robustness, fairness, privacy; corpus role is transfer-attack framework
+paper_ids:
+- paper-392b0c393c06b48e
+- paper-6dbb0d4a7b949143
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: source_page_public_data_unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Public source page located; exact paper-used data revision or archive is unverified.
+  - Public data/media reuse rights require separate review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://multi-trust.github.io/
+  note: Component source datasets and generated attacks have separate rights; exact corpus-used task/revision
+    unpinned
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-fa6b2317713f1adbc745
+  paper_id: paper-392b0c393c06b48e
+  source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
+  page: 26
+  role: transfer-attack framework
+  excerpt: Ensemble-based Transfer Attacks We further evaluate MLLM robustness using the MultiTrust benchmarking
+    framework [68], which employs ensemble-based SSA-CWA attacks to generate highly transferable adversar-
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-80e069ba8780afe7b019
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 14
+  role: transfer-attack framework
+  excerpt: g the attacks on the COCO image captioning task. These exam- MultiTrust benchmarking framework
+    (Zhang et al., ples illustrate the varying degrees of model susceptibility
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://multi-trust.github.io/
+  note: Author project links benchmark/code covering truthfulness, safety, robustness, fairness, privacy;
+    corpus role is transfer-attack framework
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_benchmark_page_located
+- kind: source_audit_rights
+  url: https://multi-trust.github.io/
+  note: Component source datasets and generated attacks have separate rights; exact corpus-used task/revision
+    unpinned
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_benchmark_page_located
+- kind: source_audit_access
+  url: https://multi-trust.github.io/
+  note: source_page_public_data_unverified; Identify paper-used MultiTrust subtask and release; do not
+    infer a single image archive.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_benchmark_page_located
+source_url: https://multi-trust.github.io/

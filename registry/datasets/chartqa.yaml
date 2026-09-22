@@ -1,0 +1,72 @@
+schema_version: '1.0'
+id: chartqa
+name: ChartQA
+aliases: []
+description: ChartQA chart question-answer benchmark; human and augmented questions
+  plus author full bounding-box release are distinct variants
+paper_ids:
+- paper-20de77d4e60fd1bd
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Source content and publication rights require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/vis-nlp/ChartQA/blob/044eabfc306abfe9340c5741f0093aefc5973d06/LICENSE
+  note: Repository contains GPL-3.0 LICENSE, but source charts have third-party origins;
+    do not infer blanket chart-image redistribution from code/repository license.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-f1435065ba192f35ee7d
+  paper_id: paper-20de77d4e60fd1bd
+  source_file_hash: ccc6f6fee4214f0656c164535cbe29f1cbbce5769b311c93f08e1110437f29e0
+  page: 8
+  role: related-work comparison
+  excerpt: in these intuition-challenging edge scenes, potentially by sion (Lu et
+    al., 2023), ChartQA (Masry et al., 2022), OCR- leveraging specific data and appropriate
+    learning objectives.
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/vis-nlp/ChartQA/tree/044eabfc306abfe9340c5741f0093aefc5973d06
+  note: ChartQA chart question-answer benchmark; human and augmented questions plus
+    author full bounding-box release are distinct variants
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: https://github.com/vis-nlp/ChartQA/tree/044eabfc306abfe9340c5741f0093aefc5973d06
+  note: author repository commit 044eabfc306abfe9340c5741f0093aefc5973d06
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://github.com/vis-nlp/ChartQA/tree/044eabfc306abfe9340c5741f0093aefc5973d06
+  note: First-version dataset folder on author GitHub; full annotation variant linked
+    to author HF; no archive obtained in this audit.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+  probe: official_page_read_download_unprobed
+- kind: source_audit_rights
+  url: https://github.com/vis-nlp/ChartQA/blob/044eabfc306abfe9340c5741f0093aefc5973d06/LICENSE
+  note: Repository contains GPL-3.0 LICENSE, but source charts have third-party origins;
+    do not infer blanket chart-image redistribution from code/repository license.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://github.com/vis-nlp/ChartQA/tree/044eabfc306abfe9340c5741f0093aefc5973d06

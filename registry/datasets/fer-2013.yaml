@@ -1,0 +1,56 @@
+schema_version: '1.0'
+id: fer-2013
+name: FER-2013
+aliases: []
+description: Original challenge is on Kaggle; registration and challenge rules govern access. Third-party
+  Kaggle reuploads are not original rights evidence.
+paper_ids:
+- paper-2038cb87115b4fb0
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: gated
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Original-source credentials or agreement are required.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data
+  note: Original competition data terms need account-side review; a reupload license cannot override them.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-d03b6b40dc5c277f93ac
+  paper_id: paper-2038cb87115b4fb0
+  source_file_hash: 51dcc13673e3b9b98e6b9cb67b07e584643259b69e50a0c028b1c7814a1ee676
+  page: 13
+  role: direct base for VQA overlay
+  excerpt: ns dataset, Recognition 2013 (FER-2013) (Goodfellow et al., we grouped the seven emotions into
+    positive, neg-
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data
+  note: 'Original challenge is on Kaggle; registration and challenge rules govern access. Third-party
+    Kaggle reuploads are not original rights evidence. Release: FER2013 challenge CSV; train/public/private
+    test'
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_audit_rights
+  url: https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data
+  note: Original competition data terms need account-side review; a reupload license cannot override them.
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+source_url: https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data

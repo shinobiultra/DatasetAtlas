@@ -1,0 +1,425 @@
+schema_version: '1.0'
+id: cifar-100
+name: CIFAR-100
+aliases:
+- CIFAR100
+- cifar100
+description: Original CIFAR-100 60,000-image classification release in its documented two-label binary
+  format. Local adapter reads complete train and test splits without Python pickle; first 100 training
+  examples form the preview.
+paper_ids:
+- paper-a47845c66d4a3f48
+- paper-6dbb0d4a7b949143
+- paper-208c53a35b62bc52
+- paper-3e0db9c633ab204c
+- paper-ed38cc9d6f4b163c
+- paper-25eaa8c74ce76800
+- paper-392b0c393c06b48e
+release: cifar-100-original-binary
+adapter: cifar100_binary
+adapter_config:
+  archive: work/sources/cifar-100/cifar-100-binary.tar.gz
+  archive_md5: 03b5dce01913d631647c71ecec9e9cb8
+  archive_sha256: 58a81ae192c23a4be8b1804d68e518ed807d710a4eb253b1f2a199162a40d8ec
+  prepared_root: work/sources/cifar-100/prepared
+  preparation_budget_bytes: 400000000
+  population: official CIFAR-100 binary train and test batches, 60,000 examples
+  fields:
+    fine_label:
+      dtype: category
+      description: Original fine class index 0 through 99
+      values:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+      - 20
+      - 21
+      - 22
+      - 23
+      - 24
+      - 25
+      - 26
+      - 27
+      - 28
+      - 29
+      - 30
+      - 31
+      - 32
+      - 33
+      - 34
+      - 35
+      - 36
+      - 37
+      - 38
+      - 39
+      - 40
+      - 41
+      - 42
+      - 43
+      - 44
+      - 45
+      - 46
+      - 47
+      - 48
+      - 49
+      - 50
+      - 51
+      - 52
+      - 53
+      - 54
+      - 55
+      - 56
+      - 57
+      - 58
+      - 59
+      - 60
+      - 61
+      - 62
+      - 63
+      - 64
+      - 65
+      - 66
+      - 67
+      - 68
+      - 69
+      - 70
+      - 71
+      - 72
+      - 73
+      - 74
+      - 75
+      - 76
+      - 77
+      - 78
+      - 79
+      - 80
+      - 81
+      - 82
+      - 83
+      - 84
+      - 85
+      - 86
+      - 87
+      - 88
+      - 89
+      - 90
+      - 91
+      - 92
+      - 93
+      - 94
+      - 95
+      - 96
+      - 97
+      - 98
+      - 99
+    fine_class_name:
+      dtype: category
+      description: Original fine class name
+      values:
+      - apple
+      - aquarium_fish
+      - baby
+      - bear
+      - beaver
+      - bed
+      - bee
+      - beetle
+      - bicycle
+      - bottle
+      - bowl
+      - boy
+      - bridge
+      - bus
+      - butterfly
+      - camel
+      - can
+      - castle
+      - caterpillar
+      - cattle
+      - chair
+      - chimpanzee
+      - clock
+      - cloud
+      - cockroach
+      - couch
+      - crab
+      - crocodile
+      - cup
+      - dinosaur
+      - dolphin
+      - elephant
+      - flatfish
+      - forest
+      - fox
+      - girl
+      - hamster
+      - house
+      - kangaroo
+      - keyboard
+      - lamp
+      - lawn_mower
+      - leopard
+      - lion
+      - lizard
+      - lobster
+      - man
+      - maple_tree
+      - motorcycle
+      - mountain
+      - mouse
+      - mushroom
+      - oak_tree
+      - orange
+      - orchid
+      - otter
+      - palm_tree
+      - pear
+      - pickup_truck
+      - pine_tree
+      - plain
+      - plate
+      - poppy
+      - porcupine
+      - possum
+      - rabbit
+      - raccoon
+      - ray
+      - road
+      - rocket
+      - rose
+      - sea
+      - seal
+      - shark
+      - shrew
+      - skunk
+      - skyscraper
+      - snail
+      - snake
+      - spider
+      - squirrel
+      - streetcar
+      - sunflower
+      - sweet_pepper
+      - table
+      - tank
+      - telephone
+      - television
+      - tiger
+      - tractor
+      - train
+      - trout
+      - tulip
+      - turtle
+      - wardrobe
+      - whale
+      - willow_tree
+      - wolf
+      - woman
+      - worm
+    coarse_label:
+      dtype: category
+      description: Original coarse superclass index 0 through 19
+      values:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+      - 10
+      - 11
+      - 12
+      - 13
+      - 14
+      - 15
+      - 16
+      - 17
+      - 18
+      - 19
+    coarse_class_name:
+      dtype: category
+      description: Original coarse superclass name
+      values:
+      - aquatic_mammals
+      - fish
+      - flowers
+      - food_containers
+      - fruit_and_vegetables
+      - household_electrical_devices
+      - household_furniture
+      - insects
+      - large_carnivores
+      - large_man-made_outdoor_things
+      - large_natural_outdoor_scenes
+      - large_omnivores_and_herbivores
+      - medium_mammals
+      - non-insect_invertebrates
+      - people
+      - reptiles
+      - small_mammals
+      - trees
+      - vehicles_1
+      - vehicles_2
+    split:
+      dtype: category
+      description: Original train or test split
+      values:
+      - train
+      - test
+    index:
+      dtype: number
+      description: Zero-based index within source split
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 60000
+  unit: example
+  blockers:
+  - Official source gives no explicit image redistribution license.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://www.cs.toronto.edu/~kriz/cifar.html
+  note: Official page provides downloads and citation but no explicit redistribution license; local preview
+    only.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-81d348109813b6d56c85
+  paper_id: paper-a47845c66d4a3f48
+  source_file_hash: f1108a17f3cbbba7a93256ee725d68092c9a6d25204ca4faab92f6f0cbe1a4df
+  page: 5
+  role: evaluation
+  excerpt: p leaderboards for the `∞ , `2 and common corruption threat models on CIFAR-10, CIFAR-100 [75],
+    and ImageNet [32] datasets (see Table 1 for details). We use the fixed budgets of ε∞ = 8/255 and ε2
+    = 0
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-e6642b800bacbc0c82fb
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 5
+  role: evaluation
+  excerpt: ky et al., 2009), Robust Vision Models. We focus on robust vision en- CIFAR100, Pets (Parkhi
+    et al., 2012), UCF101 (Soomro, coders, specifically large-scale adversarially trained Ima- 2012
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-e22f88b280198aef7d51
+  paper_id: paper-208c53a35b62bc52
+  source_file_hash: 721478f2130be8167b3b4530bbcbffb41bb9acba581bbc75eadcbfcf949ce42a
+  page: 6
+  role: evaluation
+  excerpt: then considering the worst case over all attacks, as MNIST, CIFAR-10, CIFAR-100 and ImageNet
+    as datasets. we do for AutoAttack, improves the performance. We report first results for determi
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-d5e7f5c1bca724799f7b
+  paper_id: paper-3e0db9c633ab204c
+  source_file_hash: d2750f355a25fcdcfcb221e5049a0aa41ec096b452772c73e1767e2d039a6545
+  page: 7
+  role: evaluation
+  excerpt: Caltech101 Cifar10 Cifar100 Cars Dtd
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-e01172864d20c961b385
+  paper_id: paper-ed38cc9d6f4b163c
+  source_file_hash: 83a5bac87a0f2e399ee723093e2a914019cd82a2374fa007482ac0fcd29f8058
+  page: 5
+  role: evaluation
+  excerpt: e Visibility (NDV) Index. For a pure sample x and its [Krizhevsky et al., 2009], CIFAR-100
+    [Krizhevsky et al.,
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-f2814873488f529b74d3
+  paper_id: paper-a47845c66d4a3f48
+  source_file_hash: f1108a17f3cbbba7a93256ee725d68092c9a6d25204ca4faab92f6f0cbe1a4df
+  page: 5
+  role: benchmark source
+  excerpt: set up leaderboards for the `∞ , `2 and common corruption threat models on CIFAR-10, CIFAR-100
+    [75], and ImageNet [32] datasets (see Table 1 for details). We use the fixed budgets of ε∞ = 8/255
+    and ε2 = 0.5 for the `∞ a
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-d78d298cc2dde1adbdde
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 5
+  role: zero-shot robustness evaluation
+  excerpt: Robust Vision Models. We focus on robust vision en- CIFAR100, Pets (Parkhi et al., 2012), UCF101
+    (Soomro, coders, spec
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_release
+  url: https://www.cs.toronto.edu/~kriz/cifar.html
+  note: Official page documents 60,000 images, 100 fine/20 coarse classes, binary row layout and MD5.
+- kind: mirror
+  url: https://data.brainchip.com/dataset-mirror/cifar100/cifar-100-binary.tar.gz
+  note: Byte-identical mirror used to resume 168,513,733-byte archive; final MD5 matches author page.
+- kind: corpus_mention
+  evidence_id: evidence-c63e5e138844835b95ab
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: l., 2024) CLIP Image Classification CIFAR100, MIT States, MSCOCO,
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-700565db3fe4e221b496
+  paper_id: paper-392b0c393c06b48e
+  source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
+  page: 6
+  role: zero-shot adversarial diagnostic evaluation
+  excerpt: 'Figure 2 x-axis label: CIFAR100'
+  review_scope: full_pdf_visual_figure_checked
+  paper_full_review_complete: true
+- kind: confirmed_name_alias
+  alias_id: cifar100
+  reason: CIFAR100 spelling denotes the original CIFAR-100 source; no CIFAR-100-C suffix occurs in its
+    receipts.
+  scope_note: Preserve each paper's role and subset; the active preview is one pinned release, not proof
+    of an identical paper sample.
+  source_url: https://www.cs.toronto.edu/~kriz/cifar.html
+  audit_file: registry/candidate_dispositions.yaml
+source_url: https://www.cs.toronto.edu/~kriz/cifar.html
+snapshot_id: cifar-100-binary-sha256-58a81ae192c23a4be8b1804d68e518ed807d710a4eb253b1f2a199162a40d8ec
+tasks:
+- image classification
+modalities:
+- image
+labels:
+- fine_class_name
+- coarse_class_name

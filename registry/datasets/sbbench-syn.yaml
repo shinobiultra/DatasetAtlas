@@ -1,0 +1,56 @@
+schema_version: '1.0'
+id: sbbench-syn
+name: SBBench-Syn
+aliases: []
+description: Paper supplement counts match two public HF noncrop datasets; a generic SBBench-Syn candidate
+  spans age and gender configs.
+paper_ids:
+- paper-32cea5e43d940514
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Exact source variant or paper selection is unresolved.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://huggingface.co/vlmbias
+  note: No license text in dataset cards; public access does not prove publication rights.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-5dc6d72d1f1016aa1a84
+  paper_id: paper-32cea5e43d940514
+  source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
+  page: 7
+  role: introduced synthetic derivative
+  excerpt: Based on the motivation that our main image dataset D E B IAS L ENS Rule SB-Syn SB-Syn 84.32
+    44.59 D E B IAS L ENS Rule SB-Syn-Crop SB-Syn-Crop 84.71 45.55
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://huggingface.co/vlmbias
+  note: 'Paper supplement counts match two public HF noncrop datasets; a generic SBBench-Syn candidate
+    spans age and gender configs. Release: Author synthetic SBBench noncrop gender206/age333 distinct
+    configs'
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+- kind: source_audit_rights
+  url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_age_crop_False
+  note: No license text in dataset cards; public access does not prove publication rights.
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+source_url: https://huggingface.co/vlmbias

@@ -1,0 +1,33 @@
+schema_version: 1.0.0
+paper_id: paper-b8a3bbfe3c7eefff
+title: 'Adversarial Examples Are Not Easily Detected: Bypassing Ten Detection Methods'
+authors:
+- Carlini, Nicholas
+- Wagner, David
+year: '2017'
+doi: 10.48550/arXiv.1705.07263
+url: http://arxiv.org/abs/1705.07263
+outcome: processed
+human_review_complete: false
+candidate_mention_count: 64
+sources:
+- relative_path: files/34856/Carlini and Wagner - 2017 - Adversarial Examples Are
+    Not Easily Detected Bypassing Ten Detection Methods.pdf
+  type: pdf
+  sha256: 80623126b569da46ac487c4d631dbd93f7c4916396eb45a18865ed529a66e3b7
+  page_count: 12
+  extraction_quality:
+    pages_total: 12
+    pages_low_text: 0
+    characters: 90972
+    status: usable
+  processing_status: extracted
+review_method: full_pdf_page_text_appendix_table_caption_bibliography_agent_audit
+reviewed_at: '2026-09-22T03:27:40.790032+00:00'
+reviewed_pages: 12
+review_note: Direct MNIST and CIFAR-10; ImageNet is another work/future setting, no
+  direct use.
+mention_inventory_review_complete: true
+reviewer_kind: agent
+reviewed_versions:
+- 80623126b569da46

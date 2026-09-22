@@ -1,0 +1,70 @@
+schema_version: '1.0'
+id: gyafc
+name: GYAFC
+aliases: []
+description: Grammarly Yahoo Answers Formality Corpus, informal/formal sentence rewrites
+paper_ids:
+- paper-29349603429218b8
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: request_required
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Author access request/terms must be completed before acquisition.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/raosudha89/GYAFC-corpus/blob/fe2da425ad91933b30097e7d2ed05e428e95ba92/README.md
+  note: No data license or redistribution grant posted in author README; Yahoo Answers
+    source content needs separate review.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-d21f4f7e725aae8a38d3
+  paper_id: paper-29349603429218b8
+  source_file_hash: a025d9386684c74fca7aae546e5707d9ec43e808ca9fc3a654154f964d50144f
+  page: 8
+  role: model-training lineage
+  excerpt: 'ack with two baselines. model was trained on the biggest available dataset,
+    Gram- marly’s Yahoo Answers Formality Corpus (GYAFC) [32], 6 https: //huggin'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/raosudha89/GYAFC-corpus/tree/fe2da425ad91933b30097e7d2ed05e428e95ba92
+  note: Grammarly Yahoo Answers Formality Corpus, informal/formal sentence rewrites
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: https://github.com/raosudha89/GYAFC-corpus/tree/fe2da425ad91933b30097e7d2ed05e428e95ba92
+  note: author repository commit fe2da425ad91933b30097e7d2ed05e428e95ba92; no public
+    data archive version
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://github.com/raosudha89/GYAFC-corpus/tree/fe2da425ad91933b30097e7d2ed05e428e95ba92
+  note: Author requests email with affiliation and use description to provide corpus;
+    access has not been requested or granted.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+  probe: official_page_read_download_unprobed
+- kind: source_audit_rights
+  url: https://github.com/raosudha89/GYAFC-corpus/blob/fe2da425ad91933b30097e7d2ed05e428e95ba92/README.md
+  note: No data license or redistribution grant posted in author README; Yahoo Answers
+    source content needs separate review.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://github.com/raosudha89/GYAFC-corpus/tree/fe2da425ad91933b30097e7d2ed05e428e95ba92

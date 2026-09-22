@@ -1,0 +1,55 @@
+{
+  "dataset_id": "omnisafebench-mm",
+  "source_url": "https://huggingface.co/datasets/jiaxiaojunQAQ/OmniSafeBench-MM",
+  "revision": "hf-665c3bd114e1f13bb7ffca286167e75119a1cd22",
+  "original_files": [
+    {
+      "dataset": "omnisafebench-mm",
+      "file": "work/sources/omnisafebench-mm/data_full.json",
+      "url": "https://huggingface.co/datasets/jiaxiaojunQAQ/OmniSafeBench-MM/resolve/665c3bd114e1f13bb7ffca286167e75119a1cd22/data_full.json",
+      "bytes": 485910,
+      "sha256": "f635957718aaa1fe01eb7ffdad70461a7cf0f03531bb8244f9ab415e5dae20d1"
+    }
+  ],
+  "derivation_script": "work/sources/prepare_text_batch.py",
+  "derived": {
+    "path": "work/sources/omnisafebench-mm/records.jsonl",
+    "bytes": 468298,
+    "sha256": "e45ab95dcc7f9fdffd51c15106a88c7b4651d3d835f67c0fa8c99f51bd8e0cc9",
+    "rows": 1500
+  },
+  "preview_pack": "work/packs/omnisafebench-mm/pack.json",
+  "rights_decision": "metadata_only; original content and media remain local pending review",
+  "scope_note": "All 1,500 official OmniSafeBench-MM JSON annotation rows, with their original prompts, risk categories and distinct pinned image references. Source images resolve individually on demand.",
+  "preview_sha256": "9e12e497a9b3ef064b93302020e668a9e6a67f7450c3f70e9f6833dd70ef3081",
+  "preview_records": 100,
+  "preview_sampling": {
+    "method": "fixed_quota_per_source_category_order",
+    "unit": "example",
+    "population": "All 1,500 official OmniSafeBench-MM JSON annotation rows, with their original prompts, risk categories and distinct pinned image references. Source images resolve individually on demand.",
+    "offset": 0,
+    "requested_count": 100,
+    "returned_count": 100,
+    "next_cursor": null,
+    "source_revision": "hf-665c3bd114e1f13bb7ffca286167e75119a1cd22",
+    "bytes_read": 31581,
+    "warnings": [],
+    "selection_note": "",
+    "source_rows_scanned": 885,
+    "selection_counts": {
+      "A. Ethical and Social Risks": 11,
+      "B. Privacy and Data Risks": 11,
+      "C. Safety and Physical Harm": 11,
+      "D. Criminal and Economic Risks": 11,
+      "E. Cybersecurity Threats": 11,
+      "F. Information and Political Manipulation": 11,
+      "G. Content and Cultural Safety": 12,
+      "H. Intellectual Property and Ownership": 11,
+      "I. Decision and Cognitive Risks": 11
+    }
+  },
+  "public_image_manifest": "work/sources/omnisafebench-mm/available_images.json",
+  "public_image_manifest_sha256": "842d95115cd16e0f2ad6711d6119a18b2cf375e49f8dbc768556d86d8cfa9379",
+  "public_image_files": 1500,
+  "annotation_rows_with_released_image": 1500
+}

@@ -1,0 +1,55 @@
+schema_version: '1.0'
+id: zerobench
+name: ZeroBench
+aliases: []
+description: Original project links author data with a later v2 revision; paper reference alone does not
+  select v1/v2.
+paper_ids:
+- paper-20de77d4e60fd1bd
+release: hf-8fcdfd9138c802cac52b774b36946e70f738f500-original
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: gated
+  adapter: not_started
+  preview: none
+  complete_data: inaccessible
+  publication: metadata_only
+  preview_count: 0
+  unit: example
+  blockers:
+  - Original author Hugging Face dataset requires account login and acceptance of access conditions; unauthenticated pinned Parquet HEAD returns HTTP 401.
+  - Author card requests that answers not be disclosed publicly or used for training; underlying image rights remain unreviewed.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://zerobench.github.io/
+  note: Author card forbids public answer disclosure and training use; image-specific rights remain unreviewed. No dataset content was downloaded.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-8f88de86ec6def044711
+  paper_id: paper-20de77d4e60fd1bd
+  source_file_hash: ccc6f6fee4214f0656c164535cbe29f1cbbce5769b311c93f08e1110437f29e0
+  page: 8
+  role: related-work comparison
+  excerpt: r- standing. ZeroBench (Roberts et al., 2025b) and VibeEval experiments. Results are averaged
+    over five independent (Padlewski
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://zerobench.github.io/
+  note: 'Original project links author data with a later v2 revision; paper reference alone does not select
+    v1/v2. Release: ZeroBench original main/subquestions; revision v2 exists'
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_audit_rights
+  url: https://zerobench.github.io/
+  note: Official dataset card licence and image-specific rights need review before publication.
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+source_url: https://zerobench.github.io/

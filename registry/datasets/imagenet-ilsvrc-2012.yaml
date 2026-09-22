@@ -1,0 +1,58 @@
+schema_version: '1.0'
+id: imagenet-ilsvrc-2012
+name: ImageNet ILSVRC 2012
+aliases: []
+description: Official ImageNet challenge page sends common classification release to Kaggle and requires
+  login/request for other data.
+paper_ids:
+- paper-79f7a50cea22ddab
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: gated
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Original-source credentials or agreement are required.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://www.image-net.org/challenges/LSVRC/
+  note: ImageNet image access and research-use terms govern; challenge page is not a blanket redistribution
+    license.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-2a25892b13246d94e5e5
+  paper_id: paper-79f7a50cea22ddab
+  source_file_hash: 28dbf621ade4e44491a888181654f0d500f45f3a09475881ea4f614fca31da8f
+  page: 6
+  role: evaluation
+  excerpt: 'by cross validation on the normalized learned from 1.2M images of the ImageNet ILSVRC 2012
+    reconstruction error, a selection based on qualitative analy- data [22]. sis is preferred because
+    the method '
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://www.image-net.org/challenges/LSVRC/
+  note: 'Official ImageNet challenge page sends common classification release to Kaggle and requires login/request
+    for other data. Release: ILSVRC2012 classification/localization; challenge revisions exist'
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_audit_rights
+  url: https://www.image-net.org/challenges/LSVRC/
+  note: ImageNet image access and research-use terms govern; challenge page is not a blanket redistribution
+    license.
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+source_url: https://www.image-net.org/challenges/LSVRC/

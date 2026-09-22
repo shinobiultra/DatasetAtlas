@@ -1,0 +1,66 @@
+schema_version: '1.0'
+id: bbq
+name: BBQ
+aliases: []
+description: All 11 official BBQ category JSONL files in category filename order. Answer choices and source labels
+  remain separate from model predictions.
+paper_ids:
+- paper-32cea5e43d940514
+release: github-bea11bd97d79217245b5871acd247b9d6eb24598
+adapter: structured
+adapter_config:
+  path: work/sources/bbq/records.jsonl
+  format: jsonl
+  sha256: a4477d8c0a8109b8f6c11eed0cea4b0a89ec709cf9c9ffb5b07e399e23031d33
+  population: All 11 official BBQ category JSONL files in category filename order. Answer choices and source labels
+    remain separate from model predictions.
+  mapping:
+    id: source_id
+    text: context
+    question: question
+    choices: choices
+  fields:
+    source_id: Category and official example ID
+    category: Official category
+    context: Original question context
+    question: Original question
+    choices: Original ans0, ans1, ans2 in order
+    label: Original correct answer index
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 58492
+  unit: example
+  blockers:
+  - Public redistribution remains metadata only pending a release-specific rights and sensitive-content review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_applicable
+  external_provider: local_only
+  source: https://github.com/nyu-mll/BBQ
+  note: Local source access does not authorize public record or media redistribution.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-5551817339589d7e6475
+  paper_id: paper-32cea5e43d940514
+  source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
+  page: 5
+  role: prompt lineage
+  excerpt: ✓ 11.1 19.4 18.0 10.3 occupation, sentiment, and skills) and BBQ [64] for CLIP (ViT-L/14@336)† − 19.9
+    31.5 23.2 30.0 SBBench. All thes
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_release
+  url: https://github.com/nyu-mll/BBQ
+  note: Pinned github-bea11bd97d79217245b5871acd247b9d6eb24598; 58492 rows; derived SHA-256 a4477d8c0a8109b8f6c11eed0cea4b0a89ec709cf9c9ffb5b07e399e23031d33.
+snapshot_id: github-bea11bd97d79217245b5871acd247b9d6eb24598-a4477d8c0a81
+source_url: https://github.com/nyu-mll/BBQ
+modalities:
+- text

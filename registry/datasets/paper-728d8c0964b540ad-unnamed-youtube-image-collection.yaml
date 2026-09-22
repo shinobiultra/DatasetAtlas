@@ -1,0 +1,41 @@
+schema_version: '1.0'
+id: paper-728d8c0964b540ad-unnamed-youtube-image-collection
+name: unnamed YouTube image collection
+aliases: []
+description: Mention candidate from a focused page audit; the evidence receipts distinguish
+  direct use, comparison, related-work, and citation-only roles. Original source,
+  release, and rights still require independent verification.
+paper_ids:
+- paper-728d8c0964b540ad
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: unverified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Original release identity and rights need verification.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-d7fb4620dd5328d384de
+  paper_id: paper-728d8c0964b540ad
+  source_file_hash: c4e3bd872ef20b7d2c4d77a63cd8f37cb8ff518609ae09acaf0fd5dd9e76c54c
+  page: 2
+  role: source data
+  excerpt: itecture [9]. We refer to it as “AlexNet”. • ∼ 10M image samples from Youtube
+    (see [10]) – Unsupervised trained network with ∼ 1 billion learnable parameters.
+    We refer to it as “QuocNet”.
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true

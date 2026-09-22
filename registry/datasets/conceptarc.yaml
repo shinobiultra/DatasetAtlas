@@ -1,0 +1,60 @@
+schema_version: '1.0'
+id: conceptarc
+name: ConceptARC
+aliases: []
+description: ConceptARC concept-group ARC benchmark. Author repository supplies ARC-format JSON tasks
+  organized by concept; corpus occurrence is bibliography title only
+paper_ids:
+- paper-c941465e4095dbe8
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Public data/media reuse rights require separate review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/victorvikram/ConceptARC
+  note: No blanket rights for any third-party component inferred from code repository
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-ef672e826f50b46f06d3
+  paper_id: paper-c941465e4095dbe8
+  source_file_hash: 1835ce2ce52470e55f0e102783dc055be0b421b6c79d068277b2f4909345fa97
+  page: 12
+  role: bibliography-only reference
+  excerpt: 'es, 43:e1, 2020. Moskvichev, A., Odouard, V. V., and Mitchell, M. The ConceptARC Benchmark:
+    Evaluating Under- Lindsay, G. W. and Bau, D. Testing methods of neural standing and Generalization'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/victorvikram/ConceptARC
+  note: Author repository supplies ARC-format JSON tasks organized by concept; corpus occurrence is bibliography
+    title only
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_release_located
+- kind: source_audit_rights
+  url: https://github.com/victorvikram/ConceptARC
+  note: No blanket rights for any third-party component inferred from code repository
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_release_located
+- kind: source_audit_access
+  url: https://github.com/victorvikram/ConceptARC
+  note: public; Keep bibliography-only; distinct from ARC-AGI base and from model training data.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_release_located
+source_url: https://github.com/victorvikram/ConceptARC

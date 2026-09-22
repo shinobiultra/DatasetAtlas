@@ -1,0 +1,104 @@
+schema_version: '1.0'
+id: laion-400m
+name: LAION-400M
+aliases: []
+description: LAION-400M English image-caption URL index, not a rights-cleared image
+  archive.
+paper_ids:
+- paper-7a1ff5996ce95273
+- paper-3e0db9c633ab204c
+- paper-d8a392188b9cf4d6
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Source-family rights and any public media examples require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://laion.ai/laion-400-open-dataset/
+  note: CC BY 4.0 covers metadata only; linked images have heterogeneous third-party
+    rights
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-088fb87acece68487125
+  paper_id: paper-7a1ff5996ce95273
+  source_file_hash: d2da2819b87291e9ff99547e1724286e95ef4de33cad091ce17762c0c90782d1
+  page: 7
+  role: training
+  excerpt: the LAION-400M dataset [18], using a batch size of 600 per Attack Method
+    Google Gemini OpenAI GPT GPU on three NVIDIA A100 8
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-a175f83688fdc37be6b5
+  paper_id: paper-3e0db9c633ab204c
+  source_file_hash: d2750f355a25fcdcfcb221e5049a0aa41ec096b452772c73e1767e2d039a6545
+  page: 5
+  role: model-training lineage
+  excerpt: 61.0 37.1 58.0 67.3 87.4 OpenCLIP-L/14 LAION-400M 72.8 65.4 46.5 84.9 59.9
+    59.6 43.0 59.7 70.3 87.6 TeCoA2
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-9ce599540bf506074a52
+  paper_id: paper-d8a392188b9cf4d6
+  source_file_hash: 0e3f26916ef19ce5982122f2bb72212315d6dcbe59c9cc953852202654cc1acf
+  page: 3
+  role: related-work mention
+  excerpt: . AnyAttack (Zhang et al., 2025) trains a noise generator via contrastive
+    learning on the LAION-400M dataset (Schuhmann et al., 2021) to produce transferable
+    adversarial perturbations. M-Attack (Li et al., 2025) enhances transfera
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-49c02f15b50105d8ac92
+  paper_id: paper-7a1ff5996ce95273
+  source_file_hash: d2da2819b87291e9ff99547e1724286e95ef4de33cad091ce17762c0c90782d1
+  page: 2
+  role: attack pretraining
+  excerpt: . Methods such as adaptive learn- volves pre-training a generator on the
+    large-scale LAION- ing rates and gradient clipping have been integrated to en-
+    400M dataset [18], enabling the pre-trained noise genera-
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://laion.ai/laion-400-open-dataset/
+  note: LAION-400M English image-caption URL index, not a rights-cleared image archive
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: https://laion.ai/laion-400-open-dataset/
+  note: 400 million pair release; project describes 32 metadata Parquet files around
+    50 GB
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://laion.ai/laion-400-open-dataset/
+  note: Public metadata links; project says a 10 TB image WebDataset was internal-only
+    due licensing; no downloads attempted
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_rights
+  url: https://laion.ai/laion-400-open-dataset/
+  note: CC BY 4.0 covers metadata only; linked images have heterogeneous third-party
+    rights
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://laion.ai/laion-400-open-dataset/

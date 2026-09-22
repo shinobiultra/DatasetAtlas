@@ -1,0 +1,54 @@
+[
+  {
+    "method": "random",
+    "seconds": 0.10344173600060458,
+    "matched": 70000,
+    "returned": 100,
+    "labels": {
+      "0": 9,
+      "1": 16,
+      "2": 6,
+      "3": 8,
+      "4": 11,
+      "5": 8,
+      "6": 7,
+      "7": 13,
+      "8": 10,
+      "9": 12
+    },
+    "first_ids": [
+      "mnist:example:cd00313b64893d7b0af210e2",
+      "mnist:example:c4b60e54d7e3b94563dcec6b",
+      "mnist:example:e32d6e347670bb09a740394a",
+      "mnist:example:171968b2689069a4b1c4d7f6",
+      "mnist:example:067b93c7f8bca7190ec91573"
+    ],
+    "cache": "OS caches warm; Arrow-batched deterministic hash"
+  },
+  {
+    "method": "stratified",
+    "seconds": 0.9977558619993943,
+    "matched": 70000,
+    "returned": 100,
+    "labels": {
+      "0": 10,
+      "1": 10,
+      "2": 10,
+      "3": 10,
+      "4": 10,
+      "5": 10,
+      "6": 10,
+      "7": 10,
+      "8": 10,
+      "9": 10
+    },
+    "first_ids": [
+      "mnist:example:a62b1354cc53cacbcf64e85e",
+      "mnist:example:894e85d0b7c7b66c0c2551c7",
+      "mnist:example:5707d86788afec30fa30e33b",
+      "mnist:example:7fb50f5bb7dd41aac57a1164",
+      "mnist:example:c4b60e54d7e3b94563dcec6b"
+    ],
+    "cache": "OS caches warm; Arrow-batched deterministic hash"
+  }
+]

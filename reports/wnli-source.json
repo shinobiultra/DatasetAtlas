@@ -1,0 +1,16 @@
+{
+  "dataset_id": "wnli",
+  "source_sha256": {
+    "WNLI.zip": "ae0e8e4d16f4d46d4a0a566ec7ecceccfd3fbfaa4a7a4b4e02848c0f2561ac46"
+  },
+  "converted_sha256": "a8baeb3306a9ca9bf281bce74f15ec466dbdb6d8665096073d74f41f8ad93e3b",
+  "count": 852,
+  "counts_by_split": {
+    "train": 635,
+    "dev": 71,
+    "test": 146
+  },
+  "distinct_upstream_ids": 0,
+  "preview_records": 100,
+  "scope": "Official GLUE ZIP train/dev/test task files, original TSV columns preserved, withheld test labels null. Auxiliary original/tokenized copies in CoLA ZIP are not double-counted. Release is pinned by downloaded archive SHA-256, not an inferred paper-specific subset."
+}

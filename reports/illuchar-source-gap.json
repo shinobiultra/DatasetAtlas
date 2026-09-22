@@ -1,0 +1,20 @@
+{
+  "dataset_id": "illuchar",
+  "checked_on": "2026-09-22",
+  "source_revision": "d55c729918bda746f74d377a2f11c92389e44bf0",
+  "source_url": "https://huggingface.co/datasets/Tujz/IlluChar/tree/d55c729918bda746f74d377a2f11c92389e44bf0",
+  "source_files_bytes": {
+    "data/train-00000-of-00003.parquet": 324131164,
+    "data/train-00001-of-00003.parquet": 1307437597,
+    "data/train-00002-of-00003.parquet": 1163120560
+  },
+  "parquet_bytes": 2794689321,
+  "acquisition_budget_bytes_per_release": 1000000000,
+  "acquired": false,
+  "local_preview": false,
+  "local_complete_index": false,
+  "rights_review": "not_reviewed",
+  "version_gap": "Pinned HF release advertises about 4.13k rows, while the paper describes 2.5k training and approximately 1.1k test. The release-to-paper row/split mapping has not been reconciled.",
+  "decision": "Deferred source acquisition because the three pinned Parquet shards total 2,794,689,321 bytes, above the current per-release budget; no completeness claim.",
+  "budget_scope": "Historical limit of one bounded agent assignment, not a user download restriction. User authorized larger local downloads; acquisition was deferred at final closeout."
+}

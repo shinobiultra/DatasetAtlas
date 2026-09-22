@@ -1,0 +1,65 @@
+schema_version: '1.0'
+id: agent-security-bench
+name: Agent Security Bench
+aliases: []
+description: Agent Security Bench (ASB), not Agent Safety Bench. ICLR 2025 authors release ASB code for
+  agent attack/defense scenarios; corpus occurrence is bibliography title only
+paper_ids:
+- paper-fdcf898e0b05daff
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: source_page_public_data_unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Public source page located; exact paper-used data revision or archive is unverified.
+  - Public data/media reuse rights require separate review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/agiresearch/ASB
+  note: No corpus-paper run, exact data package version, or public record rights established from this
+    citation
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-f0e5c7e071e839696e56
+  paper_id: paper-fdcf898e0b05daff
+  source_file_hash: 81476d954e7ac06e3750e0e0640511ec2e7f150a06486e70e42f17b02f1fc5f8
+  page: 33
+  role: bibliography-only reference
+  excerpt: 'uang, Kai Mei, Yifei Yao, Zhenting Wang, Chenlu Zhan, Hongwei Wang, and Yongfeng Zhang. Agent
+    security bench (asb): Formalizing and benchmarking attacks and defenses in llm-based agents, 2025b.
+    URL https://arxiv.org/abs/2410.02644. Hong'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/agiresearch/ASB
+  note: ICLR 2025 authors release ASB code for agent attack/defense scenarios; corpus occurrence is bibliography
+    title only
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_protocol_located
+- kind: source_audit_rights
+  url: https://github.com/agiresearch/ASB
+  note: No corpus-paper run, exact data package version, or public record rights established from this
+    citation
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_protocol_located
+- kind: source_audit_access
+  url: https://github.com/agiresearch/ASB
+  note: source_page_public_data_unverified; Keep bibliography-only protocol reference; do not confuse
+    unrelated Agent Safety Bench (also ASB).
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_protocol_located
+source_url: https://github.com/agiresearch/ASB

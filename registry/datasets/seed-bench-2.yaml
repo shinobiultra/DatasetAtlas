@@ -1,0 +1,103 @@
+schema_version: '1.0'
+id: seed-bench-2
+name: SEED-Bench-2
+aliases:
+- Seed-Bench-2
+description: SEED-Bench-2 multi-dimensional image/video multiple-choice benchmark;
+  separate from SEED-Bench-1 and 2-Plus.
+paper_ids:
+- paper-32cea5e43d940514
+- paper-f03c5ad315e6d835
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Source-family rights and any public media examples require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2
+  note: Author dataset card declares CC BY-NC 4.0; DATASET.md identifies numerous
+    upstream image/video datasets whose own terms remain relevant
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-7cd4be6a2b540e2865ea
+  paper_id: paper-32cea5e43d940514
+  source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
+  page: 5
+  role: evaluation
+  excerpt: 'd with the sum of perception and reasoning scores, MMMU-dev [87], and
+    Seed-Bench-2 [49]) for The comparison methods for LVLMs are as fol- general performance
+    evaluation [16]. lows [21]: Full F'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-dd5df3a42498ee440d04
+  paper_id: paper-f03c5ad315e6d835
+  source_file_hash: 47431d9340ff27b9234e2184711fbc3fc06ded7718fe53ca79b23a1cd1db777d
+  page: 8
+  role: evaluation
+  excerpt: 'r Bias ↓ General Performance ↑ P. Traits Skills Occ. MMBench MME MMMU
+    Seed-Bench-2 Original 0.86 0.48 0.56 0.60 1773.55 0.26 0.50 Prompt Engineering
+    0.80 0.40 0.41 0.53 -10.90% 1728.42 -2.54% '
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-9702134a67f20b71fdaa
+  paper_id: paper-32cea5e43d940514
+  source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
+  page: 5
+  role: general utility evaluation
+  excerpt: 24.2 measured with the sum of perception and reasoning scores, MMMU-dev
+    [87], and Seed-Bench-2 [49]) for The comparison methods for LVLMs are as fol-
+    general performance evaluation [16
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2
+  note: SEED-Bench-2 multi-dimensional image/video multiple-choice benchmark; separate
+    from SEED-Bench-1 and 2-Plus
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2
+  note: Official author card lists roughly 24,000 questions and 27 dimensions
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2
+  note: Official Hugging Face dataset is public but large and media-heavy; no archive
+    downloaded
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_rights
+  url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2
+  note: Author dataset card declares CC BY-NC 4.0; DATASET.md identifies numerous
+    upstream image/video datasets whose own terms remain relevant
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_related_links
+  urls:
+  - https://github.com/AILab-CVC/SEED-Bench/blob/main/DATASET.md
+  note: Additional official or author-cited evidence; does not establish a selected
+    release.
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2

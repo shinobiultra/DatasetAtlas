@@ -1,0 +1,71 @@
+schema_version: '1.0'
+id: simplevqa
+name: SimpleVQA
+aliases: []
+description: SimpleVQA single-image short-answer benchmark; do not conflate full test
+  with provided view_200 subset
+paper_ids:
+- paper-80b7ba2e277a20c5
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Source content and publication rights require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://huggingface.co/datasets/m-a-p/SimpleVQA/blob/037cf89fb6f1212691756b66d1ecde6c2ce89e54/README.md
+  note: HF card marks Apache-2.0; verify whether this covers source images and attribution
+    before publishing a public media subset.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-702d50c604987b5fadb1
+  paper_id: paper-80b7ba2e277a20c5
+  source_file_hash: 1b014c3d1e86a39f1c6a88d4e9b79c99df2e06c5c7c31bea224aa5da2ae0c46d
+  page: 7
+  role: out-of-domain evaluation
+  excerpt: 'that additional variants enhance scale coverage. (VQA) tasks: SimpleVQA
+    [8], MMStar [7], and RealWorldQA [30].'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://huggingface.co/datasets/m-a-p/SimpleVQA/tree/037cf89fb6f1212691756b66d1ecde6c2ce89e54
+  note: SimpleVQA single-image short-answer benchmark; do not conflate full test with
+    provided view_200 subset
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: https://huggingface.co/datasets/m-a-p/SimpleVQA/tree/037cf89fb6f1212691756b66d1ecde6c2ce89e54
+  note: author HF commit 037cf89fb6f1212691756b66d1ecde6c2ce89e54
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://huggingface.co/datasets/m-a-p/SimpleVQA/tree/037cf89fb6f1212691756b66d1ecde6c2ce89e54
+  note: Author HF Parquet files directly accessible; about 349 MB full test and 66.6
+    MB view_200 per repository listing, no content fetched.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+  probe: hf_tree_metadata_only
+- kind: source_audit_rights
+  url: https://huggingface.co/datasets/m-a-p/SimpleVQA/blob/037cf89fb6f1212691756b66d1ecde6c2ce89e54/README.md
+  note: HF card marks Apache-2.0; verify whether this covers source images and attribution
+    before publishing a public media subset.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://huggingface.co/datasets/m-a-p/SimpleVQA/tree/037cf89fb6f1212691756b66d1ecde6c2ce89e54

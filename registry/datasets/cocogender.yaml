@@ -1,0 +1,96 @@
+schema_version: '1.0'
+id: cocogender
+name: COCOgender
+aliases:
+- Cocogender
+description: COCOgender image/caption gender overlay cited by DebiasLens as Tang et
+  al. 2021; possible relation to COCO-GB V1/V2 requires confirmation.
+paper_ids:
+- paper-32cea5e43d940514
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: unverified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Exact COCOgender-to-COCO-GB release and 12,454-example mapping remain unresolved;
+    do not conflate with COCO-gender.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System
+  note: Overlay license not established; underlying COCO photos and captions have
+    separate source rights
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-db79fb0dad90887f266c
+  paper_id: paper-32cea5e43d940514
+  source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
+  page: 4
+  role: training
+  excerpt: 'ace, we train SAE using various data configura- [ tions: CelebA [52],
+    Cocogender images [76], and Fair- Ng = Eg \  Eh  Face [41] for the image encoder
+    and Cocogender cap- h∈G,h̸=g tions (Cocogend'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-9a16d7bc5f85d5a7e913
+  paper_id: paper-32cea5e43d940514
+  source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
+  page: 4
+  role: SAE image training
+  excerpt: 'tions: CelebA [52], Cocogender images [76], and Fair- Ng = Eg \  Eh '
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System
+  note: COCOgender image/caption gender overlay cited by DebiasLens as Tang et al.
+    2021; possible relation to COCO-GB V1/V2 requires confirmation
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: candidate_mapping_unresolved
+- kind: source_audit_release
+  url: https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System
+  note: DebiasLens supplement reports 12,454 examples; cited author's release distinguishes
+    COCO-GB V1 and V2, but exact mapping to COCOgender is unverified
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: candidate_mapping_unresolved
+- kind: source_audit_access
+  url: https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System
+  note: Cited author repository contains COCOGB_V1 and COCOGB_V2 material; no matching
+    12,454-example archive verified
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: candidate_mapping_unresolved
+- kind: source_audit_rights
+  url: https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System
+  note: Overlay license not established; underlying COCO photos and captions have
+    separate source rights
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: candidate_mapping_unresolved
+- kind: source_audit_related_links
+  urls:
+  - https://arxiv.org/abs/2006.08315
+  - https://openaccess.thecvf.com/content/CVPR2026/supplemental/An_Interpretable_Debiasing_of_CVPR_2026_supplemental.pdf
+  note: Additional official or author-cited evidence; does not establish a selected
+    release.
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: candidate_mapping_unresolved
+relationships:
+- type: annotation_overlay_of
+  target: coco
+  status: paper_claim_only
+source_url: https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System

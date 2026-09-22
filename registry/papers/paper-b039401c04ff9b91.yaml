@@ -1,0 +1,38 @@
+schema_version: 1.0.0
+paper_id: paper-b039401c04ff9b91
+title: 'Grounding Visual Illusions in Language: Do Vision-Language Models Perceive
+  Illusions Like Humans?'
+authors:
+- Zhang, Yichi
+- Pan, Jiayi
+- Zhou, Yuchen
+- Pan, Rui
+- Chai, Joyce
+year: '2023'
+doi: 10.48550/arXiv.2311.00047
+url: http://arxiv.org/abs/2311.00047
+outcome: processed
+human_review_complete: false
+mention_inventory_review_complete: true
+candidate_mention_count: 20
+sources:
+- relative_path: files/34818/Zhang et al. - 2023 - Grounding Visual Illusions in Language
+    Do Vision-Language Models Perceive Illusions Like Humans.pdf
+  type: pdf
+  sha256: e41b2b1aeae1227613483fdda368f89c4f56fa1c45abadd8e41569b0ed672442
+  page_count: 11
+  extraction_quality:
+    pages_total: 11
+    pages_low_text: 1
+    characters: 68793
+    status: usable
+  processing_status: extracted
+reviewer_kind: agent
+review_method: full_pdf_page_text_appendix_table_caption_bibliography_audit
+reviewed_at: '2026-09-22T03:40:07.003156+00:00'
+reviewed_pages: 11
+reviewed_versions:
+- e41b2b1aeae12276
+review_note: All 11 pages checked. Authors introduce GVIL manual paired illusion/non-illusion
+  images; no other external direct source. ImageNet appears only as prior model-training
+  context.

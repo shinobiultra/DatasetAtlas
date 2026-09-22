@@ -1,0 +1,81 @@
+schema_version: '1.0'
+id: via-bench
+name: VIA-Bench
+aliases: []
+description: VIA-Bench visual illusions/anomalies benchmark.
+paper_ids:
+- paper-20de77d4e60fd1bd
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: unverified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Exact paper-specific source release or selected subset remains unverified; source
+    research alone does not resolve this candidate.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://arxiv.org/abs/2602.01816
+  note: Source online images and annotation/publication terms unverified
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-4e5967ed2a1dccec33dc
+  paper_id: paper-20de77d4e60fd1bd
+  source_file_hash: ccc6f6fee4214f0656c164535cbe29f1cbbce5769b311c93f08e1110437f29e0
+  page: 1
+  role: introduction
+  excerpt: mmon-sense priors. To stimuli. Our findings reveal a fundamental diver-
+    address this gap, we introduce VIA-Bench, a gence between machine and human perception,
+    challenging benchmark designed to probe model suggesting that resolving such perce
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-32a22fe89559645980ce
+  paper_id: paper-20de77d4e60fd1bd
+  source_file_hash: ccc6f6fee4214f0656c164535cbe29f1cbbce5769b311c93f08e1110437f29e0
+  page: 2
+  role: introduced evaluation benchmark
+  excerpt: We construct VIA-Bench via careful human-in-the-loop Song et al., 2025).
+    Beyond basic perception, these mod-
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://arxiv.org/abs/2602.01816
+  note: VIA-Bench visual illusions/anomalies benchmark
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_paper_only_release_unverified
+- kind: source_audit_release
+  url: https://arxiv.org/abs/2602.01816
+  note: Authors introduce six-category VIA-Bench in 2026 paper; full original downloadable
+    release not identified in this check
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_paper_only_release_unverified
+- kind: source_audit_access
+  url: https://arxiv.org/abs/2602.01816
+  observation: paper_only
+  requires_external_access_step: null
+  download_or_media_inspected: false
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_paper_only_release_unverified
+- kind: source_audit_rights
+  url: https://arxiv.org/abs/2602.01816
+  note: Source online images and annotation/publication terms unverified
+  publication_decision: media_not_approved
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_paper_only_release_unverified
+source_url: https://arxiv.org/abs/2602.01816

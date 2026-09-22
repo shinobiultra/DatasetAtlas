@@ -1,0 +1,63 @@
+schema_version: '1.0'
+id: coco-demographic-annotations
+name: COCO demographic annotations
+aliases: []
+description: COCO 2014 validation demographic overlay. Original Zhao et al. overlay describes 15,762 validation
+  images and 28,315 persons with perceived skin-color/gender annotations. Author annotations available
+  on request via https://forms.gle/y179Fk63dgTWo9cSA.
+paper_ids:
+- paper-09b2d7393fc75cf7
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: author_request_required
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Original author requires a request for the demographic annotation overlay.
+  - Public data/media reuse rights require separate review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://princetonvisualai.github.io/imagecaptioning-bias/
+  note: No public overlay-file redistribution license verified; underlying COCO media rights remain separate.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-53118e4d360a8157bfd9
+  paper_id: paper-09b2d7393fc75cf7
+  source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
+  page: 8
+  role: annotation overlay evaluation
+  excerpt: ', we use the COCO concept of BMW7 , causing the model to hallucinate the target dataset with
+    demographic annotations from [65]. The query brand. set is constructed from caption'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://princetonvisualai.github.io/imagecaptioning-bias/
+  note: Original Zhao et al. overlay describes 15,762 validation images and 28,315 persons with perceived
+    skin-color/gender annotations. Author annotations available on request via https://forms.gle/y179Fk63dgTWo9cSA.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_request_required
+- kind: source_audit_rights
+  url: https://princetonvisualai.github.io/imagecaptioning-bias/
+  note: No public overlay-file redistribution license verified; underlying COCO media rights remain separate.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_request_required
+- kind: source_audit_access
+  url: https://princetonvisualai.github.io/imagecaptioning-bias/
+  note: author_request_required; Exact annotation overlay is request-only; base COCO images are not the
+    same source.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_request_required
+source_url: https://princetonvisualai.github.io/imagecaptioning-bias/

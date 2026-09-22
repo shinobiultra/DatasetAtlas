@@ -1,0 +1,85 @@
+schema_version: '1.0'
+id: socialcounterfactuals
+name: SocialCounterfactuals
+aliases: []
+description: Intel SocialCounterfactuals synthetic image-text counterfactual sets,
+  170,832 pairs in author paper.
+paper_ids:
+- paper-765a2362f8735bc4
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Source-family rights and any public media examples require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://huggingface.co/datasets/Intel/SocialCounterfactuals/tree/182f8d1739028dc3ab9e9f6be4e1cb52cf5d6fe1
+  note: Author HF card marks dataset MIT; inspect dataset card and repository LICENSE
+    against generated media before any public subset
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-f5772618b055c91b2c96
+  paper_id: paper-765a2362f8735bc4
+  source_file_hash: 820aee810116ff6b3adbe19c8ffdc5a54ae6c80315641a16da74ddb4bd8f0076
+  page: 2
+  role: source data
+  excerpt: 'and race bias in VLMs. To mitigate gen- VLMs generate fair responses with
+    fair confidence on two datasets: der and race bias in VLMs, several debiasing
+    methods have been PAIRS [10] and SocialCounterfactuals (SCF) [17]. We follow the
+    pr'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-2722c4a4611e48c7337a
+  paper_id: paper-765a2362f8735bc4
+  source_file_hash: 820aee810116ff6b3adbe19c8ffdc5a54ae6c80315641a16da74ddb4bd8f0076
+  page: 2
+  role: direct fairness evaluation
+  excerpt: der and race bias in VLMs, several debiasing methods have been PAIRS [10]
+    and SocialCounterfactuals (SCF) [17]. We follow the proposed. Orthogonal projection
+    is used in [11] to debias text o
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://huggingface.co/datasets/Intel/SocialCounterfactuals/tree/182f8d1739028dc3ab9e9f6be4e1cb52cf5d6fe1
+  note: Intel SocialCounterfactuals synthetic image-text counterfactual sets, 170,832
+    pairs in author paper
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: https://huggingface.co/datasets/Intel/SocialCounterfactuals/tree/182f8d1739028dc3ab9e9f6be4e1cb52cf5d6fe1
+  note: Intel Hugging Face repository commit 182f8d1739028dc3ab9e9f6be4e1cb52cf5d6fe1;
+    61 Parquet shards
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://huggingface.co/datasets/Intel/SocialCounterfactuals/tree/182f8d1739028dc3ab9e9f6be4e1cb52cf5d6fe1
+  note: Author HF repository direct, total data tree roughly 27.2 GB; dataset viewer
+    lists 171k train rows; no gate observed
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+  probe: hosted_tree_inspected_no_data_fetch
+- kind: source_audit_rights
+  url: https://huggingface.co/datasets/Intel/SocialCounterfactuals/tree/182f8d1739028dc3ab9e9f6be4e1cb52cf5d6fe1
+  note: Author HF card marks dataset MIT; inspect dataset card and repository LICENSE
+    against generated media before any public subset
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://huggingface.co/datasets/Intel/SocialCounterfactuals/tree/182f8d1739028dc3ab9e9f6be4e1cb52cf5d6fe1

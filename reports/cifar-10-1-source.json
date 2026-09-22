@@ -1,0 +1,37 @@
+{
+  "kind": "verified_source_acquisition",
+  "source_url": "https://github.com/modestyachts/CIFAR-10.1/tree/d9982abb0bfc4846b8d13a11e66b887d946205d0",
+  "checked_at": "2026-09-22",
+  "sha256": {
+    "cifar10.1_v6_data.npy": "2997188e5816f5bd545dc77771b6227828c28146049fcecf3fa10775474cacc6",
+    "cifar10.1_v6_labels.npy": "ae40beda001693674edc94d925ee8268cfe68905f8f9aff800c8dcdfcd6c9448"
+  },
+  "count": 2000,
+  "counts_by_label": {
+    "airplane": 200,
+    "automobile": 200,
+    "bird": 200,
+    "cat": 200,
+    "deer": 200,
+    "dog": 200,
+    "frog": 200,
+    "horse": 200,
+    "ship": 200,
+    "truck": 200
+  },
+  "pixel_validation": "All 2,000 saved PNG arrays exactly equal original NPY rows; no transformations",
+  "preview_count": 100,
+  "preview_class_counts": {
+    "airplane": 10,
+    "automobile": 10,
+    "bird": 10,
+    "cat": 10,
+    "deer": 10,
+    "dog": 10,
+    "frog": 10,
+    "horse": 10,
+    "ship": 10,
+    "truck": 10
+  },
+  "prepared_parquet_sha256": "4ca1776fd68aae0807f8d6424be79e25d1a1c2bb5273bff88db875e3ddfd9b1b"
+}

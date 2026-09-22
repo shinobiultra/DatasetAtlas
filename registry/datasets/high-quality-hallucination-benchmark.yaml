@@ -1,0 +1,61 @@
+schema_version: '1.0'
+id: high-quality-hallucination-benchmark
+name: High-Quality Hallucination Benchmark
+aliases: []
+description: 'HQH/HQHBench: 4,000 VQA pairs, eight 500-pair hallucination types, Visual
+  Genome image IDs. Source review: Author repository commit 6d35a4c320270fa507016550312edcb5a0570ed4'
+paper_ids:
+- paper-25eaa8c74ce76800
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  note: Authors state CC BY 4.0 following Visual Genome; underlying image licenses
+    still require per-asset review
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-9a253ea5a6e2edab0d22
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 29
+  role: cited-study dataset in survey table
+  excerpt: cination Detection, High-Quality Hallucination vl-7b VQA Benchmark, TextVQA-X
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/HQHBench/HQHBench/tree/6d35a4c320270fa507016550312edcb5a0570ed4
+  note: 'HQH/HQHBench: 4,000 VQA pairs, eight 500-pair hallucination types, Visual
+    Genome image IDs Author repository commit 6d35a4c320270fa507016550312edcb5a0570ed4'
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://github.com/HQHBench/HQHBench/tree/6d35a4c320270fa507016550312edcb5a0570ed4
+  note: 'Author JSON is on GitHub; images linked separately to Visual Genome Probe:
+    first_primary_url_http_head_200; payload_not_downloaded'
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_rights
+  url: https://openreview.net/forum?id=kjVgyR3RFr
+  note: Authors state CC BY 4.0 following Visual Genome; underlying image licenses
+    still require per-asset review
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://github.com/HQHBench/HQHBench/tree/6d35a4c320270fa507016550312edcb5a0570ed4

@@ -1,0 +1,18 @@
+{
+  "dataset_id": "cebab",
+  "source_sha256": {
+    "CEBaB-v1.1.zip": "afe8ebcb5d18f33297512cd5c7e05f1590b82fb0683367042454c3eda7d5c6ae"
+  },
+  "converted_sha256": "e06a0233c8972462ebfbab0f1ab466938f15baebc7f418a0e6af68888cb86e3d",
+  "count": 18600,
+  "counts_by_split": {
+    "train_inclusive": 11728,
+    "train_exclusive": 1755,
+    "train_observational": 1755,
+    "dev": 1673,
+    "test": 1689
+  },
+  "distinct_upstream_ids": 15090,
+  "preview_records": 100,
+  "scope": "All five source split files; train_inclusive, train_exclusive and train_observational are alternative overlapping populations, not independent pooled examples. Original review IDs, edit IDs, label distributions, disagreement and worker fields are preserved. Corpus role remains related-work mention."
+}

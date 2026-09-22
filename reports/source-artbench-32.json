@@ -1,0 +1,117 @@
+{
+  "dataset_id": "artbench",
+  "release": "artbench10-32-cifarbin-abb96b78-csv7b83d705",
+  "snapshot_id": "artbench10-32-abb96b78-7b83d705",
+  "source": {
+    "author_repository": "https://github.com/liaopeiyuan/artbench",
+    "variant": "ArtBench-10 32x32 CIFAR binary only",
+    "binary": {
+      "url": "https://artbench.eecs.berkeley.edu/files/artbench-10-binary.tar.gz",
+      "bytes": 172979254,
+      "sha256": "abb96b7807369c59311300af81937f1bb1357570590d224833825104fde45380",
+      "md5": "7209f8702da01c5127cb13201855c1ee"
+    },
+    "metadata_csv": {
+      "url": "https://artbench.eecs.berkeley.edu/files/ArtBench-10.csv",
+      "bytes": 10959245,
+      "sha256": "7b83d70554a629ab0e750841e137e92fe2a4e0cc788c44b2ce1a607eab36c012"
+    }
+  },
+  "join": {
+    "key": "(split,cifar_index)",
+    "author_csv_rows": 60000,
+    "binary_rows": 60000,
+    "all_indices_unique_and_covered": true,
+    "all_60000_style_labels_match_binary": true,
+    "csv_fields": [
+      "name",
+      "artist",
+      "url",
+      "is_public_domain",
+      "length",
+      "width",
+      "label",
+      "split",
+      "cifar_index"
+    ]
+  },
+  "preview": {
+    "path": "work/packs/artbench/pack.json",
+    "sha256": "46d1ff4e85e49cd5eb14ce49fa0de6713246df578c09f4b387bdd685ca5fab9c",
+    "examples": 100,
+    "distinct_images": 100,
+    "sampling": {
+      "method": "first_5_per_style_per_split",
+      "unit": "example",
+      "population": "ArtBench-10 author 32x32 CIFAR binary; 50,000 train and 10,000 test examples",
+      "sections": [
+        {
+          "split": "train",
+          "scanned_source_rows": 100,
+          "selected_per_style": 5,
+          "selected_count": 50
+        },
+        {
+          "split": "test",
+          "scanned_source_rows": 100,
+          "selected_per_style": 5,
+          "selected_count": 50
+        }
+      ],
+      "requested_count": 100,
+      "returned_count": 100,
+      "source_revision": "artbench10-32-cifarbin-abb96b78-csv7b83d705",
+      "bytes_read": 11808765,
+      "note": "Class- and split-balanced local preview; PNGs are lossless encodings of author 32x32 CIFAR RGB pixels, not original-resolution artworks."
+    },
+    "per_split_style": {
+      "test:art_nouveau": 5,
+      "test:baroque": 5,
+      "test:expressionism": 5,
+      "test:impressionism": 5,
+      "test:post_impressionism": 5,
+      "test:realism": 5,
+      "test:renaissance": 5,
+      "test:romanticism": 5,
+      "test:surrealism": 5,
+      "test:ukiyo_e": 5,
+      "train:art_nouveau": 5,
+      "train:baroque": 5,
+      "train:expressionism": 5,
+      "train:impressionism": 5,
+      "train:post_impressionism": 5,
+      "train:realism": 5,
+      "train:renaissance": 5,
+      "train:romanticism": 5,
+      "train:surrealism": 5,
+      "train:ukiyo_e": 5
+    },
+    "media_checksums": 100,
+    "pillow_verified_32px_pngs": 100,
+    "representation": "lossless PNG reconstructed from original author binary RGB bytes"
+  },
+  "complete_access": {
+    "path": "work/snapshots/artbench/manifest.json",
+    "manifest_sha256": "72619b9813e7bcb58a037ac9536e752affa5c5332b51caf6cdd75376c49ee791",
+    "record_count": 60000,
+    "split_counts": {
+      "train": 50000,
+      "test": 10000
+    },
+    "full_pagination_page_size": 1000
+  },
+  "author_public_domain_flag": {
+    "true": 50060,
+    "false": 9940,
+    "meaning": "Author CSV claim only; not independently verified"
+  },
+  "rights": {
+    "repository_license_not_artwork_license": true,
+    "local_preview": "not published",
+    "public_release": "metadata_only pending per-work rights review"
+  },
+  "excluded": [
+    "256px variant",
+    "original-resolution artworks"
+  ]
+}

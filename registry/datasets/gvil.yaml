@@ -1,0 +1,137 @@
+schema_version: '1.0'
+id: gvil
+name: GVIL
+aliases: []
+description: 'Local author GVIL archive: 2,400 VQA and 800 visual grounding annotation
+  rows, 1,600 explicit pairs, 204 JPEG files (200 referenced). Original annotations
+  and task-specific source keys are preserved. Corpus roles remain introduction/related-work
+  mentions.'
+paper_ids:
+- paper-b039401c04ff9b91
+- paper-20de77d4e60fd1bd
+- paper-6a7364738bac9f07
+release: github-cd04efb9d53c935c8194011d32b5a8b515c588bf
+adapter: structured_archive
+adapter_config:
+  path: work/sources/gvil/records.jsonl
+  format: jsonl
+  sha256: f95f394225a497be40ad76232e835aefcb85724c04bf9c9589fc7741678b5711
+  mapping:
+    id: source_id
+    question: display_question
+    media: media_path
+  media_archive: work/sources/gvil/original/dataset.zip
+  media_archive_sha256: 1d717f5822ded7d3383d014eefd1fb17c0a46ab15ce0c104f0c0392365c8650b
+  fields:
+    type:
+      dtype: category
+      values:
+      - desc_qa
+      - localization
+      - samediff_qa
+      - subj_qa
+      description: Original GVIL task
+    pair_id:
+      dtype: category
+      description: Pair identifier within task
+    source_key:
+      dtype: category
+      description: Original annotation map key
+    img:
+      dtype: category
+      description: Original image filename
+    q_id:
+      dtype: number
+      description: Original question ID
+  population: all 2,400 VQA and 800 VG annotation entries in author archive
+  selection_note: One first annotation per distinct image before further source questions;
+    local media only.
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  unit: example
+  blockers:
+  - Source content rights are not cleared for static publication; local inspection
+    only.
+  total_count: 3200
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/vl-illusion/GVIL
+  note: No blanket visual-image redistribution rights established by repo page
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-a354dc88b2c3d4b62d11
+  paper_id: paper-b039401c04ff9b91
+  source_file_hash: e41b2b1aeae1227613483fdda368f89c4f56fa1c45abadd8e41569b0ed672442
+  page: 2
+  role: introduction
+  excerpt: ', 2001; Carey, 2001), so is language dataset, we created a benchmark,
+    Grounding Vi- comprehension and language production. Such sual Illusion in Language
+    (GVIL), which consists findings catalyz'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-a645e5be6857cb9e7e50
+  paper_id: paper-20de77d4e60fd1bd
+  source_file_hash: ccc6f6fee4214f0656c164535cbe29f1cbbce5769b311c93f08e1110437f29e0
+  page: 8
+  role: related-work comparison
+  excerpt: sual illusions are encoded in diffusion models; GVIL (Zhang Multimodal
+    Large Language Models (MLLMs) have et al., 2023) probes VLM perception of c
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-8f817ed2aa206133fdc6
+  paper_id: paper-6a7364738bac9f07
+  source_file_hash: d91f86d6799fd7cd645f7909f9bf9308f6a56566433bebd2c1f56b44c7db8f49
+  page: 3
+  role: related-work comparison
+  excerpt: Image Type Instance Description GVIL 16 Binary 1600 × Color & Size illusions
+    and variant
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/vl-illusion/GVIL
+  note: Original author repo hosts GVIL data and code; corpus occurrences are introduction/related-work
+    comparisons
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_located
+- kind: source_audit_rights
+  url: https://github.com/vl-illusion/GVIL
+  note: No blanket visual-image redistribution rights established by repo page
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_located
+- kind: source_audit_access
+  url: https://github.com/vl-illusion/GVIL
+  note: public; Keep related-work role; pin paired illusion/no-illusion subset if
+    later evaluated.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_located
+- kind: verified_local_source_snapshot
+  checked_on: '2026-09-22'
+  revision: github-cd04efb9d53c935c8194011d32b5a8b515c588bf
+  receipt: reports/gvil-source.json
+  source_row_count: 3200
+  scope: 'Local author GVIL archive: 2,400 VQA and 800 visual grounding annotation
+    rows, 1,600 explicit pairs, 204 JPEG files (200 referenced). Original annotations
+    and task-specific source keys are preserved. Corpus roles remain introduction/related-work
+    mentions.'
+source_url: https://github.com/vl-illusion/GVIL/tree/cd04efb9d53c935c8194011d32b5a8b515c588bf
+snapshot_id: gvil-sha256-f95f394225a497be40ad76232e835aefcb85724c04bf9c9589fc7741678b5711
+modalities:
+- image
+- text
+tasks:
+- visual question answering
+- visual grounding

@@ -1,0 +1,60 @@
+schema_version: '1.0'
+id: omnispatial
+name: OmniSpatial
+aliases: []
+description: OmniSpatial spatial-reasoning benchmark. Official OmniSpatial-test documents 1,387 images/clips,
+  1,533 QA pairs, 50 tasks; corpus related-work comparison only
+paper_ids:
+- paper-20de77d4e60fd1bd
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Public data/media reuse rights require separate review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/qizekun/OmniSpatial
+  note: Author declares data CC BY-NC 4.0 and code MIT; individual images may have extra source constraints
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-59e6ef3b84714a87b0e3
+  paper_id: paper-20de77d4e60fd1bd
+  source_file_hash: ccc6f6fee4214f0656c164535cbe29f1cbbce5769b311c93f08e1110437f29e0
+  page: 8
+  role: related-work comparison
+  excerpt: oning tasks. OmniSpatial (Jia et al., 2025) and Space-10 (Gong Gemini-2.5-pro 0.1 40.50 40.42
+    30.05 30.05 Gemini-2.5-pro 0.
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/qizekun/OmniSpatial
+  note: Official OmniSpatial-test documents 1,387 images/clips, 1,533 QA pairs, 50 tasks; corpus related-work
+    comparison only
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_located
+- kind: source_audit_rights
+  url: https://github.com/qizekun/OmniSpatial
+  note: Author declares data CC BY-NC 4.0 and code MIT; individual images may have extra source constraints
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_located
+- kind: source_audit_access
+  url: https://github.com/qizekun/OmniSpatial
+  note: public; Pin test revision/subtask before any direct adapter; preserve related-work-only role.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_located
+source_url: https://github.com/qizekun/OmniSpatial

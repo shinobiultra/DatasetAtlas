@@ -1,0 +1,232 @@
+schema_version: '1.0'
+id: mnist
+name: MNIST
+aliases: []
+description: Original MNIST handwritten-digit classification release. Local full train
+  and test IDX files provide 70,000 examples; the preview is the first 100 training
+  examples in source order.
+tasks:
+- handwritten digit classification
+modalities:
+- image
+labels:
+- digit
+paper_ids:
+- paper-1e2474b15fec2d7d
+- paper-208c53a35b62bc52
+- paper-78a318ad1ec346ef
+- paper-a2c6dc42af089fd5
+- paper-728d8c0964b540ad
+- paper-b8a3bbfe3c7eefff
+- paper-72040eccb96ead7a
+- paper-d0229a9d15fd6b77
+- paper-f7fa96d778a8d649
+- paper-25eaa8c74ce76800
+- paper-a47845c66d4a3f48
+source_url: https://yann.lecun.org/exdb/mnist/
+release: mnist-original-idx
+snapshot_id: mnist-gz-sha256-1380708c276834e082dc47a936e95f5bca5ac9f0fdbab891b17ac77badd8b079
+adapter: idx
+adapter_config:
+  root: work/sources/mnist
+  preparation_budget_bytes: 80000000
+  counts:
+    train: 60000
+    test: 10000
+  splits:
+    train:
+      images: train-images-idx3-ubyte.gz
+      images_md5: f68b3c2dcbeaaa9fbdd348bbdeb94873
+      labels: train-labels-idx1-ubyte.gz
+      labels_md5: d53e105ee54ea40749a09fcbcd1e9432
+    test:
+      images: t10k-images-idx3-ubyte.gz
+      images_md5: 9fb629c4189551a2d022fa330f9573f3
+      labels: t10k-labels-idx1-ubyte.gz
+      labels_md5: ec29112dd5afa0611ce80d1b7f02629c
+  population: official MNIST original training and test IDX files, 70,000 examples
+  fields:
+    label:
+      dtype: category
+      description: Original digit class, 0 through 9
+      values:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+    split:
+      dtype: category
+      description: Original train or test split
+      values:
+      - train
+      - test
+    index:
+      dtype: number
+      description: Zero-based index within source split
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 70000
+  unit: example
+  blockers:
+  - Original source does not state redistribution terms for images; public media remains
+    withheld.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://yann.lecun.org/exdb/mnist/
+  note: Author source offers the files without an explicit redistribution license;
+    public preview stays metadata-only.
+relationships: []
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-1a543288f6baad146efc
+  paper_id: paper-1e2474b15fec2d7d
+  source_file_hash: ada9a023bec3a045996c2660092bd2e4c1a28380b76315ad0d97051c119bd9ce
+  page: 3
+  role: source data
+  excerpt: 'l recognition tasks: the classi- fication of hand-written digits [the
+    MNIST dataset, 24] and the classification of ten basic-level categories in small
+    natural images [the CIFAR-10 dataset, 25].'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: source_release
+  url: https://yann.lecun.org/exdb/mnist/
+  note: Official original release states 60,000 train and 10,000 test images and IDX
+    layout.
+- kind: mirror
+  url: https://github.com/cvdfoundation/mnist
+  note: CVDF mirror credits permission from Yann LeCun; four files match torchvision
+    published MD5 hashes.
+- kind: corpus_mention
+  evidence_id: evidence-8103dafe19609004c5c9
+  paper_id: paper-208c53a35b62bc52
+  source_file_hash: 721478f2130be8167b3b4530bbcbffb41bb9acba581bbc75eadcbfcf949ce42a
+  page: 6
+  role: evaluation
+  excerpt: 'R, using points: then considering the worst case over all attacks, as
+    MNIST, CIFAR-10, CIFAR-100 and ImageNet as datasets. we do for AutoAttack, improves
+    the performance. We report firs'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-44f9f82b9cba9b56d6e2
+  paper_id: paper-78a318ad1ec346ef
+  source_file_hash: 697485cbbe20010f4e0e4494fa62e97e91369caafdf6d63f11ae051b89abfa30
+  page: 2
+  role: evaluation
+  excerpt: 'in this domain. 1 We evaluate our attacks on three standard datasets:
+    MNIST In the space of malware classification, the existence of [28], a digit-recognition
+    task (0-9); CIFAR-10 [24],'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-a25b327bdcfcbf9cbc98
+  paper_id: paper-a2c6dc42af089fd5
+  source_file_hash: cbf9bf68f543aa351c3ea6aac7b159d58860b0993df2f9b8f938d8594b2601e1
+  page: 2
+  role: training
+  excerpt: ' data points. 3. Building on the above insights, we train networks on
+    MNIST [19] and CIFAR10 [16] that are robust to a wide range of adversarial attacks.
+    Our approach is based on optimi'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-452e22775907a29d871a
+  paper_id: paper-728d8c0964b540ad
+  source_file_hash: c4e3bd872ef20b7d2c4d77a63cd8f37cb8ff518609ae09acaf0fd5dd9e76c54c
+  page: 2
+  role: training
+  excerpt: 'xperiments on a few different networks and three datasets : • For the
+    MNIST dataset, we used the following architectures [11] – A simple fully connected
+    network with one or more hidden '
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-1cde3b9fd2ad31046168
+  paper_id: paper-b8a3bbfe3c7eefff
+  source_file_hash: 80623126b569da46ac487c4d631dbd93f7c4916396eb45a18865ed529a66e3b7
+  page: 2
+  role: evaluation
+  excerpt: raining set and testing set are natural instances). Then, given a The MNIST
+    dataset [23] consists of 70, 000 28 × 28 greyscale im- network F (·) and a natural
+    input x so that C(x) = l w
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-968af16afa79c1c7c2df
+  paper_id: paper-72040eccb96ead7a
+  source_file_hash: 84af60e71339cbfe4f8aa35fd48431b2fcd1b3d941955a1bcb1e2582f42d35de
+  page: 5
+  role: training
+  excerpt: e of classifiers to capture all task-dependent variability. Attack on MNIST
+    and ImageNet. After validating its potential to uncover adversarial subspaces,
+    we apply metameric sampling to
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-9a2b5d0860237941b8c0
+  paper_id: paper-d0229a9d15fd6b77
+  source_file_hash: 70e6dfea92070bfbbda98bfeff804db3302c4b77411cef098e5d16c466474a27
+  page: 2
+  role: evaluation
+  excerpt: m robustness. 3. Obfuscated Gradients If a defense argues security on MNIST
+    and any other dataset, A defense is said to cause gradient masking if it “does
+    we only evaluate the defense o
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-30a62482316a0b2c229e
+  paper_id: paper-f7fa96d778a8d649
+  source_file_hash: 7f6c0a50475149e11e3b7efc9c0a00383652b7cae62f80facd8ae2684ef251e7
+  page: 3
+  role: evaluation
+  excerpt: tmax classifier to have an error rate of 99.9% with an average confidence
+    of 79.3% on the MNIST (?) test set1 . In the same setting, a maxout network misclassifies
+    89.4% of our adversarial examples with an average confidence
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-63ea0bc0fef73b101f10
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: — CIFAR-10 airplane subclass, MNIST Training Data
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-1ba7d99117c9e8925c82
+  paper_id: paper-a47845c66d4a3f48
+  source_file_hash: f1108a17f3cbbba7a93256ee725d68092c9a6d25204ca4faab92f6f0cbe1a4df
+  page: 4
+  role: related benchmark comparison
+  excerpt: h have stood many thorough evaluations. However, having only two models
+    per dataset (MNIST and CIFAR-10) does not constitute a sufficiently large testbed,
+    and, because of the repetitive evaluations, some attacks may
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-20ab72600f5f8731e5be
+  paper_id: paper-1e2474b15fec2d7d
+  source_file_hash: ada9a023bec3a045996c2660092bd2e4c1a28380b76315ad0d97051c119bd9ce
+  page: 3
+  role: direct evaluation
+  excerpt: 'ly simple visual recognition tasks: the classi- fication of hand-written
+    digits [the MNIST dataset, 24] and the classification of ten basic-level categories
+    in small natural images [the CIFAR-10 dataset, 25]. From a'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true

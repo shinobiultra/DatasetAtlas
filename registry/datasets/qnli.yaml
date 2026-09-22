@@ -1,0 +1,107 @@
+schema_version: '1.0'
+id: qnli
+name: GLUE QNLI v2
+aliases: []
+description: Official GLUE ZIP train/dev/test task files, original TSV columns preserved,
+  withheld test labels null. Auxiliary original/tokenized copies in CoLA ZIP are not
+  double-counted. Release is pinned by downloaded archive SHA-256, not an inferred
+  paper-specific subset.
+paper_ids:
+- paper-25eaa8c74ce76800
+release: source-sha256-05a5e14b496e30e1
+adapter: structured
+adapter_config:
+  path: work/sources/qnli/records.parquet
+  format: parquet
+  sha256: 024825517e5f197dd775eebd55d53737228f1aedc4eb7beca40d22e3f12cbaff
+  mapping:
+    id: source_id
+    text: display_text
+    question: question
+  fields:
+    index:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    label:
+      dtype: category
+      values:
+      - entailment
+      - not_entailment
+      description: Original source label; null only when source does not provide it
+    label_status:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    question:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    sentence:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    source_id:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    source_member:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    split:
+      dtype: category
+      values:
+      - train
+      - dev
+      - test
+      description: Original split; CEBaB train alternatives overlap
+  source_files_sha256: &id001
+    QNLIv2.zip: e634e78627a29adaecd4f955359b22bf5e70f2cbd93b493f2d624138a0c0e5f5
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  unit: example
+  blockers:
+  - Public redistribution has not been approved; local inspection is supported.
+  total_count: 115669
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_applicable
+  external_provider: local_only
+  source: https://gluebenchmark.com/tasks
+  basis: GLUE/task text rights vary; public download does not establish redistribution
+    permission.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-51a46da1b77c7a4695cb
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: ', 2023) ResNet-9; ResNet-18; BERT — QNLI, CIFAR-10, ImageNet (Zheng et
+    al., 2024b) DDPM'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: verified_source_acquisition
+  source_url: https://dl.fbaipublicfiles.com/glue/data/QNLIv2.zip
+  checked_at: '2026-09-22'
+  sha256: *id001
+  scope: Official GLUE ZIP train/dev/test task files, original TSV columns preserved,
+    withheld test labels null. Auxiliary original/tokenized copies in CoLA ZIP are
+    not double-counted. Release is pinned by downloaded archive SHA-256, not an inferred
+    paper-specific subset.
+  counts_by_split:
+    train: 104743
+    dev: 5463
+    test: 5463
+snapshot_id: qnli-sha256-024825517e5f197dd775eebd55d53737228f1aedc4eb7beca40d22e3f12cbaff
+source_url: https://gluebenchmark.com/tasks
+modalities:
+- text
+tasks:
+- question-answer entailment
+labels:
+- entailment
+- not_entailment

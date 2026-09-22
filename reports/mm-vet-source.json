@@ -1,0 +1,48 @@
+{
+  "dataset_id": "mm-vet",
+  "source_url": "https://github.com/yuweihao/MM-Vet/releases/tag/v1",
+  "release": "github-v1-ff85408b7f382be1",
+  "original_files": [
+    {
+      "dataset_id": "mm-vet",
+      "release": "v1",
+      "author_release_id": 115044244,
+      "author_asset_id": 131129271,
+      "url": "https://github.com/yuweihao/MM-Vet/releases/download/v1/mm-vet.zip",
+      "file": "work/sources/mm-vet/original/mm-vet.zip",
+      "bytes": 66540341,
+      "sha256": "ff85408b7f382be146195b10ff5c7f995fbf297e92ea1132b61e438c8967116a",
+      "author_sha256": null
+    }
+  ],
+  "derivation_script": "work/sources/prepare_multimodal_batch.py",
+  "derived": {
+    "path": "work/sources/mm-vet/records.jsonl",
+    "rows": 218,
+    "bytes": 146731,
+    "sha256": "f604506820ea8c6403b132079af9cd887d3d5561f35e706e779ce09d1958ffde"
+  },
+  "scope_note": "Official MM-Vet v1 release: 218 question-answer records with 200 distinct image files. Capability tags, original answers, image-source labels and bard-set membership remain source fields. v2 is a distinct release.",
+  "preview_pack": "work/packs/mm-vet/pack.json",
+  "rights_decision": "metadata_only; records and media remain local pending release-specific review",
+  "preview_sha256": "d2d68ef2a98dd80ddf3fbf60d598e02d9aadacad9745ac2fd65a966d3a89bd41",
+  "preview_records": 100,
+  "preview_unique_images": 100,
+  "preview_sampling": {
+    "method": "first_per_asset_source_order",
+    "unit": "example",
+    "population": "Official MM-Vet v1 release: 218 question-answer records with 200 distinct image files. Capability tags, original answers, image-source labels and bard-set membership remain source fields. v2 is a distinct release.",
+    "offset": 0,
+    "requested_count": 100,
+    "returned_count": 100,
+    "next_cursor": "118",
+    "source_revision": "github-v1-ff85408b7f382be1",
+    "bytes_read": 40299,
+    "warnings": [],
+    "selection_note": "",
+    "official_source_release": "github-v1-ff85408b7f382be1",
+    "full_source_rows": 218,
+    "unique_source_images": 100,
+    "selection_explanation": "First 100 distinct embedded/source images in author source order"
+  }
+}

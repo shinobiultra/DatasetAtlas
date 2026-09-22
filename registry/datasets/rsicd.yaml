@@ -1,0 +1,54 @@
+schema_version: '1.0'
+id: rsicd
+name: RSICD
+aliases: []
+description: Original paper points to author repository for the RSICD corpus.
+paper_ids:
+- paper-25eaa8c74ce76800
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/201528014227051/RSICD_optimal
+  note: Imagery from several map providers has provider-specific terms; repository license does not clear
+    base imagery.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-3d0888dc5be37d28a901
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: RSICD (Fang et al., 2024b) DensetNet-121 —
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/201528014227051/RSICD_optimal
+  note: 'Original paper points to author repository for the RSICD corpus. Release: RSICD 10,921 aerial
+    images/5 captions each'
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_audit_rights
+  url: https://github.com/201528014227051/RSICD_optimal
+  note: Imagery from several map providers has provider-specific terms; repository license does not clear
+    base imagery.
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+source_url: https://github.com/201528014227051/RSICD_optimal

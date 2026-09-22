@@ -1,0 +1,39 @@
+schema_version: 1.0.0
+paper_id: paper-2df1203e2d3767bb
+title: 'PHANTOM: A Large-Scale Dataset of Multimodal Adversarial Attacks for Vision-Language
+  Models'
+authors:
+- Gallivanone, Simone
+- Khodadadi, Hossein
+- Dore, Mauro
+- Medda, Mauro
+- Franco, Nicola
+year: '2026'
+doi: 10.48550/arXiv.2606.24388
+url: http://arxiv.org/abs/2606.24388
+outcome: processed
+human_review_complete: false
+mention_inventory_review_complete: true
+candidate_mention_count: 213
+sources:
+- relative_path: files/34746/Gallivanone et al. - 2026 - PHANTOM A Large-Scale Dataset
+    of Multimodal Adversarial Attacks for Vision-Language Models.pdf
+  type: pdf
+  sha256: 4f39bf0ce4653e2237f45d5373a7d33340d8e6510dbff31ebb4d16fc9f7cad13
+  page_count: 27
+  extraction_quality:
+    pages_total: 27
+    pages_low_text: 9
+    characters: 188370
+    status: usable
+  processing_status: extracted
+reviewer_kind: agent
+review_method: full_pdf_page_text_appendix_table_caption_bibliography_audit
+reviewed_at: '2026-09-22T03:41:11.146110+00:00'
+reviewed_pages: 27
+reviewed_versions:
+- 4f39bf0ce4653e22
+review_note: All 27 pages checked incl figures and low-text visually. PHANTOM 47,524
+  samples from 7,826 intents; four root intent benchmarks only plus 747 Child Safety
+  intents. COCO train supplies BAP image seeds. Comparative 16-benchmark survey is
+  not source membership; author HF URL claim unverified locally.

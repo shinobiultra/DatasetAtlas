@@ -1,0 +1,101 @@
+schema_version: '1.0'
+id: mathvision
+name: MathVision
+aliases: []
+description: 'Official MathVision test split: 3,040 image-bearing math questions. The 304-item testmini is an overlapping
+  subset and is preserved separately as source evidence, not duplicated in the index.'
+paper_ids:
+- paper-20de77d4e60fd1bd
+release: hf-2837ddb3f13abaf6b3997c12d80753e5470bd46a-test
+adapter: embedded_parquet
+adapter_config:
+  path: work/sources/mathvision/original/data/test-00000-of-00001-3532b8d3f1b4047a.parquet
+  format: parquet
+  sha256: bcb3078a77bd6ee0e4e22135d53b9a48604fcd1b62dec69e279e812ba4dd7d37
+  media_columns:
+  - decoded_image
+  mapping:
+    id: id
+    question: question
+    choices: options
+  fields:
+    id: Original test problem ID
+    question: Original competition problem question
+    options: Original answer options
+    answer: Original source answer
+    solution: Original solution when present
+    level: Original difficulty level
+    subject: Original math subject
+    image: Original source image path
+    decoded_image: Embedded source image metadata, without binary payload
+  population: MathVision official test split, 3,040 rows; testmini overlap excluded
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 3040
+  unit: example
+  blockers:
+  - The dataset card MIT tag does not establish rights to original contest problems and diagrams; media and records
+    remain local pending rights review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  external_provider: local_only
+  source: https://huggingface.co/datasets/MathLLMs/MathVision
+  note: The dataset card MIT tag does not establish rights to original contest problems and diagrams; media and
+    records remain local pending rights review.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-ffae259f36b693b49099
+  paper_id: paper-20de77d4e60fd1bd
+  source_file_hash: ccc6f6fee4214f0656c164535cbe29f1cbbce5769b311c93f08e1110437f29e0
+  page: 8
+  role: related-work comparison
+  excerpt: ue is to improve MLLM generalization 2025b) and domain-specific assessments, such as MathVi- in these
+    intuition-challenging edge scenes, potentially by sion (Lu et al., 2023), ChartQA (Masry et al
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://huggingface.co/datasets/MathLLMs/MathVision/tree/2837ddb3f13abaf6b3997c12d80753e5470bd46a
+  note: MathVision image-bearing math-competition problem set, not MathVista or MathVerse
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: https://huggingface.co/datasets/MathLLMs/MathVision/tree/2837ddb3f13abaf6b3997c12d80753e5470bd46a
+  note: author HF commit 2837ddb3f13abaf6b3997c12d80753e5470bd46a; author code repo commit 260ff0f0756b957eac3eaa6115fe1a45d8429df4
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://huggingface.co/datasets/MathLLMs/MathVision/tree/2837ddb3f13abaf6b3997c12d80753e5470bd46a
+  note: Author HF Parquet files accessible; no content acquired in this audit.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+  probe: hf_tree_metadata_only
+- kind: source_audit_rights
+  url: https://huggingface.co/datasets/MathLLMs/MathVision/tree/2837ddb3f13abaf6b3997c12d80753e5470bd46a
+  note: HF MIT tag does not by itself establish rights to original contest diagrams/problems; review per-source
+    copyright before publishing content.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_release
+  url: https://huggingface.co/datasets/MathLLMs/MathVision/resolve/2837ddb3f13abaf6b3997c12d80753e5470bd46a/data/test-00000-of-00001-3532b8d3f1b4047a.parquet
+  note: Pinned author release; 3040 local source rows, SHA-256 bcb3078a77bd6ee0e4e22135d53b9a48604fcd1b62dec69e279e812ba4dd7d37.
+source_url: https://huggingface.co/datasets/MathLLMs/MathVision
+snapshot_id: hf-2837ddb3f13abaf6b3997c12d80753e5470bd46a-test-bcb3078a77bd
+modalities:
+- text
+- image
+tasks:
+- visual math reasoning
+- visual question answering

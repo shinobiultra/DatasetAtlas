@@ -1,0 +1,86 @@
+schema_version: '1.0'
+id: omnisafebench-mm
+name: OmniSafeBench-MM
+aliases: []
+description: All 1,500 official OmniSafeBench-MM JSON annotation rows, with their original prompts, risk categories
+  and distinct pinned image references. Source images resolve individually on demand.
+paper_ids:
+- paper-2df1203e2d3767bb
+release: hf-665c3bd114e1f13bb7ffca286167e75119a1cd22
+adapter: structured
+adapter_config:
+  path: work/sources/omnisafebench-mm/records.jsonl
+  format: jsonl
+  sha256: e45ab95dcc7f9fdffd51c15106a88c7b4651d3d835f67c0fa8c99f51bd8e0cc9
+  population: All 1,500 official OmniSafeBench-MM JSON annotation rows, with their original prompts, risk categories
+    and distinct pinned image references. Source images resolve individually on demand.
+  mapping:
+    id: id
+    text: original_prompt
+    media: media_path
+    media_modality: image
+  fields:
+    id: Official row ID
+    original_prompt: Original text prompt
+    main_category: Original risk domain
+    subcategory: Original risk category
+    style: Original prompt style
+    image_path: Original release media reference
+  media_root: work/sources/omnisafebench-mm/media
+  media_base_url: https://huggingface.co/datasets/jiaxiaojunQAQ/OmniSafeBench-MM/resolve/665c3bd114e1f13bb7ffca286167e75119a1cd22/
+  media_revision: 665c3bd114e1f13bb7ffca286167e75119a1cd22
+  media_allowed_hosts:
+  - huggingface.co
+  - us.aws.cdn.hf.co
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 1500
+  unit: example
+  blockers:
+  - Image bytes are fetched only per requested asset; the complete media archive is not locally cached.
+  - Generated image rights and sensitive content require publication review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  external_provider: local_only
+  source: https://huggingface.co/datasets/jiaxiaojunQAQ/OmniSafeBench-MM
+  note: Local source access does not authorize public record or media redistribution.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-94be8a9a2c4055594a44
+  paper_id: paper-2df1203e2d3767bb
+  source_file_hash: 4f39bf0ce4653e2237f45d5373a7d33340d8e6510dbff31ebb4d16fc9f7cad13
+  page: 6
+  role: source data
+  excerpt: 'of Multimodal Adversarial Attacks for Vision-Language Models We collected more than 7 000 harmful intents
+    from the following benchmarks: JailBreakV_28K [19], MM- SafetyBench [2], OmniSafeBench-MM [4], and SafeBench
+    [33]. Moreover, we added 747 intents related to th'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-c94c8cc5e189b10b4f52
+  paper_id: paper-2df1203e2d3767bb
+  source_file_hash: 4f39bf0ce4653e2237f45d5373a7d33340d8e6510dbff31ebb4d16fc9f7cad13
+  page: 6
+  role: harmful intent source
+  excerpt: 'ful intents from the following benchmarks: JailBreakV_28K [19], MM- SafetyBench [2], OmniSafeBench-MM
+    [4], and SafeBench [33]. Moreover, we added 747 intents related to the new Child Safety category, generated
+    with the as'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_release
+  url: https://huggingface.co/datasets/jiaxiaojunQAQ/OmniSafeBench-MM
+  note: Pinned hf-665c3bd114e1f13bb7ffca286167e75119a1cd22; 1500 rows; derived SHA-256 e45ab95dcc7f9fdffd51c15106a88c7b4651d3d835f67c0fa8c99f51bd8e0cc9.
+snapshot_id: hf-665c3bd114e1f13bb7ffca286167e75119a1cd22-e45ab95dcc7f
+source_url: https://huggingface.co/datasets/jiaxiaojunQAQ/OmniSafeBench-MM
+modalities:
+- text
+- image

@@ -1,0 +1,41 @@
+schema_version: 1.0.0
+paper_id: paper-f5da3ca03780a203
+title: 'Grounding-Driven Attack: Improving Encoder-based Adversarial Transferability
+  against Large Vision-Language Models'
+authors:
+- Zhang, Xinwei
+- Bai, Li
+- Zhang, Tianwei
+- Zhang, Youqian
+- Ye, Qingqing
+- Zhao, Yingnan
+- Du, Ruochen
+- Hu, Haibo
+year: '2026'
+doi: 10.48550/arXiv.2602.09431
+url: http://arxiv.org/abs/2602.09431
+outcome: processed
+human_review_complete: false
+mention_inventory_review_complete: true
+candidate_mention_count: 26
+sources:
+- relative_path: files/34747/Zhang et al. - 2026 - Grounding-Driven Attack Improving
+    Encoder-based Adversarial Transferability against Large Vision-La.pdf
+  type: pdf
+  sha256: d65cb215e41e6b745002603b59c138ce86e5ad7eb08751c0e3a85f3982959032
+  page_count: 27
+  extraction_quality:
+    pages_total: 27
+    pages_low_text: 3
+    characters: 120623
+    status: usable
+  processing_status: extracted
+reviewer_kind: agent
+review_method: full_pdf_page_text_appendix_table_caption_bibliography_audit
+reviewed_at: '2026-09-22T03:40:07.003156+00:00'
+reviewed_pages: 27
+reviewed_versions:
+- d65cb215e41e6b74
+review_note: All 27 pages checked, including qualitative figure-only p18 captions.
+  Direct Flickr30k, CIFAR-10, TextVQA validation, COVID-19 Radiography 100-image case
+  study and derived adversarial images. iMedVQA appears only in bibliography.

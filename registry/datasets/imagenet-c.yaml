@@ -1,0 +1,78 @@
+schema_version: '1.0'
+id: imagenet-c
+name: ImageNet-C
+aliases: []
+description: ImageNet-C corruption benchmark over ImageNet classification images.
+paper_ids:
+- paper-2c07a8c6af8e33c2
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Source-family rights and any public media examples require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://www.image-net.org/download.php
+  note: Zenodo record did not establish a license for underlying images; code license
+    does not override ImageNet access terms
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-a6ff49971b6594811c26
+  paper_id: paper-2c07a8c6af8e33c2
+  source_file_hash: 46f3b325eda29bc401398f275242e175e3576fd32fc6d037fe589341aea00542
+  page: 3
+  role: related-work mention
+  excerpt: compression, total-variation minimization, smooth- ImageNet-C (Hendrycks
+    and Dietterich, 2019) ing) can ablate brittle, high-frequency cues and en- evaluates
+    corruption res
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://zenodo.org/records/2235448
+  note: ImageNet-C corruption benchmark over ImageNet classification images
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_media_rights_unknown
+- kind: source_audit_release
+  url: https://zenodo.org/records/2235448
+  note: Zenodo record 2235448 v1, DOI 10.5281/zenodo.2235448; multiple corruption
+    archives total roughly 66 GB
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_media_rights_unknown
+- kind: source_audit_access
+  url: https://zenodo.org/records/2235448
+  note: Author repository points to public Zenodo archives; no large fetch attempted
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_media_rights_unknown
+- kind: source_audit_rights
+  url: https://www.image-net.org/download.php
+  note: Zenodo record did not establish a license for underlying images; code license
+    does not override ImageNet access terms
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_media_rights_unknown
+- kind: source_audit_related_links
+  urls:
+  - https://github.com/hendrycks/robustness
+  - https://www.image-net.org/download.php
+  note: Additional official or author-cited evidence; does not establish a selected
+    release.
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_media_rights_unknown
+source_url: https://zenodo.org/records/2235448

@@ -1,0 +1,61 @@
+schema_version: '1.0'
+id: ms-coco-captions
+name: MS-COCO captions
+aliases: []
+description: Adversarial evaluation randomly selects an MS-COCO caption; the task family is identifiable
+  but caption IDs and split are not.
+paper_ids:
+- paper-a291f2908480a2f8
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Exact source variant or paper selection is unresolved.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://cocodataset.org/#download
+  note: Caption annotations and linked photo rights are distinct.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-d9f9ade55c43fa5170e0
+  paper_id: paper-a291f2908480a2f8
+  source_file_hash: 7530ebbc6bf29d83834d772db462efec8fcc11a79c323331acc9f4066023f70b
+  page: 8
+  role: evaluation
+  excerpt: es are crafted, to quantitatively evaluate the adversarial robustness of large VLMs. From MS-COCO
+    captions [44], we randomly select a text description (usually a complete sentence, as shown in our
+    Appendix) as the adversarially targeted
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://cocodataset.org/#download
+  note: 'Adversarial evaluation randomly selects an MS-COCO caption; the task family is identifiable but
+    caption IDs and split are not. Release: COCO captions task; random caption selection unknown'
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+- kind: source_audit_rights
+  url: https://cocodataset.org/#termsofuse
+  note: Caption annotations and linked photo rights are distinct.
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+source_url: https://cocodataset.org/
+relationships:
+- type: same_source_family_as
+  target_id: coco
+  scope: COCO family only; year, split, selected image/caption IDs and overlay are not established as
+    the active COCO-2017-val release.

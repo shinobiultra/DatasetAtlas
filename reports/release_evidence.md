@@ -1,0 +1,37 @@
+# Implementation evidence
+
+This workspace implements the browser, local workbench, source adapters, durable analysis, model integration, and publication pipeline described in `SPEC.md`. **It is not yet a completed v1 release:** exact source identity and previews across the entire paper-derived inventory remain incomplete. The final catalogue has 336 entries, 64 verified local previews containing 6,313 records, and 59 canonical full-scope indices. Some indexed populations retain partial media; these are not 59 complete original datasets. See [the remaining roadmap](../ROADMAP.md). An unavailable adapter is an implementation gap, not an external access restriction.
+
+## Reproduce the running application
+
+From the repository root, run `.venv/bin/atlas serve --port 8765` and open `http://127.0.0.1:8765/?mode=workbench`. The default route uses the approved static bundle. Local datasets and model weights are stored under ignored `work/`; provider settings and saved model conversations are under ignored `local-config/`.
+
+## Evidence and its scope
+
+| Requirement | Evidence | Limits |
+| --- | --- | --- |
+| Complete paper inventory | [Corpus coverage](corpus_coverage.md): 83 original files, 64 paper inventories checked by agents against full text and page evidence | Source identities and particular extraction uncertainties remain separate; no human approval is asserted |
+| Honest dataset coverage | [Coverage CSV](dataset_coverage.csv), [source access](source_access_report.md), versioned registry YAMLs | Candidate entries are not advertised as browsable; publication restrictions do not prohibit local inspection |
+| Complete local queries | Immutable Parquet indices under `work/snapshots`; each manifest gives its verified expected record count | Each index names its release and exact population; these are not all datasets in the inventory |
+| Real analysis | [CLEVR receipt](analysis-demo-clevr-100.json): ten completed 100-example runs; [COCO receipt](analysis-demo-coco-100.json): fourteen completed 100-example runs, including both detectors and embedding spaces | Detector counts are predictions, not benchmark accuracy; all source labels remain separate |
+| Local model integration | `work/model-server/proof-summary.json`, capability probe, independent-batch receipts and saved conversations | The local Qwen2.5-VL-3B produced incorrect CLEVR answers; integration success is not answer accuracy or a SOTA claim |
+| Export and static publication | `work/demo-analysis/portable-pack`; approved CLEVR, PAIRS, and EuroSAT source packs under `examples/approved-packs`, with six CLEVR derived artifacts | Explicit media/artifact allowlists; no remote publication performed |
+| Query performance | [Measured timings](query-performance.json), reproduced by `scripts/benchmark_queries.py` | OS caches were not flushed; this measures exact count and first-page retrieval, not arbitrary filters or browser rendering |
+| Query cancellation | [Full CLEVR cancellation](query-cancellation.json), reproduced by `scripts/benchmark_query_cancellation.py`; 999,968-record reader remained usable after interruption | Native DuckDB memory setting is not a process RSS cap; the default 30-second query timer bounds SQL work, not source indexing or model jobs |
+| Browser acceptance | [Browser verification](browser-verification.md); durable Playwright static CLEVR flow, live linked COCO image conversation/export journey, geometry and video checks, and separate mocked 10,000-point map test | Synthetic performance fixtures are not real dataset coverage; timing is one reference-machine run |
+| Base installation | [Clean installation receipt](installation-verification.json) for the built wheel outside the checkout | Browser/API work without model dependencies; optional model stack is tested separately in this development environment |
+| Independent review | [Review report](independent_review.md) and adversarial API/storage/job tests | Open findings remain release work; passing tests alone is insufficient |
+
+## Validation discipline
+
+Run `.venv/bin/python -m pytest -q`, then `npm test --prefix apps/web` and `npm run build --prefix apps/web`. Generated contracts are checked against Pydantic models. Publication validation scans paths, secrets, rights, artifacts and actual bytes. Runtime tests distinguish failed/missing detector results from completed zero detections, reject changed selection/run inputs, and exercise cancelled jobs, resumed transfers, immutable result joins, traversal and chunked-body limits.
+
+`scripts/build_release.py` builds the frontend and distribution. Installation and browser walkthrough receipts are recorded separately when executed; an unexecuted check must not be inferred from this document.
+
+No paid model API was used. Dataset pixels were sent only to the explicitly configured local model server. Models and datasets were acquired under the user's explicit local-download authorization.
+
+## Final closeout validation
+
+180 Python tests and 15 frontend tests passed. The final Playwright run passed 11 checks; the optional additional model-send test was skipped because its real saved conversation is already recorded in [the linked journey receipt](browser-linked-journey.json). Browser re-export/import was rerun successfully. Generated contracts were byte-identical. [All 64 registered local previews](final-preview-verification.json) passed record-count, snapshot-identity, and file-checksum verification. Registry validation passed 336/336. The public bundle contains only the three approved 100-record previews and is about 30.4 MB including frontend assets.
+
+The wheel and source archive were rebuilt, scanned, and the wheel installed with base dependencies in a fresh Python 3.12 environment. A real HTTP server outside the checkout served the catalogue, all three packs and representative images, JavaScript, and API capabilities without Torch, Transformers, NudeNet, scikit-learn, UMAP, or LanceDB. See [the refreshed installation receipt](installation-verification.json). No remote deployment was performed.

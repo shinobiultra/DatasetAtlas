@@ -1,0 +1,63 @@
+schema_version: '1.0'
+id: timit
+name: TIMIT
+aliases: []
+description: 'TIMIT Acoustic-Phonetic Continuous Speech Corpus LDC93S1; source paper explicitly excluded
+  it from final word/speaker training. Source review: LDC93S1, 1993 release'
+paper_ids:
+- paper-6d747c88d639c5aa
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: gated
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Original-source registration, contact sharing, or licensed subscription is required.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  note: LDC user agreement; no open redistribution
+  source: https://catalog.ldc.upenn.edu/LDC93S1
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-80e8d3fcb419f5abe93c
+  paper_id: paper-6d747c88d639c5aa
+  source_file_hash: 519805fac1ac6df034dd67ef95643703ebd97fa1c18e0f035a1f93feada6994e
+  page: 13
+  role: exclusion
+  excerpt: ross-class labels (i.e., 50 unique speakers for each of the word classes). This exclusion fully
+    removed TIMIT from the training dataset. We then selected words and speaker classes that each contained
+    at least 200 unique utterances, and suc
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://catalog.ldc.upenn.edu/LDC93S1
+  note: TIMIT Acoustic-Phonetic Continuous Speech Corpus LDC93S1; source paper explicitly excluded it
+    from final word/speaker training LDC93S1, 1993 release
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://catalog.ldc.upenn.edu/LDC93S1
+  note: 'LDC license/subscription or nonmember agreement required Probe: first_primary_url_http_head_200;
+    payload_not_downloaded'
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_rights
+  url: https://catalog.ldc.upenn.edu/LDC93S1
+  note: LDC user agreement; no open redistribution
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://catalog.ldc.upenn.edu/LDC93S1

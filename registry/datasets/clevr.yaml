@@ -1,0 +1,106 @@
+schema_version: '1.0'
+id: clevr
+name: CLEVR
+aliases: []
+description: 'Compositional visual-question-answering benchmark. This catalogue entry is the pinned maujim/CLEVR_sample_500
+  validation population: 1,070 questions over 107 distinct original CLEVR images. Its public preview shows
+  100 questions on 100 distinct images; the separate clevr-v1-full entry indexes all 999,968 official
+  train/validation/test questions.'
+tasks:
+- visual question answering
+- compositional reasoning
+modalities:
+- image
+- text
+labels:
+- answer
+- question_family_index
+paper_ids:
+- paper-2038cb87115b4fb0
+source_url: https://cs.stanford.edu/people/jcjohns/clevr/
+release: CLEVR_v1.0
+snapshot_id: hf-maujim-CLEVR_sample_500-463520cb0e4d16f2f61ae0607c81eacdd009e9f4-validation
+adapter: https
+adapter_config:
+  path: work/sources/clevr/questions/CLEVR_val_questions.json
+  url: https://huggingface.co/datasets/maujim/CLEVR_sample_500/resolve/463520cb0e4d16f2f61ae0607c81eacdd009e9f4/questions/CLEVR_val_questions.json
+  revision: 463520cb0e4d16f2f61ae0607c81eacdd009e9f4
+  format: json
+  records_key: questions
+  sha256: 59ae70d05d0975dc4bf0dc32f9a2509f226e65fb6fa2740878324af329fb23ee
+  media_root: work/sources/clevr/images/val
+  media_base_url: https://huggingface.co/datasets/maujim/CLEVR_sample_500/resolve/463520cb0e4d16f2f61ae0607c81eacdd009e9f4/images/val
+  media_revision: 463520cb0e4d16f2f61ae0607c81eacdd009e9f4
+  population: maujim/CLEVR_sample_500 validation questions, 1070 questions over 107 distinct images
+  mapping:
+    id: question_index
+    question: question
+    media: image_filename
+  fields:
+    answer:
+      dtype: category
+      description: Original CLEVR answer
+    question:
+      dtype: string
+      description: Original CLEVR question
+    question_family_index:
+      dtype: number
+      description: Original question family identifier
+    image_filename:
+      dtype: string
+      description: Original CLEVR image filename
+    image_index:
+      dtype: number
+      description: Original image index within the validation split
+    split:
+      dtype: category
+      description: Original source split
+    program:
+      dtype: array
+      description: Original functional program
+  media_allowed_hosts:
+  - huggingface.co
+  - us.aws.cdn.hf.co
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: approved
+  preview_count: 100
+  total_count: 1070
+  unit: example
+  blockers: []
+rights:
+  records: approved
+  annotations: approved
+  images: approved
+  derived_artifacts: approved
+  code: not_applicable
+  basis: CLEVR authors release all data under CC BY 4.0, with attribution required.
+  source: https://cs.stanford.edu/people/jcjohns/clevr/
+  replica: https://huggingface.co/datasets/maujim/CLEVR_sample_500/tree/463520cb0e4d16f2f61ae0607c81eacdd009e9f4
+  attribution: CLEVR (c) 2017 Facebook, Inc.; Johnson et al., CVPR 2017. CC BY 4.0.
+relationships:
+- type: has_complete_release_variant
+  target: clevr-v1-full
+  status: verified
+evidence:
+- kind: source_release
+  url: https://cs.stanford.edu/people/jcjohns/clevr/
+  note: Official v1.0 description and CC BY 4.0 statement.
+- kind: preview_replica
+  url: https://huggingface.co/datasets/maujim/CLEVR_sample_500/tree/463520cb0e4d16f2f61ae0607c81eacdd009e9f4
+  note: Pinned subset; validation question JSON SHA-256 recorded above.
+- kind: corpus_mention
+  evidence_id: evidence-2d25eb48baee563a58c0
+  paper_id: paper-2038cb87115b4fb0
+  source_file_hash: 51dcc13673e3b9b98e6b9cb67b07e584643259b69e50a0c028b1c7814a1ee676
+  page: 9
+  role: future-work example
+  excerpt: and Copes- attention heads compared to the universal heads per- take, 2017) and CLEVR (Johnson
+    et al., 2017) al- forming outlier suppression. low variations in color and shape
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true

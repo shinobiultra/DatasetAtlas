@@ -1,0 +1,65 @@
+schema_version: '1.0'
+id: medical-multimodal-evaluation-data
+name: Medical Multimodal Evaluation Data
+aliases: []
+description: HuatuoGPT-Vision bundled medical evaluation release. Author repo links HF bundle with 17.3k
+  test rows across six component families, including VQA-RAD, SLAKE, PathVQA, PMC-VQA, OmniMedVQA and
+  MMMU medical tracks
+paper_ids:
+- paper-d8a392188b9cf4d6
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Public data/media reuse rights require separate review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://huggingface.co/datasets/FreedomIntelligence/Medical_Multimodal_Evaluation_Data
+  note: HF bundle declares Apache-2.0 but original medical images/components may carry separate patient/source
+    rights
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-c18bb76aff3663808779
+  paper_id: paper-d8a392188b9cf4d6
+  source_file_hash: 0e3f26916ef19ce5982122f2bb72212315d6dcbe59c9cc953852202654cc1acf
+  page: 5
+  role: evaluation
+  excerpt: (K et al., 2017), LLaVA-Instruct-150K (Liu et al., 2023) (LLaVA), and Medical Multimodal Evaluation
+    Data (Chen et al., 2024b) (Medical). The first two consist of natural images, while the third contains
+    medical ima
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://huggingface.co/datasets/FreedomIntelligence/Medical_Multimodal_Evaluation_Data
+  note: Author repo links HF bundle with 17.3k test rows across six component families, including VQA-RAD,
+    SLAKE, PathVQA, PMC-VQA, OmniMedVQA and MMMU medical tracks
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_bundle_located
+- kind: source_audit_rights
+  url: https://huggingface.co/datasets/FreedomIntelligence/Medical_Multimodal_Evaluation_Data
+  note: HF bundle declares Apache-2.0 but original medical images/components may carry separate patient/source
+    rights
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_bundle_located
+- kind: source_audit_access
+  url: https://huggingface.co/datasets/FreedomIntelligence/Medical_Multimodal_Evaluation_Data
+  note: public; Pin HF revision and cited paper subset; treat as bundle over six sources, not independent
+    image acquisition.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_bundle_located
+source_url: https://huggingface.co/datasets/FreedomIntelligence/Medical_Multimodal_Evaluation_Data

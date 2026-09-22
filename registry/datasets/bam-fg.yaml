@@ -1,0 +1,62 @@
+schema_version: '1.0'
+id: bam-fg
+name: BAM-FG
+aliases: []
+description: 'Behance Artistic Media Fine-Grained, distinct Raw and cleaned consensus variants. Source
+  review: ALADIN ICCV 2021: 2.62M artworks/310k groups; Raw 1M/175k, CN 1.62M/135k'
+paper_ids:
+- paper-25eaa8c74ce76800
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Access to the exact data files has not been verified.
+  - The exact paper release, source variant, or derived collection remains unresolved.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  note: Behance creator artwork rights separate; no blanket redistribution grant found
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-84d91734fa8c5d5f9d28
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: DINO, MoCov3, CLIP, ViT, — ImageNet-1K, BAM-FG, Artchive, ALADIN, SSCD
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://research.adobe.com/publication/aladin-all-layer-adaptive-instance-normalization-for-fine-grained-style-similarity/
+  note: 'Behance Artistic Media Fine-Grained, distinct Raw and cleaned consensus variants ALADIN ICCV
+    2021: 2.62M artworks/310k groups; Raw 1M/175k, CN 1.62M/135k'
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: identity_resolved_release_access_unresolved
+- kind: source_audit_access
+  url: https://research.adobe.com/publication/aladin-all-layer-adaptive-instance-normalization-for-fine-grained-style-similarity/
+  note: 'Author paper describes source but no current fixed public download/checksum verified Probe: first_primary_url_http_head_200;
+    payload_not_downloaded'
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: identity_resolved_release_access_unresolved
+- kind: source_audit_rights
+  url: https://arxiv.org/abs/2103.09776
+  note: Behance creator artwork rights separate; no blanket redistribution grant found No source-content
+    rights grant was verified; linked page is identity/access context only.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: identity_resolved_release_access_unresolved
+source_url: https://research.adobe.com/publication/aladin-all-layer-adaptive-instance-normalization-for-fine-grained-style-similarity/

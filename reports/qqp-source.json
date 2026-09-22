@@ -1,0 +1,16 @@
+{
+  "dataset_id": "qqp",
+  "source_sha256": {
+    "QQP-clean.zip": "40e7c862c04eb26ee04b67fd900e76c45c6ba8e6d8fab4f8f1f8072a1a3fbae0"
+  },
+  "converted_sha256": "35fdadcb69e8677480688c2c4c2c393df28a38eca47bac3fe104658c0a370b8f",
+  "count": 795241,
+  "counts_by_split": {
+    "train": 363846,
+    "dev": 40430,
+    "test": 390965
+  },
+  "distinct_upstream_ids": 404290,
+  "preview_records": 100,
+  "scope": "Official GLUE ZIP train/dev/test task files, original TSV columns preserved, withheld test labels null. Auxiliary original/tokenized copies in CoLA ZIP are not double-counted. Release is pinned by downloaded archive SHA-256, not an inferred paper-specific subset."
+}

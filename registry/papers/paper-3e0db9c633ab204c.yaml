@@ -1,0 +1,38 @@
+schema_version: 1.0.0
+paper_id: paper-3e0db9c633ab204c
+title: 'Double Visual Defense: Adversarial Pre-training and Instruction Tuning for
+  Improving Vision-Language Model Robustness'
+authors:
+- Wang, Zeyu
+- Xie, Cihang
+- Bartoldson, Brian
+- Kailkhura, Bhavya
+year: '2025'
+doi: 10.48550/arXiv.2501.09446
+url: http://arxiv.org/abs/2501.09446
+outcome: processed
+human_review_complete: false
+candidate_mention_count: 97
+sources:
+- relative_path: files/34757/Wang et al. - 2025 - Double Visual Defense Adversarial
+    Pre-training and Instruction Tuning for Improving Vision-Language.pdf
+  type: pdf
+  sha256: d2750f355a25fcdcfcb221e5049a0aa41ec096b452772c73e1767e2d039a6545
+  page_count: 15
+  extraction_quality:
+    pages_total: 15
+    pages_low_text: 2
+    characters: 94213
+    status: usable
+  processing_status: extracted
+mention_inventory_review_complete: true
+reviewer_kind: agent
+review_method: full_pdf_page_text_appendix_table_caption_bibliography_audit
+reviewed_at: '2026-09-22T03:31:55.502810+00:00'
+reviewed_pages: 15
+reviewed_versions:
+- d2750f355a25fcdc
+review_note: All 15 pages checked including benchmark tables and references. Direct
+  evaluation includes captioning, ImageNet variants, downstream image classification,
+  VQA and hallucination benchmarks. DataComp/LAION are model lineage; Recap-DataComp
+  captions are training source. FGVC and Flowers exact versions remain ambiguous.

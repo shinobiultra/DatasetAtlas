@@ -1,0 +1,84 @@
+schema_version: '1.0'
+id: oasis
+name: OASIS
+aliases: []
+description: Open Affective Standardized Image Set, not OASIS neuroimaging.
+paper_ids:
+- paper-164d7c221452ffec
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Official source family identified; exact selected release, preparation and public-use
+    rights still require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://pubmed.ncbi.nlm.nih.gov/26907748/
+  note: Original authors say images can be used freely in online/offline research
+    studies; this does not establish republishing rights for an Atlas preview
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-2aaba29648599f505e51
+  paper_id: paper-164d7c221452ffec
+  source_file_hash: a89bc42d5e26b03e424ef9aa3ecc43d7857a7ef0deb8c0ede544d5b94aa625d4
+  page: 1
+  role: source data
+  excerpt: the Open (VLMs) such as CLIP (Radford et al., 2021) and Affective Standardized
+    Image Set (OASIS) (Kurdi BLIP-2 (Li et al., 2023) excel at mapping images et al.,
+    2017), capturing social group signals and and text into a shared
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-53407659120faa2283f9
+  paper_id: paper-164d7c221452ffec
+  source_file_hash: a89bc42d5e26b03e424ef9aa3ecc43d7857a7ef0deb8c0ede544d5b94aa625d4
+  page: 4
+  role: direct retrieval source
+  excerpt: mages Group-based images SC-EAT Group representation in retrieved images
+    OASIS 900 images Valenced images in SC-EAT Valence ratings in retrieved images
+    NRC-VAD Lexicon
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://pubmed.ncbi.nlm.nih.gov/26907748/
+  note: Open Affective Standardized Image Set, not OASIS neuroimaging
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: project_identified_release_unpinned
+- kind: source_audit_release
+  url: https://pubmed.ncbi.nlm.nih.gov/26907748/
+  note: Original publication describes 900 color images; paper-specific archive version
+    unpinned
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: project_identified_release_unpinned
+- kind: source_audit_access
+  url: https://pubmed.ncbi.nlm.nih.gov/26907748/
+  observation: author_download_link_unprobed
+  requires_external_access_step: null
+  download_or_media_inspected: false
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: project_identified_release_unpinned
+- kind: source_audit_rights
+  url: https://pubmed.ncbi.nlm.nih.gov/26907748/
+  note: Original authors say images can be used freely in online/offline research
+    studies; this does not establish republishing rights for an Atlas preview
+  publication_decision: media_not_approved
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: project_identified_release_unpinned
+source_url: https://pubmed.ncbi.nlm.nih.gov/26907748/

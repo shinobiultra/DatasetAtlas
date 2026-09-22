@@ -1,0 +1,55 @@
+schema_version: '1.0'
+id: the-pile
+name: The Pile
+aliases: []
+description: Original author repo documents a large mixed text corpus; current original distribution path
+  and component availability need verification.
+paper_ids:
+- paper-fe221c51b8ea09df
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Source access has not been verified.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/EleutherAI/The-Pile
+  note: Component copyrights/licenses vary; repo code licence is not a blanket corpus licence.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-20881495412bf0715e5a
+  paper_id: paper-fe221c51b8ea09df
+  source_file_hash: d63dc008b2ef7206bb605d16b0b4ab6a7559f9693454285d0cd09b29ba4eb50c
+  page: 2
+  role: source data
+  excerpt: 'ion tokens of Across each token, we measure a direct effect DEhead of The Pile (Gao et al.,
+    2020), the dataset used to train Pythia- individual attention heads. Model components add their '
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/EleutherAI/The-Pile
+  note: 'Original author repo documents a large mixed text corpus; current original distribution path
+    and component availability need verification. Release: The Pile original 825 GiB, 22 component sources'
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_audit_rights
+  url: https://github.com/EleutherAI/The-Pile
+  note: Component copyrights/licenses vary; repo code licence is not a blanket corpus licence.
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+source_url: https://github.com/EleutherAI/The-Pile

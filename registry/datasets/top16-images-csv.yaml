@@ -1,0 +1,69 @@
+schema_version: '1.0'
+id: top16-images-csv
+name: Pach top-16 ImageNet image references
+aliases: []
+description: Nine hundred thirty SAE neuron rows, each listing 16 ImageNet-training image references in
+  the author metric benchmark. The referenced images are not bundled.
+paper_ids:
+- paper-9036b4eaa048dc21
+release: 39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493
+adapter: csv
+adapter_config:
+  path: /home/bitwise/Documents/vibe/DatasetAtlas/work/sources/pach/metric_benchmark/top16_images.csv
+  format: csv
+  sha256: 0c78fabc182df046aab24199fcab156b9798bb33d60f46023d7565eaa52c29cc
+  mapping:
+    id: k
+  fields:
+    k:
+      description: SAE neuron identifier
+      dtype: string
+    x_1:
+      description: First referenced ImageNet-training image
+      dtype: string
+    x_16:
+      description: Sixteenth referenced ImageNet-training image
+      dtype: string
+  population: Nine hundred thirty SAE neuron rows, each listing 16 ImageNet-training image references
+    in the author metric benchmark. The referenced images are not bundled.
+  selection_note: First 100 source-order rows; full local source index is retained.
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: local_only
+  complete_data: full_csv_indexed
+  publication: metadata_only
+  preview_count: 100
+  unit: example
+  blockers:
+  - ImageNet source images require separate access and rights review.
+  total_count: 930
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/ExplainableML/sae-for-vlm/blob/39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493/metric_benchmark.tar.gz
+  note: CSV references are local-only metadata; original ImageNet image rights are separate and no image
+    bytes are bundled.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-9341c3ef7ea8b870dbb7
+  paper_id: paper-9036b4eaa048dc21
+  source_file_hash: 88586baf881cd37666b815d32164caaa8a344cf3272fea7a93bf642d320bca93
+  page: 22
+  role: released derived ImageNet image list
+  excerpt: 'mns: k_x, k_y, R_user, MS_x_dino, MS_y_dino, MS_x_clip, MS_y_clip. • top16_images.csv – Lists
+    the 16 most activating images from the ImageNet training set for each neuron used in the study. Columns:
+    k,'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: local_source_snapshot
+  url: https://github.com/ExplainableML/sae-for-vlm/blob/39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493/metric_benchmark.tar.gz
+  note: Pinned source revision 39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493; local source index /home/bitwise/Documents/vibe/DatasetAtlas/work/sources/pach/metric_benchmark/top16_images.csv;
+    SHA-256 0c78fabc182df046aab24199fcab156b9798bb33d60f46023d7565eaa52c29cc; population 930 rows.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+snapshot_id: pach-top16-0c78fabc182df046
+source_url: https://github.com/ExplainableML/sae-for-vlm/blob/39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493/metric_benchmark.tar.gz

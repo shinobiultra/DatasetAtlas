@@ -1,0 +1,62 @@
+schema_version: 1.0.0
+paper_id: paper-a4d86f421f531623
+title: Mechanistic Interpretability Needs Philosophy
+authors:
+- Williams, Iwan
+- Oldenburg, Ninell
+- Dhar, Ruchira
+- Hatherley, Joshua
+- Fierro, Constanza
+- Rajcic, Nina
+- Schiller, Sandrine R.
+- Stamatiou, Filippos
+- Søgaard, Anders
+year: '2025'
+doi: 10.48550/arXiv.2506.18852
+url: http://arxiv.org/abs/2506.18852
+outcome: processed
+human_review_complete: false
+candidate_mention_count: 3
+sources:
+- relative_path: files/29926/Williams et al. - 2025 - Mechanistic Interpretability
+    Needs Philosophy.pdf
+  type: pdf
+  sha256: e6df6b943822233f0f953aa8d1bc63d767c853632c19be0c4e2c3b8b3b1316df
+  page_count: 15
+  extraction_quality:
+    pages_total: 15
+    pages_low_text: 0
+    characters: 63771
+    status: usable
+  processing_status: extracted
+- relative_path: files/29927/2506.html
+  type: html
+  sha256: 9537ecf65c371176961bf42b2cce11e927b100c803ed5029101b9dfd2bbf235e
+  page_count: null
+  extraction_quality:
+    pages_total: 1
+    pages_low_text: 1
+    characters: 0
+    status: low
+  processing_status: extracted
+- relative_path: files/34839/Williams et al. - 2026 - Mechanistic Interpretability
+    Needs Philosophy.pdf
+  type: pdf
+  sha256: 8bc2f04f5b70f2558f7427754df12e6f2447a6d2c0571fe5fdd59f6d5480d7e6
+  page_count: 16
+  extraction_quality:
+    pages_total: 16
+    pages_low_text: 0
+    characters: 68372
+    status: usable
+  processing_status: extracted
+mention_inventory_review_complete: true
+reviewer_kind: agent
+review_method: full_pdf_page_text_appendix_table_caption_bibliography_agent_audit
+reviewed_at: '2026-09-22T03:27:40.839347+00:00'
+reviewed_pages: 31
+reviewed_versions:
+- e6df6b943822233f
+- 8bc2f04f5b70f255
+review_note: Both 2025 and 2026 PDF versions reviewed; no named direct-use dataset,
+  only generic prior-work dataset discussion.

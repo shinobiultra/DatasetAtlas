@@ -1,0 +1,16 @@
+{
+  "dataset_id": "qnli",
+  "source_sha256": {
+    "QNLIv2.zip": "e634e78627a29adaecd4f955359b22bf5e70f2cbd93b493f2d624138a0c0e5f5"
+  },
+  "converted_sha256": "024825517e5f197dd775eebd55d53737228f1aedc4eb7beca40d22e3f12cbaff",
+  "count": 115669,
+  "counts_by_split": {
+    "train": 104743,
+    "dev": 5463,
+    "test": 5463
+  },
+  "distinct_upstream_ids": 0,
+  "preview_records": 100,
+  "scope": "Official GLUE ZIP train/dev/test task files, original TSV columns preserved, withheld test labels null. Auxiliary original/tokenized copies in CoLA ZIP are not double-counted. Release is pinned by downloaded archive SHA-256, not an inferred paper-specific subset."
+}

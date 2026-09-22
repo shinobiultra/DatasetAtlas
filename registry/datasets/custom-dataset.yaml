@@ -1,0 +1,61 @@
+schema_version: '1.0'
+id: custom-dataset
+name: Custom Dataset
+aliases: []
+description: Tang et al. DAAM custom-data survey descriptor. Survey table uses a generic label; original
+  method paper does not establish a uniquely named fixed release from this label.
+paper_ids:
+- paper-25eaa8c74ce76800
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: paper_protocol_checked_release_unverified
+  access: source_release_unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Exact source data release or paper-used subset is unverified.
+  - Public data/media reuse rights require separate review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://arxiv.org/abs/2210.04885
+  note: Exact constituent media and rights unknown.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-7180160ee5488198d0da
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: 'l., 2022) Stable-Diffusion Visualization Custom Dataset Table 10: A comprehensive overview
+    of interpretability methods for Section 5'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://arxiv.org/abs/2210.04885
+  note: Survey table uses a generic label; original method paper does not establish a uniquely named fixed
+    release from this label.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: generic_descriptor_unresolved
+- kind: source_audit_rights
+  url: https://arxiv.org/abs/2210.04885
+  note: Exact constituent media and rights unknown.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: generic_descriptor_unresolved
+- kind: source_audit_access
+  url: https://arxiv.org/abs/2210.04885
+  note: source_release_unverified; Do not promote generic label to an accepted dataset identity.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: generic_descriptor_unresolved
+source_url: https://arxiv.org/abs/2210.04885

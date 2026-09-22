@@ -1,0 +1,106 @@
+schema_version: '1.0'
+id: wnli
+name: GLUE WNLI
+aliases: []
+description: Official GLUE ZIP train/dev/test task files, original TSV columns preserved,
+  withheld test labels null. Auxiliary original/tokenized copies in CoLA ZIP are not
+  double-counted. Release is pinned by downloaded archive SHA-256, not an inferred
+  paper-specific subset.
+paper_ids:
+- paper-25eaa8c74ce76800
+release: source-sha256-5cacdf1828639542
+adapter: structured
+adapter_config:
+  path: work/sources/wnli/records.parquet
+  format: parquet
+  sha256: a8baeb3306a9ca9bf281bce74f15ec466dbdb6d8665096073d74f41f8ad93e3b
+  mapping:
+    id: source_id
+    text: display_text
+  fields:
+    index:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    label:
+      dtype: category
+      values:
+      - '0'
+      - '1'
+      description: Original source label; null only when source does not provide it
+    label_status:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    sentence1:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    sentence2:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    source_id:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    source_member:
+      dtype: string
+      description: Original source field; see source_member and release provenance
+    split:
+      dtype: category
+      values:
+      - train
+      - dev
+      - test
+      description: Original split; CEBaB train alternatives overlap
+  source_files_sha256: &id001
+    WNLI.zip: ae0e8e4d16f4d46d4a0a566ec7ecceccfd3fbfaa4a7a4b4e02848c0f2561ac46
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  unit: example
+  blockers:
+  - Public redistribution has not been approved; local inspection is supported.
+  total_count: 852
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_applicable
+  external_provider: local_only
+  source: https://gluebenchmark.com/tasks
+  basis: GLUE/task text rights vary; public download does not establish redistribution
+    permission.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-22d21aa17e4ef5011aa1
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: MRPC, SST2, WNLI, QQP, (Kwon et al., 2024) RoBERTa / Llama-2-13B-chat,
+    —
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: verified_source_acquisition
+  source_url: https://dl.fbaipublicfiles.com/glue/data/WNLI.zip
+  checked_at: '2026-09-22'
+  sha256: *id001
+  scope: Official GLUE ZIP train/dev/test task files, original TSV columns preserved,
+    withheld test labels null. Auxiliary original/tokenized copies in CoLA ZIP are
+    not double-counted. Release is pinned by downloaded archive SHA-256, not an inferred
+    paper-specific subset.
+  counts_by_split:
+    train: 635
+    dev: 71
+    test: 146
+snapshot_id: wnli-sha256-a8baeb3306a9ca9bf281bce74f15ec466dbdb6d8665096073d74f41f8ad93e3b
+source_url: https://gluebenchmark.com/tasks
+modalities:
+- text
+tasks:
+- natural language inference
+labels:
+- '0'
+- '1'

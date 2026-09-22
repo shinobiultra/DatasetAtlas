@@ -1,0 +1,97 @@
+schema_version: '1.0'
+id: sst2
+name: SST-2 (GLUE distribution)
+aliases:
+- GLUE SST-2
+- Stanford Sentiment Treebank binary
+description: Local, split-preserving conversion of the GLUE SST-2 ZIP hosted by the GLUE baseline download
+  script. This is the GLUE sentence-level binary release, not the full original Stanford Sentiment Treebank
+  or an unseen-label test set.
+paper_ids:
+- paper-25eaa8c74ce76800
+release: GLUE-SST-2-zip-2020-09-03
+adapter: structured
+adapter_config:
+  path: work/sources/sst2/glue-sst2.parquet
+  format: parquet
+  sha256: 914641ca6a671b23acf504ca35f082beb83d188278c5ca9c26d8c3ce591efea4
+  mapping:
+    id: source_id
+    text: sentence
+  source_archive: work/sources/sst2/SST-2.zip
+  source_archive_sha256: d67e16fb55739c1b32cdce9877596db1c127dc322d93c082281f64057c16deaa
+  source_archive_url: https://dl.fbaipublicfiles.com/glue/data/SST-2.zip
+  source_archive_version_id: gAOv9nMgC092.oqzTRzZou2skIpI.QQJ
+  population: GLUE SST-2 original ZIP train, dev, and unlabeled test TSVs converted losslessly to Parquet,
+    70,042 rows
+  fields:
+    split:
+      dtype: category
+      description: Original GLUE split
+      values:
+      - train
+      - dev
+      - test
+    label:
+      dtype: category
+      description: Original binary sentiment label 0 or 1; null for withheld GLUE test labels
+      values:
+      - 0
+      - 1
+    label_status:
+      dtype: category
+      description: Source labeled or withheld by GLUE
+      values:
+      - source_labeled
+      - withheld_by_glue
+    source_index:
+      dtype: number
+      description: Zero-based row/index within original split
+    source_member:
+      dtype: string
+      description: Original member path in GLUE ZIP
+    source_id:
+      dtype: string
+      description: Stable split:index key created for this conversion
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 70042
+  unit: example
+  blockers:
+  - Source text redistribution rights are not stated in the GLUE ZIP or SST README; do not publish sentence
+    content without review.
+  - GLUE test labels are withheld in the official archive.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_applicable
+  source: https://dl.fbaipublicfiles.com/glue/data/SST-2.zip
+  basis: GLUE download is public and original SST README requests citation, but no text redistribution
+    license was found in the source archive. Local analysis only until rights review.
+  external_provider: local_only
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-10d666a4a973e715b922
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: MRPC, SST2, WNLI, QQP, (Kwon et al., 2024) RoBERTa / Llama-2-13B-chat, —
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+tasks:
+- binary sentiment classification
+modalities:
+- text
+labels:
+- negative
+- positive
+source_url: https://gluebenchmark.com/tasks
+snapshot_id: sst2-glue-d67e16fb-914641ca

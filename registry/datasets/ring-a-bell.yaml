@@ -1,0 +1,51 @@
+schema_version: '1.0'
+id: ring-a-bell
+name: Ring-a-Bell
+aliases: []
+description: Mention candidate from a focused page audit; the evidence receipts distinguish
+  direct use, comparison, related-work, and citation-only roles. Original source,
+  release, and rights still require independent verification.
+paper_ids:
+- paper-09b2d7393fc75cf7
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: unverified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Original release identity and rights need verification.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-9a354804eaef9ac3f719
+  paper_id: paper-09b2d7393fc75cf7
+  source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
+  page: 7
+  role: evaluation
+  excerpt: ce-of-means procedure described in Equation (4). We evaluate on COCO [59]
+    annotations and Ring-a-Bell [60] Datasets. Under this setting, the attacker wishes
+    the steering prompts, both containing only safe descriptions. We also vect
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-53c6bb98b6b86756204e
+  paper_id: paper-09b2d7393fc75cf7
+  source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
+  page: 7
+  role: T2I evaluation
+  excerpt: We evaluate on COCO [59] annotations and Ring-a-Bell [60] Datasets. Under
+    this setting, the attacker wishes the steering
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true

@@ -1,0 +1,65 @@
+schema_version: '1.0'
+id: smolim2-135m-10b
+name: SmoLIM2-135M-10B
+aliases: []
+description: The candidate spelling SmoLIM2 is a transcription error; author text corpus is a sampled
+  10B-token SmolLM2-135M pretraining mixture, used for transcoders.
+paper_ids:
+- paper-959e8fc51787f7e4
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://huggingface.co/datasets/EleutherAI/SmolLM2-135M-10B
+  note: Mixed six component corpora carry component rights; no blanket downstream text publication inferred.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-f43e2575f9fc2b91a5c6
+  paper_id: paper-959e8fc51787f7e4
+  source_file_hash: 5f8f1d0c816db711928aa4dde7ed771b84b94fe84ee7f48cdaefd0a3ce2e9edb
+  page: 6
+  role: training
+  excerpt: es the FVU obtained when training transcoders on our text-only split (SmoLIM2-135M-10B) versus
+    our full Datasets. Our dataset for feature analysis is a subset of our multimodal (text+image) datase
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-671ef214f84cb2fd78c8
+  paper_id: paper-959e8fc51787f7e4
+  source_file_hash: 5f8f1d0c816db711928aa4dde7ed771b84b94fe84ee7f48cdaefd0a3ce2e9edb
+  page: 5
+  role: text training source
+  excerpt: sition t, the transcoder produces feature activations SmoLIM2-135M-10B [2] 2048 text tokens
+    144,000 ImageN
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://huggingface.co/datasets/EleutherAI/SmolLM2-135M-10B
+  note: 'The candidate spelling SmoLIM2 is a transcription error; author text corpus is a sampled 10B-token
+    SmolLM2-135M pretraining mixture, used for transcoders. Release: EleutherAI SmolLM2-135M-10B 10.1M
+    rows/25.6 GB'
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_audit_rights
+  url: https://github.com/EleutherAI/clt-training
+  note: Mixed six component corpora carry component rights; no blanket downstream text publication inferred.
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+source_url: https://huggingface.co/datasets/EleutherAI/SmolLM2-135M-10B

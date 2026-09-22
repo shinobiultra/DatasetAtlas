@@ -1,0 +1,85 @@
+schema_version: '1.0'
+id: visualpuzzle
+name: VisualPuzzle
+aliases: []
+description: Official NeuLab VisualPuzzles train Parquet with 1,168 image questions across five reasoning categories.
+  Original options, answer, category and difficulty remain source fields; repeated images share asset identity.
+paper_ids:
+- paper-20de77d4e60fd1bd
+release: hf-e6bc28fb1adcd27f25476b917e8c35c67b64027b
+adapter: structured
+adapter_config:
+  path: work/sources/visualpuzzle/records.jsonl
+  format: jsonl
+  sha256: 12e3debad4a5f9c1ba0adb0140f4993db362bba3511fd18bf520d846ab630c55
+  media_root: work/sources/visualpuzzle/media
+  population: Official NeuLab VisualPuzzles train Parquet with 1,168 image questions across five reasoning categories.
+    Original options, answer, category and difficulty remain source fields; repeated images share asset identity.
+  mapping:
+    id: id
+    question: question
+    choices: options
+    media: media_path
+    media_modality: image
+  fields:
+    id: Official puzzle ID
+    question: Original puzzle question
+    options: Original options when present
+    answer: Original source answer
+    category: Official reasoning category
+    difficulty: Official difficulty
+    image_sha256: SHA-256 of original embedded image bytes
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 1168
+  unit: example
+  blockers:
+  - The dataset card says MIT; source puzzle image rights need a release-specific publication review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  external_provider: local_only
+  source: https://huggingface.co/datasets/neulab/VisualPuzzles
+  note: The dataset card says MIT; source puzzle image rights need a release-specific publication review.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-2f2225b823e9507f8b74
+  paper_id: paper-20de77d4e60fd1bd
+  source_file_hash: ccc6f6fee4214f0656c164535cbe29f1cbbce5769b311c93f08e1110437f29e0
+  page: 8
+  role: related-work comparison
+  excerpt: lations. Vi- Gemini-2.5-pro 1.5 40.92 40.84 29.45 29.75 sualPuzzle (Song et al., 2025), PuzzleVQA (Chia
+    et al., InternVL3.5-8B 0.1 23.35 14.98 34.53 20.70 20
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/neulab/VisualPuzzles
+  note: 'NeuLab author repo links a public HF dataset; distinct from PuzzleVQA. Release: VisualPuzzles 1,168 puzzles'
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_audit_rights
+  url: https://github.com/neulab/VisualPuzzles
+  note: Repo MIT license observed; verify HF data card before image redistribution.
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_release
+  url: https://huggingface.co/datasets/neulab/VisualPuzzles/tree/e6bc28fb1adcd27f25476b917e8c35c67b64027b
+  note: Pinned official release; 1168 rows; derived SHA-256 12e3debad4a5f9c1ba0adb0140f4993db362bba3511fd18bf520d846ab630c55.
+source_url: https://huggingface.co/datasets/neulab/VisualPuzzles
+snapshot_id: hf-e6bc28fb1adcd27f25476b917e8c35c67b64027b-12e3debad4a5
+modalities:
+- text
+- image
+tasks:
+- visual question answering
+- visual reasoning

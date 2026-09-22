@@ -1,0 +1,53 @@
+schema_version: '1.0'
+id: puzzlevqa
+name: PuzzleVQA
+aliases: []
+description: Author-maintained repository includes puzzle data and evaluation; distinct from VisualPuzzles.
+paper_ids:
+- paper-20de77d4e60fd1bd
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/declare-lab/LLM-PuzzleTest
+  note: Repo MIT licence observed; verify generated puzzle data scope before publication.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-befd49879e9bc0396e76
+  paper_id: paper-20de77d4e60fd1bd
+  source_file_hash: ccc6f6fee4214f0656c164535cbe29f1cbbce5769b311c93f08e1110437f29e0
+  page: 8
+  role: related-work comparison
+  excerpt: 1.5 40.92 40.84 29.45 29.75 sualPuzzle (Song et al., 2025), PuzzleVQA (Chia et al., InternVL3.5-8B
+    0.1 23.35 14.98 34.53 20.70 2024), and AlgopuzzleVQA (Ghosal
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/declare-lab/LLM-PuzzleTest
+  note: 'Author-maintained repository includes puzzle data and evaluation; distinct from VisualPuzzles.
+    Release: PuzzleVQA original abstract-pattern puzzle collection'
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_audit_rights
+  url: https://github.com/declare-lab/LLM-PuzzleTest
+  note: Repo MIT licence observed; verify generated puzzle data scope before publication.
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+source_url: https://github.com/declare-lab/LLM-PuzzleTest

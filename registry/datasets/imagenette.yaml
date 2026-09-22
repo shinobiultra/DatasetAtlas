@@ -1,0 +1,127 @@
+schema_version: '1.0'
+id: imagenette
+name: Imagenette
+aliases: []
+description: Official fastai Imagenette 160-pixel ImageNet-derived release after the
+  2019-12-06 70/30 split update. The archive contains 13,394 class-folder JPEGs across
+  train and validation; local preview interleaves source classes.
+paper_ids:
+- paper-32cea5e43d940514
+release: imagenette2-160
+adapter: archive
+adapter_config:
+  path: work/sources/imagenette/imagenette2-160.tgz
+  format: tar.gz
+  sha256: 64d0c4859f35a461889e0147755a999a48b49bf38a7e0f9bd27003f10db02fe5
+  suffixes:
+  - .JPEG
+  path_regex: imagenette2-160/(?P<split>train|val)/(?P<label>n\d{8})/[^/]+\.(?:JPEG|jpg|jpeg)
+  order: round_robin_label
+  label_names:
+    n01440764: tench
+    n02102040: English springer
+    n02979186: cassette player
+    n03000684: chain saw
+    n03028079: church
+    n03394916: French horn
+    n03417042: garbage truck
+    n03425413: gas pump
+    n03445777: golf ball
+    n03888257: parachute
+  population: official Imagenette 160px train and validation, 13,394 JPEG images
+  fields:
+    label:
+      dtype: category
+      description: Original ImageNet synset folder ID
+      values:
+      - n01440764
+      - n02102040
+      - n02979186
+      - n03000684
+      - n03028079
+      - n03394916
+      - n03417042
+      - n03425413
+      - n03445777
+      - n03888257
+    class_name:
+      dtype: category
+      description: Class display name for original synset
+      values:
+      - tench
+      - English springer
+      - cassette player
+      - chain saw
+      - church
+      - French horn
+      - garbage truck
+      - gas pump
+      - golf ball
+      - parachute
+    split:
+      dtype: category
+      description: Original train or validation split
+      values:
+      - train
+      - val
+    path:
+      dtype: string
+      description: Original archive member path
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 13394
+  unit: example
+  blockers:
+  - ImageNet-derived photo redistribution rights are not established for public preview.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/fastai/imagenette/blob/ba8db39559154607fecd46bfff9068f074082af4/README.md
+  note: fastai repository license covers code/repository; original ImageNet photos
+    have separate source rights. Local preview only.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-d8213817e2347aed1673
+  paper_id: paper-32cea5e43d940514
+  source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
+  page: 5
+  role: evaluation
+  excerpt: utes (e.g., gender). We D E B IAS L ENS (T) ✓ 16.3 27.6 26.9 21.2 use ImageNette
+    [29] and VLMEvalKit MME [12]- D E B IAS L ENS (I+T) ✓ 16.2 25.1 19.9 24.2 measured
+    with the sum of perception
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-611e4a746fe3e511ed6a
+  paper_id: paper-32cea5e43d940514
+  source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
+  page: 5
+  role: general utility evaluation
+  excerpt: D E B IAS L ENS (T) ✓ 16.3 27.6 26.9 21.2 use ImageNette [29] and VLMEvalKit
+    MME [12]- D E B IAS L ENS (I+T) ✓ 16.2 25.1 1
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_release
+  url: https://github.com/fastai/imagenette/tree/ba8db39559154607fecd46bfff9068f074082af4
+  note: Author README distinguishes 160px variant and post-2019-12-06 70/30 split.
+- kind: source_archive
+  url: https://s3.amazonaws.com/fast-ai-imageclas/imagenette2-160.tgz
+  size_bytes: 99003388
+  sha256: 64d0c4859f35a461889e0147755a999a48b49bf38a7e0f9bd27003f10db02fe5
+  note: Official direct S3 archive; 13,394 JPEGs.
+source_url: https://github.com/fastai/imagenette
+snapshot_id: imagenette2-160-sha256-64d0c4859f35a461889e0147755a999a48b49bf38a7e0f9bd27003f10db02fe5
+tasks:
+- image classification
+modalities:
+- image
+labels:
+- class_name

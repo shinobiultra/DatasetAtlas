@@ -1,0 +1,84 @@
+schema_version: '1.0'
+id: bias-in-bios
+name: Bias in Bios
+aliases: []
+description: Bias in Bios author reproduction procedure, not a ready-made safe-to-load
+  dataset release.
+paper_ids:
+- paper-32cea5e43d940514
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Source-family rights and any public media examples require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/microsoft/biosbias/blob/1534c12ab469f103d83960cd5e9b561a9562abc0/README.md
+  note: Repository MIT license applies to code; original biographies and reconstructed
+    data redistribution not licensed by that statement
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-d7481a57bd98e1681aba
+  paper_id: paper-32cea5e43d940514
+  source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
+  page: 4
+  role: training
+  excerpt: 'e encoder and Cocogender cap- h∈G,h̸=g tions (Cocogendertxt) [76] and
+    Bias in Bios [15] for the The set Ng thus comprises neurons that are activated
+    text encoder. Note that all these datasets '
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-8c3087c1630d12d8cdad
+  paper_id: paper-32cea5e43d940514
+  source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
+  page: 4
+  role: SAE text training
+  excerpt: tions (Cocogendertxt) [76] and Bias in Bios [15] for the The set Ng thus
+    comprises neurons that are activated
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/microsoft/biosbias/tree/1534c12ab469f103d83960cd5e9b561a9562abc0
+  note: Bias in Bios author reproduction procedure, not a ready-made safe-to-load
+    dataset release
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: https://github.com/microsoft/biosbias/tree/1534c12ab469f103d83960cd5e9b561a9562abc0
+  note: Microsoft author repository commit 1534c12ab469f103d83960cd5e9b561a9562abc0;
+    no fixed data archive release
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://github.com/microsoft/biosbias/tree/1534c12ab469f103d83960cd5e9b561a9562abc0
+  note: Official script reconstructs from 16 Common Crawl archives and emits BIOS.pkl;
+    README estimates roughly four days with 64 cores; source retrieval and processing
+    untested here
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+  probe: source_reconstruction_not_acquired
+- kind: source_audit_rights
+  url: https://github.com/microsoft/biosbias/blob/1534c12ab469f103d83960cd5e9b561a9562abc0/README.md
+  note: Repository MIT license applies to code; original biographies and reconstructed
+    data redistribution not licensed by that statement
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://github.com/microsoft/biosbias/tree/1534c12ab469f103d83960cd5e9b561a9562abc0

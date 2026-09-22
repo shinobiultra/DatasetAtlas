@@ -1,0 +1,17 @@
+work/
+local-config/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+node_modules/
+apps/web/dist/
+src/dataset_atlas/web/
+*.egg-info/
+dist/
+.env
+playwright-report/
+test-results/
+
+apps/web/public/data/
+apps/web/*.tsbuildinfo

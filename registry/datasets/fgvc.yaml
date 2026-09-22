@@ -1,0 +1,55 @@
+schema_version: '1.0'
+id: fgvc
+name: FGVC
+aliases: []
+description: Evaluation chart labels FGVC alongside Cars/DTD/EuroSAT/Flowers/Pets; it does not spell out
+  aircraft or split.
+paper_ids:
+- paper-3e0db9c633ab204c
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Original data download availability is unverified.
+  - Exact source variant or paper selection is unresolved.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/
+  note: No rights claim for an unidentified FGVC variant.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-2ac5730e38fcef94d8a6
+  paper_id: paper-3e0db9c633ab204c
+  source_file_hash: d2750f355a25fcdcfcb221e5049a0aa41ec096b452772c73e1767e2d039a6545
+  page: 7
+  role: evaluation
+  excerpt: Cars Dtd Eurosat FGVC Flowers Pets Eval Model Training Data OpenAI-L/14
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/
+  note: 'Evaluation chart labels FGVC alongside Cars/DTD/EuroSAT/Flowers/Pets; it does not spell out aircraft
+    or split. Release: FGVC-Aircraft is a candidate; exact FGVC benchmark unspecified'
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+- kind: source_audit_rights
+  url: https://www.robots.ox.ac.uk/~vgg/data/
+  note: No rights claim for an unidentified FGVC variant.
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+source_url: https://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/

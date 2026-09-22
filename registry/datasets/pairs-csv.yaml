@@ -1,0 +1,79 @@
+schema_version: '1.0'
+id: pairs-csv
+name: Pach neuron-pair metric benchmark
+aliases: []
+description: One thousand released neuron pairs with user preference and DINOv2/CLIP metric scores, from
+  the Pach SAE metric_benchmark archive. This is not an image dataset.
+paper_ids:
+- paper-9036b4eaa048dc21
+release: 39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493
+adapter: csv
+adapter_config:
+  path: /home/bitwise/Documents/vibe/DatasetAtlas/work/sources/pach/metric_benchmark/pairs.csv
+  format: csv
+  sha256: 53cc1aa475b13daafeb173f441e962c9ca1a63d7256128f416e827f698140e71
+  mapping: {}
+  fields:
+    k_x:
+      description: First SAE neuron identifier
+      dtype: string
+    k_y:
+      description: Second SAE neuron identifier
+      dtype: string
+    R_user:
+      description: Aggregated human preference
+      dtype: number
+    MS_x_dino:
+      description: DINOv2 score for first neuron
+      dtype: number
+    MS_y_dino:
+      description: DINOv2 score for second neuron
+      dtype: number
+    MS_x_clip:
+      description: CLIP score for first neuron
+      dtype: number
+    MS_y_clip:
+      description: CLIP score for second neuron
+      dtype: number
+  population: One thousand released neuron pairs with user preference and DINOv2/CLIP metric scores, from
+    the Pach SAE metric_benchmark archive. This is not an image dataset.
+  selection_note: First 100 source-order rows; full local source index is retained.
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: local_only
+  complete_data: full_csv_indexed
+  publication: metadata_only
+  preview_count: 100
+  unit: example
+  blockers:
+  - Reuse/publication terms for user-study responses are not verified.
+  total_count: 1000
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/ExplainableML/sae-for-vlm/blob/39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493/metric_benchmark.tar.gz
+  note: Author repository releases archive but does not establish dataset/participant-response reuse license;
+    local-only preview.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-1ec537cc3260e7e248c4
+  paper_id: paper-9036b4eaa048dc21
+  source_file_hash: 88586baf881cd37666b815d32164caaa8a344cf3272fea7a93bf642d320bca93
+  page: 22
+  role: released derived judgment file
+  excerpt: user • pairs.csv – Contains 1000 pairs of neurons (rx , ry ), along with user preferences R(kx
+    ,ky ) and MS values computed using tw
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: local_source_snapshot
+  url: https://github.com/ExplainableML/sae-for-vlm/blob/39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493/metric_benchmark.tar.gz
+  note: Pinned source revision 39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493; local source index /home/bitwise/Documents/vibe/DatasetAtlas/work/sources/pach/metric_benchmark/pairs.csv;
+    SHA-256 53cc1aa475b13daafeb173f441e962c9ca1a63d7256128f416e827f698140e71; population 1000 rows.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+snapshot_id: pach-pairs-53cc1aa475b13daa
+source_url: https://github.com/ExplainableML/sae-for-vlm/blob/39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493/metric_benchmark.tar.gz

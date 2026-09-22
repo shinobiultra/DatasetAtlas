@@ -1,0 +1,81 @@
+schema_version: '1.0'
+id: custom-propeller-and-rotating-snake-stimuli
+name: custom propeller and rotating-snake stimuli
+aliases: []
+description: Watanabe Illusory Motion test stimuli.
+paper_ids:
+- paper-4f53de240f8fc1af
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Official source family identified; exact selected release, preparation and public-use
+    rights still require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://doi.org/10.6084/m9.figshare.5483680
+  note: Figshare Test_data record states CC BY 4.0; verify exact v1/v2 differences
+    and media file checksums
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-55b69f0af12b5cdda59b
+  paper_id: paper-4f53de240f8fc1af
+  source_file_hash: 8ebf6e59889fac55b6530a1b8edfcaad993fc72a4b5cdb49b1b9b7452084fc5d
+  page: 3
+  role: derived collection
+  excerpt: 'idden units (Figures 11, 12). (GTX-1080, NVIDIA). For the PredNet predictions,
+    there were six testing stimuli: cw rotating propeller, ccw rotating propeller,
+    Optical Flow Analysis static propeller, mirrored cw rotating'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://doi.org/10.6084/m9.figshare.5483680
+  note: Watanabe Illusory Motion test stimuli
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_identified_version_drift
+- kind: source_audit_release
+  url: https://doi.org/10.6084/m9.figshare.5483680
+  note: Paper p3 describes six test conditions; p4 links Figshare Test_data 5483680.v1
+    with propeller videos and illusion/control images; current Figshare record is
+    v2
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_identified_version_drift
+- kind: source_audit_access
+  url: https://doi.org/10.6084/m9.figshare.5483680
+  observation: figshare_article_public
+  requires_external_access_step: null
+  download_or_media_inspected: false
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_identified_version_drift
+- kind: source_audit_rights
+  url: https://doi.org/10.6084/m9.figshare.5483680
+  note: Figshare Test_data record states CC BY 4.0; verify exact v1/v2 differences
+    and media file checksums
+  publication_decision: media_not_approved
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_identified_version_drift
+- kind: source_audit_related_links
+  urls:
+  - https://figshare.com/articles/media/Test_data/5483680
+  note: Additional official or author evidence; not a selected release.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_identified_version_drift
+source_url: https://doi.org/10.6084/m9.figshare.5483680

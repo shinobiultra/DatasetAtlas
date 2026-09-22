@@ -1,0 +1,84 @@
+schema_version: '1.0'
+id: sbbench
+name: SBBench
+aliases: []
+description: SBBench / author BBQ-V benchmark.
+paper_ids:
+- paper-32cea5e43d940514
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Official source family identified; exact selected release, preparation and public-use
+    rights still require dataset-specific review.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/UCF-CRCV/BBQ-Vision
+  note: Author repository states CC BY-NC 4.0 and academic research only; source web-photo
+    rights need item review
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-a1f7de4556ce998ec742
+  paper_id: paper-32cea5e43d940514
+  source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
+  page: 5
+  role: evaluation
+  excerpt: ' recent bench- Adj Occup Act Ster marks: VLAGenderBias (VLA) [21] and
+    SBBench [57]. CLIP (ViT-B/16) [67] − 22.9 33.7 19.5 33.8 CLIP (ViT-B/16)† − 21.9
+    33.5 19.8 32.5 The former consists o'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-81c782c68186b60ffd4c
+  paper_id: paper-32cea5e43d940514
+  source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
+  page: 5
+  role: LVLM evaluation
+  excerpt: 'Adj Occup Act Ster marks: VLAGenderBias (VLA) [21] and SBBench [57]. CLIP
+    (ViT-B/16) [67] − 22.9 33.7 19.5 33.8'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/UCF-CRCV/BBQ-Vision
+  note: SBBench / author BBQ-V benchmark
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_identified_version_drift
+- kind: source_audit_release
+  url: https://github.com/UCF-CRCV/BBQ-Vision
+  note: Citing fairness paper says about 14.6k images; original author BBQ-V repo
+    currently describes 14,144 QA pairs over 4,497 images, so units/revision must
+    not be equated
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_identified_version_drift
+- kind: source_audit_access
+  url: https://github.com/UCF-CRCV/BBQ-Vision
+  observation: author_repo_release
+  requires_external_access_step: null
+  download_or_media_inspected: false
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_identified_version_drift
+- kind: source_audit_rights
+  url: https://github.com/UCF-CRCV/BBQ-Vision
+  note: Author repository states CC BY-NC 4.0 and academic research only; source web-photo
+    rights need item review
+  publication_decision: media_not_approved
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_identified_version_drift
+source_url: https://github.com/UCF-CRCV/BBQ-Vision

@@ -1,0 +1,251 @@
+schema_version: '1.0'
+id: coco
+name: COCO
+aliases:
+- MS COCO
+- COCO2017 val
+description: 'COCO source family with a local official 2017 validation release: 5,000 images,
+  25,014 captions, and 36,781 object instances in 80 categories. Each caption example shares
+  its original image asset and asset-scoped source boxes. Paper evidence below retains its original,
+  sometimes distinct split or role; this local validation release does not assert that every
+  cited paper used validation. Images remain local because the COCO Consortium does not own
+  their copyright.'
+tasks:
+- image captioning
+- object detection
+- instance segmentation
+modalities:
+- image
+- text
+labels:
+- caption
+- category_id
+- bbox
+- iscrowd
+paper_ids:
+- paper-2df1203e2d3767bb
+- paper-09b2d7393fc75cf7
+- paper-6c99cf73401b37d4
+- paper-944952997d24ce45
+- paper-6dbb0d4a7b949143
+- paper-392b0c393c06b48e
+- paper-3e0db9c633ab204c
+- paper-c65ee35ca47313c9
+source_url: https://cocodataset.org/
+release: COCO-2017-val
+snapshot_id: coco-2017-val-4f7e2ccb-113a836d
+adapter: coco
+adapter_config:
+  images_archive: work/sources/coco/val2017.zip
+  annotations_archive: work/sources/coco/annotations_trainval2017.zip
+  images_sha256: 4f7e2ccb2866ec5041993c9cf2a952bbed69647b115d0f74da7ce8f4bef82f05
+  annotations_sha256: 113a836d90195ee1f884e704da6304dfaaecff1f023f49b6ca93c4aaae470268
+  prepared_root: work/packs/coco/prepared
+  preparation_budget_bytes: 2000000000
+  population: Official COCO 2017 validation captions; 25,014 captions on 5,000 images
+  fields:
+    image_id:
+      dtype: number
+      description: Original COCO image ID
+    caption_id:
+      dtype: number
+      description: Original COCO caption annotation ID
+    caption:
+      dtype: object
+      description: Original caption annotation dictionary
+    image:
+      dtype: object
+      description: Original image metadata including source file name and license ID
+    image_license:
+      dtype: object
+      description: COCO license dictionary corresponding to original image license ID
+    instances:
+      dtype: array
+      description: Full original instance annotations for the shared image; bbox uses source
+        x,y,width,height in original pixels
+    categories:
+      dtype: array
+      description: Original category definitions used by this image
+    category_names:
+      dtype: array
+      description: Names derived from original category IDs for filtering
+    instance_count:
+      dtype: number
+      description: Number of original instance annotations for the shared image
+    person_count:
+      dtype: number
+      description: Number of source instances whose category name is person
+  expected_images: 5000
+  expected_captions: 25014
+  expected_instances: 36781
+  expected_categories: 80
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: requires_preparation
+  publication: metadata_only
+  preview_count: 100
+  total_count: 25014
+  unit: example
+  blockers:
+  - Complete Parquet snapshot requires local indexing; public image rights require per-image
+    review.
+rights:
+  records: approved
+  annotations: approved
+  images: metadata_only
+  derived_artifacts: not_reviewed
+  external_provider: local_only
+  source: https://cocodataset.org/#termsofuse
+  basis: COCO annotations are CC BY 4.0; the Consortium does not own image copyrights, so original
+    media remains local pending per-image review.
+relationships: []
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-8f972ac9719ff39b441b
+  paper_id: paper-2df1203e2d3767bb
+  source_file_hash: 4f39bf0ce4653e2237f45d5373a7d33340d8e6510dbff31ebb4d16fc9f7cad13
+  page: 26
+  role: source data
+  excerpt: ed the adversarial image against a batch of 8 affirmative target responses, starting
+    from clean images from the COCO train dataset [54]. For the prompt engineering phase, we
+    followed the standard iterative interaction flow. In addition to the target model unde
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-48d2efeadefbd3c959fb
+  paper_id: paper-09b2d7393fc75cf7
+  source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
+  page: 7
+  role: evaluation
+  excerpt: ' in Figure 2. the difference-of-means procedure described in Equation (4). We evaluate
+    on COCO [59] annotations and Ring-a-Bell [60] Datasets. Under this setting, the attacker
+    wishes the steering prompts, both containing onl'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-30d6893849ebc2b0f190
+  paper_id: paper-6c99cf73401b37d4
+  source_file_hash: 63a07114996dfdfd5a19f4a2790f78b7b42dc95ce54e14d1a8f32cbef00fc8fb
+  page: 14
+  role: source data
+  excerpt: 'pt the queries to our evaluation protocol (see §A.3). Localization. • COCO_one:
+    Single-object localization queries on COCO images, from the COCO single- object split of
+    What’s Up [Kama'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-7f99ef82c67f3226f903
+  paper_id: paper-944952997d24ce45
+  source_file_hash: 71a1cce60cc2242209269ec562113d20745af5b8416c92c7ce7b1bc418d2ca5b
+  page: 7
+  role: source data
+  excerpt: 8.34 86.89 86.56 89.09 domly sampled subset of 1, 000 images from the COCO DeepSeek-VL
+    36.54 79.57 86.39 86.98 dataset [18]. We design three cross-matching tasks, Llava 40.72
+    97.32 98.
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-cd558b04f3c0aab353a7
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 6
+  role: evaluation
+  excerpt: dels attack setting is designed to effectively evaluate the adversar- COCO, more
+    than doubling the performance of both FARE4 ial performance of model and incorporates both
+    untargeted a
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-b9d7f893c5124f06abea
+  paper_id: paper-392b0c393c06b48e
+  source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
+  page: 9
+  role: evaluation
+  excerpt: emaining computa- tionally feasible. We evaluate on image captioning (COCO [29],
+    Flickr30k [44]) and VQA (VQAv2 [16], TextVQA [54], VizWiz [17], OKVQA [39]), reporting results
+    on 500 r
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-d6f4e622800ed0bc7873
+  paper_id: paper-3e0db9c633ab204c
+  source_file_hash: d2750f355a25fcdcfcb221e5049a0aa41ec096b452772c73e1767e2d039a6545
+  page: 5
+  role: evaluation
+  excerpt: COCO Flickr30k IN-1k IN-V2 IN-A IN-R ObjectNet IN-Sketch E
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-95b33ab8c874547a0ce9
+  paper_id: paper-c65ee35ca47313c9
+  source_file_hash: 8720667ee4191c5e834c8159661294785cc5f89cc2c793c5e5db0c562deb12d3
+  page: 2
+  role: source lineage
+  excerpt: '{woman, Section 5, we discuss the fundamental challenges in cre- man}, for the COCO
+    validation set to analyze perfor- ating spurious-feature-free benchmarks and propose prac-
+    mance disparities in image captioning. F'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_release
+  url: https://cocodataset.org/#download
+  note: Official 2017 validation images and 2017 train/val annotations; archive hashes in reports/coco-source.json.
+- kind: source_rights
+  url: https://cocodataset.org/#termsofuse
+  note: Annotations CC BY 4.0; image copyrights remain with source owners and Flickr terms apply.
+- kind: corpus_mention
+  evidence_id: evidence-f8cf299f7073ddcad7ba
+  paper_id: paper-09b2d7393fc75cf7
+  source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
+  page: 7
+  role: T2I evaluation source
+  excerpt: ). We evaluate on COCO [59] annotations and Ring-a-Bell [60] Datasets. Under this
+    setting, the attacker wishes the steering
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-2b99e3f07674f10e90b1
+  paper_id: paper-392b0c393c06b48e
+  source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
+  page: 9
+  role: caption evaluation
+  excerpt: luation while remaining computa- tionally feasible. We evaluate on image captioning
+    (COCO [29], Flickr30k [44]) and VQA (VQAv2 [16], TextVQA [54], VizWiz [17], OKVQA [39]),
+    reporting results on 500 ran- domly
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-d57e1c64bb29a4c95a02
+  paper_id: paper-944952997d24ce45
+  source_file_hash: 71a1cce60cc2242209269ec562113d20745af5b8416c92c7ce7b1bc418d2ca5b
+  page: 7
+  role: task hijack image source
+  excerpt: Phi3 38.34 86.89 86.56 89.09 domly sampled subset of 1, 000 images from the COCO
+    DeepSeek-VL 36.54 79.57 86.39 86.98 dataset [18]. We design three cross-matching tasks,
+    Llava 40.
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-83f90f4248918899e401
+  paper_id: paper-6c99cf73401b37d4
+  source_file_hash: 63a07114996dfdfd5a19f4a2790f78b7b42dc95ce54e14d1a8f32cbef00fc8fb
+  page: 3
+  role: image source
+  excerpt: al., 2023], which consists of structured two-object scenes, two natural splits from
+    COCO [Lin et al., 2014], Visual Genome [Kr- ishna et al., 2017, VG], and VSR [Liu et al.,
+    2023] (see examples in Figure 8 and App
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-4e0a1c9b851d97b85084
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 5
+  role: caption evaluation
+  excerpt: s (TextVQA, VQAv2, VizWiz, OKVQA), we report VQA accuracy, and for captioning tasks
+    (COCO, Flickr30k), we report CIDEr score. COCO Flickr30 T
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true

@@ -1,0 +1,61 @@
+schema_version: '1.0'
+id: broden
+name: Broden
+aliases: []
+description: 'MIT Network Dissection Broden composite, not Broden+ from Unified Parsing. Source review:
+  NetDissect release1 commit 20ce6f887607aadc04ab9fb3d452e4723685cbbb'
+paper_ids:
+- paper-25eaa8c74ce76800
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  note: MIT repository code license does not relicense ADE/PASCAL/OpenSurfaces/DTD source images
+  source: https://netdissect.csail.mit.edu/
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-feeff0bcd3f2b5391950
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: 023) ResNet Image Classification CIFAR100, Broden, ImageNet (Kalibhat et al., 2023) DINO Image
+    Clas
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/CSAILVision/NetDissect/tree/20ce6f887607aadc04ab9fb3d452e4723685cbbb
+  note: MIT Network Dissection Broden composite, not Broden+ from Unified Parsing NetDissect release1
+    commit 20ce6f887607aadc04ab9fb3d452e4723685cbbb
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://github.com/CSAILVision/NetDissect/tree/20ce6f887607aadc04ab9fb3d452e4723685cbbb
+  note: 'Author download script available; roughly gigabyte-scale data, not fetched Probe: first_primary_url_http_head_200;
+    payload_not_downloaded'
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_rights
+  url: https://netdissect.csail.mit.edu/
+  note: MIT repository code license does not relicense ADE/PASCAL/OpenSurfaces/DTD source images
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+source_url: https://github.com/CSAILVision/NetDissect/tree/20ce6f887607aadc04ab9fb3d452e4723685cbbb

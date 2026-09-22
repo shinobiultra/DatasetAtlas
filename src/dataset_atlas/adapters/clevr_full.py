@@ -1,0 +1,208 @@
+"""Selective access to the official CLEVR v1.0 archive.
+
+Only question JSON is materialized as JSONL. Images remain in the original ZIP
+and are decompressed individually when a record's asset is requested.
+"""
+from __future__ import annotations
+
+import hashlib
+import io
+import json
+from pathlib import Path
+import re
+import zipfile
+
+from dataset_atlas.models import Asset, Record, stable_id
+
+from .core import (DatasetAdapter, MediaHandle, PreparationPlan, PreparedSource,
+                   RecordBatch, SourceDescription)
+
+
+def _questions(handle: io.TextIOBase):
+    """Iterate objects in a CLEVR question array without loading the whole JSON."""
+    decoder = json.JSONDecoder()
+    buffer = ""
+    eof = False
+    prefix = re.compile(r'"questions"\s*:\s*\[')
+    while True:
+        match = prefix.search(buffer)
+        if match:
+            buffer = buffer[match.end():]
+            break
+        chunk = handle.read(1 << 20)
+        if not chunk:
+            raise ValueError("CLEVR JSON lacks a questions array")
+        buffer = (buffer + chunk)[-2_000_000:]
+    position = 0
+    while True:
+        while position < len(buffer) and buffer[position] in " \t\r\n,":
+            position += 1
+        if position < len(buffer) and buffer[position] == "]":
+            return
+        try:
+            row, end = decoder.raw_decode(buffer, position)
+        except json.JSONDecodeError:
+            if eof or len(buffer) - position > 20_000_000:
+                raise ValueError("invalid or oversized CLEVR question object") from None
+            chunk = handle.read(1 << 20)
+            eof = not chunk
+            buffer += chunk
+            continue
+        if not isinstance(row, dict):
+            raise ValueError("CLEVR question must be an object")
+        yield row
+        position = end
+        if position > 1 << 20:
+            buffer = buffer[position:]
+            position = 0
+
+
+class CLEVRFullAdapter(DatasetAdapter):
+    """Full official train/val/test questions and selective original image bytes."""
+
+    SPLITS = ("train", "val", "test")
+
+    def _archive(self) -> Path:
+        return Path(self.config["archive"]).expanduser().resolve()
+
+    def _prepared(self) -> Path:
+        return Path(self.config["prepared_root"]).expanduser().resolve()
+
+    def probe(self) -> SourceDescription:
+        archive = self._archive()
+        return SourceDescription("clevr_full", str(archive), archive.is_file(),
+                                 self.revision, archive.stat().st_size if archive.is_file() else None,
+                                 True, True, True, False, True,
+                                 ("full official ZIP; question-only extraction, image-on-demand",))
+
+    def plan(self, limit: int, max_bytes: int, cursor: str | None = None) -> PreparationPlan:
+        base = super().plan(limit, max_bytes, cursor)
+        if not self.config.get("archive_sha256"):
+            raise ValueError("full CLEVR archive requires a pinned SHA-256")
+        return PreparationPlan(base.dataset_id, base.source_revision, cursor, limit,
+                               max_bytes, 0, None,
+                               ("verify full archive SHA-256; stream question JSON to indexed JSONL",),
+                               "question JSONL output size is unknown until preparation")
+
+    def _members(self, archive: zipfile.ZipFile) -> tuple[dict[str, str], str]:
+        names = archive.namelist()
+        questions: dict[str, str] = {}
+        for split in self.SPLITS:
+            suffix = f"questions/CLEVR_{split}_questions.json"
+            found = [name for name in names if name.endswith(suffix)]
+            if len(found) != 1:
+                raise ValueError(f"expected one CLEVR {split} question member")
+            questions[split] = found[0]
+        prefix = questions["train"].split("questions/")[0]
+        if any(not member.startswith(prefix) for member in questions.values()):
+            raise ValueError("CLEVR question member roots disagree")
+        return questions, prefix
+
+    def prepare(self, approved_plan: PreparationPlan) -> PreparedSource:
+        source = super().prepare(approved_plan)
+        archive_path = self._archive()
+        digest = hashlib.sha256()
+        with archive_path.open("rb") as handle:
+            for chunk in iter(lambda: handle.read(4 << 20), b""):
+                digest.update(chunk)
+        if digest.hexdigest() != self.config["archive_sha256"]:
+            raise ValueError("CLEVR archive differs from pinned SHA-256")
+        root = self._prepared(); root.mkdir(parents=True, exist_ok=True)
+        index_path = root / "questions-index.json"
+        records_path = root / "questions.jsonl"
+        if index_path.is_file() and records_path.is_file():
+            index = json.loads(index_path.read_text())
+            if (index.get("archive_sha256") == digest.hexdigest()
+                    and index.get("jsonl_bytes") == records_path.stat().st_size):
+                return source
+        staged = records_path.with_suffix(".jsonl.part")
+        checkpoints: list[list[int]] = []
+        split_counts: dict[str, int] = {}
+        offset = 0
+        count = 0
+        try:
+            with zipfile.ZipFile(archive_path) as archive:
+                question_members, prefix = self._members(archive)
+                with staged.open("wb") as output:
+                    for split in self.SPLITS:
+                        split_counts[split] = 0
+                        with archive.open(question_members[split]) as raw:
+                            with io.TextIOWrapper(raw, encoding="utf-8") as text:
+                                for row in _questions(text):
+                                    if count % 1000 == 0:
+                                        checkpoints.append([count, offset])
+                                    row["split"] = split
+                                    line = (json.dumps(row, ensure_ascii=False, separators=(",", ":")) + "\n").encode("utf-8")
+                                    source.charge(len(line))
+                                    output.write(line)
+                                    offset += len(line)
+                                    count += 1
+                                    split_counts[split] += 1
+            staged.replace(records_path)
+            index = {"archive_sha256": digest.hexdigest(), "jsonl_bytes": offset,
+                     "total": count, "split_counts": split_counts,
+                     "checkpoints": checkpoints, "zip_prefix": prefix}
+            index_path.write_text(json.dumps(index, indent=2), encoding="utf-8")
+        finally:
+            staged.unlink(missing_ok=True)
+        return source
+
+    def _index(self) -> dict:
+        return json.loads((self._prepared() / "questions-index.json").read_text())
+
+    def _record(self, row: dict) -> Record:
+        split = row["split"]
+        index = row["question_index"]
+        filename = row["image_filename"]
+        if split not in self.SPLITS or not re.fullmatch(r"CLEVR_(train|val|test)_\d{6}\.png", filename):
+            raise ValueError("invalid CLEVR source image filename")
+        key = f"{split}:{index}"
+        asset_ref = f"images/{split}/{filename}"
+        aid = stable_id(self.dataset.id, self.revision, "asset", asset_ref)
+        rid = stable_id(self.dataset.id, self.revision, "example", key)
+        asset = Asset(id=aid, dataset_id=self.dataset.id, release_id=self.revision,
+                      modality="image", uri=asset_ref,
+                      metadata={"source_split": split, "source_image_filename": filename})
+        return Record(id=rid, dataset_id=self.dataset.id, release_id=self.revision,
+                      snapshot_id=self.dataset.snapshot_id, question=row.get("question"),
+                      asset_ids=[aid], assets=[asset], source=row)
+
+    def iter_records(self, source: PreparedSource, cursor: str | None = None,
+                     limit: int | None = None) -> RecordBatch:
+        index = self._index()
+        total = index["total"]
+        start = int(cursor or 0)
+        if not 0 <= start <= total:
+            raise ValueError("CLEVR cursor outside release")
+        size = min(limit or source.limit, source.limit, total - start)
+        checkpoint = max((item for item in index["checkpoints"] if item[0] <= start),
+                         default=[0, 0], key=lambda item: item[0])
+        rows: list[Record] = []
+        with (self._prepared() / "questions.jsonl").open("rb") as handle:
+            handle.seek(checkpoint[1])
+            for _ in range(start - checkpoint[0]):
+                handle.readline()
+            for _ in range(size):
+                line = handle.readline()
+                if not line:
+                    raise ValueError("truncated CLEVR question index")
+                source.charge(len(line))
+                rows.append(self._record(json.loads(line)))
+        end = start + len(rows)
+        return RecordBatch(rows, str(end) if end < total else None, len(rows))
+
+    def resolve_asset(self, source: PreparedSource, asset_ref: str) -> MediaHandle:
+        match = re.fullmatch(r"images/(train|val|test)/CLEVR_(train|val|test)_\d{6}\.png", asset_ref)
+        if not match or match.group(1) != match.group(2):
+            raise ValueError("invalid CLEVR asset reference")
+        prefix = self._index()["zip_prefix"]
+        member = prefix + asset_ref
+        with zipfile.ZipFile(self._archive()) as archive:
+            info = archive.getinfo(member)
+            if info.file_size > source.max_bytes - source.bytes_read:
+                raise ValueError("CLEVR image exceeds remaining byte budget")
+            data = archive.read(info)
+        source.charge(len(data))
+        if not data.startswith(b"\x89PNG\r\n\x1a\n"):
+            raise ValueError("CLEVR image member is not PNG")
+        return MediaHandle(data, "image/png", hashlib.sha256(data).hexdigest(), asset_ref)

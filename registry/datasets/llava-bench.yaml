@@ -1,0 +1,99 @@
+schema_version: '1.0'
+id: llava-bench
+name: LLaVA-Bench
+aliases: []
+description: 'Official LLaVA-Bench In-the-Wild: all 60 questions (conversation, detail, complex) linked to 24 images
+  and 24 context captions. This is distinct from LLaVA-Bench COCO; the entire 60-record release is the local preview.'
+paper_ids:
+- paper-25eaa8c74ce76800
+release: hf-9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b
+adapter: structured
+adapter_config:
+  path: work/sources/llava-bench/records.jsonl
+  format: jsonl
+  sha256: 1e7bb6d7e39c08135858dd51979f758b109150707df4a6c2baa5113455835710
+  media_root: work/sources/llava-bench/original
+  mapping:
+    id: question_id
+    question: question
+    media: media_path
+    media_modality: image
+  fields:
+    question_id: Original question ID
+    question: Original question
+    category: Official question category
+    source_image_name: Original image filename
+    context_caption: Author-provided image context caption
+    context_id: Original context image ID
+    image_sha256: SHA-256 of author image bytes
+  population: 'Official LLaVA-Bench In-the-Wild: all 60 questions (conversation, detail, complex) linked to 24 images
+    and 24 context captions. This is distinct from LLaVA-Bench COCO; the entire 60-record release is the local preview.'
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 60
+  total_count: 60
+  unit: example
+  blockers:
+  - HF Apache-2.0 tag does not establish every contributed photo's rights; media and records remain local pending
+    image-level review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  external_provider: local_only
+  source: https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild
+  note: HF Apache-2.0 tag does not establish every contributed photo's rights; media and records remain local pending
+    image-level review.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-e76e7c96d5cbb4e61933
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: 13, Sphinx, GPT-4V MMBench, LLaVA-Bench (Fu et al., 2024) PaliGemma-3B-Mix-448 —
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/tree/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b
+  note: LLaVA-Bench In-the-Wild image/question/context set, distinct from LLaVA-Bench COCO
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/tree/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b
+  note: author HF commit 9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/tree/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b
+  note: Author HF release directly accessible, about 9.96 MB total; files not downloaded in this audit.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+  probe: hf_tree_metadata_only
+- kind: source_audit_rights
+  url: https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/tree/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b
+  note: HF Apache-2.0 tag alone does not establish rights to every contributed/source photo; verify images and context
+    separately.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_release
+  url: https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild/resolve/9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b/questions.jsonl
+  note: Pinned author release; 60 local source rows, SHA-256 1e7bb6d7e39c08135858dd51979f758b109150707df4a6c2baa5113455835710.
+source_url: https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild
+snapshot_id: hf-9773b6fd2be88d4ced480dcd9bfd4ce76e47f79b-1e7bb6d7e39c
+modalities:
+- text
+- image
+tasks:
+- visual question answering
+- multimodal conversation

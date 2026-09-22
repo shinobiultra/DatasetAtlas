@@ -1,0 +1,115 @@
+schema_version: '1.0'
+id: iconqa
+name: IconQA (original three subtasks)
+aliases:
+- IconQA
+description: Author-hosted original IconQA ZIP with 107,439 diagram questions across image-choice,
+  text-choice, and fill-in-the-blank tasks. Every question retains its original PNG diagram and
+  image-choice assets where applicable. The separate Icon645 icon pretraining corpus is not included.
+paper_ids:
+- paper-2038cb87115b4fb0
+release: iconqa-original-v1-475f7651
+adapter: iconqa
+adapter_config:
+  archive: work/sources/iconqa/iconqa_data.zip
+  archive_sha256: 475f7651d9e2a86dee340e8b8b1d07b3d34abc7279c08bc7391196b49d4d348b
+  archive_url: https://iconqa2021.s3.us-west-1.amazonaws.com/iconqa_data.zip
+  archive_s3_etag: dd3c97ebc6266418e6316472ecb9a679-108
+  archive_last_modified: '2022-02-14T20:27:00Z'
+  prepared_root: work/sources/iconqa/prepared
+  preparation_budget_bytes: 3000000000
+  expected_records: 107439
+  expected_counts:
+    'train:choose_img': 34603
+    'train:choose_txt': 18946
+    'train:fill_in_blank': 10913
+    'val:choose_img': 11534
+    'val:choose_txt': 6316
+    'val:fill_in_blank': 3638
+    'test:choose_img': 11535
+    'test:choose_txt': 6316
+    'test:fill_in_blank': 3638
+  population: Complete original IconQA v1 author ZIP, 107,439 questions across three subtasks
+  fields:
+    split:
+      dtype: category
+      values: [train, val, test]
+      description: Original author train, validation, or test split
+    subtask:
+      dtype: category
+      values: [choose_img, choose_txt, fill_in_blank]
+      description: Original IconQA question type
+    problem_id:
+      dtype: string
+      description: Original problem directory ID within split and subtask
+    grade:
+      dtype: category
+      description: Author grade value from data.json
+    label:
+      dtype: category
+      description: Author reasoning skill label from data.json
+    ques_type:
+      dtype: category
+      description: Author task value from data.json, checked against archive path
+    answer:
+      dtype: object
+      description: Original answer; integer choice index or string fill-in response
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 107439
+  unit: example
+  blockers:
+  - The author README and included metadata.json each overstate the validation count by one;
+    the source ZIP has 11,534 validation image-choice examples and 21,488 validation examples overall.
+  - Public image/question publication needs review of CC BY-NC-SA 4.0 attribution and ShareAlike conditions.
+rights:
+  records: author_declares_CC_BY_NC_SA_4_0
+  annotations: author_declares_CC_BY_NC_SA_4_0
+  images: author_declares_CC_BY_NC_SA_4_0
+  source: https://github.com/lupantech/IconQA
+  note: The author README and included archive LICENSE.md declare CC BY-NC-SA 4.0 for IconQA;
+    local research access is enabled, public publication remains metadata-only pending rights review.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-5d70ca361253cefb0f65
+  paper_id: paper-2038cb87115b4fb0
+  source_file_hash: 51dcc13673e3b9b98e6b9cb67b07e584643259b69e50a0c028b1c7814a1ee676
+  page: 9
+  role: future-work example
+  excerpt: Similarly, icon datasets like IconQA (Lu et al., Outlier Suppression. Outlier suppression heads
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/lupantech/IconQA
+  note: 'Authors provide diagrams/questions and distinguish Icon645 pretraining dataset from IconQA. Release:
+    IconQA original three subtasks'
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_audit_rights
+  url: https://github.com/lupantech/IconQA
+  note: Authors explicitly license IconQA under CC BY-NC-SA 4.0.
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+source_url: https://github.com/lupantech/IconQA
+tasks:
+- diagram question answering
+- visual reasoning
+modalities:
+- image
+- text
+labels:
+- answer
+- reasoning skill
+- grade
+- split
+- subtask
+snapshot_id: iconqa-original-475f7651

@@ -1,0 +1,152 @@
+schema_version: '1.0'
+id: svhn
+name: SVHN
+aliases: []
+description: Street View House Numbers, original full-number PNG/bounding-box archive
+  or cropped 32x32 digit MAT files; keep formats separate.
+paper_ids:
+- paper-a47845c66d4a3f48
+release: svhn-cropped-train-test
+adapter: svhn_cropped_mat
+adapter_config:
+  root: work/sources/svhn
+  sha256:
+    train: 435e94d69a87fde4fd4d7f3dd208dfc32cb6ae8af2240d066de1df7508d083b8
+    test: cdce80dfb2a2c4c6160906d0bd7c68ec5a99d7ca4831afa54f09182025b6a75b
+  preparation_budget_bytes: 600000000
+  population: Official cropped 32x32 train (73,257) and test (26,032) digit examples;
+    extra split excluded
+  fields:
+    split:
+      dtype: category
+      description: Original Stanford split
+      values:
+      - train
+      - test
+    index:
+      dtype: number
+      description: Zero-based position within original MAT split
+    raw_label:
+      dtype: number
+      description: Original Stanford y value 1..10; 10 denotes the digit zero
+    digit:
+      dtype: category
+      description: Normalized digit class 0..9
+      values:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 9
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  unit: example
+  blockers:
+  - Original Stanford terms limit use to non-commercial purposes; public image examples
+    and redistribution remain unapproved.
+  - The optional extra split (531,131 images) is outside this pinned train/test release.
+  total_count: 99289
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: http://ufldl.stanford.edu/housenumbers/
+  note: Official download page marks both formats non-commercial use only; no redistribution
+    grant
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-2fcde5ba8a4a0d50c95e
+  paper_id: paper-a47845c66d4a3f48
+  source_file_hash: f1108a17f3cbbba7a93256ee725d68092c9a6d25204ca4faab92f6f0cbe1a4df
+  page: 8
+  role: evaluation
+  excerpt: 'on CIFAR-10 from the Model Zoo on three OOD datasets: CIFAR-100 [75],
+    SVHN [97], and Describable Textures Dataset [24]. We use the area under the ROC
+    curve (AUROC) to measure the succe'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-34b1a4845f1490165c6d
+  paper_id: paper-a47845c66d4a3f48
+  source_file_hash: f1108a17f3cbbba7a93256ee725d68092c9a6d25204ca4faab92f6f0cbe1a4df
+  page: 8
+  role: OOD evaluation
+  excerpt: 'models trained on CIFAR-10 from the Model Zoo on three OOD datasets: CIFAR-100
+    [75], SVHN [97], and Describable Textures Dataset [24]. We use the area under
+    the ROC curve (AUROC) to measure the success in the detec'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: http://ufldl.stanford.edu/housenumbers/
+  note: Street View House Numbers, original full-number PNG/bounding-box archive or
+    cropped 32x32 digit MAT files; keep formats separate
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: http://ufldl.stanford.edu/housenumbers/
+  note: Official Stanford release; train 73,257, test 26,032, extra 531,131 cropped
+    digits; no version tag/hash on page
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: http://ufldl.stanford.edu/housenumbers/
+  note: Direct train/test/extra links from Stanford source page; original and cropped
+    formats available; page fetched and inspected, downloads untested
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+  probe: official_page_read_download_unprobed
+- kind: source_audit_rights
+  url: http://ufldl.stanford.edu/housenumbers/
+  note: Official download page marks both formats non-commercial use only; no redistribution
+    grant
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_release
+  url: http://ufldl.stanford.edu/housenumbers/
+  note: Original cropped 32x32 MAT train and test files; extra split intentionally
+    excluded; source raw y=10 means digit 0.
+- kind: source_archive
+  url: http://ufldl.stanford.edu/housenumbers/train_32x32.mat
+  size_bytes: 182040794
+  md5: e26dedcc434d2e4c54c9b2d4a06d8373
+  sha256: 435e94d69a87fde4fd4d7f3dd208dfc32cb6ae8af2240d066de1df7508d083b8
+  note: Original Stanford MAT file; bounded transfer and official MD5 verified, local
+    SHA-256 pinned.
+- kind: source_archive
+  url: http://ufldl.stanford.edu/housenumbers/test_32x32.mat
+  size_bytes: 64275384
+  md5: eb5a983be6a315427106f1b164d9cef3
+  sha256: cdce80dfb2a2c4c6160906d0bd7c68ec5a99d7ca4831afa54f09182025b6a75b
+  note: Original Stanford MAT file; bounded transfer and official MD5 verified, local
+    SHA-256 pinned.
+- kind: local_preview
+  record_count: 100
+  distinct_asset_count: 100
+  source_scope: original cropped train split
+  pack_sha256: 708ef3c0de59da997c66c10ade68402e6ecc1fc05ca46b954ce666061bc45a01
+  note: Verified source-backed local preview with 100 PNG derivatives. Not a published
+    image pack.
+- kind: complete_index
+  record_count: 99289
+  source_scope: original cropped train and test splits
+  manifest_sha256: 6aa9650d76c4c50d380df8e8e36c633f2a0ca09a41cd7f128025d4e359cccfe8
+  parquet_sha256: 37f2a56e8d9e0c67cf05077859f10c91d77b4048b7da5b5aea7f61e6bcd1666d
+  note: Complete local index for the pinned two-file release; extra split excluded.
+source_url: http://ufldl.stanford.edu/housenumbers/
+snapshot_id: svhn-cropped-train-test-sha256-60d9973032afc71554b5fac75d00eb0410ec4267c4cd993adb31cc4faf2dcdf5

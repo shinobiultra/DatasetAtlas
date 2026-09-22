@@ -1,0 +1,53 @@
+schema_version: '1.0'
+id: pmc-vqa
+name: PMC-VQA
+aliases: []
+description: Original author repository describes 227k VQA pairs over 149k biomedical images from PMC.
+paper_ids:
+- paper-25eaa8c74ce76800
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/xiaoman-zhang/PMC-VQA
+  note: Underlying PMC article figures carry article-specific rights; no blanket figure license inferred.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-cfc798c0c374d1296ced
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 29
+  role: cited-study dataset in survey table
+  excerpt: ext, InstructBLIP VQA LingoQA, RS-VQA, PMC- VQA, DocVQA, VQAv2 Logit Lens (Jiang et al., 2024c)
+    LLaVA-1.5-7B, Shikra
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/xiaoman-zhang/PMC-VQA
+  note: 'Original author repository describes 227k VQA pairs over 149k biomedical images from PMC. Release:
+    PMC-VQA original medical VQA release'
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_audit_rights
+  url: https://github.com/xiaoman-zhang/PMC-VQA
+  note: Underlying PMC article figures carry article-specific rights; no blanket figure license inferred.
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+source_url: https://github.com/xiaoman-zhang/PMC-VQA

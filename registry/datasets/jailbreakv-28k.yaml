@@ -1,0 +1,98 @@
+schema_version: '1.0'
+id: jailbreakv-28k
+name: JailBreakV-28K
+aliases:
+- JailBreakV_28K
+- jailbreakv-28k-13161513
+description: Official 28,000-row JailBreakV CSV with source jailbreak queries, red-team queries, format and policy
+  fields, and original image references. Only references present in the small public image tree resolve individually;
+  the full image set is not public in this release.
+paper_ids:
+- paper-2df1203e2d3767bb
+release: hf-f949ca582fff13d396ac8fce59596afafb2b78d3
+adapter: structured
+adapter_config:
+  path: work/sources/jailbreakv-28k/records.jsonl
+  format: jsonl
+  sha256: cc2fda39e8362dc3bc697989d30a7f15271b64a5b0ac9fa8becc9841c8a94d1e
+  population: Official 28,000-row JailBreakV CSV with source jailbreak queries, red-team queries, format and policy
+    fields, and original image references. Only references present in the small public image tree resolve individually;
+    the full image set is not public in this release.
+  mapping:
+    id: id
+    text: jailbreak_query
+    media: media_path
+    media_modality: image
+  fields:
+    id: Official row ID
+    jailbreak_query: Original jailbreak query
+    redteam_query: Original harmful intent
+    format: Original attack format
+    policy: Original policy category
+    image_path: Original relative image reference
+  media_root: work/sources/jailbreakv-28k/media
+  media_base_url: https://huggingface.co/datasets/JailbreakV-28K/JailBreakV-28k/resolve/f949ca582fff13d396ac8fce59596afafb2b78d3/JailBreakV_28K
+  media_revision: f949ca582fff13d396ac8fce59596afafb2b78d3
+  media_allowed_hosts:
+  - huggingface.co
+  - us.aws.cdn.hf.co
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: partial_media
+  publication: metadata_only
+  preview_count: 100
+  total_count: 28000
+  unit: example
+  blockers:
+  - The public pinned Hub tree exposes only 267 PNG files; most of the 28,000 CSV image references are absent. Complete
+    text rows are browsable, but multimodal media coverage is partial.
+  - Sensitive prompts and image rights require publication review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  external_provider: local_only
+  source: https://huggingface.co/datasets/JailbreakV-28K/JailBreakV-28k
+  note: Local source access does not authorize public record or media redistribution.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-cf91c6888c3690038c70
+  paper_id: paper-2df1203e2d3767bb
+  source_file_hash: 4f39bf0ce4653e2237f45d5373a7d33340d8e6510dbff31ebb4d16fc9f7cad13
+  page: 6
+  role: source data
+  excerpt: 'of Multimodal Adversarial Attacks for Vision-Language Models We collected more than 7 000 harmful intents
+    from the following benchmarks: JailBreakV_28K [19], MM- SafetyBench [2], OmniSafeBench-MM [4], and SafeBench
+    [33]. Moreover, we added 747 intents related to th'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-fd7b7e7e90ab5fde29d9
+  paper_id: paper-2df1203e2d3767bb
+  source_file_hash: 4f39bf0ce4653e2237f45d5373a7d33340d8e6510dbff31ebb4d16fc9f7cad13
+  page: 6
+  role: harmful intent source
+  excerpt: 'odels We collected more than 7 000 harmful intents from the following benchmarks: JailBreakV_28K [19],
+    MM- SafetyBench [2], OmniSafeBench-MM [4], and SafeBench [33]. Moreover, we added 747 intents related to the
+    new'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_release
+  url: https://huggingface.co/datasets/JailbreakV-28K/JailBreakV-28k
+  note: Pinned hf-f949ca582fff13d396ac8fce59596afafb2b78d3; 28000 rows; derived SHA-256 cc2fda39e8362dc3bc697989d30a7f15271b64a5b0ac9fa8becc9841c8a94d1e.
+snapshot_id: hf-f949ca582fff13d396ac8fce59596afafb2b78d3-cc2fda39e836
+source_url: https://huggingface.co/datasets/JailbreakV-28K/JailBreakV-28k
+modalities:
+- text
+- image
+relationships:
+- type: alias_redirect
+  alias_id: jailbreakv-28k-13161513
+  reason: Both spellings cite the same JailBreakV_28K source sentence on PHANTOM p6.
+  evidence_ids:
+  - evidence-cf91c6888c3690038c70
+  - evidence-fd7b7e7e90ab5fde29d9

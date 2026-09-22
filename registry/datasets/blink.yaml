@@ -1,0 +1,98 @@
+schema_version: '1.0'
+id: blink
+name: BLINK
+aliases: []
+description: 'Official BLINK release across all 14 visual perception tasks and both val/test splits: 3,807 source
+  rows and 7,358 real embedded image occurrences. Test answers marked hidden by the author remain hidden; no answer
+  is inferred.'
+paper_ids:
+- paper-25eaa8c74ce76800
+release: hf-a3666eb249237ba3d5eca8db21176cc47967e040
+adapter: embedded_parquet
+adapter_config:
+  path: work/sources/blink/records.parquet
+  sha256: 692ab907f30faa05ce86f50de8855ac3975602e784ff9ffd357cc66c433f1383
+  format: parquet
+  mapping:
+    id: source_id
+    question: question
+    choices: choices
+  fields:
+    source_id: Task/split/original-ID key
+    task: Official BLINK task
+    split: Original val or test split
+    source_file: Pinned author Parquet path
+    idx: Original source ID
+    question: Original question
+    sub_task: Original subtask label
+    choices: Original answer choices
+    answer: Original author answer or hidden marker
+    prompt: Author prompt
+    explanation: Author explanation
+    source_image_columns: Original image column order
+    images: Original embedded image metadata
+  population: 'Official BLINK release across all 14 visual perception tasks and both val/test splits: 3,807 source
+    rows and 7,358 real embedded image occurrences. Test answers marked hidden by the author remain hidden; no answer
+    is inferred.'
+  media_columns:
+  - images
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 3807
+  unit: example
+  blockers:
+  - Author card Apache-2.0 does not clear every underlying image source; records/media local, publication metadata-only.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  external_provider: local_only
+  source: https://huggingface.co/datasets/BLINK-Benchmark/BLINK
+  note: Author card Apache-2.0 does not clear every underlying image source; records/media local, publication metadata-only.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-2c66ca06b429021ee51d
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 29
+  role: cited-study dataset in survey table
+  excerpt: 25) LLaVA, Qwen-VL Classification, VQA BLINK, NaturalBench (Luo et al., 2024) LLaVA, Mantis-Fuyu
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK
+  note: Author HF dataset links official evaluation code and 2024 paper; corpus appearance is survey table of cited
+    studies
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_located
+- kind: source_audit_rights
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK
+  note: HF dataset/media terms and source image rights not verified here
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_located
+- kind: source_audit_access
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK
+  note: public; Preserve cited-study role; pin release revision/subtasks only for later direct use.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_located
+- kind: source_release
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK
+  note: Pinned official author release, 3807 test/val records, derived SHA-256 692ab907f30faa05ce86f50de8855ac3975602e784ff9ffd357cc66c433f1383.
+source_url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK
+snapshot_id: hf-a3666eb249237ba3d5eca8db21176cc47967e040-692ab907f30f
+modalities:
+- text
+- image
+tasks:
+- visual perception
+- visual reasoning

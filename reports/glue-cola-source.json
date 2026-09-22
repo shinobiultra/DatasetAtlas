@@ -1,0 +1,16 @@
+{
+  "dataset_id": "glue-cola",
+  "source_sha256": {
+    "CoLA.zip": "f212fcd832b8f7b435fb991f101abf89f96b933ab400603bf198960dfc32cbff"
+  },
+  "converted_sha256": "6eb61fa7e7466bf3c5c1faf4283430008b90444abf92f01974de8b489b8bfcdc",
+  "count": 10657,
+  "counts_by_split": {
+    "train": 8551,
+    "dev": 1043,
+    "test": 1063
+  },
+  "distinct_upstream_ids": 0,
+  "preview_records": 100,
+  "scope": "Official GLUE ZIP train/dev/test task files, original TSV columns preserved, withheld test labels null. Auxiliary original/tokenized copies in CoLA ZIP are not double-counted. Release is pinned by downloaded archive SHA-256, not an inferred paper-specific subset."
+}

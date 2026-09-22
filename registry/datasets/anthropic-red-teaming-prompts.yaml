@@ -1,0 +1,64 @@
+schema_version: '1.0'
+id: anthropic-red-teaming-prompts
+name: Anthropic red-teaming prompts
+aliases: []
+description: Official Anthropic red-team-attempt transcripts and ratings, not the citing paper's 1,000-response
+  selection. The official gzip is a JSON array despite its jsonl.gz name.
+paper_ids:
+- paper-12e8bd34b4a2f2a8
+release: hf-09be8c5bbc57cb3887f3a9732ad6aa7ec602a1fa
+adapter: structured
+adapter_config:
+  path: work/sources/anthropic-red-teaming-prompts/records.jsonl
+  format: jsonl
+  sha256: 361e0c67cba0ecc3ac7134bbad25ce28fe49d228fbc7832d58fa7b1370b4a780
+  population: Official Anthropic red-team-attempt transcripts and ratings, not the citing paper's 1,000-response
+    selection. The official gzip is a JSON array despite its jsonl.gz name.
+  mapping:
+    id: source_row
+    text: task_description
+  fields:
+    source_row: One-based row number in official Anthropic source
+    transcript: Complete original red-team conversation transcript
+    task_description: Original red-team task description
+    rating: Original source rating
+    min_harmlessness_score_transcript: Original source transcript score
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
+  publication: metadata_only
+  preview_count: 100
+  total_count: 38961
+  unit: example
+  blockers:
+  - Sensitive red-team conversations are local only pending publication review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_applicable
+  external_provider: local_only
+  source: https://huggingface.co/datasets/Anthropic/hh-rlhf
+  note: Local source access does not authorize public record or media redistribution.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-7da0fe69d78dd95c00b9
+  paper_id: paper-12e8bd34b4a2f2a8
+  source_file_hash: e651ef9944539b513a21a8b7a1b5a62f88b7355a6cce81fde112f57c96c28cf7
+  page: 20
+  role: additional prompt evaluation
+  excerpt: 'ality of the jailbreak. Table 8: We examine the rate at which the 1000 responses to Anthropic red-teaming
+    prompts were flagged by the OpenAI Content Moderation API. We also use the OpenAssistant/reward-model-deberta-v3-large-v2
+    reward mod'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_release
+  url: https://huggingface.co/datasets/Anthropic/hh-rlhf
+  note: Pinned hf-09be8c5bbc57cb3887f3a9732ad6aa7ec602a1fa; 38961 rows; derived SHA-256 361e0c67cba0ecc3ac7134bbad25ce28fe49d228fbc7832d58fa7b1370b4a780.
+snapshot_id: hf-09be8c5bbc57cb3887f3a9732ad6aa7ec602a1fa-361e0c67cba0
+source_url: https://huggingface.co/datasets/Anthropic/hh-rlhf
+modalities:
+- text

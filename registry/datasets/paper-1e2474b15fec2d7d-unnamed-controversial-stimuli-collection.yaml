@@ -1,0 +1,123 @@
+schema_version: '1.0'
+id: paper-1e2474b15fec2d7d-unnamed-controversial-stimuli-collection
+name: Golan controversial stimuli shown to participants
+aliases: []
+description: 'Author-released Experiment 1 MNIST and Experiment 2 CIFAR-10 stimuli actually presented
+  in behavioral experiments: 820 plus 1,043 PNG paths. The source archive also contains more synthesized
+  candidates and response CSVs, which this index does not conflate with displayed stimuli.'
+paper_ids:
+- paper-1e2474b15fec2d7d
+release: e90062775c5ca243ef5407f338ed05e758d21447
+adapter: csv
+adapter_config:
+  path: /home/bitwise/Documents/vibe/DatasetAtlas/work/sources/golan/presented_index.csv
+  format: csv
+  sha256: 9e4aadbd50e4453cf173a242f1b7f64d170800e92bc129e8d35bbb29a576bb23
+  mapping:
+    id: path
+    media: path
+    media_modality: image
+  fields:
+    path:
+      description: Author repository path
+      dtype: string
+    experiment:
+      description: MNIST Experiment 1 or CIFAR-10 Experiment 2
+      dtype: string
+    replication:
+      description: Experiment 2 replication a or b; blank for Experiment 1
+      dtype: string
+    stimulus_kind:
+      description: Synthesized controversial stimulus or natural control
+      dtype: string
+    source_sha256:
+      description: Original source image SHA-256
+      dtype: string
+  population: 'Author-released Experiment 1 MNIST and Experiment 2 CIFAR-10 stimuli actually presented
+    in behavioral experiments: 820 plus 1,043 PNG paths. The source archive also contains more synthesized
+    candidates and response CSVs, which this index does not conflate with displayed stimuli.'
+  selection_note: 'Deterministic alternating source order: first 50 MNIST Experiment 1 and 50 CIFAR-10
+    Experiment 2 rows in the 100-image preview; full local index retains all 1,863 presented files.'
+  media_root: /home/bitwise/Documents/vibe/DatasetAtlas/work/sources/golan/presented
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: local_only
+  complete_data: presented_stimuli_indexed
+  publication: metadata_only
+  preview_count: 100
+  unit: example
+  blockers:
+  - Media republication rights are not verified.
+  - This index excludes non-presented synthesized candidates and participant response files.
+  total_count: 1863
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/kriegeskorte-lab/PNAS_2020_Controversial_Stimuli
+  note: Author repo publishes original PNGs without an identified dataset media license; natural controls
+    derive from MNIST/CIFAR-10. Local preview only.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-cedfcbbf9b6f4138d63d
+  paper_id: paper-1e2474b15fec2d7d
+  source_file_hash: ada9a023bec3a045996c2660092bd2e4c1a28380b76315ad0d97051c119bd9ce
+  page: 4
+  role: derived collection
+  excerpt: ' MNIST models Candidate MNIST models. We assembled a set of Figure 2: Synthetic controversial
+    stimuli for one digit pair and all nine candidate models, all trained on MNIST (Ta- pairs of MNIST
+    models (Experiment'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-f7e144faf55c829dedb5
+  paper_id: paper-1e2474b15fec2d7d
+  source_file_hash: ada9a023bec3a045996c2660092bd2e4c1a28380b76315ad0d97051c119bd9ce
+  page: 5
+  role: introduced derived stimuli
+  excerpt: ations between MNIST models and human perception. For each pair of models, we formed 90 controversial
+    stimuli, targeting all possible pairs of classes. In Experiment 1, the classes are the ten digits.
+    Fig. 2 shows the results of this proce
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/kriegeskorte-lab/PNAS_2020_Controversial_Stimuli
+  note: Golan controversial MNIST/CIFAR-10 stimuli and human results
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_identified
+- kind: source_audit_release
+  url: https://github.com/kriegeskorte-lab/PNAS_2020_Controversial_Stimuli
+  note: Paper p5 generated 90 stimuli per MNIST model pair; original author repository links Experiment
+    1 MNIST and Experiment 2 CIFAR-10 synthesized stimuli and behavioral results, despite paper p10 future
+    tense
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_identified
+- kind: source_audit_access
+  url: https://github.com/kriegeskorte-lab/PNAS_2020_Controversial_Stimuli
+  observation: author_repo_release_public
+  requires_external_access_step: null
+  download_or_media_inspected: false
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_identified
+- kind: source_audit_rights
+  url: https://github.com/kriegeskorte-lab/PNAS_2020_Controversial_Stimuli
+  note: Repository does not state a verified license for these image/result files; parent MNIST/CIFAR
+    data rights remain distinct
+  publication_decision: media_not_approved
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_identified
+- kind: local_source_snapshot
+  url: https://github.com/kriegeskorte-lab/PNAS_2020_Controversial_Stimuli
+  note: Pinned source revision e90062775c5ca243ef5407f338ed05e758d21447; local source index /home/bitwise/Documents/vibe/DatasetAtlas/work/sources/golan/presented_index.csv;
+    SHA-256 9e4aadbd50e4453cf173a242f1b7f64d170800e92bc129e8d35bbb29a576bb23; population 1863 rows.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+source_url: https://github.com/kriegeskorte-lab/PNAS_2020_Controversial_Stimuli
+snapshot_id: golan-presented-e90062775c5ca243

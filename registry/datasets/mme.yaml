@@ -1,0 +1,95 @@
+schema_version: '1.0'
+id: mme
+name: MME
+aliases: []
+description: Original MME multimodal perception/cognition benchmark, not Video-MME
+  or later MME-family releases.
+paper_ids:
+- paper-32cea5e43d940514
+- paper-f03c5ad315e6d835
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - The official project is identified, but the exact data archive, revision, access
+    and rights remain unverified.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://mme-benchmark.github.io/home_page.html
+  note: No dataset license established; site's CC BY-SA footer licenses website, not
+    necessarily benchmark images/annotations
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-26c8edebedb1e8b7dbaa
+  paper_id: paper-32cea5e43d940514
+  source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
+  page: 5
+  role: evaluation
+  excerpt: AS L ENS (T) ✓ 16.3 27.6 26.9 21.2 use ImageNette [29] and VLMEvalKit MME
+    [12]- D E B IAS L ENS (I+T) ✓ 16.2 25.1 19.9 24.2 measured with the sum of perception
+    and reasoning scores, M
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-19dde8a7a56a0e66a4bf
+  paper_id: paper-f03c5ad315e6d835
+  source_file_hash: 47431d9340ff27b9234e2184711fbc3fc06ded7718fe53ca79b23a1cd1db777d
+  page: 8
+  role: evaluation
+  excerpt: 025 Gender Bias ↓ General Performance ↑ P. Traits Skills Occ. MMBench MME
+    MMMU Seed-Bench-2 Original 0.86 0.48 0.56 0.60 1773.55 0.26 0.50 Prompt Engineering
+    0.80 0.40 0.41 0.53 -10.9
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-e7794def5159feb1aa50
+  paper_id: paper-32cea5e43d940514
+  source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
+  page: 5
+  role: general utility evaluation
+  excerpt: ) ✓ 16.3 27.6 26.9 21.2 use ImageNette [29] and VLMEvalKit MME [12]- D
+    E B IAS L ENS (I+T) ✓ 16.2 25.1 19.9 24.2 measured with
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://mme-benchmark.github.io/home_page.html
+  note: Original MME multimodal perception/cognition benchmark, not Video-MME or later
+    MME-family releases
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_project_resolved_data_release_unverified
+- kind: source_audit_release
+  url: https://mme-benchmark.github.io/home_page.html
+  note: Original 2023 project lists fourteen subtasks and manually designed instruction-answer
+    annotations; no immutable data release verified
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_project_resolved_data_release_unverified
+- kind: source_audit_access
+  url: https://mme-benchmark.github.io/home_page.html
+  note: Project page links a GitHub dataset location; linked repository fetch failed
+    during this check, so file-level availability unverified
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_project_resolved_data_release_unverified
+- kind: source_audit_rights
+  url: https://mme-benchmark.github.io/home_page.html
+  note: No dataset license established; site's CC BY-SA footer licenses website, not
+    necessarily benchmark images/annotations
+  audit_file: work/sources/source-audit-jobs.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_project_resolved_data_release_unverified
+source_url: https://mme-benchmark.github.io/home_page.html

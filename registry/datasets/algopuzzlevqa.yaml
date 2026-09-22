@@ -1,0 +1,62 @@
+schema_version: '1.0'
+id: algopuzzlevqa
+name: AlgopuzzleVQA
+aliases: []
+description: AlgoPuzzleVQA algorithmic visual puzzle dataset. Author group also maintains LLM-PuzzleTest
+  code; corpus cites this as related-work comparison, not a direct run
+paper_ids:
+- paper-20de77d4e60fd1bd
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: source_page_public_data_unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Public source page located; exact paper-used data revision or archive is unverified.
+  - Public data/media reuse rights require separate review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://huggingface.co/datasets/declare-lab/AlgoPuzzleVQA
+  note: HF card/repo rights and puzzle image generation terms require release-level review
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-7caf48ea7cdbebea6c5d
+  paper_id: paper-20de77d4e60fd1bd
+  source_file_hash: ccc6f6fee4214f0656c164535cbe29f1cbbce5769b311c93f08e1110437f29e0
+  page: 8
+  role: related-work comparison
+  excerpt: ', InternVL3.5-8B 0.1 23.35 14.98 34.53 20.70 2024), and AlgopuzzleVQA (Ghosal et al., 2024)
+    empha- InternVL3.5-8B 0.6 23.68 16.15 33.13 20.70 size the model’s r'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://huggingface.co/datasets/declare-lab/AlgoPuzzleVQA
+  note: Author group also maintains LLM-PuzzleTest code; corpus cites this as related-work comparison,
+    not a direct run
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_located
+- kind: source_audit_rights
+  url: https://huggingface.co/datasets/declare-lab/AlgoPuzzleVQA
+  note: HF card/repo rights and puzzle image generation terms require release-level review
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_located
+- kind: source_audit_access
+  url: https://huggingface.co/datasets/declare-lab/AlgoPuzzleVQA
+  note: source_page_public_data_unverified; Pin HF revision and puzzle subtype if later used; preserve
+    related-work-only role.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_release_located
+source_url: https://huggingface.co/datasets/declare-lab/AlgoPuzzleVQA

@@ -1,0 +1,63 @@
+schema_version: '1.0'
+id: illusionbench-3c643c29
+name: IllusionBench
+aliases: []
+description: Zhang IllusionBench paper title, possibly IllusionBench+ revision. Original Zhang paper describes
+  1,051 images/5,548 QA/1,051 descriptions; corpus mention cites Zhang 2025, while a local paper title
+  uses IllusionBench+
+paper_ids:
+- paper-2c07a8c6af8e33c2
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: author_source_checked_release_unverified
+  access: source_page_public_data_unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Public source page located; exact paper-used data revision or archive is unverified.
+  - Public data/media reuse rights require separate review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://arxiv.org/abs/2501.00848
+  note: No original release/version and source-image rights confirmed for this particular name
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-1724d7392bf0fc4c7928
+  paper_id: paper-2c07a8c6af8e33c2
+  source_file_hash: 46f3b325eda29bc401398f275242e175e3576fd32fc6d037fe589341aea00542
+  page: 2
+  role: related-work mention
+  excerpt: S-V (Das et al., 2024) and 2025; Liao et al., 2025) and multi-task train- IllusionBench (Zhang
+    et al., 2025). ing (Rao et al., 2024; Wang et al., 2023; Ma et al.,
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://arxiv.org/abs/2501.00848
+  note: Original Zhang paper describes 1,051 images/5,548 QA/1,051 descriptions; corpus mention cites
+    Zhang 2025, while a local paper title uses IllusionBench+
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_paper_located_variant_relation_unresolved
+- kind: source_audit_rights
+  url: https://arxiv.org/abs/2501.00848
+  note: No original release/version and source-image rights confirmed for this particular name
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_paper_located_variant_relation_unresolved
+- kind: source_audit_access
+  url: https://arxiv.org/abs/2501.00848
+  note: source_page_public_data_unverified; Compare authors, images and release before any merge with
+    IllusionBench+; keep related-work role.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: author_paper_located_variant_relation_unresolved
+source_url: https://arxiv.org/abs/2501.00848

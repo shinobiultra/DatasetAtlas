@@ -1,8 +1,13 @@
 """Read-only registry and immutable pack loading."""
 from pathlib import Path
 import json
+import time
 import yaml
 from dataset_atlas.models import Dataset, Pack
+
+# Registry YAML changes are rare and human-paced; stat-ing every file on every
+# lookup is not. Resolving a 100-record selection used to sweep 33,600 files.
+BASELINE_RECHECK_SECONDS = 0.5
 
 class Registry:
     def __init__(self, root: Path):
@@ -12,7 +17,22 @@ class Registry:
         self._packs={}
         self._active_datasets={}
         self._by_id={}
+        self._baseline_checked=0.0
+        self._versions={}
+    def refresh(self):
+        """Force the next lookup to re-read registry files regardless of the recheck window."""
+        self._baseline_checked=0.0
+    def has(self, dataset_id) -> bool:
+        self._refresh_baseline()
+        return dataset_id in self._by_id
+    def ids(self) -> list[str]:
+        """Catalogue IDs without resolving any prepared version; cheap enough to call per lookup."""
+        self._refresh_baseline()
+        return list(self._by_id)
     def _refresh_baseline(self):
+        now=time.monotonic()
+        if self._signature is not None and now-self._baseline_checked<BASELINE_RECHECK_SECONDS:return
+        self._baseline_checked=now
         files=sorted((self.root/'registry/datasets').glob('*.yaml'))
         signature=tuple((str(p),p.stat().st_mtime_ns,p.stat().st_size) for p in files)
         if signature!=self._signature:
@@ -51,17 +71,22 @@ class Registry:
 
     def versions(self, dataset_id):
         self._refresh_baseline()
-        baseline=next((d for d in self._datasets if d.id==dataset_id),None)
+        baseline=self._by_id.get(dataset_id)
         if baseline is None:raise KeyError(dataset_id)
-        versions=[]
         active=self.active_directory(dataset_id)
         directories=sorted((self.root/'work/prepared'/dataset_id).glob('*/dataset.json'))
         if active:directories.sort(key=lambda p:p.parent!=active)
+        # Re-read only when a version document or the baseline actually changed.
+        signature=(self._signature and id(self._datasets),str(active),tuple((str(p),p.stat().st_mtime_ns,p.stat().st_size) for p in directories))
+        cached=self._versions.get(dataset_id)
+        if cached is not None and cached[0]==signature:return list(cached[1])
+        versions=[]
         for path in directories:
             dataset=Dataset.model_validate_json(path.read_text())
             versions.append((self._resolved(dataset),path.parent/'pack/pack.json',path.parent/'snapshot'))
         versions.append((self._resolved(baseline),self.root/'work/packs'/dataset_id/'pack.json',self.root/'work/snapshots'/dataset_id))
-        return versions
+        self._versions[dataset_id]=(signature,versions)
+        return list(versions)
     def dataset_version(self, dataset_id, release_id):
         for dataset,_,_ in self.versions(dataset_id):
             if dataset.release==release_id:return dataset

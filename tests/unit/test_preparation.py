@@ -1,5 +1,6 @@
 import hashlib
 import json
+import os
 from pathlib import Path
 import pyarrow as pa
 import pyarrow.parquet as pq
@@ -170,3 +171,73 @@ def test_source_recipe_restricts_release_split(monkeypatch,tmp_path):
     plan=PreparationManager(tmp_path).plan(dataset.id,1000,1000)
     assert plan['ready'] and plan['expected_count']==150 and plan['expected_download_bytes']==100
     assert plan['scope']=='Development split only' and len(plan['files'])==1
+
+
+def test_refresh_metadata_is_idempotent_and_prune_removes_only_unreachable_versions(tmp_path):
+    import shutil
+    dataset = fixture(tmp_path)
+    manager = PreparationManager(tmp_path)
+    plan = manager.plan(dataset.id, 1_000_000, 1_000_000)
+    run(tmp_path, plan['id'])
+    registry = Registry(tmp_path)
+    active = registry.active_directory(dataset.id)
+    # Reproduce the out-of-tree edit: a hard-linked twin with rewritten metadata, made active.
+    twin = active.parent / (active.name + '-metadata-v2')
+    shutil.copytree(active, twin, copy_function=os.link)
+    (active.parent / 'active.json').write_text(json.dumps({'version': twin.name}))
+    # A failed run leaves its directory behind too.
+    failed = active.parent / ('deadbeef' * 8)
+    failed.mkdir()
+    (failed / 'dataset.json').write_text(json.dumps({**json.loads((active / 'dataset.json').read_text()), 'snapshot_id': 'never-activated'}))
+    (failed / 'junk.bin').write_bytes(b'x' * 4096)
+    (manager.directory / failed.name).mkdir()
+    (manager.directory / failed.name / 'status.json').write_text(json.dumps({'status': 'failed'}))
+
+    first = manager.refresh_metadata(dataset.id, active.name, activate=True)
+    second = manager.refresh_metadata(dataset.id, active.name)
+    assert first['active'] and second['active'] and first['snapshot_id'] == second['snapshot_id']
+    document = json.loads((active / 'dataset.json').read_text())
+    assert sum(item.get('kind') == 'local_preparation' for item in document['evidence']) == 1
+    assert json.loads((active / 'receipt.json').read_text())['metadata_version'] == 2
+    assert json.loads((active / 'pack/pack.json').read_text())['dataset']['adapter_config'] == {}
+    assert registry.active_directory(dataset.id) == active
+
+    preview = manager.prune()
+    reasons = {entry['version']: entry['reason'] for entry in preview['removable']}
+    assert reasons[twin.name] == 'duplicate of active snapshot'
+    assert reasons[failed.name] == 'failed'
+    assert all(entry['version'] != active.name for entry in preview['removable'])
+    # The twin shares every source/snapshot inode with the retained version, so it frees only the
+    # documents the refresh rewrote (now unique to it); the failed run frees its whole payload.
+    twin_entry = next(entry for entry in preview['removable'] if entry['version'] == twin.name)
+    failed_entry = next(entry for entry in preview['removable'] if entry['version'] == failed.name)
+    assert 0 < twin_entry['freed_bytes'] < 1_000_000 and failed_entry['freed_bytes'] >= 4096
+    assert twin.exists() and failed.exists()
+
+    result = manager.prune(execute=True)
+    assert result['executed'] and not twin.exists() and not failed.exists() and active.exists()
+    assert registry.dataset(dataset.id).snapshot_id == first['snapshot_id']
+
+
+def test_prune_keeps_superseded_versions_a_saved_selection_still_references(tmp_path):
+    import shutil, sqlite3
+    dataset = fixture(tmp_path)
+    manager = PreparationManager(tmp_path)
+    plan = manager.plan(dataset.id, 1_000_000, 1_000_000)
+    run(tmp_path, plan['id'])
+    registry = Registry(tmp_path)
+    old = registry.active_directory(dataset.id)
+    new = old.parent / 'newer-version'
+    shutil.copytree(old, new)
+    document = json.loads((new / 'dataset.json').read_text()); document.update(release='new', snapshot_id='new-snapshot')
+    (new / 'dataset.json').write_text(json.dumps(document))
+    (old.parent / 'active.json').write_text(json.dumps({'version': new.name}))
+    db = sqlite3.connect(tmp_path / 'work/atlas.sqlite')
+    db.execute('CREATE TABLE IF NOT EXISTS selections (id TEXT PRIMARY KEY, body TEXT NOT NULL)')
+    old_snapshot = json.loads((old / 'dataset.json').read_text())['snapshot_id']
+    db.execute('INSERT INTO selections VALUES (?,?)', ('s1', json.dumps({'id': 's1', 'ids': ['x'], 'unit': 'example', 'snapshot_ids': [old_snapshot], 'dataset_ids': [dataset.id], 'created_at': 'now'})))
+    db.commit(); db.close()
+    report = manager.prune()
+    retained = {entry['version']: entry['reason'] for entry in report['retained']}
+    assert retained[old.name] == 'referenced by a saved selection'
+    assert not report['removable']

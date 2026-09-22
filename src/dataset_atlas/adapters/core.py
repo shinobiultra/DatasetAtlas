@@ -835,6 +835,17 @@ def get_adapter(dataset: Dataset) -> DatasetAdapter:
 
 
 _PREPARED_ADAPTERS: dict[str, DatasetAdapter] = {}
+_DECODED_CACHES: dict[str, BoundedCache] = {}
+
+
+def _decoded_cache(cache_root: Path) -> BoundedCache:
+    """The media endpoint is the hottest route; reuse its cache handle per root."""
+    key = str(Path(cache_root).resolve())
+    cache = _DECODED_CACHES.get(key)
+    if cache is None:
+        cache = BoundedCache(cache_root, max_bytes=1_000_000_000)
+        _DECODED_CACHES[key] = cache
+    return cache
 
 
 def resolve_dataset_asset(dataset: Dataset, asset_ref: str,
@@ -848,7 +859,7 @@ def resolve_dataset_asset(dataset: Dataset, asset_ref: str,
     if max_bytes < 1 or max_bytes > 250_000_000:
         raise ValueError("invalid per-asset byte budget")
     key = hashlib.sha256(dataset.model_dump_json().encode()).hexdigest()
-    cache = BoundedCache(cache_root,max_bytes=1_000_000_000) if cache_root is not None else None
+    cache = _decoded_cache(cache_root) if cache_root is not None else None
     identity=CacheIdentity(key,asset_ref,'decoded-original-v1')
     if cache:
         cached=cache.get(identity)

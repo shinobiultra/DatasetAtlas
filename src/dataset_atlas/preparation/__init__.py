@@ -206,11 +206,20 @@ class PreparationManager:
         pid = value.get('pid')
         alive = False
         if pid:
-            try:
-                command = Path(f'/proc/{pid}/cmdline').read_bytes()
-                alive = identity.encode() in command and b'dataset_atlas.preparation.worker' in command
-            except OSError:
-                pass
+            proc = Path(f'/proc/{pid}/cmdline')
+            if proc.exists():
+                try:
+                    command = proc.read_bytes()
+                    alive = identity.encode() in command and b'dataset_atlas.preparation.worker' in command
+                except OSError:
+                    pass
+            else:
+                # No procfs (macOS): a live PID is the best available signal.
+                try:
+                    os.kill(pid, 0)
+                    alive = True
+                except OSError:
+                    alive = False
         if value['status'] == 'running' and not alive:
             receipt=directory/'resource-error.receipt'
             reason=json.loads(receipt.read_text()).get('message') if receipt.is_file() else 'Worker is no longer running; retry reuses verified downloads.'
@@ -237,6 +246,127 @@ class PreparationManager:
         (directory / 'cancel').touch()
         # Worker sees this during transfers and between record batches.
         return self.status(identity)
+
+
+    def version_directory(self, dataset_id, identity):
+        if '/' in dataset_id or '\\' in dataset_id or dataset_id in {'.', '..'}:
+            raise ValueError('Invalid dataset ID')
+        if not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]*', identity):
+            raise ValueError('Invalid prepared version')
+        directory = (self.root / 'work/prepared' / dataset_id / identity).resolve()
+        if directory.parent != (self.root / 'work/prepared' / dataset_id).resolve() or not (directory / 'dataset.json').is_file():
+            raise FileNotFoundError('Prepared version not found')
+        return directory
+
+    def refresh_metadata(self, dataset_id, identity, *, activate=False):
+        """Re-derive a completed version's catalogue metadata from its own receipt.
+
+        The worker's index and sources are immutable; only the derived coverage
+        and evidence in dataset.json/pack.json can change when the derivation
+        code improves. Doing that here, idempotently, keeps every active version
+        reproducible from the repository instead of from an ad-hoc edit.
+        """
+        from dataset_atlas.models import Dataset, Pack
+        directory = self.version_directory(dataset_id, identity)
+        receipt = json.loads((directory / 'receipt.json').read_text())
+        dataset = Dataset.model_validate_json((directory / 'dataset.json').read_text())
+        if dataset.id != dataset_id or dataset.snapshot_id != receipt['snapshot_id']:
+            raise ValueError('Prepared version identity does not match its receipt')
+        dataset.evidence = [item for item in dataset.evidence
+                            if not (item.get('kind') == 'local_preparation' and item.get('snapshot_id') == dataset.snapshot_id)]
+        dataset = prepared_metadata(dataset, receipt['scope'])
+        pack_path = directory / 'pack/pack.json'
+        pack = Pack.model_validate_json(pack_path.read_text())
+        pack.dataset = dataset.model_copy(update={'adapter_config': {}})
+        atomic(directory / 'dataset.json', dataset.model_dump(mode='json'))
+        atomic(pack_path, pack.model_dump(mode='json'))
+        receipt['metadata_version'] = 2
+        receipt['metadata_refreshed_at'] = time.time()
+        atomic(directory / 'receipt.json', receipt)
+        if activate:
+            atomic(directory.parent / 'active.json', {'version': identity})
+        return {'dataset_id': dataset_id, 'version': identity, 'snapshot_id': dataset.snapshot_id,
+                'active': json.loads((directory.parent / 'active.json').read_text())['version'] == identity if (directory.parent / 'active.json').is_file() else False}
+
+    def _referenced_snapshots(self):
+        """Snapshot IDs that saved selections still point at; those versions are pinned."""
+        import sqlite3
+        path = self.root / 'work/atlas.sqlite'
+        if not path.is_file():
+            return set()
+        referenced = set()
+        db = sqlite3.connect(path)
+        try:
+            for (body,) in db.execute('SELECT body FROM selections'):
+                referenced.update(json.loads(body).get('snapshot_ids', []))
+        finally:
+            db.close()
+        return referenced
+
+    def prune(self, *, execute=False):
+        """Explicit eviction for prepared versions nothing can reach any more.
+
+        Removable: failed/cancelled/interrupted runs; non-active versions whose
+        snapshot is also served by the active version (exact duplicates); and
+        superseded versions no saved selection references. Byte counts ignore
+        inodes shared with a retained version, so they are what deletion frees.
+        """
+        referenced = self._referenced_snapshots()
+        report = {'removable': [], 'retained': [], 'freed_bytes': 0, 'executed': execute}
+        base = self.root / 'work/prepared'
+        if not base.is_dir():
+            return report
+        for dataset_dir in sorted(base.iterdir()):
+            if not dataset_dir.is_dir():
+                continue
+            pointer = dataset_dir / 'active.json'
+            active = json.loads(pointer.read_text())['version'] if pointer.is_file() else None
+            versions = []
+            for version_dir in sorted(dataset_dir.iterdir()):
+                if not version_dir.is_dir():
+                    continue
+                document = version_dir / 'dataset.json'
+                snapshot = json.loads(document.read_text()).get('snapshot_id') if document.is_file() else None
+                status_path = self.directory / version_dir.name / 'status.json'
+                status = json.loads(status_path.read_text()).get('status') if status_path.is_file() else None
+                versions.append((version_dir, snapshot, status))
+            active_snapshot = next((snapshot for directory, snapshot, _ in versions if directory.name == active), None)
+            retained_inodes = set()
+            decisions = []
+            for directory, snapshot, status in versions:
+                if directory.name == active:
+                    decisions.append((directory, snapshot, 'active', False))
+                elif status in {'failed', 'cancelled', 'interrupted'} or snapshot is None:
+                    decisions.append((directory, snapshot, status or 'incomplete', True))
+                elif snapshot == active_snapshot:
+                    decisions.append((directory, snapshot, 'duplicate of active snapshot', True))
+                elif snapshot in referenced:
+                    decisions.append((directory, snapshot, 'referenced by a saved selection', False))
+                else:
+                    decisions.append((directory, snapshot, 'superseded and unreferenced', True))
+            for directory, _, _, removable in decisions:
+                if not removable:
+                    for path in directory.rglob('*'):
+                        if path.is_file():
+                            stat = path.stat()
+                            retained_inodes.add((stat.st_dev, stat.st_ino))
+            for directory, snapshot, reason, removable in decisions:
+                entry = {'dataset_id': dataset_dir.name, 'version': directory.name, 'snapshot_id': snapshot, 'reason': reason}
+                if not removable:
+                    report['retained'].append(entry)
+                    continue
+                freed = 0
+                for path in directory.rglob('*'):
+                    if path.is_file() and not path.is_symlink():
+                        stat = path.stat()
+                        if (stat.st_dev, stat.st_ino) not in retained_inodes:
+                            freed += stat.st_size
+                entry['freed_bytes'] = freed
+                report['removable'].append(entry)
+                report['freed_bytes'] += freed
+                if execute:
+                    shutil.rmtree(directory)
+        return report
 
 
 def prepared_metadata(dataset, scope):

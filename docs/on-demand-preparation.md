@@ -10,11 +10,20 @@ atlas datasets acquire --dataset illuchar --max-download-bytes 4000000000 --max-
 atlas datasets preparation --id PLAN_ID
 atlas datasets preparation --id PLAN_ID --cancel
 atlas datasets preparation --id PLAN_ID --retry
+# Re-derive a completed version's coverage/evidence from its own receipt (idempotent),
+# and optionally make it the active version. This is the only sanctioned way to change
+# a prepared version's catalogue metadata.
+atlas datasets preparation --id VERSION_ID --refresh-metadata DATASET_ID --activate
+# Explicit eviction: list, then remove, versions nothing can reach any more.
+atlas datasets prune
+atlas datasets prune --execute
 ```
 
 Supported acquisition paths are pinned native Hugging Face Arrow/Parquet shards, explicit original-archive recipes in `registry/recipes`, and already configured local adapters. A repository revision and optional subdirectory in a Hugging Face source URL are respected. No repository Python code is executed. All selected source shards are retained separately, with source filename, row and checksum provenance. Different configurations or overlapping splits are not deduplicated or asserted to be independent examples.
 
 Recipes name an adapter, exact expected population count, original source URLs, byte lengths and checksums. SHA-256 is verified for pinned files; older official MD5 recipes are additionally hashed with SHA-256 after acquisition. HTTPS redirects are individually allowlisted and DNS/IP checked. Successful partial transfers can resume when their strong ETag agrees. Gated releases are not bypassed. Missing recipes remain implementation gaps.
+
+`atlas datasets prune` removes failed, cancelled and interrupted runs, non-active versions whose snapshot the active version already serves, and superseded versions no saved selection references. Versions a selection references are pinned and reported as such. Freed-byte figures ignore inodes shared with a retained version, so they are what deletion actually reclaims. Nothing is removed without `--execute`.
 
 `work/preparation/<plan-id>` contains the approved plan, status, cancellation marker and worker log. `work/prepared/<dataset-id>/<version>` contains retained source references, a 100-record preview (or all smaller populations), an immutable full-population Parquet index, and a receipt. Only after exact count and output validation succeeds is `active.json` atomically switched. Earlier versions and the original tracked registry remain available; frozen selections resolve their original snapshot.
 

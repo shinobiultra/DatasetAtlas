@@ -74,7 +74,11 @@ def run(root, identity):
                 source_dir.mkdir(exist_ok=True)
                 target = source_dir / (digest.hexdigest() + '.' + entry['format'])
                 if not target.exists():
-                    os.link(source, target)
+                    try:
+                        os.link(source, target)
+                    except OSError:
+                        # Cache and prepared roots may sit on different filesystems.
+                        shutil.copy2(source, target)
                 files.append({**entry, 'sha256':digest.hexdigest(), 'path': str(target)})
                 if entry.get('config_key'):dataset.adapter_config[entry['config_key']]=str(target)
                 if entry.get('config_key')=='path':dataset.adapter_config['sha256']=digest.hexdigest()

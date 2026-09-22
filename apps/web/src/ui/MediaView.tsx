@@ -117,6 +117,7 @@ export function AssetView({ asset, overlays = [], controls = false, highlight, f
     return <div className="fallback"><Icon.Layers size={20} /><span>{asset.modality} record</span><small className="mono wrap-any">{asset.id}</small></div>
   }
 
+  const hiddenBySafeView = safeViewEnabled() && overlays.some(overlay => overlay.assetId === asset.id && overlay.visible)
   const expected = (safeViewEnabled() ? [] : overlays).filter(overlay => overlay.assetId === asset.id && overlay.visible)
   const misaligned = natural ? expected.filter(overlay => overlay.width !== natural.width || overlay.height !== natural.height) : []
   return (
@@ -132,6 +133,7 @@ export function AssetView({ asset, overlays = [], controls = false, highlight, f
         onError={() => setFailed(true)}
       />
       <BoxLayer overlays={expected} natural={natural} highlight={highlight} />
+      {hiddenBySafeView && <span className="overlay-note">Detector boxes are not drawn over a safe-view derivative</span>}
       {misaligned.length > 0 && (
         <span className="overlay-note">
           Overlay hidden: {misaligned[0].width}×{misaligned[0].height} detector input differs from this {natural?.width}×{natural?.height} representation

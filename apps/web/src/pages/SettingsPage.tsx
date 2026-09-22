@@ -205,8 +205,14 @@ function AppearanceSection() {
   return (
     <div className="card card-pad">
       <h3 style={{ marginBottom: 10 }}>Appearance</h3>
-      <label className="row"><input type="checkbox" checked={safeView} onChange={event => { localStorage.setItem('atlas.safe-view', String(event.target.checked)); window.location.reload() }} />Safe-view image display</label>
-      <p className="hint">Pixelated display derivatives in the local workbench; other image URLs are hidden. Originals and analysis/model inputs remain unchanged. This is a viewing aid, not a content classifier.</p>
+      {provider.mode === 'workbench' ? (
+        <>
+          <label className="row"><input type="checkbox" checked={safeView} onChange={event => { localStorage.setItem('atlas.safe-view', String(event.target.checked)); window.location.reload() }} />Safe-view image display</label>
+          <p className="hint">Pixelated display derivatives served by the local workbench; image URLs it cannot derive are hidden. Originals and analysis/model inputs remain unchanged, and detector boxes are not drawn over derivatives. This is a viewing aid, not a content classifier.</p>
+        </>
+      ) : (
+        <p className="hint">Safe-view display derivatives are produced by the local workbench; the public build serves originals only.</p>
+      )}
       <div className="col" style={{ gap: 14 }}>
         <label className="row" style={{ gap: 9 }}>
           <input type="checkbox" checked={density} onChange={event => setDensity(event.target.checked)} />

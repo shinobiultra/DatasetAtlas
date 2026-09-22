@@ -147,3 +147,14 @@ export function fieldLeafName(field: FieldDescriptor): string {
   const parts = field.name.split('·')
   return (parts.length > 1 ? parts.slice(1).join('·') : field.name).trim() || field.id
 }
+
+/** Human byte sizes with the unit the magnitude deserves. */
+export function formatBytes(value: number | null | undefined): string {
+  if (value === null || value === undefined || !Number.isFinite(value)) return '—'
+  if (value < 1000) return `${Math.round(value)} B`
+  const units = ['KB', 'MB', 'GB', 'TB']
+  let scaled = value / 1000
+  let index = 0
+  while (scaled >= 1000 && index < units.length - 1) { scaled /= 1000; index += 1 }
+  return `${scaled >= 100 ? scaled.toFixed(0) : scaled >= 10 ? scaled.toFixed(1) : scaled.toFixed(2)} ${units[index]}`
+}

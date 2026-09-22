@@ -2,10 +2,11 @@ import { createPortal } from 'react-dom'
 import { useEffect, useRef, useState } from 'react'
 import { preparationApi } from '../provider'
 import { Notice } from '../ui/primitives'
+import { formatBytes } from '../lib/format'
 
 type Plan = { id: string; ready: boolean; scope: string; source_identity: string; expected_download_bytes: number; available_bytes: number; required_free_bytes: number; requirements: string[]; files: { source_name: string; bytes: number }[] }
 type Status = { id: string; status: string; stage?: string; error?: string; indexed_count?: number; expected_count?: number; downloaded_bytes?: number; current_file?: string }
-const bytes = (n: number) => `${(n / 1e9).toFixed(2)} GB`
+const bytes = formatBytes
 
 export function PrepareDataset({ datasetId }: { datasetId: string }) {
   const [open, setOpen] = useState(false)

@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-22T08:19:14.756530+00:00",
+  "checked_at": "2026-09-22T08:47:58.685787+00:00",
   "datasets": [
     {
       "dataset_id": "algopuzzlevqa",
@@ -9,7 +9,7 @@
       "preview_records": 100,
       "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
       "plan_id": "d7290b7a41f1d5598624f81657149d6b13404b911ad651faddb417051a23edc8",
-      "prepared_receipt": "work/prepared/algopuzzlevqa/d7290b7a41f1d5598624f81657149d6b13404b911ad651faddb417051a23edc8-metadata-v2/receipt.json"
+      "prepared_receipt": "work/prepared/algopuzzlevqa/d7290b7a41f1d5598624f81657149d6b13404b911ad651faddb417051a23edc8/receipt.json"
     },
     {
       "dataset_id": "conceptarc",
@@ -39,7 +39,17 @@
       "preview_records": 100,
       "scope": "All 5,640 DTD images with all ten official train/validation/test partitions.",
       "plan_id": "86d68f5ee62fa4c586c07a12f5c2d1bf113e372cb805b1cbde7a200342a60b49",
-      "prepared_receipt": "work/prepared/dtd/86d68f5ee62fa4c586c07a12f5c2d1bf113e372cb805b1cbde7a200342a60b49-metadata-v2/receipt.json"
+      "prepared_receipt": "work/prepared/dtd/86d68f5ee62fa4c586c07a12f5c2d1bf113e372cb805b1cbde7a200342a60b49/receipt.json"
+    },
+    {
+      "dataset_id": "exams-v",
+      "release": "e9488045cbad16c973f031c7a8f7466b5dcc3794",
+      "snapshot_id": "exams-v-8bb5701d7c67cf214b73ca4d",
+      "records": 21291,
+      "preview_records": 100,
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "plan_id": "8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911",
+      "prepared_receipt": "work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/receipt.json"
     },
     {
       "dataset_id": "gqa",
@@ -49,7 +59,7 @@
       "preview_records": 100,
       "scope": "official GQA v1.2 val_balanced_questions.json (132,062 examples)",
       "plan_id": "9c85e41ad6950bd1896baad6ea5ef5085af8e85b9823d15e82f484ba733e6f4a",
-      "prepared_receipt": "work/prepared/gqa/9c85e41ad6950bd1896baad6ea5ef5085af8e85b9823d15e82f484ba733e6f4a-metadata-v2/receipt.json"
+      "prepared_receipt": "work/prepared/gqa/9c85e41ad6950bd1896baad6ea5ef5085af8e85b9823d15e82f484ba733e6f4a/receipt.json"
     },
     {
       "dataset_id": "illuchar",
@@ -59,7 +69,7 @@
       "preview_records": 100,
       "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
       "plan_id": "df53383aaaa234f3f95818ec4c5bd1bde4ee9c29737ef4a0913d281e0ab532be",
-      "prepared_receipt": "work/prepared/illuchar/df53383aaaa234f3f95818ec4c5bd1bde4ee9c29737ef4a0913d281e0ab532be-metadata-v2/receipt.json"
+      "prepared_receipt": "work/prepared/illuchar/df53383aaaa234f3f95818ec4c5bd1bde4ee9c29737ef4a0913d281e0ab532be/receipt.json"
     },
     {
       "dataset_id": "mmmu-dev",
@@ -89,7 +99,7 @@
       "preview_records": 100,
       "scope": "All 7,349 annotated Oxford-IIIT Pet images; original trainval and test splits.",
       "plan_id": "c812b4c6a2a467571c2dc4eb5e41b56c12609d9eb79856969396da1e811aebe7",
-      "prepared_receipt": "work/prepared/oxfordpet/c812b4c6a2a467571c2dc4eb5e41b56c12609d9eb79856969396da1e811aebe7-metadata-v2/receipt.json"
+      "prepared_receipt": "work/prepared/oxfordpet/c812b4c6a2a467571c2dc4eb5e41b56c12609d9eb79856969396da1e811aebe7/receipt.json"
     },
     {
       "dataset_id": "puzzlevqa",
@@ -139,13 +149,13 @@
       "preview_records": 100,
       "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
       "plan_id": "90c82ed7172dd56a64312bea65d2ebb1c751370425eb810e74bc72bce6163e6a",
-      "prepared_receipt": "work/prepared/wmdp/90c82ed7172dd56a64312bea65d2ebb1c751370425eb810e74bc72bce6163e6a-metadata-v2/receipt.json"
+      "prepared_receipt": "work/prepared/wmdp/90c82ed7172dd56a64312bea65d2ebb1c751370425eb810e74bc72bce6163e6a/receipt.json"
     }
   ],
   "catalogue_entries": 336,
-  "with_previews": 77,
-  "without_previews": 259,
-  "full_population_indices": 72,
+  "with_previews": 78,
+  "without_previews": 258,
+  "full_population_indices": 73,
   "all_requested_datasets_complete": false,
   "note": "Acquired source populations and on-demand infrastructure; catalogue-wide coverage is not complete."
 }

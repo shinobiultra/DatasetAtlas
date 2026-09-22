@@ -11,7 +11,7 @@ test('on-demand plan shows source population and budgets without starting a down
   await expect(page.getByRole('region', { name: 'Prepare full dataset' })).toBeVisible()
   await page.getByRole('button', { name: 'Review preparation plan' }).click()
   await expect(page.getByRole('button', { name: 'Download and prepare', exact: true })).toBeEnabled()
-  await expect(page.getByText(/0.00 GB download/)).toBeVisible()
+  await expect(page.getByText(/^0 B download/)).toBeVisible()
   await expect(page.getByText(/not a claim of the paper-used revision/)).toBeVisible()
 })
 

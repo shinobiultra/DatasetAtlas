@@ -15,7 +15,7 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
-from dataset_atlas.models import Capabilities, Query, Selection, Record, content_id
+from dataset_atlas.models import Capabilities, Pack, Query, Selection, Record, content_id
 from dataset_atlas.registry import Registry
 from dataset_atlas.queries import query_pack,materialize_records
 from dataset_atlas.runtime import analysis_config, roots_for
@@ -41,6 +41,11 @@ class AggregateRequest(BaseModel):
     field_ids: list[str] = Field(min_length=1, max_length=12)
     top: int = Field(default=24, ge=1, le=200)
 
+class PreparationPlanRequest(BaseModel):
+    model_config=ConfigDict(extra='forbid')
+    max_download_bytes: int = Field(ge=1)
+    max_output_bytes: int = Field(ge=1)
+
 class RecordRequest(BaseModel):
     model_config=ConfigDict(extra='forbid')
     ids: list[str] = Field(min_length=1, max_length=1000)
@@ -65,15 +70,37 @@ class MediaHandles:
 def media_byte_limit(asset):
     return 250_000_000 if asset.modality=='video' else 100_000_000 if asset.modality=='audio' else 10_000_000
 
+_SAFE_VIEW_CACHE=OrderedDict()
+_SAFE_VIEW_CACHE_BYTES=[0]
+_SAFE_VIEW_CACHE_LIMIT=100_000_000
+_SAFE_VIEW_LOCK=RLock()
+
+def cached_safe_view(data:bytes)->bytes:
+    """Display derivatives are pure functions of the original bytes; keep recent ones."""
+    from dataset_atlas.storage.display import safe_view
+    key=hashlib.sha256(data).hexdigest()
+    with _SAFE_VIEW_LOCK:
+        cached=_SAFE_VIEW_CACHE.get(key)
+        if cached is not None:
+            _SAFE_VIEW_CACHE.move_to_end(key)
+            return cached
+    derived=safe_view(data)
+    with _SAFE_VIEW_LOCK:
+        _SAFE_VIEW_CACHE[key]=derived
+        _SAFE_VIEW_CACHE_BYTES[0]+=len(derived)
+        while _SAFE_VIEW_CACHE_BYTES[0]>_SAFE_VIEW_CACHE_LIMIT and len(_SAFE_VIEW_CACHE)>1:
+            _,evicted=_SAFE_VIEW_CACHE.popitem(last=False)
+            _SAFE_VIEW_CACHE_BYTES[0]-=len(evicted)
+    return derived
+
 def media_response(data:bytes,media_type:str,request:Request):
+    """Serve bounded, already safely read bytes with native media seeking."""
     representation=request.query_params.get('representation','original')
     if representation not in {'original','safe-view'}:raise ValueError('Unknown display representation')
     if representation=='safe-view':
         if not media_type.startswith('image/'):raise ValueError('Safe-view derivatives support images only')
-        from dataset_atlas.storage.display import safe_view
-        data=safe_view(data)
+        data=cached_safe_view(data)
         media_type='image/png'
-    """Serve bounded, already safely read bytes with native media seeking."""
     size=len(data)
     etag='"'+hashlib.sha256(data).hexdigest()+'"'
     headers={'Accept-Ranges':'bytes','ETag':etag,'Cache-Control':'private, max-age=3600'}
@@ -126,6 +153,21 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
     media_handles=MediaHandles()
     snapshot_cache={}
     thumbnail_cache={}
+    pack_cache={}
+    def indexed_pack(pack_path):
+        """A parsed pack and its record index, cached on the file's on-disk revision.
+
+        Selections, exports and model contexts resolve many IDs in a row; parsing
+        the whole pack per ID made a 100-record selection take over a second."""
+        stat=pack_path.stat()
+        signature=(stat.st_mtime_ns,stat.st_size)
+        cached=pack_cache.get(str(pack_path))
+        if cached is None or cached[0]!=signature:
+            pack=Pack.model_validate_json(pack_path.read_text())
+            index={record.id:record for record in pack.records+materialize_records(pack,'asset')}
+            cached=(signature,pack,index)
+            pack_cache[str(pack_path)]=cached
+        return cached[1],cached[2]
     def complete_snapshot(dataset_id):
         registry.dataset(dataset_id)
         path=registry.snapshot_path(dataset_id)
@@ -211,17 +253,16 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
             asset.uri=str(cached)
         return resolved
     def find_record(record_id: str,prepare_media=True,snapshot_ids=None):
-        candidates=registry.datasets()
+        # Record IDs are namespaced by dataset; only fall back to a catalogue sweep for foreign IDs.
         prefix=record_id.split(':',1)[0]
-        if any(d.id==prefix for d in candidates):candidates=[d for d in candidates if d.id==prefix]
-        for raw_dataset in candidates:
-            for dataset,pack_path,snapshot_path in registry.versions(raw_dataset.id):
+        candidates=[prefix] if registry.has(prefix) else registry.ids()
+        for dataset_id in candidates:
+            for dataset,pack_path,snapshot_path in registry.versions(dataset_id):
                 if snapshot_ids and dataset.snapshot_id not in snapshot_ids:continue
                 if not pack_path.is_file():continue
-                from dataset_atlas.models import Pack
-                pack=Pack.model_validate_json(pack_path.read_text())
-                for record in pack.records+materialize_records(pack,'asset'):
-                    if record.id==record_id:return prepared_record(record,dataset) if prepare_media else record.model_copy(deep=True)
+                _,index=indexed_pack(pack_path)
+                record=index.get(record_id)
+                if record is not None:return prepared_record(record,dataset) if prepare_media else record.model_copy(deep=True)
                 if (snapshot_path/'manifest.json').exists():
                     from dataset_atlas.queries.parquet import ParquetSnapshot
                     if str(snapshot_path) not in snapshot_cache:snapshot_cache[str(snapshot_path)]=ParquetSnapshot(snapshot_path.parent,snapshot_path)
@@ -284,8 +325,8 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
     from dataset_atlas.preparation import PreparationManager
     preparation=PreparationManager(root)
     @app.post('/api/v1/datasets/{dataset_id}/preparation/plan')
-    def preparation_plan(dataset_id:str, body:dict):
-        return preparation.plan(dataset_id,body.get('max_download_bytes'),body.get('max_output_bytes'))
+    def preparation_plan(dataset_id:str, body:PreparationPlanRequest):
+        return preparation.plan(dataset_id,body.max_download_bytes,body.max_output_bytes)
     @app.get('/api/v1/preparation')
     def preparation_list(dataset_id:str|None=None):return preparation.list(dataset_id)
     @app.post('/api/v1/preparation/{plan_id}/start')
@@ -446,7 +487,9 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
     def get_records(body:RecordRequest):
         result=[]
         for id in body.ids:
-            original=find_record(id)
+            # Media is served lazily by token from the route below, exactly as for query pages;
+            # materializing every asset here made a 100-record lookup cost seconds.
+            original=find_record(id,prepare_media=False)
             if original is None:raise KeyError(id)
             record=original.model_copy(deep=True)
             for asset in record.assets:

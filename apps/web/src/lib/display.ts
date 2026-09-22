@@ -1,5 +1,11 @@
+import { provider } from '../provider'
+
 /** Display representations never replace Asset.uri in saved records or model contexts. */
-export function safeViewEnabled(): boolean { return localStorage.getItem('atlas.safe-view') === 'true' }
+export function safeViewEnabled(): boolean {
+  // Only the workbench can serve a derivative; the public build would just lose every image.
+  if (provider.mode !== 'workbench') return false
+  try { return localStorage.getItem('atlas.safe-view') === 'true' } catch { return false }
+}
 export function displayUrl(url: string): string {
   if (!safeViewEnabled()) return url
   if (url.startsWith('/api/v1/media/')) return `${url}${url.includes('?') ? '&' : '?'}representation=safe-view`

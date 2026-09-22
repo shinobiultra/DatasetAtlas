@@ -57,7 +57,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
   const [dense, setDense] = useStoredState<boolean>('atlas.dense', false)
   const [cardWidth, setCardWidth] = useStoredState<number>('atlas.card', 248)
   const [columnIds, setColumnIds] = useStoredState<Record<string, string[]>>('atlas.columns', {})
-  const [railOpen, setRailOpen] = useStoredState<boolean>('atlas.rail', true)
+  const [railOpen, setRailOpen] = useStoredState<boolean>('atlas.rail', window.innerWidth > 1080)
   const [centre, setCentre] = useState<Centre>('browse')
   const [focusIndex, setFocusIndex] = useState(0)
   const [comparePair, setComparePair] = useState<[string | null, string | null]>([null, null])
@@ -120,6 +120,19 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
       setLoadError(String(failure instanceof Error ? failure.message : failure))
     } finally { setBusyMessage('') }
   }, [dataset, datasetId, scope])
+
+  async function refreshResults() {
+    if (!dataset) return
+    try {
+      const [nextFields, available] = await Promise.all([
+        scope === 'complete' ? provider.completeInfo(datasetId).then(info => { setComplete(info); return info.fields }) : provider.fields(datasetId),
+        provider.artifacts(datasetId),
+      ])
+      setFields(nextFields)
+      setArtifacts(available.filter(item => item.unit === unit && item.snapshot_ids.includes(snapshotId)))
+      onToast('Results refreshed for this population.')
+    } catch (failure) { onToast(String(failure instanceof Error ? failure.message : failure)) }
+  }
 
   /* ---------- the query ---------- */
   const snapshotId = scope === 'complete' ? complete?.snapshot_id ?? '' : dataset?.snapshot_id ?? ''
@@ -292,6 +305,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
           </div>
         </div>
         <div className="ds-header-actions">
+          {browsable && provider.mode === 'workbench' && <button type="button" className="btn" onClick={() => void refreshResults()}>Refresh results</button>}
           {supportsComplete(dataset) && (
             <Segmented
               label="Population scope" value={scope} onChange={value => void changeScope(value)}
@@ -311,12 +325,13 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
 
   if (!browsable) {
     return (
+      <>
       <div className="work">
         {header}
         <div className="work-scroll">
           <div className="page">
             <Notice tone="warn">
-              <strong>No inspectable examples here yet.</strong> This entry is a resolved catalogue record without a prepared preview
+              <strong>No inspectable examples here yet.</strong> This catalogue entry has no prepared preview
               {provider.mode === 'static' ? ' approved for the public build' : ' in this workbench'}.
             </Notice>
             <div className="card card-pad">
@@ -345,6 +360,11 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
           </div>
         </div>
       </div>
+      {panel === 'about' && <aside className="ctx" aria-label="About dataset">
+        <div className="ctx-head"><h2>{dataset.name}</h2><span className="spacer" /><button type="button" className="btn ghost icon" aria-label="Close panel" onClick={() => setPanel(null)}><Icon.Close size={15} /></button></div>
+        <div className="ctx-scroll"><AboutPanel dataset={dataset} onOpenDataset={onOpenDataset} /></div>
+      </aside>}
+      </>
     )
   }
 

@@ -1,27 +1,23 @@
 {
-  "checked_at_utc": "2026-09-22T05:07:27.836172+00:00",
+  "checked_at_utc": "2026-09-22T06:42:55.117245+00:00",
   "catalogue_entries": 336,
   "tested_local_previews": 64,
   "verified_preview_records": 6313,
   "canonical_full_scope_indices": 59,
   "entries_without_preview": 272,
-  "python_tests_passed": 180,
-  "frontend_tests_passed": 15,
-  "browser_tests_passed": 11,
-  "browser_tests_skipped": 1,
+  "python_tests_passed": 191,
+  "frontend_tests_passed": 22,
+  "browser_tests_passed": 27,
+  "browser_tests_skipped": 0,
   "approved_public_preview_datasets": [
     "clevr",
     "eurosat",
     "pairs"
   ],
   "full_v1_complete": false,
-  "active_download": {
-    "dataset_id": "gqa",
-    "downloaded_bytes": 7697088245,
-    "expected_archive_bytes": 21817965542,
-    "session_id": 97317,
-    "completion_does_not_automatically_upgrade_coverage": true
-  },
+  "active_download": null,
   "all_subagents_finished": true,
-  "paid_model_apis_used": false
+  "paid_model_apis_used": false,
+  "gqa_full_archive_acquired": true,
+  "gqa_browsing_snapshot_media_scope": "selected_preview"
 }

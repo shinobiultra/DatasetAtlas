@@ -17,7 +17,7 @@ const STATE_TONE: Record<RunState['state'], 'ok' | 'warn' | 'danger' | 'default'
 
 export function RunStateRow({ state }: { state: RunState }) {
   return (
-    <div className="row" role="status" style={{ gap: 8, alignItems: 'flex-start', padding: '5px 0' }}>
+    <div className="row" role="status" data-artifact-id={state.artifact.id} style={{ gap: 8, alignItems: 'flex-start', padding: '5px 0' }}>
       <Tag tone={STATE_TONE[state.state]}>{state.state === 'not_computed' ? 'Not computed' : titleCase(state.state)}</Tag>
       <div style={{ minWidth: 0, fontSize: 'var(--fs-sm)' }}>
         <div className="truncate" title={state.runLabel}>{state.runLabel}</div>

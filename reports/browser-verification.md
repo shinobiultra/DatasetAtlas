@@ -40,3 +40,7 @@ The initial browser export/import exposed a numeric JSON checksum mismatch. Afte
 ## Final suite rerun
 
 After the final publication build, 11 Playwright checks passed with `ATLAS_LIVE_API` and `ATLAS_REIMPORT_SELECTION_ID` set. The one optional additional model-send test was skipped; the existing real linked-conversation receipt above remains valid. Static relationship navigation, local source evidence, detector overlays, H.264 playback, browser re-import, EXIF geometry, missing/failed/zero states, and both 10,000-item synthetic performance checks passed. The pagination observation race is fixed by waiting for the second page requests. Full command output is in `work/verify-install/playwright.log`.
+
+## Rebuilt interface closeout
+
+The earlier UI evidence above is superseded by [the UI closeout](ui-closeout.md): 191 Python tests, 22 frontend tests, and all 27 browser checks pass. The rebuilt panels now have real local image-send and detector/embedding-run receipts, explicit result refresh, and 390 px / 820 px browser coverage. No model-send skip remains in the live closeout run.

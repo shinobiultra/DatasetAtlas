@@ -25,7 +25,7 @@ export function App() {
   const [suggestOpen, setSuggestOpen] = useState(false)
   const [suggestIndex, setSuggestIndex] = useState(0)
   const [toasts, setToasts] = useState<Toast[]>([])
-  const [navOpen, setNavOpen] = useStoredState<boolean>('atlas.nav', true)
+  const [navOpen, setNavOpen] = useStoredState<boolean>('atlas.nav', window.innerWidth > 900)
   const [selectionsKey, setSelectionsKey] = useState(0)
   const [recent, setRecent] = useStoredState<string[]>('atlas.recent', [])
   const searchRef = useRef<HTMLInputElement>(null)
@@ -90,7 +90,7 @@ export function App() {
         </button>
         <button type="button" className="brand" onClick={() => navigate({ name: 'catalogue' })} aria-label="Dataset Atlas — catalogue">
           <span className="brand-mark"><Icon.Layers size={15} /></span>
-          Dataset Atlas
+          <span className="brand-name">Dataset Atlas</span>
         </button>
         <label className="search" style={{ position: 'relative' }}>
           <Icon.Search />
@@ -142,7 +142,7 @@ export function App() {
         </div>
       </header>
 
-      <nav className="nav" hidden={!navOpen && window.innerWidth <= 900} aria-label="Primary">
+      <nav className={`nav${navOpen ? '' : ' collapsed'}`} aria-label="Primary">
         <div className="nav-scroll">
           <div className="nav-group">
             {navItem({ name: 'catalogue' }, 'Datasets', <Icon.Database size={15} />, datasets.length || undefined)}

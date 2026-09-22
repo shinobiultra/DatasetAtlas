@@ -104,6 +104,7 @@ export function CataloguePage({ term, onOpen }: { term: string; onOpen: (id: str
   const [datasets, setDatasets] = useState<Dataset[] | null>(null)
   const [thumbs, setThumbs] = useState<Thumbnails>({})
   const [error, setError] = useState('')
+  const [filtersOpen, setFiltersOpen] = useState(window.innerWidth > 1080)
   const [facets, setFacets] = useStoredState<Facets>('atlas.catalogue.facets', emptyFacets)
   const [layout, setLayout] = useStoredState<'cards' | 'list'>('atlas.catalogue.layout', 'cards')
   const [sort, setSort] = useStoredState<'relevance' | 'name' | 'coverage'>('atlas.catalogue.sort', 'coverage')
@@ -151,9 +152,9 @@ export function CataloguePage({ term, onOpen }: { term: string; onOpen: (id: str
 
   return (
     <>
-      <aside className="rail" aria-label="Catalogue filters">
+      <aside className="rail" aria-label="Catalogue filters" hidden={!filtersOpen}>
         <div className="rail-head">
-          <h3>Filters</h3>
+          <h3>Filters</h3><button type="button" className="btn ghost icon" aria-label="Close catalogue filters" onClick={() => setFiltersOpen(false)}><Icon.Close size={14} /></button>
           {facetCount(facets) > 0 && <button type="button" className="linkish" style={{ marginLeft: 'auto', fontSize: 'var(--fs-sm)' }} onClick={() => setFacets(emptyFacets)}>Reset</button>}
         </div>
         <div className="rail-scroll">
@@ -200,6 +201,7 @@ export function CataloguePage({ term, onOpen }: { term: string; onOpen: (id: str
             </p>
           </div>
           <div className="row" style={{ marginLeft: 'auto' }}>
+            <button type="button" className="btn" aria-expanded={filtersOpen} onClick={() => setFiltersOpen(!filtersOpen)}>Filters</button>
             <label className="row" style={{ gap: 6, fontSize: 'var(--fs-sm)', color: 'var(--text-muted)' }}>
               Sort
               <select className="select" style={{ width: 132 }} value={sort} onChange={event => setSort(event.target.value as typeof sort)} aria-label="Sort datasets">

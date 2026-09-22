@@ -135,8 +135,10 @@ test('local COCO completed detector overlays remain visible on original media', 
   await forwardLocalApi(page, process.env.ATLAS_LIVE_API!)
   await page.goto('/?mode=workbench#/dataset/coco')
   const inspector = await inspectRecord(page, 'coco:example:c765b3eb380b785ef8fc414d')
-  await expect(inspector.locator('.box-layer rect')).toHaveCount(64) // 32 outlines plus 32 label plates
-  await expect(inspector.getByRole('status').filter({ hasText: 'detect.coco_v1' })).toContainText('Completed · 32 detections')
+  const artifactId = 'ed3d9c68da43ce9d7b593937'
+  const artifact = await (await fetch(`${process.env.ATLAS_LIVE_API}/api/v1/artifacts/${artifactId}`)).json()
+  await expect(inspector.locator(`.box-layer[data-run-id="${artifact.run_id}"] rect`)).toHaveCount(64) // 32 outlines plus 32 label plates, scoped to the frozen baseline run
+  await expect(inspector.locator(`[data-artifact-id="${artifactId}"]`)).toContainText('Completed · 32 detections')
   await expect(inspector.locator('.overlay-note')).toHaveCount(0)
 })
 

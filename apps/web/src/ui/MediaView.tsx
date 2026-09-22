@@ -50,7 +50,7 @@ function BoxLayer({ overlays, natural, highlight }: {
     <>
       {aligned.map(overlay => (
         <svg
-          key={overlay.run} className="box-layer" viewBox={`0 0 ${overlay.width} ${overlay.height}`}
+          key={overlay.run} data-run-id={overlay.run} className="box-layer" viewBox={`0 0 ${overlay.width} ${overlay.height}`}
           preserveAspectRatio="xMidYMid meet" role="img"
           aria-label={`${overlay.boxes.length} detections from run ${overlay.run}, extraction threshold ${display(overlay.threshold)}`}
         >

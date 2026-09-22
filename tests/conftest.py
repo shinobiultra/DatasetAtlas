@@ -19,3 +19,18 @@ def workspace(tmp_path,pack):
     (tmp_path/'work/packs/fixture').mkdir(parents=True)
     (tmp_path/'work/packs/fixture/pack.json').write_text(pack.model_dump_json())
     return tmp_path
+
+@pytest.fixture
+def require_local_files():
+    """Optional source acceptance checks run only where their acquisition exists.
+
+    Missing inputs are explicit skips in clean CI, never evidence of validation.
+    Once the listed entry points exist, all content/hash assertions still run.
+    """
+    from pathlib import Path
+    root = Path(__file__).resolve().parents[1]
+    def require(*names):
+        absent = [name for name in names if not (root / name).is_file()]
+        if absent:
+            pytest.skip("Optional acquired local inputs are absent: " + ", ".join(absent))
+    return require

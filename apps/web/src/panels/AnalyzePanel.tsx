@@ -164,7 +164,7 @@ export function AnalyzePanel({ selected, unit, saved, onSave, onRan }: {
         <button type="button" className="btn primary" disabled={!estimate?.estimate_digest || busy} onClick={start}>
           <Icon.Play size={13} />Run analysis
         </button>
-        <p className="hint">Results become available in the column picker, filters, inspector, and map colour selector. Nothing runs until you approve the estimate.</p>
+        <p className="hint">After the run finishes, choose Refresh results to add it to the column picker, filters, inspector, and map colour selector. Nothing runs until you approve the estimate.</p>
         {message && <Notice tone={message.startsWith('Run ') ? 'info' : 'warn'}>{message}</Notice>}
       </div>
     </>

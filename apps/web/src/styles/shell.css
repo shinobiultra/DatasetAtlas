@@ -202,6 +202,23 @@
 @media (max-width: 900px) {
   .app { grid-template-columns: 1fr; grid-template-areas: "top" "main" "bar"; }
   .nav { position: fixed; top: 52px; bottom: 0; left: 0; z-index: 30; box-shadow: var(--shadow-lg); }
-  .nav[hidden] { display: none; }
+  .nav.collapsed { display: none; }
   .ctx { position: absolute; right: 0; top: 0; bottom: 0; z-index: 19; width: min(var(--panel-w), 100vw); box-shadow: var(--shadow-lg); }
+}
+
+.rail[hidden] { display: none; }
+@media (max-width: 900px) {
+  .statusbar { overflow-x: auto; max-width: 100vw; }
+  .statusbar > * { flex-shrink: 0; }
+  .ds-header-actions { flex-wrap: wrap; max-width: 100%; margin-left: 0; }
+  .topbar { gap: 8px; padding: 0 8px; }
+  .topbar .search { min-width: 0; }
+  .topbar .kbd-hint { display: none; }
+  .toast { max-width: calc(100vw - 24px); }
+}
+@media (max-width: 600px) {
+  .brand-name, .topbar-right { display: none; }
+  .ds-header { padding: 12px; }
+  .ds-header-main { min-width: 0; }
+  .ds-header-main .summary { -webkit-line-clamp: 1; }
 }

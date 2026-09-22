@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "verified_at_utc": "2026-09-22T05:06:23.293928+00:00",
+  "verified_at_utc": "2026-09-22T06:42:41.329693+00:00",
   "installation": {
-    "installed_module": "/home/bitwise/Documents/vibe/DatasetAtlas/work/verify-install/final-base-venv/lib/python3.12/site-packages/dataset_atlas/__init__.py",
+    "installed_module": "/home/bitwise/Documents/vibe/DatasetAtlas/work/verify-install/ui-base-venv/lib/python3.12/site-packages/dataset_atlas/__init__.py",
     "optional_model_packages_present": {
       "torch": false,
       "transformers": false,
@@ -21,7 +21,7 @@
         },
         "script": {
           "status": 200,
-          "bytes": 301494,
+          "bytes": 399522,
           "content_type": "text/javascript; charset=utf-8"
         },
         "catalogue": {
@@ -87,8 +87,8 @@
         "pairs": 100
       },
       "archive": "dataset_atlas-0.1.0.tar.gz",
-      "files": 450,
-      "site_bytes": 30352288
+      "files": 482,
+      "site_bytes": 30473116
     },
     "wheel": {
       "approved_media_files": {
@@ -97,28 +97,26 @@
         "pairs": 100
       },
       "archive": "dataset_atlas-0.1.0-py3-none-any.whl",
-      "files": 374,
-      "site_bytes": 30352288
+      "files": 376,
+      "site_bytes": 30473116
     }
   },
   "release_archives": {
     "dataset_atlas-0.1.0.tar.gz": {
-      "bytes": 29424811,
-      "sha256": "fa8b5a23d6fab949ad07567232356208b5a011d66b42872c07c5212715759e87"
+      "bytes": 29515899,
+      "sha256": "59655ac8ed73484da3979331d787b17c2a912fa26ce3db40796923568f09c886"
     },
     "dataset_atlas-0.1.0-py3-none-any.whl": {
-      "bytes": 29218809,
-      "sha256": "74de45c18e530763869b06404e1cb387e66491344b592bc6735908fc9c9cffe6"
+      "bytes": 29253323,
+      "sha256": "f1b6cd90acba3152f9ae71eb0149f5d5752b52e8ce60788d3f6f20fb56aec7b7"
     }
   },
   "validation": {
-    "full_python_suite": "180 passed; 2 dependency deprecation warnings",
-    "frontend_tests": "15 passed",
+    "full_python_suite": "191 passed; 2 dependency deprecation warnings",
+    "frontend_tests": "22 passed",
+    "browser_suite": "27 passed; all live local model and analysis checks enabled",
     "generated_contract": "byte-identical",
-    "no_remote_deployment": true,
-    "browser_suite": "11 passed; 1 optional repeat model-send skipped; earlier actual image conversation retained",
-    "registry": "336 entries, zero errors",
-    "local_previews": "64 packs, 6313 records; all listed file checksums and snapshot identities verified"
+    "no_remote_deployment": true
   },
   "limitations": [
     "Selected installed HTTP routes verified; complete workbench and model checks are recorded separately.",

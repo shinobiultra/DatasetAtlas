@@ -26,6 +26,18 @@ cp -R examples/approved-packs/. work/packs/
 
 Static mode needs no Python or models. Build it with `npm run build` in `apps/web`, or use `npm run dev` during development. The catalogue and approved previews are generated into `apps/web/public/data` by the explicit publication command. No backend is needed after building.
 
+## The interface
+
+One shell carries every screen: navigation on the left, the examples in the centre, and a single contextual panel on the right that shows the inspected sample or, on request, dataset details, analysis setup or a model conversation.
+
+- **Catalogue** — thumbnail-led dataset cards over real prepared media, with faceted filters for coverage, modality, task, access and annotations, and a compact list alternative.
+- **Dataset** — a compact header, then **Samples** (the default) and **Overview**. Overview computes label distributions over the population the filter matched, in preview or complete scope, and states that population.
+- **Browsing** — Grid, Table, Map and Compare share one population, one selection and one set of filters. Both grid and table are virtualized and page in as you scroll; media is fetched only for what is on screen.
+- **Inspection** — clicking a record inspects it and never selects it; ticking its checkbox selects it and never changes what is inspected. Focused inspection takes the centre with prev/next, fit/actual size, overlay toggles and a filmstrip labelled as browsing order rather than similarity.
+- **Compare** — two equally weighted media panels above aligned evidence, with a differences-only toggle that compares only values present on both sides with the same type.
+
+Coverage claims are per deployment: the public build says what *it* can show, and an entry prepared locally but not published reads "Metadata only here". A metadata-only dataset explains its access, adapter, complete-data and publication states instead of showing an empty grid, and says plainly that an unimplemented adapter is an implementation gap rather than a source restriction. See [interface architecture](docs/interface.md).
+
 ## Reproducible workflows
 
 ```bash
@@ -74,6 +86,7 @@ uv run python scripts/build_release.py
 
 The release builder embeds the built frontend in the wheel. Install the resulting wheel to run `atlas serve` without Node. Dataset previews are separately portable; full datasets, paper PDFs, caches, credentials, and full extracted text are excluded from the distribution.
 
+- [Interface architecture](docs/interface.md): the shell, the interaction contract, and the honesty rules the components enforce.
 - [Shared contracts](docs/contracts.md): Pydantic is the schema source of truth; TypeScript is generated.
 - [Adding datasets](docs/adding-datasets.md): reusable mappings, coverage, and evidence.
 - [Remote workbench](docs/remote-workbench.md): existing mounts and SSH tunnelling.

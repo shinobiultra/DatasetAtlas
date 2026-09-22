@@ -658,3 +658,105 @@ class ParquetSnapshot:
             coverage={"available_count": self.manifest["record_count"], "sampled_count": sampled_count, "sampling": query.sample},
             ordering=query.sort, cursor=next_cursor, warnings=warnings,
         )
+
+    def aggregate(self, query: Query, field_ids: Sequence[str], artifacts: Sequence[Artifact] = (), *, top: int = 24) -> dict[str, Any]:
+        """Distributions for named fields over the population the filter matched.
+
+        This exists so a dataset overview can state real counts for a complete
+        index instead of extrapolating from a loaded page. Any sampling in the
+        browsing query is deliberately not applied, and the response says so:
+        a stratified preview is not a prevalence estimate.
+        """
+        if query.snapshot_id != self.manifest["snapshot_id"]:
+            raise ValueError("Snapshot mismatch; reload dataset before aggregating")
+        if query.unit != self.manifest["unit"]:
+            raise ValueError("This snapshot does not support the requested record unit")
+        if len(field_ids) > 12:
+            raise ValueError("Aggregate at most 12 fields per request")
+        if type(top) is not int or not 1 <= top <= 200:
+            raise ValueError("Invalid aggregation width")
+        selected = query.result_snapshot_ids
+        if len(selected) != len(set(selected)) or set(selected) != {artifact.id for artifact in artifacts}:
+            raise ValueError("Explicit result snapshot IDs must match supplied artifacts")
+        result_fields, result_table = self._prepare_results(artifacts)
+        registry = {field_id: (f'source."{column}"', dtype, allowed) for field_id, (column, dtype, allowed) in self.registry.items()}
+        for index, field in enumerate(result_fields):
+            registry[field.id] = (f'results."r_{index}"', field.dtype, set(field.query_ops))
+        validate_filter(query.filter, set(registry))
+        params: list[Any] = []
+        predicates: list[str] = []
+        if query.filter:
+            predicates.append(self._predicate(query.filter, params, registry, self.category_kinds))
+        if query.search:
+            if len(query.search) > 4000:
+                raise ValueError("Search exceeds 4000 characters")
+            predicates.append('instr(source."search_text", ?) > 0')
+            params.append(query.search.lower())
+        where = " WHERE " + " AND ".join(predicates) if predicates else ""
+        source = 'read_parquet(?) AS source' + (' LEFT JOIN result_table AS results ON source."id" = results."id"' if artifacts else '')
+
+        connection = duckdb.connect(database=":memory:")
+        connection.execute(f"SET memory_limit = '{self.memory_mb}MB'")
+        connection.execute("SET max_temp_directory_size = '1024MB'")
+        connection.execute(f"SET threads = {self.threads}")
+        with self._lock:
+            self._active.add(connection)
+        expired = threading.Event()
+
+        def expire() -> None:
+            expired.set()
+            connection.interrupt()
+
+        timer = threading.Timer(self.timeout_seconds, expire)
+        timer.daemon = True
+        timer.start()
+        results: list[dict[str, Any]] = []
+        try:
+            if artifacts:
+                connection.register("result_table", result_table)
+            denominator = connection.execute(f"SELECT count(*) FROM {source}{where}", [str(self.parquet), *params]).fetchone()[0]
+            for field_id in field_ids:
+                column, dtype, _ = self._column(field_id, registry)
+                if dtype in {"array", "object"}:
+                    results.append({"field_id": field_id, "kind": "unsupported", "reason": "Structured fields are not aggregated."})
+                    continue
+                missing = connection.execute(f"SELECT count(*) FROM {source}{where}{' AND' if where else ' WHERE'} {column} IS NULL", [str(self.parquet), *params]).fetchone()[0]
+                if dtype == "category":
+                    expression, kind = self._category_sort_expression(field_id, column, self.category_kinds) if len(self.category_kinds.get(field_id, [])) == 1 else (f"substr({column}, 3)", "string")
+                    key = f"substr({column}, 3)" if kind != "number" else expression
+                else:
+                    key = column
+                if dtype == "number":
+                    row = connection.execute(
+                        f'SELECT min({column}), max({column}), avg({column}), count({column}) FROM {source}{where}',
+                        [str(self.parquet), *params],
+                    ).fetchone()
+                    results.append({
+                        "field_id": field_id, "kind": "numeric", "denominator": denominator, "missing": missing,
+                        "min": row[0], "max": row[1], "mean": row[2], "present": row[3],
+                    })
+                    continue
+                rows = connection.execute(
+                    f'SELECT CAST({key} AS VARCHAR) AS k, count(*) AS n FROM {source}{where}{" AND" if where else " WHERE"} {column} IS NOT NULL GROUP BY 1 ORDER BY n DESC, k ASC LIMIT ?',
+                    [str(self.parquet), *params, top + 1],
+                ).fetchall()
+                truncated = len(rows) > top
+                results.append({
+                    "field_id": field_id, "kind": "categorical", "denominator": denominator, "missing": missing,
+                    "counts": [{"value": row[0], "count": row[1]} for row in rows[:top]], "truncated": truncated,
+                })
+        except duckdb.InterruptException as exc:
+            raise ValueError("Aggregation exceeded its time budget" if expired.is_set() else "Aggregation cancelled") from exc
+        finally:
+            timer.cancel()
+            timer.join()
+            with self._lock:
+                self._active.discard(connection)
+            connection.close()
+        return {
+            "snapshot_id": self.snapshot_id, "unit": self.unit, "population_scope": self.population_scope,
+            "denominator": denominator, "count_status": "exact", "results": results,
+            "sampling_applied": False,
+            "warnings": (["Sampling in the browsing query was not applied; these counts describe the filtered population."] if query.sample else [])
+                        + ([] if self.population_scope == "complete" else [f"Counts describe the available {self.population_scope} snapshot, not a complete release."]),
+        }

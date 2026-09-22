@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import type { Pack, Query } from './generated'
 import fixture from './test-fixtures/query-parity.json'
-import { fieldValue, fnv1a, queryPack } from './query'
+import { aggregatePack, fieldValue, fnv1a, queryPack } from './query'
 
 const pack = fixture.pack as Pack
 
@@ -51,5 +51,30 @@ describe('static query parity with canonical Python fixtures', () => {
 
   it('uses portable UTF-8 FNV-1a ordering', () => {
     expect(fnv1a('42:α-1')).toBe(2855757388)
+  })
+})
+
+describe('aggregate parity with canonical Python fixtures', () => {
+  for (const [name, testCase] of Object.entries(fixture.aggregates)) {
+    it(name, () => {
+      const expected = testCase as { query: Query; field_ids: string[]; expected: Record<string, unknown> }
+      const actual = aggregatePack(pack, expected.query, expected.field_ids)
+      expect(actual.denominator).toEqual(expected.expected.denominator)
+      expect(actual.population_scope).toEqual(expected.expected.population_scope)
+      expect(actual.sampling_applied).toEqual(expected.expected.sampling_applied)
+      expect(actual.warnings).toEqual(expected.expected.warnings)
+      expect(JSON.parse(JSON.stringify(actual.results))).toEqual(expected.expected.results)
+    })
+  }
+
+  it('rejects an unregistered aggregation field rather than counting nothing', () => {
+    expect(() => aggregatePack(pack, { snapshot_id: 'synthetic-v1' }, ['source.absent'])).toThrow(/Unknown aggregation field/)
+  })
+
+  it('never applies the browsing sample to a population count', () => {
+    const sampled = aggregatePack(pack, { snapshot_id: 'synthetic-v1', sample: { method: 'random', size: 2, seed: 1 } }, ['source.group'])
+    const plain = aggregatePack(pack, { snapshot_id: 'synthetic-v1' }, ['source.group'])
+    expect(sampled.denominator).toBe(plain.denominator)
+    expect(sampled.warnings.some(warning => warning.includes('Sampling in the browsing query was not applied'))).toBe(true)
   })
 })

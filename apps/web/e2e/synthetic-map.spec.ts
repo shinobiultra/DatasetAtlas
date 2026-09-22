@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test'
+import { expectPanel, scopeLine, selectionBar, stubCommonRoutes, switchView } from './helpers'
 import { cpus, totalmem } from 'node:os'
 import { writeFileSync } from 'node:fs'
 
@@ -36,23 +37,28 @@ test('synthetic 10,000-point map renders and lasso-selects without a production 
   await page.addInitScript(() => {
     const state = { lastDraw: null as null | { renderedPoints: number; drawMs: number }, started: 0, fills: 0 }
     ;(window as any).__atlasCanvas = state
+    const isMap = (canvas: HTMLCanvasElement) => canvas.parentElement?.classList.contains('map-stage') ?? false
     const clear = CanvasRenderingContext2D.prototype.clearRect
     const fill = CanvasRenderingContext2D.prototype.fill
     CanvasRenderingContext2D.prototype.clearRect = function (...args) {
-      if (this.canvas.width === 800 && this.canvas.height === 500) { state.started = performance.now(); state.fills = 0 }
+      if (isMap(this.canvas)) { state.started = performance.now(); state.fills = 0 }
       return clear.apply(this, args)
     }
     CanvasRenderingContext2D.prototype.fill = function (...args) {
       const result = fill.apply(this, args)
-      if (this.canvas.width === 800 && this.canvas.height === 500) {
+      if (isMap(this.canvas)) {
         state.fills++
-        if (state.fills === 10_000) state.lastDraw = { renderedPoints: state.fills, drawMs: performance.now() - state.started }
+        // Record cumulatively: the renderer culls points outside the viewport,
+        // so the final count of a draw is not known in advance.
+        state.lastDraw = { renderedPoints: state.fills, drawMs: performance.now() - state.started }
       }
       return result
     }
   })
   await page.route('**/api/v1/**', async route => {
     const request = route.request(), url = new URL(request.url()), path = url.pathname.replace('/api/v1', '')
+    const common = stubCommonRoutes(path, ID)
+    if (common !== undefined) return route.fulfill({ json: common })
     let body: unknown
     if (path === '/capabilities') body = { mode: 'workbench', operations: ['catalogue', 'query', 'selection', 'artifacts'], api_version: '1' }
     else if (path === '/datasets') body = [dataset]
@@ -69,23 +75,23 @@ test('synthetic 10,000-point map renders and lasso-selects without a production 
 
   await page.goto(`/?mode=workbench#/dataset/${ID}`)
   await expect(page.getByRole('heading', { name: dataset.name })).toBeVisible()
-  await page.getByRole('button', { name: 'About' }).click()
-  const evidence = page.getByRole('dialog', { name: 'about drawer' }).locator('.evidence-section')
-  await expect(evidence.getByText(/Agent source check/)).toBeVisible()
-  await expect(evidence.getByText(/Paper text check/)).toBeVisible()
-  await expect(evidence.getByRole('link', { name: 'https://example.org/test-only' })).toHaveAttribute('href', 'https://example.org/test-only')
-  await evidence.getByText('Full receipt').first().click()
-  await expect(evidence.getByText(/official_source_resolved_not_human_reviewed/)).toBeVisible()
-  await page.getByRole('button', { name: 'Close drawer' }).click()
-  await page.getByRole('button', { name: 'Map', exact: true }).click()
-  const canvas = page.locator('.map-canvas canvas')
-  await expect(canvas).toHaveAttribute('aria-label', /Projection with 1000 visible records/)
-  for (let pageNumber = 2; pageNumber <= 10; pageNumber++) {
-    await page.getByRole('button', { name: 'Load more points' }).click()
-    await expect(canvas).toHaveAttribute('aria-label', new RegExp(`Projection with ${pageNumber * PAGE} visible records`))
-  }
-  await expect(page.locator('.map-wrap')).toContainText('10000 plotted of 10000 loaded records')
+  await page.getByRole('button', { name: 'About dataset' }).click()
+  const about = await expectPanel(page, 'About dataset')
+  await about.getByText(/^Evidence \(/).click()
+  await expect(about.getByText(/Source Audit Identity/i)).toBeVisible()
+  await expect(about.getByText(/Corpus Mention/i)).toBeVisible()
+  await expect(about.getByRole('link', { name: 'https://example.org/test-only' })).toHaveAttribute('href', 'https://example.org/test-only')
+  await about.getByText('Full receipt').first().click()
+  await expect(about.getByText(/official_source_resolved_not_human_reviewed/)).toBeVisible()
+
+  await switchView(page, 'Map')
+  const canvas = page.locator('.map-stage canvas')
+  // The map pulls its whole population automatically rather than asking for clicks.
+  await expect(canvas).toHaveAttribute('aria-label', new RegExp(`Projection project\\.umap with ${SIZE} plotted points`), { timeout: 60_000 })
+  await expect(page.locator('.map-strip')).toContainText(`${SIZE.toLocaleString()} plotted`)
   const draw = await page.evaluate(() => (window as any).__atlasCanvas.lastDraw)
+  // Every plotted point is drawn; the renderer only culls what a pan or zoom
+  // has moved outside the canvas, and nothing is panned here.
   expect(draw?.renderedPoints).toBe(SIZE)
 
   await page.evaluate(() => {
@@ -93,7 +99,7 @@ test('synthetic 10,000-point map renders and lasso-selects without a production 
     ;(window as any).__atlasSelection = state
     document.addEventListener('pointerup', () => { state.pointerUpAt = performance.now() }, { capture: true, once: true })
     const observer = new MutationObserver(() => {
-      if (document.querySelector('.selection-bar strong')?.textContent === '10000 selected') {
+      if (document.querySelector('.statusbar.active .count')?.textContent === '10,000 selected') {
         state.domAt = performance.now()
         observer.disconnect()
         requestAnimationFrame(() => { state.frameAt = performance.now() })
@@ -101,9 +107,6 @@ test('synthetic 10,000-point map renders and lasso-selects without a production 
     })
     observer.observe(document.body, { childList: true, subtree: true, characterData: true })
   })
-  await canvas.scrollIntoViewIfNeeded()
-  const initialBox = await canvas.boundingBox()
-  if (initialBox && initialBox.y < 260) await page.evaluate(delta => document.querySelector('.results')?.scrollBy(0, delta), initialBox.y - 260)
   const box = await canvas.boundingBox()
   expect(box).not.toBeNull()
   const coord = (x: number, y: number) => ({ x: box!.x + x * box!.width / 800, y: box!.y + y * box!.height / 500 })
@@ -116,7 +119,7 @@ test('synthetic 10,000-point map renders and lasso-selects without a production 
     await page.mouse.move(point.x, point.y)
   }
   await page.mouse.up()
-  await expect(page.locator('.selection-bar strong')).toHaveText('10000 selected')
+  await expect(selectionBar(page).locator('.count')).toHaveText('10,000 selected')
   await page.waitForFunction(() => Boolean((window as any).__atlasSelection.frameAt))
   const timing = await page.evaluate(() => (window as any).__atlasSelection as Record<string, number>)
   const environment = await page.evaluate(() => ({ userAgent: navigator.userAgent, hardwareConcurrency: navigator.hardwareConcurrency, deviceMemoryGiB: (navigator as Navigator & { deviceMemory?: number }).deviceMemory ?? null }))

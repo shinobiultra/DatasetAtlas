@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "verified_at_utc": "2026-09-23T05:23:29.095012+00:00",
+  "verified_at_utc": "2026-09-23T05:28:31.103979+00:00",
   "installation": {
     "installed_module": "/home/bitwise/Documents/vibe/DatasetAtlas/work/verify-install/selective-base-venv/lib/python3.12/site-packages/dataset_atlas/__init__.py",
     "optional_model_packages_present": {
@@ -103,16 +103,16 @@
   },
   "release_archives": {
     "dataset_atlas-0.1.0.tar.gz": {
-      "bytes": 29627406,
-      "sha256": "95366a6f1babe2165cd1cb803d50ce4d0403f46b9befaab6f6273b9095d95b69"
+      "bytes": 29628083,
+      "sha256": "2cd6efa7d6e9438098c618e30e1ae6c7bc85cf26a9df61c23c5c1d68c452ecb0"
     },
     "dataset_atlas-0.1.0-py3-none-any.whl": {
-      "bytes": 29326842,
-      "sha256": "dfbbc62cd1b15721c330b9d0b8dc11adb3d6e8bf82da692f0faee4ad27474e9e"
+      "bytes": 29327218,
+      "sha256": "bc918745dcf33d6d80abab5195a7f0d8f2450a9a35bd1137a8901aeb6130af1d"
     }
   },
   "validation": {
-    "full_python_suite": "311 passed; 2 dependency deprecation warnings",
+    "full_python_suite": "313 passed; 2 dependency deprecation warnings",
     "frontend_tests": "22 passed",
     "browser_suite": "30 passed in one opt-in browser run including real analysis and local image send; 4 media checks passed afterward including the new absent-source-image regression",
     "generated_contract": "byte-identical",
@@ -121,5 +121,6 @@
   "limitations": [
     "Selected installed HTTP routes verified; complete workbench and model checks are recorded separately.",
     "Optional model dependencies are intentionally absent from this base environment."
-  ]
+  ],
+  "built_source_commit": "bef6b70"
 }

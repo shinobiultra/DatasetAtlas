@@ -13,7 +13,7 @@ datasets = ["scipy>=1.15,<2", "ijson>=3.3,<4"]
 vision = ["nudenet>=3.4,<4", "torch>=2.6", "torchvision>=0.21"]
 embeddings = ["sentence-transformers>=3.4", "transformers>=4.49", "lancedb>=0.20", "sentencepiece>=0.2"]
 projection = ["scikit-learn>=1.6", "umap-learn>=0.5.7"]
-remote-storage = ["s3fs>=2025.2"]
+remote-storage = ["s3fs>=2025.2", "indexed-gzip>=1.9,<2"]
 development = ["pytest>=8.3", "pytest-asyncio>=0.25", "build>=1.2"]
 [project.scripts]
 atlas = "dataset_atlas.cli:main"

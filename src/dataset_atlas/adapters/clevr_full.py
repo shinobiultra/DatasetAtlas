@@ -197,11 +197,9 @@ class CLEVRFullAdapter(DatasetAdapter):
             raise ValueError("invalid CLEVR asset reference")
         prefix = self._index()["zip_prefix"]
         member = prefix + asset_ref
-        with zipfile.ZipFile(self._archive()) as archive:
-            info = archive.getinfo(member)
-            if info.file_size > source.max_bytes - source.bytes_read:
-                raise ValueError("CLEVR image exceeds remaining byte budget")
-            data = archive.read(info)
+        from dataset_atlas.storage.zip_members import LOCAL_ZIP_MEMBERS
+        data = LOCAL_ZIP_MEMBERS.read(self._archive(), member, source.max_bytes - source.bytes_read,
+                                      self.config['archive_sha256'])
         source.charge(len(data))
         if not data.startswith(b"\x89PNG\r\n\x1a\n"):
             raise ValueError("CLEVR image member is not PNG")

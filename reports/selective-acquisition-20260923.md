@@ -75,9 +75,9 @@ See `remote-metadata-benchmark.json`.
   the response and context digest. The linked selection survived export/import. Fresh
   detector and embedding browser runs passed. Receipts: `browser-linked-journey.json` and
   `browser-analysis-journey.json`. This validates routing, not answer accuracy.
-- The latest recorded full Python suite passed 292 tests, including native TSV, RAVEL,
+- The latest recorded full Python suite passed 347 tests (one optional local-archive check skipped after deliberate source retirement), including native TSV, RAVEL,
   EMNIST and multi-archive preparation. All 22 frontend tests and all
-  30 browser checks passed in one opt-in run, including real analysis and local image send.
+  34 browser checks passed in one opt-in run, including real analysis and local image send.
 - Browsing now explicitly chooses result snapshots instead of attaching every historical
   run. A 40-run regression verifies that source browsing works, older results remain
   selectable, and the 32-run query bound stays enforced.
@@ -163,3 +163,75 @@ Aircraft's updated source scope now explicitly states that the official 2013b ar
 omits images_size.txt; source_size is null and original boxes remain unchanged. The
 corrected immutable version and its 100 preview images passed after increasing the
 bounded repack output allowance to 5 GB.
+
+## Native perceptual, restoration and paired-question releases
+
+The next implementation batch preserves native variant relationships instead of
+flattening them into unrelated images:
+
+- BAPPS: 197,344 judgement records (151,400 2AFC train, 36,344 2AFC validation,
+  9,600 JND validation), with 582,432 original patches. Fractional human judgements,
+  reference/p0/p1 roles and all eleven native distortion/task groups remain distinct.
+  The files named `.tar.gz` are uncompressed TARs; their original hashes are recorded.
+- MME: 2,374 original yes/no questions, with the 2,114-question perception component
+  also available under its existing catalogue entry. Native question pairs share
+  their original image identity without sharing record identity.
+- MM-SafetyBench: 1,680 annotated questions with SD, SD_TYPO and TYPO image conditions,
+  plus five native image groups without released questions. All 5,055 images survive
+  in 1,685 records. Condition-specific questions remain source data; none were run.
+- Set5 and Set14: all 114 files in the pinned SelfExSR benchmark representation,
+  grouped into five and fourteen image identities. Scale-specific HR crops and LR
+  images are separate assets. Byte equivalence to the first historical distribution
+  is not established and is not claimed.
+
+All preview images for those five catalogue sources plus the MME perception entry
+passed live decoding. BAPPS, MME and MM-SafetyBench also have deterministic probes
+covering every native task/category/scenario, including unannotated image groups.
+Receipts: `preview-media-batch11-20260923.json`, `preview-media-batch12-20260923.json`,
+`preview-media-batch13-20260923.json` and `native-diversity-media-batch2-20260923.json`.
+Batch 13 completed Set5, Set14 and DIV2K. CINIC-10 and SUN397 subsequently completed in their separate native preview receipts.
+
+DIV2K's 900 published train/validation identities have a complete index over all 22
+author ZIPs. Training preserves all four wild realizations (14 total HR/LR assets
+per image); validation has one wild realization (11 assets per image). Test HR
+images are not published at the author download page. Remote archive consistency
+uses strong ETags and member CRCs; full archive SHA-256 was not computed. All 1,400 original preview image variants passed live decoding in the batch-13 receipt.
+
+Repeated local ZIP reads now reuse verified directory metadata. Remote ZIP reads
+coalesce adjacent local-header and small-payload requests into bounded 64 KiB ranges.
+This changes request overhead without changing original asset bytes or identities.
+Focused inspection names native conditions and roles, and labels an image-specific
+question separately from the record question. The complete browser suite passed
+34 checks, including real local analysis and image transmission to the local VLM.
+
+
+## Original-quality previews and bounded storage
+
+SUN397 now has all 108,754 images and ten native evaluation-fold memberships indexed;
+its 100 sampled previews preserve the original JPEG bytes. CINIC-10 has all 270,000
+native train/valid/test images, with CIFAR/ImageNet origin identifiers retained.
+NRC-VAD has 74,772 versioned terms across v1 and v2.1, including native translations
+and scale exports; its noncommercial license does not authorize public redistribution.
+Each has a native source audit and completed live preview receipt.
+
+The storage pass now fits within the requested 50–150 GB range, including configured
+model weights and the current vLLM compilation cache. The exact, timestamped footprint
+is `storage-footprint-retained-20260923.json`; 100 GB remains the target.
+SHA-verified duplicate acquired copies were hard-linked, unused versions were pruned,
+and verified native ZIP/TAR access replaced large retained archives. VQA v2 and POPE
+were retired together because they share COCO val2014 media. Frozen snapshots remain.
+
+Aircraft's 10,000 images have 9,900 AVIF copies and 100 byte-exact preview originals.
+GQA's complete validation-balanced image population has 10,234 distinct images,
+including 82 distinct originals serving its existing 100-record preview. Other large
+populations retain partial bulk conversions plus original preview pins; remaining
+images are compressed on inspection through a shared bounded cache. They are not
+claimed to be completely transcoded offline. Model inputs always resolve originals.
+
+`retained-media-live-verification.json` verifies all 582 distinct preview images
+across GQA, SUN397, complete CLEVR, VQA v2, POPE and DOCCI after original retirement,
+plus 18 late-population original/display pairs. One SUN397 source image retained its
+original representation because AVIF conversion was unsuitable. Native ZIP/TAR cold
+range probes and VHD image/video after-retirement checks have separate receipts.
+`docs/storage.md` documents bounded encoding, original retrieval, retirement checks,
+shared preparation admission and the limits of application-level quota enforcement.

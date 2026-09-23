@@ -37,6 +37,10 @@ def test_full_preparation_and_runtime_registry(tmp_path):
     dataset = registry.dataset(original.id)
     assert dataset.coverage.total_count == 117
     assert len(registry.pack(original.id).records) == 100
+    preview = registry.pack(original.id)
+    assert preview.sampling['method'] == 'sha256_bottom_k_primary_asset'
+    assert preview.sampling['population_count'] == 117
+    assert max(r.source['value'] for r in preview.records) > 100
     snapshot = ParquetSnapshot(registry.snapshot_path(original.id).parent, registry.snapshot_path(original.id))
     result = snapshot.query(Query(snapshot_id=dataset.snapshot_id, population_scope='complete', limit=1000))
     assert result.matched_count == 117 and len(result.records) == 117
@@ -45,6 +49,30 @@ def test_full_preparation_and_runtime_registry(tmp_path):
     assert filtered.matched_count==1 and filtered.records[0].source['value']==116
     # Original manifest is never rewritten.
     assert yaml.safe_load((tmp_path/'registry/datasets/fixture.yaml').read_text())['coverage']['preview_count'] == 0
+
+
+def test_shared_storage_rechecks_headroom_before_dispatch(tmp_path):
+    from dataset_atlas.storage.optimized import configure_storage
+    dataset = fixture(tmp_path, 3)
+    configure_storage(tmp_path, target_bytes=2_000_000, ceiling_bytes=3_000_000, optimized_cache_bytes=100_000)
+    manager = PreparationManager(tmp_path)
+    plan = manager.plan(dataset.id, 100_000, 1_000_000)
+    assert plan['ready'] and plan['shared_storage']['admitted']
+    (tmp_path/'new-retained-source').write_bytes(b'x' * 2_500_000)
+    with pytest.raises(ValueError, match='headroom changed'): manager.start(plan['id'])
+    blocked = manager.plan(dataset.id, 100_000, 1_000_000)
+    assert not blocked['ready'] and not blocked['shared_storage']['admitted']
+
+
+def test_storage_reservations_include_jobs_older_than_ui_listing(tmp_path, monkeypatch):
+    fixture(tmp_path, 1)
+    manager = PreparationManager(tmp_path)
+    for i in range(101):
+        directory = manager._path(f'{i:064x}'); directory.mkdir()
+        (directory/'status.json').write_text('{}')
+        (directory/'plan.json').write_text(json.dumps({'required_free_bytes': 10}))
+    monkeypatch.setattr(manager, 'status', lambda identity: {'id': identity, 'status':'running'})
+    assert manager._storage_reservations() == 1010
 
 
 def test_shards_arrow_and_parquet_stable_ids(tmp_path):
@@ -395,3 +423,19 @@ def test_gated_recipe_requires_local_credentials_without_serializing_them(tmp_pa
     plan = manager.plan(dataset.id, 1000000, 1000000)
     assert plan['ready'] and plan['credential_profile'] == 'huggingface'
     assert 'hf_fixture_private' not in json.dumps(plan)
+
+
+def test_prune_does_not_claim_to_free_a_source_linked_outside_prepared(tmp_path):
+    dataset = fixture(tmp_path)
+    manager = PreparationManager(tmp_path)
+    source = tmp_path/'work/source-objects/native'
+    source.parent.mkdir(parents=True)
+    source.write_bytes(b'z'*4096)
+    failed = tmp_path/'work/prepared'/dataset.id/('f'*64)
+    failed.mkdir(parents=True)
+    os.link(source,failed/'archive.zip')
+    report = manager.prune()
+    entry = next(item for item in report['removable'] if item['version']==failed.name)
+    assert entry['freed_bytes']==0
+    manager.prune(execute=True)
+    assert not failed.exists() and source.read_bytes()==b'z'*4096

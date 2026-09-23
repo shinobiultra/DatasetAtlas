@@ -193,11 +193,9 @@ class GQABalancedAdapter(DatasetAdapter):
     def resolve_asset(self, source: PreparedSource, asset_ref: str) -> MediaHandle:
         if not self.IMAGE_RE.fullmatch(asset_ref):
             raise ValueError("invalid GQA image reference")
-        with zipfile.ZipFile(self._paths()[1]) as archive:
-            info = archive.getinfo(asset_ref)
-            if info.file_size > source.max_bytes - source.bytes_read:
-                raise ValueError("GQA image exceeds remaining byte budget")
-            data = archive.read(info)
+        from dataset_atlas.storage.zip_members import LOCAL_ZIP_MEMBERS
+        data = LOCAL_ZIP_MEMBERS.read(self._paths()[1], asset_ref, source.max_bytes - source.bytes_read,
+                                      self.config['images_sha256'])
         source.charge(len(data))
         if not data.startswith(b"\xff\xd8\xff"):
             raise ValueError("GQA image member is not JPEG")

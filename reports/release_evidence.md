@@ -50,3 +50,30 @@ separate from verified coverage. The latest counts and test checkpoint are in
 The current implementation has not received a new independent review. PR #3's review
 covers its earlier changes only. Source acquisition does not approve redistribution;
 public media remain limited to CLEVR, PAIRS and EuroSAT.
+
+## Full-resolution previews and bounded retained storage
+
+The 2026-09-23 storage checkpoint retains original preview pixels and serves
+full-dimension AVIF browsing copies for other images, with originals available
+on demand. The measured footprint, including explicitly configured local model
+weights and the active vLLM compilation cache, is below 150 GB; see
+[the timestamped storage scan](storage-footprint-retained-20260923.json).
+This measures the current 131-preview workspace, not a prediction that every
+remaining collection's metadata will fit. Admission checks enforce the configured
+ceiling for new preparations, subject to the documented filesystem caveats.
+
+After retiring verified acquired archives, all 600 preview records across GQA,
+SUN397, CLEVR full, VQA v2, POPE and DOCCI passed original-byte checks (582 distinct
+images). Eighteen late-population original/display pairs also passed. Separate
+VHD11K checks passed 100 original preview images, three non-preview image pairs,
+and three original videos. Receipts are in `retained-media-live-verification.json`,
+`vhd11k-images-after-source-eviction.json`, and
+`vhd11k-video-after-source-eviction.json`. Aircraft has its own earlier receipt.
+
+Validation: 347 Python tests passed, with one optional local-archive test skipped
+because that original is now served on demand; targeted retirement and type-fix
+tests passed afterward. All 22 frontend tests and 34 browser checks passed,
+including real local detector, embedding and vLLM image-send journeys. The new
+storage modules pass the pinned `ty` check through `prek`. Current archive and
+base-only installation receipts are recorded separately. Catalogue coverage
+remains incomplete: 202 of 333 entries still lack a preview.

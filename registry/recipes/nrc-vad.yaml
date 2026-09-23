@@ -1,0 +1,38 @@
+release: NRC-VAD-1-and-2.1-native
+adapter: nrc_vad
+source_url: https://saifmohammad.com/WebPages/nrc-vad.html
+expected_count: 74772
+scope: 'All 19971 native English entries in v1 and 54801 entries in v2.1 (74772 versioned
+  terms). Retain all 108 v1 automatic translations and every native score/dimension/subset
+  export with native row positions. Original version scales differ: v1 [0,1], v2.1
+  [-1,1]. Export values are not silently normalized, including the source BipolarScale/PolarSubset
+  files. NRC and Saif M. Mohammad attribution retained. Noncommercial local research
+  use; redistribution prohibited.'
+adapter_config:
+  annotations:
+  - path_key: original_path
+    version: '1'
+    prefix: NRC-VAD-Lexicon/
+    main_member: NRC-VAD-Lexicon.txt
+  - path_key: expanded_path
+    version: '2.1'
+    prefix: NRC-VAD-Lexicon-v2.1/
+    main_member: NRC-VAD-Lexicon-v2.1.txt
+  mapping:
+    text: term
+  max_annotation_bytes: 200000000
+files:
+- source_name: NRC-VAD-Lexicon.zip
+  url: https://saifmohammad.com/WebDocs/Lexicons/NRC-VAD-Lexicon.zip
+  sha256: f956a7814823d22b34e67af451a33095f57635f11dae98728dee891a30a83aea
+  bytes: 44536009
+  format: zip
+  config_key: original_path
+- source_name: NRC-VAD-Lexicon-v2.1.zip
+  url: https://saifmohammad.com/WebDocs/Lexicons/NRC-VAD-Lexicon-v2.1.zip
+  sha256: 8bcd04831ffda149f683f8d3091c76a3aee138ee3aa1924b67b50b9416d37df0
+  bytes: 6488651
+  format: zip
+  config_key: expanded_path
+allowed_hosts:
+- saifmohammad.com

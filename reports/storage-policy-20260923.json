@@ -1,0 +1,13 @@
+{
+  "target_bytes": 100000000000,
+  "ceiling_bytes": 150000000000,
+  "optimized_cache_bytes": 5000000000,
+  "optimize_on_demand": true,
+  "enforce_preparation_ceiling": true,
+  "external_roots": [
+    "/home/bitwise/.cache/huggingface/hub/models--Qwen--Qwen2.5-VL-3B-Instruct",
+    "/home/bitwise/.cache/huggingface/hub/models--Qwen--Qwen2.5-VL-3B-Instruct-AWQ",
+    "/home/bitwise/.lmstudio/models/OBLITERATUS/gemma-4-E4B-it-OBLITERATED",
+    "/home/bitwise/.cache/vllm/torch_compile_cache/torch_aot_compile/57d9b21e56ab797b8bbff34151df322287140fd5ab94c389f23618bb9e6ae6b7"
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "records": 270000,
+  "groups": {
+    "test": 90000,
+    "train": 90000,
+    "valid": 90000
+  },
+  "files": [
+    {
+      "source_name": "CINIC-10.tar.gz",
+      "url": "https://datashare.ed.ac.uk/server/api/core/bitstreams/e8e186cc-2688-48f1-aa5a-3fda1a43f8b6/content",
+      "bytes": 687544992,
+      "sha256": "31b095acf6d75e25a9e028bae82a07a0f94ff6b00671be2802d34ac4efa81a9e",
+      "format": "tar.gz",
+      "config_key": "path"
+    }
+  ],
+  "native_checksum_receipt": {
+    "source_name": "CINIC-10.tar.gz",
+    "url": "https://datashare.ed.ac.uk/server/api/core/bitstreams/e8e186cc-2688-48f1-aa5a-3fda1a43f8b6/content",
+    "bytes": 687544992,
+    "sha256": "31b095acf6d75e25a9e028bae82a07a0f94ff6b00671be2802d34ac4efa81a9e",
+    "config_key": "path",
+    "format": "tar.gz",
+    "author_md5": "6ee4d0c996905fe93221de577967a372"
+  },
+  "status": "full_native_index_and_preview_verified",
+  "live_verification_report": "reports/cinic-10-preview-verification.json"
+}

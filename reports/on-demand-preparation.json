@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-23T05:21:41.573243+00:00",
+  "checked_at": "2026-09-23T07:25:32.758360+00:00",
   "datasets": [
     {
       "dataset_id": "agent-security-bench",
@@ -30,6 +30,16 @@
       "scope": "ArtBench-10 author 32x32 CIFAR binary; 50,000 train and 10,000 test examples",
       "plan_id": "aac58a52359d0a516e1147672cb21eea3d0d0041b5d7f84d8cf66306a5a3807f",
       "prepared_receipt": "work/prepared/artbench/aac58a52359d0a516e1147672cb21eea3d0d0041b5d7f84d8cf66306a5a3807f/receipt.json"
+    },
+    {
+      "dataset_id": "bapps",
+      "release": "BAPPS-author-archives-20260923",
+      "snapshot_id": "bapps-fbde65c7714d91d3224a25f8",
+      "records": 197344,
+      "preview_records": 100,
+      "scope": "All 197344 native BAPPS judgement records from author-linked 2AFC train/validation and JND validation TARs. Original patches, reference/p0/p1 roles and fractional human judgements retained. Native distortion groups and splits are distinct memberships. No inferred media publication rights.",
+      "plan_id": "fbde65c7714d91d3224a25f88dbf03feba374981fa477414299f067186ae9c7e",
+      "prepared_receipt": "work/prepared/bapps/fbde65c7714d91d3224a25f88dbf03feba374981fa477414299f067186ae9c7e/receipt.json"
     },
     {
       "dataset_id": "caltech101",
@@ -92,6 +102,16 @@
       "prepared_receipt": "work/prepared/cifar-100-c/8b1e4a18684465bd7c083fa679f2fb41e4206ada1e65a744b63e0a4799529257/receipt.json"
     },
     {
+      "dataset_id": "cinic-10",
+      "release": "CINIC-10-institutional-ds2448",
+      "snapshot_id": "cinic-10-f7e34bd1657f83c19d756310",
+      "records": 270000,
+      "preview_records": 100,
+      "scope": "All 270000 original CINIC-10 images across train/valid/test (90000 each), with ten native classes and CIFAR/ImageNet source identity retained from filenames. No image regeneration or split reassignment. Original institutional MD5 verified; no publication approval.",
+      "plan_id": "f7e34bd1657f83c19d7563105cb0a10c0d7d6acb8263fb2297730740556b9086",
+      "prepared_receipt": "work/prepared/cinic-10/f7e34bd1657f83c19d7563105cb0a10c0d7d6acb8263fb2297730740556b9086/receipt.json"
+    },
+    {
       "dataset_id": "coco-2014",
       "release": "coco-2014-native-all-image-splits",
       "snapshot_id": "coco-2014-0b639bf940c97037307f3b69",
@@ -140,6 +160,16 @@
       "scope": "All 11,788 CUB-200-2011 images, original train/test splits, 200 class labels, bounding boxes, 15 parts and 312 per-image attributes. Optional segmentation release is separate.",
       "plan_id": "24d786c47fbc01c79e1386cc30192ba883a46e4b8c2b3561a8d274faa3fa6832",
       "prepared_receipt": "work/prepared/cub-200-2011/24d786c47fbc01c79e1386cc30192ba883a46e4b8c2b3561a8d274faa3fa6832/receipt.json"
+    },
+    {
+      "dataset_id": "div2k",
+      "release": "DIV2K-official-published-archives-20260923",
+      "snapshot_id": "div2k-c28595c00366b0495e4ba62f",
+      "records": 900,
+      "preview_records": 100,
+      "scope": "All 900 published train/validation image identities (800 train, 100 validation), each joined to HR and all released LR variants (13 LR variants in train, including four wild realizations; ten LR variants in validation) across NTIRE 2017 and 2018 (22 original ZIP archives). Test HR images are not published on the author download page and are outside this released population. Original bytes fetched only on request; strong ETags and ZIP CRCs checked, complete remote archive SHA-256 not computed. No media publication approval.",
+      "plan_id": "c28595c00366b0495e4ba62f1fabb030cf02321270cd57d720c03ce0f722c065",
+      "prepared_receipt": "work/prepared/div2k/c28595c00366b0495e4ba62f1fabb030cf02321270cd57d720c03ce0f722c065/receipt.json"
     },
     {
       "dataset_id": "dreambooth",
@@ -352,6 +382,16 @@
       "prepared_receipt": "work/prepared/medical-multimodal-evaluation-data/f5d28789a26e7367502e3119c2382e016d8254b005c94ee9d6bff4805187329f/receipt.json"
     },
     {
+      "dataset_id": "mm-safetybench",
+      "release": "b80eedea3db312c09ded2082813390f68e750ef3",
+      "snapshot_id": "mm-safetybench-ef9dc9d1057214c3eca5b3b2",
+      "records": 1685,
+      "preview_records": 100,
+      "scope": "All 1680 native question records with three image variants (SD, SD_TYPO, TYPO), plus five original image groups without released question annotations: 1685 records and 5055 image members. Original prompts retained as inert data; no attacks executed. Questions from pinned author Git revision, images from author-linked Drive archive. Research-only license; no publication approval.",
+      "plan_id": "ef9dc9d1057214c3eca5b3b23241ff26f03a4a882703cad75b10ee93012ab70e",
+      "prepared_receipt": "work/prepared/mm-safetybench/ef9dc9d1057214c3eca5b3b23241ff26f03a4a882703cad75b10ee93012ab70e/receipt.json"
+    },
+    {
       "dataset_id": "mmbench",
       "release": "mmbench-v1-circular-tsv",
       "snapshot_id": "mmbench-f5c02c046f2fd701c1ea8d6c",
@@ -360,6 +400,26 @@
       "scope": "All four official MMBench v1 EN/CN dev/test TSV populations, including circular-evaluation permutations. TSV bytes acquired from a pinned mirror and matched against the author evaluation toolkit MD5; rows are not distinct base questions. Test answers remain as released.",
       "plan_id": "f5c02c046f2fd701c1ea8d6cf8d78fcb35d076901c177de6bc2458e83d47de2c",
       "prepared_receipt": "work/prepared/mmbench/f5c02c046f2fd701c1ea8d6cf8d78fcb35d076901c177de6bc2458e83d47de2c/receipt.json"
+    },
+    {
+      "dataset_id": "mme-perception",
+      "release": "7056f44dac19de35e510b62d734bb2f7a6f64739",
+      "snapshot_id": "mme-perception-5f39a6a7b8e802b3b31d5c25",
+      "records": 2114,
+      "preview_records": 100,
+      "scope": "All 2114 native question rows in the ten perception categories of the author-linked MME benchmark ZIP. Retain both questions per image, native answers, category and pair identity. No inferred publication rights.",
+      "plan_id": "5f39a6a7b8e802b3b31d5c2517c3290926a9bfe55b09fa361683ba648ce096b9",
+      "prepared_receipt": "work/prepared/mme-perception/5f39a6a7b8e802b3b31d5c2517c3290926a9bfe55b09fa361683ba648ce096b9/receipt.json"
+    },
+    {
+      "dataset_id": "mme",
+      "release": "7056f44dac19de35e510b62d734bb2f7a6f64739",
+      "snapshot_id": "mme-2bfda63c4a3bebd2ec0c167a",
+      "records": 2374,
+      "preview_records": 100,
+      "scope": "All 2374 native question rows in all fourteen categories of the author-linked MME benchmark ZIP. Retain both questions per image, native answers, category and pair identity. No inferred publication rights.",
+      "plan_id": "2bfda63c4a3bebd2ec0c167a984084fa2636dfb5e92d50e71e96c7aa5db6c600",
+      "prepared_receipt": "work/prepared/mme/2bfda63c4a3bebd2ec0c167a984084fa2636dfb5e92d50e71e96c7aa5db6c600/receipt.json"
     },
     {
       "dataset_id": "mmmu-dev",
@@ -390,6 +450,16 @@
       "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
       "plan_id": "3a316bc9ca232b3988341858c01ea9cc5e73911e52ee0e9a7c23a1adddbe8690",
       "prepared_receipt": "work/prepared/naturalbench/3a316bc9ca232b3988341858c01ea9cc5e73911e52ee0e9a7c23a1adddbe8690/receipt.json"
+    },
+    {
+      "dataset_id": "nrc-vad",
+      "release": "NRC-VAD-1-and-2.1-native",
+      "snapshot_id": "nrc-vad-211641de9b969b2e119b8adb",
+      "records": 74772,
+      "preview_records": 100,
+      "scope": "All 19971 native English entries in v1 and 54801 entries in v2.1 (74772 versioned terms). Retain all 108 v1 automatic translations and every native score/dimension/subset export with native row positions. Original version scales differ: v1 [0,1], v2.1 [-1,1]. Export values are not silently normalized, including the source BipolarScale/PolarSubset files. NRC and Saif M. Mohammad attribution retained. Noncommercial local research use; redistribution prohibited.",
+      "plan_id": "211641de9b969b2e119b8adb7e79285fe3970c101f7a87f455d9968f3a7b1fe3",
+      "prepared_receipt": "work/prepared/nrc-vad/211641de9b969b2e119b8adb7e79285fe3970c101f7a87f455d9968f3a7b1fe3/receipt.json"
     },
     {
       "dataset_id": "ok-vqa",
@@ -472,6 +542,26 @@
       "prepared_receipt": "work/prepared/senator-tweets-2021/47e5564df91d1cbbb471a9eede206bc229dee7b46c1d1e9c7b972bc97d883ee1/receipt.json"
     },
     {
+      "dataset_id": "set14",
+      "release": "SelfExSR-8f6dd8c1d20cb7e8792a7177b4f6fd677633f598",
+      "snapshot_id": "set14-5e16aa81b4fc0c1175b0f713",
+      "records": 14,
+      "preview_records": 14,
+      "scope": "All 14 native image identities and all 84 scale-specific HR/LR files for x2/x3/x4 in the pinned SelfExSR benchmark distribution of Set14. Original Git blob hashes checked on request; no generated downsampling. This is an explicitly named benchmark representation, not verified byte equivalence to the first historical release. No media publication approval.",
+      "plan_id": "5e16aa81b4fc0c1175b0f71371c0522fe0da394c93cc638938994c864aa6b737",
+      "prepared_receipt": "work/prepared/set14/5e16aa81b4fc0c1175b0f71371c0522fe0da394c93cc638938994c864aa6b737/receipt.json"
+    },
+    {
+      "dataset_id": "set5",
+      "release": "SelfExSR-8f6dd8c1d20cb7e8792a7177b4f6fd677633f598",
+      "snapshot_id": "set5-ef8d77ef3398695a0d24be69",
+      "records": 5,
+      "preview_records": 5,
+      "scope": "All 5 native image identities and all 30 scale-specific HR/LR files for x2/x3/x4 in the pinned SelfExSR benchmark distribution of Set5. Original Git blob hashes checked on request; no generated downsampling. This is an explicitly named benchmark representation, not verified byte equivalence to the first historical release. No media publication approval.",
+      "plan_id": "ef8d77ef3398695a0d24be69f121c8df886c76a8682bf3324cf829d84f5a84af",
+      "prepared_receipt": "work/prepared/set5/ef8d77ef3398695a0d24be69f121c8df886c76a8682bf3324cf829d84f5a84af/receipt.json"
+    },
+    {
       "dataset_id": "simplevqa",
       "release": "037cf89fb6f1212691756b66d1ecde6c2ce89e54",
       "snapshot_id": "simplevqa-8382305d27a65ddcdbc544e1",
@@ -500,6 +590,16 @@
       "scope": "All eight SpaCE-10 single-choice test subsets (ep, eq, fr, oo, os, sa, sp, sq) at the pinned revision; each record keeps its subset name from the source shard.",
       "plan_id": "8c27fa373dff12ed1d31f6bcb17eb1d8b9bf2316ee760217aad8bc8913bcd741",
       "prepared_receipt": "work/prepared/space-10/8c27fa373dff12ed1d31f6bcb17eb1d8b9bf2316ee760217aad8bc8913bcd741/receipt.json"
+    },
+    {
+      "dataset_id": "sun397",
+      "release": "SUN397-original-byte-equivalent-mirror-99bbf6ad18ca4f01e47f8f96ca1a8b7e53cb235a",
+      "snapshot_id": "sun397-bfade66cc4678f0e17c4f745",
+      "records": 108754,
+      "preview_records": 100,
+      "scope": "All 108754 native SUN397 images in 397 classes, joined to all ten published training/testing text folds and distinct MATLAB complement testing folds. Mirror image archive matches the TorchVision-published original MD5 and pinned HF SHA-256. Both native partition protocols retained separately. No public redistribution approval.",
+      "plan_id": "bfade66cc4678f0e17c4f7458c9d06a91049140158c0b16cf240318935494c46",
+      "prepared_receipt": "work/prepared/sun397/bfade66cc4678f0e17c4f7458c9d06a91049140158c0b16cf240318935494c46/receipt.json"
     },
     {
       "dataset_id": "t2i-compbench",
@@ -593,9 +693,9 @@
     }
   ],
   "catalogue_entries": 333,
-  "with_previews": 121,
-  "without_previews": 212,
-  "full_population_indices": 116,
+  "with_previews": 131,
+  "without_previews": 202,
+  "full_population_indices": 126,
   "all_requested_datasets_complete": false,
   "note": "Acquired source populations and on-demand infrastructure; catalogue-wide coverage is not complete."
 }

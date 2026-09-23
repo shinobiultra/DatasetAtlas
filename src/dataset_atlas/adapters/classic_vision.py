@@ -16,8 +16,12 @@ class ClassicVisionAdapter(DirectoryArchiveAdapter):
 
     def _rows(self):
         if hasattr(self,'_metadata_rows'):return self._metadata_rows
-        path=self._path();is_zip=zipfile.is_zipfile(path)
-        archive=zipfile.ZipFile(path) if is_zip else tarfile.open(path)
+        path=self._path();is_zip=bool(self.config.get('original_access_index')) or zipfile.is_zipfile(path)
+        if self.config.get('original_access_index'):
+            from dataset_atlas.storage.indexed_tar import IndexedTarArchive
+            archive=IndexedTarArchive(self.config['original_access_index'], self.config.get('original_archive_path'), self.config.get('max_annotation_bytes',256_000_000))
+        else:
+            archive=zipfile.ZipFile(path) if is_zip else tarfile.open(path)
         maximum=self.config.get('max_annotation_bytes',256_000_000);consumed=0
         with archive:
             members={m.filename if is_zip else m.name:m for m in (archive.infolist() if is_zip else archive.getmembers()) if not m.is_dir()} if is_zip else {m.name:m for m in archive.getmembers() if m.isfile()}

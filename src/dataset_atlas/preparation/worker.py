@@ -114,6 +114,29 @@ def run(root, identity):
                 'metadata_transfer_bytes':plan['max_download_bytes'],'population':plan['scope'],
                 'mapping':dataset.adapter_config.get('mapping',{})}
         derived_sources = []
+        if dataset.adapter_config.get('archive_preparation') == 'indexed-gzip':
+            from dataset_atlas.storage.indexed_tar import build_tar_index
+            from dataset_atlas.storage.ranges import range_fingerprint
+            original = Path(dataset.adapter_config['path'])
+            entry = next(f for f in dataset.adapter_config['source_files'] if f.get('config_key') == 'path')
+            hosts = ['huggingface.co','cdn-lfs.huggingface.co','cdn-lfs-us-1.huggingface.co',
+                     'cas-bridge.xethub.hf.co','us.aws.cdn.hf.co',*plan.get('allowed_hosts', [])]
+            index = Path(root) / 'work/original-access' / entry['sha256']
+            update(stage='indexing original archive for selective retrieval')
+            remote = {'url': entry['url'], 'bytes': entry['bytes'], 'allowed_hosts': hosts,
+                      'etag': range_fingerprint(entry['url'], expected_size=entry['bytes'], allowed_hosts=hosts)}
+            if (index / 'receipt.json').is_file():
+                proof = json.loads((index / 'receipt.json').read_text())
+                if proof['source_sha256'] != entry['sha256'] or proof['remote']['etag'] != remote['etag']:
+                    raise ValueError('Existing original-access index differs from pinned source')
+            else:
+                proof = build_tar_index(original, index, source_sha256=entry['sha256'], remote=remote,
+                    max_uncompressed_bytes=dataset.adapter_config.get('max_uncompressed_bytes', entry['bytes'] * 4),
+                    max_index_bytes=plan['max_output_bytes'], cancel=check, progress=lambda values: update(**values))
+            derived_sources.append({'format': proof['format'], 'path': str(index), 'bytes': proof['index_bytes'],
+                                    'source_sha256': proof['source_sha256'], 'members': proof['members']})
+            dataset.adapter_config.update(original_access_index=str(index), original_archive_path=str(original),
+                path=str(index / 'members.sqlite'), sha256=proof['checksums']['members.sqlite'])
         repack_paths = dataset.adapter_config.get('repack_paths', [])
         if dataset.adapter_config.get('archive_preparation') == 'zip-store':
             repack_paths = ['path', *repack_paths]
@@ -206,6 +229,8 @@ def run(root, identity):
         preview_bytes=len(json.dumps(pack.model_dump(mode='json'),indent=2,ensure_ascii=False).encode())
         if preview_bytes+derived_bytes>=plan['max_output_bytes']:raise ValueError('Preview alone exceeds approved output budget')
         source = adapter.prepare(adapter.plan(1000, read_budget))
+        from .sampling import PreviewSampler
+        sampler = PreviewSampler(min(expected_count, 100))
         def records():
             cursor = None
             count = 0
@@ -214,7 +239,9 @@ def run(root, identity):
                 batch = adapter.iter_records(source, cursor, 1000)
                 if not batch.records and batch.next_cursor:
                     raise ValueError('Adapter made no progress')
-                yield from batch.records
+                for record in batch.records:
+                    sampler.add(record)
+                    yield record
                 count += len(batch.records)
                 update(stage='indexing', indexed_count=count, **({'downloaded_bytes':adapter.bytes_fetched} if dataset.adapter=='remote_columnar' else {}))
                 if not batch.next_cursor:
@@ -227,6 +254,23 @@ def run(root, identity):
             build_parquet_snapshot(records(), pack.fields, snapshot, root=version,
                 dataset_id=dataset.id, release_id=dataset.release, snapshot_id=dataset.snapshot_id,
                 expected_count=expected_count, population_scope='complete', max_bytes=plan['max_output_bytes']-preview_bytes-derived_bytes)
+        if sampler.population_count == 0:
+            # A completed staged index can survive cancellation before activation.
+            # Recover the same sample without reading source media a second time.
+            import pyarrow.parquet as pq
+            from dataset_atlas.models import Record
+            for batch in pq.ParquetFile(snapshot / 'records.parquet').iter_batches(columns=['record_json'], batch_size=256):
+                check()
+                for value in batch.column(0).to_pylist():
+                    sampler.add(Record.model_validate_json(value))
+        if sampler.population_count != expected_count:
+            raise ValueError('Preview sampling population differs from the complete index')
+        pack.records = sampler.records()
+        pack.sampling = sampler.description(dataset.release)
+        actual_preview_bytes = len(pack.model_dump_json(indent=2).encode())
+        snapshot_bytes = sum(path.stat().st_size for path in snapshot.rglob('*') if path.is_file())
+        if actual_preview_bytes + snapshot_bytes + derived_bytes > plan['max_output_bytes']:
+            raise ValueError('Random preview and snapshot exceed approved output budget')
         check()
         dataset.coverage.preview_count = len(pack.records)
         dataset.coverage.total_count = expected_count

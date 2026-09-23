@@ -1,0 +1,488 @@
+{
+  "removable": [
+    {
+      "dataset_id": "div2k",
+      "version": "ec728c08b9da12f9f89646f4b5f928a3fbd9d214d1f20f3901cd2a2952c75efc",
+      "snapshot_id": null,
+      "reason": "failed",
+      "freed_bytes": 0
+    },
+    {
+      "dataset_id": "fgvc-aircraft",
+      "version": "6555fd7b2910866781085a00742f5948614bd5cc757b545d216a44dae824c474",
+      "snapshot_id": "fgvc-aircraft-6555fd7b2910866781085a00",
+      "reason": "superseded and unreferenced",
+      "freed_bytes": 5519706448
+    },
+    {
+      "dataset_id": "fgvc-aircraft",
+      "version": "a4de297ff45441eabd0924bade10a57bd36510ddf3aff15a4c56af5408dfb26f",
+      "snapshot_id": null,
+      "reason": "failed",
+      "freed_bytes": 0
+    },
+    {
+      "dataset_id": "hatefulillusion",
+      "version": "c7ad98080dc2d9191d75db12258c62a25d6a4ec40d9c102606ce4164d8cc7468",
+      "snapshot_id": "hatefulillusion-d2c4259ead1ab2daaa122833",
+      "reason": "superseded and unreferenced",
+      "freed_bytes": 1022694
+    },
+    {
+      "dataset_id": "omnispatial",
+      "version": "df9db574e78cde35ca4d4110fa4b9a1f31d69814ac6c9e2dfc0ff1a1ba3d8ccf",
+      "snapshot_id": null,
+      "reason": "failed",
+      "freed_bytes": 201230
+    },
+    {
+      "dataset_id": "sun397",
+      "version": "2a802a8420f14c19c6c710f9329ec92f590196b43d9b10bf21d18ed7cf4f19d9",
+      "snapshot_id": null,
+      "reason": "cancelled",
+      "freed_bytes": 0
+    }
+  ],
+  "retained": [
+    {
+      "dataset_id": "agent-security-bench",
+      "version": "6c964796c79d723ae4f9d74d27762759af483540456d2a4d9f506788da9e16d5",
+      "snapshot_id": "agent-security-bench-6c964796c79d723ae4f9d74d",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "algopuzzlevqa",
+      "version": "d7290b7a41f1d5598624f81657149d6b13404b911ad651faddb417051a23edc8",
+      "snapshot_id": "algopuzzlevqa-d7290b7a41f1d5598624f816",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "artbench",
+      "version": "aac58a52359d0a516e1147672cb21eea3d0d0041b5d7f84d8cf66306a5a3807f",
+      "snapshot_id": "artbench10-32-abb96b78-7b83d705",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "bapps",
+      "version": "fbde65c7714d91d3224a25f88dbf03feba374981fa477414299f067186ae9c7e",
+      "snapshot_id": "bapps-fbde65c7714d91d3224a25f8",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "caltech101",
+      "version": "119fce6cd456b9a7522911000115975712fbe996f8e310f77788eb7b6f35b9e5",
+      "snapshot_id": "caltech101-119fce6cd456b9a752291100",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "causalgym",
+      "version": "7cdf70d4a91d1a538132fb32388428dc410d7f4600ef65c067d8f95afc37307c",
+      "snapshot_id": "causalgym-7cdf70d4a91d1a538132fb32",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "chartqa",
+      "version": "92d66748aca98ebf8c5ca09ccc0ffb7309876461545229bf756a91a0d1a7d9cc",
+      "snapshot_id": "chartqa-d4e1d2da48323fabcdc28245",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "chartqa",
+      "version": "d4e1d2da48323fabcdc282453d5f7361af1bb9dd168aec9c04eb2ef79d87e92e",
+      "snapshot_id": "chartqa-d4e1d2da48323fabcdc28245",
+      "reason": "source dependency of a retained version"
+    },
+    {
+      "dataset_id": "child-safety-intents",
+      "version": "364a516834ef9fa54cb8f0a2554e7e0d10916089aa8ae8261a6d6bd7ee2e7bca",
+      "snapshot_id": "child-safety-intents-364a516834ef9fa54cb8f0a2",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "cifar-10-c",
+      "version": "84a406abd2b8547a4e8bb719b47fd8ed9aba78485c8674bb27f6d185134aeaed",
+      "snapshot_id": "cifar-10-c-84a406abd2b8547a4e8bb719",
+      "reason": "source dependency of a retained version"
+    },
+    {
+      "dataset_id": "cifar-10-c",
+      "version": "930e6f4b982e03743c4dc097a40b5503d3a559b0e9309477899279d22f5a1e08",
+      "snapshot_id": "cifar-10-c-84a406abd2b8547a4e8bb719",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "cifar-100-c",
+      "version": "8b1e4a18684465bd7c083fa679f2fb41e4206ada1e65a744b63e0a4799529257",
+      "snapshot_id": "cifar-100-c-8b1e4a18684465bd7c083fa6",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "coco-2014",
+      "version": "0b639bf940c97037307f3b69108298a2db2bf6ba430251a7b89fbac90018735d",
+      "snapshot_id": "coco-2014-0b639bf940c97037307f3b69",
+      "reason": "source dependency of a retained version"
+    },
+    {
+      "dataset_id": "coco-2014",
+      "version": "887d386753a51dbcec623342c2cd39cc2b0dc61a103d4206938fc3b946a435d0",
+      "snapshot_id": "coco-2014-0b639bf940c97037307f3b69",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "coco-qa",
+      "version": "7698bc16eecb417c272fad53244d6942b62b4402c12639e0d049dd77e74a02f1",
+      "snapshot_id": "coco-qa-7698bc16eecb417c272fad53",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "conceptarc",
+      "version": "f1a00e23a30566170d8df113ea47c9cd164991a2edec224cfb5306bf3918c19f",
+      "snapshot_id": "conceptarc-f1a00e23a30566170d8df113",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "counterfact",
+      "version": "6cf557976850e03e1d9f7c698b41522fa9fe268f9a7988780d0cc4b046953da4",
+      "snapshot_id": "counterfact-6cf557976850e03e1d9f7c69",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "cub-200-2011",
+      "version": "24d786c47fbc01c79e1386cc30192ba883a46e4b8c2b3561a8d274faa3fa6832",
+      "snapshot_id": "cub-200-2011-24d786c47fbc01c79e1386cc",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "div2k",
+      "version": "c28595c00366b0495e4ba62f1fabb030cf02321270cd57d720c03ce0f722c065",
+      "snapshot_id": "div2k-c28595c00366b0495e4ba62f",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "dreambooth",
+      "version": "81737aa47cb7a339b4f7bfcc4b63e48b5d293ef419e24c7d5fb23f4bc8e91cea",
+      "snapshot_id": "dreambooth-81737aa47cb7a339b4f7bfcc",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "dtd",
+      "version": "86d68f5ee62fa4c586c07a12f5c2d1bf113e372cb805b1cbde7a200342a60b49",
+      "snapshot_id": "dtd-86d68f5ee62fa4c586c07a12",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "emnist",
+      "version": "b4c5dbb6769e68cf5f77553765cd2dd312cae8c0bd8b50390d0356e8abca0b83",
+      "snapshot_id": "emnist-b4c5dbb6769e68cf5f775537",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "emnist-letters",
+      "version": "5f8fcf976f44552c43ef0601ce80794b678099e3acbb6e90a860da45b3e2737a",
+      "snapshot_id": "emnist-letters-5f8fcf976f44552c43ef0601",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "exams-v",
+      "version": "8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911",
+      "snapshot_id": "exams-v-8bb5701d7c67cf214b73ca4d",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "fgvc-aircraft",
+      "version": "e39781517b01ac1fd77afc0800267fa7b3fd2d834cd065b327815d6e9d6fe95e",
+      "snapshot_id": "fgvc-aircraft-e39781517b01ac1fd77afc08",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "flowers102",
+      "version": "bf66416e2c87239627de1757b0cfca135f04eca4fdf5af2c01be13cd52c04416",
+      "snapshot_id": "flowers102-bf66416e2c87239627de1757",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "food101",
+      "version": "a4740474b6175205805f9f7d9b71bf65ef67be90884a429ea039c36fc991de53",
+      "snapshot_id": "food101-a4740474b6175205805f9f7d",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "gqa",
+      "version": "9c85e41ad6950bd1896baad6ea5ef5085af8e85b9823d15e82f484ba733e6f4a",
+      "snapshot_id": "gqa-v1.2-val-balanced-full-media-02ce5c49c793accd",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "gvil-paired-illusion-images",
+      "version": "a8eb8f897ed84eab186300bd63e7d980cda881ddafaa5b91615ec0bc969e4a23",
+      "snapshot_id": "gvil-paired-illusion-images-a8eb8f897ed84eab186300bd",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "hades",
+      "version": "f31faebb5541d6f225edb983cd1071bdba44bdcd5a754e979a62a1a59043e531",
+      "snapshot_id": "hades-f31faebb5541d6f225edb983",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "hallusionbench",
+      "version": "4409608d811110c75d2a47ca743017e61834180c7c428bc544eefa05ca926752",
+      "snapshot_id": "hallusionbench-4409608d811110c75d2a47ca",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "hatefulillusion",
+      "version": "907d2829f42c614e03e706161788ca7179eec95f910b5d8d619ce26d9dd04bcf",
+      "snapshot_id": "hatefulillusion-b1adce69143ff8bfd52942d5-illusion-and-condition",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "hatefulillusion",
+      "version": "d2c4259ead1ab2daaa1228337b2e11725fc215a522ed4270575f01a1da76002a",
+      "snapshot_id": "hatefulillusion-d2c4259ead1ab2daaa122833",
+      "reason": "source dependency of a retained version"
+    },
+    {
+      "dataset_id": "high-quality-hallucination-benchmark",
+      "version": "83c0f8cb55644a3ef37a292b990e157a0d69cec1af7434a32f419367b3b702e5",
+      "snapshot_id": "high-quality-hallucination-benchmark-83c0f8cb55644a3ef37a292b",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "hod",
+      "version": "c683a46b41082747111185f23cb685acd114250b0bc66afb10e3cd881ad69b9c",
+      "snapshot_id": "hod-c683a46b41082747111185f2",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "illuchar",
+      "version": "df53383aaaa234f3f95818ec4c5bd1bde4ee9c29737ef4a0913d281e0ab532be",
+      "snapshot_id": "illuchar-df53383aaaa234f3f95818ec",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "illusionmnist",
+      "version": "dcfed09bae9f2498897a2cf8569fa0af93a95d9ea4f2d2b7a47551ecb776d020",
+      "snapshot_id": "illusionmnist-dcfed09bae9f2498897a2cf8",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "illusoryvqa",
+      "version": "3c6eaab517eb3497b8e31a04cd514f441f9fc0078daba89a9743b595f7e71d25",
+      "snapshot_id": "illusoryvqa-3c6eaab517eb3497b8e31a04",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "llava-instruct-150k",
+      "version": "befd4bb56018b6d5b330b1b9a76a114fdd99828170e710e5e0642a8d1e069a2b",
+      "snapshot_id": "llava-instruct-150k-befd4bb56018b6d5b330b1b9",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "llava-instruct-150k-3a74a703",
+      "version": "8e62c15e7f3a18cfb719b4d7e2b0a76bcfa405959908b9374f8f15bd0d1a0858",
+      "snapshot_id": "llava-instruct-150k-3a74a703-8e62c15e7f3a18cfb719b4d7",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "medical-multimodal-evaluation-data",
+      "version": "f5d28789a26e7367502e3119c2382e016d8254b005c94ee9d6bff4805187329f",
+      "snapshot_id": "medical-multimodal-evaluation-data-f5d28789a26e7367502e3119",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "mm-safetybench",
+      "version": "ef9dc9d1057214c3eca5b3b23241ff26f03a4a882703cad75b10ee93012ab70e",
+      "snapshot_id": "mm-safetybench-ef9dc9d1057214c3eca5b3b2",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "mmbench",
+      "version": "f5c02c046f2fd701c1ea8d6cf8d78fcb35d076901c177de6bc2458e83d47de2c",
+      "snapshot_id": "mmbench-f5c02c046f2fd701c1ea8d6c",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "mme",
+      "version": "2bfda63c4a3bebd2ec0c167a984084fa2636dfb5e92d50e71e96c7aa5db6c600",
+      "snapshot_id": "mme-2bfda63c4a3bebd2ec0c167a",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "mme-perception",
+      "version": "5f39a6a7b8e802b3b31d5c2517c3290926a9bfe55b09fa361683ba648ce096b9",
+      "snapshot_id": "mme-perception-5f39a6a7b8e802b3b31d5c25",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "mmmu-dev",
+      "version": "f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf",
+      "snapshot_id": "mmmu-dev-f8724745219ce8a377c9ad10",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "mmstar",
+      "version": "575b7bceafdb3600130af8c38d7b1329d97167c7983ff0945f4e882bfec813f8",
+      "snapshot_id": "mmstar-575b7bceafdb3600130af8c3",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "naturalbench",
+      "version": "3a316bc9ca232b3988341858c01ea9cc5e73911e52ee0e9a7c23a1adddbe8690",
+      "snapshot_id": "naturalbench-3a316bc9ca232b3988341858",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "nrc-vad",
+      "version": "211641de9b969b2e119b8adb7e79285fe3970c101f7a87f455d9968f3a7b1fe3",
+      "snapshot_id": "nrc-vad-211641de9b969b2e119b8adb",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "ok-vqa",
+      "version": "c55a48ee7faf15021d4b26e823604718a2bc2b8fa834f2033cb8009ff37ac227",
+      "snapshot_id": "ok-vqa-c55a48ee7faf15021d4b26e8",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "omnispatial",
+      "version": "689646803151cca434269285d100083ab6fc80322c14fd7424fbbb6d9cf82a49",
+      "snapshot_id": "omnispatial-689646803151cca434269285",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "oxfordpet",
+      "version": "c812b4c6a2a467571c2dc4eb5e41b56c12609d9eb79856969396da1e811aebe7",
+      "snapshot_id": "oxfordpet-c812b4c6a2a467571c2dc4eb",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "phantom",
+      "version": "41623e4dc1d0eb73cab47b5315440df94341bdcf2507dd49148d2e82a76ec98c",
+      "snapshot_id": "phantom-41623e4dc1d0eb73cab47b53",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "pmc-vqa",
+      "version": "474c9573c3e9c36f83e3fb7450de61a89f37f02500c72d4d32be8c5de1c21210",
+      "snapshot_id": "pmc-vqa-474c9573c3e9c36f83e3fb74",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "puzzlevqa",
+      "version": "c2ccea1708af07e3a99bf5bc60b838282066a08d2258e4cd52d53247633d9a33",
+      "snapshot_id": "puzzlevqa-c2ccea1708af07e3a99bf5bc",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "ravel",
+      "version": "17f66185e65ba33d01ed27661cb363c2f922dc6261ee9a9cd87b15f4553789a6",
+      "snapshot_id": "ravel-17f66185e65ba33d01ed2766",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "senator-tweets-2021",
+      "version": "47e5564df91d1cbbb471a9eede206bc229dee7b46c1d1e9c7b972bc97d883ee1",
+      "snapshot_id": "senator-tweets-2021-47e5564df91d1cbbb471a9ee",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "set14",
+      "version": "5e16aa81b4fc0c1175b0f71371c0522fe0da394c93cc638938994c864aa6b737",
+      "snapshot_id": "set14-5e16aa81b4fc0c1175b0f713",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "set5",
+      "version": "ef8d77ef3398695a0d24be69f121c8df886c76a8682bf3324cf829d84f5a84af",
+      "snapshot_id": "set5-ef8d77ef3398695a0d24be69",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "simplevqa",
+      "version": "8382305d27a65ddcdbc544e102756226f5531bccc9916e3cb0e767b2ebf97be1",
+      "snapshot_id": "simplevqa-8382305d27a65ddcdbc544e1",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "socialcounterfactuals",
+      "version": "4b4879de586a143d86e86fed44badae6be1b3dd9c2afd9ce5767dd75fe34b360",
+      "snapshot_id": "socialcounterfactuals-4b4879de586a143d86e86fed",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "space-10",
+      "version": "8c27fa373dff12ed1d31f6bcb17eb1d8b9bf2316ee760217aad8bc8913bcd741",
+      "snapshot_id": "space-10-8c27fa373dff12ed1d31f6bc",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "t2i-compbench",
+      "version": "d1f9d5f40314f250a816be9c06cef680099b7bdc37648692907214e6d4546d6a",
+      "snapshot_id": "t2i-compbench-d1f9d5f40314f250a816be9c",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "textvqa",
+      "version": "5f9d0955c9a06956601ea622c973e32833b91cd45fc261a5dae3ace28b61ca27",
+      "snapshot_id": "textvqa-5f9d0955c9a06956601ea622",
+      "reason": "source dependency of a retained version"
+    },
+    {
+      "dataset_id": "textvqa",
+      "version": "b8060284cb5668c2af463c741aba12eb42343e06ce9f412707734c4efd6b1870",
+      "snapshot_id": "textvqa-5f9d0955c9a06956601ea622",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "tweeteval",
+      "version": "7ac11a6c7e256513df066eff360bc9f94675cde4c76fc87d36adbb0bf63c192c",
+      "snapshot_id": "tweeteval-7ac11a6c7e256513df066eff",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "visual-genome",
+      "version": "faffc9e1faa8f9f535a0316f45a05182141221d2b7694025d8ce044eb87c4439",
+      "snapshot_id": "visual-genome-faffc9e1faa8f9f535a0316f",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "vizwiz",
+      "version": "be331d65cbb289a69ed7a41362d701a92b8980114c32d9061dac994151083fcb",
+      "snapshot_id": "vizwiz-f2b6da52c62c9b263496cfef",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "vizwiz",
+      "version": "f2b6da52c62c9b263496cfef5a7f6b4ab3374b0151314c23a9d05e40dd9785b6",
+      "snapshot_id": "vizwiz-f2b6da52c62c9b263496cfef",
+      "reason": "source dependency of a retained version"
+    },
+    {
+      "dataset_id": "vsr",
+      "version": "75d410703d2acf91c8d91db26743ad74bff609991e1655f17e7dff036d06a08c",
+      "snapshot_id": "vsr-75d410703d2acf91c8d91db2",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "waterbirds",
+      "version": "1661bca077cdd6c9b8049c03496285228cffbe6d4af2cdc53cbeefeea7aef3cf",
+      "snapshot_id": "waterbirds-1661bca077cdd6c9b8049c03",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "what-s-up",
+      "version": "2a86da80652409309e2aa863dbd7564736f13d57027fa5d5752f84f338268249",
+      "snapshot_id": "what-s-up-2a86da80652409309e2aa863",
+      "reason": "active"
+    },
+    {
+      "dataset_id": "wmdp",
+      "version": "90c82ed7172dd56a64312bea65d2ebb1c751370425eb810e74bc72bce6163e6a",
+      "snapshot_id": "wmdp-90c82ed7172dd56a64312bea",
+      "reason": "active"
+    }
+  ],
+  "freed_bytes": 5520930372,
+  "executed": false
+}

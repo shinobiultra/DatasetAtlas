@@ -80,3 +80,25 @@ only one partition is retained in memory. Native Letters labels start at 1 and i
 mapping retains both character codes. All-six-configuration counts describe overlapping
 configuration memberships. Display PNGs record their transpose; stored pixels are
 unchanged.
+
+For large gzip TAR sources, `archive_preparation: indexed-gzip` builds a native
+member inventory and gzip seek checkpoints instead of another full-sized archive.
+The optional `remote-storage` extra supplies `indexed-gzip`. `archive`,
+`classic_vision`, and `sun397` can read these inventories and retrieve verified
+original members locally or through ETag-bound HTTPS ranges. The checkpoint
+library lives under `work/original-access/<source SHA-256>`; it is retained storage,
+not an evictable cache. Both member SHA-256 values and the derivative checksums
+are recorded. `max_uncompressed_bytes` bounds the indexing pass.
+
+To prepare space-efficient browsing media while keeping full-quality previews:
+
+```sh
+atlas storage status
+atlas storage compact --dataset DATASET_ID --max-input-bytes 4000000000 --max-output-bytes 3000000000
+```
+
+Compaction is resumable and defaults to full-dimension AVIF quality 60, speed 6,
+4:4:4 chroma. It preserves every preview asset byte-for-byte. Compressed copies
+remain separate from canonical model inputs; unsupported image modes stay original.
+It does not itself delete source archives: original eviction requires a complete
+compaction receipt, a verified retrieval route, and preserved snapshot dependencies.

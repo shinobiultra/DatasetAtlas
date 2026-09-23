@@ -63,7 +63,7 @@ def test_real_vhd11k_full_source_and_media_when_present():
     image_zip = Path(dataset.adapter_config.get("images_archive", "missing"))
     video_zip = Path(dataset.adapter_config.get("videos_archive", "missing"))
     if not all(path.is_file() for path in (source_file, image_zip, video_zip)):
-        pytest.skip("pinned VHD11K local source archives not yet prepared")
+        pytest.skip("Optional native VHD11K archives are not retained locally; original-on-demand access is checked separately")
     adapter = VHD11KAdapter(dataset)
     source = adapter.prepare(adapter.plan(101, 160_000_000))
     first = adapter.iter_records(source, limit=101)

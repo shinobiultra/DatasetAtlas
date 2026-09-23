@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "local_video_archive_absent": true,
+  "probes": [
+    {
+      "record_id": "vhd11k:example:97aea44dfd965857f3be67c8",
+      "original_sha256": "7e16d5d614dba0bb708665218377f551088567b36717e4142151bd7ff6d0c8af",
+      "bytes": 541738,
+      "non_ascii_native_name": false,
+      "elapsed_seconds": 2.3341763019561768
+    },
+    {
+      "record_id": "vhd11k:example:6e490787fe954fb3ba5fb85a",
+      "original_sha256": "d2bae68014afff02ab1a651c350ea8ddeb222108ec1562785a6565e8b30babd3",
+      "bytes": 2001405,
+      "non_ascii_native_name": false,
+      "elapsed_seconds": 2.322469711303711
+    },
+    {
+      "record_id": "vhd11k:example:b31e08ccd1ece455dfe93df8",
+      "original_sha256": "a9cf4fea3fe819a8bfa0645d516e015908b634c9bb54d64ea93d9bcb97e218d6",
+      "bytes": 4537985,
+      "non_ascii_native_name": true,
+      "elapsed_seconds": 2.623432159423828
+    }
+  ],
+  "note": "Live original media API after source eviction; earlier cold range receipts are separate."
+}

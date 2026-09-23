@@ -40,6 +40,23 @@ def test_zip_random_access_and_cached_exact_bytes(tmp_path,monkeypatch):
     assert len(calls)==initial
 
 
+def test_small_zip_header_and_payload_reads_share_bounded_range_blocks(tmp_path, monkeypatch):
+    from dataset_atlas.storage.ranges import SmallReadBuffer
+    stream = io.BytesIO()
+    with zipfile.ZipFile(stream, 'w') as z:
+        z.writestr('image.png', b'original image bytes')
+        z.writestr('unrequested.bin', b'x' * 1_000_000)
+    payload = stream.getvalue()
+    calls = transport(monkeypatch, payload)
+    cache = BoundedCache(tmp_path/'cache', 200_000)
+    source = HttpsRangeReader('https://example.org/source', size=len(payload), etag='"v1"',
+                             allowed_hosts=['example.org'], byte_budget=131072, cache=cache)
+    with source, zipfile.ZipFile(SmallReadBuffer(source)) as z:
+        assert z.read('image.png') == b'original image bytes'
+        assert source.bytes_fetched <= 131072
+    assert len(calls) == 2  # One tail block and one image block; no full ZIP copy.
+
+
 @pytest.mark.parametrize('kwargs,message',[({'status':200},'HTTP 206'),({'etag':'"v2"'},'ETag changed'),({'wrong_bounds':True},'bounds')])
 def test_range_source_drift_and_ignored_range_fail(monkeypatch,kwargs,message):
     transport(monkeypatch,b'0123456789',**kwargs)

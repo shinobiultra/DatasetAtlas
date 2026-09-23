@@ -1,0 +1,61 @@
+{
+  "index": {
+    "format": "atlas-remote-gzip-tar-v1",
+    "source_sha256": "e4e323d410e29f0370c81eabdcbb0e2b813acea1de22891b70b58ff41bfc9834",
+    "source_bytes": 2753340328,
+    "remote": {
+      "url": "https://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/archives/fgvc-aircraft-2013b.tar.gz",
+      "bytes": 2753340328,
+      "allowed_hosts": [
+        "www.robots.ox.ac.uk",
+        "thor.robots.ox.ac.uk"
+      ],
+      "etag": "\"a41ca3a8-4f02e3e95a900\""
+    },
+    "members": 10027,
+    "uncompressed_member_bytes": 2762865657,
+    "index_bytes": 23481995,
+    "checksums": {
+      "members.sqlite": "f46c925b51c95cbd4d95bc110eadd5c42af56cbed6f2ce392bbc664d0c5dd1fa",
+      "checkpoints.gzidx": "106d0b15da96e5e25febb9f0f41bd7632a67a800d5109715d80cd823dec0116e"
+    },
+    "spacing_bytes": 4194304,
+    "indexed_gzip_version": "1.10.3"
+  },
+  "probes": [
+    {
+      "member": "0034309",
+      "proof": {
+        "sha256": "07a4a1beea732fa877ad2fb2e67533c754f8fd31a8c8df5dd5b1131c6896aa64",
+        "bytes": 75998,
+        "transferred_bytes": 4194304,
+        "source_sha256": "e4e323d410e29f0370c81eabdcbb0e2b813acea1de22891b70b58ff41bfc9834",
+        "fingerprint_type": "etag",
+        "etag": "\"a41ca3a8-4f02e3e95a900\""
+      }
+    },
+    {
+      "member": "1600892",
+      "proof": {
+        "sha256": "97778955d2ba155c2f14b03e952cfa16f5fcdc8231ccabf79d2da3b6e472959c",
+        "bytes": 282931,
+        "transferred_bytes": 4194306,
+        "source_sha256": "e4e323d410e29f0370c81eabdcbb0e2b813acea1de22891b70b58ff41bfc9834",
+        "fingerprint_type": "etag",
+        "etag": "\"a41ca3a8-4f02e3e95a900\""
+      }
+    },
+    {
+      "member": "0925498",
+      "proof": {
+        "sha256": "acb305ea86f06f7defe125da78c0c6974258f9eeece7609c7e4eac24542336d8",
+        "bytes": 411028,
+        "transferred_bytes": 4194306,
+        "source_sha256": "e4e323d410e29f0370c81eabdcbb0e2b813acea1de22891b70b58ff41bfc9834",
+        "fingerprint_type": "etag",
+        "etag": "\"a41ca3a8-4f02e3e95a900\""
+      }
+    }
+  ],
+  "status": "passed"
+}

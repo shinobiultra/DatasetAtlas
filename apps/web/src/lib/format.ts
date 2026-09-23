@@ -95,7 +95,7 @@ export function coverageState(dataset: Dataset, mode: 'static' | 'workbench'): C
 }
 
 export const COVERAGE_STATE_LABEL: Record<CoverageState, string> = {
-  full: 'Full data available locally',
+  full: 'Full population indexed',
   preview: 'Preview available',
   elsewhere: 'Not published here — prepared in the workbench',
   metadata: 'Metadata only — no adapter yet',
@@ -107,7 +107,7 @@ export function coverageLine(dataset: Dataset, mode: 'static' | 'workbench'): { 
   const unit = coverage.unit ?? 'example'
   switch (coverageState(dataset, mode)) {
     case 'full':
-      return { text: `${previewCount.toLocaleString()} ${unit} preview · full data available locally`, tone: 'ok' }
+      return { text: `${previewCount.toLocaleString()} ${unit} preview · full population indexed`, tone: 'ok' }
     case 'preview': {
       const extra = mode === 'workbench'
         ? (coverage.complete_data === 'requires_preparation' ? ' · full data needs preparation'

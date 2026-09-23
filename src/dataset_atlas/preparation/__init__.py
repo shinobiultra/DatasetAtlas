@@ -197,6 +197,11 @@ class PreparationManager:
         if adapter_error and plan.get('kind') not in {'huggingface_columnar','huggingface_remote_columnar'}:
             plan['ready'] = False
             plan['requirements'].append('Adapter implementation missing: ' + dataset.adapter)
+        if dataset.adapter_config.get('archive_preparation') == 'indexed-gzip':
+            import importlib.util
+            if importlib.util.find_spec('indexed_gzip') is None:
+                plan['requirements'].append('Indexed gzip access requires the remote-storage extra (indexed-gzip).')
+            plan['media_access'] = 'Native gzip TAR checkpoints support bounded original-image retrieval; no uncompressed media archive is created.'
         remote = dataset.adapter_config.get('remote_archives', {})
         selective_media = remote or dataset.adapter_config.get('media_inventory_path') or plan.get('kind')=='huggingface_remote_columnar' or dataset.adapter=='remote_columnar'
         if remote:
@@ -228,12 +233,19 @@ class PreparationManager:
         if plan['required_free_bytes'] > plan['available_bytes']:
             plan['ready'] = False
             plan['requirements'].append('Insufficient free space for source, cache, and the approved output budget.')
+        from dataset_atlas.storage.optimized import preparation_headroom
+        storage = preparation_headroom(self.root, plan['required_free_bytes'], self._storage_reservations())
+        if storage:
+            plan['shared_storage'] = storage
+            if not storage['admitted']:
+                plan['ready'] = False
+                plan['requirements'].append('Shared Atlas storage ceiling leaves insufficient space for this preparation; free retained data or reduce the requested limits.')
         if plan['requirements']:
             plan['ready'] = False
         from dataset_atlas.jobs.limits import limits, enforcement
         plan['resource_limits']=limits({})
         plan['memory_enforcement']=enforcement()
-        plan['id'] = hashlib.sha256(json.dumps({k:v for k,v in plan.items() if k!='available_bytes'}, sort_keys=True).encode()).hexdigest()
+        plan['id'] = hashlib.sha256(json.dumps({k:v for k,v in plan.items() if k not in {'available_bytes', 'shared_storage'}}, sort_keys=True).encode()).hexdigest()
         atomic(self._path(plan['id']) / 'plan.json', plan)
         return plan
 
@@ -241,9 +253,21 @@ class PreparationManager:
         import fcntl
         directory=self._path(identity)
         if not directory.is_dir():raise FileNotFoundError('Preparation plan not found')
-        with (directory/'dispatch.lock').open('a') as lock:
-            fcntl.flock(lock,fcntl.LOCK_EX)
-            return self._start(identity)
+        with (self.directory/'storage-admission.lock').open('a') as storage_lock:
+            fcntl.flock(storage_lock,fcntl.LOCK_EX)
+            with (directory/'dispatch.lock').open('a') as lock:
+                fcntl.flock(lock,fcntl.LOCK_EX)
+                return self._start(identity)
+
+    def _storage_reservations(self):
+        reserved = 0
+        # The UI listing is capped at 100; admission must include older jobs too.
+        for status_path in self.directory.glob('*/status.json'):
+            status = self.status(status_path.parent.name)
+            if status['status'] not in {'queued', 'running'}: continue
+            path = self._path(status['id'])/'plan.json'
+            reserved += json.loads(path.read_text())['required_free_bytes']
+        return reserved
 
     def _start(self, identity):
         directory = self._path(identity)
@@ -253,6 +277,10 @@ class PreparationManager:
         prior = self.status(identity)
         if prior['status'] in {'running', 'queued', 'completed'}:
             return prior
+        from dataset_atlas.storage.optimized import preparation_headroom
+        storage = preparation_headroom(self.root, plan['required_free_bytes'], self._storage_reservations())
+        if storage and not storage['admitted']:
+            raise ValueError('Shared Atlas storage headroom changed; free retained data or create a smaller plan')
         if shutil.disk_usage(self.directory).free < plan['required_free_bytes']:
             raise ValueError('Free space changed; create a new plan')
         (directory / 'cancel').unlink(missing_ok=True)
@@ -463,6 +491,16 @@ class PreparationManager:
                     if path.is_file():
                         stat = path.stat()
                         retained_inodes.add((stat.st_dev, stat.st_ino))
+        # A source object or cache may hold another hard link *outside* prepared/.
+        # Count bytes as reclaimable only when all links to that inode are removed.
+        from collections import Counter
+        removable_links = Counter()
+        for directory, (_, _, removable, _) in decisions.items():
+            if removable:
+                for path in directory.rglob('*'):
+                    if path.is_file() and not path.is_symlink():
+                        info = path.stat()
+                        removable_links[(info.st_dev, info.st_ino)] += 1
         counted = set()
         for directory, (snapshot, reason, removable, _) in decisions.items():
             entry = {'dataset_id': directory.parent.name, 'version': directory.name, 'snapshot_id': snapshot, 'reason': reason}
@@ -474,7 +512,7 @@ class PreparationManager:
                 if path.is_file() and not path.is_symlink():
                     stat = path.stat()
                     inode = (stat.st_dev, stat.st_ino)
-                    if inode not in retained_inodes and inode not in counted:
+                    if inode not in retained_inodes and inode not in counted and removable_links[inode] == stat.st_nlink:
                         freed += stat.st_size
                         counted.add(inode)
             entry['freed_bytes'] = freed

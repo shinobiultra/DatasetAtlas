@@ -1,13 +1,13 @@
 {
-  "checked_at_utc": "2026-09-23T05:21:41.573243+00:00",
+  "checked_at_utc": "2026-09-23T07:25:32.758360+00:00",
   "catalogue_entries": 333,
-  "tested_local_previews": 121,
-  "verified_preview_records": 12013,
-  "canonical_full_scope_indices": 116,
-  "entries_without_preview": 212,
-  "python_tests_passed": 292,
+  "tested_local_previews": 131,
+  "verified_preview_records": 12832,
+  "canonical_full_scope_indices": 126,
+  "entries_without_preview": 202,
+  "python_tests_passed": 347,
   "frontend_tests_passed": 22,
-  "browser_tests_passed": 30,
+  "browser_tests_passed": 34,
   "browser_tests_skipped": 0,
   "approved_public_preview_datasets": [
     "clevr",
@@ -21,6 +21,12 @@
   "gqa_browsing_snapshot_media_scope": "full",
   "active_preparations": [],
   "executable_preparation_plans": 81,
-  "validation_log": "work/validation-native-complete-20260923.log",
-  "browser_validation_log": "work/browser-results-fixed-20260923.log"
+  "validation_log": "work/storage-retention-python.log",
+  "browser_validation_log": "work/storage-final-browser.log",
+  "additional_focused_test_log": "work/shared-retention-tests.log",
+  "python_tests_skipped": 1,
+  "gqa_full_archive_retained_locally": false,
+  "storage_policy": "reports/storage-policy-20260923.json",
+  "storage_footprint": "reports/storage-footprint-retained-20260923.json",
+  "retained_media_verification": "reports/retained-media-live-verification.json"
 }

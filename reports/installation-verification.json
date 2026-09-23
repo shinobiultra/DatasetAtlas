@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "verified_at_utc": "2026-09-23T05:28:31.103979+00:00",
+  "verified_at_utc": "2026-09-23T08:31:46.501931+00:00",
   "installation": {
     "installed_module": "/home/bitwise/Documents/vibe/DatasetAtlas/work/verify-install/selective-base-venv/lib/python3.12/site-packages/dataset_atlas/__init__.py",
     "optional_model_packages_present": {
@@ -21,7 +21,7 @@
         },
         "script": {
           "status": 200,
-          "bytes": 407911,
+          "bytes": 409319,
           "content_type": "text/javascript; charset=utf-8"
         },
         "catalogue": {
@@ -87,8 +87,8 @@
         "pairs": 100
       },
       "archive": "dataset_atlas-0.1.0.tar.gz",
-      "files": 531,
-      "site_bytes": 30488709
+      "files": 562,
+      "site_bytes": 30490117
     },
     "wheel": {
       "approved_media_files": {
@@ -97,30 +97,33 @@
         "pairs": 100
       },
       "archive": "dataset_atlas-0.1.0-py3-none-any.whl",
-      "files": 398,
-      "site_bytes": 30488709
+      "files": 413,
+      "site_bytes": 30490117
     }
   },
   "release_archives": {
     "dataset_atlas-0.1.0.tar.gz": {
-      "bytes": 29628083,
-      "sha256": "2cd6efa7d6e9438098c618e30e1ae6c7bc85cf26a9df61c23c5c1d68c452ecb0"
+      "bytes": 29676637,
+      "sha256": "315b597c8677a09cfa40008e15bea1ec475b66d2633585800a2bc20254c66adc"
     },
     "dataset_atlas-0.1.0-py3-none-any.whl": {
-      "bytes": 29327218,
-      "sha256": "bc918745dcf33d6d80abab5195a7f0d8f2450a9a35bd1137a8901aeb6130af1d"
+      "bytes": 29365114,
+      "sha256": "cde4f7259de1919d519fb2e69537d9f3c593a669670e2ffdb44125a25bc68652"
+    },
+    ".gitignore": {
+      "bytes": 1,
+      "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1"
     }
   },
   "validation": {
-    "full_python_suite": "313 passed; 2 dependency deprecation warnings",
+    "full_python_suite": "347 passed, 1 skipped (optional retired local VHD11K archive); subsequent storage regression tests passed",
     "frontend_tests": "22 passed",
-    "browser_suite": "30 passed in one opt-in browser run including real analysis and local image send; 4 media checks passed afterward including the new absent-source-image regression",
+    "browser_suite": "34 passed in one opt-in browser run including real analysis, local image send and media representation checks",
     "generated_contract": "byte-identical",
     "no_remote_deployment": true
   },
   "limitations": [
     "Selected installed HTTP routes verified; complete workbench and model checks are recorded separately.",
     "Optional model dependencies are intentionally absent from this base environment."
-  ],
-  "built_source_commit": "bef6b70"
+  ]
 }

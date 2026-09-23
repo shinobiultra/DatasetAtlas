@@ -1,0 +1,30 @@
+{
+  "dataset_id": "fgvc-aircraft",
+  "snapshot_id": "fgvc-aircraft-e39781517b01ac1fd77afc08",
+  "status": "executed",
+  "source_member_checksums_verified": 10000,
+  "full_quality_preview_assets_verified": 100,
+  "original_range_verification": "reports/aircraft-original-range-verification.json",
+  "sources": [
+    {
+      "sha256": "9cc8ebb5a5178dce216292ec965d488c410f6fe4f9dbab9fbd6773bcf3544b0f",
+      "bytes": 2764717507,
+      "links": 1,
+      "paths": [
+        "work/prepared/fgvc-aircraft/e39781517b01ac1fd77afc0800267fa7b3fd2d834cd065b327815d6e9d6fe95e/sources/original-members.zip"
+      ]
+    },
+    {
+      "sha256": "e4e323d410e29f0370c81eabdcbb0e2b813acea1de22891b70b58ff41bfc9834",
+      "bytes": 2753340328,
+      "links": 4,
+      "paths": [
+        "work/source-objects/e4e323d410e29f0370c81eabdcbb0e2b813acea1de22891b70b58ff41bfc9834",
+        "work/sources/acquisition-20260923/fgvc-aircraft/fgvc-aircraft-2013b.tar.gz",
+        "work/sources/acquisition-20260923/classic-cache/objects/baabfb6bada1627f077b36339de6960d742a0e5c37c36114b89f574d178e1c30",
+        "work/prepared/fgvc-aircraft/e39781517b01ac1fd77afc0800267fa7b3fd2d834cd065b327815d6e9d6fe95e/sources/e4e323d410e29f0370c81eabdcbb0e2b813acea1de22891b70b58ff41bfc9834.tar.gz"
+      ]
+    }
+  ],
+  "freed_unique_file_bytes": 5518057835
+}

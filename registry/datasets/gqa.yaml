@@ -3,10 +3,11 @@ id: gqa
 name: GQA val-balanced
 aliases: []
 description: 'Official GQA questions v1.2 validation-balanced split: 132,062 source
-  question/answer examples. A selected local preview contains 100 original Visual
-  Genome-derived JPEGs acquired by bounded HTTP ZIP ranges; the 21.8 GB full image
-  archive is still being prepared, so remaining rows currently have question metadata
-  but no local media.'
+  question/answer examples over 10,234 distinct Visual Genome-derived JPEGs. The
+  complete question population is indexed. The workbench retains original-quality
+  preview images and full-resolution AVIF browsing copies, with byte-verified
+  originals retrieved on demand from the official archive. Other GQA question
+  splits remain outside this explicitly scoped snapshot.'
 paper_ids:
 - paper-3e0db9c633ab204c
 - paper-2c07a8c6af8e33c2

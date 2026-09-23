@@ -1,0 +1,14 @@
+repos:
+  - repo: local
+    hooks:
+      - id: ty-storage
+        name: Type-check storage and preview sampling
+        entry: uvx ty==0.0.83 check src/dataset_atlas/storage/compact.py src/dataset_atlas/storage/indexed_tar.py src/dataset_atlas/storage/indexed_zip.py src/dataset_atlas/storage/optimized.py src/dataset_atlas/storage/retention.py src/dataset_atlas/storage/usage.py src/dataset_atlas/preparation/sampling.py src/dataset_atlas/adapters/nrc_vad.py
+        language: system
+        pass_filenames: false
+        files: ^(src/dataset_atlas/(storage/|preparation/sampling.py|adapters/nrc_vad.py)|pyproject.toml|uv.lock)
+      - id: diff-whitespace
+        name: Check patch whitespace
+        entry: git diff --check
+        language: system
+        pass_filenames: false

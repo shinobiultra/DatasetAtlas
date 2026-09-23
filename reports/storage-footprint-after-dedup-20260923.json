@@ -1,0 +1,256 @@
+{
+  "root": "/home/bitwise/Documents/vibe/DatasetAtlas",
+  "target_bytes": 100000000000,
+  "ceiling_bytes": 150000000000,
+  "status": "above_ceiling",
+  "files": 170487,
+  "logical_bytes": 359515041825,
+  "unique_file_bytes": 249656319956,
+  "allocated_bytes": 250013876224,
+  "bytes_above_target": 150013876224,
+  "groups": {
+    "work/sources": {
+      "files": 23202,
+      "logical_bytes": 200376821967,
+      "unique_file_bytes": 115055962568,
+      "allocated_bytes": 115104026624
+    },
+    "work/prepared": {
+      "files": 724,
+      "logical_bytes": 75991701314,
+      "unique_file_bytes": 75773782092,
+      "allocated_bytes": 75775606784
+    },
+    "work/source-objects": {
+      "files": 108,
+      "logical_bytes": 62947575827,
+      "unique_file_bytes": 39783135621,
+      "allocated_bytes": 39783153664
+    },
+    "work/model-server": {
+      "files": 59583,
+      "logical_bytes": 8005984873,
+      "unique_file_bytes": 7775853134,
+      "allocated_bytes": 7909584896
+    },
+    "work/media-cache": {
+      "files": 18628,
+      "logical_bytes": 3806423942,
+      "unique_file_bytes": 3806423942,
+      "allocated_bytes": 3834888192
+    },
+    ".venv": {
+      "files": 28591,
+      "logical_bytes": 1978998369,
+      "unique_file_bytes": 1978998369,
+      "allocated_bytes": 2048057344
+    },
+    "work/models": {
+      "files": 58,
+      "logical_bytes": 1721057444,
+      "unique_file_bytes": 1721057444,
+      "allocated_bytes": 1721204736
+    },
+    "work/snapshots": {
+      "files": 120,
+      "logical_bytes": 1391794797,
+      "unique_file_bytes": 1391794797,
+      "allocated_bytes": 1392078848
+    },
+    "work/compact-media": {
+      "files": 8907,
+      "logical_bytes": 488366594,
+      "unique_file_bytes": 488366594,
+      "allocated_bytes": 506810368
+    },
+    "work/verify-install": {
+      "files": 14272,
+      "logical_bytes": 1401677475,
+      "unique_file_bytes": 476306172,
+      "allocated_bytes": 492195840
+    },
+    "work/packs": {
+      "files": 2428,
+      "logical_bytes": 395487260,
+      "unique_file_bytes": 395487260,
+      "allocated_bytes": 400805888
+    },
+    "work": {
+      "files": 347,
+      "logical_bytes": 172782245,
+      "unique_file_bytes": 172782245,
+      "allocated_bytes": 173711360
+    },
+    "apps": {
+      "files": 3944,
+      "logical_bytes": 151787092,
+      "unique_file_bytes": 151787092,
+      "allocated_bytes": 162615296
+    },
+    "work/demo-analysis-coco": {
+      "files": 1548,
+      "logical_bytes": 117200361,
+      "unique_file_bytes": 117200361,
+      "allocated_bytes": 122068992
+    },
+    "work/download-cache": {
+      "files": 18,
+      "logical_bytes": 111076417,
+      "unique_file_bytes": 111076417,
+      "allocated_bytes": 111120384
+    },
+    "work/clean-ci-check": {
+      "files": 1382,
+      "logical_bytes": 75864637,
+      "unique_file_bytes": 75864637,
+      "allocated_bytes": 78635008
+    },
+    "dist": {
+      "files": 2,
+      "logical_bytes": 58955301,
+      "unique_file_bytes": 58955301,
+      "allocated_bytes": 58957824
+    },
+    "work/artifacts": {
+      "files": 2460,
+      "logical_bytes": 47841157,
+      "unique_file_bytes": 47841157,
+      "allocated_bytes": 55283712
+    },
+    ".git": {
+      "files": 488,
+      "logical_bytes": 53908971,
+      "unique_file_bytes": 53908971,
+      "allocated_bytes": 55250944
+    },
+    "work/demo-analysis": {
+      "files": 1046,
+      "logical_bytes": 43897067,
+      "unique_file_bytes": 43897067,
+      "allocated_bytes": 46669824
+    },
+    "src": {
+      "files": 532,
+      "logical_bytes": 33294090,
+      "unique_file_bytes": 33294090,
+      "allocated_bytes": 34414592
+    },
+    "registry": {
+      "files": 477,
+      "logical_bytes": 32347287,
+      "unique_file_bytes": 32347287,
+      "allocated_bytes": 33292288
+    },
+    "examples": {
+      "files": 305,
+      "logical_bytes": 29570606,
+      "unique_file_bytes": 29570606,
+      "allocated_bytes": 30179328
+    },
+    "work/original-access": {
+      "files": 4,
+      "logical_bytes": 23483053,
+      "unique_file_bytes": 23483053,
+      "allocated_bytes": 23494656
+    },
+    "work/preparation": {
+      "files": 763,
+      "logical_bytes": 14092056,
+      "unique_file_bytes": 14092056,
+      "allocated_bytes": 15560704
+    },
+    "work/corpus": {
+      "files": 110,
+      "logical_bytes": 13892369,
+      "unique_file_bytes": 13892369,
+      "allocated_bytes": 14143488
+    },
+    "ui-mockups": {
+      "files": 8,
+      "logical_bytes": 9771092,
+      "unique_file_bytes": 9771092,
+      "allocated_bytes": 9785344
+    },
+    "work/compression-study": {
+      "files": 58,
+      "logical_bytes": 7031287,
+      "unique_file_bytes": 7031287,
+      "allocated_bytes": 7139328
+    },
+    "local-config": {
+      "files": 7,
+      "logical_bytes": 5402756,
+      "unique_file_bytes": 5402756,
+      "allocated_bytes": 5423104
+    },
+    "reports": {
+      "files": 123,
+      "logical_bytes": 3376877,
+      "unique_file_bytes": 3376877,
+      "allocated_bytes": 3661824
+    },
+    "tests": {
+      "files": 156,
+      "logical_bytes": 2351400,
+      "unique_file_bytes": 2351400,
+      "allocated_bytes": 2682880
+    },
+    "workspace files": {
+      "files": 8,
+      "logical_bytes": 662624,
+      "unique_file_bytes": 662624,
+      "allocated_bytes": 684032
+    },
+    "scripts": {
+      "files": 22,
+      "logical_bytes": 136281,
+      "unique_file_bytes": 136281,
+      "allocated_bytes": 184320
+    },
+    "work/vector-cache": {
+      "files": 4,
+      "logical_bytes": 159069,
+      "unique_file_bytes": 159069,
+      "allocated_bytes": 172032
+    },
+    "work/jobs": {
+      "files": 36,
+      "logical_bytes": 114831,
+      "unique_file_bytes": 114831,
+      "allocated_bytes": 131072
+    },
+    "docs": {
+      "files": 8,
+      "logical_bytes": 69510,
+      "unique_file_bytes": 69510,
+      "allocated_bytes": 86016
+    },
+    ".pytest_cache": {
+      "files": 5,
+      "logical_bytes": 32518,
+      "unique_file_bytes": 32518,
+      "allocated_bytes": 49152
+    },
+    "schemas": {
+      "files": 1,
+      "logical_bytes": 29132,
+      "unique_file_bytes": 29132,
+      "allocated_bytes": 32768
+    },
+    "test-results": {
+      "files": 3,
+      "logical_bytes": 17789,
+      "unique_file_bytes": 17789,
+      "allocated_bytes": 28672
+    },
+    ".github": {
+      "files": 1,
+      "logical_bytes": 4088,
+      "unique_file_bytes": 4088,
+      "allocated_bytes": 4096
+    }
+  },
+  "external_symlinks_not_counted": 42,
+  "errors": [],
+  "measurement_note": "Regular files only; hard links counted once, allocated filesystem blocks. Reflink-shared extents may be counted more than once. Symlink targets, external source roots, shared model stores and directory metadata are outside this measurement."
+}

@@ -1,0 +1,921 @@
+{
+  "status": "passed",
+  "preview_records": 100,
+  "native_total": 108754,
+  "sampling": {
+    "method": "sha256_bottom_k_primary_asset",
+    "seed": 0,
+    "unit": "example",
+    "grouping": "primary asset ID; example ID for records without assets",
+    "population": "complete pinned indexed population",
+    "population_count": 108754,
+    "requested_count": 100,
+    "returned_count": 100,
+    "source_revision": "SUN397-original-byte-equivalent-mirror-99bbf6ad18ca4f01e47f8f96ca1a8b7e53cb235a",
+    "media_representation": "original",
+    "selection_note": "One hash-ranked example per sampled primary asset. All linked assets remain. Not an example-prevalence estimate."
+  },
+  "media": [
+    {
+      "id": "sun397:asset:6943c4ffa0bf29d5eba2362e",
+      "sha256": "8945521a913b5e72f1fc01d4945f668e2295148cd86144ff35ada44f8d103a0a",
+      "bytes": 118242,
+      "dimensions": [
+        640,
+        480
+      ]
+    },
+    {
+      "id": "sun397:asset:355c243062b69de0a5522b15",
+      "sha256": "8bf0ab95494a455d92e6a8b8e0a0fc53e759c5231e2903b80962cbc746944692",
+      "bytes": 21112,
+      "dimensions": [
+        225,
+        300
+      ]
+    },
+    {
+      "id": "sun397:asset:fed035da1509542156f4b808",
+      "sha256": "76e29dc6905000e6548afd88ea06d18bc31d0ac8c0ce2fb51a8423705d78f6f8",
+      "bytes": 7380,
+      "dimensions": [
+        290,
+        218
+      ]
+    },
+    {
+      "id": "sun397:asset:5b7f5559095475748cb20419",
+      "sha256": "5f0e3c4d19233f54f739db540851e2bca968a592eaa34a43837012bfa4e155ec",
+      "bytes": 64670,
+      "dimensions": [
+        341,
+        512
+      ]
+    },
+    {
+      "id": "sun397:asset:0d5de0204afdf84416170f83",
+      "sha256": "c34c179a60ab12314103183578d8e687cf76257a1092a181702fb349df1e6688",
+      "bytes": 595745,
+      "dimensions": [
+        2309,
+        1337
+      ]
+    },
+    {
+      "id": "sun397:asset:397a0412edeac55780f3aa58",
+      "sha256": "efb6027022004fbd8c3609e602d97fd4bde54d2526f1b9279ed3ac851e14170d",
+      "bytes": 610415,
+      "dimensions": [
+        2272,
+        1704
+      ]
+    },
+    {
+      "id": "sun397:asset:7f840fd43d3d1e69230fe9a3",
+      "sha256": "5d9fcd8a107fd64af883d8265343ff1c9ee6622b0747ca5a5ae295a3bc77581a",
+      "bytes": 40088,
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "id": "sun397:asset:151b4dbeb8f5c31949d12a39",
+      "sha256": "e9cecec0140066fddad889d7de682a3a806a62d074756e9a9bf11b1f7580a9c6",
+      "bytes": 235506,
+      "dimensions": [
+        1200,
+        798
+      ]
+    },
+    {
+      "id": "sun397:asset:76d53739ab8fead13e5c94cc",
+      "sha256": "92e814fe826790a569838959dcca119e7f0e7e86afa2a3f004e4693eccdcaf1e",
+      "bytes": 94524,
+      "dimensions": [
+        640,
+        433
+      ]
+    },
+    {
+      "id": "sun397:asset:9f75cf7b7a84f141b7adbf2e",
+      "sha256": "351fe1c67bb2faa1742da4c938b73451b2ea5e5396dd75e70c4fb7294efc43a6",
+      "bytes": 132906,
+      "dimensions": [
+        2048,
+        1536
+      ]
+    },
+    {
+      "id": "sun397:asset:e5acad64945f779c21070584",
+      "sha256": "244edbf41bc899046121aebcd2d679e379011dd44ca807f57b7da74d1ee4b0ce",
+      "bytes": 333265,
+      "dimensions": [
+        1419,
+        944
+      ]
+    },
+    {
+      "id": "sun397:asset:a10c158bc996554a085e21ad",
+      "sha256": "290b920f9beaecba43ba7d5986af8ae052802043192551b0912aeb5cdadb7826",
+      "bytes": 2122640,
+      "dimensions": [
+        3000,
+        4000
+      ]
+    },
+    {
+      "id": "sun397:asset:f83dfc41786793457eeb4248",
+      "sha256": "02b8beeb5e1b39f2e4207629b912d9225c86b4a6c7b1017c1f584dec38b1afca",
+      "bytes": 399796,
+      "dimensions": [
+        1600,
+        1200
+      ]
+    },
+    {
+      "id": "sun397:asset:e75e640ac4d57aac05374385",
+      "sha256": "bea659c8cb01c742f6abfc15a42d4791c7b9396ca9fe7f7db6c83f9bf8c43de7",
+      "bytes": 81629,
+      "dimensions": [
+        343,
+        230
+      ]
+    },
+    {
+      "id": "sun397:asset:99d4071f1bc0b2cc0bb0ba44",
+      "sha256": "756ff218742a35668b28dd68a5121e8cf51e3626435064c8319fdfce46ab76e2",
+      "bytes": 17524,
+      "dimensions": [
+        201,
+        294
+      ]
+    },
+    {
+      "id": "sun397:asset:59c5fede19862326562977dd",
+      "sha256": "36727df8efb5df47371d1d06a7e67f9abc6f53ed5ad7c576036df2bab32abf82",
+      "bytes": 22884,
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "id": "sun397:asset:35840987ef1f59fc4fb15b9a",
+      "sha256": "d7fccf231b4dcd554ca6190f7cfd6c1d7893eb8196ff6a32e7659696cf8827ce",
+      "bytes": 7943454,
+      "dimensions": [
+        3441,
+        2265
+      ]
+    },
+    {
+      "id": "sun397:asset:d6230a6712dba488da03d752",
+      "sha256": "919e0c4c73086e0b263810314d8af4faf8733bcf0b836a3e1b98cfbed7d3acb0",
+      "bytes": 109541,
+      "dimensions": [
+        465,
+        357
+      ]
+    },
+    {
+      "id": "sun397:asset:f8f8b4396d65407766c52abe",
+      "sha256": "2ee4652e27b4789eeea4ac16555db68d1d05e4da14a35add19ed7e230ac96688",
+      "bytes": 11853,
+      "dimensions": [
+        225,
+        300
+      ]
+    },
+    {
+      "id": "sun397:asset:4f4f5333476c9575381fb0ca",
+      "sha256": "e7c23516856c4f9c367d02ab6bba6175b6c3cbdc6e825b36d8969b0376017658",
+      "bytes": 154869,
+      "dimensions": [
+        1024,
+        768
+      ]
+    },
+    {
+      "id": "sun397:asset:2b71324159a78c79de8b9299",
+      "sha256": "5931068f08a3811c600fc866d61d673ee7f4a6f245d815e7dedcd71042a62c6e",
+      "bytes": 123283,
+      "dimensions": [
+        1200,
+        900
+      ]
+    },
+    {
+      "id": "sun397:asset:e269c9d2334b6a6d5155e61b",
+      "sha256": "ed7509ad0da52985cc4b3cf852b1f3cf0977557e6ed582390c7162e4db2bea42",
+      "bytes": 24252,
+      "dimensions": [
+        320,
+        253
+      ]
+    },
+    {
+      "id": "sun397:asset:4dc325148d685ab7744f5d4e",
+      "sha256": "40a8553f7bfc2a76e5b3de61a54672787369067c313c9de1fa760a26bcbc7182",
+      "bytes": 34800,
+      "dimensions": [
+        474,
+        355
+      ]
+    },
+    {
+      "id": "sun397:asset:5597012ba3972513f664dd54",
+      "sha256": "a38eff9cb976697b22dcb2def4f997bbb87dc99200532a41abec634619eab3e3",
+      "bytes": 286579,
+      "dimensions": [
+        428,
+        605
+      ]
+    },
+    {
+      "id": "sun397:asset:65b5f3fda5b9ac2a5e1857f2",
+      "sha256": "d910c666b62a04364a217f88503d3fe53c5f93807afb364d3ed51b2b93ba4464",
+      "bytes": 11562,
+      "dimensions": [
+        300,
+        224
+      ]
+    },
+    {
+      "id": "sun397:asset:0218a338b975ca75f95687ad",
+      "sha256": "e9390ba3c0fed64b68b61a2fcc1b99ceedffb0afbf838bd0451341dc2ec084cb",
+      "bytes": 81406,
+      "dimensions": [
+        336,
+        448
+      ]
+    },
+    {
+      "id": "sun397:asset:a08fa46e7f4782da3878446e",
+      "sha256": "16aeec8ff6fc3c15db51454b603b0b5c2239da080696cb02c5c129aef9e91ef4",
+      "bytes": 219245,
+      "dimensions": [
+        1280,
+        960
+      ]
+    },
+    {
+      "id": "sun397:asset:2e2c1f95d320c89287906f65",
+      "sha256": "876602686a082b2bd41b2389d9f51480f8b1bc096bb871e50528fcd9f1a55344",
+      "bytes": 37287,
+      "dimensions": [
+        298,
+        218
+      ]
+    },
+    {
+      "id": "sun397:asset:74965090853f7bc3b82effff",
+      "sha256": "90427041a8024ccc772affa5427c84f3ec60b750778e72618e4e38aa2fe1ab0d",
+      "bytes": 24601,
+      "dimensions": [
+        256,
+        384
+      ]
+    },
+    {
+      "id": "sun397:asset:df9e1bf9d2c50c90392a5ffb",
+      "sha256": "4a2680d783660440467ac60ffaaf1695d72afce445828e3128d48cd80e8672e6",
+      "bytes": 53393,
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "id": "sun397:asset:792663e9ee85d6f19ec495ed",
+      "sha256": "9577f88b366090c11b621357663a880d547752b37c7afc24fb171f3c96fbe949",
+      "bytes": 347172,
+      "dimensions": [
+        1816,
+        931
+      ]
+    },
+    {
+      "id": "sun397:asset:5863116b0d9087d7d8a493c3",
+      "sha256": "b9bdeb58864eb2f97857a504fb900d82e9bf6baa7d018d3650b1e6f75b2d323b",
+      "bytes": 1810081,
+      "dimensions": [
+        3648,
+        2736
+      ]
+    },
+    {
+      "id": "sun397:asset:68206b26d8c9214a517971a4",
+      "sha256": "dd54abbc052c2e3d0106e7a29495f5b5a4ef05fa082aafe6d42dd80cd72a4b52",
+      "bytes": 8960,
+      "dimensions": [
+        225,
+        400
+      ]
+    },
+    {
+      "id": "sun397:asset:991373414c3caacb1d564e32",
+      "sha256": "bb83954093fc30b87745741e34533093d6677ef27077cb281e11d58d27ace4e1",
+      "bytes": 16069,
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "id": "sun397:asset:976529d8a8ccbc6bcad92326",
+      "sha256": "608ce344e247153586beb5c8328c50b89e2d916eb6104b0b7609cd8b2605bdd1",
+      "bytes": 166543,
+      "dimensions": [
+        1280,
+        1024
+      ]
+    },
+    {
+      "id": "sun397:asset:abcb6d585a399d1e4156036d",
+      "sha256": "05e1d862b01c62be7167a3341bbd1ee93050126c44e25a5979217e7571397997",
+      "bytes": 524883,
+      "dimensions": [
+        1200,
+        1600
+      ]
+    },
+    {
+      "id": "sun397:asset:fe3a6027e954287aa7962842",
+      "sha256": "60b3deeae8185266510afba1c53377fb5b27d71596117c6dde8ddfb22d941fca",
+      "bytes": 263282,
+      "dimensions": [
+        2016,
+        1512
+      ]
+    },
+    {
+      "id": "sun397:asset:8ae2dcd84514711ffd9ca9b8",
+      "sha256": "929e83dfad11cd499179e5aeefd176ef2b1ccd64337eddfb6c4761391c93b6f6",
+      "bytes": 6273148,
+      "dimensions": [
+        4000,
+        3000
+      ]
+    },
+    {
+      "id": "sun397:asset:7057b9ab67929ed15babfe14",
+      "sha256": "6c37686824984466b145aa6d272d7001442d345026432d4e008e39f9639a80dd",
+      "bytes": 80051,
+      "dimensions": [
+        448,
+        336
+      ]
+    },
+    {
+      "id": "sun397:asset:c2e62e2b6d15ab11f627bc01",
+      "sha256": "f9c42923445ac4395d86accd5ad5c7f7686a57a294c7227b0b3da159f31e9fa3",
+      "bytes": 1144606,
+      "dimensions": [
+        2048,
+        1360
+      ]
+    },
+    {
+      "id": "sun397:asset:5205495d2c92eb9131cc61d1",
+      "sha256": "8d05d61cd3529cf51ea57b23af4cbd2fe1306da9f5012382e1605fc05a1e427b",
+      "bytes": 131694,
+      "dimensions": [
+        500,
+        333
+      ]
+    },
+    {
+      "id": "sun397:asset:362c40603f731b826d6be0b8",
+      "sha256": "ba7a7e43e4a19f2cc32baba97275c76cc25ebe82e48c7fc92e9581392a788c9b",
+      "bytes": 374560,
+      "dimensions": [
+        1440,
+        1080
+      ]
+    },
+    {
+      "id": "sun397:asset:5b5b1863e5a31675b05766a5",
+      "sha256": "5b07536850aab913e9ad2f2622bf8fc2a2f3f04db3184342f702e5667a87627e",
+      "bytes": 85039,
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "id": "sun397:asset:6a99870504a463127ff5d2e3",
+      "sha256": "09ef2a14426009244056d0f41d55708581cbccbff7c1b6308cb38d1a6f2d9884",
+      "bytes": 299340,
+      "dimensions": [
+        1080,
+        1440
+      ]
+    },
+    {
+      "id": "sun397:asset:2b19b30bc9e0ebb6b3f7dcd1",
+      "sha256": "f5921355e0bbf3d0d00abdd3ade923365065af7fad4961a8b43e60e8033a5e96",
+      "bytes": 67374,
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "id": "sun397:asset:4ed4c622d94adb4cefa97916",
+      "sha256": "ac9dde4b001a649090fa08f23f4417309ea1cb96fc26ad6e75dba8c5f81d3f01",
+      "bytes": 81505,
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "id": "sun397:asset:6ca9348155597020e8c92287",
+      "sha256": "a17806c0562f04528677970b96b3702e7a7aa73cd01538c55df1994dc5a0ecbb",
+      "bytes": 2267317,
+      "dimensions": [
+        2816,
+        2112
+      ]
+    },
+    {
+      "id": "sun397:asset:b189fd207efc5021be266813",
+      "sha256": "1d84cb94458fd1f019cac084fa08d8d59e2419177c9c9777ce621b14f7114582",
+      "bytes": 193985,
+      "dimensions": [
+        2816,
+        2112
+      ]
+    },
+    {
+      "id": "sun397:asset:37ea2139c78bdc8a2128da32",
+      "sha256": "ae1fe8ef104d68657184cf36a7f5d6422afefcdfda6dad965acdd260b672e059",
+      "bytes": 1633711,
+      "dimensions": [
+        3008,
+        2000
+      ]
+    },
+    {
+      "id": "sun397:asset:9a4b62ce4a4da6edd5285db3",
+      "sha256": "2a9d9995502f6071a1267085685cd52d5da48db90ec99c56dec4ff041d14eb18",
+      "bytes": 2412034,
+      "dimensions": [
+        2186,
+        1704
+      ]
+    },
+    {
+      "id": "sun397:asset:28ced425e67b3b4319709a0d",
+      "sha256": "a917e401e7936ef8f84b36b5c5c71e7a89fd0c262c4f6d4382e89383f631bcdd",
+      "bytes": 145148,
+      "dimensions": [
+        500,
+        375
+      ]
+    },
+    {
+      "id": "sun397:asset:86ad85a54a01e26f692a977b",
+      "sha256": "3fd83c8bdd5bb630779affa041f181127e9ed7946c643923bcc10b09a472e36f",
+      "bytes": 1152410,
+      "dimensions": [
+        2048,
+        1536
+      ]
+    },
+    {
+      "id": "sun397:asset:53978f5efcf841a43c161982",
+      "sha256": "a2c9e2cdb814c41ae6ebefb6c80b461fee6d6a76f201be2cb169dca9eee92125",
+      "bytes": 114344,
+      "dimensions": [
+        600,
+        452
+      ]
+    },
+    {
+      "id": "sun397:asset:e1145132d7eb4b456646fa8c",
+      "sha256": "cdf3ee61db0dd5956078b7813f7ed1fb5f68f0420758425cded4628886fddfe2",
+      "bytes": 260986,
+      "dimensions": [
+        800,
+        1066
+      ]
+    },
+    {
+      "id": "sun397:asset:d767e77a36063cdfe9517747",
+      "sha256": "f5841bae5b84588de44f8f686437814fed7069143dbc3d6c15e19f0f24a718f7",
+      "bytes": 32402,
+      "dimensions": [
+        330,
+        233
+      ]
+    },
+    {
+      "id": "sun397:asset:1c4d581e00157dade388ce32",
+      "sha256": "a190551c2c3f8fbe0ef69b7bdaa50adb696ca117403a7206ccf07eb6f4160fe7",
+      "bytes": 325610,
+      "dimensions": [
+        1024,
+        768
+      ]
+    },
+    {
+      "id": "sun397:asset:a726200a873456904db2f899",
+      "sha256": "5e96f138d1c628d710fc60dc247a29a4a6c16f7992f2e29d7445cede20ef1cc7",
+      "bytes": 11242,
+      "dimensions": [
+        300,
+        225
+      ]
+    },
+    {
+      "id": "sun397:asset:40af5d9b16e42244dfdb8369",
+      "sha256": "1c6ceb7f9f0f335393bc99ae6bde4c545803f7c5b1e9db5b88cb91a9126f8921",
+      "bytes": 40008,
+      "dimensions": [
+        320,
+        240
+      ]
+    },
+    {
+      "id": "sun397:asset:8eadaecbd4aa6c560ada60d1",
+      "sha256": "b10bccac7c7301778b8ba30cb982edcfa88ddf44f0c8217936154496158fb07f",
+      "bytes": 117250,
+      "dimensions": [
+        367,
+        550
+      ]
+    },
+    {
+      "id": "sun397:asset:957a620937a53986797b5a3b",
+      "sha256": "eb037731eedd55db03e4a352095ff1f4c0381ceb74151306fbf9d1dfef28c6c5",
+      "bytes": 446665,
+      "dimensions": [
+        1600,
+        1200
+      ]
+    },
+    {
+      "id": "sun397:asset:c887ea13882a60e527e4bc24",
+      "sha256": "52ac8f5e0c8750023e14ada2a63fbe187003f5836b56358c5ffb3f711d350a1e",
+      "bytes": 66752,
+      "dimensions": [
+        300,
+        255
+      ]
+    },
+    {
+      "id": "sun397:asset:7b644a775fd70c1314d06f11",
+      "sha256": "55e8c59c3a8c41fb870c9bee4820feac736d53bda13c2f84589c8306b9fc0695",
+      "bytes": 18837,
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "id": "sun397:asset:b2fbfd56ab9b93d7c0c2f107",
+      "sha256": "b39df39c621ad6b54990d66560af6119bad6dbd6411905468369bf928b480f4e",
+      "bytes": 376344,
+      "dimensions": [
+        1600,
+        2400
+      ]
+    },
+    {
+      "id": "sun397:asset:02b92cc084db1504298ddef7",
+      "sha256": "0304114ed8d915c1f921d95269213c1c58cfc01a97cb8e844c6c9d3700a98927",
+      "bytes": 53425,
+      "dimensions": [
+        279,
+        200
+      ]
+    },
+    {
+      "id": "sun397:asset:35bc5f9dd60f51430e6eed40",
+      "sha256": "d852a485accf87cfeebdc3c57e4ab70bf8878ed101c843535f9d7c4f0d4b1928",
+      "bytes": 10741,
+      "dimensions": [
+        300,
+        240
+      ]
+    },
+    {
+      "id": "sun397:asset:05b5885b128fc7719899c495",
+      "sha256": "07e5853cd882498484902627f729b61cfd6f50a3af624d1103c58cccac8e086b",
+      "bytes": 21579,
+      "dimensions": [
+        300,
+        223
+      ]
+    },
+    {
+      "id": "sun397:asset:3a1bc8902a9da2cefc55f1c1",
+      "sha256": "56b37b93c8fa7dc1bcff8696e4e9fe1a968669706fa37a2a71e62f9b94847b04",
+      "bytes": 240598,
+      "dimensions": [
+        1600,
+        1200
+      ]
+    },
+    {
+      "id": "sun397:asset:e90a0d78021d80b599b4eb51",
+      "sha256": "33faa00b17cc6cf42288936b7a76ca0d5ec82e9a1f1c933dbbeb935bd91dd59d",
+      "bytes": 29657,
+      "dimensions": [
+        220,
+        166
+      ]
+    },
+    {
+      "id": "sun397:asset:7132a7f690b416493ec420af",
+      "sha256": "e33b6a92ef169ac283d58528517968de8d21ae49b4ef572f8691d83f03d98d7b",
+      "bytes": 394073,
+      "dimensions": [
+        2592,
+        1944
+      ]
+    },
+    {
+      "id": "sun397:asset:fe6317a34512971d93cb092b",
+      "sha256": "20056e742c20bf5a5978b01a8a132b028ca419d509f5a4d6b421177978a756c4",
+      "bytes": 55355,
+      "dimensions": [
+        405,
+        310
+      ]
+    },
+    {
+      "id": "sun397:asset:81cf0380d4bef22a6c3ee9fa",
+      "sha256": "d4f8e4171b20f09231a782efeb7ad03c61ba645394c03d55390a334a237d8b33",
+      "bytes": 1220139,
+      "dimensions": [
+        1936,
+        1296
+      ]
+    },
+    {
+      "id": "sun397:asset:8999390d938b6778d194591c",
+      "sha256": "77efa61bf54ceb17c5fbc567b0f3378ea2587627bd90f7b57547c4f2aa87c1e7",
+      "bytes": 32316,
+      "dimensions": [
+        640,
+        425
+      ]
+    },
+    {
+      "id": "sun397:asset:fa20b3110a4e066f68c083e7",
+      "sha256": "4a7686064a08351b07020c57a2b0c985179d546c6d42d94148c82f2a46313ce8",
+      "bytes": 270038,
+      "dimensions": [
+        1200,
+        1600
+      ]
+    },
+    {
+      "id": "sun397:asset:6e7dd00e33aa6005e92caf08",
+      "sha256": "efd227c6cc68ecb6a18bde976b50f247ae49f45cac4dbb2f2a9c6a8c414e9912",
+      "bytes": 1424635,
+      "dimensions": [
+        1952,
+        2576
+      ]
+    },
+    {
+      "id": "sun397:asset:11ee0130df2919ca4495e7c5",
+      "sha256": "d1d9cb798e8e70cd61c91c48dc334ac96658e347abd115089c56116d5498a16c",
+      "bytes": 10808,
+      "dimensions": [
+        350,
+        233
+      ]
+    },
+    {
+      "id": "sun397:asset:e15b2eee7f4fed18f243d5a4",
+      "sha256": "192949bf389c999e05d89ced9e463064415757b34afd40204dd3087cb970e0c3",
+      "bytes": 1058831,
+      "dimensions": [
+        2048,
+        1536
+      ]
+    },
+    {
+      "id": "sun397:asset:6f067f7a4537d7dd928e9ee4",
+      "sha256": "51698ed521733b645a1046725450ea778f1f8cd464e4fb8287b2367ddd7afb2b",
+      "bytes": 136122,
+      "dimensions": [
+        500,
+        375
+      ]
+    },
+    {
+      "id": "sun397:asset:31ece7476ff98e20a7e102c5",
+      "sha256": "3fa29d6c5ff79533d0b27b98a8ac13fb4a8a3a9cd77235e82382ba55f9fe8f9a",
+      "bytes": 29634,
+      "dimensions": [
+        325,
+        244
+      ]
+    },
+    {
+      "id": "sun397:asset:9303da9646a25eb17e31a2a0",
+      "sha256": "8943e2a5624bd1af086c2aefd203a58f5dd060f246c78e8224e9ce7a8892efa2",
+      "bytes": 102387,
+      "dimensions": [
+        500,
+        375
+      ]
+    },
+    {
+      "id": "sun397:asset:e9bb7885fde0a795b4d0ab02",
+      "sha256": "4dee5f50da8df7266e66bc42c3d8baad4dffa4650787f7e1155afb59ef51cec8",
+      "bytes": 936240,
+      "dimensions": [
+        2048,
+        1536
+      ]
+    },
+    {
+      "id": "sun397:asset:c90da6d2962335eb6d88331c",
+      "sha256": "ebc84bba496646bfee11d83196dce6303af7f3956a2c0258f0c5b9f7f8ac9be0",
+      "bytes": 27938,
+      "dimensions": [
+        311,
+        423
+      ]
+    },
+    {
+      "id": "sun397:asset:e7297e94b8b00a6bb63b411a",
+      "sha256": "52045d7b63bf07638b332e5118c274085c25318f860f1657b6bf2da2c2b57cb2",
+      "bytes": 495385,
+      "dimensions": [
+        2048,
+        1536
+      ]
+    },
+    {
+      "id": "sun397:asset:683d0b6b655c66bfb39f6737",
+      "sha256": "49eb50319f74ff58eff101757ea57cfb02af9f56ce10441cb72b77be3e2b97c3",
+      "bytes": 20551,
+      "dimensions": [
+        300,
+        225
+      ]
+    },
+    {
+      "id": "sun397:asset:f694836189cfdcc906727de8",
+      "sha256": "83bc635c3ca2d80774295196cbdca490e8de3694915ba427e4ed68bab36f1f48",
+      "bytes": 387461,
+      "dimensions": [
+        1024,
+        768
+      ]
+    },
+    {
+      "id": "sun397:asset:7199ec494277b122b4f9e597",
+      "sha256": "b30b258781e9f098e907857e8b9b67ff5d48a55cbb3ad773df796770ad3c70b8",
+      "bytes": 127966,
+      "dimensions": [
+        1109,
+        1067
+      ]
+    },
+    {
+      "id": "sun397:asset:64b08a17af38b26b60559279",
+      "sha256": "7931a6ce5c67ec327a5eabca1fc6bdc1debf7bf14be4f85afdfab59580f8657a",
+      "bytes": 189411,
+      "dimensions": [
+        1024,
+        768
+      ]
+    },
+    {
+      "id": "sun397:asset:1ff2e820ca0f1d6920f3ef3b",
+      "sha256": "3f76be9661f6e0017af628b8843e8def60a99f4325f6d286259d19c1fbdb8953",
+      "bytes": 580792,
+      "dimensions": [
+        1712,
+        2288
+      ]
+    },
+    {
+      "id": "sun397:asset:e13568550405f9aead9ac0ab",
+      "sha256": "418f671851ade64511e1277922ec266181f3ee0a15e5f8a40409728fcba952d1",
+      "bytes": 120595,
+      "dimensions": [
+        500,
+        321
+      ]
+    },
+    {
+      "id": "sun397:asset:68a25d51734ae2ef5a4d4b91",
+      "sha256": "2559ed1377c2675256048d3b550b584923e6136244573b36f3106d11d0fbd173",
+      "bytes": 402922,
+      "dimensions": [
+        1200,
+        800
+      ]
+    },
+    {
+      "id": "sun397:asset:fa7e8f8b1518e34e09ea06a8",
+      "sha256": "91e87a0ca76a33a9810c6b8e49b1be03c148c12f8643c644ecfe069727ccdc8b",
+      "bytes": 49780,
+      "dimensions": [
+        519,
+        700
+      ]
+    },
+    {
+      "id": "sun397:asset:d971b857aa4daa214268d4a3",
+      "sha256": "fa3dfd6cab8d3da1697ccd9ec99787fc0a2df475ce96fe9f84db0fb4492b3819",
+      "bytes": 101267,
+      "dimensions": [
+        1234,
+        750
+      ]
+    },
+    {
+      "id": "sun397:asset:77af1bb83b756b22c7599c15",
+      "sha256": "434f09f30a222abd15bb1c104adbfd742f1848ab2371e8d7901cf19fed558014",
+      "bytes": 29018,
+      "dimensions": [
+        288,
+        216
+      ]
+    },
+    {
+      "id": "sun397:asset:bf5e34cf6240b5f3edb19f2e",
+      "sha256": "adc8e9d9280272e5925742c20e37437affd48d56951f96c79d79f69423a092ac",
+      "bytes": 91995,
+      "dimensions": [
+        600,
+        450
+      ]
+    },
+    {
+      "id": "sun397:asset:dc94f20ec4df31da087573cf",
+      "sha256": "53c957d1cd4105025782ef52cdcf647ba63195a7ed29d3b2896b6c4cd5e2b344",
+      "bytes": 335047,
+      "dimensions": [
+        1600,
+        1200
+      ]
+    },
+    {
+      "id": "sun397:asset:f7ea4b33dcb705d386693fd4",
+      "sha256": "05938420e309dad920e5145d8d8400679e9bf6887f40413b38ec14a8d5554552",
+      "bytes": 147236,
+      "dimensions": [
+        500,
+        332
+      ]
+    },
+    {
+      "id": "sun397:asset:3c3ef8690d01510035e087ee",
+      "sha256": "d446ca75b868bbf48b85b982aeff326b5f0a2c4c992af9b783cdbb68c1002ea8",
+      "bytes": 38408,
+      "dimensions": [
+        300,
+        200
+      ]
+    },
+    {
+      "id": "sun397:asset:049ecee2c331c44bc59a3a1d",
+      "sha256": "5e675fd48bbc859b0291e015ddead6301cb6b7cd35ca27603cce9d1232791261",
+      "bytes": 39669,
+      "dimensions": [
+        580,
+        435
+      ]
+    },
+    {
+      "id": "sun397:asset:8bf4b78804343e899106eb45",
+      "sha256": "a0b67d25d5bc7c30ef39da49fc199c5414aeed86dbd374f5fb68f3f53d2ffae8",
+      "bytes": 11392,
+      "dimensions": [
+        225,
+        300
+      ]
+    },
+    {
+      "id": "sun397:asset:0d9f0e30a8bf6bf5172d0d5f",
+      "sha256": "f98db3b165aab5b62e1fb909bed7f8cb51cd5821c6b5792b4da82299fb0501e3",
+      "bytes": 18152,
+      "dimensions": [
+        256,
+        256
+      ]
+    },
+    {
+      "id": "sun397:asset:6c8aa27d271a40c442cdcc7a",
+      "sha256": "c6a3b937649ea0f51c3354107ddc6c684a80cf59b30a58f199f57a8415b01c42",
+      "bytes": 387531,
+      "dimensions": [
+        800,
+        1067
+      ]
+    }
+  ],
+  "snapshot_id": "sun397-bfade66cc4678f0e17c4f745"
+}

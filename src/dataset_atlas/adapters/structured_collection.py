@@ -11,7 +11,7 @@ from PIL import Image
 from .core import DatasetAdapter,SourceDescription,RecordBatch,MediaHandle,_nested,_safe_relative
 from dataset_atlas.storage import BoundedCache, CacheIdentity, HttpsFetcher
 from urllib.parse import quote, urlsplit
-from dataset_atlas.storage.ranges import HttpsRangeReader
+from dataset_atlas.storage.ranges import HttpsRangeReader, SmallReadBuffer
 
 
 class _LocalArchive(io.BufferedReader):
@@ -319,10 +319,14 @@ class StructuredCollectionAdapter(DatasetAdapter):
             expected=self.config.get('derived_archive_checksums',{}).get(path_key) or next((item['sha256'] for item in self.config.get('source_files',[]) if Path(item['path'])==path),None)
             if not expected:raise ValueError('Local media archive requires a pinned checksum')
             return self._image_handle(source,LOCAL_ZIP_MEMBERS.read(path,member,remaining,expected),asset_ref)
-        with self._remote(key,self.config.get('media_transfer_bytes',40_000_000)) as remote,zipfile.ZipFile(remote) as archive:
-            info=archive.getinfo(member)
-            if info.is_dir() or info.file_size>remaining or info.file_size<1:raise ValueError('Remote ZIP image exceeds byte budget')
-            data=archive.read(info)  # ZIP CRC validated by zipfile, including decompression.
+        with self._remote(key,self.config.get('media_transfer_bytes',40_000_000)) as remote:
+            # ZIP local headers, names and small image payloads are adjacent.
+            # Coalesce their reads instead of making several HTTP round trips.
+            reader = SmallReadBuffer(remote) if isinstance(remote, HttpsRangeReader) else remote
+            with zipfile.ZipFile(reader) as archive:
+                info=archive.getinfo(member)
+                if info.is_dir() or info.file_size>remaining or info.file_size<1:raise ValueError('Remote ZIP image exceeds byte budget')
+                data=archive.read(info)  # ZIP CRC validated by zipfile, including decompression.
         return self._image_handle(source,data,asset_ref)
 
     def _image_handle(self,source,data,asset_ref):

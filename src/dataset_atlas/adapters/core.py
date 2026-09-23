@@ -524,7 +524,10 @@ class DirectoryArchiveAdapter(DatasetAdapter):
             return cached
         path = self._path()
         suffixes = {suffix.lower() for suffix in self.config.get("suffixes", [".jpg", ".jpeg", ".png", ".webp"])}
-        if path.is_dir():
+        if self.config.get('original_access_index'):
+            from dataset_atlas.storage.indexed_tar import IndexedTarArchive
+            names = [i.filename for i in IndexedTarArchive(self.config['original_access_index']).infolist()]
+        elif path.is_dir():
             names = [str(p.relative_to(path).as_posix()) for p in path.rglob("*") if p.is_file()]
         elif zipfile.is_zipfile(path):
             with zipfile.ZipFile(path) as archive:
@@ -610,7 +613,11 @@ class DirectoryArchiveAdapter(DatasetAdapter):
     def resolve_asset(self, source: PreparedSource, asset_ref: str) -> MediaHandle:
         name = _safe_relative(asset_ref)
         path = self._path()
-        if path.is_dir():
+        if self.config.get('original_access_index'):
+            from dataset_atlas.storage.indexed_tar import read_tar_member
+            data, _ = read_tar_member(self.config['original_access_index'], name,
+                max_bytes=source.max_bytes - source.bytes_read, local_source=self.config.get('original_archive_path'))
+        elif path.is_dir():
             data = read_rooted_file(path / name, [path], source.max_bytes - source.bytes_read)
         elif zipfile.is_zipfile(path):
             from dataset_atlas.storage.zip_members import LOCAL_ZIP_MEMBERS
@@ -767,6 +774,9 @@ class OverlayAdapter(StructuredAdapter):
 
 
 def get_adapter(dataset: Dataset) -> DatasetAdapter:
+    if dataset.adapter == 'nrc_vad':
+        from .nrc_vad import NRCVADAdapter
+        return NRCVADAdapter(dataset)
     if dataset.adapter == 'inventory_variants':
         from .inventory_variants import InventoryVariantsAdapter
         return InventoryVariantsAdapter(dataset)
@@ -900,7 +910,8 @@ def _decoded_cache(cache_root: Path) -> BoundedCache:
 
 
 def resolve_dataset_asset(dataset: Dataset, asset_ref: str,
-                          max_bytes: int = 10_000_000, cache_root: Path | None = None) -> MediaHandle:
+                          max_bytes: int = 10_000_000, cache_root: Path | None = None,
+                          workspace_root: Path | None = None) -> MediaHandle:
     """Resolve one configured source asset for the workbench media endpoint.
 
     Preparation is cached per dataset configuration; each media request still
@@ -919,6 +930,21 @@ def resolve_dataset_asset(dataset: Dataset, asset_ref: str,
             mime,data=cached.read_bytes().split(b'\n',1)
             if len(data)>max_bytes:raise ValueError('Cached asset exceeds byte budget')
             return MediaHandle(data,mime.decode('ascii'),hashlib.sha256(data).hexdigest(),asset_ref)
+    if workspace_root is not None:
+        # Workbench compression never changes canonical model inputs. Protected
+        # originals and range-addressable native archives survive source eviction.
+        root = Path(workspace_root).resolve()
+        from dataset_atlas.storage.compact import compact_entry, read_compact
+        entry = compact_entry(root, dataset.id, dataset.snapshot_id, asset_ref)
+        if entry and entry['representation'] == 'original':
+            data, mime, proof = read_compact(root, dataset.id, dataset.snapshot_id, asset_ref, max_bytes)
+            return MediaHandle(data, mime, proof['original_sha256'], asset_ref)
+        from dataset_atlas.storage.indexed_tar import read_original_route
+        original = read_original_route(root, dataset.id, dataset.snapshot_id, asset_ref, max_bytes)
+        if original:
+            import mimetypes
+            data, proof = original
+            return MediaHandle(data, mimetypes.guess_type(asset_ref)[0] or 'application/octet-stream', proof['sha256'], asset_ref)
     with _PREPARED_ADAPTER_LOCK:
         adapter = _PREPARED_ADAPTERS.get(key)
         if adapter is None:

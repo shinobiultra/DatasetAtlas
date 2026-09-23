@@ -26,7 +26,10 @@ class SUN397Adapter(ClassicVisionAdapter):
                     raise ValueError('SUN397 partition checksum changed')
         maximum = self.config.get('max_annotation_bytes', 150_000_000)
         consumed = 0
-        with zipfile.ZipFile(self._path()) as images, zipfile.ZipFile(partitions) as annotations:
+        from dataset_atlas.storage.indexed_tar import IndexedTarArchive
+        image_archive = (IndexedTarArchive(self.config['original_access_index'], self.config.get('original_archive_path'), maximum)
+                         if self.config.get('original_access_index') else zipfile.ZipFile(self._path()))
+        with image_archive as images, zipfile.ZipFile(partitions) as annotations:
             def payload(archive, name):
                 nonlocal consumed
                 info = archive.getinfo(name)

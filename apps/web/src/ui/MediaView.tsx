@@ -156,6 +156,11 @@ export function AssetView({ asset, overlays = [], controls = false, highlight, f
 /** The representation label a researcher needs before trusting what they see. */
 export function RepresentationTag({ asset }: { asset: Asset }) {
   if (asset.metadata?.availability === 'absent_from_pinned_release') return <span className="tag">Unavailable in source release</span>
+  if (!safeViewEnabled() && ['compressed_avif', 'optimized_on_demand'].includes(asset.representation ?? '')) return <>
+    <span className="tag" title="AVIF browsing copy at the source pixel dimensions, retaining the original if conversion is unsuitable or larger. Model inputs use the original.">{asset.representation === 'compressed_avif' ? 'Compressed · full resolution' : 'Full-resolution browsing copy'}</span>
+    {typeof asset.metadata?.original_uri === 'string' && asset.metadata.original_uri.startsWith('/api/v1/media/') &&
+      <a className="btn sm" href={asset.metadata.original_uri} target="_blank" rel="noreferrer">Open original</a>}
+  </>
   const representation = safeViewEnabled() ? 'Safe-view display derivative' : asset.representation ?? 'original'
   return <span className="tag" title={`Asset ${asset.id}`}>{representation === 'original' ? 'Original' : representation}</span>
 }

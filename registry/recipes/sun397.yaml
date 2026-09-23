@@ -1,0 +1,27 @@
+release: SUN397-original-byte-equivalent-mirror-99bbf6ad18ca4f01e47f8f96ca1a8b7e53cb235a
+adapter: sun397
+source_url: https://sun.cs.princeton.edu/
+expected_count: 108754
+scope: All 108754 native SUN397 images in 397 classes, joined to all ten published
+  training/testing text folds and distinct MATLAB complement testing folds. Mirror
+  image archive matches the TorchVision-published original MD5 and pinned HF SHA-256.
+  Both native partition protocols retained separately. No public redistribution approval.
+adapter_config:
+  dataset_kind: sun397
+  archive_preparation: indexed-gzip
+  max_annotation_bytes: 150000000
+  max_uncompressed_bytes: 60000000000
+files:
+- source_name: SUN397.tar.gz
+  url: https://huggingface.co/zhengli97/SUN397_Dataset/resolve/99bbf6ad18ca4f01e47f8f96ca1a8b7e53cb235a/SUN397.tar.gz
+  bytes: 39077296924
+  sha256: f404130965a7ad77bed5ececc71e720ab50f3cc1e1bb257257610d38f3b928ec
+  format: tar.gz
+  config_key: path
+- source_name: Partitions.zip
+  url: https://huggingface.co/zhengli97/SUN397_Dataset/resolve/99bbf6ad18ca4f01e47f8f96ca1a8b7e53cb235a/Partitions.zip
+  bytes: 18293705
+  sha256: e3311ea5f812d4cc6faef194688343d1111f6cd6f70f2c62f393c2b8d6ba1ec9
+  config_key: partitions_path
+  format: zip
+  mirror_revision: 99bbf6ad18ca4f01e47f8f96ca1a8b7e53cb235a

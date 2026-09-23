@@ -1,0 +1,45 @@
+{
+  "dataset_id": "vhd11k",
+  "source_sha256": "4e846878a2aa25acf5e4c489d071060830222cbf5808a0f6a4930902901e5965",
+  "linked_dataset_ids": [],
+  "status": "executed",
+  "retained_snapshots": 1,
+  "image_references_checked": 10000,
+  "unique_native_images_in_snapshots": 10000,
+  "preview_asset_memberships": 100,
+  "preview_bytes_upper_bound": 22130115,
+  "cold_original_probes": [
+    {
+      "sha256": "cb2b4cd33d4bfad35e3b2d8b9dcb0b1d4bf09baabfc5366ea10836bda0d2fc2b",
+      "bytes": 92037,
+      "transferred_bytes": 90948,
+      "source_sha256": "4e846878a2aa25acf5e4c489d071060830222cbf5808a0f6a4930902901e5965",
+      "fingerprint_type": "etag",
+      "etag": "\"f989c07fdb437e8c9fa8f73004cb332a368396f0d4b395fd3d8625aca53dc6c5\""
+    },
+    {
+      "sha256": "628c4ec3d0a6edb30e75eecb741a67ffb3cf4f8c8983f4cab5f278aeb13e4f02",
+      "bytes": 304810,
+      "transferred_bytes": 304860,
+      "source_sha256": "4e846878a2aa25acf5e4c489d071060830222cbf5808a0f6a4930902901e5965",
+      "fingerprint_type": "etag",
+      "etag": "\"f989c07fdb437e8c9fa8f73004cb332a368396f0d4b395fd3d8625aca53dc6c5\""
+    },
+    {
+      "sha256": "d0053952d9bf580de815dff21fe7c08ad2345b382d64adfab3b7bba19b9b14cf",
+      "bytes": 66084,
+      "transferred_bytes": 64035,
+      "source_sha256": "4e846878a2aa25acf5e4c489d071060830222cbf5808a0f6a4930902901e5965",
+      "fingerprint_type": "etag",
+      "etag": "\"f989c07fdb437e8c9fa8f73004cb332a368396f0d4b395fd3d8625aca53dc6c5\""
+    }
+  ],
+  "paths": [
+    "work/sources/vhd11k/harmful_images_10000.zip"
+  ],
+  "extracted_files": 0,
+  "source_bytes": 2274940728,
+  "extracted_bytes": 0,
+  "retention": "Original-quality previews and complete indices; other originals and optimized browsing copies on demand.",
+  "freed_unique_file_bytes": 2274940728
+}

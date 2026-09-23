@@ -101,3 +101,40 @@ Those are cache limits, not a promise that decoded Python objects occupy 100 MB.
 Local file identity changes invalidate cached checksum verification. Native image
 condition/role labels appear in focused inspection; an image-specific question
 is labelled separately from the record question.
+
+Full preparations sample at most 100 representative examples while streaming the
+complete index. SHA-256 priorities, seed 0, and primary-asset grouping make this
+independent of source order. Every asset within a chosen example remains linked.
+Preview media is original quality and resolution; existing source-order packs
+retain their original sampling declarations until migrated.
+
+`atlas storage status` measures unique allocated local file blocks, with hard-link,
+external-symlink and shared-extent caveats. `atlas storage compact --dataset ID
+--max-input-bytes N --max-output-bytes N` writes resumable full-dimension AVIF
+browsing copies under `work/compact-media`, protecting all preview assets. It never
+rewrites source archives, canonical records, or model inputs. `representation=compact`
+serves a checksum-verified copy; `representation=original` retains the original
+route. Browser assets explicitly label the copy and provide `metadata.original_uri`.
+Unsupported pixel modes and animated images remain original. Compression is used
+only when its measured output is smaller. Native EXIF orientation and ICC profiles
+are retained without resizing. Original-source eviction is a separate operation
+requiring verified retrieval and saved-selection dependency checks.
+
+The optional remote-storage extra provides gzip TAR seek checkpoints. The original
+archive is fully SHA-256 checked during indexing, each member has its own checksum,
+and subsequent remote requests pin a strong ETag with an explicit transfer cap.
+The retrieval receipt distinguishes transferred ranges from a full-file verification.
+
+Native ZIP indices store original compressed offsets and per-member hashes without
+keeping an uncompressed archive. `storage retire-original` checks retained snapshot
+memberships, pins every preview original and installs routes before removing acquired
+copies. Shared sources require all dependent datasets in the same checked operation.
+
+`storage configure` enables `representation=optimized` for non-preview image browsing.
+Its shared LRU cache is separate from bulk compaction, and model inputs remain original.
+The browser's `optimized_on_demand` label allows an original-byte fallback when AVIF is
+unsuitable or larger; response headers report the actual representation. Even an
+explicit optimized request for a preview returns original bytes. Preparation planning
+and dispatch account for configured external roots and running reservations against
+the shared ceiling. Dataset coverage says "full population indexed", since complete
+metadata does not imply that every original media file is resident on disk.

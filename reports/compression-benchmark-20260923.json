@@ -1,0 +1,832 @@
+{
+  "status": "completed",
+  "sample_method": "8 per dataset, smallest SHA256(compression-study-v1:member); convenience datasets, not a catalogue size projection",
+  "originals_modified": false,
+  "rows": [
+    {
+      "dataset": "food101",
+      "source_member": "food-101/images/chicken_quesadilla/3335217.jpg",
+      "sha256": "afc6d0e8833af5a3f376f0a2e16aa7889a3f314c15993ade6a43e4cc9a7e79ad",
+      "source_bytes": 52449,
+      "dimensions": [
+        384,
+        512
+      ],
+      "measurements": [
+        {
+          "codec": "JPEG XL reversible JPEG",
+          "output_bytes": 44551,
+          "round_trip_original_sha256": "afc6d0e8833af5a3f376f0a2e16aa7889a3f314c15993ade6a43e4cc9a7e79ad",
+          "seconds": 0.032877920999453636
+        },
+        {
+          "codec": "AVIF",
+          "quality": 50,
+          "subsampling": "4:4:4",
+          "output_bytes": 18492,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 32.37382507324219,
+          "seconds": 0.4276453300008143
+        },
+        {
+          "codec": "AVIF",
+          "quality": 65,
+          "subsampling": "4:4:4",
+          "output_bytes": 31564,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 37.79518127441406,
+          "seconds": 0.3714071350004815
+        }
+      ]
+    },
+    {
+      "dataset": "food101",
+      "source_member": "food-101/images/waffles/3111533.jpg",
+      "sha256": "34bf23308e3a633f66263ecbbfab81b77287abc94b37b3a6dc39e065be01d5a7",
+      "source_bytes": 29006,
+      "dimensions": [
+        384,
+        512
+      ],
+      "measurements": [
+        {
+          "codec": "JPEG XL reversible JPEG",
+          "output_bytes": 24859,
+          "round_trip_original_sha256": "34bf23308e3a633f66263ecbbfab81b77287abc94b37b3a6dc39e065be01d5a7",
+          "seconds": 0.02008280200061563
+        },
+        {
+          "codec": "AVIF",
+          "quality": 50,
+          "subsampling": "4:4:4",
+          "output_bytes": 9425,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 38.95450973510742,
+          "seconds": 0.29602804299975105
+        },
+        {
+          "codec": "AVIF",
+          "quality": 65,
+          "subsampling": "4:4:4",
+          "output_bytes": 15463,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 42.052032470703125,
+          "seconds": 0.2836732710002252
+        }
+      ]
+    },
+    {
+      "dataset": "food101",
+      "source_member": "food-101/images/sushi/3808946.jpg",
+      "sha256": "0f2627af1c6bfb70fe050b6986c47f6594a7e3ccdd6879fcb28356b1dee47b4c",
+      "source_bytes": 62253,
+      "dimensions": [
+        512,
+        512
+      ],
+      "measurements": [
+        {
+          "codec": "JPEG XL reversible JPEG",
+          "output_bytes": 52533,
+          "round_trip_original_sha256": "0f2627af1c6bfb70fe050b6986c47f6594a7e3ccdd6879fcb28356b1dee47b4c",
+          "seconds": 0.021245395999358152
+        },
+        {
+          "codec": "AVIF",
+          "quality": 50,
+          "subsampling": "4:4:4",
+          "output_bytes": 20391,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 35.14680480957031,
+          "seconds": 0.519439247000264
+        },
+        {
+          "codec": "AVIF",
+          "quality": 65,
+          "subsampling": "4:4:4",
+          "output_bytes": 36522,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 39.64670944213867,
+          "seconds": 0.48527658700004395
+        }
+      ]
+    },
+    {
+      "dataset": "food101",
+      "source_member": "food-101/images/foie_gras/403493.jpg",
+      "sha256": "001cffcfec6cefda14d893373b34a31ba393bb64b8e4334134ded2972773c1f3",
+      "source_bytes": 52510,
+      "dimensions": [
+        512,
+        384
+      ],
+      "measurements": [
+        {
+          "codec": "JPEG XL reversible JPEG",
+          "output_bytes": 43871,
+          "round_trip_original_sha256": "001cffcfec6cefda14d893373b34a31ba393bb64b8e4334134ded2972773c1f3",
+          "seconds": 0.02279279199865414
+        },
+        {
+          "codec": "AVIF",
+          "quality": 50,
+          "subsampling": "4:4:4",
+          "output_bytes": 14250,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 35.16304397583008,
+          "seconds": 0.40786959800061595
+        },
+        {
+          "codec": "AVIF",
+          "quality": 65,
+          "subsampling": "4:4:4",
+          "output_bytes": 22281,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 38.60700607299805,
+          "seconds": 0.40882688599958783
+        }
+      ]
+    },
+    {
+      "dataset": "food101",
+      "source_member": "food-101/images/cheese_plate/1769895.jpg",
+      "sha256": "52598e3f59a8698bd6fad3733c171280b170f01c1dc23e201fe835f7ebbe35e3",
+      "source_bytes": 43994,
+      "dimensions": [
+        512,
+        512
+      ],
+      "measurements": [
+        {
+          "codec": "JPEG XL reversible JPEG",
+          "output_bytes": 37894,
+          "round_trip_original_sha256": "52598e3f59a8698bd6fad3733c171280b170f01c1dc23e201fe835f7ebbe35e3",
+          "seconds": 0.022029182000551373
+        },
+        {
+          "codec": "AVIF",
+          "quality": 50,
+          "subsampling": "4:4:4",
+          "output_bytes": 13002,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 38.124420166015625,
+          "seconds": 0.4532901459988352
+        },
+        {
+          "codec": "AVIF",
+          "quality": 65,
+          "subsampling": "4:4:4",
+          "output_bytes": 21576,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 41.23488998413086,
+          "seconds": 0.43680960399979085
+        }
+      ]
+    },
+    {
+      "dataset": "food101",
+      "source_member": "food-101/images/guacamole/3439448.jpg",
+      "sha256": "cf60be056ab10775f621387f51a3935ac3b9f97a22da878b34da73b045f88a8b",
+      "source_bytes": 34898,
+      "dimensions": [
+        512,
+        512
+      ],
+      "measurements": [
+        {
+          "codec": "JPEG XL reversible JPEG",
+          "output_bytes": 29611,
+          "round_trip_original_sha256": "cf60be056ab10775f621387f51a3935ac3b9f97a22da878b34da73b045f88a8b",
+          "seconds": 0.01990765700065822
+        },
+        {
+          "codec": "AVIF",
+          "quality": 50,
+          "subsampling": "4:4:4",
+          "output_bytes": 10244,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 39.73827362060547,
+          "seconds": 0.3336525790000451
+        },
+        {
+          "codec": "AVIF",
+          "quality": 65,
+          "subsampling": "4:4:4",
+          "output_bytes": 16461,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 42.7565803527832,
+          "seconds": 0.36273085399989213
+        }
+      ]
+    },
+    {
+      "dataset": "food101",
+      "source_member": "food-101/images/falafel/1568938.jpg",
+      "sha256": "b5c15554b93655fefbe06c2afe65dae75c946f3566bbc0314f0d9e1898e8032c",
+      "source_bytes": 60859,
+      "dimensions": [
+        512,
+        512
+      ],
+      "measurements": [
+        {
+          "codec": "JPEG XL reversible JPEG",
+          "output_bytes": 51543,
+          "round_trip_original_sha256": "b5c15554b93655fefbe06c2afe65dae75c946f3566bbc0314f0d9e1898e8032c",
+          "seconds": 0.02383436200034339
+        },
+        {
+          "codec": "AVIF",
+          "quality": 50,
+          "subsampling": "4:4:4",
+          "output_bytes": 20780,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 35.0269775390625,
+          "seconds": 0.5158424630008085
+        },
+        {
+          "codec": "AVIF",
+          "quality": 65,
+          "subsampling": "4:4:4",
+          "output_bytes": 35442,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 39.37192916870117,
+          "seconds": 0.4704050300006202
+        }
+      ]
+    },
+    {
+      "dataset": "food101",
+      "source_member": "food-101/images/gnocchi/1591063.jpg",
+      "sha256": "b59b2a67c7abdff66a40e05b41db6d36f662cd0bff975c75746bba7d38aa0271",
+      "source_bytes": 64839,
+      "dimensions": [
+        512,
+        512
+      ],
+      "measurements": [
+        {
+          "codec": "JPEG XL reversible JPEG",
+          "output_bytes": 54888,
+          "round_trip_original_sha256": "b59b2a67c7abdff66a40e05b41db6d36f662cd0bff975c75746bba7d38aa0271",
+          "seconds": 0.0216269310003554
+        },
+        {
+          "codec": "AVIF",
+          "quality": 50,
+          "subsampling": "4:4:4",
+          "output_bytes": 23011,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 32.90019226074219,
+          "seconds": 0.46893601000010676
+        },
+        {
+          "codec": "AVIF",
+          "quality": 65,
+          "subsampling": "4:4:4",
+          "output_bytes": 38390,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 38.05024719238281,
+          "seconds": 0.42221862899896223
+        }
+      ]
+    },
+    {
+      "dataset": "bapps",
+      "source_member": "train/cnn/ref/016365.png",
+      "sha256": "885837b4e5f952838c3ffa9730ed7a8ad10c9628651e7aab8909bf1374e75db4",
+      "source_bytes": 15492,
+      "dimensions": [
+        256,
+        256
+      ],
+      "measurements": [
+        {
+          "codec": "AVIF",
+          "quality": 50,
+          "subsampling": "4:4:4",
+          "output_bytes": 4721,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 34.002986907958984,
+          "seconds": 0.14669011300065904
+        },
+        {
+          "codec": "AVIF",
+          "quality": 65,
+          "subsampling": "4:4:4",
+          "output_bytes": 6866,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 37.19784927368164,
+          "seconds": 0.17930352300027153
+        }
+      ]
+    },
+    {
+      "dataset": "bapps",
+      "source_member": "train/mix/p1/056251.png",
+      "sha256": "a55ee906112813e87bf9abb97caa3b97a8345bfe59b54beb124b9d126dd5eca5",
+      "source_bytes": 9983,
+      "dimensions": [
+        256,
+        256
+      ],
+      "measurements": [
+        {
+          "codec": "AVIF",
+          "quality": 50,
+          "subsampling": "4:4:4",
+          "output_bytes": 2221,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 42.274837493896484,
+          "seconds": 0.13451392199931433
+        },
+        {
+          "codec": "AVIF",
+          "quality": 65,
+          "subsampling": "4:4:4",
+          "output_bytes": 3217,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 44.1840705871582,
+          "seconds": 0.1698900749997847
+        }
+      ]
+    },
+    {
+      "dataset": "bapps",
+      "source_member": "train/mix/ref/011625.png",
+      "sha256": "68137ac2e198030b889dbcf0f5f8eaaf7de7387a39e003dfd8a7af9b2237ac56",
+      "source_bytes": 12033,
+      "dimensions": [
+        256,
+        256
+      ],
+      "measurements": [
+        {
+          "codec": "AVIF",
+          "quality": 50,
+          "subsampling": "4:4:4",
+          "output_bytes": 2796,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 39.90943145751953,
+          "seconds": 0.11770188900118228
+        },
+        {
+          "codec": "AVIF",
+          "quality": 65,
+          "subsampling": "4:4:4",
+          "output_bytes": 4328,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 42.133033752441406,
+          "seconds": 0.1266371279998566
+        }
+      ]
+    },
+    {
+      "dataset": "bapps",
+      "source_member": "train/cnn/p0/026952.png",
+      "sha256": "c7af22f72820ab8629f95e13fc54d07e6196b48e42f7db05d4f473c8de44b813",
+      "source_bytes": 8810,
+      "dimensions": [
+        256,
+        256
+      ],
+      "measurements": [
+        {
+          "codec": "AVIF",
+          "quality": 50,
+          "subsampling": "4:4:4",
+          "output_bytes": 1438,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 43.49988555908203,
+          "seconds": 0.10900303599919425
+        },
+        {
+          "codec": "AVIF",
+          "quality": 65,
+          "subsampling": "4:4:4",
+          "output_bytes": 1951,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 44.54117202758789,
+          "seconds": 0.1228995080000459
+        }
+      ]
+    },
+    {
+      "dataset": "bapps",
+      "source_member": "train/cnn/ref/018454.png",
+      "sha256": "8c567c96968d096910f983b8d6b74c82b717258763a5f707ffe3aded81b95df6",
+      "source_bytes": 13259,
+      "dimensions": [
+        256,
+        256
+      ],
+      "measurements": [
+        {
+          "codec": "AVIF",
+          "quality": 50,
+          "subsampling": "4:4:4",
+          "output_bytes": 3065,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 39.30797576904297,
+          "seconds": 0.12793257200064545
+        },
+        {
+          "codec": "AVIF",
+          "quality": 65,
+          "subsampling": "4:4:4",
+          "output_bytes": 4682,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 41.49415969848633,
+          "seconds": 0.14281604499956302
+        }
+      ]
+    },
+    {
+      "dataset": "bapps",
+      "source_member": "train/mix/p0/001026.png",
+      "sha256": "cbce3642f358afa667fd926e49c0c72a33d2d18a4e52ce5fe4cf101b2bde3f95",
+      "source_bytes": 14008,
+      "dimensions": [
+        256,
+        256
+      ],
+      "measurements": [
+        {
+          "codec": "AVIF",
+          "quality": 50,
+          "subsampling": "4:4:4",
+          "output_bytes": 4848,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 38.114410400390625,
+          "seconds": 0.39706649200161337
+        },
+        {
+          "codec": "AVIF",
+          "quality": 65,
+          "subsampling": "4:4:4",
+          "output_bytes": 6777,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 41.416847229003906,
+          "seconds": 0.4446113060002972
+        }
+      ]
+    },
+    {
+      "dataset": "bapps",
+      "source_member": "train/mix/p1/013083.png",
+      "sha256": "00c0a8aad23a096e7f77de05a2de9f23979f06a5c749dc420f777a887bb52886",
+      "source_bytes": 10373,
+      "dimensions": [
+        256,
+        256
+      ],
+      "measurements": [
+        {
+          "codec": "AVIF",
+          "quality": 50,
+          "subsampling": "4:4:4",
+          "output_bytes": 2040,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 41.88005065917969,
+          "seconds": 0.0979873790001875
+        },
+        {
+          "codec": "AVIF",
+          "quality": 65,
+          "subsampling": "4:4:4",
+          "output_bytes": 2907,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 43.40186309814453,
+          "seconds": 0.11230067499855068
+        }
+      ]
+    },
+    {
+      "dataset": "bapps",
+      "source_member": "train/traditional/p0/044601.png",
+      "sha256": "25c85b78c5e2d0cf99f1e921298a6c3fd7744cd5d195db438745899a0c3d0216",
+      "source_bytes": 16315,
+      "dimensions": [
+        256,
+        256
+      ],
+      "measurements": [
+        {
+          "codec": "AVIF",
+          "quality": 50,
+          "subsampling": "4:4:4",
+          "output_bytes": 6043,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 35.2500114440918,
+          "seconds": 0.19007747400064545
+        },
+        {
+          "codec": "AVIF",
+          "quality": 65,
+          "subsampling": "4:4:4",
+          "output_bytes": 9274,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 37.81569290161133,
+          "seconds": 0.20822451999993064
+        }
+      ]
+    },
+    {
+      "dataset": "fgvc-aircraft",
+      "source_member": "fgvc-aircraft-2013b/data/images/1398071.jpg",
+      "sha256": "780f49bc7006e7e5285f2437f5cca2a48f648709fd54a1b1aee8563dbcd78bee",
+      "source_bytes": 363970,
+      "dimensions": [
+        1024,
+        696
+      ],
+      "measurements": [
+        {
+          "codec": "JPEG XL reversible JPEG",
+          "output_bytes": 316208,
+          "round_trip_original_sha256": "780f49bc7006e7e5285f2437f5cca2a48f648709fd54a1b1aee8563dbcd78bee",
+          "seconds": 0.05647724699883838
+        },
+        {
+          "codec": "AVIF",
+          "quality": 50,
+          "subsampling": "4:4:4",
+          "output_bytes": 47895,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 33.7950553894043,
+          "seconds": 1.2938607420001063
+        },
+        {
+          "codec": "AVIF",
+          "quality": 65,
+          "subsampling": "4:4:4",
+          "output_bytes": 90857,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 36.2738037109375,
+          "seconds": 1.737924067001586
+        }
+      ]
+    },
+    {
+      "dataset": "fgvc-aircraft",
+      "source_member": "fgvc-aircraft-2013b/data/images/2082475.jpg",
+      "sha256": "df03266501756a562ca49ae35afe38c9142b1ce6c2951395cd98c91ed79e6ca8",
+      "source_bytes": 192026,
+      "dimensions": [
+        1024,
+        695
+      ],
+      "measurements": [
+        {
+          "codec": "JPEG XL reversible JPEG",
+          "output_bytes": 159441,
+          "round_trip_original_sha256": "df03266501756a562ca49ae35afe38c9142b1ce6c2951395cd98c91ed79e6ca8",
+          "seconds": 0.04372719200000574
+        },
+        {
+          "codec": "AVIF",
+          "quality": 50,
+          "subsampling": "4:4:4",
+          "output_bytes": 15408,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 38.7062873840332,
+          "seconds": 0.5297663630008174
+        },
+        {
+          "codec": "AVIF",
+          "quality": 65,
+          "subsampling": "4:4:4",
+          "output_bytes": 23191,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 40.08906555175781,
+          "seconds": 0.7001495469994552
+        }
+      ]
+    },
+    {
+      "dataset": "fgvc-aircraft",
+      "source_member": "fgvc-aircraft-2013b/data/images/0222913.jpg",
+      "sha256": "31f3d91661df98e4f9ad1ebee708e01c20558b8cb5ef0c22f2ca961eed0dc309",
+      "source_bytes": 172940,
+      "dimensions": [
+        950,
+        654
+      ],
+      "measurements": [
+        {
+          "codec": "JPEG XL reversible JPEG",
+          "output_bytes": 143156,
+          "round_trip_original_sha256": "31f3d91661df98e4f9ad1ebee708e01c20558b8cb5ef0c22f2ca961eed0dc309",
+          "seconds": 0.034920789001262165
+        },
+        {
+          "codec": "AVIF",
+          "quality": 50,
+          "subsampling": "4:4:4",
+          "output_bytes": 35788,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 33.628684997558594,
+          "seconds": 0.8362873519999994
+        },
+        {
+          "codec": "AVIF",
+          "quality": 65,
+          "subsampling": "4:4:4",
+          "output_bytes": 83199,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 38.04258346557617,
+          "seconds": 1.0492723289989954
+        }
+      ]
+    },
+    {
+      "dataset": "fgvc-aircraft",
+      "source_member": "fgvc-aircraft-2013b/data/images/0923417.jpg",
+      "sha256": "e3075cc35c40abc3ed7252c6979656aa2d6543a286ed18171a548e6e1b1e1630",
+      "source_bytes": 239213,
+      "dimensions": [
+        1024,
+        695
+      ],
+      "measurements": [
+        {
+          "codec": "JPEG XL reversible JPEG",
+          "output_bytes": 198968,
+          "round_trip_original_sha256": "e3075cc35c40abc3ed7252c6979656aa2d6543a286ed18171a548e6e1b1e1630",
+          "seconds": 0.04687065199868812
+        },
+        {
+          "codec": "AVIF",
+          "quality": 50,
+          "subsampling": "4:4:4",
+          "output_bytes": 26925,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 36.10310745239258,
+          "seconds": 1.2588239230008185
+        },
+        {
+          "codec": "AVIF",
+          "quality": 65,
+          "subsampling": "4:4:4",
+          "output_bytes": 44698,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 38.521087646484375,
+          "seconds": 1.6097039500000392
+        }
+      ]
+    },
+    {
+      "dataset": "fgvc-aircraft",
+      "source_member": "fgvc-aircraft-2013b/data/images/1600892.jpg",
+      "sha256": "97778955d2ba155c2f14b03e952cfa16f5fcdc8231ccabf79d2da3b6e472959c",
+      "source_bytes": 282931,
+      "dimensions": [
+        1024,
+        695
+      ],
+      "measurements": [
+        {
+          "codec": "JPEG XL reversible JPEG",
+          "output_bytes": 240032,
+          "round_trip_original_sha256": "97778955d2ba155c2f14b03e952cfa16f5fcdc8231ccabf79d2da3b6e472959c",
+          "seconds": 0.054018725000787526
+        },
+        {
+          "codec": "AVIF",
+          "quality": 50,
+          "subsampling": "4:4:4",
+          "output_bytes": 32738,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 36.07095718383789,
+          "seconds": 1.5924913890012249
+        },
+        {
+          "codec": "AVIF",
+          "quality": 65,
+          "subsampling": "4:4:4",
+          "output_bytes": 55286,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 38.09339904785156,
+          "seconds": 2.1785803220009257
+        }
+      ]
+    },
+    {
+      "dataset": "fgvc-aircraft",
+      "source_member": "fgvc-aircraft-2013b/data/images/1842078.jpg",
+      "sha256": "4e042f2dba5d9ef25328be8419398751ebc0ac7cbebf928e3d600022756af4dd",
+      "source_bytes": 166569,
+      "dimensions": [
+        1024,
+        695
+      ],
+      "measurements": [
+        {
+          "codec": "JPEG XL reversible JPEG",
+          "output_bytes": 137495,
+          "round_trip_original_sha256": "4e042f2dba5d9ef25328be8419398751ebc0ac7cbebf928e3d600022756af4dd",
+          "seconds": 0.0463226140000188
+        },
+        {
+          "codec": "AVIF",
+          "quality": 50,
+          "subsampling": "4:4:4",
+          "output_bytes": 13579,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 39.09712219238281,
+          "seconds": 0.7973886759991728
+        },
+        {
+          "codec": "AVIF",
+          "quality": 65,
+          "subsampling": "4:4:4",
+          "output_bytes": 19925,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 40.93960189819336,
+          "seconds": 0.9379771829990204
+        }
+      ]
+    },
+    {
+      "dataset": "fgvc-aircraft",
+      "source_member": "fgvc-aircraft-2013b/data/images/0796447.jpg",
+      "sha256": "cc1d037c9ed003cdfd7c439d2441cd4f04f65912dfb6314916e34107cbf14edd",
+      "source_bytes": 207384,
+      "dimensions": [
+        1000,
+        678
+      ],
+      "measurements": [
+        {
+          "codec": "JPEG XL reversible JPEG",
+          "output_bytes": 178004,
+          "round_trip_original_sha256": "cc1d037c9ed003cdfd7c439d2441cd4f04f65912dfb6314916e34107cbf14edd",
+          "seconds": 0.03979772500133549
+        },
+        {
+          "codec": "AVIF",
+          "quality": 50,
+          "subsampling": "4:4:4",
+          "output_bytes": 36252,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 37.31990432739258,
+          "seconds": 1.095380691000173
+        },
+        {
+          "codec": "AVIF",
+          "quality": 65,
+          "subsampling": "4:4:4",
+          "output_bytes": 57343,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 39.95491027832031,
+          "seconds": 1.215280468999481
+        }
+      ]
+    },
+    {
+      "dataset": "fgvc-aircraft",
+      "source_member": "fgvc-aircraft-2013b/data/images/0925498.jpg",
+      "sha256": "acb305ea86f06f7defe125da78c0c6974258f9eeece7609c7e4eac24542336d8",
+      "source_bytes": 411028,
+      "dimensions": [
+        1495,
+        1009
+      ],
+      "measurements": [
+        {
+          "codec": "JPEG XL reversible JPEG",
+          "output_bytes": 339987,
+          "round_trip_original_sha256": "acb305ea86f06f7defe125da78c0c6974258f9eeece7609c7e4eac24542336d8",
+          "seconds": 0.084578555999542
+        },
+        {
+          "codec": "AVIF",
+          "quality": 50,
+          "subsampling": "4:4:4",
+          "output_bytes": 17266,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 39.88788604736328,
+          "seconds": 0.7330868849985563
+        },
+        {
+          "codec": "AVIF",
+          "quality": 65,
+          "subsampling": "4:4:4",
+          "output_bytes": 29340,
+          "dimensions_unchanged": true,
+          "rgb_psnr_db": 40.756778717041016,
+          "seconds": 1.1206713729989133
+        }
+      ]
+    }
+  ],
+  "source_bytes": 2537142,
+  "codec_versions": {
+    "cjxl": "cjxl v0.12.0 a7a9c787 [_AVX2_,SSE4,SSE2] {GNU 16.1.1}\nCopyright (c) the JPEG XL Project\n",
+    "pillow": "12.3.0"
+  },
+  "codec_references": [
+    "https://aomedia.org/specifications/avif/",
+    "https://jpeg.org/jpegxl/"
+  ]
+}

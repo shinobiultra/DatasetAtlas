@@ -69,7 +69,7 @@ class MediaHandles:
             return value
 
 def media_byte_limit(asset):
-    return 250_000_000 if asset.modality=='video' else 100_000_000 if asset.modality=='audio' else 10_000_000
+    return 250_000_000 if asset.modality=='video' else 100_000_000 if asset.modality=='audio' else 50_000_000
 
 _SAFE_VIEW_CACHE=OrderedDict()
 _SAFE_VIEW_CACHE_BYTES=[0]
@@ -97,7 +97,7 @@ def cached_safe_view(data:bytes)->bytes:
 def media_response(data:bytes,media_type:str,request:Request):
     """Serve bounded, already safely read bytes with native media seeking."""
     representation=request.query_params.get('representation','original')
-    if representation not in {'original','safe-view'}:raise ValueError('Unknown display representation')
+    if representation not in {'original','safe-view','compact','optimized'}:raise ValueError('Unknown display representation')
     if representation=='safe-view':
         if not media_type.startswith('image/'):raise ValueError('Safe-view derivatives support images only')
         data=cached_safe_view(data)
@@ -239,7 +239,7 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
                     asset.uri=str(path)
                     continue
             from dataset_atlas.adapters import resolve_dataset_asset
-            handle=resolve_dataset_asset(dataset,asset.uri,max_bytes=media_byte_limit(asset),cache_root=work/'media-cache/decoded')
+            handle=resolve_dataset_asset(dataset,asset.uri,max_bytes=media_byte_limit(asset),cache_root=work/'media-cache/decoded',workspace_root=root)
             suffix={"image/png":".png","image/jpeg":".jpg","image/webp":".webp","image/gif":".gif","image/avif":".avif","video/mp4":".mp4","video/webm":".webm","audio/mpeg":".mp3","audio/wav":".wav","audio/ogg":".ogg","audio/flac":".flac"}.get(handle.media_type)
             if not suffix:raise ValueError('Prepared analysis media type is unsupported')
             directory=work/'media-cache';directory.mkdir(parents=True,exist_ok=True)
@@ -306,6 +306,43 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         if not any(resolved.is_relative_to(p) for p in roots):raise ValueError('Media outside configured roots')
         if resolved.is_file() and resolved.suffix.lower() not in {'.jpg','.jpeg','.png','.webp','.gif','.avif','.mp3','.wav','.ogg','.mp4','.webm','.flac'}:raise ValueError('Unsupported media type')
         return resolved
+    def is_preview_asset(dataset_id, asset_id, snapshot_id):
+        try:
+            preview = registry.pack(dataset_id)
+            if preview.dataset.snapshot_id != snapshot_id:
+                path = next(p for d,p,_ in registry.versions(dataset_id) if d.snapshot_id == snapshot_id)
+                preview = Pack.model_validate_json(path.read_text())
+            return any(a.id == asset_id for r in preview.records for a in r.assets)
+        except (FileNotFoundError, StopIteration):
+            return True
+    def expose_asset(dataset_id, asset, snapshot_id, *, allow_compact=True):
+        from dataset_atlas.storage.compact import compact_entry
+        entry = compact_entry(root, dataset_id, snapshot_id, asset.uri)
+        token = content_id([dataset_id, asset.id])
+        original = asset.model_copy(deep=True)
+        original.metadata['_compact_snapshot_id'] = snapshot_id
+        media_handles[token] = (dataset_id, original)
+        asset.uri = '/api/v1/media/' + token
+        if allow_compact and entry and entry['representation'] == 'compressed_avif':
+            asset.metadata['original_uri'] = asset.uri + '?representation=original'
+            asset.metadata['compression'] = entry
+            asset.representation = 'compressed_avif'
+            asset.sha256 = entry['sha256']
+            asset.uri += '?representation=compact'
+        elif allow_compact and not entry and asset.modality == 'image':
+            from dataset_atlas.storage.optimized import storage_policy
+            from PIL import features
+            policy = storage_policy(root)
+            if policy and policy.get('optimize_on_demand') and 'avif' in features.get_supported():
+                # Preview membership is based on stable asset identity, including
+                # legacy packs that materialize the same image under another URI.
+                protected = is_preview_asset(dataset_id, asset.id, snapshot_id)
+                if not protected:
+                    asset.metadata['original_uri'] = asset.uri + '?representation=original'
+                    asset.representation = 'optimized_on_demand'
+                    asset.sha256 = None  # The derivative does not have the original's checksum.
+                    asset.uri += '?representation=optimized'
+
     def browser_pack(dataset_id,result_ids=None):
         from dataset_atlas.queries.results import attach_results
         pack=registry.pack(dataset_id).model_copy(deep=True)
@@ -319,9 +356,7 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         for record in pack.records:
             for asset in record.assets:
                 if asset.uri and not asset.uri.startswith(('https://','http://','data:')):
-                    token=content_id([dataset_id,asset.id])
-                    media_handles[token]=(dataset_id,asset.model_copy(deep=True))
-                    asset.uri='/api/v1/media/'+token
+                    expose_asset(dataset_id, asset, record.snapshot_id, allow_compact=False)
         return pack
     from dataset_atlas.preparation import PreparationManager
     preparation=PreparationManager(root)
@@ -420,9 +455,7 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         for record in response.records:
             for asset in record.assets:
                 if asset.uri:
-                    token=content_id([dataset_id,asset.id])
-                    media_handles[token]=(dataset_id,asset.model_copy(deep=True))
-                    asset.uri='/api/v1/media/'+token
+                    expose_asset(dataset_id, asset, record.snapshot_id)
         return response
     @app.post('/api/v1/aggregate/{dataset_id}')
     def aggregate(dataset_id:str,body:AggregateRequest):
@@ -462,14 +495,43 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         result['coverage']={'filtered_records':eligible.matched_count,'embedded_eligible_records':result['eligible_count']}
         return result
     def serve_asset(dataset_id,asset,request):
+        from dataset_atlas.storage.compact import read_compact
+        snapshot_id = asset.metadata.get('_compact_snapshot_id') or registry.dataset_version(dataset_id,asset.release_id).snapshot_id
+        compact = read_compact(root, dataset_id, snapshot_id, asset.metadata.get('source_ref',asset.uri), media_byte_limit(asset))
+        if compact and (request.query_params.get('representation') in {'compact', 'safe-view'} or compact[2]['representation'] == 'original'):
+            response = media_response(compact[0], compact[1], request)
+            response.headers['X-Atlas-Media-Representation'] = 'safe-view' if request.query_params.get('representation') == 'safe-view' else compact[2]['representation']
+            response.headers['X-Atlas-Original-SHA256'] = compact[2]['original_sha256']
+            return response
+        if request.query_params.get('representation') == 'compact':
+            raise FileNotFoundError('Compressed browsing copy is not prepared')
+        if request.query_params.get('representation') == 'optimized':
+            if asset.modality != 'image': raise ValueError('Optimized browsing supports images only')
+            from dataset_atlas.storage.optimized import optimized_image, storage_policy
+            policy = storage_policy(root)
+            if not policy or not policy.get('optimize_on_demand'): raise ValueError('On-demand compression is not enabled')
+            if is_preview_asset(dataset_id, asset.id, snapshot_id):
+                data, mime = original_media(dataset_id, asset)
+                response = media_response(data, mime, request)
+                response.headers['X-Atlas-Media-Representation'] = 'original'
+                return response
+            data, mime, proof = optimized_image(root, dataset_id, snapshot_id, asset.metadata.get('source_ref', asset.uri),
+                                               lambda: original_media(dataset_id, asset)[0], cache_bytes=policy['optimized_cache_bytes'])
+            response = media_response(data, mime, request)
+            response.headers['X-Atlas-Media-Representation'] = proof['representation']
+            response.headers['X-Atlas-Original-SHA256'] = proof['original_sha256']
+            return response
+        data, mime = original_media(dataset_id, asset)
+        return media_response(data, mime, request)
+    def original_media(dataset_id, asset):
         path=asset_path(asset)
         if path.is_file():
             import mimetypes
             from dataset_atlas.storage import read_rooted_file
-            return media_response(read_rooted_file(path,roots,media_byte_limit(asset)),mimetypes.guess_type(path.name)[0] or 'application/octet-stream',request)
+            return read_rooted_file(path,roots,media_byte_limit(asset)),mimetypes.guess_type(path.name)[0] or 'application/octet-stream'
         from dataset_atlas.adapters import resolve_dataset_asset
-        handle=resolve_dataset_asset(registry.dataset_version(dataset_id,asset.release_id),asset.metadata.get('source_ref',asset.uri),max_bytes=media_byte_limit(asset),cache_root=work/'media-cache/decoded')
-        return media_response(handle.data,handle.media_type,request)
+        handle=resolve_dataset_asset(registry.dataset_version(dataset_id,asset.release_id),asset.metadata.get('source_ref',asset.uri),max_bytes=media_byte_limit(asset),cache_root=work/'media-cache/decoded',workspace_root=root)
+        return handle.data,handle.media_type
     @app.api_route('/api/v1/media/{token}',methods=['GET','HEAD'])
     def media(token:str,request:Request):
         handle_entry=media_handles.get(token)
@@ -495,9 +557,7 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
             record=original.model_copy(deep=True)
             for asset in record.assets:
                 if asset.uri and not asset.uri.startswith(('https://','http://','data:')):
-                    token=content_id([record.dataset_id,asset.id])
-                    media_handles[token]=(record.dataset_id,asset.model_copy(deep=True))
-                    asset.uri='/api/v1/media/'+token
+                    expose_asset(record.dataset_id, asset, record.snapshot_id)
             result.append(record)
         return result
     @app.get('/api/v1/selections')

@@ -16,6 +16,41 @@ def main(argv=None):
     parser=argparse.ArgumentParser(prog='atlas',description='Dataset Atlas local workbench')
     parser.add_argument('--root',type=Path,default=Path(os.environ.get('ATLAS_ROOT','.')),help='Workspace containing registry/ and work/')
     sub=parser.add_subparsers(dest='command',required=True)
+    storage=sub.add_parser('storage').add_subparsers(dest='action',required=True)
+    usage=storage.add_parser('status',help='Measure local storage including sources, previews, models, caches and staging')
+    usage.add_argument('--target-bytes',type=int)
+    usage.add_argument('--ceiling-bytes',type=int)
+    configure=storage.add_parser('configure',help='Enable full-resolution on-demand compression and shared preparation admission limits')
+    configure.add_argument('--target-bytes',type=int,default=100_000_000_000)
+    configure.add_argument('--ceiling-bytes',type=int,default=150_000_000_000)
+    configure.add_argument('--optimized-cache-bytes',type=int,default=5_000_000_000)
+    configure.add_argument('--external-root',type=Path,action='append',default=[])
+    compact=storage.add_parser('compact',help='Prepare full-dimension AVIF browsing copies while protecting preview originals')
+    compact.add_argument('--dataset',required=True)
+    compact.add_argument('--max-input-bytes',type=int,required=True)
+    compact.add_argument('--max-output-bytes',type=int,required=True)
+    compact.add_argument('--quality',type=int,default=60)
+    compact.add_argument('--speed',type=int,default=6)
+    index=storage.add_parser('index-original',help='Build a verified native archive member index for bounded original retrieval')
+    index.add_argument('--source',type=Path,required=True)
+    index.add_argument('--sha256',required=True)
+    index.add_argument('--url',required=True)
+    index.add_argument('--allow-host',action='append',required=True)
+    index.add_argument('--format',choices=['zip','gzip-tar'],required=True)
+    index.add_argument('--name',required=True)
+    index.add_argument('--max-input-bytes',type=int,required=True)
+    index.add_argument('--max-index-bytes',type=int,default=500_000_000)
+    retire=storage.add_parser('retire-original',help='Verify original retrieval and preview retention before removing acquired archive copies')
+    retire.add_argument('--dataset',required=True)
+    retire.add_argument('--also-dataset',action='append',default=[])
+    retire.add_argument('--source',type=Path,required=True)
+    retire.add_argument('--index',required=True)
+    retire.add_argument('--asset-prefix',default='')
+    retire.add_argument('--member-prefix',default='')
+    retire.add_argument('--extracted-root',type=Path)
+    retire.add_argument('--max-preview-bytes',type=int,default=500_000_000)
+    retire.add_argument('--max-transfer-bytes',type=int,default=150_000_000)
+    retire.add_argument('--execute',action='store_true')
     corpus=sub.add_parser('corpus').add_subparsers(dest='action',required=True)
     scan=corpus.add_parser('scan');scan.add_argument('--papers-dir',type=Path,required=True);scan.add_argument('--output',type=Path,default=Path('work/corpus'))
     extract=corpus.add_parser('extract');extract.add_argument('--manifest',type=Path,required=True)
@@ -39,7 +74,38 @@ def main(argv=None):
     sub.add_parser('doctor')
     args=parser.parse_args(argv);root=args.root.resolve()
     try:
-        if args.command=='corpus':
+        if args.command=='storage':
+            if args.action=='status':
+                from dataset_atlas.storage.usage import workspace_usage
+                from dataset_atlas.storage.optimized import storage_policy
+                policy = storage_policy(root) or {}
+                emit(workspace_usage(root,args.target_bytes if args.target_bytes is not None else policy.get('target_bytes',100_000_000_000),args.ceiling_bytes if args.ceiling_bytes is not None else policy.get('ceiling_bytes',150_000_000_000),policy.get('external_roots',[])))
+            elif args.action=='configure':
+                from dataset_atlas.storage.optimized import configure_storage
+                emit(configure_storage(root,target_bytes=args.target_bytes,ceiling_bytes=args.ceiling_bytes,optimized_cache_bytes=args.optimized_cache_bytes,external_roots=args.external_root))
+            elif args.action=='index-original':
+                from dataset_atlas.storage.ranges import range_fingerprint
+                source=args.source if args.source.is_absolute() else root/args.source
+                base=(root/'work/original-access').resolve();output=(base/args.name).resolve()
+                if not output.is_relative_to(base) or output==base:raise ValueError('Original index name must stay inside work/original-access')
+                if source.stat().st_size>args.max_input_bytes:raise ValueError('Source exceeds input byte budget')
+                remote={'url':args.url,'bytes':source.stat().st_size,'allowed_hosts':args.allow_host}
+                remote['etag']=range_fingerprint(args.url,expected_size=remote['bytes'],allowed_hosts=args.allow_host)
+                if args.format=='zip':
+                    from dataset_atlas.storage.indexed_zip import build_zip_index as build
+                    bounds={'max_input_bytes':args.max_input_bytes}
+                else:
+                    from dataset_atlas.storage.indexed_tar import build_tar_index as build
+                    bounds={'max_uncompressed_bytes':args.max_input_bytes}
+                emit(build(source,output,source_sha256=args.sha256,remote=remote,max_index_bytes=args.max_index_bytes,**bounds))
+            elif args.action=='retire-original':
+                from dataset_atlas.storage.retention import retire_image_archive
+                emit(retire_image_archive(root,args.dataset,args.index,args.source,mappings=[{'asset_prefix':args.asset_prefix,'member_prefix':args.member_prefix},{'asset_prefix':'media/'+args.asset_prefix,'member_prefix':args.member_prefix}],max_preview_bytes=args.max_preview_bytes,max_transfer_bytes=args.max_transfer_bytes,extracted_root=args.extracted_root,linked_datasets=args.also_dataset,execute=args.execute))
+            else:
+                from dataset_atlas.storage.compact import compact_dataset
+                emit(compact_dataset(root,args.dataset,max_input_bytes=args.max_input_bytes,max_output_bytes=args.max_output_bytes,quality=args.quality,speed=args.speed,
+                    progress=lambda value: print(json.dumps(value),file=sys.stderr,flush=True)))
+        elif args.command=='corpus':
             from dataset_atlas.corpus import pipeline
             if args.action=='scan':emit(pipeline.scan(args.papers_dir,args.output))
             elif args.action=='extract':emit(pipeline.extract(args.manifest))

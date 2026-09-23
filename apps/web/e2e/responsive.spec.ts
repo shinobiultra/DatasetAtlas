@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 import { sampleCards, selectionBar } from './helpers'
 
-for (const width of [390, 820]) {
+for (const width of [304, 390, 820]) {
   test(`narrow ${width}px catalogue and sample actions remain reachable`, async ({ page }) => {
     await page.setViewportSize({ width, height: 844 })
     await page.goto('/')
@@ -19,6 +19,9 @@ for (const width of [390, 820]) {
     await page.getByLabel(`Select record ${id}`).check()
     await selectionBar(page).getByRole('button', { name: 'Analyze', exact: true }).click()
     await expect(page.getByRole('complementary', { name: 'Analysis' })).toBeVisible()
+    const bounds = await page.getByRole('complementary', { name: 'Analysis' }).boundingBox()
+    expect(bounds!.x).toBeGreaterThanOrEqual(0)
+    expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(width)
     await page.getByRole('button', { name: 'Close panel' }).click()
     await page.getByRole('button', { name: 'Expand navigation' }).click()
     await page.getByRole('navigation', { name: 'Primary' }).getByRole('button', { name: 'Collections', exact: true }).click()

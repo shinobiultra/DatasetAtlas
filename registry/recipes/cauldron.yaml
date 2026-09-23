@@ -1,0 +1,18 @@
+source_url: https://huggingface.co/datasets/HuggingFaceM4/the_cauldron/tree/847a98a779b1652d65111daf20c972dfcd333605
+release: 847a98a779b1652d65111daf20c972dfcd333605
+expected_count: 1880992
+description: 'The Cauldron: all 50 released configurations, preserving image groups and ordered native
+  question/answer pairs. The available release is pinned; the citing paper''s selected 72,000 pairs are
+  not identified by this source.'
+scope: All 1880992 grouped examples across all 50 native configurations and 938 Parquet shards at author
+  revision 847a98a779b1652d65111daf20c972dfcd333605; configuration and native user/assistant/source fields
+  retained. This is the available complete release, not a reconstruction of a paper-specific sample.
+adapter_config:
+  mapping:
+    conversation_pairs: texts
+    configuration_from_path: true
+  max_record_bytes: 16000000
+resource_limits:
+  max_wall_seconds: 21600
+  max_cpu_seconds: 7200
+  max_rss_bytes: 8000000000

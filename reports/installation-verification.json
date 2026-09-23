@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "verified_at_utc": "2026-09-23T08:31:46.501931+00:00",
+  "verified_at_utc": "2026-09-23T10:00:10.745205+00:00",
   "installation": {
     "installed_module": "/home/bitwise/Documents/vibe/DatasetAtlas/work/verify-install/selective-base-venv/lib/python3.12/site-packages/dataset_atlas/__init__.py",
     "optional_model_packages_present": {
@@ -21,12 +21,12 @@
         },
         "script": {
           "status": 200,
-          "bytes": 409319,
+          "bytes": 409777,
           "content_type": "text/javascript; charset=utf-8"
         },
         "catalogue": {
           "status": 200,
-          "bytes": 405426,
+          "bytes": 409021,
           "content_type": "application/json"
         },
         "clevr": {
@@ -87,8 +87,8 @@
         "pairs": 100
       },
       "archive": "dataset_atlas-0.1.0.tar.gz",
-      "files": 562,
-      "site_bytes": 30490117
+      "files": 577,
+      "site_bytes": 30494182
     },
     "wheel": {
       "approved_media_files": {
@@ -97,18 +97,18 @@
         "pairs": 100
       },
       "archive": "dataset_atlas-0.1.0-py3-none-any.whl",
-      "files": 413,
-      "site_bytes": 30490117
+      "files": 420,
+      "site_bytes": 30494182
     }
   },
   "release_archives": {
     "dataset_atlas-0.1.0.tar.gz": {
-      "bytes": 29676637,
-      "sha256": "315b597c8677a09cfa40008e15bea1ec475b66d2633585800a2bc20254c66adc"
+      "bytes": 29695187,
+      "sha256": "187becb7f3d27f375744600c82a7778c9bbe83302fc2d2b33041b0582cf60149"
     },
     "dataset_atlas-0.1.0-py3-none-any.whl": {
-      "bytes": 29365114,
-      "sha256": "cde4f7259de1919d519fb2e69537d9f3c593a669670e2ffdb44125a25bc68652"
+      "bytes": 29380467,
+      "sha256": "064e125e5feeec68158261d3e201a74a7042fa799057cf58148d5c45ad16cafd"
     },
     ".gitignore": {
       "bytes": 1,
@@ -116,9 +116,9 @@
     }
   },
   "validation": {
-    "full_python_suite": "347 passed, 1 skipped (optional retired local VHD11K archive); subsequent storage regression tests passed",
+    "full_python_suite": "372 passed, 1 skipped (optional retired local VHD11K archive)",
     "frontend_tests": "22 passed",
-    "browser_suite": "34 passed in one opt-in browser run including real analysis, local image send and media representation checks",
+    "browser_suite": "36 passed in one opt-in browser run including real analysis, local image send, native mask download and 304px layout checks",
     "generated_contract": "byte-identical",
     "no_remote_deployment": true
   },

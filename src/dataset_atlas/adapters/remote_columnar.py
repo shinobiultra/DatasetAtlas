@@ -43,7 +43,7 @@ class RemoteColumnarAdapter(DatasetAdapter):
                 # Disable speculative reads spanning omitted image columns.
                 buffer=SmallReadBuffer(source) if budget is None else source
                 parquet=pq.ParquetFile(buffer,pre_buffer=False,buffer_size=0)
-                parquet._atlas_buffer=buffer
+                parquet._atlas_buffer=buffer  # ty: ignore[unresolved-attribute]
                 yield parquet
             finally:
                 if budget is None:self.bytes_fetched+=source.bytes_fetched
@@ -71,8 +71,37 @@ class RemoteColumnarAdapter(DatasetAdapter):
     @property
     def count(self):return sum(sum(self._layout(i)[3]) for i in range(len(self.files)))
 
+    def warm_layouts(self, progress=None, workers=8):
+        """Read independent footers concurrently under one aggregate byte cap."""
+        from concurrent.futures import ThreadPoolExecutor
+        if type(workers) is not int or not 1 <= workers <= 8:
+            raise ValueError('Remote schema concurrency must be within 1..8')
+        missing=[index for index in range(len(self.files)) if index not in self._layouts]
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            for start in range(0,len(missing),workers):
+                if self.cancel:self.cancel()
+                batch=missing[start:start+workers]
+                # Each reader owns an equal reservation. Their combined network
+                # reads cannot exceed the remaining transfer budget, even on error.
+                allowance=(self.transfer_limit-self.bytes_fetched)//len(batch)
+                if allowance<=0:raise ValueError('Remote metadata transfer budget exhausted')
+                def read(index):
+                    config={**self.config,'remote_files':[self.files[index]],'metadata_transfer_bytes':allowance}
+                    child=RemoteColumnarAdapter(self.dataset.model_copy(update={'adapter_config':config}))
+                    child.cancel=self.cancel
+                    try:return index,child._layout(0),child.bytes_fetched,None
+                    except Exception as error:return index,None,child.bytes_fetched,error
+                results=list(pool.map(read,batch))
+                self.bytes_fetched+=sum(result[2] for result in results)
+                for index,layout,_,error in results:
+                    if error is not None:raise error
+                    self._layouts[index]=layout
+                    if progress:progress(schema_shards=len(self._layouts),total_shards=len(self.files),downloaded_bytes=self.bytes_fetched)
+
     def source_field_types(self):
         types={'_atlas_origin':{'object'}}
+        if self.config.get('mapping', {}).get('configuration_from_path'):
+            types['_atlas_configuration']={'string'}
         for i in range(len(self.files)):
             schema,media,_,_=self._layout(i)
             for field in schema:
@@ -84,8 +113,8 @@ class RemoteColumnarAdapter(DatasetAdapter):
                 types.setdefault(field.name,set()).add(kind)
         return {name:next(iter(kinds)) if len(kinds)==1 else 'object' for name,kinds in types.items()}
 
-    def _record(self,row,file_index,row_index):
-        if '_atlas_origin' in row:raise ValueError('Source collides with reserved provenance field')
+    def _source_record(self,row,file_index,row_index):
+        if any(name in row for name in ('_atlas_origin','_atlas_configuration')):raise ValueError('Source collides with reserved provenance field')
         _,media,_,_=self._layout(file_index);entry=self.files[file_index];row=dict(row);assets=[]
         for column,is_list in media.items():
             value=row.get(column)
@@ -95,7 +124,7 @@ class RemoteColumnarAdapter(DatasetAdapter):
             for slot,item in enumerate(values):
                 if item is None:
                     descriptors.append(None);continue
-                ref=f'remote/{file_index}/{row_index}/{column}/{slot}.png'
+                ref=f'remote/{file_index+self.config.get("file_index_offset",0)}/{row_index}/{column}/{slot}.png'
                 origin={'source_path':item.get('path'),'representation':'original embedded image on request','availability':'unchecked embedded bytes',
                         'source_file':entry['source_name'],'source_row':row_index,'source_field':column,'source_slot':slot,'source_etag':entry['etag']}
                 assets.append(Asset(id=stable_id(self.dataset.id,self.revision,'asset',ref),dataset_id=self.dataset.id,release_id=self.revision,
@@ -107,6 +136,19 @@ class RemoteColumnarAdapter(DatasetAdapter):
             if self.config['mapping'].get(key) not in row:self.config['mapping'][key]=next((name for name in candidates if name in row),None)
         record=DatasetAdapter._record(self,row,f'{entry["source_name"]}:{row_index}')
         record.assets=assets;record.asset_ids=[a.id for a in assets]
+        pair_column=self.config['mapping'].get('conversation_pairs')
+        if pair_column:
+            pairs=row.get(pair_column)
+            if not isinstance(pairs,list) or any(not isinstance(pair,dict) or
+                not isinstance(pair.get('user'),str) or not isinstance(pair.get('assistant'),str) for pair in pairs):
+                raise ValueError(f'Invalid user/assistant pairs in source column {pair_column}')
+            record.conversation=[message for pair in pairs for message in (
+                {'role':'user','content':pair['user']}, {'role':'assistant','content':pair['assistant']})]
+            if pairs:record.question=pairs[0]['user']
+        if self.config['mapping'].get('configuration_from_path'):
+            configuration,separator,_=entry['source_name'].partition('/')
+            if not separator:raise ValueError('Source has no configuration directory')
+            record.source['_atlas_configuration']=configuration
         record.source['_atlas_origin']={'file':entry['source_name'],'row':row_index,'upstream_sha256':entry['sha256'],
             'etag':entry['etag'],'integrity':'Strong ETag-bound ranges; full shard SHA-256 not computed locally.'}
         return record
@@ -147,7 +189,7 @@ class RemoteColumnarAdapter(DatasetAdapter):
                         if skip<batch.num_rows:
                             rows=batch.slice(skip,min(size-len(records),batch.num_rows-skip)).to_pylist()
                             for local,row in enumerate(rows,batch_start+skip):
-                                record=self._record(row,index,local);source.charge(len(record.model_dump_json().encode()));records.append(record)
+                                record=self._source_record(row,index,local);source.charge(len(record.model_dump_json().encode()));records.append(record)
                         batch_start+=batch.num_rows
                         if len(records)==size:break
                     group_start+=count
@@ -156,6 +198,97 @@ class RemoteColumnarAdapter(DatasetAdapter):
             if len(records)==size:break
         end=start+len(records)
         return RecordBatch(records,str(end) if end<self.count else None,len(records))
+
+    def iter_all_records(self, source, workers=4):
+        """Overlap shard I/O while yielding the exact original source order.
+
+        Each producer buffers at most 32 MB of encoded records in at most 32
+        batches. Each wave reserves disjoint shares of the network allowance.
+        These are buffer limits, not a bound on decoded Python process memory.
+        """
+        from concurrent.futures import ThreadPoolExecutor
+        from queue import Queue, Empty, Full
+        from threading import Event, Condition
+        class BufferedQueue(Queue):
+            def __init__(self):
+                super().__init__(maxsize=32)
+                self.credit=Condition()
+                self.buffered=0
+        if type(workers) is not int or not 1 <= workers <= 4:
+            raise ValueError('Remote record concurrency must be within 1..4')
+        stop=Event()
+        def check():
+            if stop.is_set():raise InterruptedError('Remote shard iteration stopped')
+            if self.cancel:self.cancel()
+        def put(queue, value):
+            records,fetched,error=value
+            sizes=[len(record.model_dump_json().encode()) for record in records] if records else []
+            if any(size>32_000_000 for size in sizes):raise ValueError('Remote record exceeds 32 MB buffer limit')
+            if sum(sizes)>32_000_000:
+                chunk=[];used=0
+                for record,size in zip(records,sizes):
+                    if chunk and used+size>32_000_000:
+                        put(queue,(chunk,fetched,None));fetched=0;chunk=[];used=0
+                    chunk.append(record);used+=size
+                if chunk:put(queue,(chunk,fetched,error))
+                return
+            encoded_size=sum(sizes)
+            with queue.credit:
+                while queue.buffered+encoded_size>32_000_000 and not stop.is_set():
+                    queue.credit.wait(.1)
+                if stop.is_set():return
+                queue.buffered+=encoded_size
+            while not stop.is_set():
+                try:queue.put((records,fetched,error,encoded_size),timeout=.1);return
+                except Full:continue
+        def read(index, allowance, queue):
+            child=None;reported=0
+            try:
+                config={**self.config,'remote_files':[self.files[index]],'file_index_offset':index,
+                        'metadata_transfer_bytes':allowance}
+                child=RemoteColumnarAdapter(self.dataset.model_copy(update={'adapter_config':config}))
+                child.cancel=check
+                child._layouts[0]=self._layout(index)
+                prepared=child.prepare(child.plan(1000,source.max_bytes))
+                cursor=None
+                while True:
+                    check()
+                    batch=child.iter_records(prepared,cursor,1000)
+                    put(queue,(batch.records,child.bytes_fetched-reported,None))
+                    reported=child.bytes_fetched
+                    if not batch.next_cursor:break
+                    if cursor==batch.next_cursor:raise ValueError('Remote shard repeated cursor')
+                    cursor=batch.next_cursor
+                put(queue,(None,child.bytes_fetched-reported,None))
+            except Exception as error:
+                put(queue,(None,(child.bytes_fetched if child else 0)-reported,error))
+        # Populate shared layouts before threads access them.
+        self.warm_layouts()
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            try:
+                for start in range(0,len(self.files),workers):
+                    check()
+                    indices=list(range(start,min(start+workers,len(self.files))))
+                    allowance=(self.transfer_limit-self.bytes_fetched)//len(indices)
+                    if allowance<=0:raise ValueError('Remote metadata transfer budget exhausted')
+                    queues=[BufferedQueue() for _ in indices]
+                    futures=[pool.submit(read,index,allowance,queue) for index,queue in zip(indices,queues)]
+                    for queue in queues:
+                        while True:
+                            check()
+                            try:records,fetched,error,encoded_size=queue.get(timeout=.1)
+                            except Empty:continue
+                            with queue.credit:
+                                queue.buffered-=encoded_size
+                                queue.credit.notify_all()
+                            self.bytes_fetched+=fetched
+                            if error is not None:raise error
+                            if records is None:break
+                            for record in records:
+                                source.charge(len(record.model_dump_json().encode()))
+                                yield record
+                    for future in futures:future.result()
+            finally:stop.set()
 
     def resolve_asset(self,source,asset_ref):
         match=re.fullmatch(r'remote/(\d+)/(\d+)/([A-Za-z_][A-Za-z_0-9]*)/(\d+)\.png',asset_ref)

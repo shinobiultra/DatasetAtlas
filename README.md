@@ -2,7 +2,7 @@
 
 Browse evidence-linked datasets, inspect real records, save reproducible selections, and attach optional local analysis. The same React frontend runs as a static site or with a loopback Python workbench.
 
-The workbench and static browser are implemented, with **333 catalogue entries, 131 prepared local previews (12,832 records), and 126 canonical full-scope indices**. Full-scope indices describe their acquired populations; some have partial media. This is **not a completed v1 release** of [SPEC.md](SPEC.md): 202 entries have no preview. All 64 paper mention inventories have been checked against the full text, but exact release identity and dataset coverage remain incomplete. See the [remaining roadmap](ROADMAP.md). See [corpus coverage](reports/corpus_coverage.md), [dataset coverage](reports/dataset_coverage.csv), [source access](reports/source_access_report.md), and [release evidence](reports/release_evidence.md). Paper mention evidence does not by itself resolve a dataset release. Metadata-only entries are not browsable datasets.
+The workbench and static browser are implemented, with **333 catalogue entries, 143 prepared local previews (14,032 records), and 138 canonical full-scope indices**. Full-scope indices describe their acquired populations; some have partial media. This is **not a completed v1 release** of [SPEC.md](SPEC.md): 190 entries have no preview. All 64 paper mention inventories have been checked against the full text, but exact release identity and dataset coverage remain incomplete. See the [remaining roadmap](ROADMAP.md). See [corpus coverage](reports/corpus_coverage.md), [dataset coverage](reports/dataset_coverage.csv), [source access](reports/source_access_report.md), and [release evidence](reports/release_evidence.md). Paper mention evidence does not by itself resolve a dataset release. Metadata-only entries are not browsable datasets.
 
 ## Run locally
 
@@ -19,7 +19,7 @@ uv run atlas serve
 
 Use **Prepare full data** on a dataset to review its pinned source plan, set budgets, and start or resume local preparation. See [on-demand preparation](docs/on-demand-preparation.md) and [implementation evidence](reports/on-demand-implementation.md).
 
-For large collections, [the storage policy](docs/storage.md) preserves original-quality, full-resolution previews and compresses other images on demand into a bounded AVIF cache. Original bytes remain available for inspection and model inputs. The local 2026-09-23 storage pass is within the requested 150 GB ceiling, including the configured model weights; the latest measured footprint and its accounting limits are in [the storage receipt](reports/storage-footprint-retained-20260923.json).
+For large collections, [the storage policy](docs/storage.md) preserves original-quality, full-resolution previews and compresses other images on demand into a bounded AVIF cache. Original bytes remain available for inspection and model inputs. The local 2026-09-23 storage pass is within the requested 150 GB ceiling, including the configured model weights; the latest measured footprint and its accounting limits are in [the storage receipt](reports/storage-footprint-native-20260923.json).
 
 Open **http://127.0.0.1:8765/?mode=workbench**. The default browser route is static mode and makes no privileged localhost connection. Local preview packs live under `work/packs/`; to install the redistributable demonstration packs into a fresh checkout:
 

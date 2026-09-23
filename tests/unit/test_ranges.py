@@ -72,6 +72,33 @@ def test_range_bounds_and_budget(monkeypatch):
     with pytest.raises(ValueError):HttpsRangeReader('https://example.org/source',size=10,etag='W/"v1"',allowed_hosts=['example.org'],byte_budget=4)
 
 
+def test_keepalive_reuses_validated_origin_and_recovers_stale_socket_once(monkeypatch):
+    import http.client
+    instances=[];destinations=[]
+    class Connection:
+        def __init__(self,*args):self.calls=0;self.closed=False;instances.append(self)
+        def request(self,method,target,headers):
+            self.calls+=1
+            if len(instances)==1 and self.calls==3:raise http.client.RemoteDisconnected('stale')
+            self.start,self.end=map(int,headers['Range'][6:].split('-'))
+        def getresponse(self):
+            body=io.BytesIO(b'0123456789'[self.start:self.end+1]);body.status=206;body.will_close=False
+            headers={'ETag':'"v1"','Content-Range':f'bytes {self.start}-{self.end}/10','Content-Length':str(self.end-self.start+1)}
+            body.getheader=lambda key,default=None:headers.get(key,default)
+            return body
+        def close(self):self.closed=True
+    def destination(self,url):
+        destinations.append(url);return 'example.org',443,'1.1.1.1','/source'
+    monkeypatch.setattr('dataset_atlas.storage.ranges._PinnedHTTPSConnection',Connection)
+    monkeypatch.setattr('dataset_atlas.storage.https.HttpsFetcher._destination',destination)
+    with reader(b'0123456789') as source:
+        assert source.read(2)==b'01' and source.read(2)==b'23'
+        assert len(instances)==1 and len(destinations)==2
+        assert source.read(2)==b'45' and len(instances)==2
+        assert source.bytes_fetched==6
+    assert all(connection.closed for connection in instances)
+
+
 def test_small_read_buffer_reuses_aligned_ranges_and_keeps_large_reads_single():
     import io
     from dataset_atlas.storage.ranges import SmallReadBuffer

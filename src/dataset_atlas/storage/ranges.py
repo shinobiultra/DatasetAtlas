@@ -1,6 +1,7 @@
 """Bounded, revision-bound HTTPS range reads for selective archive/media access."""
 from __future__ import annotations
 import hashlib
+import http.client
 import io
 from pathlib import Path
 import re
@@ -23,12 +24,20 @@ class HttpsRangeReader(io.RawIOBase):
             raise ValueError('Range source requires a pinned strong ETag')
         self.url=url;self.size=size;self.etag=etag;self.byte_budget=byte_budget
         self._resolved_url=None
+        self._connection=None
+        self._connection_origin=None
         self.position=0;self.bytes_fetched=0;self.cache=cache;self.cancel=cancel
         self.fetcher=HttpsFetcher(allowed_hosts,timeout=30,max_bytes=byte_budget)
 
     def readable(self):return True
     def seekable(self):return True
     def tell(self):return self.position
+    def close(self):
+        connection=getattr(self,'_connection',None)
+        if connection is not None:
+            connection.close()
+            self._connection=None
+        super().close()
     def seek(self,offset,whence=0):
         position=offset+(self.position if whence==1 else self.size if whence==2 else 0)
         if whence not in (0,1,2) or position<0:raise ValueError('Invalid remote seek')
@@ -46,11 +55,18 @@ class HttpsRangeReader(io.RawIOBase):
         if count>self.byte_budget:raise ValueError('Remote range exceeds read budget')
         start=self.position;end=start+count-1
         identity=CacheIdentity(self.etag,hashlib.sha256(f'{self.url}:{self.size}:{start}:{end}'.encode()).hexdigest(),'https-range-v1')
-        path=self.cache.get(identity) if self.cache else None
-        if path:
-            if path.stat().st_size!=count:raise ValueError('Cached range length mismatch')
-            data=path.read_bytes()
-        else:
+        data=None
+        if self.cache:
+            # A concurrent shard reader may evict an object between get() and
+            # read_bytes(). Use the same short lock as cache commits.
+            import fcntl
+            with (self.cache.root/'range-cache.lock').open('a') as lock:
+                fcntl.flock(lock,fcntl.LOCK_EX)
+                path=self.cache.get(identity)
+                if path:
+                    if path.stat().st_size!=count:raise ValueError('Cached range length mismatch')
+                    data=path.read_bytes()
+        if data is None:
             if self.bytes_fetched+count>self.byte_budget:raise ValueError('Remote reads exceed transfer budget')
             data=self._fetch(start,end)
             self.bytes_fetched+=len(data)
@@ -68,14 +84,29 @@ class HttpsRangeReader(io.RawIOBase):
 
     def _fetch(self,start,end):
         current=self._resolved_url or self.url
+        reconnected=False
         for _ in range(self.fetcher.max_redirects+1):
             if self.cancel:self.cancel()
             host,port,address,target=self.fetcher._destination(current)
-            connection=_PinnedHTTPSConnection(host,address,port,self.fetcher.timeout)
+            origin=(host,port)
+            reused=self._connection is not None and self._connection_origin==origin
+            if not reused:
+                if self._connection is not None:self._connection.close()
+                self._connection=_PinnedHTTPSConnection(host,address,port,self.fetcher.timeout)
+                self._connection_origin=origin
+            connection=self._connection
+            keep=False
             try:
-                connection.request('GET',target,headers={'Accept-Encoding':'identity','Range':f'bytes={start}-{end}',
-                                                       'If-Match':self.etag,'User-Agent':'DatasetAtlas/0.1'})
-                response=connection.getresponse()
+                try:
+                    connection.request('GET',target,headers={'Accept-Encoding':'identity','Range':f'bytes={start}-{end}',
+                                                           'If-Match':self.etag,'User-Agent':'DatasetAtlas/0.1'})
+                    response=connection.getresponse()
+                except (http.client.RemoteDisconnected,BrokenPipeError,ConnectionResetError):
+                    # Retry a stale keep-alive socket once, before consuming any
+                    # response body. Partial payload failures are never retried.
+                    if not reused or reconnected:raise
+                    reconnected=True
+                    continue
                 if response.status in (301,302,303,307,308):
                     location=response.getheader('Location')
                     if not location:raise ValueError('Range redirect has no location')
@@ -96,8 +127,12 @@ class HttpsRangeReader(io.RawIOBase):
                 data=response.read(count+1)
                 if len(data)!=count:raise ValueError('Range response is truncated or overlong')
                 self._resolved_url=current
+                keep=not getattr(response,'will_close',True)
                 return data
-            finally:connection.close()
+            finally:
+                if not keep:
+                    connection.close()
+                    self._connection=None
         raise ValueError('Too many HTTPS range redirects')
 
 

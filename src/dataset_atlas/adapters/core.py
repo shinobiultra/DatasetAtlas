@@ -210,7 +210,7 @@ class DatasetAdapter:
             cursor = batch.next_cursor
         return ValidationReport(count, tuple(sorted(dup)))
 
-    def _record(self, row: dict[str, Any], ordinal: int) -> Record:
+    def _record(self, row: dict[str, Any], ordinal: int | str) -> Record:
         mapping = self.config.get("mapping", {})
         source_id = _nested(row, mapping.get("id"))
         if source_id is None:
@@ -774,6 +774,18 @@ class OverlayAdapter(StructuredAdapter):
 
 
 def get_adapter(dataset: Dataset) -> DatasetAdapter:
+    if dataset.adapter == 'textvqa_x':
+        from .textvqa_x import TextVQAXAdapter
+        return TextVQAXAdapter(dataset)
+    if dataset.adapter == 'pathways':
+        from .pathways import PathwaysAdapter
+        return PathwaysAdapter(dataset)
+    if dataset.adapter == 'sad_structs':
+        from .sad import SADStructsAdapter
+        return SADStructsAdapter(dataset)
+    if dataset.adapter == 'text_pairs':
+        from .text_pairs import TextPairsAdapter
+        return TextPairsAdapter(dataset)
     if dataset.adapter == 'nrc_vad':
         from .nrc_vad import NRCVADAdapter
         return NRCVADAdapter(dataset)

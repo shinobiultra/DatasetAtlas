@@ -249,3 +249,27 @@ def test_seeded_sampling_matches_pack_and_pages(tmp_path,method):
     expected_second=query_pack(pack,query.model_copy(update={"cursor":expected.cursor}))
     assert [r.id for r in second.records]==[r.id for r in expected_second.records]
     assert second.cursor is None and len(second.records)==18
+
+
+def test_large_native_record_opt_in_and_byte_bounded_pagination(tmp_path):
+    # Three records fit the count limit but exceed the response byte limit.
+    payload='é'*3_000_000
+    records=[Record(id=f'toy:example:{i}',dataset_id='toy',release_id='r1',snapshot_id='s1',
+                    text=payload,source={'native':payload}) for i in range(3)]
+    with pytest.raises(ValueError,match='2000000 byte bound'):
+        build_parquet_snapshot(records,[],tmp_path/'default',root=tmp_path,dataset_id='toy',release_id='r1',snapshot_id='s1',expected_count=3)
+    assert not (tmp_path/'default').exists()
+    path=tmp_path/'large'
+    build_parquet_snapshot(records,[],path,root=tmp_path,dataset_id='toy',release_id='r1',snapshot_id='s1',expected_count=3,population_scope='complete',max_record_bytes=16_000_000)
+    snapshot=ParquetSnapshot(tmp_path,path)
+    query=Query(snapshot_id='s1',population_scope='complete',limit=500)
+    first=snapshot.query(query)
+    assert first.returned_count==2 and first.matched_count==3 and first.cursor
+    assert any('32 MB' in warning for warning in first.warnings)
+    assert sum(len(row.model_dump_json().encode()) for row in first.records)<32_000_000
+    last=snapshot.query(query.model_copy(update={'cursor':first.cursor}))
+    assert last.returned_count==1 and last.cursor is None
+    assert [r.id for r in first.records+last.records]==[r.id for r in records]
+    assert all(r.text==payload and r.source['native']==payload for r in first.records+last.records)
+    with pytest.raises(ValueError,match='1..16 MB'):
+        build_parquet_snapshot([],[],tmp_path/'invalid',root=tmp_path,dataset_id='toy',release_id='r1',snapshot_id='s1',expected_count=0,max_record_bytes=16_000_001)

@@ -2,7 +2,7 @@ import { displayUrl } from '../lib/display'
 import { useEffect, useMemo, useState } from 'react'
 import type { Artifact, Record as AtlasRecord } from '../generated'
 import { recordHeadline, shortId } from '../lib/format'
-import { AssetView, assetLabel, assetUrl, imageAssets, primaryAsset } from '../ui/MediaView'
+import { AssetView, RepresentationTag, assetLabel, assetUrl, imageAssets, primaryAsset } from '../ui/MediaView'
 import { detectorStates } from './model'
 import { Tag } from '../ui/primitives'
 import { useKey, inEditable } from '../lib/hooks'
@@ -83,6 +83,7 @@ export function FocusedInspector({ records, index, artifacts, onIndex, onClose, 
       </div>
 
       <div className="focus-below">
+        {asset && <div className="row" aria-label="Selected image representation" style={{ gap: 8 }}><Tag>{assetLabel(asset, assetIndex)}</Tag><RepresentationTag asset={asset} /></div>}
         {typeof asset?.metadata?.question === 'string' && asset.metadata.question !== record.question && (
           <div className="focus-question" aria-label="Question for selected image"><strong>{assetLabel(asset, assetIndex)}.</strong> {asset.metadata.question}</div>
         )}

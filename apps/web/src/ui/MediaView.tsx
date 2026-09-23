@@ -29,7 +29,7 @@ export function imageAssets(record: AtlasRecord): Asset[] {
 export function assetLabel(asset: Asset, index = 0): string {
   const condition = asset.metadata?.condition
   if (typeof condition === 'string' && condition.trim()) return condition
-  const role = asset.metadata?.source_role
+  const role = asset.metadata?.source_role ?? asset.metadata?.role
   if (typeof role === 'string' && role.trim()) {
     return ({ ref: 'Reference', p0: 'Patch 0', p1: 'Patch 1' } as Record<string, string>)[role] ?? role
   }
@@ -162,5 +162,5 @@ export function RepresentationTag({ asset }: { asset: Asset }) {
       <a className="btn sm" href={asset.metadata.original_uri} target="_blank" rel="noreferrer">Open original</a>}
   </>
   const representation = safeViewEnabled() ? 'Safe-view display derivative' : asset.representation ?? 'original'
-  return <span className="tag" title={`Asset ${asset.id}`}>{representation === 'original' ? 'Original' : representation}</span>
+  return <span className="tag" title={`Asset ${asset.id}`}>{representation === 'original' ? 'Original' : representation === 'lossless_mask_render' ? 'Lossless mask view' : representation}</span>
 }

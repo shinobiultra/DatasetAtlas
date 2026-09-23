@@ -77,3 +77,53 @@ including real local detector, embedding and vLLM image-send journeys. The new
 storage modules pass the pinned `ty` check through `prek`. Current archive and
 base-only installation receipts are recorded separately. Catalogue coverage
 remains incomplete: 202 of 333 entries still lack a preview.
+
+## Native populations, visual masks and bounded remote indexing
+
+The next 2026-09-23 checkpoint has **143 prepared previews / 14,032 records and
+138 full-population indices**, with 190 of 333 entries still lacking a preview.
+Newly verified populations are Resume Corpus (29,783 native text/label pairs),
+SAD (127,173 unrendered samples and three trials), Bias in Bios (396,189 rows),
+ScienceQA-IMG (10,332 image-bearing questions), six Pathways populations (4,955
+rows), TextVQA-X (18,096 explanations), and FOIL (594,536 caption examples).
+
+The exact releases and limitations matter: Bias in Bios uses the identified
+LabHC/Ravfogel derivative, Pathways follows the pinned available author transform,
+and FOIL uses the author's corrected October 2018 release. Historical paper-used
+revision equivalence is not inferred. SAD's templates are not executed or rendered,
+and its question/answer text is excluded from committed receipts. See
+[native text verification](native-text-live-verification.json),
+[ScienceQA/Bios verification](scienceqa-bios-live-verification.json),
+[Pathways verification](pathways-live-verification.json),
+[TextVQA-X verification](textvqa-x-live-verification.json), and
+[FOIL verification](foil-live-verification.json).
+
+TextVQA-X retains exact native boolean NumPy masks, a lossless PNG view, explanations
+and original TextVQA photographs. All native explanations/splits were checked;
+103 image/mask/array triplets passed live checks. The browser downloads the exact
+native array and labels the lossless mask view. Deflated storage reduces the
+13.84 GB decoded native mask members to a 28 MB random-access ZIP without changing
+member bytes. The worker independently bounds encoded output and decoded work.
+
+Food101 now has a deterministic random 100-record preview. Retirement of its
+verified native archive freed 4,996,278,331 bytes; its separate derived ZIP remains.
+All 100 new preview originals and three later original/display pairs passed live
+checks after retirement. The latest [storage scan](storage-footprint-native-20260923.json)
+measured 137.4 GB including configured local model weights, before FOIL's index.
+This is a timestamped measurement, not a promise that all remaining full metadata
+will fit. Corpus originals remain untouched.
+
+Cauldron is still running and is excluded from completed coverage. A real native
+record exceeded the default 2 MB bound; the explicit recipe now permits up to
+16 MB per record. Query pages stop at 32 MB of encoded record/result payload and
+continue without skipping the next record. Remote shard prefetch buffers are
+bounded, cancellation closes producers, and worker failure explicitly closes
+its iterators. Persistent range connections halve elapsed time in one recorded
+cold-client-cache trial; that is not a controlled global throughput estimate.
+
+Validation: 372 Python tests passed (one optional retired-local-archive skip),
+370 passed on fresh Python 3.14 (three optional dependency/source skips), 22 frontend
+tests and 36 browser checks passed. The browser run includes real local detectors,
+embeddings, vLLM image send, native mask download and 304/390/820 px layouts.
+Pinned `ty`/`prek`, wheel/sdist scanning and base-only installed HTTP checks passed;
+receipts identify their exact artifacts. No new independent review is claimed.

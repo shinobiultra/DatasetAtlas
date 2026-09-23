@@ -43,7 +43,7 @@ def test_complete_pinned_snapshot_preview_and_real_media(dataset_id, count):
     assert receipt["preview_sha256"] == hashlib.sha256((ROOT / receipt["preview_pack"]).read_bytes()).hexdigest()
     for record in (pack.records[0], pack.records[-1]):
         for asset in record.assets:
-            media = resolve_dataset_asset(dataset, asset.uri)
+            media = resolve_dataset_asset(dataset, asset.uri, workspace_root=ROOT)
             with Image.open(BytesIO(media.data)) as image:
                 image.verify()
             assert hashlib.sha256(media.data).hexdigest() == media.sha256

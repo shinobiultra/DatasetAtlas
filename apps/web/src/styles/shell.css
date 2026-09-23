@@ -203,7 +203,7 @@
   .app { grid-template-columns: 1fr; grid-template-areas: "top" "main" "bar"; }
   .nav { position: fixed; top: 52px; bottom: 0; left: 0; z-index: 30; box-shadow: var(--shadow-lg); }
   .nav.collapsed { display: none; }
-  .ctx { position: absolute; right: 0; top: 0; bottom: 0; z-index: 19; width: min(var(--panel-w), 100vw); box-shadow: var(--shadow-lg); }
+  .ctx { position: absolute; right: 0; top: 0; bottom: 0; z-index: 19; width: min(var(--panel-w), 100vw); max-width: 100vw; box-shadow: var(--shadow-lg); }
 }
 
 .rail[hidden] { display: none; }

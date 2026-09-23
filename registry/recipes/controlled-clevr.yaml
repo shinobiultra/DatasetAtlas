@@ -1,0 +1,47 @@
+release: pathways-470944b3f6b44901a9055cf8d91aef18cee21671
+source_url: https://github.com/israfelsr/vlm-pathways/tree/470944b3f6b44901a9055cf8d91aef18cee21671
+adapter: pathways
+expected_count: 408
+description: 'Pathways controlled_clevr: 408 examples from the author-defined transformation of the native
+  Whats-Up controlled_clevr release. Original annotations and image bytes are retained alongside the derived
+  caption, preposition and object fields.'
+scope: All 408 rows of controlled_clevr under the pinned author transformation. VG two-object unknown-preposition
+  rows are excluded exactly as in the author script. This available reconstruction does not assert the
+  historical paper-used revision or repeat the upstream RGB re-encoding.
+adapter_config:
+  annotations:
+  - path_key: controlled_clevr_annotations
+    split: controlled_clevr
+    correct_choice_index: 0
+    text_from_first_choice: true
+    media_paths_field: image_path
+    media_path_remove_prefix: data/
+    media_archive: controlled_clevr
+    choices_field: caption_options
+  pathways_split: controlled_clevr
+  mapping:
+    text: _atlas_text
+    choices: _atlas_choices
+  remote_cache_root: work/media-cache/whatsup
+  local_archives:
+    controlled_clevr:
+      path_key: controlled_clevr_path
+  repack_paths:
+  - controlled_clevr_path
+files:
+- url: https://drive.usercontent.google.com/download?id=13jdBpg8t3NqW3jrL6FK8HO93vwsUjDxG&export=download&confirm=t
+  source_name: controlled_clevr.tar.gz
+  bytes: 65817200
+  sha256: df8b23af7dc73c4bf98937777b7a5d85aab42598eace82fa7adad5802df2c493
+  config_key: controlled_clevr_path
+  format: tgz
+- url: https://drive.usercontent.google.com/download?id=1unNNosLbdy9NDjgj4l8fsQP3WiAAGA6z&export=download
+  source_name: controlled_clevr.json
+  bytes: 86532
+  sha256: 2c0df1ab59d13d71442752b4b3c7353114d712a785b0850ec22e11c2b0c474c9
+  config_key: controlled_clevr_annotations
+  format: json
+allowed_hosts:
+- drive.usercontent.google.com
+- drive.google.com
+remote_metadata_bytes: 20000000

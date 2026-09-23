@@ -2,33 +2,35 @@ schema_version: '1.0'
 id: bias-in-bios
 name: Bias in Bios
 aliases: []
-description: Bias in Bios author reproduction procedure, not a ready-made safe-to-load
-  dataset release.
+description: 'Bias in Bios: all 396,189 biographies in the LabHC-hosted Ravfogel et al. representation
+  (257,478 train, 99,069 test, 39,642 dev). Retains hard_text, profession and source gender codes. This
+  derived release omits 5,557 biographies described as unavailable by its publisher; it is not the original
+  full Common Crawl reconstruction.'
 paper_ids:
 - paper-32cea5e43d940514
-release: unresolved
-adapter: structured
+release: 052f01de644dba841176e0449528b41f27d94a61
+adapter: columnar
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
-  access: unverified
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Source-family rights and any public media examples require dataset-specific review.
-  - Adapter and preview are not implemented.
+  - Public preview redistribution is not approved.
+  total_count: 396189
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://github.com/microsoft/biosbias/blob/1534c12ab469f103d83960cd5e9b561a9562abc0/README.md
-  note: Repository MIT license applies to code; original biographies and reconstructed
-    data redistribution not licensed by that statement
+  note: Repository MIT license applies to code; original biographies and reconstructed data redistribution
+    not licensed by that statement
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-d7481a57bd98e1681aba
@@ -36,9 +38,8 @@ evidence:
   source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
   page: 4
   role: training
-  excerpt: 'e encoder and Cocogender cap- h∈G,h̸=g tions (Cocogendertxt) [76] and
-    Bias in Bios [15] for the The set Ng thus comprises neurons that are activated
-    text encoder. Note that all these datasets '
+  excerpt: 'e encoder and Cocogender cap- h∈G,h̸=g tions (Cocogendertxt) [76] and Bias in Bios [15] for
+    the The set Ng thus comprises neurons that are activated text encoder. Note that all these datasets '
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -47,38 +48,47 @@ evidence:
   source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
   page: 4
   role: SAE text training
-  excerpt: tions (Cocogendertxt) [76] and Bias in Bios [15] for the The set Ng thus
-    comprises neurons that are activated
+  excerpt: tions (Cocogendertxt) [76] and Bias in Bios [15] for the The set Ng thus comprises neurons
+    that are activated
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://github.com/microsoft/biosbias/tree/1534c12ab469f103d83960cd5e9b561a9562abc0
-  note: Bias in Bios author reproduction procedure, not a ready-made safe-to-load
-    dataset release
+  note: Bias in Bios author reproduction procedure, not a ready-made safe-to-load dataset release
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_release
   url: https://github.com/microsoft/biosbias/tree/1534c12ab469f103d83960cd5e9b561a9562abc0
-  note: Microsoft author repository commit 1534c12ab469f103d83960cd5e9b561a9562abc0;
-    no fixed data archive release
+  note: Microsoft author repository commit 1534c12ab469f103d83960cd5e9b561a9562abc0; no fixed data archive
+    release
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_access
   url: https://github.com/microsoft/biosbias/tree/1534c12ab469f103d83960cd5e9b561a9562abc0
-  note: Official script reconstructs from 16 Common Crawl archives and emits BIOS.pkl;
-    README estimates roughly four days with 64 cores; source retrieval and processing
-    untested here
+  note: Official script reconstructs from 16 Common Crawl archives and emits BIOS.pkl; README estimates
+    roughly four days with 64 cores; source retrieval and processing untested here
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
   probe: source_reconstruction_not_acquired
 - kind: source_audit_rights
   url: https://github.com/microsoft/biosbias/blob/1534c12ab469f103d83960cd5e9b561a9562abc0/README.md
-  note: Repository MIT license applies to code; original biographies and reconstructed
-    data redistribution not licensed by that statement
+  note: Repository MIT license applies to code; original biographies and reconstructed data redistribution
+    not licensed by that statement
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
-source_url: https://github.com/microsoft/biosbias/tree/1534c12ab469f103d83960cd5e9b561a9562abc0
+- kind: native_population_live_verification
+  url: https://huggingface.co/datasets/LabHC/bias_in_bios/tree/052f01de644dba841176e0449528b41f27d94a61
+  checked_on: '2026-09-23'
+  receipt: reports/scienceqa-bios-live-verification.json
+  scope: All three native Parquet splits of the pinned LabHC/Ravfogel representation, preserving all 396189
+    rows and the three native fields. Original Microsoft reconstruction and additional raw/scrubbed fields
+    are not fabricated. Parquet avoids executing the alternative pickle serialization. No public biography
+    redistribution approval.
+  source_identity_status: pinned_available_representation_not_paper_revision_claim
+source_url: https://huggingface.co/datasets/LabHC/bias_in_bios/tree/052f01de644dba841176e0449528b41f27d94a61
+modalities:
+- text

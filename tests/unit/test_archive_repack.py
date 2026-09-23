@@ -16,3 +16,22 @@ def test_repack_preserves_member_bytes_and_rejects_overbudget_or_links(tmp_path)
     with tarfile.open(source,'w:gz') as archive:
         link=tarfile.TarInfo('unsafe');link.type=tarfile.SYMTYPE;link.linkname='/etc/passwd';archive.addfile(link)
     with pytest.raises(ValueError,match='nonregular'):repack_tar(source,tmp_path/'linked.zip',1000)
+
+
+def test_compressed_repack_bounds_decoded_work_and_preserves_native_arrays(tmp_path):
+    source=tmp_path/'sparse.tgz';native=b'\0'*2_000_000
+    with tarfile.open(source,'w:gz') as archive:
+        member=tarfile.TarInfo('mask.npy');member.size=len(native);archive.addfile(member,io.BytesIO(native))
+    target=tmp_path/'compressed.zip'
+    proof=repack_tar(source,target,10_000,compression='deflate',max_uncompressed_bytes=len(native))
+    assert proof['format']=='zip-deflate' and proof['decoded_bytes']==len(native)
+    assert proof['bytes']<10_000
+    with zipfile.ZipFile(target) as archive:assert archive.read('mask.npy')==native
+    with pytest.raises(ValueError,match='decoded byte budget'):
+        repack_tar(source,tmp_path/'bomb.zip',10_000,compression='deflate',max_uncompressed_bytes=1000)
+    assert not (tmp_path/'bomb.partial').exists()
+    with pytest.raises(ValueError,match='explicit decoded'):
+        repack_tar(source,tmp_path/'unbounded.zip',10_000,compression='deflate')
+    with pytest.raises(ValueError,match='output budget'):
+        repack_tar(source,tmp_path/'too-small.zip',800,compression='deflate',max_uncompressed_bytes=len(native))
+    assert not (tmp_path/'too-small.partial').exists()

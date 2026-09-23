@@ -1,0 +1,854 @@
+{
+  "checked_at": "2026-09-23T09:45:43.859590+00:00",
+  "status": "passed",
+  "dataset_id": "food101",
+  "snapshot_id": "food101-a4740474b6175205805f9f7d",
+  "full_population_count": 101000,
+  "original_preview_sha256_checks": 100,
+  "late_original_display_pairs": 3,
+  "sampling": {
+    "method": "sha256_bottom_k_primary_asset",
+    "seed": 0,
+    "unit": "example",
+    "grouping": "primary asset ID; example ID for records without assets",
+    "population": "complete pinned indexed population",
+    "population_count": 101000,
+    "requested_count": 100,
+    "returned_count": 100,
+    "source_revision": "eth-food101-original",
+    "media_representation": "original",
+    "selection_note": "One hash-ranked example per sampled primary asset. All linked assets remain. Not an example-prevalence estimate."
+  },
+  "checks": [
+    {
+      "record_id": "food101:example:9d7249d17a16edde41a810a5",
+      "sha256": "1857dff375d882cfd3098462af1a639a301ba6b6d92c69ef8d30d95854bc5c1b",
+      "dimensions": [
+        512,
+        339
+      ]
+    },
+    {
+      "record_id": "food101:example:c8ab740aaaf5a47bbab732ea",
+      "sha256": "081ee72049e38432d00301fd39b1a9e66c040a3a160496e0be63aa8945d1bdb4",
+      "dimensions": [
+        512,
+        384
+      ]
+    },
+    {
+      "record_id": "food101:example:573e5d73b33fe80a2d8f7dd0",
+      "sha256": "352f5708eb5d573f2a37b0c38ccaf0a7669b11c6b1662e04cfa6559cdcdcfbaf",
+      "dimensions": [
+        384,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:8fcdce138f8ed61a4716c207",
+      "sha256": "e72a4910d751fb44858e6661bf7d3c200b19006ea9ea3b94e5640700d156d19a",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:f437842481d3de565fb5a2fd",
+      "sha256": "fbbf7eb0eb1c12856e1a9b2b892fba4b2195789f4d01dbcab5d7b889760ca21e",
+      "dimensions": [
+        512,
+        502
+      ]
+    },
+    {
+      "record_id": "food101:example:55e22cfdfef548f70656599b",
+      "sha256": "79ef8c6eb75ff520aeaa223514729bd39f388ddb32685003251576057f0dab5a",
+      "dimensions": [
+        512,
+        384
+      ]
+    },
+    {
+      "record_id": "food101:example:d5af3ff17373aad15c87ec3e",
+      "sha256": "9b0615154aca04ff4b96fb1167e1b875a4b487074e9e3b04471fe26a5ec56fbe",
+      "dimensions": [
+        512,
+        384
+      ]
+    },
+    {
+      "record_id": "food101:example:9af54fd709e8237b61e4b2a8",
+      "sha256": "660b2a3ba07d0d0acfdd5abc04d72a0e90431d4a8faddc87a801283983608e55",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:8e864cb8647be19b2a3e6e4b",
+      "sha256": "89b41060f29abe8c6b4260cffced742d00af904645e3160e5221e87819a6087a",
+      "dimensions": [
+        512,
+        384
+      ]
+    },
+    {
+      "record_id": "food101:example:db760d21e0f92306e71956f6",
+      "sha256": "d960980cd85e17e23a81f02ba6718a5743d1a05437d01b3355d1c9e4e267c1d0",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:49243c69769b394fe916d567",
+      "sha256": "aec6e9204732c9f726cdbfc68821d7dccb2ca80ff85bd2effea8df1d9b058dab",
+      "dimensions": [
+        382,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:1a0085ddfbed40d5c678c5a7",
+      "sha256": "42dcdf22d34240ab40c4f0e8b9998c2a30dfce0517eb9859bbea56ed1a58061c",
+      "dimensions": [
+        512,
+        382
+      ]
+    },
+    {
+      "record_id": "food101:example:1ae096166f310f77a78be408",
+      "sha256": "cb349570f928657e3b3f41514d4b1f2f8cd86869c7008aaadcb4efb2f16edf42",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:df65171aade738ece956db0d",
+      "sha256": "edfb5f7b6fc93554b67a5529e2d9608dab0c8e2ffbd0d7582c35a15e8412acf6",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:b0c7e1d1e1a8d78de69b891d",
+      "sha256": "b4ba73f63aab74b777a2492f832158d396df9ab9c35e335118aba628f476bda9",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:a44c7fd975644849d051c919",
+      "sha256": "bcdcb01a876e945588d0da888c33daff7d5bc20beac7dcf948b9bfddb040388b",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:5ad139caa749c0f787b5744d",
+      "sha256": "789caa42551e1406b9734003b9ffcb6389146d9f34437d0c38ad20cf3d5d87c0",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:20df53e02c6845c4d5b8bd63",
+      "sha256": "fd4fb500ee5772e88836ce3287e1094a13cb80bfc814766f3fe3129b0c2638bf",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:cc5c4b76a1fac01e37ec6aa2",
+      "sha256": "1584ad988076ab1a6e38a86ddd8fe179e1e78919c968437b06ae6be28b9fe247",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:f22304af9a1c9db84b06da06",
+      "sha256": "78f587ab2b662372b2b61438039281674dc0997a91e21022988db5b64c22e27c",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:b065079b0f0a968ce3891162",
+      "sha256": "fd766ed5a804e92e7d3bd912602869f38a35efd579aeaa943e16200fd898ad16",
+      "dimensions": [
+        512,
+        382
+      ]
+    },
+    {
+      "record_id": "food101:example:0ddda3eaaa25ba9db148f553",
+      "sha256": "2b930eb49378d4c782f9f7620ff0d93bcebb60787d8061c886bb50be210d5cf1",
+      "dimensions": [
+        512,
+        384
+      ]
+    },
+    {
+      "record_id": "food101:example:80d24b2b9bf58e3cbe44a888",
+      "sha256": "e18099439022cf0d61d5e59429305326e56e56aa849d881bb933da6d0c62d320",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:37413b62a4d61c483ddfb42b",
+      "sha256": "530ca9d127dafe8bed28d7ebf268c345af8c27eb1052ea5ee8c5deea2abffce7",
+      "dimensions": [
+        512,
+        382
+      ]
+    },
+    {
+      "record_id": "food101:example:30cc80585a78ee54ae23d9fc",
+      "sha256": "5885594c21b2d6b634e1d12a1a1b2c2bcb6164983a4f96ee49233918748e5495",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:a88436e51e748f6424390598",
+      "sha256": "c346ddd69fc89cf83b239e547d0ac344e962b5d1faa0387cede41305f4312c72",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:7ab7cdfdeecb8a45ff88d811",
+      "sha256": "f859721ce023fe8afa0d0496580fb86f6a9f06839e263a7f8bfb11a5a9654a8c",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:0dceda87856c0c30dfaa1ab4",
+      "sha256": "ab58b137022b6a69c5985e1293c160ae1828e9ce4c6eb9c852735f3bd6a7e103",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:124beeba5e8ebf9fa1b61b09",
+      "sha256": "55d257ccf7e1319adb34edf87bf9a30b8c5ae015f00c04fc23fb854f6ac23c96",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:d23afc8b0520b3912bc73b07",
+      "sha256": "80af0f84aa6f20c9b11e8451cc0527b8475a47c1b69672c63ee075ec4e701637",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:30b91adf3e7c77730f16ee80",
+      "sha256": "bbf90854ea6171e80a65c3fdfe939916f678701e2c1fb14f6bbfdc5f4753eebd",
+      "dimensions": [
+        306,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:be13fc6430cae49b1282d939",
+      "sha256": "ba25116fa6e1408aec20c95d7d151adeb1fed24f2076a51df96465cb8861427a",
+      "dimensions": [
+        512,
+        289
+      ]
+    },
+    {
+      "record_id": "food101:example:8be5286826628b1576261be1",
+      "sha256": "5e66410a4f60c2553f142e6847d986dddec6ad22694bd68358808e2f27a336d5",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:fea4cf5cf2ad5f59b353e4b6",
+      "sha256": "39143d9fd04e1addfd92e468f62a6b1ca595b099a4773d9450145c7542cb67d8",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:ba922fe6566a1a6c145f3109",
+      "sha256": "c1b4ec151b294147e3233f4e5f0625bbc4f3aaa42241c2040eaa20e53c7bdbe7",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:450c21c76bf1c6ca89869ab4",
+      "sha256": "b152bd9be0e9a47e94b39e03ded6af82d7598a69344223e6414d46380d709c92",
+      "dimensions": [
+        512,
+        384
+      ]
+    },
+    {
+      "record_id": "food101:example:37d7de6592f2d2c87858e963",
+      "sha256": "4b73d8803819ad8b5289906f80e725011372859aed5e68998ef7140695bf41c4",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:aeb781bff2241e9abc9ea170",
+      "sha256": "7dfb0cf9747c05cb90b2739bfd4e10f289c6a3e513fe030faee09257b40520fe",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:408ad65a127bd09217495161",
+      "sha256": "548137dc28e46f1c36bd986516a8247afa824f594ca5e8b5b7fe6a5bedebd759",
+      "dimensions": [
+        512,
+        384
+      ]
+    },
+    {
+      "record_id": "food101:example:b4d731be203f01fd9d527fa3",
+      "sha256": "1f2860dbadbf114f9b31e12926e243a0a08625dcc8471bede517a8a4474d6133",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:9f55dda99197a4081ecf0b8e",
+      "sha256": "b4c03b1ee32a470cd66a6d61e512ef917a1c73637ab8f065705ec064f97182fb",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:d295674da7cd11f8f879c0d1",
+      "sha256": "30c9a2e6902003ce50346d5cdda8a55feb98fbf81e1b4ba26c1ba5225b90ab92",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:be3381153857ad815f6a7e36",
+      "sha256": "386e8ac2bc0f2a6b84148505471fb99ccf7372a209a93be283180734d74d3a6d",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:cef8b24a5d354d0a56259a63",
+      "sha256": "5835936b900292ab7cd7c42f55ae671db10d7bb041892bed3d22830d5f11e611",
+      "dimensions": [
+        512,
+        511
+      ]
+    },
+    {
+      "record_id": "food101:example:2ee631a0da63f8fee6673e07",
+      "sha256": "0ceab1a61f3fc00c66c6650c90be0e8c4813870cb3fd13345bf88fc4ca8e3843",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:9fa22d7b19042aeea074045d",
+      "sha256": "1481da1961a7285b7e09e0e534177534c53e949e9e25600ff8df6e86f4804329",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:474eba749cb64a3ce6846a80",
+      "sha256": "bf7d7ce5121a2d0629be79fb7f8296cb0b6bb4a539090ce175e46709df34537b",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:0a779abe67094e7993312a19",
+      "sha256": "ed6b79ebc39ef22134dc17e972c43c1295b53e26880d17e9775d699de0d56473",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:c863fbd74f6dc5e28ee191b1",
+      "sha256": "f22a174ef89b698b6c72212b2d305d2a86ca6fc975707d4c866eacb0f0206c78",
+      "dimensions": [
+        384,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:99596c570af0e1efa5c8d3fb",
+      "sha256": "b112f214ff6ddbf53a0e0399bdee42c2fe147a605ebed302a93d456ed20977c2",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:2756cc53a5160f8a9dca7661",
+      "sha256": "2bf6d74e34997a3b5c36e51d7470d07e938dd6f1f1bbf26af2ef75cb7eaa5220",
+      "dimensions": [
+        512,
+        384
+      ]
+    },
+    {
+      "record_id": "food101:example:81996ceaab387a43c76967e0",
+      "sha256": "7df1f72a97c3569145596b20e124724ad61870b0829902ea975d1be18afa2c33",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:29895b602dbe57c5b0565946",
+      "sha256": "15ef98d7559146480bcc9dc9834a4213e2120a5dbcf01e60619bb9b06b77f723",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:d91b0e796497f32983f7b0ad",
+      "sha256": "305be347441a6354a4a7f875f57ff81f175703e7f37ac6e167a4eac4ac6eed25",
+      "dimensions": [
+        512,
+        384
+      ]
+    },
+    {
+      "record_id": "food101:example:b806f14d40d503a403569c28",
+      "sha256": "5e0287343c1bb02d6d6398b61cdc2b48d288662c1f7214df64cb702f95182b76",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:97f189096216a3e0ef91af4a",
+      "sha256": "d74384654f5449eedcdbcc90f714dab29cac38ded9ab1615f1eac0463b08da14",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:09c1b3e5a547125b3a27ee41",
+      "sha256": "865e81adeae04c1b5973c2c0012a0dd9358dfbe17b6b99e344c2ef538897f155",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:a442eb804dadd3dd205bc7a0",
+      "sha256": "f7da5329614cee01639d383b02611a2f2a5329613065347f7060991483c9ab03",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:d9871184319f1e201f43fec6",
+      "sha256": "3820c74c73c2e553e17701f0a2c72940f91279b727132fb31c9c7637711c1379",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:6e376f798056ea1dd8713198",
+      "sha256": "59ffe1846e42b84aa1e6fe5599dde9eb711cc4bc7ec8a67abc7430c56f021cf0",
+      "dimensions": [
+        382,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:105227c19ab7e9e69006e5f8",
+      "sha256": "329aa66a0f9a40d71ca0dfc54c1baf0d482bc5df3762c60e47b18d5d24fd9ce5",
+      "dimensions": [
+        512,
+        384
+      ]
+    },
+    {
+      "record_id": "food101:example:b631ff9dda8ed53cc2fd6dcf",
+      "sha256": "8cb5e8b718bdb0cd61bb607c9afacd04291400b22f6f3c05cc8cae53722b10af",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:96f7b5a53c9d762369d26e73",
+      "sha256": "01799070f4dc4aef0d1d417d00157060721534b19f03569c8e16b11da4242658",
+      "dimensions": [
+        384,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:b8c6d39744c16fc37ab3bbc0",
+      "sha256": "f6531753cbd0352a6484f5b0d477dc8a95c91342ff50f90a99adede674617185",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:faf0b0b51174e48afe0910ee",
+      "sha256": "4ccc4cc0fa21459b40f0ecfa1a33268fc7c1c505c4bdc9c0a127dee7a693eb04",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:7d692e788efe54fa0c2c5e51",
+      "sha256": "2b555a412319dad50cc8bfac4d17fde1a39a126cec16aef0176ee2094f4fa10f",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:1b09432378f2db007e104a33",
+      "sha256": "3111ce0d8b89538f5352dc4638bcca8e18e982c18da442fd36dc6231284c6619",
+      "dimensions": [
+        384,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:2df4fc40fcdd228201e5376e",
+      "sha256": "165ce4c3e2f77d73e96df3b128681657901bc3fae88ec1e5f3b5e40c954dabfb",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:2d34c9de48b78c10099ba16d",
+      "sha256": "7acfa36d5690bbbde71ff85ac333b5dd1888e115579f010ec3cafb7e0a070017",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:8631771c1e8bdb0f81881139",
+      "sha256": "c37585d5429e199900e6875434230468a470b9085828a9488f923a4a71295f83",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:dd7bc2c348a69a946b8f7613",
+      "sha256": "81fac895e834c91278ca4a03449fe0c852e3b9fd0e68d75e39e0c0ddfa39cd80",
+      "dimensions": [
+        512,
+        382
+      ]
+    },
+    {
+      "record_id": "food101:example:f6263092c46bd52c53b34856",
+      "sha256": "56367a1570c512384ae5b0d26c89d1aeb3099b4c1af5e64f3083d2393cf06174",
+      "dimensions": [
+        384,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:83024ee88e313ba70d646c3a",
+      "sha256": "d930a4fb3c856f129a96c40e88bcd48ff9767bcd2561cf396c7674e80d435a8a",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:ee1d360452d218ed4467ad90",
+      "sha256": "b8f070eb8e953429212f66405420fc7942a29b20f7355d50f79330030bc90d32",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:6b2757ced5cc42e64d432fc4",
+      "sha256": "2dba7d5cf473afec753f8290425aee9a4838a1477754ab88f59f5d6a1eb2b5fe",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:752ca1d96ed0b6a278d69ae0",
+      "sha256": "9392b37a30f5dfbcd0ae0f1029237daec609378157fc3b1d82e0ca7f8ebb433b",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:0a118f8f4fa3af2a48cf91f3",
+      "sha256": "2cfa6addd55d7b22b0890bd367e006d5432f22f2354fac9f7718770ab00a2f99",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:b3defe1822fefadd228b029a",
+      "sha256": "725f37efe8eb127e4079b823ce60543680f9cbc09e7311acf2eaf8af5d2ca478",
+      "dimensions": [
+        384,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:ca536aa1e179273c3d79d80c",
+      "sha256": "cafc944f16459f3a9ceb4208d28176cedb35fc4e027c09b5f873182c7b597164",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:c294f666ae3c1d95642c1893",
+      "sha256": "a781929c9fdbc5aa921b36b1e28bc98564ebeee0287dc0fd7df8e201e6fdda74",
+      "dimensions": [
+        512,
+        374
+      ]
+    },
+    {
+      "record_id": "food101:example:91e6f25576669089ddf86ef9",
+      "sha256": "1a0b58b064cee9dbc634ec53dffddc109ed5c7159d0db47e02ce5fb206b9a38c",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:5d374b30086cc24d107c6100",
+      "sha256": "da7d7763e75e19b8dc9062b529d47d4ee35132db04a4b1eade9561d634edd2d3",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:5a195ec0a93c800ebd8f93b3",
+      "sha256": "110041410a64ee608a90022f2841d6d6c77750e6969b951e63f265711e755795",
+      "dimensions": [
+        512,
+        288
+      ]
+    },
+    {
+      "record_id": "food101:example:81a609f3260111f3927157a1",
+      "sha256": "ef4a456aab70ebd8a2be8afff2b65ee4bf1adf76727089bb3c9ef315c7bf6b22",
+      "dimensions": [
+        512,
+        384
+      ]
+    },
+    {
+      "record_id": "food101:example:5fbf8fe1ac70399a3bd1c364",
+      "sha256": "df1700b8803a2280e115417ca675a60f7a2b3d2d04acfcb295e6f89863c49ca7",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:de23a6558e803342f2f2e8a0",
+      "sha256": "d315c2d518773e34782973cc537c0edc82cce729547ec0f3b3496cf5523cedb7",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:061a5e258b1bd7a89b7ef969",
+      "sha256": "0c4fdf23ab0f2867a08c0b993e86a667212050cfd9979680dadd125ef03470d8",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:3d652d7adef9c78cd653fd56",
+      "sha256": "c7685ac053824397ddc3b3a5e50059114235deaeca3909ec8dbda5d793015a92",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:1d762bc9f058063a74efe42a",
+      "sha256": "e50a594315d9c1befc01dc8dbbadd10073f70a297d22bb9094aebf85e15d768e",
+      "dimensions": [
+        512,
+        384
+      ]
+    },
+    {
+      "record_id": "food101:example:9622c542033dcb519115f332",
+      "sha256": "99701a4b3fe978b085f28d8a1a2ceca01ab5b1b782a84445d84201444b127f18",
+      "dimensions": [
+        512,
+        384
+      ]
+    },
+    {
+      "record_id": "food101:example:9b2de125b4105d5d1f86f6c5",
+      "sha256": "11db08c5cf1aa98192a97274d387d8bc22029344bc1d76e86334b5423d39905d",
+      "dimensions": [
+        512,
+        384
+      ]
+    },
+    {
+      "record_id": "food101:example:e763c9631c70dadf55e347cf",
+      "sha256": "aebecdecc3972b6e1e11260426c03a25ab277c48e27cfe7a05ef2049e116ae82",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:c4883d67184958fed9980f98",
+      "sha256": "08346c492a83572f0457bbded1eb4d14bb3b4a19a8a909a35b98c62939775a71",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:d704b2392a75a3b3a5ca5992",
+      "sha256": "49bd0944b11474e968a1b73922a675161b257bb787dff8e278029a8936aa0de5",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:77a20725e8f4691a6d8b63c2",
+      "sha256": "42f97d254639e7ae592c19b0802aecb576bba0274f134663d58114503a4af029",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:f01aec031a72692ce81ed0e9",
+      "sha256": "4405d1aec776505ae42b953ca2dcf6d7674561b5c3049335e9ae18db1027af43",
+      "dimensions": [
+        382,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:d5ea46ae488ea11755481647",
+      "sha256": "c4d9b42d99c084cdd10f27760393dc443b36503ef09d4aaba69b05dc09025897",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:a77242e48ae68d12a60a5a4d",
+      "sha256": "3332650581be0bbe04beb1debb9428633f753684fe5d852952fe74017297fb50",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:9954bcb5376d5f15ae87b58e",
+      "sha256": "4a35520b02edfea40d71257f4764952778a8be995c95b3e69b8b87d3479c4a90",
+      "dimensions": [
+        512,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:4eaee7a14bce88abcbcade82",
+      "sha256": "36629319e687bad15bd39c733706b851c9c20e7d9556143ec4bc277edda0e784",
+      "dimensions": [
+        382,
+        512
+      ]
+    },
+    {
+      "record_id": "food101:example:fffd21caa4a7ca6520617460",
+      "original_sha256": "a4e91ef5314d79e076180c34fdad994de4c4a0637bb093dbd3cab20f9e0a7b70",
+      "display_sha256": "a4e91ef5314d79e076180c34fdad994de4c4a0637bb093dbd3cab20f9e0a7b70",
+      "dimensions": [
+        468,
+        512
+      ],
+      "representation": null
+    },
+    {
+      "record_id": "food101:example:fffc3164bd5440767980e660",
+      "original_sha256": "606891c7824605e0c13580b0d7af8c999cc8f88d0445a2e7d22d7ead192e6737",
+      "display_sha256": "de83c75eed5da0d69444729441707e6b83e10898822cea849068d641d791897f",
+      "dimensions": [
+        512,
+        384
+      ],
+      "representation": null
+    },
+    {
+      "record_id": "food101:example:fffc25fce6523a0ebb51089b",
+      "original_sha256": "12de78bdce97ac518e9974dee7c81a48a3552ce87159d7caf2d9612beafc5e9b",
+      "display_sha256": "cc3be7cdd6a1e165892f87e3ef9f5822d4d3ad9d36821d2ed89024d8f158452c",
+      "dimensions": [
+        512,
+        512
+      ],
+      "representation": null
+    }
+  ]
+}

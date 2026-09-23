@@ -243,7 +243,7 @@ class PreparationManager:
         if plan['requirements']:
             plan['ready'] = False
         from dataset_atlas.jobs.limits import limits, enforcement
-        plan['resource_limits']=limits({})
+        plan['resource_limits']=limits(recipe.get('resource_limits',{}))
         plan['memory_enforcement']=enforcement()
         plan['id'] = hashlib.sha256(json.dumps({k:v for k,v in plan.items() if k not in {'available_bytes', 'shared_storage'}}, sort_keys=True).encode()).hexdigest()
         atomic(self._path(plan['id']) / 'plan.json', plan)
@@ -288,7 +288,7 @@ class PreparationManager:
         atomic(directory / 'status.json', {'id': identity, 'dataset_id': plan['dataset_id'], 'status': 'queued', 'updated_at': time.time()})
         with (directory / 'worker.log').open('ab') as log:
             from dataset_atlas.jobs.limits import worker_command
-            process = subprocess.Popen(worker_command([sys.executable, '-m', 'dataset_atlas.preparation.worker', str(self.root), identity],{}),
+            process = subprocess.Popen(worker_command([sys.executable, '-m', 'dataset_atlas.preparation.worker', str(self.root), identity],plan.get('resource_limits',{})),
                 stdin=subprocess.DEVNULL, stdout=log, stderr=log, start_new_session=True)
         self.processes[identity] = process
         return self.status(identity)

@@ -64,6 +64,32 @@ def test_shared_storage_rechecks_headroom_before_dispatch(tmp_path):
     assert not blocked['ready'] and not blocked['shared_storage']['admitted']
 
 
+@pytest.mark.parametrize('selected_count', [1, 2])
+def test_filtered_index_counts_actual_image_population_and_samples_it(tmp_path, selected_count):
+    import io
+    from PIL import Image
+    dataset=fixture(tmp_path,3)
+    image=io.BytesIO();Image.new('RGB',(2,2),'blue').save(image,'PNG')
+    path=tmp_path/'source.parquet'
+    pq.write_table(pa.Table.from_pylist([{'text':'plain','image':None},
+        {'text':'with image','image':{'bytes':image.getvalue(),'path':'image.png'}},
+        {'text':'plain again','image':None}]),path)
+    dataset.adapter_config['files'][0]['sha256']=hashlib.sha256(path.read_bytes()).hexdigest()
+    dataset.adapter_config.update(record_filter={'asset_modality':'image'},expected_source_count=3)
+    dataset.coverage.total_count=selected_count
+    (tmp_path/'registry/datasets/fixture.yaml').write_text(yaml.safe_dump(dataset.model_dump(mode='json')))
+    manager=PreparationManager(tmp_path);plan=manager.plan(dataset.id,1_000_000,1_000_000)
+    if selected_count==2:
+        with pytest.raises(ValueError):run(tmp_path,plan['id'])
+        assert Registry(tmp_path).active_directory(dataset.id) is None
+    else:
+        run(tmp_path,plan['id'])
+        pack=Registry(tmp_path).pack(dataset.id)
+        assert len(pack.records)==1 and len(pack.records[0].assets)==1
+        assert pack.records[0].text=='with image'
+        assert pack.sampling['population_count']==1
+
+
 def test_storage_reservations_include_jobs_older_than_ui_listing(tmp_path, monkeypatch):
     fixture(tmp_path, 1)
     manager = PreparationManager(tmp_path)
@@ -439,3 +465,33 @@ def test_prune_does_not_claim_to_free_a_source_linked_outside_prepared(tmp_path)
     assert entry['freed_bytes']==0
     manager.prune(execute=True)
     assert not failed.exists() and source.read_bytes()==b'z'*4096
+
+
+def test_recipe_resource_limits_are_pinned_and_passed_to_dispatch(tmp_path,monkeypatch):
+    dataset=fixture(tmp_path,3);recipes=tmp_path/'registry/recipes';recipes.mkdir()
+    path=recipes/f'{dataset.id}.yaml';path.write_text(yaml.safe_dump({'resource_limits':{'max_wall_seconds':21600,'max_cpu_seconds':7200}}))
+    manager=PreparationManager(tmp_path);plan=manager.plan(dataset.id,1000000,1000000)
+    assert plan['resource_limits']=={'max_rss_bytes':8000000000,'max_wall_seconds':21600,'max_cpu_seconds':7200}
+    observed=[]
+    from dataset_atlas.jobs import limits
+    def dispatch(command,config):
+        observed.append(config)
+        raise RuntimeError('test-only dispatch observation')
+    monkeypatch.setattr(limits,'worker_command',dispatch)
+    with pytest.raises(RuntimeError,match='dispatch observation'):manager.start(plan['id'])
+    assert observed==[plan['resource_limits']]
+    path.write_text(yaml.safe_dump({'resource_limits':{'max_wall_seconds':0}}))
+    with pytest.raises(ValueError,match='positive integer'):manager.plan(dataset.id,1000000,1000000)
+
+
+def test_failed_snapshot_writer_closes_input_iterator(tmp_path,monkeypatch):
+    dataset=fixture(tmp_path,3);manager=PreparationManager(tmp_path)
+    plan=manager.plan(dataset.id,1000000,1000000);retained=[]
+    def fail(records,*args,**kwargs):
+        retained.append(records)
+        next(records)
+        raise ValueError('deliberate downstream writer failure')
+    monkeypatch.setattr('dataset_atlas.queries.parquet.build_parquet_snapshot',fail)
+    with pytest.raises(ValueError,match='downstream writer failure'):run(tmp_path,plan['id'])
+    assert retained[0].gi_frame is None
+    assert manager.status(plan['id'])['status']=='failed'

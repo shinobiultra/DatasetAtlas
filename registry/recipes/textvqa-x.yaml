@@ -1,0 +1,71 @@
+release: textvqa-x-493ee9629208ff6fabf1ce0bc9cb5be0559a8ca6
+source_url: https://github.com/amzn/explainable-text-vqa/tree/493ee9629208ff6fabf1ce0bc9cb5be0559a8ca6
+adapter: textvqa_x
+expected_count: 18096
+description: 'TextVQA-X: all 18,096 native question explanations, split IDs and boolean visual masks,
+  joined exactly to the original TextVQA questions and images. Masks retain original NumPy bytes and a
+  lossless PNG visualization.'
+scope: All 14476 training and 3620 validation IDs in the author release; every textual explanation, token
+  list and native boolean mask retained. Original TextVQA image bytes fetched on request; no paper-specific
+  evaluation reconstruction is inferred.
+adapter_config:
+  annotations:
+  - path_key: explanations_path
+  mapping:
+    question: _atlas_question
+  local_archives:
+    masks:
+      path_key: masks_path
+  repack_paths:
+  - masks_path
+  repack_compression: deflate
+  repack_max_uncompressed_bytes: 14000000000
+  remote_archives:
+    trainval:
+      url: https://dl.fbaipublicfiles.com/textvqa/images/train_val_images.zip
+      bytes: 7072297970
+      etag: '"79ddfdcdb3f40b3466b9c0dc2f0cda25-68"'
+      allowed_hosts:
+      - dl.fbaipublicfiles.com
+  remote_cache_root: work/media-cache/ranges
+files:
+- source_name: data_splits/train_id.txt
+  url: https://raw.githubusercontent.com/amzn/explainable-text-vqa/493ee9629208ff6fabf1ce0bc9cb5be0559a8ca6/data_splits/train_id.txt
+  bytes: 79523
+  sha256: 8d6981fcd23ceabd9106e025e08d3a1558c9d2b7b761d25d5711e513c24b73c1
+  format: txt
+  config_key: train_ids_path
+- source_name: data_splits/val_id.txt
+  url: https://raw.githubusercontent.com/amzn/explainable-text-vqa/493ee9629208ff6fabf1ce0bc9cb5be0559a8ca6/data_splits/val_id.txt
+  bytes: 19942
+  sha256: 77ada96c4dfb5c5d5919ac3e7f2964100cb367cf5e3278109c06fbe189ad9ce0
+  format: txt
+  config_key: val_ids_path
+- source_name: text_explanations/explanations_token.json
+  url: https://raw.githubusercontent.com/amzn/explainable-text-vqa/493ee9629208ff6fabf1ce0bc9cb5be0559a8ca6/text_explanations/explanations_token.json
+  bytes: 8386039
+  sha256: b88f3a860f4781822c219d13bbe22e1850ff92c7806e7e0213a8b5a6d9c6a87e
+  format: json
+  config_key: explanations_path
+- source_name: visual_explanations/seg.tar.gz
+  url: https://raw.githubusercontent.com/amzn/explainable-text-vqa/493ee9629208ff6fabf1ce0bc9cb5be0559a8ca6/visual_explanations/seg.tar.gz
+  bytes: 27215771
+  sha256: 6e939088ed2f3035ad78871fe21522977de3433b32d99f0f178fabd84609331b
+  format: tgz
+  config_key: masks_path
+- source_name: TextVQA_0.5.1_train.json
+  url: https://dl.fbaipublicfiles.com/textvqa/data/TextVQA_0.5.1_train.json
+  bytes: 21634937
+  sha256: 95f5c407db56cba56a177799dcd685a7cc0ec7c0d851b59910acf7786d31b68a
+  format: json
+  config_key: questions_train_path
+- source_name: TextVQA_0.5.1_val.json
+  url: https://dl.fbaipublicfiles.com/textvqa/data/TextVQA_0.5.1_val.json
+  bytes: 3116162
+  sha256: 4ceb5aadc1a41719d0a3e4dfdf06838bcfee1db569a9a65ee67d31c99893081d
+  format: json
+  config_key: questions_val_path
+allowed_hosts:
+- raw.githubusercontent.com
+- dl.fbaipublicfiles.com
+remote_metadata_bytes: 20000000

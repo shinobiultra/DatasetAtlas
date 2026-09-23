@@ -138,3 +138,53 @@ explicit optimized request for a preview returns original bytes. Preparation pla
 and dispatch account for configured external roots and running reservations against
 the shared ceiling. Dataset coverage says "full population indexed", since complete
 metadata does not imply that every original media file is resident on disk.
+
+Remote shard fingerprinting and schema reads use at most eight concurrent readers,
+preserve source order, and reserve shares of the same metadata transfer budget.
+Native `conversation_pairs` mappings retain the original pair objects and expose
+their ordered user/assistant text in canonical conversations. A configuration
+directory is a filterable source field only when the recipe explicitly declares it.
+
+The `text_pairs` adapter reads exact native text/label pairs without extraction,
+using a declared reversible encoding and per-member checksums. `sad_structs`
+preserves released sample templates and trial definitions without substituting
+variables, executing benchmark code, or claiming procedural results. SAD's
+anti-contamination terms prohibit committing or publishing plaintext questions;
+its preview packs remain local and source receipts contain only aggregate counts,
+paths and hashes.
+
+Preparation admits at most two dataset writers, with an exclusive lease per dataset.
+Ordinary source download/verification/linking is serialized to prevent another worker
+from evicting an object before it is retained. Remote indexing overlaps at most four
+shards while preserving source order and global asset references. Each producer buffers
+at most 32 batches and 32 MB of encoded records; these are not Python RSS limits.
+ETag-bound readers reuse validated HTTPS connections and reconnect a stale socket once
+before reading a response body. Saved shard fingerprints are reusable within the same
+plan; every subsequent range still validates its pinned ETag.
+
+A declared `record_filter: {asset_modality: image}` selects a native subpopulation.
+The recipe must specify both `expected_source_count` and the selected `expected_count`.
+Preparation checks both actual counts before activation and samples from selected
+records only. This does not infer a paper-specific subset or invent native identifiers.
+
+The Pathways adapter applies the pinned authors' caption parsing and VG two-object
+exclusion rule, preserving native What's-Up annotations and original media bytes.
+Its derived fields record the transformation revision; neither a historical paper
+revision nor the authors' RGB image re-encoding is inferred.
+
+TextVQA-X joins every native explanation and split ID to the original question and
+image ID, rejecting missing/duplicate joins. Native boolean NumPy masks remain
+available as array assets; separate, explicitly labelled PNG assets visualize their
+exact values and dimensions. Pickles and object arrays are never deserialized.
+Deflated TAR-to-ZIP repacking requires separate decoded-work and encoded-output
+budgets, preserves native member bytes and enables random access without expanding
+the entire sparse-mask collection on disk.
+
+Snapshot writers default to a 2 MB encoded-record limit; a pinned source recipe may
+opt in to at most 16 MB when a native record requires it. The snapshot manifest
+records that bound. Complete-index queries cap the combined encoded record and
+prediction payloads at 32 MB per page; a byte-shortened page retains an exact count
+and a continuation cursor. This is a record-payload cap, not an HTTP-envelope or
+process RSS claim. Native conversations are never truncated to meet the cap.
+Recipe resource limits are validated and pinned in preparation plans, then applied
+to both the worker cgroup command and its CPU/RSS/wall-time watchdog.

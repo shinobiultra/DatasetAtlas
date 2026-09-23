@@ -173,6 +173,7 @@ def build_parquet_snapshot(
     root: Path, dataset_id: str, release_id: str, snapshot_id: str,
     expected_count: int, unit: Unit = "example", population_scope: str = "preview",
     batch_size: int = 512, max_bytes: int = 20_000_000_000,
+    max_record_bytes: int = 2_000_000,
 ) -> Path:
     """Stream records into a new, checksum-bound snapshot; never alter originals.
 
@@ -191,6 +192,8 @@ def build_parquet_snapshot(
         raise ValueError("Unsupported population scope")
     if type(batch_size) is not int or not 1 <= batch_size <= 4096 or max_bytes <= 0:
         raise ValueError("Invalid snapshot bounds")
+    if type(max_record_bytes) is not int or not 1 <= max_record_bytes <= 16_000_000:
+        raise ValueError("Record bound must be within 1..16 MB")
     fields = list(fields)
     registry = _registry(fields)
     schema = pa.schema([
@@ -221,8 +224,8 @@ def build_parquet_snapshot(
                 except sqlite3.IntegrityError as exc:
                     raise ValueError(f"Duplicate or empty record ID: {record.id}") from exc
                 encoded = record.model_dump_json()
-                if len(encoded.encode("utf-8")) > 2_000_000:
-                    raise ValueError(f"Record exceeds 2 MB bound: {record.id}")
+                if len(encoded.encode("utf-8")) > max_record_bytes:
+                    raise ValueError(f"Record exceeds {max_record_bytes} byte bound: {record.id}; source={record.source.get('_atlas_origin', {})}")
                 row = {name: _field_value(record, name) for name in _BASE_FIELDS}
                 row["record_json"] = encoded
                 row["search_text"] = "\n".join([record.text or "", record.question or "", json.dumps(record.source, ensure_ascii=False, separators=(",", ":"))]).lower()
@@ -260,6 +263,7 @@ def build_parquet_snapshot(
             "category_kinds": {field_id: sorted(kinds) for field_id, kinds in category_kinds.items()},
             "checksums": {"records.parquet": _sha256(parquet)},
             "parquet_bytes": parquet.stat().st_size,
+            "max_record_bytes": max_record_bytes,
         }
         (stage / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n")
         parquet.chmod(0o444)
@@ -628,7 +632,15 @@ class ParquetSnapshot:
                     strata=f'atlas_stratum(source."record_json", {prediction})'
                     selected_columns+=f', row_number() OVER (PARTITION BY {strata} ORDER BY atlas_rank(source."id"), source."id") AS atlas_stratum_rank, {strata} AS atlas_stratum_key'
                 if expired.is_set():raise ValueError("Query exceeded its time budget")
-                result_rows = connection.execute(f"SELECT {selected_columns} FROM {source}{where}{order} LIMIT ? OFFSET ?", [str(self.parquet), *params, take, offset]).fetchall()
+                reader = connection.execute(f"SELECT {selected_columns} FROM {source}{where}{order} LIMIT ? OFFSET ?", [str(self.parquet), *params, take, offset])
+                result_rows = []; page_bytes = 0
+                while row := reader.fetchone():
+                    payload_bytes = len(row[0].encode()) + (len(row[1].encode()) if artifacts and row[1] else 0)
+                    if payload_bytes > 32_000_000:
+                        raise ValueError("Single query record exceeds 32 MB response payload bound")
+                    if result_rows and page_bytes + payload_bytes > 32_000_000:
+                        break
+                    result_rows.append(row); page_bytes += payload_bytes
             else:
                 result_rows = []
         except duckdb.InterruptException as exc:
@@ -649,6 +661,8 @@ class ParquetSnapshot:
         next_offset = offset + len(records)
         next_cursor = base64.urlsafe_b64encode(json.dumps({"query": fingerprint, "offset": next_offset}).encode()).decode() if next_offset < sampled_count else None
         warnings = []
+        if len(records) < take:
+            warnings.append("Page shortened to the 32 MB record payload budget; continue with its cursor.")
         if method=="stratified":warnings.append("Stratified samples do not estimate population prevalence.")
         if self.manifest["population_scope"] != "complete":
             warnings.append(f"Counts describe the available {self.manifest['population_scope']} snapshot, not a complete release.")

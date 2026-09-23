@@ -1,0 +1,47 @@
+release: pathways-470944b3f6b44901a9055cf8d91aef18cee21671
+source_url: https://github.com/israfelsr/vlm-pathways/tree/470944b3f6b44901a9055cf8d91aef18cee21671
+adapter: pathways
+expected_count: 412
+description: 'Pathways controlled_images: 412 examples from the author-defined transformation of the native
+  Whats-Up controlled_images release. Original annotations and image bytes are retained alongside the
+  derived caption, preposition and object fields.'
+scope: All 412 rows of controlled_images under the pinned author transformation. VG two-object unknown-preposition
+  rows are excluded exactly as in the author script. This available reconstruction does not assert the
+  historical paper-used revision or repeat the upstream RGB re-encoding.
+adapter_config:
+  annotations:
+  - path_key: controlled_images_annotations
+    split: controlled_images
+    correct_choice_index: 0
+    text_from_first_choice: true
+    media_paths_field: image_path
+    media_path_remove_prefix: data/
+    media_archive: controlled_images
+    choices_field: caption_options
+  pathways_split: controlled_images
+  mapping:
+    text: _atlas_text
+    choices: _atlas_choices
+  remote_cache_root: work/media-cache/whatsup
+  local_archives:
+    controlled_images:
+      path_key: controlled_images_path
+  repack_paths:
+  - controlled_images_path
+files:
+- url: https://drive.usercontent.google.com/download?id=19KGYVQjrV3syb00GgcavB2nZTW5NXX0H&export=download&confirm=t
+  source_name: controlled_images.tar.gz
+  bytes: 95134342
+  sha256: 4fc005e7ab1e2ac5e5836d2456dd9ae930239c44953b0b2d3e9523f6ad5b1a69
+  config_key: controlled_images_path
+  format: tgz
+- url: https://drive.usercontent.google.com/download?id=1ap8mmmpQjLIjPGuplkpBgc1hoEHCj4hm&export=download
+  source_name: controlled_images.json
+  bytes: 88371
+  sha256: 77ee94ae35552ed643ecd47f700daa178e10051458baae99d5c4c5d5922590d3
+  config_key: controlled_images_annotations
+  format: json
+allowed_hosts:
+- drive.usercontent.google.com
+- drive.google.com
+remote_metadata_bytes: 20000000

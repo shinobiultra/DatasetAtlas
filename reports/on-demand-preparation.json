@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-23T07:25:32.758360+00:00",
+  "checked_at": "2026-09-23T09:58:39.945458+00:00",
   "datasets": [
     {
       "dataset_id": "agent-security-bench",
@@ -40,6 +40,16 @@
       "scope": "All 197344 native BAPPS judgement records from author-linked 2AFC train/validation and JND validation TARs. Original patches, reference/p0/p1 roles and fractional human judgements retained. Native distortion groups and splits are distinct memberships. No inferred media publication rights.",
       "plan_id": "fbde65c7714d91d3224a25f88dbf03feba374981fa477414299f067186ae9c7e",
       "prepared_receipt": "work/prepared/bapps/fbde65c7714d91d3224a25f88dbf03feba374981fa477414299f067186ae9c7e/receipt.json"
+    },
+    {
+      "dataset_id": "bias-in-bios",
+      "release": "052f01de644dba841176e0449528b41f27d94a61",
+      "snapshot_id": "bias-in-bios-93bf77d2317cc012455bdbc6",
+      "records": 396189,
+      "preview_records": 100,
+      "scope": "All three native Parquet splits of the pinned LabHC/Ravfogel representation, preserving all 396189 rows and the three native fields. Original Microsoft reconstruction and additional raw/scrubbed fields are not fabricated. Parquet avoids executing the alternative pickle serialization. No public biography redistribution approval.",
+      "plan_id": "93bf77d2317cc012455bdbc6aa61c59bc9e7d41e30cf15205777858ff65579df",
+      "prepared_receipt": "work/prepared/bias-in-bios/93bf77d2317cc012455bdbc6aa61c59bc9e7d41e30cf15205777858ff65579df/receipt.json"
     },
     {
       "dataset_id": "caltech101",
@@ -122,6 +132,16 @@
       "prepared_receipt": "work/prepared/coco-2014/887d386753a51dbcec623342c2cd39cc2b0dc61a103d4206938fc3b946a435d0/receipt.json"
     },
     {
+      "dataset_id": "coco-one",
+      "release": "pathways-470944b3f6b44901a9055cf8d91aef18cee21671",
+      "snapshot_id": "coco-one-0b6ab83266694ecc87cf1b5f",
+      "records": 2247,
+      "preview_records": 100,
+      "scope": "All 2247 rows of coco_one under the pinned author transformation. VG two-object unknown-preposition rows are excluded exactly as in the author script. This available reconstruction does not assert the historical paper-used revision or repeat the upstream RGB re-encoding.",
+      "plan_id": "0b6ab83266694ecc87cf1b5f1b7a7036241eb7d0962c94570774601856a79a9f",
+      "prepared_receipt": "work/prepared/coco-one/0b6ab83266694ecc87cf1b5f1b7a7036241eb7d0962c94570774601856a79a9f/receipt.json"
+    },
+    {
       "dataset_id": "coco-qa",
       "release": "cocoqa-2015-05-17",
       "snapshot_id": "coco-qa-7698bc16eecb417c272fad53",
@@ -132,6 +152,16 @@
       "prepared_receipt": "work/prepared/coco-qa/7698bc16eecb417c272fad53244d6942b62b4402c12639e0d049dd77e74a02f1/receipt.json"
     },
     {
+      "dataset_id": "coco-two",
+      "release": "pathways-470944b3f6b44901a9055cf8d91aef18cee21671",
+      "snapshot_id": "coco-two-60d8560653b5bd04321440de",
+      "records": 440,
+      "preview_records": 100,
+      "scope": "All 440 rows of coco_two under the pinned author transformation. VG two-object unknown-preposition rows are excluded exactly as in the author script. This available reconstruction does not assert the historical paper-used revision or repeat the upstream RGB re-encoding.",
+      "plan_id": "60d8560653b5bd04321440de0e326286705be351fecb2dd3dcb95768301e0918",
+      "prepared_receipt": "work/prepared/coco-two/60d8560653b5bd04321440de0e326286705be351fecb2dd3dcb95768301e0918/receipt.json"
+    },
+    {
       "dataset_id": "conceptarc",
       "release": "github-0e67da6af879e4bad3d7cd3c196e8d551b445725",
       "snapshot_id": "conceptarc-f1a00e23a30566170d8df113",
@@ -140,6 +170,26 @@
       "scope": "All original corpus tasks and separately named MinimalTasks; each record preserves complete train/test grids as one task.",
       "plan_id": "f1a00e23a30566170d8df113ea47c9cd164991a2edec224cfb5306bf3918c19f",
       "prepared_receipt": "work/prepared/conceptarc/f1a00e23a30566170d8df113ea47c9cd164991a2edec224cfb5306bf3918c19f/receipt.json"
+    },
+    {
+      "dataset_id": "controlled-clevr",
+      "release": "pathways-470944b3f6b44901a9055cf8d91aef18cee21671",
+      "snapshot_id": "controlled-clevr-4316323619a0b4e837544440",
+      "records": 408,
+      "preview_records": 100,
+      "scope": "All 408 rows of controlled_clevr under the pinned author transformation. VG two-object unknown-preposition rows are excluded exactly as in the author script. This available reconstruction does not assert the historical paper-used revision or repeat the upstream RGB re-encoding.",
+      "plan_id": "4316323619a0b4e8375444401599ce97c01eef7e44a2fdbc9ad74bed13e2c0ab",
+      "prepared_receipt": "work/prepared/controlled-clevr/4316323619a0b4e8375444401599ce97c01eef7e44a2fdbc9ad74bed13e2c0ab/receipt.json"
+    },
+    {
+      "dataset_id": "controlled-images",
+      "release": "pathways-470944b3f6b44901a9055cf8d91aef18cee21671",
+      "snapshot_id": "controlled-images-e295683752ee1888f4183c58",
+      "records": 412,
+      "preview_records": 100,
+      "scope": "All 412 rows of controlled_images under the pinned author transformation. VG two-object unknown-preposition rows are excluded exactly as in the author script. This available reconstruction does not assert the historical paper-used revision or repeat the upstream RGB re-encoding.",
+      "plan_id": "e295683752ee1888f4183c587d205e5b77aeb9c5846d106f69fbe04eab8335ff",
+      "prepared_receipt": "work/prepared/controlled-images/e295683752ee1888f4183c587d205e5b77aeb9c5846d106f69fbe04eab8335ff/receipt.json"
     },
     {
       "dataset_id": "counterfact",
@@ -242,14 +292,24 @@
       "prepared_receipt": "work/prepared/flowers102/bf66416e2c87239627de1757b0cfca135f04eca4fdf5af2c01be13cd52c04416/receipt.json"
     },
     {
+      "dataset_id": "foil-it",
+      "release": "foil-v1.0-author-oct2018-release",
+      "snapshot_id": "foil-it-1f1ff6c245f34f5a6b1444d1",
+      "records": 594536,
+      "preview_records": 100,
+      "scope": "All caption examples from both author-linked corrected-release JSON files, joined to all 97,847 native image entries. Distinct correct/foil captions are examples; repeated image IDs retain one shared original image. No historical earlier-release equivalence is claimed.",
+      "plan_id": "1f1ff6c245f34f5a6b1444d19c6996f1af1f25428c4a69dfccd7e04e7f6f0869",
+      "prepared_receipt": "work/prepared/foil-it/1f1ff6c245f34f5a6b1444d19c6996f1af1f25428c4a69dfccd7e04e7f6f0869/receipt.json"
+    },
+    {
       "dataset_id": "food101",
       "release": "eth-food101-original",
       "snapshot_id": "food101-a4740474b6175205805f9f7d",
       "records": 101000,
       "preview_records": 100,
       "scope": "All original 101000 images in the 75750 training and 25250 test split with all 101 source class names. Original training annotation noise is retained.",
-      "plan_id": "a4740474b6175205805f9f7d9b71bf65ef67be90884a429ea039c36fc991de53",
-      "prepared_receipt": "work/prepared/food101/a4740474b6175205805f9f7d9b71bf65ef67be90884a429ea039c36fc991de53/receipt.json"
+      "plan_id": "101d286f535dc1f09c5827c2f34188cffabafbb843879ff73cc36c0bebdfeec5",
+      "prepared_receipt": "work/prepared/food101/101d286f535dc1f09c5827c2f34188cffabafbb843879ff73cc36c0bebdfeec5/receipt.json"
     },
     {
       "dataset_id": "gqa",
@@ -350,6 +410,16 @@
       "scope": "All native CSV-indexed train/test rows in MNIST_train, MNIST_test, FashionMnist_train, FashionMnist_test, IllusionAnimals_train, IllusionAnimals_test, IllusionChar_train, IllusionChar_test. Each example keeps all released image conditions and their condition-specific targets. Missing training control counterparts are explicit. Unindexed duplicate-name image files and generation prompt pools are retained upstream, not counted as annotated examples. This is the original author-generated dataset, not Atlas-generated replacements.",
       "plan_id": "3c6eaab517eb3497b8e31a04cd514f441f9fc0078daba89a9743b595f7e71d25",
       "prepared_receipt": "work/prepared/illusoryvqa/3c6eaab517eb3497b8e31a04cd514f441f9fc0078daba89a9743b595f7e71d25/receipt.json"
+    },
+    {
+      "dataset_id": "jiechieu-tsopze-resume-corpus",
+      "release": "24de39957d99caf2c89cf384ba2396bafe16050d",
+      "snapshot_id": "jiechieu-tsopze-resume-corpus-ecd3403084c8be2481293438",
+      "records": 29783,
+      "preview_records": 100,
+      "scope": "All 29783 exact .txt/.lab pairs in the native resumes_corpus.zip, preserving original text, raw labels, category lists and member SHA-256 values. The flat export, occupation normalization and skills files remain original source artifacts, without guessing undocumented joins. No public redistribution approval.",
+      "plan_id": "ecd3403084c8be24812934381716a87795e73f19dbecec418cf2c1335e41ea94",
+      "prepared_receipt": "work/prepared/jiechieu-tsopze-resume-corpus/ecd3403084c8be24812934381716a87795e73f19dbecec418cf2c1335e41ea94/receipt.json"
     },
     {
       "dataset_id": "llava-instruct-150k-3a74a703",
@@ -532,6 +602,26 @@
       "prepared_receipt": "work/prepared/ravel/17f66185e65ba33d01ed27661cb363c2f922dc6261ee9a9cd87b15f4553789a6/receipt.json"
     },
     {
+      "dataset_id": "sad",
+      "release": "dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3",
+      "snapshot_id": "sad-e00d59eacc1a244e4ca086c6",
+      "records": 127176,
+      "preview_records": 100,
+      "scope": "All 127173 native samples plus three native trial records across the 13 published structs.zip archives at the pinned author revision. These are native templates/definitions, including repeated task variants, not a claim of 127176 distinct rendered benchmark questions. Non-batch template context remains in original archives. Procedural benchmark execution and cached model results are outside this source-browser scope. No plaintext questions or answers may be committed or published.",
+      "plan_id": "e00d59eacc1a244e4ca086c65806888d358d44f8a1db883f198b06a0466666a0",
+      "prepared_receipt": "work/prepared/sad/e00d59eacc1a244e4ca086c65806888d358d44f8a1db883f198b06a0466666a0/receipt.json"
+    },
+    {
+      "dataset_id": "scienceqa-img",
+      "release": "f18b0a70359ebfb41f658fd564208d0355b013f4",
+      "snapshot_id": "scienceqa-img-aed103e93ef820d316b1224c",
+      "records": 10332,
+      "preview_records": 100,
+      "scope": "All 10332 image-bearing questions selected from the 21208-question author-linked ScienceQA Hugging Face release, with all three native splits preserved by source filename. Available representation, not a claim about an unpinned evaluation-only paper selection.",
+      "plan_id": "aed103e93ef820d316b1224c93edb571a9e120a6b1ef9bce5e7d6d3478119b1b",
+      "prepared_receipt": "work/prepared/scienceqa-img/aed103e93ef820d316b1224c93edb571a9e120a6b1ef9bce5e7d6d3478119b1b/receipt.json"
+    },
+    {
       "dataset_id": "senator-tweets-2021",
       "release": "9e85227220f34246003bdde92d4c2151106d21f6",
       "snapshot_id": "senator-tweets-2021-47e5564df91d1cbbb471a9ee",
@@ -612,6 +702,16 @@
       "prepared_receipt": "work/prepared/t2i-compbench/d1f9d5f40314f250a816be9c06cef680099b7bdc37648692907214e6d4546d6a/receipt.json"
     },
     {
+      "dataset_id": "textvqa-x",
+      "release": "textvqa-x-493ee9629208ff6fabf1ce0bc9cb5be0559a8ca6",
+      "snapshot_id": "textvqa-x-6e43a204a178d5abf77cbc26",
+      "records": 18096,
+      "preview_records": 100,
+      "scope": "All 14476 training and 3620 validation IDs in the author release; every textual explanation, token list and native boolean mask retained. Original TextVQA image bytes fetched on request; no paper-specific evaluation reconstruction is inferred.",
+      "plan_id": "6e43a204a178d5abf77cbc260a220a39ab8a1ad375ce8c970ebb0d1e4895c86c",
+      "prepared_receipt": "work/prepared/textvqa-x/6e43a204a178d5abf77cbc260a220a39ab8a1ad375ce8c970ebb0d1e4895c86c/receipt.json"
+    },
+    {
       "dataset_id": "textvqa",
       "release": "textvqa-0.5.1-all-splits",
       "snapshot_id": "textvqa-5f9d0955c9a06956601ea622",
@@ -630,6 +730,26 @@
       "scope": "All native TweetEval Parquet configurations and train/validation/test splits. Task groups and numeric label definitions differ; retain per-file Hugging Face ClassLabel metadata.",
       "plan_id": "7ac11a6c7e256513df066eff360bc9f94675cde4c76fc87d36adbb0bf63c192c",
       "prepared_receipt": "work/prepared/tweeteval/7ac11a6c7e256513df066eff360bc9f94675cde4c76fc87d36adbb0bf63c192c/receipt.json"
+    },
+    {
+      "dataset_id": "vg-qa-one",
+      "release": "pathways-470944b3f6b44901a9055cf8d91aef18cee21671",
+      "snapshot_id": "vg-qa-one-f572207512f2f00015071b0b",
+      "records": 1160,
+      "preview_records": 100,
+      "scope": "All 1160 rows of vg_qa_one under the pinned author transformation. VG two-object unknown-preposition rows are excluded exactly as in the author script. This available reconstruction does not assert the historical paper-used revision or repeat the upstream RGB re-encoding.",
+      "plan_id": "f572207512f2f00015071b0b5e4d3156a9fde07371cd3282809686f1a02dbd61",
+      "prepared_receipt": "work/prepared/vg-qa-one/f572207512f2f00015071b0b5e4d3156a9fde07371cd3282809686f1a02dbd61/receipt.json"
+    },
+    {
+      "dataset_id": "vg-qa-two",
+      "release": "pathways-470944b3f6b44901a9055cf8d91aef18cee21671",
+      "snapshot_id": "vg-qa-two-b140c3bfe0075e77bed1b5db",
+      "records": 288,
+      "preview_records": 100,
+      "scope": "All 288 rows of vg_qa_two under the pinned author transformation. VG two-object unknown-preposition rows are excluded exactly as in the author script. This available reconstruction does not assert the historical paper-used revision or repeat the upstream RGB re-encoding.",
+      "plan_id": "b140c3bfe0075e77bed1b5db226c9b6ba3199b35c229b61ba858ba73f89b2c8c",
+      "prepared_receipt": "work/prepared/vg-qa-two/b140c3bfe0075e77bed1b5db226c9b6ba3199b35c229b61ba858ba73f89b2c8c/receipt.json"
     },
     {
       "dataset_id": "visual-genome",
@@ -693,9 +813,9 @@
     }
   ],
   "catalogue_entries": 333,
-  "with_previews": 131,
-  "without_previews": 202,
-  "full_population_indices": 126,
+  "with_previews": 143,
+  "without_previews": 190,
+  "full_population_indices": 138,
   "all_requested_datasets_complete": false,
   "note": "Acquired source populations and on-demand infrastructure; catalogue-wide coverage is not complete."
 }

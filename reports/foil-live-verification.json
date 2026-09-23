@@ -1,0 +1,976 @@
+{
+  "checked_at": "2026-09-23T09:57:38.954363+00:00",
+  "status": "passed",
+  "dataset_id": "foil-it",
+  "snapshot_id": "foil-it-1f1ff6c245f34f5a6b1444d1",
+  "full_population_count": 594536,
+  "split_counts": {
+    "train": 395576,
+    "test": 198960
+  },
+  "all_native_annotations_and_image_joins_exact": true,
+  "original_preview_images_decoded": 100,
+  "late_original_images_decoded": 3,
+  "sampling": {
+    "method": "sha256_bottom_k_primary_asset",
+    "seed": 0,
+    "unit": "example",
+    "grouping": "primary asset ID; example ID for records without assets",
+    "population": "complete pinned indexed population",
+    "population_count": 594536,
+    "requested_count": 100,
+    "returned_count": 100,
+    "source_revision": "foil-v1.0-author-oct2018-release",
+    "media_representation": "original",
+    "selection_note": "One hash-ranked example per sampled primary asset. All linked assets remain. Not an example-prevalence estimate."
+  },
+  "source_files": [
+    {
+      "split": "train",
+      "url": "https://www.dropbox.com/scl/fi/kwwsbc4vx6fx4jozdo4dl/foilv1.0_train_2017.json?rlkey=f1wne2madqz04pf8dkztbkpgy&dl=1",
+      "path": "work/sources/foil-it/train.json",
+      "bytes": 86553565,
+      "sha256": "1690461a554a54e9be343d34c4ef4cd2655913605dc4da8fea0a8505678745a8",
+      "images": 65697,
+      "annotations": 395576
+    },
+    {
+      "split": "test",
+      "url": "https://www.dropbox.com/s/u4ntgo73szg6yai/foilv1.0_test_2017.json?dl=1",
+      "path": "work/sources/foil-it/test.json",
+      "bytes": 45080997,
+      "sha256": "7b37ab2a4e3dc911d006d5941919245c47d1e67d2ee29b4f7a87d5ecc9284642",
+      "images": 32150,
+      "annotations": 198960
+    }
+  ],
+  "checks": [
+    {
+      "record_id": "foil-it:example:eb390fe0f2eee27a1dd27863",
+      "sha256": "b86fcd1800e72a1db3e933a457ef9480ecde4dc00821d0f7597a5d296652729a",
+      "bytes": 95010,
+      "dimensions": [
+        430,
+        500
+      ]
+    },
+    {
+      "record_id": "foil-it:example:6de6d67135f5fab915f52b9f",
+      "sha256": "416be94c7e4c64fb71f6d4ea98857b2cd8871d4667828bdd14e64b52e2003c4a",
+      "bytes": 142598,
+      "dimensions": [
+        640,
+        400
+      ]
+    },
+    {
+      "record_id": "foil-it:example:9a7da7e35dae8b0d0f4040bd",
+      "sha256": "7346c1b1591a645c7eb5cc160dffa984ed9cab95ea0f8c96026f088b17467837",
+      "bytes": 167941,
+      "dimensions": [
+        640,
+        426
+      ]
+    },
+    {
+      "record_id": "foil-it:example:50de4358179fcf54f045c044",
+      "sha256": "e576cb6a0bdab55c293517240b0661e2f671286b8ccc2dd6462946d66dc5ac02",
+      "bytes": 96502,
+      "dimensions": [
+        640,
+        427
+      ]
+    },
+    {
+      "record_id": "foil-it:example:7399bf1d113fe2a476dc9bf0",
+      "sha256": "0d35318149fb9b58a066b8d97808d14dd8c381725e8ed39cce77d7eb6bfa1839",
+      "bytes": 95717,
+      "dimensions": [
+        500,
+        375
+      ]
+    },
+    {
+      "record_id": "foil-it:example:046e27fc7e88553fde81f96e",
+      "sha256": "a1ac66a6343287aa1d0f564a7734c6659850aa1106b62b71386c154c92720230",
+      "bytes": 155344,
+      "dimensions": [
+        427,
+        640
+      ]
+    },
+    {
+      "record_id": "foil-it:example:38ab2536e2eb0d28b400a800",
+      "sha256": "f586060822ec16583431b8dffae4bf434a397424d8f0beb1a2d567feb28193ee",
+      "bytes": 102261,
+      "dimensions": [
+        500,
+        375
+      ]
+    },
+    {
+      "record_id": "foil-it:example:e6b945d76762ed4f4cd70b81",
+      "sha256": "720182d6eb855770105c80aad87a1d4e874c2932bbbf2140ca38605ece8646e1",
+      "bytes": 272565,
+      "dimensions": [
+        427,
+        640
+      ]
+    },
+    {
+      "record_id": "foil-it:example:2b45cf5a89851c07efaa4048",
+      "sha256": "1deee53f12fbfeb0ba7ab30ec77b9734b5bf307bef256820b424a99802d62a89",
+      "bytes": 334058,
+      "dimensions": [
+        428,
+        640
+      ]
+    },
+    {
+      "record_id": "foil-it:example:dbbc1064db514073a688fddf",
+      "sha256": "44b96db429f8927157132dd5e08b1af99f3f598ee7f1e9e7fcbdbf233f1f8e72",
+      "bytes": 125167,
+      "dimensions": [
+        640,
+        427
+      ]
+    },
+    {
+      "record_id": "foil-it:example:affa40c5712d147f05c2af83",
+      "sha256": "2a10de781dd2dbdce5cc4fc674e51aad328bdf0abb72124495b71c2f4c4cbb26",
+      "bytes": 248037,
+      "dimensions": [
+        640,
+        480
+      ]
+    },
+    {
+      "record_id": "foil-it:example:f940c71d109dd759fb93e032",
+      "sha256": "ef1b61b35ac3aa2af9d9cdb01f52ac79703a5ad0f0fbe036d6aecb94c07c212f",
+      "bytes": 276623,
+      "dimensions": [
+        640,
+        480
+      ]
+    },
+    {
+      "record_id": "foil-it:example:d5d2dbc10271eb6c29012d73",
+      "sha256": "38ff1299b79dd1d28d8f527be0cac7d680733e39f19ebe3ac9ed6b1490bc149f",
+      "bytes": 97381,
+      "dimensions": [
+        640,
+        480
+      ]
+    },
+    {
+      "record_id": "foil-it:example:efc689cb922887831f0c88ab",
+      "sha256": "4d9c3d0dc59a5672c450ab1df69fe4f1f93d56db9792215d05e943a18f434b8c",
+      "bytes": 141480,
+      "dimensions": [
+        612,
+        612
+      ]
+    },
+    {
+      "record_id": "foil-it:example:452a5bdc6da1f6164ec37cda",
+      "sha256": "c248cfe9ecc802c4376ae5008f70940c39f6e1428c2759052338e2afab8b82db",
+      "bytes": 151985,
+      "dimensions": [
+        640,
+        640
+      ]
+    },
+    {
+      "record_id": "foil-it:example:f685187596bc22a903e07ad9",
+      "sha256": "0f1f8f4a0ce660506e80acf6db4e98eba5d6b185a55f17afb0842d2d2623e1b5",
+      "bytes": 174730,
+      "dimensions": [
+        640,
+        480
+      ]
+    },
+    {
+      "record_id": "foil-it:example:4d93e9974dbf4369af74f149",
+      "sha256": "4307a13bf9da55fd849b79b9eb49cf09f7d1a1cccb8b41ade54f8f8f874f8a0e",
+      "bytes": 248131,
+      "dimensions": [
+        640,
+        480
+      ]
+    },
+    {
+      "record_id": "foil-it:example:b407de6fcabaa2751b099b9c",
+      "sha256": "7fb6277b3162a717b3332901eb975964475f9f162b25294cd0302e65ee887241",
+      "bytes": 68522,
+      "dimensions": [
+        500,
+        342
+      ]
+    },
+    {
+      "record_id": "foil-it:example:a20acd190f35eebc381fcd3f",
+      "sha256": "53e584bc6e006c42221e225ae3152134e3ee1193cab01c72d5307cc5fbbf8e01",
+      "bytes": 240564,
+      "dimensions": [
+        640,
+        427
+      ]
+    },
+    {
+      "record_id": "foil-it:example:a5449ed47b621a96718f225b",
+      "sha256": "e1885174d49df7a26e3fa2f4ae7c6e7d1f2d893e6fa13de6e2f9815f38013b3c",
+      "bytes": 67127,
+      "dimensions": [
+        640,
+        427
+      ]
+    },
+    {
+      "record_id": "foil-it:example:f325c8f81ebe5f7ebe9f166b",
+      "sha256": "cc6ab7ec5546c7639dca73166167ee35e1fb1be2076dd55729042a3d0c73a061",
+      "bytes": 106868,
+      "dimensions": [
+        375,
+        500
+      ]
+    },
+    {
+      "record_id": "foil-it:example:b56820dccd1eee99c150ac7a",
+      "sha256": "0acc024d0d44e23e1f7de25748b7839e3d238285573a01ff010ccf7a0ad423e5",
+      "bytes": 187806,
+      "dimensions": [
+        640,
+        468
+      ]
+    },
+    {
+      "record_id": "foil-it:example:68be9d9b01c0b1503e8628d0",
+      "sha256": "7412739af5c18d1bbd9a0698c89bbaa4cf8e5dc5d3cd219db48f1c5fbc8b6194",
+      "bytes": 196429,
+      "dimensions": [
+        640,
+        424
+      ]
+    },
+    {
+      "record_id": "foil-it:example:7cfd0e4f305d6fc679faeafc",
+      "sha256": "7ade6ec85fa5c00bcf796ae32a2b019b680d14aca71e425ca668907646ea41c4",
+      "bytes": 179980,
+      "dimensions": [
+        640,
+        426
+      ]
+    },
+    {
+      "record_id": "foil-it:example:668433d9a2b890a2aa027509",
+      "sha256": "0144eced8cee30e05e9b67b61b7cd09132fa96971f5a04775534c7d9d78bb652",
+      "bytes": 93112,
+      "dimensions": [
+        640,
+        426
+      ]
+    },
+    {
+      "record_id": "foil-it:example:bfdaae507fc50c21f450775e",
+      "sha256": "f3657209cdb1eae86715c7bf605b55e2ac6cef81cfd3bdc497774b544f3ae93a",
+      "bytes": 266053,
+      "dimensions": [
+        426,
+        640
+      ]
+    },
+    {
+      "record_id": "foil-it:example:ae2b41686d3d18383faa8a67",
+      "sha256": "bb533f839a40d7ba5430d9abfe62ea14f8f905fb3154735e409bc94bf74f2fd1",
+      "bytes": 113446,
+      "dimensions": [
+        640,
+        429
+      ]
+    },
+    {
+      "record_id": "foil-it:example:c1e445e9e442810f4a1adfde",
+      "sha256": "956629d6a84da4ac4b25ebc00b9cace5010ee47cf44896957fae75c269b8ed18",
+      "bytes": 156520,
+      "dimensions": [
+        640,
+        480
+      ]
+    },
+    {
+      "record_id": "foil-it:example:f41c344968702002a35d883b",
+      "sha256": "0f04ca1a44504c5ee61c4a504ce014a39e281f96bfab5b03361932226369c085",
+      "bytes": 157440,
+      "dimensions": [
+        640,
+        360
+      ]
+    },
+    {
+      "record_id": "foil-it:example:27ba11c2e7acabae902dba00",
+      "sha256": "c4ba2474f6961fdd1902d2e35c136b0065e931f6449823a830cd8b1a0f1be48c",
+      "bytes": 196851,
+      "dimensions": [
+        640,
+        513
+      ]
+    },
+    {
+      "record_id": "foil-it:example:325d329eeb25e0e8f7f32e07",
+      "sha256": "fc7273b300e9cfed9836cb9e63ee4f615b390df8ded8cf2fded25f3c5479cbcf",
+      "bytes": 117634,
+      "dimensions": [
+        640,
+        469
+      ]
+    },
+    {
+      "record_id": "foil-it:example:1f97c14e25a0faa17711c0c7",
+      "sha256": "714f88811a67dd089d1681d60afc6a3474ed97fadd25b83b195027a961703a37",
+      "bytes": 267732,
+      "dimensions": [
+        640,
+        426
+      ]
+    },
+    {
+      "record_id": "foil-it:example:91c6aa5b615499b994eda3cb",
+      "sha256": "ee49ced0e62cb6104155b312f3d24b1a29e3494c6487fe3b4469e1554881aa15",
+      "bytes": 116441,
+      "dimensions": [
+        640,
+        403
+      ]
+    },
+    {
+      "record_id": "foil-it:example:aa58158099baa5ff53799e11",
+      "sha256": "af6edcda0b5ee8285138ec79a069906867c016c4933d446dd76d660b48754a55",
+      "bytes": 245904,
+      "dimensions": [
+        401,
+        640
+      ]
+    },
+    {
+      "record_id": "foil-it:example:d54c89cd02948fb48fee519c",
+      "sha256": "df2b41b0b8d125e1c1203218eb9a4bbb7319248669aaa1fba7b5d74a0b3efe75",
+      "bytes": 251191,
+      "dimensions": [
+        640,
+        480
+      ]
+    },
+    {
+      "record_id": "foil-it:example:2fa7e052355b804dd40ef9da",
+      "sha256": "293c48a45f4df31c77143a0ef9245fafc6a68d6b14c3762cb62d984c2be836e6",
+      "bytes": 212053,
+      "dimensions": [
+        640,
+        480
+      ]
+    },
+    {
+      "record_id": "foil-it:example:19964882bc6dad716902e1e3",
+      "sha256": "cd794df28ffbc7f6b6ec836f90a68e302ccc1674c36faa4fcd6ee3d83d750f2c",
+      "bytes": 186017,
+      "dimensions": [
+        640,
+        427
+      ]
+    },
+    {
+      "record_id": "foil-it:example:9c3b3614cd850354ce57ead0",
+      "sha256": "27723f3e3f8f22dca18fd9f3bea378ab08c51861b923dba5b9a36f063e7382a7",
+      "bytes": 114369,
+      "dimensions": [
+        640,
+        429
+      ]
+    },
+    {
+      "record_id": "foil-it:example:7378a831dab2907195cb441d",
+      "sha256": "5349be150c2d7e247d150a6873f1f22b839b1296c88e44a17dce49155f8cee5c",
+      "bytes": 100328,
+      "dimensions": [
+        426,
+        640
+      ]
+    },
+    {
+      "record_id": "foil-it:example:9e2dfc973e848612eb4f86d3",
+      "sha256": "bc44f3a5a79f1a42f07fd678136b7d28eef9119bb814b73628b9cfef41eba327",
+      "bytes": 220295,
+      "dimensions": [
+        640,
+        478
+      ]
+    },
+    {
+      "record_id": "foil-it:example:1ba03d8f829fad1205590101",
+      "sha256": "7a847439d18118284091aef16b7f0fed832316920098e57e8c6562604512122d",
+      "bytes": 121033,
+      "dimensions": [
+        427,
+        640
+      ]
+    },
+    {
+      "record_id": "foil-it:example:e2da94fa7642a759ee332815",
+      "sha256": "a80a8d304d78d815ff11465946c2762142cee856533089ff338cec843120c658",
+      "bytes": 170094,
+      "dimensions": [
+        596,
+        640
+      ]
+    },
+    {
+      "record_id": "foil-it:example:52cde15852566975365cea23",
+      "sha256": "fd9e16dad5a2e6458effa686257255abfc7ecae925dc582b6715f18c1762be32",
+      "bytes": 162106,
+      "dimensions": [
+        640,
+        424
+      ]
+    },
+    {
+      "record_id": "foil-it:example:05f04b193fe36655fdad67bc",
+      "sha256": "cd6233434b150bfc76a7e07990d094e3043d207d1b5d7c598ffaf98a2b96187e",
+      "bytes": 121593,
+      "dimensions": [
+        640,
+        426
+      ]
+    },
+    {
+      "record_id": "foil-it:example:a83a7544a920f91f667ad94c",
+      "sha256": "e334ca98706ad24bb575a5d1658916df66593996dca82be9bce79b6aecf22f9e",
+      "bytes": 223574,
+      "dimensions": [
+        640,
+        448
+      ]
+    },
+    {
+      "record_id": "foil-it:example:5cb5c03617270a4816a04dcc",
+      "sha256": "2a5a4461a02216836354082e09400b735c841cc157acddf404ae2de1d81aca88",
+      "bytes": 172184,
+      "dimensions": [
+        640,
+        480
+      ]
+    },
+    {
+      "record_id": "foil-it:example:71003c16b3b9e2a064e1f708",
+      "sha256": "cf9e2e56c48cc26ac005c6c6729f8f5196a117045a4486e8641a3af7083d6dfd",
+      "bytes": 124597,
+      "dimensions": [
+        480,
+        640
+      ]
+    },
+    {
+      "record_id": "foil-it:example:41a2b1c734b8840b8d4fe23c",
+      "sha256": "40168f599d7b29c45edc96208321931955862bc242ab349f39a93e94d16f8aae",
+      "bytes": 99490,
+      "dimensions": [
+        427,
+        640
+      ]
+    },
+    {
+      "record_id": "foil-it:example:a8fa382833b2592a6a018f0e",
+      "sha256": "133fdb5a74459aa85450d788f4abfcf41b3962ad4b9ccb33fd5c9248e05a9c3c",
+      "bytes": 80100,
+      "dimensions": [
+        640,
+        316
+      ]
+    },
+    {
+      "record_id": "foil-it:example:ed35f4641b2192077118ac45",
+      "sha256": "831a5b5f80f3b7dcf7f6777b105faad0d222fffe469e6e1bc3167c6ab5d007a5",
+      "bytes": 152612,
+      "dimensions": [
+        500,
+        375
+      ]
+    },
+    {
+      "record_id": "foil-it:example:db95c4aaca7aefe5a83b5e33",
+      "sha256": "aa57ad6b6cbacd08be9b4d993c21bfa64e94f54029ae0f5dd933a967cc3389f2",
+      "bytes": 183592,
+      "dimensions": [
+        640,
+        427
+      ]
+    },
+    {
+      "record_id": "foil-it:example:823c591d3429a7b08b77e1aa",
+      "sha256": "cb96d4d4924c78451e37615ca4d13457cedc8a0652b6742c16470865247efb86",
+      "bytes": 86392,
+      "dimensions": [
+        500,
+        375
+      ]
+    },
+    {
+      "record_id": "foil-it:example:0eaf136bbf0785a445365986",
+      "sha256": "9174861e0a7ceb5281bfa32dd7c9a1f35ce9dc9bbfd269d22038691df83d3f2e",
+      "bytes": 167196,
+      "dimensions": [
+        640,
+        427
+      ]
+    },
+    {
+      "record_id": "foil-it:example:93e6481b74612153ce439d0c",
+      "sha256": "9c61a2feb27a15c4b9c9ccadbda6fdc0f433ce6956a1c16f4b95ccdb812b1288",
+      "bytes": 167030,
+      "dimensions": [
+        640,
+        424
+      ]
+    },
+    {
+      "record_id": "foil-it:example:933cccfa043376b06aaa6c48",
+      "sha256": "cfbe3cc2ae6bf029adbc2277af7f6f830de1708467f61e0360085dc4471c7094",
+      "bytes": 122252,
+      "dimensions": [
+        640,
+        417
+      ]
+    },
+    {
+      "record_id": "foil-it:example:16f84743ff25c6655d03f508",
+      "sha256": "2a56161ba06eef20a6526a6d71fceedfe58f417fa37652cc3203df07f5cfc517",
+      "bytes": 102905,
+      "dimensions": [
+        640,
+        480
+      ]
+    },
+    {
+      "record_id": "foil-it:example:d3a7a8b27bf876ed0bcf7085",
+      "sha256": "d3af6b66b82dd0decfa70357ecb5d4634b742ae6f29a2c88b427a91a30658e47",
+      "bytes": 182112,
+      "dimensions": [
+        438,
+        640
+      ]
+    },
+    {
+      "record_id": "foil-it:example:508545c87bd96e40e3fa500c",
+      "sha256": "b354d8a6ea28277549ddd64d4a6897da2bf91655d7a6e29a02447c912c79e763",
+      "bytes": 237776,
+      "dimensions": [
+        640,
+        428
+      ]
+    },
+    {
+      "record_id": "foil-it:example:69a32e7fab70f7002d570af9",
+      "sha256": "d07bfad45d62c696df9d49c8a3706561bfcb9de5529e49f2e958e2fe776120ab",
+      "bytes": 98088,
+      "dimensions": [
+        640,
+        288
+      ]
+    },
+    {
+      "record_id": "foil-it:example:49b291322421962c9c777944",
+      "sha256": "357bff480f2323a85c8b6877e4c3057821063108dcf9433839308c02828487cc",
+      "bytes": 85786,
+      "dimensions": [
+        640,
+        426
+      ]
+    },
+    {
+      "record_id": "foil-it:example:5c628ed14fa7caee4a8b47a8",
+      "sha256": "2a8ce2b0e69cc4cccb09fedc890fc6a369df14183aeef43a817186784b81ae54",
+      "bytes": 151491,
+      "dimensions": [
+        480,
+        640
+      ]
+    },
+    {
+      "record_id": "foil-it:example:df2ad7fb0ec304dbb4f41b34",
+      "sha256": "fad3ba6dff3a1186761398aade04b93f643fd097aa3800f31671bfd39efa3831",
+      "bytes": 23029,
+      "dimensions": [
+        350,
+        215
+      ]
+    },
+    {
+      "record_id": "foil-it:example:b8013e04ac0a80f549bfb9a8",
+      "sha256": "b29088daf73a28a219547e5a4ec0235496e31ba4c5af9abfa9ce61d41ce17ec5",
+      "bytes": 112903,
+      "dimensions": [
+        500,
+        333
+      ]
+    },
+    {
+      "record_id": "foil-it:example:f76dbf4fd5f9940449721cb3",
+      "sha256": "40f5bef3927c26fbc566e5e0efec3377175a246afddb638964722d1e1d693ebc",
+      "bytes": 125752,
+      "dimensions": [
+        640,
+        433
+      ]
+    },
+    {
+      "record_id": "foil-it:example:8a9d3d8062cf7d4d143d6043",
+      "sha256": "07c2e6324b92667a11c98bac17965c7b9889a5eaba0a5115e31e5a762b4e1df9",
+      "bytes": 215588,
+      "dimensions": [
+        480,
+        640
+      ]
+    },
+    {
+      "record_id": "foil-it:example:86de6d5fc825cf46741851c1",
+      "sha256": "735ed21e13a62cc1dfc433fb741aab09734b2eb3062a1909d3b5ba2b673093bd",
+      "bytes": 123612,
+      "dimensions": [
+        640,
+        480
+      ]
+    },
+    {
+      "record_id": "foil-it:example:5a20c6d39cf668667d7b13cf",
+      "sha256": "80d30fd39e9a90816e3de65eb0917244a384bf1c0b49d66f96544faa0dff63b0",
+      "bytes": 171003,
+      "dimensions": [
+        612,
+        612
+      ]
+    },
+    {
+      "record_id": "foil-it:example:0d818f41613ed512cc6db1bb",
+      "sha256": "ff0a0b38e44826ed08db2f9711e9e073d48b12ce72d21f8a5de3d786399edbd7",
+      "bytes": 153217,
+      "dimensions": [
+        640,
+        429
+      ]
+    },
+    {
+      "record_id": "foil-it:example:ea65e807fda4ce50c4a98535",
+      "sha256": "9bfb3322ed533ff95e7a6c294aca9f166b8e38192d0c05f95941e913dcdf7078",
+      "bytes": 183336,
+      "dimensions": [
+        513,
+        640
+      ]
+    },
+    {
+      "record_id": "foil-it:example:667d623d6d5c5a8a3f40e072",
+      "sha256": "558fa326f5a4ee566afec88dc0b3c2fa52f726bc1450dc3040ebd41cddf13976",
+      "bytes": 206975,
+      "dimensions": [
+        640,
+        425
+      ]
+    },
+    {
+      "record_id": "foil-it:example:97b9a444e02e0fbd1473cb4c",
+      "sha256": "dbd5e3befd51ebb40f2fb9201584df1b69c5c84b432c2fc1bb77260dac72f0c2",
+      "bytes": 182586,
+      "dimensions": [
+        500,
+        443
+      ]
+    },
+    {
+      "record_id": "foil-it:example:c4eaeb27c43ee3ed87e8ca33",
+      "sha256": "78afcce346a56a9a61a76f47a0ff0ffbe391cdddd51a8384ac7538249ccf9df3",
+      "bytes": 172808,
+      "dimensions": [
+        427,
+        640
+      ]
+    },
+    {
+      "record_id": "foil-it:example:c995e2c05d8c43863628c287",
+      "sha256": "2f7941c048d446780da5c25e17e9ea0d30f42fe33b9c3be444c0ca7fca836f6d",
+      "bytes": 94986,
+      "dimensions": [
+        500,
+        375
+      ]
+    },
+    {
+      "record_id": "foil-it:example:e5f98b9dd1ffcb51c5b63148",
+      "sha256": "62445accb3d4f346e6556a8bccd15aaa7577db4d3d665bf0bb5ee884424efdea",
+      "bytes": 108805,
+      "dimensions": [
+        308,
+        462
+      ]
+    },
+    {
+      "record_id": "foil-it:example:4eb04d6913a0d29d30717299",
+      "sha256": "1efbe45ffaee60b79d8971be9d4daa0276a999cfb8336ad208c1c88f161f9909",
+      "bytes": 189864,
+      "dimensions": [
+        640,
+        480
+      ]
+    },
+    {
+      "record_id": "foil-it:example:0c741cf1a76141c235b2b8dc",
+      "sha256": "5a4e28405eadfe063f8e237619ae34a2dd1098b747b2eb31e42e6f817d2dab0a",
+      "bytes": 197299,
+      "dimensions": [
+        640,
+        426
+      ]
+    },
+    {
+      "record_id": "foil-it:example:8fb863df2a63efadd605a4b6",
+      "sha256": "8d686bb7e30f8a1633aca34b655fbbdafb1c0a2120d85892bff94d833e0ab4ed",
+      "bytes": 305477,
+      "dimensions": [
+        640,
+        480
+      ]
+    },
+    {
+      "record_id": "foil-it:example:2e054abdacd4594151ace16b",
+      "sha256": "886f530f5431029d641303cbe7e41b63c419c620ab5e1e2b7ae2f1b0c8112a1d",
+      "bytes": 279718,
+      "dimensions": [
+        640,
+        431
+      ]
+    },
+    {
+      "record_id": "foil-it:example:5134e97bcbbdd9413c843aa0",
+      "sha256": "4075c5c70a6f7f762f3284610801cb49ff8e7c2e5b33c0d5e3ce2864c5cd26a5",
+      "bytes": 156084,
+      "dimensions": [
+        640,
+        480
+      ]
+    },
+    {
+      "record_id": "foil-it:example:c09cc07c669f48aece30daa4",
+      "sha256": "da0dc5b7e46622f50d6aeed4d7d677e64b0a1fe2b23439c51d1e8cb82ae115c5",
+      "bytes": 95309,
+      "dimensions": [
+        640,
+        400
+      ]
+    },
+    {
+      "record_id": "foil-it:example:57baa9d26c1679df634a6f11",
+      "sha256": "a5574b4492ae0a848ccadb2442adec19806956d11c23e52805ffa580c87ad022",
+      "bytes": 211731,
+      "dimensions": [
+        426,
+        640
+      ]
+    },
+    {
+      "record_id": "foil-it:example:7ac0b289bde4e23586a02735",
+      "sha256": "ba526e414cfe3e6bfd0a36c7224d0500108b6f7e9a0823a7ca009e4327c202db",
+      "bytes": 132010,
+      "dimensions": [
+        640,
+        480
+      ]
+    },
+    {
+      "record_id": "foil-it:example:458500d3404c1e2070e5dfbd",
+      "sha256": "b0dbdfe1d0cdfe50e625a8eb309fd7b1235ea6c1664ccb828e763c6a84db9e54",
+      "bytes": 100546,
+      "dimensions": [
+        640,
+        426
+      ]
+    },
+    {
+      "record_id": "foil-it:example:d64e17fa7488f8624a029899",
+      "sha256": "8982b2ed2da3c55a2955c0098dd8eff5ba86802fb01e1caedc43c3ccbbd26740",
+      "bytes": 178611,
+      "dimensions": [
+        640,
+        398
+      ]
+    },
+    {
+      "record_id": "foil-it:example:f715b695e9f54337cf9ee931",
+      "sha256": "4014217304975be074e8bd489320f8b5a200dfa9b2f0ce4edaf22baaa984a9da",
+      "bytes": 300459,
+      "dimensions": [
+        574,
+        640
+      ]
+    },
+    {
+      "record_id": "foil-it:example:38aeb6894ba9ac1baf3087a6",
+      "sha256": "1fa021d1d3c35587abf01c0ad8735b42e7823ad271f9cfb10af122cb15d2d62f",
+      "bytes": 186943,
+      "dimensions": [
+        500,
+        375
+      ]
+    },
+    {
+      "record_id": "foil-it:example:31284161fee01fa6ac773695",
+      "sha256": "88e24eea9b4cb340c00a6b5d52c58f617268a8867856fa7639474ec566b6a958",
+      "bytes": 128115,
+      "dimensions": [
+        640,
+        425
+      ]
+    },
+    {
+      "record_id": "foil-it:example:93a008933490f3d22ea8a2e1",
+      "sha256": "25292470c7abc0ed90ffc6a150c849321d7c8d6e3ffb92d20479980eaa18b9b6",
+      "bytes": 271837,
+      "dimensions": [
+        640,
+        480
+      ]
+    },
+    {
+      "record_id": "foil-it:example:f9b649ab7d5dd9519a006799",
+      "sha256": "423aea9ac5e18c247a13335f4292e2a11e6e59f667fc1b08a66f85fea6f067bb",
+      "bytes": 246620,
+      "dimensions": [
+        612,
+        612
+      ]
+    },
+    {
+      "record_id": "foil-it:example:3d8a69b336b044d7babee9cf",
+      "sha256": "226012dc01ffe3ecb57c116aa433974b21cba253f10a441640a01dbfb03cf7d3",
+      "bytes": 330710,
+      "dimensions": [
+        640,
+        480
+      ]
+    },
+    {
+      "record_id": "foil-it:example:81344865eb6a78dc367ff84d",
+      "sha256": "97dfc2a0ca1f991d1aeade7b73c86463121db0254d8734949857fa3bdd21f162",
+      "bytes": 271307,
+      "dimensions": [
+        640,
+        482
+      ]
+    },
+    {
+      "record_id": "foil-it:example:375f2aeaecf3489a1d144751",
+      "sha256": "f52a1f56f06a6c70f8e3976f5707708e44baaa906b889e949090d68aa43c6f89",
+      "bytes": 122752,
+      "dimensions": [
+        640,
+        448
+      ]
+    },
+    {
+      "record_id": "foil-it:example:a51091b8abb071a51c827050",
+      "sha256": "d3998c56c380a7e22455cd99bc940da1fe5eefd1f471ddb1316a351e81a9130e",
+      "bytes": 166237,
+      "dimensions": [
+        640,
+        480
+      ]
+    },
+    {
+      "record_id": "foil-it:example:73a3208610c4637bd265fe8e",
+      "sha256": "785078897cf92cd57d95a4353dfbf66fe2805c0e9cb15cdd8d740ffe5ebc5cf9",
+      "bytes": 234653,
+      "dimensions": [
+        640,
+        464
+      ]
+    },
+    {
+      "record_id": "foil-it:example:502eb7820b0829f578493931",
+      "sha256": "c0e297a53192d9ded99ea48a5bcc0081511c3696212954b54b75578a11f2d4d2",
+      "bytes": 92357,
+      "dimensions": [
+        640,
+        427
+      ]
+    },
+    {
+      "record_id": "foil-it:example:11cf388ca666e08a83442ab6",
+      "sha256": "b2bbc3012b7f879a6cc47e8d96d9d9fc37e4e7352b1cea4c079db4a9d5bb66fb",
+      "bytes": 139761,
+      "dimensions": [
+        427,
+        640
+      ]
+    },
+    {
+      "record_id": "foil-it:example:182639f84cf511c3140b2c01",
+      "sha256": "651d1aef1c32a55493378a698ddd61afd7db289567e644d030747ff7094bd7ab",
+      "bytes": 144233,
+      "dimensions": [
+        640,
+        424
+      ]
+    },
+    {
+      "record_id": "foil-it:example:ccb9dd21dc54675628066baf",
+      "sha256": "5e9b3b98e89bdb7872721a07a9391b25a63a4edc60521035e24c100d87bdd83b",
+      "bytes": 145497,
+      "dimensions": [
+        480,
+        640
+      ]
+    },
+    {
+      "record_id": "foil-it:example:1160e7be256a0ded6a7eebce",
+      "sha256": "201d0c3e5a66e2e94e03ce666f84ef350de7081b8fa6afef484b7a8ae389c590",
+      "bytes": 47394,
+      "dimensions": [
+        469,
+        469
+      ]
+    },
+    {
+      "record_id": "foil-it:example:4eed776ac3106e2e861a2030",
+      "sha256": "e63a2b11b5e63cba249d8ee0aa7f06bd1708a223135ab97206ac30323ba541f3",
+      "bytes": 331300,
+      "dimensions": [
+        640,
+        427
+      ]
+    },
+    {
+      "record_id": "foil-it:example:ffffffdcbe187481e7efe0c7",
+      "sha256": "0ec86b47c95c76251f1200aa97b3495d7eb69d496940ac41e932197acbf20cab",
+      "bytes": 148931,
+      "dimensions": [
+        435,
+        500
+      ]
+    },
+    {
+      "record_id": "foil-it:example:ffffa95357744e4433c7a1a5",
+      "sha256": "0d71a0798ee5ba23df14c60af0ee4b64da101f5a8d1952ef9fed1c5ba785c6b2",
+      "bytes": 197185,
+      "dimensions": [
+        640,
+        427
+      ]
+    },
+    {
+      "record_id": "foil-it:example:ffffa21f5a67793798bc45e4",
+      "sha256": "6d679663e24faeff5af7cf03bd5cdf6cb8647dc6ae4d8676e4a45a402af810cd",
+      "bytes": 200409,
+      "dimensions": [
+        640,
+        424
+      ]
+    }
+  ]
+}

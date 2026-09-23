@@ -2,33 +2,34 @@ schema_version: '1.0'
 id: scienceqa-img
 name: ScienceQA-IMG
 aliases: []
-description: Image-bearing subset of ScienceQA; distinct from the full multimodal
-  benchmark's text-only questions
+description: 'ScienceQA image-bearing population: all 10,332 questions with images across train, validation
+  and test, in the Hugging Face representation linked by the authors. Text-only questions are excluded.
+  Original question, answer, choices, lecture and solution fields are retained.'
 paper_ids:
 - paper-3e0db9c633ab204c
-release: unresolved
-adapter: structured
+release: f18b0a70359ebfb41f658fd564208d0355b013f4
+adapter: remote_columnar
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
-  access: unverified
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Source content and publication rights require dataset-specific review.
-  - Adapter and preview are not implemented.
+  - Public preview redistribution is not approved.
+  total_count: 10332
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://github.com/lupantech/ScienceQA/blob/2cbf8318e07b9ece895bb2ae605e71e38d623264/README.md
-  note: Author repository identifies dataset CC BY-NC-SA 4.0 and code MIT; check original
-    educational image rights and license obligations per public asset.
+  note: Author repository identifies dataset CC BY-NC-SA 4.0 and code MIT; check original educational
+    image rights and license obligations per public asset.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-8a290f31b3e54475db20
@@ -36,14 +37,12 @@ evidence:
   source_file_hash: d2750f355a25fcdcfcb221e5049a0aa41ec096b452772c73e1767e2d039a6545
   page: 8
   role: evaluation
-  excerpt: POPE Model Vision Encoder VQAv2(val) GQA VizWiz SciQA-IMG TextVQA (val)
-    MME
+  excerpt: POPE Model Vision Encoder VQAv2(val) GQA VizWiz SciQA-IMG TextVQA (val) MME
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://github.com/lupantech/ScienceQA/tree/2cbf8318e07b9ece895bb2ae605e71e38d623264
-  note: Image-bearing subset of ScienceQA; distinct from the full multimodal benchmark's
-    text-only questions
+  note: Image-bearing subset of ScienceQA; distinct from the full multimodal benchmark's text-only questions
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
@@ -55,17 +54,28 @@ evidence:
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_access
   url: https://github.com/lupantech/ScienceQA/tree/2cbf8318e07b9ece895bb2ae605e71e38d623264
-  note: Author repository provides problem JSON and image download script/links; data
-    acquisition not attempted in this audit.
+  note: Author repository provides problem JSON and image download script/links; data acquisition not
+    attempted in this audit.
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
   probe: official_page_read_download_unprobed
 - kind: source_audit_rights
   url: https://github.com/lupantech/ScienceQA/blob/2cbf8318e07b9ece895bb2ae605e71e38d623264/README.md
-  note: Author repository identifies dataset CC BY-NC-SA 4.0 and code MIT; check original
-    educational image rights and license obligations per public asset.
+  note: Author repository identifies dataset CC BY-NC-SA 4.0 and code MIT; check original educational
+    image rights and license obligations per public asset.
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
-source_url: https://github.com/lupantech/ScienceQA/tree/2cbf8318e07b9ece895bb2ae605e71e38d623264
+- kind: native_population_live_verification
+  url: https://huggingface.co/datasets/derek-thomas/ScienceQA/tree/f18b0a70359ebfb41f658fd564208d0355b013f4
+  checked_on: '2026-09-23'
+  receipt: reports/scienceqa-bios-live-verification.json
+  scope: All 10332 image-bearing questions selected from the 21208-question author-linked ScienceQA Hugging
+    Face release, with all three native splits preserved by source filename. Available representation,
+    not a claim about an unpinned evaluation-only paper selection.
+  source_identity_status: pinned_available_representation_not_paper_revision_claim
+source_url: https://huggingface.co/datasets/derek-thomas/ScienceQA/tree/f18b0a70359ebfb41f658fd564208d0355b013f4
+modalities:
+- image
+- text

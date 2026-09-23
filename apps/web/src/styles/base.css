@@ -2,7 +2,7 @@
 
 * { box-sizing: border-box; }
 html, body, #root { height: 100%; }
-body { margin: 0; min-width: 320px; background: var(--bg); color: var(--text); font-size: var(--fs-base); }
+body { margin: 0; min-width: 0; background: var(--bg); color: var(--text); font-size: var(--fs-base); }
 
 h1, h2, h3, h4, p, dl, dd, figure { margin: 0; }
 h1 { font-size: var(--fs-title); line-height: 1.18; letter-spacing: -.02em; font-weight: 640; }

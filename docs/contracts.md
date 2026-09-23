@@ -74,3 +74,9 @@ extra (`ijson`) into a bounded disk-backed join index. All source rows survive,
 including repeated paragraph rows and QA-region mappings without a released QA or
 region. Unjoined mappings are separate annotation records with no invented image.
 The derived join index is included in the preparation output budget and receipt.
+
+The Visual Genome join writer requires an explicit `join_index_path`; preparation
+workers place it inside their own version directory. Existing prepared derivatives
+remain readable without creating files beside original archives. Streaming joins
+check cancellation every 256 native rows, clean partial output after interruption,
+and reject a QA-to-region mapping when both IDs exist but refer to different images.

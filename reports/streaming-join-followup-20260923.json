@@ -1,0 +1,18 @@
+{
+  "scope": "Visual Genome streaming join follow-up to the 311-test native-release checkpoint",
+  "focused_python_tests": 23,
+  "new_regressions": [
+    "Cancellation removes partial join output and leaves original ZIP bytes unchanged",
+    "New joins require an explicit writable output path",
+    "An existing join obeys a reduced disk limit",
+    "QA and region IDs cannot silently join different images"
+  ],
+  "live_existing_version": {
+    "dataset_id": "visual-genome",
+    "records": 116367,
+    "last_record": "visual-genome:example:0b91870c28cc4674db221c21",
+    "last_record_status": "Native mapping: QA and region IDs absent from released annotation tables",
+    "last_record_media_count": 0
+  },
+  "no_source_reacquisition": true
+}

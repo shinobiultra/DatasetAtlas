@@ -34,7 +34,7 @@ def fixture(tmp_path, orphan_image=False):
         if name == 'qa_to_region_mapping': spec['region_mapping'] = True
         tables.append(spec)
         files.append(dict(path=str(path), sha256=hashlib.sha256(path.read_bytes()).hexdigest()))
-    config.update(tables=tables, source_files=files, annotations=[{'path_key': spec['path_key']} for spec in tables],
+    config.update(tables=tables, source_files=files, join_index_path=str(tmp_path/'derived'/'join.sqlite'), annotations=[{'path_key': spec['path_key']} for spec in tables],
                   media_path_remove_prefix='root/', media_archive_by_prefix={'VG_100K': 'vg'}, remote_archives={'vg': {'etag': '"fixture"'}})
     return VisualGenomeAdapter(Dataset(id='vg', name='Fixture', release='r', snapshot_id='s', adapter='visual_genome', adapter_config=config))
 
@@ -72,3 +72,30 @@ def test_streaming_join_rejects_undeclared_image_and_disk_overrun(tmp_path):
     with pytest.raises(Exception, match='full'):
         adapter.prepare(adapter.plan(10, 100000))
     assert not adapter._index_path().exists()
+
+
+def test_join_cancellation_cleans_partial_derivative_without_touching_originals(tmp_path):
+    adapter = fixture(tmp_path)
+    original = {p.name: p.read_bytes() for p in tmp_path.glob('*.zip')}
+    def cancel(): raise InterruptedError('cancelled')
+    with pytest.raises(InterruptedError): adapter.validate_media(1000, cancel)
+    assert not adapter._index_path().exists()
+    assert not list((tmp_path/'derived').glob('*.tmp'))
+    assert original == {p.name: p.read_bytes() for p in tmp_path.glob('*.zip')}
+    adapter = fixture(tmp_path)
+    del adapter.config['join_index_path']
+    with pytest.raises(ValueError, match='explicit writable'): adapter._ensure_index()
+    assert not (tmp_path/'visual-genome-join.sqlite').exists()
+
+
+def test_existing_join_obeys_reduced_disk_budget_and_qa_region_agreement(tmp_path):
+    adapter = fixture(tmp_path)
+    adapter.prepare(adapter.plan(10, 100000))
+    fresh = VisualGenomeAdapter(adapter.dataset)
+    fresh.config['max_join_bytes'] = 4096
+    with pytest.raises(ValueError, match='exceeds disk budget'): fresh._ensure_index()
+    adapter._index_path().unlink()
+    archive = tmp_path/'qa_to_region_mapping.zip'
+    with zipfile.ZipFile(archive, 'w') as z:
+        z.writestr('qa_to_region_mapping.json', json.dumps({'21': 12}))
+    with pytest.raises(ValueError, match='different images'): VisualGenomeAdapter(adapter.dataset)._ensure_index()

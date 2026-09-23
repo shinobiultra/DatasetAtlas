@@ -15,7 +15,14 @@ from .structured_collection import StructuredCollectionAdapter
 
 class VisualGenomeAdapter(StructuredCollectionAdapter):
     def _index_path(self):
-        return Path(self.config['image_data_path']).parent / 'visual-genome-join.sqlite'
+        if self.config.get('join_index_path'):
+            return Path(self.config['join_index_path'])
+        # Older prepared versions already own this derivative. Read it without
+        # creating files next to a caller's original annotation archives.
+        existing = Path(self.config['image_data_path']).parent / 'visual-genome-join.sqlite'
+        if existing.is_file():
+            return existing
+        raise ValueError('Visual Genome requires an explicit writable join_index_path')
 
     def _ensure_index(self):
         if hasattr(self, '_index_ready'):
@@ -26,13 +33,22 @@ class VisualGenomeAdapter(StructuredCollectionAdapter):
             'sources': self.config.get('source_files', []),
             'tables': self.config['tables'], 'version': 2,
         }, sort_keys=True).encode()).hexdigest()
+        def verify():
+            if path.stat().st_size > self.config.get('max_join_bytes', 8_000_000_000):
+                raise ValueError('Existing Visual Genome join exceeds disk budget')
+            with sqlite3.connect(f'file:{path}?mode=ro', uri=True) as db:
+                row = db.execute("SELECT value FROM metadata WHERE key='fingerprint'").fetchone()
+                if row != (fingerprint,):
+                    raise ValueError('Visual Genome join index does not match pinned sources')
+        if path.is_file():
+            verify()
+            self._index_ready = True
+            return
+        path.parent.mkdir(parents=True, exist_ok=True)
         with path.with_suffix('.lock').open('a') as lock:
             fcntl.flock(lock, fcntl.LOCK_EX)
             if path.is_file():
-                with sqlite3.connect(f'file:{path}?mode=ro', uri=True) as db:
-                    row = db.execute("SELECT value FROM metadata WHERE key='fingerprint'").fetchone()
-                    if row != (fingerprint,):
-                        raise ValueError('Visual Genome join index does not match pinned sources')
+                verify()
             else:
                 self._build_index(path, fingerprint)
         self._index_ready = True
@@ -77,10 +93,16 @@ class VisualGenomeAdapter(StructuredCollectionAdapter):
                     with archive.open(info) as stream:
                         rows = ijson.kvitems(stream, '', use_float=True) if spec.get('qa_keyed') else ijson.items(stream, 'item', use_float=True)
                         for row in rows:
+                            if count % 256 == 0 and getattr(self, '_cancel', None):
+                                self._cancel()
                             encoded = json.dumps(row[1] if spec.get('qa_keyed') else row, ensure_ascii=False, separators=(',', ':'))
                             if spec.get('qa_keyed'):
                                 qa_id = int(row[0])
                                 parent = db.execute('SELECT image_id FROM qas WHERE id=?', (qa_id,)).fetchone()
+                                if parent and spec.get('region_mapping'):
+                                    region_parent = db.execute('SELECT image_id FROM regions WHERE id=?', (row[1],)).fetchone()
+                                    if region_parent and region_parent != parent:
+                                        raise ValueError('Visual Genome QA and region mapping refer to different images')
                                 if not parent and spec.get('region_mapping'):
                                     parent = db.execute('SELECT image_id FROM regions WHERE id=?', (row[1],)).fetchone()
                                     if not parent:
@@ -138,6 +160,10 @@ class VisualGenomeAdapter(StructuredCollectionAdapter):
             self._sources_checked = True
         self._ensure_index()
         return source
+
+    def validate_media(self, budget, cancel=None):
+        self._cancel = cancel
+        return super().validate_media(budget, cancel)
 
     @property
     def derived_sources(self):

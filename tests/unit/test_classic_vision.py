@@ -66,3 +66,96 @@ def test_food_native_taxonomy_splits_and_images(tmp_path):
     assert [r['display_label'] for r in rows]==['Apple pie','Pizza']
     assert [r['split'] for r in rows]==['train','test']
     assert adapter.count==2
+
+
+def test_caltech_nested_release_annotations_and_background(tmp_path):
+    import tarfile
+    from scipy.io import savemat
+    from dataset_atlas.preparation import PreparationManager
+    from dataset_atlas.preparation.worker import run
+    from dataset_atlas.registry import Registry
+    import yaml,json
+    def mat(values):
+        result=io.BytesIO();savemat(result,values);return result.getvalue()
+    image=io.BytesIO();Image.new('RGB',(5,4)).save(image,'JPEG')
+    images={'101_ObjectCategories/Faces/image_0001.jpg':image.getvalue(),
+            '101_ObjectCategories/BACKGROUND_Google/image_0001.jpg':image.getvalue()}
+    annotations={'Annotations/Faces_2/annotation_0001.mat':mat({'box_coord':[[1,4,1,5]],'obj_contour':[[0,1],[0,1]]}),
+        'Annotations/FeatureDetectionQuality.mat':mat({'Features':{'name':'Faces_2','Good_Pts':[[2]],'Total_Pts':[[3]]}}),
+        'Annotations/progress.mat':mat({'Status':1})}
+    outer=tmp_path/'original.zip'
+    with zipfile.ZipFile(outer,'w') as z:
+        for name,entries in [('images.tgz',images),('annotations.tar',annotations)]:
+            buffer=io.BytesIO()
+            with tarfile.open(fileobj=buffer,mode='w:gz') as archive:
+                for member,data in entries.items():
+                    info=tarfile.TarInfo(member);info.size=len(data);archive.addfile(info,io.BytesIO(data))
+            z.writestr(name,buffer.getvalue())
+    dataset=Dataset(id='caltech-test',name='Fixture',release='r',adapter='classic_vision',coverage={'total_count':2},adapter_config={
+        'dataset_kind':'caltech101','path':str(outer),'outer_path':str(outer),'repack_members':[
+            {'source_key':'outer_path','member':'images.tgz','target_key':'path'},
+            {'source_key':'outer_path','member':'annotations.tar','target_key':'annotations_path'}]})
+    directory=tmp_path/'registry/datasets';directory.mkdir(parents=True)
+    (directory/'caltech.yaml').write_text(yaml.safe_dump(dataset.model_dump(mode='json')))
+    manager=PreparationManager(tmp_path);plan=manager.plan(dataset.id,1_000_000,1_000_000);run(tmp_path,plan['id'])
+    registry=Registry(tmp_path);prepared=registry.dataset(dataset.id);adapter=ClassicVisionAdapter(prepared)
+    rows=adapter._rows()
+    assert rows[0]['annotation_status']=='not_released_for_background'
+    assert rows[1]['native_annotation']['box_coord']==[[1,4,1,5]]
+    assert rows[1]['native_feature_quality']['Good_Pts']==2
+    assert rows[1]['native_feature_quality']['source_category']=='Faces_2'
+    receipt=json.loads((registry.active_directory(dataset.id)/'receipt.json').read_text())
+    assert len(receipt['derived_sources'])==2
+    assert {s['source_member'] for s in receipt['derived_sources']}=={'images.tgz','annotations.tar'}
+    # Unknown orphan annotations are an error, not silently ignored.
+    prepared.adapter_config.pop('derived_archive_checksums')
+    with zipfile.ZipFile(prepared.adapter_config['annotations_path'],'a') as z:z.writestr('Annotations/unknown.mat',mat({'x':1}))
+    with pytest.raises(ValueError,match='unmatched'):ClassicVisionAdapter(prepared)._rows()
+
+
+def test_gvil_pairs_keep_task_ids_answers_and_raw_annotations(tmp_path):
+    import json
+    path=tmp_path/'gvil.zip'
+    rows={'a':{'img':'a.jpg','type':'samediff_qa','question':'Same?','answer_match':'yes','answer_mismatch':'no'},
+          'b':{'img':'b.jpg','type':'samediff_qa','question':'Same?','answer_match':'no','answer_mismatch':'yes'}}
+    vg={'a':{'img':'a.jpg','type':'localization','query':'left','bbox_match':[1,2,3,4],'bbox_mismatch':[4,3,2,1]},
+        'b':{'img':'b.jpg','type':'localization','query':'right','bbox_match':[4,3,2,1],'bbox_mismatch':[1,2,3,4]}}
+    with zipfile.ZipFile(path,'w') as z:
+        for name,value in {'vqa_annotation.json':rows,'vg_annotation.json':vg,'pair_info.json':{'samediff_qa':[['a','b']],'localization':[['a','b']]},'raw_annotations.json':[{'img_file':'a.jpg','subjects':[]} ]}.items():z.writestr('dataset/'+name,json.dumps(value))
+        for name in ['a.jpg','b.jpg']:z.writestr('dataset/images/'+name,b'fixture')
+    adapter=ClassicVisionAdapter(Dataset(id='gvil',name='Fixture',release='r',snapshot_id='s',adapter='classic_vision',adapter_config={
+        'path':str(path),'dataset_kind':'gvil','mapping':{'question':'question'}}))
+    records=adapter.iter_records(adapter.prepare(adapter.plan(10,100000))).records
+    assert len(records)==5 and len({r.id for r in records})==5
+    vqa=[r for r in records if r.source['task']=='vqa'];vg=[r for r in records if r.source['task']=='vg']
+    assert vqa[0].relations[0].object_id==vqa[1].id
+    assert vg[0].relations[0].object_id==vg[1].id
+    assert vqa[0].source['answer_match']=='yes' and vqa[0].question=='Same?'
+    assert vqa[0].asset_ids==vg[0].asset_ids
+
+
+def test_hod_joins_metadata_both_annotation_formats_and_duplicate_views(tmp_path):
+    import zipfile
+    from dataset_atlas.adapters.classic_vision import ClassicVisionAdapter
+    from dataset_atlas.models import Dataset
+    path = tmp_path/'hod.zip'
+    xml = '<annotation><filename>a.jpg</filename><size><width>8</width><height>6</height></size><object><name>alcohol</name><bndbox><xmin>1</xmin><ymin>2</ymin><xmax>5</xmax><ymax>4</ymax></bndbox></object></annotation>'
+    def write(changed=False):
+        with zipfile.ZipFile(path, 'w') as z:
+            z.writestr('release/dataset/metadata.csv', 'Category,Case Type,Image Name,Annotation Name (YOLOv5),Annotation Name (Faster R-CNN),Reference\nalcohol,Hard,a.jpg,a.txt,a.xml,https://source.example\n')
+            for directory in ['all', 'class/alcohol/hard_cases']:
+                for folder, name, value in [('jpg','a.jpg',b'image fixture'),('txt','a.txt','0 0.375 0.5 0.5 0.333333'),('xml','a.xml',xml)]:
+                    if changed and directory!='all' and folder=='txt':value='1 0.375 0.5 0.5 0.333333'
+                    z.writestr(f'release/dataset/{directory}/{folder}/{name}', value)
+    write()
+    ds = Dataset(id='hod', name='Fixture', release='r', snapshot_id='s', adapter='classic_vision', adapter_config={
+        'path':str(path),'archive_prefix':'release/','dataset_kind':'hod'})
+    adapter=ClassicVisionAdapter(ds)
+    record=adapter.iter_records(adapter.prepare(adapter.plan(10,10000))).records[0]
+    assert adapter.count==1 and record.source['difficulty']=='Hard'
+    assert record.source['native_metadata']['Reference']=='https://source.example'
+    assert record.source['xml_objects'][0]['box_xyxy']==[1,2,5,4]
+    assert record.source['yolo_objects'][0]['class_name']=='alcohol'
+    assert record.source['class_copy_members']['jpg'].endswith('class/alcohol/hard_cases/jpg/a.jpg')
+    write(changed=True)
+    with pytest.raises(ValueError,match='counterparts differ'):ClassicVisionAdapter(ds)._rows()

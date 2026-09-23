@@ -2,8 +2,9 @@ schema_version: '1.0'
 id: causalgym
 name: CausalGym
 aliases: []
-description: CausalGym linguistic causal-interpretability benchmark. Original authors adapt SyntaxGym
-  linguistic tasks for interventions; both corpus occurrences are bibliography only
+description: CausalGym linguistic causal-interpretability benchmark. Original authors
+  adapt SyntaxGym linguistic tasks for interventions; both corpus occurrences are
+  bibliography only
 paper_ids:
 - paper-8729802cb62942f0
 - paper-2ae8012d97e5e3da
@@ -13,7 +14,7 @@ adapter_config: {}
 coverage:
   identity: candidate
   source: verified
-  access: source_page_public_data_unverified
+  access: public
   adapter: not_started
   preview: none
   complete_data: unimplemented
@@ -28,7 +29,8 @@ rights:
   annotations: not_reviewed
   images: not_reviewed
   source: https://github.com/aryamanarora/causalgym
-  note: Task/source text terms and repository license must be checked separately before distribution
+  note: Task/source text terms and repository license must be checked separately before
+    distribution
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-f9b93c2c1680db1336f1
@@ -36,8 +38,9 @@ evidence:
   source_file_hash: 5bbb59bdd632976cdc8551430429a4f788fcc3ff27ec9e08f9b26f9bc91e1285
   page: 8
   role: bibliography-only reference
-  excerpt: 'topher Potts. der): Fazl Barez, Yonatan Belinkov, Yanai Elazar, 2024. CausalGym: Benchmarking
-    causal inter- Thomas Fel, Neel Nanda, Chris Olah, Yuval Pin- pretability methods on linguistic '
+  excerpt: 'topher Potts. der): Fazl Barez, Yonatan Belinkov, Yanai Elazar, 2024.
+    CausalGym: Benchmarking causal inter- Thomas Fel, Neel Nanda, Chris Olah, Yuval
+    Pin- pretability methods on linguistic '
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -46,29 +49,42 @@ evidence:
   source_file_hash: 8cb8aa5aeb09ce466263e93f0b11ecf8caac93664142c18b28f4d299291048fa
   page: 46
   role: bibliography-only reference
-  excerpt: 'n & review, 26(4): 1174–1194, 2019. Aryaman Arora, Dan Jurafsky, and Christopher Potts. CausalGym:
-    Benchmarking causal interpretability methods on linguistic tasks. In Lun-Wei Ku, Andre Mar- tins,
-    and Vivek Srikumar, editor'
+  excerpt: 'n & review, 26(4): 1174–1194, 2019. Aryaman Arora, Dan Jurafsky, and Christopher
+    Potts. CausalGym: Benchmarking causal interpretability methods on linguistic tasks.
+    In Lun-Wei Ku, Andre Mar- tins, and Vivek Srikumar, editor'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://github.com/aryamanarora/causalgym
-  note: Original authors adapt SyntaxGym linguistic tasks for interventions; both corpus occurrences are
-    bibliography only
+  note: Original authors adapt SyntaxGym linguistic tasks for interventions; both
+    corpus occurrences are bibliography only
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: official_protocol_located
 - kind: source_audit_rights
   url: https://github.com/aryamanarora/causalgym
-  note: Task/source text terms and repository license must be checked separately before distribution
+  note: Task/source text terms and repository license must be checked separately before
+    distribution
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: official_protocol_located
 - kind: source_audit_access
   url: https://github.com/aryamanarora/causalgym
-  note: source_page_public_data_unverified; Preserve bibliography-only role and SyntaxGym lineage; not
-    a direct run by either corpus paper.
+  note: source_page_public_data_unverified; Preserve bibliography-only role and SyntaxGym
+    lineage; not a direct run by either corpus paper.
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: official_protocol_located
+- kind: implemented_source_release
+  url: https://github.com/aryamanarora/causalgym
+  checked_on: '2026-09-23'
+  report: reports/selective-acquisition-20260923.md
+  note: Pinned acquired population and real preview exercised locally. Mirror and
+    selective-transfer limits remain in the acquisition receipts; this does not establish
+    publication rights or the exact paper-used subset.
+  recipe: registry/recipes/causalgym.yaml
 source_url: https://github.com/aryamanarora/causalgym
+modalities:
+- text
+tasks:
+- causal interpretability

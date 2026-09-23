@@ -73,3 +73,11 @@ def test_source_and_access_review_are_not_frozen_by_preparation():
     merged=merge_prepared(baseline,prepared,recipe_present=True)
     assert (merged.coverage.identity,merged.coverage.source,merged.coverage.access,merged.coverage.publication)==('resolved','verified','public','restricted')
     assert (merged.coverage.preview_count,merged.coverage.total_count,merged.coverage.adapter)==(100,150,'tested')
+
+
+def test_recipe_without_description_does_not_freeze_obsolete_source_claim(workspace):
+    registry = Registry(workspace)
+    _activate(workspace, registry, description='No source acquired yet')
+    (workspace/'registry/recipes').mkdir(exist_ok=True)
+    (workspace/'registry/recipes/fixture.yaml').write_text('adapter: structured\n')
+    assert registry.dataset('fixture').description == ''

@@ -14,7 +14,7 @@ adapter_config: {}
 coverage:
   identity: resolved
   source: verified
-  access: unverified
+  access: public
   adapter: not_started
   preview: none
   complete_data: unimplemented
@@ -90,4 +90,17 @@ evidence:
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
-source_url: https://github.com/tianyi-lab/HallusionBench/tree/744007c232c292942c7f80eb61edb2465482da31
+- kind: implemented_source_release
+  url: https://github.com/tianyi-lab/HallusionBench
+  checked_on: '2026-09-23'
+  report: reports/selective-acquisition-20260923.md
+  note: Pinned acquired population and real preview exercised locally. Mirror and
+    selective-transfer limits remain in the acquisition receipts; this does not establish
+    publication rights or the exact paper-used subset.
+  recipe: registry/recipes/hallusionbench.yaml
+source_url: https://github.com/tianyi-lab/HallusionBench
+modalities:
+- image
+- text
+tasks:
+- visual hallucination evaluation

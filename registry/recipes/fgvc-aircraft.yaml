@@ -4,7 +4,7 @@ expected_count: 10000
 source_url: https://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/
 scope: 'All 10000 images in the official fgvc-aircraft-2013b archive, with original
   splits {''train'': 3334, ''val'': 3333, ''test'': 3333}, variant/family/manufacturer
-  labels, image dimensions and bounding boxes. Original copyright banners retained.'
+  labels and bounding boxes. This archive omits images_size.txt; source_size remains null. Original copyright banners retained.'
 adapter_config:
   dataset_kind: aircraft
   archive_preparation: zip-store

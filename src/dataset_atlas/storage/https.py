@@ -25,10 +25,12 @@ class _PinnedHTTPSConnection(http.client.HTTPSConnection):
 
 class HttpsFetcher:
     def __init__(self, allowed_hosts: set[str] | list[str], *, timeout: float = 20,
-                 max_redirects: int = 4, max_bytes: int = 64 * 1024 * 1024):
+                 max_redirects: int = 4, max_bytes: int = 64 * 1024 * 1024, credential_profile: str | None = None):
         self.allowed_hosts = {host.lower().rstrip(".") for host in allowed_hosts}
         if not self.allowed_hosts or max_bytes <= 0 or max_redirects < 0:
             raise ValueError("Allowlisted hosts and positive fetch limits are required")
+        if credential_profile not in {None,"huggingface"}:raise ValueError("Unknown source credential profile")
+        self.credential_profile = credential_profile
         self.timeout = timeout
         self.max_redirects = max_redirects
         self.max_bytes = max_bytes
@@ -77,6 +79,8 @@ class HttpsFetcher:
             host, port, address, target = self._destination(current)
             connection = _PinnedHTTPSConnection(host, address, port, self.timeout)
             headers = {"Accept-Encoding": "identity", "User-Agent": "DatasetAtlas/0.1"}
+            from .auth import source_headers
+            headers.update(source_headers(self.credential_profile,host))
             if offset:
                 headers["Range"] = f"bytes={offset}-"
                 headers["If-Range"] = metadata["strong_etag"]

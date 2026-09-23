@@ -13,7 +13,8 @@ def repack_tar(source, destination, max_bytes, cancel=None):
     temporary=destination.with_suffix('.partial')
     names=set();total=0
     try:
-        with tarfile.open(source,'r|*') as archive,zipfile.ZipFile(temporary,'w',compression=zipfile.ZIP_STORED,allowZip64=True) as output:
+        source_args = {'fileobj': source} if hasattr(source, 'read') else {'name': source}
+        with tarfile.open(mode='r|*', **source_args) as archive,zipfile.ZipFile(temporary,'w',compression=zipfile.ZIP_STORED,allowZip64=True) as output:
             for member in archive:
                 if cancel:cancel()
                 if member.isdir():continue

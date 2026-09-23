@@ -37,3 +37,40 @@ than all historical artifacts. The Results picker exposes every compatible run;
 deselecting a run removes its dependent filters, sort and map colour. Inspector
 run evidence and projection selection remain available independently. Frozen
 selections retain the exact chosen result IDs in their saved query.
+
+### Native source acquisition and missing media
+
+Recipes may declare `credential_profile: huggingface`. This names locally available
+`HF_TOKEN` or the Hugging Face token file; credentials are never embedded in a recipe,
+plan, prepared dataset, or receipt. The bearer header is sent only to
+`huggingface.co`, and is rebuilt without it on CDN redirects. Gated release access and
+public redistribution rights remain separate.
+
+`atlas datasets cache-source --path FILE --sha256 SHA256 --max-bytes N` verifies and
+registers an already downloaded original in `work/source-objects/SHA256`. Workers can
+reuse that retained source object independently of the evictable download cache. This
+explicit source library consumes disk until removed by its owner; cache eviction does
+not delete it or the caller's file. No input file is modified.
+
+`repack_members` derives bounded member-addressable ZIPs from TAR members nested in a
+source ZIP. Each derivative retains the source key, native member name, size and
+checksum in the prepared receipt. `structured_collection` annotation `joins` preserve
+native joined fields and reject duplicates, missing keys and undeclared unused rows.
+`media_variants` names source conditions and their distinct target provenance; declared
+absent conditions remain explicit fields rather than fabricated media.
+
+An image listed by an upstream annotation but absent from the pinned source can be an
+`Asset` with `uri: null`, `metadata.availability: absent_from_pinned_release`, and its
+native `source_path`. It remains inspectable, is excluded from image transmission,
+and is not a failed HTTP request or a placeholder image. Preparation reports these
+missing references and marks the full annotation index as having partial media.
+PHANTOM retains native grouped JSON, turn JSONL, and both behaviour annotation forms;
+its conversation-bearing records remain example units, each with an ordered canonical
+conversation. Source-listed absent images and the 12 JSONL-only conversations are
+explicit. Local authorization does not make the release public.
+
+Visual Genome streams its original ZIP/JSON tables with the optional `datasets`
+extra (`ijson`) into a bounded disk-backed join index. All source rows survive,
+including repeated paragraph rows and QA-region mappings without a released QA or
+region. Unjoined mappings are separate annotation records with no invented image.
+The derived join index is included in the preparation output budget and receipt.

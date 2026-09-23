@@ -21,6 +21,7 @@ def main(argv=None):
     extract=corpus.add_parser('extract');extract.add_argument('--manifest',type=Path,required=True)
     resolve=corpus.add_parser('resolve');resolve.add_argument('--mentions',type=Path,required=True);resolve.add_argument('--registry',type=Path,default=Path('registry'))
     datasets=sub.add_parser('datasets').add_subparsers(dest='action',required=True)
+    cached=datasets.add_parser('cache-source',help='Register a verified local archive for reuse across preparation jobs');cached.add_argument('--path',type=Path,required=True);cached.add_argument('--sha256',required=True);cached.add_argument('--max-bytes',type=int,required=True)
     validate=datasets.add_parser('validate');validate.add_argument('--all',action='store_true')
     prepare=datasets.add_parser('prepare');prepare.add_argument('--dataset',required=True);prepare.add_argument('--preview-size',type=int,default=100);prepare.add_argument('--max-bytes',type=int,default=20_000_000);prepare.add_argument('--dry-run',action='store_true')
     acquire=datasets.add_parser('acquire');acquire.add_argument('--dataset',required=True);acquire.add_argument('--max-download-bytes',type=int,required=True);acquire.add_argument('--max-output-bytes',type=int,required=True);acquire.add_argument('--execute',action='store_true');acquire.add_argument('--source-mode',choices=['download','selective'],default='download')
@@ -46,7 +47,10 @@ def main(argv=None):
         elif args.command=='datasets':
             from dataset_atlas.registry import Registry
             registry=Registry(root)
-            if args.action=='acquire':
+            if args.action=='cache-source':
+                from dataset_atlas.storage.sources import register_source
+                emit(register_source(root,args.path,args.sha256,args.max_bytes))
+            elif args.action=='acquire':
                 from dataset_atlas.preparation import PreparationManager
                 manager=PreparationManager(root);plan=manager.plan(args.dataset,args.max_download_bytes,args.max_output_bytes,args.source_mode);emit(plan)
                 if args.execute:emit(manager.start(plan['id']))

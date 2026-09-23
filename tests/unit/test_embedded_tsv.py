@@ -53,3 +53,24 @@ def test_bad_tsv_references_fail_before_indexing(tmp_path, rows, error):
 def test_tsv_read_is_bounded(tmp_path):
     with pytest.raises(ValueError, match='byte limit'):
         adapter(tmp_path, [['1','x'*1000,'q','a','b','A']], max_row_bytes=100)._rows()
+
+
+def test_opaque_tsv_image_uri_is_served_and_survives_api_restart(tmp_path):
+    import yaml
+    from fastapi.testclient import TestClient
+    from dataset_atlas.api import create_app
+    from dataset_atlas.preparation import PreparationManager
+    from dataset_atlas.preparation.worker import run
+    data=image();a=adapter(tmp_path,[['1',base64.b64encode(data).decode(),'Which?','one','two','A']])
+    a.dataset.coverage.total_count=1
+    directory=tmp_path/'registry/datasets';directory.mkdir(parents=True)
+    (directory/'tsv.yaml').write_text(yaml.safe_dump(a.dataset.model_dump(mode='json')))
+    manager=PreparationManager(tmp_path);plan=manager.plan('tsv',1000000,1000000);run(tmp_path,plan['id'])
+    with TestClient(create_app(tmp_path)) as client:
+        response=client.get('/api/v1/datasets/tsv/pack');assert response.status_code==200
+        uri=response.json()['records'][0]['assets'][0]['uri']
+        result=client.get(uri);assert result.status_code==200,result.text
+        assert result.content==data and result.headers['content-type']=='image/png'
+    # No preceding pack/query request: resolve the stable token from persisted packs.
+    with TestClient(create_app(tmp_path)) as client:
+        assert client.get(uri).content==data

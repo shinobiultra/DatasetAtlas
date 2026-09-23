@@ -11,7 +11,7 @@ adapter_config: {}
 coverage:
   identity: resolved
   source: verified
-  access: unverified
+  access: public
   adapter: not_started
   preview: none
   complete_data: unimplemented
@@ -19,15 +19,16 @@ coverage:
   preview_count: 0
   unit: example
   blockers:
-  - Official source family identified; exact selected release, preparation and public-use rights still require dataset-specific
-    review.
+  - Official source family identified; exact selected release, preparation and public-use
+    rights still require dataset-specific review.
   - Adapter and preview are not implemented.
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://github.com/IllusoryVQA/IllusoryVQA
-  note: MIT repository code does not automatically establish redistribution rights for every image in all four subdatasets
+  note: MIT repository code does not automatically establish redistribution rights
+    for every image in all four subdatasets
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-c362e60025da6290cdad
@@ -35,8 +36,9 @@ evidence:
   source_file_hash: 1b014c3d1e86a39f1c6a88d4e9b79c99df2e06c5c7c31bea224aa5da2ae0c46d
   page: 10
   role: source data
-  excerpt: arge, Medium, and Small groups. For each MNIST, which are used in the IllusoryVQA [26] dataset. The second
-    image with a resolution of 1000×1000, suppose the hidden character group consists of
+  excerpt: arge, Medium, and Small groups. For each MNIST, which are used in the IllusoryVQA
+    [26] dataset. The second image with a resolution of 1000×1000, suppose the hidden
+    character group consists of
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -45,9 +47,9 @@ evidence:
   source_file_hash: 1b014c3d1e86a39f1c6a88d4e9b79c99df2e06c5c7c31bea224aa5da2ae0c46d
   page: 10
   role: source and evaluation
-  excerpt: egorized into Large, Medium, and Small groups. For each MNIST, which are used in the IllusoryVQA [26]
-    dataset. The second image with a resolution of 1000×1000, suppose the hidden character group consists of characters,
-    i
+  excerpt: egorized into Large, Medium, and Small groups. For each MNIST, which are
+    used in the IllusoryVQA [26] dataset. The second image with a resolution of 1000×1000,
+    suppose the hidden character group consists of characters, i
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -58,8 +60,8 @@ evidence:
   source_identity_status: project_identified_release_unpinned
 - kind: source_audit_release
   url: https://github.com/IllusoryVQA/IllusoryVQA
-  note: Original authors name IllusionMNIST, IllusionFashionMNIST, IllusionAnimals and IllusionChar; linked data
-    location/version must be checked
+  note: Original authors name IllusionMNIST, IllusionFashionMNIST, IllusionAnimals
+    and IllusionChar; linked data location/version must be checked
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: project_identified_release_unpinned
@@ -73,14 +75,29 @@ evidence:
   source_identity_status: project_identified_release_unpinned
 - kind: source_audit_rights
   url: https://github.com/IllusoryVQA/IllusoryVQA
-  note: MIT repository code does not automatically establish redistribution rights for every image in all four subdatasets
+  note: MIT repository code does not automatically establish redistribution rights
+    for every image in all four subdatasets
   publication_decision: media_not_approved
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: project_identified_release_unpinned
+- kind: implemented_source_release
+  url: https://github.com/IllusoryVQA/IllusoryVQA
+  checked_on: '2026-09-23'
+  report: reports/selective-acquisition-20260923.md
+  note: Pinned acquired population and real preview exercised locally. Mirror and
+    selective-transfer limits remain in the acquisition receipts; this does not establish
+    publication rights or the exact paper-used subset.
+  recipe: registry/recipes/illusoryvqa.yaml
 source_url: https://github.com/IllusoryVQA/IllusoryVQA
 relationships:
 - type: same_source_family_as
   target_id: illusionvqa
   status: asserted_from_source_review
-  scope: Variant spelling/family of IllusionVQA; the local base is the pinned IllusionVQA release.
+  scope: Variant spelling/family of IllusionVQA; the local base is the pinned IllusionVQA
+    release.
+modalities:
+- image
+- text
+tasks:
+- visual illusion reasoning

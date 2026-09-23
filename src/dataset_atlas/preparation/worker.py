@@ -9,6 +9,7 @@ from pathlib import Path
 import shutil
 import sys
 import time
+import zipfile
 from . import PreparationManager, atomic
 
 
@@ -59,14 +60,18 @@ def run(root, identity):
             cache = BoundedCache(Path(root) / 'work/download-cache', max_bytes=plan['max_download_bytes'])
             fetcher = HttpsFetcher(['huggingface.co', 'cdn-lfs.huggingface.co', 'cdn-lfs-us-1.huggingface.co',
                 'cdn-lfs-eu-1.huggingface.co', 'cas-bridge.xethub.hf.co', 'us.aws.cdn.hf.co', 'eu.aws.cdn.hf.co', 'www.robots.ox.ac.uk', 'thor.robots.ox.ac.uk']+plan.get('allowed_hosts',[]), timeout=60,
-                max_bytes=plan['max_download_bytes'])
+                max_bytes=plan['max_download_bytes'],credential_profile=plan.get('credential_profile'))
             files = []
             for entry in plan['files']:
                 check()
-                source = fetcher.fetch(entry['url'], cache,
-                    CacheIdentity(plan.get('revision',dataset.release), entry.get('sha256',entry.get('md5')), 'original'),
-                    expected_sha256=entry.get('sha256'), byte_budget=entry['bytes'], cancel=check,
-                    progress=lambda total:update(downloaded_bytes=sum(f['bytes'] for f in files)+total,current_file=entry['source_name']))
+                from dataset_atlas.storage.sources import source_object
+                source=source_object(root,entry.get('sha256'),entry['bytes'])
+                if source is None:
+                    source = fetcher.fetch(entry['url'], cache,
+                        CacheIdentity(plan.get('revision',dataset.release), entry.get('sha256',entry.get('md5')), 'original'),
+                        expected_sha256=entry.get('sha256'), byte_budget=entry['bytes'], cancel=check,
+                        progress=lambda total:update(downloaded_bytes=sum(f['bytes'] for f in files)+total,current_file=entry['source_name']))
+                else:update(stage='reusing registered source',current_file=entry['source_name'])
                 digest=hashlib.sha256();md5=hashlib.md5(usedforsecurity=False)
                 with source.open('rb') as stream:
                     for chunk in iter(lambda:stream.read(1024*1024),b''):digest.update(chunk);md5.update(chunk)
@@ -126,6 +131,25 @@ def run(root, identity):
                 dataset.adapter_config[path_key]=str(target)
                 dataset.adapter_config.setdefault('derived_archive_checksums', {})[path_key]=derived['sha256']
                 if path_key=='path':dataset.adapter_config['sha256']=derived['sha256']
+        for step in dataset.adapter_config.get('repack_members', []):
+            from dataset_atlas.storage.archive import repack_tar
+            from dataset_atlas.adapters.core import _safe_relative
+            path_key=step['target_key']
+            if not isinstance(path_key, str) or not re.fullmatch(r'[a-z_]+', path_key):
+                raise ValueError('Invalid archive target configuration key')
+            update(stage='preparing nested random-access archive')
+            target=version/'sources'/(path_key+'-members.zip')
+            target.parent.mkdir(exist_ok=True)
+            with zipfile.ZipFile(dataset.adapter_config[step['source_key']]) as outer:
+                info=outer.getinfo(_safe_relative(step['member']))
+                if info.is_dir() or info.file_size > plan['max_output_bytes']:
+                    raise ValueError('Nested source archive exceeds approved output budget')
+                with outer.open(info) as member:
+                    derived=repack_tar(member,target,plan['max_output_bytes']-sum(item['bytes'] for item in derived_sources),check)
+            derived_sources.append({**derived, 'path_key':path_key, 'source_member':step['member']})
+            dataset.adapter_config[path_key]=str(target)
+            dataset.adapter_config.setdefault('derived_archive_checksums', {})[path_key]=derived['sha256']
+            if path_key=='path':dataset.adapter_config['sha256']=derived['sha256']
         derived_source=derived_sources[0] if len(derived_sources)==1 else None
         derived_bytes=sum(item['bytes'] for item in derived_sources)
         if not dataset.snapshot_id:
@@ -156,6 +180,10 @@ def run(root, identity):
             media_validation=adapter.validate_media(plan.get('remote_metadata_bytes',20_000_000),check)
         check()
         update(stage='preview', expected_count=expected_count)
+        adapter_derivatives = getattr(adapter, 'derived_sources', [])
+        if adapter_derivatives:
+            derived_sources.extend(adapter_derivatives)
+            derived_bytes = sum(item['bytes'] for item in derived_sources)
         pack = build_preview(dataset, version / 'pack', adapter=adapter, limit=min(expected_count, 100), max_bytes=read_budget,max_output_bytes=plan['max_output_bytes']-derived_bytes)
         # Columnar metadata covers all shards, including fields beyond the preview.
         declared_types = adapter.source_field_types() if hasattr(adapter, 'source_field_types') else {}
@@ -202,7 +230,7 @@ def run(root, identity):
         dataset.coverage.total_count = expected_count
         dataset.coverage.preview = 'complete_target'
         dataset.coverage.adapter = 'tested'
-        dataset.coverage.complete_data = 'supported' if dataset.adapter_config.get('media_scope') != 'selected_preview' else 'indexed_metadata_partial_media'
+        dataset.coverage.complete_data = 'supported' if dataset.adapter_config.get('media_scope') != 'selected_preview' and not (media_validation or {}).get('absent_media_references') else 'indexed_metadata_partial_media'
         # Access/identity/rights evidence is deliberately not upgraded by downloading.
         from . import prepared_metadata
         dataset=prepared_metadata(dataset,plan['scope'])

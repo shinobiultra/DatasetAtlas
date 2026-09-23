@@ -58,4 +58,17 @@ evidence:
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
-source_url: https://github.com/HQHBench/HQHBench/tree/6d35a4c320270fa507016550312edcb5a0570ed4
+- kind: implemented_source_release
+  url: https://github.com/HQHBench/HQHBench
+  checked_on: '2026-09-23'
+  report: reports/selective-acquisition-20260923.md
+  note: Pinned acquired population and real preview exercised locally. Mirror and
+    selective-transfer limits remain in the acquisition receipts; this does not establish
+    publication rights or the exact paper-used subset.
+  recipe: registry/recipes/high-quality-hallucination-benchmark.yaml
+source_url: https://github.com/HQHBench/HQHBench
+modalities:
+- image
+- text
+tasks:
+- visual hallucination evaluation

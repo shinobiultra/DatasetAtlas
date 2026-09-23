@@ -1,0 +1,163 @@
+release: official-annotation-files-20260923
+adapter: visual_genome
+source_url: https://homes.cs.washington.edu/~ranjay/visualgenome/
+expected_count: 116367
+scope: All 108077 native image records with objects, attributes, relationships, regions,
+  questions, region graphs, QA objects, QA-region mappings, all 19561 paragraph rows
+  (including repeated image IDs), and scene graphs. Also retains 8290 native QA-region
+  mappings whose QA and region IDs are both absent from released tables as explicit
+  orphan annotation records. Original images fetched on request from the two official
+  ZIPs; no claim of a paper-specific subset.
+files:
+- source_name: image_data.json.zip
+  url: https://homes.cs.washington.edu/~ranjay/visualgenome/data/dataset/image_data.json.zip
+  bytes: 1780854
+  sha256: b87a94918cb2ff4d952cf1dfeca0b9cf6cd6fd204c2f8704645653be1163681a
+  config_key: image_data_path
+  format: zip
+- source_name: objects.json.zip
+  url: https://homes.cs.washington.edu/~ranjay/visualgenome/data/dataset/objects.json.zip
+  bytes: 55323929
+  sha256: efa456069aedb420b7dabf54f4608c89c78a00de550f1433066e9b6f84fb629c
+  config_key: objects_path
+  format: zip
+- source_name: attributes.json.zip
+  url: https://homes.cs.washington.edu/~ranjay/visualgenome/data/dataset/attributes.json.zip
+  bytes: 83280561
+  sha256: 7f71c80fb5396c67a3022e0748de16a3253b7fe5759e151215e0f1a3de3f38c7
+  config_key: attributes_path
+  format: zip
+- source_name: relationships.json.zip
+  url: https://homes.cs.washington.edu/~ranjay/visualgenome/data/dataset/relationships.json.zip
+  bytes: 77904473
+  sha256: e648867b8087e4aeb10019a959f914e2580909f1c3e50a21b25de8741679182f
+  config_key: relationships_path
+  format: zip
+- source_name: region_descriptions.json.zip
+  url: https://homes.cs.washington.edu/~ranjay/visualgenome/data/dataset/region_descriptions.json.zip
+  bytes: 127377968
+  sha256: 038382219029c9cb0d7b0308b1d45f7537cf5a47b98f493f6d0e30c8947fb15d
+  config_key: region_descriptions_path
+  format: zip
+- source_name: question_answers.json.zip
+  url: https://homes.cs.washington.edu/~ranjay/visualgenome/data/dataset/question_answers.json.zip
+  bytes: 24776315
+  sha256: ba5ef71a5852d9fc7e066a8af05711fce58901b2152e9fd636efdf49fd1fc613
+  config_key: question_answers_path
+  format: zip
+- source_name: region_graphs.json.zip
+  url: https://homes.cs.washington.edu/~ranjay/visualgenome/data/dataset/region_graphs.json.zip
+  bytes: 331673448
+  sha256: a34a7623a1c03d89d4f7df10b7ed7945eb2d7e67084eee249ab8e3433e6a6dcf
+  config_key: region_graphs_path
+  format: zip
+- source_name: qa_objects.json.zip
+  url: https://homes.cs.washington.edu/~ranjay/visualgenome/data/dataset/qa_objects.json.zip
+  bytes: 36614091
+  sha256: 131ade26859c787aadc1e92f8918d5842e6b85edd6788cd1c8cd34904676dec2
+  config_key: qa_objects_path
+  format: zip
+- source_name: qa_to_region_mapping.json.zip
+  url: https://homes.cs.washington.edu/~ranjay/visualgenome/data/dataset/qa_to_region_mapping.json.zip
+  bytes: 4896486
+  sha256: eafba86f750f0b63ae1590df9179ee644076954697a3fa531d0def8836ee98e5
+  config_key: qa_to_region_mapping_path
+  format: zip
+- source_name: paragraphs_v1.json.zip
+  url: https://homes.cs.washington.edu/~ranjay/visualgenome/data/dataset/paragraphs_v1.json.zip
+  bytes: 2108680
+  sha256: 8407f1068e0711e5f6550d641c523ee26984ee8e02c1d51564369cccd56e8b26
+  config_key: paragraphs_path
+  format: zip
+- source_name: scene_graphs.json.zip
+  url: https://homes.cs.washington.edu/~ranjay/visualgenome/data/dataset/scene_graphs.json.zip
+  bytes: 114018504
+  sha256: 0d4f65268d510fbd73ce5e8116f7830df50bcbceec75146a0bc53fd36c68335d
+  config_key: scene_graphs_path
+  format: zip
+allowed_hosts:
+- homes.cs.washington.edu
+remote_metadata_bytes: 30000000
+adapter_config:
+  annotations:
+  - path_key: image_data_path
+  - path_key: objects_path
+  - path_key: attributes_path
+  - path_key: relationships_path
+  - path_key: region_descriptions_path
+  - path_key: question_answers_path
+  - path_key: region_graphs_path
+  - path_key: qa_objects_path
+  - path_key: qa_to_region_mapping_path
+  - path_key: paragraphs_path
+  - path_key: scene_graphs_path
+  tables:
+  - path_key: image_data_path
+    member: image_data.json
+    field: image
+    key: image_id
+  - path_key: objects_path
+    member: objects.json
+    field: objects
+    key: image_id
+  - path_key: attributes_path
+    member: attributes.json
+    field: attributes
+    key: image_id
+  - path_key: relationships_path
+    member: relationships.json
+    field: relationships
+    key: image_id
+  - path_key: region_descriptions_path
+    member: region_descriptions.json
+    field: region_descriptions
+    key: id
+    region_list: regions
+  - path_key: question_answers_path
+    member: question_answers.json
+    field: question_answers
+    key: id
+    qa_list: qas
+  - path_key: region_graphs_path
+    member: region_graphs.json
+    field: region_graphs
+    key: image_id
+  - path_key: qa_objects_path
+    member: qa_objects.json
+    field: qa_objects
+    qa_keyed: true
+  - path_key: qa_to_region_mapping_path
+    member: qa_to_region_mapping.json
+    field: qa_to_region_mapping
+    qa_keyed: true
+    region_mapping: true
+  - path_key: paragraphs_path
+    member: paragraphs_v1.json
+    field: paragraphs
+    key: image_id
+    multiple: true
+  - path_key: scene_graphs_path
+    member: scene_graphs.json
+    field: scene_graphs
+    key: image_id
+  max_join_bytes: 8000000000
+  max_annotation_bytes: 8000000000
+  media_path_remove_prefix: people/rak248/
+  media_archive_by_prefix:
+    VG_100K: vg1
+    VG_100K_2: vg2
+  remote_archives:
+    vg1:
+      url: https://cs.stanford.edu/people/rak248/VG_100K_2/images.zip
+      etag: '"2440e0c7e-53532c2990b40"'
+      bytes: 9731705982
+      allowed_hosts:
+      - cs.stanford.edu
+    vg2:
+      url: https://cs.stanford.edu/people/rak248/VG_100K_2/images2.zip
+      etag: '"14622e04a-534f48f09c500"'
+      bytes: 5471658058
+      allowed_hosts:
+      - cs.stanford.edu
+  remote_cache_root: work/media-cache/visualgenome
+  remote_cache_bytes: 1000000000

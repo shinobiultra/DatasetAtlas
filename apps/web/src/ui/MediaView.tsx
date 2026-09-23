@@ -23,7 +23,7 @@ export function assetUrl(asset: Asset): string | null {
 }
 
 export function imageAssets(record: AtlasRecord): Asset[] {
-  return (record.assets ?? []).filter(asset => asset.modality === 'image' && asset.uri)
+  return (record.assets ?? []).filter(asset => asset.modality === 'image')
 }
 
 export function primaryAsset(record: AtlasRecord): Asset | null {
@@ -97,8 +97,8 @@ export function AssetView({ asset, overlays = [], controls = false, highlight, f
     return (
       <div className="fallback">
         <Icon.Image size={20} />
-        <span>{asset.modality} representation is not available here</span>
-        <small className="mono wrap-any">{asset.id}</small>
+        <span>{asset.metadata?.availability === 'absent_from_pinned_release' ? 'Listed by the source, absent from this release' : `${asset.modality} representation is not available here`}</span>
+        <small className="mono wrap-any">{String(asset.metadata?.source_path ?? asset.id)}</small>
       </div>
     )
   }
@@ -145,6 +145,7 @@ export function AssetView({ asset, overlays = [], controls = false, highlight, f
 
 /** The representation label a researcher needs before trusting what they see. */
 export function RepresentationTag({ asset }: { asset: Asset }) {
+  if (asset.metadata?.availability === 'absent_from_pinned_release') return <span className="tag">Unavailable in source release</span>
   const representation = safeViewEnabled() ? 'Safe-view display derivative' : asset.representation ?? 'original'
   return <span className="tag" title={`Asset ${asset.id}`}>{representation === 'original' ? 'Original' : representation}</span>
 }

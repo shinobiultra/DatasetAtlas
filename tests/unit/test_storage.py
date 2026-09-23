@@ -143,3 +143,40 @@ def test_https_interrupted_transfer_resumes_only_with_matching_range(monkeypatch
     assert result.read_bytes() == b"abcdef"
     assert requests[1]["Range"] == "bytes=3-"
     assert requests[1]["If-Range"] == '"revision-1"'
+
+
+def test_huggingface_credentials_are_local_and_not_forwarded_to_cdn(monkeypatch, tmp_path):
+    import dataset_atlas.storage.https as module
+    from dataset_atlas.storage.auth import source_headers
+    monkeypatch.delenv('HF_TOKEN', raising=False)
+    monkeypatch.setenv('HF_HOME', str(tmp_path/'hf'))
+    monkeypatch.setenv('HF_TOKEN_PATH', str(tmp_path/'hf'/'token'))
+    with pytest.raises(ValueError, match='missing'):
+        source_headers('huggingface', 'huggingface.co')
+    monkeypatch.setenv('HF_TOKEN', 'hf_fixture_secret')
+    assert source_headers('huggingface', 'cdn.huggingface.co') == {}
+    monkeypatch.setattr(socket, 'getaddrinfo', lambda *a, **k: [
+        (socket.AF_INET, socket.SOCK_STREAM, 0, '', ('93.184.215.14', 443))])
+    requests = []
+    class Response:
+        def __init__(self, redirected):
+            self.status = 200 if redirected else 302
+            self.body = b'abc'
+        def getheader(self, name, default=None):
+            return {'Location': 'https://us.aws.cdn.hf.co/image', 'Content-Length': '3'}.get(name, default)
+        def read(self, size):
+            chunk, self.body = self.body[:size], self.body[size:]
+            return chunk
+    class Connection:
+        def __init__(self, host, *a, **k): self.host = host
+        def request(self, method, target, headers): requests.append((self.host, dict(headers)))
+        def getresponse(self): return Response(self.host != 'huggingface.co')
+        def close(self): pass
+    monkeypatch.setattr(module, '_PinnedHTTPSConnection', Connection)
+    cache = BoundedCache(tmp_path/'cache', max_bytes=100)
+    result = HttpsFetcher({'huggingface.co', 'us.aws.cdn.hf.co'}, credential_profile='huggingface').fetch(
+        'https://huggingface.co/datasets/fixture/image', cache, CacheIdentity('r', 'a', 'original'))
+    assert result.read_bytes() == b'abc'
+    assert requests[0][1]['Authorization'] == 'Bearer hf_fixture_secret'
+    assert 'Authorization' not in requests[1][1]
+    assert all(b'hf_fixture_secret' not in path.read_bytes() for path in (tmp_path/'cache').rglob('*') if path.is_file())

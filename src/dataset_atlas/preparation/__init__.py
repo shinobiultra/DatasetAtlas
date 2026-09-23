@@ -74,11 +74,19 @@ class PreparationManager:
             'scope': dataset.adapter_config.get('population', 'configured source population'),
             'source_identity': 'Pinned available release; not a claim of the paper-used revision.'}
         recipe = {}
+        active = self.registry.active_directory(dataset.id)
+        recipe_changed = False
         recipe_path = self.root/'registry/recipes'/f'{dataset.id}.yaml'
         if recipe_path.is_file():
             import yaml
             recipe=yaml.safe_load(recipe_path.read_text())
-            prepared=dataset.model_copy(deep=True)
+            recipe_hash=hashlib.sha256(recipe_path.read_bytes()).hexdigest()
+            if active:
+                previous_plan=self._path(json.loads((active/'receipt.json').read_text())['plan_id'])/'plan.json'
+                previous_hash=json.loads(previous_plan.read_text()).get('recipe_sha256') if previous_plan.is_file() else None
+                recipe_changed=previous_hash!=recipe_hash
+            prepared=self.registry.baseline_dataset(dataset.id) if recipe_changed else dataset.model_copy(deep=True)
+            if recipe_changed or (recipe.get('files') and not active):prepared.snapshot_id=''
             if recipe.get('source_url'):prepared.source_url=recipe['source_url']
             if recipe.get('description'):prepared.description=recipe['description']
             if recipe.get('release'):prepared.release=recipe['release']
@@ -87,7 +95,12 @@ class PreparationManager:
             prepared.adapter_config.update(recipe.get('adapter_config',{}))
             prepared=self.registry._resolved(prepared)
             plan['prepared_dataset']=prepared.model_dump(mode='json')
-            plan['recipe_sha256']=hashlib.sha256(recipe_path.read_bytes()).hexdigest()
+            plan['recipe_sha256']=recipe_hash
+            if recipe.get('credential_profile'):
+                from dataset_atlas.storage.auth import source_headers
+                try:source_headers(recipe['credential_profile'],'huggingface.co')
+                except ValueError as exc:plan['requirements'].append(str(exc))
+                plan['credential_profile']=recipe['credential_profile']
             dataset=prepared
             plan['scope']=recipe.get('scope',prepared.adapter_config.get('population',plan['scope']))
         parsed = urlsplit(dataset.source_url or '')
@@ -101,7 +114,7 @@ class PreparationManager:
         except (ValueError, KeyError, FileNotFoundError) as exc:
             description = None
             if str(exc).startswith('unknown adapter:'):adapter_error=str(exc)
-        if recipe.get('files') and not (description and description.exists):
+        if recipe.get('files') and (recipe_changed or not active or not (description and description.exists)):
             plan.update(kind='http_archive', files=recipe['files'], expected_count=recipe.get('expected_count'),
                 expected_download_bytes=sum(f['bytes'] for f in recipe['files']), ready=True,
                 scope=recipe['scope'], allowed_hosts=recipe.get('allowed_hosts',[]))
@@ -205,10 +218,13 @@ class PreparationManager:
         if plan.get('kind')=='huggingface_remote_columnar' or dataset.adapter=='remote_columnar':
             # Transfer is streamed through a bounded cache, not retained as a full source copy.
             plan['required_free_bytes']=max_output_bytes+dataset.adapter_config.get('remote_cache_bytes',1_000_000_000)+20_000_000
+        plan['required_free_bytes'] += dataset.adapter_config.get('max_join_bytes', 0)
         plan['available_bytes'] = shutil.disk_usage(self.directory).free
         if plan['required_free_bytes'] > plan['available_bytes']:
             plan['ready'] = False
             plan['requirements'].append('Insufficient free space for source, cache, and the approved output budget.')
+        if plan['requirements']:
+            plan['ready'] = False
         from dataset_atlas.jobs.limits import limits, enforcement
         plan['resource_limits']=limits({})
         plan['memory_enforcement']=enforcement()
@@ -467,10 +483,17 @@ class PreparationManager:
 def prepared_metadata(dataset, scope):
     """Remove only acquisition claims that this successful preparation disproves."""
     obsolete = {'Adapter and preview are not implemented.', 'Adapter and preview are not implemented'}
+    if dataset.adapter_config.get('credential_profile') == 'huggingface':
+        obsolete.add('Repository files require accepting the Hugging Face contact-sharing access gate.')
     dataset.coverage.blockers = [message for message in dataset.coverage.blockers
         if message not in obsolete
         and not (dataset.adapter=='columnar' and message.startswith('Pinned HF Parquet source totals') and 'no local preview' in message)
         and not (dataset.adapter_config.get('media_scope')=='full' and message.startswith('Only 100 selected original JPEGs'))]
+    if dataset.adapter_config.get('credential_profile') == 'huggingface':
+        dataset.coverage.blockers = [
+            'Source-image redistribution rights remain unreviewed; local acquisition does not approve publication.'
+            if message == 'Dataset content and inherited source-image rights have not been inspected.' else message
+            for message in dataset.coverage.blockers]
     dataset.evidence.append({'kind':'local_preparation','snapshot_id':dataset.snapshot_id,'population':scope,
         'record_count':dataset.coverage.total_count,'note':'Prepared source population; publication rights and paper identity are separate.'})
     return dataset

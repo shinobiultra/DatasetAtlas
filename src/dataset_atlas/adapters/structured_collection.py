@@ -86,6 +86,8 @@ class StructuredCollectionAdapter(DatasetAdapter):
             if format=='csv':data=list(csv.DictReader(io.StringIO(text)))
             elif format=='jsonl':data=[json.loads(line) for line in text.splitlines() if line.strip()]
             elif format=='json':data=json.loads(text)
+            elif format=='text':data=[{'text':text}]
+            elif format=='text_lines':data=[{'line':number,'text':line} for number,line in enumerate(text.splitlines(),1) if line.strip()]
             else:raise ValueError('Unsupported annotation format')
             if entry.get('records_key'):data=_nested(data,entry['records_key'])
             if entry.get('array_columns'):
@@ -94,7 +96,40 @@ class StructuredCollectionAdapter(DatasetAdapter):
                     raise ValueError('Annotation array width differs from declared columns')
                 data = [dict(zip(columns, row)) for row in data]
             if not isinstance(data,list) or any(not isinstance(row,dict) for row in data):raise ValueError('Annotations must contain a list of objects')
+            joins=[]
+            for spec in entry.get('joins',[]):
+                join_path=Path(self.config[spec['path_key']])
+                if spec.get('member'):
+                    with zipfile.ZipFile(join_path) as archive:
+                        info=archive.getinfo(_safe_relative(spec['member']));consumed+=info.file_size
+                        if consumed>maximum:raise ValueError('Joined annotations exceed declared read budget')
+                        table=json.loads(archive.read(info))
+                else:
+                    consumed+=join_path.stat().st_size
+                    if consumed>maximum:raise ValueError('Joined annotations exceed declared read budget')
+                    table=json.loads(join_path.read_text(encoding='utf-8-sig'))
+                if spec.get('records_key'):table=_nested(table,spec['records_key'])
+                if spec['key']=='@key':
+                    if not isinstance(table,dict):raise ValueError('Keyed annotation join requires an object')
+                    items=table.items()
+                else:
+                    if not isinstance(table,list):raise ValueError('Annotation join requires a list of objects')
+                    items=((_nested(item,spec['key']),item) for item in table)
+                lookup={}
+                for key,item in items:
+                    if key is None or not isinstance(key,(str,int)):raise ValueError('Duplicate or missing annotation join key')
+                    if spec.get('string_keys'):key=str(key)
+                    if key in lookup:raise ValueError('Duplicate or missing annotation join key')
+                    lookup[key]=item
+                joins.append((spec,lookup,set()))
             for ordinal,row in enumerate(data):
+                row=dict(row)
+                for spec,lookup,used_keys in joins:
+                    key=_nested(row,spec['on'])
+                    if spec.get('string_keys') and key is not None:key=str(key)
+                    if key not in lookup:raise ValueError('Source row has no matching annotation join')
+                    if spec['field'] in row:raise ValueError('Annotation join would overwrite a source field')
+                    row[spec['field']]=lookup[key];used_keys.add(key)
                 if any(key.startswith('_atlas_') for key in row):raise ValueError('Annotation uses reserved provenance fields')
                 source_id=_nested(row,self.config.get('mapping',{}).get('id'))
                 if self.config.get('identity_fields'):
@@ -103,6 +138,7 @@ class StructuredCollectionAdapter(DatasetAdapter):
                     source_id=json.dumps(parts,ensure_ascii=False,separators=(',',':'))
                 identity=f"{entry.get('identity_prefix',entry['split'])}:{source_id if source_id is not None else ordinal}"
                 value={**row,'_atlas_origin':{'split':entry['split'],'row':ordinal,'file':entry.get('member',entry.get('path_key')),'identity':identity,'group':entry.get('identity_prefix',entry['split'])}}
+                if entry.get('source_status'):value['_atlas_source_status']=entry['source_status']
                 if entry.get('choices_columns'):
                     value['_atlas_choices'] = [row[key] for key in entry['choices_columns']]
                 elif entry.get('choices_field'):
@@ -146,7 +182,11 @@ class StructuredCollectionAdapter(DatasetAdapter):
                 if entry.get('media_path_url_field'):
                     # Only use the source URL's path as a join key. The recipe owns
                     # the HTTPS destination; annotation URLs never grant network access.
-                    member = _safe_relative(urlsplit(row[entry['media_path_url_field']]).path.lstrip('/'))
+                    member = _safe_relative(urlsplit(_nested(row,entry['media_path_url_field'])).path.lstrip('/'))
+                    remove_prefix=entry.get('media_path_remove_prefix','')
+                    if remove_prefix:
+                        if not member.startswith(remove_prefix):raise ValueError('Image URL lacks declared source prefix')
+                        member=_safe_relative(member[len(remove_prefix):])
                     prefix = member.split('/', 1)[0]
                     key = entry['media_archive_by_prefix'].get(prefix)
                     if key not in self.config['remote_archives']: raise ValueError('Image URL path has no declared archive')
@@ -155,7 +195,24 @@ class StructuredCollectionAdapter(DatasetAdapter):
                     member=re.sub(r'\{([A-Za-z0-9_]+)\}',lambda match:str(variables[match[1]]),template)
                     member=_safe_relative(member)
                     value['_atlas_media_refs'].append(f"zip/{entry['media_archive']}/{member}" if entry.get('media_archive') else f'file/{member}')
+                if entry.get('media_variants'):
+                    value['_atlas_media_conditions']={};value['_atlas_absent_conditions']=[]
+                    variables['_prefix']=entry.get('media_prefix','')
+                    for variant in entry['media_variants']:
+                        absent=variant.get('absent_when')
+                        if absent and _nested(row,absent['field']) in absent['values']:
+                            value['_atlas_absent_conditions'].append(variant['condition'])
+                            continue
+                        member=_safe_relative(re.sub(r'\{([A-Za-z0-9_]+)\}',lambda match:str(variables[match[1]]),variant['template']))
+                        ref=f'file/{member}'
+                        if ref in value['_atlas_media_refs']:raise ValueError('Duplicate media variant')
+                        target=_nested(row,variant['target_field']) if 'target_field' in variant else variant.get('target')
+                        value['_atlas_media_conditions'][ref]={'condition':variant['condition'],'target':target,
+                            'target_provenance':'native field '+variant['target_field'] if 'target_field' in variant else 'release card condition definition'}
+                        value['_atlas_media_refs'].append(ref)
                 rows.append(value)
+            for spec,lookup,used_keys in joins:
+                if not spec.get('allow_unused',False) and used_keys!=set(lookup):raise ValueError('Unmatched annotation join rows')
         self._annotation_rows=rows
         return rows
 
@@ -223,6 +280,7 @@ class StructuredCollectionAdapter(DatasetAdapter):
         for ordinal,row in enumerate(rows[start:end],start):
             record=DatasetAdapter._record(self,row,ordinal);record.source.pop('_atlas_media_refs',None)
             for asset in record.assets:
+                if asset.uri in row.get('_atlas_media_conditions',{}):asset.metadata.update(row['_atlas_media_conditions'][asset.uri])
                 if asset.uri.startswith('file/'):
                     entry=self._inventory()[asset.uri[5:]]
                     asset.sha256=entry.get('sha256')
@@ -241,7 +299,7 @@ class StructuredCollectionAdapter(DatasetAdapter):
             remaining=source.max_bytes-source.bytes_read
             if entry['bytes']>remaining:raise ValueError('Source image exceeds byte budget')
             cache=BoundedCache(self.config['remote_cache_root'],max_bytes=self.config.get('remote_cache_bytes',1_000_000_000))
-            path=HttpsFetcher(self.config['media_allowed_hosts'],max_bytes=remaining).fetch(
+            path=HttpsFetcher(self.config['media_allowed_hosts'],max_bytes=remaining,credential_profile=self.config.get('credential_profile')).fetch(
                 self.config['media_base_url'].rstrip('/')+'/'+quote(name,safe='/'),cache,
                 CacheIdentity(self.revision,entry.get('sha256',entry.get('git_blob_sha1')),'source-image'),
                 expected_sha256=entry.get('sha256'),byte_budget=entry['bytes'])

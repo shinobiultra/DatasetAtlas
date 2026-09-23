@@ -785,6 +785,12 @@ def get_adapter(dataset: Dataset) -> DatasetAdapter:
     if dataset.adapter == "coco_questions":
         from .coco_questions import CocoQuestionsAdapter
         return CocoQuestionsAdapter(dataset)
+    if dataset.adapter == "visual_genome":
+        from .visual_genome import VisualGenomeAdapter
+        return VisualGenomeAdapter(dataset)
+    if dataset.adapter == "phantom":
+        from .phantom import PhantomAdapter
+        return PhantomAdapter(dataset)
     if dataset.adapter == "structured_collection":
         from .structured_collection import StructuredCollectionAdapter
         return StructuredCollectionAdapter(dataset)

@@ -343,3 +343,55 @@ def test_multiple_native_archives_repack_and_join_with_shared_output_budget(tmp_
     receipt=json.loads((registry.active_directory('multi')/'receipt.json').read_text())
     assert len(receipt['derived_sources'])==2
     for item in receipt['derived_sources']:assert item['bytes']>0
+
+
+def test_new_recipe_replaces_active_source_and_gets_a_new_snapshot(tmp_path, monkeypatch):
+    original=fixture(tmp_path,3);manager=PreparationManager(tmp_path)
+    initial=manager.plan(original.id,1000000,1000000);run(tmp_path,initial['id'])
+    old=Registry(tmp_path).dataset(original.id)
+    path=tmp_path/'replacement.json';path.write_text('[{"id":"new","text":"new release"}]')
+    checksum=hashlib.sha256(path.read_bytes()).hexdigest()
+    recipes=tmp_path/'registry/recipes';recipes.mkdir()
+    (recipes/(original.id+'.yaml')).write_text(yaml.safe_dump({'adapter':'json','release':'new-release','expected_count':1,
+        'scope':'New release','adapter_config':{'mapping':{'id':'id','text':'text'}},'files':[{'url':'https://example.org/new.json',
+        'source_name':'new.json','bytes':path.stat().st_size,'sha256':checksum,'config_key':'path','format':'json'}]}))
+    plan=manager.plan(original.id,1000000,1000000)
+    assert plan['kind']=='http_archive' and plan['expected_count']==1
+    assert plan['prepared_dataset']['snapshot_id'] == ''
+    monkeypatch.setattr('dataset_atlas.storage.HttpsFetcher.fetch',lambda *args,**kwargs:path)
+    run(tmp_path,plan['id']);registry=Registry(tmp_path);new=registry.dataset(original.id)
+    assert new.snapshot_id != old.snapshot_id and new.coverage.total_count==1
+    assert registry.pack(original.id).records[0].text=='new release'
+    assert registry.dataset_version(original.id,old.release).snapshot_id==old.snapshot_id
+
+
+def test_registered_source_preparation_never_fetches_network(tmp_path,monkeypatch):
+    from dataset_atlas.storage.sources import register_source
+    dataset=fixture(tmp_path,2);path=tmp_path/'replacement.json';path.write_text('[{"text":"registered"}]')
+    sha=hashlib.sha256(path.read_bytes()).hexdigest();register_source(tmp_path,path,sha,1000)
+    recipes=tmp_path/'registry/recipes';recipes.mkdir()
+    (recipes/(dataset.id+'.yaml')).write_text(yaml.safe_dump({'adapter':'json','release':'registered','expected_count':1,'scope':'Fixture',
+        'adapter_config':{'mapping':{'text':'text'}},'files':[{'source_name':'data.json','url':'https://example.org/data.json','sha256':sha,'bytes':path.stat().st_size,'format':'json','config_key':'path'}]}))
+    def reject(*a,**kw):raise AssertionError('Registered source was downloaded again')
+    monkeypatch.setattr('dataset_atlas.storage.HttpsFetcher.fetch',reject)
+    manager=PreparationManager(tmp_path);plan=manager.plan(dataset.id,10000,1000000);run(tmp_path,plan['id'])
+    assert Registry(tmp_path).pack(dataset.id).records[0].text=='registered'
+
+
+def test_gated_recipe_requires_local_credentials_without_serializing_them(tmp_path, monkeypatch):
+    dataset = fixture(tmp_path, 3)
+    recipes = tmp_path/'registry/recipes'; recipes.mkdir()
+    source = tmp_path/'source.parquet'
+    (recipes/(dataset.id+'.yaml')).write_text(yaml.safe_dump({
+        'credential_profile': 'huggingface', 'release': 'new', 'scope': 'fixture', 'expected_count': 3,
+        'files': [{'url': 'https://huggingface.co/datasets/fixture/data.parquet', 'source_name': 'data.parquet',
+                   'bytes': source.stat().st_size, 'sha256': hashlib.sha256(source.read_bytes()).hexdigest()}]}))
+    monkeypatch.delenv('HF_TOKEN', raising=False)
+    monkeypatch.setenv('HF_TOKEN_PATH', str(tmp_path/'missing-token'))
+    manager = PreparationManager(tmp_path)
+    plan = manager.plan(dataset.id, 1000000, 1000000)
+    assert not plan['ready'] and any('credentials are missing' in item for item in plan['requirements'])
+    monkeypatch.setenv('HF_TOKEN', 'hf_fixture_private')
+    plan = manager.plan(dataset.id, 1000000, 1000000)
+    assert plan['ready'] and plan['credential_profile'] == 'huggingface'
+    assert 'hf_fixture_private' not in json.dumps(plan)

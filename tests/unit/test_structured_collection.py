@@ -124,3 +124,63 @@ def test_fixed_width_caption_rows_preserve_order_and_reject_bad_width(tmp_path):
     assert record.assets[0].uri=='zip/coco/val/000000000123.jpg'
     path.write_text('[[123,"only one option"]]')
     with pytest.raises(ValueError,match='width'):StructuredCollectionAdapter(a.dataset)._rows()
+
+
+def test_native_conditions_keep_distinct_targets_and_explicit_absence(tmp_path):
+    rows=[{'image_name':'a','label':'2'},{'image_name':'b','label':'No illusion'}]
+    path=tmp_path/'rows.json';path.write_text(json.dumps(rows))
+    files={name:{'bytes':10,'sha256':'a'*64} for name in ['repo/illusion/a.jpg','repo/raw/a.jpg','repo/illusion/b.jpg','repo/control/a.jpg','repo/control/b.jpg']}
+    inventory=tmp_path/'images.json';inventory.write_text(json.dumps({'files':files}))
+    variants=[{'template':'{_prefix}/illusion/{image_name}.jpg','condition':'illusion','target_field':'label'},
+        {'template':'{_prefix}/raw/{image_name}.jpg','condition':'raw','target_field':'label','absent_when':{'field':'label','values':['No illusion']}},
+        {'template':'{_prefix}/control/{image_name}.jpg','condition':'control','target':'No illusion'}]
+    dataset=Dataset(id='variants',name='Fixture',release='r',snapshot_id='s',adapter='structured_collection',adapter_config={
+        'path':str(path),'annotations':[{'path_key':'path','split':'test','media_prefix':'repo','media_variants':variants}],
+        'mapping':{'id':'image_name'},'media_inventory_path':str(inventory),'media_inventory_sha256':hashlib.sha256(inventory.read_bytes()).hexdigest()})
+    adapter=StructuredCollectionAdapter(dataset);assert adapter.validate_media(10000)['referenced_images']==5
+    records=adapter.iter_records(adapter.prepare(adapter.plan(10,10000))).records
+    assert [a.metadata['target'] for a in records[0].assets]==['2','2','No illusion']
+    assert len(records[1].assets)==2 and records[1].source['_atlas_absent_conditions']==['raw']
+    assert records[0].source['label']=='2'
+    # Undeclared absence remains an error rather than silently dropping a condition.
+    del files['repo/control/b.jpg'];inventory.write_text(json.dumps({'files':files}))
+    dataset.adapter_config['media_inventory_sha256']=hashlib.sha256(inventory.read_bytes()).hexdigest()
+    with pytest.raises(ValueError,match='missing inventory'):StructuredCollectionAdapter(dataset).validate_media(10000)
+
+
+def test_malformed_upstream_document_can_be_inspected_as_explicit_raw_text(tmp_path):
+    path=tmp_path/'broken.jsonl';path.write_text('<html>Upstream error committed as a source file</html>')
+    dataset=Dataset(id='raw',name='Fixture',release='r',snapshot_id='s',adapter='structured_collection',adapter_config={
+        'path':str(path),'annotations':[{'path_key':'path','format':'text','split':'malformed','source_status':'Invalid native JSONL'}],'mapping':{'text':'text'}})
+    adapter=StructuredCollectionAdapter(dataset);record=adapter.iter_records(adapter.prepare(adapter.plan(1,10000))).records[0]
+    assert record.text==path.read_text()
+    assert record.source['_atlas_source_status']=='Invalid native JSONL'
+    assert not record.assets
+
+
+def test_native_annotation_join_preserves_fields_and_rejects_defects(tmp_path,monkeypatch):
+    adapter,_,path=fixture(tmp_path,monkeypatch)
+    path.write_text('[{"id":1,"image_id":7,"question":"Where?"}]')
+    joined=tmp_path/'images.json';joined.write_text('[{"image_id":7,"url":"http://source.example/train/image.png","width":8}]')
+    adapter.config.update(source_files=[],images_path=str(joined),annotations=[{'path_key':'train_path','split':'test',
+        'joins':[{'path_key':'images_path','on':'image_id','key':'image_id','field':'image_metadata'}],
+        'media_path_url_field':'image_metadata.url','media_archive_by_prefix':{'train':'images'}}])
+    record=adapter.iter_records(adapter.prepare(adapter.plan(10,10000))).records[0]
+    assert record.source['image_metadata']['width']==8 and record.question=='Where?'
+    assert record.assets[0].uri=='zip/images/train/image.png'
+    for value,match in [('[{"image_id":7},{"image_id":7}]','Duplicate'),('[{"image_id":8}]','no matching'),
+                        ('[{"image_id":7,"url":"http://x/train/image.png"},{"image_id":8}]','Unmatched')]:
+        joined.write_text(value);adapter.__dict__.pop('_annotation_rows',None)
+        with pytest.raises(ValueError,match=match):adapter._rows()
+
+
+def test_native_text_lists_preserve_line_numbers_and_overlapping_memberships(tmp_path):
+    path = tmp_path/'prompts.txt';path.write_text('First prompt\n\n Second prompt \n')
+    dataset = Dataset(id='prompts', name='Fixture', release='r', snapshot_id='s', adapter='structured_collection', adapter_config={
+        'path': str(path), 'annotations': [{'path_key': 'path', 'format': 'text_lines', 'split': split} for split in ['all', 'train']],
+        'mapping': {'id': 'line', 'text': 'text'}})
+    adapter = StructuredCollectionAdapter(dataset)
+    records = adapter.iter_records(adapter.prepare(adapter.plan(10, 10000))).records
+    assert len(records) == 4 and len({r.id for r in records}) == 4
+    assert records[1].source['line'] == 3 and records[1].text == ' Second prompt '
+    assert records[0].text == records[2].text

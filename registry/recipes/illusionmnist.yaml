@@ -1,0 +1,79 @@
+release: official-collection-a197e3e89ea6740e
+source_url: https://github.com/IllusoryVQA/IllusoryVQA
+adapter: structured_collection
+expected_count: 5069
+scope: All native CSV-indexed train/test rows in MNIST_train, MNIST_test. Each example
+  keeps all released image conditions and their condition-specific targets. Missing
+  training control counterparts are explicit. Unindexed duplicate-name image files
+  and generation prompt pools are retained upstream, not counted as annotated examples.
+  This is the original author-generated dataset, not Atlas-generated replacements.
+files:
+- source_name: MNIST_train.csv
+  url: https://huggingface.co/datasets/VQA-Illusion/MNIST_train/resolve/fdd191d5183fb50f32c3ebee9e506438f53a4b07/df_data.csv
+  bytes: 338262
+  sha256: 65ecfeda3dcedcee5b3469042582d894ebcb95c3df00c3b17405ed85a0e1ae28
+  format: csv
+  config_key: mnist_train_metadata
+- source_name: MNIST_test.csv
+  url: https://huggingface.co/datasets/VQA-Illusion/MNIST_test/resolve/81ad1bbc995810369a5d3b4aceb84b882b55ced1/df_data.csv
+  bytes: 94772
+  sha256: 647c690ba3f4c180e7e775c850fe6981b0f2ac281479c1957ec6d6e4d2bec80a
+  format: csv
+  config_key: mnist_test_metadata
+allowed_hosts: &id001
+- huggingface.co
+- cdn-lfs.huggingface.co
+- cdn-lfs-us-1.huggingface.co
+- cdn-lfs-eu-1.huggingface.co
+- cas-bridge.xethub.hf.co
+- us.aws.cdn.hf.co
+- eu.aws.cdn.hf.co
+adapter_config:
+  annotations:
+  - path_key: mnist_train_metadata
+    format: csv
+    split: MNIST_train
+    media_prefix: VQA-Illusion/MNIST_train/resolve/fdd191d5183fb50f32c3ebee9e506438f53a4b07
+    media_variants:
+    - template: '{_prefix}/ill_images/{image_name}.jpg'
+      condition: illusion_or_native_training_control
+      target_field: label
+    - template: '{_prefix}/raw_images/{image_name}.jpg'
+      condition: source_condition
+      target_field: label
+      absent_when:
+        field: label
+        values:
+        - No Illusion
+        - No illusion
+        - no illusion
+        - ''
+  - path_key: mnist_test_metadata
+    format: csv
+    split: MNIST_test
+    media_prefix: VQA-Illusion/MNIST_test/resolve/81ad1bbc995810369a5d3b4aceb84b882b55ced1
+    media_variants:
+    - template: '{_prefix}/ill_images/{image_name}.jpg'
+      condition: illusion_or_native_training_control
+      target_field: label
+    - template: '{_prefix}/illusion_images_filtered/{image_name}.jpg'
+      condition: filtered_illusion
+      target_field: label
+    - template: '{_prefix}/raw_images/{image_name}.jpg'
+      condition: source_condition
+      target_field: label
+    - template: '{_prefix}/illusionless_images/{image_name}.jpg'
+      condition: illusionless
+      target: No illusion
+    - template: '{_prefix}/illusionless_images_filtered/{image_name}.jpg'
+      condition: filtered_illusionless
+      target: No illusion
+  mapping:
+    id: image_name
+    text: Pprompt
+  media_inventory_path: registry/source-manifests/illusionmnist-media.json
+  media_inventory_sha256: a197e3e89ea6740ed37218842d516d223749af92876dd07f1e5f9597cd71f08d
+  media_base_url: https://huggingface.co/datasets
+  media_allowed_hosts: *id001
+  remote_cache_root: work/media-cache/illusoryvqa
+  remote_cache_bytes: 2000000000

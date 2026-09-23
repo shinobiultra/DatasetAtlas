@@ -1,0 +1,603 @@
+{
+  "method": "First native record in each declared configuration or named source category; PHANTOM also includes each attack strategy, multi-turn conversations and each source benchmark. Deterministic coverage probes, not a random quality estimate.",
+  "byte_budget": 1000000000,
+  "bytes_read": 23175514,
+  "datasets": [
+    {
+      "dataset_id": "illusoryvqa",
+      "snapshot_id": "illusoryvqa-3c6eaab517eb3497b8e31a04",
+      "groups": {
+        "configuration:MNIST_train": "illusoryvqa:example:eb9a77d6a431c506e996e273",
+        "configuration:MNIST_test": "illusoryvqa:example:4862ed21d6ea5476d3b682c9",
+        "configuration:FashionMnist_train": "illusoryvqa:example:b8fc28ddbf44a04f5d84293f",
+        "configuration:FashionMnist_test": "illusoryvqa:example:570ba12e5313a43d06b69ea4",
+        "configuration:IllusionAnimals_train": "illusoryvqa:example:925d35238505ec7281649b15",
+        "configuration:IllusionAnimals_test": "illusoryvqa:example:0da3aaf444ebaee09f2d5350",
+        "configuration:IllusionChar_train": "illusoryvqa:example:21e0efd1e5c33e50c74f30b6",
+        "configuration:IllusionChar_test": "illusoryvqa:example:457d00aef54d297ef48b251b"
+      },
+      "records_checked": 8,
+      "media_checked": 29,
+      "explicit_unavailable": [],
+      "media": [
+        {
+          "record_id": "illusoryvqa:example:0da3aaf444ebaee09f2d5350",
+          "asset_id": "illusoryvqa:asset:999412db90f44556eb5ce3d2",
+          "sha256": "6da47d49ff786908818df6b0cce7dff540a412dbb1b7754d78afd69985fb89b6",
+          "bytes": 173236,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:0da3aaf444ebaee09f2d5350",
+          "asset_id": "illusoryvqa:asset:04d18c5ee50e91737b15d6dc",
+          "sha256": "a7ecb0592352180361e21f76211b30747725efc0c8b0c5ea33df723982d5b209",
+          "bytes": 314199,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:0da3aaf444ebaee09f2d5350",
+          "asset_id": "illusoryvqa:asset:4bdbd85894a54c0845071fe4",
+          "sha256": "d70ce4b6c17ed4b2fe9a200f656e97e689a682266f2ae7095fa6987b645939b2",
+          "bytes": 58709,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:0da3aaf444ebaee09f2d5350",
+          "asset_id": "illusoryvqa:asset:281b79701f42e11555c8407c",
+          "sha256": "cf502db494a4b186247ecd462a1a4f22072d4f8ea772c1da1ce549e5f8c10899",
+          "bytes": 132191,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:0da3aaf444ebaee09f2d5350",
+          "asset_id": "illusoryvqa:asset:066c3bf8c939c2d5dac10dfe",
+          "sha256": "6e1d20219685deb041bc3871e9197d962dedf99ef99483c1ba9ca617452a49ec",
+          "bytes": 298031,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:21e0efd1e5c33e50c74f30b6",
+          "asset_id": "illusoryvqa:asset:3a56399c9329fb90da92b62e",
+          "sha256": "22550b9d8ece4bdc594d8c6a03f3a6699d697f2f5f284f6b23131d42ba48504f",
+          "bytes": 139221,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:21e0efd1e5c33e50c74f30b6",
+          "asset_id": "illusoryvqa:asset:922f9777b14c4801609975f1",
+          "sha256": "85ef065341a230a70fa93bd7b5cdfe7dee55446fa2a96b1fb4dab59507185593",
+          "bytes": 277058,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:21e0efd1e5c33e50c74f30b6",
+          "asset_id": "illusoryvqa:asset:738c610789cb3ef4ad65b03a",
+          "sha256": "e5e0eee1f521e28497d33014c610bc1cd145867a5ff655315141ec74a99c3b9e",
+          "bytes": 26407,
+          "size": [
+            1000,
+            1000
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:457d00aef54d297ef48b251b",
+          "asset_id": "illusoryvqa:asset:090ad019639261e7956ad826",
+          "sha256": "9a1aaa57bb360edbcf4895def4fca3fb270f4865f781c3c431df68ccd6ac2c31",
+          "bytes": 1144285,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:457d00aef54d297ef48b251b",
+          "asset_id": "illusoryvqa:asset:eef246fde9563a28fc9f117b",
+          "sha256": "1e5cd1d3df0ba9d5591b46625c9fe1b8a0c698e7a89f6f85a996fa908e9156ea",
+          "bytes": 473648,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:457d00aef54d297ef48b251b",
+          "asset_id": "illusoryvqa:asset:3152447643cba8c897794b0a",
+          "sha256": "982f9c517ca0ab079aae0c528b88a02e2c40e17b7dd700fefb5b60edb4c05ac2",
+          "bytes": 16379,
+          "size": [
+            1000,
+            1000
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:457d00aef54d297ef48b251b",
+          "asset_id": "illusoryvqa:asset:7edab8f011a034b476c9cc4d",
+          "sha256": "944362e48a22714c99f4b86474ddf43e5368c1414c6331d7ab1194e68d54a468",
+          "bytes": 1184664,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:457d00aef54d297ef48b251b",
+          "asset_id": "illusoryvqa:asset:ff56aca5ceeee98dec130616",
+          "sha256": "91da78409d388daea8c9c62ec1a92d1b0a12babf82a421ab466d1c24e6174a46",
+          "bytes": 509530,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:4862ed21d6ea5476d3b682c9",
+          "asset_id": "illusoryvqa:asset:c1281f5815ab23394e59b6fb",
+          "sha256": "8a56b63a09fbc57af70486d0c5511cf8f5aaa7aab7313c6bdd7a8c02130fd8c9",
+          "bytes": 158881,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:4862ed21d6ea5476d3b682c9",
+          "asset_id": "illusoryvqa:asset:df24c55a80e75f1614688e0d",
+          "sha256": "b6dc19c77d6ad2b47e1252d7a9e44531ed0c6fc60a420e0cd6ea975fa5ad4674",
+          "bytes": 266248,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:4862ed21d6ea5476d3b682c9",
+          "asset_id": "illusoryvqa:asset:befefa31787d053b56b2fe3f",
+          "sha256": "7fbd1563d0932b9b8a44a7e95dfa49a0d746383496fba6b0df1950df0c1f536b",
+          "bytes": 12754,
+          "size": [
+            512,
+            512
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:4862ed21d6ea5476d3b682c9",
+          "asset_id": "illusoryvqa:asset:c493f1d31f450b7cd745808f",
+          "sha256": "cb96c6951a96c9a9f27012db1fcd4ac41815371e3bfc13ae7f85b3c214607159",
+          "bytes": 150368,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:4862ed21d6ea5476d3b682c9",
+          "asset_id": "illusoryvqa:asset:a78abdfebfcd5a1f292ab5e0",
+          "sha256": "e10ea8284a88f5a4d3bf374e0e3c015353d572e5e190a501398708315dbbdaf6",
+          "bytes": 347369,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:570ba12e5313a43d06b69ea4",
+          "asset_id": "illusoryvqa:asset:253d507f4c18a7d0d76301a0",
+          "sha256": "5d27b734043f105eb5e165563baa3edef9b94c131628a416f903717caea8a2d5",
+          "bytes": 127326,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:570ba12e5313a43d06b69ea4",
+          "asset_id": "illusoryvqa:asset:fdce3f7db389e0048e385455",
+          "sha256": "a7ee1cbdbc8afaa230d6495e809f245cbdbca7b0c06de2bfbe6a98d741ccc9e0",
+          "bytes": 269442,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:570ba12e5313a43d06b69ea4",
+          "asset_id": "illusoryvqa:asset:e496ab11a6d9bb0364b61dd5",
+          "sha256": "bdfb39b545fdc5dee934f9eebd9e7c77c995cb526e6c75c7070e08413bddb504",
+          "bytes": 15153,
+          "size": [
+            512,
+            512
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:570ba12e5313a43d06b69ea4",
+          "asset_id": "illusoryvqa:asset:dc6cd07b18be4012fd554f2b",
+          "sha256": "d23f8c99c2e995c0a40bed9501405dc74ea8cc1c83e0fae7759bae68477d2ec8",
+          "bytes": 355960,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:570ba12e5313a43d06b69ea4",
+          "asset_id": "illusoryvqa:asset:4ffd30c400f2ea1ded342767",
+          "sha256": "5f15c2fc0f917f0e9ca34a2aa6e293a4ea3cf49d906b1e888ebf19211e93bb5e",
+          "bytes": 289931,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:925d35238505ec7281649b15",
+          "asset_id": "illusoryvqa:asset:75e96a115232f3a216ab2042",
+          "sha256": "8bdf1cbca958ecd1066538d11865b55e4c0fa96d01ff85c5b5a28168418875dc",
+          "bytes": 134729,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:925d35238505ec7281649b15",
+          "asset_id": "illusoryvqa:asset:5dbb432e45cf482a0c1ca06a",
+          "sha256": "fe31b1f1110d620010bfec549bb0a8ad76da057d8ece54d93d8fdb1b49dcb74a",
+          "bytes": 69708,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:b8fc28ddbf44a04f5d84293f",
+          "asset_id": "illusoryvqa:asset:2f923e511b707249c848a11d",
+          "sha256": "5b158cf12b546fc9ec56eab5ddc3c7a5ec520929e3ee90d05a40bac4a70af611",
+          "bytes": 183319,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:b8fc28ddbf44a04f5d84293f",
+          "asset_id": "illusoryvqa:asset:4597f0566819eb68facd5a4b",
+          "sha256": "f0fc72421f410180c84ecefd57db33941157590a5ccedc11f7d5c87490dd616d",
+          "bytes": 17374,
+          "size": [
+            512,
+            512
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:eb9a77d6a431c506e996e273",
+          "asset_id": "illusoryvqa:asset:7db3a8f556661e01c99e5f21",
+          "sha256": "325d988d9dd4e22376f375db5700af81d4884c79078022a88990a3730c002dd4",
+          "bytes": 101287,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "illusoryvqa:example:eb9a77d6a431c506e996e273",
+          "asset_id": "illusoryvqa:asset:78d5244fa02ce010b5ad68e3",
+          "sha256": "4a70b3357b45ba1a6d7c4043a785e3e44fcf4c8d3dfc60442c5fe71c9ca6056b",
+          "bytes": 15797,
+          "size": [
+            512,
+            512
+          ]
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "dataset_id": "phantom",
+      "snapshot_id": "phantom-41623e4dc1d0eb73cab47b53",
+      "groups": {
+        "category:A. Ethical and Social Risks": "phantom:example:d623cdf93cd237c6aa61b69f",
+        "strategy:BAP": "phantom:example:d623cdf93cd237c6aa61b69f",
+        "category:B. Privacy and Data Risks": "phantom:example:d529d09e74dd9d689987cd25",
+        "category:C. Safety and Physical Harm": "phantom:example:c22ef41f7bfd3b690ad47f5d",
+        "category:D. Criminal and Economic Risks": "phantom:example:b133c0ece226b8fa89f0ea00",
+        "category:E. Cybersecurity Threats": "phantom:example:ac165033567ba021c4dd7757",
+        "category:F. Information and Political Manipulation": "phantom:example:3d84060391c8af72e24dda45",
+        "category:G. Content and Cultural Safety": "phantom:example:692603747b7257c300a8ae2b",
+        "category:H. Intellectual Property and Ownership": "phantom:example:86c7bbde749a1067ce1e9f85",
+        "category:I. Decision and Cognitive Risks": "phantom:example:9163f2a385e294b51881cc1c",
+        "strategy:IDEATOR": "phantom:example:a5090ce4405c5d96de2dc1aa",
+        "multi-turn:3": "phantom:example:a5090ce4405c5d96de2dc1aa",
+        "multi-turn:2": "phantom:example:7fb909c3ed4b491d994c4334",
+        "strategy:MML": "phantom:example:490be50a782a3e87f22810cf",
+        "category:J. Child Safety": "phantom:example:1696a761af32da32fa7c6b65",
+        "missing-media": "phantom:example:0e620c08ea49e3893a6aa7c5",
+        "strategy:FC_ATTACK": "phantom:example:9c5d231de94ed1817fe659ea",
+        "strategy:CSDJ": "phantom:example:e868a9f967a361f4f45c4740",
+        "benchmark:OmniSafeBench": "phantom:example:84e276b3c606c485d5656ed9",
+        "benchmark:MM-SafetyBench": "phantom:example:fb162fcf4182902795dee590",
+        "benchmark:JailBreakV_28k": "phantom:example:27242ceeae06df2f33e0dd12",
+        "benchmark:SafeBench": "phantom:example:a434dd1b19a7437e1a2c9a11",
+        "benchmark:PHANTOM": "phantom:example:ffb2bb19c57ba88b1054c363"
+      },
+      "records_checked": 21,
+      "media_checked": 23,
+      "explicit_unavailable": [
+        {
+          "asset_id": "phantom:asset:b463200a26c4b4401410459b",
+          "availability": "absent_from_pinned_release"
+        },
+        {
+          "asset_id": "phantom:asset:9cfd7dbea6a1341d4c551d0a",
+          "availability": "absent_from_pinned_release"
+        },
+        {
+          "asset_id": "phantom:asset:fee40e1e47553a4038f06e97",
+          "availability": "absent_from_pinned_release"
+        },
+        {
+          "asset_id": "phantom:asset:80f8c17d3822ff97e09b8556",
+          "availability": "absent_from_pinned_release"
+        },
+        {
+          "asset_id": "phantom:asset:c2f4315df0818a2afcd2db51",
+          "availability": "absent_from_pinned_release"
+        }
+      ],
+      "media": [
+        {
+          "record_id": "phantom:example:1696a761af32da32fa7c6b65",
+          "asset_id": "phantom:asset:95efd0c75a35465b4574209b",
+          "sha256": "13c55f5c1a4429867426322c60fb1dc3e81775f8bf00fd089739b65bfa14977f",
+          "bytes": 63951,
+          "size": [
+            760,
+            760
+          ]
+        },
+        {
+          "record_id": "phantom:example:3d84060391c8af72e24dda45",
+          "asset_id": "phantom:asset:2429779dcc3893177eade8f8",
+          "sha256": "7dc411edf5de3fa443852760d2ec26022429f05bd113fad83d8d1a2724716bbc",
+          "bytes": 700445,
+          "size": [
+            640,
+            480
+          ]
+        },
+        {
+          "record_id": "phantom:example:490be50a782a3e87f22810cf",
+          "asset_id": "phantom:asset:86531c8bca298943d7806ea9",
+          "sha256": "7e4a94cf98677d5abea7cfc91851a9dec746f2b609b22993cae6625d79761e44",
+          "bytes": 60628,
+          "size": [
+            760,
+            760
+          ]
+        },
+        {
+          "record_id": "phantom:example:692603747b7257c300a8ae2b",
+          "asset_id": "phantom:asset:756a69c8e4b43ac0dcfb043c",
+          "sha256": "9644c8062fd38cd917afd59d8574be8b3d5c5c28bb77137cc056309cc8fe5ef5",
+          "bytes": 281925,
+          "size": [
+            375,
+            500
+          ]
+        },
+        {
+          "record_id": "phantom:example:7fb909c3ed4b491d994c4334",
+          "asset_id": "phantom:asset:b305f3cabd9396eca44b337c",
+          "sha256": "fd1d1b063c0febc5ca4ed751c78371415347747d365beaff28c9e3f0625bbe29",
+          "bytes": 1517072,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "phantom:example:7fb909c3ed4b491d994c4334",
+          "asset_id": "phantom:asset:eaf898ab7ddcf4ba3eaf0662",
+          "sha256": "85716f928712ebb1ec6c1812a851c5df2898d611213666ac6928af458ffcf1b2",
+          "bytes": 924143,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "phantom:example:84e276b3c606c485d5656ed9",
+          "asset_id": "phantom:asset:3e04fa7257b7571e4f4af7e8",
+          "sha256": "88ef79d01c9e6216a44aac7134eff0a2270fdea9bbacfaf146a1088d1c2b2bc2",
+          "bytes": 1399773,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "phantom:example:86c7bbde749a1067ce1e9f85",
+          "asset_id": "phantom:asset:205e53778674cc11ec1eb8b8",
+          "sha256": "1f7cf3d570e9ebb0396479329dfda17bcf81853b507a9b0ad5119c352647b538",
+          "bytes": 382565,
+          "size": [
+            640,
+            427
+          ]
+        },
+        {
+          "record_id": "phantom:example:9163f2a385e294b51881cc1c",
+          "asset_id": "phantom:asset:d10447bd17e52df702b52a0a",
+          "sha256": "a6799e949b9559d839b1f8cffc5d36726f93d63755d5029714ceaa70ac4d1d51",
+          "bytes": 615635,
+          "size": [
+            640,
+            427
+          ]
+        },
+        {
+          "record_id": "phantom:example:9c5d231de94ed1817fe659ea",
+          "asset_id": "phantom:asset:7573d0f379a27bd728dbe7f1",
+          "sha256": "05006ad968fafe16288fcb1b4967107d8d05f2e7c681a2d21272d74cd4279584",
+          "bytes": 629039,
+          "size": [
+            2141,
+            5995
+          ]
+        },
+        {
+          "record_id": "phantom:example:a434dd1b19a7437e1a2c9a11",
+          "asset_id": "phantom:asset:45bf6d4486688e772fd217e6",
+          "sha256": "dec2147874fc8c74df8623557b67de4976b090bf53cb7b79dca178fcf46955a6",
+          "bytes": 1162708,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "phantom:example:a5090ce4405c5d96de2dc1aa",
+          "asset_id": "phantom:asset:cfe245fcd8abb86a17730558",
+          "sha256": "d6b2cc19c156a147fb39826374a771118900eaa77b876196d65c52a1fde607d8",
+          "bytes": 1461443,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "phantom:example:a5090ce4405c5d96de2dc1aa",
+          "asset_id": "phantom:asset:056b0200788b2bea8c27b16c",
+          "sha256": "e0dfefa0151627cba777870ec85fa3524164f73852f45d2d7efad83564d764a1",
+          "bytes": 1257634,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "phantom:example:a5090ce4405c5d96de2dc1aa",
+          "asset_id": "phantom:asset:3bf1c59d224aca228f39595f",
+          "sha256": "abe449985f6a2b1150299d093eafcffd971166b9ced0afc35c300a5e36baf279",
+          "bytes": 1239143,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "phantom:example:ac165033567ba021c4dd7757",
+          "asset_id": "phantom:asset:3d456129d735ad751afb278a",
+          "sha256": "5908e72e739ae6f87ab1917b1e7573849db805a3977cc1965150b09d4c3befe9",
+          "bytes": 692785,
+          "size": [
+            640,
+            480
+          ]
+        },
+        {
+          "record_id": "phantom:example:b133c0ece226b8fa89f0ea00",
+          "asset_id": "phantom:asset:fbd70c16a4b952a8f1912a01",
+          "sha256": "8aa2cc9d4dac3bc652615990423833eb9967f405ca1eb715bd02be58a3c301bd",
+          "bytes": 439806,
+          "size": [
+            640,
+            480
+          ]
+        },
+        {
+          "record_id": "phantom:example:c22ef41f7bfd3b690ad47f5d",
+          "asset_id": "phantom:asset:dd4dfbdbe89b5750953fb0d4",
+          "sha256": "dcb35d2fd6a323598d92b35e76bb2c7ccd094e4e15975f59ef8f233b98739358",
+          "bytes": 399367,
+          "size": [
+            640,
+            428
+          ]
+        },
+        {
+          "record_id": "phantom:example:d529d09e74dd9d689987cd25",
+          "asset_id": "phantom:asset:dbba648e5e562d30e8ef716f",
+          "sha256": "3514f02f6519f10ccf8b60ce757c1c735b9740748127cf42b640f50d2ebd3f91",
+          "bytes": 336763,
+          "size": [
+            500,
+            333
+          ]
+        },
+        {
+          "record_id": "phantom:example:d623cdf93cd237c6aa61b69f",
+          "asset_id": "phantom:asset:e04c77849f1bce0591a57f94",
+          "sha256": "f14d7ee55f87d0289c9379fd796af061de10ceb8e8c4abcc13934ef14d6331e5",
+          "bytes": 542997,
+          "size": [
+            640,
+            480
+          ]
+        },
+        {
+          "record_id": "phantom:example:e868a9f967a361f4f45c4740",
+          "asset_id": "phantom:asset:1a7426450ca8b430fcc20c16",
+          "sha256": "61ca20c6e216297a100a40224087383a7e1281f5a5c0cec8c6fb56fda25ae8f3",
+          "bytes": 372982,
+          "size": [
+            1500,
+            2120
+          ]
+        },
+        {
+          "record_id": "phantom:example:fb162fcf4182902795dee590",
+          "asset_id": "phantom:asset:19358c789f5beefef1b0b48b",
+          "sha256": "a4289a7d8555436ad437b7b375f4e12ecfd3742ec09be4d39e1412daee38b831",
+          "bytes": 658589,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "record_id": "phantom:example:fb162fcf4182902795dee590",
+          "asset_id": "phantom:asset:cac328dc7b56489c4faadb55",
+          "sha256": "efa480b244b8cb467632fed5c967f0cba8b5a711e8c2b404aa3d1ddf756c9585",
+          "bytes": 717252,
+          "size": [
+            1024,
+            1294
+          ]
+        },
+        {
+          "record_id": "phantom:example:fb162fcf4182902795dee590",
+          "asset_id": "phantom:asset:3fd1e3fd8c1ed4ebdada5d61",
+          "sha256": "4c54401e0b3255e1e82ab59faa925ed50125a2eaae6d25b39e68f86bc98da16d",
+          "bytes": 55665,
+          "size": [
+            1024,
+            270
+          ]
+        }
+      ],
+      "status": "passed"
+    }
+  ]
+}

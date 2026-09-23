@@ -10,9 +10,9 @@ SocialCounterfactuals now has a 170,832-record index spanning all 61 pinned Parq
 
 TweetEval has completed 200,785 rows across its native Parquet task configurations and splits. ClassLabel meanings are retained per shard, so an integer label is not assigned a universal meaning across tasks. MMStar completed its 1,500 records and COCO 2014 its 164,062 images with published annotations. Both 100-record previews passed actual image decoding.
 
-## Executable recipes being verified
+## Further completed native preparations
 
-Current plans cover the original LLaVA-Instruct-150K JSON (157,712 conversations), its separate FineVision representation, FGVC-Aircraft, COCO-QA, OK-VQA, HADES, VSR, Medical Multimodal Evaluation Data, and HallusionBench. A queued plan is not coverage; consult `reports/on-demand-preparation.json` and live preparation status for completed populations.
+Completed native indices cover the original LLaVA-Instruct-150K JSON (157,712 conversations), its separate FineVision representation, FGVC-Aircraft, COCO-QA, OK-VQA, HADES, VSR, Medical Multimodal Evaluation Data, and HallusionBench. These source populations completed and their preview images passed live checks; consult `reports/on-demand-preparation.json` and live preparation status for completed populations.
 
 COCO-QA validates the alignment of its four native text files. OK-VQA joins questions and annotations by question ID and rejects missing, duplicate, orphan, or contradictory image joins. Original LLaVA conversations retain separate identities even when they share image IDs. VSR preserves random/zeroshot split memberships rather than claiming those overlapping configurations are unique examples.
 
@@ -29,10 +29,18 @@ COCO 2014's recipe covers all 164,062 train/validation/test images and all publi
 
 The three confirmed catalogue aliases from PR #3 remain `describable-textures-dataset` → `dtd`, `pets` → `oxfordpet`, and `okvqa` → `ok-vqa`. Family mentions are not automatically merged.
 
-Additional native recipes now awaiting live verification include all four MMBench v1
+Additional native recipes with completed indices and live preview verification include all four MMBench v1
 partitions (21,990 circular-evaluation rows), all author CausalGym splits (17,400
 intervention pairs), RAVEL (6,828 entity inventories and 5,011 Wikipedia control prompts),
 What's Up (all six native caption-comparison sets, 4,958 rows), Food-101, CIFAR-100-C,
 and all EMNIST configurations plus its Letters subset. The two EMNIST plans reuse the
 already cached original archive. MMBench's pinned mirror files match the authors'
 evaluation-toolkit MD5s; the original HTTPS endpoint's certificate is expired.
+
+
+PHANTOM is now locally authorized and indexed; it remains a gated source with explicitly
+missing source-listed media. Caltech101, DreamBooth, GVIL, IllusoryVQA/IllusionMNIST,
+Agent Security Bench, and HQH also have complete native annotation indices and live
+preview receipts. Visual Genome completed its full eleven-table native index with
+bounded disk-backed joins and 100 live preview images. T2I-CompBench also has all
+17,861 native prompt-list memberships indexed. Its source QA/region join defects remain explicit.

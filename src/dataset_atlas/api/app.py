@@ -304,7 +304,7 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
             candidate=work/'packs'/asset.dataset_id/candidate
         resolved=candidate.resolve()
         if not any(resolved.is_relative_to(p) for p in roots):raise ValueError('Media outside configured roots')
-        if resolved.suffix.lower() not in {'.jpg','.jpeg','.png','.webp','.gif','.avif','.mp3','.wav','.ogg','.mp4','.webm','.flac'}:raise ValueError('Unsupported media type')
+        if resolved.is_file() and resolved.suffix.lower() not in {'.jpg','.jpeg','.png','.webp','.gif','.avif','.mp3','.wav','.ogg','.mp4','.webm','.flac'}:raise ValueError('Unsupported media type')
         return resolved
     def browser_pack(dataset_id,result_ids=None):
         from dataset_atlas.queries.results import attach_results
@@ -461,29 +461,28 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         result['population_scope']=eligible.population_scope
         result['coverage']={'filtered_records':eligible.matched_count,'embedded_eligible_records':result['eligible_count']}
         return result
+    def serve_asset(dataset_id,asset,request):
+        path=asset_path(asset)
+        if path.is_file():
+            import mimetypes
+            from dataset_atlas.storage import read_rooted_file
+            return media_response(read_rooted_file(path,roots,media_byte_limit(asset)),mimetypes.guess_type(path.name)[0] or 'application/octet-stream',request)
+        from dataset_atlas.adapters import resolve_dataset_asset
+        handle=resolve_dataset_asset(registry.dataset_version(dataset_id,asset.release_id),asset.metadata.get('source_ref',asset.uri),max_bytes=media_byte_limit(asset),cache_root=work/'media-cache/decoded')
+        return media_response(handle.data,handle.media_type,request)
     @app.api_route('/api/v1/media/{token}',methods=['GET','HEAD'])
     def media(token:str,request:Request):
         handle_entry=media_handles.get(token)
         if handle_entry is not None:
             dataset_id,asset=handle_entry
-            path=asset_path(asset)
-            if path.is_file():
-                import mimetypes
-                from dataset_atlas.storage import read_rooted_file
-                return media_response(read_rooted_file(path,roots,media_byte_limit(asset)),mimetypes.guess_type(path.name)[0] or 'application/octet-stream',request)
-            from dataset_atlas.adapters import resolve_dataset_asset
-            handle=resolve_dataset_asset(registry.dataset_version(dataset_id,asset.release_id),asset.metadata.get('source_ref',asset.uri),max_bytes=media_byte_limit(asset),cache_root=work/'media-cache/decoded')
-            return media_response(handle.data,handle.media_type,request)
+            return serve_asset(dataset_id,asset,request)
         for d in registry.datasets():
             try:pack=registry.pack(d.id)
             except FileNotFoundError:continue
             for r in pack.records:
                 for a in r.assets:
                     if secrets.compare_digest(content_id([d.id,a.id]),token):
-                        import mimetypes
-                        from dataset_atlas.storage import read_rooted_file
-                        path=asset_path(a)
-                        return media_response(read_rooted_file(path,roots,media_byte_limit(a)),mimetypes.guess_type(path.name)[0] or 'application/octet-stream',request)
+                        return serve_asset(d.id,a,request)
         raise KeyError(token)
     @app.post('/api/v1/records')
     def get_records(body:RecordRequest):

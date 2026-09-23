@@ -10,7 +10,7 @@ from dataset_atlas.models import Dataset, Pack
 BASELINE_RECHECK_SECONDS = 0.5
 
 
-def merge_prepared(baseline: Dataset, prepared: Dataset, recipe_present: bool) -> Dataset:
+def merge_prepared(baseline: Dataset, prepared: Dataset, recipe_present: bool, recipe_fields: set[str] | None = None) -> Dataset:
     """Combine the tracked registry record with what a preparation determined.
 
     Preparation legitimately fixes the release, snapshot, adapter and coverage,
@@ -31,8 +31,8 @@ def merge_prepared(baseline: Dataset, prepared: Dataset, recipe_present: bool) -
     for field in ('identity','source','access','publication'):
         setattr(merged.coverage,field,getattr(baseline.coverage,field))
     if recipe_present:
-        if prepared.description!=baseline.description:merged.description=prepared.description
-        if prepared.source_url!=baseline.source_url:merged.source_url=prepared.source_url
+        if (recipe_fields is None or 'description' in recipe_fields) and prepared.description!=baseline.description:merged.description=prepared.description
+        if (recipe_fields is None or 'source_url' in recipe_fields) and prepared.source_url!=baseline.source_url:merged.source_url=prepared.source_url
     local=[item for item in prepared.evidence if item.get('kind')=='local_preparation']
     merged.evidence=[item for item in baseline.evidence if item.get('kind')!='local_preparation']+local
     return merged
@@ -96,12 +96,15 @@ class Registry:
         path=active/'dataset.json'
         stat=path.stat()
         # The merge depends on both documents, so the cache key covers both.
-        signature=(str(path),stat.st_mtime_ns,stat.st_size,id(self._datasets))
+        recipe_path=self.root/'registry/recipes'/f'{baseline.id}.yaml'
+        recipe_stat=recipe_path.stat() if recipe_path.is_file() else None
+        signature=(str(path),stat.st_mtime_ns,stat.st_size,id(self._datasets),recipe_stat.st_mtime_ns if recipe_stat else None)
         cached=self._active_datasets.get(baseline.id)
         if cached is None or cached[0]!=signature:
             prepared=Dataset.model_validate_json(path.read_text())
             if prepared.id!=baseline.id:raise ValueError('Prepared dataset identity mismatch')
-            cached=(signature,merge_prepared(baseline,prepared,(self.root/'registry/recipes'/f'{baseline.id}.yaml').is_file()))
+            recipe_fields=set(yaml.safe_load(recipe_path.read_text()) or {}) if recipe_stat else set()
+            cached=(signature,merge_prepared(baseline,prepared,bool(recipe_stat),recipe_fields))
             self._active_datasets[baseline.id]=cached
         return cached[1]
     def datasets(self) -> list[Dataset]:
@@ -156,6 +159,11 @@ class Registry:
         dataset_id=self.resolve(dataset_id)
         if dataset_id not in self._by_id:raise KeyError(dataset_id)
         return self._resolved(self._active_dataset(self._by_id[dataset_id]))
+    def baseline_dataset(self, dataset_id: str) -> Dataset:
+        """Tracked source configuration, without inheriting an active version's paths."""
+        dataset_id=self.resolve(dataset_id)
+        if dataset_id not in self._by_id:raise KeyError(dataset_id)
+        return self._resolved(self._by_id[dataset_id])
     def pack(self, dataset_id: str) -> Pack:
         dataset_id=self.resolve(dataset_id)
         self.dataset(dataset_id)

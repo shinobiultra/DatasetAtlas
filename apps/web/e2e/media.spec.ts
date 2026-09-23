@@ -5,7 +5,7 @@ import { inspectRecord, sampleCards, stubCommonRoutes } from './helpers'
 
 const ID = 'synthetic-media-contract'
 const SNAPSHOT = 'test-only-media-snapshot'
-const names = ['geometry', 'mismatch', 'missing', 'failed', 'zero', 'broken'] as const
+const names = ['geometry', 'mismatch', 'missing', 'failed', 'zero', 'broken', 'absent'] as const
 const assetId = (name: string) => `synthetic:asset:${name}`
 const recordId = (name: string) => `synthetic:example:${name}`
 const fixture = readFileSync(fileURLToPath(new URL('./fixtures/orientation-6.jpg', import.meta.url)))
@@ -13,7 +13,7 @@ const records = names.map(name => ({
   id: recordId(name), dataset_id: ID, release_id: 'test-only', snapshot_id: SNAPSHOT, unit: 'example',
   text: `Synthetic ${name} image`, source: { test_case: name },
   asset_ids: [assetId(name)],
-  assets: [{ id: assetId(name), dataset_id: ID, release_id: 'test-only', modality: 'image', representation: 'original', uri: `/test-media/${name === 'broken' ? 'missing.png' : 'orientation-6.jpg'}`, metadata: {} }],
+  assets: [{ id: assetId(name), dataset_id: ID, release_id: 'test-only', modality: 'image', representation: 'original', uri: name === 'absent' ? null : `/test-media/${name === 'broken' ? 'missing.png' : 'orientation-6.jpg'}`, metadata: name === 'absent' ? { availability: 'absent_from_pinned_release', source_path: 'native/missing.jpg' } : {} }],
 }))
 const assetOutput = (name: string, width = 40, height = 80, detections: unknown[] = []) => ({ asset_id: assetId(name), status: 'completed', width, height, detections })
 const artifact = {
@@ -117,4 +117,16 @@ test('the extraction threshold is stated beside the boxes it produced', async ({
   const inspector = await inspectRecord(page, recordId('geometry'))
   await expect(inspector.getByRole('status')).toContainText('Completed · 1 detection')
   await expect(inspector.getByRole('status')).toContainText('Extraction threshold 0.5')
+})
+
+
+test('source-listed absent images remain explicit without a broken media request', async ({ page }) => {
+  const requested: string[] = []
+  page.on('request', request => { if (request.url().includes('native/missing')) requested.push(request.url()) })
+  await setup(page)
+  const inspector = await inspectRecord(page, recordId('absent'))
+  await expect(inspector.getByText('Listed by the source, absent from this release')).toBeVisible()
+  await expect(inspector.getByText('native/missing.jpg', { exact: true })).toBeVisible()
+  await expect(inspector.getByText('Unavailable in source release')).toBeVisible()
+  expect(requested).toEqual([])
 })

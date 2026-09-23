@@ -57,8 +57,7 @@ SHA-256 values remain provenance, not locally verified hashes of unread bytes.
 SocialCounterfactuals completed all 170,832 records across 61 shards, fetching 6,132,809
 metadata/annotation bytes from 27.22 GB of remote shards. All 100 preview images and three
 reproducible full-population images from distinct shards passed decoding. See
-`remote-parquet-live.json`. FineVision's separate LLaVA representation is still indexing
-at this checkpoint; a ready plan or test fixture is not real dataset coverage.
+`remote-parquet-live.json`. FineVision's separate LLaVA representation completed 157,710 rows; the original LLaVA release has 157,712. Both are indexed separately and their previews passed live image checks.
 
 Small Parquet columns are coalesced only when their byte intervals touch; image columns
 are excluded from metadata prefetch. The 1,000-row real-shard benchmark used 948,782 fetched
@@ -95,3 +94,72 @@ See `remote-metadata-benchmark.json`.
 No sub-agents, paid APIs, external model transmission, or writes to corpus originals were
 used. The local source/model downloads were bounded; the application remains incomplete
 until accessible catalogue-wide acquisition and exact release reconciliation are finished.
+
+## Further native populations and gated access
+
+The next acquisition batch completed full native populations: original LLaVA (157,712),
+its FineVision representation (157,710), Aircraft (10,000), COCO-QA (117,684), OK-VQA
+(14,055), VSR (16,023 overlapping split/configuration memberships), Medical Multimodal
+Evaluation Data (17,303), HallusionBench (1,129), MMBench (21,990 circular-evaluation
+rows), CausalGym (17,400), RAVEL (11,839 native entity/control rows), What's Up (4,958),
+Food-101 (101,000), CIFAR-100-C (950,000), EMNIST (2,255,710 configuration memberships)
+and its Letters subset (145,600). HADES is indexed from its pinned native release.
+
+Caltech101 has 9,144 images with 8,677 native object-outline annotations, including
+native per-image quality values. Its 467 background images have no released object
+outlines. DreamBooth retains all 158 reference images across 30 subjects and the native
+class, prompt-template and attribution files. GVIL has 3,302 native VQA, visual-grounding
+and raw-annotation records, with 1,600 explicitly joined evaluation pairs. IllusoryVQA
+contains all 26,121 records across its eight native configurations; the separately
+identified IllusionMNIST subset has 5,069. Targets differ by image condition; declared
+no-illusion cases do not acquire fabricated counterparts.
+
+Agent Security Bench retains 843 native input rows, including one explicitly labelled
+raw HTML document committed by its authors under a JSONL filename. That malformed
+source file is not counted as a functioning agent task. HQH retains all 4,000 questions,
+joined to author image metadata and original Visual Genome archive members.
+
+PHANTOM access was authorized by the user and verified using the existing local HF
+credential. Its pinned native release contains 47,524 conversations in turn JSONL,
+47,512 in grouped attack JSON, and 7,826 behaviours. The full index retains all 55,350
+conversation/behaviour records and both native forms; the 747 native Child Safety
+intents are also browsable as their own subset. 11,508 source-listed image paths are
+absent from the pinned repository, affecting 2,031 records. Missing media remains
+explicit, while 56,854 valid distinct image references are checksum-pinned for access
+on demand. No adversarial prompt was executed, and no PHANTOM content was sent to a
+model. The release remains gated, with no public redistribution approval.
+
+Live preview receipts are `preview-media-batch2` through `preview-media-batch7-20260923.json`.
+The first IllusoryVQA audit and three batch-2 checks were interrupted by a workbench
+restart; the subsequent retry receipts preserve that history. MMBench initially exposed
+an API error for opaque TSV asset identifiers; the route was fixed and all 100 preview
+images subsequently passed. `native-diversity-media-20260923.json` records additional
+full-population configuration probes when completed; it does not assert that every
+image payload has been downloaded.
+
+Local source objects can now be registered by SHA-256 and reused independently of the
+evictable download cache. This prevented large retained originals from being downloaded
+again when a smaller preparation evicted their cache entries. Nested TAR members in the
+original Caltech ZIP are repacked into bounded, checksummed member-addressable derivatives.
+
+
+Visual Genome completed 116,367 records: 108,077 images with all eleven source annotation
+tables, plus 8,290 orphan QA-region mapping records. 131,261 mappings lacked a released QA;
+those with a released region still join through that region. 55,989 lacked a released
+region; those with a released QA still join through that QA. The 8,290 with neither are
+retained without an invented image. All 19,561 paragraph rows survive, including ten
+repeated image IDs. The streaming join used a bounded SQLite derivative, included in the
+output budget and receipt. Its 100 preview images passed on the updated workbench;
+the first pre-restart attempt hit the old server's missing adapter dispatch and is
+retained separately. T2I-CompBench retains all 17,861 native text-list memberships,
+including overlapping lists and its explicitly named object vocabulary.
+
+
+HOD completed all 10,631 native images with original CSV metadata, YOLO annotations,
+XML annotations, category/difficulty and reference URLs. Its all/ and class/ copies
+match for all 31,893 image/annotation Git-blob pairs and are represented once per native
+metadata image; alternate paths remain in the records. All 100 preview images passed.
+Aircraft's updated source scope now explicitly states that the official 2013b archive
+omits images_size.txt; source_size is null and original boxes remain unchanged. The
+corrected immutable version and its 100 preview images passed after increasing the
+bounded repack output allowance to 5 GB.

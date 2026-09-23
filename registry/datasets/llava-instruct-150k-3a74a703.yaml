@@ -2,8 +2,8 @@ schema_version: '1.0'
 id: llava-instruct-150k-3a74a703
 name: LLaVA_Instruct_150k
 aliases: []
-description: Paper explicitly draws from FineVision rather than the standalone original LLaVA JSON; exact sampled
-  10,000 IDs and revision are not pinned.
+description: Paper explicitly draws from FineVision rather than the standalone original
+  LLaVA JSON; exact sampled 10,000 IDs and revision are not pinned.
 paper_ids:
 - paper-09b2d7393fc75cf7
 release: unresolved
@@ -27,7 +27,8 @@ rights:
   annotations: not_reviewed
   images: not_reviewed
   source: https://huggingface.co/datasets/HuggingFaceM4/FineVision/tree/main/LLaVA_Instruct_150K
-  note: FineVision mixture carries constituent image rights; public Parquet does not grant blanket image republication.
+  note: FineVision mixture carries constituent image rights; public Parquet does not
+    grant blanket image republication.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-d4ec8a360644adfc6d91
@@ -35,28 +36,42 @@ evidence:
   source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
   page: 7
   role: refusal evaluation subset
-  excerpt: For evaluation, we use the FineVision dataset [50], selecting 10,000 images from the LLaVA_Instruct_150k
-    subset, yielding 20,559 image–instruction pairs, and the test split of TextVQA [51], containing 5,730 pairs.
-    Lastly, th
+  excerpt: For evaluation, we use the FineVision dataset [50], selecting 10,000 images
+    from the LLaVA_Instruct_150k subset, yielding 20,559 image–instruction pairs,
+    and the test split of TextVQA [51], containing 5,730 pairs. Lastly, th
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://huggingface.co/datasets/HuggingFaceM4/FineVision/tree/main/LLaVA_Instruct_150K
-  note: 'Paper explicitly draws from FineVision rather than the standalone original LLaVA JSON; exact sampled 10,000
-    IDs and revision are not pinned. Release: FineVision LLaVA_Instruct_150K config; 10,000 sampled images/20,559
-    pairs'
+  note: 'Paper explicitly draws from FineVision rather than the standalone original
+    LLaVA JSON; exact sampled 10,000 IDs and revision are not pinned. Release: FineVision
+    LLaVA_Instruct_150K config; 10,000 sampled images/20,559 pairs'
   audit_file: work/sources/source-audit-jobs-batch3.json
   checked_on: '2026-09-22'
   source_identity_status: family_only
 - kind: source_audit_rights
   url: https://huggingface.co/datasets/HuggingFaceM4/FineVision
-  note: FineVision mixture carries constituent image rights; public Parquet does not grant blanket image republication.
+  note: FineVision mixture carries constituent image rights; public Parquet does not
+    grant blanket image republication.
   audit_file: work/sources/source-audit-jobs-batch3.json
   checked_on: '2026-09-22'
   source_identity_status: family_only
+- kind: implemented_source_release
+  url: https://huggingface.co/datasets/HuggingFaceM4/FineVision/tree/main/LLaVA_Instruct_150K
+  checked_on: '2026-09-23'
+  report: reports/selective-acquisition-20260923.md
+  note: Pinned acquired population and real preview exercised locally. Mirror and
+    selective-transfer limits remain in the acquisition receipts; this does not establish
+    publication rights or the exact paper-used subset.
 source_url: https://huggingface.co/datasets/HuggingFaceM4/FineVision/tree/main/LLaVA_Instruct_150K
 relationships:
 - type: same_source_family_as
   target_id: llava-instruct-150k
   status: asserted_from_source_review
-  scope: Same LLaVA-Instruct-150K family under a different repository; the two records name different upstream copies.
+  scope: Same LLaVA-Instruct-150K family under a different repository; the two records
+    name different upstream copies.
+modalities:
+- image
+- text
+tasks:
+- visual instruction following

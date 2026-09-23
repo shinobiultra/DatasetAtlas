@@ -1,6 +1,16 @@
 {
-  "checked_at": "2026-09-23T04:04:18.960321+00:00",
+  "checked_at": "2026-09-23T05:21:41.573243+00:00",
   "datasets": [
+    {
+      "dataset_id": "agent-security-bench",
+      "release": "1f561dccf92d55302368fa67679b4ba9d9c8fdc4",
+      "snapshot_id": "agent-security-bench-6c964796c79d723ae4f9d74d",
+      "records": 843,
+      "preview_records": 100,
+      "scope": "Every valid native JSONL row, plus invalid native files represented as explicitly labelled raw source documents, under the author repository data/ directory: task bundles, normal tools and attack-tool configurations. Named files remain separate overlapping configurations. This is static inspection of released inputs; procedural agent execution, tool implementation code and generated attack outcomes are not misrepresented as dataset rows.",
+      "plan_id": "6c964796c79d723ae4f9d74d27762759af483540456d2a4d9f506788da9e16d5",
+      "prepared_receipt": "work/prepared/agent-security-bench/6c964796c79d723ae4f9d74d27762759af483540456d2a4d9f506788da9e16d5/receipt.json"
+    },
     {
       "dataset_id": "algopuzzlevqa",
       "release": "dc4b82f3817e5a4b89dad128f6d4eb0248c75072",
@@ -10,6 +20,36 @@
       "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
       "plan_id": "d7290b7a41f1d5598624f81657149d6b13404b911ad651faddb417051a23edc8",
       "prepared_receipt": "work/prepared/algopuzzlevqa/d7290b7a41f1d5598624f81657149d6b13404b911ad651faddb417051a23edc8/receipt.json"
+    },
+    {
+      "dataset_id": "artbench",
+      "release": "artbench10-32-cifarbin-abb96b78-csv7b83d705",
+      "snapshot_id": "artbench10-32-abb96b78-7b83d705",
+      "records": 60000,
+      "preview_records": 100,
+      "scope": "ArtBench-10 author 32x32 CIFAR binary; 50,000 train and 10,000 test examples",
+      "plan_id": "aac58a52359d0a516e1147672cb21eea3d0d0041b5d7f84d8cf66306a5a3807f",
+      "prepared_receipt": "work/prepared/artbench/aac58a52359d0a516e1147672cb21eea3d0d0041b5d7f84d8cf66306a5a3807f/receipt.json"
+    },
+    {
+      "dataset_id": "caltech101",
+      "release": "caltech101-institutional-v1",
+      "snapshot_id": "caltech101-119fce6cd456b9a752291100",
+      "records": 9144,
+      "preview_records": 100,
+      "scope": "All images in the Caltech institutional v1 archive, including explicitly labelled background images. All released MATLAB outlines and bounding-box annotations joined using the native category-name mapping. Background annotations are absent; no official train/test split is inferred.",
+      "plan_id": "119fce6cd456b9a7522911000115975712fbe996f8e310f77788eb7b6f35b9e5",
+      "prepared_receipt": "work/prepared/caltech101/119fce6cd456b9a7522911000115975712fbe996f8e310f77788eb7b6f35b9e5/receipt.json"
+    },
+    {
+      "dataset_id": "causalgym",
+      "release": "causalgym-95349c3a5e53e2506e8b212482ea6dd784978156",
+      "snapshot_id": "causalgym-7cdf70d4a91d1a538132fb32",
+      "records": 17400,
+      "preview_records": 100,
+      "scope": "All author-released CausalGym train/dev/test intervention pairs: {'train': 11600, 'dev': 2900, 'test': 2900}. Native base/source segments, target labels and linguistic tasks retained; no new stimuli generated.",
+      "plan_id": "7cdf70d4a91d1a538132fb32388428dc410d7f4600ef65c067d8f95afc37307c",
+      "prepared_receipt": "work/prepared/causalgym/7cdf70d4a91d1a538132fb32388428dc410d7f4600ef65c067d8f95afc37307c/receipt.json"
     },
     {
       "dataset_id": "chartqa",
@@ -22,14 +62,34 @@
       "prepared_receipt": "work/prepared/chartqa/92d66748aca98ebf8c5ca09ccc0ffb7309876461545229bf756a91a0d1a7d9cc/receipt.json"
     },
     {
+      "dataset_id": "child-safety-intents",
+      "release": "df168bd0fe810cdce256caddf6c9596f55760afb",
+      "snapshot_id": "child-safety-intents-364a516834ef9fa54cb8f0a2",
+      "records": 747,
+      "preview_records": 100,
+      "scope": "All 747 PHANTOM-authored Child Safety behaviours from the native release. Text-only source intents; no generated images or attack execution.",
+      "plan_id": "364a516834ef9fa54cb8f0a2554e7e0d10916089aa8ae8261a6d6bd7ee2e7bca",
+      "prepared_receipt": "work/prepared/child-safety-intents/364a516834ef9fa54cb8f0a2554e7e0d10916089aa8ae8261a6d6bd7ee2e7bca/receipt.json"
+    },
+    {
       "dataset_id": "cifar-10-c",
       "release": "zenodo-2535967-cifar-10-c",
       "snapshot_id": "cifar-10-c-84a406abd2b8547a4e8bb719",
       "records": 950000,
       "preview_records": 100,
       "scope": "All 19 corruption types at 5 severities over the 10,000 CIFAR-10 test images (950,000 corrupted images) from the official CIFAR-10-C.tar; CIFAR-10-P is a separate file and is not included.",
-      "plan_id": "84a406abd2b8547a4e8bb719b47fd8ed9aba78485c8674bb27f6d185134aeaed",
-      "prepared_receipt": "work/prepared/cifar-10-c/84a406abd2b8547a4e8bb719b47fd8ed9aba78485c8674bb27f6d185134aeaed/receipt.json"
+      "plan_id": "930e6f4b982e03743c4dc097a40b5503d3a559b0e9309477899279d22f5a1e08",
+      "prepared_receipt": "work/prepared/cifar-10-c/930e6f4b982e03743c4dc097a40b5503d3a559b0e9309477899279d22f5a1e08/receipt.json"
+    },
+    {
+      "dataset_id": "cifar-100-c",
+      "release": "zenodo-3555552-cifar-100-c",
+      "snapshot_id": "cifar-100-c-8b1e4a18684465bd7c083fa6",
+      "records": 950000,
+      "preview_records": 100,
+      "scope": "All 19 CIFAR-100-C corruption types at 5 severities over the 10000 original CIFAR-100 test indices (950000 images); lossless source array pixels on request.",
+      "plan_id": "8b1e4a18684465bd7c083fa679f2fb41e4206ada1e65a744b63e0a4799529257",
+      "prepared_receipt": "work/prepared/cifar-100-c/8b1e4a18684465bd7c083fa679f2fb41e4206ada1e65a744b63e0a4799529257/receipt.json"
     },
     {
       "dataset_id": "coco-2014",
@@ -38,8 +98,18 @@
       "records": 164062,
       "preview_records": 100,
       "scope": "All 164062 COCO 2014 train/val/test images. Original published train/val captions, instance masks/boxes and person keypoints are joined per image. Test annotations are withheld and remain absent, never counted as zero detections. Images fetched on request.",
-      "plan_id": "0b639bf940c97037307f3b69108298a2db2bf6ba430251a7b89fbac90018735d",
-      "prepared_receipt": "work/prepared/coco-2014/0b639bf940c97037307f3b69108298a2db2bf6ba430251a7b89fbac90018735d/receipt.json"
+      "plan_id": "887d386753a51dbcec623342c2cd39cc2b0dc61a103d4206938fc3b946a435d0",
+      "prepared_receipt": "work/prepared/coco-2014/887d386753a51dbcec623342c2cd39cc2b0dc61a103d4206938fc3b946a435d0/receipt.json"
+    },
+    {
+      "dataset_id": "coco-qa",
+      "release": "cocoqa-2015-05-17",
+      "snapshot_id": "coco-qa-7698bc16eecb417c272fad53",
+      "records": 117684,
+      "preview_records": 100,
+      "scope": "All 117684 native cocoqa-2015-05-17 questions, original answers and splits, joined to COCO 2014 images accessed on request. Paper-specific subsets are not inferred.",
+      "plan_id": "7698bc16eecb417c272fad53244d6942b62b4402c12639e0d049dd77e74a02f1",
+      "prepared_receipt": "work/prepared/coco-qa/7698bc16eecb417c272fad53244d6942b62b4402c12639e0d049dd77e74a02f1/receipt.json"
     },
     {
       "dataset_id": "conceptarc",
@@ -72,6 +142,16 @@
       "prepared_receipt": "work/prepared/cub-200-2011/24d786c47fbc01c79e1386cc30192ba883a46e4b8c2b3561a8d274faa3fa6832/receipt.json"
     },
     {
+      "dataset_id": "dreambooth",
+      "release": "4f887af7970a06fc0cd3adaa1d0b368547d6a1d0",
+      "snapshot_id": "dreambooth-81737aa47cb7a339b4f7bfcc",
+      "records": 158,
+      "preview_records": 100,
+      "scope": "All 158 images from 30 native subject folders, their 15 class names, source attribution text and released prompt templates. Documentation images excluded; no generated evaluation images or synthetic replacements.",
+      "plan_id": "81737aa47cb7a339b4f7bfcc4b63e48b5d293ef419e24c7d5fb23f4bc8e91cea",
+      "prepared_receipt": "work/prepared/dreambooth/81737aa47cb7a339b4f7bfcc4b63e48b5d293ef419e24c7d5fb23f4bc8e91cea/receipt.json"
+    },
+    {
       "dataset_id": "dtd",
       "release": "dtd-r1.0.1",
       "snapshot_id": "dtd-86d68f5ee62fa4c586c07a12",
@@ -80,6 +160,26 @@
       "scope": "All 5,640 DTD images with all ten official train/validation/test partitions.",
       "plan_id": "86d68f5ee62fa4c586c07a12f5c2d1bf113e372cb805b1cbde7a200342a60b49",
       "prepared_receipt": "work/prepared/dtd/86d68f5ee62fa4c586c07a12f5c2d1bf113e372cb805b1cbde7a200342a60b49/receipt.json"
+    },
+    {
+      "dataset_id": "emnist-letters",
+      "release": "nist-emnist-idx-2017-letters",
+      "snapshot_id": "emnist-letters-5f8fcf976f44552c43ef0601",
+      "records": 145600,
+      "preview_records": 100,
+      "scope": "All 124800 train and 20800 test EMNIST Letters images, retaining native 1-based labels and uppercase/lowercase mapping; the paper-specific excluded-letter subset is not inferred. Lossless display PNGs apply an explicit transpose of the stored pixel matrix.",
+      "plan_id": "5f8fcf976f44552c43ef0601ce80794b678099e3acbb6e90a860da45b3e2737a",
+      "prepared_receipt": "work/prepared/emnist-letters/5f8fcf976f44552c43ef0601ce80794b678099e3acbb6e90a860da45b3e2737a/receipt.json"
+    },
+    {
+      "dataset_id": "emnist",
+      "release": "nist-emnist-idx-2017-all",
+      "snapshot_id": "emnist-b4c5dbb6769e68cf5f775537",
+      "records": 2255710,
+      "preview_records": 100,
+      "scope": "All six native IDX configurations and their train/test splits; overlapping configurations are separate memberships, not unique handwriting images. Lossless display PNGs apply an explicit transpose of the stored pixel matrix.",
+      "plan_id": "b4c5dbb6769e68cf5f77553765cd2dd312cae8c0bd8b50390d0356e8abca0b83",
+      "prepared_receipt": "work/prepared/emnist/b4c5dbb6769e68cf5f77553765cd2dd312cae8c0bd8b50390d0356e8abca0b83/receipt.json"
     },
     {
       "dataset_id": "exams-v",
@@ -92,6 +192,16 @@
       "prepared_receipt": "work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/receipt.json"
     },
     {
+      "dataset_id": "fgvc-aircraft",
+      "release": "fgvc-aircraft-2013b",
+      "snapshot_id": "fgvc-aircraft-e39781517b01ac1fd77afc08",
+      "records": 10000,
+      "preview_records": 100,
+      "scope": "All 10000 images in the official fgvc-aircraft-2013b archive, with original splits {'train': 3334, 'val': 3333, 'test': 3333}, variant/family/manufacturer labels and bounding boxes. This archive omits images_size.txt; source_size remains null. Original copyright banners retained.",
+      "plan_id": "e39781517b01ac1fd77afc0800267fa7b3fd2d834cd065b327815d6e9d6fe95e",
+      "prepared_receipt": "work/prepared/fgvc-aircraft/e39781517b01ac1fd77afc0800267fa7b3fd2d834cd065b327815d6e9d6fe95e/receipt.json"
+    },
+    {
       "dataset_id": "flowers102",
       "release": "oxford-flowers102-original",
       "snapshot_id": "flowers102-bf66416e2c87239627de1757",
@@ -100,6 +210,16 @@
       "scope": "All 8,189 original Oxford Flowers-102 images with source class IDs and train/validation/test membership; optional segmentation images are a separate source.",
       "plan_id": "bf66416e2c87239627de1757b0cfca135f04eca4fdf5af2c01be13cd52c04416",
       "prepared_receipt": "work/prepared/flowers102/bf66416e2c87239627de1757b0cfca135f04eca4fdf5af2c01be13cd52c04416/receipt.json"
+    },
+    {
+      "dataset_id": "food101",
+      "release": "eth-food101-original",
+      "snapshot_id": "food101-a4740474b6175205805f9f7d",
+      "records": 101000,
+      "preview_records": 100,
+      "scope": "All original 101000 images in the 75750 training and 25250 test split with all 101 source class names. Original training annotation noise is retained.",
+      "plan_id": "a4740474b6175205805f9f7d9b71bf65ef67be90884a429ea039c36fc991de53",
+      "prepared_receipt": "work/prepared/food101/a4740474b6175205805f9f7d9b71bf65ef67be90884a429ea039c36fc991de53/receipt.json"
     },
     {
       "dataset_id": "gqa",
@@ -112,6 +232,36 @@
       "prepared_receipt": "work/prepared/gqa/9c85e41ad6950bd1896baad6ea5ef5085af8e85b9823d15e82f484ba733e6f4a/receipt.json"
     },
     {
+      "dataset_id": "gvil-paired-illusion-images",
+      "release": "cd04efb9d53c935c8194011d32b5a8b515c588bf",
+      "snapshot_id": "gvil-paired-illusion-images-a8eb8f897ed84eab186300bd",
+      "records": 3302,
+      "preview_records": 100,
+      "scope": "All 2,400 native VQA questions, 800 visual grounding questions, their 1,600 native pair memberships, and 102 raw image annotations. Match/mismatch answers and boxes are preserved separately; pair relationships are joined to canonical record IDs.",
+      "plan_id": "a8eb8f897ed84eab186300bd63e7d980cda881ddafaa5b91615ec0bc969e4a23",
+      "prepared_receipt": "work/prepared/gvil-paired-illusion-images/a8eb8f897ed84eab186300bd63e7d980cda881ddafaa5b91615ec0bc969e4a23/receipt.json"
+    },
+    {
+      "dataset_id": "hades",
+      "release": "8c7388c566c8844a0732a2ad2156b72ae00c92c8",
+      "snapshot_id": "hades-f31faebb5541d6f225edb983",
+      "records": 4500,
+      "preview_records": 100,
+      "scope": "All native HADES benchmark Parquet test shards from the author-linked Monosail release. Preserve every image variant and annotation; do not execute prompts.",
+      "plan_id": "f31faebb5541d6f225edb983cd1071bdba44bdcd5a754e979a62a1a59043e531",
+      "prepared_receipt": "work/prepared/hades/f31faebb5541d6f225edb983cd1071bdba44bdcd5a754e979a62a1a59043e531/receipt.json"
+    },
+    {
+      "dataset_id": "hallusionbench",
+      "release": "cd417161857aefb23d878d42cf1bb53aa9dd646f",
+      "snapshot_id": "hallusionbench-4409608d811110c75d2a47ca",
+      "records": 1129,
+      "preview_records": 100,
+      "scope": "All 1129 HallusionBench author annotation rows, reproduced field-for-field by the pinned LMMs-Lab-Encoder Parquet mirror (951 image and 178 text-only rows). Mirror image bytes verified by shard SHA-256; original media archive link is unavailable, so image equivalence to that archive is not claimed.",
+      "plan_id": "4409608d811110c75d2a47ca743017e61834180c7c428bc544eefa05ca926752",
+      "prepared_receipt": "work/prepared/hallusionbench/4409608d811110c75d2a47ca743017e61834180c7c428bc544eefa05ca926752/receipt.json"
+    },
+    {
       "dataset_id": "hatefulillusion",
       "release": "b1adce69143ff8bfd52942d5b14f11daeaa827d1",
       "snapshot_id": "hatefulillusion-b1adce69143ff8bfd52942d5-illusion-and-condition",
@@ -122,6 +272,26 @@
       "prepared_receipt": "work/prepared/hatefulillusion/907d2829f42c614e03e706161788ca7179eec95f910b5d8d619ce26d9dd04bcf/receipt.json"
     },
     {
+      "dataset_id": "high-quality-hallucination-benchmark",
+      "release": "6d35a4c320270fa507016550312edcb5a0570ed4",
+      "snapshot_id": "high-quality-hallucination-benchmark-83c0f8cb55644a3ef37a292b",
+      "records": 4000,
+      "preview_records": 100,
+      "scope": "All 4000 author HQH questions joined to the released image_data metadata and original Visual Genome archive members by native image ID and URL path. Match validated against both full VG archive directories; images are retrieved on demand, not all copied locally.",
+      "plan_id": "83c0f8cb55644a3ef37a292b990e157a0d69cec1af7434a32f419367b3b702e5",
+      "prepared_receipt": "work/prepared/high-quality-hallucination-benchmark/83c0f8cb55644a3ef37a292b990e157a0d69cec1af7434a32f419367b3b702e5/receipt.json"
+    },
+    {
+      "dataset_id": "hod",
+      "release": "a78e801de791eebdf2e9011cbf5b5ac2f6c65716",
+      "snapshot_id": "hod-c683a46b41082747111185f2",
+      "records": 10631,
+      "preview_records": 100,
+      "scope": "All 10631 native HOD images, joined to the original metadata.csv, YOLO and XML annotations, category, normal/hard difficulty, and source reference. The all/ and class/ image and annotation copies match author Git blob IDs exactly and are represented once per native metadata image; original copy paths remain recorded. No public redistribution approval.",
+      "plan_id": "c683a46b41082747111185f23cb685acd114250b0bc66afb10e3cd881ad69b9c",
+      "prepared_receipt": "work/prepared/hod/c683a46b41082747111185f23cb685acd114250b0bc66afb10e3cd881ad69b9c/receipt.json"
+    },
+    {
       "dataset_id": "illuchar",
       "release": "d55c729918bda746f74d377a2f11c92389e44bf0",
       "snapshot_id": "illuchar-df53383aaaa234f3f95818ec",
@@ -130,6 +300,66 @@
       "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
       "plan_id": "df53383aaaa234f3f95818ec4c5bd1bde4ee9c29737ef4a0913d281e0ab532be",
       "prepared_receipt": "work/prepared/illuchar/df53383aaaa234f3f95818ec4c5bd1bde4ee9c29737ef4a0913d281e0ab532be/receipt.json"
+    },
+    {
+      "dataset_id": "illusionmnist",
+      "release": "official-collection-a197e3e89ea6740e",
+      "snapshot_id": "illusionmnist-dcfed09bae9f2498897a2cf8",
+      "records": 5069,
+      "preview_records": 100,
+      "scope": "All native CSV-indexed train/test rows in MNIST_train, MNIST_test. Each example keeps all released image conditions and their condition-specific targets. Missing training control counterparts are explicit. Unindexed duplicate-name image files and generation prompt pools are retained upstream, not counted as annotated examples. This is the original author-generated dataset, not Atlas-generated replacements.",
+      "plan_id": "dcfed09bae9f2498897a2cf8569fa0af93a95d9ea4f2d2b7a47551ecb776d020",
+      "prepared_receipt": "work/prepared/illusionmnist/dcfed09bae9f2498897a2cf8569fa0af93a95d9ea4f2d2b7a47551ecb776d020/receipt.json"
+    },
+    {
+      "dataset_id": "illusoryvqa",
+      "release": "official-collection-e3f834dabc5610de",
+      "snapshot_id": "illusoryvqa-3c6eaab517eb3497b8e31a04",
+      "records": 26121,
+      "preview_records": 100,
+      "scope": "All native CSV-indexed train/test rows in MNIST_train, MNIST_test, FashionMnist_train, FashionMnist_test, IllusionAnimals_train, IllusionAnimals_test, IllusionChar_train, IllusionChar_test. Each example keeps all released image conditions and their condition-specific targets. Missing training control counterparts are explicit. Unindexed duplicate-name image files and generation prompt pools are retained upstream, not counted as annotated examples. This is the original author-generated dataset, not Atlas-generated replacements.",
+      "plan_id": "3c6eaab517eb3497b8e31a04cd514f441f9fc0078daba89a9743b595f7e71d25",
+      "prepared_receipt": "work/prepared/illusoryvqa/3c6eaab517eb3497b8e31a04cd514f441f9fc0078daba89a9743b595f7e71d25/receipt.json"
+    },
+    {
+      "dataset_id": "llava-instruct-150k-3a74a703",
+      "release": "3c380a731a3429c1d04693d6ec16d7e683def84c",
+      "snapshot_id": "llava-instruct-150k-3a74a703-8e62c15e7f3a18cfb719b4d7",
+      "records": 157710,
+      "preview_records": 100,
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "plan_id": "8e62c15e7f3a18cfb719b4d7e2b0a76bcfa405959908b9374f8f15bd0d1a0858",
+      "prepared_receipt": "work/prepared/llava-instruct-150k-3a74a703/8e62c15e7f3a18cfb719b4d7e2b0a76bcfa405959908b9374f8f15bd0d1a0858/receipt.json"
+    },
+    {
+      "dataset_id": "llava-instruct-150k",
+      "release": "llava-instruct-150k-9d451dc7629cfe0469f6ae4432b765cd603d5fcb",
+      "snapshot_id": "llava-instruct-150k-befd4bb56018b6d5b330b1b9",
+      "records": 157712,
+      "preview_records": 100,
+      "scope": "All 157712 conversations in the original llava_instruct_150k.json at revision 9d451dc7629cfe0469f6ae4432b765cd603d5fcb, with COCO train2014 images on request. Other JSON variants remain separate.",
+      "plan_id": "befd4bb56018b6d5b330b1b9a76a114fdd99828170e710e5e0642a8d1e069a2b",
+      "prepared_receipt": "work/prepared/llava-instruct-150k/befd4bb56018b6d5b330b1b9a76a114fdd99828170e710e5e0642a8d1e069a2b/receipt.json"
+    },
+    {
+      "dataset_id": "medical-multimodal-evaluation-data",
+      "release": "medical-multimodal-7d5b870cf7ace833a187a3459d7180a60ce9c5a1",
+      "snapshot_id": "medical-multimodal-evaluation-data-f5d28789a26e7367502e3119",
+      "records": 17303,
+      "preview_records": 100,
+      "scope": "All 17303 native Medical Multimodal Evaluation Data questions and all referenced image slots at revision 7d5b870cf7ace833a187a3459d7180a60ce9c5a1; original images fetched on request.",
+      "plan_id": "f5d28789a26e7367502e3119c2382e016d8254b005c94ee9d6bff4805187329f",
+      "prepared_receipt": "work/prepared/medical-multimodal-evaluation-data/f5d28789a26e7367502e3119c2382e016d8254b005c94ee9d6bff4805187329f/receipt.json"
+    },
+    {
+      "dataset_id": "mmbench",
+      "release": "mmbench-v1-circular-tsv",
+      "snapshot_id": "mmbench-f5c02c046f2fd701c1ea8d6c",
+      "records": 21990,
+      "preview_records": 100,
+      "scope": "All four official MMBench v1 EN/CN dev/test TSV populations, including circular-evaluation permutations. TSV bytes acquired from a pinned mirror and matched against the author evaluation toolkit MD5; rows are not distinct base questions. Test answers remain as released.",
+      "plan_id": "f5c02c046f2fd701c1ea8d6cf8d78fcb35d076901c177de6bc2458e83d47de2c",
+      "prepared_receipt": "work/prepared/mmbench/f5c02c046f2fd701c1ea8d6cf8d78fcb35d076901c177de6bc2458e83d47de2c/receipt.json"
     },
     {
       "dataset_id": "mmmu-dev",
@@ -162,6 +392,16 @@
       "prepared_receipt": "work/prepared/naturalbench/3a316bc9ca232b3988341858c01ea9cc5e73911e52ee0e9a7c23a1adddbe8690/receipt.json"
     },
     {
+      "dataset_id": "ok-vqa",
+      "release": "ok-vqa-1.1",
+      "snapshot_id": "ok-vqa-c55a48ee7faf15021d4b26e8",
+      "records": 14055,
+      "preview_records": 100,
+      "scope": "All 14055 native ok-vqa-1.1 questions, original answers and splits, joined to COCO 2014 images accessed on request. Paper-specific subsets are not inferred.",
+      "plan_id": "c55a48ee7faf15021d4b26e823604718a2bc2b8fa834f2033cb8009ff37ac227",
+      "prepared_receipt": "work/prepared/ok-vqa/c55a48ee7faf15021d4b26e823604718a2bc2b8fa834f2033cb8009ff37ac227/receipt.json"
+    },
+    {
       "dataset_id": "omnispatial",
       "release": "6691f3288bb1ff207d6ead4d841b505de08a6fd8",
       "snapshot_id": "omnispatial-689646803151cca434269285",
@@ -182,6 +422,16 @@
       "prepared_receipt": "work/prepared/oxfordpet/c812b4c6a2a467571c2dc4eb5e41b56c12609d9eb79856969396da1e811aebe7/receipt.json"
     },
     {
+      "dataset_id": "phantom",
+      "release": "df168bd0fe810cdce256caddf6c9596f55760afb",
+      "snapshot_id": "phantom-41623e4dc1d0eb73cab47b53",
+      "records": 55350,
+      "preview_records": 100,
+      "scope": "All 47524 conversations in native metadata.jsonl, joined to 47512 grouped attacks, plus 7826 native behaviours. Both source forms retained. Source-listed images absent from the pinned repository are explicitly unavailable; no claim of complete media. Gated images fetched on request with local authorized credentials.",
+      "plan_id": "41623e4dc1d0eb73cab47b5315440df94341bdcf2507dd49148d2e82a76ec98c",
+      "prepared_receipt": "work/prepared/phantom/41623e4dc1d0eb73cab47b5315440df94341bdcf2507dd49148d2e82a76ec98c/receipt.json"
+    },
+    {
       "dataset_id": "pmc-vqa",
       "release": "b56ae594f794867893143b337b4118a835794647-v1",
       "snapshot_id": "pmc-vqa-474c9573c3e9c36f83e3fb74",
@@ -200,6 +450,16 @@
       "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
       "plan_id": "c2ccea1708af07e3a99bf5bc60b838282066a08d2258e4cd52d53247633d9a33",
       "prepared_receipt": "work/prepared/puzzlevqa/c2ccea1708af07e3a99bf5bc60b838282066a08d2258e4cd52d53247633d9a33/receipt.json"
+    },
+    {
+      "dataset_id": "ravel",
+      "release": "ravel-e421fc9e132b3613b1d0020f856d539217fb30ca",
+      "snapshot_id": "ravel-17f66185e65ba33d01ed2766",
+      "records": 11839,
+      "preview_records": 100,
+      "scope": "All five RAVEL domains: every entity attribute inventory with native prompt templates and both split assignments, plus every independent Wikipedia control prompt. One browse example per entity inventory or control prompt; this is source data, not a model-specific filtered evaluation population.",
+      "plan_id": "17f66185e65ba33d01ed27661cb363c2f922dc6261ee9a9cd87b15f4553789a6",
+      "prepared_receipt": "work/prepared/ravel/17f66185e65ba33d01ed27661cb363c2f922dc6261ee9a9cd87b15f4553789a6/receipt.json"
     },
     {
       "dataset_id": "senator-tweets-2021",
@@ -242,6 +502,16 @@
       "prepared_receipt": "work/prepared/space-10/8c27fa373dff12ed1d31f6bcb17eb1d8b9bf2316ee760217aad8bc8913bcd741/receipt.json"
     },
     {
+      "dataset_id": "t2i-compbench",
+      "release": "4aa404212eb5d06e5adbcd9cee696c750d0d25a5",
+      "snapshot_id": "t2i-compbench-d1f9d5f40314f250a816be9c",
+      "records": 17861,
+      "preview_records": 100,
+      "scope": "All native text-list memberships under examples/dataset at the pinned author commit, including benchmark prompts, training/validation and seen/unseen subsets, and the explicitly named new_objects vocabulary. Overlapping lists remain distinct source memberships; these are prompt inputs, not generated image results or a claim of unique prompts.",
+      "plan_id": "d1f9d5f40314f250a816be9c06cef680099b7bdc37648692907214e6d4546d6a",
+      "prepared_receipt": "work/prepared/t2i-compbench/d1f9d5f40314f250a816be9c06cef680099b7bdc37648692907214e6d4546d6a/receipt.json"
+    },
+    {
       "dataset_id": "textvqa",
       "release": "textvqa-0.5.1-all-splits",
       "snapshot_id": "textvqa-5f9d0955c9a06956601ea622",
@@ -262,6 +532,16 @@
       "prepared_receipt": "work/prepared/tweeteval/7ac11a6c7e256513df066eff360bc9f94675cde4c76fc87d36adbb0bf63c192c/receipt.json"
     },
     {
+      "dataset_id": "visual-genome",
+      "release": "official-annotation-files-20260923",
+      "snapshot_id": "visual-genome-faffc9e1faa8f9f535a0316f",
+      "records": 116367,
+      "preview_records": 100,
+      "scope": "All 108077 native image records with objects, attributes, relationships, regions, questions, region graphs, QA objects, QA-region mappings, all 19561 paragraph rows (including repeated image IDs), and scene graphs. Also retains 8290 native QA-region mappings whose QA and region IDs are both absent from released tables as explicit orphan annotation records. Original images fetched on request from the two official ZIPs; no claim of a paper-specific subset.",
+      "plan_id": "faffc9e1faa8f9f535a0316f45a05182141221d2b7694025d8ce044eb87c4439",
+      "prepared_receipt": "work/prepared/visual-genome/faffc9e1faa8f9f535a0316f45a05182141221d2b7694025d8ce044eb87c4439/receipt.json"
+    },
+    {
       "dataset_id": "vizwiz",
       "release": "vizwiz-final-with-public-test-answers-2026",
       "snapshot_id": "vizwiz-f2b6da52c62c9b263496cfef",
@@ -272,6 +552,16 @@
       "prepared_receipt": "work/prepared/vizwiz/be331d65cbb289a69ed7a41362d701a92b8980114c32d9061dac994151083fcb/receipt.json"
     },
     {
+      "dataset_id": "vsr",
+      "release": "vsr-native-b27a0af0ee1462d2b6b92c8c83e869d9254a241a",
+      "snapshot_id": "vsr-75d410703d2acf91c8d91db2",
+      "records": 16023,
+      "preview_records": 100,
+      "scope": "All 16023 split memberships from the native random and zeroshot VSR benchmark splits. Configurations overlap; these are not 16023 unique caption-image pairs. The raw pre-validation collection is separate.",
+      "plan_id": "75d410703d2acf91c8d91db26743ad74bff609991e1655f17e7dff036d06a08c",
+      "prepared_receipt": "work/prepared/vsr/75d410703d2acf91c8d91db26743ad74bff609991e1655f17e7dff036d06a08c/receipt.json"
+    },
+    {
       "dataset_id": "waterbirds",
       "release": "waterbird-complete95-forest2water2-56c51b77f7d17283",
       "snapshot_id": "waterbirds-1661bca077cdd6c9b8049c03",
@@ -280,6 +570,16 @@
       "scope": "Original Waterbirds complete95 forest2water2 release, all train/validation/test records with original y/place/split annotations.",
       "plan_id": "1661bca077cdd6c9b8049c03496285228cffbe6d4af2cdc53cbeefeea7aef3cf",
       "prepared_receipt": "work/prepared/waterbirds/1661bca077cdd6c9b8049c03496285228cffbe6d4af2cdc53cbeefeea7aef3cf/receipt.json"
+    },
+    {
+      "dataset_id": "what-s-up",
+      "release": "whatsup-emnlp2023-native",
+      "snapshot_id": "what-s-up-2a86da80652409309e2aa863",
+      "records": 4958,
+      "preview_records": 100,
+      "scope": "All six author-released Whats-Up populations: Controlled A/B and COCO/VG one- and two-object caption comparisons. The first caption is correct by the author release contract. Controlled/VG original archive members retained locally; COCO val2017 images fetched on request.",
+      "plan_id": "2a86da80652409309e2aa863dbd7564736f13d57027fa5d5752f84f338268249",
+      "prepared_receipt": "work/prepared/what-s-up/2a86da80652409309e2aa863dbd7564736f13d57027fa5d5752f84f338268249/receipt.json"
     },
     {
       "dataset_id": "wmdp",
@@ -293,9 +593,9 @@
     }
   ],
   "catalogue_entries": 333,
-  "with_previews": 92,
-  "without_previews": 241,
-  "full_population_indices": 87,
+  "with_previews": 121,
+  "without_previews": 212,
+  "full_population_indices": 116,
   "all_requested_datasets_complete": false,
   "note": "Acquired source populations and on-demand infrastructure; catalogue-wide coverage is not complete."
 }

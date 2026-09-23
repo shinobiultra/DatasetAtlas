@@ -26,6 +26,16 @@ export function imageAssets(record: AtlasRecord): Asset[] {
   return (record.assets ?? []).filter(asset => asset.modality === 'image')
 }
 
+export function assetLabel(asset: Asset, index = 0): string {
+  const condition = asset.metadata?.condition
+  if (typeof condition === 'string' && condition.trim()) return condition
+  const role = asset.metadata?.source_role
+  if (typeof role === 'string' && role.trim()) {
+    return ({ ref: 'Reference', p0: 'Patch 0', p1: 'Patch 1' } as Record<string, string>)[role] ?? role
+  }
+  return `Image ${index + 1}`
+}
+
 export function primaryAsset(record: AtlasRecord): Asset | null {
   return (record.assets ?? []).find(asset => asset.modality === 'image' && asset.uri)
     ?? (record.assets ?? []).find(asset => asset.uri)

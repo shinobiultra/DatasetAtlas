@@ -1,0 +1,45 @@
+{
+  "records": 197344,
+  "groups": {
+    "train/cnn": 38120,
+    "train/traditional": 56640,
+    "train/mix": 56640,
+    "val/cnn": 4720,
+    "val/color": 4720,
+    "val/superres": 10856,
+    "val/traditional": 4720,
+    "val/deblur": 9440,
+    "val/frameinterp": 1888,
+    "jnd/val/cnn": 4800,
+    "jnd/val/traditional": 4800
+  },
+  "files": [
+    {
+      "source_name": "twoafc_train.tar.gz",
+      "url": "https://perceptual-similarity.s3.us-west-2.amazonaws.com/dataset/twoafc_train.tar.gz",
+      "bytes": 6103029760,
+      "sha256": "b4f5c772c7cd88ac44bcb4ff0741745d434c05f0094f2bfb262ddcd0055bf393",
+      "config_key": "training_path",
+      "format": "tar.gz"
+    },
+    {
+      "source_name": "twoafc_val.tar.gz",
+      "url": "https://perceptual-similarity.s3.us-west-2.amazonaws.com/dataset/twoafc_val.tar.gz",
+      "bytes": 1279180800,
+      "sha256": "41486671b06de923e7ba277c4797d4d9d86d609863ba35ecdb576133f8b9d859",
+      "config_key": "validation_path",
+      "format": "tar.gz"
+    },
+    {
+      "source_name": "jnd.tar.gz",
+      "url": "https://perceptual-similarity.s3.us-west-2.amazonaws.com/dataset/jnd.tar.gz",
+      "bytes": 267939840,
+      "sha256": "79d5b50b02b1e04075c7b375cc7b66243d21e93b277b24b6030637977b2073fd",
+      "config_key": "jnd_path",
+      "format": "tar.gz"
+    }
+  ],
+  "status": "full_native_index_and_preview_verified",
+  "media_evidence": "reports/preview-media-batch11-20260923.json",
+  "diversity_evidence": "reports/native-diversity-media-batch2-20260923.json"
+}

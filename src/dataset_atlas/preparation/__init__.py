@@ -208,6 +208,11 @@ class PreparationManager:
             plan['source_file_bytes'] = plan['expected_download_bytes']
             plan['expected_download_bytes'] += metadata_limit
             plan['media_access'] = 'Original images fetched on inspection through bounded HTTPS ranges; strong ETags are consistency fingerprints, not archive hashes.'
+        elif dataset.adapter_config.get('local_archives'):
+            metadata_limit = recipe.get('remote_metadata_bytes', 20_000_000)
+            if type(metadata_limit) is not int or not 1 <= metadata_limit <= 100_000_000:
+                raise ValueError('Archive metadata budget must be within 1..100 MB')
+            plan['remote_metadata_bytes'] = metadata_limit
         elif selective_media and not plan.get('media_access'):
             plan['media_access'] = 'Original image files fetched on inspection and checked against the pinned source inventory; a bounded cache limits disk use.'
         if plan['expected_download_bytes'] > max_download_bytes:

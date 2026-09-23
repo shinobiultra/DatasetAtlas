@@ -613,11 +613,8 @@ class DirectoryArchiveAdapter(DatasetAdapter):
         if path.is_dir():
             data = read_rooted_file(path / name, [path], source.max_bytes - source.bytes_read)
         elif zipfile.is_zipfile(path):
-            with zipfile.ZipFile(path) as archive:
-                info = archive.getinfo(name)
-                if info.file_size > source.max_bytes - source.bytes_read:
-                    raise ValueError("asset exceeds remaining byte budget")
-                data = archive.read(name)
+            from dataset_atlas.storage.zip_members import LOCAL_ZIP_MEMBERS
+            data = LOCAL_ZIP_MEMBERS.read(path, name, source.max_bytes - source.bytes_read, self.config.get('sha256'))
         else:
             with tarfile.open(path) as archive:
                 member = archive.getmember(name)
@@ -770,6 +767,21 @@ class OverlayAdapter(StructuredAdapter):
 
 
 def get_adapter(dataset: Dataset) -> DatasetAdapter:
+    if dataset.adapter == 'inventory_variants':
+        from .inventory_variants import InventoryVariantsAdapter
+        return InventoryVariantsAdapter(dataset)
+    if dataset.adapter == 'archive_variants':
+        from .archive_variants import ArchiveVariantsAdapter
+        return ArchiveVariantsAdapter(dataset)
+    if dataset.adapter == 'mm_safetybench':
+        from .mm_safetybench import MMSafetyBenchAdapter
+        return MMSafetyBenchAdapter(dataset)
+    if dataset.adapter == 'mme':
+        from .mme import MMEAdapter
+        return MMEAdapter(dataset)
+    if dataset.adapter == 'sun397':
+        from .sun397 import SUN397Adapter
+        return SUN397Adapter(dataset)
     if dataset.adapter == 'emnist_archive':
         from .emnist import EMNISTAdapter
         return EMNISTAdapter(dataset)
@@ -785,6 +797,9 @@ def get_adapter(dataset: Dataset) -> DatasetAdapter:
     if dataset.adapter == "coco_questions":
         from .coco_questions import CocoQuestionsAdapter
         return CocoQuestionsAdapter(dataset)
+    if dataset.adapter == "perceptual":
+        from .perceptual import PerceptualAdapter
+        return PerceptualAdapter(dataset)
     if dataset.adapter == "visual_genome":
         from .visual_genome import VisualGenomeAdapter
         return VisualGenomeAdapter(dataset)
@@ -867,7 +882,10 @@ def get_adapter(dataset: Dataset) -> DatasetAdapter:
         raise ValueError(f"unknown adapter: {dataset.adapter}") from exc
 
 
-_PREPARED_ADAPTERS: dict[str, DatasetAdapter] = {}
+from collections import OrderedDict
+import threading
+_PREPARED_ADAPTERS: OrderedDict[str, DatasetAdapter] = OrderedDict()
+_PREPARED_ADAPTER_LOCK = threading.RLock()
 _DECODED_CACHES: dict[str, BoundedCache] = {}
 
 
@@ -901,13 +919,17 @@ def resolve_dataset_asset(dataset: Dataset, asset_ref: str,
             mime,data=cached.read_bytes().split(b'\n',1)
             if len(data)>max_bytes:raise ValueError('Cached asset exceeds byte budget')
             return MediaHandle(data,mime.decode('ascii'),hashlib.sha256(data).hexdigest(),asset_ref)
-    adapter = _PREPARED_ADAPTERS.get(key)
-    if adapter is None:
-        adapter = get_adapter(dataset)
-        prep_budget = int(dataset.adapter_config.get("preparation_budget_bytes", max_bytes))
-        plan = adapter.plan(1, prep_budget)
-        adapter.prepare(plan)
-        _PREPARED_ADAPTERS[key] = adapter
+    with _PREPARED_ADAPTER_LOCK:
+        adapter = _PREPARED_ADAPTERS.get(key)
+        if adapter is None:
+            adapter = get_adapter(dataset)
+            prep_budget = int(dataset.adapter_config.get("preparation_budget_bytes", max_bytes))
+            plan = adapter.plan(1, prep_budget)
+            adapter.prepare(plan)
+            _PREPARED_ADAPTERS[key] = adapter
+            while len(_PREPARED_ADAPTERS) > 6:
+                _PREPARED_ADAPTERS.popitem(last=False)
+        _PREPARED_ADAPTERS.move_to_end(key)
     source = PreparedSource(dataset.id, dataset.release, max_bytes, 1, adapter.probe().location)
     handle=adapter.resolve_asset(source, asset_ref)
     if cache:

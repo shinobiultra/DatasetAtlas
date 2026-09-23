@@ -312,6 +312,13 @@ class StructuredCollectionAdapter(DatasetAdapter):
         if len(parts)!=3 or parts[0]!='zip' or parts[1] not in {*self.config.get('remote_archives', {}), *self.config.get('local_archives', {})}:raise ValueError('Invalid ZIP reference')
         _,key,member=parts;member=_safe_relative(member)
         remaining=source.max_bytes-source.bytes_read
+        if key in self.config.get('local_archives', {}):
+            from dataset_atlas.storage.zip_members import LOCAL_ZIP_MEMBERS
+            path_key=self.config['local_archives'][key]['path_key']
+            path=Path(self.config[path_key])
+            expected=self.config.get('derived_archive_checksums',{}).get(path_key) or next((item['sha256'] for item in self.config.get('source_files',[]) if Path(item['path'])==path),None)
+            if not expected:raise ValueError('Local media archive requires a pinned checksum')
+            return self._image_handle(source,LOCAL_ZIP_MEMBERS.read(path,member,remaining,expected),asset_ref)
         with self._remote(key,self.config.get('media_transfer_bytes',40_000_000)) as remote,zipfile.ZipFile(remote) as archive:
             info=archive.getinfo(member)
             if info.is_dir() or info.file_size>remaining or info.file_size<1:raise ValueError('Remote ZIP image exceeds byte budget')

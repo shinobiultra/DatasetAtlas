@@ -1,0 +1,30 @@
+release: SelfExSR-8f6dd8c1d20cb7e8792a7177b4f6fd677633f598
+adapter: inventory_variants
+source_url: https://github.com/jbhuang0604/SelfExSR/tree/8f6dd8c1d20cb7e8792a7177b4f6fd677633f598/data/Set5
+expected_count: 5
+scope: All 5 native image identities and all 30 scale-specific HR/LR files for x2/x3/x4
+  in the pinned SelfExSR benchmark distribution of Set5. Original Git blob hashes
+  checked on request; no generated downsampling. This is an explicitly named benchmark
+  representation, not verified byte equivalence to the first historical release. No
+  media publication approval.
+adapter_config:
+  annotations: []
+  media_inventory_path: registry/source-manifests/set5-selfexsr-media.json
+  media_inventory_sha256: 2351b29bbae070f49bc2b71fb4f672546f2c16f6bf9b2737575139357d99f68e
+  media_base_url: https://raw.githubusercontent.com/jbhuang0604/SelfExSR/8f6dd8c1d20cb7e8792a7177b4f6fd677633f598
+  media_allowed_hosts:
+  - raw.githubusercontent.com
+  remote_cache_root: work/media-cache/selfexsr
+  remote_cache_bytes: 100000000
+  member_regex: data/Set5/image_SRF_(?P<scale>[234])/img_(?P<image_id>\d{3})_SRF_(?P=scale)_(?P<role>HR|LR)\.png
+  variant_template: x{scale}_{role}
+  expected_variants:
+  - x2_HR
+  - x2_LR
+  - x3_HR
+  - x3_LR
+  - x4_HR
+  - x4_LR
+  variant_note: SelfExSR benchmark representation. Scale-specific HR files retain
+    native crops; equivalence to the first historical Set5/Set14 distribution is not
+    established.

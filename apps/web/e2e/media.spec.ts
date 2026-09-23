@@ -5,7 +5,7 @@ import { inspectRecord, sampleCards, stubCommonRoutes } from './helpers'
 
 const ID = 'synthetic-media-contract'
 const SNAPSHOT = 'test-only-media-snapshot'
-const names = ['geometry', 'mismatch', 'missing', 'failed', 'zero', 'broken', 'absent'] as const
+const names = ['geometry', 'mismatch', 'missing', 'failed', 'zero', 'broken', 'absent', 'variants'] as const
 const assetId = (name: string) => `synthetic:asset:${name}`
 const recordId = (name: string) => `synthetic:example:${name}`
 const fixture = readFileSync(fileURLToPath(new URL('./fixtures/orientation-6.jpg', import.meta.url)))
@@ -13,7 +13,9 @@ const records = names.map(name => ({
   id: recordId(name), dataset_id: ID, release_id: 'test-only', snapshot_id: SNAPSHOT, unit: 'example',
   text: `Synthetic ${name} image`, source: { test_case: name },
   asset_ids: [assetId(name)],
-  assets: [{ id: assetId(name), dataset_id: ID, release_id: 'test-only', modality: 'image', representation: 'original', uri: name === 'absent' ? null : `/test-media/${name === 'broken' ? 'missing.png' : 'orientation-6.jpg'}`, metadata: name === 'absent' ? { availability: 'absent_from_pinned_release', source_path: 'native/missing.jpg' } : {} }],
+  assets: name === 'variants'
+    ? ['ref', 'p0', 'p1'].map(role => ({ id: assetId(name) + role, dataset_id: ID, release_id: 'test-only', modality: 'image', representation: 'original', uri: '/test-media/orientation-6.jpg', metadata: { source_role: role, question: `Synthetic question for ${role}` } }))
+    : [{ id: assetId(name), dataset_id: ID, release_id: 'test-only', modality: 'image', representation: 'original', uri: name === 'absent' ? null : `/test-media/${name === 'broken' ? 'missing.png' : 'orientation-6.jpg'}`, metadata: name === 'absent' ? { availability: 'absent_from_pinned_release', source_path: 'native/missing.jpg' } : {} }],
 }))
 const assetOutput = (name: string, width = 40, height = 80, detections: unknown[] = []) => ({ asset_id: assetId(name), status: 'completed', width, height, detections })
 const artifact = {
@@ -129,4 +131,16 @@ test('source-listed absent images remain explicit without a broken media request
   await expect(inspector.getByText('native/missing.jpg', { exact: true })).toBeVisible()
   await expect(inspector.getByText('Unavailable in source release')).toBeVisible()
   expect(requested).toEqual([])
+})
+
+test('focused inspection names native image roles and shows the selected image question', async ({ page }) => {
+  await setup(page)
+  const inspector = await inspectRecord(page, recordId('variants'))
+  await expect(inspector.getByText('Reference', { exact: true })).toBeVisible()
+  await inspector.getByRole('button', { name: 'Open', exact: true }).click()
+  const select = page.getByLabel('Choose image in this record')
+  await expect(select.locator('option')).toHaveText(['Reference · 1 of 3', 'Patch 0 · 2 of 3', 'Patch 1 · 3 of 3'])
+  await select.selectOption('2')
+  await expect(page.getByLabel('Question for selected image')).toContainText('Synthetic question for p1')
+  await expect(page.getByLabel('Question for selected image')).not.toContainText('Synthetic question for ref')
 })

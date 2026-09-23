@@ -2,7 +2,7 @@ import { displayUrl } from '../lib/display'
 import { useEffect, useMemo, useState } from 'react'
 import type { Artifact, Record as AtlasRecord } from '../generated'
 import { recordHeadline, shortId } from '../lib/format'
-import { AssetView, assetUrl, imageAssets, primaryAsset } from '../ui/MediaView'
+import { AssetView, assetLabel, assetUrl, imageAssets, primaryAsset } from '../ui/MediaView'
 import { detectorStates } from './model'
 import { Tag } from '../ui/primitives'
 import { useKey, inEditable } from '../lib/hooks'
@@ -54,8 +54,8 @@ export function FocusedInspector({ records, index, artifacts, onIndex, onClose, 
         {images.length > 1 && (
           <label className="row" style={{ gap: 6, fontSize: 'var(--fs-sm)', color: 'var(--text-muted)' }}>
             Image
-            <select className="select" style={{ width: 92, height: 28 }} value={assetIndex} onChange={event => setAssetIndex(Number(event.target.value))} aria-label="Choose image in this record">
-              {images.map((_, position) => <option key={position} value={position}>{position + 1} of {images.length}</option>)}
+            <select className="select" style={{ width: 180, maxWidth: '24vw', height: 28 }} value={assetIndex} onChange={event => setAssetIndex(Number(event.target.value))} aria-label="Choose image in this record">
+              {images.map((image, position) => <option key={image.id} value={position}>{assetLabel(image, position)} · {position + 1} of {images.length}</option>)}
             </select>
           </label>
         )}
@@ -83,6 +83,9 @@ export function FocusedInspector({ records, index, artifacts, onIndex, onClose, 
       </div>
 
       <div className="focus-below">
+        {typeof asset?.metadata?.question === 'string' && asset.metadata.question !== record.question && (
+          <div className="focus-question" aria-label="Question for selected image"><strong>{assetLabel(asset, assetIndex)}.</strong> {asset.metadata.question}</div>
+        )}
         {record.question && <div className="focus-question"><strong>Q.</strong> {record.question}</div>}
         {!record.question && record.text && asset && <div className="focus-question clamp-3">{record.text}</div>}
         <div className="filmstrip-head">

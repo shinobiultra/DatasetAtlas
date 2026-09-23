@@ -167,7 +167,7 @@ def run(root, identity):
         if dataset.adapter == 'visual_genome':
             dataset.adapter_config['join_index_path'] = str(version / 'sources' / 'visual-genome-join.sqlite')
         adapter = get_adapter(dataset)
-        if dataset.adapter=='remote_columnar':adapter.cancel=check
+        adapter.cancel=check
         expected_count = adapter.count if dataset.adapter in {'columnar','remote_columnar'} else plan['expected_count']
         if dataset.adapter in {'columnar','remote_columnar'} and plan.get('expected_count') is not None and expected_count != plan['expected_count']:
             raise ValueError('Columnar count differs from declared release population')

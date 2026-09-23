@@ -3,7 +3,7 @@ import type { Artifact, FieldDescriptor, Query, Record as AtlasRecord } from '..
 import { provider } from '../provider'
 import { fieldValue } from '../query'
 import { display, isMissing, shortId, titleCase } from '../lib/format'
-import { AssetView, RepresentationTag, classColour, imageAssets, primaryAsset } from '../ui/MediaView'
+import { AssetView, RepresentationTag, assetLabel, classColour, imageAssets, primaryAsset } from '../ui/MediaView'
 import { detectorStates, runLabel, type RunState } from '../dataset/model'
 import { CopyButton, Notice, Tabs, Tag } from '../ui/primitives'
 import { Value } from '../ui/Value'
@@ -62,6 +62,7 @@ export function SampleInspector({ record, fields, artifacts, query, datasetId, o
       <div className="insp-section">
         <div className="row" style={{ flexWrap: 'wrap', gap: 6 }}>
           {asset && <RepresentationTag asset={asset} />}
+          {asset && Boolean(asset.metadata?.condition || asset.metadata?.source_role) && <Tag>{assetLabel(asset)}</Tag>}
           {images.length > 1 && <Tag>{images.length} images</Tag>}
           {record.unit && <Tag>{titleCase(record.unit)}</Tag>}
           <button type="button" className="btn sm" style={{ marginLeft: 'auto' }} onClick={onFocus}><Icon.Expand size={13} />Open</button>

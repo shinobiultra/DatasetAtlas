@@ -1,0 +1,144 @@
+release: b80eedea3db312c09ded2082813390f68e750ef3
+adapter: mm_safetybench
+source_url: https://github.com/isXinLiu/MM-SafetyBench
+expected_count: 1685
+scope: 'All 1680 native question records with three image variants (SD, SD_TYPO, TYPO),
+  plus five original image groups without released question annotations: 1685 records
+  and 5055 image members. Original prompts retained as inert data; no attacks executed.
+  Questions from pinned author Git revision, images from author-linked Drive archive.
+  Research-only license; no publication approval.'
+adapter_config:
+  annotations:
+  - path_key: questions_a_path
+    scenario: 01-Illegal_Activitiy
+    source_name: 01-Illegal_Activitiy.json
+  - path_key: questions_b_path
+    scenario: 02-HateSpeech
+    source_name: 02-HateSpeech.json
+  - path_key: questions_c_path
+    scenario: 03-Malware_Generation
+    source_name: 03-Malware_Generation.json
+  - path_key: questions_d_path
+    scenario: 04-Physical_Harm
+    source_name: 04-Physical_Harm.json
+  - path_key: questions_e_path
+    scenario: 05-EconomicHarm
+    source_name: 05-EconomicHarm.json
+  - path_key: questions_f_path
+    scenario: 06-Fraud
+    source_name: 06-Fraud.json
+  - path_key: questions_g_path
+    scenario: 07-Sex
+    source_name: 07-Sex.json
+  - path_key: questions_h_path
+    scenario: 08-Political_Lobbying
+    source_name: 08-Political_Lobbying.json
+  - path_key: questions_i_path
+    scenario: 09-Privacy_Violence
+    source_name: 09-Privacy_Violence.json
+  - path_key: questions_j_path
+    scenario: 10-Legal_Opinion
+    source_name: 10-Legal_Opinion.json
+  - path_key: questions_k_path
+    scenario: 11-Financial_Advice
+    source_name: 11-Financial_Advice.json
+  - path_key: questions_l_path
+    scenario: 12-Health_Consultation
+    source_name: 12-Health_Consultation.json
+  - path_key: questions_m_path
+    scenario: 13-Gov_Decision
+    source_name: 13-Gov_Decision.json
+  local_archives:
+    images:
+      path_key: images_path
+  mapping:
+    question: Question
+  max_annotation_bytes: 20000000
+files:
+- url: https://raw.githubusercontent.com/isXinLiu/MM-SafetyBench/b80eedea3db312c09ded2082813390f68e750ef3/data/processed_questions/01-Illegal_Activitiy.json
+  sha256: e2db149c809c86fc5e6ef285bc17ca45228b19349ebd73125e7408098a273be9
+  bytes: 91231
+  source_name: 01-Illegal_Activitiy.json
+  format: json
+  config_key: questions_a_path
+- url: https://raw.githubusercontent.com/isXinLiu/MM-SafetyBench/b80eedea3db312c09ded2082813390f68e750ef3/data/processed_questions/02-HateSpeech.json
+  sha256: 462672c4ca05d43a5502de61cbee0f5c12b76c9e7164e7b947f0ce8d1971bcb8
+  bytes: 152148
+  source_name: 02-HateSpeech.json
+  format: json
+  config_key: questions_b_path
+- url: https://raw.githubusercontent.com/isXinLiu/MM-SafetyBench/b80eedea3db312c09ded2082813390f68e750ef3/data/processed_questions/03-Malware_Generation.json
+  sha256: da4ceec8e02f130cac70ffabc6127f9d2a9d7466cd9f992c5f9c7ecb0a9645ae
+  bytes: 39657
+  source_name: 03-Malware_Generation.json
+  format: json
+  config_key: questions_c_path
+- url: https://raw.githubusercontent.com/isXinLiu/MM-SafetyBench/b80eedea3db312c09ded2082813390f68e750ef3/data/processed_questions/04-Physical_Harm.json
+  sha256: f58c97aee2e22257b1b813d94ac7147cdb9e3c1b9c93a03eb14e1f3f32ab879e
+  bytes: 131345
+  source_name: 04-Physical_Harm.json
+  format: json
+  config_key: questions_d_path
+- url: https://raw.githubusercontent.com/isXinLiu/MM-SafetyBench/b80eedea3db312c09ded2082813390f68e750ef3/data/processed_questions/05-EconomicHarm.json
+  sha256: 9146c5eebeed31fcb48a1d622edca2e41c8880430c7e5ba715ed74e2f799ffd7
+  bytes: 120182
+  source_name: 05-EconomicHarm.json
+  format: json
+  config_key: questions_e_path
+- url: https://raw.githubusercontent.com/isXinLiu/MM-SafetyBench/b80eedea3db312c09ded2082813390f68e750ef3/data/processed_questions/06-Fraud.json
+  sha256: 869f47fa08e683d3220e7a4ec071482324748346d17462e0060cedec03cdadc0
+  bytes: 138478
+  source_name: 06-Fraud.json
+  format: json
+  config_key: questions_f_path
+- url: https://raw.githubusercontent.com/isXinLiu/MM-SafetyBench/b80eedea3db312c09ded2082813390f68e750ef3/data/processed_questions/07-Sex.json
+  sha256: 23f4080200eca1701ce15295784e2c2291b2a8bb9883fd34ba92933b4297ceb7
+  bytes: 93378
+  source_name: 07-Sex.json
+  format: json
+  config_key: questions_g_path
+- url: https://raw.githubusercontent.com/isXinLiu/MM-SafetyBench/b80eedea3db312c09ded2082813390f68e750ef3/data/processed_questions/08-Political_Lobbying.json
+  sha256: a9c64065b449a1a14ad332ff1fb630a55e8cf5b8f99f2269b230a6414cc2526e
+  bytes: 141026
+  source_name: 08-Political_Lobbying.json
+  format: json
+  config_key: questions_h_path
+- url: https://raw.githubusercontent.com/isXinLiu/MM-SafetyBench/b80eedea3db312c09ded2082813390f68e750ef3/data/processed_questions/09-Privacy_Violence.json
+  sha256: 836d48648f9bc6ff1bf32291a7b05a2248c64c15bf363e0afcf8566922e5fdcd
+  bytes: 135807
+  source_name: 09-Privacy_Violence.json
+  format: json
+  config_key: questions_i_path
+- url: https://raw.githubusercontent.com/isXinLiu/MM-SafetyBench/b80eedea3db312c09ded2082813390f68e750ef3/data/processed_questions/10-Legal_Opinion.json
+  sha256: 7281f218f74090dafe4df0a2b27c5e6f85949727a14e51418eaadda93811ce72
+  bytes: 109707
+  source_name: 10-Legal_Opinion.json
+  format: json
+  config_key: questions_j_path
+- url: https://raw.githubusercontent.com/isXinLiu/MM-SafetyBench/b80eedea3db312c09ded2082813390f68e750ef3/data/processed_questions/11-Financial_Advice.json
+  sha256: 3220e4b9c8c9c588dfb61d4805b5dc1be9839089037b3701daea9af4a9ee298f
+  bytes: 129012
+  source_name: 11-Financial_Advice.json
+  format: json
+  config_key: questions_k_path
+- url: https://raw.githubusercontent.com/isXinLiu/MM-SafetyBench/b80eedea3db312c09ded2082813390f68e750ef3/data/processed_questions/12-Health_Consultation.json
+  sha256: f3163717d2e397494a69a9462bb61f36c6ca1533b8f36d715593f50377df6895
+  bytes: 78365
+  source_name: 12-Health_Consultation.json
+  format: json
+  config_key: questions_l_path
+- url: https://raw.githubusercontent.com/isXinLiu/MM-SafetyBench/b80eedea3db312c09ded2082813390f68e750ef3/data/processed_questions/13-Gov_Decision.json
+  sha256: 83d3188cf488f08b82baedefdf6a7f28927834ea76e4de0217048bd217a9a0c9
+  bytes: 131529
+  source_name: 13-Gov_Decision.json
+  format: json
+  config_key: questions_m_path
+- url: https://drive.usercontent.google.com/download?id=1xjW9k-aGkmwycqGCXbru70FaSKhSDcR_&export=download&confirm=t
+  sha256: 7e1a9f08212038ceaa74801964d2b97c219509663bbd017ab77abb1b063cc23e
+  bytes: 498030008
+  source_name: images.zip
+  format: zip
+  config_key: images_path
+allowed_hosts:
+- raw.githubusercontent.com
+- drive.usercontent.google.com

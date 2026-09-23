@@ -80,3 +80,24 @@ workers place it inside their own version directory. Existing prepared derivativ
 remain readable without creating files beside original archives. Streaming joins
 check cancellation every 256 native rows, clean partial output after interruption,
 and reject a QA-to-region mapping when both IDs exist but refer to different images.
+
+Native image variants remain assets of their original example. BAPPS preserves
+reference/p0/p1 roles, task, distortion group and scalar human judgements. MME
+keeps both yes/no questions and a shared pair ID. MM-SafetyBench keeps all three
+image conditions and their condition-specific question fields; image groups with
+no released question remain explicitly unannotated examples. Browsing these
+safety datasets does not execute their contents.
+
+`archive_variants` derives a complete native filename inventory from ETag-bound
+ZIP directories and checks every expected per-split variant before activation.
+DIV2K training's four wild realizations are distinct assets; validation has one.
+`inventory_variants` joins pinned individual files by native image ID and scale,
+retaining scale-specific HR crops. SUN397 separately exposes text evaluation
+folds and the MATLAB non-training complements; those test populations differ.
+
+Repeated local media reads reuse a bounded LRU of ZIP directories (four archives,
+100 MB of encoded central-directory metadata) and six prepared adapter instances.
+Those are cache limits, not a promise that decoded Python objects occupy 100 MB.
+Local file identity changes invalidate cached checksum verification. Native image
+condition/role labels appear in focused inspection; an image-specific question
+is labelled separately from the record question.

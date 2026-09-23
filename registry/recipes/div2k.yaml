@@ -1,0 +1,310 @@
+release: DIV2K-official-published-archives-20260923
+adapter: archive_variants
+source_url: https://data.vision.ee.ethz.ch/cvl/DIV2K/
+expected_count: 900
+remote_metadata_bytes: 5000000
+scope: All 900 published train/validation image identities (800 train, 100 validation),
+  each joined to HR and all released LR variants (13 LR variants in train, including
+  four wild realizations; ten LR variants in validation) across NTIRE 2017 and 2018
+  (22 original ZIP archives). Test HR images are not published on the author download
+  page and are outside this released population. Original bytes fetched only on request;
+  strong ETags and ZIP CRCs checked, complete remote archive SHA-256 not computed.
+  No media publication approval.
+adapter_config:
+  annotations: []
+  remote_archives:
+    div2k_train_hr:
+      url: https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_HR.zip
+      bytes: 3530603713
+      etag: '"d270bcc1-5487e5c18d636"'
+      allowed_hosts:
+      - data.vision.ee.ethz.ch
+      split: train
+      variant: HR
+      role: high_resolution
+      downscale_factor: null
+      member_regex: DIV2K_train_HR/(?P<image_id>\d{4})\.png
+      expected_count: 800
+    div2k_valid_hr:
+      url: https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_HR.zip
+      bytes: 448993893
+      etag: '"1ac31a65-5487e628d1f06"'
+      allowed_hosts:
+      - data.vision.ee.ethz.ch
+      split: valid
+      variant: HR
+      role: high_resolution
+      downscale_factor: null
+      member_regex: DIV2K_valid_HR/(?P<image_id>\d{4})\.png
+      expected_count: 100
+    div2k_train_lr_bicubic_x2:
+      url: https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_LR_bicubic_X2.zip
+      bytes: 925390592
+      etag: '"37285700-5487e5d0a3d6f"'
+      allowed_hosts:
+      - data.vision.ee.ethz.ch
+      split: train
+      variant: LR_bicubic_X2
+      role: low_resolution
+      downscale_factor: 2
+      member_regex: DIV2K_train_LR_bicubic/X2/(?P<image_id>\d{4})x2\.png
+      expected_count: 800
+    div2k_train_lr_bicubic_x3:
+      url: https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_LR_bicubic_X3.zip
+      bytes: 427847282
+      etag: '"19806e72-5487e5d7cde4c"'
+      allowed_hosts:
+      - data.vision.ee.ethz.ch
+      split: train
+      variant: LR_bicubic_X3
+      role: low_resolution
+      downscale_factor: 3
+      member_regex: DIV2K_train_LR_bicubic/X3/(?P<image_id>\d{4})x3\.png
+      expected_count: 800
+    div2k_train_lr_bicubic_x4:
+      url: https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_LR_bicubic_X4.zip
+      bytes: 246914039
+      etag: '"eb79bf7-5487e5dc0dd36"'
+      allowed_hosts:
+      - data.vision.ee.ethz.ch
+      split: train
+      variant: LR_bicubic_X4
+      role: low_resolution
+      downscale_factor: 4
+      member_regex: DIV2K_train_LR_bicubic/X4/(?P<image_id>\d{4})x4\.png
+      expected_count: 800
+    div2k_train_lr_difficult:
+      url: https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_LR_difficult.zip
+      bytes: 263211252
+      etag: '"fb048f4-5626f6551774c"'
+      allowed_hosts:
+      - data.vision.ee.ethz.ch
+      split: train
+      variant: LR_difficult
+      role: low_resolution
+      downscale_factor: 4
+      member_regex: DIV2K_train_LR_difficult/(?P<image_id>\d{4})x4d\.png
+      expected_count: 800
+    div2k_train_lr_mild:
+      url: https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_LR_mild.zip
+      bytes: 275693358
+      etag: '"106ebf2e-5626f6614d8d2"'
+      allowed_hosts:
+      - data.vision.ee.ethz.ch
+      split: train
+      variant: LR_mild
+      role: low_resolution
+      downscale_factor: 4
+      member_regex: DIV2K_train_LR_mild/(?P<image_id>\d{4})x4m\.png
+      expected_count: 800
+    div2k_train_lr_unknown_x2:
+      url: https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_LR_unknown_X2.zip
+      bytes: 734182735
+      etag: '"2bc2bd4f-5487e5ffd55a6"'
+      allowed_hosts:
+      - data.vision.ee.ethz.ch
+      split: train
+      variant: LR_unknown_X2
+      role: low_resolution
+      downscale_factor: 2
+      member_regex: DIV2K_train_LR_unknown/X2/(?P<image_id>\d{4})x2\.png
+      expected_count: 800
+    div2k_train_lr_unknown_x3:
+      url: https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_LR_unknown_X3.zip
+      bytes: 377245548
+      etag: '"167c4f6c-5487e60670d2d"'
+      allowed_hosts:
+      - data.vision.ee.ethz.ch
+      split: train
+      variant: LR_unknown_X3
+      role: low_resolution
+      downscale_factor: 3
+      member_regex: DIV2K_train_LR_unknown/X3/(?P<image_id>\d{4})x3\.png
+      expected_count: 800
+    div2k_train_lr_unknown_x4:
+      url: https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_LR_unknown_X4.zip
+      bytes: 208956781
+      etag: '"c746d6d-5487e60a00f7b"'
+      allowed_hosts:
+      - data.vision.ee.ethz.ch
+      split: train
+      variant: LR_unknown_X4
+      role: low_resolution
+      downscale_factor: 4
+      member_regex: DIV2K_train_LR_unknown/X4/(?P<image_id>\d{4})x4\.png
+      expected_count: 800
+    div2k_train_lr_wild:
+      url: https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_LR_wild.zip
+      bytes: 1079873385
+      etag: '"405d8f69-5626f6730f9f4"'
+      allowed_hosts:
+      - data.vision.ee.ethz.ch
+      split: train
+      variant: LR_wild_{realization}
+      role: low_resolution
+      downscale_factor: 4
+      member_regex: DIV2K_train_LR_wild/(?P<image_id>\d{4})x4w(?P<realization>[1-4])\.png
+      expected_count: 3200
+    div2k_train_lr_x8:
+      url: https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_LR_x8.zip
+      bytes: 65753171
+      etag: '"3eb5053-5626f67548fad"'
+      allowed_hosts:
+      - data.vision.ee.ethz.ch
+      split: train
+      variant: LR_x8
+      role: low_resolution
+      downscale_factor: 8
+      member_regex: DIV2K_train_LR_x8/(?P<image_id>\d{4})x8\.png
+      expected_count: 800
+    div2k_valid_lr_bicubic_x2:
+      url: https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_LR_bicubic_X2.zip
+      bytes: 117763600
+      etag: '"704ee10-5487e62af1e7a"'
+      allowed_hosts:
+      - data.vision.ee.ethz.ch
+      split: valid
+      variant: LR_bicubic_X2
+      role: low_resolution
+      downscale_factor: 2
+      member_regex: DIV2K_valid_LR_bicubic/X2/(?P<image_id>\d{4})x2\.png
+      expected_count: 100
+    div2k_valid_lr_bicubic_x3:
+      url: https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_LR_bicubic_X3.zip
+      bytes: 54513392
+      etag: '"33fcef0-5487e62be031f"'
+      allowed_hosts:
+      - data.vision.ee.ethz.ch
+      split: valid
+      variant: LR_bicubic_X3
+      role: low_resolution
+      downscale_factor: 3
+      member_regex: DIV2K_valid_LR_bicubic/X3/(?P<image_id>\d{4})x3\.png
+      expected_count: 100
+    div2k_valid_lr_bicubic_x4:
+      url: https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_LR_bicubic_X4.zip
+      bytes: 31505881
+      etag: '"1e0bdd9-5487e62c853d9"'
+      allowed_hosts:
+      - data.vision.ee.ethz.ch
+      split: valid
+      variant: LR_bicubic_X4
+      role: low_resolution
+      downscale_factor: 4
+      member_regex: DIV2K_valid_LR_bicubic/X4/(?P<image_id>\d{4})x4\.png
+      expected_count: 100
+    div2k_valid_lr_difficult:
+      url: https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_LR_difficult.zip
+      bytes: 33596835
+      etag: '"200a5a3-582f511928f2b"'
+      allowed_hosts:
+      - data.vision.ee.ethz.ch
+      split: valid
+      variant: LR_difficult
+      role: low_resolution
+      downscale_factor: 4
+      member_regex: DIV2K_valid_LR_difficult/(?P<image_id>\d{4})x4d\.png
+      expected_count: 100
+    div2k_valid_lr_mild:
+      url: https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_LR_mild.zip
+      bytes: 35300939
+      etag: '"21aa64b-582f510e960c5"'
+      allowed_hosts:
+      - data.vision.ee.ethz.ch
+      split: valid
+      variant: LR_mild
+      role: low_resolution
+      downscale_factor: 4
+      member_regex: DIV2K_valid_LR_mild/(?P<image_id>\d{4})x4m\.png
+      expected_count: 100
+    div2k_valid_lr_unknown_x2:
+      url: https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_LR_unknown_X2.zip
+      bytes: 93433041
+      etag: '"591acd1-5487e6323847c"'
+      allowed_hosts:
+      - data.vision.ee.ethz.ch
+      split: valid
+      variant: LR_unknown_X2
+      role: low_resolution
+      downscale_factor: 2
+      member_regex: DIV2K_valid_LR_unknown/X2/(?P<image_id>\d{4})x2\.png
+      expected_count: 100
+    div2k_valid_lr_unknown_x3:
+      url: https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_LR_unknown_X3.zip
+      bytes: 48143315
+      etag: '"2de9bd3-5487e6330d2dd"'
+      allowed_hosts:
+      - data.vision.ee.ethz.ch
+      split: valid
+      variant: LR_unknown_X3
+      role: low_resolution
+      downscale_factor: 3
+      member_regex: DIV2K_valid_LR_unknown/X3/(?P<image_id>\d{4})x3\.png
+      expected_count: 100
+    div2k_valid_lr_unknown_x4:
+      url: https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_LR_unknown_X4.zip
+      bytes: 26695095
+      etag: '"19755b7-5487e6338358f"'
+      allowed_hosts:
+      - data.vision.ee.ethz.ch
+      split: valid
+      variant: LR_unknown_X4
+      role: low_resolution
+      downscale_factor: 4
+      member_regex: DIV2K_valid_LR_unknown/X4/(?P<image_id>\d{4})x4\.png
+      expected_count: 100
+    div2k_valid_lr_wild:
+      url: https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_LR_wild.zip
+      bytes: 34655417
+      etag: '"210ccb9-582f511f52052"'
+      allowed_hosts:
+      - data.vision.ee.ethz.ch
+      split: valid
+      variant: LR_wild
+      role: low_resolution
+      downscale_factor: 4
+      member_regex: DIV2K_valid_LR_wild/(?P<image_id>\d{4})x4w\.png
+      expected_count: 100
+    div2k_valid_lr_x8:
+      url: https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_LR_x8.zip
+      bytes: 8428103
+      etag: '"809a47-582f50ef79971"'
+      allowed_hosts:
+      - data.vision.ee.ethz.ch
+      split: valid
+      variant: LR_x8
+      role: low_resolution
+      downscale_factor: 8
+      member_regex: DIV2K_valid_LR_x8/(?P<image_id>\d{4})x8\.png
+      expected_count: 100
+  expected_variants:
+    train:
+    - HR
+    - LR_bicubic_X2
+    - LR_bicubic_X3
+    - LR_bicubic_X4
+    - LR_difficult
+    - LR_mild
+    - LR_unknown_X2
+    - LR_unknown_X3
+    - LR_unknown_X4
+    - LR_wild_1
+    - LR_wild_2
+    - LR_wild_3
+    - LR_wild_4
+    - LR_x8
+    valid:
+    - HR
+    - LR_bicubic_X2
+    - LR_bicubic_X3
+    - LR_bicubic_X4
+    - LR_difficult
+    - LR_mild
+    - LR_unknown_X2
+    - LR_unknown_X3
+    - LR_unknown_X4
+    - LR_wild
+    - LR_x8
+  remote_cache_root: work/media-cache/div2k
+  remote_cache_bytes: 1000000000
+  annotation_transfer_bytes: 5000000

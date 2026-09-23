@@ -1,11 +1,18 @@
 schema_version: '1.0'
 id: oxfordpet
-name: Oxfordpet
-aliases: []
-description: Oxford publishes images and trimap annotations separately; same source family as pets candidate,
-  not a new release.
+name: Oxford-IIIT Pet
+aliases:
+- Oxford Pets
+- Oxford-IIIT Pet
+- Pets
+- pets
+description: Oxford publishes images and trimap annotations separately; same source family as pets candidate, not
+  a new release.
 paper_ids:
 - paper-25eaa8c74ce76800
+- paper-6dbb0d4a7b949143
+- paper-3e0db9c633ab204c
+- paper-392b0c393c06b48e
 release: unresolved
 adapter: structured
 adapter_config: {}
@@ -19,8 +26,7 @@ coverage:
   publication: not_reviewed
   preview_count: 0
   unit: example
-  blockers:
-  - Adapter and preview are not implemented.
+  blockers: []
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -39,8 +45,8 @@ evidence:
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://www.robots.ox.ac.uk/~vgg/data/pets/
-  note: 'Oxford publishes images and trimap annotations separately; same source family as pets candidate,
-    not a new release. Release: Oxford-IIIT Pet original, 37 breeds; paper split unpinned'
+  note: 'Oxford publishes images and trimap annotations separately; same source family as pets candidate, not a
+    new release. Release: Oxford-IIIT Pet original, 37 breeds; paper split unpinned'
   audit_file: work/sources/source-audit-jobs-batch3.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
@@ -50,4 +56,58 @@ evidence:
   audit_file: work/sources/source-audit-jobs-batch3.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
+- kind: corpus_mention
+  evidence_id: evidence-4b1715f75940f803e5ef
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 5
+  role: evaluation
+  excerpt: ' 2009), Robust Vision Models. We focus on robust vision en- CIFAR100, Pets (Parkhi et al., 2012), UCF101
+    (Soomro, coders, specifically large-scale adversarially trained Ima- 2012), and'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+  merged_from_alias: pets
+- kind: corpus_mention
+  evidence_id: evidence-4f224d5a19699730a47a
+  paper_id: paper-3e0db9c633ab204c
+  source_file_hash: d2750f355a25fcdcfcb221e5049a0aa41ec096b452772c73e1767e2d039a6545
+  page: 7
+  role: evaluation
+  excerpt: Cars Dtd Eurosat FGVC Flowers Pets Eval Model Training Data OpenAI-L/14
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+  merged_from_alias: pets
+- kind: corpus_mention
+  evidence_id: evidence-44bec31dda922c2fbb72
+  paper_id: paper-392b0c393c06b48e
+  source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
+  page: 6
+  role: zero-shot adversarial diagnostic evaluation
+  excerpt: 'Figure 2 x-axis label: Pets'
+  review_scope: full_pdf_visual_figure_checked
+  paper_full_review_complete: true
+  merged_from_alias: pets
+- kind: corpus_mention
+  evidence_id: evidence-9ea95792793b690e3f47
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 5
+  role: zero-shot robustness evaluation
+  excerpt: Robust Vision Models. We focus on robust vision en- CIFAR100, Pets (Parkhi et al., 2012), UCF101 (Soomro,
+    coders, speci
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+  merged_from_alias: pets
+- kind: source_audit_access
+  url: https://www.robots.ox.ac.uk/~vgg/data/pets/
+  note: Official images.tar.gz and annotations.tar.gz were retrieved from the Oxford page and indexed by preparation;
+    7,349 records.
+  checked_on: '2026-09-22'
+  source_identity_status: official_release_acquired_by_preparation
 source_url: https://www.robots.ox.ac.uk/~vgg/data/pets/
+relationships:
+- type: alias_resolved_from
+  target_id: pets
+  status: verified
+  scope: 'Same official Oxford-IIIT Pet release (Parkhi et al., 2012): the pets candidate''s "Pets (Parkhi et al.,
+    2012)" mentions name this release; identical source and recipe.'

@@ -9,6 +9,31 @@ from dataset_atlas.models import Dataset, Pack
 # lookup is not. Resolving a 100-record selection used to sweep 33,600 files.
 BASELINE_RECHECK_SECONDS = 0.5
 
+
+def merge_prepared(baseline: Dataset, prepared: Dataset, recipe_present: bool) -> Dataset:
+    """Combine the tracked registry record with what a preparation determined.
+
+    Preparation legitimately fixes the release, snapshot, adapter and coverage,
+    and may append its own evidence. Everything descriptive — name, aliases,
+    paper links, rights, relationships and the source audits — stays owned by the
+    registry YAML, so a later review edit is visible while the version is active
+    instead of being frozen at plan time. A recipe may override the description
+    and source URL for the population it prepares; those follow the prepared copy
+    only when a recipe exists to have set them.
+    """
+    merged=baseline.model_copy(deep=True)
+    merged.release=prepared.release
+    merged.snapshot_id=prepared.snapshot_id
+    merged.adapter=prepared.adapter
+    merged.adapter_config=dict(prepared.adapter_config)
+    merged.coverage=prepared.coverage.model_copy(deep=True)
+    if recipe_present:
+        if prepared.description!=baseline.description:merged.description=prepared.description
+        if prepared.source_url!=baseline.source_url:merged.source_url=prepared.source_url
+    local=[item for item in prepared.evidence if item.get('kind')=='local_preparation']
+    merged.evidence=[item for item in baseline.evidence if item.get('kind')!='local_preparation']+local
+    return merged
+
 class Registry:
     def __init__(self, root: Path):
         self.root=Path(root).resolve()
@@ -19,6 +44,7 @@ class Registry:
         self._by_id={}
         self._baseline_checked=0.0
         self._versions={}
+        self._aliases={}
     def refresh(self):
         """Force the next lookup to re-read registry files regardless of the recheck window."""
         self._baseline_checked=0.0
@@ -34,29 +60,52 @@ class Registry:
         if self._signature is not None and now-self._baseline_checked<BASELINE_RECHECK_SECONDS:return
         self._baseline_checked=now
         files=sorted((self.root/'registry/datasets').glob('*.yaml'))
-        signature=tuple((str(p),p.stat().st_mtime_ns,p.stat().st_size) for p in files)
+        dispositions=self.root/'registry/candidate_dispositions.yaml'
+        signature=tuple((str(p),p.stat().st_mtime_ns,p.stat().st_size) for p in files+([dispositions] if dispositions.is_file() else []))
         if signature!=self._signature:
             self._datasets=[Dataset.model_validate(yaml.safe_load(p.read_text())) for p in files]
             if len({d.id for d in self._datasets})!=len(self._datasets):raise ValueError('Duplicate dataset IDs')
             self._by_id={d.id:d for d in self._datasets}
+            self._aliases=self._retired_aliases(dispositions)
             self._signature=signature
+    def _retired_aliases(self, dispositions):
+        """Retired IDs -> canonical ID, from confirmed alias redirects and `alias_resolved_from` relationships.
+
+        A retired ID never shadows a live catalogue entry, and a redirect to an unknown canonical ID is ignored
+        rather than inventing a dataset."""
+        aliases={}
+        rules=yaml.safe_load(dispositions.read_text()) if dispositions.is_file() else {}
+        for rule in (rules or {}).get('alias_redirects',[]) or []:
+            aliases[str(rule.get('alias_id'))]=str(rule.get('canonical_id'))
+        for dataset in self._datasets:
+            for relationship in dataset.relationships:
+                if isinstance(relationship,dict) and relationship.get('type')=='alias_resolved_from' and relationship.get('target_id'):
+                    aliases[str(relationship['target_id'])]=dataset.id
+        return {alias:canonical for alias,canonical in aliases.items() if alias not in self._by_id and canonical in self._by_id}
+    def resolve(self, dataset_id: str) -> str:
+        """Canonical ID for a live or retired dataset ID; unknown IDs are returned unchanged."""
+        self._refresh_baseline()
+        if dataset_id in self._by_id:return dataset_id
+        return self._aliases.get(dataset_id,dataset_id)
     def _active_dataset(self, baseline):
         active=self.active_directory(baseline.id)
         if not active:return baseline
         path=active/'dataset.json'
         stat=path.stat()
-        signature=(str(path),stat.st_mtime_ns,stat.st_size)
+        # The merge depends on both documents, so the cache key covers both.
+        signature=(str(path),stat.st_mtime_ns,stat.st_size,id(self._datasets))
         cached=self._active_datasets.get(baseline.id)
         if cached is None or cached[0]!=signature:
-            dataset=Dataset.model_validate_json(path.read_text())
-            if dataset.id!=baseline.id:raise ValueError('Prepared dataset identity mismatch')
-            cached=(signature,dataset)
+            prepared=Dataset.model_validate_json(path.read_text())
+            if prepared.id!=baseline.id:raise ValueError('Prepared dataset identity mismatch')
+            cached=(signature,merge_prepared(baseline,prepared,(self.root/'registry/recipes'/f'{baseline.id}.yaml').is_file()))
             self._active_datasets[baseline.id]=cached
         return cached[1]
     def datasets(self) -> list[Dataset]:
         self._refresh_baseline()
         return [self._active_dataset(dataset) for dataset in self._datasets]
     def active_directory(self, dataset_id):
+        dataset_id=self.resolve(dataset_id)
         if '/' in dataset_id or '\\' in dataset_id or dataset_id in {'.','..'}:raise ValueError('Invalid dataset ID')
         base=self.root/'work/prepared'/dataset_id
         pointer=base/'active.json'
@@ -66,11 +115,13 @@ class Registry:
         if path.parent!=base.resolve():raise ValueError('Invalid prepared version')
         return path
     def snapshot_path(self, dataset_id):
+        dataset_id=self.resolve(dataset_id)
         active=self.active_directory(dataset_id)
         return active/'snapshot' if active else self.root/'work/snapshots'/dataset_id
 
     def versions(self, dataset_id):
         self._refresh_baseline()
+        dataset_id=self.resolve(dataset_id)
         baseline=self._by_id.get(dataset_id)
         if baseline is None:raise KeyError(dataset_id)
         active=self.active_directory(dataset_id)
@@ -99,10 +150,11 @@ class Registry:
             if isinstance(value,str) and '://' not in value and not Path(value).is_absolute():copy.adapter_config[key]=str(self.root/value)
         return copy
     def dataset(self, dataset_id: str) -> Dataset:
-        self._refresh_baseline()
+        dataset_id=self.resolve(dataset_id)
         if dataset_id not in self._by_id:raise KeyError(dataset_id)
         return self._resolved(self._active_dataset(self._by_id[dataset_id]))
     def pack(self, dataset_id: str) -> Pack:
+        dataset_id=self.resolve(dataset_id)
         self.dataset(dataset_id)
         if '/' in dataset_id or '\\' in dataset_id or dataset_id in {'.','..'}:raise ValueError('Invalid dataset ID')
         active=self.active_directory(dataset_id)

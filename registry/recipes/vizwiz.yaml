@@ -1,0 +1,25 @@
+# VizWiz-VQA annotations only. The question/answer JSON is 1.7 MB; the image archives
+# (val.zip 3.49 GB, train larger) are not part of this population, so records carry the
+# original image filename as a source field with no local media. Checksum deliberately
+# unpinned until the archive has been fetched once under an approved budget.
+release: vizwiz-vqa-final-annotations
+adapter: annotated_archive
+# Count declared from the VizWiz-VQA release (20,523 train + 4,319 val); verified at preparation.
+expected_count: 24842
+scope: All VizWiz-VQA train and val question records from the official Annotations.zip; images are the separate VizWiz_final image archives and are not acquired here.
+adapter_config:
+  annotation_patterns:
+  - train.json
+  - val.json
+  json_mode: list
+  mapping:
+    question: question
+    text: question
+files:
+- source_name: Annotations.zip
+  url: https://vizwiz.cs.colorado.edu/VizWiz_final/vqa_data/Annotations.zip
+  bytes: 1711273
+  format: zip
+  config_key: path
+allowed_hosts:
+- vizwiz.cs.colorado.edu

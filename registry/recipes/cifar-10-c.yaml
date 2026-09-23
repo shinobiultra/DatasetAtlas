@@ -1,0 +1,16 @@
+# Hendrycks & Dietterich CIFAR-10-C, Zenodo record 2535967. Sizes and MD5 come from the
+# Zenodo API. 2.92 GB exceeds this session's approved budget, and the .npy-in-tar reader
+# (cifar_c_npy) is not implemented yet; the plan reports both, so this is a documented gap.
+release: zenodo-2535967-cifar-10-c
+adapter: cifar_c_npy
+expected_count: 950000
+scope: All 19 corruption types at 5 severities over the 10,000 CIFAR-10 test images (950,000 corrupted images) from the official CIFAR-10-C.tar; CIFAR-10-P is a separate file and is not included.
+files:
+- source_name: CIFAR-10-C.tar
+  url: https://zenodo.org/records/2535967/files/CIFAR-10-C.tar
+  bytes: 2918471680
+  md5: 56bf5dcef84df0e2308c6dcbcbbd8499
+  format: tar
+  config_key: path
+allowed_hosts:
+- zenodo.org

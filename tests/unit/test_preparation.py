@@ -241,3 +241,21 @@ def test_prune_keeps_superseded_versions_a_saved_selection_still_references(tmp_
     retained = {entry['version']: entry['reason'] for entry in report['retained']}
     assert retained[old.name] == 'referenced by a saved selection'
     assert not report['removable']
+
+
+def test_archive_recipe_without_checksum_or_count_is_not_ready(tmp_path):
+    dataset = fixture(tmp_path)
+    path = tmp_path / 'registry/datasets/fixture.yaml'
+    raw = yaml.safe_load(path.read_text()); raw.update(adapter_config={}, source_url='https://example.org/data'); path.write_text(yaml.safe_dump(raw))
+    recipes = tmp_path / 'registry/recipes'; recipes.mkdir()
+    (recipes / f'{dataset.id}.yaml').write_text(yaml.safe_dump({
+        'adapter': 'json', 'scope': 'Whole release',
+        'files': [{'source_name': 'data.json', 'url': 'https://example.org/data.json', 'bytes': 1234, 'format': 'json', 'config_key': 'path'}],
+        'allowed_hosts': ['example.org'],
+    }))
+    plan = PreparationManager(tmp_path).plan(dataset.id, 1_000_000, 1_000_000)
+    assert plan['kind'] == 'http_archive' and plan['ready'] is False
+    assert any('Checksum not pinned for data.json' in r for r in plan['requirements'])
+    assert any('population count must be declared' in r for r in plan['requirements'])
+    with pytest.raises(ValueError, match='requirements'):
+        PreparationManager(tmp_path).start(plan['id'])

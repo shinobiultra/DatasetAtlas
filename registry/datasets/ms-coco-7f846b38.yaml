@@ -2,8 +2,8 @@ schema_version: '1.0'
 id: ms-coco-7f846b38
 name: MS COCO
 aliases: []
-description: Paper randomly selects ten MS COCO images for a sentiment experiment; original source family
-  is known but selected images are not.
+description: Paper randomly selects ten MS COCO images for a sentiment experiment; original source family is known
+  but selected images are not.
 paper_ids:
 - paper-29349603429218b8
 release: unresolved
@@ -35,15 +35,14 @@ evidence:
   source_file_hash: a025d9386684c74fca7aae546e5707d9ec43e808ca9fc3a654154f964d50144f
   page: 8
   role: source data
-  excerpt: test” library,4 a pre-trained sentiment analysis Data. We randomly selected 10 images from
-    MS COCO [12] model used in [9, 27] to capture sentiment-specific nuances and 5 images from ImageNet
-    [35]. For each image,
+  excerpt: test” library,4 a pre-trained sentiment analysis Data. We randomly selected 10 images from MS COCO [12]
+    model used in [9, 27] to capture sentiment-specific nuances and 5 images from ImageNet [35]. For each image,
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://cocodataset.org/#download
-  note: 'Paper randomly selects ten MS COCO images for a sentiment experiment; original source family
-    is known but selected images are not. Release: MS COCO 10-image random paper subset; IDs absent'
+  note: 'Paper randomly selects ten MS COCO images for a sentiment experiment; original source family is known but
+    selected images are not. Release: MS COCO 10-image random paper subset; IDs absent'
   audit_file: work/sources/source-audit-jobs-batch3.json
   checked_on: '2026-09-22'
   source_identity_status: family_only
@@ -57,5 +56,5 @@ source_url: https://cocodataset.org/
 relationships:
 - type: same_source_family_as
   target_id: coco
-  scope: COCO family only; year, split, selected image/caption IDs and overlay are not established as
-    the active COCO-2017-val release.
+  scope: COCO family only; year, split, selected image/caption IDs and overlay are not established as the active
+    COCO-2017-val release.

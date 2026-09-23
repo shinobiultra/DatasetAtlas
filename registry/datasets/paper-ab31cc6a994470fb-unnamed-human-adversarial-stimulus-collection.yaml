@@ -2,9 +2,8 @@ schema_version: '1.0'
 id: paper-ab31cc6a994470fb-unnamed-human-adversarial-stimulus-collection
 name: unnamed human adversarial-stimulus collection
 aliases: []
-description: Mention candidate from a focused page audit; the evidence receipts distinguish
-  direct use, comparison, related-work, and citation-only roles. Original source,
-  release, and rights still require independent verification.
+description: Mention candidate from a focused page audit; the evidence receipts distinguish direct use, comparison,
+  related-work, and citation-only roles. Original source, release, and rights still require independent verification.
 paper_ids:
 - paper-ab31cc6a994470fb
 release: unresolved
@@ -13,16 +12,16 @@ adapter_config: {}
 coverage:
   identity: candidate
   source: unverified
-  access: unverified
-  adapter: not_started
+  access: unreleased
+  adapter: not_applicable
   preview: none
-  complete_data: unimplemented
+  complete_data: externally_blocked
   publication: not_reviewed
   preview_count: 0
   unit: example
   blockers:
-  - Original release identity and rights need verification.
-  - Adapter and preview are not implemented.
+  - The paper describes adversarial stimuli it produced for human trials; no public release was located.
+  - No examples will be synthesized in its place; the record exists to carry the paper mention.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -34,8 +33,11 @@ evidence:
   source_file_hash: 87225f47168a56f003f607ca3c74bbf8ff6b50f8fe1a0030be85f2eade99b536
   page: 6
   role: derived collection
-  excerpt: 'sented in one of four conditions as follows: • image: images from the
-    ImageNet training set (rescaled to the [40, 255 − 40] range to avoid clipping
-    when adversarial perturbations are added; see Figure '
+  excerpt: 'sented in one of four conditions as follows: • image: images from the ImageNet training set (rescaled
+    to the [40, 255 − 40] range to avoid clipping when adversarial perturbations are added; see Figure '
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
+- kind: source_audit_access
+  note: The paper describes adversarial stimuli it produced for human trials; no public release was located.
+  checked_on: '2026-09-22'
+  source_identity_status: paper_specific_collection_unreleased

@@ -18,18 +18,18 @@ adapter_config: {}
 coverage:
   identity: candidate
   source: unverified
-  access: unverified
-  adapter: not_started
+  access: unreleased
+  adapter: not_applicable
   preview: none
-  complete_data: unimplemented
+  complete_data: externally_blocked
   publication: not_reviewed
   preview_count: 0
   total_count: null
   unit: example
   blockers:
-  - Exact paper-specific source release or selected subset remains unverified; source
-    research alone does not resolve this candidate.
-  - Adapter and preview are not implemented.
+  - The paper describes 40 manually curated harmful instructions used for human evaluation; the audit found no public
+    release.
+  - No examples will be synthesized in its place; the record exists to carry the paper mention.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -50,9 +50,8 @@ evidence:
   source_file_hash: e651ef9944539b513a21a8b7a1b5a62f88b7355a6cce81fde112f57c96c28cf7
   page: 6
   role: evaluation
-  excerpt: f our visual adversarial examples, we pair them with a diverse set of 40
-    manually curated harmful textual instructions. These instructions explicitly ask
-    for the generation of detrimental con
+  excerpt: f our visual adversarial examples, we pair them with a diverse set of 40 manually curated harmful textual
+    instructions. These instructions explicitly ask for the generation of detrimental con
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -63,8 +62,7 @@ evidence:
   source_identity_status: paper_custom_release_unverified
 - kind: source_audit_release
   url: https://arxiv.org/abs/2306.13213
-  note: Paper p6 describes 40 manually curated instructions in four categories for
-    human evaluation
+  note: Paper p6 describes 40 manually curated instructions in four categories for human evaluation
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: paper_custom_release_unverified
@@ -89,10 +87,9 @@ evidence:
   source_file_hash: e651ef9944539b513a21a8b7a1b5a62f88b7355a6cce81fde112f57c96c28cf7
   page: 6
   role: human evaluation
-  excerpt: 'effectiveness of our visual adversarial examples, we pair them with a
-    diverse set of 40 manually curated harmful textual instructions. These instructions
-    explicitly ask for the generation of detrimental content across four distinct
-    categories: identity attack, di'
+  excerpt: 'effectiveness of our visual adversarial examples, we pair them with a diverse set of 40 manually curated
+    harmful textual instructions. These instructions explicitly ask for the generation of detrimental content across
+    four distinct categories: identity attack, di'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -103,8 +100,8 @@ evidence:
   source_identity_status: confirmed_duplicate_candidate
 - kind: source_audit_release
   url: https://arxiv.org/abs/2306.13213
-  note: The two curated candidate IDs cite the same paper p6 statement of 40 manually
-    curated harmful instructions, not two releases
+  note: The two curated candidate IDs cite the same paper p6 statement of 40 manually curated harmful instructions,
+    not two releases
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: confirmed_duplicate_candidate
@@ -123,3 +120,8 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: confirmed_duplicate_candidate
+- kind: source_audit_access
+  note: The paper describes 40 manually curated harmful instructions used for human evaluation; the audit found
+    no public release.
+  checked_on: '2026-09-22'
+  source_identity_status: paper_specific_collection_unreleased

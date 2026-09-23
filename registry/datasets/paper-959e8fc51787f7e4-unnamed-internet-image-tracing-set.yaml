@@ -11,17 +11,17 @@ adapter_config: {}
 coverage:
   identity: candidate
   source: verified
-  access: unverified
-  adapter: not_started
+  access: unreleased
+  adapter: not_applicable
   preview: none
-  complete_data: unimplemented
+  complete_data: externally_blocked
   publication: not_reviewed
   preview_count: 0
   unit: example
   blockers:
-  - Exact paper-specific source release or selected subset remains unverified; source
-    research alone does not resolve this candidate.
-  - Adapter and preview are not implemented.
+  - The audit verified per-task curated internet image samples with no fixed release; the public repository holds
+    code and models only.
+  - No examples will be synthesized in its place; the record exists to carry the paper mention.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -35,9 +35,8 @@ evidence:
   source_file_hash: 5f8f1d0c816db711928aa4dde7ed771b84b94fe84ee7f48cdaefd0a3ce2e9edb
   page: 6
   role: evaluation
-  excerpt: ' that make the underlying representations more explainable. sample of
-    20-100 internet images that are semantically re- The gap is largest in the middle
-    layers (e.g. Layer 15), con- lated to the image we'
+  excerpt: ' that make the underlying representations more explainable. sample of 20-100 internet images that are
+    semantically re- The gap is largest in the middle layers (e.g. Layer 15), con- lated to the image we'
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -48,8 +47,8 @@ evidence:
   source_identity_status: per_task_curated_samples_no_fixed_release_verified
 - kind: source_audit_release
   url: https://github.com/UIUC-MONET/vlm-circuit-tracing
-  note: Paper p6 describes 20–100 semantically related internet images per tracing
-    task; code/models repo public, no matching curated-image archive verified
+  note: Paper p6 describes 20–100 semantically related internet images per tracing task; code/models repo public,
+    no matching curated-image archive verified
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: per_task_curated_samples_no_fixed_release_verified
@@ -68,4 +67,9 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: per_task_curated_samples_no_fixed_release_verified
+- kind: source_audit_access
+  note: The audit verified per-task curated internet image samples with no fixed release; the public repository
+    holds code and models only.
+  checked_on: '2026-09-22'
+  source_identity_status: paper_specific_collection_unreleased
 source_url: https://github.com/UIUC-MONET/vlm-circuit-tracing

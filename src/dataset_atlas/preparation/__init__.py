@@ -99,9 +99,18 @@ class PreparationManager:
         except (ValueError, KeyError, FileNotFoundError):
             description = None
         if recipe.get('files') and not (description and description.exists):
-            plan.update(kind='http_archive', files=recipe['files'], expected_count=recipe['expected_count'],
+            plan.update(kind='http_archive', files=recipe['files'], expected_count=recipe.get('expected_count'),
                 expected_download_bytes=sum(f['bytes'] for f in recipe['files']), ready=True,
                 scope=recipe['scope'], allowed_hosts=recipe.get('allowed_hosts',[]))
+            # A recipe may be authored before its archive has been fetched once; until a
+            # checksum is pinned the worker would have nothing to verify against.
+            unpinned=[f['source_name'] for f in recipe['files'] if not (f.get('sha256') or f.get('md5'))]
+            if unpinned:
+                plan['ready']=False
+                plan['requirements'].append(f"Checksum not pinned for {', '.join(unpinned)}; fetch once, record its SHA-256, then plan again.")
+            if plan['expected_count'] is None:
+                plan['ready']=False
+                plan['requirements'].append('Exact source population count must be declared in the recipe before full indexing.')
         elif description and description.exists:
             plan['kind'] = 'local'
             plan['expected_count'] = dataset.coverage.total_count

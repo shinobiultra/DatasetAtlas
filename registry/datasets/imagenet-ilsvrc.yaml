@@ -2,8 +2,8 @@ schema_version: '1.0'
 id: imagenet-ilsvrc
 name: ImageNet ILSVRC
 aliases: []
-description: Deep Image Prior paper says AlexNet trained on ImageNet ILSVRC, which establishes model-training
-  lineage, not a new Atlas image evaluation release.
+description: Deep Image Prior paper says AlexNet trained on ImageNet ILSVRC, which establishes model-training lineage,
+  not a new Atlas image evaluation release.
 paper_ids:
 - paper-08e415961919a492
 release: unresolved
@@ -36,8 +36,8 @@ evidence:
   source_file_hash: bb5aa079a2d42a3c0c001424bb540dfcd289ea2c409000267e5681444fb20bd3
   page: 14
   role: training
-  excerpt: ' inverting different layers of AlexNet (trained for classification on ImageNet ILSVRC) using
-    three different regularizers: the deep image prior, the TV norm prior of [38], and the network trained'
+  excerpt: ' inverting different layers of AlexNet (trained for classification on ImageNet ILSVRC) using three different
+    regularizers: the deep image prior, the TV norm prior of [38], and the network trained'
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -46,16 +46,15 @@ evidence:
   source_file_hash: bb5aa079a2d42a3c0c001424bb540dfcd289ea2c409000267e5681444fb20bd3
   page: 14
   role: model-training lineage
-  excerpt: 're-image obtained by inverting different layers of AlexNet (trained for classification on
-    ImageNet ILSVRC) using three different regularizers: the deep image prior, the TV norm prior of [38],
-    and the network trained to invert represent'
+  excerpt: 're-image obtained by inverting different layers of AlexNet (trained for classification on ImageNet ILSVRC)
+    using three different regularizers: the deep image prior, the TV norm prior of [38], and the network trained
+    to invert represent'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://www.image-net.org/challenges/LSVRC/
-  note: 'Deep Image Prior paper says AlexNet trained on ImageNet ILSVRC, which establishes model-training
-    lineage, not a new Atlas image evaluation release. Release: ILSVRC classification lineage; year/split
-    unresolved'
+  note: 'Deep Image Prior paper says AlexNet trained on ImageNet ILSVRC, which establishes model-training lineage,
+    not a new Atlas image evaluation release. Release: ILSVRC classification lineage; year/split unresolved'
   audit_file: work/sources/source-audit-jobs-batch3.json
   checked_on: '2026-09-22'
   source_identity_status: family_only
@@ -66,3 +65,8 @@ evidence:
   checked_on: '2026-09-22'
   source_identity_status: family_only
 source_url: https://www.image-net.org/challenges/LSVRC/
+relationships:
+- type: same_source_family_as
+  target_id: imagenet
+  status: asserted_from_source_review
+  scope: ILSVRC challenge release of ImageNet, cited as model-training lineage.

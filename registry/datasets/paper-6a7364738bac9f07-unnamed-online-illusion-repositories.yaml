@@ -11,16 +11,17 @@ adapter_config: {}
 coverage:
   identity: resolved
   source: verified
-  access: unverified
+  access: unreleased
   adapter: not_applicable
   preview: none
-  complete_data: not_applicable
+  complete_data: externally_blocked
   publication: not_reviewed
   preview_count: 0
   unit: example
   blockers:
-  - This is source-material lineage, not a standalone dataset release or browsable
-    record population.
+  - The audit classified this as source-material lineage for IllusionBench+, not a standalone release.
+  - No examples will be synthesized in its place; the record exists to carry the paper mention.
+  - This is source-material lineage, not a standalone dataset release or browsable record population.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -33,9 +34,8 @@ evidence:
   source_file_hash: d91f86d6799fd7cd645f7909f9bf9308f6a56566433bebd2c1f56b44c7db8f49
   page: 3
   role: source lineage
-  excerpt: ting complex visual scenes. We collect 1K+ images from various online repositories.
-    Previous studies mainly focus on synthetic cognitive il- After manual selection,
-    780 images are confirmed t
+  excerpt: ting complex visual scenes. We collect 1K+ images from various online repositories. Previous studies
+    mainly focus on synthetic cognitive il- After manual selection, 780 images are confirmed t
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -46,8 +46,8 @@ evidence:
   source_identity_status: source_material_not_independent_dataset
 - kind: source_audit_release
   url: https://jhc.sjtu.edu.cn/~xiaohongliu/papers/2025IllusionBench.pdf
-  note: Paper p3 says 1K+ candidate web images, 780 manually selected before further
-    categorization; no named single source dataset is identified
+  note: Paper p3 says 1K+ candidate web images, 780 manually selected before further categorization; no named single
+    source dataset is identified
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: source_material_not_independent_dataset
@@ -66,3 +66,7 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: source_material_not_independent_dataset
+- kind: source_audit_access
+  note: The audit classified this as source-material lineage for IllusionBench+, not a standalone release.
+  checked_on: '2026-09-22'
+  source_identity_status: paper_specific_collection_unreleased

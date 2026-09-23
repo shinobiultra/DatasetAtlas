@@ -2,8 +2,7 @@ schema_version: '1.0'
 id: coco-train
 name: COCO train
 aliases: []
-description: Attack paper says clean images from COCO train without pinning release year or selected image
-  IDs.
+description: Attack paper says clean images from COCO train without pinning release year or selected image IDs.
 paper_ids:
 - paper-2df1203e2d3767bb
 release: unresolved
@@ -35,15 +34,15 @@ evidence:
   source_file_hash: 4f39bf0ce4653e2237f45d5373a7d33340d8e6510dbff31ebb4d16fc9f7cad13
   page: 26
   role: attack image source
-  excerpt: ainst a batch of 8 affirmative target responses, starting from clean images from the COCO train
-    dataset [54]. For the prompt engineering phase, we followed the standard iterative interaction flow.
-    In addition to the
+  excerpt: ainst a batch of 8 affirmative target responses, starting from clean images from the COCO train dataset
+    [54]. For the prompt engineering phase, we followed the standard iterative interaction flow. In addition to
+    the
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://cocodataset.org/#download
-  note: 'Attack paper says clean images from COCO train without pinning release year or selected image
-    IDs. Release: COCO train; 2014 versus 2017 unresolved'
+  note: 'Attack paper says clean images from COCO train without pinning release year or selected image IDs. Release:
+    COCO train; 2014 versus 2017 unresolved'
   audit_file: work/sources/source-audit-jobs-batch3.json
   checked_on: '2026-09-22'
   source_identity_status: family_only
@@ -57,5 +56,5 @@ source_url: https://cocodataset.org/
 relationships:
 - type: same_source_family_as
   target_id: coco
-  scope: COCO family only; year, split, selected image/caption IDs and overlay are not established as
-    the active COCO-2017-val release.
+  scope: COCO family only; year, split, selected image/caption IDs and overlay are not established as the active
+    COCO-2017-val release.

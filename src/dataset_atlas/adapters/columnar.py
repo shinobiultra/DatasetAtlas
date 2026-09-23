@@ -9,6 +9,13 @@ from .core import DatasetAdapter, SourceDescription
 from .embedded_parquet import EmbeddedParquetAdapter
 
 
+def _holds_bytes(value) -> bool:
+    if isinstance(value, (bytes, bytearray, memoryview)):return True
+    if isinstance(value, list):return any(_holds_bytes(item) for item in value)
+    if isinstance(value, dict):return any(_holds_bytes(item) for item in value.values())
+    return False
+
+
 class ColumnarAdapter(EmbeddedParquetAdapter):
     def __init__(self, dataset):
         # Image normalization is shared; the manifest pins each shard separately.
@@ -29,7 +36,11 @@ class ColumnarAdapter(EmbeddedParquetAdapter):
                 for field in schema:
                     dtype=field.type
                     if pa.types.is_list(dtype) or pa.types.is_large_list(dtype):dtype=dtype.value_type
-                    if pa.types.is_struct(dtype) and 'bytes' in [f.name for f in dtype] and 'image' in field.name.lower():names.add(field.name)
+                    # Raw binary columns and bytes/path structs are the two ways releases embed
+                    # images; either is media regardless of what the column is called. A column
+                    # that is not media must be declared explicitly through `media_columns`.
+                    if pa.types.is_binary(dtype) or pa.types.is_large_binary(dtype):names.add(field.name)
+                    elif pa.types.is_struct(dtype) and 'bytes' in [f.name for f in dtype]:names.add(field.name)
             configured.adapter_config['media_columns'] = sorted(names) or ['_atlas_no_embedded_images']
         super().__init__(configured)
         self.files = self.config.get('files', [])
@@ -133,6 +144,10 @@ class ColumnarAdapter(EmbeddedParquetAdapter):
             if self.config['mapping'].get(key) not in row:
                 self.config['mapping'][key]=next((name for name in candidates if name in row),None)
         record = super()._record(row, ordinal)
+        # Fail on the first row with a named column, not 100 rows later inside JSON serialization.
+        leaked = [key for key, value in record.source.items() if _holds_bytes(value)]
+        if leaked:
+            raise ValueError(f"Column(s) {', '.join(sorted(leaked))} hold raw bytes; declare them in media_columns or exclude them")
         offset = 0
         self.count
         for entry, count in zip(self.files, self._counts):

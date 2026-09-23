@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-22T08:47:58.685787+00:00",
+  "checked_at": "2026-09-22T09:22:03.021765+00:00",
   "datasets": [
     {
       "dataset_id": "algopuzzlevqa",
@@ -132,6 +132,16 @@
       "prepared_receipt": "work/prepared/simplevqa/8382305d27a65ddcdbc544e102756226f5531bccc9916e3cb0e767b2ebf97be1/receipt.json"
     },
     {
+      "dataset_id": "space-10",
+      "release": "efd7316ef37efb0fe9a858cc74ef2b2f772a8cda",
+      "snapshot_id": "space-10-8c27fa373dff12ed1d31f6bc",
+      "records": 4132,
+      "preview_records": 100,
+      "scope": "All eight SpaCE-10 single-choice test subsets (ep, eq, fr, oo, os, sa, sp, sq) at the pinned revision; each record keeps its subset name from the source shard.",
+      "plan_id": "8c27fa373dff12ed1d31f6bcb17eb1d8b9bf2316ee760217aad8bc8913bcd741",
+      "prepared_receipt": "work/prepared/space-10/8c27fa373dff12ed1d31f6bcb17eb1d8b9bf2316ee760217aad8bc8913bcd741/receipt.json"
+    },
+    {
       "dataset_id": "waterbirds",
       "release": "waterbird-complete95-forest2water2-56c51b77f7d17283",
       "snapshot_id": "waterbirds-1661bca077cdd6c9b8049c03",
@@ -152,10 +162,10 @@
       "prepared_receipt": "work/prepared/wmdp/90c82ed7172dd56a64312bea65d2ebb1c751370425eb810e74bc72bce6163e6a/receipt.json"
     }
   ],
-  "catalogue_entries": 336,
-  "with_previews": 78,
-  "without_previews": 258,
-  "full_population_indices": 73,
+  "catalogue_entries": 333,
+  "with_previews": 79,
+  "without_previews": 254,
+  "full_population_indices": 74,
   "all_requested_datasets_complete": false,
   "note": "Acquired source populations and on-demand infrastructure; catalogue-wide coverage is not complete."
 }

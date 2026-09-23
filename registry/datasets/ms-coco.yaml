@@ -2,8 +2,8 @@ schema_version: '1.0'
 id: ms-coco
 name: MS-COCO
 aliases: []
-description: Mentions include caption-guided image retrieval, 36 selected images, and a survey-table citation;
-  none proves a common exact release.
+description: Mentions include caption-guided image retrieval, 36 selected images, and a survey-table citation; none
+  proves a common exact release.
 paper_ids:
 - paper-ebd63da316af82e5
 - paper-6d747c88d639c5aa
@@ -37,8 +37,8 @@ evidence:
   source_file_hash: 5b91dbe170a94faf5062a9c5f9b5928f77d4f6d7b08998dc8f3a14c5ed455541
   page: 2
   role: evaluation
-  excerpt: sults on generic scenes prompts and longer, more complex prompts from MS-COCO [18]. In practice,
-    we first retrieve a seed, low-frequency INR whose caption is most similar to the prompt. B
+  excerpt: sults on generic scenes prompts and longer, more complex prompts from MS-COCO [18]. In practice, we first
+    retrieve a seed, low-frequency INR whose caption is most similar to the prompt. B
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -47,9 +47,9 @@ evidence:
   source_file_hash: 519805fac1ac6df034dd67ef95643703ebd97fa1c18e0f035a1f93feada6994e
   page: 5
   role: source data
-  excerpt: odels, we generated metamers of 36 randomly selected natural images across each of the 16 MS-COCO
-    categories (see Supplement Table 4 for a summary of matching the visual model metamers, and Supplement
-    Figures 1-3 for full histograms of th
+  excerpt: odels, we generated metamers of 36 randomly selected natural images across each of the 16 MS-COCO categories
+    (see Supplement Table 4 for a summary of matching the visual model metamers, and Supplement Figures 1-3 for
+    full histograms of th
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -63,8 +63,8 @@ evidence:
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://cocodataset.org/#download
-  note: 'Mentions include caption-guided image retrieval, 36 selected images, and a survey-table citation;
-    none proves a common exact release. Release: MS COCO family; three paper roles and selections'
+  note: 'Mentions include caption-guided image retrieval, 36 selected images, and a survey-table citation; none
+    proves a common exact release. Release: MS COCO family; three paper roles and selections'
   audit_file: work/sources/source-audit-jobs-batch3.json
   checked_on: '2026-09-22'
   source_identity_status: family_only
@@ -78,5 +78,5 @@ source_url: https://cocodataset.org/
 relationships:
 - type: same_source_family_as
   target_id: coco
-  scope: COCO family only; year, split, selected image/caption IDs and overlay are not established as
-    the active COCO-2017-val release.
+  scope: COCO family only; year, split, selected image/caption IDs and overlay are not established as the active
+    COCO-2017-val release.

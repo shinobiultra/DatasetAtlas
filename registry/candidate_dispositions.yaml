@@ -1,65 +1,117 @@
 schema_version: '1.0'
-# Durable, public classification rules. Full PDF excerpts and archived candidate
-# YAMLs remain in the private work/corpus audit artifacts.
 excluded_from_dataset_catalogue:
-  - id: cropa
-    disposition: method_not_dataset
-    reason: CroPA is the Cross-Prompt Attack method, not a released dataset.
-    paper_ids: [paper-25eaa8c74ce76800]
-    source_url: https://github.com/Haochen-Luo/CroPA
-  - id: ideator
-    disposition: method_not_dataset
-    reason: IDEATOR is an attack method; VLBreakBench is a separate released output.
-    paper_ids: [paper-fdcf898e0b05daff]
-    source_url: https://github.com/roywang021/IDEATOR
-  - id: imedvqa
-    disposition: name_extraction_artifact
-    reason: A PDF line break split OmniMedVQA into Omn- and iMedVQA; no separate iMedVQA source exists.
-    corrected_identity: OmniMedVQA
-    paper_ids: [paper-f5da3ca03780a203]
-    source_url: https://openaccess.thecvf.com/content/CVPR2024/html/Hu_OmniMedVQA_A_New_Large-Scale_Comprehensive_Evaluation_Benchmark_for_Medical_LVLM_CVPR_2024_paper.html
+- id: cropa
+  disposition: method_not_dataset
+  reason: CroPA is the Cross-Prompt Attack method, not a released dataset.
+  paper_ids:
+  - paper-25eaa8c74ce76800
+  source_url: https://github.com/Haochen-Luo/CroPA
+- id: ideator
+  disposition: method_not_dataset
+  reason: IDEATOR is an attack method; VLBreakBench is a separate released output.
+  paper_ids:
+  - paper-fdcf898e0b05daff
+  source_url: https://github.com/roywang021/IDEATOR
+- id: imedvqa
+  disposition: name_extraction_artifact
+  reason: A PDF line break split OmniMedVQA into Omn- and iMedVQA; no separate iMedVQA source exists.
+  corrected_identity: OmniMedVQA
+  paper_ids:
+  - paper-f5da3ca03780a203
+  source_url: https://openaccess.thecvf.com/content/CVPR2024/html/Hu_OmniMedVQA_A_New_Large-Scale_Comprehensive_Evaluation_Benchmark_for_Medical_LVLM_CVPR_2024_paper.html
 alias_redirects:
-  - alias_id: paper-12e8bd34b4a2f2a8-unnamed-harmful-instruction-evaluation-set-90f1ca61
-    canonical_id: paper-12e8bd34b4a2f2a8-unnamed-harmful-instruction-evaluation-set
-    disposition: confirmed_same_paper_alias
-    reason: Both page-6 receipts refer to the same 40-instruction collection.
-    paper_ids: [paper-12e8bd34b4a2f2a8]
-    source_url: https://arxiv.org/abs/2306.13213
-  - alias_id: jailbreakv-28k-13161513
-    canonical_id: jailbreakv-28k
-    disposition: confirmed_same_paper_alias
-    reason: Both PHANTOM page-6 spellings name JailBreakV_28K.
-    paper_ids: [paper-2df1203e2d3767bb]
-    source_url: https://huggingface.co/datasets/JailbreakV-28K/JailBreakV-28k
-  - alias_id: cifar10
-    canonical_id: cifar-10
-    disposition: source_verified_name_alias
-    reason: CIFAR10 spelling denotes the original CIFAR-10 source; no shifted or corrupted suffix occurs in its receipts.
-    paper_ids: [paper-25eaa8c74ce76800, paper-392b0c393c06b48e]
-    source_url: https://www.cs.toronto.edu/~kriz/cifar.html
-    evidence_ids: [evidence-ac2590cd536df85159ee, evidence-b12451f2d54be3df8ca1]
-    scope_note: Preserve each paper's role and subset; the active preview is one pinned release, not proof of an identical paper sample.
-  - alias_id: cifar100
-    canonical_id: cifar-100
-    disposition: source_verified_name_alias
-    reason: CIFAR100 spelling denotes the original CIFAR-100 source; no CIFAR-100-C suffix occurs in its receipts.
-    paper_ids: [paper-25eaa8c74ce76800, paper-392b0c393c06b48e]
-    source_url: https://www.cs.toronto.edu/~kriz/cifar.html
-    evidence_ids: [evidence-c63e5e138844835b95ab, evidence-700565db3fe4e221b496]
-    scope_note: Preserve each paper's role and subset; the active preview is one pinned release, not proof of an identical paper sample.
-  - alias_id: vqa-2-0
-    canonical_id: vqa-v2
-    disposition: source_verified_name_alias
-    reason: VQA 2.0 is the VQA v2 benchmark name; a paper's exact split or selection is not implied.
-    paper_ids: [paper-765a2362f8735bc4]
-    source_url: https://visualqa.org/download.html
-    evidence_ids: [evidence-5631a7cf99ec92152302, evidence-8b145fe068984c83886a]
-    scope_note: Active VQA v2 pack pins 2017 validation on COCO val2014; other paper runs can use different splits or samples.
-  - alias_id: vqav2
-    canonical_id: vqa-v2
-    disposition: source_verified_name_alias
-    reason: VQAv2 is the VQA v2 benchmark name; 500-image and other paper selections remain separate scopes.
-    paper_ids: [paper-25eaa8c74ce76800, paper-6dbb0d4a7b949143]
-    source_url: https://visualqa.org/download.html
-    evidence_ids: [evidence-c8c27fbf90cb9936fd35, evidence-426bccb2316d71eb6c17, evidence-3da4798079c6d0fe3aac, evidence-1fb1c58004a38f3099fb, evidence-274bf70a3897654ac6bf, evidence-a6e0b2fbd4e229b12f16]
-    scope_note: Active VQA v2 pack pins 2017 validation on COCO val2014; receipts include distinct sampled evaluations.
+- alias_id: paper-12e8bd34b4a2f2a8-unnamed-harmful-instruction-evaluation-set-90f1ca61
+  canonical_id: paper-12e8bd34b4a2f2a8-unnamed-harmful-instruction-evaluation-set
+  disposition: confirmed_same_paper_alias
+  reason: Both page-6 receipts refer to the same 40-instruction collection.
+  paper_ids:
+  - paper-12e8bd34b4a2f2a8
+  source_url: https://arxiv.org/abs/2306.13213
+- alias_id: jailbreakv-28k-13161513
+  canonical_id: jailbreakv-28k
+  disposition: confirmed_same_paper_alias
+  reason: Both PHANTOM page-6 spellings name JailBreakV_28K.
+  paper_ids:
+  - paper-2df1203e2d3767bb
+  source_url: https://huggingface.co/datasets/JailbreakV-28K/JailBreakV-28k
+- alias_id: cifar10
+  canonical_id: cifar-10
+  disposition: source_verified_name_alias
+  reason: CIFAR10 spelling denotes the original CIFAR-10 source; no shifted or corrupted suffix occurs in its receipts.
+  paper_ids:
+  - paper-25eaa8c74ce76800
+  - paper-392b0c393c06b48e
+  source_url: https://www.cs.toronto.edu/~kriz/cifar.html
+  evidence_ids:
+  - evidence-ac2590cd536df85159ee
+  - evidence-b12451f2d54be3df8ca1
+  scope_note: Preserve each paper's role and subset; the active preview is one pinned release, not proof of an identical
+    paper sample.
+- alias_id: cifar100
+  canonical_id: cifar-100
+  disposition: source_verified_name_alias
+  reason: CIFAR100 spelling denotes the original CIFAR-100 source; no CIFAR-100-C suffix occurs in its receipts.
+  paper_ids:
+  - paper-25eaa8c74ce76800
+  - paper-392b0c393c06b48e
+  source_url: https://www.cs.toronto.edu/~kriz/cifar.html
+  evidence_ids:
+  - evidence-c63e5e138844835b95ab
+  - evidence-700565db3fe4e221b496
+  scope_note: Preserve each paper's role and subset; the active preview is one pinned release, not proof of an identical
+    paper sample.
+- alias_id: vqa-2-0
+  canonical_id: vqa-v2
+  disposition: source_verified_name_alias
+  reason: VQA 2.0 is the VQA v2 benchmark name; a paper's exact split or selection is not implied.
+  paper_ids:
+  - paper-765a2362f8735bc4
+  source_url: https://visualqa.org/download.html
+  evidence_ids:
+  - evidence-5631a7cf99ec92152302
+  - evidence-8b145fe068984c83886a
+  scope_note: Active VQA v2 pack pins 2017 validation on COCO val2014; other paper runs can use different splits
+    or samples.
+- alias_id: vqav2
+  canonical_id: vqa-v2
+  disposition: source_verified_name_alias
+  reason: VQAv2 is the VQA v2 benchmark name; 500-image and other paper selections remain separate scopes.
+  paper_ids:
+  - paper-25eaa8c74ce76800
+  - paper-6dbb0d4a7b949143
+  source_url: https://visualqa.org/download.html
+  evidence_ids:
+  - evidence-c8c27fbf90cb9936fd35
+  - evidence-426bccb2316d71eb6c17
+  - evidence-3da4798079c6d0fe3aac
+  - evidence-1fb1c58004a38f3099fb
+  - evidence-274bf70a3897654ac6bf
+  - evidence-a6e0b2fbd4e229b12f16
+  scope_note: Active VQA v2 pack pins 2017 validation on COCO val2014; receipts include distinct sampled evaluations.
+- alias_id: describable-textures-dataset
+  canonical_id: dtd
+  disposition: confirmed_same_release_alias
+  reason: Same official Oxford dtd-r1.0.1 archive and byte-identical recipe; paper mentions merged into dtd.
+  paper_ids:
+  - paper-a47845c66d4a3f48
+  - paper-72040eccb96ead7a
+  source_url: https://www.robots.ox.ac.uk/~vgg/data/dtd/
+- alias_id: pets
+  canonical_id: oxfordpet
+  disposition: confirmed_same_release_alias
+  reason: Pets (Parkhi et al., 2012) is the Oxford-IIIT Pet release already registered as oxfordpet; identical source
+    and recipe.
+  paper_ids:
+  - paper-6dbb0d4a7b949143
+  - paper-3e0db9c633ab204c
+  - paper-392b0c393c06b48e
+  source_url: https://www.robots.ox.ac.uk/~vgg/data/pets/
+- alias_id: okvqa
+  canonical_id: ok-vqa
+  disposition: confirmed_same_release_alias
+  reason: Both records name the OK-VQA release on okvqa.allenai.org; merged into ok-vqa.
+  paper_ids:
+  - paper-6dbb0d4a7b949143
+  - paper-392b0c393c06b48e
+  - paper-7ed1979562251931
+  source_url: https://okvqa.allenai.org/download.html

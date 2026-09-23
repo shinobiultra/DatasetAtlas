@@ -2,8 +2,8 @@ schema_version: '1.0'
 id: restricted-imagenet
 name: Restricted ImageNet
 aliases: []
-description: Author code specifies nine superclass label ranges and requires a local full ImageNet tree;
-  no independent restricted-image archive is required.
+description: Author code specifies nine superclass label ranges and requires a local full ImageNet tree; no independent
+  restricted-image archive is required.
 paper_ids:
 - paper-63c3bd849356e00f
 release: unresolved
@@ -27,8 +27,7 @@ rights:
   annotations: not_reviewed
   images: not_reviewed
   source: https://github.com/MadryLab/robustness/blob/master/robustness/datasets.py
-  note: ImageNet access and photo terms still apply; MIT robustness code license does not license source
-    images.
+  note: ImageNet access and photo terms still apply; MIT robustness code license does not license source images.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-d964329e13fb8bc4bd63
@@ -36,23 +35,26 @@ evidence:
   source_file_hash: 81c3715d1e256579071591f3bc61f55d63b32a33dcc981026209d14d32990f32
   page: 17
   role: evaluation
-  excerpt: asets For our experimental analysis, we use the CIFAR-10 [Kri09] and (restricted) ImageNet
-    [Rus+15] datasets. Attaining robust models for the complete ImageNet dataset is known to be a chall
+  excerpt: asets For our experimental analysis, we use the CIFAR-10 [Kri09] and (restricted) ImageNet [Rus+15] datasets.
+    Attaining robust models for the complete ImageNet dataset is known to be a chall
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://github.com/MadryLab/robustness/blob/master/robustness/datasets.py
-  note: 'Author code specifies nine superclass label ranges and requires a local full ImageNet tree; no
-    independent restricted-image archive is required. Release: MadryLab RestrictedImageNet 9 grouped labels
-    over base ImageNet'
+  note: 'Author code specifies nine superclass label ranges and requires a local full ImageNet tree; no independent
+    restricted-image archive is required. Release: MadryLab RestrictedImageNet 9 grouped labels over base ImageNet'
   audit_file: work/sources/source-audit-jobs-batch3.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
 - kind: source_audit_rights
   url: https://github.com/MadryLab/robust-features-code
-  note: ImageNet access and photo terms still apply; MIT robustness code license does not license source
-    images.
+  note: ImageNet access and photo terms still apply; MIT robustness code license does not license source images.
   audit_file: work/sources/source-audit-jobs-batch3.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
 source_url: https://github.com/MadryLab/robustness/blob/master/robustness/datasets.py
+relationships:
+- type: same_source_family_as
+  target_id: imagenet
+  status: asserted_from_source_review
+  scope: Restricted ImageNet super-class grouping derived from ILSVRC.

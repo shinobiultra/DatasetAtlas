@@ -1,0 +1,44 @@
+release: causalgym-95349c3a5e53e2506e8b212482ea6dd784978156
+source_url: https://huggingface.co/datasets/aryaman/causalgym/tree/95349c3a5e53e2506e8b212482ea6dd784978156
+adapter: structured_collection
+expected_count: 17400
+scope: 'All author-released CausalGym train/dev/test intervention pairs: {''train'':
+  11600, ''dev'': 2900, ''test'': 2900}. Native base/source segments, target labels
+  and linguistic tasks retained; no new stimuli generated.'
+adapter_config:
+  annotations:
+  - path_key: train_path
+    split: train
+    format: json
+  - path_key: dev_path
+    split: dev
+    format: json
+  - path_key: test_path
+    split: test
+    format: json
+  text_parts_field: base
+  mapping:
+    text: _atlas_text
+files:
+- url: https://huggingface.co/datasets/aryaman/causalgym/resolve/95349c3a5e53e2506e8b212482ea6dd784978156/train.json
+  source_name: train.json
+  bytes: 5524326
+  sha256: 021f40afe202c312db3523497988097f77deb59d74c487234f28b7d3360ad0ba
+  config_key: train_path
+  format: json
+- url: https://huggingface.co/datasets/aryaman/causalgym/resolve/95349c3a5e53e2506e8b212482ea6dd784978156/dev.json
+  source_name: dev.json
+  bytes: 1381038
+  sha256: 0f32cdfa742e7633bb13e49601d346f832f9c17b19107f1eeaffd53995912ce8
+  config_key: dev_path
+  format: json
+- url: https://huggingface.co/datasets/aryaman/causalgym/resolve/95349c3a5e53e2506e8b212482ea6dd784978156/test.json
+  source_name: test.json
+  bytes: 1380516
+  sha256: d433abfc2b910f9cc339cc0be392a85b9f3fa4361e07e235816ade821144cdef
+  config_key: test_path
+  format: json
+allowed_hosts:
+- huggingface.co
+- cas-bridge.xethub.hf.co
+- us.aws.cdn.hf.co

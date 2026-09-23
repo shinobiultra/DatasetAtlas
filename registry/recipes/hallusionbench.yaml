@@ -1,0 +1,8 @@
+source_url: https://huggingface.co/datasets/lmms-lab-encoder/HallusionBench/tree/cd417161857aefb23d878d42cf1bb53aa9dd646f
+source_patterns:
+- data/*.parquet
+expected_count: 1129
+scope: All 1129 HallusionBench author annotation rows, reproduced field-for-field
+  by the pinned LMMs-Lab-Encoder Parquet mirror (951 image and 178 text-only rows).
+  Mirror image bytes verified by shard SHA-256; original media archive link is unavailable,
+  so image equivalence to that archive is not claimed.

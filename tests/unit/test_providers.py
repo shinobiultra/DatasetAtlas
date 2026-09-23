@@ -271,3 +271,38 @@ def test_context_digest_binds_provider_endpoint(tmp_path):
     after = svc.preview(context)
     assert before.context_digest != after.context_digest
     assert after.policy["provider_endpoint"] == "http://127.0.0.1:4321/v1"
+
+
+@pytest.mark.parametrize('content,reason,message',[('', 'stop','empty response'),('   ','stop','empty response'),('', 'length','output limit'),('partial answer','length','incomplete'),('','content_filter','content filtering')])
+def test_incomplete_provider_answers_are_saved_as_errors(tmp_path,content,reason,message):
+    svc=service(tmp_path,lambda request:httpx.Response(200,json={'choices':[{'message':{'content':content},'finish_reason':reason}]}))
+    svc._providers['local'].capabilities['text_generation'].status='supported'
+    context=ContextRequest(provider_id='local',record_ids=['sample-1'])
+    preview=svc.preview(context)
+    result=svc.converse(ConversationRequest(context=context,context_digest=preview.context_digest,approved_provider_id='local',approved_record_ids=['sample-1'],prompt='Answer'))
+    assert message in result.error
+    assert result.response==content
+    assert result.provenance['finish_reasons']==[reason]
+    assert svc.get_conversation(result.id).error==result.error
+
+
+def test_empty_provider_output_does_not_complete_an_evaluation_batch(tmp_path):
+    svc=service(tmp_path,lambda request:httpx.Response(200,json={'choices':[{'message':{'content':''},'finish_reason':'length'}]}))
+    svc._providers['local'].capabilities['text_generation'].status='supported'
+    svc.record_lookup=lambda identity:record().model_copy(update={'id':identity})
+    context=ContextRequest(provider_id='local',record_ids=['sample-1','sample-2'],mode='evaluation',independent_records=True)
+    preview=svc.preview(context)
+    result=svc.converse(ConversationRequest(context=context,context_digest=preview.context_digest,approved_provider_id='local',approved_record_ids=['sample-1','sample-2'],prompt='Answer'))
+    assert result.status=='partial' and result.pending_record_ids==['sample-1','sample-2'] and result.completed_record_ids==[]
+
+
+def test_truncated_probe_remains_unknown_and_respects_configured_budget(tmp_path):
+    seen=[]
+    def handler(request):
+        seen.append(json.loads(request.content))
+        return httpx.Response(200,json={'choices':[{'message':{'content':''},'finish_reason':'length'}]})
+    svc=service(tmp_path,handler)
+    svc.put_provider(ProviderConfig(id='local',base_url='http://127.0.0.1:1234/v1',model='mock',max_output_tokens=32))
+    result=svc.probe('local',['text_generation','tool_calls'])
+    assert all(result.capabilities[name].status=='unknown' for name in ['text_generation','tool_calls'])
+    assert all(x['max_tokens']==32 for x in seen)

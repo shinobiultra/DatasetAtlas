@@ -1,0 +1,45 @@
+release: nist-emnist-idx-2017-all
+adapter: emnist_archive
+expected_count: 2255710
+source_url: https://www.nist.gov/itl/products-and-services/emnist-dataset
+scope: All six native IDX configurations and their train/test splits; overlapping
+  configurations are separate memberships, not unique handwriting images. Lossless
+  display PNGs apply an explicit transpose of the stored pixel matrix.
+adapter_config:
+  configurations:
+  - byclass
+  - bymerge
+  - balanced
+  - letters
+  - digits
+  - mnist
+  counts:
+    byclass:
+      train: 697932
+      test: 116323
+    bymerge:
+      train: 697932
+      test: 116323
+    balanced:
+      train: 112800
+      test: 18800
+    letters:
+      train: 124800
+      test: 20800
+    digits:
+      train: 240000
+      test: 40000
+    mnist:
+      train: 60000
+      test: 10000
+  max_decoded_partition_bytes: 600000000
+files:
+- url: https://biometrics.nist.gov/cs_links/EMNIST/gzip.zip
+  source_name: gzip.zip
+  bytes: 561753746
+  sha256: fb9bb67e33772a9cc0b895e4ecf36d2cf35be8b709693c3564cea2a019fcda8e
+  md5: 58c8d27c78d21e728a6bc7b3cc06412e
+  config_key: path
+  format: zip
+allowed_hosts:
+- biometrics.nist.gov

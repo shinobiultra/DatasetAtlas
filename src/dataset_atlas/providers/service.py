@@ -153,6 +153,9 @@ class ProviderService:
             try:
                 payload, path = self._probe_payload(config, name)
                 response = self._post(config, path, payload)
+                choices = response.get("choices")
+                if isinstance(choices, list) and choices and isinstance(choices[0], dict) and choices[0].get("finish_reason") == "length":
+                    raise ValueError("probe reached its output limit; capability remains unverified")
                 supported = self._probe_valid(name, response)
                 results[name] = CapabilityResult(status="supported" if supported else "unsupported", tested_at=_now(), detail="benign probe succeeded" if supported else "probe response did not demonstrate capability")
             except ProviderHTTPError as exc:
@@ -175,12 +178,11 @@ class ProviderService:
             if capability == "multiple_image_input":
                 content[0]["text"] = "Name the two pixel colors in order. Reply with RED BLUE only."
                 content.append({"type": "image_url", "image_url": {"url": _BLUE_PIXEL}})
-        payload: dict[str, Any] = {"model": config.model, "messages": [{"role": "user", "content": content}], "max_tokens": 12, "stream": False}
+        payload: dict[str, Any] = {"model": config.model, "messages": [{"role": "user", "content": content}], "max_tokens": min(config.max_output_tokens, 512), "stream": False}
         if capability == "structured_output":
             payload["response_format"] = {"type": "json_object"}
             payload["messages"][0]["content"] = "Return only JSON: {\"ok\": true}"
         if capability == "tool_calls":
-            payload["max_tokens"] = 96  # allow a complete function envelope and JSON arguments
             payload["tools"] = [{"type": "function", "function": {"name": "atlas_probe", "description": "Benign probe", "parameters": {"type": "object", "properties": {}}}}]
             payload["tool_choice"] = {"type": "function", "function": {"name": "atlas_probe"}}
         return payload, "/chat/completions"
@@ -256,6 +258,7 @@ class ProviderService:
         receipts: list[dict[str, Any]] = []
         usage: dict[str, Any] = {}
         usage_by_iteration: list[dict[str, Any]] = []
+        finish_reasons: list[str | None] = []
         response_text: str | None = None
         error: str | None = None
         calls = 0
@@ -279,6 +282,8 @@ class ProviderService:
                     raise ValueError("provider returned no choices")
                 if not isinstance(choices[0], dict) or not isinstance(choices[0].get("message"), dict):
                     raise ValueError("provider returned invalid message")
+                finish_reason = choices[0].get("finish_reason")
+                finish_reasons.append(finish_reason if isinstance(finish_reason, str) else None)
                 message = choices[0]["message"]
                 tool_calls = message.get("tool_calls") or []
                 if not isinstance(tool_calls, list):
@@ -288,6 +293,12 @@ class ProviderService:
                     if content is None:
                         raise ValueError("provider returned no response content")
                     response_text = content if isinstance(content, str) else json.dumps(content, ensure_ascii=False)
+                    if finish_reason == "length":
+                        raise ValueError("provider output limit reached before completion; response is incomplete")
+                    if finish_reason == "content_filter":
+                        raise ValueError("provider stopped the response through content filtering")
+                    if not response_text.strip():
+                        raise ValueError("provider returned empty response content")
                     if len(response_text) > 100_000:
                         raise ValueError("provider response exceeds size budget")
                     break
@@ -331,7 +342,7 @@ class ProviderService:
             id="conversation:" + uuid4().hex, provider_id=provider.config.id, model=provider.config.model,
             context_digest=preview.context_digest, record_ids=request.approved_record_ids, mode=request.context.mode,
             prompt=request.prompt, response=response_text, error=error, usage=usage,
-            provenance={"created_at": started, "input_sent": preview.model_dump(mode="json"), "generation_settings": {"max_tokens": provider.config.max_output_tokens, "max_iterations": request.max_iterations, "max_tool_calls": request.max_tool_calls, "max_tool_rows": request.max_tool_rows, "required_tool": request.required_tool, "deadline_seconds": request.deadline_seconds}, "usage_by_iteration": usage_by_iteration, "cited_tool_receipts": tool_citations, "cited_records": record_citations, "client_preprocessing": preview.image_representations, "provider_preprocessing": "unknown"},
+            provenance={"created_at": started, "input_sent": preview.model_dump(mode="json"), "generation_settings": {"max_tokens": provider.config.max_output_tokens, "max_iterations": request.max_iterations, "max_tool_calls": request.max_tool_calls, "max_tool_rows": request.max_tool_rows, "required_tool": request.required_tool, "deadline_seconds": request.deadline_seconds}, "usage_by_iteration": usage_by_iteration, "finish_reasons": finish_reasons, "cited_tool_receipts": tool_citations, "cited_records": record_citations, "client_preprocessing": preview.image_representations, "provider_preprocessing": "unknown"},
             tool_results=receipts, created_at=started,
         )
         self._save_conversation(result)

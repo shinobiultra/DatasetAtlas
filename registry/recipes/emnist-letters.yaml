@@ -1,0 +1,26 @@
+release: nist-emnist-idx-2017-letters
+adapter: emnist_archive
+expected_count: 145600
+source_url: https://www.nist.gov/itl/products-and-services/emnist-dataset
+scope: All 124800 train and 20800 test EMNIST Letters images, retaining native 1-based
+  labels and uppercase/lowercase mapping; the paper-specific excluded-letter subset
+  is not inferred. Lossless display PNGs apply an explicit transpose of the stored
+  pixel matrix.
+adapter_config:
+  configurations:
+  - letters
+  counts:
+    letters:
+      train: 124800
+      test: 20800
+  max_decoded_partition_bytes: 600000000
+files:
+- url: https://biometrics.nist.gov/cs_links/EMNIST/gzip.zip
+  source_name: gzip.zip
+  bytes: 561753746
+  sha256: fb9bb67e33772a9cc0b895e4ecf36d2cf35be8b709693c3564cea2a019fcda8e
+  md5: 58c8d27c78d21e728a6bc7b3cc06412e
+  config_key: path
+  format: zip
+allowed_hosts:
+- biometrics.nist.gov

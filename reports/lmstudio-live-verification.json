@@ -1,0 +1,96 @@
+{
+  "tested_at": "2026-09-23T03:23:01.891653+00:00",
+  "server": "LM Studio llmster 0.0.25-1",
+  "endpoint": "http://127.0.0.1:1234/v1",
+  "model": "gemma-4-e4b-it-obliterated Q5_K_M",
+  "runtime": "llama.cpp-linux-x86_64-nvidia-cuda12-avx2@2.43.0",
+  "placement": "CPU; 4096 context",
+  "provider": {
+    "config": {
+      "id": "local-lmstudio",
+      "base_url": "http://127.0.0.1:1234/v1",
+      "model": "atlas-lmstudio",
+      "api_key_env": null,
+      "timeout_seconds": 120.0,
+      "max_output_tokens": 1536,
+      "max_input_characters": 20000,
+      "max_images": 2,
+      "allow_external": false
+    },
+    "capabilities": {
+      "text_generation": {
+        "status": "supported",
+        "tested_at": "2026-09-23T03:22:31.528727+00:00",
+        "detail": "benign probe succeeded"
+      },
+      "single_image_input": {
+        "status": "supported",
+        "tested_at": "2026-09-23T03:22:31.876168+00:00",
+        "detail": "benign probe succeeded"
+      },
+      "multiple_image_input": {
+        "status": "supported",
+        "tested_at": "2026-09-23T03:22:32.377471+00:00",
+        "detail": "benign probe succeeded"
+      },
+      "structured_output": {
+        "status": "unsupported",
+        "tested_at": "2026-09-23T03:22:32.383168+00:00",
+        "detail": "probe returned HTTP 400"
+      },
+      "tool_calls": {
+        "status": "unsupported",
+        "tested_at": "2026-09-23T03:22:32.388874+00:00",
+        "detail": "probe returned HTTP 400"
+      },
+      "text_embeddings": {
+        "status": "unsupported",
+        "tested_at": "2026-09-23T03:22:32.395327+00:00",
+        "detail": "probe returned HTTP 400"
+      },
+      "image_embeddings": {
+        "status": "unsupported",
+        "tested_at": "2026-09-23T03:22:32.400301+00:00",
+        "detail": "probe returned HTTP 400"
+      }
+    }
+  },
+  "interactions": [
+    {
+      "mode": "text",
+      "conversation_id": "conversation:416342eaf2c447ad8737efe8a3eead7f",
+      "record_ids": [
+        "clevr:example:81280039a9c65cac129baa0d"
+      ],
+      "context_digest": "44ebef6ac8b535af13482bbc58ed44384d89825f9ca2c3ac3eab305e7c45407e",
+      "response": "[[record:clevr:example:81280039a9c65cac129baa0d]] has a question about a big metallic object, and you did not get any picture.",
+      "error": null,
+      "tool_calls": null,
+      "image_representations": []
+    },
+    {
+      "mode": "image",
+      "conversation_id": "conversation:6e6a3ce9d592475f89e3588cb42286b9",
+      "record_ids": [
+        "clevr:example:81280039a9c65cac129baa0d"
+      ],
+      "context_digest": "5ede4ee32c7e6d2eda26965f9fddb61566c0aafe5e5334aba87b3ac40eef8e80",
+      "response": "There is a big purple ball with a shiny finish, and a small green ball next to it [[record:clevr:example:81280039a9c65cac129baa0d]].",
+      "error": null,
+      "tool_calls": null,
+      "image_representations": [
+        {
+          "asset_id": "clevr:asset:51f6069dca0873395bd798b9",
+          "representation": "original",
+          "mime_type": "image/png",
+          "sha256": "5daf56d223c01e2481d6f12ef54686275f71fe67704f639734e27d2c5d6970c9",
+          "bytes": 183144,
+          "client_preprocessing": "none; file bytes encoded as data URL",
+          "provider_preprocessing": "unknown"
+        }
+      ]
+    }
+  ],
+  "external_data_transmission": false,
+  "note": "Local integration checks, not model accuracy measurements."
+}

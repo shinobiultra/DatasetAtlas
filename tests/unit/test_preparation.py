@@ -16,7 +16,7 @@ from dataset_atlas.queries.parquet import ParquetSnapshot
 
 def fixture(root, count=117):
     data = root / 'source.parquet'
-    pq.write_table(pa.table({'text': [f'record {i}' for i in range(count)], 'value': list(range(count))}), data)
+    pq.write_table(pa.table({'text': [f'record {i}' for i in range(count)], 'value': pa.array(range(count),type=pa.int32())}), data)
     dataset = Dataset(id='real-fixture', name='Test fixture', release='pinned', snapshot_id='pinned-snapshot',
         adapter='columnar', adapter_config={'files': [{'path': str(data), 'sha256': hashlib.sha256(data.read_bytes()).hexdigest()}]},
         coverage={'total_count': count})
@@ -41,6 +41,8 @@ def test_full_preparation_and_runtime_registry(tmp_path):
     result = snapshot.query(Query(snapshot_id=dataset.snapshot_id, population_scope='complete', limit=1000))
     assert result.matched_count == 117 and len(result.records) == 117
     assert max(r.source['value'] for r in result.records) == 116
+    filtered=snapshot.query(Query(snapshot_id=dataset.snapshot_id,population_scope='complete',filter={'field_id':'source.value','op':'gt','value':115}))
+    assert filtered.matched_count==1 and filtered.records[0].source['value']==116
     # Original manifest is never rewritten.
     assert yaml.safe_load((tmp_path/'registry/datasets/fixture.yaml').read_text())['coverage']['preview_count'] == 0
 
@@ -259,3 +261,85 @@ def test_archive_recipe_without_checksum_or_count_is_not_ready(tmp_path):
     assert any('population count must be declared' in r for r in plan['requirements'])
     with pytest.raises(ValueError, match='requirements'):
         PreparationManager(tmp_path).start(plan['id'])
+
+
+def test_prune_preserves_transitive_source_dependencies_and_running_versions(tmp_path):
+    import shutil
+    dataset = fixture(tmp_path)
+    manager = PreparationManager(tmp_path)
+    plan = manager.plan(dataset.id, 1_000_000, 1_000_000)
+    run(tmp_path, plan['id'])
+    old = Registry(tmp_path).active_directory(dataset.id)
+    intermediate = old.parent / 'intermediate'
+    newest = old.parent / 'newest'
+    shutil.copytree(old, intermediate)
+    shutil.copytree(old, newest)
+    def dependency(directory, target):
+        document = json.loads((directory / 'dataset.json').read_text())
+        document['adapter_config']['source_files'] = [{'path': str(target / 'source.bin')}]
+        (directory / 'dataset.json').write_text(json.dumps(document))
+    dependency(intermediate, old)
+    dependency(newest, intermediate)
+    (old.parent / 'active.json').write_text(json.dumps({'version': newest.name}))
+    running = old.parent / ('f' * 64); running.mkdir()
+    (manager.directory / running.name).mkdir()
+    (manager.directory / running.name / 'status.json').write_text(json.dumps({'status': 'running'}))
+    report = manager.prune(execute=True)
+    assert not report['removable']
+    assert {x['version'] for x in report['retained']} == {old.name, intermediate.name, newest.name, running.name}
+    assert old.exists() and intermediate.exists()
+
+
+def test_unknown_adapter_recipe_cannot_be_started(tmp_path):
+    dataset = fixture(tmp_path)
+    recipes = tmp_path / 'registry/recipes'; recipes.mkdir()
+    (recipes / f'{dataset.id}.yaml').write_text(yaml.safe_dump({
+        'adapter': 'not_implemented', 'scope': 'Full', 'expected_count': 3,
+        'files': [{'source_name': 'data.zip', 'url': 'https://example.org/data.zip', 'bytes': 100, 'sha256': 'a'*64}],
+    }))
+    plan = PreparationManager(tmp_path).plan(dataset.id, 1_000_000, 1_000_000)
+    assert not plan['ready']
+    assert any('Adapter implementation missing' in reason for reason in plan['requirements'])
+
+
+def test_selective_parquet_plan_reserves_transfer_budget_instead_of_full_shards(monkeypatch,tmp_path):
+    dataset=fixture(tmp_path)
+    path=tmp_path/'registry/datasets/fixture.yaml'
+    raw=yaml.safe_load(path.read_text());raw.update(adapter_config={},source_url='https://huggingface.co/datasets/owner/repo');path.write_text(yaml.safe_dump(raw))
+    monkeypatch.setattr('dataset_atlas.preparation.read_metadata',lambda url:{'sha':'a'*40,'siblings':[
+        {'rfilename':'train.parquet','size':4_000_000_000_000,'lfs':{'sha256':'b'*64}}]})
+    plan=PreparationManager(tmp_path).plan(dataset.id,100_000_000,100_000_000,source_mode='selective')
+    assert plan['ready'] and plan['kind']=='huggingface_remote_columnar'
+    assert plan['source_total_bytes']==4_000_000_000_000
+    assert plan['expected_download_bytes']==100_000_000 and plan['download_is_upper_bound']
+    assert plan['required_free_bytes']==1_120_000_000
+    full=PreparationManager(tmp_path).plan(dataset.id,100_000_000,100_000_000)
+    assert not full['ready']
+
+
+def test_multiple_native_archives_repack_and_join_with_shared_output_budget(tmp_path):
+    import tarfile, io
+    from PIL import Image
+    from dataset_atlas.adapters import get_adapter
+    image=io.BytesIO();Image.new('RGB',(3,4)).save(image,'PNG')
+    config={'annotations':[], 'local_archives':{}, 'repack_paths':[], 'source_files':[]}
+    for name in ['first','second']:
+        path=tmp_path/(name+'.tgz')
+        with tarfile.open(path,'w:gz') as archive:
+            data=image.getvalue();entry=tarfile.TarInfo('a.png');entry.size=len(data);archive.addfile(entry,io.BytesIO(data))
+        annotations=tmp_path/(name+'.json');annotations.write_text('[{"image":"a.png"}]')
+        config[name+'_path']=str(path);config[name+'_annotations']=str(annotations)
+        config['annotations'].append({'path_key':name+'_annotations','split':name,'media_paths_field':'image','media_archive':name})
+        config['local_archives'][name]={'path_key':name+'_path'};config['repack_paths'].append(name+'_path')
+        config['source_files'].append({'path':str(path),'sha256':hashlib.sha256(path.read_bytes()).hexdigest()})
+    dataset=Dataset(id='multi',name='Fixture',release='r',adapter='structured_collection',adapter_config=config,coverage={'total_count':2})
+    directory=tmp_path/'registry/datasets';directory.mkdir(parents=True)
+    (directory/'multi.yaml').write_text(yaml.safe_dump(dataset.model_dump(mode='json')))
+    manager=PreparationManager(tmp_path);plan=manager.plan('multi',10000,1000000);run(tmp_path,plan['id'])
+    registry=Registry(tmp_path);prepared=registry.dataset('multi');adapter=get_adapter(prepared)
+    source=adapter.prepare(adapter.plan(10,10000));records=adapter.iter_records(source).records
+    assert len({r.assets[0].id for r in records})==2
+    assert all(adapter.resolve_asset(source,r.assets[0].uri).data==image.getvalue() for r in records)
+    receipt=json.loads((registry.active_directory('multi')/'receipt.json').read_text())
+    assert len(receipt['derived_sources'])==2
+    for item in receipt['derived_sources']:assert item['bytes']>0

@@ -1,6 +1,6 @@
 # Implementation evidence
 
-This workspace implements the browser, local workbench, source adapters, durable analysis, model integration, and publication pipeline described in `SPEC.md`. **It is not yet a completed v1 release:** exact source identity and previews across the entire paper-derived inventory remain incomplete. The final catalogue has 336 entries, 64 verified local previews containing 6,313 records, and 59 canonical full-scope indices. Some indexed populations retain partial media; these are not 59 complete original datasets. See [the remaining roadmap](../ROADMAP.md). An unavailable adapter is an implementation gap, not an external access restriction.
+This workspace implements the browser, local workbench, source adapters, durable analysis, model integration, and publication pipeline described in `SPEC.md`. **It is not yet a completed v1 release:** exact source identity and previews across the entire paper-derived inventory remain incomplete. Current counts and exact acquired populations are generated in [the preparation report](on-demand-preparation.json). Some indexed populations retain partial media; an index is not automatically a complete original release. See [the remaining roadmap](../ROADMAP.md). An unavailable adapter is an implementation gap, not an external access restriction.
 
 ## Reproduce the running application
 
@@ -30,7 +30,7 @@ Run `.venv/bin/python -m pytest -q`, then `npm test --prefix apps/web` and `npm 
 
 No paid model API was used. Dataset pixels were sent only to the explicitly configured local model server. Models and datasets were acquired under the user's explicit local-download authorization.
 
-## Final closeout validation
+## Earlier closeout validation (historical)
 
 180 Python tests and 15 frontend tests passed. The final Playwright run passed 11 checks; the optional additional model-send test was skipped because its real saved conversation is already recorded in [the linked journey receipt](browser-linked-journey.json). Browser re-export/import was rerun successfully. Generated contracts were byte-identical. [All 64 registered local previews](final-preview-verification.json) passed record-count, snapshot-identity, and file-checksum verification. Registry validation passed 336/336. The public bundle contains only the three approved 100-record previews and is about 30.4 MB including frontend assets.
 
@@ -39,3 +39,14 @@ The wheel and source archive were rebuilt, scanned, and the wheel installed with
 ## Rebuilt interface closeout
 
 The earlier UI evidence above is superseded by [the UI closeout](ui-closeout.md): 191 Python tests, 22 frontend tests, and all 27 browser checks pass. The rebuilt panels now have real local image-send and detector/embedding-run receipts, explicit result refresh, and 390 px / 820 px browser coverage. No model-send skip remains in the live closeout run.
+
+## Current acquisition and provider work
+
+The 2026-09-23 expansion and its precise limits are documented in
+[selective acquisition](selective-acquisition-20260923.md). Live preparation status remains
+separate from verified coverage. The latest counts and test checkpoint are in
+[final-status.json](final-status.json); older counts above are historical receipts.
+
+The current implementation has not received a new independent review. PR #3's review
+covers its earlier changes only. Source acquisition does not approve redistribution;
+public media remain limited to CLEVR, PAIRS and EuroSAT.

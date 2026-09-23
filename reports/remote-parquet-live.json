@@ -1,0 +1,68 @@
+{
+  "dataset_id": "socialcounterfactuals",
+  "snapshot_id": "socialcounterfactuals-4b4879de586a143d86e86fed",
+  "matched_count": 170832,
+  "sample": {
+    "method": "random",
+    "size": 3,
+    "seed": 56
+  },
+  "media": [
+    {
+      "record_id": "socialcounterfactuals:example:d34e9a28c804bd824efe3bcc",
+      "source_origin": {
+        "file": "data/train-00028-of-00061-75dd261a3d674438.parquet",
+        "row": 839,
+        "upstream_sha256": "4e8f3c9c3804f6979e19e11fa4beb18e78341060cfe5807018826aebcff6ccd9",
+        "etag": "\"28d1aabfa397a15acc17e4efe8630b7c33152d6c4ea5ff7b69e20601b272396f\"",
+        "integrity": "Strong ETag-bound ranges; full shard SHA-256 not computed locally."
+      },
+      "asset_id": "socialcounterfactuals:asset:7e14a1370ef119a935aeb22d",
+      "bytes": 182534,
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "3ff70db3cb360763b3c9b977bfedcb0b17311c282f9aea96c093025677a5bca0",
+      "seconds": 10.038572033000492
+    },
+    {
+      "record_id": "socialcounterfactuals:example:97415834879279563a90e313",
+      "source_origin": {
+        "file": "data/train-00020-of-00061-25d60ad1c3879b76.parquet",
+        "row": 233,
+        "upstream_sha256": "d80d5618a40865c2c07352241c26451a3fa9e66e41873e7a9703535d43f9ef99",
+        "etag": "\"b51666774e7963a3c43245755d4b16491a3a76e10c012c94f8cbde4b878495c7\"",
+        "integrity": "Strong ETag-bound ranges; full shard SHA-256 not computed locally."
+      },
+      "asset_id": "socialcounterfactuals:asset:2e2cb3386212d579b5d82570",
+      "bytes": 127887,
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "1272d79512a41b76f33c8394caa5e252380595cadf1e77877da5552d40ab063f",
+      "seconds": 9.04270203499982
+    },
+    {
+      "record_id": "socialcounterfactuals:example:593820b4cd9894963c176617",
+      "source_origin": {
+        "file": "data/train-00044-of-00061-61ad579100301c53.parquet",
+        "row": 1494,
+        "upstream_sha256": "0a24408160ee4d2b239281d60588bc00f5060de43c9b5d15e9071ce95a34c56e",
+        "etag": "\"5dcac7a1042d4287eabc528983e5b18465e5e02bb5d107e51fc647cc316632a3\"",
+        "integrity": "Strong ETag-bound ranges; full shard SHA-256 not computed locally."
+      },
+      "asset_id": "socialcounterfactuals:asset:fbc4269c4128c444f24f433b",
+      "bytes": 140435,
+      "size": [
+        512,
+        512
+      ],
+      "sha256": "51561698386ac4067beb149548008afe06ce0a4f64ac4c0cd4b17853545c3e8d",
+      "seconds": 10.114567301000534
+    }
+  ],
+  "seconds": 30.010496642999897,
+  "scope": "Full remote Parquet population. Three reproducible records outside the first 100; original image payload decoded and served locally."
+}

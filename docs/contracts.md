@@ -13,3 +13,27 @@ Filter AST: leaf {field_id,op,value} or {and:[...]}/{or:[...]}/{not:...}; bounde
 Do not edit shared models without coordinating with lead. Use optional imports for heavy dependencies and honest unavailable statuses. Synthetic data only in tests. Agents own their assigned files and must preserve others' changes.
 
 On-demand preparation: `POST /datasets/{id}/preparation/plan` takes explicit `max_download_bytes` and `max_output_bytes`; `POST /preparation/{plan_id}/start` executes that saved plan. `GET /preparation?dataset_id=...`, `GET /preparation/{plan_id}`, and `POST /preparation/{plan_id}/cancel` expose durable status and cancellation. These workbench-only operations are not exposed as model tools. Prepared versions under `work/prepared` override active local registry coverage while preserving earlier snapshots. `GET /media/{token}?representation=safe-view` returns a display derivative; original record references are unchanged.
+
+Selective Parquet preparation is additive: preparation plans accept optional `source_mode:
+"selective"` (default `"download"`). The plan still covers every native Parquet shard in
+its pinned source/configuration. `source_total_bytes` describes the remote source;
+`expected_download_bytes` is an upper bound when `download_is_upper_bound` is true.
+Only the bounded range cache and prepared output require local disk reservation. The
+worker indexes all non-image columns and path leaves, retains image slot identities,
+and fetches embedded image bytes on inspection. Strong ETags bind range consistency;
+upstream full-file SHA-256 values are provenance, not falsely reported as locally checked.
+Unsupported binary layouts, changed ETags, oversized row groups, exhausted budgets and
+missing embedded bytes fail explicitly. Complete-index queries continue using the same
+Parquet snapshot API. The CLI equivalent is `atlas datasets acquire --source-mode selective`.
+
+`structured_collection` combines pinned JSON/JSONL/CSV splits and optional remote ZIP
+annotations with on-demand images. Every referenced filename is checked against a pinned
+source inventory or archive directory before activation. Local media inventories are
+copied into the immutable prepared version. Pruning preserves their transitive source
+version dependencies and never removes a running preparation.
+
+Browsing queries attach only explicitly selected analysis runs (maximum 32), rather
+than all historical artifacts. The Results picker exposes every compatible run;
+deselecting a run removes its dependent filters, sort and map colour. Inspector
+run evidence and projection selection remain available independently. Frozen
+selections retain the exact chosen result IDs in their saved query.

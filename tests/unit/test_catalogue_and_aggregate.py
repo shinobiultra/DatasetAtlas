@@ -119,3 +119,25 @@ def test_aggregate_endpoint_rejects_a_stale_snapshot(workspace):
         'field_ids': ['source.label'],
     })
     assert response.status_code == 422
+
+
+def test_thumbnails_use_active_prepared_pack_and_follow_activation(workspace):
+    import json, shutil
+    original = workspace / 'work/packs/fixture/pack.json'
+    base = workspace / 'work/prepared/fixture'
+    first = base / 'first'; (first / 'pack').mkdir(parents=True)
+    document = json.loads(original.read_text())
+    (first / 'pack/pack.json').write_text(json.dumps(document))
+    (first / 'dataset.json').write_text(json.dumps(document['dataset']))
+    (base / 'active.json').write_text(json.dumps({'version': 'first'}))
+    original.unlink()
+    app = client(workspace)
+    response = app.get('/api/v1/catalogue/thumbnails')
+    assert response.status_code == 200 and response.json()['datasets']['fixture']['tiles']
+    second = base / 'second'; shutil.copytree(first, second)
+    for record in document['records']:
+        record['assets'] = []; record['asset_ids'] = []; record['question'] = 'New active preview'
+    (second / 'pack/pack.json').write_text(json.dumps(document))
+    (base / 'active.json').write_text(json.dumps({'version': 'second'}))
+    tiles = app.get('/api/v1/catalogue/thumbnails').json()['datasets']['fixture']['tiles']
+    assert tiles[0]['kind'] == 'text' and tiles[0]['text'] == 'New active preview'

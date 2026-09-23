@@ -4,6 +4,7 @@ import fcntl
 import hashlib
 import json
 import os
+import re
 from pathlib import Path
 import shutil
 import sys
@@ -83,6 +84,7 @@ def run(root, identity):
                 if entry.get('config_key'):dataset.adapter_config[entry['config_key']]=str(target)
                 if entry.get('config_key')=='path':dataset.adapter_config['sha256']=digest.hexdigest()
                 update(downloaded_bytes=sum(f['bytes'] for f in files), current_file=entry['source_name'])
+            dataset.adapter_config['source_files'] = files
             if plan['kind']=='huggingface_columnar':
                 dataset.release = plan['revision']
             dataset.snapshot_id = f'{dataset.id}-{identity[:24]}'
@@ -90,17 +92,71 @@ def run(root, identity):
                 dataset.adapter = 'columnar'
                 dataset.adapter_config = {**dataset.adapter_config, 'files': files, 'population': plan['scope'],
                     'mapping': {'text': 'text', 'question': 'question', 'choices': 'choices', **dataset.adapter_config.get('mapping', {})}}
+        if plan['kind']=='huggingface_remote_columnar':
+            from dataset_atlas.storage.ranges import range_fingerprint
+            hosts=['huggingface.co','cdn-lfs.huggingface.co','cdn-lfs-us-1.huggingface.co','cdn-lfs-eu-1.huggingface.co',
+                   'cas-bridge.xethub.hf.co','us.aws.cdn.hf.co','eu.aws.cdn.hf.co']
+            remote_files=[]
+            for entry in plan['files']:
+                check()
+                update(stage='pinning remote shards',current_file=entry['source_name'])
+                remote_files.append({**entry,'etag':range_fingerprint(entry['url'],expected_size=entry['bytes'],allowed_hosts=hosts)})
+            dataset.release=plan['revision']
+            dataset.snapshot_id=f'{dataset.id}-{identity[:24]}'
+            dataset.adapter='remote_columnar'
+            dataset.adapter_config={'remote_files':remote_files,'allowed_hosts':hosts,
+                'remote_cache_root':str(Path(root)/'work/media-cache/remote-parquet'),'remote_cache_bytes':1_000_000_000,
+                'metadata_transfer_bytes':plan['max_download_bytes'],'population':plan['scope'],
+                'mapping':dataset.adapter_config.get('mapping',{})}
+        derived_sources = []
+        repack_paths = dataset.adapter_config.get('repack_paths', [])
+        if dataset.adapter_config.get('archive_preparation') == 'zip-store':
+            repack_paths = ['path', *repack_paths]
+        for path_key in dict.fromkeys(repack_paths):
+            from dataset_atlas.storage.archive import repack_tar
+            if not isinstance(path_key, str) or not re.fullmatch(r'[a-z_]+', path_key):
+                raise ValueError('Invalid archive path configuration key')
+            original=Path(dataset.adapter_config[path_key])
+            if original.suffix != '.zip':
+                update(stage='preparing random-access archive')
+                target=version/'sources'/('original-members.zip' if path_key=='path' else path_key+'-members.zip')
+                target.parent.mkdir(exist_ok=True)
+                derived=repack_tar(original,target,plan['max_output_bytes']-sum(item['bytes'] for item in derived_sources),check)
+                derived_sources.append({**derived, 'path_key': path_key})
+                dataset.adapter_config[path_key]=str(target)
+                dataset.adapter_config.setdefault('derived_archive_checksums', {})[path_key]=derived['sha256']
+                if path_key=='path':dataset.adapter_config['sha256']=derived['sha256']
+        derived_source=derived_sources[0] if len(derived_sources)==1 else None
+        derived_bytes=sum(item['bytes'] for item in derived_sources)
+        if not dataset.snapshot_id:
+            dataset.snapshot_id=f'{dataset.id}-{identity[:24]}'
+        # Freeze small derived source inventories alongside this immutable version.
+        if dataset.adapter_config.get('media_inventory_path'):
+            inventory=Path(dataset.adapter_config['media_inventory_path'])
+            payload=inventory.read_bytes()
+            digest=hashlib.sha256(payload).hexdigest()
+            if digest!=dataset.adapter_config['media_inventory_sha256']:raise ValueError('Media inventory checksum changed')
+            target=version/'sources'/(digest+'.inventory.json')
+            target.parent.mkdir(exist_ok=True)
+            if not target.exists():target.write_bytes(payload)
+            dataset.adapter_config['media_inventory_path']=str(target)
         adapter = get_adapter(dataset)
-        expected_count = adapter.count if dataset.adapter == 'columnar' else plan['expected_count']
-        if dataset.adapter == 'columnar' and plan.get('expected_count') is not None and expected_count != plan['expected_count']:
+        if dataset.adapter=='remote_columnar':adapter.cancel=check
+        expected_count = adapter.count if dataset.adapter in {'columnar','remote_columnar'} else plan['expected_count']
+        if dataset.adapter in {'columnar','remote_columnar'} and plan.get('expected_count') is not None and expected_count != plan['expected_count']:
             raise ValueError('Columnar count differs from declared release population')
         if expected_count is None or expected_count < 1:
             raise ValueError('Source population must have a verified positive count')
         # Source reads can include large embedded media, while persisted output has its own cap.
-        read_budget = min(100_000_000_000, max(plan['max_output_bytes'], sum(f['bytes'] for f in plan['files']) * 4))
+        read_budget = min(10_000_000_000_000, max(plan['max_output_bytes'], sum(f['bytes'] for f in plan['files']) * 4))
+        check()
+        media_validation = None
+        if hasattr(adapter, 'validate_media'):
+            update(stage='validating media references')
+            media_validation=adapter.validate_media(plan.get('remote_metadata_bytes',20_000_000),check)
         check()
         update(stage='preview', expected_count=expected_count)
-        pack = build_preview(dataset, version / 'pack', limit=min(expected_count, 100), max_bytes=read_budget,max_output_bytes=plan['max_output_bytes'])
+        pack = build_preview(dataset, version / 'pack', adapter=adapter, limit=min(expected_count, 100), max_bytes=read_budget,max_output_bytes=plan['max_output_bytes']-derived_bytes)
         # Columnar metadata covers all shards, including fields beyond the preview.
         declared_types = adapter.source_field_types() if hasattr(adapter, 'source_field_types') else {}
         for name in sorted({k for r in pack.records for k in r.source} | set(declared_types)):
@@ -112,9 +168,13 @@ def run(root, identity):
                 else 'array' if types == {list} else 'string' if types == {str} else 'object')
             dtype = declared_types.get(name, dtype)
             pack.fields.append(FieldDescriptor(id='source.' + name, name=name, dtype=dtype,
-                provenance={'source_url': dataset.source_url}))
+                provenance={'source_url': dataset.source_url},
+                query_ops=['eq','ne','in','contains','is_null']+(['gt','gte','lt','lte'] if dtype=='number' else [])))
+        for field in pack.fields:
+            if field.dtype=='number' and field.query_ops==['eq','ne','in','contains','is_null']:
+                field.query_ops+=['gt','gte','lt','lte']
         preview_bytes=len(json.dumps(pack.model_dump(mode='json'),indent=2,ensure_ascii=False).encode())
-        if preview_bytes>=plan['max_output_bytes']:raise ValueError('Preview alone exceeds approved output budget')
+        if preview_bytes+derived_bytes>=plan['max_output_bytes']:raise ValueError('Preview alone exceeds approved output budget')
         source = adapter.prepare(adapter.plan(1000, read_budget))
         def records():
             cursor = None
@@ -126,7 +186,7 @@ def run(root, identity):
                     raise ValueError('Adapter made no progress')
                 yield from batch.records
                 count += len(batch.records)
-                update(stage='indexing', indexed_count=count)
+                update(stage='indexing', indexed_count=count, **({'downloaded_bytes':adapter.bytes_fetched} if dataset.adapter=='remote_columnar' else {}))
                 if not batch.next_cursor:
                     break
                 if cursor == batch.next_cursor:
@@ -136,7 +196,7 @@ def run(root, identity):
         if not snapshot.exists():
             build_parquet_snapshot(records(), pack.fields, snapshot, root=version,
                 dataset_id=dataset.id, release_id=dataset.release, snapshot_id=dataset.snapshot_id,
-                expected_count=expected_count, population_scope='complete', max_bytes=plan['max_output_bytes']-preview_bytes)
+                expected_count=expected_count, population_scope='complete', max_bytes=plan['max_output_bytes']-preview_bytes-derived_bytes)
         check()
         dataset.coverage.preview_count = len(pack.records)
         dataset.coverage.total_count = expected_count
@@ -150,7 +210,7 @@ def run(root, identity):
         atomic(version / 'pack/pack.json', pack.model_dump(mode='json'))
         atomic(version / 'dataset.json', dataset.model_dump(mode='json'))
         atomic(version / 'receipt.json', {'plan_id': identity, 'source_files': plan['files'],
-            'record_count': expected_count, 'snapshot_id': dataset.snapshot_id, 'scope': plan['scope']})
+            'record_count': expected_count, 'snapshot_id': dataset.snapshot_id, 'scope': plan['scope'], 'media_validation':media_validation,'derived_source':derived_source,'derived_sources':derived_sources,'remote_metadata_bytes':getattr(adapter,'bytes_fetched',None)})
         atomic(base / 'active.json', {'version': identity})
         update(status='completed', stage='ready', snapshot_id=dataset.snapshot_id, indexed_count=expected_count)
     except InterruptedError as exc:

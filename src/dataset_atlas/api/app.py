@@ -45,6 +45,7 @@ class PreparationPlanRequest(BaseModel):
     model_config=ConfigDict(extra='forbid')
     max_download_bytes: int = Field(ge=1)
     max_output_bytes: int = Field(ge=1)
+    source_mode: str = Field(default='download', pattern='^(download|selective)$')
 
 class RecordRequest(BaseModel):
     model_config=ConfigDict(extra='forbid')
@@ -326,7 +327,7 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
     preparation=PreparationManager(root)
     @app.post('/api/v1/datasets/{dataset_id}/preparation/plan')
     def preparation_plan(dataset_id:str, body:PreparationPlanRequest):
-        return preparation.plan(dataset_id,body.max_download_bytes,body.max_output_bytes)
+        return preparation.plan(dataset_id,body.max_download_bytes,body.max_output_bytes,body.source_mode)
     @app.get('/api/v1/preparation')
     def preparation_list(dataset_id:str|None=None):return preparation.list(dataset_id)
     @app.post('/api/v1/preparation/{plan_id}/start')
@@ -352,8 +353,9 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         entries={}
         for dataset in registry.datasets():
             if not (dataset.coverage.preview_count or 0):continue
-            path=work/'packs'/dataset.id/'pack.json'
-            try:signature=(path.stat().st_mtime_ns,path.stat().st_size)
+            active=registry.active_directory(dataset.id)
+            path=active/'pack/pack.json' if active else work/'packs'/dataset.id/'pack.json'
+            try:signature=(str(path),path.stat().st_mtime_ns,path.stat().st_size)
             except OSError:continue
             cached=thumbnail_cache.get(dataset.id)
             if cached is None or cached[0]!=signature:

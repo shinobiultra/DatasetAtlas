@@ -1,13 +1,13 @@
 {
-  "checked_at_utc": "2026-09-22T09:22:03.021765+00:00",
+  "checked_at_utc": "2026-09-23T04:04:18.960321+00:00",
   "catalogue_entries": 333,
-  "tested_local_previews": 79,
-  "verified_preview_records": 7813,
-  "canonical_full_scope_indices": 74,
-  "entries_without_preview": 254,
-  "python_tests_passed": 217,
+  "tested_local_previews": 92,
+  "verified_preview_records": 9113,
+  "canonical_full_scope_indices": 87,
+  "entries_without_preview": 241,
+  "python_tests_passed": 292,
   "frontend_tests_passed": 22,
-  "browser_tests_passed": 29,
+  "browser_tests_passed": 30,
   "browser_tests_skipped": 0,
   "approved_public_preview_datasets": [
     "clevr",
@@ -15,11 +15,121 @@
     "pairs"
   ],
   "full_v1_complete": false,
-  "active_download": "exams-v",
   "all_subagents_finished": true,
   "paid_model_apis_used": false,
   "gqa_full_archive_acquired": true,
   "gqa_browsing_snapshot_media_scope": "full",
-  "active_preparations": [],
-  "executable_preparation_plans": 81
+  "active_preparations": [
+    {
+      "id": "75d410703d2acf91c8d91db26743ad74bff609991e1655f17e7dff036d06a08c",
+      "dataset_id": "vsr",
+      "status": "running",
+      "pid": 1884152,
+      "stage": "waiting for preparation slot",
+      "updated_at": 1790136258.9673865
+    },
+    {
+      "id": "f31faebb5541d6f225edb983cd1071bdba44bdcd5a754e979a62a1a59043e531",
+      "dataset_id": "hades",
+      "status": "running",
+      "pid": 1835816,
+      "stage": "waiting for preparation slot",
+      "updated_at": 1790136258.9540055
+    },
+    {
+      "id": "17f66185e65ba33d01ed27661cb363c2f922dc6261ee9a9cd87b15f4553789a6",
+      "dataset_id": "ravel",
+      "status": "running",
+      "pid": 2866353,
+      "stage": "waiting for preparation slot",
+      "updated_at": 1790136258.9238262
+    },
+    {
+      "id": "f5d28789a26e7367502e3119c2382e016d8254b005c94ee9d6bff4805187329f",
+      "dataset_id": "medical-multimodal-evaluation-data",
+      "status": "running",
+      "pid": 1896404,
+      "stage": "waiting for preparation slot",
+      "updated_at": 1790136258.8912842
+    },
+    {
+      "id": "4409608d811110c75d2a47ca743017e61834180c7c428bc544eefa05ca926752",
+      "dataset_id": "hallusionbench",
+      "status": "running",
+      "pid": 2087056,
+      "stage": "waiting for preparation slot",
+      "updated_at": 1790136258.8583715
+    },
+    {
+      "id": "c55a48ee7faf15021d4b26e823604718a2bc2b8fa834f2033cb8009ff37ac227",
+      "dataset_id": "ok-vqa",
+      "status": "running",
+      "pid": 1765699,
+      "stage": "waiting for preparation slot",
+      "updated_at": 1790136258.8572848
+    },
+    {
+      "id": "7cdf70d4a91d1a538132fb32388428dc410d7f4600ef65c067d8f95afc37307c",
+      "dataset_id": "causalgym",
+      "status": "running",
+      "pid": 2836931,
+      "stage": "waiting for preparation slot",
+      "updated_at": 1790136258.844312
+    },
+    {
+      "id": "930e6f4b982e03743c4dc097a40b5503d3a559b0e9309477899279d22f5a1e08",
+      "dataset_id": "cifar-10-c",
+      "status": "running",
+      "pid": 1620333,
+      "stage": "waiting for preparation slot",
+      "updated_at": 1790136258.7743797
+    },
+    {
+      "id": "befd4bb56018b6d5b330b1b9a76a114fdd99828170e710e5e0642a8d1e069a2b",
+      "dataset_id": "llava-instruct-150k",
+      "status": "running",
+      "pid": 1802230,
+      "stage": "waiting for preparation slot",
+      "updated_at": 1790136258.615476
+    },
+    {
+      "id": "f5c02c046f2fd701c1ea8d6cf8d78fcb35d076901c177de6bc2458e83d47de2c",
+      "dataset_id": "mmbench",
+      "status": "running",
+      "pid": 2805941,
+      "stage": "waiting for preparation slot",
+      "updated_at": 1790136258.6127074
+    },
+    {
+      "id": "7698bc16eecb417c272fad53244d6942b62b4402c12639e0d049dd77e74a02f1",
+      "dataset_id": "coco-qa",
+      "status": "running",
+      "pid": 1765241,
+      "stage": "waiting for preparation slot",
+      "updated_at": 1790136258.612372
+    },
+    {
+      "id": "6555fd7b2910866781085a00742f5948614bd5cc757b545d216a44dae824c474",
+      "dataset_id": "fgvc-aircraft",
+      "status": "running",
+      "pid": 1354147,
+      "stage": "waiting for preparation slot",
+      "updated_at": 1790136258.4940693
+    },
+    {
+      "id": "8e62c15e7f3a18cfb719b4d7e2b0a76bcfa405959908b9374f8f15bd0d1a0858",
+      "dataset_id": "llava-instruct-150k-3a74a703",
+      "status": "running",
+      "pid": 2468651,
+      "stage": "indexing",
+      "updated_at": 1790136246.7171814,
+      "downloaded_bytes": 54104275,
+      "current_file": "LLaVA_Instruct_150K/train-00153-of-00154.parquet",
+      "expected_count": 157710,
+      "indexed_count": 86000
+    }
+  ],
+  "executable_preparation_plans": 81,
+  "validation_log": "work/validation-native-complete-20260923.log",
+  "browser_validation_log": "work/browser-results-fixed-20260923.log"
 }

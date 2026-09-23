@@ -1,0 +1,6 @@
+source_url: https://huggingface.co/datasets/Lin-Chen/MMStar/tree/bc98d668301da7b14f648724866e57302778ab27
+scope: All 1500 MMStar questions in the author-published native mmstar.parquet, including
+  images, categories, original answers and source metadata.
+source_patterns:
+- '*.parquet'
+expected_count: 1500

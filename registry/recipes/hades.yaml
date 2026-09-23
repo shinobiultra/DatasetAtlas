@@ -1,0 +1,5 @@
+source_url: https://huggingface.co/datasets/Monosail/HADES/tree/8c7388c566c8844a0732a2ad2156b72ae00c92c8
+scope: All native HADES benchmark Parquet test shards from the author-linked Monosail
+  release. Preserve every image variant and annotation; do not execute prompts.
+source_patterns:
+- '*.parquet'

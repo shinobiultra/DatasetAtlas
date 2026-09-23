@@ -62,13 +62,14 @@ class PreparationManager:
             raise ValueError('Invalid preparation ID')
         return self.directory / identity
 
-    def plan(self, dataset_id, max_download_bytes, max_output_bytes):
+    def plan(self, dataset_id, max_download_bytes, max_output_bytes, source_mode="download"):
         if any(type(n) is not int or not 1 <= n <= 10_000_000_000_000 for n in (max_download_bytes, max_output_bytes)):
             raise ValueError('Positive download and output limits of at most 10 TB are required')
+        if source_mode not in {'download','selective'}:raise ValueError('Source mode must be download or selective')
         dataset = self.registry.dataset(dataset_id)
         plan = {'dataset_id': dataset.id, 'dataset': dataset.model_dump(mode='json'),
             'max_download_bytes': max_download_bytes, 'max_output_bytes': max_output_bytes,
-            'files': [], 'expected_download_bytes': 0, 'expected_count': None,
+            'source_mode':source_mode,'files': [], 'expected_download_bytes': 0, 'expected_count': None,
             'source_url': dataset.source_url, 'requirements': [], 'ready': False,
             'scope': dataset.adapter_config.get('population', 'configured source population'),
             'source_identity': 'Pinned available release; not a claim of the paper-used revision.'}
@@ -92,12 +93,14 @@ class PreparationManager:
         parsed = urlsplit(dataset.source_url or '')
         match = re.match(r'^/datasets/([^/]+/[^/]+)', parsed.path)
         # A tested local adapter remains authoritative for joined/native releases.
+        adapter_error = None
         try:
             from dataset_atlas.adapters import get_adapter
             adapter = get_adapter(dataset)
             description = adapter.probe()
-        except (ValueError, KeyError, FileNotFoundError):
+        except (ValueError, KeyError, FileNotFoundError) as exc:
             description = None
+            if str(exc).startswith('unknown adapter:'):adapter_error=str(exc)
         if recipe.get('files') and not (description and description.exists):
             plan.update(kind='http_archive', files=recipe['files'], expected_count=recipe.get('expected_count'),
                 expected_download_bytes=sum(f['bytes'] for f in recipe['files']), ready=True,
@@ -111,9 +114,9 @@ class PreparationManager:
             if plan['expected_count'] is None:
                 plan['ready']=False
                 plan['requirements'].append('Exact source population count must be declared in the recipe before full indexing.')
-        elif description and description.exists:
+        elif description and description.exists and not (source_mode=='selective' and parsed.hostname=='huggingface.co' and match):
             plan['kind'] = 'local'
-            plan['expected_count'] = dataset.coverage.total_count
+            plan['expected_count'] = recipe.get('expected_count', dataset.coverage.total_count)
             snapshot = self.registry.snapshot_path(dataset.id)
             if (snapshot / 'manifest.json').is_file():
                 plan['expected_count'] = json.loads((snapshot / 'manifest.json').read_text())['record_count']
@@ -162,11 +165,46 @@ class PreparationManager:
         else:
             plan['kind'] = 'unconfigured'
             plan['requirements'].append('A pinned acquisition recipe or authorized local source is required for this release.')
+        if source_mode=='selective':
+            if plan.get('kind')=='huggingface_columnar' and plan['files'] and all(f['format']=='parquet' for f in plan['files']):
+                plan['kind']='huggingface_remote_columnar'
+                plan['source_total_bytes']=plan['expected_download_bytes']
+                plan['expected_download_bytes']=max_download_bytes
+                plan['download_is_upper_bound']=True
+                plan['media_access']='Index all annotation columns through bounded HTTPS ranges; fetch embedded images on inspection. Strong ETags enforce consistency; full shard SHA-256 is not checked locally. Unsupported layouts fail explicitly.'
+            elif plan.get('kind')!='local' or dataset.adapter!='remote_columnar':
+                plan['ready']=False
+                plan['requirements'].append('Selective column access requires a native Parquet source. Use the source recipe or full download for this format.')
+        if plan.get('kind')=='local' and dataset.adapter=='remote_columnar':
+            dataset.adapter_config['metadata_transfer_bytes']=max_download_bytes
+            plan['prepared_dataset']=dataset.model_dump(mode='json')
+            plan['expected_download_bytes']=max_download_bytes
+            plan['download_is_upper_bound']=True
+            plan['media_access']='Re-index complete remote annotations within the approved transfer budget; embedded images remain remote.'
+        if adapter_error and plan.get('kind') not in {'huggingface_columnar','huggingface_remote_columnar'}:
+            plan['ready'] = False
+            plan['requirements'].append('Adapter implementation missing: ' + dataset.adapter)
+        remote = dataset.adapter_config.get('remote_archives', {})
+        selective_media = remote or dataset.adapter_config.get('media_inventory_path') or plan.get('kind')=='huggingface_remote_columnar' or dataset.adapter=='remote_columnar'
+        if remote:
+            metadata_limit = recipe.get('remote_metadata_bytes', 20_000_000)
+            if type(metadata_limit) is not int or not 1 <= metadata_limit <= 100_000_000:
+                raise ValueError('Remote metadata budget must be within 1..100 MB')
+            plan['remote_archives'] = remote
+            plan['remote_metadata_bytes'] = metadata_limit
+            plan['source_file_bytes'] = plan['expected_download_bytes']
+            plan['expected_download_bytes'] += metadata_limit
+            plan['media_access'] = 'Original images fetched on inspection through bounded HTTPS ranges; strong ETags are consistency fingerprints, not archive hashes.'
+        elif selective_media and not plan.get('media_access'):
+            plan['media_access'] = 'Original image files fetched on inspection and checked against the pinned source inventory; a bounded cache limits disk use.'
         if plan['expected_download_bytes'] > max_download_bytes:
             plan['ready'] = False
             plan['requirements'].append('Source download exceeds the selected download budget.')
         # Cache and retained source may coexist; reserve both conservatively.
-        plan['required_free_bytes'] = plan['expected_download_bytes'] * 2 + max_output_bytes
+        plan['required_free_bytes'] = plan['expected_download_bytes'] * 2 + max_output_bytes + (dataset.adapter_config.get('remote_cache_bytes',1_000_000_000) if selective_media else 0)
+        if plan.get('kind')=='huggingface_remote_columnar' or dataset.adapter=='remote_columnar':
+            # Transfer is streamed through a bounded cache, not retained as a full source copy.
+            plan['required_free_bytes']=max_output_bytes+dataset.adapter_config.get('remote_cache_bytes',1_000_000_000)+20_000_000
         plan['available_bytes'] = shutil.disk_usage(self.directory).free
         if plan['required_free_bytes'] > plan['available_bytes']:
             plan['ready'] = False
@@ -325,56 +363,104 @@ class PreparationManager:
         base = self.root / 'work/prepared'
         if not base.is_dir():
             return report
+        decisions = {}
         for dataset_dir in sorted(base.iterdir()):
             if not dataset_dir.is_dir():
                 continue
             pointer = dataset_dir / 'active.json'
             active = json.loads(pointer.read_text())['version'] if pointer.is_file() else None
             versions = []
-            for version_dir in sorted(dataset_dir.iterdir()):
-                if not version_dir.is_dir():
+            for directory in sorted(dataset_dir.iterdir()):
+                if not directory.is_dir():
                     continue
-                document = version_dir / 'dataset.json'
-                snapshot = json.loads(document.read_text()).get('snapshot_id') if document.is_file() else None
-                status_path = self.directory / version_dir.name / 'status.json'
+                document = directory / 'dataset.json'
+                body = json.loads(document.read_text()) if document.is_file() else {}
+                status_path = self.directory / directory.name / 'status.json'
                 status = json.loads(status_path.read_text()).get('status') if status_path.is_file() else None
-                versions.append((version_dir, snapshot, status))
-            active_snapshot = next((snapshot for directory, snapshot, _ in versions if directory.name == active), None)
-            retained_inodes = set()
-            decisions = []
-            for directory, snapshot, status in versions:
+                versions.append((directory, body, status))
+            active_snapshot = next((body.get('snapshot_id') for directory, body, _ in versions if directory.name == active), None)
+            for directory, body, status in versions:
+                snapshot = body.get('snapshot_id')
                 if directory.name == active:
-                    decisions.append((directory, snapshot, 'active', False))
+                    reason, removable = 'active', False
+                elif status in {'running', 'queued'}:
+                    reason, removable = 'preparation in progress', False
                 elif status in {'failed', 'cancelled', 'interrupted'} or snapshot is None:
-                    decisions.append((directory, snapshot, status or 'incomplete', True))
+                    reason, removable = status or 'incomplete', True
                 elif snapshot == active_snapshot:
-                    decisions.append((directory, snapshot, 'duplicate of active snapshot', True))
+                    reason, removable = 'duplicate of active snapshot', True
                 elif snapshot in referenced:
-                    decisions.append((directory, snapshot, 'referenced by a saved selection', False))
+                    reason, removable = 'referenced by a saved selection', False
                 else:
-                    decisions.append((directory, snapshot, 'superseded and unreferenced', True))
-            for directory, _, _, removable in decisions:
-                if not removable:
-                    for path in directory.rglob('*'):
-                        if path.is_file():
-                            stat = path.stat()
-                            retained_inodes.add((stat.st_dev, stat.st_ino))
-            for directory, snapshot, reason, removable in decisions:
-                entry = {'dataset_id': dataset_dir.name, 'version': directory.name, 'snapshot_id': snapshot, 'reason': reason}
-                if not removable:
-                    report['retained'].append(entry)
+                    reason, removable = 'superseded and unreferenced', True
+                decisions[directory.resolve()] = [snapshot, reason, removable, body]
+        # Local re-indexing can reference source files in an older prepared version.
+        # Trace every retained configuration transitively, including across datasets.
+        def strings(value):
+            if isinstance(value, str):
+                yield value
+            elif isinstance(value, dict):
+                for child in value.values():
+                    yield from strings(child)
+            elif isinstance(value, list):
+                for child in value:
+                    yield from strings(child)
+        pending = [directory for directory, entry in decisions.items() if not entry[2]]
+        visited = set()
+        while pending:
+            directory = pending.pop()
+            if directory in visited:
+                continue
+            visited.add(directory)
+            config = decisions[directory][3].get('adapter_config', {})
+            # A running worker may not have written dataset.json yet.
+            plan_path = self.directory / directory.name / 'plan.json'
+            if not config and plan_path.is_file():
+                plan = json.loads(plan_path.read_text())
+                config = plan.get('prepared_dataset', plan.get('dataset', {})).get('adapter_config', {})
+            for value in strings(config):
+                if not value or '://' in value:
                     continue
-                freed = 0
+                try:
+                    path = Path(value)
+                    path = (path if path.is_absolute() else self.root / path).resolve()
+                    relative = path.relative_to(base)
+                except (ValueError, OSError):
+                    continue
+                if len(relative.parts) < 2:
+                    continue
+                target = base.joinpath(*relative.parts[:2]).resolve()
+                if target in decisions and target != directory:
+                    entry = decisions[target]
+                    if entry[2]:
+                        entry[1:3] = ['source dependency of a retained version', False]
+                    pending.append(target)
+        retained_inodes = set()
+        for directory, (_, _, removable, _) in decisions.items():
+            if not removable:
                 for path in directory.rglob('*'):
-                    if path.is_file() and not path.is_symlink():
+                    if path.is_file():
                         stat = path.stat()
-                        if (stat.st_dev, stat.st_ino) not in retained_inodes:
-                            freed += stat.st_size
-                entry['freed_bytes'] = freed
-                report['removable'].append(entry)
-                report['freed_bytes'] += freed
-                if execute:
-                    shutil.rmtree(directory)
+                        retained_inodes.add((stat.st_dev, stat.st_ino))
+        counted = set()
+        for directory, (snapshot, reason, removable, _) in decisions.items():
+            entry = {'dataset_id': directory.parent.name, 'version': directory.name, 'snapshot_id': snapshot, 'reason': reason}
+            if not removable:
+                report['retained'].append(entry)
+                continue
+            freed = 0
+            for path in directory.rglob('*'):
+                if path.is_file() and not path.is_symlink():
+                    stat = path.stat()
+                    inode = (stat.st_dev, stat.st_ino)
+                    if inode not in retained_inodes and inode not in counted:
+                        freed += stat.st_size
+                        counted.add(inode)
+            entry['freed_bytes'] = freed
+            report['removable'].append(entry)
+            report['freed_bytes'] += freed
+            if execute:
+                shutil.rmtree(directory)
         return report
 
 

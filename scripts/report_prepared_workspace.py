@@ -42,6 +42,7 @@ with path.open('w',newline='') as stream:
     writer=csv.DictWriter(stream,fieldnames=columns,lineterminator="\n");writer.writeheader();writer.writerows(rows)
 status_path=root/'reports/final-status.json'
 status=json.loads(status_path.read_text())
+status.pop('active_download', None)  # Superseded by the actual preparation list.
 status.update(checked_at_utc=report['checked_at'],catalogue_entries=len(datasets),tested_local_previews=preview_count,
               verified_preview_records=sum(d.coverage.preview_count for d in datasets),canonical_full_scope_indices=index_count,
               entries_without_preview=len(datasets)-preview_count,full_v1_complete=False,

@@ -21,7 +21,7 @@ import { AnalyzePanel } from '../panels/AnalyzePanel'
 import { ModelPanel } from '../panels/ModelPanel'
 import {
   canBrowse, clauseFilter, defaultColumnFields, MAP_MAX_POINTS, MAP_PAGE_SIZE, PAGE_SIZE, projectionArtifacts,
-  scopeSummary, supportsComplete, useBrowse, type Clause, type PopulationScope, type Unit, type View,
+  runLabel, scopeSummary, supportsComplete, useBrowse, type Clause, type PopulationScope, type Unit, type View,
 } from './model'
 
 type Panel = 'inspector' | 'about' | 'analyze' | 'model'
@@ -44,6 +44,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
   const [loadError, setLoadError] = useState('')
   const [fields, setFields] = useState<FieldDescriptor[]>([])
   const [artifacts, setArtifacts] = useState<Artifact[]>([])
+  const [selectedResultIds, setSelectedResultIds] = useState<string[]>([])
   const [scope, setScope] = useState<PopulationScope>('preview')
   const [complete, setComplete] = useState<CompleteScope | null>(null)
   const [unit, setUnit] = useState<Unit>('example')
@@ -87,6 +88,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
     setSearch(''); setClauses([]); setSort(null); setSample(null); setSelected(new Set()); setInspected(null)
     setExtraRecord(null); setPanel(null); setCentre('browse'); setComparePair([null, null]); setSavedSelection(null)
     setColourFieldId(''); setProjectionId('')
+    setSelectedResultIds([])
     provider.dataset(datasetId).then(async item => {
       if (!live) return
       setDataset(item)
@@ -116,6 +118,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
         setUnit((dataset.coverage?.unit as Unit) ?? 'example')
       }
       setClauses([]); setSort(null); setSelected(new Set()); setInspected(null); setCentre('browse')
+      setSelectedResultIds([]); setColourFieldId('')
       setScope(next)
       setLoadError('')
     } catch (failure) {
@@ -138,7 +141,22 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
 
   /* ---------- the query ---------- */
   const snapshotId = scope === 'complete' ? complete?.snapshot_id ?? '' : dataset?.snapshot_id ?? ''
-  const resultSnapshotIds = useMemo(() => artifacts.filter(item => item.unit === unit).map(item => item.id).sort(), [artifacts, unit])
+  const resultSnapshotIds = useMemo(() => artifacts.filter(item => item.unit === unit && selectedResultIds.includes(item.id)).map(item => item.id).sort(), [artifacts, unit, selectedResultIds])
+
+  // Attaching every historical run makes unrelated browsing grow without bound.
+  // The picker preserves explicit query provenance and the API's 32-run limit;
+  // direct inspection and projection selection still have access to every run.
+  function toggleResult(id: string, enabled: boolean) {
+    if (enabled) {
+      if (resultSnapshotIds.length >= 32) return
+      setSelectedResultIds(current => [...current, id])
+    } else {
+      setSelectedResultIds(current => current.filter(value => value !== id))
+      setClauses(current => current.filter(clause => !clause.fieldId.startsWith(`prediction.${id}.`)))
+      setSort(current => current?.field_id.startsWith(`prediction.${id}.`) ? null : current)
+      setColourFieldId(current => current.startsWith(`prediction.${id}.`) ? '' : current)
+    }
+  }
 
   const query = useMemo<Query | null>(() => {
     if (!dataset || !snapshotId) return null
@@ -247,7 +265,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
   }, [dataset, selected, selectionName, unit, snapshotId, datasetId, sample, query, onToast, onSelectionSaved])
 
   /* ---------- derived ---------- */
-  const unitFields = useMemo(() => fields.filter(field => (field.unit ?? 'example') === unit), [fields, unit])
+  const unitFields = useMemo(() => fields.filter(field => (field.unit ?? 'example') === unit && !artifacts.some(item => field.id.startsWith(`prediction.${item.id}.`) && !resultSnapshotIds.includes(item.id))), [fields, unit, artifacts, resultSnapshotIds])
   const chosenColumnIds = columnIds[`${datasetId}:${unit}`]
   const defaultColumns = useMemo(() => defaultColumnFields(unitFields, records).map(field => field.id), [unitFields, records])
   const activeColumnIds = chosenColumnIds ?? defaultColumns
@@ -307,6 +325,19 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
           </div>
         </div>
         <div className="ds-header-actions">
+          {artifacts.some(item => item.unit === unit) && (
+            <Popover label="Results for browsing" trigger={() => <>Results ({resultSnapshotIds.length})<Icon.ChevronDown size={12} /></>}>
+              {() => <div style={{ maxWidth: 360 }}>
+                <p className="hint">Choose up to 32 runs for filters, columns and map colours. The inspector and projection selector can access every run.</p>
+                <div className="col" style={{ maxHeight: 320, overflow: 'auto', marginTop: 8 }}>
+                  {artifacts.filter(item => item.unit === unit).map(item => <label className="facet-opt" key={item.id} title={item.id}>
+                    <input type="checkbox" aria-label={`Use result ${item.id}`} checked={resultSnapshotIds.includes(item.id)} disabled={!resultSnapshotIds.includes(item.id) && resultSnapshotIds.length >= 32} onChange={event => toggleResult(item.id, event.target.checked)} />
+                    <span>{runLabel(item)}</span>
+                  </label>)}
+                </div>
+              </div>}
+            </Popover>
+          )}
           {browsable && provider.mode === 'workbench' && <button type="button" className="btn" onClick={() => void refreshResults()}>Refresh results</button>}
           {supportsComplete(dataset) && (
             <Segmented

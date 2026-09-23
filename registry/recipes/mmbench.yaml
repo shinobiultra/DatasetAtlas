@@ -1,0 +1,56 @@
+release: mmbench-v1-circular-tsv
+adapter: embedded_tsv
+source_url: https://github.com/open-compass/MMBench
+expected_count: 21990
+scope: All four official MMBench v1 EN/CN dev/test TSV populations, including circular-evaluation
+  permutations. TSV bytes acquired from a pinned mirror and matched against the author
+  evaluation toolkit MD5; rows are not distinct base questions. Test answers remain
+  as released.
+adapter_config:
+  tables:
+  - path_key: dev_en_path
+    split: dev
+    language: EN
+  - path_key: test_en_path
+    split: test
+    language: EN
+  - path_key: dev_cn_path
+    split: dev
+    language: CN
+  - path_key: test_cn_path
+    split: test
+    language: CN
+files:
+- url: https://huggingface.co/ambivalent02/openencompass_tsv/resolve/943da5d7577251a00aac6bab450b12a965c778f7/MMBench_DEV_EN.tsv
+  source_name: MMBench_DEV_EN.tsv
+  bytes: 37156625
+  sha256: 64baa14c5ec650302f428212a0b3efc5c88fbf9236d0d6fdea45c555f0b02d7a
+  md5: b6caf1133a01c6bb705cf753bb527ed8
+  config_key: dev_en_path
+  format: tsv
+- url: https://huggingface.co/ambivalent02/openencompass_tsv/resolve/943da5d7577251a00aac6bab450b12a965c778f7/MMBench_TEST_EN.tsv
+  source_name: MMBench_TEST_EN.tsv
+  bytes: 53398240
+  sha256: 71a76a9cf8867c1e91afe3f50c36072714cff7cd6791eff02fe37a89e9c794b4
+  md5: 6939fadb0ce626fefc0bdc9c64efc528
+  config_key: test_en_path
+  format: tsv
+- url: https://huggingface.co/ambivalent02/openencompass_tsv/resolve/943da5d7577251a00aac6bab450b12a965c778f7/MMBench_DEV_CN.tsv
+  source_name: MMBench_DEV_CN.tsv
+  bytes: 37068586
+  sha256: cbf1e24febf215e719bf50f19834ccd97f80ba325b6b469c849db73c2559d959
+  md5: 08b8fc3324a5ed74155350f57be69fbd
+  config_key: dev_cn_path
+  format: tsv
+- url: https://huggingface.co/ambivalent02/openencompass_tsv/resolve/943da5d7577251a00aac6bab450b12a965c778f7/MMBench_TEST_CN.tsv
+  source_name: MMBench_TEST_CN.tsv
+  bytes: 53267399
+  sha256: 7c6dde7fa2c03b4ba77be3fc34ee9fe10171c5962b6e0c29ff020b231aa50eb8
+  md5: 7e1239baf0ee4c8b513e19705a0f317e
+  config_key: test_cn_path
+  format: tsv
+allowed_hosts:
+- huggingface.co
+- cas-bridge.xethub.hf.co
+- us.aws.cdn.hf.co
+- eu.aws.cdn.hf.co

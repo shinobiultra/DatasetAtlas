@@ -1,4 +1,65 @@
-source_url: https://huggingface.co/datasets/xmcmic/PMC-VQA
-source_evidence_url: https://raw.githubusercontent.com/xiaoman-zhang/PMC-VQA/master/README.md
-note: Official repository README links this data release. The plan pins the available
-  revision; paper-specific identity remains separate.
+source_url: https://huggingface.co/datasets/xmcmic/PMC-VQA/resolve/b56ae594f794867893143b337b4118a835794647
+release: b56ae594f794867893143b337b4118a835794647-v1
+adapter: structured_collection
+expected_count: 228948
+remote_metadata_bytes: 50000000
+scope: Original PMC-VQA v1 train and test questions, plus separately identified test_clean
+  evaluation subset. The noncompound-image v2 release is a different representation
+  and is not included.
+files:
+- source_name: test.csv
+  url: https://huggingface.co/datasets/xmcmic/PMC-VQA/resolve/b56ae594f794867893143b337b4118a835794647/test.csv
+  bytes: 10710861
+  sha256: 3ec50be9a8f5d5bf5dfb16c920968122f4801e2b464f0343115459209386714d
+  format: csv
+  config_key: test_csv
+- source_name: test_clean.csv
+  url: https://huggingface.co/datasets/xmcmic/PMC-VQA/resolve/b56ae594f794867893143b337b4118a835794647/test_clean.csv
+  bytes: 418686
+  sha256: 8523073108666b8f5231c3d40004a7b74a57381ea54ec9a3019edf1b33eab8f7
+  format: csv
+  config_key: test_clean_csv
+- source_name: train.csv
+  url: https://huggingface.co/datasets/xmcmic/PMC-VQA/resolve/b56ae594f794867893143b337b4118a835794647/train.csv
+  bytes: 38081707
+  sha256: 24b4e287546bbfc96ce47aadda59f43fe948b15b82820ac533363e51c1adc029
+  format: csv
+  config_key: train_csv
+allowed_hosts: &id001
+- huggingface.co
+- cdn-lfs.huggingface.co
+- cdn-lfs-us-1.huggingface.co
+- cdn-lfs-eu-1.huggingface.co
+- cas-bridge.xethub.hf.co
+- us.aws.cdn.hf.co
+- eu.aws.cdn.hf.co
+adapter_config:
+  annotations:
+  - path_key: test_csv
+    format: csv
+    split: test
+    media_archive: images
+    media_template: images/{Figure_path}
+  - path_key: test_clean_csv
+    format: csv
+    split: test_clean
+    media_archive: images
+    media_template: images/{Figure_path}
+  - path_key: train_csv
+    format: csv
+    split: train
+    media_archive: images
+    media_template: images/{Figure_path}
+  mapping:
+    question: Question
+  remote_archives:
+    images:
+      url: https://huggingface.co/datasets/xmcmic/PMC-VQA/resolve/b56ae594f794867893143b337b4118a835794647/images.zip
+      bytes: 18945102275
+      sha256: cc9f909d6804d0b58111ec8aa7c7b564eece237f24fdcb701916c47beec8285e
+      etag: '"4d5eede557f15d89aa3d06c22f7a839069bd2efa071afd1afde4cf67b1f7e25c"'
+      accept_ranges: bytes
+      allowed_hosts: *id001
+  remote_cache_root: work/media-cache/ranges
+  remote_cache_bytes: 1000000000
+  media_transfer_bytes: 50000000

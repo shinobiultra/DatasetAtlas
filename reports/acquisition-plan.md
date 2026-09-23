@@ -1,73 +1,38 @@
-# Acquisition plan — what is prepared, what is next, what is blocked
+# Acquisition status and remaining work
 
-Generated 2026-09-22 against the 333-entry catalogue. This is a plan, not coverage: an entry
-is only "browsable" once a preparation run has downloaded, verified and indexed its declared
-population. Nothing in this file was downloaded to produce it beyond HTTP `HEAD` size probes.
+Updated 2026-09-23. The user authorized bounded public dataset/model acquisition in the tens of GB, without paid APIs or external model transmission. The previous session's 1 GB limit is superseded. This file distinguishes completed preparation from queued or unimplemented work.
 
-## Prepared this session
+## Completed and exercised
 
-| Dataset | Release | Records | Downloaded | Notes |
-| --- | --- | --- | --- | --- |
-| `space-10` | `efd7316e…` (HF revision pin) | 4,132 / 4,132 | 872 MB | Eight embedded images per record; complete-population index and media serve live. Only the 2D QA release is public — the 3D media release is not out, so `access` stays `partial_public_2d_only`. |
+The nine new full populations in [selective-acquisition-20260923.md](selective-acquisition-20260923.md) are TextVQA, VizWiz, ChartQA, HatefulIllusion, OmniSpatial, PMC-VQA V1, Flowers-102, CUB-200-2011 and CIFAR-10-C. Their complete 100-record previews have passed actual image decoding through the workbench, including every image slot. See [preview-media-20260923.json](preview-media-20260923.json).
 
-The approved budget for this session was ≈1 GB and `space-10` consumed 872 MB of it. No other
-download was started.
+SocialCounterfactuals now has a 170,832-record index spanning all 61 pinned Parquet shards. Index construction fetched 6,132,809 bytes of metadata/annotation ranges from 27.22 GB of remote source shards. Images remain remote and are fetched within per-request limits. Three reproducible full-population samples from distinct shards passed actual image delivery; this does not assert that all 170,832 image payloads were fetched. See [remote-parquet-live.json](remote-parquet-live.json).
 
-## Ready to run — needs a budget approval only
+TweetEval has completed 200,785 rows across its native Parquet task configurations and splits. ClassLabel meanings are retained per shard, so an integer label is not assigned a universal meaning across tasks. MMStar completed its 1,500 records and COCO 2014 its 164,062 images with published annotations. Both 100-record previews passed actual image decoding.
 
-| Dataset | Kind | Download | Blocker |
-| --- | --- | --- | --- |
-| `cifar-10-c` | `http_archive` (Zenodo) | 2.92 GB (md5 pinned) | Over the session budget, **and** needs a `cifar_c_npy` adapter (stacked `.npy` per corruption); the recipe is committed but not runnable. |
+## Executable recipes being verified
 
-## Recipes written, deliberately not ready
+Current plans cover the original LLaVA-Instruct-150K JSON (157,712 conversations), its separate FineVision representation, FGVC-Aircraft, COCO-QA, OK-VQA, HADES, VSR, Medical Multimodal Evaluation Data, and HallusionBench. A queued plan is not coverage; consult `reports/on-demand-preparation.json` and live preparation status for completed populations.
 
-The planner refuses an `http_archive` plan without a per-file checksum and a declared
-`expected_count`, so these fail closed rather than downloading something unverified:
+COCO-QA validates the alignment of its four native text files. OK-VQA joins questions and annotations by question ID and rejects missing, duplicate, orphan, or contradictory image joins. Original LLaVA conversations retain separate identities even when they share image IDs. VSR preserves random/zeroshot split memberships rather than claiming those overlapping configurations are unique examples.
 
-| Dataset | Download | What it needs |
-| --- | --- | --- |
-| `textvqa` | 24.8 MB (two annotation JSONs) | SHA-256 for `TextVQA_0.5.1_{train,val}.json`. Images come from Open Images and are a separate, larger fetch. |
-| `vizwiz` | 1.7 MB (`Annotations.zip`) | SHA-256 for `Annotations.zip`. Images are a separate ~9 GB fetch. |
+HallusionBench's original Google Drive media link returned 404. The pinned LMMs-Lab-Encoder mirror reproduces all 1,129 original annotation rows field-for-field. Its image bytes are pinned by the mirror's shard SHA-256; equivalence to the unavailable original media archive is not established. See [hallusionbench-mirror-verification.json](hallusionbench-mirror-verification.json).
 
-Recording those two checksums is a one-off ~27 MB fetch; that is the smallest next budget ask
-and would add two annotation-only datasets (media referenced, not embedded).
+COCO 2014's recipe covers all 164,062 train/validation/test images and all published train/validation captions, instances and person keypoints. Test annotations remain absent, explicitly marked not released.
 
-## Hugging Face releases that need a format-specific recipe
+## Still incomplete
 
-`hatefulillusion`, `omnispatial`, `pmc-vqa` — the planner reports "no native Arrow/Parquet
-shards in this release". The columnar path cannot be pointed at them; each needs its own
-acquisition recipe. Not attempted.
+- Catalogue-wide coverage is unfinished. The exact current counts are generated in `reports/dataset_coverage.csv` and `reports/final-status.json`; many accessible native formats still need integration and verification.
+- FineVision's approximately 4.65 TB of media and DataComp's approximately 340 GB of metadata are not copied wholesale. Remote Parquet support has real multi-shard evidence, but each source still needs its own layout, population, performance and media verification.
+- Gated releases need authorized files or access. Never-published collections remain `not_applicable`; ambiguous variants retain their identity uncertainty. These are different from missing adapters.
+- No new media publication approval is implied by local acquisition. Public packs remain restricted to the existing approved sources.
 
-## Catalogue-wide state (333 entries)
+The three confirmed catalogue aliases from PR #3 remain `describable-textures-dataset` → `dtd`, `pets` → `oxfordpet`, and `okvqa` → `ok-vqa`. Family mentions are not automatically merged.
 
-| State | Count | Meaning |
-| --- | --- | --- |
-| Previews prepared | 79 | Preview pack built from verified source. |
-| Complete-population indices | 74 | Whole declared population indexed and queryable. |
-| `access: public` | 141 | Public source located; not the same as prepared. |
-| `access: unverified` | 118 | Source page not yet verified against the paper's claim. |
-| `access: gated` | 22 | Registration, licence click-through or request form. |
-| `access: unreleased` | 17 | Paper describes a collection that was never published; `adapter: not_applicable`. |
-| `access: request_required` | 4 | Author contact required. |
-| Other verification states | 28 | Source page public but data link unverified, variant of a base source, etc. |
-
-`scripts/audit_preparation.py` reports 80 entries as plannable and 253 as requiring
-`work/access` material (credentials, manual downloads or a licence acceptance that this tool
-does not click through).
-
-## Duplicate catalogue pairs resolved
-
-Three pairs described the same release under two IDs. Each retired ID is now an alias of the
-canonical entry, recorded as an `alias_resolved_from` relationship plus an
-`alias_redirects` disposition, and old deep links still resolve through the API:
-
-- `describable-textures-dataset` → `dtd`
-- `pets` → `oxfordpet`
-- `okvqa` → `ok-vqa`
-
-## Not done
-
-- No adapter exists for `cifar_c_npy`, COCO-QA (line-aligned files) or OK-VQA (two-file join).
-  Those three datasets cannot be prepared regardless of budget.
-- The 235 entries with no recipe are unchanged apart from the relationship and access-state
-  corrections above; most sit behind gated or unverified sources.
+Additional native recipes now awaiting live verification include all four MMBench v1
+partitions (21,990 circular-evaluation rows), all author CausalGym splits (17,400
+intervention pairs), RAVEL (6,828 entity inventories and 5,011 Wikipedia control prompts),
+What's Up (all six native caption-comparison sets, 4,958 rows), Food-101, CIFAR-100-C,
+and all EMNIST configurations plus its Letters subset. The two EMNIST plans reuse the
+already cached original archive. MMBench's pinned mirror files match the authors'
+evaluation-toolkit MD5s; the original HTTPS endpoint's certificate is expired.

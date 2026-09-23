@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "verified_at_utc": "2026-09-22T06:42:41.329693+00:00",
+  "verified_at_utc": "2026-09-23T04:12:36.058621+00:00",
   "installation": {
-    "installed_module": "/home/bitwise/Documents/vibe/DatasetAtlas/work/verify-install/ui-base-venv/lib/python3.12/site-packages/dataset_atlas/__init__.py",
+    "installed_module": "/home/bitwise/Documents/vibe/DatasetAtlas/work/verify-install/selective-base-venv/lib/python3.12/site-packages/dataset_atlas/__init__.py",
     "optional_model_packages_present": {
       "torch": false,
       "transformers": false,
@@ -11,7 +11,7 @@
       "umap": false,
       "lancedb": false
     },
-    "environment": "Fresh Python 3.12 environment, wheel with base dependencies, HTTP server outside checkout",
+    "environment": "Isolated Python 3.12 base-only environment created this session; current wheel reinstalled, HTTP server outside checkout",
     "http_smoke": {
       "endpoints": {
         "root": {
@@ -21,12 +21,12 @@
         },
         "script": {
           "status": 200,
-          "bytes": 399522,
+          "bytes": 407568,
           "content_type": "text/javascript; charset=utf-8"
         },
         "catalogue": {
           "status": 200,
-          "bytes": 399118,
+          "bytes": 404479,
           "content_type": "application/json"
         },
         "clevr": {
@@ -70,7 +70,7 @@
           "content_type": "application/json"
         }
       },
-      "catalogue_count": 336,
+      "catalogue_count": 333,
       "published_preview_counts": {
         "clevr": 100,
         "eurosat": 100,
@@ -87,8 +87,8 @@
         "pairs": 100
       },
       "archive": "dataset_atlas-0.1.0.tar.gz",
-      "files": 482,
-      "site_bytes": 30473116
+      "files": 524,
+      "site_bytes": 30487419
     },
     "wheel": {
       "approved_media_files": {
@@ -97,24 +97,24 @@
         "pairs": 100
       },
       "archive": "dataset_atlas-0.1.0-py3-none-any.whl",
-      "files": 376,
-      "site_bytes": 30473116
+      "files": 394,
+      "site_bytes": 30487419
     }
   },
   "release_archives": {
     "dataset_atlas-0.1.0.tar.gz": {
-      "bytes": 29515899,
-      "sha256": "59655ac8ed73484da3979331d787b17c2a912fa26ce3db40796923568f09c886"
+      "bytes": 29599072,
+      "sha256": "2f91e4577e10f2ee22f0da8e3e70c5c5b6dd54e7d47073dce7ac1a180ffedc6e"
     },
     "dataset_atlas-0.1.0-py3-none-any.whl": {
-      "bytes": 29253323,
-      "sha256": "f1b6cd90acba3152f9ae71eb0149f5d5752b52e8ce60788d3f6f20fb56aec7b7"
+      "bytes": 29312752,
+      "sha256": "cd191f3c93dd88c216898257f2f885c7a43a74f581a858fa3e3bed578cd97ed4"
     }
   },
   "validation": {
-    "full_python_suite": "191 passed; 2 dependency deprecation warnings",
+    "full_python_suite": "292 passed; 2 dependency deprecation warnings",
     "frontend_tests": "22 passed",
-    "browser_suite": "27 passed; all live local model and analysis checks enabled",
+    "browser_suite": "30 passed in one opt-in browser run, including real analysis and local image send; subsequent native adapter changes covered by Python tests",
     "generated_contract": "byte-identical",
     "no_remote_deployment": true
   },

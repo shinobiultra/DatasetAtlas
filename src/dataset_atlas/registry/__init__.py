@@ -27,6 +27,9 @@ def merge_prepared(baseline: Dataset, prepared: Dataset, recipe_present: bool) -
     merged.adapter=prepared.adapter
     merged.adapter_config=dict(prepared.adapter_config)
     merged.coverage=prepared.coverage.model_copy(deep=True)
+    # Source audits and rights decisions remain registry-owned after preparation.
+    for field in ('identity','source','access','publication'):
+        setattr(merged.coverage,field,getattr(baseline.coverage,field))
     if recipe_present:
         if prepared.description!=baseline.description:merged.description=prepared.description
         if prepared.source_url!=baseline.source_url:merged.source_url=prepared.source_url

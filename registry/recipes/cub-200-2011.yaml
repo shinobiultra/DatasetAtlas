@@ -1,0 +1,29 @@
+release: caltech-cub-200-2011-original
+source_url: https://data.caltech.edu/records/65de6-vp158
+adapter: classic_vision
+expected_count: 11788
+scope: All 11,788 CUB-200-2011 images, original train/test splits, 200 class labels,
+  bounding boxes, 15 parts and 312 per-image attributes. Optional segmentation release
+  is separate.
+source_note: Mirror verified against official Caltech MD5 and pinned mirror SHA-256.
+  Caltech file endpoint returns Cloudflare error 1010 from this host.
+adapter_config:
+  dataset_kind: cub_200_2011
+  archive_preparation: zip-store
+  max_annotation_bytes: 256000000
+files:
+- url: https://huggingface.co/heatingma/pygmtools/resolve/e83ca92a421e0f5431472f9bfd8cb4d6594fdb74/CUB_200_2011.tgz
+  bytes: 1150585339
+  sha256: 0c685df5597a8b24909f6a7c9db6d11e008733779a671760afef78feb49bf081
+  md5: 97eceeb196236b17998738112f37df78
+  source_name: CUB_200_2011.tgz
+  config_key: path
+  format: tgz
+allowed_hosts:
+- huggingface.co
+- cdn-lfs.huggingface.co
+- cdn-lfs-us-1.huggingface.co
+- cdn-lfs-eu-1.huggingface.co
+- cas-bridge.xethub.hf.co
+- us.aws.cdn.hf.co
+- eu.aws.cdn.hf.co

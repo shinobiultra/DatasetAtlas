@@ -12,8 +12,8 @@ adapter: structured
 adapter_config: {}
 coverage:
   identity: candidate
-  source: unverified
-  access: unverified
+  source: verified
+  access: public
   adapter: not_started
   preview: none
   complete_data: unimplemented
@@ -37,3 +37,15 @@ evidence:
   excerpt: T-B/16 + LoRA) — FGVC-Aircraft, Food101, Flowers102,
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
+- kind: implemented_source_release
+  url: https://www.robots.ox.ac.uk/~vgg/data/flowers/102/
+  checked_on: '2026-09-23'
+  recipe: registry/recipes/flowers102.yaml
+  report: reports/selective-acquisition-20260923.md
+  note: Original source release and native records exercised locally. This is not
+    a claim of human rights review or an exact paper-used subset.
+modalities:
+- image
+tasks:
+- image classification
+source_url: https://www.robots.ox.ac.uk/~vgg/data/flowers/102/

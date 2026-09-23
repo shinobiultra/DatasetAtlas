@@ -1,25 +1,61 @@
-# VizWiz-VQA annotations only. The question/answer JSON is 1.7 MB; the image archives
-# (val.zip 3.49 GB, train larger) are not part of this population, so records carry the
-# original image filename as a source field with no local media. Checksum deliberately
-# unpinned until the archive has been fetched once under an approved budget.
-release: vizwiz-vqa-final-annotations
-adapter: annotated_archive
-# Count declared from the VizWiz-VQA release (20,523 train + 4,319 val); verified at preparation.
-expected_count: 24842
-scope: All VizWiz-VQA train and val question records from the official Annotations.zip; images are the separate VizWiz_final image archives and are not acquired here.
+release: vizwiz-final-with-public-test-answers-2026
+adapter: structured_collection
+expected_count: 32842
+scope: All 32,842 VizWiz-VQA train/val/test questions; the test answers are the author-published
+  April 2026 release, not a claim about paper-time access. Original images are fetched
+  selectively from official archives.
+remote_metadata_bytes: 20000000
 adapter_config:
-  annotation_patterns:
-  - train.json
-  - val.json
-  json_mode: list
+  annotations:
+  - path_key: annotations_path
+    member: train.json
+    split: train
+    media_archive: train
+    media_template: train/{image}
+  - path_key: annotations_path
+    member: val.json
+    split: val
+    media_archive: val
+    media_template: val/{image}
+  - path_key: test_path
+    split: test
+    media_archive: test
+    media_template: test/{image}
   mapping:
+    id: image
     question: question
-    text: question
+  remote_cache_root: work/media-cache/ranges
+  remote_archives:
+    train:
+      url: https://vizwiz.cs.colorado.edu/VizWiz_final/images/train.zip
+      bytes: 11298421598
+      etag: '"2a1703b5e-59afdc1e58080"'
+      allowed_hosts:
+      - vizwiz.cs.colorado.edu
+    val:
+      url: https://vizwiz.cs.colorado.edu/VizWiz_final/images/val.zip
+      bytes: 3488913457
+      etag: '"cff49831-59b08b3044b40"'
+      allowed_hosts:
+      - vizwiz.cs.colorado.edu
+    test:
+      url: https://vizwiz.cs.colorado.edu/VizWiz_final/images/test.zip
+      bytes: 3975272799
+      etag: '"ecf1d95f-59afd88518300"'
+      allowed_hosts:
+      - vizwiz.cs.colorado.edu
 files:
 - source_name: Annotations.zip
   url: https://vizwiz.cs.colorado.edu/VizWiz_final/vqa_data/Annotations.zip
   bytes: 1711273
+  sha256: dbc32fc1e3f1b1039aea906030d569d6c238b4ddb2eea5e3453a6a565c829ec9
   format: zip
-  config_key: path
+  config_key: annotations_path
+- source_name: VQA_test.json
+  url: https://vizwiz.cs.colorado.edu/VizWiz_all_answers/VQA_test.json
+  bytes: 8227183
+  sha256: fa113f0e90230ab4690bb41c4d74e40f7087cc7c192dd8363fa4d6bad339b7aa
+  format: json
+  config_key: test_path
 allowed_hosts:
 - vizwiz.cs.colorado.edu

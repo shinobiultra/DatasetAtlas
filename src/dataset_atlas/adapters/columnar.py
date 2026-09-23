@@ -47,6 +47,7 @@ class ColumnarAdapter(EmbeddedParquetAdapter):
         if not self.files or any(not isinstance(f, dict) or len(f.get('sha256', '')) != 64 for f in self.files):
             raise ValueError('Columnar files require paths and SHA-256 checksums')
         self._counts = None
+        self._features = {}
 
     def source_field_types(self):
         """Union schemas across every shard, including columns absent from the preview."""
@@ -136,6 +137,27 @@ class ColumnarAdapter(EmbeddedParquetAdapter):
                 if limit == 0:
                     return
 
+    def _feature_labels(self, entry, row):
+        """Keep ClassLabel meanings scoped to their native shard/configuration."""
+        path = entry['path']
+        if path not in self._features:
+            if entry.get('format', Path(path).suffix[1:]) == 'parquet':
+                schema = pq.read_schema(path)
+            else:
+                with pa.memory_map(path, 'r') as stream:
+                    try: schema = pa.ipc.open_stream(stream).schema
+                    except pa.ArrowInvalid:
+                        stream.seek(0); schema = pa.ipc.open_file(stream).schema
+            metadata = (schema.metadata or {}).get(b'huggingface', b'{}')
+            if len(metadata) > 1_000_000: raise ValueError('Source feature metadata exceeds 1 MB')
+            self._features[path] = json.loads(metadata).get('info', {}).get('features', {})
+        labels = {}
+        for name, feature in self._features[path].items():
+            if not isinstance(feature, dict) or feature.get('_type') != 'ClassLabel': continue
+            value = row.get(name); names = feature.get('names', [])
+            if type(value) is int and 0 <= value < len(names): labels[name] = names[value]
+        return labels
+
     def _record(self, row, ordinal):
         # Source row ordinals across immutable ordered shards are globally unique.
         self.config['mapping'] = {**self.config.get('mapping', {}), 'id': None}
@@ -153,7 +175,8 @@ class ColumnarAdapter(EmbeddedParquetAdapter):
         for entry, count in zip(self.files, self._counts):
             if ordinal < offset + count:
                 record.source['_atlas_origin'] = {'file': entry.get('source_name', Path(entry['path']).name),
-                    'row': ordinal - offset, 'sha256': entry['sha256'], 'split': entry.get('split')}
+                    'row': ordinal - offset, 'sha256': entry['sha256'], 'split': entry.get('split'),
+                    'group': str(Path(entry.get('source_name', '')).parent), 'class_labels': self._feature_labels(entry, row)}
                 break
             offset += count
         return record

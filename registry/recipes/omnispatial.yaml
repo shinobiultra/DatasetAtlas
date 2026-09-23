@@ -1,4 +1,41 @@
-source_url: https://huggingface.co/datasets/qizekun/OmniSpatial
-source_evidence_url: https://raw.githubusercontent.com/qizekun/OmniSpatial/main/README.md
-note: Official repository README links this data release. The plan pins the available
-  revision; paper-specific identity remains separate.
+source_url: https://huggingface.co/datasets/qizekun/OmniSpatial/tree/6691f3288bb1ff207d6ead4d841b505de08a6fd8
+release: 6691f3288bb1ff207d6ead4d841b505de08a6fd8
+adapter: structured_collection
+expected_count: 8431
+scope: All 8,431 questions and their referenced images in the official OmniSpatial-full
+  archive. Train/test archives are alternate partitions of this release, not additional
+  records.
+remote_metadata_bytes: 30000000
+adapter_config:
+  annotations:
+  - remote_archive: full
+    member: OmniSpatial-full/data.json
+    sha256: 5d8ea5ef66287ca22c7e3af860c47362323087327aee4b6c3edf31f8796cb396
+    split: full
+    media_archive: full
+    media_template: OmniSpatial-full/{task_type}/{_stem}.png
+    media_stem_field: id
+  mapping:
+    id: id
+    question: question
+    choices: options
+  remote_archives:
+    full:
+      url: https://huggingface.co/datasets/qizekun/OmniSpatial/resolve/6691f3288bb1ff207d6ead4d841b505de08a6fd8/OmniSpatial-full.zip
+      bytes: 8493093107
+      sha256: 9bdcb56e6263ed94e225d5db9ddf52b19750a0114da43ad048fde700476a6a67
+      etag: '"17ce7978548d35263bd1c08331b09d34f9421fc25e1d9234599be0b703bc4443"'
+      accept_ranges: bytes
+      allowed_hosts:
+      - huggingface.co
+      - cdn-lfs.huggingface.co
+      - cdn-lfs-us-1.huggingface.co
+      - cdn-lfs-eu-1.huggingface.co
+      - cas-bridge.xethub.hf.co
+      - us.aws.cdn.hf.co
+      - eu.aws.cdn.hf.co
+  remote_cache_root: work/media-cache/ranges
+  remote_cache_bytes: 1000000000
+  identity_fields:
+  - task_type
+  - id

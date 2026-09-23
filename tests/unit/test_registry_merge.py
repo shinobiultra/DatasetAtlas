@@ -65,3 +65,11 @@ def test_merge_prepared_is_pure():
     assert (merged.name, merged.aliases, merged.paper_ids) == ('Base', ['B'], ['p'])
     assert (merged.release, merged.snapshot_id, merged.coverage.preview_count) == ('r1', 's1', 7)
     assert baseline.release == 'r0' and prepared.name == 'Renamed by nobody'
+
+
+def test_source_and_access_review_are_not_frozen_by_preparation():
+    baseline=Dataset(id='d',name='Base',coverage={'identity':'resolved','source':'verified','access':'public','publication':'restricted'})
+    prepared=Dataset(id='d',name='Base',coverage={'identity':'candidate','source':'unverified','access':'unverified','publication':'not_reviewed','preview_count':100,'total_count':150,'adapter':'tested'})
+    merged=merge_prepared(baseline,prepared,recipe_present=True)
+    assert (merged.coverage.identity,merged.coverage.source,merged.coverage.access,merged.coverage.publication)==('resolved','verified','public','restricted')
+    assert (merged.coverage.preview_count,merged.coverage.total_count,merged.coverage.adapter)==(100,150,'tested')

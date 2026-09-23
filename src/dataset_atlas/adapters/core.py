@@ -169,7 +169,7 @@ class DatasetAdapter:
         # Large releases may be prepared when the caller has explicitly
         # approved their source-specific budget. The preview default remains
         # 20 MB, and adapters still enforce the approved cap while reading.
-        if not 1 <= limit <= 1000 or not 1 <= max_bytes <= 100_000_000_000:
+        if not 1 <= limit <= 1000 or not 1 <= max_bytes <= 10_000_000_000_000:
             raise ValueError("an explicit positive row and byte budget is required")
         desc = self.probe()
         if not desc.exists:
@@ -770,6 +770,33 @@ class OverlayAdapter(StructuredAdapter):
 
 
 def get_adapter(dataset: Dataset) -> DatasetAdapter:
+    if dataset.adapter == 'emnist_archive':
+        from .emnist import EMNISTAdapter
+        return EMNISTAdapter(dataset)
+    if dataset.adapter == 'ravel':
+        from .ravel import RavelAdapter
+        return RavelAdapter(dataset)
+    if dataset.adapter == 'embedded_tsv':
+        from .embedded_tsv import EmbeddedTSVAdapter
+        return EmbeddedTSVAdapter(dataset)
+    if dataset.adapter == "coco_images":
+        from .coco_images import CocoImagesAdapter
+        return CocoImagesAdapter(dataset)
+    if dataset.adapter == "coco_questions":
+        from .coco_questions import CocoQuestionsAdapter
+        return CocoQuestionsAdapter(dataset)
+    if dataset.adapter == "structured_collection":
+        from .structured_collection import StructuredCollectionAdapter
+        return StructuredCollectionAdapter(dataset)
+    if dataset.adapter == "remote_columnar":
+        from .remote_columnar import RemoteColumnarAdapter
+        return RemoteColumnarAdapter(dataset)
+    if dataset.adapter == "classic_vision":
+        from .classic_vision import ClassicVisionAdapter
+        return ClassicVisionAdapter(dataset)
+    if dataset.adapter == "cifar_c_npy":
+        from .corruptions import CIFARCorruptionsAdapter
+        return CIFARCorruptionsAdapter(dataset)
     if dataset.adapter == "annotated_archive":
         from .annotated_archive import AnnotatedArchiveAdapter
         return AnnotatedArchiveAdapter(dataset)
@@ -896,9 +923,9 @@ def resolve_dataset_asset(dataset: Dataset, asset_ref: str,
 
 def build_preview(dataset: Dataset, output_dir: Path, limit: int = 100,
                   max_bytes: int = 20_000_000, cursor: str | None = None,
-                  distinct_assets: bool = False, include_media: bool = False, max_output_bytes: int | None = None) -> Pack:
+                  distinct_assets: bool = False, include_media: bool = False, max_output_bytes: int | None = None, adapter: DatasetAdapter | None = None) -> Pack:
     """Make a local pack from a bounded plan. Publication is a separate rights gate."""
-    adapter = get_adapter(dataset)
+    adapter = adapter or get_adapter(dataset)
     plan = adapter.plan(limit, max_bytes, cursor)
     source = adapter.prepare(plan)
     records: list[Record] = []

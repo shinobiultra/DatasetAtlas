@@ -1,0 +1,6 @@
+source_url: https://huggingface.co/datasets/cardiffnlp/tweet_eval/tree/b3a375baf0f409c77e6bc7aa35102b7b3534f8be
+scope: All native TweetEval Parquet configurations and train/validation/test splits.
+  Task groups and numeric label definitions differ; retain per-file Hugging Face ClassLabel
+  metadata.
+source_patterns:
+- '*.parquet'

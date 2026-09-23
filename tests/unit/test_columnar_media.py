@@ -50,3 +50,22 @@ def test_undeclared_bytes_fail_on_the_first_row_with_the_column_named(tmp_path):
     source = adapter.prepare(adapter.plan(10, 10_000_000))
     with pytest.raises(ValueError, match='blob.*raw bytes'):
         adapter.iter_records(source)
+
+
+def test_class_labels_are_scoped_to_the_source_shard(tmp_path):
+    import json,hashlib
+    import pyarrow as pa
+    import pyarrow.parquet as pq
+    from dataset_atlas.models import Dataset
+    from dataset_atlas.adapters.columnar import ColumnarAdapter
+    files=[]
+    for group,names in [('sentiment',['negative','neutral','positive']),('irony',['non_irony','irony'])]:
+        path=tmp_path/(group+'.parquet')
+        table=pa.Table.from_pylist([{'text':'native text','label':1}]).replace_schema_metadata({b'huggingface':json.dumps({'info':{'features':{'label':{'_type':'ClassLabel','names':names}}}}).encode()})
+        pq.write_table(table,path)
+        files.append({'path':str(path),'source_name':group+'/test.parquet','sha256':hashlib.sha256(path.read_bytes()).hexdigest()})
+    adapter=ColumnarAdapter(Dataset(id='tasks',name='Tasks',release='r',snapshot_id='s',adapter='columnar',adapter_config={'files':files}))
+    records=adapter.iter_records(adapter.prepare(adapter.plan(2,100000))).records
+    assert [r.source['label'] for r in records]==[1,1]
+    assert [r.source['_atlas_origin']['class_labels']['label'] for r in records]==['neutral','irony']
+    assert [r.source['_atlas_origin']['group'] for r in records]==['sentiment','irony']

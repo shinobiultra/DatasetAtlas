@@ -23,7 +23,7 @@ def main(argv=None):
     datasets=sub.add_parser('datasets').add_subparsers(dest='action',required=True)
     validate=datasets.add_parser('validate');validate.add_argument('--all',action='store_true')
     prepare=datasets.add_parser('prepare');prepare.add_argument('--dataset',required=True);prepare.add_argument('--preview-size',type=int,default=100);prepare.add_argument('--max-bytes',type=int,default=20_000_000);prepare.add_argument('--dry-run',action='store_true')
-    acquire=datasets.add_parser('acquire');acquire.add_argument('--dataset',required=True);acquire.add_argument('--max-download-bytes',type=int,required=True);acquire.add_argument('--max-output-bytes',type=int,required=True);acquire.add_argument('--execute',action='store_true')
+    acquire=datasets.add_parser('acquire');acquire.add_argument('--dataset',required=True);acquire.add_argument('--max-download-bytes',type=int,required=True);acquire.add_argument('--max-output-bytes',type=int,required=True);acquire.add_argument('--execute',action='store_true');acquire.add_argument('--source-mode',choices=['download','selective'],default='download')
     preparation=datasets.add_parser('preparation');preparation.add_argument('--id',required=True);preparation.add_argument('--cancel',action='store_true');preparation.add_argument('--retry',action='store_true')
     preparation.add_argument('--refresh-metadata',metavar='DATASET_ID',help='Re-derive a completed version\'s coverage/evidence from its receipt');preparation.add_argument('--activate',action='store_true',help='With --refresh-metadata: make that version active')
     prune=datasets.add_parser('prune',help='List or remove failed, duplicate and unreferenced prepared versions');prune.add_argument('--execute',action='store_true')
@@ -48,7 +48,7 @@ def main(argv=None):
             registry=Registry(root)
             if args.action=='acquire':
                 from dataset_atlas.preparation import PreparationManager
-                manager=PreparationManager(root);plan=manager.plan(args.dataset,args.max_download_bytes,args.max_output_bytes);emit(plan)
+                manager=PreparationManager(root);plan=manager.plan(args.dataset,args.max_download_bytes,args.max_output_bytes,args.source_mode);emit(plan)
                 if args.execute:emit(manager.start(plan['id']))
             elif args.action=='preparation':
                 from dataset_atlas.preparation import PreparationManager

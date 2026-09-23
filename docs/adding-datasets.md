@@ -21,3 +21,62 @@ EMNIST Balanced demonstrates optional IDX `mapping_file`/`mapping_sha256`/`class
 `embedded_parquet` reads pinned local Parquet files with image `bytes/path` structs, including lists and multiple top-level image columns. Configure `path`, required `sha256`, `media_columns: [image]`, and ordinary `mapping`/`fields`. It preserves original image bytes; source JSON contains path/hash/size metadata instead of binary data. Missing bytes remain visible as missing assets, and repeated image bytes share an asset ID. Row-group access resolves one original image without extracting the whole population. Limits are 10 MB per image, 20 MB of image bytes per record, and 32 images per record. RealWorldQA demonstrates the complete 765-row source and a 100-original-image preview; its two source shards are consolidated with explicit shard/row provenance by `scripts/prepare_visual_sources.py`.
 
 The workbench media endpoint supports HEAD and single HTTP byte ranges. It bounds each original read at 10 MB for images, 100 MB for audio, and 250 MB for video. ZIP-backed videos are currently decompressed as bounded complete members before serving a range, so range support does not imply streaming ZIP decompression. Browsing retains at most 10,000 media-handle metadata entries; requery an old complete-data page after eviction to obtain live handles.
+
+### Full annotations with images on request
+
+Use `structured_collection` for releases with separate split annotations. A recipe can
+map JSON arrays, JSONL records, CSV rows, or a checksummed JSON member in an ETag-pinned
+remote ZIP. Original fields stay in `source`; `_atlas_origin` records split, annotation
+file and identity. Use `identity_fields` for IDs scoped to a category, and
+`identity_prefix` when multiple annotation groups share a split. Never silently discard
+duplicate IDs. Media templates may name multiple images per record. HTTPS ZIP references
+are checked against the complete directory; individual images are checked against a
+SHA-256 or Git blob inventory. ChartQA, TextVQA, VizWiz, HatefulIllusion, OmniSpatial and
+PMC-VQA provide tested recipes. Their exact populations and rights remain distinct.
+
+For native Parquet repositories, choose **Keep Parquet images remote; index annotations
+only** in the preparation dialog, or pass `--source-mode selective` to `atlas datasets
+acquire`. The download limit caps actual range transfers. The prepared-data limit caps
+persisted output; the source remains remote behind a bounded cache. Reading an image may
+require its Parquet row group. Oversized groups require a local shard or a separately
+configured larger media budget; they are never silently truncated.
+
+`classic_vision` supports native CUB-200-2011, Flowers-102 and FGVC-Aircraft annotations;
+Flowers requires the `datasets` extra for MATLAB label files. `cifar_c_npy` addresses
+CIFAR-C arrays directly inside the original uncompressed TAR without executing pickle.
+The optional `archive_preparation: zip-store` copies regular TAR member bytes into a
+random-access derived ZIP, within the approved prepared-data budget. Originals remain
+read-only, and the transformation checksum is recorded separately.
+
+`embedded_tsv` reads native image-bearing benchmark TSVs. Each `tables` entry names
+its `path_key`, split and optional language; source files have pinned checksums.
+The default `index` identifies a row within its table. Numeric `image` values are
+references to another row in that same table, including forward references; missing
+or cyclic references fail before indexing. Base64 payloads stay in the original TSV,
+with byte offsets used for bounded decoding on inspection. Circular permutations
+remain separate examples and share image assets. MMBench's recipe records both the
+mirror SHA-256 and the evaluation toolkit's checksum.
+
+`structured_collection` also supports local ZIP archives via `local_archives` entries
+with a `path_key`. Set `repack_paths` to the configuration keys holding native TARs
+to copy their members into derived stored ZIPs during preparation. All repacked
+archives share the same prepared-data budget, and every checksum is retained in the
+receipt. `array_columns` names fixed-width JSON-array columns; `choices_columns`
+selects their ordered options. `text_parts_field` joins original text segments without
+altering the original arrays. These transformations describe source data; they never
+create replacement examples.
+
+The native `ravel` adapter retains all five author-released domain inventories,
+attribute templates and independent Wikipedia control prompts. Entity splits and
+prompt splits remain separate; absent attribute values remain absent. These source
+inventories are not a model-specific evaluation subset. `classic_vision` additionally
+supports Food-101's native class names and train/test manifests, retaining the
+intentionally noisy training labels.
+
+`emnist_archive` reads NIST's original `gzip.zip`, with explicit configurations and
+train/test counts. Its metadata pass reads only IDX headers and labels. Image access
+lazily decodes one gzip partition under a separate 600 MB default decoded-byte limit;
+only one partition is retained in memory. Native Letters labels start at 1 and its
+mapping retains both character codes. All-six-configuration counts describe overlapping
+configuration memberships. Display PNGs record their transpose; stored pixels are
+unchanged.

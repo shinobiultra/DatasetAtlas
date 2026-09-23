@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-22T09:22:03.021765+00:00",
+  "checked_at": "2026-09-23T04:04:18.960321+00:00",
   "datasets": [
     {
       "dataset_id": "algopuzzlevqa",
@@ -10,6 +10,36 @@
       "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
       "plan_id": "d7290b7a41f1d5598624f81657149d6b13404b911ad651faddb417051a23edc8",
       "prepared_receipt": "work/prepared/algopuzzlevqa/d7290b7a41f1d5598624f81657149d6b13404b911ad651faddb417051a23edc8/receipt.json"
+    },
+    {
+      "dataset_id": "chartqa",
+      "release": "044eabfc306abfe9340c5741f0093aefc5973d06",
+      "snapshot_id": "chartqa-d4e1d2da48323fabcdc28245",
+      "records": 32719,
+      "preview_records": 100,
+      "scope": "All human and augmented train/validation/test questions in the author first-version ChartQA release; bounding-box release is separate.",
+      "plan_id": "92d66748aca98ebf8c5ca09ccc0ffb7309876461545229bf756a91a0d1a7d9cc",
+      "prepared_receipt": "work/prepared/chartqa/92d66748aca98ebf8c5ca09ccc0ffb7309876461545229bf756a91a0d1a7d9cc/receipt.json"
+    },
+    {
+      "dataset_id": "cifar-10-c",
+      "release": "zenodo-2535967-cifar-10-c",
+      "snapshot_id": "cifar-10-c-84a406abd2b8547a4e8bb719",
+      "records": 950000,
+      "preview_records": 100,
+      "scope": "All 19 corruption types at 5 severities over the 10,000 CIFAR-10 test images (950,000 corrupted images) from the official CIFAR-10-C.tar; CIFAR-10-P is a separate file and is not included.",
+      "plan_id": "84a406abd2b8547a4e8bb719b47fd8ed9aba78485c8674bb27f6d185134aeaed",
+      "prepared_receipt": "work/prepared/cifar-10-c/84a406abd2b8547a4e8bb719b47fd8ed9aba78485c8674bb27f6d185134aeaed/receipt.json"
+    },
+    {
+      "dataset_id": "coco-2014",
+      "release": "coco-2014-native-all-image-splits",
+      "snapshot_id": "coco-2014-0b639bf940c97037307f3b69",
+      "records": 164062,
+      "preview_records": 100,
+      "scope": "All 164062 COCO 2014 train/val/test images. Original published train/val captions, instance masks/boxes and person keypoints are joined per image. Test annotations are withheld and remain absent, never counted as zero detections. Images fetched on request.",
+      "plan_id": "0b639bf940c97037307f3b69108298a2db2bf6ba430251a7b89fbac90018735d",
+      "prepared_receipt": "work/prepared/coco-2014/0b639bf940c97037307f3b69108298a2db2bf6ba430251a7b89fbac90018735d/receipt.json"
     },
     {
       "dataset_id": "conceptarc",
@@ -32,6 +62,16 @@
       "prepared_receipt": "work/prepared/counterfact/6cf557976850e03e1d9f7c698b41522fa9fe268f9a7988780d0cc4b046953da4/receipt.json"
     },
     {
+      "dataset_id": "cub-200-2011",
+      "release": "caltech-cub-200-2011-original",
+      "snapshot_id": "cub-200-2011-24d786c47fbc01c79e1386cc",
+      "records": 11788,
+      "preview_records": 100,
+      "scope": "All 11,788 CUB-200-2011 images, original train/test splits, 200 class labels, bounding boxes, 15 parts and 312 per-image attributes. Optional segmentation release is separate.",
+      "plan_id": "24d786c47fbc01c79e1386cc30192ba883a46e4b8c2b3561a8d274faa3fa6832",
+      "prepared_receipt": "work/prepared/cub-200-2011/24d786c47fbc01c79e1386cc30192ba883a46e4b8c2b3561a8d274faa3fa6832/receipt.json"
+    },
+    {
       "dataset_id": "dtd",
       "release": "dtd-r1.0.1",
       "snapshot_id": "dtd-86d68f5ee62fa4c586c07a12",
@@ -52,6 +92,16 @@
       "prepared_receipt": "work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/receipt.json"
     },
     {
+      "dataset_id": "flowers102",
+      "release": "oxford-flowers102-original",
+      "snapshot_id": "flowers102-bf66416e2c87239627de1757",
+      "records": 8189,
+      "preview_records": 100,
+      "scope": "All 8,189 original Oxford Flowers-102 images with source class IDs and train/validation/test membership; optional segmentation images are a separate source.",
+      "plan_id": "bf66416e2c87239627de1757b0cfca135f04eca4fdf5af2c01be13cd52c04416",
+      "prepared_receipt": "work/prepared/flowers102/bf66416e2c87239627de1757b0cfca135f04eca4fdf5af2c01be13cd52c04416/receipt.json"
+    },
+    {
       "dataset_id": "gqa",
       "release": "gqa-v1.2-val-balanced",
       "snapshot_id": "gqa-v1.2-val-balanced-full-media-02ce5c49c793accd",
@@ -60,6 +110,16 @@
       "scope": "official GQA v1.2 val_balanced_questions.json (132,062 examples)",
       "plan_id": "9c85e41ad6950bd1896baad6ea5ef5085af8e85b9823d15e82f484ba733e6f4a",
       "prepared_receipt": "work/prepared/gqa/9c85e41ad6950bd1896baad6ea5ef5085af8e85b9823d15e82f484ba733e6f4a/receipt.json"
+    },
+    {
+      "dataset_id": "hatefulillusion",
+      "release": "b1adce69143ff8bfd52942d5b14f11daeaa827d1",
+      "snapshot_id": "hatefulillusion-b1adce69143ff8bfd52942d5-illusion-and-condition",
+      "records": 2160,
+      "preview_records": 100,
+      "scope": "All digit, hate-slang and hate-symbol records in the pinned author release, with original illusion and condition images available on request.",
+      "plan_id": "907d2829f42c614e03e706161788ca7179eec95f910b5d8d619ce26d9dd04bcf",
+      "prepared_receipt": "work/prepared/hatefulillusion/907d2829f42c614e03e706161788ca7179eec95f910b5d8d619ce26d9dd04bcf/receipt.json"
     },
     {
       "dataset_id": "illuchar",
@@ -82,6 +142,16 @@
       "prepared_receipt": "work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/receipt.json"
     },
     {
+      "dataset_id": "mmstar",
+      "release": "bc98d668301da7b14f648724866e57302778ab27",
+      "snapshot_id": "mmstar-575b7bceafdb3600130af8c3",
+      "records": 1500,
+      "preview_records": 100,
+      "scope": "All 1500 MMStar questions in the author-published native mmstar.parquet, including images, categories, original answers and source metadata.",
+      "plan_id": "575b7bceafdb3600130af8c38d7b1329d97167c7983ff0945f4e882bfec813f8",
+      "prepared_receipt": "work/prepared/mmstar/575b7bceafdb3600130af8c38d7b1329d97167c7983ff0945f4e882bfec813f8/receipt.json"
+    },
+    {
       "dataset_id": "naturalbench",
       "release": "ba41a7d564877a9b64c094b08015ca493cc3e54b",
       "snapshot_id": "naturalbench-3a316bc9ca232b3988341858",
@@ -92,6 +162,16 @@
       "prepared_receipt": "work/prepared/naturalbench/3a316bc9ca232b3988341858c01ea9cc5e73911e52ee0e9a7c23a1adddbe8690/receipt.json"
     },
     {
+      "dataset_id": "omnispatial",
+      "release": "6691f3288bb1ff207d6ead4d841b505de08a6fd8",
+      "snapshot_id": "omnispatial-689646803151cca434269285",
+      "records": 8431,
+      "preview_records": 100,
+      "scope": "All 8,431 questions and their referenced images in the official OmniSpatial-full archive. Train/test archives are alternate partitions of this release, not additional records.",
+      "plan_id": "689646803151cca434269285d100083ab6fc80322c14fd7424fbbb6d9cf82a49",
+      "prepared_receipt": "work/prepared/omnispatial/689646803151cca434269285d100083ab6fc80322c14fd7424fbbb6d9cf82a49/receipt.json"
+    },
+    {
       "dataset_id": "oxfordpet",
       "release": "oxford-iiit-pet-original",
       "snapshot_id": "oxfordpet-c812b4c6a2a467571c2dc4eb",
@@ -100,6 +180,16 @@
       "scope": "All 7,349 annotated Oxford-IIIT Pet images; original trainval and test splits.",
       "plan_id": "c812b4c6a2a467571c2dc4eb5e41b56c12609d9eb79856969396da1e811aebe7",
       "prepared_receipt": "work/prepared/oxfordpet/c812b4c6a2a467571c2dc4eb5e41b56c12609d9eb79856969396da1e811aebe7/receipt.json"
+    },
+    {
+      "dataset_id": "pmc-vqa",
+      "release": "b56ae594f794867893143b337b4118a835794647-v1",
+      "snapshot_id": "pmc-vqa-474c9573c3e9c36f83e3fb74",
+      "records": 228948,
+      "preview_records": 100,
+      "scope": "Original PMC-VQA v1 train and test questions, plus separately identified test_clean evaluation subset. The noncompound-image v2 release is a different representation and is not included.",
+      "plan_id": "474c9573c3e9c36f83e3fb7450de61a89f37f02500c72d4d32be8c5de1c21210",
+      "prepared_receipt": "work/prepared/pmc-vqa/474c9573c3e9c36f83e3fb7450de61a89f37f02500c72d4d32be8c5de1c21210/receipt.json"
     },
     {
       "dataset_id": "puzzlevqa",
@@ -132,6 +222,16 @@
       "prepared_receipt": "work/prepared/simplevqa/8382305d27a65ddcdbc544e102756226f5531bccc9916e3cb0e767b2ebf97be1/receipt.json"
     },
     {
+      "dataset_id": "socialcounterfactuals",
+      "release": "182f8d1739028dc3ab9e9f6be4e1cb52cf5d6fe1",
+      "snapshot_id": "socialcounterfactuals-4b4879de586a143d86e86fed",
+      "records": 170832,
+      "preview_records": 100,
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "plan_id": "4b4879de586a143d86e86fed44badae6be1b3dd9c2afd9ce5767dd75fe34b360",
+      "prepared_receipt": "work/prepared/socialcounterfactuals/4b4879de586a143d86e86fed44badae6be1b3dd9c2afd9ce5767dd75fe34b360/receipt.json"
+    },
+    {
       "dataset_id": "space-10",
       "release": "efd7316ef37efb0fe9a858cc74ef2b2f772a8cda",
       "snapshot_id": "space-10-8c27fa373dff12ed1d31f6bc",
@@ -140,6 +240,36 @@
       "scope": "All eight SpaCE-10 single-choice test subsets (ep, eq, fr, oo, os, sa, sp, sq) at the pinned revision; each record keeps its subset name from the source shard.",
       "plan_id": "8c27fa373dff12ed1d31f6bcb17eb1d8b9bf2316ee760217aad8bc8913bcd741",
       "prepared_receipt": "work/prepared/space-10/8c27fa373dff12ed1d31f6bcb17eb1d8b9bf2316ee760217aad8bc8913bcd741/receipt.json"
+    },
+    {
+      "dataset_id": "textvqa",
+      "release": "textvqa-0.5.1-all-splits",
+      "snapshot_id": "textvqa-5f9d0955c9a06956601ea622",
+      "records": 45336,
+      "preview_records": 100,
+      "scope": "All 45336 original TextVQA 0.5.1 train/val/test questions; original images accessed selectively from the official ZIP archives. Test answers are not part of this release.",
+      "plan_id": "b8060284cb5668c2af463c741aba12eb42343e06ce9f412707734c4efd6b1870",
+      "prepared_receipt": "work/prepared/textvqa/b8060284cb5668c2af463c741aba12eb42343e06ce9f412707734c4efd6b1870/receipt.json"
+    },
+    {
+      "dataset_id": "tweeteval",
+      "release": "b3a375baf0f409c77e6bc7aa35102b7b3534f8be",
+      "snapshot_id": "tweeteval-7ac11a6c7e256513df066eff",
+      "records": 200785,
+      "preview_records": 100,
+      "scope": "All native TweetEval Parquet configurations and train/validation/test splits. Task groups and numeric label definitions differ; retain per-file Hugging Face ClassLabel metadata.",
+      "plan_id": "7ac11a6c7e256513df066eff360bc9f94675cde4c76fc87d36adbb0bf63c192c",
+      "prepared_receipt": "work/prepared/tweeteval/7ac11a6c7e256513df066eff360bc9f94675cde4c76fc87d36adbb0bf63c192c/receipt.json"
+    },
+    {
+      "dataset_id": "vizwiz",
+      "release": "vizwiz-final-with-public-test-answers-2026",
+      "snapshot_id": "vizwiz-f2b6da52c62c9b263496cfef",
+      "records": 32842,
+      "preview_records": 100,
+      "scope": "All 32,842 VizWiz-VQA train/val/test questions; the test answers are the author-published April 2026 release, not a claim about paper-time access. Original images are fetched selectively from official archives.",
+      "plan_id": "be331d65cbb289a69ed7a41362d701a92b8980114c32d9061dac994151083fcb",
+      "prepared_receipt": "work/prepared/vizwiz/be331d65cbb289a69ed7a41362d701a92b8980114c32d9061dac994151083fcb/receipt.json"
     },
     {
       "dataset_id": "waterbirds",
@@ -163,9 +293,9 @@
     }
   ],
   "catalogue_entries": 333,
-  "with_previews": 79,
-  "without_previews": 254,
-  "full_population_indices": 74,
+  "with_previews": 92,
+  "without_previews": 241,
+  "full_population_indices": 87,
   "all_requested_datasets_complete": false,
   "note": "Acquired source populations and on-demand infrastructure; catalogue-wide coverage is not complete."
 }

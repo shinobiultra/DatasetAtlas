@@ -1,4 +1,65 @@
-source_url: https://huggingface.co/datasets/yiting/HatefulIllusion_Dataset
-source_evidence_url: https://raw.githubusercontent.com/TrustAIRLab/HatefulIllusion/main/README.md
-note: Official repository README links this data release. The plan pins the available
-  revision; paper-specific identity remains separate.
+source_url: https://huggingface.co/datasets/yiting/HatefulIllusion_Dataset/resolve/b1adce69143ff8bfd52942d5b14f11daeaa827d1
+release: b1adce69143ff8bfd52942d5b14f11daeaa827d1
+adapter: structured_collection
+expected_count: 2160
+scope: All digit, hate-slang and hate-symbol records in the pinned author release,
+  with original illusion and condition images available on request.
+files:
+- source_name: digits/metadata.jsonl
+  url: https://huggingface.co/datasets/yiting/HatefulIllusion_Dataset/resolve/b1adce69143ff8bfd52942d5b14f11daeaa827d1/digits/metadata.jsonl
+  bytes: 68130
+  sha256: 8f536c9a322c1daa89d53bbf0cd6ab539e1445cb823c0de20555de952943bc4e
+  format: jsonl
+  config_key: digits_path
+- source_name: hate_slangs/metadata.jsonl
+  url: https://huggingface.co/datasets/yiting/HatefulIllusion_Dataset/resolve/b1adce69143ff8bfd52942d5b14f11daeaa827d1/hate_slangs/metadata.jsonl
+  bytes: 166278
+  sha256: c8a2de59603e505476685c93452098fca0a7c3781fc8d0b43b710154b4625a32
+  format: jsonl
+  config_key: hate_slangs_path
+- source_name: hate_symbols/metadata.jsonl
+  url: https://huggingface.co/datasets/yiting/HatefulIllusion_Dataset/resolve/b1adce69143ff8bfd52942d5b14f11daeaa827d1/hate_symbols/metadata.jsonl
+  bytes: 296285
+  sha256: 87caa176cba46567fb367036bc69f6353d45b9ed4db04e43d62efa95a8bc3589
+  format: jsonl
+  config_key: hate_symbols_path
+allowed_hosts: &id001
+- huggingface.co
+- cdn-lfs.huggingface.co
+- cdn-lfs-us-1.huggingface.co
+- cdn-lfs-eu-1.huggingface.co
+- cas-bridge.xethub.hf.co
+- us.aws.cdn.hf.co
+- eu.aws.cdn.hf.co
+adapter_config:
+  annotations:
+  - path_key: digits_path
+    format: jsonl
+    split: digits
+    identity_prefix: digits
+    media_templates:
+    - digits/{image}
+    - digits/{condition_image}
+  - path_key: hate_slangs_path
+    format: jsonl
+    split: hate_slangs
+    identity_prefix: hate_slangs
+    media_templates:
+    - hate_slangs/{image}
+    - hate_slangs/{condition_image}
+  - path_key: hate_symbols_path
+    format: jsonl
+    split: hate_symbols
+    identity_prefix: hate_symbols
+    media_templates:
+    - hate_symbols/{image}
+    - hate_symbols/{condition_image}
+  mapping:
+    text: message
+  media_inventory_path: registry/media/hatefulillusion.json
+  media_inventory_sha256: e09eb926b421f0ca96de7faadfe4d06ceaeaebda91071a2327ac32f106ef946c
+  media_base_url: https://huggingface.co/datasets/yiting/HatefulIllusion_Dataset/resolve/b1adce69143ff8bfd52942d5b14f11daeaa827d1
+  media_allowed_hosts: *id001
+  remote_cache_root: work/media-cache/originals
+  remote_cache_bytes: 1000000000
+snapshot_id: hatefulillusion-b1adce69143ff8bfd52942d5-illusion-and-condition

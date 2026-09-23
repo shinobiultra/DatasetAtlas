@@ -1,0 +1,35 @@
+{
+  "original_url": "https://raw.githubusercontent.com/tianyi-lab/HallusionBench/744007c232c292942c7f80eb61edb2465482da31/HallusionBench.json",
+  "original_sha256": "ca6e0fb677dd56e5fb0e2700d06c58d01f8a6ae66e0f1773b2ac48c0a095d051",
+  "original_rows": 1129,
+  "mirror_repository": "lmms-lab-encoder/HallusionBench",
+  "revision": "cd417161857aefb23d878d42cf1bb53aa9dd646f",
+  "mirror_rows": 1129,
+  "all_original_annotation_fields_equal": true,
+  "compared_fields": [
+    "category",
+    "subcategory",
+    "visual_input",
+    "set_id",
+    "figure_id",
+    "sample_note",
+    "question_id",
+    "question",
+    "gt_answer_details",
+    "gt_answer",
+    "filename"
+  ],
+  "files": [
+    {
+      "file": "data/image-00000-of-00001.parquet",
+      "bytes": 146530754,
+      "sha256": "fd46946fa6b3f15ab8c8e2e0dacf54bc801db7915f17a47cec5ca872f30de2a9"
+    },
+    {
+      "file": "data/non_image-00000-of-00001.parquet",
+      "bytes": 22861,
+      "sha256": "a5e4a0030188432ae0766ae75161e06d74cbe05476db9b98124107e64659d114"
+    }
+  ],
+  "media_integrity": "Mirror bytes verified against pinned Hugging Face SHA-256. Original Google Drive media link returned HTTP 404; media equivalence to the missing original archive is not established."
+}

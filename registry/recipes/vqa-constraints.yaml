@@ -1,0 +1,87 @@
+release: vqa-constraints-0c74e01ea5fb02bbdd90e08f53777d271c44f639
+source_url: https://github.com/microsoft/MLLMInterpret/tree/0c74e01ea5fb02bbdd90e08f53777d271c44f639
+adapter: vqa_constraints
+expected_count: 9463
+remote_metadata_bytes: 20000000
+description: 'VQA-Constraints: all 9,463 released native constraint rows across Multimodal Known (1,204),
+  Multimodal Movies (3,214) and OK-VQA (5,045). Questions and visual/text constraint phrases remain exact;
+  every author-provided image candidate is available with the original pixels.'
+scope: All rows in the three native CSVs at the pinned author repository revision. Directory-based Known/Movies
+  questions retain every released candidate image; COCO references join to original val2014 images. Blank
+  CSV index fields and native strings are retained. Unannotated image folders are counted in the receipt,
+  not fabricated as questions. No unreleased multi-constraint rows, answer labels or historical paper-used
+  image choices are inferred.
+files:
+- source_name: data_multimodal_known.zip
+  url: https://drive.usercontent.google.com/download?id=1YuGAomZdkMBvQBKndTimUFFmIWduahNS&export=download&confirm=t
+  bytes: 1596436363
+  sha256: 9884a80b4a455ab9f8af292edeb0fd945b998768587b84b1316024fb6279fcdc
+  format: zip
+  config_key: known_images_path
+- source_name: data_multimodal_movies.zip
+  url: https://drive.usercontent.google.com/download?id=1n2mBeUyY7K3ZRpXHHH6fWXFWXnf2p0Sw&export=download&confirm=t
+  bytes: 2433473100
+  sha256: 8a9e810f4b4e1a48808ed8353e2add0b9fdf891a227e50294705962d1ed319ff
+  format: zip
+  config_key: movies_images_path
+- source_name: multimodal_known.csv
+  url: https://raw.githubusercontent.com/microsoft/MLLMInterpret/0c74e01ea5fb02bbdd90e08f53777d271c44f639/data_constraints/multimodal_known.csv
+  bytes: 123690
+  sha256: 408dfb50471e22afa4d32d1aeb236c8863f87a68bedadb83ad4c491c53f603bd
+  format: csv
+  config_key: multimodal_known_path
+- source_name: multimodal_movies.csv
+  url: https://raw.githubusercontent.com/microsoft/MLLMInterpret/0c74e01ea5fb02bbdd90e08f53777d271c44f639/data_constraints/multimodal_movies.csv
+  bytes: 324153
+  sha256: 0c2aa8abdeed0577ba8a658128247df44e02df9ffcf170c30d55fe0b570f061e
+  format: csv
+  config_key: multimodal_movies_path
+- source_name: okvqa.csv
+  url: https://raw.githubusercontent.com/microsoft/MLLMInterpret/0c74e01ea5fb02bbdd90e08f53777d271c44f639/data_constraints/okvqa.csv
+  bytes: 510877
+  sha256: d6299025ab9ed2a986908729e31c9b66054548d7003f97372a5fc97d999069b3
+  format: csv
+  config_key: okvqa_path
+allowed_hosts:
+- raw.githubusercontent.com
+- drive.google.com
+- drive.usercontent.google.com
+adapter_config:
+  annotations:
+  - path_key: multimodal_known_path
+    format: csv
+    split: multimodal_known
+  - path_key: multimodal_movies_path
+    format: csv
+    split: multimodal_movies
+  - path_key: okvqa_path
+    format: csv
+    split: okvqa
+    media_paths_field: image_url
+    media_path_remove_prefix: ./
+    media_archive: coco
+  mapping:
+    question: question
+  directory_sources:
+    multimodal_known:
+      archive: known
+      prefix: data_multimodal_known
+    multimodal_movies:
+      archive: movies
+      prefix: data_multimodal_movies
+  local_archives:
+    known:
+      path_key: known_images_path
+    movies:
+      path_key: movies_images_path
+  remote_archives:
+    coco:
+      url: https://s3.amazonaws.com/images.cocodataset.org/zips/val2014.zip
+      bytes: 6645013297
+      etag: '"3925cc4d50eb68d47bf2d6324a012d20-793"'
+      allowed_hosts:
+      - s3.amazonaws.com
+  remote_cache_root: work/media-cache/ranges
+  remote_cache_bytes: 1000000000
+  annotation_transfer_bytes: 20000000
+  max_annotation_bytes: 2000000

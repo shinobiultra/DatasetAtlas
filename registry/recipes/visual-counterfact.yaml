@@ -1,0 +1,13 @@
+source_url: https://huggingface.co/datasets/mgolov/Visual-Counterfact/tree/f8cd0b2335356b0f01a164df0cac7403f56a6c83
+release: f8cd0b2335356b0f01a164df0cac7403f56a6c83
+expected_count: 1220
+source_patterns:
+- data/color-*.parquet
+- data/size-*.parquet
+description: 'Visual CounterFact: all 493 color and 727 size examples in the author release, retaining
+  original and counterfactual image pairs, correct/incorrect answers and object labels.'
+scope: Both full native author splits (1,220 paired examples). This is the released collection, not a
+  claim that the separately mentioned 469-item or 467-item study subsets have been identified.
+adapter_config:
+  mapping:
+    text: object

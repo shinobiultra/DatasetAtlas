@@ -9,6 +9,10 @@ test('on-demand plan shows source population and budgets without starting a down
   await page.goto('/?mode=workbench#/dataset/algopuzzlevqa')
   await page.getByRole('button', { name: 'Prepare full data', exact: true }).click()
   await expect(page.getByRole('region', { name: 'Prepare full dataset' })).toBeVisible()
+  // This already-local small source needs no multi-GB reservation. Keep the
+  // test compatible with a nearly full, correctly enforced workspace budget.
+  await page.getByLabel('Download limit (GB)').fill('0.05')
+  await page.getByLabel('Prepared data limit (GB)').fill('0.05')
   await page.getByRole('button', { name: 'Review preparation plan' }).click()
   await expect(page.getByRole('button', { name: 'Download and prepare', exact: true })).toBeEnabled()
   await expect(page.getByText(/^0 B download/)).toBeVisible()

@@ -31,3 +31,25 @@ def test_archive_member_ids_join_native_hr_and_lr_without_fabricating_images(tmp
     other._remote = adapter._remote
     with pytest.raises(ValueError, match='population differs'):
         other._rows()
+
+
+def test_native_folder_labels_remain_filterable_and_cannot_overwrite_identity(tmp_path):
+    path = tmp_path/'images.zip'
+    with zipfile.ZipFile(path, 'w') as archive:
+        archive.writestr('images/n00000001/example.JPEG', b'fixture')
+    spec = {'member_regex': r'images/(?P<image_id>(?P<class_id>n\d{8})/[^/]+)\.JPEG',
+            'split': 'train', 'variant': 'original', 'role': 'original', 'expected_count': 1,
+            'source_fields': {'class_id': '{class_id}'}, 'etag': '"fixture"'}
+    d = Dataset(id='folders', name='Fixture', adapter='archive_variants', adapter_config={
+        'annotations': [], 'remote_archives': {'images': spec}, 'expected_variants': ['original']})
+    adapter = ArchiveVariantsAdapter(d)
+    adapter._remote = lambda key, budget: _LocalArchive(path, budget)
+    row = adapter.iter_records(adapter.prepare(adapter.plan(10, 100000))).records[0]
+    assert row.source['class_id'] == 'n00000001'
+    assert row.source['native_id'] == 'n00000001/example'
+    for field in ['split', '_atlas_media_refs', 'native_id']:
+        d.adapter_config['remote_archives']['images']['source_fields'] = {field: 'changed'}
+        invalid = ArchiveVariantsAdapter(d)
+        invalid._remote = adapter._remote
+        with pytest.raises(ValueError, match='reserved'):
+            invalid._rows()

@@ -12,6 +12,7 @@ from .core import DatasetAdapter,SourceDescription,RecordBatch,MediaHandle,_nest
 from dataset_atlas.storage import BoundedCache, CacheIdentity, HttpsFetcher
 from urllib.parse import quote, urlsplit
 from dataset_atlas.storage.ranges import HttpsRangeReader, SmallReadBuffer
+from dataset_atlas.storage.multipart import MultipartRangeReader
 
 
 class _LocalArchive(io.BufferedReader):
@@ -162,9 +163,13 @@ class StructuredCollectionAdapter(DatasetAdapter):
                     if entry.get('text_from_first_choice') and choices:value['_atlas_text'] = choices[0]
                 if self.config.get('text_parts_field'):
                     parts = _nested(row, self.config['text_parts_field'])
+                    if self.config.get('text_parts_item_field') and isinstance(parts, list):
+                        parts = [_nested(part, self.config['text_parts_item_field']) for part in parts]
                     if not isinstance(parts, list) or any(not isinstance(part, str) for part in parts):
                         raise ValueError('Text parts field must be an ordered list of strings')
-                    value['_atlas_text'] = ''.join(parts)
+                    separator = self.config.get('text_parts_separator', '')
+                    if not isinstance(separator, str):raise ValueError('Text parts separator must be a string')
+                    value['_atlas_text'] = separator.join(parts)
                 templates=entry.get('media_templates',[entry['media_template']] if entry.get('media_template') else [])
                 variables=dict(row)
                 if entry.get('media_stem_field'):
@@ -212,7 +217,7 @@ class StructuredCollectionAdapter(DatasetAdapter):
                             value['_atlas_absent_conditions'].append(variant['condition'])
                             continue
                         member=_safe_relative(re.sub(r'\{([A-Za-z0-9_]+)\}',lambda match:str(variables[match[1]]),variant['template']))
-                        ref=f'file/{member}'
+                        ref=f"zip/{variant['media_archive']}/{member}" if variant.get('media_archive') else f'file/{member}'
                         if ref in value['_atlas_media_refs']:raise ValueError('Duplicate media variant')
                         target=_nested(row,variant['target_field']) if 'target_field' in variant else variant.get('target')
                         value['_atlas_media_conditions'][ref]={'condition':variant['condition'],'target':target,
@@ -242,6 +247,10 @@ class StructuredCollectionAdapter(DatasetAdapter):
             return _LocalArchive(self.config[self.config['local_archives'][key]['path_key']], budget)
         entry=self.config['remote_archives'][key]
         cache=BoundedCache(self.config['remote_cache_root'],max_bytes=self.config.get('remote_cache_bytes',1_000_000_000))
+        if 'parts' in entry:
+            if sum(part['bytes'] for part in entry['parts']) != entry['bytes']:
+                raise ValueError('Multipart archive size disagrees with its pinned parts')
+            return MultipartRangeReader(entry['parts'],byte_budget=budget,cache=cache,cancel=getattr(self,'cancel',None))
         return HttpsRangeReader(entry['url'],size=entry['bytes'],etag=entry['etag'],allowed_hosts=entry['allowed_hosts'],byte_budget=budget,cache=cache)
 
     def _inventory(self):
@@ -297,7 +306,11 @@ class StructuredCollectionAdapter(DatasetAdapter):
                     continue
                 key=asset.uri.split('/')[1]
                 asset.metadata.update({'representation':'original ZIP member'})
-                if key in self.config.get('remote_archives', {}):asset.metadata['source_etag']=self.config['remote_archives'][key]['etag']
+                if key in self.config.get('remote_archives', {}):
+                    spec=self.config['remote_archives'][key]
+                    if 'parts' in spec:
+                        asset.metadata['source_integrity']='Ordered multipart source; each part has a pinned strong ETag.'
+                    else:asset.metadata['source_etag']=spec['etag']
             source.charge(len(record.model_dump_json().encode()));records.append(record)
         return RecordBatch(records,str(end) if end<len(rows) else None,len(records))
 
@@ -338,11 +351,9 @@ class StructuredCollectionAdapter(DatasetAdapter):
         with self._remote(key,self.config.get('media_transfer_bytes',40_000_000)) as remote:
             # ZIP local headers, names and small image payloads are adjacent.
             # Coalesce their reads instead of making several HTTP round trips.
-            reader = SmallReadBuffer(remote) if isinstance(remote, HttpsRangeReader) else remote
-            with zipfile.ZipFile(reader) as archive:
-                info=archive.getinfo(member)
-                if info.is_dir() or info.file_size>remaining or info.file_size<1:raise ValueError('Remote ZIP image exceeds byte budget')
-                data=archive.read(info)  # ZIP CRC validated by zipfile, including decompression.
+            reader = SmallReadBuffer(remote) if isinstance(remote, (HttpsRangeReader,MultipartRangeReader)) else remote
+            from dataset_atlas.storage.remote_zip import REMOTE_ZIP_MEMBERS
+            data=REMOTE_ZIP_MEMBERS.read(reader,self.config['remote_archives'][key],member,remaining)
         return self._image_handle(source,data,asset_ref)
 
     def _image_handle(self,source,data,asset_ref):

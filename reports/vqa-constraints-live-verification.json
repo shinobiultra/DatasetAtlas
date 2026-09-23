@@ -1,0 +1,2189 @@
+{
+  "checked_at": "2026-09-23T11:13:45.108674+00:00",
+  "status": "passed",
+  "dataset_id": "vqa-constraints",
+  "snapshot_id": "vqa-constraints-7b84c7030382399b53869347",
+  "population_count": 9463,
+  "split_counts": {
+    "multimodal_known": 1204,
+    "multimodal_movies": 3214,
+    "okvqa": 5045
+  },
+  "all_native_csv_fields_and_image_joins_verified": true,
+  "unannotated_image_directories": {
+    "known": [
+      "data_multimodal_known/A photo of Athanasius of Alexandria",
+      "data_multimodal_known/A photo of Francis de Sales",
+      "data_multimodal_known/A photo of Ibrahim Pasha of Egypt",
+      "data_multimodal_known/A photo of Michael Dorn",
+      "data_multimodal_known/A photo of Pope Heraclas of Alexandria",
+      "data_multimodal_known/A photo of The Leftovers"
+    ],
+    "movies": [
+      "data_multimodal_movies/A photo of January 30, 1930"
+    ]
+  },
+  "preview_records_verified": 100,
+  "late_records_verified": 3,
+  "native_image_checks": 195,
+  "sampling": {
+    "method": "sha256_bottom_k_primary_asset",
+    "seed": 0,
+    "unit": "example",
+    "grouping": "primary asset ID; example ID for records without assets",
+    "population": "complete pinned indexed population",
+    "population_count": 9463,
+    "requested_count": 100,
+    "returned_count": 100,
+    "source_revision": "vqa-constraints-0c74e01ea5fb02bbdd90e08f53777d271c44f639",
+    "media_representation": "original",
+    "selection_note": "One hash-ranked example per sampled primary asset. All linked assets remain. Not an example-prevalence estimate."
+  },
+  "checks": [
+    {
+      "record_id": "vqa-constraints:example:2329e09196fb827cbadcbcaa",
+      "native_member": "val2014/COCO_val2014_000000366611.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 286082,
+      "dimensions": [
+        640,
+        478
+      ],
+      "sha256": "3e1171bf28aa4f22505762b05491ac79e81a3f479df7de56f9321594489b8902"
+    },
+    {
+      "record_id": "vqa-constraints:example:cbfbff006b0557b49f1c240f",
+      "native_member": "val2014/COCO_val2014_000000002890.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 257295,
+      "dimensions": [
+        640,
+        491
+      ],
+      "sha256": "32cb46d54d230c65da3152adbf274a9db331d2fd20f7cfe80f9826d1d323672c"
+    },
+    {
+      "record_id": "vqa-constraints:example:98ca4f08ccba0b9e3d36b6a4",
+      "native_member": "data_multimodal_movies/A photo of James Yukich/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 127992,
+      "dimensions": [
+        845,
+        1390
+      ],
+      "sha256": "166302ba8dc28937f2a329eb56d9210c2dcc1f134ec4f922281ed39fe864a61d"
+    },
+    {
+      "record_id": "vqa-constraints:example:98ca4f08ccba0b9e3d36b6a4",
+      "native_member": "data_multimodal_movies/A photo of James Yukich/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 6379,
+      "dimensions": [
+        185,
+        262
+      ],
+      "sha256": "484400d4da6f55f9cb180e58b8c532f5fd6de0725b9439780cd39bd399d67c4c"
+    },
+    {
+      "record_id": "vqa-constraints:example:98ca4f08ccba0b9e3d36b6a4",
+      "native_member": "data_multimodal_movies/A photo of James Yukich/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 19881,
+      "dimensions": [
+        1400,
+        1400
+      ],
+      "sha256": "3c79e72df6daa60d04c7f49239f99c7bbd5f4c25bb7a9f1f6e1310a582884c23"
+    },
+    {
+      "record_id": "vqa-constraints:example:18724cfac14b2334f52006f7",
+      "native_member": "val2014/COCO_val2014_000000574350.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 211889,
+      "dimensions": [
+        640,
+        480
+      ],
+      "sha256": "3005a59da81563b54b4a6bc13b656cce00874ad38a25f5b61ef28b08169a9ac8"
+    },
+    {
+      "record_id": "vqa-constraints:example:18989e560a872ada44f2d879",
+      "native_member": "data_multimodal_known/A photo of 2002 Australian Open/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 152689,
+      "dimensions": [
+        835,
+        1390
+      ],
+      "sha256": "5d5616698a30e9e4c3ed822c2f700e71bde43e99764aa88407bc97612193b26f"
+    },
+    {
+      "record_id": "vqa-constraints:example:18989e560a872ada44f2d879",
+      "native_member": "data_multimodal_known/A photo of 2002 Australian Open/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 111459,
+      "dimensions": [
+        768,
+        1024
+      ],
+      "sha256": "3c38720b04e5861870efa8af2dbbd4889a579331dd7c9dbe6c75f2b5c8e43f6d"
+    },
+    {
+      "record_id": "vqa-constraints:example:18989e560a872ada44f2d879",
+      "native_member": "data_multimodal_known/A photo of 2002 Australian Open/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 273042,
+      "dimensions": [
+        1200,
+        1493
+      ],
+      "sha256": "24e20fe32306753c7f6b7d64adbbcd8b4ea5b9585be8c79559bb6caf85c2d80e"
+    },
+    {
+      "record_id": "vqa-constraints:example:5ec8d0acef537ca1b50704b4",
+      "native_member": "val2014/COCO_val2014_000000453520.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 139948,
+      "dimensions": [
+        640,
+        480
+      ],
+      "sha256": "084ca3b4e1882574838232864be3b9c1dabb9b67b06a6190771adaf811be5c98"
+    },
+    {
+      "record_id": "vqa-constraints:example:15b86cd47618ae0b6cd485e7",
+      "native_member": "data_multimodal_known/A photo of Toulouse/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 346663,
+      "dimensions": [
+        1200,
+        853
+      ],
+      "sha256": "64113709323e19b7acc0b1102085abd23090c0a9e5d9e4e8692dbce2f548c313"
+    },
+    {
+      "record_id": "vqa-constraints:example:15b86cd47618ae0b6cd485e7",
+      "native_member": "data_multimodal_known/A photo of Toulouse/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 220182,
+      "dimensions": [
+        2000,
+        1306
+      ],
+      "sha256": "6e6ee5a4d209e55cdb544e4051bc47db793f5f168d9a58f3b96e3faae92d572d"
+    },
+    {
+      "record_id": "vqa-constraints:example:15b86cd47618ae0b6cd485e7",
+      "native_member": "data_multimodal_known/A photo of Toulouse/Image_3.jpeg",
+      "verification": "native ZIP byte equality",
+      "bytes": 2575954,
+      "dimensions": [
+        3872,
+        2581
+      ],
+      "sha256": "b57661e97a502ece8e35f55f174fc04e8c21c88be232b402a63a29376ed3ec4f"
+    },
+    {
+      "record_id": "vqa-constraints:example:eb6118694eddb4d835fb6a82",
+      "native_member": "val2014/COCO_val2014_000000516798.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 233597,
+      "dimensions": [
+        640,
+        424
+      ],
+      "sha256": "e109915a4098d59ea500e79c61924a6d3429ddfdc17ff104ee03ee01136a6dc8"
+    },
+    {
+      "record_id": "vqa-constraints:example:1f4fa57522f1aff9c5470d5b",
+      "native_member": "val2014/COCO_val2014_000000564940.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 97518,
+      "dimensions": [
+        640,
+        480
+      ],
+      "sha256": "1fba79cd2ce89f567db3e41f1c639c9f1dcdd934ccc743b92418b1e3004a9d1e"
+    },
+    {
+      "record_id": "vqa-constraints:example:29a4820a45f1712377150e21",
+      "native_member": "val2014/COCO_val2014_000000223300.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 99782,
+      "dimensions": [
+        640,
+        426
+      ],
+      "sha256": "1fb619023a10461879dbd5cd18c161752b0c7ae078e19df29182b50c1843dbce"
+    },
+    {
+      "record_id": "vqa-constraints:example:95fa86fb1eb7b6d852ab052b",
+      "native_member": "data_multimodal_movies/A photo of Olivia Wilde/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 544983,
+      "dimensions": [
+        1600,
+        2193
+      ],
+      "sha256": "6465b0ab851a5db9d755f30993ea0f8dfc0eeb640a9e8f7cb8812972b5bba4a9"
+    },
+    {
+      "record_id": "vqa-constraints:example:95fa86fb1eb7b6d852ab052b",
+      "native_member": "data_multimodal_movies/A photo of Olivia Wilde/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 403429,
+      "dimensions": [
+        1200,
+        1946
+      ],
+      "sha256": "331d089df9152aae687acb4231257858ba6a66ad8cc74c817c2228dde7c2e86a"
+    },
+    {
+      "record_id": "vqa-constraints:example:95fa86fb1eb7b6d852ab052b",
+      "native_member": "data_multimodal_movies/A photo of Olivia Wilde/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 679555,
+      "dimensions": [
+        1600,
+        2400
+      ],
+      "sha256": "01c23cd1ac81558201821e8a3589296e0a98f5b4e601497d80e34d207ef16bf0"
+    },
+    {
+      "record_id": "vqa-constraints:example:b0af34e89212abdccf66699a",
+      "native_member": "data_multimodal_movies/A photo of Emile Ardolino/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 57871,
+      "dimensions": [
+        714,
+        1010
+      ],
+      "sha256": "b957cbb82fdc750323991ab60bf5b7ad0c3deb551d5da67ea2f14d60e966b2f6"
+    },
+    {
+      "record_id": "vqa-constraints:example:b0af34e89212abdccf66699a",
+      "native_member": "data_multimodal_movies/A photo of Emile Ardolino/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 204032,
+      "dimensions": [
+        1280,
+        1519
+      ],
+      "sha256": "c52c6a913299665e008f611c68ce236a7e959d84e593a0eaea797383bd0bc5e2"
+    },
+    {
+      "record_id": "vqa-constraints:example:b0af34e89212abdccf66699a",
+      "native_member": "data_multimodal_movies/A photo of Emile Ardolino/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 1064327,
+      "dimensions": [
+        2048,
+        1431
+      ],
+      "sha256": "3f4e7f2621367236082a8283e6f8b3e0ee98139b5cd256d888a2008c5f69c212"
+    },
+    {
+      "record_id": "vqa-constraints:example:e54f0071863565e6c076383c",
+      "native_member": "val2014/COCO_val2014_000000347179.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 119345,
+      "dimensions": [
+        640,
+        421
+      ],
+      "sha256": "9b690e9a5630ef23e05b559524add25ac6a813fb6bfb4b753f7dea39ed2b73d7"
+    },
+    {
+      "record_id": "vqa-constraints:example:63cff4215d6235304232eb50",
+      "native_member": "data_multimodal_movies/A photo of Denis Sanders/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 268209,
+      "dimensions": [
+        1280,
+        1519
+      ],
+      "sha256": "1f14ebeeaec4fcafb930b081f6c5f5b7223ff50bb0de3667f63e3750a6b20687"
+    },
+    {
+      "record_id": "vqa-constraints:example:63cff4215d6235304232eb50",
+      "native_member": "data_multimodal_movies/A photo of Denis Sanders/Image_2.jpeg",
+      "verification": "native ZIP byte equality",
+      "bytes": 31590,
+      "dimensions": [
+        750,
+        422
+      ],
+      "sha256": "67b75384122c7f266b0817dda08ba1358e732148570f0112ffeecac931dc41d3"
+    },
+    {
+      "record_id": "vqa-constraints:example:63cff4215d6235304232eb50",
+      "native_member": "data_multimodal_movies/A photo of Denis Sanders/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 45300,
+      "dimensions": [
+        395,
+        341
+      ],
+      "sha256": "7c9c42845ae1bae994adcba6696461dcfe5b73a7cc20322fbf0ee223f5dc309c"
+    },
+    {
+      "record_id": "vqa-constraints:example:017d09dbbe123c870d448e28",
+      "native_member": "val2014/COCO_val2014_000000337705.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 76452,
+      "dimensions": [
+        640,
+        428
+      ],
+      "sha256": "4179648a30e3048ad2a3f506ab2f2964fb3912edc5dc835b158d26c1ba8573ba"
+    },
+    {
+      "record_id": "vqa-constraints:example:03ff4621d897780df83c1687",
+      "native_member": "val2014/COCO_val2014_000000106330.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 89627,
+      "dimensions": [
+        640,
+        427
+      ],
+      "sha256": "dca8fa3746600f66ac17fc04e6560b485566c4ef8b9d1079319e6ea4d73be7fa"
+    },
+    {
+      "record_id": "vqa-constraints:example:4fdb780141190b5f25241e44",
+      "native_member": "data_multimodal_movies/A photo of Jack Lemmon/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 153694,
+      "dimensions": [
+        709,
+        900
+      ],
+      "sha256": "3849b19e0aa4938032af49f06c2018ee0b6c124b1b506f6b5593e393649c47a8"
+    },
+    {
+      "record_id": "vqa-constraints:example:4fdb780141190b5f25241e44",
+      "native_member": "data_multimodal_movies/A photo of Jack Lemmon/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 873657,
+      "dimensions": [
+        1079,
+        1559
+      ],
+      "sha256": "9694853cdf842e931fc01c3ad2ee3ac5abbabffc348df81b3716f220cbc03bdb"
+    },
+    {
+      "record_id": "vqa-constraints:example:4fdb780141190b5f25241e44",
+      "native_member": "data_multimodal_movies/A photo of Jack Lemmon/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 302260,
+      "dimensions": [
+        2560,
+        2560
+      ],
+      "sha256": "10f7b6aa394354108fcc18a3723d90e7ee921b3b4ec6870d67132aa67c54bcc4"
+    },
+    {
+      "record_id": "vqa-constraints:example:15930dd0607cd466d7f4cc26",
+      "native_member": "data_multimodal_movies/A photo of Vicky Jenson/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 115649,
+      "dimensions": [
+        400,
+        484
+      ],
+      "sha256": "7d1caad679c8d320d12c2df838e856cce41f5c1acabf71a70dabd1d92730e6e2"
+    },
+    {
+      "record_id": "vqa-constraints:example:15930dd0607cd466d7f4cc26",
+      "native_member": "data_multimodal_movies/A photo of Vicky Jenson/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 116542,
+      "dimensions": [
+        768,
+        1152
+      ],
+      "sha256": "f2bdc91fe1bf6c6cae0660a9d5822d3980ab393975e2dbb032bac79864a4f03c"
+    },
+    {
+      "record_id": "vqa-constraints:example:15930dd0607cd466d7f4cc26",
+      "native_member": "data_multimodal_movies/A photo of Vicky Jenson/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 297067,
+      "dimensions": [
+        1080,
+        1440
+      ],
+      "sha256": "a87586b5e886b3bc081774f41142758df6eed5fcb91bf6a4479af85f696631e6"
+    },
+    {
+      "record_id": "vqa-constraints:example:acd06e78e986fe265a578a93",
+      "native_member": "data_multimodal_known/A photo of Polisse/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 260499,
+      "dimensions": [
+        1104,
+        1500
+      ],
+      "sha256": "fec7842f099b06cf7e8604497b06aeed385167932b6dc428c446e3145fdde39d"
+    },
+    {
+      "record_id": "vqa-constraints:example:acd06e78e986fe265a578a93",
+      "native_member": "data_multimodal_known/A photo of Polisse/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 86769,
+      "dimensions": [
+        600,
+        800
+      ],
+      "sha256": "6685a4bdbb946754b6702b154b6534d2cae1e371a9a2676a8501ad4acbb960d7"
+    },
+    {
+      "record_id": "vqa-constraints:example:acd06e78e986fe265a578a93",
+      "native_member": "data_multimodal_known/A photo of Polisse/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 162424,
+      "dimensions": [
+        1000,
+        1359
+      ],
+      "sha256": "d8afc6871e9c3750297be457f8e9eb09a5d8799f4e739ebccd1df4288b085ad6"
+    },
+    {
+      "record_id": "vqa-constraints:example:aa352f6c521dfb63253120f2",
+      "native_member": "val2014/COCO_val2014_000000450993.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 212753,
+      "dimensions": [
+        640,
+        436
+      ],
+      "sha256": "f8e96d4c167a4f013e862ba54eeb046485b6addd45fa0067336fd2068e113837"
+    },
+    {
+      "record_id": "vqa-constraints:example:a953ee24d783df9f01c5d839",
+      "native_member": "val2014/COCO_val2014_000000349185.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 229308,
+      "dimensions": [
+        640,
+        384
+      ],
+      "sha256": "f9e42baa93d36b0bde26d75ff6fbaeaa5ddac090799e5edf692703a7b4339ba9"
+    },
+    {
+      "record_id": "vqa-constraints:example:712cc89fdd443cf89fd29b52",
+      "native_member": "val2014/COCO_val2014_000000189067.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 174409,
+      "dimensions": [
+        640,
+        636
+      ],
+      "sha256": "7900491dd2709ee315f265e6d275ca1b6d2e87e4626ed516dfb5b7ffa304e00f"
+    },
+    {
+      "record_id": "vqa-constraints:example:9408ab63ee2ebf4a9d02ceff",
+      "native_member": "data_multimodal_movies/A photo of Toma\u2560\u00fcs Gutie\u2560\u00fcrrez Alea/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 227752,
+      "dimensions": [
+        1280,
+        1519
+      ],
+      "sha256": "dde23cb1b2bfef58107c09ad356ecef5bdb38ada38957ae5e3ee206b87ab76a8"
+    },
+    {
+      "record_id": "vqa-constraints:example:9408ab63ee2ebf4a9d02ceff",
+      "native_member": "data_multimodal_movies/A photo of Toma\u2560\u00fcs Gutie\u2560\u00fcrrez Alea/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 47691,
+      "dimensions": [
+        500,
+        246
+      ],
+      "sha256": "cb26758e14315f1fbb07818340fdfd46e9502a20d9f7afc12816a7677c207f6d"
+    },
+    {
+      "record_id": "vqa-constraints:example:9408ab63ee2ebf4a9d02ceff",
+      "native_member": "data_multimodal_movies/A photo of Toma\u2560\u00fcs Gutie\u2560\u00fcrrez Alea/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 429186,
+      "dimensions": [
+        1076,
+        810
+      ],
+      "sha256": "bce96aca8052015204843ddce5f2e151b28c31609adf658e7f711b809838f921"
+    },
+    {
+      "record_id": "vqa-constraints:example:22329f2db4ef4380aa7047ef",
+      "native_member": "val2014/COCO_val2014_000000474384.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 176925,
+      "dimensions": [
+        640,
+        444
+      ],
+      "sha256": "f1f266b43b5561b3c79a6fee6f9312c84c9eb92d7b832227716518531636ead6"
+    },
+    {
+      "record_id": "vqa-constraints:example:eed237e64415d9256806a831",
+      "native_member": "data_multimodal_movies/A photo of Kaan Mu\u2560\u00eajdeci/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 106514,
+      "dimensions": [
+        866,
+        1390
+      ],
+      "sha256": "3aefeb5b7bbe814d11dce050f61d9e979056597eb45ef1726252a0fe41eb02fa"
+    },
+    {
+      "record_id": "vqa-constraints:example:eed237e64415d9256806a831",
+      "native_member": "data_multimodal_movies/A photo of Kaan Mu\u2560\u00eajdeci/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 90537,
+      "dimensions": [
+        1000,
+        1500
+      ],
+      "sha256": "ec8aa91bdd662c1786e41b70bad8a37e554d2f2e20781501db529a7c396e1259"
+    },
+    {
+      "record_id": "vqa-constraints:example:eed237e64415d9256806a831",
+      "native_member": "data_multimodal_movies/A photo of Kaan Mu\u2560\u00eajdeci/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 85224,
+      "dimensions": [
+        580,
+        870
+      ],
+      "sha256": "781802c27b11bafc4fd9381f9b715d90d7d4d7519a795c2e0fec56bbe97f2e5e"
+    },
+    {
+      "record_id": "vqa-constraints:example:2c4e7014acdee2c580c0f85f",
+      "native_member": "data_multimodal_movies/A photo of Bodil Ipsen/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 154580,
+      "dimensions": [
+        1280,
+        1519
+      ],
+      "sha256": "5495e26185f584847b1757bf7db912ca934fda8863419e6183354ed8c3440a30"
+    },
+    {
+      "record_id": "vqa-constraints:example:2c4e7014acdee2c580c0f85f",
+      "native_member": "data_multimodal_movies/A photo of Bodil Ipsen/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 173989,
+      "dimensions": [
+        971,
+        1280
+      ],
+      "sha256": "6a72fd1c1c834cc7944a1610f75b10fadb19a403f2e8771d1ce511404a0db553"
+    },
+    {
+      "record_id": "vqa-constraints:example:2c4e7014acdee2c580c0f85f",
+      "native_member": "data_multimodal_movies/A photo of Bodil Ipsen/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 4033,
+      "dimensions": [
+        78,
+        90
+      ],
+      "sha256": "9667248eba3bc807b44563e56f961085d1e5198fbc34f1f1349449ecce449d2f"
+    },
+    {
+      "record_id": "vqa-constraints:example:fd3d6bdfbcf2e68afe400683",
+      "native_member": "val2014/COCO_val2014_000000508731.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 213356,
+      "dimensions": [
+        640,
+        427
+      ],
+      "sha256": "039fe5c39686586c507c6c505dde2aa65d3939e398d611da3fd67fe55570e8d2"
+    },
+    {
+      "record_id": "vqa-constraints:example:6260fc05d5cf42a46a4ef459",
+      "native_member": "val2014/COCO_val2014_000000568846.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 92126,
+      "dimensions": [
+        640,
+        429
+      ],
+      "sha256": "80a40ac5c9eb46657f692874e0b99b721c2894b49eb0bb6d50e91b89e7d1082d"
+    },
+    {
+      "record_id": "vqa-constraints:example:a21cee14f5aeb77392b61c6e",
+      "native_member": "data_multimodal_movies/A photo of Steven Soderbergh/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 208365,
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "sha256": "59aeeb8c5399d81f3d3f4978f77276f93765e87e86b1bf71d6ea4847d058348f"
+    },
+    {
+      "record_id": "vqa-constraints:example:a21cee14f5aeb77392b61c6e",
+      "native_member": "data_multimodal_movies/A photo of Steven Soderbergh/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 259308,
+      "dimensions": [
+        1280,
+        1519
+      ],
+      "sha256": "db2696b03067570f1e19a50ee81dd006929f5024dd7a4e5e398dbfa02029bf8f"
+    },
+    {
+      "record_id": "vqa-constraints:example:a21cee14f5aeb77392b61c6e",
+      "native_member": "data_multimodal_movies/A photo of Steven Soderbergh/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 137035,
+      "dimensions": [
+        950,
+        1427
+      ],
+      "sha256": "fdf0d921bb3da49c3b4469b0b77aa294a600ffc1694b862e2cacaf1d7eb264d1"
+    },
+    {
+      "record_id": "vqa-constraints:example:d262d59b23c7ffd1b9504233",
+      "native_member": "val2014/COCO_val2014_000000141755.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 140186,
+      "dimensions": [
+        640,
+        427
+      ],
+      "sha256": "a01345ea0f7228fbc7e67f1b9fa5a8efb1d72997288e4fe837713432efb374c8"
+    },
+    {
+      "record_id": "vqa-constraints:example:a658655828ab9d2b46ab3bf2",
+      "native_member": "val2014/COCO_val2014_000000507147.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 260680,
+      "dimensions": [
+        500,
+        392
+      ],
+      "sha256": "ca43cfae76974aeca98bf2766952bf2090c2edacc25ce5087653901a6d85be80"
+    },
+    {
+      "record_id": "vqa-constraints:example:2327e0e97c70bfde479505db",
+      "native_member": "val2014/COCO_val2014_000000144252.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 186257,
+      "dimensions": [
+        640,
+        426
+      ],
+      "sha256": "401cfdb161a0831ecc1a3f044b1cb5f3375f9eaa21aa278bf4e96c53809b16e4"
+    },
+    {
+      "record_id": "vqa-constraints:example:14cf2ac6b1a2113567f3e2c0",
+      "native_member": "data_multimodal_movies/A photo of George Kirby/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 398987,
+      "dimensions": [
+        2000,
+        1333
+      ],
+      "sha256": "bb17f09d20db97bec178e221dbfd9b4e6b93289718ed0ec22ee0d2e691ed8ba8"
+    },
+    {
+      "record_id": "vqa-constraints:example:14cf2ac6b1a2113567f3e2c0",
+      "native_member": "data_multimodal_movies/A photo of George Kirby/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 141349,
+      "dimensions": [
+        1280,
+        720
+      ],
+      "sha256": "6c30195d283e4f855dadd7cc63beabce52c998e1efbd4f463a36202bf51aab82"
+    },
+    {
+      "record_id": "vqa-constraints:example:14cf2ac6b1a2113567f3e2c0",
+      "native_member": "data_multimodal_movies/A photo of George Kirby/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 99496,
+      "dimensions": [
+        1200,
+        800
+      ],
+      "sha256": "6eabcf9ed3447a08572d72667e0bb4d036e263e5efeeaadb6b4a6b5ba46dc5a3"
+    },
+    {
+      "record_id": "vqa-constraints:example:2e957779dfe87cbfe557eb97",
+      "native_member": "val2014/COCO_val2014_000000020070.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 39954,
+      "dimensions": [
+        500,
+        375
+      ],
+      "sha256": "83b01b990b9502957d9c3701d1f9bdbf6e47c03e4c20540febb7b2ce4fe3e7fe"
+    },
+    {
+      "record_id": "vqa-constraints:example:d379034b7c67b88b9afca8d8",
+      "native_member": "val2014/COCO_val2014_000000314792.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 92460,
+      "dimensions": [
+        640,
+        480
+      ],
+      "sha256": "59a8eb51c6e3ead9ebe003b615c48f9bd6327ffb4e5ffe3c691a0d1e785cf606"
+    },
+    {
+      "record_id": "vqa-constraints:example:0226305209cc2efcb0fe606d",
+      "native_member": "data_multimodal_known/A photo of Chris Stringer/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 50085,
+      "dimensions": [
+        718,
+        718
+      ],
+      "sha256": "185c13800cba4e0497ba0f8f5057d4c690ebd9959fcf3328fc27ad99f6f1f033"
+    },
+    {
+      "record_id": "vqa-constraints:example:0226305209cc2efcb0fe606d",
+      "native_member": "data_multimodal_known/A photo of Chris Stringer/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 28055,
+      "dimensions": [
+        186,
+        279
+      ],
+      "sha256": "08f405b8be49810bf2401344ddf4668e4e3b257c4fdb6fa1c1cc23d2b04a948f"
+    },
+    {
+      "record_id": "vqa-constraints:example:0226305209cc2efcb0fe606d",
+      "native_member": "data_multimodal_known/A photo of Chris Stringer/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 130044,
+      "dimensions": [
+        720,
+        1024
+      ],
+      "sha256": "307237a69684c94521d82feab8bfc31ac34ff4236bd297931d90776f51637c3d"
+    },
+    {
+      "record_id": "vqa-constraints:example:0fc40ea767f6b3bce5af745f",
+      "native_member": "val2014/COCO_val2014_000000007386.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 211976,
+      "dimensions": [
+        600,
+        400
+      ],
+      "sha256": "1bb19f0a2a950a944d178c921fddaddda6f133df6367e9f75ffcaafe2cd43f83"
+    },
+    {
+      "record_id": "vqa-constraints:example:c55c6e2c258adf617b0f75bd",
+      "native_member": "val2014/COCO_val2014_000000395531.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 172226,
+      "dimensions": [
+        500,
+        375
+      ],
+      "sha256": "93cecf51476c12e581f5d06d46640a1433172a52b046243561b0d218cf2c9f69"
+    },
+    {
+      "record_id": "vqa-constraints:example:6b797fa11194b9006a3e01e0",
+      "native_member": "val2014/COCO_val2014_000000147653.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 184345,
+      "dimensions": [
+        640,
+        501
+      ],
+      "sha256": "5e431acb4b87135cb9d00f078fcf0a5f4c20806cd31c46f5e7b2658865f1d58e"
+    },
+    {
+      "record_id": "vqa-constraints:example:e34932b359453e22c5e3c084",
+      "native_member": "data_multimodal_movies/A photo of Kurt Wimmer/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 131754,
+      "dimensions": [
+        630,
+        1200
+      ],
+      "sha256": "c01486ff1e51ddddfe5adcb53da6871e307607d0f91f796600999dd438617028"
+    },
+    {
+      "record_id": "vqa-constraints:example:e34932b359453e22c5e3c084",
+      "native_member": "data_multimodal_movies/A photo of Kurt Wimmer/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 289949,
+      "dimensions": [
+        1080,
+        1440
+      ],
+      "sha256": "5a077a4c471609d27800bfadb71e6eaf8de993f15f5b0b097cad1717f5a35766"
+    },
+    {
+      "record_id": "vqa-constraints:example:e34932b359453e22c5e3c084",
+      "native_member": "data_multimodal_movies/A photo of Kurt Wimmer/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 192726,
+      "dimensions": [
+        600,
+        900
+      ],
+      "sha256": "c5bdbb918a2049e07906d7374f20e88acaa4b31187c25f3ff9fccf5ebd9357c2"
+    },
+    {
+      "record_id": "vqa-constraints:example:b44baba412a01295cca76f3a",
+      "native_member": "data_multimodal_known/A photo of Kyo\u2560\u00e4to Prefecture/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 316674,
+      "dimensions": [
+        2400,
+        1350
+      ],
+      "sha256": "f5b72aa220fb696e9407c373bd4cf6aef48db170702503a9ec7842be80d3f01b"
+    },
+    {
+      "record_id": "vqa-constraints:example:b44baba412a01295cca76f3a",
+      "native_member": "data_multimodal_known/A photo of Kyo\u2560\u00e4to Prefecture/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 552476,
+      "dimensions": [
+        2121,
+        1414
+      ],
+      "sha256": "6a275ccfb4fbedce38a991bdbf766cb486b888a606906f7f26f21248bc43b324"
+    },
+    {
+      "record_id": "vqa-constraints:example:b44baba412a01295cca76f3a",
+      "native_member": "data_multimodal_known/A photo of Kyo\u2560\u00e4to Prefecture/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 1030813,
+      "dimensions": [
+        3072,
+        2049
+      ],
+      "sha256": "6414085a8adf9846e25d1925a3468124ab58c17864067337c71c771e62fdccc6"
+    },
+    {
+      "record_id": "vqa-constraints:example:f27fe4ed879ba00921effb44",
+      "native_member": "val2014/COCO_val2014_000000094922.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 191783,
+      "dimensions": [
+        500,
+        480
+      ],
+      "sha256": "fb228651effa74cd480edfefd7e904eef5a2c75bcd715698a13356c488c1b56f"
+    },
+    {
+      "record_id": "vqa-constraints:example:fb6a32d6d8fa22d2a5a95278",
+      "native_member": "val2014/COCO_val2014_000000122851.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 236223,
+      "dimensions": [
+        640,
+        427
+      ],
+      "sha256": "66611effe0476677e3b3897022021bba92b2882e1808e3dcd91977c8f4aa11d6"
+    },
+    {
+      "record_id": "vqa-constraints:example:1155925ff58c45f880a7043b",
+      "native_member": "data_multimodal_movies/A photo of Richard Donner/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 167061,
+      "dimensions": [
+        1070,
+        1600
+      ],
+      "sha256": "4df7d94aadf275df9b4b76637a1351336d8c19871438c8d36ecb4d9f17336675"
+    },
+    {
+      "record_id": "vqa-constraints:example:1155925ff58c45f880a7043b",
+      "native_member": "data_multimodal_movies/A photo of Richard Donner/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 44818,
+      "dimensions": [
+        600,
+        900
+      ],
+      "sha256": "6c481dfaeb23e51560b8b12964cf4bc7dbb05f9431c472d3c5953f9e86c04d0f"
+    },
+    {
+      "record_id": "vqa-constraints:example:1155925ff58c45f880a7043b",
+      "native_member": "data_multimodal_movies/A photo of Richard Donner/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 38012,
+      "dimensions": [
+        779,
+        519
+      ],
+      "sha256": "34f76711b28033bc8da534ec59d0a025241ba57e07aee737c98f8c69b3b91554"
+    },
+    {
+      "record_id": "vqa-constraints:example:ed5a1bc86a1bf94cc6cefe93",
+      "native_member": "val2014/COCO_val2014_000000552866.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 221895,
+      "dimensions": [
+        640,
+        427
+      ],
+      "sha256": "39f88de787b869527998f54adc31c87cd9f28dc6ff1c273405c93199915e80fd"
+    },
+    {
+      "record_id": "vqa-constraints:example:d4288cc15ce63ab7222ef3be",
+      "native_member": "data_multimodal_known/A photo of John XXIII/Image_1.JPG",
+      "verification": "native ZIP byte equality",
+      "bytes": 254679,
+      "dimensions": [
+        1062,
+        1600
+      ],
+      "sha256": "1b9e5a2d4f812b551d329762d7db4387395a20d544a9a66bc631553608a86744"
+    },
+    {
+      "record_id": "vqa-constraints:example:d4288cc15ce63ab7222ef3be",
+      "native_member": "data_multimodal_known/A photo of John XXIII/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 1841694,
+      "dimensions": [
+        1710,
+        1666
+      ],
+      "sha256": "0e65e0d09a430767dff2e0fe7d81db5a93967e92d000ddd611dee07a236573b9"
+    },
+    {
+      "record_id": "vqa-constraints:example:d4288cc15ce63ab7222ef3be",
+      "native_member": "data_multimodal_known/A photo of John XXIII/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 601677,
+      "dimensions": [
+        1658,
+        2300
+      ],
+      "sha256": "083ecebcf6c9d538d1874572c830e519e1830accd0c53fca56b935eeb7059100"
+    },
+    {
+      "record_id": "vqa-constraints:example:ae29e95cb6eb1767c246227f",
+      "native_member": "data_multimodal_movies/A photo of Claire Denis/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 276700,
+      "dimensions": [
+        1333,
+        2001
+      ],
+      "sha256": "64527cb69e9da37141d3ed9408b618af4eb4968b707ad5ef455e79c703cb23a6"
+    },
+    {
+      "record_id": "vqa-constraints:example:ae29e95cb6eb1767c246227f",
+      "native_member": "data_multimodal_movies/A photo of Claire Denis/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 481472,
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "sha256": "9f6142180eac7abbaf3bdcf4ea0b48ac914ceeb099afe8223b1719608a2db814"
+    },
+    {
+      "record_id": "vqa-constraints:example:ae29e95cb6eb1767c246227f",
+      "native_member": "data_multimodal_movies/A photo of Claire Denis/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 127372,
+      "dimensions": [
+        950,
+        1426
+      ],
+      "sha256": "98b11e97cf259dcec1c9ee5a7367a53818084d72f98668f99c5545211837bc45"
+    },
+    {
+      "record_id": "vqa-constraints:example:65c548831a54e2a4b618f1c7",
+      "native_member": "val2014/COCO_val2014_000000282980.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 188764,
+      "dimensions": [
+        640,
+        427
+      ],
+      "sha256": "a38b966def2a4b8b485ef4a6d38ac2755332bf59086881498b42013c6060f8bf"
+    },
+    {
+      "record_id": "vqa-constraints:example:c2b8fa386bcbda8120255772",
+      "native_member": "data_multimodal_movies/A photo of Mark Jones/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 638926,
+      "dimensions": [
+        1939,
+        1253
+      ],
+      "sha256": "7ab9a30608a549cbae38d6cf0913394c8bc49ec9331af83bddba59885e714511"
+    },
+    {
+      "record_id": "vqa-constraints:example:c2b8fa386bcbda8120255772",
+      "native_member": "data_multimodal_movies/A photo of Mark Jones/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 212373,
+      "dimensions": [
+        1804,
+        1707
+      ],
+      "sha256": "f53949f3275abdea07e11d16442cea43082c71609d9c9bed17982a311e10a6ac"
+    },
+    {
+      "record_id": "vqa-constraints:example:c2b8fa386bcbda8120255772",
+      "native_member": "data_multimodal_movies/A photo of Mark Jones/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 206979,
+      "dimensions": [
+        1600,
+        1067
+      ],
+      "sha256": "938fe752b8156dec9b06bd739745158bfa222fd27530fb10deaff5570db6b1e4"
+    },
+    {
+      "record_id": "vqa-constraints:example:d76cbc8935d5373a398196ca",
+      "native_member": "data_multimodal_movies/A photo of Michael Mann/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 411027,
+      "dimensions": [
+        1536,
+        2048
+      ],
+      "sha256": "2ecda73fa8dc4c75f2a09cbcb643b6d58fab708b591db0e2b3d9ca25d933dd19"
+    },
+    {
+      "record_id": "vqa-constraints:example:d76cbc8935d5373a398196ca",
+      "native_member": "data_multimodal_movies/A photo of Michael Mann/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 128317,
+      "dimensions": [
+        1200,
+        1600
+      ],
+      "sha256": "309f702e2af61e408f8c8e70b4936423c39be73ab1f008e7931f58391488fcc6"
+    },
+    {
+      "record_id": "vqa-constraints:example:d76cbc8935d5373a398196ca",
+      "native_member": "data_multimodal_movies/A photo of Michael Mann/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 246440,
+      "dimensions": [
+        1234,
+        1646
+      ],
+      "sha256": "572fbc44aeb964722e11d7cc38d067baebb1e3aacdc725f41c78c63addcb5aff"
+    },
+    {
+      "record_id": "vqa-constraints:example:4dbc9f47f71d178456066ae4",
+      "native_member": "val2014/COCO_val2014_000000155885.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 105127,
+      "dimensions": [
+        500,
+        346
+      ],
+      "sha256": "6deebe54595c32afc959b7f3f88bba76a5c078c2f259fe7db02ecfc5d691927a"
+    },
+    {
+      "record_id": "vqa-constraints:example:882001223836a288988d2777",
+      "native_member": "val2014/COCO_val2014_000000070334.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 370670,
+      "dimensions": [
+        640,
+        480
+      ],
+      "sha256": "2005b6cf5e4faad8755f994972957e1d158893729021d23860baf8941b65d977"
+    },
+    {
+      "record_id": "vqa-constraints:example:bba63ff7f8daca180b21340e",
+      "native_member": "val2014/COCO_val2014_000000544432.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 204474,
+      "dimensions": [
+        640,
+        479
+      ],
+      "sha256": "acbee937567b65dad8bca6d29872eaa451cf230650d443fdcb01dc3b5c3df624"
+    },
+    {
+      "record_id": "vqa-constraints:example:d60face97bcb05940adbfba7",
+      "native_member": "data_multimodal_movies/A photo of Louis de Fune\u2560\u00c7s/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 253862,
+      "dimensions": [
+        1280,
+        1024
+      ],
+      "sha256": "455f834ca8e91c88dfd70271a2747b857a47bfdd7f61d76637828a7a583b6d89"
+    },
+    {
+      "record_id": "vqa-constraints:example:d60face97bcb05940adbfba7",
+      "native_member": "data_multimodal_movies/A photo of Louis de Fune\u2560\u00c7s/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 714276,
+      "dimensions": [
+        2205,
+        3035
+      ],
+      "sha256": "66a567bcbf3d860e5f0bd7a9d51f55c19c8623b99f093181eb723fa3da444930"
+    },
+    {
+      "record_id": "vqa-constraints:example:d60face97bcb05940adbfba7",
+      "native_member": "data_multimodal_movies/A photo of Louis de Fune\u2560\u00c7s/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 624081,
+      "dimensions": [
+        1937,
+        2906
+      ],
+      "sha256": "c710a20a973f137ec9d3f3b198476b06f483a3894f206aab931d8d4c783b97ca"
+    },
+    {
+      "record_id": "vqa-constraints:example:b6d6ec78d255fef315a08368",
+      "native_member": "data_multimodal_movies/A photo of Ilya Naishuller/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 58242,
+      "dimensions": [
+        388,
+        472
+      ],
+      "sha256": "efba9e6d63a32eb060d526ad8dc3f4f35a34e5514902b59f108896783f7a5dd9"
+    },
+    {
+      "record_id": "vqa-constraints:example:b6d6ec78d255fef315a08368",
+      "native_member": "data_multimodal_movies/A photo of Ilya Naishuller/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 42253,
+      "dimensions": [
+        600,
+        900
+      ],
+      "sha256": "679bc095281a8baec63ba160e9901e5ec24739da6147842e9fe2ffcca17b8d1a"
+    },
+    {
+      "record_id": "vqa-constraints:example:b6d6ec78d255fef315a08368",
+      "native_member": "data_multimodal_movies/A photo of Ilya Naishuller/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 120764,
+      "dimensions": [
+        1000,
+        1000
+      ],
+      "sha256": "75f334ee326579af5dc7ca83b7e10e5c19b60bb56e5326621fecb9ecf5233f48"
+    },
+    {
+      "record_id": "vqa-constraints:example:c995f51d63a39b58c0caec06",
+      "native_member": "val2014/COCO_val2014_000000319073.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 165055,
+      "dimensions": [
+        640,
+        427
+      ],
+      "sha256": "1a48b9a6fce7609b8fedeab5646494a008e306eacc76bb36bdbf87658b9c044c"
+    },
+    {
+      "record_id": "vqa-constraints:example:a44621d4cb4ac667a1fd212a",
+      "native_member": "val2014/COCO_val2014_000000086001.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 121068,
+      "dimensions": [
+        640,
+        529
+      ],
+      "sha256": "04f82f09a6893be037a04493569462b7f5dd57ac2d5040f76f075319541a7b7e"
+    },
+    {
+      "record_id": "vqa-constraints:example:978c1a71184d86e415433eb5",
+      "native_member": "data_multimodal_known/A photo of La Jornada/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 121832,
+      "dimensions": [
+        750,
+        1051
+      ],
+      "sha256": "e81930d64f0874a2c3f34d60579e5253c3a2cb9e10c93ad2ad6bea0d3272b1ae"
+    },
+    {
+      "record_id": "vqa-constraints:example:978c1a71184d86e415433eb5",
+      "native_member": "data_multimodal_known/A photo of La Jornada/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 134415,
+      "dimensions": [
+        750,
+        1054
+      ],
+      "sha256": "7d5639514754b04fdc16de4942018f422481182d7e25dad55f7bd3c8503be4ea"
+    },
+    {
+      "record_id": "vqa-constraints:example:978c1a71184d86e415433eb5",
+      "native_member": "data_multimodal_known/A photo of La Jornada/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 140055,
+      "dimensions": [
+        750,
+        1051
+      ],
+      "sha256": "d218e4a4dd3a3a500cbef5cdc935d2ab72774eb1ecbfa89d40f3d61ef9003ecf"
+    },
+    {
+      "record_id": "vqa-constraints:example:b1b76ce2eb24ca12c123d4c6",
+      "native_member": "val2014/COCO_val2014_000000002972.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 209181,
+      "dimensions": [
+        640,
+        480
+      ],
+      "sha256": "711224bd85600cd8007c40d89bb917b00172f2cc7479a7fa3de0f6a0d4c2828d"
+    },
+    {
+      "record_id": "vqa-constraints:example:acbc71d885e0ab9774e2f16b",
+      "native_member": "val2014/COCO_val2014_000000569314.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 246099,
+      "dimensions": [
+        640,
+        480
+      ],
+      "sha256": "2e421e2740a8db77ff331f614253c5efdd4ef7ac9a0d70a80674e05f6771b18d"
+    },
+    {
+      "record_id": "vqa-constraints:example:ed41e17caf9917f56f262780",
+      "native_member": "val2014/COCO_val2014_000000083656.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 78166,
+      "dimensions": [
+        640,
+        480
+      ],
+      "sha256": "81ce5d53a3f357a843a87e36c4287e5036888d436ec6a6314e80cd30a9acf921"
+    },
+    {
+      "record_id": "vqa-constraints:example:5ae3811f1cde6c71c334dff5",
+      "native_member": "val2014/COCO_val2014_000000139734.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 120178,
+      "dimensions": [
+        612,
+        612
+      ],
+      "sha256": "c19f4d6e273664dab13129fd507813306aed2da8c647da685b9ae1a01a246bb1"
+    },
+    {
+      "record_id": "vqa-constraints:example:7acf4ac6491e0c25f9dbfd41",
+      "native_member": "val2014/COCO_val2014_000000071933.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 78306,
+      "dimensions": [
+        500,
+        333
+      ],
+      "sha256": "6eeb393ff9349b17c6212962710277a1e124faa65bfb7d2e5eca303f0472985c"
+    },
+    {
+      "record_id": "vqa-constraints:example:09309c269235c961e2a62146",
+      "native_member": "data_multimodal_movies/A photo of Kaneto Shindo\u2560\u00e4/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 16220,
+      "dimensions": [
+        387,
+        580
+      ],
+      "sha256": "40b7e053769b5857d14d200dbd00a7d85d27d01163cc69e87d35b1f3d94f1a3d"
+    },
+    {
+      "record_id": "vqa-constraints:example:09309c269235c961e2a62146",
+      "native_member": "data_multimodal_movies/A photo of Kaneto Shindo\u2560\u00e4/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 144954,
+      "dimensions": [
+        740,
+        1110
+      ],
+      "sha256": "b60601d7011a4ec306815a4126a5b0065768f8bd2af49d2c4072a6fb2365b33f"
+    },
+    {
+      "record_id": "vqa-constraints:example:09309c269235c961e2a62146",
+      "native_member": "data_multimodal_movies/A photo of Kaneto Shindo\u2560\u00e4/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 53227,
+      "dimensions": [
+        794,
+        514
+      ],
+      "sha256": "5bf38be878dd7b37a55a5632e279328b49b131dda11164a74ffc69e7e2bc913a"
+    },
+    {
+      "record_id": "vqa-constraints:example:d896c39841769a7fb7c413fb",
+      "native_member": "data_multimodal_movies/A photo of David S. Ward/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 199266,
+      "dimensions": [
+        1280,
+        1519
+      ],
+      "sha256": "2067a7c5456ba0f6471073b8f14509239c487b42b1a751c486e9d26fceb7ed12"
+    },
+    {
+      "record_id": "vqa-constraints:example:d896c39841769a7fb7c413fb",
+      "native_member": "data_multimodal_movies/A photo of David S. Ward/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 69108,
+      "dimensions": [
+        1000,
+        662
+      ],
+      "sha256": "003bbe86ba01d849e6e102d3adf2df979f89f3ffe6aa35ba6c6b85ece647d95b"
+    },
+    {
+      "record_id": "vqa-constraints:example:d896c39841769a7fb7c413fb",
+      "native_member": "data_multimodal_movies/A photo of David S. Ward/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 1056131,
+      "dimensions": [
+        3500,
+        2280
+      ],
+      "sha256": "7016a50e1e34f98f256b6a3478ed526ddb9ecaeef43aa3f5115e9441f19c46a1"
+    },
+    {
+      "record_id": "vqa-constraints:example:f7ea1711a46c90517ca973d5",
+      "native_member": "data_multimodal_movies/A photo of Liev Schreiber/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 216132,
+      "dimensions": [
+        1151,
+        1600
+      ],
+      "sha256": "7ef5b49caea35c8d8793b758c5d388bc93e2dffb398cbdf86c1a0a514e9fa5b5"
+    },
+    {
+      "record_id": "vqa-constraints:example:f7ea1711a46c90517ca973d5",
+      "native_member": "data_multimodal_movies/A photo of Liev Schreiber/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 152241,
+      "dimensions": [
+        683,
+        1024
+      ],
+      "sha256": "62f6aae523c6ea3498afb8fd688f436506ddb1317e1df30c5a723dccb03feb10"
+    },
+    {
+      "record_id": "vqa-constraints:example:f7ea1711a46c90517ca973d5",
+      "native_member": "data_multimodal_movies/A photo of Liev Schreiber/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 155591,
+      "dimensions": [
+        740,
+        1114
+      ],
+      "sha256": "5b38a0c2474688bab2e1ee54d79fd562f94692e6bc2017d4cb2812697ff95cb6"
+    },
+    {
+      "record_id": "vqa-constraints:example:bc67cc39101520e40d0372aa",
+      "native_member": "data_multimodal_known/A photo of Jean-Pierre Van Rossem/Image_1.jpeg",
+      "verification": "native ZIP byte equality",
+      "bytes": 50459,
+      "dimensions": [
+        680,
+        425
+      ],
+      "sha256": "dbf8bc56702d24795fc56dbdedfcd35b2500b549b82a176681cdca8e0a0cbf9b"
+    },
+    {
+      "record_id": "vqa-constraints:example:bc67cc39101520e40d0372aa",
+      "native_member": "data_multimodal_known/A photo of Jean-Pierre Van Rossem/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 61542,
+      "dimensions": [
+        763,
+        490
+      ],
+      "sha256": "090106d5e1aad60c264df3421f475cd30f60530897a52c91b0df15ea45d5331d"
+    },
+    {
+      "record_id": "vqa-constraints:example:bc67cc39101520e40d0372aa",
+      "native_member": "data_multimodal_known/A photo of Jean-Pierre Van Rossem/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 249400,
+      "dimensions": [
+        1440,
+        1440
+      ],
+      "sha256": "d8be49751435b2a795423060937c1c53410fc102800254ed30c2f6761c8af929"
+    },
+    {
+      "record_id": "vqa-constraints:example:3f958896e0b905becd768882",
+      "native_member": "val2014/COCO_val2014_000000435783.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 248744,
+      "dimensions": [
+        640,
+        480
+      ],
+      "sha256": "efc92df3ffffdcbb9dd262ced681d7fde9de9560bad198c34357f27182687bc9"
+    },
+    {
+      "record_id": "vqa-constraints:example:ad901d76e90e95253e490a04",
+      "native_member": "data_multimodal_movies/A photo of Michael Cuesta/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 795554,
+      "dimensions": [
+        1329,
+        2048
+      ],
+      "sha256": "3ad4ab21a34b470d5e07229e4b049278cb3bb39a6796bdd4c5a239d26c53a77b"
+    },
+    {
+      "record_id": "vqa-constraints:example:ad901d76e90e95253e490a04",
+      "native_member": "data_multimodal_movies/A photo of Michael Cuesta/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 32761,
+      "dimensions": [
+        396,
+        594
+      ],
+      "sha256": "fd91851bb856722ee806de1c0d95804236003d42fbc153aa7711e80f8910b2e1"
+    },
+    {
+      "record_id": "vqa-constraints:example:ad901d76e90e95253e490a04",
+      "native_member": "data_multimodal_movies/A photo of Michael Cuesta/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 11064,
+      "dimensions": [
+        240,
+        285
+      ],
+      "sha256": "ff65fe4caae744a7413e8c328de8f19443c56ce50afd41fb2892c389d331ea55"
+    },
+    {
+      "record_id": "vqa-constraints:example:27c855f5ecd7bca0092e2b21",
+      "native_member": "val2014/COCO_val2014_000000474164.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 252530,
+      "dimensions": [
+        633,
+        640
+      ],
+      "sha256": "c1ac8270b67fc383f20fd7ca99786dac0267445f78d3f3e72f980b5e33e4a638"
+    },
+    {
+      "record_id": "vqa-constraints:example:6f2dc4e78573cc762a12ca96",
+      "native_member": "val2014/COCO_val2014_000000536654.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 216813,
+      "dimensions": [
+        640,
+        383
+      ],
+      "sha256": "62388c6a2e2e1e65bd0362c45e851245b0134b3ff3a330dd86d36305d91b6cf3"
+    },
+    {
+      "record_id": "vqa-constraints:example:ea1f56b5248495f3844848b2",
+      "native_member": "data_multimodal_movies/A photo of Josh Baker/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 76757,
+      "dimensions": [
+        1752,
+        985
+      ],
+      "sha256": "423d7efea03fcd908086b18b1aeed49d51a0fbf8eac8f2d833265bdce9708ff7"
+    },
+    {
+      "record_id": "vqa-constraints:example:ea1f56b5248495f3844848b2",
+      "native_member": "data_multimodal_movies/A photo of Josh Baker/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 41179,
+      "dimensions": [
+        750,
+        525
+      ],
+      "sha256": "39ad5e817e9b7a07595978616ca59b110e07355ce64a3be2691e07caf41de86e"
+    },
+    {
+      "record_id": "vqa-constraints:example:ea1f56b5248495f3844848b2",
+      "native_member": "data_multimodal_movies/A photo of Josh Baker/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 20712,
+      "dimensions": [
+        432,
+        540
+      ],
+      "sha256": "b5d5cb33f7f642a1329f6e3061eb6395253c4772440286c69babd342749658a9"
+    },
+    {
+      "record_id": "vqa-constraints:example:5a4d3b2455fb06f1ad70ba34",
+      "native_member": "data_multimodal_movies/A photo of Shane Meadows/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 204135,
+      "dimensions": [
+        1392,
+        884
+      ],
+      "sha256": "efeacabc302478724c19fef1e24267c03f51352c6ce8f6eeeb7b94e6bbbc513d"
+    },
+    {
+      "record_id": "vqa-constraints:example:5a4d3b2455fb06f1ad70ba34",
+      "native_member": "data_multimodal_movies/A photo of Shane Meadows/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 238218,
+      "dimensions": [
+        2000,
+        1270
+      ],
+      "sha256": "e4768d93f546902136f2f4a51e5be1232ff45ae46c2880e29c8b30e640270172"
+    },
+    {
+      "record_id": "vqa-constraints:example:5a4d3b2455fb06f1ad70ba34",
+      "native_member": "data_multimodal_movies/A photo of Shane Meadows/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 59557,
+      "dimensions": [
+        700,
+        700
+      ],
+      "sha256": "e3b1c998447c652d519f79b9cc757505d92526676cb9846c96a826816e6040f1"
+    },
+    {
+      "record_id": "vqa-constraints:example:b30a2409968223ee5188a8f6",
+      "native_member": "data_multimodal_known/A photo of Monster Rancher/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 318407,
+      "dimensions": [
+        1600,
+        1200
+      ],
+      "sha256": "383d000f3bc8ab275cb868217ae50de00ee7c4d98184ac68261e103648bab502"
+    },
+    {
+      "record_id": "vqa-constraints:example:b30a2409968223ee5188a8f6",
+      "native_member": "data_multimodal_known/A photo of Monster Rancher/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 360680,
+      "dimensions": [
+        1052,
+        1500
+      ],
+      "sha256": "69a6c63e0f20305cdd4e485172dedd56de21da32b5b560d1c0b744ec53175abd"
+    },
+    {
+      "record_id": "vqa-constraints:example:b30a2409968223ee5188a8f6",
+      "native_member": "data_multimodal_known/A photo of Monster Rancher/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 254671,
+      "dimensions": [
+        1920,
+        1080
+      ],
+      "sha256": "6c3319e5517c58fa7c238f70fa28a7c1ba43571f3fa811bfcf38221475fc97bd"
+    },
+    {
+      "record_id": "vqa-constraints:example:ffe78ab30e2bf08fd264c82f",
+      "native_member": "data_multimodal_movies/A photo of Joseph Gordon-Levitt/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 155792,
+      "dimensions": [
+        1297,
+        1600
+      ],
+      "sha256": "d898f5903c4b530abae42fa9b62b07466b5877e4aa66c0a7debd6f3eb7dfe717"
+    },
+    {
+      "record_id": "vqa-constraints:example:ffe78ab30e2bf08fd264c82f",
+      "native_member": "data_multimodal_movies/A photo of Joseph Gordon-Levitt/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 478459,
+      "dimensions": [
+        1585,
+        2048
+      ],
+      "sha256": "cfe086af9a67c8476abbd3809eb82d437b76f1a815985b1050557e5989ff83f7"
+    },
+    {
+      "record_id": "vqa-constraints:example:ffe78ab30e2bf08fd264c82f",
+      "native_member": "data_multimodal_movies/A photo of Joseph Gordon-Levitt/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 1384774,
+      "dimensions": [
+        2181,
+        3000
+      ],
+      "sha256": "682e9dfd70781e1d33e58f2df055d183ffcff04d359e1cbe78e73d02a927bb5b"
+    },
+    {
+      "record_id": "vqa-constraints:example:dc560e414f1d42f466c09ec5",
+      "native_member": "data_multimodal_movies/A photo of Julien Duvivier/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 49779,
+      "dimensions": [
+        600,
+        900
+      ],
+      "sha256": "dc9b2eb94438a139e23cfa1ff4dbf23c6f54c2e09ce0908f4913cbec4d117343"
+    },
+    {
+      "record_id": "vqa-constraints:example:dc560e414f1d42f466c09ec5",
+      "native_member": "data_multimodal_movies/A photo of Julien Duvivier/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 14121,
+      "dimensions": [
+        300,
+        400
+      ],
+      "sha256": "56828a1ee8c29866198d80f0ef31b4ebd7e6cd5a661762cfdc47f938f5d41c2e"
+    },
+    {
+      "record_id": "vqa-constraints:example:dc560e414f1d42f466c09ec5",
+      "native_member": "data_multimodal_movies/A photo of Julien Duvivier/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 146383,
+      "dimensions": [
+        1000,
+        562
+      ],
+      "sha256": "9c6b6bbe1187861bb899ff33a5b3fa4de88adfcbea7bbdb6f85469508448dc9f"
+    },
+    {
+      "record_id": "vqa-constraints:example:6ba999e94699363716e4b956",
+      "native_member": "val2014/COCO_val2014_000000298732.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 163673,
+      "dimensions": [
+        640,
+        480
+      ],
+      "sha256": "3e8c78a2b0c4a7cbbd8ea9156eb451bd8be607fcc9d698cfda083e260cf4bbfa"
+    },
+    {
+      "record_id": "vqa-constraints:example:9d3ec1d13bfda40247fb586a",
+      "native_member": "val2014/COCO_val2014_000000046048.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 112232,
+      "dimensions": [
+        640,
+        480
+      ],
+      "sha256": "5d8055ed7fabde0ed90bf84d6d89256c53e7fecefb369624f8bf3b0e3a464eb0"
+    },
+    {
+      "record_id": "vqa-constraints:example:2730c9cf3c4d8328858341f0",
+      "native_member": "data_multimodal_known/A photo of Final Cut Pro X/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 119664,
+      "dimensions": [
+        1144,
+        1144
+      ],
+      "sha256": "1390afc2143167fe797ef2976e2ac568d600bfd266794a3b527555b4f2f570b5"
+    },
+    {
+      "record_id": "vqa-constraints:example:2730c9cf3c4d8328858341f0",
+      "native_member": "data_multimodal_known/A photo of Final Cut Pro X/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 73313,
+      "dimensions": [
+        1000,
+        1000
+      ],
+      "sha256": "de218edfa746a2c12c6523b3e25024dbd1e4bf0e24929f1e476efc46cdb5beb0"
+    },
+    {
+      "record_id": "vqa-constraints:example:2730c9cf3c4d8328858341f0",
+      "native_member": "data_multimodal_known/A photo of Final Cut Pro X/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 350702,
+      "dimensions": [
+        1468,
+        857
+      ],
+      "sha256": "47eed17b65bc993dfb07ec5cf6c19a4e5fefc3f88046af4da0789204803be7b1"
+    },
+    {
+      "record_id": "vqa-constraints:example:07bed34d3f016fe5959d28f6",
+      "native_member": "data_multimodal_known/A photo of Salvatore Ferragamo Italia S.p.A./Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 438199,
+      "dimensions": [
+        1188,
+        792
+      ],
+      "sha256": "f30fbe858a00814317b7ceab15334269639dd7982ef6c499784862ec40048c1a"
+    },
+    {
+      "record_id": "vqa-constraints:example:07bed34d3f016fe5959d28f6",
+      "native_member": "data_multimodal_known/A photo of Salvatore Ferragamo Italia S.p.A./Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 123931,
+      "dimensions": [
+        859,
+        1390
+      ],
+      "sha256": "7a0a6c62c753ce1f387a386b88210c6afe457f9deafd0f8338d9d91e6c56c34d"
+    },
+    {
+      "record_id": "vqa-constraints:example:07bed34d3f016fe5959d28f6",
+      "native_member": "data_multimodal_known/A photo of Salvatore Ferragamo Italia S.p.A./Image_3.png",
+      "verification": "native ZIP byte equality",
+      "bytes": 42017,
+      "dimensions": [
+        3000,
+        2000
+      ],
+      "sha256": "fbd99528a01ce48bd8af534ee9d72cb2c8bbb5f85a14d0f8684ab1749ed9e7fe"
+    },
+    {
+      "record_id": "vqa-constraints:example:9dc080f001e1a6dcba5d2297",
+      "native_member": "val2014/COCO_val2014_000000341230.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 255670,
+      "dimensions": [
+        640,
+        480
+      ],
+      "sha256": "697704fcc99d944e4d65bf39cab0888d0e846cc9b98354191dd81ff76118a39a"
+    },
+    {
+      "record_id": "vqa-constraints:example:d2254008c10a0e8a95a0c002",
+      "native_member": "val2014/COCO_val2014_000000563381.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 222991,
+      "dimensions": [
+        640,
+        426
+      ],
+      "sha256": "504bbcc573592503630f2cdaf23f807175986fef4635ed305b59ee91f09857d6"
+    },
+    {
+      "record_id": "vqa-constraints:example:446f074f09ec311c79008b89",
+      "native_member": "data_multimodal_known/A photo of Euromoney Institutional Investor/Image_1.png",
+      "verification": "native ZIP byte equality",
+      "bytes": 37255,
+      "dimensions": [
+        1280,
+        648
+      ],
+      "sha256": "12ed197eaccb8ef10c6540b88428d78c67bb9be1c0ee526b46470bd4285bbae8"
+    },
+    {
+      "record_id": "vqa-constraints:example:446f074f09ec311c79008b89",
+      "native_member": "data_multimodal_known/A photo of Euromoney Institutional Investor/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 20202,
+      "dimensions": [
+        400,
+        133
+      ],
+      "sha256": "e10246b9f74b0dd89323225bd3c12a7a84c8fc30fdf9e0f6d9535967cd2ea94a"
+    },
+    {
+      "record_id": "vqa-constraints:example:446f074f09ec311c79008b89",
+      "native_member": "data_multimodal_known/A photo of Euromoney Institutional Investor/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 396491,
+      "dimensions": [
+        2169,
+        1481
+      ],
+      "sha256": "954cf4f92589d68d56473284147294ca37c2a30ee27e293d9cd739125abd1a53"
+    },
+    {
+      "record_id": "vqa-constraints:example:2eedcea0e9b604f8d4b88e7a",
+      "native_member": "val2014/COCO_val2014_000000193480.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 365093,
+      "dimensions": [
+        640,
+        554
+      ],
+      "sha256": "25cefe62f15567536e4300216af3b5556dd2056dfb52c881bfdfa589707feb74"
+    },
+    {
+      "record_id": "vqa-constraints:example:6db057dcdb272a81a273260a",
+      "native_member": "val2014/COCO_val2014_000000376493.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 110115,
+      "dimensions": [
+        500,
+        333
+      ],
+      "sha256": "4f14c4b9d788fe27f5ecafb4eb7ee588db9fae26647dac9f7ad2f08b40ad144b"
+    },
+    {
+      "record_id": "vqa-constraints:example:7eb6af107e76f5223b3cc8a5",
+      "native_member": "val2014/COCO_val2014_000000455290.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 293956,
+      "dimensions": [
+        640,
+        427
+      ],
+      "sha256": "179abc119e5fbf8a9d7408703b485e20b8372c701d7d45836c1d35a11ee6d702"
+    },
+    {
+      "record_id": "vqa-constraints:example:ddf6b301e9fc70dd96ef6587",
+      "native_member": "data_multimodal_movies/A photo of Guan Hu/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 31061,
+      "dimensions": [
+        477,
+        620
+      ],
+      "sha256": "3803a564f5567df1d47aaf274462e3890c452063150965ece171d12c915ef41c"
+    },
+    {
+      "record_id": "vqa-constraints:example:ddf6b301e9fc70dd96ef6587",
+      "native_member": "data_multimodal_movies/A photo of Guan Hu/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 30774,
+      "dimensions": [
+        678,
+        1018
+      ],
+      "sha256": "d7d253b9a2f52b20425ddfb8098e19792e9db1fd4cd5339508632488c5b7104b"
+    },
+    {
+      "record_id": "vqa-constraints:example:ddf6b301e9fc70dd96ef6587",
+      "native_member": "data_multimodal_movies/A photo of Guan Hu/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 132244,
+      "dimensions": [
+        1280,
+        1519
+      ],
+      "sha256": "992d8b2a5c5f2999f798edab7d909af9c0bc4a7fca7877bb8ddf65f79fdceddd"
+    },
+    {
+      "record_id": "vqa-constraints:example:67038be70c31d8aec5c99e64",
+      "native_member": "data_multimodal_movies/A photo of Catherine Hardwicke/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 307619,
+      "dimensions": [
+        1280,
+        1749
+      ],
+      "sha256": "4edaf424a68a008aea9f30f87cc4b90bf28a12d9a62600c65a110b36bb43b555"
+    },
+    {
+      "record_id": "vqa-constraints:example:67038be70c31d8aec5c99e64",
+      "native_member": "data_multimodal_movies/A photo of Catherine Hardwicke/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 745673,
+      "dimensions": [
+        2065,
+        3000
+      ],
+      "sha256": "e115a6f015f14fc4e6b15d88f55b9b9bd20b405eaf0e25d4ea18f6837d21a796"
+    },
+    {
+      "record_id": "vqa-constraints:example:67038be70c31d8aec5c99e64",
+      "native_member": "data_multimodal_movies/A photo of Catherine Hardwicke/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 494471,
+      "dimensions": [
+        666,
+        1000
+      ],
+      "sha256": "074981e6ed12757dea02b0b660d3be5741963e2813e47c445224776f43af0e0a"
+    },
+    {
+      "record_id": "vqa-constraints:example:96e07098241c81ace5596d5d",
+      "native_member": "data_multimodal_known/A photo of Reconstructionist Rabbinical College/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 521707,
+      "dimensions": [
+        2000,
+        1500
+      ],
+      "sha256": "ca8a974eeaff0b4c8ddfb05750ad6d47462b7b6d31c3cbf03118d9d7b848b03d"
+    },
+    {
+      "record_id": "vqa-constraints:example:96e07098241c81ace5596d5d",
+      "native_member": "data_multimodal_known/A photo of Reconstructionist Rabbinical College/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 559510,
+      "dimensions": [
+        880,
+        580
+      ],
+      "sha256": "d5c947e2636bab7afc751772519bb42ab66ba61ce57f8042cf60db7986a4d1b7"
+    },
+    {
+      "record_id": "vqa-constraints:example:96e07098241c81ace5596d5d",
+      "native_member": "data_multimodal_known/A photo of Reconstructionist Rabbinical College/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 127125,
+      "dimensions": [
+        1024,
+        681
+      ],
+      "sha256": "588ee7040c0c3e6c6df2c64a09364b28048557bfa41475442032720ac77b966b"
+    },
+    {
+      "record_id": "vqa-constraints:example:f8b07242cd7d5be48f55bf89",
+      "native_member": "val2014/COCO_val2014_000000024744.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 213894,
+      "dimensions": [
+        640,
+        640
+      ],
+      "sha256": "af68b6ef7ece892607c79b8efc437da6eaae563ed55a8061548decb23e8860f0"
+    },
+    {
+      "record_id": "vqa-constraints:example:dadc72c9ddf98dce72f0b37e",
+      "native_member": "val2014/COCO_val2014_000000236604.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 199324,
+      "dimensions": [
+        640,
+        621
+      ],
+      "sha256": "d3ccb66f0be24b2ed8ca7a1d41af0274161312a0c4c7ddf4241c46103408b9de"
+    },
+    {
+      "record_id": "vqa-constraints:example:190c6cb8cf1312084ded840d",
+      "native_member": "data_multimodal_movies/A photo of Hwang Dong-hyeok/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 50771,
+      "dimensions": [
+        637,
+        788
+      ],
+      "sha256": "9b0feafd53fb497a57f9019848329b82ef44dacc60e164ae7104091f0a86cf80"
+    },
+    {
+      "record_id": "vqa-constraints:example:190c6cb8cf1312084ded840d",
+      "native_member": "data_multimodal_movies/A photo of Hwang Dong-hyeok/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 82955,
+      "dimensions": [
+        1954,
+        1090
+      ],
+      "sha256": "f96d67b52ba1b3cae2a438a8256ec9eb4ec8efe7917f9fb0379f62388ed6798a"
+    },
+    {
+      "record_id": "vqa-constraints:example:190c6cb8cf1312084ded840d",
+      "native_member": "data_multimodal_movies/A photo of Hwang Dong-hyeok/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 332765,
+      "dimensions": [
+        2560,
+        1408
+      ],
+      "sha256": "939639cd97c46fddaca7c836bfab9e9654a90266e8e0f18fc1f3caf37bd11fe4"
+    },
+    {
+      "record_id": "vqa-constraints:example:eee715dfd26bd569543548b6",
+      "native_member": "val2014/COCO_val2014_000000265707.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 99308,
+      "dimensions": [
+        500,
+        375
+      ],
+      "sha256": "8574173341f8ae2d87ffb5857cadc8eb941d2498deb6a4d3b0f5d5b773447483"
+    },
+    {
+      "record_id": "vqa-constraints:example:8918b560229d8d205b9f7ef8",
+      "native_member": "val2014/COCO_val2014_000000100187.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 117944,
+      "dimensions": [
+        640,
+        480
+      ],
+      "sha256": "2d8317b93998c98d96afb7dd4f0a32a50b68ec48ea116dc19bffd0d5549781c1"
+    },
+    {
+      "record_id": "vqa-constraints:example:54561508a2c6730e35594d66",
+      "native_member": "val2014/COCO_val2014_000000470113.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 166744,
+      "dimensions": [
+        640,
+        424
+      ],
+      "sha256": "c1fd3723ae94baa284e15fd71dd1ee2a0b4118041800af16a21ec5fe3fa4b082"
+    },
+    {
+      "record_id": "vqa-constraints:example:aecdc91c218fbfab03c75a62",
+      "native_member": "val2014/COCO_val2014_000000112093.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 141065,
+      "dimensions": [
+        640,
+        480
+      ],
+      "sha256": "c418067ff1d0aa9548e5aeef67f49db23e6eaa25c05c3bd1b235ba7070d3fa73"
+    },
+    {
+      "record_id": "vqa-constraints:example:03bc3ad80d308bd836306d8f",
+      "native_member": "val2014/COCO_val2014_000000294698.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 193261,
+      "dimensions": [
+        640,
+        480
+      ],
+      "sha256": "a9a0af5b76b04a7778202493e5ac9ccc9948bdd4287ccfb6e4f90139a18424b8"
+    },
+    {
+      "record_id": "vqa-constraints:example:c906d8cc88e39fb9bb6ba9ec",
+      "native_member": "val2014/COCO_val2014_000000335981.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 222971,
+      "dimensions": [
+        640,
+        480
+      ],
+      "sha256": "94703b47b8d05af8e3754bcdef8536c64394c15b6fc65c4deba57442295fb98c"
+    },
+    {
+      "record_id": "vqa-constraints:example:7d55de9435afae543e44e42a",
+      "native_member": "data_multimodal_movies/A photo of Francis Annan/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 86868,
+      "dimensions": [
+        600,
+        800
+      ],
+      "sha256": "d58a1810f870270794a9a1026594b7a588b3db3bb93280d950486cee46611e90"
+    },
+    {
+      "record_id": "vqa-constraints:example:7d55de9435afae543e44e42a",
+      "native_member": "data_multimodal_movies/A photo of Francis Annan/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 48710,
+      "dimensions": [
+        903,
+        768
+      ],
+      "sha256": "3856f8674475c38e2992584327f6dbfe984bf0de887645da3b1ea889aeabbc30"
+    },
+    {
+      "record_id": "vqa-constraints:example:7d55de9435afae543e44e42a",
+      "native_member": "data_multimodal_movies/A photo of Francis Annan/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 179091,
+      "dimensions": [
+        650,
+        975
+      ],
+      "sha256": "79b924b8b3a3865074c686331ee02f89bdb5c56ca88c3344c0a1a048d31fa86f"
+    },
+    {
+      "record_id": "vqa-constraints:example:4aecbe294a3e943651a6c4a6",
+      "native_member": "data_multimodal_movies/A photo of Alberto Rodri\u2560\u00fcguez Librero/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 176970,
+      "dimensions": [
+        766,
+        1139
+      ],
+      "sha256": "8ee46d07dc45930c9bc504a78e9b57e34287c96f20218b59dfc077119c0a3e17"
+    },
+    {
+      "record_id": "vqa-constraints:example:4aecbe294a3e943651a6c4a6",
+      "native_member": "data_multimodal_movies/A photo of Alberto Rodri\u2560\u00fcguez Librero/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 175597,
+      "dimensions": [
+        1080,
+        1627
+      ],
+      "sha256": "b4134c7e8b6b279f29e4de34c372c8d9662a613345c814831a457f77d8b9caf7"
+    },
+    {
+      "record_id": "vqa-constraints:example:4aecbe294a3e943651a6c4a6",
+      "native_member": "data_multimodal_movies/A photo of Alberto Rodri\u2560\u00fcguez Librero/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 77088,
+      "dimensions": [
+        312,
+        296
+      ],
+      "sha256": "4c324289b2806fcd40d417405ed080765c7edd684b1113eed4d4d2e088f89ec0"
+    },
+    {
+      "record_id": "vqa-constraints:example:fffeabff6a84bb53ad705a0b",
+      "native_member": "data_multimodal_movies/A photo of Peter Howitt/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 194993,
+      "dimensions": [
+        1280,
+        1519
+      ],
+      "sha256": "fa507288d446119c4bb1201a983b621d041db927092957da8fed467f759a0e1d"
+    },
+    {
+      "record_id": "vqa-constraints:example:fffeabff6a84bb53ad705a0b",
+      "native_member": "data_multimodal_movies/A photo of Peter Howitt/Image_2.jpeg",
+      "verification": "native ZIP byte equality",
+      "bytes": 53236,
+      "dimensions": [
+        520,
+        700
+      ],
+      "sha256": "659bb0df91224eafbcff8b41d22c51b80ad4422c01a46e72c06136963f72f0dd"
+    },
+    {
+      "record_id": "vqa-constraints:example:fffeabff6a84bb53ad705a0b",
+      "native_member": "data_multimodal_movies/A photo of Peter Howitt/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 115465,
+      "dimensions": [
+        1300,
+        1082
+      ],
+      "sha256": "f2438672ffde2359f58ea634306d66046f34019a1b3e38246f1fe1a6cacb8389"
+    },
+    {
+      "record_id": "vqa-constraints:example:fff6cc94133fa1a0070201d6",
+      "native_member": "data_multimodal_movies/A photo of Iain Softley/Image_1.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 49088,
+      "dimensions": [
+        400,
+        600
+      ],
+      "sha256": "adf75cfe34794b2af9367990e24f6fa7c68713d338ac37a48b72ddcd424f983f"
+    },
+    {
+      "record_id": "vqa-constraints:example:fff6cc94133fa1a0070201d6",
+      "native_member": "data_multimodal_movies/A photo of Iain Softley/Image_2.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 94349,
+      "dimensions": [
+        1000,
+        1394
+      ],
+      "sha256": "896261c3c195d4c31e811982f593951de87f5ca9043bb6fb80ab9388a0fa4a6c"
+    },
+    {
+      "record_id": "vqa-constraints:example:fff6cc94133fa1a0070201d6",
+      "native_member": "data_multimodal_movies/A photo of Iain Softley/Image_3.jpg",
+      "verification": "native ZIP byte equality",
+      "bytes": 68674,
+      "dimensions": [
+        720,
+        900
+      ],
+      "sha256": "41eb1b222b824eeb00b0338402220bc037c2bbd945bac9bd3bfb174780b5b76b"
+    },
+    {
+      "record_id": "vqa-constraints:example:fff59eae73547f7213c906e9",
+      "native_member": "val2014/COCO_val2014_000000550452.jpg",
+      "verification": "pinned native ZIP length and CRC32",
+      "bytes": 231075,
+      "dimensions": [
+        640,
+        359
+      ],
+      "sha256": "a1b4c587f8097901621333957c68dcfef2fb22132e4827ad5a0a8d04757824b4"
+    }
+  ]
+}

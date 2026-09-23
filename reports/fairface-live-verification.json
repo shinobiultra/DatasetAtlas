@@ -1,0 +1,2086 @@
+{
+  "checked_at": "2026-09-23T10:44:56.039098+00:00",
+  "status": "passed",
+  "dataset_id": "fairface",
+  "snapshot_id": "fairface-ef2603000a545d258d028c65",
+  "population_count": 97698,
+  "all_native_labels_and_member_joins_verified": true,
+  "preview_records_verified": 100,
+  "late_records_verified": 3,
+  "native_image_checks": 206,
+  "sampling": {
+    "method": "sha256_bottom_k_primary_asset",
+    "seed": 0,
+    "unit": "example",
+    "grouping": "primary asset ID; example ID for records without assets",
+    "population": "complete pinned indexed population",
+    "population_count": 97698,
+    "requested_count": 100,
+    "returned_count": 100,
+    "source_revision": "fairface-author-padding025-and125-fb823086",
+    "media_representation": "original",
+    "selection_note": "One hash-ranked example per sampled primary asset. All linked assets remain. Not an example-prevalence estimate."
+  },
+  "checks": [
+    {
+      "record_id": "fairface:example:3d4d611156c57db588fbb55d",
+      "condition": "padding=0.25",
+      "sha256": "f811809245217fcc21037da2ce5507789c65f45945c2143fb1bc39d0d34003e0",
+      "bytes": 5076,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:3d4d611156c57db588fbb55d",
+      "condition": "padding=1.25",
+      "sha256": "aef8e64dcc22e9ff744df5adc6081e80a32d2d70b2ab9a4b6fb1f6002b0211d7",
+      "bytes": 18160,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:009b153681be485a79f7ac9a",
+      "condition": "padding=0.25",
+      "sha256": "451d51d4cf7646e18771916b801c5f05202e9cfbebf54247a905a19e50d80f04",
+      "bytes": 7216,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:009b153681be485a79f7ac9a",
+      "condition": "padding=1.25",
+      "sha256": "7457a57679543585af48f2ad720e429560f0ff3d5e46500a7fa5bd3ad9776806",
+      "bytes": 23702,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:6ac39ff32a4ed2be2285cd7d",
+      "condition": "padding=0.25",
+      "sha256": "b7c4792d8857f22d752d7ab691f6985fdd27a9139802c2547fa82a0852eb6f6e",
+      "bytes": 7713,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:6ac39ff32a4ed2be2285cd7d",
+      "condition": "padding=1.25",
+      "sha256": "097ee5948959d06c937f9298a3f8194a78d8d87e519c00d6e8d55abac027407a",
+      "bytes": 29656,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:35039b5c71f870494bcbbbf4",
+      "condition": "padding=0.25",
+      "sha256": "ba5884833cfe3814f8304a685930a5b31555bd658956157eb6f732762efcaa86",
+      "bytes": 3810,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:35039b5c71f870494bcbbbf4",
+      "condition": "padding=1.25",
+      "sha256": "0615a96b23529468675800072e78ba5aa4dc9d2b03932c44e8baa00fe9b25e16",
+      "bytes": 15068,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:6d2efae685c3155d01098445",
+      "condition": "padding=0.25",
+      "sha256": "8f1685ea00f58e49aaa672c20de10ae3acb7c2d981be432b41a50c894a940b51",
+      "bytes": 6117,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:6d2efae685c3155d01098445",
+      "condition": "padding=1.25",
+      "sha256": "05078d0d1d003786e4b5344b1e7905f1ac6ac0e7470002ba968c84b328ccbb5e",
+      "bytes": 21706,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:3c6c3383575e31c2a40f0a2b",
+      "condition": "padding=0.25",
+      "sha256": "e57c182d9081adf9c49cb3997efb3439d763420b766beaab8765ba87af28bd09",
+      "bytes": 5174,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:3c6c3383575e31c2a40f0a2b",
+      "condition": "padding=1.25",
+      "sha256": "122cc13aaf07207f9724e0f75535a5818a3963508e7fe1af7dd5a946029c86b1",
+      "bytes": 16421,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:9da7cfd9db178e377a7e95ba",
+      "condition": "padding=0.25",
+      "sha256": "3a1b43930de90572c1548acccc9e2e96560281a93e175cbb7f4b72ea977c6d22",
+      "bytes": 6080,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:9da7cfd9db178e377a7e95ba",
+      "condition": "padding=1.25",
+      "sha256": "8f4bd60dcebe72fd2a3460ea9d5b32bd4dc5e7e47726cf3b75f6eb6bcffa8398",
+      "bytes": 27460,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:9ae88e29a66f874d18ed2764",
+      "condition": "padding=0.25",
+      "sha256": "7455374e4ac94ec2059d3cd64b90f13181ad678ef79192ffba4dbf23ce966439",
+      "bytes": 7956,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:9ae88e29a66f874d18ed2764",
+      "condition": "padding=1.25",
+      "sha256": "f870087163aab95bf33503df743f3451a3d10f79a839bfd9098f5ae788231d1c",
+      "bytes": 22368,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:3e79a4faa5946b2a66c420ee",
+      "condition": "padding=0.25",
+      "sha256": "741aabf3d8ee42b166a2aee75219e966ce66445abedf7ba685d9b336a54d61fb",
+      "bytes": 6500,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:3e79a4faa5946b2a66c420ee",
+      "condition": "padding=1.25",
+      "sha256": "d9dd30c3233e5c3f2e4a900366505784135043b56c4108fc36c42e32bb6064b2",
+      "bytes": 23510,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:2a6de8b47172e2d88165d3d4",
+      "condition": "padding=0.25",
+      "sha256": "e8e13da6da4975f1e909adcc673174f8ebb6d054e1d471b426196bb45ae00c9c",
+      "bytes": 7358,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:2a6de8b47172e2d88165d3d4",
+      "condition": "padding=1.25",
+      "sha256": "6a2c297f8b35b1fa5bcdbdcad153a7afd8d7d21be724babf622044076fc6c30c",
+      "bytes": 30941,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:b6d76a37d6a2b13e83747d09",
+      "condition": "padding=0.25",
+      "sha256": "8ac11be6a8f11af75aad53c94799090f42249ca568188f46ea8c26dbb60a4314",
+      "bytes": 5743,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:b6d76a37d6a2b13e83747d09",
+      "condition": "padding=1.25",
+      "sha256": "45ba6d5355999546ff689055070c3155f6d2f8d6de2f2f23303cd611873d69d5",
+      "bytes": 21089,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:d0f0788f79006e68e41982d2",
+      "condition": "padding=0.25",
+      "sha256": "9787e97530d11ea4e44b5e9b3c9b7b8e937218bf2f7a8e1b33f1c4d69fe790bd",
+      "bytes": 5928,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:d0f0788f79006e68e41982d2",
+      "condition": "padding=1.25",
+      "sha256": "f6a9df07de62694995905d14e19a8fcd8b3b97ab2609a1b018837ba0046ebe6d",
+      "bytes": 19724,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:ae3489f7226319e6c74b379a",
+      "condition": "padding=0.25",
+      "sha256": "f8f662afae227f40a0e21d6ce47ebc5a75caf45c4ec60e200703c7ecac0cf3c8",
+      "bytes": 5512,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:ae3489f7226319e6c74b379a",
+      "condition": "padding=1.25",
+      "sha256": "c7df9536715513d26d7365ad1ca433b856ccfff2fb301ce80a2e752175153f16",
+      "bytes": 15357,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:cb80860689259776717f140d",
+      "condition": "padding=0.25",
+      "sha256": "4d421cfe5483c3c237557b626018222cdd9b874700fbae7870f518a1f1786fae",
+      "bytes": 6984,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:cb80860689259776717f140d",
+      "condition": "padding=1.25",
+      "sha256": "3381b176fcb79162d565d01eb1bbfd473cf6c9c1179e13ac2d9266f6c1a1914e",
+      "bytes": 31740,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:1bd648497a5045bbb6112e7e",
+      "condition": "padding=0.25",
+      "sha256": "88f28e365e3db142299a66b4de0e5998797b8d29e6328aa08a4c73e0a8dee988",
+      "bytes": 6294,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:1bd648497a5045bbb6112e7e",
+      "condition": "padding=1.25",
+      "sha256": "4a572fba0b2515401f5bab819651850e65580e65fafd6d3e9969fec231c217d6",
+      "bytes": 30444,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:ec86f04aaa4ea32006f23b58",
+      "condition": "padding=0.25",
+      "sha256": "7911b8b58c7000f426d609c7a9d3648f9980059a063a4964bcf5b5a1812e05d1",
+      "bytes": 5362,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:ec86f04aaa4ea32006f23b58",
+      "condition": "padding=1.25",
+      "sha256": "e02095b05913f761f2c456bd7bbf4b7d19021930587b1444cc45c60e6d784959",
+      "bytes": 16533,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:db8a6249858ccf203d1f0b3c",
+      "condition": "padding=0.25",
+      "sha256": "0dc9fb4c25b11afe23871b0050919003f7d1dca782b1ffff3d669f073bc27130",
+      "bytes": 4741,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:db8a6249858ccf203d1f0b3c",
+      "condition": "padding=1.25",
+      "sha256": "e23169b298b048d78d246e04af52e5c663f3acd2f4a0b3e00a9b42b190aa0945",
+      "bytes": 15392,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:ad02730883a623241e1d8a3d",
+      "condition": "padding=0.25",
+      "sha256": "99077612087668735347b936f3c39e11f6d9ae476eb43a3ff6698a6768e4eff4",
+      "bytes": 6336,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:ad02730883a623241e1d8a3d",
+      "condition": "padding=1.25",
+      "sha256": "b3ab09da3bb5c85897ad71590ca7a31ce2b6038be439a68065f7b5d901f26ba3",
+      "bytes": 25110,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:0645d4d396fdcd7379467523",
+      "condition": "padding=0.25",
+      "sha256": "dbb47ec0b04409e1b18d5db524aefe886ca8e6e89ced21e0adad378a10a8c8e3",
+      "bytes": 4116,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:0645d4d396fdcd7379467523",
+      "condition": "padding=1.25",
+      "sha256": "3d315bbc522a4e3cdb95119f1d7ff82f3f62f3097cf9ecd998083f24ceb1b70f",
+      "bytes": 13658,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:0a9cd1f2fd8ebeb86922ef84",
+      "condition": "padding=0.25",
+      "sha256": "f667117b27f88fbb77cac0514eca9d787e437665fbba5d94523a97e56b0f93ff",
+      "bytes": 5394,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:0a9cd1f2fd8ebeb86922ef84",
+      "condition": "padding=1.25",
+      "sha256": "c432dd56225496a3c4b7ee3781aa7972dfe5092c8e726f0e48d4c666f50ab353",
+      "bytes": 19141,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:607fc08ae0d6947ac731d730",
+      "condition": "padding=0.25",
+      "sha256": "7e1b6a16e0e8829d43cea3056cb59e9d4dde19c62a0d0e85e945d3fd92820165",
+      "bytes": 5562,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:607fc08ae0d6947ac731d730",
+      "condition": "padding=1.25",
+      "sha256": "cb6e5d074e7ed68d523f5ad4727499ba73999fdf507539825286eab36bc92f7b",
+      "bytes": 15039,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:f6e1c76bda4129d1e4cbd7d4",
+      "condition": "padding=0.25",
+      "sha256": "b148b4a41492084cb92c03f4b3bf5fdb5f2a4d8163a2b018d39c33a94ba4771b",
+      "bytes": 5788,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:f6e1c76bda4129d1e4cbd7d4",
+      "condition": "padding=1.25",
+      "sha256": "52f79586e8960777c30289de2b97d301a807be311708ef30eca251c822b54c36",
+      "bytes": 30081,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:93549c5215894d486a4dcc51",
+      "condition": "padding=0.25",
+      "sha256": "afab1eb918fed469e84aa7511c31cf9504a9ae74ab8d56580ffec528b562af64",
+      "bytes": 6474,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:93549c5215894d486a4dcc51",
+      "condition": "padding=1.25",
+      "sha256": "8a57458992ea068f9e09a22dfc641c7958759552d47690c08a056e778b98ea91",
+      "bytes": 24135,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:d46b6c7ac0cdecc065f1d1bf",
+      "condition": "padding=0.25",
+      "sha256": "a053bef0522673c1a4216047a6e71cdf3add77bf114d05299d74e7967e4d89a8",
+      "bytes": 7059,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:d46b6c7ac0cdecc065f1d1bf",
+      "condition": "padding=1.25",
+      "sha256": "70226599b688de6addcff19e7c004211ed1718a6dff084cca3f9ac87ded52916",
+      "bytes": 16226,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:d95c5e8c1b0a2fe43edda5d4",
+      "condition": "padding=0.25",
+      "sha256": "909fc9bbc043f9e73ef7b173107eca25a41f7dc4bf3b22e6fc012a89a17d7078",
+      "bytes": 5760,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:d95c5e8c1b0a2fe43edda5d4",
+      "condition": "padding=1.25",
+      "sha256": "db43aa1fc80656772fbd61cd59b06830b26a6674c3f6a82c933395f74c3dd446",
+      "bytes": 24341,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:ba7e88617aaddfdb438f3810",
+      "condition": "padding=0.25",
+      "sha256": "e0dbfe5b11809ec8a2b451f47bc5dc39333ba10d06bdbd38e5de762b0d4f5fa8",
+      "bytes": 6089,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:ba7e88617aaddfdb438f3810",
+      "condition": "padding=1.25",
+      "sha256": "1ec13d40d69c25d7f66a3d455ed36544197afbb514a6168adca249a605ff4395",
+      "bytes": 22126,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:6b672e7f83c5212f011500ab",
+      "condition": "padding=0.25",
+      "sha256": "d8d2ff8f69a1ac40f2c5392e9e8b0c61e3017f17f1ddd21547d5ffcb641ccdf2",
+      "bytes": 4659,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:6b672e7f83c5212f011500ab",
+      "condition": "padding=1.25",
+      "sha256": "336e4e13bfc46e9ee8f877bf0b8ef9542e6f3172f00cf49d330a9708d37c3a89",
+      "bytes": 16220,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:dd90345bdec332557ff8f35e",
+      "condition": "padding=0.25",
+      "sha256": "9acda97f8678d7390ea7401945b0b878b5852fe49f77bf0d7308c2ab04be7857",
+      "bytes": 5740,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:dd90345bdec332557ff8f35e",
+      "condition": "padding=1.25",
+      "sha256": "fa248b79cb90a131d1944924bede6f0157f8200115ea91c5326de36f7258ce83",
+      "bytes": 22259,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:efad8c047e30cecb724b57c8",
+      "condition": "padding=0.25",
+      "sha256": "49f4a48e290173817e059d1fa67933d50db04114cf8af114e4cbc6829b4fb1be",
+      "bytes": 5581,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:efad8c047e30cecb724b57c8",
+      "condition": "padding=1.25",
+      "sha256": "82bcdd7bb2ba307d0fb93538dfaf5f3875e130a623b8c08b147b12603650f29c",
+      "bytes": 19209,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:e67f796e8a365308b0f909f5",
+      "condition": "padding=0.25",
+      "sha256": "921767f6096ac953a2511a2b235a855632c8c36a2a455d87e7544d92da71490a",
+      "bytes": 4033,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:e67f796e8a365308b0f909f5",
+      "condition": "padding=1.25",
+      "sha256": "5f61497df254a4a4f961c7e2389cacbcf8a4e1c183a3907827b10a4f4f377837",
+      "bytes": 15001,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:f834d8b44bdaf73e553641b3",
+      "condition": "padding=0.25",
+      "sha256": "2f25879adf5daf749636e63e14a10a2f769bbd828711ca8a8e4a42cdd463ee95",
+      "bytes": 5143,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:f834d8b44bdaf73e553641b3",
+      "condition": "padding=1.25",
+      "sha256": "cc37305221cabde7bb37f6d7560d2aa816f67f900f6b05f9c16d4743bc9b6abe",
+      "bytes": 24290,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:67c8ba054c18fb8907af9b93",
+      "condition": "padding=0.25",
+      "sha256": "1f00ab7eca84431f17dbf72a7464c97ab183222a589190172baa5fdaed69ccf0",
+      "bytes": 4704,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:67c8ba054c18fb8907af9b93",
+      "condition": "padding=1.25",
+      "sha256": "2d28b7a0a3e66b97484c2c9a0bff2cf57bb9cdf99f6162dc4c8b058bbc12c77f",
+      "bytes": 20067,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:8df3b8d322bc457895bfdfc4",
+      "condition": "padding=0.25",
+      "sha256": "9370c9e378acc2b5321693bbd6ac886241ecef36ea2f8410f5d06093f62f725a",
+      "bytes": 7138,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:8df3b8d322bc457895bfdfc4",
+      "condition": "padding=1.25",
+      "sha256": "afd7e5eec9b675b778b0624145e4231f30c3b6128cf57b26a9f90e273606de4b",
+      "bytes": 32210,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:8ca006868d619b45338037df",
+      "condition": "padding=0.25",
+      "sha256": "da34613a5da5afd6fc4d661f0a91b676a96a314ce1566d6562bb3d953dbc9094",
+      "bytes": 5996,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:8ca006868d619b45338037df",
+      "condition": "padding=1.25",
+      "sha256": "f9538b349338a4be77def4c735dba6a1210bccd183c865afaf055b4b9d6357a9",
+      "bytes": 16610,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:3464a88208a97e0137535b86",
+      "condition": "padding=0.25",
+      "sha256": "50dde6771af4a3fa4362e696a8d3267cc6d418538fb5a611c0d260c25e76a91b",
+      "bytes": 4693,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:3464a88208a97e0137535b86",
+      "condition": "padding=1.25",
+      "sha256": "9c746691c427f9808c16b76d7126b45e6dfd3b2da5626855f5eea30cb0bd6f04",
+      "bytes": 24357,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:680974def75bd0dbcbb75906",
+      "condition": "padding=0.25",
+      "sha256": "e63dbcdb0c60e9777363019f2bfd815298cdbe11af1d3328224fa469bc8efbe1",
+      "bytes": 4475,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:680974def75bd0dbcbb75906",
+      "condition": "padding=1.25",
+      "sha256": "797abcaa7c263f76cadc41b9960b356c370a378d293860993fdceffcb73a4f0c",
+      "bytes": 18991,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:5ed6d7247644ce7e61ca88f4",
+      "condition": "padding=0.25",
+      "sha256": "4084f6aeeb9ba7be9f487dd2829919b8a10d5d9e9e9696f82ab03b6ba8e03547",
+      "bytes": 6589,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:5ed6d7247644ce7e61ca88f4",
+      "condition": "padding=1.25",
+      "sha256": "e29478523fa66409fe7480f7ffb2d4913d49cf61dfec6c75566596bd6d97a694",
+      "bytes": 30949,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:3048df4e4b97f0bf108c622b",
+      "condition": "padding=0.25",
+      "sha256": "f98aab430225afa8712eec450957ff446a01a8b45f1be17c44424a33e9a9079e",
+      "bytes": 5061,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:3048df4e4b97f0bf108c622b",
+      "condition": "padding=1.25",
+      "sha256": "9f1d5448169f9a64bc17ad24b0abbb05e86b4120384e3bc807c7683161784d7a",
+      "bytes": 18096,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:9da1c3fa23cbf06142b47c82",
+      "condition": "padding=0.25",
+      "sha256": "0121408a179000155f23be44b2513c8342b6fd9c710511fe3ddc82a1796ded88",
+      "bytes": 6712,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:9da1c3fa23cbf06142b47c82",
+      "condition": "padding=1.25",
+      "sha256": "233c4ea42e244a36fb2a86e3bd48dfce18e723956aeea288dc604d5b2b4a7a40",
+      "bytes": 35771,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:dae080faeafeccd658bf3bd6",
+      "condition": "padding=0.25",
+      "sha256": "81d773dcd0f89bc060870568666ef5edcdf9910782e7455b8527361c649093e4",
+      "bytes": 3452,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:dae080faeafeccd658bf3bd6",
+      "condition": "padding=1.25",
+      "sha256": "1ebc14c7a0bc8c838c3c3a7087775d7b65e35eded6f8b074e18cfb91cde38775",
+      "bytes": 15920,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:586a9fb2ae61d941246ab9b1",
+      "condition": "padding=0.25",
+      "sha256": "c30c279bf304745fed33e233dc4ba59ddfdbc910502f9bd5ab597b9d919a21c2",
+      "bytes": 4436,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:586a9fb2ae61d941246ab9b1",
+      "condition": "padding=1.25",
+      "sha256": "23886b811691c64863ca9fb2783ad7e77e57e7ccb1877c7e8ce35f8742896570",
+      "bytes": 15429,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:c30f5b0f16216bed6eb65994",
+      "condition": "padding=0.25",
+      "sha256": "37a354b2ff99be299429740642b08c8e6d2f3dc3ef924065e4b2e7d30dd92143",
+      "bytes": 5098,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:c30f5b0f16216bed6eb65994",
+      "condition": "padding=1.25",
+      "sha256": "243a89ef50c41aa52a1de1683204c53bf263ea0eb07334477c52ef2e9571f16b",
+      "bytes": 21185,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:452f51057c5cded629eb4054",
+      "condition": "padding=0.25",
+      "sha256": "0c49b5eb1df510696b019edd5960c79704ca55b52eebdabf2dd466fca88d1a51",
+      "bytes": 5173,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:452f51057c5cded629eb4054",
+      "condition": "padding=1.25",
+      "sha256": "984969a24c5d4a12e1934082e316ea419d50c6d2722b0cf19ad02c2d0680363c",
+      "bytes": 17506,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:06409f6cc2ae6e0a7acaff49",
+      "condition": "padding=0.25",
+      "sha256": "e903f3ca53838ef5b3ffede1231d1437b15a6397539c1cb48c2bc33658d4b9fc",
+      "bytes": 5997,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:06409f6cc2ae6e0a7acaff49",
+      "condition": "padding=1.25",
+      "sha256": "6062ee2c81604d38afb78d7e3a5d8bacb6cf453be0b43f3c9db826a3ab6bc07c",
+      "bytes": 20927,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:c98b1813538f3f8e9579462c",
+      "condition": "padding=0.25",
+      "sha256": "03822c690adc4fdadd0ca7c4439024fcc50ef2b84b044c0c01f0da14b26b366c",
+      "bytes": 5808,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:c98b1813538f3f8e9579462c",
+      "condition": "padding=1.25",
+      "sha256": "662ab4e4b0c8d19e3d46659e99e756aa311e225b48f1c596a589310fb25c6230",
+      "bytes": 22650,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:368152e33087822273f8ece6",
+      "condition": "padding=0.25",
+      "sha256": "de0f096f9084ae000947c03ef00c1f05e331f6f19a7c81406db5740e3bd4c004",
+      "bytes": 6267,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:368152e33087822273f8ece6",
+      "condition": "padding=1.25",
+      "sha256": "b285b4ef1bc912c17c80e8ae19a33c95418a59a04695930ce8a79cfabff6e854",
+      "bytes": 24505,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:aff093b8071709633f9c2813",
+      "condition": "padding=0.25",
+      "sha256": "56b901acb90217ec2c2e2820c25644ad4aacdd9775d07079d29574f69528d390",
+      "bytes": 4969,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:aff093b8071709633f9c2813",
+      "condition": "padding=1.25",
+      "sha256": "be6be70b0ba250272c535cf57849ac22878d6af92cb0e99f970d8f664f4b4f55",
+      "bytes": 21179,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:03ffefb5640dd7077b81398c",
+      "condition": "padding=0.25",
+      "sha256": "eacc5db910297fef1575da80e19fc209dbcebe28b14fea948d25cf11cb5f24b4",
+      "bytes": 4586,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:03ffefb5640dd7077b81398c",
+      "condition": "padding=1.25",
+      "sha256": "391a53dc220a67fddb54547241a227e5709d5454db63770eab9118d9c82a8fb8",
+      "bytes": 18992,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:d14d80cfccd83c2b6fd31aac",
+      "condition": "padding=0.25",
+      "sha256": "7ecad0c5386a47c27d80f613356f2c8a4f63e3e79384c306a9493139d6958f09",
+      "bytes": 8969,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:d14d80cfccd83c2b6fd31aac",
+      "condition": "padding=1.25",
+      "sha256": "a62ee15ad6db8bad4d3f3d328548085840e59d1732f1f1da52ec3eb6dde27bee",
+      "bytes": 32997,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:15ce1d6a70436ddc920417fa",
+      "condition": "padding=0.25",
+      "sha256": "488d17f7d5723e9b84d4491cf9bfa95598bc5979bb33f4c4d61a172596f6518c",
+      "bytes": 7917,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:15ce1d6a70436ddc920417fa",
+      "condition": "padding=1.25",
+      "sha256": "367143bc6610f70bb64d948e7efbef5aaa22f24abfe0628d37c26881db94d09d",
+      "bytes": 28115,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:3f76cc76cc6c953976f2fa89",
+      "condition": "padding=0.25",
+      "sha256": "851f0062b524465fd8d6a1b15eed99c9066d0f5ab395fe9c8f6896dfc8748dd2",
+      "bytes": 6793,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:3f76cc76cc6c953976f2fa89",
+      "condition": "padding=1.25",
+      "sha256": "86583ef846c76955ce8e34514f07dfa931f46e6718c1156ebb78f7fca1a7a8a0",
+      "bytes": 15393,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:b49b5296857642055baaedb4",
+      "condition": "padding=0.25",
+      "sha256": "13cbf4930212ab15bf5e718784701b1a5af406a25d313207f6a36fdbbedabdfa",
+      "bytes": 7230,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:b49b5296857642055baaedb4",
+      "condition": "padding=1.25",
+      "sha256": "49b99a7da0395ee6e4c18af45015e306069c34956ee1490be029e2fa5eb1b84c",
+      "bytes": 29362,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:e0d66fa18194e16edc26258b",
+      "condition": "padding=0.25",
+      "sha256": "16621bf5b64df356f039ed1dcb384e6a9349f144f9cfd3d11576c31d8cd6a5c6",
+      "bytes": 6527,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:e0d66fa18194e16edc26258b",
+      "condition": "padding=1.25",
+      "sha256": "31ba3b3ee0ebec482fac35a1fa6429097d6431c29e8b1bfdf7c464b2a1c74515",
+      "bytes": 31186,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:6795c0e0cb33944afb0e3cf4",
+      "condition": "padding=0.25",
+      "sha256": "f23a2410bb3364b0669a90934a54aa195bf09ddd5a7f4a6f7679c94068163069",
+      "bytes": 4708,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:6795c0e0cb33944afb0e3cf4",
+      "condition": "padding=1.25",
+      "sha256": "3c1e9e6deca20f9d75a1b5b5207f3b648eae32f1fc3af97d4f6fc4b76ccb5cfd",
+      "bytes": 17769,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:05f925052ae2c9499cb2328e",
+      "condition": "padding=0.25",
+      "sha256": "d4c685f632b3b860b666c5ac5cce420f41ebaaa132bf9f6297e210f7cfc2c3a9",
+      "bytes": 6257,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:05f925052ae2c9499cb2328e",
+      "condition": "padding=1.25",
+      "sha256": "abef883f0403e56d39b6ccfcc7fd96db84526ec74a4a4b1eccddb70ac2582324",
+      "bytes": 22119,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:88282e21a6a0d6ad6a812c66",
+      "condition": "padding=0.25",
+      "sha256": "8d2ae31dbd1b23a538804d1b16e9e968940fce0efb3ec3949b7ba929ebd1073d",
+      "bytes": 7554,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:88282e21a6a0d6ad6a812c66",
+      "condition": "padding=1.25",
+      "sha256": "cf502722ca6207eab239ef2c4ec69fed1f027878e4572dbbf22a5c1a94603abd",
+      "bytes": 35380,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:61ddeb3d8dee16460d7da92a",
+      "condition": "padding=0.25",
+      "sha256": "1fd866e858a6f306b279ca02e5a006c8378bf089d8ba028952a40ad75f09f411",
+      "bytes": 6461,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:61ddeb3d8dee16460d7da92a",
+      "condition": "padding=1.25",
+      "sha256": "472a04ba3a7f222bdf08a97653c9e67010a69541f4a6a61792fb679143f2697e",
+      "bytes": 21017,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:ab3747d2f251dde94533bb4f",
+      "condition": "padding=0.25",
+      "sha256": "442b688faea60e538f3d545d1dd7500faa5b7120e26c35ddebcf570df22ebf6f",
+      "bytes": 5310,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:ab3747d2f251dde94533bb4f",
+      "condition": "padding=1.25",
+      "sha256": "8645fbda563493f996d93ee7529b30c5edae6efd4ff35ea1f39e436f19c383d4",
+      "bytes": 17026,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:25f262a4629f64229032f782",
+      "condition": "padding=0.25",
+      "sha256": "22394e54632243423956d32e1d7c2ab905d0095ccec2f75ff0efa47347947d21",
+      "bytes": 4427,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:25f262a4629f64229032f782",
+      "condition": "padding=1.25",
+      "sha256": "958720b7985bd85e2db5b09597dc8ece1825a51f074581d8d1cdb4f1dd9708d1",
+      "bytes": 17847,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:571cdf10bf8edc8509d1117e",
+      "condition": "padding=0.25",
+      "sha256": "edddb52db1f36b2246e020b65d0d09144fe704fa0534ec7ba75a66447b2502e9",
+      "bytes": 7111,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:571cdf10bf8edc8509d1117e",
+      "condition": "padding=1.25",
+      "sha256": "1196c0e21a8b6359148c3f159e7f2aa14cb420929b97fba6225725f2e4e11e9d",
+      "bytes": 24420,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:d30a1d4847862e87b52e3ae6",
+      "condition": "padding=0.25",
+      "sha256": "1a2614fb2ce7199f420d24e548eb339410876fa52a6b8db29af4830088599447",
+      "bytes": 9674,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:d30a1d4847862e87b52e3ae6",
+      "condition": "padding=1.25",
+      "sha256": "97212d2a3999068510b52ddebb26969c5e22b4245fac46494884e071de5aeebc",
+      "bytes": 38128,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:94fad2e4a66b074252c4a24e",
+      "condition": "padding=0.25",
+      "sha256": "23e37f7c4169333a5c30742addeff384834177c9ed719d5101d9a74776b54771",
+      "bytes": 4184,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:94fad2e4a66b074252c4a24e",
+      "condition": "padding=1.25",
+      "sha256": "b9de0c5690de6163759781f99fe9d32754f16ed706a67a247296feee0796c122",
+      "bytes": 15357,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:aacfe051fbe07ff44e51b784",
+      "condition": "padding=0.25",
+      "sha256": "8a2f0cae8a19d026d0c854c050c4878f4e2e8914c846caec917fc8a4e17f3936",
+      "bytes": 4161,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:aacfe051fbe07ff44e51b784",
+      "condition": "padding=1.25",
+      "sha256": "700ba3170226e0c6aab9dfde077828cb12414a8db03437ec40be1c2b8b13e312",
+      "bytes": 17529,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:e51352d0e2f6611ad86adac3",
+      "condition": "padding=0.25",
+      "sha256": "5129f06be7149f0589840a9c01e51cbc2ed88e0dad8143f6c8241aeed5dc8f81",
+      "bytes": 4893,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:e51352d0e2f6611ad86adac3",
+      "condition": "padding=1.25",
+      "sha256": "c9c80bbb804f324caf5fbfb4e392cca9806ce3b23e76e319d1527da364db0d8e",
+      "bytes": 21265,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:e8bd3418c41d5471d72c3ff1",
+      "condition": "padding=0.25",
+      "sha256": "333b535362cf2372e951fca899f36d1ec32c20b6a597660e79e174acc41cce4e",
+      "bytes": 5248,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:e8bd3418c41d5471d72c3ff1",
+      "condition": "padding=1.25",
+      "sha256": "6a73ad1b40cb20d42f4bdcbbf6ed19ee73fd868d7ada0d2521ceab7d52f683f7",
+      "bytes": 21988,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:b9b94308fb3921d22d533529",
+      "condition": "padding=0.25",
+      "sha256": "f7a9b17055e51eb4f40334fa5468332435e9856e9efd6f94d9dcf41c92605b90",
+      "bytes": 5599,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:b9b94308fb3921d22d533529",
+      "condition": "padding=1.25",
+      "sha256": "7bf0b6dc137ecc8b2bab0b993aab0863462457bd70d6e70a5b930a11ab9c44ca",
+      "bytes": 22242,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:23a94f06fa28f7670164efe5",
+      "condition": "padding=0.25",
+      "sha256": "dbc25aa0aeeee0c14de3bf7ade83512f040fbc9e6f51f79330a5d760b2db2385",
+      "bytes": 4262,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:23a94f06fa28f7670164efe5",
+      "condition": "padding=1.25",
+      "sha256": "5888695471e4ec8cab8ea9f9b3072a3e224135f8326f4df043848fc4459ba8a9",
+      "bytes": 9585,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:bd4d921ff7df078cd728e7e4",
+      "condition": "padding=0.25",
+      "sha256": "7a2e13dae1f2b8d76ccbbfd10bb4eb03e5b080c8181f781944f0754cc5633c87",
+      "bytes": 5448,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:bd4d921ff7df078cd728e7e4",
+      "condition": "padding=1.25",
+      "sha256": "22120922573b351d09011163b898adb947333d84a8f38cc3dc3a720ef1af54a9",
+      "bytes": 18983,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:6e4a667452100535e785a97e",
+      "condition": "padding=0.25",
+      "sha256": "ea548772855704715b870ca26408601dbaa8234deea2017a6addcbac1e51c48d",
+      "bytes": 5748,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:6e4a667452100535e785a97e",
+      "condition": "padding=1.25",
+      "sha256": "4635a6ef4c2c82cc3c5a363b8112140a2bdccfd352cedb7772000e57ad36856b",
+      "bytes": 16175,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:d4051f42fb77e128bb9eb088",
+      "condition": "padding=0.25",
+      "sha256": "e2e6bf1132e466392f9a99aebbc11f8ac261ecd2d7d768948acba4434e245ccf",
+      "bytes": 7884,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:d4051f42fb77e128bb9eb088",
+      "condition": "padding=1.25",
+      "sha256": "6e3c5886b078a6aca2631e21cff6d0f3a981b5b1c79194d906145f54e16072c1",
+      "bytes": 35058,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:e14bd8c3afd8a7659fce1233",
+      "condition": "padding=0.25",
+      "sha256": "523d94aa62aa3bbd0291e2c8feca5e37706d7a10e851653605250c91d8b39718",
+      "bytes": 9100,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:e14bd8c3afd8a7659fce1233",
+      "condition": "padding=1.25",
+      "sha256": "04e0196dadfb9b2dbc16a384231562d01f21743e9487e5477b4d53e1092de637",
+      "bytes": 36287,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:44d9879a791fa237b30a2ede",
+      "condition": "padding=0.25",
+      "sha256": "6e809dfe88ae02634af6bccc25fe1b1d28ab8380d6f7ebbf1e59d70327f546bc",
+      "bytes": 8865,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:44d9879a791fa237b30a2ede",
+      "condition": "padding=1.25",
+      "sha256": "30d3788c4fe37008436cfecb25457a8d7ec0d7787cf9e199bb4214409a7b669e",
+      "bytes": 40216,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:167af1f893a4b28a59161166",
+      "condition": "padding=0.25",
+      "sha256": "fd3364a83a7426926bb5c3ca447cfd4fb00b988198af2d06e5d383ef3bb6e9eb",
+      "bytes": 5851,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:167af1f893a4b28a59161166",
+      "condition": "padding=1.25",
+      "sha256": "7d0f2ba21f591330210f9051f886e67ae5c4e9c9e23c2503a11326aaf4f991b6",
+      "bytes": 15215,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:37b21f8cf016b2ca01af2c95",
+      "condition": "padding=0.25",
+      "sha256": "bd9ae358bed9c9b48655f6b730a7687b1a0ccca5cd25c0e44f211ec936ff6a9a",
+      "bytes": 5571,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:37b21f8cf016b2ca01af2c95",
+      "condition": "padding=1.25",
+      "sha256": "5227a1222fb60c8c98d81f7e34a600d62bab9ec80e32a309fa71fedba4be3d19",
+      "bytes": 22985,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:599bb9a7d04057cbb8bd6fc7",
+      "condition": "padding=0.25",
+      "sha256": "d5bd74604401a5892a7d7812dbf8840e07d83b8856a2f4b594ac68420a506038",
+      "bytes": 7705,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:599bb9a7d04057cbb8bd6fc7",
+      "condition": "padding=1.25",
+      "sha256": "d3eea17a0343e9bab74f8c26b44b63824f5a398ad79c43dc91c6e53c97b95d2d",
+      "bytes": 28326,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:5666a4c9af0c5e8fe7431f16",
+      "condition": "padding=0.25",
+      "sha256": "229c42eb9508227a91321b85441a4a69c1786c280886c4003738432e46ed4007",
+      "bytes": 7223,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:5666a4c9af0c5e8fe7431f16",
+      "condition": "padding=1.25",
+      "sha256": "766564b0157f93b32aa6d827a766a917b2bff8325d9ad44b165e1062043c8278",
+      "bytes": 23645,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:56372d82bfe85fa93eb6d3d2",
+      "condition": "padding=0.25",
+      "sha256": "34555416d9c12cce65edb3b4cc95112e1596cdbbe867d39d2d7261776209f81c",
+      "bytes": 7002,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:56372d82bfe85fa93eb6d3d2",
+      "condition": "padding=1.25",
+      "sha256": "a002607a9460a166e8241e494feecb84efc521e087e587941a91d8635cd488ae",
+      "bytes": 20845,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:42f5001565aec74b59561c88",
+      "condition": "padding=0.25",
+      "sha256": "22179c3782a4011be3c5a73b5fa9c1d613703b5457dc720e6e3b2556ccf09598",
+      "bytes": 5839,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:42f5001565aec74b59561c88",
+      "condition": "padding=1.25",
+      "sha256": "4ee6b639d129a7594d9206f28dd3627c0ecfa4b02788573c5e6357c0d253ceb7",
+      "bytes": 21081,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:c973713eb042bbc227b5cfe1",
+      "condition": "padding=0.25",
+      "sha256": "4141d27924d273746864390109fe23d6a84a698e23b30ed344099d0a00cb49b2",
+      "bytes": 6411,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:c973713eb042bbc227b5cfe1",
+      "condition": "padding=1.25",
+      "sha256": "d5df68e07ec23cfb35c8854b68e4bba1f4128862a10fac7079a6157f968a2347",
+      "bytes": 19684,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:ab3d9f2f60397def807b2dfe",
+      "condition": "padding=0.25",
+      "sha256": "686e613882d3967ddfc0a352d2088bd516e13bf091b0be66c944575112283f9c",
+      "bytes": 8008,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:ab3d9f2f60397def807b2dfe",
+      "condition": "padding=1.25",
+      "sha256": "262cae19d518458c4be421cffb61477eff5ab6965c5df388a94143f594203bbc",
+      "bytes": 24756,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:398f84b961b735d6d0734977",
+      "condition": "padding=0.25",
+      "sha256": "a465bc0129b1a2234e331c24275dbf5289be3e350581bab3da5402d4367e5d0f",
+      "bytes": 4706,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:398f84b961b735d6d0734977",
+      "condition": "padding=1.25",
+      "sha256": "23d869986337977c41ee20e25094598de294a56b0e5daa55170ffd46d3f1584c",
+      "bytes": 13654,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:be0c329b8a2ba41cffc3ebc8",
+      "condition": "padding=0.25",
+      "sha256": "a2cdbef68e0128c48979cdb1e7014c927bbc3fbc52a7ba69ef0835192b6d6bc8",
+      "bytes": 4680,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:be0c329b8a2ba41cffc3ebc8",
+      "condition": "padding=1.25",
+      "sha256": "e0bfd5ead243b3d678191821c3e7beb224fc88e598d47c00cad4acb46b11c1b3",
+      "bytes": 18544,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:283a925ffbdbf3350bd1e8a6",
+      "condition": "padding=0.25",
+      "sha256": "2e1d7f6de8d9e6f8f0acb14af585a80c57440af6785e10905a1fa36c20f79c1a",
+      "bytes": 4078,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:283a925ffbdbf3350bd1e8a6",
+      "condition": "padding=1.25",
+      "sha256": "60238ca8d89ff22b6f7c51f804483581964b2ab5e901ef7d27b2cb73973c6380",
+      "bytes": 18318,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:b8527454fa156783366fb212",
+      "condition": "padding=0.25",
+      "sha256": "788459057ad0eed45fecf23a016716a7cf69f92cac2c105b512751d8f838d07f",
+      "bytes": 5956,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:b8527454fa156783366fb212",
+      "condition": "padding=1.25",
+      "sha256": "e209432ad8ff9c55e7dc60ecdbf02ca994e63b2c9068c9ad578792d6d6b52d5d",
+      "bytes": 21882,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:df7a3b640434c4ed7602f9b4",
+      "condition": "padding=0.25",
+      "sha256": "e0b6373026bd02556d36fa6842dd25a4adc38955123ed1cbb073476eef57a2f8",
+      "bytes": 6876,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:df7a3b640434c4ed7602f9b4",
+      "condition": "padding=1.25",
+      "sha256": "b7bdac04f516dc0a8c47a0182136a74b0950abb55cf1a3f2a63a976561c82064",
+      "bytes": 23577,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:ee1908d63716f69183988945",
+      "condition": "padding=0.25",
+      "sha256": "f40971a3839ae8c37e72982a29113f880fa4cb7e717e48f723b1a26ab43f626a",
+      "bytes": 6919,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:ee1908d63716f69183988945",
+      "condition": "padding=1.25",
+      "sha256": "7782792f09436acc9f89c0302c1ae134ef481751cea58f58807440416b4f5a14",
+      "bytes": 21775,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:b811ea92fd87b54f897670cc",
+      "condition": "padding=0.25",
+      "sha256": "601a9029727fd20da11ec9e85637f9e28066bd685ba9b41f545c4329aa254924",
+      "bytes": 4818,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:b811ea92fd87b54f897670cc",
+      "condition": "padding=1.25",
+      "sha256": "11b90b4e51443fb023f7243e6be849425a758d87aa288aabd8627ccfe76eff06",
+      "bytes": 14861,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:ac4152d3862641dc0876b1c7",
+      "condition": "padding=0.25",
+      "sha256": "85470d6d13783ac7a14da47d8888ea3aeb097571356720a7964e19082f316ba9",
+      "bytes": 6526,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:ac4152d3862641dc0876b1c7",
+      "condition": "padding=1.25",
+      "sha256": "4f71b2e93b1ac0132f020b5fdf95ba68a2a948593b509d462e281a3323d8db55",
+      "bytes": 22394,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:703ae9161ec6c9d022b35de9",
+      "condition": "padding=0.25",
+      "sha256": "df6d35d2915d7738b10b35af29f83b57cf601092b51943aaf9ad82282cc870f9",
+      "bytes": 8587,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:703ae9161ec6c9d022b35de9",
+      "condition": "padding=1.25",
+      "sha256": "b1862937a3798fa8d5d3bde7a6062e7480fd0d75dcf8a1c397732195c25e18d9",
+      "bytes": 29053,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:42ef71aab9de3720c8320018",
+      "condition": "padding=0.25",
+      "sha256": "6b615f821f8da719c9dfe7cf90543aba68d146f961d2239236a32e7231bc9365",
+      "bytes": 5758,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:42ef71aab9de3720c8320018",
+      "condition": "padding=1.25",
+      "sha256": "2183da6919d2887f6f48c35708d6f27b8955e31d1d8338489fb146e694992186",
+      "bytes": 20040,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:7ebedc2fb82e9e2dfa6212d9",
+      "condition": "padding=0.25",
+      "sha256": "d29157893363903a4ab99d781f0afcba07be05a5722bd01d8c9807c5923b8b34",
+      "bytes": 5460,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:7ebedc2fb82e9e2dfa6212d9",
+      "condition": "padding=1.25",
+      "sha256": "efebd972831f97127e0df5ba8fe418eb9fb1113e61721f336676a77c0c457ef8",
+      "bytes": 24874,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:dfdc7f111dea3810d91770a9",
+      "condition": "padding=0.25",
+      "sha256": "d85c6499e46dffba727c30234112835c7b29720aae31b55e58193ecc0f381b9c",
+      "bytes": 7829,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:dfdc7f111dea3810d91770a9",
+      "condition": "padding=1.25",
+      "sha256": "092eefc8926a2a2292be2ce9b9aa7c7272d8d771f0b0dc13d9cc363fadaaf50f",
+      "bytes": 28171,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:e7d874fd23bc77191b35fb3f",
+      "condition": "padding=0.25",
+      "sha256": "66ac97512efedc20d4e7720952d177be0928c39341cc85c0b6c5dcff8b16a871",
+      "bytes": 6104,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:e7d874fd23bc77191b35fb3f",
+      "condition": "padding=1.25",
+      "sha256": "f7965b86a03d0285c709237c8e9716ca5beb40d1ab436b9438169a900a5c1bbd",
+      "bytes": 27704,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:584278dff717b3d1a7cb7e4c",
+      "condition": "padding=0.25",
+      "sha256": "b9dc55d7102a7ceaa67b1ef1d8121d4c54ec5930f672841d897c8bd76e2ecff6",
+      "bytes": 3898,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:584278dff717b3d1a7cb7e4c",
+      "condition": "padding=1.25",
+      "sha256": "3ff81e957efbe8b1071524fe3f796a3357a42e85b789be45a9e04407f9c642d5",
+      "bytes": 17232,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:c8bad845c1526684cb6f1d3f",
+      "condition": "padding=0.25",
+      "sha256": "e817460946b6e21b904f4c9976dd6b1ac57a935f6c19bc2786b79489a2f2b074",
+      "bytes": 6448,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:c8bad845c1526684cb6f1d3f",
+      "condition": "padding=1.25",
+      "sha256": "a322058603835bb82e2e4a223dac3cfa41cef633e93bdd1d27cb101e18500d90",
+      "bytes": 21887,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:5bb6838eb69626b522554835",
+      "condition": "padding=0.25",
+      "sha256": "c0f6b15faa6d9986499d2c615399a4475f3325f8c76aa4921919cc46b08a1f38",
+      "bytes": 5578,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:5bb6838eb69626b522554835",
+      "condition": "padding=1.25",
+      "sha256": "dd24c36659ba52d3cd9a47c864c09d1f93c6116db01f4e5bacb21e6405cef01c",
+      "bytes": 27864,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:850ed87256d22ec1162fa2a9",
+      "condition": "padding=0.25",
+      "sha256": "1ecaba5e3fa55e82d43ed8260ca897782b7335592f1d120726da4b3e5f6d4021",
+      "bytes": 3580,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:850ed87256d22ec1162fa2a9",
+      "condition": "padding=1.25",
+      "sha256": "abd33a3aa4cf5dad60c9c1df41fca34f84932089162026211f6f89852b826a68",
+      "bytes": 12948,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:11e90571dce55223a32fdc02",
+      "condition": "padding=0.25",
+      "sha256": "bc91b2147a5076e25b6ea79e64890bcec7cdfb6e7c31480f4a7e8c88f3aa147f",
+      "bytes": 5963,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:11e90571dce55223a32fdc02",
+      "condition": "padding=1.25",
+      "sha256": "568375478d34686e4316b44a0af66b90930ec6780c96ff466231b5984fdf3f79",
+      "bytes": 21093,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:5f281b94e2d462aa5ae33c58",
+      "condition": "padding=0.25",
+      "sha256": "66143990041e4ff266706a3c2dad259e5a50fd449b37da2b636b452b651d8613",
+      "bytes": 4909,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:5f281b94e2d462aa5ae33c58",
+      "condition": "padding=1.25",
+      "sha256": "e100acf44686ba4b7d79fd27dee899ba314c935c7995b1eb14c99333d28fbc90",
+      "bytes": 17682,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:a5dc01f98729f6ab517d677e",
+      "condition": "padding=0.25",
+      "sha256": "0fd8b32e4c6ddfbed54c4eeb33856de79f2f355cc89b5c240129f103aa233812",
+      "bytes": 5496,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:a5dc01f98729f6ab517d677e",
+      "condition": "padding=1.25",
+      "sha256": "afbf94938622a528ffcc14b41cdc674187caf96d47a63769c9dcabf8eee1ce6d",
+      "bytes": 23728,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:fffff326cd328514363a886e",
+      "condition": "padding=0.25",
+      "sha256": "0572da22e19ada8bb7b6175fccb82a572020deeec83732debdde060c53102c53",
+      "bytes": 6921,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:fffff326cd328514363a886e",
+      "condition": "padding=1.25",
+      "sha256": "636e741bf42a0c9b0ff49f66a4a0ca78bd4409230ee71f9355faffe368b705f6",
+      "bytes": 22809,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:ffffe30809c2f9cb1983150c",
+      "condition": "padding=0.25",
+      "sha256": "a83ced797de6c7a95ebb2edb88887c0b3daa2bddc556454557d2196cec106e5f",
+      "bytes": 7181,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:ffffe30809c2f9cb1983150c",
+      "condition": "padding=1.25",
+      "sha256": "9be57809e6a2a7f2dc8d0982cc30b7d9cb2f67764c668d5133ce038c8995af69",
+      "bytes": 27843,
+      "dimensions": [
+        448,
+        448
+      ]
+    },
+    {
+      "record_id": "fairface:example:fffec547fb81758db99acb34",
+      "condition": "padding=0.25",
+      "sha256": "d527d2cd9fd74a5e4147f3462cbdaa2c58e860dd14b030eaf6c7e7f229106c98",
+      "bytes": 8539,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "fairface:example:fffec547fb81758db99acb34",
+      "condition": "padding=1.25",
+      "sha256": "cd60fe5f0706b4073de48930fb33b73453b5f63abffaa88819f033c4d838f657",
+      "bytes": 23739,
+      "dimensions": [
+        448,
+        448
+      ]
+    }
+  ]
+}

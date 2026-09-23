@@ -2,24 +2,27 @@ schema_version: '1.0'
 id: rsicd
 name: RSICD
 aliases: []
-description: Original paper points to author repository for the RSICD corpus.
+description: 'RSICD: all 10,921 author-released remote-sensing images and their five native captions,
+  caption tokens/IDs and train/validation/test labels. All 224 by 224 released images retain their original
+  pixels.'
 paper_ids:
 - paper-25eaa8c74ce76800
-release: unresolved
-adapter: structured
+release: rsicd-fc33b4555e4baa4d2f05ff0449479c89da2eeac2
+adapter: structured_collection
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Adapter and preview are not implemented.
+  - Public image redistribution has not been approved.
+  total_count: 10921
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -34,7 +37,7 @@ evidence:
   source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
   page: 30
   role: cited-study dataset in survey table
-  excerpt: RSICD (Fang et al., 2024b) DensetNet-121 —
+  excerpt: "RSICD (Fang et al., 2024b) DensetNet-121 \u2014"
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -51,4 +54,16 @@ evidence:
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
-source_url: https://github.com/201528014227051/RSICD_optimal
+- kind: native_population_live_verification
+  url: https://github.com/201528014227051/RSICD_optimal/tree/fc33b4555e4baa4d2f05ff0449479c89da2eeac2
+  checked_on: '2026-09-23'
+  receipt: reports/rsicd-live-verification.json
+  scope: Complete native dataset_rsicd.json joined by exact filename to the author Git LFS image ZIP.
+    Five caption entries per image are retained even where their strings repeat. Images are the released
+    224-pixel benchmark crops, not higher-resolution map-provider imagery.
+source_url: https://github.com/201528014227051/RSICD_optimal/tree/fc33b4555e4baa4d2f05ff0449479c89da2eeac2
+modalities:
+- image
+- text
+tasks:
+- image captioning

@@ -26,9 +26,15 @@ class ArchiveVariantsAdapter(StructuredCollectionAdapter):
                         raise ValueError(f'Unexpected native variant archive member: {key}/{item.filename}')
                     native_id = match.group('image_id')
                     identity = spec['split'] + ':' + native_id
+                    fields = {name: template.format(**match.groupdict())
+                              for name, template in spec.get('source_fields', {}).items()}
+                    if any(name.startswith('_') or name in {'native_id', 'split', 'native_variants'} for name in fields):
+                        raise ValueError('Archive source field collides with an identity or reserved field')
                     row = rows.setdefault(identity, {'native_id': native_id, 'split': spec['split'],
                         '_atlas_origin': {'identity': identity, 'split': spec['split'], 'group': spec['split']},
-                        '_atlas_media_refs': [], '_atlas_media_conditions': {}, 'native_variants': {}})
+                        '_atlas_media_refs': [], '_atlas_media_conditions': {}, 'native_variants': {}, **fields})
+                    if any(row.get(name) != value for name, value in fields.items()):
+                        raise ValueError('Archive variants disagree on native source fields')
                     variant = spec['variant'].format(**match.groupdict())
                     if variant in row['native_variants']:
                         raise ValueError('Duplicate native image variant')

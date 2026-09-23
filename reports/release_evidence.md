@@ -168,3 +168,36 @@ and generator-budget checks passed. The earlier 22 frontend and 36 browser check
 remain the UI checkpoint; this batch changed no frontend code. Native media and
 query checks above ran against the current workbench. Pinned type checks passed.
 Cauldron remains in progress and is excluded from these completed counts.
+
+## Native archive and caption checkpoint, 2026-09-23
+
+The next verified checkpoint reaches **157 previews / 15,432 records and 152
+full-population indices**, leaving 176 of 333 entries without previews. Nine new
+populations and their exact scope are documented in
+[native-expansion-20260923.md](native-expansion-20260923.md). This remains incomplete.
+
+Multipart HTTPS ZIP reads now preserve SEED's native images/ordered frames without
+assembling its large source archives. A bounded parsed-directory cache avoids
+reparsing the same large ZIP for each frame while preserving native header/CRC
+validation. FairFace retains both native crop variants, VQA-Constraints retains
+all released image candidates and exact Unicode joins, and RSICD retains all
+54,605 captions including repeated strings. FIND code and weights remain passive
+source data; no untrusted benchmark code or pickle was executed.
+
+Preparation now honors declared remote Parquet cache roots/budgets. Verified
+registered source files can be reused through same-filesystem hard links, with
+admission accounting reflecting reuse. A failed planned link or missing registered
+object fails explicitly rather than silently downloading an unreserved copy.
+
+Validation: **406 Python passed, one optional source skip; Python 3.14: 404 passed,
+three optional skips; 22 frontend tests; 38 browser checks**. The browser suite
+includes local detector/embedding runs and actual vLLM image transmission. Its
+small-source preparation test now requests a 50 MB budget instead of requiring
+an unnecessary 2 GB default reservation. `prek`, wheel/sdist inspection and the
+installed base-only HTTP smoke test passed. Receipts and exact logs are referenced
+in `reports/final-status.json` and `reports/installation-verification.json`.
+
+The timestamped storage scan measured **143.47 GB**, including configured external
+models. The user requested a graceful stop. Cauldron was cancelled at 725,000 of
+1,880,992 rows and remains excluded from coverage. The workbench and task-owned
+vLLM server were stopped. See [STOP_20260923.md](../STOP_20260923.md) before resuming.

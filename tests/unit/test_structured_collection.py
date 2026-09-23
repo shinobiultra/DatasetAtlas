@@ -226,3 +226,52 @@ def test_keyed_annotations_keep_native_keys_and_exact_overlay(tmp_path,monkeypat
     path.write_text(json.dumps({'image-9':{'image_id':'collision'}}))
     adapter=StructuredCollectionAdapter(adapter.dataset.model_copy(update={'adapter_config':adapter.config}))
     with pytest.raises(ValueError,match='colliding'):adapter.prepare(adapter.plan(10,10000))
+
+
+def test_native_crop_variants_join_distinct_local_archives(tmp_path):
+    import hashlib
+    from PIL import Image
+    path = tmp_path/'labels.json'
+    path.write_text(json.dumps([{'id': 'photo', 'file': 'train/1.jpg', 'label': 'native annotation'}]))
+    config = {'path': str(path), 'mapping': {'id': 'id'}, 'annotations': [{'path_key': 'path', 'split': 'train',
+        'media_variants': [{'condition': key, 'media_archive': key, 'template': '{file}'} for key in ['crop025', 'crop125']]}],
+        'local_archives': {}, 'source_files': []}
+    native = {}
+    for key, colour in [('crop025', 'red'), ('crop125', 'blue')]:
+        import io
+        output = io.BytesIO()
+        Image.new('RGB', (8, 8), colour).save(output, format='JPEG')
+        native[key] = output.getvalue()
+        archive_path = tmp_path/(key+'.zip')
+        with zipfile.ZipFile(archive_path, 'w') as archive:
+            archive.writestr('train/1.jpg', native[key])
+        config[key+'_path'] = str(archive_path)
+        config['local_archives'][key] = {'path_key': key+'_path'}
+        config['source_files'].append({'path': str(archive_path), 'sha256': hashlib.sha256(archive_path.read_bytes()).hexdigest()})
+    adapter = StructuredCollectionAdapter(Dataset(id='crops', name='Fixture', snapshot_id='s', adapter_config=config))
+    source = adapter.prepare(adapter.plan(10,100000))
+    row = adapter.iter_records(source).records[0]
+    assert row.source['label'] == 'native annotation'
+    assert len(row.assets) == 2 and row.assets[0].id != row.assets[1].id
+    assert adapter.validate_media(100000)['referenced_images'] == 2
+    for asset in row.assets:
+        assert adapter.resolve_asset(source, asset.uri).data == native[asset.metadata['condition']]
+
+
+def test_native_caption_objects_preserve_ids_tokens_and_repeated_strings(tmp_path):
+    captions = [{'raw': 'same caption', 'id': 1, 'tokens': ['same', 'caption']},
+                {'raw': 'same caption', 'id': 2, 'tokens': ['same', 'caption']}]
+    path = tmp_path / 'captions.json'
+    path.write_text(json.dumps([{'id': 7, 'sentences': captions, 'split': 'val'}]))
+    config = {'path': str(path), 'annotations': [{'path_key': 'path', 'split': 'all'}],
+              'text_parts_field': 'sentences', 'text_parts_item_field': 'raw',
+              'text_parts_separator': '\n', 'mapping': {'id': 'id', 'text': '_atlas_text'}}
+    dataset = Dataset(id='captions', name='Captions', release='r', snapshot_id='s',
+                      adapter='structured_collection', adapter_config=config)
+    adapter = StructuredCollectionAdapter(dataset)
+    record = adapter.iter_records(adapter.prepare(adapter.plan(10, 10000))).records[0]
+    assert record.text == 'same caption\nsame caption'
+    assert record.source['sentences'] == captions and record.source['split'] == 'val'
+    path.write_text(json.dumps([{'id': 7, 'sentences': [{'id': 1}]}]))
+    with pytest.raises(ValueError, match='ordered list of strings'):
+        StructuredCollectionAdapter(dataset)._rows()

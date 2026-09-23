@@ -3,34 +3,35 @@ id: seed-bench-2
 name: SEED-Bench-2
 aliases:
 - Seed-Bench-2
-description: SEED-Bench-2 multi-dimensional image/video multiple-choice benchmark;
-  separate from SEED-Bench-1 and 2-Plus.
+description: 'SEED-Bench 2: all 24,371 native questions with original choices, answers, task dimensions
+  and image references. Video questions retain the eight ordered author-released frames. Original-resolution
+  images and frames are fetched on demand from the pinned media archives.'
 paper_ids:
 - paper-32cea5e43d940514
 - paper-f03c5ad315e6d835
-release: unresolved
-adapter: structured
+release: 2a0f22725601e6fc42392864c28539701194cd0f
+adapter: seed_bench
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Source-family rights and any public media examples require dataset-specific review.
-  - Adapter and preview are not implemented.
+  - Public preview redistribution is not approved.
+  total_count: 24371
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2
-  note: Author dataset card declares CC BY-NC 4.0; DATASET.md identifies numerous
-    upstream image/video datasets whose own terms remain relevant
+  note: Author dataset card declares CC BY-NC 4.0; DATASET.md identifies numerous upstream image/video
+    datasets whose own terms remain relevant
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-7cd4be6a2b540e2865ea
@@ -38,9 +39,9 @@ evidence:
   source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
   page: 5
   role: evaluation
-  excerpt: 'd with the sum of perception and reasoning scores, MMMU-dev [87], and
-    Seed-Bench-2 [49]) for The comparison methods for LVLMs are as fol- general performance
-    evaluation [16]. lows [21]: Full F'
+  excerpt: 'd with the sum of perception and reasoning scores, MMMU-dev [87], and Seed-Bench-2 [49]) for
+    The comparison methods for LVLMs are as fol- general performance evaluation [16]. lows [21]: Full
+    F'
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -49,9 +50,9 @@ evidence:
   source_file_hash: 47431d9340ff27b9234e2184711fbc3fc06ded7718fe53ca79b23a1cd1db777d
   page: 8
   role: evaluation
-  excerpt: 'r Bias ↓ General Performance ↑ P. Traits Skills Occ. MMBench MME MMMU
-    Seed-Bench-2 Original 0.86 0.48 0.56 0.60 1773.55 0.26 0.50 Prompt Engineering
-    0.80 0.40 0.41 0.53 -10.90% 1728.42 -2.54% '
+  excerpt: "r Bias \u2193 General Performance \u2191 P. Traits Skills Occ. MMBench MME MMMU Seed-Bench-2\
+    \ Original 0.86 0.48 0.56 0.60 1773.55 0.26 0.50 Prompt Engineering 0.80 0.40 0.41 0.53 -10.90% 1728.42\
+    \ -2.54% "
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -60,15 +61,14 @@ evidence:
   source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
   page: 5
   role: general utility evaluation
-  excerpt: 24.2 measured with the sum of perception and reasoning scores, MMMU-dev
-    [87], and Seed-Bench-2 [49]) for The comparison methods for LVLMs are as fol-
-    general performance evaluation [16
+  excerpt: 24.2 measured with the sum of perception and reasoning scores, MMMU-dev [87], and Seed-Bench-2
+    [49]) for The comparison methods for LVLMs are as fol- general performance evaluation [16
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2
-  note: SEED-Bench-2 multi-dimensional image/video multiple-choice benchmark; separate
-    from SEED-Bench-1 and 2-Plus
+  note: SEED-Bench-2 multi-dimensional image/video multiple-choice benchmark; separate from SEED-Bench-1
+    and 2-Plus
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
@@ -80,24 +80,35 @@ evidence:
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_access
   url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2
-  note: Official Hugging Face dataset is public but large and media-heavy; no archive
-    downloaded
+  note: Official Hugging Face dataset is public but large and media-heavy; no archive downloaded
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_rights
   url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2
-  note: Author dataset card declares CC BY-NC 4.0; DATASET.md identifies numerous
-    upstream image/video datasets whose own terms remain relevant
+  note: Author dataset card declares CC BY-NC 4.0; DATASET.md identifies numerous upstream image/video
+    datasets whose own terms remain relevant
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_related_links
   urls:
   - https://github.com/AILab-CVC/SEED-Bench/blob/main/DATASET.md
-  note: Additional official or author-cited evidence; does not establish a selected
-    release.
+  note: Additional official or author-cited evidence; does not establish a selected release.
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
-source_url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2
+- kind: native_population_live_verification
+  url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/tree/2a0f22725601e6fc42392864c28539701194cd0f
+  checked_on: '2026-09-23'
+  receipt: reports/seed-bench-2-live-verification.json
+  scope: All 24,371 questions in the author Hugging Face release, including every native task and all
+    ordered media. The released video representation is eight PNG frames per question, not full video
+    playback. No benchmark prompts are executed or generated outputs claimed. Each archive part is ETag-bound;
+    upstream hashes are recorded, not falsely reported as fully downloaded and locally verified.
+source_url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/tree/2a0f22725601e6fc42392864c28539701194cd0f
+modalities:
+- image
+- text
+tasks:
+- visual question answering

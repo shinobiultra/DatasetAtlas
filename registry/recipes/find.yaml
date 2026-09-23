@@ -1,0 +1,23 @@
+release: find-zenodo-8332767-v1.0.1
+source_url: https://zenodo.org/records/8332767
+adapter: find
+expected_count: 2275
+description: 'FIND v1.0.1: all 2,275 released functions across string, numeric, entity-neuron and relation-neuron
+  groups, with native definitions, source code, test data and available serialized approximation weights.
+  Code and model bytes are inspected as data, never executed or deserialized.'
+scope: All 1000 string, 1000 numeric, 200 entity-neuron and 75 relation-neuron functions in the author
+  Zenodo v1.0.1 archive. Native auxiliary tables and initial lists are joined exactly. The archive contains
+  only 150 approximation weight files; absence for other functions is retained, and no benchmark execution
+  or scoring is claimed.
+files:
+- source_name: FIND-dataset.zip
+  url: https://zenodo.org/api/records/8332767/files/FIND-dataset.zip/content
+  bytes: 2732606
+  sha256: 33d52ed845e7ab5b6085b6b079b092c10c39cbc0def595737a55cc5227b6d811
+  md5: 93cf573a9d7b5a1d840e8635fc688556
+  format: zip
+  config_key: path
+allowed_hosts:
+- zenodo.org
+adapter_config:
+  max_annotation_bytes: 20000000

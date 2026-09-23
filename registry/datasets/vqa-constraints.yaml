@@ -2,27 +2,27 @@ schema_version: '1.0'
 id: vqa-constraints
 name: VQA-Constraints
 aliases: []
-description: Mention candidate from a focused page audit; the evidence receipts distinguish
-  direct use, comparison, related-work, and citation-only roles. Original source,
-  release, and rights still require independent verification.
+description: 'VQA-Constraints: all 9,463 released native constraint rows across Multimodal Known (1,204),
+  Multimodal Movies (3,214) and OK-VQA (5,045). Questions and visual/text constraint phrases remain exact;
+  every author-provided image candidate is available with the original pixels.'
 paper_ids:
 - paper-25eaa8c74ce76800
-release: unresolved
-adapter: structured
+release: vqa-constraints-0c74e01ea5fb02bbdd90e08f53777d271c44f639
+adapter: vqa_constraints
 adapter_config: {}
 coverage:
   identity: candidate
-  source: unverified
-  access: unverified
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Original release identity and rights need verification.
-  - Adapter and preview are not implemented.
+  - Public media redistribution is not approved.
+  total_count: 9463
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -34,7 +34,24 @@ evidence:
   source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
   page: 29
   role: cited-study dataset in survey table
-  excerpt: 4a) LLaVa VQA, Model Editing VQA-Constraints Causal Tracing (Basu et al.,
-    2024b) SD-XL, DeepFloyd Knowledge L
+  excerpt: 4a) LLaVa VQA, Model Editing VQA-Constraints Causal Tracing (Basu et al., 2024b) SD-XL, DeepFloyd
+    Knowledge L
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
+- kind: native_population_live_verification
+  url: https://github.com/microsoft/MLLMInterpret/tree/0c74e01ea5fb02bbdd90e08f53777d271c44f639
+  checked_on: '2026-09-23'
+  receipt: reports/vqa-constraints-live-verification.json
+  scope: All rows in the three native CSVs at the pinned author repository revision. Directory-based Known/Movies
+    questions retain every released candidate image; COCO references join to original val2014 images.
+    Blank CSV index fields and native strings are retained. Unannotated image folders are counted in the
+    receipt, not fabricated as questions. No unreleased multi-constraint rows, answer labels or historical
+    paper-used image choices are inferred.
+  source_identity_status: author_release_located_not_human_reviewed
+source_url: https://github.com/microsoft/MLLMInterpret/tree/0c74e01ea5fb02bbdd90e08f53777d271c44f639
+modalities:
+- image
+- text
+tasks:
+- visual question answering
+- constraint inspection

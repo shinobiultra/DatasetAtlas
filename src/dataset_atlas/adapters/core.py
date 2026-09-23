@@ -777,6 +777,15 @@ def get_adapter(dataset: Dataset) -> DatasetAdapter:
     if dataset.adapter == 'pathways_shapes':
         from .pathways_shapes import PathwaysShapesAdapter
         return PathwaysShapesAdapter(dataset)
+    if dataset.adapter == 'find':
+        from .find import FindAdapter
+        return FindAdapter(dataset)
+    if dataset.adapter == 'seed_bench':
+        from .seed_bench import SeedBenchAdapter
+        return SeedBenchAdapter(dataset)
+    if dataset.adapter == 'vqa_constraints':
+        from .vqa_constraints import VQAConstraintsAdapter
+        return VQAConstraintsAdapter(dataset)
     if dataset.adapter == 'nocaps':
         from .nocaps import NocapsAdapter
         return NocapsAdapter(dataset)

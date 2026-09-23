@@ -1,0 +1,37 @@
+{
+  "checked_at": "2026-09-23T10:53:19.606020+00:00",
+  "dataset_id": "seed-bench-2",
+  "snapshot_id": "seed-bench-2-416cf4eb3f1e1849409f58b7",
+  "case": "Four consecutive native frames in the same 116124-member multipart archive. First request parses the directory; subsequent frames reuse its parsed metadata. On-disk HTTP range cache already warm from live verification. No cold-network claim.",
+  "directory_cache_entries": 1,
+  "reads": [
+    {
+      "asset_id": "seed-bench-2:asset:15e2e37db97ce2fdf7d3e734",
+      "member": "zip/images/SEED-Bench-2-image/task21/kitchen_8_frame/v3388/1.png",
+      "seconds": 0.42686828499790863,
+      "bytes": 1680795,
+      "sha256": "5e33ac44b525a0378bba5c9b99f652bf83d8f65b5947bddbfc87948c29c59c84"
+    },
+    {
+      "asset_id": "seed-bench-2:asset:6e6ea89280444aedefd12f7d",
+      "member": "zip/images/SEED-Bench-2-image/task21/kitchen_8_frame/v3388/2.png",
+      "seconds": 0.027191688001039438,
+      "bytes": 1785128,
+      "sha256": "43bf46a78dd4c81bf0fbbade1c4ee24b96312ce66ca637bffc86280368413caa"
+    },
+    {
+      "asset_id": "seed-bench-2:asset:350c0946ca6f9e3dd562403e",
+      "member": "zip/images/SEED-Bench-2-image/task21/kitchen_8_frame/v3388/3.png",
+      "seconds": 0.020347769997897558,
+      "bytes": 1459714,
+      "sha256": "b68958b4996ee58062be5a8dbf1584d321b61d8b7e2e866338c9d3e190539ae8"
+    },
+    {
+      "asset_id": "seed-bench-2:asset:0e04250ad35415e0de6abc06",
+      "member": "zip/images/SEED-Bench-2-image/task21/kitchen_8_frame/v3388/4.png",
+      "seconds": 0.021320951000234345,
+      "bytes": 1720124,
+      "sha256": "ddeb98c3473c02918cdc2538035e6b5d8ef6b6b79431bad3f2804894baeee918"
+    }
+  ]
+}

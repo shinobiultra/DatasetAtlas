@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-23T10:19:32.559507+00:00",
+  "checked_at": "2026-09-23T11:22:11.667404+00:00",
   "datasets": [
     {
       "dataset_id": "agent-security-bench",
@@ -272,6 +272,16 @@
       "prepared_receipt": "work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/receipt.json"
     },
     {
+      "dataset_id": "fairface",
+      "release": "fairface-author-padding025-and125-fb823086",
+      "snapshot_id": "fairface-ef2603000a545d258d028c65",
+      "records": 97698,
+      "preview_records": 100,
+      "scope": "Complete native training and validation CSVs, joined by exact filename to both original image ZIPs; 97,698 examples and 195,396 native image variants. Original released crop dimensions are retained; these are not uncropped source photographs. Native age, gender and race labels remain source-provided annotations.",
+      "plan_id": "ef2603000a545d258d028c657dccc6ecd7bf662b6f5c29c1797bb11801ee4a5a",
+      "prepared_receipt": "work/prepared/fairface/ef2603000a545d258d028c657dccc6ecd7bf662b6f5c29c1797bb11801ee4a5a/receipt.json"
+    },
+    {
       "dataset_id": "fgvc-aircraft",
       "release": "fgvc-aircraft-2013b",
       "snapshot_id": "fgvc-aircraft-e39781517b01ac1fd77afc08",
@@ -280,6 +290,16 @@
       "scope": "All 10000 images in the official fgvc-aircraft-2013b archive, with original splits {'train': 3334, 'val': 3333, 'test': 3333}, variant/family/manufacturer labels and bounding boxes. This archive omits images_size.txt; source_size remains null. Original copyright banners retained.",
       "plan_id": "e39781517b01ac1fd77afc0800267fa7b3fd2d834cd065b327815d6e9d6fe95e",
       "prepared_receipt": "work/prepared/fgvc-aircraft/e39781517b01ac1fd77afc0800267fa7b3fd2d834cd065b327815d6e9d6fe95e/receipt.json"
+    },
+    {
+      "dataset_id": "find",
+      "release": "find-zenodo-8332767-v1.0.1",
+      "snapshot_id": "find-21542ebc798c9c161aed091e",
+      "records": 2275,
+      "preview_records": 100,
+      "scope": "All 1000 string, 1000 numeric, 200 entity-neuron and 75 relation-neuron functions in the author Zenodo v1.0.1 archive. Native auxiliary tables and initial lists are joined exactly. The archive contains only 150 approximation weight files; absence for other functions is retained, and no benchmark execution or scoring is claimed.",
+      "plan_id": "21542ebc798c9c161aed091e943b0826834791947a1ea83ad392d53501b3c686",
+      "prepared_receipt": "work/prepared/find/21542ebc798c9c161aed091e943b0826834791947a1ea83ad392d53501b3c686/receipt.json"
     },
     {
       "dataset_id": "flowers102",
@@ -410,6 +430,16 @@
       "scope": "All native CSV-indexed train/test rows in MNIST_train, MNIST_test, FashionMnist_train, FashionMnist_test, IllusionAnimals_train, IllusionAnimals_test, IllusionChar_train, IllusionChar_test. Each example keeps all released image conditions and their condition-specific targets. Missing training control counterparts are explicit. Unindexed duplicate-name image files and generation prompt pools are retained upstream, not counted as annotated examples. This is the original author-generated dataset, not Atlas-generated replacements.",
       "plan_id": "3c6eaab517eb3497b8e31a04cd514f441f9fc0078daba89a9743b595f7e71d25",
       "prepared_receipt": "work/prepared/illusoryvqa/3c6eaab517eb3497b8e31a04cd514f441f9fc0078daba89a9743b595f7e71d25/receipt.json"
+    },
+    {
+      "dataset_id": "imagenet-sketch",
+      "release": "imagenet-sketch-0d8b8b5380efe50baae075842505918ad43c88fe",
+      "snapshot_id": "imagenet-sketch-c9569b42c8fe9b7288958f5b",
+      "records": 50889,
+      "preview_records": 100,
+      "scope": "Complete 50,889-image archive in the authors' linked Hugging Face distribution; all 1,000 native class folders retained. Native archive has more images than the rounded 50,000 headline count. The upstream loader names this single evaluation population train; no evaluation split is invented. Strong ETag and per-member ZIP CRC checked on reads; upstream full-file SHA-256 recorded but not locally verified.",
+      "plan_id": "c9569b42c8fe9b7288958f5b64ab4c7bb6111030071bdae500ed2aec7ed3671c",
+      "prepared_receipt": "work/prepared/imagenet-sketch/c9569b42c8fe9b7288958f5b64ab4c7bb6111030071bdae500ed2aec7ed3671c/receipt.json"
     },
     {
       "dataset_id": "jiechieu-tsopze-resume-corpus",
@@ -622,6 +652,16 @@
       "prepared_receipt": "work/prepared/ravel/17f66185e65ba33d01ed27661cb363c2f922dc6261ee9a9cd87b15f4553789a6/receipt.json"
     },
     {
+      "dataset_id": "rsicd",
+      "release": "rsicd-fc33b4555e4baa4d2f05ff0449479c89da2eeac2",
+      "snapshot_id": "rsicd-f3cb3b52b1c4280539220300",
+      "records": 10921,
+      "preview_records": 100,
+      "scope": "Complete native dataset_rsicd.json joined by exact filename to the author Git LFS image ZIP. Five caption entries per image are retained even where their strings repeat. Images are the released 224-pixel benchmark crops, not higher-resolution map-provider imagery.",
+      "plan_id": "f3cb3b52b1c4280539220300a80e8c853ce6c24e44a6bf85464cbe25b2f5e56d",
+      "prepared_receipt": "work/prepared/rsicd/f3cb3b52b1c4280539220300a80e8c853ce6c24e44a6bf85464cbe25b2f5e56d/receipt.json"
+    },
+    {
       "dataset_id": "sad",
       "release": "dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3",
       "snapshot_id": "sad-e00d59eacc1a244e4ca086c6",
@@ -640,6 +680,26 @@
       "scope": "All 10332 image-bearing questions selected from the 21208-question author-linked ScienceQA Hugging Face release, with all three native splits preserved by source filename. Available representation, not a claim about an unpinned evaluation-only paper selection.",
       "plan_id": "aed103e93ef820d316b1224c93edb571a9e120a6b1ef9bce5e7d6d3478119b1b",
       "prepared_receipt": "work/prepared/scienceqa-img/aed103e93ef820d316b1224c93edb571a9e120a6b1ef9bce5e7d6d3478119b1b/receipt.json"
+    },
+    {
+      "dataset_id": "seed-bench-2",
+      "release": "2a0f22725601e6fc42392864c28539701194cd0f",
+      "snapshot_id": "seed-bench-2-416cf4eb3f1e1849409f58b7",
+      "records": 24371,
+      "preview_records": 100,
+      "scope": "All 24,371 questions in the author Hugging Face release, including every native task and all ordered media. The released video representation is eight PNG frames per question, not full video playback. No benchmark prompts are executed or generated outputs claimed. Each archive part is ETag-bound; upstream hashes are recorded, not falsely reported as fully downloaded and locally verified.",
+      "plan_id": "416cf4eb3f1e1849409f58b71385a9a9d24ca4023a9acf0e3cb609567891cf36",
+      "prepared_receipt": "work/prepared/seed-bench-2/416cf4eb3f1e1849409f58b71385a9a9d24ca4023a9acf0e3cb609567891cf36/receipt.json"
+    },
+    {
+      "dataset_id": "seedbench",
+      "release": "81cb1571b8a3a30af2e62073b8d2054418350f0a",
+      "snapshot_id": "seedbench-75c59e0dad780db02e013e52",
+      "records": 17990,
+      "preview_records": 100,
+      "scope": "All 17,990 questions in the author Hugging Face release, including every native task and all ordered media. The released video representation is eight PNG frames per question, not full video playback. No benchmark prompts are executed or generated outputs claimed. Each archive part is ETag-bound; upstream hashes are recorded, not falsely reported as fully downloaded and locally verified.",
+      "plan_id": "75c59e0dad780db02e013e525ba91d00f98de6ca2a65bc549a6bac6406754c5a",
+      "prepared_receipt": "work/prepared/seedbench/75c59e0dad780db02e013e525ba91d00f98de6ca2a65bc549a6bac6406754c5a/receipt.json"
     },
     {
       "dataset_id": "senator-tweets-2021",
@@ -772,6 +832,16 @@
       "prepared_receipt": "work/prepared/textvqa/b8060284cb5668c2af463c741aba12eb42343e06ce9f412707734c4efd6b1870/receipt.json"
     },
     {
+      "dataset_id": "turing-eye-test",
+      "release": "2cc637da14c5f167676ffde210048c4f2306bd55",
+      "snapshot_id": "turing-eye-test-24c126958397a8455fbd295b",
+      "records": 490,
+      "preview_records": 100,
+      "scope": "Complete author full split (490 examples); task-specific copies and older duplicated all/auxiliary Parquet files are excluded to avoid counting the same benchmark population repeatedly. Released benchmark stimuli, not Atlas-generated test fixtures.",
+      "plan_id": "24c126958397a8455fbd295b8d469f180b675a3c461df68886c382bcc6e737a9",
+      "prepared_receipt": "work/prepared/turing-eye-test/24c126958397a8455fbd295b8d469f180b675a3c461df68886c382bcc6e737a9/receipt.json"
+    },
+    {
       "dataset_id": "tweeteval",
       "release": "b3a375baf0f409c77e6bc7aa35102b7b3534f8be",
       "snapshot_id": "tweeteval-7ac11a6c7e256513df066eff",
@@ -802,6 +872,16 @@
       "prepared_receipt": "work/prepared/vg-qa-two/b140c3bfe0075e77bed1b5db226c9b6ba3199b35c229b61ba858ba73f89b2c8c/receipt.json"
     },
     {
+      "dataset_id": "visual-counterfact",
+      "release": "f8cd0b2335356b0f01a164df0cac7403f56a6c83",
+      "snapshot_id": "visual-counterfact-88f61997e002267ca122fdb9",
+      "records": 1220,
+      "preview_records": 100,
+      "scope": "Both full native author splits (1,220 paired examples). This is the released collection, not a claim that the separately mentioned 469-item or 467-item study subsets have been identified.",
+      "plan_id": "88f61997e002267ca122fdb963dd35310a3f0e706d8a95782ddb3f457876efec",
+      "prepared_receipt": "work/prepared/visual-counterfact/88f61997e002267ca122fdb963dd35310a3f0e706d8a95782ddb3f457876efec/receipt.json"
+    },
+    {
       "dataset_id": "visual-genome",
       "release": "official-annotation-files-20260923",
       "snapshot_id": "visual-genome-faffc9e1faa8f9f535a0316f",
@@ -820,6 +900,16 @@
       "scope": "All 32,842 VizWiz-VQA train/val/test questions; the test answers are the author-published April 2026 release, not a claim about paper-time access. Original images are fetched selectively from official archives.",
       "plan_id": "be331d65cbb289a69ed7a41362d701a92b8980114c32d9061dac994151083fcb",
       "prepared_receipt": "work/prepared/vizwiz/be331d65cbb289a69ed7a41362d701a92b8980114c32d9061dac994151083fcb/receipt.json"
+    },
+    {
+      "dataset_id": "vqa-constraints",
+      "release": "vqa-constraints-0c74e01ea5fb02bbdd90e08f53777d271c44f639",
+      "snapshot_id": "vqa-constraints-7b84c7030382399b53869347",
+      "records": 9463,
+      "preview_records": 100,
+      "scope": "All rows in the three native CSVs at the pinned author repository revision. Directory-based Known/Movies questions retain every released candidate image; COCO references join to original val2014 images. Blank CSV index fields and native strings are retained. Unannotated image folders are counted in the receipt, not fabricated as questions. No unreleased multi-constraint rows, answer labels or historical paper-used image choices are inferred.",
+      "plan_id": "7b84c7030382399b53869347c2d1e824064e1ff575ab76a9d42f6fc7a1ae9aa6",
+      "prepared_receipt": "work/prepared/vqa-constraints/7b84c7030382399b53869347c2d1e824064e1ff575ab76a9d42f6fc7a1ae9aa6/receipt.json"
     },
     {
       "dataset_id": "vsr",
@@ -863,9 +953,9 @@
     }
   ],
   "catalogue_entries": 333,
-  "with_previews": 148,
-  "without_previews": 185,
-  "full_population_indices": 143,
+  "with_previews": 157,
+  "without_previews": 176,
+  "full_population_indices": 152,
   "all_requested_datasets_complete": false,
   "note": "Acquired source populations and on-demand infrastructure; catalogue-wide coverage is not complete."
 }

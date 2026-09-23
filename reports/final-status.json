@@ -1,13 +1,13 @@
 {
-  "checked_at_utc": "2026-09-23T10:19:32.559507+00:00",
+  "checked_at_utc": "2026-09-23T11:22:11.667404+00:00",
   "catalogue_entries": 333,
-  "tested_local_previews": 148,
-  "verified_preview_records": 14532,
-  "canonical_full_scope_indices": 143,
-  "entries_without_preview": 185,
-  "python_tests_passed": 380,
+  "tested_local_previews": 157,
+  "verified_preview_records": 15432,
+  "canonical_full_scope_indices": 152,
+  "entries_without_preview": 176,
+  "python_tests_passed": 406,
   "frontend_tests_passed": 22,
-  "browser_tests_passed": 36,
+  "browser_tests_passed": 38,
   "browser_tests_skipped": 0,
   "approved_public_preview_datasets": [
     "clevr",
@@ -19,25 +19,10 @@
   "paid_model_apis_used": false,
   "gqa_full_archive_acquired": true,
   "gqa_browsing_snapshot_media_scope": "full",
-  "active_preparations": [
-    {
-      "id": "6605d7d8e0aeccd40412008c32fab506fc68797ad32a259c9f657994bb0c54ab",
-      "dataset_id": "cauldron",
-      "status": "running",
-      "pid": 3541713,
-      "stage": "indexing",
-      "downloaded_bytes": 51701374,
-      "updated_at": 1790158763.2943525,
-      "pinned_shards": 938,
-      "total_shards": 938,
-      "schema_shards": 938,
-      "expected_count": 1880992,
-      "indexed_count": 404000
-    }
-  ],
-  "validation_log": "work/next-native-python.log",
-  "browser_validation_log": "work/native-browser-final.log",
-  "additional_focused_test_log": "work/next-native-final-focused.log",
+  "active_preparations": [],
+  "validation_log": "work/native-expanded-python-final.log",
+  "browser_validation_log": "work/native-expanded-browser-final.log",
+  "additional_focused_test_log": "work/rsicd-focused.log",
   "python_tests_skipped": 1,
   "gqa_full_archive_retained_locally": false,
   "storage_policy": "reports/storage-policy-20260923.json",
@@ -45,8 +30,30 @@
   "retained_media_verification": "reports/retained-media-live-verification.json",
   "python_current_validation": {
     "version": "3.14.2",
-    "passed": 378,
+    "passed": 404,
     "skipped": 3,
-    "log": "work/next-native-python314.log"
-  }
+    "log": "work/native-expanded-python314-final.log"
+  },
+  "stopped_at_user_request": true,
+  "stopped_at_utc": "2026-09-23T11:22:11.710547+00:00",
+  "stop_handoff": "STOP_20260923.md",
+  "workbench_running": false,
+  "task_vllm_running": false,
+  "cancelled_preparations": [
+    {
+      "id": "6605d7d8e0aeccd40412008c32fab506fc68797ad32a259c9f657994bb0c54ab",
+      "dataset_id": "cauldron",
+      "status": "cancelled",
+      "pid": 3541713,
+      "stage": "indexing",
+      "downloaded_bytes": 109514222,
+      "updated_at": 1790162459.3665752,
+      "pinned_shards": 938,
+      "total_shards": 938,
+      "schema_shards": 938,
+      "expected_count": 1880992,
+      "indexed_count": 725000,
+      "error": "Preparation cancelled; verified source downloads are retained for retry."
+    }
+  ]
 }

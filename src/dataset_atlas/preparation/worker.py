@@ -66,6 +66,9 @@ def run(root, identity):
                     check()
                     from dataset_atlas.storage.sources import source_object
                     source=source_object(root,entry.get('sha256'),entry['bytes'])
+                    link_only = entry['source_name'] in plan.get('reuse_registered_sources',[])
+                    if link_only and source is None:
+                        raise ValueError('Registered source reserved for reuse is missing; create a new plan')
                     if source is None:
                         source = fetcher.fetch(entry['url'], cache,
                             CacheIdentity(plan.get('revision',dataset.release), entry.get('sha256',entry.get('md5')), 'original'),
@@ -75,6 +78,8 @@ def run(root, identity):
                     digest=hashlib.sha256();md5=hashlib.md5(usedforsecurity=False)
                     with source.open('rb') as stream:
                         for chunk in iter(lambda:stream.read(1024*1024),b''):digest.update(chunk);md5.update(chunk)
+                    if entry.get('sha256') and digest.hexdigest()!=entry['sha256']:
+                        raise ValueError('Acquired source SHA-256 differs from the approved plan')
                     if entry.get('md5') and md5.hexdigest()!=entry['md5']:raise ValueError('Official source MD5 mismatch')
                     source_dir = version / 'sources'
                     source_dir.mkdir(exist_ok=True)
@@ -82,7 +87,9 @@ def run(root, identity):
                     if not target.exists():
                         try:
                             os.link(source, target)
-                        except OSError:
+                        except OSError as error:
+                            if link_only:
+                                raise ValueError('Registered source hard-link reuse failed; create a new plan') from error
                             # Cache and prepared roots may sit on different filesystems.
                             shutil.copy2(source, target)
                     files.append({**entry, 'sha256':digest.hexdigest(), 'path': str(target)})
@@ -113,7 +120,7 @@ def run(root, identity):
             dataset.release=plan['revision']
             dataset.snapshot_id=f'{dataset.id}-{identity[:24]}'
             dataset.adapter='remote_columnar'
-            source_options={key:dataset.adapter_config[key] for key in ('record_filter','expected_source_count','fields','max_record_bytes') if key in dataset.adapter_config}
+            source_options={key:dataset.adapter_config[key] for key in ('record_filter','expected_source_count','fields','max_record_bytes','remote_cache_root','remote_cache_bytes') if key in dataset.adapter_config}
             dataset.adapter_config={'remote_files':remote_files,'allowed_hosts':hosts,
                 'remote_cache_root':str(Path(root)/'work/media-cache/remote-parquet'),'remote_cache_bytes':1_000_000_000,
                 'metadata_transfer_bytes':plan['max_download_bytes'],'population':plan['scope'],

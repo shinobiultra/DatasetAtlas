@@ -1,0 +1,15 @@
+source_url: https://huggingface.co/datasets/HongchengGao/TuringEyeTest/tree/2cc637da14c5f167676ffde210048c4f2306bd55
+release: 2cc637da14c5f167676ffde210048c4f2306bd55
+expected_count: 490
+source_patterns:
+- data/full-*.parquet
+description: 'Turing Eye Test: the author full split, comprising 490 released perception examples across
+  HiddenText (150), 3DCaptcha (150), Colorblind (150) and ChineseLigature (40), with original-resolution
+  images, questions, ground truth and native task labels.'
+scope: Complete author full split (490 examples); task-specific copies and older duplicated all/auxiliary
+  Parquet files are excluded to avoid counting the same benchmark population repeatedly. Released benchmark
+  stimuli, not Atlas-generated test fixtures.
+adapter_config:
+  mapping:
+    id: idx
+    question: Question

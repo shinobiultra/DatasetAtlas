@@ -495,3 +495,82 @@ def test_failed_snapshot_writer_closes_input_iterator(tmp_path,monkeypatch):
     with pytest.raises(ValueError,match='downstream writer failure'):run(tmp_path,plan['id'])
     assert retained[0].gi_frame is None
     assert manager.status(plan['id'])['status']=='failed'
+
+
+def test_selective_worker_uses_the_cache_budget_and_root_that_were_admitted(tmp_path, monkeypatch):
+    dataset = fixture(tmp_path, 3)
+    path = tmp_path/'registry/datasets/fixture.yaml'
+    raw = yaml.safe_load(path.read_text())
+    raw.update(adapter_config={'remote_cache_root': 'work/custom-cache', 'remote_cache_bytes': 123456},
+               source_url='https://huggingface.co/datasets/owner/repo')
+    path.write_text(yaml.safe_dump(raw))
+    payload = (tmp_path/'source.parquet').read_bytes()
+    monkeypatch.setattr('dataset_atlas.preparation.read_metadata', lambda url: {'sha': 'a'*40, 'siblings': [
+        {'rfilename': 'train.parquet', 'size': len(payload), 'lfs': {'sha256': hashlib.sha256(payload).hexdigest()}}]})
+    monkeypatch.setattr('dataset_atlas.preparation.remote.range_fingerprint', lambda *args, **kwargs: '"fixture"')
+    monkeypatch.setattr('dataset_atlas.storage.ranges.HttpsRangeReader._fetch', lambda self, start, end: payload[start:end+1])
+    manager = PreparationManager(tmp_path)
+    plan = manager.plan(dataset.id, 1000000, 1000000, source_mode='selective')
+    assert plan['required_free_bytes'] == 1000000 + 123456 + 20000000
+    run(tmp_path, plan['id'])
+    prepared = Registry(tmp_path).dataset(dataset.id)
+    assert prepared.adapter_config['remote_cache_bytes'] == 123456
+    assert prepared.adapter_config['remote_cache_root'] == str(tmp_path/'work/custom-cache')
+    assert (tmp_path/'work/custom-cache/cache.sqlite3').is_file()
+
+
+@pytest.mark.parametrize('invalid', [0, -1, True, 1.5])
+def test_invalid_remote_cache_budget_cannot_reduce_reservation(tmp_path, monkeypatch, invalid):
+    dataset = fixture(tmp_path, 3)
+    path = tmp_path/'registry/datasets/fixture.yaml'
+    raw = yaml.safe_load(path.read_text())
+    raw.update(adapter_config={'remote_cache_bytes': invalid}, source_url='https://huggingface.co/datasets/owner/repo')
+    path.write_text(yaml.safe_dump(raw))
+    monkeypatch.setattr('dataset_atlas.preparation.read_metadata', lambda url: {'sha': 'a'*40, 'siblings': [
+        {'rfilename': 'train.parquet', 'size': 100, 'lfs': {'sha256': 'b'*64}}]})
+    with pytest.raises(ValueError, match='cache budget'):
+        PreparationManager(tmp_path).plan(dataset.id, 1000000, 1000000, source_mode='selective')
+
+
+def registered_recipe_fixture(tmp_path):
+    from dataset_atlas.storage.sources import register_source
+    dataset = fixture(tmp_path, 3)
+    payload = (tmp_path/'source.parquet').read_bytes()
+    sha = hashlib.sha256(payload).hexdigest()
+    registered = register_source(tmp_path, tmp_path/'source.parquet', sha, len(payload))
+    recipes = tmp_path/'registry/recipes'; recipes.mkdir()
+    (recipes/(dataset.id+'.yaml')).write_text(yaml.safe_dump({'adapter':'structured', 'expected_count':3, 'scope':'Fixture only',
+        'files':[{'source_name':'rows.parquet','url':'https://example.org/rows.parquet','bytes':len(payload),'sha256':sha,
+                  'format':'parquet','config_key':'path'}], 'adapter_config':{'format':'parquet'}}))
+    return dataset, Path(registered['path'])
+
+
+def test_registered_original_reserves_only_output_and_is_hardlinked(tmp_path):
+    dataset, original = registered_recipe_fixture(tmp_path)
+    manager = PreparationManager(tmp_path)
+    plan = manager.plan(dataset.id, 1000000, 1000000)
+    assert plan['reuse_registered_sources'] == ['rows.parquet']
+    assert plan['required_free_bytes'] == 1000000
+    run(tmp_path, plan['id'])
+    target = Path(Registry(tmp_path).dataset(dataset.id).adapter_config['path'])
+    assert target.stat().st_ino == original.stat().st_ino
+
+
+@pytest.mark.parametrize('failure', ['missing', 'link_failure'])
+def test_reserved_original_reuse_never_falls_back_to_unreserved_download_or_copy(tmp_path, monkeypatch, failure):
+    dataset, original = registered_recipe_fixture(tmp_path)
+    manager = PreparationManager(tmp_path)
+    plan = manager.plan(dataset.id, 1000000, 1000000)
+    def forbidden(*args, **kwargs):
+        raise AssertionError('Unreserved download/copy must never occur')
+    monkeypatch.setattr('dataset_atlas.storage.HttpsFetcher.fetch', forbidden)
+    monkeypatch.setattr('dataset_atlas.preparation.worker.shutil.copy2', forbidden)
+    if failure == 'missing':
+        original.unlink()
+    else:
+        def fail_link(*args):
+            raise OSError('Fixture disallows hard links')
+        monkeypatch.setattr('dataset_atlas.preparation.worker.os.link', fail_link)
+    with pytest.raises(ValueError, match='create a new plan'):
+        run(tmp_path, plan['id'])
+    assert Registry(tmp_path).active_directory(dataset.id) is None

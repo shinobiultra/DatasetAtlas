@@ -1,0 +1,676 @@
+{
+  "checked_at": "2026-09-23T10:31:48.939969+00:00",
+  "status": "passed",
+  "dataset_id": "find",
+  "snapshot_id": "find-21542ebc798c9c161aed091e",
+  "population_count": 2275,
+  "available_native_weight_files": 150,
+  "all_native_definitions_source_code_and_auxiliary_fields_exact": true,
+  "preview_records_verified": 100,
+  "late_records_verified": 3,
+  "native_asset_http_checks": 108,
+  "sampling": {
+    "method": "sha256_bottom_k_primary_asset",
+    "seed": 0,
+    "unit": "example",
+    "grouping": "primary asset ID; example ID for records without assets",
+    "population": "complete pinned indexed population",
+    "population_count": 2275,
+    "requested_count": 100,
+    "returned_count": 100,
+    "source_revision": "find-zenodo-8332767-v1.0.1",
+    "media_representation": "original",
+    "selection_note": "One hash-ranked example per sampled primary asset. All linked assets remain. Not an example-prevalence estimate."
+  },
+  "execution": "No benchmark source was executed and no serialized model was deserialized.",
+  "checks": [
+    {
+      "record_id": "find:example:e52599a25c7cc1b787c38e4f",
+      "native_member": "find_dataset/neurons_relations/f00068/function_code.py",
+      "sha256": "39e5514401df87d125c4bbbc31bda5a9cab99f7948297987476db9d33aea0eb9",
+      "bytes": 1314
+    },
+    {
+      "record_id": "find:example:d126de1c4cfa0fa758200fbc",
+      "native_member": "find_dataset/numeric/f00549/function_code.py",
+      "sha256": "5bd1221e96e9ca344ad486f45c1a5f9bc55bb1ca2555475118e41a8c5deb684a",
+      "bytes": 437
+    },
+    {
+      "record_id": "find:example:f438e4a65f5c0695ab4ea636",
+      "native_member": "find_dataset/neurons_entities/f00183/function_code.py",
+      "sha256": "c33f5efdde4f4d76b72215f026f7668d7c2dff3f2c2f649c2fa81f20e3917844",
+      "bytes": 1913
+    },
+    {
+      "record_id": "find:example:db80d86c90a6e8ce0169e52b",
+      "native_member": "find_dataset/strings/f00592/function_code.py",
+      "sha256": "c594703b41042c0b15fbe9fca9e0f5b3b4e6cef48f48f7978188d5bab9e06618",
+      "bytes": 1049
+    },
+    {
+      "record_id": "find:example:7662664779cb839be2f67ac1",
+      "native_member": "find_dataset/strings/f00320/function_code.py",
+      "sha256": "dc0d9245aeac416fc78220c1406e43db85ed772cf6827f65a61093598b604e2a",
+      "bytes": 736
+    },
+    {
+      "record_id": "find:example:486ef70a339acb90ad3fc652",
+      "native_member": "find_dataset/numeric/f00567/function_code.py",
+      "sha256": "968e56608aebb24be9e1df23e1ba1c6a09b1170b2e08a2b2b49ae7fbe567fbb8",
+      "bytes": 490
+    },
+    {
+      "record_id": "find:example:44b34b37282dd112a71ba547",
+      "native_member": "find_dataset/numeric/f00491/function_code.py",
+      "sha256": "55c6acb785e7cf3ae10b11529af24fa1ffce5d9d2736c06425da601f885b9b3d",
+      "bytes": 435
+    },
+    {
+      "record_id": "find:example:7d62bc13ba4353ef863bc43a",
+      "native_member": "find_dataset/strings/f00661/function_code.py",
+      "sha256": "8cb37f6b494fed6cb3e913bde5daa060bd527771a438a2fef718fccdeb11c478",
+      "bytes": 972
+    },
+    {
+      "record_id": "find:example:10b3a235ccbee6e32d05f0d2",
+      "native_member": "find_dataset/strings/f00284/function_code.py",
+      "sha256": "2868f6e5c6ebf8edaccbd3ed0d454d6e90a81ed4806dab8e6044e3f35fa32636",
+      "bytes": 736
+    },
+    {
+      "record_id": "find:example:4bb399a07b8ee058923fe20e",
+      "native_member": "find_dataset/numeric/f00761/function_code.py",
+      "sha256": "e8661bb5b45983ecae97186b1617279280f77f8e4c8e5d692bd564f39076c89d",
+      "bytes": 436
+    },
+    {
+      "record_id": "find:example:46850cd3752fa943ffb6fcb9",
+      "native_member": "find_dataset/neurons_entities/f00003/function_code.py",
+      "sha256": "0577a0ed24bde60e0a287b118fb6515672997b0a84d490d19cdd5115612b39b0",
+      "bytes": 1796
+    },
+    {
+      "record_id": "find:example:2bc307966212904bee48d8ce",
+      "native_member": "find_dataset/numeric/f00002/function_code.py",
+      "sha256": "73ce3b4f3a66c649e9e10907aadb83a2d1931d0eca2787bcd154479ad473c5c6",
+      "bytes": 783
+    },
+    {
+      "record_id": "find:example:2bc307966212904bee48d8ce",
+      "native_member": "find_dataset/numeric/f00002/mlp_approx_model.pt",
+      "sha256": "97bd7c8a039678e295a3daf6d7cedd38a0e2b7ecff236ab32f3e2823515e5383",
+      "bytes": 2581
+    },
+    {
+      "record_id": "find:example:708a721728b9cafa080bb9a9",
+      "native_member": "find_dataset/strings/f00648/function_code.py",
+      "sha256": "b6ff22bc524a1ee19e4b935d527787a2cf65ada8ac758573f1b8d25674ba78e4",
+      "bytes": 1504
+    },
+    {
+      "record_id": "find:example:d792d0152fb1675d31f68ebd",
+      "native_member": "find_dataset/numeric/f00913/function_code.py",
+      "sha256": "e62e76a585f367afc1d9907e84347e069a21ad2fafa85230be8cbbccbae5926c",
+      "bytes": 422
+    },
+    {
+      "record_id": "find:example:ef6732d94ff6dbafac63f275",
+      "native_member": "find_dataset/strings/f00617/function_code.py",
+      "sha256": "afefa211b9c2f8edc35fb0d6fdbba394278e5e05915be9cf3d1dfc4ae288e969",
+      "bytes": 679
+    },
+    {
+      "record_id": "find:example:bb9b3bbd473c296af078d6dd",
+      "native_member": "find_dataset/strings/f00264/function_code.py",
+      "sha256": "57c716f0be77b760e5512c85649524d920ec069d757557f1aa80775da311efd4",
+      "bytes": 469
+    },
+    {
+      "record_id": "find:example:bd9d7d1856447282c4e22a06",
+      "native_member": "find_dataset/numeric/f00977/function_code.py",
+      "sha256": "b0be9c3105b41124b00adaf67248efeb6feb09df7b7bb36de76489c0048be26b",
+      "bytes": 436
+    },
+    {
+      "record_id": "find:example:c474208545f3ecc7a23a72c2",
+      "native_member": "find_dataset/strings/f00572/function_code.py",
+      "sha256": "e59187e91c2f84fbd23c707e46b788708d74e555957a50498268af992adc28f3",
+      "bytes": 345
+    },
+    {
+      "record_id": "find:example:410a2e4932823924db785aab",
+      "native_member": "find_dataset/numeric/f00616/function_code.py",
+      "sha256": "5064379141f9af0742b64baee79c4f7dd97d095c4ec0d48e6b3540f4e9c3ec65",
+      "bytes": 603
+    },
+    {
+      "record_id": "find:example:3297d102862768f88cf9214b",
+      "native_member": "find_dataset/numeric/f00435/function_code.py",
+      "sha256": "815dbbd33d948a49e49aec10a7ac9caecbb5f0fbfd64412dcb2a72db4d7c0b27",
+      "bytes": 454
+    },
+    {
+      "record_id": "find:example:083ec84068c5f634de974da9",
+      "native_member": "find_dataset/numeric/f00857/function_code.py",
+      "sha256": "b0d322a0550ad808a3e5178777c109d6064b4a46f8ab427062d04fc55004b155",
+      "bytes": 607
+    },
+    {
+      "record_id": "find:example:cea14a3521a6b6494cc6cb0c",
+      "native_member": "find_dataset/strings/f00912/function_code.py",
+      "sha256": "89a2445fa53dae82c4fe6a596f8c2b58c45884948f2894b14825a63af9b4dee8",
+      "bytes": 917
+    },
+    {
+      "record_id": "find:example:956ef4e2b3fc2e9451d1a4c9",
+      "native_member": "find_dataset/numeric/f00736/function_code.py",
+      "sha256": "82206df01bda705c428d381db702bade2fee8642a1a14abc9311422648280361",
+      "bytes": 604
+    },
+    {
+      "record_id": "find:example:fe46d8bcba55faf597305a94",
+      "native_member": "find_dataset/neurons_entities/f00156/function_code.py",
+      "sha256": "83285f7c347220f8794fe72d5d91e099593da5dddec90f42f03b75bc49faa594",
+      "bytes": 1889
+    },
+    {
+      "record_id": "find:example:9a61eba82b06dab7f5975351",
+      "native_member": "find_dataset/neurons_entities/f00042/function_code.py",
+      "sha256": "8abfc01eec7d14e2e24e0789b2c4deec3e7cf10704755e52495185727a6a1ab9",
+      "bytes": 1826
+    },
+    {
+      "record_id": "find:example:161cfc7421a6f0667c432074",
+      "native_member": "find_dataset/strings/f00401/function_code.py",
+      "sha256": "e8527d775207c306705ee6a1b98756fe3834f0d7a91962f7b5dbd7787fed9a68",
+      "bytes": 1448
+    },
+    {
+      "record_id": "find:example:563b5bcdc15948c2434e9a51",
+      "native_member": "find_dataset/numeric/f00592/function_code.py",
+      "sha256": "3be46e90c57ef599b8ca9ad9e418bc4b0f60853a6119cf89d7c05100051a0b1c",
+      "bytes": 453
+    },
+    {
+      "record_id": "find:example:43394c95739b950567543fa2",
+      "native_member": "find_dataset/numeric/f00136/function_code.py",
+      "sha256": "73ce3b4f3a66c649e9e10907aadb83a2d1931d0eca2787bcd154479ad473c5c6",
+      "bytes": 783
+    },
+    {
+      "record_id": "find:example:43394c95739b950567543fa2",
+      "native_member": "find_dataset/numeric/f00136/mlp_approx_model.pt",
+      "sha256": "b52384b5651d162743e251f3219e4e6b4180b80bdc3f0ba545373dc198a9d822",
+      "bytes": 2581
+    },
+    {
+      "record_id": "find:example:766b50a4ef51a6a230ce12e9",
+      "native_member": "find_dataset/strings/f00641/function_code.py",
+      "sha256": "ff2a7a94fb6d570119d4a0c521da46ea09eb6898431aaceebdbb34e99f322b1b",
+      "bytes": 725
+    },
+    {
+      "record_id": "find:example:898457986cc1d2efc6cd1a6c",
+      "native_member": "find_dataset/strings/f00575/function_code.py",
+      "sha256": "d5b739c96fc878842bd7eb7ef34a153ae0c53fa5ae47300cbb8b1424c355d03d",
+      "bytes": 1000
+    },
+    {
+      "record_id": "find:example:1b10ea0455f86d92ae0e0d63",
+      "native_member": "find_dataset/strings/f00000/function_code.py",
+      "sha256": "b645c094b60a40da2d3610fed489c62a8592668cb6951bfa5da6524fb6bceabb",
+      "bytes": 1692
+    },
+    {
+      "record_id": "find:example:b6abc57c11ea57f01e9c8cfd",
+      "native_member": "find_dataset/strings/f00622/function_code.py",
+      "sha256": "dea1688cb9dfc70d9603d634f8e19ea123e3f29428a620da880778c190772612",
+      "bytes": 509
+    },
+    {
+      "record_id": "find:example:966bcb7081bdcecb5848def2",
+      "native_member": "find_dataset/neurons_entities/f00080/function_code.py",
+      "sha256": "e3445b81f0a561b367fb20897ba8e0979f6253773eaf9da653ac040f4e8e6bf7",
+      "bytes": 1810
+    },
+    {
+      "record_id": "find:example:9b85fcfc5cc53cc2e9653e48",
+      "native_member": "find_dataset/numeric/f00903/function_code.py",
+      "sha256": "2b872472352a1450adabb25587a02e7187d20fdeb8531c0dc55216540ea122b6",
+      "bytes": 453
+    },
+    {
+      "record_id": "find:example:9316111897b5bb8fd2a6de01",
+      "native_member": "find_dataset/numeric/f00497/function_code.py",
+      "sha256": "fc7d5033a23b622a7fa88e6a79b8eef0515eb4692c1860660b83d39c741ac74a",
+      "bytes": 478
+    },
+    {
+      "record_id": "find:example:c56ff7d4091a068e46b02312",
+      "native_member": "find_dataset/strings/f00250/function_code.py",
+      "sha256": "c8ef1eb823bfc093575f8f76b19625d28a4081da77e26d6af7a2bcf1356f7c23",
+      "bytes": 345
+    },
+    {
+      "record_id": "find:example:9465f9859afd1b134bf0a04b",
+      "native_member": "find_dataset/strings/f00961/function_code.py",
+      "sha256": "673d6443a506022b9ee93c2fcdf8bb96e9f5302d9394de3d0305f3450fb3cfce",
+      "bytes": 2096
+    },
+    {
+      "record_id": "find:example:393994829f6e9fef3dd39934",
+      "native_member": "find_dataset/neurons_entities/f00041/function_code.py",
+      "sha256": "4084383d096b69f8d4413a97cd2fd0f4a0e458d478b1b33b4f5c8fa60a875e55",
+      "bytes": 1794
+    },
+    {
+      "record_id": "find:example:0abc547d31efd274e328983e",
+      "native_member": "find_dataset/numeric/f00123/function_code.py",
+      "sha256": "73ce3b4f3a66c649e9e10907aadb83a2d1931d0eca2787bcd154479ad473c5c6",
+      "bytes": 783
+    },
+    {
+      "record_id": "find:example:0abc547d31efd274e328983e",
+      "native_member": "find_dataset/numeric/f00123/mlp_approx_model.pt",
+      "sha256": "a3d20178eda3a0091df2f9cc8d03bac20eae15d555fe0c831bd5665921507c4b",
+      "bytes": 2581
+    },
+    {
+      "record_id": "find:example:828db9e61ede01626be9d168",
+      "native_member": "find_dataset/numeric/f00335/function_code.py",
+      "sha256": "eea178ec6cd25e253f6d196526f233183b75077eba0871028ea88ab540d09929",
+      "bytes": 460
+    },
+    {
+      "record_id": "find:example:5167fa3022b1c02439f152af",
+      "native_member": "find_dataset/neurons_entities/f00113/function_code.py",
+      "sha256": "2b1d484cc9326fa22e198d798996ce72e1bf08fdaebb09e4b6f1b33425a180c8",
+      "bytes": 1790
+    },
+    {
+      "record_id": "find:example:e0a729dbc57b4f78a9fdff4f",
+      "native_member": "find_dataset/strings/f00262/function_code.py",
+      "sha256": "bacd8df3e2245dd522750e5ef5ba2794e7ba225243560950289ef4bb6af87780",
+      "bytes": 971
+    },
+    {
+      "record_id": "find:example:4f0875d006537c9f5ba75132",
+      "native_member": "find_dataset/numeric/f00642/function_code.py",
+      "sha256": "265bd1982a26f4ed20f7e9bdc44ee3c620910c1769c35c911a33d3f12fa3cf72",
+      "bytes": 454
+    },
+    {
+      "record_id": "find:example:6e23fd644f8387b18a30acaf",
+      "native_member": "find_dataset/numeric/f00069/function_code.py",
+      "sha256": "73ce3b4f3a66c649e9e10907aadb83a2d1931d0eca2787bcd154479ad473c5c6",
+      "bytes": 783
+    },
+    {
+      "record_id": "find:example:6e23fd644f8387b18a30acaf",
+      "native_member": "find_dataset/numeric/f00069/mlp_approx_model.pt",
+      "sha256": "0cc126551114209bf1816d7d2f6adb85c2fceff39122832006c4986218a393d3",
+      "bytes": 2581
+    },
+    {
+      "record_id": "find:example:9a216635f44f1a227a42bf5c",
+      "native_member": "find_dataset/numeric/f00163/function_code.py",
+      "sha256": "1d326929f827894bbc47922255e52c26026a11869fa47961c4b45c365f21adc2",
+      "bytes": 649
+    },
+    {
+      "record_id": "find:example:08cd8fd8f18d936f6eb54954",
+      "native_member": "find_dataset/numeric/f00691/function_code.py",
+      "sha256": "41cfb17654792c48ffaefd4740dac4072ba9c641547868d6d8f6fb6b4c12f632",
+      "bytes": 513
+    },
+    {
+      "record_id": "find:example:4964207ee3c348450247172b",
+      "native_member": "find_dataset/numeric/f00209/function_code.py",
+      "sha256": "958e2bd2b07940c3072038bae57c1c220f359d97dfb4fefe87e8616332e53fa2",
+      "bytes": 443
+    },
+    {
+      "record_id": "find:example:fbda9950ac45b5d973277b64",
+      "native_member": "find_dataset/numeric/f00182/function_code.py",
+      "sha256": "fc7f81495fcc3a2d404c4801745ca1a569398e1a893cd248e0e2e9d400ada2f9",
+      "bytes": 490
+    },
+    {
+      "record_id": "find:example:86c9242c1674e7d48039e11d",
+      "native_member": "find_dataset/numeric/f00434/function_code.py",
+      "sha256": "22cff6cb229e163ea65db3aade166d0a47b879c46b264bad49162c7eed8d8d48",
+      "bytes": 488
+    },
+    {
+      "record_id": "find:example:65c820cf7a0b7ad9d18ad5ba",
+      "native_member": "find_dataset/neurons_entities/f00033/function_code.py",
+      "sha256": "0a3d1f8570c44f2e0c0fad43aa133dcc2bdc77d3e86e6cb27b65352d72c21630",
+      "bytes": 1794
+    },
+    {
+      "record_id": "find:example:437a97106a7edbe67bedc324",
+      "native_member": "find_dataset/numeric/f00679/function_code.py",
+      "sha256": "0c79b079a1d67c95b856a22440286d324957d85f8c17e7317b08b3a4912bd51c",
+      "bytes": 604
+    },
+    {
+      "record_id": "find:example:c806d537fb97372ad248f155",
+      "native_member": "find_dataset/numeric/f00392/function_code.py",
+      "sha256": "d14d0604bf57654ee74cd52c99d7b86e4dade314a6393129fe5d8cb1da1f7b63",
+      "bytes": 445
+    },
+    {
+      "record_id": "find:example:d7b7321ecc6867074440750c",
+      "native_member": "find_dataset/strings/f00894/function_code.py",
+      "sha256": "4780311553d57ceffbb180239b061f585f1a9bc2b0a03c8f7a8f19bd89e11116",
+      "bytes": 1661
+    },
+    {
+      "record_id": "find:example:98ea6f0a15fefab1e7e0e4c6",
+      "native_member": "find_dataset/numeric/f00676/function_code.py",
+      "sha256": "806df63a9ebeebd3d25476aaeb5a95ac9a6671c2ad87aea5a95b07129bc6dfb9",
+      "bytes": 452
+    },
+    {
+      "record_id": "find:example:fb2dc3cb6582b4679a752d18",
+      "native_member": "find_dataset/strings/f00236/function_code.py",
+      "sha256": "649536705411d9774d4a7aadd65dd3cfd595dc3efd45411ca770cc65df26c0a0",
+      "bytes": 736
+    },
+    {
+      "record_id": "find:example:a06d0d01ba43445bb0ff8e2d",
+      "native_member": "find_dataset/numeric/f00684/function_code.py",
+      "sha256": "550be663566a552cc86eca71803b833def6ca041912c2e5750a2077beb65abe1",
+      "bytes": 477
+    },
+    {
+      "record_id": "find:example:94e395a3389c110464f8e9ab",
+      "native_member": "find_dataset/numeric/f00508/function_code.py",
+      "sha256": "5be73a77cb08a28adf2e1ec54a6390f0e787edf3b6548e0f2ed053b95d9ada09",
+      "bytes": 489
+    },
+    {
+      "record_id": "find:example:2d27fcdd5daeb52e54923252",
+      "native_member": "find_dataset/strings/f00593/function_code.py",
+      "sha256": "45bdf74d944bb3a1fd82ff7ec36a18f4fb0bf9c97365f98efe0af614ea27546e",
+      "bytes": 345
+    },
+    {
+      "record_id": "find:example:9b1c1b8cdc8875c948be2a1d",
+      "native_member": "find_dataset/strings/f00560/function_code.py",
+      "sha256": "7b2d2b01023a60f572105e5030a78ecd3b9f5976c39cc021c6697275f657000d",
+      "bytes": 343
+    },
+    {
+      "record_id": "find:example:f7afbaf8138ac3e1d384c481",
+      "native_member": "find_dataset/neurons_relations/f00001/function_code.py",
+      "sha256": "6c1a0e83ad6d1d5bec0e8924f01eb53e02cc6f5d7b5662a7f0a4a983b561ef16",
+      "bytes": 1243
+    },
+    {
+      "record_id": "find:example:239801aab3c6ac97499ccbd0",
+      "native_member": "find_dataset/strings/f00081/function_code.py",
+      "sha256": "986ab932a71974ed315ed9fe022292cb35df947d1b87f8acd7627aa4c49dcd2f",
+      "bytes": 923
+    },
+    {
+      "record_id": "find:example:c3df6d7a25ba291d15704b63",
+      "native_member": "find_dataset/numeric/f00421/function_code.py",
+      "sha256": "00212b9ecb51048b46244fe7e39e4f612e39d553021e9aca436eb73dfa7a5575",
+      "bytes": 470
+    },
+    {
+      "record_id": "find:example:53d2240cd42967cc33f709ac",
+      "native_member": "find_dataset/strings/f00455/function_code.py",
+      "sha256": "b5f68d58f749848349827a3b73dbda755bb14f696e5b2fe40d5c9c3f33237f62",
+      "bytes": 469
+    },
+    {
+      "record_id": "find:example:f7774b0841f61edca915cd86",
+      "native_member": "find_dataset/strings/f00874/function_code.py",
+      "sha256": "ebeb4f410a6fe2d05fcb20d5fa7b275c70adeb4f748731533f538c12b8e1eabf",
+      "bytes": 1119
+    },
+    {
+      "record_id": "find:example:335edd8714093090eecf9cc0",
+      "native_member": "find_dataset/neurons_entities/f00177/function_code.py",
+      "sha256": "9b9f90287b79fa0642a669f1fd97e82bf5d1b7e315b2e395816ddadea878dd75",
+      "bytes": 1975
+    },
+    {
+      "record_id": "find:example:d8f579db7789a46148608bb5",
+      "native_member": "find_dataset/strings/f00372/function_code.py",
+      "sha256": "9f7b39767d58d056529e04cb2f9031cd0542774c40fd09eb3d298e691c5cc6e2",
+      "bytes": 1057
+    },
+    {
+      "record_id": "find:example:69c1c360f722b77cf56e92be",
+      "native_member": "find_dataset/numeric/f00695/function_code.py",
+      "sha256": "7793f6938749e3728459323bfcb61f2caa82bfe20e194fa5dd5059ad16ff73e1",
+      "bytes": 473
+    },
+    {
+      "record_id": "find:example:1eca5eec14fd164abf6663c5",
+      "native_member": "find_dataset/strings/f00451/function_code.py",
+      "sha256": "b2867308dc4ad1bd9c5144da07f53fce0d3e2823f0b2607fd3796bcf7ed66cef",
+      "bytes": 1070
+    },
+    {
+      "record_id": "find:example:2da12a9150131cca1fedd54b",
+      "native_member": "find_dataset/strings/f00513/function_code.py",
+      "sha256": "23a670a07b60b9c125dcc6092ca700e0f365187aa589fe9a33c60a41881574ce",
+      "bytes": 1416
+    },
+    {
+      "record_id": "find:example:e350a0969fd949b73740847f",
+      "native_member": "find_dataset/neurons_relations/f00072/function_code.py",
+      "sha256": "0a1eb990d8c63b85a19e40bcc93a2b2accffc46ac1ccf0aefa72113f4439a936",
+      "bytes": 1341
+    },
+    {
+      "record_id": "find:example:311e6239c9644f59df25da15",
+      "native_member": "find_dataset/neurons_relations/f00040/function_code.py",
+      "sha256": "bd31af147bdf8040c9a115e96481d7d319ea67e40383a537ad05553b43736524",
+      "bytes": 1302
+    },
+    {
+      "record_id": "find:example:50d8b82016cc0bcfdbb4cdc6",
+      "native_member": "find_dataset/strings/f00683/function_code.py",
+      "sha256": "0ad97756cae7727ac92a3b3c797709fc654d1e3bef674dafc144b3d6f5e745e7",
+      "bytes": 1300
+    },
+    {
+      "record_id": "find:example:e142763984575d4b9dbe3bce",
+      "native_member": "find_dataset/numeric/f00937/function_code.py",
+      "sha256": "93e4d46107dd20bd92ccdccacc4eeb560e8731ca2e5f3e140779bf454c403b91",
+      "bytes": 420
+    },
+    {
+      "record_id": "find:example:d911104dbb2a515c0a71b78b",
+      "native_member": "find_dataset/numeric/f00623/function_code.py",
+      "sha256": "503b0a58f61e8eb7ff85b9a229160d36484101a7fcdf65c66f6c943061903c2e",
+      "bytes": 454
+    },
+    {
+      "record_id": "find:example:53fc16202a57427eaef80ffa",
+      "native_member": "find_dataset/numeric/f00018/function_code.py",
+      "sha256": "73ce3b4f3a66c649e9e10907aadb83a2d1931d0eca2787bcd154479ad473c5c6",
+      "bytes": 783
+    },
+    {
+      "record_id": "find:example:53fc16202a57427eaef80ffa",
+      "native_member": "find_dataset/numeric/f00018/mlp_approx_model.pt",
+      "sha256": "20a68f8c51e139f1f69718ff428f1532461bf00598379eb219b3d83c522ce831",
+      "bytes": 2581
+    },
+    {
+      "record_id": "find:example:beaa08261f389febb00bdf65",
+      "native_member": "find_dataset/strings/f00559/function_code.py",
+      "sha256": "fa1a597c663c581e18c3a9de6b5ada1cdcf554d4048ba430d7eea834b4b3a59d",
+      "bytes": 1643
+    },
+    {
+      "record_id": "find:example:ea5e48691e2bc49d986055d6",
+      "native_member": "find_dataset/strings/f00489/function_code.py",
+      "sha256": "aa577130a4f04fd5349917a11356a7138d2393f92763eccd42c96d9f40b4fa24",
+      "bytes": 342
+    },
+    {
+      "record_id": "find:example:2f9dbec574565abfd7fd718f",
+      "native_member": "find_dataset/strings/f00133/function_code.py",
+      "sha256": "2b6550fca15d709df16d1cb24410960aea34da5fae1472173229ff77b4611759",
+      "bytes": 1194
+    },
+    {
+      "record_id": "find:example:054622a36edcc2bc77e9ca0c",
+      "native_member": "find_dataset/numeric/f00898/function_code.py",
+      "sha256": "68fe0e636502875651a473da15a15bbca81c121defccfc21d0613205520d9051",
+      "bytes": 433
+    },
+    {
+      "record_id": "find:example:97a945725a41f5c9f65a4c71",
+      "native_member": "find_dataset/strings/f00409/function_code.py",
+      "sha256": "57b1fe2cece3b111e0635933e53bad480e1ecf2e0e330155881030a5ad53c2c5",
+      "bytes": 999
+    },
+    {
+      "record_id": "find:example:3d7ce85687efa9228f44e505",
+      "native_member": "find_dataset/strings/f00181/function_code.py",
+      "sha256": "cdbb2db91d6a2096ef53fb3dda8f5fc7dd53a299ae6de4fcadf2015c440b4f38",
+      "bytes": 1804
+    },
+    {
+      "record_id": "find:example:6338be0d846dfd9e9e499a74",
+      "native_member": "find_dataset/numeric/f00243/function_code.py",
+      "sha256": "b0522c102a1cf46cd63751b33c6013155d4b31417f4cf09d6cd8df60899eb37a",
+      "bytes": 458
+    },
+    {
+      "record_id": "find:example:d2a3e1d9614ae076eb27447c",
+      "native_member": "find_dataset/strings/f00892/function_code.py",
+      "sha256": "49b888aa89de317219b5518d96c2e7daa2e5f676bf002c696fac72de687e15a2",
+      "bytes": 1668
+    },
+    {
+      "record_id": "find:example:446de7211f15f543120f8ece",
+      "native_member": "find_dataset/numeric/f00461/function_code.py",
+      "sha256": "78203cc325b4ebf9ebbb985d25b09c9f042d6c427fc90c114796472cf0301df3",
+      "bytes": 437
+    },
+    {
+      "record_id": "find:example:f7908ce3820b8717d649b2d2",
+      "native_member": "find_dataset/strings/f00208/function_code.py",
+      "sha256": "634e5cf9ff89e0d18e4875a64fec3213cdc8b2949f16a6ad34efed70268d6f5d",
+      "bytes": 1427
+    },
+    {
+      "record_id": "find:example:4dc6d69ec0d19aaead7c8217",
+      "native_member": "find_dataset/strings/f00356/function_code.py",
+      "sha256": "45ef99d371dbf6939d09bb75cf27b64a3f7de82634d209d8ac1cf96a9c6e3249",
+      "bytes": 866
+    },
+    {
+      "record_id": "find:example:ccce26a58198c235ec92766c",
+      "native_member": "find_dataset/neurons_entities/f00129/function_code.py",
+      "sha256": "f6a112f5feb80dd6dad7e038394605ba8a9594e3e310ffc6efd884c6fee829d7",
+      "bytes": 1792
+    },
+    {
+      "record_id": "find:example:1530530d90f11a740d8326ac",
+      "native_member": "find_dataset/strings/f00317/function_code.py",
+      "sha256": "ec6cab2b9a0b67d7fa27d660229006a2678e11f7e10390d36e3662e764bda1c5",
+      "bytes": 1725
+    },
+    {
+      "record_id": "find:example:a575fb5c31a51382ac87387f",
+      "native_member": "find_dataset/numeric/f00261/function_code.py",
+      "sha256": "0a316520ba74076512ff512a9ff1245eecf43530133dabb34b68b0606b2a5b9f",
+      "bytes": 452
+    },
+    {
+      "record_id": "find:example:36d3cc50731888214b5d975f",
+      "native_member": "find_dataset/strings/f00332/function_code.py",
+      "sha256": "a519cc3044ed75cdceb1a04fffcf6cda364ac4dbf435b8975335d742875786b8",
+      "bytes": 736
+    },
+    {
+      "record_id": "find:example:304c05bcdf148482c87fe338",
+      "native_member": "find_dataset/numeric/f00870/function_code.py",
+      "sha256": "4b7f36080a4f82897ec4c8f38b9a67a930f3957781e3a795b577de6f67744d2c",
+      "bytes": 445
+    },
+    {
+      "record_id": "find:example:a011a54968c6a7092558a193",
+      "native_member": "find_dataset/numeric/f00794/function_code.py",
+      "sha256": "c0b7748bc0cf912b6caf9ca6a58fe80112aefab3aba556b36c4641644797728b",
+      "bytes": 510
+    },
+    {
+      "record_id": "find:example:5605fbd4fcebed14b5b866cd",
+      "native_member": "find_dataset/numeric/f00161/function_code.py",
+      "sha256": "6073485ee49851544fc109c8654b0e616e4aa70c0aa20ee03f1aecbd0fff6cf0",
+      "bytes": 601
+    },
+    {
+      "record_id": "find:example:d0cf37865301f8c097820454",
+      "native_member": "find_dataset/numeric/f00723/function_code.py",
+      "sha256": "adf3f60e331be6a35d905a7cf006079f455be59288d55995a76ff8101e379bf3",
+      "bytes": 463
+    },
+    {
+      "record_id": "find:example:35b177790d39a5b575a66345",
+      "native_member": "find_dataset/neurons_entities/f00101/function_code.py",
+      "sha256": "cea6709376445f895dd7050c45ccfb5ab7e449b1fa122ccd3cb08cc4efe11cdd",
+      "bytes": 1798
+    },
+    {
+      "record_id": "find:example:e657d24beccd259105d19676",
+      "native_member": "find_dataset/numeric/f00277/function_code.py",
+      "sha256": "b9ed752fe683f1565cfe1f4df9c26fbc068d5219a2ca25c8fd0d5a8ae2c7787b",
+      "bytes": 473
+    },
+    {
+      "record_id": "find:example:8b8d895a11ec4179a381d65a",
+      "native_member": "find_dataset/neurons_relations/f00000/function_code.py",
+      "sha256": "a65b953840496ecf519ca6ad981267f0040728f120057f3a6ea2153f8b2f31d8",
+      "bytes": 1235
+    },
+    {
+      "record_id": "find:example:a3009db76f8b63318913deb7",
+      "native_member": "find_dataset/numeric/f00323/function_code.py",
+      "sha256": "02d406708b518ef34632faab73027bbed4ea73cdb526bee94a28fd852465ea39",
+      "bytes": 464
+    },
+    {
+      "record_id": "find:example:130c5990baeb843d107e92e0",
+      "native_member": "find_dataset/numeric/f00725/function_code.py",
+      "sha256": "777cb6d73da926d435a0504a46d3ee4102687efd883f3ebec9ee539a2a419109",
+      "bytes": 422
+    },
+    {
+      "record_id": "find:example:8913b9bfab020f981157b1a5",
+      "native_member": "find_dataset/strings/f00913/function_code.py",
+      "sha256": "b5aaf86a78289af851ae10d90cdf1b2f8c07617890cacca64de97f7a5fce67f9",
+      "bytes": 546
+    },
+    {
+      "record_id": "find:example:fff43835f83a66fc5e6a653b",
+      "native_member": "find_dataset/numeric/f00419/function_code.py",
+      "sha256": "770705b7e3b6f1c910d3c2c754d9b39315e48dbed60ff718a3188ab607e5b1a7",
+      "bytes": 439
+    },
+    {
+      "record_id": "find:example:ffd47001ed0d549fefaabe93",
+      "native_member": "find_dataset/strings/f00665/function_code.py",
+      "sha256": "3a9a0b4def045de8a85cfd4d2d2c3a0f389d6f1fd630180432d332dc3ed4a4e2",
+      "bytes": 1658
+    },
+    {
+      "record_id": "find:example:ff8e31c75968804aa9cbe0a3",
+      "native_member": "find_dataset/numeric/f00756/function_code.py",
+      "sha256": "5e9a4b2593aad773625546e51f7de7a276e1398df403e465992015e613831480",
+      "bytes": 477
+    }
+  ]
+}

@@ -204,6 +204,10 @@ class PreparationManager:
             plan['media_access'] = 'Native gzip TAR checkpoints support bounded original-image retrieval; no uncompressed media archive is created.'
         remote = dataset.adapter_config.get('remote_archives', {})
         selective_media = remote or dataset.adapter_config.get('media_inventory_path') or plan.get('kind')=='huggingface_remote_columnar' or dataset.adapter=='remote_columnar'
+        if selective_media:
+            cache_bytes = dataset.adapter_config.get('remote_cache_bytes',1_000_000_000)
+            if type(cache_bytes) is not int or not 1 <= cache_bytes <= 1_000_000_000_000:
+                raise ValueError('Remote cache budget must be a positive integer of at most 1 TB')
         if remote:
             metadata_limit = recipe.get('remote_metadata_bytes', 20_000_000)
             if type(metadata_limit) is not int or not 1 <= metadata_limit <= 100_000_000:
@@ -225,9 +229,25 @@ class PreparationManager:
             plan['requirements'].append('Source download exceeds the selected download budget.')
         # Cache and retained source may coexist; reserve both conservatively.
         plan['required_free_bytes'] = plan['expected_download_bytes'] * 2 + max_output_bytes + (dataset.adapter_config.get('remote_cache_bytes',1_000_000_000) if selective_media else 0)
-        if plan.get('kind')=='huggingface_remote_columnar' or dataset.adapter=='remote_columnar':
+        if plan.get('kind')=='huggingface_remote_columnar' or (plan.get('kind')=='local' and dataset.adapter=='remote_columnar'):
             # Transfer is streamed through a bounded cache, not retained as a full source copy.
             plan['required_free_bytes']=max_output_bytes+dataset.adapter_config.get('remote_cache_bytes',1_000_000_000)+20_000_000
+        if plan.get('kind') in {'http_archive','huggingface_columnar'}:
+            # Verified, registered originals on the destination filesystem need
+            # only another hard link. The worker must fail if reuse is no longer
+            # possible; it cannot silently download/copy under this reservation.
+            from dataset_atlas.storage.sources import source_object
+            destination = self.root/'work/prepared'/dataset.id
+            while not destination.exists():
+                destination = destination.parent
+            reuse = []
+            for entry in plan['files']:
+                source = source_object(self.root,entry.get('sha256'),entry['bytes'])
+                if source is not None and source.stat().st_dev == destination.stat().st_dev:
+                    reuse.append(entry['source_name'])
+                    plan['required_free_bytes'] -= 2 * entry['bytes']
+            if reuse:
+                plan['reuse_registered_sources'] = reuse
         plan['required_free_bytes'] += dataset.adapter_config.get('max_join_bytes', 0)
         plan['available_bytes'] = shutil.disk_usage(self.directory).free
         if plan['required_free_bytes'] > plan['available_bytes']:

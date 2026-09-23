@@ -1,0 +1,960 @@
+{
+  "checked_at": "2026-09-23T11:18:14.184532+00:00",
+  "status": "passed",
+  "dataset_id": "rsicd",
+  "snapshot_id": "rsicd-f3cb3b52b1c4280539220300",
+  "population_count": 10921,
+  "native_caption_count": 54605,
+  "native_split_counts": {
+    "train": 8734,
+    "test": 1093,
+    "val": 1094
+  },
+  "all_native_annotations_and_member_joins_verified": true,
+  "preview_records_verified": 100,
+  "late_records_verified": 3,
+  "native_image_checks": 103,
+  "integrity": "Pinned Git LFS SHA-256 identity and HTTPS ETag; selective reads checked against native ZIP member length/CRC. Entire archive not downloaded or fully rehashed.",
+  "sampling": {
+    "method": "sha256_bottom_k_primary_asset",
+    "seed": 0,
+    "unit": "example",
+    "grouping": "primary asset ID; example ID for records without assets",
+    "population": "complete pinned indexed population",
+    "population_count": 10921,
+    "requested_count": 100,
+    "returned_count": 100,
+    "source_revision": "rsicd-fc33b4555e4baa4d2f05ff0449479c89da2eeac2",
+    "media_representation": "original",
+    "selection_note": "One hash-ranked example per sampled primary asset. All linked assets remain. Not an example-prevalence estimate."
+  },
+  "checks": [
+    {
+      "record_id": "rsicd:example:9ffa402721d75f20dbb8fad9",
+      "sha256": "9f01b4b2893a9558e09caa3f04c3c5090ba46d940a861efd01bc77e89a55ddd3",
+      "bytes": 68980,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:ef9f7c6f48d38f1b58749686",
+      "sha256": "0ed05cd3b94c1f6c4e2d41e245cb300bf79a54beebb14f5c6d772a6c7ead2768",
+      "bytes": 39691,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:241f3df62ef541ebe5e19a7b",
+      "sha256": "395bde4d207b8c640c3d7260d513ac9443842b499ce3edbe3f4d83d791c88e83",
+      "bytes": 8484,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:0e6ce3110a70e32de38212b9",
+      "sha256": "38935b57bb3dd5808173ff4543eddc21c8c2f4ef6620b7f2d6b49836a6a3fd5f",
+      "bytes": 49738,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:84ddcbf4912fe7724d5e0b10",
+      "sha256": "4d248418ea69918ec28fa626e6252dc19ef46b3205e7560b6ee08a145fe1771a",
+      "bytes": 4888,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:fb8e5d3021b9287368b955a9",
+      "sha256": "614e2299675ea1ff89eef3807356927307974f3aea404261e45131cae4f470e3",
+      "bytes": 41258,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:db340de551967d8a40309e57",
+      "sha256": "ab03f86c7e428b8f33769b11acf61bc04977687d494f41ecac71cd2221d6ea45",
+      "bytes": 93091,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:a228478e42707bbdaaf058be",
+      "sha256": "f502e8e2135b1b5450146810fc05ab965194bf66bc8f86c16061e0bbc6600bc6",
+      "bytes": 55455,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:4b69f5905904abf09e3a4939",
+      "sha256": "0b6e90ff652b000754e10aacede0e4f2372b8779c1efabd3a50b4ffdbb2adaa8",
+      "bytes": 35968,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:f3756e7bfc80a9bc8ff7ff0d",
+      "sha256": "0cae072aa4d392aefda595a54355f5379ebb9b9c65f004f70716dd9bd7072bee",
+      "bytes": 9663,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:beff58a3f75202b89ec1e0c2",
+      "sha256": "f9a53ea2e4144fc3e9c6fbfe35d76410e45c52dc2a1465f7ef31e4cd2fd63811",
+      "bytes": 79190,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:8b97e52044221151c74595d2",
+      "sha256": "35355eef4218d65a776b1c361c837355dc56c56a47f0c012e7336e06a8b1e5f9",
+      "bytes": 55995,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:277e21f70722ffae96446f36",
+      "sha256": "aa6a545331ff990df841e31d50967abf4e1163df80f8a0046d9d4c1d3c0aead2",
+      "bytes": 73303,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:be542e6b12cd87fec8505f89",
+      "sha256": "928d30e71505c1a7e2b86b89db4614d80fbbae2ddced2b53bf9abd0285be3b55",
+      "bytes": 11149,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:bbb3dfc719b45f2d98922555",
+      "sha256": "f96d5adb680b0da9b8b4c2a00367142691f494de1bf0657b32b9f989a6b5a5be",
+      "bytes": 35459,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:dfa9d167d658829ff76eaf39",
+      "sha256": "5d7f6599ae5c1fa6722a3111289a48fc735b4c864975cb4bfaef3994e564d789",
+      "bytes": 54236,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:77040030e98eba622c43926c",
+      "sha256": "42902890b1f61452ef6e8982baa7d32ce32780e93eb671111fa7874d72111b33",
+      "bytes": 57746,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:00e4e8bdb2e5c3dffa1f749d",
+      "sha256": "b824b09f2f3acdfcd2d7757c6c613032c19ae26dd9d0e2cbee251f7cb1f659e2",
+      "bytes": 48210,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:4de7b1f837f58632174e621a",
+      "sha256": "9487114b5a8be27cbe9c65e4c62c9f36cf700acb1eeb913405e60daade687846",
+      "bytes": 69965,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:dac8e4106b7457f99d73ddff",
+      "sha256": "7d54e7fe7cfd9b3a7f63752f39a8be71be7939f099e84d6ae67802a1b079e8a5",
+      "bytes": 58642,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:25e975fcab0530b87fc7aa3d",
+      "sha256": "d968806342016eeb6df10710ce480d4594c607881254dad4361135f0e8c1bde4",
+      "bytes": 45759,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:64a7c835448402d3c8eb95c5",
+      "sha256": "69d36d97af097347b7306bb610b833f475631e463da4520d9de45ae511bab3d1",
+      "bytes": 61816,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:02ba9546586c6c717e9a322f",
+      "sha256": "e208269e345bc60e5609dad43b05710067a24410b10053cb00240a9d268ef1b3",
+      "bytes": 70634,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:1b8d2957c879a9af983f2dc0",
+      "sha256": "8b4f56c015cf31319ec15f0e6bf726a6e02b161b5064de7377dd52335069aa78",
+      "bytes": 34814,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:8f8c69271a6481243994e59c",
+      "sha256": "804e6492f81e4715ae2a6e67e21b6428045a8bedc50cd55149edd437a7845b94",
+      "bytes": 48520,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:0fd334e8f7fb304a75244809",
+      "sha256": "68cd00b50ddba81b5bfd4a4ef445c3713a22b84661cb24dd7822469e59411c05",
+      "bytes": 50984,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:8ad9bbcde5bca9d152b7c70b",
+      "sha256": "a6974fb6ef2a5850a638c1c2e1882cce0cc46fbe6c38e7361967c387423e204f",
+      "bytes": 58026,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:b5529d383328e615f569fa05",
+      "sha256": "c42ea4f840179341e0a31ee849d5fc5dc0e1fb94a74cba352ec8063f89c75392",
+      "bytes": 56679,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:25decfe79a605512aba453ea",
+      "sha256": "5dc00ddab75c550ddbb548e81d6aeebb874b6e76351a649ad7c2080a43ccda2e",
+      "bytes": 82681,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:d24a6fa17b86646c8e7d9f75",
+      "sha256": "4ede4c27e101f80bfc9c9f4186e8ee594adce4dc2dac26dfe124fb6f4d38916a",
+      "bytes": 6491,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:e6e12d965493d968df6c4748",
+      "sha256": "a1db24b82031def7bec99f229ef295dadf0a324cdfb22f594e003924b0748123",
+      "bytes": 9910,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:ec3feaa231befa45f67eb571",
+      "sha256": "696a976ef55b059bf771400631a832f9848af777fab48cf9841a5013a2d6725a",
+      "bytes": 57235,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:b28b610e8a7ecc972fe78330",
+      "sha256": "490cfea31fba6333c0b986006df0a2d2f265cfa87a752eea565794b07dbd947a",
+      "bytes": 49952,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:bf5a9e3bdbf209fc11b06adf",
+      "sha256": "0b6327f78e30ab454102e31dbe7bf95c28c9247c413a8afff92d27bc483b854c",
+      "bytes": 64141,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:5793eb7b0285d97b7593495b",
+      "sha256": "16011c6b0fece62c7b915bcd2e0a01f2e2da605330b2cdaa68057359d96c8f84",
+      "bytes": 67771,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:6019502632af510d1bc67c63",
+      "sha256": "21f8c5bc1a1fb9ddc989affa12857fca071b3431d6ecb8e1ba7a0bc443665f53",
+      "bytes": 66412,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:262c1c947bbc65871a9501eb",
+      "sha256": "81eafcd4b25c48051675f26bfb66feba9d0d447af47ac2eb12e55d777d7e3df2",
+      "bytes": 64652,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:f318b1d449ba370c3c5f4a6f",
+      "sha256": "214ce4b1ea13c24107a3cec69c4e5d41df1e20b118824556518df1b32510b7de",
+      "bytes": 59317,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:374d9d430008eff0f390f29a",
+      "sha256": "81c7793a878739f4e6a21a2fd0626a88eece59477454e3cb0b4dfc6be9b6b2ee",
+      "bytes": 55119,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:c88b6a4382f4e4d9432e672e",
+      "sha256": "4a4727479fa11f2e4fd0fb3ec7320e5bae612a372aec902a3998a6b22c30695a",
+      "bytes": 40091,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:5c4220c9bac24b4a3b9fc38a",
+      "sha256": "efcba581e4ed00ed41e6d02a8dcb0f7c2691507c4ccc8949b503c483d0f07d3b",
+      "bytes": 13975,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:2856b1e5619352e0e884c842",
+      "sha256": "fbc3d539395ec50ebe7b9b405f3730d04ba37cce36d192e95af6d00ed95b7280",
+      "bytes": 49928,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:6dc7966e2cb162e5b05c06cb",
+      "sha256": "b55b231254c455157e324a21f4e30e631808da3fcdeae523a6c67d69010d4099",
+      "bytes": 57067,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:9bc8fc46098747d0b2d21ffc",
+      "sha256": "4d97054b18f29ce681011af6039c1f15dd037882243fe9e5c28a163a43d2ae3c",
+      "bytes": 47358,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:364f2d4d2cdce946fa7ecaaa",
+      "sha256": "95890bb708248d00ec1a6404942d02b4429210491f9394f47c5559930633837e",
+      "bytes": 57383,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:781d40d239902502b3d262ad",
+      "sha256": "b2786d342c6289c4a6508b6e9a4036cb943f5a97ad5d0d888b91c9df75430fe2",
+      "bytes": 50171,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:fa1ff74f0ed9b98a5fa8d2a6",
+      "sha256": "c694747e19346ae27dbfdf476baa20d364c324850e8deca38e676552a14fdfdb",
+      "bytes": 60085,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:aaf397e5ee46da32fc36d8e4",
+      "sha256": "324c0810364c62d63480dd2144e9775b4404ec9625ed4df26cfd492202ff0c3d",
+      "bytes": 56026,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:a16b1710e4be4f633c4c562b",
+      "sha256": "b34bbef93d02f26d2ebc82e43afbc2991f97f7daf5fe18bd5ae1ad59aafddac9",
+      "bytes": 71071,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:043b1da1ba164b43a08b5d84",
+      "sha256": "86fbe315cea3234e0d07c1904467753fca9c5b2999f291c780f059251d1333d5",
+      "bytes": 48004,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:369ac7f1c8ae826c6b589e39",
+      "sha256": "bffab054bc154a86bba95a841a702e36e75e521314ce4b00fbc362f10abcc099",
+      "bytes": 84222,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:3af65dcbdab2824d78fe413d",
+      "sha256": "1ef85dd6a2bf01b6a3512d01ecb6c533bf9be6ac9a6fe7359e46470e3a5dcc0e",
+      "bytes": 55255,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:c202e7ed4398fe35745ce948",
+      "sha256": "5fbd0cd112b2fbbaeb4ef92635ec1211c4c96efced382e49b69c5f7c2f5c52c9",
+      "bytes": 51103,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:b2e327f02f7fe6f9398ad2f1",
+      "sha256": "6379e0fa00c16dcc15c28e9ea97b52cb528321990b414c8c7b58e5351f8b0a86",
+      "bytes": 51502,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:2276c48f5615954a17c5ae6b",
+      "sha256": "0b02eb255c205994673df4336abba73e7857aeec633e278746411b51b134dd07",
+      "bytes": 38576,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:34e8dd465c35cae119c9ac81",
+      "sha256": "b3e281d1a6975365aa054175755d20b249b44335c67b676296f6e63b3e8ca8d0",
+      "bytes": 7373,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:d69830b812486e8dbfdec0a8",
+      "sha256": "2d95cd8417befd7278ef4facb0c71646b70678fff12715cccdb9f679088e3903",
+      "bytes": 103358,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:0f7775adb95ad425c5633cb8",
+      "sha256": "4ef057bfb08ddf55151d96a57ad3642119bd507623705267118eb3880aa1c540",
+      "bytes": 37925,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:d23f7cbb4039abe6e04042e8",
+      "sha256": "ec185903036143997bd68ec7cb22b6dda9144c2756a0617b976acf383c08f52e",
+      "bytes": 10817,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:135b6813514c763d87f31911",
+      "sha256": "81dc08cc5b5512522990bbb5699c76bc80fc86629345a946b239cb390847519b",
+      "bytes": 58573,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:0c629b569b8a783bb2c0a6bb",
+      "sha256": "8348f0cc4a95860af29c0e7a8a0503dc7c7ff0098f2df58b96bcdaff2a831244",
+      "bytes": 60996,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:3f489b8efa7588cc73e6cfdb",
+      "sha256": "eedb31e6af18fc5ec048fd60580e747596f1263fe490246c2380504d2ff3ae74",
+      "bytes": 40034,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:a07da4ec53417a3ecdc98039",
+      "sha256": "9bae7b818940d190bec7e2daac942eb502d66af9b76f8a49366bd998f5d29e51",
+      "bytes": 101027,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:0b42216676f1a7ab4421bd8a",
+      "sha256": "76d95259bc8a77b959da9ddd02281f4ee13f488b5f14a026ad7b01509e44aa0e",
+      "bytes": 83170,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:09e8a8723d2cbf96c161d08f",
+      "sha256": "e3e7fc2a6002a10b0269d56891f2228f1f684227f65c9813b5d93fd5ba56385a",
+      "bytes": 37744,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:3f2cf1cc003288633cba333e",
+      "sha256": "079a0d26588ec025f3477187f51554d3a2ab0d15afd1863cc3afd9aada080279",
+      "bytes": 9056,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:d02f44214e5e4261df12ffa4",
+      "sha256": "115e4c4b692df9eb3a1eff696befa3187bc6e64d486137d7c58b6b7d606ff7ee",
+      "bytes": 38754,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:8de570e78f2ba34c1585b7e8",
+      "sha256": "535890b980299398fe81c798ad427fcf666767bc05b1fe34bffb8ffcbe293e4e",
+      "bytes": 7742,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:e8146d5e1f0845bb88d91b78",
+      "sha256": "c83514c5ce5b3402c14b6fb45cdf532b418589ebac3bf01e4e50e2757047473d",
+      "bytes": 59104,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:998100c511f54c291093dcf8",
+      "sha256": "75f57985052cc7fee6173e7b9eb034ff6a8da4428eee39cab32d31748697916a",
+      "bytes": 39150,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:b5c9bdaaccafee8e3fa726c6",
+      "sha256": "a915c50e00b6562fce27592faf6f9000e2e299f635e6e88a7fec5e926e3b400f",
+      "bytes": 81356,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:74ffe3d4e27db6a802159414",
+      "sha256": "ec3a578181fcc0441642a6e996274a2b0ef3f3cd6d573784998720048d020cec",
+      "bytes": 33150,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:cf67da4589641965571bb568",
+      "sha256": "586ec197fa38ae512d0a77f6681e6c89e5aae8bbd0bc591a9b8b9ae8174b71e2",
+      "bytes": 63848,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:6978dbb05be36bfe0c11c5db",
+      "sha256": "57e538089e81ed459f15e880d2134d323c1e7f8747343e71c86dc98f5f68de27",
+      "bytes": 67162,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:7b615b4b275d2ee6c756946d",
+      "sha256": "478370c38f43775917ce5e0075e5dc922268f104ec41dc5b163d79598e2c4f42",
+      "bytes": 21853,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:92b6d63a4970355c5b78fdaa",
+      "sha256": "f7902596e1a279ab07952a635e6dc790cccc8098abc69ab895242738eae2676f",
+      "bytes": 6591,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:28c93dc9a08261e8ea9f876f",
+      "sha256": "272d6a22e3045bab091197af4df070fa2d2b1ab1880151ce32a015753352c115",
+      "bytes": 21857,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:bbdef0402868ee2c79892e6e",
+      "sha256": "0d971d3d2ffa95d7ac3ada1acf0fc4d73193a470366cbf10a1dbdebcb110e0e2",
+      "bytes": 51086,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:e69145503060f6578c4c4418",
+      "sha256": "a7549c1f15f822c728093f88abca1dc719ba1b33558885f9dda8aebf3d5d08be",
+      "bytes": 37446,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:d40ee10d9329572fefc5ddb2",
+      "sha256": "b6ecf10bd696848087a132b1fe06c088a595578e8b7f016360ec1889b53fd526",
+      "bytes": 25030,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:244a5bcba32808ff41f9fa30",
+      "sha256": "4355dbc3fcb80834d5c259a0eaa0381d974139fe23520f0739163867fc25f38a",
+      "bytes": 61908,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:c9990aac0aeaf00a7b3199fa",
+      "sha256": "0b643502124fb841c31f8598977c27b3c0e9b5e1252867555f2594c917c9a723",
+      "bytes": 50848,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:fbd71e2405bafb1003a461f3",
+      "sha256": "8a8661e16e92de118aa53d6e54ab46645b351594412d0fcadb4f0f2de1e38f44",
+      "bytes": 76820,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:afc312452b360f2294ea0d06",
+      "sha256": "a6fe534bb98e03a50300798a91b5e109478d00aeea0d6936540c2cafc8c7b03b",
+      "bytes": 8305,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:cb90b65cdee465b5ae23949e",
+      "sha256": "d9015f13a40cbf4016367d8ee64ddcd017544504df9544333c906d8ec489abdc",
+      "bytes": 10351,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:2b1deca61408c70ca1c7d2ad",
+      "sha256": "a6891e62bc51da80c9ad3c33a457505d6b2a1085868e73a90c6fe7c23d5aed1f",
+      "bytes": 81375,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:4b4868c4093d009ea73dbcde",
+      "sha256": "1210d73e7ed496a9838655eefc225d68703aa072b56d2f96495066c6d9e1f913",
+      "bytes": 68760,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:0fdfaa5e490b813f9e370146",
+      "sha256": "2f080a17619db991c904d81591e78551a49f1c37dfbc004ee784b8e925581819",
+      "bytes": 82823,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:c7065993fdc6a3ca3927be2b",
+      "sha256": "773b5f61a2a17f7a2ac8811886ae679efa408474f50f8678ea9735b01af781f9",
+      "bytes": 57491,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:92e2a396d2771377f871d069",
+      "sha256": "78d4b248ecdef21e1c127e5d843104833933afd83105cba1a9c7fcd3029ede9c",
+      "bytes": 53138,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:ff31bae2bfa48271c1412b8d",
+      "sha256": "179cd7baf2b50d550748ca802fd02c06b211aa3ca85ca9cc328584f38a337c7c",
+      "bytes": 44649,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:b140a9f5c3d935a42333c85c",
+      "sha256": "dba7ae13f42bf826627d686da8474a0614313d03b722ebb17bef7a28927f1424",
+      "bytes": 52246,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:80073d2ca736747c98218fd9",
+      "sha256": "cf018e7650decc3288c5d1b4e4fb6a84ecb95573a8b09f5556c4fcc25beb0aa0",
+      "bytes": 3685,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:a6cb280ca8e03861e2bce068",
+      "sha256": "0b59131495c56c15e8f3678cc9a360329c65967ef652b0ff4b3fc5eb31a9abac",
+      "bytes": 65091,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:f2f5f47d384cf837e69bd8c0",
+      "sha256": "5d35e46f0a890c543102f30b0710c09b535e0e808e1d67ab10c2b5da8d832007",
+      "bytes": 13104,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:50da71c23a073c2356e90b3e",
+      "sha256": "f41f4432a43e586390ea6be41f955d3442d97e37a462fc6927a431552be433c2",
+      "bytes": 35929,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:6107c3584b9021426ef7b1d4",
+      "sha256": "11d22862a8f4e63580adf82acc10c77f46dcfd88adf86e8b173137dd42d9dca8",
+      "bytes": 81355,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:6b6888a0e9d53fc804de891d",
+      "sha256": "7b5049170c82ce2ee4862c38eef40679daf4dc1b622d6166190e4a8b89d84a5b",
+      "bytes": 40988,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:acf472a5f75b97636b637a6d",
+      "sha256": "cf122632f659e3350dceafeeaed0f7e3696ca9e6f0c7494471a2ffd5abf28601",
+      "bytes": 58771,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:d9532341164d1a0e40b6936f",
+      "sha256": "af1c61a1deb4b1a35a5def44224d847615a41f2df1ada27dee11f3535ceb4de6",
+      "bytes": 61761,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:fff66921054238dab548257b",
+      "sha256": "f904d48a1195cf4932d779c48f1921449f6117f8bf1c4150cad99ee4f2740a86",
+      "bytes": 62713,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:ffe6ca163030ba2a91d3b92b",
+      "sha256": "a2e28455a3a1a22382db4681cbdf772d5155b2ef13094486ea1d33359108558b",
+      "bytes": 33055,
+      "dimensions": [
+        224,
+        224
+      ]
+    },
+    {
+      "record_id": "rsicd:example:ffe424d6d52dbdcd00588562",
+      "sha256": "e0fb52b4bc868275acffc1b1c7344e44d98767e3f09f8983e4edb822a7972bd7",
+      "bytes": 57994,
+      "dimensions": [
+        224,
+        224
+      ]
+    }
+  ]
+}

@@ -209,3 +209,22 @@ existing original access for every dependent snapshot, and pinned preview origin
 It does not delete snapshots, create replacement native routes, or remove external
 source files. Index-writer failures close all owned iterators, including remote
 prefetch producers.
+
+Multipart ZIP sources pin the order, length and ETag of every byte chunk. Reads
+cross chunk boundaries under one transfer cap without assembling a full archive.
+This supports byte-split ZIPs, not ZIP multi-disk archives. Repeated media reads
+reuse bounded parsed directories while retaining native header, name, overlap,
+length and CRC checks. The cache bound measures encoded directory bytes, not
+Python object RSS.
+
+FIND preserves native function source, metadata and available model files as
+passive text/array assets; importing never executes code or deserializes weights.
+SEED question identities include native task IDs, retaining a repeated question
+ID across two task types. All native choices and frame order survive; released
+video frames are not described as full videos. FairFace retains both released
+crop variants and labels them with their native padding conditions.
+
+Selective workers honor the cache root and byte limit admitted by their plan.
+Registered, checksum-verified originals on the destination filesystem can be
+reserved for hard-link reuse. Such a plan fails if the original disappears or
+linking fails; it cannot fall back to an unreserved download or copy.

@@ -51,6 +51,13 @@ def main(argv=None):
     retire.add_argument('--max-preview-bytes',type=int,default=500_000_000)
     retire.add_argument('--max-transfer-bytes',type=int,default=150_000_000)
     retire.add_argument('--execute',action='store_true')
+    repacked=storage.add_parser('retire-repacked',help='Remove a redundant ZIP after exact native-member and retained-route verification')
+    repacked.add_argument('--source',type=Path,required=True)
+    repacked.add_argument('--sha256',required=True)
+    repacked.add_argument('--index',required=True)
+    repacked.add_argument('--max-decoded-bytes',type=int,required=True)
+    repacked.add_argument('--max-transfer-bytes',type=int,default=150_000_000)
+    repacked.add_argument('--execute',action='store_true')
     corpus=sub.add_parser('corpus').add_subparsers(dest='action',required=True)
     scan=corpus.add_parser('scan');scan.add_argument('--papers-dir',type=Path,required=True);scan.add_argument('--output',type=Path,default=Path('work/corpus'))
     extract=corpus.add_parser('extract');extract.add_argument('--manifest',type=Path,required=True)
@@ -98,6 +105,9 @@ def main(argv=None):
                     from dataset_atlas.storage.indexed_tar import build_tar_index as build
                     bounds={'max_uncompressed_bytes':args.max_input_bytes}
                 emit(build(source,output,source_sha256=args.sha256,remote=remote,max_index_bytes=args.max_index_bytes,**bounds))
+            elif args.action=='retire-repacked':
+                from dataset_atlas.storage.retention import retire_repacked_archive
+                emit(retire_repacked_archive(root,args.index,args.source,source_sha256=args.sha256,max_decoded_bytes=args.max_decoded_bytes,max_transfer_bytes=args.max_transfer_bytes,execute=args.execute))
             elif args.action=='retire-original':
                 from dataset_atlas.storage.retention import retire_image_archive
                 emit(retire_image_archive(root,args.dataset,args.index,args.source,mappings=[{'asset_prefix':args.asset_prefix,'member_prefix':args.member_prefix},{'asset_prefix':'media/'+args.asset_prefix,'member_prefix':args.member_prefix}],max_preview_bytes=args.max_preview_bytes,max_transfer_bytes=args.max_transfer_bytes,extracted_root=args.extracted_root,linked_datasets=args.also_dataset,execute=args.execute))

@@ -184,3 +184,45 @@ def test_native_text_lists_preserve_line_numbers_and_overlapping_memberships(tmp
     assert len(records) == 4 and len({r.id for r in records}) == 4
     assert records[1].source['line'] == 3 and records[1].text == ' Second prompt '
     assert records[0].text == records[2].text
+
+
+def test_etag_inventory_checks_bounds_and_declared_fingerprint(tmp_path,monkeypatch):
+    adapter,image,path=fixture(tmp_path,monkeypatch)
+    path.write_text(json.dumps([{'id':1,'image':'a.png'}]))
+    inventory=tmp_path/'inventory.json';inventory.write_text(json.dumps({'files':{'a.png':{'bytes':len(image),'etag':'"native-v1"'}}}))
+    adapter.config.update(annotations=[{'path_key':'train_path','split':'train','media_template':'{image}'}],source_files=[],
+        media_inventory_path=str(inventory),media_inventory_sha256=hashlib.sha256(inventory.read_bytes()).hexdigest(),
+        remote_cache_root=str(tmp_path/'cache'),media_base_url='https://example.org/pinned',media_allowed_hosts=['example.org'])
+    observed=[]
+    class Reader(io.BytesIO):
+        def __init__(self,url,**kwargs):
+            observed.append((url,kwargs));super().__init__(image)
+    monkeypatch.setattr('dataset_atlas.adapters.structured_collection.HttpsRangeReader',Reader)
+    assert adapter.validate_media(10000)['referenced_images']==1
+    source=adapter.prepare(adapter.plan(10,10000));record=adapter.iter_records(source).records[0]
+    assert record.assets[0].sha256 is None
+    assert adapter.resolve_asset(source,record.assets[0].uri).data==image
+    assert observed[0][0]=='https://example.org/pinned/a.png'
+    assert observed[0][1]['etag']=='"native-v1"' and observed[0][1]['byte_budget']==len(image)
+    with pytest.raises(ValueError,match='byte budget'):adapter.resolve_asset(adapter.prepare(adapter.plan(1,1)),'file/a.png')
+    adapter._media_inventory['a.png']['bytes']+=1
+    with pytest.raises(ValueError,match='length changed'):adapter.resolve_asset(source,'file/a.png')
+    del adapter._media_inventory
+    inventory.write_text(json.dumps({'files':{'a.png':{'bytes':len(image),'etag':'W/"weak"'}}}))
+    adapter.config['media_inventory_sha256']=hashlib.sha256(inventory.read_bytes()).hexdigest()
+    with pytest.raises(ValueError,match='strong ETag'):adapter.validate_media(10000)
+
+
+def test_keyed_annotations_keep_native_keys_and_exact_overlay(tmp_path,monkeypatch):
+    adapter,_,path=fixture(tmp_path,monkeypatch)
+    rows={'image-9':{'caption':'native','person00':{'region':[1,2,3,4]}}};path.write_text(json.dumps(rows))
+    votes=tmp_path/'votes.json';votes.write_text(json.dumps({'image-9':{'votes':[{'worker':'native-id','value':'unsure'}]}}))
+    adapter.config.update(source_files=[],votes_path=str(votes),mapping={'id':'image_id','text':'caption'},
+        annotations=[{'path_key':'train_path','split':'train','record_key_field':'image_id',
+            'joins':[{'path_key':'votes_path','key':'@key','on':'image_id','field':'native_votes'}]}])
+    record=adapter.iter_records(adapter.prepare(adapter.plan(10,10000))).records[0]
+    assert record.source['image_id']=='image-9' and record.source['person00']==rows['image-9']['person00']
+    assert record.source['native_votes']==json.loads(votes.read_text())['image-9']
+    path.write_text(json.dumps({'image-9':{'image_id':'collision'}}))
+    adapter=StructuredCollectionAdapter(adapter.dataset.model_copy(update={'adapter_config':adapter.config}))
+    with pytest.raises(ValueError,match='colliding'):adapter.prepare(adapter.plan(10,10000))

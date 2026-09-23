@@ -194,6 +194,12 @@ def run(root, identity):
             target.parent.mkdir(exist_ok=True)
             if not target.exists():target.write_bytes(payload)
             dataset.adapter_config['media_inventory_path']=str(target)
+        if dataset.adapter == 'pathways_shapes':
+            from dataset_atlas.adapters.pathways_shapes import materialize
+            update(stage='rendering pinned author generation recipe')
+            generated = materialize(dataset,version/'sources/shapes',plan['max_output_bytes']-derived_bytes,check)
+            derived_sources.append(generated)
+            derived_bytes += generated['bytes']
         if dataset.adapter == 'visual_genome':
             dataset.adapter_config['join_index_path'] = str(version / 'sources' / 'visual-genome-join.sqlite')
         adapter = get_adapter(dataset)

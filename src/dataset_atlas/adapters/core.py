@@ -774,6 +774,12 @@ class OverlayAdapter(StructuredAdapter):
 
 
 def get_adapter(dataset: Dataset) -> DatasetAdapter:
+    if dataset.adapter == 'pathways_shapes':
+        from .pathways_shapes import PathwaysShapesAdapter
+        return PathwaysShapesAdapter(dataset)
+    if dataset.adapter == 'nocaps':
+        from .nocaps import NocapsAdapter
+        return NocapsAdapter(dataset)
     if dataset.adapter == 'textvqa_x':
         from .textvqa_x import TextVQAXAdapter
         return TextVQAXAdapter(dataset)

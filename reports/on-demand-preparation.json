@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-23T09:58:39.945458+00:00",
+  "checked_at": "2026-09-23T10:19:32.559507+00:00",
   "datasets": [
     {
       "dataset_id": "agent-security-bench",
@@ -522,6 +522,16 @@
       "prepared_receipt": "work/prepared/naturalbench/3a316bc9ca232b3988341858c01ea9cc5e73911e52ee0e9a7c23a1adddbe8690/receipt.json"
     },
     {
+      "dataset_id": "nocaps",
+      "release": "nocaps-v0.1-author-public-images-captions",
+      "snapshot_id": "nocaps-605ac563fbfcdff13e5850f0",
+      "records": 15100,
+      "preview_records": 100,
+      "scope": "All 15,100 native image records, preserving all 45,000 public validation captions; test captions are not published. Native legacy URLs retained; CVDF V4/V5 images joined by exact Open Images ID, at their released resolution (maximum 1024 pixels), not original Flickr full resolution.",
+      "plan_id": "605ac563fbfcdff13e5850f0b1f0ea21c1affab16cfdb52738442927e520ee86",
+      "prepared_receipt": "work/prepared/nocaps/605ac563fbfcdff13e5850f0b1f0ea21c1affab16cfdb52738442927e520ee86/receipt.json"
+    },
+    {
       "dataset_id": "nrc-vad",
       "release": "NRC-VAD-1-and-2.1-native",
       "snapshot_id": "nrc-vad-211641de9b969b2e119b8adb",
@@ -570,6 +580,16 @@
       "scope": "All 47524 conversations in native metadata.jsonl, joined to 47512 grouped attacks, plus 7826 native behaviours. Both source forms retained. Source-listed images absent from the pinned repository are explicitly unavailable; no claim of complete media. Gated images fetched on request with local authorized credentials.",
       "plan_id": "41623e4dc1d0eb73cab47b5315440df94341bdcf2507dd49148d2e82a76ec98c",
       "prepared_receipt": "work/prepared/phantom/41623e4dc1d0eb73cab47b5315440df94341bdcf2507dd49148d2e82a76ec98c/receipt.json"
+    },
+    {
+      "dataset_id": "phase",
+      "release": "phase-native-20221101",
+      "snapshot_id": "phase-176f56b79c6a0003d36fe74a",
+      "records": 18889,
+      "preview_records": 100,
+      "scope": "All 14,275 training and 4,614 validation images in the author-linked 20221101 release, with both complete individual-vote and aggregated-region annotation tables. Auxiliary annotators.csv and README are retained in the original annotation ZIP. Annotation values describe human perceptions, not verified personal attributes.",
+      "plan_id": "176f56b79c6a0003d36fe74aa70156d0c1f8f7bc1fe2621362625b60d36cee33",
+      "prepared_receipt": "work/prepared/phase/176f56b79c6a0003d36fe74aa70156d0c1f8f7bc1fe2621362625b60d36cee33/receipt.json"
     },
     {
       "dataset_id": "pmc-vqa",
@@ -650,6 +670,36 @@
       "scope": "All 5 native image identities and all 30 scale-specific HR/LR files for x2/x3/x4 in the pinned SelfExSR benchmark distribution of Set5. Original Git blob hashes checked on request; no generated downsampling. This is an explicitly named benchmark representation, not verified byte equivalence to the first historical release. No media publication approval.",
       "plan_id": "ef8d77ef3398695a0d24be69f121c8df886c76a8682bf3324cf829d84f5a84af",
       "prepared_receipt": "work/prepared/set5/ef8d77ef3398695a0d24be69f121c8df886c76a8682bf3324cf829d84f5a84af/receipt.json"
+    },
+    {
+      "dataset_id": "shapes-localization",
+      "release": "pathways-shapes-470944b3f6b44901a9055cf8d91aef18cee21671-seed42-pillow12.3.0-python3.12",
+      "snapshot_id": "shapes-localization-510f4cb1cb3f80c2eab643ac",
+      "records": 400,
+      "preview_records": 100,
+      "scope": "All 400 examples from the pinned author README recipe (200 pairs, seed 42, 1024x1024 pixels, 80-pixel shapes, 3x3 grid). This is an author-recipe reconstruction, not an archived historical experiment population. Source fields, paired identities, rendering versions and pixel hashes are retained.",
+      "plan_id": "510f4cb1cb3f80c2eab643acde4cf8f8d36ef6c4b69fff85ae93a22614e46dd2",
+      "prepared_receipt": "work/prepared/shapes-localization/510f4cb1cb3f80c2eab643acde4cf8f8d36ef6c4b69fff85ae93a22614e46dd2/receipt.json"
+    },
+    {
+      "dataset_id": "shapes-recognition",
+      "release": "pathways-shapes-470944b3f6b44901a9055cf8d91aef18cee21671-seed42-pillow12.3.0-python3.12",
+      "snapshot_id": "shapes-recognition-081729164fe20329392e0a16",
+      "records": 400,
+      "preview_records": 100,
+      "scope": "All 400 examples from the pinned author README recipe (200 pairs, seed 42, 1024x1024 pixels, 80-pixel shapes, 3x3 grid). This is an author-recipe reconstruction, not an archived historical experiment population. Source fields, paired identities, rendering versions and pixel hashes are retained.",
+      "plan_id": "081729164fe20329392e0a164b901ba9bdcc93dbac0abd94092258285ae3745a",
+      "prepared_receipt": "work/prepared/shapes-recognition/081729164fe20329392e0a164b901ba9bdcc93dbac0abd94092258285ae3745a/receipt.json"
+    },
+    {
+      "dataset_id": "shapes-relations",
+      "release": "pathways-shapes-470944b3f6b44901a9055cf8d91aef18cee21671-seed42-pillow12.3.0-python3.12",
+      "snapshot_id": "shapes-relations-d76e5d0368bd2a47e7864ae3",
+      "records": 400,
+      "preview_records": 100,
+      "scope": "All 400 examples from the pinned author README recipe (200 pairs, seed 42, 1024x1024 pixels, 80-pixel shapes, 3x3 grid). This is an author-recipe reconstruction, not an archived historical experiment population. Source fields, paired identities, rendering versions and pixel hashes are retained.",
+      "plan_id": "d76e5d0368bd2a47e7864ae3e4eac09cc520bf5939f3529c7f3b7c4ec0bedf31",
+      "prepared_receipt": "work/prepared/shapes-relations/d76e5d0368bd2a47e7864ae3e4eac09cc520bf5939f3529c7f3b7c4ec0bedf31/receipt.json"
     },
     {
       "dataset_id": "simplevqa",
@@ -813,9 +863,9 @@
     }
   ],
   "catalogue_entries": 333,
-  "with_previews": 143,
-  "without_previews": 190,
-  "full_population_indices": 138,
+  "with_previews": 148,
+  "without_previews": 185,
+  "full_population_indices": 143,
   "all_requested_datasets_complete": false,
   "note": "Acquired source populations and on-demand infrastructure; catalogue-wide coverage is not complete."
 }

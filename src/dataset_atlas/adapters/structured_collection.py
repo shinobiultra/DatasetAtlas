@@ -90,6 +90,11 @@ class StructuredCollectionAdapter(DatasetAdapter):
             elif format=='text_lines':data=[{'line':number,'text':line} for number,line in enumerate(text.splitlines(),1) if line.strip()]
             else:raise ValueError('Unsupported annotation format')
             if entry.get('records_key'):data=_nested(data,entry['records_key'])
+            if entry.get('record_key_field'):
+                field = entry['record_key_field']
+                if not isinstance(data,dict) or any(not isinstance(value,dict) or field in value for value in data.values()):
+                    raise ValueError('Keyed annotation records require objects without a colliding key field')
+                data = [{field:key,**value} for key,value in data.items()]
             if entry.get('array_columns'):
                 columns = entry['array_columns']
                 if not isinstance(data, list) or any(not isinstance(row, list) or len(row) != len(columns) for row in data):
@@ -119,8 +124,11 @@ class StructuredCollectionAdapter(DatasetAdapter):
                 for key,item in items:
                     if key is None or not isinstance(key,(str,int)):raise ValueError('Duplicate or missing annotation join key')
                     if spec.get('string_keys'):key=str(key)
-                    if key in lookup:raise ValueError('Duplicate or missing annotation join key')
-                    lookup[key]=item
+                    if spec.get('many'):
+                        lookup.setdefault(key,[]).append(item)
+                    else:
+                        if key in lookup:raise ValueError('Duplicate or missing annotation join key')
+                        lookup[key]=item
                 joins.append((spec,lookup,set()))
             for ordinal,row in enumerate(data):
                 row=dict(row)
@@ -246,7 +254,8 @@ class StructuredCollectionAdapter(DatasetAdapter):
             for name,entry in self._media_inventory.items():
                 _safe_relative(name)
                 if type(entry.get('bytes')) is not int or not 1<=entry['bytes']<=250_000_000:raise ValueError('Invalid inventory image size')
-                if not (re.fullmatch(r'[a-f0-9]{64}',entry.get('sha256','')) or re.fullmatch(r'[a-f0-9]{40}',entry.get('git_blob_sha1',''))):raise ValueError('Inventory image requires a content checksum')
+                if 'etag' in entry and not re.fullmatch(r'"[^"\r\n]+"',entry['etag']):raise ValueError('Inventory image requires a strong ETag')
+                if not (re.fullmatch(r'[a-f0-9]{64}',entry.get('sha256','')) or re.fullmatch(r'[a-f0-9]{40}',entry.get('git_blob_sha1','')) or entry.get('etag')):raise ValueError('Inventory image requires a content checksum or strong ETag')
         return self._media_inventory
 
     def validate_media(self,budget,cancel=None):
@@ -270,7 +279,7 @@ class StructuredCollectionAdapter(DatasetAdapter):
                 if missing:raise ValueError(f'Annotations reference {len(missing)} missing ZIP images in {key}: {sorted(missing)[:3]}')
                 fetched+=source.bytes_fetched
         return {'referenced_images':sum(len(names) for names in wanted.values())+len(individual),'archives':len(wanted),'metadata_bytes_fetched':fetched,
-                'integrity':('Remote archives: strong ETags and ZIP CRCs, full remote SHA-256 not computed. Local archives: pinned full-file SHA-256 and member CRCs.' if wanted else 'Original image files checked against the pinned SHA-256 or Git blob inventory on access.')}
+                'integrity':('Remote archives: strong ETags and ZIP CRCs, full remote SHA-256 not computed. Local archives: pinned full-file SHA-256 and member CRCs.' if wanted else 'Original image files checked against pinned checksums or strong ETag and size on access; ETags are consistency fingerprints, not content hashes.')}
 
     def iter_records(self,source,cursor=None,limit=None):
         start=int(cursor or 0)
@@ -299,11 +308,18 @@ class StructuredCollectionAdapter(DatasetAdapter):
             remaining=source.max_bytes-source.bytes_read
             if entry['bytes']>remaining:raise ValueError('Source image exceeds byte budget')
             cache=BoundedCache(self.config['remote_cache_root'],max_bytes=self.config.get('remote_cache_bytes',1_000_000_000))
-            path=HttpsFetcher(self.config['media_allowed_hosts'],max_bytes=remaining,credential_profile=self.config.get('credential_profile')).fetch(
-                self.config['media_base_url'].rstrip('/')+'/'+quote(name,safe='/'),cache,
-                CacheIdentity(self.revision,entry.get('sha256',entry.get('git_blob_sha1')),'source-image'),
-                expected_sha256=entry.get('sha256'),byte_budget=entry['bytes'])
-            data=path.read_bytes()
+            url=self.config['media_base_url'].rstrip('/')+'/'+quote(name,safe='/')
+            if entry.get('etag'):
+                if self.config.get('credential_profile'):raise ValueError('ETag-only image sources currently require public access')
+                with HttpsRangeReader(url,size=entry['bytes'],etag=entry['etag'],allowed_hosts=self.config['media_allowed_hosts'],byte_budget=entry['bytes'],cache=cache) as remote:
+                    data=remote.read(entry['bytes'])
+                if entry.get('sha256') and hashlib.sha256(data).hexdigest()!=entry['sha256']:raise ValueError('Source image checksum changed')
+            else:
+                path=HttpsFetcher(self.config['media_allowed_hosts'],max_bytes=remaining,credential_profile=self.config.get('credential_profile')).fetch(
+                    url,cache,
+                    CacheIdentity(self.revision,entry.get('sha256',entry.get('git_blob_sha1')),'source-image'),
+                    expected_sha256=entry.get('sha256'),byte_budget=entry['bytes'])
+                data=path.read_bytes()
             if len(data)!=entry['bytes']:raise ValueError('Source image length changed')
             if entry.get('git_blob_sha1') and hashlib.sha1(f'blob {len(data)}\0'.encode()+data).hexdigest()!=entry['git_blob_sha1']:
                 raise ValueError('Source image differs from pinned Git object')

@@ -23,7 +23,11 @@ def test_retirement_pins_full_quality_preview_and_preserves_original_retrieval(w
             out = io.BytesIO(); Image.new('RGB', (30 + i, 17), ('red', 'green', 'blue')[i]).save(out, 'PNG')
             originals[f'images/{i}.png'] = out.getvalue(); archive.writestr(f'Release/images/{i}.png', out.getvalue())
     payload = source.read_bytes(); sha = hashlib.sha256(payload).hexdigest()
-    pack.dataset.adapter_config = {'archive': str(source), 'archive_sha256': sha}
+    repacked = sources/'repacked.zip'
+    with zipfile.ZipFile(repacked,'w') as archive:
+        for name,data in originals.items():archive.writestr('Release/'+name,data)
+    repacked_sha=hashlib.sha256(repacked.read_bytes()).hexdigest()
+    pack.dataset.adapter_config = {'archive': str(source), 'archive_sha256': sha, 'repacked':str(repacked), 'repacked_sha256':repacked_sha}
     (workspace/'registry/datasets/fixture.yaml').write_text(yaml.safe_dump(pack.dataset.model_dump(mode='json')))
     rows = []
     for i, ref in enumerate(originals):
@@ -66,3 +70,18 @@ def test_retirement_pins_full_quality_preview_and_preserves_original_retrieval(w
     for ref, data in originals.items():
         assert resolve_dataset_asset(dataset, ref, workspace_root=workspace).data == data
     assert all(path.is_file() for path in [snapshots/'fixture/records.parquet', index/'members.sqlite'])
+
+    from dataset_atlas.storage.retention import retire_repacked_archive
+    from dataset_atlas.storage.indexed_tar import route_path
+    options=dict(source_sha256=repacked_sha,max_decoded_bytes=1_000_000)
+    with pytest.raises(ValueError,match='checksum changed'):
+        retire_repacked_archive(workspace,'native',repacked,source_sha256='0'*64,max_decoded_bytes=1_000_000)
+    shared_route=route_path(workspace,'shared','s2');saved=shared_route.read_bytes();shared_route.unlink()
+    with pytest.raises(ValueError,match='native routes'):
+        retire_repacked_archive(workspace,'native',repacked,execute=True,**options)
+    assert repacked.is_file()
+    shared_route.write_bytes(saved)
+    proof=retire_repacked_archive(workspace,'native',repacked,execute=True,**options)
+    assert proof['status']=='executed' and not repacked.exists()
+    assert proof['all_native_members_checked']==3 and proof['image_references_checked']==6
+    for ref,data in originals.items():assert resolve_dataset_asset(dataset,ref,workspace_root=workspace).data==data

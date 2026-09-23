@@ -1,11 +1,11 @@
 {
-  "checked_at_utc": "2026-09-23T09:58:39.945458+00:00",
+  "checked_at_utc": "2026-09-23T10:19:32.559507+00:00",
   "catalogue_entries": 333,
-  "tested_local_previews": 143,
-  "verified_preview_records": 14032,
-  "canonical_full_scope_indices": 138,
-  "entries_without_preview": 190,
-  "python_tests_passed": 372,
+  "tested_local_previews": 148,
+  "verified_preview_records": 14532,
+  "canonical_full_scope_indices": 143,
+  "entries_without_preview": 185,
+  "python_tests_passed": 380,
   "frontend_tests_passed": 22,
   "browser_tests_passed": 36,
   "browser_tests_skipped": 0,
@@ -26,27 +26,27 @@
       "status": "running",
       "pid": 3541713,
       "stage": "indexing",
-      "downloaded_bytes": 27863698,
-      "updated_at": 1790157514.3254697,
+      "downloaded_bytes": 51701374,
+      "updated_at": 1790158763.2943525,
       "pinned_shards": 938,
       "total_shards": 938,
       "schema_shards": 938,
       "expected_count": 1880992,
-      "indexed_count": 309000
+      "indexed_count": 404000
     }
   ],
-  "validation_log": "work/native-python-final.log",
+  "validation_log": "work/next-native-python.log",
   "browser_validation_log": "work/native-browser-final.log",
-  "additional_focused_test_log": "work/preparation-cleanup-tests.log",
+  "additional_focused_test_log": "work/next-native-final-focused.log",
   "python_tests_skipped": 1,
   "gqa_full_archive_retained_locally": false,
   "storage_policy": "reports/storage-policy-20260923.json",
-  "storage_footprint": "reports/storage-footprint-native-20260923.json",
+  "storage_footprint": "reports/storage-footprint-expanded-20260923.json",
   "retained_media_verification": "reports/retained-media-live-verification.json",
   "python_current_validation": {
     "version": "3.14.2",
-    "passed": 370,
+    "passed": 378,
     "skipped": 3,
-    "log": "work/native-python314-final.log"
+    "log": "work/next-native-python314.log"
   }
 }

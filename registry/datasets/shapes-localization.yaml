@@ -2,26 +2,28 @@ schema_version: '1.0'
 id: shapes-localization
 name: Shapes Localization
 aliases: []
-description: Pathways Shapes Localization synthetic set.
+description: 'Pathways Shapes Localization: 400 images reconstructed using the released author generator,
+  200 counterfactual pairs, seed 42 and the documented 1024-pixel rendering defaults. Historical experiment
+  pixel identity is not established.'
 paper_ids:
 - paper-6c99cf73401b37d4
-release: unresolved
-adapter: structured
+release: pathways-shapes-470944b3f6b44901a9055cf8d91aef18cee21671-seed42-pillow12.3.0-python3.12
+adapter: pathways_shapes
 adapter_config: {}
 coverage:
-  identity: resolved
+  identity: candidate
   source: verified
-  access: unverified
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Official source family identified; exact selected release, preparation and public-use
-    rights still require dataset-specific review.
-  - Adapter and preview are not implemented.
+  - Public preview redistribution is not approved.
+  - Author-recipe reconstruction; historical experiment pixels are not available.
+  total_count: 400
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -35,9 +37,9 @@ evidence:
   source_file_hash: 63a07114996dfdfd5a19f4a2790f78b7b42dc95ce54e14d1a8f32cbef00fc8fb
   page: 13
   role: introduction
-  excerpt: 'es Datasets We generate three synthetic datasets: Shapes Recognition,
-    Shapes Localization, and Shapes Relations, using a single pipeline. The shared
-    generation ensures all three datasets are construc'
+  excerpt: 'es Datasets We generate three synthetic datasets: Shapes Recognition, Shapes Localization,
+    and Shapes Relations, using a single pipeline. The shared generation ensures all three datasets are
+    construc'
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -46,10 +48,9 @@ evidence:
   source_file_hash: 63a07114996dfdfd5a19f4a2790f78b7b42dc95ce54e14d1a8f32cbef00fc8fb
   page: 13
   role: introduced synthetic evaluation
-  excerpt: 'Synthetic Shapes Datasets We generate three synthetic datasets: Shapes
-    Recognition, Shapes Localization, and Shapes Relations, using a single pipeline.
-    The shared generation ensures all three datasets are constructed from the same
-    pr'
+  excerpt: 'Synthetic Shapes Datasets We generate three synthetic datasets: Shapes Recognition, Shapes
+    Localization, and Shapes Relations, using a single pipeline. The shared generation ensures all three
+    datasets are constructed from the same pr'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -60,8 +61,8 @@ evidence:
   source_identity_status: author_generation_recipe_identified
 - kind: source_audit_release
   url: https://github.com/israfelsr/vlm-pathways
-  note: Paper p13 reports 400 generated examples and a position task; author repo
-    provides localization generation command
+  note: Paper p13 reports 400 generated examples and a position task; author repo provides localization
+    generation command
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_generation_recipe_identified
@@ -80,4 +81,17 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_generation_recipe_identified
-source_url: https://github.com/israfelsr/vlm-pathways
+- kind: native_population_live_verification
+  url: https://github.com/israfelsr/vlm-pathways/tree/470944b3f6b44901a9055cf8d91aef18cee21671
+  checked_on: '2026-09-23'
+  receipt: reports/shapes-live-verification.json
+  scope: All 400 examples from the pinned author README recipe (200 pairs, seed 42, 1024x1024 pixels,
+    80-pixel shapes, 3x3 grid). This is an author-recipe reconstruction, not an archived historical experiment
+    population. Source fields, paired identities, rendering versions and pixel hashes are retained.
+source_url: https://github.com/israfelsr/vlm-pathways/tree/470944b3f6b44901a9055cf8d91aef18cee21671
+modalities:
+- image
+- text
+tasks:
+- shape localization
+- counterfactual pairs

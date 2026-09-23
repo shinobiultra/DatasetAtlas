@@ -127,3 +127,44 @@ tests and 36 browser checks passed. The browser run includes real local detector
 embeddings, vLLM image send, native mask download and 304/390/820 px layouts.
 Pinned `ty`/`prek`, wheel/sdist scanning and base-only installed HTTP checks passed;
 receipts identify their exact artifacts. No new independent review is claimed.
+
+## Nocaps, PHASE and author Shapes recipes
+
+The next checkpoint reaches **148 previews / 14,532 records and 143 full-population
+indices**, leaving 185 of 333 entries without a preview. Nocaps includes all 15,100
+native image records with all 45,000 public validation captions and explicitly
+unpublished test labels. Its legacy Figure Eight URLs fail; exact Open Images IDs
+join to the official CVDF V4/V5 image distribution. All 103 inspected files match
+the benchmark's recorded dimensions, which are capped at 1024 pixels upstream;
+Atlas does not resize them or claim original Flickr full resolution. See
+[nocaps verification](nocaps-live-verification.json).
+
+PHASE retains all 18,889 native images, 35,347 annotated regions, aggregated human
+perceptions and individual annotator votes. Every annotation field was checked
+against the author release; 103 live images match original ZIP member bytes.
+Auxiliary annotator information and the research-only-use notice remain in the
+native annotation archive. These are source annotations, not inferred personal
+attributes. See [PHASE verification](phase-live-verification.json).
+
+Shapes Recognition, Localization and Relations each contain 400 images reconstructed
+with the authors' released generator. The source revision, seed, Python/Pillow
+versions, 1024-pixel rendering parameters, generated-file hashes and paired sample
+relations are recorded. All 1,200 images and native fields matched the upstream
+pure functions; 309 live originals passed checks. These are explicitly labelled
+author-recipe reconstructions, not archived historical experiment images or test
+fixtures. See [Shapes verification](shapes-live-verification.json).
+
+Food101's redundant repacked ZIP was also retired after all 101,008 native members,
+202,000 image references in retained snapshots and pinned preview originals passed
+verification. Fresh original retrieval probes passed before removing the extra
+5,139,003,823-byte copy. The original preview/late-image live checks passed again
+after deletion. See [the retirement receipt](food101-repacked-retention.json).
+The [new storage scan](storage-footprint-expanded-20260923.json) measured **135.6 GB**,
+including configured external model weights and active staging, with no scan errors.
+
+Validation: 380 Python tests passed (one optional source skip), and 378 passed on
+Python 3.14 (three optional dependency/source skips). Subsequent focused retention
+and generator-budget checks passed. The earlier 22 frontend and 36 browser checks
+remain the UI checkpoint; this batch changed no frontend code. Native media and
+query checks above ran against the current workbench. Pinned type checks passed.
+Cauldron remains in progress and is excluded from these completed counts.

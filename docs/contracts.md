@@ -188,3 +188,24 @@ and a continuation cursor. This is a record-payload cap, not an HTTP-envelope or
 process RSS claim. Native conversations are never truncated to meet the cap.
 Recipe resource limits are validated and pinned in preparation plans, then applied
 to both the worker cgroup command and its CPU/RSS/wall-time watchdog.
+
+Keyed JSON annotations may declare `record_key_field`; collisions are rejected.
+Explicit `many: true` joins retain every matching native row in source order and
+still reject orphaned join keys. Nocaps uses image records with ten validation
+captions, while its unpublished test captions remain absent. Public media manifests
+may pin strong ETags plus exact lengths; every read validates both and records the
+observed content hash. ETags are not presented as cryptographic content checksums.
+
+Shapes datasets use bundled pure functions from the pinned MIT-licensed author
+recipe. Generation is explicit preparation with bounds on pairs, image size,
+decoded pixels and output bytes. Seeds, Python minor version, Pillow version and
+source revision are pinned. Stored PNGs retain hashes and counterfactual pair
+relations; existing prepared images can be read without rerunning the generator.
+These populations are labelled author-recipe reconstructions, not archived
+historical experiment images or Atlas test fixtures.
+
+`storage retire-repacked` requires exact parity for every native archive member,
+existing original access for every dependent snapshot, and pinned preview originals.
+It does not delete snapshots, create replacement native routes, or remove external
+source files. Index-writer failures close all owned iterators, including remote
+prefetch producers.

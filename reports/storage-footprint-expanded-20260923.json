@@ -1,0 +1,293 @@
+{
+  "root": "/home/bitwise/Documents/vibe/DatasetAtlas",
+  "checked_at_utc": "2026-09-23T10:20:07.524828+00:00",
+  "target_bytes": 100000000000,
+  "ceiling_bytes": 150000000000,
+  "status": "above_target",
+  "files": 256803,
+  "logical_bytes": 195565545533,
+  "unique_file_bytes": 135117797366,
+  "allocated_bytes": 135647092736,
+  "bytes_above_target": 35647092736,
+  "groups": {
+    "work/prepared": {
+      "files": 2101,
+      "logical_bytes": 69239708050,
+      "unique_file_bytes": 67376249370,
+      "allocated_bytes": 67381313536
+    },
+    "work/sources": {
+      "files": 8404,
+      "logical_bytes": 67600429185,
+      "unique_file_bytes": 29279763765,
+      "allocated_bytes": 29297422336
+    },
+    "work/model-server": {
+      "files": 59583,
+      "logical_bytes": 8005984873,
+      "unique_file_bytes": 7775853134,
+      "allocated_bytes": 7909584896
+    },
+    "external:/home/bitwise/.cache/huggingface/hub/models--Qwen--Qwen2.5-VL-3B-Instruct": {
+      "files": 21,
+      "logical_bytes": 7520892472,
+      "unique_file_bytes": 7520892472,
+      "allocated_bytes": 7520927744
+    },
+    "external:/home/bitwise/.lmstudio/models/OBLITERATUS/gemma-4-E4B-it-OBLITERATED": {
+      "files": 3,
+      "logical_bytes": 6753289651,
+      "unique_file_bytes": 6753289651,
+      "allocated_bytes": 6753304576
+    },
+    "work/compact-media": {
+      "files": 80141,
+      "logical_bytes": 4227011190,
+      "unique_file_bytes": 4227011190,
+      "allocated_bytes": 4375183360
+    },
+    "work/media-cache": {
+      "files": 38990,
+      "logical_bytes": 4097159076,
+      "unique_file_bytes": 4097159076,
+      "allocated_bytes": 4177797120
+    },
+    ".venv": {
+      "files": 28591,
+      "logical_bytes": 1978998369,
+      "unique_file_bytes": 1978998369,
+      "allocated_bytes": 2048057344
+    },
+    "work/models": {
+      "files": 58,
+      "logical_bytes": 1721057444,
+      "unique_file_bytes": 1721057444,
+      "allocated_bytes": 1721204736
+    },
+    "work/snapshots": {
+      "files": 120,
+      "logical_bytes": 1391794797,
+      "unique_file_bytes": 1391794797,
+      "allocated_bytes": 1392078848
+    },
+    "work/verify-install": {
+      "files": 21932,
+      "logical_bytes": 1880732527,
+      "unique_file_bytes": 937404620,
+      "allocated_bytes": 969469952
+    },
+    "work/original-access": {
+      "files": 39,
+      "logical_bytes": 526236430,
+      "unique_file_bytes": 526236430,
+      "allocated_bytes": 526356480
+    },
+    "work/packs": {
+      "files": 2428,
+      "logical_bytes": 395487260,
+      "unique_file_bytes": 395487260,
+      "allocated_bytes": 400805888
+    },
+    "work/download-cache": {
+      "files": 21,
+      "logical_bytes": 210884755,
+      "unique_file_bytes": 210884755,
+      "allocated_bytes": 210935808
+    },
+    "work": {
+      "files": 557,
+      "logical_bytes": 177993216,
+      "unique_file_bytes": 177993216,
+      "allocated_bytes": 179466240
+    },
+    "apps": {
+      "files": 3954,
+      "logical_bytes": 152836770,
+      "unique_file_bytes": 152836770,
+      "allocated_bytes": 163700736
+    },
+    "work/demo-analysis-coco": {
+      "files": 1548,
+      "logical_bytes": 117200361,
+      "unique_file_bytes": 117200361,
+      "allocated_bytes": 122068992
+    },
+    "work/clean-ci-check": {
+      "files": 1382,
+      "logical_bytes": 75864637,
+      "unique_file_bytes": 75864637,
+      "allocated_bytes": 78635008
+    },
+    "dist": {
+      "files": 3,
+      "logical_bytes": 59075655,
+      "unique_file_bytes": 59075655,
+      "allocated_bytes": 59080704
+    },
+    "work/artifacts": {
+      "files": 2468,
+      "logical_bytes": 47845141,
+      "unique_file_bytes": 47845141,
+      "allocated_bytes": 55316480
+    },
+    ".git": {
+      "files": 59,
+      "logical_bytes": 49393688,
+      "unique_file_bytes": 49393688,
+      "allocated_bytes": 49590272
+    },
+    "work/demo-analysis": {
+      "files": 1046,
+      "logical_bytes": 43897067,
+      "unique_file_bytes": 43897067,
+      "allocated_bytes": 46669824
+    },
+    "src": {
+      "files": 632,
+      "logical_bytes": 34685338,
+      "unique_file_bytes": 34685338,
+      "allocated_bytes": 36016128
+    },
+    "registry": {
+      "files": 497,
+      "logical_bytes": 34209684,
+      "unique_file_bytes": 34209684,
+      "allocated_bytes": 35209216
+    },
+    "examples": {
+      "files": 305,
+      "logical_bytes": 29570606,
+      "unique_file_bytes": 29570606,
+      "allocated_bytes": 30179328
+    },
+    "external:/home/bitwise/.cache/vllm/torch_compile_cache/torch_aot_compile/57d9b21e56ab797b8bbff34151df322287140fd5ab94c389f23618bb9e6ae6b7": {
+      "files": 202,
+      "logical_bytes": 29143831,
+      "unique_file_bytes": 29143831,
+      "allocated_bytes": 29634560
+    },
+    "work/preparation": {
+      "files": 875,
+      "logical_bytes": 15987798,
+      "unique_file_bytes": 15987798,
+      "allocated_bytes": 17584128
+    },
+    "work/corpus": {
+      "files": 110,
+      "logical_bytes": 13892369,
+      "unique_file_bytes": 13892369,
+      "allocated_bytes": 14143488
+    },
+    "external:/home/bitwise/.cache/huggingface/hub/models--Qwen--Qwen2.5-VL-3B-Instruct-AWQ": {
+      "files": 5,
+      "logical_bytes": 11424081,
+      "unique_file_bytes": 11424081,
+      "allocated_bytes": 11431936
+    },
+    "ui-mockups": {
+      "files": 8,
+      "logical_bytes": 9771092,
+      "unique_file_bytes": 9771092,
+      "allocated_bytes": 9785344
+    },
+    "work/compression-study": {
+      "files": 58,
+      "logical_bytes": 7031287,
+      "unique_file_bytes": 7031287,
+      "allocated_bytes": 7139328
+    },
+    "local-config": {
+      "files": 8,
+      "logical_bytes": 6277384,
+      "unique_file_bytes": 6277384,
+      "allocated_bytes": 6299648
+    },
+    "reports": {
+      "files": 172,
+      "logical_bytes": 4415450,
+      "unique_file_bytes": 4415450,
+      "allocated_bytes": 4820992
+    },
+    "tests": {
+      "files": 246,
+      "logical_bytes": 3913673,
+      "unique_file_bytes": 3913673,
+      "allocated_bytes": 4419584
+    },
+    "workspace files": {
+      "files": 9,
+      "logical_bytes": 664988,
+      "unique_file_bytes": 664988,
+      "allocated_bytes": 692224
+    },
+    "scripts": {
+      "files": 25,
+      "logical_bytes": 175222,
+      "unique_file_bytes": 175222,
+      "allocated_bytes": 229376
+    },
+    "work/vector-cache": {
+      "files": 4,
+      "logical_bytes": 159069,
+      "unique_file_bytes": 159069,
+      "allocated_bytes": 172032
+    },
+    "work/jobs": {
+      "files": 44,
+      "logical_bytes": 114831,
+      "unique_file_bytes": 114831,
+      "allocated_bytes": 131072
+    },
+    "docs": {
+      "files": 9,
+      "logical_bytes": 82178,
+      "unique_file_bytes": 82178,
+      "allocated_bytes": 106496
+    },
+    ".pytest_cache": {
+      "files": 5,
+      "logical_bytes": 36972,
+      "unique_file_bytes": 36972,
+      "allocated_bytes": 53248
+    },
+    "schemas": {
+      "files": 1,
+      "logical_bytes": 29132,
+      "unique_file_bytes": 29132,
+      "allocated_bytes": 32768
+    },
+    "test-results": {
+      "files": 3,
+      "logical_bytes": 17789,
+      "unique_file_bytes": 17789,
+      "allocated_bytes": 28672
+    },
+    ".github": {
+      "files": 1,
+      "logical_bytes": 4652,
+      "unique_file_bytes": 4652,
+      "allocated_bytes": 8192
+    },
+    "licenses": {
+      "files": 1,
+      "logical_bytes": 1072,
+      "unique_file_bytes": 1072,
+      "allocated_bytes": 4096
+    },
+    "work/source-objects": {
+      "files": 134,
+      "logical_bytes": 19090164421,
+      "unique_file_bytes": 0,
+      "allocated_bytes": 0
+    }
+  },
+  "external_symlinks_not_counted": 60,
+  "errors": [],
+  "included_external_roots": [
+    "/home/bitwise/.cache/huggingface/hub/models--Qwen--Qwen2.5-VL-3B-Instruct",
+    "/home/bitwise/.cache/huggingface/hub/models--Qwen--Qwen2.5-VL-3B-Instruct-AWQ",
+    "/home/bitwise/.lmstudio/models/OBLITERATUS/gemma-4-E4B-it-OBLITERATED",
+    "/home/bitwise/.cache/vllm/torch_compile_cache/torch_aot_compile/57d9b21e56ab797b8bbff34151df322287140fd5ab94c389f23618bb9e6ae6b7"
+  ],
+  "measurement_note": "Regular files only; hard links counted once, allocated filesystem blocks. Reflink-shared extents may be counted more than once. Only explicitly configured external model/source roots are included. Incidental symlink targets and directory metadata are outside this measurement."
+}

@@ -205,3 +205,145 @@ def retire_image_archive(root, dataset_id, index_name, source, *, mappings,
     report.update(status='executed', freed_unique_file_bytes=native['source_bytes'] + freed_extracted)
     atomic(receipt_path, report)
     return report
+
+
+def retire_repacked_archive(root, index_name, source, *, source_sha256,
+                            max_decoded_bytes, max_transfer_bytes=150_000_000,
+                            execute=False):
+    """Retire a redundant ZIP only after exact parity and existing route checks.
+
+    Unlike retirement of a native source, this never installs routes. Every
+    dependent snapshot must already have verified native access and pinned
+    original previews, including datasets that share the repacked archive.
+    """
+    import zipfile
+    import pyarrow.parquet as pq
+    from dataset_atlas.registry import Registry
+    from dataset_atlas.adapters.core import _safe_relative
+    from dataset_atlas.preparation import atomic
+    from .indexed_tar import _file_identity, route_path, read_tar_member
+    from .indexed_zip import read_zip_member
+    from .compact import read_compact
+
+    root = Path(root).resolve(); source = Path(source)
+    source = (root/source).resolve() if not source.is_absolute() else source.resolve()
+    owned = [root/'work/prepared', root/'work/sources', root/'work/source-objects']
+    if not any(source.is_relative_to(p) for p in owned):
+        raise ValueError('Only acquired Atlas repacked archives can be retired')
+    if any(type(value) is not int or value < 1 for value in (max_decoded_bytes,max_transfer_bytes)):
+        raise ValueError('Positive decoded-work and transfer budgets required')
+    before = _file_identity(source)
+    with source.open('rb') as stream:
+        if hashlib.file_digest(stream, 'sha256').hexdigest() != source_sha256:
+            raise ValueError('Repacked archive checksum changed')
+    base = (root/'work/original-access').resolve(); index = (base/index_name).resolve()
+    if not index.is_relative_to(base): raise ValueError('Original-access index outside configured root')
+    native = json.loads((index/'receipt.json').read_text())
+    if native['format'] not in {'atlas-remote-gzip-tar-v1', 'atlas-remote-zip-v1'}:
+        raise ValueError('Unsupported native index format')
+    with (index/'members.sqlite').open('rb') as stream:
+        if hashlib.file_digest(stream, 'sha256').hexdigest() != native['checksums']['members.sqlite']:
+            raise ValueError('Native member index checksum changed')
+    with sqlite3.connect((index/'members.sqlite').as_uri()+'?mode=ro', uri=True) as db:
+        expected = {name:(size,sha) for name,size,sha in db.execute('SELECT name,bytes,sha256 FROM members')}
+    if not expected: raise ValueError('Native archive contains no members')
+    decoded = 0; seen = set()
+    with zipfile.ZipFile(source) as archive:
+        for member in archive.infolist():
+            if member.is_dir(): continue
+            name = _safe_relative(member.filename)
+            if name in seen or name not in expected: raise ValueError('Repacked member absent or duplicated in native inventory')
+            seen.add(name); size,sha = expected[name]; decoded += member.file_size
+            if decoded > max_decoded_bytes: raise ValueError('Repacked archive exceeds decoded-work budget')
+            if member.file_size != size: raise ValueError('Repacked member size differs from native source')
+            digest = hashlib.sha256()
+            with archive.open(member) as stream:
+                for block in iter(lambda:stream.read(1 << 20),b''): digest.update(block)
+            if digest.hexdigest() != sha:
+                raise ValueError('Repacked member differs from native source')
+    if seen != set(expected): raise ValueError('Repacked archive omits native members')
+
+    def strings(obj):
+        if isinstance(obj,str): yield obj
+        elif isinstance(obj,dict):
+            for value in obj.values(): yield from strings(value)
+        elif isinstance(obj,list):
+            for value in obj: yield from strings(value)
+    inode = tuple(before[:2]); dependencies = []; route_identities = []; references = 0; previews = 0
+    registry = Registry(root)
+    for dataset in registry.datasets():
+        for version,pack_path,snapshot in registry.versions(dataset.id):
+            values = set(strings(version.adapter_config)); dependent = False
+            for value in values:
+                if not (value.startswith(str(root)) or value.startswith('work/')): continue
+                candidate = Path(value); candidate = candidate if candidate.is_absolute() else root/candidate
+                if candidate.is_file() and tuple(_file_identity(candidate)[:2]) == inode: dependent = True
+            if not dependent: continue
+            if source_sha256 not in values or native['source_sha256'] not in values:
+                raise ValueError('Dependent snapshot lacks both pinned archive identities')
+            route = route_path(root,version.id,version.snapshot_id)
+            if not route.is_file() or not (snapshot/'records.parquet').is_file():
+                raise ValueError('Dependent snapshot lacks complete index or native routes')
+            config = json.loads(route.read_text()); route_identities.append((route,_file_identity(route)))
+            if config.get('dataset_id') != version.id or config.get('snapshot_id') != version.snapshot_id:
+                raise ValueError('Native route identity changed')
+            mappings = config['archives']
+            def native_member(ref):
+                for mapping in mappings:
+                    prefix = mapping.get('asset_prefix','')
+                    if not ref.startswith(prefix): continue
+                    if (base/mapping['index']).resolve() != index:
+                        raise ValueError('Dependent media has a different preceding native route')
+                    name = mapping.get('member_prefix','') + ref[len(prefix):]
+                    name = mapping.get('member_names',{}).get(name,name)
+                    if name in expected: return name
+                raise ValueError('Dependent media has no verified native route')
+            for batch in pq.ParquetFile(snapshot/'records.parquet').iter_batches(columns=['record_json'],batch_size=512):
+                for raw in batch.column(0).to_pylist():
+                    for asset in json.loads(raw)['assets']:
+                        if not asset.get('uri'): continue
+                        if asset['modality'] != 'image': raise ValueError('Repacked retirement requires image-only media references')
+                        name = native_member(asset['uri']); references += 1
+                        if asset.get('sha256') and asset['sha256'] != expected[name][1]:
+                            raise ValueError('Snapshot image differs from native member')
+            for record in json.loads(pack_path.read_text())['records']:
+                for asset in record['assets']:
+                    if not asset.get('uri'): continue
+                    name = native_member(asset['uri']); size,sha = expected[name]
+                    result = read_compact(root,version.id,version.snapshot_id,asset['uri'],size)
+                    if result is None or not result[2].get('protected_preview') or hashlib.sha256(result[0]).hexdigest() != sha:
+                        raise ValueError('Dependent preview original is not pinned')
+                    previews += 1
+            dependencies.append({'dataset_id':version.id,'snapshot_id':version.snapshot_id})
+    if not dependencies: raise ValueError('No dependent retained image snapshots found')
+    reader = read_zip_member if native['format'] == 'atlas-remote-zip-v1' else read_tar_member
+    names = sorted(expected); transferred = 0; probes = []
+    for name in [names[i] for i in sorted({0,len(names)//2,len(names)-1})]:
+        data,proof = reader(index,name,max_bytes=50_000_000,transfer_bytes=max_transfer_bytes-transferred)
+        if hashlib.sha256(data).hexdigest() != expected[name][1]: raise ValueError('Cold native member verification failed')
+        transferred += proof['transferred_bytes']; probes.append(proof)
+    paths = []
+    for directory,_,files in os.walk(root/'work'):
+        for name in files:
+            path = Path(directory)/name
+            if path.is_symlink(): continue
+            try: identity = _file_identity(path)
+            except FileNotFoundError: continue
+            if tuple(identity[:2]) == inode:
+                if not any(path.is_relative_to(p) for p in [*owned,root/'work/download-cache']):
+                    raise ValueError('Repacked hard link lies outside acquired directories')
+                paths.append(path)
+    if len(paths) != source.stat().st_nlink: raise ValueError('Repacked archive has external hard links')
+    report = {'status':'verified_plan','source_sha256':source_sha256,'source_bytes':before[2],
+              'native_source_sha256':native['source_sha256'],'native_index':index_name,
+              'all_native_members_checked':len(seen),'decoded_bytes':decoded,
+              'retained_dependencies':dependencies,'image_references_checked':references,
+              'pinned_preview_references_checked':previews,'cold_original_probes':probes,
+              'paths':[str(p.relative_to(root)) for p in paths]}
+    if not execute: return report
+    if _file_identity(source) != before or any(_file_identity(p) != identity for p,identity in route_identities):
+        raise ValueError('Repacked archive or native routes changed during verification')
+    receipt = base/'retirements'/f'repacked-{source_sha256}.json'; atomic(receipt,report)
+    for path in paths: path.unlink()
+    report.update(status='executed',freed_unique_file_bytes=before[2]); atomic(receipt,report)
+    return report

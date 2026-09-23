@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "verified_at_utc": "2026-09-23T10:00:10.745205+00:00",
+  "verified_at_utc": "2026-09-23T10:21:49.125418+00:00",
   "installation": {
     "installed_module": "/home/bitwise/Documents/vibe/DatasetAtlas/work/verify-install/selective-base-venv/lib/python3.12/site-packages/dataset_atlas/__init__.py",
     "optional_model_packages_present": {
@@ -26,7 +26,7 @@
         },
         "catalogue": {
           "status": 200,
-          "bytes": 409021,
+          "bytes": 410222,
           "content_type": "application/json"
         },
         "clevr": {
@@ -87,8 +87,8 @@
         "pairs": 100
       },
       "archive": "dataset_atlas-0.1.0.tar.gz",
-      "files": 577,
-      "site_bytes": 30494182
+      "files": 582,
+      "site_bytes": 30495383
     },
     "wheel": {
       "approved_media_files": {
@@ -97,18 +97,18 @@
         "pairs": 100
       },
       "archive": "dataset_atlas-0.1.0-py3-none-any.whl",
-      "files": 420,
-      "site_bytes": 30494182
+      "files": 423,
+      "site_bytes": 30495383
     }
   },
   "release_archives": {
     "dataset_atlas-0.1.0.tar.gz": {
-      "bytes": 29695187,
-      "sha256": "187becb7f3d27f375744600c82a7778c9bbe83302fc2d2b33041b0582cf60149"
+      "bytes": 29707058,
+      "sha256": "71ae8a6b616dae20ab85fbc9a804911dc5b4547ec1bd0f03008d431ce6c69434"
     },
     "dataset_atlas-0.1.0-py3-none-any.whl": {
-      "bytes": 29380467,
-      "sha256": "064e125e5feeec68158261d3e201a74a7042fa799057cf58148d5c45ad16cafd"
+      "bytes": 29390380,
+      "sha256": "4e150a6c4116b7ec5a5c85ecda2745c8ed5b15170eba709ac7f6a36d837435ad"
     },
     ".gitignore": {
       "bytes": 1,
@@ -116,7 +116,7 @@
     }
   },
   "validation": {
-    "full_python_suite": "372 passed, 1 skipped (optional retired local VHD11K archive)",
+    "full_python_suite": "380 passed, 1 skipped (optional retired local VHD11K archive)",
     "frontend_tests": "22 passed",
     "browser_suite": "36 passed in one opt-in browser run including real analysis, local image send, native mask download and 304px layout checks",
     "generated_contract": "byte-identical",

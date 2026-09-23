@@ -1,0 +1,54 @@
+release: nocaps-v0.1-author-public-images-captions
+source_url: https://nocaps.org/download
+adapter: nocaps
+expected_count: 15100
+description: 'nocaps v0.1: all 4,500 validation images with ten native captions each and all 10,600 test
+  images with undisclosed captions. Original benchmark image dimensions are preserved through the author-linked
+  Open Images CVDF distribution.'
+scope: All 15,100 native image records, preserving all 45,000 public validation captions; test captions
+  are not published. Native legacy URLs retained; CVDF V4/V5 images joined by exact Open Images ID, at
+  their released resolution (maximum 1024 pixels), not original Flickr full resolution.
+files:
+- source_name: nocaps-val.json
+  url: https://drive.usercontent.google.com/download?id=1zrsLhT94nazJ5h-LleHsU4AojHBqpcA0&export=download&confirm=t
+  bytes: 6159547
+  sha256: 2e8071fcd1fa512ce119b56c6fe6af2fc2105f25f0fffafe7032c8c9217c32f6
+  format: json
+  config_key: val_path
+- source_name: nocaps-test.json
+  url: https://drive.usercontent.google.com/download?id=1y8rBQZp5jsKS-eO2xmFPeJr8Rz-ShQst&export=download&confirm=t
+  bytes: 3069304
+  sha256: f22809de674afa26bd81ece416266d4eab63b6d9d6f618ae92ea3ca1bd3da7a8
+  format: json
+  config_key: test_path
+allowed_hosts:
+- drive.google.com
+- drive.usercontent.google.com
+adapter_config:
+  annotations:
+  - path_key: val_path
+    records_key: images
+    split: validation
+    media_template: validation/{file_name}
+    joins:
+    - path_key: val_path
+      records_key: annotations
+      key: image_id
+      'on': id
+      field: native_captions
+      many: true
+  - path_key: test_path
+    records_key: images
+    split: test
+    media_template: test/{file_name}
+  mapping:
+    id: id
+    text: _atlas_caption_text
+  media_inventory_path: registry/source-manifests/nocaps-media.json
+  media_inventory_sha256: 4edb5421a070d4f43d638d15e105beafd9faff4cf632adc57075d06802d6491e
+  media_base_url: https://open-images-dataset.s3.amazonaws.com
+  media_allowed_hosts:
+  - open-images-dataset.s3.amazonaws.com
+  remote_cache_root: work/media-cache/nocaps
+  remote_cache_bytes: 200000000
+  max_annotation_bytes: 30000000

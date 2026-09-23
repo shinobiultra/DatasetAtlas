@@ -87,3 +87,17 @@ files cannot be retired. Receipts stay under `work/original-access/retirements`.
 No snapshot or frozen selection is deleted, and absent upstream media remains
 explicitly absent. A remote source that disappears later produces an availability
 error; neither an AVIF copy nor a successful earlier probe fabricates an original.
+
+A redundant stored ZIP produced during earlier preparation can also be retired:
+
+```bash
+atlas storage retire-repacked --source work/prepared/DATASET/VERSION/sources/original-members.zip \
+  --sha256 REPACKED_ZIP_SHA256 --index DATASET-native --max-decoded-bytes 6000000000
+```
+
+This verifies every repacked member against the native archive's member hashes,
+requires existing original routes and pinned previews for every dependent snapshot,
+and performs fresh native retrieval probes. `--execute` removes only the checked
+Atlas-owned redundant archive. It cannot establish routes by itself; first complete
+native indexing and preview retention. Food101's additional 5.14 GB retirement is
+recorded in `reports/food101-repacked-retention.json`.

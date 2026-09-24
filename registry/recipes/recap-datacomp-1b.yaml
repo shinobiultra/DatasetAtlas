@@ -1,0 +1,20 @@
+source_url: https://huggingface.co/datasets/UCSC-VLAA/Recap-DataComp-1B/tree/457c44d98651bcfdfb3cc8695f5e60a0d2705e78
+release: 457c44d98651bcfdfb3cc8695f5e60a0d2705e78
+description: Recap-DataComp-1B train metadata as released by the authors, with LLaVA-1.5 re-captions,
+  original DataComp captions, URLs and native CLIP/GPT-4V scores. Linked images are third-party URLs
+  and are not fetched.
+scope: Rows of the 100 train Parquet shards (of 4,627) with the lowest SHA-256 shard ranks at author
+  revision 457c44d98651bcfdfb3cc8695f5e60a0d2705e78. Reading all 4,627 footers would transfer about
+  3 GB, so other shards are outside this preview population.
+source_patterns:
+- data/train_data/train-*.parquet
+sample_footers: shard_rank
+sample_shards: 100
+adapter_config:
+  mapping:
+    text: re_caption
+  remote_cache_bytes: 200000000
+resource_limits:
+  max_wall_seconds: 7200
+  max_cpu_seconds: 3600
+  max_rss_bytes: 4000000000

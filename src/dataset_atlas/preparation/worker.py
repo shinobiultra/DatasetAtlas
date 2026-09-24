@@ -53,6 +53,10 @@ def run(root, identity):
         version.mkdir(parents=True, exist_ok=True)
         check()
         update(stage='acquiring', downloaded_bytes=0)
+        if plan['kind']=='huggingface_remote_sample':
+            from .remote_sample import prepare_sampled_preview
+            prepare_sampled_preview(root, plan, identity, dataset, version, base, directory, update, check)
+            return
         if plan['kind'] in {'huggingface_columnar','http_archive'}:
             from dataset_atlas.storage import BoundedCache, CacheIdentity, HttpsFetcher
             # Multipart source chunks are consumed into one verified archive as

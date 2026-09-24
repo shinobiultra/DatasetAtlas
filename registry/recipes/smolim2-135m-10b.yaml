@@ -1,0 +1,18 @@
+source_url: https://huggingface.co/datasets/EleutherAI/SmolLM2-135M-10B/tree/4c87b0da77c1937f3a08b763cf899c46f39b8b3b
+release: 4c87b0da77c1937f3a08b763cf899c46f39b8b3b
+description: EleutherAI SmolLM2-135M-10B, a 10B-token sample of the SmolLM2-135M pretraining mixture
+  released for transcoder training. Native text and component-source fields are retained.
+scope: Every row of all 85 train Parquet shards at author revision 4c87b0da77c1937f3a08b763cf899c46f39b8b3b.
+  The preview is a seeded sample over footer row counts; no complete local index is built.
+source_patterns:
+- data/train-*.parquet
+sample_footers: all
+adapter_config:
+  mapping:
+    text: text
+  remote_cache_bytes: 200000000
+  max_record_bytes: 4000000
+resource_limits:
+  max_wall_seconds: 7200
+  max_cpu_seconds: 3600
+  max_rss_bytes: 4000000000

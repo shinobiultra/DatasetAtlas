@@ -27,6 +27,8 @@ class RemoteColumnarAdapter(DatasetAdapter):
         self.cancel=None
         self.cache=BoundedCache(self.config['remote_cache_root'],self.config.get('remote_cache_bytes',1_000_000_000))
         self._layouts={}
+        # Compressed bytes per row group: (selected non-media columns, media columns).
+        self._group_bytes={}
 
     def probe(self):
         return SourceDescription('remote_columnar',self.files[0]['url'],True,self.revision,sum(f['bytes'] for f in self.files),
@@ -65,8 +67,20 @@ class RemoteColumnarAdapter(DatasetAdapter):
                     path=parquet.schema.column(i).path
                     if path.split('.')[0] not in media or path.endswith('.path'):columns.append(path)
                 groups=[parquet.metadata.row_group(i).num_rows for i in range(parquet.num_row_groups)]
+                selected=set(columns);sizes=[]
+                for i in range(parquet.num_row_groups):
+                    group=parquet.metadata.row_group(i)
+                    chunks=[group.column(c) for c in range(group.num_columns)]
+                    sizes.append((sum(c.total_compressed_size for c in chunks if c.path_in_schema in selected),
+                                  sum(c.total_compressed_size for c in chunks if c.path_in_schema.split('.')[0] in media)))
+                self._group_bytes[index]=sizes
                 self._layouts[index]=(schema,media,columns,groups)
         return self._layouts[index]
+
+    def group_bytes(self,index):
+        """Compressed (annotation, media) bytes of each row group in one shard."""
+        self._layout(index)
+        return self._group_bytes[index]
 
     @property
     def count(self):return sum(sum(self._layout(i)[3]) for i in range(len(self.files)))
@@ -89,13 +103,13 @@ class RemoteColumnarAdapter(DatasetAdapter):
                     config={**self.config,'remote_files':[self.files[index]],'metadata_transfer_bytes':allowance}
                     child=RemoteColumnarAdapter(self.dataset.model_copy(update={'adapter_config':config}))
                     child.cancel=self.cancel
-                    try:return index,child._layout(0),child.bytes_fetched,None
+                    try:return index,(child._layout(0),child._group_bytes[0]),child.bytes_fetched,None
                     except Exception as error:return index,None,child.bytes_fetched,error
                 results=list(pool.map(read,batch))
                 self.bytes_fetched+=sum(result[2] for result in results)
                 for index,layout,_,error in results:
                     if error is not None:raise error
-                    self._layouts[index]=layout
+                    self._layouts[index],self._group_bytes[index]=layout
                     if progress:progress(schema_shards=len(self._layouts),total_shards=len(self.files),downloaded_bytes=self.bytes_fetched)
 
     def source_field_types(self):
@@ -170,6 +184,32 @@ class RemoteColumnarAdapter(DatasetAdapter):
             if merged and start<=merged[-1][1]:merged[-1]=(merged[-1][0],max(merged[-1][1],end))
             else:merged.append((start,end))
         parquet._atlas_buffer.prefetch(merged)
+
+    def records_at(self,source,targets):
+        """Records at explicit (file index, row group, row within group) positions.
+
+        Each touched row group is read once, annotation columns only; embedded
+        image bytes stay remote until an asset is resolved."""
+        wanted={}
+        for file_index,group,row in targets:
+            if not 0<=file_index<len(self.files):raise ValueError('Remote shard outside declared population')
+            groups=self._layout(file_index)[3]
+            if not 0<=group<len(groups) or not 0<=row<groups[group]:raise ValueError('Remote row outside declared population')
+            wanted.setdefault((file_index,group),set()).add(row)
+        found={}
+        for (file_index,group),rows in sorted(wanted.items()):
+            if self.cancel:self.cancel()
+            _,_,columns,groups=self._layout(file_index)
+            first=sum(groups[:group])
+            with self._parquet(file_index) as parquet:
+                self._prefetch_metadata(parquet,group,columns)
+                table=parquet.read_row_group(group,columns=columns)
+            for row in sorted(rows):
+                record=self._source_record(table.slice(row,1).to_pylist()[0],file_index,first+row)
+                source.charge(len(record.model_dump_json().encode()))
+                found[(file_index,group,row)]=record
+            del table
+        return [found[target] for target in targets]
 
     def iter_records(self,source,cursor=None,limit=None):
         start=int(cursor or 0);size=min(limit or source.limit,source.limit)

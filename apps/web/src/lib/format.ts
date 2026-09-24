@@ -111,7 +111,8 @@ export function coverageLine(dataset: Dataset, mode: 'static' | 'workbench'): { 
     case 'preview': {
       const extra = mode === 'workbench'
         ? (coverage.complete_data === 'requires_preparation' ? ' · full data needs preparation'
-          : coverage.complete_data === 'externally_blocked' ? ' · full data externally blocked' : '')
+          : coverage.complete_data === 'externally_blocked' ? ' · full data externally blocked'
+          : coverage.complete_data === 'exceeds_storage_budget' ? ' · sampled; full index exceeds local storage budget' : '')
         : ''
       return { text: `${previewCount.toLocaleString()} ${unit} preview${extra}`, tone: 'ok' }
     }

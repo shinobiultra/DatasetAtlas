@@ -52,7 +52,6 @@ class HttpsRangeReader(io.RawIOBase):
         if self.closed:raise ValueError('Reader is closed')
         count=max(0,self.size-self.position) if size<0 else min(size,max(0,self.size-self.position))
         if not count:return b''
-        if count>self.byte_budget:raise ValueError('Remote range exceeds read budget')
         start=self.position;end=start+count-1
         identity=CacheIdentity(self.etag,hashlib.sha256(f'{self.url}:{self.size}:{start}:{end}'.encode()).hexdigest(),'https-range-v1')
         data=None
@@ -67,6 +66,8 @@ class HttpsRangeReader(io.RawIOBase):
                     if path.stat().st_size!=count:raise ValueError('Cached range length mismatch')
                     data=path.read_bytes()
         if data is None:
+            # Budgets bound network transfer; an already verified cached range costs none.
+            if count>self.byte_budget:raise ValueError('Remote range exceeds read budget')
             if self.bytes_fetched+count>self.byte_budget:raise ValueError('Remote reads exceed transfer budget')
             data=self._fetch(start,end)
             self.bytes_fetched+=len(data)

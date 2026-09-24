@@ -65,7 +65,7 @@ class PreparationManager:
     def plan(self, dataset_id, max_download_bytes, max_output_bytes, source_mode="download"):
         if any(type(n) is not int or not 1 <= n <= 10_000_000_000_000 for n in (max_download_bytes, max_output_bytes)):
             raise ValueError('Positive download and output limits of at most 10 TB are required')
-        if source_mode not in {'download','selective'}:raise ValueError('Source mode must be download or selective')
+        if source_mode not in {'download','selective','sample'}:raise ValueError('Source mode must be download, selective or sample')
         dataset = self.registry.dataset(dataset_id)
         plan = {'dataset_id': dataset.id, 'dataset': dataset.model_dump(mode='json'),
             'max_download_bytes': max_download_bytes, 'max_output_bytes': max_output_bytes,
@@ -142,7 +142,7 @@ class PreparationManager:
             if plan['expected_count'] is None:
                 plan['ready']=False
                 plan['requirements'].append('Exact source population count must be declared in the recipe before full indexing.')
-        elif description and description.exists and not (source_mode=='selective' and parsed.hostname=='huggingface.co' and match):
+        elif description and description.exists and not (source_mode in {'selective','sample'} and parsed.hostname=='huggingface.co' and match):
             plan['kind'] = 'local'
             plan['expected_count'] = recipe.get('expected_count', dataset.coverage.total_count)
             snapshot = self.registry.snapshot_path(dataset.id)
@@ -203,6 +203,19 @@ class PreparationManager:
             elif plan.get('kind')!='local' or dataset.adapter!='remote_columnar':
                 plan['ready']=False
                 plan['requirements'].append('Selective column access requires a native Parquet source. Use the source recipe or full download for this format.')
+        if source_mode=='sample':
+            if plan.get('kind')=='huggingface_columnar' and plan['files'] and all(f['format']=='parquet' for f in plan['files']):
+                policy=recipe.get('sample_footers','all')
+                if policy not in {'all','shard_rank'}:raise ValueError('sample_footers must be all or shard_rank')
+                shards=recipe.get('sample_shards',min(100,len(plan['files'])))
+                if policy=='shard_rank' and (type(shards) is not int or not 1<=shards<=len(plan['files'])):raise ValueError('sample_shards must be within the pinned shard count')
+                plan.update(kind='huggingface_remote_sample',source_total_bytes=plan['expected_download_bytes'],
+                    expected_download_bytes=max_download_bytes,download_is_upper_bound=True,
+                    sample={'size':100,'seed':recipe.get('sample_seed',0),'footers':policy,'shards':shards if policy=='shard_rank' else len(plan['files'])},
+                    media_access='Sample 100 rows by a seeded SHA-256 counter over row counts from Parquet footers; read only the selected row groups within the transfer budget. No complete local index is built; embedded images are fetched on inspection.')
+            else:
+                plan['ready']=False
+                plan['requirements'].append('Sampled remote previews require a native Parquet source on Hugging Face.')
         if plan.get('kind')=='local' and dataset.adapter=='remote_columnar':
             dataset.adapter_config['metadata_transfer_bytes']=max_download_bytes
             plan['prepared_dataset']=dataset.model_dump(mode='json')
@@ -215,7 +228,7 @@ class PreparationManager:
             plan['expected_download_bytes']=recipe['remote_transfer_budget_bytes']
             plan['download_is_upper_bound']=True
             plan['media_access']='Index the complete ETag-bound remote ZIP directory; verify and pin 100 original encrypted PNGs. Other originals remain range-addressable on demand.'
-        if adapter_error and plan.get('kind') not in {'huggingface_columnar','huggingface_remote_columnar'}:
+        if adapter_error and plan.get('kind') not in {'huggingface_columnar','huggingface_remote_columnar','huggingface_remote_sample'}:
             plan['ready'] = False
             plan['requirements'].append('Adapter implementation missing: ' + dataset.adapter)
         if dataset.adapter_config.get('archive_preparation') == 'indexed-gzip':
@@ -224,7 +237,7 @@ class PreparationManager:
                 plan['requirements'].append('Indexed gzip access requires the remote-storage extra (indexed-gzip).')
             plan['media_access'] = 'Native gzip TAR checkpoints support bounded original-image retrieval; no uncompressed media archive is created.'
         remote = dataset.adapter_config.get('remote_archives', {})
-        selective_media = remote or dataset.adapter_config.get('media_inventory_path') or plan.get('kind')=='huggingface_remote_columnar' or dataset.adapter in {'remote_columnar','objectnet'}
+        selective_media = remote or dataset.adapter_config.get('media_inventory_path') or plan.get('kind') in {'huggingface_remote_columnar','huggingface_remote_sample'} or dataset.adapter in {'remote_columnar','objectnet'}
         if selective_media:
             cache_bytes = dataset.adapter_config.get('remote_cache_bytes',1_000_000_000)
             if type(cache_bytes) is not int or not 1 <= cache_bytes <= 1_000_000_000_000:
@@ -250,7 +263,7 @@ class PreparationManager:
             plan['requirements'].append('Source download exceeds the selected download budget.')
         # Cache and retained source may coexist; reserve both conservatively.
         plan['required_free_bytes'] = plan['expected_download_bytes'] * 2 + max_output_bytes + (dataset.adapter_config.get('remote_cache_bytes',1_000_000_000) if selective_media else 0)
-        if plan.get('kind')=='huggingface_remote_columnar' or (plan.get('kind')=='local' and dataset.adapter in {'remote_columnar','objectnet'}):
+        if plan.get('kind') in {'huggingface_remote_columnar','huggingface_remote_sample'} or (plan.get('kind')=='local' and dataset.adapter in {'remote_columnar','objectnet'}):
             # Transfer is streamed through a bounded cache, not retained as a full source copy.
             plan['required_free_bytes']=max_output_bytes+dataset.adapter_config.get('remote_cache_bytes',1_000_000_000)+20_000_000
         if plan.get('kind') in {'http_archive','huggingface_columnar'}:

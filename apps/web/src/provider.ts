@@ -249,7 +249,7 @@ export function recordMedia(record: AtlasRecord): string[] {
 /** Explicit user-triggered workbench acquisition; never invoked by static browsing or model tools. */
 export const preparationApi = {
   list: <T,>(datasetId: string) => get<T>(`/preparation?dataset_id=${encodeURIComponent(datasetId)}`),
-  plan: <T,>(id: string, maxDownloadBytes: number, maxOutputBytes: number, sourceMode: 'download' | 'selective' = 'download') => post<T>(`/datasets/${encodeURIComponent(id)}/preparation/plan`, { max_download_bytes: maxDownloadBytes, max_output_bytes: maxOutputBytes, source_mode: sourceMode }),
+  plan: <T,>(id: string, maxDownloadBytes: number, maxOutputBytes: number, sourceMode: 'download' | 'selective' | 'sample' = 'download') => post<T>(`/datasets/${encodeURIComponent(id)}/preparation/plan`, { max_download_bytes: maxDownloadBytes, max_output_bytes: maxOutputBytes, source_mode: sourceMode }),
   start: <T,>(id: string) => post<T>(`/preparation/${encodeURIComponent(id)}/start`),
   status: <T,>(id: string) => get<T>(`/preparation/${encodeURIComponent(id)}`),
   cancel: <T,>(id: string) => post<T>(`/preparation/${encodeURIComponent(id)}/cancel`),

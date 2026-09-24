@@ -1,0 +1,19 @@
+source_url: https://huggingface.co/datasets/mlfoundations/datacomp_1b/tree/086ebeee20d4cc3b3e7c05ae703fcf278ae3a759
+release: 086ebeee20d4cc3b3e7c05ae703fcf278ae3a759
+description: DataComp-1B metadata as released by the authors, one row per image-text pair with its
+  URL, caption, original dimensions, CLIP similarity scores, face boxes and SHA-256. Linked images are
+  third-party URLs and are not fetched.
+scope: Every row of all 2,664 metadata Parquet shards at author revision 086ebeee20d4cc3b3e7c05ae703fcf278ae3a759.
+  Each shard is one row group, so the preview reads a bounded number of whole shards. The companion
+  .npz embedding files are outside this population.
+source_patterns:
+- '*.parquet'
+sample_footers: all
+adapter_config:
+  mapping:
+    text: text
+  remote_cache_bytes: 200000000
+resource_limits:
+  max_wall_seconds: 10800
+  max_cpu_seconds: 3600
+  max_rss_bytes: 6000000000

@@ -45,7 +45,7 @@ class PreparationPlanRequest(BaseModel):
     model_config=ConfigDict(extra='forbid')
     max_download_bytes: int = Field(ge=1)
     max_output_bytes: int = Field(ge=1)
-    source_mode: str = Field(default='download', pattern='^(download|selective)$')
+    source_mode: str = Field(default='download', pattern='^(download|selective|sample)$')
 
 class RecordRequest(BaseModel):
     model_config=ConfigDict(extra='forbid')

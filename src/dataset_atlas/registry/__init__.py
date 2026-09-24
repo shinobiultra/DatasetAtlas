@@ -30,6 +30,13 @@ def merge_prepared(baseline: Dataset, prepared: Dataset, recipe_present: bool, r
     # Source audits and rights decisions remain registry-owned after preparation.
     for field in ('identity','source','access','publication'):
         setattr(merged.coverage,field,getattr(baseline.coverage,field))
+    # Blocker wording is reviewed in the registry after a version is prepared.
+    # Apply the same removal of disproven acquisition blockers used by the worker,
+    # without freezing the plan-time blocker list in an active snapshot.
+    from dataset_atlas.preparation import prepared_metadata
+    blocker_view=merged.model_copy(deep=True)
+    blocker_view.coverage.blockers=list(baseline.coverage.blockers)
+    merged.coverage.blockers=prepared_metadata(blocker_view, '').coverage.blockers
     if recipe_present:
         if (recipe_fields is None or 'description' in recipe_fields) and prepared.description!=baseline.description:merged.description=prepared.description
         if (recipe_fields is None or 'source_url' in recipe_fields) and prepared.source_url!=baseline.source_url:merged.source_url=prepared.source_url

@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-23T11:22:11.667404+00:00",
+  "checked_at": "2026-09-24T07:13:47.052487+00:00",
   "datasets": [
     {
       "dataset_id": "agent-security-bench",
@@ -482,6 +482,16 @@
       "prepared_receipt": "work/prepared/medical-multimodal-evaluation-data/f5d28789a26e7367502e3119c2382e016d8254b005c94ee9d6bff4805187329f/receipt.json"
     },
     {
+      "dataset_id": "mllmu-bench",
+      "release": "e91a01eb060b61be8dbde7edb48b121341bd0890",
+      "snapshot_id": "mllmu-bench-b3001307bd1e61f205d498bf",
+      "records": 1000,
+      "preview_records": 100,
+      "scope": "Complete Full_Set (500 image/person records) and Test_Set (500 image/person records) at the pinned author release. Each remains a distinct configuration. Retain_Set, forget_5/10/15, retain_85/90/95 and ft_Data are separately released training/evaluation derivatives and are not silently counted as new people. The citing paper's 438-image selection is not identified.",
+      "plan_id": "b3001307bd1e61f205d498bfe16ffe6c14aeefa53c79e0a829fd3043fd565c8b",
+      "prepared_receipt": "work/prepared/mllmu-bench/b3001307bd1e61f205d498bfe16ffe6c14aeefa53c79e0a829fd3043fd565c8b/receipt.json"
+    },
+    {
       "dataset_id": "mm-safetybench",
       "release": "b80eedea3db312c09ded2082813390f68e750ef3",
       "snapshot_id": "mm-safetybench-ef9dc9d1057214c3eca5b3b2",
@@ -670,6 +680,26 @@
       "scope": "All 127173 native samples plus three native trial records across the 13 published structs.zip archives at the pinned author revision. These are native templates/definitions, including repeated task variants, not a claim of 127176 distinct rendered benchmark questions. Non-batch template context remains in original archives. Procedural benchmark execution and cached model results are outside this source-browser scope. No plaintext questions or answers may be committed or published.",
       "plan_id": "e00d59eacc1a244e4ca086c65806888d358d44f8a1db883f198b06a0466666a0",
       "prepared_receipt": "work/prepared/sad/e00d59eacc1a244e4ca086c65806888d358d44f8a1db883f198b06a0466666a0/receipt.json"
+    },
+    {
+      "dataset_id": "sbbench-syn-crop",
+      "release": "sbbench-syn-crop-43769ef07d9388ebb4c3dc74b548eea615d0c93b-a7679386395cf29e9640757f16923f823d6251ef",
+      "snapshot_id": "sbbench-syn-crop-6af88e8b5f5d96b5cf118933",
+      "records": 917,
+      "preview_records": 100,
+      "scope": "Complete pinned vlmbias age and gender crop=True Parquet releases (917 rows). Each source stays identifiable by configuration and immutable revision. This is an author release population, not a claim that the chart abbreviations SB-Syn or SB-Syn-Crop identify exact historical membership. Native integer label codes are retained without inventing a category mapping.",
+      "plan_id": "6af88e8b5f5d96b5cf1189335dc4282438f6ed3e0dd5ecf1636c0d995bb8f8d9",
+      "prepared_receipt": "work/prepared/sbbench-syn-crop/6af88e8b5f5d96b5cf1189335dc4282438f6ed3e0dd5ecf1636c0d995bb8f8d9/receipt.json"
+    },
+    {
+      "dataset_id": "sbbench-syn",
+      "release": "sbbench-syn-95ac0c3020ff710295a6ed5c0216718f03383151-b3f53090f541bfcdb491217dfec7aa639289ad8a",
+      "snapshot_id": "sbbench-syn-175b3c346a5f1a2596d424ce",
+      "records": 539,
+      "preview_records": 100,
+      "scope": "Complete pinned vlmbias age and gender crop=False Parquet releases (539 rows). Each source stays identifiable by configuration and immutable revision. This is an author release population, not a claim that the chart abbreviations SB-Syn or SB-Syn-Crop identify exact historical membership. Native integer label codes are retained without inventing a category mapping.",
+      "plan_id": "175b3c346a5f1a2596d424cebcb4f5a08e82e0ffa5ca3c027833a721a811d532",
+      "prepared_receipt": "work/prepared/sbbench-syn/175b3c346a5f1a2596d424cebcb4f5a08e82e0ffa5ca3c027833a721a811d532/receipt.json"
     },
     {
       "dataset_id": "scienceqa-img",
@@ -953,9 +983,9 @@
     }
   ],
   "catalogue_entries": 333,
-  "with_previews": 157,
-  "without_previews": 176,
-  "full_population_indices": 152,
+  "with_previews": 160,
+  "without_previews": 173,
+  "full_population_indices": 155,
   "all_requested_datasets_complete": false,
   "note": "Acquired source populations and on-demand infrastructure; catalogue-wide coverage is not complete."
 }

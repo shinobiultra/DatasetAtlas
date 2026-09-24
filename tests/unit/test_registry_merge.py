@@ -75,6 +75,25 @@ def test_source_and_access_review_are_not_frozen_by_preparation():
     assert (merged.coverage.preview_count,merged.coverage.total_count,merged.coverage.adapter)==(100,150,'tested')
 
 
+def test_updated_registry_blockers_replace_plan_time_claims():
+    baseline=Dataset(id='d',name='Base',coverage={'blockers':[
+        'Adapter and preview are not implemented.',
+        'Paper selection still needs review.',
+        'Redistribution remains unapproved.',
+    ]})
+    prepared=Dataset(id='d',name='Base',adapter='columnar',coverage={
+        'preview_count':100,'adapter':'tested',
+        'blockers':['Old release identity and rights need verification.'],
+    })
+    merged=merge_prepared(baseline,prepared,recipe_present=True)
+    assert merged.coverage.blockers==[
+        'Paper selection still needs review.',
+        'Redistribution remains unapproved.',
+    ]
+    assert baseline.coverage.blockers[0]=='Adapter and preview are not implemented.'
+    assert prepared.coverage.blockers==['Old release identity and rights need verification.']
+
+
 def test_recipe_without_description_does_not_freeze_obsolete_source_claim(workspace):
     registry = Registry(workspace)
     _activate(workspace, registry, description='No source acquired yet')

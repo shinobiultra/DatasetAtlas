@@ -1,0 +1,1165 @@
+{
+  "checked_at": "2026-09-24T07:11:15.473693+00:00",
+  "status": "passed",
+  "dataset_id": "sbbench-syn-crop",
+  "snapshot_id": "sbbench-syn-crop-6af88e8b5f5d96b5cf118933",
+  "population_count": 917,
+  "native_config_counts": {
+    "age/data/train-00000-of-00002.parquet": 256,
+    "age/data/train-00001-of-00002.parquet": 255,
+    "gender/data/train-00000-of-00001.parquet": 406
+  },
+  "all_native_labels_and_image_paths_verified": true,
+  "preview_records_verified": 100,
+  "late_records_verified": 3,
+  "original_image_checks": 103,
+  "integrity": "Pinned author-repository SHA-256 metadata and strong-ETag HTTPS ranges; entire source Parquet shards not downloaded or fully hashed locally.",
+  "sampling": {
+    "method": "sha256_bottom_k_primary_asset",
+    "seed": 0,
+    "unit": "example",
+    "grouping": "primary asset ID; example ID for records without assets",
+    "population": "complete pinned indexed population",
+    "population_count": 917,
+    "requested_count": 100,
+    "returned_count": 100,
+    "source_revision": "sbbench-syn-crop-43769ef07d9388ebb4c3dc74b548eea615d0c93b-a7679386395cf29e9640757f16923f823d6251ef",
+    "media_representation": "original",
+    "selection_note": "One hash-ranked example per sampled primary asset. All linked assets remain. Not an example-prevalence estimate."
+  },
+  "checks": [
+    {
+      "record_id": "sbbench-syn-crop:example:f3f712ff01e7969774d448d7",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 0,
+      "sha256": "d39e697f8dd6f7ad5c88d198143be26640e1742d9b28e09f4534527b4f691b36",
+      "bytes": 1432671,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:2ccc521196d21735f9cf7519",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 7,
+      "sha256": "58f9d27d65b2b5cbb31fcc6694ee2985e32db660caab4497b6724a0572cfff90",
+      "bytes": 1401612,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:14316f930752d5bd8909e518",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 8,
+      "sha256": "c537f7c17b929f33c95f090907c097f765bf7afe99afb6360d7a208f0028fe50",
+      "bytes": 1374053,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:f1bebc90295ee6b958beaa35",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 9,
+      "sha256": "d67611eaee2def1deb373839e6602bb400248ada1dd2d77873a7fe8aff0188d2",
+      "bytes": 1371388,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:6e465bca77f7027d5062e696",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 13,
+      "sha256": "91b7eac9818aa75c654ed70d67d1688c9fa0456774beb1900a0cdbda59ab6b44",
+      "bytes": 1405483,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:17b9fb9093c92606abfca729",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 17,
+      "sha256": "deb65a48f02db60e33c7a98345752a63b8aa820be8880178f552a629588d62ec",
+      "bytes": 1251786,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:e8d59421863bc39d29ee0404",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 26,
+      "sha256": "57c6f0ab9ddb037856b397be8fbce81442a05c4347ddc758310beb53468e4b19",
+      "bytes": 1015047,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:a4251328b1ee0a5db699b07f",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 46,
+      "sha256": "d64021a4c6256ca949136e1666a294bf785f44002287f097588542096b735d02",
+      "bytes": 1620781,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:52927f26dfa0fd1a78c64f62",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 62,
+      "sha256": "e9d345e83f3303fa9c7d067bebe9837ffcd67110c3c9b24e15f33ee5f91381b9",
+      "bytes": 1436059,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:c45e218c9c15e0ee304b8a04",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 83,
+      "sha256": "92fe5cb33280e568cd5429a918874c77a1fed4473095aa1d0a4d31a843dd6c34",
+      "bytes": 1370147,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:49138c2ff9e24d765733dfeb",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 87,
+      "sha256": "f7965cc7a4aee94a94f6fd6be526f05c5d7b916a72ba34aec66d70160a8dc342",
+      "bytes": 1680468,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:83b3c9b33538213b59cb1729",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 93,
+      "sha256": "ab0d840bfb3e95e29cd1ab8b477444dcde329d004a29f833a4d199250ce2664b",
+      "bytes": 1520167,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:ad209a92fcb382bb9e8a9e8a",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 96,
+      "sha256": "4ec2ed94d111f93f892c41a4818af71d521b336c581ac37f923174e7d9181584",
+      "bytes": 1207123,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:6295687329c309d6ad30e79f",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 103,
+      "sha256": "80cb83c7a4a5b8ba1afec29effb2b0c7281159446c41ab90453bfff6f521db01",
+      "bytes": 1384194,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:19aafbd214c87753265bb14b",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 106,
+      "sha256": "374d7313830261c7c11954b19ca60c491af23088fe03017cd197966dfa0c6c4c",
+      "bytes": 1271979,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:97f93a50d34faa1f24a83930",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 109,
+      "sha256": "5a954b4f27b81f4ba70d325d2fa1d6726cf3842e4e2214af4a208df750f0249e",
+      "bytes": 1439066,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:cd14c95851cda8bc46d0347e",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 118,
+      "sha256": "614407dc971f94d1d4e0d8277e0898d0ad825f8b52f586e26997fbfa5c445340",
+      "bytes": 916383,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:4698d6423446615e0407b179",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 124,
+      "sha256": "105cc671e052bcbb0132d5562ecfe6deabebebbbf66eca755fba9817a14536a9",
+      "bytes": 1245396,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:01f2599fd3c85788a207aa4f",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 130,
+      "sha256": "dd2a2c874d150c2a653289ebc1e253fb17d455dd5d1ba2efe40b215a7a293038",
+      "bytes": 1187472,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:6ff85a405edf227f3acd192e",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 131,
+      "sha256": "0055313b31742204b36cfdfdf20ca74248935c0d401ac4673893b4978a7f75a3",
+      "bytes": 1400627,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:aac7eeb206bd9cbdc0b45502",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 152,
+      "sha256": "bd7872bb93700acc6bcd7cdd0f85df20556bf218683db877066fce33e1681b25",
+      "bytes": 1165640,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:37cd5a2f3b2551bb98e0dabb",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 154,
+      "sha256": "76b128635cd4a3f3deb94bbdff49d78d788b2c5cab55fd2fd30b16ef34f602ff",
+      "bytes": 1249288,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:c486a1cba9abbf611240cd4b",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 155,
+      "sha256": "27b2184986ee3d7f2cdbaaf266cfee0973ce7faa21a69eef134abdb86eb72657",
+      "bytes": 1377873,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:4f9b5b4f3fe93fe7052c1cac",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 161,
+      "sha256": "84541f1df25d732b3202de16b478a5aa065cfdbea21f8541d7fd50fe497171a0",
+      "bytes": 1357963,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:6a6b2fdb0d0c82c7b889bd9d",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 162,
+      "sha256": "e34bcee7d4f89fc414816228ed754611e7ae6a2d7477f50162ab378c620199b2",
+      "bytes": 1279491,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:10254050fd5e5a94317ac42b",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 181,
+      "sha256": "fd11acd1e854eb27aa5fc58fd19ac129c442dad999cc3fcfcd1e931e452273c4",
+      "bytes": 1154614,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:3a103f61244bfd9babfe0173",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 190,
+      "sha256": "6757d2bbcbdc82ad1f09ebddfc2f75b9647fcb5da57931401249a76162da4017",
+      "bytes": 1229241,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:1543cb6c9e78915971602064",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 191,
+      "sha256": "46cb777bb1611a9f384340ffe5eb411993a13ba29208c3e4abdd476286e49067",
+      "bytes": 1460545,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:ef204a3e3ece96e335e4f94c",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 197,
+      "sha256": "6f605413075fc171f636a430bce34c74f6fb0402950cffc356437df59b77c81e",
+      "bytes": 1344700,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:397695774e9352c5df8d5149",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 198,
+      "sha256": "38eb909ad5ca374c71f233dbb7ef061bae7bf325ee7b0a03dd0b94ea5d1abe8d",
+      "bytes": 1473220,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:56eb44fca22a2f8409290d20",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 207,
+      "sha256": "f52ace3ec311deafaaa8e64719b9bf1d700320c4b69a0aeacde6c958ec3e13da",
+      "bytes": 1387514,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:2c50bcb1d92c9bdd4281c43b",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 219,
+      "sha256": "747a5fefd8a1cf3e745876f7230578fa23d27ce6e01d249c518566373d443a5e",
+      "bytes": 1279072,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:d595303302db66692a60f28f",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 223,
+      "sha256": "8856fc0ed75e62e1e5a7d792ca1da8cf037400fcb64a6ea091a9e69f3fc851e9",
+      "bytes": 1413497,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:98ffc9fcc5f55df3945120b9",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 226,
+      "sha256": "1ebfe524d7a56acdf318abd672b9d6371947dd683ab7e1183b301a0cd246237c",
+      "bytes": 1280099,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:91e8a4169538c3ccc26aab06",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 234,
+      "sha256": "a4379a521bec59728178dc1a6eefe4b1b83d9f6512d20b9d7cfdb32fb2b3ac3c",
+      "bytes": 1369039,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:0dd83207d680fddc6f48dd64",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 241,
+      "sha256": "9ea568f727dccac6cb709b196a6d7a9639810f722487eb65c40f214c9c18ae4e",
+      "bytes": 1404809,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:ff455dc6efe06325e049542f",
+      "native_file": "age/data/train-00000-of-00002.parquet",
+      "native_row": 251,
+      "sha256": "171aef9dc604584b614d3dbabeb213f051d3d91824ef90470fb3d5730956e7e8",
+      "bytes": 1274382,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:a240dab477878dd9dc773eb8",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 20,
+      "sha256": "ac96926b75862502f8b1aa38781f196401c5711571f22a4c9609d0135c822f14",
+      "bytes": 1375625,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:d26c6d3160495150273460c3",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 23,
+      "sha256": "ed95e7b9c49892a98fdb950a2e99d588c502300831ca74cfe4540b3cb3bd2051",
+      "bytes": 1379485,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:122b237c7e440543c9c1e2dc",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 41,
+      "sha256": "fdde7830db26ac31337ca1c04e9f73c4fac671117f5fc17da46890c70063b6a9",
+      "bytes": 654628,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:249998d21766677a903c4541",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 42,
+      "sha256": "1df2845882826272b442bdd0d56958e5d995cd5f7f13b398ac965dd9d9f14ae5",
+      "bytes": 1466127,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:dec6e7c598de4b74fe60433b",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 58,
+      "sha256": "410387ed0116668c89037e461e98e6c830086c5374aaa500e89d6022c356d8c5",
+      "bytes": 1283639,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:a5573acb91b25553ac0f4751",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 89,
+      "sha256": "ee3f697bd80cfe966399151a9d29520b22ab4b0079cebe8af43065e8462e0daf",
+      "bytes": 1585337,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:9a93c1de40cc6351909fe892",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 107,
+      "sha256": "1f55d778908d7c32b25a48a2fdbe5905fb5242f4a619d1cf0ef529350dc2830d",
+      "bytes": 1386234,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:2c1865ab436ea6f7eae324b0",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 116,
+      "sha256": "f6a7d615dbc5b22de9755de10579acd6b1c30f674a5e2e55f1429dce636165c9",
+      "bytes": 1309917,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:6de99cd8316a1a2fa4ede4c8",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 120,
+      "sha256": "e149b134ba3852b299551682aa050fc22e89c92af543bb5f9e9799bf1d0b29a2",
+      "bytes": 1164588,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:997cfd429d76ccf13647eb0e",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 138,
+      "sha256": "41857965a83c55e793803798f40552092029634cc137a918a079fcab747c76c8",
+      "bytes": 1414025,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:62226bc589761a52a19cef42",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 144,
+      "sha256": "33854fb32f55c007a28ec1762971feb9e25817526ef3c37e79f3e6e3a94d8764",
+      "bytes": 1076548,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:d15fb25be733803259cd6c70",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 152,
+      "sha256": "1e790c147d0cc7e988131cf6696686cef3bb66e1e555558a434b3eb7376cfd1e",
+      "bytes": 1514317,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:d75db9bad6a76293a5bfe84e",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 162,
+      "sha256": "0661de0db18076b10dfbeb3f654898bfae3d775d61d02ff9ad27445e408c5ea3",
+      "bytes": 1177014,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:73f1200a192c88d64ab4f335",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 168,
+      "sha256": "f08e01e82fa846e5ab68c3c2b6320af88ed25293c95a60f4e2df1bd61d0d443f",
+      "bytes": 1575986,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:c975396c9f811877e45f0c7e",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 175,
+      "sha256": "d4b7fd12d08c9e02e944ce7a5ccef31489aa02792186f2664afb443c4bd510c5",
+      "bytes": 1201168,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:6db4a759616957e861d4370a",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 178,
+      "sha256": "ef4d9978a482fc02b173a1ae1f7899ffd8ed9e0ad4d244c73285569641c99508",
+      "bytes": 1438102,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:9ce64e0440e1f407074e557c",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 183,
+      "sha256": "7bfb4f4609fb030b4c3f1c6dfd4efd23363731a05b3efd05477992af7c98d5c9",
+      "bytes": 1385912,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:dfaef4f341398599d0f3f538",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 190,
+      "sha256": "8b8a3424353587cf1f4cc817db3ecaf7f451f872f094a1e6b7858ca1a77540b6",
+      "bytes": 1471296,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:15650f7de6b8d4a90ba90280",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 197,
+      "sha256": "b03376aa1baa56e486da67f6f4412a72c3f6e1125a3e95a475e6fd3ac0170030",
+      "bytes": 1457188,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:ae8f97816ed080c2ee802495",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 202,
+      "sha256": "c56139da30861937df6044f5049c043a56032419b3c3aa7b9dfc9f498db2b30f",
+      "bytes": 1390209,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:af6380f3fbf1b6939a2ed2db",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 223,
+      "sha256": "3caad90ca77118268e0e944133071c235d4a962ddfdaa7b301d350dd6e6d9890",
+      "bytes": 1213205,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:fe90b4433fbfd848e6b37bdb",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 226,
+      "sha256": "990b4c3ee82ee72228875c5f6508a8236f49d42aac1f7f6d8db3303a7c4685e5",
+      "bytes": 1275345,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:835068f3ead667de4ef765b2",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 240,
+      "sha256": "62610e87de80ee39f98836cb308383a7433fc7525db41905f990fd95341d2a14",
+      "bytes": 1595795,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:adb5bfd481b3092145fc0024",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 245,
+      "sha256": "892c819729123b1d3b671274b4dfb0c6d6c199be5e9437b8c42ce29b8b461a84",
+      "bytes": 1306405,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:2963a6a1d813324868999904",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 249,
+      "sha256": "448e19abc5c769ea22591b65172a3f5e2f012b9c05644ffbf7bbf8325e2323a0",
+      "bytes": 1473233,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:186cc87d6251210cabbee829",
+      "native_file": "age/data/train-00001-of-00002.parquet",
+      "native_row": 251,
+      "sha256": "0dc6fb7893306ea4bbfb89c4abccf8499c7f4690fec4a422bbc83c132ae055ad",
+      "bytes": 1445586,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:88bbd6e07360b6828ecce52f",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 1,
+      "sha256": "bcbbe18125868af56c7c38e09b3c87d5a6bae83eb38f3f0ac6dee1a64702723a",
+      "bytes": 1162946,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:eb8d9eeab853b038662e7ad5",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 5,
+      "sha256": "cc28a05275c629285288002b56486de944dc74b1347c4a53f89b0d4cf339a087",
+      "bytes": 1178173,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:5048ceb057272a7ec8a5a0f3",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 9,
+      "sha256": "87b764801cb1d462fa24675e6230f85069188f332d7345f4c028fe253b0874a7",
+      "bytes": 1258866,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:9cc1025bed8e1cb700e5892d",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 10,
+      "sha256": "2723110681fea4bce3be8cff4ec28cfec202a8053ef0567fca949f2eb56cfc26",
+      "bytes": 1184596,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:6de9b963528dbf7dfb5ebe8a",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 15,
+      "sha256": "3ccd29884357da4ddd120923e6202ea6afe37f55def6c876400ed8e61b71d107",
+      "bytes": 1186019,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:1d4b6fb91534bbd43b4ba3b8",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 27,
+      "sha256": "6c0361a37f7c3668379637fbc20f74532930a7c963b7086eca507fab0cb70c3e",
+      "bytes": 1285364,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:7c0cb22a46857a286f97f024",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 30,
+      "sha256": "9627cc7788a0c90671a53d897f2b4aa6f8a37b30568c57a62c85f752d863a457",
+      "bytes": 1392700,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:d75ae30104315901d1d63b0e",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 31,
+      "sha256": "83d0155e374c02dcfbde00e48b483df211aea97a05569248f6657e8172982c5d",
+      "bytes": 1040480,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:a8c1c22d5d290af887315217",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 36,
+      "sha256": "63500a5b2290f58bd08bba1c7f5d1d5dc2e131e5bf6c5a9349cc16b574c14efa",
+      "bytes": 1142774,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:ffeddaadc4cf8480961fabd2",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 65,
+      "sha256": "53261f174b5ea955166a87f4dacf187f74fe1ac4369395dd2f452472bcb04da6",
+      "bytes": 1291096,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:fa9428fe3b16b06ba6ab4507",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 72,
+      "sha256": "0cf90356c63412378f64096581f0de64abfaa84161b94b1b2d8385befeb5f3b4",
+      "bytes": 1289484,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:a67f3c42a990cd233e8e069a",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 73,
+      "sha256": "ae4d932f820538f80812feff5452adcaf57434f5b42069cb65ac754b152ae9f1",
+      "bytes": 1417893,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:c1193391648efdf348c19798",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 74,
+      "sha256": "b3057829aecc652f318362d62b6c151d909ec3cf4fe7f57cdac5f5503439c867",
+      "bytes": 1213711,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:5c26151c08c3606ed565bbb5",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 102,
+      "sha256": "32e4b1f3d3455367271cc46f8fc0daf0869966f9b8ca2e692ec5ade0bfaee798",
+      "bytes": 1273433,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:c1261449c0a9658422cd7283",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 105,
+      "sha256": "d14f55bb3c630d8cd838c4c5550f9ef478a5eb07e04b4c95b20ad9141841cecf",
+      "bytes": 1164975,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:a17fa15a8fe7d8b87c3ab59d",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 112,
+      "sha256": "d6b4aaf4bfe2cd269179c5d472586cddeef245eed705b42656dd9b2e830cbccd",
+      "bytes": 1074904,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:6c07fbddb479b1c1895d5677",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 115,
+      "sha256": "9d91a378e4737283d6e782e78feb630f15455bbfd2606fc668c8aba080b5d70b",
+      "bytes": 1182241,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:193e2200fbdbdab39e0da52e",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 136,
+      "sha256": "9b78fcdcc209c343791730f04cdd579b1b97b9bab309d411440824e469591e23",
+      "bytes": 1285693,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:feef40aedffe46a5be6ae61c",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 137,
+      "sha256": "0b5d1d9391a7bb8a938edaa3ab6842442d82c2edf01a3425318d8d3e9e859610",
+      "bytes": 1260867,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:547746b8e1c2c5c7beb39c67",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 146,
+      "sha256": "82602eeeb520d76eb8f7819738e333a4cedab0fdf9da2e5f123cfaef0ca15737",
+      "bytes": 1170753,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:97c4d3dc321f73a0ab9c8c24",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 147,
+      "sha256": "28363ff493f2e43b0cb8c7ca079a7ee6df93f58555b9eb4d9d6c1e79c1a680ac",
+      "bytes": 1396515,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:9190b085dd071e43b9978fca",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 160,
+      "sha256": "2473a7499a3bb4910c052a632966e44cd75bbbeef7bf8fc093d25f2afac77f1d",
+      "bytes": 1218033,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:1b21f6cab60b7c13228c4268",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 197,
+      "sha256": "385b5f1b21d8c040637be82f514903b77a502a528a7395247cbb2d99e49182ff",
+      "bytes": 1226065,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:c0ee267a96904cfaf6d3aa40",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 199,
+      "sha256": "e6ff4b618c5be42e08a71c9987ccd6a83750073c09297b8f221e7ffcff77033f",
+      "bytes": 1121895,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:105b0acc9e9407d0d32bc965",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 213,
+      "sha256": "b55ad0e04431180524699a277596fadf73712878648472f1cc64742cc40c6530",
+      "bytes": 1121701,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:35e218758b3961996b7f59f2",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 228,
+      "sha256": "aa438b4dbbfdf7c5266b7c68211f8af004119b969ad563a167ef889bee8f63b8",
+      "bytes": 1330288,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:ff614d3e7f3574adb50851cb",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 235,
+      "sha256": "ead25ea36387a9433695f6d0a7c0593e5fde8b917be176efd4ec49e150d312bc",
+      "bytes": 1201253,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:821e6a4be9b5a3829acdad62",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 237,
+      "sha256": "dc7599b153de8892c2a5a1afd310900320833eb9b398a449ea91fea20353846b",
+      "bytes": 1529172,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:be4dac6e580ca9899b7514fe",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 242,
+      "sha256": "0620cbd8b6c486789a3a7a966bdd870f96a8e1d08c65f8ac1c9a43cb6d5a61be",
+      "bytes": 1196165,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:f039911d66935e8e59e277da",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 253,
+      "sha256": "a016ec384248bfa0bc7a3e62349f0f26bdc37c0423fa99411c9b934885eb21c2",
+      "bytes": 1326325,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:1a4bbc68ab2598a751c90fac",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 275,
+      "sha256": "464874d2e06b9eb13bf3fd47a8f8d7aeca1982be2ef8a1c97e0f0777683d69e6",
+      "bytes": 1272907,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:18cab6b44cddbeb8beccc931",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 285,
+      "sha256": "c9547a819ddde144fcf3df9750987430d39c30d8e6a1312e37f8468034aaee63",
+      "bytes": 1120380,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:715bc305f00f3640025258ed",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 321,
+      "sha256": "8b3196b808693a69f6f6021228505f574b8bb12eb0b8500c7186e101e237d527",
+      "bytes": 1000979,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:556c33dab6432e152e5afff7",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 322,
+      "sha256": "cdb12ea093aeb7094cc4145d8c7da10033e7fe041a8d27710fb01ff5e46b5d6d",
+      "bytes": 1288295,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:c6d316d10fa1c463dcc9b4c3",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 327,
+      "sha256": "8798026a051541207ca2130e275d1c7669e2138a33f1c66f9cf3b5c86604746a",
+      "bytes": 1313314,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:10532197a605dcace718e543",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 332,
+      "sha256": "70b88399668ce3acdd90e9b9969561b1985e1bb918646b6e82f9226f84ac2520",
+      "bytes": 1231107,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:1195d50791a3980b5ae6538b",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 355,
+      "sha256": "72688e6e22d75551015c8bc411017b5a7aef2a139ff78f9385b246439a3f09aa",
+      "bytes": 1417013,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:2f9a9e37e760d3151852dcce",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 357,
+      "sha256": "1b0da8722da54b83f73ae75c21b5b8332a9898d10dfcdcbd406e44c582d7dc3b",
+      "bytes": 1313384,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:d9a3e0155a5814e213f01881",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 358,
+      "sha256": "2c5065c9479a1f5e9ea1bc54cdeb5210bad8203d59ef3f1008469f4bc52675c6",
+      "bytes": 1265977,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "sbbench-syn-crop:example:a7652b70213985ba1dbd129b",
+      "native_file": "gender/data/train-00000-of-00001.parquet",
+      "native_row": 394,
+      "sha256": "d5084d1bfb5000b16300ef9a0959e165b9c884c2db6afd34c32fcef8fd95c8cc",
+      "bytes": 1203426,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # Remaining implementation roadmap
 
-Updated 2026-09-23. SPEC.md remains the acceptance contract. The complete catalogue-wide request is **not finished**: 333 catalogue entries, 157 with prepared local previews, 176 without previews, and 152 canonical full-population indices. An index covers its explicitly pinned population, not all historical releases or an unidentified paper subset.
+Updated 2026-09-24. SPEC.md remains the acceptance contract. The complete catalogue-wide request is **not finished**: 333 catalogue entries, 160 with prepared local previews, 173 without previews, and 155 canonical full-population indices. An index covers its explicitly pinned population, not all historical releases or an unidentified paper subset. MLLMU-Bench Full_Set/Test_Set and both SBBench synthetic age/gender variants passed complete native annotation and live original-image verification; their exact citing-paper selections and media publication rights remain unresolved. [Verification](reports/native-expansion-20260924.md).
 
 Implemented since the UI closeout:
 
@@ -23,13 +23,13 @@ Remaining work:
   remains the target. Original-quality preview pins, full-dimension AVIF browsing
   copies, a shared on-demand cache, verified ZIP/TAR original retrieval and shared
   preparation admission limits are implemented. Actual receipts are in
-  `reports/storage-footprint-expanded-20260923.json` and
+  `reports/storage-footprint-20260924.json` and
   `reports/retained-media-live-verification.json`. New preparations sample randomly
   over their complete population; older source-order previews still need migration.
   Application admission limits are not a filesystem quota; continue measuring
   external model/cache roots and maintenance output as coverage expands.
 
-1. **Finish acquisition and adapter coverage.** 176 entries still have no prepared preview. Some have executable on-demand plans but are untested; many still lack a format-specific recipe. Accessible remaining examples include additional multimodal benchmarks and large source collections. This is implementation work, not an external access restriction.
+1. **Finish acquisition and adapter coverage.** 173 entries still have no prepared preview. Some have executable on-demand plans but are untested; many still lack a format-specific recipe. Accessible remaining examples include additional multimodal benchmarks and large source collections. This is implementation work, not an external access restriction. The Cauldron plan is still indexing; it is excluded from these counts until activation and verification.
 2. **Finish exact release reconciliation.** All 64 papers have full-text mention inventories and all 332 canonical corpus groups have research dispositions, but that does not resolve every source, revision, variant, or split. Preserve uncertain identities and source evidence. Do not merge similarly named populations without evidence. The confirmed DTD, Oxford Pets and OK-VQA duplicate IDs have been resolved as aliases; uncertain family/variant references remain distinct.
 3. **Support the largest remote releases selectively.** FineVision's native shards total about 4.65 TB; DataComp metadata is about 340 GB. Current acquisition plans enforce available disk space and reject oversized copies. Selective remote Parquet indexing is implemented with real multi-shard verification; catalogue-wide large-source coverage and broader mounted-source setup remain incomplete.
 4. **Complete remaining media and release populations.** SVO-Probes and JailBreakV retain media gaps; several existing entries cover selected official splits or representations. ViSU-Text, ZeroBench, Winoground and other actual gates require authorized access. Source uncertainty and access gates do not excuse accessible adapter gaps.

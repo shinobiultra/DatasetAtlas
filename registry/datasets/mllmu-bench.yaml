@@ -2,27 +2,28 @@ schema_version: '1.0'
 id: mllmu-bench
 name: MLLMU-Bench
 aliases: []
-description: Mention candidate from a focused page audit; the evidence receipts distinguish
-  direct use, comparison, related-work, and citation-only roles. Original source,
-  release, and rights still require independent verification.
+description: 'MLLMU-Bench: the author''s 500-person Full_Set and 500-person Test_Set, with original image
+  groups and all released biography, question/answer, classification, generation and masked-answer fields
+  retained where present.'
 paper_ids:
 - paper-944952997d24ce45
-release: unresolved
-adapter: structured
+release: e91a01eb060b61be8dbde7edb48b121341bd0890
+adapter: remote_columnar
 adapter_config: {}
 coverage:
-  identity: candidate
-  source: unverified
-  access: unverified
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Original release identity and rights need verification.
-  - Adapter and preview are not implemented.
+  - "The citing paper\u2019s 438-image selection has not been identified in the author release."
+  - Public media redistribution is not approved.
+  total_count: 1000
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -34,9 +35,9 @@ evidence:
   source_file_hash: 71a1cce60cc2242209269ec562113d20745af5b8416c92c7ce7b1bc418d2ca5b
   page: 8
   role: evaluation
-  excerpt: ' To evaluate VMA for privacy breaches, we sampled 438 images from the
-    MLLMU-Bench dataset [24], all of which remain secure under benign conditions.
-    Each image is paired with a carefully designed prom'
+  excerpt: ' To evaluate VMA for privacy breaches, we sampled 438 images from the MLLMU-Bench dataset
+    [24], all of which remain secure under benign conditions. Each image is paired with a carefully designed
+    prom'
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -45,8 +46,24 @@ evidence:
   source_file_hash: 71a1cce60cc2242209269ec562113d20745af5b8416c92c7ce7b1bc418d2ca5b
   page: 8
   role: privacy evaluation
-  excerpt: ivacy breaches. To evaluate VMA for privacy breaches, we sampled 438 images
-    from the MLLMU-Bench dataset [24], all of which remain secure under benign conditions.
-    Each image is paired with a carefully designed prompt to e
+  excerpt: ivacy breaches. To evaluate VMA for privacy breaches, we sampled 438 images from the MLLMU-Bench
+    dataset [24], all of which remain secure under benign conditions. Each image is paired with a carefully
+    designed prompt to e
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
+- kind: native_population_live_verification
+  url: https://huggingface.co/datasets/MLLMMU/MLLMU-Bench/tree/e91a01eb060b61be8dbde7edb48b121341bd0890
+  checked_on: '2026-09-24'
+  receipt: reports/mllmu-bench-live-verification.json
+  scope: Complete Full_Set (500 image/person records) and Test_Set (500 image/person records) at the pinned
+    author release. Each remains a distinct configuration. Retain_Set, forget_5/10/15, retain_85/90/95
+    and ft_Data are separately released training/evaluation derivatives and are not silently counted as
+    new people. The citing paper's 438-image selection is not identified.
+  source_identity_status: official_author_release_resolved_not_paper_subset
+source_url: https://huggingface.co/datasets/MLLMMU/MLLMU-Bench/tree/e91a01eb060b61be8dbde7edb48b121341bd0890
+modalities:
+- image
+- text
+tasks:
+- multimodal unlearning evaluation
+- question answering

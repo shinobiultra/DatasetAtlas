@@ -1,0 +1,23 @@
+source_url: https://huggingface.co/datasets/MLLMMU/MLLMU-Bench/tree/e91a01eb060b61be8dbde7edb48b121341bd0890
+release: e91a01eb060b61be8dbde7edb48b121341bd0890
+expected_count: 1000
+source_patterns:
+  - Full_Set/*.parquet
+  - Test_Set/*.parquet
+description: >-
+  MLLMU-Bench: the author's 500-person Full_Set and 500-person Test_Set, with
+  original image groups and all released biography, question/answer,
+  classification, generation and masked-answer fields retained where present.
+scope: >-
+  Complete Full_Set (500 image/person records) and Test_Set (500 image/person
+  records) at the pinned author release. Each remains a distinct configuration.
+  Retain_Set, forget_5/10/15, retain_85/90/95 and ft_Data are separately
+  released training/evaluation derivatives and are not silently counted as new
+  people. The citing paper's 438-image selection is not identified.
+adapter_config:
+  mapping:
+    question: question
+    text: biography
+    configuration_from_path: true
+  remote_cache_root: work/media-cache/ranges
+  remote_cache_bytes: 1000000000

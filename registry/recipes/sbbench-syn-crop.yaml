@@ -1,0 +1,38 @@
+source_url: https://huggingface.co/vlmbias
+release: sbbench-syn-crop-43769ef07d9388ebb4c3dc74b548eea615d0c93b-a7679386395cf29e9640757f16923f823d6251ef
+adapter: remote_columnar
+expected_count: 917
+description: 'SBBench synthetic author crop releases: all 917 image examples across separate age and gender
+  configurations, with original image bytes and native integer labels retained. Label meanings are not
+  inferred.'
+scope: Complete pinned vlmbias age and gender crop=True Parquet releases (917 rows). Each source stays
+  identifiable by configuration and immutable revision. This is an author release population, not a claim
+  that the chart abbreviations SB-Syn or SB-Syn-Crop identify exact historical membership. Native integer
+  label codes are retained without inventing a category mapping.
+adapter_config:
+  remote_files:
+  - source_name: age/data/train-00000-of-00002.parquet
+    url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_age_crop_True/resolve/43769ef07d9388ebb4c3dc74b548eea615d0c93b/data/train-00000-of-00002.parquet
+    bytes: 343041741
+    sha256: cb8ac573bcf8c0b29e3164e90e144c3fac86eabf73961c1d18f6477f4dc63f1e
+    etag: '"59af205297a2ef7790956d2425b106868e198b9ad6f1fb7c0a6f313245fc9a47"'
+  - source_name: age/data/train-00001-of-00002.parquet
+    url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_age_crop_True/resolve/43769ef07d9388ebb4c3dc74b548eea615d0c93b/data/train-00001-of-00002.parquet
+    bytes: 342276597
+    sha256: c83a2c053cb877c41a6137086deacf2e251185317555643e84c37442203bfdd7
+    etag: '"58500cc0ac4534794d9a09881c966b9ef55bb32218ab5b8da2586f2835d5da35"'
+  - source_name: gender/data/train-00000-of-00001.parquet
+    url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_gender_crop_True/resolve/a7679386395cf29e9640757f16923f823d6251ef/data/train-00000-of-00001.parquet
+    bytes: 496951911
+    sha256: 735bea2e42b4be933c4687170bce19e8738c096176d21807d94dbbdf4e439599
+    etag: '"795b42b77fe5d13b0f8fe5154a3ee01293665c24bb33de0c0d53163901b2e0d6"'
+  allowed_hosts:
+  - huggingface.co
+  - cas-bridge.xethub.hf.co
+  - cdn-lfs-us-1.hf.co
+  - cdn-lfs.hf.co
+  - us.aws.cdn.hf.co
+  remote_cache_root: work/media-cache/sbbench-syn-crop
+  remote_cache_bytes: 300000000
+  mapping:
+    configuration_from_path: true

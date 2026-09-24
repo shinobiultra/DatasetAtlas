@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "verified_at_utc": "2026-09-23T11:20:36.575540+00:00",
+  "verified_at_utc": "2026-09-24T07:18:01.131051+00:00",
   "installation": {
     "installed_module": "/home/bitwise/Documents/vibe/DatasetAtlas/work/verify-install/selective-base-venv/lib/python3.12/site-packages/dataset_atlas/__init__.py",
     "optional_model_packages_present": {
@@ -26,7 +26,7 @@
         },
         "catalogue": {
           "status": 200,
-          "bytes": 412208,
+          "bytes": 413161,
           "content_type": "application/json"
         },
         "clevr": {
@@ -88,7 +88,7 @@
       },
       "archive": "dataset_atlas-0.1.0.tar.gz",
       "files": 592,
-      "site_bytes": 30497369
+      "site_bytes": 30498322
     },
     "wheel": {
       "approved_media_files": {
@@ -98,17 +98,17 @@
       },
       "archive": "dataset_atlas-0.1.0-py3-none-any.whl",
       "files": 428,
-      "site_bytes": 30497369
+      "site_bytes": 30498322
     }
   },
   "release_archives": {
     "dataset_atlas-0.1.0.tar.gz": {
-      "bytes": 29722322,
-      "sha256": "f45c38e5a668f3a41614048515afbfc3b75b08a3580a853db98761a97a1e74fe"
+      "bytes": 29722911,
+      "sha256": "258714ce99824777aef6dad8266817ada91e54fa7bb525abab9e5a3b9c21b9b6"
     },
     "dataset_atlas-0.1.0-py3-none-any.whl": {
-      "bytes": 29401213,
-      "sha256": "10bd2fe855a0b40d8c1f5f051d90312bd4cd88e7eedef175e20ce6f25363772d"
+      "bytes": 29401684,
+      "sha256": "331a9ae75962d19b2c68284062f0af2edcd96da1831c1ef88c5b818040c998d8"
     },
     ".gitignore": {
       "bytes": 1,
@@ -116,7 +116,7 @@
     }
   },
   "validation": {
-    "full_python_suite": "406 passed, 1 skipped (optional retired local VHD11K archive)",
+    "full_python_suite": "407 passed, 1 skipped (optional retired local VHD11K archive)",
     "frontend_tests": "22 passed",
     "browser_suite": "38 passed in one opt-in browser run including real analysis, local image send, native mask download and 304px layout checks",
     "generated_contract": "byte-identical",

@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-24T07:37:59.538740+00:00",
+  "checked_at": "2026-09-24T09:17:09.235134+00:00",
   "datasets": [
     {
       "dataset_id": "agent-security-bench",
@@ -702,6 +702,16 @@
       "prepared_receipt": "work/prepared/sad/e00d59eacc1a244e4ca086c65806888d358d44f8a1db883f198b06a0466666a0/receipt.json"
     },
     {
+      "dataset_id": "safebench",
+      "release": "8646a3dc34cc0442e604a56fd0cd7c1307bc0a68",
+      "snapshot_id": "safebench-bf70d65c44aa26a1971e3b6b",
+      "records": 2300,
+      "preview_records": 100,
+      "scope": "All 2,300 category/ordinal groups in the pinned author SafeBench archive, with one text prompt, one image prompt, one PNG and two WAV assets per group. Extra author scripts and a three-row auxiliary CSV remain in the original archive but are not dataset examples. MiniBench is a subset and is not double-counted.",
+      "plan_id": "bf70d65c44aa26a1971e3b6b33f422c484929f56799842bba471c5dc71361391",
+      "prepared_receipt": "work/prepared/safebench/bf70d65c44aa26a1971e3b6b33f422c484929f56799842bba471c5dc71361391/receipt.json"
+    },
+    {
       "dataset_id": "sbbench-syn-crop",
       "release": "sbbench-syn-crop-43769ef07d9388ebb4c3dc74b548eea615d0c93b-a7679386395cf29e9640757f16923f823d6251ef",
       "snapshot_id": "sbbench-syn-crop-6af88e8b5f5d96b5cf118933",
@@ -1003,9 +1013,9 @@
     }
   ],
   "catalogue_entries": 333,
-  "with_previews": 162,
-  "without_previews": 171,
-  "full_population_indices": 157,
+  "with_previews": 163,
+  "without_previews": 170,
+  "full_population_indices": 158,
   "all_requested_datasets_complete": false,
   "note": "Acquired source populations and on-demand infrastructure; catalogue-wide coverage is not complete."
 }

@@ -1,0 +1,54 @@
+{
+  "checked_at_utc": "2026-09-24T09:03:56.414633+00:00",
+  "operation": "Evicted only unpinned, rebuildable cache entries; source archives, prepared snapshots and Cauldron remote-parquet cache untouched.",
+  "caches": [
+    {
+      "cache": "div2k",
+      "evicted_entries": 2549,
+      "logical_bytes": 999956370,
+      "pinned_entries_untouched": 0
+    },
+    {
+      "cache": "ranges",
+      "evicted_entries": 895,
+      "logical_bytes": 999880322,
+      "pinned_entries_untouched": 0
+    },
+    {
+      "cache": "decoded",
+      "evicted_entries": 1804,
+      "logical_bytes": 999689019,
+      "pinned_entries_untouched": 0
+    },
+    {
+      "cache": "sbbench-syn",
+      "evicted_entries": 11,
+      "logical_bytes": 279080988,
+      "pinned_entries_untouched": 0
+    },
+    {
+      "cache": "sbbench-syn-crop",
+      "evicted_entries": 6,
+      "logical_bytes": 245887893,
+      "pinned_entries_untouched": 0
+    },
+    {
+      "cache": "originals",
+      "evicted_entries": 201,
+      "logical_bytes": 168645756,
+      "pinned_entries_untouched": 0
+    },
+    {
+      "cache": "seedbench",
+      "evicted_entries": 575,
+      "logical_bytes": 298926380,
+      "pinned_entries_untouched": 0
+    },
+    {
+      "cache": "seed-bench-2",
+      "evicted_entries": 779,
+      "logical_bytes": 299555669,
+      "pinned_entries_untouched": 0
+    }
+  ]
+}

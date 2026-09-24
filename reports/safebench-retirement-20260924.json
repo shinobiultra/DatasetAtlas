@@ -1,0 +1,90 @@
+{
+  "dataset_id": "safebench",
+  "source_sha256": "97ceb223490c81d4ea343b552e358e44f5d4d1cbfdf9d6bc785cec8958d5fd9a",
+  "linked_dataset_ids": [],
+  "status": "executed",
+  "retained_snapshots": 1,
+  "preview_asset_memberships": 300,
+  "modalities": [
+    "audio",
+    "image"
+  ],
+  "preview_bytes_upper_bound": 222923635,
+  "cold_original_probes": [
+    {
+      "sha256": "b21623d7e0eb95b3097d6223c09a53eb425919de08296b2221d2b79472962819",
+      "bytes": 311340,
+      "transferred_bytes": 6291458,
+      "source_sha256": "97ceb223490c81d4ea343b552e358e44f5d4d1cbfdf9d6bc785cec8958d5fd9a",
+      "fingerprint_type": "multipart-etag",
+      "part_etags": [
+        "\"f0a96d505df3f37aee418950fd5df7175b96f5ed68576a02b2e24d52d22b9111\"",
+        "\"c128fde061b13b5393f19acb79b32e3ee446a154a9eaf721e2a668f264516b5d\"",
+        "\"b814adc838dd175bcb455158c73142f62c3be02f9c009dd8d740f0118a6d2972\"",
+        "\"5af642f0b38db5636bf720ef39a978a100e6192eab035cc8e3d6e6a9cf272f93\"",
+        "\"0753f3d0933d60de1dccba1b451f554b0fb5aa930ae4457ed6b996df0cd14a24\"",
+        "\"3f70375592831218e93fbb39a51dcb550eee8ae9760c7c86e394870a65d9f562\"",
+        "\"d066674b4173917adafb3df724e71c71b43619a7581439bb1ed4dba9461d9fdb\"",
+        "\"6ff1cbdcec1344527856f05fe6d1d5ce0437da37c613d4c9939e006dee57ed35\"",
+        "\"632f35cf772a0dcfbe0d54a49dcbd85408775de60e7ad03b3de47b60195dc208\"",
+        "\"4fa4b47d78501797030f11efb8c89063a17cef923341f890241772f4543374ba\""
+      ]
+    },
+    {
+      "sha256": "e6f4800ba6aae2c238f54109d35542311da09b878d55e7d4c7fd76b3bdb28d64",
+      "bytes": 389164,
+      "transferred_bytes": 6291458,
+      "source_sha256": "97ceb223490c81d4ea343b552e358e44f5d4d1cbfdf9d6bc785cec8958d5fd9a",
+      "fingerprint_type": "multipart-etag",
+      "part_etags": [
+        "\"f0a96d505df3f37aee418950fd5df7175b96f5ed68576a02b2e24d52d22b9111\"",
+        "\"c128fde061b13b5393f19acb79b32e3ee446a154a9eaf721e2a668f264516b5d\"",
+        "\"b814adc838dd175bcb455158c73142f62c3be02f9c009dd8d740f0118a6d2972\"",
+        "\"5af642f0b38db5636bf720ef39a978a100e6192eab035cc8e3d6e6a9cf272f93\"",
+        "\"0753f3d0933d60de1dccba1b451f554b0fb5aa930ae4457ed6b996df0cd14a24\"",
+        "\"3f70375592831218e93fbb39a51dcb550eee8ae9760c7c86e394870a65d9f562\"",
+        "\"d066674b4173917adafb3df724e71c71b43619a7581439bb1ed4dba9461d9fdb\"",
+        "\"6ff1cbdcec1344527856f05fe6d1d5ce0437da37c613d4c9939e006dee57ed35\"",
+        "\"632f35cf772a0dcfbe0d54a49dcbd85408775de60e7ad03b3de47b60195dc208\"",
+        "\"4fa4b47d78501797030f11efb8c89063a17cef923341f890241772f4543374ba\""
+      ]
+    },
+    {
+      "sha256": "d1b657195c26df5fc6cdcc99b16287eaa74a38d5dba0a6b08cc0efe651c8ac15",
+      "bytes": 898196,
+      "transferred_bytes": 8388608,
+      "source_sha256": "97ceb223490c81d4ea343b552e358e44f5d4d1cbfdf9d6bc785cec8958d5fd9a",
+      "fingerprint_type": "multipart-etag",
+      "part_etags": [
+        "\"f0a96d505df3f37aee418950fd5df7175b96f5ed68576a02b2e24d52d22b9111\"",
+        "\"c128fde061b13b5393f19acb79b32e3ee446a154a9eaf721e2a668f264516b5d\"",
+        "\"b814adc838dd175bcb455158c73142f62c3be02f9c009dd8d740f0118a6d2972\"",
+        "\"5af642f0b38db5636bf720ef39a978a100e6192eab035cc8e3d6e6a9cf272f93\"",
+        "\"0753f3d0933d60de1dccba1b451f554b0fb5aa930ae4457ed6b996df0cd14a24\"",
+        "\"3f70375592831218e93fbb39a51dcb550eee8ae9760c7c86e394870a65d9f562\"",
+        "\"d066674b4173917adafb3df724e71c71b43619a7581439bb1ed4dba9461d9fdb\"",
+        "\"6ff1cbdcec1344527856f05fe6d1d5ce0437da37c613d4c9939e006dee57ed35\"",
+        "\"632f35cf772a0dcfbe0d54a49dcbd85408775de60e7ad03b3de47b60195dc208\"",
+        "\"4fa4b47d78501797030f11efb8c89063a17cef923341f890241772f4543374ba\""
+      ]
+    }
+  ],
+  "paths": [
+    "work/source-objects/97ceb223490c81d4ea343b552e358e44f5d4d1cbfdf9d6bc785cec8958d5fd9a",
+    "work/sources/safebench/safebench.tar.gz",
+    "work/prepared/safebench/bf70d65c44aa26a1971e3b6b33f422c484929f56799842bba471c5dc71361391/sources/97ceb223490c81d4ea343b552e358e44f5d4d1cbfdf9d6bc785cec8958d5fd9a.tar.gz"
+  ],
+  "extracted_files": 0,
+  "source_bytes": 4729119052,
+  "extracted_bytes": 0,
+  "retention": "Original-quality previews and complete indices; other originals and optimized browsing copies on demand.",
+  "freed_unique_file_bytes": 4729119052,
+  "media_references_checked": 6900,
+  "unique_native_media_in_snapshots": 6900,
+  "post_retirement_verification": {
+    "adapter_rows": 2300,
+    "preview_original_http_reads": 300,
+    "later_original_http_reads": 3,
+    "cached_prompt_tables": 46
+  }
+}

@@ -118,6 +118,21 @@ class PreparationManager:
             plan.update(kind='http_archive', files=recipe['files'], expected_count=recipe.get('expected_count'),
                 expected_download_bytes=sum(f['bytes'] for f in recipe['files']), ready=True,
                 scope=recipe['scope'], allowed_hosts=recipe.get('allowed_hosts',[]))
+            for entry in recipe['files']:
+                if not entry.get('parts'):
+                    continue
+                parts = entry['parts']
+                if (not isinstance(parts, list) or not parts or len(parts) > 256 or
+                    any(not isinstance(part, dict) for part in parts) or
+                    any(not isinstance(part.get('source_name'), str) or
+                        not part['source_name'] or type(part.get('bytes')) is not int or part['bytes'] < 1 or
+                        not isinstance(part.get('sha256'), str) or
+                        not re.fullmatch(r'[a-f0-9]{64}', part['sha256']) or
+                        not isinstance(part.get('url'), str) or
+                        urlsplit(part['url']).scheme != 'https' for part in parts) or
+                    len({part['source_name'] for part in parts}) != len(parts) or
+                    sum(part['bytes'] for part in parts) != entry['bytes']):
+                    raise ValueError('Multipart recipe requires ordered, checksum-pinned HTTPS parts matching the archive size')
             # A recipe may be authored before its archive has been fetched once; until a
             # checksum is pinned the worker would have nothing to verify against.
             unpinned=[f['source_name'] for f in recipe['files'] if not (f.get('sha256') or f.get('md5'))]
@@ -388,6 +403,12 @@ class PreparationManager:
         dataset = Dataset.model_validate_json((directory / 'dataset.json').read_text())
         if dataset.id != dataset_id or dataset.snapshot_id != receipt['snapshot_id']:
             raise ValueError('Prepared version identity does not match its receipt')
+        from dataset_atlas.registry import Registry
+        catalogue = Registry(self.root).baseline_dataset(dataset_id)
+        if not dataset.tasks:
+            dataset.tasks = list(catalogue.tasks)
+        if not dataset.modalities:
+            dataset.modalities = list(catalogue.modalities)
         dataset.evidence = [item for item in dataset.evidence
                             if not (item.get('kind') == 'local_preparation' and item.get('snapshot_id') == dataset.snapshot_id)]
         dataset = prepared_metadata(dataset, receipt['scope'])

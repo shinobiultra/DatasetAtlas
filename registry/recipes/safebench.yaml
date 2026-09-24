@@ -1,0 +1,75 @@
+source_url: https://huggingface.co/datasets/Zonghao2025/safebench/tree/8646a3dc34cc0442e604a56fd0cd7c1307bc0a68
+release: 8646a3dc34cc0442e604a56fd0cd7c1307bc0a68
+adapter: safebench
+expected_count: 2300
+description: 'SafeBench author release: 23 categories with 100 numbered native groups each. Text prompts,
+  image-generation prompts, PNG images, and male/female WAV files are preserved with their native category
+  and ordinal; semantic equivalence across modalities is unverified.'
+scope: All 2,300 category/ordinal groups in the pinned author SafeBench archive, with one text prompt,
+  one image prompt, one PNG and two WAV assets per group. Extra author scripts and a three-row auxiliary
+  CSV remain in the original archive but are not dataset examples. MiniBench is a subset and is not double-counted.
+adapter_config:
+  archive_preparation: indexed-gzip
+  max_uncompressed_bytes: 6000000000
+  category_sha256: 0d188565fee9fa5cb9d02839fc090bd104d4d26eb0a0639d88642aa50410f1eb
+  max_record_bytes: 200000
+files:
+- source_name: safebench.tar.gz
+  bytes: 4729119052
+  sha256: 97ceb223490c81d4ea343b552e358e44f5d4d1cbfdf9d6bc785cec8958d5fd9a
+  format: tar.gz
+  config_key: path
+  parts:
+  - source_name: part_aa
+    bytes: 524288000
+    sha256: 794a4b6a644a79fc36d1df7ecf6e3cc99d6fd3e89f6abe20cc1dc2563b20bc3d
+    url: https://huggingface.co/datasets/Zonghao2025/safebench/resolve/8646a3dc34cc0442e604a56fd0cd7c1307bc0a68/part_aa
+  - source_name: part_ab
+    bytes: 524288000
+    sha256: 7529cf3dfb61760a8ec5f13511f83638276e05d5bddfeda7ae67c8b505bb922c
+    url: https://huggingface.co/datasets/Zonghao2025/safebench/resolve/8646a3dc34cc0442e604a56fd0cd7c1307bc0a68/part_ab
+  - source_name: part_ac
+    bytes: 524288000
+    sha256: eeb49dacd1eb7bc5f6bf0586170493465561b1e2622f4b2a71917a52203f2a72
+    url: https://huggingface.co/datasets/Zonghao2025/safebench/resolve/8646a3dc34cc0442e604a56fd0cd7c1307bc0a68/part_ac
+  - source_name: part_ad
+    bytes: 524288000
+    sha256: 12da081821b750b3074f238138f180a306a3b9c9f7ea5cafdabdc90ab750d646
+    url: https://huggingface.co/datasets/Zonghao2025/safebench/resolve/8646a3dc34cc0442e604a56fd0cd7c1307bc0a68/part_ad
+  - source_name: part_ae
+    bytes: 524288000
+    sha256: ead1376065b82959053c0cf8073f769f057682e0870074429c7961710b1998bb
+    url: https://huggingface.co/datasets/Zonghao2025/safebench/resolve/8646a3dc34cc0442e604a56fd0cd7c1307bc0a68/part_ae
+  - source_name: part_af
+    bytes: 524288000
+    sha256: 2491a7176ec520367bdc7dfb88598bae84dd7b6114be347b917820ef0a3256db
+    url: https://huggingface.co/datasets/Zonghao2025/safebench/resolve/8646a3dc34cc0442e604a56fd0cd7c1307bc0a68/part_af
+  - source_name: part_ag
+    bytes: 524288000
+    sha256: add164566616509411e3d58da3bd3c88244326fee40f4c758c7dd1794d6d0636
+    url: https://huggingface.co/datasets/Zonghao2025/safebench/resolve/8646a3dc34cc0442e604a56fd0cd7c1307bc0a68/part_ag
+  - source_name: part_ah
+    bytes: 524288000
+    sha256: ad0e55f9fa7c5b6251e431747729eec9ae40f8dbc4fa028755609978b7589bae
+    url: https://huggingface.co/datasets/Zonghao2025/safebench/resolve/8646a3dc34cc0442e604a56fd0cd7c1307bc0a68/part_ah
+  - source_name: part_ai
+    bytes: 524288000
+    sha256: 8ab028bba267c70c52af7f07cf1751689bfc6f6727b8aca0d049e091b7845ae1
+    url: https://huggingface.co/datasets/Zonghao2025/safebench/resolve/8646a3dc34cc0442e604a56fd0cd7c1307bc0a68/part_ai
+  - source_name: part_aj
+    bytes: 10527052
+    sha256: 9d1adf1fe7bb32dd963d3ac5ea78a69d7a9356351952e950e32decb4498bb594
+    url: https://huggingface.co/datasets/Zonghao2025/safebench/resolve/8646a3dc34cc0442e604a56fd0cd7c1307bc0a68/part_aj
+- source_name: category.csv
+  bytes: 552
+  sha256: 0d188565fee9fa5cb9d02839fc090bd104d4d26eb0a0639d88642aa50410f1eb
+  format: csv
+  config_key: category_path
+  url: https://huggingface.co/datasets/Zonghao2025/safebench/resolve/8646a3dc34cc0442e604a56fd0cd7c1307bc0a68/category.csv
+allowed_hosts:
+- us.aws.cdn.hf.co
+- eu.aws.cdn.hf.co
+resource_limits:
+  max_wall_seconds: 14400
+  max_cpu_seconds: 7200
+  max_rss_bytes: 6000000000

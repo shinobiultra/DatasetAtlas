@@ -1,0 +1,121 @@
+{
+  "checked_at_utc": "2026-09-24T09:10:39.561982+00:00",
+  "dataset_id": "safebench",
+  "release": "8646a3dc34cc0442e604a56fd0cd7c1307bc0a68",
+  "source_archive_sha256": "97ceb223490c81d4ea343b552e358e44f5d4d1cbfdf9d6bc785cec8958d5fd9a",
+  "source_archive_bytes": 4729119052,
+  "parts": [
+    {
+      "name": "part_aa",
+      "bytes": 524288000,
+      "sha256": "794a4b6a644a79fc36d1df7ecf6e3cc99d6fd3e89f6abe20cc1dc2563b20bc3d"
+    },
+    {
+      "name": "part_ab",
+      "bytes": 524288000,
+      "sha256": "7529cf3dfb61760a8ec5f13511f83638276e05d5bddfeda7ae67c8b505bb922c"
+    },
+    {
+      "name": "part_ac",
+      "bytes": 524288000,
+      "sha256": "eeb49dacd1eb7bc5f6bf0586170493465561b1e2622f4b2a71917a52203f2a72"
+    },
+    {
+      "name": "part_ad",
+      "bytes": 524288000,
+      "sha256": "12da081821b750b3074f238138f180a306a3b9c9f7ea5cafdabdc90ab750d646"
+    },
+    {
+      "name": "part_ae",
+      "bytes": 524288000,
+      "sha256": "ead1376065b82959053c0cf8073f769f057682e0870074429c7961710b1998bb"
+    },
+    {
+      "name": "part_af",
+      "bytes": 524288000,
+      "sha256": "2491a7176ec520367bdc7dfb88598bae84dd7b6114be347b917820ef0a3256db"
+    },
+    {
+      "name": "part_ag",
+      "bytes": 524288000,
+      "sha256": "add164566616509411e3d58da3bd3c88244326fee40f4c758c7dd1794d6d0636"
+    },
+    {
+      "name": "part_ah",
+      "bytes": 524288000,
+      "sha256": "ad0e55f9fa7c5b6251e431747729eec9ae40f8dbc4fa028755609978b7589bae"
+    },
+    {
+      "name": "part_ai",
+      "bytes": 524288000,
+      "sha256": "8ab028bba267c70c52af7f07cf1751689bfc6f6727b8aca0d049e091b7845ae1"
+    },
+    {
+      "name": "part_aj",
+      "bytes": 10527052,
+      "sha256": "9d1adf1fe7bb32dd963d3ac5ea78a69d7a9356351952e950e32decb4498bb594"
+    }
+  ],
+  "all_source_members_hashed_and_matched_to_index": 6971,
+  "all_source_member_bytes": 5075863316,
+  "full_index_rows_independently_checked": 2300,
+  "category_counts": {
+    "1": 100,
+    "2": 100,
+    "3": 100,
+    "4": 100,
+    "5": 100,
+    "6": 100,
+    "7": 100,
+    "8": 100,
+    "9": 100,
+    "10": 100,
+    "11": 100,
+    "12": 100,
+    "13": 100,
+    "14": 100,
+    "15": 100,
+    "16": 100,
+    "17": 100,
+    "18": 100,
+    "19": 100,
+    "20": 100,
+    "21": 100,
+    "22": 100,
+    "23": 100
+  },
+  "all_native_text_and_image_prompt_rows_matched": true,
+  "all_three_original_media_slots_per_row_matched_to_pinned_member_checksum": true,
+  "preview_records": 100,
+  "preview_sampling": {
+    "method": "sha256_bottom_k_primary_asset",
+    "seed": 0,
+    "unit": "example",
+    "grouping": "primary asset ID; record ID for records without assets",
+    "population": "complete pinned indexed population",
+    "population_count": 2300,
+    "requested_count": 100,
+    "returned_count": 100,
+    "source_revision": "8646a3dc34cc0442e604a56fd0cd7c1307bc0a68",
+    "media_representation": "original",
+    "selection_note": "One hash-ranked record per sampled primary asset. All linked assets remain. Not an example-prevalence estimate."
+  },
+  "preview_original_http_media_reads": {
+    "image": 101,
+    "audio": 202
+  },
+  "later_record_http_media_checked": "safebench:example:739d0dd3f2b7faca4aaf2511",
+  "image_dimensions_observed_min_max": {
+    "width": [
+      1024,
+      1024
+    ],
+    "height": [
+      1024,
+      1024
+    ]
+  },
+  "audio_decoding_count": 202,
+  "grouping_limit": "Same native category and ordinal links paths. Text and image prompts are different; semantic equivalence and exact citing-paper selection are not inferred.",
+  "publication_rights": "not_reviewed"
+}

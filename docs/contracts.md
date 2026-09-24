@@ -217,6 +217,14 @@ reuse bounded parsed directories while retaining native header, name, overlap,
 length and CRC checks. The cache bound measures encoded directory bytes, not
 Python object RSS.
 
+Multipart gzip TAR sources pin ordered part lengths and SHA-256 hashes before
+bounded assembly. A complete combined archive SHA-256 is checked before native
+indexing; the resulting member index preserves per-member hashes and gzip seek
+checkpoints. Original reads may later use ETag-bound ranges over the individual
+parts under one transfer limit after Atlas-owned archive copies are retired.
+Preview image and audio originals are pinned before such retirement; full record
+metadata and checksum-verified prompt tables remain local.
+
 FIND preserves native function source, metadata and available model files as
 passive text/array assets; importing never executes code or deserializes weights.
 SEED question identities include native task IDs, retaining a repeated question

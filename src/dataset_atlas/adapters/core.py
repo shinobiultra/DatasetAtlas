@@ -774,6 +774,9 @@ class OverlayAdapter(StructuredAdapter):
 
 
 def get_adapter(dataset: Dataset) -> DatasetAdapter:
+    if dataset.adapter == 'safebench':
+        from .safebench import SafeBenchAdapter
+        return SafeBenchAdapter(dataset)
     if dataset.adapter == 'elife_workbooks':
         from .elife_workbooks import ElifeWorkbooksAdapter
         return ElifeWorkbooksAdapter(dataset)

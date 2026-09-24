@@ -18,7 +18,7 @@ import tempfile
 
 def retire_image_archive(root, dataset_id, index_name, source, *, mappings,
                          max_preview_bytes=500_000_000, max_transfer_bytes=150_000_000,
-                         extracted_root=None, linked_datasets=(), execute=False):
+                         extracted_root=None, linked_datasets=(), modalities=('image',), execute=False):
     import pyarrow.parquet as pq
     from dataset_atlas.registry import Registry
     from dataset_atlas.preparation import atomic
@@ -26,6 +26,10 @@ def retire_image_archive(root, dataset_id, index_name, source, *, mappings,
     from .indexed_tar import route_path, read_tar_member, _file_identity
     from .indexed_zip import read_zip_member
     from .zip_members import LOCAL_ZIP_MEMBERS
+
+    if not modalities or any(modality not in {'image', 'audio'} for modality in modalities):
+        raise ValueError('Retirement modalities must be image and/or audio')
+    modalities = frozenset(modalities)
 
     root = Path(root).resolve(); registry = Registry(root); dataset_id = registry.resolve(dataset_id)
     dataset_ids = {dataset_id, *(registry.resolve(identity) for identity in linked_datasets)}
@@ -70,13 +74,13 @@ def retire_image_archive(root, dataset_id, index_name, source, *, mappings,
                 # A different retained release keeps its own source and routes.
                 continue
             pack = json.loads(pack_path.read_text())
-            preview = {a['id']: a for r in pack['records'] for a in r['assets'] if a.get('uri') and a['modality'] == 'image'}
+            preview = {a['id']: a for r in pack['records'] for a in r['assets'] if a.get('uri') and a['modality'] in modalities}
             found = {}; seen = set()
             for batch in pq.ParquetFile(snapshot/'records.parquet').iter_batches(columns=['record_json'], batch_size=512):
                 for value in batch.column(0).to_pylist():
                     for asset in json.loads(value)['assets']:
                         ref = asset.get('uri')
-                        if not ref or asset['modality'] != 'image': continue
+                        if not ref or asset['modality'] not in modalities: continue
                         if ref not in seen:
                             required[ref] = member_for(ref); seen.add(ref)
                         if asset.get('sha256') and asset['sha256'] != required[ref][1]:
@@ -90,13 +94,13 @@ def retire_image_archive(root, dataset_id, index_name, source, *, mappings,
                 if asset.get('sha256') and asset['sha256'] != sha:
                     raise ValueError('Preview differs from indexed source member')
                 preview_bytes += size
-                preview_copies.append((version.id, version.snapshot_id, {ref, asset['uri']}, member, sha, size))
+                preview_copies.append((version.id, version.snapshot_id, {ref, asset['uri']}, member, sha, size, asset['modality']))
             path = route_path(root, version.id, version.snapshot_id)
             config = json.loads(path.read_text()) if path.exists() else {'dataset_id': version.id, 'snapshot_id': version.snapshot_id, 'archives': []}
             entries = [{'index': str(index.relative_to(base)), **entry} for entry in mappings]
             config['archives'] = entries + [e for e in config['archives'] if e.get('index') != str(index.relative_to(base))]
             routes.append((path, config))
-        if not routes or not required: raise ValueError('Retirement requires a retained complete image snapshot')
+        if not routes or not required: raise ValueError('Retirement requires a retained complete media snapshot')
         if {config['dataset_id'] for _,config in routes} != dataset_ids:
             raise ValueError('Every linked dataset requires a retained complete snapshot for this exact source')
         if preview_bytes > max_preview_bytes: raise ValueError('Preview originals exceed retention budget')
@@ -159,21 +163,28 @@ def retire_image_archive(root, dataset_id, index_name, source, *, mappings,
                         raise ValueError(f'Extracted originals are required by {other.id}')
     report = {'dataset_id': dataset_id, 'source_sha256': native['source_sha256'],
               'linked_dataset_ids': sorted(dataset_ids - {dataset_id}),
-              'status': 'verified_plan', 'retained_snapshots': len(routes), 'image_references_checked': references,
-              'unique_native_images_in_snapshots': len(set(required.values())), 'preview_asset_memberships': len(preview_copies),
+              'status': 'verified_plan', 'retained_snapshots': len(routes), 'media_references_checked': references,
+              'unique_native_media_in_snapshots': len(set(required.values())), 'preview_asset_memberships': len(preview_copies),
+              'modalities': sorted(modalities),
               'preview_bytes_upper_bound': preview_bytes, 'cold_original_probes': evidence,
               'paths': [str(p.relative_to(root)) for p in paths], 'extracted_files': len(extracted),
               'source_bytes': native['source_bytes'], 'extracted_bytes': sum(identity[2] for _, identity in extracted),
               'retention': 'Original-quality previews and complete indices; other originals and optimized browsing copies on demand.'}
     if not execute: return report
     # Every preview representation is installed and checked before any deletion.
-    for owner_id, snapshot_id, refs, member, sha, size in preview_copies:
+    for owner_id, snapshot_id, refs, member, sha, size, modality in preview_copies:
         if reader is read_zip_member:
             data = LOCAL_ZIP_MEMBERS.read(source, member, 50_000_000, native['source_sha256'])
         else:
             data, _ = read_tar_member(index, member, local_source=source, max_bytes=50_000_000)
         if len(data) != size or hashlib.sha256(data).hexdigest() != sha: raise ValueError('Preview retention checksum mismatch')
-        _, mime, metadata = encode_image(data, protected=True)
+        if modality == 'image':
+            _, mime, metadata = encode_image(data, protected=True)
+        else:
+            from dataset_atlas.adapters.core import _media_type
+            mime = _media_type(member)
+            metadata = {'original_sha256': sha, 'original_bytes': len(data),
+                        'protected_preview': True, 'representation': 'original'}
         store = store_directory(root, owner_id, snapshot_id); (store/'objects').mkdir(parents=True, exist_ok=True)
         with (store/'writer.lock').open('a') as lock:
             fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)

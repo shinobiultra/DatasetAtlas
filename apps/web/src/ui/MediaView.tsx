@@ -33,7 +33,8 @@ export function assetLabel(asset: Asset, index = 0): string {
   if (typeof role === 'string' && role.trim()) {
     return ({ ref: 'Reference', p0: 'Patch 0', p1: 'Patch 1' } as Record<string, string>)[role] ?? role
   }
-  return `Image ${index + 1}`
+  const kind = asset.modality === 'audio' ? 'Audio' : asset.modality === 'video' ? 'Video' : 'Image'
+  return `${kind} ${index + 1}`
 }
 
 export function primaryAsset(record: AtlasRecord): Asset | null {
@@ -121,7 +122,7 @@ export function AssetView({ asset, overlays = [], controls = false, highlight, f
       </div>
     )
   }
-  if (asset.modality === 'audio') return <audio src={url} controls={controls} preload="none" aria-label={alt ?? `Audio asset ${asset.id}`} style={{ width: '92%' }} onError={() => setFailed(true)} />
+  if (asset.modality === 'audio') return <audio src={url} controls={controls} preload="none" aria-label={alt ?? `Audio asset ${asset.id}`} style={{ width: '100%' }} onError={() => setFailed(true)} />
   if (asset.modality === 'video') return <video src={url} controls={controls} preload="metadata" aria-label={alt ?? `Video asset ${asset.id}`} onError={() => setFailed(true)} />
   if (asset.modality !== 'image') {
     return <div className="fallback"><Icon.Layers size={20} /><span>{asset.modality} record</span><small className="mono wrap-any">{asset.id}</small></div>

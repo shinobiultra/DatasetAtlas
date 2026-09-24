@@ -23,6 +23,9 @@ def build_tar_index(source, output, *, source_sha256, remote, max_uncompressed_b
             raise ValueError('Original archive checksum changed')
     if source.stat().st_size != remote['bytes']:
         raise ValueError('Original archive size differs from pinned remote source')
+    if 'parts' in remote and (not remote['parts'] or
+                              sum(part['bytes'] for part in remote['parts']) != remote['bytes']):
+        raise ValueError('Multipart archive length differs from pinned parts')
     output.mkdir(parents=True)
     total = 0; members = 0
     try:
@@ -112,8 +115,14 @@ def read_tar_member(index, member, *, max_bytes=50_000_000, transfer_bytes=32_00
         return data, {'sha256': sha, 'bytes': size, 'transferred_bytes': 0,
                       'source_sha256': receipt['source_sha256'], 'source': 'verified local original'}
     remote = receipt['remote']
-    factory = reader_factory or HttpsRangeReader
-    with factory(remote['url'], size=remote['bytes'], etag=remote['etag'], allowed_hosts=remote['allowed_hosts'], byte_budget=transfer_bytes, cache=cache) as ranges:
+    if 'parts' in remote:
+        from .multipart import MultipartRangeReader
+        factory = reader_factory or MultipartRangeReader
+        ranges = factory(remote['parts'], byte_budget=transfer_bytes, cache=cache)
+    else:
+        factory = reader_factory or HttpsRangeReader
+        ranges = factory(remote['url'], size=remote['bytes'], etag=remote['etag'], allowed_hosts=remote['allowed_hosts'], byte_budget=transfer_bytes, cache=cache)
+    with ranges:
         with indexed_gzip.IndexedGzipFile(fileobj=ranges, index_file=str(index/'checkpoints.gzidx'),
                 auto_build=False, readbuf_size=1 << 20, buffer_size=64 << 10) as decoded:
             decoded.seek(offset)
@@ -121,8 +130,10 @@ def read_tar_member(index, member, *, max_bytes=50_000_000, transfer_bytes=32_00
         transferred = ranges.bytes_fetched
     if len(data) != size or hashlib.sha256(data).hexdigest() != sha:
         raise ValueError('Retrieved original member checksum changed')
+    identity = ({'fingerprint_type': 'multipart-etag', 'part_etags': [part['etag'] for part in remote['parts']]}
+                if 'parts' in remote else {'fingerprint_type': 'etag', 'etag': remote['etag']})
     return data, {'sha256': sha, 'bytes': size, 'transferred_bytes': transferred,
-                  'source_sha256': receipt['source_sha256'], 'fingerprint_type': 'etag', 'etag': remote['etag']}
+                  'source_sha256': receipt['source_sha256'], **identity}
 
 
 _VERIFIED = set()

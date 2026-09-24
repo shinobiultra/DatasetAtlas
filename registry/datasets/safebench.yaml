@@ -4,6 +4,12 @@ name: SafeBench
 aliases: []
 description: Paper-cited SafeBench is the MLLM safety benchmark, not autonomous-driving SafeBench; official
   site links author data.
+tasks:
+- multimodal safety evaluation
+modalities:
+- text
+- image
+- audio
 paper_ids:
 - paper-2df1203e2d3767bb
 release: unresolved

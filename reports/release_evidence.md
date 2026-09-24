@@ -54,7 +54,7 @@ compares complete annotations and paths with author releases, then checks origin
 images from previews and later records; all seven Figshare images/videos passed
 original-byte media routes. The eLife source-data workbooks also pass independent
 parity on all 1,229 native nonempty cells and 135 formulas, plus seven original
-XLSX routes. The current checkpoint is 162 previews, 157 complete-population
+XLSX routes. The 2026-09-24 morning checkpoint was 162 previews, 157 complete-population
 indices and 171 entries without a preview. Cauldron is still indexing and is
 excluded. Python 3.12 passed 410 tests with one optional skip; Python 3.14
 passed 408 with three optional skips. All 22 frontend tests and the pinned
@@ -62,7 +62,7 @@ passed 408 with three optional skips. All 22 frontend tests and the pinned
 and the reinstalled base-only wheel passed an HTTP smoke test outside the checkout.
 The 38 browser checks were completed at the earlier 2026-09-23 checkpoint; no
 frontend behavior changed in this continuation. [Storage accounting](storage-footprint-20260924.json)
-measured 141.82 GB while Cauldron was still running, below the 150 GB ceiling
+measured 141.82 GB at that checkpoint while Cauldron was still running, below the 150 GB ceiling
 but above the 100 GB target.
 Checksum-identical immutable source, derived ZIP and Parquet copies were linked
 without changing their paths or bytes. [Visual Genome derivatives](derived-archive-dedup-20260924.json),
@@ -226,3 +226,16 @@ The timestamped storage scan measured **143.47 GB**, including configured extern
 models. The user requested a graceful stop. Cauldron was cancelled at 725,000 of
 1,880,992 rows and remains excluded from coverage. The workbench and task-owned
 vLLM server were stopped. See [STOP_20260923.md](../STOP_20260923.md) before resuming.
+
+The subsequent SafeBench expansion adds a complete 2,300-group native index and
+100 original-quality preview records, making **163 previews / 15,846 records,
+158 full-population indices, and 170 entries without previews**. All 6,971
+archive members and all native text/image prompt rows were independently
+verified; 300 preview media and three later original files passed HTTP reads.
+The 4.7 GB local archive was retired after both image and audio previews were
+pinned, and original media remain available through checksum-checked remote
+multipart reads. [Native receipt](safebench-live-verification.json),
+[retirement receipt](safebench-retirement-20260924.json), and
+[browser check](safebench-browser-20260924.json). The measured footprint is
+139.44 GB, including configured models and the still-running Cauldron plan.
+The Python 3.12 suite passed 414 tests with one optional skip; Python 3.14 passed 412 with three optional skips. The 22 frontend tests, 26 default browser checks, one live SafeBench browser check, and `prek` passed.

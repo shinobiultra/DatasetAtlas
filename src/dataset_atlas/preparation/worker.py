@@ -55,7 +55,12 @@ def run(root, identity):
         update(stage='acquiring', downloaded_bytes=0)
         if plan['kind'] in {'huggingface_columnar','http_archive'}:
             from dataset_atlas.storage import BoundedCache, CacheIdentity, HttpsFetcher
-            cache = BoundedCache(Path(root) / 'work/download-cache', max_bytes=plan['max_download_bytes'])
+            # Multipart source chunks are consumed into one verified archive as
+            # they arrive, so retaining all chunks in the cache would double
+            # the final storage footprint.
+            cache_limit = (min(plan['max_download_bytes'], 600_000_000)
+                           if any(entry.get('parts') for entry in plan['files']) else plan['max_download_bytes'])
+            cache = BoundedCache(Path(root) / 'work/download-cache', max_bytes=cache_limit)
             fetcher = HttpsFetcher(['huggingface.co', 'cdn-lfs.huggingface.co', 'cdn-lfs-us-1.huggingface.co',
                 'cdn-lfs-eu-1.huggingface.co', 'cas-bridge.xethub.hf.co', 'us.aws.cdn.hf.co', 'eu.aws.cdn.hf.co', 'www.robots.ox.ac.uk', 'thor.robots.ox.ac.uk']+plan.get('allowed_hosts',[]), timeout=60,
                 max_bytes=plan['max_download_bytes'],credential_profile=plan.get('credential_profile'))
@@ -69,7 +74,40 @@ def run(root, identity):
                     link_only = entry['source_name'] in plan.get('reuse_registered_sources',[])
                     if link_only and source is None:
                         raise ValueError('Registered source reserved for reuse is missing; create a new plan')
-                    if source is None:
+                    if source is None and entry.get('parts'):
+                        parts = entry['parts']
+                        if not isinstance(parts, list) or not parts or sum(part['bytes'] for part in parts) != entry['bytes']:
+                            raise ValueError('Multipart source parts differ from declared archive size')
+                        source_dir = version / 'sources'
+                        source_dir.mkdir(exist_ok=True)
+                        target = source_dir / (entry['sha256'] + '.' + entry['format'])
+                        partial = target.with_name(target.name + '.partial')
+                        digest = hashlib.sha256()
+                        transferred = 0
+                        try:
+                            with partial.open('wb') as combined:
+                                for part in parts:
+                                    check()
+                                    chunk = fetcher.fetch(part['url'], cache,
+                                        CacheIdentity(plan.get('revision', dataset.release), part['sha256'], 'original-part'),
+                                        expected_sha256=part['sha256'], byte_budget=part['bytes'], cancel=check,
+                                        progress=lambda total: update(downloaded_bytes=sum(f['bytes'] for f in files)+transferred+total,
+                                                                      current_file=part['source_name']))
+                                    if chunk.stat().st_size != part['bytes']:
+                                        raise ValueError('Multipart source part length changed')
+                                    with chunk.open('rb') as stream:
+                                        for block in iter(lambda: stream.read(1 << 20), b''):
+                                            check()
+                                            digest.update(block)
+                                            combined.write(block)
+                                    transferred += part['bytes']
+                            if digest.hexdigest() != entry['sha256'] or transferred != entry['bytes']:
+                                raise ValueError('Concatenated multipart archive differs from pinned checksum')
+                            os.replace(partial, target)
+                            source = target
+                        finally:
+                            partial.unlink(missing_ok=True)
+                    elif source is None:
                         source = fetcher.fetch(entry['url'], cache,
                             CacheIdentity(plan.get('revision',dataset.release), entry.get('sha256',entry.get('md5')), 'original'),
                             expected_sha256=entry.get('sha256'), byte_budget=entry['bytes'], cancel=check,
@@ -135,11 +173,23 @@ def run(root, identity):
                      'cas-bridge.xethub.hf.co','us.aws.cdn.hf.co',*plan.get('allowed_hosts', [])]
             index = Path(root) / 'work/original-access' / entry['sha256']
             update(stage='indexing original archive for selective retrieval')
-            remote = {'url': entry['url'], 'bytes': entry['bytes'], 'allowed_hosts': hosts,
-                      'etag': range_fingerprint(entry['url'], expected_size=entry['bytes'], allowed_hosts=hosts)}
+            if entry.get('parts'):
+                remote = {'bytes': entry['bytes'], 'parts': [
+                    {'url': part['url'], 'bytes': part['bytes'], 'sha256': part['sha256'],
+                     'allowed_hosts': hosts,
+                     'etag': range_fingerprint(part['url'], expected_size=part['bytes'], allowed_hosts=hosts)}
+                    for part in entry['parts']]}
+            else:
+                remote = {'url': entry['url'], 'bytes': entry['bytes'], 'allowed_hosts': hosts,
+                          'etag': range_fingerprint(entry['url'], expected_size=entry['bytes'], allowed_hosts=hosts)}
             if (index / 'receipt.json').is_file():
                 proof = json.loads((index / 'receipt.json').read_text())
-                if proof['source_sha256'] != entry['sha256'] or proof['remote']['etag'] != remote['etag']:
+                def remote_identity(value):
+                    if 'parts' in value:
+                        return (value['bytes'], [(part['url'], part['bytes'], part.get('sha256'), part['etag'])
+                                                for part in value['parts']])
+                    return (value['url'], value['bytes'], value['etag'])
+                if proof['source_sha256'] != entry['sha256'] or remote_identity(proof['remote']) != remote_identity(remote):
                     raise ValueError('Existing original-access index differs from pinned source')
             else:
                 proof = build_tar_index(original, index, source_sha256=entry['sha256'], remote=remote,

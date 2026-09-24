@@ -391,6 +391,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
                 <button type="button" className="btn" onClick={() => setPanel('about')}><Icon.Info size={13} />Open full record</button>
               </div>
             </div>
+            <RelatedBrowsable dataset={dataset} onOpenDataset={onOpenDataset} />
           </div>
         </div>
       </div>
@@ -745,6 +746,40 @@ function SampleForm({ sample, onApply }: { sample: { method: string; size: numbe
         <button type="button" className="btn primary" onClick={() => onApply({ method, size, seed })}>Apply sample</button>
         {sample && <button type="button" className="btn" onClick={() => onApply(null)}>Remove</button>}
       </div>
+    </div>
+  )
+}
+
+/** Related catalogue entries that do have inspectable examples here. A relation is not an identity claim. */
+function RelatedBrowsable({ dataset, onOpenDataset }: { dataset: Dataset; onOpenDataset: (id: string) => void }) {
+  const relations = useMemo(() => ((dataset.relationships ?? []) as Array<Record<string, unknown>>)
+    .map(item => ({ target: String(item.target_id ?? item.target ?? ''), type: String(item.type ?? 'related').replaceAll('_', ' '), scope: typeof item.scope === 'string' ? item.scope : '' }))
+    .filter(item => item.target), [dataset])
+  const [catalogue, setCatalogue] = useState<Dataset[]>([])
+  useEffect(() => {
+    let live = true
+    if (relations.length) provider.datasets().then(items => { if (live) setCatalogue(items) }).catch(() => {})
+    return () => { live = false }
+  }, [relations.length])
+  const browsable = relations.flatMap(item => {
+    const target = catalogue.find(entry => entry.id === item.target)
+    return target && canBrowse(target) ? [{ ...item, target }] : []
+  })
+  if (!browsable.length) return null
+  return (
+    <div className="card card-pad" style={{ marginTop: 12 }}>
+      <h3 style={{ marginBottom: 6 }}>Related entries you can browse</h3>
+      <p className="hint" style={{ marginTop: 0 }}>
+        These have real examples here. A family or source relation does not establish that they are the exact release or subset this entry names.
+      </p>
+      {browsable.map(item => (
+        <div key={item.target.id} className="row" style={{ gap: 8, padding: '5px 0', flexWrap: 'wrap', fontSize: 'var(--fs-md)' }}>
+          <Tag>{item.type}</Tag>
+          <button type="button" className="linkish" onClick={() => onOpenDataset(item.target.id)}>{item.target.name}</button>
+          <span className="hint">{(item.target.coverage?.preview_count ?? 0).toLocaleString()} {item.target.coverage?.unit ?? 'example'} preview records</span>
+          {item.scope && <span className="hint" style={{ flexBasis: '100%', fontSize: 'var(--fs-sm)' }}>{item.scope}</span>}
+        </div>
+      ))}
     </div>
   )
 }

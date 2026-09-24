@@ -307,7 +307,7 @@ def run(root, identity):
         # Remote Parquet path leaves can describe an image whose bytes are absent.
         # Keep extra hash-ranked candidates so the published local preview can
         # consist of original images that were actually opened and decoded.
-        verify_remote_media = dataset.adapter == 'remote_columnar'
+        verify_remote_media = dataset.adapter == 'remote_columnar' or dataset.adapter_config.get('verify_remote_preview_media', False)
         group_by = dataset.adapter_config.get('preview_group_by', 'primary_asset')
         sampler = (AssetFirstPreviewSampler(min(expected_count, 100)) if group_by == 'primary_asset_then_example'
             else PreviewSampler(min(expected_count, 250 if verify_remote_media else 100), group_by=group_by))
@@ -335,7 +335,7 @@ def run(root, identity):
                     sampler.add(record)
                     yield record
                     count += 1
-                update(stage='indexing', indexed_count=count, **({'downloaded_bytes':adapter.bytes_fetched} if dataset.adapter=='remote_columnar' else {}))
+                update(stage='indexing', indexed_count=count, **({'downloaded_bytes':adapter.bytes_fetched} if hasattr(adapter, 'bytes_fetched') else {}))
                 if not batch.next_cursor:
                     break
                 if cursor == batch.next_cursor:
@@ -365,7 +365,9 @@ def run(root, identity):
         if verify_remote_media:
             media_source = adapter.prepare(adapter.plan(100, read_budget))
             pack.records, preview_media_validation = select_verified_remote_preview(
-                candidates, lambda ref: adapter.resolve_asset(media_source, ref), min(expected_count, 100))
+                candidates, lambda ref: adapter.resolve_asset(media_source, ref), min(expected_count, 100),
+                on_progress=lambda **values: update(stage='verifying preview media', **values,
+                    **({'downloaded_bytes': adapter.bytes_fetched} if hasattr(adapter, 'bytes_fetched') else {})))
         else:
             pack.records = candidates
         pack.sampling = sampler.description(dataset.release, dataset.coverage.unit)
@@ -393,7 +395,9 @@ def run(root, identity):
         atomic(version / 'pack/pack.json', pack.model_dump(mode='json'))
         atomic(version / 'dataset.json', dataset.model_dump(mode='json'))
         atomic(version / 'receipt.json', {'plan_id': identity, 'source_files': plan['files'],
-            'record_count': expected_count, 'snapshot_id': dataset.snapshot_id, 'scope': plan['scope'], 'media_validation':media_validation,'preview_media_validation':preview_media_validation,'derived_source':derived_source,'derived_sources':derived_sources,'remote_metadata_bytes':getattr(adapter,'bytes_fetched',None)})
+            'record_count': expected_count, 'snapshot_id': dataset.snapshot_id, 'scope': plan['scope'], 'media_validation':media_validation,'preview_media_validation':preview_media_validation,'derived_source':derived_source,'derived_sources':derived_sources,
+            'remote_metadata_bytes':getattr(adapter,'metadata_bytes_fetched',None) if dataset.adapter=='objectnet' else getattr(adapter,'bytes_fetched',None),
+            'remote_zip_transfer_bytes':getattr(adapter,'bytes_fetched',None) if dataset.adapter=='objectnet' else None})
         atomic(base / 'active.json', {'version': identity})
         update(status='completed', stage='ready', snapshot_id=dataset.snapshot_id, indexed_count=expected_count)
     except InterruptedError as exc:

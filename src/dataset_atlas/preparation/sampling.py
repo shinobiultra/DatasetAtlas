@@ -66,7 +66,7 @@ class PreviewSampler:
                 'selection_note': 'One hash-ranked record per sampled primary asset. All linked assets remain. Not an example-prevalence estimate.' if self.group_by == 'primary_asset' else 'Hash-ranked examples. Reused images may occur more than once.'}
 
 
-def select_verified_remote_preview(candidates, resolve_asset, count):
+def select_verified_remote_preview(candidates, resolve_asset, count, on_progress=None):
     """Keep the first hash-ranked candidates whose original image slots open."""
     verified = []
     absent = 0
@@ -89,6 +89,9 @@ def select_verified_remote_preview(candidates, resolve_asset, count):
             continue
         checked_assets += record_assets
         verified.append(record)
+        if on_progress and (len(verified) % 5 == 0 or len(verified) == count):
+            on_progress(verified_records=len(verified), verified_assets=checked_assets,
+                        candidates_checked=len(verified) + absent)
     if len(verified) != count:
         raise ValueError(f'Only {len(verified)} of {count} original-media preview records are available')
     return verified, {'candidate_pool': len(candidates),

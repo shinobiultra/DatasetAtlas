@@ -25,7 +25,7 @@ class RemoteZipMemberCache:
         self.entries = OrderedDict()
         self.lock = threading.RLock()
 
-    def read(self, source, spec, member, max_bytes):
+    def read(self, source, spec, member, max_bytes, *, password=None):
         from dataset_atlas.adapters.core import _safe_relative
 
         member = _safe_relative(member)
@@ -65,7 +65,15 @@ class RemoteZipMemberCache:
             info = archive.getinfo(member)
             if info.is_dir() or not 1 <= info.file_size <= max_bytes:
                 raise ValueError("Remote ZIP member exceeds byte budget")
-            return archive.read(info)
+            with archive.open(info, pwd=password) as stream:
+                chunks = []
+                size = 0
+                while chunk := stream.read(1 << 20):
+                    size += len(chunk)
+                    if size > max_bytes:
+                        raise ValueError("Remote ZIP member exceeds byte budget")
+                    chunks.append(chunk)
+            return b''.join(chunks)
 
 
 REMOTE_ZIP_MEMBERS = RemoteZipMemberCache()

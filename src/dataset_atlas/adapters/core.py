@@ -783,6 +783,9 @@ def get_adapter(dataset: Dataset) -> DatasetAdapter:
     if dataset.adapter == 'covid_radiography':
         from .covid_radiography import CovidRadiographyAdapter
         return CovidRadiographyAdapter(dataset)
+    if dataset.adapter == 'objectnet':
+        from .objectnet import ObjectNetAdapter
+        return ObjectNetAdapter(dataset)
     if dataset.adapter == 'safebench':
         from .safebench import SafeBenchAdapter
         return SafeBenchAdapter(dataset)

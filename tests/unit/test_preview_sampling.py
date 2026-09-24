@@ -79,10 +79,13 @@ def test_remote_preview_skips_path_only_slots_and_pins_checked_hashes():
         if ref == 'missing.png':
             raise FileNotFoundError('source has a path but no bytes')
         return handle
-    selected, report = select_verified_remote_preview(candidates, resolve, 2)
+    progress = []
+    selected, report = select_verified_remote_preview(candidates, resolve, 2,
+        on_progress=lambda **values: progress.append(values))
     assert [r.id for r in selected] == ['1', '2']
     assert all(r.assets[0].sha256 == handle.sha256 for r in selected)
     assert report['unavailable_candidate_records'] == 1
     assert report['verified_preview_assets'] == 2
+    assert progress == [{'verified_records': 2, 'verified_assets': 2, 'candidates_checked': 3}]
     with pytest.raises(ValueError, match='Only 2 of 3'):
         select_verified_remote_preview(candidates, resolve, 3)

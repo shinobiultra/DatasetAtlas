@@ -209,6 +209,12 @@ class PreparationManager:
             plan['expected_download_bytes']=max_download_bytes
             plan['download_is_upper_bound']=True
             plan['media_access']='Re-index complete remote annotations within the approved transfer budget; embedded images remain remote.'
+        if plan.get('kind')=='local' and dataset.adapter=='objectnet':
+            dataset.adapter_config['remote_transfer_budget_bytes']=min(max_download_bytes,recipe['remote_transfer_budget_bytes'])
+            plan['prepared_dataset']=dataset.model_dump(mode='json')
+            plan['expected_download_bytes']=recipe['remote_transfer_budget_bytes']
+            plan['download_is_upper_bound']=True
+            plan['media_access']='Index the complete ETag-bound remote ZIP directory; verify and pin 100 original encrypted PNGs. Other originals remain range-addressable on demand.'
         if adapter_error and plan.get('kind') not in {'huggingface_columnar','huggingface_remote_columnar'}:
             plan['ready'] = False
             plan['requirements'].append('Adapter implementation missing: ' + dataset.adapter)
@@ -218,7 +224,7 @@ class PreparationManager:
                 plan['requirements'].append('Indexed gzip access requires the remote-storage extra (indexed-gzip).')
             plan['media_access'] = 'Native gzip TAR checkpoints support bounded original-image retrieval; no uncompressed media archive is created.'
         remote = dataset.adapter_config.get('remote_archives', {})
-        selective_media = remote or dataset.adapter_config.get('media_inventory_path') or plan.get('kind')=='huggingface_remote_columnar' or dataset.adapter=='remote_columnar'
+        selective_media = remote or dataset.adapter_config.get('media_inventory_path') or plan.get('kind')=='huggingface_remote_columnar' or dataset.adapter in {'remote_columnar','objectnet'}
         if selective_media:
             cache_bytes = dataset.adapter_config.get('remote_cache_bytes',1_000_000_000)
             if type(cache_bytes) is not int or not 1 <= cache_bytes <= 1_000_000_000_000:
@@ -244,7 +250,7 @@ class PreparationManager:
             plan['requirements'].append('Source download exceeds the selected download budget.')
         # Cache and retained source may coexist; reserve both conservatively.
         plan['required_free_bytes'] = plan['expected_download_bytes'] * 2 + max_output_bytes + (dataset.adapter_config.get('remote_cache_bytes',1_000_000_000) if selective_media else 0)
-        if plan.get('kind')=='huggingface_remote_columnar' or (plan.get('kind')=='local' and dataset.adapter=='remote_columnar'):
+        if plan.get('kind')=='huggingface_remote_columnar' or (plan.get('kind')=='local' and dataset.adapter in {'remote_columnar','objectnet'}):
             # Transfer is streamed through a bounded cache, not retained as a full source copy.
             plan['required_free_bytes']=max_output_bytes+dataset.adapter_config.get('remote_cache_bytes',1_000_000_000)+20_000_000
         if plan.get('kind') in {'http_archive','huggingface_columnar'}:

@@ -105,6 +105,15 @@ all released radiographs decode at 299×299 and masks at 256×256, so this sourc
 value must not be used as an asset width or height. The prepared release is
 local-only pending medical-image rights review.
 
+ObjectNet 1.0 is indexed from an ETag-bound remote ZIP directory and its
+checksum-pinned folder-label mapping. The 197 GB archive stays remote; a
+100-image original PNG preview is protected locally, with red borders intact.
+Individual later originals are fetched by bounded ZIP ranges and checked by
+the archive CRC and strong ETag. The complete archive SHA-256 and availability
+of every later media member remain unverified. ObjectNet images are excluded
+from public packs, and its [source licence](https://objectnet.dev/download.html)
+forbids model-parameter tuning on the test set.
+
 `archive_variants` derives a complete native filename inventory from ETag-bound
 ZIP directories and checks every expected per-split variant before activation.
 DIV2K training's four wild realizations are distinct assets; validation has one.

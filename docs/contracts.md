@@ -118,6 +118,15 @@ independent of source order. Every asset within a chosen example remains linked.
 Preview media is original quality and resolution; existing source-order packs
 retain their original sampling declarations until migrated.
 
+When a released population has fewer than 100 distinct primary images, the
+`primary_asset_then_example` sampler takes one SHA-256-ranked example per image
+before filling the preview with SHA-256-ranked distinct examples. It preserves
+the 100-example target without misrepresenting repeated media as new images.
+`atlas datasets preparation --id ID --verify-full-media DATASET_ID` audits every
+indexed image reference against a checksum-valid protected original before
+marking the pinned population's media scope `full`. This says nothing about
+other paper settings or publication rights.
+
 `atlas storage status` measures unique allocated local file blocks, with hard-link,
 external-symlink and shared-extent caveats. `atlas storage compact --dataset ID
 --max-input-bytes N --max-output-bytes N` writes resumable full-dimension AVIF

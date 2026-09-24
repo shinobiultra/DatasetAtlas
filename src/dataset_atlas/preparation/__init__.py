@@ -487,6 +487,67 @@ class PreparationManager:
                 'preview_records': len(pack.records), 'preview_media_validation': validation,
                 'index_sha256': digest.hexdigest(), 'index_rows': expected}
 
+    def verify_full_media(self, dataset_id, identity):
+        """Prove every indexed image has a protected, checksum-valid local original."""
+        import hashlib
+        import pyarrow.parquet as pq
+        from dataset_atlas.models import Dataset, Pack
+        from dataset_atlas.storage.compact import read_compact
+
+        directory = self.version_directory(dataset_id, identity)
+        receipt_path = directory / 'receipt.json'
+        receipt = json.loads(receipt_path.read_text())
+        dataset = Dataset.model_validate_json((directory / 'dataset.json').read_text())
+        manifest = json.loads((directory / 'snapshot/manifest.json').read_text())
+        if (dataset.id != dataset_id or dataset.snapshot_id != receipt['snapshot_id']
+                or manifest['record_count'] != receipt['record_count']):
+            raise ValueError('Full-media audit requires a matching completed index')
+        snapshot_path = directory / 'snapshot/records.parquet'
+        with snapshot_path.open('rb') as stream:
+            if hashlib.file_digest(stream, 'sha256').hexdigest() != manifest['checksums']['records.parquet']:
+                raise ValueError('Full-media audit index checksum differs from manifest')
+        refs = {}
+        rows = 0
+        for batch in pq.ParquetFile(snapshot_path).iter_batches(columns=['record_json'], batch_size=256):
+            for value in batch.column(0).to_pylist():
+                record = json.loads(value)
+                rows += 1
+                if set(record['asset_ids']) != {asset['id'] for asset in record['assets']}:
+                    raise ValueError('Full-media audit asset references disagree with indexed assets')
+                for asset in record['assets']:
+                    if asset['modality'] != 'image' or not asset.get('uri'):
+                        raise ValueError('Full-media audit only supports indexed image assets')
+                    ref = asset['uri']
+                    if ref in refs and refs[ref] != asset['id']:
+                        raise ValueError('Image reference has conflicting asset identities')
+                    refs[ref] = asset['id']
+        if rows != manifest['record_count'] or not refs:
+            raise ValueError('Full-media audit row count or asset population differs')
+        verified_bytes = 0
+        for ref in refs:
+            result = read_compact(self.root, dataset.id, dataset.snapshot_id, ref, 50_000_000)
+            if not result or result[2].get('representation') != 'original' or not result[2].get('protected_preview'):
+                raise ValueError('Indexed image lacks a protected original')
+            verified_bytes += len(result[0])
+        dataset.adapter_config['media_scope'] = 'full'
+        dataset.coverage.complete_data = 'supported'
+        dataset.evidence = [item for item in dataset.evidence
+                            if not (item.get('kind') == 'local_preparation' and item.get('snapshot_id') == dataset.snapshot_id)]
+        dataset = prepared_metadata(dataset, receipt['scope'])
+        pack_path = directory / 'pack/pack.json'
+        pack = Pack.model_validate_json(pack_path.read_text())
+        pack.dataset = dataset.model_copy(update={'adapter_config': {}})
+        validation = {'indexed_records': rows, 'unique_image_assets': len(refs),
+            'protected_original_bytes': verified_bytes,
+            'scope': 'Every image reference in the complete indexed release has a checksum-valid protected local original.'}
+        receipt['full_media_validation'] = validation
+        receipt['metadata_version'] = 4
+        receipt['metadata_refreshed_at'] = time.time()
+        atomic(directory / 'dataset.json', dataset.model_dump(mode='json'))
+        atomic(pack_path, pack.model_dump(mode='json'))
+        atomic(receipt_path, receipt)
+        return {'dataset_id': dataset.id, 'snapshot_id': dataset.snapshot_id, **validation}
+
     def _referenced_snapshots(self):
         """Snapshot IDs that saved selections still point at; those versions are pinned."""
         import sqlite3

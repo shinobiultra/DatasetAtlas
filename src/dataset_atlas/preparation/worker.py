@@ -303,12 +303,14 @@ def run(root, identity):
         preview_bytes=len(json.dumps(pack.model_dump(mode='json'),indent=2,ensure_ascii=False).encode())
         if preview_bytes+derived_bytes>=plan['max_output_bytes']:raise ValueError('Preview alone exceeds approved output budget')
         source = adapter.prepare(adapter.plan(1000, read_budget))
-        from .sampling import PreviewSampler, select_verified_remote_preview
+        from .sampling import PreviewSampler, AssetFirstPreviewSampler, select_verified_remote_preview
         # Remote Parquet path leaves can describe an image whose bytes are absent.
         # Keep extra hash-ranked candidates so the published local preview can
         # consist of original images that were actually opened and decoded.
         verify_remote_media = dataset.adapter == 'remote_columnar'
-        sampler = PreviewSampler(min(expected_count, 250 if verify_remote_media else 100))
+        group_by = dataset.adapter_config.get('preview_group_by', 'primary_asset')
+        sampler = (AssetFirstPreviewSampler(min(expected_count, 100)) if group_by == 'primary_asset_then_example'
+            else PreviewSampler(min(expected_count, 250 if verify_remote_media else 100), group_by=group_by))
         def records():
             cursor = None
             count = 0

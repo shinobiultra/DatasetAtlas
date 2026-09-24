@@ -1,11 +1,11 @@
 {
-  "checked_at_utc": "2026-09-24T10:24:34.703716+00:00",
+  "checked_at_utc": "2026-09-24T10:43:54.292432+00:00",
   "catalogue_entries": 333,
-  "tested_local_previews": 165,
-  "verified_preview_records": 16046,
-  "canonical_full_scope_indices": 160,
-  "entries_without_preview": 168,
-  "python_tests_passed": 414,
+  "tested_local_previews": 166,
+  "verified_preview_records": 16146,
+  "canonical_full_scope_indices": 161,
+  "entries_without_preview": 167,
+  "python_tests_passed": 422,
   "frontend_tests_passed": 22,
   "browser_tests_passed": 38,
   "browser_tests_skipped": 0,
@@ -38,10 +38,12 @@
   "task_vllm_running": false,
   "safebench_native_verification": "reports/safebench-live-verification.json",
   "safebench_archive_retirement": "reports/safebench-retirement-20260924.json",
-  "storage_allocated_bytes": 139444580352,
+  "storage_allocated_bytes": 145949659136,
   "browser_current_validation": {
     "default_passed": 26,
     "default_skipped": 13,
-    "live_safebench_passed": 1
-  }
+    "live_safebench_passed": 1,
+    "live_qava_passed": 1
+  },
+  "qava_native_verification": "reports/qava-live-verification-20260924.json"
 }

@@ -1,0 +1,28 @@
+source_url: https://github.com/btzyd/qava/tree/a43b4ba7814ac632a848dcbc06a1417b038a59e8
+release: a43b4ba7814ac632a848dcbc06a1417b038a59e8-32x50
+adapter: qava
+expected_count: 1600
+description: >-
+  QAVA author's released VQA v2 32-image x 50-question subset with native
+  question and answer annotations. Other m+n settings mentioned in the paper
+  are not identified by this release.
+scope: Exactly 1,600 question/answer pairs across 32 COCO val2014 images in the pinned QAVA author repository.
+adapter_config:
+  archive_prefix: qava-a43b4ba7814ac632a848dcbc06a1417b038a59e8
+  sha256: 9c2b6f186ecb326332b889c884dbda38b296f1476e9ae8b3132c203fb8cad734
+  preview_group_by: primary_asset_then_example
+  max_record_bytes: 200000
+  media_scope: on_demand_unverified
+files:
+- source_name: qava-a43b4ba7.tar.gz
+  url: https://codeload.github.com/btzyd/qava/tar.gz/a43b4ba7814ac632a848dcbc06a1417b038a59e8
+  bytes: 2102911
+  sha256: 9c2b6f186ecb326332b889c884dbda38b296f1476e9ae8b3132c203fb8cad734
+  format: tar.gz
+  config_key: archive
+allowed_hosts:
+- codeload.github.com
+resource_limits:
+  max_wall_seconds: 1800
+  max_cpu_seconds: 600
+  max_rss_bytes: 2000000000

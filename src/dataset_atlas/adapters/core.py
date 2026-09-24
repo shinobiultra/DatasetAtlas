@@ -777,6 +777,9 @@ def get_adapter(dataset: Dataset) -> DatasetAdapter:
     if dataset.adapter == 'roco':
         from .roco import RocoAdapter
         return RocoAdapter(dataset)
+    if dataset.adapter == 'qava':
+        from .qava import QavaAdapter
+        return QavaAdapter(dataset)
     if dataset.adapter == 'safebench':
         from .safebench import SafeBenchAdapter
         return SafeBenchAdapter(dataset)

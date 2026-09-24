@@ -6,7 +6,7 @@ import pytest
 from PIL import Image
 
 from dataset_atlas.models import Asset, Record
-from dataset_atlas.preparation.sampling import PreviewSampler, select_verified_remote_preview
+from dataset_atlas.preparation.sampling import PreviewSampler, AssetFirstPreviewSampler, select_verified_remote_preview
 
 
 def record(i, group=None):
@@ -44,6 +44,26 @@ def test_text_populations_small_populations_and_seeds():
     assert {r.id for r in small.records()} == {str(i) for i in range(12)}
     assert small.description('release')['population_count'] == 12
     assert small.description('release', 'asset')['unit'] == 'asset'
+
+
+def test_example_grouping_reaches_target_when_many_questions_share_images():
+    sampler = PreviewSampler(100, group_by='example')
+    for index in range(1600):
+        sampler.add(record(index, index // 50))
+    assert len(sampler.records()) == 100
+    assert len({item.id for item in sampler.records()}) == 100
+    assert len({item.asset_ids[0] for item in sampler.records()}) <= 32
+    assert sampler.description('release')['method'] == 'sha256_bottom_k_example'
+
+
+def test_asset_first_sampling_fills_examples_without_losing_distinct_images():
+    sampler = AssetFirstPreviewSampler(100)
+    for index in range(1600):
+        sampler.add(record(index, index // 50))
+    result = sampler.records()
+    assert len(result) == len({item.id for item in result}) == 100
+    assert len({item.asset_ids[0] for item in result}) == 32
+    assert sampler.description('release')['method'] == 'sha256_asset_first_with_example_fill'
 
 
 def test_remote_preview_skips_path_only_slots_and_pins_checked_hashes():

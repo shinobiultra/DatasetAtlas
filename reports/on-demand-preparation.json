@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-24T10:24:34.703716+00:00",
+  "checked_at": "2026-09-24T10:43:54.292432+00:00",
   "datasets": [
     {
       "dataset_id": "agent-security-bench",
@@ -1052,6 +1052,16 @@
       "prepared_receipt": "work/prepared/vqa-constraints/7b84c7030382399b53869347c2d1e824064e1ff575ab76a9d42f6fc7a1ae9aa6/receipt.json"
     },
     {
+      "dataset_id": "vqa-v2-m-n-subsets",
+      "release": "a43b4ba7814ac632a848dcbc06a1417b038a59e8-32x50",
+      "snapshot_id": "vqa-v2-m-n-subsets-7ea8298d3dfad2a72406a562",
+      "records": 1600,
+      "preview_records": 100,
+      "scope": "Exactly 1,600 question/answer pairs across 32 COCO val2014 images in the pinned QAVA author repository.",
+      "plan_id": "7ea8298d3dfad2a72406a5627aeac3d39de121de63acdbfb2f5d3ef5d47d23e4",
+      "prepared_receipt": "work/prepared/vqa-v2-m-n-subsets/7ea8298d3dfad2a72406a5627aeac3d39de121de63acdbfb2f5d3ef5d47d23e4/receipt.json"
+    },
+    {
       "dataset_id": "vsr",
       "release": "vsr-native-b27a0af0ee1462d2b6b92c8c83e869d9254a241a",
       "snapshot_id": "vsr-75d410703d2acf91c8d91db2",
@@ -1093,9 +1103,9 @@
     }
   ],
   "catalogue_entries": 333,
-  "with_previews": 165,
-  "without_previews": 168,
-  "full_population_indices": 160,
+  "with_previews": 166,
+  "without_previews": 167,
+  "full_population_indices": 161,
   "all_requested_datasets_complete": false,
   "note": "Acquired source populations and on-demand infrastructure; catalogue-wide coverage is not complete."
 }

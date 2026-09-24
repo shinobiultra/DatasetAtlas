@@ -75,6 +75,7 @@ def main(argv=None):
     preparation=datasets.add_parser('preparation');preparation.add_argument('--id',required=True);preparation.add_argument('--cancel',action='store_true');preparation.add_argument('--retry',action='store_true')
     preparation.add_argument('--refresh-metadata',metavar='DATASET_ID',help='Re-derive a completed version\'s coverage/evidence from its receipt');preparation.add_argument('--activate',action='store_true',help='With --refresh-metadata: make that version active')
     preparation.add_argument('--verify-remote-preview',metavar='DATASET_ID',help='Check a completed remote index and derive a preview with verified original images')
+    preparation.add_argument('--verify-full-media',metavar='DATASET_ID',help='Prove every indexed image has a protected original and update media coverage')
     prune=datasets.add_parser('prune',help='List or remove failed, duplicate and unreferenced prepared versions');prune.add_argument('--execute',action='store_true')
     index=datasets.add_parser('index');index.add_argument('--dataset',required=True);index.add_argument('--expected-count',type=int,required=True);index.add_argument('--max-bytes',type=int,default=30_000_000_000)
     serve=sub.add_parser('serve');serve.add_argument('--host',default='127.0.0.1');serve.add_argument('--port',type=int,default=8765)
@@ -142,7 +143,8 @@ def main(argv=None):
             elif args.action=='preparation':
                 from dataset_atlas.preparation import PreparationManager
                 manager=PreparationManager(root)
-                if args.verify_remote_preview:emit(manager.verify_remote_preview(args.verify_remote_preview,args.id))
+                if args.verify_full_media:emit(manager.verify_full_media(args.verify_full_media,args.id))
+                elif args.verify_remote_preview:emit(manager.verify_remote_preview(args.verify_remote_preview,args.id))
                 elif args.refresh_metadata:emit(manager.refresh_metadata(args.refresh_metadata,args.id,activate=args.activate))
                 else:emit(manager.cancel(args.id) if args.cancel else manager.start(args.id) if args.retry else manager.status(args.id))
             elif args.action=='prune':

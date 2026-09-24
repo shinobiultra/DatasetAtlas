@@ -4,6 +4,11 @@ name: ROCO
 aliases: []
 description: Original ROCO repository documents radiology image-caption pairs; ROCOv2 later excludes many
   original images for rights.
+tasks:
+- medical image captioning
+modalities:
+- image
+- text
 paper_ids:
 - paper-25eaa8c74ce76800
 release: unresolved

@@ -1,0 +1,30 @@
+source_url: https://github.com/razorx89/roco-dataset/tree/a1f0ad6c578ca8801e5a6eccc90af051aee1c326
+release: a1f0ad6c578ca8801e5a6eccc90af051aee1c326
+adapter: roco
+expected_count: 87927
+description: >-
+  Original ROCO train, validation and test annotation tables for radiology and
+  non-radiology images. Source captions, keywords, CUIs, semantic types, links
+  and per-image licence labels are retained. Current PMC media are checked by
+  filename and PMC object MD5 on request; historical FTP-byte equivalence is
+  not asserted.
+scope: All 87,927 distinct ROCO IDs in the original author repository's six split/domain groups.
+adapter_config:
+  archive_preparation: zip-store
+  repack_max_uncompressed_bytes: 100000000
+  max_record_bytes: 200000
+  expected_count: 87927
+  media_scope: on_demand_unverified
+files:
+- source_name: roco-a1f0ad6c.tar.gz
+  bytes: 13631396
+  sha256: 16a2f53335b4ec26e5b311118423d88a93e5f1459495c1c1944dcc71119dc3d4
+  format: tar.gz
+  config_key: path
+  url: https://codeload.github.com/razorx89/roco-dataset/tar.gz/a1f0ad6c578ca8801e5a6eccc90af051aee1c326
+allowed_hosts:
+- codeload.github.com
+resource_limits:
+  max_wall_seconds: 3600
+  max_cpu_seconds: 1800
+  max_rss_bytes: 6000000000

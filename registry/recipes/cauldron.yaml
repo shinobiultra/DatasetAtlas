@@ -8,6 +8,7 @@ scope: All 1880992 grouped examples across all 50 native configurations and 938 
   revision 847a98a779b1652d65111daf20c972dfcd333605; configuration and native user/assistant/source fields
   retained. This is the available complete release, not a reconstruction of a paper-specific sample.
 adapter_config:
+  media_scope: on_demand_unverified
   mapping:
     conversation_pairs: texts
     configuration_from_path: true

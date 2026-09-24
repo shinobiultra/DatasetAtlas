@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-24T09:17:09.235134+00:00",
+  "checked_at": "2026-09-24T10:24:34.703716+00:00",
   "datasets": [
     {
       "dataset_id": "agent-security-bench",
@@ -62,6 +62,16 @@
       "prepared_receipt": "work/prepared/caltech101/119fce6cd456b9a7522911000115975712fbe996f8e310f77788eb7b6f35b9e5/receipt.json"
     },
     {
+      "dataset_id": "cauldron",
+      "release": "847a98a779b1652d65111daf20c972dfcd333605",
+      "snapshot_id": "cauldron-6605d7d8e0aeccd40412008c",
+      "records": 1880992,
+      "preview_records": 100,
+      "scope": "All 1880992 grouped examples across all 50 native configurations and 938 Parquet shards at author revision 847a98a779b1652d65111daf20c972dfcd333605; configuration and native user/assistant/source fields retained. This is the available complete release, not a reconstruction of a paper-specific sample.",
+      "plan_id": "6605d7d8e0aeccd40412008c32fab506fc68797ad32a259c9f657994bb0c54ab",
+      "prepared_receipt": "work/prepared/cauldron/6605d7d8e0aeccd40412008c32fab506fc68797ad32a259c9f657994bb0c54ab/receipt.json"
+    },
+    {
       "dataset_id": "causalgym",
       "release": "causalgym-95349c3a5e53e2506e8b212482ea6dd784978156",
       "snapshot_id": "causalgym-7cdf70d4a91d1a538132fb32",
@@ -102,6 +112,16 @@
       "prepared_receipt": "work/prepared/cifar-10-c/930e6f4b982e03743c4dc097a40b5503d3a559b0e9309477899279d22f5a1e08/receipt.json"
     },
     {
+      "dataset_id": "cifar-10",
+      "release": "cifar-10-original-binary",
+      "snapshot_id": "cifar-10-8cc4c6411c05a5736d1f0044",
+      "records": 60000,
+      "preview_records": 100,
+      "scope": "official CIFAR-10 binary train and test batches, 60,000 examples",
+      "plan_id": "8cc4c6411c05a5736d1f0044ba57a3cfca0da8cc3e9dac6a94c6fb415e441c0e",
+      "prepared_receipt": "work/prepared/cifar-10/8cc4c6411c05a5736d1f0044ba57a3cfca0da8cc3e9dac6a94c6fb415e441c0e/receipt.json"
+    },
+    {
       "dataset_id": "cifar-100-c",
       "release": "zenodo-3555552-cifar-100-c",
       "snapshot_id": "cifar-100-c-8b1e4a18684465bd7c083fa6",
@@ -110,6 +130,16 @@
       "scope": "All 19 CIFAR-100-C corruption types at 5 severities over the 10000 original CIFAR-100 test indices (950000 images); lossless source array pixels on request.",
       "plan_id": "8b1e4a18684465bd7c083fa679f2fb41e4206ada1e65a744b63e0a4799529257",
       "prepared_receipt": "work/prepared/cifar-100-c/8b1e4a18684465bd7c083fa679f2fb41e4206ada1e65a744b63e0a4799529257/receipt.json"
+    },
+    {
+      "dataset_id": "cifar-100",
+      "release": "cifar-100-original-binary",
+      "snapshot_id": "cifar-100-6a1e646c1fd5066afa247613",
+      "records": 60000,
+      "preview_records": 100,
+      "scope": "official CIFAR-100 binary train and test batches, 60,000 examples",
+      "plan_id": "6a1e646c1fd5066afa2476136b078c77e4de1552dcca30c2345e886cf425e370",
+      "prepared_receipt": "work/prepared/cifar-100/6a1e646c1fd5066afa2476136b078c77e4de1552dcca30c2345e886cf425e370/receipt.json"
     },
     {
       "dataset_id": "cinic-10",
@@ -422,6 +452,16 @@
       "prepared_receipt": "work/prepared/hod/c683a46b41082747111185f23cb685acd114250b0bc66afb10e3cd881ad69b9c/receipt.json"
     },
     {
+      "dataset_id": "iconqa",
+      "release": "iconqa-original-v1-475f7651",
+      "snapshot_id": "iconqa-3e2eb3a289d3c9dee30a0047",
+      "records": 107439,
+      "preview_records": 100,
+      "scope": "Complete original IconQA v1 author ZIP, 107,439 questions across three subtasks",
+      "plan_id": "3e2eb3a289d3c9dee30a0047477bb33194bef795df8fa378a34d8b322311e240",
+      "prepared_receipt": "work/prepared/iconqa/3e2eb3a289d3c9dee30a0047477bb33194bef795df8fa378a34d8b322311e240/receipt.json"
+    },
+    {
       "dataset_id": "illuchar",
       "release": "d55c729918bda746f74d377a2f11c92389e44bf0",
       "snapshot_id": "illuchar-df53383aaaa234f3f95818ec",
@@ -452,6 +492,26 @@
       "prepared_receipt": "work/prepared/illusoryvqa/3c6eaab517eb3497b8e31a04cd514f441f9fc0078daba89a9743b595f7e71d25/receipt.json"
     },
     {
+      "dataset_id": "imagenet-a",
+      "release": "imagenet-a-original-tar-3bb36322",
+      "snapshot_id": "imagenet-a-54b2af5ad790129b1d342087",
+      "records": 7500,
+      "preview_records": 100,
+      "scope": "Original author ImageNet-A TAR: 7,500 source images across 200 synset folders",
+      "plan_id": "54b2af5ad790129b1d342087635ddeb3d1d4da48afe1edbd963bfdc29d6e80f4",
+      "prepared_receipt": "work/prepared/imagenet-a/54b2af5ad790129b1d342087635ddeb3d1d4da48afe1edbd963bfdc29d6e80f4/receipt.json"
+    },
+    {
+      "dataset_id": "imagenet-r",
+      "release": "imagenet-r-original-tar-18c6bf49",
+      "snapshot_id": "imagenet-r-9ec005c87cd8302c3286b193",
+      "records": 30000,
+      "preview_records": 100,
+      "scope": "Original author ImageNet-R TAR: 30,000 source images across 200 synset folders",
+      "plan_id": "9ec005c87cd8302c3286b193a106aaf13165af997063776e97bb9f2966eb9182",
+      "prepared_receipt": "work/prepared/imagenet-r/9ec005c87cd8302c3286b193a106aaf13165af997063776e97bb9f2966eb9182/receipt.json"
+    },
+    {
       "dataset_id": "imagenet-sketch",
       "release": "imagenet-sketch-0d8b8b5380efe50baae075842505918ad43c88fe",
       "snapshot_id": "imagenet-sketch-c9569b42c8fe9b7288958f5b",
@@ -460,6 +520,16 @@
       "scope": "Complete 50,889-image archive in the authors' linked Hugging Face distribution; all 1,000 native class folders retained. Native archive has more images than the rounded 50,000 headline count. The upstream loader names this single evaluation population train; no evaluation split is invented. Strong ETag and per-member ZIP CRC checked on reads; upstream full-file SHA-256 recorded but not locally verified.",
       "plan_id": "c9569b42c8fe9b7288958f5b64ab4c7bb6111030071bdae500ed2aec7ed3671c",
       "prepared_receipt": "work/prepared/imagenet-sketch/c9569b42c8fe9b7288958f5b64ab4c7bb6111030071bdae500ed2aec7ed3671c/receipt.json"
+    },
+    {
+      "dataset_id": "imagenet-v2",
+      "release": "imagenetv2-b-33-matched-frequency",
+      "snapshot_id": "imagenet-v2-1c43e6f3cb87b6960ebaab3c",
+      "records": 10000,
+      "preview_records": 100,
+      "scope": "ImageNetV2 MatchedFrequency b-33 only, 10,000 images and 10/class; Threshold0.7 and TopImages absent",
+      "plan_id": "1c43e6f3cb87b6960ebaab3c03548c16a6810488332bd63cd7199feb24236800",
+      "prepared_receipt": "work/prepared/imagenet-v2/1c43e6f3cb87b6960ebaab3c03548c16a6810488332bd63cd7199feb24236800/receipt.json"
     },
     {
       "dataset_id": "jiechieu-tsopze-resume-corpus",
@@ -680,6 +750,16 @@
       "scope": "All five RAVEL domains: every entity attribute inventory with native prompt templates and both split assignments, plus every independent Wikipedia control prompt. One browse example per entity inventory or control prompt; this is source data, not a model-specific filtered evaluation population.",
       "plan_id": "17f66185e65ba33d01ed27661cb363c2f922dc6261ee9a9cd87b15f4553789a6",
       "prepared_receipt": "work/prepared/ravel/17f66185e65ba33d01ed27661cb363c2f922dc6261ee9a9cd87b15f4553789a6/receipt.json"
+    },
+    {
+      "dataset_id": "roco",
+      "release": "a1f0ad6c578ca8801e5a6eccc90af051aee1c326",
+      "snapshot_id": "roco-22428cb5affabcf475c57290",
+      "records": 87927,
+      "preview_records": 100,
+      "scope": "All 87,927 distinct ROCO IDs in the original author repository's six split/domain groups.",
+      "plan_id": "22428cb5affabcf475c57290b57f7b706c60fc513319051e698bbceb4dbfc92a",
+      "prepared_receipt": "work/prepared/roco/22428cb5affabcf475c57290b57f7b706c60fc513319051e698bbceb4dbfc92a/receipt.json"
     },
     {
       "dataset_id": "rsicd",
@@ -1013,9 +1093,9 @@
     }
   ],
   "catalogue_entries": 333,
-  "with_previews": 163,
-  "without_previews": 170,
-  "full_population_indices": 158,
+  "with_previews": 165,
+  "without_previews": 168,
+  "full_population_indices": 160,
   "all_requested_datasets_complete": false,
   "note": "Acquired source populations and on-demand infrastructure; catalogue-wide coverage is not complete."
 }

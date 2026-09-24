@@ -25,6 +25,16 @@ upstream full-file SHA-256 values are provenance, not falsely reported as locall
 Unsupported binary layouts, changed ETags, oversized row groups, exhausted budgets and
 missing embedded bytes fail explicitly. Complete-index queries continue using the same
 Parquet snapshot API. The CLI equivalent is `atlas datasets acquire --source-mode selective`.
+For remote Parquet previews, preparation retains the 250 lowest hash-ranked
+distinct-asset candidates, opens and decodes each selected original image,
+then keeps the first 100 fully available records. Source slots containing only
+an old filesystem path are skipped, counted in the receipt, and do not become
+broken preview cards. The sampling manifest records this availability condition;
+the full annotation index may still have partial media availability.
+`atlas datasets preparation --id PLAN_ID --verify-remote-preview DATASET_ID`
+re-derives that verified preview from an existing completed snapshot. It checks
+the snapshot checksum and row count first, so path-only source defects can be
+repaired without copying or re-indexing the whole remote population.
 
 `structured_collection` combines pinned JSON/JSONL/CSV splits and optional remote ZIP
 annotations with on-demand images. Every referenced filename is checked against a pinned
@@ -224,6 +234,21 @@ checkpoints. Original reads may later use ETag-bound ranges over the individual
 parts under one transfer limit after Atlas-owned archive copies are retired.
 Preview image and audio originals are pinned before such retirement; full record
 metadata and checksum-verified prompt tables remain local.
+
+`atlas storage pin-preview --dataset ID --max-input-bytes N --max-output-bytes N`
+checks every preview image identity against the complete snapshot and retains
+its exact original bytes in the protected compact-media store. This is useful
+when a source's images are independently hosted and no single native archive
+can be retired. A repeated run validates and reuses previously pinned bytes.
+
+ROCO keeps the author's six split/domain annotation groups and their native
+caption, image-link, keyword, CUI, semantic-type and per-image licence tables.
+The archived FTP commands are never executed. An image request looks up its
+filename in the current versioned PMC article metadata and checks the
+downloaded image against that metadata's MD5. This verifies current PMC
+access, not byte equivalence to the historical ROCO FTP image. All annotation
+records are indexed, but media beyond the verified 100-image preview remain
+on-demand and unverified until requested.
 
 FIND preserves native function source, metadata and available model files as
 passive text/array assets; importing never executes code or deserializes weights.

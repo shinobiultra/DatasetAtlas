@@ -303,8 +303,12 @@ def run(root, identity):
         preview_bytes=len(json.dumps(pack.model_dump(mode='json'),indent=2,ensure_ascii=False).encode())
         if preview_bytes+derived_bytes>=plan['max_output_bytes']:raise ValueError('Preview alone exceeds approved output budget')
         source = adapter.prepare(adapter.plan(1000, read_budget))
-        from .sampling import PreviewSampler
-        sampler = PreviewSampler(min(expected_count, 100))
+        from .sampling import PreviewSampler, select_verified_remote_preview
+        # Remote Parquet path leaves can describe an image whose bytes are absent.
+        # Keep extra hash-ranked candidates so the published local preview can
+        # consist of original images that were actually opened and decoded.
+        verify_remote_media = dataset.adapter == 'remote_columnar'
+        sampler = PreviewSampler(min(expected_count, 250 if verify_remote_media else 100))
         def records():
             cursor = None
             count = 0
@@ -354,8 +358,20 @@ def run(root, identity):
                     sampler.add(Record.model_validate_json(value))
         if sampler.population_count != expected_count:
             raise ValueError('Preview sampling population differs from the complete index')
-        pack.records = sampler.records()
+        candidates = sampler.records()
+        preview_media_validation = None
+        if verify_remote_media:
+            media_source = adapter.prepare(adapter.plan(100, read_budget))
+            pack.records, preview_media_validation = select_verified_remote_preview(
+                candidates, lambda ref: adapter.resolve_asset(media_source, ref), min(expected_count, 100))
+        else:
+            pack.records = candidates
         pack.sampling = sampler.description(dataset.release, dataset.coverage.unit)
+        if preview_media_validation:
+            pack.sampling.update(method='sha256_bottom_k_primary_asset_verified_media',
+                requested_count=min(expected_count, 100), returned_count=len(pack.records),
+                candidate_pool_count=len(candidates),
+                selection_note='Lowest hash-ranked candidate records with all linked original images verified; excludes unavailable remote image slots.')
         actual_preview_bytes = len(pack.model_dump_json(indent=2).encode())
         snapshot_bytes = sum(path.stat().st_size for path in snapshot.rglob('*') if path.is_file())
         if actual_preview_bytes + snapshot_bytes + derived_bytes > plan['max_output_bytes']:
@@ -365,7 +381,9 @@ def run(root, identity):
         dataset.coverage.total_count = expected_count
         dataset.coverage.preview = 'complete_target'
         dataset.coverage.adapter = 'tested'
-        dataset.coverage.complete_data = 'supported' if dataset.adapter_config.get('media_scope') != 'selected_preview' and not (media_validation or {}).get('absent_media_references') else 'indexed_metadata_partial_media'
+        dataset.coverage.complete_data = ('indexed_metadata_partial_media'
+            if dataset.adapter_config.get('media_scope') in {'selected_preview', 'on_demand_unverified'}
+            or (media_validation or {}).get('absent_media_references') else 'supported')
         # Access/identity/rights evidence is deliberately not upgraded by downloading.
         from . import prepared_metadata
         dataset=prepared_metadata(dataset,plan['scope'])
@@ -373,7 +391,7 @@ def run(root, identity):
         atomic(version / 'pack/pack.json', pack.model_dump(mode='json'))
         atomic(version / 'dataset.json', dataset.model_dump(mode='json'))
         atomic(version / 'receipt.json', {'plan_id': identity, 'source_files': plan['files'],
-            'record_count': expected_count, 'snapshot_id': dataset.snapshot_id, 'scope': plan['scope'], 'media_validation':media_validation,'derived_source':derived_source,'derived_sources':derived_sources,'remote_metadata_bytes':getattr(adapter,'bytes_fetched',None)})
+            'record_count': expected_count, 'snapshot_id': dataset.snapshot_id, 'scope': plan['scope'], 'media_validation':media_validation,'preview_media_validation':preview_media_validation,'derived_source':derived_source,'derived_sources':derived_sources,'remote_metadata_bytes':getattr(adapter,'bytes_fetched',None)})
         atomic(base / 'active.json', {'version': identity})
         update(status='completed', stage='ready', snapshot_id=dataset.snapshot_id, indexed_count=expected_count)
     except InterruptedError as exc:

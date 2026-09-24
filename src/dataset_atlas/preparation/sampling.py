@@ -3,6 +3,9 @@ from __future__ import annotations
 
 import hashlib
 import heapq
+from io import BytesIO
+
+from PIL import Image
 
 
 class PreviewSampler:
@@ -15,8 +18,8 @@ class PreviewSampler:
     """
 
     def __init__(self, size=100, seed=0):
-        if type(size) is not int or not 1 <= size <= 100:
-            raise ValueError('Preview size must be between 1 and 100')
+        if type(size) is not int or not 1 <= size <= 500:
+            raise ValueError('Preview candidate pool must be between 1 and 500')
         if type(seed) is not int:
             raise ValueError('Preview seed must be an integer')
         self.size, self.seed = size, seed
@@ -59,3 +62,35 @@ class PreviewSampler:
                 'requested_count': self.size, 'returned_count': len(self.selected),
                 'source_revision': release, 'media_representation': 'original',
                 'selection_note': 'One hash-ranked record per sampled primary asset. All linked assets remain. Not an example-prevalence estimate.'}
+
+
+def select_verified_remote_preview(candidates, resolve_asset, count):
+    """Keep the first hash-ranked candidates whose original image slots open."""
+    verified = []
+    absent = 0
+    checked_assets = 0
+    for record in candidates:
+        if len(verified) == count:
+            break
+        try:
+            record_assets = 0
+            for asset in record.assets:
+                if asset.modality != 'image' or not asset.uri:
+                    continue
+                handle = resolve_asset(asset.uri)
+                with Image.open(BytesIO(handle.data)) as image:
+                    image.verify()
+                asset.sha256 = handle.sha256
+                record_assets += 1
+        except FileNotFoundError:
+            absent += 1
+            continue
+        checked_assets += record_assets
+        verified.append(record)
+    if len(verified) != count:
+        raise ValueError(f'Only {len(verified)} of {count} original-media preview records are available')
+    return verified, {'candidate_pool': len(candidates),
+        'candidates_checked': len(verified) + absent,
+        'unavailable_candidate_records': absent,
+        'verified_preview_assets': checked_assets,
+        'selection': 'Lowest SHA-256-ranked distinct assets with every selected image opened from the pinned source'}

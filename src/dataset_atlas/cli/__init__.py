@@ -31,6 +31,10 @@ def main(argv=None):
     compact.add_argument('--max-output-bytes',type=int,required=True)
     compact.add_argument('--quality',type=int,default=60)
     compact.add_argument('--speed',type=int,default=6)
+    pin=storage.add_parser('pin-preview',help='Retain every original image in a verified local preview')
+    pin.add_argument('--dataset',required=True)
+    pin.add_argument('--max-input-bytes',type=int,required=True)
+    pin.add_argument('--max-output-bytes',type=int,required=True)
     index=storage.add_parser('index-original',help='Build a verified native archive member index for bounded original retrieval')
     index.add_argument('--source',type=Path,required=True)
     index.add_argument('--sha256',required=True)
@@ -50,6 +54,7 @@ def main(argv=None):
     retire.add_argument('--extracted-root',type=Path)
     retire.add_argument('--max-preview-bytes',type=int,default=500_000_000)
     retire.add_argument('--max-transfer-bytes',type=int,default=150_000_000)
+    retire.add_argument('--modality',action='append',choices=['image','audio'],default=[])
     retire.add_argument('--execute',action='store_true')
     repacked=storage.add_parser('retire-repacked',help='Remove a redundant ZIP after exact native-member and retained-route verification')
     repacked.add_argument('--source',type=Path,required=True)
@@ -69,6 +74,7 @@ def main(argv=None):
     acquire=datasets.add_parser('acquire');acquire.add_argument('--dataset',required=True);acquire.add_argument('--max-download-bytes',type=int,required=True);acquire.add_argument('--max-output-bytes',type=int,required=True);acquire.add_argument('--execute',action='store_true');acquire.add_argument('--source-mode',choices=['download','selective'],default='download')
     preparation=datasets.add_parser('preparation');preparation.add_argument('--id',required=True);preparation.add_argument('--cancel',action='store_true');preparation.add_argument('--retry',action='store_true')
     preparation.add_argument('--refresh-metadata',metavar='DATASET_ID',help='Re-derive a completed version\'s coverage/evidence from its receipt');preparation.add_argument('--activate',action='store_true',help='With --refresh-metadata: make that version active')
+    preparation.add_argument('--verify-remote-preview',metavar='DATASET_ID',help='Check a completed remote index and derive a preview with verified original images')
     prune=datasets.add_parser('prune',help='List or remove failed, duplicate and unreferenced prepared versions');prune.add_argument('--execute',action='store_true')
     index=datasets.add_parser('index');index.add_argument('--dataset',required=True);index.add_argument('--expected-count',type=int,required=True);index.add_argument('--max-bytes',type=int,default=30_000_000_000)
     serve=sub.add_parser('serve');serve.add_argument('--host',default='127.0.0.1');serve.add_argument('--port',type=int,default=8765)
@@ -110,7 +116,10 @@ def main(argv=None):
                 emit(retire_repacked_archive(root,args.index,args.source,source_sha256=args.sha256,max_decoded_bytes=args.max_decoded_bytes,max_transfer_bytes=args.max_transfer_bytes,execute=args.execute))
             elif args.action=='retire-original':
                 from dataset_atlas.storage.retention import retire_image_archive
-                emit(retire_image_archive(root,args.dataset,args.index,args.source,mappings=[{'asset_prefix':args.asset_prefix,'member_prefix':args.member_prefix},{'asset_prefix':'media/'+args.asset_prefix,'member_prefix':args.member_prefix}],max_preview_bytes=args.max_preview_bytes,max_transfer_bytes=args.max_transfer_bytes,extracted_root=args.extracted_root,linked_datasets=args.also_dataset,execute=args.execute))
+                emit(retire_image_archive(root,args.dataset,args.index,args.source,mappings=[{'asset_prefix':args.asset_prefix,'member_prefix':args.member_prefix},{'asset_prefix':'media/'+args.asset_prefix,'member_prefix':args.member_prefix}],max_preview_bytes=args.max_preview_bytes,max_transfer_bytes=args.max_transfer_bytes,extracted_root=args.extracted_root,linked_datasets=args.also_dataset,modalities=args.modality or ('image',),execute=args.execute))
+            elif args.action=='pin-preview':
+                from dataset_atlas.storage.compact import pin_preview_originals
+                emit(pin_preview_originals(root,args.dataset,max_input_bytes=args.max_input_bytes,max_output_bytes=args.max_output_bytes))
             else:
                 from dataset_atlas.storage.compact import compact_dataset
                 emit(compact_dataset(root,args.dataset,max_input_bytes=args.max_input_bytes,max_output_bytes=args.max_output_bytes,quality=args.quality,speed=args.speed,
@@ -133,7 +142,8 @@ def main(argv=None):
             elif args.action=='preparation':
                 from dataset_atlas.preparation import PreparationManager
                 manager=PreparationManager(root)
-                if args.refresh_metadata:emit(manager.refresh_metadata(args.refresh_metadata,args.id,activate=args.activate))
+                if args.verify_remote_preview:emit(manager.verify_remote_preview(args.verify_remote_preview,args.id))
+                elif args.refresh_metadata:emit(manager.refresh_metadata(args.refresh_metadata,args.id,activate=args.activate))
                 else:emit(manager.cancel(args.id) if args.cancel else manager.start(args.id) if args.retry else manager.status(args.id))
             elif args.action=='prune':
                 from dataset_atlas.preparation import PreparationManager

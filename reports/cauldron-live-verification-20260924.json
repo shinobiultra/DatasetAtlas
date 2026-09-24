@@ -1,0 +1,70 @@
+{
+  "dataset_id": "cauldron",
+  "snapshot_id": "cauldron-6605d7d8e0aeccd40412008c",
+  "snapshot_sha256": "f2da3e9f2206091b398fd05d307795eb1f18243051eb978aa86ac8fe863f64ee",
+  "manifest_sha256": "f2da3e9f2206091b398fd05d307795eb1f18243051eb978aa86ac8fe863f64ee",
+  "sha_match": true,
+  "rows": 1880992,
+  "unique_ids": 1880992,
+  "null_ids": 0,
+  "expected_rows": 1880992,
+  "media_caveat": "All selected preview images are exact pinned originals and decode through the live API. Other source rows may contain path-only image slots; their media are on demand and not globally verified. Full remote shard SHA-256 values remain author metadata; fetched ranges are strong-ETag bound.",
+  "preview_records": 100,
+  "preview_images_checked": 109,
+  "preview_original_bytes": 12011003,
+  "preview_min_dimensions": [
+    160,
+    80
+  ],
+  "preview_selection": {
+    "method": "sha256_bottom_k_primary_asset_verified_media",
+    "seed": 0,
+    "unit": "example",
+    "grouping": "primary asset ID; record ID for records without assets",
+    "population": "complete pinned indexed population",
+    "population_count": 1880992,
+    "requested_count": 100,
+    "returned_count": 100,
+    "source_revision": "847a98a779b1652d65111daf20c972dfcd333605",
+    "media_representation": "original",
+    "selection_note": "Lowest hash-ranked candidate records with all linked original images verified; excludes unavailable remote image slots.",
+    "candidate_pool_count": 250
+  },
+  "verified_path_only_candidate_exclusions": 5,
+  "complete_data": "indexed_metadata_partial_media",
+  "later_nonpreview_original_checks": [
+    {
+      "shard": 0,
+      "record_id": "cauldron:example:6b21cda72972c7b475e69fc3",
+      "reference": "remote/0/0/images/0.png",
+      "sha256": "6f87465d3de58a7a768c96ef6dbf9fc0bb2bb8f6f35a72de32aa7813e90a2d3c",
+      "bytes": 10075,
+      "dimensions": [
+        299,
+        227
+      ]
+    },
+    {
+      "shard": 1,
+      "record_id": "cauldron:example:2ae37740d12d9f2043bb7e9c",
+      "reference": "remote/1/0/images/0.png",
+      "sha256": "f320f4943fd41f40ddf63238ef7ce0f1035a35b9f39ef1b27a0c7a3b811ed32a",
+      "bytes": 57412,
+      "dimensions": [
+        640,
+        480
+      ]
+    },
+    {
+      "shard": 4,
+      "record_id": "cauldron:example:5dc6c9c282a8fff83b19effa",
+      "reference": "remote/4/0/images/0.png",
+      "sha256": "5aa87383e1e0f050602fabf2f51d8e978f13238eb8e4ee7bc8330a893b333919",
+      "bytes": 6806,
+      "dimensions": [
+        800,
+        557
+      ]
+    }
+  ]
+}

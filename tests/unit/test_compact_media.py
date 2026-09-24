@@ -110,6 +110,7 @@ def test_compact_dataset_api_keeps_preview_and_analysis_originals(workspace, pac
         compact = client.get(asset['uri'])
         assert compact.headers['content-type'] == 'image/avif'
         assert compact.headers['x-atlas-media-representation'] == 'compressed_avif'
+
         original = client.get(asset['metadata']['original_uri'])
         assert original.content == originals['media/1.png']
         selection = Selection(id='s', ids=['item-1'], unit='example', snapshot_ids=['s1'], dataset_ids=['fixture'], created_at='now', query={'population_scope':'complete'})
@@ -119,3 +120,31 @@ def test_compact_dataset_api_keeps_preview_and_analysis_originals(workspace, pac
         assert Path(canonical.uri).read_bytes() == originals['media/1.png']
     # Canonical packs are never rewritten to point at a browsing derivative.
     assert Registry(workspace).pack('fixture').records[0].assets[0].uri == 'preview/0.png'
+
+def test_pin_preview_originals_preserves_exact_bytes_without_refetch(workspace, pack, monkeypatch):
+    from dataset_atlas.models import Asset, Record
+    from dataset_atlas.queries.parquet import build_parquet_snapshot
+    from dataset_atlas.storage.compact import pin_preview_originals, read_compact
+    from dataset_atlas.adapters.core import MediaHandle
+
+    data = picture(size=(57, 31))
+    ref = 'native/source.png'
+    asset = Asset(id='exact-image', dataset_id='fixture', release_id='r1', modality='image', uri=ref,
+                  sha256=hashlib.sha256(data).hexdigest())
+    row = Record(id='exact-record', dataset_id='fixture', release_id='r1', snapshot_id='s1',
+                 assets=[asset], asset_ids=[asset.id])
+    pack.records = [row]
+    (workspace/'work/packs/fixture/pack.json').write_text(pack.model_dump_json())
+    snapshots = workspace/'work/snapshots'; snapshots.mkdir()
+    build_parquet_snapshot([row], [], snapshots/'fixture', root=snapshots, dataset_id='fixture',
+                           release_id='r1', snapshot_id='s1', expected_count=1, population_scope='complete')
+    calls = []
+    def remote(_dataset, reference, **_):
+        calls.append(reference)
+        return MediaHandle(data, 'image/png', hashlib.sha256(data).hexdigest(), reference)
+    monkeypatch.setattr('dataset_atlas.adapters.resolve_dataset_asset', remote)
+    report = pin_preview_originals(workspace, 'fixture', max_input_bytes=100_000, max_output_bytes=100_000)
+    assert report['preview_image_assets_pinned'] == 1 and calls == [ref]
+    assert read_compact(workspace, 'fixture', 's1', ref, 100_000)[0] == data
+    pin_preview_originals(workspace, 'fixture', max_input_bytes=1, max_output_bytes=100_000)
+    assert calls == [ref]

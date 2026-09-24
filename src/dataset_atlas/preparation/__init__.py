@@ -425,6 +425,68 @@ class PreparationManager:
         return {'dataset_id': dataset_id, 'version': identity, 'snapshot_id': dataset.snapshot_id,
                 'active': json.loads((directory.parent / 'active.json').read_text())['version'] == identity if (directory.parent / 'active.json').is_file() else False}
 
+    def verify_remote_preview(self, dataset_id, identity):
+        """Re-derive a remote preview from a finished index without re-indexing it.
+
+        Path-only image structs in some released Parquet rows do not contain
+        retrievable originals. A bounded, hash-ranked candidate pool is checked
+        against the pinned remote release before any preview metadata changes.
+        """
+        import hashlib
+        import pyarrow.parquet as pq
+        from dataset_atlas.adapters import get_adapter
+        from dataset_atlas.models import Dataset, Pack, Record
+        from .sampling import PreviewSampler, select_verified_remote_preview
+
+        directory = self.version_directory(dataset_id, identity)
+        receipt_path = directory / 'receipt.json'
+        receipt = json.loads(receipt_path.read_text())
+        dataset = Dataset.model_validate_json((directory / 'dataset.json').read_text())
+        if dataset.adapter != 'remote_columnar' or dataset.snapshot_id != receipt['snapshot_id']:
+            raise ValueError('A completed remote-columnar version is required')
+        manifest = json.loads((directory / 'snapshot/manifest.json').read_text())
+        path = directory / 'snapshot/records.parquet'
+        digest = hashlib.sha256()
+        with path.open('rb') as stream:
+            for chunk in iter(lambda: stream.read(16_000_000), b''):
+                digest.update(chunk)
+        if digest.hexdigest() != manifest['checksums']['records.parquet']:
+            raise ValueError('Prepared index checksum differs from its manifest')
+        expected = manifest['record_count']
+        sampler = PreviewSampler(min(expected, 250))
+        for batch in pq.ParquetFile(path).iter_batches(columns=['record_json'], batch_size=256):
+            for value in batch.column(0).to_pylist():
+                sampler.add(Record.model_validate_json(value))
+        if sampler.population_count != expected or expected != receipt['record_count']:
+            raise ValueError('Prepared index row count differs from its receipt')
+        adapter = get_adapter(dataset)
+        source = adapter.prepare(adapter.plan(100, 10_000_000_000_000))
+        pack_path = directory / 'pack/pack.json'
+        pack = Pack.model_validate_json(pack_path.read_text())
+        pack.records, validation = select_verified_remote_preview(sampler.records(),
+            lambda ref: adapter.resolve_asset(source, ref), min(expected, 100))
+        pack.sampling = sampler.description(dataset.release, dataset.coverage.unit)
+        pack.sampling.update(method='sha256_bottom_k_primary_asset_verified_media',
+            requested_count=min(expected, 100), returned_count=len(pack.records),
+            candidate_pool_count=len(sampler.records()),
+            selection_note='Lowest hash-ranked candidate records with all linked original images verified; excludes unavailable remote image slots.')
+        dataset.adapter_config['media_scope'] = 'on_demand_unverified'
+        dataset.coverage.preview_count = len(pack.records)
+        dataset.coverage.complete_data = 'indexed_metadata_partial_media'
+        dataset.evidence = [item for item in dataset.evidence
+                            if not (item.get('kind') == 'local_preparation' and item.get('snapshot_id') == dataset.snapshot_id)]
+        dataset = prepared_metadata(dataset, receipt['scope'])
+        pack.dataset = dataset.model_copy(update={'adapter_config': {}})
+        receipt['preview_media_validation'] = validation
+        receipt['metadata_version'] = 3
+        receipt['metadata_refreshed_at'] = time.time()
+        atomic(pack_path, pack.model_dump(mode='json'))
+        atomic(directory / 'dataset.json', dataset.model_dump(mode='json'))
+        atomic(receipt_path, receipt)
+        return {'dataset_id': dataset_id, 'snapshot_id': dataset.snapshot_id,
+                'preview_records': len(pack.records), 'preview_media_validation': validation,
+                'index_sha256': digest.hexdigest(), 'index_rows': expected}
+
     def _referenced_snapshots(self):
         """Snapshot IDs that saved selections still point at; those versions are pinned."""
         import sqlite3

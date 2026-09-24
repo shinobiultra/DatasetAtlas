@@ -98,6 +98,89 @@ def read_compact(root, dataset_id, snapshot_id, asset_ref, max_bytes):
     return data, entry['mime'], entry
 
 
+def pin_preview_originals(root, dataset_id, *, max_input_bytes, max_output_bytes):
+    """Retain every original preview image before depending on remote media.
+
+    The complete snapshot must contain the same asset identities as the pack.
+    Each original is resolved through its adapter and stored byte-for-byte;
+    source archives and later records remain untouched.
+    """
+    import fcntl
+    import pyarrow.parquet as pq
+    from dataset_atlas.registry import Registry
+    from dataset_atlas.adapters import resolve_dataset_asset
+
+    if min(max_input_bytes, max_output_bytes) < 1:
+        raise ValueError('Positive preview input and output budgets required')
+    root = Path(root).resolve()
+    registry = Registry(root)
+    dataset = registry.dataset(dataset_id)
+    pack = registry.pack(dataset_id)
+    preview = {asset.id: asset for record in pack.records for asset in record.assets
+               if asset.modality == 'image' and asset.uri}
+    if not preview:
+        raise ValueError('No image preview assets to pin')
+    snapshot = registry.snapshot_path(dataset_id)
+    if snapshot is None or not (snapshot/'records.parquet').is_file():
+        raise ValueError('Complete local snapshot is required to pin preview originals')
+    found = {}
+    for batch in pq.ParquetFile(snapshot/'records.parquet').iter_batches(columns=['record_json'], batch_size=512):
+        for value in batch.column(0).to_pylist():
+            for item in json.loads(value)['assets']:
+                if item['id'] in preview:
+                    if item.get('uri') is None:
+                        raise ValueError('Preview original is absent from complete snapshot')
+                    if item['uri'] != preview[item['id']].uri:
+                        raise ValueError('Preview and snapshot image references differ')
+                    found[item['id']] = item['uri']
+    if set(found) != set(preview):
+        raise ValueError('Preview image identities differ from complete snapshot')
+    directory = store_directory(root, dataset.id, dataset.snapshot_id)
+    (directory/'objects').mkdir(parents=True, exist_ok=True)
+    consumed = 0
+    pinned = 0
+    with (directory/'writer.lock').open('a') as lock:
+        fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        with sqlite3.connect(directory/'index.sqlite') as db:
+            db.execute('CREATE TABLE IF NOT EXISTS media (ref TEXT PRIMARY KEY, metadata TEXT NOT NULL)')
+            for asset_id, asset in preview.items():
+                ref = found[asset_id]
+                old = read_compact(root, dataset.id, dataset.snapshot_id, ref, 50_000_000)
+                if old:
+                    if old[2].get('representation') != 'original' or not old[2].get('protected_preview'):
+                        raise ValueError('Existing preview media is not a protected original')
+                    pinned += 1
+                    continue
+                allowance = min(50_000_000, max_input_bytes - consumed)
+                if allowance < 1:
+                    raise ValueError('Preview input budget exhausted')
+                data = resolve_dataset_asset(dataset, ref, max_bytes=allowance, workspace_root=root).data
+                consumed += len(data)
+                if asset.sha256 and hashlib.sha256(data).hexdigest() != asset.sha256:
+                    raise ValueError('Preview original differs from pinned asset checksum')
+                _, mime, metadata = encode_image(data, protected=True)
+                digest = hashlib.sha256(data).hexdigest()
+                target = directory/'objects'/digest
+                if not target.exists():
+                    used = sum(p.stat().st_size for p in directory.rglob('*') if p.is_file())
+                    if used + len(data) + 4096 > max_output_bytes:
+                        raise ValueError('Preview output budget exhausted')
+                    with tempfile.NamedTemporaryFile(dir=target.parent, delete=False) as stream:
+                        temporary = Path(stream.name)
+                        stream.write(data)
+                    try:
+                        os.replace(temporary, target)
+                    finally:
+                        temporary.unlink(missing_ok=True)
+                metadata.update(sha256=digest, bytes=len(data), mime=mime)
+                db.execute('INSERT OR REPLACE INTO media VALUES (?,?)', (ref, json.dumps(metadata, separators=(',', ':'))))
+                db.commit()
+                pinned += 1
+    return {'dataset_id': dataset.id, 'snapshot_id': dataset.snapshot_id,
+            'preview_image_assets_pinned': pinned, 'original_bytes_read_this_run': consumed,
+            'retention': 'Original preview bytes preserved locally; other media remain on demand.'}
+
+
 def compact_dataset(root, dataset_id, *, max_input_bytes, max_output_bytes, quality=60, speed=6, cancel=None, progress=None):
     """Resume bounded conversion. Original archives and canonical records stay intact.
 

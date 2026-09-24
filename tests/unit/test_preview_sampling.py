@@ -1,7 +1,12 @@
 import random
+import hashlib
+from io import BytesIO
+
+import pytest
+from PIL import Image
 
 from dataset_atlas.models import Asset, Record
-from dataset_atlas.preparation.sampling import PreviewSampler
+from dataset_atlas.preparation.sampling import PreviewSampler, select_verified_remote_preview
 
 
 def record(i, group=None):
@@ -39,3 +44,25 @@ def test_text_populations_small_populations_and_seeds():
     assert {r.id for r in small.records()} == {str(i) for i in range(12)}
     assert small.description('release')['population_count'] == 12
     assert small.description('release', 'asset')['unit'] == 'asset'
+
+
+def test_remote_preview_skips_path_only_slots_and_pins_checked_hashes():
+    output = BytesIO()
+    Image.new('RGB', (2, 2), 'red').save(output, format='PNG')
+    data = output.getvalue()
+    class Handle:
+        sha256 = hashlib.sha256(data).hexdigest()
+    handle = Handle()
+    handle.data = data
+    candidates = [record(0, 'missing'), record(1, 'present'), record(2, 'later')]
+    def resolve(ref):
+        if ref == 'missing.png':
+            raise FileNotFoundError('source has a path but no bytes')
+        return handle
+    selected, report = select_verified_remote_preview(candidates, resolve, 2)
+    assert [r.id for r in selected] == ['1', '2']
+    assert all(r.assets[0].sha256 == handle.sha256 for r in selected)
+    assert report['unavailable_candidate_records'] == 1
+    assert report['verified_preview_assets'] == 2
+    with pytest.raises(ValueError, match='Only 2 of 3'):
+        select_verified_remote_preview(candidates, resolve, 3)

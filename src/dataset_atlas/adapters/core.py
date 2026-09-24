@@ -786,6 +786,9 @@ def get_adapter(dataset: Dataset) -> DatasetAdapter:
     if dataset.adapter == 'objectnet':
         from .objectnet import ObjectNetAdapter
         return ObjectNetAdapter(dataset)
+    if dataset.adapter == 'visual6502':
+        from .visual6502 import Visual6502Adapter
+        return Visual6502Adapter(dataset)
     if dataset.adapter == 'safebench':
         from .safebench import SafeBenchAdapter
         return SafeBenchAdapter(dataset)

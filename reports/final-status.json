@@ -1,13 +1,13 @@
 {
-  "checked_at_utc": "2026-09-24T11:30:14.467039+00:00",
+  "checked_at_utc": "2026-09-24T11:38:14.711599+00:00",
   "catalogue_entries": 333,
-  "tested_local_previews": 168,
-  "verified_preview_records": 16346,
-  "canonical_full_scope_indices": 163,
-  "entries_without_preview": 165,
-  "python_tests_passed": 425,
+  "tested_local_previews": 169,
+  "verified_preview_records": 16446,
+  "canonical_full_scope_indices": 164,
+  "entries_without_preview": 164,
+  "python_tests_passed": 426,
   "frontend_tests_passed": 22,
-  "browser_tests_passed": 39,
+  "browser_tests_passed": 40,
   "browser_tests_skipped": 0,
   "approved_public_preview_datasets": [
     "clevr",
@@ -20,8 +20,8 @@
   "gqa_full_archive_acquired": true,
   "gqa_browsing_snapshot_media_scope": "full",
   "active_preparations": [],
-  "validation_log": "work/objectnet-pytest.log",
-  "browser_validation_log": "work/objectnet-browser.log",
+  "validation_log": "work/visual6502-pytest.log",
+  "browser_validation_log": "work/visual6502-browser.log",
   "additional_focused_test_log": "work/rsicd-focused.log",
   "python_tests_skipped": 1,
   "gqa_full_archive_retained_locally": false,
@@ -38,16 +38,18 @@
   "task_vllm_running": false,
   "safebench_native_verification": "reports/safebench-live-verification.json",
   "safebench_archive_retirement": "reports/safebench-retirement-20260924.json",
-  "storage_allocated_bytes": 148023808000,
+  "storage_allocated_bytes": 148032499712,
   "browser_current_validation": {
     "default_passed": 26,
     "default_skipped": 13,
     "live_safebench_passed": 1,
     "live_qava_passed": 1,
     "live_covid_radiography_passed": 1,
-    "live_objectnet_passed": 1
+    "live_objectnet_passed": 1,
+    "live_visual6502_passed": 1
   },
   "qava_native_verification": "reports/qava-live-verification-20260924.json",
   "covid_radiography_native_verification": "reports/covid-radiography-live-verification-20260924.json",
-  "objectnet_native_verification": "reports/objectnet-live-verification-20260924.json"
+  "objectnet_native_verification": "reports/objectnet-live-verification-20260924.json",
+  "visual6502_native_verification": "reports/visual6502-live-verification-20260924.json"
 }

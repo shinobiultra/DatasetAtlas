@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-24T11:30:14.467039+00:00",
+  "checked_at": "2026-09-24T11:38:14.711599+00:00",
   "datasets": [
     {
       "dataset_id": "agent-security-bench",
@@ -1052,6 +1052,16 @@
       "prepared_receipt": "work/prepared/visual-genome/faffc9e1faa8f9f535a0316f45a05182141221d2b7694025d8ce044eb87c4439/receipt.json"
     },
     {
+      "dataset_id": "visual6502-transistor-netlist",
+      "release": "6502-revD-d8ecc129b34e0eaf320e0400fcf33329475bdb1e",
+      "snapshot_id": "visual6502-transistor-netlist-8ca29116d1d0c7b52a65c79d",
+      "records": 3510,
+      "preview_records": 100,
+      "scope": "Exactly the 3,510 native transistor rows in the pinned Visual6502 transdefs.js file.",
+      "plan_id": "8ca29116d1d0c7b52a65c79dc092c5a8fcff64a9095a239f4a08a6b01cd9f87f",
+      "prepared_receipt": "work/prepared/visual6502-transistor-netlist/8ca29116d1d0c7b52a65c79dc092c5a8fcff64a9095a239f4a08a6b01cd9f87f/receipt.json"
+    },
+    {
       "dataset_id": "vizwiz",
       "release": "vizwiz-final-with-public-test-answers-2026",
       "snapshot_id": "vizwiz-f2b6da52c62c9b263496cfef",
@@ -1123,9 +1133,9 @@
     }
   ],
   "catalogue_entries": 333,
-  "with_previews": 168,
-  "without_previews": 165,
-  "full_population_indices": 163,
+  "with_previews": 169,
+  "without_previews": 164,
+  "full_population_indices": 164,
   "all_requested_datasets_complete": false,
   "note": "Acquired source populations and on-demand infrastructure; catalogue-wide coverage is not complete."
 }

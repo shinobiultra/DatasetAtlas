@@ -114,6 +114,13 @@ of every later media member remain unverified. ObjectNet images are excluded
 from public packs, and its [source licence](https://objectnet.dev/download.html)
 forbids model-parameter tuning on the test set.
 
+The Visual6502 revD `transdefs.js` adapter treats its 3,510 rows as structured
+transistor examples and preserves every gate, channel, bounding box and geometry
+value. It parses only a checksum-pinned literal table; no source JavaScript is
+executed. The citing paper's exact 6507 input is not established by this public
+6502 source file, so paper release identity remains a candidate. The records
+stay local pending file-specific publication review.
+
 `archive_variants` derives a complete native filename inventory from ETag-bound
 ZIP directories and checks every expected per-split variant before activation.
 DIV2K training's four wild realizations are distinct assets; validation has one.

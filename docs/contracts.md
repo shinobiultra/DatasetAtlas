@@ -98,6 +98,13 @@ image conditions and their condition-specific question fields; image groups with
 no released question remain explicitly unannotated examples. Browsing these
 safety datasets does not execute their contents.
 
+COVID-19 Radiography Kaggle v5 pairs each original radiograph with its released
+mask as two image assets in one example. All four XLSX source tables join by
+native filename. The tables' `256*256` value is kept as `source_table_size`;
+all released radiographs decode at 299×299 and masks at 256×256, so this source
+value must not be used as an asset width or height. The prepared release is
+local-only pending medical-image rights review.
+
 `archive_variants` derives a complete native filename inventory from ETag-bound
 ZIP directories and checks every expected per-split variant before activation.
 DIV2K training's four wild realizations are distinct assets; validation has one.

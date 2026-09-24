@@ -780,6 +780,9 @@ def get_adapter(dataset: Dataset) -> DatasetAdapter:
     if dataset.adapter == 'qava':
         from .qava import QavaAdapter
         return QavaAdapter(dataset)
+    if dataset.adapter == 'covid_radiography':
+        from .covid_radiography import CovidRadiographyAdapter
+        return CovidRadiographyAdapter(dataset)
     if dataset.adapter == 'safebench':
         from .safebench import SafeBenchAdapter
         return SafeBenchAdapter(dataset)

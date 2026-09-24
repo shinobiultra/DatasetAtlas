@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-24T10:43:54.292432+00:00",
+  "checked_at": "2026-09-24T11:01:19.212079+00:00",
   "datasets": [
     {
       "dataset_id": "agent-security-bench",
@@ -230,6 +230,16 @@
       "scope": "All 21,919 original CounterFact cases, including rewrite requests and neighborhood/paraphrase/generation prompts.",
       "plan_id": "6cf557976850e03e1d9f7c698b41522fa9fe268f9a7988780d0cc4b046953da4",
       "prepared_receipt": "work/prepared/counterfact/6cf557976850e03e1d9f7c698b41522fa9fe268f9a7988780d0cc4b046953da4/receipt.json"
+    },
+    {
+      "dataset_id": "covid-19-radiography",
+      "release": "kaggle-v5-2022-03-19",
+      "snapshot_id": "covid-19-radiography-d0955977002b7234b0a30974",
+      "records": 21165,
+      "preview_records": 100,
+      "scope": "All 21,165 class-labelled radiographs and their 21,165 paired masks in Kaggle version 5.",
+      "plan_id": "d0955977002b7234b0a30974600166dcaf7f1c4573ccd69c1075774ecfb2d8f0",
+      "prepared_receipt": "work/prepared/covid-19-radiography/d0955977002b7234b0a30974600166dcaf7f1c4573ccd69c1075774ecfb2d8f0/receipt.json"
     },
     {
       "dataset_id": "cub-200-2011",
@@ -1103,9 +1113,9 @@
     }
   ],
   "catalogue_entries": 333,
-  "with_previews": 166,
-  "without_previews": 167,
-  "full_population_indices": 161,
+  "with_previews": 167,
+  "without_previews": 166,
+  "full_population_indices": 162,
   "all_requested_datasets_complete": false,
   "note": "Acquired source populations and on-demand infrastructure; catalogue-wide coverage is not complete."
 }

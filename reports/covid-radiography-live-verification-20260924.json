@@ -1,0 +1,24 @@
+{
+  "dataset_id": "covid-19-radiography",
+  "kaggle_version": 5,
+  "archive_sha256": "15f44e7111a74f048a54a41bf699637ffaad51b08a9d4a622ff5596879cb7f2b",
+  "snapshot_id": "covid-19-radiography-d0955977002b7234b0a30974",
+  "native_source_rows_and_image_mask_pairs": 21165,
+  "source_archive_members": 42335,
+  "full_native_png_decode_checks": 42330,
+  "full_native_dimensions_and_modes": {
+    "('radiograph', '(299, 299)', 'L')": 21025,
+    "('radiograph', '(299, 299)', 'RGB')": 140,
+    "('segmentation mask', '(256, 256)', 'RGB')": 21165
+  },
+  "preview_records": 100,
+  "preview_assets_http_byte_exact_decode_checks": 200,
+  "later_non_preview_assets_http_byte_exact_decode_checks": 2,
+  "http_bytes_verified": 3828237,
+  "checked_dimensions_by_role": {
+    "('radiograph', '(299, 299)')": 101,
+    "('segmentation mask', '(256, 256)')": 101
+  },
+  "source_metadata_discrepancy": "Four native tables claim 256*256 for source radiographs; sampled originals are 299x299 and paired masks 256x256. Atlas does not assert source-table SIZE as asset dimensions.",
+  "rights_note": "Local inspection only. Kaggle describes data files as copyright of original authors; medical image redistribution is not approved. Exact cited-paper subset remains unpinned."
+}

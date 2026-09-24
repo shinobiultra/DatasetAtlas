@@ -1,11 +1,11 @@
 {
-  "checked_at_utc": "2026-09-24T10:43:54.292432+00:00",
+  "checked_at_utc": "2026-09-24T11:01:19.212079+00:00",
   "catalogue_entries": 333,
-  "tested_local_previews": 166,
-  "verified_preview_records": 16146,
-  "canonical_full_scope_indices": 161,
-  "entries_without_preview": 167,
-  "python_tests_passed": 422,
+  "tested_local_previews": 167,
+  "verified_preview_records": 16246,
+  "canonical_full_scope_indices": 162,
+  "entries_without_preview": 166,
+  "python_tests_passed": 424,
   "frontend_tests_passed": 22,
   "browser_tests_passed": 38,
   "browser_tests_skipped": 0,
@@ -38,12 +38,14 @@
   "task_vllm_running": false,
   "safebench_native_verification": "reports/safebench-live-verification.json",
   "safebench_archive_retirement": "reports/safebench-retirement-20260924.json",
-  "storage_allocated_bytes": 145949659136,
+  "storage_allocated_bytes": 147597369344,
   "browser_current_validation": {
     "default_passed": 26,
     "default_skipped": 13,
     "live_safebench_passed": 1,
-    "live_qava_passed": 1
+    "live_qava_passed": 1,
+    "live_covid_radiography_passed": 1
   },
-  "qava_native_verification": "reports/qava-live-verification-20260924.json"
+  "qava_native_verification": "reports/qava-live-verification-20260924.json",
+  "covid_radiography_native_verification": "reports/covid-radiography-live-verification-20260924.json"
 }

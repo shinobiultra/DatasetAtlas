@@ -1,11 +1,11 @@
 {
-  "checked_at_utc": "2026-09-24T07:13:47.052487+00:00",
+  "checked_at_utc": "2026-09-24T07:37:59.538740+00:00",
   "catalogue_entries": 333,
-  "tested_local_previews": 160,
-  "verified_preview_records": 15732,
-  "canonical_full_scope_indices": 155,
-  "entries_without_preview": 173,
-  "python_tests_passed": 407,
+  "tested_local_previews": 162,
+  "verified_preview_records": 15746,
+  "canonical_full_scope_indices": 157,
+  "entries_without_preview": 171,
+  "python_tests_passed": 410,
   "frontend_tests_passed": 22,
   "browser_tests_passed": 38,
   "browser_tests_skipped": 0,
@@ -26,13 +26,13 @@
       "status": "running",
       "pid": 417674,
       "stage": "indexing",
-      "downloaded_bytes": 5913389,
-      "updated_at": 1790234017.9580622,
+      "downloaded_bytes": 43229789,
+      "updated_at": 1790235475.281976,
       "pinned_shards": 938,
       "total_shards": 938,
       "schema_shards": 938,
       "expected_count": 1880992,
-      "indexed_count": 800000
+      "indexed_count": 1050000
     }
   ],
   "validation_log": "work/native-expanded-python-final-20260924.log",
@@ -45,7 +45,7 @@
   "retained_media_verification": "reports/retained-media-live-verification.json",
   "python_current_validation": {
     "version": "3.14.2",
-    "passed": 405,
+    "passed": 408,
     "skipped": 3,
     "log": "work/native-expanded-python314-final-20260924.log"
   },

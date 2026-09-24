@@ -38,4 +38,4 @@ def test_text_populations_small_populations_and_seeds():
     for i in range(12): small.add(record(i))
     assert {r.id for r in small.records()} == {str(i) for i in range(12)}
     assert small.description('release')['population_count'] == 12
-
+    assert small.description('release', 'asset')['unit'] == 'asset'

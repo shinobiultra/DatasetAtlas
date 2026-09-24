@@ -774,6 +774,12 @@ class OverlayAdapter(StructuredAdapter):
 
 
 def get_adapter(dataset: Dataset) -> DatasetAdapter:
+    if dataset.adapter == 'elife_workbooks':
+        from .elife_workbooks import ElifeWorkbooksAdapter
+        return ElifeWorkbooksAdapter(dataset)
+    if dataset.adapter == 'figshare_stimuli':
+        from .figshare_stimuli import FigshareStimuliAdapter
+        return FigshareStimuliAdapter(dataset)
     if dataset.adapter == 'pathways_shapes':
         from .pathways_shapes import PathwaysShapesAdapter
         return PathwaysShapesAdapter(dataset)

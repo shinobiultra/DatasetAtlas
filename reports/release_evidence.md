@@ -47,18 +47,22 @@ The 2026-09-23 expansion and its precise limits are documented in
 separate from verified coverage. The latest counts and test checkpoint are in
 [final-status.json](final-status.json); older counts above are historical receipts.
 
-The 2026-09-24 continuation added the pinned native MLLMU-Bench Full_Set/Test_Set
-and both SBBench synthetic age/gender variants. [Native verification](native-expansion-20260924.md)
+The 2026-09-24 continuation added the pinned native MLLMU-Bench Full_Set/Test_Set,
+both SBBench synthetic age/gender variants and the exact seven-file Figshare v1
+stimulus release. [Native verification](native-expansion-20260924.md)
 compares complete annotations and paths with author releases, then checks original
-images from previews and later records. The current checkpoint is 160 previews,
-155 complete-population indices and 173 entries without a preview. Cauldron is
-still indexing and is excluded. Python 3.12 passed 407 tests with one optional
-skip; Python 3.14 passed 405 with three optional skips; all 22 frontend tests and
-the pinned `prek` checks passed. The built wheel and sdist passed archive inspection,
+images from previews and later records; all seven Figshare images/videos passed
+original-byte media routes. The eLife source-data workbooks also pass independent
+parity on all 1,229 native nonempty cells and 135 formulas, plus seven original
+XLSX routes. The current checkpoint is 162 previews, 157 complete-population
+indices and 171 entries without a preview. Cauldron is still indexing and is
+excluded. Python 3.12 passed 410 tests with one optional skip; Python 3.14
+passed 408 with three optional skips. All 22 frontend tests and the pinned
+`prek` checks passed. The built wheel and sdist passed archive inspection,
 and the reinstalled base-only wheel passed an HTTP smoke test outside the checkout.
 The 38 browser checks were completed at the earlier 2026-09-23 checkpoint; no
 frontend behavior changed in this continuation. [Storage accounting](storage-footprint-20260924.json)
-measured 144.59 GB while Cauldron was still running, below the 150 GB ceiling
+measured 144.83 GB while Cauldron was still running, below the 150 GB ceiling
 but above the 100 GB target.
 
 The current implementation has not received a new independent review. PR #3's review

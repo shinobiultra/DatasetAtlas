@@ -1,26 +1,26 @@
 {
   "root": "/home/bitwise/Documents/vibe/DatasetAtlas",
-  "checked_at_utc": "2026-09-24T07:15:43.364352+00:00",
+  "checked_at_utc": "2026-09-24T07:40:18.495469+00:00",
   "target_bytes": 100000000000,
   "ceiling_bytes": 150000000000,
   "status": "above_target",
-  "files": 272933,
-  "logical_bytes": 217924103561,
-  "unique_file_bytes": 144013362810,
-  "allocated_bytes": 144588476416,
-  "bytes_above_target": 44588476416,
+  "files": 282936,
+  "logical_bytes": 218016208475,
+  "unique_file_bytes": 144226800473,
+  "allocated_bytes": 144833028096,
+  "bytes_above_target": 44833028096,
   "groups": {
     "work/prepared": {
-      "files": 2207,
-      "logical_bytes": 76324404980,
-      "unique_file_bytes": 74448475525,
-      "allocated_bytes": 74453803008
+      "files": 2223,
+      "logical_bytes": 76481865608,
+      "unique_file_bytes": 74727268902,
+      "allocated_bytes": 74732630016
     },
     "work/sources": {
-      "files": 8501,
-      "logical_bytes": 74372414325,
-      "unique_file_bytes": 29349312939,
-      "allocated_bytes": 29367193600
+      "files": 8517,
+      "logical_bytes": 74405700021,
+      "unique_file_bytes": 29382598635,
+      "allocated_bytes": 29400510464
     },
     "work/model-server": {
       "files": 59583,
@@ -41,10 +41,10 @@
       "allocated_bytes": 6753304576
     },
     "work/media-cache": {
-      "files": 54527,
-      "logical_bytes": 5847567682,
-      "unique_file_bytes": 5847567682,
-      "allocated_bytes": 5972660224
+      "files": 64415,
+      "logical_bytes": 5857375110,
+      "unique_file_bytes": 5857375110,
+      "allocated_bytes": 6013333504
     },
     "work/compact-media": {
       "files": 80141,
@@ -72,8 +72,8 @@
     },
     "work/verify-install": {
       "files": 21940,
-      "logical_bytes": 1880801267,
-      "unique_file_bytes": 937473360,
+      "logical_bytes": 1880803121,
+      "unique_file_bytes": 937475214,
       "allocated_bytes": 969555968
     },
     "work/original-access": {
@@ -88,22 +88,16 @@
       "unique_file_bytes": 395487260,
       "allocated_bytes": 400805888
     },
-    "work/download-cache": {
-      "files": 21,
-      "logical_bytes": 210884755,
-      "unique_file_bytes": 210884755,
-      "allocated_bytes": 210935808
-    },
     "work": {
-      "files": 685,
-      "logical_bytes": 178810812,
-      "unique_file_bytes": 178810812,
-      "allocated_bytes": 180670464
+      "files": 708,
+      "logical_bytes": 178878886,
+      "unique_file_bytes": 178878886,
+      "allocated_bytes": 180805632
     },
     "apps": {
       "files": 3956,
-      "logical_bytes": 152846152,
-      "unique_file_bytes": 152846152,
+      "logical_bytes": 152849092,
+      "unique_file_bytes": 152849092,
       "allocated_bytes": 163717120
     },
     "work/demo-analysis-coco": {
@@ -111,6 +105,12 @@
       "logical_bytes": 117200361,
       "unique_file_bytes": 117200361,
       "allocated_bytes": 122068992
+    },
+    "work/download-cache": {
+      "files": 11,
+      "logical_bytes": 101943945,
+      "unique_file_bytes": 101943945,
+      "allocated_bytes": 101974016
     },
     "work/clean-ci-check": {
       "files": 1382,
@@ -120,9 +120,9 @@
     },
     "dist": {
       "files": 3,
-      "logical_bytes": 59123536,
-      "unique_file_bytes": 59123536,
-      "allocated_bytes": 59133952
+      "logical_bytes": 59133935,
+      "unique_file_bytes": 59133935,
+      "allocated_bytes": 59142144
     },
     "work/artifacts": {
       "files": 2472,
@@ -131,10 +131,10 @@
       "allocated_bytes": 55332864
     },
     ".git": {
-      "files": 139,
-      "logical_bytes": 49835194,
-      "unique_file_bytes": 49835194,
-      "allocated_bytes": 50225152
+      "files": 171,
+      "logical_bytes": 50013663,
+      "unique_file_bytes": 50013663,
+      "allocated_bytes": 50487296
     },
     "work/demo-analysis": {
       "files": 1046,
@@ -143,16 +143,16 @@
       "allocated_bytes": 46669824
     },
     "src": {
-      "files": 647,
-      "logical_bytes": 34796044,
-      "unique_file_bytes": 34796044,
-      "allocated_bytes": 36167680
+      "files": 653,
+      "logical_bytes": 34865853,
+      "unique_file_bytes": 34865853,
+      "allocated_bytes": 36245504
     },
     "registry": {
-      "files": 509,
-      "logical_bytes": 34300521,
-      "unique_file_bytes": 34300521,
-      "allocated_bytes": 35315712
+      "files": 511,
+      "logical_bytes": 34310649,
+      "unique_file_bytes": 34310649,
+      "allocated_bytes": 35332096
     },
     "examples": {
       "files": 305,
@@ -167,10 +167,10 @@
       "allocated_bytes": 29634560
     },
     "work/preparation": {
-      "files": 960,
-      "logical_bytes": 16329255,
-      "unique_file_bytes": 16329255,
-      "allocated_bytes": 18046976
+      "files": 982,
+      "logical_bytes": 16425282,
+      "unique_file_bytes": 16425282,
+      "allocated_bytes": 18178048
     },
     "work/corpus": {
       "files": 110,
@@ -203,21 +203,21 @@
       "allocated_bytes": 6737920
     },
     "reports": {
-      "files": 191,
-      "logical_bytes": 5208101,
-      "unique_file_bytes": 5208101,
-      "allocated_bytes": 5652480
+      "files": 193,
+      "logical_bytes": 5216984,
+      "unique_file_bytes": 5216984,
+      "allocated_bytes": 5664768
     },
     "tests": {
-      "files": 261,
-      "logical_bytes": 4125176,
-      "unique_file_bytes": 4125176,
-      "allocated_bytes": 4648960
+      "files": 267,
+      "logical_bytes": 4170073,
+      "unique_file_bytes": 4170073,
+      "allocated_bytes": 4702208
     },
     "workspace files": {
       "files": 10,
-      "logical_bytes": 670162,
-      "unique_file_bytes": 670162,
+      "logical_bytes": 670367,
+      "unique_file_bytes": 670367,
       "allocated_bytes": 700416
     },
     "scripts": {
@@ -246,8 +246,8 @@
     },
     ".pytest_cache": {
       "files": 5,
-      "logical_bytes": 39959,
-      "unique_file_bytes": 39959,
+      "logical_bytes": 40246,
+      "unique_file_bytes": 40246,
       "allocated_bytes": 57344
     },
     "schemas": {

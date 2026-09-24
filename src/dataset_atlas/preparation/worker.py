@@ -290,7 +290,8 @@ def run(root, identity):
             with closing(records()) as record_stream:
                 build_parquet_snapshot(record_stream, pack.fields, snapshot, root=version,
                     dataset_id=dataset.id, release_id=dataset.release, snapshot_id=dataset.snapshot_id,
-                    expected_count=expected_count, population_scope='complete', max_bytes=plan['max_output_bytes']-preview_bytes-derived_bytes,
+                    expected_count=expected_count, unit=dataset.coverage.unit, population_scope='complete',
+                    max_bytes=plan['max_output_bytes']-preview_bytes-derived_bytes,
                     max_record_bytes=dataset.adapter_config.get('max_record_bytes',2_000_000))
         if sampler.population_count == 0:
             # A completed staged index can survive cancellation before activation.
@@ -304,7 +305,7 @@ def run(root, identity):
         if sampler.population_count != expected_count:
             raise ValueError('Preview sampling population differs from the complete index')
         pack.records = sampler.records()
-        pack.sampling = sampler.description(dataset.release)
+        pack.sampling = sampler.description(dataset.release, dataset.coverage.unit)
         actual_preview_bytes = len(pack.model_dump_json(indent=2).encode())
         snapshot_bytes = sum(path.stat().st_size for path in snapshot.rglob('*') if path.is_file())
         if actual_preview_bytes + snapshot_bytes + derived_bytes > plan['max_output_bytes']:

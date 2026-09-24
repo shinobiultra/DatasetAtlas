@@ -50,10 +50,12 @@ class PreviewSampler:
     def records(self):
         return [self.selected[group][1] for group in sorted(self.selected, key=lambda group: (self.rank(group), group))]
 
-    def description(self, release):
+    def description(self, release, unit='example'):
+        if unit not in {'asset', 'example', 'entity', 'conversation'}:
+            raise ValueError('Unknown preview sampling unit')
         return {'method': 'sha256_bottom_k_primary_asset', 'seed': self.seed,
-                'unit': 'example', 'grouping': 'primary asset ID; example ID for records without assets',
+                'unit': unit, 'grouping': 'primary asset ID; record ID for records without assets',
                 'population': 'complete pinned indexed population', 'population_count': self.population_count,
                 'requested_count': self.size, 'returned_count': len(self.selected),
                 'source_revision': release, 'media_representation': 'original',
-                'selection_note': 'One hash-ranked example per sampled primary asset. All linked assets remain. Not an example-prevalence estimate.'}
+                'selection_note': 'One hash-ranked record per sampled primary asset. All linked assets remain. Not an example-prevalence estimate.'}

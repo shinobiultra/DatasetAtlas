@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-24T07:13:47.052487+00:00",
+  "checked_at": "2026-09-24T07:37:59.538740+00:00",
   "datasets": [
     {
       "dataset_id": "agent-security-bench",
@@ -212,6 +212,16 @@
       "prepared_receipt": "work/prepared/cub-200-2011/24d786c47fbc01c79e1386cc30192ba883a46e4b8c2b3561a8d274faa3fa6832/receipt.json"
     },
     {
+      "dataset_id": "custom-propeller-and-rotating-snake-stimuli",
+      "release": "figshare-5483680-v1",
+      "snapshot_id": "custom-propeller-and-rotating-snake-stimuli-b8212b08c27c78b1c5021e4e",
+      "records": 7,
+      "preview_records": 7,
+      "scope": "Every media file in Figshare Test_data article 5483680 version 1, excluding the later v2-only InkBlots ZIP. All seven assets are selected for the preview; original bytes and file IDs are retained, with no model inference or derived condition labels.",
+      "plan_id": "b8212b08c27c78b1c5021e4e72a0dd86db8a1cc37e89a6bada91dee4aecdc388",
+      "prepared_receipt": "work/prepared/custom-propeller-and-rotating-snake-stimuli/b8212b08c27c78b1c5021e4e72a0dd86db8a1cc37e89a6bada91dee4aecdc388/receipt.json"
+    },
+    {
       "dataset_id": "div2k",
       "release": "DIV2K-official-published-archives-20260923",
       "snapshot_id": "div2k-c28595c00366b0495e4ba62f",
@@ -290,6 +300,16 @@
       "scope": "All 10000 images in the official fgvc-aircraft-2013b archive, with original splits {'train': 3334, 'val': 3333, 'test': 3333}, variant/family/manufacturer labels and bounding boxes. This archive omits images_size.txt; source_size remains null. Original copyright banners retained.",
       "plan_id": "e39781517b01ac1fd77afc0800267fa7b3fd2d834cd065b327815d6e9d6fe95e",
       "prepared_receipt": "work/prepared/fgvc-aircraft/e39781517b01ac1fd77afc0800267fa7b3fd2d834cd065b327815d6e9d6fe95e/receipt.json"
+    },
+    {
+      "dataset_id": "figure-linked-source-data-spreadsheets",
+      "release": "elife-55378-v1",
+      "snapshot_id": "figure-linked-source-data-spreadsheets-7db3510f31bb563e2618ea83",
+      "records": 7,
+      "preview_records": 7,
+      "scope": "All seven figure source-data XLSX files named in eLife article 55378 version 1. One record per workbook, not an invented row-level observation table. Native sparse coordinates and shared formulas are retained with their cached values, but formulas are never evaluated.",
+      "plan_id": "7db3510f31bb563e2618ea839835c9d25a1b04de7d523661be449dbd8be7e8d4",
+      "prepared_receipt": "work/prepared/figure-linked-source-data-spreadsheets/7db3510f31bb563e2618ea839835c9d25a1b04de7d523661be449dbd8be7e8d4/receipt.json"
     },
     {
       "dataset_id": "find",
@@ -983,9 +1003,9 @@
     }
   ],
   "catalogue_entries": 333,
-  "with_previews": 160,
-  "without_previews": 173,
-  "full_population_indices": 155,
+  "with_previews": 162,
+  "without_previews": 171,
+  "full_population_indices": 157,
   "all_requested_datasets_complete": false,
   "note": "Acquired source populations and on-demand infrastructure; catalogue-wide coverage is not complete."
 }

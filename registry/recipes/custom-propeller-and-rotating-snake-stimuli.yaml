@@ -1,0 +1,114 @@
+release: figshare-5483680-v1
+source_url: https://doi.org/10.6084/m9.figshare.5483680.v1
+adapter: figshare_stimuli
+expected_count: 7
+description: 'Original seven media files in the author-linked Figshare Test_data v1 release: five still
+  images and two propeller videos. The paper describes six testing conditions; file-to-condition equivalence
+  is not inferred.'
+scope: Every media file in Figshare Test_data article 5483680 version 1, excluding the later v2-only InkBlots
+  ZIP. All seven assets are selected for the preview; original bytes and file IDs are retained, with no model
+  inference or derived condition labels.
+files:
+- source_name: Test_data_non_illusion_four.jpg
+  url: https://ndownloader.figshare.com/files/9484975
+  bytes: 98772
+  sha256: 68b29e71257ddf8d1dd010df7a3f016526aa0a470c0ebd0f34a65954be9659ca
+  md5: f9cc6e7752479dc8a89c4327f919a485
+  format: jpg
+  config_key: file_9484975
+- source_name: Test_data_non_illusion_single.jpg
+  url: https://ndownloader.figshare.com/files/9484978
+  bytes: 48450
+  sha256: 3cd70e8f4dfb76dcdac7c0621d2a93443294b56f5fcd8a4df7132358f67e5e57
+  md5: 35fa07afe36865783ed09d0c7f50386f
+  format: jpg
+  config_key: file_9484978
+- source_name: Test_data_propeller_L.MP4
+  url: https://ndownloader.figshare.com/files/9484981
+  bytes: 17032895
+  sha256: 210f5ba0f29ac67241f21c94757031040febb6c639c357186b8f8dc50079dbda
+  md5: 7c16d44b054400d3956f47b3dda28fa3
+  format: mp4
+  config_key: file_9484981
+- source_name: Test_data_propeller_R.MP4
+  url: https://ndownloader.figshare.com/files/9484984
+  bytes: 15789019
+  sha256: 2cf4ee0e3e90c0b04a0f5da4cc599f42e93cc5c0f97a1192f2180b00013cd58a
+  md5: 3c9c646d1e462e113a96b391d6a9691e
+  format: mp4
+  config_key: file_9484984
+- source_name: Test_data_illusion_four.jpg
+  url: https://ndownloader.figshare.com/files/9484987
+  bytes: 97364
+  sha256: 8da0087de4650f1ce803672b32bd6acab10d3ea6adf58883b9b3048abe49e585
+  md5: b20e30e6f30ad7866080775579eadb27
+  format: jpg
+  config_key: file_9484987
+- source_name: Test_data_illusion_single_L.jpg
+  url: https://ndownloader.figshare.com/files/9484990
+  bytes: 48227
+  sha256: 0bba17dc872c30971d2a35a4e66c88c8434f8745bc4c8fce437433f5402c32c5
+  md5: ff475f5ebb92035dc6ee80fe622ef758
+  format: jpg
+  config_key: file_9484990
+- source_name: Test_data_illusion_single_R.jpg
+  url: https://ndownloader.figshare.com/files/9484993
+  bytes: 87563
+  sha256: f7e9f6ef96b1d84cce8de870cad5d477706d6c1323819dab1610236ed85d42c9
+  md5: e8bbbf5858297e770403d4a2f5185984
+  format: jpg
+  config_key: file_9484993
+allowed_hosts:
+- ndownloader.figshare.com
+- s3-eu-west-1.amazonaws.com
+adapter_config:
+  media_files:
+  - figshare_file_id: 9484975
+    name: Test_data_non_illusion_four.jpg
+    bytes: 98772
+    sha256: 68b29e71257ddf8d1dd010df7a3f016526aa0a470c0ebd0f34a65954be9659ca
+    md5: f9cc6e7752479dc8a89c4327f919a485
+    modality: image
+    path_key: file_9484975
+  - figshare_file_id: 9484978
+    name: Test_data_non_illusion_single.jpg
+    bytes: 48450
+    sha256: 3cd70e8f4dfb76dcdac7c0621d2a93443294b56f5fcd8a4df7132358f67e5e57
+    md5: 35fa07afe36865783ed09d0c7f50386f
+    modality: image
+    path_key: file_9484978
+  - figshare_file_id: 9484981
+    name: Test_data_propeller_L.MP4
+    bytes: 17032895
+    sha256: 210f5ba0f29ac67241f21c94757031040febb6c639c357186b8f8dc50079dbda
+    md5: 7c16d44b054400d3956f47b3dda28fa3
+    modality: video
+    path_key: file_9484981
+  - figshare_file_id: 9484984
+    name: Test_data_propeller_R.MP4
+    bytes: 15789019
+    sha256: 2cf4ee0e3e90c0b04a0f5da4cc599f42e93cc5c0f97a1192f2180b00013cd58a
+    md5: 3c9c646d1e462e113a96b391d6a9691e
+    modality: video
+    path_key: file_9484984
+  - figshare_file_id: 9484987
+    name: Test_data_illusion_four.jpg
+    bytes: 97364
+    sha256: 8da0087de4650f1ce803672b32bd6acab10d3ea6adf58883b9b3048abe49e585
+    md5: b20e30e6f30ad7866080775579eadb27
+    modality: image
+    path_key: file_9484987
+  - figshare_file_id: 9484990
+    name: Test_data_illusion_single_L.jpg
+    bytes: 48227
+    sha256: 0bba17dc872c30971d2a35a4e66c88c8434f8745bc4c8fce437433f5402c32c5
+    md5: ff475f5ebb92035dc6ee80fe622ef758
+    modality: image
+    path_key: file_9484990
+  - figshare_file_id: 9484993
+    name: Test_data_illusion_single_R.jpg
+    bytes: 87563
+    sha256: f7e9f6ef96b1d84cce8de870cad5d477706d6c1323819dab1610236ed85d42c9
+    md5: e8bbbf5858297e770403d4a2f5185984
+    modality: image
+    path_key: file_9484993

@@ -1,0 +1,59 @@
+{
+  "checked_at": "2026-09-24T07:45:44.508057+00:00",
+  "operation": "Atomic hard-link deduplication of three checksum-identical immutable derived ZIPs; original source bytes and all logical paths retained.",
+  "files": [
+    {
+      "path": "work/prepared/what-s-up/2a86da80652409309e2aa863dbd7564736f13d57027fa5d5752f84f338268249/sources/vg_images_path-members.zip",
+      "size": 686789150,
+      "allocated_bytes": 686796800,
+      "device": 64768,
+      "inode_before": 58441092,
+      "links_before": 1,
+      "sha256": "d2b4ac8968095af789a2bf8284698dafb00f63e5befea197d30992b596980e67"
+    },
+    {
+      "path": "work/prepared/vg-qa-one/f572207512f2f00015071b0b5e4d3156a9fde07371cd3282809686f1a02dbd61/sources/vg_images_path-members.zip",
+      "size": 686789150,
+      "allocated_bytes": 686796800,
+      "device": 64768,
+      "inode_before": 59375176,
+      "links_before": 1,
+      "sha256": "d2b4ac8968095af789a2bf8284698dafb00f63e5befea197d30992b596980e67"
+    },
+    {
+      "path": "work/prepared/vg-qa-two/b140c3bfe0075e77bed1b5db226c9b6ba3199b35c229b61ba858ba73f89b2c8c/sources/vg_images_path-members.zip",
+      "size": 686789150,
+      "allocated_bytes": 686796800,
+      "device": 64768,
+      "inode_before": 59375188,
+      "links_before": 1,
+      "sha256": "d2b4ac8968095af789a2bf8284698dafb00f63e5befea197d30992b596980e67"
+    }
+  ],
+  "inode_after": 58441092,
+  "links_after": 3,
+  "freed_allocated_bytes": 1373593600,
+  "media_checks": [
+    {
+      "dataset_id": "what-s-up",
+      "asset_id": "what-s-up:asset:733c9a337a60439869fefa80",
+      "original_bytes": 278827,
+      "sha256_before_and_after": "67807a586a0f425e79e087feef685b0ee1fc26eb12e12876cccb8f31725923c0",
+      "post_link_direct_adapter_check": "passed"
+    },
+    {
+      "dataset_id": "vg-qa-one",
+      "asset_id": "vg-qa-one:asset:a0b33aff21efea2763a986f6",
+      "original_bytes": 112814,
+      "sha256_before_and_after": "b0a3473b8847a671087fbe2d0ef0e869847c9ab5678286bda6df309e6c1300e4",
+      "post_link_direct_adapter_check": "passed"
+    },
+    {
+      "dataset_id": "vg-qa-two",
+      "asset_id": "vg-qa-two:asset:e4d151d67a5cf32aa593e741",
+      "original_bytes": 100312,
+      "sha256_before_and_after": "ffccb36733d31a8b82c16444dbf5e453545289a5640b227874d775589a6835b9",
+      "post_link_direct_adapter_check": "passed"
+    }
+  ]
+}

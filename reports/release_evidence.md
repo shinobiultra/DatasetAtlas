@@ -62,8 +62,15 @@ passed 408 with three optional skips. All 22 frontend tests and the pinned
 and the reinstalled base-only wheel passed an HTTP smoke test outside the checkout.
 The 38 browser checks were completed at the earlier 2026-09-23 checkpoint; no
 frontend behavior changed in this continuation. [Storage accounting](storage-footprint-20260924.json)
-measured 144.83 GB while Cauldron was still running, below the 150 GB ceiling
+measured 141.82 GB while Cauldron was still running, below the 150 GB ceiling
 but above the 100 GB target.
+Checksum-identical immutable source, derived ZIP and Parquet copies were linked
+without changing their paths or bytes. [Visual Genome derivatives](derived-archive-dedup-20260924.json),
+[COCO snapshots](coco-snapshot-dedup-20260924.json),
+[Waterbirds source](waterbirds-source-dedup-20260924.json), and
+[four smaller pairs](secondary-dedup-20260924.json) recovered about 3 GB
+of allocated space; direct source-media and representative snapshot reads passed
+after relinking.
 
 The current implementation has not received a new independent review. PR #3's review
 covers its earlier changes only. Source acquisition does not approve redistribution;

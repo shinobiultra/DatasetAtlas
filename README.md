@@ -19,7 +19,7 @@ uv run atlas serve
 
 Use **Prepare full data** on a dataset to review its pinned source plan, set budgets, and start or resume local preparation. See [on-demand preparation](docs/on-demand-preparation.md) and [implementation evidence](reports/on-demand-implementation.md).
 
-For large collections, [the storage policy](docs/storage.md) preserves original-quality, full-resolution previews and compresses other images on demand into a bounded AVIF cache. Original bytes remain available for inspection and model inputs. The local 2026-09-24 storage pass measured 144.83 GB, within the requested 150 GB ceiling and above the 100 GB target, including the configured model weights and an active preparation. See [the storage receipt](reports/storage-footprint-20260924.json) for accounting limits.
+For large collections, [the storage policy](docs/storage.md) preserves original-quality, full-resolution previews and compresses other images on demand into a bounded AVIF cache. Original bytes remain available for inspection and model inputs. The local 2026-09-24 storage pass measured 141.82 GB, within the requested 150 GB ceiling and above the 100 GB target, including the configured model weights and an active preparation. See [the storage receipt](reports/storage-footprint-20260924.json) for accounting limits.
 
 Open **http://127.0.0.1:8765/?mode=workbench**. The default browser route is static mode and makes no privileged localhost connection. Local preview packs live under `work/packs/`; to install the redistributable demonstration packs into a fresh checkout:
 

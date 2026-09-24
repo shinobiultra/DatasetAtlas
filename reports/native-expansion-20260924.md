@@ -17,3 +17,6 @@ preview verification. Large remote Parquet shards remain remote; source SHA-256
 values are author metadata and fetched ranges are bound by strong ETags, not
 misreported as locally verified whole-shard hashes. Preview image requests use
 original released bytes and pixel dimensions.
+
+The two native file collections also passed a [live browser inspection](browser-native-20260924.json):
+seven loaded assets and an inspectable sample in each, with no page or HTTP errors.

@@ -1,0 +1,36 @@
+{
+  "checked_at": "2026-09-24T07:47:56.788807+00:00",
+  "operation": "Atomic hard-link deduplication of two checksum-identical immutable COCO-2014 snapshots; both manifests and paths retained.",
+  "files": [
+    {
+      "path": "work/prepared/coco-2014/0b639bf940c97037307f3b69108298a2db2bf6ba430251a7b89fbac90018735d/snapshot/records.parquet",
+      "size": 781264577,
+      "allocated_bytes": 781271040,
+      "device": 64768,
+      "inode": 57934299,
+      "links": 1,
+      "sha256": "a6c14b52595fdd40843d8b6f0b94115f045c58e004092f4164b941ddf391b090",
+      "snapshot_id": "coco-2014-0b639bf940c97037307f3b69",
+      "records": 164062
+    },
+    {
+      "path": "work/prepared/coco-2014/887d386753a51dbcec623342c2cd39cc2b0dc61a103d4206938fc3b946a435d0/snapshot/records.parquet",
+      "size": 781264577,
+      "allocated_bytes": 781271040,
+      "device": 64768,
+      "inode": 58324213,
+      "links": 1,
+      "sha256": "a6c14b52595fdd40843d8b6f0b94115f045c58e004092f4164b941ddf391b090",
+      "snapshot_id": "coco-2014-0b639bf940c97037307f3b69",
+      "records": 164062
+    }
+  ],
+  "inode_after": 57934299,
+  "links_after": 2,
+  "freed_allocated_bytes": 781271040,
+  "first_middle_last_record_ids_checked_after": [
+    "coco-2014:example:439a4b96eafb9cb13f1c4603",
+    "coco-2014:example:f4fb0ce865cbed772d11d08c",
+    "coco-2014:example:cf9e1f0a3e436284f96aad17"
+  ]
+}

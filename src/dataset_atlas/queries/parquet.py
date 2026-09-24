@@ -275,7 +275,7 @@ def build_parquet_snapshot(
 class ParquetSnapshot:
     """Validated immutable snapshot. Call `interrupt()` from another thread to cancel."""
 
-    def __init__(self, root: Path, snapshot_dir: Path, *, memory_mb: int = 256, threads: int = 2, timeout_seconds: float = 30):
+    def __init__(self, root: Path, snapshot_dir: Path, *, memory_mb: int = 256, threads: int = 4, timeout_seconds: float = 30):
         root = Path(root)
         directory = Path(snapshot_dir)
         if not root.is_dir() or directory.is_symlink() or not directory.is_dir():
@@ -620,7 +620,8 @@ class ParquetSnapshot:
                 connection.register("result_table", result_table)
             source = 'read_parquet(?) AS source' + (' LEFT JOIN result_table AS results ON source."id" = results."id"' if artifacts else '')
             if expired.is_set():raise ValueError("Query exceeded its time budget")
-            count = connection.execute(f"SELECT count(*) FROM {source}{where}", [str(self.parquet), *params]).fetchone()[0]
+            # An unfiltered, unjoined population is exactly the manifest count, already checked against Parquet metadata.
+            count = self.record_count if not where and not artifacts else connection.execute(f"SELECT count(*) FROM {source}{where}", [str(self.parquet), *params]).fetchone()[0]
             sampled_count = min(size, count) if size is not None else count
             if offset > sampled_count:
                 raise ValueError("Cursor offset exceeds current result; restart pagination")
@@ -643,6 +644,8 @@ class ParquetSnapshot:
                     result_rows.append(row); page_bytes += payload_bytes
             else:
                 result_rows = []
+            # An interrupt delivered between statements is otherwise lost; the budget still applies.
+            if expired.is_set():raise ValueError("Query exceeded its time budget")
         except duckdb.InterruptException as exc:
             raise ValueError("Query exceeded its time budget" if expired.is_set() else "Query cancelled") from exc
         finally:

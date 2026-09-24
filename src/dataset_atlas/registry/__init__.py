@@ -173,7 +173,9 @@ class Registry:
         return self._resolved(self._by_id[dataset_id])
     def pack(self, dataset_id: str) -> Pack:
         dataset_id=self.resolve(dataset_id)
-        self.dataset(dataset_id)
+        # Existence only: dataset() deep-copies adapter configuration, which for
+        # sharded releases is large and made every pack lookup cost milliseconds.
+        if dataset_id not in self._by_id:raise KeyError(dataset_id)
         if '/' in dataset_id or '\\' in dataset_id or dataset_id in {'.','..'}:raise ValueError('Invalid dataset ID')
         active=self.active_directory(dataset_id)
         path=active/'pack/pack.json' if active else self.root/'work/packs'/dataset_id/'pack.json'

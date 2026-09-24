@@ -77,6 +77,10 @@ class JobManager:
         self._active: dict[str, threading.Thread] = {}
         self._guard = threading.RLock()
         self._closed = False
+        # Registered artifacts are immutable (INSERT OR IGNORE, never updated),
+        # so each is parsed once; embedding runs alone are tens of megabytes.
+        self._artifacts: dict[str, Artifact] = {}
+        self._artifact_lock = threading.Lock()
         with self._db() as db:
             db.executescript("""
                 CREATE TABLE IF NOT EXISTS runs (
@@ -692,17 +696,39 @@ class JobManager:
                                (artifact.id, _json(artifact.model_dump(mode="json"))))
             return run
 
-    def list_artifacts(self) -> list[Artifact]:
+    def list_artifacts(self, snapshot_ids: set[str] | None = None) -> list[Artifact]:
+        """Registered artifacts, newest first; optionally only those on given snapshots.
+
+        Returned objects are shared, immutable registrations; copy before changing."""
         with self._db() as db:
-            rows = db.execute("SELECT artifact_json FROM artifacts ORDER BY rowid DESC").fetchall()
-        return [Artifact.model_validate_json(row[0]) for row in rows]
+            ids = [row[0] for row in db.execute("SELECT id FROM artifacts ORDER BY rowid DESC")]
+            with self._artifact_lock:
+                missing = [identity for identity in ids if identity not in self._artifacts]
+            for start in range(0, len(missing), 256):
+                chunk = missing[start:start + 256]
+                rows = db.execute(f"SELECT id,artifact_json FROM artifacts WHERE id IN ({','.join('?' * len(chunk))})", chunk).fetchall()
+                parsed = {identity: Artifact.model_validate_json(body) for identity, body in rows}
+                with self._artifact_lock:
+                    self._artifacts.update(parsed)
+        with self._artifact_lock:
+            result = [self._artifacts[identity] for identity in ids if identity in self._artifacts]
+        if snapshot_ids is not None:
+            result = [artifact for artifact in result if snapshot_ids.intersection(artifact.snapshot_ids)]
+        return result
 
     def get_artifact(self, artifact_id: str) -> Artifact:
+        with self._artifact_lock:
+            cached = self._artifacts.get(artifact_id)
+        if cached is not None:
+            return cached
         with self._db() as db:
             row = db.execute("SELECT artifact_json FROM artifacts WHERE id=?", (artifact_id,)).fetchone()
         if not row:
             raise KeyError(artifact_id)
-        return Artifact.model_validate_json(row[0])
+        artifact = Artifact.model_validate_json(row[0])
+        with self._artifact_lock:
+            self._artifacts.setdefault(artifact_id, artifact)
+        return artifact
 
     def close(self) -> None:
         self._closed = True

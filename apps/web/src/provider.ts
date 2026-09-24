@@ -215,7 +215,8 @@ export class WorkbenchDataProvider implements DataProvider {
     const result = await get<unknown>(`/selections/${encodeURIComponent(selection.id)}/export`)
     downloadJson(`atlas-selection-${selection.id}.json`, result)
   }
-  artifacts(): Promise<Artifact[]> { return get('/artifacts') }
+  /** Browsing never renders embedding vectors; the browse view omits them and stays scoped to one dataset's snapshots. */
+  artifacts(id?: string): Promise<Artifact[]> { return get(`/artifacts?view=browse${id ? `&dataset_id=${encodeURIComponent(id)}` : ''}`) }
   processors(): Promise<ProcessorDescriptor[]> { return get('/processors') }
   runs(): Promise<Run[]> { return get('/runs') }
   estimateRun(selectionId: string, processorId: string, config: Record<string, unknown>): Promise<Record<string, unknown>> { return post('/runs/estimate', { selection_id: selectionId, processor_id: processorId, config }) }

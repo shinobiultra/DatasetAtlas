@@ -170,7 +170,7 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
             pack_cache[str(pack_path)]=cached
         return cached[1],cached[2]
     def complete_snapshot(dataset_id):
-        registry.dataset(dataset_id)
+        if not registry.has(registry.resolve(dataset_id)):raise KeyError(dataset_id)
         path=registry.snapshot_path(dataset_id)
         if not (path/'manifest.json').exists():raise ValueError('Complete-data index not prepared; run atlas datasets index with the verified full count')
         if str(path) not in snapshot_cache:
@@ -186,6 +186,10 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
     @asynccontextmanager
     async def lifespan(app):
         if jobs and hasattr(jobs,'start'):jobs.start()
+        if jobs:
+            # Parse registered artifacts once in the background so the first dataset view is not the one to pay for it.
+            import threading
+            threading.Thread(target=jobs.list_artifacts,name='atlas-artifact-warmup',daemon=True).start()
         yield
         if jobs and hasattr(jobs,'close'):jobs.close()
     app=FastAPI(title='Dataset Atlas',version='1.0',lifespan=lifespan)
@@ -211,6 +215,10 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         response=await call_next(request)
         response.headers['X-Content-Type-Options']='nosniff'
         response.headers['Referrer-Policy']='no-referrer'
+        path=request.url.path
+        if not path.startswith('/api/'):
+            # The shell must revalidate so a rebuilt frontend is picked up; hashed bundles never change.
+            response.headers['Cache-Control']='public, max-age=31536000, immutable' if path.startswith('/assets/') else 'no-cache'
         response.headers['Content-Security-Policy']="default-src 'self'; img-src 'self' data: https:; media-src 'self' data: https:; style-src 'self' 'unsafe-inline'; script-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; frame-ancestors 'none'"
         return response
     from fastapi.exceptions import RequestValidationError
@@ -306,13 +314,24 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         if not any(resolved.is_relative_to(p) for p in roots):raise ValueError('Media outside configured roots')
         if resolved.is_file() and resolved.suffix.lower() not in {'.jpg','.jpeg','.png','.webp','.gif','.avif','.mp3','.wav','.ogg','.mp4','.webm','.flac'}:raise ValueError('Unsupported media type')
         return resolved
+    preview_asset_ids={}
     def is_preview_asset(dataset_id, asset_id, snapshot_id):
         try:
             preview = registry.pack(dataset_id)
-            if preview.dataset.snapshot_id != snapshot_id:
+            if preview.dataset.snapshot_id == snapshot_id:
+                path = None
+                signature = ('active', id(preview))
+            else:
                 path = next(p for d,p,_ in registry.versions(dataset_id) if d.snapshot_id == snapshot_id)
-                preview = Pack.model_validate_json(path.read_text())
-            return any(a.id == asset_id for r in preview.records for a in r.assets)
+                stat = path.stat()
+                signature = (str(path), stat.st_mtime_ns, stat.st_size)
+            key = (dataset_id, snapshot_id)
+            cached = preview_asset_ids.get(key)
+            if cached is None or cached[0] != signature or (path is None and cached[2] is not preview):
+                if path is not None:preview = Pack.model_validate_json(path.read_text())
+                cached = (signature, frozenset(a.id for r in preview.records for a in r.assets), preview if path is None else None)
+                preview_asset_ids[key] = cached
+            return asset_id in cached[1]
         except (FileNotFoundError, StopIteration):
             return True
     def expose_asset(dataset_id, asset, snapshot_id, *, allow_compact=True):
@@ -343,20 +362,43 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
                     asset.sha256 = None  # The derivative does not have the original's checksum.
                     asset.uri += '?representation=optimized'
 
+    browser_packs=OrderedDict()
+    asset_fields={}
+    browser_pack_lock=RLock()
     def browser_pack(dataset_id,result_ids=None):
+        """The browser-facing preview pack with the chosen runs attached.
+
+        Built once per (pack revision, attached runs) and shared read-only by
+        queries, fields and aggregates; rebuilding and re-exposing every asset
+        on each request made ordinary browsing requests cost 100+ ms each.
+        Media handles are re-bound on every use because their LRU is bounded."""
         from dataset_atlas.queries.results import attach_results
-        pack=registry.pack(dataset_id).model_copy(deep=True)
-        candidates={a.id:a for a in pack.artifacts}
+        base=registry.pack(dataset_id)
+        candidates={a.id:a for a in base.artifacts}
         if jobs:
-            candidates.update({a.id:a for a in jobs.list_artifacts() if pack.dataset.snapshot_id in a.snapshot_ids})
+            candidates.update({a.id:a for a in jobs.list_artifacts({base.dataset.snapshot_id})})
         if result_ids is None: result_ids=list(candidates)
         if any(id not in candidates for id in result_ids):raise ValueError('Requested result snapshot is unavailable')
-        pack=attach_results(pack,[candidates[id] for id in result_ids])
+        key=(dataset_id,tuple(result_ids))
+        with browser_pack_lock:
+            cached=browser_packs.get(key)
+            if cached is not None and cached[0] is base:
+                browser_packs.move_to_end(key)
+                for token,value in cached[2]:media_handles[token]=value
+                return cached[1]
+        pack=attach_results(base,[candidates[id] for id in result_ids])
         pack.dataset.adapter_config={}
+        handles=[]
         for record in pack.records:
             for asset in record.assets:
                 if asset.uri and not asset.uri.startswith(('https://','http://','data:')):
                     expose_asset(dataset_id, asset, record.snapshot_id, allow_compact=False)
+                    token=asset.uri.rsplit('/',1)[-1].split('?',1)[0]
+                    handles.append((token,media_handles.get(token)))
+        with browser_pack_lock:
+            browser_packs[key]=(base,pack,handles)
+            browser_packs.move_to_end(key)
+            while len(browser_packs)>24:browser_packs.popitem(last=False)
         return pack
     from dataset_atlas.preparation import PreparationManager
     preparation=PreparationManager(root)
@@ -421,12 +463,13 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
     @app.get('/api/v1/datasets/{dataset_id}')
     def dataset(dataset_id:str):return registry.dataset(dataset_id).model_copy(update={'adapter_config':{}})
     def selected_artifacts(ids):
+        if not ids:return []
         available={a.id:a for a in artifacts()}
         if len(set(ids))!=len(ids) or any(id not in available for id in ids):raise ValueError("Requested result snapshot is unavailable or duplicated")
         return [available[id] for id in ids]
     def complete_fields(dataset_id):
         snap=complete_snapshot(dataset_id)
-        compatible=[a for a in artifacts() if a.snapshot_ids==[snap.snapshot_id] and a.unit==snap.unit]
+        compatible=[a for a in artifacts({snap.snapshot_id}) if a.snapshot_ids==[snap.snapshot_id] and a.unit==snap.unit]
         fields=[f.model_copy(deep=True) for f in snap.query_fields(compatible)]
         try:
             descriptors={f.id:f for f in registry.pack(dataset_id).fields}
@@ -445,9 +488,13 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         if population_scope=='complete':return complete_fields(dataset_id)
         pack=browser_pack(dataset_id)
         if unit!='asset':return pack.fields
-        from dataset_atlas.models import FieldDescriptor
-        keys=sorted({key for row in materialize_records(pack,'asset') for key in row.source})
-        return [FieldDescriptor(id='source.'+key,name=key,unit='asset') for key in keys]
+        cached=asset_fields.get(dataset_id)
+        if cached is None or cached[0] is not pack:
+            from dataset_atlas.models import FieldDescriptor
+            keys=sorted({key for row in materialize_records(pack,'asset') for key in row.source})
+            cached=(pack,[FieldDescriptor(id='source.'+key,name=key,unit='asset') for key in keys])
+            asset_fields[dataset_id]=cached
+        return cached[1]
     @app.post('/api/v1/queries/{dataset_id}')
     def query(dataset_id:str,query:Query):
         if query.population_scope=='preview':return query_pack(browser_pack(dataset_id,query.result_snapshot_ids),query)
@@ -656,15 +703,45 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
     def retry(run_id:str):
         if not jobs:raise HTTPException(503,'Job coordinator unavailable')
         return jobs.retry(run_id)
-    @app.get('/api/v1/artifacts')
-    def artifacts():
-        result=jobs.list_artifacts() if jobs else []
+    def artifacts(snapshot_ids=None):
+        result=list(jobs.list_artifacts(snapshot_ids)) if jobs else []
         for d in registry.datasets():
-            try:result.extend(registry.pack(d.id).artifacts)
-            except FileNotFoundError:pass
+            try:packed=registry.pack(d.id).artifacts
+            except FileNotFoundError:continue
+            result.extend(a for a in packed if snapshot_ids is None or snapshot_ids.intersection(a.snapshot_ids))
         return result
+    def dataset_snapshot_ids(dataset_id):
+        """Every snapshot a dataset's browsing can use: prepared versions and its complete index."""
+        snapshots={registry.dataset(dataset_id).snapshot_id}
+        snapshots.update(d.snapshot_id for d,_,_ in registry.versions(dataset_id))
+        try:snapshots.add(complete_snapshot(dataset_id).snapshot_id)
+        except (ValueError,FileNotFoundError):pass
+        return {s for s in snapshots if s}
+    def without_vectors(value):
+        if isinstance(value,dict):return {k:without_vectors(v) for k,v in value.items() if k!='vector'}
+        if isinstance(value,list):return [without_vectors(v) for v in value]
+        return value
+    browse_views={}
+    def browse_view(artifact):
+        """Omit embedding vectors, which browsing never renders; the full artifact stays at /artifacts/{id}."""
+        if not artifact.kind.startswith('embed.') or not isinstance(artifact.data,dict):return artifact
+        cached=browse_views.get(artifact.id)
+        if cached is None or cached[0] is not artifact:
+            data={k:without_vectors(v) if k in {'items','points'} else v for k,v in artifact.data.items()}
+            data['omitted_fields']=['vector']
+            cached=(artifact,artifact.model_copy(update={'data':data}))
+            browse_views[artifact.id]=cached
+        return cached[1]
+    @app.get('/api/v1/artifacts')
+    def list_artifacts(dataset_id:str|None=None,view:str='full'):
+        if view not in {'full','browse'}:raise ValueError('Artifact view must be full or browse')
+        result=artifacts(dataset_snapshot_ids(dataset_id) if dataset_id else None)
+        return [browse_view(a) for a in result] if view=='browse' else result
     @app.get('/api/v1/artifacts/{artifact_id}')
     def artifact(artifact_id:str):
+        if jobs:
+            try:return jobs.get_artifact(artifact_id)
+            except KeyError:pass
         for a in artifacts():
             if (a.id if hasattr(a,'id') else a['id'])==artifact_id:return a
         raise KeyError(artifact_id)

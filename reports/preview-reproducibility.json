@@ -1,0 +1,4707 @@
+{
+ "catalogue_entries": 333,
+ "commit": "76b9d3c",
+ "datasets": [
+  {
+   "category": "no_recipe",
+   "dataset_id": "activations-csv",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "Pach ImageNet validation activation index",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "advbench",
+   "download_bytes": 0,
+   "kind": "local",
+   "maintainer_preview": true,
+   "name": "AdvBench",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 0,
+    "kind": "local",
+    "records_indexed": 520,
+    "snapshot_id": "github-llm-attacks-098262edf85f807224e70ecd87b9d83716bf6b73-harmful-behaviors"
+   }
+  },
+  {
+   "category": "planned",
+   "dataset_id": "agent-security-bench",
+   "download_bytes": 441328,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "Agent Security Bench",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "algopuzzlevqa",
+   "download_bytes": 226793952,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": true,
+   "name": "AlgopuzzleVQA",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "alpaca",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "Stanford Alpaca",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "anthropic-red-teaming-prompts",
+   "download_bytes": 0,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": true,
+   "name": "Anthropic red-teaming prompts",
+   "ready": false,
+   "requirements": [
+    "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "artbench",
+   "download_bytes": 183938499,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "ArtBench-10 (32x32 CIFAR binary)",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 183938499,
+    "kind": "http_archive",
+    "records_indexed": 60000,
+    "snapshot_id": "artbench10-32-abb96b78-7b83d705"
+   }
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "artbench-2",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Artbench-2",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "artchive",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Artchive",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "asteroids-rom",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Asteroids ROM",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "audioset",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "AudioSet",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "bam-fg",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "BAM-FG",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "bapps",
+   "download_bytes": 7650150400,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "BAPPS",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "bbq",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "BBQ",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "behonest",
+   "download_bytes": 0,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": true,
+   "name": "BeHonest",
+   "ready": false,
+   "requirements": [
+    "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "bias-in-bios",
+   "download_bytes": 99808338,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": true,
+   "name": "Bias in Bios",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 99808338,
+    "kind": "huggingface_columnar",
+    "records_indexed": 396189,
+    "snapshot_id": "bias-in-bios-3c9becfb1396a39da1dfb885"
+   }
+  },
+  {
+   "category": "planned",
+   "dataset_id": "blink",
+   "download_bytes": 10000000000,
+   "kind": "huggingface_remote_sample",
+   "maintainer_preview": true,
+   "name": "BLINK",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": 797279831,
+   "upper_bound": true
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "brain-score",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Brain-Score",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "brca",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "BRCA",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "broden",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Broden",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "caltech101",
+   "download_bytes": 137414764,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "Caltech101",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "cauldron",
+   "download_bytes": 10000000000,
+   "kind": "huggingface_remote_sample",
+   "maintainer_preview": true,
+   "name": "Cauldron",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": 168903960966,
+   "upper_bound": true
+  },
+  {
+   "category": "planned",
+   "dataset_id": "causalgym",
+   "download_bytes": 8285880,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "CausalGym",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "cc3m",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "CC3M",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "cebab",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "CEBaB v1.1",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "celeba",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "CelebA",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "chartqa",
+   "download_bytes": 4615773,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "ChartQA",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "chicago-face-database",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Chicago Face Database",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "child-safety-intents",
+   "download_bytes": 8771903,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "Child Safety intents",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "cifar-10",
+   "download_bytes": 170052171,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "CIFAR-10",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 170052171,
+    "kind": "http_archive",
+    "records_indexed": 60000,
+    "snapshot_id": "cifar-10-8f82a07a646c7289294dfc9f"
+   }
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "cifar-10-1",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "CIFAR-10.1 v6",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "cifar-10-c",
+   "download_bytes": 2918471680,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "CIFAR-10-C",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "cifar-100",
+   "download_bytes": 168513733,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "CIFAR-100",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 168513733,
+    "kind": "http_archive",
+    "records_indexed": 60000,
+    "snapshot_id": "cifar-100-6ff4d010ff30dc0c1dbb8ab9"
+   }
+  },
+  {
+   "category": "planned",
+   "dataset_id": "cifar-100-c",
+   "download_bytes": 2918473216,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "CIFAR-100-C",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "cifar-2",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "CIFAR-2",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "cinic-10",
+   "download_bytes": 687544992,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "CINIC-10",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "clevr",
+   "download_bytes": 0,
+   "kind": "local",
+   "maintainer_preview": true,
+   "name": "CLEVR",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 0,
+    "kind": "local",
+    "records_indexed": 1070,
+    "snapshot_id": "hf-maujim-CLEVR_sample_500-463520cb0e4d16f2f61ae0607c81eacdd009e9f4-validation"
+   }
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "clevr-v1-full",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "CLEVR v1.0 (official complete release)",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "coco",
+   "download_bytes": 1068492871,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "COCO",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 1068492871,
+    "kind": "http_archive",
+    "records_indexed": 25014,
+    "snapshot_id": "coco-2017-val-4f7e2ccb-113a836d"
+   }
+  },
+  {
+   "category": "planned",
+   "dataset_id": "coco-2014",
+   "download_bytes": 293636258,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "COCO 2014",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "coco-caption",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "COCO Caption",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "coco-demographic-annotations",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "COCO demographic annotations",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "coco-detection-dataset",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "COCO Detection Dataset",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "coco-gender",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "COCO-gender",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "coco-one",
+   "download_bytes": 20182827,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "COCO_one",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 182827,
+    "kind": "http_archive",
+    "records_indexed": 2247,
+    "snapshot_id": "coco-one-020c32626f5c87251c80053e"
+   }
+  },
+  {
+   "category": "planned",
+   "dataset_id": "coco-qa",
+   "download_bytes": 31859880,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "COCO-QA",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "coco-spatial",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "COCO-Spatial",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "coco-train",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "COCO train",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "coco-two",
+   "download_bytes": 20042823,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "COCO_two",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 42823,
+    "kind": "http_archive",
+    "records_indexed": 440,
+    "snapshot_id": "coco-two-02c9b51ef8bfb1552f5935fe"
+   }
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "cocogender",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "COCOgender",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "cocogendertxt",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Cocogendertxt",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "concept-editing-dataset",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Concept-Editing Dataset",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "conceptarc",
+   "download_bytes": 147432,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "ConceptARC",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 147432,
+    "kind": "http_archive",
+    "records_indexed": 176,
+    "snapshot_id": "conceptarc-54562e3a6997dfbf5344b99a"
+   }
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "conceptual-captions",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Conceptual Captions",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "contrastive-prompts",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Contrastive Prompts",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "controlled-clevr",
+   "download_bytes": 65903732,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "Controlled CLEVR",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 65903732,
+    "kind": "http_archive",
+    "records_indexed": 408,
+    "snapshot_id": "controlled-clevr-efeefc12ac6c3bfc4224d459"
+   }
+  },
+  {
+   "category": "verified",
+   "dataset_id": "controlled-images",
+   "download_bytes": 95222713,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "Controlled Images",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 95222713,
+    "kind": "http_archive",
+    "records_indexed": 412,
+    "snapshot_id": "controlled-images-1e73b894d9a5dc74a22442e6"
+   }
+  },
+  {
+   "category": "planned",
+   "dataset_id": "counterfact",
+   "download_bytes": 45108470,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "Counterfact",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "covid-19-radiography",
+   "download_bytes": 816029038,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "COVID-19 Radiography",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "cub",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "CUB",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "cub-200-2011",
+   "download_bytes": 1150585339,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "CUB-200-2011",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "cub200",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "CUB200",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "custom-dataset",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Custom Dataset",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "custom-image-editing-dataset",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Custom Image Editing Dataset",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "custom-neonatal-rat-ganglion-recordings",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "custom neonatal rat ganglion recordings",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "custom-propeller-and-rotating-snake-stimuli",
+   "download_bytes": 33202290,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "custom propeller and rotating-snake stimuli",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 33202290,
+    "kind": "http_archive",
+    "records_indexed": 7,
+    "snapshot_id": "custom-propeller-and-rotating-snake-stimuli-f41eac3bbe56927ac87d3c41"
+   }
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "custom-speech-segment-collection",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "custom speech segment collection",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "custom-ternus-psychophysics-responses",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "custom Ternus psychophysics responses",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "dall-e-generated-target-images",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "DALL-E generated target images",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "datacomp-1b",
+   "download_bytes": 10000000000,
+   "kind": "huggingface_remote_sample",
+   "maintainer_preview": false,
+   "name": "DataComp-1B",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": 339875509907,
+   "upper_bound": true
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "deepfashion",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "DeepFashion",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "div2k",
+   "download_bytes": 5000000,
+   "kind": "local",
+   "maintainer_preview": true,
+   "name": "DIV2K",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "docci",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "DOCCI image descriptions",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "docvqa",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "DocVQA",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "donkey-kong-rom",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Donkey Kong ROM",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "dreambooth",
+   "download_bytes": 112065318,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "Dreambooth",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "dtd",
+   "download_bytes": 625239812,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "DTD",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "e-ic",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "E-IC",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "e-vqa",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "E-VQA",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "emnist",
+   "download_bytes": 561753746,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "EMNIST",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "emnist-balanced",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "EMNIST Balanced",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "emnist-letters",
+   "download_bytes": 561753746,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "EMNIST Letters",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "emoset",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Emoset",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "eurosat",
+   "download_bytes": 94658721,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "EuroSAT",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 94658721,
+    "kind": "http_archive",
+    "records_indexed": 27000,
+    "snapshot_id": "zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90"
+   }
+  },
+  {
+   "category": "planned",
+   "dataset_id": "exams-v",
+   "download_bytes": 10000000000,
+   "kind": "huggingface_remote_sample",
+   "maintainer_preview": true,
+   "name": "EXAMS-V",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": 6442812293,
+   "upper_bound": true
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "facet",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "FACET",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "facial-expression-recognition-2013",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Facial Expression Recognition 2013",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "factoid",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "FACTOID",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "fairface",
+   "download_bytes": 2676767154,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "FairFace",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "fer-2013",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "FER-2013",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "ffhq",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "FFHQ",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "fgvc",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "FGVC",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "fgvc-aircraft",
+   "download_bytes": 2753340328,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "FGVC-Aircraft",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "figure-linked-source-data-spreadsheets",
+   "download_bytes": 78836,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "figure-linked source data spreadsheets",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 78836,
+    "kind": "http_archive",
+    "records_indexed": 7,
+    "snapshot_id": "figure-linked-source-data-spreadsheets-16996bf75bb5237276f9a737"
+   }
+  },
+  {
+   "category": "verified",
+   "dataset_id": "find",
+   "download_bytes": 2732606,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "FIND",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 2732606,
+    "kind": "http_archive",
+    "records_indexed": 2275,
+    "snapshot_id": "find-e48489e4709305aba567c5b9"
+   }
+  },
+  {
+   "category": "planned",
+   "dataset_id": "finevision",
+   "download_bytes": 10000000000,
+   "kind": "huggingface_remote_sample",
+   "maintainer_preview": false,
+   "name": "FineVision",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": 4645230556607,
+   "upper_bound": true
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "first-person-social-interactions-dataset",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "First-Person Social Interactions Dataset",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "flickr30k",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Flickr30k",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "flowers",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Flowers",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "flowers102",
+   "download_bytes": 344878000,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "Flowers102",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "foil-it",
+   "download_bytes": 171634562,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "FOIL it!",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "food101",
+   "download_bytes": 4996278331,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "Food101",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "gaussian-rubbish-examples",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Gaussian rubbish examples",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "gda-adversarial-image-variants",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "GDA adversarial image variants",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "glue-cola",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "GLUE CoLA",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "google-web-1t-corpus",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Google Web 1T Corpus",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "gpt-4v-filtered-vl-gender-subset",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "GPT-4V-filtered VL-Gender subset",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "gqa",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "GQA val-balanced",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "group-labels",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Group Labels",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "gvil",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "GVIL",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "gvil-paired-illusion-images",
+   "download_bytes": 26668357,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "GVIL paired illusion images",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "gyafc",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "GYAFC",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "hades",
+   "download_bytes": 10000000000,
+   "kind": "huggingface_remote_sample",
+   "maintainer_preview": true,
+   "name": "HADES",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": 697716274,
+   "upper_bound": true
+  },
+  {
+   "category": "planned",
+   "dataset_id": "hallusionbench",
+   "download_bytes": 146553615,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": true,
+   "name": "HallusionBench",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "halueval",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "HaluEval",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "harmbench",
+   "download_bytes": 0,
+   "kind": "local",
+   "maintainer_preview": true,
+   "name": "HarmBench text behaviors",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 0,
+    "kind": "local",
+    "records_indexed": 400,
+    "snapshot_id": "github-HarmBench-8e1604d1171fe8a48d8febecd22f600e462bdcdd-text-all"
+   }
+  },
+  {
+   "category": "planned",
+   "dataset_id": "hatefulillusion",
+   "download_bytes": 530693,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "HatefulIllusion",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "hc-bench",
+   "download_bytes": 0,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": true,
+   "name": "HC-Bench wild images",
+   "ready": false,
+   "requirements": [
+    "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "hellaswag-pro",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "HellaSwag-Pro",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "high-quality-hallucination-benchmark",
+   "download_bytes": 38405373,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "High-Quality Hallucination Benchmark",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "hod",
+   "download_bytes": 1215888315,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "HOD",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "iconqa",
+   "download_bytes": 1851278883,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "IconQA (original three subtasks)",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "ictcf",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "iCTCF",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "idenprof",
+   "download_bytes": 154714873,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "IdenProf v1.0",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 154714873,
+    "kind": "http_archive",
+    "records_indexed": 11000,
+    "snapshot_id": "idenprof-v1-1d506b7276f30c6cc769faf8de96ccfda2385c1ab72a72f3fc50ce45240c3f8c"
+   }
+  },
+  {
+   "category": "planned",
+   "dataset_id": "illuchar",
+   "download_bytes": 10000000000,
+   "kind": "huggingface_remote_sample",
+   "maintainer_preview": true,
+   "name": "IlluChar",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": 2794689321,
+   "upper_bound": true
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "illusionbench",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "IllusionBench+",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "illusionbench-3c643c29",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "IllusionBench",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "illusionmnist",
+   "download_bytes": 433034,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "IllusionMNIST",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "illusionvqa",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "IllusionVQA",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "illusory-vqa",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Illusory VQA",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "illusoryvqa",
+   "download_bytes": 2472743,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "IllusoryVQA",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "imagenet",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "ImageNet",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "imagenet-1k",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "ImageNet-1K",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "imagenet-a",
+   "download_bytes": 687552512,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "ImageNet-A",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "imagenet-c",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "ImageNet-C",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "imagenet-ilsvrc",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "ImageNet ILSVRC",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "imagenet-ilsvrc-2012",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "ImageNet ILSVRC 2012",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "imagenet-r",
+   "download_bytes": 2191079936,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "ImageNet-R",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "imagenet-sampled-1-000-images",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "ImageNet sampled 1,000 images",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "imagenet-segmentation",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "ImageNet-segmentation",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "imagenet-sketch",
+   "download_bytes": 20000000,
+   "kind": "local",
+   "maintainer_preview": true,
+   "name": "ImageNet-Sketch",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 0,
+    "kind": "local",
+    "records_indexed": 50889,
+    "snapshot_id": "imagenet-sketch-9b32a1d497b7bb9fbf74212a"
+   }
+  },
+  {
+   "category": "planned",
+   "dataset_id": "imagenet-v2",
+   "download_bytes": 1264079360,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "ImageNet-V2 (MatchedFrequency b-33)",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "imagenet100",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "ImageNet100",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "imagenette",
+   "download_bytes": 99003388,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "Imagenette",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 99003388,
+    "kind": "http_archive",
+    "records_indexed": 13394,
+    "snapshot_id": "imagenette2-160-sha256-64d0c4859f35a461889e0147755a999a48b49bf38a7e0f9bd27003f10db02fe5"
+   }
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "imagenetval",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "ImageNetVal",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "inaturalist",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "iNaturalist",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "interpbench",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "InterpBench",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "itac",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "ITAC",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "jailbreakv-28k",
+   "download_bytes": 0,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": true,
+   "name": "JailBreakV-28K",
+   "ready": false,
+   "requirements": [
+    "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "jiechieu-tsopze-resume-corpus",
+   "download_bytes": 169185415,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "Jiechieu-Tsopze resume corpus",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 169185415,
+    "kind": "http_archive",
+    "records_indexed": 29783,
+    "snapshot_id": "jiechieu-tsopze-resume-corpus-4de1664d91d46a45bcca87c7"
+   }
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "laion",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "LAION",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "laion-400m",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "LAION-400M",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "laion-aesthetics",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "LAION Aesthetics",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "language-identification-dataset",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "language-identification dataset",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "lingoqa",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "LingoQA",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "llava-bench",
+   "download_bytes": 0,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": true,
+   "name": "LLaVA-Bench",
+   "ready": false,
+   "requirements": [
+    "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "llava-instruct-150k",
+   "download_bytes": 248941895,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "LLaVA-Instruct-150K",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "llava-instruct-150k-3a74a703",
+   "download_bytes": 10000000000,
+   "kind": "huggingface_remote_sample",
+   "maintainer_preview": true,
+   "name": "LLaVA_Instruct_150k",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": 76639461610,
+   "upper_bound": true
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "maliciousinstruct",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "MaliciousInstruct",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "mathvision",
+   "download_bytes": 63893372,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": true,
+   "name": "MathVision",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 63893372,
+    "kind": "huggingface_columnar",
+    "records_indexed": 3344,
+    "snapshot_id": "mathvision-623739c2bc0a3b7bd81f360b"
+   }
+  },
+  {
+   "category": "planned",
+   "dataset_id": "medical-multimodal-evaluation-data",
+   "download_bytes": 25977328,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "Medical Multimodal Evaluation Data",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "miap",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "MIAP",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "middlebury",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Middlebury",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "mit-adobe-5k",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "MIT-Adobe 5k",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "mit-states",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "MIT States",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "mllmu-bench",
+   "download_bytes": 10000000000,
+   "kind": "huggingface_remote_sample",
+   "maintainer_preview": true,
+   "name": "MLLMU-Bench",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": 910765821,
+   "upper_bound": true
+  },
+  {
+   "category": "planned",
+   "dataset_id": "mm-safetybench",
+   "download_bytes": 499521873,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "MM-SafetyBench",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "mm-vet",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "MM-Vet",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "mma-diffusion",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "MMA-Diffusion",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "mmbench",
+   "download_bytes": 180890850,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "MMBench",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "mmbench-en-dev",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "MMBench English dev v1.0 (CircularEval)",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "mme",
+   "download_bytes": 199848448,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "MME",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "mme-perception",
+   "download_bytes": 199848448,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "MME-Perception",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "mmmu-dev",
+   "download_bytes": 56960272,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": true,
+   "name": "MMMU-dev",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "mmstar",
+   "download_bytes": 41798712,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": true,
+   "name": "MMStar",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "mnist",
+   "download_bytes": 11594722,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "MNIST",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 11594722,
+    "kind": "http_archive",
+    "records_indexed": 70000,
+    "snapshot_id": "mnist-gz-sha256-1380708c276834e082dc47a936e95f5bca5ac9f0fdbab891b17ac77badd8b079"
+   }
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "mrpc",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "MRPC (SentEval-hosted tokenized distribution)",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "ms-coco",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "MS-COCO",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "ms-coco-7f846b38",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "MS COCO",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "ms-coco-captions",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "MS-COCO captions",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "ms-cxr",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "MS-CXR",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "mscoco",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "MSCOCO",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "mscoco-100-target-subset",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "MSCOCO 100-target subset",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "multitrust",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "MultiTrust",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "mvbench-scene-qa",
+   "download_bytes": 0,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": false,
+   "name": "MVBench Scene QA",
+   "ready": false,
+   "requirements": [
+    "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "naturalbench",
+   "download_bytes": 10000000000,
+   "kind": "huggingface_remote_sample",
+   "maintainer_preview": true,
+   "name": "NaturalBench",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": 1141602282,
+   "upper_bound": true
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "nips17",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "NIPS17",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "nocaps",
+   "download_bytes": 9228851,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "NoCaps",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 9228851,
+    "kind": "http_archive",
+    "records_indexed": 15100,
+    "snapshot_id": "nocaps-612262fbfb6b7ec14cfe33be"
+   }
+  },
+  {
+   "category": "verified",
+   "dataset_id": "nrc-vad",
+   "download_bytes": 51024660,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "NRC-VAD",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 51024660,
+    "kind": "http_archive",
+    "records_indexed": 74772,
+    "snapshot_id": "nrc-vad-793836b83fcd9f286a19203b"
+   }
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "oasis",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "OASIS",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "objaverse",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Objaverse",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "objectnet",
+   "download_bytes": 1600000000,
+   "kind": "local",
+   "maintainer_preview": true,
+   "name": "ObjectNet",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": true
+  },
+  {
+   "category": "planned",
+   "dataset_id": "ok-vqa",
+   "download_bytes": 31433136,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "OK-VQA",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "omnisafebench-mm",
+   "download_bytes": 0,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": true,
+   "name": "OmniSafeBench-MM",
+   "ready": false,
+   "requirements": [
+    "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "omnispatial",
+   "download_bytes": 30000000,
+   "kind": "local",
+   "maintainer_preview": true,
+   "name": "OmniSpatial",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "openimages",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "OpenImages",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "ostris-dataset",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Ostris Dataset",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "oxfordpet",
+   "download_bytes": 811092049,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "Oxford-IIIT Pet",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "pairs",
+   "download_bytes": 19130645,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "PAIRS",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 19130645,
+    "kind": "http_archive",
+    "records_indexed": 200,
+    "snapshot_id": "author-git-507075ac84d244c4f98b965ba257b197d4944b04-tar-sha256-0fae5bead2cd5f38dabf8e50e2ebdd0157a29eceb59d963abf6d29b2ce8ec9db"
+   }
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "pairs-csv",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "Pach neuron-pair metric benchmark",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-08e415961919a492-unnamed-11-image-inpainting-set",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed 11-image inpainting set",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-08e415961919a492-unnamed-real-noise-benchmark-46",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed real-noise benchmark [46]",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-12e8bd34b4a2f2a8-unnamed-harmful-instruction-evaluation-set",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed harmful-instruction evaluation set",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-12e8bd34b4a2f2a8-unnamed-harmful-sentence-corpus",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed harmful sentence corpus",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-164d7c221452ffec-unnamed-cfd-morph-collection",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed CFD morph collection",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-1e2474b15fec2d7d-unnamed-controversial-stimuli-collection",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "Golan controversial stimuli shown to participants",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-2aa40aa13ed2a25b-unnamed-objaverse-spatial-images",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed Objaverse spatial images",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-2aa40aa13ed2a25b-unnamed-synthetic-spatial-training-set",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed synthetic spatial training set",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-collection",
+   "download_bytes": 0,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": false,
+   "name": "unnamed internet hidden-content collection",
+   "ready": false,
+   "requirements": [
+    "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-set",
+   "download_bytes": 0,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": false,
+   "name": "unnamed internet hidden-content set",
+   "ready": false,
+   "requirements": [
+    "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-63c3bd849356e00f-unnamed-robust-nonrobust-feature-collections",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed robust/nonrobust feature collections",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-6a7364738bac9f07-unnamed-online-illusion-repositories",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed online illusion repositories",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-72040eccb96ead7a-unnamed-synthetic-spheres-dataset",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed synthetic spheres dataset",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-728d8c0964b540ad-unnamed-youtube-image-collection",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed YouTube image collection",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-765a2362f8735bc4-unnamed-social-category-question-set",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed social-category question set",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-9036b4eaa048dc21-unnamed-neuron-pair-judgment-collection",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed neuron-pair judgment collection",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-944952997d24ce45-unnamed-van-gogh-painting-sample",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed Van Gogh painting sample",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-944952997d24ce45-unnamed-vma-candidate-pool",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed VMA candidate pool",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-959e8fc51787f7e4-unnamed-curated-internet-image-collection",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed curated internet image collection",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-959e8fc51787f7e4-unnamed-internet-image-tracing-set",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed internet image tracing set",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-959e8fc51787f7e4-unnamed-sea-otter-image-sample",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed sea-otter image sample",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-ab31cc6a994470fb-unnamed-human-adversarial-stimulus-collection",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed human adversarial-stimulus collection",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-c12960e5d652fb7f-unnamed-attack-generalization-collection",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed attack-generalization collection",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-f6dcb0e50d10ea38-unnamed-ai-generated-gender-image-attack-set",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed AI-generated gender-image attack set",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-f6dcb0e50d10ea38-unnamed-explicit-image-attack-set",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed explicit-image attack set",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-f6dcb0e50d10ea38-unnamed-historical-event-image-attack-set",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed historical-event image attack set",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-f6dcb0e50d10ea38-unnamed-product-screenshot-attack",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed product screenshot attack",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "paper-f6dcb0e50d10ea38-unnamed-public-figure-adversarial-image-set",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "unnamed public-figure adversarial image set",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "pascal-voc",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Pascal VOC",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "pata",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "PATA",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "perturbed-gender-benchmark-image-variants",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "perturbed gender-benchmark image variants",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "phantom",
+   "download_bytes": 145037610,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "PHANTOM",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "phase",
+   "download_bytes": 2583467043,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "PHASE",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "pitfall-rom",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Pitfall ROM",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "places",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Places",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "pmc-vqa",
+   "download_bytes": 99211254,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "PMC-VQA",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "pope",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "POPE",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "puzzlevqa",
+   "download_bytes": 61704981,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": true,
+   "name": "PuzzleVQA",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "qnli",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "GLUE QNLI v2",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "qqp",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "GLUE QQP clean",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "raise1k",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "RAISE1k",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "ravel",
+   "download_bytes": 429309,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "RAVEL",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "realtoxicityprompts",
+   "download_bytes": 0,
+   "kind": "local",
+   "maintainer_preview": true,
+   "name": "RealToxicityPrompts",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 0,
+    "kind": "local",
+    "records_indexed": 99442,
+    "snapshot_id": "hf-allenai-real-toxicity-prompts-f21629712ffd6a3d13a54fd2807ccd521c55ef74-4b680887"
+   }
+  },
+  {
+   "category": "planned",
+   "dataset_id": "realworldqa",
+   "download_bytes": 10000000000,
+   "kind": "huggingface_remote_sample",
+   "maintainer_preview": true,
+   "name": "RealWorldQA",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": 678331175,
+   "upper_bound": true
+  },
+  {
+   "category": "planned",
+   "dataset_id": "recap-datacomp-1b",
+   "download_bytes": 10000000000,
+   "kind": "huggingface_remote_sample",
+   "maintainer_preview": false,
+   "name": "Recap-DataComp-1B",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": 527439101358,
+   "upper_bound": true
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "restricted-imagenet",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Restricted ImageNet",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "ring-a-bell",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Ring-a-Bell",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "robustbench",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "RobustBench",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "roco",
+   "download_bytes": 13631396,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "ROCO",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "rosmap",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "ROSMAP",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "rs-vqa",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "RS-VQA",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "rsicd",
+   "download_bytes": 17470775,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "RSICD",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 12470775,
+    "kind": "http_archive",
+    "records_indexed": 10921,
+    "snapshot_id": "rsicd-c075cb66498b2669017f699b"
+   }
+  },
+  {
+   "category": "verified",
+   "dataset_id": "sad",
+   "download_bytes": 15535932,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "SAD",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 15535932,
+    "kind": "http_archive",
+    "records_indexed": 127176,
+    "snapshot_id": "sad-e7a8febddad8f30929faed1f"
+   }
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "saegis-clean-and-adversarial-splits",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "SAEgis clean and adversarial splits",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "safebench",
+   "download_bytes": 4729119604,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "SafeBench",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "sb-syn",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "SB-Syn",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "sb-syn-crop",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "SB-Syn-Crop",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "sbbench",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "SBBench",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "sbbench-syn",
+   "download_bytes": 10000000000,
+   "kind": "local",
+   "maintainer_preview": true,
+   "name": "SBBench-Syn",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": true
+  },
+  {
+   "category": "planned",
+   "dataset_id": "sbbench-syn-crop",
+   "download_bytes": 10000000000,
+   "kind": "local",
+   "maintainer_preview": true,
+   "name": "SBBench-Syn-Crop",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": true
+  },
+  {
+   "category": "planned",
+   "dataset_id": "sbbench-synthetic-age-crop-false",
+   "download_bytes": 10000000000,
+   "kind": "huggingface_remote_sample",
+   "maintainer_preview": true,
+   "name": "SBBench synthetic age, crop no",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": 430967656,
+   "upper_bound": true
+  },
+  {
+   "category": "planned",
+   "dataset_id": "sbbench-synthetic-age-crop-true",
+   "download_bytes": 10000000000,
+   "kind": "huggingface_remote_sample",
+   "maintainer_preview": true,
+   "name": "SBBench synthetic age, crop yes",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": 685318338,
+   "upper_bound": true
+  },
+  {
+   "category": "verified",
+   "dataset_id": "sbbench-synthetic-gender-crop-false",
+   "download_bytes": 237029151,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": true,
+   "name": "SBBench synthetic gender, crop no",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 237029151,
+    "kind": "huggingface_columnar",
+    "records_indexed": 206,
+    "snapshot_id": "sbbench-synthetic-gender-crop-false-ec72d8fbe39efd79f455bb3d"
+   }
+  },
+  {
+   "category": "planned",
+   "dataset_id": "sbbench-synthetic-gender-crop-true",
+   "download_bytes": 10000000000,
+   "kind": "huggingface_remote_sample",
+   "maintainer_preview": true,
+   "name": "SBBench synthetic gender, crop yes",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": 496951911,
+   "upper_bound": true
+  },
+  {
+   "category": "planned",
+   "dataset_id": "scienceqa-img",
+   "download_bytes": 10000000000,
+   "kind": "huggingface_remote_sample",
+   "maintainer_preview": true,
+   "name": "ScienceQA-IMG",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": 626082086,
+   "upper_bound": true
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "scrambled-mnist",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "scrambled MNIST",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "seed-bench-2",
+   "download_bytes": 68076410,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "SEED-Bench-2",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 18076410,
+    "kind": "http_archive",
+    "records_indexed": 24371,
+    "snapshot_id": "seed-bench-2-a0d334fc923e1c7a6176afcc"
+   }
+  },
+  {
+   "category": "verified",
+   "dataset_id": "seedbench",
+   "download_bytes": 57170715,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "SEEDBench",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 7170715,
+    "kind": "http_archive",
+    "records_indexed": 17990,
+    "snapshot_id": "seedbench-da76d562230a8abd77c827d9"
+   }
+  },
+  {
+   "category": "planned",
+   "dataset_id": "senator-tweets-2021",
+   "download_bytes": 232535302,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": true,
+   "name": "senator tweets 2021",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "set14",
+   "download_bytes": 0,
+   "kind": "local",
+   "maintainer_preview": true,
+   "name": "Set14",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "set5",
+   "download_bytes": 0,
+   "kind": "local",
+   "maintainer_preview": true,
+   "name": "Set5",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "shapes-localization",
+   "download_bytes": 0,
+   "kind": "local",
+   "maintainer_preview": true,
+   "name": "Shapes Localization",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 0,
+    "kind": "local",
+    "records_indexed": 400,
+    "snapshot_id": "shapes-localization-3160953ed274a46cce4c7929"
+   }
+  },
+  {
+   "category": "verified",
+   "dataset_id": "shapes-recognition",
+   "download_bytes": 0,
+   "kind": "local",
+   "maintainer_preview": true,
+   "name": "Shapes Recognition",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 0,
+    "kind": "local",
+    "records_indexed": 400,
+    "snapshot_id": "shapes-recognition-e71783f3f4a2f35334b7717e"
+   }
+  },
+  {
+   "category": "verified",
+   "dataset_id": "shapes-relations",
+   "download_bytes": 0,
+   "kind": "local",
+   "maintainer_preview": true,
+   "name": "Shapes Relations",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 0,
+    "kind": "local",
+    "records_indexed": 400,
+    "snapshot_id": "shapes-relations-f758d1064e7dde76dacba9c5"
+   }
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "shapeworld",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "ShapeWorld",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "shiftmnist",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "shiftMNIST",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "simplevqa",
+   "download_bytes": 10000000000,
+   "kind": "huggingface_remote_sample",
+   "maintainer_preview": true,
+   "name": "SimpleVQA",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": 415633984,
+   "upper_bound": true
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "simulated-transistor-traces",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "simulated transistor traces",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "smolim2-135m-10b",
+   "download_bytes": 10000000000,
+   "kind": "huggingface_remote_sample",
+   "maintainer_preview": false,
+   "name": "SmoLIM2-135M-10B",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": 25564441952,
+   "upper_bound": true
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "snli-ve",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "SNLI-VE",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "socialcounterfactuals",
+   "download_bytes": 10000000000,
+   "kind": "huggingface_remote_sample",
+   "maintainer_preview": true,
+   "name": "SocialCounterfactuals",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": 27215665580,
+   "upper_bound": true
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "sorrybench",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "SorryBench",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "space-10",
+   "download_bytes": 10000000000,
+   "kind": "huggingface_remote_sample",
+   "maintainer_preview": true,
+   "name": "Space-10",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": 872031458,
+   "upper_bound": true
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "space-invaders-rom",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Space Invaders ROM",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "spoken-wikipedia",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Spoken Wikipedia",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "sst2",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "SST-2 (GLUE distribution)",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "stanford-cars",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Stanford Cars",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "stl-10",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "STL-10",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "larger_budget",
+   "dataset_id": "sun397",
+   "download_bytes": 39095590629,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "SUN397",
+   "ready": false,
+   "requirements": [
+    "Source download exceeds the selected download budget.",
+    "Insufficient free space for source, cache, and the approved output budget."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "svhn",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "SVHN",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "svo-probes",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "SVO-Probes",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "t2i-compbench",
+   "download_bytes": 850742,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "T2I-CompBench",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "tdc2023",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "TDC2023",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "textvqa",
+   "download_bytes": 47521619,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "TextVQA",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "textvqa-x",
+   "download_bytes": 80452374,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "TextVQA-X",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 60452374,
+    "kind": "http_archive",
+    "records_indexed": 18096,
+    "snapshot_id": "textvqa-x-bf9facb587bcee835edb4de9"
+   }
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "the-pile",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "The Pile",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "tid2013",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "TID2013",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "timit",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "TIMIT",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "top16-images-csv",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "Pach top-16 ImageNet image references",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "turing-eye-test",
+   "download_bytes": 171526343,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": true,
+   "name": "Turing Eye Test",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 171526343,
+    "kind": "huggingface_columnar",
+    "records_indexed": 490,
+    "snapshot_id": "turing-eye-test-39e56b130b136e1cb01ffa62"
+   }
+  },
+  {
+   "category": "planned",
+   "dataset_id": "tweeteval",
+   "download_bytes": 14219197,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": true,
+   "name": "TweetEval",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "ucf101",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "UCF101",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "vg-qa-one",
+   "download_bytes": 679846716,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "VG_QA_one",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 679846716,
+    "kind": "http_archive",
+    "records_indexed": 1160,
+    "snapshot_id": "vg-qa-one-778f272eddecafe156619eac"
+   }
+  },
+  {
+   "category": "verified",
+   "dataset_id": "vg-qa-two",
+   "download_bytes": 679781210,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "VG_QA_two",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 679781210,
+    "kind": "http_archive",
+    "records_indexed": 288,
+    "snapshot_id": "vg-qa-two-50b9c7dfa7fece4e4d437506"
+   }
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "vhd11k",
+   "download_bytes": 0,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": true,
+   "name": "VHD11K",
+   "ready": false,
+   "requirements": [
+    "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "via-bench",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "VIA-Bench",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "vibeeval",
+   "download_bytes": 205284291,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": true,
+   "name": "VibeEval",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 205284291,
+    "kind": "huggingface_columnar",
+    "records_indexed": 269,
+    "snapshot_id": "vibeeval-06e50ebbe9d1d153943dc6bd"
+   }
+  },
+  {
+   "category": "gated",
+   "dataset_id": "visu",
+   "download_bytes": 0,
+   "kind": null,
+   "maintainer_preview": false,
+   "name": "VISU",
+   "ready": false,
+   "requirements": [
+    "This release is gated. Obtain authorized local files and configure its adapter."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "gated",
+   "dataset_id": "visu-text",
+   "download_bytes": 0,
+   "kind": null,
+   "maintainer_preview": false,
+   "name": "ViSU-Text",
+   "ready": false,
+   "requirements": [
+    "This release is gated. Obtain authorized local files and configure its adapter."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "visual-counterfact",
+   "download_bytes": 10000000000,
+   "kind": "huggingface_remote_sample",
+   "maintainer_preview": true,
+   "name": "Visual-Counterfact",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": 319019525,
+   "upper_bound": true
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "visual-counterfact-filtered-467",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Visual-Counterfact filtered 467",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "visual-genome",
+   "download_bytes": 889755309,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "Visual Genome",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "visual6502-transistor-netlist",
+   "download_bytes": 265349,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "Visual6502 transistor netlist",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "visualpuzzle",
+   "download_bytes": 142706932,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": true,
+   "name": "VisualPuzzle",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 142706932,
+    "kind": "huggingface_columnar",
+    "records_indexed": 1168,
+    "snapshot_id": "visualpuzzle-3f81e0be6ddc0465405b8417"
+   }
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "visualqa",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "visualQA",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "vizwiz",
+   "download_bytes": 29938456,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "VizWiz",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "vizwiz-priv",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "VizWiz-priv",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "vl-gender",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "VL-Gender",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "vlagenderbias",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "VLAGenderBias",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "vqa-constraints",
+   "download_bytes": 4050868183,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "VQA-Constraints",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "vqa-v2",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "VQA v2",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "vqa-v2-m-n-subsets",
+   "download_bytes": 2102911,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "VQA v2 m+n subsets",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "vsr",
+   "download_bytes": 34977421,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "VSR",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "vtab",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "VTAB",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "wall-street-journal",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "Wall Street Journal",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "waterbirds",
+   "download_bytes": 489698023,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "Waterbirds",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "planned",
+   "dataset_id": "what-s-up",
+   "download_bytes": 861230174,
+   "kind": "http_archive",
+   "maintainer_preview": true,
+   "name": "What's Up",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "whoops",
+   "download_bytes": 0,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": true,
+   "name": "WHOOPS!",
+   "ready": false,
+   "requirements": [
+    "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "wilds",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "WILDS",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "gated",
+   "dataset_id": "winoground",
+   "download_bytes": 0,
+   "kind": null,
+   "maintainer_preview": false,
+   "name": "Winoground",
+   "ready": false,
+   "requirements": [
+    "This release is gated. Obtain authorized local files and configure its adapter."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "verified",
+   "dataset_id": "wmdp",
+   "download_bytes": 1114566,
+   "kind": "huggingface_columnar",
+   "maintainer_preview": true,
+   "name": "WMDP",
+   "ready": true,
+   "requirements": [],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 1114566,
+    "kind": "huggingface_columnar",
+    "records_indexed": 3668,
+    "snapshot_id": "wmdp-4687eb325b7c41af75cc2465"
+   }
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "wnli",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": true,
+   "name": "GLUE WNLI",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  },
+  {
+   "category": "no_recipe",
+   "dataset_id": "zerobench",
+   "download_bytes": 0,
+   "kind": "unconfigured",
+   "maintainer_preview": false,
+   "name": "ZeroBench",
+   "ready": false,
+   "requirements": [
+    "A pinned acquisition recipe or authorized local source is required for this release."
+   ],
+   "source_bytes": null,
+   "upper_bound": false
+  }
+ ],
+ "generated_at": "2026-10-01T03:48:25.394034+00:00",
+ "maintainer_previews": 169,
+ "maintainer_previews_reproducible": 131,
+ "per_dataset_budget_bytes": 10000000000,
+ "summary": {
+  "gated": 3,
+  "larger_budget": 1,
+  "no_recipe": 195,
+  "other": 0,
+  "planned": 92,
+  "verified": 42
+ }
+}

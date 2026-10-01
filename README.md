@@ -1,34 +1,50 @@
 # Dataset Atlas
 
-Browse evidence-linked datasets, inspect real records, save reproducible selections, and attach optional local analysis. The same React frontend runs as a static site or with a loopback Python workbench.
+One place to explore datasets, mostly multimodal ones: a searchable catalogue of the datasets and benchmarks in a paper corpus, real examples with their annotations, reproducible filters and selections, optional analysis on the same samples, and your own datasets alongside them. It runs on your machine; the same React interface also builds as a static site.
 
-The workbench and static browser are implemented, with **333 catalogue entries, 169 prepared local previews (16,446 records), and 164 canonical full-scope indices**. Full-scope indices describe their acquired populations; some have partial media. This is **not a completed v1 release** of [SPEC.md](SPEC.md): 164 entries have no preview. All 64 paper mention inventories have been checked against the full text, but exact release identity and dataset coverage remain incomplete. See the [remaining roadmap](ROADMAP.md), [latest native verification](reports/native-expansion-20260924.md), [corpus coverage](reports/corpus_coverage.md), [dataset coverage](reports/dataset_coverage.csv), [source access](reports/source_access_report.md), and [release evidence](reports/release_evidence.md). Paper mention evidence does not by itself resolve a dataset release. Metadata-only entries are not browsable datasets.
+## Quick start
 
-## Run locally
+```bash
+uv tool install ./dataset_atlas-0.2.0-py3-none-any.whl     # a release wheel; no Node, no checkout
+atlas init ~/atlas && cd ~/atlas                           # a workspace with the 333-entry catalogue
+atlas serve                                                # open http://127.0.0.1:8765/
+atlas previews fetch --execute --total-download-bytes 10000000000    # optional: fetch many previews at once
+```
+
+Everything is explained in **[Getting started](docs/getting-started.md)**; to browse your own folders, tables or Hugging Face datasets see **[Adding your own datasets](docs/adding-your-own-datasets.md)**. From a repository checkout instead: `uv sync && npm --prefix apps/web ci && npm --prefix apps/web run build && uv run atlas serve`.
+
+A fresh workspace holds the catalogue but no data. Each dataset says what you can do with it: **Preview available** (100 real examples are here), **Preview on request** (fetch it from the original publisher after reviewing the size), or **Metadata only** (no acquisition path yet, or gated; the page says which). Nothing downloads until you approve a plan, and previews are never presented as whole datasets.
+
+## Status
+
+This is a working release, not a finished v1 of [SPEC.md](SPEC.md). Measured on 2026-10-01 ([evidence](reports/preview-reproducibility.md)):
+
+- **333 catalogue entries** from all 64 corpus papers. Each mention is checked against the paper text; exact release identity is still open for many ([corpus coverage](reports/corpus_coverage.md), [dataset coverage](reports/dataset_coverage.csv)).
+- **Previews you can fetch yourself:** 42 datasets were fetched from an empty workspace and verified; 92 more have a ready source plan and are being verified; the rest of the maintainer's 169 previews need a pinned recipe. Datasets with no acquisition path are implementation gaps unless the report says the source is gated or unreleased.
+- The maintainer's workspace additionally holds complete indexes for 164 populations; see the [roadmap](ROADMAP.md) for what remains and [release evidence](reports/release_evidence.md) for the acceptance matrix.
+
+Paper mention evidence does not by itself resolve a dataset release. Metadata-only entries are not browsable datasets.
+
+## Run from a checkout
 
 Python 3.12 and Node 22+ are used for development. `uv.lock` and `apps/web/package-lock.json` pin the resolved environments.
 
 ```bash
 uv sync --extra development --extra projection
-cd apps/web
-npm ci
-npm run build
-cd ../..
+npm --prefix apps/web ci && npm --prefix apps/web run build
 uv run atlas serve
 ```
 
-Use **Prepare full data** on a dataset to review its pinned source plan, set budgets, and start or resume local preparation. See [on-demand preparation](docs/on-demand-preparation.md) and [implementation evidence](reports/on-demand-implementation.md).
+Use **Get preview** or **Prepare full data** on a dataset to review its pinned source plan, set budgets, and start or resume local preparation. See [on-demand preparation](docs/on-demand-preparation.md) and [implementation evidence](reports/on-demand-implementation.md). The default browser route on a workbench is the workbench; a static host serves the public build, which makes no privileged localhost connection.
 
-For large collections, [the storage policy](docs/storage.md) preserves original-quality, full-resolution previews and compresses other images on demand into a bounded AVIF cache. Original bytes remain available for inspection and model inputs. The local 2026-09-24 storage pass measured 147.60 GB, within the requested 150 GB ceiling and above the 100 GB target, including configured model weights, pinned Cauldron preview originals, and newly registered native archives. See [the storage receipt](reports/storage-footprint-20260924.json) for accounting limits.
+For large collections, [the storage policy](docs/storage.md) preserves original-quality, full-resolution previews and compresses other images on demand into a bounded AVIF cache. Original bytes remain available for inspection and model inputs. See [the storage receipt](reports/storage-footprint-20260924.json) for the maintainer's measurement and its accounting limits.
 
-Open **http://127.0.0.1:8765/?mode=workbench**. The default browser route is static mode and makes no privileged localhost connection. Local preview packs live under `work/packs/`; to install the redistributable demonstration packs into a fresh checkout:
+Static mode needs no Python or models. Build it with `npm run build` in `apps/web`, or use `npm run dev` during development. The catalogue and approved previews are generated into `apps/web/public/data` by the explicit publication command. Only the redistributable demonstration packs (CLEVR, PAIRS, EuroSAT) are approved for it; to install them into a workspace:
 
 ```bash
 mkdir -p work/packs
 cp -R examples/approved-packs/. work/packs/
 ```
-
-Static mode needs no Python or models. Build it with `npm run build` in `apps/web`, or use `npm run dev` during development. The catalogue and approved previews are generated into `apps/web/public/data` by the explicit publication command. No backend is needed after building.
 
 ## The interface
 
@@ -99,7 +115,9 @@ The release builder embeds the built frontend in the wheel. Install the resultin
 
 - [Interface architecture](docs/interface.md): the shell, the interaction contract, and the honesty rules the components enforce.
 - [Shared contracts](docs/contracts.md): Pydantic is the schema source of truth; TypeScript is generated.
-- [Adding datasets](docs/adding-datasets.md): reusable mappings, coverage, and evidence.
+- [Getting started](docs/getting-started.md): install, fetch previews, where things live, updating.
+- [Adding your own datasets](docs/adding-your-own-datasets.md): folders, tables and Hugging Face datasets, from the interface or the CLI.
+- [Adding catalogue datasets](docs/adding-datasets.md): adapters, recipes, mappings, coverage and evidence.
 - [Remote workbench](docs/remote-workbench.md): existing mounts and SSH tunnelling.
 - [Publication](docs/publication.md): explicit rights and media allowlists.
 

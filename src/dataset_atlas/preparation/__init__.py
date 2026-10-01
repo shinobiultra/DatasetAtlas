@@ -115,6 +115,20 @@ class PreparationManager:
             return sample
         return download
 
+    @staticmethod
+    def _no_path_message(dataset):
+        """Say whose gap this is: Atlas's, the source's, or unknown. Never present a missing adapter as a restriction."""
+        access = dataset.coverage.access
+        if access == 'public':
+            return ('Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a '
+                    'restriction by the source (see docs/adding-datasets.md).')
+        if access == 'unreleased':
+            return 'The authors have not released this data, so there is nothing to fetch; the entry records where it is described.'
+        if access in {'gated', 'request_required', 'author_request_required'}:
+            return 'This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it.'
+        return ('Atlas has no acquisition path for this release, and its public availability has not been verified. '
+                'Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md).')
+
     def _plan(self, dataset_id, max_download_bytes, max_output_bytes, source_mode="download"):
         if any(type(n) is not int or not 1 <= n <= 10_000_000_000_000 for n in (max_download_bytes, max_output_bytes)):
             raise ValueError('Positive download and output limits of at most 10 TB are required')
@@ -258,7 +272,7 @@ class PreparationManager:
                     plan['requirements'].append('No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required.')
         else:
             plan['kind'] = 'unconfigured'
-            plan['requirements'].append('A pinned acquisition recipe or authorized local source is required for this release.')
+            plan['requirements'].append(self._no_path_message(dataset))
         if source_mode=='selective':
             if plan.get('kind')=='huggingface_columnar' and plan['files'] and all(f['format']=='parquet' for f in plan['files']):
                 plan['kind']='huggingface_remote_columnar'

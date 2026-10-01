@@ -273,3 +273,18 @@ def test_remote_zip_plans_report_bounded_reads_instead_of_zero_bytes(tmp_path):
     assert 'not downloaded' in plan['media_access']
     too_small = PreparationManager(tmp_path).plan('big', 100_000_000, 10**9)
     assert too_small['ready'] is False and 'exceeds the selected download budget' in ' '.join(too_small['requirements'])
+
+
+@pytest.mark.parametrize('access,fragment', [
+    ('public', 'gap in Atlas, not a restriction by the source'),
+    ('unreleased', 'have not released this data'),
+    ('gated', 'needs approval or an agreement'),
+    ('request_required', 'needs approval or an agreement'),
+    ('unverified', 'availability has not been verified'),
+])
+def test_a_missing_acquisition_path_says_whose_gap_it_is(tmp_path, access, fragment):
+    (tmp_path / 'registry/datasets').mkdir(parents=True)
+    entry = Dataset(id='d', name='D', adapter='unknown_adapter', coverage=Coverage(access=access))
+    (tmp_path / 'registry/datasets/d.yaml').write_text(yaml.safe_dump(entry.model_dump(mode='json')))
+    plan = PreparationManager(tmp_path).plan('d', 10**6, 10**6)
+    assert plan['ready'] is False and any(fragment in message for message in plan['requirements'])

@@ -26,7 +26,8 @@ CATEGORIES = [
     ('planned', 'A source plan is ready within the budget; not yet fetched from an empty workspace', 'Fetchable, not yet verified'),
     ('larger_budget', 'Fetchable, but the source is larger than the per-dataset budget used here', 'Needs a larger download budget'),
     ('gated', 'Source requires an account, agreement or approval; Atlas does not bypass it', 'Gated at the source'),
-    ('no_recipe', 'No pinned acquisition recipe or adapter yet: an implementation gap, not a source restriction', 'No acquisition path yet'),
+    ('no_recipe', 'No pinned acquisition recipe or adapter yet. For a public source this is a gap in Atlas; where availability is unverified, source research comes first', 'No acquisition path yet'),
+    ('unreleased', 'The authors have not released this data; nothing can be fetched', 'Unreleased'),
     ('other', 'Another stated requirement', 'Other'),
 ]
 
@@ -37,9 +38,11 @@ def classify(plan: dict) -> str:
     text = ' '.join(plan.get('requirements', [])).lower()
     if 'exceeds the selected download budget' in text:
         return 'larger_budget'
-    if 'gated' in text:
+    if 'gated' in text or 'needs approval or an agreement' in text:
         return 'gated'
-    if 'recipe' in text or 'adapter implementation missing' in text or 'authorized local source' in text:
+    if 'unreleased' in text or 'have not released' in text:
+        return 'unreleased'
+    if 'no pinned acquisition recipe' in text or 'no acquisition path' in text or 'adapter implementation missing' in text or 'authorized local source' in text:
         return 'no_recipe'
     return 'other'
 

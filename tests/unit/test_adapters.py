@@ -540,3 +540,43 @@ def test_remote_images_without_a_pinned_etag_are_refused(tmp_path: Path):
     adapter = get_adapter(dataset(tmp_path, "vqa_v2", config))
     with pytest.raises(ValueError, match="strong ETag"):
         adapter.plan(1, 1000)
+
+
+def test_full_clevr_reads_questions_and_media_by_range_with_identical_records(tmp_path: Path, monkeypatch):
+    from dataset_atlas.adapters.remote_media import RemoteZip
+    archive_path = tmp_path / "CLEVR_v1.0.zip"
+    counts = {"train": 110, "val": 10, "test": 5}
+    with zipfile.ZipFile(archive_path, "w", zipfile.ZIP_DEFLATED) as archive:
+        for split, count in counts.items():
+            rows = [{"question_index": i, "image_filename": f"CLEVR_{split}_{i:06d}.png", "question": f"Question {i}?", "answer": "yes", "program": []}
+                    for i in range(count)]
+            archive.writestr(f"CLEVR_v1.0/questions/CLEVR_{split}_questions.json", json.dumps({"info": {"release": "v1"}, "questions": rows}))
+            for i in range(count):
+                archive.writestr(f"CLEVR_v1.0/images/{split}/CLEVR_{split}_{i:06d}.png", b"\x89PNG\r\n\x1a\nfixture " + f"{split}{i}".encode())
+    local = get_adapter(dataset(tmp_path, "clevr_full", {
+        "archive": str(archive_path), "prepared_root": str(tmp_path / "prepared-local"),
+        "archive_sha256": hashlib.sha256(archive_path.read_bytes()).hexdigest()}))
+    local_source = local.prepare(local.plan(120, 100_000))
+    local_rows = local.iter_records(local_source, limit=125).records
+
+    class Range:
+        def __init__(self): self._s, self.size = archive_path.open("rb"), archive_path.stat().st_size
+        def readable(self): return True
+        def seekable(self): return True
+        def tell(self): return self._s.tell()
+        def seek(self, o, w=0): return self._s.seek(o, w)
+        def read(self, n=-1): return self._s.read(n)
+        def close(self): self._s.close()
+        def __enter__(self): return self
+        def __exit__(self, *e): self.close()
+    monkeypatch.setattr(RemoteZip, "reader", lambda self, budget: Range())
+    remote = get_adapter(dataset(tmp_path, "clevr_full", {
+        "remote_archive": {"url": f"https://example.com/{tmp_path.name}/CLEVR_v1.0.zip", "bytes": archive_path.stat().st_size,
+                           "etag": '"clevr-etag"', "allowed_hosts": ["example.com"]},
+        "remote_cache_root": str(tmp_path / "remote-cache"), "prepared_root": str(tmp_path / "prepared-remote")}))
+    assert remote.probe().exists
+    remote_source = remote.prepare(remote.plan(120, 100_000))
+    remote_rows = remote.iter_records(remote_source, limit=125).records
+    assert [(r.id, r.asset_ids, r.source["split"], r.question) for r in local_rows] == [(r.id, r.asset_ids, r.source["split"], r.question) for r in remote_rows]
+    assert json.loads((tmp_path / "prepared-remote" / "questions-index.json").read_text())["archive_sha256"] == 'remote-etag:"clevr-etag"'
+    assert remote.resolve_asset(remote_source, remote_rows[112].assets[0].uri).data == b"\x89PNG\r\n\x1a\nfixture val2"

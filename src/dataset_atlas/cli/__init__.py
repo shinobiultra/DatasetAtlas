@@ -249,7 +249,22 @@ def main(argv=None):
         elif args.command=='doctor':
             checks={name:importlib.util.find_spec(name) is not None for name in ['fastapi','duckdb','pyarrow','nudenet','torchvision','transformers','sentence_transformers','lancedb','umap']}
             from dataset_atlas.registry import Registry
-            emit({'workspace':str(root),'writable':os.access(root,os.W_OK),'datasets':len(Registry(root).datasets()),'dependencies':checks,'frontend_built':(root/'apps/web/dist/index.html').exists() or (Path(__file__).resolve().parents[1]/'web/index.html').exists(),'providers':'Not probed; no network requests performed','downloads':0})
+            import shutil
+            issues=[]
+            catalogue=(root/'registry/datasets').is_dir()
+            if not catalogue:issues.append(f'No catalogue in {root}: run `atlas init {root}` to create a workspace.')
+            frontend=(root/'apps/web/dist/index.html').exists() or (Path(__file__).resolve().parents[1]/'web/index.html').exists()
+            if not frontend:issues.append('The interface is not built: install a release wheel, or run `npm --prefix apps/web ci && npm --prefix apps/web run build`.')
+            free=shutil.disk_usage(root).free
+            if free<5_000_000_000:issues.append(f'Only {free/1e9:.1f} GB free on the workspace disk; previews and indexes need room.')
+            from dataset_atlas.storage.optimized import storage_policy
+            policy=storage_policy(root) or {}
+            for external in policy.get('external_roots',[]):
+                if not Path(external).is_dir():issues.append(f'Configured storage root does not exist: {external}. Preparations are refused until it is fixed: re-run `atlas storage configure` with --external-root for each root that still exists.')
+            datasets=Registry(root).datasets() if catalogue else []
+            user=[d.id for d in datasets if d.origin=='user']
+            emit({'workspace':str(root),'writable':os.access(root,os.W_OK),'datasets':len(datasets),'your_datasets':user,'free_bytes':free,'dependencies':checks,'frontend_built':frontend,'issues':issues,'providers':'Not probed; no network requests performed','downloads':0})
+            if issues:return 1
         elif args.command=='publish':
             from dataset_atlas.exports import build_publication,validate_publication
             if args.profile!='public':raise ValueError('Only explicitly configured public profile is available')

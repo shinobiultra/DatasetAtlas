@@ -258,3 +258,18 @@ def test_an_unmeasurable_storage_root_is_named_instead_of_blamed_on_free_space(t
     assert plan['ready'] is False
     text = ' '.join(plan['requirements'])
     assert '/models/gone' in text and 'local-config/storage.json' in text and 'insufficient space' not in text
+
+
+def test_remote_zip_plans_report_bounded_reads_instead_of_zero_bytes(tmp_path):
+    """A plan that reads archive directories and member ranges must not claim to cost nothing."""
+    from dataset_atlas.preparation import PreparationManager
+    (tmp_path / 'registry/datasets').mkdir(parents=True)
+    entry = Dataset(id='big', name='Big', adapter='clevr_full', coverage=Coverage(total_count=5), adapter_config={
+        'remote_archive': {'url': 'https://example.com/a.zip', 'bytes': 10**10, 'etag': '"e"', 'allowed_hosts': ['example.com']},
+        'remote_cache_root': 'work/media-cache/big', 'prepared_root': 'work/sources/big', 'remote_metadata_bytes': 123_000_000})
+    (tmp_path / 'registry/datasets/big.yaml').write_text(yaml.safe_dump(entry.model_dump(mode='json')))
+    plan = PreparationManager(tmp_path).plan('big', 10**9, 10**9)
+    assert plan['expected_download_bytes'] == 123_000_000 and plan['download_is_upper_bound'] is True
+    assert 'not downloaded' in plan['media_access']
+    too_small = PreparationManager(tmp_path).plan('big', 100_000_000, 10**9)
+    assert too_small['ready'] is False and 'exceeds the selected download budget' in ' '.join(too_small['requirements'])

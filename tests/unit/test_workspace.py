@@ -61,3 +61,22 @@ def test_commands_in_an_uninitialised_directory_point_at_init(tmp_path, capsys):
     assert main(['--root', str(tmp_path), 'serve']) == 1
     assert 'atlas init' in capsys.readouterr().err
     assert main(['--root', str(tmp_path), 'previews', 'status']) == 1
+
+
+def test_doctor_reports_actionable_issues_and_exits_nonzero(tmp_path, capsys):
+    import json
+    (tmp_path / 'registry/datasets').mkdir(parents=True)
+    (tmp_path / 'local-config').mkdir()
+    (tmp_path / 'local-config/storage.json').write_text(json.dumps({
+        'target_bytes': 10, 'ceiling_bytes': 20, 'optimized_cache_bytes': 5, 'enforce_preparation_ceiling': True,
+        'external_roots': [str(tmp_path / 'a-model-folder-that-was-removed')]}))
+    assert main(['--root', str(tmp_path), 'doctor']) == 1
+    report = json.loads(capsys.readouterr().out)
+    assert any('a-model-folder-that-was-removed' in issue and 'atlas storage configure' in issue for issue in report['issues'])
+    assert report['datasets'] == 0 and report['downloads'] == 0
+
+
+def test_doctor_in_an_uninitialised_directory_points_at_init(tmp_path, capsys):
+    import json
+    assert main(['--root', str(tmp_path), 'doctor']) == 1
+    assert any('atlas init' in issue for issue in json.loads(capsys.readouterr().out)['issues'])

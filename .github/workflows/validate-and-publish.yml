@@ -88,6 +88,11 @@ jobs:
         run: |
           python scripts/build_release.py
           python scripts/verify_distribution.py
+      # The wheel embeds the interface and the catalogue: `uv tool install` it, then `atlas init DIR` (docs/getting-started.md).
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dataset-atlas-wheel
+          path: dist/*.whl
 
   python-current:
     runs-on: ubuntu-latest

@@ -181,3 +181,24 @@ def test_derived_overlay_is_pinned_and_joins_by_snapshot_and_id(tmp_path):
     args[3].write_text(json.dumps(policy))
     with pytest.raises(PublicationError, match="Incomplete"):
         validate_publication(*args)
+
+
+def test_user_origin_datasets_and_workspace_availability_never_reach_a_public_build(tmp_path):
+    import json
+    import yaml
+    from dataset_atlas.exports import build_publication, validate_publication
+    from dataset_atlas.exports.publication import PublicationError
+    from dataset_atlas.models import Availability, Coverage, Dataset
+    registry = tmp_path / 'registry'
+    (registry / 'datasets').mkdir(parents=True)
+    shipped = Dataset(id='shipped', name='Shipped', coverage=Coverage(preview_count=3), availability=Availability(preview='local'))
+    (registry / 'datasets/shipped.yaml').write_text(yaml.safe_dump(shipped.model_dump(mode='json')))
+    (tmp_path / 'profile.json').write_text(json.dumps({'schema_version': '1.0', 'datasets': {}}))
+    report = build_publication(registry, tmp_path / 'packs', tmp_path / 'site', tmp_path / 'profile.json')
+    catalogue = json.loads((tmp_path / 'site/data/catalogue.json').read_text())
+    assert report.catalogue_count == 1 and 'availability' not in catalogue[0]
+    mine = Dataset(id='mine', name='Mine', origin='user')
+    (registry / 'datasets/mine.yaml').write_text(yaml.safe_dump(mine.model_dump(mode='json')))
+    import pytest
+    with pytest.raises(PublicationError, match='never published'):
+        validate_publication(registry, tmp_path / 'packs', tmp_path / 'site2', tmp_path / 'profile.json')

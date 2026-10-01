@@ -240,3 +240,21 @@ def test_a_reviewed_recipe_snapshot_id_wins_and_local_plans_keep_their_own():
     from dataset_atlas.preparation import snapshot_for
     assert snapshot_for('ds', acquired('/w', recipe_snapshot_id='ds-reviewed'), 'p', '/w') == 'ds-reviewed'
     assert snapshot_for('ds', acquired('/w', files=[]), 'plan-hash-xyz', '/w') == 'ds-plan-hash-xyz'
+
+
+def test_an_unmeasurable_storage_root_is_named_instead_of_blamed_on_free_space(tmp_path, monkeypatch):
+    """Admission fails closed when usage cannot be measured, and says why, so the fix is obvious."""
+    from dataset_atlas.preparation import PreparationManager
+    import dataset_atlas.storage.optimized as optimized
+    (tmp_path / 'registry/datasets').mkdir(parents=True)
+    from dataset_atlas.models import Dataset
+    (tmp_path / 'registry/datasets/d.yaml').write_text(yaml.safe_dump(Dataset(id='d', name='D', adapter='structured',
+        adapter_config={'path': str(tmp_path / 'f.json')}, coverage=Coverage(total_count=1)).model_dump(mode='json')))
+    (tmp_path / 'f.json').write_text('[{"a": 1}]')
+    monkeypatch.setattr(optimized, 'preparation_headroom', lambda *a, **k: {
+        'admitted': False, 'measurement_errors': [{'path': '/models/gone', 'error': 'Configured storage root is missing or not a directory'}],
+        'ceiling_bytes': 1, 'allocated_workspace_bytes': 0, 'available_bytes': 1, 'required_bytes': 1, 'reserved_by_running_preparations': 0})
+    plan = PreparationManager(tmp_path).plan('d', 10**6, 10**6)
+    assert plan['ready'] is False
+    text = ' '.join(plan['requirements'])
+    assert '/models/gone' in text and 'local-config/storage.json' in text and 'insufficient space' not in text

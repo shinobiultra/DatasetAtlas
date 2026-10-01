@@ -52,6 +52,8 @@ def _registry(registry_dir: Path) -> list[Dataset]:
             raise PublicationError(f"Invalid registry dataset: {path.name}") from exc
         if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]*", dataset.id):
             raise PublicationError(f"Unsafe dataset ID: {dataset.id}")
+        if dataset.origin != "catalogue":
+            raise PublicationError(f"{dataset.id}: datasets added from local storage are never published")
         datasets.append(dataset)
     if len({dataset.id for dataset in datasets}) != len(datasets):
         raise PublicationError("Duplicate dataset ID in registry")
@@ -93,7 +95,8 @@ def _profile(path: Path, ids: set[str]) -> dict[str, dict[str, Any]]:
 
 def _public_dataset(dataset: Dataset) -> dict[str, Any]:
     # Construct explicitly; registry evidence, adapter config and paper text never enter output.
-    value = dataset.model_dump(mode="json", exclude={"adapter_config", "evidence", "relationships"})
+    # `availability` describes one workspace, not the catalogue; it must never be published.
+    value = dataset.model_dump(mode="json", exclude={"adapter_config", "evidence", "relationships", "availability"})
     value["adapter_config"] = {}
     value["evidence"] = []
     # Publish navigable relationships without private alias receipts or excerpts.

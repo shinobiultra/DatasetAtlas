@@ -180,3 +180,33 @@ def test_huggingface_credentials_are_local_and_not_forwarded_to_cdn(monkeypatch,
     assert requests[0][1]['Authorization'] == 'Bearer hf_fixture_secret'
     assert 'Authorization' not in requests[1][1]
     assert all(b'hf_fixture_secret' not in path.read_bytes() for path in (tmp_path/'cache').rglob('*') if path.is_file())
+
+
+def test_wildcard_host_admits_only_subdomains_of_the_named_suffix():
+    from dataset_atlas.storage import HttpsFetcher
+    fetcher = HttpsFetcher(['example.org', '*.cdn.example.net'])
+    # Exact entries still match exactly; the wildcard needs a label in front of the suffix.
+    for allowed in ('example.org', 'abc123.cdn.example.net', 'a.b.cdn.example.net'):
+        assert allowed in fetcher.allowed_hosts or allowed.endswith(fetcher.allowed_suffixes)
+    for refused in ('cdn.example.net', 'evilcdn.example.net', 'cdn.example.net.evil.com', 'sub.example.org'):
+        assert refused not in fetcher.allowed_hosts and not refused.endswith(fetcher.allowed_suffixes)
+
+
+def test_wildcard_only_configuration_is_valid_but_a_bare_star_is_not():
+    import pytest
+    from dataset_atlas.storage import HttpsFetcher
+    assert HttpsFetcher(['*.cdn.example.net']).allowed_suffixes == ('.cdn.example.net',)
+    with pytest.raises(ValueError):
+        HttpsFetcher(['*.'])
+    with pytest.raises(ValueError):
+        HttpsFetcher(['*'])
+
+
+def test_unlisted_destination_is_refused_before_any_connection():
+    import pytest
+    from dataset_atlas.storage import HttpsFetcher
+    fetcher = HttpsFetcher(['*.cdn.example.net'])
+    with pytest.raises(ValueError, match='not allowlisted'):
+        fetcher._destination('https://cdn.example.net/file')
+    with pytest.raises(ValueError, match='not allowlisted'):
+        fetcher._destination('https://evil.example.org/file')

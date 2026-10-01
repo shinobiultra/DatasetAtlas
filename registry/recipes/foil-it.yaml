@@ -25,6 +25,8 @@ allowed_hosts:
 - www.dropbox.com
 - dl.dropboxusercontent.com
 - www.dropboxusercontent.com
+# Dropbox redirects each download to a fresh random subdomain of dl.dropboxusercontent.com.
+- '*.dl.dropboxusercontent.com'
 remote_metadata_bytes: 40000000
 adapter_config:
   annotations:

@@ -317,7 +317,9 @@ class StructuredAdapter(DatasetAdapter):
                     if line.strip():
                         yield json.loads(line)
         elif kind == "csv":
-            types = self.config.get("csv_types", {})
+            types = self.config.get("csv_types") or {
+                name: spec["dtype"] for name, spec in (self.config.get("fields") or {}).items()
+                if isinstance(spec, dict) and spec.get("dtype") in ("number", "boolean")}
             with path.open(encoding="utf-8-sig", newline="") as handle:
                 for ordinal, row in enumerate(csv.DictReader(handle, delimiter=self.config.get("delimiter", ","))):
                     yield cast_csv_row(row, types, ordinal) if types else row

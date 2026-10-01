@@ -340,3 +340,26 @@ def test_api_requires_the_state_change_header_and_explains_errors(lab, classes):
     assert bad.status_code == 422 and 'absolute path' in bad.json()['detail']
     assert client.delete('/api/v1/local-datasets/never-added').status_code == 404
     assert client.post('/api/v1/local-datasets', json={'source': str(classes), 'extra': 1}).status_code == 422
+
+
+# ---- declared CSV types in catalogue entries -----------------------------------------------
+
+def test_catalogue_csv_fields_declared_numeric_are_cast_and_blanks_stay_missing(tmp_path):
+    from dataset_atlas.adapters import get_adapter
+    from dataset_atlas.models import Dataset
+    (tmp_path / 'm.csv').write_text('id,score,flag,pick\n1,0.5,true,a\n2,,false,b\n3,7,true,a\n')
+    config = {'path': str(tmp_path / 'm.csv'), 'format': 'csv', 'fields': {
+        'score': {'dtype': 'number'}, 'flag': {'dtype': 'boolean'}, 'pick': {'dtype': 'category', 'values': ['a', 'b']}}}
+    rows = list(get_adapter(Dataset(id='x', name='x', adapter='csv', snapshot_id='s', release='r', adapter_config=config))._rows())
+    assert [r['score'] for r in rows] == [0.5, None, 7] and [r['flag'] for r in rows] == [True, False, True]
+    assert [r['id'] for r in rows] == ['1', '2', '3'] and [r['pick'] for r in rows] == ['a', 'b', 'a']
+
+
+def test_a_column_declared_numeric_that_is_not_fails_loudly_instead_of_loading_text(tmp_path):
+    from dataset_atlas.adapters import get_adapter
+    from dataset_atlas.models import Dataset
+    (tmp_path / 'm.csv').write_text('who\nk_x\nk_y\n')
+    config = {'path': str(tmp_path / 'm.csv'), 'format': 'csv', 'fields': {'who': {'dtype': 'number'}}}
+    adapter = get_adapter(Dataset(id='x', name='x', adapter='csv', snapshot_id='s', release='r', adapter_config=config))
+    with pytest.raises(ValueError, match="column 'who' is declared numeric"):
+        list(adapter._rows())

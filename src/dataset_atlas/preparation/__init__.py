@@ -353,7 +353,14 @@ class PreparationManager:
             plan['shared_storage'] = storage
             if not storage['admitted']:
                 plan['ready'] = False
-                plan['requirements'].append('Shared Atlas storage ceiling leaves insufficient space for this preparation; free retained data or reduce the requested limits.')
+                if storage['measurement_errors']:
+                    # Usage that cannot be measured completely is never assumed to fit under the ceiling.
+                    first = storage['measurement_errors'][0]
+                    plan['requirements'].append(
+                        f"Storage use could not be measured completely, so the workspace ceiling cannot be checked ({first['path']}: {first['error']}). "
+                        'Remove or fix that path in local-config/storage.json (or run `atlas storage configure`), then plan again.')
+                else:
+                    plan['requirements'].append('Shared Atlas storage ceiling leaves insufficient space for this preparation; free retained data or reduce the requested limits.')
         if plan['requirements']:
             plan['ready'] = False
         from dataset_atlas.jobs.limits import limits, enforcement

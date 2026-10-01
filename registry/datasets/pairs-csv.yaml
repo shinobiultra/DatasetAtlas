@@ -21,8 +21,11 @@ adapter_config:
       description: Second SAE neuron identifier
       dtype: string
     R_user:
-      description: Aggregated human preference
-      dtype: number
+      description: Aggregated user response, recorded as the name of the column it selects (k_x or k_y)
+      dtype: category
+      values:
+      - k_x
+      - k_y
     MS_x_dino:
       description: DINOv2 score for first neuron
       dtype: number

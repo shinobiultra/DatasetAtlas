@@ -1,0 +1,19 @@
+# Pinned originals for a clean clone. Each SHA-256 equals the digest the catalogue entry already pins and was
+# checked against the maintainer's copy; the URL serves exactly this byte length. Release and snapshot IDs are carried over
+# unchanged, so a colleague's preview has the same identity as the maintainer's.
+release: zenodo-7711810-v2-rgb
+snapshot_id: zenodo-7711810-v2-rgb-sha256-b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90
+adapter: archive
+expected_count: 27000
+scope: official EuroSAT v2 RGB, 27,000 class-folder JPEGs
+source_url: https://zenodo.org/records/7711810
+adapter_config: {}
+files:
+- source_name: EuroSAT_RGB.zip
+  url: https://zenodo.org/records/7711810/files/EuroSAT_RGB.zip
+  bytes: 94658721
+  sha256: b4f5b234ecb7d7ff9c6cddb046543b4717c53fd6e9815be6c0e80cc614f51b90
+  format: zip
+  config_key: path
+allowed_hosts:
+- zenodo.org

@@ -27,7 +27,13 @@ class HttpsFetcher:
     def __init__(self, allowed_hosts: set[str] | list[str], *, timeout: float = 20,
                  max_redirects: int = 4, max_bytes: int = 64 * 1024 * 1024, credential_profile: str | None = None):
         self.allowed_hosts = {host.lower().rstrip(".") for host in allowed_hosts}
-        if not self.allowed_hosts or max_bytes <= 0 or max_redirects < 0:
+        # An entry like "*.example.com" admits subdomains of example.com (never example.com itself, never other
+        # domains). Some CDNs redirect to a fresh random subdomain per request; the wildcard must be opted into.
+        if any("*" in host and not (host.startswith("*.") and len(host) > 3 and "*" not in host[2:]) for host in self.allowed_hosts):
+            raise ValueError("Host patterns may only use a leading wildcard label, as in *.example.com")
+        self.allowed_suffixes = tuple(host[1:] for host in self.allowed_hosts if host.startswith("*.") and len(host) > 3 and "*" not in host[2:])
+        self.allowed_hosts = {host for host in self.allowed_hosts if not host.startswith("*.")}
+        if not (self.allowed_hosts or self.allowed_suffixes) or max_bytes <= 0 or max_redirects < 0:
             raise ValueError("Allowlisted hosts and positive fetch limits are required")
         if credential_profile not in {None,"huggingface"}:raise ValueError("Unknown source credential profile")
         self.credential_profile = credential_profile
@@ -40,7 +46,7 @@ class HttpsFetcher:
         if parsed.scheme.lower() != "https" or parsed.username or parsed.password or not parsed.hostname:
             raise ValueError("Only credential-free HTTPS URLs are allowed")
         host = parsed.hostname.lower().rstrip(".")
-        if host not in self.allowed_hosts:
+        if host not in self.allowed_hosts and not any(host.endswith(suffix) for suffix in self.allowed_suffixes):
             raise ValueError("HTTPS destination is not allowlisted")
         port = parsed.port or 443
         if port != 443:

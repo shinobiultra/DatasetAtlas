@@ -45,7 +45,7 @@ class PreparationPlanRequest(BaseModel):
     model_config=ConfigDict(extra='forbid')
     max_download_bytes: int = Field(ge=1)
     max_output_bytes: int = Field(ge=1)
-    source_mode: str = Field(default='download', pattern='^(download|selective|sample)$')
+    source_mode: str = Field(default='download', pattern='^(auto|download|selective|sample)$')
 
 class RecordRequest(BaseModel):
     model_config=ConfigDict(extra='forbid')
@@ -416,9 +416,13 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
     @app.get('/api/v1/capabilities')
     def capabilities():
         return Capabilities(mode='workbench',operations=['catalogue','query','selection','export','artifacts','providers','conversations']+(['analysis','jobs'] if jobs else []))
+    def present(dataset):
+        """Public view of a dataset: no local adapter paths, and coverage corrected to what this workspace holds."""
+        from dataset_atlas.catalogue import with_availability
+        return with_availability(dataset.model_copy(update={'adapter_config':{}}),*registry.local_state(dataset.id))
     @app.get('/api/v1/datasets')
     def datasets():
-        return [d.model_copy(update={'adapter_config':{}}) for d in registry.datasets()]
+        return [present(d) for d in registry.datasets()]
     @app.get('/api/v1/catalogue/thumbnails')
     def catalogue_thumbnails():
         """Real preview tiles per dataset so the catalogue never fabricates media.
@@ -461,7 +465,7 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
             entries[dataset.id]={'modality':cached[1]['modality'],'tiles':resolved}
         return thumbnails_document(entries)
     @app.get('/api/v1/datasets/{dataset_id}')
-    def dataset(dataset_id:str):return registry.dataset(dataset_id).model_copy(update={'adapter_config':{}})
+    def dataset(dataset_id:str):return present(registry.dataset(dataset_id))
     def selected_artifacts(ids):
         if not ids:return []
         available={a.id:a for a in artifacts()}

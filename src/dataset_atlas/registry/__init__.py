@@ -127,6 +127,12 @@ class Registry:
         path=(base/name).resolve()
         if path.parent!=base.resolve():raise ValueError('Invalid prepared version')
         return path
+    def local_state(self, dataset_id):
+        """(has preview pack, has complete index) as actually present in this workspace; stat calls only."""
+        dataset_id=self.resolve(dataset_id)
+        active=self.active_directory(dataset_id)
+        pack=active/'pack/pack.json' if active else self.root/'work/packs'/dataset_id/'pack.json'
+        return pack.is_file(),(self.snapshot_path(dataset_id)/'manifest.json').is_file()
     def snapshot_path(self, dataset_id):
         dataset_id=self.resolve(dataset_id)
         active=self.active_directory(dataset_id)

@@ -15,7 +15,7 @@ import { CompareView } from './CompareView'
 import { FilterRail } from './FilterRail'
 import { OverviewTab } from './OverviewTab'
 import { SampleInspector } from '../panels/SampleInspector'
-import { PrepareDataset } from '../panels/PrepareDataset'
+import { PrepareDataset, PREPARE_EVENT } from '../panels/PrepareDataset'
 import { AboutPanel } from '../panels/AboutPanel'
 import { AnalyzePanel } from '../panels/AnalyzePanel'
 import { ModelPanel } from '../panels/ModelPanel'
@@ -352,7 +352,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
       </div>
       <div className="ds-tabs">
         <Tabs label="Dataset view" value={tab} onChange={onTab} options={[{ value: 'samples', label: 'Samples' }, { value: 'overview', label: 'Overview' }]} />
-        {provider.mode === 'workbench' && <PrepareDataset key={dataset.id} datasetId={dataset.id} />}
+        {provider.mode === 'workbench' && <PrepareDataset key={dataset.id} datasetId={dataset.id} onRequest={dataset.availability?.preview === 'on_request'} />}
       </div>
     </>
   )
@@ -364,10 +364,24 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
         {header}
         <div className="work-scroll">
           <div className="page">
-            <Notice tone="warn">
-              <strong>No inspectable examples here yet.</strong> This catalogue entry has no prepared preview
-              {provider.mode === 'static' ? ' approved for the public build' : ' in this workbench'}.
-            </Notice>
+            {provider.mode === 'workbench' && dataset.availability?.preview === 'on_request' ? (
+              <div className="card card-pad">
+                <h3 style={{ marginBottom: 6 }}>Preview not fetched on this machine yet</h3>
+                <p style={{ margin: '0 0 10px' }}>
+                  A {(dataset.availability.upstream_preview_count ?? 0).toLocaleString()}-{dataset.coverage?.unit ?? 'example'} preview is recorded for this dataset.
+                  Getting it downloads the records and media from the original source to this workbench; you see the size and the
+                  source plan before anything is fetched.
+                </p>
+                <div className="row">
+                  <button type="button" className="btn primary" onClick={() => window.dispatchEvent(new CustomEvent(PREPARE_EVENT, { detail: dataset.id }))}>Get preview</button>
+                </div>
+              </div>
+            ) : (
+              <Notice tone="warn">
+                <strong>No inspectable examples here yet.</strong> This catalogue entry has no prepared preview
+                {provider.mode === 'static' ? ' approved for the public build' : ' in this workbench'}.
+              </Notice>
+            )}
             <div className="card card-pad">
               <h3 style={{ marginBottom: 10 }}>Why, precisely</h3>
               <dl className="dl">

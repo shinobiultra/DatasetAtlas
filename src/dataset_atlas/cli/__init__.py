@@ -78,6 +78,11 @@ def main(argv=None):
     preparation.add_argument('--verify-full-media',metavar='DATASET_ID',help='Prove every indexed image has a protected original and update media coverage')
     prune=datasets.add_parser('prune',help='List or remove failed, duplicate and unreferenced prepared versions');prune.add_argument('--execute',action='store_true')
     index=datasets.add_parser('index');index.add_argument('--dataset',required=True);index.add_argument('--expected-count',type=int,required=True);index.add_argument('--max-bytes',type=int,default=30_000_000_000)
+    previews=sub.add_parser('previews',help='Fetch inspectable previews into a workspace that holds none yet').add_subparsers(dest='action',required=True)
+    pstatus=previews.add_parser('status',help='List datasets by what this workspace holds; --plan also checks cost and readiness over the network');pstatus.add_argument('--plan',action='store_true');pstatus.add_argument('--dataset',action='append',default=[])
+    pstatus.add_argument('--max-download-bytes',type=int,default=2_000_000_000)
+    pfetch=previews.add_parser('fetch',help='Plan, and with --execute fetch, previews cheapest first within a total download budget');pfetch.add_argument('--dataset',action='append',default=[],help='Repeat to name datasets; default is every dataset with an upstream preview')
+    pfetch.add_argument('--per-dataset-download-bytes',type=int,default=2_000_000_000);pfetch.add_argument('--per-dataset-output-bytes',type=int,default=1_000_000_000);pfetch.add_argument('--total-download-bytes',type=int,default=20_000_000_000);pfetch.add_argument('--execute',action='store_true')
     serve=sub.add_parser('serve');serve.add_argument('--host',default='127.0.0.1');serve.add_argument('--port',type=int,default=8765)
     analyze=sub.add_parser('analyze');analyze.add_argument('--selection',required=True);analyze.add_argument('--processor',required=True);analyze.add_argument('--config',type=Path)
     export=sub.add_parser('export').add_subparsers(dest='action',required=True)
@@ -185,6 +190,23 @@ def main(argv=None):
                 dataset=registry.dataset(args.dataset)
                 if args.dry_run:emit(get_adapter(dataset).plan(args.preview_size,args.max_bytes))
                 else:emit(build_preview(dataset,root/'work/packs'/dataset.id,limit=args.preview_size,max_bytes=args.max_bytes))
+        elif args.command=='previews':
+            from dataset_atlas.preparation import PreparationManager
+            from dataset_atlas.preparation.previews import fetch_previews,plan_all,targets
+            if args.action=='status':
+                manager=PreparationManager(root);registry=manager.registry
+                local=[d.id for d in registry.datasets() if registry.local_state(d.id)[0]]
+                missing=targets(manager,args.dataset or None)
+                result={'catalogue':len(registry.datasets()),'local_previews':len(local),'on_request':len(missing),'dataset_ids_on_request':[d.id for d in missing]}
+                if args.plan:
+                    rows=plan_all(manager,missing,args.max_download_bytes,args.max_download_bytes,lambda message:print(message,file=sys.stderr,flush=True))
+                    result['readiness']={'ready':sum(r['ready'] for r in rows),'not_ready':sum(not r['ready'] for r in rows),'datasets':rows}
+                emit(result)
+            else:
+                report=fetch_previews(root,args.dataset or None,per_dataset_download_bytes=args.per_dataset_download_bytes,per_dataset_output_bytes=args.per_dataset_output_bytes,total_download_bytes=args.total_download_bytes,execute=args.execute,log=lambda message:print(message,file=sys.stderr,flush=True))
+                emit(report)
+                if not args.execute:print('Dry run: nothing was downloaded. Re-run with --execute to fetch the planned previews.',file=sys.stderr)
+                if report['outcomes'].get('failed') or report.get('interrupted'):return 1
         elif args.command=='serve':
             import uvicorn
             from dataset_atlas.api import create_app

@@ -8,13 +8,21 @@ type Plan = { id: string; ready: boolean; scope: string; source_identity: string
 type Status = { id: string; status: string; stage?: string; error?: string; indexed_count?: number; expected_count?: number; downloaded_bytes?: number; current_file?: string }
 const bytes = formatBytes
 
-export function PrepareDataset({ datasetId }: { datasetId: string }) {
+/** Opens a dataset's preparation dialog from anywhere on the page without sharing component state. */
+export const PREPARE_EVENT = 'atlas:prepare'
+
+export function PrepareDataset({ datasetId, onRequest = false }: { datasetId: string; onRequest?: boolean }) {
   const [open, setOpen] = useState(false)
+  useEffect(() => {
+    const listener = (event: Event) => { if ((event as CustomEvent<string>).detail === datasetId) setOpen(true) }
+    window.addEventListener(PREPARE_EVENT, listener)
+    return () => window.removeEventListener(PREPARE_EVENT, listener)
+  }, [datasetId])
   const dialog = useRef<HTMLDialogElement>(null)
   useEffect(() => { if (open) dialog.current?.showModal(); else dialog.current?.close() }, [open])
-  const [download, setDownload] = useState('10')
-  const [output, setOutput] = useState('2')
-  const [mode, setMode] = useState<'download' | 'selective' | 'sample'>('download')
+  const [download, setDownload] = useState(onRequest ? '2' : '10')
+  const [output, setOutput] = useState(onRequest ? '1' : '2')
+  const [mode, setMode] = useState<'auto' | 'download' | 'selective' | 'sample'>(onRequest ? 'auto' : 'download')
   const [plan, setPlan] = useState<Plan | null>(null)
   const [status, setStatus] = useState<Status | null>(null)
   const [error, setError] = useState('')
@@ -49,12 +57,13 @@ export function PrepareDataset({ datasetId }: { datasetId: string }) {
   }
   const running = status && ['queued', 'running'].includes(status.status)
   return <div>
-    <button className="btn" onClick={() => setOpen(!open)} aria-expanded={open}>Prepare full data</button>
+    <button className={onRequest ? 'btn primary' : 'btn'} onClick={() => setOpen(!open)} aria-expanded={open}>{onRequest ? 'Get preview' : 'Prepare full data'}</button>
     {createPortal(<dialog ref={dialog} className="preparation-dialog" aria-label="Dataset preparation" onCancel={() => setOpen(false)}><section className="card-pad" aria-label="Prepare full dataset">
-      <div className="row"><h3>Prepare on request</h3><span className="spacer" /><button className="btn" onClick={() => setOpen(false)}>Close preparation</button></div>
-      <p className="hint">Review the source and storage plan before downloading. Existing prepared versions are retained. Public sharing is a separate decision.</p>
+      <div className="row"><h3>{onRequest ? 'Get a preview' : 'Prepare on request'}</h3><span className="spacer" /><button className="btn" onClick={() => setOpen(false)}>Close preparation</button></div>
+      <p className="hint">Review the source and storage plan before downloading. Data comes from the original source to this machine; existing prepared versions are retained. Public sharing is a separate decision.</p>
       <label className="hint">Source access
         <select className="select" aria-label="Source access" value={mode} onChange={e => { setMode(e.target.value as typeof mode); setPlan(null) }}>
+          <option value="auto">Fetch a preview with the smallest download (recommended)</option>
           <option value="download">Download the pinned source and index it completely</option>
           <option value="selective">Keep Parquet images remote; index every annotation row</option>
           <option value="sample">Sample 100 rows from remote Parquet; no complete index</option>
@@ -73,7 +82,7 @@ export function PrepareDataset({ datasetId }: { datasetId: string }) {
         {plan.source_total_bytes !== undefined && <p className="hint">{bytes(plan.source_total_bytes)} source population; {mode === 'sample' ? 'only the sampled row groups are read.' : 'image columns remain remote.'}</p>}
         {plan.files.length > 0 && <details><summary>{plan.files.length} pinned source files</summary><ul>{plan.files.map(f => <li key={f.source_name}>{f.source_name} ({bytes(f.bytes)})</li>)}</ul></details>}
         {plan.requirements.map(message => <Notice key={message} tone="warn">{message}</Notice>)}
-        <button className="btn primary" disabled={!plan.ready || busy || !!running} onClick={() => void start(plan.id)}>Download and prepare</button>
+        <button className="btn primary" disabled={!plan.ready || busy || !!running} onClick={() => void start(plan.id)}>{onRequest ? 'Fetch preview' : 'Download and prepare'}</button>
       </div>}
       {status && <div role="status">
         <p>{status.status} {status.stage && `· ${status.stage}`} {status.indexed_count !== undefined && `· ${status.indexed_count.toLocaleString()} / ${status.expected_count?.toLocaleString()} records`}</p>

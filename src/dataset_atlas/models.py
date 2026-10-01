@@ -32,6 +32,15 @@ class Coverage(Model):
     unit: Unit = 'example'
     blockers: list[str] = Field(default_factory=list)
 
+class Availability(Model):
+    """What this deployment holds right now; computed per request and never stored in the registry.
+
+    `Coverage` records what a maintainer prepared on their machine. A colleague's fresh
+    workspace holds none of that until it is fetched, so the two must not be conflated."""
+    preview: Literal['local', 'on_request', 'none'] = 'none'
+    complete_data: Literal['local', 'on_request', 'none'] = 'none'
+    upstream_preview_count: int = 0
+
 class Dataset(Versioned):
     id: str
     name: str
@@ -47,6 +56,7 @@ class Dataset(Versioned):
     adapter: str = 'structured'
     adapter_config: dict[str, Any] = Field(default_factory=dict)
     coverage: Coverage = Field(default_factory=Coverage)
+    availability: Availability | None = None
     rights: dict[str, str] = Field(default_factory=dict)
     relationships: list[dict[str, Any]] = Field(default_factory=list)
     evidence: list[dict[str, Any]] = Field(default_factory=list)

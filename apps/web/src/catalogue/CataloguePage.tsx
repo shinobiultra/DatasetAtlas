@@ -122,7 +122,7 @@ export function CataloguePage({ term, onOpen }: { term: string; onOpen: (id: str
   const searched = useMemo(() => all.filter(dataset => matchesTerm(dataset, term)), [all, term])
   const shown = useMemo(() => {
     const rows = searched.filter(dataset => passesFacets(dataset, facets))
-    const order: Record<CoverageState, number> = { full: 0, preview: 1, elsewhere: 2, metadata: 3 }
+    const order: Record<CoverageState, number> = { full: 0, preview: 1, on_request: 2, elsewhere: 3, metadata: 4 }
     const byCoverage = (dataset: Dataset) => order[coverageState(dataset, provider.mode)]
     if (sort === 'name') return [...rows].sort((a, b) => a.name.localeCompare(b.name))
     if (sort === 'coverage') return [...rows].sort((a, b) => byCoverage(a) - byCoverage(b) || a.name.localeCompare(b.name))

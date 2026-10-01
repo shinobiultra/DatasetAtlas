@@ -80,7 +80,7 @@ export function shortId(id: string, length = 10): string {
  * carries what publication approved, so it must not repeat the workbench's
  * preview claim as if the examples were here.
  */
-export type CoverageState = 'full' | 'preview' | 'elsewhere' | 'metadata'
+export type CoverageState = 'full' | 'preview' | 'on_request' | 'elsewhere' | 'metadata'
 
 export function coverageState(dataset: Dataset, mode: 'static' | 'workbench'): CoverageState {
   const coverage = dataset.coverage ?? {}
@@ -91,12 +91,15 @@ export function coverageState(dataset: Dataset, mode: 'static' | 'workbench'): C
   }
   if (previewCount > 0 && coverage.complete_data === 'supported') return 'full'
   if (previewCount > 0) return 'preview'
+  // The registry records a verified preview population, but this workbench has not fetched it yet.
+  if (dataset.availability?.preview === 'on_request') return 'on_request'
   return 'metadata'
 }
 
 export const COVERAGE_STATE_LABEL: Record<CoverageState, string> = {
   full: 'Full population indexed',
   preview: 'Preview available',
+  on_request: 'Preview on request — not fetched here yet',
   elsewhere: 'Not published here — prepared in the workbench',
   metadata: 'Metadata only — no adapter yet',
 }
@@ -116,6 +119,8 @@ export function coverageLine(dataset: Dataset, mode: 'static' | 'workbench'): { 
         : ''
       return { text: `${previewCount.toLocaleString()} ${unit} preview${extra}`, tone: 'ok' }
     }
+    case 'on_request':
+      return { text: `Preview on request · ${(dataset.availability?.upstream_preview_count ?? 0).toLocaleString()} ${unit} when fetched`, tone: 'default' }
     case 'elsewhere':
       return { text: `Metadata only here · ${previewCount.toLocaleString()} ${unit} preview exists in the local workbench`, tone: 'warn' }
     default:

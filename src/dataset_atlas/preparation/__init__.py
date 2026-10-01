@@ -14,6 +14,10 @@ from dataset_atlas.models import content_id
 from dataset_atlas.registry import Registry
 
 
+# A complete download is preferred for `auto` plans only while it stays this small.
+AUTO_COMPLETE_DOWNLOAD_BYTES = 250_000_000
+
+
 def atomic(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(path.name + f'.{os.getpid()}.tmp')
@@ -63,6 +67,28 @@ class PreparationManager:
         return self.directory / identity
 
     def plan(self, dataset_id, max_download_bytes, max_output_bytes, source_mode="download"):
+        if source_mode == 'auto':
+            return self._plan_auto(dataset_id, max_download_bytes, max_output_bytes)
+        return self._plan(dataset_id, max_download_bytes, max_output_bytes, source_mode)
+
+    def _plan_auto(self, dataset_id, max_download_bytes, max_output_bytes):
+        """The cheapest route to inspectable records, chosen from real plans.
+
+        A complete download is preferred only while it is small, because it also yields a complete
+        index. Otherwise a sampled remote read fetches ~100 rows. If neither fits, the full-download
+        plan is returned so its stated requirements (size, recipe, access) explain why."""
+        download = self._plan(dataset_id, max_download_bytes, max_output_bytes, 'download')
+        if download['ready'] and download['expected_download_bytes'] <= AUTO_COMPLETE_DOWNLOAD_BYTES:
+            return download
+        try:
+            sample = self._plan(dataset_id, max_download_bytes, max_output_bytes, 'sample')
+        except (ValueError, KeyError, OSError):
+            sample = None
+        if sample is not None and sample['ready']:
+            return sample
+        return download
+
+    def _plan(self, dataset_id, max_download_bytes, max_output_bytes, source_mode="download"):
         if any(type(n) is not int or not 1 <= n <= 10_000_000_000_000 for n in (max_download_bytes, max_output_bytes)):
             raise ValueError('Positive download and output limits of at most 10 TB are required')
         if source_mode not in {'download','selective','sample'}:raise ValueError('Source mode must be download, selective or sample')

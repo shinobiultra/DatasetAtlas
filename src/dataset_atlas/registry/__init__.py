@@ -8,6 +8,7 @@ from dataset_atlas.models import Dataset, Pack
 # Registry YAML changes are rare and human-paced; stat-ing every file on every
 # lookup is not. Resolving a 100-record selection used to sweep 33,600 files.
 BASELINE_RECHECK_SECONDS = 0.5
+USER_REGISTRY = 'local-config/registry/datasets'
 
 
 def merge_prepared(baseline: Dataset, prepared: Dataset, recipe_present: bool, recipe_fields: set[str] | None = None) -> Dataset:
@@ -70,10 +71,16 @@ class Registry:
         if self._signature is not None and now-self._baseline_checked<BASELINE_RECHECK_SECONDS:return
         self._baseline_checked=now
         files=sorted((self.root/'registry/datasets').glob('*.yaml'))
+        # A researcher's own datasets sit beside the shipped catalogue, outside version control.
+        user_files=sorted((self.root/USER_REGISTRY).glob('*.yaml'))
         dispositions=self.root/'registry/candidate_dispositions.yaml'
-        signature=tuple((str(p),p.stat().st_mtime_ns,p.stat().st_size) for p in files+([dispositions] if dispositions.is_file() else []))
+        signature=tuple((str(p),p.stat().st_mtime_ns,p.stat().st_size) for p in files+user_files+([dispositions] if dispositions.is_file() else []))
         if signature!=self._signature:
             self._datasets=[Dataset.model_validate(yaml.safe_load(p.read_text())) for p in files]
+            for path in user_files:
+                entry=Dataset.model_validate(yaml.safe_load(path.read_text()))
+                if entry.origin!='user':raise ValueError(f'{path.name}: datasets added from local storage must declare origin: user')
+                self._datasets.append(entry)
             if len({d.id for d in self._datasets})!=len(self._datasets):raise ValueError('Duplicate dataset IDs')
             self._by_id={d.id:d for d in self._datasets}
             self._aliases=self._retired_aliases(dispositions)

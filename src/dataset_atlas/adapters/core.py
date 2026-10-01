@@ -94,6 +94,26 @@ class ValidationReport:
     errors: tuple[str, ...] = ()
 
 
+def cast_csv_row(row: dict[str, str], types: dict[str, str], ordinal: int) -> dict[str, Any]:
+    """Type declared CSV columns. A blank cell is missing (None), never zero or false."""
+    for column, kind in types.items():
+        value = row.get(column)
+        if value is None or value == "":
+            row[column] = None
+        elif kind == "number":
+            try:
+                row[column] = int(value) if re.fullmatch(r"[+-]?\d+", value) else float(value)
+            except ValueError:
+                raise ValueError(f"row {ordinal}: column {column!r} is declared numeric but holds {value!r}") from None
+        elif kind == "boolean":
+            if value.strip().lower() not in {"true", "false"}:
+                raise ValueError(f"row {ordinal}: column {column!r} is declared boolean but holds {value!r}")
+            row[column] = value.strip().lower() == "true"
+        else:
+            raise ValueError(f"unsupported CSV column type {kind!r}")
+    return row
+
+
 def _nested(row: dict[str, Any], key: str | None) -> Any:
     if not key:
         return None
@@ -297,8 +317,10 @@ class StructuredAdapter(DatasetAdapter):
                     if line.strip():
                         yield json.loads(line)
         elif kind == "csv":
+            types = self.config.get("csv_types", {})
             with path.open(encoding="utf-8-sig", newline="") as handle:
-                yield from csv.DictReader(handle)
+                for ordinal, row in enumerate(csv.DictReader(handle, delimiter=self.config.get("delimiter", ","))):
+                    yield cast_csv_row(row, types, ordinal) if types else row
         elif kind == "json":
             with path.open(encoding="utf-8") as handle:
                 data = json.load(handle)
@@ -313,6 +335,13 @@ class StructuredAdapter(DatasetAdapter):
             parquet = pq.ParquetFile(path)
             for batch in parquet.iter_batches(batch_size=128):
                 yield from batch.to_pylist()
+
+    def iter_sequential(self, source: PreparedSource) -> Iterator[Record]:
+        """Every record in one pass. Paging re-reads CSV/JSONL from the start for each page, which is
+        quadratic on large tables, so indexing opts in with `sequential_index`."""
+        for ordinal, row in enumerate(self._rows()):
+            source.charge(len(json.dumps(row, ensure_ascii=False, default=str).encode()))
+            yield self._record(row, ordinal)
 
     def iter_records(self, source: PreparedSource, cursor: str | None = None,
                      limit: int | None = None) -> RecordBatch:
@@ -948,15 +977,23 @@ import threading
 _PREPARED_ADAPTERS: OrderedDict[str, DatasetAdapter] = OrderedDict()
 _PREPARED_ADAPTER_LOCK = threading.RLock()
 _DECODED_CACHES: dict[str, BoundedCache] = {}
+_DECODED_CACHES_LOCK = threading.Lock()
 
 
 def _decoded_cache(cache_root: Path) -> BoundedCache:
-    """The media endpoint is the hottest route; reuse its cache handle per root."""
+    """The media endpoint is the hottest route; reuse its cache handle per root.
+
+    A new workspace's first grid issues dozens of simultaneous requests. Creating the cache
+    database from each of them at once makes SQLite fail with "database is locked", so
+    construction is serialized and every caller shares the one handle."""
     key = str(Path(cache_root).resolve())
     cache = _DECODED_CACHES.get(key)
     if cache is None:
-        cache = BoundedCache(cache_root, max_bytes=1_000_000_000)
-        _DECODED_CACHES[key] = cache
+        with _DECODED_CACHES_LOCK:
+            cache = _DECODED_CACHES.get(key)
+            if cache is None:
+                cache = BoundedCache(cache_root, max_bytes=1_000_000_000)
+                _DECODED_CACHES[key] = cache
     return cache
 
 

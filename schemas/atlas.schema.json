@@ -127,6 +127,15 @@
           "title": "Name",
           "type": "string"
         },
+        "origin": {
+          "default": "catalogue",
+          "enum": [
+            "catalogue",
+            "user"
+          ],
+          "title": "Origin",
+          "type": "string"
+        },
         "aliases": {
           "items": {
             "type": "string"

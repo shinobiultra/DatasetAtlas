@@ -44,6 +44,8 @@ class Availability(Model):
 class Dataset(Versioned):
     id: str
     name: str
+    # `user` datasets are registered from the researcher's own storage; they never enter the shipped catalogue.
+    origin: Literal['catalogue', 'user'] = 'catalogue'
     aliases: list[str] = Field(default_factory=list)
     description: str = ''
     tasks: list[str] = Field(default_factory=list)

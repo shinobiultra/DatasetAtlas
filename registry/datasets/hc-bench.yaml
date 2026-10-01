@@ -10,7 +10,7 @@ paper_ids:
 release: 203e4f80fb6f979fdab63f828daa9b04fc5c6f06
 adapter: csv
 adapter_config:
-  path: /home/bitwise/Documents/vibe/DatasetAtlas/work/sources/hc-bench/wild_index.csv
+  path: work/sources/hc-bench/wild_index.csv
   format: csv
   sha256: a24e9f1602d1c16637daedf903c99d20030ed093aa62198d1210401d75817eb8
   mapping:
@@ -31,7 +31,7 @@ adapter_config:
     local pack covers only the wild subset; the current repository has other object/text parts and differs
     from the 112-image paper version.
   selection_note: First 100 source-order rows; full local source index is retained.
-  media_root: /home/bitwise/Documents/vibe/DatasetAtlas/work/sources/hc-bench
+  media_root: work/sources/hc-bench
 coverage:
   identity: resolved
   source: verified
@@ -104,7 +104,7 @@ evidence:
   source_identity_status: author_release_identified_version_drift
 - kind: local_source_snapshot
   url: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench
-  note: Pinned source revision 203e4f80fb6f979fdab63f828daa9b04fc5c6f06; local source index /home/bitwise/Documents/vibe/DatasetAtlas/work/sources/hc-bench/wild_index.csv;
+  note: Pinned source revision 203e4f80fb6f979fdab63f828daa9b04fc5c6f06; local source index work/sources/hc-bench/wild_index.csv;
     SHA-256 a24e9f1602d1c16637daedf903c99d20030ed093aa62198d1210401d75817eb8; population 53 rows.
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'

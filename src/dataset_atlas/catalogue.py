@@ -78,6 +78,9 @@ def with_availability(dataset: Any, has_preview: bool, has_complete: bool) -> An
 
     coverage = dataset.coverage.model_copy(deep=True)
     upstream = coverage.preview_count or 0
+    if dataset.origin == "user" and not upstream:
+        # Registering the source declares that a population exists; its preview is built from it on request.
+        upstream = min(coverage.total_count or 100, 100)
     if not has_preview:
         coverage.preview, coverage.preview_count = "none", 0
     if coverage.complete_data == "supported" and not has_complete:

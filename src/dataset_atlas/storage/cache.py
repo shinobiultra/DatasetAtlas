@@ -57,7 +57,17 @@ class BoundedCache:
 
     def _db(self) -> sqlite3.Connection:
         db = sqlite3.connect(self.db_path, timeout=30)
-        db.execute("PRAGMA journal_mode=WAL")
+        # Switching a brand-new database to WAL needs exclusive access and ignores the busy timeout, so
+        # concurrent first use can fail instantly with "database is locked". Retrying is safe: it is idempotent.
+        for attempt in range(40):
+            try:
+                db.execute("PRAGMA journal_mode=WAL")
+                break
+            except sqlite3.OperationalError as error:
+                if "locked" not in str(error) or attempt == 39:
+                    db.close()
+                    raise
+                time.sleep(0.05)
         db.execute("PRAGMA busy_timeout=30000")
         return db
 

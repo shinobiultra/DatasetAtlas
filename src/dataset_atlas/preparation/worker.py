@@ -318,6 +318,16 @@ def run(root, identity):
         def records():
             cursor = None
             count = 0
+            if dataset.adapter_config.get('sequential_index') and hasattr(adapter, 'iter_sequential'):
+                for record in adapter.iter_sequential(source):
+                    check()
+                    if not accepts_record(record,record_filter):continue
+                    sampler.add(record)
+                    yield record
+                    count += 1
+                    if count % 1000 == 0:
+                        update(stage='indexing', indexed_count=count)
+                return
             if dataset.adapter == 'remote_columnar':
                 with closing(adapter.iter_all_records(source)) as remote_records:
                     for record in remote_records:

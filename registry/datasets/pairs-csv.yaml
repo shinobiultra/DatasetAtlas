@@ -9,7 +9,7 @@ paper_ids:
 release: 39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493
 adapter: csv
 adapter_config:
-  path: /home/bitwise/Documents/vibe/DatasetAtlas/work/sources/pach/metric_benchmark/pairs.csv
+  path: work/sources/pach/metric_benchmark/pairs.csv
   format: csv
   sha256: 53cc1aa475b13daafeb173f441e962c9ca1a63d7256128f416e827f698140e71
   mapping: {}
@@ -71,7 +71,7 @@ evidence:
   paper_full_review_complete: true
 - kind: local_source_snapshot
   url: https://github.com/ExplainableML/sae-for-vlm/blob/39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493/metric_benchmark.tar.gz
-  note: Pinned source revision 39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493; local source index /home/bitwise/Documents/vibe/DatasetAtlas/work/sources/pach/metric_benchmark/pairs.csv;
+  note: Pinned source revision 39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493; local source index work/sources/pach/metric_benchmark/pairs.csv;
     SHA-256 53cc1aa475b13daafeb173f441e962c9ca1a63d7256128f416e827f698140e71; population 1000 rows.
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'

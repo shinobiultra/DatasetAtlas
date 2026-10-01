@@ -240,10 +240,35 @@ export class WorkbenchDataProvider implements DataProvider {
   }
 }
 
-export const provider: DataProvider = new URLSearchParams(window.location.search).get('mode') === 'workbench' ? new WorkbenchDataProvider() : new StaticDataProvider()
+/** An explicit `?mode=` wins; otherwise the workbench server marks the page it serves, and any other host is static. */
+function deploymentMode(): 'workbench' | 'static' {
+  const requested = new URLSearchParams(window.location.search).get('mode')
+  if (requested === 'workbench' || requested === 'static') return requested
+  return document.querySelector('meta[name="atlas-mode"]')?.getAttribute('content') === 'workbench' ? 'workbench' : 'static'
+}
+export const provider: DataProvider = deploymentMode() === 'workbench' ? new WorkbenchDataProvider() : new StaticDataProvider()
 
 export function recordMedia(record: AtlasRecord): string[] {
   return (record.assets ?? []).filter(asset => asset.uri).map(asset => provider.mode === 'static' ? publicUrl(asset.uri!) : asset.uri!)
+}
+
+/** What inspecting a researcher's own folder, table or Hugging Face URL found. Local paths stay on the server. */
+export type SourceInspection = {
+  kind: 'images' | 'table' | 'embedded_parquet' | 'huggingface'
+  count: number | null; unit: string; bytes: number; labels: string[]; modalities: string[]
+  columns: { name: string; dtype: string; role: string | null; distinct?: number | null; missing?: number; sample?: string[] }[]
+  warnings: string[]
+  suggested: { name?: string; media_column?: string | null; text_column?: string | null; id_column?: string | null; media_root?: string | null }
+  parquet_shards?: number; gated?: boolean; revision?: string
+}
+export type SourceOptions = Record<string, string | null>
+
+/** Registering your own data is an explicit workbench action; it reads and never modifies the source. */
+export const localDatasetApi = {
+  inspect: (source: string, options: SourceOptions = {}) => post<SourceInspection>('/local-datasets/inspect', { source, options }),
+  add: (body: { source: string; name: string; dataset_id?: string; description?: string; options?: SourceOptions; replace?: boolean }) =>
+    post<{ dataset: Dataset; inspection: SourceInspection }>('/local-datasets', body),
+  remove: (id: string, purge = false) => responseJson<{ dataset_id: string; purged: string[] }>(`${api}/local-datasets/${encodeURIComponent(id)}?purge=${purge}`, { method: 'DELETE', headers: { 'X-Atlas-Request': '1' } }),
 }
 
 /** Explicit user-triggered workbench acquisition; never invoked by static browsing or model tools. */

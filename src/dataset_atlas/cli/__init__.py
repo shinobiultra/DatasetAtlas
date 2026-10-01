@@ -69,6 +69,15 @@ def main(argv=None):
     resolve=corpus.add_parser('resolve');resolve.add_argument('--mentions',type=Path,required=True);resolve.add_argument('--registry',type=Path,default=Path('registry'))
     datasets=sub.add_parser('datasets').add_subparsers(dest='action',required=True)
     cached=datasets.add_parser('cache-source',help='Register a verified local archive for reuse across preparation jobs');cached.add_argument('--path',type=Path,required=True);cached.add_argument('--sha256',required=True);cached.add_argument('--max-bytes',type=int,required=True)
+    def source_options(parser):
+        parser.add_argument('source',help='Absolute path to a folder/archive of images or a .csv/.tsv/.jsonl/.json/.parquet table, or a Hugging Face dataset URL')
+        for flag in ('media-column','text-column','question-column','id-column','media-root'):parser.add_argument('--'+flag)
+    inspect=datasets.add_parser('inspect',help='Show what would be registered for your own data, without registering anything');source_options(inspect)
+    add=datasets.add_parser('add',help='Register your own folder, table or Hugging Face dataset and build its preview');source_options(add)
+    add.add_argument('--name');add.add_argument('--id',dest='dataset_id');add.add_argument('--description',default='');add.add_argument('--replace',action='store_true',help='Re-register an existing dataset of yours, e.g. after its folder changed')
+    add.add_argument('--no-prepare',action='store_true',help='Register only; build the preview later from the workbench or atlas previews fetch')
+    add.add_argument('--max-download-bytes',type=int,default=2_000_000_000,help='Budget for Hugging Face sources; local sources download nothing')
+    remove=datasets.add_parser('remove',help='Unregister a dataset you added; your files are never touched');remove.add_argument('dataset_id');remove.add_argument('--purge',action='store_true',help='Also delete its prepared index and preview')
     validate=datasets.add_parser('validate');validate.add_argument('--all',action='store_true')
     prepare=datasets.add_parser('prepare');prepare.add_argument('--dataset',required=True);prepare.add_argument('--preview-size',type=int,default=100);prepare.add_argument('--max-bytes',type=int,default=20_000_000);prepare.add_argument('--dry-run',action='store_true')
     acquire=datasets.add_parser('acquire');acquire.add_argument('--dataset',required=True);acquire.add_argument('--max-download-bytes',type=int,required=True);acquire.add_argument('--max-output-bytes',type=int,required=True);acquire.add_argument('--execute',action='store_true');acquire.add_argument('--source-mode',choices=['download','selective','sample'],default='download')
@@ -155,6 +164,23 @@ def main(argv=None):
             elif args.action=='prune':
                 from dataset_atlas.preparation import PreparationManager
                 emit(PreparationManager(root).prune(execute=args.execute))
+            elif args.action in {'inspect','add'}:
+                from dataset_atlas.registry.user import inspect_source,register
+                options={key:getattr(args,key) for key in ('media_column','text_column','question_column','id_column','media_root') if getattr(args,key)}
+                inspection=inspect_source(args.source,options)
+                shown={key:value for key,value in inspection.items() if key!='adapter_config'}
+                if args.action=='inspect':emit(shown)
+                else:
+                    entry=register(root,inspection,name=args.name or inspection['suggested']['name'],dataset_id=args.dataset_id,description=args.description,replace=args.replace)
+                    emit({'registered':entry.id,'name':entry.name,'records':inspection['count'],'warnings':inspection['warnings'],'source_files_touched':False})
+                    if not args.no_prepare:
+                        from dataset_atlas.preparation.previews import fetch_previews
+                        report=fetch_previews(root,[entry.id],per_dataset_download_bytes=args.max_download_bytes,total_download_bytes=args.max_download_bytes,execute=True,log=lambda message:print(message,file=sys.stderr,flush=True))
+                        emit(report)
+                        if report['outcomes'].get('failed') or report['outcomes'].get('skipped_not_ready'):return 1
+            elif args.action=='remove':
+                from dataset_atlas.registry.user import unregister
+                emit(unregister(root,args.dataset_id,purge=args.purge))
             elif args.action=='validate':
                 errors=[];count=0
                 for dataset in registry.datasets():

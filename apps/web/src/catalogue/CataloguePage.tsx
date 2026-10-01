@@ -2,6 +2,7 @@ import { displayUrl } from '../lib/display'
 import { useEffect, useMemo, useState } from 'react'
 import type { Dataset } from '../generated'
 import { provider, type ThumbEntry, type Thumbnails } from '../provider'
+import { AddDataset } from '../panels/AddDataset'
 import { accessTone, coverageLine, coverageState, compact, titleCase, COVERAGE_STATE_LABEL, type CoverageState } from '../lib/format'
 import { useStoredState } from '../lib/hooks'
 import { Empty, Facet, FacetList, FacetOption, Notice, Segmented, Spinner, Tag } from '../ui/primitives'
@@ -202,6 +203,7 @@ export function CataloguePage({ term, onOpen }: { term: string; onOpen: (id: str
             </p>
           </div>
           <div className="row" style={{ marginLeft: 'auto' }}>
+            {provider.mode === 'workbench' && <AddDataset />}
             <button type="button" className="btn" aria-expanded={filtersOpen} onClick={() => setFiltersOpen(!filtersOpen)}>Filters</button>
             <label className="row" style={{ gap: 6, fontSize: 'var(--fs-sm)', color: 'var(--text-muted)' }}>
               Sort

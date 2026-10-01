@@ -12,7 +12,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
 from fastapi import FastAPI, HTTPException, Request
-from fastapi.responses import FileResponse, JSONResponse, Response
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
 from dataset_atlas.models import Capabilities, Pack, Query, Selection, Record, content_id
@@ -46,6 +46,15 @@ class PreparationPlanRequest(BaseModel):
     max_download_bytes: int = Field(ge=1)
     max_output_bytes: int = Field(ge=1)
     source_mode: str = Field(default='download', pattern='^(auto|download|selective|sample)$')
+
+class LocalDatasetRequest(BaseModel):
+    model_config=ConfigDict(extra='forbid')
+    source: str = Field(min_length=1, max_length=2000)
+    name: str|None = Field(default=None, max_length=120)
+    dataset_id: str|None = Field(default=None, max_length=63)
+    description: str = Field(default='', max_length=2000)
+    options: dict[str,str|None] = Field(default_factory=dict)
+    replace: bool = False
 
 class RecordRequest(BaseModel):
     model_config=ConfigDict(extra='forbid')
@@ -405,6 +414,26 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
     @app.post('/api/v1/datasets/{dataset_id}/preparation/plan')
     def preparation_plan(dataset_id:str, body:PreparationPlanRequest):
         return preparation.plan(dataset_id,body.max_download_bytes,body.max_output_bytes,body.source_mode)
+    def describe_source(inspection):
+        # Local paths stay server-side: the interface needs what was found, not where the files live.
+        return {key:value for key,value in inspection.items() if key!='adapter_config'}
+    @app.post('/api/v1/local-datasets/inspect')
+    def local_dataset_inspect(body:LocalDatasetRequest):
+        from dataset_atlas.registry.user import inspect_source
+        return describe_source(inspect_source(body.source,body.options))
+    @app.post('/api/v1/local-datasets')
+    def local_dataset_add(body:LocalDatasetRequest):
+        from dataset_atlas.registry.user import inspect_source,register
+        inspection=inspect_source(body.source,body.options)
+        entry=register(root,inspection,name=body.name or inspection['suggested']['name'],dataset_id=body.dataset_id,description=body.description,replace=body.replace)
+        registry.refresh()
+        return {'dataset':present(registry.dataset(entry.id)),'inspection':describe_source(inspection)}
+    @app.delete('/api/v1/local-datasets/{dataset_id}')
+    def local_dataset_remove(dataset_id:str,purge:bool=False):
+        from dataset_atlas.registry.user import unregister
+        result=unregister(root,dataset_id,purge=purge)
+        registry.refresh()
+        return result
     @app.get('/api/v1/preparation')
     def preparation_list(dataset_id:str|None=None):return preparation.list(dataset_id)
     @app.post('/api/v1/preparation/{plan_id}/start')
@@ -760,7 +789,14 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
     except ImportError:pass
     web=root/'apps/web/dist'
     if not web.is_dir():web=Path(__file__).resolve().parents[1]/'web'
-    if web.is_dir():app.mount('/',StaticFiles(directory=web,html=True),name='web')
+    if web.is_dir():
+        index=web/'index.html'
+        @app.get('/',include_in_schema=False)
+        def home():
+            # The page served by the workbench is the workbench; only a static host lacks this marker.
+            html=index.read_text().replace('<head>','<head>\n    <meta name="atlas-mode" content="workbench" />',1)
+            return HTMLResponse(html,headers={'Cache-Control':'no-cache'})
+        app.mount('/',StaticFiles(directory=web,html=True),name='web')
     else:
         @app.get('/')
         def no_web():return {'message':'Frontend not built. Run npm ci && npm run build in apps/web, then restart atlas serve.','api':'/docs'}

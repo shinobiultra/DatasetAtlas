@@ -4,7 +4,7 @@ Dataset Atlas is a local tool for exploring datasets, mostly multimodal ones: a 
 
 ## Install
 
-You need Python 3.11–3.14. Node is only needed if you build the interface yourself.
+You need Python 3.11–3.14 on Linux or macOS. (On Windows use WSL: preparation workers rely on POSIX file locking.) Node is only needed if you build the interface yourself.
 
 **From a release wheel** (no Node, no checkout):
 

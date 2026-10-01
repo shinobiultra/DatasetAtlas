@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-09-24T11:38:14.711599+00:00",
+  "checked_at": "2026-10-01T04:28:06.454654+00:00",
   "datasets": [
     {
       "dataset_id": "agent-security-bench",
@@ -932,6 +932,16 @@
       "prepared_receipt": "work/prepared/simplevqa/8382305d27a65ddcdbc544e102756226f5531bccc9916e3cb0e767b2ebf97be1/receipt.json"
     },
     {
+      "dataset_id": "smolim2-135m-10b",
+      "release": "4c87b0da77c1937f3a08b763cf899c46f39b8b3b",
+      "snapshot_id": "smolim2-135m-10b-a279e2f43713aa8fcfdbae1a",
+      "records": 10058156,
+      "preview_records": 100,
+      "scope": "Every row of all 85 train Parquet shards at author revision 4c87b0da77c1937f3a08b763cf899c46f39b8b3b. The preview is a seeded sample over footer row counts; no complete local index is built.",
+      "plan_id": "a279e2f43713aa8fcfdbae1a937d80cd54a581d8d0d095ea65c40e383164c6de",
+      "prepared_receipt": "work/prepared/smolim2-135m-10b/a279e2f43713aa8fcfdbae1a937d80cd54a581d8d0d095ea65c40e383164c6de/receipt.json"
+    },
+    {
       "dataset_id": "socialcounterfactuals",
       "release": "182f8d1739028dc3ab9e9f6be4e1cb52cf5d6fe1",
       "snapshot_id": "socialcounterfactuals-4b4879de586a143d86e86fed",
@@ -1133,8 +1143,8 @@
     }
   ],
   "catalogue_entries": 333,
-  "with_previews": 169,
-  "without_previews": 164,
+  "with_previews": 170,
+  "without_previews": 163,
   "full_population_indices": 164,
   "all_requested_datasets_complete": false,
   "note": "Acquired source populations and on-demand infrastructure; catalogue-wide coverage is not complete."

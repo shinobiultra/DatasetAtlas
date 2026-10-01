@@ -112,3 +112,83 @@ def glue_sst2(params, inputs, output_dir, check):
     schema = pa.schema([('source_id', pa.string()), ('sentence', pa.string()), ('label', pa.int8()), ('label_status', pa.string()),
                         ('split', pa.string()), ('source_index', pa.int32()), ('source_member', pa.string())])
     return write_rows(rows, output_dir / 'records.parquet', 'parquet', check, schema=schema)
+
+
+# ---- safety / bias / hallucination benchmarks held as JSONL tables ---------------------------------------------
+# Each adds only identity fields (a source row or ID) to the original rows and keeps every original field and type.
+
+@converter('anthropic_red_team')
+def anthropic_red_team(params, inputs, output_dir, check):
+    """Anthropic red-team attempts. The official `.jsonl.gz` is, despite its name, one gzip-compressed JSON array."""
+    import gzip
+
+    def rows():
+        with gzip.open(inputs['source_gz']) as stream:
+            for number, row in enumerate(json.load(stream), 1):
+                yield {**row, 'source_row': number}
+    return write_rows(rows, output_dir / 'records.jsonl', 'jsonl', check)
+
+
+@converter('maliciousinstruct')
+def maliciousinstruct(params, inputs, output_dir, check):
+    """One row per nonempty line of MaliciousInstruct.txt, with its one-based source line number."""
+    def rows():
+        for number, line in enumerate(inputs['source_txt'].read_text().splitlines(), 1):
+            if line.strip():
+                yield {'source_line': number, 'prompt': line}
+    return write_rows(rows, output_dir / 'prompts.jsonl', 'jsonl', check)
+
+
+@converter('tdc2023')
+def tdc2023(params, inputs, output_dir, check):
+    """The red-teaming starter kit's dev and test behaviour strings, in order."""
+    def rows():
+        for split in ('dev', 'test'):
+            for number, behavior in enumerate(json.loads(inputs[f'{split}_behaviors'].read_text()), 1):
+                yield {'source_id': f'{split}:{number}', 'split': split, 'source_index': number, 'behavior': behavior}
+    return write_rows(rows, output_dir / 'records.jsonl', 'jsonl', check)
+
+
+@converter('bbq')
+def bbq(params, inputs, output_dir, check):
+    """All BBQ category files in the order given; adds `source_id` (category:line) and the three answers as `choices`."""
+    def rows():
+        for category in params['categories']:
+            with inputs[category].open() as stream:
+                for number, line in enumerate(stream):
+                    if line.strip():
+                        row = json.loads(line)
+                        yield {**row, 'source_id': f'{category}:{number}', 'choices': [row['ans0'], row['ans1'], row['ans2']]}
+    return write_rows(rows, output_dir / 'records.jsonl', 'jsonl', check)
+
+
+HALUEVAL_TEXT = {'dialogue': 'dialogue_history', 'general': 'user_query', 'qa': 'question', 'summarization': 'document'}
+
+
+@converter('halueval')
+def halueval(params, inputs, output_dir, check):
+    """HaluEval's four task files (one JSON object per line); adds the task, a source ID/row and the field shown as text."""
+    def rows():
+        for task, shown in HALUEVAL_TEXT.items():
+            with inputs[task].open() as stream:
+                for number, line in enumerate(stream, 1):
+                    if line.strip():
+                        row = json.loads(line)
+                        yield {**row, 'task': task, 'source_id': f'{task}:{number}', 'source_row': number, 'display_text': row[shown]}
+    return write_rows(rows, output_dir / 'records.jsonl', 'jsonl', check)
+
+
+@converter('behonest')
+def behonest(params, inputs, output_dir, check):
+    """BeHonest's scenario files, interleaved: row n of every file in turn, so any prefix spans all scenarios.
+
+    Adds `source_id` (member::id), scenario, member and the prompt shown; every original field is kept."""
+    def rows():
+        files = [(entry['member'], json.loads(inputs[entry['key']].read_text())) for entry in params['members']]
+        for position in range(max(len(data) for _, data in files)):
+            for member, data in files:
+                if position < len(data):
+                    row = data[position]
+                    shown = row['prompt'] if 'prompt' in row else row['prompt_1']
+                    yield {**row, 'source_id': f"{member}::{row['id']}", 'scenario': member.split('/')[0], 'source_member': member, 'display_text': shown}
+    return write_rows(rows, output_dir / 'records.jsonl', 'jsonl', check)

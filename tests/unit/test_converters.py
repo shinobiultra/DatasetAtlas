@@ -143,3 +143,84 @@ def test_a_conversion_recipe_must_pin_its_digest_at_plan_time(tmp_path):
     workspace(tmp_path / 'ws', {'CoLA.zip': zip_path.read_bytes()}, {'name': 'glue_task', 'count': 4, 'rows_sha256': 'not-a-digest'})
     with pytest.raises(ValueError, match='SHA-256 row digest'):
         PreparationManager(tmp_path / 'ws').plan('converted', 10_000_000, 10_000_000)
+
+
+# ---- each converter's rule, on small synthetic inputs --------------------------------------------
+
+def convert(name, params, inputs, tmp_path):
+    from dataset_atlas.converters import CONVERTERS, text  # noqa: F401
+    result = CONVERTERS[name](params, inputs, tmp_path / name, lambda: None)
+    path = result['path']
+    return [json.loads(line) for line in path.read_text().splitlines()], result
+
+
+def test_anthropic_gz_json_array_gets_a_one_based_source_row_and_keeps_native_types(tmp_path):
+    import gzip
+    source = tmp_path / 'r.jsonl.gz'
+    with gzip.open(source, 'wt') as stream:
+        json.dump([{'rating': 0.0, 'tags': None, 'is_upworker': False}, {'rating': 3.0, 'tags': ['x'], 'is_upworker': True}], stream)
+    rows, _ = convert('anthropic_red_team', {}, {'source_gz': source}, tmp_path)
+    assert rows == [{'rating': 0.0, 'tags': None, 'is_upworker': False, 'source_row': 1},
+                    {'rating': 3.0, 'tags': ['x'], 'is_upworker': True, 'source_row': 2}]
+
+
+def test_maliciousinstruct_skips_blank_lines_but_keeps_true_line_numbers(tmp_path):
+    source = tmp_path / 'm.txt'
+    source.write_text('first\n\nthird\n')
+    rows, _ = convert('maliciousinstruct', {}, {'source_txt': source}, tmp_path)
+    assert rows == [{'source_line': 1, 'prompt': 'first'}, {'source_line': 3, 'prompt': 'third'}]
+
+
+def test_tdc2023_numbers_dev_then_test_behaviours(tmp_path):
+    (tmp_path / 'd.json').write_text('["a", "b"]')
+    (tmp_path / 't.json').write_text('["c"]')
+    rows, _ = convert('tdc2023', {}, {'dev_behaviors': tmp_path / 'd.json', 'test_behaviors': tmp_path / 't.json'}, tmp_path)
+    assert [(r['source_id'], r['split'], r['source_index'], r['behavior']) for r in rows] == [('dev:1', 'dev', 1, 'a'), ('dev:2', 'dev', 2, 'b'), ('test:1', 'test', 1, 'c')]
+
+
+def test_bbq_adds_category_scoped_ids_and_choices_and_preserves_every_original_field(tmp_path):
+    for category, answers in (('Age', 'x'), ('SES', 'y')):
+        (tmp_path / f'{category}.jsonl').write_text(json.dumps({'example_id': 0, 'ans0': answers + '0', 'ans1': answers + '1', 'ans2': answers + '2', 'label': 1}) + '\n\n'
+                                                      + json.dumps({'example_id': 1, 'ans0': 'a', 'ans1': 'b', 'ans2': 'c', 'label': 0}) + '\n')
+    rows, _ = convert('bbq', {'categories': ['SES', 'Age']}, {c: tmp_path / f'{c}.jsonl' for c in ('Age', 'SES')}, tmp_path)
+    assert [r['source_id'] for r in rows] == ['SES:0', 'SES:2', 'Age:0', 'Age:2']  # the id is the file line, so a blank line leaves a gap
+    assert rows[0]['choices'] == ['y0', 'y1', 'y2'] and rows[0]['label'] == 1 and rows[0]['example_id'] == 0
+
+
+def test_halueval_shows_the_task_specific_field_and_numbers_rows_per_task(tmp_path):
+    inputs = {}
+    for task, shown in (('dialogue', 'dialogue_history'), ('general', 'user_query'), ('qa', 'question'), ('summarization', 'document')):
+        path = tmp_path / f'{task}.json'
+        path.write_text(json.dumps({shown: f'{task} text', 'other': 1}) + '\n')
+        inputs[task] = path
+    rows, _ = convert('halueval', {}, inputs, tmp_path)
+    assert [(r['task'], r['source_id'], r['source_row'], r['display_text']) for r in rows] == [
+        ('dialogue', 'dialogue:1', 1, 'dialogue text'), ('general', 'general:1', 1, 'general text'),
+        ('qa', 'qa:1', 1, 'qa text'), ('summarization', 'summarization:1', 1, 'summarization text')]
+
+
+def test_behonest_interleaves_files_row_by_row_so_any_prefix_spans_every_scenario(tmp_path):
+    members = [{'key': 'a', 'member': 'Alpha/one.json'}, {'key': 'b', 'member': 'Beta/two.json'}]
+    (tmp_path / 'a.json').write_text(json.dumps([{'id': 1, 'prompt': 'a1'}, {'id': 2, 'prompt': 'a2'}, {'id': 3, 'prompt': 'a3'}]))
+    (tmp_path / 'b.json').write_text(json.dumps([{'id': 1, 'prompt_1': 'b1'}]))
+    rows, _ = convert('behonest', {'members': members}, {'a': tmp_path / 'a.json', 'b': tmp_path / 'b.json'}, tmp_path)
+    assert [r['source_id'] for r in rows] == ['Alpha/one.json::1', 'Beta/two.json::1', 'Alpha/one.json::2', 'Alpha/one.json::3']
+    assert [r['display_text'] for r in rows] == ['a1', 'b1', 'a2', 'a3']  # `prompt_1` is shown when there is no `prompt`
+    assert rows[1]['scenario'] == 'Beta' and rows[1]['source_member'] == 'Beta/two.json'
+
+
+def test_glue_sst2_keeps_typed_columns_and_null_test_labels(tmp_path):
+    import pyarrow.parquet as pq
+    from dataset_atlas.converters import text
+    counts = {'train': 67349, 'dev': 872, 'test': 1821}
+    source = tmp_path / 'SST-2.zip'
+    with zipfile.ZipFile(source, 'w') as z:
+        z.writestr('SST-2/train.tsv', 'sentence\tlabel\n' + ''.join(f'train {i}\t{i % 2}\n' for i in range(counts['train'])))
+        z.writestr('SST-2/dev.tsv', 'sentence\tlabel\n' + ''.join(f'dev {i}\t1\n' for i in range(counts['dev'])))
+        z.writestr('SST-2/test.tsv', 'index\tsentence\n' + ''.join(f'{i}\ttest {i}\n' for i in range(counts['test'])))
+    result = text.glue_sst2({}, {'source_zip': source}, tmp_path / 'o', lambda: None)
+    table = pq.read_table(result['path'])
+    assert table.schema.field('label').type == 'int8' and table.schema.field('source_index').type == 'int32'
+    assert result['count'] == sum(counts.values())
+    last = table.slice(table.num_rows - 1, 1).to_pylist()[0]
+    assert last['label'] is None and last['label_status'] == 'withheld_by_glue' and last['split'] == 'test'

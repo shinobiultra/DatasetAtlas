@@ -1,0 +1,42 @@
+# The catalogue's records are these pinned originals plus identity fields (see dataset_atlas/converters/text.py). A fetch reproduces
+# them and fails unless the converted rows match this row digest, taken from the maintainer's records. IDs and snapshot unchanged.
+release: github-b7253db3cdaa0ab2c382f92b26b390109174f77e
+snapshot_id: github-b7253db3cdaa0ab2c382f92b26b390109174f77e-9150115bd2c4
+adapter: structured
+expected_count: 34507
+scope: 'All four official HaluEval release data files: dialogue, general, QA and summarization. Current files contain 34,507 records;
+  the README describes the release approximately as 35K.'
+source_url: https://github.com/RUCAIBox/HaluEval
+adapter_config: {}
+convert:
+  name: halueval
+  params: {}
+  count: 34507
+  rows_sha256: 425ad840993518e06c6b2c6dd80fce20a3653f2424629b90d71ce17e2dd3139c
+files:
+- source_name: dialogue_data.json
+  url: https://raw.githubusercontent.com/RUCAIBox/HaluEval/b7253db3cdaa0ab2c382f92b26b390109174f77e/data/dialogue_data.json
+  bytes: 6984266
+  sha256: 9c461df2691e4362837f66fceaaff3bc260453350c3a1cae76a5a52e5e338bfd
+  format: json
+  config_key: dialogue
+- source_name: general_data.json
+  url: https://raw.githubusercontent.com/RUCAIBox/HaluEval/b7253db3cdaa0ab2c382f92b26b390109174f77e/data/general_data.json
+  bytes: 3307122
+  sha256: 73302cd97666b808fb94b5d8a4a2c924049c9484e609017a2f808c4a6d539219
+  format: json
+  config_key: general
+- source_name: qa_data.json
+  url: https://raw.githubusercontent.com/RUCAIBox/HaluEval/b7253db3cdaa0ab2c382f92b26b390109174f77e/data/qa_data.json
+  bytes: 6164420
+  sha256: 89ed139ec5e3a3169a0b30e45569ac1283846f76f27f7bb5e908ee6deed57e88
+  format: json
+  config_key: qa
+- source_name: summarization_data.json
+  url: https://raw.githubusercontent.com/RUCAIBox/HaluEval/b7253db3cdaa0ab2c382f92b26b390109174f77e/data/summarization_data.json
+  bytes: 46992527
+  sha256: 86d2561eeb4271eb50b6bd90c9fd38636d30eaf4e98b648045f221adb1c2c758
+  format: json
+  config_key: summarization
+allowed_hosts:
+- raw.githubusercontent.com

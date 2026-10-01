@@ -1,0 +1,24 @@
+# The catalogue's records are these pinned originals plus identity fields (see dataset_atlas/converters/text.py). A fetch reproduces
+# them and fails unless the converted rows match this row digest, taken from the maintainer's records. IDs and snapshot unchanged.
+release: hf-09be8c5bbc57cb3887f3a9732ad6aa7ec602a1fa
+snapshot_id: hf-09be8c5bbc57cb3887f3a9732ad6aa7ec602a1fa-361e0c67cba0
+adapter: structured
+expected_count: 38961
+scope: Official Anthropic red-team-attempt transcripts and ratings, not the citing paper's 1,000-response selection. The official gzip
+  is a JSON array despite its jsonl.gz name.
+source_url: https://huggingface.co/datasets/Anthropic/hh-rlhf
+adapter_config: {}
+convert:
+  name: anthropic_red_team
+  params: {}
+  count: 38961
+  rows_sha256: 2a0652cebec5eca4cc1da748c678b0735ea82f0887ed279a0d6eaaab024c08cd
+files:
+- source_name: red_team_attempts.jsonl.gz
+  url: https://huggingface.co/datasets/Anthropic/hh-rlhf/resolve/09be8c5bbc57cb3887f3a9732ad6aa7ec602a1fa/red-team-attempts/red_team_attempts.jsonl.gz
+  bytes: 15483307
+  sha256: 4c7b0069991460f0064f279fd400b51f3f0095697d14d7793c49b0925f80814f
+  format: gz
+  config_key: source_gz
+allowed_hosts:
+- huggingface.co

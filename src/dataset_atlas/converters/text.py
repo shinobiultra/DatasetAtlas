@@ -192,3 +192,18 @@ def behonest(params, inputs, output_dir, check):
                     shown = row['prompt'] if 'prompt' in row else row['prompt_1']
                     yield {**row, 'source_id': f"{member}::{row['id']}", 'scenario': member.split('/')[0], 'source_member': member, 'display_text': shown}
     return write_rows(rows, output_dir / 'records.jsonl', 'jsonl', check)
+
+
+@converter('pope')
+def pope(params, inputs, output_dir, check):
+    """POPE's three object-probing question files (adversarial, popular, random): one row per question, joined by file name to COCO val2014."""
+    def rows():
+        for strategy in ('adversarial', 'popular', 'random'):
+            with inputs[strategy].open() as stream:
+                for line in stream:
+                    if line.strip():
+                        row = json.loads(line)
+                        yield {'source_id': f"{strategy}:{row['question_id']}", 'strategy': strategy, 'question_id': row['question_id'],
+                               'question': row['text'], 'label': row['label'], 'source_image_name': row['image'],
+                               'media_path': 'val2014/' + row['image']}
+    return write_rows(rows, output_dir / 'records.jsonl', 'jsonl', check)

@@ -224,3 +224,16 @@ def test_glue_sst2_keeps_typed_columns_and_null_test_labels(tmp_path):
     assert result['count'] == sum(counts.values())
     last = table.slice(table.num_rows - 1, 1).to_pylist()[0]
     assert last['label'] is None and last['label_status'] == 'withheld_by_glue' and last['split'] == 'test'
+
+
+def test_pope_joins_each_question_to_its_coco_val2014_image_and_keeps_question_ids_numeric(tmp_path):
+    inputs = {}
+    for number, strategy in enumerate(('adversarial', 'popular', 'random'), 1):
+        path = tmp_path / f'{strategy}.json'
+        path.write_text(json.dumps({'question_id': number, 'image': f'COCO_val2014_{number:012d}.jpg', 'text': 'Is there a cat in the image?', 'label': 'yes'}) + '\n')
+        inputs[strategy] = path
+    rows, _ = convert('pope', {}, inputs, tmp_path)
+    assert [(r['source_id'], r['question_id'], r['media_path']) for r in rows] == [
+        ('adversarial:1', 1, 'val2014/COCO_val2014_000000000001.jpg'), ('popular:2', 2, 'val2014/COCO_val2014_000000000002.jpg'),
+        ('random:3', 3, 'val2014/COCO_val2014_000000000003.jpg')]
+    assert rows[0]['question'] == 'Is there a cat in the image?' and rows[0]['label'] == 'yes' and rows[0]['strategy'] == 'adversarial'

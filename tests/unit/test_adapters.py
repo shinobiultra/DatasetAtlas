@@ -580,3 +580,35 @@ def test_full_clevr_reads_questions_and_media_by_range_with_identical_records(tm
     assert [(r.id, r.asset_ids, r.source["split"], r.question) for r in local_rows] == [(r.id, r.asset_ids, r.source["split"], r.question) for r in remote_rows]
     assert json.loads((tmp_path / "prepared-remote" / "questions-index.json").read_text())["archive_sha256"] == 'remote-etag:"clevr-etag"'
     assert remote.resolve_asset(remote_source, remote_rows[112].assets[0].uri).data == b"\x89PNG\r\n\x1a\nfixture val2"
+
+
+def test_structured_archive_reads_media_by_range_when_the_archive_is_not_local(tmp_path: Path, monkeypatch):
+    from dataset_atlas.adapters.remote_media import RemoteZip
+    archive_path = tmp_path / "val2014.zip"
+    with zipfile.ZipFile(archive_path, "w") as archive:
+        archive.writestr("val2014/COCO_val2014_000000000001.jpg", b"\xff\xd8\xfforiginal one")
+    records = tmp_path / "records.jsonl"
+    records.write_text(json.dumps({"source_id": "a:1", "question": "Is there a cat?", "media_path": "val2014/COCO_val2014_000000000001.jpg"}) + "\n")
+    class Range:
+        def __init__(self): self._s, self.size = archive_path.open("rb"), archive_path.stat().st_size
+        def readable(self): return True
+        def seekable(self): return True
+        def tell(self): return self._s.tell()
+        def seek(self, o, w=0): return self._s.seek(o, w)
+        def read(self, n=-1): return self._s.read(n)
+        def close(self): self._s.close()
+        def __enter__(self): return self
+        def __exit__(self, *e): self.close()
+    monkeypatch.setattr(RemoteZip, "reader", lambda self, budget: Range())
+    item = dataset(tmp_path, "structured_archive", {
+        "path": str(records), "format": "jsonl", "mapping": {"id": "source_id", "question": "question", "media": "media_path"},
+        "remote_media_archive": {"url": f"https://example.com/{tmp_path.name}/val2014.zip", "bytes": archive_path.stat().st_size,
+                                 "etag": '"val2014-etag"', "allowed_hosts": ["example.com"]},
+        "remote_cache_root": str(tmp_path / "remote-cache")})
+    adapter = get_adapter(item)
+    source = adapter.prepare(adapter.plan(1, 100_000))
+    record = adapter.iter_records(source, limit=1).records[0]
+    media = adapter.resolve_asset(source, record.assets[0].uri)
+    assert media.data == b"\xff\xd8\xfforiginal one" and media.media_type == "image/jpeg"
+    with pytest.raises(ValueError):
+        adapter.resolve_asset(source, "../val2014/COCO_val2014_000000000001.jpg")

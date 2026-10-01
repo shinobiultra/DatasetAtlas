@@ -317,7 +317,7 @@ class PreparationManager:
                 plan['requirements'].append('Indexed gzip access requires the remote-storage extra (indexed-gzip).')
             plan['media_access'] = 'Native gzip TAR checkpoints support bounded original-image retrieval; no uncompressed media archive is created.'
         remote = dataset.adapter_config.get('remote_archives', {})
-        remote_zips = [key for key in ('remote_questions', 'remote_images', 'remote_archive') if dataset.adapter_config.get(key)]
+        remote_zips = [key for key in ('remote_questions', 'remote_images', 'remote_archive', 'remote_media_archive') if dataset.adapter_config.get(key)]
         selective_media = remote or remote_zips or dataset.adapter_config.get('media_inventory_path') or plan.get('kind') in {'huggingface_remote_columnar','huggingface_remote_sample'} or dataset.adapter in {'remote_columnar','objectnet'}
         if selective_media:
             cache_bytes = dataset.adapter_config.get('remote_cache_bytes',1_000_000_000)

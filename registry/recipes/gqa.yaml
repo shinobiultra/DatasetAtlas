@@ -1,9 +1,25 @@
-# Official complete image archive; questions remain explicitly validation-balanced.
-description: Official GQA v1.2 validation-balanced population of 132,062 question-answer examples. Every referenced image ID is joined to the verified complete official image archive. Training and other question splits are outside this explicitly scoped snapshot.
+# A clean clone reads GQA's two official archives by ranges bound to their strong ETags (consistency fingerprints, not content hashes)
+# instead of downloading 1.5 GB + 21.8 GB. The maintainer's active version joined a fully downloaded images.zip (SHA-256 02ce5c49...,
+# recorded in its receipt); the files are the same, so questions, record IDs and the snapshot ID are unchanged.
+description: Official GQA v1.2 validation-balanced population of 132,062 question-answer examples. Every referenced image ID is joined
+  to the complete directory of the official image archive. Questions and images are read on request by HTTPS ranges bound to each archive's
+  ETag; neither archive is downloaded. Training and other question splits are outside this explicitly scoped snapshot.
 snapshot_id: gqa-v1.2-val-balanced-full-media-02ce5c49c793accd
 adapter_config:
-  images_archive: work/sources/gqa/images.zip
-  images_sha256: 02ce5c49c793accd5305356de9c39a50f80a7aaac193b0203de30dbbc65bde62
-  prepared_root: work/sources/gqa/prepared-full-media
-  media_scope: full
-  preparation_budget_bytes: 2000000000
+  remote_questions:
+    url: https://downloads.cs.stanford.edu/nlp/data/gqa/questions1.2.zip
+    bytes: 1498616372
+    etag: '"5c9a1875-59531234"'
+    allowed_hosts:
+    - downloads.cs.stanford.edu
+  remote_images:
+    url: https://downloads.cs.stanford.edu/nlp/data/gqa/images.zip
+    bytes: 21817965542
+    etag: '"5c55f4cb-51473bbe6"'
+    allowed_hosts:
+    - downloads.cs.stanford.edu
+  remote_cache_root: work/media-cache/gqa-remote
+  remote_cache_bytes: 1000000000
+  prepared_root: work/sources/gqa/prepared-remote
+  media_scope: on_demand_unverified
+  expected_questions: 132062

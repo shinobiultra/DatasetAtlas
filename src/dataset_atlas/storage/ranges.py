@@ -5,9 +5,15 @@ import http.client
 import io
 from pathlib import Path
 import re
+import time
 from urllib.parse import urljoin
 from .https import HttpsFetcher, _PinnedHTTPSConnection
 from .cache import BoundedCache, CacheIdentity
+
+
+class _TransientRangeError(Exception):
+    def __init__(self,status):
+        super().__init__(f'transient HTTP {status}');self.status=status
 
 
 class HttpsRangeReader(io.RawIOBase):
@@ -69,7 +75,7 @@ class HttpsRangeReader(io.RawIOBase):
             # Budgets bound network transfer; an already verified cached range costs none.
             if count>self.byte_budget:raise ValueError('Remote range exceeds read budget')
             if self.bytes_fetched+count>self.byte_budget:raise ValueError('Remote reads exceed transfer budget')
-            data=self._fetch(start,end)
+            data=self._fetch_with_retry(start,end)
             self.bytes_fetched+=len(data)
             if self.cache:
                 # Independent readers may request the same immutable range concurrently.
@@ -82,6 +88,17 @@ class HttpsRangeReader(io.RawIOBase):
                         self.cache.commit(identity,partial,fingerprint_type='etag',fingerprint=self.etag)
         self.position+=len(data)
         return data
+
+    TRANSIENT_STATUSES=(429,502,503,504)
+
+    def _fetch_with_retry(self,start,end):
+        """Retry only throttling/unavailability, with bounded backoff. Integrity failures (ETag, bounds) never retry."""
+        for attempt in range(5):
+            try:return self._fetch(start,end)
+            except _TransientRangeError as error:
+                if attempt==4:raise ValueError(f'Range source unavailable: HTTP {error.status} after {attempt} retries') from None
+                if self.cancel:self.cancel()
+                time.sleep(min(8,2**attempt))
 
     def _fetch(self,start,end):
         current=self._resolved_url or self.url
@@ -117,6 +134,7 @@ class HttpsRangeReader(io.RawIOBase):
                     # Signed CDN destinations can expire; resolve again once.
                     self._resolved_url=None;current=self.url
                     continue
+                if response.status in self.TRANSIENT_STATUSES:raise _TransientRangeError(response.status)
                 if response.status!=206:raise ValueError(f'Range source requires HTTP 206; received {response.status}')
                 if response.getheader('ETag')!=self.etag:raise ValueError('Range source ETag changed')
                 if response.getheader('Content-Encoding','identity')!='identity':raise ValueError('Encoded range response is unsupported')

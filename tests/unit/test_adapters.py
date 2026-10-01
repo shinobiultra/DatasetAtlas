@@ -456,3 +456,87 @@ def test_vqa_v2_joins_original_answers_and_coco_2014_images(tmp_path: Path):
     assert len(first.records[0].source["answers"]) == 10
     assert adapter.resolve_asset(source, second.records[0].assets[0].uri).media_type == "image/jpeg"
     assert json.loads((tmp_path / "prepared" / "index.json").read_text())["join_report"]["unmatched_annotations"] == 0
+
+
+def _vqa_fixture(tmp_path: Path, remote: bool):
+    questions_zip, annotations_zip, images_zip = tmp_path / "q.zip", tmp_path / "a.zip", tmp_path / "val2014.zip"
+    questions = [{"question_id": i, "image_id": 10 if i < 3 else 11, "question": f"Question {i}?"} for i in (1, 2, 3)]
+    annotations = [{"question_id": q["question_id"], "image_id": q["image_id"], "question_type": "what", "answer_type": "other",
+                    "multiple_choice_answer": "cat", "answers": [{"answer_id": j, "answer": "cat", "answer_confidence": "yes"} for j in range(1, 11)]}
+                   for q in questions]
+    with zipfile.ZipFile(questions_zip, "w") as archive:
+        archive.writestr("v2_OpenEnded_mscoco_val2014_questions.json", json.dumps({"data_subtype": "val2014", "questions": questions}))
+    with zipfile.ZipFile(annotations_zip, "w") as archive:
+        archive.writestr("v2_mscoco_val2014_annotations.json", json.dumps({"data_subtype": "val2014", "annotations": annotations}))
+    with zipfile.ZipFile(images_zip, "w") as archive:
+        for image_id in (10, 11):
+            archive.writestr(f"val2014/COCO_val2014_{image_id:012d}.jpg", b"\xff\xd8\xff" + f"original {image_id}".encode())
+    config = {"questions_archive": str(questions_zip), "annotations_archive": str(annotations_zip), "prepared_root": str(tmp_path / "prepared"),
+              "questions_sha256": hashlib.sha256(questions_zip.read_bytes()).hexdigest(),
+              "annotations_sha256": hashlib.sha256(annotations_zip.read_bytes()).hexdigest(), "expected_questions": 3}
+    if remote:
+        config.update(remote_images={"url": f"https://example.com/{tmp_path.name}/val2014.zip", "bytes": images_zip.stat().st_size,
+                                     "etag": '"fixture-etag"', "allowed_hosts": ["example.com"]},
+                      remote_cache_root=str(tmp_path / "remote-cache"))
+    else:
+        config.update(images_archive=str(images_zip), images_sha256=hashlib.sha256(images_zip.read_bytes()).hexdigest())
+    return config, images_zip
+
+
+class _FakeRange:
+    """Stands in for an ETag-bound HTTPS range reader over a local ZIP, counting what it is asked for."""
+    def __init__(self, path: Path, requested: list):
+        self._stream, self.size, self.requested = path.open("rb"), path.stat().st_size, requested
+    def readable(self): return True
+    def seekable(self): return True
+    def tell(self): return self._stream.tell()
+    def seek(self, offset, whence=0): return self._stream.seek(offset, whence)
+    def read(self, size=-1):
+        start = self._stream.tell(); data = self._stream.read(size); self.requested.append((start, len(data))); return data
+    def close(self): self._stream.close()
+    def __enter__(self): return self
+    def __exit__(self, *exc): self.close()
+
+
+def test_vqa_v2_reads_images_by_range_when_the_archive_is_not_local(tmp_path: Path, monkeypatch):
+    from dataset_atlas.adapters.remote_media import RemoteZip
+    config, images_zip = _vqa_fixture(tmp_path, remote=True)
+    requested: list = []
+    monkeypatch.setattr(RemoteZip, "reader", lambda self, budget: _FakeRange(images_zip, requested))
+    adapter = get_adapter(dataset(tmp_path, "vqa_v2", config))
+    assert adapter.probe().exists  # no local image archive is required
+    source = adapter.prepare(adapter.plan(3, 100_000))
+    batch = adapter.iter_records(source, limit=3)
+    assert len(batch.records) == 3 and batch.records[0].source["question"] == "Question 1?"
+    assert batch.records[0].assets[0].metadata["media_access"] == "remote_zip_range"
+    assert batch.records[0].assets[0].metadata["source_etag"] == '"fixture-etag"'
+    media = adapter.resolve_asset(source, batch.records[2].assets[0].uri)
+    assert media.data == b"\xff\xd8\xfforiginal 11" and media.media_type == "image/jpeg"
+    # The index records that the images were bound by ETag rather than by a whole-file hash.
+    index = json.loads((tmp_path / "prepared" / "index.json").read_text())
+    assert index["source_sha256"]["images"] == 'remote-etag:"fixture-etag"' and index["join_report"]["missing_images"] == 0
+    assert requested, "images must be read through the range reader"
+
+
+def test_remote_and_local_images_give_identical_records(tmp_path: Path, monkeypatch):
+    """Where the archive lives must not change record identity: colleagues share selections with the maintainer."""
+    from dataset_atlas.adapters.remote_media import RemoteZip
+    local_dir, remote_dir = tmp_path / "local", tmp_path / "remote"
+    local_dir.mkdir(); remote_dir.mkdir()
+    local_config, _ = _vqa_fixture(local_dir, remote=False)
+    remote_config, images_zip = _vqa_fixture(remote_dir, remote=True)
+    monkeypatch.setattr(RemoteZip, "reader", lambda self, budget: _FakeRange(images_zip, []))
+    ids = []
+    for directory, config in ((local_dir, local_config), (remote_dir, remote_config)):
+        adapter = get_adapter(dataset(directory, "vqa_v2", config))
+        source = adapter.prepare(adapter.plan(3, 100_000))
+        ids.append([(r.id, r.asset_ids, r.source["question"]) for r in adapter.iter_records(source, limit=3).records])
+    assert ids[0] == ids[1]
+
+
+def test_remote_images_without_a_pinned_etag_are_refused(tmp_path: Path):
+    config, _ = _vqa_fixture(tmp_path, remote=True)
+    del config["remote_images"]["etag"]
+    adapter = get_adapter(dataset(tmp_path, "vqa_v2", config))
+    with pytest.raises(ValueError, match="strong ETag"):
+        adapter.plan(1, 1000)

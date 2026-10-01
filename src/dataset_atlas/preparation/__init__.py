@@ -297,7 +297,8 @@ class PreparationManager:
                 plan['requirements'].append('Indexed gzip access requires the remote-storage extra (indexed-gzip).')
             plan['media_access'] = 'Native gzip TAR checkpoints support bounded original-image retrieval; no uncompressed media archive is created.'
         remote = dataset.adapter_config.get('remote_archives', {})
-        selective_media = remote or dataset.adapter_config.get('media_inventory_path') or plan.get('kind') in {'huggingface_remote_columnar','huggingface_remote_sample'} or dataset.adapter in {'remote_columnar','objectnet'}
+        remote_zips = [key for key in ('remote_questions', 'remote_images') if dataset.adapter_config.get(key)]
+        selective_media = remote or remote_zips or dataset.adapter_config.get('media_inventory_path') or plan.get('kind') in {'huggingface_remote_columnar','huggingface_remote_sample'} or dataset.adapter in {'remote_columnar','objectnet'}
         if selective_media:
             cache_bytes = dataset.adapter_config.get('remote_cache_bytes',1_000_000_000)
             if type(cache_bytes) is not int or not 1 <= cache_bytes <= 1_000_000_000_000:
@@ -318,6 +319,12 @@ class PreparationManager:
             plan['remote_metadata_bytes'] = metadata_limit
         elif selective_media and not plan.get('media_access'):
             plan['media_access'] = 'Original image files fetched on inspection and checked against the pinned source inventory; a bounded cache limits disk use.'
+        if remote_zips:
+            # Directories are read by ranges; each inspected original adds its own bytes. Nothing is downloaded whole.
+            plan['expected_download_bytes'] += dataset.adapter_config.get('remote_metadata_bytes', 150_000_000) * len(remote_zips)
+            plan['download_is_upper_bound'] = True
+            plan['media_access'] = ("Archive directories and the few originals you inspect are read by HTTPS ranges bound to each archive's "
+                                    'strong ETag (a consistency fingerprint, not a content hash); the archives themselves are not downloaded.')
         if plan['expected_download_bytes'] > max_download_bytes:
             plan['ready'] = False
             plan['requirements'].append('Source download exceeds the selected download budget.')

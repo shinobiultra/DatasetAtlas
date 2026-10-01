@@ -43,12 +43,12 @@ export function passesFacets(dataset: Dataset, facets: Facets): boolean {
   return true
 }
 
-function Tiles({ entry, name }: { entry: ThumbEntry | undefined; name: string }) {
+function Tiles({ entry, name, onRequest = false }: { entry: ThumbEntry | undefined; name: string; onRequest?: boolean }) {
   const tiles = entry?.tiles ?? []
   if (!tiles.length) {
     return (
       <div className="ds-thumbs">
-        <div className="no-thumb"><Icon.Database size={18} /><span>No preview prepared</span></div>
+        <div className="no-thumb"><Icon.Database size={18} /><span>{onRequest ? 'Preview on request' : 'No preview prepared'}</span></div>
       </div>
     )
   }
@@ -84,7 +84,7 @@ function DatasetCard({ dataset, thumbs, onOpen, starred, onStar }: {
         <Icon.Star size={14} filled={starred} />
       </button>
       <button type="button" onClick={onOpen} style={{ all: 'unset', cursor: 'pointer', display: 'flex', flexDirection: 'column', flex: 1 }}>
-        <Tiles entry={thumbs} name={dataset.name} />
+        <Tiles entry={thumbs} name={dataset.name} onRequest={coverageState(dataset, provider.mode) === 'on_request'} />
         <div className="ds-card-body">
           <div className="ds-card-title"><strong>{dataset.name}</strong></div>
           <p className="clamp-2">{dataset.description || 'No description recorded for this source yet.'}</p>

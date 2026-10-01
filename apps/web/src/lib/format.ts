@@ -120,7 +120,8 @@ export function coverageLine(dataset: Dataset, mode: 'static' | 'workbench'): { 
       return { text: `${previewCount.toLocaleString()} ${unit} preview${extra}`, tone: 'ok' }
     }
     case 'on_request':
-      return { text: `Preview on request · ${(dataset.availability?.upstream_preview_count ?? 0).toLocaleString()} ${unit} when fetched`, tone: 'default' }
+      { const count = dataset.availability?.upstream_preview_count ?? 0
+        return { text: `Preview on request · ${count.toLocaleString()} ${unit}${count === 1 ? '' : 's'} when fetched`, tone: 'default' } }
     case 'elsewhere':
       return { text: `Metadata only here · ${previewCount.toLocaleString()} ${unit} preview exists in the local workbench`, tone: 'warn' }
     default:

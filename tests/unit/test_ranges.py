@@ -137,3 +137,50 @@ def test_redirect_is_reused_but_every_destination_is_revalidated(monkeypatch):
         assert source.read(2)==b'23'
     assert requests==['/original','/signed','/signed']
     assert len(destinations)==3
+
+
+def flaky_transport(monkeypatch, payload, failures, status=503):
+    """Fail the first `failures` requests with a throttling status, then serve normally."""
+    calls = {'n': 0}
+    class Connection:
+        def __init__(self, *args): pass
+        def request(self, method, target, headers):
+            self.start, self.end = map(int, headers['Range'][6:].split('-')); calls['n'] += 1
+        def getresponse(self):
+            response = io.BytesIO(b'' if calls['n'] <= failures else payload[self.start:self.end + 1])
+            response.status = status if calls['n'] <= failures else 206
+            headers = {'ETag': '"v1"', 'Content-Range': f'bytes {self.start}-{self.end}/{len(payload)}', 'Content-Length': str(self.end - self.start + 1)}
+            response.getheader = lambda name, default=None: headers.get(name, default)
+            return response
+        def close(self): pass
+    monkeypatch.setattr('dataset_atlas.storage.ranges._PinnedHTTPSConnection', Connection)
+    monkeypatch.setattr('dataset_atlas.storage.https.HttpsFetcher._destination', lambda self, url: ('example.org', 443, '1.1.1.1', '/source'))
+    slept = []
+    monkeypatch.setattr('dataset_atlas.storage.ranges.time.sleep', slept.append)
+    return calls, slept
+
+
+@pytest.mark.parametrize('status', [429, 502, 503, 504])
+def test_throttling_is_retried_with_backoff_and_does_not_count_against_the_budget(monkeypatch, status):
+    payload = bytes(range(256)) * 4
+    calls, slept = flaky_transport(monkeypatch, payload, failures=2, status=status)
+    with reader(payload) as source:
+        assert source.read(100) == payload[:100]
+        assert source.bytes_fetched == 100
+    assert calls['n'] == 3 and slept == [1, 2]
+
+
+def test_persistent_unavailability_gives_up_with_a_clear_error(monkeypatch):
+    payload = b'x' * 1000
+    calls, slept = flaky_transport(monkeypatch, payload, failures=99)
+    with reader(payload) as source, pytest.raises(ValueError, match='unavailable: HTTP 503 after 4 retries'):
+        source.read(10)
+    assert calls['n'] == 5 and slept == [1, 2, 4, 8]
+
+
+def test_integrity_failures_are_never_retried(monkeypatch):
+    payload = b'x' * 1000
+    calls = transport(monkeypatch, payload, etag='"changed"')
+    with reader(payload) as source, pytest.raises(ValueError, match='ETag changed'):
+        source.read(10)
+    assert len(calls) == 1

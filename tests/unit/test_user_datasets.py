@@ -363,3 +363,14 @@ def test_a_column_declared_numeric_that_is_not_fails_loudly_instead_of_loading_t
     adapter = get_adapter(Dataset(id='x', name='x', adapter='csv', snapshot_id='s', release='r', adapter_config=config))
     with pytest.raises(ValueError, match="column 'who' is declared numeric"):
         list(adapter._rows())
+
+
+def test_a_folder_far_too_large_to_be_a_dataset_is_refused_without_a_full_walk(tmp_path, monkeypatch):
+    import dataset_atlas.registry.user as user
+    for i in range(30):
+        image(tmp_path / 'huge' / f'{i}.png')
+    monkeypatch.setattr(user, 'MAX_FOLDER_ENTRIES', 10)
+    with pytest.raises(ValueError, match='more than 10 files'):
+        inspect_source(str(tmp_path / 'huge'))
+    monkeypatch.setattr(user, 'MAX_FOLDER_ENTRIES', 1000)
+    assert inspect_source(str(tmp_path / 'huge'))['count'] == 30

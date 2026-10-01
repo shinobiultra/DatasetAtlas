@@ -42,7 +42,7 @@ def classify(plan: dict) -> str:
         return 'gated'
     if 'unreleased' in text or 'have not released' in text:
         return 'unreleased'
-    if 'no pinned acquisition recipe' in text or 'no acquisition path' in text or 'adapter implementation missing' in text or 'authorized local source' in text:
+    if 'no pinned acquisition recipe' in text or 'no acquisition path' in text or 'adapter implementation missing' in text or 'authorized local source' in text or 'format-specific acquisition recipe' in text:
         return 'no_recipe'
     return 'other'
 

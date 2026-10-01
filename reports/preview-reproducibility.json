@@ -1,6 +1,6 @@
 {
  "catalogue_entries": 333,
- "commit": "76b9d3c",
+ "commit": "885bd60",
  "datasets": [
   {
    "category": "no_recipe",
@@ -11,7 +11,7 @@
    "name": "Pach ImageNet validation activation index",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -36,7 +36,7 @@
    }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "agent-security-bench",
    "download_bytes": 441328,
    "kind": "http_archive",
@@ -45,10 +45,17 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 441328,
+    "kind": "http_archive",
+    "records_indexed": 843,
+    "snapshot_id": "agent-security-bench-0740dd18c9056b93339e7472"
+   }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "algopuzzlevqa",
    "download_bytes": 226793952,
    "kind": "huggingface_columnar",
@@ -57,35 +64,52 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 226793952,
+    "kind": "huggingface_columnar",
+    "records_indexed": 1800,
+    "snapshot_id": "algopuzzlevqa-0063c0f9ee41355ecc164b16"
+   }
   },
   {
-   "category": "no_recipe",
+   "category": "verified",
    "dataset_id": "alpaca",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 22773992,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "Stanford Alpaca",
-   "ready": false,
-   "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 22773992,
+    "kind": "http_archive",
+    "records_indexed": 52002,
+    "snapshot_id": "alpaca-data-sha256-2eddafc6b977608d778aaab8dfc7e50e547b3af9826dfb9e909d9fc362e4a419"
+   }
   },
   {
-   "category": "no_recipe",
+   "category": "verified",
    "dataset_id": "anthropic-red-teaming-prompts",
-   "download_bytes": 0,
-   "kind": "huggingface_columnar",
+   "download_bytes": 15483307,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "Anthropic red-teaming prompts",
-   "ready": false,
-   "requirements": [
-    "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 15483307,
+    "kind": "http_archive",
+    "records_indexed": 38961,
+    "snapshot_id": "hf-09be8c5bbc57cb3887f3a9732ad6aa7ec602a1fa-361e0c67cba0"
+   }
   },
   {
    "category": "verified",
@@ -115,7 +139,7 @@
    "name": "Artbench-2",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -129,7 +153,7 @@
    "name": "Artchive",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -143,7 +167,7 @@
    "name": "Asteroids ROM",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -157,7 +181,7 @@
    "name": "AudioSet",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -171,7 +195,7 @@
    "name": "BAM-FG",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -189,32 +213,42 @@
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "verified",
    "dataset_id": "bbq",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 50931178,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "BBQ",
-   "ready": false,
-   "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 50931178,
+    "kind": "http_archive",
+    "records_indexed": 58492,
+    "snapshot_id": "github-bea11bd97d79217245b5871acd247b9d6eb24598-a4477d8c0a81"
+   }
   },
   {
-   "category": "no_recipe",
+   "category": "verified",
    "dataset_id": "behonest",
-   "download_bytes": 0,
-   "kind": "huggingface_columnar",
+   "download_bytes": 5261339,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "BeHonest",
-   "ready": false,
-   "requirements": [
-    "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 5261339,
+    "kind": "http_archive",
+    "records_indexed": 19059,
+    "snapshot_id": "behonest-sha256-3fc0022ed6b68c4e5598c027ef2683731d6957a67ac930557fd336b70ebe3163"
+   }
   },
   {
    "category": "verified",
@@ -256,7 +290,7 @@
    "name": "Brain-Score",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -270,7 +304,7 @@
    "name": "BRCA",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -284,13 +318,13 @@
    "name": "Broden",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "caltech101",
    "download_bytes": 137414764,
    "kind": "http_archive",
@@ -299,7 +333,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 137414764,
+    "kind": "http_archive",
+    "records_indexed": 9144,
+    "snapshot_id": "caltech101-a1db0495e523344acece6c4f"
+   }
   },
   {
    "category": "planned",
@@ -314,7 +355,7 @@
    "upper_bound": true
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "causalgym",
    "download_bytes": 8285880,
    "kind": "http_archive",
@@ -323,7 +364,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 8285880,
+    "kind": "http_archive",
+    "records_indexed": 17400,
+    "snapshot_id": "causalgym-7907ec8c860039bcb0de0c4e"
+   }
   },
   {
    "category": "no_recipe",
@@ -334,24 +382,29 @@
    "name": "CC3M",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "verified",
    "dataset_id": "cebab",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 2243815,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "CEBaB v1.1",
-   "ready": false,
-   "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 2243815,
+    "kind": "http_archive",
+    "records_indexed": 18600,
+    "snapshot_id": "cebab-sha256-e06a0233c8972462ebfbab0f1ab466938f15baebc7f418a0e6af68888cb86e3d"
+   }
   },
   {
    "category": "no_recipe",
@@ -362,13 +415,13 @@
    "name": "CelebA",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "chartqa",
    "download_bytes": 4615773,
    "kind": "http_archive",
@@ -377,10 +430,17 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 4615773,
+    "kind": "http_archive",
+    "records_indexed": 32719,
+    "snapshot_id": "chartqa-64ac239af71feeb5c9b892d8"
+   }
   },
   {
-   "category": "no_recipe",
+   "category": "gated",
    "dataset_id": "chicago-face-database",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -388,13 +448,13 @@
    "name": "Chicago Face Database",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "child-safety-intents",
    "download_bytes": 8771903,
    "kind": "http_archive",
@@ -403,7 +463,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 8771903,
+    "kind": "http_archive",
+    "records_indexed": 747,
+    "snapshot_id": "child-safety-intents-c7ceb4eb44b7d515632ea2a3"
+   }
   },
   {
    "category": "verified",
@@ -433,7 +500,7 @@
    "name": "CIFAR-10.1 v6",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -490,7 +557,7 @@
    "name": "CIFAR-2",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -527,18 +594,23 @@
    }
   },
   {
-   "category": "no_recipe",
+   "category": "verified",
    "dataset_id": "clevr-v1-full",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 400000000,
+   "kind": "local",
    "maintainer_preview": true,
    "name": "CLEVR v1.0 (official complete release)",
-   "ready": false,
-   "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": true,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 0,
+    "kind": "local",
+    "records_indexed": 999968,
+    "snapshot_id": "clevr-v1-zip-sha256-5cd61cf1096ed20944df93c9adb31e74d189b8459a94f54ba00090e5c59936d1"
+   }
   },
   {
    "category": "verified",
@@ -560,7 +632,7 @@
    }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "coco-2014",
    "download_bytes": 293636258,
    "kind": "http_archive",
@@ -569,7 +641,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 253636258,
+    "kind": "http_archive",
+    "records_indexed": 164062,
+    "snapshot_id": "coco-2014-d310f9ccbd947a75c96c1c5d"
+   }
   },
   {
    "category": "no_recipe",
@@ -580,13 +659,13 @@
    "name": "COCO Caption",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "gated",
    "dataset_id": "coco-demographic-annotations",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -594,7 +673,7 @@
    "name": "COCO demographic annotations",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -608,7 +687,7 @@
    "name": "COCO Detection Dataset",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -622,7 +701,7 @@
    "name": "COCO-gender",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -647,7 +726,7 @@
    }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "coco-qa",
    "download_bytes": 31859880,
    "kind": "http_archive",
@@ -656,7 +735,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 1859880,
+    "kind": "http_archive",
+    "records_indexed": 117684,
+    "snapshot_id": "coco-qa-3f4aecef7c435acec860621a"
+   }
   },
   {
    "category": "no_recipe",
@@ -667,7 +753,7 @@
    "name": "COCO-Spatial",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -681,7 +767,7 @@
    "name": "COCO train",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -714,7 +800,7 @@
    "name": "COCOgender",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -728,7 +814,7 @@
    "name": "Cocogendertxt",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -742,7 +828,7 @@
    "name": "Concept-Editing Dataset",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -775,7 +861,7 @@
    "name": "Conceptual Captions",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -789,7 +875,7 @@
    "name": "Contrastive Prompts",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -833,7 +919,7 @@
    }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "counterfact",
    "download_bytes": 45108470,
    "kind": "http_archive",
@@ -842,7 +928,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 45108470,
+    "kind": "http_archive",
+    "records_indexed": 21919,
+    "snapshot_id": "counterfact-1079b795a617ce71f77b9c58"
+   }
   },
   {
    "category": "planned",
@@ -865,7 +958,7 @@
    "name": "CUB",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -891,7 +984,7 @@
    "name": "CUB200",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -905,7 +998,7 @@
    "name": "Custom Dataset",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -919,7 +1012,7 @@
    "name": "Custom Image Editing Dataset",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -933,7 +1026,7 @@
    "name": "custom neonatal rat ganglion recordings",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -966,7 +1059,7 @@
    "name": "custom speech segment collection",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -980,7 +1073,7 @@
    "name": "custom Ternus psychophysics responses",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -994,7 +1087,7 @@
    "name": "DALL-E generated target images",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -1020,13 +1113,13 @@
    "name": "DeepFashion",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "div2k",
    "download_bytes": 5000000,
    "kind": "local",
@@ -1035,7 +1128,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 0,
+    "kind": "local",
+    "records_indexed": 900,
+    "snapshot_id": "div2k-1570d8375a01e3d8ee53e296"
+   }
   },
   {
    "category": "no_recipe",
@@ -1046,7 +1146,7 @@
    "name": "DOCCI image descriptions",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -1060,7 +1160,7 @@
    "name": "DocVQA",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -1074,13 +1174,13 @@
    "name": "Donkey Kong ROM",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "dreambooth",
    "download_bytes": 112065318,
    "kind": "http_archive",
@@ -1089,10 +1189,17 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 112065318,
+    "kind": "http_archive",
+    "records_indexed": 158,
+    "snapshot_id": "dreambooth-ff3cb5f3a1403af162ae7ee8"
+   }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "dtd",
    "download_bytes": 625239812,
    "kind": "http_archive",
@@ -1101,7 +1208,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 625239812,
+    "kind": "http_archive",
+    "records_indexed": 5640,
+    "snapshot_id": "dtd-714bf0a61e0919a06d221ecf"
+   }
   },
   {
    "category": "no_recipe",
@@ -1112,7 +1226,7 @@
    "name": "E-IC",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -1126,13 +1240,13 @@
    "name": "E-VQA",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "emnist",
    "download_bytes": 561753746,
    "kind": "http_archive",
@@ -1141,7 +1255,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 561753746,
+    "kind": "http_archive",
+    "records_indexed": 2255710,
+    "snapshot_id": "emnist-e2feaa3eaf68c7669ee9d3ea"
+   }
   },
   {
    "category": "no_recipe",
@@ -1152,13 +1273,13 @@
    "name": "EMNIST Balanced",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "emnist-letters",
    "download_bytes": 561753746,
    "kind": "http_archive",
@@ -1167,7 +1288,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 561753746,
+    "kind": "http_archive",
+    "records_indexed": 145600,
+    "snapshot_id": "emnist-letters-ccc090792290aabf13eb77bd"
+   }
   },
   {
    "category": "no_recipe",
@@ -1178,7 +1306,7 @@
    "name": "Emoset",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -1215,7 +1343,7 @@
    "upper_bound": true
   },
   {
-   "category": "no_recipe",
+   "category": "gated",
    "dataset_id": "facet",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -1223,13 +1351,13 @@
    "name": "FACET",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "gated",
    "dataset_id": "facial-expression-recognition-2013",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -1237,7 +1365,7 @@
    "name": "Facial Expression Recognition 2013",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -1251,7 +1379,7 @@
    "name": "FACTOID",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -1269,7 +1397,7 @@
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "gated",
    "dataset_id": "fer-2013",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -1277,7 +1405,7 @@
    "name": "FER-2013",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -1291,7 +1419,7 @@
    "name": "FFHQ",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -1305,7 +1433,7 @@
    "name": "FGVC",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -1381,13 +1509,13 @@
    "name": "First-Person Social Interactions Dataset",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "gated",
    "dataset_id": "flickr30k",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -1395,7 +1523,7 @@
    "name": "Flickr30k",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -1409,13 +1537,13 @@
    "name": "Flowers",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "flowers102",
    "download_bytes": 344878000,
    "kind": "http_archive",
@@ -1424,10 +1552,17 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 344878000,
+    "kind": "http_archive",
+    "records_indexed": 8189,
+    "snapshot_id": "flowers102-4028c0ac49ba835a025b9cc7"
+   }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "foil-it",
    "download_bytes": 171634562,
    "kind": "http_archive",
@@ -1436,7 +1571,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 131634562,
+    "kind": "http_archive",
+    "records_indexed": 594536,
+    "snapshot_id": "foil-it-98fc25e642021305d20cdd72"
+   }
   },
   {
    "category": "planned",
@@ -1459,7 +1601,7 @@
    "name": "Gaussian rubbish examples",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -1473,27 +1615,32 @@
    "name": "GDA adversarial image variants",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "verified",
    "dataset_id": "glue-cola",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 376971,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "GLUE CoLA",
-   "ready": false,
-   "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 376971,
+    "kind": "http_archive",
+    "records_indexed": 10657,
+    "snapshot_id": "glue-cola-sha256-6eb61fa7e7466bf3c5c1faf4283430008b90444abf92f01974de8b489b8bfcdc"
+   }
   },
   {
-   "category": "no_recipe",
+   "category": "gated",
    "dataset_id": "google-web-1t-corpus",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -1501,7 +1648,7 @@
    "name": "Google Web 1T Corpus",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -1515,24 +1662,29 @@
    "name": "GPT-4V-filtered VL-Gender subset",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "verified",
    "dataset_id": "gqa",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 300000000,
+   "kind": "local",
    "maintainer_preview": true,
    "name": "GQA val-balanced",
-   "ready": false,
-   "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": true,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 0,
+    "kind": "local",
+    "records_indexed": 132062,
+    "snapshot_id": "gqa-v1.2-val-balanced-full-media-02ce5c49c793accd"
+   }
   },
   {
    "category": "no_recipe",
@@ -1543,7 +1695,7 @@
    "name": "Group Labels",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -1557,13 +1709,13 @@
    "name": "GVIL",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "gvil-paired-illusion-images",
    "download_bytes": 26668357,
    "kind": "http_archive",
@@ -1572,10 +1724,17 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 26668357,
+    "kind": "http_archive",
+    "records_indexed": 3302,
+    "snapshot_id": "gvil-paired-illusion-images-39f1a8b226d39bea853b75a6"
+   }
   },
   {
-   "category": "no_recipe",
+   "category": "gated",
    "dataset_id": "gyafc",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -1583,7 +1742,7 @@
    "name": "GYAFC",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -1601,7 +1760,7 @@
    "upper_bound": true
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "hallusionbench",
    "download_bytes": 146553615,
    "kind": "huggingface_columnar",
@@ -1610,21 +1769,33 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 146553615,
+    "kind": "huggingface_columnar",
+    "records_indexed": 1129,
+    "snapshot_id": "hallusionbench-7d2bc517b912259343aba542"
+   }
   },
   {
-   "category": "no_recipe",
+   "category": "verified",
    "dataset_id": "halueval",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 63448335,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "HaluEval",
-   "ready": false,
-   "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 63448335,
+    "kind": "http_archive",
+    "records_indexed": 34507,
+    "snapshot_id": "github-b7253db3cdaa0ab2c382f92b26b390109174f77e-9150115bd2c4"
+   }
   },
   {
    "category": "verified",
@@ -1646,7 +1817,7 @@
    }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "hatefulillusion",
    "download_bytes": 530693,
    "kind": "http_archive",
@@ -1655,7 +1826,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 530693,
+    "kind": "http_archive",
+    "records_indexed": 2160,
+    "snapshot_id": "hatefulillusion-b1adce69143ff8bfd52942d5-illusion-and-condition"
+   }
   },
   {
    "category": "no_recipe",
@@ -1680,13 +1858,13 @@
    "name": "HellaSwag-Pro",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "high-quality-hallucination-benchmark",
    "download_bytes": 38405373,
    "kind": "http_archive",
@@ -1695,7 +1873,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 8405373,
+    "kind": "http_archive",
+    "records_indexed": 4000,
+    "snapshot_id": "high-quality-hallucination-benchmark-84098cf9e3074a0aef09aba8"
+   }
   },
   {
    "category": "planned",
@@ -1730,7 +1915,7 @@
    "name": "iCTCF",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -1775,7 +1960,7 @@
    "name": "IllusionBench+",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -1789,13 +1974,13 @@
    "name": "IllusionBench",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "illusionmnist",
    "download_bytes": 433034,
    "kind": "http_archive",
@@ -1804,7 +1989,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 433034,
+    "kind": "http_archive",
+    "records_indexed": 5069,
+    "snapshot_id": "illusionmnist-41e7b5d0e9d283fd24c69fd5"
+   }
   },
   {
    "category": "no_recipe",
@@ -1815,7 +2007,7 @@
    "name": "IllusionVQA",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -1829,13 +2021,13 @@
    "name": "Illusory VQA",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "illusoryvqa",
    "download_bytes": 2472743,
    "kind": "http_archive",
@@ -1844,10 +2036,17 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 2472743,
+    "kind": "http_archive",
+    "records_indexed": 26121,
+    "snapshot_id": "illusoryvqa-981b9706f8dd4c75e77ac6d0"
+   }
   },
   {
-   "category": "no_recipe",
+   "category": "gated",
    "dataset_id": "imagenet",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -1855,7 +2054,7 @@
    "name": "ImageNet",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -1869,7 +2068,7 @@
    "name": "ImageNet-1K",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -1895,13 +2094,13 @@
    "name": "ImageNet-C",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "gated",
    "dataset_id": "imagenet-ilsvrc",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -1909,13 +2108,13 @@
    "name": "ImageNet ILSVRC",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "gated",
    "dataset_id": "imagenet-ilsvrc-2012",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -1923,7 +2122,7 @@
    "name": "ImageNet ILSVRC 2012",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -1949,7 +2148,7 @@
    "name": "ImageNet sampled 1,000 images",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -1963,7 +2162,7 @@
    "name": "ImageNet-segmentation",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2000,7 +2199,7 @@
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "gated",
    "dataset_id": "imagenet100",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -2008,7 +2207,7 @@
    "name": "ImageNet100",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2033,7 +2232,7 @@
    }
   },
   {
-   "category": "no_recipe",
+   "category": "gated",
    "dataset_id": "imagenetval",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -2041,7 +2240,7 @@
    "name": "ImageNetVal",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2055,7 +2254,7 @@
    "name": "iNaturalist",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2069,7 +2268,7 @@
    "name": "InterpBench",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2083,7 +2282,7 @@
    "name": "ITAC",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2130,7 +2329,7 @@
    "name": "LAION",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2144,7 +2343,7 @@
    "name": "LAION-400M",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2158,7 +2357,7 @@
    "name": "LAION Aesthetics",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2172,7 +2371,7 @@
    "name": "language-identification dataset",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2186,7 +2385,7 @@
    "name": "LingoQA",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2206,7 +2405,7 @@
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "llava-instruct-150k",
    "download_bytes": 248941895,
    "kind": "http_archive",
@@ -2215,7 +2414,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 228941895,
+    "kind": "http_archive",
+    "records_indexed": 157712,
+    "snapshot_id": "llava-instruct-150k-6ad90f6c205653a42c47a337"
+   }
   },
   {
    "category": "planned",
@@ -2230,18 +2436,23 @@
    "upper_bound": true
   },
   {
-   "category": "no_recipe",
+   "category": "verified",
    "dataset_id": "maliciousinstruct",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 6269,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "MaliciousInstruct",
-   "ready": false,
-   "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 6269,
+    "kind": "http_archive",
+    "records_indexed": 100,
+    "snapshot_id": "github-Jailbreak_LLM-1e490531c0ef4bc13430178bf1fbc8f813e34b1a-MaliciousInstruct-a64d69dd"
+   }
   },
   {
    "category": "verified",
@@ -2263,7 +2474,7 @@
    }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "medical-multimodal-evaluation-data",
    "download_bytes": 25977328,
    "kind": "http_archive",
@@ -2272,7 +2483,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 5977328,
+    "kind": "http_archive",
+    "records_indexed": 17303,
+    "snapshot_id": "medical-multimodal-evaluation-data-1b439bb8e95c7561114b34ea"
+   }
   },
   {
    "category": "no_recipe",
@@ -2283,7 +2501,7 @@
    "name": "MIAP",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2297,7 +2515,7 @@
    "name": "Middlebury",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2311,7 +2529,7 @@
    "name": "MIT-Adobe 5k",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2325,7 +2543,7 @@
    "name": "MIT States",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2343,7 +2561,7 @@
    "upper_bound": true
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "mm-safetybench",
    "download_bytes": 499521873,
    "kind": "http_archive",
@@ -2352,7 +2570,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 499521873,
+    "kind": "http_archive",
+    "records_indexed": 1685,
+    "snapshot_id": "mm-safetybench-bca50e0f5a4f17275f4a7287"
+   }
   },
   {
    "category": "no_recipe",
@@ -2363,13 +2588,13 @@
    "name": "MM-Vet",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "gated",
    "dataset_id": "mma-diffusion",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -2377,13 +2602,13 @@
    "name": "MMA-Diffusion",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "mmbench",
    "download_bytes": 180890850,
    "kind": "http_archive",
@@ -2392,7 +2617,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 180890850,
+    "kind": "http_archive",
+    "records_indexed": 21990,
+    "snapshot_id": "mmbench-2a81453d3f455da10ab645d4"
+   }
   },
   {
    "category": "no_recipe",
@@ -2403,13 +2635,13 @@
    "name": "MMBench English dev v1.0 (CircularEval)",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "mme",
    "download_bytes": 199848448,
    "kind": "http_archive",
@@ -2418,10 +2650,17 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 199848448,
+    "kind": "http_archive",
+    "records_indexed": 2374,
+    "snapshot_id": "mme-3cf201fdaaf3f869390523aa"
+   }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "mme-perception",
    "download_bytes": 199848448,
    "kind": "http_archive",
@@ -2430,10 +2669,17 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 199848448,
+    "kind": "http_archive",
+    "records_indexed": 2114,
+    "snapshot_id": "mme-perception-29d089ba45a6b9ff3fb83796"
+   }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "mmmu-dev",
    "download_bytes": 56960272,
    "kind": "huggingface_columnar",
@@ -2442,10 +2688,17 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 56960272,
+    "kind": "huggingface_columnar",
+    "records_indexed": 150,
+    "snapshot_id": "mmmu-dev-4aae6704662b6bde6f21a1f2"
+   }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "mmstar",
    "download_bytes": 41798712,
    "kind": "huggingface_columnar",
@@ -2454,7 +2707,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 41798712,
+    "kind": "huggingface_columnar",
+    "records_indexed": 1500,
+    "snapshot_id": "mmstar-ad07378064e9193b2331443a"
+   }
   },
   {
    "category": "verified",
@@ -2476,18 +2736,23 @@
    }
   },
   {
-   "category": "no_recipe",
+   "category": "verified",
    "dataset_id": "mrpc",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 1488319,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "MRPC (SentEval-hosted tokenized distribution)",
-   "ready": false,
-   "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 1488319,
+    "kind": "http_archive",
+    "records_indexed": 5801,
+    "snapshot_id": "mrpc-sha256-530c369b1fad0d3cf84c6c2a188e53dbf19c4e7c1303b00e947b27bcf4a38aa8"
+   }
   },
   {
    "category": "no_recipe",
@@ -2498,7 +2763,7 @@
    "name": "MS-COCO",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2512,7 +2777,7 @@
    "name": "MS COCO",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2526,13 +2791,13 @@
    "name": "MS-COCO captions",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "gated",
    "dataset_id": "ms-cxr",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -2540,7 +2805,7 @@
    "name": "MS-CXR",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2554,7 +2819,7 @@
    "name": "MSCOCO",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2568,7 +2833,7 @@
    "name": "MSCOCO 100-target subset",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2582,7 +2847,7 @@
    "name": "MultiTrust",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2622,7 +2887,7 @@
    "name": "NIPS17",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2674,7 +2939,7 @@
    "name": "OASIS",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2688,7 +2953,7 @@
    "name": "Objaverse",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2706,7 +2971,7 @@
    "upper_bound": true
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "ok-vqa",
    "download_bytes": 31433136,
    "kind": "http_archive",
@@ -2715,7 +2980,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 1433136,
+    "kind": "http_archive",
+    "records_indexed": 14055,
+    "snapshot_id": "ok-vqa-ad106c05f67152429144a172"
+   }
   },
   {
    "category": "no_recipe",
@@ -2732,7 +3004,7 @@
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "omnispatial",
    "download_bytes": 30000000,
    "kind": "local",
@@ -2741,7 +3013,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 0,
+    "kind": "local",
+    "records_indexed": 8431,
+    "snapshot_id": "omnispatial-a1fc74583cad04779e4b1d64"
+   }
   },
   {
    "category": "no_recipe",
@@ -2752,7 +3031,7 @@
    "name": "OpenImages",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2766,7 +3045,7 @@
    "name": "Ostris Dataset",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2811,7 +3090,7 @@
    "name": "Pach neuron-pair metric benchmark",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2825,7 +3104,7 @@
    "name": "unnamed 11-image inpainting set",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2839,13 +3118,13 @@
    "name": "unnamed real-noise benchmark [46]",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "unreleased",
    "dataset_id": "paper-12e8bd34b4a2f2a8-unnamed-harmful-instruction-evaluation-set",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -2853,13 +3132,13 @@
    "name": "unnamed harmful-instruction evaluation set",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "The authors have not released this data, so there is nothing to fetch; the entry records where it is described."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "unreleased",
    "dataset_id": "paper-12e8bd34b4a2f2a8-unnamed-harmful-sentence-corpus",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -2867,13 +3146,13 @@
    "name": "unnamed harmful sentence corpus",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "The authors have not released this data, so there is nothing to fetch; the entry records where it is described."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "gated",
    "dataset_id": "paper-164d7c221452ffec-unnamed-cfd-morph-collection",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -2881,7 +3160,7 @@
    "name": "unnamed CFD morph collection",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2895,7 +3174,7 @@
    "name": "Golan controversial stimuli shown to participants",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2909,13 +3188,13 @@
    "name": "unnamed Objaverse spatial images",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "gated",
    "dataset_id": "paper-2aa40aa13ed2a25b-unnamed-synthetic-spatial-training-set",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -2923,7 +3202,7 @@
    "name": "unnamed synthetic spatial training set",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -2957,7 +3236,7 @@
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "unreleased",
    "dataset_id": "paper-63c3bd849356e00f-unnamed-robust-nonrobust-feature-collections",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -2965,13 +3244,13 @@
    "name": "unnamed robust/nonrobust feature collections",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "The authors have not released this data, so there is nothing to fetch; the entry records where it is described."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "unreleased",
    "dataset_id": "paper-6a7364738bac9f07-unnamed-online-illusion-repositories",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -2979,13 +3258,13 @@
    "name": "unnamed online illusion repositories",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "The authors have not released this data, so there is nothing to fetch; the entry records where it is described."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "unreleased",
    "dataset_id": "paper-72040eccb96ead7a-unnamed-synthetic-spheres-dataset",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -2993,13 +3272,13 @@
    "name": "unnamed synthetic spheres dataset",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "The authors have not released this data, so there is nothing to fetch; the entry records where it is described."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "unreleased",
    "dataset_id": "paper-728d8c0964b540ad-unnamed-youtube-image-collection",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -3007,13 +3286,13 @@
    "name": "unnamed YouTube image collection",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "The authors have not released this data, so there is nothing to fetch; the entry records where it is described."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "unreleased",
    "dataset_id": "paper-765a2362f8735bc4-unnamed-social-category-question-set",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -3021,13 +3300,13 @@
    "name": "unnamed social-category question set",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "The authors have not released this data, so there is nothing to fetch; the entry records where it is described."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "unreleased",
    "dataset_id": "paper-9036b4eaa048dc21-unnamed-neuron-pair-judgment-collection",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -3035,7 +3314,7 @@
    "name": "unnamed neuron-pair judgment collection",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "The authors have not released this data, so there is nothing to fetch; the entry records where it is described."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -3049,7 +3328,7 @@
    "name": "unnamed Van Gogh painting sample",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -3063,13 +3342,13 @@
    "name": "unnamed VMA candidate pool",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "unreleased",
    "dataset_id": "paper-959e8fc51787f7e4-unnamed-curated-internet-image-collection",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -3077,13 +3356,13 @@
    "name": "unnamed curated internet image collection",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "The authors have not released this data, so there is nothing to fetch; the entry records where it is described."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "unreleased",
    "dataset_id": "paper-959e8fc51787f7e4-unnamed-internet-image-tracing-set",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -3091,7 +3370,7 @@
    "name": "unnamed internet image tracing set",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "The authors have not released this data, so there is nothing to fetch; the entry records where it is described."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -3105,13 +3384,13 @@
    "name": "unnamed sea-otter image sample",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "unreleased",
    "dataset_id": "paper-ab31cc6a994470fb-unnamed-human-adversarial-stimulus-collection",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -3119,13 +3398,13 @@
    "name": "unnamed human adversarial-stimulus collection",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "The authors have not released this data, so there is nothing to fetch; the entry records where it is described."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "unreleased",
    "dataset_id": "paper-c12960e5d652fb7f-unnamed-attack-generalization-collection",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -3133,13 +3412,13 @@
    "name": "unnamed attack-generalization collection",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "The authors have not released this data, so there is nothing to fetch; the entry records where it is described."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "unreleased",
    "dataset_id": "paper-f6dcb0e50d10ea38-unnamed-ai-generated-gender-image-attack-set",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -3147,13 +3426,13 @@
    "name": "unnamed AI-generated gender-image attack set",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "The authors have not released this data, so there is nothing to fetch; the entry records where it is described."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "unreleased",
    "dataset_id": "paper-f6dcb0e50d10ea38-unnamed-explicit-image-attack-set",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -3161,13 +3440,13 @@
    "name": "unnamed explicit-image attack set",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "The authors have not released this data, so there is nothing to fetch; the entry records where it is described."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "unreleased",
    "dataset_id": "paper-f6dcb0e50d10ea38-unnamed-historical-event-image-attack-set",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -3175,13 +3454,13 @@
    "name": "unnamed historical-event image attack set",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "The authors have not released this data, so there is nothing to fetch; the entry records where it is described."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "unreleased",
    "dataset_id": "paper-f6dcb0e50d10ea38-unnamed-product-screenshot-attack",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -3189,13 +3468,13 @@
    "name": "unnamed product screenshot attack",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "The authors have not released this data, so there is nothing to fetch; the entry records where it is described."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "unreleased",
    "dataset_id": "paper-f6dcb0e50d10ea38-unnamed-public-figure-adversarial-image-set",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -3203,7 +3482,7 @@
    "name": "unnamed public-figure adversarial image set",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "The authors have not released this data, so there is nothing to fetch; the entry records where it is described."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -3217,7 +3496,7 @@
    "name": "Pascal VOC",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -3231,7 +3510,7 @@
    "name": "PATA",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -3245,13 +3524,13 @@
    "name": "perturbed gender-benchmark image variants",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "phantom",
    "download_bytes": 145037610,
    "kind": "http_archive",
@@ -3260,7 +3539,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 145037610,
+    "kind": "http_archive",
+    "records_indexed": 55350,
+    "snapshot_id": "phantom-f664013f53118102169b9f7f"
+   }
   },
   {
    "category": "planned",
@@ -3283,7 +3569,7 @@
    "name": "Pitfall ROM",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -3297,13 +3583,13 @@
    "name": "Places",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "pmc-vqa",
    "download_bytes": 99211254,
    "kind": "http_archive",
@@ -3312,24 +3598,36 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 49211254,
+    "kind": "http_archive",
+    "records_indexed": 228948,
+    "snapshot_id": "pmc-vqa-3adb5378902d294cdd696444"
+   }
   },
   {
-   "category": "no_recipe",
+   "category": "verified",
    "dataset_id": "pope",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 151108757,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "POPE",
-   "ready": false,
-   "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": true,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 1108757,
+    "kind": "http_archive",
+    "records_indexed": 9000,
+    "snapshot_id": "github-08d957b917e5a378a2f99d35b6293c536a66298b-coco-7f42dccddc13"
+   }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "puzzlevqa",
    "download_bytes": 61704981,
    "kind": "huggingface_columnar",
@@ -3338,35 +3636,52 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 61704981,
+    "kind": "huggingface_columnar",
+    "records_indexed": 2000,
+    "snapshot_id": "puzzlevqa-ceb95a68b19e4ec8d27a91a6"
+   }
   },
   {
-   "category": "no_recipe",
+   "category": "verified",
    "dataset_id": "qnli",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 10627589,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "GLUE QNLI v2",
-   "ready": false,
-   "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 10627589,
+    "kind": "http_archive",
+    "records_indexed": 115669,
+    "snapshot_id": "qnli-sha256-024825517e5f197dd775eebd55d53737228f1aedc4eb7beca40d22e3f12cbaff"
+   }
   },
   {
-   "category": "no_recipe",
+   "category": "verified",
    "dataset_id": "qqp",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 41696084,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "GLUE QQP clean",
-   "ready": false,
-   "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 41696084,
+    "kind": "http_archive",
+    "records_indexed": 795241,
+    "snapshot_id": "qqp-sha256-35fdadcb69e8677480688c2c4c2c393df28a38eca47bac3fe104658c0a370b8f"
+   }
   },
   {
    "category": "no_recipe",
@@ -3377,13 +3692,13 @@
    "name": "RAISE1k",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "ravel",
    "download_bytes": 429309,
    "kind": "http_archive",
@@ -3392,7 +3707,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 429309,
+    "kind": "http_archive",
+    "records_indexed": 11839,
+    "snapshot_id": "ravel-f8ee152b4ed9779e53683ca9"
+   }
   },
   {
    "category": "verified",
@@ -3438,7 +3760,7 @@
    "upper_bound": true
   },
   {
-   "category": "no_recipe",
+   "category": "gated",
    "dataset_id": "restricted-imagenet",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -3446,7 +3768,7 @@
    "name": "Restricted ImageNet",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -3460,7 +3782,7 @@
    "name": "Ring-a-Bell",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -3474,13 +3796,13 @@
    "name": "RobustBench",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "roco",
    "download_bytes": 13631396,
    "kind": "http_archive",
@@ -3489,10 +3811,17 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 13631396,
+    "kind": "http_archive",
+    "records_indexed": 87927,
+    "snapshot_id": "roco-27c6d3632bbb2da4cebb82eb"
+   }
   },
   {
-   "category": "no_recipe",
+   "category": "gated",
    "dataset_id": "rosmap",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -3500,7 +3829,7 @@
    "name": "ROSMAP",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -3514,7 +3843,7 @@
    "name": "RS-VQA",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -3566,7 +3895,7 @@
    "name": "SAEgis clean and adversarial splits",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -3592,7 +3921,7 @@
    "name": "SB-Syn",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -3606,13 +3935,13 @@
    "name": "SB-Syn-Crop",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "gated",
    "dataset_id": "sbbench",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -3620,7 +3949,7 @@
    "name": "SBBench",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -3725,7 +4054,7 @@
    "name": "scrambled MNIST",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -3769,7 +4098,7 @@
    }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "senator-tweets-2021",
    "download_bytes": 232535302,
    "kind": "huggingface_columnar",
@@ -3778,10 +4107,17 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 232535302,
+    "kind": "huggingface_columnar",
+    "records_indexed": 99693,
+    "snapshot_id": "senator-tweets-2021-63a11647128898910ec17505"
+   }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "set14",
    "download_bytes": 0,
    "kind": "local",
@@ -3790,10 +4126,17 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 0,
+    "kind": "local",
+    "records_indexed": 14,
+    "snapshot_id": "set14-9b7986dd8c56355735482391"
+   }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "set5",
    "download_bytes": 0,
    "kind": "local",
@@ -3802,7 +4145,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 0,
+    "kind": "local",
+    "records_indexed": 5,
+    "snapshot_id": "set5-eefbc8ec96124174716b05b9"
+   }
   },
   {
    "category": "verified",
@@ -3870,7 +4220,7 @@
    "name": "ShapeWorld",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -3884,7 +4234,7 @@
    "name": "shiftMNIST",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -3910,7 +4260,7 @@
    "name": "simulated transistor traces",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -3920,7 +4270,7 @@
    "dataset_id": "smolim2-135m-10b",
    "download_bytes": 10000000000,
    "kind": "huggingface_remote_sample",
-   "maintainer_preview": false,
+   "maintainer_preview": true,
    "name": "SmoLIM2-135M-10B",
    "ready": true,
    "requirements": [],
@@ -3936,7 +4286,7 @@
    "name": "SNLI-VE",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -3954,7 +4304,7 @@
    "upper_bound": true
   },
   {
-   "category": "no_recipe",
+   "category": "gated",
    "dataset_id": "sorrybench",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -3962,7 +4312,7 @@
    "name": "SorryBench",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -3988,7 +4338,7 @@
    "name": "Space Invaders ROM",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -4002,24 +4352,29 @@
    "name": "Spoken Wikipedia",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "verified",
    "dataset_id": "sst2",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 7439277,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "SST-2 (GLUE distribution)",
-   "ready": false,
-   "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 7439277,
+    "kind": "http_archive",
+    "records_indexed": 70042,
+    "snapshot_id": "sst2-glue-d67e16fb-914641ca"
+   }
   },
   {
    "category": "no_recipe",
@@ -4030,7 +4385,7 @@
    "name": "Stanford Cars",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -4044,7 +4399,7 @@
    "name": "STL-10",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -4073,7 +4428,7 @@
    "name": "SVHN",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -4087,13 +4442,13 @@
    "name": "SVO-Probes",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "t2i-compbench",
    "download_bytes": 850742,
    "kind": "http_archive",
@@ -4102,24 +4457,36 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 850742,
+    "kind": "http_archive",
+    "records_indexed": 17861,
+    "snapshot_id": "t2i-compbench-882c21ccc7a44334cf87046f"
+   }
   },
   {
-   "category": "no_recipe",
+   "category": "verified",
    "dataset_id": "tdc2023",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 7820,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "TDC2023",
-   "ready": false,
-   "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 7820,
+    "kind": "http_archive",
+    "records_indexed": 100,
+    "snapshot_id": "github-f7ddd7d1c7bda82c6609ecfaf1484565d08d754a-35a6f471e530"
+   }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "textvqa",
    "download_bytes": 47521619,
    "kind": "http_archive",
@@ -4128,7 +4495,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 27521619,
+    "kind": "http_archive",
+    "records_indexed": 45336,
+    "snapshot_id": "textvqa-30fe6aba871f0987a71f122f"
+   }
   },
   {
    "category": "verified",
@@ -4158,7 +4532,7 @@
    "name": "The Pile",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -4172,13 +4546,13 @@
    "name": "TID2013",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "gated",
    "dataset_id": "timit",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -4186,7 +4560,7 @@
    "name": "TIMIT",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -4200,7 +4574,7 @@
    "name": "Pach top-16 ImageNet image references",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -4225,7 +4599,7 @@
    }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "tweeteval",
    "download_bytes": 14219197,
    "kind": "huggingface_columnar",
@@ -4234,7 +4608,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 14219197,
+    "kind": "huggingface_columnar",
+    "records_indexed": 200785,
+    "snapshot_id": "tweeteval-5a39cced52b3792e0ab81681"
+   }
   },
   {
    "category": "no_recipe",
@@ -4245,7 +4626,7 @@
    "name": "UCF101",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -4311,7 +4692,7 @@
    "name": "VIA-Bench",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -4384,7 +4765,7 @@
    "name": "Visual-Counterfact filtered 467",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -4402,7 +4783,7 @@
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "visual6502-transistor-netlist",
    "download_bytes": 265349,
    "kind": "http_archive",
@@ -4411,7 +4792,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 265349,
+    "kind": "http_archive",
+    "records_indexed": 3510,
+    "snapshot_id": "visual6502-transistor-netlist-1adb08466ec5b7cf8f6e2470"
+   }
   },
   {
    "category": "verified",
@@ -4441,13 +4829,13 @@
    "name": "visualQA",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "vizwiz",
    "download_bytes": 29938456,
    "kind": "http_archive",
@@ -4456,7 +4844,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 9938456,
+    "kind": "http_archive",
+    "records_indexed": 32842,
+    "snapshot_id": "vizwiz-e38691de4a6f108cb53f9f99"
+   }
   },
   {
    "category": "no_recipe",
@@ -4467,7 +4862,7 @@
    "name": "VizWiz-priv",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -4481,7 +4876,7 @@
    "name": "VL-Gender",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -4495,7 +4890,7 @@
    "name": "VLAGenderBias",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -4513,21 +4908,26 @@
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "verified",
    "dataset_id": "vqa-v2",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 164013859,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "VQA v2",
-   "ready": false,
-   "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": true,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 14013859,
+    "kind": "http_archive",
+    "records_indexed": 214354,
+    "snapshot_id": "vqa-v2-2017-val2014-sha256-015383bc60b789044210cc9351f7817c9d2be61235dba2b27600f89ce1982da2"
+   }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "vqa-v2-m-n-subsets",
    "download_bytes": 2102911,
    "kind": "http_archive",
@@ -4536,10 +4936,17 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 2102911,
+    "kind": "http_archive",
+    "records_indexed": 1600,
+    "snapshot_id": "vqa-v2-m-n-subsets-2d86731f8a0a922471a875e9"
+   }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "vsr",
    "download_bytes": 34977421,
    "kind": "http_archive",
@@ -4548,7 +4955,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 4977421,
+    "kind": "http_archive",
+    "records_indexed": 16023,
+    "snapshot_id": "vsr-2cfe9446c0b3fff1f2b49681"
+   }
   },
   {
    "category": "no_recipe",
@@ -4559,7 +4973,7 @@
    "name": "VTAB",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -4573,13 +4987,13 @@
    "name": "Wall Street Journal",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "waterbirds",
    "download_bytes": 489698023,
    "kind": "http_archive",
@@ -4588,7 +5002,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 489698023,
+    "kind": "http_archive",
+    "records_indexed": 11788,
+    "snapshot_id": "waterbirds-aa659462236cfdb2e94bf306"
+   }
   },
   {
    "category": "planned",
@@ -4625,7 +5046,7 @@
    "name": "WILDS",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
    ],
    "source_bytes": null,
    "upper_bound": false
@@ -4664,21 +5085,26 @@
    }
   },
   {
-   "category": "no_recipe",
+   "category": "verified",
    "dataset_id": "wnli",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 28999,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "GLUE WNLI",
-   "ready": false,
-   "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-01",
+    "downloaded_bytes": 28999,
+    "kind": "http_archive",
+    "records_indexed": 852,
+    "snapshot_id": "wnli-sha256-a8baeb3306a9ca9bf281bce74f15ec466dbdb6d8665096073d74f41f8ad93e3b"
+   }
   },
   {
-   "category": "no_recipe",
+   "category": "gated",
    "dataset_id": "zerobench",
    "download_bytes": 0,
    "kind": "unconfigured",
@@ -4686,22 +5112,23 @@
    "name": "ZeroBench",
    "ready": false,
    "requirements": [
-    "A pinned acquisition recipe or authorized local source is required for this release."
+    "This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it."
    ],
    "source_bytes": null,
    "upper_bound": false
   }
  ],
- "generated_at": "2026-10-01T03:48:25.394034+00:00",
- "maintainer_previews": 169,
- "maintainer_previews_reproducible": 131,
+ "generated_at": "2026-10-01T04:30:46.712156+00:00",
+ "maintainer_previews": 170,
+ "maintainer_previews_reproducible": 150,
  "per_dataset_budget_bytes": 10000000000,
  "summary": {
-  "gated": 3,
+  "gated": 26,
   "larger_budget": 1,
-  "no_recipe": 195,
+  "no_recipe": 137,
   "other": 0,
-  "planned": 92,
-  "verified": 42
+  "planned": 44,
+  "unreleased": 17,
+  "verified": 108
  }
 }

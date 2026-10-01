@@ -8,6 +8,7 @@ ordinary dataset; the same preparation pipeline builds its complete index and sa
 from __future__ import annotations
 import hashlib
 import json
+import os
 import re
 from datetime import datetime, timezone
 from pathlib import Path
@@ -20,6 +21,7 @@ IMAGE_SUFFIXES = ('.jpg', '.jpeg', '.png', '.webp', '.gif', '.bmp')
 TABLE_FORMATS = {'.csv': 'csv', '.tsv': 'csv', '.jsonl': 'jsonl', '.ndjson': 'jsonl', '.json': 'json', '.parquet': 'parquet'}
 ARCHIVE_SUFFIXES = ('.zip', '.tar', '.tar.gz', '.tgz')
 MAX_SOURCE_BYTES = 2_000_000_000
+MAX_FOLDER_ENTRIES = 2_000_000
 MAX_CATEGORIES = 50
 ID_PATTERN = re.compile(r'^[a-z0-9][a-z0-9-]{1,62}$')
 _NUMBER = re.compile(r'^[+-]?(\d+(\.\d*)?|\.\d+)([eE][+-]?\d+)?$')
@@ -61,9 +63,21 @@ def inspect_source(source: str, options: dict | None = None) -> dict:
                      'or a .csv/.tsv/.jsonl/.json/.parquet table.')
 
 
+def _bounded_entry_count(path: Path, limit: int | None = None) -> None:
+    """Fail fast on a folder far too large to be a dataset (a home directory, `/`), without walking all of it."""
+    limit = MAX_FOLDER_ENTRIES if limit is None else limit
+    seen = 0
+    for _, _, files in os.walk(path, followlinks=False):
+        seen += len(files)
+        if seen > limit:
+            raise ValueError(f'{path} holds more than {limit:,} files. Choose the folder that directly contains the images (or a table of them).')
+
+
 def _inspect_images(path: Path) -> dict:
     from dataset_atlas.adapters import get_adapter
     config = {'path': str(path), 'suffixes': list(IMAGE_SUFFIXES)}
+    if path.is_dir():
+        _bounded_entry_count(path)
     if path.is_file():
         config['sha256'] = _sha256(path)
     names = get_adapter(_stub(config, 'directory'))._names()

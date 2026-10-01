@@ -102,7 +102,7 @@ def prepare_sampled_preview(root, plan, identity, dataset, version, base, direct
     from pathlib import Path
     from dataset_atlas.adapters import get_adapter
     from dataset_atlas.models import FieldDescriptor, Pack
-    from . import atomic, prepared_metadata
+    from . import atomic, prepared_metadata, snapshot_for
     from .remote import pin_remote_files
     from io import BytesIO
     from PIL import Image
@@ -121,7 +121,7 @@ def prepare_sampled_preview(root, plan, identity, dataset, version, base, direct
         remote_files = pin_remote_files(files, HF_HOSTS, check, update)
         atomic(fingerprint_path, remote_files)
     dataset.release = plan['revision']
-    dataset.snapshot_id = f'{dataset.id}-{identity[:24]}'
+    dataset.snapshot_id = snapshot_for(dataset.id, plan, identity, root)
     dataset.adapter = 'remote_columnar'
     mapping = dataset.adapter_config.get('mapping', {})
     cache_bytes = dataset.adapter_config.get('remote_cache_bytes', 200_000_000)

@@ -25,6 +25,33 @@ def atomic(path, value):
     temporary.replace(path)
 
 
+def snapshot_for(dataset_id, plan, identity, root):
+    """The snapshot ID of what a plan acquired: derived from the data, never from where it was put.
+
+    A plan hash covers this workspace's absolute paths and budgets, so two colleagues preparing identical
+    bytes would get different snapshot IDs and could not exchange saved selections. This hashes the
+    acquired files' checksums, revision, recipe, scope and sampling instead. A recipe that declares its own
+    reviewed `snapshot_id` wins."""
+    if plan.get('recipe_snapshot_id'):
+        return plan['recipe_snapshot_id']
+    if not plan.get('files'):
+        return f'{dataset_id}-{identity[:24]}'
+    prefix = str(Path(root).resolve())
+    def portable(value):
+        if isinstance(value, dict):
+            return {key: portable(item) for key, item in value.items() if not key.endswith('_bytes')}
+        if isinstance(value, list):
+            return [portable(item) for item in value]
+        return value.replace(prefix, '') if isinstance(value, str) else value
+    config = (plan.get('prepared_dataset') or plan['dataset']).get('adapter_config', {})
+    files = sorted([f.get('source_name'), f.get('sha256') or f.get('md5'), f.get('bytes')] for f in plan['files'])
+    identity_document = {'dataset': dataset_id, 'kind': plan.get('kind'), 'revision': plan.get('revision'), 'recipe': plan.get('recipe_sha256'),
+                         'scope': plan.get('scope'), 'expected_count': plan.get('expected_count'), 'sample': plan.get('sample'),
+                         'files': files, 'config': portable(config)}
+    digest = hashlib.sha256(json.dumps(identity_document, sort_keys=True, default=str).encode()).hexdigest()
+    return f'{dataset_id}-{digest[:24]}'
+
+
 def read_metadata(url):
     """Bounded primary-source metadata, without credentials or repository execution."""
     from dataset_atlas.storage.https import HttpsFetcher, _PinnedHTTPSConnection
@@ -116,7 +143,10 @@ class PreparationManager:
             if recipe.get('source_url'):prepared.source_url=recipe['source_url']
             if recipe.get('description'):prepared.description=recipe['description']
             if recipe.get('release'):prepared.release=recipe['release']
-            if recipe.get('snapshot_id'):prepared.snapshot_id=recipe['snapshot_id']
+            if recipe.get('snapshot_id'):
+                prepared.snapshot_id=recipe['snapshot_id']
+                # A reviewed, content-derived ID is workspace-independent; a plan hash is not (it covers local paths).
+                plan['recipe_snapshot_id']=recipe['snapshot_id']
             if recipe.get('adapter'):prepared.adapter=recipe['adapter']
             prepared.adapter_config.update(recipe.get('adapter_config',{}))
             prepared=self.registry._resolved(prepared)
@@ -145,6 +175,10 @@ class PreparationManager:
                 expected_download_bytes=sum(f['bytes'] for f in recipe['files']), ready=True,
                 scope=recipe['scope'], allowed_hosts=recipe.get('allowed_hosts',[]))
             for entry in recipe['files']:
+                if entry.get('config_dir') is not None or entry.get('dest_name') is not None:
+                    if (not isinstance(entry.get('config_dir'), str) or not re.fullmatch(r'[a-z_]+', entry['config_dir'])
+                            or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]*', str(entry.get('dest_name', entry['source_name'])))):
+                        raise ValueError('config_dir must be a lowercase configuration key and dest_name a plain file name')
                 if not entry.get('parts'):
                     continue
                 parts = entry['parts']

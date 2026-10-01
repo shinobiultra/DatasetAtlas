@@ -203,3 +203,40 @@ def test_keyboard_interrupt_cancels_the_running_job_and_keeps_the_rest_unattempt
     assert report['interrupted'] is True
     assert stub.cancelled == ['small'.ljust(64, '0')]
     assert [r['outcome'] for r in report['datasets']] == ['interrupted', 'not_attempted', 'not_attempted']
+
+
+# ---- snapshot identity across workspaces ---------------------------------------------------
+
+def acquired(root, **changes):
+    """A plan as two different workspaces would produce it for the same acquired bytes."""
+    plan = {'id': 'f' * 64, 'kind': 'huggingface_columnar', 'revision': 'a' * 40, 'scope': 'all shards', 'expected_count': 10,
+            'recipe_sha256': None, 'files': [{'source_name': 'data/a.parquet', 'sha256': '1' * 64, 'bytes': 100, 'url': f'https://x/{root}'}],
+            'dataset': {'adapter_config': {'root': f'{root}/work/sources/x', 'preparation_budget_bytes': 5, 'mapping': {'text': 'q'}}}}
+    plan.update(changes)
+    return plan
+
+
+def test_identical_data_gets_the_same_snapshot_id_in_every_workspace():
+    from dataset_atlas.preparation import snapshot_for
+    one = snapshot_for('ds', acquired('/home/ann/atlas'), 'plan-hash-one', '/home/ann/atlas')
+    two = snapshot_for('ds', acquired('/srv/bob/ws', max_download_bytes=1), 'plan-hash-two', '/srv/bob/ws')
+    assert one == two and one.startswith('ds-')
+
+
+def test_different_bytes_or_scope_or_mapping_give_a_different_snapshot_id():
+    from dataset_atlas.preparation import snapshot_for
+    base = snapshot_for('ds', acquired('/w'), 'p', '/w')
+    changed_file = acquired('/w')
+    changed_file['files'][0]['sha256'] = '2' * 64
+    assert snapshot_for('ds', changed_file, 'p', '/w') != base
+    assert snapshot_for('ds', acquired('/w', revision='b' * 40), 'p', '/w') != base
+    assert snapshot_for('ds', acquired('/w', scope='train only'), 'p', '/w') != base
+    remapped = acquired('/w')
+    remapped['dataset']['adapter_config']['mapping'] = {'text': 'other'}
+    assert snapshot_for('ds', remapped, 'p', '/w') != base
+
+
+def test_a_reviewed_recipe_snapshot_id_wins_and_local_plans_keep_their_own():
+    from dataset_atlas.preparation import snapshot_for
+    assert snapshot_for('ds', acquired('/w', recipe_snapshot_id='ds-reviewed'), 'p', '/w') == 'ds-reviewed'
+    assert snapshot_for('ds', acquired('/w', files=[]), 'plan-hash-xyz', '/w') == 'ds-plan-hash-xyz'

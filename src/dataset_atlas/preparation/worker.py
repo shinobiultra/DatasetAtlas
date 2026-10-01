@@ -10,7 +10,7 @@ import shutil
 import sys
 import time
 import zipfile
-from . import PreparationManager, atomic
+from . import PreparationManager, atomic, snapshot_for
 
 
 def run(root, identity):
@@ -125,7 +125,13 @@ def run(root, identity):
                     if entry.get('md5') and md5.hexdigest()!=entry['md5']:raise ValueError('Official source MD5 mismatch')
                     source_dir = version / 'sources'
                     source_dir.mkdir(exist_ok=True)
-                    target = source_dir / (digest.hexdigest() + '.' + entry['format'])
+                    if entry.get('config_dir'):
+                        # Adapters that read a directory of files by their published names (e.g. MNIST IDX).
+                        named = source_dir / entry['config_dir']
+                        named.mkdir(exist_ok=True)
+                        target = named / entry.get('dest_name', entry['source_name'])
+                    else:
+                        target = source_dir / (digest.hexdigest() + '.' + entry['format'])
                     if not target.exists():
                         try:
                             os.link(source, target)
@@ -136,12 +142,13 @@ def run(root, identity):
                             shutil.copy2(source, target)
                     files.append({**entry, 'sha256':digest.hexdigest(), 'path': str(target)})
                     if entry.get('config_key'):dataset.adapter_config[entry['config_key']]=str(target)
+                    if entry.get('config_dir'):dataset.adapter_config[entry['config_dir']]=str(target.parent)
                     if entry.get('config_key')=='path':dataset.adapter_config['sha256']=digest.hexdigest()
                     update(downloaded_bytes=sum(f['bytes'] for f in files), current_file=entry['source_name'])
             dataset.adapter_config['source_files'] = files
             if plan['kind']=='huggingface_columnar':
                 dataset.release = plan['revision']
-            dataset.snapshot_id = f'{dataset.id}-{identity[:24]}'
+            dataset.snapshot_id = snapshot_for(dataset.id, plan, identity, root)
             if plan['kind']=='huggingface_columnar':
                 dataset.adapter = 'columnar'
                 dataset.adapter_config = {**dataset.adapter_config, 'files': files, 'population': plan['scope'],
@@ -160,7 +167,7 @@ def run(root, identity):
                 remote_files=pin_remote_files(plan['files'],hosts,check,update)
                 atomic(fingerprint_path,remote_files)
             dataset.release=plan['revision']
-            dataset.snapshot_id=f'{dataset.id}-{identity[:24]}'
+            dataset.snapshot_id=snapshot_for(dataset.id,plan,identity,root)
             dataset.adapter='remote_columnar'
             source_options={key:dataset.adapter_config[key] for key in ('record_filter','expected_source_count','fields','max_record_bytes','remote_cache_root','remote_cache_bytes') if key in dataset.adapter_config}
             dataset.adapter_config={'remote_files':remote_files,'allowed_hosts':hosts,

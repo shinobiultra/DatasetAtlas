@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "dataset-atlas"
-version = "0.1.0"
+version = "0.2.0"
 description = "Evidence-bound dataset browser and optional local research workbench"
 requires-python = ">=3.11,<3.15"
 dependencies = ["fastapi>=0.115,<1", "uvicorn>=0.34,<1", "pydantic>=2.10,<3", "httpx>=0.28,<1", "PyYAML>=6,<7", "duckdb>=1.2,<2", "pyarrow>=19", "fsspec>=2025.2", "numpy>=2,<3", "pillow>=11,<13"]
@@ -18,7 +18,7 @@ development = ["pytest>=8.3", "pytest-asyncio>=0.25", "build>=1.2"]
 [project.scripts]
 atlas = "dataset_atlas.cli:main"
 [tool.hatch.build]
-artifacts = ["src/dataset_atlas/web/**"]
+artifacts = ["src/dataset_atlas/web/**", "src/dataset_atlas/catalogue_seed/**"]
 [tool.hatch.build.targets.wheel]
 packages = ["src/dataset_atlas"]
 [tool.hatch.build.targets.sdist]

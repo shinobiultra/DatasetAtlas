@@ -86,6 +86,11 @@ def inspect_archive(path: Path, *, sdist: bool) -> dict:
     }
     if media_counts != {"clevr": 100, "eurosat": 100, "pairs": 100}:
         raise ValueError(f"Approved media count differs in {path.name}: {media_counts}")
+    # The wheel must be able to create a workspace: it carries the catalogue, and the catalogue is clean.
+    if not sdist:
+        seed_datasets = [name for name in members if name.startswith("dataset_atlas/catalogue_seed/registry/datasets/") and name.endswith(".yaml")]
+        if len(seed_datasets) < 300 or "dataset_atlas/catalogue_seed/schemas/atlas.schema.json" not in members:
+            raise ValueError(f"Wheel catalogue seed is missing or incomplete in {path.name}: {len(seed_datasets)} dataset entries")
     if site_bytes > MAX_SITE_BYTES:
         raise ValueError(f"Bundled site exceeds 200 MB in {path.name}: {site_bytes}")
     return {"archive": path.name, "files": len(members), "site_bytes": site_bytes, "approved_media_files": media_counts}

@@ -92,6 +92,7 @@ def main(argv=None):
     pstatus.add_argument('--max-download-bytes',type=int,default=2_000_000_000)
     pfetch=previews.add_parser('fetch',help='Plan, and with --execute fetch, previews cheapest first within a total download budget');pfetch.add_argument('--dataset',action='append',default=[],help='Repeat to name datasets; default is every dataset with an upstream preview')
     pfetch.add_argument('--per-dataset-download-bytes',type=int,default=2_000_000_000);pfetch.add_argument('--per-dataset-output-bytes',type=int,default=1_000_000_000);pfetch.add_argument('--total-download-bytes',type=int,default=20_000_000_000);pfetch.add_argument('--execute',action='store_true')
+    init=sub.add_parser('init',help='Create a workspace from the catalogue shipped in this installation (or refresh its catalogue with --update)');init.add_argument('directory',nargs='?',type=Path,default=Path('.'));init.add_argument('--update',action='store_true')
     serve=sub.add_parser('serve');serve.add_argument('--host',default='127.0.0.1');serve.add_argument('--port',type=int,default=8765)
     analyze=sub.add_parser('analyze');analyze.add_argument('--selection',required=True);analyze.add_argument('--processor',required=True);analyze.add_argument('--config',type=Path)
     export=sub.add_parser('export').add_subparsers(dest='action',required=True)
@@ -102,6 +103,13 @@ def main(argv=None):
     sub.add_parser('doctor')
     args=parser.parse_args(argv);root=args.root.resolve()
     try:
+        if args.command=='init':
+            from dataset_atlas.workspace import init_workspace
+            result=init_workspace(args.directory,update=args.update);emit(result)
+            print(f"Next: cd {result['workspace']} && atlas serve   (then open http://127.0.0.1:8765/)",file=sys.stderr)
+            return 0
+        if args.command in {'serve','previews','datasets'} and not (root/'registry/datasets').is_dir():
+            raise ValueError(f'No catalogue in {root}. Run `atlas init {root}` to create a workspace, or pass --root for an existing one.')
         if args.command=='storage':
             if args.action=='status':
                 from dataset_atlas.storage.usage import workspace_usage

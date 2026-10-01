@@ -273,3 +273,13 @@ def test_large_native_record_opt_in_and_byte_bounded_pagination(tmp_path):
     assert all(r.text==payload and r.source['native']==payload for r in first.records+last.records)
     with pytest.raises(ValueError,match='1..16 MB'):
         build_parquet_snapshot([],[],tmp_path/'invalid',root=tmp_path,dataset_id='toy',release_id='r1',snapshot_id='s1',expected_count=0,max_record_bytes=16_000_001)
+
+
+def test_exceeding_the_prepared_data_limit_says_how_far_it_got_and_what_to_change(tmp_path):
+    import pytest
+    from dataset_atlas.models import FieldDescriptor, Record
+    from dataset_atlas.queries.parquet import build_parquet_snapshot
+    records = [Record(id=f'r{i}', dataset_id='d', release_id='r', snapshot_id='s', text='x' * 2000, source={'n': i}) for i in range(400)]
+    with pytest.raises(ValueError, match=r'of 400 records fit within the 2,000-byte prepared-data limit.*raise the prepared-data limit'):
+        build_parquet_snapshot(iter(records), [FieldDescriptor(id='source.n', name='n', dtype='number')], tmp_path / 'snap', root=tmp_path,
+                               dataset_id='d', release_id='r', snapshot_id='s', expected_count=400, population_scope='complete', max_bytes=2_000)

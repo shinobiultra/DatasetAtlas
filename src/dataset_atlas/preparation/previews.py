@@ -47,7 +47,7 @@ def plan_all(manager, datasets, per_dataset_download_bytes, per_dataset_output_b
     return rows
 
 
-def fetch_previews(root, dataset_ids=None, *, per_dataset_download_bytes=2_000_000_000, per_dataset_output_bytes=1_000_000_000,
+def fetch_previews(root, dataset_ids=None, *, per_dataset_download_bytes=2_000_000_000, per_dataset_output_bytes=4_000_000_000,
                    total_download_bytes=20_000_000_000, execute=False, poll_seconds=2.0, log=lambda message: None, manager=None,
                    sleep=time.sleep):
     root = Path(root).resolve()

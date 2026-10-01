@@ -168,6 +168,11 @@ def _category_value(value: Any) -> tuple[str, str]:
     raise ValueError("Category value must be a string, finite number, boolean, or null")
 
 
+def _budget_message(written: int, expected: int, limit: int) -> str:
+    return (f"Snapshot exceeds byte budget: {written:,} of {expected:,} records fit within the {limit:,}-byte prepared-data limit. "
+            "A complete index can be several times the size of its source; raise the prepared-data limit and prepare again.")
+
+
 def build_parquet_snapshot(
     records: Iterable[Record], fields: Sequence[FieldDescriptor], output_dir: Path, *,
     root: Path, dataset_id: str, release_id: str, snapshot_id: str,
@@ -245,7 +250,7 @@ def build_parquet_snapshot(
                     rows.clear()
                     rows_bytes = 0
                     if parquet.stat().st_size > max_bytes:
-                        raise ValueError("Snapshot exceeds byte budget")
+                        raise ValueError(_budget_message(count, expected_count, max_bytes))
             if rows:
                 writer.write_table(pa.Table.from_pylist(rows, schema=schema))
             if count != expected_count:
@@ -255,7 +260,7 @@ def build_parquet_snapshot(
             identity_db.close()
         (stage / "ids.sqlite").unlink()
         if parquet.stat().st_size > max_bytes:
-            raise ValueError("Snapshot exceeds byte budget")
+            raise ValueError(_budget_message(count, expected_count, max_bytes))
         manifest = {
             "schema_version": "1.0", "dataset_id": dataset_id, "release_id": release_id,
             "snapshot_id": snapshot_id, "unit": unit, "population_scope": population_scope,

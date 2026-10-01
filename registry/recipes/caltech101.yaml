@@ -26,4 +26,6 @@ files:
 allowed_hosts:
 - data.caltech.edu
 - caltechdata.s3.amazonaws.com
+# The records API now redirects downloads to Caltech's Open Storage Network endpoint.
+- caltech2.osn.mghpcc.org
 - s3.amazonaws.com

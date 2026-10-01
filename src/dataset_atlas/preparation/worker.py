@@ -146,6 +146,13 @@ def run(root, identity):
                     if entry.get('config_key')=='path':dataset.adapter_config['sha256']=digest.hexdigest()
                     update(downloaded_bytes=sum(f['bytes'] for f in files), current_file=entry['source_name'])
             dataset.adapter_config['source_files'] = files
+            if plan.get('convert'):
+                # Reproduce the maintained table from the pinned originals; a differing result fails the preparation.
+                from dataset_atlas.converters import run_conversion
+                update(stage='converting source files')
+                inputs = {entry['config_key']: Path(entry['path']) for entry in files if entry.get('config_key')}
+                converted = run_conversion(plan['convert'], inputs, version / 'sources/converted', check)
+                dataset.adapter_config.update(path=str(converted['path']), format=converted['format'], sha256=converted['file_sha256'])
             if plan['kind']=='huggingface_columnar':
                 dataset.release = plan['revision']
             dataset.snapshot_id = snapshot_for(dataset.id, plan, identity, root)

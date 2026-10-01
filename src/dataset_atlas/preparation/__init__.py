@@ -174,6 +174,12 @@ class PreparationManager:
             plan.update(kind='http_archive', files=recipe['files'], expected_count=recipe.get('expected_count'),
                 expected_download_bytes=sum(f['bytes'] for f in recipe['files']), ready=True,
                 scope=recipe['scope'], allowed_hosts=recipe.get('allowed_hosts',[]))
+            if recipe.get('convert'):
+                conversion = recipe['convert']
+                if (not isinstance(conversion, dict) or not isinstance(conversion.get('name'), str) or type(conversion.get('count')) is not int
+                        or not re.fullmatch(r'[a-f0-9]{64}', str(conversion.get('rows_sha256', '')))):
+                    raise ValueError('A conversion recipe requires a converter name, an integer row count and a SHA-256 row digest')
+                plan['convert'] = conversion
             for entry in recipe['files']:
                 if entry.get('config_dir') is not None or entry.get('dest_name') is not None:
                     if (not isinstance(entry.get('config_dir'), str) or not re.fullmatch(r'[a-z_]+', entry['config_dir'])

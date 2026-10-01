@@ -65,6 +65,19 @@ A preview is 100 samples. **Prepare full data** on a dataset's page plans a comp
 
 Folders of images, tables, Parquet files and Hugging Face datasets can be added from the **Add dataset** button on the catalogue, or with `atlas datasets add`. See [adding your own datasets](adding-your-own-datasets.md).
 
+## Enable the analysis tools
+
+Detectors (NudeNet, a person/object detector), image/text embeddings, maps, clustering and outliers are optional and need extra libraries and model weights. Browsing needs neither.
+
+```bash
+uv tool install './dataset_atlas-0.2.0-py3-none-any.whl[vision,embeddings,projection]'    # or: pip install "dataset-atlas[vision,embeddings,projection]"
+atlas models status                       # which pinned models are installed and configured
+atlas models fetch                        # dry run: lists files and sizes (about 1.7 GB in total, mostly SigLIP 2)
+atlas models fetch --execute              # downloads, verifies every file's SHA-256, and configures the processors
+```
+
+Each model is a public third-party artifact pinned by revision and checksum in `registry/models/`; Atlas never downloads one without your `--execute`, refuses a file that does not match its checksum, and never overwrites settings you changed in `local-config/recipes.json` (use `--reconfigure` to reset them). `atlas doctor` reports what is installed. Then select records in the interface and choose **Analyze**; results appear as fields, map colours and filters on the same examples. Connecting a model server for conversations is separate; see [model connections](model-connections.md).
+
 ## Where things live
 
 | Path | Contents | Safe to delete? |

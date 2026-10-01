@@ -7,3 +7,15 @@ modality: image
 local_only: true
 evidence: reports/analysis-demo-clevr-100.json
 status: local_selection_verified_2026-09-22
+install:
+  dir: work/models
+  files:
+  - path: fasterrcnn_mobilenet_v3_large_320_fpn-907ea3f9.pth
+    url: https://download.pytorch.org/models/fasterrcnn_mobilenet_v3_large_320_fpn-907ea3f9.pth
+    bytes: 77844807
+    sha256: 907ea3f91ff92242bc1baea8049276a3e76bca48ce7560bd268cc029f37977b5
+  processors:
+    detect.coco_v1:
+      extraction_threshold: 0.05
+      weights_path: '{dir}/fasterrcnn_mobilenet_v3_large_320_fpn-907ea3f9.pth'
+      weights_sha256: 907ea3f91ff92242bc1baea8049276a3e76bca48ce7560bd268cc029f37977b5

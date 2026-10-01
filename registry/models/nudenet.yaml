@@ -8,3 +8,16 @@ weight_sha256: c15d8273adad2d0a92f014cc69ab2d6c311a06777a55545f2c4eb46f51911f0f
 weight_source: bundled_320n.onnx
 evidence: reports/analysis-demo-clevr-100.json
 status: local_selection_verified_2026-09-22
+install:
+  kind: package
+  package: nudenet
+  resource: 320n.onnx
+  dir: work/models
+  path: nudenet-320n.onnx
+  bytes: 12150158
+  sha256: c15d8273adad2d0a92f014cc69ab2d6c311a06777a55545f2c4eb46f51911f0f
+  processors:
+    detect.nudenet:
+      extraction_threshold: 0.25
+      model_path: '{file}'
+      model_sha256: c15d8273adad2d0a92f014cc69ab2d6c311a06777a55545f2c4eb46f51911f0f

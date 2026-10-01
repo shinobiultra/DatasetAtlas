@@ -93,6 +93,11 @@ def main(argv=None):
     pfetch=previews.add_parser('fetch',help='Plan, and with --execute fetch, previews cheapest first within a total download budget');pfetch.add_argument('--dataset',action='append',default=[],help='Repeat to name datasets; default is every dataset with an upstream preview')
     pfetch.add_argument('--per-dataset-download-bytes',type=int,default=2_000_000_000);pfetch.add_argument('--per-dataset-output-bytes',type=int,default=4_000_000_000,help='Cap on one dataset\'s prepared index and preview; a complete index can be several times its source size');pfetch.add_argument('--total-download-bytes',type=int,default=20_000_000_000);pfetch.add_argument('--execute',action='store_true')
     init=sub.add_parser('init',help='Create a workspace from the catalogue shipped in this installation (or refresh its catalogue with --update)');init.add_argument('directory',nargs='?',type=Path,default=Path('.'));init.add_argument('--update',action='store_true')
+    models=sub.add_parser('models',help='Install the pinned public model weights the analysis tools need').add_subparsers(dest='action',required=True)
+    mstatus=models.add_parser('status',help='Which analysis models are installed and configured; --verify re-hashes every file');mstatus.add_argument('--verify',action='store_true')
+    mfetch=models.add_parser('fetch',help='Plan, and with --execute download, pinned model weights into work/models and configure the processors')
+    mfetch.add_argument('--model',action='append',default=[],help='Repeat to name models (see `atlas models status`); default is all');mfetch.add_argument('--execute',action='store_true')
+    mfetch.add_argument('--max-download-bytes',type=int,default=3_000_000_000);mfetch.add_argument('--reconfigure',action='store_true',help='Overwrite existing processor settings in local-config/recipes.json')
     serve=sub.add_parser('serve');serve.add_argument('--host',default='127.0.0.1');serve.add_argument('--port',type=int,default=8765)
     analyze=sub.add_parser('analyze');analyze.add_argument('--selection',required=True);analyze.add_argument('--processor',required=True);analyze.add_argument('--config',type=Path)
     export=sub.add_parser('export').add_subparsers(dest='action',required=True)
@@ -108,7 +113,7 @@ def main(argv=None):
             result=init_workspace(args.directory,update=args.update);emit(result)
             print(f"Next: cd {result['workspace']} && atlas serve   (then open http://127.0.0.1:8765/)",file=sys.stderr)
             return 0
-        if args.command in {'serve','previews','datasets'} and not (root/'registry/datasets').is_dir():
+        if args.command in {'serve','previews','datasets','models'} and not (root/'registry/datasets').is_dir():
             raise ValueError(f'No catalogue in {root}. Run `atlas init {root}` to create a workspace, or pass --root for an existing one.')
         if args.command=='storage':
             if args.action=='status':
@@ -241,6 +246,13 @@ def main(argv=None):
                 emit(report)
                 if not args.execute:print('Dry run: nothing was downloaded. Re-run with --execute to fetch the planned previews.',file=sys.stderr)
                 if report['outcomes'].get('failed') or report.get('interrupted'):return 1
+        elif args.command=='models':
+            from dataset_atlas import models_install
+            if args.action=='status':emit(models_install.status(root,verify=args.verify))
+            else:
+                report=models_install.install(root,args.model or None,execute=args.execute,max_download_bytes=args.max_download_bytes,reconfigure=args.reconfigure,log=lambda message:print(message,file=sys.stderr,flush=True))
+                emit(report)
+                if not args.execute:print('Dry run: nothing was downloaded. Re-run with --execute to install these models.',file=sys.stderr)
         elif args.command=='serve':
             import uvicorn
             from dataset_atlas.api import create_app

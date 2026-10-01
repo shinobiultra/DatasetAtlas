@@ -1,6 +1,6 @@
 # Preview reproducibility from an empty workspace
 
-Generated 2026-10-01 at commit `885bd60`. A colleague's workspace holds only the shipped catalogue; this reports what `atlas previews fetch` can obtain from each dataset's own publisher. Planning reads source metadata only (per-dataset budget 10.0 GB); it downloads nothing.
+Generated 2026-10-01 at commit `3b64daf`. A colleague's workspace holds only the shipped catalogue; this reports what `atlas previews fetch` can obtain from each dataset's own publisher. Planning reads source metadata only (per-dataset budget 10.0 GB); it downloads nothing.
 
 **108 verified from scratch · 44 more fetchable · 1 need a larger budget · 26 gated · 137 with no acquisition path yet · 0 other** of 333 catalogue entries.
 

@@ -17,10 +17,10 @@ A fresh workspace holds the catalogue but no data. Each dataset says what you ca
 
 ## Status
 
-This is a working release, not a finished v1 of [SPEC.md](SPEC.md). Measured on 2026-10-01 ([evidence](reports/preview-reproducibility.md)):
+This is a working release, not a finished v1 of [SPEC.md](SPEC.md). Measured on 2026-10-02 ([evidence](reports/preview-reproducibility.md)):
 
 - **333 catalogue entries** from all 64 corpus papers. Each mention is checked against the paper text; exact release identity is still open for many ([corpus coverage](reports/corpus_coverage.md), [dataset coverage](reports/dataset_coverage.csv)).
-- **Previews you can fetch yourself:** 108 datasets were fetched from an empty workspace and verified (a 100-record preview and complete index, with the maintainer's snapshot ID where one is pinned); 45 more have a ready source plan that has not yet been run from scratch. 150 of the maintainer's 170 previews are reproducible from the catalogue alone; the other 20 need a pinned recipe. Datasets with no acquisition path are implementation gaps unless the report says the source is gated or unreleased.
+- **Previews you can fetch yourself:** 144 datasets were fetched from an empty workspace and verified (a 100-record preview and complete index, with the maintainer's snapshot ID where one is pinned); 21 more have a ready source plan that has not yet been run from scratch, and 3 were tried and failed on stated limits (`exams-v`, `illuchar`, `space-10`). 163 of the maintainer's 170 previews have a fetch path from the catalogue alone; the other 7 are `docci` (7.6 GB image archive), `svhn` (publisher serves plain HTTP only), `vhd11k` (no remote adapter), the unnamed controversial-stimuli entry, and the 3 that failed. Datasets with no acquisition path are implementation gaps unless the report says the source is gated or unreleased.
 - The maintainer's workspace additionally holds complete indexes for 164 populations; see the [roadmap](ROADMAP.md) for what remains and [release evidence](reports/release_evidence.md) for the acceptance matrix.
 
 Paper mention evidence does not by itself resolve a dataset release. Metadata-only entries are not browsable datasets.

@@ -1,176 +1,199 @@
 # Preview reproducibility from an empty workspace
 
-Generated 2026-10-01 at commit `3b64daf`. A colleague's workspace holds only the shipped catalogue; this reports what `atlas previews fetch` can obtain from each dataset's own publisher. Planning reads source metadata only (per-dataset budget 10.0 GB); it downloads nothing.
+Generated 2026-10-02 at commit `7ff682f`. A colleague's workspace holds only the shipped catalogue; this reports what `atlas previews fetch` can obtain from each dataset's own publisher. Planning reads source metadata only (per-dataset budget 10.0 GB); it downloads nothing.
 
-**108 verified from scratch · 44 more fetchable · 1 need a larger budget · 26 gated · 137 with no acquisition path yet · 0 other** of 333 catalogue entries.
+**144 verified from scratch · 21 more fetchable (not yet tried) · 3 tried and failed · 1 need a larger budget · 26 gated · 121 with no acquisition path yet · 0 other** of 333 catalogue entries.
 
-The maintainer's workspace holds 170 previews; 150 of them can be reproduced from the catalogue alone. The rest need a recipe (see below). A "verified" dataset was fetched in an empty workspace, produced a 100-record preview and complete index, and (where the catalogue pins one) carries the maintainer's snapshot ID.
+The maintainer's workspace holds 170 previews; 163 of them can be reproduced from the catalogue alone. The rest need a recipe (see below). A "verified" dataset was fetched in an empty workspace, produced a 100-record preview and complete index, and (where the catalogue pins one) carries the maintainer's snapshot ID.
 
-## Verified from scratch (108)
+## Verified from scratch (144)
 
 Fetched from an empty workspace and checked.
 
 | Dataset | Maintainer preview | Source size | Detail |
 | --- | --- | --- | --- |
-| `advbench` | yes | 0 B | 520 records indexed, 0 B fetched, 2026-10-01 |
-| `agent-security-bench` | yes | 441.3 KB | 843 records indexed, 441.3 KB fetched, 2026-10-01 |
-| `algopuzzlevqa` | yes | 226.8 MB | 1,800 records indexed, 226.8 MB fetched, 2026-10-01 |
-| `alpaca` | yes | 22.8 MB | 52,002 records indexed, 22.8 MB fetched, 2026-10-01 |
-| `anthropic-red-teaming-prompts` | yes | 15.5 MB | 38,961 records indexed, 15.5 MB fetched, 2026-10-01 |
-| `artbench` | yes | 183.9 MB | 60,000 records indexed, 183.9 MB fetched, 2026-10-01 |
-| `bbq` | yes | 50.9 MB | 58,492 records indexed, 50.9 MB fetched, 2026-10-01 |
-| `behonest` | yes | 5.3 MB | 19,059 records indexed, 5.3 MB fetched, 2026-10-01 |
-| `bias-in-bios` | yes | 99.8 MB | 396,189 records indexed, 99.8 MB fetched, 2026-10-01 |
-| `caltech101` | yes | 137.4 MB | 9,144 records indexed, 137.4 MB fetched, 2026-10-01 |
-| `causalgym` | yes | 8.3 MB | 17,400 records indexed, 8.3 MB fetched, 2026-10-01 |
-| `cebab` | yes | 2.2 MB | 18,600 records indexed, 2.2 MB fetched, 2026-10-01 |
-| `chartqa` | yes | 4.6 MB | 32,719 records indexed, 4.6 MB fetched, 2026-10-01 |
-| `child-safety-intents` | yes | 8.8 MB | 747 records indexed, 8.8 MB fetched, 2026-10-01 |
-| `cifar-10` | yes | 170.1 MB | 60,000 records indexed, 170.1 MB fetched, 2026-10-01 |
-| `cifar-100` | yes | 168.5 MB | 60,000 records indexed, 168.5 MB fetched, 2026-10-01 |
-| `clevr` | yes | 0 B | 1,070 records indexed, 0 B fetched, 2026-10-01 |
-| `clevr-v1-full` | yes | 400.0 MB | 999,968 records indexed, 0 B fetched, 2026-10-01 |
-| `coco` | yes | 1.1 GB | 25,014 records indexed, 1.1 GB fetched, 2026-10-01 |
-| `coco-2014` | yes | 293.6 MB | 164,062 records indexed, 253.6 MB fetched, 2026-10-01 |
-| `coco-one` | yes | 20.2 MB | 2,247 records indexed, 182.8 KB fetched, 2026-10-01 |
-| `coco-qa` | yes | 31.9 MB | 117,684 records indexed, 1.9 MB fetched, 2026-10-01 |
-| `coco-two` | yes | 20.0 MB | 440 records indexed, 42.8 KB fetched, 2026-10-01 |
-| `conceptarc` | yes | 147.4 KB | 176 records indexed, 147.4 KB fetched, 2026-10-01 |
-| `controlled-clevr` | yes | 65.9 MB | 408 records indexed, 65.9 MB fetched, 2026-10-01 |
-| `controlled-images` | yes | 95.2 MB | 412 records indexed, 95.2 MB fetched, 2026-10-01 |
-| `counterfact` | yes | 45.1 MB | 21,919 records indexed, 45.1 MB fetched, 2026-10-01 |
-| `custom-propeller-and-rotating-snake-stimuli` | yes | 33.2 MB | 7 records indexed, 33.2 MB fetched, 2026-10-01 |
-| `div2k` | yes | 5.0 MB | 900 records indexed, 0 B fetched, 2026-10-01 |
-| `dreambooth` | yes | 112.1 MB | 158 records indexed, 112.1 MB fetched, 2026-10-01 |
-| `dtd` | yes | 625.2 MB | 5,640 records indexed, 625.2 MB fetched, 2026-10-01 |
-| `emnist` | yes | 561.8 MB | 2,255,710 records indexed, 561.8 MB fetched, 2026-10-01 |
-| `emnist-letters` | yes | 561.8 MB | 145,600 records indexed, 561.8 MB fetched, 2026-10-01 |
-| `eurosat` | yes | 94.7 MB | 27,000 records indexed, 94.7 MB fetched, 2026-10-01 |
-| `figure-linked-source-data-spreadsheets` | yes | 78.8 KB | 7 records indexed, 78.8 KB fetched, 2026-10-01 |
-| `find` | yes | 2.7 MB | 2,275 records indexed, 2.7 MB fetched, 2026-10-01 |
-| `flowers102` | yes | 344.9 MB | 8,189 records indexed, 344.9 MB fetched, 2026-10-01 |
-| `foil-it` | yes | 171.6 MB | 594,536 records indexed, 131.6 MB fetched, 2026-10-01 |
-| `glue-cola` | yes | 377.0 KB | 10,657 records indexed, 377.0 KB fetched, 2026-10-01 |
-| `gqa` | yes | 300.0 MB | 132,062 records indexed, 0 B fetched, 2026-10-01 |
-| `gvil-paired-illusion-images` | yes | 26.7 MB | 3,302 records indexed, 26.7 MB fetched, 2026-10-01 |
-| `hallusionbench` | yes | 146.6 MB | 1,129 records indexed, 146.6 MB fetched, 2026-10-01 |
-| `halueval` | yes | 63.4 MB | 34,507 records indexed, 63.4 MB fetched, 2026-10-01 |
-| `harmbench` | yes | 0 B | 400 records indexed, 0 B fetched, 2026-10-01 |
-| `hatefulillusion` | yes | 530.7 KB | 2,160 records indexed, 530.7 KB fetched, 2026-10-01 |
-| `high-quality-hallucination-benchmark` | yes | 38.4 MB | 4,000 records indexed, 8.4 MB fetched, 2026-10-01 |
-| `idenprof` | yes | 154.7 MB | 11,000 records indexed, 154.7 MB fetched, 2026-10-01 |
-| `illusionmnist` | yes | 433.0 KB | 5,069 records indexed, 433.0 KB fetched, 2026-10-01 |
-| `illusoryvqa` | yes | 2.5 MB | 26,121 records indexed, 2.5 MB fetched, 2026-10-01 |
-| `imagenet-sketch` | yes | 20.0 MB | 50,889 records indexed, 0 B fetched, 2026-10-01 |
-| `imagenette` | yes | 99.0 MB | 13,394 records indexed, 99.0 MB fetched, 2026-10-01 |
-| `jiechieu-tsopze-resume-corpus` | yes | 169.2 MB | 29,783 records indexed, 169.2 MB fetched, 2026-10-01 |
-| `llava-instruct-150k` | yes | 248.9 MB | 157,712 records indexed, 228.9 MB fetched, 2026-10-01 |
-| `maliciousinstruct` | yes | 6.3 KB | 100 records indexed, 6.3 KB fetched, 2026-10-01 |
-| `mathvision` | yes | 63.9 MB | 3,344 records indexed, 63.9 MB fetched, 2026-10-01 |
-| `medical-multimodal-evaluation-data` | yes | 26.0 MB | 17,303 records indexed, 6.0 MB fetched, 2026-10-01 |
-| `mm-safetybench` | yes | 499.5 MB | 1,685 records indexed, 499.5 MB fetched, 2026-10-01 |
-| `mmbench` | yes | 180.9 MB | 21,990 records indexed, 180.9 MB fetched, 2026-10-01 |
-| `mme` | yes | 199.8 MB | 2,374 records indexed, 199.8 MB fetched, 2026-10-01 |
-| `mme-perception` | yes | 199.8 MB | 2,114 records indexed, 199.8 MB fetched, 2026-10-01 |
-| `mmmu-dev` | yes | 57.0 MB | 150 records indexed, 57.0 MB fetched, 2026-10-01 |
-| `mmstar` | yes | 41.8 MB | 1,500 records indexed, 41.8 MB fetched, 2026-10-01 |
-| `mnist` | yes | 11.6 MB | 70,000 records indexed, 11.6 MB fetched, 2026-10-01 |
-| `mrpc` | yes | 1.5 MB | 5,801 records indexed, 1.5 MB fetched, 2026-10-01 |
-| `nocaps` | yes | 9.2 MB | 15,100 records indexed, 9.2 MB fetched, 2026-10-01 |
-| `nrc-vad` | yes | 51.0 MB | 74,772 records indexed, 51.0 MB fetched, 2026-10-01 |
-| `ok-vqa` | yes | 31.4 MB | 14,055 records indexed, 1.4 MB fetched, 2026-10-01 |
-| `omnispatial` | yes | 30.0 MB | 8,431 records indexed, 0 B fetched, 2026-10-01 |
-| `pairs` | yes | 19.1 MB | 200 records indexed, 19.1 MB fetched, 2026-10-01 |
-| `phantom` | yes | 145.0 MB | 55,350 records indexed, 145.0 MB fetched, 2026-10-01 |
-| `pmc-vqa` | yes | 99.2 MB | 228,948 records indexed, 49.2 MB fetched, 2026-10-01 |
-| `pope` | yes | 151.1 MB | 9,000 records indexed, 1.1 MB fetched, 2026-10-01 |
-| `puzzlevqa` | yes | 61.7 MB | 2,000 records indexed, 61.7 MB fetched, 2026-10-01 |
-| `qnli` | yes | 10.6 MB | 115,669 records indexed, 10.6 MB fetched, 2026-10-01 |
-| `qqp` | yes | 41.7 MB | 795,241 records indexed, 41.7 MB fetched, 2026-10-01 |
-| `ravel` | yes | 429.3 KB | 11,839 records indexed, 429.3 KB fetched, 2026-10-01 |
-| `realtoxicityprompts` | yes | 0 B | 99,442 records indexed, 0 B fetched, 2026-10-01 |
-| `roco` | yes | 13.6 MB | 87,927 records indexed, 13.6 MB fetched, 2026-10-01 |
-| `rsicd` | yes | 17.5 MB | 10,921 records indexed, 12.5 MB fetched, 2026-10-01 |
-| `sad` | yes | 15.5 MB | 127,176 records indexed, 15.5 MB fetched, 2026-10-01 |
-| `sbbench-synthetic-gender-crop-false` | yes | 237.0 MB | 206 records indexed, 237.0 MB fetched, 2026-10-01 |
-| `seed-bench-2` | yes | 68.1 MB | 24,371 records indexed, 18.1 MB fetched, 2026-10-01 |
-| `seedbench` | yes | 57.2 MB | 17,990 records indexed, 7.2 MB fetched, 2026-10-01 |
-| `senator-tweets-2021` | yes | 232.5 MB | 99,693 records indexed, 232.5 MB fetched, 2026-10-01 |
-| `set14` | yes | 0 B | 14 records indexed, 0 B fetched, 2026-10-01 |
-| `set5` | yes | 0 B | 5 records indexed, 0 B fetched, 2026-10-01 |
-| `shapes-localization` | yes | 0 B | 400 records indexed, 0 B fetched, 2026-10-01 |
-| `shapes-recognition` | yes | 0 B | 400 records indexed, 0 B fetched, 2026-10-01 |
-| `shapes-relations` | yes | 0 B | 400 records indexed, 0 B fetched, 2026-10-01 |
-| `sst2` | yes | 7.4 MB | 70,042 records indexed, 7.4 MB fetched, 2026-10-01 |
-| `t2i-compbench` | yes | 850.7 KB | 17,861 records indexed, 850.7 KB fetched, 2026-10-01 |
-| `tdc2023` | yes | 7.8 KB | 100 records indexed, 7.8 KB fetched, 2026-10-01 |
-| `textvqa` | yes | 47.5 MB | 45,336 records indexed, 27.5 MB fetched, 2026-10-01 |
-| `textvqa-x` | yes | 80.5 MB | 18,096 records indexed, 60.5 MB fetched, 2026-10-01 |
-| `turing-eye-test` | yes | 171.5 MB | 490 records indexed, 171.5 MB fetched, 2026-10-01 |
-| `tweeteval` | yes | 14.2 MB | 200,785 records indexed, 14.2 MB fetched, 2026-10-01 |
-| `vg-qa-one` | yes | 679.8 MB | 1,160 records indexed, 679.8 MB fetched, 2026-10-01 |
-| `vg-qa-two` | yes | 679.8 MB | 288 records indexed, 679.8 MB fetched, 2026-10-01 |
-| `vibeeval` | yes | 205.3 MB | 269 records indexed, 205.3 MB fetched, 2026-10-01 |
-| `visual6502-transistor-netlist` | yes | 265.3 KB | 3,510 records indexed, 265.3 KB fetched, 2026-10-01 |
-| `visualpuzzle` | yes | 142.7 MB | 1,168 records indexed, 142.7 MB fetched, 2026-10-01 |
-| `vizwiz` | yes | 29.9 MB | 32,842 records indexed, 9.9 MB fetched, 2026-10-01 |
-| `vqa-v2` | yes | 164.0 MB | 214,354 records indexed, 14.0 MB fetched, 2026-10-01 |
-| `vqa-v2-m-n-subsets` | yes | 2.1 MB | 1,600 records indexed, 2.1 MB fetched, 2026-10-01 |
-| `vsr` | yes | 35.0 MB | 16,023 records indexed, 5.0 MB fetched, 2026-10-01 |
-| `waterbirds` | yes | 489.7 MB | 11,788 records indexed, 489.7 MB fetched, 2026-10-01 |
-| `wmdp` | yes | 1.1 MB | 3,668 records indexed, 1.1 MB fetched, 2026-10-01 |
-| `wnli` | yes | 29.0 KB | 852 records indexed, 29.0 KB fetched, 2026-10-01 |
+| `advbench` | yes | 0 B | 520 records indexed, 0 B fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `agent-security-bench` | yes | 441.3 KB | 843 records indexed, 441.3 KB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `algopuzzlevqa` | yes | 226.8 MB | 1,800 records indexed, 226.8 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `alpaca` | yes | 22.8 MB | 52,002 records indexed, 22.8 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `anthropic-red-teaming-prompts` | yes | 15.5 MB | 38,961 records indexed, 15.5 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `artbench` | yes | 183.9 MB | 60,000 records indexed, 183.9 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `bbq` | yes | 50.9 MB | 58,492 records indexed, 50.9 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `behonest` | yes | 5.3 MB | 19,059 records indexed, 5.3 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `bias-in-bios` | yes | 99.8 MB | 396,189 records indexed, 99.8 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `blink` | yes | 10.0 GB | index complete, 57.8 KB fetched, 2026-10-02 |
+| `caltech101` | yes | 137.4 MB | 9,144 records indexed, 137.4 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `cauldron` | yes | 10.0 GB | index complete, 49.9 MB fetched, 2026-10-02 |
+| `causalgym` | yes | 8.3 MB | 17,400 records indexed, 8.3 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `cebab` | yes | 2.2 MB | 18,600 records indexed, 2.2 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `chartqa` | yes | 4.6 MB | 32,719 records indexed, 4.6 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `child-safety-intents` | yes | 8.8 MB | 747 records indexed, 8.8 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `cifar-10` | yes | 170.1 MB | 60,000 records indexed, 170.1 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `cifar-100` | yes | 168.5 MB | 60,000 records indexed, 168.5 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `clevr` | yes | 0 B | 1,070 records indexed, 0 B fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `clevr-v1-full` | yes | 400.0 MB | 999,968 records indexed, 0 B fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `coco` | yes | 1.1 GB | 25,014 records indexed, 1.1 GB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `coco-2014` | yes | 293.6 MB | 164,062 records indexed, 253.6 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `coco-one` | yes | 20.2 MB | 2,247 records indexed, 182.8 KB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `coco-qa` | yes | 31.9 MB | 117,684 records indexed, 1.9 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `coco-two` | yes | 20.0 MB | 440 records indexed, 42.8 KB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `conceptarc` | yes | 147.4 KB | 176 records indexed, 147.4 KB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `controlled-clevr` | yes | 65.9 MB | 408 records indexed, 65.9 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `controlled-images` | yes | 95.2 MB | 412 records indexed, 95.2 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `counterfact` | yes | 45.1 MB | 21,919 records indexed, 45.1 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `covid-19-radiography` | yes | 816.0 MB | 21,165 records indexed, 816.0 MB fetched, 2026-10-02 |
+| `cub-200-2011` | yes | 1.2 GB | 11,788 records indexed, 1.2 GB fetched, 2026-10-02 |
+| `custom-propeller-and-rotating-snake-stimuli` | yes | 33.2 MB | 7 records indexed, 33.2 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `datacomp-1b` | no | 10.0 GB | index complete, 2.0 GB fetched, 2026-10-02 |
+| `div2k` | yes | 5.0 MB | 900 records indexed, 0 B fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `dreambooth` | yes | 112.1 MB | 158 records indexed, 112.1 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `dtd` | yes | 625.2 MB | 5,640 records indexed, 625.2 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `emnist` | yes | 561.8 MB | 2,255,710 records indexed, 561.8 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `emnist-balanced` | yes | 561.8 MB | 131,600 records indexed, 561.8 MB fetched, 2026-10-02 |
+| `emnist-letters` | yes | 561.8 MB | 145,600 records indexed, 561.8 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `eurosat` | yes | 94.7 MB | 27,000 records indexed, 94.7 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `fairface` | yes | 2.7 GB | 97,698 records indexed, 2.7 GB fetched, 2026-10-02 |
+| `figure-linked-source-data-spreadsheets` | yes | 78.8 KB | 7 records indexed, 78.8 KB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `find` | yes | 2.7 MB | 2,275 records indexed, 2.7 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `finevision` | no | 10.0 GB | index complete, 1.5 GB fetched, 2026-10-02 |
+| `flowers102` | yes | 344.9 MB | 8,189 records indexed, 344.9 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `foil-it` | yes | 171.6 MB | 594,536 records indexed, 131.6 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `glue-cola` | yes | 377.0 KB | 10,657 records indexed, 377.0 KB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `gqa` | yes | 300.0 MB | 132,062 records indexed, 0 B fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `gvil` | yes | 26.7 MB | 3,200 records indexed, 26.7 MB fetched, 2026-10-02 |
+| `gvil-paired-illusion-images` | yes | 26.7 MB | 3,302 records indexed, 26.7 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `hades` | yes | 10.0 GB | index complete, 244.0 KB fetched, 2026-10-02 |
+| `hallusionbench` | yes | 146.6 MB | 1,129 records indexed, 146.6 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `halueval` | yes | 63.4 MB | 34,507 records indexed, 63.4 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `harmbench` | yes | 0 B | 400 records indexed, 0 B fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `hatefulillusion` | yes | 530.7 KB | 2,160 records indexed, 530.7 KB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `high-quality-hallucination-benchmark` | yes | 38.4 MB | 4,000 records indexed, 8.4 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `hod` | yes | 1.2 GB | 10,631 records indexed, 1.2 GB fetched, 2026-10-02 |
+| `iconqa` | yes | 1.9 GB | 107,439 records indexed, 1.9 GB fetched, 2026-10-02 |
+| `idenprof` | yes | 154.7 MB | 11,000 records indexed, 154.7 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `illusionmnist` | yes | 433.0 KB | 5,069 records indexed, 433.0 KB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `illusoryvqa` | yes | 2.5 MB | 26,121 records indexed, 2.5 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `imagenet-a` | yes | 687.6 MB | 7,500 records indexed, 687.6 MB fetched, 2026-10-02 |
+| `imagenet-r` | yes | 2.2 GB | 30,000 records indexed, 2.2 GB fetched, 2026-10-02 |
+| `imagenet-sketch` | yes | 20.0 MB | 50,889 records indexed, 0 B fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `imagenet-v2` | yes | 1.3 GB | 10,000 records indexed, 1.3 GB fetched, 2026-10-02 |
+| `imagenette` | yes | 99.0 MB | 13,394 records indexed, 99.0 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `jiechieu-tsopze-resume-corpus` | yes | 169.2 MB | 29,783 records indexed, 169.2 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `llava-instruct-150k` | yes | 248.9 MB | 157,712 records indexed, 228.9 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `llava-instruct-150k-3a74a703` | yes | 76.6 GB | index complete, 12.5 MB fetched, 2026-10-02 |
+| `maliciousinstruct` | yes | 6.3 KB | 100 records indexed, 6.3 KB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `mathvision` | yes | 63.9 MB | 3,344 records indexed, 63.9 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `medical-multimodal-evaluation-data` | yes | 26.0 MB | 17,303 records indexed, 6.0 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `mllmu-bench` | yes | 10.0 GB | index complete, 1.1 MB fetched, 2026-10-02 |
+| `mm-safetybench` | yes | 499.5 MB | 1,685 records indexed, 499.5 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `mmbench` | yes | 180.9 MB | 21,990 records indexed, 180.9 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `mme` | yes | 199.8 MB | 2,374 records indexed, 199.8 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `mme-perception` | yes | 199.8 MB | 2,114 records indexed, 199.8 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `mmmu-dev` | yes | 57.0 MB | 150 records indexed, 57.0 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `mmstar` | yes | 41.8 MB | 1,500 records indexed, 41.8 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `mnist` | yes | 11.6 MB | 70,000 records indexed, 11.6 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `mrpc` | yes | 1.5 MB | 5,801 records indexed, 1.5 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `naturalbench` | yes | 10.0 GB | index complete, 320.3 KB fetched, 2026-10-02 |
+| `nocaps` | yes | 9.2 MB | 15,100 records indexed, 9.2 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `nrc-vad` | yes | 51.0 MB | 74,772 records indexed, 51.0 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `objectnet` | yes | 1.6 GB | 50,273 records indexed, 627.5 MB fetched, 2026-10-02 |
+| `ok-vqa` | yes | 31.4 MB | 14,055 records indexed, 1.4 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `omnispatial` | yes | 30.0 MB | 8,431 records indexed, 0 B fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `oxfordpet` | yes | 811.1 MB | 7,349 records indexed, 811.1 MB fetched, 2026-10-02 |
+| `pairs` | yes | 19.1 MB | 200 records indexed, 19.1 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `phantom` | yes | 145.0 MB | 55,350 records indexed, 145.0 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `phase` | yes | 2.6 GB | 18,889 records indexed, 2.6 GB fetched, 2026-10-02 |
+| `pmc-vqa` | yes | 99.2 MB | 228,948 records indexed, 49.2 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `pope` | yes | 151.1 MB | 9,000 records indexed, 1.1 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `puzzlevqa` | yes | 61.7 MB | 2,000 records indexed, 61.7 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `qnli` | yes | 10.6 MB | 115,669 records indexed, 10.6 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `qqp` | yes | 41.7 MB | 795,241 records indexed, 41.7 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `ravel` | yes | 429.3 KB | 11,839 records indexed, 429.3 KB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `realtoxicityprompts` | yes | 0 B | 99,442 records indexed, 0 B fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `realworldqa` | yes | 10.0 GB | index complete, 169.6 KB fetched, 2026-10-02 |
+| `recap-datacomp-1b` | no | 10.0 GB | index complete, 122.9 MB fetched, 2026-10-02 |
+| `roco` | yes | 13.6 MB | 87,927 records indexed, 13.6 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `rsicd` | yes | 17.5 MB | 10,921 records indexed, 12.5 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `sad` | yes | 15.5 MB | 127,176 records indexed, 15.5 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `sbbench-syn` | yes | 10.0 GB | 539 records indexed, 137.7 KB fetched, 2026-10-02 |
+| `sbbench-syn-crop` | yes | 10.0 GB | 917 records indexed, 207.7 KB fetched, 2026-10-02 |
+| `sbbench-synthetic-age-crop-false` | yes | 10.0 GB | index complete, 69.6 KB fetched, 2026-10-02 |
+| `sbbench-synthetic-age-crop-true` | yes | 10.0 GB | index complete, 136.1 KB fetched, 2026-10-02 |
+| `sbbench-synthetic-gender-crop-false` | yes | 237.0 MB | 206 records indexed, 237.0 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `sbbench-synthetic-gender-crop-true` | yes | 10.0 GB | index complete, 70.5 KB fetched, 2026-10-02 |
+| `scienceqa-img` | yes | 10.0 GB | index complete, 5.9 MB fetched, 2026-10-02 |
+| `seed-bench-2` | yes | 68.1 MB | 24,371 records indexed, 18.1 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `seedbench` | yes | 57.2 MB | 17,990 records indexed, 7.2 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `senator-tweets-2021` | yes | 232.5 MB | 99,693 records indexed, 232.5 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `set14` | yes | 0 B | 14 records indexed, 0 B fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `set5` | yes | 0 B | 5 records indexed, 0 B fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `shapes-localization` | yes | 0 B | 400 records indexed, 0 B fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `shapes-recognition` | yes | 0 B | 400 records indexed, 0 B fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `shapes-relations` | yes | 0 B | 400 records indexed, 0 B fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `simplevqa` | yes | 10.0 GB | index complete, 415.7 MB fetched, 2026-10-02 |
+| `smolim2-135m-10b` | yes | 10.0 GB | index complete, 295.9 MB fetched, 2026-10-02 |
+| `socialcounterfactuals` | yes | 10.0 GB | index complete, 4.0 MB fetched, 2026-10-02 |
+| `sst2` | yes | 7.4 MB | 70,042 records indexed, 7.4 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `stl-10` | yes | 2.6 GB | 113,000 records indexed, 2.6 GB fetched, 2026-10-02 |
+| `t2i-compbench` | yes | 850.7 KB | 17,861 records indexed, 850.7 KB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `tdc2023` | yes | 7.8 KB | 100 records indexed, 7.8 KB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `textvqa` | yes | 47.5 MB | 45,336 records indexed, 27.5 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `textvqa-x` | yes | 80.5 MB | 18,096 records indexed, 60.5 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `turing-eye-test` | yes | 171.5 MB | 490 records indexed, 171.5 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `tweeteval` | yes | 14.2 MB | 200,785 records indexed, 14.2 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `vg-qa-one` | yes | 679.8 MB | 1,160 records indexed, 679.8 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `vg-qa-two` | yes | 679.8 MB | 288 records indexed, 679.8 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `vibeeval` | yes | 205.3 MB | 269 records indexed, 205.3 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `visual-counterfact` | yes | 10.0 GB | index complete, 182.5 KB fetched, 2026-10-02 |
+| `visual-genome` | yes | 889.8 MB | 116,367 records indexed, 859.8 MB fetched, 2026-10-02 |
+| `visual6502-transistor-netlist` | yes | 265.3 KB | 3,510 records indexed, 265.3 KB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `visualpuzzle` | yes | 142.7 MB | 1,168 records indexed, 142.7 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `vizwiz` | yes | 29.9 MB | 32,842 records indexed, 9.9 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `vqa-v2` | yes | 164.0 MB | 214,354 records indexed, 14.0 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `vqa-v2-m-n-subsets` | yes | 2.1 MB | 1,600 records indexed, 2.1 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `vsr` | yes | 35.0 MB | 16,023 records indexed, 5.0 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `waterbirds` | yes | 489.7 MB | 11,788 records indexed, 489.7 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `what-s-up` | yes | 861.2 MB | 4,958 records indexed, 841.2 MB fetched, 2026-10-02 |
+| `wmdp` | yes | 1.1 MB | 3,668 records indexed, 1.1 MB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
+| `wnli` | yes | 29.0 KB | 852 records indexed, 29.0 KB fetched, 2026-10-01 (earlier run, first reported at 3b64daf) |
 
-## Fetchable, not yet verified (44)
+## Fetchable, not yet verified (21)
 
 A source plan is ready within the budget; not yet fetched from an empty workspace.
 
 | Dataset | Maintainer preview | Source size | Detail |
 | --- | --- | --- | --- |
+| `activations-csv` | yes | 22.0 MB | 22.0 MB · http_archive |
 | `bapps` | yes | 7.7 GB | 7.7 GB · http_archive |
-| `blink` | yes | 10.0 GB | up to 10.0 GB · huggingface_remote_sample |
-| `cauldron` | yes | 10.0 GB | up to 10.0 GB · huggingface_remote_sample |
+| `cifar-10-1` | yes | 6.2 MB | 6.2 MB · http_archive |
 | `cifar-10-c` | yes | 2.9 GB | 2.9 GB · http_archive |
 | `cifar-100-c` | yes | 2.9 GB | 2.9 GB · http_archive |
 | `cinic-10` | yes | 687.5 MB | 687.5 MB · http_archive |
-| `covid-19-radiography` | yes | 816.0 MB | 816.0 MB · http_archive |
-| `cub-200-2011` | yes | 1.2 GB | 1.2 GB · http_archive |
-| `datacomp-1b` | no | 10.0 GB | up to 10.0 GB · huggingface_remote_sample |
-| `exams-v` | yes | 10.0 GB | up to 10.0 GB · huggingface_remote_sample |
-| `fairface` | yes | 2.7 GB | 2.7 GB · http_archive |
 | `fgvc-aircraft` | yes | 2.8 GB | 2.8 GB · http_archive |
-| `finevision` | no | 10.0 GB | up to 10.0 GB · huggingface_remote_sample |
 | `food101` | yes | 5.0 GB | 5.0 GB · http_archive |
-| `hades` | yes | 10.0 GB | up to 10.0 GB · huggingface_remote_sample |
-| `hod` | yes | 1.2 GB | 1.2 GB · http_archive |
-| `iconqa` | yes | 1.9 GB | 1.9 GB · http_archive |
-| `illuchar` | yes | 10.0 GB | up to 10.0 GB · huggingface_remote_sample |
-| `imagenet-a` | yes | 687.6 MB | 687.6 MB · http_archive |
-| `imagenet-r` | yes | 2.2 GB | 2.2 GB · http_archive |
-| `imagenet-v2` | yes | 1.3 GB | 1.3 GB · http_archive |
-| `llava-instruct-150k-3a74a703` | yes | 10.0 GB | up to 10.0 GB · huggingface_remote_sample |
-| `mllmu-bench` | yes | 10.0 GB | up to 10.0 GB · huggingface_remote_sample |
-| `naturalbench` | yes | 10.0 GB | up to 10.0 GB · huggingface_remote_sample |
-| `objectnet` | yes | 1.6 GB | up to 1.6 GB · local |
-| `oxfordpet` | yes | 811.1 MB | 811.1 MB · http_archive |
-| `phase` | yes | 2.6 GB | 2.6 GB · http_archive |
-| `realworldqa` | yes | 10.0 GB | up to 10.0 GB · huggingface_remote_sample |
-| `recap-datacomp-1b` | no | 10.0 GB | up to 10.0 GB · huggingface_remote_sample |
+| `hc-bench` | yes | 11.7 MB | 11.7 MB · http_archive |
+| `illusionvqa` | yes | 38.7 MB | 38.7 MB · http_archive |
+| `jailbreakv-28k` | yes | 23.2 MB | 23.2 MB · http_archive |
+| `llava-bench` | yes | 9.8 MB | 9.8 MB · http_archive |
+| `mm-vet` | yes | 66.5 MB | 66.5 MB · http_archive |
+| `mmbench-en-dev` | yes | 37.2 MB | 37.2 MB · http_archive |
+| `omnisafebench-mm` | yes | 485.9 KB | 485.9 KB · http_archive |
+| `pairs-csv` | yes | 22.0 MB | 22.0 MB · http_archive |
 | `safebench` | yes | 4.7 GB | 4.7 GB · http_archive |
-| `sbbench-syn` | yes | 10.0 GB | up to 10.0 GB · local |
-| `sbbench-syn-crop` | yes | 10.0 GB | up to 10.0 GB · local |
-| `sbbench-synthetic-age-crop-false` | yes | 10.0 GB | up to 10.0 GB · huggingface_remote_sample |
-| `sbbench-synthetic-age-crop-true` | yes | 10.0 GB | up to 10.0 GB · huggingface_remote_sample |
-| `sbbench-synthetic-gender-crop-true` | yes | 10.0 GB | up to 10.0 GB · huggingface_remote_sample |
-| `scienceqa-img` | yes | 10.0 GB | up to 10.0 GB · huggingface_remote_sample |
-| `simplevqa` | yes | 10.0 GB | up to 10.0 GB · huggingface_remote_sample |
-| `smolim2-135m-10b` | yes | 10.0 GB | up to 10.0 GB · huggingface_remote_sample |
-| `socialcounterfactuals` | yes | 10.0 GB | up to 10.0 GB · huggingface_remote_sample |
-| `space-10` | yes | 10.0 GB | up to 10.0 GB · huggingface_remote_sample |
-| `visual-counterfact` | yes | 10.0 GB | up to 10.0 GB · huggingface_remote_sample |
-| `visual-genome` | yes | 889.8 MB | 889.8 MB · http_archive |
+| `svo-probes` | yes | 14.2 MB | 14.2 MB · http_archive |
+| `top16-images-csv` | yes | 22.0 MB | 22.0 MB · http_archive |
 | `vqa-constraints` | yes | 4.1 GB | 4.1 GB · http_archive |
-| `what-s-up` | yes | 861.2 MB | 861.2 MB · http_archive |
+| `whoops` | yes | 689.3 MB | 689.3 MB · http_archive |
+
+## Fetch attempted, failed (3)
+
+A fetch from an empty workspace was attempted and failed; the stated reason is the last observed error, not a source restriction.
+
+| Dataset | Maintainer preview | Source size | Detail |
+| --- | --- | --- | --- |
+| `exams-v` | yes | 10.0 GB | ValueError: Embedded image exceeds pixel budget |
+| `illuchar` | yes | 10.0 GB | ValueError: Image row group exceeds decoded memory budget |
+| `space-10` | yes | 10.0 GB | ValueError: Remote binary column image requires the full-download adapter; slot availability cannot be inferred |
 
 ## Needs a larger download budget (1)
 
@@ -213,13 +236,12 @@ Source requires an account, agreement or approval; Atlas does not bypass it.
 | `winoground` | no | 0 B | This release is gated. Obtain authorized local files and configure its adapter. |
 | `zerobench` | no | 0 B | This release needs approval or an agreement from its source, which Atlas does not bypass; add authorized local files to use it. |
 
-## No acquisition path yet (137)
+## No acquisition path yet (121)
 
 No pinned acquisition recipe or adapter yet. For a public source this is a gap in Atlas; where availability is unverified, source research comes first.
 
 | Dataset | Maintainer preview | Source size | Detail |
 | --- | --- | --- | --- |
-| `activations-csv` | yes | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
 | `artbench-2` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `artchive` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `asteroids-rom` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
@@ -230,7 +252,6 @@ No pinned acquisition recipe or adapter yet. For a public source this is a gap i
 | `broden` | no | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
 | `cc3m` | no | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
 | `celeba` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
-| `cifar-10-1` | yes | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
 | `cifar-2` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `coco-caption` | no | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
 | `coco-detection-dataset` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
@@ -256,7 +277,6 @@ No pinned acquisition recipe or adapter yet. For a public source this is a gap i
 | `donkey-kong-rom` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `e-ic` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `e-vqa` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
-| `emnist-balanced` | yes | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
 | `emoset` | no | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
 | `factoid` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `ffhq` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
@@ -267,13 +287,10 @@ No pinned acquisition recipe or adapter yet. For a public source this is a gap i
 | `gda-adversarial-image-variants` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `gpt-4v-filtered-vl-gender-subset` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `group-labels` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
-| `gvil` | yes | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
-| `hc-bench` | yes | 0 B | No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required. |
 | `hellaswag-pro` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `ictcf` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `illusionbench` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `illusionbench-3c643c29` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
-| `illusionvqa` | yes | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
 | `illusory-vqa` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `imagenet-1k` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `imagenet-c` | no | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
@@ -282,19 +299,15 @@ No pinned acquisition recipe or adapter yet. For a public source this is a gap i
 | `inaturalist` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `interpbench` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `itac` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
-| `jailbreakv-28k` | yes | 0 B | No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required. |
 | `laion` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `laion-400m` | no | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
 | `laion-aesthetics` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `language-identification-dataset` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `lingoqa` | no | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
-| `llava-bench` | yes | 0 B | No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required. |
 | `miap` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `middlebury` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `mit-adobe-5k` | no | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
 | `mit-states` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
-| `mm-vet` | yes | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
-| `mmbench-en-dev` | yes | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
 | `ms-coco` | no | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
 | `ms-coco-7f846b38` | no | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
 | `ms-coco-captions` | no | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
@@ -305,10 +318,8 @@ No pinned acquisition recipe or adapter yet. For a public source this is a gap i
 | `nips17` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `oasis` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `objaverse` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
-| `omnisafebench-mm` | yes | 0 B | No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required. |
 | `openimages` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `ostris-dataset` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
-| `pairs-csv` | yes | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
 | `paper-08e415961919a492-unnamed-11-image-inpainting-set` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `paper-08e415961919a492-unnamed-real-noise-benchmark-46` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `paper-1e2474b15fec2d7d-unnamed-controversial-stimuli-collection` | yes | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
@@ -338,12 +349,9 @@ No pinned acquisition recipe or adapter yet. For a public source this is a gap i
 | `space-invaders-rom` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `spoken-wikipedia` | no | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
 | `stanford-cars` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
-| `stl-10` | yes | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
 | `svhn` | yes | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
-| `svo-probes` | yes | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
 | `the-pile` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `tid2013` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
-| `top16-images-csv` | yes | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
 | `ucf101` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `vhd11k` | yes | 0 B | No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required. |
 | `via-bench` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
@@ -354,7 +362,6 @@ No pinned acquisition recipe or adapter yet. For a public source this is a gap i
 | `vlagenderbias` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `vtab` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
 | `wall-street-journal` | no | 0 B | Atlas has no acquisition path for this release, and its public availability has not been verified. Identity or source research is needed bef |
-| `whoops` | yes | 0 B | No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required. |
 | `wilds` | no | 0 B | Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the sourc |
 
 ## Unreleased (17)

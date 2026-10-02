@@ -24,6 +24,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CATEGORIES = [
     ('verified', 'Fetched from an empty workspace and checked', 'Verified from scratch'),
     ('planned', 'A source plan is ready within the budget; not yet fetched from an empty workspace', 'Fetchable, not yet verified'),
+    ('attempt_failed', 'A fetch from an empty workspace was attempted and failed; the stated reason is the last observed error, not a source restriction', 'Fetch attempted, failed'),
     ('larger_budget', 'Fetchable, but the source is larger than the per-dataset budget used here', 'Needs a larger download budget'),
     ('gated', 'Source requires an account, agreement or approval; Atlas does not bypass it', 'Gated at the source'),
     ('no_recipe', 'No pinned acquisition recipe or adapter yet. For a public source this is a gap in Atlas; where availability is unverified, source research comes first', 'No acquisition path yet'),
@@ -105,9 +106,22 @@ def verified(workspaces: list[Path]) -> dict[str, dict]:
             version = json.loads((workspace / 'work/prepared' / dataset_id / 'active.json').read_text())['version']
             receipt = json.loads((workspace / 'work/prepared' / dataset_id / version / 'receipt.json').read_text())
             found[dataset_id] = {'downloaded_bytes': status.get('downloaded_bytes', 0), 'kind': plan.get('kind'),
-                                 'records_indexed': receipt.get('record_count'), 'snapshot_id': receipt.get('snapshot_id'),
+                                 'records_indexed': receipt.get('record_count') if receipt.get('record_count') is not None else status.get('indexed_count'), 'snapshot_id': receipt.get('snapshot_id'),
                                  'completed_at': datetime.fromtimestamp(status.get('updated_at', 0), timezone.utc).strftime('%Y-%m-%d')}
     return found
+
+
+def failures(workspaces: list[Path]) -> dict[str, str]:
+    """Last failed preparation per dataset in the verification workspaces (a later success is handled by the caller)."""
+    found: dict[str, tuple[float, str]] = {}
+    for workspace in workspaces:
+        for status_path in sorted((workspace / 'work/preparation').glob('*/status.json')):
+            status = json.loads(status_path.read_text())
+            if status.get('status') == 'failed' and status.get('dataset_id'):
+                stamp = status.get('updated_at', 0)
+                if status['dataset_id'] not in found or stamp > found[status['dataset_id']][0]:
+                    found[status['dataset_id']] = (stamp, str(status.get('error', 'unknown error'))[:200])
+    return {key: value[1] for key, value in found.items()}
 
 
 def fmt_bytes(value) -> str:
@@ -135,11 +149,14 @@ def main() -> None:
         for entry in old.get('datasets', []):
             if entry.get('category') == 'verified' and entry['dataset_id'] not in evidence and entry.get('verification'):
                 evidence[entry['dataset_id']] = {**entry['verification'], 'carried_from_commit': entry['verification'].get('carried_from_commit', old.get('commit'))}
+    failed = failures([path.resolve() for path in args.verified_from])
     coverage = {row['dataset_id']: row for row in csv.DictReader((ROOT / 'reports/dataset_coverage.csv').open())}
     for row in rows:
         row['maintainer_preview'] = coverage.get(row['dataset_id'], {}).get('preview', 'none') != 'none'
         if row['dataset_id'] in evidence:
             row['category'], row['verification'] = 'verified', evidence[row['dataset_id']]
+        elif row['category'] == 'planned' and row['dataset_id'] in failed:
+            row['category'], row['requirements'] = 'attempt_failed', [failed[row['dataset_id']]]
     commit = subprocess.run(['git', 'rev-parse', '--short', 'HEAD'], cwd=ROOT, capture_output=True, text=True).stdout.strip()
     summary = {c: sum(r['category'] == c for r in rows) for c, _, _ in CATEGORIES}
     with_preview = [r for r in rows if r['maintainer_preview']]
@@ -155,7 +172,7 @@ def main() -> None:
              f"Generated {document['generated_at'][:10]} at commit `{commit}`. A colleague's workspace holds only the shipped catalogue; "
              'this reports what `atlas previews fetch` can obtain from each dataset\'s own publisher. Planning reads source metadata only '
              f'(per-dataset budget {fmt_bytes(args.per_dataset_bytes)}); it downloads nothing.', '',
-             f"**{summary['verified']} verified from scratch · {summary['planned']} more fetchable · {summary['larger_budget']} need a larger budget · "
+             f"**{summary['verified']} verified from scratch · {summary['planned']} more fetchable (not yet tried) · {summary['attempt_failed']} tried and failed · {summary['larger_budget']} need a larger budget · "
              f"{summary['gated']} gated · {summary['no_recipe']} with no acquisition path yet · {summary['other']} other** of {len(rows)} catalogue entries.", '',
              f"The maintainer's workspace holds {len(with_preview)} previews; {document['maintainer_previews_reproducible']} of them can be reproduced from the "
              'catalogue alone. The rest need a recipe (see below). A "verified" dataset was fetched in an empty workspace, produced a '
@@ -170,7 +187,8 @@ def main() -> None:
             detail = ''
             if category == 'verified':
                 v = r['verification']
-                detail = f"{v['records_indexed']:,} records indexed, {fmt_bytes(v['downloaded_bytes'])} fetched, {v['completed_at']}"
+                detail = f"{v['records_indexed']:,} records indexed, " if v['records_indexed'] is not None else 'index complete, '
+                detail += f"{fmt_bytes(v['downloaded_bytes'])} fetched, {v['completed_at']}"
                 if v.get('carried_from_commit'):
                     detail += f" (earlier run, first reported at {v['carried_from_commit']})"
             elif category == 'planned':

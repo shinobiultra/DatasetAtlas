@@ -1,18 +1,16 @@
 {
  "catalogue_entries": 333,
- "commit": "3b64daf",
+ "commit": "7ff682f",
  "datasets": [
   {
-   "category": "no_recipe",
+   "category": "planned",
    "dataset_id": "activations-csv",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 21980821,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "Pach ImageNet validation activation index",
-   "ready": false,
-   "requirements": [
-    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
    "upper_bound": false
   },
@@ -28,6 +26,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 0,
     "kind": "local",
@@ -47,6 +46,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 441328,
     "kind": "http_archive",
@@ -66,6 +66,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 226793952,
     "kind": "huggingface_columnar",
@@ -85,6 +86,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 22773992,
     "kind": "http_archive",
@@ -104,6 +106,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 15483307,
     "kind": "http_archive",
@@ -123,6 +126,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 183938499,
     "kind": "http_archive",
@@ -224,6 +228,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 50931178,
     "kind": "http_archive",
@@ -243,6 +248,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 5261339,
     "kind": "http_archive",
@@ -262,6 +268,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 99808338,
     "kind": "huggingface_columnar",
@@ -270,7 +277,7 @@
    }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "blink",
    "download_bytes": 10000000000,
    "kind": "huggingface_remote_sample",
@@ -279,7 +286,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": 797279831,
-   "upper_bound": true
+   "upper_bound": true,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 57773,
+    "kind": "huggingface_remote_sample",
+    "records_indexed": null,
+    "snapshot_id": "blink-908626ff1219ab012e071c38"
+   }
   },
   {
    "category": "no_recipe",
@@ -335,6 +349,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 137414764,
     "kind": "http_archive",
@@ -343,7 +358,7 @@
    }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "cauldron",
    "download_bytes": 10000000000,
    "kind": "huggingface_remote_sample",
@@ -352,7 +367,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": 168903960966,
-   "upper_bound": true
+   "upper_bound": true,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 49869271,
+    "kind": "huggingface_remote_sample",
+    "records_indexed": null,
+    "snapshot_id": "cauldron-30268cc37f99b4be540c8deb"
+   }
   },
   {
    "category": "verified",
@@ -366,6 +388,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 8285880,
     "kind": "http_archive",
@@ -399,6 +422,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 2243815,
     "kind": "http_archive",
@@ -432,6 +456,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 4615773,
     "kind": "http_archive",
@@ -465,6 +490,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 8771903,
     "kind": "http_archive",
@@ -484,6 +510,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 170052171,
     "kind": "http_archive",
@@ -492,16 +519,14 @@
    }
   },
   {
-   "category": "no_recipe",
+   "category": "planned",
    "dataset_id": "cifar-10-1",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 6152256,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "CIFAR-10.1 v6",
-   "ready": false,
-   "requirements": [
-    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
    "upper_bound": false
   },
@@ -529,6 +554,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 168513733,
     "kind": "http_archive",
@@ -586,6 +612,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 0,
     "kind": "local",
@@ -605,6 +632,7 @@
    "source_bytes": null,
    "upper_bound": true,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 0,
     "kind": "local",
@@ -624,6 +652,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 1068492871,
     "kind": "http_archive",
@@ -643,6 +672,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 253636258,
     "kind": "http_archive",
@@ -718,6 +748,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 182827,
     "kind": "http_archive",
@@ -737,6 +768,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 1859880,
     "kind": "http_archive",
@@ -784,6 +816,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 42823,
     "kind": "http_archive",
@@ -845,6 +878,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 147432,
     "kind": "http_archive",
@@ -892,6 +926,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 65903732,
     "kind": "http_archive",
@@ -911,6 +946,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 95222713,
     "kind": "http_archive",
@@ -930,6 +966,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 45108470,
     "kind": "http_archive",
@@ -938,7 +975,7 @@
    }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "covid-19-radiography",
    "download_bytes": 816029038,
    "kind": "http_archive",
@@ -947,7 +984,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 816029038,
+    "kind": "http_archive",
+    "records_indexed": 21165,
+    "snapshot_id": "covid-19-radiography-b4647c14d793a512cdc047c8"
+   }
   },
   {
    "category": "no_recipe",
@@ -964,7 +1008,7 @@
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "cub-200-2011",
    "download_bytes": 1150585339,
    "kind": "http_archive",
@@ -973,7 +1017,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 1150585339,
+    "kind": "http_archive",
+    "records_indexed": 11788,
+    "snapshot_id": "cub-200-2011-8ee3d9d66f0fb535263e15d3"
+   }
   },
   {
    "category": "no_recipe",
@@ -1043,6 +1094,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 33202290,
     "kind": "http_archive",
@@ -1093,7 +1145,7 @@
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "datacomp-1b",
    "download_bytes": 10000000000,
    "kind": "huggingface_remote_sample",
@@ -1102,7 +1154,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": 339875509907,
-   "upper_bound": true
+   "upper_bound": true,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 1989330080,
+    "kind": "huggingface_remote_sample",
+    "records_indexed": null,
+    "snapshot_id": "datacomp-1b-3549775fbb55158d315ca644"
+   }
   },
   {
    "category": "no_recipe",
@@ -1130,6 +1189,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 0,
     "kind": "local",
@@ -1191,6 +1251,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 112065318,
     "kind": "http_archive",
@@ -1210,6 +1271,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 625239812,
     "kind": "http_archive",
@@ -1257,6 +1319,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 561753746,
     "kind": "http_archive",
@@ -1265,18 +1328,23 @@
    }
   },
   {
-   "category": "no_recipe",
+   "category": "verified",
    "dataset_id": "emnist-balanced",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 561753746,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "EMNIST Balanced",
-   "ready": false,
-   "requirements": [
-    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 561753746,
+    "kind": "http_archive",
+    "records_indexed": 131600,
+    "snapshot_id": "nist-emnist-balanced-idx-sha256-fb9bb67e33772a9cc0b895e4ecf36d2cf35be8b709693c3564cea2a019fcda8e"
+   }
   },
   {
    "category": "verified",
@@ -1290,6 +1358,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 561753746,
     "kind": "http_archive",
@@ -1323,6 +1392,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 94658721,
     "kind": "http_archive",
@@ -1331,14 +1401,16 @@
    }
   },
   {
-   "category": "planned",
+   "category": "attempt_failed",
    "dataset_id": "exams-v",
    "download_bytes": 10000000000,
    "kind": "huggingface_remote_sample",
    "maintainer_preview": true,
    "name": "EXAMS-V",
    "ready": true,
-   "requirements": [],
+   "requirements": [
+    "ValueError: Embedded image exceeds pixel budget"
+   ],
    "source_bytes": 6442812293,
    "upper_bound": true
   },
@@ -1385,7 +1457,7 @@
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "fairface",
    "download_bytes": 2676767154,
    "kind": "http_archive",
@@ -1394,7 +1466,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 2676767154,
+    "kind": "http_archive",
+    "records_indexed": 97698,
+    "snapshot_id": "fairface-a1f571fd57bfa080564ad2f9"
+   }
   },
   {
    "category": "gated",
@@ -1462,6 +1541,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 78836,
     "kind": "http_archive",
@@ -1481,6 +1561,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 2732606,
     "kind": "http_archive",
@@ -1489,7 +1570,7 @@
    }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "finevision",
    "download_bytes": 10000000000,
    "kind": "huggingface_remote_sample",
@@ -1498,7 +1579,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": 4645230556607,
-   "upper_bound": true
+   "upper_bound": true,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 1521512469,
+    "kind": "huggingface_remote_sample",
+    "records_indexed": null,
+    "snapshot_id": "finevision-17fa663a721c77ca65d752db"
+   }
   },
   {
    "category": "no_recipe",
@@ -1554,6 +1642,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 344878000,
     "kind": "http_archive",
@@ -1573,6 +1662,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 131634562,
     "kind": "http_archive",
@@ -1632,6 +1722,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 376971,
     "kind": "http_archive",
@@ -1679,6 +1770,7 @@
    "source_bytes": null,
    "upper_bound": true,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 0,
     "kind": "local",
@@ -1701,18 +1793,23 @@
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "verified",
    "dataset_id": "gvil",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 26668357,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "GVIL",
-   "ready": false,
-   "requirements": [
-    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 26668357,
+    "kind": "http_archive",
+    "records_indexed": 3200,
+    "snapshot_id": "gvil-sha256-f95f394225a497be40ad76232e835aefcb85724c04bf9c9589fc7741678b5711"
+   }
   },
   {
    "category": "verified",
@@ -1726,6 +1823,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 26668357,
     "kind": "http_archive",
@@ -1748,7 +1846,7 @@
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "hades",
    "download_bytes": 10000000000,
    "kind": "huggingface_remote_sample",
@@ -1757,7 +1855,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": 697716274,
-   "upper_bound": true
+   "upper_bound": true,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 243972,
+    "kind": "huggingface_remote_sample",
+    "records_indexed": null,
+    "snapshot_id": "hades-4e6e40b65725323928fc39fe"
+   }
   },
   {
    "category": "verified",
@@ -1771,6 +1876,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 146553615,
     "kind": "huggingface_columnar",
@@ -1790,6 +1896,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 63448335,
     "kind": "http_archive",
@@ -1809,6 +1916,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 0,
     "kind": "local",
@@ -1828,6 +1936,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 530693,
     "kind": "http_archive",
@@ -1836,16 +1945,14 @@
    }
   },
   {
-   "category": "no_recipe",
+   "category": "planned",
    "dataset_id": "hc-bench",
-   "download_bytes": 0,
-   "kind": "huggingface_columnar",
+   "download_bytes": 11679658,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "HC-Bench wild images",
-   "ready": false,
-   "requirements": [
-    "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
    "upper_bound": false
   },
@@ -1875,6 +1982,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 8405373,
     "kind": "http_archive",
@@ -1883,7 +1991,7 @@
    }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "hod",
    "download_bytes": 1215888315,
    "kind": "http_archive",
@@ -1892,10 +2000,17 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 1215888315,
+    "kind": "http_archive",
+    "records_indexed": 10631,
+    "snapshot_id": "hod-45acfdc2e382db7773f52a6a"
+   }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "iconqa",
    "download_bytes": 1851278883,
    "kind": "http_archive",
@@ -1904,7 +2019,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 1851278883,
+    "kind": "http_archive",
+    "records_indexed": 107439,
+    "snapshot_id": "iconqa-90f29756b3fb729af4712ec7"
+   }
   },
   {
    "category": "no_recipe",
@@ -1932,6 +2054,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 154714873,
     "kind": "http_archive",
@@ -1940,14 +2063,16 @@
    }
   },
   {
-   "category": "planned",
+   "category": "attempt_failed",
    "dataset_id": "illuchar",
    "download_bytes": 10000000000,
    "kind": "huggingface_remote_sample",
    "maintainer_preview": true,
    "name": "IlluChar",
    "ready": true,
-   "requirements": [],
+   "requirements": [
+    "ValueError: Image row group exceeds decoded memory budget"
+   ],
    "source_bytes": 2794689321,
    "upper_bound": true
   },
@@ -1991,6 +2116,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 433034,
     "kind": "http_archive",
@@ -1999,16 +2125,14 @@
    }
   },
   {
-   "category": "no_recipe",
+   "category": "planned",
    "dataset_id": "illusionvqa",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 38656127,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "IllusionVQA",
-   "ready": false,
-   "requirements": [
-    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
    "upper_bound": false
   },
@@ -2038,6 +2162,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 2472743,
     "kind": "http_archive",
@@ -2074,7 +2199,7 @@
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "imagenet-a",
    "download_bytes": 687552512,
    "kind": "http_archive",
@@ -2083,7 +2208,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 687552512,
+    "kind": "http_archive",
+    "records_indexed": 7500,
+    "snapshot_id": "imagenet-a-302946c5d334d7cd9c8f9d6c"
+   }
   },
   {
    "category": "no_recipe",
@@ -2128,7 +2260,7 @@
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "imagenet-r",
    "download_bytes": 2191079936,
    "kind": "http_archive",
@@ -2137,7 +2269,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 2191079936,
+    "kind": "http_archive",
+    "records_indexed": 30000,
+    "snapshot_id": "imagenet-r-bde3cf02da0c7bd500e5765d"
+   }
   },
   {
    "category": "no_recipe",
@@ -2179,6 +2318,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 0,
     "kind": "local",
@@ -2187,7 +2327,7 @@
    }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "imagenet-v2",
    "download_bytes": 1264079360,
    "kind": "http_archive",
@@ -2196,7 +2336,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 1264079360,
+    "kind": "http_archive",
+    "records_indexed": 10000,
+    "snapshot_id": "imagenet-v2-74e9289d222366ec2a68a6b7"
+   }
   },
   {
    "category": "gated",
@@ -2224,6 +2371,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 99003388,
     "kind": "http_archive",
@@ -2288,16 +2436,14 @@
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "planned",
    "dataset_id": "jailbreakv-28k",
-   "download_bytes": 0,
-   "kind": "huggingface_columnar",
+   "download_bytes": 23153101,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "JailBreakV-28K",
-   "ready": false,
-   "requirements": [
-    "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
    "upper_bound": false
   },
@@ -2313,6 +2459,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 169185415,
     "kind": "http_archive",
@@ -2391,16 +2538,14 @@
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "planned",
    "dataset_id": "llava-bench",
-   "download_bytes": 0,
-   "kind": "huggingface_columnar",
+   "download_bytes": 9768089,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "LLaVA-Bench",
-   "ready": false,
-   "requirements": [
-    "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
    "upper_bound": false
   },
@@ -2416,6 +2561,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 228941895,
     "kind": "http_archive",
@@ -2424,16 +2570,26 @@
    }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "llava-instruct-150k-3a74a703",
-   "download_bytes": 10000000000,
-   "kind": "huggingface_remote_sample",
+   "download_bytes": 76639461610,
+   "kind": "huggingface_columnar",
    "maintainer_preview": true,
    "name": "LLaVA_Instruct_150k",
-   "ready": true,
-   "requirements": [],
-   "source_bytes": 76639461610,
-   "upper_bound": true
+   "ready": false,
+   "requirements": [
+    "Source download exceeds the selected download budget.",
+    "Insufficient free space for source, cache, and the approved output budget."
+   ],
+   "source_bytes": null,
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 12533018,
+    "kind": "huggingface_remote_sample",
+    "records_indexed": null,
+    "snapshot_id": "llava-instruct-150k-3a74a703-22382667dc8e548bcb1e0e3d"
+   }
   },
   {
    "category": "verified",
@@ -2447,6 +2603,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 6269,
     "kind": "http_archive",
@@ -2466,6 +2623,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 63893372,
     "kind": "huggingface_columnar",
@@ -2485,6 +2643,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 5977328,
     "kind": "http_archive",
@@ -2549,7 +2708,7 @@
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "mllmu-bench",
    "download_bytes": 10000000000,
    "kind": "huggingface_remote_sample",
@@ -2558,7 +2717,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": 910765821,
-   "upper_bound": true
+   "upper_bound": true,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 1137737,
+    "kind": "huggingface_remote_sample",
+    "records_indexed": null,
+    "snapshot_id": "mllmu-bench-a86c575369eb22ee4c61c8ff"
+   }
   },
   {
    "category": "verified",
@@ -2572,6 +2738,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 499521873,
     "kind": "http_archive",
@@ -2580,16 +2747,14 @@
    }
   },
   {
-   "category": "no_recipe",
+   "category": "planned",
    "dataset_id": "mm-vet",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 66540341,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "MM-Vet",
-   "ready": false,
-   "requirements": [
-    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
    "upper_bound": false
   },
@@ -2619,6 +2784,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 180890850,
     "kind": "http_archive",
@@ -2627,16 +2793,14 @@
    }
   },
   {
-   "category": "no_recipe",
+   "category": "planned",
    "dataset_id": "mmbench-en-dev",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 37156625,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "MMBench English dev v1.0 (CircularEval)",
-   "ready": false,
-   "requirements": [
-    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
    "upper_bound": false
   },
@@ -2652,6 +2816,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 199848448,
     "kind": "http_archive",
@@ -2671,6 +2836,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 199848448,
     "kind": "http_archive",
@@ -2690,6 +2856,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 56960272,
     "kind": "huggingface_columnar",
@@ -2709,6 +2876,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 41798712,
     "kind": "huggingface_columnar",
@@ -2728,6 +2896,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 11594722,
     "kind": "http_archive",
@@ -2747,6 +2916,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 1488319,
     "kind": "http_archive",
@@ -2867,7 +3037,7 @@
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "naturalbench",
    "download_bytes": 10000000000,
    "kind": "huggingface_remote_sample",
@@ -2876,7 +3046,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": 1141602282,
-   "upper_bound": true
+   "upper_bound": true,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 320316,
+    "kind": "huggingface_remote_sample",
+    "records_indexed": null,
+    "snapshot_id": "naturalbench-39057a3a7e1dba5b16d97156"
+   }
   },
   {
    "category": "no_recipe",
@@ -2904,6 +3081,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 9228851,
     "kind": "http_archive",
@@ -2923,6 +3101,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 51024660,
     "kind": "http_archive",
@@ -2959,7 +3138,7 @@
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "objectnet",
    "download_bytes": 1600000000,
    "kind": "local",
@@ -2968,7 +3147,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": true
+   "upper_bound": true,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 627523550,
+    "kind": "local",
+    "records_indexed": 50273,
+    "snapshot_id": "objectnet-b7e59a85c26c3392f4774344"
+   }
   },
   {
    "category": "verified",
@@ -2982,6 +3168,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 1433136,
     "kind": "http_archive",
@@ -2990,16 +3177,14 @@
    }
   },
   {
-   "category": "no_recipe",
+   "category": "planned",
    "dataset_id": "omnisafebench-mm",
-   "download_bytes": 0,
-   "kind": "huggingface_columnar",
+   "download_bytes": 485910,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "OmniSafeBench-MM",
-   "ready": false,
-   "requirements": [
-    "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
    "upper_bound": false
   },
@@ -3015,6 +3200,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 0,
     "kind": "local",
@@ -3051,7 +3237,7 @@
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "oxfordpet",
    "download_bytes": 811092049,
    "kind": "http_archive",
@@ -3060,7 +3246,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 811092049,
+    "kind": "http_archive",
+    "records_indexed": 7349,
+    "snapshot_id": "oxfordpet-5ef48cb2544fe8a240341b17"
+   }
   },
   {
    "category": "verified",
@@ -3074,6 +3267,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 19130645,
     "kind": "http_archive",
@@ -3082,16 +3276,14 @@
    }
   },
   {
-   "category": "no_recipe",
+   "category": "planned",
    "dataset_id": "pairs-csv",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 21980821,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "Pach neuron-pair metric benchmark",
-   "ready": false,
-   "requirements": [
-    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
    "upper_bound": false
   },
@@ -3541,6 +3733,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 145037610,
     "kind": "http_archive",
@@ -3549,7 +3742,7 @@
    }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "phase",
    "download_bytes": 2583467043,
    "kind": "http_archive",
@@ -3558,7 +3751,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 2583467043,
+    "kind": "http_archive",
+    "records_indexed": 18889,
+    "snapshot_id": "phase-46ac740ccadfb2f40d4220b5"
+   }
   },
   {
    "category": "no_recipe",
@@ -3600,6 +3800,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 49211254,
     "kind": "http_archive",
@@ -3619,6 +3820,7 @@
    "source_bytes": null,
    "upper_bound": true,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 1108757,
     "kind": "http_archive",
@@ -3638,6 +3840,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 61704981,
     "kind": "huggingface_columnar",
@@ -3657,6 +3860,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 10627589,
     "kind": "http_archive",
@@ -3676,6 +3880,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 41696084,
     "kind": "http_archive",
@@ -3709,6 +3914,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 429309,
     "kind": "http_archive",
@@ -3728,6 +3934,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 0,
     "kind": "local",
@@ -3736,7 +3943,7 @@
    }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "realworldqa",
    "download_bytes": 10000000000,
    "kind": "huggingface_remote_sample",
@@ -3745,10 +3952,17 @@
    "ready": true,
    "requirements": [],
    "source_bytes": 678331175,
-   "upper_bound": true
+   "upper_bound": true,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 169601,
+    "kind": "huggingface_remote_sample",
+    "records_indexed": null,
+    "snapshot_id": "realworldqa-fe8e8be9a55281549c77c26c"
+   }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "recap-datacomp-1b",
    "download_bytes": 10000000000,
    "kind": "huggingface_remote_sample",
@@ -3757,7 +3971,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": 527439101358,
-   "upper_bound": true
+   "upper_bound": true,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 122944293,
+    "kind": "huggingface_remote_sample",
+    "records_indexed": null,
+    "snapshot_id": "recap-datacomp-1b-6f04b4fafec2b886deb740fe"
+   }
   },
   {
    "category": "gated",
@@ -3813,6 +4034,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 13631396,
     "kind": "http_archive",
@@ -3860,6 +4082,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 12470775,
     "kind": "http_archive",
@@ -3879,6 +4102,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 15535932,
     "kind": "http_archive",
@@ -3955,7 +4179,7 @@
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "sbbench-syn",
    "download_bytes": 10000000000,
    "kind": "local",
@@ -3964,10 +4188,17 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": true
+   "upper_bound": true,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 137707,
+    "kind": "local",
+    "records_indexed": 539,
+    "snapshot_id": "sbbench-syn-91b8c3bed86b143713118f64"
+   }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "sbbench-syn-crop",
    "download_bytes": 10000000000,
    "kind": "local",
@@ -3976,10 +4207,17 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": true
+   "upper_bound": true,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 207704,
+    "kind": "local",
+    "records_indexed": 917,
+    "snapshot_id": "sbbench-syn-crop-1389b2d507a0ff11f0319b0f"
+   }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "sbbench-synthetic-age-crop-false",
    "download_bytes": 10000000000,
    "kind": "huggingface_remote_sample",
@@ -3988,10 +4226,17 @@
    "ready": true,
    "requirements": [],
    "source_bytes": 430967656,
-   "upper_bound": true
+   "upper_bound": true,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 69612,
+    "kind": "huggingface_remote_sample",
+    "records_indexed": null,
+    "snapshot_id": "sbbench-synthetic-age-crop-false-9f5f8f45eadaa2029ea06a50"
+   }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "sbbench-synthetic-age-crop-true",
    "download_bytes": 10000000000,
    "kind": "huggingface_remote_sample",
@@ -4000,7 +4245,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": 685318338,
-   "upper_bound": true
+   "upper_bound": true,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 136083,
+    "kind": "huggingface_remote_sample",
+    "records_indexed": null,
+    "snapshot_id": "sbbench-synthetic-age-crop-true-ef8aff4ae1487fc23f8126d7"
+   }
   },
   {
    "category": "verified",
@@ -4014,6 +4266,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 237029151,
     "kind": "huggingface_columnar",
@@ -4022,7 +4275,7 @@
    }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "sbbench-synthetic-gender-crop-true",
    "download_bytes": 10000000000,
    "kind": "huggingface_remote_sample",
@@ -4031,10 +4284,17 @@
    "ready": true,
    "requirements": [],
    "source_bytes": 496951911,
-   "upper_bound": true
+   "upper_bound": true,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 70470,
+    "kind": "huggingface_remote_sample",
+    "records_indexed": null,
+    "snapshot_id": "sbbench-synthetic-gender-crop-true-93df029f1155264ddcc79f21"
+   }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "scienceqa-img",
    "download_bytes": 10000000000,
    "kind": "huggingface_remote_sample",
@@ -4043,7 +4303,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": 626082086,
-   "upper_bound": true
+   "upper_bound": true,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 5943171,
+    "kind": "huggingface_remote_sample",
+    "records_indexed": null,
+    "snapshot_id": "scienceqa-img-a23a44740d1874695181520a"
+   }
   },
   {
    "category": "no_recipe",
@@ -4071,6 +4338,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 18076410,
     "kind": "http_archive",
@@ -4090,6 +4358,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 7170715,
     "kind": "http_archive",
@@ -4109,6 +4378,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 232535302,
     "kind": "huggingface_columnar",
@@ -4128,6 +4398,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 0,
     "kind": "local",
@@ -4147,6 +4418,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 0,
     "kind": "local",
@@ -4166,6 +4438,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 0,
     "kind": "local",
@@ -4185,6 +4458,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 0,
     "kind": "local",
@@ -4204,6 +4478,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 0,
     "kind": "local",
@@ -4240,7 +4515,7 @@
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "simplevqa",
    "download_bytes": 10000000000,
    "kind": "huggingface_remote_sample",
@@ -4249,7 +4524,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": 415633984,
-   "upper_bound": true
+   "upper_bound": true,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 415726205,
+    "kind": "huggingface_remote_sample",
+    "records_indexed": null,
+    "snapshot_id": "simplevqa-5cd509c7306ef9180d24e3cd"
+   }
   },
   {
    "category": "no_recipe",
@@ -4266,7 +4548,7 @@
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "smolim2-135m-10b",
    "download_bytes": 10000000000,
    "kind": "huggingface_remote_sample",
@@ -4275,7 +4557,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": 25564441952,
-   "upper_bound": true
+   "upper_bound": true,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 295857616,
+    "kind": "huggingface_remote_sample",
+    "records_indexed": null,
+    "snapshot_id": "smolim2-135m-10b-f08a0531d081b41203f53ef5"
+   }
   },
   {
    "category": "no_recipe",
@@ -4292,7 +4581,7 @@
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "socialcounterfactuals",
    "download_bytes": 10000000000,
    "kind": "huggingface_remote_sample",
@@ -4301,7 +4590,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": 27215665580,
-   "upper_bound": true
+   "upper_bound": true,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 4032343,
+    "kind": "huggingface_remote_sample",
+    "records_indexed": null,
+    "snapshot_id": "socialcounterfactuals-d021f3ec3fb97cf98da99855"
+   }
   },
   {
    "category": "gated",
@@ -4318,14 +4614,16 @@
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "attempt_failed",
    "dataset_id": "space-10",
    "download_bytes": 10000000000,
    "kind": "huggingface_remote_sample",
    "maintainer_preview": true,
    "name": "Space-10",
    "ready": true,
-   "requirements": [],
+   "requirements": [
+    "ValueError: Remote binary column image requires the full-download adapter; slot availability cannot be inferred"
+   ],
    "source_bytes": 872031458,
    "upper_bound": true
   },
@@ -4369,6 +4667,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 7439277,
     "kind": "http_archive",
@@ -4391,18 +4690,23 @@
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "verified",
    "dataset_id": "stl-10",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 2640397119,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "STL-10",
-   "ready": false,
-   "requirements": [
-    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 2640397119,
+    "kind": "http_archive",
+    "records_indexed": 113000,
+    "snapshot_id": "stl10-original-f31fd99273a1acb8"
+   }
   },
   {
    "category": "larger_budget",
@@ -4434,16 +4738,14 @@
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "planned",
    "dataset_id": "svo-probes",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 14172488,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "SVO-Probes",
-   "ready": false,
-   "requirements": [
-    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
    "upper_bound": false
   },
@@ -4459,6 +4761,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 850742,
     "kind": "http_archive",
@@ -4478,6 +4781,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 7820,
     "kind": "http_archive",
@@ -4497,6 +4801,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 27521619,
     "kind": "http_archive",
@@ -4516,6 +4821,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 60452374,
     "kind": "http_archive",
@@ -4566,16 +4872,14 @@
    "upper_bound": false
   },
   {
-   "category": "no_recipe",
+   "category": "planned",
    "dataset_id": "top16-images-csv",
-   "download_bytes": 0,
-   "kind": "unconfigured",
+   "download_bytes": 21980821,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "Pach top-16 ImageNet image references",
-   "ready": false,
-   "requirements": [
-    "Atlas has no pinned acquisition recipe for this release yet. The source is public, so this is a gap in Atlas, not a restriction by the source (see docs/adding-datasets.md)."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
    "upper_bound": false
   },
@@ -4591,6 +4895,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 171526343,
     "kind": "huggingface_columnar",
@@ -4610,6 +4915,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 14219197,
     "kind": "huggingface_columnar",
@@ -4643,6 +4949,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 679846716,
     "kind": "http_archive",
@@ -4662,6 +4969,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 679781210,
     "kind": "http_archive",
@@ -4709,6 +5017,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 205284291,
     "kind": "huggingface_columnar",
@@ -4745,7 +5054,7 @@
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "visual-counterfact",
    "download_bytes": 10000000000,
    "kind": "huggingface_remote_sample",
@@ -4754,7 +5063,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": 319019525,
-   "upper_bound": true
+   "upper_bound": true,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 182464,
+    "kind": "huggingface_remote_sample",
+    "records_indexed": null,
+    "snapshot_id": "visual-counterfact-f785c0412a01a2723bcabf70"
+   }
   },
   {
    "category": "no_recipe",
@@ -4771,7 +5087,7 @@
    "upper_bound": false
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "visual-genome",
    "download_bytes": 889755309,
    "kind": "http_archive",
@@ -4780,7 +5096,14 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 859755309,
+    "kind": "http_archive",
+    "records_indexed": 116367,
+    "snapshot_id": "visual-genome-3001bf89dbbe5d9e50718810"
+   }
   },
   {
    "category": "verified",
@@ -4794,6 +5117,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 265349,
     "kind": "http_archive",
@@ -4813,6 +5137,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 142706932,
     "kind": "huggingface_columnar",
@@ -4846,6 +5171,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 9938456,
     "kind": "http_archive",
@@ -4919,6 +5245,7 @@
    "source_bytes": null,
    "upper_bound": true,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 14013859,
     "kind": "http_archive",
@@ -4938,6 +5265,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 2102911,
     "kind": "http_archive",
@@ -4957,6 +5285,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 4977421,
     "kind": "http_archive",
@@ -5004,6 +5333,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 489698023,
     "kind": "http_archive",
@@ -5012,7 +5342,7 @@
    }
   },
   {
-   "category": "planned",
+   "category": "verified",
    "dataset_id": "what-s-up",
    "download_bytes": 861230174,
    "kind": "http_archive",
@@ -5021,19 +5351,24 @@
    "ready": true,
    "requirements": [],
    "source_bytes": null,
-   "upper_bound": false
+   "upper_bound": false,
+   "verification": {
+    "completed_at": "2026-10-02",
+    "downloaded_bytes": 841230174,
+    "kind": "http_archive",
+    "records_indexed": 4958,
+    "snapshot_id": "what-s-up-fcafcbcfd52304a3bad66545"
+   }
   },
   {
-   "category": "no_recipe",
+   "category": "planned",
    "dataset_id": "whoops",
-   "download_bytes": 0,
-   "kind": "huggingface_columnar",
+   "download_bytes": 689305874,
+   "kind": "http_archive",
    "maintainer_preview": true,
    "name": "WHOOPS!",
-   "ready": false,
-   "requirements": [
-    "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
-   ],
+   "ready": true,
+   "requirements": [],
    "source_bytes": null,
    "upper_bound": false
   },
@@ -5077,6 +5412,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 1114566,
     "kind": "huggingface_columnar",
@@ -5096,6 +5432,7 @@
    "source_bytes": null,
    "upper_bound": false,
    "verification": {
+    "carried_from_commit": "3b64daf",
     "completed_at": "2026-10-01",
     "downloaded_bytes": 28999,
     "kind": "http_archive",
@@ -5118,17 +5455,18 @@
    "upper_bound": false
   }
  ],
- "generated_at": "2026-10-01T04:33:46.724197+00:00",
+ "generated_at": "2026-10-02T09:27:19.603872+00:00",
  "maintainer_previews": 170,
- "maintainer_previews_reproducible": 150,
+ "maintainer_previews_reproducible": 163,
  "per_dataset_budget_bytes": 10000000000,
  "summary": {
+  "attempt_failed": 3,
   "gated": 26,
   "larger_budget": 1,
-  "no_recipe": 137,
+  "no_recipe": 121,
   "other": 0,
-  "planned": 44,
+  "planned": 21,
   "unreleased": 17,
-  "verified": 108
+  "verified": 144
  }
 }

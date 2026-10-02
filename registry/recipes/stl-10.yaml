@@ -1,0 +1,20 @@
+# Stanford publishes STL-10 only as this one 2.6 GB archive (train, test and 100,000 unlabeled images); the adapter verifies
+# its SHA-256 and MD5 and the official member hashes before extracting. The download is the whole release, so the plan states
+# its size and the budget is a hard limit. Identity and snapshot are unchanged.
+release: STL-10-original-binary-91f7769d
+snapshot_id: stl10-original-f31fd99273a1acb8
+adapter: stl10
+expected_count: 113000
+scope: Stanford original STL-10 binary train, test, and unlabeled splits; 113,000 images
+source_url: https://cs.stanford.edu/~acoates/stl10/
+adapter_config: {}
+files:
+- source_name: stl10_binary.tar.gz
+  url: https://ai.stanford.edu/~acoates/stl10/stl10_binary.tar.gz
+  bytes: 2640397119
+  sha256: f31fd99273a1acb8609c8db427cebb1de3f71de77758cdc0e22956e1289b9866
+  md5: 91f7769df0f17e558f3565bffb0c7dfb
+  format: gz
+  config_dir: root
+allowed_hosts:
+- ai.stanford.edu

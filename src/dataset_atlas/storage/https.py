@@ -8,6 +8,7 @@ from pathlib import Path
 import re
 import socket
 import ssl
+import time
 from urllib.parse import urljoin, urlsplit, urlunsplit
 
 from .cache import BoundedCache, CacheIdentity
@@ -41,6 +42,17 @@ class HttpsFetcher:
         self.max_redirects = max_redirects
         self.max_bytes = max_bytes
 
+    @staticmethod
+    def _resolve(host: str, port: int):
+        """A resolver that briefly fails is retried; a host that never resolves ends with an error that names it."""
+        for attempt in range(5):
+            try:
+                return socket.getaddrinfo(host, port, type=socket.SOCK_STREAM)
+            except socket.gaierror as error:
+                if attempt == 4:
+                    raise ValueError(f"Host did not resolve after {attempt} retries: {host} ({error.strerror})") from None
+                time.sleep(min(8, 2 ** attempt))
+
     def _destination(self, url: str) -> tuple[str, int, str, str]:
         parsed = urlsplit(url)
         if parsed.scheme.lower() != "https" or parsed.username or parsed.password or not parsed.hostname:
@@ -51,7 +63,7 @@ class HttpsFetcher:
         port = parsed.port or 443
         if port != 443:
             raise ValueError("Only HTTPS port 443 is allowed")
-        addresses = {entry[4][0] for entry in socket.getaddrinfo(host, port, type=socket.SOCK_STREAM)}
+        addresses = {entry[4][0] for entry in self._resolve(host, port)}
         if not addresses or any(not ipaddress.ip_address(address).is_global for address in addresses):
             raise ValueError("HTTPS destination resolved to a nonpublic address")
         target = urlunsplit(("", "", parsed.path or "/", parsed.query, ""))

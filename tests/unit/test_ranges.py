@@ -184,3 +184,23 @@ def test_integrity_failures_are_never_retried(monkeypatch):
     with reader(payload) as source, pytest.raises(ValueError, match='ETag changed'):
         source.read(10)
     assert len(calls) == 1
+
+
+def test_a_briefly_failing_resolver_is_retried_and_a_dead_host_is_named(monkeypatch):
+    import socket
+    from dataset_atlas.storage.https import HttpsFetcher
+    slept = []
+    monkeypatch.setattr('dataset_atlas.storage.https.time.sleep', slept.append)
+    answers = iter([socket.gaierror(-5, 'No address associated with hostname')] * 2 + [[(2, 1, 6, '', ('93.184.216.34', 443))]])
+    def getaddrinfo(*args, **kwargs):
+        answer = next(answers)
+        if isinstance(answer, Exception):
+            raise answer
+        return answer
+    monkeypatch.setattr('dataset_atlas.storage.https.socket.getaddrinfo', getaddrinfo)
+    host, port, address, target = HttpsFetcher(['example.org'])._destination('https://example.org/x')
+    assert (host, address) == ('example.org', '93.184.216.34') and slept == [1, 2]
+    monkeypatch.setattr('dataset_atlas.storage.https.socket.getaddrinfo',
+                        lambda *a, **k: (_ for _ in ()).throw(socket.gaierror(-5, 'No address associated with hostname')))
+    with pytest.raises(ValueError, match='example.org did not resolve|did not resolve after 4 retries: example.org'):
+        HttpsFetcher(['example.org'])._destination('https://example.org/x')

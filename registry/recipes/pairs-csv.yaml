@@ -1,0 +1,27 @@
+# The released CSV is read from the pinned author tarball (SHA-256 below); the activations summary recomputes the per-neuron index from
+# the published 50,000-value rows. Both are reproduced exactly (row digest pinned). Identity and snapshot are unchanged.
+release: 39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493
+snapshot_id: pach-pairs-53cc1aa475b13daa
+adapter: csv
+expected_count: 1000
+scope: One thousand released neuron pairs with user preference and DINOv2/CLIP metric scores, from the Pach SAE metric_benchmark archive.
+  This is not an image dataset.
+source_url: https://github.com/ExplainableML/sae-for-vlm/blob/39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493/metric_benchmark.tar.gz
+adapter_config:
+  format: csv
+convert:
+  name: tar_csv_member
+  params:
+    member: metric_benchmark/pairs.csv
+  count: 1000
+  rows_sha256: c6f6a3739140d54932d551cc5c759aa165afc64352c9329c434c2c64fd8a0db3
+files:
+- source_name: metric_benchmark.tar.gz
+  url: https://raw.githubusercontent.com/ExplainableML/sae-for-vlm/39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493/metric_benchmark.tar.gz
+  bytes: 21980821
+  sha256: ef19b58be1cc9cb44b3948057e52d09907fd273c2935f9ab87a47989c100f5db
+  format: tar.gz
+  config_key: source_tar
+allowed_hosts:
+- raw.githubusercontent.com
+- github.com

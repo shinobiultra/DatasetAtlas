@@ -76,6 +76,21 @@ def write_rows(rows: Callable[[], Iterable[dict]], output: Path, fmt: str, check
             if batch:
                 writer.write_table(pa.Table.from_pylist(batch, schema=schema))
         columns = ordered
+    elif fmt == 'csv':
+        import csv
+        columns = []
+        for row in rows():
+            columns.extend(c for c in row if c not in columns)
+        digest = RowDigest()
+        with output.open('w', newline='') as stream:
+            writer = csv.DictWriter(stream, fieldnames=columns, lineterminator='\n')
+            writer.writeheader()
+            for row in rows():
+                check()
+                text = {c: '' if row.get(c) is None else str(row[c]) for c in columns}
+                digest.add(text)  # a CSV holds text, so the digest is over what a reader gets back
+                writer.writerow(text)
+        columns = columns
     else:
         raise ValueError(f'Unsupported converter output format: {fmt}')
     return {'path': output, 'format': fmt, 'count': digest.count, 'rows_sha256': digest.hexdigest(), 'file_sha256': file_sha256(output), 'columns': columns}
@@ -88,6 +103,11 @@ def digest_existing(path: Path, fmt: str) -> dict:
         for line in Path(path).open():
             if line.strip():
                 digest.add(json.loads(line))
+    elif fmt == 'csv':
+        import csv
+        with Path(path).open(newline='', encoding='utf-8-sig') as stream:
+            for row in csv.DictReader(stream):
+                digest.add(row)
     else:
         import pyarrow.parquet as pq
         for batch in pq.ParquetFile(path).iter_batches(batch_size=10_000):
@@ -107,7 +127,7 @@ def media_digest(directory: Path) -> str:
 
 def run_conversion(spec: dict, inputs: dict[str, Path], output_dir: Path, check=lambda: None) -> dict:
     """Run the named converter and refuse a result that differs from the recipe's pinned count or row digest."""
-    from . import text  # noqa: F401  (registers the converters)
+    from . import text, tables  # noqa: F401  (registers the converters)
     name = spec.get('name')
     if name not in CONVERTERS:
         raise ValueError(f'Unknown converter: {name!r}')

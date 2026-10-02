@@ -1,0 +1,27 @@
+# The released CSV is read from the pinned author tarball (SHA-256 below); the activations summary recomputes the per-neuron index from
+# the published 50,000-value rows. Both are reproduced exactly (row digest pinned). Identity and snapshot are unchanged.
+release: 39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493
+snapshot_id: pach-top16-0c78fabc182df046
+adapter: csv
+expected_count: 930
+scope: Nine hundred thirty SAE neuron rows, each listing 16 ImageNet-training image references in the author metric benchmark. The referenced
+  images are not bundled.
+source_url: https://github.com/ExplainableML/sae-for-vlm/blob/39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493/metric_benchmark.tar.gz
+adapter_config:
+  format: csv
+convert:
+  name: tar_csv_member
+  params:
+    member: metric_benchmark/top16_images.csv
+  count: 930
+  rows_sha256: 093520515f355c37c92a21a61adc7604258911a4c6d0dfa3477af36aa3947eae
+files:
+- source_name: metric_benchmark.tar.gz
+  url: https://raw.githubusercontent.com/ExplainableML/sae-for-vlm/39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493/metric_benchmark.tar.gz
+  bytes: 21980821
+  sha256: ef19b58be1cc9cb44b3948057e52d09907fd273c2935f9ab87a47989c100f5db
+  format: tar.gz
+  config_key: source_tar
+allowed_hosts:
+- raw.githubusercontent.com
+- github.com

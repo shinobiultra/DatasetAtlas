@@ -5,9 +5,8 @@ import http.client
 import io
 from pathlib import Path
 import re
-import socket
 import time
-from urllib.parse import urljoin, urlsplit
+from urllib.parse import urljoin
 from .https import HttpsFetcher, _PinnedHTTPSConnection
 from .cache import BoundedCache, CacheIdentity
 
@@ -98,11 +97,6 @@ class HttpsRangeReader(io.RawIOBase):
             try:return self._fetch(start,end)
             except _TransientRangeError as error:
                 if attempt==4:raise ValueError(f'Range source unavailable: HTTP {error.status} after {attempt} retries') from None
-                if self.cancel:self.cancel()
-                time.sleep(min(8,2**attempt))
-            except socket.gaierror as error:
-                # A resolver that briefly fails is retried; a host that never resolves ends with a message that names it.
-                if attempt==4:raise ValueError(f'Range source host did not resolve after {attempt} retries: {urlsplit(self._resolved_url or self.url).hostname} ({error.strerror})') from None
                 if self.cancel:self.cancel()
                 time.sleep(min(8,2**attempt))
 

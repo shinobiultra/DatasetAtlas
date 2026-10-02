@@ -184,23 +184,3 @@ def test_integrity_failures_are_never_retried(monkeypatch):
     with reader(payload) as source, pytest.raises(ValueError, match='ETag changed'):
         source.read(10)
     assert len(calls) == 1
-
-
-def test_a_briefly_failing_resolver_is_retried_and_a_dead_host_is_named(monkeypatch):
-    import socket
-    payload = b'x' * 1000
-    flaky_transport(monkeypatch, payload, failures=0)
-    attempts = {'n': 0}
-    def resolve(self, url):
-        attempts['n'] += 1
-        if attempts['n'] <= 2:
-            raise socket.gaierror(-5, 'No address associated with hostname')
-        return ('example.org', 443, '1.1.1.1', '/source')
-    monkeypatch.setattr('dataset_atlas.storage.https.HttpsFetcher._destination', resolve)
-    with reader(payload) as source:
-        assert source.read(10) == payload[:10]
-    assert attempts['n'] == 3
-    monkeypatch.setattr('dataset_atlas.storage.https.HttpsFetcher._destination',
-                        lambda self, url: (_ for _ in ()).throw(socket.gaierror(-5, 'No address associated with hostname')))
-    with reader(payload) as source, pytest.raises(ValueError, match='did not resolve after 4 retries: .*No address'):
-        source.read(10)

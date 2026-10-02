@@ -127,6 +127,14 @@ def main() -> None:
     args = parser.parse_args()
     rows = plan_all(args.per_dataset_bytes)
     evidence = verified([path.resolve() for path in args.verified_from])
+    # Verification workspaces are deleted to free disk, so earlier evidence is carried over from the previous report. It keeps its own
+    # date, and records the commit it was first reported at; a dataset is carried only while it is still in the catalogue.
+    previous = args.output_prefix.with_suffix('.json')
+    if previous.is_file():
+        old = json.loads(previous.read_text())
+        for entry in old.get('datasets', []):
+            if entry.get('category') == 'verified' and entry['dataset_id'] not in evidence and entry.get('verification'):
+                evidence[entry['dataset_id']] = {**entry['verification'], 'carried_from_commit': entry['verification'].get('carried_from_commit', old.get('commit'))}
     coverage = {row['dataset_id']: row for row in csv.DictReader((ROOT / 'reports/dataset_coverage.csv').open())}
     for row in rows:
         row['maintainer_preview'] = coverage.get(row['dataset_id'], {}).get('preview', 'none') != 'none'
@@ -163,6 +171,8 @@ def main() -> None:
             if category == 'verified':
                 v = r['verification']
                 detail = f"{v['records_indexed']:,} records indexed, {fmt_bytes(v['downloaded_bytes'])} fetched, {v['completed_at']}"
+                if v.get('carried_from_commit'):
+                    detail += f" (earlier run, first reported at {v['carried_from_commit']})"
             elif category == 'planned':
                 detail = f"{'up to ' if r.get('upper_bound') else ''}{fmt_bytes(r['download_bytes'])} · {r['kind']}"
             elif r.get('requirements'):

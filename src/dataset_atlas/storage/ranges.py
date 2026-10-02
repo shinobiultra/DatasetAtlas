@@ -77,7 +77,8 @@ class HttpsRangeReader(io.RawIOBase):
             if self.bytes_fetched+count>self.byte_budget:raise ValueError('Remote reads exceed transfer budget')
             data=self._fetch_with_retry(start,end)
             self.bytes_fetched+=len(data)
-            if self.cache:
+            if self.cache and len(data)<=self.cache.max_bytes:
+                # A range larger than the whole cache is served without being cached rather than failing the read.
                 # Independent readers may request the same immutable range concurrently.
                 import fcntl
                 lock_path=self.cache.root/'range-cache.lock'

@@ -204,3 +204,12 @@ def test_a_briefly_failing_resolver_is_retried_and_a_dead_host_is_named(monkeypa
                         lambda *a, **k: (_ for _ in ()).throw(socket.gaierror(-5, 'No address associated with hostname')))
     with pytest.raises(ValueError, match='example.org did not resolve|did not resolve after 4 retries: example.org'):
         HttpsFetcher(['example.org'])._destination('https://example.org/x')
+
+
+def test_a_range_larger_than_the_whole_cache_is_served_uncached(tmp_path, monkeypatch):
+    payload = bytes(range(256)) * 20
+    calls = transport(monkeypatch, payload)
+    cache = BoundedCache(tmp_path / 'cache', 1_000)
+    with reader(payload, cache=cache) as source:
+        assert source.read(4_000) == payload[:4_000]
+    assert len(calls) == 1

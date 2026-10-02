@@ -191,7 +191,8 @@ class PreparationManager:
             if recipe.get('convert'):
                 conversion = recipe['convert']
                 if (not isinstance(conversion, dict) or not isinstance(conversion.get('name'), str) or type(conversion.get('count')) is not int
-                        or not re.fullmatch(r'[a-f0-9]{64}', str(conversion.get('rows_sha256', '')))):
+                        or not re.fullmatch(r'[a-f0-9]{64}', str(conversion.get('rows_sha256', '')))
+                    or (conversion.get('media_sha256') is not None and not re.fullmatch(r'[a-f0-9]{64}', str(conversion['media_sha256'])))):
                     raise ValueError('A conversion recipe requires a converter name, an integer row count and a SHA-256 row digest')
                 plan['convert'] = conversion
             for entry in recipe['files']:

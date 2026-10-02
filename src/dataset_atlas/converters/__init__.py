@@ -96,6 +96,15 @@ def digest_existing(path: Path, fmt: str) -> dict:
     return {'count': digest.count, 'rows_sha256': digest.hexdigest()}
 
 
+def media_digest(directory: Path) -> str:
+    """SHA-256 over every file under `directory` (relative path and content hash, sorted): pins extracted media exactly."""
+    digest = hashlib.sha256()
+    root = Path(directory)
+    for path in sorted(p for p in root.rglob('*') if p.is_file()):
+        digest.update(f'{path.relative_to(root).as_posix()}\t{file_sha256(path)}\n'.encode())
+    return digest.hexdigest()
+
+
 def run_conversion(spec: dict, inputs: dict[str, Path], output_dir: Path, check=lambda: None) -> dict:
     """Run the named converter and refuse a result that differs from the recipe's pinned count or row digest."""
     from . import text  # noqa: F401  (registers the converters)
@@ -110,4 +119,9 @@ def run_conversion(spec: dict, inputs: dict[str, Path], output_dir: Path, check=
         raise ValueError(f"Conversion produced {result['count']:,} rows; the recipe pins {spec['count']:,}")
     if result['rows_sha256'] != spec['rows_sha256']:
         raise ValueError('Converted rows differ from the maintainer\'s pinned row digest; the originals or the converter changed')
+    # A converter that extracts media returns its directory as adapter_config (e.g. media_root) and a recipe pins its digest.
+    if spec.get('media_sha256') and result.get('media_dir') is not None and media_digest(result['media_dir']) != spec['media_sha256']:
+        raise ValueError('Extracted media differ from the maintainer\'s pinned media digest; the originals or the converter changed')
+    if spec.get('media_sha256') and result.get('media_dir') is None:
+        raise ValueError('The recipe pins extracted media but the converter produced none')
     return result

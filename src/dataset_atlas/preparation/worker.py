@@ -153,6 +153,9 @@ def run(root, identity):
                 inputs = {entry['config_key']: Path(entry['path']) for entry in files if entry.get('config_key')}
                 converted = run_conversion(plan['convert'], inputs, version / 'sources/converted', check)
                 dataset.adapter_config.update(path=str(converted['path']), format=converted['format'], sha256=converted['file_sha256'])
+                if converted.get('media_dir') is not None:
+                    dataset.adapter_config['media_root'] = str(converted['media_dir'])
+                dataset.adapter_config.update(converted.get('adapter_config', {}))
             if plan['kind']=='huggingface_columnar':
                 dataset.release = plan['revision']
             dataset.snapshot_id = snapshot_for(dataset.id, plan, identity, root)

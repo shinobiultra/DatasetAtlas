@@ -237,3 +237,38 @@ def test_pope_joins_each_question_to_its_coco_val2014_image_and_keeps_question_i
         ('adversarial:1', 1, 'val2014/COCO_val2014_000000000001.jpg'), ('popular:2', 2, 'val2014/COCO_val2014_000000000002.jpg'),
         ('random:3', 3, 'val2014/COCO_val2014_000000000003.jpg')]
     assert rows[0]['question'] == 'Is there a cat in the image?' and rows[0]['label'] == 'yes' and rows[0]['strategy'] == 'adversarial'
+
+
+# ---- converters that extract media ---------------------------------------------------------
+
+def test_media_converters_pin_their_extracted_files_and_set_media_root_for_the_adapter(tmp_path, monkeypatch):
+    from dataset_atlas.converters import CONVERTERS, media_digest, write_rows
+    def extract(params, inputs, output_dir, check):
+        media = output_dir / 'media'
+        media.mkdir(parents=True)
+        (media / 'a.png').write_bytes(b'png-a')
+        result = write_rows(lambda: iter([{'id': 'a', 'image': 'a.png'}]), output_dir / 'records.jsonl', 'jsonl', check)
+        return {**result, 'media_dir': media}
+    monkeypatch.setitem(CONVERTERS, 'fake_media', extract)
+    first = CONVERTERS['fake_media']({}, {}, tmp_path / 'probe', lambda: None)
+    spec = {'name': 'fake_media', 'count': 1, 'rows_sha256': first['rows_sha256'], 'media_sha256': media_digest(first['media_dir'])}
+    ok = run_conversion(spec, {}, tmp_path / 'ok')
+    assert ok['media_dir'] == tmp_path / 'ok' / 'media'
+    with pytest.raises(ValueError, match='Extracted media differ'):
+        run_conversion({**spec, 'media_sha256': '0' * 64}, {}, tmp_path / 'bad')
+
+
+def test_a_recipe_that_pins_media_for_a_converter_without_any_is_refused(tmp_path):
+    from dataset_atlas.converters import text  # noqa: F401
+    (tmp_path / 'd.json').write_text('["a"]')
+    (tmp_path / 't.json').write_text('["b"]')
+    inputs = {'dev_behaviors': tmp_path / 'd.json', 'test_behaviors': tmp_path / 't.json'}
+    spec = spec_for_tdc(inputs, tmp_path)
+    with pytest.raises(ValueError, match='produced none'):
+        run_conversion({**spec, 'media_sha256': '1' * 64}, inputs, tmp_path / 'o')
+
+
+def spec_for_tdc(inputs, tmp_path):
+    from dataset_atlas.converters import text
+    produced = text.tdc2023({}, inputs, tmp_path / 'p', lambda: None)
+    return {'name': 'tdc2023', 'count': produced['count'], 'rows_sha256': produced['rows_sha256']}

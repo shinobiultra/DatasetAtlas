@@ -47,7 +47,7 @@ def workspace(root, recipe_extra=None, files_extra=None):
 
 
 def fetch(root, monkeypatch, records, image):
-    paths = {'https://example.org/records.json': records, 'https://example.org/one.png': image}
+    paths = {'https://example.org/records.json': records, 'https://example.org/one.png': image, 'https://example.org/bundle.zip': image}
     monkeypatch.setattr('dataset_atlas.storage.HttpsFetcher.fetch', lambda self, url, *a, **k: paths[url])
     manager = PreparationManager(root)
     plan = manager.plan('listed', 10_000_000, 10_000_000)
@@ -98,3 +98,47 @@ def test_two_workspaces_fetching_the_same_bytes_share_a_snapshot_id(tmp_path, mo
         run(root, plan['id'])
         ids.append(Registry(root).dataset('listed').snapshot_id)
     assert ids[0] == ids[1] and ids[0].startswith('listed-')
+
+
+def zipped_workspace(root, member_sha=None, members=None):
+    """The image is published inside a zip; the recipe pins the member and places it by name for the adapter."""
+    import zipfile
+    records, image = workspace(root)
+    bundle = root / 'bundle.zip'
+    with zipfile.ZipFile(bundle, 'w') as z:
+        z.writestr('release/one.png', image.read_bytes())
+        z.writestr('release/other.txt', 'not pinned')
+    recipe_path = root / 'registry/recipes/listed.yaml'
+    recipe = yaml.safe_load(recipe_path.read_text())
+    recipe['files'][1] = {'url': 'https://example.org/bundle.zip', 'source_name': 'bundle.zip', 'bytes': bundle.stat().st_size,
+                          'sha256': hashlib.sha256(bundle.read_bytes()).hexdigest(), 'format': 'zip', 'config_dir': 'media_root',
+                          'extract': members if members is not None else [{'member': 'release/one.png', 'sha256': member_sha or hashlib.sha256(png()).hexdigest()}]}
+    recipe_path.write_text(yaml.safe_dump(recipe))
+    return records, bundle
+
+
+def test_pinned_zip_members_are_placed_by_name_and_nothing_else_is_extracted(tmp_path, monkeypatch):
+    from pathlib import Path
+    records, bundle = zipped_workspace(tmp_path)
+    dataset = fetch(tmp_path, monkeypatch, records, bundle)
+    media = Path(dataset.adapter_config['media_root'])
+    assert [p.name for p in media.iterdir()] == ['one.png'] and (media / 'one.png').read_bytes() == png()
+
+
+def test_a_zip_member_that_differs_from_its_pin_fails_the_preparation(tmp_path, monkeypatch):
+    records, bundle = zipped_workspace(tmp_path, member_sha='0' * 64)
+    monkeypatch.setattr('dataset_atlas.storage.HttpsFetcher.fetch', lambda self, url, *a, **k: records if url.endswith('.json') else bundle)
+    manager = PreparationManager(tmp_path)
+    plan = manager.plan('listed', 10_000_000, 10_000_000)
+    with pytest.raises(ValueError, match='pinned checksum'):
+        run(tmp_path, plan['id'])
+    assert 'pinned checksum' in manager.status(plan['id'])['error']
+    assert not (tmp_path / 'work/prepared/listed/active.json').exists()
+
+
+@pytest.mark.parametrize('members', [[{'member': '../x.png', 'sha256': 'a' * 64}], [{'member': 'a/b.png', 'sha256': 'short'}],
+                                     [{'member': 'a/x.png', 'sha256': 'a' * 64}, {'member': 'b/x.png', 'sha256': 'a' * 64}], []])
+def test_unsafe_or_ambiguous_extract_pins_are_rejected_at_plan_time(tmp_path, members):
+    zipped_workspace(tmp_path, members=members)
+    with pytest.raises(ValueError, match='extract needs'):
+        PreparationManager(tmp_path).plan('listed', 10_000_000, 10_000_000)

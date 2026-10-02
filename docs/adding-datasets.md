@@ -115,7 +115,7 @@ files:
 allowed_hosts: [s3.amazonaws.com]
 ```
 
-Check that the URL serves exactly that length, and (for the first fetch) that the SHA-256 matches the file the entry already pins. `config_dir` (and optionally `dest_name`) places files by name in a directory the adapter reads. Redirects must stay on `allowed_hosts`; `*.example.com` admits subdomains of a CDN that issues a random host per download.
+Check that the URL serves exactly that length, and (for the first fetch) that the SHA-256 matches the file the entry already pins. `config_dir` (and optionally `dest_name`) places files by name in a directory the adapter reads. For a publisher that ships one large zip of many files, a `format: zip` entry with `config_dir` and `extract: [{member, sha256}]` verifies the zip as a whole and places only those members, each checked against its own SHA-256 (see `registry/recipes/emnist-balanced.yaml`). Redirects must stay on `allowed_hosts`; `*.example.com` admits subdomains of a CDN that issues a random host per download.
 
 **2. Ranged reads of a huge archive.** When the source is a multi-gigabyte ZIP (VQA v2's images, GQA, CLEVR), declare it instead of downloading it:
 

@@ -1,0 +1,31 @@
+# NIST publishes EMNIST as one 562 MB zip of every split. The zip is verified as a whole, and only the Balanced IDX files and the class
+# mapping are placed (each member's SHA-256 is pinned); the adapter then checks the official per-file MD5s. Identity and snapshot
+# are unchanged.
+release: nist-emnist-idx-balanced-2017
+snapshot_id: nist-emnist-balanced-idx-sha256-fb9bb67e33772a9cc0b895e4ecf36d2cf35be8b709693c3564cea2a019fcda8e
+adapter: idx
+expected_count: 131600
+scope: original NIST EMNIST Balanced IDX train+test split
+source_url: https://www.nist.gov/itl/products-and-services/emnist-dataset
+adapter_config: {}
+files:
+- source_name: gzip.zip
+  url: https://biometrics.nist.gov/cs_links/EMNIST/gzip.zip
+  bytes: 561753746
+  sha256: fb9bb67e33772a9cc0b895e4ecf36d2cf35be8b709693c3564cea2a019fcda8e
+  md5: 58c8d27c78d21e728a6bc7b3cc06412e
+  format: zip
+  config_dir: root
+  extract:
+  - member: gzip/emnist-balanced-train-images-idx3-ubyte.gz
+    sha256: 74295e75e4e9fa2c102147460ee7eb763653d5132d883a84fb88932bfb8d2db4
+  - member: gzip/emnist-balanced-train-labels-idx1-ubyte.gz
+    sha256: b46d41e5156a0a8aaaa4d18979fdd1588850fa8571018acffd5d93b325a7d6ed
+  - member: gzip/emnist-balanced-test-images-idx3-ubyte.gz
+    sha256: 117fc12b015e37ea98bfb2cbba3f77c3782c056cdbd219b87abfc8661d7135db
+  - member: gzip/emnist-balanced-test-labels-idx1-ubyte.gz
+    sha256: a67cac948379b67270b9a4d0a01c8ec661598accf2f2b1964340b7c83cb175cd
+  - member: gzip/emnist-balanced-mapping.txt
+    sha256: 956dc507bf69e9f31f4e3e876d22ec66124aa229b5d0bd65ab8956a8044d3ede
+allowed_hosts:
+- biometrics.nist.gov

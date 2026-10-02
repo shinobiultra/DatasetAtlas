@@ -125,6 +125,17 @@ def run(root, identity):
                     if entry.get('md5') and md5.hexdigest()!=entry['md5']:raise ValueError('Official source MD5 mismatch')
                     source_dir = version / 'sources'
                     source_dir.mkdir(exist_ok=True)
+                    if entry.get('extract'):
+                        # The publisher's zip is verified as a whole; the pinned members are placed by name for the adapter.
+                        from .extract import extract_zip_members
+                        named = source_dir / entry['config_dir']
+                        named.mkdir(exist_ok=True)
+                        update(stage='extracting pinned members', current_file=entry['source_name'])
+                        extract_zip_members(source, named, entry['extract'], check)
+                        files.append({**entry, 'sha256': digest.hexdigest(), 'path': str(named)})
+                        dataset.adapter_config[entry['config_dir']] = str(named)
+                        update(downloaded_bytes=sum(f['bytes'] for f in files), current_file=entry['source_name'])
+                        continue
                     if entry.get('config_dir'):
                         # Adapters that read a directory of files by their published names (e.g. MNIST IDX).
                         named = source_dir / entry['config_dir']

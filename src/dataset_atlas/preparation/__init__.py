@@ -200,6 +200,15 @@ class PreparationManager:
                     if (not isinstance(entry.get('config_dir'), str) or not re.fullmatch(r'[a-z_]+', entry['config_dir'])
                             or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]*', str(entry.get('dest_name', entry['source_name'])))):
                         raise ValueError('config_dir must be a lowercase configuration key and dest_name a plain file name')
+                if entry.get('extract') is not None:
+                    members = entry['extract']
+                    if (entry.get('format') != 'zip' or not isinstance(entry.get('config_dir'), str) or not isinstance(members, list)
+                            or not members or len(members) > 64
+                            or any(not isinstance(m, dict) or not isinstance(m.get('member'), str) or not m['member'] or m['member'].startswith('/')
+                                   or '..' in m['member'].split('/') or not re.fullmatch(r'[a-f0-9]{64}', str(m.get('sha256', '')))
+                                   or not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]*', m['member'].rsplit('/', 1)[-1]) for m in members)
+                            or len({m['member'].rsplit('/', 1)[-1] for m in members}) != len(members)):
+                        raise ValueError('extract needs a zip file with a config_dir and plain, checksum-pinned members with distinct names')
                 if not entry.get('parts'):
                     continue
                 parts = entry['parts']

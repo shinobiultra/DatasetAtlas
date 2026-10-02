@@ -291,3 +291,94 @@ def test_omnisafebench_refuses_an_unexpected_or_escaping_media_reference(tmp_pat
         source.write_text(json.dumps([{'id': 0, 'image_path': reference}]))
         with pytest.raises(ValueError, match='Unexpected OmniSafeBench media reference'):
             CONVERTERS['omnisafebench_mm']({}, {'source_json': source}, tmp_path / 'out', lambda: None)
+
+
+# ---- HC-Bench ------------------------------------------------------------------------------------------------
+
+def test_hc_bench_builds_the_index_csv_from_the_pinned_images_and_copies_them_unchanged(tmp_path):
+    inputs = {}
+    for key, tag in (('image_02', 'two'), ('image_01', 'one')):  # key order, not argument order, sets row order
+        (tmp_path / f'{key}.png').write_bytes(png(tag))
+        inputs[key] = tmp_path / f'{key}.png'
+    result = CONVERTERS['hc_bench']({}, inputs, tmp_path / 'out', lambda: None)
+    one = png('one')
+    text = Path(result['path']).read_bytes().decode()
+    assert text.splitlines()[0] == 'path,source_subset,source_bytes,source_sha256' and '\r\n' in text  # csv-module dialect, as the maintainer's file
+    assert text.splitlines()[1] == f'wild/image_01.png,wild,{len(one)},{hashlib.sha256(one).hexdigest()}'
+    assert result['format'] == 'csv' and result['count'] == 2 and result['file_sha256'] == hashlib.sha256(text.encode()).hexdigest()
+    assert (result['media_dir'] / 'wild/image_02.png').read_bytes() == png('two')
+    # the row digest is over the CSV's string cells, so the maintainer's CSV can be digested the same way
+    from dataset_atlas.converters import RowDigest
+    digest = RowDigest()
+    for row in csv.DictReader(io.StringIO(text, newline='')):
+        digest.add(row)
+    assert digest.hexdigest() == result['rows_sha256']
+
+
+def test_hc_bench_recipe_pins_media_and_refuses_non_png_or_empty_input(tmp_path):
+    (tmp_path / 'image_01.png').write_bytes(png('one'))
+    inputs = {'image_01': tmp_path / 'image_01.png'}
+    spec = pin('hc_bench', {}, inputs, tmp_path)
+    assert run_conversion(spec, inputs, tmp_path / 'ok')['count'] == 1
+    (tmp_path / 'image_01.png').write_bytes(jpg('now a jpeg'))
+    with pytest.raises(ValueError, match='not a png'):
+        CONVERTERS['hc_bench']({}, inputs, tmp_path / 'bad', lambda: None)
+    with pytest.raises(ValueError, match='no images'):
+        CONVERTERS['hc_bench']({}, {}, tmp_path / 'empty', lambda: None)
+
+
+# ---- MMBench -------------------------------------------------------------------------------------------------
+
+def real_image(fmt, color):
+    from PIL import Image
+    buffer = io.BytesIO()
+    Image.new('RGB', (3, 2), color).save(buffer, format=fmt)
+    return buffer.getvalue()
+
+
+def mmbench_tsv(path, png_data=None):
+    import base64
+    header = ['index', 'question', 'hint', 'A', 'B', 'C', 'D', 'answer', 'category', 'image', 'source', 'l2-category', 'comment', 'split']
+    rows = [['1', 'Which?', 'a hint', 'cat', 'dog', '', '', 'A', 'obj', base64.b64encode(png_data or real_image('PNG', 'red')).decode(), 'src', 'l2', '', 'dev'],
+            ['1000001', 'Which?', 'a hint', 'dog', 'cat', '', '', 'B', 'obj', '1', 'src', 'l2', '', 'dev'],  # a circular variant points at row 1's image
+            ['2', 'Where?', '', 'in', 'out', 'up', 'down', 'C', 'loc', base64.b64encode(real_image('JPEG', 'blue')).decode(), 'src', 'l2', '', 'dev']]
+    path.write_text('\n'.join('\t'.join(r) for r in [header] + rows) + '\n')
+    return {'source_tsv': path}
+
+
+def test_mmbench_decodes_each_image_once_follows_variant_references_and_formats_choices(tmp_path):
+    import pyarrow.parquet as pq
+    result = CONVERTERS['mmbench_dev']({'image_groups': 2}, mmbench_tsv(tmp_path / 'm.tsv'), tmp_path / 'out', lambda: None)
+    rows = pq.read_table(result['path']).to_pylist()
+    assert result['count'] == 3 and [r['source_id'] for r in rows] == ['1', '1000001', '2']
+    assert rows[0]['choices'] == ['A. cat', 'B. dog'] and rows[2]['choices'] == ['A. in', 'B. out', 'C. up', 'D. down']  # empty options are dropped
+    assert rows[1]['source_image_index'] == '1' and rows[1]['image'] == rows[0]['image'] and rows[2]['image'].endswith('.jpg')
+    assert rows[0]['image'] == rows[0]['image_sha256'] + '.png' and (rows[0]['image_width'], rows[0]['image_height']) == (3, 2)
+    assert rows[0]['hint'] == 'a hint' and rows[0]['A'] == 'cat' and rows[0]['answer'] == 'A'  # original columns are kept
+    assert sorted(p.name for p in result['media_dir'].iterdir()) == sorted({r['image'] for r in rows})  # flat, one file per distinct image
+    assert (result['media_dir'] / rows[0]['image']).read_bytes() == real_image('PNG', 'red')
+    assert digest_existing(result['path'], 'parquet')['rows_sha256'] == result['rows_sha256']
+
+
+def test_mmbench_recipe_pins_rows_and_media_and_refuses_a_different_image_population(tmp_path):
+    inputs = mmbench_tsv(tmp_path / 'm.tsv')
+    spec = pin('mmbench_dev', {'image_groups': 2}, inputs, tmp_path)
+    assert run_conversion(spec, inputs, tmp_path / 'ok')['count'] == 3
+    with pytest.raises(ValueError, match='image-group population'):
+        CONVERTERS['mmbench_dev']({'image_groups': 3}, inputs, tmp_path / 'bad', lambda: None)
+    (tmp_path / 'other').mkdir()
+    other = mmbench_tsv(tmp_path / 'other/m.tsv', png_data=real_image('PNG', 'green'))
+    with pytest.raises(ValueError, match='row digest'):
+        run_conversion(spec, other, tmp_path / 'changed')
+
+
+def test_mmbench_refuses_cyclic_missing_and_unsupported_image_references(tmp_path):
+    with pytest.raises(ValueError, match='Cyclic'):
+        media.mmbench_image('1', {'1': '2', '2': '1'})
+    with pytest.raises(ValueError, match='Missing'):
+        media.mmbench_image('1', {'1': '9'})
+    import base64
+    bad = tmp_path / 'bad.tsv'
+    bad.write_text('index\tA\tB\tC\tD\timage\n1\ta\tb\t\t\t' + base64.b64encode(b'GIF89a' + b'x' * 80).decode() + '\n')
+    with pytest.raises(Exception):  # Pillow cannot identify or the format is not JPEG/PNG
+        CONVERTERS['mmbench_dev']({}, {'source_tsv': bad}, tmp_path / 'out', lambda: None)

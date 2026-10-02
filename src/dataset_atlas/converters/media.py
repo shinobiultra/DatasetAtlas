@@ -263,3 +263,106 @@ def omnisafebench_mm(params, inputs, output_dir, check):
             row['media_path'] = image.removeprefix('dataset/')
             yield row
     return write_rows(rows, Path(output_dir) / 'records.jsonl', 'jsonl', check)
+
+
+# ---- HC-Bench (wild subset) ---------------------------------------------------------------------------------------
+
+@converter('hc_bench')
+def hc_bench(params, inputs, output_dir, check):
+    """HC-Bench's wild subset: the index CSV the catalogue reads, built from the pinned image files themselves.
+
+    Inputs are one `image_<NN>` per file (image_01 is `wild/image_01.png`), taken in key order. Each row records the path, the
+    subset and the file's byte length and SHA-256; the images are copied unchanged under `<output>/media/wild/`. The index is
+    written exactly as the maintainer's CSV (default `csv` dialect, CRLF line ends), so its file checksum matches too."""
+    import csv
+    subset, extension = params.get('subset', 'wild'), params.get('extension', 'png')
+    media_dir = Path(output_dir) / 'media'
+    columns = ['path', 'source_subset', 'source_bytes', 'source_sha256']
+    output = Path(output_dir) / 'wild_index.csv'
+    output.parent.mkdir(parents=True, exist_ok=True)
+    digest = RowDigest()
+    with output.open('w', newline='') as stream:
+        writer = csv.writer(stream)
+        writer.writerow(columns)
+        for key in sorted(k for k in inputs if k.startswith('image_')):
+            check()
+            name = f'{key}.{extension}'
+            data = checked_image(Path(inputs[key]).read_bytes())
+            if image_extension(data) != '.' + extension:
+                raise ValueError(f'HC-Bench image is not a {extension}: {name}')
+            relative = f'{subset}/{name}'
+            store_image(media_dir, relative, data)
+            row = {'path': relative, 'source_subset': subset, 'source_bytes': str(len(data)), 'source_sha256': hashlib.sha256(data).hexdigest()}
+            writer.writerow([row[column] for column in columns])
+            digest.add(row)
+    if digest.count == 0:
+        raise ValueError('HC-Bench conversion received no images')
+    return {'path': output, 'format': 'csv', 'count': digest.count, 'rows_sha256': digest.hexdigest(), 'file_sha256': file_sha256(output),
+            'columns': columns, 'media_dir': media_dir}
+
+
+# ---- MMBench (English dev, CircularEval variants) ------------------------------------------------------------------
+
+def mmbench_image(reference: str, images: dict) -> tuple[str, bytes]:
+    """Follow an `image` cell to its base64 payload: a short cell names another row's index, a long one is the image itself."""
+    import base64
+    seen = set()
+    while True:
+        if reference in seen:
+            raise ValueError('Cyclic MMBench image reference')
+        seen.add(reference)
+        if reference not in images:
+            raise ValueError('Missing MMBench image reference')
+        value = images[reference]
+        if len(value) > 64:
+            return reference, base64.b64decode(value, validate=True)
+        reference = value
+
+
+@converter('mmbench_dev')
+def mmbench_dev(params, inputs, output_dir, check):
+    """MMBench's official TSV (one row per circular choice-order variant): every original column kept, base64 images decoded once.
+
+    Adds `image` (the decoded file name, `<sha256>.jpg|.png`), `source_id` (= `index`), `source_image_index` (the row that holds the
+    payload), `image_sha256`, `image_width`, `image_height` and `choices` ("A. text" for each non-empty option). The images are the
+    exact decoded bytes, written flat under `<output>/images/` (the catalogue's `media_root`)."""
+    import csv
+    import io
+    import pyarrow as pa
+    import pyarrow.parquet as pq
+    from PIL import Image
+    media_dir = Path(output_dir) / 'images'
+    limit = csv.field_size_limit()
+    csv.field_size_limit(max(limit, 10_000_000))
+    try:
+        with Path(inputs['source_tsv']).open(encoding='utf-8') as stream:
+            raw = list(csv.DictReader(stream, delimiter='\t'))
+    finally:
+        csv.field_size_limit(limit)
+    images = {row['index']: row['image'] for row in raw}
+    if len(images) != len(raw):
+        raise ValueError('Duplicate MMBench source indices')
+    prepared, groups, digest = [], set(), RowDigest()
+    for row in raw:
+        check()
+        holder, data = mmbench_image(row['index'], images)
+        with Image.open(io.BytesIO(data)) as image:
+            if image.format not in {'JPEG', 'PNG'}:
+                raise ValueError('Unsupported MMBench image encoding')
+            suffix = '.jpg' if image.format == 'JPEG' else '.png'
+            width, height = image.size
+            image.verify()
+        sha = hashlib.sha256(data).hexdigest()
+        store_image(media_dir, sha + suffix, data)
+        groups.add(holder)
+        record = {**row, 'image': sha + suffix, 'source_id': row['index'], 'source_image_index': holder, 'image_sha256': sha,
+                  'image_width': width, 'image_height': height, 'choices': [f'{key}. {row[key]}' for key in 'ABCD' if row.get(key)]}
+        prepared.append(record)
+        digest.add(record)
+    if params.get('image_groups') is not None and len(groups) != params['image_groups']:
+        raise ValueError('MMBench image-group population differs from the pinned release')
+    output = Path(output_dir) / 'records.parquet'
+    table = pa.Table.from_pylist(prepared)
+    pq.write_table(table, output, compression='zstd')
+    return {'path': output, 'format': 'parquet', 'count': digest.count, 'rows_sha256': digest.hexdigest(), 'file_sha256': file_sha256(output),
+            'columns': table.schema.names, 'media_dir': media_dir}

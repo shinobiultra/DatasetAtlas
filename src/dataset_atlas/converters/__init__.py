@@ -127,7 +127,8 @@ def media_digest(directory: Path) -> str:
 
 def run_conversion(spec: dict, inputs: dict[str, Path], output_dir: Path, check=lambda: None) -> dict:
     """Run the named converter and refuse a result that differs from the recipe's pinned count or row digest."""
-    from . import text, tables  # noqa: F401  (registers the converters)
+    from . import text, tables, images  # noqa: F401  (registers the converters)
+    from . import media  # noqa: F401
     name = spec.get('name')
     if name not in CONVERTERS:
         raise ValueError(f'Unknown converter: {name!r}')

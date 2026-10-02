@@ -1,0 +1,48 @@
+# The two pinned NPY arrays become lossless PNGs plus the maintainer's class round-robin table (converters/images.py). Rows are
+# reproduced exactly (digest pinned); every PNG is decoded and compared with its source pixels, so integrity does not depend on a
+# Pillow version's PNG bytes. Identity and snapshot are unchanged.
+release: v6-d9982abb0bfc
+snapshot_id: cifar101-v6-4ca1776fd68aae0807f8d6424be79e25d1a1c2bb5273bff88db875e3ddfd9b1b
+adapter: structured
+expected_count: 2000
+scope: "Author v6 release: 2,000 original 32\xD732 RGB images, 200 per CIFAR-10 class. Distinct from the 2,021-image v4 release. Original\
+  \ NPY pixels are losslessly encoded as PNG for local browsing; source row indices are preserved."
+source_url: https://github.com/modestyachts/CIFAR-10.1/tree/d9982abb0bfc4846b8d13a11e66b887d946205d0
+adapter_config: {}
+convert:
+  name: npy_images_round_robin
+  params:
+    count: 2000
+    image_shape:
+    - 32
+    - 32
+    - 3
+    release_variant: v6
+    class_names:
+    - airplane
+    - automobile
+    - bird
+    - cat
+    - deer
+    - dog
+    - frog
+    - horse
+    - ship
+    - truck
+  count: 2000
+  rows_sha256: 37739dfed9c6ae6199549ffc541604950fb784941a92c9cbdf7d6e3da4aacdf6
+files:
+- source_name: cifar10.1_v6_data.npy
+  url: https://raw.githubusercontent.com/modestyachts/CIFAR-10.1/d9982abb0bfc4846b8d13a11e66b887d946205d0/datasets/cifar10.1_v6_data.npy
+  bytes: 6144128
+  sha256: 2997188e5816f5bd545dc77771b6227828c28146049fcecf3fa10775474cacc6
+  format: npy
+  config_key: data_npy
+- source_name: cifar10.1_v6_labels.npy
+  url: https://raw.githubusercontent.com/modestyachts/CIFAR-10.1/d9982abb0bfc4846b8d13a11e66b887d946205d0/datasets/cifar10.1_v6_labels.npy
+  bytes: 8128
+  sha256: ae40beda001693674edc94d925ee8268cfe68905f8f9aff800c8dcdfcd6c9448
+  format: npy
+  config_key: labels_npy
+allowed_hosts:
+- raw.githubusercontent.com

@@ -1,0 +1,31 @@
+# IllusionVQA's two author test Parquets at their pinned Hugging Face revisions (SHA-256 equal to the maintainer's originals). The maintained
+# table is both tasks in one Parquet with the images embedded unchanged; converters/media.py reproduces it. Its rows carry image bytes, so
+# the pinned digest hashes those in place (BytesRowDigest). Release and snapshot identity are unchanged from the catalogue entry.
+release: hf-comprehension-07e12764029d968a78a78e13928fb370066de706-soft-230e55cc3cda992be203b5b051368be0771db213
+snapshot_id: hf-comprehension-07e12764029d968a78a78e13928fb370066de706-soft-230e55cc3cda992be203b5b051368be0771db213-b7bbeb299baa
+adapter: embedded_parquet
+expected_count: 1435
+scope: 'Official IllusionVQA test releases: 435 comprehension and 1,000 soft-localization image MCQs. Training/select examples are separate
+  few-shot material, excluded from benchmark test index; distinct from IllusoryVQA.'
+source_url: https://illusionvqa.github.io/
+adapter_config: {}
+convert:
+  name: illusionvqa
+  params: {}
+  count: 1435
+  rows_sha256: e515ec6a2d944e692541a2f0cf43b3459a07f9e0ab77da0767f0a3c55ff75450
+files:
+- source_name: illusionVQA-Comprehension__test-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/csebuetnlp/illusionVQA-Comprehension/resolve/07e12764029d968a78a78e13928fb370066de706/data/test-00000-of-00001.parquet
+  bytes: 14209250
+  sha256: 8084c4a35a67831e2c3142724713d12b6266ddddad22e5c2edf3a1abe837b330
+  format: parquet
+  config_key: comprehension
+- source_name: illusionVQA-Soft-Localization__test-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/csebuetnlp/illusionVQA-Soft-Localization/resolve/230e55cc3cda992be203b5b051368be0771db213/data/test-00000-of-00001.parquet
+  bytes: 24446877
+  sha256: cea4ddf9f6e08ac0f0e1de8aaf0e828a2a08fe0d43ea5145bbde80ea453c76bd
+  format: parquet
+  config_key: soft_localization
+allowed_hosts:
+- huggingface.co

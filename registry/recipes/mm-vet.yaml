@@ -1,0 +1,28 @@
+# The MM-Vet v1 release archive from the author's GitHub release (SHA-256 equal to the maintainer's original). The maintained table is its
+# 218 annotations plus the exact bytes of its 200 images; converters/media.py reproduces both (row and media digests are checked on every
+# fetch). Release and snapshot identity are unchanged from the catalogue entry.
+release: github-v1-ff85408b7f382be1
+snapshot_id: github-v1-ff85408b7f382be1-f604506820ea
+adapter: structured
+expected_count: 218
+scope: 'Official MM-Vet v1 release: 218 question-answer records with 200 distinct image files. Capability tags, original answers, image-source
+  labels and bard-set membership remain source fields. v2 is a distinct release.'
+source_url: https://github.com/yuweihao/MM-Vet/releases/tag/v1
+adapter_config: {}
+convert:
+  name: mm_vet
+  params: {}
+  count: 218
+  rows_sha256: 10fd5bc375cb640386344613719669a1ece2e7fe66fdc9d70da95ff0b8cd456b
+  media_sha256: 235440348c2aac883c911c30d0ca08d8fbd7a591afd4f716743de82b3dcfa426
+files:
+- source_name: mm-vet.zip
+  url: https://github.com/yuweihao/MM-Vet/releases/download/v1/mm-vet.zip
+  bytes: 66540341
+  sha256: ff85408b7f382be146195b10ff5c7f995fbf297e92ea1132b61e438c8967116a
+  format: zip
+  config_key: source_zip
+allowed_hosts:
+- github.com
+- objects.githubusercontent.com
+- release-assets.githubusercontent.com

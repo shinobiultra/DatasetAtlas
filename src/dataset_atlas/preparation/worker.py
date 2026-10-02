@@ -315,6 +315,9 @@ def run(root, identity):
         if adapter_derivatives:
             derived_sources.extend(adapter_derivatives)
             derived_bytes = sum(item['bytes'] for item in derived_sources)
+        if derived_bytes >= plan['max_output_bytes']:
+            raise ValueError(f"The index this dataset needs ({derived_bytes:,} bytes) exceeds the output budget of {plan['max_output_bytes']:,} bytes. "
+                             f"Approve a larger budget (e.g. --per-dataset-output-bytes {derived_bytes * 2}) or leave this dataset out.")
         pack = build_preview(dataset, version / 'pack', adapter=adapter, limit=min(expected_count, 100), max_bytes=read_budget,max_output_bytes=plan['max_output_bytes']-derived_bytes)
         # Columnar metadata covers all shards, including fields beyond the preview.
         declared_types = adapter.source_field_types() if hasattr(adapter, 'source_field_types') else {}

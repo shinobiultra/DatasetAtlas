@@ -239,6 +239,41 @@ def test_pope_joins_each_question_to_its_coco_val2014_image_and_keeps_question_i
     assert rows[0]['question'] == 'Is there a cat in the image?' and rows[0]['label'] == 'yes' and rows[0]['strategy'] == 'adversarial'
 
 
+def synthetic_gvil_zip(path: Path) -> Path:
+    """A synthetic archive with GVIL's reviewed structure (2,400 VQA + 800 VG entries, 400 pairs per task, 204 images)."""
+    vqa, vg, pairs = {}, {}, {}
+    for task, target in (('desc_qa', vqa), ('samediff_qa', vqa), ('subj_qa', vqa), ('localization', vg)):
+        pairs[task] = []
+        for pair in range(400):
+            keys = [f'{task}-{2 * pair}', f'{task}-{2 * pair + 1}']
+            pairs[task].append(keys)
+            for key in keys:
+                image = f'img{(len(vqa) + len(vg)) % 200}.jpg'
+                target[key] = {'type': task, 'img': image, 'q_id': len(target), **({'query': 'where?'} if target is vg else {'question': 'what?'})}
+    with zipfile.ZipFile(path, 'w') as z:
+        for name, value in (('vqa_annotation', vqa), ('vg_annotation', vg), ('pair_info', pairs), ('raw_annotations', {str(i): {} for i in range(102)})):
+            z.writestr(f'dataset/{name}.json', json.dumps(value))
+        for number in range(204):
+            z.writestr(f'dataset/images/img{number}.jpg', b'\xff\xd8synthetic')
+    return path
+
+
+def test_gvil_joins_annotations_to_pairs_and_interleaves_by_image_so_a_preview_spans_distinct_images(tmp_path):
+    rows, _ = convert('gvil', {}, {'media_archive': synthetic_gvil_zip(tmp_path / 'dataset.zip')}, tmp_path)
+    assert len(rows) == 3200 and len({r['source_id'] for r in rows}) == 3200
+    assert len({r['media_path'] for r in rows[:100]}) == 100 and all(r['media_path'].startswith('dataset/images/') for r in rows)
+    first = next(r for r in rows if r['source_id'] == 'localization:localization-0')
+    assert first['pair_id'] == 'localization:0' and first['display_question'] == 'where?' and first['q_id'] == 0
+
+
+def test_gvil_refuses_an_archive_whose_structure_differs_from_the_reviewed_release(tmp_path):
+    with zipfile.ZipFile(tmp_path / 'dataset.zip', 'w') as z:
+        for name in ('vqa_annotation', 'vg_annotation', 'pair_info', 'raw_annotations'):
+            z.writestr(f'dataset/{name}.json', '{}')
+    with pytest.raises(ValueError, match='structure differs'):
+        convert('gvil', {}, {'media_archive': tmp_path / 'dataset.zip'}, tmp_path)
+
+
 # ---- converters that extract media ---------------------------------------------------------
 
 def test_media_converters_pin_their_extracted_files_and_set_media_root_for_the_adapter(tmp_path, monkeypatch):

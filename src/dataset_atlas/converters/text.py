@@ -207,3 +207,51 @@ def pope(params, inputs, output_dir, check):
                                'question': row['text'], 'label': row['label'], 'source_image_name': row['image'],
                                'media_path': 'val2014/' + row['image']}
     return write_rows(rows, output_dir / 'records.jsonl', 'jsonl', check)
+
+
+@converter('gvil')
+def gvil(params, inputs, output_dir, check):
+    """GVIL's VQA and visual-grounding annotations joined to their explicit pairs, one example per annotation.
+
+    Rows are interleaved by image (the first annotation of every distinct image before any further annotation of an image), so a
+    100-record preview has 100 distinct images. Images stay in the pinned archive; each row names its member in `media_path`."""
+    from collections import defaultdict
+    with zipfile.ZipFile(inputs['media_archive']) as zipped:
+        members = zipped.infolist()
+        if sum(item.file_size for item in members) > 50_000_000 or any(
+                item.filename.startswith('/') or '..' in Path(item.filename).parts for item in members):
+            raise ValueError('GVIL archive size or member path is unsafe')
+        vqa = json.loads(zipped.read('dataset/vqa_annotation.json'))
+        vg = json.loads(zipped.read('dataset/vg_annotation.json'))
+        pairs = json.loads(zipped.read('dataset/pair_info.json'))
+        raw = json.loads(zipped.read('dataset/raw_annotations.json'))
+        images = {item.filename for item in members if item.filename.startswith('dataset/images/') and item.filename.lower().endswith('.jpg')}
+    if len(vqa) != 2400 or len(vg) != 800 or len(images) != 204 or len(raw) != 102:
+        raise ValueError('GVIL release structure differs from reviewed source')
+    pair_index = {}
+    for task, groups in pairs.items():
+        if len(groups) != 400:
+            raise ValueError(f'Unexpected GVIL pair count: {task}')
+        for ordinal, pair in enumerate(groups):
+            if len(pair) != 2:
+                raise ValueError('GVIL pair must have two members')
+            for member in pair:
+                if (task, member) in pair_index:
+                    raise ValueError('Duplicate GVIL pair member')
+                pair_index[(task, member)] = f'{task}:{ordinal}'
+    rows = []
+    for member_name, source in (('dataset/vqa_annotation.json', vqa), ('dataset/vg_annotation.json', vg)):
+        for source_key, row in source.items():
+            task = row['type']
+            image_path = f"dataset/images/{row['img']}"
+            if image_path not in images or (task, source_key) not in pair_index:
+                raise ValueError(f'GVIL annotation lacks image or pair: {source_key}')
+            rows.append({**row, 'source_id': f'{task}:{source_key}', 'source_key': source_key, 'source_member': member_name,
+                         'pair_id': pair_index[(task, source_key)], 'media_path': image_path, 'display_question': row.get('question', row.get('query'))})
+    if len(rows) != 3200 or len(pair_index) != 3200:
+        raise ValueError('GVIL full task population does not match pairs')
+    by_image = defaultdict(list)
+    for row in rows:
+        by_image[row['media_path']].append(row)
+    ordered = [group[offset] for offset in range(max(map(len, by_image.values()))) for group in by_image.values() if offset < len(group)]
+    return write_rows(lambda: iter(ordered), output_dir / 'records.jsonl', 'jsonl', check)

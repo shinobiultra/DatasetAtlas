@@ -1,0 +1,23 @@
+# The author's pinned dataset.zip is both the media archive and the source of the maintained 3,200-row table (converters/text.py:
+# gvil). A fetch reproduces the rows exactly (digest pinned) and fails otherwise. Images stay in the archive and are read on
+# demand. Identity and snapshot are unchanged; rights are not cleared for republication, so this is local inspection only.
+release: github-cd04efb9d53c935c8194011d32b5a8b515c588bf
+snapshot_id: gvil-sha256-f95f394225a497be40ad76232e835aefcb85724c04bf9c9589fc7741678b5711
+adapter: structured_archive
+expected_count: 3200
+scope: all 2,400 VQA and 800 VG annotation entries in author archive
+source_url: https://github.com/vl-illusion/GVIL/tree/cd04efb9d53c935c8194011d32b5a8b515c588bf
+adapter_config: {}
+convert:
+  name: gvil
+  count: 3200
+  rows_sha256: 210195628158449f53ee45e75d1d5774db1edc607c7c7d930d258b13203d8523
+files:
+- source_name: dataset.zip
+  url: https://raw.githubusercontent.com/vl-illusion/GVIL/cd04efb9d53c935c8194011d32b5a8b515c588bf/dataset.zip
+  bytes: 26668357
+  sha256: 1d717f5822ded7d3383d014eefd1fb17c0a46ab15ce0c104f0c0392365c8650b
+  format: zip
+  config_key: media_archive
+allowed_hosts:
+- raw.githubusercontent.com

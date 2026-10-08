@@ -52,9 +52,10 @@ evidence:
   checked_on: '2026-10-08'
   note: Public and not gated (page read without signing in; nothing downloaded). The same wild/ files
     are already prepared under the hc-bench entry at a pinned revision, so no separate acquisition is
-    needed. Whether wild/ is the paper's exact 53-image set remains for a human to decide.
+    needed. The registry's 2026-10-06 relationship on this entry records the repository as context, not
+    the paper's collection, and the two stay distinct until exact image IDs show that the paper's 53 images
+    are wild/; the count match alone does not. Read by the implementing agent, not human-reviewed.
   source_identity_status: author_release_identified_version_drift
-  disposition: released_after_audit
   observation: author_hf_release
 - kind: source_audit_rights
   url: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench
@@ -68,8 +69,9 @@ evidence:
   probe_status: reachable
   http_status: 200
   checked_on: '2026-10-08'
-  note: 'released_after_audit: read from public pages on 2026-10-08 (the source_audit_access item of that
-    date), not from a probe. 1 URL probed (HEAD only): 1 reachable.'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 1 URL probed (HEAD only): 1 reachable.'
 relationships:
 - type: source_subset_of
   target_id: hc-bench

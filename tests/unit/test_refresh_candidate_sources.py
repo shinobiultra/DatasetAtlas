@@ -339,7 +339,7 @@ def test_the_url_that_answered_is_the_reported_probe_when_the_primary_one_timed_
     assert candidate["evidence"][-1]["url"] == PAGE_URL and candidate["evidence"][-1]["probe_status"] == "gone"
 
 
-# --- probes alone never decide a release (Step 5 is human reading) -------------------------------------------------------
+# --- probes alone never decide a release (a reading is by the implementing agent, not a probe) -------------------------------------------------------
 
 @pytest.mark.parametrize("status", sorted(HTTP))
 @pytest.mark.parametrize("access", ["public", "unverified", "gated"])
@@ -358,11 +358,6 @@ def test_a_researched_disposition_recorded_today_is_honoured():
     assert candidate["coverage"]["access"] == "public"
 
 
-def test_a_researched_disposition_from_an_earlier_date_is_not_reapplied():
-    audit = {"kind": "source_audit_release", "url": PAGE_URL, "checked_on": "2026-09-22", "disposition": "still_unreleased"}
-    assert refreshed(entry(evidence=[audit]), outcome()).disposition == "public_unpinned"
-
-
 def test_a_researched_disposition_cannot_claim_a_pin():
     audit = {"kind": "source_audit_release", "url": PAGE_URL, "checked_on": TODAY, "disposition": "now_public_pinnable"}
     with pytest.raises(ValueError, match="now_public_pinnable"):
@@ -373,6 +368,123 @@ def test_an_unknown_researched_disposition_is_refused():
     audit = {"kind": "source_audit_release", "url": PAGE_URL, "checked_on": TODAY, "disposition": "resolved"}
     with pytest.raises(ValueError, match="resolved"):
         refreshed(entry(evidence=[audit]), outcome())
+
+
+# --- an earlier-dated reading stands until something new is found; a pinned data file is something new ---------------------
+
+def _reading(checked_on, disposition, note="Read from the author's public page.", kind="source_audit_access", url=PAGE_URL):
+    return {"kind": kind, "url": url, "checked_on": checked_on, "disposition": disposition, "note": note}
+
+
+def test_an_earlier_dated_reading_is_not_relabelled_by_a_page_that_still_answers_200():
+    candidate = entry(evidence=[_reading("2026-09-22", "still_unreleased", "No public release located.")], source_url=PAGE_URL)
+    result = refreshed(candidate, outcome(PAGE_URL, content_type="text/html"))
+    assert result.disposition == "still_unreleased" and result.basis == "researched_earlier"
+    assert candidate["evidence"][-1]["note"].startswith("still_unreleased:") and "2026-09-22" in candidate["evidence"][-1]["note"]
+
+
+def test_the_latest_dated_reading_wins_and_a_reading_dated_after_the_run_is_ignored():
+    candidate = entry(evidence=[_reading("2026-09-22", "still_unreleased"), _reading("2026-10-01", "now_gated"),
+                                _reading("2026-11-30", "released_after_audit")])
+    assert refreshed(candidate, outcome(PAGE_URL, content_type="text/html")).disposition == "now_gated"
+
+
+def test_a_pinned_data_file_beats_any_reading_because_a_release_has_appeared():
+    candidate = entry(evidence=[_reading("2026-09-22", "still_unreleased")])
+    assert refreshed(candidate, pinned()).disposition == "now_public_pinnable"
+
+
+def test_a_reading_of_unchanged_persists_too():
+    candidate = entry(evidence=[_reading("2026-09-22", "unchanged")])
+    assert refreshed(candidate, outcome(PAGE_URL, content_type="text/html")).basis == "researched_earlier"
+
+
+# --- the entry's own record can contradict "public"; the label stays, the receipt says so -------------------------------------
+
+@pytest.mark.parametrize("blocker, signal", [
+    ("The original Kaggle competition pages require a Kaggle login.", "login or registration"),
+    ("Publisher download requires name, affiliation, email and acceptance of research terms.", "access request or terms"),
+    ("LDC licensed web download/subscription; no access obtained.", "licence agreement"),
+    ("Re-LAION variants require HF gated research access.", "gated"),
+    ("Data-generation recipe, not a release: the repository ships setup scripts and no images.", "recipe, not a release"),
+    ("Study-specific in-house cohort; no public release version located.", "in-house or no public release"),
+    ("The host did not answer a HEAD request within 30 s.", "host outage")])
+def test_a_recorded_login_request_licence_gate_recipe_or_outage_is_flagged_without_changing_the_label(blocker, signal):
+    candidate = entry(access="unverified", blockers=[blocker])
+    result = refreshed(candidate, outcome(PAGE_URL, content_type="text/html"))
+    assert result.disposition == "public_unpinned" and signal in result.signals
+
+
+def test_the_flag_reads_blockers_the_rights_note_and_earlier_audit_notes_but_never_the_refresh_items_own_text():
+    plain = entry(access="unverified")
+    assert module.record_signals(plain) == ()
+    in_rights = entry(access="unverified")
+    in_rights["rights"]["note"] = "LDC speech and underlying newspaper text agreement; no public redistribution"
+    assert module.record_signals(in_rights) == ("licence agreement",)
+    in_audit = entry(access="unverified", evidence=[{"kind": "source_audit_access", "checked_on": "2026-09-22", "note": "Registration is required."}])
+    assert module.record_signals(in_audit) == ("login or registration",)
+    own = entry(access="unverified", evidence=[{"kind": "source_audit_refresh", "note": "unchanged: 1 gated or forbidden login recipe"}])
+    assert module.record_signals(own) == ()
+
+
+def test_a_statement_that_something_is_not_gated_or_ungated_is_not_a_gate_signal():
+    candidate = entry(access="unverified", blockers=["Public and not gated (page read without signing in)."])
+    candidate["rights"]["note"] = "The ungated mirror carries MIT."
+    assert module.record_signals(candidate) == ()
+
+
+def test_dataset_membership_and_no_licence_statements_are_not_signals():
+    candidate = entry(access="unverified", blockers=["Selected membership remains unverified.", "The page states no licence or request process."])
+    assert module.record_signals(candidate) == ()
+
+
+def test_the_receipt_row_and_the_markdown_show_the_signals_and_a_legend_that_says_what_public_unpinned_means(tmp_path):
+    root = _registry(tmp_path, _named("kaggle", access="unverified", source_url="https://example.org/landing",
+                                      blockers=["The competition pages require a Kaggle login."]),
+                     _named("plain", access="unverified", source_url="https://example.org/plain"))
+    receipt = _drive(root)
+    rows = {item["dataset_id"]: item for item in receipt["entries"]}
+    assert rows["kaggle"]["record_signals"] == ["login or registration"] and rows["plain"]["record_signals"] == []
+    assert rows["kaggle"]["disposition"] == "public_unpinned"
+    text = (root / "out.md").read_text()
+    legend = [line for line in text.splitlines() if line.startswith("Legend")]
+    assert len(legend) == 1 and "`public_unpinned`" in legend[0] and "does not establish" in legend[0]
+    assert all(f"`{name}`" in legend[0] for name in module.DISPOSITIONS)
+    row = next(line for line in text.splitlines() if line.startswith("| `kaggle`"))
+    assert "login or registration" in row and "Record also says" in text
+    assert receipt["legend"]["public_unpinned"] == module.LEGEND["public_unpinned"]
+
+
+# --- a reading is by the implementing agent, and its caveat travels with the disposition ------------------------------------------
+
+def test_no_receipt_text_claims_a_human_reviewed_anything():
+    assert "human page review" not in module.NOTE and "human reading" not in (module.__doc__ or "")
+    assert "not human-reviewed" in module.NOTE
+
+
+def test_a_released_after_audit_entry_carries_its_caveat_into_the_json_list_and_the_markdown_row(tmp_path):
+    caveat = "The 53-image count matches by count only; the match to the paper's set is not verified."
+    reading = _reading(TODAY, "released_after_audit", caveat)
+    reading["url"] = "https://example.org/landing"
+    entry_ = _named("hidden", access="unverified", source_url="https://example.org/landing", evidence=[reading])
+    receipt = _drive(_registry(tmp_path, entry_))
+    (listed,) = receipt["released_after_audit"]
+    assert listed["dataset_id"] == "hidden" and caveat in listed["caveat"] and "not human-reviewed" in listed["caveat"]
+    assert listed["url"] == "https://example.org/landing"
+    row = next(line for line in (tmp_path / "out.md").read_text().splitlines() if line.startswith("| `hidden`"))
+    assert "by count only" in row and "not human-reviewed" in row
+
+
+def test_a_same_day_reading_without_a_disposition_is_listed_on_the_receipt_row_and_marked_in_the_markdown(tmp_path):
+    reading = {"kind": "source_audit_access", "url": "https://example.org/landing", "checked_on": TODAY,
+               "note": "Public and not gated; the match to the paper is unverified."}
+    receipt = _drive(_registry(tmp_path, _named("hidden", access="unverified", source_url="https://example.org/landing", evidence=[reading])))
+    (row,) = receipt["entries"]
+    assert row["disposition"] == "public_unpinned"
+    assert row["agent_readings"] == [{"kind": "source_audit_access", "url": "https://example.org/landing", "checked_on": TODAY,
+                                      "note": "Public and not gated; the match to the paper is unverified."}]
+    md_row = next(line for line in (tmp_path / "out.md").read_text().splitlines() if line.startswith("| `hidden`"))
+    assert "agent reading" in md_row.lower() and "not human-reviewed" in md_row
 
 
 # --- selection, observations, probing ---------------------------------------------------------------------------------------

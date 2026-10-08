@@ -70,5 +70,5 @@ evidence:
   probe_status: reachable
   http_status: 200
   checked_on: '2026-10-08'
-  note: 'now_gated: read from public pages on 2026-10-08 (the source_audit_access item of that date),
-    not from a probe. 3 URLs probed (HEAD only): 3 reachable.'
+  note: 'now_gated: read from public pages on 2026-10-08 by the implementing agent (the source_audit_access
+    item of that date); not human-reviewed and not a probe. 3 URLs probed (HEAD only): 3 reachable.'

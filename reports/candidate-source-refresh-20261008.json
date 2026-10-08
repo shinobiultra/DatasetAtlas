@@ -1,10 +1,19 @@
 {
   "tool": "scripts/refresh_candidate_sources.py",
   "checked_on": "2026-10-08",
-  "generated_at_utc": "2026-10-08T04:39:19Z",
+  "generated_at_utc": "2026-10-08T04:59:44Z",
   "dry_run": false,
-  "note": "Each URL was probed by HEAD (or a 1-byte ranged GET); no payload was downloaded and no credentials were sent. `unreachable`, a WAF challenge and a Google Drive page are no information and keep the prior state. A reachable landing page is not evidence that the data is public. `released_after_audit` and `still_unreleased` come from human page review, not probes.",
+  "note": "Each URL was probed by HEAD (or a 1-byte ranged GET); no payload was downloaded and no credentials were sent. `unreachable`, a WAF challenge and a Google Drive page are no information and keep the prior state. A reachable landing page is not evidence that the data is public. `released_after_audit` and `still_unreleased` come only from a dated reading of public pages by the implementing agent (not human-reviewed, not a probe); the latest such reading stands unless a pinned data file appears.",
   "pin_rule": "pinned = latest status `reachable` and (a digest, or a strong ETag that does not start with W/ together with a known content length); `now_public_pinnable` also needs a data file or archive content type, never an HTML page or document",
+  "legend": {
+    "unchanged": "the recorded state stands: no new information, or the answer says nothing about the files",
+    "now_public_pinnable": "a data file answers without credentials and carries a pin; a candidate for integration only",
+    "public_unpinned": "a recorded page answers without credentials and nothing on a data file is pinned; this does not establish that the data itself is public",
+    "now_gated": "a source answered 401/403 (or an agent reading found a gate) on an entry not recorded as gated; unconfirmed",
+    "released_after_audit": "an agent reading of public pages found a release; not human-reviewed, identity not verified",
+    "still_unreleased": "an agent reading of public pages located no public release; not human-reviewed"
+  },
+  "record_signal_rule": "case-insensitive keyword rule over the entry's own blockers, rights note and earlier source_audit_* notes (never the refresh items); it lists what the record already says and never changes a disposition",
   "selection": {
     "rule": "merged coverage preview_count == 0 and preview == none and access != unreleased",
     "count": 98
@@ -12,28 +21,19 @@
   "settings": {
     "timeout": 15.0,
     "attempts": 2,
-    "workers": 4,
-    "host_delay_s": 1.0
+    "workers": 1,
+    "host_delay_s": 0.0
   },
   "disposition_counts": {
     "unchanged": 22,
     "now_public_pinnable": 0,
-    "public_unpinned": 70,
+    "public_unpinned": 72,
     "now_gated": 1,
-    "released_after_audit": 2,
+    "released_after_audit": 0,
     "still_unreleased": 3
   },
   "now_public_pinnable": [],
-  "released_after_audit": [
-    {
-      "dataset_id": "paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-collection",
-      "note": "released_after_audit: read from public pages on 2026-10-08 (the source_audit_access item of that date), not from a probe. 1 URL probed (HEAD only): 1 reachable."
-    },
-    {
-      "dataset_id": "paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-set",
-      "note": "released_after_audit: read from public pages on 2026-10-08 (the source_audit_access item of that date), not from a probe. 1 URL probed (HEAD only): 1 reachable."
-    }
-  ],
+  "released_after_audit": [],
   "entries": [
     {
       "dataset_id": "artbench-2",
@@ -47,6 +47,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://sail-sg.github.io/D-TRAK/",
@@ -59,7 +62,7 @@
           "content_digest": null,
           "final_host": "sail-sg.github.io",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:20Z",
+          "checked_at_utc": "2026-10-08T04:58:09Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -71,11 +74,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"78d64d061d8e6c14864dd782e308544b\"",
+          "etag": "W/\"778b761f675b3d9599dd5100ef1fcc83\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:57Z",
+          "checked_at_utc": "2026-10-08T04:58:49Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -94,6 +97,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://openaccess.thecvf.com/content/ICCV2023/papers/Wang_Evaluating_Data_Attribution_for_Text-to-Image_Models_ICCV_2023_paper.pdf",
@@ -106,7 +112,7 @@
           "content_digest": null,
           "final_host": "openaccess.thecvf.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:28Z",
+          "checked_at_utc": "2026-10-08T04:58:24Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -122,7 +128,7 @@
           "content_digest": null,
           "final_host": "www.artchive.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:20Z",
+          "checked_at_utc": "2026-10-08T04:58:09Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -141,6 +147,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://doi.org/10.1371/journal.pcbi.1005268",
@@ -153,7 +162,7 @@
           "content_digest": null,
           "final_host": "journals.plos.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:15Z",
+          "checked_at_utc": "2026-10-08T04:58:02Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -172,6 +181,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://research.adobe.com/publication/aladin-all-layer-adaptive-instance-normalization-for-fine-grained-style-similarity/",
@@ -184,7 +196,7 @@
           "content_digest": null,
           "final_host": "research.adobe.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:22Z",
+          "checked_at_utc": "2026-10-08T04:58:09Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -200,7 +212,7 @@
           "content_digest": null,
           "final_host": "arxiv.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:28Z",
+          "checked_at_utc": "2026-10-08T04:58:24Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -219,6 +231,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://www.brain-score.org/",
@@ -231,7 +246,7 @@
           "content_digest": null,
           "final_host": "www.brain-score.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:22Z",
+          "checked_at_utc": "2026-10-08T04:58:11Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -250,6 +265,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://gdc.cancer.gov/about-data/publications/brca_2012",
@@ -262,7 +280,7 @@
           "content_digest": null,
           "final_host": "gdc.cancer.gov",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:18Z",
+          "checked_at_utc": "2026-10-08T04:58:05Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -278,7 +296,7 @@
           "content_digest": null,
           "final_host": "gdc.cancer.gov",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:24Z",
+          "checked_at_utc": "2026-10-08T04:58:20Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -297,6 +315,11 @@
       "http_status": null,
       "summary": "data-file URL unreachable; the reachable page says nothing about the files.",
       "note": "unchanged: a data-file URL did not answer as a data file (no answer, removed, empty or a page) and a reachable landing page says nothing about the files, so the prior state stands. 6 URLs probed (HEAD only): 5 unreachable, 1 reachable. 5 of them gave no information.",
+      "record_signals": [
+        "host outage"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/CSAILVision/NetDissect/tree/20ce6f887607aadc04ab9fb3d452e4723685cbbb",
@@ -305,11 +328,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"09650ba37c3bde3d9b1e71fb1f49e852\"",
+          "etag": "W/\"68aa1901b6dfb4b90d0533531baf08e2\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:25Z",
+          "checked_at_utc": "2026-10-08T04:58:20Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -325,7 +348,7 @@
           "content_digest": null,
           "final_host": null,
           "error": "ConnectTimeout: timed out",
-          "checked_at_utc": "2026-10-08T04:39:18Z",
+          "checked_at_utc": "2026-10-08T04:59:07Z",
           "pinned": false,
           "data_file": false,
           "no_information": "transient failure"
@@ -341,7 +364,7 @@
           "content_digest": null,
           "final_host": null,
           "error": "ConnectTimeout: timed out",
-          "checked_at_utc": "2026-10-08T04:38:47Z",
+          "checked_at_utc": "2026-10-08T04:58:36Z",
           "pinned": false,
           "data_file": false,
           "no_information": "transient failure"
@@ -408,6 +431,12 @@
       "http_status": 200,
       "summary": "recorded gate unchanged; a reachable page says nothing about the files.",
       "note": "unchanged: a reachable page says nothing about whether the files are public, so the prior state stands. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [
+        "access request or terms",
+        "licence agreement"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://www.chicagofaces.org/",
@@ -420,7 +449,7 @@
           "content_digest": null,
           "final_host": "www.chicagofaces.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:21Z",
+          "checked_at_utc": "2026-10-08T04:58:11Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -439,6 +468,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/BrunoKM/diffusion-influence",
@@ -447,11 +479,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"227f16ed66aae87864bd19f2e036c5f2\"",
+          "etag": "W/\"335534e3e5025a6980b0d40e70584243\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:16Z",
+          "checked_at_utc": "2026-10-08T04:58:02Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -470,6 +502,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://cocodataset.org/",
@@ -482,7 +517,7 @@
           "content_digest": null,
           "final_host": "cocodataset.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:14Z",
+          "checked_at_utc": "2026-10-08T04:58:00Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -498,7 +533,7 @@
           "content_digest": null,
           "final_host": "arxiv.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:23Z",
+          "checked_at_utc": "2026-10-08T04:58:14Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -517,6 +552,11 @@
       "http_status": 200,
       "summary": "recorded gate unchanged; a reachable page says nothing about the files.",
       "note": "unchanged: a reachable page says nothing about whether the files are public, so the prior state stands. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [
+        "access request or terms"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://princetonvisualai.github.io/imagecaptioning-bias/",
@@ -529,7 +569,7 @@
           "content_digest": null,
           "final_host": "princetonvisualai.github.io",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:19Z",
+          "checked_at_utc": "2026-10-08T04:58:07Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -548,6 +588,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://arxiv.org/abs/2410.07149",
@@ -560,7 +603,7 @@
           "content_digest": null,
           "final_host": "arxiv.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:34Z",
+          "checked_at_utc": "2026-10-08T04:58:30Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -579,6 +622,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://openaccess.thecvf.com/content/ICCV2025/papers/Hirota_Bias_in_Gender_Bias_Benchmarks_How_Spurious_Features_Distort_Evaluation_ICCV_2025_paper.pdf",
@@ -591,7 +637,7 @@
           "content_digest": null,
           "final_host": "openaccess.thecvf.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:31Z",
+          "checked_at_utc": "2026-10-08T04:58:27Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -610,6 +656,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/amitakamath/whatsup_vlms",
@@ -618,11 +667,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"c7a559ab664f64911b801adb914e3074\"",
+          "etag": "W/\"a3fce81bdc151db8171886e6596fc9ad\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:44Z",
+          "checked_at_utc": "2026-10-08T04:58:38Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -641,6 +690,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 3 URLs probed (HEAD only): 3 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://cocodataset.org/",
@@ -653,7 +705,7 @@
           "content_digest": null,
           "final_host": "cocodataset.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:14Z",
+          "checked_at_utc": "2026-10-08T04:58:00Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -669,7 +721,7 @@
           "content_digest": null,
           "final_host": "cocodataset.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:23Z",
+          "checked_at_utc": "2026-10-08T04:58:15Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -685,7 +737,7 @@
           "content_digest": null,
           "final_host": "cocodataset.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:27Z",
+          "checked_at_utc": "2026-10-08T04:58:22Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -704,6 +756,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/namin-an/DeBiasLens",
@@ -712,11 +767,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"e1ed6e00ca8f9c6b5b550e5dfbbc4aba\"",
+          "etag": "W/\"5d4b990ebb540e559b499712b2912d0e\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:55Z",
+          "checked_at_utc": "2026-10-08T04:58:54Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -735,6 +790,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/samyadeepbasu/LocoGen",
@@ -743,11 +801,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"786761ff88fd96a42f4392b0d7ab31f3\"",
+          "etag": "W/\"27bcc5ddae1d7749fbcc9af48797806c\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:39:05Z",
+          "checked_at_utc": "2026-10-08T04:59:01Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -766,6 +824,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/google-research-datasets/conceptual-captions",
@@ -774,11 +835,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"a1342247c6f03991c0eca7cd27abfe65\"",
+          "etag": "W/\"32ed7c0a929cc31091072ab25b061dd8\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:49Z",
+          "checked_at_utc": "2026-10-08T04:58:44Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -797,6 +858,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://compvis.github.io/attribute-control/",
@@ -809,7 +873,7 @@
           "content_digest": null,
           "final_host": "compvis.github.io",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:14Z",
+          "checked_at_utc": "2026-10-08T04:58:00Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -828,6 +892,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://www.vision.caltech.edu/datasets/cub_200_2011/",
@@ -840,7 +907,7 @@
           "content_digest": null,
           "final_host": "www.vision.caltech.edu",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:23Z",
+          "checked_at_utc": "2026-10-08T04:58:12Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -859,6 +926,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://www.vision.caltech.edu/datasets/cub_200_2011/",
@@ -871,7 +941,7 @@
           "content_digest": null,
           "final_host": "www.vision.caltech.edu",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:23Z",
+          "checked_at_utc": "2026-10-08T04:58:12Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -887,7 +957,7 @@
           "content_digest": null,
           "final_host": "data.caltech.edu",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:15Z",
+          "checked_at_utc": "2026-10-08T04:58:01Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -906,6 +976,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://arxiv.org/abs/2210.04885",
@@ -918,7 +991,7 @@
           "content_digest": null,
           "final_host": "arxiv.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:31Z",
+          "checked_at_utc": "2026-10-08T04:58:26Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -937,6 +1010,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://arxiv.org/abs/2208.01626",
@@ -949,7 +1025,7 @@
           "content_digest": null,
           "final_host": "arxiv.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:29Z",
+          "checked_at_utc": "2026-10-08T04:58:25Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -968,6 +1044,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://doi.org/10.7554/eLife.55378",
@@ -980,7 +1059,7 @@
           "content_digest": null,
           "final_host": "elifesciences.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:27Z",
+          "checked_at_utc": "2026-10-08T04:58:23Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -996,7 +1075,7 @@
           "content_digest": null,
           "final_host": "api.elifesciences.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:14Z",
+          "checked_at_utc": "2026-10-08T04:58:00Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1013,8 +1092,38 @@
       "deciding_url": "https://proceedings.neurips.cc/paper/2019/hash/ac27b77292582bc293a51055bfc994ee-Abstract.html",
       "probe_status": "reachable",
       "http_status": 200,
-      "summary": "No public release of the segment collection was located on the paper's NeurIPS page.",
-      "note": "still_unreleased: read from public pages on 2026-10-08 (the source_audit_access item of that date), not from a probe. 1 URL probed (HEAD only): 1 reachable.",
+      "summary": "Agent reading, not human-reviewed: No public release of the segment collection was located on the paper's NeurIPS page. The component corpora have their own access routes (WSJ: LDC licence; Spoken Wikipedia: public project), tracked under their own catalogue entries.",
+      "note": "still_unreleased: read from public pages on 2026-10-08 by the implementing agent (the source_audit_access item of that date); not human-reviewed and not a probe. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [
+        "licence agreement",
+        "in-house or no public release"
+      ],
+      "agent_readings": [
+        {
+          "kind": "source_audit_identity",
+          "url": "https://proceedings.neurips.cc/paper/2019/hash/ac27b77292582bc293a51055bfc994ee-Abstract.html",
+          "checked_on": "2026-10-08",
+          "note": "Training set built by the paper's authors for a word and speaker recognition network (230,356 segments, 432 speaker classes, 793 word classes per the paper's text); its speech sources are WSJ, Spoken Wikipedia and AudioSet background clips. The NeurIPS 2019 page for the paper lists supplemental material but links no code or dataset."
+        },
+        {
+          "kind": "source_audit_access",
+          "url": "https://proceedings.neurips.cc/paper/2019/hash/ac27b77292582bc293a51055bfc994ee-Abstract.html",
+          "checked_on": "2026-10-08",
+          "note": "No public release of the segment collection was located on the paper's NeurIPS page. The component corpora have their own access routes (WSJ: LDC licence; Spoken Wikipedia: public project), tracked under their own catalogue entries."
+        },
+        {
+          "kind": "source_audit_rights",
+          "url": "https://proceedings.neurips.cc/paper/2019/hash/ac27b77292582bc293a51055bfc994ee-Abstract.html",
+          "checked_on": "2026-10-08",
+          "note": "Segments derived from LDC Wall Street Journal speech inherit the LDC agreement (no public redistribution, per the registry's own WSJ audit); rights to any release are unverified."
+        }
+      ],
+      "reading": {
+        "kind": "source_audit_access",
+        "url": "https://proceedings.neurips.cc/paper/2019/hash/ac27b77292582bc293a51055bfc994ee-Abstract.html",
+        "checked_on": "2026-10-08",
+        "note": "No public release of the segment collection was located on the paper's NeurIPS page. The component corpora have their own access routes (WSJ: LDC licence; Spoken Wikipedia: public project), tracked under their own catalogue entries."
+      },
       "urls": [
         {
           "url": "https://proceedings.neurips.cc/paper/2019/hash/ac27b77292582bc293a51055bfc994ee-Abstract.html",
@@ -1027,7 +1136,7 @@
           "content_digest": null,
           "final_host": "proceedings.neurips.cc",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:19Z",
+          "checked_at_utc": "2026-10-08T04:58:08Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1046,6 +1155,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 2 URLs probed (HEAD only): 1 reachable, 1 redirect refused. 1 of them gave no information.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://doi.org/10.3758/s13423-020-01786-9",
@@ -1058,7 +1170,7 @@
           "content_digest": null,
           "final_host": "idp.springer.com",
           "error": "more than 4 redirects",
-          "checked_at_utc": "2026-10-08T04:38:25Z",
+          "checked_at_utc": "2026-10-08T04:58:19Z",
           "pinned": false,
           "data_file": false,
           "no_information": "redirect refused"
@@ -1070,11 +1182,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"dad3f1f2251cca88830519ef3df91e3e\"",
+          "etag": "W/\"dadf962bf41d644186f749a973aadf43\"",
           "content_digest": null,
           "final_host": "link.springer.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:17Z",
+          "checked_at_utc": "2026-10-08T04:58:05Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1093,6 +1205,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://arxiv.org/abs/2305.16934",
@@ -1105,7 +1220,7 @@
           "content_digest": null,
           "final_host": "arxiv.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:33Z",
+          "checked_at_utc": "2026-10-08T04:58:29Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1124,6 +1239,12 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [
+        "access request or terms",
+        "licence agreement"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://mmlab.ie.cuhk.edu.hk/projects/DeepFashion.html",
@@ -1136,7 +1257,7 @@
           "content_digest": null,
           "final_host": "mmlab.ie.cuhk.edu.hk",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:16Z",
+          "checked_at_utc": "2026-10-08T04:58:05Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1155,6 +1276,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://doi.org/10.1371/journal.pcbi.1005268",
@@ -1167,7 +1291,7 @@
           "content_digest": null,
           "final_host": "journals.plos.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:15Z",
+          "checked_at_utc": "2026-10-08T04:58:02Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1186,6 +1310,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 6 URLs probed (HEAD only): 6 reachable. 3 of them gave no information.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/zjunlp/EasyEdit/blob/14cea8245f06715684592ab55184939b99d70784/examples/MMEdit.md",
@@ -1194,11 +1321,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"fdadbb2b38fe540528d39265490be2c1\"",
+          "etag": "W/\"c63a19a3ca40f49f0956f330e46b217d\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:39:10Z",
+          "checked_at_utc": "2026-10-08T04:59:03Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1297,6 +1424,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 4 URLs probed (HEAD only): 4 reachable. 3 of them gave no information.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/zjunlp/EasyEdit/blob/14cea8245f06715684592ab55184939b99d70784/examples/MMEdit.md",
@@ -1305,11 +1435,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"fdadbb2b38fe540528d39265490be2c1\"",
+          "etag": "W/\"c63a19a3ca40f49f0956f330e46b217d\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:39:10Z",
+          "checked_at_utc": "2026-10-08T04:59:03Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1376,6 +1506,12 @@
       "http_status": 200,
       "summary": "recorded gate unchanged; a reachable page says nothing about the files.",
       "note": "unchanged: a reachable page says nothing about whether the files are public, so the prior state stands. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [
+        "access request or terms",
+        "licence agreement"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://ai.meta.com/datasets/facet/",
@@ -1388,7 +1524,7 @@
           "content_digest": null,
           "final_host": "ai.meta.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:25Z",
+          "checked_at_utc": "2026-10-08T04:58:14Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1404,7 +1540,7 @@
           "content_digest": null,
           "final_host": "ai.meta.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:15Z",
+          "checked_at_utc": "2026-10-08T04:58:02Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1423,6 +1559,11 @@
       "http_status": 200,
       "summary": "recorded gate unchanged; a reachable page says nothing about the files.",
       "note": "unchanged: a reachable page says nothing about whether the files are public, so the prior state stands. 2 URLs probed (HEAD only): 1 gone, 1 reachable.",
+      "record_signals": [
+        "login or registration"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data",
@@ -1435,7 +1576,7 @@
           "content_digest": null,
           "final_host": "www.kaggle.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:22Z",
+          "checked_at_utc": "2026-10-08T04:58:10Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1451,7 +1592,7 @@
           "content_digest": null,
           "final_host": "aclanthology.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:23Z",
+          "checked_at_utc": "2026-10-08T04:58:12Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -1470,6 +1611,13 @@
       "http_status": 404,
       "summary": "gone (HTTP 404), a single observation; prior state kept.",
       "note": "unchanged: the URL answered as removed or empty (a single observation, neither a gate nor an implementation gap), so the prior state stands. 1 URL probed (HEAD only): 1 gone.",
+      "record_signals": [
+        "login or registration",
+        "licence agreement",
+        "in-house or no public release"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data",
@@ -1482,7 +1630,7 @@
           "content_digest": null,
           "final_host": "www.kaggle.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:22Z",
+          "checked_at_utc": "2026-10-08T04:58:10Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1501,6 +1649,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/",
@@ -1513,7 +1664,7 @@
           "content_digest": null,
           "final_host": "www.robots.ox.ac.uk",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:27Z",
+          "checked_at_utc": "2026-10-08T04:58:22Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1529,7 +1680,7 @@
           "content_digest": null,
           "final_host": "www.robots.ox.ac.uk",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:23Z",
+          "checked_at_utc": "2026-10-08T04:58:20Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1548,6 +1699,11 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 2 URLs probed (HEAD only): 1 reachable, 1 unreachable. 1 of them gave no information.",
+      "record_signals": [
+        "host outage"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://ai.stanford.edu/~alireza/Disney/",
@@ -1560,7 +1716,7 @@
           "content_digest": null,
           "final_host": "ai.stanford.edu",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:14Z",
+          "checked_at_utc": "2026-10-08T04:58:00Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -1576,7 +1732,7 @@
           "content_digest": null,
           "final_host": "figshare.com",
           "error": "unexpected HTTP 202 (x-amzn-waf-action: challenge, a bot challenge, not an answer about the source)",
-          "checked_at_utc": "2026-10-08T04:38:16Z",
+          "checked_at_utc": "2026-10-08T04:58:02Z",
           "pinned": false,
           "data_file": false,
           "no_information": "bot challenge"
@@ -1595,6 +1751,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://www.robots.ox.ac.uk/~vgg/data/flowers/102/",
@@ -1607,7 +1766,7 @@
           "content_digest": null,
           "final_host": "www.robots.ox.ac.uk",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:29Z",
+          "checked_at_utc": "2026-10-08T04:58:25Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1623,7 +1782,7 @@
           "content_digest": null,
           "final_host": "www.robots.ox.ac.uk",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:23Z",
+          "checked_at_utc": "2026-10-08T04:58:20Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1640,8 +1799,37 @@
       "deciding_url": "https://arxiv.org/abs/1412.6572",
       "probe_status": "reachable",
       "http_status": 200,
-      "summary": "The arXiv page and the paper text name no released examples or code for this experiment; the abstract page lists no code or data link.",
-      "note": "still_unreleased: read from public pages on 2026-10-08 (the source_audit_access item of that date), not from a probe. 1 URL probed (HEAD only): 1 reachable.",
+      "summary": "Agent reading, not human-reviewed: The arXiv page and the paper text name no released examples or code for this experiment; the abstract page lists no code or data link. Regenerating the set needs only the stated distribution.",
+      "note": "still_unreleased: read from public pages on 2026-10-08 by the implementing agent (the source_audit_access item of that date); not human-reviewed and not a probe. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [
+        "recipe, not a release"
+      ],
+      "agent_readings": [
+        {
+          "kind": "source_audit_identity",
+          "url": "https://arxiv.org/abs/1412.6572",
+          "checked_on": "2026-10-08",
+          "note": "Synthetic probe set generated inside Goodfellow, Shlens and Szegedy 2015: 10,000 samples drawn from a zero-mean, identity-covariance Gaussian in 784 dimensions (MNIST input size), fed to a maxout network. It is a recipe, not a distributed dataset."
+        },
+        {
+          "kind": "source_audit_access",
+          "url": "https://arxiv.org/abs/1412.6572",
+          "checked_on": "2026-10-08",
+          "note": "The arXiv page and the paper text name no released examples or code for this experiment; the abstract page lists no code or data link. Regenerating the set needs only the stated distribution."
+        },
+        {
+          "kind": "source_audit_rights",
+          "url": "https://arxiv.org/abs/1412.6572",
+          "checked_on": "2026-10-08",
+          "note": "No third-party data is involved (random noise), so there is no dataset licence; the arXiv paper carries its own distribution licence."
+        }
+      ],
+      "reading": {
+        "kind": "source_audit_access",
+        "url": "https://arxiv.org/abs/1412.6572",
+        "checked_on": "2026-10-08",
+        "note": "The arXiv page and the paper text name no released examples or code for this experiment; the abstract page lists no code or data link. Regenerating the set needs only the stated distribution."
+      },
       "urls": [
         {
           "url": "https://arxiv.org/abs/1412.6572",
@@ -1654,7 +1842,7 @@
           "content_digest": null,
           "final_host": "arxiv.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:14Z",
+          "checked_at_utc": "2026-10-08T04:58:00Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1671,8 +1859,35 @@
       "deciding_url": "https://arxiv.org/abs/2602.09431",
       "probe_status": "reachable",
       "http_status": 200,
-      "summary": "The arXiv page (v2, marked under review) and the HTML text state no code, adversarial images or other release.",
-      "note": "still_unreleased: read from public pages on 2026-10-08 (the source_audit_access item of that date), not from a probe. 1 URL probed (HEAD only): 1 reachable.",
+      "summary": "Agent reading, not human-reviewed: The arXiv page (v2, marked under review) and the HTML text state no code, adversarial images or other release. None was located.",
+      "note": "still_unreleased: read from public pages on 2026-10-08 by the implementing agent (the source_audit_access item of that date); not human-reviewed and not a probe. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [
+        {
+          "kind": "source_audit_identity",
+          "url": "https://arxiv.org/abs/2602.09431",
+          "checked_on": "2026-10-08",
+          "note": "Adversarial copies produced inside the Grounding-Driven Attack paper (arXiv 2602.09431): 1,000 images sampled from each of Flickr30k, CIFAR-10 and TextVQA validation, perturbed with PGD (epsilon 8/255, 100 steps) against encoders. A derived collection, not a named benchmark."
+        },
+        {
+          "kind": "source_audit_access",
+          "url": "https://arxiv.org/abs/2602.09431",
+          "checked_on": "2026-10-08",
+          "note": "The arXiv page (v2, marked under review) and the HTML text state no code, adversarial images or other release. None was located."
+        },
+        {
+          "kind": "source_audit_rights",
+          "url": "https://arxiv.org/abs/2602.09431",
+          "checked_on": "2026-10-08",
+          "note": "The perturbed images derive from Flickr30k, CIFAR-10 and TextVQA images, each under its own terms; no licence for the derived images is stated."
+        }
+      ],
+      "reading": {
+        "kind": "source_audit_access",
+        "url": "https://arxiv.org/abs/2602.09431",
+        "checked_on": "2026-10-08",
+        "note": "The arXiv page (v2, marked under review) and the HTML text state no code, adversarial images or other release. None was located."
+      },
       "urls": [
         {
           "url": "https://arxiv.org/abs/2602.09431",
@@ -1685,7 +1900,7 @@
           "content_digest": null,
           "final_host": "arxiv.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:39Z",
+          "checked_at_utc": "2026-10-08T04:58:34Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1704,6 +1919,12 @@
       "http_status": 200,
       "summary": "recorded gate unchanged; a reachable page says nothing about the files.",
       "note": "unchanged: a reachable page says nothing about whether the files are public, so the prior state stands. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [
+        "login or registration",
+        "licence agreement"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://catalog.ldc.upenn.edu/LDC2006T13",
@@ -1712,11 +1933,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"d01ea7524b9cc0326ba649a4aa6ca598\"",
+          "etag": "W/\"0caa7df74534fae997f862508fadbd98\"",
           "content_digest": null,
           "final_host": "catalog.ldc.upenn.edu",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:15Z",
+          "checked_at_utc": "2026-10-08T04:58:01Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1735,6 +1956,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/ExplainableML/vla-gender-bias",
@@ -1743,11 +1967,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"b41ce48e308a95e741df9bf074231776\"",
+          "etag": "W/\"d22ff3ba2fa8e5bd3d01ca955312b072\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:28Z",
+          "checked_at_utc": "2026-10-08T04:58:23Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1766,6 +1990,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://aclanthology.org/2025.findings-acl.955/",
@@ -1778,7 +2005,7 @@
           "content_digest": null,
           "final_host": "aclanthology.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:14Z",
+          "checked_at_utc": "2026-10-08T04:58:00Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -1790,11 +2017,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"a88b2ab9ee17bfd391c33bba51881f6d\"",
+          "etag": "W/\"28b670e72a2db7bbbc0df46edc85b6a7\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:39:02Z",
+          "checked_at_utc": "2026-10-08T04:58:50Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1813,6 +2040,11 @@
       "http_status": 200,
       "summary": "recorded gate unchanged; a reachable page says nothing about the files.",
       "note": "unchanged: a reachable page says nothing about whether the files are public, so the prior state stands. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [
+        "access request or terms"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/raosudha89/GYAFC-corpus/tree/fe2da425ad91933b30097e7d2ed05e428e95ba92",
@@ -1821,11 +2053,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"e8f478e5d7cb3c34d4a991074a5da57b\"",
+          "etag": "W/\"5459ddc97b120ed2074f43073c27126c\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:39:03Z",
+          "checked_at_utc": "2026-10-08T04:58:59Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1837,11 +2069,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"2a023c7d682ae9e7749671734bb68d2f\"",
+          "etag": "W/\"4780c3b47e5d1a6845e578dfb48f18e5\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:39:08Z",
+          "checked_at_utc": "2026-10-08T04:58:57Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1860,6 +2092,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://arxiv.org/html/2502.11393v2",
@@ -1872,7 +2107,7 @@
           "content_digest": null,
           "final_host": "arxiv.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:40Z",
+          "checked_at_utc": "2026-10-08T04:58:35Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -1891,6 +2126,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://ngdc.cncb.ac.cn/ictcf/",
@@ -1903,7 +2141,7 @@
           "content_digest": null,
           "final_host": "ngdc.cncb.ac.cn",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:19Z",
+          "checked_at_utc": "2026-10-08T04:58:07Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1919,7 +2157,7 @@
           "content_digest": null,
           "final_host": "ngdc.cncb.ac.cn",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:25Z",
+          "checked_at_utc": "2026-10-08T04:58:21Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -1938,6 +2176,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://jhc.sjtu.edu.cn/~xiaohongliu/papers/2025IllusionBench.pdf",
@@ -1950,7 +2191,7 @@
           "content_digest": null,
           "final_host": "jhc.sjtu.edu.cn",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:16Z",
+          "checked_at_utc": "2026-10-08T04:58:03Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -1969,6 +2210,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/IllusoryVQA/IllusoryVQA",
@@ -1977,11 +2221,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"ee5241941cfa0fc8810e7b171032bcff\"",
+          "etag": "W/\"fa8046f5b358c31309f055ffc91e2e65\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:31Z",
+          "checked_at_utc": "2026-10-08T04:58:26Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -2000,6 +2244,11 @@
       "http_status": 200,
       "summary": "recorded gate unchanged; a reachable page says nothing about the files.",
       "note": "unchanged: a reachable page says nothing about whether the files are public, so the prior state stands. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [
+        "login or registration"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://www.image-net.org/",
@@ -2012,7 +2261,7 @@
           "content_digest": null,
           "final_host": "www.image-net.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:21Z",
+          "checked_at_utc": "2026-10-08T04:58:10Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -2028,7 +2277,7 @@
           "content_digest": null,
           "final_host": "www.image-net.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:28Z",
+          "checked_at_utc": "2026-10-08T04:58:24Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -2047,6 +2296,11 @@
       "http_status": 200,
       "summary": "recorded gate unchanged; a reachable page says nothing about the files.",
       "note": "unchanged: a reachable page says nothing about whether the files are public, so the prior state stands. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [
+        "login or registration"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://www.image-net.org/challenges/LSVRC/",
@@ -2059,7 +2313,7 @@
           "content_digest": null,
           "final_host": "www.image-net.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:26Z",
+          "checked_at_utc": "2026-10-08T04:58:21Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -2075,7 +2329,7 @@
           "content_digest": null,
           "final_host": "www.image-net.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:28Z",
+          "checked_at_utc": "2026-10-08T04:58:24Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -2094,6 +2348,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://arxiv.org/abs/2502.14976",
@@ -2106,7 +2363,7 @@
           "content_digest": null,
           "final_host": "arxiv.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:35Z",
+          "checked_at_utc": "2026-10-08T04:58:31Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -2125,6 +2382,12 @@
       "http_status": 200,
       "summary": "recorded gate unchanged; a reachable page says nothing about the files.",
       "note": "unchanged: a reachable page says nothing about whether the files are public, so the prior state stands. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [
+        "login or registration",
+        "licence agreement"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://www.image-net.org/challenges/LSVRC/",
@@ -2137,7 +2400,7 @@
           "content_digest": null,
           "final_host": "www.image-net.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:26Z",
+          "checked_at_utc": "2026-10-08T04:58:21Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -2156,6 +2419,11 @@
       "http_status": 200,
       "summary": "recorded gate unchanged; a reachable page says nothing about the files.",
       "note": "unchanged: a reachable page says nothing about whether the files are public, so the prior state stands. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [
+        "login or registration"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://www.image-net.org/challenges/LSVRC/",
@@ -2168,7 +2436,7 @@
           "content_digest": null,
           "final_host": "www.image-net.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:26Z",
+          "checked_at_utc": "2026-10-08T04:58:21Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -2184,7 +2452,7 @@
           "content_digest": null,
           "final_host": "www.image-net.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:28Z",
+          "checked_at_utc": "2026-10-08T04:58:24Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -2203,6 +2471,11 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [
+        "in-house or no public release"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://openaccess.thecvf.com/content/WACV2024/papers/Fang_Dynamic_Multimodal_Information_Bottleneck_for_Multimodality_Classification_WACV_2024_paper.pdf",
@@ -2215,7 +2488,7 @@
           "content_digest": null,
           "final_host": "openaccess.thecvf.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:33Z",
+          "checked_at_utc": "2026-10-08T04:58:28Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -2234,6 +2507,11 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [
+        "gated"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://laion.ai/blog/laion-5b/",
@@ -2246,7 +2524,7 @@
           "content_digest": null,
           "final_host": "laion.ai",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:16Z",
+          "checked_at_utc": "2026-10-08T04:58:03Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -2262,7 +2540,7 @@
           "content_digest": null,
           "final_host": "laion.ai",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:28Z",
+          "checked_at_utc": "2026-10-08T04:58:23Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -2279,8 +2557,39 @@
       "deciding_url": "https://laion.ai/blog/laion-aesthetics/",
       "probe_status": "reachable",
       "http_status": 200,
-      "summary": "The LAION Hugging Face dataset page for laion2B-en-aesthetic (parquet, about 8.35 GB) is gated behind an agreement to share contact information.",
-      "note": "now_gated: read from public pages on 2026-10-08 (the source_audit_access item of that date), not from a probe. 3 URLs probed (HEAD only): 3 reachable.",
+      "summary": "Agent reading, not human-reviewed: The LAION Hugging Face dataset page for laion2B-en-aesthetic (parquet, about 8.35 GB) is gated behind an agreement to share contact information. The page was read without signing in and the terms were not accepted. LAION's Re-LAION-5B release is likewise gated (laion.ai/blog/r...",
+      "note": "now_gated: read from public pages on 2026-10-08 by the implementing agent (the source_audit_access item of that date); not human-reviewed and not a probe. 3 URLs probed (HEAD only): 3 reachable.",
+      "record_signals": [
+        "access request or terms",
+        "licence agreement",
+        "gated"
+      ],
+      "agent_readings": [
+        {
+          "kind": "source_audit_identity",
+          "url": "https://laion.ai/blog/laion-aesthetics/",
+          "checked_on": "2026-10-08",
+          "note": "LAION-Aesthetics is a family of score-filtered subsets of LAION-5B: V1 (8M and 120M English-caption samples) and V2 (six overlapping subsets from 1.2B at score 4.5 down to 625K at 6.5). The paper says only 'LAION Aesthetics (a subset of LAION-5B)', so which subset it used is not identified."
+        },
+        {
+          "kind": "source_audit_access",
+          "url": "https://huggingface.co/datasets/laion/laion2B-en-aesthetic",
+          "checked_on": "2026-10-08",
+          "note": "The LAION Hugging Face dataset page for laion2B-en-aesthetic (parquet, about 8.35 GB) is gated behind an agreement to share contact information. The page was read without signing in and the terms were not accepted. LAION's Re-LAION-5B release is likewise gated (laion.ai/blog/relaion-5b)."
+        },
+        {
+          "kind": "source_audit_rights",
+          "url": "https://laion.ai/blog/relaion-5b/",
+          "checked_on": "2026-10-08",
+          "note": "Re-LAION-5B is released under Apache 2.0 per its blog page; the registry's earlier LAION audit records CC BY 4.0 for LAION-5B metadata with images keeping their source copyrights. The aesthetic subset's own licence is not shown on its Hugging Face page."
+        }
+      ],
+      "reading": {
+        "kind": "source_audit_access",
+        "url": "https://huggingface.co/datasets/laion/laion2B-en-aesthetic",
+        "checked_on": "2026-10-08",
+        "note": "The LAION Hugging Face dataset page for laion2B-en-aesthetic (parquet, about 8.35 GB) is gated behind an agreement to share contact information. The page was read without signing in and the terms were not accepted. LAION's Re-LAION-5B release is likewise gated (laion.ai/blog/relaion-5b)."
+      },
       "urls": [
         {
           "url": "https://laion.ai/blog/laion-aesthetics/",
@@ -2293,7 +2602,7 @@
           "content_digest": null,
           "final_host": "laion.ai",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:25Z",
+          "checked_at_utc": "2026-10-08T04:58:20Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -2305,11 +2614,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": 140886,
-          "etag": "W/\"22656-1ZLyeNTFy+v14GN/nhwM0YOTgno\"",
+          "etag": "W/\"22656-G3JIJPoarH4aqC68NhB++eBQ31k\"",
           "content_digest": null,
           "final_host": "huggingface.co",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:29Z",
+          "checked_at_utc": "2026-10-08T04:58:25Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -2325,7 +2634,7 @@
           "content_digest": null,
           "final_host": "laion.ai",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:28Z",
+          "checked_at_utc": "2026-10-08T04:58:23Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -2344,6 +2653,28 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [
+        {
+          "kind": "source_audit_identity",
+          "url": "https://vision.middlebury.edu/",
+          "checked_on": "2026-10-08",
+          "note": "The Middlebury site hosts five separate benchmarks (stereo, multi-view stereo, MRF, optical flow, color). The BAPPS paper cites its 'Middleburry dataset' to the stereo taxonomy paper (Scharstein and Szeliski, IJCV 2002) while using it for frame-interpolation patch triplets, so which Middlebury data it drew on is not established. A family of benchmarks, not one release."
+        },
+        {
+          "kind": "source_audit_access",
+          "url": "https://vision.middlebury.edu/",
+          "checked_on": "2026-10-08",
+          "note": "The benchmark pages are public (page read; nothing downloaded). No single archive corresponds to the paper's use, so there is nothing to pin."
+        },
+        {
+          "kind": "source_audit_rights",
+          "url": "https://vision.middlebury.edu/",
+          "checked_on": "2026-10-08",
+          "note": "The site's front page states no licence or terms for its datasets; rights are not established."
+        }
+      ],
+      "reading": null,
       "urls": [
         {
           "url": "https://vision.middlebury.edu/",
@@ -2356,7 +2687,7 @@
           "content_digest": null,
           "final_host": "vision.middlebury.edu",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:20Z",
+          "checked_at_utc": "2026-10-08T04:58:09Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -2375,6 +2706,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 3 URLs probed (HEAD only): 3 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://cocodataset.org/",
@@ -2387,7 +2721,7 @@
           "content_digest": null,
           "final_host": "cocodataset.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:14Z",
+          "checked_at_utc": "2026-10-08T04:58:00Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -2403,7 +2737,7 @@
           "content_digest": null,
           "final_host": "cocodataset.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:23Z",
+          "checked_at_utc": "2026-10-08T04:58:15Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -2419,7 +2753,7 @@
           "content_digest": null,
           "final_host": "cocodataset.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:27Z",
+          "checked_at_utc": "2026-10-08T04:58:22Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -2438,6 +2772,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 3 URLs probed (HEAD only): 3 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://cocodataset.org/",
@@ -2450,7 +2787,7 @@
           "content_digest": null,
           "final_host": "cocodataset.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:14Z",
+          "checked_at_utc": "2026-10-08T04:58:00Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -2466,7 +2803,7 @@
           "content_digest": null,
           "final_host": "cocodataset.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:23Z",
+          "checked_at_utc": "2026-10-08T04:58:15Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -2482,7 +2819,7 @@
           "content_digest": null,
           "final_host": "cocodataset.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:27Z",
+          "checked_at_utc": "2026-10-08T04:58:22Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -2501,6 +2838,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 3 URLs probed (HEAD only): 3 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://cocodataset.org/",
@@ -2513,7 +2853,7 @@
           "content_digest": null,
           "final_host": "cocodataset.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:14Z",
+          "checked_at_utc": "2026-10-08T04:58:00Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -2529,7 +2869,7 @@
           "content_digest": null,
           "final_host": "cocodataset.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:23Z",
+          "checked_at_utc": "2026-10-08T04:58:15Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -2545,7 +2885,7 @@
           "content_digest": null,
           "final_host": "cocodataset.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:27Z",
+          "checked_at_utc": "2026-10-08T04:58:22Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -2564,6 +2904,12 @@
       "http_status": 200,
       "summary": "recorded gate unchanged; a reachable page says nothing about the files.",
       "note": "unchanged: a reachable page says nothing about whether the files are public, so the prior state stands. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [
+        "login or registration",
+        "licence agreement"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://physionet.org/content/ms-cxr/1.1.0/",
@@ -2576,7 +2922,7 @@
           "content_digest": null,
           "final_host": "physionet.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:20Z",
+          "checked_at_utc": "2026-10-08T04:58:09Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -2592,7 +2938,7 @@
           "content_digest": null,
           "final_host": "www.physionet.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:23Z",
+          "checked_at_utc": "2026-10-08T04:58:12Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -2611,6 +2957,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 3 URLs probed (HEAD only): 3 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://cocodataset.org/",
@@ -2623,7 +2972,7 @@
           "content_digest": null,
           "final_host": "cocodataset.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:14Z",
+          "checked_at_utc": "2026-10-08T04:58:00Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -2639,7 +2988,7 @@
           "content_digest": null,
           "final_host": "cocodataset.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:23Z",
+          "checked_at_utc": "2026-10-08T04:58:15Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -2655,7 +3004,7 @@
           "content_digest": null,
           "final_host": "cocodataset.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:27Z",
+          "checked_at_utc": "2026-10-08T04:58:22Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -2674,6 +3023,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://openaccess.thecvf.com/content/CVPR2025/papers/Zhang_Anyattack_Towards_Large-scale_Self-supervised_Adversarial_Attacks_on_Vision-language_Models_CVPR_2025_paper.pdf",
@@ -2686,7 +3038,7 @@
           "content_digest": null,
           "final_host": "openaccess.thecvf.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:25Z",
+          "checked_at_utc": "2026-10-08T04:58:21Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -2705,6 +3057,11 @@
       "http_status": 200,
       "summary": "recorded gate unchanged; a reachable page says nothing about the files.",
       "note": "unchanged: a reachable page says nothing about whether the files are public, so the prior state stands. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [
+        "gated"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://multi-trust.github.io/",
@@ -2717,7 +3074,7 @@
           "content_digest": null,
           "final_host": "multi-trust.github.io",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:17Z",
+          "checked_at_utc": "2026-10-08T04:58:05Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -2729,11 +3086,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": 122572,
-          "etag": "W/\"1decc-7t794zjnUSwpbFp3NT1UKNb+6R0\"",
+          "etag": "W/\"1decc-srNlIlLFhogjPMVnxbzsQq0TTRo\"",
           "content_digest": null,
           "final_host": "huggingface.co",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:31Z",
+          "checked_at_utc": "2026-10-08T04:58:26Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -2752,6 +3109,11 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [
+        "login or registration"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/cleverhans-lab/cleverhans/tree/master/cleverhans_v3.1.0/examples/nips17_adversarial_competition/dataset",
@@ -2760,11 +3122,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"02526a9b84a9bf78310698f2446bba6c\"",
+          "etag": "W/\"5c0fcf7f65c91b6d95bc59ff4655b863\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:45Z",
+          "checked_at_utc": "2026-10-08T04:58:43Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -2783,6 +3145,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://openreview.net/forum?id=7b15cbcf0e6eb7f970a7346ada0d3cea572203e1",
@@ -2795,7 +3160,7 @@
           "content_digest": null,
           "final_host": "openreview.net",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:19Z",
+          "checked_at_utc": "2026-10-08T04:58:09Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -2814,6 +3179,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/dmitryulyanov/deep-image-prior",
@@ -2822,11 +3190,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"b737424fcbf36249960d3c5f77f296ac\"",
+          "etag": "W/\"b070f227d705650680e1cedaf9bd3402\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:46Z",
+          "checked_at_utc": "2026-10-08T04:58:41Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -2845,6 +3213,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://noise.visinf.tu-darmstadt.de/",
@@ -2857,7 +3228,7 @@
           "content_digest": null,
           "final_host": "noise.visinf.tu-darmstadt.de",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:18Z",
+          "checked_at_utc": "2026-10-08T04:58:07Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -2876,6 +3247,12 @@
       "http_status": 200,
       "summary": "recorded gate unchanged; a reachable page says nothing about the files.",
       "note": "unchanged: a reachable page says nothing about whether the files are public, so the prior state stands. 3 URLs probed (HEAD only): 3 reachable.",
+      "record_signals": [
+        "access request or terms",
+        "licence agreement"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/kshitishghate/bias_prop",
@@ -2884,11 +3261,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"4a84f83e6e90de4ef001ccbd2833a65f\"",
+          "etag": "W/\"050398bf229d562e4abec7fabb2161f0\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:54Z",
+          "checked_at_utc": "2026-10-08T04:58:46Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -2904,7 +3281,7 @@
           "content_digest": null,
           "final_host": "www.chicagofaces.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:21Z",
+          "checked_at_utc": "2026-10-08T04:58:11Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -2916,11 +3293,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"a88b2ab9ee17bfd391c33bba51881f6d\"",
+          "etag": "W/\"28b670e72a2db7bbbc0df46edc85b6a7\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:39:02Z",
+          "checked_at_utc": "2026-10-08T04:58:50Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -2939,6 +3316,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 2 URLs probed (HEAD only): 2 reachable. 1 of them gave no information.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/Raphoo/linear-mech-vlms/tree/main/spatial_id_derivation",
@@ -2947,11 +3327,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"81687fa51ccdaa2b80b17c87c6030a85\"",
+          "etag": "W/\"0f253d3b82715387a263a1ba70ed6adb\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:33Z",
+          "checked_at_utc": "2026-10-08T04:58:29Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -2962,12 +3342,12 @@
           "status": "reachable",
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
-          "content_length": 81827,
+          "content_length": 81608,
           "etag": null,
           "content_digest": null,
           "final_host": "drive.google.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:15Z",
+          "checked_at_utc": "2026-10-08T04:58:01Z",
           "pinned": false,
           "data_file": false,
           "no_information": "Google Drive page"
@@ -2986,6 +3366,12 @@
       "http_status": 200,
       "summary": "recorded gate unchanged; a reachable page says nothing about the files.",
       "note": "unchanged: a reachable page says nothing about whether the files are public, so the prior state stands. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [
+        "access request or terms",
+        "licence agreement"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/Raphoo/linear-mech-vlms/blob/main/spatial_finetuning/README.md",
@@ -2994,11 +3380,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"d7e5f0e2a2716a658e34162cfbf93009\"",
+          "etag": "W/\"58241b394adedb5486e87a311f25d4be\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:32Z",
+          "checked_at_utc": "2026-10-08T04:58:28Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3008,15 +3394,37 @@
     {
       "dataset_id": "paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-collection",
       "access": "unverified",
-      "disposition": "released_after_audit",
-      "basis": "researched",
+      "disposition": "public_unpinned",
+      "basis": "landing_page",
       "evidence_appended": true,
       "blockers_added": [],
       "deciding_url": "https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench",
       "probe_status": "reachable",
       "http_status": 200,
-      "summary": "Public and not gated (page read without signing in; nothing downloaded).",
-      "note": "released_after_audit: read from public pages on 2026-10-08 (the source_audit_access item of that date), not from a probe. 1 URL probed (HEAD only): 1 reachable.",
+      "summary": "landing page reachable; no data file, no pin.",
+      "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [
+        {
+          "kind": "source_audit_identity",
+          "url": "https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench",
+          "checked_on": "2026-10-08",
+          "note": "The author's Hugging Face repository HC-Bench cites the SemVink paper (arXiv 2506.02803) and holds object/ (56 base + 56 hidden-content images), text/ (56 images) and wild/ (53 natural/urban photographs). The paper's '53 internet-sourced hidden-content images' match wild/ by count only; the paper page links no release, so the match is not verified."
+        },
+        {
+          "kind": "source_audit_access",
+          "url": "https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench",
+          "checked_on": "2026-10-08",
+          "note": "Public and not gated (page read without signing in; nothing downloaded). The same wild/ files are already prepared under the hc-bench entry at a pinned revision, so no separate acquisition is needed. The registry's 2026-10-06 relationship on this entry records the repository as context, not the paper's collection, and the two stay distinct until exact image IDs show that the paper's 53 images are wild/; the count match alone does not. Read by the implementing agent, not human-reviewed."
+        },
+        {
+          "kind": "source_audit_rights",
+          "url": "https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench",
+          "checked_on": "2026-10-08",
+          "note": "Hugging Face card tags MIT. Rights to the underlying internet-sourced photographs are not stated and need item review; public media display is not approved."
+        }
+      ],
+      "reading": null,
       "urls": [
         {
           "url": "https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench",
@@ -3025,11 +3433,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": 430652,
-          "etag": "W/\"6923c-krBjc+M6KC3PsUxNs2UunPZ4HvQ\"",
+          "etag": "W/\"6923c-8lLKe8tBz5Eu3ISmS00BusYsyck\"",
           "content_digest": null,
           "final_host": "huggingface.co",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:25Z",
+          "checked_at_utc": "2026-10-08T04:58:20Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3039,15 +3447,37 @@
     {
       "dataset_id": "paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-set",
       "access": "unverified",
-      "disposition": "released_after_audit",
-      "basis": "researched",
+      "disposition": "public_unpinned",
+      "basis": "landing_page",
       "evidence_appended": true,
       "blockers_added": [],
       "deciding_url": "https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench",
       "probe_status": "reachable",
       "http_status": 200,
-      "summary": "Public and not gated (page read without signing in; nothing downloaded).",
-      "note": "released_after_audit: read from public pages on 2026-10-08 (the source_audit_access item of that date), not from a probe. 1 URL probed (HEAD only): 1 reachable.",
+      "summary": "landing page reachable; no data file, no pin.",
+      "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [
+        {
+          "kind": "source_audit_identity",
+          "url": "https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench",
+          "checked_on": "2026-10-08",
+          "note": "The author's Hugging Face repository HC-Bench cites the SemVink paper (arXiv 2506.02803) and holds object/ (56 base + 56 hidden-content images), text/ (56 images) and wild/ (53 natural/urban photographs). The paper's '53 internet-sourced hidden-content images' match wild/ by count only; the paper page links no release, so the match is not verified."
+        },
+        {
+          "kind": "source_audit_access",
+          "url": "https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench",
+          "checked_on": "2026-10-08",
+          "note": "Public and not gated (page read without signing in; nothing downloaded). The same wild/ files are already prepared under the hc-bench entry at a pinned revision, so no separate acquisition is needed. The registry's 2026-10-06 relationship on this entry records the repository as context, not the paper's collection, and the two stay distinct until exact image IDs show that the paper's 53 images are wild/; the count match alone does not. Read by the implementing agent, not human-reviewed."
+        },
+        {
+          "kind": "source_audit_rights",
+          "url": "https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench",
+          "checked_on": "2026-10-08",
+          "note": "Hugging Face card tags MIT. Rights to the underlying internet-sourced photographs are not stated and need item review; public media display is not approved."
+        }
+      ],
+      "reading": null,
       "urls": [
         {
           "url": "https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench",
@@ -3056,11 +3486,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": 430652,
-          "etag": "W/\"6923c-krBjc+M6KC3PsUxNs2UunPZ4HvQ\"",
+          "etag": "W/\"6923c-8lLKe8tBz5Eu3ISmS00BusYsyck\"",
           "content_digest": null,
           "final_host": "huggingface.co",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:25Z",
+          "checked_at_utc": "2026-10-08T04:58:20Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3079,6 +3509,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/Trustworthy-AI-Group/VMA",
@@ -3087,11 +3520,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"5002903234d6ad4e227702b7f15c15f9\"",
+          "etag": "W/\"b25a1b04b56644bc776258a43cfe4019\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:37Z",
+          "checked_at_utc": "2026-10-08T04:58:32Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3110,6 +3543,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/Trustworthy-AI-Group/VMA",
@@ -3118,11 +3554,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"5002903234d6ad4e227702b7f15c15f9\"",
+          "etag": "W/\"b25a1b04b56644bc776258a43cfe4019\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:37Z",
+          "checked_at_utc": "2026-10-08T04:58:32Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3141,6 +3577,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/UIUC-MONET/vlm-circuit-tracing",
@@ -3149,11 +3588,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"41dec6c44585d095511596666f1ef11f\"",
+          "etag": "W/\"5877203feaf3a49a583ccbf3ec4d9788\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:40Z",
+          "checked_at_utc": "2026-10-08T04:58:35Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3172,6 +3611,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 4 URLs probed (HEAD only): 4 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/pata-fairness/pata_dataset",
@@ -3180,11 +3622,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"ad024b71426947ea5e1cd736c67e2b48\"",
+          "etag": "W/\"f61688e24093eef7705872ae93e0450f\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:58Z",
+          "checked_at_utc": "2026-10-08T04:59:04Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3200,7 +3642,7 @@
           "content_digest": null,
           "final_host": "arxiv.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:32Z",
+          "checked_at_utc": "2026-10-08T04:58:28Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3216,7 +3658,7 @@
           "content_digest": null,
           "final_host": "openaccess.thecvf.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:18Z",
+          "checked_at_utc": "2026-10-08T04:58:07Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -3228,11 +3670,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"d89a16b28577279772edfdb551900210\"",
+          "etag": "W/\"946c6bb6854f29f81b46a2c21001296e\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:39:07Z",
+          "checked_at_utc": "2026-10-08T04:59:05Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3251,6 +3693,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://openaccess.thecvf.com/content/ICCV2025/html/Hirota_Bias_in_Gender_Bias_Benchmarks_How_Spurious_Features_Distort_Evaluation_ICCV_2025_paper.html",
@@ -3263,7 +3708,7 @@
           "content_digest": null,
           "final_host": "openaccess.thecvf.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:30Z",
+          "checked_at_utc": "2026-10-08T04:58:25Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -3282,6 +3727,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://doi.org/10.1371/journal.pcbi.1005268",
@@ -3294,7 +3742,7 @@
           "content_digest": null,
           "final_host": "journals.plos.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:15Z",
+          "checked_at_utc": "2026-10-08T04:58:02Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3313,6 +3761,11 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [
+        "access request or terms"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://loki.disi.unitn.it/RAISE/",
@@ -3325,7 +3778,7 @@
           "content_digest": null,
           "final_host": "loki.disi.unitn.it",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:17Z",
+          "checked_at_utc": "2026-10-08T04:58:06Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3344,6 +3797,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/RobustBench/robustbench/tree/78fcc9e48a07a861268f295a777b975f25155964",
@@ -3352,11 +3808,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"3c762a448ae4a98978efac2919246e08\"",
+          "etag": "W/\"43307fc84b5c32fb73fd9daba4f623a8\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:35Z",
+          "checked_at_utc": "2026-10-08T04:58:31Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3375,6 +3831,9 @@
       "http_status": 200,
       "summary": "recorded gate unchanged; a reachable page says nothing about the files.",
       "note": "unchanged: a reachable page says nothing about whether the files are public, so the prior state stands. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://www.radc.rush.edu/molecular_networks/datasets.html",
@@ -3387,7 +3846,7 @@
           "content_digest": null,
           "final_host": "www.radc.rush.edu",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:23Z",
+          "checked_at_utc": "2026-10-08T04:58:20Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3403,7 +3862,7 @@
           "content_digest": null,
           "final_host": "www.radc.rush.edu",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:26Z",
+          "checked_at_utc": "2026-10-08T04:58:22Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3422,6 +3881,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://huggingface.co/vlmbias",
@@ -3430,11 +3892,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": 101055,
-          "etag": "W/\"18abf-WTyiQheds0zK3DjybbTyA0nFrdY\"",
+          "etag": "W/\"18abf-2FgEe4Bs7n1olkr0TVAlad/lKGY\"",
           "content_digest": null,
           "final_host": "huggingface.co",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:32Z",
+          "checked_at_utc": "2026-10-08T04:58:28Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3446,11 +3908,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"e1ed6e00ca8f9c6b5b550e5dfbbc4aba\"",
+          "etag": "W/\"5d4b990ebb540e559b499712b2912d0e\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:55Z",
+          "checked_at_utc": "2026-10-08T04:58:54Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3469,6 +3931,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://huggingface.co/vlmbias",
@@ -3477,11 +3942,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": 101055,
-          "etag": "W/\"18abf-WTyiQheds0zK3DjybbTyA0nFrdY\"",
+          "etag": "W/\"18abf-2FgEe4Bs7n1olkr0TVAlad/lKGY\"",
           "content_digest": null,
           "final_host": "huggingface.co",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:32Z",
+          "checked_at_utc": "2026-10-08T04:58:28Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3493,11 +3958,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"e1ed6e00ca8f9c6b5b550e5dfbbc4aba\"",
+          "etag": "W/\"5d4b990ebb540e559b499712b2912d0e\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:55Z",
+          "checked_at_utc": "2026-10-08T04:58:54Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3516,6 +3981,12 @@
       "http_status": 401,
       "summary": "HTTP 401 re-observed; the recorded gate stands.",
       "note": "unchanged: a gate answer is already recorded for this entry, so the prior state stands. 3 URLs probed (HEAD only): 2 reachable, 1 gated or forbidden.",
+      "record_signals": [
+        "access request or terms",
+        "gated"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/UCF-CRCV/BBQ-Vision",
@@ -3524,11 +3995,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"01877913e8a6303435076bd4d13091d1\"",
+          "etag": "W/\"03929e68ade7dc579b1d74df832bf12b\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:39Z",
+          "checked_at_utc": "2026-10-08T04:58:34Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3579,6 +4050,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://arxiv.org/abs/1911.09288",
@@ -3591,7 +4065,7 @@
           "content_digest": null,
           "final_host": "arxiv.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:26Z",
+          "checked_at_utc": "2026-10-08T04:58:22Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3610,6 +4084,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/jhjacobsen/fully-invertible-revnet",
@@ -3618,11 +4095,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"3feb92f518c826073ae3d90ec2bae3ca\"",
+          "etag": "W/\"4c0492dde1ec9b633bd3edb2c25cb1e7\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:52Z",
+          "checked_at_utc": "2026-10-08T04:58:47Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3641,6 +4118,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/ericmjonas/neuroprocdata",
@@ -3649,11 +4129,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"ae0e9b3ec6e8ce4300746e905bfd23fd\"",
+          "etag": "W/\"f360914dd3970a1a68cbc91edace724a\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:48Z",
+          "checked_at_utc": "2026-10-08T04:58:40Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3669,7 +4149,7 @@
           "content_digest": null,
           "final_host": "ericmjonas.github.io",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:15Z",
+          "checked_at_utc": "2026-10-08T04:58:01Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -3688,6 +4168,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://doi.org/10.1371/journal.pcbi.1005268",
@@ -3700,7 +4183,7 @@
           "content_digest": null,
           "final_host": "journals.plos.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:15Z",
+          "checked_at_utc": "2026-10-08T04:58:02Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3719,6 +4202,12 @@
       "http_status": 200,
       "summary": "recorded gate unchanged; a reachable page says nothing about the files.",
       "note": "unchanged: a reachable page says nothing about whether the files are public, so the prior state stands. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [
+        "login or registration",
+        "licence agreement"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://catalog.ldc.upenn.edu/LDC93S1",
@@ -3727,11 +4216,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"289de812f6c13ab88686673cf02909d2\"",
+          "etag": "W/\"99e5b58cc6e4d264832c851be14e3608\"",
           "content_digest": null,
           "final_host": "catalog.ldc.upenn.edu",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:24Z",
+          "checked_at_utc": "2026-10-08T04:58:15Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3750,6 +4239,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://arxiv.org/abs/2602.01816",
@@ -3762,7 +4254,7 @@
           "content_digest": null,
           "final_host": "arxiv.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:37Z",
+          "checked_at_utc": "2026-10-08T04:58:32Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3781,6 +4273,9 @@
       "http_status": 200,
       "summary": "recorded gate unchanged; a reachable page says nothing about the files.",
       "note": "unchanged: a reachable page says nothing about whether the files are public, so the prior state stands. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://huggingface.co/datasets/aimagelab/ViSU-Text",
@@ -3789,11 +4284,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": 161601,
-          "etag": "W/\"27741-0+SXK86cHhVBqtkh/UYaHE/TlBw\"",
+          "etag": "W/\"27741-SVsEFsK6uVifH55szpac9kwm1dE\"",
           "content_digest": null,
           "final_host": "huggingface.co",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:28Z",
+          "checked_at_utc": "2026-10-08T04:58:23Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3809,7 +4304,7 @@
           "content_digest": null,
           "final_host": "huggingface.co",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:15Z",
+          "checked_at_utc": "2026-10-08T04:58:03Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3828,6 +4323,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/nlietzow/vision-default-prior-override",
@@ -3836,11 +4334,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"6fec080c1822837190e2f0d3ccd7e7c7\"",
+          "etag": "W/\"95f3c2e901154ddf8c6e4e30ff8434cd\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:39:00Z",
+          "checked_at_utc": "2026-10-08T04:58:52Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3859,6 +4357,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://visualqa.org/",
@@ -3867,11 +4368,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": 34354,
-          "etag": "\"69013457-8632\"",
+          "etag": "\"69013458-8632\"",
           "content_digest": null,
           "final_host": "visualqa.org",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:20Z",
+          "checked_at_utc": "2026-10-08T04:58:09Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -3883,11 +4384,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"1e8f676d970fbdca5ae00b42f491a167\"",
+          "etag": "W/\"e11b4ecadb88f825e86dab90720c7cce\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:42Z",
+          "checked_at_utc": "2026-10-08T04:58:37Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3904,8 +4405,37 @@
       "deciding_url": "https://github.com/ExplainableML/vla-gender-bias",
       "probe_status": "reachable",
       "http_status": 200,
-      "summary": "The README directs users to run setup_data.sh, which downloads and processes the source datasets (about 100 GB of disk and about 24 hours per the README).",
-      "note": "unchanged: read from public pages on 2026-10-08 (the source_audit_access item of that date), not from a probe. 1 URL probed (HEAD only): 1 reachable.",
+      "summary": "Agent reading, not human-reviewed: The README directs users to run setup_data.sh, which downloads and processes the source datasets (about 100 GB of disk and about 24 hours per the README). It offers no hosted copy of the 5,000 selected images; the recipe is public, but each source dataset keeps its own access ...",
+      "note": "unchanged: read from public pages on 2026-10-08 by the implementing agent (the source_audit_access item of that date); not human-reviewed and not a probe. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [
+        "recipe, not a release"
+      ],
+      "agent_readings": [
+        {
+          "kind": "source_audit_identity",
+          "url": "https://github.com/ExplainableML/vla-gender-bias",
+          "checked_on": "2026-10-08",
+          "note": "Benchmark introduced by Girrbach et al. (arXiv 2410.19314): 5,000 images, 1,000 each from FairFace, MIAP, PHASE and PATA (FairFace in two padding variants), balanced for gender and, where annotated, ethnicity, with trait, skill and occupation prompts. The author repository holds code and a setup_data.sh recipe."
+        },
+        {
+          "kind": "source_audit_access",
+          "url": "https://github.com/ExplainableML/vla-gender-bias",
+          "checked_on": "2026-10-08",
+          "note": "The README directs users to run setup_data.sh, which downloads and processes the source datasets (about 100 GB of disk and about 24 hours per the README). It offers no hosted copy of the 5,000 selected images; the recipe is public, but each source dataset keeps its own access route."
+        },
+        {
+          "kind": "source_audit_rights",
+          "url": "https://github.com/ExplainableML/vla-gender-bias",
+          "checked_on": "2026-10-08",
+          "note": "The README text read states no licence. The images come from FairFace, MIAP, PHASE and PATA, whose own terms apply; redistribution of the selected images is not approved here."
+        }
+      ],
+      "reading": {
+        "kind": "source_audit_access",
+        "url": "https://github.com/ExplainableML/vla-gender-bias",
+        "checked_on": "2026-10-08",
+        "note": "The README directs users to run setup_data.sh, which downloads and processes the source datasets (about 100 GB of disk and about 24 hours per the README). It offers no hosted copy of the 5,000 selected images; the recipe is public, but each source dataset keeps its own access route."
+      },
       "urls": [
         {
           "url": "https://github.com/ExplainableML/vla-gender-bias",
@@ -3914,11 +4444,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"b41ce48e308a95e741df9bf074231776\"",
+          "etag": "W/\"d22ff3ba2fa8e5bd3d01ca955312b072\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:28Z",
+          "checked_at_utc": "2026-10-08T04:58:23Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3937,6 +4467,11 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [
+        "recipe, not a release"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://github.com/ExplainableML/vla-gender-bias/tree/70297fe6035cb1a76f7b434218c9ea86dacd0782",
@@ -3945,11 +4480,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"bc15c0fffd4baef11091a8c1eb838c30\"",
+          "etag": "W/\"0f10d786f3b0dfdb88f9aae1932e3626\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:29Z",
+          "checked_at_utc": "2026-10-08T04:58:25Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -3966,8 +4501,35 @@
       "deciding_url": "https://google-research.github.io/task_adaptation/",
       "probe_status": "reachable",
       "http_status": 200,
-      "summary": "The code repository loads the member datasets through TensorFlow Datasets; its README says Diabetic Retinopathy and Resisc45 cannot be downloaded automatically.",
-      "note": "unchanged: read from public pages on 2026-10-08 (the source_audit_access item of that date), not from a probe. 2 URLs probed (HEAD only): 2 reachable.",
+      "summary": "Agent reading, not human-reviewed: The code repository loads the member datasets through TensorFlow Datasets; its README says Diabetic Retinopathy and Resisc45 cannot be downloaded automatically. There is no single VTAB archive to pin; each member dataset has its own source.",
+      "note": "unchanged: read from public pages on 2026-10-08 by the implementing agent (the source_audit_access item of that date); not human-reviewed and not a probe. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [],
+      "agent_readings": [
+        {
+          "kind": "source_audit_identity",
+          "url": "https://google-research.github.io/task_adaptation/",
+          "checked_on": "2026-10-08",
+          "note": "VTAB is the Visual Task Adaptation Benchmark of Zhai et al. (arXiv 1910.04867): 19 classification tasks assembled from existing public datasets (for example Caltech101, CIFAR-100, CLEVR, EuroSAT, KITTI, SUN397, SVHN). It is a benchmark suite with no single release. The registry's survey excerpt ('CUB200, VTAB (Pruthi et al., 2020) ResNet-56') is a flattened table fragment, so its trailing citation is not an attribution of VTAB; the survey names VTAB only as a dataset of a cited study, and which VTAB tasks that study used is not established here."
+        },
+        {
+          "kind": "source_audit_access",
+          "url": "https://github.com/google-research/task_adaptation",
+          "checked_on": "2026-10-08",
+          "note": "The code repository loads the member datasets through TensorFlow Datasets; its README says Diabetic Retinopathy and Resisc45 cannot be downloaded automatically. There is no single VTAB archive to pin; each member dataset has its own source."
+        },
+        {
+          "kind": "source_audit_rights",
+          "url": "https://github.com/google-research/task_adaptation",
+          "checked_on": "2026-10-08",
+          "note": "The code is Apache-2.0 per the repository. The data keep the terms of each member dataset; no benchmark-wide data licence is stated."
+        }
+      ],
+      "reading": {
+        "kind": "source_audit_access",
+        "url": "https://github.com/google-research/task_adaptation",
+        "checked_on": "2026-10-08",
+        "note": "The code repository loads the member datasets through TensorFlow Datasets; its README says Diabetic Retinopathy and Resisc45 cannot be downloaded automatically. There is no single VTAB archive to pin; each member dataset has its own source."
+      },
       "urls": [
         {
           "url": "https://google-research.github.io/task_adaptation/",
@@ -3980,7 +4542,7 @@
           "content_digest": null,
           "final_host": "google-research.github.io",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:15Z",
+          "checked_at_utc": "2026-10-08T04:58:02Z",
           "pinned": true,
           "data_file": false,
           "no_information": null
@@ -3992,11 +4554,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"b9dbdc14500db35f813a08a042be8b6a\"",
+          "etag": "W/\"021fe51cde262ce24feab75bf9035026\"",
           "content_digest": null,
           "final_host": "github.com",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:51Z",
+          "checked_at_utc": "2026-10-08T04:58:56Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -4015,6 +4577,11 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 2 URLs probed (HEAD only): 2 reachable.",
+      "record_signals": [
+        "licence agreement"
+      ],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://catalog.ldc.upenn.edu/LDC93S6A",
@@ -4023,11 +4590,11 @@
           "http_status": 200,
           "content_type": "text/html; charset=utf-8",
           "content_length": null,
-          "etag": "W/\"abb62c16b29ae2c3c5e383c36d3cea5a\"",
+          "etag": "W/\"b18416941ac6717adb2a7f58356f2e1b\"",
           "content_digest": null,
           "final_host": "catalog.ldc.upenn.edu",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:27Z",
+          "checked_at_utc": "2026-10-08T04:58:23Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -4043,7 +4610,7 @@
           "content_digest": null,
           "final_host": "proceedings.neurips.cc",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:19Z",
+          "checked_at_utc": "2026-10-08T04:58:08Z",
           "pinned": false,
           "data_file": false,
           "no_information": null
@@ -4062,6 +4629,9 @@
       "http_status": 200,
       "summary": "landing page reachable; no data file, no pin.",
       "note": "public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong ETag with a length) on a data file, so no release is pinned and public availability of the data itself is not established. 1 URL probed (HEAD only): 1 reachable.",
+      "record_signals": [],
+      "agent_readings": [],
+      "reading": null,
       "urls": [
         {
           "url": "https://wilds.stanford.edu/",
@@ -4074,7 +4644,7 @@
           "content_digest": null,
           "final_host": "wilds.stanford.edu",
           "error": null,
-          "checked_at_utc": "2026-10-08T04:38:20Z",
+          "checked_at_utc": "2026-10-08T04:58:09Z",
           "pinned": true,
           "data_file": false,
           "no_information": null

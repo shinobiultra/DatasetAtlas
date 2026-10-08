@@ -42,9 +42,10 @@ evidence:
   checked_on: '2026-10-08'
   note: 'VTAB is the Visual Task Adaptation Benchmark of Zhai et al. (arXiv 1910.04867): 19 classification
     tasks assembled from existing public datasets (for example Caltech101, CIFAR-100, CLEVR, EuroSAT,
-    KITTI, SUN397, SVHN). It is a benchmark suite with no single release. The survey row that mentions
-    it attributes it to Pruthi et al. 2020, which does not match the benchmark''s authors, so which resource
-    the survey means is unresolved.'
+    KITTI, SUN397, SVHN). It is a benchmark suite with no single release. The registry''s survey excerpt
+    (''CUB200, VTAB (Pruthi et al., 2020) ResNet-56'') is a flattened table fragment, so its trailing
+    citation is not an attribution of VTAB; the survey names VTAB only as a dataset of a cited study,
+    and which VTAB tasks that study used is not established here.'
   source_identity_status: benchmark_suite_no_single_release
 - kind: source_audit_access
   url: https://github.com/google-research/task_adaptation
@@ -66,5 +67,5 @@ evidence:
   probe_status: reachable
   http_status: 200
   checked_on: '2026-10-08'
-  note: 'unchanged: read from public pages on 2026-10-08 (the source_audit_access item of that date),
-    not from a probe. 2 URLs probed (HEAD only): 2 reachable.'
+  note: 'unchanged: read from public pages on 2026-10-08 by the implementing agent (the source_audit_access
+    item of that date); not human-reviewed and not a probe. 2 URLs probed (HEAD only): 2 reachable.'

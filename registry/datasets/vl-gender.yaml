@@ -79,5 +79,5 @@ evidence:
   probe_status: reachable
   http_status: 200
   checked_on: '2026-10-08'
-  note: 'unchanged: read from public pages on 2026-10-08 (the source_audit_access item of that date),
-    not from a probe. 1 URL probed (HEAD only): 1 reachable.'
+  note: 'unchanged: read from public pages on 2026-10-08 by the implementing agent (the source_audit_access
+    item of that date); not human-reviewed and not a probe. 1 URL probed (HEAD only): 1 reachable.'

@@ -52,6 +52,14 @@ evidence:
   audit_file: work/sources/source-audit-jobs-batch3.json
   checked_on: '2026-09-22'
   source_identity_status: family_only
+- kind: source_audit_refresh
+  url: https://cocodataset.org/
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 3 URLs probed (HEAD only): 3 reachable.'
 source_url: https://cocodataset.org/
 relationships:
 - type: same_source_family_as

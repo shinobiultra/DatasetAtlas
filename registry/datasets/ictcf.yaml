@@ -61,4 +61,12 @@ evidence:
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: source_resolved_paper_slice_unresolved
+- kind: source_audit_refresh
+  url: https://ngdc.cncb.ac.cn/ictcf/
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 2 URLs probed (HEAD only): 2 reachable.'
 source_url: https://ngdc.cncb.ac.cn/ictcf/

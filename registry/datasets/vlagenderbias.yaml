@@ -71,6 +71,14 @@ evidence:
   note: 'From the source inspected on 2026-10-06: author repository inspected: image
     benchmarks over member datasets plus prompt CSVs. Not inferred from the dataset
     name.'
+- kind: source_audit_refresh
+  url: https://github.com/ExplainableML/vla-gender-bias/tree/70297fe6035cb1a76f7b434218c9ea86dacd0782
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 1 URL probed (HEAD only): 1 reachable.'
 relationships:
 - type: derived_from
   target_id: fairface

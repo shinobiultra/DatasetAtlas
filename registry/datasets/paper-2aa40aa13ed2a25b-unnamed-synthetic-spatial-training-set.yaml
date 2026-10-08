@@ -69,4 +69,11 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: explicit_author_request_for_large_archive
+- kind: source_audit_refresh
+  url: https://github.com/Raphoo/linear-mech-vlms/blob/main/spatial_finetuning/README.md
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'unchanged: a reachable page says nothing about whether the files are public, so the prior state
+    stands. 1 URL probed (HEAD only): 1 reachable.'
 source_url: https://github.com/Raphoo/linear-mech-vlms/blob/main/spatial_finetuning/README.md

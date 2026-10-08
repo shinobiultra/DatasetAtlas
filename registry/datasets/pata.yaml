@@ -92,6 +92,14 @@ evidence:
   checked_on: '2026-10-06'
   note: 'From the source inspected on 2026-10-06: author repository inspected: scene
     captions and a list of image URLs with labels. Not inferred from the dataset name.'
+- kind: source_audit_refresh
+  url: https://github.com/pata-fairness/pata_dataset
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 4 URLs probed (HEAD only): 4 reachable.'
 modalities:
 - image
 - text

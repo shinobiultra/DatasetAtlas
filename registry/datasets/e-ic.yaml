@@ -73,6 +73,14 @@ evidence:
   checked_on: '2026-10-06'
   note: 'From the source inspected on 2026-10-06: EasyEdit README inspected: image captioning editing
     data with images. Not inferred from the dataset name.'
+- kind: source_audit_refresh
+  url: https://github.com/zjunlp/EasyEdit/blob/14cea8245f06715684592ab55184939b99d70784/examples/MMEdit.md
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 6 URLs probed (HEAD only): 6 reachable. 3 of them gave no information.'
 source_url: https://github.com/zjunlp/EasyEdit/blob/14cea8245f06715684592ab55184939b99d70784/examples/MMEdit.md
 modalities:
 - image

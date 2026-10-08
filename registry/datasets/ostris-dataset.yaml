@@ -59,3 +59,11 @@ evidence:
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: survey_name_ambiguous
+- kind: source_audit_refresh
+  url: https://openreview.net/forum?id=7b15cbcf0e6eb7f970a7346ada0d3cea572203e1
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 1 URL probed (HEAD only): 1 reachable.'

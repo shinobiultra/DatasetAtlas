@@ -93,4 +93,12 @@ evidence:
     (CVPR 2012); no licence or request process. HEAD requests to the first video over
     http and https returned no response within 30 s.
   source_identity_status: author_page_identified_media_host_unresponsive
+- kind: source_audit_refresh
+  url: https://ai.stanford.edu/~alireza/Disney/
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 2 URLs probed (HEAD only): 1 reachable, 1 unreachable. 1 of them gave no information.'
 source_url: https://ai.stanford.edu/~alireza/Disney/

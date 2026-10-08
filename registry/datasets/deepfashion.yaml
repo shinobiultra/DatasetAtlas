@@ -54,4 +54,12 @@ evidence:
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: family_only
+- kind: source_audit_refresh
+  url: https://mmlab.ie.cuhk.edu.hk/projects/DeepFashion.html
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 1 URL probed (HEAD only): 1 reachable.'
 source_url: https://mmlab.ie.cuhk.edu.hk/projects/DeepFashion.html

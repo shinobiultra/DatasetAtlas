@@ -96,6 +96,14 @@ evidence:
   checked_on: '2026-10-06'
   note: 'From the source inspected on 2026-10-06: arXiv abstract inspected: image
     question-answer benchmark. Not inferred from the dataset name.'
+- kind: source_audit_refresh
+  url: https://arxiv.org/abs/2602.01816
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 1 URL probed (HEAD only): 1 reachable.'
 source_url: https://arxiv.org/abs/2602.01816
 modalities:
 - image

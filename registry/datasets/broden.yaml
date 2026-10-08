@@ -82,6 +82,14 @@ evidence:
   checked_on: '2026-10-06'
   note: 'From the source inspected on 2026-10-06: NetDissect download script inspected: image archive
     with segmentation labels. Not inferred from the dataset name.'
+- kind: source_audit_refresh
+  url: http://netdissect.csail.mit.edu/data/broden1_224.zip
+  probe_status: unreachable
+  http_status: null
+  checked_on: '2026-10-08'
+  note: 'unchanged: a data-file URL did not answer as a data file (no answer, removed, empty or a page)
+    and a reachable landing page says nothing about the files, so the prior state stands. 6 URLs probed
+    (HEAD only): 5 unreachable, 1 reachable. 5 of them gave no information.'
 source_url: https://github.com/CSAILVision/NetDissect/tree/20ce6f887607aadc04ab9fb3d452e4723685cbbb
 modalities:
 - image

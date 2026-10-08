@@ -79,6 +79,14 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: original_citation_only
+- kind: source_audit_refresh
+  url: https://jhc.sjtu.edu.cn/~xiaohongliu/papers/2025IllusionBench.pdf
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 1 URL probed (HEAD only): 1 reachable.'
 relationships:
 - type: same_source_family_as
   target_id: illusionbench-3c643c29

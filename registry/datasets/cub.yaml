@@ -59,6 +59,14 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: official_family_located_variant_unpinned
+- kind: source_audit_refresh
+  url: https://www.vision.caltech.edu/datasets/cub_200_2011/
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 1 URL probed (HEAD only): 1 reachable.'
 source_url: https://www.vision.caltech.edu/datasets/cub_200_2011/
 relationships:
 - type: same_source_family_as

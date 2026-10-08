@@ -78,4 +78,12 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_recipe_and_render_source_identified_outputs_unverified
+- kind: source_audit_refresh
+  url: https://github.com/Raphoo/linear-mech-vlms/tree/main/spatial_id_derivation
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 2 URLs probed (HEAD only): 2 reachable. 1 of them gave no information.'
 source_url: https://github.com/Raphoo/linear-mech-vlms/tree/main/spatial_id_derivation

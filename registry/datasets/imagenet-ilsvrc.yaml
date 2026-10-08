@@ -64,6 +64,13 @@ evidence:
   audit_file: work/sources/source-audit-jobs-batch3.json
   checked_on: '2026-09-22'
   source_identity_status: family_only
+- kind: source_audit_refresh
+  url: https://www.image-net.org/challenges/LSVRC/
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'unchanged: a reachable page says nothing about whether the files are public, so the prior state
+    stands. 2 URLs probed (HEAD only): 2 reachable.'
 source_url: https://www.image-net.org/challenges/LSVRC/
 relationships:
 - type: same_source_family_as

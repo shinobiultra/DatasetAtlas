@@ -67,4 +67,11 @@ evidence:
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_refresh
+  url: https://github.com/raosudha89/GYAFC-corpus/tree/fe2da425ad91933b30097e7d2ed05e428e95ba92
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'unchanged: a reachable page says nothing about whether the files are public, so the prior state
+    stands. 2 URLs probed (HEAD only): 2 reachable.'
 source_url: https://github.com/raosudha89/GYAFC-corpus/tree/fe2da425ad91933b30097e7d2ed05e428e95ba92

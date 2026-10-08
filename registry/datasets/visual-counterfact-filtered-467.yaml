@@ -75,4 +75,12 @@ evidence:
   note: Reconstruction of the current author name/plural/color-overlap filters selects 469 from the current
     493-row color release. This is not evidence of the historical 467-row membership; no substitute subset
     is published or indexed.
+- kind: source_audit_refresh
+  url: https://github.com/nlietzow/vision-default-prior-override
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 1 URL probed (HEAD only): 1 reachable.'
 source_url: https://github.com/nlietzow/vision-default-prior-override

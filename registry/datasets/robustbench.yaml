@@ -83,4 +83,12 @@ evidence:
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: benchmark_protocol_not_standalone_dataset
+- kind: source_audit_refresh
+  url: https://github.com/RobustBench/robustbench/tree/78fcc9e48a07a861268f295a777b975f25155964
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 1 URL probed (HEAD only): 1 reachable.'
 source_url: https://github.com/RobustBench/robustbench/tree/78fcc9e48a07a861268f295a777b975f25155964

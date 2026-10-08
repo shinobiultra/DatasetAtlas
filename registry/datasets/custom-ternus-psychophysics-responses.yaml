@@ -78,4 +78,13 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: paper_primary_collection_release_unverified
+- kind: source_audit_refresh
+  url: https://link.springer.com/article/10.3758/s13423-020-01786-9
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 2 URLs probed (HEAD only): 1 reachable, 1 redirect refused. 1 of them gave no
+    information.'
 source_url: https://doi.org/10.3758/s13423-020-01786-9

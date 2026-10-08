@@ -51,3 +51,33 @@ evidence:
     In
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/ExplainableML/vla-gender-bias
+  checked_on: '2026-10-08'
+  note: 'Benchmark introduced by Girrbach et al. (arXiv 2410.19314): 5,000 images, 1,000 each from FairFace,
+    MIAP, PHASE and PATA (FairFace in two padding variants), balanced for gender and, where annotated,
+    ethnicity, with trait, skill and occupation prompts. The author repository holds code and a setup_data.sh
+    recipe.'
+  source_identity_status: author_recipe_located_no_hosted_data
+- kind: source_audit_access
+  url: https://github.com/ExplainableML/vla-gender-bias
+  checked_on: '2026-10-08'
+  note: The README directs users to run setup_data.sh, which downloads and processes the source datasets
+    (about 100 GB of disk and about 24 hours per the README). It offers no hosted copy of the 5,000 selected
+    images; the recipe is public, but each source dataset keeps its own access route.
+  source_identity_status: author_recipe_located_no_hosted_data
+  disposition: unchanged
+  observation: recipe_only_no_hosted_release
+- kind: source_audit_rights
+  url: https://github.com/ExplainableML/vla-gender-bias
+  checked_on: '2026-10-08'
+  note: The README text read states no licence. The images come from FairFace, MIAP, PHASE and PATA, whose
+    own terms apply; redistribution of the selected images is not approved here.
+  source_identity_status: author_recipe_located_no_hosted_data
+- kind: source_audit_refresh
+  url: https://github.com/ExplainableML/vla-gender-bias
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'unchanged: read from public pages on 2026-10-08 (the source_audit_access item of that date),
+    not from a probe. 1 URL probed (HEAD only): 1 reachable.'

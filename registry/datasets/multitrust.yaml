@@ -88,6 +88,13 @@ evidence:
   checked_on: '2026-10-06'
   note: 'From the source inspected on 2026-10-06: Hugging Face file listing inspected: images plus JSON/CSV
     task files. Not inferred from the dataset name.'
+- kind: source_audit_refresh
+  url: https://multi-trust.github.io/
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'unchanged: a reachable page says nothing about whether the files are public, so the prior state
+    stands. 2 URLs probed (HEAD only): 2 reachable.'
 source_url: https://multi-trust.github.io/
 modalities:
 - image

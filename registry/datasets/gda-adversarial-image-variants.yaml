@@ -39,3 +39,31 @@ evidence:
     multimodal tasks: image captioning on Flickr30k [32] using the pro'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://arxiv.org/abs/2602.09431
+  checked_on: '2026-10-08'
+  note: 'Adversarial copies produced inside the Grounding-Driven Attack paper (arXiv 2602.09431): 1,000
+    images sampled from each of Flickr30k, CIFAR-10 and TextVQA validation, perturbed with PGD (epsilon
+    8/255, 100 steps) against encoders. A derived collection, not a named benchmark.'
+  source_identity_status: paper_derived_collection_no_release_located
+- kind: source_audit_access
+  url: https://arxiv.org/abs/2602.09431
+  checked_on: '2026-10-08'
+  note: The arXiv page (v2, marked under review) and the HTML text state no code, adversarial images or
+    other release. None was located.
+  source_identity_status: paper_derived_collection_no_release_located
+  disposition: still_unreleased
+  observation: no_public_release_located
+- kind: source_audit_rights
+  url: https://arxiv.org/abs/2602.09431
+  checked_on: '2026-10-08'
+  note: The perturbed images derive from Flickr30k, CIFAR-10 and TextVQA images, each under its own terms;
+    no licence for the derived images is stated.
+  source_identity_status: paper_derived_collection_no_release_located
+- kind: source_audit_refresh
+  url: https://arxiv.org/abs/2602.09431
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'still_unreleased: read from public pages on 2026-10-08 (the source_audit_access item of that
+    date), not from a probe. 1 URL probed (HEAD only): 1 reachable.'

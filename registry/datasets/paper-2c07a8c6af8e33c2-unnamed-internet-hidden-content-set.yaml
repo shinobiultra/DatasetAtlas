@@ -39,6 +39,37 @@ evidence:
     Rare errors (1.79–8.93%)'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench
+  checked_on: '2026-10-08'
+  note: The author's Hugging Face repository HC-Bench cites the SemVink paper (arXiv 2506.02803) and holds
+    object/ (56 base + 56 hidden-content images), text/ (56 images) and wild/ (53 natural/urban photographs).
+    The paper's '53 internet-sourced hidden-content images' match wild/ by count only; the paper page
+    links no release, so the match is not verified.
+  source_identity_status: author_release_identified_version_drift
+- kind: source_audit_access
+  url: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench
+  checked_on: '2026-10-08'
+  note: Public and not gated (page read without signing in; nothing downloaded). The same wild/ files
+    are already prepared under the hc-bench entry at a pinned revision, so no separate acquisition is
+    needed. Whether wild/ is the paper's exact 53-image set remains for a human to decide.
+  source_identity_status: author_release_identified_version_drift
+  disposition: released_after_audit
+  observation: author_hf_release
+- kind: source_audit_rights
+  url: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench
+  checked_on: '2026-10-08'
+  note: Hugging Face card tags MIT. Rights to the underlying internet-sourced photographs are not stated
+    and need item review; public media display is not approved.
+  source_identity_status: author_release_identified_version_drift
+  publication_decision: media_not_approved
+- kind: source_audit_refresh
+  url: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'released_after_audit: read from public pages on 2026-10-08 (the source_audit_access item of that
+    date), not from a probe. 1 URL probed (HEAD only): 1 reachable.'
 relationships:
 - type: source_subset_of
   target_id: hc-bench

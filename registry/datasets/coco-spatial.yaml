@@ -85,6 +85,14 @@ evidence:
     always correct) and links a Google Drive folder for the data. The catalogue already holds a Pathways transformation
     of both splits (coco-one 2,247 and coco-two 440 examples), which this entry now links.
   source_identity_status: author_release_identified_prepared_via_pathways_transform
+- kind: source_audit_refresh
+  url: https://github.com/amitakamath/whatsup_vlms
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 1 URL probed (HEAD only): 1 reachable.'
 source_url: https://github.com/amitakamath/whatsup_vlms
 relationships:
 - type: same_source_family_as

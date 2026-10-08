@@ -37,3 +37,34 @@ evidence:
   excerpt: CUB200, VTAB (Pruthi et al., 2020) ResNet-56 —
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://google-research.github.io/task_adaptation/
+  checked_on: '2026-10-08'
+  note: 'VTAB is the Visual Task Adaptation Benchmark of Zhai et al. (arXiv 1910.04867): 19 classification
+    tasks assembled from existing public datasets (for example Caltech101, CIFAR-100, CLEVR, EuroSAT,
+    KITTI, SUN397, SVHN). It is a benchmark suite with no single release. The survey row that mentions
+    it attributes it to Pruthi et al. 2020, which does not match the benchmark''s authors, so which resource
+    the survey means is unresolved.'
+  source_identity_status: benchmark_suite_no_single_release
+- kind: source_audit_access
+  url: https://github.com/google-research/task_adaptation
+  checked_on: '2026-10-08'
+  note: The code repository loads the member datasets through TensorFlow Datasets; its README says Diabetic
+    Retinopathy and Resisc45 cannot be downloaded automatically. There is no single VTAB archive to pin;
+    each member dataset has its own source.
+  source_identity_status: benchmark_suite_no_single_release
+  disposition: unchanged
+  observation: suite_of_existing_datasets
+- kind: source_audit_rights
+  url: https://github.com/google-research/task_adaptation
+  checked_on: '2026-10-08'
+  note: The code is Apache-2.0 per the repository. The data keep the terms of each member dataset; no
+    benchmark-wide data licence is stated.
+  source_identity_status: benchmark_suite_no_single_release
+- kind: source_audit_refresh
+  url: https://google-research.github.io/task_adaptation/
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'unchanged: read from public pages on 2026-10-08 (the source_audit_access item of that date),
+    not from a probe. 2 URLs probed (HEAD only): 2 reachable.'

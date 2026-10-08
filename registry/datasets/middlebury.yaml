@@ -39,3 +39,30 @@ evidence:
     tasks include autoencoding, denoising, fra'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://vision.middlebury.edu/
+  checked_on: '2026-10-08'
+  note: The Middlebury site hosts five separate benchmarks (stereo, multi-view stereo, MRF, optical flow,
+    color). The BAPPS paper cites its 'Middleburry dataset' to the stereo taxonomy paper (Scharstein and
+    Szeliski, IJCV 2002) while using it for frame-interpolation patch triplets, so which Middlebury data
+    it drew on is not established. A family of benchmarks, not one release.
+  source_identity_status: benchmark_family_no_single_release
+- kind: source_audit_access
+  url: https://vision.middlebury.edu/
+  checked_on: '2026-10-08'
+  note: The benchmark pages are public (page read; nothing downloaded). No single archive corresponds
+    to the paper's use, so there is nothing to pin.
+  source_identity_status: benchmark_family_no_single_release
+- kind: source_audit_rights
+  url: https://vision.middlebury.edu/
+  checked_on: '2026-10-08'
+  note: The site's front page states no licence or terms for its datasets; rights are not established.
+  source_identity_status: benchmark_family_no_single_release
+- kind: source_audit_refresh
+  url: https://vision.middlebury.edu/
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 1 URL probed (HEAD only): 1 reachable.'

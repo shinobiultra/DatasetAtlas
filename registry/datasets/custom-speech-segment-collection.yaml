@@ -40,3 +40,33 @@ evidence:
     segmen
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://proceedings.neurips.cc/paper/2019/hash/ac27b77292582bc293a51055bfc994ee-Abstract.html
+  checked_on: '2026-10-08'
+  note: Training set built by the paper's authors for a word and speaker recognition network (230,356
+    segments, 432 speaker classes, 793 word classes per the paper's text); its speech sources are WSJ,
+    Spoken Wikipedia and AudioSet background clips. The NeurIPS 2019 page for the paper lists supplemental
+    material but links no code or dataset.
+  source_identity_status: paper_built_collection_not_released
+- kind: source_audit_access
+  url: https://proceedings.neurips.cc/paper/2019/hash/ac27b77292582bc293a51055bfc994ee-Abstract.html
+  checked_on: '2026-10-08'
+  note: 'No public release of the segment collection was located on the paper''s NeurIPS page. The component
+    corpora have their own access routes (WSJ: LDC licence; Spoken Wikipedia: public project), tracked
+    under their own catalogue entries.'
+  source_identity_status: paper_built_collection_not_released
+  disposition: still_unreleased
+  observation: no_public_release_located
+- kind: source_audit_rights
+  url: https://proceedings.neurips.cc/paper/2019/hash/ac27b77292582bc293a51055bfc994ee-Abstract.html
+  checked_on: '2026-10-08'
+  note: Segments derived from LDC Wall Street Journal speech inherit the LDC agreement (no public redistribution,
+    per the registry's own WSJ audit); rights to any release are unverified.
+  source_identity_status: paper_built_collection_not_released
+- kind: source_audit_refresh
+  url: https://proceedings.neurips.cc/paper/2019/hash/ac27b77292582bc293a51055bfc994ee-Abstract.html
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'still_unreleased: read from public pages on 2026-10-08 (the source_audit_access item of that
+    date), not from a probe. 1 URL probed (HEAD only): 1 reachable.'

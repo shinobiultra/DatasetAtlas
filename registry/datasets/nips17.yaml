@@ -102,6 +102,14 @@ evidence:
   checked_on: '2026-10-06'
   note: 'From the source inspected on 2026-10-06: CleverHans dev_dataset.csv inspected:
     rows are image URLs with labels. Not inferred from the dataset name.'
+- kind: source_audit_refresh
+  url: https://github.com/cleverhans-lab/cleverhans/tree/master/cleverhans_v3.1.0/examples/nips17_adversarial_competition/dataset
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 1 URL probed (HEAD only): 1 reachable.'
 relationships:
 - type: same_source_family_as
   target_id: saegis-clean-and-adversarial-splits

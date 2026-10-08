@@ -71,3 +71,11 @@ evidence:
     race2, gender1 (12 each), gender_words_expanded (24). The README says the CFD and OASIS images come
     from their own sites and that templates and code will be added later.'
   source_identity_status: author_vocabulary_released_phrase_list_not_released
+- kind: source_audit_refresh
+  url: https://aclanthology.org/2025.findings-acl.955/
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 2 URLs probed (HEAD only): 2 reachable.'

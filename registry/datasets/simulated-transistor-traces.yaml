@@ -77,4 +77,12 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_release_claim_conflicts_with_repo_readme
+- kind: source_audit_refresh
+  url: https://github.com/ericmjonas/neuroprocdata
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 2 URLs probed (HEAD only): 2 reachable.'
 source_url: https://github.com/ericmjonas/neuroprocdata

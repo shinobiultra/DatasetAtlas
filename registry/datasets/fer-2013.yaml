@@ -53,4 +53,11 @@ evidence:
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
+- kind: source_audit_refresh
+  url: https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data
+  probe_status: gone
+  http_status: 404
+  checked_on: '2026-10-08'
+  note: 'unchanged: the URL answered as removed or empty (a single observation, neither a gate nor an
+    implementation gap), so the prior state stands. 1 URL probed (HEAD only): 1 gone.'
 source_url: https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data

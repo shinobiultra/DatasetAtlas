@@ -89,4 +89,11 @@ evidence:
   http_status: 403
   scope: Authenticated HEAD using configured local credentials; no gate acceptance or application submitted.
     Metadata is public, native Parquet access is not granted.
+- kind: source_audit_refresh
+  url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/real-00000-of-00007.parquet
+  probe_status: gated_or_forbidden
+  http_status: 401
+  checked_on: '2026-10-08'
+  note: 'unchanged: a gate answer is already recorded for this entry, so the prior state stands. 3 URLs
+    probed (HEAD only): 2 reachable, 1 gated or forbidden.'
 source_url: https://github.com/UCF-CRCV/BBQ-Vision

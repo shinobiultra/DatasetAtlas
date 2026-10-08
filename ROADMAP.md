@@ -34,6 +34,23 @@ The six media integrations pass complete native-index and retained-original veri
 
 PATA now opens directly in complete scope with no preview-pack request. All 4,934 native label/URL rows and 24 caption objects are preserved and exhaustively compared with the canonical index. A separate empty-workspace run reproduced the exact snapshot; it does not increase the 84 verified preview recipe count. [PATA evidence](reports/pata-native-metadata-integration-final-20261007.json).
 
+## 2026-10-08 pass: state at stop
+
+Plan: [docs/superpowers/plans/2026-10-08-finish-atlas.md](docs/superpowers/plans/2026-10-08-finish-atlas.md). Executed by Sonnet 5.5 implementers and reviewers (the user replaced `gpt-6.1-sol` for this run); a same-family reviewer is not human acceptance. **Headline coverage numbers above are unchanged** (333 / 218 / 115) until Task 9 regenerates the CSV and status; BBQ-V would make it 219 once committed.
+
+Committed (checkpoint `f9332fa`, then one commit per task, no pushes; the baseline on the checkpoint tree was Python 1028 passed / 1 skipped, vitest 26, `prek` passed, preview-media smoke 218 datasets, complete-index smoke 216 of 216, browser 66 + 3 opt-in with local Ollama only):
+- Task 1: baseline attestation, [baseline-attestation-20261008.json](reports/baseline-attestation-20261008.json). The browser suite needs `ATLAS_PYTHON=<abs .venv python>` and `ATLAS_LINKED_PROVIDER=local-ollama-qwen35` on this machine, and it rewrites 18 tracked `reports/browser-*.json` receipts.
+- Task 2: `src/dataset_atlas/registry/source_probe.py` and `scripts/probe_sources.py`, a bounded HEAD-only probe; a timeout reads `unreachable`, never "gated". Broden's official host timed out in every probe.
+- Task 3: evidence refresh of the 98 no-preview, not-unreleased entries ([receipt](reports/candidate-source-refresh-20261008.md)): evidence-only registry edits, 0 pinnable data files, `public_unpinned` means only that a landing page answers.
+- Task 5: MultiTrust and BBQ-V were gated on 2026-10-08; the researcher has since accepted both ([gate check](reports/gate-check-20261008.json)). `webshare.ipat.gatech.edu` (first-person dataset videos) does not resolve in DNS.
+- Task 6: [identity review queue](reports/identity_review_queue.md): 145 candidate identities in 120 decisions for a person. Nothing in it changes a record.
+
+In progress, NOT committed: **Task 5b, BBQ-V** (`registry/datasets/sbbench.yaml`). Real run done: 45 Parquet shards, 54,414 rows, complete annotation index, 100 original preview images, snapshot `bbq-v-a1c78b8f73bc-parquet45-f3e4eed58c04e355`, 0.975 GB transferred, 78 MB output. Sampling is a deterministic, budget-independent two-stage selection (row group, then row; not a prevalence estimate). Still to do: live reads through the media route, the receipt, the registry evidence and coverage edits, then the full suite (8 tests in `tests/unit/test_sbbench_bbqv.py` fail until then), `prek`, `atlas datasets validate --all`, two commits. A patch and tarball of the uncommitted files are in `work/wip/` (git-ignored). The same slice changes shared code (`remote_columnar.py`, `remote_sample.py`, `worker.py`, `ranges.py`: bounded retry of connection timeouts, a clearer 401/403 message), which needs review.
+
+Not started: Task 5c (MultiTrust suite adapter; 10,549 files, 11.31 GB, accessible; plan pinned remote reads with only the 100 preview originals local, one catalogue record linking member tasks), Task 7 (SPEC §22.1 acceptance matrix), Task 8 (storage 122.4 GB against the 100 GB target; dry-run reclaim table first, then delete only verified retrievable bodies), Task 9 (regenerate reports, rebuild wheel and sdist, clean installs, full verification, remove `apps/web/node_modules`), final whole-branch review.
+
+Decisions that are the user's: the 120 identity groups; publication rights beyond CLEVR, PAIRS and EuroSAT; FACET, TIMIT/LDC, PhysioNet and other publisher gates.
+
 ## Remaining work
 
 1. **Public implementation and acquisition gaps:** MultiTrust needs per-task native adapters; PATA's complete 4,934-row label/URL/caption metadata index is implemented and verified; third-party images remain unarchived and unverified. Broden's native adapter is implemented, but the official source fails bounded connection probes. These are distinguished in the [remaining coverage audit](reports/remaining-native-coverage-audit-20261007.json); accessible source metadata is not native example coverage.

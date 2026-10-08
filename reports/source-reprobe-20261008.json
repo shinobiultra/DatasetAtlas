@@ -1,0 +1,1669 @@
+{
+  "tool": "scripts/probe_sources.py",
+  "note": "Each probe is a HEAD, or a 1-byte ranged GET after 403/405/501; no payload was downloaded and no credentials were sent. `unreachable` is a transient observation, never a gate and never an implementation gap.",
+  "runs": [
+    {
+      "generated_at_utc": "2026-10-08T03:40:38Z",
+      "mode": {
+        "blocked": true,
+        "datasets": [],
+        "extras": [
+          {
+            "dataset_id": "broden",
+            "url": "https://netdissect.csail.mit.edu/data/broden1_224.zip"
+          },
+          {
+            "dataset_id": "broden",
+            "url": "https://netdissect.csail.mit.edu/data/broden1_227.zip"
+          },
+          {
+            "dataset_id": "broden",
+            "url": "https://netdissect.csail.mit.edu/data/broden1_384.zip"
+          },
+          {
+            "dataset_id": "e-ic",
+            "url": "https://drive.google.com/drive/folders/1jBdTJxUb9wEeHnvG-RY8dv5_I4QlDpUS?usp=drive_link"
+          },
+          {
+            "dataset_id": "e-vqa",
+            "url": "https://drive.google.com/drive/folders/1jBdTJxUb9wEeHnvG-RY8dv5_I4QlDpUS?usp=drive_link"
+          },
+          {
+            "dataset_id": "e-ic",
+            "url": "https://drive.google.com/file/d/1fQzJBFkok5kFZT6QUuT-HCuYKk2Vb93O/view"
+          },
+          {
+            "dataset_id": "e-vqa",
+            "url": "https://drive.google.com/file/d/1fQzJBFkok5kFZT6QUuT-HCuYKk2Vb93O/view"
+          },
+          {
+            "dataset_id": "e-ic",
+            "url": "https://drive.google.com/uc?export=download&id=1fQzJBFkok5kFZT6QUuT-HCuYKk2Vb93O"
+          },
+          {
+            "dataset_id": "e-vqa",
+            "url": "https://drive.google.com/uc?export=download&id=1fQzJBFkok5kFZT6QUuT-HCuYKk2Vb93O"
+          },
+          {
+            "dataset_id": "e-ic",
+            "url": "https://pan.baidu.com/s/1g9nMv-5BJmztxYU-BWRdvg"
+          },
+          {
+            "dataset_id": "e-ic",
+            "url": "https://pan.baidu.com/s/15WJuPOvxRyF6GDZ-B6_NiA"
+          }
+        ]
+      },
+      "settings": {
+        "timeout": 15.0,
+        "attempts": 2
+      },
+      "dataset_ids": [
+        "broden",
+        "celeba",
+        "chicago-face-database",
+        "child-safety-intents",
+        "coco-demographic-annotations",
+        "e-ic",
+        "e-vqa",
+        "facet",
+        "facial-expression-recognition-2013",
+        "fer-2013",
+        "first-person-social-interactions-dataset",
+        "flickr30k",
+        "google-web-1t-corpus",
+        "gyafc",
+        "imagenet",
+        "imagenet-ilsvrc",
+        "imagenet-ilsvrc-2012",
+        "imagenet100",
+        "imagenetval",
+        "mma-diffusion",
+        "ms-cxr",
+        "multitrust",
+        "paper-164d7c221452ffec-unnamed-cfd-morph-collection",
+        "paper-2aa40aa13ed2a25b-unnamed-synthetic-spatial-training-set",
+        "phantom",
+        "raise1k",
+        "restricted-imagenet",
+        "ring-a-bell",
+        "rosmap",
+        "sbbench",
+        "sorrybench",
+        "timit",
+        "visu",
+        "visu-text",
+        "winoground",
+        "zerobench"
+      ],
+      "probes": [
+        {
+          "url": "http://netdissect.csail.mit.edu/data/broden1_224.zip",
+          "status": "unreachable",
+          "http_status": null,
+          "content_length": null,
+          "content_type": null,
+          "etag": null,
+          "content_digest": null,
+          "final_host": null,
+          "error": "ConnectTimeout: timed out",
+          "elapsed_s": 30.062,
+          "checked_at_utc": "2026-10-08T03:41:08Z",
+          "dataset_ids": [
+            "broden"
+          ],
+          "origins": [
+            "source_audit_access"
+          ]
+        },
+        {
+          "url": "https://aclanthology.org/2025.naacl-long.571.pdf",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": 39689879,
+          "content_type": "application/pdf",
+          "etag": "\"25d9e97-6339c2ad6452f\"",
+          "content_digest": null,
+          "final_host": "aclanthology.org",
+          "error": null,
+          "elapsed_s": 0.578,
+          "checked_at_utc": "2026-10-08T03:40:38Z",
+          "dataset_ids": [
+            "facial-expression-recognition-2013"
+          ],
+          "origins": [
+            "source_audit_rights"
+          ]
+        },
+        {
+          "url": "https://ai.meta.com/datasets/facet-downloads/",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=\"utf-8\"",
+          "etag": null,
+          "content_digest": null,
+          "final_host": "ai.meta.com",
+          "error": null,
+          "elapsed_s": 0.718,
+          "checked_at_utc": "2026-10-08T03:40:39Z",
+          "dataset_ids": [
+            "facet"
+          ],
+          "origins": [
+            "source_audit_rights"
+          ]
+        },
+        {
+          "url": "https://ai.meta.com/datasets/facet/",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=\"utf-8\"",
+          "etag": null,
+          "content_digest": null,
+          "final_host": "ai.meta.com",
+          "error": null,
+          "elapsed_s": 0.823,
+          "checked_at_utc": "2026-10-08T03:40:39Z",
+          "dataset_ids": [
+            "facet"
+          ],
+          "origins": [
+            "source_audit_access",
+            "source_audit_identity",
+            "source_audit_release",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://ai.stanford.edu/~alireza/Disney/",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": 19112,
+          "content_type": "text/html; charset=UTF-8",
+          "etag": "\"372d0014-4aa8-537ed585fbf40\"",
+          "content_digest": null,
+          "final_host": "ai.stanford.edu",
+          "error": null,
+          "elapsed_s": 0.505,
+          "checked_at_utc": "2026-10-08T03:40:39Z",
+          "dataset_ids": [
+            "first-person-social-interactions-dataset"
+          ],
+          "origins": [
+            "source_audit_access",
+            "source_audit_identity",
+            "source_audit_release",
+            "source_audit_rights",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://arxiv.org/abs/2606.24388",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": 42363,
+          "content_type": "text/html; charset=utf-8",
+          "etag": null,
+          "content_digest": null,
+          "final_host": "arxiv.org",
+          "error": null,
+          "elapsed_s": 0.051,
+          "checked_at_utc": "2026-10-08T03:40:39Z",
+          "dataset_ids": [
+            "child-safety-intents"
+          ],
+          "origins": [
+            "source_audit_rights"
+          ]
+        },
+        {
+          "url": "https://catalog.ldc.upenn.edu/LDC2006T13",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "W/\"c5d28d4b4ca4ae2cafb88a5a539068fc\"",
+          "content_digest": null,
+          "final_host": "catalog.ldc.upenn.edu",
+          "error": null,
+          "elapsed_s": 0.848,
+          "checked_at_utc": "2026-10-08T03:40:40Z",
+          "dataset_ids": [
+            "google-web-1t-corpus"
+          ],
+          "origins": [
+            "source_audit_access",
+            "source_audit_identity",
+            "source_audit_rights",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://catalog.ldc.upenn.edu/LDC93S1",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "W/\"1ac9fba6777c92692e3658f894f91b39\"",
+          "content_digest": null,
+          "final_host": "catalog.ldc.upenn.edu",
+          "error": null,
+          "elapsed_s": 0.833,
+          "checked_at_utc": "2026-10-08T03:40:40Z",
+          "dataset_ids": [
+            "timit"
+          ],
+          "origins": [
+            "source_audit_access",
+            "source_audit_identity",
+            "source_audit_rights",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://drive.google.com/drive/folders/1jBdTJxUb9wEeHnvG-RY8dv5_I4QlDpUS?usp=drive_link",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=utf-8",
+          "etag": null,
+          "content_digest": null,
+          "final_host": "drive.google.com",
+          "error": null,
+          "elapsed_s": 2.174,
+          "checked_at_utc": "2026-10-08T03:40:41Z",
+          "dataset_ids": [
+            "e-ic",
+            "e-vqa"
+          ],
+          "origins": [
+            "--extra"
+          ]
+        },
+        {
+          "url": "https://drive.google.com/file/d/1fQzJBFkok5kFZT6QUuT-HCuYKk2Vb93O/view",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": 81770,
+          "content_type": "text/html; charset=utf-8",
+          "etag": null,
+          "content_digest": null,
+          "final_host": "drive.google.com",
+          "error": null,
+          "elapsed_s": 0.348,
+          "checked_at_utc": "2026-10-08T03:40:40Z",
+          "dataset_ids": [
+            "e-ic",
+            "e-vqa"
+          ],
+          "origins": [
+            "--extra"
+          ]
+        },
+        {
+          "url": "https://drive.google.com/uc?export=download&id=1fQzJBFkok5kFZT6QUuT-HCuYKk2Vb93O",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": 2467,
+          "content_type": "text/html; charset=utf-8",
+          "etag": null,
+          "content_digest": null,
+          "final_host": "drive.usercontent.google.com",
+          "error": null,
+          "elapsed_s": 0.93,
+          "checked_at_utc": "2026-10-08T03:40:40Z",
+          "dataset_ids": [
+            "e-ic",
+            "e-vqa"
+          ],
+          "origins": [
+            "--extra"
+          ]
+        },
+        {
+          "url": "https://figshare.com/articles/media/Training_data/5483668",
+          "status": "empty_response",
+          "http_status": 202,
+          "content_length": 0,
+          "content_type": "text/html; charset=UTF-8",
+          "etag": null,
+          "content_digest": null,
+          "final_host": "figshare.com",
+          "error": null,
+          "elapsed_s": 1.681,
+          "checked_at_utc": "2026-10-08T03:40:42Z",
+          "dataset_ids": [
+            "first-person-social-interactions-dataset"
+          ],
+          "origins": [
+            "source_audit_related_links"
+          ]
+        },
+        {
+          "url": "https://github.com/CSAILVision/NetDissect/tree/20ce6f887607aadc04ab9fb3d452e4723685cbbb",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "W/\"d853f8380f13b3daa0824c862e68a9f0\"",
+          "content_digest": null,
+          "final_host": "github.com",
+          "error": null,
+          "elapsed_s": 1.027,
+          "checked_at_utc": "2026-10-08T03:40:42Z",
+          "dataset_ids": [
+            "broden"
+          ],
+          "origins": [
+            "source_audit_access",
+            "source_audit_identity",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://github.com/MadryLab/robust-features-code",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "W/\"5a611f51af7e4d4631500f56e4d93df4\"",
+          "content_digest": null,
+          "final_host": "github.com",
+          "error": null,
+          "elapsed_s": 0.982,
+          "checked_at_utc": "2026-10-08T03:40:42Z",
+          "dataset_ids": [
+            "restricted-imagenet"
+          ],
+          "origins": [
+            "source_audit_rights"
+          ]
+        },
+        {
+          "url": "https://github.com/MadryLab/robustness/blob/master/robustness/datasets.py",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "W/\"ff4baf5668f4f4d9abf595c01ba2f2f5\"",
+          "content_digest": null,
+          "final_host": "github.com",
+          "error": null,
+          "elapsed_s": 0.744,
+          "checked_at_utc": "2026-10-08T03:40:42Z",
+          "dataset_ids": [
+            "restricted-imagenet"
+          ],
+          "origins": [
+            "source_audit_identity",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://github.com/Raphoo/linear-mech-vlms/blob/main/spatial_finetuning/README.md",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "W/\"aead7932d254df9ab0fb04f89c0040be\"",
+          "content_digest": null,
+          "final_host": "github.com",
+          "error": null,
+          "elapsed_s": 0.828,
+          "checked_at_utc": "2026-10-08T03:40:42Z",
+          "dataset_ids": [
+            "paper-2aa40aa13ed2a25b-unnamed-synthetic-spatial-training-set"
+          ],
+          "origins": [
+            "source_audit_access",
+            "source_audit_identity",
+            "source_audit_release",
+            "source_audit_rights",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://github.com/SORRY-Bench/sorry-bench",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "W/\"da35046c0fc59d4f46b2db226de8d3e5\"",
+          "content_digest": null,
+          "final_host": "github.com",
+          "error": null,
+          "elapsed_s": 0.426,
+          "checked_at_utc": "2026-10-08T03:40:43Z",
+          "dataset_ids": [
+            "sorrybench"
+          ],
+          "origins": [
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://github.com/UCF-CRCV/BBQ-Vision",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "W/\"c8483bfee92680ab9c2e5e3a767335b5\"",
+          "content_digest": null,
+          "final_host": "github.com",
+          "error": null,
+          "elapsed_s": 0.466,
+          "checked_at_utc": "2026-10-08T03:40:43Z",
+          "dataset_ids": [
+            "sbbench"
+          ],
+          "origins": [
+            "source_audit_access",
+            "source_audit_identity",
+            "source_audit_release",
+            "source_audit_rights",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://github.com/chiayi-hsu/Ring-A-Bell",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "W/\"f8f0ca8c389540bc05c793f4114bf3b8\"",
+          "content_digest": null,
+          "final_host": "github.com",
+          "error": null,
+          "elapsed_s": 0.395,
+          "checked_at_utc": "2026-10-08T03:40:43Z",
+          "dataset_ids": [
+            "ring-a-bell"
+          ],
+          "origins": [
+            "source_audit_release"
+          ]
+        },
+        {
+          "url": "https://github.com/cure-lab/MMA-Diffusion/tree/563091a61193927789d891a1603b7a7a832eb844",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "W/\"e8bd1f7f882d55b8177b2dbcfc1de50f\"",
+          "content_digest": null,
+          "final_host": "github.com",
+          "error": null,
+          "elapsed_s": 0.497,
+          "checked_at_utc": "2026-10-08T03:40:43Z",
+          "dataset_ids": [
+            "mma-diffusion"
+          ],
+          "origins": [
+            "source_audit_access",
+            "source_audit_identity",
+            "source_audit_rights",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://github.com/kshitishghate/bias_prop",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "W/\"67cd5b53192ae7dcf4986f2d6d9cb2b7\"",
+          "content_digest": null,
+          "final_host": "github.com",
+          "error": null,
+          "elapsed_s": 0.431,
+          "checked_at_utc": "2026-10-08T03:40:43Z",
+          "dataset_ids": [
+            "paper-164d7c221452ffec-unnamed-cfd-morph-collection"
+          ],
+          "origins": [
+            "source_audit_access",
+            "source_audit_identity",
+            "source_audit_release",
+            "source_audit_rights",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://github.com/kshitishghate/bias_prop/tree/c0e4a922124d0c28e85be7a4d9753ac317028450",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "W/\"73bdeeace4b359a65fec837897515f3d\"",
+          "content_digest": null,
+          "final_host": "github.com",
+          "error": null,
+          "elapsed_s": 0.452,
+          "checked_at_utc": "2026-10-08T03:40:43Z",
+          "dataset_ids": [
+            "paper-164d7c221452ffec-unnamed-cfd-morph-collection"
+          ],
+          "origins": [
+            "source_audit_release"
+          ]
+        },
+        {
+          "url": "https://github.com/raosudha89/GYAFC-corpus/blob/fe2da425ad91933b30097e7d2ed05e428e95ba92/README.md",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "W/\"273ddd7ded6a5ea72c0d321323e35c7b\"",
+          "content_digest": null,
+          "final_host": "github.com",
+          "error": null,
+          "elapsed_s": 0.558,
+          "checked_at_utc": "2026-10-08T03:40:44Z",
+          "dataset_ids": [
+            "gyafc"
+          ],
+          "origins": [
+            "source_audit_rights"
+          ]
+        },
+        {
+          "url": "https://github.com/raosudha89/GYAFC-corpus/tree/fe2da425ad91933b30097e7d2ed05e428e95ba92",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "W/\"fcd31d5032798273cb51c0ab2714c8ff\"",
+          "content_digest": null,
+          "final_host": "github.com",
+          "error": null,
+          "elapsed_s": 0.464,
+          "checked_at_utc": "2026-10-08T03:40:44Z",
+          "dataset_ids": [
+            "gyafc"
+          ],
+          "origins": [
+            "source_audit_access",
+            "source_audit_identity",
+            "source_audit_release",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://github.com/zjunlp/EasyEdit/blob/14cea8245f06715684592ab55184939b99d70784/examples/MMEdit.md",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "W/\"62b3bff69352f4665e495bfc4f70e5f9\"",
+          "content_digest": null,
+          "final_host": "github.com",
+          "error": null,
+          "elapsed_s": 0.644,
+          "checked_at_utc": "2026-10-08T03:40:44Z",
+          "dataset_ids": [
+            "e-ic",
+            "e-vqa"
+          ],
+          "origins": [
+            "source_audit_access",
+            "source_audit_identity",
+            "source_audit_rights",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://huggingface.co/api/datasets/aimagelab/ViSU-Text",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": 3259,
+          "content_type": "application/json; charset=utf-8",
+          "etag": "W/\"cbb-/746lTTNp3x116dodT//hjjva+E\"",
+          "content_digest": null,
+          "final_host": "huggingface.co",
+          "error": null,
+          "elapsed_s": 0.213,
+          "checked_at_utc": "2026-10-08T03:40:44Z",
+          "dataset_ids": [
+            "visu",
+            "visu-text"
+          ],
+          "origins": [
+            "source_audit_access",
+            "source_audit_rights"
+          ]
+        },
+        {
+          "url": "https://huggingface.co/datasets/Chia15/RingABell-Nudity/tree/ce2df13b0ec372b2ca80460d5746ba8b933d6d17",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": 139326,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "W/\"2203e-fIdJgh4ecEsCMOG8Syt9fiVpxR0\"",
+          "content_digest": null,
+          "final_host": "huggingface.co",
+          "error": null,
+          "elapsed_s": 0.393,
+          "checked_at_utc": "2026-10-08T03:40:44Z",
+          "dataset_ids": [
+            "ring-a-bell"
+          ],
+          "origins": [
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://huggingface.co/datasets/aimagelab/ViSU-Text",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": 161601,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "W/\"27741-fi+Wv/GEDCt+pKJpKfB6jYNFTOY\"",
+          "content_digest": null,
+          "final_host": "huggingface.co",
+          "error": null,
+          "elapsed_s": 0.208,
+          "checked_at_utc": "2026-10-08T03:40:44Z",
+          "dataset_ids": [
+            "visu"
+          ],
+          "origins": [
+            "source_audit_identity",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://huggingface.co/datasets/aimagelab/ViSU-Text/tree/9afabb85b5570fa883b7caa0561d8c8d71d84dcd",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": 153811,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "W/\"258d3-XtewI3wIBwr010X+sEuC9b0nv04\"",
+          "content_digest": null,
+          "final_host": "huggingface.co",
+          "error": null,
+          "elapsed_s": 0.402,
+          "checked_at_utc": "2026-10-08T03:40:44Z",
+          "dataset_ids": [
+            "visu-text"
+          ],
+          "origins": [
+            "source_audit_access",
+            "source_audit_release",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://huggingface.co/datasets/facebook/winoground",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": 166713,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "W/\"28b39-l1Oi2lZbpVhJvVi9718/pAe8EiU\"",
+          "content_digest": null,
+          "final_host": "huggingface.co",
+          "error": null,
+          "elapsed_s": 0.346,
+          "checked_at_utc": "2026-10-08T03:40:44Z",
+          "dataset_ids": [
+            "winoground"
+          ],
+          "origins": [
+            "source_audit_rights"
+          ]
+        },
+        {
+          "url": "https://huggingface.co/datasets/facebook/winoground/tree/b400e173549071916ad1b3d449293bc8d8b4b763",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": 142584,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "W/\"22cf8-G5sF5LFQqlwg9s86gcZH0lAlnDc\"",
+          "content_digest": null,
+          "final_host": "huggingface.co",
+          "error": null,
+          "elapsed_s": 0.609,
+          "checked_at_utc": "2026-10-08T03:40:45Z",
+          "dataset_ids": [
+            "winoground"
+          ],
+          "origins": [
+            "source_audit_access",
+            "source_audit_identity",
+            "source_audit_release",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://huggingface.co/datasets/it4lia/PHANTOM",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": 206441,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "W/\"32669-ZCxbHwUgIIc0ltLnJGFaLOG8X7w\"",
+          "content_digest": null,
+          "final_host": "huggingface.co",
+          "error": null,
+          "elapsed_s": 0.204,
+          "checked_at_utc": "2026-10-08T03:40:44Z",
+          "dataset_ids": [
+            "phantom"
+          ],
+          "origins": [
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://huggingface.co/datasets/it4lia/PHANTOM/tree/df168bd0fe810cdce256caddf6c9596f55760afb",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": 173697,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "W/\"2a681-O2RGK6mO5YdGtHr4aly+hzetCFs\"",
+          "content_digest": null,
+          "final_host": "huggingface.co",
+          "error": null,
+          "elapsed_s": 0.6,
+          "checked_at_utc": "2026-10-08T03:40:45Z",
+          "dataset_ids": [
+            "child-safety-intents"
+          ],
+          "origins": [
+            "source_audit_access",
+            "source_audit_identity",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://huggingface.co/datasets/thu-ml/MultiTrust/tree/84dc74754959e9f52b67c5185700f4f7fcd8c4df",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": 122572,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "W/\"1decc-RroxvfwkH+axqEPO9tkepVmYBWU\"",
+          "content_digest": null,
+          "final_host": "huggingface.co",
+          "error": null,
+          "elapsed_s": 0.434,
+          "checked_at_utc": "2026-10-08T03:40:45Z",
+          "dataset_ids": [
+            "multitrust"
+          ],
+          "origins": [
+            "source_audit_release"
+          ]
+        },
+        {
+          "url": "https://loki.disi.unitn.it/RAISE/",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=UTF-8",
+          "etag": null,
+          "content_digest": null,
+          "final_host": "loki.disi.unitn.it",
+          "error": null,
+          "elapsed_s": 5.95,
+          "checked_at_utc": "2026-10-08T03:40:51Z",
+          "dataset_ids": [
+            "raise1k"
+          ],
+          "origins": [
+            "source_audit_identity",
+            "source_audit_rights",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=UTF-8",
+          "etag": null,
+          "content_digest": null,
+          "final_host": "mmlab.ie.cuhk.edu.hk",
+          "error": null,
+          "elapsed_s": 0.978,
+          "checked_at_utc": "2026-10-08T03:40:46Z",
+          "dataset_ids": [
+            "celeba"
+          ],
+          "origins": [
+            "source_audit_access",
+            "source_audit_identity",
+            "source_audit_release",
+            "source_audit_rights",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://multi-trust.github.io/",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": 15112,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "\"67c56b7f-3b08\"",
+          "content_digest": null,
+          "final_host": "multi-trust.github.io",
+          "error": null,
+          "elapsed_s": 0.321,
+          "checked_at_utc": "2026-10-08T03:40:45Z",
+          "dataset_ids": [
+            "multitrust"
+          ],
+          "origins": [
+            "source_audit_access",
+            "source_audit_identity",
+            "source_audit_rights",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://netdissect.csail.mit.edu/",
+          "status": "unreachable",
+          "http_status": null,
+          "content_length": null,
+          "content_type": null,
+          "etag": null,
+          "content_digest": null,
+          "final_host": null,
+          "error": "ConnectTimeout: timed out",
+          "elapsed_s": 30.783,
+          "checked_at_utc": "2026-10-08T03:41:16Z",
+          "dataset_ids": [
+            "broden"
+          ],
+          "origins": [
+            "source_audit_rights"
+          ]
+        },
+        {
+          "url": "https://netdissect.csail.mit.edu/data/broden1_224.zip",
+          "status": "unreachable",
+          "http_status": null,
+          "content_length": null,
+          "content_type": null,
+          "etag": null,
+          "content_digest": null,
+          "final_host": null,
+          "error": "ConnectTimeout: timed out",
+          "elapsed_s": 30.18,
+          "checked_at_utc": "2026-10-08T03:41:16Z",
+          "dataset_ids": [
+            "broden"
+          ],
+          "origins": [
+            "--extra"
+          ]
+        },
+        {
+          "url": "https://netdissect.csail.mit.edu/data/broden1_227.zip",
+          "status": "unreachable",
+          "http_status": null,
+          "content_length": null,
+          "content_type": null,
+          "etag": null,
+          "content_digest": null,
+          "final_host": null,
+          "error": "ConnectTimeout: timed out",
+          "elapsed_s": 30.055,
+          "checked_at_utc": "2026-10-08T03:41:21Z",
+          "dataset_ids": [
+            "broden"
+          ],
+          "origins": [
+            "--extra"
+          ]
+        },
+        {
+          "url": "https://netdissect.csail.mit.edu/data/broden1_384.zip",
+          "status": "unreachable",
+          "http_status": null,
+          "content_length": null,
+          "content_type": null,
+          "etag": null,
+          "content_digest": null,
+          "final_host": null,
+          "error": "ConnectTimeout: timed out",
+          "elapsed_s": 30.067,
+          "checked_at_utc": "2026-10-08T03:41:38Z",
+          "dataset_ids": [
+            "broden"
+          ],
+          "origins": [
+            "--extra"
+          ]
+        },
+        {
+          "url": "https://pan.baidu.com/s/15WJuPOvxRyF6GDZ-B6_NiA",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=utf-8",
+          "etag": null,
+          "content_digest": null,
+          "final_host": "pan.baidu.com",
+          "error": null,
+          "elapsed_s": 12.116,
+          "checked_at_utc": "2026-10-08T03:41:28Z",
+          "dataset_ids": [
+            "e-ic"
+          ],
+          "origins": [
+            "--extra"
+          ]
+        },
+        {
+          "url": "https://pan.baidu.com/s/1g9nMv-5BJmztxYU-BWRdvg",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=utf-8",
+          "etag": null,
+          "content_digest": null,
+          "final_host": "pan.baidu.com",
+          "error": null,
+          "elapsed_s": 11.926,
+          "checked_at_utc": "2026-10-08T03:41:28Z",
+          "dataset_ids": [
+            "e-ic"
+          ],
+          "origins": [
+            "--extra"
+          ]
+        },
+        {
+          "url": "https://physionet.org/content/ms-cxr/1.1.0/",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": 68513,
+          "content_type": "text/html; charset=utf-8",
+          "etag": null,
+          "content_digest": null,
+          "final_host": "physionet.org",
+          "error": null,
+          "elapsed_s": 1.407,
+          "checked_at_utc": "2026-10-08T03:41:22Z",
+          "dataset_ids": [
+            "ms-cxr"
+          ],
+          "origins": [
+            "source_audit_identity",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://princetonvisualai.github.io/imagecaptioning-bias/",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": 10849,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "\"69c55aa2-2a61\"",
+          "content_digest": null,
+          "final_host": "princetonvisualai.github.io",
+          "error": null,
+          "elapsed_s": 0.207,
+          "checked_at_utc": "2026-10-08T03:41:22Z",
+          "dataset_ids": [
+            "coco-demographic-annotations"
+          ],
+          "origins": [
+            "source_audit_access",
+            "source_audit_identity",
+            "source_audit_rights",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://shannon.cs.illinois.edu/DenotationGraph/",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": 8165,
+          "content_type": "text/html",
+          "etag": null,
+          "content_digest": null,
+          "final_host": "shannon.cs.illinois.edu",
+          "error": null,
+          "elapsed_s": 1.626,
+          "checked_at_utc": "2026-10-08T03:41:24Z",
+          "dataset_ids": [
+            "flickr30k"
+          ],
+          "origins": [
+            "source_audit_access",
+            "source_audit_identity",
+            "source_audit_release",
+            "source_audit_rights",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://www.chicagofaces.org/",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=UTF-8",
+          "etag": null,
+          "content_digest": null,
+          "final_host": "www.chicagofaces.org",
+          "error": null,
+          "elapsed_s": 0.857,
+          "checked_at_utc": "2026-10-08T03:41:25Z",
+          "dataset_ids": [
+            "chicago-face-database",
+            "paper-164d7c221452ffec-unnamed-cfd-morph-collection"
+          ],
+          "origins": [
+            "source_audit_access",
+            "source_audit_identity",
+            "source_audit_related_links",
+            "source_audit_release",
+            "source_audit_rights",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://www.image-net.org/",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=UTF-8",
+          "etag": null,
+          "content_digest": null,
+          "final_host": "www.image-net.org",
+          "error": null,
+          "elapsed_s": 0.569,
+          "checked_at_utc": "2026-10-08T03:41:25Z",
+          "dataset_ids": [
+            "imagenet"
+          ],
+          "origins": [
+            "source_audit_identity",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://www.image-net.org/challenges/LSVRC/",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=UTF-8",
+          "etag": null,
+          "content_digest": null,
+          "final_host": "www.image-net.org",
+          "error": null,
+          "elapsed_s": 0.5,
+          "checked_at_utc": "2026-10-08T03:41:26Z",
+          "dataset_ids": [
+            "imagenet-ilsvrc",
+            "imagenet-ilsvrc-2012",
+            "imagenet100",
+            "imagenetval"
+          ],
+          "origins": [
+            "source_audit_identity",
+            "source_audit_rights",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://www.image-net.org/download.php",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html; charset=UTF-8",
+          "etag": null,
+          "content_digest": null,
+          "final_host": "www.image-net.org",
+          "error": null,
+          "elapsed_s": 0.504,
+          "checked_at_utc": "2026-10-08T03:41:26Z",
+          "dataset_ids": [
+            "imagenet",
+            "imagenet-ilsvrc",
+            "imagenetval"
+          ],
+          "origins": [
+            "source_audit_rights"
+          ]
+        },
+        {
+          "url": "https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data",
+          "status": "gone",
+          "http_status": 404,
+          "content_length": 134,
+          "content_type": "text/html; charset=UTF-8",
+          "etag": null,
+          "content_digest": null,
+          "final_host": "www.kaggle.com",
+          "error": null,
+          "elapsed_s": 0.289,
+          "checked_at_utc": "2026-10-08T03:41:27Z",
+          "dataset_ids": [
+            "facial-expression-recognition-2013",
+            "fer-2013"
+          ],
+          "origins": [
+            "source_audit_identity",
+            "source_audit_rights",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://www.physionet.org/content/ms-cxr/view-license/1.1.0/",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": 14418,
+          "content_type": "text/html; charset=utf-8",
+          "etag": null,
+          "content_digest": null,
+          "final_host": "www.physionet.org",
+          "error": null,
+          "elapsed_s": 1.0,
+          "checked_at_utc": "2026-10-08T03:41:28Z",
+          "dataset_ids": [
+            "ms-cxr"
+          ],
+          "origins": [
+            "source_audit_rights"
+          ]
+        },
+        {
+          "url": "https://www.radc.rush.edu/molecular_networks/datasets.html",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": 2750,
+          "content_type": "text/html",
+          "etag": "W/\"2750-1519319205000\"",
+          "content_digest": null,
+          "final_host": "www.radc.rush.edu",
+          "error": null,
+          "elapsed_s": 0.844,
+          "checked_at_utc": "2026-10-08T03:41:28Z",
+          "dataset_ids": [
+            "rosmap"
+          ],
+          "origins": [
+            "source_audit_access",
+            "source_audit_identity",
+            "source_url"
+          ]
+        },
+        {
+          "url": "https://www.radc.rush.edu/resources.htm",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": null,
+          "content_type": "text/html;charset=UTF-8",
+          "etag": null,
+          "content_digest": null,
+          "final_host": "www.radc.rush.edu",
+          "error": null,
+          "elapsed_s": 0.827,
+          "checked_at_utc": "2026-10-08T03:41:29Z",
+          "dataset_ids": [
+            "rosmap"
+          ],
+          "origins": [
+            "source_audit_rights"
+          ]
+        },
+        {
+          "url": "https://zerobench.github.io/",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": 565625,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "\"6ab6e7b9-8a179\"",
+          "content_digest": null,
+          "final_host": "zerobench.github.io",
+          "error": null,
+          "elapsed_s": 0.061,
+          "checked_at_utc": "2026-10-08T03:41:28Z",
+          "dataset_ids": [
+            "zerobench"
+          ],
+          "origins": [
+            "source_audit_identity",
+            "source_audit_rights",
+            "source_url"
+          ]
+        }
+      ]
+    },
+    {
+      "generated_at_utc": "2026-10-08T03:42:10Z",
+      "mode": {
+        "blocked": false,
+        "datasets": [],
+        "extras": [
+          {
+            "dataset_id": "sbbench",
+            "url": "https://huggingface.co/datasets/ucf-crcv/BBQ-V/tree/a1c78b8f73bc40408993414e3d94714a6a9169d3"
+          },
+          {
+            "dataset_id": "sbbench",
+            "url": "https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/real-00000-of-00007.parquet"
+          }
+        ]
+      },
+      "settings": {
+        "timeout": 15.0,
+        "attempts": 2
+      },
+      "dataset_ids": [
+        "sbbench"
+      ],
+      "probes": [
+        {
+          "url": "https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/real-00000-of-00007.parquet",
+          "status": "gated_or_forbidden",
+          "http_status": 401,
+          "content_length": 124,
+          "content_type": "text/plain; charset=utf-8",
+          "etag": "W/\"7c-SVcMjLZreuT9daDyl5KKkr5zMjY\"",
+          "content_digest": null,
+          "final_host": "huggingface.co",
+          "error": null,
+          "elapsed_s": 0.274,
+          "checked_at_utc": "2026-10-08T03:42:10Z",
+          "dataset_ids": [
+            "sbbench"
+          ],
+          "origins": [
+            "--extra"
+          ]
+        },
+        {
+          "url": "https://huggingface.co/datasets/ucf-crcv/BBQ-V/tree/a1c78b8f73bc40408993414e3d94714a6a9169d3",
+          "status": "reachable",
+          "http_status": 200,
+          "content_length": 131264,
+          "content_type": "text/html; charset=utf-8",
+          "etag": "W/\"200c0-AtntRQ522vbolCnTsiVzegdbVsE\"",
+          "content_digest": null,
+          "final_host": "huggingface.co",
+          "error": null,
+          "elapsed_s": 0.443,
+          "checked_at_utc": "2026-10-08T03:42:10Z",
+          "dataset_ids": [
+            "sbbench"
+          ],
+          "origins": [
+            "--extra"
+          ]
+        }
+      ]
+    },
+    {
+      "generated_at_utc": "2026-10-08T03:52:06Z",
+      "mode": {
+        "blocked": false,
+        "datasets": [],
+        "extras": [
+          {
+            "dataset_id": "broden",
+            "url": "http://netdissect.csail.mit.edu/data/broden1_224.zip"
+          },
+          {
+            "dataset_id": "broden",
+            "url": "https://netdissect.csail.mit.edu/"
+          },
+          {
+            "dataset_id": "broden",
+            "url": "https://netdissect.csail.mit.edu/data/broden1_224.zip"
+          },
+          {
+            "dataset_id": "broden",
+            "url": "https://netdissect.csail.mit.edu/data/broden1_227.zip"
+          },
+          {
+            "dataset_id": "broden",
+            "url": "https://netdissect.csail.mit.edu/data/broden1_384.zip"
+          }
+        ]
+      },
+      "settings": {
+        "timeout": 15.0,
+        "attempts": 2
+      },
+      "dataset_ids": [
+        "broden"
+      ],
+      "probes": [
+        {
+          "url": "http://netdissect.csail.mit.edu/data/broden1_224.zip",
+          "status": "unreachable",
+          "http_status": null,
+          "content_length": null,
+          "content_type": null,
+          "etag": null,
+          "content_digest": null,
+          "final_host": null,
+          "error": "ConnectTimeout: timed out",
+          "elapsed_s": 30.062,
+          "checked_at_utc": "2026-10-08T03:52:36Z",
+          "dataset_ids": [
+            "broden"
+          ],
+          "origins": [
+            "--extra"
+          ]
+        },
+        {
+          "url": "https://netdissect.csail.mit.edu/",
+          "status": "unreachable",
+          "http_status": null,
+          "content_length": null,
+          "content_type": null,
+          "etag": null,
+          "content_digest": null,
+          "final_host": null,
+          "error": "ConnectTimeout: timed out",
+          "elapsed_s": 30.057,
+          "checked_at_utc": "2026-10-08T03:52:36Z",
+          "dataset_ids": [
+            "broden"
+          ],
+          "origins": [
+            "--extra"
+          ]
+        },
+        {
+          "url": "https://netdissect.csail.mit.edu/data/broden1_224.zip",
+          "status": "unreachable",
+          "http_status": null,
+          "content_length": null,
+          "content_type": null,
+          "etag": null,
+          "content_digest": null,
+          "final_host": null,
+          "error": "ConnectTimeout: timed out",
+          "elapsed_s": 30.061,
+          "checked_at_utc": "2026-10-08T03:52:36Z",
+          "dataset_ids": [
+            "broden"
+          ],
+          "origins": [
+            "--extra"
+          ]
+        },
+        {
+          "url": "https://netdissect.csail.mit.edu/data/broden1_227.zip",
+          "status": "unreachable",
+          "http_status": null,
+          "content_length": null,
+          "content_type": null,
+          "etag": null,
+          "content_digest": null,
+          "final_host": null,
+          "error": "ConnectTimeout: timed out",
+          "elapsed_s": 30.059,
+          "checked_at_utc": "2026-10-08T03:52:36Z",
+          "dataset_ids": [
+            "broden"
+          ],
+          "origins": [
+            "--extra"
+          ]
+        },
+        {
+          "url": "https://netdissect.csail.mit.edu/data/broden1_384.zip",
+          "status": "unreachable",
+          "http_status": null,
+          "content_length": null,
+          "content_type": null,
+          "etag": null,
+          "content_digest": null,
+          "final_host": null,
+          "error": "ConnectTimeout: timed out",
+          "elapsed_s": 30.038,
+          "checked_at_utc": "2026-10-08T03:53:06Z",
+          "dataset_ids": [
+            "broden"
+          ],
+          "origins": [
+            "--extra"
+          ]
+        }
+      ]
+    },
+    {
+      "generated_at_utc": "2026-10-08T04:02:58Z",
+      "mode": {
+        "blocked": false,
+        "datasets": [],
+        "extras": [
+          {
+            "dataset_id": "broden",
+            "url": "http://netdissect.csail.mit.edu/data/broden1_224.zip"
+          },
+          {
+            "dataset_id": "broden",
+            "url": "https://netdissect.csail.mit.edu/"
+          },
+          {
+            "dataset_id": "broden",
+            "url": "https://netdissect.csail.mit.edu/data/broden1_224.zip"
+          },
+          {
+            "dataset_id": "broden",
+            "url": "https://netdissect.csail.mit.edu/data/broden1_227.zip"
+          },
+          {
+            "dataset_id": "broden",
+            "url": "https://netdissect.csail.mit.edu/data/broden1_384.zip"
+          }
+        ]
+      },
+      "settings": {
+        "timeout": 15.0,
+        "attempts": 2
+      },
+      "dataset_ids": [
+        "broden"
+      ],
+      "probes": [
+        {
+          "url": "http://netdissect.csail.mit.edu/data/broden1_224.zip",
+          "status": "unreachable",
+          "http_status": null,
+          "content_length": null,
+          "content_type": null,
+          "etag": null,
+          "content_digest": null,
+          "final_host": null,
+          "error": "ConnectTimeout: timed out",
+          "elapsed_s": 30.219,
+          "checked_at_utc": "2026-10-08T04:03:28Z",
+          "dataset_ids": [
+            "broden"
+          ],
+          "origins": [
+            "--extra"
+          ]
+        },
+        {
+          "url": "https://netdissect.csail.mit.edu/",
+          "status": "unreachable",
+          "http_status": null,
+          "content_length": null,
+          "content_type": null,
+          "etag": null,
+          "content_digest": null,
+          "final_host": null,
+          "error": "ConnectTimeout: timed out",
+          "elapsed_s": 30.213,
+          "checked_at_utc": "2026-10-08T04:03:28Z",
+          "dataset_ids": [
+            "broden"
+          ],
+          "origins": [
+            "--extra"
+          ]
+        },
+        {
+          "url": "https://netdissect.csail.mit.edu/data/broden1_224.zip",
+          "status": "unreachable",
+          "http_status": null,
+          "content_length": null,
+          "content_type": null,
+          "etag": null,
+          "content_digest": null,
+          "final_host": null,
+          "error": "ConnectTimeout: timed out",
+          "elapsed_s": 30.214,
+          "checked_at_utc": "2026-10-08T04:03:28Z",
+          "dataset_ids": [
+            "broden"
+          ],
+          "origins": [
+            "--extra"
+          ]
+        },
+        {
+          "url": "https://netdissect.csail.mit.edu/data/broden1_227.zip",
+          "status": "unreachable",
+          "http_status": null,
+          "content_length": null,
+          "content_type": null,
+          "etag": null,
+          "content_digest": null,
+          "final_host": null,
+          "error": "ConnectTimeout: timed out",
+          "elapsed_s": 30.213,
+          "checked_at_utc": "2026-10-08T04:03:28Z",
+          "dataset_ids": [
+            "broden"
+          ],
+          "origins": [
+            "--extra"
+          ]
+        },
+        {
+          "url": "https://netdissect.csail.mit.edu/data/broden1_384.zip",
+          "status": "unreachable",
+          "http_status": null,
+          "content_length": null,
+          "content_type": null,
+          "etag": null,
+          "content_digest": null,
+          "final_host": null,
+          "error": "ConnectTimeout: timed out",
+          "elapsed_s": 30.039,
+          "checked_at_utc": "2026-10-08T04:03:58Z",
+          "dataset_ids": [
+            "broden"
+          ],
+          "origins": [
+            "--extra"
+          ]
+        }
+      ]
+    }
+  ],
+  "repeated_probes": [
+    {
+      "url": "http://netdissect.csail.mit.edu/data/broden1_224.zip",
+      "probes": [
+        {
+          "checked_at_utc": "2026-10-08T03:41:08Z",
+          "status": "unreachable",
+          "http_status": null
+        },
+        {
+          "checked_at_utc": "2026-10-08T03:52:36Z",
+          "status": "unreachable",
+          "http_status": null
+        },
+        {
+          "checked_at_utc": "2026-10-08T04:03:28Z",
+          "status": "unreachable",
+          "http_status": null
+        }
+      ]
+    },
+    {
+      "url": "https://netdissect.csail.mit.edu/",
+      "probes": [
+        {
+          "checked_at_utc": "2026-10-08T03:41:16Z",
+          "status": "unreachable",
+          "http_status": null
+        },
+        {
+          "checked_at_utc": "2026-10-08T03:52:36Z",
+          "status": "unreachable",
+          "http_status": null
+        },
+        {
+          "checked_at_utc": "2026-10-08T04:03:28Z",
+          "status": "unreachable",
+          "http_status": null
+        }
+      ]
+    },
+    {
+      "url": "https://netdissect.csail.mit.edu/data/broden1_224.zip",
+      "probes": [
+        {
+          "checked_at_utc": "2026-10-08T03:41:16Z",
+          "status": "unreachable",
+          "http_status": null
+        },
+        {
+          "checked_at_utc": "2026-10-08T03:52:36Z",
+          "status": "unreachable",
+          "http_status": null
+        },
+        {
+          "checked_at_utc": "2026-10-08T04:03:28Z",
+          "status": "unreachable",
+          "http_status": null
+        }
+      ]
+    },
+    {
+      "url": "https://netdissect.csail.mit.edu/data/broden1_227.zip",
+      "probes": [
+        {
+          "checked_at_utc": "2026-10-08T03:41:21Z",
+          "status": "unreachable",
+          "http_status": null
+        },
+        {
+          "checked_at_utc": "2026-10-08T03:52:36Z",
+          "status": "unreachable",
+          "http_status": null
+        },
+        {
+          "checked_at_utc": "2026-10-08T04:03:28Z",
+          "status": "unreachable",
+          "http_status": null
+        }
+      ]
+    },
+    {
+      "url": "https://netdissect.csail.mit.edu/data/broden1_384.zip",
+      "probes": [
+        {
+          "checked_at_utc": "2026-10-08T03:41:38Z",
+          "status": "unreachable",
+          "http_status": null
+        },
+        {
+          "checked_at_utc": "2026-10-08T03:53:06Z",
+          "status": "unreachable",
+          "http_status": null
+        },
+        {
+          "checked_at_utc": "2026-10-08T04:03:58Z",
+          "status": "unreachable",
+          "http_status": null
+        }
+      ]
+    }
+  ]
+}

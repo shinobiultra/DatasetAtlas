@@ -1,0 +1,26 @@
+{
+  "verified_at_utc": "2026-10-06T05:12:47.490054+00:00",
+  "dataset_id": "visu-text",
+  "snapshot_id": "visu-text-58d1117cb0d29527958928db",
+  "status": "passed",
+  "native_rows_compared": 168700,
+  "split_counts": {
+    "test": 5000,
+    "train": 158700,
+    "validation": 5000
+  },
+  "native_coco_id_types": {
+    "test:str": 5000,
+    "train:int": 158700,
+    "validation:str": 5000
+  },
+  "original_json_sha256": {
+    "test": "aac393f14187a9d8dfd5e16673a260d783a9d54edccf64d54424fcd2e9515094",
+    "train": "257bc9c6238fe820b9d67b3149bb99d3d2bd69d8dbf9ab03c7c31c3600f20cd1",
+    "validation": "6ceb150be98c7535f070a41455b1f9483bbd4bff1748b63e3e749146457f86a4"
+  },
+  "all_native_caption_pairs_and_fields_unchanged": true,
+  "image_assets": 0,
+  "external_model_requests": 0,
+  "scope": "Authorized original ViSU-Text caption-pair release; unsafe vision images remain deliberately unreleased."
+}

@@ -17,6 +17,40 @@ MAX_IMAGE_BYTES = 10_000_000
 IMAGE_MAGIC = ((b'\x89PNG\r\n\x1a\n', '.png'), (b'\xff\xd8\xff', '.jpg'))
 
 
+@converter('golan_presented_stimuli')
+def golan_presented_stimuli(params, inputs, output_dir, check):
+    """Retain only the PNGs presented to participants, in the maintained alternating experiment order."""
+    import tarfile
+    from itertools import zip_longest
+    from dataset_atlas.adapters.core import _safe_relative
+    media_dir=Path(output_dir)/'media'
+    groups={1:[],2:[]}; seen=set()
+    with tarfile.open(inputs['source_archive'],'r|gz') as archive:
+        for member in archive:
+            check()
+            relative=member.name.partition('/')[2]
+            if not relative.endswith('.png') or '/stimuli_presented_in_behavioral_experiment/' not in relative:continue
+            _safe_relative(relative)
+            if not member.isfile() or relative in seen:raise ValueError('Presented stimulus must be a unique regular file')
+            experiment=1 if relative.startswith('experiment_1_results/') else 2 if relative.startswith('experiment_2_results/') else None
+            if experiment is None:raise ValueError('Unknown presented experiment')
+            stream=archive.extractfile(member)
+            if stream is None or member.size>MAX_IMAGE_BYTES:raise ValueError('Presented stimulus exceeds image bound')
+            data=checked_image(stream.read(MAX_IMAGE_BYTES+1));stream.close()
+            if image_extension(data)!='.png':raise ValueError('Presented stimulus is not PNG')
+            store_image(media_dir,relative,data);seen.add(relative)
+            name=Path(relative).name
+            groups[experiment].append({'path':relative,'experiment':'MNIST' if experiment==1 else 'CIFAR-10',
+                'replication':next((p.removeprefix('replication_') for p in Path(relative).parts if p.startswith('replication_')),''),
+                'stimulus_kind':'natural_control' if name.startswith(('MNIST_','CIFAR_10_test_')) else 'synthesized_controversial',
+                'source_bytes':str(len(data)),'source_sha256':hashlib.sha256(data).hexdigest()})
+    if [len(groups[1]),len(groups[2])]!=params.get('counts',[820,1043]):raise ValueError('Presented experiment counts differ')
+    def rows():
+        for pair in zip_longest(*[sorted(groups[i],key=lambda row:row['path']) for i in (1,2)]):
+            yield from (row for row in pair if row is not None)
+    return {**write_rows(rows,Path(output_dir)/'records.csv','csv',check),'media_dir':media_dir}
+
+
 def image_extension(data: bytes) -> str:
     """The file extension for a PNG/JPEG/WebP payload, judged from its signature; anything else is refused."""
     for magic, extension in IMAGE_MAGIC:

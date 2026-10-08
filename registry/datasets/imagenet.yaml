@@ -367,3 +367,16 @@ evidence:
   checked_on: '2026-09-22'
   source_identity_status: family_only
 source_url: https://www.image-net.org/
+relationships:
+- type: same_source_family_as
+  target_id: imagenet-1k
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: Hugging Face ImageNet-1k carries the same ILSVRC-2012 classes; paper roles and selected images
+    are not established.
+- type: same_source_family_as
+  target_id: imagenet-ilsvrc-2012
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: ILSVRC-2012 is the browsable ImageNet classification release here. This entry aggregates many
+    paper roles (training, validation, sampled subsets) that no single release covers.

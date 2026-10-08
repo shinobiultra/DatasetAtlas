@@ -25,7 +25,11 @@ uv run atlas serve
 
 The server listens on loopback only. To use it on another machine, run it there and tunnel the port: `ssh -L 8765:127.0.0.1:8765 host` (see [remote workbench](remote-workbench.md)).
 
+One workbench coordinates a workspace at a time. `atlas serve` and `atlas analyze` hold `work/.coordinator.lock`; a second one on the same workspace refuses and names the process that holds it, because two coordinators would both register the same staged analysis output. Use the running workbench, stop it first, or give the second one its own workspace with `--root`.
+
 Optional analysis (detectors, embeddings, maps) needs extras: `uv sync --extra vision --extra embeddings --extra projection` or `pip install "dataset-atlas[vision,embeddings,projection]"`. Browsing needs none of them, and never needs a GPU.
+
+Some source formats need acquisition extras: `uv sync --extra datasets --extra remote-storage`, or install the wheel with `[datasets,remote-storage]`. These provide SciPy for SVHN MAT files, streaming Visual Genome joins and gzip TAR checkpoints. Preparation checks required format dependencies before downloading.
 
 `atlas doctor` reports what is installed and whether the interface is available.
 
@@ -55,7 +59,7 @@ atlas previews fetch --execute --dataset mnist --dataset wmdp     # just these
 
 `fetch` plans every dataset first, then fetches the cheapest first within the total budget you give it, and writes a receipt to `work/previews/`. It resumes where it stopped: finished previews are skipped, and verified partial downloads are reused. Sources are the datasets' own publishers; Atlas does not use a mirror of its own. A dataset whose source needs a login or an agreement is reported, never bypassed.
 
-Previews are small by design, but some sources only publish large archives. The plan states that size, and the budget you set is a hard limit. Fetching one preview never starts a full download of a large release.
+Previews contain few records, but some publishers only offer large archives. A preview can require the whole native archive. The plan states its transfer and output requirements, and your budgets are hard limits. A large archive is fetched only when those explicit limits permit it. See [authorization links](dataset-authorization.md) for sources that require approval or licensing.
 
 ## Add more of a dataset
 
@@ -106,3 +110,5 @@ atlas init --update ~/atlas
 ## Models and privacy
 
 Nothing is sent to any model or service unless you connect a provider and approve an explicit context. See [model connections](model-connections.md). Dataset text, images and annotations are treated as untrusted content.
+
+For a local Ollama thinking model, a provider configuration can set `reasoning_effort: "none"` for short inspection replies. This setting is included in the approved context and saved generation provenance; unsupported modes still need a capability probe. The model panel honors the configured timeout up to 120 seconds. See[Ollama OpenAI compatibility](https://docs.ollama.com/api/openai-compatibility).

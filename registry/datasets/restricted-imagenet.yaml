@@ -52,9 +52,16 @@ evidence:
   audit_file: work/sources/source-audit-jobs-batch3.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in at least one record.
+    Not inferred from the name or description.'
 source_url: https://github.com/MadryLab/robustness/blob/master/robustness/datasets.py
 relationships:
 - type: same_source_family_as
   target_id: imagenet
   status: asserted_from_source_review
   scope: Restricted ImageNet super-class grouping derived from ILSVRC.
+modalities:
+- image

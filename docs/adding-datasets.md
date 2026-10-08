@@ -128,6 +128,8 @@ adapter_config:
 
 The adapter reads the ZIP's directory and only the members a user inspects, through HTTPS ranges bound to the strong ETag (`adapters/remote_media.py`). A strong ETag is a consistency fingerprint, not a content hash, so coverage reports the media as unverified and every record says so. Plans report the bounded directory reads instead of zero bytes.
 
+`atlas previews fetch` plans in `auto` mode, which downloads a source completely while it is small (under 250 MB) because that also yields a complete index. Some small shards cannot be read that way: ZeroBench's 95 MB Parquet holds embedded images above the full-download limit of 10 MB each, so a complete download fails at the preview step even though selective range reads succeed. A recipe can say so with `auto_source_mode: selective`, and `auto` then takes the selective route (which needs a native Parquet source) whenever its plan is ready. Only `selective` is accepted; any other value is refused.
+
 **3. Conversions.** If the catalogue's records are a deterministic conversion of originals, write the rule as a converter (`dataset_atlas/converters/`) and pin the originals plus the converted rows' digest:
 
 ```yaml
@@ -137,3 +139,15 @@ convert: {name: bbq, params: {categories: [Age, …]}, count: 58492, rows_sha256
 `digest_existing(path, fmt)` gives the digest of the maintainer's table. The fetch fails unless the converted rows match it exactly, so a colleague's table cannot silently differ. The digest is over row content, not file bytes, because Parquet encoding varies between library versions. Where the original already equals the maintained table (Alpaca's JSON array), no converter is needed; point the structured adapter at the original with `format: json`.
 
 **4. Verify from an empty workspace.** `atlas init` a scratch directory (or copy `registry/` and `schemas/`) and run `atlas previews fetch --execute --dataset <id>`. Compare `snapshot_id` with the maintained entry, resolve a few media, then regenerate the report with `--verified-from <that workspace>`.
+
+## Images a browser cannot decode (TIFF)
+
+Keep the original bytes as the asset. The structured adapter flags any image asset whose file name ends in `.tif`/`.tiff` with `browser_render_required` and `source_format: TIFF`; the grid and inspector then request `?representation=display`, a faithful, bounded PNG rendering (16-bit and floating-point samples are scaled linearly to 8 bits, alpha is kept, nothing is blurred or cropped, the longer edge is capped at 4096 px). `?representation=safe-view` remains a different, deliberately blurred derivative that the researcher opts into. Records, selections and model inputs always carry the original asset. RSVQA-LR (`registry/recipes/rs-vqa.yaml`, `converters/remote_sensing.py`) is the worked example.
+
+## Images that a source repository commits without a table
+
+When an author repository commits media but no annotation file, state the structure its paths carry as a converter over a **pinned inventory**. Write `registry/media/<id>.json` once from the repository tree at the pinned commit (`{"files": {path: {"bytes": n, "git_blob_sha1": sha}}}`), pin its SHA-256 in the recipe, and let the converter (`converters/adversarial_images.py` for SAEgis) emit one row per file without opening any image. Images are fetched on demand from `raw.githubusercontent.com/<owner>/<repo>/<commit>/<path>` and each read is checked against its Git blob SHA-1; `atlas storage pin-preview --dataset <id>` then retains the 100 preview originals locally so the preview survives an upstream outage. Verify any relationship the paths imply (a clean image and its attacked variant sharing a file name) on the real files and keep the receipt (`scripts/verify_saegis_pairing.py` checks all 1,800 SAEgis pairs by pixel similarity and every fetched file's blob hash).
+
+## Source research that does not end in a preview
+
+Record what was checked on the entry: the URL and revision, what the source actually holds (files, counts, licence), and why nothing was prepared. A name shared with an unrelated release (VIA-Bench versus the video benchmark VIABench) is evidence to keep, so nobody attaches the wrong data later. A source that is only a recipe over other datasets (VLAGenderBias) links to its members with `derived_from`. Say whether the blocker is external (unreachable host, gate, unreleased) or an implementation gap; the two are never interchangeable.

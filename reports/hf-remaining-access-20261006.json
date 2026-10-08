@@ -1,0 +1,35 @@
+{
+  "checked_at_utc": "2026-10-06T04:53:03.332557+00:00",
+  "probes": [
+    {
+      "repo": "aimagelab/ViSU-Text",
+      "contents_retained": false,
+      "revision": "9afabb85b5570fa883b7caa0561d8c8d71d84dcd",
+      "gated": "manual",
+      "authorized": true,
+      "native_probe_file": "ViSU-Text_validation.json",
+      "probe": "Native file HEAD; no dataset body read",
+      "etag": "\"6be96dca0c7199294b8ed9fd53dc12a2e0152c5a\""
+    },
+    {
+      "repo": "ucf-crcv/BBQ-V",
+      "contents_retained": false,
+      "revision": "a1c78b8f73bc40408993414e3d94714a6a9169d3",
+      "gated": "auto",
+      "authorized": false,
+      "error": "ValueError: Source fingerprint Range GET requires HTTP 206; received 403"
+    },
+    {
+      "repo": "YijunYang280/MMA_Diffusion_adv_images_benchmark",
+      "contents_retained": false,
+      "revision": "d6072a9abaf9155fde364b2b973bdc6e9cdc9b64",
+      "gated": "auto",
+      "authorized": false,
+      "error": "ValueError: Source fingerprint HTTP 403",
+      "native_probe_file": "mma_diffusion_adv_images.csv",
+      "probe": "Native file HEAD; no dataset body read"
+    }
+  ],
+  "max_file_probe_bytes": 1,
+  "dataset_examples_retained": 0
+}

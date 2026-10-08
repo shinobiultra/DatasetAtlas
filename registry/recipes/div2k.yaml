@@ -26,7 +26,7 @@ adapter_config:
       member_regex: DIV2K_train_HR/(?P<image_id>\d{4})\.png
       expected_count: 800
     div2k_valid_hr:
-      url: https://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_HR.zip
+      url: https://data.vision.ee.ethz.ch/cvl/DIV2K/validation_release/DIV2K_valid_HR.zip
       bytes: 448993893
       etag: '"1ac31a65-5487e628d1f06"'
       allowed_hosts:

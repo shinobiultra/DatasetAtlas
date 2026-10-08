@@ -18,10 +18,11 @@ from dataset_atlas.registry import Registry
 AUTO_COMPLETE_DOWNLOAD_BYTES = 250_000_000
 
 
-def atomic(path, value):
+def atomic(path, value, *, compact=False):
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_name(path.name + f'.{os.getpid()}.tmp')
-    temporary.write_text(json.dumps(value, indent=2, ensure_ascii=False))
+    temporary.write_text(json.dumps(value, indent=None if compact else 2,
+                                    separators=(',', ':') if compact else None, ensure_ascii=False))
     temporary.replace(path)
 
 
@@ -52,16 +53,17 @@ def snapshot_for(dataset_id, plan, identity, root):
     return f'{dataset_id}-{digest[:24]}'
 
 
-def read_metadata(url):
-    """Bounded primary-source metadata, without credentials or repository execution."""
+def read_metadata(url, credential_profile=None):
+    """Bounded primary-source metadata; credentials are resolved locally for the Hub host."""
     from dataset_atlas.storage.https import HttpsFetcher, _PinnedHTTPSConnection
-    fetcher = HttpsFetcher(['huggingface.co'])
+    fetcher = HttpsFetcher(['huggingface.co'],credential_profile=credential_profile)
     from urllib.parse import urljoin
     for hop in range(5):
         host, port, address, target = fetcher._destination(url)
         connection = _PinnedHTTPSConnection(host, address, port, 30)
         try:
-            connection.request('GET', target, headers={'Accept-Encoding': 'identity'})
+            from dataset_atlas.storage.auth import source_headers
+            connection.request('GET', target, headers={'Accept-Encoding': 'identity',**source_headers(credential_profile,host)})
             response = connection.getresponse()
             if response.status in {301,302,303,307,308}:
                 location=response.getheader('Location')
@@ -105,6 +107,10 @@ class PreparationManager:
         index. Otherwise a sampled remote read fetches ~100 rows. If neither fits, the full-download
         plan is returned so its stated requirements (size, recipe, access) explain why."""
         download = self._plan(dataset_id, max_download_bytes, max_output_bytes, 'download')
+        if self._recipe_auto_source_mode(dataset_id) == 'selective':
+            selective = self._plan(dataset_id, max_download_bytes, max_output_bytes, 'selective')
+            if selective['ready']:
+                return selective
         if download['ready'] and download['expected_download_bytes'] <= AUTO_COMPLETE_DOWNLOAD_BYTES:
             return download
         try:
@@ -114,6 +120,18 @@ class PreparationManager:
         if sample is not None and sample['ready']:
             return sample
         return download
+
+    def _recipe_auto_source_mode(self, dataset_id):
+        """A recipe can name the route `auto` must take when a small complete download would fail, for example because
+        embedded images exceed the full-download limits; selective range reads have no such limit."""
+        path = self.root/'registry/recipes'/f'{dataset_id}.yaml'
+        if not path.is_file():
+            return None
+        import yaml
+        mode = (yaml.safe_load(path.read_text()) or {}).get('auto_source_mode')
+        if mode not in {None, 'selective'}:
+            raise ValueError('auto_source_mode must be selective')
+        return mode
 
     @staticmethod
     def _no_path_message(dataset):
@@ -171,6 +189,8 @@ class PreparationManager:
                 try:source_headers(recipe['credential_profile'],'huggingface.co')
                 except ValueError as exc:plan['requirements'].append(str(exc))
                 plan['credential_profile']=recipe['credential_profile']
+                prepared.adapter_config['credential_profile']=recipe['credential_profile']
+                plan['prepared_dataset']=prepared.model_dump(mode='json')
             dataset=prepared
             plan['scope']=recipe.get('scope',prepared.adapter_config.get('population',plan['scope']))
         parsed = urlsplit(dataset.source_url or '')
@@ -188,6 +208,20 @@ class PreparationManager:
             plan.update(kind='http_archive', files=recipe['files'], expected_count=recipe.get('expected_count'),
                 expected_download_bytes=sum(f['bytes'] for f in recipe['files']), ready=True,
                 scope=recipe['scope'], allowed_hosts=recipe.get('allowed_hosts',[]))
+            if recipe.get('sequential_tar_sources'):
+                if dataset.adapter not in {'imagenet_c','inaturalist'}:raise ValueError('Sequential TAR acquisition requires a supported native archive adapter')
+                plan['kind']='http_sequential_tar'
+            if recipe.get('zip_tar_sources'):
+                from .zip_tar import validate_sources
+                if dataset.adapter!='spoken_wikipedia':raise ValueError('Native ZIP/TAR preparation requires the Spoken Wikipedia adapter')
+                validate_sources(recipe['zip_tar_sources'])
+                maximum=recipe.get('native_zip_tar_index_bytes',1_000_000_000)
+                if type(maximum) is not int or not 1<=maximum<=1_000_000_000:
+                    raise ValueError('Native ZIP/TAR indices require an aggregate output cap within1byte..1GB')
+                plan['zip_tar_sources']=recipe['zip_tar_sources'];plan['native_zip_tar_index_bytes']=maximum
+                plan['expected_annotation_transfer_bytes']=sum(entry.get('remote_zip_member',{}).get('transfer_bytes',entry['bytes']) for entry in recipe['files'])
+                plan['expected_download_bytes']=plan['expected_annotation_transfer_bytes']+sum(spec['compressed_bytes']+1_000_000 for spec in recipe['zip_tar_sources'].values())
+                plan['download_is_upper_bound']=True
             if recipe.get('convert'):
                 conversion = recipe['convert']
                 if (not isinstance(conversion, dict) or not isinstance(conversion.get('name'), str) or type(conversion.get('count')) is not int
@@ -248,10 +282,19 @@ class PreparationManager:
             requested_revision = parts[5] if len(parts)>5 and parts[4]=='tree' else None
             prefix = '/'.join(parts[6:]).rstrip('/') if requested_revision else ''
             revision_path = '/revision/'+quote(requested_revision,safe='') if requested_revision else ''
-            info = read_metadata(f'https://huggingface.co/api/datasets/{repo}{revision_path}?blobs=true')
+            info = read_metadata(f'https://huggingface.co/api/datasets/{repo}{revision_path}?blobs=true',**({'credential_profile':plan['credential_profile']} if plan.get('credential_profile') else {}))
+            accessible=True
             if info.get('gated'):
-                plan['requirements'].append('This release is gated. Obtain authorized local files and configure its adapter.')
-            else:
+                from dataset_atlas.storage.auth import source_headers
+                try:
+                    source_headers('huggingface','huggingface.co')
+                    plan['credential_profile']='huggingface'
+                    dataset.adapter_config['credential_profile']='huggingface'
+                    plan['prepared_dataset']=dataset.model_dump(mode='json')
+                except ValueError:
+                    accessible=False
+                    plan['requirements'].append('This release is gated. Request access on its Hugging Face page and sign in locally, or register authorized source files.')
+            if accessible:
                 revision = info.get('sha', '')
                 if not re.fullmatch('[a-f0-9]{40}', revision):
                     raise ValueError('Source API did not return an immutable revision')
@@ -318,6 +361,13 @@ class PreparationManager:
             plan['expected_download_bytes']=recipe['remote_transfer_budget_bytes']
             plan['download_is_upper_bound']=True
             plan['media_access']='Index the complete ETag-bound remote ZIP directory; verify and pin 100 original encrypted PNGs. Other originals remain range-addressable on demand.'
+        if (plan.get('convert') or {}).get('name')=='tid2013_native':
+            try:
+                import rarfile
+                if not hasattr(rarfile,'RarFile') or not (shutil.which('7zz') or shutil.which('7z')):raise ImportError
+            except (ImportError,OSError):
+                plan['ready']=False
+                plan['requirements'].append('Native RAR access requires dataset-atlas[datasets] (rarfile) and the system 7-Zip command.')
         if adapter_error and plan.get('kind') not in {'huggingface_columnar','huggingface_remote_columnar','huggingface_remote_sample'}:
             plan['ready'] = False
             plan['requirements'].append('Adapter implementation missing: ' + dataset.adapter)
@@ -326,9 +376,26 @@ class PreparationManager:
             if importlib.util.find_spec('indexed_gzip') is None:
                 plan['requirements'].append('Indexed gzip access requires the remote-storage extra (indexed-gzip).')
             plan['media_access'] = 'Native gzip TAR checkpoints support bounded original-image retrieval; no uncompressed media archive is created.'
+        if plan.get('zip_tar_sources') or (dataset.adapter=='spoken_wikipedia' and dataset.adapter_config.get('native_audio_sources')):
+            import importlib.util
+            if importlib.util.find_spec('indexed_gzip') is None:
+                plan['requirements'].append('Native ZIP/TAR seek indices require dataset-atlas[remote-storage] (indexed-gzip).')
+            if dataset.adapter_config.get('verify_remote_preview_media'):
+                if not shutil.which('ffmpeg') or not shutil.which('ffprobe'):
+                    plan['requirements'].append('Native audio preview verification requires FFmpeg and ffprobe before source acquisition.')
+        if dataset.adapter=='svhn_cropped_mat':
+            import importlib.util
+            if importlib.util.find_spec('scipy') is None:
+                plan['requirements'].append('SVHN MAT preparation requires scipy; install dataset-atlas[datasets] before downloading.')
+        if dataset.adapter=='ucf101' and (not shutil.which('ffmpeg') or not shutil.which('ffprobe')):
+            plan['requirements'].append('Native UCF101 verification and browser playback require FFmpeg and ffprobe before acquisition.')
+        if (plan.get('convert') or {}).get('name')=='ffhq_metadata':
+            import importlib.util
+            if importlib.util.find_spec('ijson') is None:
+                plan['requirements'].append('FFHQ metadata conversion requires ijson; install dataset-atlas[datasets] before acquisition.')
         remote = dataset.adapter_config.get('remote_archives', {})
         remote_zips = [key for key in ('remote_questions', 'remote_images', 'remote_archive', 'remote_media_archive') if dataset.adapter_config.get(key)]
-        selective_media = remote or remote_zips or dataset.adapter_config.get('media_inventory_path') or plan.get('kind') in {'huggingface_remote_columnar','huggingface_remote_sample'} or dataset.adapter in {'remote_columnar','objectnet'}
+        selective_media = remote or remote_zips or dataset.adapter_config.get('media_inventory_path') or plan.get('kind') in {'huggingface_remote_columnar','huggingface_remote_sample'} or dataset.adapter in {'remote_columnar','objectnet','objaverse','miap','fivek','ffhq','emoset','imagenet_c','inaturalist','spoken_wikipedia'}
         if selective_media:
             cache_bytes = dataset.adapter_config.get('remote_cache_bytes',1_000_000_000)
             if type(cache_bytes) is not int or not 1 <= cache_bytes <= 1_000_000_000_000:
@@ -355,11 +422,27 @@ class PreparationManager:
             plan['download_is_upper_bound'] = True
             plan['media_access'] = ("Archive directories and the few originals you inspect are read by HTTPS ranges bound to each archive's "
                                     'strong ETag (a consistency fingerprint, not a content hash); the archives themselves are not downloaded.')
+        preview_media = recipe.get('preview_media_transfer_bytes') if recipe else None
+        if preview_media is not None:
+            # Verifying the preview opens original files the source list does not count (100 original 16-bit TIFFs are about 5 GB), so a recipe
+            # declares the transfer measured on a real preparation and the plan must show it before the researcher approves a budget.
+            if type(preview_media) is not int or not 0 <= preview_media <= 1_000_000_000_000:
+                raise ValueError('preview_media_transfer_bytes must be an integer number of bytes of at most 1 TB')
+            plan['preview_media_transfer_bytes'] = preview_media
+            plan['expected_download_bytes'] += preview_media
+            plan['download_is_upper_bound'] = True
         if plan['expected_download_bytes'] > max_download_bytes:
             plan['ready'] = False
             plan['requirements'].append('Source download exceeds the selected download budget.')
         # Cache and retained source may coexist; reserve both conservatively.
         plan['required_free_bytes'] = plan['expected_download_bytes'] * 2 + max_output_bytes + (dataset.adapter_config.get('remote_cache_bytes',1_000_000_000) if selective_media else 0)
+        if plan.get('kind')=='http_sequential_tar':
+            # One cache object is indexed and cold-verified before retirement;
+            # the next source never coexists with that completed original.
+            plan['required_free_bytes']=max(entry['bytes'] for entry in plan['files'])+max_output_bytes+dataset.adapter_config.get('remote_cache_bytes',200_000_000)+20_000_000
+        if plan.get('zip_tar_sources'):
+            plan['required_free_bytes']=plan['expected_annotation_transfer_bytes']*2+max_output_bytes+dataset.adapter_config.get('remote_cache_bytes',200_000_000)+64_000_000
+            plan['media_access']='Every pinned native TAR and member is hash-checked through its parent ZIP; only bounded seek indices and verified original audio previews are retained. No full audio TAR body is stored.'
         if plan.get('kind') in {'huggingface_remote_columnar','huggingface_remote_sample'} or (plan.get('kind')=='local' and dataset.adapter in {'remote_columnar','objectnet'}):
             # Transfer is streamed through a bounded cache, not retained as a full source copy.
             plan['required_free_bytes']=max_output_bytes+dataset.adapter_config.get('remote_cache_bytes',1_000_000_000)+20_000_000
@@ -424,8 +507,31 @@ class PreparationManager:
             status = self.status(status_path.parent.name)
             if status['status'] not in {'queued', 'running'}: continue
             path = self._path(status['id'])/'plan.json'
-            reserved += json.loads(path.read_text())['required_free_bytes']
+            plan=json.loads(path.read_text())
+            reserved += max(0,plan['required_free_bytes']-self._allocated_preparation_bytes(plan))
         return reserved
+
+    def _allocated_preparation_bytes(self,plan):
+        """Subtract Atlas-owned job bytes already counted in shared usage.
+
+        Shared hard links are deliberately not subtracted: another source or
+        frozen version may own those bytes. A failed measurement reserves the
+        whole declared peak instead of assuming that unknown bytes are free.
+        """
+        if not plan.get('id') or not plan.get('dataset_id'):return 0
+        version=self.root/'work/prepared'/plan['dataset_id']/plan['id']
+        if version.is_symlink() or not version.is_dir():return 0
+        total=0
+        try:
+            for directory,children,files in os.walk(version,followlinks=False):
+                children[:]=[name for name in children if not (Path(directory)/name).is_symlink()]
+                for name in files:
+                    path=Path(directory)/name
+                    if path.is_symlink():continue
+                    info=path.stat()
+                    if info.st_nlink==1:total+=getattr(info,'st_blocks',0)*512
+        except OSError:return 0
+        return total
 
     def _start(self, identity):
         directory = self._path(identity)
@@ -436,11 +542,20 @@ class PreparationManager:
         if prior['status'] in {'running', 'queued', 'completed'}:
             return prior
         from dataset_atlas.storage.optimized import preparation_headroom
-        storage = preparation_headroom(self.root, plan['required_free_bytes'], self._storage_reservations())
+        remaining=max(0,plan['required_free_bytes']-self._allocated_preparation_bytes(plan))
+        storage = preparation_headroom(self.root, remaining, self._storage_reservations())
         if storage and not storage['admitted']:
             raise ValueError('Shared Atlas storage headroom changed; free retained data or create a smaller plan')
-        if shutil.disk_usage(self.directory).free < plan['required_free_bytes']:
+        if shutil.disk_usage(self.directory).free < remaining:
             raise ValueError('Free space changed; create a new plan')
+        if prior['status'] in {'failed','cancelled','interrupted'}:
+            history=directory/'attempts'; history.mkdir(exist_ok=True)
+            resource=directory/'resource-error.receipt'
+            atomic(history/f'{time.time_ns()}.json',{
+                'status':prior,
+                'plan_sha256':hashlib.sha256((directory/'plan.json').read_bytes()).hexdigest(),
+                'worker_log_bytes_before_retry':(directory/'worker.log').stat().st_size if (directory/'worker.log').exists() else 0,
+                'resource_error':json.loads(resource.read_text()) if resource.is_file() else None})
         (directory / 'cancel').unlink(missing_ok=True)
         (directory / 'resource-error.receipt').unlink(missing_ok=True)
         atomic(directory / 'status.json', {'id': identity, 'dataset_id': plan['dataset_id'], 'status': 'queued', 'updated_at': time.time()})
@@ -474,6 +589,16 @@ class PreparationManager:
                     alive = True
                 except OSError:
                     alive = False
+        # A PID can be invisible from a restricted process namespace while its
+        # filesystem writer lease remains held. Do not rewrite a live worker's
+        # status as interrupted merely because this reader cannot see procfs.
+        if value['status'] == 'running' and not alive:
+            from .slots import dataset_writer_active
+            dataset_id = value.get('dataset_id')
+            if dataset_id and dataset_writer_active(self.directory, dataset_id,plan_id=identity,expected_pid=pid):
+                alive = True
+            if time.time() - value.get('updated_at', 0) < 10:
+                alive = True
         if value['status'] == 'running' and not alive:
             receipt=directory/'resource-error.receipt'
             reason=json.loads(receipt.read_text()).get('message') if receipt.is_file() else 'Worker is no longer running; retry reuses verified downloads.'
@@ -483,7 +608,7 @@ class PreparationManager:
             value.update(status='interrupted', error='Worker did not start; retry preparation.')
             atomic(path, value)
         process = self.processes.get(identity)
-        if process is not None and process.poll() is not None and value['status'] in {'running', 'queued'}:
+        if process is not None and process.poll() is not None and not alive and value.get('pid') == process.pid and value['status'] in {'running', 'queued'}:
             value.update(status='interrupted', error='Worker exited before completion; retry reuses verified downloads.')
             atomic(path, value)
         return value
@@ -812,9 +937,16 @@ class PreparationManager:
 
 def prepared_metadata(dataset, scope):
     """Remove only acquisition claims that this successful preparation disproves."""
+    if dataset.adapter_config.get('media_scope')=='partial':
+        dataset.coverage.complete_data='indexed_metadata_partial_media'
     obsolete = {'Adapter and preview are not implemented.', 'Adapter and preview are not implemented'}
     if dataset.adapter_config.get('credential_profile') == 'huggingface':
         obsolete.add('Repository files require accepting the Hugging Face contact-sharing access gate.')
+        obsolete.update({
+            'Original-source credentials or agreement are required.',
+            'Official authors require access approval before downloading the 202503 base question.jsonl; no approved local source is present.',
+            'Original author Hugging Face dataset requires account login and acceptance of access conditions; unauthenticated pinned Parquet HEAD returns HTTP 401.',
+        })
     dataset.coverage.blockers = [message for message in dataset.coverage.blockers
         if message not in obsolete
         and not (dataset.adapter=='columnar' and message.startswith('Pinned HF Parquet source totals') and 'no local preview' in message)

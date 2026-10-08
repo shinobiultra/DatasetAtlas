@@ -1,0 +1,40 @@
+{
+  "started_at_utc": "2026-10-07T05:50:37.675780+00:00",
+  "max_total_transfer_bytes": 12000000000,
+  "sources": [
+    {
+      "source": "ffhq-metadata",
+      "declared_bytes": 267793842,
+      "publisher_md5": "425ae20f06a4da1d4dc0f46d40ba5fd6",
+      "url": "https://drive.usercontent.google.com/download?id=16N0RV4fHI6joBuKbQAoG34V_cQk7vxSA&export=download&confirm=t",
+      "allowed_hosts": [
+        "drive.usercontent.google.com",
+        "drive.google.com"
+      ],
+      "status": "passed",
+      "path": "work/official-native-candidates-20261007/ffhq-metadata/objects/0661f49388ba12e1593ff3323f3013bb5334ed1f6783f4da6e14592883dbd09c",
+      "sha256": "1be5c2d1a78196d45a9600558c04b46dffefa217b7c664d5be38ed28a4d9a0ee",
+      "publisher_checksum_checked": true,
+      "network_bytes": 267793842
+    },
+    {
+      "source": "emoset",
+      "declared_bytes": 11288914945,
+      "publisher_md5": null,
+      "url": "https://www.dropbox.com/scl/fi/myue506itjfc06m7svdw6/EmoSet-118K.zip?rlkey=7f3oyjkr6zyndf0gau7t140rv&dl=1",
+      "allowed_hosts": [
+        "www.dropbox.com",
+        "dl.dropboxusercontent.com",
+        "*.dl.dropboxusercontent.com"
+      ],
+      "status": "passed",
+      "path": "work/official-native-candidates-20261007/emoset/objects/9f19edb6e800f6b74f1a4957aa4c9e4745e4aae58df1ed9586bbc7d6389f85ed",
+      "sha256": "ebdf50858d24b8b454148dffc84219eb171e61ac80d43bfa65bd9affbbf5d660",
+      "publisher_checksum_checked": false,
+      "network_bytes": 11288914945
+    }
+  ],
+  "scope": "Official author-linked release bodies acquired once under explicit limits; measured SHA-256 is distinguished from independent publisher checksum; all data stays local.",
+  "actual_network_bytes": 11556708787,
+  "completed_at_utc": "2026-10-07T05:59:11.626113+00:00"
+}

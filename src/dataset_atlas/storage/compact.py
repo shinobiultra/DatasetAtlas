@@ -116,7 +116,7 @@ def pin_preview_originals(root, dataset_id, *, max_input_bytes, max_output_bytes
     registry = Registry(root)
     dataset = registry.dataset(dataset_id)
     pack = registry.pack(dataset_id)
-    preview = {asset.id: asset for record in pack.records for asset in record.assets
+    preview = {(asset.id,asset.uri): asset for record in pack.records for asset in record.assets
                if asset.modality == 'image' and asset.uri}
     if not preview:
         raise ValueError('No image preview assets to pin')
@@ -124,15 +124,18 @@ def pin_preview_originals(root, dataset_id, *, max_input_bytes, max_output_bytes
     if snapshot is None or not (snapshot/'records.parquet').is_file():
         raise ValueError('Complete local snapshot is required to pin preview originals')
     found = {}
+    preview_ids={identity for identity,_ in preview}
     for batch in pq.ParquetFile(snapshot/'records.parquet').iter_batches(columns=['record_json'], batch_size=512):
         for value in batch.column(0).to_pylist():
             for item in json.loads(value)['assets']:
-                if item['id'] in preview:
+                if item['id'] in preview_ids:
                     if item.get('uri') is None:
                         raise ValueError('Preview original is absent from complete snapshot')
-                    if item['uri'] != preview[item['id']].uri:
-                        raise ValueError('Preview and snapshot image references differ')
-                    found[item['id']] = item['uri']
+                    key=(item['id'],item['uri'])
+                    if key not in preview:continue
+                    if item.get('sha256') and preview[key].sha256 and item['sha256']!=preview[key].sha256:
+                        raise ValueError('Preview and snapshot image checksums differ')
+                    found[key] = item['uri']
     if set(found) != set(preview):
         raise ValueError('Preview image identities differ from complete snapshot')
     directory = store_directory(root, dataset.id, dataset.snapshot_id)

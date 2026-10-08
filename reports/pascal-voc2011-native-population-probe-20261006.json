@@ -1,0 +1,32 @@
+{
+  "native_image_members": 14961,
+  "native_xml_members": 14961,
+  "images_without_xml": 0,
+  "xml_without_images": 0,
+  "native_mask_counts": {
+    "SegmentationClass": 2223,
+    "SegmentationObject": 2223
+  },
+  "main_populations": {
+    "ImageSets/Main/train.txt": {
+      "rows": 5717,
+      "unique_image_ids": 5717,
+      "images_without_membership": 9244,
+      "unjoined_table_images": 0
+    },
+    "ImageSets/Main/trainval.txt": {
+      "rows": 11540,
+      "unique_image_ids": 11540,
+      "images_without_membership": 3421,
+      "unjoined_table_images": 0
+    },
+    "ImageSets/Main/val.txt": {
+      "rows": 5823,
+      "unique_image_ids": 5823,
+      "images_without_membership": 9138,
+      "unjoined_table_images": 0
+    }
+  },
+  "table_count": 102,
+  "all_table_unjoined_image_ids": 0
+}

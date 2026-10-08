@@ -1,0 +1,25 @@
+{
+  "checked_at_unix": 1791271122.1167545,
+  "torchvision_source": "https://raw.githubusercontent.com/pytorch/vision/main/torchvision/datasets/places365.py",
+  "source_lines": [
+    "# {variant: (archive, md5)}",
+    "\"standard\": (\"filelist_places365-standard.tar\", \"35a0585fee1fa656440f3ab298f8479c\"),",
+    "\"challenge\": (\"filelist_places365-challenge.tar\", \"70a8307e459c3de41690a7c76c931734\"),",
+    "# (file, md5)",
+    "_CATEGORIES_META = (\"categories_places365.txt\", \"06c963b85866bd0649f97cb43dd16673\")",
+    "# {split: (file, md5)}",
+    "\"val\": (\"places365_val.txt\", \"e9f2fd57bfd9d07630173f4e8708e4b1\"),",
+    "# {(split, small): (file, md5)}",
+    "(\"val\", True): (\"val_256.tar\", \"e27b17d8d44f4af9a78502beb927f808\"),",
+    "file, md5 = self._CATEGORIES_META",
+    "if not self._check_integrity(file, md5, download):",
+    "file, md5 = self._FILE_LIST_META[self.split]",
+    "if not self._check_integrity(file, md5, download):",
+    "file, md5 = self._DEVKIT_META[self.variant]",
+    "download_and_extract_archive(urljoin(self._BASE_URL, file), self.root, md5=md5)",
+    "file, md5 = self._IMAGES_META[(self.split, self.small)]",
+    "download_and_extract_archive(urljoin(self._BASE_URL, file), self.root, md5=md5)",
+    "def _check_integrity(self, file: str, md5: str, download: bool) -> bool:",
+    "integrity = check_integrity(file, md5=md5)"
+  ]
+}

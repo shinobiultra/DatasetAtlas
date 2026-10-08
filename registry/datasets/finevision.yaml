@@ -2,33 +2,41 @@ schema_version: '1.0'
 id: finevision
 name: FineVision
 aliases: []
-description: HuggingFaceM4 publishes many source-specific configurations; a generic FineVision reference
-  does not identify the selected mixture or snapshot.
+description: A bounded 100-record sampled preview of the pinned HuggingFaceM4/FineVision
+  native Parquet release. All shard footers were read to define the sampling population;
+  only selected original image bytes and records are prepared. The citing papers'
+  exact LLaVA subset and 500k training mixture remain unidentified.
 paper_ids:
 - paper-09b2d7393fc75cf7
 - paper-d8a392188b9cf4d6
-release: unresolved
+release: 3c380a731a3429c1d04693d6ec16d7e683def84c
 adapter: structured
 adapter_config: {}
 coverage:
   identity: candidate
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: exceeds_storage_budget
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Exact source variant or paper release is unresolved.
-  - Adapter and preview are not implemented.
+  - The exact paper-used LLaVA subset and 500k training mixture remain unresolved;
+    release identity stays candidate.
+  - Only a bounded sampled preview is prepared; the approximately 4.65 TB release
+    has no complete local annotation index.
+  - Underlying source-specific annotation and image rights remain unreviewed; no public
+    image pack is approved.
+  total_count: 25243243
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://huggingface.co/datasets/HuggingFaceM4/FineVision
-  note: Mixed underlying data have source-specific rights; no blanket image permission inferred.
+  note: Mixed underlying data have source-specific rights; no blanket image permission
+    inferred.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-fac9b30f173112a89c8b
@@ -36,9 +44,9 @@ evidence:
   source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
   page: 7
   role: evaluation
-  excerpt: ' crops. giving he (see multimodal steering in Appendix III-C). For evaluation, we use the
-    FineVision dataset [50], selecting 10,000 images from the LLaVA_Instruct_150k subset, yielding 20,559
-    image–instruction pairs, and the test split of'
+  excerpt: ' crops. giving he (see multimodal steering in Appendix III-C). For evaluation,
+    we use the FineVision dataset [50], selecting 10,000 images from the LLaVA_Instruct_150k
+    subset, yielding 20,559 image–instruction pairs, and the test split of'
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -47,8 +55,9 @@ evidence:
   source_file_hash: 0e3f26916ef19ce5982122f2bb72212315d6dcbe59c9cc953852202654cc1acf
   page: 5
   role: training
-  excerpt: ' the vision encoder, projection layer, and language model. We use the FineVision dataset (Wiedmann
-    et al., 2025), training on 500k samples with a batch size of 16 and a learning rate of 5e-5. The SA'
+  excerpt: ' the vision encoder, projection layer, and language model. We use the
+    FineVision dataset (Wiedmann et al., 2025), training on 500k samples with a batch
+    size of 16 and a learning rate of 5e-5. The SA'
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -57,23 +66,66 @@ evidence:
   source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
   page: 7
   role: refusal evaluation
-  excerpt: giving he (see multimodal steering in Appendix III-C). For evaluation, we use the FineVision
-    dataset [50], selecting 10,000 images from the LLaVA_Instruct_150k subset, yielding 20,559 image–instruction
-    pairs, and
+  excerpt: giving he (see multimodal steering in Appendix III-C). For evaluation,
+    we use the FineVision dataset [50], selecting 10,000 images from the LLaVA_Instruct_150k
+    subset, yielding 20,559 image–instruction pairs, and
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://huggingface.co/datasets/HuggingFaceM4/FineVision
-  note: 'HuggingFaceM4 publishes many source-specific configurations; a generic FineVision reference does
-    not identify the selected mixture or snapshot. Release: FineVision mixture; configuration/revision
-    unresolved'
+  note: 'HuggingFaceM4 publishes many source-specific configurations; a generic FineVision
+    reference does not identify the selected mixture or snapshot. Release: FineVision
+    mixture; configuration/revision unresolved'
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: family_only
 - kind: source_audit_rights
   url: https://huggingface.co/datasets/HuggingFaceM4/FineVision
-  note: Mixed underlying data have source-specific rights; no blanket image permission inferred.
+  note: Mixed underlying data have source-specific rights; no blanket image permission
+    inferred.
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: family_only
-source_url: https://huggingface.co/datasets/HuggingFaceM4/FineVision
+- kind: sampled_native_preview
+  checked_on: '2026-10-05'
+  snapshot_id: finevision-17fa663a721c77ca65d752db
+  record_count: 100
+  sampling:
+    method: sha256_counter_two_stage_row_groups
+    seed: 0
+    population_count: 25243243
+    row_groups_in_population: 256590
+    row_groups_selected: 100
+    rows_drawn: 100
+    draws: 100
+    selected_row_group_transfer_bytes: 1380307759
+    transfer_budget_bytes: 1747832047
+    design: simple random sample of rows without replacement
+    draw_rule: global position = int(SHA-256("<seed>:<draw index>")) mod population
+      count
+    unit: example
+    source_revision: 3c380a731a3429c1d04693d6ec16d7e683def84c
+    requested_count: 100
+    returned_count: 100
+    population: All Arrow/Parquet shards in the pinned repository; configuration and
+      split retained by source filename.
+    shards_in_population: 9499
+    shards_in_release: 9499
+    shard_selection: all pinned shards
+    footer_transfer_bytes: 1252167953
+    total_transfer_bytes: 2902318210
+    selection_note: Rows drawn from the complete pinned release; no complete local
+      index exists.
+    media_selection: Drawn rows kept in draw order only when every embedded image
+      slot opened; unavailable slots are excluded, not substituted.
+  source_scope: All Arrow/Parquet shards in the pinned repository; configuration and
+    split retained by source filename.
+  prepared_receipt_sha256: 76748d40b3d62b28632efc36a1f072a77a06fac15553c0df832de61e2a0a6071
+  note: Real selected native records and original image bytes; not a complete index
+    or a paper-specific population.
+source_url: https://huggingface.co/datasets/HuggingFaceM4/FineVision/tree/3c380a731a3429c1d04693d6ec16d7e683def84c
+tasks:
+- visual instruction tuning
+modalities:
+- image
+- text

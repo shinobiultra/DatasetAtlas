@@ -19,9 +19,12 @@ coverage:
   preview_count: 0
   unit: example
   blockers:
-  - Exact paper-specific source release or selected subset remains unverified; source
-    research alone does not resolve this candidate.
-  - Adapter and preview are not implemented.
+  - 'No release located: the paper (arXiv 2602.01816) says its data and code ''will
+    be released''; no repository or dataset link was found on 2026-10-06.'
+  - 'Hugging Face MCG-NJU/VIABench and Riverlu/VIABench are a DIFFERENT benchmark
+    (VIABench, arXiv 2607.14660: videos from blind individuals). They share a name
+    only and must not be attached to this entry.'
+  - Adapter and preview are not implemented because there is no data to adapt.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -78,4 +81,22 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: original_paper_only_release_unverified
+- kind: source_audit_identity
+  checked_on: '2026-10-06'
+  url: https://arxiv.org/abs/2602.01816
+  note: 'arXiv 2602.01816 ''Seeing Is Believing? A Benchmark for Multimodal Large
+    Language Models on Visual Illusions and Anomalies'' (Hou et al.): 1,004 multiple-choice
+    items in six categories; the abstract says the benchmark data and code will be
+    released and gives no link. The two Hugging Face dataset repos named VIABench
+    carry arXiv 2607.14660 (video benchmark for visual-impairment assistance) and
+    are a name collision.'
+  source_identity_status: no_release_found_name_collision_recorded
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'From the source inspected on 2026-10-06: arXiv abstract inspected: image
+    question-answer benchmark. Not inferred from the dataset name.'
 source_url: https://arxiv.org/abs/2602.01816
+modalities:
+- image
+- text

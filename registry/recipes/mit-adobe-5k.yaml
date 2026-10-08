@@ -1,0 +1,27 @@
+release: mit-adobe-fivek-native-2011
+adapter: fivek
+expected_count: 25000
+preview_media_transfer_bytes: 5300000000  # Measured 5,203,980,204 bytes to open and verify the 100 original 16-bit TIFF previews on the maintainer preparation (about 52 MB each).
+scope: All 25000 expert rendition rows for the 5000 native inputs and five author-labelled expert conditions
+  on the pinned source page. The 100-record preview samples rendition assets; raw DNG inputs remain referenced
+  and unacquired. Original 16-bit TIFF bytes are preserved. No paper-specific expert condition or training
+  subset is inferred.
+adapter_config:
+  media_scope: partial
+  verify_remote_preview_media: true
+  remote_cache_root: work/media-cache/fivek
+  remote_cache_bytes: 200000000
+  media_transfer_bytes: 150000000
+allowed_hosts:
+- data.csail.mit.edu
+convert:
+  name: fivek_renditions
+  count: 25000
+  rows_sha256: cc44b8cb6e837fff2fcb3fb4adb085273487cb2711985ce8170421282dbd8edb
+files:
+- source_name: fivek-native-page.html
+  url: https://data.csail.mit.edu/graphics/fivek/
+  bytes: 4629128
+  sha256: cc11c048a6c29459628cd0989ba28324857988eac10894773b8a20dbb9fd3127
+  config_key: source_page
+  format: html

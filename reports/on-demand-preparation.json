@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-01T04:28:06.454654+00:00",
+  "checked_at": "2026-10-07T09:40:32.552962+00:00",
   "datasets": [
     {
       "dataset_id": "agent-security-bench",
@@ -30,6 +30,16 @@
       "scope": "ArtBench-10 author 32x32 CIFAR binary; 50,000 train and 10,000 test examples",
       "plan_id": "aac58a52359d0a516e1147672cb21eea3d0d0041b5d7f84d8cf66306a5a3807f",
       "prepared_receipt": "work/prepared/artbench/aac58a52359d0a516e1147672cb21eea3d0d0041b5d7f84d8cf66306a5a3807f/receipt.json"
+    },
+    {
+      "dataset_id": "audioset",
+      "release": "audioset-weak-label-v1-native",
+      "snapshot_id": "audioset-e20a1363c75e564b4b93472e",
+      "records": 2084320,
+      "preview_records": 100,
+      "scope": "All 2084320 native weak-label segment annotations across balanced_train, eval and unbalanced_train. Native counts differ from the summary webpage; source headers are preserved. YouTube audio and VGGish features are not acquired. Structured inspection only; audio availability remains partial.",
+      "plan_id": "d6b1feb521bd970f68496251923c094b73f089632693194811c87542cbe1d5bc",
+      "prepared_receipt": "work/prepared/audioset/d6b1feb521bd970f68496251923c094b73f089632693194811c87542cbe1d5bc/receipt.json"
     },
     {
       "dataset_id": "bapps",
@@ -80,6 +90,26 @@
       "scope": "All author-released CausalGym train/dev/test intervention pairs: {'train': 11600, 'dev': 2900, 'test': 2900}. Native base/source segments, target labels and linguistic tasks retained; no new stimuli generated.",
       "plan_id": "7cdf70d4a91d1a538132fb32388428dc410d7f4600ef65c067d8f95afc37307c",
       "prepared_receipt": "work/prepared/causalgym/7cdf70d4a91d1a538132fb32388428dc410d7f4600ef65c067d8f95afc37307c/receipt.json"
+    },
+    {
+      "dataset_id": "cc3m",
+      "release": "0bb028f274446e0b102c1253d087a98eeb4519a3",
+      "snapshot_id": "cc3m-d34368d5ed7fd8c61bb932b3",
+      "records": 3334173,
+      "preview_records": 100,
+      "scope": "Native unlabeled train and validation captions and image URLs in the pinned Google Research repository. The separate machine-labeled configuration is excluded; third-party images have not been acquired. No historical image-byte or paper-subset equality is claimed.",
+      "plan_id": "da9a8efd7b8a48b1447508a2f1f393167444d872001473a48d00727899dafd68",
+      "prepared_receipt": "work/prepared/cc3m/da9a8efd7b8a48b1447508a2f1f393167444d872001473a48d00727899dafd68/receipt.json"
+    },
+    {
+      "dataset_id": "celeba",
+      "release": "cuhk-official-aligned-public-annotations",
+      "snapshot_id": "celeba-4f68b10ae7785997faf4779b",
+      "records": 202599,
+      "preview_records": 100,
+      "scope": "All 202599 filename-joined public author aligned face images, 40 signed attributes, original-photo bounding boxes, aligned landmarks and native train/validation/test partitions. Identity labels require publisher request and are absent; paper-specific subsets remain unidentified. Bounding boxes refer to original photographs and are not overlaid on aligned crops.",
+      "plan_id": "4d935f2df56cb83d9be936065e0fbff6617aad61e9d24e6e84f3d41316057573",
+      "prepared_receipt": "work/prepared/celeba/4d935f2df56cb83d9be936065e0fbff6617aad61e9d24e6e84f3d41316057573/receipt.json"
     },
     {
       "dataset_id": "chartqa",
@@ -192,6 +222,16 @@
       "prepared_receipt": "work/prepared/coco-two/60d8560653b5bd04321440de0e326286705be351fecb2dd3dcb95768301e0918/receipt.json"
     },
     {
+      "dataset_id": "cocogender",
+      "release": "github-8eab34dbcbb49d9a9743b1f6ed26d48f74945a44",
+      "snapshot_id": "cocogender-8becc92c67d150fc3d78ce27",
+      "records": 244242,
+      "preview_records": 100,
+      "scope": "The author-released COCO-GB annotations at the pinned commit, as two separate release variants: v1 (123,287 images in the Karpathy split of COCO 2014 with the author's four-valued gender integer, COCO category IDs, captions and a 1,000-image gender-balanced secret test) and v2 (120,955 image records in three reorganised train/test/fine-tune files). COCO IDs repeat across variants and partitions, so every row is scoped by variant and partition. The gender integer is the author's native value, derived by the authors from caption words, not a perceived or self-reported identity; its coding is not documented for the JSON field itself. Images are COCO 2014 files read on request from the ETag-pinned official archives, not mirrored. The captions are COCO's; v2 fine-tune keeps only some of each image's sentences.",
+      "plan_id": "f30e7701915f03c0b5190d5ad04e23ae4d933bc080d1568db76450b7a29f29fe",
+      "prepared_receipt": "work/prepared/cocogender/f30e7701915f03c0b5190d5ad04e23ae4d933bc080d1568db76450b7a29f29fe/receipt.json"
+    },
+    {
       "dataset_id": "conceptarc",
       "release": "github-0e67da6af879e4bad3d7cd3c196e8d551b445725",
       "snapshot_id": "conceptarc-f1a00e23a30566170d8df113",
@@ -262,14 +302,34 @@
       "prepared_receipt": "work/prepared/custom-propeller-and-rotating-snake-stimuli/b8212b08c27c78b1c5021e4e72a0dd86db8a1cc37e89a6bada91dee4aecdc388/receipt.json"
     },
     {
+      "dataset_id": "datacomp-1b",
+      "release": "086ebeee20d4cc3b3e7c05ae703fcf278ae3a759-first-metadata-shard",
+      "snapshot_id": "datacomp-1b-205fe73e2fa84d584b2ae3f6",
+      "records": 532229,
+      "preview_records": 100,
+      "scope": "All 532229 native metadata records from the first lexicographic Parquet shard, 0035af9f90f581816acf269df5eb37ad.parquet, at the pinned author revision. Caption, original URL/dimensions, CLIP scores, face boxes and SHA-256 fields remain native. This explicitly bounded shard is a subset of DataComp-1B; the other 2663 shards, NPZ embeddings, linked source images and paper-used subset are not prepared. The full-source acquisition plan is retained in registry/source-plans/datacomp-1b-all-shards.yaml.",
+      "plan_id": "ab636cb10a13e59e59bfe3ddaf0d8d81cfd61ca4cdf126da7e7746b0143503fc",
+      "prepared_receipt": "work/prepared/datacomp-1b/ab636cb10a13e59e59bfe3ddaf0d8d81cfd61ca4cdf126da7e7746b0143503fc/receipt.json"
+    },
+    {
       "dataset_id": "div2k",
       "release": "DIV2K-official-published-archives-20260923",
-      "snapshot_id": "div2k-c28595c00366b0495e4ba62f",
+      "snapshot_id": "div2k-e081005897257c3c2cbf03b6",
       "records": 900,
       "preview_records": 100,
       "scope": "All 900 published train/validation image identities (800 train, 100 validation), each joined to HR and all released LR variants (13 LR variants in train, including four wild realizations; ten LR variants in validation) across NTIRE 2017 and 2018 (22 original ZIP archives). Test HR images are not published on the author download page and are outside this released population. Original bytes fetched only on request; strong ETags and ZIP CRCs checked, complete remote archive SHA-256 not computed. No media publication approval.",
-      "plan_id": "c28595c00366b0495e4ba62f1fabb030cf02321270cd57d720c03ce0f722c065",
-      "prepared_receipt": "work/prepared/div2k/c28595c00366b0495e4ba62f1fabb030cf02321270cd57d720c03ce0f722c065/receipt.json"
+      "plan_id": "e081005897257c3c2cbf03b6b443d0bd0e4afab58f5a05a0834c1895a7d73a4b",
+      "prepared_receipt": "work/prepared/div2k/e081005897257c3c2cbf03b6b443d0bd0e4afab58f5a05a0834c1895a7d73a4b/receipt.json"
+    },
+    {
+      "dataset_id": "docvqa",
+      "release": "539088ef8a8ada01ac8e2e6d4e372586748a265e",
+      "snapshot_id": "docvqa-95e71e4ff0dea89c656587a6",
+      "records": 50000,
+      "preview_records": 100,
+      "scope": "Every native DocVQA train, validation and test row in the pinned LMMs-Lab formatted mirror. InfographicVQA is excluded. Native question IDs, document IDs, UCSF page identifiers, question types, answers and split fields remain intact. Preview media are verified original bytes from this mirror; equality to the original RRC archives and the citing paper population is not established. Document media remain local-only.",
+      "plan_id": "2f1e0feeb2b41a277b4e6172cfbe3b3ad652ccbbf6b94e27d2c7a76a43c01190",
+      "prepared_receipt": "work/prepared/docvqa/2f1e0feeb2b41a277b4e6172cfbe3b3ad652ccbbf6b94e27d2c7a76a43c01190/receipt.json"
     },
     {
       "dataset_id": "dreambooth",
@@ -312,6 +372,16 @@
       "prepared_receipt": "work/prepared/emnist/b4c5dbb6769e68cf5f77553765cd2dd312cae8c0bd8b50390d0356e8abca0b83/receipt.json"
     },
     {
+      "dataset_id": "emoset",
+      "release": "EmoSet-118K-native-author-linked-2023",
+      "snapshot_id": "emoset-a6a9d1bc6fbf0747d4a3a61b",
+      "records": 118102,
+      "preview_records": 100,
+      "scope": "All 118,102 original JPEGs and native annotation objects with released train/val/test membership and ordered split rows; no 3.3M-pool or unidentified paper-subset claim. Whole author-linked ZIP SHA-256 measured locally, all member CRC/SHA checked. Independent publisher digest and redistribution/external-provider approval remain absent; local-only.",
+      "plan_id": "32ecd4a024d785b728a9997f89954b95b46c6bf987bf0154ff690f6e589bc5b7",
+      "prepared_receipt": "work/prepared/emoset/32ecd4a024d785b728a9997f89954b95b46c6bf987bf0154ff690f6e589bc5b7/receipt.json"
+    },
+    {
       "dataset_id": "exams-v",
       "release": "e9488045cbad16c973f031c7a8f7466b5dcc3794",
       "snapshot_id": "exams-v-8bb5701d7c67cf214b73ca4d",
@@ -322,6 +392,16 @@
       "prepared_receipt": "work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/receipt.json"
     },
     {
+      "dataset_id": "factoid",
+      "release": "FACTOID-author-linked-native-users-sha42e975c9067c",
+      "snapshot_id": "factoid-38d3940905bae0fa7c110111",
+      "records": 4150,
+      "preview_records": 100,
+      "scope": "All 4,150 native FACTOID user rows from the author-linked gzip, with 4,166 original column labels, full typed cells, original DataFrame axes/dtypes/attrs/flags and byte-identical serialization retained. One Atlas example is one original user row, not a post. Shared container memo identities and nonfinite float bits have explicit envelopes; integer-labelled columns use reversible runs. Missing Reddit text stays missing; no hydration, source-code execution or external provider access. Historical paper membership and source publication/privacy rights remain unverified; local-only.",
+      "plan_id": "0fb4824a01fd1854109f5658181fe28730cb732d29a39638fb416cfa363fa39a",
+      "prepared_receipt": "work/prepared/factoid/0fb4824a01fd1854109f5658181fe28730cb732d29a39638fb416cfa363fa39a/receipt.json"
+    },
+    {
       "dataset_id": "fairface",
       "release": "fairface-author-padding025-and125-fb823086",
       "snapshot_id": "fairface-ef2603000a545d258d028c65",
@@ -330,6 +410,16 @@
       "scope": "Complete native training and validation CSVs, joined by exact filename to both original image ZIPs; 97,698 examples and 195,396 native image variants. Original released crop dimensions are retained; these are not uncropped source photographs. Native age, gender and race labels remain source-provided annotations.",
       "plan_id": "ef2603000a545d258d028c657dccc6ecd7bf662b6f5c29c1797bb11801ee4a5a",
       "prepared_receipt": "work/prepared/fairface/ef2603000a545d258d028c657dccc6ecd7bf662b6f5c29c1797bb11801ee4a5a/receipt.json"
+    },
+    {
+      "dataset_id": "ffhq",
+      "release": "ffhq-dataset-v2-native-70000",
+      "snapshot_id": "ffhq-95a360eb6cb9aeafd49b43dd",
+      "records": 70000,
+      "preview_records": 100,
+      "scope": "All 70,000 publisher FFHQ v2 metadata entries. Native 1024\u00d71024 aligned PNG images retain their original file bytes, file MD5 and decoded pixel MD5; only bounded requested originals are acquired. Thumbnails, in-the-wild files and TFRecords are preserved as source references, not substituted for aligned PNGs. Historical paper subsets and preprocessing remain unidentified; local-only and not approved for external providers or publication.",
+      "plan_id": "489a42999f69dcbb3e44d04c3b9acb50f4f1ee8a1d7c018dda2676b3c8d15f24",
+      "prepared_receipt": "work/prepared/ffhq/489a42999f69dcbb3e44d04c3b9acb50f4f1ee8a1d7c018dda2676b3c8d15f24/receipt.json"
     },
     {
       "dataset_id": "fgvc-aircraft",
@@ -360,6 +450,26 @@
       "scope": "All 1000 string, 1000 numeric, 200 entity-neuron and 75 relation-neuron functions in the author Zenodo v1.0.1 archive. Native auxiliary tables and initial lists are joined exactly. The archive contains only 150 approximation weight files; absence for other functions is retained, and no benchmark execution or scoring is claimed.",
       "plan_id": "21542ebc798c9c161aed091e943b0826834791947a1ea83ad392d53501b3c686",
       "prepared_receipt": "work/prepared/find/21542ebc798c9c161aed091e943b0826834791947a1ea83ad392d53501b3c686/receipt.json"
+    },
+    {
+      "dataset_id": "finevision",
+      "release": "3c380a731a3429c1d04693d6ec16d7e683def84c",
+      "snapshot_id": "finevision-17fa663a721c77ca65d752db",
+      "records": 25243243,
+      "preview_records": 100,
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "plan_id": "51630c1c589cd1bb5e66989b78c75f9b6a8b17702013599b176c94e4bc865b29",
+      "prepared_receipt": "work/prepared/finevision/51630c1c589cd1bb5e66989b78c75f9b6a8b17702013599b176c94e4bc865b29/receipt.json"
+    },
+    {
+      "dataset_id": "flickr30k",
+      "release": "nlphuji-mirror-2b239befc81b6e3f035ce6bd52f5f4d60f5625f7",
+      "snapshot_id": "flickr30k-01ef654ef2ae461bd369608c",
+      "records": 31014,
+      "preview_records": 100,
+      "scope": "All 31014 native CSV image rows with ordered captions, sentence IDs and train/val/test memberships from the pinned nlphuji mirror. The ZIP has 31783 original JPEGs: unused originals are retained as source membership, not invented annotation rows. The original publisher population and paper-specific subsets remain distinct.",
+      "plan_id": "96cb742a60008433766218c132eac042d049df6d92fba3d8596f1959652088e8",
+      "prepared_receipt": "work/prepared/flickr30k/96cb742a60008433766218c132eac042d049df6d92fba3d8596f1959652088e8/receipt.json"
     },
     {
       "dataset_id": "flowers102",
@@ -482,6 +592,16 @@
       "prepared_receipt": "work/prepared/illuchar/df53383aaaa234f3f95818ec4c5bd1bde4ee9c29737ef4a0913d281e0ab532be/receipt.json"
     },
     {
+      "dataset_id": "illusionbench-3c643c29",
+      "release": "hf-8ee046d8acfb968c1a6a564f231396bc0c4039ae",
+      "snapshot_id": "illusionbench-3c643c29-5b6cbb8d761d22b8d8f7a76d",
+      "records": 1041,
+      "preview_records": 100,
+      "scope": "All 1,041 annotated entries of the authors' Image_properties.json at the pinned Hugging Face revision (5,577 questions: 2,213 true/false and 3,364 multiple choice, with the authors' answers and difficulty/category fields). The release is not consistent with itself or the paper (1,051 images and 5,548 questions): its archive holds 1,008 images, 997 match an annotation, 44 annotated entries have no image in the archive (kept as records with the image marked absent from the pinned release) and 11 archived images have no annotation (not indexed; named in the registry evidence). Images are read on request from the authors' ETag-pinned archive.",
+      "plan_id": "17bce8a3c5df4bfe716f9b2396b4e3f1f2f48546cd2857a2b55412d7e2784267",
+      "prepared_receipt": "work/prepared/illusionbench-3c643c29/17bce8a3c5df4bfe716f9b2396b4e3f1f2f48546cd2857a2b55412d7e2784267/receipt.json"
+    },
+    {
       "dataset_id": "illusionmnist",
       "release": "official-collection-a197e3e89ea6740e",
       "snapshot_id": "illusionmnist-dcfed09bae9f2498897a2cf8",
@@ -502,6 +622,16 @@
       "prepared_receipt": "work/prepared/illusoryvqa/3c6eaab517eb3497b8e31a04cd514f441f9fc0078daba89a9743b595f7e71d25/receipt.json"
     },
     {
+      "dataset_id": "imagenet-1k",
+      "release": "49e2ee26f3810fb5a7536bbf732a7b07389a47b5",
+      "snapshot_id": "imagenet-1k-d6f099d5ff6c38335f6792c3",
+      "records": 1431167,
+      "preview_records": 100,
+      "scope": "All native train, validation and test Parquet rows in the pinned ILSVRC author repository. Test labels remain the released unknown value. Image bytes are read on request; only verified preview originals are retained. This release does not establish paper-specific sample membership.",
+      "plan_id": "16d1afd52529e8af251ada25e0818ab0cb1b1c03b841016c2a73de81fb04b201",
+      "prepared_receipt": "work/prepared/imagenet-1k/16d1afd52529e8af251ada25e0818ab0cb1b1c03b841016c2a73de81fb04b201/receipt.json"
+    },
+    {
       "dataset_id": "imagenet-a",
       "release": "imagenet-a-original-tar-3bb36322",
       "snapshot_id": "imagenet-a-54b2af5ad790129b1d342087",
@@ -512,6 +642,26 @@
       "prepared_receipt": "work/prepared/imagenet-a/54b2af5ad790129b1d342087635ddeb3d1d4da48afe1edbd963bfdc29d6e80f4/receipt.json"
     },
     {
+      "dataset_id": "imagenet-c",
+      "release": "imagenet-c-zenodo-2235448-v1",
+      "snapshot_id": "imagenet-c-48f864aa463ccc9c07b8e707",
+      "records": 4750000,
+      "preview_records": 100,
+      "scope": "All native corruption/class/severity JPEGs in the five publisher archives, including the extra corruptions. Complete archive MD5 and SHA-256, every member SHA-256, gzip checkpoints and compressed-block SHA-256 are verified and retained. Archive bodies are retired only after cold original-member checks; later originals use bounded hash-verified HTTPS ranges. Paper-specific corruption selections are not inferred. Acquisition uses a revision-pinned Hugging Face mirror; every complete archive must match BOTH its pinned SHA-256 and the original Zenodo publisher MD5 before being accepted.",
+      "plan_id": "172042359143d124bea1d71f318c8c1b74ef0b29ea1f8f496898a974637da3fe",
+      "prepared_receipt": "work/prepared/imagenet-c/172042359143d124bea1d71f318c8c1b74ef0b29ea1f8f496898a974637da3fe/receipt.json"
+    },
+    {
+      "dataset_id": "imagenet-ilsvrc-2012",
+      "release": "49e2ee26f3810fb5a7536bbf732a7b07389a47b5",
+      "snapshot_id": "imagenet-ilsvrc-2012-5437a4609fb98361905372ef",
+      "records": 1281167,
+      "preview_records": 100,
+      "scope": "All 1,281,167 native ILSVRC2012 training images in the pinned authorized ILSVRC author release. The validation and unlabeled test populations are excluded. Native source filenames and labels remain intact. This is the available full training population; the citing paper learned representation and cross-validation membership remain unidentified. Media remain local-only.",
+      "plan_id": "7c1b9124bf7a57ec4ef595c0f519852f084328b0b141f1d3afb0cc4f18db3013",
+      "prepared_receipt": "work/prepared/imagenet-ilsvrc-2012/7c1b9124bf7a57ec4ef595c0f519852f084328b0b141f1d3afb0cc4f18db3013/receipt.json"
+    },
+    {
       "dataset_id": "imagenet-r",
       "release": "imagenet-r-original-tar-18c6bf49",
       "snapshot_id": "imagenet-r-9ec005c87cd8302c3286b193",
@@ -520,6 +670,16 @@
       "scope": "Original author ImageNet-R TAR: 30,000 source images across 200 synset folders",
       "plan_id": "9ec005c87cd8302c3286b193a106aaf13165af997063776e97bb9f2966eb9182",
       "prepared_receipt": "work/prepared/imagenet-r/9ec005c87cd8302c3286b193a106aaf13165af997063776e97bb9f2966eb9182/receipt.json"
+    },
+    {
+      "dataset_id": "imagenet-segmentation",
+      "release": "native-gtsegs-ijcv-511a987eeae9cceb",
+      "snapshot_id": "imagenet-segmentation-b63e3c95b40c88bfa7d8ac21",
+      "records": 4276,
+      "preview_records": 100,
+      "scope": "All 4276 native MATLAB image references and all linked groundtruth mask cells. The pinned CLIP text-span author loader uses the first mask cell; additional mask cells remain separately inspectable. Native class IDs, image dimensions and independent mask dimensions are preserved: 2872 first-mask pairs have different geometry and are explicitly flagged. PNGs preserve MATLAB pixels after the author's axis transpose; the original MAT bytes remain retained. No resizing, thresholding or ImageNet-S substitution is performed.",
+      "plan_id": "f95f2951813c3ce629b694fbe7c91d0805d7a1a14a1c0213fa49d64869def432",
+      "prepared_receipt": "work/prepared/imagenet-segmentation/f95f2951813c3ce629b694fbe7c91d0805d7a1a14a1c0213fa49d64869def432/receipt.json"
     },
     {
       "dataset_id": "imagenet-sketch",
@@ -542,6 +702,26 @@
       "prepared_receipt": "work/prepared/imagenet-v2/1c43e6f3cb87b6960ebaab3c03548c16a6810488332bd63cd7199feb24236800/receipt.json"
     },
     {
+      "dataset_id": "inaturalist",
+      "release": "inat2021-validation",
+      "snapshot_id": "inaturalist-0e3e1ae705e36be4f9ded293",
+      "records": 100000,
+      "preview_records": 100,
+      "scope": "Complete native iNaturalist 2021 validation release: 100,000 original images, 10,000 native taxa, every taxonomy field, per-image licence, rights holder and native location metadata. Original archives are checksum-verified then retired with bounded original access. The citing paper challenge release and exact SAE membership remain unidentified. Observation coordinates and media remain local-only.",
+      "plan_id": "466c30ecbe1e6e786dbd5fb9e52b940f01503c560d623600dfe8d0ba9de76811",
+      "prepared_receipt": "work/prepared/inaturalist/466c30ecbe1e6e786dbd5fb9e52b940f01503c560d623600dfe8d0ba9de76811/receipt.json"
+    },
+    {
+      "dataset_id": "interpbench",
+      "release": "author-benchmark-a1242a84f8a4d07d1be9a8f5ec710415198016b2",
+      "snapshot_id": "interpbench-860f056677610641edc9cdf0",
+      "records": 86,
+      "preview_records": 86,
+      "scope": "All 86 author-released benchmark case/model metadata rows, preserving task descriptions, native architecture/training fields and model/circuit source links. The unit is a benchmark case, not a generated model input. No pickle, circuit or weights file is executed, loaded or substituted for fixed input examples; generated training/evaluation inputs are outside this metadata population.",
+      "plan_id": "d5002444d06cd8335405030945121482c1a97491a39ec27f6375266e1b5d3c87",
+      "prepared_receipt": "work/prepared/interpbench/d5002444d06cd8335405030945121482c1a97491a39ec27f6375266e1b5d3c87/receipt.json"
+    },
+    {
       "dataset_id": "jiechieu-tsopze-resume-corpus",
       "release": "24de39957d99caf2c89cf384ba2396bafe16050d",
       "snapshot_id": "jiechieu-tsopze-resume-corpus-ecd3403084c8be2481293438",
@@ -550,6 +730,36 @@
       "scope": "All 29783 exact .txt/.lab pairs in the native resumes_corpus.zip, preserving original text, raw labels, category lists and member SHA-256 values. The flat export, occupation normalization and skills files remain original source artifacts, without guessing undocumented joins. No public redistribution approval.",
       "plan_id": "ecd3403084c8be24812934381716a87795e73f19dbecec418cf2c1335e41ea94",
       "prepared_receipt": "work/prepared/jiechieu-tsopze-resume-corpus/ecd3403084c8be24812934381716a87795e73f19dbecec418cf2c1335e41ea94/receipt.json"
+    },
+    {
+      "dataset_id": "laion-400m",
+      "release": "laion400m-original-2021-first-metadata-shard-e1e0eebf0d9f-native-rows",
+      "snapshot_id": "laion-400m-3883b6167124755868318e51",
+      "records": 12933524,
+      "preview_records": 100,
+      "scope": "All12933524 native URL/caption annotation rows in the first of32 original LAION400M metadata shards on the publisher distribution. Preserves SAMPLE_ID, URL, TEXT, HEIGHT, WIDTH, LICENSE, NSFW and similarity exactly. This is annotation browsing; no linked image bytes are acquired. Other31 shards, embeddings, source-image availability and exact citing-paper subset remain unprepared. ReLAION is a different filtered release.",
+      "plan_id": "a8906cc1719e2386f7fd159ad6ccf0499eb38a0a6b09fb1246e400eb386b238b",
+      "prepared_receipt": "work/prepared/laion-400m/a8906cc1719e2386f7fd159ad6ccf0499eb38a0a6b09fb1246e400eb386b238b/receipt.json"
+    },
+    {
+      "dataset_id": "language-identification-dataset",
+      "release": "hf-aa56583bf2bc52b0565770607d6fc3faebecf9e2",
+      "snapshot_id": "language-identification-dataset-c0c259517bfb01761de43b70",
+      "records": 90000,
+      "preview_records": 100,
+      "scope": "All 90,000 rows of the Hugging Face papluca/language-identification dataset at the pinned revision: 70,000 train, 10,000 validation and 10,000 test texts, 3,500/500/500 per language, 20 languages, each with the author's language label. The card gives no licence and lists extended amazon_reviews_multi, xnli and stsb_multi_mt sources. The corpus paper only cites this dataset as the one its language-detection model was fine-tuned on (footnote 7); it did not evaluate on it.",
+      "plan_id": "f86d4477bf74ed80b2dcfb29b36de9908dd66eaf864713fe632a89a0052c50ec",
+      "prepared_receipt": "work/prepared/language-identification-dataset/f86d4477bf74ed80b2dcfb29b36de9908dd66eaf864713fe632a89a0052c50ec/receipt.json"
+    },
+    {
+      "dataset_id": "lingoqa",
+      "release": "lingoqa-evaluation-author-20240312",
+      "snapshot_id": "lingoqa-a86d3e40ae7c4e78cfc90b7a",
+      "records": 1000,
+      "preview_records": 100,
+      "scope": "All 1000 native evaluation annotation rows, retaining both source answers for each of 500 questions, original question/segment/index fields and five ordered original JPEG frames for each of 100 driving segments. This is the author evaluation release, not the training population or newly extracted video frames.",
+      "plan_id": "5fd702851af0eb6816d8b7bdd0636b97c5b1a4fc43eca2b9d28a338150e7ba0a",
+      "prepared_receipt": "work/prepared/lingoqa/5fd702851af0eb6816d8b7bdd0636b97c5b1a4fc43eca2b9d28a338150e7ba0a/receipt.json"
     },
     {
       "dataset_id": "llava-instruct-150k-3a74a703",
@@ -582,6 +792,36 @@
       "prepared_receipt": "work/prepared/medical-multimodal-evaluation-data/f5d28789a26e7367502e3119c2382e016d8254b005c94ee9d6bff4805187329f/receipt.json"
     },
     {
+      "dataset_id": "miap",
+      "release": "open-images-extended-miap-native-202106",
+      "snapshot_id": "miap-a3ebef5f2a9364fd38f78fab",
+      "records": 100000,
+      "preview_records": 100,
+      "scope": "All 100000 native image keys and all 472186 released person boxes across train, validation and test. Native person-box values, image order and annotation-row joins are preserved. Only selected preview JPEGs are verified; all other original images remain unverified and are read on request.",
+      "plan_id": "2236d45f9cff14869f35fa852e7b0c4aadb4188cab9f71a27acc27803cb9c9e5",
+      "prepared_receipt": "work/prepared/miap/2236d45f9cff14869f35fa852e7b0c4aadb4188cab9f71a27acc27803cb9c9e5/receipt.json"
+    },
+    {
+      "dataset_id": "mit-adobe-5k",
+      "release": "mit-adobe-fivek-native-2011",
+      "snapshot_id": "mit-adobe-5k-f3036ad4c3c0536ed77cf3b8",
+      "records": 25000,
+      "preview_records": 100,
+      "scope": "All 25000 expert rendition rows for the 5000 native inputs and five author-labelled expert conditions on the pinned source page. The 100-record preview samples rendition assets; raw DNG inputs remain referenced and unacquired. Original 16-bit TIFF bytes are preserved. No paper-specific expert condition or training subset is inferred.",
+      "plan_id": "0ee39bb1cbfb77625b3bc506180cebe4e31fe9841ad7c585837b8c6157d36009",
+      "prepared_receipt": "work/prepared/mit-adobe-5k/0ee39bb1cbfb77625b3bc506180cebe4e31fe9841ad7c585837b8c6157d36009/receipt.json"
+    },
+    {
+      "dataset_id": "mit-states",
+      "release": "mit-states-mirror-d3f1d1b05431a92aed318c5dd9f660866fcfa2a6",
+      "snapshot_id": "mit-states-1419d70e19d4c3e17d29042a",
+      "records": 63440,
+      "preview_records": 100,
+      "scope": "All 63,440 JPEG members under the MIT States images directory of the pinned public MIT States/UT-Zappos mirror. Native pair folders and filenames are preserved without splitting compound labels. Other bundle members are explicitly excluded. Mirror bytes are retained unchanged; byte equality and image-quality equality to the publisher archive, historical paper subsets and redistribution rights remain unverified. No pickles, Torch files, notebooks or source code are executed.",
+      "plan_id": "990a9b1375318b5a15c47904b2ce60249b9794e44c3d3b2aabf7b8cb81673336",
+      "prepared_receipt": "work/prepared/mit-states/990a9b1375318b5a15c47904b2ce60249b9794e44c3d3b2aabf7b8cb81673336/receipt.json"
+    },
+    {
       "dataset_id": "mllmu-bench",
       "release": "e91a01eb060b61be8dbde7edb48b121341bd0890",
       "snapshot_id": "mllmu-bench-b3001307bd1e61f205d498bf",
@@ -600,6 +840,16 @@
       "scope": "All 1680 native question records with three image variants (SD, SD_TYPO, TYPO), plus five original image groups without released question annotations: 1685 records and 5055 image members. Original prompts retained as inert data; no attacks executed. Questions from pinned author Git revision, images from author-linked Drive archive. Research-only license; no publication approval.",
       "plan_id": "ef9dc9d1057214c3eca5b3b23241ff26f03a4a882703cad75b10ee93012ab70e",
       "prepared_receipt": "work/prepared/mm-safetybench/ef9dc9d1057214c3eca5b3b23241ff26f03a4a882703cad75b10ee93012ab70e/receipt.json"
+    },
+    {
+      "dataset_id": "mma-diffusion",
+      "release": "native-prompt-benchmark-9f70ce2e897f7930aa0e34900389959235433e9a",
+      "snapshot_id": "mma-diffusion-cbe4e8ca8fb7b012470a1e6d",
+      "records": 1000,
+      "preview_records": 100,
+      "scope": "All 1000 native prompt benchmark rows, preserving target, adversarial, sanitized adversarial and clean prompts as distinct native fields. The separate image benchmark and the paper-specific purified image collection remain unprepared and unidentified.",
+      "plan_id": "c8a3c14d38fc0cc4c151d2273c54d8fd466256cdb8390894ec45f6007bdfe275",
+      "prepared_receipt": "work/prepared/mma-diffusion/c8a3c14d38fc0cc4c151d2273c54d8fd466256cdb8390894ec45f6007bdfe275/receipt.json"
     },
     {
       "dataset_id": "mmbench",
@@ -652,6 +902,16 @@
       "prepared_receipt": "work/prepared/mmstar/575b7bceafdb3600130af8c38d7b1329d97167c7983ff0945f4e882bfec813f8/receipt.json"
     },
     {
+      "dataset_id": "mvbench-scene-qa",
+      "release": "author-scene-qa-230a2d4fac8900333c61754641c7a13e069ac9c6",
+      "snapshot_id": "mvbench-scene-qa-f470f9c1c599a80dfa0ee443",
+      "records": 200,
+      "preview_records": 100,
+      "scope": "All 200 native Scene QA scene-transition questions in the pinned MVBench author release, with ordered candidate answers and exact original video keys. Forward-order clips remain distinct from the paper's unreleased reversed-frame condition; other MVBench tasks are excluded.",
+      "plan_id": "6e49c33c5ecd40514ae8aa9c1a0a23d4dbd5dc029110597ea1bf905efa836f84",
+      "prepared_receipt": "work/prepared/mvbench-scene-qa/6e49c33c5ecd40514ae8aa9c1a0a23d4dbd5dc029110597ea1bf905efa836f84/receipt.json"
+    },
+    {
       "dataset_id": "naturalbench",
       "release": "ba41a7d564877a9b64c094b08015ca493cc3e54b",
       "snapshot_id": "naturalbench-3a316bc9ca232b3988341858",
@@ -680,6 +940,26 @@
       "scope": "All 19971 native English entries in v1 and 54801 entries in v2.1 (74772 versioned terms). Retain all 108 v1 automatic translations and every native score/dimension/subset export with native row positions. Original version scales differ: v1 [0,1], v2.1 [-1,1]. Export values are not silently normalized, including the source BipolarScale/PolarSubset files. NRC and Saif M. Mohammad attribution retained. Noncommercial local research use; redistribution prohibited.",
       "plan_id": "211641de9b969b2e119b8adb7e79285fe3970c101f7a87f455d9968f3a7b1fe3",
       "prepared_receipt": "work/prepared/nrc-vad/211641de9b969b2e119b8adb7e79285fe3970c101f7a87f455d9968f3a7b1fe3/receipt.json"
+    },
+    {
+      "dataset_id": "oasis",
+      "release": "author-osf-6pnd7-uxvpb-corrected-20170926",
+      "snapshot_id": "oasis-6d34d8d6f56a33c3ff05bcb6",
+      "records": 900,
+      "preview_records": 100,
+      "scope": "All 900 original OASIS JPEGs joined to the native overall normative table and the corrected 2017-09-26 gender table in the author OSF archive. Raw source strings are retained. Two image joins remove trailing whitespace only, with explicit flags; norms are not rewritten. Participant-level responses and the paper's selected stimuli remain separate. Every row links its original JPEG in the pinned archive, and the preview retains 100 of those originals.",
+      "plan_id": "558c4ab6bab5ac00e47d3777f191f2337cd2c94f58e5319fd3f5967978dcbd8d",
+      "prepared_receipt": "work/prepared/oasis/558c4ab6bab5ac00e47d3777f191f2337cd2c94f58e5319fd3f5967978dcbd8d/receipt.json"
+    },
+    {
+      "dataset_id": "objaverse",
+      "release": "objaverse-1.0-21e4e142159e2153706c23a3a02e55cec5591cea",
+      "snapshot_id": "objaverse-19f1f6fdea460cb626f0484e",
+      "records": 798759,
+      "preview_records": 100,
+      "scope": "All 798,759 native Objaverse 1.0 UIDs, complete original object metadata JSON and ordered native LVIS categories. Per-object licences and 387 non-hexadecimal UIDs remain unchanged. 100 original self-contained GLB preview objects are verified within explicit byte, geometry and texture limits; larger or unsupported candidate objects remain in the full annotation index and are reported as preview exclusions. The citing paper 55 rendered objects, exact UIDs and render conditions remain unidentified. No object media is publicly distributed.",
+      "plan_id": "c74b675ffb039e3edfe8356e647587158df55a48f02f4c9e1748317649dc8b74",
+      "prepared_receipt": "work/prepared/objaverse/c74b675ffb039e3edfe8356e647587158df55a48f02f4c9e1748317649dc8b74/receipt.json"
     },
     {
       "dataset_id": "objectnet",
@@ -712,6 +992,16 @@
       "prepared_receipt": "work/prepared/omnispatial/689646803151cca434269285d100083ab6fc80322c14fd7424fbbb6d9cf82a49/receipt.json"
     },
     {
+      "dataset_id": "openimages",
+      "release": "open-images-v7-native-validation-tables-202210",
+      "snapshot_id": "openimages-6d883481727ff1663f4528ba",
+      "records": 41620,
+      "preview_records": 100,
+      "scope": "All 41620 native validation image metadata rows joined to 595339 human image-label rows, 303980 bounding boxes, 27243 visual relationships and 24730 segmentation annotation rows from the tables linked by the V7 publisher page. Native strings, negative labels, empty values and per-table ordinal identities are preserved. The V7 class table lacks names for eight referenced native class/attribute IDs; these remain explicit null names. Original CVDF JPEGs are fetched only for inspected examples. Mask PNGs, localized narratives, V7 point labels, train/test and exact paper release memberships are outside this declared snapshot.",
+      "plan_id": "3528ea6bb77f72a1256f2939929a825d762bc4f8dd03cb4a3d3b21e98f5af60f",
+      "prepared_receipt": "work/prepared/openimages/3528ea6bb77f72a1256f2939929a825d762bc4f8dd03cb4a3d3b21e98f5af60f/receipt.json"
+    },
+    {
       "dataset_id": "oxfordpet",
       "release": "oxford-iiit-pet-original",
       "snapshot_id": "oxfordpet-c812b4c6a2a467571c2dc4eb",
@@ -720,6 +1010,26 @@
       "scope": "All 7,349 annotated Oxford-IIIT Pet images; original trainval and test splits.",
       "plan_id": "c812b4c6a2a467571c2dc4eb5e41b56c12609d9eb79856969396da1e811aebe7",
       "prepared_receipt": "work/prepared/oxfordpet/c812b4c6a2a467571c2dc4eb5e41b56c12609d9eb79856969396da1e811aebe7/receipt.json"
+    },
+    {
+      "dataset_id": "pascal-voc",
+      "release": "voc2011-author-native-archive-14961",
+      "snapshot_id": "pascal-voc-65c6a48a2e8d4384933a556a",
+      "records": 14961,
+      "preview_records": 100,
+      "scope": "All14961 native VOC2011 archive JPEG/XML pairs, preserving exact XML,20 signed classification labels and all102 image-set tables. Main classification trainval has11540 images;3421 other archive images retain absent classification labels. Native2223 class/object mask pairs are linked as original palette PNG assets. Other VOC years and the citing survey paper specific release/subset remain unresolved.",
+      "plan_id": "cecb7ca799654e6e3714f178e1e76fc3c736b9870572531d164712eca5e2e37d",
+      "prepared_receipt": "work/prepared/pascal-voc/cecb7ca799654e6e3714f178e1e76fc3c736b9870572531d164712eca5e2e37d/receipt.json"
+    },
+    {
+      "dataset_id": "pata",
+      "release": "PATA author label/URL and caption metadata @ c65a7f34e6e200d77b82a53d33b224389798ff6c",
+      "snapshot_id": "pata-metadata-23abe811fea14abf1a4bb663",
+      "records": 4934,
+      "preview_records": 0,
+      "scope": "All released label/URL rows and exact scene captions; no third-party media requested.",
+      "plan_id": "metadata-23abe811fea14abf1a4bb663b942502950ede3c1a84e372267697efdd6ab787f",
+      "prepared_receipt": "work/prepared/pata/metadata-23abe811fea14abf1a4bb663b942502950ede3c1a84e372267697efdd6ab787f/receipt.json"
     },
     {
       "dataset_id": "phantom",
@@ -740,6 +1050,16 @@
       "scope": "All 14,275 training and 4,614 validation images in the author-linked 20221101 release, with both complete individual-vote and aggregated-region annotation tables. Auxiliary annotators.csv and README are retained in the original annotation ZIP. Annotation values describe human perceptions, not verified personal attributes.",
       "plan_id": "176f56b79c6a0003d36fe74aa70156d0c1f8f7bc1fe2621362625b60d36cee33",
       "prepared_receipt": "work/prepared/phase/176f56b79c6a0003d36fe74aa70156d0c1f8f7bc1fe2621362625b60d36cee33/receipt.json"
+    },
+    {
+      "dataset_id": "places",
+      "release": "places365-standard-validation-256-native",
+      "snapshot_id": "places-0516b70aa6c24604d8f265db",
+      "records": 36500,
+      "preview_records": 100,
+      "scope": "All36500 native Places365 Standard validation images in the author val_256 release with all365 native category labels and exact validation file-list joins. The256pixel release is publisher-prepared; Atlas preserves its JPEG bytes. Places205, Challenge, training images, larger image variants and the survey paper unspecified Places population are outside this snapshot.",
+      "plan_id": "c5a999c4e9ce824ae3ed7b00a88f244ad946c8873762c2384d3a13e7be36b2cf",
+      "prepared_receipt": "work/prepared/places/c5a999c4e9ce824ae3ed7b00a88f244ad946c8873762c2384d3a13e7be36b2cf/receipt.json"
     },
     {
       "dataset_id": "pmc-vqa",
@@ -772,6 +1092,36 @@
       "prepared_receipt": "work/prepared/ravel/17f66185e65ba33d01ed27661cb363c2f922dc6261ee9a9cd87b15f4553789a6/receipt.json"
     },
     {
+      "dataset_id": "recap-datacomp-1b",
+      "release": "457c44d98651bcfdfb3cc8695f5e60a0d2705e78-author-preview",
+      "snapshot_id": "recap-datacomp-1b-a77c02c3714fddb5c7e223fb",
+      "records": 1000,
+      "preview_records": 100,
+      "scope": "All 1000 native rows in the author-published preview split at pinned HF revision 457c44d98651bcfdfb3cc8695f5e60a0d2705e78. Preserves original/rewritten/conditioned captions and scores. Excludes the 940890257-row training release; third-party source image URLs are metadata, and no image bytes are acquired.",
+      "plan_id": "4a0a2fa7609e23f9d5decfa655001ea96374b51637a1d5c54eefaf523f99e3da",
+      "prepared_receipt": "work/prepared/recap-datacomp-1b/4a0a2fa7609e23f9d5decfa655001ea96374b51637a1d5c54eefaf523f99e3da/receipt.json"
+    },
+    {
+      "dataset_id": "restricted-imagenet",
+      "release": "49e2ee26f3810fb5a7536bbf732a7b07389a47b5",
+      "snapshot_id": "restricted-imagenet-19b7bb271d7bdd721e205899",
+      "records": 267898,
+      "preview_records": 100,
+      "scope": "All 257,748 native training images and 10,150 validation images in the nine inclusive MadryLab RestrictedImageNet class ranges over the pinned authorized ILSVRC author release. Native labels and filenames remain unchanged; grouped labels preserve the pinned author mapping separately. All 1,000 native training label/WNID pairs were verified to match lexicographic ImageFolder class ordering before applying these ranges. The unlabeled test split is excluded. This available release does not establish the citing paper exact trained-model or sample membership; media remain local-only.",
+      "plan_id": "50ae3bd26058bc3ff94f8d726bb7d904a26c1f714b53ca7c3edf97448e48ad76",
+      "prepared_receipt": "work/prepared/restricted-imagenet/50ae3bd26058bc3ff94f8d726bb7d904a26c1f714b53ca7c3edf97448e48ad76/receipt.json"
+    },
+    {
+      "dataset_id": "ring-a-bell",
+      "release": "hf-ce2df13b0ec372b2ca80460d5746ba8b933d6d17",
+      "snapshot_id": "ring-a-bell-27f2bb7cb5b62c59d0590559",
+      "records": 285,
+      "preview_records": 100,
+      "scope": "All 285 author-released Ring-A-Bell nudity InvPrompts at the pinned Hugging Face revision: three files of 95 prompts, one per (K, eta) setting (K=16, 38, 77; eta=3), each with the author's case number and evaluation seed. Only the nudity concept is released; the corpus paper does not say which concept or setting it used. Prompts are adversarial text, not images.",
+      "plan_id": "2942cdc33058bbe2f6af66db6980515f73ff1252fc8cb50f15517244a8500322",
+      "prepared_receipt": "work/prepared/ring-a-bell/2942cdc33058bbe2f6af66db6980515f73ff1252fc8cb50f15517244a8500322/receipt.json"
+    },
+    {
       "dataset_id": "roco",
       "release": "a1f0ad6c578ca8801e5a6eccc90af051aee1c326",
       "snapshot_id": "roco-22428cb5affabcf475c57290",
@@ -780,6 +1130,16 @@
       "scope": "All 87,927 distinct ROCO IDs in the original author repository's six split/domain groups.",
       "plan_id": "22428cb5affabcf475c57290b57f7b706c60fc513319051e698bbceb4dbfc92a",
       "prepared_receipt": "work/prepared/roco/22428cb5affabcf475c57290b57f7b706c60fc513319051e698bbceb4dbfc92a/receipt.json"
+    },
+    {
+      "dataset_id": "rs-vqa",
+      "release": "zenodo-6344334-v1.0",
+      "snapshot_id": "rs-vqa-70bccdf9a169df9e133a76f9",
+      "records": 77232,
+      "preview_records": 100,
+      "scope": "All 77,232 questions of the author's RSVQA-LR Zenodo release (record 6344334 v1.0, CC BY 4.0): the 57,223 train, 10,005 validation and 10,004 test question/answer pairs over the 772 Sentinel-2 images, each with its native question type, annotator IDs and image sensor/geolocation fields. Images are the archive's original 256x256 TIFFs, unchanged. RSVQA-HR and RSVQAxBEN are separate releases and are not prepared; the survey table that cites RS-VQA does not say which variant it means.",
+      "plan_id": "a8316c3d60880c30b78a1d13c0ae1daabaf24dba74d5f5ca5205796b602ed1e3",
+      "prepared_receipt": "work/prepared/rs-vqa/a8316c3d60880c30b78a1d13c0ae1daabaf24dba74d5f5ca5205796b602ed1e3/receipt.json"
     },
     {
       "dataset_id": "rsicd",
@@ -800,6 +1160,16 @@
       "scope": "All 127173 native samples plus three native trial records across the 13 published structs.zip archives at the pinned author revision. These are native templates/definitions, including repeated task variants, not a claim of 127176 distinct rendered benchmark questions. Non-batch template context remains in original archives. Procedural benchmark execution and cached model results are outside this source-browser scope. No plaintext questions or answers may be committed or published.",
       "plan_id": "e00d59eacc1a244e4ca086c65806888d358d44f8a1db883f198b06a0466666a0",
       "prepared_receipt": "work/prepared/sad/e00d59eacc1a244e4ca086c65806888d358d44f8a1db883f198b06a0466666a0/receipt.json"
+    },
+    {
+      "dataset_id": "saegis-clean-and-adversarial-splits",
+      "release": "github-6365cbfc9e4de1e6df01624b793abbef09789cc8",
+      "snapshot_id": "saegis-clean-and-adversarial-splits-b248271dc538be4b1bef0744",
+      "records": 4800,
+      "preview_records": 100,
+      "scope": "All 4,800 images committed to the SAEgis author repository at the pinned commit: three source datasets (NIPS17, LLaVA-Instruct-150K, Medical-Multimodal-Eval), each with 800 train, 100 dev and 100 test clean originals, plus 100 dev and 100 test attacked variants from each of three attack methods (FOA-Attack, M-Attack, SSA-CWA). Every image is 224x224 and is fetched unchanged from the pinned commit, verified against its Git blob SHA-1. An attacked image's clean counterpart is the original with the same file name in the same split (all 1,800 pairs checked by pixel similarity; see reports/saegis-pairing-verification-20261006.json). The repository has no licence file and the images derive from third-party datasets, so everything stays local.",
+      "plan_id": "e0cea341c62942478275b1221affc1cb136346c9655ac2f8d95c23b2031f3c73",
+      "prepared_receipt": "work/prepared/saegis-clean-and-adversarial-splits/e0cea341c62942478275b1221affc1cb136346c9655ac2f8d95c23b2031f3c73/receipt.json"
     },
     {
       "dataset_id": "safebench",
@@ -922,6 +1292,16 @@
       "prepared_receipt": "work/prepared/shapes-relations/d76e5d0368bd2a47e7864ae3e4eac09cc520bf5939f3529c7f3b7c4ec0bedf31/receipt.json"
     },
     {
+      "dataset_id": "shapeworld",
+      "release": "author-fixed-examples-e720bf46e57fc01326d04d639fa6133d9c12158f",
+      "snapshot_id": "shapeworld-9eaf32f9ba60f4efbdd2c398",
+      "records": 2100,
+      "preview_records": 100,
+      "scope": "All 2100 fixed author-released world examples across the 21 agreement and classification configurations at the pinned Git revision. This is the released example population, not an arbitrary newly generated dataset or a paper-specific training population.",
+      "plan_id": "6b074e656c00c8318cb6f3aefbf6ce9f053f334d5d277444967099739018d585",
+      "prepared_receipt": "work/prepared/shapeworld/6b074e656c00c8318cb6f3aefbf6ce9f053f334d5d277444967099739018d585/receipt.json"
+    },
+    {
       "dataset_id": "simplevqa",
       "release": "037cf89fb6f1212691756b66d1ecde6c2ce89e54",
       "snapshot_id": "simplevqa-8382305d27a65ddcdbc544e1",
@@ -942,6 +1322,16 @@
       "prepared_receipt": "work/prepared/smolim2-135m-10b/a279e2f43713aa8fcfdbae1a937d80cd54a581d8d0d095ea65c40e383164c6de/receipt.json"
     },
     {
+      "dataset_id": "snli-ve",
+      "release": "author-linked-allennlp-snli-ve-2020",
+      "snapshot_id": "snli-ve-3fc30bf5035cf5d034e724e9",
+      "records": 565286,
+      "preview_records": 100,
+      "scope": "All native SNLI-VE train/dev/test pair rows from the author-linked AllenNLP release; original premise, hypothesis, parse strings, annotator labels, gold label, pair/caption IDs and Flickr image key retained. Native pairs are joined to the separately pinned Flickr30K mirror; mirror byte equality to the historical image TAR and the paper-selected pairs remains unverified.",
+      "plan_id": "38ebf70968e4b7932b920b141a678fdd909d168f4b99c50bba0b088087ea732f",
+      "prepared_receipt": "work/prepared/snli-ve/38ebf70968e4b7932b920b141a678fdd909d168f4b99c50bba0b088087ea732f/receipt.json"
+    },
+    {
       "dataset_id": "socialcounterfactuals",
       "release": "182f8d1739028dc3ab9e9f6be4e1cb52cf5d6fe1",
       "snapshot_id": "socialcounterfactuals-4b4879de586a143d86e86fed",
@@ -952,6 +1342,16 @@
       "prepared_receipt": "work/prepared/socialcounterfactuals/4b4879de586a143d86e86fed44badae6be1b3dd9c2afd9ce5767dd75fe34b360/receipt.json"
     },
     {
+      "dataset_id": "sorrybench",
+      "release": "sorry-bench-202503-612a4e1f45db8adf884fa62318ddf9fa1c6e75e9",
+      "snapshot_id": "sorrybench-cfb1fc5001cd31ca69ba36b9",
+      "records": 9240,
+      "preview_records": 100,
+      "scope": "All 9240 native instruction/variation rows: 440 base questions and their 20 released variants, with native question IDs, category, prompt style and every ordered turn preserved. Four native null turns remain null and visible; they are not invented instructions. Base and perturbation conditions remain distinct. This does not identify the citing paper's selected attack prompts.",
+      "plan_id": "0f9fc585c06e4e924abe5593f22afb31bf40bdb323c17cac17d7fdae64bb7d9e",
+      "prepared_receipt": "work/prepared/sorrybench/0f9fc585c06e4e924abe5593f22afb31bf40bdb323c17cac17d7fdae64bb7d9e/receipt.json"
+    },
+    {
       "dataset_id": "space-10",
       "release": "efd7316ef37efb0fe9a858cc74ef2b2f772a8cda",
       "snapshot_id": "space-10-8c27fa373dff12ed1d31f6bc",
@@ -960,6 +1360,26 @@
       "scope": "All eight SpaCE-10 single-choice test subsets (ep, eq, fr, oo, os, sa, sp, sq) at the pinned revision; each record keeps its subset name from the source shard.",
       "plan_id": "8c27fa373dff12ed1d31f6bcb17eb1d8b9bf2316ee760217aad8bc8913bcd741",
       "prepared_receipt": "work/prepared/space-10/8c27fa373dff12ed1d31f6bcb17eb1d8b9bf2316ee760217aad8bc8913bcd741/receipt.json"
+    },
+    {
+      "dataset_id": "spoken-wikipedia",
+      "release": "swc-2.0-native-sentences-and-article-audio-fdr1875",
+      "snapshot_id": "spoken-wikipedia-4135cd833dc468a535dd4f9c",
+      "records": 738234,
+      "preview_records": 100,
+      "scope": "All 738,234 native sentence elements from 5,397 SWC2.0 aligned articles across Dutch, English and German, joined by exact native info.json/aligned.swc SHA-256 to every supported released whole-article audio part. Complete native TARs, all member hashes and parent ZIP-member CRCs are verified. Whole-article audio remains original, without fabricated sentence clips; sentence alignment fields and native XML serializations remain inspectable. Unsegmented ignored spans and unidentified paper-specific screenings are outside this sentence population. Parent ZIP whole-file SHA-256 is not claimed.",
+      "plan_id": "2d4444b129f6ae9e1702175637c22a531b69309d254951127e483e7da74043b4",
+      "prepared_receipt": "work/prepared/spoken-wikipedia/2d4444b129f6ae9e1702175637c22a531b69309d254951127e483e7da74043b4/receipt.json"
+    },
+    {
+      "dataset_id": "stanford-cars",
+      "release": "9abf6cf7d6dfa7b95152a0d6e791ea9435b47a40",
+      "snapshot_id": "stanford-cars-dabb452b13fbc335dc41244a",
+      "records": 16185,
+      "preview_records": 100,
+      "scope": "All 16185 train/test image rows in the pinned tanganke Stanford Cars mirror. Corruption variants are excluded. This mirror has not been proven byte-identical to the retired Stanford archive or the paper subset.",
+      "plan_id": "92f7de041fb0386d4c2c01d679fcae8f2e6234d8c1b0a258b61bf4279c6b945c",
+      "prepared_receipt": "work/prepared/stanford-cars/92f7de041fb0386d4c2c01d679fcae8f2e6234d8c1b0a258b61bf4279c6b945c/receipt.json"
     },
     {
       "dataset_id": "sun397",
@@ -1002,6 +1422,26 @@
       "prepared_receipt": "work/prepared/textvqa/b8060284cb5668c2af463c741aba12eb42343e06ce9f412707734c4efd6b1870/receipt.json"
     },
     {
+      "dataset_id": "the-pile",
+      "release": "author-heldout-05b327037e6301f256d8df32193756edc4c8e3bd",
+      "snapshot_id": "the-pile-e7b8d51155b69f024279b1d6",
+      "records": 429254,
+      "preview_records": 100,
+      "scope": "All 429,254 native author validation (214,670) and test (214,584) documents from the pinned EleutherAI held-out repository, with exact native text, complete metadata JSON values and 22 component labels. This is the author held-out population, not the 825 GiB training corpus or the citing paper training inputs. Original JSONL files remain checksum-pinned locally. Component copyright and privacy review is pending; no content is publicly distributed.",
+      "plan_id": "8226558da4db7905b521f887b269dd80fc71ba7469d5ff4a4e7a3e48ad9888aa",
+      "prepared_receipt": "work/prepared/the-pile/8226558da4db7905b521f887b269dd80fc71ba7469d5ff4a4e7a3e48ad9888aa/receipt.json"
+    },
+    {
+      "dataset_id": "tid2013",
+      "release": "tid2013-author-native-rar-3000",
+      "snapshot_id": "tid2013-928c3fddde1e3a025ae63534",
+      "records": 3000,
+      "preview_records": 100,
+      "scope": "All3000 native distorted-image/reference pairs,25 original references and all17 authors score tables. Exact BMP bytes, MOS row order, native filename codes and original table lines are retained. Archive executables are not extracted or executed. Exact paper evaluation protocol and image redistribution rights remain unreviewed.",
+      "plan_id": "804772e053e2949104e99466a26de0cb26c41d5c3f1fa3129819cf9475ce2711",
+      "prepared_receipt": "work/prepared/tid2013/804772e053e2949104e99466a26de0cb26c41d5c3f1fa3129819cf9475ce2711/receipt.json"
+    },
+    {
       "dataset_id": "turing-eye-test",
       "release": "2cc637da14c5f167676ffde210048c4f2306bd55",
       "snapshot_id": "turing-eye-test-24c126958397a8455fbd295b",
@@ -1022,6 +1462,16 @@
       "prepared_receipt": "work/prepared/tweeteval/7ac11a6c7e256513df066eff360bc9f94675cde4c76fc87d36adbb0bf63c192c/receipt.json"
     },
     {
+      "dataset_id": "ucf101",
+      "release": "ucf101-recognition-mirror-04d4e5ca1dc93606cb58752b0c08331e598743a4",
+      "snapshot_id": "ucf101-a3e52ccb183998304dd6e9e6",
+      "records": 13320,
+      "preview_records": 100,
+      "scope": "All 13,320 unchanged original AVI members in the pinned public UCF101 ZIP mirror, joined to every native class-index row and all three train/test recognition folds. Exact ZIP membership, source revision, strong ETag and per-member CRC are retained. Preview originals decode locally; a separate browser display derivative verifies exact decoded-frame parity and copies supported native audio packets. Publisher archive byte equivalence and citing-paper subset identity remain unverified. No media redistribution approval.",
+      "plan_id": "5c848053d4bd204c5f7024972db0d1fe1a5a7b6ab792309c4ee379dade7e6b03",
+      "prepared_receipt": "work/prepared/ucf101/5c848053d4bd204c5f7024972db0d1fe1a5a7b6ab792309c4ee379dade7e6b03/receipt.json"
+    },
+    {
       "dataset_id": "vg-qa-one",
       "release": "pathways-470944b3f6b44901a9055cf8d91aef18cee21671",
       "snapshot_id": "vg-qa-one-f572207512f2f00015071b0b",
@@ -1040,6 +1490,16 @@
       "scope": "All 288 rows of vg_qa_two under the pinned author transformation. VG two-object unknown-preposition rows are excluded exactly as in the author script. This available reconstruction does not assert the historical paper-used revision or repeat the upstream RGB re-encoding.",
       "plan_id": "b140c3bfe0075e77bed1b5db226c9b6ba3199b35c229b61ba858ba73f89b2c8c",
       "prepared_receipt": "work/prepared/vg-qa-two/b140c3bfe0075e77bed1b5db226c9b6ba3199b35c229b61ba858ba73f89b2c8c/receipt.json"
+    },
+    {
+      "dataset_id": "visu-text",
+      "release": "hf-9afabb85b5570fa883b7caa0561d8c8d71d84dcd",
+      "snapshot_id": "visu-text-58d1117cb0d29527958928db",
+      "records": 168700,
+      "preview_records": 100,
+      "scope": "All 168,700 original ViSU-Text caption-pair rows: 158,700 train, 5,000 validation and 5,000 test. Every native safe/nsfw caption, incremental ID, prompt ID, tag and COCO ID remains unchanged, including native split-dependent COCO ID types. Canonical display text is the native safe caption; its paired unsafe caption remains separately queryable as source.nsfw. This text-only component has no vision images and does not establish access to the deliberately withheld unsafe vision corpus. Content remains authorized-local and is never publicly distributed.",
+      "plan_id": "9f4019e4135bb11cfa9f03d6bdf0aab002acf7c70cc1db445457275590bbfce0",
+      "prepared_receipt": "work/prepared/visu-text/9f4019e4135bb11cfa9f03d6bdf0aab002acf7c70cc1db445457275590bbfce0/receipt.json"
     },
     {
       "dataset_id": "visual-counterfact",
@@ -1070,6 +1530,16 @@
       "scope": "Exactly the 3,510 native transistor rows in the pinned Visual6502 transdefs.js file.",
       "plan_id": "8ca29116d1d0c7b52a65c79dc092c5a8fcff64a9095a239f4a08a6b01cd9f87f",
       "prepared_receipt": "work/prepared/visual6502-transistor-netlist/8ca29116d1d0c7b52a65c79dc092c5a8fcff64a9095a239f4a08a6b01cd9f87f/receipt.json"
+    },
+    {
+      "dataset_id": "vizwiz-priv",
+      "release": "vizwiz-priv-v1.0-author-20190617",
+      "snapshot_id": "vizwiz-priv-a306803df15e20a204ec7a5b",
+      "records": 13571,
+      "preview_records": 100,
+      "scope": "All 13571 native train/val/test image annotation rows, including all privacy regions and question fields. Original nonprivate JPEGs and both author-provided redaction conditions remain distinct; no private unredacted images were released. Eight annotated nonprivate images are absent from every archive and remain explicit missing assets. All five annotation tables are retained, with aggregate tables checked byte-for-field against the native split rows. Web-page counts disagree with the released JSON and are not substituted.",
+      "plan_id": "66e8bf72a910b65bcbe0d128ff9d0947dc3968f227ac7e10f4683737dbf1b141",
+      "prepared_receipt": "work/prepared/vizwiz-priv/66e8bf72a910b65bcbe0d128ff9d0947dc3968f227ac7e10f4683737dbf1b141/receipt.json"
     },
     {
       "dataset_id": "vizwiz",
@@ -1132,6 +1602,16 @@
       "prepared_receipt": "work/prepared/what-s-up/2a86da80652409309e2aa863dbd7564736f13d57027fa5d5752f84f338268249/receipt.json"
     },
     {
+      "dataset_id": "winoground",
+      "release": "author-b400e173549071916ad1b3d449293bc8d8b4b763",
+      "snapshot_id": "winoground-5d3aec24dfea15148b9bdc67",
+      "records": 400,
+      "preview_records": 100,
+      "scope": "All 400 native caption/image pairs from the pinned author JSONL, with both original images for every example retained as separate paired conditions. Only preview originals are acquired; remaining originals are verified on request.",
+      "plan_id": "53d929d70371ed7c969658242436f2d370522919756a70e4c339c994d9bb13db",
+      "prepared_receipt": "work/prepared/winoground/53d929d70371ed7c969658242436f2d370522919756a70e4c339c994d9bb13db/receipt.json"
+    },
+    {
       "dataset_id": "wmdp",
       "release": "7125571f22f032c56415e7980f48d877dd830ff8",
       "snapshot_id": "wmdp-90c82ed7172dd56a64312bea",
@@ -1140,12 +1620,22 @@
       "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
       "plan_id": "90c82ed7172dd56a64312bea65d2ebb1c751370425eb810e74bc72bce6163e6a",
       "prepared_receipt": "work/prepared/wmdp/90c82ed7172dd56a64312bea65d2ebb1c751370425eb810e74bc72bce6163e6a/receipt.json"
+    },
+    {
+      "dataset_id": "zerobench",
+      "release": "8fcdfd9138c802cac52b774b36946e70f738f500",
+      "snapshot_id": "zerobench-ddd9fd1b122cb9af5451d313",
+      "records": 100,
+      "preview_records": 100,
+      "scope": "All 100 original main questions in the pinned author ZeroBench release, retaining linked images and native answers. Separate subquestions and later v2 remain distinct. Answers remain local-only.",
+      "plan_id": "52f78e2061f5dc857ac3bc5ca9ab8fca477a9799059f7596a69255451172027e",
+      "prepared_receipt": "work/prepared/zerobench/52f78e2061f5dc857ac3bc5ca9ab8fca477a9799059f7596a69255451172027e/receipt.json"
     }
   ],
   "catalogue_entries": 333,
-  "with_previews": 170,
-  "without_previews": 163,
-  "full_population_indices": 164,
+  "with_previews": 218,
+  "without_previews": 115,
+  "full_population_indices": 216,
   "all_requested_datasets_complete": false,
   "note": "Acquired source populations and on-demand infrastructure; catalogue-wide coverage is not complete."
 }

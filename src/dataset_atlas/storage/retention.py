@@ -12,8 +12,92 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 import sqlite3
 import tempfile
+
+
+def _local_config_path(root, value):
+    """Normalize possible local dependencies; ordinary metadata is not a path."""
+    if not value or '://' in value or '\x00' in value:return None
+    path=Path(value)
+    try:path=path.expanduser()
+    except RuntimeError:
+        # An unknown ~username may also be an ordinary literal local filename.
+        # Keep that possible dependency relative to the workspace.
+        pass
+    # Linux cannot address a filename component larger than255 UTF-8 bytes.
+    # Descriptive config fields may contain arbitrarily long ordinary text.
+    if any(len(part.encode('utf-8'))>255 for part in path.parts):return None
+    absolute=path if path.is_absolute() else root/path
+    if len(os.fsencode(absolute))>=4096:return None
+    return absolute.resolve()
+
+
+def _require_independent_excluded_asset(asset, native_shas, member_sha, independently_routed=None):
+    """A prefix alone cannot prove that an excluded asset survives retirement."""
+    metadata=asset.get('metadata') or {}
+    refs=[asset.get('uri'),metadata.get('source_ref'),metadata.get('source_path')]
+    expected={sha for ref in refs if isinstance(ref,str) and ref and (sha:=member_sha(ref))}
+    if len(expected)>1:raise ValueError('Excluded media has conflicting native member checksums')
+    native_ref=bool(expected)
+    sha=asset.get('sha256')
+    if sha and native_ref and sha not in expected:raise ValueError('Excluded media checksum differs from its native member')
+    if not native_ref and isinstance(sha,str) and re.fullmatch(r'[0-9a-f]{64}',sha) and sha not in native_shas:return
+    measured_sha=sha if isinstance(sha,str) and re.fullmatch(r'[0-9a-f]{64}',sha) else next(iter(expected),None)
+    if independently_routed and measured_sha and independently_routed(asset,measured_sha):return
+    if native_ref:raise ValueError('Excluded media is a member of the archive being retired')
+    raise ValueError('Excluded media lacks a checksum proving independence from this archive')
+
+
+def _independent_route_checker(root, version, current_native_sha):
+    from .indexed_tar import route_path,_file_identity
+    from dataset_atlas.adapters.core import _safe_relative
+    from contextlib import closing
+    route=route_path(root,version.id,version.snapshot_id)
+    config=json.loads(route.read_text()) if route.is_file() else {}
+    if config and (config.get('dataset_id'),config.get('snapshot_id'))!=(version.id,version.snapshot_id):
+        raise ValueError('Independent original route identity changed')
+    verified={};base=(root/'work/original-access').resolve()
+    def check(asset,expected_sha):
+        metadata=asset.get('metadata') or {}
+        for ref in [asset.get('uri'),metadata.get('source_ref'),metadata.get('source_path')]:
+            if not isinstance(ref,str):continue
+            for mapping in config.get('archives',[]):
+                prefix=mapping.get('asset_prefix','')
+                if not ref.startswith(prefix):continue
+                index=(base/mapping['index']).resolve()
+                if not index.is_relative_to(base):raise ValueError('Independent original index outside configured root')
+                receipt=index/'receipt.json'
+                if not receipt.is_file():continue
+                proof=json.loads(receipt.read_text())
+                source_sha=proof.get('source_sha256')
+                if not isinstance(source_sha,str) or not re.fullmatch(r'[0-9a-f]{64}',source_sha):
+                    raise ValueError('Independent native archive lacks a pinned source checksum')
+                if proof.get('source_sha256')==current_native_sha:continue
+                if proof.get('format') not in {'atlas-remote-tar-v1','atlas-remote-gzip-tar-v1','atlas-remote-zip-v1'}:
+                    raise ValueError('Unsupported independent archive index')
+                derivatives={name:(index/_safe_relative(name)).resolve() for name in proof['checksums']}
+                if any(not path.is_relative_to(index) for path in derivatives.values()):
+                    raise ValueError('Independent native index derivative outside its root')
+                database=index/'members.sqlite'
+                if 'members.sqlite' not in derivatives:raise ValueError('Independent native index lacks its member checksum')
+                identity=tuple((name,_file_identity(path)) for name,path in sorted(derivatives.items()))
+                if verified.get(index)!=identity:
+                    for name,path in derivatives.items():
+                        with path.open('rb') as stream:
+                            if hashlib.file_digest(stream,'sha256').hexdigest()!=proof['checksums'][name]:
+                                raise ValueError('Independent native index derivative checksum changed')
+                    verified[index]=identity
+                name=mapping.get('member_prefix','')+ref[len(prefix):]
+                name=mapping.get('member_names',{}).get(name,name)
+                with closing(sqlite3.connect(database.as_uri()+'?mode=ro',uri=True)) as db:
+                    member=db.execute('SELECT sha256 FROM members WHERE name=?',(name,)).fetchone()
+                if member is None:continue
+                if expected_sha!=member[0]:raise ValueError('Independent route differs from excluded native asset checksum')
+                return True
+        return False
+    return check
 
 
 def retire_image_archive(root, dataset_id, index_name, source, *, mappings,
@@ -51,9 +135,12 @@ def retire_image_archive(root, dataset_id, index_name, source, *, mappings,
             raise ValueError('Retirement source differs from verified archive')
     if source.stat().st_size != native['source_bytes']: raise ValueError('Retirement source size changed')
     reader = read_zip_member if native['format'] == 'atlas-remote-zip-v1' else read_tar_member
-    if native['format'] not in {'atlas-remote-zip-v1', 'atlas-remote-gzip-tar-v1'}:
+    if native['format'] not in {'atlas-remote-zip-v1', 'atlas-remote-gzip-tar-v1', 'atlas-remote-tar-v1'}:
         raise ValueError('Unsupported original-access index')
+    if not mappings: raise ValueError('At least one archive mapping is required')
     routes = []; required = {}; preview_copies = []; preview_bytes = 0; references = 0
+    def in_scope(ref):
+        return any(ref.startswith(entry.get('asset_prefix', '')) for entry in mappings)
     def member_for(ref):
         for entry in mappings:
             prefix = entry.get('asset_prefix', '')
@@ -63,24 +150,32 @@ def retire_image_archive(root, dataset_id, index_name, source, *, mappings,
                 if row: return member, row[0], row[1]
         raise ValueError(f'No verified native member for {ref}')
     with sqlite3.connect((index/'members.sqlite').as_uri()+'?mode=ro', uri=True) as members:
+        native_shas={row[0] for row in members.execute('SELECT sha256 FROM members')}
+        def member_sha(ref):
+            row=members.execute('SELECT sha256 FROM members WHERE name=?',(ref,)).fetchone()
+            return row[0] if row else None
         for version, pack_path, snapshot in [item for identity in sorted(dataset_ids) for item in registry.versions(identity)]:
             if not snapshot.is_dir(): continue
             if native['source_sha256'] not in set(strings(version.adapter_config)):
                 for value in strings(version.adapter_config):
-                    if not (value.startswith(str(root)) or value.startswith('work/')): continue
-                    candidate = Path(value); candidate = candidate if candidate.is_absolute() else root/candidate
+                    candidate = _local_config_path(root,value)
+                    if candidate is None:continue
                     if candidate.is_file() and candidate.samefile(source):
                         raise ValueError('A retained snapshot references this source without its pinned archive checksum')
                 # A different retained release keeps its own source and routes.
                 continue
             pack = json.loads(pack_path.read_text())
-            preview = {a['id']: a for r in pack['records'] for a in r['assets'] if a.get('uri') and a['modality'] in modalities}
+            independent_route=_independent_route_checker(root,version,native['source_sha256'])
+            preview = {a['id']: a for r in pack['records'] for a in r['assets'] if a.get('uri') and a['modality'] in modalities and in_scope(a['uri'])}
             found = {}; seen = set()
             for batch in pq.ParquetFile(snapshot/'records.parquet').iter_batches(columns=['record_json'], batch_size=512):
                 for value in batch.column(0).to_pylist():
                     for asset in json.loads(value)['assets']:
                         ref = asset.get('uri')
                         if not ref or asset['modality'] not in modalities: continue
+                        if not in_scope(ref):
+                            _require_independent_excluded_asset(asset,native_shas,member_sha,independent_route)
+                            continue
                         if ref not in seen:
                             required[ref] = member_for(ref); seen.add(ref)
                         if asset.get('sha256') and asset['sha256'] != required[ref][1]:
@@ -88,6 +183,7 @@ def retire_image_archive(root, dataset_id, index_name, source, *, mappings,
                         references += 1
                         if asset['id'] in preview: found[asset['id']] = ref
             if set(found) != set(preview): raise ValueError('A retained preview is absent from its full snapshot')
+            if not seen: raise ValueError('Archive mappings cover no media in a dependent snapshot')
             for asset_id, ref in found.items():
                 member, sha, size = required[ref]
                 asset = preview[asset_id]
@@ -146,8 +242,8 @@ def retire_image_archive(root, dataset_id, index_name, source, *, mappings,
         if other.id in dataset_ids: continue
         for version, _, _ in registry.versions(other.id):
             for value in strings(version.adapter_config):
-                if not (value.startswith(str(root)) or value.startswith('work/')): continue
-                path = Path(value); path = path if path.is_absolute() else root/path
+                path = _local_config_path(root,value)
+                if path is None:continue
                 if path.is_file() and (path.stat().st_dev, path.stat().st_ino) == inode:
                     raise ValueError(f'Original is required by retained dataset {other.id}')
     # Check extracted-directory dependencies separately from shared archive inodes.
@@ -157,8 +253,8 @@ def retire_image_archive(root, dataset_id, index_name, source, *, mappings,
             if other.id in dataset_ids: continue
             for version, _, _ in registry.versions(other.id):
                 for value in strings(version.adapter_config):
-                    if not (value.startswith(str(root)) or value.startswith('work/')): continue
-                    path = Path(value); path = path if path.is_absolute() else root/path
+                    path = _local_config_path(root,value)
+                    if path is None:continue
                     if path.resolve().is_relative_to(extracted_base):
                         raise ValueError(f'Extracted originals are required by {other.id}')
     report = {'dataset_id': dataset_id, 'source_sha256': native['source_sha256'],
@@ -250,7 +346,7 @@ def retire_repacked_archive(root, index_name, source, *, source_sha256,
     base = (root/'work/original-access').resolve(); index = (base/index_name).resolve()
     if not index.is_relative_to(base): raise ValueError('Original-access index outside configured root')
     native = json.loads((index/'receipt.json').read_text())
-    if native['format'] not in {'atlas-remote-gzip-tar-v1', 'atlas-remote-zip-v1'}:
+    if native['format'] not in {'atlas-remote-gzip-tar-v1', 'atlas-remote-tar-v1', 'atlas-remote-zip-v1'}:
         raise ValueError('Unsupported native index format')
     with (index/'members.sqlite').open('rb') as stream:
         if hashlib.file_digest(stream, 'sha256').hexdigest() != native['checksums']['members.sqlite']:
@@ -258,6 +354,7 @@ def retire_repacked_archive(root, index_name, source, *, source_sha256,
     with sqlite3.connect((index/'members.sqlite').as_uri()+'?mode=ro', uri=True) as db:
         expected = {name:(size,sha) for name,size,sha in db.execute('SELECT name,bytes,sha256 FROM members')}
     if not expected: raise ValueError('Native archive contains no members')
+    native_shas={sha for _,sha in expected.values()}
     decoded = 0; seen = set()
     with zipfile.ZipFile(source) as archive:
         for member in archive.infolist():
@@ -286,8 +383,8 @@ def retire_repacked_archive(root, index_name, source, *, source_sha256,
         for version,pack_path,snapshot in registry.versions(dataset.id):
             values = set(strings(version.adapter_config)); dependent = False
             for value in values:
-                if not (value.startswith(str(root)) or value.startswith('work/')): continue
-                candidate = Path(value); candidate = candidate if candidate.is_absolute() else root/candidate
+                candidate = _local_config_path(root,value)
+                if candidate is None:continue
                 if candidate.is_file() and tuple(_file_identity(candidate)[:2]) == inode: dependent = True
             if not dependent: continue
             if source_sha256 not in values or native['source_sha256'] not in values:
@@ -299,7 +396,15 @@ def retire_repacked_archive(root, index_name, source, *, source_sha256,
             if config.get('dataset_id') != version.id or config.get('snapshot_id') != version.snapshot_id:
                 raise ValueError('Native route identity changed')
             mappings = config['archives']
-            def native_member(ref):
+            independent_route=_independent_route_checker(root,version,native['source_sha256'])
+            def native_member(asset):
+                ref=asset['uri']
+                # Multi-archive datasets retain separate routes. Only references
+                # assigned to this archive participate in its retirement; a
+                # conflicting preceding route still fails closed.
+                if not any((base/mapping['index']).resolve() == index and ref.startswith(mapping.get('asset_prefix','')) for mapping in mappings):
+                    _require_independent_excluded_asset(asset,native_shas,lambda name:expected[name][1] if name in expected else None,independent_route)
+                    return None
                 for mapping in mappings:
                     prefix = mapping.get('asset_prefix','')
                     if not ref.startswith(prefix): continue
@@ -309,22 +414,28 @@ def retire_repacked_archive(root, index_name, source, *, source_sha256,
                     name = mapping.get('member_names',{}).get(name,name)
                     if name in expected: return name
                 raise ValueError('Dependent media has no verified native route')
+            affected = 0
             for batch in pq.ParquetFile(snapshot/'records.parquet').iter_batches(columns=['record_json'],batch_size=512):
                 for raw in batch.column(0).to_pylist():
                     for asset in json.loads(raw)['assets']:
                         if not asset.get('uri'): continue
+                        name = native_member(asset)
+                        if name is None: continue
                         if asset['modality'] != 'image': raise ValueError('Repacked retirement requires image-only media references')
-                        name = native_member(asset['uri']); references += 1
+                        references += 1; affected += 1
                         if asset.get('sha256') and asset['sha256'] != expected[name][1]:
                             raise ValueError('Snapshot image differs from native member')
             for record in json.loads(pack_path.read_text())['records']:
                 for asset in record['assets']:
                     if not asset.get('uri'): continue
-                    name = native_member(asset['uri']); size,sha = expected[name]
+                    name = native_member(asset)
+                    if name is None: continue
+                    size,sha = expected[name]
                     result = read_compact(root,version.id,version.snapshot_id,asset['uri'],size)
                     if result is None or not result[2].get('protected_preview') or hashlib.sha256(result[0]).hexdigest() != sha:
                         raise ValueError('Dependent preview original is not pinned')
                     previews += 1
+            if not affected: raise ValueError('Native routes cover no media in a dependent snapshot')
             dependencies.append({'dataset_id':version.id,'snapshot_id':version.snapshot_id})
     if not dependencies: raise ValueError('No dependent retained image snapshots found')
     reader = read_zip_member if native['format'] == 'atlas-remote-zip-v1' else read_tar_member

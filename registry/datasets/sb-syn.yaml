@@ -59,3 +59,9 @@ relationships:
   target_id: sbbench
   status: asserted_from_source_review
   scope: Synthetic split of SBBench under a shortened name.
+- type: same_source_family_as
+  target_id: sbbench-syn
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: The paper chart label SB-Syn plausibly denotes the author synthetic releases; it is not established as
+    an alias of this prepared population.

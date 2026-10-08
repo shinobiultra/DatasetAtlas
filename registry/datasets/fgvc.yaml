@@ -53,3 +53,10 @@ evidence:
   checked_on: '2026-09-22'
   source_identity_status: family_only
 source_url: https://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/
+relationships:
+- type: same_source_family_as
+  target_id: fgvc-aircraft
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: FGVC-Aircraft is the identifiable benchmark behind the chart label FGVC; the chart does not spell
+    it out, so identity stays a candidate.

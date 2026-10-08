@@ -104,6 +104,11 @@ evidence:
     7,349 records.
   checked_on: '2026-09-22'
   source_identity_status: official_release_acquired_by_preparation
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in at least one record.
+    Not inferred from the name or description.'
 source_url: https://www.robots.ox.ac.uk/~vgg/data/pets/
 relationships:
 - type: alias_resolved_from
@@ -111,3 +116,5 @@ relationships:
   status: verified
   scope: 'Same official Oxford-IIIT Pet release (Parkhi et al., 2012): the pets candidate''s "Pets (Parkhi et al.,
     2012)" mentions name this release; identical source and recipe.'
+modalities:
+- image

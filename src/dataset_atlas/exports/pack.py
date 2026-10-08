@@ -24,6 +24,30 @@ def _validate_pack(pack: Pack) -> None:
     for record in pack.records:
         if record.dataset_id != pack.dataset.id or record.snapshot_id != pack.dataset.snapshot_id or record.release_id != pack.dataset.release:
             raise ExchangeError(f"Record identity does not match pack: {record.id}")
+        for asset in record.assets:
+            if asset.dataset_id != record.dataset_id or asset.release_id != record.release_id:
+                raise ExchangeError(f"Asset identity does not match pack: {asset.id}")
+    artifact_ids = [artifact.id for artifact in pack.artifacts]
+    if len(artifact_ids) != len(set(artifact_ids)):
+        raise ExchangeError("Duplicate artifact ID in pack")
+    subjects = {unit: {record.id for record in pack.records if record.unit == unit}
+                for unit in ('asset', 'example', 'entity', 'conversation')}
+    subjects['asset'].update(asset.id for record in pack.records for asset in record.assets)
+    for artifact in pack.artifacts:
+        if artifact.snapshot_ids != [pack.dataset.snapshot_id]:
+            raise ExchangeError(f"Artifact snapshot does not match pack: {artifact.id}")
+        if len(artifact.ids) != len(set(artifact.ids)) or not set(artifact.ids).issubset(subjects[artifact.unit]):
+            raise ExchangeError(f"Artifact subjects do not match pack unit and IDs: {artifact.id}")
+        declared = set(artifact.ids)
+        for key in ('items', 'points', 'rows', 'ids'):
+            if key not in artifact.data:
+                continue
+            values = artifact.data[key]
+            if not isinstance(values, list):
+                raise ExchangeError(f"Artifact {key} must be a list: {artifact.id}")
+            embedded = values if key == 'ids' else [value.get('id') if isinstance(value, dict) else None for value in values]
+            if any(not isinstance(identity, str) or identity not in declared for identity in embedded) or len(embedded) != len(set(embedded)):
+                raise ExchangeError(f"Artifact {key} subjects differ from its declared IDs: {artifact.id}")
     if pack.checksums:
         raise ExchangeError("Nested external file checksums are not portable; include content in a new pack")
 

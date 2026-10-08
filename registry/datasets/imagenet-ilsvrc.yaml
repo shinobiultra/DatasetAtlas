@@ -70,3 +70,9 @@ relationships:
   target_id: imagenet
   status: asserted_from_source_review
   scope: ILSVRC challenge release of ImageNet, cited as model-training lineage.
+- type: same_source_family_as
+  target_id: imagenet-ilsvrc-2012
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: The challenge release named by the entry; the cited paper only states model-training lineage, so the examples
+    are family context, not its training set.

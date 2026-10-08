@@ -60,3 +60,9 @@ evidence:
   checked_on: '2026-09-22'
   source_identity_status: official_family_located_variant_unpinned
 source_url: https://github.com/google-research-datasets/conceptual-captions
+relationships:
+- type: same_source_family_as
+  target_id: cc3m
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: CC3M is the Google Conceptual Captions release prepared here; the survey table names no version.

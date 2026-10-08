@@ -1,0 +1,23 @@
+{
+  "scope": "Benign local provider availability probe; no dataset input.",
+  "/api/version": {
+    "status": 200,
+    "version": "0.20.2",
+    "models": []
+  },
+  "/api/ps": {
+    "status": 200,
+    "version": null,
+    "models": [
+      {
+        "name": "qwen3-embedding:0.6b",
+        "size_vram": 0
+      }
+    ]
+  },
+  "request": {
+    "http_status": 200,
+    "response_characters": 0,
+    "elapsed_seconds": 2.7463837370014517
+  }
+}

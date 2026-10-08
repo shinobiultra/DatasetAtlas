@@ -2,11 +2,13 @@
 from contextlib import ExitStack, contextmanager
 import fcntl
 import hashlib
+import json
+import os
 from pathlib import Path
 import time
 
 
-def try_writer_slot(directory, dataset_id):
+def try_writer_slot(directory, dataset_id, plan_id=None):
     directory = Path(directory)
     identity = hashlib.sha256(dataset_id.encode()).hexdigest()
     dataset_lock = (directory / f'dataset-{identity}.lock').open('a')
@@ -15,6 +17,9 @@ def try_writer_slot(directory, dataset_id):
     except BlockingIOError:
         dataset_lock.close()
         return None
+    dataset_lock.seek(0);dataset_lock.truncate()
+    dataset_lock.write(json.dumps({'pid':os.getpid(),'plan_id':plan_id}))
+    dataset_lock.flush()
     lease = ExitStack()
     lease.callback(dataset_lock.close)
     try:
@@ -30,6 +35,22 @@ def try_writer_slot(directory, dataset_id):
         return None
     finally:
         lease.close()
+
+
+def dataset_writer_active(directory, dataset_id, *, plan_id=None, expected_pid=None):
+    """Check the dataset lease independently of the two shared writer slots."""
+    identity = hashlib.sha256(dataset_id.encode()).hexdigest()
+    with (Path(directory) / f'dataset-{identity}.lock').open('a+') as lock:
+        try:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+        except BlockingIOError:
+            try:
+                lock.seek(0);holder=json.loads(lock.read(1000))
+            except (OSError,ValueError):return False
+            return ((plan_id is not None and holder.get('plan_id')==plan_id)
+                or (holder.get('plan_id') is None and expected_pid is not None and holder.get('pid')==expected_pid))
+        fcntl.flock(lock, fcntl.LOCK_UN)
+        return False
 
 
 @contextmanager

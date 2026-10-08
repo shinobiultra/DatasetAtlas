@@ -32,11 +32,11 @@ export function describeClause(field: FieldDescriptor, op: string, value: unknow
 
 export function canBrowse(dataset: Dataset): boolean {
   if (provider.mode === 'static') return dataset.coverage?.publication === 'approved' && (dataset.coverage.preview_count ?? 0) > 0
-  return (dataset.coverage?.preview_count ?? 0) > 0 || dataset.coverage?.complete_data === 'supported'
+  return (dataset.coverage?.preview_count ?? 0) > 0 || dataset.availability?.complete_data === 'local' || dataset.coverage?.complete_data === 'supported'
 }
 
 export function supportsComplete(dataset: Dataset): boolean {
-  return provider.mode === 'workbench' && ['supported', 'requires_preparation'].includes(dataset.coverage?.complete_data ?? '')
+  return provider.mode === 'workbench' && (dataset.availability?.complete_data === 'local' || ['supported', 'requires_preparation'].includes(dataset.coverage?.complete_data ?? ''))
 }
 
 /** Accumulating pager: pages append, so scrolling never resets what is on screen. */
@@ -110,7 +110,7 @@ export function useBrowse(datasetId: string, query: Query | null, enabled: boole
 
 /* ---------- Detector artifacts ---------- */
 
-type DetectorAsset = { asset_id: string; status?: string; width?: number; height?: number; detections?: Box[]; error?: string }
+type DetectorAsset = { asset_id: string; status?: string; width?: number; height?: number; detections?: Box[]; file_sha256?: string; error?: string }
 type DetectorItem = { id?: string; status?: string; output?: { assets?: DetectorAsset[] } | null; error?: string }
 
 export type RunState = {
@@ -121,6 +121,7 @@ export type RunState = {
   summary: string
   detail: string
   threshold: unknown
+  extractionThreshold?: unknown
   overlays: Overlay[]
 }
 
@@ -128,10 +129,16 @@ export function runLabel(artifact: Artifact): string {
   return `${artifact.kind} · ${shortId(artifact.run_id ?? artifact.id, 8)}`
 }
 
+export function isEmbeddingArtifact(artifact: Artifact): boolean {
+  const provenance = artifact.provenance?.processor_provenance as { kind?: string; registered_embedding_space?: boolean } | undefined
+  return artifact.kind.startsWith('embed.') || (artifact.kind === 'import.research' && provenance?.kind === 'vector' && provenance.registered_embedding_space === true)
+}
+
 export function detectorStates(artifacts: Artifact[], recordId: string): RunState[] {
   return artifacts.filter(artifact => artifact.kind.startsWith('detect.')).map(artifact => {
-    const provenance = artifact.provenance?.processor_provenance as { extraction_threshold?: unknown } | undefined
-    const threshold = provenance?.extraction_threshold ?? 'unknown'
+    const provenance = artifact.provenance?.processor_provenance as { extraction_threshold?: unknown; display_threshold?: unknown } | undefined
+    const threshold = provenance?.display_threshold ?? provenance?.extraction_threshold ?? 'unknown'
+    const extractionThreshold = provenance?.extraction_threshold ?? 'unknown'
     const label = runLabel(artifact)
     const item = ((artifact.data?.items ?? []) as DetectorItem[]).find(entry => entry.id === recordId)
     if (!item) return { artifact, runLabel: label, state: 'not_computed', summary: 'Not computed for this record', detail: '', threshold, overlays: [] }
@@ -141,10 +148,11 @@ export function detectorStates(artifacts: Artifact[], recordId: string): RunStat
     }
     const assets = item.output?.assets ?? []
     const done = assets.filter(asset => asset.status === 'completed' && Array.isArray(asset.detections))
-    const count = done.reduce((total, asset) => total + (asset.detections?.length ?? 0), 0)
+    const originals = new Map(done.map(asset => [asset.file_sha256 ? `sha256:${asset.file_sha256}` : `asset:${asset.asset_id}`, asset]))
+    const count = [...originals.values()].reduce((total, asset) => total + (asset.detections?.length ?? 0), 0)
     const overlays: Overlay[] = done.map(asset => ({
       assetId: asset.asset_id, width: asset.width ?? 0, height: asset.height ?? 0,
-      boxes: asset.detections ?? [], run: artifact.run_id ?? artifact.id, kind: artifact.kind, threshold, visible: true,
+      boxes: asset.detections ?? [], run: artifact.run_id ?? artifact.id, kind: artifact.kind, threshold, extractionThreshold, visible: true,
     }))
     if (!assets.length) return { artifact, runLabel: label, state: 'other', summary: 'Completed without asset results', detail: '', threshold, overlays }
     if (done.length !== assets.length) {

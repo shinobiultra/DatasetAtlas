@@ -7,22 +7,24 @@ description: Mention candidate from a focused page audit; the evidence receipts 
   release, and rights still require independent verification.
 paper_ids:
 - paper-25eaa8c74ce76800
-release: unresolved
-adapter: structured
+release: voc2011-author-native-archive-14961
+adapter: pascal_voc
 adapter_config: {}
 coverage:
   identity: candidate
-  source: unverified
-  access: unverified
-  adapter: not_started
+  source: verified
+  access: public
+  adapter: implemented
   preview: none
-  complete_data: unimplemented
+  complete_data: unprepared
   publication: not_reviewed
   preview_count: 0
   unit: example
   blockers:
-  - Original release identity and rights need verification.
-  - Adapter and preview are not implemented.
+  - The citing survey names Pascal VOC without year or split; this explicit VOC2011
+    archive does not resolve paper membership.
+  - Native adapter and pinned recipe implemented; real preparation and independent
+    limitations verification pending.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -34,7 +36,31 @@ evidence:
   source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
   page: 30
   role: cited-study dataset in survey table
-  excerpt: ResNet50, VGG16 — ImageNet, Pascal VOC (Yang et al., 2024c) BLIP2(blip2-opt-2.7b),
-    —
+  excerpt: "ResNet50, VGG16 \u2014 ImageNet, Pascal VOC (Yang et al., 2024c) BLIP2(blip2-opt-2.7b),\
+    \ \u2014"
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
+- kind: source_audit_access
+  checked_on: '2026-10-06'
+  url: https://www.robots.ox.ac.uk/~vgg/projects/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar
+  note: The old host.robots.ox.ac.uk paths now answer HTTP 301 to www.robots.ox.ac.uk/~vgg/projects/pascal/VOC/.
+    VOC2012 trainval is 1,999,639,040 bytes (strong ETag, Last-Modified 2025-09-11)
+    and VOC2007 test is 451,020,800 bytes; both serve range requests. The survey cites
+    only 'Pascal VOC'.
+  source_identity_status: official_files_reachable_year_not_named_by_paper
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'From the source inspected on 2026-10-06: official VOC tar archives inspected
+    by header only; photographs with XML annotations per the challenge. Not inferred
+    from the dataset name.'
+- kind: native_source_acquisition
+  checked_on: '2026-10-06'
+  url: https://thor.robots.ox.ac.uk/pascal/VOC/voc2011/VOCtrainval_25-May-2011.tar
+  receipt: reports/pascal-voc2011-native-source-acquisition-20261006.json
+  note: Full original archive SHA256 and publisher MD5 verified. Native14961 image/XML
+    pairs,11540 Main trainval images,3421 outsideMain images and2223 paired masks;
+    paper identity and publication rights remain unresolved.
+modalities:
+- image
+source_url: https://www.robots.ox.ac.uk/~vgg/projects/pascal/VOC/voc2011/index.html

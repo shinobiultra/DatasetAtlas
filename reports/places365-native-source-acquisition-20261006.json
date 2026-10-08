@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "checked_at_utc": "2026-10-06T07:25:01.027342+00:00",
+  "sources": [
+    {
+      "source_name": "filelist_places365-standard.tar",
+      "bytes": 67498496,
+      "md5": "35a0585fee1fa656440f3ab298f8479c",
+      "config_key": "annotations_path",
+      "url": "https://data.csail.mit.edu/places/places365/filelist_places365-standard.tar",
+      "sha256": "520699e00d69b63ddc29fac54645aa00ce1c10ca42e288960aa1cf791d6e9aa9",
+      "format": "tar",
+      "source_members": 4,
+      "annotation_members": [
+        "categories_places365.txt",
+        "places365_val.txt"
+      ],
+      "image_members": 0,
+      "registered_source": "work/source-objects/520699e00d69b63ddc29fac54645aa00ce1c10ca42e288960aa1cf791d6e9aa9"
+    },
+    {
+      "source_name": "val_256.tar",
+      "bytes": 525158400,
+      "md5": "e27b17d8d44f4af9a78502beb927f808",
+      "config_key": "path",
+      "url": "https://data.csail.mit.edu/places/places365/val_256.tar",
+      "sha256": "24b4e639ef12a0012af525bc4cb443e4ab4aaea8369a1fb009b70e4a4aad5d48",
+      "format": "tar",
+      "source_members": 36500,
+      "annotation_members": [],
+      "image_members": 36500,
+      "registered_source": "work/source-objects/24b4e639ef12a0012af525bc4cb443e4ab4aaea8369a1fb009b70e4a4aad5d48"
+    }
+  ],
+  "network_bytes": 592656896,
+  "max_network_bytes": 650000000,
+  "external_model_requests": 0,
+  "source_identity": "Places365 Standard 256pixel validation and native author labels. Survey paper unspecified Places release remains candidate."
+}

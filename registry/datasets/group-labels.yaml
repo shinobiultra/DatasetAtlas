@@ -11,7 +11,7 @@ adapter: structured
 adapter_config: {}
 coverage:
   identity: candidate
-  source: unverified
+  source: verified
   access: unverified
   adapter: not_started
   preview: none
@@ -20,9 +20,12 @@ coverage:
   preview_count: 0
   unit: example
   blockers:
-  - Access to the exact data files has not been verified.
-  - The exact paper release, source variant, or derived collection remains unresolved.
-  - Adapter and preview are not implemented.
+  - The authors' repository (kshitishghate/bias_prop) releases only Data/template_and_group_words.json
+    (3 templates, a 6-item prompt template list, 24 gender words, 36 race words and smaller subsets);
+    the 864-phrase list itself and the code that builds it are not released ('will be added' per its README).
+  - 24 gender words x 36 race words = 864 matches the paper's count, but the paper's exact phrase construction
+    is not in the repository, so Atlas does not generate the list and present it as the released data.
+  - The released word lists are a vocabulary resource, not a population of examples; no preview was prepared.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -60,3 +63,11 @@ evidence:
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: paper_derived_lexicon_release_unresolved
+- kind: source_audit_release
+  checked_on: '2026-10-06'
+  url: https://github.com/kshitishghate/bias_prop/tree/c0e4a922124d0c28e85be7a4d9753ac317028450
+  note: 'At this commit the repository holds Data/template_and_group_words.json (2,983 bytes), LICENSE
+    and README. Keys: template1/2/3 (3 each), template (6), gender_words (24), race_words (36), race1,
+    race2, gender1 (12 each), gender_words_expanded (24). The README says the CFD and OASIS images come
+    from their own sites and that templates and code will be added later.'
+  source_identity_status: author_vocabulary_released_phrase_list_not_released

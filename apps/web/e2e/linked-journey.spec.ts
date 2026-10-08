@@ -7,11 +7,12 @@ const recordId = 'coco:example:c765b3eb380b785ef8fc414d'
 const imageId = 'coco:asset:7902a9a64c72d30f6de1cd9e'
 const ids = { detector: 'ed3d9c68da43ce9d7b593937', nudenet: '9f3fd9518d29eecd47273581', embedding: '102efabba647db4f5066e95e', umap: '4c4e3ec224e69e6290e6edf3' }
 const reportPath = fileURLToPath(new URL('../../../reports/browser-linked-journey.json', import.meta.url))
+const providerId = process.env.ATLAS_LINKED_PROVIDER ?? 'local-qwen2-5-vl-3b'
 
 async function forwardLocalApi(page: Page, api: string) {
   await page.route('**/api/v1/**', async route => {
     const request = route.request(), url = new URL(request.url())
-    const response = await fetch(`${api}${url.pathname}${url.search}`, { method: request.method(), headers: { 'Content-Type': 'application/json', 'X-Atlas-Request': '1', ...(request.headers().range ? { Range: request.headers().range } : {}) }, body: request.method() === 'GET' ? undefined : request.postData() ?? undefined })
+    const response = await fetch(`${api}${url.pathname}${url.search}`, { method: request.method(), headers: { 'Content-Type': 'application/json', 'X-Atlas-Request': '1', Connection: 'close', ...(request.headers().range ? { Range: request.headers().range } : {}) }, body: request.method() === 'GET' ? undefined : request.postData() ?? undefined })
     await route.fulfill({ status: response.status, headers: { 'Content-Type': response.headers.get('content-type') ?? 'application/octet-stream' }, body: Buffer.from(await response.arrayBuffer()) })
   })
 }
@@ -55,7 +56,7 @@ test('linked real COCO selection, named analysis, image conversation and exchang
   await expect(inspector.locator(`[data-artifact-id="${ids.nudenet}"]`)).toContainText('Completed')
   await selectionBar(page).getByRole('button', { name: 'Ask model' }).click()
   const drawer = await expectPanel(page, 'Ask model')
-  await drawer.getByLabel('Provider').selectOption('local-qwen2-5-vl-3b')
+  await drawer.getByLabel('Provider').selectOption(providerId)
   const imageChoice = drawer.getByRole('checkbox', { name: `Include image asset ${imageId}` })
   await expect(imageChoice).toBeVisible()
   await imageChoice.check()
@@ -71,11 +72,18 @@ test('linked real COCO selection, named analysis, image conversation and exchang
   expect(preview.outgoing[0].content.find(item => item.type === 'image_url')?.image_url?.url).toMatch(/^data:image\/jpeg;base64,\S+/)
   await expect(drawer.getByText('Outgoing context', { exact: false })).toBeVisible()
   await drawer.getByLabel('Message').fill('Describe the selected image in one sentence.')
-  const sendPromise = page.waitForResponse(r => r.url().endsWith('/api/v1/conversations') && r.request().method() === 'POST', { timeout: 150_000 })
+  const sendPromise = page.waitForResponse(r => r.url().endsWith('/api/v1/conversation-jobs') && r.request().method() === 'POST', { timeout: 150_000 })
   await drawer.getByRole('button', { name: 'Send to provider' }).click()
   const sendHttp = await sendPromise
   expect(sendHttp.ok()).toBe(true)
-  const conversation = await sendHttp.json() as { id: string; error?: string | null; context_digest: string; record_ids: string[]; response?: string | null }
+  const job = await sendHttp.json()
+  let completedJob: { status?: string; result?: any } = {}
+  await expect.poll(async () => {
+    completedJob = await (await fetch(`${api}/api/v1/conversation-jobs/${job.id}`)).json()
+    return ['completed', 'failed', 'cancelled', 'interrupted'].includes(completedJob.status ?? '')
+  }, { timeout: 150_000 }).toBe(true)
+  expect(completedJob.status).toBe('completed')
+  const conversation = completedJob.result as { id: string; error?: string | null; context_digest: string; record_ids: string[]; response?: string | null }
   expect(conversation.error).toBeFalsy()
   expect(conversation.record_ids).toEqual(selection.ids)
   expect(conversation.context_digest).toBe(preview.context_digest)
@@ -101,7 +109,7 @@ test('linked real COCO selection, named analysis, image conversation and exchang
   expect(imported.ids).toEqual(selection.ids)
   expect(imported.snapshot_ids).toEqual(selection.snapshot_ids)
   await expect(page.locator('.toasts')).toContainText('Imported 1 frozen example IDs')
-  writeFileSync(reportPath, JSON.stringify({ tested_at: new Date().toISOString(), browser: `Chromium ${browser.version()}`, dataset_id: 'coco', source_filter: { field_id: 'source.person_count', op: 'eq', value: 2, matched_count: filteredCount }, record_id: recordId, selection_id: selection.id, snapshot_ids: selection.snapshot_ids, existing_artifacts: Object.fromEntries(Object.entries(named).map(([name, artifact]) => [name, { id: artifact.id, kind: artifact.kind, run_id: artifact.run_id, population_count: artifact.ids.length, includes_record: artifact.ids.includes(recordId) }])), map: { projection_artifact_id: ids.umap, color_field_id: colorField, plotted_count: filteredCount }, provider_id: 'local-qwen2-5-vl-3b', context_digest: preview.context_digest, conversation_id: conversation.id, image_proof: { asset_id: imageId, sha256: preview.image_representations[0].sha256, bytes: preview.image_representations[0].bytes, mime_type: preview.image_representations[0].mime_type, saved_input_contains_image_data_url: true }, response_error: conversation.error ?? null, response_text: conversation.response ?? null, exported_selection_checksum: exchange.checksum, imported_selection_id: imported.id, imported_ids_equal_export: JSON.stringify(imported.ids) === JSON.stringify(exchange.selection.ids), note: 'Existing 100-record analysis artifacts include the selected record; they were not recomputed. Image bytes and data URL are excluded from this receipt.' }, null, 2) + '\n')
+  writeFileSync(reportPath, JSON.stringify({ tested_at: new Date().toISOString(), browser: `Chromium ${browser.version()}`, dataset_id: 'coco', source_filter: { field_id: 'source.person_count', op: 'eq', value: 2, matched_count: filteredCount }, record_id: recordId, selection_id: selection.id, snapshot_ids: selection.snapshot_ids, existing_artifacts: Object.fromEntries(Object.entries(named).map(([name, artifact]) => [name, { id: artifact.id, kind: artifact.kind, run_id: artifact.run_id, population_count: artifact.ids.length, includes_record: artifact.ids.includes(recordId) }])), map: { projection_artifact_id: ids.umap, color_field_id: colorField, plotted_count: filteredCount }, provider_id: providerId, context_digest: preview.context_digest, conversation_id: conversation.id, image_proof: { asset_id: imageId, sha256: preview.image_representations[0].sha256, bytes: preview.image_representations[0].bytes, mime_type: preview.image_representations[0].mime_type, saved_input_contains_image_data_url: true }, response_error: conversation.error ?? null, response_text: conversation.response ?? null, exported_selection_checksum: exchange.checksum, imported_selection_id: imported.id, imported_ids_equal_export: JSON.stringify(imported.ids) === JSON.stringify(exchange.selection.ids), note: 'Existing 100-record analysis artifacts include the selected record; they were not recomputed. Image bytes and data URL are excluded from this receipt.' }, null, 2) + '\n')
 })
 
 test('browser re-exports and re-imports the saved linked COCO selection', async ({ page }, testInfo) => {

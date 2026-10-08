@@ -1,0 +1,24 @@
+release: native-prompt-benchmark-9f70ce2e897f7930aa0e34900389959235433e9a
+adapter: structured
+credential_profile: huggingface
+expected_count: 1000
+scope: All 1000 native prompt benchmark rows, preserving target, adversarial, sanitized adversarial and
+  clean prompts as distinct native fields. The separate image benchmark and the paper-specific purified
+  image collection remain unprepared and unidentified.
+adapter_config:
+  mapping:
+    text: adv_prompt
+  format: csv
+  media_scope: partial
+allowed_hosts:
+- huggingface.co
+- cas-bridge.xethub.hf.co
+- us.aws.cdn.hf.co
+- cdn-lfs-us-1.huggingface.co
+files:
+- source_name: mma-diffusion-nsfw-adv-prompts.csv
+  bytes: 301007
+  sha256: 0ad992fc65ad446e0a61235f564cb92d340a43ba40740c1201ea14245c4426b9
+  url: https://huggingface.co/datasets/YijunYang280/MMA-Diffusion-NSFW-adv-prompts-benchmark/resolve/9f70ce2e897f7930aa0e34900389959235433e9a/mma-diffusion-nsfw-adv-prompts.csv
+  config_key: path
+  format: csv

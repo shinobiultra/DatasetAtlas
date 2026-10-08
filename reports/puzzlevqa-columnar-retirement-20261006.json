@@ -1,0 +1,60 @@
+{
+  "dataset_id": "puzzlevqa",
+  "executed": true,
+  "status": "executed",
+  "sources": [
+    {
+      "source_name": "data/train-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/declare-lab/PuzzleVQA/resolve/09290d05682a941782582ec8bbd5903347b2baff/data/train-00000-of-00001.parquet",
+      "bytes": 61704981,
+      "sha256": "ee4dc2e0f5712710b454b99140a06ed21354342f4a659628202a7132aaa54f92",
+      "etag": "\"c50cd8f53656fe10e2069a757388224a150572201ff84e9f8daa31ab3de66a93\"",
+      "rows": 2000
+    }
+  ],
+  "versions": [
+    {
+      "snapshot_id": "puzzlevqa-c2ccea1708af07e3a99bf5bc",
+      "native_image_references": 2000,
+      "index": "parquet-4085e7fe00f0aeb7a093146b357c2a04-eecfa26906c94df0999e2731b4a26457",
+      "cold_checks": [
+        {
+          "ref": "embedded/1000/0.png",
+          "sha256": "64ef81082c74b3f8566282f65d575ccbb5755383447650375f732e9126fac496",
+          "transferred_bytes": 3239322,
+          "source_ref": "remote/0/1000/image/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/0/0.png",
+          "sha256": "35dafb555c1f0225da0ba88869cc82033d0b13b349a3ff1846413ae8f537e565",
+          "transferred_bytes": 3005121,
+          "source_ref": "remote/0/0/image/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/1999/0.png",
+          "sha256": "9a8984824b60d64db29a8ad7daf9a38d9c2e0f89f270fa0e3b8499e5d09eb722",
+          "transferred_bytes": 3063078,
+          "source_ref": "remote/0/1999/image/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        }
+      ]
+    }
+  ],
+  "total_verification_transfer_bytes": 9307522,
+  "native_index_bytes": 323584,
+  "preview_bytes_upper_bound": 3088296,
+  "source_paths_eligible": [
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/puzzlevqa/c2ccea1708af07e3a99bf5bc60b838282066a08d2258e4cd52d53247633d9a33/sources/ee4dc2e0f5712710b454b99140a06ed21354342f4a659628202a7132aaa54f92.parquet"
+  ],
+  "source_paths_retired": [
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/puzzlevqa/c2ccea1708af07e3a99bf5bc60b838282066a08d2258e4cd52d53247633d9a33/sources/ee4dc2e0f5712710b454b99140a06ed21354342f4a659628202a7132aaa54f92.parquet"
+  ],
+  "freed_source_allocated_bytes": 61706240,
+  "integrity": "Complete native Parquet SHA-256 and every canonical image SHA-256 retained. Preview originals pinned locally. Retrieved originals equal their measured native SHA-256.",
+  "transfer_measurement": "One-byte source probes plus actual range payloads; validated ETag-bound cache hits transfer zero bytes. Verification can reuse those cached ranges."
+}

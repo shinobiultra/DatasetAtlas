@@ -67,3 +67,10 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: paper_selection_release_unverified
+relationships:
+- type: same_source_family_as
+  target_id: coco
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: AnyAttack's 100 MSCOCO target images have no published ID list; the COCO
+    2017 validation release is family context, not that selection.

@@ -8,21 +8,25 @@ description: Mention candidate from a focused page audit; the evidence receipts 
 paper_ids:
 - paper-c65ee35ca47313c9
 release: unresolved
-adapter: structured
+adapter: miap
 adapter_config: {}
 coverage:
   identity: candidate
-  source: unverified
-  access: unverified
-  adapter: not_started
+  source: verified
+  access: public
+  adapter: implemented
   preview: none
-  complete_data: unimplemented
-  publication: not_reviewed
+  complete_data: requires_preparation
+  publication: local_only
   preview_count: 0
   unit: example
   blockers:
-  - Original release identity and rights need verification.
-  - Adapter and preview are not implemented.
+  - The paper cites Open Images as the dataset MIAP annotates a subset of and as a
+    dataset with gender-correlated features in prior studies; it names no release
+    (V4 to V7) or split and does not use Open Images directly.
+  - Native V7 validation metadata joins, 41,620-image index and 100 original previews
+    are verified. Mask media, localized narratives, point labels and train/test remain
+    outside this snapshot. Public redistribution rights are not approved.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -39,3 +43,35 @@ evidence:
     Images [26], non-gender features, such as color and objects,
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
+- kind: source_audit_access
+  checked_on: '2026-10-06'
+  url: https://storage.googleapis.com/openimages/v5/validation-annotations-human-imagelabels.csv
+  note: Open Images annotation CSVs are served from storage.googleapis.com (for example
+    v5 validation human image labels, 24,824,095 bytes, MD5 ETag 1897fce9...; v6 and
+    v7 class descriptions also answer), and original images are served by object from
+    s3.amazonaws.com/open-images-dataset/validation/<ImageID>.jpg with an MD5 ETag.
+    The paper (p. 12) says MIAP annotates a subset of Open Images and that prior studies
+    found gender-correlated non-gender features in COCO and Open Images; it uses neither
+    Open Images directly.
+  source_identity_status: official_files_reachable_version_not_named_by_paper
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'From the source inspected on 2026-10-06: annotation CSVs and S3 image objects
+    probed; photographs. Not inferred from the dataset name.'
+- kind: native_source_integration
+  checked_on: '2026-10-07'
+  receipt: reports/openimages-native-source-audit-20261007.json
+  source_identity_status: pinned_publisher_validation_files_paper_release_unidentified
+  note: All declared image keys and annotation rows joined locally. No native contents
+    transmitted to models; native previews are not yet activated.
+relationships:
+- type: same_source_family_as
+  target_id: miap
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: MIAP annotates a subset of Open Images (paper p. 12); the browsable MIAP
+    entry is that overlay, not the underlying Open Images release.
+modalities:
+- image
+source_url: https://storage.googleapis.com/openimages/web/download_v7.html

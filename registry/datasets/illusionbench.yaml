@@ -79,3 +79,11 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: original_citation_only
+relationships:
+- type: same_source_family_as
+  target_id: illusionbench-3c643c29
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: IllusionBench+ is the benchmark the corpus paper itself says it constructs;
+    the Zhang et al. IllusionBench is browsable under the linked entry but is a different
+    release, so this is context only.

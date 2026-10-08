@@ -70,6 +70,35 @@ def test_asset_identity_and_safe_resolution(tmp_path: Path):
         adapter.resolve_asset(source, "../outside.png")
 
 
+def test_pinned_source_row_identity_preserves_duplicate_native_ids(tmp_path: Path):
+    pa = pytest.importorskip("pyarrow")
+    import pyarrow.parquet as pq
+    rows = [{"native_id": 7, "text": "synthetic first"},
+            {"native_id": 7, "text": "synthetic second"}]
+    path = tmp_path / "duplicate-ids.parquet"
+    pq.write_table(pa.Table.from_pylist(rows), path, row_group_size=1)
+    sha = hashlib.sha256(path.read_bytes()).hexdigest()
+    config = {"path": str(path), "sha256": sha, "record_identity": "source_row",
+              "mapping": {"id": "native_id", "text": "text"}}
+    adapter = get_adapter(dataset(tmp_path, "parquet", config))
+    source = adapter.prepare(adapter.plan(2, 10_000))
+    records = list(adapter.iter_sequential(source))
+    assert len({record.id for record in records}) == 2
+    assert [record.source["native_id"] for record in records] == [7, 7]
+    assert [record.source["_atlas_origin"]["row"] for record in records] == [0, 1]
+    assert all(record.source["_atlas_origin"]["source_sha256"] == sha for record in records)
+    assert adapter.iter_records(source, cursor="1", limit=1).records[0] == records[1]
+    unpinned = get_adapter(dataset(tmp_path, "parquet", {**config, "sha256": None}))
+    with pytest.raises(ValueError, match="pinned source checksum"):
+        unpinned.iter_records(unpinned.prepare(unpinned.plan(2, 10_000)))
+    other_path = tmp_path / "other-source.parquet"
+    pq.write_table(pa.Table.from_pylist(rows[::-1]), other_path)
+    other_sha = hashlib.sha256(other_path.read_bytes()).hexdigest()
+    other = get_adapter(dataset(tmp_path, "parquet", {**config, "path": str(other_path), "sha256": other_sha}))
+    other_records = list(other.iter_sequential(other.prepare(other.plan(2, 10_000))))
+    assert {record.id for record in records}.isdisjoint(record.id for record in other_records)
+
+
 def test_parquet_cursor_seeks_past_prior_row_groups(tmp_path: Path, monkeypatch):
     pa = pytest.importorskip("pyarrow")
     import pyarrow.parquet as pq

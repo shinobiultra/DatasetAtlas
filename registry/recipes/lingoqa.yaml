@@ -1,0 +1,40 @@
+release: lingoqa-evaluation-author-20240312
+adapter: structured_collection
+expected_count: 1000
+scope: All 1000 native evaluation annotation rows, retaining both source answers for
+  each of 500 questions, original question/segment/index fields and five ordered original
+  JPEG frames for each of 100 driving segments. This is the author evaluation release,
+  not the training population or newly extracted video frames.
+adapter_config:
+  annotations:
+  - path_key: annotations_path
+    format: parquet
+    split: evaluation
+    media_paths_field: images
+    media_archive: frames
+  mapping:
+    question: question
+  identity_fields:
+  - question_id
+  - segment_id
+  - __index_level_0__
+  local_archives:
+    frames:
+      path_key: images_path
+  max_annotation_bytes: 5000000
+files:
+- source_name: val.parquet
+  url: https://drive.usercontent.google.com/download?id=1I8u6uYysQUstoVYZapyRQkXmOwr-AG3d&export=download&confirm=t
+  bytes: 73927
+  sha256: 435461a8a8038ad8d2a8fe98388f40530978149e60e7beaaa41174088fe53caf
+  format: parquet
+  config_key: annotations_path
+- source_name: images.zip
+  url: https://drive.usercontent.google.com/download?id=1U5tBTZjw0rH9ID1JuuWsOmIp2HNvQvQo&export=download&confirm=t
+  bytes: 232101697
+  sha256: 343703b0194ba26eb20a6c5678f62963be037ac45ba742e5e095dd4a4b5aee5e
+  format: zip
+  config_key: images_path
+allowed_hosts:
+- drive.google.com
+- drive.usercontent.google.com

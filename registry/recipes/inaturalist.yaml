@@ -1,0 +1,45 @@
+release: inat2021-validation
+adapter: inaturalist
+expected_count: 100000
+sequential_tar_sources: true
+scope: 'Complete native iNaturalist 2021 validation release: 100,000 original images,
+  10,000 native taxa, every taxonomy field, per-image licence, rights holder and native
+  location metadata. Original archives are checksum-verified then retired with bounded
+  original access. The citing paper challenge release and exact SAE membership remain
+  unidentified. Observation coordinates and media remain local-only.'
+adapter_config:
+  annotation_archive_name: val.json.tar
+  annotation_member: val.json
+  image_archive_name: val.tar
+  mapping:
+    id: source_id
+    media: media_ref
+    label: category.name
+  sequential_index: true
+  media_scope: partial
+  verify_remote_preview_media: true
+  native_record_read_bytes: 2000000000
+  remote_cache_root: work/media-cache/inaturalist
+  remote_cache_bytes: 200000000
+  media_transfer_bytes: 100000000
+allowed_hosts:
+- ml-inat-competition-datasets.s3.amazonaws.com
+files:
+- source_name: val.json.tar.gz
+  url: https://ml-inat-competition-datasets.s3.amazonaws.com/2021/val.json.tar.gz
+  format: tar.gz
+  bytes: 9797665
+  sha256: d63dfdb2e5fbc0262373833ed3fd02030787bd4b5cf2bd4ff3caea6d3f4e2970
+  probe_member_suffix: .json
+  max_uncompressed_bytes: 60000000
+- source_name: val.tar.gz
+  url: https://ml-inat-competition-datasets.s3.amazonaws.com/2021/val.tar.gz
+  format: tar.gz
+  bytes: 8931661582
+  md5: f6f6e0e242e3d4c9569ba56400938afc
+  probe_member_suffix: .jpg
+  max_uncompressed_bytes: 12000000000
+resource_limits:
+  max_cpu_seconds: 7200
+  max_wall_seconds: 14400
+  max_rss_bytes: 8000000000

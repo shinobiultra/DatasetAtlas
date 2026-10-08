@@ -53,3 +53,10 @@ evidence:
   checked_on: '2026-09-22'
   source_identity_status: family_only
 source_url: https://www.robots.ox.ac.uk/~vgg/data/flowers/102/
+relationships:
+- type: same_source_family_as
+  target_id: flowers102
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: Oxford publishes Flowers 17 and Flowers 102; the chart gives no class count, so the prepared
+    Flowers-102 release is a family member, not a confirmed match.

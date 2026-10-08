@@ -58,3 +58,9 @@ relationships:
   target_id: imagenet
   status: asserted_from_source_review
   scope: Multiple non-identical 100-class selections derived from ILSVRC; the paper selection is unpinned.
+- type: same_source_family_as
+  target_id: imagenet-ilsvrc-2012
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: ImageNet100 is a 100-class selection of ILSVRC; this entry names no class list or seed, so the parent release
+    is only context.

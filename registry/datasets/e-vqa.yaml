@@ -21,9 +21,12 @@ coverage:
   preview_count: 0
   unit: example
   blockers:
-  - Access to the exact data files has not been verified.
-  - The exact paper release, source variant, or derived collection remains unresolved.
-  - Adapter and preview are not implemented.
+  - The authors host the visual question answering editing data on Google Drive and Baidu NetDisk (EasyEdit
+    examples/MMEdit.md), not on a pinned, checksummable source. A 2026-10-06 request for the image archive
+    through the Drive download endpoint returned an empty HTML body.
+  - A Google Drive folder cannot be listed or pinned reproducibly here; mirrors on Hugging Face are third-party
+    uploads and are not treated as the original release.
+  - Adapter and preview are not implemented because no verifiable file could be fetched.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -60,4 +63,18 @@ evidence:
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_file_version_unverified
+- kind: source_audit_access
+  checked_on: '2026-10-06'
+  url: https://github.com/zjunlp/EasyEdit/blob/14cea8245f06715684592ab55184939b99d70784/examples/MMEdit.md
+  note: README links Google Drive folder and image archive and BaiduNetDisk mirrors for E-VQA and E-IC;
+    HEAD/GET of the Drive image-archive id returned HTTP 200 with content-length 0 (text/html).
+  source_identity_status: author_release_on_unpinnable_hosts
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'From the source inspected on 2026-10-06: EasyEdit README inspected: visual question answering
+    editing data with images. Not inferred from the dataset name.'
 source_url: https://github.com/zjunlp/EasyEdit/blob/14cea8245f06715684592ab55184939b99d70784/examples/MMEdit.md
+modalities:
+- image
+- text

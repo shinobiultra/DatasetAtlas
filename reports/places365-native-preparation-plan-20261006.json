@@ -1,0 +1,249 @@
+{
+  "dataset_id": "places",
+  "dataset": {
+    "schema_version": "1.0",
+    "id": "places",
+    "name": "Places",
+    "origin": "catalogue",
+    "aliases": [],
+    "description": "MIT Places family includes multiple versions and split sizes; original site may be intermittently unavailable.",
+    "tasks": [],
+    "modalities": [],
+    "labels": [],
+    "paper_ids": [
+      "paper-25eaa8c74ce76800"
+    ],
+    "source_url": "https://places2.csail.mit.edu/",
+    "release": "places365-standard-validation-256-native",
+    "snapshot_id": "",
+    "adapter": "places365",
+    "adapter_config": {},
+    "coverage": {
+      "identity": "candidate",
+      "source": "verified",
+      "access": "public",
+      "adapter": "implemented",
+      "preview": "none",
+      "complete_data": "unimplemented",
+      "publication": "not_reviewed",
+      "preview_count": 0,
+      "total_count": null,
+      "unit": "example",
+      "blockers": [
+        "The citing survey names only Places; release and split remain unidentified. Native Places365 Standard256validation browsing does not resolve that paper membership.",
+        "Training, Challenge and other native image variants remain unprepared. Source-image publication rights remain unreviewed."
+      ]
+    },
+    "availability": null,
+    "rights": {
+      "records": "not_reviewed",
+      "annotations": "not_reviewed",
+      "images": "not_reviewed",
+      "source": "https://places2.csail.mit.edu/",
+      "note": "Authors retain third-party image copyrights; CC BY for pretrained models does not cover images."
+    },
+    "relationships": [],
+    "evidence": [
+      {
+        "kind": "corpus_mention",
+        "evidence_id": "evidence-bdd04a8ffd2d3c64b2c0",
+        "paper_id": "paper-25eaa8c74ce76800",
+        "source_file_hash": "4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6",
+        "page": 30,
+        "role": "cited-study dataset in survey table",
+        "excerpt": "CLIP Image Retrieval, Segmenta- Waterbirds, CUB, Places, ImageNet- Text-Explanations of tion",
+        "review_scope": "full_text_mention_inventory_checked",
+        "paper_full_review_complete": true
+      },
+      {
+        "kind": "source_audit_identity",
+        "url": "https://places2.csail.mit.edu/",
+        "note": "MIT Places family includes multiple versions and split sizes; original site may be intermittently unavailable. Release: Places2/Places365 Standard/Challenge not disambiguated",
+        "audit_file": "work/sources/source-audit-jobs-batch2.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "family_only"
+      },
+      {
+        "kind": "source_audit_rights",
+        "url": "https://places2.csail.mit.edu/",
+        "note": "Authors retain third-party image copyrights; CC BY for pretrained models does not cover images.",
+        "audit_file": "work/sources/source-audit-jobs-batch2.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "family_only"
+      },
+      {
+        "kind": "source_audit_access",
+        "checked_on": "2026-10-06",
+        "url": "https://data.csail.mit.edu/places/places365/val_256.tar",
+        "note": "Official MIT host answers HTTPS range requests: val_256.tar is 525,158,400 bytes (strong ETag, Last-Modified 2016-05-16) and filelist_places365-standard.tar is 67,498,496 bytes. The survey table names only 'Places' (no Places205, Places365 or Places2 version, split or size), so no release is pinned. The list archive's contents were not inspected and places365_val.txt is not served at the top level (HTTP 404).",
+        "source_identity_status": "official_files_reachable_release_not_named_by_paper"
+      },
+      {
+        "kind": "source_audit_release",
+        "url": "https://data.csail.mit.edu/places/places365/val_256.tar",
+        "note": "Publisher validation archive and native label filelist verified against library/publisher MD5 and measured SHA256. All36500original JPEG members are retained or indexed.",
+        "checked_on": "2026-10-06",
+        "audit_file": "reports/places365-native-source-acquisition-20261006.json"
+      }
+    ]
+  },
+  "max_download_bytes": 650000000,
+  "max_output_bytes": 1000000000,
+  "source_mode": "download",
+  "files": [
+    {
+      "source_name": "filelist_places365-standard.tar",
+      "url": "https://data.csail.mit.edu/places/places365/filelist_places365-standard.tar",
+      "bytes": 67498496,
+      "sha256": "520699e00d69b63ddc29fac54645aa00ce1c10ca42e288960aa1cf791d6e9aa9",
+      "md5": "35a0585fee1fa656440f3ab298f8479c",
+      "format": "tar",
+      "config_key": "annotations_path"
+    },
+    {
+      "source_name": "val_256.tar",
+      "url": "https://data.csail.mit.edu/places/places365/val_256.tar",
+      "bytes": 525158400,
+      "sha256": "24b4e639ef12a0012af525bc4cb443e4ab4aaea8369a1fb009b70e4a4aad5d48",
+      "md5": "e27b17d8d44f4af9a78502beb927f808",
+      "format": "tar",
+      "config_key": "path"
+    }
+  ],
+  "expected_download_bytes": 592656896,
+  "expected_count": 36500,
+  "source_url": "https://places2.csail.mit.edu/",
+  "requirements": [],
+  "ready": true,
+  "scope": "All36500 native Places365 Standard validation images in the author val_256 release with all365 native category labels and exact validation file-list joins. The256pixel release is publisher-prepared; Atlas preserves its JPEG bytes. Places205, Challenge, training images, larger image variants and the survey paper unspecified Places population are outside this snapshot.",
+  "source_identity": "Pinned available release; not a claim of the paper-used revision.",
+  "prepared_dataset": {
+    "schema_version": "1.0",
+    "id": "places",
+    "name": "Places",
+    "origin": "catalogue",
+    "aliases": [],
+    "description": "MIT Places family includes multiple versions and split sizes; original site may be intermittently unavailable.",
+    "tasks": [],
+    "modalities": [],
+    "labels": [],
+    "paper_ids": [
+      "paper-25eaa8c74ce76800"
+    ],
+    "source_url": "https://places2.csail.mit.edu/",
+    "release": "places365-standard-validation-256-native",
+    "snapshot_id": "",
+    "adapter": "places365",
+    "adapter_config": {
+      "archive_preparation": "indexed-tar",
+      "archive_member_prefix": "val_256/",
+      "native_class_count": 365,
+      "native_images_per_class": 100,
+      "max_annotation_bytes": 8000000,
+      "sequential_index": true,
+      "verify_remote_preview_media": true,
+      "media_scope": "partial",
+      "remote_cache_bytes": 100000000,
+      "max_uncompressed_bytes": 600000000,
+      "max_rss_bytes": 4000000000,
+      "max_cpu_seconds": 900,
+      "max_wall_seconds": 1800
+    },
+    "coverage": {
+      "identity": "candidate",
+      "source": "verified",
+      "access": "public",
+      "adapter": "implemented",
+      "preview": "none",
+      "complete_data": "unimplemented",
+      "publication": "not_reviewed",
+      "preview_count": 0,
+      "total_count": null,
+      "unit": "example",
+      "blockers": [
+        "The citing survey names only Places; release and split remain unidentified. Native Places365 Standard256validation browsing does not resolve that paper membership.",
+        "Training, Challenge and other native image variants remain unprepared. Source-image publication rights remain unreviewed."
+      ]
+    },
+    "availability": null,
+    "rights": {
+      "records": "not_reviewed",
+      "annotations": "not_reviewed",
+      "images": "not_reviewed",
+      "source": "https://places2.csail.mit.edu/",
+      "note": "Authors retain third-party image copyrights; CC BY for pretrained models does not cover images."
+    },
+    "relationships": [],
+    "evidence": [
+      {
+        "kind": "corpus_mention",
+        "evidence_id": "evidence-bdd04a8ffd2d3c64b2c0",
+        "paper_id": "paper-25eaa8c74ce76800",
+        "source_file_hash": "4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6",
+        "page": 30,
+        "role": "cited-study dataset in survey table",
+        "excerpt": "CLIP Image Retrieval, Segmenta- Waterbirds, CUB, Places, ImageNet- Text-Explanations of tion",
+        "review_scope": "full_text_mention_inventory_checked",
+        "paper_full_review_complete": true
+      },
+      {
+        "kind": "source_audit_identity",
+        "url": "https://places2.csail.mit.edu/",
+        "note": "MIT Places family includes multiple versions and split sizes; original site may be intermittently unavailable. Release: Places2/Places365 Standard/Challenge not disambiguated",
+        "audit_file": "work/sources/source-audit-jobs-batch2.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "family_only"
+      },
+      {
+        "kind": "source_audit_rights",
+        "url": "https://places2.csail.mit.edu/",
+        "note": "Authors retain third-party image copyrights; CC BY for pretrained models does not cover images.",
+        "audit_file": "work/sources/source-audit-jobs-batch2.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "family_only"
+      },
+      {
+        "kind": "source_audit_access",
+        "checked_on": "2026-10-06",
+        "url": "https://data.csail.mit.edu/places/places365/val_256.tar",
+        "note": "Official MIT host answers HTTPS range requests: val_256.tar is 525,158,400 bytes (strong ETag, Last-Modified 2016-05-16) and filelist_places365-standard.tar is 67,498,496 bytes. The survey table names only 'Places' (no Places205, Places365 or Places2 version, split or size), so no release is pinned. The list archive's contents were not inspected and places365_val.txt is not served at the top level (HTTP 404).",
+        "source_identity_status": "official_files_reachable_release_not_named_by_paper"
+      },
+      {
+        "kind": "source_audit_release",
+        "url": "https://data.csail.mit.edu/places/places365/val_256.tar",
+        "note": "Publisher validation archive and native label filelist verified against library/publisher MD5 and measured SHA256. All36500original JPEG members are retained or indexed.",
+        "checked_on": "2026-10-06",
+        "audit_file": "reports/places365-native-source-acquisition-20261006.json"
+      }
+    ]
+  },
+  "recipe_sha256": "2fde84a7e018d129f4bfe92cb86da2592eaa81e0071f302d3be64ec7b95a8dec",
+  "kind": "http_archive",
+  "allowed_hosts": [
+    "data.csail.mit.edu"
+  ],
+  "required_free_bytes": 1000000000,
+  "reuse_registered_sources": [
+    "filelist_places365-standard.tar",
+    "val_256.tar"
+  ],
+  "available_bytes": 205241999360,
+  "shared_storage": {
+    "ceiling_bytes": 150000000000,
+    "allocated_workspace_bytes": 112546234368,
+    "reserved_by_running_preparations": 0,
+    "available_bytes": 37453765632,
+    "required_bytes": 1000000000,
+    "admitted": true,
+    "scope": "Workspace regular files plus explicitly configured external model/source roots.",
+    "measurement_errors": []
+  },
+  "resource_limits": {
+    "max_rss_bytes": 8000000000,
+    "max_cpu_seconds": 3600,
+    "max_wall_seconds": 7200
+  },
+  "memory_enforcement": "kernel cgroup memory cap including descendants; swap disabled",
+  "id": "c5a999c4e9ce824ae3ed7b00a88f244ad946c8873762c2384d3a13e7be36b2cf"
+}

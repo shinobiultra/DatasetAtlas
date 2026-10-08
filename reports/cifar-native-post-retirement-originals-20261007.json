@@ -1,0 +1,90 @@
+{
+  "verified_at_utc": "2026-10-07T06:58:24.986005+00:00",
+  "status": "passed",
+  "datasets": [
+    {
+      "dataset_id": "cifar-10-c",
+      "snapshot_id": "cifar-10-c-84a406abd2b8547a4e8bb719",
+      "status": "passed",
+      "original_bodies_absent": true,
+      "original_checks": [
+        {
+          "native_rgb_sha256": "9d3e39e8ac854c709afdc61c7da7740662d8f90bd82d3436b859d0720f038508",
+          "png_sha256": "b308c763a6f67609a33fd435901d32f10b4f1326286c2fc66fbf533961895c61",
+          "dimensions": [
+            32,
+            32
+          ],
+          "bytes": 2504,
+          "non_preview": false,
+          "native_pixels_equal": true
+        },
+        {
+          "native_rgb_sha256": "eaadb8aa7265af8a37fb76239dc6f2c5a4989ea36a90ec1325840fded8b63343",
+          "png_sha256": "cd0153205c46f572bd76db19b76f48a52e9476dd147a8a82396fae5eb0c41538",
+          "dimensions": [
+            32,
+            32
+          ],
+          "bytes": 2734,
+          "non_preview": true,
+          "native_pixels_equal": true
+        },
+        {
+          "native_rgb_sha256": "e63ffdecc1960200024d96b5c632d568644e8c263c4f9f9167f1f465ee4b9ed0",
+          "png_sha256": "1e20b3d5796979ca560da1d92511ff936c57da15be6c34eb1f638b9b24ad1572",
+          "dimensions": [
+            32,
+            32
+          ],
+          "bytes": 2004,
+          "non_preview": true,
+          "native_pixels_equal": true
+        }
+      ]
+    },
+    {
+      "dataset_id": "cifar-100-c",
+      "snapshot_id": "cifar-100-c-8b1e4a18684465bd7c083fa6",
+      "status": "passed",
+      "original_bodies_absent": true,
+      "original_checks": [
+        {
+          "native_rgb_sha256": "4c311dcd125ae0b3a4dc41b602a6bfbb7d009e73fb9e019cfb9846e1db78e044",
+          "png_sha256": "a49f345276d46d8ae31181efdc2d646038977e7e8aeb93d6061fd003b80808c0",
+          "dimensions": [
+            32,
+            32
+          ],
+          "bytes": 2125,
+          "non_preview": false,
+          "native_pixels_equal": true
+        },
+        {
+          "native_rgb_sha256": "0c70c182e4d9e8396eb395b1c660d77e04ec242fca70ef3d2849e86b05cd99fe",
+          "png_sha256": "233b0bf1a66454be1ab2302ba64c6df69d0e383566b47c0ade122d9308efa113",
+          "dimensions": [
+            32,
+            32
+          ],
+          "bytes": 2580,
+          "non_preview": true,
+          "native_pixels_equal": true
+        },
+        {
+          "native_rgb_sha256": "31c61b5161c4dd5d3817381ebe2bc274e340e15147e0870b8186b4cc559aace6",
+          "png_sha256": "4e15a803e16769e04465e9ec298e6ed5e97a2183c716cdbaa520b4288d8a4c35",
+          "dimensions": [
+            32,
+            32
+          ],
+          "bytes": 2239,
+          "non_preview": true,
+          "native_pixels_equal": true
+        }
+      ]
+    }
+  ],
+  "external_model_requests": 0,
+  "scope": "Six original lossless PNG renders after TAR removal match native RGB SHA pins measured before removal; all tests stay local."
+}

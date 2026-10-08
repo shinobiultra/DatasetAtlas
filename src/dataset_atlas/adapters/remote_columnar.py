@@ -15,6 +15,10 @@ from .core import DatasetAdapter,SourceDescription,RecordBatch,MediaHandle
 from .embedded_parquet import _encoding
 
 
+class MediaLimitError(ValueError):
+    """A particular source image cannot be inspected within the media limits."""
+
+
 class RemoteColumnarAdapter(DatasetAdapter):
     def __init__(self,dataset):
         super().__init__(dataset)
@@ -23,12 +27,14 @@ class RemoteColumnarAdapter(DatasetAdapter):
         self.files=self.config['remote_files']
         if not self.files:raise ValueError('Remote Parquet files are required')
         self.bytes_fetched=0
+        self.media_bytes_fetched=0
         self.transfer_limit=self.config.get('metadata_transfer_bytes',100_000_000)
         self.cancel=None
         self.cache=BoundedCache(self.config['remote_cache_root'],self.config.get('remote_cache_bytes',1_000_000_000))
         self._layouts={}
         # Compressed bytes per row group: (selected non-media columns, media columns).
         self._group_bytes={}
+        self._binary_media={}
 
     def probe(self):
         return SourceDescription('remote_columnar',self.files[0]['url'],True,self.revision,sum(f['bytes'] for f in self.files),
@@ -38,9 +44,11 @@ class RemoteColumnarAdapter(DatasetAdapter):
     def _parquet(self,index,budget=None):
         entry=self.files[index]
         limit=budget if budget is not None else self.transfer_limit-self.bytes_fetched
+        if self.config.get('aggregate_transfer_bytes') is not None:
+            limit=min(limit,self.config['aggregate_transfer_bytes']-self.bytes_fetched-self.media_bytes_fetched)
         if limit<=0:raise ValueError('Remote metadata transfer budget exhausted')
         with HttpsRangeReader(entry['url'],size=entry['bytes'],etag=entry['etag'],allowed_hosts=self.config['allowed_hosts'],
-                              byte_budget=limit,cache=self.cache,cancel=self.cancel) as source:
+                              byte_budget=limit,cache=self.cache,cancel=self.cancel,credential_profile=self.config.get('credential_profile')) as source:
             try:
                 # Disable speculative reads spanning omitted image columns.
                 buffer=SmallReadBuffer(source) if budget is None else source
@@ -49,11 +57,12 @@ class RemoteColumnarAdapter(DatasetAdapter):
                 yield parquet
             finally:
                 if budget is None:self.bytes_fetched+=source.bytes_fetched
+                else:self.media_bytes_fetched+=source.bytes_fetched
 
     def _layout(self,index):
         if index not in self._layouts:
             with self._parquet(index) as parquet:
-                schema=parquet.schema_arrow;media={};columns=[]
+                schema=parquet.schema_arrow;media={};columns=[];binary=set()
                 for field in schema:
                     dtype=field.type;is_list=pa.types.is_list(dtype) or pa.types.is_large_list(dtype)
                     if is_list:dtype=dtype.value_type
@@ -62,10 +71,16 @@ class RemoteColumnarAdapter(DatasetAdapter):
                         if not re.fullmatch(r'[A-Za-z_][A-Za-z_0-9]*',field.name):raise ValueError('Remote media field name is unsupported')
                         media[field.name]=is_list
                     elif pa.types.is_binary(dtype) or pa.types.is_large_binary(dtype):
-                        raise ValueError(f'Remote binary column {field.name} requires the full-download adapter; slot availability cannot be inferred')
+                        declared=self.config.get('media_columns',[self.config.get('mapping',{}).get('media','image')])
+                        if field.name not in declared:
+                            raise ValueError(f'Remote binary column {field.name} must be declared in media_columns')
+                        media[field.name]=is_list;binary.add(field.name)
+                    elif (pa.types.is_string(dtype) or pa.types.is_large_string(dtype)) and self.config.get('media_encoding')=='base64':
+                        declared=self.config.get('media_columns',[])
+                        if field.name in declared:media[field.name]=is_list;binary.add(field.name)
                 for i in range(len(parquet.schema)):
                     path=parquet.schema.column(i).path
-                    if path.split('.')[0] not in media or path.endswith('.path'):columns.append(path)
+                    if path.split('.')[0] not in media or path.endswith('.path') or path.split('.')[0] in binary:columns.append(path)
                 groups=[parquet.metadata.row_group(i).num_rows for i in range(parquet.num_row_groups)]
                 selected=set(columns);sizes=[]
                 for i in range(parquet.num_row_groups):
@@ -74,6 +89,7 @@ class RemoteColumnarAdapter(DatasetAdapter):
                     sizes.append((sum(c.total_compressed_size for c in chunks if c.path_in_schema in selected),
                                   sum(c.total_compressed_size for c in chunks if c.path_in_schema.split('.')[0] in media)))
                 self._group_bytes[index]=sizes
+                self._binary_media[index]=binary
                 self._layouts[index]=(schema,media,columns,groups)
         return self._layouts[index]
 
@@ -103,13 +119,13 @@ class RemoteColumnarAdapter(DatasetAdapter):
                     config={**self.config,'remote_files':[self.files[index]],'metadata_transfer_bytes':allowance}
                     child=RemoteColumnarAdapter(self.dataset.model_copy(update={'adapter_config':config}))
                     child.cancel=self.cancel
-                    try:return index,(child._layout(0),child._group_bytes[0]),child.bytes_fetched,None
+                    try:return index,(child._layout(0),child._group_bytes[0],child._binary_media[0]),child.bytes_fetched,None
                     except Exception as error:return index,None,child.bytes_fetched,error
                 results=list(pool.map(read,batch))
                 self.bytes_fetched+=sum(result[2] for result in results)
                 for index,layout,_,error in results:
                     if error is not None:raise error
-                    self._layouts[index],self._group_bytes[index]=layout
+                    self._layouts[index],self._group_bytes[index],self._binary_media[index]=layout
                     if progress:progress(schema_shards=len(self._layouts),total_shards=len(self.files),downloaded_bytes=self.bytes_fetched)
 
     def source_field_types(self):
@@ -126,6 +142,19 @@ class RemoteColumnarAdapter(DatasetAdapter):
                       else 'string' if pa.types.is_string(dtype) or pa.types.is_large_string(dtype) else 'object')
                 types.setdefault(field.name,set()).add(kind)
         return {name:next(iter(kinds)) if len(kinds)==1 else 'object' for name,kinds in types.items()}
+
+    def _metadata_table(self,table,file_index):
+        """Keep binary-list slot counts and nulls without copying image bytes into Python."""
+        for column in self._binary_media.get(file_index,set()):
+            values=[]
+            is_list=self._layout(file_index)[1][column]
+            for scalar in table[column]:
+                if not scalar.is_valid:values.append(None)
+                elif is_list:values.append([{'path':None} if item.is_valid else None for item in scalar.values])
+                else:values.append({'path':None})
+            replacement=pa.array(values,type=pa.list_(pa.struct([('path',pa.string())])) if is_list else pa.struct([('path',pa.string())]))
+            table=table.set_column(table.schema.get_field_index(column),column,replacement)
+        return table
 
     def _source_record(self,row,file_index,row_index):
         if any(name in row for name in ('_atlas_origin','_atlas_configuration')):raise ValueError('Source collides with reserved provenance field')
@@ -170,18 +199,20 @@ class RemoteColumnarAdapter(DatasetAdapter):
     @staticmethod
     def _prefetch_metadata(parquet, group, columns):
         # Selected column chunks are contiguous in common multimodal shards.
-        # Merge touching intervals only: skipped image bytes are never included.
-        metadata=parquet.metadata.row_group(group);selected=set(columns);ranges=[]
+        # Small gaps between annotation pages can be fetched in one request;
+        # never bridge an omitted column, even when it is small.
+        metadata=parquet.metadata.row_group(group);selected=set(columns);ranges=[];omitted=[]
         for index in range(metadata.num_columns):
             column=metadata.column(index)
-            if column.path_in_schema not in selected:continue
             offsets=[offset for offset in (column.dictionary_page_offset,column.data_page_offset) if offset is not None and offset>=0]
             if not offsets:raise ValueError('Parquet column has no page offset')
             start=min(offsets);end=start+column.total_compressed_size
-            if end>start:ranges.append((start,end))
+            if end>start:
+                (ranges if column.path_in_schema in selected else omitted).append((start,end))
         merged=[]
         for start,end in sorted(ranges):
-            if merged and start<=merged[-1][1]:merged[-1]=(merged[-1][0],max(merged[-1][1],end))
+            if merged and start-merged[-1][1]<=4096 and not any(left<start and right>merged[-1][1] for left,right in omitted):
+                merged[-1]=(merged[-1][0],max(merged[-1][1],end))
             else:merged.append((start,end))
         parquet._atlas_buffer.prefetch(merged)
 
@@ -197,18 +228,19 @@ class RemoteColumnarAdapter(DatasetAdapter):
             if not 0<=group<len(groups) or not 0<=row<groups[group]:raise ValueError('Remote row outside declared population')
             wanted.setdefault((file_index,group),set()).add(row)
         found={}
-        for (file_index,group),rows in sorted(wanted.items()):
-            if self.cancel:self.cancel()
+        for file_index in sorted({key[0] for key in wanted}):
             _,_,columns,groups=self._layout(file_index)
-            first=sum(groups[:group])
             with self._parquet(file_index) as parquet:
-                self._prefetch_metadata(parquet,group,columns)
-                table=parquet.read_row_group(group,columns=columns)
-            for row in sorted(rows):
-                record=self._source_record(table.slice(row,1).to_pylist()[0],file_index,first+row)
-                source.charge(len(record.model_dump_json().encode()))
-                found[(file_index,group,row)]=record
-            del table
+                for (_,group),rows in sorted((key,value) for key,value in wanted.items() if key[0]==file_index):
+                    if self.cancel:self.cancel()
+                    first=sum(groups[:group])
+                    self._prefetch_metadata(parquet,group,columns)
+                    table=parquet.read_row_group(group,columns=columns)
+                    for row in sorted(rows):
+                        record=self._source_record(self._metadata_table(table.slice(row,1),file_index).to_pylist()[0],file_index,first+row)
+                        source.charge(len(record.model_dump_json().encode()))
+                        found[(file_index,group,row)]=record
+                    del table
         return [found[target] for target in targets]
 
     def iter_records(self,source,cursor=None,limit=None):
@@ -227,7 +259,7 @@ class RemoteColumnarAdapter(DatasetAdapter):
                     for batch in parquet.iter_batches(batch_size=1000,row_groups=[group],columns=columns):
                         skip=max(0,start-offset-batch_start)
                         if skip<batch.num_rows:
-                            rows=batch.slice(skip,min(size-len(records),batch.num_rows-skip)).to_pylist()
+                            rows=self._metadata_table(pa.Table.from_batches([batch.slice(skip,min(size-len(records),batch.num_rows-skip))]),index).to_pylist()
                             for local,row in enumerate(rows,batch_start+skip):
                                 record=self._source_record(row,index,local);source.charge(len(record.model_dump_json().encode()));records.append(record)
                         batch_start+=batch.num_rows
@@ -289,6 +321,7 @@ class RemoteColumnarAdapter(DatasetAdapter):
                 child=RemoteColumnarAdapter(self.dataset.model_copy(update={'adapter_config':config}))
                 child.cancel=check
                 child._layouts[0]=self._layout(index)
+                child._binary_media[0]=self._binary_media.get(index,set())
                 prepared=child.prepare(child.plan(1000,source.max_bytes))
                 cursor=None
                 while True:
@@ -330,7 +363,8 @@ class RemoteColumnarAdapter(DatasetAdapter):
                     for future in futures:future.result()
             finally:stop.set()
 
-    def resolve_asset(self,source,asset_ref):
+    def resolve_original_asset(self,source,asset_ref):
+        """Bounded native bytes, before the separate display/processor pixel check."""
         match=re.fullmatch(r'remote/(\d+)/(\d+)/([A-Za-z_][A-Za-z_0-9]*)/(\d+)\.png',asset_ref)
         if not match:raise ValueError('Invalid remote Parquet image reference')
         index,row,column,slot=int(match[1]),int(match[2]),match[3],int(match[4])
@@ -345,14 +379,37 @@ class RemoteColumnarAdapter(DatasetAdapter):
         with self._parquet(index,budget=self.config.get('media_transfer_bytes',250_000_000)) as parquet:
             metadata=parquet.metadata.row_group(group)
             media_bytes=sum(metadata.column(i).total_compressed_size for i in range(metadata.num_columns) if metadata.column(i).path_in_schema.split('.')[0]==column)
-            decoded_bytes=sum(metadata.column(i).total_uncompressed_size for i in range(metadata.num_columns) if metadata.column(i).path_in_schema.split('.')[0]==column)
-            if decoded_bytes>self.config.get('media_decode_bytes',512_000_000):raise ValueError('Image row group exceeds decoded memory budget')
             if media_bytes>self.config.get('media_transfer_bytes',250_000_000):raise ValueError('Image row group exceeds media transfer budget; mount or download this shard')
-            value=parquet.read_row_group(group,columns=[column]).slice(row-offset,1).to_pylist()[0][column]
+            # Large native row groups need not become one decoded table. Arrow
+            # reads column pages under the worker's RSS cap; each exposed batch
+            # has its own decoded-byte bound, and only the requested row enters
+            # Python. This does not claim a hard bound on Arrow's internal buffers.
+            remaining=row-offset
+            value=None
+            for batch in parquet.iter_batches(batch_size=8,row_groups=[group],columns=[column]):
+                if batch.nbytes>self.config.get('media_decode_bytes',512_000_000):raise MediaLimitError('Image batch exceeds decoded memory budget')
+                if remaining<batch.num_rows:
+                    value=batch.slice(remaining,1).to_pylist()[0][column];break
+                remaining-=batch.num_rows
         values=value if media[column] else [value]
-        if values is None or slot>=len(values) or not values[slot] or not values[slot].get('bytes'):raise FileNotFoundError('Source has no embedded image bytes for this slot')
-        data=values[slot]['bytes'];source.charge(len(data));_,mime=_encoding(data)
-        with Image.open(io.BytesIO(data)) as image:
-            if image.width*image.height>50_000_000:raise ValueError('Embedded image exceeds pixel budget')
-            image.verify()
+        if values is None or slot>=len(values) or not values[slot]:raise FileNotFoundError('Source has no embedded image bytes for this slot')
+        item=values[slot]
+        if isinstance(item,bytes):data=item
+        elif isinstance(item,dict):data=item.get('bytes')
+        elif isinstance(item,str) and self.config.get('media_encoding')=='base64':
+            import base64,binascii
+            remaining=source.max_bytes-source.bytes_read
+            if len(item)>((remaining+2)//3)*4:raise MediaLimitError('Base64 original exceeds the decoded-byte budget')
+            try:data=base64.b64decode(item,validate=True)
+            except (binascii.Error,ValueError):raise ValueError('Native image base64 encoding is invalid') from None
+        else:raise ValueError('Embedded image slot has invalid type')
+        if not data:raise FileNotFoundError('Source has no embedded image bytes for this slot')
+        source.charge(len(data));_,mime=_encoding(data)
         return MediaHandle(data,mime,hashlib.sha256(data).hexdigest(),asset_ref)
+
+    def resolve_asset(self,source,asset_ref):
+        original=self.resolve_original_asset(source,asset_ref)
+        with Image.open(io.BytesIO(original.data)) as image:
+            if image.width*image.height>50_000_000:raise MediaLimitError('Embedded image exceeds pixel budget')
+            image.verify()
+        return original

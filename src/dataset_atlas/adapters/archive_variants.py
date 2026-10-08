@@ -1,11 +1,22 @@
 """Join native image variants by IDs declared in pinned ZIP member names."""
 import re
 import zipfile
+import hashlib
+import json
 
+from .core import DatasetAdapter
 from .structured_collection import StructuredCollectionAdapter
 
 
 class ArchiveVariantsAdapter(StructuredCollectionAdapter):
+    def prepare_media(self, approved_plan):
+        """Reading one image needs only its own archive.
+
+        `prepare` rebuilds the whole release inventory, opening every remote archive directory (22 for DIV2K); when a publisher moves or
+        removes one archive, that would make every media read fail, including images whose archive is intact. Preparation still validates
+        the complete inventory; the media path does not repeat it."""
+        return DatasetAdapter.prepare(self, approved_plan)
+
     def _rows(self):
         if hasattr(self, '_annotation_rows'):
             return self._annotation_rows
@@ -18,8 +29,27 @@ class ArchiveVariantsAdapter(StructuredCollectionAdapter):
             pattern = re.compile(spec['member_regex'])
             count = 0
             with self._remote(key, budget - self._annotation_bytes_fetched) as source, zipfile.ZipFile(source) as archive:
+                files = [item for item in archive.infolist() if not item.is_dir()]
+                if len({item.filename for item in files}) != len(files):
+                    raise ValueError('Duplicate native archive member')
+                if spec.get('directory_members_sha256'):
+                    inventory = [[item.filename, item.file_size, item.compress_size, item.CRC,
+                                  item.compress_type, item.header_offset] for item in files]
+                    digest = hashlib.sha256(json.dumps(inventory, ensure_ascii=False, separators=(',', ':')).encode()).hexdigest()
+                    if digest != spec['directory_members_sha256']:
+                        raise ValueError('Native archive directory fingerprint changed')
+                prefix = spec.get('selected_prefix')
+                ignored = set(spec.get('ignored_members', []))
+                observed_ignored = set()
+                excluded = 0
                 for item in archive.infolist():
                     if item.is_dir():
+                        continue
+                    if prefix and not item.filename.startswith(prefix):
+                        excluded += 1
+                        continue
+                    if item.filename in ignored:
+                        observed_ignored.add(item.filename)
                         continue
                     match = pattern.fullmatch(item.filename)
                     if not match:
@@ -46,6 +76,10 @@ class ArchiveVariantsAdapter(StructuredCollectionAdapter):
                     row['_atlas_media_conditions'][ref] = metadata
                     count += 1
                 self._annotation_bytes_fetched += source.bytes_fetched
+                if observed_ignored != ignored:
+                    raise ValueError('Declared ignored archive members differ from source')
+                if prefix and excluded != spec.get('expected_excluded_members'):
+                    raise ValueError('Excluded archive population differs from declared count')
             if count != spec['expected_count']:
                 raise ValueError('Native archive population differs from declared count')
         for row in rows.values():

@@ -1,0 +1,86 @@
+{
+  "dataset_id": "simplevqa",
+  "executed": true,
+  "status": "executed",
+  "sources": [
+    {
+      "source_name": "test.parquet",
+      "url": "https://huggingface.co/datasets/m-a-p/SimpleVQA/resolve/037cf89fb6f1212691756b66d1ecde6c2ce89e54/test.parquet",
+      "bytes": 349014606,
+      "sha256": "9385aeef23b8a44894b4b8818dbcb87a4ea0a6cc327aa13da96207cfc014ac45",
+      "etag": "\"0b22b6d4974fa0bdaba6084667d3dadbfa84c650164e33af42708e94cddcd975\"",
+      "rows": 2025
+    },
+    {
+      "source_name": "view_200.parquet",
+      "url": "https://huggingface.co/datasets/m-a-p/SimpleVQA/resolve/037cf89fb6f1212691756b66d1ecde6c2ce89e54/view_200.parquet",
+      "bytes": 66619378,
+      "sha256": "c562f6461f6ef8b67041bfb09d5da28b5a3d54d18cc11f480a4416fc6348e066",
+      "etag": "\"a021a3c529f87a0762603f78ff19e3976138884ff4a741e488a89dc85d86cf57\"",
+      "rows": 200
+    }
+  ],
+  "versions": [
+    {
+      "snapshot_id": "simplevqa-8382305d27a65ddcdbc544e1",
+      "native_image_references": 2225,
+      "index": "parquet-833f25accecc7b94a3109c9b6970ac59-64b51958602241a68c3b7e5e735d0d3c",
+      "cold_checks": [
+        {
+          "ref": "embedded/1012/0.png",
+          "sha256": "85305a94ace04f72f3986a4f7ab5b8771af60a4dbd61455878eed498094223f4",
+          "transferred_bytes": 348448355,
+          "source_ref": "remote/0/1012/image/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/2125/0.png",
+          "sha256": "85305a94ace04f72f3986a4f7ab5b8771af60a4dbd61455878eed498094223f4",
+          "transferred_bytes": 66609786,
+          "source_ref": "remote/1/100/image/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/0/0.webp",
+          "sha256": "52e5767b0b66e1ca4add062e5efbe05663e2d36496b4154b3dcc05e75f613cff",
+          "transferred_bytes": 0,
+          "source_ref": "remote/0/0/image/0.png",
+          "media_type": "image/webp",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/1112/0.jpg",
+          "sha256": "b0fc1157759917b2ad1bebfa46a683030a11cc94a5dc5f1e5031be13ff1298ee",
+          "transferred_bytes": 0,
+          "source_ref": "remote/0/1112/image/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/2224/0.png",
+          "sha256": "98664847fbe8f05c6e740307530862c32ed6c0d2d3996538a3b31eaac2ff0b61",
+          "transferred_bytes": 0,
+          "source_ref": "remote/1/199/image/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        }
+      ]
+    }
+  ],
+  "total_verification_transfer_bytes": 415058143,
+  "native_index_bytes": 352256,
+  "preview_bytes_upper_bound": 10491636,
+  "source_paths_eligible": [
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/simplevqa/8382305d27a65ddcdbc544e102756226f5531bccc9916e3cb0e767b2ebf97be1/sources/9385aeef23b8a44894b4b8818dbcb87a4ea0a6cc327aa13da96207cfc014ac45.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/simplevqa/8382305d27a65ddcdbc544e102756226f5531bccc9916e3cb0e767b2ebf97be1/sources/c562f6461f6ef8b67041bfb09d5da28b5a3d54d18cc11f480a4416fc6348e066.parquet"
+  ],
+  "source_paths_retired": [
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/simplevqa/8382305d27a65ddcdbc544e102756226f5531bccc9916e3cb0e767b2ebf97be1/sources/9385aeef23b8a44894b4b8818dbcb87a4ea0a6cc327aa13da96207cfc014ac45.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/simplevqa/8382305d27a65ddcdbc544e102756226f5531bccc9916e3cb0e767b2ebf97be1/sources/c562f6461f6ef8b67041bfb09d5da28b5a3d54d18cc11f480a4416fc6348e066.parquet"
+  ],
+  "freed_source_allocated_bytes": 415641600,
+  "integrity": "Complete native Parquet SHA-256 and every canonical image SHA-256 retained. Preview originals pinned locally. Retrieved originals equal their measured native SHA-256.",
+  "transfer_measurement": "One-byte source probes plus actual range payloads; validated ETag-bound cache hits transfer zero bytes. Verification can reuse those cached ranges."
+}

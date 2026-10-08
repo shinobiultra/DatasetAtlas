@@ -59,3 +59,10 @@ evidence:
   checked_on: '2026-09-22'
   source_identity_status: derived_protocol_unpinned
 source_url: https://github.com/jhjacobsen/fully-invertible-revnet
+relationships:
+- type: derived_from
+  target_id: mnist
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: Binary and texture shiftMNIST are built from MNIST digits; the paper's constructed images are
+    not reproduced, only the parent digits are browsable.

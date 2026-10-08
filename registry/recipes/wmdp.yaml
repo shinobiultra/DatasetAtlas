@@ -1,0 +1,11 @@
+repository: cais/wmdp
+revision: 7125571f22f032c56415e7980f48d877dd830ff8
+expected_count: 3668
+scope: All native test Parquet rows in the pinned WMDP bio/chem/cyber configurations.
+  Original questions, choices, answer values and source-file/row identities retained.
+  The data stays local; this is source integration, not model evaluation or redistribution
+  approval.
+adapter_config:
+  mapping:
+    question: question
+    choices: choices

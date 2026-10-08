@@ -1,0 +1,55 @@
+release: cuhk-official-aligned-public-annotations
+adapter: structured_archive
+expected_count: 202599
+scope: All 202599 filename-joined public author aligned face images, 40 signed attributes,
+  original-photo bounding boxes, aligned landmarks and native train/validation/test
+  partitions. Identity labels require publisher request and are absent; paper-specific
+  subsets remain unidentified. Bounding boxes refer to original photographs and are
+  not overlaid on aligned crops.
+allowed_hosts:
+- drive.usercontent.google.com
+remote_metadata_bytes: 2000000
+adapter_config:
+  verify_remote_preview_media: true
+  sequential_index: true
+  max_record_bytes: 1000000
+  media_scope: complete
+convert:
+  name: celeba_native
+  count: 202599
+  rows_sha256: abfd1b5bd1e296bd8c125b77d0dd854b832cfa60691144e1b9c534e395a5b7bc
+files:
+- source_name: img_align_celeba.zip
+  bytes: 1443490838
+  sha256: 46fb89443c578308acf364d7d379fe1b9efb793042c0af734b6112e4fd3a8c74
+  url: https://drive.usercontent.google.com/download?id=0B7EVK8r0v71pZjFTYXZWM3FlRnM&export=download&confirm=t
+  config_key: media_archive
+  format: zip
+- source_name: list_attr_celeba.txt
+  bytes: 26721026
+  sha256: f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0
+  url: https://drive.usercontent.google.com/download?id=0B7EVK8r0v71pblRyaVFSWGxPY0U&export=download&confirm=t
+  config_key: attributes
+  format: txt
+- source_name: list_bbox_celeba.txt
+  bytes: 6082035
+  sha256: 7487a82e57c4bb956c5445ae2df4a91ffa717e903c5fa22874ede0820c8ec41b
+  url: https://drive.usercontent.google.com/download?id=0B7EVK8r0v71pbThiMVRxWXZ4dU0&export=download&confirm=t
+  config_key: bbox
+  format: txt
+- source_name: list_landmarks_align_celeba.txt
+  bytes: 12156055
+  sha256: 6c02a87569907f6db2ba99019085697596730e8129f67a3d61659f198c48d43b
+  url: https://drive.usercontent.google.com/download?id=0B7EVK8r0v71pd0FJY3Blby1HUTQ&export=download&confirm=t
+  config_key: landmarks_align
+  format: txt
+- source_name: list_eval_partition.txt
+  bytes: 2836386
+  sha256: fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7
+  url: https://drive.usercontent.google.com/download?id=0B7EVK8r0v71pY0NSMzRuSXJEVkk&export=download&confirm=t
+  config_key: partitions
+  format: txt
+resource_limits:
+  max_rss_bytes: 8000000000
+  max_cpu_seconds: 1800
+  max_wall_seconds: 7200

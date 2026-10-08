@@ -34,6 +34,15 @@ def test_summarize_falls_back_to_text_without_media():
     assert [tile['text'] for tile in summary['tiles']] == ['Question 0', 'Question 1', 'Question 2']
 
 
+def test_summarize_skips_retained_raw_source_documents_when_choosing_sample_text():
+    """An author-committed error page is kept faithfully as a labelled record, but must not stand in for the dataset on its catalogue card."""
+    raw = Record(id='raw', dataset_id='d', release_id='r', snapshot_id='s', text='<html><title>Rate limit</title></html>',
+                 source={'_atlas_source_status': 'Author-published file is not valid JSONL; raw source document retained, not an agent task.'})
+    real = [Record(id=f'r{index}', dataset_id='d', release_id='r', snapshot_id='s', text=f'Task {index}') for index in range(2)]
+    summary = summarize_records([raw, *real], limit=3)
+    assert [tile['text'] for tile in summary['tiles']] == ['Task 0', 'Task 1']
+
+
 def test_summarize_reports_no_tiles_rather_than_inventing_one():
     record = Record(id='r', dataset_id='d', release_id='r', snapshot_id='s',
                     assets=[Asset(id='a', dataset_id='d', release_id='r', modality='audio', uri='clip.wav')])

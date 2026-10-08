@@ -1,0 +1,40 @@
+release: voc2011-author-native-archive-14961
+adapter: pascal_voc
+source_url: https://www.robots.ox.ac.uk/~vgg/projects/pascal/VOC/voc2011/index.html
+expected_count: 14961
+scope: All14961 native VOC2011 archive JPEG/XML pairs, preserving exact XML,20 signed
+  classification labels and all102 image-set tables. Main classification trainval
+  has11540 images;3421 other archive images retain absent classification labels. Native2223
+  class/object mask pairs are linked as original palette PNG assets. Other VOC years
+  and the citing survey paper specific release/subset remain unresolved.
+allowed_hosts:
+- thor.robots.ox.ac.uk
+adapter_config:
+  archive_preparation: indexed-tar
+  archive_index_key: archive_path
+  sequential_index: true
+  verify_remote_preview_media: true
+  preview_group_by: primary_asset_then_example
+  media_scope: partial
+  max_record_bytes: 1000000
+  max_uncompressed_bytes: 2000000000
+  native_record_read_bytes: 500000000
+  remote_cache_root: work/media-cache/pascal-voc
+  remote_cache_bytes: 100000000
+  media_transfer_bytes: 200000000
+convert:
+  name: pascal_voc_native
+  count: 14961
+  rows_sha256: a79130421fd7cf8d36bfa2316e3b94b63e52aaa40647dd956e1cd1239dc19862
+files:
+- source_name: VOCtrainval_25-May-2011.tar
+  url: https://thor.robots.ox.ac.uk/pascal/VOC/voc2011/VOCtrainval_25-May-2011.tar
+  bytes: 1765686784
+  sha256: 0a7f5f5d154f7290ec65ec3f78b72ef72c6d93ff6d79acd40dc222a9ee5248ba
+  md5: 6c3384ef61512963050cb5d687e5bf1e
+  format: tar
+  config_key: archive_path
+resource_limits:
+  max_rss_bytes: 4000000000
+  max_cpu_seconds: 900
+  max_wall_seconds: 1800

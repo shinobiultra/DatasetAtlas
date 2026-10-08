@@ -90,4 +90,12 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: explicit_copyright_request_only_release_unverified
+- kind: source_audit_release
+  checked_on: '2026-10-06'
+  url: https://github.com/kshitishghate/bias_prop/tree/c0e4a922124d0c28e85be7a4d9753ac317028450
+  note: The authors' repository states that the Chicago Face Database can be downloaded
+    only from its official website and contains no morphed images or the scaled CFD
+    dataset; its README says the preprocessing code that creates the scaled CFD dataset
+    will be added later.
+  source_identity_status: derived_collection_not_released
 source_url: https://github.com/kshitishghate/bias_prop

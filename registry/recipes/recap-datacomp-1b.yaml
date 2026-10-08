@@ -1,20 +1,21 @@
-source_url: https://huggingface.co/datasets/UCSC-VLAA/Recap-DataComp-1B/tree/457c44d98651bcfdfb3cc8695f5e60a0d2705e78
-release: 457c44d98651bcfdfb3cc8695f5e60a0d2705e78
-description: Recap-DataComp-1B train metadata as released by the authors, with LLaVA-1.5 re-captions,
-  original DataComp captions, URLs and native CLIP/GPT-4V scores. Linked images are third-party URLs
-  and are not fetched.
-scope: Rows of the 100 train Parquet shards (of 4,627) with the lowest SHA-256 shard ranks at author
-  revision 457c44d98651bcfdfb3cc8695f5e60a0d2705e78. Reading all 4,627 footers would transfer about
-  3 GB, so other shards are outside this preview population.
-source_patterns:
-- data/train_data/train-*.parquet
-sample_footers: shard_rank
-sample_shards: 100
+adapter: structured
+release: 457c44d98651bcfdfb3cc8695f5e60a0d2705e78-author-preview
+expected_count: 1000
+scope: All 1000 native rows in the author-published preview split at pinned HF revision
+  457c44d98651bcfdfb3cc8695f5e60a0d2705e78. Preserves original/rewritten/conditioned
+  captions and scores. Excludes the 940890257-row training release; third-party source
+  image URLs are metadata, and no image bytes are acquired.
+source_url: https://huggingface.co/datasets/UCSC-VLAA/Recap-DataComp-1B
 adapter_config:
   mapping:
+    id: key
     text: re_caption
-  remote_cache_bytes: 200000000
-resource_limits:
-  max_wall_seconds: 7200
-  max_cpu_seconds: 3600
-  max_rss_bytes: 4000000000
+  media_scope: partial
+  max_annotation_bytes: 2000000
+files:
+- source_name: preview-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/UCSC-VLAA/Recap-DataComp-1B/resolve/457c44d98651bcfdfb3cc8695f5e60a0d2705e78/data/preview_data/preview-00000-of-00001.parquet
+  bytes: 572363
+  sha256: fd997438d99535237f3a7974e343b53b6c63ddab03c0c85be4c16d5a2b0bdc3a
+  config_key: path
+  format: parquet

@@ -20,28 +20,8 @@ def attach_results(pack: Pack, artifacts: list[Artifact]) -> Pack:
             record=records.get(item.get('id'))
             if record is None:continue
             prefix=artifact.id+'.'
-            values={'status':item.get('status','unknown')}
-            if item.get('status')=='completed':
-                output=item.get('output',{})
-                for key,value in output.items():
-                    if value is None or isinstance(value,(str,bool,int,float)):
-                        if isinstance(value,float) and not math.isfinite(value):continue
-                        values[key]=value
-                detections=output.get('detections')
-                if isinstance(detections,list):values['detection_count']=len(detections)
-                # Vision output retains original per-asset results separately.
-                asset_outputs=output.get('assets')
-                if isinstance(asset_outputs,list):
-                    completed=[a for a in asset_outputs if a.get('status')=='completed']
-                    if len(completed)==1 and len(asset_outputs)==1:
-                        for key,value in completed[0].items():
-                            if key not in {'asset_id','status'} and (value is None or isinstance(value,(str,bool,int,float))):values[key]=value
-                    if len(completed)==len(asset_outputs):
-                        detection_sets=[a.get('detections',a.get('output',{}).get('detections')) for a in completed]
-                        if all(isinstance(d,list) for d in detection_sets):
-                            boxes=[box for ds in detection_sets for box in ds]
-                            values['detection_count']=len(boxes)
-                            values['person_count']=sum(d.get('class')=='person' for d in boxes)
+            from .result_values import result_values
+            values=result_values(item)
             for key,value in values.items():
                 name=prefix+key
                 record.prediction[name]=value

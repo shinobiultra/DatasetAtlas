@@ -3,7 +3,7 @@ from pathlib import Path
 import json
 
 def roots_for(root: Path, kind: str) -> list[Path]:
-    defaults={'data_roots':[root/'work/packs',root/'work/media-cache'], 'model_roots':[root/'work/models',root/'local-config/models']}
+    defaults={'data_roots':[root/'work/packs',root/'work/prepared',root/'work/media-cache'], 'model_roots':[root/'work/models',root/'local-config/models']}
     path=root/'local-config/settings.json'
     settings=json.loads(path.read_text()) if path.exists() else {}
     if kind not in settings:

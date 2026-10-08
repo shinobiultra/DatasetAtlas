@@ -37,7 +37,11 @@ for row in rows:
     row.update(blockers=' | '.join(dataset.coverage.blockers),release=dataset.release,snapshot_id=dataset.snapshot_id or '',
                source_url=dataset.source_url or '',evidence_count=len(dataset.evidence))
     if registry.active_directory(dataset.id):
-        row['blocker_type']='identity_and_publication_review' if dataset.coverage.identity!='resolved' else 'publication_review'
+        pending=[]
+        if dataset.coverage.identity!='resolved':pending.append('identity')
+        if dataset.coverage.complete_data=='indexed_metadata_partial_media':pending.append('partial_media')
+        pending.append('publication_review')
+        row['blocker_type']='_and_'.join(pending)
 with path.open('w',newline='') as stream:
     writer=csv.DictWriter(stream,fieldnames=columns,lineterminator="\n");writer.writeheader();writer.writerows(rows)
 status_path=root/'reports/final-status.json'

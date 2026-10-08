@@ -63,3 +63,9 @@ relationships:
   target_id: imagenet
   status: asserted_from_source_review
   scope: A paper-sampled 1,000-image subset of ImageNet; selection unreleased.
+- type: same_source_family_as
+  target_id: imagenet-ilsvrc-2012
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: The paper's 1,000 random ImageNet images have no published seed or ID list; the parent release is context,
+    not that sample.

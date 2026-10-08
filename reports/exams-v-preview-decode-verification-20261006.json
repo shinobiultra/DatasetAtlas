@@ -1,0 +1,25 @@
+{
+  "dataset_id": "exams-v",
+  "snapshot_id": "exams-v-8bb5701d7c67cf214b73ca4d",
+  "executed": true,
+  "preview_records": 100,
+  "index_rows": 21291,
+  "index_sha256": "113d455810fb4a081988dd250d57ee6165b71578e385c0bbf9f3e5f0ccbdd85a",
+  "preview_media_validation": {
+    "candidate_pool": 250,
+    "candidates_checked": 100,
+    "unavailable_candidate_records": 0,
+    "media_limit_exclusions": {},
+    "verified_preview_assets": 100,
+    "selection": "Lowest SHA-256-ranked distinct assets with every selected image opened from the pinned source"
+  },
+  "original_bytes_read": 40500002,
+  "network_bytes_transferred": 2597676957,
+  "max_transfer_bytes": 3000000000,
+  "max_preview_bytes": 100000000,
+  "previous_pack_sha256": "3d33188e91257d82a9cd095ee4598192062d457234e054e60a65b2533a6ec7e6",
+  "native_snapshot_changed": false,
+  "note": "Every selected original image was decoded within the pixel cap. Oversized native examples remain in the complete index with original-byte access.",
+  "protected_original_bytes_added": 40098477,
+  "prior_preview_audit": "work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/preview-audits/1791264839147448458"
+}

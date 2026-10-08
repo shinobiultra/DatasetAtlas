@@ -1,0 +1,87 @@
+{
+  "verified_at_utc": "2026-10-07T06:58:48.717768+00:00",
+  "status": "passed",
+  "datasets": [
+    {
+      "dataset_id": "emoset",
+      "snapshot_id": "emoset-a6a9d1bc6fbf0747d4a3a61b",
+      "original_bodies_absent": true,
+      "complete_count": 118102,
+      "original_checks": [
+        {
+          "sha256": "7356458c01bb9208d317072eb353336e4bb51fc310b1caad8238bcd0c7570886",
+          "bytes": 135511,
+          "dimensions": [
+            1024,
+            680
+          ],
+          "native_member_sha256_equal": true,
+          "non_preview": true
+        },
+        {
+          "sha256": "e84bd204f82261a3657f8f973c30ee99a3144c683c8f70ef5cc1d55696c4126d",
+          "bytes": 41267,
+          "dimensions": [
+            720,
+            480
+          ],
+          "native_member_sha256_equal": true,
+          "non_preview": true
+        },
+        {
+          "sha256": "14ee382085433dd2ac063da5e21decae5f0f38b3b1b95e4068852d7f2dd3bcc5",
+          "bytes": 48956,
+          "dimensions": [
+            720,
+            480
+          ],
+          "native_member_sha256_equal": true,
+          "non_preview": true
+        }
+      ],
+      "status": "passed"
+    },
+    {
+      "dataset_id": "phase",
+      "snapshot_id": "phase-176f56b79c6a0003d36fe74a",
+      "original_bodies_absent": true,
+      "complete_count": 18889,
+      "original_checks": [
+        {
+          "sha256": "752e59e042096eaa8d23b7be596abbe3719e5c0ea8760b390f3661d1e487f755",
+          "bytes": 47564,
+          "dimensions": [
+            460,
+            700
+          ],
+          "native_member_sha256_equal": true,
+          "non_preview": true
+        },
+        {
+          "sha256": "3150802c84e2a3a5db3e968ebe21ac073d3d8797fc432228da9e44ea32a7288b",
+          "bytes": 52019,
+          "dimensions": [
+            612,
+            408
+          ],
+          "native_member_sha256_equal": true,
+          "non_preview": true
+        },
+        {
+          "sha256": "66afc09d89e2749e98acb957c26446177d6dd4f7068105e266c601855d142b29",
+          "bytes": 54558,
+          "dimensions": [
+            450,
+            414
+          ],
+          "native_member_sha256_equal": true,
+          "non_preview": true
+        }
+      ],
+      "status": "passed"
+    }
+  ],
+  "external_model_requests": 0,
+  "max_original_response_bytes": 30000000,
+  "scope": "Six non-preview original JPEGs checked after archive removal; optimized display derivatives are explicitly excluded from the original-byte request."
+}

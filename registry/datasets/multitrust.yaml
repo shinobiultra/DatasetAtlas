@@ -13,7 +13,7 @@ adapter_config: {}
 coverage:
   identity: candidate
   source: verified
-  access: source_page_public_data_unverified
+  access: gated
   adapter: not_started
   preview: none
   complete_data: unimplemented
@@ -21,8 +21,12 @@ coverage:
   preview_count: 0
   unit: example
   blockers:
-  - Public source page located; exact paper-used data revision or archive is unverified.
-  - Public data/media reuse rights require separate review.
+  - 'Hugging Face thu-ml/MultiTrust (CC BY-SA 4.0, auto-gated: each researcher accepts the terms on their
+    own account) holds 10,549 files across five trustworthiness aspects with task-specific formats.'
+  - 'A suite of heterogeneous tasks, not one homogeneous collection: it needs per-task adapters, an implementation
+    gap rather than an access block.'
+  - The citing paper uses the MultiTrust framework for transfer attacks, so the examples a researcher
+    would want are those it generated, which were not located.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -72,4 +76,19 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_benchmark_page_located
+- kind: source_audit_release
+  checked_on: '2026-10-06'
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/tree/84dc74754959e9f52b67c5185700f4f7fcd8c4df
+  note: Pinned revision lists 10,549 files (README, fairness/preference.json, fairness/profess_prediction.csv,
+    profession_images/*.jpg and other per-task folders). Listing read with the researcher's existing authorized
+    account; no file contents were fetched.
+  source_identity_status: author_release_identified_suite_not_adapted
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'From the source inspected on 2026-10-06: Hugging Face file listing inspected: images plus JSON/CSV
+    task files. Not inferred from the dataset name.'
 source_url: https://multi-trust.github.io/
+modalities:
+- image
+- text

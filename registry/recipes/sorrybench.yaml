@@ -1,0 +1,189 @@
+release: sorry-bench-202503-612a4e1f45db8adf884fa62318ddf9fa1c6e75e9
+adapter: structured
+credential_profile: huggingface
+expected_count: 9240
+scope: 'All 9240 native instruction/variation rows: 440 base questions and their 20 released variants,
+  with native question IDs, category, prompt style and every ordered turn preserved. Four native null
+  turns remain null and visible; they are not invented instructions. Base and perturbation conditions
+  remain distinct. This does not identify the citing paper''s selected attack prompts.'
+allowed_hosts:
+- huggingface.co
+- cas-bridge.xethub.hf.co
+- us.aws.cdn.hf.co
+- cdn-lfs-us-1.huggingface.co
+convert:
+  name: sorrybench_variants
+  count: 9240
+  rows_sha256: fb6074fe4b3f000c92488aa6ba5a7cc6ffab8e139850244b9db48276d816732d
+  params:
+    source_order:
+    - question.jsonl
+    - question_ascii.jsonl
+    - question_atbash.jsonl
+    - question_authority_endorsement.jsonl
+    - question_caesar.jsonl
+    - question_evidence-based_persuasion.jsonl
+    - question_expert_endorsement.jsonl
+    - question_logical_appeal.jsonl
+    - question_misrepresentation.jsonl
+    - question_misspellings.jsonl
+    - question_morse.jsonl
+    - question_question.jsonl
+    - question_role_play.jsonl
+    - question_slang.jsonl
+    - question_technical_terms.jsonl
+    - question_translate-fr.jsonl
+    - question_translate-ml.jsonl
+    - question_translate-mr.jsonl
+    - question_translate-ta.jsonl
+    - question_translate-zh-cn.jsonl
+    - question_uncommon_dialects.jsonl
+    input_keys:
+      question.jsonl: source_0
+      question_ascii.jsonl: source_1
+      question_atbash.jsonl: source_2
+      question_authority_endorsement.jsonl: source_3
+      question_caesar.jsonl: source_4
+      question_evidence-based_persuasion.jsonl: source_5
+      question_expert_endorsement.jsonl: source_6
+      question_logical_appeal.jsonl: source_7
+      question_misrepresentation.jsonl: source_8
+      question_misspellings.jsonl: source_9
+      question_morse.jsonl: source_10
+      question_question.jsonl: source_11
+      question_role_play.jsonl: source_12
+      question_slang.jsonl: source_13
+      question_technical_terms.jsonl: source_14
+      question_translate-fr.jsonl: source_15
+      question_translate-ml.jsonl: source_16
+      question_translate-mr.jsonl: source_17
+      question_translate-ta.jsonl: source_18
+      question_translate-zh-cn.jsonl: source_19
+      question_uncommon_dialects.jsonl: source_20
+files:
+- source_name: question.jsonl
+  bytes: 92842
+  sha256: 001213f6f819f3b4df5a0ef488b0533bce05e4ece7607ab189499cff93461b2f
+  url: https://huggingface.co/datasets/sorry-bench/sorry-bench-202503/resolve/612a4e1f45db8adf884fa62318ddf9fa1c6e75e9/question.jsonl
+  config_key: source_0
+  format: jsonl
+- source_name: question_ascii.jsonl
+  bytes: 1507288
+  sha256: 9ea2d9338d0f36116568d98fca2591706224ae2abbe03233be3ca50341fa8535
+  url: https://huggingface.co/datasets/sorry-bench/sorry-bench-202503/resolve/612a4e1f45db8adf884fa62318ddf9fa1c6e75e9/question_ascii.jsonl
+  config_key: source_1
+  format: jsonl
+- source_name: question_atbash.jsonl
+  bytes: 979035
+  sha256: e88172416028bdb0653d5479a99596846a29c102584454b6909bd869a71d4cfa
+  url: https://huggingface.co/datasets/sorry-bench/sorry-bench-202503/resolve/612a4e1f45db8adf884fa62318ddf9fa1c6e75e9/question_atbash.jsonl
+  config_key: source_2
+  format: jsonl
+- source_name: question_authority_endorsement.jsonl
+  bytes: 334453
+  sha256: 52747e644f1746dd5a627c2819b2eb75a04bf3342e1c17ad1f82b2c3f367c138
+  url: https://huggingface.co/datasets/sorry-bench/sorry-bench-202503/resolve/612a4e1f45db8adf884fa62318ddf9fa1c6e75e9/question_authority_endorsement.jsonl
+  config_key: source_3
+  format: jsonl
+- source_name: question_caesar.jsonl
+  bytes: 1015082
+  sha256: 82a46a2b06e88c532d828900c34ab86b117dbbcba3dbeb8982a247f4af35c2c9
+  url: https://huggingface.co/datasets/sorry-bench/sorry-bench-202503/resolve/612a4e1f45db8adf884fa62318ddf9fa1c6e75e9/question_caesar.jsonl
+  config_key: source_4
+  format: jsonl
+- source_name: question_evidence-based_persuasion.jsonl
+  bytes: 403925
+  sha256: f380e616532f2b60ed747bc084d1b0f72a3cff1c54928e0d83c99c629dbda474
+  url: https://huggingface.co/datasets/sorry-bench/sorry-bench-202503/resolve/612a4e1f45db8adf884fa62318ddf9fa1c6e75e9/question_evidence-based_persuasion.jsonl
+  config_key: source_5
+  format: jsonl
+- source_name: question_expert_endorsement.jsonl
+  bytes: 312982
+  sha256: c0fb490a00db188d2c2a3ab64a44995d954a489010c38013b926c04387cb3302
+  url: https://huggingface.co/datasets/sorry-bench/sorry-bench-202503/resolve/612a4e1f45db8adf884fa62318ddf9fa1c6e75e9/question_expert_endorsement.jsonl
+  config_key: source_6
+  format: jsonl
+- source_name: question_logical_appeal.jsonl
+  bytes: 283632
+  sha256: 178e7f997444bd43da34cadf9b355da603d7dbeb3cbc4d8ba800cd5e0f354acf
+  url: https://huggingface.co/datasets/sorry-bench/sorry-bench-202503/resolve/612a4e1f45db8adf884fa62318ddf9fa1c6e75e9/question_logical_appeal.jsonl
+  config_key: source_7
+  format: jsonl
+- source_name: question_misrepresentation.jsonl
+  bytes: 336657
+  sha256: 599df62ce807856ede60d24b7e589ec11ccfb8600f8da3607de40f38adc9e59d
+  url: https://huggingface.co/datasets/sorry-bench/sorry-bench-202503/resolve/612a4e1f45db8adf884fa62318ddf9fa1c6e75e9/question_misrepresentation.jsonl
+  config_key: source_8
+  format: jsonl
+- source_name: question_misspellings.jsonl
+  bytes: 89811
+  sha256: 7bd4190015a4b5fac38238a149bf46933dcb2e241a4ddb1383ef630305fef94c
+  url: https://huggingface.co/datasets/sorry-bench/sorry-bench-202503/resolve/612a4e1f45db8adf884fa62318ddf9fa1c6e75e9/question_misspellings.jsonl
+  config_key: source_9
+  format: jsonl
+- source_name: question_morse.jsonl
+  bytes: 1445980
+  sha256: 49afa9a1fd44ecc9da6508b082da051e294171df3584a2c5aa832025e68bb9a9
+  url: https://huggingface.co/datasets/sorry-bench/sorry-bench-202503/resolve/612a4e1f45db8adf884fa62318ddf9fa1c6e75e9/question_morse.jsonl
+  config_key: source_10
+  format: jsonl
+- source_name: question_question.jsonl
+  bytes: 91125
+  sha256: b39c03a8128aab38cb8ed4f6b258a7b7366205221a6a29a0a4de6333f1403cb7
+  url: https://huggingface.co/datasets/sorry-bench/sorry-bench-202503/resolve/612a4e1f45db8adf884fa62318ddf9fa1c6e75e9/question_question.jsonl
+  config_key: source_11
+  format: jsonl
+- source_name: question_role_play.jsonl
+  bytes: 146519
+  sha256: 34300983cbb409f99869e6c19dd1a94675e35c17bbbd4c5bad416c33baadf762
+  url: https://huggingface.co/datasets/sorry-bench/sorry-bench-202503/resolve/612a4e1f45db8adf884fa62318ddf9fa1c6e75e9/question_role_play.jsonl
+  config_key: source_12
+  format: jsonl
+- source_name: question_slang.jsonl
+  bytes: 84108
+  sha256: c478ae1b2ccc63b2a7994ae5c5555c1033ccfbec61a4f9038dc63cf7294a3dcd
+  url: https://huggingface.co/datasets/sorry-bench/sorry-bench-202503/resolve/612a4e1f45db8adf884fa62318ddf9fa1c6e75e9/question_slang.jsonl
+  config_key: source_13
+  format: jsonl
+- source_name: question_technical_terms.jsonl
+  bytes: 164294
+  sha256: 476820335410e28f1807c1c9fac7e4f22a57c892d6835284ee2ad3a5860b5923
+  url: https://huggingface.co/datasets/sorry-bench/sorry-bench-202503/resolve/612a4e1f45db8adf884fa62318ddf9fa1c6e75e9/question_technical_terms.jsonl
+  config_key: source_14
+  format: jsonl
+- source_name: question_translate-fr.jsonl
+  bytes: 110898
+  sha256: a6b4c73b95368a481c8e89c28b10948062a67fd93e6342b45c7c3bb0874a67c7
+  url: https://huggingface.co/datasets/sorry-bench/sorry-bench-202503/resolve/612a4e1f45db8adf884fa62318ddf9fa1c6e75e9/question_translate-fr.jsonl
+  config_key: source_15
+  format: jsonl
+- source_name: question_translate-ml.jsonl
+  bytes: 234335
+  sha256: e1368139aeedd8c0e2458c18ddc3a14274f7f86ff4e44fa12cf37879286fe533
+  url: https://huggingface.co/datasets/sorry-bench/sorry-bench-202503/resolve/612a4e1f45db8adf884fa62318ddf9fa1c6e75e9/question_translate-ml.jsonl
+  config_key: source_16
+  format: jsonl
+- source_name: question_translate-mr.jsonl
+  bytes: 197737
+  sha256: a0ca0518327e7b4119562a7162767e4d8d6696123c7b9841040c52f99d69b745
+  url: https://huggingface.co/datasets/sorry-bench/sorry-bench-202503/resolve/612a4e1f45db8adf884fa62318ddf9fa1c6e75e9/question_translate-mr.jsonl
+  config_key: source_17
+  format: jsonl
+- source_name: question_translate-ta.jsonl
+  bytes: 230905
+  sha256: 6a81878cd2487da37daa7da5c2c3b52901ac54e6cbaff6d243672a28333695a1
+  url: https://huggingface.co/datasets/sorry-bench/sorry-bench-202503/resolve/612a4e1f45db8adf884fa62318ddf9fa1c6e75e9/question_translate-ta.jsonl
+  config_key: source_18
+  format: jsonl
+- source_name: question_translate-zh-cn.jsonl
+  bytes: 90551
+  sha256: b2237e068d9da9c3d4ad3d0599b2ba19b999426452f4adf7b8ef16695467012b
+  url: https://huggingface.co/datasets/sorry-bench/sorry-bench-202503/resolve/612a4e1f45db8adf884fa62318ddf9fa1c6e75e9/question_translate-zh-cn.jsonl
+  config_key: source_19
+  format: jsonl
+- source_name: question_uncommon_dialects.jsonl
+  bytes: 101417
+  sha256: 78257c8b708206a7cb82ebc089321eeaf3b70ddbe74e296f775d4d09b21a4fe6
+  url: https://huggingface.co/datasets/sorry-bench/sorry-bench-202503/resolve/612a4e1f45db8adf884fa62318ddf9fa1c6e75e9/question_uncommon_dialects.jsonl
+  config_key: source_20
+  format: jsonl

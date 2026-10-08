@@ -2,31 +2,35 @@ schema_version: '1.0'
 id: lingoqa
 name: LingoQA
 aliases: []
-description: Wayve author repository publishes benchmark and download instructions; evaluation has 500
-  answers.
+description: All 1000 author evaluation answer rows for 500 questions and 100 driving
+  segments, with five ordered original JPEG frames per segment. Training data and
+  the citing paper's exact population remain outside this prepared release.
 paper_ids:
 - paper-25eaa8c74ce76800
-release: unresolved
+release: lingoqa-evaluation-author-20240312
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Adapter and preview are not implemented.
+  - The training release and citing paper's exact selected population are not prepared.
+  - Source-specific image/data licence and attribution still need publication review.
+  total_count: 1000
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://github.com/wayveai/lingoqa
-  note: Wayve provides a specific LingoQA data licence with attribution and derivative conditions.
+  note: Wayve provides a specific LingoQA data licence with attribution and derivative
+    conditions.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-18507ae872e4e1a9a54e
@@ -39,15 +43,36 @@ evidence:
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://github.com/wayveai/lingoqa
-  note: 'Wayve author repository publishes benchmark and download instructions; evaluation has 500 answers.
-    Release: LingoQA train/evaluation video-question data'
+  note: 'Wayve author repository publishes benchmark and download instructions; evaluation
+    has 500 answers. Release: LingoQA train/evaluation video-question data'
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
 - kind: source_audit_rights
   url: https://github.com/wayveai/lingoqa
-  note: Wayve provides a specific LingoQA data licence with attribution and derivative conditions.
+  note: Wayve provides a specific LingoQA data licence with attribution and derivative
+    conditions.
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
+- kind: fresh_workspace_acquisition
+  checked_on: '2026-10-05'
+  snapshot_id: lingoqa-a86d3e40ae7c4e78cfc90b7a
+  source_count: 1000
+  recipe: registry/recipes/lingoqa.yaml
+  scope: All 1000 native evaluation annotation rows, retaining both source answers
+    for each of 500 questions, original question/segment/index fields and five ordered
+    original JPEG frames for each of 100 driving segments. This is the author evaluation
+    release, not the training population or newly extracted video frames.
+  publication_review_complete: false
 source_url: https://github.com/wayveai/lingoqa
+snapshot_id: lingoqa-a86d3e40ae7c4e78cfc90b7a
+tasks:
+- visual question answering
+modalities:
+- image
+- text
+labels:
+- answer
+- question_id
+- segment_id

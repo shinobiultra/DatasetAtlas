@@ -1,0 +1,15 @@
+{
+  "status": "failed_historical_checkpoint",
+  "browser_passed": 68,
+  "browser_failed": 1,
+  "failure_test": "e2e/factoid.spec.ts:6:1",
+  "failure_assertion_line": 21,
+  "failure_type": "No complete-scope sample card after15000ms",
+  "reproduced_native_http_probe": "reports/factoid-complete-ui-page-probe-20261007.json",
+  "repair_probe": "reports/factoid-complete-ui-page-repair-20261007.json",
+  "generated_failure_logs": [
+    "work/wide-native-query-red-20261007.log",
+    "work/wide-native-query-refusal-red-20261007.log"
+  ],
+  "scope": "Aggregate preserved failure checkpoint. The later all-browser runner reuses its log path; this receipt and independently timestamped review preserve the superseded failure, with native contents excluded."
+}

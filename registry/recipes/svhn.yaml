@@ -1,0 +1,31 @@
+release: svhn-cropped-train-test
+snapshot_id: svhn-cropped-train-test-sha256-60d9973032afc71554b5fac75d00eb0410ec4267c4cd993adb31cc4faf2dcdf5
+source_url: http://ufldl.stanford.edu/housenumbers/
+adapter: svhn_cropped_mat
+expected_count: 99289
+scope: Official cropped 32x32 train (73257) and test (26032) digit examples; extra
+  split excluded. Original MAT files must match both the pinned SHA-256 and official
+  MD5 before parsing.
+allowed_hosts:
+- ufldl.stanford.edu
+files:
+- source_name: train_32x32.mat
+  url: http://ufldl.stanford.edu/housenumbers/train_32x32.mat
+  bytes: 182040794
+  sha256: 435e94d69a87fde4fd4d7f3dd208dfc32cb6ae8af2240d066de1df7508d083b8
+  md5: e26dedcc434d2e4c54c9b2d4a06d8373
+  config_dir: root
+  dest_name: train_32x32.mat
+  format: mat
+- source_name: test_32x32.mat
+  url: http://ufldl.stanford.edu/housenumbers/test_32x32.mat
+  bytes: 64275384
+  sha256: cdce80dfb2a2c4c6160906d0bd7c68ec5a99d7ca4831afa54f09182025b6a75b
+  md5: eb5a983be6a315427106f1b164d9cef3
+  config_dir: root
+  dest_name: test_32x32.mat
+  format: mat
+adapter_config:
+  sha256:
+    train: 435e94d69a87fde4fd4d7f3dd208dfc32cb6ae8af2240d066de1df7508d083b8
+    test: cdce80dfb2a2c4c6160906d0bd7c68ec5a99d7ca4831afa54f09182025b6a75b

@@ -14,7 +14,7 @@ adapter: structured
 adapter_config: {}
 coverage:
   identity: candidate
-  source: unverified
+  source: verified
   access: unverified
   adapter: not_started
   preview: none
@@ -23,8 +23,14 @@ coverage:
   preview_count: 0
   unit: example
   blockers:
-  - Original release identity and rights need verification.
-  - Adapter and preview are not implemented.
+  - The 1,000-image DEV set is described by dev_dataset.csv in the CleverHans repository,
+    which lists image URLs; the repository does not host the images and its download_images.py
+    links have been reported expired (cleverhans issue 1180).
+  - The original Kaggle competition pages that host the images require a Kaggle login
+    that Atlas will not use on a researcher's behalf.
+  - The SAEgis paper's NIPS17 images are available separately as part of the SAEgis
+    author release (entry saegis-clean-and-adversarial-splits); that does not establish
+    this entry's identity.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -84,3 +90,24 @@ evidence:
     qualitative examples clearly demonstrate the strong egories.
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
+- kind: source_audit_release
+  checked_on: '2026-10-06'
+  url: https://github.com/cleverhans-lab/cleverhans/tree/master/cleverhans_v3.1.0/examples/nips17_adversarial_competition/dataset
+  note: dev_dataset.csv (ImageId, URL, bounding box, TrueLabel, TargetClass), final_dataset.csv
+    and download_images.py; images are fetched from third-party URLs. No image files
+    were fetched and no listing was prepared.
+  source_identity_status: csv_with_expired_image_urls
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'From the source inspected on 2026-10-06: CleverHans dev_dataset.csv inspected:
+    rows are image URLs with labels. Not inferred from the dataset name.'
+relationships:
+- type: same_source_family_as
+  target_id: saegis-clean-and-adversarial-splits
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: SAEgis commits 224x224 clean NIPS17 images and attacked variants; they are
+    that paper's derived images, not the competition DEV set as released.
+modalities:
+- image

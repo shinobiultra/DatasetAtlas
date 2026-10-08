@@ -17,11 +17,12 @@ A fresh workspace holds the catalogue but no data. Each dataset says what you ca
 
 ## Status
 
-This is a working release, not a finished v1 of [SPEC.md](SPEC.md). Measured on 2026-10-02 ([evidence](reports/preview-reproducibility.md)):
+This is a working release; full v1 of [SPEC.md](SPEC.md) remains incomplete. Measured on 2026-10-07 ([reproducibility evidence](reports/preview-reproducibility.md)):
 
-- **333 catalogue entries** from all 64 corpus papers. Each mention is checked against the paper text; exact release identity is still open for many ([corpus coverage](reports/corpus_coverage.md), [dataset coverage](reports/dataset_coverage.csv)).
-- **Previews you can fetch yourself:** 144 datasets were fetched from an empty workspace and verified (a 100-record preview and complete index, with the maintainer's snapshot ID where one is pinned); 21 more have a ready source plan that has not yet been run from scratch, and 3 were tried and failed on stated limits (`exams-v`, `illuchar`, `space-10`). 163 of the maintainer's 170 previews have a fetch path from the catalogue alone; the other 7 are `docci` (7.6 GB image archive), `svhn` (publisher serves plain HTTP only), `vhd11k` (no remote adapter), the unnamed controversial-stimuli entry, and the 3 that failed. Datasets with no acquisition path are implementation gaps unless the report says the source is gated or unreleased.
-- The maintainer's workspace additionally holds complete indexes for 164 populations; see the [roadmap](ROADMAP.md) for what remains and [release evidence](reports/release_evidence.md) for the acceptance matrix.
+- **333 catalogue entries** from all 64 corpus papers, with **218 prepared previews**, **21,332 preview records** and **216 indices for explicitly declared native populations**. Exact paper-used release identities remain open for many entries ([dataset coverage](reports/dataset_coverage.csv)).
+- Every prepared preview has an acquisition path from the catalogue. Fresh-workspace results, remaining budgets and failed attempts are recorded per dataset in the reproducibility report. A sampled preview is distinct from a complete population index.
+- Today’s additions include Open Images validation annotations, the pinned MIT-States and UCF101 mirrors, all FFHQ metadata, the author-linked EmoSet-118K population, and whole-article Spoken Wikipedia audio. All have native membership/original verification; mirror equality, historical paper subsets and publication rights retain their explicit limits. Earlier native coverage includes AudioSet annotations, the Recap preview split, LingoQA evaluation rows and frames, VizWiz-Priv source conditions, one DataComp metadata shard, and a sampled FineVision preview from its pinned release. Their receipts distinguish missing audio/images, absent source files, and unprepared shards; these do not imply complete coverage of a larger release.
+- **115 entries still lack a prepared preview.** Remaining public acquisition implementations, unresolved identities, unavailable releases and gated sources are listed separately. [Authorization links](docs/dataset-authorization.md) explain where to request the licensed or gated data you do not currently hold.
 
 Paper mention evidence does not by itself resolve a dataset release. Metadata-only entries are not browsable datasets.
 
@@ -37,7 +38,7 @@ uv run atlas serve
 
 Use **Get preview** or **Prepare full data** on a dataset to review its pinned source plan, set budgets, and start or resume local preparation. See [on-demand preparation](docs/on-demand-preparation.md) and [implementation evidence](reports/on-demand-implementation.md). The default browser route on a workbench is the workbench; a static host serves the public build, which makes no privileged localhost connection.
 
-For large collections, [the storage policy](docs/storage.md) preserves original-quality, full-resolution previews and compresses other images on demand into a bounded AVIF cache. Original bytes remain available for inspection and model inputs. See [the storage receipt](reports/storage-footprint-20260924.json) for the maintainer's measurement and its accounting limits.
+For large collections, [the storage policy](docs/storage.md) preserves original-quality, full-resolution previews and compresses other images on demand into a bounded AVIF cache. Original bytes remain available for inspection and model inputs. Use `atlas storage clean` to review removable caches, duplicate immutable bytes and isolated test environments, then `atlas storage clean --execute` to reclaim them. See [the current storage receipt](reports/storage-footprint-final-20261007.json) for measured allocated blocks and accounting limits.
 
 Static mode needs no Python or models. Build it with `npm run build` in `apps/web`, or use `npm run dev` during development. The catalogue and approved previews are generated into `apps/web/public/data` by the explicit publication command. Only the redistributable demonstration packs (CLEVR, PAIRS, EuroSAT) are approved for it; to install them into a workspace:
 

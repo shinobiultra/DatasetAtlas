@@ -80,6 +80,38 @@ def test_unknown_converters_and_unpinned_recipes_are_refused(tmp_path):
         run_conversion({'name': 'glue_task', 'count': 1}, {}, tmp_path)
 
 
+def test_vhd11k_conversion_preserves_native_tables_and_scopes_identical_names(tmp_path):
+    from dataset_atlas.converters.tables import vhd11k_annotations
+    images=tmp_path/'images.csv'; videos=tmp_path/'videos.csv'
+    images.write_text('imagePath,decision,caption\nsame.jpeg,yes,"a, b"\n')
+    videos.write_text('videoPath,decision,caption\nsame.jpeg,no,original video caption\n')
+    result=vhd11k_annotations({}, {'image_annotations':images,'video_annotations':videos},tmp_path/'out',lambda:None)
+    rows=[json.loads(line) for line in Path(result['path']).read_text().splitlines()]
+    assert [row['source_id'] for row in rows]==['image:same.jpeg','video:same.jpeg']
+    assert rows[0]['caption']=='a, b' and rows[1]['caption']=='original video caption'
+    assert rows[0]['decision']=='yes' and rows[1]['decision']=='no'
+    images.write_text('imagePath,decision\n../outside.jpeg,yes\n')
+    with pytest.raises(ValueError,match='Unsafe native'):
+        vhd11k_annotations({}, {'image_annotations':images,'video_annotations':videos},tmp_path/'bad',lambda:None)
+
+
+def test_audioset_native_segment_headers_labels_and_missing_audio_are_explicit(tmp_path):
+    from dataset_atlas.converters.tables import audioset_segments
+    import pyarrow.parquet as pq
+    labels=tmp_path/'labels.csv';labels.write_text('index,mid,display_name\n0,/m/sound,Native name\n')
+    inputs={'class_labels':labels}
+    for split in ('balanced_train','eval','unbalanced_train'):
+        p=tmp_path/(split+'.csv')
+        p.write_text('# release header\n# native count=1\n# YTID, start_seconds, end_seconds, positive_labels\nvideo, 1.000, 2.000, "/m/sound"\n')
+        inputs[split]=p
+    result=audioset_segments({},inputs,tmp_path/'out',lambda:None)
+    rows=pq.read_table(result['path']).to_pylist()
+    assert len(rows)==3 and len({row['source_id'] for row in rows})==3
+    assert rows[0]['start_seconds']=='1.000' and rows[0]['label_names']==['Native name']
+    assert rows[0]['source_header'][1]=='# native count=1'
+    assert 'not acquired' in rows[0]['media_availability']
+
+
 def test_malformed_source_rows_fail_loudly(tmp_path):
     bad = tmp_path / 'CoLA.zip'
     with zipfile.ZipFile(bad, 'w') as z:

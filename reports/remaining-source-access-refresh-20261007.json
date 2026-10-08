@@ -1,0 +1,120 @@
+{
+  "repositories": [
+    {
+      "repository": "ucf-crcv/BBQ-V",
+      "metadata_status": 200,
+      "revision": "a1c78b8f73bc40408993414e3d94714a6a9169d3",
+      "gated": "auto",
+      "file_count": 60,
+      "effective_status": 403,
+      "bytes": 158,
+      "source_extension": ".parquet",
+      "redirects": [
+        {
+          "host": "huggingface.co",
+          "status": 403
+        }
+      ],
+      "authorized": false
+    },
+    {
+      "repository": "YijunYang280/MMA-Diffusion-NSFW-adv-prompts-benchmark",
+      "metadata_status": 200,
+      "revision": "9f70ce2e897f7930aa0e34900389959235433e9a",
+      "gated": "auto",
+      "file_count": 3,
+      "effective_status": 200,
+      "bytes": 301007,
+      "source_extension": ".csv",
+      "redirects": [
+        {
+          "host": "huggingface.co",
+          "status": 200
+        }
+      ],
+      "authorized": true
+    },
+    {
+      "repository": "YijunYang280/MMA_Diffusion_adv_images_benchmark",
+      "metadata_status": 200,
+      "revision": "d6072a9abaf9155fde364b2b973bdc6e9cdc9b64",
+      "gated": "auto",
+      "file_count": 6,
+      "effective_status": 403,
+      "bytes": 224,
+      "source_extension": ".csv",
+      "redirects": [
+        {
+          "host": "huggingface.co",
+          "status": 403
+        }
+      ],
+      "authorized": false
+    },
+    {
+      "repository": "quchenyuan/UCF101-ZIP",
+      "metadata_status": 200,
+      "revision": "04d4e5ca1dc93606cb58752b0c08331e598743a4",
+      "gated": false,
+      "file_count": 5,
+      "effective_status": 200,
+      "bytes": 6957373664,
+      "source_extension": ".zip",
+      "redirects": [
+        {
+          "host": "huggingface.co",
+          "status": 302
+        },
+        {
+          "host": "us.aws.cdn.hf.co",
+          "status": 200
+        }
+      ],
+      "authorized": true
+    },
+    {
+      "repository": "flwrlabs/ucf101",
+      "metadata_status": 200,
+      "revision": "1098eed48f2929443f47c39f3b5c814e16369c11",
+      "gated": false,
+      "file_count": 96,
+      "effective_status": 200,
+      "bytes": 478121690,
+      "source_extension": ".parquet",
+      "redirects": [
+        {
+          "host": "huggingface.co",
+          "status": 302
+        },
+        {
+          "host": "us.aws.cdn.hf.co",
+          "status": 200
+        }
+      ],
+      "authorized": true
+    },
+    {
+      "repository": "AaronWu901225/MIT_states_UT_zappos",
+      "metadata_status": 200,
+      "revision": "d3f1d1b05431a92aed318c5dd9f660866fcfa2a6",
+      "gated": false,
+      "file_count": 2,
+      "effective_status": 200,
+      "bytes": 1667945529,
+      "source_extension": ".zip",
+      "redirects": [
+        {
+          "host": "huggingface.co",
+          "status": 302
+        },
+        {
+          "host": "us.aws.cdn.hf.co",
+          "status": 200
+        }
+      ],
+      "authorized": true
+    }
+  ],
+  "dataset_bodies_downloaded": 0,
+  "metadata_limit_bytes_per_repo": 2000000
+}

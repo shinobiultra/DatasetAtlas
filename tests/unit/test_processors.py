@@ -138,8 +138,16 @@ def test_minilm_local_model_contract_and_recipe_identity(tmp_path: Path, monkeyp
     class FakeModule:
         SentenceTransformer = FakeSentenceTransformer
 
+    class FakeTorch:
+        # torch_device only asks whether CUDA or MPS exist; a CPU-only stand-in keeps this contract test independent of the optional ML stack.
+        __version__ = "fake"
+        cuda = None
+        backends = None
+        version = None
+
     real_import = embeddings.importlib.import_module
-    monkeypatch.setattr(embeddings.importlib, "import_module", lambda name: FakeModule if name == "sentence_transformers" else real_import(name))
+    fakes = {"sentence_transformers": FakeModule, "torch": FakeTorch}
+    monkeypatch.setattr(embeddings.importlib, "import_module", lambda name: fakes[name] if name in fakes else real_import(name))
     config = {"model_path": str(tmp_path), "model_revision": embeddings.RECIPES["embed.minilm"]["revision"],
               "model_sha256": digest, "representation": "question"}
     result = run_processor("embed.minilm", [record(question="Which colour?", text="Ignored text")], config)

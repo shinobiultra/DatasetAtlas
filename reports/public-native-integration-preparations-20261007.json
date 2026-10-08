@@ -1,0 +1,35 @@
+{
+  "started_at_utc": "2026-10-07T05:29:36.250215+00:00",
+  "datasets": [
+    {
+      "dataset_id": "openimages",
+      "plan_id": "3528ea6bb77f72a1256f2939929a825d762bc4f8dd03cb4a3d3b21e98f5af60f",
+      "ready": true,
+      "source_budget_bytes": 200000000,
+      "output_budget_bytes": 1000000000,
+      "expected_download_bytes": 100000000,
+      "requirements": [],
+      "status": "completed",
+      "snapshot_id": "openimages-6d883481727ff1663f4528ba",
+      "population_count": 41620,
+      "preview_records": 100,
+      "downloaded_bytes": 0
+    },
+    {
+      "dataset_id": "mit-states",
+      "plan_id": "990a9b1375318b5a15c47904b2ce60249b9794e44c3d3b2aabf7b8cb81673336",
+      "ready": true,
+      "source_budget_bytes": 200000000,
+      "output_budget_bytes": 2000000000,
+      "expected_download_bytes": 170000000,
+      "requirements": [],
+      "status": "completed",
+      "snapshot_id": "mit-states-1419d70e19d4c3e17d29042a",
+      "population_count": 63440,
+      "preview_records": 100,
+      "downloaded_bytes": 28038814
+    }
+  ],
+  "native_contents_sent_to_models": false,
+  "completed_at_utc": "2026-10-07T05:33:04.087841+00:00"
+}

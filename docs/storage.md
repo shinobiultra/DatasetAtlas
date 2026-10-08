@@ -55,12 +55,29 @@ source files. Its persistent copies are counted separately from the on-demand
 cache. Preview protection matches stable asset IDs as well as native filenames,
 including older packs that materialized files below `media/`.
 
+## Native CIFAR-C array retirement
+
+`atlas storage retire-cifar-c --dataset cifar-10-c` (or `cifar-100-c`) verifies a
+retirement plan before `--execute` removes acquired TAR copies. The plan may
+create retrieval indices and protect original previews. Every retained canonical
+row must match native corruption, integer severity, original test index, label
+and RGB array membership. All retained preview pixels must remain protected;
+unverified older dependencies, missing snapshots, foreign hard links and unsafe
+indices refuse removal.
+
+Original access reads exact 3,072-byte C-order RGB rows using whole-source
+SHA-256 block pins and a hash-pinned receipt, then renders the same lossless
+32×32 PNG. It performs no resizing, normalization or pixel conversion. The
+original TAR stays remote after retirement; its availability remains an upstream
+dependency. Corpus originals, canonical records, frozen selections and required
+model weights are preserved.
+
 ## Original archive access and retirement
 
-For already acquired native ZIP or gzip TAR archives, `index-original` verifies
+For already acquired native ZIP, plain TAR or gzip TAR archives, `index-original` verifies
 the entire source SHA-256 and records every member's SHA-256, size and position.
 Gzip TAR uses seek checkpoints through the optional `remote-storage` extra;
-ZIP uses native compressed-member offsets. Remote retrieval uses pinned strong
+Plain TAR uses native member offsets; ZIP uses native compressed-member offsets. A filename ending in `.tar.gz` is not accepted as proof of gzip encoding; Atlas checks the actual format. Remote retrieval uses pinned strong
 ETags, strict HTTPS byte ranges, bounded decompression and member hash checks.
 An ETag alone is not treated as a full-file cryptographic hash.
 
@@ -101,3 +118,39 @@ and performs fresh native retrieval probes. `--execute` removes only the checked
 Atlas-owned redundant archive. It cannot establish routes by itself; first complete
 native indexing and preview retention. Food101's additional 5.14 GB retirement is
 recorded in `reports/food101-repacked-retention.json`.
+
+## Cleanup
+
+```bash
+atlas storage clean                             # inspect the proposed cleanup
+atlas storage clean --execute                  # evict unpinned caches and share duplicate immutable files
+atlas storage clean --execute --include-model-test-env
+```
+
+Cleanup preserves prepared versions, original previews, saved selections, model
+weights and native source paths. It evicts unpinned download/range entries and
+unprotected AVIF copies, removes disposable installation-test environments, and
+replaces byte-identical native source, preview and canonical index copies with
+hard links after complete SHA-256 checks. Mutable JSON and SQLite files are never
+shared this way. A pinned cache object, shared protected original, active
+preparation or held storage lock prevents unsafe removal.
+
+The last option also removes the regeneratable isolated vLLM test environment;
+it preserves its model weights and receipts. Recreate that environment with
+`scripts/setup-local-vlm.sh` before using `scripts/start-local-vlm.sh`. Atlas's
+main development environment is retained.
+
+HTTP preparations use separate bounded staging caches in each version, allowing
+the two admitted writers to transfer concurrently without evicting each other's
+source files. Failed/cancelled preparations retain resumable partials and their
+attempt history. Completion removes staging-cache links after native source
+links exist. Remote Parquet preview caches follow the same staged lifecycle.
+
+The 2026-10-05 cleanup additionally retired BAPPS's native plain TAR and redundant
+ZIP copies after full member-hash parity, protected previews and fresh original
+retrieval probes. STL-10 retains every native pixel/label/metadata member and its
+pinned receipt after removal of the duplicate compressed archive. Fresh-download
+verification copies are disposable only after their counts, hashes, plans,
+status, preview media checks and logs have been retained. See the latest
+`reports/storage-footprint-20261005.json` and release evidence for measured bytes;
+logical file sizes alone overstate savings when hard links are present.

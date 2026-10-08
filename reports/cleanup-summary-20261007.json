@@ -1,0 +1,27 @@
+{
+  "checked_at_utc": "2026-10-07T08:12:28.356220+00:00",
+  "status": "completed",
+  "configured_root_start_allocated_bytes": 129183100928,
+  "configured_root_final_allocated_bytes": 116566290432,
+  "net_configured_root_reduction_bytes": 12616810496,
+  "verified_retired_unique_native_archive_body_bytes": 19705921773,
+  "scope": "Net measurement includes new native acquisitions and indices. Gross archive-body bytes are distinct from net allocated savings; hard links and reflink extent accounting can differ from physical disk reclamation.",
+  "factoid_unreferenced_probe_retirement": "reports/factoid-exploratory-body-retirement-20261007.json",
+  "retained": [
+    "read-only corpus originals",
+    "active and frozen canonical snapshots",
+    "protected original preview media",
+    "required model weights and primary runtime"
+  ],
+  "receipts": [
+    "reports/prepared-version-cleanup-final-20261007.json",
+    "reports/storage-idle-cache-cleanup-final-20261007.json",
+    "reports/idle-cache-retirement-closeout-20261007.json",
+    "reports/release-dependency-retirement-20261007.json",
+    "reports/release-dependency-retirement-closeout-20261007.json",
+    "reports/closeout-build-cache-retirement-20261007.json",
+    "reports/cifar-10-c-native-source-retirement-20261007.json",
+    "reports/cifar-100-c-native-source-retirement-20261007.json",
+    "reports/factoid-exploratory-body-retirement-20261007.json"
+  ]
+}

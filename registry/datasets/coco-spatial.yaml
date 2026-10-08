@@ -78,9 +78,30 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_release_identified_subset_unpinned
+- kind: source_audit_release
+  checked_on: '2026-10-06'
+  url: https://github.com/amitakamath/whatsup_vlms
+  note: The authors' README lists COCO_QA_one_obj and COCO_QA_two_obj among its six datasets (first caption option
+    always correct) and links a Google Drive folder for the data. The catalogue already holds a Pathways transformation
+    of both splits (coco-one 2,247 and coco-two 440 examples), which this entry now links.
+  source_identity_status: author_release_identified_prepared_via_pathways_transform
 source_url: https://github.com/amitakamath/whatsup_vlms
 relationships:
 - type: same_source_family_as
   target_id: coco
   status: asserted_from_source_review
   scope: Spatial-relation overlay on COCO images.
+- type: same_source_family_as
+  target_id: coco-one
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: The What's Up repository's COCO-spatial one-object (coco_qa_one_obj) release is the native source of this
+    prepared Pathways transformation (it adds derived caption, preposition and object fields). The citing paper's
+    curated COCO subset is not shown to equal it, and the native question files themselves were not acquired.
+- type: same_source_family_as
+  target_id: coco-two
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: The What's Up repository's COCO-spatial two-object (coco_qa_two_obj) release is the native source of this
+    prepared Pathways transformation (it adds derived caption, preposition and object fields). The citing paper's
+    curated COCO subset is not shown to equal it, and the native question files themselves were not acquired.

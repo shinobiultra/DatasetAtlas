@@ -2,8 +2,9 @@ schema_version: '1.0'
 id: spoken-wikipedia
 name: Spoken Wikipedia
 aliases: []
-description: 'Spoken Wikipedia Corpora audio plus aligned Wikipedia article text; English/German/Dutch
-  releases. Source review: Author project release variants; exact corpus archive digest unverified'
+description: 'Spoken Wikipedia Corpora audio plus aligned Wikipedia article text;
+  English/German/Dutch releases. Source review: Author project release variants; exact
+  corpus archive digest unverified'
 paper_ids:
 - paper-6d747c88d639c5aa
 release: unresolved
@@ -20,12 +21,15 @@ coverage:
   preview_count: 0
   unit: example
   blockers:
-  - Adapter and preview are not implemented.
+  - Three pinned native language archives are indexed and whole-article linked audio
+    previews are activated; sentence audio clips and paper-specific alignment are
+    not established.
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
-  note: Official project states CC BY-SA 4.0; retain speaker/article attribution and share-alike conditions
+  note: Official project states CC BY-SA 4.0; retain speaker/article attribution and
+    share-alike conditions
   source: https://nats.gitlab.io/swc/
 evidence:
 - kind: corpus_mention
@@ -34,29 +38,37 @@ evidence:
   source_file_hash: 519805fac1ac6df034dd67ef95643703ebd97fa1c18e0f035a1f93feada6994e
   page: 13
   role: source data
-  excerpt: 8], but with an updated training set using segments from the Wall Street Journal [40] and Spoken
-    Wikipedia Corpora [41]. We screened the Wall Street Journal (WSJ) [40], TIMIT [47], and a subset of
-    articles from the Spoken Wikipedia Copo
+  excerpt: 8], but with an updated training set using segments from the Wall Street
+    Journal [40] and Spoken Wikipedia Corpora [41]. We screened the Wall Street Journal
+    (WSJ) [40], TIMIT [47], and a subset of articles from the Spoken Wikipedia Copo
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://nats.gitlab.io/swc/
-  note: Spoken Wikipedia Corpora audio plus aligned Wikipedia article text; English/German/Dutch releases
-    Author project release variants; exact corpus archive digest unverified
+  note: Spoken Wikipedia Corpora audio plus aligned Wikipedia article text; English/German/Dutch
+    releases Author project release variants; exact corpus archive digest unverified
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_access
   url: https://nats.gitlab.io/swc/
-  note: 'Official project provides language downloads; potentially hundreds of hours audio Probe: first_primary_url_http_head_200;
-    payload_not_downloaded'
+  note: 'Official project provides language downloads; potentially hundreds of hours
+    audio Probe: first_primary_url_http_head_200; payload_not_downloaded'
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_rights
   url: https://nats.gitlab.io/swc/
-  note: Official project states CC BY-SA 4.0; retain speaker/article attribution and share-alike conditions
+  note: Official project states CC BY-SA 4.0; retain speaker/article attribution and
+    share-alike conditions
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields
+    present in at least one record. Not inferred from the name or description.'
 source_url: https://nats.gitlab.io/swc/
+modalities:
+- text

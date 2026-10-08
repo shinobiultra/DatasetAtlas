@@ -1,0 +1,23 @@
+{
+  "checked_at_utc": "2026-10-07T08:10:25.849364+00:00",
+  "status": "executed",
+  "targets": [
+    "/home/bitwise/Documents/vibe/DatasetAtlas/apps/web/node_modules",
+    "/tmp/atlas-python314-release-env",
+    "/tmp/dataset-atlas-uv-cache",
+    "/tmp/dataset-atlas-uv-tools",
+    "/tmp/dataset-atlas-prek-cache"
+  ],
+  "files_inventoried": 20819,
+  "inventoried_allocated_bytes": 701276160,
+  "manifest": "work/release-dependency-retirement-closeout-20261007/file-checksums.json",
+  "manifest_sha256": "d08977adc2bc7d9dff75aafe16643865aabbf85bdb5a42a58791d5357e7e391b",
+  "scope": "Reproducible frontend dependencies, disposable base-test environment and task-owned tool caches; no corpus, canonical data, models or protected previews.",
+  "recreate": [
+    "npm --prefix apps/web ci",
+    "uv sync --locked --python 3.14.2 --extra development --extra datasets --extra remote-storage (in a disposable environment)",
+    "uvx prek run --all-files"
+  ],
+  "allocated_measurement_limit": "Referenced blocks before unlink; hard links outside the inventory can make actual physical reclamation smaller.",
+  "all_targets_absent": true
+}

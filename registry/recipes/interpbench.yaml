@@ -1,0 +1,25 @@
+release: author-benchmark-a1242a84f8a4d07d1be9a8f5ec710415198016b2
+adapter: structured
+expected_count: 86
+scope: All 86 author-released benchmark case/model metadata rows, preserving task descriptions, native
+  architecture/training fields and model/circuit source links. The unit is a benchmark case, not a generated
+  model input. No pickle, circuit or weights file is executed, loaded or substituted for fixed input examples;
+  generated training/evaluation inputs are outside this metadata population.
+adapter_config:
+  format: parquet
+  mapping:
+    id: case_id
+    text: task_description
+  sequential_index: true
+allowed_hosts:
+- huggingface.co
+- cdn-lfs-us-1.huggingface.co
+- us.aws.cdn.hf.co
+- cas-bridge.xethub.hf.co
+files:
+- source_name: benchmark_cases_metadata.parquet
+  url: https://huggingface.co/cybershiptrooper/InterpBench/resolve/a1242a84f8a4d07d1be9a8f5ec710415198016b2/benchmark_cases_metadata.parquet
+  bytes: 76400
+  sha256: 085f02859e3d07ce9c964936ce063397f84ac7a80e01429a9da0efabd2aa2dea
+  config_key: path
+  format: parquet

@@ -3,17 +3,99 @@ id: cocogender
 name: COCOgender
 aliases:
 - Cocogender
-description: COCOgender image/caption gender overlay cited by DebiasLens as Tang et al. 2021; possible relation
-  to COCO-GB V1/V2 requires confirmation.
+description: 'COCO-GB (Tang et al., WWW 2021) as released by its authors: v1 (123,287 COCO 2014 images with a four-valued
+  gender integer, category IDs, captions and a 1,000-image gender-balanced secret test) and v2 (120,955 image records
+  in reorganised train/test/fine-tune files), kept as separate variants. The DeBiasLens paper''s ''Cocogender''
+  cites this work but does not say which variant or subset it used, so identity stays a candidate.'
 paper_ids:
 - paper-32cea5e43d940514
-release: unresolved
-adapter: structured
-adapter_config: {}
+release: github-8eab34dbcbb49d9a9743b1f6ed26d48f74945a44
+adapter: structured_collection
+adapter_config:
+  annotations:
+  - path_key: path
+    format: jsonl
+    split: all
+    identity_prefix: coco-gb
+    media_path_url_field: coco_url
+    media_archive_by_prefix:
+      train2014: train2014
+      val2014: val2014
+  mapping:
+    id: source_id
+    text: display_text
+  max_annotation_bytes: 400000000
+  remote_archives:
+    train2014:
+      url: https://s3.amazonaws.com/images.cocodataset.org/zips/train2014.zip
+      bytes: 13510573713
+      etag: '"289af3433b84b5b8622626b10146c1bc-1611"'
+      allowed_hosts:
+      - s3.amazonaws.com
+    val2014:
+      url: https://s3.amazonaws.com/images.cocodataset.org/zips/val2014.zip
+      bytes: 6645013297
+      etag: '"3925cc4d50eb68d47bf2d6324a012d20-793"'
+      allowed_hosts:
+      - s3.amazonaws.com
+  remote_cache_root: work/media-cache/ranges
+  fields:
+    source_id: Release variant, partition and COCO image ID
+    release_variant:
+      description: COCO-GB release variant
+      values:
+      - v1
+      - v2
+    partition:
+      description: v1 Karpathy split, or v2 file (train, test, fine_tune)
+      values:
+      - train
+      - restval
+      - val
+      - test
+      - fine_tune
+    split:
+      description: Native 'split' field (v2 keeps Karpathy-style labels even in its test file)
+      values:
+      - train
+      - restval
+      - val
+      - test
+    cocoid:
+      description: COCO image ID
+      dtype: number
+    imgid:
+      description: Native image index within its file
+      dtype: number
+    filepath:
+      description: COCO 2014 folder
+      values:
+      - train2014
+      - val2014
+    filename: COCO image file name
+    gender:
+      description: Author's native gender integer, derived from caption words (absent in v2 fine_tune); coding not
+        documented for this field
+      dtype: number
+    category_id: Native COCO category ID string (absent in v2 fine_tune)
+    category_ids:
+      description: The category IDs parsed to integers
+      dtype: array
+    captions: Captions present in this record
+    caption_ids: IDs of the captions present
+    listed_sentence_ids: Native sentence ID list (may name captions this record omits)
+    captions_subset_of_listed:
+      description: True when the record keeps fewer sentences than it lists
+      dtype: boolean
+    secret_test:
+      description: 'v1: in the author''s gender-balanced 1,000-image secret test (absent for v2)'
+      dtype: boolean
+    display_text: First caption, for display
+    coco_url: Canonical COCO image URL used only to name the archive member
 coverage:
   identity: candidate
-  source: unverified
-  access: unverified
+  source: verified
+  access: public
   adapter: not_started
   preview: none
   complete_data: unimplemented
@@ -21,14 +103,18 @@ coverage:
   preview_count: 0
   unit: example
   blockers:
-  - Exact COCOgender-to-COCO-GB release and 12,454-example mapping remain unresolved; do not conflate with COCO-gender.
-  - Adapter and preview are not implemented.
+  - The DeBiasLens paper cites Tang et al. 2021 for 'Cocogender' without naming v1, v2 or the subset it trained
+    on, so the exact paper population is unresolved.
+  - The gender integer is the authors' native value, derived from caption words (not perceived or self-reported
+    identity); the repository does not document the JSON field's own coding, so Atlas does not name its values.
+  - COCO images keep their per-image Flickr licences and are read on request from COCO's official archives; no public
+    redistribution review.
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System
-  note: Overlay license not established; underlying COCO photos and captions have separate source rights
+  note: COCO captions and images carry COCO terms; the author repository states no data licence for the gender overlay.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-db79fb0dad90887f266c
@@ -83,6 +169,21 @@ evidence:
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: candidate_mapping_unresolved
+- kind: source_audit_release
+  checked_on: '2026-10-06'
+  url: https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System/tree/8eab34dbcbb49d9a9743b1f6ed26d48f74945a44
+  note: 'Repository at this commit holds COCOGB_V1/COCOGBv1.zip (Ksplit_gender_category.json: 123,287 images, splits
+    train 82,783 / restval 30,504 / val 5,000 / test 5,000, 80 COCO categories, a 1,000-entry secret_test whose
+    gender and categories agree with the split records) and COCOGB_V2/COCOv2.zip (train 111,313, test 1,974, fine_tune
+    7,668). The authors'' Benchmarking_existing_models/benchmarking.py codes a caption''s gender words as 0 woman
+    only, 1 man only, 2 both or neutral only, 3 none; the JSON field is not documented separately. Ksplit_gender_category.json.zip
+    is a byte-identical copy of COCOGBv1.zip.'
+  source_identity_status: author_release_identified_variant_not_established_by_paper
+- kind: derived_facet
+  field: tasks
+  checked_on: '2026-10-06'
+  note: Task from the author repository description (benchmarking gender bias in captioning), not from the citing
+    paper.
 relationships:
 - type: annotation_overlay_of
   target: coco
@@ -91,4 +192,14 @@ relationships:
   target_id: coco
   status: asserted_from_source_review
   scope: Gender-annotation overlay on COCO images.
-source_url: https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System
+source_url: https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System/tree/8eab34dbcbb49d9a9743b1f6ed26d48f74945a44
+modalities:
+- image
+- text
+tasks:
+- image captioning gender-bias evaluation
+labels:
+- gender
+- category_id
+- release_variant
+- partition

@@ -58,3 +58,9 @@ relationships:
   target_id: imagenet
   status: asserted_from_source_review
   scope: Likely the ILSVRC validation split; exact year and selection unpinned.
+- type: same_source_family_as
+  target_id: imagenet-ilsvrc-2012
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: Likely the ILSVRC validation split, which the parent release contains; year and selection are not pinned
+    by the survey table.

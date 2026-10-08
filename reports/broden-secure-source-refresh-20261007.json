@@ -1,0 +1,39 @@
+{
+  "source_scripts": [
+    {
+      "url": "https://raw.githubusercontent.com/CSAILVision/NetDissect/20ce6f887607aadc04ab9fb3d452e4723685cbbb/script/dlbroden.sh",
+      "status": 200,
+      "source_urls": [
+        "http://netdissect.csail.mit.edu/data/broden1_224.zip",
+        "http://netdissect.csail.mit.edu/data/broden1_227.zip",
+        "http://netdissect.csail.mit.edu/data/broden1_384.zip"
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/CSAILVision/NetDissect-Lite/master/script/dlbroden.sh",
+      "status": 200,
+      "source_urls": [
+        "http://netdissect.csail.mit.edu/data/broden1_224.zip",
+        "http://netdissect.csail.mit.edu/data/broden1_227.zip"
+      ]
+    },
+    {
+      "url": "https://raw.githubusercontent.com/davidbau/dissect/master/netdissect/broden.py",
+      "status": 404,
+      "source_urls": []
+    }
+  ],
+  "metadata_repositories": [
+    {
+      "repository": "anonymous347928/broden_concepts",
+      "revision": "4cdec3fa69bbffff5c2c1ffc084e34767ef78edc",
+      "gated": false,
+      "file_count": 3,
+      "file_extensions": [
+        "",
+        ".md",
+        ".zip"
+      ]
+    }
+  ]
+}

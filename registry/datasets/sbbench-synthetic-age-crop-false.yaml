@@ -69,3 +69,10 @@ evidence:
   adapter_file_sha256: 827f8c928bc1942a03eb93f2e8ea5a2198a4c9fd09465c16dcf3749da735e5e8
   source_rows: 333
   scope: Full author synthetic configuration; no public media approval.
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in at least
+    one record. Not inferred from the name or description.'
+modalities:
+- image

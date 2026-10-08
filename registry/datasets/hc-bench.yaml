@@ -108,5 +108,12 @@ evidence:
     SHA-256 a24e9f1602d1c16637daedf903c99d20030ed093aa62198d1210401d75817eb8; population 53 rows.
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'Derived from the 53-record prepared preview: asset kinds and text fields present in at least
+    one record. Not inferred from the name or description.'
 source_url: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench
 snapshot_id: hc-bench-wild-203e4f80fb6f979f
+modalities:
+- image

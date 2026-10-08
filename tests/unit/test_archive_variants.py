@@ -53,3 +53,61 @@ def test_native_folder_labels_remain_filterable_and_cannot_overwrite_identity(tm
         invalid._remote = adapter._remote
         with pytest.raises(ValueError, match='reserved'):
             invalid._rows()
+
+
+def test_media_reads_need_only_their_own_archive_even_when_another_archive_is_gone(tmp_path):
+    """Regression: a publisher moved DIV2K's validation archive and every media read failed, because each read re-opened all 22 archives."""
+    import io
+    from PIL import Image
+    stream = io.BytesIO()
+    Image.new('RGB', (4, 3), (9, 8, 7)).save(stream, format='PNG')
+    native = stream.getvalue()
+    good = tmp_path/'HR.zip'
+    with zipfile.ZipFile(good, 'w') as z:
+        z.writestr('HR/0001.png', native)
+    specs = {key: {'member_regex': key+r'/(?P<image_id>\d{4})\.png', 'split': 'train', 'variant': key, 'role': key, 'expected_count': 1, 'etag': '"fixture"'}
+             for key in ('HR', 'LR')}
+    dataset = Dataset(id='moved', name='Fixture', adapter='archive_variants', adapter_config={
+        'annotations': [], 'remote_archives': specs, 'expected_variants': ['HR', 'LR']})
+    opened = []
+
+    def remote(key, budget):
+        opened.append(key)
+        if key == 'LR':
+            raise ValueError('Range source requires HTTP 206; received 404')
+        return _LocalArchive(good, budget)
+
+    adapter = ArchiveVariantsAdapter(dataset)
+    adapter._remote = remote
+    with pytest.raises(ValueError, match='received 404'):
+        adapter.prepare(adapter.plan(10, 100000))  # preparation still validates the whole release and refuses a missing archive
+    opened.clear()
+    source = adapter.prepare_media(adapter.plan(10, 100000))
+    assert opened == []  # no archive directory is opened just to start a media read
+    handle = adapter.resolve_asset(source, 'zip/HR/HR/0001.png')
+    assert handle.data == native and opened == ['HR']
+
+
+def test_selected_native_subtree_pins_all_members_and_explicit_exclusions(tmp_path):
+    import hashlib,json
+    path=tmp_path/'bundle.zip'
+    with zipfile.ZipFile(path,'w') as z:
+        z.writestr('states/images/rough_rock/1.jpg',b'fixture')
+        z.writestr('states/images/readme.txt',b'passive metadata')
+        z.writestr('other/images/1.jpg',b'excluded fixture')
+    with zipfile.ZipFile(path) as z:
+        inventory=[[i.filename,i.file_size,i.compress_size,i.CRC,i.compress_type,i.header_offset] for i in z.infolist()]
+    digest=hashlib.sha256(json.dumps(inventory,ensure_ascii=False,separators=(',',':')).encode()).hexdigest()
+    spec={'member_regex':r'states/images/(?P<image_id>(?P<pair>[^/]+)/[^/]+)\.jpg','split':'mirror','variant':'source','role':'mirror_source','expected_count':1,'etag':'"fixture"',
+          'selected_prefix':'states/images/','ignored_members':['states/images/readme.txt'],'expected_excluded_members':1,'directory_members_sha256':digest,
+          'source_fields':{'native_pair':'{pair}'}}
+    d=Dataset(id='states',name='Fixture',adapter='archive_variants',adapter_config={'annotations':[],'remote_archives':{'images':spec},'expected_variants':['source']})
+    a=ArchiveVariantsAdapter(d);a._remote=lambda key,budget:_LocalArchive(path,budget)
+    records=a.iter_records(a.prepare(a.plan(10,100000))).records
+    assert len(records)==1 and records[0].source['native_pair']=='rough_rock'
+    spec['expected_excluded_members']=0
+    other=ArchiveVariantsAdapter(d);other._remote=a._remote
+    with pytest.raises(ValueError,match='Excluded archive population'):other._rows()
+    spec['expected_excluded_members']=1;spec['directory_members_sha256']='0'*64
+    other=ArchiveVariantsAdapter(d);other._remote=a._remote
+    with pytest.raises(ValueError,match='fingerprint changed'):other._rows()

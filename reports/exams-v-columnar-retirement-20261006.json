@@ -1,0 +1,266 @@
+{
+  "dataset_id": "exams-v",
+  "executed": true,
+  "status": "executed",
+  "sources": [
+    {
+      "source_name": "data/test-00000-of-00003.parquet",
+      "url": "https://huggingface.co/datasets/Rocktim/EXAMS-V/resolve/e9488045cbad16c973f031c7a8f7466b5dcc3794/data/test-00000-of-00003.parquet",
+      "bytes": 245159155,
+      "sha256": "fc41e9b489210a4047eca034a15cb37bffb7ac38742214da3ff2bfed224a8e36",
+      "etag": "\"501f3a778319f08ac41747ecc0a9b46b57541748ec24e52d1548295d89cdca31\"",
+      "rows": 1599
+    },
+    {
+      "source_name": "data/test-00001-of-00003.parquet",
+      "url": "https://huggingface.co/datasets/Rocktim/EXAMS-V/resolve/e9488045cbad16c973f031c7a8f7466b5dcc3794/data/test-00001-of-00003.parquet",
+      "bytes": 534926695,
+      "sha256": "22cb85576e7351509068e351b74f981a58cccf6c37bdb4b637a1b9790961a124",
+      "etag": "\"eefd27bfb3d390028386e2a5b80f21dae12bf900d182ecd5e2b2e155ccc84492\"",
+      "rows": 1599
+    },
+    {
+      "source_name": "data/test-00002-of-00003.parquet",
+      "url": "https://huggingface.co/datasets/Rocktim/EXAMS-V/resolve/e9488045cbad16c973f031c7a8f7466b5dcc3794/data/test-00002-of-00003.parquet",
+      "bytes": 564636410,
+      "sha256": "ec2fce4dbe71fba3e2a636aa8cd7b96b2e96a7d9a0de414e05b634d9c0860dab",
+      "etag": "\"97858fbfedd54c7f72fda9a42946f37f0be28e37c3c087888ef5ba8c550213dc\"",
+      "rows": 1599
+    },
+    {
+      "source_name": "data/train-00000-of-00009.parquet",
+      "url": "https://huggingface.co/datasets/Rocktim/EXAMS-V/resolve/e9488045cbad16c973f031c7a8f7466b5dcc3794/data/train-00000-of-00009.parquet",
+      "bytes": 449696559,
+      "sha256": "aed88a2e76d3497bac409469d3bc32cb0dedd11bcbc07656d6c99d3dc97ea333",
+      "etag": "\"0b6eb7468ea87f2d49dc739f4a15d3b679c9d80ec9051e9faa3a922ee030afc4\"",
+      "rows": 1833
+    },
+    {
+      "source_name": "data/train-00001-of-00009.parquet",
+      "url": "https://huggingface.co/datasets/Rocktim/EXAMS-V/resolve/e9488045cbad16c973f031c7a8f7466b5dcc3794/data/train-00001-of-00009.parquet",
+      "bytes": 169087000,
+      "sha256": "26842b8a18af408dd323aed6ace2562097533977bfbbd475c74af96c6b8f2106",
+      "etag": "\"89af97d1ebae250954da83d36f44d1ea88aa03524b1b6e1070db4fe1c960b65b\"",
+      "rows": 1833
+    },
+    {
+      "source_name": "data/train-00002-of-00009.parquet",
+      "url": "https://huggingface.co/datasets/Rocktim/EXAMS-V/resolve/e9488045cbad16c973f031c7a8f7466b5dcc3794/data/train-00002-of-00009.parquet",
+      "bytes": 664282096,
+      "sha256": "3c5096cbdb06c2461e0ed81cb46b8fcee5e82f1809bfa4a57dce3c532eae22e7",
+      "etag": "\"5de30a8b0553098b55cfe756bae999a0c49e0f74d81df346feec795eff5d2e60\"",
+      "rows": 1833
+    },
+    {
+      "source_name": "data/train-00003-of-00009.parquet",
+      "url": "https://huggingface.co/datasets/Rocktim/EXAMS-V/resolve/e9488045cbad16c973f031c7a8f7466b5dcc3794/data/train-00003-of-00009.parquet",
+      "bytes": 570642896,
+      "sha256": "c4f7aca2c3f9d012f798d2bff71de305a3abd1b0be62863ab81cc71e76b102e7",
+      "etag": "\"f4d34170bcacb70c9e82f5655ebfe80f8cb1f10490674ca7336f6791de8c5f7c\"",
+      "rows": 1833
+    },
+    {
+      "source_name": "data/train-00004-of-00009.parquet",
+      "url": "https://huggingface.co/datasets/Rocktim/EXAMS-V/resolve/e9488045cbad16c973f031c7a8f7466b5dcc3794/data/train-00004-of-00009.parquet",
+      "bytes": 587260856,
+      "sha256": "6432da71d4da2052ee2fd4e2d27ec650e0afe79c332e135e5d9f241e78cdd944",
+      "etag": "\"32d06c062fbcfa18c5d81813b69323e16d2834fd803a2d36646d797278e66732\"",
+      "rows": 1833
+    },
+    {
+      "source_name": "data/train-00005-of-00009.parquet",
+      "url": "https://huggingface.co/datasets/Rocktim/EXAMS-V/resolve/e9488045cbad16c973f031c7a8f7466b5dcc3794/data/train-00005-of-00009.parquet",
+      "bytes": 624864701,
+      "sha256": "10c35a879e73b0aa39a1715668e045a0cba2a4d98b374d8821b8399af2a1d37e",
+      "etag": "\"9e84e9f208dd7113a628dd6cde469824f5f577ada5dfc3c85ad4369d6745e7a0\"",
+      "rows": 1833
+    },
+    {
+      "source_name": "data/train-00006-of-00009.parquet",
+      "url": "https://huggingface.co/datasets/Rocktim/EXAMS-V/resolve/e9488045cbad16c973f031c7a8f7466b5dcc3794/data/train-00006-of-00009.parquet",
+      "bytes": 710645366,
+      "sha256": "0374f7bf275ba4293472c2e4a7bbcb20786597ae418bf11b2543e09ce3f9b0e7",
+      "etag": "\"4ab13f8024a08809f45460abdeb180f511d98cc33c1286c37fe2e0bb1cb8d233\"",
+      "rows": 1832
+    },
+    {
+      "source_name": "data/train-00007-of-00009.parquet",
+      "url": "https://huggingface.co/datasets/Rocktim/EXAMS-V/resolve/e9488045cbad16c973f031c7a8f7466b5dcc3794/data/train-00007-of-00009.parquet",
+      "bytes": 698690412,
+      "sha256": "b9fe776f6f3496626348f1a4df309fc352d422c7a00878005d1b9c213b2d8828",
+      "etag": "\"afdcf959be85644f14d291a4daa3ba8031b0eaf8a5dcda34ac4d16230905e6a8\"",
+      "rows": 1832
+    },
+    {
+      "source_name": "data/train-00008-of-00009.parquet",
+      "url": "https://huggingface.co/datasets/Rocktim/EXAMS-V/resolve/e9488045cbad16c973f031c7a8f7466b5dcc3794/data/train-00008-of-00009.parquet",
+      "bytes": 622920147,
+      "sha256": "d902ab7cb7ebae5fe7f3071714a1864fafbc116eabe86d600f7bca8e551eb5f4",
+      "etag": "\"c26b77be9702ca7ca267d515451c95c9269db8a65f1a84f589d4089c24ef106d\"",
+      "rows": 1832
+    }
+  ],
+  "versions": [
+    {
+      "snapshot_id": "exams-v-8bb5701d7c67cf214b73ca4d",
+      "native_image_references": 21291,
+      "index": "parquet-6e6af45b65fee5f152d9f7d2a09073ca-8bbc1106f6274221afc208920d9840a7",
+      "cold_checks": [
+        {
+          "ref": "embedded/799/0.jpg",
+          "sha256": "2b0f8c24395ec498da6a81ae307530e7356c4cc380e54353ca172bebfce6efb8",
+          "transferred_bytes": 0,
+          "source_ref": "remote/0/799/image/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/2398/0.jpg",
+          "sha256": "abc0e55dc8f3b3a951bb13894aa2babcbc0b1b692de746ba809994e976e8cabb",
+          "transferred_bytes": 0,
+          "source_ref": "remote/1/799/image/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/3997/0.jpg",
+          "sha256": "4e7f05123e8128983a4f34a9e5ab9b66e4ce308aab5c7339581868f397d18a5c",
+          "transferred_bytes": 0,
+          "source_ref": "remote/2/799/image/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/5713/0.jpg",
+          "sha256": "1a86721e111a6500ff3f047898bdde89daa434cab8c564731b4194d93a2ffb79",
+          "transferred_bytes": 0,
+          "source_ref": "remote/3/916/image/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/7546/0.png",
+          "sha256": "4c551b1133e38971252a470bd52218913dc7126085ad18f4450365fe0da50ff1",
+          "transferred_bytes": 0,
+          "source_ref": "remote/4/916/image/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/9379/0.jpg",
+          "sha256": "d1c71ef152f70bbeb9686a8e6128c89102d3f2c2bd3fbe432f946d82d12b7d09",
+          "transferred_bytes": 0,
+          "source_ref": "remote/5/916/image/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/11212/0.jpg",
+          "sha256": "bb0ec8cb59fbad0cba870ffcb853fc3b28af75ac785a9369086b18de3f78610b",
+          "transferred_bytes": 0,
+          "source_ref": "remote/6/916/image/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/13045/0.jpg",
+          "sha256": "909dd2ce3e474b63caeb658edfb7a332bf08506f35a12e8f8e6016d67b67851a",
+          "transferred_bytes": 0,
+          "source_ref": "remote/7/916/image/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/14878/0.jpg",
+          "sha256": "230feac4030172a27e27cde8c3a8e91538ddf912c5cac16e2ca3f8ec599ce64f",
+          "transferred_bytes": 0,
+          "source_ref": "remote/8/916/image/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/16711/0.jpg",
+          "sha256": "29b283534ff25ebc252d7f25f20314cc4e61c2be1942e74593521ed19d8b08a7",
+          "transferred_bytes": 0,
+          "source_ref": "remote/9/916/image/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/18543/0.jpg",
+          "sha256": "26e2dee62cae3badef9b47d397ab930ccfee2d6aff0201dffa5455ee3f822cc7",
+          "transferred_bytes": 0,
+          "source_ref": "remote/10/916/image/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/20375/0.jpg",
+          "sha256": "5acb54082432de56c324b8cd6e74698423f438bae01a03e9be2ed0e3d8de1eb0",
+          "transferred_bytes": 0,
+          "source_ref": "remote/11/916/image/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/0/0.jpg",
+          "sha256": "1a64b4603d789574a3c123f90fe96620e68309cd8f94d805736ec92c6fb3ebe1",
+          "transferred_bytes": 0,
+          "source_ref": "remote/0/0/image/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/10645/0.jpg",
+          "sha256": "dc217adf66a907560adc70c3ea22cbfd4466cd9cc5dfba388f54c31bf481729b",
+          "transferred_bytes": 0,
+          "source_ref": "remote/6/349/image/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/21290/0.jpg",
+          "sha256": "59bc9584ebe993816d955558fea511cec2f5359a6a862db1427f98d135fc1c3a",
+          "transferred_bytes": 0,
+          "source_ref": "remote/11/1831/image/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        }
+      ]
+    }
+  ],
+  "total_verification_transfer_bytes": 12,
+  "native_index_bytes": 3366912,
+  "preview_bytes_upper_bound": 61386884,
+  "source_paths_eligible": [
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/sources/fc41e9b489210a4047eca034a15cb37bffb7ac38742214da3ff2bfed224a8e36.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/sources/22cb85576e7351509068e351b74f981a58cccf6c37bdb4b637a1b9790961a124.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/sources/ec2fce4dbe71fba3e2a636aa8cd7b96b2e96a7d9a0de414e05b634d9c0860dab.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/sources/aed88a2e76d3497bac409469d3bc32cb0dedd11bcbc07656d6c99d3dc97ea333.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/sources/26842b8a18af408dd323aed6ace2562097533977bfbbd475c74af96c6b8f2106.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/sources/3c5096cbdb06c2461e0ed81cb46b8fcee5e82f1809bfa4a57dce3c532eae22e7.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/sources/c4f7aca2c3f9d012f798d2bff71de305a3abd1b0be62863ab81cc71e76b102e7.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/sources/6432da71d4da2052ee2fd4e2d27ec650e0afe79c332e135e5d9f241e78cdd944.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/sources/10c35a879e73b0aa39a1715668e045a0cba2a4d98b374d8821b8399af2a1d37e.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/sources/0374f7bf275ba4293472c2e4a7bbcb20786597ae418bf11b2543e09ce3f9b0e7.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/sources/b9fe776f6f3496626348f1a4df309fc352d422c7a00878005d1b9c213b2d8828.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/sources/d902ab7cb7ebae5fe7f3071714a1864fafbc116eabe86d600f7bca8e551eb5f4.parquet"
+  ],
+  "source_paths_retired": [
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/sources/fc41e9b489210a4047eca034a15cb37bffb7ac38742214da3ff2bfed224a8e36.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/sources/22cb85576e7351509068e351b74f981a58cccf6c37bdb4b637a1b9790961a124.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/sources/ec2fce4dbe71fba3e2a636aa8cd7b96b2e96a7d9a0de414e05b634d9c0860dab.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/sources/aed88a2e76d3497bac409469d3bc32cb0dedd11bcbc07656d6c99d3dc97ea333.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/sources/26842b8a18af408dd323aed6ace2562097533977bfbbd475c74af96c6b8f2106.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/sources/3c5096cbdb06c2461e0ed81cb46b8fcee5e82f1809bfa4a57dce3c532eae22e7.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/sources/c4f7aca2c3f9d012f798d2bff71de305a3abd1b0be62863ab81cc71e76b102e7.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/sources/6432da71d4da2052ee2fd4e2d27ec650e0afe79c332e135e5d9f241e78cdd944.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/sources/10c35a879e73b0aa39a1715668e045a0cba2a4d98b374d8821b8399af2a1d37e.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/sources/0374f7bf275ba4293472c2e4a7bbcb20786597ae418bf11b2543e09ce3f9b0e7.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/sources/b9fe776f6f3496626348f1a4df309fc352d422c7a00878005d1b9c213b2d8828.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/exams-v/8bb5701d7c67cf214b73ca4d27b32ebae0b7c8cb0ce0854afe292fd0338a8911/sources/d902ab7cb7ebae5fe7f3071714a1864fafbc116eabe86d600f7bca8e551eb5f4.parquet"
+  ],
+  "freed_source_allocated_bytes": 6442885120,
+  "integrity": "Complete native Parquet SHA-256 and every canonical image SHA-256 retained. Preview originals pinned locally. Retrieved originals equal their measured native SHA-256.",
+  "transfer_measurement": "One-byte source probes plus actual range payloads; validated ETag-bound cache hits transfer zero bytes. Verification can reuse those cached ranges."
+}

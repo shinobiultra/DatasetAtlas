@@ -12,7 +12,7 @@ Filter AST: leaf {field_id,op,value} or {and:[...]}/{or:[...]}/{not:...}; bounde
 
 Do not edit shared models without coordinating with lead. Use optional imports for heavy dependencies and honest unavailable statuses. Synthetic data only in tests. Agents own their assigned files and must preserve others' changes.
 
-On-demand preparation: `POST /datasets/{id}/preparation/plan` takes explicit `max_download_bytes` and `max_output_bytes`; `POST /preparation/{plan_id}/start` executes that saved plan. `GET /preparation?dataset_id=...`, `GET /preparation/{plan_id}`, and `POST /preparation/{plan_id}/cancel` expose durable status and cancellation. These workbench-only operations are not exposed as model tools. Prepared versions under `work/prepared` override active local registry coverage while preserving earlier snapshots. `GET /media/{token}?representation=safe-view` returns a display derivative; original record references are unchanged.
+On-demand preparation: `POST /datasets/{id}/preparation/plan` takes explicit `max_download_bytes` and `max_output_bytes`; `POST /preparation/{plan_id}/start` executes that saved plan. `GET /preparation?dataset_id=...`, `GET /preparation/{plan_id}`, and `POST /preparation/{plan_id}/cancel` expose durable status and cancellation. These workbench-only operations are not exposed as model tools. Prepared versions under `work/prepared` override active local registry coverage while preserving earlier snapshots. `GET /media/{token}?representation=safe-view` returns a deliberately blurred display derivative; `?representation=display` returns a faithful, bounded PNG rendering of an image a browser cannot decode (TIFF; header `X-Atlas-Media-Representation: display`; 16-bit samples scaled linearly to 8 bits, nothing blurred or cropped). Assets the adapter flags `browser_render_required` use it, and the original bytes stay the asset in records, selections and model inputs.
 
 Selective Parquet preparation is additive: preparation plans accept optional `source_mode:
 "selective"` (default `"download"`). The plan still covers every native Parquet shard in
@@ -196,8 +196,11 @@ its preview packs remain local and source receipts contain only aggregate counts
 paths and hashes.
 
 Preparation admits at most two dataset writers, with an exclusive lease per dataset.
-Ordinary source download/verification/linking is serialized to prevent another worker
-from evicting an object before it is retained. Remote indexing overlaps at most four
+Each HTTP preparation uses its own admitted, bounded staging cache. Source
+download/verification/linking is serialized within that cache so an object cannot
+be evicted before retention; the two writers can transfer independently. A completed
+worker removes its staging cache after source verification and immutable linking.
+Remote indexing overlaps at most four
 shards while preserving source order and global asset references. Each producer buffers
 at most 32 batches and 32 MB of encoded records; these are not Python RSS limits.
 ETag-bound readers reuse validated HTTPS connections and reconnect a stale socket once
@@ -267,6 +270,25 @@ parts under one transfer limit after Atlas-owned archive copies are retired.
 Preview image and audio originals are pinned before such retirement; full record
 metadata and checksum-verified prompt tables remain local.
 
+Native plain TAR sources use byte offsets and per-member SHA-256 hashes; compression
+is detected from the bytes rather than a filename suffix. They need no gzip checkpoints.
+Retiring a repack checks every native member, and retiring an original installs only
+the corresponding source routes without replacing routes for other archives.
+
+The Stanford SVHN exception accepts only the two official cropped train/test HTTP
+URLs, exact file lengths and SHA-256 hashes. It rejects redirects and nonpublic IPs,
+does not resume partial HTTP responses and permits no arbitrary HTTP recipes.
+
+Structured native Parquet annotations preserve ordered list fields and frame identities.
+Recipes can declare exact missing media references from a pinned source inventory;
+every declared absence must be absent and every observed absence must be declared.
+Missing records retain native paths with null media URIs rather than replacement images.
+
+Storage cleanup defaults to a plan. Execution refuses active preparations in its
+workspace, evicts only unpinned bounded-cache objects, and deduplicates immutable bytes
+using full SHA-256 and stable file identity. Canonical JSON and SQLite remain mutable
+and are excluded from derivative linking. Corpus inputs and model weights are retained.
+
 `atlas storage pin-preview --dataset ID --max-input-bytes N --max-output-bytes N`
 checks every preview image identity against the complete snapshot and retains
 its exact original bytes in the protected compact-media store. This is useful
@@ -293,3 +315,12 @@ Selective workers honor the cache root and byte limit admitted by their plan.
 Registered, checksum-verified originals on the destination filesystem can be
 reserved for hard-link reuse. Such a plan fails if the original disappears or
 linking fails; it cannot fall back to an unreserved download or copy.
+
+Sampled previews retain original media in the immutable version's `pack/media`
+directory. The API resolves this pack and verifies its recorded whole-file
+checksum before considering a remote source reference. Default data roots include
+`work/prepared`; explicit data-root settings remain authoritative. Extensionless
+content-addressed image files use their decoded format for the HTTP media type.
+A missing or changed retained file is an error, not an automatic remote download.
+
+Model context requests may include `snapshot_ids`; the workbench resolves records and rights from those inspected versions and refuses unavailable bindings. Approved context policy records exact record versions, maximum completion tokens and optional `reasoning_effort`; configuration changes invalidate the approval digest.

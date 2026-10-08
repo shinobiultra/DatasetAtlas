@@ -1,0 +1,34 @@
+{
+  "checked_at_utc": "2026-10-06T07:31:05.836661+00:00",
+  "dataset": "saegis-clean-and-adversarial-splits",
+  "snapshot_id": "saegis-clean-and-adversarial-splits-b248271dc538be4b1bef0744",
+  "records": 100,
+  "conditions": {
+    "original": 58,
+    "attacked": 42
+  },
+  "embedding_run": "8deb70ef740348eb9955272d2d235b12",
+  "outlier_run": "82f7137a382b461fa077d4fa87090e94",
+  "knn_outlier_score_auc_attacked_vs_clean": 0.278,
+  "mean_outlier_score_by_group": {
+    "FOA-Attack": 0.3137,
+    "M-Attack": 0.3138,
+    "SSA-CWA": 0.2316,
+    "clean": 0.3267
+  },
+  "n_by_group": {
+    "FOA-Attack": 12,
+    "M-Attack": 13,
+    "SSA-CWA": 17,
+    "clean": 58
+  },
+  "kmeans_cluster_by_condition": {
+    "cluster 0 / attacked": 3,
+    "cluster 0 / original": 54,
+    "cluster 1 / attacked": 21,
+    "cluster 1 / original": 4,
+    "cluster 2 / attacked": 18
+  },
+  "scope": "Exploratory description of 100 preview records (a hash-ranked sample, not a prevalence estimate) in one named embedding space (SigLIP2 image recipe) and one reference set. It shows how the tools expose structure; it is not an attack-detection result, a model accuracy claim, or evidence about unseen attacks.",
+  "limits": "Records are single images; the preview mixes sources, splits and attacks; the outlier score is relative to this 100-image reference set only."
+}

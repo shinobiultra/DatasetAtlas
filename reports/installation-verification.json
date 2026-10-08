@@ -1,129 +1,68 @@
 {
-  "schema_version": "1.0",
-  "verified_at_utc": "2026-09-24T07:40:37.560523+00:00",
-  "installation": {
-    "installed_module": "/home/bitwise/Documents/vibe/DatasetAtlas/work/verify-install/selective-base-venv/lib/python3.12/site-packages/dataset_atlas/__init__.py",
-    "optional_model_packages_present": {
-      "torch": false,
-      "transformers": false,
-      "nudenet": false,
-      "sklearn": false,
-      "umap": false,
-      "lancedb": false
-    },
-    "environment": "Isolated Python 3.12 base-only environment created this session; current wheel reinstalled, HTTP server outside checkout",
-    "http_smoke": {
-      "endpoints": {
-        "root": {
-          "status": 200,
-          "bytes": 450,
-          "content_type": "text/html; charset=utf-8"
-        },
-        "script": {
-          "status": 200,
-          "bytes": 409777,
-          "content_type": "text/javascript; charset=utf-8"
-        },
-        "catalogue": {
-          "status": 200,
-          "bytes": 413678,
-          "content_type": "application/json"
-        },
-        "clevr": {
-          "status": 200,
-          "bytes": 903876,
-          "content_type": "application/json"
-        },
-        "clevr_image": {
-          "status": 200,
-          "bytes": 183144,
-          "content_type": "image/png"
-        },
-        "eurosat": {
-          "status": 200,
-          "bytes": 89635,
-          "content_type": "application/json"
-        },
-        "eurosat_image": {
-          "status": 200,
-          "bytes": 2737,
-          "content_type": "image/jpeg"
-        },
-        "pairs": {
-          "status": 200,
-          "bytes": 95544,
-          "content_type": "application/json"
-        },
-        "pairs_image": {
-          "status": 200,
-          "bytes": 99783,
-          "content_type": "image/png"
-        },
-        "capabilities": {
-          "status": 200,
-          "bytes": 273,
-          "content_type": "application/json"
-        },
-        "datasets": {
-          "status": 200,
-          "bytes": 2,
-          "content_type": "application/json"
-        }
-      },
-      "catalogue_count": 333,
-      "published_preview_counts": {
-        "clevr": 100,
-        "eurosat": 100,
-        "pairs": 100
-      },
-      "clean_local_datasets": 0
-    }
+  "verified_at_utc": "2026-10-07T08:11:02.460827+00:00",
+  "status": "passed",
+  "wheel": "dataset_atlas-0.2.0-py3-none-any.whl",
+  "wheel_sha256": "b3b00fc4ebb5c0d04fdeddcafdd419976f39a41063a3893e315c4f59a96d9441",
+  "release_archives": {
+    "dataset_atlas-0.2.0-py3-none-any.whl": 39408162,
+    "dataset_atlas-0.2.0.tar.gz": 39353210
   },
   "archive_inspection": {
-    "sdist": {
-      "approved_media_files": {
-        "clevr": 100,
-        "eurosat": 100,
-        "pairs": 100
-      },
-      "archive": "dataset_atlas-0.1.0.tar.gz",
-      "files": 596,
-      "site_bytes": 30498839
+    "passed": true,
+    "output": "{\"sdist\": {\"approved_media_files\": {\"clevr\": 100, \"eurosat\": 100, \"pairs\": 100}, \"archive\": \"dataset_atlas-0.2.0.tar.gz\", \"files\": 1365, \"site_bytes\": 31205261}, \"wheel\": {\"approved_media_files\": {\"clevr\": 100, \"eurosat\": 100, \"pairs\": 100}, \"archive\": \"dataset_atlas-0.2.0-py3-none-any.whl\", \"files\": 1110, \"site_bytes\": 31205261}}\n"
+  },
+  "scope": "Fresh base-only virtual environment outside the checkout; real HTTP requests to the installed server; no dataset fetched, no model run.",
+  "python": "3.12.14",
+  "installed_packages": 24,
+  "optional_model_packages_present": [],
+  "fresh_catalogue_entries": 333,
+  "approved_static_previews": [
+    "clevr",
+    "eurosat",
+    "pairs"
+  ],
+  "http_routes": {
+    "/": {
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "has_script": true
     },
-    "wheel": {
-      "approved_media_files": {
-        "clevr": 100,
-        "eurosat": 100,
-        "pairs": 100
-      },
-      "archive": "dataset_atlas-0.1.0-py3-none-any.whl",
-      "files": 430,
-      "site_bytes": 30498839
+    "/api/v1/capabilities": {
+      "status": 200,
+      "mode": "workbench",
+      "operations": 11
+    },
+    "/data/catalogue.json": {
+      "status": 200,
+      "entries": 333,
+      "any_adapter_config": false
+    },
+    "/data/clevr.json": {
+      "status": 200,
+      "records": 100
+    },
+    "/data/media/clevr/5daf56d223c01e2481d6f12ef54686275f71fe67704f639734e27d2c5d6970c9.png": {
+      "status": 200,
+      "content_type": "image/png",
+      "bytes": 183144
+    },
+    "/data/eurosat.json": {
+      "status": 200,
+      "records": 100
+    },
+    "/data/media/eurosat/f733d6f5d13be0bfe05161cc4df3416e31880c4371cbde9ca85e5409ff4fa78d.jpg": {
+      "status": 200,
+      "content_type": "image/jpeg",
+      "bytes": 2737
+    },
+    "/data/pairs.json": {
+      "status": 200,
+      "records": 100
+    },
+    "/data/media/pairs/0948b1fe2a3bfb2e68214cc149f45eec36e96ea25cbb3468e2deca9a88f56d4d.png": {
+      "status": 200,
+      "content_type": "image/png",
+      "bytes": 99783
     }
-  },
-  "release_archives": {
-    "dataset_atlas-0.1.0.tar.gz": {
-      "bytes": 29726705,
-      "sha256": "3e8cf4c1b5b2e302cb704c3b1ccffa50584d84cfa70ac1b6f8a9d6e47cd14f82"
-    },
-    "dataset_atlas-0.1.0-py3-none-any.whl": {
-      "bytes": 29407229,
-      "sha256": "597a535a57112de7beeb610d90659b719d67c67a27bdfa0687ab957f5839d3c2"
-    },
-    ".gitignore": {
-      "bytes": 1,
-      "sha256": "684888c0ebb17f374298b65ee2807526c066094c701bcc7ebbe1c1095f494fc1"
-    }
-  },
-  "validation": {
-    "full_python_suite": "410 passed, 1 skipped (optional retired local VHD11K archive)",
-    "frontend_tests": "22 passed",
-    "browser_suite": "38 passed in one opt-in browser run including real analysis, local image send, native mask download and 304px layout checks",
-    "generated_contract": "byte-identical",
-    "no_remote_deployment": true
-  },
-  "limitations": [
-    "Selected installed HTTP routes verified; complete workbench and model checks are recorded separately.",
-    "Optional model dependencies are intentionally absent from this base environment."
-  ]
+  }
 }

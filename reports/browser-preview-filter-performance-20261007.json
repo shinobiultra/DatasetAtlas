@@ -1,0 +1,32 @@
+{
+  "verified_at_utc": "2026-10-07T09:57:21.672Z",
+  "fixture": "SYNTHETIC ENGINEERING TEST ONLY",
+  "status": "passed",
+  "engine": "Shipping queryPack module bundled without modification and executed in Chromium",
+  "population": 10000,
+  "target_ms": 200,
+  "scope": "In-memory static filtering and query pagination; excludes pack download, DOM rendering and GPU paint",
+  "cache_conditions": "First query after pack construction, followed by ten queries over the same loaded pack",
+  "cold_ms": 5.199999999254942,
+  "warm_ms": [
+    2.699999999254942,
+    1.9000000022351742,
+    1.300000000745058,
+    1.2999999970197678,
+    1.2000000029802322,
+    1.2999999970197678,
+    1.300000000745058,
+    1.199999999254942,
+    1.300000000745058,
+    1.300000000745058
+  ],
+  "matched_count": 2500,
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/153.0.8010.12 Safari/537.36",
+  "browser_version": "153.0.8010.12",
+  "host": {
+    "cpu": "Intel(R) Core(TM) Ultra 9 285HX",
+    "logical_cpus": 24,
+    "memory_gib": 94,
+    "platform": "linux"
+  }
+}

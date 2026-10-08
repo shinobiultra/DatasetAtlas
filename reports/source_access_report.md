@@ -1,3 +1,15 @@
+# Current source-access closeout — 2026-10-07
+
+The current workspace has 217 real previews and 215 complete indices for explicitly declared native populations; 116 catalogue entries remain without previews. Earlier dated sections below are historical and retain their original observations. Current preparation and scope evidence is in [final status](final-status.json), [remaining coverage](remaining-native-coverage-audit-20261007.json), [reproducibility](preview-reproducibility.md), and [authorization links](../docs/dataset-authorization.md).
+
+Open Images validation, FFHQ and author-linked EmoSet-118K are now integrated and verified. MIT-States and UCF101 use pinned public mirrors; official publisher equality remains unverified. Spoken Wikipedia has three indexed native language archives and verified whole-article audio previews. Native source availability and preparation remain separate from exact historical paper membership and redistribution rights.
+
+FACTOID's author gzip was acquired and converted by a nonexecuting decoder. Complete DataFrame preservation remains unverified, so no native index is activated; missing Reddit text stays missing. The reviewed experiment and exact probe-body retirement receipts remain local. MultiTrust's account access works, but per-task native adapters remain implementation work. PATA's complete 4,934-row label/URL/caption metadata index is implemented and verified; its third-party images remain unarchived and unverified. Broden's implemented native adapter cannot acquire the official archive from this network's bounded probes. RAISE-1K needs the publisher request form and native RAW/TIFF/CSV integration. These are distinct source, access and implementation limitations.
+
+The linked ImageNet and Flickr30K repositories are prepared locally. An accepted HF account does not grant FACET, LDC/TIMIT, PhysioNet or independent publisher rights. No authorization form or agreement was submitted on your behalf. Native data stayed local; only approved packs enter the static distribution.
+
+---
+
 # Source access and preview evidence
 
 Checked 2026-09-22. This report covers the verified sources and page-audited candidates currently in the registry. The corpus handoff has 332 conservative canonical identity proposals backed by 602 page/figure-located assertions; all 64 paper mention inventories are agent-complete. Three proposals were confirmed to be methods or a line-wrap artifact and are excluded under `registry/candidate_dispositions.yaml`; six duplicate aliases were merged into canonical identities. Additional original-source release variants have their own registry rows, whose current count is in `reports/dataset_coverage.csv`. Identity resolution and original-source rights checks remain incomplete for most groups, so an inventoried mention is not a verified dataset release. Cited-study tables and bibliography-only mentions remain candidate metadata, never direct-use claims.
@@ -26,3 +38,30 @@ Checked 2026-09-22. This report covers the verified sources and page-audited can
 | SorryBench | [Author source instructions](https://github.com/SORRY-Bench/sorry-bench/blob/main/README.md); [gated release](https://huggingface.co/datasets/sorry-bench/sorry-bench-202503) | Metadata only; no source records acquired. The author requires approval before download. [Access receipt](sorrybench-access.json). | Rights not reviewed; no access request or form submission performed. | **External access gate**. No preview or full-data adapter is claimed. |
 
 Other registry entries have source-audit receipts with separate identity, source, access, rights, adapter, preview, and publication states. Some exact release families are resolved, while others remain paper-linked **identity candidates**. A verified source URL without an adapter is an implementation gap; only an observed access gate is marked external. `work/corpus/curated_dataset_evidence.jsonl` holds page-level receipts. Raw extracted name groups are noisy and are not silently promoted into catalogue identities.
+
+## Addendum, 2026-10-06 (resumed pass)
+
+Prepared from author or official releases, each pinned by checksum, Git blob, ETag or Zenodo MD5, and each reproduced from an empty workspace with an identical snapshot ID:
+
+| Dataset | Source and pin | Population and limits |
+| --- | --- | --- |
+| RS-VQA (RSVQA-LR) | [Zenodo 6344334 v1.0](https://zenodo.org/records/6344334), CC BY 4.0; all files match the record's MD5s | 77,232 questions over 772 Sentinel-2 images; the survey table names no variant, so RSVQA-HR/xBEN are not claimed. Images are original TIFFs |
+| Ring-A-Bell | [Chia15/RingABell-Nudity](https://huggingface.co/datasets/Chia15/RingABell-Nudity) at `ce2df13b` (named by the authors' README) | 285 nudity InvPrompts; auto-gated, so each researcher accepts the terms on their own account; the paper's concept and setting are not stated |
+| SAEgis | [author repository](https://github.com/conan1024hao/SAEgis) at `6365cbfc`; all 4,800 committed PNGs pinned by Git blob SHA-1 (each on-demand read is checked; the 2,400 dev/test originals and attacked files were all fetched and matched) | 3 sources × (800/100/100 clean) plus 3 attacks × (100 dev + 100 test); all 1,800 attacked images paired with their same-named originals by pixel similarity (23.9–31.5 dB). No licence file; paper names the adversarial splits "training and testing" where the repository says dev and test |
+| COCO-GB | [author repository](https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System) at `8eab34db` | v1 123,287 and v2 120,955 image records kept as separate variants; gender is the authors' native integer derived from caption words; images from ETag-pinned COCO 2014 archives |
+| IllusionBench | [MingZhangSJTU/IllusionBench](https://huggingface.co/datasets/MingZhangSJTU/IllusionBench) at `8ee046d8` (README matches arXiv 2501.00848) | 1,041 annotated entries, 5,577 questions; inconsistent with the paper (1,051 images, 5,548 questions) and its own archive: 44 annotated entries lack an image, 11 archived images lack an annotation |
+| Language identification | [papluca/language-identification](https://huggingface.co/datasets/papluca/language-identification) at `aa56583b` (named by the paper's footnote 7) | 90,000 texts in 20 languages; model-training lineage only |
+| iNaturalist 2021 val | official 8.9 GB archive, native taxonomy adapter | 100,000 images; not re-fetched from an empty workspace (8.9 GB) |
+
+Researched without a preview, with the reason recorded on each entry:
+
+- **VIA-Bench**: no release located (the paper says it will be released). The two Hugging Face repos named VIABench are a different video benchmark (arXiv 2607.14660), a name collision recorded so nobody attaches them.
+- **VLAGenderBias**: the authors' repository ships scripts that rebuild it from FairFace, MIAP, PHASE and PATA, not images; linked to its members.
+- **PATA**: captions and a list of 4,934 third-party image URLs; the images are not archived.
+- **NIPS17**: `dev_dataset.csv` lists image URLs reported expired; Kaggle hosts the images behind a login.
+- **E-VQA / E-IC (MMEdit)**: Google Drive and Baidu hosting; the Drive image archive returned an empty body.
+- **MultiTrust**: auto-gated HF suite of 10,549 heterogeneous files; needs per-task adapters (an implementation gap).
+- **Broden**: `netdissect.csail.mit.edu` resolves but refuses TCP connections on ports 80 and 443 from this network while `www.csail.mit.edu` answers.
+- **UCF101**: the official host's TLS chain does not validate here ("unable to get local issuer certificate"); Atlas does not disable certificate checks.
+- **MIT-States**: only a plain-HTTP endpoint exists, which Atlas's HTTPS-only fetch layer does not use.
+- **Places365 Standard validation,VOC2011,TID2013** now have pinned native recipes, adapters/converters, full declared-population indices, retained previews and current verification. Their paper-specific memberships remain unresolved. **Open Images** remains acquisition/adapter work; source reachability alone is not coverage.

@@ -88,7 +88,7 @@ _VERIFIED = set()
 
 
 def read_zip_member(index, member, *, max_bytes=50_000_000, transfer_bytes=55_000_000,
-                    cache=None, reader_factory=None):
+                    cache=None, reader_factory=None, cancel=None, on_transfer=None):
     from dataset_atlas.adapters.core import _safe_relative
     from .ranges import HttpsRangeReader
     from .indexed_tar import _file_identity
@@ -112,11 +112,25 @@ def read_zip_member(index, member, *, max_bytes=50_000_000, transfer_bytes=55_00
         raise ValueError('Original ZIP member exceeds byte budget')
     if not 0 <= offset <= offset + compressed_bytes <= remote['bytes']:
         raise ValueError('Original ZIP member has invalid bounds')
-    factory = reader_factory or HttpsRangeReader
-    with factory(remote['url'], size=remote['bytes'], etag=remote['etag'], allowed_hosts=remote['allowed_hosts'], byte_budget=transfer_bytes, cache=cache) as remote_file:
-        remote_file.seek(offset)
-        payload = remote_file.read(compressed_bytes)
-        transferred = remote_file.bytes_fetched
+    options={'size':remote['bytes'],'allowed_hosts':remote['allowed_hosts'],'byte_budget':transfer_bytes,'cache':cache}
+    if cancel is not None:options['cancel']=cancel
+    if 'block_sha256' in remote:
+        from .hash_ranges import HashPinnedRangeReader
+        if remote['source_sha256']!=receipt['source_sha256']:raise ValueError('Block manifest differs from original ZIP checksum')
+        factory=reader_factory or HashPinnedRangeReader
+        options.update(source_sha256=remote['source_sha256'],block_bytes=remote['block_bytes'],block_sha256=remote['block_sha256'])
+        fingerprint={'fingerprint_type':'sha256-blocks'}
+    else:
+        factory=reader_factory or HttpsRangeReader
+        options['etag']=remote['etag'];fingerprint={'fingerprint_type':'etag','etag':remote['etag']}
+    remote_file=factory(remote['url'],**options)
+    try:
+        with remote_file:
+            remote_file.seek(offset)
+            payload = remote_file.read(compressed_bytes)
+            transferred = remote_file.bytes_fetched
+    finally:
+        if on_transfer:on_transfer(remote_file.bytes_fetched)
     if len(payload) != compressed_bytes: raise ValueError('Truncated original ZIP range')
     if method == zipfile.ZIP_STORED:
         data = payload
@@ -130,4 +144,4 @@ def read_zip_member(index, member, *, max_bytes=50_000_000, transfer_bytes=55_00
     if len(data) != size or hashlib.sha256(data).hexdigest() != sha:
         raise ValueError('Retrieved original ZIP member checksum changed')
     return data, {'sha256': sha, 'bytes': size, 'transferred_bytes': transferred,
-                  'source_sha256': receipt['source_sha256'], 'fingerprint_type': 'etag', 'etag': remote['etag']}
+                  'source_sha256': receipt['source_sha256'], **fingerprint}

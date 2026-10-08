@@ -115,15 +115,18 @@ def test_snapshot_identity_checksum_root_and_count_enforced(tmp_path):
 
 
 def test_interrupt_hook_reaches_active_connection(tmp_path):
+    from threading import Event
     snapshot = make_snapshot(tmp_path, count=1)
     class Active:
         called = False
         def interrupt(self):
             self.called = True
     active = Active()
-    snapshot._active.add(active)
+    cancelled=Event()
+    snapshot._active[active]=cancelled
     snapshot.interrupt()
     assert active.called
+    assert cancelled.is_set()
 
 def test_query_time_budget_cancels_and_reader_remains_usable(tmp_path):
     snapshot=make_snapshot(tmp_path,count=10_050)
@@ -273,6 +276,46 @@ def test_large_native_record_opt_in_and_byte_bounded_pagination(tmp_path):
     assert all(r.text==payload and r.source['native']==payload for r in first.records+last.records)
     with pytest.raises(ValueError,match='1..16 MB'):
         build_parquet_snapshot([],[],tmp_path/'invalid',root=tmp_path,dataset_id='toy',release_id='r1',snapshot_id='s1',expected_count=0,max_record_bytes=16_000_001)
+
+
+def test_wide_native_pages_sort_keys_within_query_memory_budget(tmp_path):
+    # Native envelopes must not be retained in the sort's top-k working set.
+    payload='x'*500_000
+    records=[r.model_copy(update={'source':{**r.source,'native':payload}}) for r in rows(256)]
+    path=tmp_path/'wide'
+    build_parquet_snapshot(records,FIELDS,path,root=tmp_path,dataset_id='toy',release_id='r1',snapshot_id='s1',expected_count=256,population_scope='complete')
+    snapshot=ParquetSnapshot(tmp_path,path,memory_mb=64,threads=1)
+    query=Query(snapshot_id='s1',population_scope='complete',sort=[{'field_id':'source.score','direction':'desc'}],limit=60)
+    first=snapshot.query(query)
+    assert first.matched_count==256 and first.returned_count==60 and first.cursor
+    assert [r.source['score'] for r in first.records]==list(range(255,195,-1))
+    assert all(r.source['native']==payload for r in first.records)
+    second=snapshot.query(query.model_copy(update={'cursor':first.cursor}))
+    assert [r.source['score'] for r in second.records]==list(range(195,135,-1))
+    with pytest.raises(ValueError,match='memory budget'):
+        ParquetSnapshot(tmp_path,path,memory_mb=64,threads=4).query(query)
+
+
+def test_interrupt_between_key_selection_and_payload_fetch_is_not_lost(tmp_path,monkeypatch):
+    from dataset_atlas.queries import parquet
+    snapshot=make_snapshot(tmp_path)
+    original=parquet.duckdb.connect
+    fired=False
+    class Hook:
+        def __init__(self,connection):self.connection=connection;self.sql=''
+        def __getattr__(self,name):return getattr(self.connection,name)
+        def execute(self,sql,*args,**kwargs):
+            self.sql=sql;self.connection.execute(sql,*args,**kwargs);return self
+        def fetchall(self):
+            nonlocal fired
+            result=self.connection.fetchall()
+            if self.sql.startswith('SELECT source."id" FROM ') and not fired:
+                fired=True;snapshot.interrupt()
+            return result
+    monkeypatch.setattr(parquet.duckdb,'connect',lambda *args,**kwargs:Hook(original(*args,**kwargs)))
+    with pytest.raises(ValueError,match='Query cancelled'):
+        snapshot.query(Query(snapshot_id='s1',population_scope='complete',limit=30))
+    assert fired
 
 
 def test_exceeding_the_prepared_data_limit_says_how_far_it_got_and_what_to_change(tmp_path):

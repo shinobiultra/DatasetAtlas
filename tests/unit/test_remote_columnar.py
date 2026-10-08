@@ -121,3 +121,37 @@ def test_closing_parallel_iterator_releases_producers(tmp_path,monkeypatch):
     assert threads
     stream.close()
     assert not any(thread.is_alive() for thread in threads)
+
+
+def test_binary_lists_preserve_order_nulls_and_original_bytes(tmp_path,monkeypatch):
+    adapter,image,_,path=fixture(tmp_path,monkeypatch)
+    pq.write_table(pa.table({'question':['paired','absent','single'],
+                            'image':[[image,None,image],None,[image]]}),path,row_group_size=3)
+    adapter.files[0]['bytes']=path.stat().st_size
+    adapter.files[0]['sha256']=hashlib.sha256(path.read_bytes()).hexdigest()
+    adapter.config['media_columns']=['image']
+    source=adapter.prepare(adapter.plan(3,10_000_000))
+    records=adapter.iter_records(source).records
+    assert len(records[0].assets)==2 and records[0].source['image'][1] is None
+    assert not records[1].assets and len(records[2].assets)==1
+    assert records[0].assets[1].metadata['source_slot']==2
+    assert adapter.resolve_asset(source,records[0].assets[1].uri).data==image
+    assert adapter.media_bytes_fetched>0
+    # The group is larger than the decoded-batch cap, but its small batches fit.
+    adapter.config['media_decode_bytes']=10
+    from dataset_atlas.adapters.remote_columnar import MediaLimitError
+    with pytest.raises(MediaLimitError,match='batch'):
+        adapter.resolve_asset(source,records[0].assets[0].uri)
+
+
+def test_media_network_bytes_share_preparation_transfer_limit(tmp_path,monkeypatch):
+    adapter,_,calls,_=fixture(tmp_path,monkeypatch)
+    source=adapter.prepare(adapter.plan(1,1_000_000))
+    record=adapter.iter_records(source).records[0]
+    adapter.resolve_asset(source,record.assets[0].uri)
+    assert adapter.bytes_fetched+adapter.media_bytes_fetched==sum(count for _,count in calls)
+    adapter.config['aggregate_transfer_bytes']=adapter.bytes_fetched+adapter.media_bytes_fetched
+    before=len(calls)
+    with pytest.raises(ValueError,match='budget exhausted'):
+        adapter.resolve_asset(source,record.assets[0].uri)
+    assert len(calls)==before

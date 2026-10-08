@@ -1,0 +1,73 @@
+# papluca/language-identification (pinned Hugging Face revision): three CSVs (train, valid, test) read as they are published, no conversion. The corpus
+# paper's footnote 7 names this exact dataset as the one its language-detection model was fine-tuned on; that is model-training lineage, not an evaluation set.
+# The dataset has no upstream row IDs, so rows are identified by split and position within the pinned files (the snapshot ID derived from their checksums fixes the order).
+release: hf-aa56583bf2bc52b0565770607d6fc3faebecf9e2
+adapter: structured_collection
+expected_count: 90000
+scope: 'All 90,000 rows of the Hugging Face papluca/language-identification dataset at the pinned revision: 70,000 train, 10,000 validation and
+  10,000 test texts, 3,500/500/500 per language, 20 languages, each with the author''s language label. The card gives no licence and lists extended
+  amazon_reviews_multi, xnli and stsb_multi_mt sources. The corpus paper only cites this dataset as the one its language-detection model was fine-tuned
+  on (footnote 7); it did not evaluate on it.'
+source_url: https://huggingface.co/datasets/papluca/language-identification/tree/aa56583bf2bc52b0565770607d6fc3faebecf9e2
+files:
+- source_name: train.csv
+  url: https://huggingface.co/datasets/papluca/language-identification/resolve/aa56583bf2bc52b0565770607d6fc3faebecf9e2/train.csv
+  bytes: 11951457
+  sha256: f180d78a1f0e758fd33bb1bae37f62eebc538d78ece2affb3d05a967850ba474
+  format: csv
+  config_key: train_path
+- source_name: valid.csv
+  url: https://huggingface.co/datasets/papluca/language-identification/resolve/aa56583bf2bc52b0565770607d6fc3faebecf9e2/valid.csv
+  bytes: 1705420
+  sha256: e0de8be0ab02445906efdbdc30bfc30534a6a224a78c21cea4b35e3bb7f5645b
+  format: csv
+  config_key: validation_path
+- source_name: test.csv
+  url: https://huggingface.co/datasets/papluca/language-identification/resolve/aa56583bf2bc52b0565770607d6fc3faebecf9e2/test.csv
+  bytes: 1686134
+  sha256: cb7dfe272142815573b735b5d555d42d28d0d648187020f2d2eb3eebd772e759
+  format: csv
+  config_key: test_path
+allowed_hosts:
+- huggingface.co
+- cas-bridge.xethub.hf.co
+- us.aws.cdn.hf.co
+- cdn-lfs-us-1.huggingface.co
+adapter_config:
+  annotations:
+  - path_key: train_path
+    format: csv
+    split: train
+  - path_key: validation_path
+    format: csv
+    split: validation
+  - path_key: test_path
+    format: csv
+    split: test
+  mapping:
+    text: text
+  fields:
+    labels:
+      description: Language code (author label)
+      values:
+      - ar
+      - bg
+      - de
+      - el
+      - en
+      - es
+      - fr
+      - hi
+      - it
+      - ja
+      - nl
+      - pl
+      - pt
+      - ru
+      - sw
+      - th
+      - tr
+      - ur
+      - vi
+      - zh
+    text: Original text

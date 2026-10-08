@@ -1,0 +1,7 @@
+source_url: https://huggingface.co/datasets/google-research-datasets/conceptual_captions/tree/0bb028f274446e0b102c1253d087a98eeb4519a3
+source_patterns: [unlabeled/*.parquet]
+scope: Native unlabeled train and validation captions and image URLs in the pinned Google Research repository. The separate machine-labeled configuration is excluded; third-party images have not been acquired. No historical image-byte or paper-subset equality is claimed.
+adapter_config:
+  mapping:
+    text: caption
+  media_scope: partial

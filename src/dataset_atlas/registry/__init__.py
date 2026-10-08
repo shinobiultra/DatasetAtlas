@@ -164,9 +164,9 @@ class Registry:
         versions.append((self._resolved(baseline),self.root/'work/packs'/dataset_id/'pack.json',self.root/'work/snapshots'/dataset_id))
         self._versions[dataset_id]=(signature,versions)
         return list(versions)
-    def dataset_version(self, dataset_id, release_id):
+    def dataset_version(self, dataset_id, release_id, snapshot_id=None):
         for dataset,_,_ in self.versions(dataset_id):
-            if dataset.release==release_id:return dataset
+            if dataset.release==release_id and (snapshot_id is None or dataset.snapshot_id==snapshot_id):return dataset
         raise KeyError('Dataset release is not prepared')
     def _resolved(self, dataset):
         copy=dataset.model_copy(deep=True)

@@ -103,7 +103,7 @@ class SVHNAdapter(DatasetAdapter):
         try:
             from scipy.io import loadmat
         except ImportError as exc:
-            raise RuntimeError("SVHN MAT preparation needs scipy; install the projection optional dependencies or scipy") from exc
+            raise RuntimeError("SVHN MAT preparation needs scipy; install dataset-atlas[datasets]") from exc
         data = loadmat(path, variable_names=["X", "y"], verify_compressed_data_integrity=True)
         x, labels = data.get("X"), data.get("y")
         if x is None or labels is None or x.shape != (32, 32, 3, count) or str(x.dtype) != "uint8":

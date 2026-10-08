@@ -1,0 +1,21 @@
+{
+  "python": "3.12.14",
+  "optional_imports": {
+    "dataset_atlas": true,
+    "pyarrow": true,
+    "duckdb": true,
+    "onnxruntime": true,
+    "sentence_transformers": true,
+    "transformers": true,
+    "sklearn": true,
+    "umap": true,
+    "lancedb": true,
+    "sentencepiece": true,
+    "nudenet": true
+  },
+  "torch": "2.14.0+cu130",
+  "torch_cuda": "13.0",
+  "cuda_available": false,
+  "devices": 0,
+  "restored_locked_runtime": true
+}

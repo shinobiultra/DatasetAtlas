@@ -75,4 +75,11 @@ evidence:
   note: User confirmed gated access. Native annotation checksums verified with local
     credentials; live preview media checked. This does not approve redistribution
     or remove the repository gate.
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields
+    present in at least one record. Not inferred from the name or description.'
 source_url: https://huggingface.co/datasets/it4lia/PHANTOM/tree/df168bd0fe810cdce256caddf6c9596f55760afb
+modalities:
+- text

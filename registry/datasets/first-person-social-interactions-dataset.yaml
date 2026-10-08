@@ -11,8 +11,8 @@ adapter: structured
 adapter_config: {}
 coverage:
   identity: candidate
-  source: unverified
-  access: unverified
+  source: verified
+  access: public
   adapter: not_started
   preview: none
   complete_data: unimplemented
@@ -20,9 +20,15 @@ coverage:
   preview_count: 0
   unit: example
   blockers:
-  - Exact paper-specific source release or selected subset remains unverified; source
-    research alone does not resolve this candidate.
-  - Adapter and preview are not implemented.
+  - The author page (ai.stanford.edu/~alireza/Disney/) links 113 AVI videos and annotation
+    ZIPs hosted on webshare.ipat.gatech.edu over plain HTTP; the host did not answer
+    a HEAD request within 30 s over either http or https on 2026-10-06 (an upstream
+    availability problem to retry).
+  - 'The videos are AVI files, which browsers cannot play, and the host is HTTP-only,
+    which Atlas''s fetch layer does not use: even when the host returns, preparation
+    needs a transcoding or an HTTPS mirror (an implementation gap beyond the outage).'
+  - The citing paper's training selection (the Watanabe selection) is not identified,
+    and the page states no licence.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -79,4 +85,12 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: original_source_and_author_reformat_distinct
+- kind: source_audit_access
+  checked_on: '2026-10-06'
+  url: https://ai.stanford.edu/~alireza/Disney/
+  note: Page lists 113 links to AVI files named like Alin_Day1_001.avi (by subject
+    and day) plus annotation ZIPs, with a request to cite Fathi, Hodgins and Rehg
+    (CVPR 2012); no licence or request process. HEAD requests to the first video over
+    http and https returned no response within 30 s.
+  source_identity_status: author_page_identified_media_host_unresponsive
 source_url: https://ai.stanford.edu/~alireza/Disney/

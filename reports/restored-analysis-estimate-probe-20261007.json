@@ -1,0 +1,26 @@
+{
+  "findings": [
+    {
+      "processor_id": "detect.coco_v1",
+      "status": 200,
+      "known_guard_topics": [
+        "missing",
+        "memory",
+        "source",
+        "selection",
+        "disabled"
+      ]
+    },
+    {
+      "processor_id": "embed.siglip2",
+      "status": 200,
+      "known_guard_topics": [
+        "missing",
+        "memory",
+        "source",
+        "selection",
+        "disabled"
+      ]
+    }
+  ]
+}

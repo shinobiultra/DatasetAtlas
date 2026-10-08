@@ -32,8 +32,14 @@ export async function revealRecord(page: Page, recordId: string) {
   const scroller = page.locator('.work-scroll')
   for (let attempt = 0; attempt < 60; attempt += 1) {
     if (await card.count()) {
-      await card.first().scrollIntoViewIfNeeded()
-      return card.first()
+      try {
+        // Opening the inspector resizes the virtual grid. A card measured
+        // before that layout change may disappear before scrolling finishes.
+        await card.first().scrollIntoViewIfNeeded({ timeout: 1000 })
+        if (await card.count()) return card.first()
+      } catch {
+        // Continue the bounded scroll search after the grid settles.
+      }
     }
     await scroller.evaluate(element => { element.scrollTop += element.clientHeight * 0.8 })
     await page.waitForTimeout(60)

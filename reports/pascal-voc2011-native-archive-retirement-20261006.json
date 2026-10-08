@@ -1,0 +1,58 @@
+{
+  "dataset_id": "pascal-voc",
+  "source_sha256": "0a7f5f5d154f7290ec65ec3f78b72ef72c6d93ff6d79acd40dc222a9ee5248ba",
+  "linked_dataset_ids": [],
+  "status": "executed",
+  "retained_snapshots": 1,
+  "media_references_checked": 19407,
+  "unique_native_media_in_snapshots": 19407,
+  "preview_asset_memberships": 124,
+  "modalities": [
+    "image"
+  ],
+  "preview_bytes_upper_bound": 11151948,
+  "cold_original_probes": [
+    {
+      "sha256": "9988be74d00986f737ab3036a5b24028776e52a68f27fa796e18f8009494c875",
+      "bytes": 145493,
+      "transferred_bytes": 145493,
+      "source_sha256": "0a7f5f5d154f7290ec65ec3f78b72ef72c6d93ff6d79acd40dc222a9ee5248ba",
+      "fingerprint_type": "etag",
+      "etag": "\"68c2ea02-693e3e00\""
+    },
+    {
+      "sha256": "07d99568d62ddbac72030d3937ef986ac2aa7b88075bbf9e62e894db1ae0f7e5",
+      "bytes": 80196,
+      "transferred_bytes": 80196,
+      "source_sha256": "0a7f5f5d154f7290ec65ec3f78b72ef72c6d93ff6d79acd40dc222a9ee5248ba",
+      "fingerprint_type": "etag",
+      "etag": "\"68c2ea02-693e3e00\""
+    },
+    {
+      "sha256": "9e48ddf258e291d193f0411de2dcdc077ad59391b3fc10f9f3af61e8a7b1164b",
+      "bytes": 2169,
+      "transferred_bytes": 2169,
+      "source_sha256": "0a7f5f5d154f7290ec65ec3f78b72ef72c6d93ff6d79acd40dc222a9ee5248ba",
+      "fingerprint_type": "etag",
+      "etag": "\"68c2ea02-693e3e00\""
+    }
+  ],
+  "paths": [
+    "work/source-objects/0a7f5f5d154f7290ec65ec3f78b72ef72c6d93ff6d79acd40dc222a9ee5248ba",
+    "work/prepared/pascal-voc/cecb7ca799654e6e3714f178e1e76fc3c736b9870572531d164712eca5e2e37d/sources/0a7f5f5d154f7290ec65ec3f78b72ef72c6d93ff6d79acd40dc222a9ee5248ba.tar"
+  ],
+  "extracted_files": 0,
+  "source_bytes": 1765686784,
+  "extracted_bytes": 0,
+  "retention": "Original-quality previews and complete indices; other originals and optimized browsing copies on demand.",
+  "freed_unique_file_bytes": 1765686784,
+  "checked_at_utc": "2026-10-06T08:52:16.020987+00:00",
+  "retired_acquisition_cache_hardlinks": [
+    {
+      "path": "work/voc2011-native-audit-20261006/download-cache/objects/88c2042a77620ac9fe87cde4b146803c549c8f87314a26505dade39e084085d9",
+      "bytes": 1765686784,
+      "sha256": "0a7f5f5d154f7290ec65ec3f78b72ef72c6d93ff6d79acd40dc222a9ee5248ba"
+    }
+  ],
+  "full_native_annotation_parity_receipt": "reports/pascal-voc2011-native-annotation-parity-20261006.json"
+}

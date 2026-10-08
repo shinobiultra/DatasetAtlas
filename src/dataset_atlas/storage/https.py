@@ -41,6 +41,7 @@ class HttpsFetcher:
         self.timeout = timeout
         self.max_redirects = max_redirects
         self.max_bytes = max_bytes
+        self.bytes_fetched = 0
 
     @staticmethod
     def _resolve(host: str, port: int):
@@ -154,6 +155,7 @@ class HttpsFetcher:
                         block = response.read(min(1024 * 1024, limit - total + 1))
                         if not block:
                             break
+                        self.bytes_fetched += len(block)
                         total += len(block)
                         if total > limit:
                             raise ValueError("HTTPS response exceeds fetch budget")

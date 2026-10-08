@@ -66,26 +66,50 @@ class PreviewSampler:
                 'selection_note': 'One hash-ranked record per sampled primary asset. All linked assets remain. Not an example-prevalence estimate.' if self.group_by == 'primary_asset' else 'Hash-ranked examples. Reused images may occur more than once.'}
 
 
-def select_verified_remote_preview(candidates, resolve_asset, count, on_progress=None):
-    """Keep the first hash-ranked candidates whose original image slots open."""
+def select_verified_remote_preview(candidates, resolve_asset, count, on_progress=None, modalities=('image',), cancel=None):
+    """Keep the first candidates in input order whose original media slots open."""
     verified = []
     absent = 0
     checked_assets = 0
+    from dataset_atlas.adapters.remote_columnar import MediaLimitError
+    excluded_limits = {}
     for record in candidates:
+        if cancel:cancel()
         if len(verified) == count:
             break
         try:
             record_assets = 0
             for asset in record.assets:
-                if asset.modality != 'image' or not asset.uri:
+                if asset.modality not in modalities or not asset.uri:
                     continue
                 handle = resolve_asset(asset.uri)
-                with Image.open(BytesIO(handle.data)) as image:
-                    image.verify()
+                if asset.sha256 and asset.sha256!=handle.sha256:
+                    raise ValueError('Original preview differs from its measured native asset checksum')
+                if asset.modality=='image':
+                    with Image.open(BytesIO(handle.data)) as image:
+                        if image.width*image.height>50_000_000:raise MediaLimitError('Original image exceeds the 50-million-pixel preview decode limit')
+                        image.load()
+                elif asset.modality=='video':
+                    from dataset_atlas.storage.video import verify_mp4, verify_avi
+                    if handle.media_type == 'video/x-msvideo':verify_avi(handle.data,cancel=cancel)
+                    else:verify_mp4(handle.data)
+                elif asset.modality=='model3d':
+                    from dataset_atlas.storage.glb import verify_glb
+                    verify_glb(handle.data)
+                elif asset.modality=='audio':
+                    from dataset_atlas.storage.audio import verify_audio
+                    verify_audio(handle.data,cancel=cancel)
+                else:raise ValueError('Unsupported preview verification modality')
                 asset.sha256 = handle.sha256
                 record_assets += 1
+            if record_assets == 0:
+                raise FileNotFoundError('No original asset in the required preview modalities')
         except FileNotFoundError:
             absent += 1
+            continue
+        except MediaLimitError as error:
+            absent += 1
+            excluded_limits[str(error)] = excluded_limits.get(str(error), 0) + 1
             continue
         checked_assets += record_assets
         verified.append(record)
@@ -97,8 +121,9 @@ def select_verified_remote_preview(candidates, resolve_asset, count, on_progress
     return verified, {'candidate_pool': len(candidates),
         'candidates_checked': len(verified) + absent,
         'unavailable_candidate_records': absent,
+        'media_limit_exclusions': excluded_limits,
         'verified_preview_assets': checked_assets,
-        'selection': 'Lowest SHA-256-ranked distinct assets with every selected image opened from the pinned source'}
+        'selection': f'Input candidate order preserved; every selected original {"/".join(modalities)} opened from the pinned source. The pack sampling receipt defines the candidate design.'}
 
 
 class AssetFirstPreviewSampler:

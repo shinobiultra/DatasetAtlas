@@ -1,0 +1,8 @@
+{
+  "checked_at_utc": "2026-10-07T09:23:15.303801+00:00",
+  "status": "recorded_deviation",
+  "scope": "A lead tool read printed the pre-existing Visual-Counterfact filter audit into this assistant context. The audit included24excluded source class labels and row ordinals, plus selected ordinals. No images, native media, FACTOID user rows/posts, credentials or model weights were printed. This crossed the repository requirement to keep dataset contents out of external models.",
+  "source_report": "reports/visual-counterfact-filter-audit.json",
+  "corrective_action": "No additional native report bodies are read into model context. All further native verification exposes explicitly whitelisted aggregate counts/hashes/statuses only. Independent reviewer was not sent those contents.",
+  "claim_limit": "Cannot claim zero native dataset content exposure for this resumed lead pass."
+}

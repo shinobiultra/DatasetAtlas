@@ -1,0 +1,57 @@
+release: ucf101-recognition-mirror-04d4e5ca1dc93606cb58752b0c08331e598743a4
+adapter: ucf101
+expected_count: 13320
+source_url: https://huggingface.co/datasets/quchenyuan/UCF101-ZIP
+remote_metadata_bytes: 5000000
+preview_media_transfer_bytes: 150000000
+credential_profile: huggingface
+scope: All 13,320 unchanged original AVI members in the pinned public UCF101 ZIP mirror,
+  joined to every native class-index row and all three train/test recognition folds.
+  Exact ZIP membership, source revision, strong ETag and per-member CRC are retained.
+  Preview originals decode locally; a separate browser display derivative verifies
+  exact decoded-frame parity and copies supported native audio packets. Publisher
+  archive byte equivalence and citing-paper subset identity remain unverified. No
+  media redistribution approval.
+files:
+- source_name: UCF101TrainTestSplits-RecognitionTask.zip
+  url: https://huggingface.co/datasets/quchenyuan/UCF101-ZIP/resolve/04d4e5ca1dc93606cb58752b0c08331e598743a4/UCF101TrainTestSplits-RecognitionTask.zip
+  bytes: 113943
+  sha256: 5c0d1a53b8ed364a2ac830a73f405e51bece7d98ce1254fd19ed4a36b224bd27
+  config_key: recognition_path
+  format: zip
+allowed_hosts:
+- huggingface.co
+- us.aws.cdn.hf.co
+- cas-bridge.xethub.hf.co
+- cdn-lfs-us-1.huggingface.co
+adapter_config:
+  annotations: []
+  mapping:
+    media_modality: video
+  remote_archives:
+    videos:
+      allowed_hosts:
+      - huggingface.co
+      - us.aws.cdn.hf.co
+      - cas-bridge.xethub.hf.co
+      - cdn-lfs-us-1.huggingface.co
+      bytes: 6957373664
+      credential_profile: huggingface
+      etag: '"4b4786739acfc28b816418ca88e8adc41b4fb2bde80467f5e587a7e93c902803"'
+      repository_revision: 04d4e5ca1dc93606cb58752b0c08331e598743a4
+      url: https://huggingface.co/datasets/quchenyuan/UCF101-ZIP/resolve/04d4e5ca1dc93606cb58752b0c08331e598743a4/UCF-101.zip
+  video_prefix: UCF-101/
+  directory_members_sha256: 89095372911cbfddeb900da726c112961fb701d7ed412ef8039dbf3c18c0cab2
+  expected_classes: 101
+  expected_count: 13320
+  verify_remote_preview_media: true
+  remote_cache_bytes: 200000000
+  media_transfer_bytes: 40000000
+  media_scope: partial
+  preview_media_modalities:
+  - video
+  remote_cache_root: work/media-cache/ucf101
+resource_limits:
+  max_rss_bytes: 3000000000
+  max_cpu_seconds: 1800
+  max_wall_seconds: 3600

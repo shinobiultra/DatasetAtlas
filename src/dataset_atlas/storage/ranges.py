@@ -22,7 +22,7 @@ class HttpsRangeReader(io.RawIOBase):
     Strong ETags are consistency fingerprints, not cryptographic content hashes.
     The caller pins the length/ETag and separately records hashes of fetched media.
     """
-    def __init__(self, url, *, size, etag, allowed_hosts, byte_budget, cache=None, cancel=None):
+    def __init__(self, url, *, size, etag, allowed_hosts, byte_budget, cache=None, cancel=None, credential_profile=None):
         super().__init__()
         if type(size) is not int or size < 1 or type(byte_budget) is not int or byte_budget < 1:
             raise ValueError('Range source requires positive size and byte budget')
@@ -33,7 +33,7 @@ class HttpsRangeReader(io.RawIOBase):
         self._connection=None
         self._connection_origin=None
         self.position=0;self.bytes_fetched=0;self.cache=cache;self.cancel=cancel
-        self.fetcher=HttpsFetcher(allowed_hosts,timeout=30,max_bytes=byte_budget)
+        self.fetcher=HttpsFetcher(allowed_hosts,timeout=30,max_bytes=byte_budget,credential_profile=credential_profile)
 
     def readable(self):return True
     def seekable(self):return True
@@ -117,8 +117,11 @@ class HttpsRangeReader(io.RawIOBase):
             keep=False
             try:
                 try:
-                    connection.request('GET',target,headers={'Accept-Encoding':'identity','Range':f'bytes={start}-{end}',
-                                                           'If-Match':self.etag,'User-Agent':'DatasetAtlas/0.1'})
+                    from .auth import source_headers
+                    headers={'Accept-Encoding':'identity','Range':f'bytes={start}-{end}',
+                             'If-Match':self.etag,'User-Agent':'DatasetAtlas/0.1'}
+                    headers.update(source_headers(self.fetcher.credential_profile,host))
+                    connection.request('GET',target,headers=headers)
                     response=connection.getresponse()
                 except (http.client.RemoteDisconnected,BrokenPipeError,ConnectionResetError):
                     # Retry a stale keep-alive socket once, before consuming any
@@ -156,23 +159,39 @@ class HttpsRangeReader(io.RawIOBase):
         raise ValueError('Too many HTTPS range redirects')
 
 
-def range_fingerprint(url, *, expected_size, allowed_hosts):
-    """Resolve a public source's strong ETag without reading its body."""
-    fetcher=HttpsFetcher(allowed_hosts,timeout=30)
+def range_fingerprint(url, *, expected_size, allowed_hosts, credential_profile=None, probe_method='HEAD'):
+    """Pin a source with HEAD or an explicitly requested one-byte Range GET.
+
+    Some publishers redirect to URLs signed for GET and reject HEAD. A GET
+    probe must return exactly the declared one-byte range; a full download is
+    never consumed when the server ignores Range.
+    """
+    if probe_method not in {'HEAD','GET'}:raise ValueError('Invalid fingerprint probe method')
+    fetcher=HttpsFetcher(allowed_hosts,timeout=30,credential_profile=credential_profile)
     current=url
     for _ in range(fetcher.max_redirects+1):
         host,port,address,target=fetcher._destination(current)
         connection=_PinnedHTTPSConnection(host,address,port,fetcher.timeout)
         try:
-            connection.request('HEAD',target,headers={'Accept-Encoding':'identity'})
+            from .auth import source_headers
+            headers={'Accept-Encoding':'identity',**source_headers(credential_profile,host)}
+            if probe_method=='GET':headers['Range']='bytes=0-0'
+            connection.request(probe_method,target,headers=headers)
             response=connection.getresponse()
             if response.status in (301,302,303,307,308):
                 location=response.getheader('Location')
                 if not location:raise ValueError('Source redirect has no location')
                 current=urljoin(current,location)
                 continue
-            if response.status!=200:raise ValueError(f'Source fingerprint HTTP {response.status}')
-            if response.getheader('Content-Length')!=str(expected_size):raise ValueError('Remote source length changed')
+            if probe_method=='GET':
+                if response.status!=206:raise ValueError(f'Source fingerprint Range GET requires HTTP 206; received {response.status}')
+                if response.getheader('Content-Range')!=f'bytes 0-0/{expected_size}' or response.getheader('Content-Length')!='1':
+                    raise ValueError('Remote source probe bounds or length changed')
+                if response.getheader('Content-Encoding','identity')!='identity':raise ValueError('Encoded fingerprint range is unsupported')
+                if len(response.read(2))!=1:raise ValueError('Remote source probe length changed')
+            else:
+                if response.status!=200:raise ValueError(f'Source fingerprint HTTP {response.status}')
+                if response.getheader('Content-Length')!=str(expected_size):raise ValueError('Remote source length changed')
             etag=response.getheader('ETag')
             if not etag or not re.fullmatch(r'"[^"\r\n]+"',etag):raise ValueError('Remote source has no strong ETag')
             return etag

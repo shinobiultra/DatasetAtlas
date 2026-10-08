@@ -129,6 +129,19 @@ def run_conversion(spec: dict, inputs: dict[str, Path], output_dir: Path, check=
     """Run the named converter and refuse a result that differs from the recipe's pinned count or row digest."""
     from . import text, tables, images  # noqa: F401  (registers the converters)
     from . import media  # noqa: F401
+    from . import collections  # noqa: F401
+    from . import celeba  # noqa: F401
+    from . import pascal_voc  # noqa: F401
+    from . import tid2013  # noqa: F401
+    from . import remote_sensing  # noqa: F401
+    from . import adversarial_images  # noqa: F401
+    from . import captioning_bias  # noqa: F401
+    from . import visual_illusions  # noqa: F401
+    from . import open_images  # noqa: F401
+    from . import ffhq  # noqa: F401
+    from . import emoset  # noqa: F401
+    from . import pata  # noqa: F401
+    from . import factoid  # noqa: F401
     name = spec.get('name')
     if name not in CONVERTERS:
         raise ValueError(f'Unknown converter: {name!r}')

@@ -2,8 +2,8 @@ schema_version: '1.0'
 id: pata
 name: PATA
 aliases: []
-description: 'Protected Attribute Tag Association face-image fairness benchmark introduced with DeAR.
-  Source review: CVPR 2023; exact release/download hash unverified'
+description: 'Protected Attribute Tag Association face-image fairness benchmark introduced
+  with DeAR. Source review: CVPR 2023; exact release/download hash unverified'
 paper_ids:
 - paper-f03c5ad315e6d835
 - paper-32cea5e43d940514
@@ -12,23 +12,29 @@ adapter: structured
 adapter_config: {}
 coverage:
   identity: candidate
-  source: unverified
-  access: unverified
-  adapter: not_started
+  source: verified
+  access: public
+  adapter: implemented
   preview: none
-  complete_data: unimplemented
+  complete_data: indexed_metadata_partial_media
   publication: not_reviewed
   preview_count: 0
   unit: example
   blockers:
-  - Access to the exact data files has not been verified.
-  - The exact paper release, source variant, or derived collection remains unresolved.
-  - Adapter and preview are not implemented.
+  - All 4,934 native author label/URL rows and 24 caption groups have an exact metadata
+    index. Reproduce with atlas datasets prepare-metadata --dataset pata --execute;
+    no image preview is claimed.
+  - Third-party images are not archived or fetched. URL availability and image rights
+    remain unverified.
+  - The demographic labels are author annotations, not self-reports. Historical paper
+    membership and redistribution remain unreviewed.
+  total_count: 4934
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
-  note: People imagery and inferred/protected attribute annotations require scoped rights/privacy review
+  note: People imagery and inferred/protected attribute annotations require scoped
+    rights/privacy review
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-3233dc4779c477841642
@@ -36,8 +42,9 @@ evidence:
   source_file_hash: 47431d9340ff27b9234e2184711fbc3fc06ded7718fe53ca79b23a1cd1db777d
   page: 2
   role: source data
-  excerpt: 2021), MIAP (Schumann et al., 2021), Phase (Garcia et al., 2023), and PATA (Seth et al., 2023)
-    datasets as they contain annotations for gender information, and all except MIAP also ann
+  excerpt: 2021), MIAP (Schumann et al., 2021), Phase (Garcia et al., 2023), and PATA
+    (Seth et al., 2023) datasets as they contain annotations for gender information,
+    and all except MIAP also ann
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -46,28 +53,46 @@ evidence:
   source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
   page: 14
   role: non-overlap evaluation
-  excerpt: ns, we use a recent text-to-image editing Datasets PATA Pairs model Qwen-Image-Edit [83] to
-    leave only one per- Prompts Adj
+  excerpt: ns, we use a recent text-to-image editing Datasets PATA Pairs model Qwen-Image-Edit
+    [83] to leave only one per- Prompts Adj
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://arxiv.org/abs/2303.10431
-  note: Protected Attribute Tag Association face-image fairness benchmark introduced with DeAR CVPR 2023;
-    exact release/download hash unverified
+  note: Protected Attribute Tag Association face-image fairness benchmark introduced
+    with DeAR CVPR 2023; exact release/download hash unverified
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: identity_resolved_release_access_unresolved
 - kind: source_audit_access
   url: https://arxiv.org/abs/2303.10431
-  note: 'Author paper describes 4,934 images; original hosted artifact not located Probe: first_primary_url_http_head_200;
-    payload_not_downloaded'
+  note: 'Author paper describes 4,934 images; original hosted artifact not located
+    Probe: first_primary_url_http_head_200; payload_not_downloaded'
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: identity_resolved_release_access_unresolved
 - kind: source_audit_rights
   url: https://openaccess.thecvf.com/content/CVPR2023/supplemental/Seth_DeAR_Debiasing_Vision-Language_CVPR_2023_supplemental.pdf
-  note: People imagery and inferred/protected attribute annotations require scoped rights/privacy review
-    No source-content rights grant was verified; linked page is identity/access context only.
+  note: People imagery and inferred/protected attribute annotations require scoped
+    rights/privacy review No source-content rights grant was verified; linked page
+    is identity/access context only.
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: identity_resolved_release_access_unresolved
+- kind: source_audit_release
+  checked_on: '2026-10-06'
+  url: https://github.com/pata-fairness/pata_dataset/tree/c65a7f34e6e200d77b82a53d33b224389798ff6c
+  note: 'Repository at this commit holds README.md, pata_fairness.captions.json and
+    pata_fairness.files.lst (4,934 rows: label|image URL on third-party sites such
+    as stock-photo and news hosts). No image files and no download link. Girrbach
+    et al.''s setup/process_pata.py fetches each URL, converts to PNG and drops failures.'
+  source_identity_status: author_labels_and_urls_media_not_archived
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'From the source inspected on 2026-10-06: author repository inspected: scene
+    captions and a list of image URLs with labels. Not inferred from the dataset name.'
+modalities:
+- image
+- text
+source_url: https://github.com/pata-fairness/pata_dataset

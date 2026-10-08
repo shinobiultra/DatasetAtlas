@@ -1,0 +1,42 @@
+[
+  {
+    "dataset_id": "hades",
+    "status": "retired",
+    "report": "reports/hades-columnar-retirement-20261006.json"
+  },
+  {
+    "dataset_id": "simplevqa",
+    "status": "failed",
+    "error": "Unknown remote media column"
+  },
+  {
+    "dataset_id": "space-10",
+    "status": "retired",
+    "report": "reports/space-10-columnar-retirement-20261006.json"
+  },
+  {
+    "dataset_id": "algopuzzlevqa",
+    "status": "failed",
+    "error": "Retirement requires pinned native Hugging Face Parquet sources"
+  },
+  {
+    "dataset_id": "hallusionbench",
+    "status": "failed",
+    "error": "A native source shard has no measured dependent images"
+  },
+  {
+    "dataset_id": "mmmu-dev",
+    "status": "retired",
+    "report": "reports/mmmu-dev-columnar-retirement-20261006.json"
+  },
+  {
+    "dataset_id": "mmstar",
+    "status": "retired",
+    "report": "reports/mmstar-columnar-retirement-20261006.json"
+  },
+  {
+    "dataset_id": "puzzlevqa",
+    "status": "retired",
+    "report": "reports/puzzlevqa-columnar-retirement-20261006.json"
+  }
+]

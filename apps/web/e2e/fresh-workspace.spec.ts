@@ -40,11 +40,12 @@ test('a dataset with a recorded preview offers to fetch it and states why nothin
 })
 
 test('a dataset with no recipe says so instead of pretending it can be fetched', async ({ page }) => {
-  // SVHN's only published source is plain HTTP, which Atlas's HTTPS-only fetcher refuses, so it has no recipe.
-  await page.goto('/#/dataset/svhn')
-  await page.getByRole('button', { name: 'Get preview' }).first().click()
+  // Broden is public; its missing pinned acquisition recipe is an Atlas implementation gap.
+  await page.goto('/#/dataset/broden')
+  await page.getByRole('button', { name: /Prepare|Get preview/ }).first().click()
   await page.getByRole('button', { name: 'Review preparation plan' }).click()
-  await expect(page.getByRole('button', { name: 'Fetch preview' })).toBeDisabled()
+  await expect(page.getByRole('button', { name: 'Download and prepare' })).toBeDisabled()
+  await expect(page.getByRole('status').filter({ hasText: /gap in Atlas/ })).toBeVisible()
 })
 
 test('add a folder of images, inspect it, build its preview and browse every image on a cold cache', async ({ page }) => {

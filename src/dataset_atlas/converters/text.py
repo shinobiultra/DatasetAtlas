@@ -255,3 +255,33 @@ def gvil(params, inputs, output_dir, check):
         by_image[row['media_path']].append(row)
     ordered = [group[offset] for offset in range(max(map(len, by_image.values()))) for group in by_image.values() if offset < len(group)]
     return write_rows(lambda: iter(ordered), output_dir / 'records.jsonl', 'jsonl', check)
+
+
+# ---- Ring-A-Bell nudity InvPrompts ---------------------------------------------------------------------------------
+
+@converter('ring_a_bell_nudity')
+def ring_a_bell_nudity(params, inputs, output_dir, check):
+    """The author's nudity InvPrompt CSVs, one row per prompt, with the (K, eta) setting each file's name states.
+
+    Columns `prompt`, `case_number` and `evaluation_seed` are the author's. Adds `variant` (the file stem), `k` and `eta` parsed from
+    the stem, and `source_id` (`<variant>:<case_number>`). Case numbers repeat across the files, so the variant scopes identity."""
+    import csv
+    import re
+
+    def rows():
+        for key, stem in params['variants'].items():
+            match = re.fullmatch(r'Nudity_eta_(\d+)_K_(\d+)', stem)
+            if not match:
+                raise ValueError(f'Unexpected Ring-A-Bell file stem: {stem!r}')
+            with Path(inputs[key]).open(newline='', encoding='utf-8-sig') as handle:
+                reader = csv.DictReader(handle)
+                if reader.fieldnames != ['prompt', 'case_number', 'evaluation_seed']:
+                    raise ValueError(f'Unexpected Ring-A-Bell columns in {stem}: {reader.fieldnames}')
+                seen = set()
+                for row in reader:
+                    if row['case_number'] in seen:
+                        raise ValueError(f'Ring-A-Bell {stem} repeats case number {row["case_number"]}')
+                    seen.add(row['case_number'])
+                    yield {'source_id': f'{stem}:{row["case_number"]}', 'variant': stem, 'eta': int(match.group(1)), 'k': int(match.group(2)),
+                           'case_number': int(row['case_number']), 'evaluation_seed': int(row['evaluation_seed']), 'prompt': row['prompt']}
+    return write_rows(rows, Path(output_dir) / 'records.jsonl', 'jsonl', check)

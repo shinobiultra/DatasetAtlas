@@ -1,0 +1,33 @@
+release: tid2013-author-native-rar-3000
+adapter: structured_collection
+source_url: https://www.ponomarenko.info/tid2013.htm
+expected_count: 3000
+scope: All3000 native distorted-image/reference pairs,25 original references and all17
+  authors score tables. Exact BMP bytes, MOS row order, native filename codes and
+  original table lines are retained. Archive executables are not extracted or executed.
+  Exact paper evaluation protocol and image redistribution rights remain unreviewed.
+allowed_hosts:
+- www.ponomarenko.info
+adapter_config:
+  sequential_index: true
+  max_annotation_bytes: 50000000
+  verify_remote_preview_media: true
+  preview_group_by: primary_asset_then_example
+  preview_candidate_count: 250
+convert:
+  name: tid2013_native
+  count: 3000
+  rows_sha256: cd6f7834eff23799e1fd5e3d7c7023d6cd4ad3c5fec8cdf451fa4bd2f88c075a
+  params:
+    definition_revision: native-rar-bmp-score-joins-v2
+files:
+- source_name: tid2013.rar
+  url: https://www.ponomarenko.info/tid2013/tid2013.rar
+  bytes: 957680241
+  sha256: 5e35cb0065f96e2b7ba69006c79d91529fe74e16076e96fa3837ff2b770d8edb
+  format: rar
+  config_key: archive_path
+resource_limits:
+  max_rss_bytes: 2000000000
+  max_cpu_seconds: 1800
+  max_wall_seconds: 2700

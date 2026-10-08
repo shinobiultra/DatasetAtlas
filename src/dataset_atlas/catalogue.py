@@ -51,6 +51,10 @@ def summarize_records(records: Iterable[Any], *, limit: int = MAX_TILES) -> dict
                 tiles.append({"kind": "image", "uri": uri})
                 if len(tiles) >= limit:
                     return {"tiles": tiles, "modality": modality}
+        source = getattr(record, "source", None)
+        if isinstance(source, dict) and source.get("_atlas_source_status"):
+            # A retained raw source document (e.g. an author-committed error page) is faithful data but a poor sample of the dataset.
+            continue
         if len(fallback_text) < limit:
             text = _text_of(record)
             if text:

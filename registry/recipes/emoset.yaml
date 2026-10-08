@@ -1,0 +1,44 @@
+source_url: https://github.com/JingyuanYY/EmoSet
+release: EmoSet-118K-native-author-linked-2023
+adapter: emoset
+expected_count: 118102
+scope: All 118,102 original JPEGs and native annotation objects with released train/val/test
+  membership and ordered split rows; no 3.3M-pool or unidentified paper-subset claim.
+  Whole author-linked ZIP SHA-256 measured locally, all member CRC/SHA checked. Independent
+  publisher digest and redistribution/external-provider approval remain absent; local-only.
+preview_media_transfer_bytes: 250000000
+adapter_config:
+  verify_remote_preview_media: true
+  preview_media_modalities:
+  - image
+  media_scope: partial
+  remote_cache_root: work/media-cache/emoset
+  remote_cache_bytes: 200000000
+  media_transfer_bytes: 10000000
+  native_record_read_bytes: 500000000
+  max_record_bytes: 100000
+convert:
+  name: emoset_native
+  params:
+    count: 118102
+    source_sha256: ebdf50858d24b8b454148dffc84219eb171e61ac80d43bfa65bd9affbbf5d660
+    url: https://www.dropbox.com/scl/fi/myue506itjfc06m7svdw6/EmoSet-118K.zip?rlkey=7f3oyjkr6zyndf0gau7t140rv&dl=1
+    allowed_hosts: &id001
+    - www.dropbox.com
+    - dl.dropboxusercontent.com
+    - '*.dl.dropboxusercontent.com'
+    max_input_bytes: 12000000000
+  count: 118102
+  rows_sha256: 0dea64d06e11ca1337fcb02a39371ceaff7fd95bd8486797832441815e366635
+files:
+- source_name: EmoSet-118K.zip
+  url: https://www.dropbox.com/scl/fi/myue506itjfc06m7svdw6/EmoSet-118K.zip?rlkey=7f3oyjkr6zyndf0gau7t140rv&dl=1
+  bytes: 11288914945
+  sha256: ebdf50858d24b8b454148dffc84219eb171e61ac80d43bfa65bd9affbbf5d660
+  config_key: archive
+  format: zip
+allowed_hosts: *id001
+resource_limits:
+  max_rss_bytes: 4000000000
+  max_cpu_seconds: 1800
+  max_wall_seconds: 3600

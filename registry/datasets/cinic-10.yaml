@@ -56,3 +56,10 @@ evidence:
   snapshot_id: cinic-10-f7e34bd1657f83c19d756310
   note: Native indexed population and 100 local preview records verified; does not
     approve redistribution or resolve a paper-specific subset.
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields
+    present in at least one record. Not inferred from the name or description.'
+modalities:
+- image

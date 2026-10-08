@@ -1,0 +1,47 @@
+release: nlphuji-mirror-2b239befc81b6e3f035ce6bd52f5f4d60f5625f7
+adapter: structured_collection
+expected_count: 31014
+scope: 'All 31014 native CSV image rows with ordered captions, sentence IDs and train/val/test memberships
+  from the pinned nlphuji mirror. The ZIP has 31783 original JPEGs: unused originals are retained as source
+  membership, not invented annotation rows. The original publisher population and paper-specific subsets
+  remain distinct.'
+allowed_hosts: &id001
+- huggingface.co
+- cas-bridge.xethub.hf.co
+- us.aws.cdn.hf.co
+- cdn-lfs-us-1.huggingface.co
+remote_metadata_bytes: 10000000
+adapter_config:
+  media_scope: partial
+  mapping:
+    id: img_id
+    text: caption_text
+    choices: captions
+  annotations:
+  - path_key: path
+    format: jsonl
+    split: native
+    media_archive: images
+    media_template: flickr30k-images/{filename}
+  remote_archives:
+    images:
+      url: https://huggingface.co/datasets/nlphuji/flickr30k/resolve/2b239befc81b6e3f035ce6bd52f5f4d60f5625f7/flickr30k-images.zip
+      bytes: 4390240817
+      etag: '"f78a015e45ea38d4367367223b2bb63cec0d549d5da13c6211663e5439a93216"'
+      allowed_hosts: *id001
+  remote_cache_root: work/media-cache/flickr30k
+  remote_cache_bytes: 100000000
+  max_annotation_bytes: 50000000
+  media_transfer_bytes: 50000000
+  verify_remote_preview_media: true
+convert:
+  name: flickr30k_mirror
+  count: 31014
+  rows_sha256: 4dea20472b6acfff942aa45904f92d30a02cfa858b783eef1bac7b21de6ec546
+files:
+- source_name: flickr_annotations_30k.csv
+  bytes: 12896305
+  sha256: 395990db603ab8bafd5c7ab2746b22058bb1e75b78b3eb56ad755931364ac137
+  url: https://huggingface.co/datasets/nlphuji/flickr30k/resolve/2b239befc81b6e3f035ce6bd52f5f4d60f5625f7/flickr_annotations_30k.csv
+  config_key: annotation_csv
+  format: csv

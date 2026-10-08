@@ -55,6 +55,31 @@ def create_provider_router(service: ProviderService) -> APIRouter:
     def list_conversations(limit: int = Query(default=100, ge=1, le=1000)):
         return service.list_conversations(limit)
 
+    @router.post('/conversation-jobs', dependencies=[Depends(_mutation_guard)])
+    def start_conversation_job(request: ConversationRequest):
+        try:
+            return service.start_conversation_job(request)
+        except ValueError as exc:
+            raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+    @router.get('/conversation-jobs')
+    def list_conversation_jobs(limit: int = Query(default=100, ge=1, le=100)):
+        return service.list_conversation_jobs(limit)
+
+    @router.get('/conversation-jobs/{job_id}')
+    def conversation_job(job_id: str):
+        try:
+            return service.get_conversation_job(job_id)
+        except KeyError as exc:
+            raise HTTPException(status_code=404, detail='model request not found') from exc
+
+    @router.post('/conversation-jobs/{job_id}/cancel', dependencies=[Depends(_mutation_guard)])
+    def cancel_conversation_job(job_id: str):
+        try:
+            return service.cancel_conversation_job(job_id)
+        except KeyError as exc:
+            raise HTTPException(status_code=404, detail='model request not found') from exc
+
     @router.get("/conversations/{conversation_id}")
     def get_conversation(conversation_id: str):
         try:

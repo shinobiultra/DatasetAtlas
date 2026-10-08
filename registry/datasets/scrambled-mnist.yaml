@@ -59,3 +59,10 @@ evidence:
   checked_on: '2026-09-22'
   source_identity_status: derived_protocol_unpinned
 source_url: https://arxiv.org/abs/1911.09288
+relationships:
+- type: derived_from
+  target_id: mnist
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: Pixel- and Fourier-phase scrambling of MNIST images; the paper's scrambled images are not reproduced,
+    only the parent digits are browsable.

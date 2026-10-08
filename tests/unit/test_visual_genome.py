@@ -99,3 +99,17 @@ def test_existing_join_obeys_reduced_disk_budget_and_qa_region_agreement(tmp_pat
     with zipfile.ZipFile(archive, 'w') as z:
         z.writestr('qa_to_region_mapping.json', json.dumps({'21': 12}))
     with pytest.raises(ValueError, match='different images'): VisualGenomeAdapter(adapter.dataset)._ensure_index()
+
+
+def test_original_media_preparation_never_builds_an_annotation_join(tmp_path, monkeypatch):
+    adapter = fixture(tmp_path)
+    monkeypatch.setattr(adapter, '_ensure_index', lambda: pytest.fail('Media access rebuilt the annotation join'))
+    source = adapter.prepare_media(adapter.plan(1, 100000))
+    assert source.dataset_id == 'vg'
+    assert not adapter._index_path().exists()
+    # Native source validation still applies even though the join is unnecessary.
+    corrupted = tmp_path / 'image.zip'
+    corrupted.write_bytes(b'changed source')
+    fresh = VisualGenomeAdapter(adapter.dataset)
+    with pytest.raises(ValueError, match='annotation checksum changed'):
+        fresh.prepare_media(fresh.plan(1, 100000))

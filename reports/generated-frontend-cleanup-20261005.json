@@ -1,0 +1,17 @@
+{
+  "checked_at_utc": "2026-10-05T09:18:41.820800+00:00",
+  "removed": [
+    {
+      "path": "apps/web/node_modules",
+      "logical_bytes_removed": 90714463
+    },
+    {
+      "path": "apps/web/dist",
+      "logical_bytes_removed": 30520183
+    }
+  ],
+  "runtime_frontend": "src/dataset_atlas/web",
+  "generated_frontend_byte_identical_to_retained_bundle": true,
+  "package_lock_sha256": "d8013c13537b83ced541d312691278b4ed0b5b087e8cbe991358c44f9ec45e03",
+  "restore_frontend_development": "npm --prefix apps/web ci && npm --prefix apps/web run build"
+}

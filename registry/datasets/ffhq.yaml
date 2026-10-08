@@ -13,17 +13,20 @@ adapter: structured
 adapter_config: {}
 coverage:
   identity: candidate
-  source: unverified
-  access: unverified
-  adapter: not_started
+  source: verified
+  access: public
+  adapter: implemented
   preview: none
-  complete_data: unimplemented
-  publication: not_reviewed
+  complete_data: requires_preparation
+  publication: local_only
   preview_count: 0
   unit: example
   blockers:
-  - Original release identity and rights need verification.
-  - Adapter and preview are not implemented.
+  - All 70,000 native metadata entries and verified original aligned PNG previews
+    are prepared locally; the remaining full-resolution population remains remote.
+  - The exact historical paper subset and preprocessing remain unidentified.
+  - All 70,000 native metadata objects and 100 original aligned PNG previews are verified.
+    Public redistribution and external providers are not approved.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -50,3 +53,13 @@ evidence:
     we crop around the facial
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
+- kind: native_source_integration
+  checked_on: '2026-10-07'
+  url: https://github.com/NVlabs/ffhq-dataset
+  receipt: reports/ffhq-native-metadata-shape-20261007.json
+  source_identity_status: publisher_v2_metadata_checksum_verified_paper_population_unidentified
+  note: All 70,000 native metadata objects preserved; official metadata MD5 verified.
+    PNG originals are checked against both native file and pixel MD5 when acquired.
+source_url: https://github.com/NVlabs/ffhq-dataset
+modalities:
+- image

@@ -1,0 +1,96 @@
+{
+  "dataset_id": "illuchar",
+  "executed": true,
+  "status": "executed",
+  "sources": [
+    {
+      "source_name": "data/train-00000-of-00003.parquet",
+      "url": "https://huggingface.co/datasets/Tujz/IlluChar/resolve/d55c729918bda746f74d377a2f11c92389e44bf0/data/train-00000-of-00003.parquet",
+      "bytes": 324131164,
+      "sha256": "1dfa8ca680e8446ecc3f651087390cd27a4b100f4730925d6f99f1d93f804be0",
+      "etag": "\"abc2005b26b4b759bf1ccf62f596a7f5ece891388e8638c45b62f3973a38707a\"",
+      "rows": 1375
+    },
+    {
+      "source_name": "data/train-00001-of-00003.parquet",
+      "url": "https://huggingface.co/datasets/Tujz/IlluChar/resolve/d55c729918bda746f74d377a2f11c92389e44bf0/data/train-00001-of-00003.parquet",
+      "bytes": 1307437597,
+      "sha256": "f49ff9589f04197fd5c78e0aa7802d3a59022e26c29868b7105ad926a60bff1c",
+      "etag": "\"44e06c0715240c4386ef0fa4611b12644b77d17d2277d1d668b28a59b10c3aa4\"",
+      "rows": 1375
+    },
+    {
+      "source_name": "data/train-00002-of-00003.parquet",
+      "url": "https://huggingface.co/datasets/Tujz/IlluChar/resolve/d55c729918bda746f74d377a2f11c92389e44bf0/data/train-00002-of-00003.parquet",
+      "bytes": 1163120560,
+      "sha256": "6dfa7ea76b6fd543c1e3f46dac7fd9069cc77b5c751caf1d2457741636bd9aea",
+      "etag": "\"f29b2fd390ecf760112ea5846491154f4a7642e4aa1503a9aac3df3a58bf7030\"",
+      "rows": 1375
+    }
+  ],
+  "versions": [
+    {
+      "snapshot_id": "illuchar-df53383aaaa234f3f95818ec",
+      "native_image_references": 4125,
+      "index": "parquet-f326d377e24f9871f131808c6c1017a2-3f539250ffb84f31b577bfd269bf415f",
+      "cold_checks": [
+        {
+          "ref": "embedded/687/0.png",
+          "sha256": "ae5b81494dba558144bd5f96f334a95d3bebcfdbf871ab5be58f8ad3d6026870",
+          "transferred_bytes": 239581080,
+          "source_ref": "remote/0/687/image/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/2062/0.png",
+          "sha256": "ce9257655592dc3ee00c22ec7cdc6e1aae80822708b345e0eaafbb1c30b45dae",
+          "transferred_bytes": 585950200,
+          "source_ref": "remote/1/687/image/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/3437/0.png",
+          "sha256": "10f9083b9fe6e5935a094e81a8d069247642e71fec44a356c67f5a3655bd1fdc",
+          "transferred_bytes": 249516320,
+          "source_ref": "remote/2/687/image/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/0/0.png",
+          "sha256": "26e6819abe982faeb9a733b0e99ff93ff3bd671c23b70aa6cf2086c1b3b557fb",
+          "transferred_bytes": 16704618,
+          "source_ref": "remote/0/0/image/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/4124/0.png",
+          "sha256": "d625e27b81eca14ac12f3e0263ac91dbbc60262c991726b68eeffa36c8c3b8fe",
+          "transferred_bytes": 438235484,
+          "source_ref": "remote/2/1374/image/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        }
+      ]
+    }
+  ],
+  "total_verification_transfer_bytes": 1529987705,
+  "native_index_bytes": 647168,
+  "preview_bytes_upper_bound": 1463064,
+  "source_paths_eligible": [
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/illuchar/df53383aaaa234f3f95818ec4c5bd1bde4ee9c29737ef4a0913d281e0ab532be/sources/1dfa8ca680e8446ecc3f651087390cd27a4b100f4730925d6f99f1d93f804be0.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/illuchar/df53383aaaa234f3f95818ec4c5bd1bde4ee9c29737ef4a0913d281e0ab532be/sources/f49ff9589f04197fd5c78e0aa7802d3a59022e26c29868b7105ad926a60bff1c.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/illuchar/df53383aaaa234f3f95818ec4c5bd1bde4ee9c29737ef4a0913d281e0ab532be/sources/6dfa7ea76b6fd543c1e3f46dac7fd9069cc77b5c751caf1d2457741636bd9aea.parquet"
+  ],
+  "source_paths_retired": [
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/illuchar/df53383aaaa234f3f95818ec4c5bd1bde4ee9c29737ef4a0913d281e0ab532be/sources/1dfa8ca680e8446ecc3f651087390cd27a4b100f4730925d6f99f1d93f804be0.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/illuchar/df53383aaaa234f3f95818ec4c5bd1bde4ee9c29737ef4a0913d281e0ab532be/sources/f49ff9589f04197fd5c78e0aa7802d3a59022e26c29868b7105ad926a60bff1c.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/illuchar/df53383aaaa234f3f95818ec4c5bd1bde4ee9c29737ef4a0913d281e0ab532be/sources/6dfa7ea76b6fd543c1e3f46dac7fd9069cc77b5c751caf1d2457741636bd9aea.parquet"
+  ],
+  "freed_source_allocated_bytes": 2794704896,
+  "integrity": "Complete native Parquet SHA-256 and every canonical image SHA-256 retained. Preview originals pinned locally. Retrieved originals equal their measured native SHA-256.",
+  "transfer_measurement": "One-byte source probes plus actual range payloads; validated ETag-bound cache hits transfer zero bytes. Verification can reuse those cached ranges."
+}

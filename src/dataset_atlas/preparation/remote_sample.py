@@ -83,12 +83,18 @@ class TwoStageSampler:
         return None
 
     def description(self, drawn: int) -> dict:
-        simple = self.rejected_for_budget == 0
+        simple = sum(group[3] for group in self.groups) <= self.byte_budget
         return {'method': METHOD, 'seed': self.seed, 'population_count': self.total, 'row_groups_in_population': len(self.groups),
                 'row_groups_selected': len(self.order), 'rows_drawn': drawn, 'draws': self.draws,
                 'selected_row_group_transfer_bytes': self.selected_bytes, 'transfer_budget_bytes': self.byte_budget,
+                'rejected_draws_for_transfer_budget': self.rejected_for_budget,
+                'row_groups_exceeding_initial_budget': sum(group[3] > self.byte_budget for group in self.groups),
+                'rows_in_groups_exceeding_initial_budget': sum(group[2] for group in self.groups if group[3] > self.byte_budget),
+                'valid_for_population_prevalence': simple,
                 'design': ('simple random sample of rows without replacement' if simple else
-                           'two-stage: row groups selected with probability proportional to row count, then rows uniform within the selected groups'),
+                           'Budget-conditioned row-group draws: initial positions are proportional to native row counts, '
+                           'but groups rejected for transfer cost alter inclusion probabilities. Oversized groups have zero inclusion; '
+                           'not valid for population prevalence estimation.'),
                 'draw_rule': 'global position = int(SHA-256("<seed>:<draw index>")) mod population count'}
 
 
@@ -96,11 +102,42 @@ HF_HOSTS = ['huggingface.co', 'cdn-lfs.huggingface.co', 'cdn-lfs-us-1.huggingfac
             'cas-bridge.xethub.hf.co', 'us.aws.cdn.hf.co', 'eu.aws.cdn.hf.co']
 
 
+def draw_native_subset(adapter, source, sampler, count, record_filter, check=lambda: None, max_candidates=100_000):
+    """A budgeted preview must enforce the same native subset as its full index."""
+    from .filtering import filter_record
+    selected = []
+    drawn = excluded = 0
+    while len(selected) < count and drawn < max_candidates:
+        check()
+        targets = []
+        while len(targets) < min(count - len(selected), max_candidates - drawn):
+            target = sampler.next()
+            if target is None:
+                break
+            targets.append(target)
+        if not targets:
+            break
+        drawn += len(targets)
+        for record in adapter.records_at(source, targets):
+            if filter_record(record, record_filter):
+                selected.append(record)
+            else:
+                excluded += 1
+    if len(selected) != count:
+        raise ValueError('Native row groups cannot supply the filtered preview within its candidate and transfer bounds')
+    description = sampler.description(drawn)
+    if record_filter:
+        description.update(native_source_population_count=sampler.total, excluded_by_native_filter=excluded,
+            subset_filter=record_filter,
+            design=description['design'] + '; only rows satisfying the pinned native subset are retained')
+    return selected, description
+
+
 def prepare_sampled_preview(root, plan, identity, dataset, version, base, directory, update, check):
     """Write a prepared version holding only a sampled preview of a pinned remote Parquet release."""
     import json
     from pathlib import Path
-    from dataset_atlas.adapters import get_adapter
+    from dataset_atlas.adapters.remote_columnar import RemoteColumnarAdapter
     from dataset_atlas.models import FieldDescriptor, Pack
     from . import atomic, prepared_metadata, snapshot_for
     from .remote import pin_remote_files
@@ -118,7 +155,7 @@ def prepare_sampled_preview(root, plan, identity, dataset, version, base, direct
         if [{k: v for k, v in entry.items() if k != 'etag'} for entry in remote_files] != files:
             raise ValueError('Saved remote shard fingerprints differ from the approved plan')
     else:
-        remote_files = pin_remote_files(files, HF_HOSTS, check, update)
+        remote_files = pin_remote_files(files, HF_HOSTS, check, update,credential_profile=plan.get('credential_profile'))
         atomic(fingerprint_path, remote_files)
     dataset.release = plan['revision']
     dataset.snapshot_id = snapshot_for(dataset.id, plan, identity, root)
@@ -128,8 +165,16 @@ def prepare_sampled_preview(root, plan, identity, dataset, version, base, direct
     dataset.adapter_config = {'remote_files': remote_files, 'allowed_hosts': HF_HOSTS,
         'remote_cache_root': str(Path(root) / 'work/media-cache/remote-parquet'), 'remote_cache_bytes': cache_bytes,
         'metadata_transfer_bytes': plan['max_download_bytes'], 'population': plan['scope'], 'mapping': mapping,
-        **{key: dataset.adapter_config[key] for key in ('fields', 'max_record_bytes', 'media_transfer_bytes') if key in dataset.adapter_config}}
-    adapter = get_adapter(dataset)
+        **{key: dataset.adapter_config[key] for key in ('fields', 'max_record_bytes', 'media_transfer_bytes', 'media_columns','credential_profile') if key in dataset.adapter_config}}
+    adapter = RemoteColumnarAdapter(dataset)
+    # Parallel preparations must not evict each other's large native chunks.
+    # This disposable per-version cache uses the reserved acquisition space;
+    # the immutable runtime configuration still uses the shared browsing cache.
+    from dataset_atlas.storage import BoundedCache
+    staging_cache=version/'staging-range-cache'
+    adapter.cache=BoundedCache(staging_cache,min(cache_bytes,plan['max_download_bytes']))
+    adapter.config['remote_cache_root']=str(staging_cache)
+    adapter.config['aggregate_transfer_bytes']=plan['max_download_bytes']
     adapter.cancel = check
     update(stage='reading remote Parquet footers')
     adapter.warm_layouts(progress=lambda **values: update(**values))
@@ -148,10 +193,14 @@ def prepare_sampled_preview(root, plan, identity, dataset, version, base, direct
     chosen = []
     media_validation = None
     drawn = unavailable = checked_assets = 0
+    from dataset_atlas.adapters.remote_columnar import MediaLimitError
+    excluded_limits = {}
+    preview_bytes=0
+    retained_handles={}
     while len(chosen) < size:
         check()
         targets = []
-        while len(targets) < (size - len(chosen)) * (2 if has_media else 1):
+        while len(targets) < size - len(chosen):
             target = sampler.next()
             if target is None:
                 break
@@ -159,16 +208,19 @@ def prepare_sampled_preview(root, plan, identity, dataset, version, base, direct
         if not targets:
             break
         drawn += len(targets)
-        update(stage='reading sampled rows', sampled_rows=drawn, selected_row_groups=len(sampler.order), downloaded_bytes=adapter.bytes_fetched)
+        update(stage='reading sampled rows', sampled_rows=drawn, selected_row_groups=len(sampler.order), downloaded_bytes=adapter.bytes_fetched+adapter.media_bytes_fetched)
         records = adapter.records_at(source, targets)
         if not has_media:
             chosen.extend(records[:size - len(chosen)])
             continue
         media_source = adapter.prepare(adapter.plan(100, plan['max_output_bytes']))
-        for record in records:
-            if len(chosen) == size:
-                break
+        available={}
+        # Resolve by native source position, then restore draw order. This keeps
+        # large column chunks hot in the bounded cache instead of repeatedly
+        # transferring them as random draws alternate between source shards.
+        for record in sorted(records,key=lambda item:(item.source['_atlas_origin']['file'],item.source['_atlas_origin']['row'])):
             check()
+            update(stage='checking sampled original media',downloaded_bytes=adapter.bytes_fetched+adapter.media_bytes_fetched)
             try:
                 opened = 0
                 for asset in record.assets:
@@ -178,13 +230,30 @@ def prepare_sampled_preview(root, plan, identity, dataset, version, base, direct
                     with Image.open(BytesIO(handle.data)) as image:
                         image.verify()
                     asset.sha256 = handle.sha256
+                    media_path=version/'pack/media'/handle.sha256
+                    if not media_path.is_file():
+                        preview_bytes+=len(handle.data)
+                        if preview_bytes>plan['max_output_bytes']:
+                            raise ValueError('Original preview media exceeds approved output budget')
+                        media_path.parent.mkdir(parents=True,exist_ok=True)
+                        media_path.write_bytes(handle.data)
+                    retained_handles[asset.id]=handle.sha256
                     opened += 1
             except FileNotFoundError:
                 unavailable += 1
                 continue
-            checked_assets += opened
-            chosen.append(record)
+            except MediaLimitError as error:
+                unavailable += 1
+                excluded_limits[str(error)] = excluded_limits.get(str(error), 0) + 1
+                continue
+            available[record.id]=opened
+        for record in records:
+            if len(chosen)==size:break
+            if record.id in available:
+                checked_assets+=available[record.id]
+                chosen.append(record)
         media_validation = {'verified_records': len(chosen), 'unavailable_candidate_records': unavailable,
+                            'media_limit_exclusions': excluded_limits,
                             'verified_preview_assets': checked_assets, 'candidates_checked': drawn}
     if not chosen:
         raise ValueError('No sampled rows were readable within the approved transfer budget')
@@ -194,11 +263,14 @@ def prepare_sampled_preview(root, plan, identity, dataset, version, base, direct
         population=plan['scope'], shards_in_population=len(remote_files), shards_in_release=len(plan['files']),
         shard_selection=('all pinned shards' if options['footers'] == 'all' else
                          f'{len(remote_files)} of {len(plan["files"])} shards with the lowest SHA-256("<seed>:<source name>") ranks; equal shard probability, not weighted by rows'),
-        footer_transfer_bytes=footer_bytes, total_transfer_bytes=adapter.bytes_fetched,
+        footer_transfer_bytes=footer_bytes, total_transfer_bytes=adapter.bytes_fetched+adapter.media_bytes_fetched,
         selection_note=('Rows drawn from the complete pinned release; no complete local index exists.' if options['footers'] == 'all' else
                         'Rows drawn from the listed shard subset only; other shards are outside this preview population.'))
     if has_media:
         description['media_selection'] = 'Drawn rows kept in draw order only when every embedded image slot opened; unavailable slots are excluded, not substituted.'
+        description['media_availability_exclusions'] = unavailable
+        description['valid_for_population_prevalence'] = False
+        description['selection_note'] += ' Media availability and decoding limits condition this preview; it cannot estimate prevalence in the full pinned population. An available-media population has not been enumerated, even when no sampled candidates were excluded.'
     declared = adapter.source_field_types()
     fields = []
     for name in sorted({key for record in chosen for key in record.source} | set(declared)):
@@ -220,7 +292,23 @@ def prepare_sampled_preview(root, plan, identity, dataset, version, base, direct
         'snapshot_id': dataset.snapshot_id})
     pack = Pack(dataset=dataset.model_copy(update={'adapter_config': {}}), fields=fields, records=chosen, population_scope='preview', sampling=description)
     payload = pack.model_dump_json(indent=2).encode()
-    if len(payload) > plan['max_output_bytes']:
+    selected_hashes={retained_handles[a.id] for r in chosen for a in r.assets if a.id in retained_handles}
+    media_dir=version/'pack/media'
+    if media_dir.exists():
+        for path in media_dir.iterdir():
+            if path.name not in selected_hashes:path.unlink()
+    checksums={}
+    for record in chosen:
+        for asset in record.assets:
+            if asset.id not in retained_handles:continue
+            relative='media/'+retained_handles[asset.id]
+            asset.metadata['source_ref']=asset.uri
+            asset.uri=relative
+            checksums[relative]=retained_handles[asset.id]
+    pack.checksums=checksums
+    payload=pack.model_dump_json(indent=2).encode()
+    retained_bytes=sum((version/'pack'/name).stat().st_size for name in checksums)
+    if len(payload)+retained_bytes > plan['max_output_bytes']:
         raise ValueError('Sampled preview exceeds approved output budget')
     (version / 'pack').mkdir(parents=True, exist_ok=True)
     atomic(version / 'pack/pack.json', pack.model_dump(mode='json'))
@@ -228,6 +316,9 @@ def prepare_sampled_preview(root, plan, identity, dataset, version, base, direct
     atomic(version / 'receipt.json', {'plan_id': identity, 'source_files': plan['files'], 'remote_files': remote_files,
         'record_count': None, 'population_rows': population_rows, 'snapshot_id': dataset.snapshot_id, 'scope': plan['scope'],
         'sampling': description, 'preview_media_validation': media_validation, 'remote_metadata_bytes': adapter.bytes_fetched,
+        'remote_media_bytes':adapter.media_bytes_fetched, 'retained_preview_original_bytes':retained_bytes,
         'integrity': 'Strong ETag-bound ranges; upstream shard SHA-256 values are provenance and were not computed locally.'})
+    import shutil
+    shutil.rmtree(staging_cache)
     atomic(base / 'active.json', {'version': identity})
-    update(status='completed', stage='ready', snapshot_id=dataset.snapshot_id, preview_count=len(chosen), downloaded_bytes=adapter.bytes_fetched)
+    update(status='completed', stage='ready', snapshot_id=dataset.snapshot_id, preview_count=len(chosen), downloaded_bytes=adapter.bytes_fetched+adapter.media_bytes_fetched)

@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import hashlib
 import io
+import json
 from pathlib import Path
 import re
 import tarfile
@@ -49,10 +50,10 @@ class STL10BinaryAdapter(DatasetAdapter):
 
     def probe(self) -> SourceDescription:
         archive = self._archive()
-        exists = archive.is_file()
+        exists = archive.is_file() or (self._prepared()/'source-receipt.json').is_file()
         return SourceDescription(
             "stl10_binary", str(archive), exists, self.revision,
-            archive.stat().st_size if exists else None,
+            archive.stat().st_size if archive.is_file() else sum(self.MEMBER_SIZES.values()) if exists else None,
             True, True, True, False, True,
             ("Original STL-10 binary train/test/unlabeled splits; ten source training folds",),
         )
@@ -62,7 +63,7 @@ class STL10BinaryAdapter(DatasetAdapter):
         expected = sum(self.MEMBER_SIZES.values()) + 2_000_000
         if max_bytes < expected:
             raise ValueError(f"STL-10 preparation requires at least {expected} output bytes")
-        if base.expected_download_bytes is None or base.expected_download_bytes > 3_000_000_000:
+        if base.expected_download_bytes is None or (self._archive().exists() and base.expected_download_bytes > 3_000_000_000):
             raise ValueError("STL-10 source archive exceeds 3 GB download bound")
         if not self.config.get("archive_sha256") or not self.config.get("archive_md5"):
             raise ValueError("STL-10 requires pinned archive SHA-256 and official MD5")
@@ -87,6 +88,19 @@ class STL10BinaryAdapter(DatasetAdapter):
     def prepare(self, approved_plan: PreparationPlan) -> PreparedSource:
         source = super().prepare(approved_plan)
         archive = self._archive()
+        if not archive.exists():
+            receipt=json.loads((self._prepared()/'source-receipt.json').read_text())
+            if receipt.get('archive_sha256')!=self.config['archive_sha256'] or receipt.get('archive_md5')!=self.config['archive_md5']:
+                raise ValueError('STL-10 retained source receipt differs from pinned original')
+            if set(receipt['members'])!=set(self.MEMBER_SIZES)|self.EXTRA_MEMBERS:
+                raise ValueError('STL-10 retained source receipt is incomplete')
+            for name,item in receipt['members'].items():
+                path=self._prepared()/name
+                if path.is_symlink() or path.stat().st_size!=item['bytes'] or self._digest(path,'sha256')!=item['sha256']:
+                    raise ValueError('STL-10 retained member checksum changed')
+            if not self._valid_prepared():raise ValueError('STL-10 retained members differ from official checksums')
+            self._validate_metadata()
+            return source
         if archive.stat().st_size > 3_000_000_000:
             raise ValueError("STL-10 source archive exceeds 3 GB download bound")
         if self._digest(archive, "sha256") != self.config["archive_sha256"] or self._digest(archive, "md5") != self.config["archive_md5"]:
@@ -139,6 +153,39 @@ class STL10BinaryAdapter(DatasetAdapter):
                 for path in staged:
                     path.unlink(missing_ok=True)
         self._validate_metadata()
+        receipt_path=self._prepared()/'source-receipt.json'
+        if receipt_path.exists():
+            prior=json.loads(receipt_path.read_text())
+            if prior.get('archive_sha256')!=self.config['archive_sha256'] or prior.get('archive_md5')!=self.config['archive_md5'] or set(prior['members'])!=set(self.MEMBER_SIZES)|self.EXTRA_MEMBERS:
+                raise ValueError('STL-10 retained source receipt differs from pinned original')
+            for name,item in prior['members'].items():
+                path=self._prepared()/name
+                if path.is_symlink() or path.stat().st_size!=item['bytes'] or self._digest(path,'sha256')!=item['sha256']:
+                    raise ValueError('STL-10 retained member checksum changed')
+            return source
+        # Text members do not have publisher MD5s. Compare them with the checked
+        # archive before binding their hashes to that archive's identity.
+        if not (self._prepared()/'source-receipt.json').exists():
+            with tarfile.open(archive,'r|gz') as bundle:
+                found=set()
+                for member in bundle:
+                    if member.name in {'stl10_binary/'+name for name in self.EXTRA_MEMBERS}:
+                        name=Path(member.name).name
+                        if not member.isfile() or name in found or member.size>1_000_000:
+                            raise ValueError('Invalid STL-10 native text member')
+                        stream=bundle.extractfile(member)
+                        if stream is None or stream.read(1_000_001)!=(self._prepared()/name).read_bytes():
+                            raise ValueError('STL-10 retained metadata differs from native archive')
+                        stream.close();found.add(name)
+                if found!=self.EXTRA_MEMBERS:raise ValueError('STL-10 source metadata is incomplete')
+        # This receipt binds every original member to the whole-file check above.
+        # With all raw pixels and metadata retained, the compressed duplicate can
+        # be removed without changing records, image geometry, or lossless renders.
+        receipt={'archive_sha256':self.config['archive_sha256'],'archive_md5':self.config['archive_md5'],
+                 'archive_bytes':archive.stat().st_size,'members':{name:{'sha256':self._digest(self._prepared()/name,'sha256'),
+                 'bytes':(self._prepared()/name).stat().st_size} for name in sorted(set(self.MEMBER_SIZES)|self.EXTRA_MEMBERS)}}
+        path=self._prepared()/'source-receipt.json';staged=path.with_suffix('.json.part')
+        staged.write_text(json.dumps(receipt,indent=2)+'\n');staged.replace(path)
         return source
 
     def _validate_metadata(self) -> None:

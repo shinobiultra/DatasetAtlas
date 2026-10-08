@@ -8,6 +8,26 @@ pytest.importorskip('indexed_gzip')
 from dataset_atlas.storage.indexed_tar import build_tar_index, read_tar_member
 
 
+def test_plain_tar_with_gzip_suffix_uses_exact_native_ranges(tmp_path):
+    source=tmp_path/'native.tar.gz'
+    value=b'original patch' * 100
+    with tarfile.open(source,'w') as archive:
+        info=tarfile.TarInfo('train/original.png');info.size=len(value);archive.addfile(info,io.BytesIO(value))
+    payload=source.read_bytes()
+    remote={'url':'https://example.org/native.tar.gz','bytes':len(payload),'etag':'"pinned"','allowed_hosts':['example.org']}
+    index=tmp_path/'index'
+    proof=build_tar_index(source,index,source_sha256=hashlib.sha256(payload).hexdigest(),remote=remote,max_uncompressed_bytes=100000)
+    assert proof['format']=='atlas-remote-tar-v1' and not (index/'checkpoints.gzidx').exists()
+    assert read_tar_member(index,'train/original.png',local_source=source)[0]==value
+    source.unlink()
+    class Reader(io.BytesIO):
+        def __init__(self,*args,**kwargs):super().__init__(payload);self.bytes_fetched=0;self.budget=kwargs['byte_budget']
+        def read(self,size=-1):
+            result=super().read(size);self.bytes_fetched+=len(result);assert self.bytes_fetched<=self.budget;return result
+    actual,receipt=read_tar_member(index,'train/original.png',transfer_bytes=len(value),reader_factory=Reader)
+    assert actual==value and receipt['transferred_bytes']==len(value)
+
+
 def test_original_member_after_local_source_removal_uses_bounded_remote_ranges(tmp_path):
     raw = io.BytesIO()
     rng = __import__('random').Random(18)

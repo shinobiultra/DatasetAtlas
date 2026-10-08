@@ -1,0 +1,50 @@
+{
+  "checked_at_unix": 1791270626.7625294,
+  "bounded_head_requests": 7,
+  "results": [
+    {
+      "url": "https://netdissect.csail.mit.edu/data/broden1_224.zip",
+      "failure_type": "ConnectTimeout",
+      "elapsed_seconds": 15.23
+    },
+    {
+      "url": "https://netdissect.csail.mit.edu/data/broden1_227.zip",
+      "failure_type": "ConnectTimeout",
+      "elapsed_seconds": 15.23
+    },
+    {
+      "url": "https://netdissect.csail.mit.edu/data/broden1_384.zip",
+      "failure_type": "ConnectTimeout",
+      "elapsed_seconds": 15.23
+    },
+    {
+      "url": "https://the-eye.eu/public/AI/cah/laion400m-met-release/laion400m-meta/",
+      "failure_type": "ConnectError",
+      "elapsed_seconds": 0.36
+    },
+    {
+      "url": "https://deploy.laion.ai/8f83b608504d46bb81708ec86e912220/",
+      "status": 200,
+      "content_bytes": null,
+      "etag": null,
+      "final_url": "https://deploy.laion.ai/8f83b608504d46bb81708ec86e912220/",
+      "elapsed_seconds": 0.84
+    },
+    {
+      "url": "https://huggingface.co/api/datasets/laion/laion400m",
+      "status": 200,
+      "content_bytes": "22742",
+      "etag": "W/\"58d6-vJiDyOI9rVr3QEtoshKpOY+DJuo\"",
+      "final_url": "https://huggingface.co/api/datasets/laion/relaion400m",
+      "elapsed_seconds": 0.36
+    },
+    {
+      "url": "https://huggingface.co/api/datasets/laion/laion_400m",
+      "status": 401,
+      "content_bytes": "41",
+      "etag": "W/\"29-dEMcHWfJi78ZR1aqzb1ELAhp3Us\"",
+      "final_url": "https://huggingface.co/api/datasets/laion/laion_400m",
+      "elapsed_seconds": 0.21
+    }
+  ]
+}

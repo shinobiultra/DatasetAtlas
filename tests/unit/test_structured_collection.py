@@ -27,6 +27,9 @@ def test_complete_join_preserves_repeated_images_and_original_answers(tmp_path,m
     assert first.records[0].id!=second.records[0].id
     assert first.records[0].asset_ids==second.records[0].asset_ids
     assert first.records[0].source['answers']==['red'] and 'answers' not in second.records[0].source
+    import zlib
+    assert first.records[0].assets[0].metadata['zip_crc32']==zlib.crc32(image)
+    assert first.records[0].assets[0].metadata['native_member_bytes']==len(image)
     assert adapter.resolve_asset(source,second.records[0].assets[0].uri).data==image
     assert adapter.count==2 and second.next_cursor is None
 
@@ -51,6 +54,37 @@ def test_fresh_adapter_preserves_nonordinal_source_ids(tmp_path,monkeypatch):
     again=fresh.iter_records(fresh.prepare(fresh.plan(2,10000))).records
     assert [r.id for r in first]==[r.id for r in again]
     assert first[0].source['_atlas_origin']['identity']=='train:1'
+
+
+def test_declared_native_missing_media_is_explicit_and_exact(tmp_path,monkeypatch):
+    adapter,_,_=fixture(tmp_path,monkeypatch,missing=True)
+    adapter.config['declared_absent_media']=['zip/images/train/absent.png']
+    validation=adapter.validate_media(10000)
+    assert validation['absent_media_references']==1
+    source=adapter.prepare(adapter.plan(2,10000))
+    records=adapter.iter_records(source).records
+    assert records[0].assets[0].uri is None
+    assert records[0].assets[0].metadata['source_path']=='zip/images/train/absent.png'
+    assert records[0].assets[0].metadata['availability']=='absent_from_pinned_release'
+    adapter.config['declared_absent_media'].append('zip/images/train/image.png')
+    with pytest.raises(ValueError,match='differs from native ZIP'):adapter.validate_media(10000)
+
+
+def test_parquet_frame_lists_preserve_native_order_and_bound_decoding(tmp_path):
+    import pyarrow as pa
+    import pyarrow.parquet as pq
+    path=tmp_path/'frames.parquet'
+    pq.write_table(pa.Table.from_pylist([{'id':'q1','question':'Which order?','images':['frames/1.jpg','frames/0.jpg'],'answer':'forward','native_index':3}]),path)
+    dataset=Dataset(id='frames',name='Frames',release='r',snapshot_id='s',adapter='structured_collection',adapter_config={
+        'path':str(path),'annotations':[{'path_key':'path','format':'parquet','split':'val','media_paths_field':'images','media_archive':'images'}],
+        'mapping':{'id':'id','question':'question'},'remote_archives':{'images':{'etag':'"r"'}}})
+    adapter=StructuredCollectionAdapter(dataset)
+    record=adapter.iter_records(adapter.prepare(adapter.plan(1,10000))).records[0]
+    assert [a.uri for a in record.assets]==['zip/images/frames/1.jpg','zip/images/frames/0.jpg']
+    assert record.source['images']==['frames/1.jpg','frames/0.jpg'] and record.source['native_index']==3
+    adapter=StructuredCollectionAdapter(dataset)
+    adapter.config['max_annotation_bytes']=1
+    with pytest.raises(ValueError,match='read budget'):adapter.prepare(adapter.plan(1,10000))
 
 
 def test_split_csv_and_compound_ids_preserve_source_fields(tmp_path):

@@ -1,0 +1,28 @@
+{
+  "dataset_id": "pata",
+  "source_revision": "c65a7f34e6e200d77b82a53d33b224389798ff6c",
+  "expected_download_bytes": 759949,
+  "expected_records": 4934,
+  "native_image_preview_count": 0,
+  "scope": "All released label/URL rows and exact scene captions; no third-party media requested.",
+  "status": "completed",
+  "executed": true,
+  "downloaded_bytes": 0,
+  "snapshot_id": "pata-metadata-23abe811fea14abf1a4bb663",
+  "plan_id": "metadata-23abe811fea14abf1a4bb663b942502950ede3c1a84e372267697efdd6ab787f",
+  "rows_sha256": "23abe811fea14abf1a4bb663b942502950ede3c1a84e372267697efdd6ab787f",
+  "exact_native_record_checks": 4934,
+  "checked_at_utc": "2026-10-07T07:27:54.007156+00:00",
+  "sources": [
+    {
+      "name": "pata_fairness.files.lst",
+      "sha256": "735d14cf33cf8bd0b8d5ca7b13db7c2ea11c48330529c23c86f596f863964033",
+      "bytes": 744512
+    },
+    {
+      "name": "pata_fairness.captions.json",
+      "sha256": "592dd19362dd62a3372224e2e0b599b418e44bbea852c8f298e17dffa1c455b0",
+      "bytes": 15437
+    }
+  ]
+}

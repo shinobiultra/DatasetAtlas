@@ -1,0 +1,92 @@
+{
+  "started_at_utc": "2026-10-07T04:34:34.889795+00:00",
+  "max_source_bytes": 90000000,
+  "max_output_bytes": 1000000000,
+  "dataset_contents_transmitted_to_models": false,
+  "files": {
+    "images": {
+      "url": "https://storage.googleapis.com/openimages/2018_04/validation/validation-images-with-rotation.csv",
+      "bytes": 15245485,
+      "etag": "\"643a54e43b0bab8acce8817b4a569780\"",
+      "status": 200,
+      "sha256": "ed93a0e121fe345effdfc7359b848dbc64a1ff6778c8c73563157cb500b33a17",
+      "path": "work/openimages-native-audit-20261007/source-cache/objects/e27afdc1a3ca3ffc9e4b469f15edbe3f2ff0b7fe6172b029ed92eef20c2b79bb"
+    },
+    "human_labels": {
+      "url": "https://storage.googleapis.com/openimages/v5/validation-annotations-human-imagelabels.csv",
+      "bytes": 24824095,
+      "etag": "\"1897fce94618869aace7f60497517bdf\"",
+      "status": 200,
+      "sha256": "c2bc8b312ee7ed01ac4c58a62c2432c7f6b83b320874cbb0644e2f51aed3faad",
+      "path": "work/openimages-native-audit-20261007/source-cache/objects/f2b063d20c8e01a27d4824694371e08a3974eb1ee56cfe97a09863838aef727e"
+    },
+    "boxes": {
+      "url": "https://storage.googleapis.com/openimages/v5/validation-annotations-bbox.csv",
+      "bytes": 25105048,
+      "etag": "\"c5e8200df129ea6867e913e8b21fcab9\"",
+      "status": 200,
+      "sha256": "d8bbd59410af14835d7733165a7bb8a3f0213981b22dd5077b0b9f7878991ff2",
+      "path": "work/openimages-native-audit-20261007/source-cache/objects/62ca5abcde0628b044425163162f2c0b939177d0b326ab4e6b2151391fbe5249"
+    },
+    "relationships": {
+      "url": "https://storage.googleapis.com/openimages/v6/oidv6-validation-annotations-vrd.csv",
+      "bytes": 3065339,
+      "etag": "\"1b2861c792a62de654746d0310849394\"",
+      "status": 200,
+      "sha256": "347d92ab753b4975f274732914e3fcd645942437dee496c2174f93dde570b82f",
+      "path": "work/openimages-native-audit-20261007/source-cache/objects/9771d829ecdd260660a9c9c0806193a9359c7b6026c4827905bac22359c8b521"
+    },
+    "segmentations": {
+      "url": "https://storage.googleapis.com/openimages/v5/validation-annotations-object-segmentation.csv",
+      "bytes": 2920821,
+      "etag": "\"dbfa09320082b635e8b96989c971128d\"",
+      "status": 200,
+      "sha256": "a876ff7a1a68de771e668baa9886f0ca2331992cd4af5497401be41828a5de89",
+      "path": "work/openimages-native-audit-20261007/source-cache/objects/0728b65a421c910e358581d9c29c35f319f95baf7c539132c4bd6ba073ba9363"
+    },
+    "class_names": {
+      "url": "https://storage.googleapis.com/openimages/v7/oidv7-class-descriptions.csv",
+      "bytes": 501178,
+      "etag": "\"2aacb919b207c50f2a084822a5c2736c\"",
+      "status": 200,
+      "sha256": "84a4373a0efb7fd6d93fe19b0e7ceb6c1b855c233d13b9b78a9a33655c9fdce3",
+      "path": "work/openimages-native-audit-20261007/source-cache/objects/90d210795b94ac91050ff0b807a997010c130eedc48fa0985610843c5d3b5357"
+    }
+  },
+  "native_coverage_not_yet_activated": true,
+  "conversion": {
+    "path": "/home/bitwise/Documents/vibe/DatasetAtlas/work/openimages-native-audit-20261007/converted/images.jsonl",
+    "format": "jsonl",
+    "count": 41620,
+    "rows_sha256": "50f25639c17c65d0eba54992656da11c7ad6528f51344318807be839e8e3f78c",
+    "file_sha256": "cbbad4901a7b9503ba55a684726f76dbc38a52d97271a66c20fee3d8586c1a5f",
+    "columns": null,
+    "adapter_config": {
+      "mapping": {
+        "id": "source_id",
+        "media": "media_ref"
+      },
+      "fields": {
+        "positive_image_labels": {
+          "dtype": "array",
+          "description": "Native image labels with Confidence exactly 1."
+        },
+        "negative_image_labels": {
+          "dtype": "array",
+          "description": "Native image labels with Confidence exactly 0; absence is not a negative label."
+        }
+      }
+    },
+    "native_scope_counts": {
+      "images": 41620,
+      "class_descriptions": 20932,
+      "unlisted_class_or_attribute_ids": 8,
+      "human_labels": 595339,
+      "boxes": 303980,
+      "relationships": 27243,
+      "segmentations": 24730
+    }
+  },
+  "status": "passed",
+  "completed_at_utc": "2026-10-07T04:34:40.634297+00:00"
+}

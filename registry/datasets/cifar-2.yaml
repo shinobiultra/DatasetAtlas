@@ -61,3 +61,10 @@ evidence:
   checked_on: '2026-09-22'
   source_identity_status: derived_protocol_located
 source_url: https://github.com/BrunoKM/diffusion-influence
+relationships:
+- type: derived_from
+  target_id: cifar-10
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: A two-class protocol generated from CIFAR-10 with the author seed and index files; the CIFAR-10
+    images are the parent, not the derived selection.

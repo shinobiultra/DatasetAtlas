@@ -1,0 +1,68 @@
+{
+  "verified_at_utc": "2026-10-07T09:32:51.296491+00:00",
+  "status": "passed",
+  "wheel": "dataset_atlas-0.2.0-py3-none-any.whl",
+  "wheel_sha256": "062a3a5e0d72d34c3c7af0e777fc96810bafda1763ef1e951fd540472c9adf3e",
+  "release_archives": {
+    "dataset_atlas-0.2.0-py3-none-any.whl": 39421865,
+    "dataset_atlas-0.2.0.tar.gz": 39372678
+  },
+  "archive_inspection": {
+    "passed": true,
+    "output": "{\"sdist\": {\"approved_media_files\": {\"clevr\": 100, \"eurosat\": 100, \"pairs\": 100}, \"archive\": \"dataset_atlas-0.2.0.tar.gz\", \"files\": 1369, \"site_bytes\": 31205261}, \"wheel\": {\"approved_media_files\": {\"clevr\": 100, \"eurosat\": 100, \"pairs\": 100}, \"archive\": \"dataset_atlas-0.2.0-py3-none-any.whl\", \"files\": 1113, \"site_bytes\": 31205261}}\n"
+  },
+  "scope": "Fresh base-only virtual environment outside the checkout; real HTTP requests to the installed server; no dataset fetched, no model run.",
+  "python": "3.12.14",
+  "installed_packages": 24,
+  "optional_model_packages_present": [],
+  "fresh_catalogue_entries": 333,
+  "approved_static_previews": [
+    "clevr",
+    "eurosat",
+    "pairs"
+  ],
+  "http_routes": {
+    "/": {
+      "status": 200,
+      "content_type": "text/html; charset=utf-8",
+      "has_script": true
+    },
+    "/api/v1/capabilities": {
+      "status": 200,
+      "mode": "workbench",
+      "operations": 11
+    },
+    "/data/catalogue.json": {
+      "status": 200,
+      "entries": 333,
+      "any_adapter_config": false
+    },
+    "/data/clevr.json": {
+      "status": 200,
+      "records": 100
+    },
+    "/data/media/clevr/5daf56d223c01e2481d6f12ef54686275f71fe67704f639734e27d2c5d6970c9.png": {
+      "status": 200,
+      "content_type": "image/png",
+      "bytes": 183144
+    },
+    "/data/eurosat.json": {
+      "status": 200,
+      "records": 100
+    },
+    "/data/media/eurosat/f733d6f5d13be0bfe05161cc4df3416e31880c4371cbde9ca85e5409ff4fa78d.jpg": {
+      "status": 200,
+      "content_type": "image/jpeg",
+      "bytes": 2737
+    },
+    "/data/pairs.json": {
+      "status": 200,
+      "records": 100
+    },
+    "/data/media/pairs/0948b1fe2a3bfb2e68214cc149f45eec36e96ea25cbb3468e2deca9a88f56d4d.png": {
+      "status": 200,
+      "content_type": "image/png",
+      "bytes": 99783
+    }
+  }
+}

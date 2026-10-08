@@ -1,0 +1,222 @@
+{
+  "dataset_id": "tid2013",
+  "dataset": {
+    "schema_version": "1.0",
+    "id": "tid2013",
+    "name": "TID2013",
+    "origin": "catalogue",
+    "aliases": [],
+    "description": "Mention candidate from a focused page audit; the evidence receipts distinguish direct use, comparison, related-work, and citation-only roles. Original source, release, and rights still require independent verification.",
+    "tasks": [
+      "image-quality-assessment"
+    ],
+    "modalities": [
+      "image"
+    ],
+    "labels": [],
+    "paper_ids": [
+      "paper-666de2b7486d80a3"
+    ],
+    "source_url": "https://www.ponomarenko.info/tid2013.htm",
+    "release": "unresolved",
+    "snapshot_id": "",
+    "adapter": "structured_collection",
+    "adapter_config": {},
+    "coverage": {
+      "identity": "candidate",
+      "source": "verified",
+      "access": "public",
+      "adapter": "implemented",
+      "preview": "none",
+      "complete_data": "unimplemented",
+      "publication": "not_reviewed",
+      "preview_count": 0,
+      "total_count": null,
+      "unit": "example",
+      "blockers": [
+        "The authors native release is verified; the citing paper exact selected evaluation membership/protocol has not been independently reconciled.",
+        "Image and annotation redistribution rights remain unreviewed."
+      ]
+    },
+    "availability": null,
+    "rights": {
+      "records": "not_reviewed",
+      "annotations": "not_reviewed",
+      "images": "not_reviewed"
+    },
+    "relationships": [],
+    "evidence": [
+      {
+        "kind": "corpus_mention",
+        "evidence_id": "evidence-fee7366f5f7b29e1aa69",
+        "paper_id": "paper-666de2b7486d80a3",
+        "source_file_hash": "c43575003d83757725739ad87acfc4026d0d3129b27bee69fd1a4c362dc0db33",
+        "page": 14,
+        "role": "evaluation",
+        "excerpt": "e show the Spearman correlation coefficient of various methods on the TID2013 Dataset [45]. Note that deep networks trained for classification perform well out of the box (blue). C. TID2013 Datas",
+        "review_scope": "full_text_mention_inventory_checked",
+        "paper_full_review_complete": true
+      },
+      {
+        "kind": "source_audit_access",
+        "checked_on": "2026-10-06",
+        "url": "https://www.ponomarenko.info/tid2013/tid2013.rar",
+        "note": "The authors' host serves tid2013.rar over HTTPS with range support: 957,680,241 bytes (Last-Modified 2022-03-09). Contents were not inspected.",
+        "source_identity_status": "official_file_reachable_implementation_gap"
+      },
+      {
+        "kind": "derived_facet",
+        "field": "modalities",
+        "checked_on": "2026-10-06",
+        "note": "From the source inspected on 2026-10-06: authors RAR inspected by header only; reference and distorted images. Not inferred from the dataset name."
+      },
+      {
+        "kind": "source_audit_release",
+        "checked_on": "2026-10-06",
+        "url": "https://www.ponomarenko.info/tid2013/tid2013.rar",
+        "note": "Full official RAR SHA-256 verified; all3025 original BMPs and17 score tables preserved, with3000 distorted/reference pairs and exact MOS joins.25 reference images are reused as paired assets.",
+        "source_identity_status": "native_author_archive_verified_paper_protocol_not_reconciled"
+      }
+    ]
+  },
+  "max_download_bytes": 1000000000,
+  "max_output_bytes": 3000000000,
+  "source_mode": "download",
+  "files": [
+    {
+      "source_name": "tid2013.rar",
+      "url": "https://www.ponomarenko.info/tid2013/tid2013.rar",
+      "bytes": 957680241,
+      "sha256": "5e35cb0065f96e2b7ba69006c79d91529fe74e16076e96fa3837ff2b770d8edb",
+      "format": "rar",
+      "config_key": "archive_path"
+    }
+  ],
+  "expected_download_bytes": 957680241,
+  "expected_count": 3000,
+  "source_url": "https://www.ponomarenko.info/tid2013.htm",
+  "requirements": [],
+  "ready": true,
+  "scope": "All3000 native distorted-image/reference pairs,25 original references and all17 authors score tables. Exact BMP bytes, MOS row order, native filename codes and original table lines are retained. Archive executables are not extracted or executed. Exact paper evaluation protocol and image redistribution rights remain unreviewed.",
+  "source_identity": "Pinned available release; not a claim of the paper-used revision.",
+  "prepared_dataset": {
+    "schema_version": "1.0",
+    "id": "tid2013",
+    "name": "TID2013",
+    "origin": "catalogue",
+    "aliases": [],
+    "description": "Mention candidate from a focused page audit; the evidence receipts distinguish direct use, comparison, related-work, and citation-only roles. Original source, release, and rights still require independent verification.",
+    "tasks": [
+      "image-quality-assessment"
+    ],
+    "modalities": [
+      "image"
+    ],
+    "labels": [],
+    "paper_ids": [
+      "paper-666de2b7486d80a3"
+    ],
+    "source_url": "https://www.ponomarenko.info/tid2013.htm",
+    "release": "tid2013-author-native-rar-3000",
+    "snapshot_id": "",
+    "adapter": "structured_collection",
+    "adapter_config": {
+      "sequential_index": true,
+      "max_annotation_bytes": 50000000,
+      "verify_remote_preview_media": true,
+      "preview_group_by": "primary_asset_then_example",
+      "preview_candidate_count": 250
+    },
+    "coverage": {
+      "identity": "candidate",
+      "source": "verified",
+      "access": "public",
+      "adapter": "implemented",
+      "preview": "none",
+      "complete_data": "unimplemented",
+      "publication": "not_reviewed",
+      "preview_count": 0,
+      "total_count": null,
+      "unit": "example",
+      "blockers": [
+        "The authors native release is verified; the citing paper exact selected evaluation membership/protocol has not been independently reconciled.",
+        "Image and annotation redistribution rights remain unreviewed."
+      ]
+    },
+    "availability": null,
+    "rights": {
+      "records": "not_reviewed",
+      "annotations": "not_reviewed",
+      "images": "not_reviewed"
+    },
+    "relationships": [],
+    "evidence": [
+      {
+        "kind": "corpus_mention",
+        "evidence_id": "evidence-fee7366f5f7b29e1aa69",
+        "paper_id": "paper-666de2b7486d80a3",
+        "source_file_hash": "c43575003d83757725739ad87acfc4026d0d3129b27bee69fd1a4c362dc0db33",
+        "page": 14,
+        "role": "evaluation",
+        "excerpt": "e show the Spearman correlation coefficient of various methods on the TID2013 Dataset [45]. Note that deep networks trained for classification perform well out of the box (blue). C. TID2013 Datas",
+        "review_scope": "full_text_mention_inventory_checked",
+        "paper_full_review_complete": true
+      },
+      {
+        "kind": "source_audit_access",
+        "checked_on": "2026-10-06",
+        "url": "https://www.ponomarenko.info/tid2013/tid2013.rar",
+        "note": "The authors' host serves tid2013.rar over HTTPS with range support: 957,680,241 bytes (Last-Modified 2022-03-09). Contents were not inspected.",
+        "source_identity_status": "official_file_reachable_implementation_gap"
+      },
+      {
+        "kind": "derived_facet",
+        "field": "modalities",
+        "checked_on": "2026-10-06",
+        "note": "From the source inspected on 2026-10-06: authors RAR inspected by header only; reference and distorted images. Not inferred from the dataset name."
+      },
+      {
+        "kind": "source_audit_release",
+        "checked_on": "2026-10-06",
+        "url": "https://www.ponomarenko.info/tid2013/tid2013.rar",
+        "note": "Full official RAR SHA-256 verified; all3025 original BMPs and17 score tables preserved, with3000 distorted/reference pairs and exact MOS joins.25 reference images are reused as paired assets.",
+        "source_identity_status": "native_author_archive_verified_paper_protocol_not_reconciled"
+      }
+    ]
+  },
+  "recipe_sha256": "9c31ff98cf24456a9ba20c53ef4c80ecbe35c2cd53a04724c99ceb04c061bead",
+  "kind": "http_archive",
+  "allowed_hosts": [
+    "www.ponomarenko.info"
+  ],
+  "convert": {
+    "name": "tid2013_native",
+    "count": 3000,
+    "rows_sha256": "cd6f7834eff23799e1fd5e3d7c7023d6cd4ad3c5fec8cdf451fa4bd2f88c075a",
+    "params": {
+      "definition_revision": "native-rar-bmp-score-joins-v2"
+    }
+  },
+  "required_free_bytes": 3000000000,
+  "reuse_registered_sources": [
+    "tid2013.rar"
+  ],
+  "available_bytes": 168340865024,
+  "shared_storage": {
+    "ceiling_bytes": 150000000000,
+    "allocated_workspace_bytes": 127004307456,
+    "reserved_by_running_preparations": 0,
+    "available_bytes": 22995692544,
+    "required_bytes": 3000000000,
+    "admitted": true,
+    "scope": "Workspace regular files plus explicitly configured external model/source roots.",
+    "measurement_errors": []
+  },
+  "resource_limits": {
+    "max_rss_bytes": 2000000000,
+    "max_cpu_seconds": 1800,
+    "max_wall_seconds": 2700
+  },
+  "memory_enforcement": "kernel cgroup memory cap including descendants; swap disabled",
+  "id": "804772e053e2949104e99466a26de0cb26c41d5c3f1fa3129819cf9475ce2711"
+}

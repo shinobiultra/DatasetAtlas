@@ -59,3 +59,10 @@ evidence:
   checked_on: '2026-09-22'
   source_identity_status: family_mentioned_version_unresolved
 source_url: https://visualqa.org/
+relationships:
+- type: same_source_family_as
+  target_id: vqa-v2
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: VQA v2 is the prepared member of the official VQA family on COCO 2014 images; the survey does
+    not say v1 or v2.

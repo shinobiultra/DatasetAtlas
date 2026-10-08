@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import sqlite3
+from typing import Any
 from urllib.parse import urlsplit
 import zipfile
 
@@ -93,8 +94,9 @@ class VisualGenomeAdapter(StructuredCollectionAdapter):
                     with archive.open(info) as stream:
                         rows = ijson.kvitems(stream, '', use_float=True) if spec.get('qa_keyed') else ijson.items(stream, 'item', use_float=True)
                         for row in rows:
-                            if count % 256 == 0 and getattr(self, '_cancel', None):
-                                self._cancel()
+                            cancel = getattr(self, '_cancel', None)
+                            if count % 256 == 0 and callable(cancel):
+                                cancel()
                             encoded = json.dumps(row[1] if spec.get('qa_keyed') else row, ensure_ascii=False, separators=(',', ':'))
                             if spec.get('qa_keyed'):
                                 qa_id = int(row[0])
@@ -150,15 +152,20 @@ class VisualGenomeAdapter(StructuredCollectionAdapter):
             stage.unlink(missing_ok=True)
             raise
 
-    def prepare(self, plan):
-        source = DatasetAdapter.prepare(self, plan)
+    def prepare(self, approved_plan):
+        source = self.prepare_media(approved_plan)
+        self._ensure_index()
+        return source
+
+    def prepare_media(self, approved_plan):
+        """Resolve a canonical native ZIP reference without rebuilding annotations."""
+        source = DatasetAdapter.prepare(self, approved_plan)
         if not hasattr(self, '_sources_checked'):
             for item in self.config.get('source_files', []):
                 with Path(item['path']).open('rb') as stream:
                     if hashlib.file_digest(stream, 'sha256').hexdigest() != item['sha256']:
                         raise ValueError('Visual Genome annotation checksum changed')
             self._sources_checked = True
-        self._ensure_index()
         return source
 
     def validate_media(self, budget, cancel=None):
@@ -215,7 +222,7 @@ class VisualGenomeAdapter(StructuredCollectionAdapter):
             rows = db.execute('SELECT ordinal,id,data FROM images WHERE ordinal>=? ORDER BY ordinal LIMIT ?', (start, size)).fetchall()
             for ordinal, image_id, data in rows:
                 image = json.loads(data)
-                row = {'_atlas_identity': f'image:{image_id}', 'image_id': image_id, 'image': image, '_atlas_media_refs': [self._media_ref(image)]}
+                row: dict[str, Any] = {'_atlas_identity': f'image:{image_id}', 'image_id': image_id, 'image': image, '_atlas_media_refs': [self._media_ref(image)]}
                 for field, encoded in db.execute('SELECT field,data FROM annotations WHERE image_id=? ORDER BY field,ordinal', (image_id,)):
                     if field in multiple:
                         row.setdefault(field, []).append(json.loads(encoded))
@@ -226,6 +233,8 @@ class VisualGenomeAdapter(StructuredCollectionAdapter):
                 record = DatasetAdapter._record(self, row, ordinal)
                 record.source.pop('_atlas_media_refs', None)
                 for asset in record.assets:
+                    if not asset.uri:
+                        raise ValueError('Visual Genome image lacks a native media reference')
                     asset.metadata.update(width=image['width'], height=image['height'], representation='original ZIP member',
                                           source_etag=self.config['remote_archives'][asset.uri.split('/')[1]]['etag'])
                 source.charge(len(record.model_dump_json().encode()))

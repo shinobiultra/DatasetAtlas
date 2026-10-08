@@ -97,7 +97,7 @@ class EmbeddedParquetAdapter(StructuredAdapter):
         total=pq.read_metadata(self._path()).num_rows
         return RecordBatch(records,str(start+len(records)) if start+len(records)<total else None,len(records))
 
-    def resolve_asset(self,source,asset_ref):
+    def resolve_original_asset(self,source,asset_ref):
         match=re.fullmatch(r'embedded/([0-9]{1,12})/([0-9]{1,2})\.(png|jpg|webp|gif|avif)',asset_ref)
         if not match:raise ValueError('Invalid embedded image reference')
         row_index,slot=int(match[1]),int(match[2]);rows=list(self._slice(row_index,1))
@@ -106,7 +106,12 @@ class EmbeddedParquetAdapter(StructuredAdapter):
         if slot>=len(entries) or not entries[slot][3]:raise FileNotFoundError('Embedded source image is missing')
         data=entries[slot][3];source.charge(len(data));suffix,mime=_encoding(data)
         if suffix!=match[3]:raise ValueError('Image reference encoding differs from source')
+        return MediaHandle(data,mime,hashlib.sha256(data).hexdigest(),asset_ref)
+
+    def resolve_asset(self,source,asset_ref):
+        original=self.resolve_original_asset(source,asset_ref)
+        data=original.data
         with Image.open(io.BytesIO(data)) as image:
             if image.width*image.height>50_000_000:raise ValueError('Embedded image pixel budget exceeded')
             image.verify()
-        return MediaHandle(data,mime,hashlib.sha256(data).hexdigest(),asset_ref)
+        return original

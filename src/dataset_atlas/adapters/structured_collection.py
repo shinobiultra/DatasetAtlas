@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 import re
 import zipfile
+from contextlib import contextmanager
 from PIL import Image
 from .core import DatasetAdapter,SourceDescription,RecordBatch,MediaHandle,_nested,_safe_relative
 from dataset_atlas.storage import BoundedCache, CacheIdentity, HttpsFetcher
@@ -37,6 +38,8 @@ class StructuredCollectionAdapter(DatasetAdapter):
         super().__init__(dataset)
         import copy
         self.config=copy.deepcopy(dataset.adapter_config)
+        self.bytes_fetched=0
+        self.preparation_transfer_limit: int | None=None
 
     def probe(self):
         paths=[Path(self.config[item['path_key']]) for item in self.config['annotations'] if item.get('path_key')]
@@ -45,8 +48,8 @@ class StructuredCollectionAdapter(DatasetAdapter):
             sum(p.stat().st_size for p in set(paths) if p.is_file()),False,True,True,True,True,
             ('Original ZIP media fetched on inspection using bounded, ETag-bound HTTPS ranges.',))
 
-    def prepare(self,plan):
-        source=super().prepare(plan)
+    def prepare(self,approved_plan):
+        source=super().prepare(approved_plan)
         for item in self.config.get('source_files',[]):
             with Path(item['path']).open('rb') as stream:digest=hashlib.file_digest(stream,'sha256').hexdigest()
             if digest!=item['sha256']:raise ValueError('Annotation file checksum changed')
@@ -73,24 +76,34 @@ class StructuredCollectionAdapter(DatasetAdapter):
                     self._annotation_bytes_fetched+=remote.bytes_fetched
                 if hashlib.sha256(payload).hexdigest()!=entry['sha256']:raise ValueError('Remote annotation checksum changed')
             elif entry.get('member'):
+                if path is None:raise ValueError('Local annotations require a path_key')
                 with zipfile.ZipFile(path) as archive:
                     info=archive.getinfo(_safe_relative(entry['member']))
                     consumed+=info.file_size
                     if consumed>maximum:raise ValueError('Annotations exceed declared read budget')
                     payload=archive.read(info)
             else:
+                if path is None:raise ValueError('Local annotations require a path_key')
                 consumed+=path.stat().st_size
                 if consumed>maximum:raise ValueError('Annotations exceed declared read budget')
                 payload=path.read_bytes()
             format=entry.get('format','json')
-            text=payload.decode('utf-8-sig')
-            if format=='csv':data=list(csv.DictReader(io.StringIO(text)))
-            elif format=='jsonl':data=[json.loads(line) for line in text.splitlines() if line.strip()]
+            text=payload.decode('utf-8-sig') if format!='parquet' else ''
+            if format=='parquet':
+                import pyarrow.parquet as pq
+                parquet=pq.ParquetFile(io.BytesIO(payload))
+                if sum(parquet.metadata.row_group(i).total_byte_size for i in range(parquet.num_row_groups))>maximum:
+                    raise ValueError('Decoded Parquet annotations exceed declared read budget')
+                data=parquet.read().to_pylist()
+            elif format=='csv':data=list(csv.DictReader(io.StringIO(text)))
+            elif format=='jsonl':data=[json.loads(line) for line in text.split('\n') if line.strip()]
             elif format=='json':data=json.loads(text)
             elif format=='text':data=[{'text':text}]
             elif format=='text_lines':data=[{'line':number,'text':line} for number,line in enumerate(text.splitlines(),1) if line.strip()]
             else:raise ValueError('Unsupported annotation format')
-            if entry.get('records_key'):data=_nested(data,entry['records_key'])
+            if entry.get('records_key'):
+                if not isinstance(data,dict):raise ValueError('Annotation records_key requires an object')
+                data=_nested(data,entry['records_key'])
             if entry.get('record_key_field'):
                 field = entry['record_key_field']
                 if not isinstance(data,dict) or any(not isinstance(value,dict) or field in value for value in data.values()):
@@ -242,16 +255,24 @@ class StructuredCollectionAdapter(DatasetAdapter):
                 types.setdefault(key,set()).add(kind)
         return {key:next(iter(values)) if len(values)==1 else 'object' for key,values in types.items()}
 
+    @contextmanager
     def _remote(self,key,budget):
         if key in self.config.get('local_archives', {}):
-            return _LocalArchive(self.config[self.config['local_archives'][key]['path_key']], budget)
+            with _LocalArchive(self.config[self.config['local_archives'][key]['path_key']], budget) as reader:yield reader
+            return
+        if self.preparation_transfer_limit is not None:budget=min(budget,self.preparation_transfer_limit-self.bytes_fetched)
+        if budget<1:raise ValueError('Original archive transfer budget exhausted')
         entry=self.config['remote_archives'][key]
         cache=BoundedCache(self.config['remote_cache_root'],max_bytes=self.config.get('remote_cache_bytes',1_000_000_000))
         if 'parts' in entry:
             if sum(part['bytes'] for part in entry['parts']) != entry['bytes']:
                 raise ValueError('Multipart archive size disagrees with its pinned parts')
-            return MultipartRangeReader(entry['parts'],byte_budget=budget,cache=cache,cancel=getattr(self,'cancel',None))
-        return HttpsRangeReader(entry['url'],size=entry['bytes'],etag=entry['etag'],allowed_hosts=entry['allowed_hosts'],byte_budget=budget,cache=cache)
+            reader=MultipartRangeReader(entry['parts'],byte_budget=budget,cache=cache,cancel=getattr(self,'cancel',None))
+        else:
+            reader=HttpsRangeReader(entry['url'],size=entry['bytes'],etag=entry['etag'],allowed_hosts=entry['allowed_hosts'],byte_budget=budget,cache=cache,credential_profile=self.config.get('credential_profile'),cancel=getattr(self,'cancel',None))
+        try:
+            with reader:yield reader
+        finally:self.bytes_fetched+=reader.bytes_fetched
 
     def _inventory(self):
         if not hasattr(self,'_media_inventory'):
@@ -276,18 +297,31 @@ class StructuredCollectionAdapter(DatasetAdapter):
                 if ref.startswith('file/'):individual.add(ref[5:])
                 else:
                     _,key,member=ref.split('/',2);wanted.setdefault(key,set()).add(member)
-        fetched=getattr(self,'_annotation_bytes_fetched',0)
+        fetched=getattr(self,'_annotation_bytes_fetched',0);self._native_zip_metadata={}
         if individual:
             missing=individual-set(self._inventory())
             if missing:raise ValueError(f'Annotations reference {len(missing)} missing inventory images: {sorted(missing)[:3]}')
+        declared=set(self.config.get('declared_absent_media',[]));observed_absent=set()
+        for ref in declared:
+            parts=ref.split('/',2)
+            if len(parts)!=3 or parts[0]!='zip' or parts[1] not in wanted:
+                raise ValueError('Declared absent media must reference a configured ZIP asset')
+            _safe_relative(parts[2])
         for key,names in wanted.items():
             if cancel:cancel()
             with self._remote(key,budget-fetched) as source,zipfile.ZipFile(source) as archive:
                 entries={i.filename:i for i in archive.infolist() if not i.is_dir()}
                 missing=names-set(entries)
-                if missing:raise ValueError(f'Annotations reference {len(missing)} missing ZIP images in {key}: {sorted(missing)[:3]}')
+                refs={f'zip/{key}/{name}' for name in missing}
+                if refs-declared:raise ValueError(f'Annotations reference {len(missing)} missing ZIP images in {key}: {sorted(missing)[:3]}')
+                observed_absent.update(refs)
+                for name in names-set(missing):
+                    info=entries[name]
+                    self._native_zip_metadata[f'zip/{key}/{name}']={'native_member_bytes':info.file_size,'zip_crc32':info.CRC}
                 fetched+=source.bytes_fetched
+        if observed_absent!=declared:raise ValueError('Declared absent media differs from native ZIP membership')
         return {'referenced_images':sum(len(names) for names in wanted.values())+len(individual),'archives':len(wanted),'metadata_bytes_fetched':fetched,
+                'absent_media_references':len(observed_absent),'absent_media':sorted(observed_absent),
                 'integrity':('Remote archives: strong ETags and ZIP CRCs, full remote SHA-256 not computed. Local archives: pinned full-file SHA-256 and member CRCs.' if wanted else 'Original image files checked against pinned checksums or strong ETag and size on access; ETags are consistency fingerprints, not content hashes.')}
 
     def iter_records(self,source,cursor=None,limit=None):
@@ -298,7 +332,18 @@ class StructuredCollectionAdapter(DatasetAdapter):
         for ordinal,row in enumerate(rows[start:end],start):
             record=DatasetAdapter._record(self,row,ordinal);record.source.pop('_atlas_media_refs',None)
             for asset in record.assets:
+                if asset.uri is None:continue
+                for entry in self.config.get('media_sha256_fields',[]):
+                    ref=entry.get('prefix','')+str(row.get(entry['member_field'],''))
+                    if asset.uri==ref:
+                        digest=row.get(entry['sha256_field'])
+                        if not isinstance(digest,str) or not re.fullmatch(r'[0-9a-f]{64}',digest):raise ValueError('Native per-asset checksum field is invalid')
+                        asset.sha256=digest
                 if asset.uri in row.get('_atlas_media_conditions',{}):asset.metadata.update(row['_atlas_media_conditions'][asset.uri])
+                if asset.uri in self.config.get('declared_absent_media',[]):
+                    asset.metadata.update(availability='absent_from_pinned_release',source_path=asset.uri)
+                    asset.uri=None
+                    continue
                 if asset.uri.startswith('file/'):
                     entry=self._inventory()[asset.uri[5:]]
                     asset.sha256=entry.get('sha256')
@@ -306,11 +351,17 @@ class StructuredCollectionAdapter(DatasetAdapter):
                     continue
                 key=asset.uri.split('/')[1]
                 asset.metadata.update({'representation':'original ZIP member'})
+                asset.metadata.update(getattr(self,'_native_zip_metadata',{}).get(asset.uri,{}))
                 if key in self.config.get('remote_archives', {}):
                     spec=self.config['remote_archives'][key]
                     if 'parts' in spec:
                         asset.metadata['source_integrity']='Ordered multipart source; each part has a pinned strong ETag.'
+                        asset.metadata['source_part_etags']=[part['etag'] for part in spec['parts']]
                     else:asset.metadata['source_etag']=spec['etag']
+                elif key in self.config.get('local_archives',{}):
+                    path_key=self.config['local_archives'][key]['path_key'];path=Path(self.config[path_key])
+                    parent_sha=self.config.get('derived_archive_checksums',{}).get(path_key) or next((entry['sha256'] for entry in self.config.get('source_files',[]) if Path(entry['path'])==path),None)
+                    if parent_sha:asset.metadata['source_archive_sha256']=parent_sha
             source.charge(len(record.model_dump_json().encode()));records.append(record)
         return RecordBatch(records,str(end) if end<len(rows) else None,len(records))
 
@@ -358,6 +409,10 @@ class StructuredCollectionAdapter(DatasetAdapter):
 
     def _image_handle(self,source,data,asset_ref):
         source.charge(len(data))
+        if self.config.get('mapping',{}).get('media_modality')=='video':
+            from dataset_atlas.storage.video import verify_mp4
+            verify_mp4(data)
+            return MediaHandle(data,'video/mp4',hashlib.sha256(data).hexdigest(),asset_ref)
         with Image.open(io.BytesIO(data)) as image:
             if image.width*image.height>50_000_000:raise ValueError('Remote ZIP image exceeds pixel budget')
             mime=Image.MIME.get(image.format,'application/octet-stream');image.verify()

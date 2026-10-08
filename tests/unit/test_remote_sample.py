@@ -39,7 +39,7 @@ def test_budget_limits_selected_row_groups_and_then_exhausts_them():
     rows = drain(sampler)
     assert len({(f, g) for f, g, _ in rows}) == 3 and len(rows) == 30
     assert sampler.selected_bytes <= 350 and sampler.next() is None
-    assert sampler.description(len(rows))['design'].startswith('two-stage')
+    assert sampler.description(len(rows))['design'].startswith('Budget-conditioned')
 
 
 def test_row_group_larger_than_budget_selects_nothing():
@@ -48,7 +48,27 @@ def test_row_group_larger_than_budget_selects_nothing():
         TwoStageSampler([(0, 0, 0, 1)])
 
 
-def shards(tmp_path, images=False):
+def test_budgeted_full_index_preview_preserves_native_subset_and_group_provenance():
+    from dataset_atlas.models import Record
+    from dataset_atlas.preparation.remote_sample import draw_native_subset
+    class Adapter:
+        def records_at(self, source, targets):
+            return [Record(id=str(row), dataset_id='fixture', release_id='native', snapshot_id='pinned',
+                source={'label': row}) for _, _, row in targets]
+    spec = {'native_class_groups': {'field': 'label', 'groups': [{'name': 'kept', 'start': 10, 'end': 19}],
+                                  'provenance': {'revision': 'fixture-author'}}}
+    sampler = TwoStageSampler([(0, 0, 100, 1)], byte_budget=10)
+    records, description = draw_native_subset(Adapter(), None, sampler, 10, spec)
+    assert {record.source['label'] for record in records} == set(range(10, 20))
+    assert all(record.source['_atlas_native_class_group']['native_label'] == record.source['label'] for record in records)
+    assert description['native_source_population_count'] == 100
+    assert description['excluded_by_native_filter'] > 0
+    assert description['rows_drawn'] > 10
+    with pytest.raises(ValueError, match='candidate and transfer bounds'):
+        draw_native_subset(Adapter(), None, TwoStageSampler([(0, 0, 100, 1)], byte_budget=10), 10, spec, max_candidates=1)
+
+
+def shards(tmp_path, images=False, nullable=True):
     payloads = {}
     for shard in range(2):
         rows = []
@@ -56,7 +76,7 @@ def shards(tmp_path, images=False):
             row = {'text': f'shard {shard} row {i}', 'value': i}
             if images:
                 picture = io.BytesIO(); Image.new('RGB', (4 + i % 3, 5), (i, shard, 7)).save(picture, 'PNG')
-                row['images'] = [{'bytes': None if i % 4 == 0 else picture.getvalue(), 'path': f'{shard}-{i}.png'}]
+                row['images'] = [{'bytes': None if nullable and i % 4 == 0 else picture.getvalue(), 'path': f'{shard}-{i}.png'}]
             rows.append(row)
         path = tmp_path / f'train-{shard}.parquet'
         pq.write_table(pa.Table.from_pylist(rows), path, row_group_size=10)
@@ -107,6 +127,30 @@ def test_sampled_preview_covers_all_shards_without_a_complete_index(tmp_path, mo
     assert record.text == f"shard {origin['file'][6]} row {origin['row']}"
 
 
+def test_complete_filtered_index_and_budgeted_media_preview_have_identical_membership(tmp_path, monkeypatch):
+    payloads = shards(tmp_path, images=True, nullable=False)
+    spec = {'native_class_groups': {'field': 'value', 'groups': [{'name': 'native subset', 'start': 0, 'end': 69}],
+                                  'provenance': {'revision': 'synthetic author mapping'}}}
+    configure(tmp_path, monkeypatch, payloads, {'expected_count': 140, 'adapter_config': {
+        'expected_source_count': 234, 'record_filter': spec}})
+    manager = PreparationManager(tmp_path)
+    plan = manager.plan('huge', 5_000_000, 5_000_000, source_mode='selective')
+    assert plan['ready']
+    run(tmp_path, plan['id'])
+    assert manager.status(plan['id'])['status'] == 'completed'
+    registry = Registry(tmp_path)
+    pack = registry.pack('huge')
+    originals = {json.loads(value)['id']: json.loads(value)['source'] for value in
+        pq.read_table(registry.snapshot_path('huge') / 'records.parquet', columns=['record_json']).column(0).to_pylist()}
+    assert len(originals) == 140 and len(pack.records) == 100
+    for record in pack.records:
+        assert 0 <= record.source['value'] <= 69
+        assert record.source == originals[record.id]
+        assert record.source['_atlas_native_class_group']['native_label'] == record.source['value']
+    assert pack.sampling['population_count'] == 140
+    assert pack.sampling['native_source_population_count'] == 234
+
+
 def test_transfer_budget_switches_to_documented_two_stage_design(tmp_path, monkeypatch):
     payloads = shards(tmp_path)
     configure(tmp_path, monkeypatch, payloads)
@@ -117,7 +161,7 @@ def test_transfer_budget_switches_to_documented_two_stage_design(tmp_path, monke
     plan = PreparationManager(tmp_path).plan('huge', footer + group * 3 + group // 2, 5_000_000, source_mode='sample')
     run(tmp_path, plan['id'])
     pack = Registry(tmp_path).pack('huge')
-    assert pack.sampling['design'].startswith('two-stage')
+    assert pack.sampling['design'].startswith('Budget-conditioned')
     assert pack.sampling['selected_row_group_transfer_bytes'] <= pack.sampling['transfer_budget_bytes']
     assert len(pack.records) == 10 * pack.sampling['row_groups_selected'] < 100
     assert Registry(tmp_path).dataset('huge').coverage.preview == 'partial'
@@ -132,7 +176,18 @@ def test_embedded_images_are_opened_and_absent_slots_excluded(tmp_path, monkeypa
     receipt = json.loads((registry.active_directory('huge') / 'receipt.json').read_text())
     assert len(pack.records) == 100 and all(r.source['value'] % 4 for r in pack.records)
     assert receipt['preview_media_validation']['unavailable_candidate_records'] > 0
+    assert pack.sampling['valid_for_population_prevalence'] is False
+    assert pack.sampling['media_availability_exclusions'] == receipt['preview_media_validation']['unavailable_candidate_records']
+    assert receipt['sampling']['valid_for_population_prevalence'] is False
     assert all(a.sha256 for r in pack.records for a in r.assets)
+    assert receipt['remote_media_bytes']>0
+    assert receipt['retained_preview_original_bytes']>0
+    assert pack.checksums
+    for record in pack.records:
+        for asset in record.assets:
+            path=registry.active_directory('huge')/'pack'/asset.uri
+            assert hashlib.sha256(path.read_bytes()).hexdigest()==asset.sha256
+            assert asset.metadata['source_ref'].startswith('remote/')
 
 
 def test_shard_rank_reads_only_selected_footers_and_leaves_total_unknown(tmp_path, monkeypatch):
@@ -144,3 +199,13 @@ def test_shard_rank_reads_only_selected_footers_and_leaves_total_unknown(tmp_pat
     assert pack.sampling['shards_in_population'] == 1 and pack.sampling['shards_in_release'] == 2
     assert len({r.source['_atlas_origin']['file'] for r in pack.records}) == 1
     assert registry.dataset('huge').coverage.total_count is None
+
+
+def test_cost_conditioning_is_disclosed_even_before_first_rejected_draw():
+    sampler = TwoStageSampler([(0,0,100,1),(0,1,900,1000)],byte_budget=1)
+    receipt = sampler.description(0)
+    assert receipt['row_groups_exceeding_initial_budget'] == 1
+    assert receipt['rows_in_groups_exceeding_initial_budget'] == 900
+    assert receipt['rejected_draws_for_transfer_budget'] == 0
+    assert receipt['valid_for_population_prevalence'] is False
+    assert 'zero inclusion' in receipt['design']

@@ -10,6 +10,7 @@ import hashlib
 import json
 from pathlib import Path
 import re
+import sqlite3
 import tarfile
 
 from dataset_atlas.storage.local import read_rooted_file
@@ -45,6 +46,12 @@ class DocciAdapter(StructuredAdapter):
 
     def probe(self) -> SourceDescription:
         descriptions, images = self._path(), self._images_archive()
+        if self.config.get('original_access_index'):
+            index=Path(self.config['original_access_index'])
+            exists=descriptions.is_file() and (index/'receipt.json').is_file()
+            return SourceDescription('jsonl',str(descriptions),exists,self.revision,
+                descriptions.stat().st_size if exists else None,True,True,True,False,True,
+                ('Author JSONL joined to SHA-256-verified native TAR members; images read by checkpoints',))
         exists = descriptions.is_file() and images.is_file()
         size = descriptions.stat().st_size + images.stat().st_size if exists else None
         return SourceDescription(
@@ -60,7 +67,7 @@ class DocciAdapter(StructuredAdapter):
             raise ValueError("DOCCI source files require pinned SHA-256 checksums")
         if base.expected_download_bytes is None or base.expected_download_bytes > max_bytes:
             raise ValueError("DOCCI sources exceed approved preparation byte budget")
-        if self._images_archive().stat().st_size > _MAX_ARCHIVE_BYTES:
+        if self._images_archive().exists() and self._images_archive().stat().st_size > _MAX_ARCHIVE_BYTES:
             raise ValueError("DOCCI image archive exceeds explicit 8 GB cap")
         return PreparationPlan(
             self.dataset.id, self.revision, cursor, limit, max_bytes, 0,
@@ -80,7 +87,7 @@ class DocciAdapter(StructuredAdapter):
             name, example_id, split = row.get("image_file"), row.get("example_id"), row.get("split")
             if not isinstance(name, str) or not _IMAGE_NAME.fullmatch(name):
                 raise ValueError("DOCCI description has invalid image_file")
-            if example_id != name[:-4] or split != name.rsplit("_", 1)[0]:
+            if not isinstance(example_id,str) or example_id != name[:-4] or split != name.rsplit("_", 1)[0]:
                 raise ValueError("DOCCI description identity/split differs from image_file")
             if name in names or example_id in ids:
                 raise ValueError("duplicate DOCCI image or example ID")
@@ -96,6 +103,20 @@ class DocciAdapter(StructuredAdapter):
     def prepare(self, approved_plan: PreparationPlan) -> PreparedSource:
         source = DatasetAdapter.prepare(self, approved_plan)
         descriptions, archive_path = self._path(), self._images_archive()
+        if self.config.get('original_access_index'):
+            index=Path(self.config['original_access_index'])
+            proof=json.loads((index/'receipt.json').read_text())
+            if proof['source_sha256']!=self.config['images_sha256'] or _sha256(descriptions)!=self.config['sha256']:
+                raise ValueError('DOCCI source checksum differs from pinned release')
+            for name,sha in proof['checksums'].items():
+                if name not in {'members.sqlite','checkpoints.gzidx'} or _sha256(index/name)!=sha:
+                    raise ValueError('DOCCI original-access index checksum changed')
+            names=self._description_names()
+            with sqlite3.connect((index/'members.sqlite').resolve().as_uri()+'?mode=ro',uri=True) as db:
+                members=db.execute('SELECT name,bytes FROM members').fetchall()
+            if {name for name,_ in members}!={'images/'+name for name in names} or any(not 3<=size<=_MAX_IMAGE_BYTES for _,size in members):
+                raise ValueError('DOCCI indexed archive filenames differ from descriptions')
+            return source
         if descriptions.stat().st_size + archive_path.stat().st_size > source.max_bytes:
             raise ValueError("DOCCI sources exceed approved preparation byte budget")
         description_hash, archive_hash = _sha256(descriptions), _sha256(archive_path)
@@ -162,6 +183,13 @@ class DocciAdapter(StructuredAdapter):
     def resolve_asset(self, source: PreparedSource, asset_ref: str) -> MediaHandle:
         if not _IMAGE_NAME.fullmatch(asset_ref):
             raise ValueError("invalid DOCCI image reference")
+        if self.config.get('original_access_index'):
+            from dataset_atlas.storage.indexed_tar import read_tar_member
+            data,proof=read_tar_member(self.config['original_access_index'],'images/'+asset_ref,
+                max_bytes=min(_MAX_IMAGE_BYTES,source.max_bytes-source.bytes_read),
+                transfer_bytes=self.config.get('original_transfer_bytes',32_000_000),local_source=self._images_archive())
+            source.charge(len(data))
+            return MediaHandle(data,'image/jpeg',proof['sha256'],asset_ref)
         index = getattr(self, "_image_index", None)
         if index is None:
             index = json.loads((self._prepared() / "index.json").read_text(encoding="utf-8"))["images"]

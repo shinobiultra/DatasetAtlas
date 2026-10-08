@@ -57,3 +57,9 @@ relationships:
   target_id: sbbench
   status: asserted_from_source_review
   scope: Cropped synthetic split of SBBench under a shortened name.
+- type: same_source_family_as
+  target_id: sbbench-syn-crop
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: The paper chart label SB-Syn-Crop plausibly denotes the author crop releases; it is not established as
+    an alias of this prepared population.

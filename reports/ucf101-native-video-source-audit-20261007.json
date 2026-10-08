@@ -1,0 +1,41 @@
+{
+  "max_transfer_bytes": 40000000,
+  "max_output_bytes": 40000000,
+  "native_contents_sent_to_models": false,
+  "ucf101-recognition": {
+    "path": "work/ucf101-native-audit-20261007/recognition.zip",
+    "bytes": 113943,
+    "sha256": "5c0d1a53b8ed364a2ac830a73f405e51bece7d98ce1254fd19ed4a36b224bd27",
+    "transferred_bytes": 113943
+  },
+  "ucf101": {
+    "path": "work/ucf101-native-audit-20261007/sample.avi",
+    "bytes": 267680,
+    "sha256": "801e1cfaeef22a6027d2efd013f698eb2f4e30b63604b79bc814f8b3015b9fab",
+    "transferred_bytes": 1854336
+  },
+  "probe": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "mpeg4",
+        "codec_type": "video",
+        "width": 320,
+        "height": 240,
+        "pix_fmt": "yuv420p",
+        "nb_frames": "143"
+      },
+      {
+        "codec_name": "mp3",
+        "codec_type": "audio",
+        "nb_frames": "217"
+      }
+    ],
+    "format": {
+      "format_name": "avi",
+      "duration": "5.720000"
+    }
+  },
+  "status": "passed"
+}

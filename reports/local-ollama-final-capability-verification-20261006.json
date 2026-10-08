@@ -1,0 +1,28 @@
+{
+  "checked_at_utc": "2026-10-06T09:42:13.624747+00:00",
+  "provider_id": "local-ollama-qwen35",
+  "generation_settings": {
+    "max_tokens": 512,
+    "reasoning_effort": "none"
+  },
+  "capabilities": {
+    "text_generation": {
+      "status": "supported",
+      "tested_at": "2026-10-06T09:42:13.193832+00:00",
+      "detail": "benign probe succeeded"
+    },
+    "single_image_input": {
+      "status": "supported",
+      "tested_at": "2026-10-06T09:42:13.397938+00:00",
+      "detail": "benign probe succeeded"
+    },
+    "multiple_image_input": {
+      "status": "supported",
+      "tested_at": "2026-10-06T09:42:13.617576+00:00",
+      "detail": "benign probe succeeded"
+    }
+  },
+  "source": "https://docs.ollama.com/api/openai-compatibility",
+  "scope": "Local benign text and generated red/blue pixels only; no dataset inputs. Existing native failures retained.",
+  "external_model_requests": 0
+}

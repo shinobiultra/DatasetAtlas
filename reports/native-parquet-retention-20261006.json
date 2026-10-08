@@ -1,0 +1,35 @@
+{
+  "checked_at_utc": "2026-10-06T04:34:41.169440+00:00",
+  "corpus_originals_modified": false,
+  "datasets": [
+    {
+      "dataset_id": "naturalbench",
+      "snapshot_id": "naturalbench-3a316bc9ca232b3988341858",
+      "preview_records": 100,
+      "original_refs_verified": 200,
+      "freed_source_allocated_bytes": 1141612544,
+      "retirement_receipt": "/home/bitwise/Documents/vibe/DatasetAtlas/reports/naturalbench-columnar-retirement-20261006.json",
+      "transfer_note": "Verification may reuse ETag-bound cached source ranges; transferred bytes are new network bytes for that successful attempt, not the sum of preserved failed attempts."
+    },
+    {
+      "dataset_id": "illuchar",
+      "snapshot_id": "illuchar-df53383aaaa234f3f95818ec",
+      "preview_records": 100,
+      "original_refs_verified": 100,
+      "freed_source_allocated_bytes": 2794704896,
+      "retirement_receipt": "/home/bitwise/Documents/vibe/DatasetAtlas/reports/illuchar-columnar-retirement-20261006.json",
+      "transfer_note": "Verification may reuse ETag-bound cached source ranges; transferred bytes are new network bytes for that successful attempt, not the sum of preserved failed attempts."
+    },
+    {
+      "dataset_id": "exams-v",
+      "snapshot_id": "exams-v-8bb5701d7c67cf214b73ca4d",
+      "preview_records": 100,
+      "original_refs_verified": 100,
+      "freed_source_allocated_bytes": 6442885120,
+      "retirement_receipt": "/home/bitwise/Documents/vibe/DatasetAtlas/reports/exams-v-columnar-retirement-20261006.json",
+      "transfer_note": "Verification may reuse ETag-bound cached source ranges; transferred bytes are new network bytes for that successful attempt, not the sum of preserved failed attempts."
+    }
+  ],
+  "total_native_source_allocated_bytes_retired": 10379202560,
+  "net_workspace_space_change": "Not inferred from gross source deletion; measured separately with all active reservations."
+}

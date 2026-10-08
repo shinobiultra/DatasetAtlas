@@ -1,0 +1,58 @@
+source_url: https://huggingface.co/datasets/aimagelab/ViSU-Text/tree/9afabb85b5570fa883b7caa0561d8c8d71d84dcd
+credential_profile: huggingface
+release: hf-9afabb85b5570fa883b7caa0561d8c8d71d84dcd
+adapter: structured_collection
+expected_count: 168700
+scope: 'All 168,700 original ViSU-Text caption-pair rows: 158,700 train, 5,000 validation
+  and 5,000 test. Every native safe/nsfw caption, incremental ID, prompt ID, tag and
+  COCO ID remains unchanged, including native split-dependent COCO ID types. Canonical
+  display text is the native safe caption; its paired unsafe caption remains separately
+  queryable as source.nsfw. This text-only component has no vision images and does
+  not establish access to the deliberately withheld unsafe vision corpus. Content
+  remains authorized-local and is never publicly distributed.'
+adapter_config:
+  annotations:
+  - path_key: test_path
+    format: json
+    split: test
+    source_status: Author text-only caption pairs; unsafe vision images are deliberately
+      unreleased.
+  - path_key: train_path
+    format: json
+    split: train
+    source_status: Author text-only caption pairs; unsafe vision images are deliberately
+      unreleased.
+  - path_key: validation_path
+    format: json
+    split: validation
+    source_status: Author text-only caption pairs; unsafe vision images are deliberately
+      unreleased.
+  mapping:
+    id: incremental_id
+    text: safe
+    label: tag
+  max_annotation_bytes: 60000000
+  native_record_read_bytes: 1000000000
+files:
+- source_name: ViSU-Text_test.json
+  url: https://huggingface.co/datasets/aimagelab/ViSU-Text/resolve/9afabb85b5570fa883b7caa0561d8c8d71d84dcd/ViSU-Text_test.json
+  bytes: 1566994
+  sha256: aac393f14187a9d8dfd5e16673a260d783a9d54edccf64d54424fcd2e9515094
+  config_key: test_path
+  format: json
+- source_name: ViSU-Text_train.json
+  url: https://huggingface.co/datasets/aimagelab/ViSU-Text/resolve/9afabb85b5570fa883b7caa0561d8c8d71d84dcd/ViSU-Text_train.json
+  bytes: 47663810
+  sha256: 257bc9c6238fe820b9d67b3149bb99d3d2bd69d8dbf9ab03c7c31c3600f20cd1
+  config_key: train_path
+  format: json
+- source_name: ViSU-Text_validation.json
+  url: https://huggingface.co/datasets/aimagelab/ViSU-Text/resolve/9afabb85b5570fa883b7caa0561d8c8d71d84dcd/ViSU-Text_validation.json
+  bytes: 1562087
+  sha256: 6ceb150be98c7535f070a41455b1f9483bbd4bff1748b63e3e749146457f86a4
+  config_key: validation_path
+  format: json
+resource_limits:
+  max_rss_bytes: 8000000000
+  max_cpu_seconds: 1800
+  max_wall_seconds: 3600

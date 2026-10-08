@@ -64,3 +64,9 @@ relationships:
   target_id: coco
   status: asserted_from_source_review
   scope: Text variant of the COCO gender overlay.
+- type: same_source_family_as
+  target_id: cocogender
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: DeBiasLens trains on 'Cocogender' images and captions citing Tang et al. 2021; the COCO-GB release is browsable
+    under cocogender, but which variant or text configuration DeBiasLens means is not established.

@@ -1,0 +1,62 @@
+# SAEgis' committed clean and adversarial images (author repository, pinned commit). The repository ships no table, so converters/adversarial_images.py
+# derives one row per image from the checksum-pinned file inventory at registry/media/ (Git blob SHA-1 + length per file, written once from the repository
+# tree at this commit). Images are fetched on demand from the pinned commit and verified against their Git blob SHA-1; the README is pinned only as provenance.
+release: github-6365cbfc9e4de1e6df01624b793abbef09789cc8
+adapter: structured_collection
+expected_count: 4800
+scope: 'All 4,800 images committed to the SAEgis author repository at the pinned commit: three source datasets (NIPS17, LLaVA-Instruct-150K, Medical-Multimodal-Eval),
+  each with 800 train, 100 dev and 100 test clean originals, plus 100 dev and 100 test attacked variants from each of three attack methods (FOA-Attack,
+  M-Attack, SSA-CWA). Every image is 224x224 and is fetched unchanged from the pinned commit, verified against its Git blob SHA-1. An attacked
+  image''s clean counterpart is the original with the same file name in the same split (all 1,800 pairs checked by pixel similarity; see reports/saegis-pairing-verification-20261006.json).
+  The repository has no licence file and the images derive from third-party datasets, so everything stays local.'
+source_url: https://github.com/conan1024hao/SAEgis/tree/6365cbfc9e4de1e6df01624b793abbef09789cc8
+files:
+- source_name: README.md
+  url: https://raw.githubusercontent.com/conan1024hao/SAEgis/6365cbfc9e4de1e6df01624b793abbef09789cc8/README.md
+  bytes: 6665
+  sha256: 1598cf94de7841d5f39432e6c7d78ef1942f2f900069c4f8c23ed6b791994e46
+  format: md
+  config_key: readme
+allowed_hosts:
+- raw.githubusercontent.com
+convert:
+  name: saegis_images
+  count: 4800
+  rows_sha256: 5edcb04101b873e29df59a84c7fc87714467fa39a5cf01d91e6909153973e8d3
+  params:
+    inventory: registry/media/saegis-clean-and-adversarial-splits.json
+    inventory_sha256: c85de461990b88f838e687d7daf5aa4d2f35a730b67c4738d8d77c510366c995
+    sources:
+    - NIPS17
+    - LLaVA-Instruct-150K
+    - Medical-Multimodal-Eval
+    attacks:
+    - FOA-Attack
+    - M-Attack
+    - SSA-CWA
+    split_sizes:
+      original:
+        train: 800
+        dev: 100
+        test: 100
+      attacked:
+        dev: 100
+        test: 100
+    count: 4800
+adapter_config:
+  annotations:
+  - path_key: path
+    format: jsonl
+    split: all
+    identity_prefix: saegis
+    media_template: '{media_path}'
+  mapping:
+    id: source_id
+    text: label
+  media_inventory_path: registry/media/saegis-clean-and-adversarial-splits.json
+  media_inventory_sha256: c85de461990b88f838e687d7daf5aa4d2f35a730b67c4738d8d77c510366c995
+  media_base_url: https://raw.githubusercontent.com/conan1024hao/SAEgis/6365cbfc9e4de1e6df01624b793abbef09789cc8
+  media_allowed_hosts:
+  - raw.githubusercontent.com
+  remote_cache_root: work/media-cache/originals
+  remote_cache_bytes: 1000000000

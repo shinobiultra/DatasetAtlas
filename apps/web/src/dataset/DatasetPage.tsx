@@ -94,6 +94,14 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
       setDataset(item)
       setUnit((item.coverage?.unit as Unit) ?? 'example')
       if (!canBrowse(item)) return
+      if (!(item.coverage?.preview_count ?? 0) && item.availability?.complete_data === 'local') {
+        const [info, available] = await Promise.all([provider.completeInfo(datasetId), provider.artifacts(datasetId)])
+        if (!live) return
+        setComplete(info); setFields(info.fields); setUnit(info.unit as Unit)
+        setArtifacts(available.filter(artifact => artifact.unit === info.unit && artifact.snapshot_ids.includes(info.snapshot_id)))
+        setScope('complete')
+        return
+      }
       const [loadedFields, loadedArtifacts] = await Promise.all([provider.fields(datasetId), provider.artifacts(datasetId)])
       if (!live) return
       setFields(loadedFields)
@@ -173,7 +181,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
     }
   }, [dataset, snapshotId, scope, resultSnapshotIds, unit, search, clauses, sort, sample, view])
 
-  const browsable = dataset ? canBrowse(dataset) : false
+  const browsable = dataset ? canBrowse(dataset) && (scope === 'complete' || (dataset.coverage?.preview_count ?? 0) > 0) : false
   const browse = useBrowse(datasetId, query, browsable, view === 'map' ? MAP_MAX_POINTS : Infinity)
   const { records, result, loading, loadingMore, hasMore, loadMore } = browse
   const sentinel = useInfiniteSentinel(loadMore, hasMore && !loading && !loadingMore && view !== 'map')
@@ -342,7 +350,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
           {supportsComplete(dataset) && (
             <Segmented
               label="Population scope" value={scope} onChange={value => void changeScope(value)}
-              options={[{ value: 'preview', label: 'Preview' }, { value: 'complete', label: 'Complete index' }]}
+              options={[...((dataset.coverage?.preview_count ?? 0) > 0 || dataset.availability?.complete_data !== 'local' ? [{ value: 'preview' as const, label: 'Preview' }] : []), { value: 'complete', label: 'Complete index' }]}
             />
           )}
           <button type="button" className="btn" aria-pressed={panel === 'about'} onClick={() => setPanel(panel === 'about' ? 'inspector' : 'about')}>
@@ -666,11 +674,11 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
           </div>
           <div className="ctx-scroll">
             {panel === 'inspector' && (record
-              ? <SampleInspector record={record} fields={fields} artifacts={artifacts} query={query} datasetId={datasetId} onOpenRecord={openRecordById} onFocus={() => focusRecord(record.id)} />
+              ? <SampleInspector mediaControls={centre !== 'focus'} record={record} fields={fields} artifacts={artifacts} query={query} datasetId={datasetId} onOpenRecord={openRecordById} onFocus={() => focusRecord(record.id)} />
               : <div className="insp-section"><Empty title="Nothing inspected">Click a card or row to inspect it. Clicking never changes your selection.</Empty></div>)}
             {panel === 'about' && <AboutPanel dataset={dataset} onOpenDataset={onOpenDataset} />}
-            {panel === 'analyze' && <AnalyzePanel selected={[...selected]} unit={unit} saved={savedSelection} onSave={saveSelection} onRan={onToast} />}
-            {panel === 'model' && <ModelPanel selected={[...selected]} unit={unit} onNotice={onToast} />}
+            {panel === 'analyze' && <AnalyzePanel selected={[...selected]} unit={unit} saved={savedSelection} fields={unitFields} artifacts={artifacts} populationScope={scope} onSave={saveSelection} onRan={onToast} onSelectIds={ids => { setSelected(new Set(ids)); setSavedSelection(null) }} />}
+            {panel === 'model' && <ModelPanel selected={[...selected]} unit={unit} snapshotIds={snapshotId ? [snapshotId] : undefined} fields={unitFields} resultSnapshotIds={resultSnapshotIds} onNotice={onToast} />}
           </div>
         </aside>
       )}

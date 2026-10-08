@@ -1,0 +1,51 @@
+{
+  "status": "passed",
+  "checked_at_utc": "2026-10-07T05:30:51.444219+00:00",
+  "native_archives": {
+    "Dutch": {
+      "sha256": "02eae01a90e05bdb90d8927cd9061ead6211c46ce7686d771b1341ec5083b26b",
+      "bytes": 8452065280
+    },
+    "English": {
+      "sha256": "cded618a5119808d0f517f1d8f5e50a42f42f7f5fbd892db5f6bc5e2054dba8f",
+      "bytes": 16190801920
+    },
+    "German": {
+      "sha256": "ee2d2e57c2d648a4292bdc93cc738c796516d18da7403231a6b78c91b5efe471",
+      "bytes": 14232719360
+    }
+  },
+  "conversion": {
+    "path": "/home/bitwise/Documents/vibe/DatasetAtlas/work/spoken-native-audio-conversion-20261007/converted/sentences.parquet",
+    "format": "parquet",
+    "count": 738234,
+    "rows_sha256": "380b7f9f030aa3e8735e4042391c2daa5e587408dbd367d16b6d9b3c2d9dd73b",
+    "file_sha256": "f85e0ebb7cdc4d57538c1c89989f0f9358ddaeb4cc663f730ebc7ea284e02262",
+    "columns": [
+      "source_id",
+      "language",
+      "article_path",
+      "normalized_text",
+      "native_sentence_attributes",
+      "native_alignment_xml",
+      "article_info_json",
+      "source_swc_sha256",
+      "media_availability",
+      "sentence_ordinal",
+      "native_token_count",
+      "media_refs",
+      "native_audio_json"
+    ],
+    "adapter_config": {
+      "mapping": {
+        "id": "source_id",
+        "text": "normalized_text",
+        "media": "media_refs",
+        "media_modality": "audio"
+      },
+      "sequential_index": true
+    }
+  },
+  "max_conversion_output_bytes": 3000000000,
+  "native_contents_sent_to_models": false
+}

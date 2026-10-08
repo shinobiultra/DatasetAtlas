@@ -1,0 +1,51 @@
+release: author-b400e173549071916ad1b3d449293bc8d8b4b763
+adapter: structured_collection
+credential_profile: huggingface
+expected_count: 400
+scope: All 400 native caption/image pairs from the pinned author JSONL, with both original images for
+  every example retained as separate paired conditions. Only preview originals are acquired; remaining
+  originals are verified on request.
+allowed_hosts: &id001
+- huggingface.co
+- cas-bridge.xethub.hf.co
+- us.aws.cdn.hf.co
+- cdn-lfs-us-1.huggingface.co
+remote_metadata_bytes: 1000000
+adapter_config:
+  media_scope: partial
+  mapping:
+    id: id
+  annotations:
+  - path_key: annotation_path
+    format: jsonl
+    split: test
+    choices_columns:
+    - caption_0
+    - caption_1
+    media_variants:
+    - condition: image_0
+      template: images/{image_0}.png
+      media_archive: images
+      target_field: caption_0
+    - condition: image_1
+      template: images/{image_1}.png
+      media_archive: images
+      target_field: caption_1
+  remote_archives:
+    images:
+      url: https://huggingface.co/datasets/facebook/winoground/resolve/b400e173549071916ad1b3d449293bc8d8b4b763/data/images.zip
+      bytes: 363798905
+      etag: '"300794dbb7fb9342dd7274e80af28871fadc8b5ef7837703a14ed7bce5cb022f"'
+      allowed_hosts: *id001
+  remote_cache_root: work/media-cache/winoground
+  remote_cache_bytes: 100000000
+  max_annotation_bytes: 500000
+  media_transfer_bytes: 150000000
+  verify_remote_preview_media: true
+files:
+- source_name: examples.jsonl
+  bytes: 115079
+  sha256: 055f68668e60bb9bac18ec37dcbb40b935690302011e3f8f53767f0b68a65911
+  url: https://huggingface.co/datasets/facebook/winoground/resolve/b400e173549071916ad1b3d449293bc8d8b4b763/data/examples.jsonl
+  config_key: annotation_path
+  format: jsonl

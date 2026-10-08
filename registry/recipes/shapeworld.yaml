@@ -1,0 +1,21 @@
+release: author-fixed-examples-e720bf46e57fc01326d04d639fa6133d9c12158f
+adapter: structured_archive
+expected_count: 2100
+scope: All 2100 fixed author-released world examples across the 21 agreement and classification configurations
+  at the pinned Git revision. This is the released example population, not an arbitrary newly generated
+  dataset or a paper-specific training population.
+allowed_hosts:
+- codeload.github.com
+convert:
+  name: shapeworld_examples
+  count: 2100
+  rows_sha256: 091ce0b7bb6185ef88deaf498a702eb9f8de053ea63da27598c25ab1e677e3ba
+files:
+- source_name: shapeworld-fixed-examples.zip
+  bytes: 84249084
+  sha256: 707b1e5b6c7b0901c40d4b69d23a4f1277a0e8f7cb3f2731bb53e5980e8eba37
+  url: https://codeload.github.com/AlexKuhnle/ShapeWorld/zip/e720bf46e57fc01326d04d639fa6133d9c12158f
+  config_key: media_archive
+  format: zip
+adapter_config:
+  verify_remote_preview_media: true

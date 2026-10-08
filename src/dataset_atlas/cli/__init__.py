@@ -20,6 +20,10 @@ def main(argv=None):
     usage=storage.add_parser('status',help='Measure local storage including sources, previews, models, caches and staging')
     usage.add_argument('--target-bytes',type=int)
     usage.add_argument('--ceiling-bytes',type=int)
+    clean=storage.add_parser('clean',help='Evict unpinned caches and test environments; hard-link checksum-identical acquired sources')
+    clean.add_argument('--execute',action='store_true')
+    clean.add_argument('--idle-media-caches',action='store_true',help='Evict only unpinned media caches outside active preparation namespaces')
+    clean.add_argument('--include-model-test-env',action='store_true',help='Also remove the reproducible isolated vLLM demonstration environment; retain model weights and evidence')
     configure=storage.add_parser('configure',help='Enable full-resolution on-demand compression and shared preparation admission limits')
     configure.add_argument('--target-bytes',type=int,default=100_000_000_000)
     configure.add_argument('--ceiling-bytes',type=int,default=150_000_000_000)
@@ -40,7 +44,7 @@ def main(argv=None):
     index.add_argument('--sha256',required=True)
     index.add_argument('--url',required=True)
     index.add_argument('--allow-host',action='append',required=True)
-    index.add_argument('--format',choices=['zip','gzip-tar'],required=True)
+    index.add_argument('--format',choices=['zip','gzip-tar','tar'],required=True)
     index.add_argument('--name',required=True)
     index.add_argument('--max-input-bytes',type=int,required=True)
     index.add_argument('--max-index-bytes',type=int,default=500_000_000)
@@ -56,6 +60,10 @@ def main(argv=None):
     retire.add_argument('--max-transfer-bytes',type=int,default=150_000_000)
     retire.add_argument('--modality',action='append',choices=['image','audio'],default=[])
     retire.add_argument('--execute',action='store_true')
+    cifar=storage.add_parser('retire-cifar-c',help='Preserve native RGB rows and protected previews before retiring acquired CIFAR-C TAR copies')
+    cifar.add_argument('--dataset',required=True,choices=['cifar-10-c','cifar-100-c'])
+    cifar.add_argument('--max-transfer-bytes',type=int,default=20_000_000)
+    cifar.add_argument('--execute',action='store_true')
     repacked=storage.add_parser('retire-repacked',help='Remove a redundant ZIP after exact native-member and retained-route verification')
     repacked.add_argument('--source',type=Path,required=True)
     repacked.add_argument('--sha256',required=True)
@@ -63,6 +71,18 @@ def main(argv=None):
     repacked.add_argument('--max-decoded-bytes',type=int,required=True)
     repacked.add_argument('--max-transfer-bytes',type=int,default=150_000_000)
     repacked.add_argument('--execute',action='store_true')
+    columnar=storage.add_parser('retire-columnar',help='Retain original previews and verified remote routes before removing acquired Parquet bodies')
+    columnar.add_argument('--dataset',required=True)
+    columnar.add_argument('--max-source-bytes',type=int,required=True)
+    columnar.add_argument('--max-preview-bytes',type=int,required=True)
+    columnar.add_argument('--max-transfer-bytes',type=int,required=True)
+    columnar.add_argument('--max-index-bytes',type=int,default=250_000_000)
+    columnar.add_argument('--execute',action='store_true')
+    verified=storage.add_parser('verify-retired-preview',help='Decode and re-derive a native preview after source-body retirement')
+    verified.add_argument('--dataset',required=True)
+    verified.add_argument('--max-preview-bytes',type=int,required=True)
+    verified.add_argument('--max-transfer-bytes',type=int,required=True)
+    verified.add_argument('--execute',action='store_true')
     corpus=sub.add_parser('corpus').add_subparsers(dest='action',required=True)
     scan=corpus.add_parser('scan');scan.add_argument('--papers-dir',type=Path,required=True);scan.add_argument('--output',type=Path,default=Path('work/corpus'))
     extract=corpus.add_parser('extract');extract.add_argument('--manifest',type=Path,required=True)
@@ -86,6 +106,9 @@ def main(argv=None):
     preparation.add_argument('--verify-remote-preview',metavar='DATASET_ID',help='Check a completed remote index and derive a preview with verified original images')
     preparation.add_argument('--verify-full-media',metavar='DATASET_ID',help='Prove every indexed image has a protected original and update media coverage')
     prune=datasets.add_parser('prune',help='List or remove failed, duplicate and unreferenced prepared versions');prune.add_argument('--execute',action='store_true')
+    metadata=datasets.add_parser('prepare-metadata',help='Index the pinned PATA author labels/URLs without fetching third-party images')
+    metadata.add_argument('--dataset',required=True,choices=['pata']);metadata.add_argument('--execute',action='store_true')
+    metadata.add_argument('--max-download-bytes',type=int,default=1_000_000);metadata.add_argument('--max-output-bytes',type=int,default=20_000_000)
     index=datasets.add_parser('index');index.add_argument('--dataset',required=True);index.add_argument('--expected-count',type=int,required=True);index.add_argument('--max-bytes',type=int,default=30_000_000_000)
     previews=sub.add_parser('previews',help='Fetch inspectable previews into a workspace that holds none yet').add_subparsers(dest='action',required=True)
     pstatus=previews.add_parser('status',help='List datasets by what this workspace holds; --plan also checks cost and readiness over the network');pstatus.add_argument('--plan',action='store_true');pstatus.add_argument('--dataset',action='append',default=[])
@@ -105,7 +128,8 @@ def main(argv=None):
     publish=sub.add_parser('publish').add_subparsers(dest='action',required=True)
     for action in ['validate','build']:
         p=publish.add_parser(action);p.add_argument('--profile',default='public');p.add_argument('--output',type=Path,default=Path('apps/web/public'));p.add_argument('--packs-dir',type=Path)
-    sub.add_parser('doctor')
+    doctor=sub.add_parser('doctor')
+    doctor.add_argument('--probe-provider',action='append',default=[],metavar='ID',help='Check a selected configured endpoint with a generated benign text probe; sends no dataset contents and downloads no files')
     args=parser.parse_args(argv);root=args.root.resolve()
     try:
         if args.command=='init':
@@ -116,6 +140,13 @@ def main(argv=None):
         if args.command in {'serve','previews','datasets','models'} and not (root/'registry/datasets').is_dir():
             raise ValueError(f'No catalogue in {root}. Run `atlas init {root}` to create a workspace, or pass --root for an existing one.')
         if args.command=='storage':
+            if args.action=='clean':
+                from dataset_atlas.storage.maintenance import clean_workspace,evict_idle_media_caches
+                if args.idle_media_caches:
+                    if args.include_model_test_env:raise ValueError('Idle media-cache cleanup cannot remove model environments')
+                    emit(evict_idle_media_caches(root,execute=args.execute))
+                else:emit(clean_workspace(root,execute=args.execute,include_model_test_env=args.include_model_test_env))
+                return 0
             if args.action=='status':
                 from dataset_atlas.storage.usage import workspace_usage
                 from dataset_atlas.storage.optimized import storage_policy
@@ -139,9 +170,20 @@ def main(argv=None):
                     from dataset_atlas.storage.indexed_tar import build_tar_index as build
                     bounds={'max_uncompressed_bytes':args.max_input_bytes}
                 emit(build(source,output,source_sha256=args.sha256,remote=remote,max_index_bytes=args.max_index_bytes,**bounds))
+            elif args.action=='retire-cifar-c':
+                from dataset_atlas.storage.cifar_ranges import retire_cifar_archive
+                emit(retire_cifar_archive(root,args.dataset,max_transfer_bytes=args.max_transfer_bytes,execute=args.execute))
             elif args.action=='retire-repacked':
                 from dataset_atlas.storage.retention import retire_repacked_archive
                 emit(retire_repacked_archive(root,args.index,args.source,source_sha256=args.sha256,max_decoded_bytes=args.max_decoded_bytes,max_transfer_bytes=args.max_transfer_bytes,execute=args.execute))
+            elif args.action=='retire-columnar':
+                from dataset_atlas.storage.columnar_retention import retire_columnar_sources
+                emit(retire_columnar_sources(root,args.dataset,max_source_bytes=args.max_source_bytes,max_preview_bytes=args.max_preview_bytes,
+                    max_transfer_bytes=args.max_transfer_bytes,max_index_bytes=args.max_index_bytes,execute=args.execute))
+            elif args.action=='verify-retired-preview':
+                from dataset_atlas.storage.columnar_retention import verify_retired_preview
+                emit(verify_retired_preview(root,args.dataset,max_preview_bytes=args.max_preview_bytes,
+                    max_transfer_bytes=args.max_transfer_bytes,execute=args.execute))
             elif args.action=='retire-original':
                 from dataset_atlas.storage.retention import retire_image_archive
                 emit(retire_image_archive(root,args.dataset,args.index,args.source,mappings=[{'asset_prefix':args.asset_prefix,'member_prefix':args.member_prefix},{'asset_prefix':'media/'+args.asset_prefix,'member_prefix':args.member_prefix}],max_preview_bytes=args.max_preview_bytes,max_transfer_bytes=args.max_transfer_bytes,extracted_root=args.extracted_root,linked_datasets=args.also_dataset,modalities=args.modality or ('image',),execute=args.execute))
@@ -177,6 +219,9 @@ def main(argv=None):
             elif args.action=='prune':
                 from dataset_atlas.preparation import PreparationManager
                 emit(PreparationManager(root).prune(execute=args.execute))
+            elif args.action=='prepare-metadata':
+                from dataset_atlas.preparation.pata import prepare_metadata
+                emit(prepare_metadata(root,execute=args.execute,max_download_bytes=args.max_download_bytes,max_output_bytes=args.max_output_bytes))
             elif args.action in {'inspect','add'}:
                 from dataset_atlas.registry.user import inspect_source,register
                 options={key:getattr(args,key) for key in ('media_column','text_column','question_column','id_column','media_root') if getattr(args,key)}
@@ -257,6 +302,8 @@ def main(argv=None):
             import uvicorn
             from dataset_atlas.api import create_app
             if args.host not in {'127.0.0.1','::1','localhost'}:raise ValueError('Use loopback binding and an SSH tunnel; remote binding is disabled by default')
+            from dataset_atlas.jobs.coordinator_lock import acquire_coordinator_lock
+            coordinator_lock=acquire_coordinator_lock(root/'work')  # held until the process exits
             uvicorn.run(create_app(root),host=args.host,port=args.port)
         elif args.command=='doctor':
             checks={name:importlib.util.find_spec(name) is not None for name in ['fastapi','duckdb','pyarrow','nudenet','torchvision','transformers','sentence_transformers','lancedb','umap']}
@@ -275,7 +322,22 @@ def main(argv=None):
                 if not Path(external).is_dir():issues.append(f'Configured storage root does not exist: {external}. Preparations are refused until it is fixed: re-run `atlas storage configure` with --external-root for each root that still exists.')
             datasets=Registry(root).datasets() if catalogue else []
             user=[d.id for d in datasets if d.origin=='user']
-            emit({'workspace':str(root),'writable':os.access(root,os.W_OK),'datasets':len(datasets),'your_datasets':user,'free_bytes':free,'dependencies':checks,'frontend_built':frontend,'issues':issues,'providers':'Not probed; no network requests performed','downloads':0})
+            provider_checks='Not probed; no network requests performed'
+            if args.probe_provider:
+                if len(args.probe_provider)>8 or len(set(args.probe_provider))!=len(args.probe_provider):raise ValueError('Select at most eight unique provider IDs')
+                from dataset_atlas.providers import ProviderService
+                service=ProviderService(root/'local-config/providers.json',lambda identity:None)
+                provider_checks=[]
+                for identity in args.probe_provider:
+                    try:
+                        view=service.probe(identity,['text_generation'])
+                        capability=view.capabilities['text_generation']
+                        provider_checks.append({'provider_id':identity,'model':view.config.model,'capability':capability.model_dump(mode='json'),'probe_input':'generated benign text only'})
+                        if capability.status!='supported':issues.append(f'Provider {identity} did not pass its text-generation connection check: {capability.detail}')
+                    except ValueError as exc:
+                        provider_checks.append({'provider_id':identity,'error':str(exc)})
+                        issues.append(f'Provider {identity} connection check failed: {exc}')
+            emit({'workspace':str(root),'writable':os.access(root,os.W_OK),'datasets':len(datasets),'your_datasets':user,'free_bytes':free,'dependencies':checks,'frontend_built':frontend,'issues':issues,'providers':provider_checks,'downloads':0})
             if issues:return 1
         elif args.command=='publish':
             from dataset_atlas.exports import build_publication,validate_publication
@@ -286,6 +348,10 @@ def main(argv=None):
             if hasattr(result,'errors') and result.errors:return 1
         elif args.command in {'analyze','export'}:
             from dataset_atlas.api.app import State,create_app
+            # Both commands construct the app's recovering job manager, so
+            # acquire ownership before either can recover pending runs.
+            from dataset_atlas.jobs.coordinator_lock import acquire_coordinator_lock
+            coordinator_lock=acquire_coordinator_lock(root/'work')
             app=create_app(root)
             manager=app.state.jobs
             try:

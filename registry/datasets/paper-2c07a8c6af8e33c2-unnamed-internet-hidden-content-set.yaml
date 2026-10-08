@@ -43,4 +43,11 @@ relationships:
 - type: source_subset_of
   target_id: hc-bench
   scope: wild/ 53-image current HF release; paper version differs
+- type: same_source_family_as
+  target_id: hc-bench
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: 'The author''s HC-Bench repository: its wild/ part is browsable here at the pinned revision,
+    but the current repository holds other object/text parts and differs from the 112-image version the
+    paper describes, so this is context, not the paper''s collection.'
 source_url: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench

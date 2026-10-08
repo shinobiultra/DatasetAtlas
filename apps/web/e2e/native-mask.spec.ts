@@ -12,12 +12,9 @@ test('real TextVQA-X mask is labelled and its native array downloads unchanged',
   const pack = await packResponse.json()
   const record = pack.records[0], array = record.assets.find((asset: { modality: string }) => asset.modality === 'array')
   const original = Buffer.from(await (await fetch(`${api}${array.uri}`)).arrayBuffer())
-  await page.route('**/api/v1/**', async route => {
-    const request = route.request(), url = new URL(request.url())
-    const response = await fetch(`${api}${url.pathname}${url.search}`, { method: request.method(), headers: { 'Content-Type': 'application/json', 'X-Atlas-Request': '1' }, body: request.method() === 'GET' ? undefined : request.postData() ?? undefined })
-    await route.fulfill({ status: response.status, contentType: response.headers.get('content-type') ?? 'application/octet-stream', body: Buffer.from(await response.arrayBuffer()) })
-  })
-  await page.goto('/?mode=workbench#/dataset/textvqa-x')
+  // Native browser downloads go to the real workbench; they must not depend on
+  // interception by the static-site API proxy used in other read-only tests.
+  await page.goto(`${api}/?mode=workbench#/dataset/textvqa-x`)
   const inspector = await inspectRecord(page, record.id)
   await inspector.getByRole('button', { name: 'Open', exact: true }).click()
   await page.getByLabel('Choose image in this record').selectOption('1')

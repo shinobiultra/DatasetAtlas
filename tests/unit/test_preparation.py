@@ -101,6 +101,18 @@ def test_storage_reservations_include_jobs_older_than_ui_listing(tmp_path, monke
     assert manager._storage_reservations() == 1010
 
 
+def test_reservation_subtracts_only_owned_allocated_bytes(tmp_path):
+    import os
+    fixture(tmp_path,1);manager=PreparationManager(tmp_path)
+    plan={'id':'a'*64,'dataset_id':'fixture','required_free_bytes':1000000}
+    version=tmp_path/'work/prepared/fixture'/plan['id'];version.mkdir(parents=True)
+    owned=version/'owned';owned.write_bytes(b'o'*10000)
+    shared=version/'shared';shared.write_bytes(b's'*20000);os.link(shared,tmp_path/'source-copy')
+    (version/'symlink').symlink_to(tmp_path/'source-copy')
+    assert manager._allocated_preparation_bytes(plan)==owned.stat().st_blocks*512
+    assert manager._allocated_preparation_bytes({'required_free_bytes':1000000})==0
+
+
 def test_shards_arrow_and_parquet_stable_ids(tmp_path):
     dataset = fixture(tmp_path, 3)
     arrow = tmp_path/'second.arrow'
@@ -132,6 +144,65 @@ def test_budget_unknown_source_cancel_and_drift(tmp_path):
     path = tmp_path/'registry/datasets/fixture.yaml'
     raw = yaml.safe_load(path.read_text());raw['release'] = 'changed';path.write_text(yaml.safe_dump(raw))
     with pytest.raises(ValueError, match='changed after planning'): run(tmp_path, plan['id'])
+
+
+def test_retry_preserves_failed_attempt_and_resource_receipt(tmp_path, monkeypatch):
+    dataset=fixture(tmp_path,1); manager=PreparationManager(tmp_path)
+    plan=manager.plan(dataset.id,1000000,1000000); directory=manager._path(plan['id'])
+    prior={'id':plan['id'],'dataset_id':dataset.id,'status':'failed','error':'retained failure','updated_at':1}
+    (directory/'status.json').write_text(json.dumps(prior))
+    (directory/'worker.log').write_bytes(b'failed output\n')
+    (directory/'resource-error.receipt').write_text(json.dumps({'message':'memory limit'}))
+    class Process:
+        pid=0
+        def __init__(self,*args,**kwargs):pass
+        def poll(self):return None
+    monkeypatch.setattr('dataset_atlas.preparation.subprocess.Popen',Process)
+    manager.start(plan['id'])
+    history=list((directory/'attempts').glob('*.json'));assert len(history)==1
+    receipt=json.loads(history[0].read_text())
+    assert receipt['status']==prior and receipt['resource_error']=={'message':'memory limit'}
+    assert receipt['worker_log_bytes_before_retry']==len(b'failed output\n')
+    assert receipt['plan_sha256']==hashlib.sha256((directory/'plan.json').read_bytes()).hexdigest()
+
+
+def test_old_manager_exit_does_not_override_live_retry(tmp_path):
+    dataset=fixture(tmp_path,1);manager=PreparationManager(tmp_path)
+    plan=manager.plan(dataset.id,1000000,1000000);directory=manager._path(plan['id'])
+    prior={'id':plan['id'],'dataset_id':dataset.id,'status':'running','pid':123,'updated_at':1}
+    (directory/'status.json').write_text(json.dumps(prior))
+    class OldProcess:
+        pid=456
+        def poll(self):return 0
+    manager.processes[plan['id']]=OldProcess()
+    # Use a recent queued state before the replacement worker writes its PID.
+    import time
+    prior.update(status='queued',updated_at=time.time());prior.pop('pid')
+    (directory/'status.json').write_text(json.dumps(prior))
+    assert manager.status(plan['id'])['status']=='queued'
+
+
+def test_transfer_keeps_records_ids_and_hashes_and_preserves_donor(tmp_path):
+    import shutil
+    from dataset_atlas.preparation.transfer import import_prepared_version
+    donor=tmp_path/'donor';donor.mkdir();dataset=fixture(donor,117)
+    manager=PreparationManager(donor);plan=manager.plan(dataset.id,1000000,1000000);run(donor,plan['id'])
+    original=Registry(donor).active_directory(dataset.id)
+    native=original/'sources/native.parquet';native.parent.mkdir();shutil.copy2(donor/'source.parquet',native)
+    metadata=json.loads((original/'dataset.json').read_text())
+    metadata['adapter_config']['files'][0]['path']=str(native)
+    metadata['adapter_config']['source_files']=[{'path':str(native),'sha256':hashlib.sha256(native.read_bytes()).hexdigest()}]
+    (original/'dataset.json').write_text(json.dumps(metadata))
+    recipient=tmp_path/'recipient';shutil.copytree(donor/'registry',recipient/'registry')
+    donor_bytes=(original/'dataset.json').read_bytes()
+    proof=import_prepared_version(recipient,donor,dataset.id)
+    imported=Registry(recipient).active_directory(dataset.id)
+    assert proof['records_unchanged'] and Registry(recipient).dataset(dataset.id).snapshot_id==Registry(donor).dataset(dataset.id).snapshot_id
+    assert Registry(recipient).pack(dataset.id).records==Registry(donor).pack(dataset.id).records
+    assert (original/'dataset.json').read_bytes()==donor_bytes
+    assert json.loads((imported/'dataset.json').read_text())['adapter_config']['files'][0]['path']==str(imported/'sources/native.parquet')
+    assert (imported/'snapshot/records.parquet').stat().st_ino==(original/'snapshot/records.parquet').stat().st_ino
+    with pytest.raises(ValueError,match='already holds'):import_prepared_version(recipient,donor,dataset.id)
 
 
 def test_source_plan_pins_every_shard_and_no_download(monkeypatch, tmp_path):
@@ -412,11 +483,18 @@ def test_new_recipe_replaces_active_source_and_gets_a_new_snapshot(tmp_path, mon
     plan=manager.plan(original.id,1000000,1000000)
     assert plan['kind']=='http_archive' and plan['expected_count']==1
     assert plan['prepared_dataset']['snapshot_id'] == ''
-    monkeypatch.setattr('dataset_atlas.storage.HttpsFetcher.fetch',lambda *args,**kwargs:path)
+    cache_roots=[]
+    def fetch(_fetcher, _url, cache, _identity, **kwargs):
+        cache_roots.append(cache.root)
+        return path
+    monkeypatch.setattr('dataset_atlas.storage.HttpsFetcher.fetch',fetch)
     run(tmp_path,plan['id']);registry=Registry(tmp_path);new=registry.dataset(original.id)
     assert new.snapshot_id != old.snapshot_id and new.coverage.total_count==1
     assert registry.pack(original.id).records[0].text=='new release'
     assert registry.dataset_version(original.id,old.release).snapshot_id==old.snapshot_id
+    assert cache_roots==[registry.active_directory(original.id)/'staging-download-cache']
+    assert not cache_roots[0].exists()
+    assert Path(new.adapter_config['path']).read_bytes()==path.read_bytes()
 
 
 def test_registered_source_preparation_never_fetches_network(tmp_path,monkeypatch):
@@ -449,6 +527,23 @@ def test_gated_recipe_requires_local_credentials_without_serializing_them(tmp_pa
     plan = manager.plan(dataset.id, 1000000, 1000000)
     assert plan['ready'] and plan['credential_profile'] == 'huggingface'
     assert 'hf_fixture_private' not in json.dumps(plan)
+
+
+def test_completed_authorized_metadata_preserves_gate_and_publication_rights():
+    from dataset_atlas.models import Dataset
+    from dataset_atlas.preparation import prepared_metadata
+    dataset = Dataset(id='authorized', name='Authorized native population', release='pinned',
+        adapter='remote_columnar', adapter_config={'credential_profile':'huggingface'},
+        coverage={'access':'gated','blockers':[
+            'Original-source credentials or agreement are required.',
+            'Source-image redistribution rights remain unreviewed.']})
+    result = prepared_metadata(dataset, 'Successful authorized native preparation')
+    assert result.coverage.access == 'gated'
+    assert result.coverage.blockers == ['Source-image redistribution rights remain unreviewed.']
+    assert result.coverage.publication == 'not_reviewed'
+    uncredentialed = Dataset(id='uncredentialed', name='Uncredentialed', release='pinned',
+        coverage={'blockers':['Original-source credentials or agreement are required.']})
+    assert prepared_metadata(uncredentialed, 'Unrelated source').coverage.blockers == uncredentialed.coverage.blockers
 
 
 def test_prune_does_not_claim_to_free_a_source_linked_outside_prepared(tmp_path):
@@ -574,3 +669,103 @@ def test_reserved_original_reuse_never_falls_back_to_unreserved_download_or_copy
     with pytest.raises(ValueError, match='create a new plan'):
         run(tmp_path, plan['id'])
     assert Registry(tmp_path).active_directory(dataset.id) is None
+
+
+@pytest.mark.parametrize('selected_count',[3,4])
+def test_native_class_group_index_preserves_labels_and_checks_actual_membership(tmp_path,selected_count):
+    dataset=fixture(tmp_path,5);path=tmp_path/'source.parquet'
+    pq.write_table(pa.table({'label':pa.array([150,151,268,269,281],type=pa.int32()),'text':['native']*5}),path)
+    dataset.adapter_config['files'][0]['sha256']=hashlib.sha256(path.read_bytes()).hexdigest()
+    dataset.coverage.total_count=selected_count
+    dataset.adapter_config.update(expected_source_count=5,record_filter={'native_class_groups':{'field':'label',
+        'groups':[{'name':'Dog','start':151,'end':268},{'name':'Cat','start':281,'end':285}],'provenance':{'revision':'fixture-author'}}})
+    (tmp_path/'registry/datasets/fixture.yaml').write_text(yaml.safe_dump(dataset.model_dump(mode='json')))
+    manager=PreparationManager(tmp_path);plan=manager.plan(dataset.id,1_000_000,1_000_000)
+    if selected_count==4:
+        with pytest.raises(ValueError,match='Snapshot has 3 records; expected 4'):run(tmp_path,plan['id'])
+        assert manager.status(plan['id'])['status']=='failed' and Registry(tmp_path).active_directory(dataset.id) is None
+    else:
+        run(tmp_path,plan['id'])
+        reg=Registry(tmp_path);pack=reg.pack(dataset.id)
+        assert manager.status(plan['id'])['status']=='completed' and len(pack.records)==3
+        assert {r.source['label'] for r in pack.records}=={151,268,281}
+        assert {r.source['_atlas_native_class_group']['id'] for r in pack.records}=={0,1}
+        assert any(f.id=='source._atlas_native_class_group' for f in pack.fields)
+
+
+def test_a_recipe_that_downloads_preview_originals_states_that_transfer_in_its_plan(tmp_path):
+    """Regression: a plan advertised a 4.6 MB download for a dataset whose 100 preview originals really transfer 5.2 GB, so a 2 GB budget failed midway."""
+    dataset = fixture(tmp_path)
+    recipes = tmp_path / 'registry/recipes'; recipes.mkdir()
+    (recipes / f'{dataset.id}.yaml').write_text(yaml.safe_dump({
+        'adapter': dataset.adapter, 'scope': 'Full', 'expected_count': 3, 'preview_media_transfer_bytes': 5_300_000_000,
+        'files': [{'source_name': 'data.csv', 'url': 'https://example.org/data.csv', 'bytes': 4_600_000, 'sha256': 'a' * 64, 'format': 'csv', 'config_key': 'path'}],
+        'allowed_hosts': ['example.org'],
+    }))
+    small = PreparationManager(tmp_path).plan(dataset.id, 2_000_000_000, 1_000_000_000)
+    assert small['expected_download_bytes'] == 4_600_000 + 5_300_000_000 and small['download_is_upper_bound']
+    assert small['preview_media_transfer_bytes'] == 5_300_000_000 and not small['ready']
+    assert any('exceeds the selected download budget' in reason for reason in small['requirements'])
+    large = PreparationManager(tmp_path).plan(dataset.id, 6_000_000_000, 1_000_000_000)
+    assert 'exceeds the selected download budget' not in ' '.join(large['requirements'])
+    with pytest.raises(ValueError, match='preview_media_transfer_bytes'):
+        (recipes / f'{dataset.id}.yaml').write_text(yaml.safe_dump({
+            'adapter': dataset.adapter, 'scope': 'Full', 'expected_count': 3, 'preview_media_transfer_bytes': -1,
+            'files': [{'source_name': 'data.csv', 'url': 'https://example.org/data.csv', 'bytes': 1, 'sha256': 'a' * 64, 'format': 'csv', 'config_key': 'path'}],
+            'allowed_hosts': ['example.org']}))
+        PreparationManager(tmp_path).plan(dataset.id, 1_000_000, 1_000_000)
+
+
+def test_a_recipe_can_make_auto_choose_selective_reads_over_a_small_complete_download(tmp_path, monkeypatch):
+    """Regression: ZeroBench's 95 MB shard is small enough for auto to download completely, but its embedded images exceed the full-download limit;
+    only the selective route reproduces the maintainer's preview from an empty workspace."""
+    dataset = fixture(tmp_path)
+    recipes = tmp_path / 'registry/recipes'; recipes.mkdir()
+    modes = []
+
+    def fake_plan(self, dataset_id, max_download_bytes, max_output_bytes, source_mode='download'):
+        modes.append(source_mode)
+        return {'ready': True, 'expected_download_bytes': 1_000, 'source_mode': source_mode}
+
+    monkeypatch.setattr(PreparationManager, '_plan', fake_plan)
+    manager = PreparationManager(tmp_path)
+    assert manager.plan(dataset.id, 1_000_000, 1_000_000, 'auto')['source_mode'] == 'download'
+    (recipes / f'{dataset.id}.yaml').write_text(yaml.safe_dump({'auto_source_mode': 'selective'}))
+    assert manager.plan(dataset.id, 1_000_000, 1_000_000, 'auto')['source_mode'] == 'selective'
+    assert manager.plan(dataset.id, 1_000_000, 1_000_000, 'download')['source_mode'] == 'download'
+    (recipes / f'{dataset.id}.yaml').write_text(yaml.safe_dump({'auto_source_mode': 'sample'}))
+    with pytest.raises(ValueError, match='auto_source_mode'):
+        manager.plan(dataset.id, 1_000_000, 1_000_000, 'auto')
+
+
+def test_running_writer_lease_survives_an_invisible_pid(tmp_path):
+    from dataset_atlas.preparation.slots import try_writer_slot
+    dataset=fixture(tmp_path,1);manager=PreparationManager(tmp_path)
+    plan=manager.plan(dataset.id,1000000,1000000);directory=manager._path(plan['id'])
+    state={'id':plan['id'],'dataset_id':dataset.id,'status':'running','pid':999999999,'updated_at':1}
+    (directory/'status.json').write_text(json.dumps(state))
+    lease=try_writer_slot(manager.directory,dataset.id,plan['id'])
+    assert lease is not None
+    with lease:
+        assert manager.status(plan['id'])['status']=='running'
+    assert manager.status(plan['id'])['status']=='interrupted'
+
+
+def test_another_plan_lease_does_not_keep_a_dead_plan_running(tmp_path):
+    from dataset_atlas.preparation.slots import try_writer_slot
+    dataset=fixture(tmp_path,1);manager=PreparationManager(tmp_path)
+    plan=manager.plan(dataset.id,1000000,1000000);directory=manager._path(plan['id'])
+    state={'id':plan['id'],'dataset_id':dataset.id,'status':'running','pid':999999999,'updated_at':1}
+    (directory/'status.json').write_text(json.dumps(state))
+    lease=try_writer_slot(manager.directory,dataset.id,'different-plan')
+    assert lease is not None
+    with lease: assert manager.status(plan['id'])['status']=='interrupted'
+
+
+def test_compact_atomic_pack_preserves_unicode_types_and_native_envelopes(tmp_path):
+    from dataset_atlas.preparation import atomic
+    value={'dataset':{'id':'generated','name':'日本語'},'records':[{'id':'generated-a','source':{'integer':7,'boolean':False,'missing':None,'float':-0.0,'nested':[{'_atlas_native_type':'float64','ieee754_hex':'7ff8000000000012'}]}}]}
+    target=tmp_path/'pack.json';atomic(target,value,compact=True)
+    actual=json.loads(target.read_text())
+    assert actual==value and type(actual['records'][0]['source']['integer']) is int and type(actual['records'][0]['source']['boolean']) is bool
+    assert target.stat().st_size<len(json.dumps(value,indent=2,ensure_ascii=False).encode())

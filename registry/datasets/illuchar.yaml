@@ -83,4 +83,11 @@ evidence:
   parquet_bytes: 2794689321
   receipt: reports/illuchar-source-gap.json
   scope: source size and version gap only; no contents acquired
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields
+    present in at least one record. Not inferred from the name or description.'
 source_url: https://huggingface.co/datasets/Tujz/IlluChar/tree/d55c729918bda746f74d377a2f11c92389e44bf0
+modalities:
+- image

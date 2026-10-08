@@ -1,0 +1,58 @@
+{
+  "checked_at_utc": "2026-10-05T09:22:05.545210+00:00",
+  "allocated_before_bytes": 140770762752,
+  "allocated_after_bytes": 95452409856,
+  "net_allocated_footprint_reduction_bytes": 45318352896,
+  "measurement": "Regular files only; hard links counted once, allocated filesystem blocks. Reflink-shared extents may be counted more than once. Only explicitly configured external model/source roots are included. Incidental symlink targets and directory metadata are outside this measurement.",
+  "within_100gb_target": true,
+  "included_external_roots": [
+    "/home/bitwise/.cache/huggingface/hub/models--Qwen--Qwen2.5-VL-3B-Instruct",
+    "/home/bitwise/.cache/huggingface/hub/models--Qwen--Qwen2.5-VL-3B-Instruct-AWQ",
+    "/home/bitwise/.cache/vllm/torch_compile_cache/torch_aot_compile/57d9b21e56ab797b8bbff34151df322287140fd5ab94c389f23618bb9e6ae6b7"
+  ],
+  "removed": "Unpinned caches, completed verification duplicates, isolated installation/model-test environments, rebuildable frontend dependencies, duplicate generated frontend, and verified retireable native/repacked archives.",
+  "retained": "Read-only original paper corpus, canonical native indices, frozen selection dependencies, protected original preview media, configured model weights, failures, hashes and receipts.",
+  "receipts": [
+    {
+      "path": "reports/storage-cleanup-20261005.json",
+      "sha256": "cbde4a77999566e2bc1db6fb71afa2e1100e8fc6f0633331d4ae2de5e3c10925"
+    },
+    {
+      "path": "reports/storage-cleanup-extra-20261005.json",
+      "sha256": "da9f1cb1e7ca654eefe61e48bd998e2852f1e177101d4150eb1965d6e1ba122e"
+    },
+    {
+      "path": "reports/storage-retirement-20261005.json",
+      "sha256": "ca5ce343efaa3d488a62a15da2851e1a21a2418837d17a44139d8e2a324f2fb0"
+    },
+    {
+      "path": "reports/native-retirement-live-20261005.json",
+      "sha256": "8d44b5044e03dc6f3eea11f119dd36ebe84073d5828364364bdcd1d6d0c712f6"
+    },
+    {
+      "path": "reports/generated-frontend-cleanup-20261005.json",
+      "sha256": "4e0b8f8e3605d52a1d2dd77b707948d89a405954c851657d549e715bc9907de2"
+    },
+    {
+      "path": "work/import-donor-disposal-20261005.json",
+      "sha256": "2fb54ed25494df223d0d76feb2431f90cbc49b81a5af77a581d8f5eaf9f7c4a2"
+    },
+    {
+      "path": "work/installation-workspace-disposal-20261005.json",
+      "sha256": "f2d7091687ed2c67927a31dd287cec948b71663a4adceace90d453469f4e462f"
+    },
+    {
+      "path": "work/storage-cleanup-release-final-20261005.json",
+      "sha256": "28095ffcd86aaa5b5f96a53d85e5e45bcde8387a724f0b9f889e013848b9ef25"
+    },
+    {
+      "path": "reports/status-recovery-20261005.json",
+      "sha256": "9717d182af52150ce3f298756f97b49df0601cb7a59f5b93f88fc52e518687e5"
+    },
+    {
+      "path": "work/clean-runtime-final-20261005.json",
+      "sha256": "76f5ce0e0ee0e6c1becc4b5f87c30491df9789ee1fe7f38851c632b1e57f9e70"
+    }
+  ],
+  "full_v1_complete": false
+}

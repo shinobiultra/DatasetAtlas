@@ -21,6 +21,15 @@ DEFAULT_MAX_OUTPUT_BYTES = 64 * 1024 * 1024
 HARD_MAX_OUTPUT_BYTES = 512 * 1024 * 1024
 
 
+def _resource_class(description,config):
+    if config.get('resource_class'):return config['resource_class']
+    device=str(config.get('device','auto' if description.get('supported_devices') else description['device'])).lower()
+    # Auto may select an accelerator inside the worker. Reserve its exclusive
+    # lease conservatively without importing the ML stack in the API process.
+    if description.get('supported_devices') and device in {'auto','mps'}:return 'gpu'
+    return 'gpu' if device.startswith(('cuda','gpu')) else description['device']
+
+
 def _json(value: object) -> str:
     return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False, allow_nan=False)
 
@@ -138,7 +147,7 @@ class JobManager:
         description = processor.describe()
         validation = processor.validate_inputs(documents, config)
         processor_estimate = processor.estimate(documents, config)
-        resource = config.get("resource_class") or ("gpu" if str(config.get("device", description["device"])).lower().startswith(("cuda", "gpu")) else description["device"])
+        resource = _resource_class(description,config)
         if resource not in ("cpu", "gpu", "network", "external_api"):
             raise ValueError("Invalid resource class")
         asset_keys: set[str] = set()
@@ -192,7 +201,7 @@ class JobManager:
         estimate = self.estimate(selection, documents, processor_id, config)
         batching = description["batching"]
         population_key = _digest([by for by in sorted(documents, key=lambda item: item["id"])]) if batching == "selection" else None
-        resource = config.get("resource_class") or ("gpu" if str(config.get("device", description["device"])).lower().startswith(("cuda", "gpu")) else description["device"])
+        resource = _resource_class(description,config)
         if resource not in ("cpu", "gpu", "network", "external_api"):
             raise ValueError("Invalid resource class")
         run_id = uuid4().hex

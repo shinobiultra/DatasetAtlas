@@ -1,0 +1,21 @@
+{
+  "status": "executed",
+  "configured_root_start_allocated_bytes": 129183100928,
+  "configured_root_final_allocated_bytes": 122381500416,
+  "net_configured_root_reduction_bytes": 6801600512,
+  "receipts": [
+    "reports/cleanup-summary-20261007.json",
+    "reports/factoid-unused-conversion-retirement-20261007.json",
+    "reports/factoid-fresh-retirement-20261007.json",
+    "reports/factoid-final-dependency-retirement-20261007.json",
+    "reports/factoid-original-hardlink-consolidation-20261007.json"
+  ],
+  "retained": [
+    "corpus originals",
+    "active and frozen canonical snapshots",
+    "protected original preview media",
+    "native source checksums and retrieval indices",
+    "required main runtime and model weights"
+  ],
+  "scope": "Inode-aware allocated blocks across all configured roots. Net savings include new native acquisitions and runtime restoration; unlinked allocated bytes and physical extent reclamation differ for hard links/reflinks."
+}

@@ -1,0 +1,11 @@
+source_url: https://huggingface.co/datasets/tanganke/stanford_cars/tree/9abf6cf7d6dfa7b95152a0d6e791ea9435b47a40
+source_patterns:
+- data/train-*.parquet
+- data/test-*.parquet
+scope: All 16185 train/test image rows in the pinned tanganke Stanford Cars mirror. Corruption variants
+  are excluded. This mirror has not been proven byte-identical to the retired Stanford archive or the
+  paper subset.
+adapter_config:
+  mapping: {}
+  media_scope: partial
+  remote_cache_bytes: 200000000

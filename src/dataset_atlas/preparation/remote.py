@@ -4,14 +4,14 @@ from concurrent.futures import ThreadPoolExecutor
 from dataset_atlas.storage.ranges import range_fingerprint
 
 
-def pin_remote_files(files, hosts, check, update, workers=8):
+def pin_remote_files(files, hosts, check, update, workers=8, credential_profile=None):
     if type(workers) is not int or not 1 <= workers <= 8:
         raise ValueError('Remote fingerprint concurrency must be within 1..8')
 
     def pin(entry):
         check()
         return {**entry, 'etag': range_fingerprint(
-            entry['url'], expected_size=entry['bytes'], allowed_hosts=hosts)}
+            entry['url'], expected_size=entry['bytes'], allowed_hosts=hosts,credential_profile=credential_profile)}
 
     pinned = []
     with ThreadPoolExecutor(max_workers=workers) as pool:

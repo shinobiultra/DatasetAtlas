@@ -7,20 +7,24 @@ description: 'MIT Network Dissection Broden composite, not Broden+ from Unified 
 paper_ids:
 - paper-25eaa8c74ce76800
 release: unresolved
-adapter: structured
+adapter: broden
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
+  adapter: partial
   preview: none
   complete_data: unimplemented
-  publication: not_reviewed
+  publication: local_only
   preview_count: 0
   unit: example
   blockers:
-  - Adapter and preview are not implemented.
+  - Native CSV/PNG/segmentation joins are implemented and tested; the three official HTTPS archive endpoints
+    time out in the current bounded probe. A publisher archive or authorized local copy is still required
+    for real coverage.
+  - Exact citing-paper resolution, release and membership remain unidentified; composite source-image
+    redistribution rights remain unreviewed.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -58,4 +62,26 @@ evidence:
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_access_probe
+  checked_on: '2026-10-06'
+  audit_file: reports/broden-source-probe-20261006.json
+  note: HEAD-only checks of official 224/227/384 ZIPs each timed out within 15 seconds. No dataset body
+    acquired; native adapter synthetic tests do not establish real coverage.
+- kind: source_audit_access
+  checked_on: '2026-10-06'
+  url: http://netdissect.csail.mit.edu/data/broden1_224.zip
+  note: 'Re-checked with the network layer, not only HTTP: netdissect.csail.mit.edu and dissect.csail.mit.edu
+    resolve to 128.52.131.63, and TCP connections to ports 80 and 443 time out after 10 s, while www.csail.mit.edu
+    answers. The official NetDissect script/dlbroden.sh at HEAD names http://netdissect.csail.mit.edu/data/broden1_224.zip
+    as the download. The release host is unreachable from this network today; this is an upstream availability
+    limit, not a missing adapter step, and a researcher with a locally obtained archive can still use
+    the tested joins.'
+  source_identity_status: host_unreachable_from_this_network
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'From the source inspected on 2026-10-06: NetDissect download script inspected: image archive
+    with segmentation labels. Not inferred from the dataset name.'
 source_url: https://github.com/CSAILVision/NetDissect/tree/20ce6f887607aadc04ab9fb3d452e4723685cbbb
+modalities:
+- image

@@ -1,8 +1,39 @@
 {
   "tool": "scripts/refresh_candidate_sources.py",
   "checked_on": "2026-10-08",
-  "generated_at_utc": "2026-10-08T04:59:44Z",
+  "generated_at_utc": "2026-10-08T05:08:44Z",
   "dry_run": false,
+  "provenance": {
+    "statement": "Observations were made live on 2026-10-08: 114 URLs probed between 2026-10-08T04:58:00Z and 2026-10-08T04:59:07Z (workers 4, 1.0 s between requests to a host, timeout 15.0 s, 2 attempts). The classification, the registry notes and these receipts were replayed from those recorded observations at 2026-10-08T05:08:44Z after a code change, with no network access; the replay did no probing. 10 further URLs carry the latest observation recorded by probe_sources --extra in reports/source-reprobe-20261008.json (2026-10-08T03:40:40Z to 2026-10-08T04:03:58Z).",
+    "observations": {
+      "made": "live",
+      "date": "2026-10-08",
+      "first_checked_at_utc": "2026-10-08T04:58:00Z",
+      "last_checked_at_utc": "2026-10-08T04:59:07Z",
+      "distinct_urls": 114,
+      "settings": {
+        "timeout": 15.0,
+        "attempts": 2,
+        "workers": 4,
+        "host_delay_s": 1.0
+      }
+    },
+    "extra_observations": {
+      "source": "reports/source-reprobe-20261008.json",
+      "distinct_urls": 10,
+      "first_checked_at_utc": "2026-10-08T03:40:40Z",
+      "last_checked_at_utc": "2026-10-08T04:03:58Z"
+    },
+    "replay": {
+      "replayed": true,
+      "generated_at_utc": "2026-10-08T05:08:44Z",
+      "settings": {
+        "probing": "none (no network)"
+      },
+      "source_generated_at_utc": "2026-10-08T04:59:08Z",
+      "reason": "classification, registry notes and receipts regenerated from the recorded observations after a code change"
+    }
+  },
   "note": "Each URL was probed by HEAD (or a 1-byte ranged GET); no payload was downloaded and no credentials were sent. `unreachable`, a WAF challenge and a Google Drive page are no information and keep the prior state. A reachable landing page is not evidence that the data is public. `released_after_audit` and `still_unreleased` come only from a dated reading of public pages by the implementing agent (not human-reviewed, not a probe); the latest such reading stands unless a pinned data file appears.",
   "pin_rule": "pinned = latest status `reachable` and (a digest, or a strong ETag that does not start with W/ together with a known content length); `now_public_pinnable` also needs a data file or archive content type, never an HTML page or document",
   "legend": {
@@ -21,8 +52,8 @@
   "settings": {
     "timeout": 15.0,
     "attempts": 2,
-    "workers": 1,
-    "host_delay_s": 0.0
+    "workers": 4,
+    "host_delay_s": 1.0
   },
   "disposition_counts": {
     "unchanged": 22,

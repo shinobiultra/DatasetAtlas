@@ -658,3 +658,91 @@ def test_dataset_option_limits_the_entries_but_the_selection_rule_still_applies(
     root = _tmp_catalogue(tmp_path)
     receipt = _drive(root, dataset_ids=["landing", "unreleased-one"])
     assert [item["dataset_id"] for item in receipt["entries"]] == ["landing"]
+
+
+# --- provenance: live observations versus a replayed classification -------------------------------------------------------------
+
+LIVE_SETTINGS = {"timeout": 7.0, "attempts": 3, "workers": 3, "host_delay_s": 0.0}
+
+
+def _live(root):
+    return module.run(root, checked_on=TODAY, probe=_fake_probe, workers=3, host_delay=0.0, timeout=7.0, attempts=3,
+                      json_path=root / "live.json", md_path=root / "live.md", extra_path=root / "none.json")
+
+
+def _no_network(url, **kwargs):
+    raise AssertionError(f"a replay must not probe {url}")
+
+
+def _replay(root, source, **kwargs):
+    return module.run(root, checked_on=TODAY, probe=_no_network, replay_from=source, json_path=root / "replay.json",
+                      md_path=root / "replay.md", extra_path=root / "none.json", **kwargs)
+
+
+def _provenance_line(path):
+    return next(line for line in Path(path).read_text().splitlines() if line.startswith("Provenance:"))
+
+
+def test_a_live_run_records_its_own_settings_and_observation_window_as_provenance(tmp_path):
+    root = _tmp_catalogue(tmp_path)
+    receipt = _live(root)
+    observations = receipt["provenance"]["observations"]
+    assert receipt["provenance"]["replay"] == {"replayed": False}
+    assert observations["made"] == "live" and observations["date"] == TODAY
+    assert observations["settings"] == LIVE_SETTINGS == receipt["settings"]
+    assert observations["first_checked_at_utc"] == observations["last_checked_at_utc"] == "2026-10-08T10:00:00Z"
+    line = _provenance_line(root / "live.md")
+    assert "live pass" in line and "2026-10-08T10:00:00Z" in line and "workers 3" in line and "replayed" not in line
+    assert receipt["provenance"]["statement"] in line
+
+
+def test_a_replay_says_so_in_the_json_and_the_markdown_and_keeps_the_live_settings_and_window(tmp_path):
+    live = _live(_tmp_catalogue(tmp_path / "live"))
+    replayed = _replay(_tmp_catalogue(tmp_path / "replay"), tmp_path / "live" / "live.json")
+    provenance = replayed["provenance"]
+    assert provenance["replay"]["replayed"] is True and provenance["replay"]["generated_at_utc"] == replayed["generated_at_utc"]
+    assert provenance["replay"]["settings"] == {"probing": "none (no network)"}
+    assert provenance["replay"]["source_generated_at_utc"] == live["generated_at_utc"]
+    assert provenance["observations"] == live["provenance"]["observations"] and replayed["settings"] == LIVE_SETTINGS
+    assert [(item["dataset_id"], item["disposition"]) for item in replayed["entries"]] == [(item["dataset_id"], item["disposition"]) for item in live["entries"]]
+    assert all(item["evidence_appended"] for item in replayed["entries"])
+    line = _provenance_line(tmp_path / "replay" / "replay.md")
+    assert "made live" in line and "replayed from those recorded observations" in line and "no network" in line
+    assert "2026-10-08T10:00:00Z" in line and "workers 3" in line and replayed["generated_at_utc"] in line
+    written = json.loads((tmp_path / "replay" / "replay.json").read_text())
+    assert written["provenance"]["statement"] in line and "replayed" in written["provenance"]["statement"]
+
+
+def test_a_replay_of_a_replay_still_reports_the_original_live_observations(tmp_path):
+    live = _live(_tmp_catalogue(tmp_path / "live"))
+    first = _replay(_tmp_catalogue(tmp_path / "first"), tmp_path / "live" / "live.json")
+    second = _replay(_tmp_catalogue(tmp_path / "second"), tmp_path / "first" / "replay.json")
+    assert second["provenance"]["observations"] == live["provenance"]["observations"] and second["settings"] == LIVE_SETTINGS
+    assert second["provenance"]["replay"]["source_generated_at_utc"] == first["generated_at_utc"]
+
+
+def test_extra_observations_are_disclosed_with_their_own_window_and_source(tmp_path):
+    root = _tmp_catalogue(tmp_path)
+    receipt_path = _receipt(tmp_path, [{"probes": [_probe_row("https://example.org/extra.zip", "unreachable", "2026-10-08T03:41:21Z",
+                                                              dataset_ids=("stalled",), http_status=None)]}])
+    receipt = module.run(root, checked_on=TODAY, probe=_fake_probe, workers=2, host_delay=0.0, json_path=root / "out.json",
+                         md_path=root / "out.md", extra_path=receipt_path)
+    extra = receipt["provenance"]["extra_observations"]
+    assert extra == {"source": "reprobe.json", "distinct_urls": 1, "first_checked_at_utc": "2026-10-08T03:41:21Z",
+                     "last_checked_at_utc": "2026-10-08T03:41:21Z"}
+    assert "03:41:21Z" in _provenance_line(root / "out.md") and str(tmp_path) not in (root / "out.json").read_text()
+
+
+def test_a_replay_refuses_a_registry_url_missing_from_the_recorded_observations(tmp_path):
+    _live(_tmp_catalogue(tmp_path / "live"))
+    other = _registry(tmp_path / "other", _named("newcomer", source_url="https://example.org/never-probed"))
+    with pytest.raises(ValueError, match="never-probed"):
+        _replay(other, tmp_path / "live" / "live.json")
+
+
+def test_the_command_line_can_replay_a_recorded_receipt_without_probing(tmp_path):
+    _live(_tmp_catalogue(tmp_path / "live"))
+    root = _tmp_catalogue(tmp_path / "cli")
+    assert module.main(["--root", str(root), "--replay-from", str(tmp_path / "live" / "live.json"), "--checked-on", TODAY]) == 0
+    written = json.loads((root / "reports/candidate-source-refresh-20261008.json").read_text())
+    assert written["provenance"]["replay"]["replayed"] is True and written["settings"] == LIVE_SETTINGS

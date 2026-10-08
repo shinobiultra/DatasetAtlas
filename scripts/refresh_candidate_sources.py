@@ -19,7 +19,10 @@ Rules the dispositions follow (each has a test):
 - The entry's own record can contradict "public" (a login, a request or terms form, a licence agreement, a gate, a recipe, an
   in-house cohort, an outage). A keyword rule over that record lists such signals on the receipt row; the label is unchanged.
 
-    python scripts/refresh_candidate_sources.py [--dry-run] [--dataset ID ...]
+    python scripts/refresh_candidate_sources.py [--dry-run] [--dataset ID ...] [--replay-from EARLIER_RECEIPT.json]
+
+With --replay-from nothing is probed: the observations recorded in an earlier receipt are re-classified (after a code change, say)
+and the new receipts say so, keeping the original live settings and times under `provenance`.
 """
 import argparse
 import copy
@@ -398,6 +401,7 @@ def _markdown(receipt: dict) -> str:
     lines = [f"# Candidate-source refresh, {receipt['checked_on']}", "",
              f"{len(receipt['entries'])} catalogue entries with no preview and a release that is not paper-private. "
              f"{NOTE}", "",
+             f"Provenance: {receipt['provenance']['statement']}", "",
              "Dispositions: " + "; ".join(f"`{name}` {counts[name]}" for name in DISPOSITIONS) + ".", "",
              "Legend: " + "; ".join(f"`{name}` {LEGEND[name]}" for name in DISPOSITIONS) + ".", "",
              f"`Record also says` lists what the entry's own blockers, rights note and earlier audit notes already record (a login, a request or "
@@ -415,9 +419,50 @@ def _markdown(receipt: dict) -> str:
     return "\n".join(lines) + "\n"
 
 
+def _recorded_outcomes(path: Path) -> tuple[dict[str, ProbeOutcome], dict]:
+    """URL outcomes recorded by an earlier receipt (extras excluded: they come from their own receipt) and that receipt."""
+    source = json.loads(Path(path).read_text())
+    outcomes = {record["url"]: ProbeOutcome(
+        url=record["url"], status=record["status"], http_status=record["http_status"], content_length=record["content_length"],
+        content_type=record["content_type"], etag=record["etag"], content_digest=record["content_digest"], final_host=record["final_host"],
+        error=record["error"], elapsed_s=0.0, checked_at_utc=record["checked_at_utc"])
+        for item in source["entries"] for record in item["urls"] if "extra" not in record["origin"]}
+    return outcomes, source
+
+
+def _window(outcomes) -> tuple[str | None, str | None]:
+    stamps = sorted(item.checked_at_utc for item in outcomes if item.checked_at_utc)
+    return (stamps[0], stamps[-1]) if stamps else (None, None)
+
+
+def _shown(path: Path, root: Path) -> str:
+    try:
+        return Path(path).resolve().relative_to(root).as_posix()
+    except ValueError:
+        return Path(path).name
+
+
+def _provenance(observations: dict, extra: dict | None, replay: dict) -> dict:
+    """Say how the observations were made and whether this receipt re-derived its classification from them later."""
+    settings = observations["settings"]
+    made = (f"{observations['distinct_urls']} URLs probed between {observations['first_checked_at_utc']} and "
+            f"{observations['last_checked_at_utc']} (workers {settings['workers']}, {settings['host_delay_s']} s between requests to a host, "
+            f"timeout {settings['timeout']} s, {settings['attempts']} attempts)")
+    further = (f" {extra['distinct_urls']} further URLs carry the latest observation recorded by probe_sources --extra in {extra['source']} "
+               f"({extra['first_checked_at_utc']} to {extra['last_checked_at_utc']})." if extra else "")
+    if replay["replayed"]:
+        statement = (f"Observations were made live on {observations['date']}: {made}. The classification, the registry notes and these receipts "
+                     f"were replayed from those recorded observations at {replay['generated_at_utc']} after a code change, with no network "
+                     f"access; the replay did no probing.{further}")
+    else:
+        statement = f"Observations and classification come from one live pass on {observations['date']}: {made}.{further}"
+    return {"statement": statement, "observations": observations, "extra_observations": extra, "replay": replay}
+
+
 def run(root: Path, *, checked_on: str = CHECKED_ON, probe=probe_url, workers: int = 4, host_delay: float = 1.0,
         timeout: float = 15.0, attempts: int = 2, dry_run: bool = False, dataset_ids=None, json_path: Path | None = None,
-        md_path: Path | None = None, extra_path: Path | None = None) -> dict:
+        md_path: Path | None = None, extra_path: Path | None = None, replay_from: Path | None = None) -> dict:
+    """Probe (or, with `replay_from`, re-use an earlier receipt's recorded observations with no network) and refresh the entries."""
     root = Path(root).resolve()
     registry = Registry(root)
     selected = select_entries(registry.datasets())
@@ -434,8 +479,22 @@ def run(root: Path, *, checked_on: str = CHECKED_ON, probe=probe_url, workers: i
         for url, origin in probe_sources.entry_urls(entries[dataset_id]):
             seen.setdefault(url, origin)
         recorded[dataset_id] = list(seen.items())
-    outcomes = probe_all([url for pairs in recorded.values() for url, _ in pairs], probe=probe, workers=workers,
-                         host_delay=host_delay, timeout=timeout, attempts=attempts)
+    urls = [url for pairs in recorded.values() for url, _ in pairs]
+    live_settings = {"timeout": timeout, "attempts": attempts, "workers": workers, "host_delay_s": host_delay}
+    live_made = "live"
+    source_generated = None
+    if replay_from:
+        stored, source = _recorded_outcomes(replay_from)
+        missing = sorted(set(urls) - set(stored))
+        if missing:
+            raise ValueError(f"the recorded observations lack {', '.join(missing)}")
+        outcomes = {url: stored[url] for url in set(urls)}
+        carried = (source.get("provenance") or {}).get("observations") or {}
+        live_settings = carried.get("settings") or source["settings"]
+        live_made = carried.get("made", "live")
+        source_generated = source["generated_at_utc"]
+    else:
+        outcomes = probe_all(urls, probe=probe, workers=workers, host_delay=host_delay, timeout=timeout, attempts=attempts)
     records: list[dict] = []
     for dataset_id in selected:
         entry = entries[dataset_id]
@@ -467,12 +526,26 @@ def run(root: Path, *, checked_on: str = CHECKED_ON, probe=probe_url, workers: i
                  "caveat": f"{record['reading']['note']} (Agent reading of {record['reading']['checked_on']}; not human-reviewed; "
                            "the identity of the release is not verified.)"}
                 for record in records if record["disposition"] == "released_after_audit" and record["reading"]]
+    generated = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    first, last = _window(outcomes.values())
+    extra_outcomes = {item.url: item for dataset_id in selected for item in extras.get(dataset_id, [])
+                      if item.url not in {url for url, _ in recorded[dataset_id]}}
+    extra_first, extra_last = _window(extra_outcomes.values())
+    provenance = _provenance(
+        {"made": live_made, "date": checked_on, "first_checked_at_utc": first, "last_checked_at_utc": last,
+         "distinct_urls": len(set(urls)), "settings": live_settings},
+        {"source": _shown(extra_path, root), "distinct_urls": len(extra_outcomes), "first_checked_at_utc": extra_first,
+         "last_checked_at_utc": extra_last} if extra_outcomes and extra_path else None,
+        {"replayed": True, "generated_at_utc": generated, "settings": {"probing": "none (no network)"},
+         "source_generated_at_utc": source_generated,
+         "reason": "classification, registry notes and receipts regenerated from the recorded observations after a code change"}
+        if replay_from else {"replayed": False})
     receipt = {
         "tool": "scripts/refresh_candidate_sources.py", "checked_on": checked_on,
-        "generated_at_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "dry_run": dry_run,
+        "generated_at_utc": generated, "dry_run": dry_run, "provenance": provenance,
         "note": NOTE, "pin_rule": PIN_RULE, "legend": LEGEND, "record_signal_rule": RECORD_SIGNAL_RULE,
         "selection": {"rule": "merged coverage preview_count == 0 and preview == none and access != unreleased", "count": len(selected)},
-        "settings": {"timeout": timeout, "attempts": attempts, "workers": workers, "host_delay_s": host_delay},
+        "settings": live_settings,
         "disposition_counts": {name: sum(record["disposition"] == name for record in records) for name in DISPOSITIONS},
         "now_public_pinnable": pinnable, "released_after_audit": released, "entries": records}
     if not dry_run:
@@ -493,6 +566,8 @@ def main(argv=None) -> int:
     parser.add_argument("--output-md", type=Path, default=Path("reports/candidate-source-refresh-20261008.md"))
     parser.add_argument("--extra-observations", type=Path, default=Path("reports/source-reprobe-20261008.json"),
                         help="receipt whose --extra URLs (not recorded in the registry) are read as the latest observation")
+    parser.add_argument("--replay-from", type=Path, help="re-classify the URL observations recorded in an earlier receipt instead of probing "
+                        "(no network); the new receipts say they are a replay and keep the original live settings and times")
     parser.add_argument("--timeout", type=float, default=15.0)
     parser.add_argument("--attempts", type=int, default=2)
     parser.add_argument("--workers", type=int, default=4)
@@ -504,7 +579,8 @@ def main(argv=None) -> int:
     try:
         receipt = run(root, checked_on=args.checked_on, workers=args.workers, host_delay=args.host_delay, timeout=args.timeout,
                       attempts=args.attempts, dry_run=args.dry_run, dataset_ids=args.dataset, json_path=root / args.output_json,
-                      md_path=root / args.output_md, extra_path=root / args.extra_observations)
+                      md_path=root / args.output_md, extra_path=root / args.extra_observations,
+                      replay_from=args.replay_from.resolve() if args.replay_from else None)
     except ValueError as error:
         parser.error(str(error))
     for record in receipt["entries"]:

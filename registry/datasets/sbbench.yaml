@@ -96,4 +96,16 @@ evidence:
   checked_on: '2026-10-08'
   note: 'unchanged: a gate answer is already recorded for this entry, so the prior state stands. 3 URLs
     probed (HEAD only): 2 reachable, 1 gated or forbidden.'
+- kind: source_audit_access
+  checked_on: '2026-10-08'
+  url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/real-00000-of-00007.parquet
+  http_status: 403
+  note: Gate still closed on 2026-10-08 (read-only metadata checks with the researcher's configured local
+    credentials, not recorded here). dataset_info reports gated 'auto' with main at a1c78b8f73bc40408993414e3d94714a6a9169d3;
+    auth_check answered HTTP 403 GatedRepo; a HEAD of one data file answered HTTP 403 (GatedRepo). The
+    README.md HEAD answered 200, which only shows that the dataset card is served while the gate stands.
+    Access requires the researcher to accept the terms on their own Hugging Face account; no terms were
+    accepted and no file body was fetched, so nothing is claimed about the content.
+  audit_file: reports/gate-check-20261008.json
+  source_identity_status: gate_still_closed_for_configured_account
 source_url: https://github.com/UCF-CRCV/BBQ-Vision

@@ -101,4 +101,16 @@ evidence:
   note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
     ETag with a length) on a data file, so no release is pinned and public availability of the data itself
     is not established. 2 URLs probed (HEAD only): 1 reachable, 1 unreachable. 1 of them gave no information.'
+- kind: source_audit_access
+  checked_on: '2026-10-08'
+  url: http://webshare.ipat.gatech.edu/coc-rim-wall-lab/web/afathi3/CVPR12/Videos/Alin_Day1/Alin_Day1_001.avi
+  note: 'The video host named by the author page, webshare.ipat.gatech.edu, did not resolve in DNS on
+    2026-10-08: probe_url on the first AVI link of the author page (Alin_Day1_001.avi) returned unreachable
+    with `gaierror: [Errno -2] Name or service not known` over http and over https (one attempt each,
+    2026-10-08T05:18:00Z and 2026-10-08T05:18:01Z), while the author page https://ai.stanford.edu/~alireza/Disney/
+    answered HTTP 200 at 2026-10-08T05:17:58Z from the same machine. The 2026-10-06 observation was no
+    response within 30 s; today the name does not resolve. Either way this is an upstream availability
+    observation to retry, not a gate and not a statement about the files.'
+  audit_file: reports/gate-check-20261008.json
+  source_identity_status: author_page_identified_media_host_unresolvable
 source_url: https://ai.stanford.edu/~alireza/Disney/

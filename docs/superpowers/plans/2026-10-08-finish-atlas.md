@@ -36,7 +36,8 @@
 - "Acceptable external blockers include unavailable releases, access approval, unavailable underlying media, and restrictions on obtaining or publishing data." "Complicated format" and "not on Hugging Face" are implementation gaps. (SPEC §5)
 - Accepting a gate's terms, submitting an access request, or buying data is **not** done by the agent; the user does it (`docs/dataset-authorization.md`).
 - Python tooling: `uv`, `uvx ty==0.0.83`, `prek`; frontend `npm ci` from lockfile. No cluster jobs, no paid model APIs.
-- `AGENTS.md` requires delegated work to use `gpt-6.1-sol` at `xhigh`, which this harness cannot select: **no subagents are spawned**; reviewer recommendations are never recorded as human acceptance.
+- `AGENTS.md` names `gpt-6.1-sol` at `xhigh` for delegated work, which this harness cannot select. The user replaced it with Sonnet 5.5 on 2026-10-08 (D2): delegates use `model: sonnet`. Reviewer recommendations are never recorded as human acceptance.
+- Task 2 amendments (pre-flight rulings): `ProbeOutcome` also carries `etag: str | None` and `content_digest: str | None`; `probe_url` also takes `resolver: Callable[[str], Sequence[str]] | None = None` so tests need no DNS. Task 3 treats a URL as pinned only with (a strong ETag and a known `content_length`) or a `content_digest`.
 - Any shared-contract change needs a fixture update and compatibility decision (SPEC §21). This plan changes no schema: new evidence kinds are free-form entries in the existing `evidence` list.
 
 ## Open decisions (stable IDs; work that does not depend on them continues)
@@ -96,12 +97,16 @@ Input classes or failure modes the spec implies but no existing test pins, most 
   class ProbeOutcome:
       url: str; status: ProbeStatus; http_status: int | None
       content_length: int | None; content_type: str | None
+      etag: str | None            # raw ETag header
+      content_digest: str | None  # Digest / Content-MD5 / HF X-Linked-Etag (unquoted), else None
       final_host: str | None; error: str | None
       elapsed_s: float; checked_at_utc: str
   def classify_probe(*, http_status: int | None, error: str | None, content_length: int | None,
                      content_type: str | None, redirect_refused: bool) -> ProbeStatus
   def probe_url(url: str, *, timeout: float = 15.0, attempts: int = 2,
-                max_redirects: int = 4, client: httpx.Client | None = None) -> ProbeOutcome
+                max_redirects: int = 4, client: httpx.Client | None = None,
+                resolver: Callable[[str], Sequence[str]] | None = None) -> ProbeOutcome
+  # resolver(host) -> list of IP strings; default uses socket.getaddrinfo. Tests inject a fake: no DNS in unit tests.
   ```
 - Consumes: `httpx` (base dependency).
 
@@ -124,7 +129,7 @@ Input classes or failure modes the spec implies but no existing test pins, most 
 - [ ] **Step 3: Implement** `probe_url`/`classify_probe`. HEAD first; on 403/405/501 retry once as `GET` with `Range: bytes=0-0` and read at most one byte. Follow redirects manually (≤ `max_redirects`), resolving each hop's host and refusing non-global addresses (`ipaddress.ip_address(...).is_global`). Never send credentials. Document the DNS-rebinding window (read-only HEAD research tool, not a fetch layer; bulk fetching stays on `storage/https.py`).
 - [ ] **Step 4:** Re-run the tests → PASS; `prek run --all-files` → Passed.
 - [ ] **Step 5: Implement `scripts/probe_sources.py`** — `--dataset ID ... | --blocked`, writes `reports/source-reprobe-20261008.json` (list of `ProbeOutcome` per URL, plus the registry entry each URL came from). `--blocked` selects entries whose `coverage.blockers` or `access` is gated/request/outage, and probes `source_url` plus every `url` inside `source_audit_*` evidence.
-- [ ] **Step 6:** Run `scripts/probe_sources.py --blocked`. Expected: Broden's three archive URLs, BBQ-V, the MMEdit Drive links and the gated publishers each get a status. Re-run Broden twice more ≥ 10 minutes apart before calling it `unreachable` in the receipt.
+- [ ] **Step 6:** Run `scripts/probe_sources.py --blocked`. Expected: Broden's three archive URLs, BBQ-V, the MMEdit Drive links and the gated publishers each get a status. Re-run Broden twice more ≥ 10 minutes apart (schedule each as a background `sleep 600 && …` command; no foreground sleep) before calling it `unreachable` in the receipt.
 - [ ] **Step 7: Checkpoint** — commit module, script, test, receipt (per D1).
 
 ---
@@ -153,7 +158,7 @@ Input classes or failure modes the spec implies but no existing test pins, most 
   ```
   (`_protected_fields` = `coverage.identity`, `coverage.preview`, `coverage.adapter`, `release`, `snapshot_id`.)
 - [ ] **Step 2:** Run → FAIL.
-- [ ] **Step 3: Implement** `refresh(entry, outcomes) -> RefreshResult` and the driver over the 98 entries with `preview: none` and `access != unreleased` (89 audited + 9 never audited; the 17 unreleased sets are excluded). Pinned means a content digest or a strong ETag together with a length from the response. Write the receipt and a one-table markdown summary.
+- [ ] **Step 3: Implement** `refresh(entry, outcomes) -> RefreshResult` and the driver over the 98 entries with `preview: none` and `access != unreleased` (89 audited + 9 never audited; the 17 unreleased sets are excluded). Pinned means `content_digest` is set, or `etag` is strong (does not start with `W/`) and `content_length` is not None. Write the receipt and a one-table markdown summary.
 - [ ] **Step 4:** Tests → PASS. Run `.venv/bin/atlas datasets validate --all` → no errors; `git diff --stat registry/` shows evidence/blocker edits only.
 - [ ] **Step 5 (research, no code):** For the nine never-audited entries, read the primary author/project pages (WebSearch/WebFetch, public pages only) and record identity, access, rights as `source_audit_*` evidence with `checked_on`. Honest outcome examples: "benchmark suite, no single release" (`vtab`), "generated by a recipe" (`gaussian-rubbish-examples`).
 - [ ] **Step 6:** Run the driver; commit the receipt. **Checkpoint** (per D1).

@@ -1,0 +1,671 @@
+{
+  "kind": "baseline_attestation",
+  "date": "2026-10-08",
+  "task": "Task 1 of docs/superpowers/plans/2026-10-08-finish-atlas.md: re-run the verification surface on the current tree and record the numbers later tasks compare against.",
+  "window_utc": {
+    "start": "2026-10-08T03:16:18Z",
+    "end": "2026-10-08T03:25:21Z"
+  },
+  "tree": {
+    "branch": "coverage-next",
+    "head": "61bde846bb7c32a1a2e7df67e2f0624ec6768dc0",
+    "head_subject": "Plan: apply pre-flight rulings (probe etag/digest/resolver, Sonnet delegation)",
+    "working_tree_at_start": "clean apart from the untracked, unrelated file ':memory:.ses'",
+    "source_changes_by_this_task": "none"
+  },
+  "environment": {
+    "os": "Linux 7.2.9-1-cachyos x86_64",
+    "python_main_venv": "3.12.14 (.venv, torch 2.14.0+cu130; not reinstalled or synced)",
+    "node": "v26.10.0",
+    "npm": "12.2.0",
+    "playwright": "1.63.0",
+    "chromium": "153.0.8010.12",
+    "vitest": "3.2.7",
+    "vite": "6.4.3",
+    "uv": "0.12.23",
+    "ty": "0.0.83",
+    "prek": "0.5.2",
+    "ollama_server": {
+      "version": "0.20.2",
+      "address": "127.0.0.1:11434",
+      "models_present": [
+        "qwen3-vl:8b",
+        "qwen3-vl:30b-a3b-instruct",
+        "qwen3.5:9b"
+      ]
+    }
+  },
+  "headline_numbers_for_later_tasks": {
+    "python_suite": {
+      "passed": 1028,
+      "skipped": 1
+    },
+    "vitest": {
+      "passed": 26
+    },
+    "preview_media_smoke": {
+      "datasets_checked": 218,
+      "ok": 169,
+      "no_media_assets": 49,
+      "asset_checks": 507,
+      "failures": 0
+    },
+    "complete_index_smoke": {
+      "datasets_checked": 216,
+      "ok": 216,
+      "failures": 0,
+      "matched_count_equals_registry_total": 216,
+      "sum_of_matched_counts": 44721051
+    },
+    "browser_suite": {
+      "tests_in_suite": 69,
+      "passed": 69,
+      "skipped_after_both_invocations": 0,
+      "failed": 0,
+      "how": "66 passed + 3 skipped in the brief command; the same 3 then passed in a second targeted invocation with their opt-in switches (see browser_suite)"
+    }
+  },
+  "checks": {
+    "python_suite": {
+      "status": "recorded_earlier_same_tree_not_rerun_by_this_task",
+      "command": "PYTHONPATH=src .venv/bin/python -m pytest -q",
+      "result": "1028 passed, 1 skipped",
+      "duration_seconds": 81
+    },
+    "vitest": {
+      "status": "recorded_earlier_same_tree_not_rerun_by_this_task",
+      "command": "npm test --prefix apps/web -- --run",
+      "result": "26 passed",
+      "note": "apps/web/node_modules was restored with npm ci earlier this session; it is gitignored."
+    },
+    "prek": {
+      "status": "recorded_earlier_same_tree_not_rerun_by_this_task",
+      "command": "prek run --all-files",
+      "result": "passed (pinned ty + whitespace)"
+    },
+    "workbench": {
+      "command": ".venv/bin/atlas serve --port 8766 (background)",
+      "pid": 917423,
+      "ready": "GET /api/v1/capabilities -> 200 within 1 s",
+      "capabilities": {
+        "mode": "workbench",
+        "api_version": "1"
+      },
+      "stopped": "SIGTERM to pid 917423 at 2026-10-08T03:25:21Z; log shows clean shutdown; 8766 no longer listening; 11434 (user Ollama) untouched"
+    },
+    "preview_media_smoke": {
+      "command": ".venv/bin/python scripts/verify_preview_media_smoke.py --api http://127.0.0.1:8766 --output <scratch>/preview-media-smoke-20261008.json",
+      "exit_code": 0,
+      "duration_seconds": 168,
+      "datasets_checked": 218,
+      "summary": {
+        "no_media_assets": 49,
+        "ok": 169
+      },
+      "asset_checks": 507,
+      "failures": {},
+      "datasets_with_no_media_assets": [
+        "activations-csv",
+        "advbench",
+        "agent-security-bench",
+        "alpaca",
+        "anthropic-red-teaming-prompts",
+        "audioset",
+        "bbq",
+        "behonest",
+        "bias-in-bios",
+        "causalgym",
+        "cc3m",
+        "cebab",
+        "child-safety-intents",
+        "conceptarc",
+        "counterfact",
+        "datacomp-1b",
+        "factoid",
+        "glue-cola",
+        "halueval",
+        "harmbench",
+        "interpbench",
+        "jiechieu-tsopze-resume-corpus",
+        "laion-400m",
+        "language-identification-dataset",
+        "maliciousinstruct",
+        "mma-diffusion",
+        "mrpc",
+        "nrc-vad",
+        "pairs-csv",
+        "qnli",
+        "qqp",
+        "ravel",
+        "realtoxicityprompts",
+        "recap-datacomp-1b",
+        "ring-a-bell",
+        "sad",
+        "senator-tweets-2021",
+        "smolim2-135m-10b",
+        "sorrybench",
+        "sst2",
+        "t2i-compbench",
+        "tdc2023",
+        "the-pile",
+        "top16-images-csv",
+        "tweeteval",
+        "visu-text",
+        "visual6502-transistor-netlist",
+        "wmdp",
+        "wnli"
+      ],
+      "raw_output_sha256": "e38f1cef0da60b37dc0fe8c530fb858a7320365c0babf7ace0041ac5832a3f9e",
+      "comparison": "reports/preview-media-smoke-final-20261007.json had 217 datasets (169 ok, 48 no_media_assets, 507 asset checks, 0 failures). The only difference is `factoid`, now a browsable dataset with status no_media_assets (a text population). Every other dataset has the same status."
+    },
+    "complete_index_smoke": {
+      "command": ".venv/bin/python scripts/verify_complete_index_smoke.py --api http://127.0.0.1:8766 --output <scratch>/complete-index-smoke-20261008.json",
+      "exit_code": 0,
+      "duration_seconds": 35,
+      "datasets_checked": 216,
+      "summary": {
+        "ok": 216
+      },
+      "failures": {},
+      "registry_totals_known": 216,
+      "matched_count_equals_registry_total_for": 216,
+      "slowest_seconds": [
+        [
+          6.202,
+          "laion-400m"
+        ],
+        [
+          2.906,
+          "the-pile"
+        ],
+        [
+          2.808,
+          "cauldron"
+        ],
+        [
+          2.181,
+          "visual-genome"
+        ],
+        [
+          1.732,
+          "imagenet-c"
+        ]
+      ],
+      "raw_output_sha256": "ad9bfe8593efa6c38e73887153246a7912ecef271aeedb2672a7df606ebb8466",
+      "matched_count_by_dataset": {
+        "advbench": 520,
+        "agent-security-bench": 843,
+        "algopuzzlevqa": 1800,
+        "alpaca": 52002,
+        "anthropic-red-teaming-prompts": 38961,
+        "artbench": 60000,
+        "audioset": 2084320,
+        "bapps": 197344,
+        "bbq": 58492,
+        "behonest": 19059,
+        "bias-in-bios": 396189,
+        "blink": 3807,
+        "caltech101": 9144,
+        "cauldron": 1880992,
+        "causalgym": 17400,
+        "cc3m": 3334173,
+        "cebab": 18600,
+        "celeba": 202599,
+        "chartqa": 32719,
+        "child-safety-intents": 747,
+        "cifar-10": 60000,
+        "cifar-10-1": 2000,
+        "cifar-10-c": 950000,
+        "cifar-100": 60000,
+        "cifar-100-c": 950000,
+        "cinic-10": 270000,
+        "clevr": 1070,
+        "clevr-v1-full": 999968,
+        "coco": 25014,
+        "coco-2014": 164062,
+        "coco-one": 2247,
+        "coco-qa": 117684,
+        "coco-two": 440,
+        "cocogender": 244242,
+        "conceptarc": 176,
+        "controlled-clevr": 408,
+        "controlled-images": 412,
+        "counterfact": 21919,
+        "covid-19-radiography": 21165,
+        "cub-200-2011": 11788,
+        "custom-propeller-and-rotating-snake-stimuli": 7,
+        "datacomp-1b": 532229,
+        "div2k": 900,
+        "docci": 14847,
+        "docvqa": 50000,
+        "dreambooth": 158,
+        "dtd": 5640,
+        "emnist": 2255710,
+        "emnist-balanced": 131600,
+        "emnist-letters": 145600,
+        "emoset": 118102,
+        "eurosat": 27000,
+        "exams-v": 21291,
+        "factoid": 4150,
+        "fairface": 97698,
+        "ffhq": 70000,
+        "fgvc-aircraft": 10000,
+        "figure-linked-source-data-spreadsheets": 7,
+        "find": 2275,
+        "flickr30k": 31014,
+        "flowers102": 8189,
+        "foil-it": 594536,
+        "food101": 101000,
+        "glue-cola": 10657,
+        "gqa": 132062,
+        "gvil": 3200,
+        "gvil-paired-illusion-images": 3302,
+        "hades": 4500,
+        "hallusionbench": 1129,
+        "halueval": 34507,
+        "harmbench": 400,
+        "hatefulillusion": 2160,
+        "hc-bench": 53,
+        "high-quality-hallucination-benchmark": 4000,
+        "hod": 10631,
+        "iconqa": 107439,
+        "idenprof": 11000,
+        "illuchar": 4125,
+        "illusionbench-3c643c29": 1041,
+        "illusionmnist": 5069,
+        "illusionvqa": 1435,
+        "illusoryvqa": 26121,
+        "imagenet-1k": 1431167,
+        "imagenet-a": 7500,
+        "imagenet-c": 4750000,
+        "imagenet-ilsvrc-2012": 1281167,
+        "imagenet-r": 30000,
+        "imagenet-segmentation": 4276,
+        "imagenet-sketch": 50889,
+        "imagenet-v2": 10000,
+        "imagenette": 13394,
+        "inaturalist": 100000,
+        "interpbench": 86,
+        "jailbreakv-28k": 28000,
+        "jiechieu-tsopze-resume-corpus": 29783,
+        "laion-400m": 12933524,
+        "language-identification-dataset": 90000,
+        "lingoqa": 1000,
+        "llava-bench": 60,
+        "llava-instruct-150k": 157712,
+        "llava-instruct-150k-3a74a703": 157710,
+        "maliciousinstruct": 100,
+        "mathvision": 3040,
+        "medical-multimodal-evaluation-data": 17303,
+        "miap": 100000,
+        "mit-adobe-5k": 25000,
+        "mit-states": 63440,
+        "mllmu-bench": 1000,
+        "mm-safetybench": 1685,
+        "mm-vet": 218,
+        "mma-diffusion": 1000,
+        "mmbench": 21990,
+        "mmbench-en-dev": 4329,
+        "mme": 2374,
+        "mme-perception": 2114,
+        "mmmu-dev": 150,
+        "mmstar": 1500,
+        "mnist": 70000,
+        "mrpc": 5801,
+        "mvbench-scene-qa": 200,
+        "naturalbench": 1900,
+        "nocaps": 15100,
+        "nrc-vad": 74772,
+        "oasis": 900,
+        "objaverse": 798759,
+        "objectnet": 50273,
+        "ok-vqa": 14055,
+        "omnisafebench-mm": 1500,
+        "omnispatial": 8431,
+        "openimages": 41620,
+        "oxfordpet": 7349,
+        "pairs": 200,
+        "pairs-csv": 1000,
+        "paper-1e2474b15fec2d7d-unnamed-controversial-stimuli-collection": 1863,
+        "pascal-voc": 14961,
+        "pata": 4934,
+        "phantom": 55350,
+        "phase": 18889,
+        "places": 36500,
+        "pmc-vqa": 228948,
+        "pope": 9000,
+        "puzzlevqa": 2000,
+        "qnli": 115669,
+        "qqp": 795241,
+        "ravel": 11839,
+        "realtoxicityprompts": 99442,
+        "realworldqa": 765,
+        "recap-datacomp-1b": 1000,
+        "restricted-imagenet": 267898,
+        "ring-a-bell": 285,
+        "roco": 87927,
+        "rs-vqa": 77232,
+        "rsicd": 10921,
+        "sad": 127176,
+        "saegis-clean-and-adversarial-splits": 4800,
+        "safebench": 2300,
+        "sbbench-syn": 539,
+        "sbbench-syn-crop": 917,
+        "sbbench-synthetic-age-crop-false": 333,
+        "sbbench-synthetic-age-crop-true": 511,
+        "sbbench-synthetic-gender-crop-false": 206,
+        "sbbench-synthetic-gender-crop-true": 406,
+        "scienceqa-img": 10332,
+        "seed-bench-2": 24371,
+        "seedbench": 17990,
+        "senator-tweets-2021": 99693,
+        "set14": 14,
+        "set5": 5,
+        "shapes-localization": 400,
+        "shapes-recognition": 400,
+        "shapes-relations": 400,
+        "shapeworld": 2100,
+        "simplevqa": 2225,
+        "snli-ve": 565286,
+        "socialcounterfactuals": 170832,
+        "sorrybench": 9240,
+        "space-10": 4132,
+        "spoken-wikipedia": 738234,
+        "sst2": 70042,
+        "stanford-cars": 16185,
+        "stl-10": 113000,
+        "sun397": 108754,
+        "svhn": 99289,
+        "svo-probes": 36841,
+        "t2i-compbench": 17861,
+        "tdc2023": 100,
+        "textvqa": 45336,
+        "textvqa-x": 18096,
+        "the-pile": 429254,
+        "tid2013": 3000,
+        "top16-images-csv": 930,
+        "turing-eye-test": 490,
+        "tweeteval": 200785,
+        "ucf101": 13320,
+        "vg-qa-one": 1160,
+        "vg-qa-two": 288,
+        "vhd11k": 11000,
+        "vibeeval": 269,
+        "visu-text": 168700,
+        "visual-counterfact": 1220,
+        "visual-genome": 116367,
+        "visual6502-transistor-netlist": 3510,
+        "visualpuzzle": 1168,
+        "vizwiz": 32842,
+        "vizwiz-priv": 13571,
+        "vqa-constraints": 9463,
+        "vqa-v2": 214354,
+        "vqa-v2-m-n-subsets": 1600,
+        "vsr": 16023,
+        "waterbirds": 11788,
+        "what-s-up": 4958,
+        "whoops": 500,
+        "winoground": 400,
+        "wmdp": 3668,
+        "wnli": 852,
+        "zerobench": 100
+      },
+      "comparison": "reports/complete-index-smoke-factoid-attested-20261007.json: same 216 datasets, all ok, and no dataset changed its matched count."
+    },
+    "browser_suite": {
+      "api_under_test": "http://127.0.0.1:8766 (ATLAS_LIVE_API)",
+      "run_1": {
+        "command": "ATLAS_PYTHON=/home/bitwise/Documents/vibe/DatasetAtlas/.venv/bin/python ATLAS_LINKED_PROVIDER=local-ollama-qwen35 ATLAS_LIVE_API=http://127.0.0.1:8766 ATLAS_LINKED_JOURNEY=1 ATLAS_ANALYSIS_JOURNEY=1 npm run test:e2e --prefix apps/web",
+        "started_utc": "2026-10-08T03:20:36Z",
+        "duration_seconds": 198,
+        "duration_note": "includes npm run build (tsc -b && vite build, 1.77 s vite); Playwright reported 3.2 m",
+        "exit_code": 0,
+        "tests_in_suite": 69,
+        "passed": 66,
+        "skipped": 3,
+        "failed": 0,
+        "skipped_tests": [
+          {
+            "test": "e2e/linked-journey.spec.ts:115 browser re-exports and re-imports the saved linked COCO selection",
+            "gate": "ATLAS_REIMPORT_SELECTION_ID not set by the brief command"
+          },
+          {
+            "test": "e2e/native-places-audio.spec.ts:37 Spoken Wikipedia whole-article native audio plays and seeks",
+            "gate": "ATLAS_NATIVE_AUDIO not set by the brief command"
+          },
+          {
+            "test": "e2e/runtime-linked-journey.spec.ts:9 current real analyses support linked filtering, projection, local image conversation and exchange",
+            "gate": "ATLAS_RUNTIME_JOURNEY not set by the brief command"
+          }
+        ],
+        "notable_durations_seconds": {
+          "analysis-journey (real detect.coco_v1 + embed.siglip2 on 1 record)": 10.4,
+          "linked-journey (local image conversation)": 18.4
+        }
+      },
+      "run_2_previously_skipped_tests": {
+        "command": "cd apps/web && ATLAS_PYTHON=<.venv python> ATLAS_LINKED_PROVIDER=local-ollama-qwen35 ATLAS_LIVE_API=http://127.0.0.1:8766 ATLAS_LINKED_JOURNEY=1 ATLAS_ANALYSIS_JOURNEY=1 ATLAS_REIMPORT_SELECTION_ID=selection-3570cf47d2ec6a9358ec874f ATLAS_NATIVE_AUDIO=1 ATLAS_RUNTIME_JOURNEY=1 node_modules/.bin/playwright test e2e/linked-journey.spec.ts:115 e2e/native-places-audio.spec.ts:37 e2e/runtime-linked-journey.spec.ts:9",
+        "started_utc": "2026-10-08T03:24:33Z",
+        "duration_seconds": 10,
+        "exit_code": 0,
+        "tests": 3,
+        "passed": 3,
+        "skipped": 0,
+        "failed": 0,
+        "why": "The brief expected 69 passed, 0 skipped, but its command leaves these three opt-in switches unset. This second invocation is an addition to, not a replacement for, run_1; run_1 stands as recorded. ATLAS_REIMPORT_SELECTION_ID is the selection saved by run_1 (selection-3570cf47d2ec6a9358ec874f, COCO linked browser acceptance, one record)."
+      },
+      "env_additions_to_brief_command": {
+        "ATLAS_PYTHON": "apps/web/playwright.config.ts starts scripts/e2e_workspace.py with `${ATLAS_PYTHON ?? python}`; /usr/bin/python has no dataset_atlas package, so the .venv interpreter is required.",
+        "ATLAS_LINKED_PROVIDER": "linked-journey.spec.ts defaults to provider `local-qwen2-5-vl-3b` (http://127.0.0.1:8001/v1), which is not running (see reports/browser-local-provider-failure-20261007.json). `local-ollama-qwen35` is the provider the previous passing receipt used and the one runtime-linked-journey.spec.ts hard-codes."
+      },
+      "model_conversations": {
+        "provider_id": "local-ollama-qwen35",
+        "base_url": "http://127.0.0.1:11434/v1",
+        "allow_external": false,
+        "model": "qwen3.5:9b (Ollama 0.20.2, Q4_K_M, 9.7B)",
+        "generation_settings": {
+          "reasoning_effort": "none",
+          "max_tokens": 512
+        },
+        "conversations": [
+          {
+            "id": "conversation:50d851d6e3dd48b0a74897878f01bf61",
+            "journey": "linked-journey (run_1)",
+            "record_ids": [
+              "coco:example:c765b3eb380b785ef8fc414d"
+            ],
+            "one_image_sent": true,
+            "context_digest": "b80d12d48bc1bd2e4641e2db65d2f2045f6d90293798bcd40bb0847fd942962b",
+            "usage": {
+              "prompt_tokens": 452,
+              "completion_tokens": 18,
+              "total_tokens": 470
+            },
+            "error": null
+          },
+          {
+            "id": "conversation:173fdd225a4a4015baaa368628e6b75f",
+            "journey": "runtime-linked-journey (run_2)",
+            "record_ids": [
+              "clevr:example:cfcd00cf0128e7a7855a0840"
+            ],
+            "one_image_sent": true,
+            "context_digest": "69f01f5bca2c70ea77b7b930b60b8744e4d083ca74ee0ce61abb60231f56b05f",
+            "usage": {
+              "prompt_tokens": 396,
+              "completion_tokens": 36,
+              "total_tokens": 432
+            },
+            "error": null
+          }
+        ],
+        "external_model_requests": 0,
+        "statement": "No external model send. The only model server contacted was the local Ollama at 127.0.0.1:11434; no paid or external model API was configured or called, and no dataset contents left this machine. Each conversation sent one approved image from a prepared local preview population, reviewed through the context preview, to that loopback server. The model name and server version are as listed; the model output is nondeterministic and differs from the 2026-10-07 receipt."
+      }
+    }
+  },
+  "workspace_side_effects_of_the_browser_journeys": {
+    "note": "The opt-in journeys write into the local, gitignored workspace (work/, local-config/). Nothing was deleted or retired.",
+    "analysis_journey_new_runs": [
+      {
+        "run_id": "a9a08ca933ed40d9be0ad842b451e359",
+        "processor_id": "detect.coco_v1",
+        "artifact_id": "fb31649bb4dcb6118b1109a4",
+        "record_id": "coco:example:c765b3eb380b785ef8fc414d",
+        "coverage": {
+          "completed": 1,
+          "failed": 0,
+          "total": 1
+        }
+      },
+      {
+        "run_id": "6864603aea2a462ea38684459266eb4d",
+        "processor_id": "embed.siglip2",
+        "artifact_id": "aadb84f4df264b7aa0a0e498",
+        "record_id": "coco:example:c765b3eb380b785ef8fc414d",
+        "coverage": {
+          "completed": 1,
+          "failed": 0,
+          "total": 1
+        }
+      }
+    ],
+    "new_selections": [
+      "selection-3570cf47d2ec6a9358ec874f (linked journey, 1 COCO record)",
+      "selection-4b38172054fb1f596fa99b09 (runtime journey, 1 CLEVR record)"
+    ],
+    "new_conversations": [
+      "conversation:50d851d6e3dd48b0a74897878f01bf61",
+      "conversation:173fdd225a4a4015baaa368628e6b75f"
+    ],
+    "linked_journey_result": {
+      "source_filter": "source.person_count eq 2",
+      "matched_count": 5,
+      "record_id": "coco:example:c765b3eb380b785ef8fc414d",
+      "snapshot_ids": [
+        "coco-2017-val-4f7e2ccb-113a836d"
+      ],
+      "response_text": "A woman is standing at a table in the dining area, next to the kitchen.",
+      "exported_selection_checksum": "3ef703dea1ac14b6f80108318db71aad02bdb0aa0e70cf8531d97b7826013406",
+      "imported_ids_equal_export": true
+    },
+    "runtime_journey_result": {
+      "dataset_id": "clevr",
+      "filtered_matches": 1,
+      "projection_points_before_filter": 16,
+      "projection_points_filtered": 1,
+      "projection_points_reexpanded": 16,
+      "projection_sha256_unchanged": "5e9a942245ca3267b3b4699990621c3ab8c95f2527581e01cd068132a6c4c06a",
+      "response_characters": 165,
+      "response_sha256": "beacf258f77fec8324142afa9a5584dc1a0f6c139407fe386e1579cec1b8e7bb",
+      "exported_checksum": "a2428cb4462e5734753ef5eb2ff80f19d138fe970f153db45a239837232a874a",
+      "prediction_columns_retained": true
+    }
+  },
+  "tracked_receipts_overwritten_by_the_browser_runs": {
+    "summary": "The browser specs write fixed-name receipts under reports/. With ATLAS_LIVE_API set, the two runs rewrote 18 tracked files with different content. None is a new receipt, so all 18 were restored with `git checkout -- <file>`; git status afterwards showed only the untracked :memory:.ses. Their rewritten content is summarised here (sha256 of the rewritten bytes) and was not committed.",
+    "nature_of_the_differences": "Timestamps in all 18. browser-analysis-journey.json also has new run and artifact ids; browser-linked-journey.json has a new selection id, conversation id, response text and export checksum; browser-runtime-linked-journey-20261007.json has a new frozen selection id, conversation id, response hash and export checksum; browser-preview-filter-performance-20261007.json has new timings; browser-places365-20261007.json and browser-tid2013-20261007.json list the same original_hashes in a different order (verified as equal sets). No pass/fail value changed in any file.",
+    "files": [
+      {
+        "path": "reports/browser-analysis-journey.json",
+        "head_sha256": "f17a85c705d488a75ef99a87a64699b6e14ae4e897a3ec30f372b403dee3c0e9",
+        "rewritten_sha256": "ac6281a7eb94c59edbf002b868f46842e0c70e866c27d7f57f612b55e4d97727"
+      },
+      {
+        "path": "reports/browser-emoset-native-20261007.json",
+        "head_sha256": "4bdc12a6f4211bfc6ca4a2f78fba28fc5d89c7e20bdea3756b19caf9ca9c02d8",
+        "rewritten_sha256": "d58bfdc3f740e47c11f2ece63e27f9dd59d04f28f1205ca0e6c1c28a5ec314ab"
+      },
+      {
+        "path": "reports/browser-factoid-native-20261007.json",
+        "head_sha256": "6cead54d04da2f9658c299d2df6bc56764663a8436bc1e85f5a70cae8006b209",
+        "rewritten_sha256": "005093de919dd44ef7eeb62d41cb8bb02b25f04e5482e5be98631a8048b575e0"
+      },
+      {
+        "path": "reports/browser-fairface.json",
+        "head_sha256": "c63e257e34cf5e250c7859bd8abe77a177dc426d1638bd1d4d6df73f7ff3964c",
+        "rewritten_sha256": "5d5a7e158acb50db9ed580b32c2624ad27e779a256745dc5951ddb163ea67b5d"
+      },
+      {
+        "path": "reports/browser-ffhq-native-20261007.json",
+        "head_sha256": "711dad19b8feedc7f625806387a698612f6cd883ca407b681826251bbd0c67ac",
+        "rewritten_sha256": "84cc91042d02e69b8266fbf0d9ba14586a6167b459585558ee46b3dc737d67d7"
+      },
+      {
+        "path": "reports/browser-linked-journey.json",
+        "head_sha256": "b364e63406b5af043f4b30f0e09aa90b9bb3566c6b1ea4e425f61a55ef6d69de",
+        "rewritten_sha256": "7f480a533620de390e7d1198e0e309bd600d1d0469567cf23d3affa8ca57cfb6"
+      },
+      {
+        "path": "reports/browser-mit-states-native-20261007.json",
+        "head_sha256": "fd23878076c3684710e4c3078acfa6ab843e49fb0897d434b1bbae4866ed7c9e",
+        "rewritten_sha256": "1eecd63356cb77043677f6a2515d1888861eb8b1f032e97710678fbdb9cec719"
+      },
+      {
+        "path": "reports/browser-native-mask.json",
+        "head_sha256": "4c5ba0e78aba02c7d658e64db6d55f5dc44e99a49f58e153f04dc40040ff1ed1",
+        "rewritten_sha256": "63b0dc5b233f30103657647a52d3e4f7823ef0c7a49a900d38dc32d0a4e8db38"
+      },
+      {
+        "path": "reports/browser-objaverse-20261007.json",
+        "head_sha256": "f5215f16f2a17e8571263fcd516e8225f9a2c57bdbf0f310e1ac9508d291cce1",
+        "rewritten_sha256": "1413e764a7c1c0effe243a35ff2d49a27c545c6994e6812fb6a759acad43ae50"
+      },
+      {
+        "path": "reports/browser-openimages-native-20261007.json",
+        "head_sha256": "9205bf6094f736d681c69f40fc48e0208920817b2772603ca87dae0e450c4706",
+        "rewritten_sha256": "7f5c7c59bc37fa05b82f3179afde90df5995b0d15dd3061aafebf24be48de682"
+      },
+      {
+        "path": "reports/browser-pascal-voc2011-20261007.json",
+        "head_sha256": "545c2fe0e15a5ad5fa712982ff57ff05428c2dc505c8072fa6bfb7b78657aced",
+        "rewritten_sha256": "f8d9e43557e3cfa68163b5a38ffbe48451ce49fff92bcc749fbf1e3ed7b2aab3"
+      },
+      {
+        "path": "reports/browser-places365-20261007.json",
+        "head_sha256": "27b0622ef59bbecc4a0897d3c294ecb25ffc2f360899638ddd02a6501dda240f",
+        "rewritten_sha256": "7148cdab47f4220b8ff42be5449b13210ce7d598a5dd21a158fd668ad4e700c5"
+      },
+      {
+        "path": "reports/browser-preview-filter-performance-20261007.json",
+        "head_sha256": "a6a6a1ff1f4d3313183ca09db5db94bb709bec92ce4e3f8d23286fa8231d59af",
+        "rewritten_sha256": "d2ae5b214d368bcd0b490d145323df85f7e178bd6a1bf2d38cb87b3667d2ba26"
+      },
+      {
+        "path": "reports/browser-runtime-linked-journey-20261007.json",
+        "head_sha256": "4e64a33f7fcbb343ba270a9f497541aed76d47f4ec8cee88123afc4039631e04",
+        "rewritten_sha256": "129ebfba4e1a749adfaaaa12e70a2b96d28b89c07b02057a16a4de1e3510ca58"
+      },
+      {
+        "path": "reports/browser-seed-bench-2.json",
+        "head_sha256": "1d70a3e0bfa0e764b6f7a7836371337f0bbff9cb6793eb74bc697a8c2b9c0405",
+        "rewritten_sha256": "88b7df31d5e21951f0b14ea88ac6483d1f6197a89b1b3c71416daa4d17ba7e0c"
+      },
+      {
+        "path": "reports/browser-spoken-wikipedia-native-audio-20261007.json",
+        "head_sha256": "f97a293eff8b47a9251567d5181d324befbeec85c988e181e95003a89e048368",
+        "rewritten_sha256": "13caa77b7cbe16560b620473b83904a8c83e5496a62e9c94c6b67edb0d802f83"
+      },
+      {
+        "path": "reports/browser-tid2013-20261007.json",
+        "head_sha256": "be7dce0b7703d7a2cea5d4f84d3ead08ab8c80c5b4207fbf1fc474c42e574d3e",
+        "rewritten_sha256": "57f325256e291cc18f0fd1206f65330382163084c7406bafb72d1e3bd854fea6"
+      },
+      {
+        "path": "reports/browser-ucf101-native-20261007.json",
+        "head_sha256": "ba3f0fcbc5e95a5ec9e93970f2128f6c9ee473fb3633c69fbdedd8830db83bfb",
+        "rewritten_sha256": "5aa8229c81603ddf0939f0bea5f7ce5cb5665fd10b264019e99718a255d4262e"
+      }
+    ]
+  },
+  "deviations_from_brief": [
+    "Browser command carries two extra environment variables (ATLAS_PYTHON, ATLAS_LINKED_PROVIDER); both are required for this machine and are explained under browser_suite.env_additions_to_brief_command.",
+    "The brief command alone yields 66 passed, 3 skipped, not 69 passed, 0 skipped. The three skips are opt-in tests; they were run in a second, targeted invocation and passed. The 69 figure is therefore 66 + 3 across two invocations, not one uninterrupted run.",
+    "Python suite, vitest and prek were not re-run (the brief says not to); their numbers are the ones recorded earlier in this session on this same tree.",
+    "Raw smoke outputs were written to a scratch directory, not to reports/ (the brief asks for one receipt). Their sha256 and the per-dataset matched counts and no-media list are embedded above."
+  ],
+  "not_run": [
+    "Python 3.14 environment checks (work/verify-install/python314-env): outside this task.",
+    "Storage measurement (SPEC 8.4): outside this task; the plan records 122,381,500,416 B allocated at the start of the pass."
+  ]
+}

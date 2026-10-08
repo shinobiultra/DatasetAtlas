@@ -9,9 +9,9 @@ These are decisions for a person. Nothing in this file changes any registry reco
 - Options. `alias_of:<id>`: the paper's name is another name for that registry entry. `distinct_release`: the paper's dataset is a release of its own. `accept_unreleased_custom_record`: a paper-private dataset with no public release, kept as an unreleased custom record. `keep_candidate`: leave the identity open.
 - Preview and adapter states come from `reports/dataset_coverage.csv`, the merged catalogue view; identity, links, access and evidence come from `registry/datasets/*.yaml`. A link to a prepared family is a pointer, never coverage: an entry whose preview is `none` stays `none` until a person decides.
 - Blocker types. `identity`: the exact release, variant or subset is not human-verified (a family alias or variant of another entry, or a name with no link). `access`: the data is gated or needs a request, which is a user action and not an identity question. `unreleased`: the registry records a paper-private dataset with no public release. `source_availability`: the registry's latest access audit records the source host as unresponsive or unresolvable. `adapter`: identity is settled and only an adapter is missing; such entries are outside this queue, so no entry below has this type.
-- IDs. `IR-NNN` comes from `registry/identity-review-ids.json`. An assignment is never renumbered or reused; a group seen for the first time takes the next free number.
-- Quoted lines (`>`) are text exactly as the registry stores it; paper excerpts are shortened to 200 characters.
-- Each group is also appended once to `work/corpus/review_queue.jsonl` as a `kind: identity_decision` record with `status: open`.
+- IDs. `IR-NNN` comes from `registry/identity-review-ids.json`. An id is never renumbered or reused. When a person resolves one member of a group, the group keeps its id even though its set of link targets changed. A group formed by merging or splitting other groups takes a new id, and the ids it replaced are listed as retired in the summary.
+- Quoted lines (`>`) are text exactly as the registry stores it (the line the merged catalogue view has already dropped as disproved, such as `Adapter and preview are not implemented.` on a prepared entry, is not quoted); paper excerpts are shortened to 200 characters.
+- This markdown is the current source of truth. Each group is also kept as a `kind: identity_decision` record in `work/corpus/identity_review_queue.jsonl`, a file this builder owns (the corpus pipeline's own review queue is never touched). While a record has status `open`, its `group_key`, `members` and `options` are a snapshot refreshed on every run; a record with any other status is never changed; a record whose group no longer exists is flagged `retired: true`.
 
 ## Summary
 
@@ -20,6 +20,8 @@ These are decisions for a person. Nothing in this file changes any registry reco
 Blocker types: `identity` 117, `access` 11, `unreleased` 16, `source_availability` 1, `adapter` 0.
 
 Preview states of the entries: `none` 100, `complete_target` 45.
+
+Retired ids: none.
 
 Groups with more than one entry: IR-014 (14), IR-019 (2), IR-032 (2), IR-034 (2), IR-037 (2), IR-044 (2), IR-050 (5), IR-059 (2), IR-095 (2), IR-096 (2).
 
@@ -353,7 +355,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Options: `distinct_release`, `keep_candidate`
 - Registry blockers:
   > Original release identity and rights need verification.
-  > Adapter and preview are not implemented.
 - Mentioned by 1 paper:
   - `paper-666de2b7486d80a3`, page 3, role: introduction
     > 1: Dataset comparison. A primary differentiator between our proposed Berkeley-Adobe Perceptual Patch Similarity (BAPPS) dataset and previous work is scale of distortion types. We provide human percep…
@@ -452,7 +453,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Registry blockers:
   > Original-source registration, contact sharing, or licensed subscription is required.
   > The exact paper release, source variant, or derived collection remains unresolved.
-  > Adapter and preview are not implemented.
 - Mentioned by 1 paper:
   - `paper-2df1203e2d3767bb`, page 6, role: introduced intent overlay
     > ], MM- SafetyBench [2], OmniSafeBench-MM [4], and SafeBench [33]. Moreover, we added 747 intents related to the new Child Safety category, generated with the assistance of OpenAI GPT-5.4, accessed vi…
@@ -500,7 +500,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Options: `distinct_release`, `keep_candidate`
 - Registry blockers:
   > Original release identity and rights need verification.
-  > Adapter and preview are not implemented.
 - Mentioned by 1 paper:
   - `paper-a47845c66d4a3f48`, page 18, role: corruption evaluation
     > R-100 datasets [75] are obtained via the PyTorch loaders [105], while CIFAR-10-C and CIFAR-100-C [58], with the common corruptions, are downloaded from the official release (see https://zenodo.org/re…
@@ -1255,7 +1254,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Options: `distinct_release`, `keep_candidate`
 - Registry blockers:
   > Original release identity and rights need verification.
-  > Adapter and preview are not implemented.
 - Mentioned by 1 paper:
   - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
     > 2024) CLIP(ViT-B/16 + LoRA) — FGVC-Aircraft, Food101, Flowers102,
@@ -1344,7 +1342,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Options: `distinct_release`, `keep_candidate`
 - Registry blockers:
   > Original release identity and rights need verification.
-  > Adapter and preview are not implemented.
 - Mentioned by 1 paper:
   - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
     > T-B/16 + LoRA) — FGVC-Aircraft, Food101, Flowers102,
@@ -1366,7 +1363,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Options: `distinct_release`, `keep_candidate`
 - Registry blockers:
   > Original release identity and rights need verification.
-  > Adapter and preview are not implemented.
 - Mentioned by 1 paper:
   - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
     > CLIP(ViT-B/16 + LoRA) — FGVC-Aircraft, Food101, Flowers102,
@@ -1482,7 +1478,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Registry identity audit: `author_release_identified_variant_unpinned` (2026-09-22).
 - Registry blockers:
   > Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.
-  > Adapter and preview are not implemented.
 - Mentioned by 1 paper:
   - `paper-b039401c04ff9b91`, page 4, role: derived collection
     > ure 3, each question The statistics of our dataset is shown in Table 2. concerns a pair of images (IMG1 and IMG2). One Note that since this dataset is only used for the eval- image (IMG1) is illusion…
@@ -1875,7 +1870,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Registry identity audit: `family_only` (2026-09-22).
 - Registry blockers:
   > Exact source variant or paper selection is unresolved.
-  > Adapter and preview are not implemented.
 - Mentioned by 1 paper:
   - `paper-09b2d7393fc75cf7`, page 7, role: refusal evaluation subset
     > For evaluation, we use the FineVision dataset [50], selecting 10,000 images from the LLaVA_Instruct_150k subset, yielding 20,559 image–instruction pairs, and the test split of TextVQA [51], containin…
@@ -1946,7 +1940,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Registry blockers:
   > Original-source access requires an author or data-holder request.
   > The exact paper release, source variant, or derived collection remains unresolved.
-  > Adapter and preview are not implemented.
 - Mentioned by 1 paper:
   - `paper-09b2d7393fc75cf7`, page 7, role: evaluation
     > vector-computation sets from the VHD11K [52] by sampling evaluate the purified version of MMA-Diffusion [62], released 250 harmful and 250 harmless images. We apply the same in [63], where we prepend…
@@ -1968,7 +1961,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Options: `distinct_release`, `keep_candidate`
 - Registry blockers:
   > Original release identity and rights need verification.
-  > Adapter and preview are not implemented.
 - Mentioned by 1 paper:
   - `paper-80b7ba2e277a20c5`, page 7, role: out-of-domain evaluation
     > l variants enhance scale coverage. (VQA) tasks: SimpleVQA [8], MMStar [7], and RealWorldQA [30].
@@ -2940,7 +2932,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Registry identity audit: `original_citation_only` (2026-09-22).
 - Registry blockers:
   > Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.
-  > Adapter and preview are not implemented.
 - Mentioned by 1 paper:
   - `paper-08e415961919a492`, page 9, role: evaluation
     > 20.28 24.35 Table 1: Detailed super-resolution PSNR comparison on the Set14 dataset with different scaling factors. 4× super-resolution where d(·) : R3×tH×tW → R3×H×W is a downsampling
@@ -2963,7 +2954,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Registry identity audit: `original_citation_only` (2026-09-22).
 - Registry blockers:
   > Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.
-  > Adapter and preview are not implemented.
 - Mentioned by 1 paper:
   - `paper-08e415961919a492`, page 9, role: evaluation
     > our approach Table 2: Detailed super-resolution PSNR comparison using Set5 [4] and Set14 [62] datasets. We use a scaling on the Set5 dataset with different scaling factors. factor of 4
@@ -3282,7 +3272,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Registry identity audit: `original_project_identified_exact_netlist_unresolved` (2026-09-22).
 - Registry blockers:
   > Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.
-  > Adapter and preview are not implemented.
 - Mentioned by 1 paper:
   - `paper-ad50206beabc5a94`, page 2, role: source data
     > [10] for a comprehensive review). The Visual6502 team reverse-engineered the 6507 from physical integrated circuits [11] by ch
@@ -3375,7 +3364,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Registry identity audit: `author_subset_file_identified` (2026-09-22).
 - Registry blockers:
   > Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.
-  > Adapter and preview are not implemented.
 - Mentioned by 1 paper:
   - `paper-7ed1979562251931`, page 4, role: derived evaluation collection
     > ons. We define the dataset “What color is”, among others. VQA v2 m+n as a subset of VQA v2, including m images, each associated with n questions, result

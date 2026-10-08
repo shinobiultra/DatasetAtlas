@@ -10,12 +10,16 @@ What it reads
 - `registry/datasets/*.yaml`: scope (identity), links, access, names, blockers and evidence (the papers that mention an entry).
 - `reports/dataset_coverage.csv`: the current `access`, `adapter` and `preview` of each entry as the merged catalogue reports
   them (a prepared version overrides the tracked YAML for adapter and preview). An entry the CSV lacks falls back to its YAML.
+  The CSV's `blockers` column says which lines the merged view dropped; the text and every line newer than the CSV come from the
+  YAML (the CSV is regenerated only now and then, so a plain copy of its column would lose lines written after it).
 
 What it writes (and only this)
-- `reports/identity_review_queue.md`: the human-readable queue.
-- `work/corpus/review_queue.jsonl`: one appended `kind: identity_decision` record per group, never duplicated, existing lines
-  untouched. The file is git-ignored.
-- `registry/identity-review-ids.json`: `{group key: "IR-NNN"}`, written only when a group is seen for the first time.
+- `reports/identity_review_queue.md`: the human-readable queue; it is the current source of truth.
+- `work/corpus/identity_review_queue.jsonl` (git-ignored, owned by this script): one `kind: identity_decision` record per group,
+  upserted by IR id. While a record's `status` is `open` its `group_key`, `members` and `options` are a snapshot refreshed on every
+  run; a record whose group no longer exists is flagged `retired: true`; a record with any other status is never changed; an id is
+  never duplicated. The corpus pipeline's own per-paper `work/corpus/review_queue.jsonl` is never read or written here.
+- `registry/identity-review-ids.json`: `{group key: "IR-NNN"}`, rewritten only when an id is assigned or moves to a new key.
 
 Groups (deterministic, never by name similarity)
 - Entries the registry links with `same_source_family_as`, `derived_from`, `annotation_overlay_of` or `source_subset_of` to the
@@ -23,14 +27,19 @@ Groups (deterministic, never by name similarity)
   entry that is not in the queue. An entry with no such link is its own group, keyed by its own id; an unlinked in-queue entry that
   others link to therefore joins them through that shared id.
 - The group key is the sorted link targets (or the entry's id), joined by `|`.
-- IDs are `IR-001`, `IR-002`, ... Unseen keys, in sorted-key order, take the next free numbers; an existing assignment is never
-  renumbered or reused even if the group's membership changed. A group that grows a new link target gets a new key, and so a new id.
+- IDs are `IR-001`, `IR-002`, ... An id is never renumbered or reused. A key already in the mapping keeps its id. An unseen key
+  inherits the id of a mapped key that no group produces any more when their nodes overlap, exactly one such mapped key overlaps it,
+  and no other unseen key overlaps that mapped key (so resolving one member of a group, which changes its set of link targets,
+  keeps the group's id). Otherwise (a merge: several retired keys overlap; a split: one retired key overlaps several; or no overlap)
+  the key takes the next free number, in sorted-key order. A mapped key that is neither produced nor inherited is *retired*: its id
+  stays reserved, and it is listed in the markdown and in the run summary.
 
     python scripts/build_identity_review_queue.py [--root PATH] [--dry-run]
 """
 import argparse
 import csv
 import json
+import os
 import re
 import sys
 from collections import Counter
@@ -45,7 +54,7 @@ REGISTRY_DIR = "registry/datasets"
 COVERAGE_CSV = "reports/dataset_coverage.csv"
 IDS_FILE = "registry/identity-review-ids.json"
 REPORT_FILE = "reports/identity_review_queue.md"
-QUEUE_FILE = "work/corpus/review_queue.jsonl"
+QUEUE_FILE = "work/corpus/identity_review_queue.jsonl"
 
 IDENTITY_SCOPE = frozenset({"candidate", "family_or_variant_candidate"})
 LINK_TYPES = frozenset({"same_source_family_as", "derived_from", "annotation_overlay_of", "source_subset_of"})
@@ -54,6 +63,9 @@ HOST_DOWN = re.compile(r"_host_(?:unresponsive|unresolvable)$")
 BLOCKER_TYPES = ("identity", "access", "unreleased", "source_availability", "adapter")
 EXCERPT_LIMIT = 200
 ID_PATTERN = re.compile(r"IR-(\d+)")
+SNAPSHOT_FIELDS = ("group_key", "members", "options")
+# The acquisition claims a successful preparation disproves; the same text `prepared_metadata` removes (tests keep the two in step).
+OBSOLETE_BLOCKERS = frozenset({"Adapter and preview are not implemented.", "Adapter and preview are not implemented"})
 
 INTRO = ("These are decisions for a person. Nothing in this file changes any registry record: `coverage.identity`, `release`, "
          "`preview`, `adapter` and every other field stay exactly as they are until a person records a decision. "
@@ -75,10 +87,16 @@ LEGEND = (
     "question. `unreleased`: the registry records a paper-private dataset with no public release. `source_availability`: the "
     "registry's latest access audit records the source host as unresponsive or unresolvable. `adapter`: identity is settled and only an "
     "adapter is missing; such entries are outside this queue, so no entry below has this type.",
-    "- IDs. `IR-NNN` comes from `registry/identity-review-ids.json`. An assignment is never renumbered or reused; a group seen for the "
-    "first time takes the next free number.",
-    "- Quoted lines (`>`) are text exactly as the registry stores it; paper excerpts are shortened to 200 characters.",
-    "- Each group is also appended once to `work/corpus/review_queue.jsonl` as a `kind: identity_decision` record with `status: open`.",
+    "- IDs. `IR-NNN` comes from `registry/identity-review-ids.json`. An id is never renumbered or reused. When a person resolves one "
+    "member of a group, the group keeps its id even though its set of link targets changed. A group formed by merging or splitting "
+    "other groups takes a new id, and the ids it replaced are listed as retired in the summary.",
+    "- Quoted lines (`>`) are text exactly as the registry stores it (the line the merged catalogue view has already dropped as "
+    "disproved, such as `Adapter and preview are not implemented.` on a prepared entry, is not quoted); paper excerpts are shortened "
+    "to 200 characters.",
+    "- This markdown is the current source of truth. Each group is also kept as a `kind: identity_decision` record in "
+    "`work/corpus/identity_review_queue.jsonl`, a file this builder owns (the corpus pipeline's own review queue is never touched). "
+    "While a record has status `open`, its `group_key`, `members` and `options` are a snapshot refreshed on every run; a record with "
+    "any other status is never changed; a record whose group no longer exists is flagged `retired: true`.",
 )
 
 
@@ -145,7 +163,12 @@ class QueueModel:
     new_ids: int
     blocker_counts: dict
     preview_counts: dict
+    inherited: list = field(default_factory=list)    # (id, old key, new key)
+    retired: list = field(default_factory=list)      # (id, key), by id
+    ids_changed: bool = False
     appended: int = 0
+    refreshed: int = 0
+    flagged_retired: int = 0
 
     @property
     def entry_count(self) -> int:
@@ -188,6 +211,20 @@ def _state(entry: dict, rows: dict, column: str) -> str:
     if row and row.get(column):
         return row[column]
     return _clean((entry.get("coverage") or {}).get(column)) or "unknown"
+
+
+def merged_blockers(entry: dict, rows: dict) -> list[str]:
+    """The entry's blocker lines as the merged catalogue view carries them.
+
+    The merged view is the tracked list minus the acquisition claims a successful preparation disproves. The CSV records what that
+    view kept; a line it dropped is dropped here only if it is one of the registry's own obsolete phrases, so a line written after
+    the CSV was generated (which the CSV cannot know) is never lost. Without a CSV row or `blockers` column the registry's list stands."""
+    lines = [_clean(line) for line in (entry.get("coverage") or {}).get("blockers") or []]
+    row = rows.get(entry["id"])
+    if not row or "blockers" not in row:
+        return lines
+    kept = {_clean(line) for line in (row["blockers"] or "").split(" | ")}
+    return [line for line in lines if line in kept or line not in OBSOLETE_BLOCKERS]
 
 
 def entry_links(entry: dict) -> list[Link]:
@@ -403,7 +440,7 @@ def build_groups(entries: dict, rows: dict) -> list[Group]:
                 access=access, adapter=_state(entry, rows, "adapter"), preview=_state(entry, rows, "preview"),
                 blocker_type=blocker_type, blocker_basis=_basis(blocker_type, access, links[entry_id], by_id, host_down),
                 options=_member_options(blocker_type, links[entry_id]), links=links[entry_id], papers=entry_papers(entry),
-                registry_blockers=[_clean(line) for line in (entry["coverage"].get("blockers") or [])],
+                registry_blockers=merged_blockers(entry, rows),
                 description=_clean(entry.get("description")), identity_audit=audit_text))
         options = _group_options(members)
         groups.append(Group(key="|".join(group_nodes), nodes=group_nodes, members=members, targets=targets,
@@ -430,17 +467,41 @@ def load_ids(path: Path) -> dict:
     return mapping
 
 
-def assign_ids(keys: list[str], existing: dict) -> tuple[dict, int]:
-    """Keep every existing assignment; give unseen keys, in sorted order, the numbers after the highest ever assigned."""
-    ids = dict(existing)
-    top = max((_number(value) for value in ids.values()), default=0)
+@dataclass
+class Assignment:
+    ids: dict
+    new: int
+    inherited: list      # (id, old key, new key)
+    retired: list        # (id, key), by id
+    changed: bool
+
+
+def assign_ids(keys: list[str], existing: dict) -> Assignment:
+    """Keep every assignment; let an unseen key inherit the id of the one retired key it overlaps; number the rest.
+
+    A mapped key that no group produces any more is *gone*. An unseen key claims the gone keys whose nodes overlap its own; it
+    inherits when it claims exactly one and no other unseen key claims that same one. Everything else takes the numbers after the
+    highest ever assigned, in sorted-key order, and a gone key nobody inherited stays in the mapping as a retired id."""
+    produced = set(keys)
+    unseen = sorted(key for key in produced if key not in existing)
+    gone = sorted(key for key in existing if key not in produced)
+    claims = {key: [other for other in gone if set(key.split("|")) & set(other.split("|"))] for key in unseen}
+    claimed = Counter(other for others in claims.values() for other in others)
+    ids, inherited = dict(existing), []
+    for key in unseen:
+        if len(claims[key]) == 1 and claimed[claims[key][0]] == 1:
+            old = claims[key][0]
+            ids[key] = ids.pop(old)
+            inherited.append((ids[key], old, key))
+    top = max((_number(value) for value in existing.values()), default=0)
     new = 0
-    for key in sorted(keys):
+    for key in unseen:
         if key not in ids:
             top += 1
             new += 1
             ids[key] = f"IR-{top:03d}"
-    return dict(sorted(ids.items())), new
+    retired = sorted(((existing[key], key) for key in gone if key in ids), key=lambda found: _number(found[0]))
+    return Assignment(dict(sorted(ids.items())), new, sorted(inherited, key=lambda found: _number(found[0])), retired, ids != existing)
 
 
 def build_model(root: Path = ROOT) -> QueueModel:
@@ -449,7 +510,8 @@ def build_model(root: Path = ROOT) -> QueueModel:
     entries = load_entries(root / REGISTRY_DIR)
     rows = load_state(root / COVERAGE_CSV)
     groups = build_groups(entries, rows)
-    ids, new = assign_ids([group.key for group in groups], load_ids(root / IDS_FILE))
+    assignment = assign_ids([group.key for group in groups], load_ids(root / IDS_FILE))
+    ids = assignment.ids
     for group in groups:
         group.id = ids[group.key]
     groups.sort(key=lambda group: _number(group.id))
@@ -457,7 +519,8 @@ def build_model(root: Path = ROOT) -> QueueModel:
     blocker_counts = {kind: sum(member.blocker_type == kind for member in members) for kind in BLOCKER_TYPES}
     previews = Counter(member.preview for member in members)
     preview_counts = {state: previews[state] for state in sorted(previews, key=lambda state: (state != "none", state))}
-    return QueueModel(groups=groups, ids=ids, new_ids=new, blocker_counts=blocker_counts, preview_counts=preview_counts)
+    return QueueModel(groups=groups, ids=ids, new_ids=assignment.new, blocker_counts=blocker_counts, preview_counts=preview_counts,
+                      inherited=assignment.inherited, retired=assignment.retired, ids_changed=assignment.changed)
 
 
 # --- the markdown a person reads ---------------------------------------------------------------------------------------
@@ -574,12 +637,20 @@ def _group_lines(group: Group) -> list[str]:
     return lines
 
 
+def _retired_line(model: QueueModel) -> str:
+    if not model.retired:
+        return "Retired ids: none."
+    listed = ", ".join(f"{found} ({_code(key)})" for found, key in model.retired)
+    return ("Retired ids (no group in the registry produces these keys any more, for example because a person resolved all its members "
+            f"or its group was merged or split; each id stays reserved and is never reused): {listed}.")
+
+
 def render_markdown(model: QueueModel) -> str:
     families = [group for group in model.groups if len(group.members) > 1]
     lines = ["# Identity review queue", "", INTRO, "", "## How to read this", "", *LEGEND, "", "## Summary", "",
              f"{model.entry_count} entries in {len(model.groups)} groups; {len(families)} groups hold more than one entry.", "",
              f"Blocker types: {_counts(model.blocker_counts)}.", "",
-             f"Preview states of the entries: {_counts(model.preview_counts)}.", "",
+             f"Preview states of the entries: {_counts(model.preview_counts)}.", "", _retired_line(model), "",
              "Groups with more than one entry: " + (", ".join(f"{group.id} ({len(group.members)})" for group in families) or "none") + ".", "",
              "### Groups", "", "| IR | Group | Entries | Preview states | Prepared target | Options |", "| --- | --- | --- | --- | --- | --- |"]
     lines += [_summary_row(group) for group in model.groups]
@@ -597,28 +668,59 @@ def queue_record(group: Group) -> dict:
             "status": "open", "options": list(group.options), "created_by": CREATED_BY}
 
 
-def queue_ids(path: Path) -> set:
-    """Ids of the records the queue file already holds. A line that is not JSON stops the run before anything is written."""
-    present = set()
-    for line in (path.read_text(encoding="utf-8").splitlines() if path.exists() else []):
-        if line.strip():
-            item = json.loads(line)
-            if isinstance(item, dict) and isinstance(item.get("id"), str):
-                present.add(item["id"])
-    return present
+def read_queue(path: Path) -> list:
+    """[(raw line, record)] of the decision file. A line that is not JSON stops the run before anything is written."""
+    if not path.exists():
+        return []
+    return [(line, json.loads(line)) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
 
 
-def append_queue(path: Path, records: list[dict], present: set) -> int:
-    """Append the records whose id the file does not hold; never rewrite, reorder or duplicate a line."""
-    fresh = [record for record in records if record["id"] not in present]
-    if not fresh:
-        return 0
-    path.parent.mkdir(parents=True, exist_ok=True)
-    separator = b"\n" if path.exists() and path.stat().st_size and not path.read_bytes().endswith(b"\n") else b""
-    body = "".join(json.dumps(record, ensure_ascii=False) + "\n" for record in fresh).encode("utf-8")
-    with path.open("ab") as stream:
-        stream.write(separator + body)
-    return len(fresh)
+def _dumps(record: dict) -> str:
+    return json.dumps(record, ensure_ascii=False)
+
+
+def sync_queue(path: Path, queue: list, records: list[dict], retired_ids: list[str]) -> dict:
+    """Upsert the decision file by IR id; leave every line it has no reason to change exactly as it is.
+
+    A new id is appended. An existing record whose status is `open` gets the snapshot fields of the current group (and loses a
+    stale `retired` flag). A record whose id is retired and whose status is `open` is flagged `retired: true`, nothing else
+    changed. A record with any other status is a person's decision and is never altered. An id is never written twice."""
+    index = {}
+    for position, (_, item) in enumerate(queue):
+        if isinstance(item, dict) and item.get("kind") == "identity_decision" and isinstance(item.get("id"), str):
+            index.setdefault(item["id"], position)
+    lines = [raw for raw, _ in queue]
+    counts = {"appended": 0, "refreshed": 0, "flagged_retired": 0}
+    for record in records:
+        position = index.get(record["id"])
+        if position is None:
+            lines.append(_dumps(record))
+            counts["appended"] += 1
+            continue
+        item = queue[position][1]
+        if item.get("status") != "open":
+            continue
+        updated = {key: value for key, value in item.items() if key != "retired"}
+        updated.update({name: record[name] for name in SNAPSHOT_FIELDS})
+        if updated != item:
+            lines[position] = _dumps(updated)
+            counts["refreshed"] += 1
+    for record_id in retired_ids:
+        position = index.get(record_id)
+        if position is None:
+            continue
+        item = queue[position][1]
+        if item.get("status") == "open" and item.get("retired") is not True:
+            lines[position] = _dumps({**item, "retired": True})
+            counts["flagged_retired"] += 1
+    text = "\n".join(lines) + "\n" if lines else ""
+    current = path.read_text(encoding="utf-8") if path.exists() else ""
+    if text != current:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        scratch = path.with_name(path.name + ".tmp")
+        scratch.write_text(text, encoding="utf-8", newline="\n")
+        os.replace(scratch, path)
+    return counts
 
 
 # --- running -----------------------------------------------------------------------------------------------------------
@@ -633,21 +735,23 @@ def run(root: Path = ROOT, *, dry_run: bool = False) -> QueueModel:
     for output in (ids_path, report_path, queue_path):
         if registry in output.resolve().parents:
             raise ValueError(f"{output.name}: the queue never writes into the dataset registry")
-    present = queue_ids(queue_path)
-    if model.new_ids or not ids_path.exists():
+    queue = read_queue(queue_path)
+    if model.ids_changed or not ids_path.exists():
         ids_path.write_text(json.dumps(model.ids, indent=2, sort_keys=True, ensure_ascii=False) + "\n", encoding="utf-8", newline="\n")
     markdown = render_markdown(model)
     if not report_path.exists() or report_path.read_text(encoding="utf-8") != markdown:
         report_path.parent.mkdir(parents=True, exist_ok=True)
         report_path.write_text(markdown, encoding="utf-8", newline="\n")
-    model.appended = append_queue(queue_path, [queue_record(group) for group in model.groups], present)
+    counts = sync_queue(queue_path, queue, [queue_record(group) for group in model.groups], [found for found, _ in model.retired])
+    model.appended, model.refreshed, model.flagged_retired = counts["appended"], counts["refreshed"], counts["flagged_retired"]
     return model
 
 
 def summary(model: QueueModel, *, dry_run: bool = False) -> dict:
     return {"groups": len(model.groups), "entries": model.entry_count, "blocker_types": model.blocker_counts,
-            "preview_states": model.preview_counts, "ids_assigned": model.new_ids, "queue_records_appended": model.appended,
-            "dry_run": dry_run}
+            "preview_states": model.preview_counts, "ids_assigned": model.new_ids, "ids_inherited": len(model.inherited),
+            "retired_ids": [found for found, _ in model.retired], "queue_records_appended": model.appended,
+            "queue_records_refreshed": model.refreshed, "queue_records_flagged_retired": model.flagged_retired, "dry_run": dry_run}
 
 
 def main(argv=None) -> int:

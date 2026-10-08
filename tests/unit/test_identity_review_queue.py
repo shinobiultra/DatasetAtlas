@@ -3,6 +3,9 @@
 The queue is read-only over the registry: it never edits an entry, never changes `coverage.identity`, `release`, `preview`
 or any other field, and never presents a family link as coverage. Only a person changes an identity.
 
+Decisions go to their own builder-owned file, `work/corpus/identity_review_queue.jsonl`; the corpus pipeline's
+`work/corpus/review_queue.jsonl` (a per-paper queue) is never touched.
+
 Tests on the real registry derive what they expect from the registry and the coverage CSV themselves, so routine later work
 (a refreshed source, a new adapter, a resolved identity) never turns them red. Tests that write use a copy in `tmp_path`.
 """
@@ -27,7 +30,9 @@ spec.loader.exec_module(builder)
 
 IN_SCOPE = {"candidate", "family_or_variant_candidate"}
 IDS_FILE = "registry/identity-review-ids.json"
-QUEUE_FILE = "work/corpus/review_queue.jsonl"
+QUEUE_FILE = "work/corpus/identity_review_queue.jsonl"
+CORPUS_QUEUE = "work/corpus/review_queue.jsonl"
+STALE_BLOCKER = re.compile(r"not implemented|no (?:local )?preview", re.I)
 ABSOLUTE_PATH = re.compile(r"(?<![\w.:/-])/(?:home|tmp|usr|var|mnt|opt|etc|Users|root)/|\b[A-Za-z]:\\")
 CONFIDENCE_WORDS = ("confident", "confidence", "likely", "probably", "recommend")
 
@@ -53,18 +58,18 @@ def _dataset_row(dataset_id: str) -> dict:
 
 
 def _workspace(tmp_path: Path, *, with_ids: bool = True) -> Path:
-    """A throwaway copy of the inputs: registry entries, coverage CSV, the committed id mapping and the review queue."""
+    """A throwaway copy of the inputs: registry entries, coverage CSV, the committed id mapping and the corpus review queue."""
     shutil.copytree(ROOT / "registry/datasets", tmp_path / "registry/datasets")
     (tmp_path / "reports").mkdir()
     shutil.copy(ROOT / "reports/dataset_coverage.csv", tmp_path / "reports/dataset_coverage.csv")
     if with_ids and (ROOT / IDS_FILE).exists():
         shutil.copy(ROOT / IDS_FILE, tmp_path / IDS_FILE)
     (tmp_path / "work/corpus").mkdir(parents=True)
-    lines = [json.dumps({"kind": "extraction_quality", "paper_id": f"paper-{n}", "status": "reviewed"}) for n in range(3)]
-    if (ROOT / QUEUE_FILE).exists():     # the corpus review items as they are, without any decision this builder already appended
-        lines = [line for line in (ROOT / QUEUE_FILE).read_text(encoding="utf-8").splitlines()
-                 if line.strip() and json.loads(line).get("kind") != "identity_decision"]
-    (tmp_path / QUEUE_FILE).write_text("\n".join(lines) + "\n", encoding="utf-8")
+    if (ROOT / CORPUS_QUEUE).exists():
+        shutil.copy(ROOT / CORPUS_QUEUE, tmp_path / CORPUS_QUEUE)
+    else:
+        lines = [json.dumps({"kind": "extraction_quality", "paper_id": f"paper-{n}", "status": "reviewed"}) for n in range(3)]
+        (tmp_path / CORPUS_QUEUE).write_text("\n".join(lines) + "\n", encoding="utf-8")
     return tmp_path
 
 
@@ -91,7 +96,7 @@ def _synthetic(tmp_path: Path, *entries, csv_rows=()) -> Path:
     if csv_rows:
         (tmp_path / "reports").mkdir()
         with (tmp_path / "reports/dataset_coverage.csv").open("w", newline="", encoding="utf-8") as stream:
-            writer = csv.DictWriter(stream, fieldnames=["dataset_id", "identity", "access", "adapter", "preview"], lineterminator="\n")
+            writer = csv.DictWriter(stream, fieldnames=list(csv_rows[0]), lineterminator="\n")
             writer.writeheader()
             writer.writerows(csv_rows)
     return tmp_path
@@ -118,6 +123,36 @@ def _section(markdown: str, heading: str) -> str:
     match = re.search(rf"^## {re.escape(heading)}.*?(?=^## |\Z)", markdown, re.M | re.S)
     assert match, heading
     return match.group(0)
+
+
+def _read_records(path: Path) -> list:
+    return [json.loads(line) for line in path.read_text(encoding="utf-8").splitlines() if line.strip()]
+
+
+def _record(root: Path, record_id: str) -> dict:
+    found = [r for r in _read_records(root / QUEUE_FILE) if r.get("id") == record_id]
+    assert len(found) == 1, record_id
+    return found[0]
+
+
+def _set_identity(root: Path, entry_id: str, identity: str) -> None:
+    path = root / "registry/datasets" / f"{entry_id}.yaml"
+    entry = yaml.safe_load(path.read_text(encoding="utf-8"))
+    entry["coverage"]["identity"] = identity
+    path.write_text(yaml.safe_dump(entry), encoding="utf-8")
+
+
+def _add_entry(root: Path, entry: dict) -> None:
+    (root / "registry/datasets" / f"{entry['id']}.yaml").write_text(yaml.safe_dump(entry), encoding="utf-8")
+
+
+def _rewrite_record(root: Path, record_id: str, **changes) -> None:
+    lines = (root / QUEUE_FILE).read_text(encoding="utf-8").splitlines()
+    for number, line in enumerate(lines):
+        item = json.loads(line)
+        if item.get("id") == record_id:
+            lines[number] = json.dumps({**item, **changes}, ensure_ascii=False)
+    (root / QUEUE_FILE).write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 @pytest.fixture(scope="module")
@@ -213,7 +248,7 @@ def test_the_committed_mapping_is_not_renumbered_by_a_run(tmp_path, real_model):
     builder.run(root)
     after = json.loads((root / IDS_FILE).read_text(encoding="utf-8"))
     before = json.loads(committed.read_text(encoding="utf-8"))
-    assert {key: after[key] for key in before} == before
+    assert set(before.values()) <= set(after.values()), "an id is never dropped, whether its group is live or retired"
     assert {g.key: g.id for g in real_model.groups} == {key: after[key] for key in {g.key for g in real_model.groups}}
 
 
@@ -422,6 +457,59 @@ def test_no_member_has_the_adapter_blocker_because_the_queue_holds_only_unsettle
     assert sum(real_model.blocker_counts.values()) == sum(len(g.members) for g in real_model.groups)
 
 
+# --- blockers come from the merged view (no contradiction with the state beside them) --------------------------------------
+
+def test_no_member_quotes_a_blocker_that_its_own_state_contradicts(real_model):
+    for group in real_model.groups:
+        for member in group.members:
+            if member.adapter in {"tested", "implemented"} or member.preview in {"complete_target", "local_only"}:
+                stale = [line for line in member.registry_blockers if STALE_BLOCKER.search(line)]
+                assert not stale, (member.id, member.adapter, member.preview, stale)
+
+
+def test_only_the_phrases_the_registry_itself_removes_are_dropped_from_the_blockers(real_model):
+    registry = _real_registry()
+    for group in real_model.groups:
+        for member in group.members:
+            lines = [" ".join(str(line).split()) for line in registry[member.id]["coverage"]["blockers"]]
+            assert member.registry_blockers == [line for line in lines if line in member.registry_blockers], member.id   # order kept
+            assert set(lines) - set(member.registry_blockers) <= builder.OBSOLETE_BLOCKERS, member.id
+
+
+def test_the_obsolete_blocker_phrases_are_the_ones_the_registry_removes():
+    import inspect
+    from dataset_atlas.preparation import prepared_metadata
+    source = inspect.getsource(prepared_metadata)
+    assert builder.OBSOLETE_BLOCKERS
+    for phrase in builder.OBSOLETE_BLOCKERS:
+        assert f"'{phrase}'" in source, phrase
+
+
+def test_blockers_follow_the_merged_view_but_keep_lines_the_older_csv_does_not_know(tmp_path):
+    gone = "Adapter and preview are not implemented."
+    rights = "Original release identity and rights need verification."
+    newer = "Checked 2026-10-09: a line written after the coverage CSV was generated."
+    rows = [{"dataset_id": "prepared", "identity": "candidate", "access": "public", "adapter": "tested", "preview": "complete_target",
+             "blockers": rights},                                                       # the merged view dropped `gone`
+            {"dataset_id": "unprepared", "identity": "candidate", "access": "public", "adapter": "not_started", "preview": "none",
+             "blockers": f"{rights} | {gone}"}]                                          # the merged view kept it
+    root = _synthetic(tmp_path,
+                      _entry("prepared", blockers=[rights, gone, newer]),
+                      _entry("unprepared", blockers=[rights, gone]),
+                      _entry("no-row", blockers=[gone, newer]),                          # no CSV row: the registry's own list
+                      csv_rows=rows)
+    model = builder.build_model(root)
+    assert _member(model, "prepared").registry_blockers == [rights, newer]
+    assert _member(model, "unprepared").registry_blockers == [rights, gone]
+    assert _member(model, "no-row").registry_blockers == [gone, newer]
+
+
+def test_a_csv_without_a_blockers_column_leaves_the_registry_list_alone(tmp_path):
+    rows = [{"dataset_id": "a", "identity": "candidate", "access": "public", "adapter": "tested", "preview": "complete_target"}]
+    root = _synthetic(tmp_path, _entry("a", blockers=["Adapter and preview are not implemented.", "Other."]), csv_rows=rows)
+    assert _member(builder.build_model(root), "a").registry_blockers == ["Adapter and preview are not implemented.", "Other."]
+
+
 # --- the people and papers behind each name ------------------------------------------------------------------------------
 
 def test_each_paper_appears_once_per_member_with_a_short_excerpt(tmp_path, real_model):
@@ -437,16 +525,16 @@ def test_each_paper_appears_once_per_member_with_a_short_excerpt(tmp_path, real_
     assert papers[0].excerpt == "first" and len(papers[1].excerpt) <= 200 and papers[1].excerpt.endswith("…")
 
 
-# --- the review queue file ----------------------------------------------------------------------------------------------
+# --- the decision file (builder-owned) --------------------------------------------------------------------------------
 
-def test_queue_records_are_appended_once_and_existing_lines_are_untouched(tmp_path):
+def test_decisions_go_to_their_own_file_and_the_corpus_review_queue_is_untouched(tmp_path):
     root = _workspace(tmp_path, with_ids=False)
-    queue = root / QUEUE_FILE
-    before = queue.read_bytes()
+    corpus = root / CORPUS_QUEUE
+    corpus_before = corpus.read_bytes()
     first = builder.run(root)
-    after = queue.read_bytes()
-    assert after.startswith(before), "existing lines are neither rewritten nor reordered"
-    records = [json.loads(line) for line in after[len(before):].decode("utf-8").splitlines()]
+    assert corpus.read_bytes() == corpus_before, "the corpus pipeline's per-paper queue is never touched"
+    assert all(json.loads(line).get("kind") != "identity_decision" for line in corpus.read_text(encoding="utf-8").splitlines() if line.strip())
+    records = _read_records(root / QUEUE_FILE)
     assert len(records) == len(first.groups)
     for record, group in zip(records, first.groups):
         assert list(record) == ["kind", "id", "group_key", "members", "status", "options", "created_by"]
@@ -454,25 +542,32 @@ def test_queue_records_are_appended_once_and_existing_lines_are_untouched(tmp_pa
                           "members": sorted(m.id for m in group.members), "status": "open", "options": group.options,
                           "created_by": "build_identity_review_queue.py"}
     assert len({r["id"] for r in records}) == len(records)
+    written = (root / QUEUE_FILE).read_bytes()
     builder.run(root)
-    assert queue.read_bytes() == after, "a second run appends nothing"
-    all_ids = [json.loads(line).get("id") for line in queue.read_text(encoding="utf-8").splitlines()]
-    assert len([i for i in all_ids if i and i.startswith("IR-")]) == len(set(i for i in all_ids if i and i.startswith("IR-")))
+    assert (root / QUEUE_FILE).read_bytes() == written, "a second run changes nothing"
+    assert corpus.read_bytes() == corpus_before
 
 
-def test_a_queue_file_without_a_trailing_newline_is_appended_to_safely(tmp_path):
+def test_the_real_corpus_review_queue_holds_no_identity_decision():
+    real = ROOT / CORPUS_QUEUE
+    if not real.exists():
+        pytest.skip("work/corpus/review_queue.jsonl is not present (git-ignored)")
+    kinds = {json.loads(line).get("kind") for line in real.read_text(encoding="utf-8").splitlines() if line.strip()}
+    assert "identity_decision" not in kinds
+
+
+def test_a_foreign_line_and_a_missing_trailing_newline_in_the_decision_file_are_kept(tmp_path):
     root = _workspace(tmp_path, with_ids=False)
-    queue = root / QUEUE_FILE
-    original = [json.dumps({"kind": "extraction_quality", "paper_id": "paper-x", "status": "pending"}),
-                json.dumps({"kind": "extraction_quality", "paper_id": "paper-y", "status": "reviewed"})]
-    queue.write_text("\n".join(original), encoding="utf-8")                 # no trailing newline
+    foreign = json.dumps({"kind": "note", "text": "kept as written"})
+    (root / QUEUE_FILE).write_text(foreign, encoding="utf-8")                 # no trailing newline
     model = builder.run(root)
-    lines = queue.read_text(encoding="utf-8").splitlines()
-    assert lines[:2] == original
-    assert len(lines) == 2 + len(model.groups) and all(json.loads(line) for line in lines)
+    text = (root / QUEUE_FILE).read_text(encoding="utf-8")
+    lines = text.splitlines()
+    assert lines[0] == foreign and len(lines) == 1 + len(model.groups) and text.endswith("\n")
+    assert all(json.loads(line) for line in lines)
 
 
-def test_a_queue_file_that_is_not_json_stops_the_run_before_anything_is_written(tmp_path):
+def test_a_decision_file_that_is_not_json_stops_the_run_before_anything_is_written(tmp_path):
     root = _workspace(tmp_path, with_ids=False)
     (root / QUEUE_FILE).write_text("not json\n", encoding="utf-8")
     with pytest.raises(json.JSONDecodeError):
@@ -481,26 +576,110 @@ def test_a_queue_file_that_is_not_json_stops_the_run_before_anything_is_written(
     assert (root / QUEUE_FILE).read_text(encoding="utf-8") == "not json\n"
 
 
-def test_a_missing_queue_file_is_created(tmp_path):
+def test_a_missing_decision_file_is_created(tmp_path):
     root = _workspace(tmp_path, with_ids=False)
-    (root / QUEUE_FILE).unlink()
+    assert not (root / QUEUE_FILE).exists()
     model = builder.run(root)
-    assert len((root / QUEUE_FILE).read_text(encoding="utf-8").splitlines()) == len(model.groups)
+    assert len(_read_records(root / QUEUE_FILE)) == len(model.groups)
 
 
-def test_a_group_already_in_the_queue_is_not_appended_again_even_if_its_members_changed(tmp_path):
+def test_an_open_record_is_refreshed_not_duplicated_when_its_group_changes(tmp_path):
     root = _synthetic(tmp_path, _entry("target", identity="resolved"), _entry("alias-1", links=[_link("same_source_family_as", "target")]))
     builder.run(root)
-    queue = root / QUEUE_FILE
-    first = queue.read_bytes()
-    (root / "registry/datasets/alias-2.yaml").write_text(
-        yaml.safe_dump(_entry("alias-2", links=[_link("same_source_family_as", "target")])), encoding="utf-8")
-    (root / "registry/datasets/other.yaml").write_text(yaml.safe_dump(_entry("other")), encoding="utf-8")
+    assert _record(root, "IR-001")["members"] == ["alias-1"]
+    _add_entry(root, _entry("alias-2", links=[_link("same_source_family_as", "target")]))
+    _add_entry(root, _entry("other"))
     builder.run(root)
-    lines = queue.read_text(encoding="utf-8").splitlines()
-    assert queue.read_bytes().startswith(first)
-    assert [json.loads(line)["id"] for line in lines] == ["IR-001", "IR-002"], "the grown group keeps IR-001 and is not appended twice"
-    assert json.loads(lines[0])["members"] == ["alias-1"], "an existing record is left exactly as it was written"
+    records = _read_records(root / QUEUE_FILE)
+    assert [r["id"] for r in records] == ["IR-001", "IR-002"], "the grown group keeps IR-001; nothing is appended twice"
+    assert records[0]["members"] == ["alias-1", "alias-2"], "while a record is open its members are a snapshot refreshed on every run"
+    assert list(records[0]) == ["kind", "id", "group_key", "members", "status", "options", "created_by"]
+
+
+def test_a_record_with_any_other_status_is_never_altered(tmp_path):
+    root = _synthetic(tmp_path, _entry("target", identity="resolved"), _entry("alias-1", links=[_link("same_source_family_as", "target")]),
+                      _entry("loner"))
+    first = builder.run(root)
+    grown, lost = _group_of(first, "alias-1").id, _group_of(first, "loner").id
+    _rewrite_record(root, grown, status="decided", decision="alias_of:target")
+    _rewrite_record(root, lost, status="deferred")
+    lines_before = (root / QUEUE_FILE).read_text(encoding="utf-8").splitlines()
+    _add_entry(root, _entry("alias-2", links=[_link("same_source_family_as", "target")]))      # the decided group grows
+    _set_identity(root, "loner", "resolved")                                                   # the deferred group disappears
+    second = builder.run(root)
+    assert (grown, "target") not in second.retired and lost in {i for i, _ in second.retired}
+    assert (root / QUEUE_FILE).read_text(encoding="utf-8").splitlines() == lines_before, "a person's recorded status is never overwritten"
+
+
+# --- ids survive a person's decisions ---------------------------------------------------------------------------------
+
+@pytest.mark.parametrize("resolved, member", [("coco-spatial", "coco-caption"), ("imagenet", "imagenet100")])
+def test_resolving_one_member_keeps_the_groups_id(tmp_path, resolved, member):
+    root = _workspace(tmp_path, with_ids=False)
+    first = builder.run(root)
+    group = _group_of(first, resolved)
+    group_id, old_key, size = group.id, group.key, len(group.members)
+    _set_identity(root, resolved, "resolved")
+    second = builder.run(root)
+    after = _group_of(second, member)
+    assert after.id == group_id and after.key != old_key and len(after.members) == size - 1
+    assert second.retired == [] and [(i, old) for i, old, _ in second.inherited] == [(group_id, old_key)]
+    mapping = json.loads((root / IDS_FILE).read_text(encoding="utf-8"))
+    assert mapping[after.key] == group_id and old_key not in mapping and len(mapping) == len(first.ids), "no new id was created"
+    record = _record(root, group_id)
+    assert record["group_key"] == after.key and resolved not in record["members"] and "retired" not in record
+    assert record["members"] == sorted(m.id for m in after.members)
+    assert re.search(rf"^## {group_id} ", builder.render_markdown(second), re.M), "the heading a person was working from survives"
+
+
+def test_a_key_that_two_retired_keys_overlap_gets_a_new_id_and_both_are_listed_retired(tmp_path):
+    root = _synthetic(tmp_path, _entry("t1", identity="resolved"), _entry("t2", identity="resolved"),
+                      _entry("a1", links=[_link("same_source_family_as", "t1")]), _entry("a2", links=[_link("same_source_family_as", "t2")]))
+    first = builder.run(root)
+    assert (_group_of(first, "a1").id, _group_of(first, "a2").id) == ("IR-001", "IR-002")
+    _add_entry(root, _entry("bridge", links=[_link("derived_from", "t1"), _link("derived_from", "t2")]))   # joins both groups
+    second = builder.run(root)
+    merged = _group_of(second, "bridge")
+    assert merged.key == "t1|t2" and {m.id for m in merged.members} == {"a1", "a2", "bridge"} and merged.id == "IR-003"
+    assert second.retired == [("IR-001", "t1"), ("IR-002", "t2")] and second.inherited == []
+    markdown = builder.render_markdown(second)
+    retired = _section(markdown, "Summary")
+    assert "IR-001" in retired and "IR-002" in retired and "Retired ids" in retired
+    assert [r.get("retired") for r in _read_records(root / QUEUE_FILE)] == [True, True, None]
+    assert _record(root, "IR-001")["members"] == ["a1"], "a retired record is left as it was, only flagged"
+    assert builder.main(["--root", str(root), "--dry-run"]) == 0
+
+
+def test_one_retired_key_overlapping_two_new_keys_is_inherited_by_neither(tmp_path):
+    root = _synthetic(tmp_path, _entry("t1", identity="resolved"), _entry("t2", identity="resolved"),
+                      _entry("bridge", links=[_link("derived_from", "t1"), _link("derived_from", "t2")]),
+                      _entry("a1", links=[_link("same_source_family_as", "t1")]), _entry("a2", links=[_link("same_source_family_as", "t2")]))
+    first = builder.run(root)
+    assert [g.key for g in first.groups] == ["t1|t2"] and first.groups[0].id == "IR-001"
+    _set_identity(root, "bridge", "resolved")                       # the one group splits in two
+    second = builder.run(root)
+    assert {g.key: g.id for g in second.groups} == {"t1": "IR-002", "t2": "IR-003"}
+    assert second.retired == [("IR-001", "t1|t2")] and second.inherited == []
+    assert len({g.id for g in second.groups}) == len(second.groups), "an id is never shared by two live groups"
+
+
+def test_a_group_that_loses_all_its_members_is_retired_and_its_open_record_is_flagged(tmp_path):
+    root = _synthetic(tmp_path, _entry("t", identity="resolved"), _entry("a1", links=[_link("same_source_family_as", "t")]), _entry("loner"))
+    first = builder.run(root)
+    gone, kept = _group_of(first, "a1"), _group_of(first, "loner")
+    record_before = _record(root, gone.id)
+    kept_before = _record(root, kept.id)
+    _set_identity(root, "a1", "resolved")
+    second = builder.run(root)
+    assert second.retired == [(gone.id, gone.key)] and [g.id for g in second.groups] == [kept.id]
+    flagged = _record(root, gone.id)
+    assert flagged == {**record_before, "retired": True} and flagged["status"] == "open", "flagged, and nothing else changed"
+    assert _record(root, kept.id) == kept_before
+    assert json.loads((root / IDS_FILE).read_text(encoding="utf-8"))[gone.key] == gone.id, "the id stays reserved"
+    _set_identity(root, "a1", "candidate")                          # undone: the group is live again under the same id
+    third = builder.run(root)
+    assert third.retired == [] and _group_of(third, "a1").id == gone.id
+    assert "retired" not in _record(root, gone.id)
 
 
 # --- the markdown a person reads ----------------------------------------------------------------------------------------
@@ -531,6 +710,19 @@ def test_every_group_has_one_ir_id_one_decision_and_all_its_members(real_model, 
         assert f"`{group.key}`" in section
 
 
+def test_the_legend_says_the_markdown_is_current_and_the_jsonl_is_a_snapshot_while_open(real_markdown):
+    legend = _section(real_markdown, "How to read this")
+    assert "work/corpus/identity_review_queue.jsonl" in legend and "work/corpus/review_queue.jsonl" not in legend
+    assert "source of truth" in legend and "snapshot" in legend and "status `open`" in legend
+    assert "retired: true" in legend
+
+
+def test_the_summary_says_when_no_id_is_retired(real_model, real_markdown):
+    if real_model.retired:
+        pytest.skip("this registry has retired ids")
+    assert "Retired ids: none." in _section(real_markdown, "Summary")
+
+
 def test_the_summary_table_lists_every_group_once(real_model, real_markdown):
     summary = _section(real_markdown, "Summary")
     for group in real_model.groups:
@@ -548,10 +740,10 @@ def test_markdown_is_deterministic(real_model):
 
 def test_command_writes_the_report_and_dry_run_writes_nothing(tmp_path, capsys):
     root = _workspace(tmp_path, with_ids=False)
-    queue_before = (root / QUEUE_FILE).read_bytes()
+    corpus_before = (root / CORPUS_QUEUE).read_bytes()
     assert builder.main(["--root", str(root), "--dry-run"]) == 0
     assert not (root / "reports/identity_review_queue.md").exists() and not (root / IDS_FILE).exists()
-    assert (root / QUEUE_FILE).read_bytes() == queue_before
+    assert not (root / QUEUE_FILE).exists() and (root / CORPUS_QUEUE).read_bytes() == corpus_before
     assert builder.main(["--root", str(root)]) == 0
     report = (root / "reports/identity_review_queue.md").read_text(encoding="utf-8")
     assert report.startswith("# Identity review queue") and report.endswith("\n")

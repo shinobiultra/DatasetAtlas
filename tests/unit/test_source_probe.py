@@ -93,6 +93,71 @@ def test_head_that_claims_zero_length_but_get_serves_a_page_is_reachable():
     assert out.status == "reachable" and out.content_length is None and consumed == [b"<"]
 
 
+def test_a_genuinely_empty_file_answered_416_to_the_confirming_range_get_is_an_empty_response():
+    def handler(request):
+        if request.method == "HEAD":
+            return httpx.Response(200, headers={"content-length": "0", "content-type": "application/octet-stream"})
+        return httpx.Response(416, headers={"content-range": "bytes */0"})
+    out = probe_url("https://example.org/empty.bin", client=_client(handler), resolver=_resolver(), attempts=1)
+    assert out.status == "empty_response" and out.content_length == 0 and out.http_status == 416 and out.error is None
+
+
+def test_a_head_refusing_server_with_an_empty_file_is_an_empty_response_via_416():
+    def handler(request):
+        if request.method == "HEAD":
+            return httpx.Response(405)
+        return httpx.Response(416, headers={"content-range": "bytes */0"})
+    out = probe_url("https://example.org/empty.bin", client=_client(handler), resolver=_resolver(), attempts=1)
+    assert out.status == "empty_response" and out.content_length == 0
+
+
+def test_416_without_a_zero_total_is_not_called_empty():
+    def handler(request):
+        return httpx.Response(405) if request.method == "HEAD" else httpx.Response(416, headers={"content-range": "bytes */50"})
+    out = probe_url("https://example.org/a", client=_client(handler), resolver=_resolver(), attempts=1)
+    assert out.status == "unreachable" and out.error == "unexpected HTTP 416"
+
+
+def test_hugging_face_x_linked_etag_on_the_redirect_hop_becomes_the_digest():
+    seen = []
+    digest = "a" * 64
+
+    def handler(request):
+        seen.append(request.url.host)
+        if request.url.host == "huggingface.co":
+            return httpx.Response(302, headers={"location": "https://cdn-lfs.example.net/blob/xyz", "etag": '"redirect-etag"',
+                                                "x-linked-etag": f'"{digest}"', "x-linked-size": "4096"})
+        return httpx.Response(200, headers={"content-length": "4096", "etag": '"cdn-etag"', "content-type": "application/octet-stream"})
+    out = probe_url("https://huggingface.co/datasets/o/n/resolve/rev/data/f.parquet", client=_client(handler), resolver=_resolver(), attempts=1)
+    assert seen == ["huggingface.co", "cdn-lfs.example.net"]
+    assert out.status == "reachable" and out.content_digest == digest
+    assert out.etag == '"cdn-etag"' and out.content_length == 4096 and out.final_host == "cdn-lfs.example.net"
+
+
+def test_a_redirect_hops_own_body_digests_are_not_attributed_to_the_final_resource():
+    def handler(request):
+        if request.url.host == "example.org":
+            return httpx.Response(302, headers={"location": "https://cdn.example.net/f", "digest": "sha-256=AAAA", "content-md5": "BBBB"})
+        return httpx.Response(200, headers={"content-length": "10"})
+    out = probe_url("https://example.org/f", client=_client(handler), resolver=_resolver(), attempts=1)
+    assert out.status == "reachable" and out.content_digest is None
+
+
+def test_a_202_is_not_a_final_answer_and_reads_unreachable_with_the_waf_challenge_named():
+    out, seen = _probe(202, headers={"content-length": "0", "content-type": "text/html", "x-amzn-waf-action": "challenge"})
+    assert out.status == "unreachable" and out.http_status == 202
+    assert "unexpected HTTP 202" in out.error and "x-amzn-waf-action: challenge" in out.error
+    assert [request.method for request in seen] == ["HEAD"]
+    out, _ = _probe(202, headers={"content-length": "0"})
+    assert out.status == "unreachable" and out.error == "unexpected HTTP 202"
+
+
+def test_204_no_content_is_an_empty_response_without_a_confirming_get():
+    out, seen = _probe(204)
+    assert out.status == "empty_response" and out.http_status == 204 and out.error is None
+    assert [request.method for request in seen] == ["HEAD"]
+
+
 def test_200_without_length_is_reachable_with_unknown_length():
     out, _ = _probe(200, headers={"content-type": "application/zip"})
     assert out.status == "reachable" and out.content_length is None
@@ -298,6 +363,14 @@ def test_invalid_limits_are_rejected():
     (dict(http_status=200, error=None, content_length=0, content_type=None, redirect_refused=False), "empty_response"),
     (dict(http_status=200, error=None, content_length=10, content_type="text/html", redirect_refused=False), "reachable"),
     (dict(http_status=206, error=None, content_length=10, content_type=None, redirect_refused=False), "reachable"),
+    (dict(http_status=206, error=None, content_length=0, content_type=None, redirect_refused=False), "empty_response"),
+    (dict(http_status=204, error=None, content_length=None, content_type=None, redirect_refused=False), "empty_response"),
+    (dict(http_status=204, error=None, content_length=0, content_type=None, redirect_refused=False), "empty_response"),
+    (dict(http_status=202, error=None, content_length=0, content_type="text/html", redirect_refused=False), "unreachable"),
+    (dict(http_status=202, error=None, content_length=None, content_type=None, redirect_refused=False), "unreachable"),
+    (dict(http_status=201, error=None, content_length=5, content_type=None, redirect_refused=False), "unreachable"),
+    (dict(http_status=416, error=None, content_length=0, content_type=None, redirect_refused=False), "empty_response"),
+    (dict(http_status=416, error=None, content_length=None, content_type=None, redirect_refused=False), "unreachable"),
     (dict(http_status=401, error=None, content_length=None, content_type=None, redirect_refused=False), "gated_or_forbidden"),
     (dict(http_status=403, error=None, content_length=None, content_type=None, redirect_refused=False), "gated_or_forbidden"),
     (dict(http_status=451, error=None, content_length=None, content_type=None, redirect_refused=False), "gated_or_forbidden"),

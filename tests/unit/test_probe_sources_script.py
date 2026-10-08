@@ -112,3 +112,14 @@ def test_append_adds_a_run_and_summarises_urls_probed_more_than_once(tmp_path, m
 def test_a_selection_is_required(tmp_path, capsys):
     with pytest.raises(SystemExit):
         probe_sources.main(["--root", str(tmp_path), "--output", str(tmp_path / "x.json")])
+
+
+def test_note_is_recorded_on_the_run_only_when_given(tmp_path, monkeypatch):
+    root = _registry(tmp_path, _entry("a", source_url="https://example.org/x"))
+    monkeypatch.setattr(probe_sources, "probe_url", _fake_probe)
+    output = root / "receipt.json"
+    arguments = ["--root", str(root), "--dataset", "a", "--output", str(output)]
+    assert probe_sources.main(arguments + ["--note", "supersedes the earlier probe"]) == 0
+    assert json.loads(output.read_text())["runs"][0]["note"] == "supersedes the earlier probe"
+    assert probe_sources.main(arguments) == 0
+    assert "note" not in json.loads(output.read_text())["runs"][0]

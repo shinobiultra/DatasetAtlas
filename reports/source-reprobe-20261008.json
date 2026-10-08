@@ -1562,6 +1562,48 @@
           ]
         }
       ]
+    },
+    {
+      "generated_at_utc": "2026-10-08T04:14:40Z",
+      "mode": {
+        "blocked": false,
+        "datasets": [],
+        "extras": [
+          {
+            "dataset_id": "first-person-social-interactions-dataset",
+            "url": "https://figshare.com/articles/media/Training_data/5483668"
+          }
+        ]
+      },
+      "settings": {
+        "timeout": 15.0,
+        "attempts": 2
+      },
+      "dataset_ids": [
+        "first-person-social-interactions-dataset"
+      ],
+      "probes": [
+        {
+          "url": "https://figshare.com/articles/media/Training_data/5483668",
+          "status": "unreachable",
+          "http_status": 202,
+          "content_length": 0,
+          "content_type": "text/html; charset=UTF-8",
+          "etag": null,
+          "content_digest": null,
+          "final_host": "figshare.com",
+          "error": "unexpected HTTP 202 (x-amzn-waf-action: challenge, a bot challenge, not an answer about the source)",
+          "elapsed_s": 1.335,
+          "checked_at_utc": "2026-10-08T04:14:42Z",
+          "dataset_ids": [
+            "first-person-social-interactions-dataset"
+          ],
+          "origins": [
+            "--extra"
+          ]
+        }
+      ],
+      "note": "Re-probe after review fix round 1 (2026-10-08). The 03:40:38Z run recorded this URL's HTTP 202 as empty_response. A 202 is not a final answer (here an AWS WAF bot challenge, header x-amzn-waf-action: challenge, content-length 0), so it now reads unreachable and carries no information about the source; this run supersedes that entry. A recomputation of every earlier receipt entry with the fixed classifier changed no other class."
     }
   ],
   "repeated_probes": [
@@ -1582,6 +1624,21 @@
           "checked_at_utc": "2026-10-08T04:03:28Z",
           "status": "unreachable",
           "http_status": null
+        }
+      ]
+    },
+    {
+      "url": "https://figshare.com/articles/media/Training_data/5483668",
+      "probes": [
+        {
+          "checked_at_utc": "2026-10-08T03:40:42Z",
+          "status": "empty_response",
+          "http_status": 202
+        },
+        {
+          "checked_at_utc": "2026-10-08T04:14:42Z",
+          "status": "unreachable",
+          "http_status": 202
         }
       ]
     },

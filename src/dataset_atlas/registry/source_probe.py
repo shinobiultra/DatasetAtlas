@@ -60,15 +60,18 @@ def classify_probe(*, http_status: int | None, error: str | None, content_length
                    content_type: str | None, redirect_refused: bool) -> ProbeStatus:
     """Only the refusal flag, the HTTP status and a zero length decide the class.
 
-    A timeout or DNS failure is `unreachable` (transient), never a gate. 429/408 and 5xx are `server_error`. Any
-    other unexpected status is not evidence of a gate or a removal, so it also reads `unreachable`.
+    A timeout or DNS failure is `unreachable` (transient), never a gate. 429/408 and 5xx are `server_error`. A
+    final answer is 200/206, or 204 (no content), or 416 for a zero-byte resource. Any other status (a 202 from a
+    bot challenge, a 400, a 304) is not evidence of a gate, a removal or an empty file, so it reads `unreachable`.
     """
     if redirect_refused:
         return "redirect_refused"
     if http_status is None:
         return "unreachable"
-    if 200 <= http_status < 300:
+    if http_status in (200, 206):
         return "empty_response" if content_length == 0 else "reachable"
+    if http_status == 204 or (http_status == 416 and content_length == 0):
+        return "empty_response"
     if http_status in (401, 402, 403, 451):
         return "gated_or_forbidden"
     if http_status in (404, 410):
@@ -114,6 +117,9 @@ def _check_destination(url: str, resolver: Callable[[str], Sequence[str]]) -> st
 
 
 def _length(response: httpx.Response, *, sniff_body: bool) -> int | None:
+    if response.status_code == 416:
+        match = re.fullmatch(r"bytes \*/([0-9]+)", response.headers.get("content-range", "").strip())
+        return int(match[1]) if match else None
     if response.status_code == 206:
         match = re.fullmatch(r"bytes [0-9]+-[0-9]+/([0-9]+|\*)", response.headers.get("content-range", "").strip())
         return int(match[1]) if match and match[1] != "*" else None
@@ -129,8 +135,8 @@ def _request(client: httpx.Client, url: str, host: str) -> _Reply:
     with client.stream("HEAD", url, headers=HEADERS) as response:
         reply = _Reply(response.status_code, response.headers, _length(response, sniff_body=False), host)
     # Some servers answer HEAD with content-length 0 for a page that GET serves (Google Drive folders), so an empty
-    # HEAD is confirmed with the same 1-byte ranged GET before it is called empty.
-    if reply.status in RANGE_FALLBACK_STATUSES or (200 <= reply.status < 300 and reply.length == 0):
+    # HEAD is confirmed with the same 1-byte ranged GET before it is called empty (a zero-byte file answers 416).
+    if reply.status in RANGE_FALLBACK_STATUSES or (reply.status == 200 and reply.length == 0):
         with client.stream("GET", url, headers={**HEADERS, "Range": "bytes=0-0"}) as response:
             reply = _Reply(response.status_code, response.headers, _length(response, sniff_body=True), host)
     return reply
@@ -148,6 +154,7 @@ def _digest(headers: httpx.Headers) -> str | None:
 
 def _probe_once(url: str, client: httpx.Client, resolver: Callable[[str], Sequence[str]], max_redirects: int) -> ProbeOutcome:
     reply: _Reply | None = None
+    linked: str | None = None
     error: str | None = None
     refused = False
     current = url
@@ -155,6 +162,8 @@ def _probe_once(url: str, client: httpx.Client, resolver: Callable[[str], Sequen
         for _ in range(max_redirects + 1):
             host = _check_destination(current, resolver)
             reply = _request(client, current, host)
+            # Hugging Face puts the LFS digest on its own redirect to the CDN; the CDN's answer does not repeat it.
+            linked = linked or _unquote(reply.headers.get("x-linked-etag"))
             location = reply.headers.get("location")
             if reply.status not in REDIRECT_STATUSES:
                 break
@@ -174,12 +183,14 @@ def _probe_once(url: str, client: httpx.Client, resolver: Callable[[str], Sequen
                             content_type=answered.headers.get("content-type") if answered else None, redirect_refused=refused)
     if answered is not None and status == "unreachable":
         error = f"unexpected HTTP {answered.status}"
+        if challenge := answered.headers.get("x-amzn-waf-action"):
+            error += f" (x-amzn-waf-action: {challenge}, a bot challenge, not an answer about the source)"
     return ProbeOutcome(
         url=url, status=status, http_status=reply.status if reply else None,
         content_length=answered.length if answered else None,
         content_type=answered.headers.get("content-type") if answered else None,
         etag=answered.headers.get("etag") if answered else None,
-        content_digest=_digest(answered.headers) if answered else None,
+        content_digest=(_digest(answered.headers) or linked) if answered else None,
         final_host=reply.host if reply else None, error=error, elapsed_s=0.0, checked_at_utc="")
 
 

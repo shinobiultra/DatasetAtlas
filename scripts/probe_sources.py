@@ -95,6 +95,7 @@ def main(argv=None):
                         help="also probe a URL the registry does not record, attached to entry ID")
     parser.add_argument("--output", type=Path, default=Path("reports/source-reprobe-20261008.json"))
     parser.add_argument("--append", action="store_true", help="add this run to an existing receipt instead of replacing it")
+    parser.add_argument("--note", help="free text recorded on this run (for example why it supersedes an earlier probe)")
     parser.add_argument("--timeout", type=float, default=15.0)
     parser.add_argument("--attempts", type=int, default=2)
     parser.add_argument("--workers", type=int, default=4)
@@ -113,6 +114,8 @@ def main(argv=None):
            "settings": {"timeout": args.timeout, "attempts": args.attempts},
            "dataset_ids": sorted({dataset_id for target in targets for dataset_id in target["dataset_ids"]}),
            "probes": run_probes(targets, timeout=args.timeout, attempts=args.attempts, workers=args.workers)}
+    if args.note:
+        run["note"] = args.note
     runs = json.loads(args.output.read_text())["runs"] if args.append and args.output.exists() else []
     runs.append(run)
     args.output.parent.mkdir(parents=True, exist_ok=True)

@@ -27,6 +27,10 @@ coverage:
     gap rather than an access block.'
   - The citing paper uses the MultiTrust framework for transfer attacks, so the examples a researcher
     would want are those it generated, which were not located.
+  - 'Checked 2026-10-08 with the researcher''s configured local Hugging Face credentials: a HEAD of one
+    data file and auth_check both answered HTTP 403 GatedRepo, so the account has not been granted access,
+    and the file listing noted on 2026-10-06 does not show otherwise. Access requires the researcher to
+    accept the terms on their own account; until then no inventory, adapter or preview exists.'
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -99,14 +103,17 @@ evidence:
   checked_on: '2026-10-08'
   url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/fairness/preference.json
   http_status: 403
-  note: Gate still closed on 2026-10-08 (read-only metadata checks with the researcher's configured local
-    credentials, not recorded here). dataset_info reports gated 'auto' with main at 84dc74754959e9f52b67c5185700f4f7fcd8c4df;
-    auth_check answered HTTP 403 GatedRepo; a HEAD of one data file answered HTTP 403 (GatedRepo). The
-    README.md HEAD answered 200, which only shows that the dataset card is served while the gate stands.
-    Access requires the researcher to accept the terms on their own Hugging Face account; no terms were
-    accepted and no file body was fetched, so nothing is claimed about the content.
+  note: 'Gate closed for the configured account on 2026-10-08 (read-only metadata checks with the researcher''s
+    configured local credentials, not recorded here). dataset_info reports gated ''auto'' with main at
+    84dc74754959e9f52b67c5185700f4f7fcd8c4df; auth_check answered HTTP 403 GatedRepo; a HEAD of one data
+    file answered HTTP 403 (GatedRepo). The README.md HEAD answered 200, which only shows that the dataset
+    card is served while the gate stands. No earlier access check is recorded for this repository: the
+    10,549-file listing noted on 2026-10-06 ("read with the researcher''s existing authorized account")
+    is returned by dataset_info for a gated repo and does not show that access was ever granted. Access
+    requires the researcher to accept the terms on their own Hugging Face account; no terms were accepted
+    and no file body was fetched, so nothing is claimed about the content.'
   audit_file: reports/gate-check-20261008.json
-  source_identity_status: gate_still_closed_for_configured_account
+  source_identity_status: gate_closed_for_configured_account
 source_url: https://multi-trust.github.io/
 modalities:
 - image

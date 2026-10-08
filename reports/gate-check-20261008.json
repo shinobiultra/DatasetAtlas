@@ -3,7 +3,7 @@
  "checked_on": "2026-10-08",
  "base_commit": "4a18626",
  "tool": "huggingface_hub.HfApi / get_hf_file_metadata (read-only) and dataset_atlas.registry.source_probe.probe_url",
- "note": "Read-only, bounded checks. Hugging Face calls used the researcher's configured local credentials; neither the credentials nor any request header is recorded. No data body was requested (metadata and HEAD only), no gate or terms were accepted and nothing was created or changed on the Hub. Nothing here is a claim about the content of any dataset.",
+ "note": "Read-only, bounded checks. Hugging Face calls used the researcher's configured local credentials; neither the credentials nor any request header is recorded. No data body was requested (metadata and HEAD, plus one GET of the author's HTML page to read its links), no gate or terms were accepted and nothing was created or changed on the Hub. Nothing here is a claim about the content of any dataset.",
  "checks": [
   {
    "dataset_id": "multitrust",
@@ -56,7 +56,7 @@
     "error_code": "GatedRepo"
    },
    "checked_at_utc": "2026-10-08T05:17:32Z",
-   "conclusion": "Refused (HTTP 403, GatedRepo): the gate is still closed for the configured account. No inventory or adapter work was started."
+   "conclusion": "Refused (HTTP 403, GatedRepo): the gate is closed for the configured account. No inventory or adapter work was started."
   },
   {
    "dataset_id": "sbbench",
@@ -110,6 +110,20 @@
    },
    "checked_at_utc": "2026-10-08T05:17:32Z",
    "conclusion": "Refused (HTTP 403, GatedRepo): the gate is still closed for the configured account. No inventory or adapter work was started."
+  },
+  {
+   "dataset_id": "first-person-social-interactions-dataset",
+   "url": "https://ai.stanford.edu/~alireza/Disney/",
+   "call": "httpx.get(url, timeout=15, follow_redirects=False) (one GET of the author's HTML page to read its links)",
+   "observed": {
+    "http_status": 200,
+    "bytes": 19112,
+    "webshare_links_found": 127,
+    "first_webshare_link": "http://webshare.ipat.gatech.edu/coc-rim-wall-lab/web/afathi3/CVPR12/Videos/Alin_Day1/Alin_Day1_001.avi"
+   },
+   "checked_at_utc": "2026-10-08T05:17:58Z",
+   "checked_at_note": "Upper bound: the script did not stamp this GET; it ran immediately before the probe_url call that finished at this time (that call took 0.5 s).",
+   "conclusion": "An HTML page of 19,112 bytes, not dataset content; it is the source of the first video URL probed below. This is the only GET in this task."
   },
   {
    "dataset_id": "first-person-social-interactions-dataset",
@@ -175,7 +189,7 @@
   }
  ],
  "conclusions": {
-  "multitrust": "Still gated: data file HEAD and auth_check answered HTTP 403 GatedRepo on 2026-10-08. Accepting the terms is the researcher's decision on their own account (D3).",
+  "multitrust": "Gated: the data file HEAD and auth_check answered HTTP 403 GatedRepo on 2026-10-08. No earlier access check is recorded for this repository, and the 2026-10-06 file listing does not show that access was ever granted. Accepting the terms is the researcher's decision on their own account (D3).",
   "sbbench": "Still gated: data file HEAD and auth_check answered HTTP 403 GatedRepo on 2026-10-08. Accepting the terms is the researcher's decision on their own account (D3).",
   "first-person-social-interactions-dataset": "Transient outage evidence: webshare.ipat.gatech.edu does not resolve in DNS today while the author page answers HTTP 200. Not a gate; the AVI/HTTP-only preparation gap recorded in the entry is separate and unchanged.",
   "broden": "Transient outage evidence: the adapter is implemented and tested; real coverage waits on a reachable publisher archive or an authorized local copy."

@@ -3,6 +3,7 @@ import type { Dataset } from '../generated'
 import { provider } from '../provider'
 import { display, evidenceText, safeUrl, titleCase } from '../lib/format'
 import { Tag } from '../ui/primitives'
+import { useGuide } from '../dataset/GuideCards'
 import * as Icon from '../ui/Icons'
 
 type Evidence = Record<string, unknown>
@@ -32,6 +33,7 @@ function Receipt({ item }: { item: Evidence }) {
 /** Where the previous implementation's metadata belongs: beside the samples, not over them. */
 export function AboutPanel({ dataset, onOpenDataset }: { dataset: Dataset; onOpenDataset: (id: string) => void }) {
   const [catalogue, setCatalogue] = useState<Dataset[]>([])
+  const guide = useGuide(dataset.id)  // public build only: papers that happen to mention the dataset
   const relationships = (dataset.relationships ?? []) as Evidence[]
   useEffect(() => { if (relationships.length) provider.datasets().then(setCatalogue).catch(() => {}) }, [relationships.length])
 
@@ -107,6 +109,24 @@ export function AboutPanel({ dataset, onOpenDataset }: { dataset: Dataset; onOpe
           {!Object.keys(dataset.rights ?? {}).length && <div><dt>Status</dt><dd>Not recorded — treat as metadata-only for publication.</dd></div>}
         </dl>
       </div>
+
+      {!!guide?.papers.length && (
+        <div className="insp-section">
+          <details className="disclosure" style={{ borderTop: 0 }}>
+            <summary>Mentioned for example in ({guide.papers.length})</summary>
+            <div className="body">
+              <ul style={{ margin: 0, paddingLeft: 18, fontSize: 'var(--fs-md)', lineHeight: 1.5 }}>
+                {guide.papers.map(paper => {
+                  const link = safeUrl(paper.url) ?? (paper.doi ? safeUrl(`https://doi.org/${paper.doi}`) : null)
+                  const label = `${paper.title ?? paper.paper_id}${paper.year ? ` (${paper.year})` : ''}`
+                  return <li key={paper.paper_id}>{link ? <a href={link} target="_blank" rel="noopener noreferrer">{label}</a> : label}</li>
+                })}
+              </ul>
+              <p className="hint">A mention does not establish which release or subset the paper used.</p>
+            </div>
+          </details>
+        </div>
+      )}
 
       <div className="insp-section">
         <details className="disclosure" style={{ borderTop: 0 }}>

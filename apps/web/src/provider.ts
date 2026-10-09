@@ -1,5 +1,6 @@
 import type { Artifact, Capabilities, Dataset, FieldDescriptor, Pack, Query, QueryResult, Record as AtlasRecord, Run, Selection } from './generated'
 import { aggregatePack, assetRecords, packFields, queryPack } from './query'
+import type { LivePreviewSpec } from './lib/hfRows'
 
 export type ProcessorDescriptor = { id: string; name?: string; description?: string; available?: boolean; reason?: string; input_units?: string[]; configured_recipe?: boolean; requires_local_model?: boolean; config_schema?: Record<string, unknown> }
 export type CompleteScope = { snapshot_id: string; unit: 'asset' | 'example' | 'entity' | 'conversation'; population_scope: 'complete'; record_count: number; count_status: 'exact' | 'estimated' | 'unknown'; fields: FieldDescriptor[] }
@@ -26,7 +27,7 @@ export type GuideSchema = {
   snapshot_id?: string | null; release?: string | null; unit: string; preview_count?: number | null; total_count?: number | null; population_scope: string
   field_count: number; fields_truncated: boolean; sampling: Record<string, unknown>; fields: GuideField[]
 }
-export type GuideEntry = { how_to_get: HowToGet; papers: GuidePaper[]; schema?: GuideSchema }
+export type GuideEntry = { how_to_get: HowToGet; papers: GuidePaper[]; schema?: GuideSchema; live_preview?: LivePreviewSpec }
 
 export interface DataProvider {
   readonly mode: 'static' | 'workbench'

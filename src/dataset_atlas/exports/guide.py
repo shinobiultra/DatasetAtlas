@@ -32,27 +32,29 @@ _UNRELEASED = {"unreleased"}
 
 HOW_TO_GET = {
     "in_site": "Examples are published on this site: open the Samples tab.",
+    "live_preview": "Examples load live from Hugging Face when you open this page; nothing is hosted here.",
     "fetch_with_atlas": "Install Dataset Atlas, then fetch the preview from the original source. Nothing downloads until you approve the plan.",
     "fetch_after_terms": "The source is gated. Accept its terms on your own account, sign in locally, then fetch the preview with Dataset Atlas.",
-    "prepared_by_maintainers_only": "The maintainers prepared a preview, but its recipe is not in this repository yet, so you cannot rebuild it from the source.",
     "accept_terms": "The source is gated. Accept its terms on your own account; Dataset Atlas has no adapter for it yet.",
     "request_from_authors": "The data is released on request. Ask the authors or publisher; Dataset Atlas has no adapter for it yet.",
     "unreleased": "The authors have not released this data. Nothing can be fetched.",
+    "source_only": "Get it from the original source (link below). Dataset Atlas has no one-command fetch for it yet.",
     "source_unverified": "No pinned public source has been verified for this entry.",
-    "public_no_adapter": "A public source exists, but Dataset Atlas has no recipe for it yet. That is a gap in Dataset Atlas, not a restriction by the source.",
 }
 
 
-def how_to_get(dataset: Dataset, *, has_recipe: bool, in_site: bool, needs_credentials: bool = False) -> dict[str, Any]:
+def how_to_get(dataset: Dataset, *, has_recipe: bool, in_site: bool, needs_credentials: bool = False, live: bool = False) -> dict[str, Any]:
     """`needs_credentials`: the recipe reads the source with a named local credential, so the source is treated as gated unless the catalogue says it is public."""
     coverage = dataset.coverage
     access = coverage.access
     if in_site:
         state = "in_site"
+    elif live:
+        state = "live_preview"
     elif has_recipe:
         state = "fetch_after_terms" if access in _GATED or (needs_credentials and access != "public") else "fetch_with_atlas"
     elif coverage.preview != "none":
-        state = "prepared_by_maintainers_only"
+        state = "source_only"
     elif access in _GATED:
         state = "accept_terms"
     elif access in _REQUEST:
@@ -60,11 +62,11 @@ def how_to_get(dataset: Dataset, *, has_recipe: bool, in_site: bool, needs_crede
     elif access in _UNRELEASED:
         state = "unreleased"
     elif access == "public":
-        state = "public_no_adapter"
+        state = "source_only"
     else:
         state = "source_unverified"
     result: dict[str, Any] = {"state": state, "summary": HOW_TO_GET[state]}
-    if state in {"fetch_with_atlas", "fetch_after_terms"}:
+    if state in {"fetch_with_atlas", "fetch_after_terms"} or (state == "live_preview" and has_recipe and not needs_credentials):
         result["commands"] = [f"atlas previews fetch --dataset {dataset.id}", f"atlas previews fetch --dataset {dataset.id} --execute"]
         result["command_notes"] = ["Plans the fetch and prints the size; downloads nothing.", "Fetches the preview within the plan's download limit."]
     return result
@@ -174,16 +176,33 @@ def _load_schema(path: Path, dataset: Dataset) -> dict[str, Any] | None:
     return document
 
 
+def load_live_previews(registry_dir: Path) -> dict[str, dict[str, Any]]:
+    path = registry_dir / "live-previews.yaml"
+    if not path.is_file():
+        return {}
+    document = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    entries = document.get("previews") or {}
+    for dataset_id, entry in entries.items():
+        if not isinstance(entry, dict) or not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]*/[A-Za-z0-9][A-Za-z0-9._-]*", str(entry.get("repo", ""))):
+            raise ExchangeError(f"Invalid live preview: {dataset_id}")
+        if entry.get("relation") not in {"author_release", "public_mirror"} or entry.get("media") not in {"image", "audio", "video", "text"}:
+            raise ExchangeError(f"Invalid live preview: {dataset_id}")
+    return entries
+
+
 def build_guide(datasets: list[Dataset], *, registry_dir: Path, schema_dir: Path, published: set[str]) -> bytes:
     """One JSON document keyed by dataset ID; the site loads it lazily on a dataset page."""
     entries: dict[str, Any] = {}
+    live_previews = load_live_previews(registry_dir)
     for dataset in datasets:
         recipe = registry_dir / "recipes" / f"{dataset.id}.yaml"
         gated_recipe = recipe.is_file() and bool((yaml.safe_load(recipe.read_text(encoding="utf-8")) or {}).get("credential_profile"))
         entry: dict[str, Any] = {
-            "how_to_get": how_to_get(dataset, has_recipe=recipe.is_file(), in_site=dataset.id in published, needs_credentials=gated_recipe),
+            "how_to_get": how_to_get(dataset, has_recipe=recipe.is_file(), in_site=dataset.id in published, needs_credentials=gated_recipe, live=dataset.id in live_previews),
             "papers": _papers(dataset, registry_dir / "papers"),
         }
+        if dataset.id in live_previews and dataset.id not in published:
+            entry["live_preview"] = live_previews[dataset.id]
         schema = _load_schema(schema_dir / f"{dataset.id}.json", dataset)
         if schema:
             entry["schema"] = {key: value for key, value in schema.items() if key not in {"schema_version", "id"}}

@@ -355,3 +355,14 @@ table.aligned td.k { color: var(--text-muted); width: 24%; }
 .live-strip .rest-h { margin-top: var(--s-6); }
 @media (max-width: 760px) { .hero { grid-template-columns: 1fr; } .hero-actions { justify-content: flex-start; } }
 .cat-head .row { flex-wrap: wrap; }
+
+/* ---------- Live preview from Hugging Face ---------- */
+.live-grid { display: grid; gap: var(--s-3); grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); }
+.live-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+.live-media { background: var(--n-100); display: grid; place-items: center; min-height: 120px; max-height: 220px; overflow: hidden; }
+.live-media img, .live-media video { width: 100%; max-height: 220px; object-fit: contain; display: block; }
+.live-media audio { width: 100%; padding: var(--s-2); }
+.live-fields { margin: 0; padding: var(--s-2) var(--s-3) var(--s-3); display: grid; gap: 4px; font-size: var(--fs-sm); }
+.live-fields > div { display: grid; gap: 0; min-width: 0; }
+.live-fields dt { color: var(--text-faint); font-size: var(--fs-xs); text-transform: none; }
+.live-fields dd { margin: 0; overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }

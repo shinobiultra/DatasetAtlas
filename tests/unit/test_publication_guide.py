@@ -23,12 +23,12 @@ def entry(dataset_id="toy", **coverage) -> Dataset:
     ({"access": "public", "preview": "complete_target"}, True, True, "in_site"),
     ({"access": "public", "preview": "complete_target"}, True, False, "fetch_with_atlas"),
     ({"access": "gated", "preview": "complete_target"}, True, False, "fetch_after_terms"),
-    ({"access": "public", "preview": "complete_target"}, False, False, "prepared_by_maintainers_only"),
+    ({"access": "public", "preview": "complete_target"}, False, False, "source_only"),
     ({"access": "gated", "preview": "none"}, False, False, "accept_terms"),
     ({"access": "request_required", "preview": "none"}, False, False, "request_from_authors"),
     ({"access": "author_request_required", "preview": "none"}, False, False, "request_from_authors"),
     ({"access": "unreleased", "preview": "none"}, False, False, "unreleased"),
-    ({"access": "public", "preview": "none"}, False, False, "public_no_adapter"),
+    ({"access": "public", "preview": "none"}, False, False, "source_only"),
     ({"access": "unverified", "preview": "none"}, False, False, "source_unverified"),
     ({"access": "source_release_unverified", "preview": "none"}, False, False, "source_unverified"),
 ])
@@ -151,7 +151,7 @@ def test_publication_writes_the_guide_beside_the_catalogue(tmp_path):
     (tmp_path / "examples/approved-packs").mkdir(parents=True)
     report = build_publication(shutil_registry, tmp_path / "examples/approved-packs", tmp_path / "site", shutil_registry / "publication.json")
     guide = json.loads((report.output_dir / "guide.json").read_text())
-    assert guide["datasets"]["toy"]["how_to_get"]["state"] == "public_no_adapter"
+    assert guide["datasets"]["toy"]["how_to_get"]["state"] == "source_only"
     assert report.catalogue_count == 1
 
 
@@ -193,7 +193,7 @@ def test_the_build_shows_merged_coverage_where_the_registry_yaml_predates_prepar
     report = build_publication(registry, tmp_path / "examples/approved-packs", tmp_path / "site", registry / "publication.json")
     catalogue = json.loads((report.output_dir / "catalogue.json").read_text())
     assert (catalogue[0]["coverage"]["preview"], catalogue[0]["coverage"]["adapter"], catalogue[0]["coverage"]["preview_count"]) == ("complete_target", "tested", 100)
-    assert json.loads((report.output_dir / "guide.json").read_text())["datasets"]["toy"]["how_to_get"]["state"] == "prepared_by_maintainers_only"
+    assert json.loads((report.output_dir / "guide.json").read_text())["datasets"]["toy"]["how_to_get"]["state"] == "source_only"
 
 
 def test_a_public_mirror_that_reads_with_a_credential_is_not_called_gated():
@@ -224,3 +224,34 @@ def test_write_schemas_deletes_only_schemas_it_wrote_and_never_when_nothing_was_
     with pytest.raises(ExchangeError, match="refusing"):
         write_schemas(Registry(set()), out)
     assert (out / "toy.json").exists()
+
+
+def test_a_live_preview_wins_over_a_fetch_recipe_and_keeps_the_fetch_commands():
+    result = how_to_get(entry("mnist", access="public", preview="complete_target"), has_recipe=True, in_site=False, live=True)
+    assert result["state"] == "live_preview" and result["commands"][0].endswith("--dataset mnist")
+    assert how_to_get(entry("x", access="public", preview="none"), has_recipe=False, in_site=False, live=True)["state"] == "live_preview"
+    assert how_to_get(entry("x", access="gated", preview="none"), has_recipe=True, in_site=True, live=True)["state"] == "in_site"
+
+
+def test_the_guide_carries_a_live_preview_and_refuses_a_malformed_one(tmp_path):
+    dataset = entry(access="public", preview="none")
+    registry = registry_with(tmp_path, dataset, paper=False)
+    live = {"schema_version": "1.0", "previews": {"toy": {"repo": "owner/name", "config": "default", "split": "test", "rows_total": 10, "media": "image", "relation": "public_mirror"}}}
+    (registry / "live-previews.yaml").write_text(yaml.safe_dump(live))
+    document = json.loads(build_guide([dataset], registry_dir=registry, schema_dir=tmp_path / "none", published=set()))
+    assert document["datasets"]["toy"]["live_preview"]["repo"] == "owner/name" and document["datasets"]["toy"]["how_to_get"]["state"] == "live_preview"
+    live["previews"]["toy"]["repo"] = "../../etc/passwd"
+    (registry / "live-previews.yaml").write_text(yaml.safe_dump(live))
+    with pytest.raises(ExchangeError, match="Invalid live preview"):
+        build_guide([dataset], registry_dir=registry, schema_dir=tmp_path / "none", published=set())
+    live["previews"]["toy"].update(repo="owner/name", relation="whatever")
+    (registry / "live-previews.yaml").write_text(yaml.safe_dump(live))
+    with pytest.raises(ExchangeError, match="Invalid live preview"):
+        build_guide([dataset], registry_dir=registry, schema_dir=tmp_path / "none", published=set())
+
+
+def test_every_committed_live_preview_names_a_catalogue_entry_and_a_wellformed_repository():
+    from dataset_atlas.exports.guide import load_live_previews
+    entries = load_live_previews(ROOT / "registry")
+    ids = {path.stem for path in (ROOT / "registry/datasets").glob("*.yaml")}
+    assert entries and set(entries) <= ids

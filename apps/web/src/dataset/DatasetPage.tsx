@@ -1,4 +1,4 @@
-import { NoPreviewGuide } from './GuideCards'
+import { StaticUnpublished } from './GuideCards'
 import { displayUrl } from '../lib/display'
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
@@ -373,7 +373,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
         {header}
         <div className="work-scroll">
           <div className="page">
-            {provider.mode === 'workbench' && dataset.availability?.preview === 'on_request' ? (
+            {provider.mode === 'static' ? <StaticUnpublished key={dataset.id} dataset={dataset} /> : provider.mode === 'workbench' && dataset.availability?.preview === 'on_request' ? (
               <div className="card card-pad">
                 <h3 style={{ marginBottom: 6 }}>Preview not fetched on this machine yet</h3>
                 <p style={{ margin: '0 0 10px' }}>
@@ -388,10 +388,9 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
             ) : (
               <Notice tone="warn">
                 <strong>No inspectable examples here yet.</strong> This catalogue entry has no prepared preview
-                {provider.mode === 'static' ? ' approved for the public build' : ' in this workbench'}.
+                {' in this workbench'}.
               </Notice>
             )}
-            {provider.mode === 'static' && <NoPreviewGuide key={dataset.id} dataset={dataset} />}
             <div className="card card-pad">
               <h3 style={{ marginBottom: 10 }}>Why, precisely</h3>
               <dl className="dl">

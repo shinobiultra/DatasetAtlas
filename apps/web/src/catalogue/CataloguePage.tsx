@@ -109,13 +109,15 @@ function DatasetCard({ dataset, thumbs, onOpen, starred, onStar }: {
 function Hero({ datasets }: { datasets: Dataset[] }) {
   const repo = repositoryUrl()
   const live = datasets.filter(dataset => coverageState(dataset, 'static') === 'preview')
+  const [livePreviews, setLivePreviews] = useState(0)
+  useEffect(() => { provider.guideStates().then(states => setLivePreviews(Object.values(states).filter(state => state === 'live_preview').length)).catch(() => {}) }, [])
   return (
     <section className="hero" aria-label="About this site">
       <div>
         <h2>{datasets.length.toLocaleString()} real datasets, each with where it comes from and how to get it</h2>
         <p>
-          Dataset Atlas maps the datasets named in a corpus of research papers: what a record holds, which papers cite it, what is known about its rights,
-          and the exact command that fetches a preview into your own workspace. The data itself is not hosted here; {live.length} sets have live examples you can open now.
+          What each dataset contains, where it comes from, what is known about its rights, and the exact command that fetches a preview into your own workspace.
+          Nothing is hosted here: {live.length} sets have examples published with their licence reviewed{livePreviews > 0 ? `, and ${livePreviews} more load live from Hugging Face when you open them` : ''}.
         </p>
       </div>
       <div className="hero-actions">

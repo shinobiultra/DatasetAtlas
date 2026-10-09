@@ -83,22 +83,22 @@ test('inspection and selection stay separate interactions', async ({ page }) => 
 test('a public build states what it can show and never claims the workbench preview', async ({ page }) => {
   await page.goto('/')
   await expect(page.locator('.cat-head')).toContainText('browsable in this public build')
-  await expect(page.getByRole('region', { name: 'About this site' })).toContainText('The data itself is not hosted here')
+  await expect(page.getByRole('region', { name: 'About this site' })).toContainText('Nothing is hosted here')
   await expect(page.getByRole('region', { name: 'Live examples' }).locator('.ds-card')).toHaveCount(3)
   const unpublished = page.locator('.ds-row[data-dataset-id="advbench"]')
   await expect(unpublished).toBeVisible()
-  await expect(unpublished).toContainText('Maintainer preview')
+  await expect(unpublished).toContainText('Source link')
   await expect(unpublished).not.toContainText('exists in the local workbench')
 })
 
 test('a metadata-only dataset explains the gap instead of showing an empty grid', async ({ page }) => {
   await page.goto('/#/dataset/facet')
-  await expect(page.getByText('No inspectable examples here yet')).toBeVisible()
+  await expect(page.getByText('No examples are published here')).toBeVisible()
   await expect(page.getByText(/implementation gap in Dataset Atlas/)).toBeVisible()
   await expect(sampleCards(page)).toHaveCount(0)
 })
 
-test('a public dataset page says how to get the data, what a record holds and which papers name it', async ({ page }) => {
+test('a public dataset page says how to get the data, and what a record holds', async ({ page }) => {
   await page.goto('/#/dataset/imagenet-1k')
   const how = page.locator('.card').filter({ hasText: 'How to get this dataset' })
   await expect(how).toContainText('Accept terms, then fetch')
@@ -106,14 +106,13 @@ test('a public dataset page says how to get the data, what a record holds and wh
   await expect(how.locator('code').nth(1)).toHaveText('atlas previews fetch --dataset imagenet-1k --execute')
   await expect(how.getByRole('button', { name: 'Copy' })).toHaveCount(2)
   const schema = page.locator('.card').filter({ hasText: 'What a record holds' })
-  await expect(schema).toContainText('No record values are published here')
+  await expect(schema).toContainText('No record values are shown here')
   await expect(schema.locator('td.mono').first()).toBeVisible()
-  await expect(page.locator('.card').filter({ hasText: /Named in \d+ corpus papers?/ })).toContainText('A mention does not establish')
 })
 
-test('the guide separates a maintainer-only preview, a gate, and a request-only release', async ({ page }) => {
+test('the guide separates a source-link-only dataset, a gate, and a request-only release', async ({ page }) => {
   await page.goto('/#/dataset/advbench')
-  await expect(page.locator('.card').filter({ hasText: 'How to get this dataset' })).toContainText('Maintainer preview, no public recipe')
+  await expect(page.locator('.card').filter({ hasText: 'How to get this dataset' })).toContainText('Get it from the source')
   await expect(page.locator('.card').filter({ hasText: 'How to get this dataset' }).locator('code')).toHaveCount(0)
   await expect(page.locator('.card').filter({ hasText: 'What a record holds' }).locator('td.mono').first()).toHaveText('goal')
   await page.goto('/#/dataset/facet')
@@ -231,4 +230,69 @@ test('local VHD H.264 clip exposes metadata and native playback without fetching
   expect(observation.height).toBe(1024)
   expect(observation.playOutcome).toBe('playing')
   expect(observation.playbackPosition).toBeGreaterThan(0)
+})
+
+const PNG = Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR4nGNgYGD4DwABBAEAHq0vwAAAAABJRU5ErkJggg==', 'base64')
+async function stubHuggingFace(page: Page, rows: number) {
+  const requests: string[] = []
+  await page.route('https://datasets-server.huggingface.co/**', async route => {
+    const url = new URL(route.request().url())
+    requests.push(url.pathname)
+    if (url.pathname === '/rows') {
+      const length = Math.min(rows, Number(url.searchParams.get('length')))
+      return route.fulfill({ status: 200, contentType: 'application/json', headers: { 'access-control-allow-origin': '*' }, body: JSON.stringify({
+        features: [{ feature_idx: 0, name: 'img', type: { _type: 'Image' } }, { feature_idx: 1, name: 'label', type: { _type: 'ClassLabel', names: ['airplane', 'automobile', 'bird'] } }, { feature_idx: 2, name: 'tracker', type: { _type: 'Image' } }],
+        rows: Array.from({ length }, (_, index) => ({ row_idx: index, row: { img: { src: `https://datasets-server.huggingface.co/cached-assets/x/${index}/img.png`, height: 1, width: 1 }, label: index % 3, tracker: { src: 'https://tracker.example/pixel.png' } } })),
+        num_rows_total: 10000, num_rows_per_page: 100, partial: false }) })
+    }
+    return route.fulfill({ status: 200, contentType: 'image/png', body: PNG })
+  })
+  return requests
+}
+
+test('a dataset with a live preview loads rows from Hugging Face and never from another host', async ({ page }) => {
+  const requests = await stubHuggingFace(page, 5)
+  let tracker = 0
+  await page.route('https://tracker.example/**', route => { tracker += 1; return route.abort() })
+  await page.goto('/#/dataset/cifar-10')
+  const live = page.locator('.live-preview')
+  await expect(live.getByRole('heading', { name: 'Live preview' })).toBeVisible()
+  await expect(live).toContainText('loaded from Hugging Face')
+  await expect(live.locator('.live-card')).toHaveCount(5)
+  await expect(live.locator('.live-card img')).toHaveCount(5)
+  await expect(live.locator('.live-card').first()).toContainText('airplane')
+  await expect(live).toContainText('Showing 5 of 10,000 rows')
+  await expect(live.getByRole('button', { name: /Load \d+ more/ })).toBeVisible()
+  expect(requests).toContain('/rows')
+  expect(tracker).toBe(0)
+  await expect(page.getByText('No examples are published here')).toHaveCount(0)
+})
+
+test('a sensitive live preview waits for a click before anything is requested', async ({ page }) => {
+  const requests = await stubHuggingFace(page, 3)
+  await page.goto('/#/dataset/fairface')
+  await expect(page.getByRole('button', { name: 'Load the live preview' })).toBeVisible()
+  await page.waitForTimeout(500)
+  expect(requests).toEqual([])
+  await page.getByRole('button', { name: 'Load the live preview' }).click()
+  await expect(page.locator('.live-card')).toHaveCount(3)
+  expect(requests).toContain('/rows')
+})
+
+test('a busy Hugging Face viewer is reported and can be retried', async ({ page }) => {
+  let calls = 0
+  await page.route('https://datasets-server.huggingface.co/**', async route => {
+    calls += 1
+    return route.fulfill({ status: 429, contentType: 'application/json', body: '{}', headers: { 'access-control-allow-origin': '*' } })
+  })
+  await page.goto('/#/dataset/cifar-10')
+  await expect(page.getByText('Hugging Face is busy right now')).toBeVisible()
+  expect(calls).toBeGreaterThan(0)
+})
+
+test('papers that mention a dataset are metadata, not part of its page', async ({ page }) => {
+  await page.goto('/#/dataset/gyafc')
+  await expect(page.getByText(/Named in \d+ corpus paper/)).toHaveCount(0)
+  await page.getByRole('button', { name: 'About dataset' }).click()
+  await expect(page.getByText(/Mentioned for example in \(\d+\)/)).toBeVisible()
 })

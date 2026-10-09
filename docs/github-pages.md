@@ -1,13 +1,14 @@
 # GitHub Pages edition
 
-The Pages site is the same interface as the local workbench, built in static mode from the repository alone. It holds none of the roughly 100 GB the maintainers' workspace needs. This page says what the site is for, what it contains, how it stays true, and how to deploy it. **Nothing has been deployed**: publishing is a manual step that needs your decision (see [Deploy](#deploy)).
+The Pages site is the same interface as the local workbench, built in static mode from the repository alone. It holds none of the roughly 100 GB the maintainers' workspace needs. This page says what the site is for, what it contains, how it stays true, and how to deploy it. Deployment is a manual workflow (see [Deploy](#deploy)).
 
 ## What a visitor gets
 
 | Tier | Content | Who sees it | Source |
 | --- | --- | --- | --- |
 | 1. Catalogue | Every real dataset (284 on 2026-10-09): description, modalities, tasks, access and coverage state, rights, relationships, source link, filters and search | everyone | `registry/datasets/*.yaml` plus the merged coverage snapshot |
-| 2. Guide | For each dataset: how to obtain it (computed, see below), the corpus papers that name it, and the field schema of the maintainers' preview (names, types, declared categories; **no record values**) | everyone | `guide.json` |
+| 2. Guide | For each dataset: how to obtain it (computed, see below) and the field schema of a sample (names, types, declared categories; **no record values**). The papers of the research corpus that mention it sit in About, under "Mentioned for example in" | everyone | `guide.json` |
+| 2b. Live preview | For datasets that exist on Hugging Face with the viewer enabled: the first rows, loaded from the visitor's browser straight from `datasets-server.huggingface.co` when the page is opened. Nothing is copied into this repository or the site; only media served by that host is rendered; sets showing people or harmful text need a click | everyone | `registry/live-previews.yaml`, `scripts/build_live_previews.py` |
 | 3. Approved examples | Real, browsable previews with media, filters, selections, maps and results | only datasets whose publication was reviewed: CLEVR, EuroSAT, PAIRS | `registry/publication.json`, `examples/approved-packs/` |
 
 Everything else is deliberately absent: record text and media of datasets whose rights are unreviewed, adapter configuration, evidence excerpts, review notes, local paths, source PDFs, model weights, embeddings and every prepared version in `work/`.
@@ -17,11 +18,11 @@ The guide answers the question a visitor actually has about a dataset they canno
 | State | Computed from | What the page says |
 | --- | --- | --- |
 | Examples on this site | publication approved | open the Samples tab |
+| Live preview from Hugging Face | listed in `registry/live-previews.yaml` and verified | the first rows load in the page; the fetch commands stay below when a recipe exists |
 | Fetch with Dataset Atlas | a recipe exists | the two commands: plan (`atlas previews fetch --dataset ID`) then fetch (`... --execute`) |
 | Accept terms, then fetch | a recipe exists and the source is gated or the recipe needs a local credential | same commands, plus the link to the [authorization guide](dataset-authorization.md); Atlas never accepts terms for anyone |
-| Maintainer preview, no public recipe | a preview exists but no recipe is tracked | a colleague cannot rebuild it from the source yet |
 | Gated at the source / Request from the authors | gated or request-required, no recipe | where to ask |
-| Public source, no Atlas recipe yet | public, no recipe | stated as a gap in Dataset Atlas, not a restriction |
+| Get it from the source | public, no recipe | the source link; no Atlas recipe exists yet |
 | Not released / No verified public source | unreleased or unverified | nothing can be fetched |
 
 ## Why it is small, and how big
@@ -71,6 +72,7 @@ Rollback: re-run the workflow from the previous good commit, or disable Pages in
 ## Not built, and why
 
 - **A static page that drives your local workbench.** The browser could talk to `atlas serve` on loopback, but the server refuses cross-origin requests on purpose. Allowing one origin needs an explicit opt-in flag and a CSRF design review first.
+- **More live previews.** `scripts/build_live_previews.py --check` re-verifies every entry against the viewer API; `--missing` retries entries that failed on a transient error. A dataset is added by naming its Hugging Face repository in the script's table, which records whether the repository is the authors' own release or a public mirror.
 - **Larger approved previews outside Pages.** Packs could be hosted as a Hugging Face dataset and loaded lazily by the site, keeping Pages small. It needs the same rights approval per dataset, so it only matters once more than a few datasets are approved.
 - **Live status.** Coverage on the site is a committed snapshot, not a service.
 

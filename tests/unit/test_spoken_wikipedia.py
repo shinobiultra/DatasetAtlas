@@ -1,5 +1,6 @@
 """Synthetic native topology only; no corpus recordings or text used in tests."""
 import hashlib
+import shutil
 import io
 import json
 from pathlib import Path
@@ -122,6 +123,7 @@ def test_audio_decoder_cancellation_reaps_a_process_after_pipe_eof():
     assert time.monotonic()-started<2
 
 
+@pytest.mark.skipif(not (shutil.which('ffmpeg') and shutil.which('ffprobe')), reason='audio preparation needs FFmpeg and ffprobe')
 def test_native_audio_preparation_pins_sources_index_and_playable_preview(tmp_path,monkeypatch):
     import yaml
     import dataset_atlas.adapters.spoken_wikipedia as module

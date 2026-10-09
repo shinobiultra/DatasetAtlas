@@ -1,10 +1,16 @@
 """Browsing caches must never serve stale results or hide full artifacts (synthetic fixture only)."""
 import sqlite3
+from pathlib import Path
+
+import pytest
+import dataset_atlas
 from fastapi.testclient import TestClient
 from dataset_atlas.api import create_app
 from dataset_atlas.models import Artifact
 
 HEADERS={'X-Atlas-Request':'1'}
+FRONTEND_BUILT = (Path(dataset_atlas.__file__).parent / 'web' / 'index.html').exists()
+needs_frontend = pytest.mark.skipif(not FRONTEND_BUILT, reason='the interface is built into the package only by scripts/build_release.py')
 
 def register(workspace, artifact):
     with sqlite3.connect(workspace/'work/jobs.sqlite3') as db:
@@ -58,6 +64,7 @@ def test_repeated_queries_from_cached_pack_serve_media(workspace):
         again=client.post('/api/v1/queries/fixture',headers=HEADERS,json=query).json()['records'][0]['assets'][0]['uri']
         assert again==uri and client.get(uri).status_code==200
 
+@needs_frontend
 def test_frontend_shell_revalidates(workspace):
     with TestClient(create_app(workspace)) as client:
         response=client.get('/')

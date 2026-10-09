@@ -1,10 +1,18 @@
 import json
+from pathlib import Path
+
+import pytest
+import dataset_atlas
 
 from dataset_atlas.cli import main
 from dataset_atlas.providers import ProviderService
 from dataset_atlas.providers.schemas import CapabilityResult, ProviderConfig, ProviderView
 
+FRONTEND_BUILT = (Path(dataset_atlas.__file__).parent / 'web' / 'index.html').exists()
+needs_frontend = pytest.mark.skipif(not FRONTEND_BUILT, reason='the interface is built into the package only by scripts/build_release.py')
 
+
+@needs_frontend
 def test_doctor_selected_provider_probe_is_explicit_benign_and_failure_is_actionable(workspace, monkeypatch, capsys):
     calls = []
     status = ['supported']

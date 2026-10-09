@@ -135,7 +135,7 @@ def test_write_schemas_replaces_stale_files_and_skips_a_dataset_without_a_pack(t
 
     out = tmp_path / "out"
     out.mkdir()
-    (out / "stale.json").write_text("{}")
+    (out / "stale.json").write_text(json.dumps({"schema_version": "1.0", "id": "stale", "fields": []}))
     assert write_schemas(Registry(), out) == ["toy"]
     assert sorted(p.name for p in out.iterdir()) == ["toy.json"]
 
@@ -194,3 +194,33 @@ def test_the_build_shows_merged_coverage_where_the_registry_yaml_predates_prepar
     catalogue = json.loads((report.output_dir / "catalogue.json").read_text())
     assert (catalogue[0]["coverage"]["preview"], catalogue[0]["coverage"]["adapter"], catalogue[0]["coverage"]["preview_count"]) == ("complete_target", "tested", 100)
     assert json.loads((report.output_dir / "guide.json").read_text())["datasets"]["toy"]["how_to_get"]["state"] == "prepared_by_maintainers_only"
+
+
+def test_a_public_mirror_that_reads_with_a_credential_is_not_called_gated():
+    assert how_to_get(entry(access="public", preview="complete_target"), has_recipe=True, in_site=False, needs_credentials=True)["state"] == "fetch_with_atlas"
+
+
+def test_write_schemas_deletes_only_schemas_it_wrote_and_never_when_nothing_was_written(tmp_path):
+    dataset, pack = pack_with_secret_values()
+
+    class Registry:
+        def __init__(self, packs):
+            self.packs = packs
+
+        def datasets(self):
+            return [dataset]
+
+        def pack(self, dataset_id):
+            if dataset_id in self.packs:
+                return pack
+            raise FileNotFoundError(dataset_id)
+
+    out = tmp_path / "out"
+    out.mkdir()
+    (out / "final-status.json").write_text('{"status": "x"}')
+    (out / "gone.json").write_text(json.dumps({"schema_version": "1.0", "id": "gone", "fields": []}))
+    assert write_schemas(Registry({"toy"}), out) == ["toy"]
+    assert sorted(p.name for p in out.iterdir()) == ["final-status.json", "toy.json"]
+    with pytest.raises(ExchangeError, match="refusing"):
+        write_schemas(Registry(set()), out)
+    assert (out / "toy.json").exists()

@@ -147,7 +147,8 @@ excluded_from_dataset_catalogue:
 - id: sb-syn
   name: SB-Syn
   disposition: alias_not_separate_dataset
-  reason: Chart label for the SBBench synthetic releases.
+  reason: Chart label that plausibly denotes the SBBench synthetic releases.; the
+    source text says it is not automatically an alias.
   refers_to:
   - sbbench-syn
   paper_ids:
@@ -159,7 +160,8 @@ excluded_from_dataset_catalogue:
 - id: sb-syn-crop
   name: SB-Syn-Crop
   disposition: alias_not_separate_dataset
-  reason: Chart label for the SBBench synthetic crop releases.
+  reason: Chart label that plausibly denotes the SBBench synthetic crop releases.;
+    the source text says it is not automatically an alias.
   refers_to:
   - sbbench-syn-crop
   paper_ids:
@@ -171,9 +173,10 @@ excluded_from_dataset_catalogue:
 - id: illusory-vqa
   name: Illusory VQA
   disposition: alias_not_separate_dataset
-  reason: Spelling or family name of IllusionVQA; the catalogued release is IllusionVQA.
+  reason: Spelling or family name of IllusoryVQA (Rostamkhani 2025), catalogued as
+    illusoryvqa; distinct from IllusionVQA.
   refers_to:
-  - illusionvqa
+  - illusoryvqa
   paper_ids:
   - paper-20de77d4e60fd1bd
   decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
@@ -413,17 +416,6 @@ excluded_from_dataset_catalogue:
     datasets; only real datasets are listed.'
   entry_file: registry/excluded/artbench-2.yaml
   source_url: https://sail-sg.github.io/D-TRAK/
-- id: laion-aesthetics
-  name: LAION Aesthetics
-  disposition: view_not_separate_dataset
-  reason: The aesthetic-score subset of LAION-5B.
-  refers_to:
-  - laion
-  paper_ids:
-  - paper-ebd63da316af82e5
-  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
-    datasets; only real datasets are listed.'
-  entry_file: registry/excluded/laion-aesthetics.yaml
 - id: vl-gender
   name: VL-Gender
   disposition: view_not_separate_dataset
@@ -528,30 +520,6 @@ excluded_from_dataset_catalogue:
     datasets; only real datasets are listed.'
   entry_file: registry/excluded/dall-e-generated-target-images.yaml
   source_url: https://arxiv.org/abs/2305.16934
-- id: paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-collection
-  name: unnamed internet hidden-content collection
-  disposition: view_not_separate_dataset
-  reason: The 53-image wild part of HC-Bench.
-  refers_to:
-  - hc-bench
-  paper_ids:
-  - paper-2c07a8c6af8e33c2
-  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
-    datasets; only real datasets are listed.'
-  entry_file: registry/excluded/paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-collection.yaml
-  source_url: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench
-- id: paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-set
-  name: unnamed internet hidden-content set
-  disposition: view_not_separate_dataset
-  reason: The 53-image wild part of HC-Bench.
-  refers_to:
-  - hc-bench
-  paper_ids:
-  - paper-2c07a8c6af8e33c2
-  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
-    datasets; only real datasets are listed.'
-  entry_file: registry/excluded/paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-set.yaml
-  source_url: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench
 - id: brain-score
   name: Brain-Score
   disposition: platform_not_dataset

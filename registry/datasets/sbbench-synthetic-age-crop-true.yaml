@@ -59,9 +59,6 @@ relationships:
 - type: possible_source_for
   target: sbbench-syn-crop
   status: candidate
-- type: possible_source_for
-  target: sb-syn-crop
-  status: candidate
 evidence:
 - kind: source_audit_release
   url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_age_crop_True/tree/43769ef07d9388ebb4c3dc74b548eea615d0c93b

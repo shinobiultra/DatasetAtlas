@@ -116,13 +116,11 @@ export class StaticDataProvider implements DataProvider {
 
   async guide(id: string): Promise<GuideEntry | null> {
     this.guides ??= (async () => {
-      try {
-        const document = await responseJson<{ schema_version?: string; datasets?: Record<string, GuideEntry> }>(publicUrl('data/guide.json'))
-        checkMajor(document, 'Public guide')
-        return document.datasets ?? {}
-      } catch { return {} }
+      const document = await responseJson<{ schema_version?: string; datasets?: Record<string, GuideEntry> }>(publicUrl('data/guide.json'))
+      checkMajor(document, 'Public guide')
+      return document.datasets ?? {}
     })()
-    return (await this.guides)[id] ?? null
+    try { return (await this.guides)[id] ?? null } catch (failure) { this.guides = undefined; throw failure }  // a failed fetch is retried, not cached
   }
   async capabilities(): Promise<Capabilities> { return { mode: 'static', operations: ['catalogue', 'query', 'selection', 'export', 'artifacts'], api_version: '1' } }
   async datasets(): Promise<Dataset[]> {

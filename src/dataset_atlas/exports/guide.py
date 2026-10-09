@@ -9,6 +9,7 @@ needs neither the packs nor the workspace.
 
 from __future__ import annotations
 
+import json
 import re
 from pathlib import Path
 from typing import Any
@@ -43,13 +44,13 @@ HOW_TO_GET = {
 
 
 def how_to_get(dataset: Dataset, *, has_recipe: bool, in_site: bool, needs_credentials: bool = False) -> dict[str, Any]:
-    """`needs_credentials`: the recipe reads the source with a named local credential, so the source is gated whatever the catalogue says."""
+    """`needs_credentials`: the recipe reads the source with a named local credential, so the source is treated as gated unless the catalogue says it is public."""
     coverage = dataset.coverage
     access = coverage.access
     if in_site:
         state = "in_site"
     elif has_recipe:
-        state = "fetch_after_terms" if access in _GATED or needs_credentials else "fetch_with_atlas"
+        state = "fetch_after_terms" if access in _GATED or (needs_credentials and access != "public") else "fetch_with_atlas"
     elif coverage.preview != "none":
         state = "prepared_by_maintainers_only"
     elif access in _GATED:
@@ -147,9 +148,17 @@ def write_schemas(registry, directory: Path) -> list[str]:
             raise ExchangeError(f"Schema is too large for {dataset.id}: {len(data)} bytes")
         (directory / f"{dataset.id}.json").write_bytes(data)
         written.append(dataset.id)
+    if not written:
+        raise ExchangeError("No local preview pack could be read; refusing to delete the committed schemas")
     for stale in directory.glob("*.json"):
-        if stale.stem not in written and stale.name != COVERAGE_FILE:
-            stale.unlink()
+        if stale.stem in written or stale.name == COVERAGE_FILE:
+            continue
+        try:
+            document = json.loads(stale.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            continue
+        if isinstance(document, dict) and document.get("schema_version") == SCHEMA_VERSION and document.get("id") == stale.stem and "fields" in document:
+            stale.unlink()  # only a schema this module wrote, whose dataset no longer has a preview
     return written
 
 

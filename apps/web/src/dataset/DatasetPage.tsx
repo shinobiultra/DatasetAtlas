@@ -416,7 +416,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
                 <button type="button" className="btn" onClick={() => setPanel('about')}><Icon.Info size={13} />Open full record</button>
               </div>
             </div>
-            {provider.mode === 'static' && <NoPreviewGuide dataset={dataset} />}
+            {provider.mode === 'static' && <NoPreviewGuide key={dataset.id} dataset={dataset} />}
             <RelatedBrowsable dataset={dataset} onOpenDataset={onOpenDataset} />
           </div>
         </div>

@@ -53,9 +53,6 @@ relationships:
 - type: possible_source_for
   target: sbbench-syn-crop
   status: candidate
-- type: possible_source_for
-  target: sb-syn-crop
-  status: candidate
 evidence:
 - kind: source_audit_release
   url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_gender_crop_True/tree/a7679386395cf29e9640757f16923f823d6251ef

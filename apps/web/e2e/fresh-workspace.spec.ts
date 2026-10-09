@@ -1,6 +1,10 @@
 import { expect, test, type Page } from '@playwright/test'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { readdirSync } from 'node:fs'
+
+/** The shipped catalogue is the repository registry, so the expected count is read from it, not typed. */
+const catalogueSize = readdirSync(fileURLToPath(new URL('../../../registry/datasets', import.meta.url))).filter(name => name.endsWith('.yaml')).length
 
 /**
  * A colleague's first run: an empty workspace holding only the shipped catalogue.
@@ -22,7 +26,7 @@ async function brokenTiles(page: Page) {
 test('the plain URL is the workbench and no catalogue entry claims records it cannot open', async ({ page }) => {
   await page.goto('/')
   await expect(page.getByText('Workbench', { exact: true })).toBeVisible()
-  await expect(page.getByText(/333 catalogue entries · 0 browsable here/)).toBeVisible()
+  await expect(page.getByText(new RegExp(`${catalogueSize} catalogue entries · 0 browsable here`))).toBeVisible()
   // Datasets with a recorded upstream preview are offered, never shown as ready (the filter rail is open at this width).
   await expect(page.getByLabel(/Preview on request/)).toBeVisible()
 })

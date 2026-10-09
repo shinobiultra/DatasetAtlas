@@ -148,6 +148,7 @@ class FixedRowGroupSampler:
             self.targets.extend((file_index, group, row) for row in order[:wanted])
             self.allocation.append(wanted)
         self.selected_bytes = sum(g[3] for g in self.chosen)
+        self.total = sum(g[2] for g in self.groups)  # the population count a native record filter compares against
         if self.selected_bytes > self.byte_budget:
             raise ValueError(f'The fixed preview selection needs {self.selected_bytes:,} bytes of row-group transfer but the budget leaves '
                              f'{self.byte_budget:,}; raise the budget or reduce the number of row groups. The selection itself does not change with the budget.')

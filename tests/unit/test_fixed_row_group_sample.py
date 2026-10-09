@@ -105,3 +105,10 @@ def test_from_spec_reads_the_recipe_block():
     assert drain(FixedRowGroupSampler.from_spec(GROUPS, NAMES, spec, byte_budget=10**12)) == drain(make())
     with pytest.raises(ValueError, match='method'):
         FixedRowGroupSampler.from_spec(GROUPS, NAMES, {**spec, 'method': 'something_else'}, byte_budget=10**12)
+
+
+def test_the_sampler_reports_the_population_count_a_native_filter_compares_against():
+    from dataset_atlas.preparation.remote_sample import FixedRowGroupSampler
+    groups = [(0, 0, 8, 100), (0, 1, 8, 100), (1, 0, 5, 100)]
+    sampler = FixedRowGroupSampler(groups=groups, names=["a", "b"], row_groups=2, count=4, max_rows_per_group=2)
+    assert sampler.total == 21

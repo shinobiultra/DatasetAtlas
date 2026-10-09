@@ -1,3 +1,4 @@
+import { NoPreviewGuide } from './GuideCards'
 import { displayUrl } from '../lib/display'
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
@@ -406,13 +407,16 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
                   </ul>
                 </>
               )}
-              <p className="hint" style={{ marginTop: 12 }}>
-                An unimplemented adapter is an implementation gap in Dataset Atlas, not a restriction imposed by the source.
-              </p>
+              {!['tested', 'implemented'].includes(dataset.coverage?.adapter ?? '') && (
+                <p className="hint" style={{ marginTop: 12 }}>
+                  An adapter that is not implemented is an implementation gap in Dataset Atlas, not a restriction imposed by the source.
+                </p>
+              )}
               <div className="row" style={{ marginTop: 12 }}>
                 <button type="button" className="btn" onClick={() => setPanel('about')}><Icon.Info size={13} />Open full record</button>
               </div>
             </div>
+            {provider.mode === 'static' && <NoPreviewGuide dataset={dataset} />}
             <RelatedBrowsable dataset={dataset} onOpenDataset={onOpenDataset} />
           </div>
         </div>

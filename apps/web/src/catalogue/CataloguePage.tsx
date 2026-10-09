@@ -201,6 +201,17 @@ export function CataloguePage({ term, onOpen }: { term: string; onOpen: (id: str
                 ? 'Loading catalogue…'
                 : `${compact(all.length)} catalogue entries · ${compact(all.filter(dataset => ['full', 'preview'].includes(coverageState(dataset, provider.mode))).length)} browsable ${provider.mode === 'static' ? 'in this public build' : 'here'}`}
             </p>
+            {provider.mode === 'static' && datasets !== null && (
+              <details className="hint" style={{ marginTop: 6, maxWidth: 760 }}>
+                <summary>What this public site is</summary>
+                <p style={{ margin: '6px 0 0' }}>
+                  A catalogue of the real datasets named in research papers: where each comes from, how to obtain it, what is known about its rights, and the fields of the maintainers' previews.
+                  The data itself is not hosted here. Examples are published only where the licence was reviewed
+                  ({all.filter(dataset => dataset.coverage?.publication === 'approved').map(dataset => dataset.name).join(', ') || 'none yet'}).
+                  Every other dataset page says how to fetch its preview into your own Dataset Atlas workspace, which also runs the filters, selections and local analysis shown here.
+                </p>
+              </details>
+            )}
           </div>
           <div className="row" style={{ marginLeft: 'auto' }}>
             {provider.mode === 'workbench' && <AddDataset />}

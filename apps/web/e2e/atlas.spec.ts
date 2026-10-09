@@ -89,10 +89,43 @@ test('a public build states what it can show and never claims the workbench prev
 })
 
 test('a metadata-only dataset explains the gap instead of showing an empty grid', async ({ page }) => {
-  await page.goto('/#/dataset/advbench')
+  await page.goto('/#/dataset/facet')
   await expect(page.getByText('No inspectable examples here yet')).toBeVisible()
   await expect(page.getByText(/implementation gap in Dataset Atlas/)).toBeVisible()
   await expect(sampleCards(page)).toHaveCount(0)
+})
+
+test('a public dataset page says how to get the data, what a record holds and which papers name it', async ({ page }) => {
+  await page.goto('/#/dataset/imagenet-1k')
+  const how = page.locator('.card').filter({ hasText: 'How to get this dataset' })
+  await expect(how).toContainText('Accept terms, then fetch')
+  await expect(how.locator('code').first()).toHaveText('atlas previews fetch --dataset imagenet-1k')
+  await expect(how.locator('code').nth(1)).toHaveText('atlas previews fetch --dataset imagenet-1k --execute')
+  await expect(how.getByRole('button', { name: 'Copy' })).toHaveCount(2)
+  const schema = page.locator('.card').filter({ hasText: 'What a record holds' })
+  await expect(schema).toContainText('No record values are published here')
+  await expect(schema.locator('td.mono').first()).toBeVisible()
+  await expect(page.locator('.card').filter({ hasText: /Named in \d+ corpus papers?/ })).toContainText('A mention does not establish')
+})
+
+test('the guide separates a maintainer-only preview, a gate, and a dataset nobody has released', async ({ page }) => {
+  await page.goto('/#/dataset/advbench')
+  await expect(page.locator('.card').filter({ hasText: 'How to get this dataset' })).toContainText('Maintainer preview, no public recipe')
+  await expect(page.locator('.card').filter({ hasText: 'How to get this dataset' }).locator('code')).toHaveCount(0)
+  await expect(page.locator('.card').filter({ hasText: 'What a record holds' }).locator('td.mono').first()).toHaveText('goal')
+  await page.goto('/#/dataset/facet')
+  await expect(page.locator('.card').filter({ hasText: 'How to get this dataset' })).toContainText('Gated at the source')
+  await page.goto('/#/dataset/paper-12e8bd34b4a2f2a8-unnamed-harmful-sentence-corpus')
+  const unreleased = page.locator('.card').filter({ hasText: 'How to get this dataset' })
+  await expect(unreleased).toContainText('Not released')
+  await expect(unreleased.locator('code')).toHaveCount(0)
+})
+
+test('the catalogue explains what the public site is and lists the datasets whose examples it publishes', async ({ page }) => {
+  await page.goto('/')
+  await page.getByText('What this public site is').click()
+  await expect(page.locator('.cat-head')).toContainText('The data itself is not hosted here')
+  await expect(page.locator('.cat-head')).toContainText('CLEVR')
 })
 
 test('About panel keeps unpublished evidence absent and shows the public source', async ({ page }, testInfo) => {

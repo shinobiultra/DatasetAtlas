@@ -128,6 +128,8 @@ def main(argv=None):
     publish=sub.add_parser('publish').add_subparsers(dest='action',required=True)
     for action in ['validate','build']:
         p=publish.add_parser(action);p.add_argument('--profile',default='public');p.add_argument('--output',type=Path,default=Path('apps/web/public'));p.add_argument('--packs-dir',type=Path)
+    schemas=publish.add_parser('schemas',help='Write the preview field schemas and the merged coverage snapshot the public build needs (a maintainers\' step; commit the result)')
+    schemas.add_argument('--output',type=Path,default=Path('examples/public-schema'))
     doctor=sub.add_parser('doctor')
     doctor.add_argument('--probe-provider',action='append',default=[],metavar='ID',help='Check a selected configured endpoint with a generated benign text probe; sends no dataset contents and downloads no files')
     args=parser.parse_args(argv);root=args.root.resolve()
@@ -339,6 +341,12 @@ def main(argv=None):
                         issues.append(f'Provider {identity} connection check failed: {exc}')
             emit({'workspace':str(root),'writable':os.access(root,os.W_OK),'datasets':len(datasets),'your_datasets':user,'free_bytes':free,'dependencies':checks,'frontend_built':frontend,'issues':issues,'providers':provider_checks,'downloads':0})
             if issues:return 1
+        elif args.command=='publish' and args.action=='schemas':
+            from dataset_atlas.exports.guide import write_coverage,write_schemas
+            from dataset_atlas.registry import Registry
+            registry=Registry(root)
+            written=write_schemas(registry,root/args.output)
+            emit({'schemas_written':len(written),'coverage_entries':write_coverage(registry,root/args.output),'output':str(args.output)})
         elif args.command=='publish':
             from dataset_atlas.exports import build_publication,validate_publication
             if args.profile!='public':raise ValueError('Only explicitly configured public profile is available')

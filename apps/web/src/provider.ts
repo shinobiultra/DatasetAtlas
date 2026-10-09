@@ -18,6 +18,16 @@ export type AggregateResponse = {
   count_status: string; results: AggregateResult[]; sampling_applied: boolean; warnings: string[]
 }
 
+/** What a visitor can do about one dataset, from the public build's guide.json (never record content). */
+export type HowToGet = { state: string; summary: string; commands?: string[]; command_notes?: string[] }
+export type GuidePaper = { paper_id: string; title?: string; year?: string; doi?: string; url?: string }
+export type GuideField = { id: string; name: string; namespace: string; dtype: string; unit: string; description?: string; values?: Array<string | number | boolean> }
+export type GuideSchema = {
+  snapshot_id?: string | null; release?: string | null; unit: string; preview_count?: number | null; total_count?: number | null; population_scope: string
+  field_count: number; fields_truncated: boolean; sampling: Record<string, unknown>; fields: GuideField[]
+}
+export type GuideEntry = { how_to_get: HowToGet; papers: GuidePaper[]; schema?: GuideSchema }
+
 export interface DataProvider {
   readonly mode: 'static' | 'workbench'
   capabilities(): Promise<Capabilities>
@@ -52,6 +62,8 @@ export interface DataProvider {
   conversation(id: string): Promise<Record<string, unknown>>
   similarity(datasetId: string, body: Record<string, unknown>): Promise<Record<string, unknown>>
   thumbnails(): Promise<Thumbnails>
+  /** Static builds only: the public guide entry for a dataset, or null (a workbench has the live dataset page instead). */
+  guide(id: string): Promise<GuideEntry | null>
   aggregate(datasetId: string, query: Query, fieldIds: string[], top?: number): Promise<AggregateResponse>
 }
 
@@ -100,7 +112,18 @@ export class StaticDataProvider implements DataProvider {
   /** In-flight requests are shared so a screen opening several panels fetches once. */
   private pending = new Map<string, Promise<Pack>>()
   private thumbs?: Promise<Thumbnails>
+  private guides?: Promise<Record<string, GuideEntry>>
 
+  async guide(id: string): Promise<GuideEntry | null> {
+    this.guides ??= (async () => {
+      try {
+        const document = await responseJson<{ schema_version?: string; datasets?: Record<string, GuideEntry> }>(publicUrl('data/guide.json'))
+        checkMajor(document, 'Public guide')
+        return document.datasets ?? {}
+      } catch { return {} }
+    })()
+    return (await this.guides)[id] ?? null
+  }
   async capabilities(): Promise<Capabilities> { return { mode: 'static', operations: ['catalogue', 'query', 'selection', 'export', 'artifacts'], api_version: '1' } }
   async datasets(): Promise<Dataset[]> {
     if (!this.catalogue) {
@@ -251,6 +274,7 @@ export class WorkbenchDataProvider implements DataProvider {
   conversation(id: string): Promise<Record<string, unknown>> { return get(`/conversations/${encodeURIComponent(id)}`) }
   similarity(datasetId: string, body: Record<string, unknown>): Promise<Record<string, unknown>> { return post(`/similarity/${encodeURIComponent(datasetId)}`, body) }
   private thumbs?: Promise<Thumbnails>
+  async guide(): Promise<GuideEntry | null> { return null }
   thumbnails(): Promise<Thumbnails> {
     this.thumbs ??= get<{ datasets?: Thumbnails }>('/catalogue/thumbnails').then(document => document.datasets ?? {}).catch(() => ({}))
     return this.thumbs

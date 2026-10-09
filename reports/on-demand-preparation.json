@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-09T03:16:02.342706+00:00",
+  "checked_at": "2026-10-09T03:48:49.633700+00:00",
   "datasets": [
     {
       "dataset_id": "agent-security-bench",
@@ -902,6 +902,16 @@
       "prepared_receipt": "work/prepared/mmstar/575b7bceafdb3600130af8c38d7b1329d97167c7983ff0945f4e882bfec813f8/receipt.json"
     },
     {
+      "dataset_id": "multitrust",
+      "release": "multitrust-84dc74754959e9f52b67c5185700f4f7fcd8c4df",
+      "snapshot_id": "multitrust-84dc74754959-q62-899310f6c6f9249f",
+      "records": 11512,
+      "preview_records": 100,
+      "scope": "Every row of the query files the authors loaders read from the gated Hugging Face dataset thu-ml/MultiTrust at revision 84dc74754959e9f52b67c5185700f4f7fcd8c4df (10,549 files, 11.31 GB; the card states CC BY-SA 4.0 with an access agreement for non-commercial academic use and no redistribution). It is a suite of heterogeneous tasks, not one image collection: truthfulness 25 tasks, safety 7, robustness 6, fairness 5, privacy 7. Rows are joined to images only by a key in the query file, a derived key or an ordinal the authors loader applies; images that the loaders pair at run time (random pick, os.listdir order, cross product), image-only tasks and shared pools are listed in reports/multitrust-task-inventory-20261009.json and not attached to a row. The enron-email k-shot table is not a query file and is not indexed. This is the authors current release, not the population or the transfer-attack examples a citing paper generated with the framework.",
+      "plan_id": "3ec9112f05191b15d6c22c22baa2eee3a4961b75b5ff7a1f64bc4fd13f96e012",
+      "prepared_receipt": "work/prepared/multitrust/3ec9112f05191b15d6c22c22baa2eee3a4961b75b5ff7a1f64bc4fd13f96e012/receipt.json"
+    },
+    {
       "dataset_id": "mvbench-scene-qa",
       "release": "author-scene-qa-230a2d4fac8900333c61754641c7a13e069ac9c6",
       "snapshot_id": "mvbench-scene-qa-f470f9c1c599a80dfa0ee443",
@@ -1642,10 +1652,10 @@
       "prepared_receipt": "work/prepared/zerobench/52f78e2061f5dc857ac3bc5ca9ab8fca477a9799059f7596a69255451172027e/receipt.json"
     }
   ],
-  "catalogue_entries": 284,
-  "with_previews": 219,
-  "without_previews": 65,
-  "full_population_indices": 217,
+  "catalogue_entries": 287,
+  "with_previews": 220,
+  "without_previews": 67,
+  "full_population_indices": 218,
   "all_requested_datasets_complete": false,
   "note": "Acquired source populations and on-demand infrastructure; catalogue-wide coverage is not complete."
 }

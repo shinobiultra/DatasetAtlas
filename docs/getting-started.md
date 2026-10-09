@@ -35,7 +35,7 @@ Some source formats need acquisition extras: `uv sync --extra datasets --extra r
 
 ## What a fresh workspace contains
 
-The catalogue: 333 datasets and benchmarks with their provenance, access and rights state. It does **not** contain the data. Each dataset says plainly what you can do with it:
+The catalogue: 287 datasets and benchmarks with their provenance, access and rights state. It does **not** contain the data. Each dataset says plainly what you can do with it:
 
 | State | Meaning |
 | --- | --- |

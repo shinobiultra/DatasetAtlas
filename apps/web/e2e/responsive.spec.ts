@@ -32,7 +32,7 @@ for (const width of [304, 390, 820]) {
 }
 
 test('metadata-only entries can open and close their full source record', async ({ page }) => {
-  await page.goto('/#/dataset/imagenet')
+  await page.goto('/#/dataset/facet')
   await expect(page.getByText('No inspectable examples here yet.')).toBeVisible()
   await page.getByRole('button', { name: 'Open full record' }).click()
   await expect(page.getByRole('complementary', { name: 'About dataset' })).toBeVisible()

@@ -15,15 +15,15 @@ These are decisions for a person. Nothing in this file changes any registry reco
 
 ## Summary
 
-99 entries in 96 groups; 2 groups hold more than one entry.
+102 entries in 98 groups; 3 groups hold more than one entry.
 
-Blocker types: `identity` 75, `access` 7, `unreleased` 16, `source_availability` 1, `adapter` 0.
+Blocker types: `identity` 78, `access` 7, `unreleased` 16, `source_availability` 1, `adapter` 0.
 
-Preview states of the entries: `none` 54, `complete_target` 45.
+Preview states of the entries: `none` 56, `complete_target` 46.
 
-Retired ids (no group in the registry produces these keys any more, for example because a person resolved all its members or its group was merged or split; each id stays reserved and is never reused): IR-002 (`artbench-2`), IR-009 (`cc3m`), IR-011 (`cifar-10`), IR-015 (`concept-editing-dataset`), IR-016 (`contrastive-prompts`), IR-019 (`cub-200-2011`), IR-020 (`custom-dataset`), IR-021 (`custom-image-editing-dataset`), IR-023 (`custom-speech-segment-collection`), IR-025 (`dall-e-generated-target-images`), IR-039 (`gaussian-rubbish-examples`), IR-040 (`gda-adversarial-image-variants`), IR-041 (`gpt-4v-filtered-vl-gender-subset`), IR-044 (`hc-bench`), IR-049 (`illusionvqa`), IR-050 (`imagenet|imagenet-1k|imagenet-ilsvrc-2012`), IR-053 (`laion-aesthetics`), IR-059 (`mnist`), IR-061 (`ostris-dataset`), IR-088 (`perturbed-gender-benchmark-image-variants`), IR-096 (`sbbench|sbbench-syn|sbbench-syn-crop`), IR-112 (`visual-counterfact-filtered-467`), IR-114 (`vl-gender`), IR-116 (`vqa-v2`).
+Retired ids (no group in the registry produces these keys any more, for example because a person resolved all its members or its group was merged or split; each id stays reserved and is never reused): IR-002 (`artbench-2`), IR-009 (`cc3m`), IR-011 (`cifar-10`), IR-015 (`concept-editing-dataset`), IR-016 (`contrastive-prompts`), IR-019 (`cub-200-2011`), IR-020 (`custom-dataset`), IR-021 (`custom-image-editing-dataset`), IR-023 (`custom-speech-segment-collection`), IR-025 (`dall-e-generated-target-images`), IR-039 (`gaussian-rubbish-examples`), IR-040 (`gda-adversarial-image-variants`), IR-041 (`gpt-4v-filtered-vl-gender-subset`), IR-049 (`illusionvqa`), IR-050 (`imagenet|imagenet-1k|imagenet-ilsvrc-2012`), IR-059 (`mnist`), IR-061 (`ostris-dataset`), IR-088 (`perturbed-gender-benchmark-image-variants`), IR-096 (`sbbench|sbbench-syn|sbbench-syn-crop`), IR-112 (`visual-counterfact-filtered-467`), IR-114 (`vl-gender`), IR-116 (`vqa-v2`).
 
-Groups with more than one entry: IR-014 (3), IR-095 (2).
+Groups with more than one entry: IR-014 (3), IR-044 (2), IR-095 (2).
 
 ### Groups
 
@@ -59,18 +59,20 @@ Groups with more than one entry: IR-014 (3), IR-095 (2).
 | IR-038 | `food101` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-042 | `group-labels` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-043 | `gvil-paired-illusion-images` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
+| IR-044 | linked to `hc-bench` | 2 | none 2 | `hc-bench` (local_only) | `alias_of:hc-bench`, `distinct_release`, `keep_candidate` |
 | IR-045 | `hellaswag-pro` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-046 | `ictcf` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-047 | `illusionbench` | 1 | none 1 | `illusionbench-3c643c29` (complete_target) | `alias_of:illusionbench-3c643c29`, `distinct_release`, `keep_candidate` |
 | IR-048 | `illusionmnist` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-051 | `itac` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-052 | `laion` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
+| IR-053 | `laion-aesthetics` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-054 | `llava-instruct-150k-3a74a703` | 1 | complete_target 1 | `llava-instruct-150k` (complete_target) | `alias_of:llava-instruct-150k`, `distinct_release`, `keep_candidate` |
 | IR-055 | `middlebury` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-056 | `mit-states` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-057 | `mma-diffusion` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-058 | `mmstar` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-060 | `multitrust` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
+| IR-060 | `multitrust` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-062 | `paper-08e415961919a492-unnamed-11-image-inpainting-set` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-063 | `paper-08e415961919a492-unnamed-real-noise-benchmark-46` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-064 | `paper-12e8bd34b4a2f2a8-unnamed-harmful-instruction-evaluation-set` | 1 | none 1 | no link | `accept_unreleased_custom_record`, `keep_candidate` |
@@ -847,6 +849,7 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   > The authors' repository (kshitishghate/bias_prop) releases only Data/template_and_group_words.json (3 templates, a 6-item prompt template list, 24 gender words, 36 race words and smaller subsets); the 864-phrase list itself and the code that builds it are not released ('will be added' per its README).
   > 24 gender words x 36 race words = 864 matches the paper's count, but the paper's exact phrase construction is not in the repository, so Atlas does not generate the list and present it as the released data.
   > The released word lists are a vocabulary resource, not a population of examples; no preview was prepared.
+  > Checked 2026-10-09: the author repository is unchanged (HEAD c0e4a922124d); the 864-phrase list is still not a file anywhere in it. External blocker (the list is not released), not an implementation gap; the released 60-word vocabulary is a different population.
 - Mentioned by 1 paper:
   - `paper-164d7c221452ffec`, page 4, role: direct lexical source
     > 000 words Valenced Text SC-EAT Valence ratings of retrieved text Group Labels 864 phrases Group-based text in SC-EAT Group representation in retrieved text Chicago Face Database (
@@ -872,6 +875,46 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Mentioned by 1 paper:
   - `paper-b039401c04ff9b91`, page 4, role: derived collection
     > ure 3, each question The statistics of our dataset is shown in Table 2. concerns a pair of images (IMG1 and IMG2). One Note that since this dataset is only used for the eval- image (IMG1) is illusion…
+
+## IR-044 · 2 entries linked to `hc-bench`
+
+**Group key:** `hc-bench` · **Entries:** 2 · **Blocker types:** `identity` 2
+
+**Linked to:**
+
+- `hc-bench` (identity `resolved`, preview `local_only`) via `same_source_family_as` and `source_subset_of` — prepared
+
+**Decision needed.** A person decides, for each of the 2 entries below, which option applies; until then it stays a candidate. The registry links these entries to `hc-bench`. The options are `alias_of:hc-bench` (the paper's name is another name for that entry), `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open); each entry offers only the alias options for the targets it links to. A prepared preview exists for `hc-bench`; the paper's exact release is unresolved, so no entry here inherits it, and an entry whose preview is `none` stays `none`.
+
+**Options:** `alias_of:hc-bench`, `distinct_release`, `keep_candidate`
+
+### `paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-collection` — unnamed internet hidden-content collection
+
+- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
+- Blocker type: **identity**. The registry links this entry to `hc-bench` (identity `resolved`, preview `local_only`) via `same_source_family_as` and `source_subset_of`. The exact release, variant or subset the paper used is not human-verified.
+- Options: `alias_of:hc-bench`, `distinct_release`, `keep_candidate`
+- Registry links: `same_source_family_as` → `hc-bench`; `source_subset_of` → `hc-bench`
+- Registry identity audit: `author_release_identified_version_drift` (2026-10-08).
+- Registry blockers:
+  > Original release identity and rights need verification.
+  > Adapter and preview are not implemented.
+- Mentioned by 1 paper:
+  - `paper-2c07a8c6af8e33c2`, page 8, role: evaluation
+    > 6.23+96.23 D EEP S EEK -VL2 0 0 0 0 84.90+84.90 Table 5: Validation of task difficulty on 53 internet-sourced hidden-content images, collected independently to reduce dataset-specific noise and biase…
+
+### `paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-set` — unnamed internet hidden-content set
+
+- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
+- Blocker type: **identity**. The registry links this entry to `hc-bench` (identity `resolved`, preview `local_only`) via `same_source_family_as` and `source_subset_of`. The exact release, variant or subset the paper used is not human-verified.
+- Options: `alias_of:hc-bench`, `distinct_release`, `keep_candidate`
+- Registry links: `same_source_family_as` → `hc-bench`; `source_subset_of` → `hc-bench`
+- Registry identity audit: `author_release_identified_version_drift` (2026-10-08).
+- Registry blockers:
+  > Original release identity and rights need verification.
+  > Adapter and preview are not implemented.
+- Mentioned by 1 paper:
+  - `paper-2c07a8c6af8e33c2`, page 8, role: independent validation collection
+    > 0 84.90+84.90 Table 5: Validation of task difficulty on 53 internet-sourced hidden-content images, collected independently to reduce dataset-specific noise and biases. Failure case analysis. Rare err…
 
 ## IR-045 · HellaSwag-Pro
 
@@ -1020,6 +1063,30 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
     > LAION, CelebA, ImageNetVal (Parekh et al., 2024) DePALM (CLIP+OPT)
 
+## IR-053 · LAION Aesthetics
+
+**Group key:** `laion-aesthetics` · **Entries:** 1 · **Blocker types:** `identity` 1
+
+**Linked to:** nothing.
+
+**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
+
+**Options:** `distinct_release`, `keep_candidate`
+
+### `laion-aesthetics` — LAION Aesthetics
+
+- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
+- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
+- Options: `distinct_release`, `keep_candidate`
+- Registry identity audit: `derived_subset_family_identified_variant_unresolved` (2026-10-08).
+- Registry blockers:
+  > Original release identity and rights need verification.
+  > Adapter and preview are not implemented.
+  > 2026-10-08 public-page reading: the Hugging Face laion/laion2B-en-aesthetic metadata is gated behind a contact-information agreement (not accepted by the agent), and which aesthetic subset the paper used is not stated.
+- Mentioned by 1 paper:
+  - `paper-ebd63da316af82e5`, page 3, role: source data
+    > tion for inversion initial- ization. In practice, we used images from LAION Aesthetics (a subset of LAION-5B [32]). This data serves two purposes: (i) training INRs for initializing text-to-image
+
 ## IR-054 · LLaVA_Instruct_150k, linked to `llava-instruct-150k`
 
 **Group key:** `llava-instruct-150k` · **Entries:** 1 · **Blocker types:** `identity` 1
@@ -1142,21 +1209,22 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 
 **Linked to:** nothing.
 
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open). For `multitrust` (access `gated`) the blocker is access, a user action such as a request, terms or credentials, not identity; the identity decision can be taken independently.
+**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open). `multitrust` already has a prepared preview of its own, yet the identity is still a candidate: the preview does not settle which release the paper used. For `multitrust` (access `gated`) the blocker is access, a user action such as a request, terms or credentials, not identity; the identity decision can be taken independently.
 
 **Options:** `distinct_release`, `keep_candidate`
 
 ### `multitrust` — MultiTrust
 
-- State: access `gated`, adapter `not_started`, preview `none`, identity `candidate`.
+- State: access `gated`, adapter `tested`, preview `complete_target`, identity `candidate`.
 - Blocker type: **access**. Access is `gated`: getting the data needs a request, terms or credentials, which is a user action. The identity decision is separate from it.
 - Options: `distinct_release`, `keep_candidate`
 - Registry identity audit: `author_benchmark_page_located` (2026-09-22).
 - Registry blockers:
-  > Hugging Face thu-ml/MultiTrust (CC BY-SA 4.0, auto-gated: each researcher accepts the terms on their own account) holds 10,549 files across five trustworthiness aspects with task-specific formats.
-  > A suite of heterogeneous tasks, not one homogeneous collection: it needs per-task adapters, an implementation gap rather than an access block.
-  > The citing paper uses the MultiTrust framework for transfer attacks, so the examples a researcher would want are those it generated, which were not located.
-  > Checked 2026-10-08 with the researcher's configured local Hugging Face credentials: a HEAD of one data file and auth_check both answered HTTP 403 GatedRepo, so the account has not been granted access, and the file listing noted on 2026-10-06 does not show otherwise. Access requires the researcher to accept the terms on their own account; until then no inventory, adapter or preview exists.
+  > Hugging Face thu-ml/MultiTrust (CC BY-SA 4.0 per the card, auto-gated) requires each researcher to accept its terms on their own account; they allow non-commercial academic use only and forbid distributing any part of the dataset. Checked 2026-10-08 with the researcher's configured credential: auth_check and a HEAD of one data file answered HTTP 403 GatedRepo (the 10,549-file listing noted on 2026-10-06 does not show that access was ever granted). The researcher has since accepted the terms on their own account and on 2026-10-09 auth_check succeeded, so this workspace can read the release; a colleague must accept the terms themselves, and Atlas never accepts them for anyone.
+  > A suite of heterogeneous tasks, not one homogeneous collection: 11,512 query rows of 50 member tasks in five aspects, read from 62 query files in six layouts. Each record is one query row; image-only tasks (450 images of the NSFW, risk-identification and stereo-generation tasks), shared image pools and pairings that the authors loaders make at run time (random pick, directory order, cross product) are counted in the task inventory and not joined to a row; the k-shot Enron table is not a query file and is not indexed.
+  > Component source datasets (for example the VizWiz-Priv, VISPR, AdvGLUE, MM-SafetyBench, SafeBench and RealToxicityPrompts folders that the file names and the authors loaders name) keep their own licences and the authors state they do not own the image copyrights, so rights stay not_reviewed and the records and 100 preview originals are local only; the access terms forbid redistribution.
+  > The citing papers use the MultiTrust framework for transfer attacks (ensemble SSA-CWA adversarial examples), so the examples a researcher would want are those they generated, which were not located; this entry is the authors current release at one pinned revision, not the corpus-used population, and identity stays candidate.
+  > Images stay remote: all 12,566 image references of the rows were found in the pinned listing (none absent), but only the 100 preview originals were fetched and checked against their pinned hashes; the rest are fetched one at a time on request. 57 images exceed 10 MB (the largest is 51.9 MB); one of them was served whole by the media route in the live check, the others were not tried.
 - Mentioned by 2 papers:
   - `paper-392b0c393c06b48e`, page 26, role: transfer-attack framework
     > Ensemble-based Transfer Attacks We further evaluate MLLM robustness using the MultiTrust benchmarking framework [68], which employs ensemble-based SSA-CWA attacks to generate highly transferable adve…
@@ -1182,6 +1250,7 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Registry blockers:
   > Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.
   > Adapter and preview are not implemented.
+  > Checked 2026-10-09: the author repository (pinned at 042e0d4c1e93) does not contain the 11-image inpainting set (1 of 11 names at HEAD, 2 of 11 in history; three differently named inpainting images). External blocker: no pinnable public file carries the population. Not an implementation gap, and no integration was made.
 - Mentioned by 1 paper:
   - `paper-08e415961919a492`, page 12, role: evaluation
     > Dmitry Ulyanov et al. Barbara Boat House Lena Peppers C.man Couple Finger Hill Man Montage Papyan et al. 28.14 31.44 34.58 35.04
@@ -1454,6 +1523,7 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Registry blockers:
   > Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.
   > Adapter and preview are not implemented.
+  > Checked 2026-10-09: the VMA repository (pinned at 53e6943112a7) holds no list or copy of the 874 Van Gogh paintings (the only data file is a 167-byte one-element data.json). External blocker: the sample is not released as files. Not an implementation gap.
 - Mentioned by 1 paper:
   - `paper-944952997d24ce45`, page 9, role: source data
     > nonsensical outputs. To validate the effectiveness of VMA, we sample 874 publicly available Van Gogh paintings. We ask VLMs to describe these images and define random token sequences as targe
@@ -1477,6 +1547,7 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Registry blockers:
   > Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.
   > Adapter and preview are not implemented.
+  > Checked 2026-10-09: the VMA repository (pinned at 53e6943112a7) holds a one-element data.json (167 bytes) and 18 image files, not the 1,000 sampled triplets or their 1,000-triplet pool. External blocker: the triplets are not released as files. Not an implementation gap.
 - Mentioned by 1 paper:
   - `paper-944952997d24ce45`, page 6, role: derived collection
     > f VLMs, We construct an evaluation candidate pool by randomly pairing 1, 000 distinct prompts, images, and target outputs. Then, we randomly sample 1, 000 text-image input-output pairs for evaluation…
@@ -1545,6 +1616,7 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Registry blockers:
   > Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.
   > Adapter and preview are not implemented.
+  > Checked 2026-10-09: the author repository (pinned at 6927944a93f5) contains no sea-otter image and no 30-image sample; its 21 PNGs are demo figures. External blocker: the sample is not released as files. Not an implementation gap.
 - Mentioned by 1 paper:
   - `paper-959e8fc51787f7e4`, page 7, role: evaluation
     > offer a clearer picture of the compu- on a curated, small dataset of 30 sea otter images signifi- tational structure supporting vision-language reasoning. cantly increased the feature’s interpretabi
@@ -2088,6 +2160,7 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Registry blockers:
   > Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.
   > Adapter and preview are not implemented.
+  > Checked 2026-10-09: the neuroprocdata repository (pinned at 3d7a1f067a34) holds only a README and three notebooks; the seven S3 objects its notebooks name all return 403 AccessDenied (2026-10-09), and its README says the data is 'not public yet'. External blocker (access denied / unreleased), not an implementation gap. The full time series (20 GB+ gzipped by the README's account) would in any case exceed the per-dataset 500 MB preparation cap.
 - Mentioned by 1 paper:
   - `paper-ad50206beabc5a94`, page 18, role: derived collection
     > ior were simulated for each game, resulting in over 250 frames per game. Lesion studies Whole-circuit simulation
@@ -2248,6 +2321,7 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   > No release located: the paper (arXiv 2602.01816) says its data and code 'will be released'; no repository or dataset link was found on 2026-10-06.
   > Hugging Face MCG-NJU/VIABench and Riverlu/VIABench are a DIFFERENT benchmark (VIABench, arXiv 2607.14660: videos from blind individuals). They share a name only and must not be attached to this entry.
   > Adapter and preview are not implemented because there is no data to adapt.
+  > Checked 2026-10-09 (repeat of 2026-10-06): arXiv still has only v1 with 'will be released'; no Hugging Face dataset or GitHub repository carries arXiv 2602.01816. External blocker (unreleased); the VIABench name collision still stands.
 - Mentioned by 1 paper:
   - `paper-20de77d4e60fd1bd`, page 1, role: introduction
     > mmon-sense priors. To stimuli. Our findings reveal a fundamental diver- address this gap, we introduce VIA-Bench, a gence between machine and human perception, challenging benchmark designed to probe…

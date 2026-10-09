@@ -1,6 +1,6 @@
 # Dataset Atlas roadmap and closeout
 
-Updated 2026-10-07. SPEC.md remains the acceptance contract. Current coverage is **333 catalogue entries, 218 prepared previews, 21,332 real preview records, 216 indices for explicitly declared native populations, and 115 entries without previews**. `full_v1_complete` remains false. A prepared native release does not resolve an unidentified historical paper subset.
+Updated 2026-10-09. SPEC.md remains the acceptance contract. Current coverage is **287 catalogue entries, 220 prepared previews, 21,532 real preview records, 218 indices for explicitly declared native populations, and 67 entries without previews**. The catalogue lists only real datasets: aliases and views of other datasets were removed on 2026-10-09 on the researcher's instruction (see [dispositions](registry/candidate_dispositions.yaml)). `full_v1_complete` remains false. A prepared native release does not resolve an unidentified historical paper subset.
 
 ## Current implementation and evidence
 
@@ -33,6 +33,26 @@ The six media integrations pass complete native-index and retained-original veri
 | Packaging/publication/limitations | Current release artifacts, approved static bundle and independent 6.1 Sol review are tracked in final receipts | Catalogue-wide acceptance and broad redistribution remain incomplete; remote deployment was not requested |
 
 PATA now opens directly in complete scope with no preview-pack request. All 4,934 native label/URL rows and 24 caption objects are preserved and exhaustively compared with the canonical index. A separate empty-workspace run reproduced the exact snapshot; it does not increase the 84 verified preview recipe count. [PATA evidence](reports/pata-native-metadata-integration-final-20261007.json).
+
+## 2026-10-09 pass: what finished
+
+Executed by Sonnet 5.5 delegates and a separate Sonnet 5.5 reviewer (`AGENTS.md` names `gpt-6.1-sol`, which this harness cannot select; the user substituted Sonnet 5.5 on 2026-10-08). A same-family reviewer is not human acceptance; [review brief](reports/independent-review-brief-20261009.md).
+
+- **Catalogue holds only real datasets.** On the researcher's instruction, 49 entries that are aliases, views or subsets of another dataset, platforms (Brain-Score, RobustBench) or generic labels that name no dataset moved to `registry/excluded/`, each with a record in [`candidate_dispositions.yaml`](registry/candidate_dispositions.yaml). Entries with their own prepared data stayed (for example `coco-one`, `coco-two`, `restricted-imagenet`); so did the 17 unreleased paper-private sets, which are real data nobody can fetch. This answered the family and alias decisions of the [identity review queue](reports/identity_review_queue.md), now 102 entries in 98 decisions; whether a paper used a given release is still a human decision. Three entries excluded by mistake were restored after review.
+- **BBQ-V** (`sbbench`): all 54,414 rows indexed from remote Parquet footers, 100 original preview images, originals read beyond row 100; 0.97 GB moved, shards stay remote ([receipt](reports/bbq-v-live-verification-20261008.json)). Which of its four overlapping file groups the paper cites as SBBench is not established.
+- **MultiTrust**: one record for the heterogeneous suite, 11,512 query rows from 62 query files and 50 member tasks, 10,464 images kept remote behind a hash-pinned inventory, 100 preview rows with 112 original files; 0.14 GB moved ([receipt](reports/multitrust-live-verification-20261009.json)). The preview is a seeded cluster sample; its five aspects are checked present, not guaranteed. The authors' generated attack examples that the citing papers used were not located.
+- **Seven GitHub-hosted paper datasets** (inpainting images, Van Gogh sample, VMA triplets, sea-otter images, transistor traces, VIA-Bench, group labels): the populations are not released as pinnable files, so nothing was integrated; dated evidence is on each entry ([probe](reports/github-sources-probe-20261009.json)).
+- **Acceptance matrix** for SPEC §22.1: 16 rows, automated checks pass ([matrix](reports/acceptance_matrix.md)); not human acceptance. It found one gap, fixed: overlay joins silently dropped results for records absent from the pack, and now count them.
+- **GitHub Pages edition**: the static site shows the merged coverage of prepared datasets, a computed how-to-get card, preview field schemas without record values, and the papers that name each dataset. Plan, size budget (31.7 MB) and deploy steps: [docs/github-pages.md](docs/github-pages.md). **Not deployed**: that needs your decision.
+- **Verification on this tree**: Python 3.12 1,450 passed / 2 skipped; Python 3.14.2 1,447 passed / 5 skipped; 28 frontend tests; browser suite 69 passed and 3 opt-in specs skipped with the local Ollama model as the only model server; complete-index smoke 218 of 218; preview-media smoke 220 datasets, 513 assets, 0 failures; clean installs of the rebuilt wheel on Python 3.12 and 3.14.2 pass.
+
+Still open:
+
+- **Storage is 123.6 GB against the 100 GB target** (ceiling 150 GB holds). Nothing was deleted: the [reclaim plan](reports/storage-reclaim-plan-20261009.md) finds 2.2 GB of idle caches (its command is also gated by the permission classifier here), 8.8 GB that are not retrievable, and 47.7 GB with active readers. Closing the gap means retiring re-downloadable archives dataset by dataset (`atlas storage index-original`, then `retire-original`), which trades offline retrievability for space. That decision is yours.
+- **Remaining 67 entries without a preview**: unreleased (17), gated or request-only releases, unverified sources, host outages, and entries needing a human identity decision. Their blockers are on each entry.
+- **Human review**: the 98 identity decisions, publication rights beyond CLEVR, PAIRS and EuroSAT, and the gates (FACET, TIMIT/LDC, PhysioNet and others) are the researcher's.
+- **Reproducibility report** (`reports/preview-reproducibility.md`) is dated 2026-10-07 and was not regenerated; BBQ-V and MultiTrust were verified in the maintainer workspace only, not from an empty one.
+- `full_v1_complete` remains false.
 
 ## 2026-10-08 pass: state at stop
 

@@ -417,7 +417,7 @@ def test_outer_preparation_process_group_stop_includes_inert_worker(tmp_path):
     def alive(pid):
         path=Path('/proc')/str(pid)/'stat'
         try:return path.read_text().split(') ')[1].split()[0]!='Z'
-        except FileNotFoundError:return False
+        except (FileNotFoundError,ProcessLookupError):return False  # a process that exits mid-read raises ESRCH
     try:
         deadline=time.monotonic()+5
         while not pid_file.exists() and time.monotonic()<deadline:time.sleep(.01)

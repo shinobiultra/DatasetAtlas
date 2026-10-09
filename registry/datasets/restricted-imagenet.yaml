@@ -58,10 +58,6 @@ evidence:
   note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in at least one record.
     Not inferred from the name or description.'
 source_url: https://github.com/MadryLab/robustness/blob/master/robustness/datasets.py
-relationships:
-- type: same_source_family_as
-  target_id: imagenet
-  status: asserted_from_source_review
-  scope: Restricted ImageNet super-class grouping derived from ILSVRC.
+relationships: []
 modalities:
 - image

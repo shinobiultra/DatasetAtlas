@@ -15,81 +15,62 @@ These are decisions for a person. Nothing in this file changes any registry reco
 
 ## Summary
 
-145 entries in 120 groups; 10 groups hold more than one entry.
+99 entries in 96 groups; 2 groups hold more than one entry.
 
-Blocker types: `identity` 117, `access` 11, `unreleased` 16, `source_availability` 1, `adapter` 0.
+Blocker types: `identity` 75, `access` 7, `unreleased` 16, `source_availability` 1, `adapter` 0.
 
-Preview states of the entries: `none` 100, `complete_target` 45.
+Preview states of the entries: `none` 54, `complete_target` 45.
 
-Retired ids: none.
+Retired ids (no group in the registry produces these keys any more, for example because a person resolved all its members or its group was merged or split; each id stays reserved and is never reused): IR-002 (`artbench-2`), IR-009 (`cc3m`), IR-011 (`cifar-10`), IR-015 (`concept-editing-dataset`), IR-016 (`contrastive-prompts`), IR-019 (`cub-200-2011`), IR-020 (`custom-dataset`), IR-021 (`custom-image-editing-dataset`), IR-023 (`custom-speech-segment-collection`), IR-025 (`dall-e-generated-target-images`), IR-039 (`gaussian-rubbish-examples`), IR-040 (`gda-adversarial-image-variants`), IR-041 (`gpt-4v-filtered-vl-gender-subset`), IR-044 (`hc-bench`), IR-049 (`illusionvqa`), IR-050 (`imagenet|imagenet-1k|imagenet-ilsvrc-2012`), IR-053 (`laion-aesthetics`), IR-059 (`mnist`), IR-061 (`ostris-dataset`), IR-088 (`perturbed-gender-benchmark-image-variants`), IR-096 (`sbbench|sbbench-syn|sbbench-syn-crop`), IR-112 (`visual-counterfact-filtered-467`), IR-114 (`vl-gender`), IR-116 (`vqa-v2`).
 
-Groups with more than one entry: IR-014 (14), IR-019 (2), IR-032 (2), IR-034 (2), IR-037 (2), IR-044 (2), IR-050 (5), IR-059 (2), IR-095 (2), IR-096 (2).
+Groups with more than one entry: IR-014 (3), IR-095 (2).
 
 ### Groups
 
 | IR | Group | Entries | Preview states | Prepared target | Options |
 | --- | --- | --- | --- | --- | --- |
 | IR-001 | `agent-security-bench` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-002 | `artbench-2` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-003 | `artchive` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-004 | `asteroids-rom` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-005 | `bam-fg` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-006 | `bapps` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-007 | `brca` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-008 | `causalgym` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-009 | `conceptual-captions` | 1 | none 1 | `cc3m` (complete_target) | `alias_of:cc3m`, `distinct_release`, `keep_candidate` |
 | IR-010 | `child-safety-intents` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-011 | `cifar-2` | 1 | none 1 | `cifar-10` (complete_target) | `alias_of:cifar-10`, `distinct_release`, `keep_candidate` |
 | IR-012 | `cifar-100-c` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-013 | `cinic-10` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-014 | linked to `coco`, `coco-one`, `coco-two`, `cocogender` | 14 | none 11, complete_target 3 | `coco` (complete_target), `coco-one` (complete_target; also in this queue), `coco-two` (complete_target; also in this queue), `cocogender` (complete_target; also in this queue) | `alias_of:coco`, `alias_of:coco-one`, `alias_of:coco-two`, `alias_of:cocogender`, `distinct_release`, `keep_candidate` |
-| IR-015 | `concept-editing-dataset` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-016 | `contrastive-prompts` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
+| IR-014 | linked to `coco` | 3 | complete_target 3 | `coco` (complete_target) | `alias_of:coco`, `distinct_release`, `keep_candidate` |
 | IR-017 | `controlled-clevr` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-018 | `controlled-images` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-019 | linked to `cub-200-2011` | 2 | none 2 | `cub-200-2011` (complete_target) | `alias_of:cub-200-2011`, `distinct_release`, `keep_candidate` |
-| IR-020 | `custom-dataset` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-021 | `custom-image-editing-dataset` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-022 | `custom-neonatal-rat-ganglion-recordings` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-023 | `custom-speech-segment-collection` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-024 | `custom-ternus-psychophysics-responses` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-025 | `dall-e-generated-target-images` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-026 | `deepfashion` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-027 | `donkey-kong-rom` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-028 | `e-ic` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-029 | `e-vqa` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-030 | `emoset` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-031 | `factoid` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-032 | linked to `fairface`, `miap`, `phase` | 2 | none 1, complete_target 1 | `fairface` (complete_target), `miap` (complete_target), `phase` (complete_target) | `alias_of:fairface`, `alias_of:miap`, `alias_of:phase`, `distinct_release`, `keep_candidate` |
+| IR-032 | `openimages` | 1 | complete_target 1 | `miap` (complete_target) | `alias_of:miap`, `distinct_release`, `keep_candidate` |
 | IR-033 | `ffhq` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-034 | linked to `fgvc-aircraft` | 2 | none 1, complete_target 1 | `fgvc-aircraft` (complete_target; also in this queue) | `alias_of:fgvc-aircraft`, `distinct_release`, `keep_candidate` |
+| IR-034 | `fgvc-aircraft` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-035 | `finevision` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-036 | `first-person-social-interactions-dataset` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-037 | linked to `flowers102` | 2 | none 1, complete_target 1 | `flowers102` (complete_target; also in this queue) | `alias_of:flowers102`, `distinct_release`, `keep_candidate` |
+| IR-037 | `flowers102` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-038 | `food101` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-039 | `gaussian-rubbish-examples` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-040 | `gda-adversarial-image-variants` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-041 | `gpt-4v-filtered-vl-gender-subset` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-042 | `group-labels` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-043 | `gvil-paired-illusion-images` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-044 | linked to `hc-bench` | 2 | none 2 | `hc-bench` (local_only) | `alias_of:hc-bench`, `distinct_release`, `keep_candidate` |
 | IR-045 | `hellaswag-pro` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-046 | `ictcf` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-047 | `illusionbench` | 1 | none 1 | `illusionbench-3c643c29` (complete_target) | `alias_of:illusionbench-3c643c29`, `distinct_release`, `keep_candidate` |
 | IR-048 | `illusionmnist` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-049 | `illusory-vqa` | 1 | none 1 | `illusionvqa` (complete_target) | `alias_of:illusionvqa`, `distinct_release`, `keep_candidate` |
-| IR-050 | linked to `imagenet`, `imagenet-1k`, `imagenet-ilsvrc-2012` | 5 | none 5 | `imagenet-1k` (complete_target), `imagenet-ilsvrc-2012` (complete_target) | `alias_of:imagenet`, `alias_of:imagenet-1k`, `alias_of:imagenet-ilsvrc-2012`, `distinct_release`, `keep_candidate` |
 | IR-051 | `itac` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-052 | `laion` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-053 | `laion-aesthetics` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-054 | `llava-instruct-150k-3a74a703` | 1 | complete_target 1 | `llava-instruct-150k` (complete_target) | `alias_of:llava-instruct-150k`, `distinct_release`, `keep_candidate` |
 | IR-055 | `middlebury` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-056 | `mit-states` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-057 | `mma-diffusion` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-058 | `mmstar` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-059 | linked to `mnist` | 2 | none 2 | `mnist` (complete_target) | `alias_of:mnist`, `distinct_release`, `keep_candidate` |
 | IR-060 | `multitrust` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-061 | `ostris-dataset` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-062 | `paper-08e415961919a492-unnamed-11-image-inpainting-set` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-063 | `paper-08e415961919a492-unnamed-real-noise-benchmark-46` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-064 | `paper-12e8bd34b4a2f2a8-unnamed-harmful-instruction-evaluation-set` | 1 | none 1 | no link | `accept_unreleased_custom_record`, `keep_candidate` |
@@ -116,7 +97,6 @@ Groups with more than one entry: IR-014 (14), IR-019 (2), IR-032 (2), IR-034 (2)
 | IR-085 | `paper-f6dcb0e50d10ea38-unnamed-public-figure-adversarial-image-set` | 1 | none 1 | no link | `accept_unreleased_custom_record`, `keep_candidate` |
 | IR-086 | `pascal-voc` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-087 | `pata` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-088 | `perturbed-gender-benchmark-image-variants` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-089 | `pitfall-rom` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-090 | `places` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-091 | `raise1k` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
@@ -124,7 +104,6 @@ Groups with more than one entry: IR-014 (14), IR-019 (2), IR-032 (2), IR-034 (2)
 | IR-093 | `rosmap` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-094 | `rs-vqa` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-095 | linked to `saegis-clean-and-adversarial-splits` | 2 | none 1, complete_target 1 | `saegis-clean-and-adversarial-splits` (complete_target; also in this queue) | `alias_of:saegis-clean-and-adversarial-splits`, `distinct_release`, `keep_candidate` |
-| IR-096 | linked to `sbbench`, `sbbench-syn`, `sbbench-syn-crop` | 2 | none 2 | `sbbench-syn` (complete_target), `sbbench-syn-crop` (complete_target) | `alias_of:sbbench`, `alias_of:sbbench-syn`, `alias_of:sbbench-syn-crop`, `distinct_release`, `keep_candidate` |
 | IR-097 | `seedbench` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-098 | `set14` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-099 | `set5` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
@@ -140,11 +119,8 @@ Groups with more than one entry: IR-014 (14), IR-019 (2), IR-032 (2), IR-034 (2)
 | IR-109 | `vg-qa-two` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-110 | `via-bench` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-111 | `visual-counterfact` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-112 | `visual-counterfact-filtered-467` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-113 | `visual6502-transistor-netlist` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-114 | `vl-gender` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-115 | `vqa-constraints` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-116 | `visualqa` | 1 | none 1 | `vqa-v2` (complete_target) | `alias_of:vqa-v2`, `distinct_release`, `keep_candidate` |
 | IR-117 | `vqa-v2-m-n-subsets` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-118 | `vtab` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-119 | `wall-street-journal` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
@@ -154,41 +130,6 @@ Groups with more than one entry: IR-014 (14), IR-019 (2), IR-032 (2), IR-034 (2)
 
 These entries have access `public` and adapter `not_started`. For each, what blocks it, read from the registry's own state:
 
-- `coco-caption` (group IR-014) — blocker type **identity**: a family alias or variant of `coco`, whose release is already prepared (preview `complete_target`); the paper's exact release for this entry is unresolved. The adapter is not what blocks it.
-  Registry identity audit: `family_mentioned_split_unresolved` (2026-09-22).
-  Registry blockers:
-  > The exact paper release, source variant, or derived collection remains unresolved.
-  > Adapter and preview are not implemented.
-- `coco-train` (group IR-014) — blocker type **identity**: a family alias or variant of `coco`, whose release is already prepared (preview `complete_target`); the paper's exact release for this entry is unresolved. The adapter is not what blocks it.
-  Registry identity audit: `family_only` (2026-09-22).
-  Registry blockers:
-  > Exact source variant or paper selection is unresolved.
-  > Adapter and preview are not implemented.
-- `ms-coco` (group IR-014) — blocker type **identity**: a family alias or variant of `coco`, whose release is already prepared (preview `complete_target`); the paper's exact release for this entry is unresolved. The adapter is not what blocks it.
-  Registry identity audit: `family_only` (2026-09-22).
-  Registry blockers:
-  > Exact source variant or paper selection is unresolved.
-  > Adapter and preview are not implemented.
-- `ms-coco-7f846b38` (group IR-014) — blocker type **identity**: a family alias or variant of `coco`, whose release is already prepared (preview `complete_target`); the paper's exact release for this entry is unresolved. The adapter is not what blocks it.
-  Registry identity audit: `family_only` (2026-09-22).
-  Registry blockers:
-  > Exact source variant or paper selection is unresolved.
-  > Adapter and preview are not implemented.
-- `ms-coco-captions` (group IR-014) — blocker type **identity**: a family alias or variant of `coco`, whose release is already prepared (preview `complete_target`); the paper's exact release for this entry is unresolved. The adapter is not what blocks it.
-  Registry identity audit: `family_only` (2026-09-22).
-  Registry blockers:
-  > Exact source variant or paper selection is unresolved.
-  > Adapter and preview are not implemented.
-- `mscoco` (group IR-014) — blocker type **identity**: a family alias or variant of `coco`, whose release is already prepared (preview `complete_target`); the paper's exact release for this entry is unresolved. The adapter is not what blocks it.
-  Registry identity audit: `family_only` (2026-09-22).
-  Registry blockers:
-  > Exact source variant or paper selection is unresolved.
-  > Adapter and preview are not implemented.
-- `cub200` (group IR-019) — blocker type **identity**: a family alias or variant of `cub-200-2011`, whose release is already prepared (preview `complete_target`); the paper's exact release for this entry is unresolved. The adapter is not what blocks it.
-  Registry identity audit: `family_only` (2026-09-22).
-  Registry blockers:
-  > Exact source variant or paper selection is unresolved.
-  > Adapter and preview are not implemented.
 - `first-person-social-interactions-dataset` (group IR-036) — blocker type **source_availability**. The registry's latest access audit (2026-10-08) records `author_page_identified_media_host_unresolvable`: the source host did not answer or did not resolve. This is source availability, not identity.
   Registry identity audit: `original_source_and_author_reformat_distinct` (2026-09-22).
   Registry description:
@@ -197,21 +138,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   > The author page (ai.stanford.edu/~alireza/Disney/) links 113 AVI videos and annotation ZIPs hosted on webshare.ipat.gatech.edu over plain HTTP; the host did not answer a HEAD request within 30 s over either http or https on 2026-10-06 (an upstream availability problem to retry).
   > The videos are AVI files, which browsers cannot play, and the host is HTTP-only, which Atlas's fetch layer does not use: even when the host returns, preparation needs a transcoding or an HTTPS mirror (an implementation gap beyond the outage).
   > The citing paper's training selection (the Watanabe selection) is not identified, and the page states no licence.
-- `sb-syn` (group IR-096) — blocker type **identity**: a family alias or variant of `sbbench-syn`, whose release is already prepared (preview `complete_target`); the paper's exact release for this entry is unresolved. The adapter is not what blocks it.
-  Registry identity audit: `family_only` (2026-09-22).
-  Registry blockers:
-  > Exact source variant or paper selection is unresolved.
-  > Adapter and preview are not implemented.
-- `sb-syn-crop` (group IR-096) — blocker type **identity**: a family alias or variant of `sbbench-syn-crop`, whose release is already prepared (preview `complete_target`); the paper's exact release for this entry is unresolved. The adapter is not what blocks it.
-  Registry identity audit: `family_only` (2026-09-22).
-  Registry blockers:
-  > Exact source variant or paper selection is unresolved.
-  > Adapter and preview are not implemented.
-- `visualqa` (group IR-116) — blocker type **identity**: a family alias or variant of `vqa-v2`, whose release is already prepared (preview `complete_target`); the paper's exact release for this entry is unresolved. The adapter is not what blocks it.
-  Registry identity audit: `family_mentioned_version_unresolved` (2026-09-22).
-  Registry blockers:
-  > The exact paper release, source variant, or derived collection remains unresolved.
-  > Adapter and preview are not implemented.
 - `wilds` (group IR-120) — blocker type **identity**: no registry link to a prepared release; the paper's exact release, variant or component is unresolved.
   Registry identity audit: `family_only` (2026-09-22).
   Registry description:
@@ -242,30 +168,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Mentioned by 1 paper:
   - `paper-fdcf898e0b05daff`, page 33, role: bibliography-only reference
     > uang, Kai Mei, Yifei Yao, Zhenting Wang, Chenlu Zhan, Hongwei Wang, and Yongfeng Zhang. Agent security bench (asb): Formalizing and benchmarking attacks and defenses in llm-based agents, 2025b. URL h…
-
-## IR-002 · Artbench-2
-
-**Group key:** `artbench-2` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `artbench-2` — Artbench-2
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `derived_subset_identity_partly_resolved` (2026-09-22).
-- Registry blockers:
-  > Access to the exact data files has not been verified.
-  > The exact paper release, source variant, or derived collection remains unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
-    > Artbench-2 (Jha et al., 2024) CLIP —
 
 ## IR-003 · Artchive
 
@@ -408,32 +310,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   - `paper-2ae8012d97e5e3da`, page 46, role: bibliography-only reference
     > n & review, 26(4): 1174–1194, 2019. Aryaman Arora, Dan Jurafsky, and Christopher Potts. CausalGym: Benchmarking causal interpretability methods on linguistic tasks. In Lun-Wei Ku, Andre Mar- tins, an…
 
-## IR-009 · Conceptual Captions, linked to `cc3m`
-
-**Group key:** `cc3m` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:**
-
-- `cc3m` (identity `resolved`, preview `complete_target`) via `same_source_family_as` — prepared
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. The registry links this entry to `cc3m`. The options are `alias_of:cc3m` (the paper's name is another name for that entry), `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open). A prepared preview exists for `cc3m`; the paper's exact release is unresolved, so no entry here inherits it, and an entry whose preview is `none` stays `none`.
-
-**Options:** `alias_of:cc3m`, `distinct_release`, `keep_candidate`
-
-### `conceptual-captions` — Conceptual Captions
-
-- State: access `base_source_public_variant_unverified`, adapter `not_started`, preview `none`, identity `family_or_variant_candidate`.
-- Blocker type: **identity**. The registry links this entry to `cc3m` (identity `resolved`, preview `complete_target`) via `same_source_family_as`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:cc3m`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `cc3m`
-- Registry identity audit: `official_family_located_variant_unpinned` (2026-09-22).
-- Registry blockers:
-  > Paper-used variant/configuration is not pinned to an exact source release.
-  > Public data/media reuse rights require separate review.
-- Mentioned by 1 paper:
-  - `paper-25eaa8c74ce76800`, page 29, role: cited-study dataset in survey table
-    > matzadeh, MMT, SMT Verb Understanding Conceptual Captions 2021) (Dahlgren Lindström et al., VSE++, VSE-C, H
-
 ## IR-010 · Child Safety intents
 
 **Group key:** `child-safety-intents` · **Entries:** 1 · **Blocker types:** `access` 1
@@ -456,32 +332,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Mentioned by 1 paper:
   - `paper-2df1203e2d3767bb`, page 6, role: introduced intent overlay
     > ], MM- SafetyBench [2], OmniSafeBench-MM [4], and SafeBench [33]. Moreover, we added 747 intents related to the new Child Safety category, generated with the assistance of OpenAI GPT-5.4, accessed vi…
-
-## IR-011 · CIFAR-2, linked to `cifar-10`
-
-**Group key:** `cifar-10` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:**
-
-- `cifar-10` (identity `resolved`, preview `complete_target`) via `derived_from` — prepared
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. The registry links this entry to `cifar-10`. The options are `alias_of:cifar-10` (the paper's name is another name for that entry), `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open). A prepared preview exists for `cifar-10`; the paper's exact release is unresolved, so no entry here inherits it, and an entry whose preview is `none` stays `none`.
-
-**Options:** `alias_of:cifar-10`, `distinct_release`, `keep_candidate`
-
-### `cifar-2` — CIFAR-2
-
-- State: access `source_page_public_data_unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `cifar-10` (identity `resolved`, preview `complete_target`) via `derived_from`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:cifar-10`, `distinct_release`, `keep_candidate`
-- Registry links: `derived_from` → `cifar-10`
-- Registry identity audit: `derived_protocol_located` (2026-09-22).
-- Registry blockers:
-  > Public source page located; exact paper-used data revision or archive is unverified.
-  > Public data/media reuse rights require separate review.
-- Mentioned by 1 paper:
-  - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
-    > 024) DDPM — CIFAR-10, CIFAR-2, ArtBench (Park et al., 2023) ResNet-9; ResNet-18; BERT —
 
 ## IR-012 · CIFAR-100-C
 
@@ -525,63 +375,17 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   - `paper-a47845c66d4a3f48`, page 7, role: evaluation
     > o dataset resampling bias (CIFAR-10.1, [112]) and image source shift (CINIC-10, [31]). For each of these datasets, we measure standard accuracy, and Fig. 3 shows that improvement in robust
 
-## IR-014 · 14 entries linked to `coco`, `coco-one`, `coco-two`, `cocogender`
+## IR-014 · 3 entries linked to `coco`
 
-**Group key:** `coco|coco-one|coco-two|cocogender` · **Entries:** 14 · **Blocker types:** `identity` 14
+**Group key:** `coco` · **Entries:** 3 · **Blocker types:** `identity` 3
 
 **Linked to:**
 
 - `coco` (identity `resolved`, preview `complete_target`) via `annotation_overlay_of` and `same_source_family_as` — prepared
-- `coco-one` (identity `candidate`, preview `complete_target`) via `same_source_family_as` — prepared; also an entry in this queue
-- `coco-two` (identity `candidate`, preview `complete_target`) via `same_source_family_as` — prepared; also an entry in this queue
-- `cocogender` (identity `candidate`, preview `complete_target`) via `same_source_family_as` — prepared; also an entry in this queue
 
-**Decision needed.** A person decides, for each of the 14 entries below, which option applies; until then it stays a candidate. The registry links these entries to `coco`, `coco-one`, `coco-two` and `cocogender`. The options are `alias_of:coco`, `alias_of:coco-one`, `alias_of:coco-two` and `alias_of:cocogender` (the paper's name is another name for that entry), `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open); each entry offers only the alias options for the targets it links to. A prepared preview exists for `coco`, `coco-one`, `coco-two` and `cocogender`; the paper's exact release is unresolved, so no entry here inherits it, and an entry whose preview is `none` stays `none`. `coco-one`, `coco-two` and `cocogender` already have a prepared preview of their own, yet the identity is still a candidate: the preview does not settle which release the paper used.
+**Decision needed.** A person decides, for each of the 3 entries below, which option applies; until then it stays a candidate. The registry links these entries to `coco`. The options are `alias_of:coco` (the paper's name is another name for that entry), `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open); each entry offers only the alias options for the targets it links to. A prepared preview exists for `coco`; the paper's exact release is unresolved, so no entry here inherits it, and an entry whose preview is `none` stays `none`. `coco-one`, `coco-two` and `cocogender` already have a prepared preview of their own, yet the identity is still a candidate: the preview does not settle which release the paper used.
 
-**Options:** `alias_of:coco`, `alias_of:coco-one`, `alias_of:coco-two`, `alias_of:cocogender`, `distinct_release`, `keep_candidate`
-
-### `coco-caption` — COCO Caption
-
-- State: access `public`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `coco` (identity `resolved`, preview `complete_target`) via `same_source_family_as`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:coco`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `coco`
-- Registry identity audit: `family_mentioned_split_unresolved` (2026-09-22).
-- Registry blockers:
-  > The exact paper release, source variant, or derived collection remains unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-25eaa8c74ce76800`, page 29, role: cited-study dataset in survey table
-    > 3) OSCAR, VinVL, BLIP, OFA Object Hallucination Detec- COCO Caption, NoCaps Linear Probing tio
-
-### `coco-detection-dataset` — COCO Detection Dataset
-
-- State: access `base_source_public_variant_unverified`, adapter `not_started`, preview `none`, identity `family_or_variant_candidate`.
-- Blocker type: **identity**. The registry links this entry to `coco` (identity `resolved`, preview `complete_target`) via `same_source_family_as`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:coco`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `coco`
-- Registry identity audit: `source_family_only` (2026-09-22).
-- Registry blockers:
-  > Paper-used variant/configuration is not pinned to an exact source release.
-  > Public data/media reuse rights require separate review.
-- Mentioned by 1 paper:
-  - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
-    > ., 2024) LLaVA, LLaVA-Phi Potential Application: COCO Detection Dataset Interpretability Coa
-
-### `coco-gender` — COCO-gender
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `coco` (identity `resolved`, preview `complete_target`) via `annotation_overlay_of` and `same_source_family_as`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:coco`, `distinct_release`, `keep_candidate`
-- Registry links: `annotation_overlay_of` → `coco`; `same_source_family_as` → `coco`
-- Registry identity audit: `derived_label_variant_unresolved` (2026-09-22).
-- Registry blockers:
-  > Access to the exact data files has not been verified.
-  > The exact paper release, source variant, or derived collection remains unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-c65ee35ca47313c9`, page 1, role: evaluation
-    > rturb non-gender fea- such as LLaVA and InternVL [5] tend to assign positive tures across four widely used benchmarks (COCO-gender, traits like “friendly” to women while attributing negative FACET, M…
+**Options:** `alias_of:coco`, `distinct_release`, `keep_candidate`
 
 ### `coco-one` — COCO_one
 
@@ -596,34 +400,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Mentioned by 1 paper:
   - `paper-6c99cf73401b37d4`, page 14, role: direct What’s Up split
     > the queries to our evaluation protocol (see §A.3). Localization. • COCO_one: Single-object localization queries on COCO images, from the COCO single- object split of What’s Up [Kamath et al.,
-
-### `coco-spatial` — COCO-Spatial
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `coco` (identity `resolved`, preview `complete_target`) via `same_source_family_as`; `coco-one` (identity `candidate`, preview `complete_target`) via `same_source_family_as`; `coco-two` (identity `candidate`, preview `complete_target`) via `same_source_family_as`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:coco`, `alias_of:coco-one`, `alias_of:coco-two`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `coco`; `same_source_family_as` → `coco-one`; `same_source_family_as` → `coco-two`
-- Registry identity audit: `author_release_identified_subset_unpinned` (2026-09-22).
-- Registry blockers:
-  > Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-2aa40aa13ed2a25b`, page 3, role: evaluation
-    > n the input sequence to swap, and Q̃ is all other indices. We use the COCO-S PATIAL benchmark (Kamath et al., 2023) for the mirrored images, which is a curated subset of COCO (Lin et al., 2014) annot…
-
-### `coco-train` — COCO train
-
-- State: access `public`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `coco` (identity `resolved`, preview `complete_target`) via `same_source_family_as`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:coco`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `coco`
-- Registry identity audit: `family_only` (2026-09-22).
-- Registry blockers:
-  > Exact source variant or paper selection is unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-2df1203e2d3767bb`, page 26, role: attack image source
-    > ainst a batch of 8 affirmative target responses, starting from clean images from the COCO train dataset [54]. For the prompt engineering phase, we followed the standard iterative interaction flow. In…
 
 ### `coco-two` — COCO_two
 
@@ -653,140 +429,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Mentioned by 1 paper:
   - `paper-32cea5e43d940514`, page 4, role: training
     > ace, we train SAE using various data configura- [ tions: CelebA [52], Cocogender images [76], and Fair- Ng = Eg \  Eh  Face [41] for the image encoder and Cocogender cap- h∈G,h̸=g tions (Cocogend
-
-### `cocogendertxt` — Cocogendertxt
-
-- State: access `base_source_public_variant_unverified`, adapter `not_started`, preview `none`, identity `family_or_variant_candidate`.
-- Blocker type: **identity**. The registry links this entry to `coco` (identity `resolved`, preview `complete_target`) via `same_source_family_as`; `cocogender` (identity `candidate`, preview `complete_target`) via `same_source_family_as`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:coco`, `alias_of:cocogender`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `coco`; `same_source_family_as` → `cocogender`
-- Registry identity audit: `derived_config_unpinned` (2026-09-22).
-- Registry blockers:
-  > Paper-used variant/configuration is not pinned to an exact source release.
-  > Public data/media reuse rights require separate review.
-- Mentioned by 1 paper:
-  - `paper-32cea5e43d940514`, page 4, role: SAE caption training
-    > tions (Cocogendertxt) [76] and Bias in Bios [15] for the The set Ng thus comprises neurons that are activated
-
-### `ms-coco` — MS-COCO
-
-- State: access `public`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `coco` (identity `resolved`, preview `complete_target`) via `same_source_family_as`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:coco`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `coco`
-- Registry identity audit: `family_only` (2026-09-22).
-- Registry blockers:
-  > Exact source variant or paper selection is unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 3 papers:
-  - `paper-ebd63da316af82e5`, page 2, role: evaluation
-    > sults on generic scenes prompts and longer, more complex prompts from MS-COCO [18]. In practice, we first retrieve a seed, low-frequency INR whose caption is most similar to the prompt. B
-  - `paper-6d747c88d639c5aa`, page 5, role: source data
-    > odels, we generated metamers of 36 randomly selected natural images across each of the 16 MS-COCO categories (see Supplement Table 4 for a summary of matching the visual model metamers, and Supplemen…
-  - `paper-25eaa8c74ce76800`, page 29, role: cited-study dataset in survey table
-    > UNITER, LXMERT, ViLT POS Tagging, Object Count- Flickr30K, MS-COCO ing
-
-### `ms-coco-7f846b38` — MS COCO
-
-- State: access `public`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `coco` (identity `resolved`, preview `complete_target`) via `same_source_family_as`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:coco`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `coco`
-- Registry identity audit: `family_only` (2026-09-22).
-- Registry blockers:
-  > Exact source variant or paper selection is unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-29349603429218b8`, page 8, role: source data
-    > test” library,4 a pre-trained sentiment analysis Data. We randomly selected 10 images from MS COCO [12] model used in [9, 27] to capture sentiment-specific nuances and 5 images from ImageNet [35]. Fo…
-
-### `ms-coco-captions` — MS-COCO captions
-
-- State: access `public`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `coco` (identity `resolved`, preview `complete_target`) via `same_source_family_as`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:coco`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `coco`
-- Registry identity audit: `family_only` (2026-09-22).
-- Registry blockers:
-  > Exact source variant or paper selection is unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-a291f2908480a2f8`, page 8, role: evaluation
-    > es are crafted, to quantitatively evaluate the adversarial robustness of large VLMs. From MS-COCO captions [44], we randomly select a text description (usually a complete sentence, as shown in our Ap…
-
-### `mscoco` — MSCOCO
-
-- State: access `public`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `coco` (identity `resolved`, preview `complete_target`) via `same_source_family_as`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:coco`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `coco`
-- Registry identity audit: `family_only` (2026-09-22).
-- Registry blockers:
-  > Exact source variant or paper selection is unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-7a1ff5996ce95273`, page 5, role: evaluation
-    > MSCOCO Model Attack Method TR@1 TR@5 TR@10 IR@1 IR@5 IR@10 R@Mean AttackVLM-ii 0.4 1.0 1.4 0.24 1.08 2.16 1.05 Attac
-
-### `mscoco-100-target-subset` — MSCOCO 100-target subset
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `coco` (identity `resolved`, preview `complete_target`) via `same_source_family_as`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:coco`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `coco`
-- Registry identity audit: `paper_selection_release_unverified` (2026-09-22).
-- Registry blockers:
-  > Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-7a1ff5996ce95273`, page 7, role: derived evaluation collection
-    > ViT-L/14, respectively. All AnyAttack methods con- Quantitative Results. We selected 100 images from the sistently deliver competitive results, outperforming most MSCOCO dataset as target images and…
-
-## IR-015 · Concept-Editing Dataset
-
-**Group key:** `concept-editing-dataset` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `concept-editing-dataset` — Concept-Editing Dataset
-
-- State: access `source_release_unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `generic_descriptor_unresolved` (2026-09-22).
-- Registry blockers:
-  > Exact source data release or paper-used subset is unverified.
-  > Public data/media reuse rights require separate review.
-- Mentioned by 1 paper:
-  - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
-    > l., 2024b) SD-1.5, SD-XL, DeepFloyd Model Editing Concept-Editing Dataset Cross-attention (Neo et al., 2024) LLaVA, LLaVA-Phi Pote
-
-## IR-016 · Contrastive Prompts
-
-**Group key:** `contrastive-prompts` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `contrastive-prompts` — Contrastive Prompts
-
-- State: access `source_release_unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `protocol_not_independent_release` (2026-09-22).
-- Registry blockers:
-  > Exact source data release or paper-used subset is unverified.
-  > Public data/media reuse rights require separate review.
-- Mentioned by 1 paper:
-  - `paper-25eaa8c74ce76800`, page 29, role: cited-study dataset in survey table
-    > 2024) CLIP, T2I Diffusion Image Editing Contrastive Prompts (Huang et al., 2024a) Qwen-VL, Idefics2-8B Many-shot L
 
 ## IR-017 · Controlled CLEVR
 
@@ -834,92 +476,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   - `paper-6c99cf73401b37d4`, page 13, role: direct What’s Up split
     > lled CLEVR split of the What’s Up benchmark [Kamath et al., 2023]. • Controlled Images: Two-object spatial-relation queries on natural photographs, from the controlled images split of What’s Up [Kama…
 
-## IR-019 · 2 entries linked to `cub-200-2011`
-
-**Group key:** `cub-200-2011` · **Entries:** 2 · **Blocker types:** `identity` 2
-
-**Linked to:**
-
-- `cub-200-2011` (identity `resolved`, preview `complete_target`) via `same_source_family_as` — prepared
-
-**Decision needed.** A person decides, for each of the 2 entries below, which option applies; until then it stays a candidate. The registry links these entries to `cub-200-2011`. The options are `alias_of:cub-200-2011` (the paper's name is another name for that entry), `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open); each entry offers only the alias options for the targets it links to. A prepared preview exists for `cub-200-2011`; the paper's exact release is unresolved, so no entry here inherits it, and an entry whose preview is `none` stays `none`.
-
-**Options:** `alias_of:cub-200-2011`, `distinct_release`, `keep_candidate`
-
-### `cub` — CUB
-
-- State: access `base_source_public_variant_unverified`, adapter `not_started`, preview `none`, identity `family_or_variant_candidate`.
-- Blocker type: **identity**. The registry links this entry to `cub-200-2011` (identity `resolved`, preview `complete_target`) via `same_source_family_as`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:cub-200-2011`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `cub-200-2011`
-- Registry identity audit: `official_family_located_variant_unpinned` (2026-09-22).
-- Registry blockers:
-  > Paper-used variant/configuration is not pinned to an exact source release.
-  > Public data/media reuse rights require separate review.
-- Mentioned by 1 paper:
-  - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
-    > a) CLIP Image Retrieval, Segmenta- Waterbirds, CUB, Places, ImageNet- Text-Explanations of t
-
-### `cub200` — CUB200
-
-- State: access `public`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `cub-200-2011` (identity `resolved`, preview `complete_target`) via `same_source_family_as`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:cub-200-2011`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `cub-200-2011`
-- Registry identity audit: `family_only` (2026-09-22).
-- Registry blockers:
-  > Exact source variant or paper selection is unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
-    > CUB200, VTAB (Pruthi et al., 2020) ResNet-56 —
-
-## IR-020 · Custom Dataset
-
-**Group key:** `custom-dataset` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `custom-dataset` — Custom Dataset
-
-- State: access `source_release_unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `generic_descriptor_unresolved` (2026-09-22).
-- Registry blockers:
-  > Exact source data release or paper-used subset is unverified.
-  > Public data/media reuse rights require separate review.
-- Mentioned by 1 paper:
-  - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
-    > l., 2022) Stable-Diffusion Visualization Custom Dataset Table 10: A comprehensive overview of interpretability methods for Section 5
-
-## IR-021 · Custom Image Editing Dataset
-
-**Group key:** `custom-image-editing-dataset` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `custom-image-editing-dataset` — Custom Image Editing Dataset
-
-- State: access `source_release_unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `generic_descriptor_unresolved` (2026-09-22).
-- Registry blockers:
-  > Exact source data release or paper-used subset is unverified.
-  > Public data/media reuse rights require separate review.
-- Mentioned by 1 paper:
-  - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
-    > al., 2022) Stable-Diffusion Image Editing Custom Image Editing Dataset (Tang et al., 2022) Stable-Diffusion Visualization
-
 ## IR-022 · custom neonatal rat ganglion recordings
 
 **Group key:** `custom-neonatal-rat-ganglion-recordings` · **Entries:** 1 · **Blocker types:** `identity` 1
@@ -943,29 +499,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   - `paper-52015222b27e7099`, page 23, role: derived collection
     > Identifiers Additional information Strain, strain Long-Evans (rat) USC Vivarium RRID:RGD_2308852 Freshly isolated background (species)
 
-## IR-023 · custom speech segment collection
-
-**Group key:** `custom-speech-segment-collection` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `custom-speech-segment-collection` — custom speech segment collection
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `paper_built_collection_not_released` (2026-10-08).
-- Registry blockers:
-  > Original release identity and rights need verification.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-6d747c88d639c5aa`, page 13, role: derived collection
-    > in any word or speaker class was less than 2000. The resulting training dataset contained 230356 unique segments in 432 speaker classes and 793 word classes, with 40650 unique segments in the validat…
-
 ## IR-024 · custom Ternus psychophysics responses
 
 **Group key:** `custom-ternus-psychophysics-responses` · **Entries:** 1 · **Blocker types:** `identity` 1
@@ -988,29 +521,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Mentioned by 1 paper:
   - `paper-347b77231e69b630`, page 4, role: derived collection
     > ected for each trial. The standard display size was ment lasted about 60 min and included three subtasks: Illusion identical to that used in the Illusion Ternus task. The small Ternus task, Illusion…
-
-## IR-025 · DALL-E generated target images
-
-**Group key:** `dall-e-generated-target-images` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `dall-e-generated-target-images` — DALL-E generated target images
-
-- State: access `source_release_unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `paper_generated_unreleased` (2026-09-22).
-- Registry blockers:
-  > Exact source data release or paper-used subset is unverified.
-  > Public data/media reuse rights require separate review.
-- Mentioned by 1 paper:
-  - `paper-a291f2908480a2f8`, page 8, role: derived collection
-    > plified ×10 for visualization) and their corresponding captions are generated below. Here DALL-E acts as hξ to generate targeted images hξ (ctar ) for reference. We note that adversarial perturbation…
 
 ## IR-026 · DeepFashion
 
@@ -1154,19 +664,17 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   - `paper-25eaa8c74ce76800`, page 22, role: bibliography-only reference
     > Flek. Navid Rajabi and Jana Kosecka. 2024. Q-groundcam: 2022. FACTOID: A new dataset for identifying Quantifying grounding in vision language models via misinf
 
-## IR-032 · 2 entries linked to `fairface`, `miap`, `phase`
+## IR-032 · OpenImages, linked to `miap`
 
-**Group key:** `fairface|miap|phase` · **Entries:** 2 · **Blocker types:** `identity` 2
+**Group key:** `miap` · **Entries:** 1 · **Blocker types:** `identity` 1
 
 **Linked to:**
 
-- `fairface` (identity `resolved`, preview `complete_target`) via `derived_from` — prepared
-- `miap` (identity `resolved`, preview `complete_target`) via `derived_from` and `same_source_family_as` — prepared
-- `phase` (identity `resolved`, preview `complete_target`) via `derived_from` — prepared
+- `miap` (identity `resolved`, preview `complete_target`) via `same_source_family_as` — prepared
 
-**Decision needed.** A person decides, for each of the 2 entries below, which option applies; until then it stays a candidate. The registry links these entries to `fairface`, `miap` and `phase`. The options are `alias_of:fairface`, `alias_of:miap` and `alias_of:phase` (the paper's name is another name for that entry), `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open); each entry offers only the alias options for the targets it links to. A prepared preview exists for `fairface`, `miap` and `phase`; the paper's exact release is unresolved, so no entry here inherits it, and an entry whose preview is `none` stays `none`. `openimages` already has a prepared preview of its own, yet the identity is still a candidate: the preview does not settle which release the paper used.
+**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. The registry links this entry to `miap`. The options are `alias_of:miap` (the paper's name is another name for that entry), `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open). A prepared preview exists for `miap`; the paper's exact release is unresolved, so no entry here inherits it, and an entry whose preview is `none` stays `none`. `openimages` already has a prepared preview of its own, yet the identity is still a candidate: the preview does not settle which release the paper used.
 
-**Options:** `alias_of:fairface`, `alias_of:miap`, `alias_of:phase`, `distinct_release`, `keep_candidate`
+**Options:** `alias_of:miap`, `distinct_release`, `keep_candidate`
 
 ### `openimages` — OpenImages
 
@@ -1180,20 +688,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Mentioned by 1 paper:
   - `paper-c65ee35ca47313c9`, page 2, role: source lineage
     > te the influence of non-gender features ages. Meister et al. [34] showed that in COCO and Open- on measured bias and distinguish between unbiased mod- Images [26], non-gender features, such as color…
-
-### `vlagenderbias` — VLAGenderBias
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `fairface` (identity `resolved`, preview `complete_target`) via `derived_from`; `miap` (identity `resolved`, preview `complete_target`) via `derived_from`; `phase` (identity `resolved`, preview `complete_target`) via `derived_from`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:fairface`, `alias_of:miap`, `alias_of:phase`, `distinct_release`, `keep_candidate`
-- Registry links: `derived_from` → `fairface`; `derived_from` → `miap`; `derived_from` → `phase`
-- Registry blockers:
-  > Data-generation recipe, not a release: the author repository ships setup scripts (about 100 GB and ~24 hours of downloads per its README) and no images; the selected 5,000 images were not reproduced.
-  > Member datasets: FairFace, MIAP and PHASE are browsable in this catalogue; PATA's images are third-party web files that are not archived (see entry pata).
-  > Gender labels here are the member datasets' own annotations (perceived or annotated), and a model prediction is never one of them.
-- Mentioned by 1 paper:
-  - `paper-32cea5e43d940514`, page 5, role: evaluation
-    > evaluating LVLMs, we use two recent bench- Adj Occup Act Ster marks: VLAGenderBias (VLA) [21] and SBBench [57]. CLIP (ViT-B/16) [67] − 22.9 33.7 19.5 33.8 CLIP (ViT-B/16)† − 21.9 33.5 19.8 32.
 
 ## IR-033 · FFHQ
 
@@ -1220,32 +714,15 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   - `paper-164d7c221452ffec`, page 14, role: model-training lineage
     > h image and text (Toney and that is pretrained on the high-quality FFHQ dataset. Caliskan, 2021; Wolfe and Caliskan, 2022b). Ad- To normalize images, we crop around the facial
 
-## IR-034 · 2 entries linked to `fgvc-aircraft`
+## IR-034 · FGVC-Aircraft
 
-**Group key:** `fgvc-aircraft` · **Entries:** 2 · **Blocker types:** `identity` 2
+**Group key:** `fgvc-aircraft` · **Entries:** 1 · **Blocker types:** `identity` 1
 
-**Linked to:**
+**Linked to:** nothing.
 
-- `fgvc-aircraft` (identity `candidate`, preview `complete_target`) via `same_source_family_as` — prepared; also an entry in this queue
+**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open). `fgvc-aircraft` already has a prepared preview of its own, yet the identity is still a candidate: the preview does not settle which release the paper used.
 
-**Decision needed.** A person decides, for each of the 2 entries below, which option applies; until then it stays a candidate. The registry links these entries to `fgvc-aircraft`. The options are `alias_of:fgvc-aircraft` (the paper's name is another name for that entry), `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open); each entry offers only the alias options for the targets it links to. A prepared preview exists for `fgvc-aircraft`; the paper's exact release is unresolved, so no entry here inherits it, and an entry whose preview is `none` stays `none`. `fgvc-aircraft` already has a prepared preview of its own, yet the identity is still a candidate: the preview does not settle which release the paper used.
-
-**Options:** `alias_of:fgvc-aircraft`, `distinct_release`, `keep_candidate`
-
-### `fgvc` — FGVC
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `fgvc-aircraft` (identity `candidate`, preview `complete_target`) via `same_source_family_as`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:fgvc-aircraft`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `fgvc-aircraft`
-- Registry identity audit: `family_only` (2026-09-22).
-- Registry blockers:
-  > Original data download availability is unverified.
-  > Exact source variant or paper selection is unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-3e0db9c633ab204c`, page 7, role: evaluation
-    > Cars Dtd Eurosat FGVC Flowers Pets Eval Model Training Data OpenAI-L/14
+**Options:** `distinct_release`, `keep_candidate`
 
 ### `fgvc-aircraft` — FGVC-Aircraft
 
@@ -1308,32 +785,15 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   - `paper-4f53de240f8fc1af`, page 3, role: source data
     > redicted the 22nd image (P2) with reference with mean-squared error using videos from the First-Person to 21 consecutive images (T1 to T21) using P1 as the image Social Interactions Dataset (Fathi et…
 
-## IR-037 · 2 entries linked to `flowers102`
+## IR-037 · Flowers102
 
-**Group key:** `flowers102` · **Entries:** 2 · **Blocker types:** `identity` 2
+**Group key:** `flowers102` · **Entries:** 1 · **Blocker types:** `identity` 1
 
-**Linked to:**
+**Linked to:** nothing.
 
-- `flowers102` (identity `candidate`, preview `complete_target`) via `same_source_family_as` — prepared; also an entry in this queue
+**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open). `flowers102` already has a prepared preview of its own, yet the identity is still a candidate: the preview does not settle which release the paper used.
 
-**Decision needed.** A person decides, for each of the 2 entries below, which option applies; until then it stays a candidate. The registry links these entries to `flowers102`. The options are `alias_of:flowers102` (the paper's name is another name for that entry), `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open); each entry offers only the alias options for the targets it links to. A prepared preview exists for `flowers102`; the paper's exact release is unresolved, so no entry here inherits it, and an entry whose preview is `none` stays `none`. `flowers102` already has a prepared preview of its own, yet the identity is still a candidate: the preview does not settle which release the paper used.
-
-**Options:** `alias_of:flowers102`, `distinct_release`, `keep_candidate`
-
-### `flowers` — Flowers
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `flowers102` (identity `candidate`, preview `complete_target`) via `same_source_family_as`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:flowers102`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `flowers102`
-- Registry identity audit: `family_only` (2026-09-22).
-- Registry blockers:
-  > Original data download availability is unverified.
-  > Exact source variant or paper selection is unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-3e0db9c633ab204c`, page 7, role: evaluation
-    > Cars Dtd Eurosat FGVC Flowers Pets Eval Model Training Data OpenAI-L/14
+**Options:** `distinct_release`, `keep_candidate`
 
 ### `flowers102` — Flowers102
 
@@ -1366,75 +826,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Mentioned by 1 paper:
   - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
     > CLIP(ViT-B/16 + LoRA) — FGVC-Aircraft, Food101, Flowers102,
-
-## IR-039 · Gaussian rubbish examples
-
-**Group key:** `gaussian-rubbish-examples` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `gaussian-rubbish-examples` — Gaussian rubbish examples
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `generated_by_recipe_no_release` (2026-10-08).
-- Registry blockers:
-  > Original release identity and rights need verification.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-f7fa96d778a8d649`, page 10, role: derived collection
-    > naively trained maxout network with a softmax layer on top had an error rate of 98.35% on Gaussian rubbish examples with an average confidence of 92.8% on mistakes. Changing the top layer to independ…
-
-## IR-040 · GDA adversarial image variants
-
-**Group key:** `gda-adversarial-image-variants` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `gda-adversarial-image-variants` — GDA adversarial image variants
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `paper_derived_collection_no_release_located` (2026-10-08).
-- Registry blockers:
-  > Original release identity and rights need verification.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-f5da3ca03780a203`, page 8, role: derived collection
-    > 4 0.4735 0.3072 0.3026 0.2574 0.3176 41.2 Datasets. We randomly sample 1,000 samples from each of three datasets for evaluation, correspond- ing to different multimodal tasks: image captioning on Fli…
-
-## IR-041 · GPT-4V-filtered VL-Gender subset
-
-**Group key:** `gpt-4v-filtered-vl-gender-subset` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `gpt-4v-filtered-vl-gender-subset` — GPT-4V-filtered VL-Gender subset
-
-- State: access `source_release_unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `paper_subset_unpinned` (2026-09-22).
-- Registry blockers:
-  > Exact source data release or paper-used subset is unverified.
-  > Public data/media reuse rights require separate review.
-- Mentioned by 1 paper:
-  - `paper-f03c5ad315e6d835`, page 18, role: derived collection
-    > ill yield better judgments regarding occupation- related content. Therefore, we provide a subset of 6000 images (1200 per dataset) to GPT-4V alongside the same prompt we used for InternVL2-40B. For 5…
 
 ## IR-042 · Group Labels
 
@@ -1481,46 +872,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Mentioned by 1 paper:
   - `paper-b039401c04ff9b91`, page 4, role: derived collection
     > ure 3, each question The statistics of our dataset is shown in Table 2. concerns a pair of images (IMG1 and IMG2). One Note that since this dataset is only used for the eval- image (IMG1) is illusion…
-
-## IR-044 · 2 entries linked to `hc-bench`
-
-**Group key:** `hc-bench` · **Entries:** 2 · **Blocker types:** `identity` 2
-
-**Linked to:**
-
-- `hc-bench` (identity `resolved`, preview `local_only`) via `same_source_family_as` and `source_subset_of` — prepared
-
-**Decision needed.** A person decides, for each of the 2 entries below, which option applies; until then it stays a candidate. The registry links these entries to `hc-bench`. The options are `alias_of:hc-bench` (the paper's name is another name for that entry), `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open); each entry offers only the alias options for the targets it links to. A prepared preview exists for `hc-bench`; the paper's exact release is unresolved, so no entry here inherits it, and an entry whose preview is `none` stays `none`.
-
-**Options:** `alias_of:hc-bench`, `distinct_release`, `keep_candidate`
-
-### `paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-collection` — unnamed internet hidden-content collection
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `hc-bench` (identity `resolved`, preview `local_only`) via `same_source_family_as` and `source_subset_of`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:hc-bench`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `hc-bench`; `source_subset_of` → `hc-bench`
-- Registry identity audit: `author_release_identified_version_drift` (2026-10-08).
-- Registry blockers:
-  > Original release identity and rights need verification.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-2c07a8c6af8e33c2`, page 8, role: evaluation
-    > 6.23+96.23 D EEP S EEK -VL2 0 0 0 0 84.90+84.90 Table 5: Validation of task difficulty on 53 internet-sourced hidden-content images, collected independently to reduce dataset-specific noise and biase…
-
-### `paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-set` — unnamed internet hidden-content set
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `hc-bench` (identity `resolved`, preview `local_only`) via `same_source_family_as` and `source_subset_of`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:hc-bench`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `hc-bench`; `source_subset_of` → `hc-bench`
-- Registry identity audit: `author_release_identified_version_drift` (2026-10-08).
-- Registry blockers:
-  > Original release identity and rights need verification.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-2c07a8c6af8e33c2`, page 8, role: independent validation collection
-    > 0 84.90+84.90 Table 5: Validation of task difficulty on 53 internet-sourced hidden-content images, collected independently to reduce dataset-specific noise and biases. Failure case analysis. Rare err…
 
 ## IR-045 · HellaSwag-Pro
 
@@ -1619,162 +970,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   - `paper-20de77d4e60fd1bd`, page 8, role: related-work comparison
     > asets 5. Related Works (e.g., IllusionMNIST) for illusion recognition; The Art of 5.1. Multimodal Large Language Models Deception
 
-## IR-049 · Illusory VQA, linked to `illusionvqa`
-
-**Group key:** `illusionvqa` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:**
-
-- `illusionvqa` (identity `resolved`, preview `complete_target`) via `same_source_family_as` — prepared
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. The registry links this entry to `illusionvqa`. The options are `alias_of:illusionvqa` (the paper's name is another name for that entry), `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open). A prepared preview exists for `illusionvqa`; the paper's exact release is unresolved, so no entry here inherits it, and an entry whose preview is `none` stays `none`.
-
-**Options:** `alias_of:illusionvqa`, `distinct_release`, `keep_candidate`
-
-### `illusory-vqa` — Illusory VQA
-
-- State: access `base_source_public_variant_unverified`, adapter `not_started`, preview `none`, identity `family_or_variant_candidate`.
-- Blocker type: **identity**. The registry links this entry to `illusionvqa` (identity `resolved`, preview `complete_target`) via `same_source_family_as`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:illusionvqa`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `illusionvqa`
-- Registry identity audit: `author_family_located_variant_unpinned` (2026-09-22).
-- Registry blockers:
-  > Paper-used variant/configuration is not pinned to an exact source release.
-  > Public data/media reuse rights require separate review.
-- Mentioned by 1 paper:
-  - `paper-20de77d4e60fd1bd`, page 8, role: related-work comparison
-    > gnificance. rent MLLMs. A line of related work includes Illusory VQA (Rostamkhani et al., 2025), which constructs ed
-
-## IR-050 · 5 entries linked to `imagenet`, `imagenet-1k`, `imagenet-ilsvrc-2012`
-
-**Group key:** `imagenet|imagenet-1k|imagenet-ilsvrc-2012` · **Entries:** 5 · **Blocker types:** `identity` 1, `access` 4
-
-**Linked to:**
-
-- `imagenet` (identity `candidate`, preview `none`) via `same_source_family_as` — no preview; also an entry in this queue
-- `imagenet-1k` (identity `resolved`, preview `complete_target`) via `same_source_family_as` — prepared
-- `imagenet-ilsvrc-2012` (identity `resolved`, preview `complete_target`) via `same_source_family_as` — prepared
-
-**Decision needed.** A person decides, for each of the 5 entries below, which option applies; until then it stays a candidate. The registry links these entries to `imagenet`, `imagenet-1k` and `imagenet-ilsvrc-2012`. The options are `alias_of:imagenet`, `alias_of:imagenet-1k` and `alias_of:imagenet-ilsvrc-2012` (the paper's name is another name for that entry), `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open); each entry offers only the alias options for the targets it links to. A prepared preview exists for `imagenet-1k` and `imagenet-ilsvrc-2012`; the paper's exact release is unresolved, so no entry here inherits it, and an entry whose preview is `none` stays `none`. For `imagenet` (access `gated`), `imagenet-ilsvrc` (access `gated`), `imagenet100` (access `gated`) and `imagenetval` (access `gated`) the blocker is access, a user action such as a request, terms or credentials, not identity; the identity decision can be taken independently.
-
-**Options:** `alias_of:imagenet`, `alias_of:imagenet-1k`, `alias_of:imagenet-ilsvrc-2012`, `distinct_release`, `keep_candidate`
-
-### `imagenet` — ImageNet
-
-- State: access `gated`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **access**. Access is `gated`: getting the data needs a request, terms or credentials, which is a user action. The identity decision is separate from it.
-- Options: `alias_of:imagenet-1k`, `alias_of:imagenet-ilsvrc-2012`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `imagenet-1k`; `same_source_family_as` → `imagenet-ilsvrc-2012`
-- Registry identity audit: `family_only` (2026-09-22).
-- Registry blockers:
-  > Original source requires registration or licensed base images.
-  > Exact source variant or paper selection is unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 22 papers:
-  - `paper-9036b4eaa048dc21`, page 5, role: training
-    > ned on activation vectors pre-extracted from the model’s responses to ImageNet [13] images. For CLIP, activation vectors are extracted from the classification (CLS) tokens in the residual
-  - `paper-a47845c66d4a3f48`, page 5, role: evaluation
-    > and common corruption threat models on CIFAR-10, CIFAR-100 [75], and ImageNet [32] datasets (see Table 1 for details). We use the fixed budgets of ε∞ = 8/255 and ε2 = 0.5 for the `∞ and `2 leaderboar…
-  - `paper-1e2474b15fec2d7d`, page 7, role: training
-    > in Experiment 1: (1) Discriminative feedforward models: a VGG-16 [29] first trained on ImageNet and then retrained on upscaled CIFAR-10 (‘finetuned VGG-16’) and a Wide-Resnet trained exclusively on C…
-  - `paper-c12960e5d652fb7f`, page 5, role: source data
-    > eline accuracy without adversar- ial attacks, we used a subset of the ImageNet dataset [27], No Defense EigenShield randomly selecting a thousand images. To evaluate Eigen- Model RTP HarmBench RTP
-  - `paper-959e8fc51787f7e4`, page 5, role: training
-    > ces feature activations SmoLIM2-135M-10B [2] 2048 text tokens 144,000 ImageNet [31] 1 image; Caption 144,000 zℓ,t,i ∈ R, Cauldron [17] 1 image; QA Text 72,000 and each feature has an assoc
-  - `paper-6dbb0d4a7b949143`, page 4, role: training
-    > nt is leveraging CLIP, which has been widely MLLMs. Using a subset of ImageNet training data D, we adopted in MLLMs due to two crucial properties: (1) its optimize W by minimizing the alignment loss…
-  - `paper-7ed1979562251931`, page 9, role: evaluation
-    > Method VQA v2 scores experiments on several other datasets, including ImageNet (Deng et al., 2009), OKVQA (Marino LQAVA (RSQ25 ) 44.07 ± 0.83 et al., 2019), NoCaps (Agrawal et al., 2019),
-  - `paper-208c53a35b62bc52`, page 6, role: evaluation
-    > ng the worst case over all attacks, as MNIST, CIFAR-10, CIFAR-100 and ImageNet as datasets. we do for AutoAttack, improves the performance. We report first results for deterministic defens
-  - `paper-78a318ad1ec346ef`, page 2, role: evaluation
-    > tential application image recognition task, also with 10 classes; and ImageNet settings, but entirely defeats its purpose: an adversary who is [9], a large-image recognition task with 1000
-  - `paper-728d8c0964b540ad`, page 2, role: evaluation
-    > ned on top of an autoencoder. We refer to this network as “AE”. • The ImageNet dataset [3]. – Krizhevsky et. al architecture [9]. We refer to it as “AlexNet”. • ∼ 10M image samples from Yo
-  - `paper-72040eccb96ead7a`, page 5, role: training
-    > ifiers to capture all task-dependent variability. Attack on MNIST and ImageNet. After validating its potential to uncover adversarial subspaces, we apply metameric sampling to fully invert
-  - `paper-d0229a9d15fd6b77`, page 2, role: evaluation
-    > amples. be an incomplete defense to adversarial examples (Papernot On ImageNet, we evaluate over 1000 randomly selected et al., 2017; Tramèr et al., 2018). Despite this, we observe images
-  - `paper-666de2b7486d80a3`, page 4, role: source data
-    > Weighted Fourier Aggregation [11], and of these networks on the 1.3M ImageNet dataset [47] for 1 three variants of a deep video deblurring method [53]. epoch. The goal of each network is
-  - `paper-ab31cc6a994470fb`, page 4, role: source data
-    > Vision Pipeline 3.1.1 Dataset In our experiment, we used images from ImageNet [7]. ImageNet contains 1,000 highly specific classes that typical people may not be able to identify, such as
-  - `paper-d098a79f00c8b2b5`, page 40, role: bibliography-only reference
-    > ing CNNs with bag-of-local-features models works surprisingly well on imagenet. In International Conference on Learning Representations, 2019. URL https://openreview.net/forum?id=SkfMWhAqY
-  - `paper-29349603429218b8`, page 8, role: source data
-    > COCO [12] model used in [9, 27] to capture sentiment-specific nuances and 5 images from ImageNet [35]. For each image, we gener- in tweets. This model was trained on an extensive dataset of ated 100…
-  - `paper-f7fa96d778a8d649`, page 3, role: evaluation
-    > on of fast adversarial example generation applied to GoogLeNet (Szegedy et al., 2014a) on ImageNet. By adding an imperceptibly small vector whose elements are equal to the sign of the elements of the…
-  - `paper-6d747c88d639c5aa`, page 13, role: model-training lineage
-    > d across two NVIDIA GPUs each with 11GB memory. S1.2 Retrained ImageNet Description The ImageNet-trained architectures used to generate metamers for the behavioral and network- network experiments we…
-  - `paper-3aa07dc1c7bc37d9`, page 23, role: bibliography-only reference
-    > 6, 2023. R. Geirhos, P. Rubisch, C. Michaelis, M. Bethge, F. A. Wichmann, and W. Brendel. Imagenet-trained cnns are biased towards texture; increasing shape bias improves accuracy and robustness. arX…
-  - `paper-25eaa8c74ce76800`, page 29, role: cited-study dataset in survey table
-    > ) CLIP Image Classification ImageNet Sparse AutoEncoder (Rao et al., 2024) CLIP, ResNet-50
-  - `paper-b039401c04ff9b91`, page 2, role: related-work mention
-    > at sual illusion. There are two main contributions of convolutional neural networks trained on ImageNet this work. First, this investigation provides an ini- or low-level vision tasks can be misled b…
-  - `paper-392b0c393c06b48e`, page 8, role: baseline encoder retraining
-    > CLIP-style adversarial pre- training on web-scale image–text data without subsequent ImageNet fine-tuning. All the adversarial trained models are publicly available. Baselines. We compare against the…
-
-### `imagenet-ilsvrc` — ImageNet ILSVRC
-
-- State: access `gated`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **access**. Access is `gated`: getting the data needs a request, terms or credentials, which is a user action. The identity decision is separate from it.
-- Options: `alias_of:imagenet`, `alias_of:imagenet-ilsvrc-2012`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `imagenet`; `same_source_family_as` → `imagenet-ilsvrc-2012`
-- Registry identity audit: `family_only` (2026-09-22).
-- Registry blockers:
-  > Original source requires registration or licensed base images.
-  > Exact source variant or paper selection is unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-08e415961919a492`, page 14, role: training
-    > inverting different layers of AlexNet (trained for classification on ImageNet ILSVRC) using three different regularizers: the deep image prior, the TV norm prior of [38], and the network trained
-
-### `imagenet-sampled-1-000-images` — ImageNet sampled 1,000 images
-
-- State: access `source_release_unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `imagenet` (identity `candidate`, preview `none`) via `same_source_family_as`; `imagenet-ilsvrc-2012` (identity `resolved`, preview `complete_target`) via `same_source_family_as`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:imagenet`, `alias_of:imagenet-ilsvrc-2012`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `imagenet`; `same_source_family_as` → `imagenet-ilsvrc-2012`
-- Registry identity audit: `paper_subset_unpinned` (2026-09-22).
-- Registry blockers:
-  > Exact source data release or paper-used subset is unverified.
-  > Public data/media reuse rights require separate review.
-- Mentioned by 1 paper:
-  - `paper-c12960e5d652fb7f`, page 5, role: source data
-    > No Defense EigenShield randomly selecting a thousand images. To evaluate Eigen- Model RTP HarmBench RTP HarmBench Shield’s robust
-
-### `imagenet100` — ImageNet100
-
-- State: access `gated`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **access**. Access is `gated`: getting the data needs a request, terms or credentials, which is a user action. The identity decision is separate from it.
-- Options: `alias_of:imagenet`, `alias_of:imagenet-ilsvrc-2012`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `imagenet`; `same_source_family_as` → `imagenet-ilsvrc-2012`
-- Registry identity audit: `family_only` (2026-09-22).
-- Registry blockers:
-  > Original-source credentials or agreement are required.
-  > Exact source variant or paper release is unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
-    > CLIP — CIFAR100, ImageNet100, ImageNet-R,
-
-### `imagenetval` — ImageNetVal
-
-- State: access `gated`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **access**. Access is `gated`: getting the data needs a request, terms or credentials, which is a user action. The identity decision is separate from it.
-- Options: `alias_of:imagenet`, `alias_of:imagenet-ilsvrc-2012`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `imagenet`; `same_source_family_as` → `imagenet-ilsvrc-2012`
-- Registry identity audit: `family_only` (2026-09-22).
-- Registry blockers:
-  > Original source requires registration or licensed base images.
-  > Exact source variant or paper selection is unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
-    > LAION, CelebA, ImageNetVal (Parekh et al., 2024) DePALM (CLIP+OPT) Image Classification
-
 ## IR-051 · ITAC
 
 **Group key:** `itac` · **Entries:** 1 · **Blocker types:** `identity` 1
@@ -1824,30 +1019,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
     > ons. Birhane, A., Han, S., Boddeti, V., Luccioni, S., et al. Into the LAION’s den: Investigating hate in multimodal datasets. Overall, effective inner interpretability techniques should
   - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
     > LAION, CelebA, ImageNetVal (Parekh et al., 2024) DePALM (CLIP+OPT)
-
-## IR-053 · LAION Aesthetics
-
-**Group key:** `laion-aesthetics` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `laion-aesthetics` — LAION Aesthetics
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `derived_subset_family_identified_variant_unresolved` (2026-10-08).
-- Registry blockers:
-  > Original release identity and rights need verification.
-  > Adapter and preview are not implemented.
-  > 2026-10-08 public-page reading: the Hugging Face laion/laion2B-en-aesthetic metadata is gated behind a contact-information agreement (not accepted by the agent), and which aesthetic subset the paper used is not stated.
-- Mentioned by 1 paper:
-  - `paper-ebd63da316af82e5`, page 3, role: source data
-    > tion for inversion initial- ization. In practice, we used images from LAION Aesthetics (a subset of LAION-5B [32]). This data serves two purposes: (i) training INRs for initializing text-to-image
 
 ## IR-054 · LLaVA_Instruct_150k, linked to `llava-instruct-150k`
 
@@ -1965,46 +1136,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   - `paper-80b7ba2e277a20c5`, page 7, role: out-of-domain evaluation
     > l variants enhance scale coverage. (VQA) tasks: SimpleVQA [8], MMStar [7], and RealWorldQA [30].
 
-## IR-059 · 2 entries linked to `mnist`
-
-**Group key:** `mnist` · **Entries:** 2 · **Blocker types:** `identity` 2
-
-**Linked to:**
-
-- `mnist` (identity `resolved`, preview `complete_target`) via `derived_from` — prepared
-
-**Decision needed.** A person decides, for each of the 2 entries below, which option applies; until then it stays a candidate. The registry links these entries to `mnist`. The options are `alias_of:mnist` (the paper's name is another name for that entry), `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open); each entry offers only the alias options for the targets it links to. A prepared preview exists for `mnist`; the paper's exact release is unresolved, so no entry here inherits it, and an entry whose preview is `none` stays `none`.
-
-**Options:** `alias_of:mnist`, `distinct_release`, `keep_candidate`
-
-### `scrambled-mnist` — scrambled MNIST
-
-- State: access `source_release_unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `mnist` (identity `resolved`, preview `complete_target`) via `derived_from`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:mnist`, `distinct_release`, `keep_candidate`
-- Registry links: `derived_from` → `mnist`
-- Registry identity audit: `derived_protocol_unpinned` (2026-09-22).
-- Registry blockers:
-  > Exact source data release or paper-used subset is unverified.
-  > Public data/media reuse rights require separate review.
-- Mentioned by 1 paper:
-  - `paper-1e2474b15fec2d7d`, page 17, role: OOD/background training
-    > examples (non-digits) used as a background class for the small VGG− model. (A) pixel-scrambled MNIST images. (B) Fourier-phase scrambled MNIST-images. (C) EMNIST letters [61], excluding the letters o…
-
-### `shiftmnist` — shiftMNIST
-
-- State: access `source_release_unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `mnist` (identity `resolved`, preview `complete_target`) via `derived_from`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:mnist`, `distinct_release`, `keep_candidate`
-- Registry links: `derived_from` → `mnist`
-- Registry identity audit: `derived_protocol_unpinned` (2026-09-22).
-- Registry blockers:
-  > Exact source data release or paper-used subset is unverified.
-  > Public data/media reuse rights require separate review.
-- Mentioned by 1 paper:
-  - `paper-72040eccb96ead7a`, page 8, role: introduction
-    > CE fi-RevNet 00.53 59.99 (b) Difference 00.53 27.84 (a) (b) Figure 8: shiftMNIST experiments. (a): Binary shiftMNIST, where the class is additionally encoded with a location-based binary cod
-
 ## IR-060 · MultiTrust
 
 **Group key:** `multitrust` · **Entries:** 1 · **Blocker types:** `access` 1
@@ -2031,30 +1162,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
     > Ensemble-based Transfer Attacks We further evaluate MLLM robustness using the MultiTrust benchmarking framework [68], which employs ensemble-based SSA-CWA attacks to generate highly transferable adve…
   - `paper-6dbb0d4a7b949143`, page 14, role: transfer-attack framework
     > g the attacks on the COCO image captioning task. These exam- MultiTrust benchmarking framework (Zhang et al., ples illustrate the varying degrees of model susceptibility
-
-## IR-061 · Ostris Dataset
-
-**Group key:** `ostris-dataset` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `ostris-dataset` — Ostris Dataset
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `survey_name_ambiguous` (2026-09-22).
-- Registry blockers:
-  > Access to the exact data files has not been verified.
-  > The exact paper release, source variant, or derived collection remains unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-25eaa8c74ce76800`, page 29, role: cited-study dataset in survey table
-    > , 2025) Stable Diffusion Image Editing Ostris Dataset, FFHQ (Baumann et al., 2024) CLIP, T2I Diffusion Image
 
 ## IR-062 · unnamed 11-image inpainting set
 
@@ -2644,29 +1751,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   - `paper-32cea5e43d940514`, page 14, role: non-overlap evaluation
     > ns, we use a recent text-to-image editing Datasets PATA Pairs model Qwen-Image-Edit [83] to leave only one per- Prompts Adj
 
-## IR-088 · perturbed gender-benchmark image variants
-
-**Group key:** `perturbed-gender-benchmark-image-variants` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `perturbed-gender-benchmark-image-variants` — perturbed gender-benchmark image variants
-
-- State: access `source_release_unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `derived_variants_unpinned` (2026-09-22).
-- Registry blockers:
-  > Exact source data release or paper-used subset is unverified.
-  > Public data/media reuse rights require separate review.
-- Mentioned by 1 paper:
-  - `paper-c65ee35ca47313c9`, page 3, role: derived collection
-    > in Appendix C.1. We randomly sample images to balance 3. Preliminary: Detecting Spurious Features
-
 ## IR-089 · Pitfall ROM
 
 **Group key:** `pitfall-rom` · **Entries:** 1 · **Blocker types:** `identity` 1
@@ -2849,48 +1933,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Mentioned by 1 paper:
   - `paper-d8a392188b9cf4d6`, page 5, role: derived collection
     > hird contains medical images for out-of-domain evaluation. For each dataset, we construct clean splits of 800, 100, and 100 images for training (i.e., feature extraction), development (i.e., threshol…
-
-## IR-096 · 2 entries linked to `sbbench`, `sbbench-syn`, `sbbench-syn-crop`
-
-**Group key:** `sbbench|sbbench-syn|sbbench-syn-crop` · **Entries:** 2 · **Blocker types:** `identity` 2
-
-**Linked to:**
-
-- `sbbench` (identity `resolved`, preview `none`) via `same_source_family_as` — no preview
-- `sbbench-syn` (identity `resolved`, preview `complete_target`) via `same_source_family_as` — prepared
-- `sbbench-syn-crop` (identity `resolved`, preview `complete_target`) via `same_source_family_as` — prepared
-
-**Decision needed.** A person decides, for each of the 2 entries below, which option applies; until then it stays a candidate. The registry links these entries to `sbbench`, `sbbench-syn` and `sbbench-syn-crop`. The options are `alias_of:sbbench`, `alias_of:sbbench-syn` and `alias_of:sbbench-syn-crop` (the paper's name is another name for that entry), `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open); each entry offers only the alias options for the targets it links to. A prepared preview exists for `sbbench-syn` and `sbbench-syn-crop`; the paper's exact release is unresolved, so no entry here inherits it, and an entry whose preview is `none` stays `none`.
-
-**Options:** `alias_of:sbbench`, `alias_of:sbbench-syn`, `alias_of:sbbench-syn-crop`, `distinct_release`, `keep_candidate`
-
-### `sb-syn` — SB-Syn
-
-- State: access `public`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `sbbench` (identity `resolved`, preview `none`) via `same_source_family_as`; `sbbench-syn` (identity `resolved`, preview `complete_target`) via `same_source_family_as`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:sbbench`, `alias_of:sbbench-syn`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `sbbench`; `same_source_family_as` → `sbbench-syn`
-- Registry identity audit: `family_only` (2026-09-22).
-- Registry blockers:
-  > Exact source variant or paper selection is unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-32cea5e43d940514`, page 7, role: introduction
-    > ed on the motivation that our main image dataset D E B IAS L ENS Rule SB-Syn SB-Syn 84.32 44.59 D E B IAS L ENS Rule SB-Syn-Crop SB-Syn-Crop 84.71 45.55 FairFace [41] seems to better yie
-
-### `sb-syn-crop` — SB-Syn-Crop
-
-- State: access `public`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `sbbench` (identity `resolved`, preview `none`) via `same_source_family_as`; `sbbench-syn-crop` (identity `resolved`, preview `complete_target`) via `same_source_family_as`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:sbbench`, `alias_of:sbbench-syn-crop`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `sbbench`; `same_source_family_as` → `sbbench-syn-crop`
-- Registry identity audit: `family_only` (2026-09-22).
-- Registry blockers:
-  > Exact source variant or paper selection is unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-32cea5e43d940514`, page 7, role: introduction
-    > t D E B IAS L ENS Rule SB-Syn SB-Syn 84.32 44.59 D E B IAS L ENS Rule SB-Syn-Crop SB-Syn-Crop 84.71 45.55 FairFace [41] seems to better yield effective social D E B IAS L ENS Rule FairFace SB
 
 ## IR-097 · SEEDBench
 
@@ -3231,29 +2273,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   - `paper-24b951c4e4ec2d31`, page 3, role: evaluation
     > Setting defined below), to identify which components carry We use the Visual-Counterfact dataset (Golo- information that causally determines how the con- vanevsky et al., 2025a), which contains 469 c…
 
-## IR-112 · Visual-Counterfact filtered 467
-
-**Group key:** `visual-counterfact-filtered-467` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `visual-counterfact-filtered-467` — Visual-Counterfact filtered 467
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `paper_selection_release_unverified` (2026-09-22).
-- Registry blockers:
-  > The current author filter reconstructed over the pinned 493-row color release selects 469 rows, not the paper-reported 467. Exact historical source revision or additional selection remains unresolved.
-  > A supported author-source filtering adapter remains implementation work; this audit is not preview coverage.
-- Mentioned by 1 paper:
-  - `paper-24b951c4e4ec2d31`, page 10, role: derived analysis subset
-    > lysis for interpreting neural nlp: ping original and counterfactual colors, leaving 467 The case of gender bias. Preprint, arXiv:2004.12265. examples for analysis.
-
 ## IR-113 · Visual6502 transistor netlist
 
 **Group key:** `visual6502-transistor-netlist` · **Entries:** 1 · **Blocker types:** `identity` 1
@@ -3276,29 +2295,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   - `paper-ad50206beabc5a94`, page 2, role: source data
     > [10] for a comprehensive review). The Visual6502 team reverse-engineered the 6507 from physical integrated circuits [11] by ch
 
-## IR-114 · VL-Gender
-
-**Group key:** `vl-gender` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `vl-gender` — VL-Gender
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `author_recipe_located_no_hosted_data` (2026-10-08).
-- Registry blockers:
-  > Original release identity and rights need verification.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-f03c5ad315e6d835`, page 2, role: introduction
-    > s including occupation-related information, we drop those images. Our VL-Gender evaluation contains 5,000 images, i.e. 1,000 images from each dataset, balanced for the gender and ethnicity attributes
-
 ## IR-115 · VQA-Constraints
 
 **Group key:** `vqa-constraints` · **Entries:** 1 · **Blocker types:** `identity` 1
@@ -3319,32 +2315,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Mentioned by 1 paper:
   - `paper-25eaa8c74ce76800`, page 29, role: cited-study dataset in survey table
     > 4a) LLaVa VQA, Model Editing VQA-Constraints Causal Tracing (Basu et al., 2024b) SD-XL, DeepFloyd Knowledge L
-
-## IR-116 · visualQA, linked to `vqa-v2`
-
-**Group key:** `vqa-v2` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:**
-
-- `vqa-v2` (identity `resolved`, preview `complete_target`) via `same_source_family_as` — prepared
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. The registry links this entry to `vqa-v2`. The options are `alias_of:vqa-v2` (the paper's name is another name for that entry), `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open). A prepared preview exists for `vqa-v2`; the paper's exact release is unresolved, so no entry here inherits it, and an entry whose preview is `none` stays `none`.
-
-**Options:** `alias_of:vqa-v2`, `distinct_release`, `keep_candidate`
-
-### `visualqa` — visualQA
-
-- State: access `public`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `vqa-v2` (identity `resolved`, preview `complete_target`) via `same_source_family_as`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:vqa-v2`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `vqa-v2`
-- Registry identity audit: `family_mentioned_version_unresolved` (2026-09-22).
-- Registry blockers:
-  > The exact paper release, source variant, or derived collection remains unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
-    > , 2024c) BLIP2(blip2-opt-2.7b), — visualQA, CroPA instructBLIP(instructblip-
 
 ## IR-117 · VQA v2 m+n subsets
 

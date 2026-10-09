@@ -74,11 +74,7 @@ evidence:
     ETag and per-member ZIP CRC checked on reads; upstream full-file SHA-256 recorded but not locally
     verified.
 source_url: https://huggingface.co/datasets/songweig/imagenet_sketch/tree/0d8b8b5380efe50baae075842505918ad43c88fe
-relationships:
-- type: same_source_family_as
-  target_id: imagenet
-  status: asserted_from_source_review
-  scope: Sketch-rendition dataset aligned to ImageNet-1K classes; a separate release, same class space.
+relationships: []
 modalities:
 - image
 tasks:

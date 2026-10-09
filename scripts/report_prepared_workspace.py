@@ -30,6 +30,7 @@ path=root/'reports/dataset_coverage.csv'
 with path.open(newline='') as stream:
     reader=csv.DictReader(stream);columns=reader.fieldnames;rows=list(reader)
 by_id={d.id:d for d in datasets}
+rows=[row for row in rows if row['dataset_id'] in by_id]  # entries moved to registry/excluded leave the matrix
 for row in rows:
     dataset=by_id[row['dataset_id']]
     for key,value in dataset.coverage.model_dump().items():

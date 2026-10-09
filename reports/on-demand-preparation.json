@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-07T09:40:32.552962+00:00",
+  "checked_at": "2026-10-09T03:16:02.342706+00:00",
   "datasets": [
     {
       "dataset_id": "agent-security-bench",
@@ -1202,6 +1202,16 @@
       "prepared_receipt": "work/prepared/sbbench-syn/175b3c346a5f1a2596d424cebcb4f5a08e82e0ffa5ca3c027833a721a811d532/receipt.json"
     },
     {
+      "dataset_id": "sbbench",
+      "release": "bbq-v-a1c78b8f73bc40408993414e3d94714a6a9169d3",
+      "snapshot_id": "bbq-v-a1c78b8f73bc-parquet45-f3e4eed58c04e355",
+      "records": 54414,
+      "preview_records": 100,
+      "scope": "Every row of the 45 Parquet shards of the gated Hugging Face dataset ucf-crcv/BBQ-V at revision a1c78b8f73bc40408993414e3d94714a6a9169d3 (12.45 GB; the card states CC BY-NC 4.0), grouped by file-name prefix: real (14,578 rows; answer options and a native label), synthetic (6,526), test (14,578; no answer columns, and the only configuration the dataset card declares) and test2 (18,732). The card says 14,144 image-question pairs; no group has that count, and the card describes only the test group. The groups overlap: upstream ids are unique inside each group but all ids of the test group also occur in the real group, so a row is identified by its shard and row, never by the upstream id alone. This is the authors' current release, not a claim that the historical SBBench population cited by the paper is any of these groups. Class codes keep the author ClassLabel integers; their names are quoted from the shard metadata. Images stay in the remote shards and are read on request through ETag-bound HTTPS ranges; only the 100 preview originals are kept locally.",
+      "plan_id": "34708ee62a0f5ed3e1fb8692afb4639f02ae72bb69d0cb4fd0b5ca10cc212f04",
+      "prepared_receipt": "work/prepared/sbbench/34708ee62a0f5ed3e1fb8692afb4639f02ae72bb69d0cb4fd0b5ca10cc212f04/receipt.json"
+    },
+    {
       "dataset_id": "scienceqa-img",
       "release": "f18b0a70359ebfb41f658fd564208d0355b013f4",
       "snapshot_id": "scienceqa-img-aed103e93ef820d316b1224c",
@@ -1632,10 +1642,10 @@
       "prepared_receipt": "work/prepared/zerobench/52f78e2061f5dc857ac3bc5ca9ab8fca477a9799059f7596a69255451172027e/receipt.json"
     }
   ],
-  "catalogue_entries": 333,
-  "with_previews": 218,
-  "without_previews": 115,
-  "full_population_indices": 216,
+  "catalogue_entries": 284,
+  "with_previews": 219,
+  "without_previews": 65,
+  "full_population_indices": 217,
   "all_requested_datasets_complete": false,
   "note": "Acquired source populations and on-demand infrastructure; catalogue-wide coverage is not complete."
 }

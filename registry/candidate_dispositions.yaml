@@ -14,11 +14,614 @@ excluded_from_dataset_catalogue:
   source_url: https://github.com/roywang021/IDEATOR
 - id: imedvqa
   disposition: name_extraction_artifact
-  reason: A PDF line break split OmniMedVQA into Omn- and iMedVQA; no separate iMedVQA source exists.
+  reason: A PDF line break split OmniMedVQA into Omn- and iMedVQA; no separate iMedVQA
+    source exists.
   corrected_identity: OmniMedVQA
   paper_ids:
   - paper-f5da3ca03780a203
   source_url: https://openaccess.thecvf.com/content/CVPR2024/html/Hu_OmniMedVQA_A_New_Large-Scale_Comprehensive_Evaluation_Benchmark_for_Medical_LVLM_CVPR_2024_paper.html
+- id: cub
+  name: CUB
+  disposition: alias_not_separate_dataset
+  reason: Survey name for the CUB birds family; the identifiable release is CUB-200-2011.
+  refers_to:
+  - cub-200-2011
+  paper_ids:
+  - paper-25eaa8c74ce76800
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/cub.yaml
+  source_url: https://www.vision.caltech.edu/datasets/cub_200_2011/
+- id: cub200
+  name: CUB200
+  disposition: alias_not_separate_dataset
+  reason: Survey spelling of CUB-200-2011.
+  refers_to:
+  - cub-200-2011
+  paper_ids:
+  - paper-25eaa8c74ce76800
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/cub200.yaml
+  source_url: https://www.vision.caltech.edu/datasets/cub_200_2011/
+- id: flowers
+  name: Flowers
+  disposition: alias_not_separate_dataset
+  reason: Chart label for the Oxford Flowers family; the catalogued release is Flowers-102.
+  refers_to:
+  - flowers102
+  paper_ids:
+  - paper-3e0db9c633ab204c
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/flowers.yaml
+  source_url: https://www.robots.ox.ac.uk/~vgg/data/flowers/102/
+- id: fgvc
+  name: FGVC
+  disposition: alias_not_separate_dataset
+  reason: Chart label for FGVC-Aircraft.
+  refers_to:
+  - fgvc-aircraft
+  paper_ids:
+  - paper-3e0db9c633ab204c
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/fgvc.yaml
+  source_url: https://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/
+- id: conceptual-captions
+  name: Conceptual Captions
+  disposition: alias_not_separate_dataset
+  reason: Name of the Conceptual Captions family; the catalogued release is CC3M.
+  refers_to:
+  - cc3m
+  paper_ids:
+  - paper-25eaa8c74ce76800
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/conceptual-captions.yaml
+  source_url: https://github.com/google-research-datasets/conceptual-captions
+- id: ms-coco
+  name: MS-COCO
+  disposition: alias_not_separate_dataset
+  reason: Spelling of MS COCO; mentions name no release, split or selection.
+  refers_to:
+  - coco
+  paper_ids:
+  - paper-ebd63da316af82e5
+  - paper-6d747c88d639c5aa
+  - paper-25eaa8c74ce76800
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/ms-coco.yaml
+  source_url: https://cocodataset.org/
+- id: mscoco
+  name: MSCOCO
+  disposition: alias_not_separate_dataset
+  reason: Spelling of MS COCO used for retrieval evaluation; no release or split is
+    named.
+  refers_to:
+  - coco
+  paper_ids:
+  - paper-7a1ff5996ce95273
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/mscoco.yaml
+  source_url: https://cocodataset.org/
+- id: ms-coco-7f846b38
+  name: MS COCO
+  disposition: alias_not_separate_dataset
+  reason: Spelling of MS COCO; the paper selects ten images without naming them.
+  refers_to:
+  - coco
+  paper_ids:
+  - paper-29349603429218b8
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/ms-coco-7f846b38.yaml
+  source_url: https://cocodataset.org/
+- id: ms-coco-captions
+  name: MS-COCO captions
+  disposition: alias_not_separate_dataset
+  reason: MS COCO captions; caption IDs and split are not named.
+  refers_to:
+  - coco
+  paper_ids:
+  - paper-a291f2908480a2f8
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/ms-coco-captions.yaml
+  source_url: https://cocodataset.org/
+- id: visualqa
+  name: visualQA
+  disposition: alias_not_separate_dataset
+  reason: Survey name of the official VQA benchmark; the catalogued release is VQA
+    v2.
+  refers_to:
+  - vqa-v2
+  paper_ids:
+  - paper-25eaa8c74ce76800
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/visualqa.yaml
+  source_url: https://visualqa.org/
+- id: sb-syn
+  name: SB-Syn
+  disposition: alias_not_separate_dataset
+  reason: Chart label for the SBBench synthetic releases.
+  refers_to:
+  - sbbench-syn
+  paper_ids:
+  - paper-32cea5e43d940514
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/sb-syn.yaml
+  source_url: https://huggingface.co/vlmbias
+- id: sb-syn-crop
+  name: SB-Syn-Crop
+  disposition: alias_not_separate_dataset
+  reason: Chart label for the SBBench synthetic crop releases.
+  refers_to:
+  - sbbench-syn-crop
+  paper_ids:
+  - paper-32cea5e43d940514
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/sb-syn-crop.yaml
+  source_url: https://huggingface.co/vlmbias
+- id: illusory-vqa
+  name: Illusory VQA
+  disposition: alias_not_separate_dataset
+  reason: Spelling or family name of IllusionVQA; the catalogued release is IllusionVQA.
+  refers_to:
+  - illusionvqa
+  paper_ids:
+  - paper-20de77d4e60fd1bd
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/illusory-vqa.yaml
+  source_url: https://github.com/IllusoryVQA/IllusoryVQA
+- id: facial-expression-recognition-2013
+  name: Facial Expression Recognition 2013
+  disposition: alias_not_separate_dataset
+  reason: The same Kaggle Challenges-in-Representation-Learning data as FER-2013.
+  refers_to:
+  - fer-2013
+  paper_ids: &id001
+  - paper-2038cb87115b4fb0
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/facial-expression-recognition-2013.yaml
+  source_url: https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data
+- id: imagenet
+  name: ImageNet
+  disposition: alias_not_separate_dataset
+  reason: Umbrella name that many papers use for training, validation and sampled
+    subsets; no single release.
+  refers_to:
+  - imagenet-ilsvrc-2012
+  - imagenet-1k
+  paper_ids:
+  - paper-9036b4eaa048dc21
+  - paper-a47845c66d4a3f48
+  - paper-1e2474b15fec2d7d
+  - paper-c12960e5d652fb7f
+  - paper-959e8fc51787f7e4
+  - paper-6dbb0d4a7b949143
+  - paper-7ed1979562251931
+  - paper-208c53a35b62bc52
+  - paper-78a318ad1ec346ef
+  - paper-728d8c0964b540ad
+  - paper-72040eccb96ead7a
+  - paper-d0229a9d15fd6b77
+  - paper-666de2b7486d80a3
+  - paper-ab31cc6a994470fb
+  - paper-d098a79f00c8b2b5
+  - paper-29349603429218b8
+  - paper-f7fa96d778a8d649
+  - paper-6d747c88d639c5aa
+  - paper-3aa07dc1c7bc37d9
+  - paper-25eaa8c74ce76800
+  - paper-b039401c04ff9b91
+  - paper-392b0c393c06b48e
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/imagenet.yaml
+  source_url: https://www.image-net.org/
+- id: imagenet-ilsvrc
+  name: ImageNet ILSVRC
+  disposition: alias_not_separate_dataset
+  reason: The ILSVRC challenge release, cited only as model-training lineage.
+  refers_to:
+  - imagenet-ilsvrc-2012
+  paper_ids:
+  - paper-08e415961919a492
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/imagenet-ilsvrc.yaml
+  source_url: https://www.image-net.org/challenges/LSVRC/
+- id: coco-gender
+  name: COCO-gender
+  disposition: alias_not_separate_dataset
+  reason: Gender-label overlay on COCO attributed to Zhao et al.; not a new image
+    archive.
+  refers_to:
+  - coco-demographic-annotations
+  - cocogender
+  paper_ids:
+  - paper-c65ee35ca47313c9
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/coco-gender.yaml
+- id: coco-train
+  name: COCO train
+  disposition: view_not_separate_dataset
+  reason: The train split of COCO; the paper names no release year or image IDs.
+  refers_to:
+  - coco
+  paper_ids:
+  - paper-2df1203e2d3767bb
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/coco-train.yaml
+  source_url: https://cocodataset.org/
+- id: coco-caption
+  name: COCO Caption
+  disposition: view_not_separate_dataset
+  reason: The caption annotations of the COCO releases.
+  refers_to:
+  - coco
+  paper_ids:
+  - paper-25eaa8c74ce76800
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/coco-caption.yaml
+  source_url: https://cocodataset.org/
+- id: coco-detection-dataset
+  name: COCO Detection Dataset
+  disposition: view_not_separate_dataset
+  reason: A survey descriptor of the COCO detection source; no separate archive or
+    subset.
+  refers_to:
+  - coco
+  paper_ids:
+  - paper-25eaa8c74ce76800
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/coco-detection-dataset.yaml
+  source_url: https://arxiv.org/abs/2410.07149
+- id: coco-spatial
+  name: COCO-Spatial
+  disposition: view_not_separate_dataset
+  reason: The What's Up COCO-spatial overlay on COCO images, catalogued as coco-one
+    and coco-two.
+  refers_to:
+  - coco-one
+  - coco-two
+  paper_ids:
+  - paper-2aa40aa13ed2a25b
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/coco-spatial.yaml
+  source_url: https://github.com/amitakamath/whatsup_vlms
+- id: cocogendertxt
+  name: Cocogendertxt
+  disposition: view_not_separate_dataset
+  reason: The caption/text configuration derived from COCO-GB.
+  refers_to:
+  - cocogender
+  paper_ids:
+  - paper-32cea5e43d940514
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/cocogendertxt.yaml
+  source_url: https://github.com/namin-an/DeBiasLens
+- id: mscoco-100-target-subset
+  name: MSCOCO 100-target subset
+  disposition: view_not_separate_dataset
+  reason: A 100-image selection from COCO with no published ID list.
+  refers_to:
+  - coco
+  paper_ids:
+  - paper-7a1ff5996ce95273
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/mscoco-100-target-subset.yaml
+- id: imagenet100
+  name: ImageNet100
+  disposition: view_not_separate_dataset
+  reason: One of several non-identical 100-class selections of ILSVRC; no class list
+    or seed.
+  refers_to:
+  - imagenet-ilsvrc-2012
+  paper_ids:
+  - paper-25eaa8c74ce76800
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/imagenet100.yaml
+  source_url: https://www.image-net.org/challenges/LSVRC/
+- id: imagenetval
+  name: ImageNetVal
+  disposition: view_not_separate_dataset
+  reason: The validation split of ILSVRC; exact year and selection unpinned.
+  refers_to:
+  - imagenet-ilsvrc-2012
+  paper_ids:
+  - paper-25eaa8c74ce76800
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/imagenetval.yaml
+  source_url: https://www.image-net.org/challenges/LSVRC/
+- id: imagenet-sampled-1-000-images
+  name: ImageNet sampled 1,000 images
+  disposition: view_not_separate_dataset
+  reason: A paper-sampled 1,000-image subset of ImageNet; selection unreleased.
+  refers_to:
+  - imagenet-ilsvrc-2012
+  paper_ids:
+  - paper-c12960e5d652fb7f
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/imagenet-sampled-1-000-images.yaml
+  source_url: https://arxiv.org/abs/2502.14976
+- id: cifar-2
+  name: CIFAR-2
+  disposition: view_not_separate_dataset
+  reason: A two-class protocol generated from CIFAR-10 with the authors' seed and
+    index files.
+  refers_to:
+  - cifar-10
+  paper_ids:
+  - paper-25eaa8c74ce76800
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/cifar-2.yaml
+  source_url: https://github.com/BrunoKM/diffusion-influence
+- id: scrambled-mnist
+  name: scrambled MNIST
+  disposition: view_not_separate_dataset
+  reason: Pixel- and Fourier-phase scrambling of MNIST; a transformation, not a release.
+  refers_to:
+  - mnist
+  paper_ids:
+  - paper-1e2474b15fec2d7d
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/scrambled-mnist.yaml
+  source_url: https://arxiv.org/abs/1911.09288
+- id: shiftmnist
+  name: shiftMNIST
+  disposition: view_not_separate_dataset
+  reason: Binary and texture shifts constructed from MNIST digits; a protocol, not
+    a release.
+  refers_to:
+  - mnist
+  paper_ids:
+  - paper-72040eccb96ead7a
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/shiftmnist.yaml
+  source_url: https://github.com/jhjacobsen/fully-invertible-revnet
+- id: artbench-2
+  name: Artbench-2
+  disposition: view_not_separate_dataset
+  reason: A paper-specific two-style subset of ArtBench-10.
+  refers_to:
+  - artbench
+  paper_ids:
+  - paper-25eaa8c74ce76800
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/artbench-2.yaml
+  source_url: https://sail-sg.github.io/D-TRAK/
+- id: laion-aesthetics
+  name: LAION Aesthetics
+  disposition: view_not_separate_dataset
+  reason: The aesthetic-score subset of LAION-5B.
+  refers_to:
+  - laion
+  paper_ids:
+  - paper-ebd63da316af82e5
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/laion-aesthetics.yaml
+- id: vl-gender
+  name: VL-Gender
+  disposition: view_not_separate_dataset
+  reason: A gender-balanced 1,000-image-per-source evaluation drawn from other datasets.
+  refers_to:
+  - fairface
+  - miap
+  - phase
+  paper_ids:
+  - paper-f03c5ad315e6d835
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/vl-gender.yaml
+- id: vlagenderbias
+  name: VLAGenderBias
+  disposition: view_not_separate_dataset
+  reason: A benchmark the authors' scripts build by sampling other datasets.
+  refers_to:
+  - fairface
+  - miap
+  - phase
+  paper_ids:
+  - paper-32cea5e43d940514
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/vlagenderbias.yaml
+- id: gpt-4v-filtered-vl-gender-subset
+  name: GPT-4V-filtered VL-Gender subset
+  disposition: view_not_separate_dataset
+  reason: A GPT-4V-filtered sample of VL-Gender.
+  refers_to:
+  - fairface
+  - miap
+  - phase
+  paper_ids:
+  - paper-f03c5ad315e6d835
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/gpt-4v-filtered-vl-gender-subset.yaml
+  source_url: https://github.com/ExplainableML/vla-gender-bias
+- id: perturbed-gender-benchmark-image-variants
+  name: perturbed gender-benchmark image variants
+  disposition: view_not_separate_dataset
+  reason: Colour, lighting, object and background perturbations of other benchmarks.
+  refers_to:
+  - cocogender
+  - fairface
+  - miap
+  - phase
+  paper_ids:
+  - paper-c65ee35ca47313c9
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/perturbed-gender-benchmark-image-variants.yaml
+  source_url: https://openaccess.thecvf.com/content/ICCV2025/html/Hirota_Bias_in_Gender_Bias_Benchmarks_How_Spurious_Features_Distort_Evaluation_ICCV_2025_paper.html
+- id: visual-counterfact-filtered-467
+  name: Visual-Counterfact filtered 467
+  disposition: view_not_separate_dataset
+  reason: A 467-case analysis subset of Visual-CounterFact.
+  paper_ids:
+  - paper-24b951c4e4ec2d31
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/visual-counterfact-filtered-467.yaml
+  source_url: https://github.com/nlietzow/vision-default-prior-override
+- id: gda-adversarial-image-variants
+  name: GDA adversarial image variants
+  disposition: view_not_separate_dataset
+  reason: Adversarial variants generated from samples of three existing datasets.
+  paper_ids:
+  - paper-f5da3ca03780a203
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/gda-adversarial-image-variants.yaml
+- id: gaussian-rubbish-examples
+  name: Gaussian rubbish examples
+  disposition: view_not_separate_dataset
+  reason: Generated noise inputs used as a probe, not a dataset.
+  paper_ids:
+  - paper-f7fa96d778a8d649
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/gaussian-rubbish-examples.yaml
+- id: custom-speech-segment-collection
+  name: custom speech segment collection
+  disposition: view_not_separate_dataset
+  reason: Training segments derived from a read-speech corpus; not released as a dataset.
+  refers_to:
+  - wall-street-journal
+  paper_ids:
+  - paper-6d747c88d639c5aa
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/custom-speech-segment-collection.yaml
+- id: dall-e-generated-target-images
+  name: DALL-E generated target images
+  disposition: view_not_separate_dataset
+  reason: Target images an attack method generates; no separate archive.
+  paper_ids:
+  - paper-a291f2908480a2f8
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/dall-e-generated-target-images.yaml
+  source_url: https://arxiv.org/abs/2305.16934
+- id: paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-collection
+  name: unnamed internet hidden-content collection
+  disposition: view_not_separate_dataset
+  reason: The 53-image wild part of HC-Bench.
+  refers_to:
+  - hc-bench
+  paper_ids:
+  - paper-2c07a8c6af8e33c2
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-collection.yaml
+  source_url: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench
+- id: paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-set
+  name: unnamed internet hidden-content set
+  disposition: view_not_separate_dataset
+  reason: The 53-image wild part of HC-Bench.
+  refers_to:
+  - hc-bench
+  paper_ids:
+  - paper-2c07a8c6af8e33c2
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-set.yaml
+  source_url: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench
+- id: brain-score
+  name: Brain-Score
+  disposition: platform_not_dataset
+  reason: A benchmark platform hosting many datasets, not a dataset.
+  paper_ids:
+  - paper-3aa07dc1c7bc37d9
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/brain-score.yaml
+  source_url: https://www.brain-score.org/
+- id: robustbench
+  name: RobustBench
+  disposition: platform_not_dataset
+  reason: A robustness leaderboard, model zoo and library, not a source-image dataset.
+  paper_ids:
+  - paper-a47845c66d4a3f48
+  - paper-12e8bd34b4a2f2a8
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/robustbench.yaml
+  source_url: https://github.com/RobustBench/robustbench/tree/78fcc9e48a07a861268f295a777b975f25155964
+- id: custom-dataset
+  name: Custom Dataset
+  disposition: no_identifiable_dataset
+  reason: A generic survey label that names no dataset.
+  paper_ids:
+  - paper-25eaa8c74ce76800
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/custom-dataset.yaml
+  source_url: https://arxiv.org/abs/2210.04885
+- id: custom-image-editing-dataset
+  name: Custom Image Editing Dataset
+  disposition: no_identifiable_dataset
+  reason: A generic survey descriptor of editing examples; no fixed release.
+  paper_ids:
+  - paper-25eaa8c74ce76800
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/custom-image-editing-dataset.yaml
+  source_url: https://arxiv.org/abs/2208.01626
+- id: concept-editing-dataset
+  name: Concept-Editing Dataset
+  disposition: no_identifiable_dataset
+  reason: A survey descriptor; no independently named data archive.
+  paper_ids:
+  - paper-25eaa8c74ce76800
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/concept-editing-dataset.yaml
+  source_url: https://github.com/samyadeepbasu/LocoGen
+- id: contrastive-prompts
+  name: Contrastive Prompts
+  disposition: no_identifiable_dataset
+  reason: Method inputs, not a standalone dataset.
+  paper_ids:
+  - paper-25eaa8c74ce76800
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/contrastive-prompts.yaml
+  source_url: https://compvis.github.io/attribute-control/
+- id: ostris-dataset
+  name: Ostris Dataset
+  disposition: no_identifiable_dataset
+  reason: A survey shorthand whose dataset was not resolved.
+  paper_ids:
+  - paper-25eaa8c74ce76800
+  decided_by: 'Researcher instruction 2026-10-09: aliases and views are not catalogue
+    datasets; only real datasets are listed.'
+  entry_file: registry/excluded/ostris-dataset.yaml
 alias_redirects:
 - alias_id: paper-12e8bd34b4a2f2a8-unnamed-harmful-instruction-evaluation-set-90f1ca61
   canonical_id: paper-12e8bd34b4a2f2a8-unnamed-harmful-instruction-evaluation-set
@@ -37,7 +640,8 @@ alias_redirects:
 - alias_id: cifar10
   canonical_id: cifar-10
   disposition: source_verified_name_alias
-  reason: CIFAR10 spelling denotes the original CIFAR-10 source; no shifted or corrupted suffix occurs in its receipts.
+  reason: CIFAR10 spelling denotes the original CIFAR-10 source; no shifted or corrupted
+    suffix occurs in its receipts.
   paper_ids:
   - paper-25eaa8c74ce76800
   - paper-392b0c393c06b48e
@@ -45,12 +649,13 @@ alias_redirects:
   evidence_ids:
   - evidence-ac2590cd536df85159ee
   - evidence-b12451f2d54be3df8ca1
-  scope_note: Preserve each paper's role and subset; the active preview is one pinned release, not proof of an identical
-    paper sample.
+  scope_note: Preserve each paper's role and subset; the active preview is one pinned
+    release, not proof of an identical paper sample.
 - alias_id: cifar100
   canonical_id: cifar-100
   disposition: source_verified_name_alias
-  reason: CIFAR100 spelling denotes the original CIFAR-100 source; no CIFAR-100-C suffix occurs in its receipts.
+  reason: CIFAR100 spelling denotes the original CIFAR-100 source; no CIFAR-100-C
+    suffix occurs in its receipts.
   paper_ids:
   - paper-25eaa8c74ce76800
   - paper-392b0c393c06b48e
@@ -58,24 +663,26 @@ alias_redirects:
   evidence_ids:
   - evidence-c63e5e138844835b95ab
   - evidence-700565db3fe4e221b496
-  scope_note: Preserve each paper's role and subset; the active preview is one pinned release, not proof of an identical
-    paper sample.
+  scope_note: Preserve each paper's role and subset; the active preview is one pinned
+    release, not proof of an identical paper sample.
 - alias_id: vqa-2-0
   canonical_id: vqa-v2
   disposition: source_verified_name_alias
-  reason: VQA 2.0 is the VQA v2 benchmark name; a paper's exact split or selection is not implied.
+  reason: VQA 2.0 is the VQA v2 benchmark name; a paper's exact split or selection
+    is not implied.
   paper_ids:
   - paper-765a2362f8735bc4
   source_url: https://visualqa.org/download.html
   evidence_ids:
   - evidence-5631a7cf99ec92152302
   - evidence-8b145fe068984c83886a
-  scope_note: Active VQA v2 pack pins 2017 validation on COCO val2014; other paper runs can use different splits
-    or samples.
+  scope_note: Active VQA v2 pack pins 2017 validation on COCO val2014; other paper
+    runs can use different splits or samples.
 - alias_id: vqav2
   canonical_id: vqa-v2
   disposition: source_verified_name_alias
-  reason: VQAv2 is the VQA v2 benchmark name; 500-image and other paper selections remain separate scopes.
+  reason: VQAv2 is the VQA v2 benchmark name; 500-image and other paper selections
+    remain separate scopes.
   paper_ids:
   - paper-25eaa8c74ce76800
   - paper-6dbb0d4a7b949143
@@ -87,11 +694,13 @@ alias_redirects:
   - evidence-1fb1c58004a38f3099fb
   - evidence-274bf70a3897654ac6bf
   - evidence-a6e0b2fbd4e229b12f16
-  scope_note: Active VQA v2 pack pins 2017 validation on COCO val2014; receipts include distinct sampled evaluations.
+  scope_note: Active VQA v2 pack pins 2017 validation on COCO val2014; receipts include
+    distinct sampled evaluations.
 - alias_id: describable-textures-dataset
   canonical_id: dtd
   disposition: confirmed_same_release_alias
-  reason: Same official Oxford dtd-r1.0.1 archive and byte-identical recipe; paper mentions merged into dtd.
+  reason: Same official Oxford dtd-r1.0.1 archive and byte-identical recipe; paper
+    mentions merged into dtd.
   paper_ids:
   - paper-a47845c66d4a3f48
   - paper-72040eccb96ead7a
@@ -99,8 +708,8 @@ alias_redirects:
 - alias_id: pets
   canonical_id: oxfordpet
   disposition: confirmed_same_release_alias
-  reason: Pets (Parkhi et al., 2012) is the Oxford-IIIT Pet release already registered as oxfordpet; identical source
-    and recipe.
+  reason: Pets (Parkhi et al., 2012) is the Oxford-IIIT Pet release already registered
+    as oxfordpet; identical source and recipe.
   paper_ids:
   - paper-6dbb0d4a7b949143
   - paper-3e0db9c633ab204c
@@ -115,3 +724,10 @@ alias_redirects:
   - paper-392b0c393c06b48e
   - paper-7ed1979562251931
   source_url: https://okvqa.allenai.org/download.html
+- alias_id: facial-expression-recognition-2013
+  canonical_id: fer-2013
+  disposition: same_challenge_data_alias
+  reason: Both entries name the Kaggle Challenges in Representation Learning FER data
+    (Goodfellow et al. 2013).
+  paper_ids: *id001
+  source_url: https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data

@@ -125,10 +125,6 @@ evidence:
   note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in at least one record.
     Not inferred from the name or description.'
 source_url: https://www.image-net.org/download.php
-relationships:
-- type: same_source_family_as
-  target_id: imagenet
-  status: asserted_from_source_review
-  scope: ILSVRC 1,000-class subset of ImageNet; the base release is gated at image-net.org.
+relationships: []
 modalities:
 - image

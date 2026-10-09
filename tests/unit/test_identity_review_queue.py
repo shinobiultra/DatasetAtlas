@@ -266,7 +266,7 @@ def test_adding_a_new_in_scope_entry_does_not_renumber_existing_groups(tmp_path)
     first = builder.run(root)
     before = _ids(first)
     registry = root / "registry/datasets"
-    assert any("|" in key for key in before), "the registry has linked families"
+    assert any(len(group.members) > 1 for group in first.groups), "the registry has linked families"
     coco_key = next(key for key in before if "coco" in key.split("|"))
     for new in (
         _entry("aaa-sorts-before-everything", name="Sorts first"),
@@ -335,15 +335,15 @@ def test_the_ids_file_is_not_a_catalogue_entry():
 # --- a family link is navigation, not coverage (Review Focus 6) -----------------------------------------------------------
 
 def test_family_link_does_not_change_preview_state(real_model, real_markdown):
-    assert _dataset_row("ms-coco")["preview"] == "none"
-    assert _real_registry()["ms-coco"]["coverage"]["preview"] == "none"
-    member = _member(real_model, "ms-coco")
+    assert _dataset_row("nips17")["preview"] == "none"
+    assert _real_registry()["nips17"]["coverage"]["preview"] == "none"
+    member = _member(real_model, "nips17")
     assert member.preview == "none"
-    group = _group_of(real_model, "ms-coco")
-    coco = next(target for target in group.targets if target.id == "coco")
-    assert coco.preview == _dataset_row("coco")["preview"], "the family's own state is shown as it is"
-    assert any(link.target == "coco" for link in member.links)
-    found = re.search(r"^### `ms-coco`.*?(?=^### |^## |\Z)", real_markdown, re.M | re.S)
+    group = _group_of(real_model, "nips17")
+    coco = next(target for target in group.targets if target.id == "saegis-clean-and-adversarial-splits")
+    assert coco.preview == _dataset_row("saegis-clean-and-adversarial-splits")["preview"], "the family's own state is shown as it is"
+    assert any(link.target == "saegis-clean-and-adversarial-splits" for link in member.links)
+    found = re.search(r"^### `nips17`.*?(?=^### |^## |\Z)", real_markdown, re.M | re.S)
     assert found and "preview `none`" in found.group(0)
 
 
@@ -613,9 +613,12 @@ def test_a_record_with_any_other_status_is_never_altered(tmp_path):
 
 # --- ids survive a person's decisions ---------------------------------------------------------------------------------
 
-@pytest.mark.parametrize("resolved, member", [("coco-spatial", "coco-caption"), ("imagenet", "imagenet100")])
+@pytest.mark.parametrize("resolved, member", [("a2", "a1")])
 def test_resolving_one_member_keeps_the_groups_id(tmp_path, resolved, member):
-    root = _workspace(tmp_path, with_ids=False)
+    # Two prepared families; a2 bridges both, so the group key names both and changes once a2 is resolved.
+    root = _synthetic(tmp_path, _entry("t1", identity="resolved"), _entry("t2", identity="resolved"),
+                      _entry("a1", links=[_link("same_source_family_as", "t1")]),
+                      _entry("a2", links=[_link("same_source_family_as", "t1"), _link("same_source_family_as", "t2")]))
     first = builder.run(root)
     group = _group_of(first, resolved)
     group_id, old_key, size = group.id, group.key, len(group.members)

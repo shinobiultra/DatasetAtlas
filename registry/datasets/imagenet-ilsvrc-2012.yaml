@@ -58,10 +58,6 @@ evidence:
   note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in at least one record.
     Not inferred from the name or description.'
 source_url: https://www.image-net.org/challenges/LSVRC/
-relationships:
-- type: same_source_family_as
-  target_id: imagenet
-  status: asserted_from_source_review
-  scope: ILSVRC 2012 release of ImageNet, distributed via Kaggle under ImageNet terms.
+relationships: []
 modalities:
 - image

@@ -18,7 +18,7 @@ def test_family_links_added_in_review_carry_a_scope_statement_and_check_date():
     registry = Registry(ROOT)
     reviewed = [(d.id, rel) for d in registry.datasets() for rel in d.relationships
                 if isinstance(rel, dict) and rel.get('checked_on') == '2026-10-06' and rel.get('status') == 'asserted_from_source_review']
-    assert len(reviewed) >= 16
+    assert len(reviewed) >= 3  # most reviewed family links sat on alias and view entries, which left the catalogue on 2026-10-09
     for entry, rel in reviewed:
         assert rel['type'] in {'same_source_family_as', 'derived_from'}, (entry, rel)
         assert len(rel.get('scope', '')) > 40, (entry, rel)  # a link must say what it does not establish

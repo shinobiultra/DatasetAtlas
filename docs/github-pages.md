@@ -62,7 +62,15 @@ Prerequisites: the repository is `github.com/shinobiultra/DatasetAtlas`; the wor
 
 ### Status on 2026-10-09
 
-The branch was pushed and PR 5 opened, but GitHub refused to start any job: "recent account payments have failed or your spending limit needs to be increased". Until that is fixed no workflow can run, so nothing was deployed. The repository is also private, and GitHub Pages on a private repository needs a paid plan, so even a working workflow may be refused when it reaches the Pages step. Two ways forward: fix billing (and confirm the plan includes Pages for private repositories), or make the repository public after deciding that the history (maintainer paths in about 60 reports, the corpus folder name) may be seen. A prebuilt copy of the exact site for `/DatasetAtlas/` is in `dist/dataset-atlas-site-*.zip` (gitignored) for any static host.
+Merged to `main` and ready, but not deployed. GitHub refused to start any job on the private repository ("recent account payments have failed or your spending limit needs to be increased"), and Pages on a private repository needs a paid plan. Making the repository public removes both limits. Making it public is the owner's step: it exposes the full history, including the maintainer's workspace paths in about 60 reports, the corpus folder name and the author e-mail on 90 commits. The history was scanned for tokens and secrets and none were found.
+
+```bash
+gh repo edit shinobiultra/DatasetAtlas --visibility public --accept-visibility-change-consequences
+gh api -X POST repos/shinobiultra/DatasetAtlas/pages -f build_type=workflow
+gh workflow run validate-and-publish.yml --ref main -f deploy=true
+```
+
+Then open `https://shinobiultra.github.io/DatasetAtlas/`. A prebuilt copy of the exact site for `/DatasetAtlas/` is in `dist/dataset-atlas-site-*.zip` (gitignored) for any static host. No licence file is committed: add one before inviting reuse.
 
 Rollback: re-run the workflow from the previous good commit, or disable Pages in settings. Cached copies and search-engine indexes can outlive a deletion, so publish only what you would accept being copied.
 

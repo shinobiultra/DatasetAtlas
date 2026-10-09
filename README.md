@@ -52,4 +52,4 @@ A working release; the full v1 in [SPEC.md](SPEC.md) is not complete. **231 cata
 
 [Getting started](docs/getting-started.md) · [Adding your own datasets](docs/adding-your-own-datasets.md) · [Adding catalogue datasets](docs/adding-datasets.md) · [Storage](docs/storage.md) · [Development](docs/development.md) · [Publication](docs/publication.md) · [GitHub Pages](docs/github-pages.md)
 
-Dataset licences and terms belong to their publishers and are not changed by this repository. Gated datasets are fetched with your own accepted terms and credentials; Dataset Atlas never accepts terms or applies for access for you.
+The code is released under the [MIT licence](LICENSE). Dataset licences and terms belong to their publishers and are not changed by it: the data and media in this repository (the three approved example sets, schemas and catalogue metadata) keep the notices recorded in `registry/` and `licenses/`. Gated datasets are fetched with your own accepted terms and credentials; Dataset Atlas never accepts terms or applies for access for you.

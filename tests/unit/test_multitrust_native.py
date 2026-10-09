@@ -308,7 +308,8 @@ def test_snapshot_id_is_derived_from_the_pins_the_task_table_and_the_fixed_selec
     digest = hashlib.sha256("\n".join(parts).encode()).hexdigest()[:16]
     assert document["snapshot_id"] == f"multitrust-{REVISION[:12]}-q{len(document['files'])}-{digest}"
     assert not re.search(r"budget|bytes", document["snapshot_id"])
-    assert config["preview_sampling"] == {"method": "sha256_bottom_k_primary_asset_verified_media", "seed": 0, "candidate_pool": 250, "count": 100}
+    assert config["preview_sampling"] == {"method": "sha256_bottom_k_primary_asset_verified_media", "seed": 0, "candidate_pool": 250, "count": 100,
+                                          "stratify_by": {"field": "aspect", "values": ["truthfulness", "safety", "robustness", "fairness", "privacy"]}}
 
 
 def test_recipe_caps_keep_the_images_remote_and_declare_an_upper_bound_below_three_gigabytes():
@@ -753,8 +754,9 @@ def test_earlier_evidence_is_untouched_and_the_new_items_cite_the_receipts():
     before, now = yaml.safe_load(old), entry()
     assert now["evidence"][:len(before["evidence"])] == before["evidence"]
     added = now["evidence"][len(before["evidence"]):]
-    assert [item["kind"] for item in added] == ["source_audit_access", "native_task_inventory", "native_population_live_verification"]
-    access, tasks, verification = added
+    assert [item["kind"] for item in added][:3] == ["source_audit_access", "native_task_inventory", "native_population_live_verification"]
+    assert {item["kind"] for item in added[3:]} <= {"preview_resample"}  # the 2026-10-09 stratified re-draw
+    access, tasks, verification = added[:3]
     assert access["checked_on"] == "2026-10-09" and "accepted" in access["note"] and "on their own" in access["note"]
     assert access["audit_file"] == verification["receipt"] == "reports/multitrust-live-verification-20261009.json"
     assert tasks["audit_file"] == "reports/multitrust-task-inventory-20261009.json"
@@ -828,7 +830,8 @@ def test_receipt_respects_the_binding_caps_and_measures_what_moved():
     parts = transfer["parts"]
     assert transfer["total_measured_bytes"] == sum(part["bytes"] for part in parts.values())
     assert transfer["preparation_transfer_bytes"] == parts["query_files"]["bytes"] + parts["preview_original_images"]["bytes"]
-    assert parts["query_files"]["bytes"] == sum(f["bytes"] for f in recipe()["files"])  # every pinned query file once, nothing else
+    # every pinned query file once, nothing else; a re-run that reuses the registered source moves none
+    assert parts["query_files"]["bytes"] in (sum(f["bytes"] for f in recipe()["files"]), 0)
     assert document["repository_downloaded_whole"] is False and document["images_downloaded_whole_repository"] is False
     assert document["query_files_fetched"] == len(recipe()["files"])
     assert document["image_files_fetched"] < 200  # a hundred preview records, a few more for the live reads; never the 10,464 images
@@ -862,7 +865,7 @@ def test_receipt_records_the_preview_the_sampling_and_the_beyond_row_hundred_rea
     sampling = preview["sampling"]
     assert sampling["seed"] == 0 and sampling["population_count"] == recipe()["expected_count"] and sampling["returned_count"] == 100
     assert sampling["method"] == recipe()["adapter_config"]["preview_sampling"]["method"] and sampling["media_representation"] == "original"
-    assert "not a prevalence estimate" in preview["rule"] and "does not stratify" in preview["rule"]
+    assert "not a prevalence estimate" in preview["rule"] and "aspect-stratified" in preview["rule"]
     media = preview["original_media"]
     assert media["verified"] == media["sha256_equal_to_pack"] == preview["assets"] >= 100 and media["representation"] == "original"
     assert media["bytes"] == document["bytes_transferred"]["parts"]["preview_original_images"]["bytes"]  # kept bytes equal the bytes fetched

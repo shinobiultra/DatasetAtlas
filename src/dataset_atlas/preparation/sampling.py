@@ -17,7 +17,17 @@ class PreviewSampler:
     not a sample for estimating example-level population prevalence.
     """
 
-    def __init__(self, size=100, seed=0, group_by='primary_asset'):
+    def __init__(self, size=100, seed=0, group_by='primary_asset', stratify=None):
+        if stratify is not None:
+            # One independent hash-ranked pool per declared stratum, interleaved in rank order, so a preview that takes the first N
+            # verified candidates holds every stratum in equal share; a record outside the declared strata is an error, never dropped.
+            values = stratify.get('values') if isinstance(stratify, dict) else None
+            if not isinstance(stratify.get('field'), str) or not isinstance(values, list) or len(values) < 2 or len(set(values)) != len(values):
+                raise ValueError('Preview stratification needs a source field and at least two distinct values')
+            self.stratify, self.strata = stratify, {value: PreviewSampler(-(-size // len(values)), seed, group_by) for value in values}
+            self.size, self.seed, self.group_by, self.population_count = size, seed, group_by, 0
+            return
+        self.stratify = None
         if type(size) is not int or not 1 <= size <= 500:
             raise ValueError('Preview candidate pool must be between 1 and 500')
         if type(seed) is not int:
@@ -33,6 +43,13 @@ class PreviewSampler:
         return int.from_bytes(hashlib.sha256(f'{self.seed}:{value}'.encode()).digest(), 'big')
 
     def add(self, record):
+        if self.stratify:
+            value = record.source.get(self.stratify['field'])
+            if value not in self.strata:
+                raise ValueError(f"Record {record.id} has {self.stratify['field']}={value!r}, outside the declared preview strata")
+            self.population_count += 1
+            self.strata[value].add(record)
+            return
         self.population_count += 1
         primary = record.asset_ids[0] if self.group_by == 'primary_asset' and record.asset_ids else None
         group = f'asset:{primary}' if primary else f'example:{record.id}'
@@ -53,11 +70,21 @@ class PreviewSampler:
         self.selected[group] = (example_rank, record)
 
     def records(self):
+        if self.stratify:
+            lanes = [self.strata[value].records() for value in self.stratify['values']]
+            return [lane[i] for i in range(max(map(len, lanes))) for lane in lanes if i < len(lane)]
         return [self.selected[group][1] for group in sorted(self.selected, key=lambda group: (self.rank(group), group))]
 
     def description(self, release, unit='example'):
         if unit not in {'asset', 'example', 'entity', 'conversation'}:
             raise ValueError('Unknown preview sampling unit')
+        if self.stratify:
+            base = self.strata[self.stratify['values'][0]].description(release, unit)
+            base.update(population_count=self.population_count, requested_count=self.size,
+                        returned_count=sum(len(s.selected) for s in self.strata.values()),
+                        stratified_by=self.stratify['field'], strata_population={v: s.population_count for v, s in self.strata.items()},
+                        selection_note='Hash-ranked records per stratum (one per primary asset), interleaved so each declared stratum has an equal share of the preview. All linked assets remain. Not a prevalence estimate.')
+            return base
         return {'method': 'sha256_bottom_k_primary_asset' if self.group_by == 'primary_asset' else 'sha256_bottom_k_example', 'seed': self.seed,
                 'unit': unit, 'grouping': 'primary asset ID; record ID for records without assets' if self.group_by == 'primary_asset' else 'record ID',
                 'population': 'complete pinned indexed population', 'population_count': self.population_count,

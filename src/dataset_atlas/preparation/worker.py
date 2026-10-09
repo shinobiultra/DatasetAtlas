@@ -416,7 +416,8 @@ def run(root, identity):
             adapter.preparation_transfer_limit=plan['max_download_bytes']-source_transfer_bytes
         group_by = dataset.adapter_config.get('preview_group_by', 'primary_asset')
         sampler = (AssetFirstPreviewSampler(min(expected_count, 100)) if group_by == 'primary_asset_then_example'
-            else PreviewSampler(min(expected_count, 250 if verify_remote_media else 100), group_by=group_by))
+            else PreviewSampler(min(expected_count, 250 if verify_remote_media else 100), group_by=group_by,
+                                stratify=(dataset.adapter_config.get('preview_sampling') or {}).get('stratify_by')))
         def records():
             cursor = None
             count = 0
@@ -547,7 +548,8 @@ def run(root, identity):
             pack.sampling.update(method='sha256_bottom_k_primary_asset_verified_media',
                 requested_count=min(expected_count, 100), returned_count=len(pack.records),
                 candidate_pool_count=len(candidates),
-                selection_note='Lowest hash-ranked candidate records with all linked original images verified; excludes unavailable remote image slots.')
+                selection_note=('Stratified hash-ranked candidates, interleaved across strata, with all linked original images verified; excludes unavailable remote image slots.'
+                    if getattr(sampler, 'stratify', None) else 'Lowest hash-ranked candidate records with all linked original images verified; excludes unavailable remote image slots.'))
         actual_preview_bytes = len(pack.model_dump_json(indent=2).encode())
         snapshot_bytes = sum(path.stat().st_size for path in snapshot.rglob('*') if path.is_file())
         if actual_preview_bytes + snapshot_bytes + derived_bytes + retained_preview_bytes > plan['max_output_bytes']:

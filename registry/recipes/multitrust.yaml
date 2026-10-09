@@ -7,10 +7,10 @@
 # snapshot_id = "multitrust-<revision[:12]>-q<number of query files>-<first 16 hex of sha256 over these lines joined by newline>": the sorted lines
 # source_name:bytes:sha256 of every file under `files`, then media_inventory:<sha256 of the inventory file>, tasks:<sha256 of the canonical JSON
 # (sorted keys, no spaces, UTF-8) of adapter_config.tasks>, and preview_sampling:<canonical JSON of adapter_config.preview_sampling>. No budget is part of it.
-# preview_media_transfer_bytes is the exact sum of the pinned sizes of every image of the 250 seeded candidates the worker may open to find 100 that decode;
+# preview_media_transfer_bytes is the exact sum of the pinned sizes of every image of the 250 seeded candidates (50 per aspect, stratified by `preview_sampling.stratify_by`) the worker may open to find 100 that decode, 20 per aspect;
 # it is an upper bound computed from the pins, not a measurement (the measured transfer is in reports/multitrust-live-verification-20261009.json).
 release: multitrust-84dc74754959e9f52b67c5185700f4f7fcd8c4df
-snapshot_id: multitrust-84dc74754959-q62-899310f6c6f9249f
+snapshot_id: multitrust-84dc74754959-q62-ebc859260cedb327
 adapter: multitrust
 credential_profile: huggingface
 expected_count: 11512
@@ -28,7 +28,7 @@ allowed_hosts:
 - cdn-lfs.hf.co
 - us.aws.cdn.hf.co
 - eu.aws.cdn.hf.co
-preview_media_transfer_bytes: 356169152
+preview_media_transfer_bytes: 276386066
 files:
 - source_name: fairness/preference.json
   url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/fairness/preference.json
@@ -871,6 +871,14 @@ adapter_config:
     seed: 0
     candidate_pool: 250
     count: 100
+    stratify_by:
+      field: aspect
+      values:
+      - truthfulness
+      - safety
+      - robustness
+      - fairness
+      - privacy
   max_annotation_bytes: 128000000
   fields:
     task:

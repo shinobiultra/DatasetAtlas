@@ -109,6 +109,12 @@ evidence:
   receipt: reports/multitrust-live-verification-20261009.json
   note: All 11,512 query rows of 62 pinned query files indexed under snapshot multitrust-84dc74754959-q62-899310f6c6f9249f; 100 preview originals fetched through the credential profile and decoded; originals of rows beyond the first 100 served for every aspect. Measured transfer and prepared output are in the receipt.
   source_identity_status: 'candidate: the authors current release, not the corpus-used transfer-attack examples'
+- kind: preview_resample
+  checked_on: '2026-10-09'
+  receipt: reports/multitrust-live-verification-20261009.json
+  scope: At the researcher's request the 100-row preview was re-drawn stratified by aspect (50 hash-ranked
+    candidates per aspect, interleaved), giving 21 truthfulness, 20 safety, 20 robustness, 19 fairness
+    and 20 privacy rows. The complete index is unchanged. Still a seeded sample, not a prevalence estimate.
 source_url: https://multi-trust.github.io/
 modalities:
 - image

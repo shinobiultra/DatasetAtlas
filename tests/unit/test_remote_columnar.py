@@ -155,3 +155,25 @@ def test_media_network_bytes_share_preparation_transfer_limit(tmp_path,monkeypat
     with pytest.raises(ValueError,match='budget exhausted'):
         adapter.resolve_asset(source,record.assets[0].uri)
     assert len(calls)==before
+
+
+def test_footer_concurrency_follows_the_recipe_and_defaults_to_eight(tmp_path,monkeypatch):
+    adapter,_,_,_=fixture(tmp_path,monkeypatch)
+    original=adapter.files[0]
+    adapter.files=[{**original,'source_name':f'part-{i}.parquet'} for i in range(6)]
+    seen=[]
+    import concurrent.futures as futures
+    real=futures.ThreadPoolExecutor
+    class Spy(real):
+        def __init__(self,max_workers=None,*a,**k):
+            seen.append(max_workers);super().__init__(max_workers,*a,**k)
+    monkeypatch.setattr(futures,'ThreadPoolExecutor',Spy)
+    adapter.config['footer_workers']=3
+    adapter.warm_layouts()
+    assert seen==[3]
+    seen.clear();adapter._layouts={};adapter.config.pop('footer_workers')
+    adapter.warm_layouts()
+    assert seen==[8]
+    adapter._layouts={}
+    adapter.config['footer_workers']=9
+    with pytest.raises(ValueError,match='within 1..8'):adapter.warm_layouts()

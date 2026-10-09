@@ -101,9 +101,10 @@ class RemoteColumnarAdapter(DatasetAdapter):
     @property
     def count(self):return sum(sum(self._layout(i)[3]) for i in range(len(self.files)))
 
-    def warm_layouts(self, progress=None, workers=8):
-        """Read independent footers concurrently under one aggregate byte cap."""
+    def warm_layouts(self, progress=None, workers=None):
+        """Read independent footers concurrently under one aggregate byte cap (`footer_workers` in the recipe, default 8)."""
         from concurrent.futures import ThreadPoolExecutor
+        if workers is None:workers=self.config.get('footer_workers',8)
         if type(workers) is not int or not 1 <= workers <= 8:
             raise ValueError('Remote schema concurrency must be within 1..8')
         missing=[index for index in range(len(self.files)) if index not in self._layouts]
@@ -130,7 +131,7 @@ class RemoteColumnarAdapter(DatasetAdapter):
 
     def source_field_types(self):
         types={'_atlas_origin':{'object'}}
-        if self.config.get('mapping', {}).get('configuration_from_path'):
+        if self.config.get('mapping', {}).get('configuration_from_path') or self.config.get('mapping', {}).get('configuration_pattern'):
             types['_atlas_configuration']={'string'}
         for i in range(len(self.files)):
             schema,media,_,_=self._layout(i)
@@ -188,10 +189,18 @@ class RemoteColumnarAdapter(DatasetAdapter):
             record.conversation=[message for pair in pairs for message in (
                 {'role':'user','content':pair['user']}, {'role':'assistant','content':pair['assistant']})]
             if pairs:record.question=pairs[0]['user']
+        if self.config['mapping'].get('configuration_from_path') and self.config['mapping'].get('configuration_pattern'):
+            raise ValueError('Declare one configuration rule: configuration_from_path or configuration_pattern, not both')
         if self.config['mapping'].get('configuration_from_path'):
             configuration,separator,_=entry['source_name'].partition('/')
             if not separator:raise ValueError('Source has no configuration directory')
             record.source['_atlas_configuration']=configuration
+        elif self.config['mapping'].get('configuration_pattern'):
+            # Hugging Face names a shard "<split>-<index>-of-<count>.parquet"; the author's configuration is that prefix.
+            found=re.search(self.config['mapping']['configuration_pattern'],entry['source_name'])
+            if not found or 'configuration' not in found.groupdict() or not found['configuration']:
+                raise ValueError(f"Source file {entry['source_name']} does not match the configuration pattern")
+            record.source['_atlas_configuration']=found['configuration']
         record.source['_atlas_origin']={'file':entry['source_name'],'row':row_index,'upstream_sha256':entry['sha256'],
             'etag':entry['etag'],'integrity':'Strong ETag-bound ranges; full shard SHA-256 not computed locally.'}
         return record

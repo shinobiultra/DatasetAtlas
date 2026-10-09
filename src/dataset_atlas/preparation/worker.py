@@ -481,13 +481,16 @@ def run(root, identity):
         retained_preview_bytes=0
         bounded_sampling=None
         if dataset.adapter=='remote_columnar' and hasattr(adapter,'group_bytes') and any(adapter._layout(i)[1] for i in range(len(adapter.files))):
-            from .remote_sample import TwoStageSampler, draw_native_subset
+            from .remote_sample import FixedRowGroupSampler, TwoStageSampler, draw_native_subset
             groups=[]
             for i in range(len(adapter.files)):
                 for group,(count,(annotation,media)) in enumerate(zip(adapter._layout(i)[3],adapter.group_bytes(i),strict=True)):
                     groups.append((i,group,count,annotation+media))
             remaining=plan['max_download_bytes']-adapter.bytes_fetched-adapter.media_bytes_fetched
-            draw=TwoStageSampler(groups,seed=0,byte_budget=remaining)
+            fixed=dataset.adapter_config.get('preview_sampling')
+            # A recipe may fix the selection (seed, row groups, rows per group); the budget then only gates admission.
+            draw=(FixedRowGroupSampler.from_spec(groups,[entry['source_name'] for entry in adapter.files],fixed,remaining) if fixed
+                  else TwoStageSampler(groups,seed=0,byte_budget=remaining))
             candidates,bounded_sampling=draw_native_subset(adapter,source,draw,min(expected_count,100),record_filter,check)
             candidates.sort(key=lambda record:(record.source['_atlas_origin']['file'],record.source['_atlas_origin']['row']))
             if record_filter:bounded_sampling['population_count']=expected_count
@@ -517,7 +520,8 @@ def run(root, identity):
                 on_progress=lambda **values: update(stage='verifying preview media', **values,
                     **({'downloaded_bytes': source_transfer_bytes+adapter.bytes_fetched+getattr(adapter,'media_bytes_fetched',0)} if hasattr(adapter, 'bytes_fetched') else {})))
             if bounded_sampling:
-                preview_media_validation['selection']='Budgeted native row-group draws; the same native subset as the complete index is enforced before original-media verification.'
+                preview_media_validation['selection']=('Fixed seeded row-group selection; the same native subset as the complete index is enforced before original-media verification.'
+                    if fixed else 'Budgeted native row-group draws; the same native subset as the complete index is enforced before original-media verification.')
             selected_hashes=set()
             for record in pack.records:
                 for asset in record.assets:
@@ -536,7 +540,9 @@ def run(root, identity):
         if bounded_sampling:
             pack.sampling={**bounded_sampling,'unit':dataset.coverage.unit,'source_revision':dataset.release,
                 'requested_count':min(expected_count,100),'returned_count':len(pack.records),'population':plan['scope'],
-                'selection_note':'Bounded native row-group sampling over the complete footer population; source order is used for efficient image reads. The complete annotation index is independent of this preview.'}
+                'selection_note':('Fixed seeded two-stage selection over the complete footer population (row group, then row within group); the transfer budget never changes it. '
+                    if fixed else 'Bounded native row-group sampling over the complete footer population; source order is used for efficient image reads. ')
+                    +'The complete annotation index is independent of this preview.'}
         elif preview_media_validation:
             pack.sampling.update(method='sha256_bottom_k_primary_asset_verified_media',
                 requested_count=min(expected_count, 100), returned_count=len(pack.records),

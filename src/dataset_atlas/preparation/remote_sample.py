@@ -98,6 +98,89 @@ class TwoStageSampler:
                 'draw_rule': 'global position = int(SHA-256("<seed>:<draw index>")) mod population count'}
 
 
+FIXED_METHOD = 'sha256_ranked_row_groups_then_rows'
+
+
+@dataclass
+class FixedRowGroupSampler:
+    """A seeded two-stage selection that never looks at the transfer budget.
+
+    ``groups`` are (file index, row group, rows, transfer bytes) of the pinned population and ``names`` the source name of
+    each file index. Stage one ranks every row group by SHA-256("<seed>:row_group:<source name>:<group>") and keeps the
+    lowest ``row_groups`` (each group equally likely, whatever its row count). Stage two ranks the rows of a kept group by
+    SHA-256("<seed>:row:<source name>:<group>:<row>") and keeps the lowest few: ``count`` rows in total, the best-ranked groups
+    giving one extra row when ``count`` does not divide evenly, never more than ``max_rows_per_group`` from one group. The
+    byte budget only gates admission: a selection that does not fit is refused, not altered.
+    """
+    groups: list[tuple[int, int, int, int]]
+    names: list[str]
+    seed: int = 0
+    row_groups: int = 40
+    count: int = 100
+    max_rows_per_group: int = 3
+    byte_budget: int = 1_000_000_000
+    draws: int = 0
+    selected_bytes: int = 0
+    rejected_for_budget: int = 0
+
+    def __post_init__(self):
+        for name in ('seed', 'row_groups', 'count', 'max_rows_per_group', 'byte_budget'):
+            if type(getattr(self, name)) is not int:
+                raise ValueError(f'Fixed sample {name} must be an integer')
+        if self.seed < 0 or self.byte_budget < 1 or self.count < 1 or self.max_rows_per_group < 1:
+            raise ValueError('Fixed sample needs a non-negative seed and positive count, rows per group and budget')
+        if not 1 <= self.row_groups <= len(self.groups):
+            raise ValueError('Fixed sample row_groups must be within the pinned population of row groups')
+        if self.row_groups * self.max_rows_per_group < self.count:
+            raise ValueError('Fixed sample cannot reach its row count with that many row groups and rows per group')
+        ranked = sorted(self.groups, key=lambda g: (hashlib.sha256(f'{self.seed}:row_group:{self.names[g[0]]}:{g[1]}'.encode()).hexdigest(), g[0], g[1]))
+        base, extra = divmod(self.count, self.row_groups)
+        self.chosen = ranked[:self.row_groups]
+        self.targets = []
+        self.allocation = []
+        for rank, (file_index, group, rows, _) in enumerate(self.chosen):
+            wanted = base + (1 if rank < extra else 0)
+            if wanted > self.max_rows_per_group:
+                raise ValueError('Fixed sample would take more rows from one row group than max_rows_per_group')
+            if rows < wanted:
+                raise ValueError(f'Row group {group} of {self.names[file_index]} has fewer rows than the {wanted} the fixed sample takes from it')
+            order = sorted(range(rows), key=lambda row: hashlib.sha256(f'{self.seed}:row:{self.names[file_index]}:{group}:{row}'.encode()).hexdigest())
+            self.targets.extend((file_index, group, row) for row in order[:wanted])
+            self.allocation.append(wanted)
+        self.selected_bytes = sum(g[3] for g in self.chosen)
+        if self.selected_bytes > self.byte_budget:
+            raise ValueError(f'The fixed preview selection needs {self.selected_bytes:,} bytes of row-group transfer but the budget leaves '
+                             f'{self.byte_budget:,}; raise the budget or reduce the number of row groups. The selection itself does not change with the budget.')
+
+    @classmethod
+    def from_spec(cls, groups, names, spec, byte_budget):
+        if spec.get('method') != FIXED_METHOD:
+            raise ValueError(f'Preview sampling method must be {FIXED_METHOD}')
+        return cls(groups=groups, names=names, seed=spec.get('seed', 0), row_groups=spec['row_groups'], count=spec.get('count', 100),
+                   max_rows_per_group=spec['max_rows_per_group'], byte_budget=byte_budget)
+
+    def next(self) -> tuple[int, int, int] | None:
+        if self.draws >= len(self.targets):
+            return None
+        self.draws += 1
+        return self.targets[self.draws - 1]
+
+    def description(self, drawn: int) -> dict:
+        return {'method': FIXED_METHOD, 'seed': self.seed, 'grouping': 'row group, then row within group',
+                'population_count': sum(g[2] for g in self.groups), 'row_groups_in_population': len(self.groups),
+                'row_groups_selected': len(self.chosen), 'rows_drawn': drawn, 'draws': self.draws, 'max_rows_per_group': self.max_rows_per_group,
+                'selected_row_group_transfer_bytes': self.selected_bytes, 'admission_budget_bytes': self.byte_budget,
+                'rejected_draws_for_transfer_budget': 0, 'valid_for_population_prevalence': False,
+                'selected_row_groups': [{'file': self.names[f], 'row_group': g, 'rows_in_group': rows, 'rows_taken': taken}
+                                        for (f, g, rows, _), taken in zip(self.chosen, self.allocation)],
+                'design': (f'Two-stage cluster sample: {len(self.chosen)} of {len(self.groups)} row groups chosen with equal probability, then up to '
+                           f'{self.max_rows_per_group} rows within each; clustered by row group, so it is not a prevalence estimate and rows of one group are '
+                           'neighbours in source order. The transfer budget gates admission only and never changes which rows are chosen.'),
+                'draw_rule': ('Row groups ranked by SHA-256("<seed>:row_group:<source name>:<group>") and the lowest are kept; rows of each kept group '
+                              'ranked by SHA-256("<seed>:row:<source name>:<group>:<row>") and the lowest are kept; the best-ranked groups take one extra '
+                              'row when the row count does not divide evenly.')}
+
+
 HF_HOSTS = ['huggingface.co', 'cdn-lfs.huggingface.co', 'cdn-lfs-us-1.huggingface.co', 'cdn-lfs-eu-1.huggingface.co',
             'cas-bridge.xethub.hf.co', 'us.aws.cdn.hf.co', 'eu.aws.cdn.hf.co']
 

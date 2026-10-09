@@ -41,6 +41,19 @@ persisted output; the source remains remote behind a bounded cache. Reading an i
 require its Parquet row group. Oversized groups require a local shard or a separately
 configured larger media budget; they are never silently truncated.
 
+A gated native Parquet repository (BBQ-V, `registry/recipes/sbbench.yaml`) is declared with
+`adapter: remote_columnar`, `credential_profile: huggingface` and every shard pinned in
+`adapter_config.remote_files`: a URL at a fixed Hub revision, the byte length, the Hub's LFS SHA-256 and the
+strong ETag from a HEAD. The researcher accepts the terms on their own account; the token is read from the
+local Hugging Face credential at request time and never reaches a recipe, receipt, pack or test. Leave
+`source_url` out of such a recipe: a `huggingface.co/datasets/<repo>` URL sends `atlas previews fetch` to the
+sampled route, which builds no complete index. Shards named `<split>-<n>-of-<m>.parquet` take their
+configuration from `mapping.configuration_pattern` (a regular expression with a `configuration` group; use
+`configuration_from_path` when the configuration is a directory). Quote the author's ClassLabel names for
+integer columns in `adapter_config.fields` (`dtype: category`, numeric `values`). The transfer budget caps the
+sampled row groups, because each one costs its whole image column chunk once. A refused read (HTTP 401 or 403)
+raises an error that names the gate; it never yields an empty page.
+
 `classic_vision` supports native CUB-200-2011, Flowers-102 and FGVC-Aircraft annotations;
 Flowers requires the `datasets` extra for MATLAB label files. `cifar_c_npy` addresses
 CIFAR-C arrays directly inside the original uncompressed TAR without executing pickle.

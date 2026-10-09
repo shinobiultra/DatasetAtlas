@@ -32,7 +32,7 @@ class HttpsRangeReader(io.RawIOBase):
         self._resolved_url=None
         self._connection=None
         self._connection_origin=None
-        self.position=0;self.bytes_fetched=0;self.cache=cache;self.cancel=cancel
+        self.position=0;self.bytes_fetched=0;self.timeout_retries=0;self.cache=cache;self.cancel=cancel
         self.fetcher=HttpsFetcher(allowed_hosts,timeout=30,max_bytes=byte_budget,credential_profile=credential_profile)
 
     def readable(self):return True
@@ -92,14 +92,36 @@ class HttpsRangeReader(io.RawIOBase):
 
     TRANSIENT_STATUSES=(429,502,503,504)
 
+    def _refusal(self,status):
+        """What a refused read means and what the researcher can do; never any header or token."""
+        if self.fetcher.credential_profile=='huggingface':
+            return (f'Source refused access (HTTP {status}): this release is gated or the local sign-in is missing. Accept its terms on '
+                    'your own Hugging Face account and sign in locally (credential profile "huggingface"), then retry. '
+                    'Nothing was read, so no records are shown.')
+        return f'Source refused access (HTTP {status}): the release requires authorization that is not configured for it. Nothing was read.'
+
+    TIMEOUT_ATTEMPTS=3
+    TIMEOUT_BACKOFF=(1,2)
+
     def _fetch_with_retry(self,start,end):
-        """Retry only throttling/unavailability, with bounded backoff. Integrity failures (ETag, bounds) never retry."""
+        """Retry throttling/unavailability and connection-level timeouts (connect, TLS, read), with bounded backoff.
+
+        Timeouts get at most TIMEOUT_ATTEMPTS attempts with a fixed 1 s, 2 s backoff. Refusals (401/403/404) and integrity
+        failures (ETag, bounds) never retry. Bytes of a timed-out attempt are discarded and not counted; the range is requested whole."""
+        timeouts=0
         for attempt in range(5):
             try:return self._fetch(start,end)
             except _TransientRangeError as error:
                 if attempt==4:raise ValueError(f'Range source unavailable: HTTP {error.status} after {attempt} retries') from None
                 if self.cancel:self.cancel()
                 time.sleep(min(8,2**attempt))
+            except TimeoutError:
+                timeouts+=1
+                if timeouts>=self.TIMEOUT_ATTEMPTS or attempt==4:
+                    raise ValueError(f'Range source timed out after {timeouts} attempts; the link or the source is too slow right now, retry later') from None
+                self.timeout_retries+=1
+                if self.cancel:self.cancel()
+                time.sleep(self.TIMEOUT_BACKOFF[timeouts-1])
 
     def _fetch(self,start,end):
         current=self._resolved_url or self.url
@@ -139,6 +161,7 @@ class HttpsRangeReader(io.RawIOBase):
                     self._resolved_url=None;current=self.url
                     continue
                 if response.status in self.TRANSIENT_STATUSES:raise _TransientRangeError(response.status)
+                if response.status in (401,403):raise ValueError(self._refusal(response.status))
                 if response.status!=206:raise ValueError(f'Range source requires HTTP 206; received {response.status}')
                 if response.getheader('ETag')!=self.etag:raise ValueError('Range source ETag changed')
                 if response.getheader('Content-Encoding','identity')!='identity':raise ValueError('Encoded range response is unsupported')

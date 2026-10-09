@@ -1,0 +1,31 @@
+source_url: https://www.robots.ox.ac.uk/~vgg/data/flowers/102/
+release: oxford-flowers102-original
+adapter: classic_vision
+expected_count: 8189
+scope: All 8,189 original Oxford Flowers-102 images with source class IDs and train/validation/test
+  membership; optional segmentation images are a separate source.
+adapter_config:
+  dataset_kind: flowers102
+  archive_preparation: zip-store
+files:
+- url: https://www.robots.ox.ac.uk/~vgg/data/flowers/102/102flowers.tgz
+  bytes: 344862509
+  sha256: 2d01ecc807db462958cfe3d92f57a8c252b4abd240eb955770201e45f783b246
+  source_name: 102flowers.tgz
+  config_key: path
+  format: tgz
+- url: https://www.robots.ox.ac.uk/~vgg/data/flowers/102/imagelabels.mat
+  bytes: 502
+  sha256: 4903e94206bac23bf772aadf06451916df56b58fc483a62db32a97b82656651d
+  source_name: imagelabels.mat
+  config_key: labels_path
+  format: mat
+- url: https://www.robots.ox.ac.uk/~vgg/data/flowers/102/setid.mat
+  bytes: 14989
+  sha256: 46b8678f91fd95d3c8f4feab80d271a6c834a1dd896fe29fd3e6ad9ce5c8dccd
+  source_name: setid.mat
+  config_key: splits_path
+  format: mat
+allowed_hosts:
+- www.robots.ox.ac.uk
+- thor.robots.ox.ac.uk

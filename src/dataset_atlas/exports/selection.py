@@ -29,6 +29,9 @@ def _check_identity(selection: Selection, records: Sequence[Record]) -> None:
     for record in records:
         if record.unit != selection.unit or record.dataset_id not in selection.dataset_ids or record.snapshot_id not in selection.snapshot_ids:
             raise ExchangeError(f"Record identity does not match selection: {record.id}")
+        for asset in record.assets:
+            if asset.dataset_id != record.dataset_id or asset.release_id != record.release_id:
+                raise ExchangeError(f"Asset identity does not match selected record: {asset.id}")
 
 
 def selection_export_payload(selection: Selection, records: Sequence[Record]) -> dict:
@@ -73,14 +76,19 @@ def export_selection(selection: Selection, records: Sequence[Record], output_dir
                 source = originals[asset["id"]]
                 if not source.uri:
                     raise ExchangeError(f"Approved media has no source: {asset['id']}")
+                if media_root is None:
+                    raise ValueError('Media export requires a configured media root')
                 file = contained_file(Path(media_root), source.uri)
                 if file.suffix.lower() not in {".png", ".jpg", ".jpeg", ".webp", ".gif"} or file.stat().st_size > 10_000_000:
                     raise ExchangeError(f"Approved media type or size is unsupported: {asset['id']}")
                 data = file.read_bytes()
+                if source.sha256 and digest(data) != source.sha256:
+                    raise ExchangeError(f"Approved original media checksum changed: {asset['id']}")
                 validate_image(data, file.suffix.lower())
                 member = f"media/{digest(data)}{file.suffix.lower()}"
                 media[member] = data
                 asset["uri"] = member
+                asset["sha256"] = digest(data)
                 found.add(asset["id"])
         if found != approved:
             raise ExchangeError("Approved media IDs must match selected assets")
@@ -149,4 +157,8 @@ def import_selection(path: Path, *, max_bytes: int = MAX_EXCHANGE_BYTES) -> tupl
     referenced_media = {asset.uri for record in records for asset in record.assets if asset.uri}
     if referenced_media != set(members[2:]):
         raise ExchangeError("Media references do not match selection manifest")
+    for record in records:
+        for asset in record.assets:
+            if asset.uri and (not asset.sha256 or digest(contained_file(path, asset.uri).read_bytes()) != asset.sha256):
+                raise ExchangeError(f"Included original media checksum differs from asset: {asset.id}")
     return selection, records

@@ -1,0 +1,50 @@
+{
+  "dataset_id": "places",
+  "source_sha256": "24b4e639ef12a0012af525bc4cb443e4ab4aaea8369a1fb009b70e4a4aad5d48",
+  "linked_dataset_ids": [],
+  "status": "executed",
+  "retained_snapshots": 1,
+  "media_references_checked": 36500,
+  "unique_native_media_in_snapshots": 36500,
+  "preview_asset_memberships": 100,
+  "modalities": [
+    "image"
+  ],
+  "preview_bytes_upper_bound": 1348214,
+  "cold_original_probes": [
+    {
+      "sha256": "7ccacbb8f85d36064b80ec67a33f7fc70b42a040035682b9ad5f5c74c8f2205d",
+      "bytes": 20469,
+      "transferred_bytes": 20469,
+      "source_sha256": "24b4e639ef12a0012af525bc4cb443e4ab4aaea8369a1fb009b70e4a4aad5d48",
+      "fingerprint_type": "etag",
+      "etag": "\"1f4d4800-532ed50e7f7d2\""
+    },
+    {
+      "sha256": "65433b139981edc438ab8337c00ede3930c92988117497d0c1140d13c7bdd218",
+      "bytes": 16467,
+      "transferred_bytes": 16467,
+      "source_sha256": "24b4e639ef12a0012af525bc4cb443e4ab4aaea8369a1fb009b70e4a4aad5d48",
+      "fingerprint_type": "etag",
+      "etag": "\"1f4d4800-532ed50e7f7d2\""
+    },
+    {
+      "sha256": "acc8f3f81e8033c619a2753fe8ebfe5245e163835ecc4b029258689d39fca2c2",
+      "bytes": 7400,
+      "transferred_bytes": 7400,
+      "source_sha256": "24b4e639ef12a0012af525bc4cb443e4ab4aaea8369a1fb009b70e4a4aad5d48",
+      "fingerprint_type": "etag",
+      "etag": "\"1f4d4800-532ed50e7f7d2\""
+    }
+  ],
+  "paths": [
+    "work/source-objects/24b4e639ef12a0012af525bc4cb443e4ab4aaea8369a1fb009b70e4a4aad5d48",
+    "work/prepared/places/c5a999c4e9ce824ae3ed7b00a88f244ad946c8873762c2384d3a13e7be36b2cf/sources/24b4e639ef12a0012af525bc4cb443e4ab4aaea8369a1fb009b70e4a4aad5d48.tar"
+  ],
+  "extracted_files": 0,
+  "source_bytes": 525158400,
+  "extracted_bytes": 0,
+  "retention": "Original-quality previews and complete indices; other originals and optimized browsing copies on demand.",
+  "freed_unique_file_bytes": 525158400,
+  "source_acquisition_cache_link_retired": "work/places365-native-audit-20261006/download-cache/objects/ad10fcec535215145ebb37b6ddc5959abe76e7b5830a675afb635492ce956ac8"
+}

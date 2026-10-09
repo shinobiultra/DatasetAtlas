@@ -2,31 +2,38 @@ schema_version: '1.0'
 id: vizwiz-priv
 name: VizWiz-priv
 aliases: []
-description: 'VizWiz-Priv privacy-region and question overlays on images captured by blind participants.
-  Source review: Author CVPR 2019 release; exact files/hashes unverified'
+description: All 13571 author-released train/val/test privacy annotation rows with
+  native polygons, question fields and distinct author-provided image conditions.
+  Eight annotated images are absent from the native ZIPs; unredacted private photographs
+  are not released.
 paper_ids:
 - paper-7ed1979562251931
-release: unresolved
+release: vizwiz-priv-v1.0-author-20190617
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: indexed_metadata_partial_media
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Adapter and preview are not implemented.
+  - Eight annotated nonprivate images are absent from all native image archives and
+    remain explicit missing assets.
+  - Private unredacted images were not released; home-mean and fake-content conditions
+    are author-produced variants.
+  - Source-specific publication rights and exact paper-used subset still need review.
+  total_count: 13571
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
-  note: Author page says CC BY 4.0, but content intentionally includes private visual information; no
-    media publication approval
+  note: Author page says CC BY 4.0, but content intentionally includes private visual
+    information; no media publication approval
   source: https://vizwiz.org/tasks-and-datasets/vizwiz-priv/
 evidence:
 - kind: corpus_mention
@@ -35,15 +42,15 @@ evidence:
   source_file_hash: aec173a1458a692a9a4159f07664f759ab64d0f3cce6638cad56d9b76af663ec
   page: 10
   role: bibliography-only reference
-  excerpt: 'Jeffrey P Bigham. Moustafa Alzantot, Yash Sharma Sharma, Ahmed El- 2019. Vizwiz-priv: A dataset
-    for recognizing the gohary, Bo-Jhang Ho, Mani Srivastava, and Kai-Wei presence and purpose of private
-    v'
+  excerpt: 'Jeffrey P Bigham. Moustafa Alzantot, Yash Sharma Sharma, Ahmed El- 2019.
+    Vizwiz-priv: A dataset for recognizing the gohary, Bo-Jhang Ho, Mani Srivastava,
+    and Kai-Wei presence and purpose of private v'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://vizwiz.org/tasks-and-datasets/vizwiz-priv/
-  note: VizWiz-Priv privacy-region and question overlays on images captured by blind participants Author
-    CVPR 2019 release; exact files/hashes unverified
+  note: VizWiz-Priv privacy-region and question overlays on images captured by blind
+    participants Author CVPR 2019 release; exact files/hashes unverified
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
@@ -56,9 +63,32 @@ evidence:
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_rights
   url: https://vizwiz.org/tasks-and-datasets/vizwiz-priv/
-  note: Author page says CC BY 4.0, but content intentionally includes private visual information; no
-    media publication approval
+  note: Author page says CC BY 4.0, but content intentionally includes private visual
+    information; no media publication approval
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
+- kind: fresh_workspace_acquisition
+  checked_on: '2026-10-05'
+  snapshot_id: vizwiz-priv-a306803df15e20a204ec7a5b
+  source_count: 13571
+  recipe: registry/recipes/vizwiz-priv.yaml
+  scope: All 13571 native train/val/test image annotation rows, including all privacy
+    regions and question fields. Original nonprivate JPEGs and both author-provided
+    redaction conditions remain distinct; no private unredacted images were released.
+    Eight annotated nonprivate images are absent from every archive and remain explicit
+    missing assets. All five annotation tables are retained, with aggregate tables
+    checked byte-for-field against the native split rows. Web-page counts disagree
+    with the released JSON and are not substituted.
+  publication_review_complete: false
 source_url: https://vizwiz.org/tasks-and-datasets/vizwiz-priv/
+snapshot_id: vizwiz-priv-a306803df15e20a204ec7a5b
+tasks:
+- visual question answering
+- privacy obfuscation
+modalities:
+- image
+- text
+labels:
+- private
+- private_regions

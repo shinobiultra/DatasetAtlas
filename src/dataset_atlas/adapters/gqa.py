@@ -27,26 +27,35 @@ class GQABalancedAdapter(DatasetAdapter):
     QUESTION_MEMBER = "val_balanced_questions.json"
     IMAGE_RE = re.compile(r"images/(?P<image_id>[0-9]+)\.jpg\Z")
 
-    def _paths(self) -> tuple[Path, Path]:
-        return (Path(self.config["questions_archive"]).expanduser().resolve(),
-                Path(self.config["images_archive"]).expanduser().resolve())
+    def _remote(self, key: str):
+        """`questions` or `images` as an ETag-pinned remote ZIP, when it is not held locally."""
+        if f"remote_{key}" not in self.config:
+            return None
+        from .remote_media import RemoteZip
+        return RemoteZip(self.config[f"remote_{key}"], self.config["remote_cache_root"], self.config.get("remote_cache_bytes", 1_000_000_000))
+
+    def _paths(self) -> tuple[Path | None, Path | None]:
+        return tuple(None if f"remote_{key}" in self.config else Path(self.config[f"{key}_archive"]).expanduser().resolve()
+                     for key in ("questions", "images"))
 
     def _prepared(self) -> Path:
         return Path(self.config["prepared_root"]).expanduser().resolve()
 
     def probe(self) -> SourceDescription:
         questions, images = self._paths()
-        missing = [str(path) for path in (questions, images) if not path.is_file()]
-        size = sum(path.stat().st_size for path in (questions, images) if path.is_file())
-        return SourceDescription("gqa_v1_2_val_balanced", f"{questions} + {images}",
+        local = [path for path in (questions, images) if path is not None]
+        missing = [str(path) for path in local if not path.is_file()]
+        size = sum(path.stat().st_size for path in local if path.is_file())
+        return SourceDescription("gqa_v1_2_val_balanced", " + ".join(str(path) if path else "remote ZIP" for path in (questions, images)),
                                  not missing, self.revision, size if not missing else None,
                                  True, True, True, False, True,
                                  tuple(f"missing source archive: {path}" for path in missing))
 
     def plan(self, limit: int, max_bytes: int, cursor: str | None = None) -> PreparationPlan:
         base = super().plan(limit, max_bytes, cursor)
-        if not self.config.get("questions_sha256") or not self.config.get("images_sha256"):
-            raise ValueError("GQA requires pinned question and image archive hashes")
+        for key in ("questions", "images"):
+            if self._remote(key) is None and not self.config.get(f"{key}_sha256"):
+                raise ValueError("GQA requires pinned question and image archive hashes")
         requirement = ("verify source questions and explicitly mark images outside the selected local preview"
                        if self.config.get("media_scope") == "selected_preview"
                        else "verify both official archives and join every validation image ID")
@@ -58,13 +67,21 @@ class GQABalancedAdapter(DatasetAdapter):
     def prepare(self, approved_plan: PreparationPlan) -> PreparedSource:
         source = super().prepare(approved_plan)
         partial_media = self.config.get("media_scope") == "selected_preview"
-        if self.config.get("media_scope", "full") not in ("full", "selected_preview"):
+        # `on_demand_unverified` joins every question to the complete image directory, but the image bytes themselves
+        # are fetched by ranges and are bound by ETag only, so coverage reports them as unverified.
+        if self.config.get("media_scope", "full") not in ("full", "selected_preview", "on_demand_unverified"):
             raise ValueError("unknown GQA media scope")
         questions, images = self._paths()
-        digests = {"questions": _sha256(questions), "images": _sha256(images)}
-        if (digests["questions"] != self.config["questions_sha256"]
-                or digests["images"] != self.config["images_sha256"]):
-            raise ValueError("GQA archive differs from pinned SHA-256")
+        remote = {key: self._remote(key) for key in ("questions", "images")}
+        digests = {}
+        for key, path in (("questions", questions), ("images", images)):
+            if remote[key]:
+                # A ranged read cannot hash a multi-gigabyte archive; the strong ETag is the consistency fingerprint instead.
+                digests[key] = "remote-etag:" + remote[key].etag
+            else:
+                digests[key] = _sha256(path)
+                if digests[key] != self.config[f"{key}_sha256"]:
+                    raise ValueError("GQA archive differs from pinned SHA-256")
         root = self._prepared()
         root.mkdir(parents=True, exist_ok=True)
         index_path, rows_path = root / "index.json", root / "records.jsonl"
@@ -73,8 +90,11 @@ class GQABalancedAdapter(DatasetAdapter):
             if old.get("source_sha256") == digests and old.get("jsonl_bytes") == rows_path.stat().st_size:
                 return source
 
-        with zipfile.ZipFile(questions) as archive:
-            raw = archive.read(self.QUESTION_MEMBER)
+        if remote["questions"]:
+            raw = remote["questions"].read(self.QUESTION_MEMBER, 500_000_000, self.config.get("remote_metadata_bytes", 150_000_000))
+        else:
+            with zipfile.ZipFile(questions) as archive:
+                raw = archive.read(self.QUESTION_MEMBER)
         source.charge(len(raw))
         questions_doc = json.loads(raw)
         del raw
@@ -83,8 +103,11 @@ class GQABalancedAdapter(DatasetAdapter):
         expected = self.config.get("expected_questions")
         if expected is not None and len(questions_doc) != int(expected):
             raise ValueError("GQA validation-balanced source count differs from declared release")
-        with zipfile.ZipFile(images) as archive:
-            names = archive.namelist()
+        if remote["images"]:
+            names = remote["images"].names(self.config.get("remote_metadata_bytes", 150_000_000))
+        else:
+            with zipfile.ZipFile(images) as archive:
+                names = archive.namelist()
         image_ids: set[str] = set()
         for name in names:
             match = self.IMAGE_RE.fullmatch(name)
@@ -193,11 +216,12 @@ class GQABalancedAdapter(DatasetAdapter):
     def resolve_asset(self, source: PreparedSource, asset_ref: str) -> MediaHandle:
         if not self.IMAGE_RE.fullmatch(asset_ref):
             raise ValueError("invalid GQA image reference")
-        with zipfile.ZipFile(self._paths()[1]) as archive:
-            info = archive.getinfo(asset_ref)
-            if info.file_size > source.max_bytes - source.bytes_read:
-                raise ValueError("GQA image exceeds remaining byte budget")
-            data = archive.read(info)
+        if self._remote("images"):
+            data = self._remote("images").read(asset_ref, source.max_bytes - source.bytes_read, self.config.get("media_transfer_bytes", 40_000_000))
+        else:
+            from dataset_atlas.storage.zip_members import LOCAL_ZIP_MEMBERS
+            data = LOCAL_ZIP_MEMBERS.read(self._paths()[1], asset_ref, source.max_bytes - source.bytes_read,
+                                          self.config['images_sha256'])
         source.charge(len(data))
         if not data.startswith(b"\xff\xd8\xff"):
             raise ValueError("GQA image member is not JPEG")

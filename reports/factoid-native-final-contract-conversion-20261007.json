@@ -1,0 +1,40 @@
+{
+  "count": 4150,
+  "rows_sha256": "fc04d18e91d14251f348fa3e2dee642030d1ec9ac7a74307df2d05177e328afa",
+  "file_sha256": "9ed0c9af0a99161e9a6197f1b8c87d321ea2e76f6c4d6f50bc6538d50418b407",
+  "metadata_sha256": "9332c9326fa69a89c9aef0fa2cfb689f82c168d5570a7a59d5b718120221d07c",
+  "native_values_sha256": "5d83dca320844e1359f4e75c39a0b634b5501cc327332c3f7bd41583b1c38afc",
+  "native_cells_checked": 17288900,
+  "resource_limits": {
+    "address_space_bytes": 8000000000,
+    "cpu_seconds": 360
+  },
+  "maximum_record_bytes": 6495717,
+  "representation": "Author native user rows; source floats, datetimes, bytes, tuples and shared containers have explicit exact representations. Integer-labelled columns use reversible runs.",
+  "syntax_receipt": {
+    "opcodes": 82115458,
+    "decoded_bytes": 1131504002,
+    "symbols": [
+      "collections.Counter",
+      "datetime.datetime",
+      "functools.partial",
+      "numpy.core.multiarray._reconstruct",
+      "numpy.core.numeric._frombuffer",
+      "numpy.dtype",
+      "numpy.ndarray",
+      "pandas.core.frame.DataFrame",
+      "pandas.core.indexes.base.Index",
+      "pandas.core.indexes.base._new_Index",
+      "pandas.core.indexes.numeric.Int64Index",
+      "pandas.core.internals.blocks.new_block",
+      "pandas.core.internals.managers.BlockManager"
+    ],
+    "memo_entries": 26996457
+  },
+  "status": "converted_and_retained",
+  "checked_at_utc": "2026-10-07T09:01:36.934948+00:00",
+  "elapsed_seconds": 196.11895740099862,
+  "output_bytes": 2385847532,
+  "native_index_activated": false,
+  "scope": "Exact native source/body and DataFrame metadata retained; compact rows round-trip to native typed cells. Complete preparation/API verification remains pending."
+}

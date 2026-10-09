@@ -1,0 +1,181 @@
+{
+  "operation": "Only byte-identical completed native sources and staging conversions replaced by hard links. All paths and bytes preserved.",
+  "files": [
+    {
+      "path": "work/roadmap-source-audit-20261005/fivek-page.source",
+      "retained": "work/prepared/mit-adobe-5k/d04c29eae62b708455a9e255a34176e4f5d3218dad8ef03b119947408a3869ca/sources/cc11c048a6c29459628cd0989ba28324857988eac10894773b8a20dbb9fd3127.html",
+      "sha256": "cc11c048a6c29459628cd0989ba28324857988eac10894773b8a20dbb9fd3127",
+      "bytes": 4629128,
+      "potential_freed_allocated_bytes": 4632576
+    },
+    {
+      "path": "work/roadmap-source-audit-20261005/SWC_English_no_audio.tar.xz",
+      "retained": "work/prepared/spoken-wikipedia/19adde1d1f25602f9dc5b394071e5e42aa13797071e0cd8f65013025a222e190/sources/f1e8442fc9f7d430009dbe3e01de7e9e24db8df80e4362f875c2df8a1616a134.tar.xz",
+      "sha256": "f1e8442fc9f7d430009dbe3e01de7e9e24db8df80e4362f875c2df8a1616a134",
+      "bytes": 64628916,
+      "potential_freed_allocated_bytes": 64634880
+    },
+    {
+      "path": "work/roadmap-source-audit-20261005/SWC_German_no_audio.tar.xz",
+      "retained": "work/prepared/spoken-wikipedia/19adde1d1f25602f9dc5b394071e5e42aa13797071e0cd8f65013025a222e190/sources/e074b51e1efbcad119ef18d58c194444bdb74232f84ad877a1e56aa48c0d33e4.tar.xz",
+      "sha256": "e074b51e1efbcad119ef18d58c194444bdb74232f84ad877a1e56aa48c0d33e4",
+      "bytes": 63103804,
+      "potential_freed_allocated_bytes": 63111168
+    },
+    {
+      "path": "work/roadmap-source-audit-20261005/flickr-csv.source",
+      "retained": "work/prepared/flickr30k/86977cdfdc07b7b97a1b3c490b074f0b07ff168207e490c60522c72a966a9638/sources/395990db603ab8bafd5c7ab2746b22058bb1e75b78b3eb56ad755931364ac137.csv",
+      "sha256": "395990db603ab8bafd5c7ab2746b22058bb1e75b78b3eb56ad755931364ac137",
+      "bytes": 12896305,
+      "potential_freed_allocated_bytes": 12898304
+    },
+    {
+      "path": "work/roadmap-source-audit-20261005/SWC_Dutch_no_audio.tar.xz",
+      "retained": "work/prepared/spoken-wikipedia/19adde1d1f25602f9dc5b394071e5e42aa13797071e0cd8f65013025a222e190/sources/089f12267f73492defa0aa4037c77f40bb6b03ee33eaa30008963378b6d08d84.tar.xz",
+      "sha256": "089f12267f73492defa0aa4037c77f40bb6b03ee33eaa30008963378b6d08d84",
+      "bytes": 17826540,
+      "potential_freed_allocated_bytes": 17829888
+    },
+    {
+      "path": "work/roadmap-source-audit-20261005/miap-boxes-val.source",
+      "retained": "work/prepared/miap/93b8b04a9d3c9b2fa827a2acd4153201da0d8eee5fcc2f2a0ab463afeb6a06db/sources/86ea219627891189ee9ddcf71845ba3e90a377d6589a780fa91e97bd22d4f9a9.csv",
+      "sha256": "86ea219627891189ee9ddcf71845ba3e90a377d6589a780fa91e97bd22d4f9a9",
+      "bytes": 2357900,
+      "potential_freed_allocated_bytes": 2359296
+    },
+    {
+      "path": "work/roadmap-source-audit-20261005/shape-zip.source",
+      "retained": "work/prepared/shapeworld/6b074e656c00c8318cb6f3aefbf6ce9f053f334d5d277444967099739018d585/sources/707b1e5b6c7b0901c40d4b69d23a4f1277a0e8f7cb3f2731bb53e5980e8eba37.zip",
+      "sha256": "707b1e5b6c7b0901c40d4b69d23a4f1277a0e8f7cb3f2731bb53e5980e8eba37",
+      "bytes": 84249084,
+      "potential_freed_allocated_bytes": 84254720
+    },
+    {
+      "path": "work/roadmap-source-audit-20261005/miap-boxes-train.source",
+      "retained": "work/prepared/miap/93b8b04a9d3c9b2fa827a2acd4153201da0d8eee5fcc2f2a0ab463afeb6a06db/sources/60821e497b7d327082c542c4eaa990d04744ca816498be93697eafde5ebb9529.csv",
+      "sha256": "60821e497b7d327082c542c4eaa990d04744ca816498be93697eafde5ebb9529",
+      "bytes": 37065903,
+      "potential_freed_allocated_bytes": 37072896
+    },
+    {
+      "path": "work/roadmap-source-audit-20261005/miap-images-train.source",
+      "retained": "work/prepared/miap/93b8b04a9d3c9b2fa827a2acd4153201da0d8eee5fcc2f2a0ab463afeb6a06db/sources/c119b2f29ae0ef60649f795cf98d9fc4e97bba63c913a5cce23e0a720c86e9e1.txt",
+      "sha256": "c119b2f29ae0ef60649f795cf98d9fc4e97bba63c913a5cce23e0a720c86e9e1",
+      "bytes": 1610000,
+      "potential_freed_allocated_bytes": 1613824
+    },
+    {
+      "path": "work/roadmap-source-audit-20261005/miap-boxes-test.source",
+      "retained": "work/prepared/miap/93b8b04a9d3c9b2fa827a2acd4153201da0d8eee5fcc2f2a0ab463afeb6a06db/sources/5012fbf0f3665be6a9bdaea69c8ceb1f503dadb2279eb51bb06ccf70d64cfe11.csv",
+      "sha256": "5012fbf0f3665be6a9bdaea69c8ceb1f503dadb2279eb51bb06ccf70d64cfe11",
+      "bytes": 7364546,
+      "potential_freed_allocated_bytes": 7364608
+    },
+    {
+      "path": "work/roadmap-source-audit-20261005/native-source-cache/objects/ce192d8c6c576e06a26bf46e5ebea9cac6301845e0d54a30d505fdde89e746ac",
+      "retained": "work/prepared/sorrybench/0f9fc585c06e4e924abe5593f22afb31bf40bdb323c17cac17d7fdae64bb7d9e/sources/9ea2d9338d0f36116568d98fca2591706224ae2abbe03233be3ca50341fa8535.jsonl",
+      "sha256": "9ea2d9338d0f36116568d98fca2591706224ae2abbe03233be3ca50341fa8535",
+      "bytes": 1507288,
+      "potential_freed_allocated_bytes": 1507328
+    },
+    {
+      "path": "work/roadmap-source-audit-20261005/native-source-cache/objects/4a8350e0e585faa1dea6930866318fd841e023e038cba6fae1ffa6f3876b0a5e",
+      "retained": "work/prepared/oasis/d3158ed7cd95c1ea18da31f89200986811aad3be641dc2c7397d5f7220746fc3/sources/b1c1f23a2adfb504801ad05df00e01b5530f4442524c983fe535476807137312.zip",
+      "sha256": "b1c1f23a2adfb504801ad05df00e01b5530f4442524c983fe535476807137312",
+      "bytes": 92128315,
+      "potential_freed_allocated_bytes": 92135424
+    },
+    {
+      "path": "work/roadmap-source-audit-20261005/native-source-cache/objects/d580ae5caa959b8b6a32b88978168d8644b3e708cdbcd141d9bd6ce447d6fb2b",
+      "retained": "work/prepared/snli-ve/38ebf70968e4b7932b920b141a678fdd909d168f4b99c50bba0b088087ea732f/sources/2171edb6bcd69a11ad542261ddf02984d9476b9aac2705d245f799e329215fdf.jsonl.gz",
+      "sha256": "2171edb6bcd69a11ad542261ddf02984d9476b9aac2705d245f799e329215fdf",
+      "bytes": 1496478,
+      "potential_freed_allocated_bytes": 1499136
+    },
+    {
+      "path": "work/roadmap-source-audit-20261005/native-source-cache/objects/1686d8f13f24da779871729107241257f00ee0a243fa47040b95b6c4fc0367bb",
+      "retained": "work/prepared/sorrybench/0f9fc585c06e4e924abe5593f22afb31bf40bdb323c17cac17d7fdae64bb7d9e/sources/49afa9a1fd44ecc9da6508b082da051e294171df3584a2c5aa832025e68bb9a9.jsonl",
+      "sha256": "49afa9a1fd44ecc9da6508b082da051e294171df3584a2c5aa832025e68bb9a9",
+      "bytes": 1445980,
+      "potential_freed_allocated_bytes": 1449984
+    },
+    {
+      "path": "work/roadmap-source-audit-20261005/native-source-cache/objects/4cd451641fe707c29fff9a3c70d0af2397aa0af39bcedfc73df5cd47203c6bf8",
+      "retained": "work/prepared/snli-ve/38ebf70968e4b7932b920b141a678fdd909d168f4b99c50bba0b088087ea732f/sources/fefcb4af598dee91005e25bbad4a4149895126e0acad9ab74ccf830325a82f9b.jsonl.gz",
+      "sha256": "fefcb4af598dee91005e25bbad4a4149895126e0acad9ab74ccf830325a82f9b",
+      "bytes": 44673835,
+      "potential_freed_allocated_bytes": 44675072
+    },
+    {
+      "path": "work/roadmap-source-audit-20261005/native-source-cache/objects/68ae322bbafcf732b7526beb680d65378c4e40e7683da124728c7c9df87351d6",
+      "retained": "work/prepared/snli-ve/38ebf70968e4b7932b920b141a678fdd909d168f4b99c50bba0b088087ea732f/sources/ecd9f5b059b1a7f98e2ff87e5d28be7fd84cf361cf11201868af9e6dc93b8830.jsonl.gz",
+      "sha256": "ecd9f5b059b1a7f98e2ff87e5d28be7fd84cf361cf11201868af9e6dc93b8830",
+      "bytes": 1494602,
+      "potential_freed_allocated_bytes": 1495040
+    },
+    {
+      "path": "work/roadmap-source-audit-20261005/native-source-cache/objects/a243227d0e1c4c81afaea3cbd983293e7b61b30bfff94fe850d3177575445d11",
+      "retained": "work/prepared/sorrybench/0f9fc585c06e4e924abe5593f22afb31bf40bdb323c17cac17d7fdae64bb7d9e/sources/82a46a2b06e88c532d828900c34ab86b117dbbcba3dbeb8982a247f4af35c2c9.jsonl",
+      "sha256": "82a46a2b06e88c532d828900c34ab86b117dbbcba3dbeb8982a247f4af35c2c9",
+      "bytes": 1015082,
+      "potential_freed_allocated_bytes": 1015808
+    },
+    {
+      "path": "work/roadmap-source-audit-20261005/converted/flickr30k/annotations.jsonl",
+      "retained": "work/prepared/flickr30k/86977cdfdc07b7b97a1b3c490b074f0b07ff168207e490c60522c72a966a9638/sources/converted/annotations.jsonl",
+      "sha256": "634a5a2802fa0793409a4ecd87f9a86d0d83eed1affcad0fcd5f2c4bbc11055e",
+      "bytes": 37973462,
+      "potential_freed_allocated_bytes": 37974016
+    },
+    {
+      "path": "work/roadmap-source-audit-20261005/converted/snli-ve/entailment.jsonl",
+      "retained": "work/prepared/snli-ve/38ebf70968e4b7932b920b141a678fdd909d168f4b99c50bba0b088087ea732f/sources/converted/entailment.jsonl",
+      "sha256": "2e11a2558d28214dde8e245da6fb5ede1cc566686c2f28f2ba5494e5942002eb",
+      "bytes": 596578218,
+      "potential_freed_allocated_bytes": 596582400
+    },
+    {
+      "path": "work/roadmap-source-audit-20261005/converted/miap/images.jsonl",
+      "retained": "work/prepared/miap/93b8b04a9d3c9b2fa827a2acd4153201da0d8eee5fcc2f2a0ab463afeb6a06db/sources/converted/images.jsonl",
+      "sha256": "8580804be2045c260853247cd69c030561afc5f91f07c200b12c2a359be31273",
+      "bytes": 198648000,
+      "potential_freed_allocated_bytes": 198656000
+    },
+    {
+      "path": "work/roadmap-source-audit-20261005/converted/shapeworld/examples.jsonl",
+      "retained": "work/prepared/shapeworld/6b074e656c00c8318cb6f3aefbf6ce9f053f334d5d277444967099739018d585/sources/converted/examples.jsonl",
+      "sha256": "e060763c075639165572ffe10cd7f9b762465c13ede694999ea714918a74d244",
+      "bytes": 13690399,
+      "potential_freed_allocated_bytes": 13692928
+    },
+    {
+      "path": "work/roadmap-source-audit-20261005/converted/fivek/renditions.jsonl",
+      "retained": "work/prepared/mit-adobe-5k/d04c29eae62b708455a9e255a34176e4f5d3218dad8ef03b119947408a3869ca/sources/converted/renditions.jsonl",
+      "sha256": "e3e6482d9742ac643a59be3d884e931fdad29a5023a4bdcbf7514cdf17ba4e7d",
+      "bytes": 16760105,
+      "potential_freed_allocated_bytes": 16760832
+    },
+    {
+      "path": "work/roadmap-source-audit-20261005/converted/sorrybench/questions.jsonl",
+      "retained": "work/prepared/sorrybench/0f9fc585c06e4e924abe5593f22afb31bf40bdb323c17cac17d7fdae64bb7d9e/sources/converted/questions.jsonl",
+      "sha256": "9bf7fb3a8e176898ae68c8aebee59777ccd880ba42746826197b25af47b999ed",
+      "bytes": 25521948,
+      "potential_freed_allocated_bytes": 25522176
+    },
+    {
+      "path": "work/roadmap-source-audit-20261005/converted/swc/sentences.parquet",
+      "retained": "work/prepared/spoken-wikipedia/19adde1d1f25602f9dc5b394071e5e42aa13797071e0cd8f65013025a222e190/sources/converted/sentences.parquet",
+      "sha256": "1818686014bea7857ddcfbcc79b6792bd7ae40e7cc5f25f712d6b1fd3f11b30a",
+      "bytes": 183654009,
+      "potential_freed_allocated_bytes": 183660544
+    },
+    {
+      "path": "work/roadmap-source-audit-20261005/converted/oasis/norms.jsonl",
+      "retained": "work/prepared/oasis/d3158ed7cd95c1ea18da31f89200986811aad3be641dc2c7397d5f7220746fc3/sources/converted/norms.jsonl",
+      "sha256": "557001e3419065ebbb267a44afc06c4e31e4b456e30da0993e3098aefecf1cf6",
+      "bytes": 1003939,
+      "potential_freed_allocated_bytes": 1007616
+    }
+  ],
+  "potential_freed_allocated_bytes": 1513406464
+}

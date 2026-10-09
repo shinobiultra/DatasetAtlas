@@ -1,0 +1,72 @@
+schema_version: '1.0'
+id: custom-speech-segment-collection
+name: custom speech segment collection
+aliases: []
+description: Mention candidate from a focused page audit; the evidence receipts distinguish
+  direct use, comparison, related-work, and citation-only roles. Original source,
+  release, and rights still require independent verification.
+paper_ids:
+- paper-6d747c88d639c5aa
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: unverified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Original release identity and rights need verification.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-70c87aa559596477cb4f
+  paper_id: paper-6d747c88d639c5aa
+  source_file_hash: 519805fac1ac6df034dd67ef95643703ebd97fa1c18e0f035a1f93feada6994e
+  page: 13
+  role: derived collection
+  excerpt: in any word or speaker class was less than 2000. The resulting training
+    dataset contained 230356 unique segments in 432 speaker classes and 793 word classes,
+    with 40650 unique segments in the validation set. During training, the speech
+    segmen
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://proceedings.neurips.cc/paper/2019/hash/ac27b77292582bc293a51055bfc994ee-Abstract.html
+  checked_on: '2026-10-08'
+  note: Training set built by the paper's authors for a word and speaker recognition network (230,356
+    segments, 432 speaker classes, 793 word classes per the paper's text); its speech sources are WSJ,
+    Spoken Wikipedia and AudioSet background clips. The NeurIPS 2019 page for the paper lists supplemental
+    material but links no code or dataset.
+  source_identity_status: paper_built_collection_not_released
+- kind: source_audit_access
+  url: https://proceedings.neurips.cc/paper/2019/hash/ac27b77292582bc293a51055bfc994ee-Abstract.html
+  checked_on: '2026-10-08'
+  note: 'No public release of the segment collection was located on the paper''s NeurIPS page. The component
+    corpora have their own access routes (WSJ: LDC licence; Spoken Wikipedia: public project), tracked
+    under their own catalogue entries.'
+  source_identity_status: paper_built_collection_not_released
+  disposition: still_unreleased
+  observation: no_public_release_located
+- kind: source_audit_rights
+  url: https://proceedings.neurips.cc/paper/2019/hash/ac27b77292582bc293a51055bfc994ee-Abstract.html
+  checked_on: '2026-10-08'
+  note: Segments derived from LDC Wall Street Journal speech inherit the LDC agreement (no public redistribution,
+    per the registry's own WSJ audit); rights to any release are unverified.
+  source_identity_status: paper_built_collection_not_released
+- kind: source_audit_refresh
+  url: https://proceedings.neurips.cc/paper/2019/hash/ac27b77292582bc293a51055bfc994ee-Abstract.html
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'still_unreleased: read from public pages on 2026-10-08 by the implementing agent (the source_audit_access
+    item of that date); not human-reviewed and not a probe. 1 URL probed (HEAD only): 1 reachable.'

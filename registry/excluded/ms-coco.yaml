@@ -1,0 +1,90 @@
+schema_version: '1.0'
+id: ms-coco
+name: MS-COCO
+aliases: []
+description: Mentions include caption-guided image retrieval, 36 selected images, and a survey-table citation; none
+  proves a common exact release.
+paper_ids:
+- paper-ebd63da316af82e5
+- paper-6d747c88d639c5aa
+- paper-25eaa8c74ce76800
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: public
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Exact source variant or paper selection is unresolved.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://cocodataset.org/#download
+  note: COCO photos/captions have different rights; paper selection remains unpinned.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-adc2cef9d7fa3445ed78
+  paper_id: paper-ebd63da316af82e5
+  source_file_hash: 5b91dbe170a94faf5062a9c5f9b5928f77d4f6d7b08998dc8f3a14c5ed455541
+  page: 2
+  role: evaluation
+  excerpt: sults on generic scenes prompts and longer, more complex prompts from MS-COCO [18]. In practice, we first
+    retrieve a seed, low-frequency INR whose caption is most similar to the prompt. B
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-58c1b024dafb6d49fa13
+  paper_id: paper-6d747c88d639c5aa
+  source_file_hash: 519805fac1ac6df034dd67ef95643703ebd97fa1c18e0f035a1f93feada6994e
+  page: 5
+  role: source data
+  excerpt: odels, we generated metamers of 36 randomly selected natural images across each of the 16 MS-COCO categories
+    (see Supplement Table 4 for a summary of matching the visual model metamers, and Supplement Figures 1-3 for
+    full histograms of th
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-508043ea6228b4491dfd
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 29
+  role: cited-study dataset in survey table
+  excerpt: UNITER, LXMERT, ViLT POS Tagging, Object Count- Flickr30K, MS-COCO ing
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://cocodataset.org/#download
+  note: 'Mentions include caption-guided image retrieval, 36 selected images, and a survey-table citation; none
+    proves a common exact release. Release: MS COCO family; three paper roles and selections'
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+- kind: source_audit_rights
+  url: https://cocodataset.org/#termsofuse
+  note: COCO photos/captions have different rights; paper selection remains unpinned.
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+- kind: source_audit_refresh
+  url: https://cocodataset.org/
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 3 URLs probed (HEAD only): 3 reachable.'
+source_url: https://cocodataset.org/
+relationships:
+- type: same_source_family_as
+  target_id: coco
+  scope: COCO family only; year, split, selected image/caption IDs and overlay are not established as the active
+    COCO-2017-val release.

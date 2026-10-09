@@ -19,6 +19,7 @@ from dataset_atlas.catalogue import summarize_records, thumbnails_document
 from dataset_atlas.models import Artifact, Dataset, Pack, Record
 from dataset_atlas.queries.results import attach_results
 
+from .guide import build_guide, load_coverage
 from .security import MAX_EXCHANGE_BYTES, ExchangeError, compact_json, contained_file, digest, read_json, scan_public, validate_image
 
 PublicationError = ExchangeError
@@ -52,6 +53,8 @@ def _registry(registry_dir: Path) -> list[Dataset]:
             raise PublicationError(f"Invalid registry dataset: {path.name}") from exc
         if not re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._-]*", dataset.id):
             raise PublicationError(f"Unsafe dataset ID: {dataset.id}")
+        if dataset.origin != "catalogue":
+            raise PublicationError(f"{dataset.id}: datasets added from local storage are never published")
         datasets.append(dataset)
     if len({dataset.id for dataset in datasets}) != len(datasets):
         raise PublicationError("Duplicate dataset ID in registry")
@@ -93,7 +96,8 @@ def _profile(path: Path, ids: set[str]) -> dict[str, dict[str, Any]]:
 
 def _public_dataset(dataset: Dataset) -> dict[str, Any]:
     # Construct explicitly; registry evidence, adapter config and paper text never enter output.
-    value = dataset.model_dump(mode="json", exclude={"adapter_config", "evidence", "relationships"})
+    # `availability` describes one workspace, not the catalogue; it must never be published.
+    value = dataset.model_dump(mode="json", exclude={"adapter_config", "evidence", "relationships", "availability"})
     value["adapter_config"] = {}
     value["evidence"] = []
     # Publish navigable relationships without private alias receipts or excerpts.
@@ -206,6 +210,10 @@ def _public_record(record: Record, *, annotations: bool, derived: bool, media_id
 
 def _prepare(registry_dir: Path, packs_dir: Path, output_dir: Path, profile_path: Path, max_bytes: int) -> tuple[PublicationReport, dict[str, bytes]]:
     datasets = _registry(Path(registry_dir))
+    # The tracked YAML predates preparation; the committed snapshot carries each dataset's merged coverage (see exports/guide.py).
+    state_dir = Path(packs_dir).parent / "public-schema"
+    merged = load_coverage(state_dir)
+    datasets = [Dataset.model_validate({**dataset.model_dump(mode="json"), "coverage": merged[dataset.id]}) if dataset.id in merged else dataset for dataset in datasets]
     policies = _profile(Path(profile_path), {dataset.id for dataset in datasets})
     files: dict[str, bytes] = {}
     catalogue: list[dict[str, Any]] = []
@@ -263,6 +271,8 @@ def _prepare(registry_dir: Path, packs_dir: Path, output_dir: Path, profile_path
         published.append(dataset.id)
     files["catalogue.json"] = compact_json(catalogue)
     files["thumbnails.json"] = compact_json(thumbnails_document(thumbnails))
+    # Field schemas are committed beside the approved packs (examples/public-schema), so this build needs no workspace.
+    files["guide.json"] = build_guide(datasets, registry_dir=Path(registry_dir), schema_dir=state_dir, published=set(published))
     total = sum(len(content) for content in files.values())
     if total > max_bytes:
         raise PublicationError(f"Static data exceeds {max_bytes} byte budget ({total})")

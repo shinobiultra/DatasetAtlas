@@ -1,0 +1,163 @@
+release: whatsup-emnlp2023-native
+source_url: https://github.com/amitakamath/whatsup_vlms/tree/7c1f2550eace32e7b8c77de5a792347c402960d1
+adapter: structured_collection
+expected_count: 4958
+scope: 'All six author-released Whats-Up populations: Controlled A/B and COCO/VG one-
+  and two-object caption comparisons. The first caption is correct by the author release
+  contract. Controlled/VG original archive members retained locally; COCO val2017
+  images fetched on request.'
+adapter_config:
+  annotations:
+  - path_key: controlled_images_annotations
+    split: controlled_images
+    correct_choice_index: 0
+    text_from_first_choice: true
+    media_paths_field: image_path
+    media_path_remove_prefix: data/
+    media_archive: controlled_images
+    choices_field: caption_options
+  - path_key: controlled_clevr_annotations
+    split: controlled_clevr
+    correct_choice_index: 0
+    text_from_first_choice: true
+    media_paths_field: image_path
+    media_path_remove_prefix: data/
+    media_archive: controlled_clevr
+    choices_field: caption_options
+  - path_key: coco_qa_one_obj_annotations
+    split: coco_qa_one_obj
+    correct_choice_index: 0
+    text_from_first_choice: true
+    array_columns:
+    - image_id
+    - true_caption
+    - false_caption
+    choices_columns:
+    - true_caption
+    - false_caption
+    media_archive: val2017
+    media_stem_field: image_id
+    media_stem_width: 12
+    media_template: val2017/{_stem}.jpg
+  - path_key: coco_qa_two_obj_annotations
+    split: coco_qa_two_obj
+    correct_choice_index: 0
+    text_from_first_choice: true
+    array_columns:
+    - image_id
+    - true_caption
+    - false_caption
+    choices_columns:
+    - true_caption
+    - false_caption
+    media_archive: val2017
+    media_stem_field: image_id
+    media_stem_width: 12
+    media_template: val2017/{_stem}.jpg
+  - path_key: vg_qa_one_obj_annotations
+    split: vg_qa_one_obj
+    correct_choice_index: 0
+    text_from_first_choice: true
+    array_columns:
+    - image_id
+    - true_caption
+    - false_caption
+    choices_columns:
+    - true_caption
+    - false_caption
+    media_archive: vg_images
+    media_template: vg_images/{image_id}.jpg
+  - path_key: vg_qa_two_obj_annotations
+    split: vg_qa_two_obj
+    correct_choice_index: 0
+    text_from_first_choice: true
+    array_columns:
+    - image_id
+    - true_caption
+    - false_caption
+    choices_columns:
+    - true_caption
+    - false_caption
+    media_archive: vg_images
+    media_template: vg_images/{image_id}.jpg
+  local_archives:
+    controlled_images:
+      path_key: controlled_images_path
+    controlled_clevr:
+      path_key: controlled_clevr_path
+    vg_images:
+      path_key: vg_images_path
+  repack_paths:
+  - controlled_images_path
+  - controlled_clevr_path
+  - vg_images_path
+  remote_archives:
+    val2017:
+      url: https://s3.amazonaws.com/images.cocodataset.org/zips/val2017.zip
+      bytes: 815585330
+      etag: '"d366be60d3dc737327160d62453e3973-98"'
+      allowed_hosts:
+      - s3.amazonaws.com
+  remote_cache_root: work/media-cache/whatsup
+  mapping:
+    text: _atlas_text
+    choices: _atlas_choices
+files:
+- url: https://drive.usercontent.google.com/download?id=19KGYVQjrV3syb00GgcavB2nZTW5NXX0H&export=download&confirm=t
+  source_name: controlled_images.tar.gz
+  bytes: 95134342
+  sha256: 4fc005e7ab1e2ac5e5836d2456dd9ae930239c44953b0b2d3e9523f6ad5b1a69
+  config_key: controlled_images_path
+  format: tgz
+- url: https://drive.usercontent.google.com/download?id=13jdBpg8t3NqW3jrL6FK8HO93vwsUjDxG&export=download&confirm=t
+  source_name: controlled_clevr.tar.gz
+  bytes: 65817200
+  sha256: df8b23af7dc73c4bf98937777b7a5d85aab42598eace82fa7adad5802df2c493
+  config_key: controlled_clevr_path
+  format: tgz
+- url: https://drive.usercontent.google.com/download?id=1idW7Buoz7fQm4-670n-oERw9U-2JLJvE&export=download&confirm=t
+  source_name: vg_images.tar.gz
+  bytes: 679749847
+  sha256: d3f3478564689d6fe31f7a5b246652faca1361fe16bad3ac7d3849a0a6b1c421
+  config_key: vg_images_path
+  format: tgz
+- url: https://drive.usercontent.google.com/download?id=1ap8mmmpQjLIjPGuplkpBgc1hoEHCj4hm&export=download
+  source_name: controlled_images.json
+  bytes: 88371
+  sha256: 77ee94ae35552ed643ecd47f700daa178e10051458baae99d5c4c5d5922590d3
+  config_key: controlled_images_annotations
+  format: json
+- url: https://drive.usercontent.google.com/download?id=1unNNosLbdy9NDjgj4l8fsQP3WiAAGA6z&export=download
+  source_name: controlled_clevr.json
+  bytes: 86532
+  sha256: 2c0df1ab59d13d71442752b4b3c7353114d712a785b0850ec22e11c2b0c474c9
+  config_key: controlled_clevr_annotations
+  format: json
+- url: https://drive.usercontent.google.com/download?id=1RsMdpE9mmwnK4zzMPpC1-wTU_hNis-dq&export=download
+  source_name: coco_qa_one_obj.json
+  bytes: 182827
+  sha256: 5861b49d67d19482ea37b4b770a5cb59d7c08f156f71585cda20f324271e22f3
+  config_key: coco_qa_one_obj_annotations
+  format: json
+- url: https://drive.usercontent.google.com/download?id=1TCEoM0mgFmz8T4cF7PQ3XJmO6JjtiQ-s&export=download
+  source_name: coco_qa_two_obj.json
+  bytes: 42823
+  sha256: 7dcdc1569565a9247a3e252a3d940b9600c4f17596652c947a461ff6ea13c57e
+  config_key: coco_qa_two_obj_annotations
+  format: json
+- url: https://drive.usercontent.google.com/download?id=1ARMRzRdohs9QTr1gpIfzyUzvW20wYp_p&export=download
+  source_name: vg_qa_one_obj.json
+  bytes: 96869
+  sha256: 6f4af42c54a35902a4ce3884723d1d129dbd05921cd005512f1ded290bb7cb31
+  config_key: vg_qa_one_obj_annotations
+  format: json
+- url: https://drive.usercontent.google.com/download?id=1sjVG5O3QMY8s118k7kQM8zzDZH12i_95&export=download
+  source_name: vg_qa_two_obj.json
+  bytes: 31363
+  sha256: abeb1143db19a85aac678b9cd77a29381442f29caff475e2551a25abec2e4ecd
+  config_key: vg_qa_two_obj_annotations
+  format: json
+allowed_hosts:
+- drive.usercontent.google.com
+- drive.google.com
+remote_metadata_bytes: 20000000

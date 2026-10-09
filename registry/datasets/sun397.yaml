@@ -2,26 +2,26 @@ schema_version: '1.0'
 id: sun397
 name: SUN397
 aliases: []
-description: Original SUN site currently forwards to a sparse MIT page; exact archive availability could
-  not be verified.
+description: Original SUN site currently forwards to a sparse MIT page; exact archive
+  availability could not be verified.
 paper_ids:
 - paper-25eaa8c74ce76800
-release: unresolved
-adapter: structured
+release: SUN397-original-byte-equivalent-mirror-99bbf6ad18ca4f01e47f8f96ca1a8b7e53cb235a
+adapter: sun397
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
-  access: unverified
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
   - Source access has not been verified.
-  - Adapter and preview are not implemented.
+  total_count: 108754
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -40,8 +40,8 @@ evidence:
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://sun.cs.princeton.edu/
-  note: 'Original SUN site currently forwards to a sparse MIT page; exact archive availability could not
-    be verified. Release: SUN397 original scene benchmark'
+  note: 'Original SUN site currently forwards to a sparse MIT page; exact archive
+    availability could not be verified. Release: SUN397 original scene benchmark'
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
@@ -51,4 +51,17 @@ evidence:
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
+- kind: local_native_release_verification
+  report: reports/sun397-preview-verification.json
+  checked_on: '2026-09-23'
+  snapshot_id: sun397-bfade66cc4678f0e17c4f745
+  note: Native indexed population and 100 local preview records verified; does not
+    approve redistribution or resolve a paper-specific subset.
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields
+    present in at least one record. Not inferred from the name or description.'
 source_url: https://sun.cs.princeton.edu/
+modalities:
+- image

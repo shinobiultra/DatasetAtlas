@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+import shutil
 from pathlib import Path
 
 import pytest
@@ -60,11 +61,27 @@ def test_realtoxicityprompts_full_pagination_and_flagged_preview():
     assert pack.sampling["method"] == "first_challenging_source_order"
 
 
-def test_sorrybench_is_gated_without_a_fake_pack():
-    registry = Registry(ROOT)
+def test_sorrybench_fresh_install_is_gated_without_a_fake_pack(tmp_path):
+    directory = tmp_path / 'registry/datasets'
+    directory.mkdir(parents=True)
+    shutil.copyfile(ROOT / 'registry/datasets/sorrybench.yaml', directory / 'sorrybench.yaml')
+    registry = Registry(tmp_path)
     dataset = registry.dataset("sorrybench")
     assert dataset.coverage.access == "gated"
     assert dataset.coverage.preview_count == 0
     assert dataset.coverage.complete_data == "externally_blocked"
     with pytest.raises(FileNotFoundError):
         registry.pack("sorrybench")
+
+
+def test_authorized_sorrybench_does_not_become_public():
+    registry = Registry(ROOT)
+    if registry.active_directory('sorrybench') is None:
+        pytest.skip('authorized SORRY-Bench source is not installed')
+    dataset = registry.dataset('sorrybench')
+    assert dataset.coverage.access == 'gated'
+    assert dataset.coverage.total_count == 9240
+    assert dataset.coverage.preview_count == len(registry.pack('sorrybench').records) == 100
+    assert dataset.coverage.publication == 'metadata_only'
+    assert dataset.rights['external_provider'] == 'local_only'
+    assert not any('no approved local source' in message for message in dataset.coverage.blockers)

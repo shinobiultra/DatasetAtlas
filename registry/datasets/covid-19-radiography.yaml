@@ -4,6 +4,10 @@ name: COVID-19 Radiography
 aliases: []
 description: COVID-19 Radiography Database. Original Qatar/Dhaka team Kaggle release provides CXR classes
   and masks; corpus uses evaluation, exact Kaggle version/sample IDs unpinned
+tasks:
+- image classification
+modalities:
+- image
 paper_ids:
 - paper-f5da3ca03780a203
 release: unresolved

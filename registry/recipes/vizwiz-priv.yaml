@@ -1,0 +1,133 @@
+release: vizwiz-priv-v1.0-author-20190617
+adapter: structured_collection
+expected_count: 13571
+remote_metadata_bytes: 10000000
+scope: All 13571 native train/val/test image annotation rows, including all privacy
+  regions and question fields. Original nonprivate JPEGs and both author-provided
+  redaction conditions remain distinct; no private unredacted images were released.
+  Eight annotated nonprivate images are absent from every archive and remain explicit
+  missing assets. All five annotation tables are retained, with aggregate tables checked
+  byte-for-field against the native split rows. Web-page counts disagree with the
+  released JSON and are not substituted.
+adapter_config:
+  annotations:
+  - path_key: annotations_path
+    member: Annotations/train.json
+    split: train
+    mapping: {}
+    media_stem_field: image
+    media_stem_separator: .
+    media_variants:
+    - condition: nonprivate_original
+      media_archive: nonprivate
+      template: Original_Images_Nonprivate/{image}
+      absent_when:
+        field: private
+        values:
+        - 1
+    - condition: author_home_mean_redaction
+      media_archive: holemean
+      template: HoleMean_Images/{image}
+    - condition: author_fake_content
+      media_archive: filling
+      template: Filling_Images/{_stem}.png
+  - path_key: annotations_path
+    member: Annotations/val.json
+    split: val
+    mapping: {}
+    media_stem_field: image
+    media_stem_separator: .
+    media_variants:
+    - condition: nonprivate_original
+      media_archive: nonprivate
+      template: Original_Images_Nonprivate/{image}
+      absent_when:
+        field: private
+        values:
+        - 1
+    - condition: author_home_mean_redaction
+      media_archive: holemean
+      template: HoleMean_Images/{image}
+    - condition: author_fake_content
+      media_archive: filling
+      template: Filling_Images/{_stem}.png
+  - path_key: annotations_path
+    member: Annotations/test.json
+    split: test
+    mapping: {}
+    media_stem_field: image
+    media_stem_separator: .
+    media_variants:
+    - condition: nonprivate_original
+      media_archive: nonprivate
+      template: Original_Images_Nonprivate/{image}
+      absent_when:
+        field: private
+        values:
+        - 1
+    - condition: author_home_mean_redaction
+      media_archive: holemean
+      template: HoleMean_Images/{image}
+    - condition: author_fake_content
+      media_archive: filling
+      template: Filling_Images/{_stem}.png
+  mapping:
+    id: image
+    question: question
+  remote_archives:
+    nonprivate:
+      url: https://vizwiz.cs.colorado.edu/dataset_downloads/VizWiz-Priv-v1.0/Original_Images_Nonprivate.zip
+      bytes: 3399238659
+      etag: '"ca9c4403-58b7be8693300"'
+      allowed_hosts:
+      - vizwiz.cs.colorado.edu
+    holemean:
+      url: https://vizwiz.cs.colorado.edu/dataset_downloads/VizWiz-Priv-v1.0/HoleMean_Images.zip
+      bytes: 1873970975
+      etag: '"6fb2871f-58b7bb60b85c0"'
+      allowed_hosts:
+      - vizwiz.cs.colorado.edu
+    filling:
+      url: https://vizwiz.cs.colorado.edu/dataset_downloads/VizWiz-Priv-v1.0/Filling_Image.zip
+      bytes: 23619230573
+      etag: '"57fd0db6d-58b7ba5d521c0"'
+      allowed_hosts:
+      - vizwiz.cs.colorado.edu
+  remote_cache_root: work/media-cache/vizwiz-priv
+  remote_cache_bytes: 400000000
+  media_transfer_bytes: 100000000
+  max_annotation_bytes: 10000000
+  declared_absent_media:
+  - zip/filling/Filling_Images/VizWiz_v2_000000035838.png
+  - zip/filling/Filling_Images/VizWiz_v2_000000038398.png
+  - zip/filling/Filling_Images/VizWiz_v2_000000038912.png
+  - zip/filling/Filling_Images/VizWiz_v2_000000038983.png
+  - zip/filling/Filling_Images/VizWiz_v2_000000040151.png
+  - zip/filling/Filling_Images/VizWiz_v2_000000040352.png
+  - zip/filling/Filling_Images/VizWiz_v2_000000041165.png
+  - zip/filling/Filling_Images/VizWiz_v2_000000041250.png
+  - zip/holemean/HoleMean_Images/VizWiz_v2_000000035838.jpg
+  - zip/holemean/HoleMean_Images/VizWiz_v2_000000038398.jpg
+  - zip/holemean/HoleMean_Images/VizWiz_v2_000000038912.jpg
+  - zip/holemean/HoleMean_Images/VizWiz_v2_000000038983.jpg
+  - zip/holemean/HoleMean_Images/VizWiz_v2_000000040151.jpg
+  - zip/holemean/HoleMean_Images/VizWiz_v2_000000040352.jpg
+  - zip/holemean/HoleMean_Images/VizWiz_v2_000000041165.jpg
+  - zip/holemean/HoleMean_Images/VizWiz_v2_000000041250.jpg
+  - zip/nonprivate/Original_Images_Nonprivate/VizWiz_v2_000000035838.jpg
+  - zip/nonprivate/Original_Images_Nonprivate/VizWiz_v2_000000038398.jpg
+  - zip/nonprivate/Original_Images_Nonprivate/VizWiz_v2_000000038912.jpg
+  - zip/nonprivate/Original_Images_Nonprivate/VizWiz_v2_000000038983.jpg
+  - zip/nonprivate/Original_Images_Nonprivate/VizWiz_v2_000000040151.jpg
+  - zip/nonprivate/Original_Images_Nonprivate/VizWiz_v2_000000040352.jpg
+  - zip/nonprivate/Original_Images_Nonprivate/VizWiz_v2_000000041165.jpg
+  - zip/nonprivate/Original_Images_Nonprivate/VizWiz_v2_000000041250.jpg
+files:
+- source_name: Annotations.zip
+  url: https://vizwiz.cs.colorado.edu/dataset_downloads/VizWiz-Priv-v1.0/Annotations.zip
+  bytes: 1035366
+  sha256: d1b07c34d24f7a9559717153c27eb5514825885fca7e4dfdf432bffb41c6805e
+  format: zip
+  config_key: annotations_path
+allowed_hosts:
+- vizwiz.cs.colorado.edu

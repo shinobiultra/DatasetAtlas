@@ -1,0 +1,223 @@
+{
+  "dataset_id": "pascal-voc",
+  "dataset": {
+    "schema_version": "1.0",
+    "id": "pascal-voc",
+    "name": "Pascal VOC",
+    "origin": "catalogue",
+    "aliases": [],
+    "description": "Mention candidate from a focused page audit; the evidence receipts distinguish direct use, comparison, related-work, and citation-only roles. Original source, release, and rights still require independent verification.",
+    "tasks": [],
+    "modalities": [
+      "image"
+    ],
+    "labels": [],
+    "paper_ids": [
+      "paper-25eaa8c74ce76800"
+    ],
+    "source_url": "https://www.robots.ox.ac.uk/~vgg/projects/pascal/VOC/voc2011/index.html",
+    "release": "voc2011-author-native-archive-14961",
+    "snapshot_id": "",
+    "adapter": "pascal_voc",
+    "adapter_config": {},
+    "coverage": {
+      "identity": "candidate",
+      "source": "verified",
+      "access": "public",
+      "adapter": "implemented",
+      "preview": "none",
+      "complete_data": "unprepared",
+      "publication": "not_reviewed",
+      "preview_count": 0,
+      "total_count": null,
+      "unit": "example",
+      "blockers": [
+        "The citing survey names Pascal VOC without year or split; this explicit VOC2011 archive does not resolve paper membership.",
+        "Native adapter and pinned recipe implemented; real preparation and independent limitations verification pending."
+      ]
+    },
+    "availability": null,
+    "rights": {
+      "records": "not_reviewed",
+      "annotations": "not_reviewed",
+      "images": "not_reviewed"
+    },
+    "relationships": [],
+    "evidence": [
+      {
+        "kind": "corpus_mention",
+        "evidence_id": "evidence-b03488646d11ddb322f5",
+        "paper_id": "paper-25eaa8c74ce76800",
+        "source_file_hash": "4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6",
+        "page": 30,
+        "role": "cited-study dataset in survey table",
+        "excerpt": "ResNet50, VGG16 \u2014 ImageNet, Pascal VOC (Yang et al., 2024c) BLIP2(blip2-opt-2.7b), \u2014",
+        "review_scope": "full_text_mention_inventory_checked",
+        "paper_full_review_complete": true
+      },
+      {
+        "kind": "source_audit_access",
+        "checked_on": "2026-10-06",
+        "url": "https://www.robots.ox.ac.uk/~vgg/projects/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar",
+        "note": "The old host.robots.ox.ac.uk paths now answer HTTP 301 to www.robots.ox.ac.uk/~vgg/projects/pascal/VOC/. VOC2012 trainval is 1,999,639,040 bytes (strong ETag, Last-Modified 2025-09-11) and VOC2007 test is 451,020,800 bytes; both serve range requests. The survey cites only 'Pascal VOC'.",
+        "source_identity_status": "official_files_reachable_year_not_named_by_paper"
+      },
+      {
+        "kind": "derived_facet",
+        "field": "modalities",
+        "checked_on": "2026-10-06",
+        "note": "From the source inspected on 2026-10-06: official VOC tar archives inspected by header only; photographs with XML annotations per the challenge. Not inferred from the dataset name."
+      },
+      {
+        "kind": "native_source_acquisition",
+        "checked_on": "2026-10-06",
+        "url": "https://thor.robots.ox.ac.uk/pascal/VOC/voc2011/VOCtrainval_25-May-2011.tar",
+        "receipt": "reports/pascal-voc2011-native-source-acquisition-20261006.json",
+        "note": "Full original archive SHA256 and publisher MD5 verified. Native14961 image/XML pairs,11540 Main trainval images,3421 outsideMain images and2223 paired masks; paper identity and publication rights remain unresolved."
+      }
+    ]
+  },
+  "max_download_bytes": 2000000000,
+  "max_output_bytes": 1000000000,
+  "source_mode": "download",
+  "files": [
+    {
+      "source_name": "VOCtrainval_25-May-2011.tar",
+      "url": "https://thor.robots.ox.ac.uk/pascal/VOC/voc2011/VOCtrainval_25-May-2011.tar",
+      "bytes": 1765686784,
+      "sha256": "0a7f5f5d154f7290ec65ec3f78b72ef72c6d93ff6d79acd40dc222a9ee5248ba",
+      "md5": "6c3384ef61512963050cb5d687e5bf1e",
+      "format": "tar",
+      "config_key": "archive_path"
+    }
+  ],
+  "expected_download_bytes": 1765686784,
+  "expected_count": 14961,
+  "source_url": "https://www.robots.ox.ac.uk/~vgg/projects/pascal/VOC/voc2011/index.html",
+  "requirements": [],
+  "ready": true,
+  "scope": "All14961 native VOC2011 archive JPEG/XML pairs, preserving exact XML,20 signed classification labels and all102 image-set tables. Main classification trainval has11540 images;3421 other archive images retain absent classification labels. Native2223 class/object mask pairs are linked as original palette PNG assets. Other VOC years and the citing survey paper specific release/subset remain unresolved.",
+  "source_identity": "Pinned available release; not a claim of the paper-used revision.",
+  "prepared_dataset": {
+    "schema_version": "1.0",
+    "id": "pascal-voc",
+    "name": "Pascal VOC",
+    "origin": "catalogue",
+    "aliases": [],
+    "description": "Mention candidate from a focused page audit; the evidence receipts distinguish direct use, comparison, related-work, and citation-only roles. Original source, release, and rights still require independent verification.",
+    "tasks": [],
+    "modalities": [
+      "image"
+    ],
+    "labels": [],
+    "paper_ids": [
+      "paper-25eaa8c74ce76800"
+    ],
+    "source_url": "https://www.robots.ox.ac.uk/~vgg/projects/pascal/VOC/voc2011/index.html",
+    "release": "voc2011-author-native-archive-14961",
+    "snapshot_id": "",
+    "adapter": "pascal_voc",
+    "adapter_config": {
+      "archive_preparation": "indexed-tar",
+      "archive_index_key": "archive_path",
+      "sequential_index": true,
+      "verify_remote_preview_media": true,
+      "preview_group_by": "primary_asset_then_example",
+      "media_scope": "partial",
+      "max_record_bytes": 1000000,
+      "max_uncompressed_bytes": 2000000000,
+      "native_record_read_bytes": 500000000,
+      "remote_cache_root": "/home/bitwise/Documents/vibe/DatasetAtlas/work/media-cache/pascal-voc",
+      "remote_cache_bytes": 100000000,
+      "media_transfer_bytes": 200000000
+    },
+    "coverage": {
+      "identity": "candidate",
+      "source": "verified",
+      "access": "public",
+      "adapter": "implemented",
+      "preview": "none",
+      "complete_data": "unprepared",
+      "publication": "not_reviewed",
+      "preview_count": 0,
+      "total_count": null,
+      "unit": "example",
+      "blockers": [
+        "The citing survey names Pascal VOC without year or split; this explicit VOC2011 archive does not resolve paper membership.",
+        "Native adapter and pinned recipe implemented; real preparation and independent limitations verification pending."
+      ]
+    },
+    "availability": null,
+    "rights": {
+      "records": "not_reviewed",
+      "annotations": "not_reviewed",
+      "images": "not_reviewed"
+    },
+    "relationships": [],
+    "evidence": [
+      {
+        "kind": "corpus_mention",
+        "evidence_id": "evidence-b03488646d11ddb322f5",
+        "paper_id": "paper-25eaa8c74ce76800",
+        "source_file_hash": "4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6",
+        "page": 30,
+        "role": "cited-study dataset in survey table",
+        "excerpt": "ResNet50, VGG16 \u2014 ImageNet, Pascal VOC (Yang et al., 2024c) BLIP2(blip2-opt-2.7b), \u2014",
+        "review_scope": "full_text_mention_inventory_checked",
+        "paper_full_review_complete": true
+      },
+      {
+        "kind": "source_audit_access",
+        "checked_on": "2026-10-06",
+        "url": "https://www.robots.ox.ac.uk/~vgg/projects/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar",
+        "note": "The old host.robots.ox.ac.uk paths now answer HTTP 301 to www.robots.ox.ac.uk/~vgg/projects/pascal/VOC/. VOC2012 trainval is 1,999,639,040 bytes (strong ETag, Last-Modified 2025-09-11) and VOC2007 test is 451,020,800 bytes; both serve range requests. The survey cites only 'Pascal VOC'.",
+        "source_identity_status": "official_files_reachable_year_not_named_by_paper"
+      },
+      {
+        "kind": "derived_facet",
+        "field": "modalities",
+        "checked_on": "2026-10-06",
+        "note": "From the source inspected on 2026-10-06: official VOC tar archives inspected by header only; photographs with XML annotations per the challenge. Not inferred from the dataset name."
+      },
+      {
+        "kind": "native_source_acquisition",
+        "checked_on": "2026-10-06",
+        "url": "https://thor.robots.ox.ac.uk/pascal/VOC/voc2011/VOCtrainval_25-May-2011.tar",
+        "receipt": "reports/pascal-voc2011-native-source-acquisition-20261006.json",
+        "note": "Full original archive SHA256 and publisher MD5 verified. Native14961 image/XML pairs,11540 Main trainval images,3421 outsideMain images and2223 paired masks; paper identity and publication rights remain unresolved."
+      }
+    ]
+  },
+  "recipe_sha256": "8de7fbc8c8a64e006912093c65aeb89f01e5cb17c2484d8afe864f297826562f",
+  "kind": "http_archive",
+  "allowed_hosts": [
+    "thor.robots.ox.ac.uk"
+  ],
+  "convert": {
+    "name": "pascal_voc_native",
+    "count": 14961,
+    "rows_sha256": "a79130421fd7cf8d36bfa2316e3b94b63e52aaa40647dd956e1cd1239dc19862"
+  },
+  "required_free_bytes": 1000000000,
+  "reuse_registered_sources": [
+    "VOCtrainval_25-May-2011.tar"
+  ],
+  "available_bytes": 193513340928,
+  "shared_storage": {
+    "ceiling_bytes": 150000000000,
+    "allocated_workspace_bytes": 121917214720,
+    "reserved_by_running_preparations": 0,
+    "available_bytes": 28082785280,
+    "required_bytes": 1000000000,
+    "admitted": true,
+    "scope": "Workspace regular files plus explicitly configured external model/source roots.",
+    "measurement_errors": []
+  },
+  "resource_limits": {
+    "max_rss_bytes": 4000000000,
+    "max_cpu_seconds": 900,
+    "max_wall_seconds": 1800
+  },
+  "memory_enforcement": "kernel cgroup memory cap including descendants; swap disabled",
+  "id": "cecb7ca799654e6e3714f178e1e76fc3c736b9870572531d164712eca5e2e37d"
+}

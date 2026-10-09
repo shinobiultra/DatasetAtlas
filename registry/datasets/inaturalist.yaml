@@ -12,7 +12,7 @@ adapter_config: {}
 coverage:
   identity: resolved
   source: verified
-  access: unverified
+  access: public
   adapter: not_started
   preview: none
   complete_data: unimplemented
@@ -20,8 +20,7 @@ coverage:
   preview_count: 0
   unit: example
   blockers:
-  - Official source family identified; exact selected release, preparation and public-use
-    rights still require dataset-specific review.
+  - The citing paper challenge release and exact SAE membership remain unidentified.
   - Adapter and preview are not implemented.
 rights:
   records: not_reviewed
@@ -83,4 +82,18 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: project_identified_release_unpinned
+- kind: source_audit_release
+  url: https://github.com/visipedia/inat_comp/tree/master/2021
+  checked_on: '2026-10-06'
+  note: 2021 native validation annotations locally acquired and SHA-256 verified;
+    100,000 images, 10,000 taxa and 7 native licence definitions. Image archive publisher
+    MD5 is pinned; full image preparation is still pending.
+  source_identity_status: native_available_validation_not_paper_membership
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields
+    present in at least one record. Not inferred from the name or description.'
 source_url: https://www.inaturalist.org/pages/developers
+modalities:
+- image

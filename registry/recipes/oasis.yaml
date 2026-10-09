@@ -1,0 +1,27 @@
+release: author-osf-6pnd7-uxvpb-corrected-20170926
+adapter: structured_archive
+expected_count: 900
+scope: All 900 original OASIS JPEGs joined to the native overall normative table and the corrected 2017-09-26
+  gender table in the author OSF archive. Raw source strings are retained. Two image joins remove trailing
+  whitespace only, with explicit flags; norms are not rewritten. Participant-level responses and the paper's
+  selected stimuli remain separate. Every row links its original JPEG in the pinned archive, and the preview
+  retains 100 of those originals.
+adapter_config:
+  verify_remote_preview_media: true
+allowed_hosts:
+- osf.io
+- files.osf.io
+- osfstorage-archive.s3.amazonaws.com
+- storage.googleapis.com
+- s3.us-east-1.amazonaws.com
+convert:
+  name: oasis_normative
+  count: 900
+  rows_sha256: 037d3f7f9be4f1550df007bbf721d510c83fb97bdf4c5d1b3de187976fe0a938
+files:
+- source_name: OASIS.zip
+  url: https://osf.io/download/uxvpb/
+  bytes: 92128315
+  sha256: b1c1f23a2adfb504801ad05df00e01b5530f4442524c983fe535476807137312
+  config_key: media_archive
+  format: zip

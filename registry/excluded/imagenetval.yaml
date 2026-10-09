@@ -1,0 +1,73 @@
+schema_version: '1.0'
+id: imagenetval
+name: ImageNetVal
+aliases: []
+description: Survey table says ImageNetVal; likely ILSVRC validation but exact study source, year and selection
+  are not pinned.
+paper_ids:
+- paper-25eaa8c74ce76800
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: gated
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Original source requires registration or licensed base images.
+  - Exact source variant or paper selection is unresolved.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://www.image-net.org/challenges/LSVRC/
+  note: ImageNet access and image terms govern.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-087d4e2f44c9b9df8043
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: LAION, CelebA, ImageNetVal (Parekh et al., 2024) DePALM (CLIP+OPT) Image Classification
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://www.image-net.org/challenges/LSVRC/
+  note: 'Survey table says ImageNetVal; likely ILSVRC validation but exact study source, year and selection are
+    not pinned. Release: ImageNet validation; challenge year and selected IDs unresolved'
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+- kind: source_audit_rights
+  url: https://www.image-net.org/download.php
+  note: ImageNet access and image terms govern.
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+- kind: source_audit_refresh
+  url: https://www.image-net.org/challenges/LSVRC/
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'unchanged: a reachable page says nothing about whether the files are public, so the prior state
+    stands. 2 URLs probed (HEAD only): 2 reachable.'
+source_url: https://www.image-net.org/challenges/LSVRC/
+relationships:
+- type: same_source_family_as
+  target_id: imagenet
+  status: asserted_from_source_review
+  scope: Likely the ILSVRC validation split; exact year and selection unpinned.
+- type: same_source_family_as
+  target_id: imagenet-ilsvrc-2012
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: Likely the ILSVRC validation split, which the parent release contains; year and selection are not pinned
+    by the survey table.

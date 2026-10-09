@@ -1,0 +1,70 @@
+schema_version: '1.0'
+id: raise1k
+name: RAISE1k
+aliases: []
+description: Original RAISE RAW image archive is identifiable; exact RAISE1k image
+  IDs/processing in cited experiment are not pinned.
+paper_ids:
+- paper-666de2b7486d80a3
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Publisher RAISE-1K download requires name, affiliation, email and acceptance of
+    research/education terms. No request was submitted on the user’s behalf.
+  - Native NEF/TIFF/CSV acquisition and display adapter remain implementation work
+    after authorized source access.
+  - Exact citing-paper source release and selected membership remain unverified.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://loki.disi.unitn.it/RAISE/
+  note: Photographer/source terms for RAISE require original-page inspection before
+    media publication.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-d4bb59037eb97f0d6be2
+  paper_id: paper-666de2b7486d80a3
+  source_file_hash: c43575003d83757725739ad87acfc4026d0d3129b27bee69fd1a4c362dc0db33
+  page: 5
+  role: source data
+  excerpt: 'ncompressed images) for Colorization [47] Val 4.7 5 training, and the
+    RAISE1k dataset [10] for validation. 2AFC–Real Alg [Val] – Val 26.9k 5 To enable
+    large-scale collection, our data is '
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://loki.disi.unitn.it/RAISE/
+  note: 'Original RAISE RAW image archive is identifiable; exact RAISE1k image IDs/processing
+    in cited experiment are not pinned. Release: RAISE-1k subset of RAISE; sampling
+    unresolved'
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+- kind: source_audit_rights
+  url: https://loki.disi.unitn.it/RAISE/
+  note: Photographer/source terms for RAISE require original-page inspection before
+    media publication.
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+- kind: source_audit_refresh
+  url: https://loki.disi.unitn.it/RAISE/
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 1 URL probed (HEAD only): 1 reachable.'
+source_url: https://loki.disi.unitn.it/RAISE/

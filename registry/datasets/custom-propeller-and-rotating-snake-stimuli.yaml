@@ -2,33 +2,36 @@ schema_version: '1.0'
 id: custom-propeller-and-rotating-snake-stimuli
 name: custom propeller and rotating-snake stimuli
 aliases: []
-description: Watanabe Illusory Motion test stimuli.
+description: 'Original seven media files in the author-linked Figshare Test_data v1 release: five still
+  images and two propeller videos. The paper describes six testing conditions; file-to-condition equivalence
+  is not inferred.'
 paper_ids:
 - paper-4f53de240f8fc1af
-release: unresolved
-adapter: structured
+release: figshare-5483680-v1
+adapter: figshare_stimuli
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
-  unit: example
+  preview_count: 7
+  unit: asset
   blockers:
-  - Official source family identified; exact selected release, preparation and public-use
-    rights still require dataset-specific review.
-  - Adapter and preview are not implemented.
+  - The paper describes six test conditions; the released v1 contains seven media files, and a condition-to-file
+    mapping is not asserted.
+  - Public media redistribution has not been approved.
+  total_count: 7
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://doi.org/10.6084/m9.figshare.5483680
-  note: Figshare Test_data record states CC BY 4.0; verify exact v1/v2 differences
-    and media file checksums
+  note: Figshare v1 article reports CC BY 4.0; redistribution remains unapproved pending source-specific
+    publication review.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-55b69f0af12b5cdda59b
@@ -36,9 +39,9 @@ evidence:
   source_file_hash: 8ebf6e59889fac55b6530a1b8edfcaad993fc72a4b5cdb49b1b9b7452084fc5d
   page: 3
   role: derived collection
-  excerpt: 'idden units (Figures 11, 12). (GTX-1080, NVIDIA). For the PredNet predictions,
-    there were six testing stimuli: cw rotating propeller, ccw rotating propeller,
-    Optical Flow Analysis static propeller, mirrored cw rotating'
+  excerpt: 'idden units (Figures 11, 12). (GTX-1080, NVIDIA). For the PredNet predictions, there were
+    six testing stimuli: cw rotating propeller, ccw rotating propeller, Optical Flow Analysis static propeller,
+    mirrored cw rotating'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -49,9 +52,8 @@ evidence:
   source_identity_status: author_release_identified_version_drift
 - kind: source_audit_release
   url: https://doi.org/10.6084/m9.figshare.5483680
-  note: Paper p3 describes six test conditions; p4 links Figshare Test_data 5483680.v1
-    with propeller videos and illusion/control images; current Figshare record is
-    v2
+  note: Paper p3 describes six test conditions; p4 links Figshare Test_data 5483680.v1 with propeller
+    videos and illusion/control images; current Figshare record is v2
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_release_identified_version_drift
@@ -65,8 +67,7 @@ evidence:
   source_identity_status: author_release_identified_version_drift
 - kind: source_audit_rights
   url: https://doi.org/10.6084/m9.figshare.5483680
-  note: Figshare Test_data record states CC BY 4.0; verify exact v1/v2 differences
-    and media file checksums
+  note: Figshare Test_data record states CC BY 4.0; verify exact v1/v2 differences and media file checksums
   publication_decision: media_not_approved
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
@@ -78,4 +79,17 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_release_identified_version_drift
-source_url: https://doi.org/10.6084/m9.figshare.5483680
+- kind: native_population_live_verification
+  url: https://doi.org/10.6084/m9.figshare.5483680.v1
+  checked_on: '2026-09-24'
+  receipt: reports/figshare-stimuli-live-verification.json
+  scope: Every media file in Figshare Test_data article 5483680 version 1, excluding the later v2-only
+    InkBlots ZIP. All seven assets are selected for the preview; original bytes and file IDs are retained,
+    with no model inference or derived condition labels.
+  source_identity_status: author_figshare_v1_resolved_paper_condition_mapping_unverified
+source_url: https://doi.org/10.6084/m9.figshare.5483680.v1
+modalities:
+- image
+- video
+tasks:
+- illusory motion stimulus inspection

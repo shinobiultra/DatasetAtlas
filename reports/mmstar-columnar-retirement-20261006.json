@@ -1,0 +1,60 @@
+{
+  "dataset_id": "mmstar",
+  "executed": true,
+  "status": "executed",
+  "sources": [
+    {
+      "source_name": "mmstar.parquet",
+      "url": "https://huggingface.co/datasets/Lin-Chen/MMStar/resolve/bc98d668301da7b14f648724866e57302778ab27/mmstar.parquet",
+      "bytes": 41798712,
+      "sha256": "29afd74b0134cfab083a8909b5358577ab18fd41c1e612031577cfb3635531c2",
+      "etag": "\"05f34b3893a0c202a9d59ead89c43be62895b1654641334fe53d89ccb7c7e98a\"",
+      "rows": 1500
+    }
+  ],
+  "versions": [
+    {
+      "snapshot_id": "mmstar-575b7bceafdb3600130af8c3",
+      "native_image_references": 1500,
+      "index": "parquet-f243e2f39d453b67dff80a4001c0c04e-fc82d7a7a4e348d4ab2d2788c1008dfc",
+      "cold_checks": [
+        {
+          "ref": "embedded/750/0.jpg",
+          "sha256": "da8cd20b3419a27da78455897c3151a0264d4a6535e43d8a18fb558b2a1235af",
+          "transferred_bytes": 2762441,
+          "source_ref": "remote/0/750/image/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/0/0.jpg",
+          "sha256": "5411cf528148edb47a579b19ce35c10c3d2014ccb2a2ddd6b4c23a3d8d8c20ea",
+          "transferred_bytes": 3117110,
+          "source_ref": "remote/0/0/image/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/1499/0.jpg",
+          "sha256": "4d626193babf8ab071f0d80764d89e2f1ba21b80744c1b50196eb8380cd2f082",
+          "transferred_bytes": 2553383,
+          "source_ref": "remote/0/1499/image/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        }
+      ]
+    }
+  ],
+  "total_verification_transfer_bytes": 8432935,
+  "native_index_bytes": 249856,
+  "preview_bytes_upper_bound": 3229394,
+  "source_paths_eligible": [
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmstar/575b7bceafdb3600130af8c38d7b1329d97167c7983ff0945f4e882bfec813f8/sources/29afd74b0134cfab083a8909b5358577ab18fd41c1e612031577cfb3635531c2.parquet"
+  ],
+  "source_paths_retired": [
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmstar/575b7bceafdb3600130af8c38d7b1329d97167c7983ff0945f4e882bfec813f8/sources/29afd74b0134cfab083a8909b5358577ab18fd41c1e612031577cfb3635531c2.parquet"
+  ],
+  "freed_source_allocated_bytes": 41799680,
+  "integrity": "Complete native Parquet SHA-256 and every canonical image SHA-256 retained. Preview originals pinned locally. Retrieved originals equal their measured native SHA-256.",
+  "transfer_measurement": "One-byte source probes plus actual range payloads; validated ETag-bound cache hits transfer zero bytes. Verification can reuse those cached ranges."
+}

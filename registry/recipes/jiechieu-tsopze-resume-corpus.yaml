@@ -1,0 +1,46 @@
+source_url: https://github.com/florex/resume_corpus/tree/24de39957d99caf2c89cf384ba2396bafe16050d
+release: 24de39957d99caf2c89cf384ba2396bafe16050d
+adapter: text_pairs
+expected_count: 29783
+description: 'Jiechieu–Tsopze resume corpus: 29,783 native text/label pairs with occupation
+  labels. Original member bytes are retained; text is decoded explicitly as Windows-1252.
+  The author also supplies a redundant flat export and normalization/skills files,
+  retained as source artifacts.'
+scope: All 29783 exact .txt/.lab pairs in the native resumes_corpus.zip, preserving
+  original text, raw labels, category lists and member SHA-256 values. The flat export,
+  occupation normalization and skills files remain original source artifacts, without
+  guessing undocumented joins. No public redistribution approval.
+adapter_config:
+  encoding: cp1252
+  mapping:
+    id: native_id
+    text: text
+  max_decoded_bytes: 250000000
+  max_member_bytes: 5000000
+files:
+- source_name: resumes_corpus.zip
+  url: https://raw.githubusercontent.com/florex/resume_corpus/24de39957d99caf2c89cf384ba2396bafe16050d/resumes_corpus.zip
+  bytes: 89368518
+  sha256: 5569bdb1a452291129bccce9c6ce3b95775c458bc59df8e46ef7267fdc7c3d2c
+  config_key: path
+  format: zip
+- source_name: resume_samples.zip
+  url: https://raw.githubusercontent.com/florex/resume_corpus/24de39957d99caf2c89cf384ba2396bafe16050d/resume_samples.zip
+  bytes: 63818300
+  sha256: e49b0e7ee8752b51a4ac046f3fc07c2331749d136823e72c9a7bb5908ecf1beb
+  config_key: flat_export_path
+  format: zip
+- source_name: normlized_classes.txt
+  url: https://raw.githubusercontent.com/florex/resume_corpus/24de39957d99caf2c89cf384ba2396bafe16050d/normlized_classes.txt
+  bytes: 1223150
+  sha256: 447023ce28e59764e2d0b2c393e62278f408306c24be5a2b746082c97c0bd870
+  config_key: normalization_path
+  format: text
+- source_name: skills_it.txt
+  url: https://raw.githubusercontent.com/florex/resume_corpus/24de39957d99caf2c89cf384ba2396bafe16050d/skills_it.txt
+  bytes: 14775447
+  sha256: fbfbaf589516a2a0f57f57de4974490be50c36a6ead835295770d0fe32946c31
+  config_key: skills_path
+  format: text
+allowed_hosts:
+- raw.githubusercontent.com

@@ -13,6 +13,34 @@ from dataset_atlas.queries.parquet import build_parquet_snapshot
 HEADERS = {"X-Atlas-Request": "1"}
 
 
+def test_protected_original_preserves_display_representation_header(workspace,pack):
+    import hashlib
+    import io
+    import json
+    import sqlite3
+    from PIL import Image
+    from dataset_atlas.storage.compact import encode_image,store_directory
+    asset=pack.records[0].assets[0]
+    output=io.BytesIO();Image.new('RGB',(31,17),(12,35,73)).save(output,format='TIFF')
+    original=output.getvalue();digest=hashlib.sha256(original).hexdigest()
+    asset.sha256=digest
+    (workspace/'work/packs/fixture/pack.json').write_text(pack.model_dump_json())
+    directory=store_directory(workspace,'fixture','s1');(directory/'objects').mkdir(parents=True)
+    data,mime,metadata=encode_image(original,protected=True)
+    (directory/'objects'/digest).write_bytes(data)
+    with sqlite3.connect(directory/'index.sqlite') as db:
+        db.execute('CREATE TABLE media(ref TEXT PRIMARY KEY,metadata TEXT NOT NULL)')
+        db.execute('INSERT INTO media VALUES(?,?)',(asset.uri,json.dumps({**metadata,'sha256':digest,'mime':mime})))
+    with TestClient(create_app(workspace)) as client:
+        exposed=client.get('/api/v1/datasets/fixture/pack').json()['records'][0]['assets'][0]
+        shown=client.get(exposed['uri']+'?representation=display')
+        assert shown.status_code==200 and shown.headers['content-type']=='image/png'
+        assert shown.headers['x-atlas-media-representation']=='display'
+        with Image.open(io.BytesIO(shown.content)) as image:
+            assert image.size==(31,17) and image.getpixel((0,0))==(12,35,73)
+        assert client.get(exposed['uri']).content==original
+
+
 def _complete_workspace(workspace, pack):
     media = workspace / "work/packs/fixture/media/test.png"
     media.parent.mkdir(parents=True, exist_ok=True)

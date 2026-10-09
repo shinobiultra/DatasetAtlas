@@ -39,3 +39,19 @@ def test_unsafe_refs_changed_sources_and_budget_rejected(tmp_path):
         adapter.iter_records(adapter.prepare(adapter.plan(1,1)),limit=1)
     adapter._path().write_bytes(b'changed')
     with pytest.raises(ValueError,match='checksum'):adapter.prepare(adapter.plan(1,1000))
+
+
+@pytest.mark.parametrize('encoding', ['PNG', 'AVIF'])
+def test_base64_image_decoding_preserves_original_bytes(tmp_path,encoding):
+    import base64
+    from dataset_atlas.adapters.columnar import ColumnarAdapter
+    stream=io.BytesIO();Image.new('RGB',(3,2),'red').save(stream,format=encoding);data=stream.getvalue()
+    path=tmp_path/'encoded.parquet';pq.write_table(pa.table({'image':[base64.b64encode(data).decode()]}),path)
+    dataset=Dataset(id='encoded',name='Encoded',release='r',snapshot_id='s',adapter='columnar',adapter_config={
+        'files':[{'path':str(path),'sha256':hashlib.sha256(path.read_bytes()).hexdigest()}],
+        'media_columns':['image'],'media_encoding':'base64'})
+    adapter=ColumnarAdapter(dataset);source=adapter.prepare(adapter.plan(1,10000));row=adapter.iter_records(source).records[0]
+    assert row.source['image']['source_encoding']=='base64'
+    assert adapter.source_field_types()['image']=='object'
+    assert adapter.resolve_asset(source,row.assets[0].uri).data==data
+    with pytest.raises(ValueError):adapter._entries({'image':'not valid base64!'})

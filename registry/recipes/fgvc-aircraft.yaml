@@ -1,0 +1,20 @@
+release: fgvc-aircraft-2013b
+adapter: classic_vision
+expected_count: 10000
+source_url: https://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/
+scope: 'All 10000 images in the official fgvc-aircraft-2013b archive, with original
+  splits {''train'': 3334, ''val'': 3333, ''test'': 3333}, variant/family/manufacturer
+  labels and bounding boxes. This archive omits images_size.txt; source_size remains null. Original copyright banners retained.'
+adapter_config:
+  dataset_kind: aircraft
+  archive_preparation: zip-store
+files:
+- url: https://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/archives/fgvc-aircraft-2013b.tar.gz
+  bytes: 2753340328
+  sha256: e4e323d410e29f0370c81eabdcbb0e2b813acea1de22891b70b58ff41bfc9834
+  source_name: fgvc-aircraft-2013b.tar.gz
+  config_key: path
+  format: tar.gz
+allowed_hosts:
+- www.robots.ox.ac.uk
+- thor.robots.ox.ac.uk

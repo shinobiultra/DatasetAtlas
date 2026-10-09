@@ -1,0 +1,14 @@
+release: imagenet-a-original-tar-3bb36322
+adapter: archive
+expected_count: 7500
+scope: 'Original author ImageNet-A TAR: 7,500 source images across 200 synset folders'
+adapter_config: {}
+files:
+- source_name: imagenet-a.tar
+  url: https://people.eecs.berkeley.edu/~hendrycks/imagenet-a.tar
+  bytes: 687552512
+  sha256: 3bb3632277e6ba6392ea64c02ddbf4dd2266c9caffd6bc09c9656d28f012589e
+  format: tar
+  config_key: path
+allowed_hosts:
+- people.eecs.berkeley.edu

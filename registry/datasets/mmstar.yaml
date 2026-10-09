@@ -12,8 +12,8 @@ adapter: structured
 adapter_config: {}
 coverage:
   identity: candidate
-  source: unverified
-  access: unverified
+  source: verified
+  access: public
   adapter: not_started
   preview: none
   complete_data: unimplemented
@@ -38,3 +38,17 @@ evidence:
     [7], and RealWorldQA [30].'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
+- kind: implemented_source_release
+  url: https://huggingface.co/datasets/Lin-Chen/MMStar
+  checked_on: '2026-09-23'
+  report: reports/selective-acquisition-20260923.md
+  note: Pinned acquired population and real preview exercised locally. Mirror and
+    selective-transfer limits remain in the acquisition receipts; this does not establish
+    publication rights or the exact paper-used subset.
+  recipe: registry/recipes/mmstar.yaml
+modalities:
+- image
+- text
+tasks:
+- visual question answering
+source_url: https://huggingface.co/datasets/Lin-Chen/MMStar

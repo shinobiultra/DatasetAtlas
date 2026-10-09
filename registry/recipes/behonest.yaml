@@ -1,0 +1,162 @@
+# The catalogue's records are these pinned originals plus identity fields (see dataset_atlas/converters/text.py). A fetch reproduces
+# them and fails unless the converted rows match this row digest, taken from the maintainer's records. IDs and snapshot unchanged.
+release: hf-fcdb24a2de2cd236bbd1b4484d99c23512ee7cc6
+snapshot_id: behonest-sha256-3fc0022ed6b68c4e5598c027ef2683731d6957a67ac930557fd336b70ebe3163
+adapter: structured
+expected_count: 19059
+scope: all 18 JSON files in pinned GAIR/BeHonest HF snapshot
+source_url: https://huggingface.co/datasets/GAIR/BeHonest/tree/fcdb24a2de2cd236bbd1b4484d99c23512ee7cc6
+adapter_config: {}
+convert:
+  name: behonest
+  params:
+    members:
+    - key: m0
+      member: Burglar_Deception/burglar_police.json
+    - key: m1
+      member: Burglar_Deception/false_label.json
+    - key: m2
+      member: Burglar_Deception/false_rec.json
+    - key: m3
+      member: Burglar_Deception/neutral.json
+    - key: m4
+      member: Game/werewolf_game.json
+    - key: m5
+      member: Knowns/knowns.json
+    - key: m6
+      member: Multiple_Choice/csqa_all.json
+    - key: m7
+      member: Open_Form/csqa_open.json
+    - key: m8
+      member: Persona_Sycophancy/no_persona.json
+    - key: m9
+      member: Persona_Sycophancy/persona.json
+    - key: m10
+      member: Preference_Sycophancy/preference_agree.json
+    - key: m11
+      member: Preference_Sycophancy/preference_disagree.json
+    - key: m12
+      member: Prompt_Format/natural_instructions_1.json
+    - key: m13
+      member: Prompt_Format/natural_instructions_2.json
+    - key: m14
+      member: Prompt_Format/natural_instructions_3.json
+    - key: m15
+      member: Prompt_Format/natural_instructions_4.json
+    - key: m16
+      member: Prompt_Format/natural_instructions_5.json
+    - key: m17
+      member: Unknowns/unknowns.json
+  count: 19059
+  rows_sha256: 300cd1d28d5686e3c35adbfbe76d18c2d4124535cc5d2e0d1b1106dc1e187aa1
+files:
+- source_name: Burglar_Deception__burglar_police.json
+  url: https://huggingface.co/datasets/GAIR/BeHonest/resolve/fcdb24a2de2cd236bbd1b4484d99c23512ee7cc6/Burglar_Deception/burglar_police.json
+  bytes: 40843
+  sha256: e8182e963c642c3e752c90953eb8bca38982df941d5d81330cf46960c541cee3
+  format: json
+  config_key: m0
+- source_name: Burglar_Deception__false_label.json
+  url: https://huggingface.co/datasets/GAIR/BeHonest/resolve/fcdb24a2de2cd236bbd1b4484d99c23512ee7cc6/Burglar_Deception/false_label.json
+  bytes: 56663
+  sha256: 78ef326c690525f2c7cf2f036a6970b59cc2e7fa6dd279ffb9214acf6f3b8772
+  format: json
+  config_key: m1
+- source_name: Burglar_Deception__false_rec.json
+  url: https://huggingface.co/datasets/GAIR/BeHonest/resolve/fcdb24a2de2cd236bbd1b4484d99c23512ee7cc6/Burglar_Deception/false_rec.json
+  bytes: 42153
+  sha256: 010f07a03f1167677a3b53fca6d56a737b700b28986aa25491f173e40ae50838
+  format: json
+  config_key: m2
+- source_name: Burglar_Deception__neutral.json
+  url: https://huggingface.co/datasets/GAIR/BeHonest/resolve/fcdb24a2de2cd236bbd1b4484d99c23512ee7cc6/Burglar_Deception/neutral.json
+  bytes: 40403
+  sha256: f45819d4923efb17426f8204e0d7851d3624dd5ff9fa452b6d1135f5df2dd3d6
+  format: json
+  config_key: m3
+- source_name: Game__werewolf_game.json
+  url: https://huggingface.co/datasets/GAIR/BeHonest/resolve/fcdb24a2de2cd236bbd1b4484d99c23512ee7cc6/Game/werewolf_game.json
+  bytes: 564798
+  sha256: 36c3f5981e56fedf82409ed3f2fd27b64d741868759e8025133694e22a0c35a3
+  format: json
+  config_key: m4
+- source_name: Knowns__knowns.json
+  url: https://huggingface.co/datasets/GAIR/BeHonest/resolve/fcdb24a2de2cd236bbd1b4484d99c23512ee7cc6/Knowns/knowns.json
+  bytes: 1064019
+  sha256: b92a7e61c6598a0b0db7be5e50a43e03e252ee7fc86d49156302c760e3850920
+  format: json
+  config_key: m5
+- source_name: Multiple_Choice__csqa_all.json
+  url: https://huggingface.co/datasets/GAIR/BeHonest/resolve/fcdb24a2de2cd236bbd1b4484d99c23512ee7cc6/Multiple_Choice/csqa_all.json
+  bytes: 319671
+  sha256: cad162f0627276949b46d0506166e480b55c56c43d354a05bc13558750ed91ea
+  format: json
+  config_key: m6
+- source_name: Open_Form__csqa_open.json
+  url: https://huggingface.co/datasets/GAIR/BeHonest/resolve/fcdb24a2de2cd236bbd1b4484d99c23512ee7cc6/Open_Form/csqa_open.json
+  bytes: 79089
+  sha256: f6592376da20e6c6de8b57997f68919986b456d38f7c68b4a05fbecf23de3368
+  format: json
+  config_key: m7
+- source_name: Persona_Sycophancy__no_persona.json
+  url: https://huggingface.co/datasets/GAIR/BeHonest/resolve/fcdb24a2de2cd236bbd1b4484d99c23512ee7cc6/Persona_Sycophancy/no_persona.json
+  bytes: 183419
+  sha256: 70f30890bb19fdf8e5c949a2bd5d11ec21efc848eedbfd21f38cc767e45f46ae
+  format: json
+  config_key: m8
+- source_name: Persona_Sycophancy__persona.json
+  url: https://huggingface.co/datasets/GAIR/BeHonest/resolve/fcdb24a2de2cd236bbd1b4484d99c23512ee7cc6/Persona_Sycophancy/persona.json
+  bytes: 247370
+  sha256: 278a6a48bc5c55cea05a236426dff29739e50d5e377d83e52bfb9192424b06da
+  format: json
+  config_key: m9
+- source_name: Preference_Sycophancy__preference_agree.json
+  url: https://huggingface.co/datasets/GAIR/BeHonest/resolve/fcdb24a2de2cd236bbd1b4484d99c23512ee7cc6/Preference_Sycophancy/preference_agree.json
+  bytes: 364217
+  sha256: ec0c0aa087e0300dae66a3b059e3fc5daaf3fa497f9fce69025af4f18b16e0a8
+  format: json
+  config_key: m10
+- source_name: Preference_Sycophancy__preference_disagree.json
+  url: https://huggingface.co/datasets/GAIR/BeHonest/resolve/fcdb24a2de2cd236bbd1b4484d99c23512ee7cc6/Preference_Sycophancy/preference_disagree.json
+  bytes: 364217
+  sha256: 996f3018cc76bbaf64d79b53f26a89f3b93c6b52befedef5f5bb4879824797c0
+  format: json
+  config_key: m11
+- source_name: Prompt_Format__natural_instructions_1.json
+  url: https://huggingface.co/datasets/GAIR/BeHonest/resolve/fcdb24a2de2cd236bbd1b4484d99c23512ee7cc6/Prompt_Format/natural_instructions_1.json
+  bytes: 210348
+  sha256: 68ab7d571558d4c08ee7b21b6754be6f647a7fad6dbf55d1b652314ca00c5a02
+  format: json
+  config_key: m12
+- source_name: Prompt_Format__natural_instructions_2.json
+  url: https://huggingface.co/datasets/GAIR/BeHonest/resolve/fcdb24a2de2cd236bbd1b4484d99c23512ee7cc6/Prompt_Format/natural_instructions_2.json
+  bytes: 209948
+  sha256: d492b91c873d2ab0b5e8e8c9f09548d4d47495418c4ff32c5bd5cc2c8fa79db8
+  format: json
+  config_key: m13
+- source_name: Prompt_Format__natural_instructions_3.json
+  url: https://huggingface.co/datasets/GAIR/BeHonest/resolve/fcdb24a2de2cd236bbd1b4484d99c23512ee7cc6/Prompt_Format/natural_instructions_3.json
+  bytes: 209148
+  sha256: d930aa339cadd70c6ee1d0e608580c34ca2a71a032ddadccdb01c18219ba46fa
+  format: json
+  config_key: m14
+- source_name: Prompt_Format__natural_instructions_4.json
+  url: https://huggingface.co/datasets/GAIR/BeHonest/resolve/fcdb24a2de2cd236bbd1b4484d99c23512ee7cc6/Prompt_Format/natural_instructions_4.json
+  bytes: 210348
+  sha256: ab8f8bd89866814543484fa5a63f961477986adc68378f69a30d5974b99fa3c7
+  format: json
+  config_key: m15
+- source_name: Prompt_Format__natural_instructions_5.json
+  url: https://huggingface.co/datasets/GAIR/BeHonest/resolve/fcdb24a2de2cd236bbd1b4484d99c23512ee7cc6/Prompt_Format/natural_instructions_5.json
+  bytes: 209548
+  sha256: c5226bb15dba59360d1e184e1f78809a42fc2d41533cff908e6696aeaf54b87b
+  format: json
+  config_key: m16
+- source_name: Unknowns__unknowns.json
+  url: https://huggingface.co/datasets/GAIR/BeHonest/resolve/fcdb24a2de2cd236bbd1b4484d99c23512ee7cc6/Unknowns/unknowns.json
+  bytes: 845137
+  sha256: 84c970c55315aa6b0a05c821c53ddaaaf2465c1acbfaf14037f1ca9392092c35
+  format: json
+  config_key: m17
+allowed_hosts:
+- huggingface.co

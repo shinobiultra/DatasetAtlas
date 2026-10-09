@@ -1,0 +1,42 @@
+schema_version: '1.0'
+id: paper-f6dcb0e50d10ea38-unnamed-public-figure-adversarial-image-set
+name: unnamed public-figure adversarial image set
+aliases: []
+description: Mention candidate from a focused page audit; the evidence receipts distinguish direct use, comparison,
+  related-work, and citation-only roles. Original source, release, and rights still require independent verification.
+paper_ids:
+- paper-f6dcb0e50d10ea38
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: unverified
+  access: unreleased
+  adapter: not_applicable
+  preview: none
+  complete_data: externally_blocked
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - The paper describes public-figure adversarial images it assembled; no public release was located.
+  - No examples will be synthesized in its place; the record exists to carry the paper mention.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-21b4e654d8ca2d116232
+  paper_id: paper-f6dcb0e50d10ea38
+  source_file_hash: 0dd6532879bce9a2e8ce2acb94b61ea633171c51be3f01e4a73eeb826d1f2b0d
+  page: 8
+  role: derived collection
+  excerpt: This yields a total of 10×9 = 90 adver-
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: source_audit_access
+  note: The paper describes public-figure adversarial images it assembled; no public release was located.
+  checked_on: '2026-09-22'
+  source_identity_status: paper_specific_collection_unreleased

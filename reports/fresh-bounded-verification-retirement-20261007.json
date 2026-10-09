@@ -1,0 +1,14 @@
+{
+  "status": "executed",
+  "checked_at_utc": "2026-10-07T06:18:24.719171+00:00",
+  "additional_removed_workspaces": [
+    "wnli"
+  ],
+  "retained_without_current_recipe_identity": [
+    "wmdp"
+  ],
+  "net_additional_allocated_bytes_freed": 36954112,
+  "first_attempt": "24 verified workspaces retired with original immutable receipt/pack/dataset/manifest copies retained, but interrupted before aggregate file-inventory persistence; their original checksums remain in those receipts and the recipe-bound reproduction report. WMDP lacked current recipe identity and was preserved. This retry persists its inventory before every deletion.",
+  "evidence_directory": "work/fresh-bounded-reproduction-evidence-20261007",
+  "scope": "Disposable fresh verification copies only; active workspace canonical data, original corpus, previews, models unchanged."
+}

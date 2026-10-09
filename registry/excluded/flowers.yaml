@@ -1,0 +1,70 @@
+schema_version: '1.0'
+id: flowers
+name: Flowers
+aliases: []
+description: The chart labels Flowers but gives no class count or split; Oxford releases Flowers 17 and
+  Flowers 102.
+paper_ids:
+- paper-3e0db9c633ab204c
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Original data download availability is unverified.
+  - Exact source variant or paper selection is unresolved.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://www.robots.ox.ac.uk/~vgg/data/flowers/102/
+  note: Original flower images have source-specific rights; no rights inference from a generic chart label.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-a83ff360effc96908f07
+  paper_id: paper-3e0db9c633ab204c
+  source_file_hash: d2750f355a25fcdcfcb221e5049a0aa41ec096b452772c73e1767e2d039a6545
+  page: 7
+  role: evaluation
+  excerpt: Cars Dtd Eurosat FGVC Flowers Pets Eval Model Training Data OpenAI-L/14
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://www.robots.ox.ac.uk/~vgg/data/flowers/102/
+  note: 'The chart labels Flowers but gives no class count or split; Oxford releases Flowers 17 and Flowers
+    102. Release: Oxford Flowers 102 candidate; 17/102 variant unresolved'
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+- kind: source_audit_rights
+  url: https://www.robots.ox.ac.uk/~vgg/data/
+  note: Original flower images have source-specific rights; no rights inference from a generic chart label.
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+- kind: source_audit_refresh
+  url: https://www.robots.ox.ac.uk/~vgg/data/flowers/102/
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 2 URLs probed (HEAD only): 2 reachable.'
+source_url: https://www.robots.ox.ac.uk/~vgg/data/flowers/102/
+relationships:
+- type: same_source_family_as
+  target_id: flowers102
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: Oxford publishes Flowers 17 and Flowers 102; the chart gives no class count, so the prepared
+    Flowers-102 release is a family member, not a confirmed match.

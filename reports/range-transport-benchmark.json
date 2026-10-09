@@ -1,0 +1,20 @@
+{
+  "measurement": "Same native shard and first 1000 records, local range cache disabled; one run per implementation, earlier implementation first. Network conditions and upstream caches were not controlled.",
+  "per_run_transfer_cap": 20000000,
+  "results": [
+    {
+      "transport": "previous",
+      "seconds": 36.44590158599749,
+      "records": 1000,
+      "bytes_fetched": 527333,
+      "source_file": "figureqa/train-00002-of-00004-4916b5a693f82d22.parquet"
+    },
+    {
+      "transport": "keepalive",
+      "seconds": 18.321804669998528,
+      "records": 1000,
+      "bytes_fetched": 527333,
+      "source_file": "figureqa/train-00002-of-00004-4916b5a693f82d22.parquet"
+    }
+  ]
+}

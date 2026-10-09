@@ -1,0 +1,41 @@
+{
+  "verified_at_utc": "2026-10-06T09:43:52.754Z",
+  "status": "passed",
+  "browser": "Chromium 153.0.8010.12",
+  "dataset_id": "clevr",
+  "source_snapshot_ids": [
+    "hf-maujim-CLEVR_sample_500-463520cb0e4d16f2f61ae0607c81eacdd009e9f4-validation"
+  ],
+  "parent_analysis_selection": "selection-18572ac9fac34fd3a84297b0",
+  "inspected_record_id": "clevr:example:cfcd00cf0128e7a7855a0840",
+  "frozen_selection_id": "selection-7e80311727c541e09864c4b4",
+  "artifacts": {
+    "quality.basic": "094ae0ffe59a5e25932d7b2e",
+    "detect.nudenet": "14e14fa14aec69bf3f4ee3b3",
+    "detect.coco_v1": "9cbbf85c2bdd03dcc9719718",
+    "embed.minilm": "1dffb2f5f775b32849efd13f",
+    "embed.siglip2": "a3cacbdbc118fd2b2f192046",
+    "project.pca": "3f618c46aa0e7f935612ce68",
+    "project.umap": "94c74a7f773a82b3e5bc6181",
+    "cluster.kmeans": "dca140a58cc90370fa2c8556",
+    "outlier.knn": "00d5fca47fbb9964620ab1c7"
+  },
+  "source_filter": "source.image_index",
+  "filtered_matches": 1,
+  "projection_before_filter_points": 16,
+  "projection_filtered_points": 1,
+  "projection_reexpanded_points": 16,
+  "projection_sha256_unchanged": "5e9a942245ca3267b3b4699990621c3ab8c95f2527581e01cd068132a6c4c06a",
+  "colour_field": "prediction.9cbbf85c2bdd03dcc9719718.person_count",
+  "provider_id": "local-ollama-qwen35",
+  "external_model_requests": 0,
+  "conversation_id": "conversation:cc8241d7bb8641a1879bc02744e28875",
+  "context_digest": "83c4a14f50ff7b71b9e18317f530c498b7d73cf73c99ebb4f18003d2df44d2c7",
+  "original_image_context_sha256": "e364cf1cd12f2c772d058ca1c0bfcb4a3fe7a6e61a65a94db19766708298c89f",
+  "response_sha256": "4a377fc483346558ace2f4539e3f211f729a6eafeedc5f7136a61cd4f9549ab2",
+  "response_characters": 146,
+  "exported_checksum": "78448c8e820ee0bad7963735d99917310ba7214b2d38fe80b8f1a9384f9e70b7",
+  "imported_selection_id": "selection-7e80311727c541e09864c4b4",
+  "prediction_columns_retained": true,
+  "scope": "Real local functional journey; outlier rank selects an inspection example and does not establish scientific validity or population prevalence."
+}

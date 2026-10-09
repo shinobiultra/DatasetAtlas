@@ -90,3 +90,24 @@ def test_docci_rejects_missing_and_symlinked_archive_members(tmp_path: Path):
     linked = _fixture(tmp_path / "linked", bad_member="images/escape.jpg")
     with pytest.raises(ValueError, match="unexpected DOCCI archive member"):
         linked.prepare(linked.plan(2, 100_000))
+
+
+def test_docci_checkpoint_access_preserves_join_without_extracting_images(tmp_path):
+    pytest.importorskip('indexed_gzip')
+    from dataset_atlas.storage.indexed_tar import build_tar_index
+    adapter=_fixture(tmp_path)
+    archive=adapter._images_archive();index=tmp_path/'original-access'
+    build_tar_index(archive,index,source_sha256=adapter.config['images_sha256'],
+        remote={'bytes':archive.stat().st_size,'url':'https://example.org/native.tar.gz','etag':'"native"','allowed_hosts':['example.org']},
+        max_uncompressed_bytes=100_000)
+    adapter.config['original_access_index']=str(index)
+    source=adapter.prepare(adapter.plan(2,100_000))
+    record=adapter.iter_records(source,None,1).records[0]
+    assert Image.open(io.BytesIO(adapter.resolve_asset(source,record.assets[0].uri).data)).size==(3,2)
+    assert not adapter._prepared().exists()
+    archive.unlink()
+    assert adapter.probe().exists
+    assert adapter.prepare(adapter.plan(2,100_000))
+    (index/'members.sqlite').write_bytes(b'changed')
+    with pytest.raises(ValueError,match='index checksum changed'):
+        adapter.prepare(adapter.plan(2,100_000))

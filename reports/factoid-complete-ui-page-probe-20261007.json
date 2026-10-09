@@ -1,0 +1,35 @@
+{
+  "pages": [
+    {
+      "limit": 3,
+      "http_status": 200,
+      "elapsed_seconds": 0.13895411499834154,
+      "response_bytes": 1875673,
+      "known_guard_topics": [
+        "budget",
+        "memory",
+        "limit"
+      ]
+    },
+    {
+      "limit": 10,
+      "http_status": 200,
+      "elapsed_seconds": 0.2022349100006977,
+      "response_bytes": 3427822,
+      "known_guard_topics": [
+        "budget",
+        "memory",
+        "limit"
+      ]
+    },
+    {
+      "limit": 60,
+      "http_status": 500,
+      "elapsed_seconds": 0.059651591000147164,
+      "response_bytes": 21,
+      "known_guard_topics": [
+        "internal server error"
+      ]
+    }
+  ]
+}

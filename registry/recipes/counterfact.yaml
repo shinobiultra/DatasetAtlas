@@ -1,0 +1,21 @@
+release: rome-counterfact-d017056125178a13
+adapter: json
+expected_count: 21919
+scope: All 21,919 original CounterFact cases, including rewrite requests and neighborhood/paraphrase/generation
+  prompts.
+description: Original ROME CounterFact release, with all 21,919 editing cases and
+  original nested rewrite targets, prompts, and subject IDs preserved.
+adapter_config:
+  format: json
+  mapping:
+    id: case_id
+    text: requested_rewrite.prompt
+files:
+- source_name: counterfact.json
+  url: https://rome.baulab.info/data/dsets/counterfact.json
+  bytes: 45108470
+  sha256: d017056125178a13728594e66a801357a8db9ed7973a7425554bb4271de9fc6f
+  format: json
+  config_key: path
+allowed_hosts:
+- rome.baulab.info

@@ -2,27 +2,26 @@ schema_version: '1.0'
 id: visual-counterfact
 name: Visual-Counterfact
 aliases: []
-description: Mention candidate from a focused page audit; the evidence receipts distinguish
-  direct use, comparison, related-work, and citation-only roles. Original source,
-  release, and rights still require independent verification.
+description: 'Visual CounterFact: all 493 color and 727 size examples in the author release, retaining
+  original and counterfactual image pairs, correct/incorrect answers and object labels.'
 paper_ids:
 - paper-24b951c4e4ec2d31
-release: unresolved
-adapter: structured
+release: f8cd0b2335356b0f01a164df0cac7403f56a6c83
+adapter: remote_columnar
 adapter_config: {}
 coverage:
   identity: candidate
-  source: unverified
-  access: unverified
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Original release identity and rights need verification.
-  - Adapter and preview are not implemented.
+  - Public preview redistribution is not approved.
+  total_count: 1220
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -34,9 +33,9 @@ evidence:
   source_file_hash: 9272a113d401f6e3d5e5c6a6e19e1745e4949dba404a23965eb239b896a77476
   page: 3
   role: evaluation
-  excerpt: Setting defined below), to identify which components carry We use the Visual-Counterfact
-    dataset (Golo- information that causally determines how the con- vanevsky et al.,
-    2025a), which contains 469 coun- fl
+  excerpt: Setting defined below), to identify which components carry We use the Visual-Counterfact dataset
+    (Golo- information that causally determines how the con- vanevsky et al., 2025a), which contains 469
+    coun- fl
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -45,8 +44,19 @@ evidence:
   source_file_hash: 9272a113d401f6e3d5e5c6a6e19e1745e4949dba404a23965eb239b896a77476
   page: 3
   role: direct evaluation
-  excerpt: defined below), to identify which components carry We use the Visual-Counterfact
-    dataset (Golo- information that causally determines how the con- vanevsky et al.,
-    2025a), which contains
+  excerpt: defined below), to identify which components carry We use the Visual-Counterfact dataset (Golo-
+    information that causally determines how the con- vanevsky et al., 2025a), which contains
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
+- kind: native_population_live_verification
+  url: https://huggingface.co/datasets/mgolov/Visual-Counterfact/tree/f8cd0b2335356b0f01a164df0cac7403f56a6c83
+  checked_on: '2026-09-23'
+  receipt: reports/visual-counterfact-live-verification.json
+  scope: Both full native author splits (1,220 paired examples). This is the released collection, not
+    a claim that the separately mentioned 469-item or 467-item study subsets have been identified.
+source_url: https://huggingface.co/datasets/mgolov/Visual-Counterfact/tree/f8cd0b2335356b0f01a164df0cac7403f56a6c83
+modalities:
+- image
+- text
+tasks:
+- visual question answering

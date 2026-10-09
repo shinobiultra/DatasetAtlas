@@ -1,0 +1,72 @@
+schema_version: '1.0'
+id: brca
+name: BRCA
+aliases: []
+description: 'TCGA-BRCA breast carcinoma project; WACV study uses 875-patient multi-omics slice, not the
+  whole GDC project. Source review: GDC current project release varies; exact WACV preprocessing manifest
+  unresolved'
+paper_ids:
+- paper-25eaa8c74ce76800
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Access to the exact data files has not been verified.
+  - The exact paper release, source variant, or derived collection remains unresolved.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  note: Human omics/clinical data have tier-specific GDC access and use controls
+  source: https://gdc.cancer.gov/access-data
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-9b61b5b283b576611a39
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: DensetNet-121 — ITAC, iCTCF, BRCA, ROSMAP (Basu et al., 2024b) SD-1.5, SD-XL, DeepFloyd Model
+    Editin
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://gdc.cancer.gov/about-data/publications/brca_2012
+  note: TCGA-BRCA breast carcinoma project; WACV study uses 875-patient multi-omics slice, not the whole
+    GDC project GDC current project release varies; exact WACV preprocessing manifest unresolved
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: project_resolved_paper_slice_unresolved
+- kind: source_audit_access
+  url: https://gdc.cancer.gov/about-data/publications/brca_2012
+  note: 'GDC has open and controlled files; controlled files require dbGaP authorization Probe: first_primary_url_http_head_200;
+    payload_not_downloaded'
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: project_resolved_paper_slice_unresolved
+- kind: source_audit_rights
+  url: https://gdc.cancer.gov/access-data
+  note: Human omics/clinical data have tier-specific GDC access and use controls
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: project_resolved_paper_slice_unresolved
+- kind: source_audit_refresh
+  url: https://gdc.cancer.gov/about-data/publications/brca_2012
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 2 URLs probed (HEAD only): 2 reachable.'
+source_url: https://gdc.cancer.gov/about-data/publications/brca_2012

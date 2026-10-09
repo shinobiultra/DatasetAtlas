@@ -1,0 +1,23 @@
+# The catalogue's records are these pinned originals plus identity fields (see dataset_atlas/converters/text.py). A fetch reproduces
+# them and fails unless the converted rows match this row digest, taken from the maintainer's records. IDs and snapshot unchanged.
+release: github-1e490531c0ef4bc13430178bf1fbc8f813e34b1a
+snapshot_id: github-Jailbreak_LLM-1e490531c0ef4bc13430178bf1fbc8f813e34b1a-MaliciousInstruct-a64d69dd
+adapter: structured
+expected_count: 100
+scope: Official MaliciousInstruct.txt, 100 nonempty source lines
+source_url: https://github.com/Princeton-SysML/Jailbreak_LLM
+adapter_config: {}
+convert:
+  name: maliciousinstruct
+  params: {}
+  count: 100
+  rows_sha256: e7d45ceec6e09ec8a8f124cb1be8da11933701d5a3a8bdf9326e327119afa9fe
+files:
+- source_name: MaliciousInstruct.txt
+  url: https://raw.githubusercontent.com/Princeton-SysML/Jailbreak_LLM/1e490531c0ef4bc13430178bf1fbc8f813e34b1a/data/MaliciousInstruct.txt
+  bytes: 6269
+  sha256: a64d69dd1004aac4a23aaff3748fb8f17161893f74db36f45b8bc849eb1bcce5
+  format: txt
+  config_key: source_txt
+allowed_hosts:
+- raw.githubusercontent.com

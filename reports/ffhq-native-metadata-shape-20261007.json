@@ -1,0 +1,59 @@
+{
+  "status": "passed",
+  "rows": 70000,
+  "source_sha256": "1be5c2d1a78196d45a9600558c04b46dffefa217b7c664d5be38ed28a4d9a0ee",
+  "root_fields": [
+    "category",
+    "image",
+    "in_the_wild",
+    "metadata",
+    "thumbnail"
+  ],
+  "nested_fields": {
+    "metadata": [
+      "author",
+      "country",
+      "date_crawled",
+      "date_uploaded",
+      "license",
+      "license_url",
+      "photo_title",
+      "photo_url"
+    ],
+    "image": [
+      "face_landmarks",
+      "file_md5",
+      "file_path",
+      "file_size",
+      "file_url",
+      "pixel_md5",
+      "pixel_size"
+    ],
+    "thumbnail": [
+      "file_md5",
+      "file_path",
+      "file_size",
+      "file_url",
+      "pixel_md5",
+      "pixel_size"
+    ],
+    "in_the_wild": [
+      "face_landmarks",
+      "face_quad",
+      "face_rect",
+      "file_md5",
+      "file_path",
+      "file_size",
+      "file_url",
+      "pixel_md5",
+      "pixel_size"
+    ]
+  },
+  "image_hosts": [
+    "drive.google.com"
+  ],
+  "all_png_1024": true,
+  "native_image_bytes": 95767891218,
+  "max_image_bytes": 2147011,
+  "native_contents_sent_to_models": false
+}

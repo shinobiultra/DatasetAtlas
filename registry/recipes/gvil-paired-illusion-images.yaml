@@ -1,0 +1,22 @@
+release: cd04efb9d53c935c8194011d32b5a8b515c588bf
+adapter: classic_vision
+source_url: https://github.com/vl-illusion/GVIL
+expected_count: 3302
+scope: All 2,400 native VQA questions, 800 visual grounding questions, their 1,600
+  native pair memberships, and 102 raw image annotations. Match/mismatch answers and
+  boxes are preserved separately; pair relationships are joined to canonical record
+  IDs.
+files:
+- url: https://raw.githubusercontent.com/vl-illusion/GVIL/cd04efb9d53c935c8194011d32b5a8b515c588bf/dataset.zip
+  sha256: 1d717f5822ded7d3383d014eefd1fb17c0a46ab15ce0c104f0c0392365c8650b
+  bytes: 26668357
+  config_key: path
+  source_name: gvil.zip
+  format: zip
+allowed_hosts:
+- raw.githubusercontent.com
+- codeload.github.com
+adapter_config:
+  dataset_kind: gvil
+  mapping:
+    question: question

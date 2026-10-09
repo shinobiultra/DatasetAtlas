@@ -1,0 +1,73 @@
+schema_version: '1.0'
+id: imagenet100
+name: ImageNet100
+aliases: []
+description: ImageNet100 denotes multiple nonidentical 100-class selections derived from ILSVRC; paper mention does
+  not specify class list or seed.
+paper_ids:
+- paper-25eaa8c74ce76800
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: gated
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Original-source credentials or agreement are required.
+  - Exact source variant or paper release is unresolved.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://www.image-net.org/challenges/LSVRC/
+  note: ImageNet base image terms apply; an unrelated subset script license does not license the photos.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-e89d33c163d99b2e2c04
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: CLIP — CIFAR100, ImageNet100, ImageNet-R,
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://www.image-net.org/challenges/LSVRC/
+  note: 'ImageNet100 denotes multiple nonidentical 100-class selections derived from ILSVRC; paper mention does
+    not specify class list or seed. Release: ImageNet-100 subset selection unresolved'
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+- kind: source_audit_rights
+  url: https://www.image-net.org/challenges/LSVRC/
+  note: ImageNet base image terms apply; an unrelated subset script license does not license the photos.
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+- kind: source_audit_refresh
+  url: https://www.image-net.org/challenges/LSVRC/
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'unchanged: a reachable page says nothing about whether the files are public, so the prior state
+    stands. 1 URL probed (HEAD only): 1 reachable.'
+source_url: https://www.image-net.org/challenges/LSVRC/
+relationships:
+- type: same_source_family_as
+  target_id: imagenet
+  status: asserted_from_source_review
+  scope: Multiple non-identical 100-class selections derived from ILSVRC; the paper selection is unpinned.
+- type: same_source_family_as
+  target_id: imagenet-ilsvrc-2012
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: ImageNet100 is a 100-class selection of ILSVRC; this entry names no class list or seed, so the parent release
+    is only context.

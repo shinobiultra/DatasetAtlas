@@ -1,0 +1,37 @@
+release: imagenet-sketch-0d8b8b5380efe50baae075842505918ad43c88fe
+adapter: archive_variants
+source_url: https://huggingface.co/datasets/songweig/imagenet_sketch/tree/0d8b8b5380efe50baae075842505918ad43c88fe
+expected_count: 50889
+remote_metadata_bytes: 20000000
+description: 'ImageNet-Sketch: all 50,889 native images in the author-linked Hugging Face ZIP, with original
+  ImageNet synset folder labels and original dimensions. Images are retrieved selectively.'
+scope: Complete 50,889-image archive in the authors' linked Hugging Face distribution; all 1,000 native
+  class folders retained. Native archive has more images than the rounded 50,000 headline count. The upstream
+  loader names this single evaluation population train; no evaluation split is invented. Strong ETag and
+  per-member ZIP CRC checked on reads; upstream full-file SHA-256 recorded but not locally verified.
+adapter_config:
+  annotations: []
+  remote_archives:
+    images:
+      url: https://huggingface.co/datasets/songweig/imagenet_sketch/resolve/0d8b8b5380efe50baae075842505918ad43c88fe/data/ImageNet-Sketch.zip
+      bytes: 7593573012
+      etag: '"6d74514d1e63397a4dc505a54b6df69207f1349c13dd56cf3af221cce0ecb513"'
+      allowed_hosts:
+      - huggingface.co
+      - cdn-lfs.huggingface.co
+      - cdn-lfs.hf.co
+      - cas-bridge.xethub.hf.co
+      - us.aws.cdn.hf.co
+      upstream_sha256: 4d3ce6b82a7c48aabf14aeac105eb533e75707f152cc858f55bfc022031a72ed
+      member_regex: sketch/(?P<image_id>(?P<class_id>n\d{8})/[^/]+)\.JPEG
+      split: train
+      variant: original
+      role: native sketch
+      expected_count: 50889
+      source_fields:
+        class_id: '{class_id}'
+  expected_variants:
+  - original
+  remote_cache_root: work/media-cache/imagenet-sketch
+  remote_cache_bytes: 100000000
+  annotation_transfer_bytes: 20000000

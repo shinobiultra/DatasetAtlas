@@ -2,33 +2,34 @@ schema_version: '1.0'
 id: figure-linked-source-data-spreadsheets
 name: figure-linked source data spreadsheets
 aliases: []
-description: eLife 55378 figure source-data Excel bundle.
+description: Seven source-data Excel workbooks linked by the eLife 55378 article for Figures 2, 3, 4 and
+  6. Each workbook is one asset record with every native nonempty cell, sparse coordinate, formula and
+  cached value preserved; the original XLSX is downloadable.
 paper_ids:
 - paper-52015222b27e7099
-release: unresolved
-adapter: structured
+release: elife-55378-v1
+adapter: elife_workbooks
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
-  unit: example
+  preview_count: 7
+  unit: asset
   blockers:
-  - Official source family identified; exact selected release, preparation and public-use
-    rights still require dataset-specific review.
-  - Adapter and preview are not implemented.
+  - Public workbook redistribution and required attribution have not been approved for static publication.
+  total_count: 7
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://api.elifesciences.org/articles/55378
-  note: Official article copyright is CC BY 4.0; retain per-file title/version and
-    attribution
+  note: The eLife article reports CC BY 4.0. Keep workbook, figure and article attribution; static publication
+    remains unapproved pending source-specific review.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-c6c2d2e932d871bbfebd
@@ -36,8 +37,8 @@ evidence:
   source_file_hash: 378ea864c68c633de3b545f8be25487cf3d45467ed2198abd7d6ff77e54c911c
   page: 27
   role: derived collection
-  excerpt: Data availability Source data files are provided as an excel spreadsheet.
-    References Adamson CL, Reid MA,
+  excerpt: Data availability Source data files are provided as an excel spreadsheet. References Adamson
+    CL, Reid MA,
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -48,8 +49,8 @@ evidence:
   source_identity_status: author_release_identified
 - kind: source_audit_release
   url: https://api.elifesciences.org/articles/55378
-  note: Article p27 says source data supplied as Excel; official eLife article API
-    exposes seven figure-linked XLSX files for Figures 2, 3, 4 and 6
+  note: Article p27 says source data supplied as Excel; official eLife article API exposes seven figure-linked
+    XLSX files for Figures 2, 3, 4 and 6
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_release_identified
@@ -63,8 +64,7 @@ evidence:
   source_identity_status: author_release_identified
 - kind: source_audit_rights
   url: https://api.elifesciences.org/articles/55378
-  note: Official article copyright is CC BY 4.0; retain per-file title/version and
-    attribution
+  note: Official article copyright is CC BY 4.0; retain per-file title/version and attribution
   publication_decision: media_not_approved
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
@@ -76,4 +76,16 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_release_identified
+- kind: native_population_live_verification
+  url: https://api.elifesciences.org/articles/55378
+  checked_on: '2026-09-24'
+  receipt: reports/elife-workbooks-live-verification.json
+  scope: All seven figure source-data XLSX files named in eLife article 55378 version 1. One record per
+    workbook, not an invented row-level observation table. Native sparse coordinates and shared formulas
+    are retained with their cached values, but formulas are never evaluated.
+  source_identity_status: article_version_1_seven_native_workbooks_resolved
 source_url: https://api.elifesciences.org/articles/55378
+modalities:
+- table
+tasks:
+- figure source-data inspection

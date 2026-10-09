@@ -70,6 +70,35 @@ def test_asset_identity_and_safe_resolution(tmp_path: Path):
         adapter.resolve_asset(source, "../outside.png")
 
 
+def test_pinned_source_row_identity_preserves_duplicate_native_ids(tmp_path: Path):
+    pa = pytest.importorskip("pyarrow")
+    import pyarrow.parquet as pq
+    rows = [{"native_id": 7, "text": "synthetic first"},
+            {"native_id": 7, "text": "synthetic second"}]
+    path = tmp_path / "duplicate-ids.parquet"
+    pq.write_table(pa.Table.from_pylist(rows), path, row_group_size=1)
+    sha = hashlib.sha256(path.read_bytes()).hexdigest()
+    config = {"path": str(path), "sha256": sha, "record_identity": "source_row",
+              "mapping": {"id": "native_id", "text": "text"}}
+    adapter = get_adapter(dataset(tmp_path, "parquet", config))
+    source = adapter.prepare(adapter.plan(2, 10_000))
+    records = list(adapter.iter_sequential(source))
+    assert len({record.id for record in records}) == 2
+    assert [record.source["native_id"] for record in records] == [7, 7]
+    assert [record.source["_atlas_origin"]["row"] for record in records] == [0, 1]
+    assert all(record.source["_atlas_origin"]["source_sha256"] == sha for record in records)
+    assert adapter.iter_records(source, cursor="1", limit=1).records[0] == records[1]
+    unpinned = get_adapter(dataset(tmp_path, "parquet", {**config, "sha256": None}))
+    with pytest.raises(ValueError, match="pinned source checksum"):
+        unpinned.iter_records(unpinned.prepare(unpinned.plan(2, 10_000)))
+    other_path = tmp_path / "other-source.parquet"
+    pq.write_table(pa.Table.from_pylist(rows[::-1]), other_path)
+    other_sha = hashlib.sha256(other_path.read_bytes()).hexdigest()
+    other = get_adapter(dataset(tmp_path, "parquet", {**config, "path": str(other_path), "sha256": other_sha}))
+    other_records = list(other.iter_sequential(other.prepare(other.plan(2, 10_000))))
+    assert {record.id for record in records}.isdisjoint(record.id for record in other_records)
+
+
 def test_parquet_cursor_seeks_past_prior_row_groups(tmp_path: Path, monkeypatch):
     pa = pytest.importorskip("pyarrow")
     import pyarrow.parquet as pq
@@ -456,3 +485,159 @@ def test_vqa_v2_joins_original_answers_and_coco_2014_images(tmp_path: Path):
     assert len(first.records[0].source["answers"]) == 10
     assert adapter.resolve_asset(source, second.records[0].assets[0].uri).media_type == "image/jpeg"
     assert json.loads((tmp_path / "prepared" / "index.json").read_text())["join_report"]["unmatched_annotations"] == 0
+
+
+def _vqa_fixture(tmp_path: Path, remote: bool):
+    questions_zip, annotations_zip, images_zip = tmp_path / "q.zip", tmp_path / "a.zip", tmp_path / "val2014.zip"
+    questions = [{"question_id": i, "image_id": 10 if i < 3 else 11, "question": f"Question {i}?"} for i in (1, 2, 3)]
+    annotations = [{"question_id": q["question_id"], "image_id": q["image_id"], "question_type": "what", "answer_type": "other",
+                    "multiple_choice_answer": "cat", "answers": [{"answer_id": j, "answer": "cat", "answer_confidence": "yes"} for j in range(1, 11)]}
+                   for q in questions]
+    with zipfile.ZipFile(questions_zip, "w") as archive:
+        archive.writestr("v2_OpenEnded_mscoco_val2014_questions.json", json.dumps({"data_subtype": "val2014", "questions": questions}))
+    with zipfile.ZipFile(annotations_zip, "w") as archive:
+        archive.writestr("v2_mscoco_val2014_annotations.json", json.dumps({"data_subtype": "val2014", "annotations": annotations}))
+    with zipfile.ZipFile(images_zip, "w") as archive:
+        for image_id in (10, 11):
+            archive.writestr(f"val2014/COCO_val2014_{image_id:012d}.jpg", b"\xff\xd8\xff" + f"original {image_id}".encode())
+    config = {"questions_archive": str(questions_zip), "annotations_archive": str(annotations_zip), "prepared_root": str(tmp_path / "prepared"),
+              "questions_sha256": hashlib.sha256(questions_zip.read_bytes()).hexdigest(),
+              "annotations_sha256": hashlib.sha256(annotations_zip.read_bytes()).hexdigest(), "expected_questions": 3}
+    if remote:
+        config.update(remote_images={"url": f"https://example.com/{tmp_path.name}/val2014.zip", "bytes": images_zip.stat().st_size,
+                                     "etag": '"fixture-etag"', "allowed_hosts": ["example.com"]},
+                      remote_cache_root=str(tmp_path / "remote-cache"))
+    else:
+        config.update(images_archive=str(images_zip), images_sha256=hashlib.sha256(images_zip.read_bytes()).hexdigest())
+    return config, images_zip
+
+
+class _FakeRange:
+    """Stands in for an ETag-bound HTTPS range reader over a local ZIP, counting what it is asked for."""
+    def __init__(self, path: Path, requested: list):
+        self._stream, self.size, self.requested = path.open("rb"), path.stat().st_size, requested
+    def readable(self): return True
+    def seekable(self): return True
+    def tell(self): return self._stream.tell()
+    def seek(self, offset, whence=0): return self._stream.seek(offset, whence)
+    def read(self, size=-1):
+        start = self._stream.tell(); data = self._stream.read(size); self.requested.append((start, len(data))); return data
+    def close(self): self._stream.close()
+    def __enter__(self): return self
+    def __exit__(self, *exc): self.close()
+
+
+def test_vqa_v2_reads_images_by_range_when_the_archive_is_not_local(tmp_path: Path, monkeypatch):
+    from dataset_atlas.adapters.remote_media import RemoteZip
+    config, images_zip = _vqa_fixture(tmp_path, remote=True)
+    requested: list = []
+    monkeypatch.setattr(RemoteZip, "reader", lambda self, budget: _FakeRange(images_zip, requested))
+    adapter = get_adapter(dataset(tmp_path, "vqa_v2", config))
+    assert adapter.probe().exists  # no local image archive is required
+    source = adapter.prepare(adapter.plan(3, 100_000))
+    batch = adapter.iter_records(source, limit=3)
+    assert len(batch.records) == 3 and batch.records[0].source["question"] == "Question 1?"
+    assert batch.records[0].assets[0].metadata["media_access"] == "remote_zip_range"
+    assert batch.records[0].assets[0].metadata["source_etag"] == '"fixture-etag"'
+    media = adapter.resolve_asset(source, batch.records[2].assets[0].uri)
+    assert media.data == b"\xff\xd8\xfforiginal 11" and media.media_type == "image/jpeg"
+    # The index records that the images were bound by ETag rather than by a whole-file hash.
+    index = json.loads((tmp_path / "prepared" / "index.json").read_text())
+    assert index["source_sha256"]["images"] == 'remote-etag:"fixture-etag"' and index["join_report"]["missing_images"] == 0
+    assert requested, "images must be read through the range reader"
+
+
+def test_remote_and_local_images_give_identical_records(tmp_path: Path, monkeypatch):
+    """Where the archive lives must not change record identity: colleagues share selections with the maintainer."""
+    from dataset_atlas.adapters.remote_media import RemoteZip
+    local_dir, remote_dir = tmp_path / "local", tmp_path / "remote"
+    local_dir.mkdir(); remote_dir.mkdir()
+    local_config, _ = _vqa_fixture(local_dir, remote=False)
+    remote_config, images_zip = _vqa_fixture(remote_dir, remote=True)
+    monkeypatch.setattr(RemoteZip, "reader", lambda self, budget: _FakeRange(images_zip, []))
+    ids = []
+    for directory, config in ((local_dir, local_config), (remote_dir, remote_config)):
+        adapter = get_adapter(dataset(directory, "vqa_v2", config))
+        source = adapter.prepare(adapter.plan(3, 100_000))
+        ids.append([(r.id, r.asset_ids, r.source["question"]) for r in adapter.iter_records(source, limit=3).records])
+    assert ids[0] == ids[1]
+
+
+def test_remote_images_without_a_pinned_etag_are_refused(tmp_path: Path):
+    config, _ = _vqa_fixture(tmp_path, remote=True)
+    del config["remote_images"]["etag"]
+    adapter = get_adapter(dataset(tmp_path, "vqa_v2", config))
+    with pytest.raises(ValueError, match="strong ETag"):
+        adapter.plan(1, 1000)
+
+
+def test_full_clevr_reads_questions_and_media_by_range_with_identical_records(tmp_path: Path, monkeypatch):
+    from dataset_atlas.adapters.remote_media import RemoteZip
+    archive_path = tmp_path / "CLEVR_v1.0.zip"
+    counts = {"train": 110, "val": 10, "test": 5}
+    with zipfile.ZipFile(archive_path, "w", zipfile.ZIP_DEFLATED) as archive:
+        for split, count in counts.items():
+            rows = [{"question_index": i, "image_filename": f"CLEVR_{split}_{i:06d}.png", "question": f"Question {i}?", "answer": "yes", "program": []}
+                    for i in range(count)]
+            archive.writestr(f"CLEVR_v1.0/questions/CLEVR_{split}_questions.json", json.dumps({"info": {"release": "v1"}, "questions": rows}))
+            for i in range(count):
+                archive.writestr(f"CLEVR_v1.0/images/{split}/CLEVR_{split}_{i:06d}.png", b"\x89PNG\r\n\x1a\nfixture " + f"{split}{i}".encode())
+    local = get_adapter(dataset(tmp_path, "clevr_full", {
+        "archive": str(archive_path), "prepared_root": str(tmp_path / "prepared-local"),
+        "archive_sha256": hashlib.sha256(archive_path.read_bytes()).hexdigest()}))
+    local_source = local.prepare(local.plan(120, 100_000))
+    local_rows = local.iter_records(local_source, limit=125).records
+
+    class Range:
+        def __init__(self): self._s, self.size = archive_path.open("rb"), archive_path.stat().st_size
+        def readable(self): return True
+        def seekable(self): return True
+        def tell(self): return self._s.tell()
+        def seek(self, o, w=0): return self._s.seek(o, w)
+        def read(self, n=-1): return self._s.read(n)
+        def close(self): self._s.close()
+        def __enter__(self): return self
+        def __exit__(self, *e): self.close()
+    monkeypatch.setattr(RemoteZip, "reader", lambda self, budget: Range())
+    remote = get_adapter(dataset(tmp_path, "clevr_full", {
+        "remote_archive": {"url": f"https://example.com/{tmp_path.name}/CLEVR_v1.0.zip", "bytes": archive_path.stat().st_size,
+                           "etag": '"clevr-etag"', "allowed_hosts": ["example.com"]},
+        "remote_cache_root": str(tmp_path / "remote-cache"), "prepared_root": str(tmp_path / "prepared-remote")}))
+    assert remote.probe().exists
+    remote_source = remote.prepare(remote.plan(120, 100_000))
+    remote_rows = remote.iter_records(remote_source, limit=125).records
+    assert [(r.id, r.asset_ids, r.source["split"], r.question) for r in local_rows] == [(r.id, r.asset_ids, r.source["split"], r.question) for r in remote_rows]
+    assert json.loads((tmp_path / "prepared-remote" / "questions-index.json").read_text())["archive_sha256"] == 'remote-etag:"clevr-etag"'
+    assert remote.resolve_asset(remote_source, remote_rows[112].assets[0].uri).data == b"\x89PNG\r\n\x1a\nfixture val2"
+
+
+def test_structured_archive_reads_media_by_range_when_the_archive_is_not_local(tmp_path: Path, monkeypatch):
+    from dataset_atlas.adapters.remote_media import RemoteZip
+    archive_path = tmp_path / "val2014.zip"
+    with zipfile.ZipFile(archive_path, "w") as archive:
+        archive.writestr("val2014/COCO_val2014_000000000001.jpg", b"\xff\xd8\xfforiginal one")
+    records = tmp_path / "records.jsonl"
+    records.write_text(json.dumps({"source_id": "a:1", "question": "Is there a cat?", "media_path": "val2014/COCO_val2014_000000000001.jpg"}) + "\n")
+    class Range:
+        def __init__(self): self._s, self.size = archive_path.open("rb"), archive_path.stat().st_size
+        def readable(self): return True
+        def seekable(self): return True
+        def tell(self): return self._s.tell()
+        def seek(self, o, w=0): return self._s.seek(o, w)
+        def read(self, n=-1): return self._s.read(n)
+        def close(self): self._s.close()
+        def __enter__(self): return self
+        def __exit__(self, *e): self.close()
+    monkeypatch.setattr(RemoteZip, "reader", lambda self, budget: Range())
+    item = dataset(tmp_path, "structured_archive", {
+        "path": str(records), "format": "jsonl", "mapping": {"id": "source_id", "question": "question", "media": "media_path"},
+        "remote_media_archive": {"url": f"https://example.com/{tmp_path.name}/val2014.zip", "bytes": archive_path.stat().st_size,
+                                 "etag": '"val2014-etag"', "allowed_hosts": ["example.com"]},
+        "remote_cache_root": str(tmp_path / "remote-cache")})
+    adapter = get_adapter(item)
+    source = adapter.prepare(adapter.plan(1, 100_000))
+    record = adapter.iter_records(source, limit=1).records[0]
+    media = adapter.resolve_asset(source, record.assets[0].uri)
+    assert media.data == b"\xff\xd8\xfforiginal one" and media.media_type == "image/jpeg"
+    with pytest.raises(ValueError):
+        adapter.resolve_asset(source, "../val2014/COCO_val2014_000000000001.jpg")

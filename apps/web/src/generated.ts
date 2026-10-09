@@ -5,11 +5,13 @@ export type Artifact = { "schema_version"?: string; "id": string; "kind": string
 
 export type Asset = { "id": string; "dataset_id": string; "release_id": string; "modality": string; "uri"?: string | null; "text"?: string | null; "representation"?: string; "sha256"?: string | null; "metadata"?: { [key: string]: unknown } };
 
+export type Availability = { "preview"?: "local" | "on_request" | "none"; "complete_data"?: "local" | "on_request" | "none"; "upstream_preview_count"?: number };
+
 export type Capabilities = { "schema_version"?: string; "mode": "static" | "workbench"; "operations": (string)[]; "api_version"?: string; "limits"?: { [key: string]: number } };
 
 export type Coverage = { "identity"?: string; "source"?: string; "access"?: string; "adapter"?: string; "preview"?: string; "complete_data"?: string; "publication"?: string; "preview_count"?: number; "total_count"?: number | null; "unit"?: "asset" | "example" | "entity" | "conversation"; "blockers"?: (string)[] };
 
-export type Dataset = { "schema_version"?: string; "id": string; "name": string; "aliases"?: (string)[]; "description"?: string; "tasks"?: (string)[]; "modalities"?: (string)[]; "labels"?: (string)[]; "paper_ids"?: (string)[]; "source_url"?: string | null; "release"?: string; "snapshot_id"?: string; "adapter"?: string; "adapter_config"?: { [key: string]: unknown }; "coverage"?: Coverage; "rights"?: { [key: string]: string }; "relationships"?: ({ [key: string]: unknown })[]; "evidence"?: ({ [key: string]: unknown })[] };
+export type Dataset = { "schema_version"?: string; "id": string; "name": string; "origin"?: "catalogue" | "user"; "aliases"?: (string)[]; "description"?: string; "tasks"?: (string)[]; "modalities"?: (string)[]; "labels"?: (string)[]; "paper_ids"?: (string)[]; "source_url"?: string | null; "release"?: string; "snapshot_id"?: string; "adapter"?: string; "adapter_config"?: { [key: string]: unknown }; "coverage"?: Coverage; "availability"?: Availability | null; "rights"?: { [key: string]: string }; "relationships"?: ({ [key: string]: unknown })[]; "evidence"?: ({ [key: string]: unknown })[] };
 
 export type Entity = { "id": string; "asset_id": string; "dataset_id": string; "release_id": string; "geometry"?: { [key: string]: unknown }; "coordinate_system"?: string; "provenance"?: { [key: string]: unknown } };
 

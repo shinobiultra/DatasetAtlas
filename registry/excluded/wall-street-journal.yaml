@@ -1,0 +1,72 @@
+schema_version: '1.0'
+id: wall-street-journal
+name: Wall Street Journal
+aliases: []
+description: 'LDC CSR Wall Street Journal read-speech corpus used in auditory metamer training; WSJ0 versus
+  WSJ1 not specified by citation. Source review: WSJ0 LDC93S6A known, but source paper exact corpus variant
+  unresolved'
+paper_ids:
+- paper-6d747c88d639c5aa
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: unverified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Access to the exact data files has not been verified.
+  - The exact paper release, source variant, or derived collection remains unresolved.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  note: LDC speech and underlying newspaper text agreement; no public redistribution
+  source: https://proceedings.neurips.cc/paper/2019/hash/ac27b77292582bc293a51055bfc994ee-Abstract.html
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-968bd8c5d64b620fdaee
+  paper_id: paper-6d747c88d639c5aa
+  source_file_hash: 519805fac1ac6df034dd67ef95643703ebd97fa1c18e0f035a1f93feada6994e
+  page: 13
+  role: source data
+  excerpt: cognition task described in [8], but with an updated training set using segments from the Wall
+    Street Journal [40] and Spoken Wikipedia Corpora [41]. We screened the Wall Street Journal (WSJ) [40],
+    TIMIT [47], and a subset of articles from
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://catalog.ldc.upenn.edu/LDC93S6A
+  note: LDC CSR Wall Street Journal read-speech corpus used in auditory metamer training; WSJ0 versus
+    WSJ1 not specified by citation WSJ0 LDC93S6A known, but source paper exact corpus variant unresolved
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_mentioned_version_unresolved
+- kind: source_audit_access
+  url: https://catalog.ldc.upenn.edu/LDC93S6A
+  note: 'LDC licensed web download/subscription; no access obtained Probe: first_primary_url_http_head_200;
+    payload_not_downloaded'
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_mentioned_version_unresolved
+- kind: source_audit_rights
+  url: https://proceedings.neurips.cc/paper/2019/hash/ac27b77292582bc293a51055bfc994ee-Abstract.html
+  note: LDC speech and underlying newspaper text agreement; no public redistribution
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_mentioned_version_unresolved
+- kind: source_audit_refresh
+  url: https://catalog.ldc.upenn.edu/LDC93S6A
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 2 URLs probed (HEAD only): 2 reachable.'

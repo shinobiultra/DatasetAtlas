@@ -1,0 +1,14 @@
+source_url: https://huggingface.co/datasets/lmms-lab-encoder/DocVQA/tree/539088ef8a8ada01ac8e2e6d4e372586748a265e
+source_evidence_url: https://site.docvqa.org/datasets/docvqa
+source_patterns:
+- DocVQA/*.parquet
+scope: Every native DocVQA train, validation and test row in the pinned LMMs-Lab formatted
+  mirror. InfographicVQA is excluded. Native question IDs, document IDs, UCSF page
+  identifiers, question types, answers and split fields remain intact. Preview media
+  are verified original bytes from this mirror; equality to the original RRC archives
+  and the citing paper population is not established. Document media remain local-only.
+adapter_config:
+  mapping:
+    question: question
+  media_scope: partial
+  remote_cache_bytes: 300000000

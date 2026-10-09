@@ -2,6 +2,7 @@ name: Validate and publish Dataset Atlas
 
 on:
   push:
+    branches: [main]
   pull_request:
   workflow_dispatch:
     inputs:
@@ -14,24 +15,35 @@ on:
 permissions:
   contents: read
 
+# A newer run of the same ref replaces an older one; a deployment is never cancelled half way.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4 # v10.1.0
         with:
           python-version: '3.12'
-      - uses: actions/setup-node@v4
+          activate-environment: true
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
           cache: npm
           cache-dependency-path: apps/web/package-lock.json
       - name: Install and test Python
         run: |
-          python -m pip install --upgrade pip
-          python -m pip install -e '.[development,datasets]'
+          # Locked, hashed dependencies: what is tested here is what the deployed artifact was built from.
+          uv export --frozen --no-emit-project --extra development --extra datasets --extra remote-storage > /tmp/requirements.txt
+          uv pip install --require-hashes -r /tmp/requirements.txt
+          uv pip install --no-deps -e .
           pytest -q
+      - name: Run incremental type and patch checks
+        run: uvx prek==0.5.2 run --all-files
       - name: Install frontend dependencies
         run: npm ci --prefix apps/web
       - name: Verify generated frontend contracts
@@ -78,19 +90,39 @@ jobs:
               raise SystemExit(f'Built index does not contain repository base {base}')
           print(f'site_bytes={size}')
           PY
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: dataset-atlas-static
           path: apps/web/dist
       - name: Build and inspect installable archives
         run: |
-          python -m pip install build
           python scripts/build_release.py
           python scripts/verify_distribution.py
+      # The wheel embeds the interface and the catalogue: `uv tool install` it, then `atlas init DIR` (docs/getting-started.md).
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: dataset-atlas-wheel
+          path: dist/*.whl
+
+  python-current:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4 # v10.1.0
+        with:
+          python-version: '3.14'
+          activate-environment: true
+      - name: Test current Python and freshly resolved compatible dependencies
+        run: |
+          uv pip install -e '.[development,datasets,remote-storage]'
+          pytest -q
 
   deploy:
-    if: github.event_name == 'workflow_dispatch' && inputs.deploy == true
-    needs: build
+    # Only the reviewed default branch is ever published; also restrict the github-pages environment to main in the repository settings.
+    if: github.event_name == 'workflow_dispatch' && inputs.deploy == true && github.ref == 'refs/heads/main'
+    timeout-minutes: 15
+    needs: [build, python-current]
     runs-on: ubuntu-latest
     permissions:
       pages: write
@@ -99,13 +131,13 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: dataset-atlas-static
           path: site
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
+      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
         with:
           path: site
       - id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4

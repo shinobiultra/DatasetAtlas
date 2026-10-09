@@ -148,5 +148,12 @@ evidence:
   manifest_sha256: 6aa9650d76c4c50d380df8e8e36c633f2a0ca09a41cd7f128025d4e359cccfe8
   parquet_sha256: 37f2a56e8d9e0c67cf05077859f10c91d77b4048b7da5b5aea7f61e6bcd1666d
   note: Complete local index for the pinned two-file release; extra split excluded.
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields
+    present in at least one record. Not inferred from the name or description.'
 source_url: http://ufldl.stanford.edu/housenumbers/
 snapshot_id: svhn-cropped-train-test-sha256-60d9973032afc71554b5fac75d00eb0410ec4267c4cd993adb31cc4faf2dcdf5
+modalities:
+- image

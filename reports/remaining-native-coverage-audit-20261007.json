@@ -1,0 +1,1182 @@
+[
+  {
+    "id": "artbench-2",
+    "adapter": "structured",
+    "source_url": "https://sail-sg.github.io/D-TRAK/",
+    "identity": "candidate",
+    "blockers": [
+      "Access to the exact data files has not been verified.",
+      "The exact paper release, source variant, or derived collection remains unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "artchive",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "Access to the exact data files has not been verified.",
+      "The exact paper release, source variant, or derived collection remains unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "asteroids-rom",
+    "adapter": "structured",
+    "source_url": "https://doi.org/10.1371/journal.pcbi.1005268",
+    "identity": "candidate",
+    "blockers": [
+      "Exact source data release or paper-used subset is unverified.",
+      "Public data/media reuse rights require separate review."
+    ]
+  },
+  {
+    "id": "bam-fg",
+    "adapter": "structured",
+    "source_url": "https://research.adobe.com/publication/aladin-all-layer-adaptive-instance-normalization-for-fine-grained-style-similarity/",
+    "identity": "candidate",
+    "blockers": [
+      "Access to the exact data files has not been verified.",
+      "The exact paper release, source variant, or derived collection remains unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "brain-score",
+    "adapter": "structured",
+    "source_url": "https://www.brain-score.org/",
+    "identity": "benchmark_platform",
+    "blockers": [
+      "Public data/media reuse rights require separate review."
+    ]
+  },
+  {
+    "id": "brca",
+    "adapter": "structured",
+    "source_url": "https://gdc.cancer.gov/about-data/publications/brca_2012",
+    "identity": "candidate",
+    "blockers": [
+      "Access to the exact data files has not been verified.",
+      "The exact paper release, source variant, or derived collection remains unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "broden",
+    "adapter": "broden",
+    "source_url": "https://github.com/CSAILVision/NetDissect/tree/20ce6f887607aadc04ab9fb3d452e4723685cbbb",
+    "identity": "resolved",
+    "blockers": [
+      "Native CSV/PNG/segmentation joins are implemented and tested; the three official HTTPS archive endpoints time out in the current bounded probe. A publisher archive or authorized local copy is still required for real coverage.",
+      "Exact citing-paper resolution, release and membership remain unidentified; composite source-image redistribution rights remain unreviewed."
+    ]
+  },
+  {
+    "id": "chicago-face-database",
+    "adapter": "structured",
+    "source_url": "https://www.chicagofaces.org/",
+    "identity": "resolved",
+    "blockers": [
+      "Author request or agreement is required for the described data; no public archive was verified.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "cifar-2",
+    "adapter": "structured",
+    "source_url": "https://github.com/BrunoKM/diffusion-influence",
+    "identity": "candidate",
+    "blockers": [
+      "Public source page located; exact paper-used data revision or archive is unverified.",
+      "Public data/media reuse rights require separate review."
+    ]
+  },
+  {
+    "id": "coco-caption",
+    "adapter": "structured",
+    "source_url": "https://cocodataset.org/",
+    "identity": "candidate",
+    "blockers": [
+      "The exact paper release, source variant, or derived collection remains unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "coco-demographic-annotations",
+    "adapter": "structured",
+    "source_url": "https://princetonvisualai.github.io/imagecaptioning-bias/",
+    "identity": "resolved",
+    "blockers": [
+      "Original author requires a request for the demographic annotation overlay.",
+      "Public data/media reuse rights require separate review."
+    ]
+  },
+  {
+    "id": "coco-detection-dataset",
+    "adapter": "structured",
+    "source_url": "https://arxiv.org/abs/2410.07149",
+    "identity": "family_or_variant_candidate",
+    "blockers": [
+      "Paper-used variant/configuration is not pinned to an exact source release.",
+      "Public data/media reuse rights require separate review."
+    ]
+  },
+  {
+    "id": "coco-gender",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "Access to the exact data files has not been verified.",
+      "The exact paper release, source variant, or derived collection remains unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "coco-spatial",
+    "adapter": "structured",
+    "source_url": "https://github.com/amitakamath/whatsup_vlms",
+    "identity": "candidate",
+    "blockers": [
+      "Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "coco-train",
+    "adapter": "structured",
+    "source_url": "https://cocodataset.org/",
+    "identity": "candidate",
+    "blockers": [
+      "Exact source variant or paper selection is unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "cocogendertxt",
+    "adapter": "structured",
+    "source_url": "https://github.com/namin-an/DeBiasLens",
+    "identity": "family_or_variant_candidate",
+    "blockers": [
+      "Paper-used variant/configuration is not pinned to an exact source release.",
+      "Public data/media reuse rights require separate review."
+    ]
+  },
+  {
+    "id": "concept-editing-dataset",
+    "adapter": "structured",
+    "source_url": "https://github.com/samyadeepbasu/LocoGen",
+    "identity": "candidate",
+    "blockers": [
+      "Exact source data release or paper-used subset is unverified.",
+      "Public data/media reuse rights require separate review."
+    ]
+  },
+  {
+    "id": "conceptual-captions",
+    "adapter": "structured",
+    "source_url": "https://github.com/google-research-datasets/conceptual-captions",
+    "identity": "family_or_variant_candidate",
+    "blockers": [
+      "Paper-used variant/configuration is not pinned to an exact source release.",
+      "Public data/media reuse rights require separate review."
+    ]
+  },
+  {
+    "id": "contrastive-prompts",
+    "adapter": "structured",
+    "source_url": "https://compvis.github.io/attribute-control/",
+    "identity": "candidate",
+    "blockers": [
+      "Exact source data release or paper-used subset is unverified.",
+      "Public data/media reuse rights require separate review."
+    ]
+  },
+  {
+    "id": "cub",
+    "adapter": "structured",
+    "source_url": "https://www.vision.caltech.edu/datasets/cub_200_2011/",
+    "identity": "family_or_variant_candidate",
+    "blockers": [
+      "Paper-used variant/configuration is not pinned to an exact source release.",
+      "Public data/media reuse rights require separate review."
+    ]
+  },
+  {
+    "id": "cub200",
+    "adapter": "structured",
+    "source_url": "https://www.vision.caltech.edu/datasets/cub_200_2011/",
+    "identity": "candidate",
+    "blockers": [
+      "Exact source variant or paper selection is unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "custom-dataset",
+    "adapter": "structured",
+    "source_url": "https://arxiv.org/abs/2210.04885",
+    "identity": "candidate",
+    "blockers": [
+      "Exact source data release or paper-used subset is unverified.",
+      "Public data/media reuse rights require separate review."
+    ]
+  },
+  {
+    "id": "custom-image-editing-dataset",
+    "adapter": "structured",
+    "source_url": "https://arxiv.org/abs/2208.01626",
+    "identity": "candidate",
+    "blockers": [
+      "Exact source data release or paper-used subset is unverified.",
+      "Public data/media reuse rights require separate review."
+    ]
+  },
+  {
+    "id": "custom-neonatal-rat-ganglion-recordings",
+    "adapter": "structured",
+    "source_url": "https://doi.org/10.7554/eLife.55378",
+    "identity": "candidate",
+    "blockers": [
+      "Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "custom-speech-segment-collection",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "Original release identity and rights need verification.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "custom-ternus-psychophysics-responses",
+    "adapter": "structured",
+    "source_url": "https://doi.org/10.3758/s13423-020-01786-9",
+    "identity": "candidate",
+    "blockers": [
+      "Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "dall-e-generated-target-images",
+    "adapter": "structured",
+    "source_url": "https://arxiv.org/abs/2305.16934",
+    "identity": "candidate",
+    "blockers": [
+      "Exact source data release or paper-used subset is unverified.",
+      "Public data/media reuse rights require separate review."
+    ]
+  },
+  {
+    "id": "deepfashion",
+    "adapter": "structured",
+    "source_url": "https://mmlab.ie.cuhk.edu.hk/projects/DeepFashion.html",
+    "identity": "candidate",
+    "blockers": [
+      "Source access has not been verified.",
+      "Exact source variant or paper release is unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "donkey-kong-rom",
+    "adapter": "structured",
+    "source_url": "https://doi.org/10.1371/journal.pcbi.1005268",
+    "identity": "candidate",
+    "blockers": [
+      "Exact source data release or paper-used subset is unverified.",
+      "Public data/media reuse rights require separate review."
+    ]
+  },
+  {
+    "id": "e-ic",
+    "adapter": "structured",
+    "source_url": "https://github.com/zjunlp/EasyEdit/blob/14cea8245f06715684592ab55184939b99d70784/examples/MMEdit.md",
+    "identity": "candidate",
+    "blockers": [
+      "The authors host the image captioning editing data on Google Drive and Baidu NetDisk (EasyEdit examples/MMEdit.md), not on a pinned, checksummable source. A 2026-10-06 request for the image archive through the Drive download endpoint returned an empty HTML body.",
+      "A Google Drive folder cannot be listed or pinned reproducibly here; mirrors on Hugging Face are third-party uploads and are not treated as the original release.",
+      "Adapter and preview are not implemented because no verifiable file could be fetched."
+    ]
+  },
+  {
+    "id": "e-vqa",
+    "adapter": "structured",
+    "source_url": "https://github.com/zjunlp/EasyEdit/blob/14cea8245f06715684592ab55184939b99d70784/examples/MMEdit.md",
+    "identity": "candidate",
+    "blockers": [
+      "The authors host the visual question answering editing data on Google Drive and Baidu NetDisk (EasyEdit examples/MMEdit.md), not on a pinned, checksummable source. A 2026-10-06 request for the image archive through the Drive download endpoint returned an empty HTML body.",
+      "A Google Drive folder cannot be listed or pinned reproducibly here; mirrors on Hugging Face are third-party uploads and are not treated as the original release.",
+      "Adapter and preview are not implemented because no verifiable file could be fetched."
+    ]
+  },
+  {
+    "id": "facet",
+    "adapter": "structured",
+    "source_url": "https://ai.meta.com/datasets/facet/",
+    "identity": "resolved",
+    "blockers": [
+      "Official source requires an access request or agreement; dataset contents and publication rights remain unreviewed.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "facial-expression-recognition-2013",
+    "adapter": "structured",
+    "source_url": "https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data",
+    "identity": "resolved",
+    "blockers": [
+      "Original source requires registration or licensed base images.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "fer-2013",
+    "adapter": "structured",
+    "source_url": "https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data",
+    "identity": "resolved",
+    "blockers": [
+      "Original-source credentials or agreement are required.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "fgvc",
+    "adapter": "structured",
+    "source_url": "https://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/",
+    "identity": "candidate",
+    "blockers": [
+      "Original data download availability is unverified.",
+      "Exact source variant or paper selection is unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "first-person-social-interactions-dataset",
+    "adapter": "structured",
+    "source_url": "https://ai.stanford.edu/~alireza/Disney/",
+    "identity": "candidate",
+    "blockers": [
+      "The author page (ai.stanford.edu/~alireza/Disney/) links 113 AVI videos and annotation ZIPs hosted on webshare.ipat.gatech.edu over plain HTTP; the host did not answer a HEAD request within 30 s over either http or https on 2026-10-06 (an upstream availability problem to retry).",
+      "The videos are AVI files, which browsers cannot play, and the host is HTTP-only, which Atlas's fetch layer does not use: even when the host returns, preparation needs a transcoding or an HTTPS mirror (an implementation gap beyond the outage).",
+      "The citing paper's training selection (the Watanabe selection) is not identified, and the page states no licence."
+    ]
+  },
+  {
+    "id": "flowers",
+    "adapter": "structured",
+    "source_url": "https://www.robots.ox.ac.uk/~vgg/data/flowers/102/",
+    "identity": "candidate",
+    "blockers": [
+      "Original data download availability is unverified.",
+      "Exact source variant or paper selection is unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "gaussian-rubbish-examples",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "Original release identity and rights need verification.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "gda-adversarial-image-variants",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "Original release identity and rights need verification.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "google-web-1t-corpus",
+    "adapter": "structured",
+    "source_url": "https://catalog.ldc.upenn.edu/LDC2006T13",
+    "identity": "resolved",
+    "blockers": [
+      "Original-source registration, contact sharing, or licensed subscription is required.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "gpt-4v-filtered-vl-gender-subset",
+    "adapter": "structured",
+    "source_url": "https://github.com/ExplainableML/vla-gender-bias",
+    "identity": "candidate",
+    "blockers": [
+      "Exact source data release or paper-used subset is unverified.",
+      "Public data/media reuse rights require separate review."
+    ]
+  },
+  {
+    "id": "group-labels",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "The authors' repository (kshitishghate/bias_prop) releases only Data/template_and_group_words.json (3 templates, a 6-item prompt template list, 24 gender words, 36 race words and smaller subsets); the 864-phrase list itself and the code that builds it are not released ('will be added' per its README).",
+      "24 gender words x 36 race words = 864 matches the paper's count, but the paper's exact phrase construction is not in the repository, so Atlas does not generate the list and present it as the released data.",
+      "The released word lists are a vocabulary resource, not a population of examples; no preview was prepared."
+    ]
+  },
+  {
+    "id": "gyafc",
+    "adapter": "structured",
+    "source_url": "https://github.com/raosudha89/GYAFC-corpus/tree/fe2da425ad91933b30097e7d2ed05e428e95ba92",
+    "identity": "resolved",
+    "blockers": [
+      "Author access request/terms must be completed before acquisition.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "hellaswag-pro",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "Source access has not been verified.",
+      "Exact source variant or paper release is unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "ictcf",
+    "adapter": "structured",
+    "source_url": "https://ngdc.cncb.ac.cn/ictcf/",
+    "identity": "candidate",
+    "blockers": [
+      "Access to the exact data files has not been verified.",
+      "The exact paper release, source variant, or derived collection remains unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "illusionbench",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "illusory-vqa",
+    "adapter": "structured",
+    "source_url": "https://github.com/IllusoryVQA/IllusoryVQA",
+    "identity": "family_or_variant_candidate",
+    "blockers": [
+      "Paper-used variant/configuration is not pinned to an exact source release.",
+      "Public data/media reuse rights require separate review."
+    ]
+  },
+  {
+    "id": "imagenet-ilsvrc",
+    "adapter": "structured",
+    "source_url": "https://www.image-net.org/challenges/LSVRC/",
+    "identity": "candidate",
+    "blockers": [
+      "Original source requires registration or licensed base images.",
+      "Exact source variant or paper selection is unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "imagenet-sampled-1-000-images",
+    "adapter": "structured",
+    "source_url": "https://arxiv.org/abs/2502.14976",
+    "identity": "candidate",
+    "blockers": [
+      "Exact source data release or paper-used subset is unverified.",
+      "Public data/media reuse rights require separate review."
+    ]
+  },
+  {
+    "id": "imagenet",
+    "adapter": "structured",
+    "source_url": "https://www.image-net.org/",
+    "identity": "candidate",
+    "blockers": [
+      "Original source requires registration or licensed base images.",
+      "Exact source variant or paper selection is unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "imagenet100",
+    "adapter": "structured",
+    "source_url": "https://www.image-net.org/challenges/LSVRC/",
+    "identity": "candidate",
+    "blockers": [
+      "Original-source credentials or agreement are required.",
+      "Exact source variant or paper release is unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "imagenetval",
+    "adapter": "structured",
+    "source_url": "https://www.image-net.org/challenges/LSVRC/",
+    "identity": "candidate",
+    "blockers": [
+      "Original source requires registration or licensed base images.",
+      "Exact source variant or paper selection is unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "itac",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "Access to the exact data files has not been verified.",
+      "The exact paper release, source variant, or derived collection remains unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "laion-aesthetics",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "Original release identity and rights need verification.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "laion",
+    "adapter": "structured",
+    "source_url": "https://laion.ai/blog/laion-5b/",
+    "identity": "candidate",
+    "blockers": [
+      "Access to the exact data files has not been verified.",
+      "The exact paper release, source variant, or derived collection remains unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "middlebury",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "Original release identity and rights need verification.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "ms-coco-7f846b38",
+    "adapter": "structured",
+    "source_url": "https://cocodataset.org/",
+    "identity": "candidate",
+    "blockers": [
+      "Exact source variant or paper selection is unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "ms-coco-captions",
+    "adapter": "structured",
+    "source_url": "https://cocodataset.org/",
+    "identity": "candidate",
+    "blockers": [
+      "Exact source variant or paper selection is unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "ms-coco",
+    "adapter": "structured",
+    "source_url": "https://cocodataset.org/",
+    "identity": "candidate",
+    "blockers": [
+      "Exact source variant or paper selection is unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "ms-cxr",
+    "adapter": "structured",
+    "source_url": "https://physionet.org/content/ms-cxr/1.1.0/",
+    "identity": "resolved",
+    "blockers": [
+      "Original-source credentials or agreement are required.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "mscoco-100-target-subset",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "mscoco",
+    "adapter": "structured",
+    "source_url": "https://cocodataset.org/",
+    "identity": "candidate",
+    "blockers": [
+      "Exact source variant or paper selection is unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "multitrust",
+    "adapter": "structured",
+    "source_url": "https://multi-trust.github.io/",
+    "identity": "candidate",
+    "blockers": [
+      "Hugging Face thu-ml/MultiTrust (CC BY-SA 4.0, auto-gated: each researcher accepts the terms on their own account) holds 10,549 files across five trustworthiness aspects with task-specific formats.",
+      "A suite of heterogeneous tasks, not one homogeneous collection: it needs per-task adapters, an implementation gap rather than an access block.",
+      "The citing paper uses the MultiTrust framework for transfer attacks, so the examples a researcher would want are those it generated, which were not located."
+    ]
+  },
+  {
+    "id": "nips17",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "The 1,000-image DEV set is described by dev_dataset.csv in the CleverHans repository, which lists image URLs; the repository does not host the images and its download_images.py links have been reported expired (cleverhans issue 1180).",
+      "The original Kaggle competition pages that host the images require a Kaggle login that Atlas will not use on a researcher's behalf.",
+      "The SAEgis paper's NIPS17 images are available separately as part of the SAEgis author release (entry saegis-clean-and-adversarial-splits); that does not establish this entry's identity."
+    ]
+  },
+  {
+    "id": "ostris-dataset",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "Access to the exact data files has not been verified.",
+      "The exact paper release, source variant, or derived collection remains unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "paper-08e415961919a492-unnamed-11-image-inpainting-set",
+    "adapter": "structured",
+    "source_url": "https://github.com/dmitryulyanov/deep-image-prior",
+    "identity": "candidate",
+    "blockers": [
+      "Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "paper-08e415961919a492-unnamed-real-noise-benchmark-46",
+    "adapter": "structured",
+    "source_url": "https://noise.visinf.tu-darmstadt.de/",
+    "identity": "candidate",
+    "blockers": [
+      "Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "paper-12e8bd34b4a2f2a8-unnamed-harmful-instruction-evaluation-set",
+    "adapter": "structured",
+    "source_url": "https://arxiv.org/abs/2306.13213",
+    "identity": "candidate",
+    "blockers": [
+      "The paper describes 40 manually curated harmful instructions used for human evaluation; the audit found no public release.",
+      "No examples will be synthesized in its place; the record exists to carry the paper mention."
+    ]
+  },
+  {
+    "id": "paper-12e8bd34b4a2f2a8-unnamed-harmful-sentence-corpus",
+    "adapter": "structured",
+    "source_url": "https://arxiv.org/abs/2306.13213",
+    "identity": "candidate",
+    "blockers": [
+      "The paper describes a 66-sentence derogatory corpus used to optimize attacks; the audit found no public release.",
+      "No examples will be synthesized in its place; the record exists to carry the paper mention."
+    ]
+  },
+  {
+    "id": "paper-164d7c221452ffec-unnamed-cfd-morph-collection",
+    "adapter": "structured",
+    "source_url": "https://github.com/kshitishghate/bias_prop",
+    "identity": "candidate",
+    "blockers": [
+      "Author request or agreement is required for the described data; no public archive was verified.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "paper-2aa40aa13ed2a25b-unnamed-objaverse-spatial-images",
+    "adapter": "structured",
+    "source_url": "https://github.com/Raphoo/linear-mech-vlms/tree/main/spatial_id_derivation",
+    "identity": "candidate",
+    "blockers": [
+      "Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "paper-2aa40aa13ed2a25b-unnamed-synthetic-spatial-training-set",
+    "adapter": "structured",
+    "source_url": "https://github.com/Raphoo/linear-mech-vlms/blob/main/spatial_finetuning/README.md",
+    "identity": "candidate",
+    "blockers": [
+      "Author request or agreement is required for the described data; no public archive was verified.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-collection",
+    "adapter": "structured",
+    "source_url": "https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench",
+    "identity": "candidate",
+    "blockers": [
+      "Original release identity and rights need verification.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-set",
+    "adapter": "structured",
+    "source_url": "https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench",
+    "identity": "candidate",
+    "blockers": [
+      "Original release identity and rights need verification.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "paper-63c3bd849356e00f-unnamed-robust-nonrobust-feature-collections",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "The paper describes robust/non-robust feature collections it constructed; no public release of them was located.",
+      "No examples will be synthesized in its place; the record exists to carry the paper mention."
+    ]
+  },
+  {
+    "id": "paper-6a7364738bac9f07-unnamed-online-illusion-repositories",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "resolved",
+    "blockers": [
+      "The audit classified this as source-material lineage for IllusionBench+, not a standalone release.",
+      "No examples will be synthesized in its place; the record exists to carry the paper mention.",
+      "This is source-material lineage, not a standalone dataset release or browsable record population."
+    ]
+  },
+  {
+    "id": "paper-72040eccb96ead7a-unnamed-synthetic-spheres-dataset",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "The paper describes a synthetic spheres dataset it generated; no public release was located.",
+      "No examples will be synthesized in its place; the record exists to carry the paper mention."
+    ]
+  },
+  {
+    "id": "paper-728d8c0964b540ad-unnamed-youtube-image-collection",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "The paper describes a YouTube image collection it assembled; no public release was located and the frames carry third-party rights.",
+      "No examples will be synthesized in its place; the record exists to carry the paper mention."
+    ]
+  },
+  {
+    "id": "paper-765a2362f8735bc4-unnamed-social-category-question-set",
+    "adapter": "structured",
+    "source_url": "https://arxiv.org/abs/2505.23798",
+    "identity": "candidate",
+    "blockers": [
+      "The paper describes 50 author-collected social-category questions; the audit found no public release.",
+      "No examples will be synthesized in its place; the record exists to carry the paper mention."
+    ]
+  },
+  {
+    "id": "paper-9036b4eaa048dc21-unnamed-neuron-pair-judgment-collection",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "The paper describes human judgments it collected over neuron pairs; no public release was located.",
+      "No examples will be synthesized in its place; the record exists to carry the paper mention."
+    ]
+  },
+  {
+    "id": "paper-944952997d24ce45-unnamed-van-gogh-painting-sample",
+    "adapter": "structured",
+    "source_url": "https://github.com/Trustworthy-AI-Group/VMA",
+    "identity": "candidate",
+    "blockers": [
+      "Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "paper-944952997d24ce45-unnamed-vma-candidate-pool",
+    "adapter": "structured",
+    "source_url": "https://github.com/Trustworthy-AI-Group/VMA",
+    "identity": "candidate",
+    "blockers": [
+      "Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "paper-959e8fc51787f7e4-unnamed-curated-internet-image-collection",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "The paper describes internet images it curated per experiment; no fixed public release was located.",
+      "No examples will be synthesized in its place; the record exists to carry the paper mention."
+    ]
+  },
+  {
+    "id": "paper-959e8fc51787f7e4-unnamed-internet-image-tracing-set",
+    "adapter": "structured",
+    "source_url": "https://github.com/UIUC-MONET/vlm-circuit-tracing",
+    "identity": "candidate",
+    "blockers": [
+      "The audit verified per-task curated internet image samples with no fixed release; the public repository holds code and models only.",
+      "No examples will be synthesized in its place; the record exists to carry the paper mention."
+    ]
+  },
+  {
+    "id": "paper-959e8fc51787f7e4-unnamed-sea-otter-image-sample",
+    "adapter": "structured",
+    "source_url": "https://github.com/UIUC-MONET/vlm-circuit-tracing",
+    "identity": "candidate",
+    "blockers": [
+      "Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "paper-ab31cc6a994470fb-unnamed-human-adversarial-stimulus-collection",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "The paper describes adversarial stimuli it produced for human trials; no public release was located.",
+      "No examples will be synthesized in its place; the record exists to carry the paper mention."
+    ]
+  },
+  {
+    "id": "paper-c12960e5d652fb7f-unnamed-attack-generalization-collection",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "The paper describes an attack-generalization image collection it assembled; no public release was located.",
+      "No examples will be synthesized in its place; the record exists to carry the paper mention."
+    ]
+  },
+  {
+    "id": "paper-f6dcb0e50d10ea38-unnamed-ai-generated-gender-image-attack-set",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "The paper describes AI-generated attack images it produced; no public release was located.",
+      "No examples will be synthesized in its place; the record exists to carry the paper mention."
+    ]
+  },
+  {
+    "id": "paper-f6dcb0e50d10ea38-unnamed-explicit-image-attack-set",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "The paper describes an explicit-image attack set it assembled; no public release was located and none would be appropriate to mirror.",
+      "No examples will be synthesized in its place; the record exists to carry the paper mention."
+    ]
+  },
+  {
+    "id": "paper-f6dcb0e50d10ea38-unnamed-historical-event-image-attack-set",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "The paper describes a historical-event image attack set it assembled; no public release was located.",
+      "No examples will be synthesized in its place; the record exists to carry the paper mention."
+    ]
+  },
+  {
+    "id": "paper-f6dcb0e50d10ea38-unnamed-product-screenshot-attack",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "The paper describes product-screenshot attack images it assembled; no public release was located.",
+      "No examples will be synthesized in its place; the record exists to carry the paper mention."
+    ]
+  },
+  {
+    "id": "paper-f6dcb0e50d10ea38-unnamed-public-figure-adversarial-image-set",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "The paper describes public-figure adversarial images it assembled; no public release was located.",
+      "No examples will be synthesized in its place; the record exists to carry the paper mention."
+    ]
+  },
+  {
+    "id": "pata",
+    "adapter": "structured",
+    "source_url": "https://github.com/pata-fairness/pata_dataset",
+    "identity": "candidate",
+    "blockers": [
+      "All 4,934 native author label/URL rows and 24 caption groups have an exact metadata index. Reproduce with atlas datasets prepare-metadata --dataset pata --execute; no image preview is claimed.",
+      "Third-party images are not archived or fetched. URL availability and image rights remain unverified.",
+      "The demographic labels are author annotations, not self-reports. Historical paper membership and redistribution remain unreviewed."
+    ]
+  },
+  {
+    "id": "perturbed-gender-benchmark-image-variants",
+    "adapter": "structured",
+    "source_url": "https://openaccess.thecvf.com/content/ICCV2025/html/Hirota_Bias_in_Gender_Bias_Benchmarks_How_Spurious_Features_Distort_Evaluation_ICCV_2025_paper.html",
+    "identity": "candidate",
+    "blockers": [
+      "Exact source data release or paper-used subset is unverified.",
+      "Public data/media reuse rights require separate review."
+    ]
+  },
+  {
+    "id": "pitfall-rom",
+    "adapter": "structured",
+    "source_url": "https://doi.org/10.1371/journal.pcbi.1005268",
+    "identity": "candidate",
+    "blockers": [
+      "Exact source data release or paper-used subset is unverified.",
+      "Public data/media reuse rights require separate review."
+    ]
+  },
+  {
+    "id": "raise1k",
+    "adapter": "structured",
+    "source_url": "https://loki.disi.unitn.it/RAISE/",
+    "identity": "candidate",
+    "blockers": [
+      "Publisher RAISE-1K download requires name, affiliation, email and acceptance of research/education terms. No request was submitted on the user\u2019s behalf.",
+      "Native NEF/TIFF/CSV acquisition and display adapter remain implementation work after authorized source access.",
+      "Exact citing-paper source release and selected membership remain unverified."
+    ]
+  },
+  {
+    "id": "robustbench",
+    "adapter": "structured",
+    "source_url": "https://github.com/RobustBench/robustbench/tree/78fcc9e48a07a861268f295a777b975f25155964",
+    "identity": "resolved",
+    "blockers": [
+      "RobustBench is a benchmark protocol, model zoo and evaluation library; it is not a standalone dataset pack. Underlying dataset releases retain their own access and rights."
+    ]
+  },
+  {
+    "id": "rosmap",
+    "adapter": "structured",
+    "source_url": "https://www.radc.rush.edu/molecular_networks/datasets.html",
+    "identity": "candidate",
+    "blockers": [
+      "Original-source access requires an author or data-holder request.",
+      "The exact paper release, source variant, or derived collection remains unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "sb-syn-crop",
+    "adapter": "structured",
+    "source_url": "https://huggingface.co/vlmbias",
+    "identity": "candidate",
+    "blockers": [
+      "Exact source variant or paper selection is unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "sb-syn",
+    "adapter": "structured",
+    "source_url": "https://huggingface.co/vlmbias",
+    "identity": "candidate",
+    "blockers": [
+      "Exact source variant or paper selection is unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "sbbench",
+    "adapter": "structured",
+    "source_url": "https://github.com/UCF-CRCV/BBQ-Vision",
+    "identity": "resolved",
+    "blockers": [
+      "The current author-linked BBQ-V release is gated; the configured local Hugging Face account received HTTP 403 for its first native Parquet file on 2026-09-23. Access approval is not present.",
+      "The current BBQ-V release and historical SBBench population differ; exact historical release membership remains unverified.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "scrambled-mnist",
+    "adapter": "structured",
+    "source_url": "https://arxiv.org/abs/1911.09288",
+    "identity": "candidate",
+    "blockers": [
+      "Exact source data release or paper-used subset is unverified.",
+      "Public data/media reuse rights require separate review."
+    ]
+  },
+  {
+    "id": "shiftmnist",
+    "adapter": "structured",
+    "source_url": "https://github.com/jhjacobsen/fully-invertible-revnet",
+    "identity": "candidate",
+    "blockers": [
+      "Exact source data release or paper-used subset is unverified.",
+      "Public data/media reuse rights require separate review."
+    ]
+  },
+  {
+    "id": "simulated-transistor-traces",
+    "adapter": "structured",
+    "source_url": "https://github.com/ericmjonas/neuroprocdata",
+    "identity": "candidate",
+    "blockers": [
+      "Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "space-invaders-rom",
+    "adapter": "structured",
+    "source_url": "https://doi.org/10.1371/journal.pcbi.1005268",
+    "identity": "candidate",
+    "blockers": [
+      "Exact source data release or paper-used subset is unverified.",
+      "Public data/media reuse rights require separate review."
+    ]
+  },
+  {
+    "id": "timit",
+    "adapter": "structured",
+    "source_url": "https://catalog.ldc.upenn.edu/LDC93S1",
+    "identity": "resolved",
+    "blockers": [
+      "Original-source registration, contact sharing, or licensed subscription is required.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "via-bench",
+    "adapter": "structured",
+    "source_url": "https://arxiv.org/abs/2602.01816",
+    "identity": "candidate",
+    "blockers": [
+      "No release located: the paper (arXiv 2602.01816) says its data and code 'will be released'; no repository or dataset link was found on 2026-10-06.",
+      "Hugging Face MCG-NJU/VIABench and Riverlu/VIABench are a DIFFERENT benchmark (VIABench, arXiv 2607.14660: videos from blind individuals). They share a name only and must not be attached to this entry.",
+      "Adapter and preview are not implemented because there is no data to adapt."
+    ]
+  },
+  {
+    "id": "visu",
+    "adapter": "structured",
+    "source_url": "https://huggingface.co/datasets/aimagelab/ViSU-Text",
+    "identity": "resolved",
+    "blockers": [
+      "Unsafe vision images are deliberately withheld by the authors.",
+      "Adapter and preview are not implemented.",
+      "The separately authorized ViSU-Text component does not supply the deliberately withheld unsafe vision images."
+    ]
+  },
+  {
+    "id": "visual-counterfact-filtered-467",
+    "adapter": "structured",
+    "source_url": "https://github.com/nlietzow/vision-default-prior-override",
+    "identity": "candidate",
+    "blockers": [
+      "The current author filter reconstructed over the pinned 493-row color release selects 469 rows, not the paper-reported 467. Exact historical source revision or additional selection remains unresolved.",
+      "A supported author-source filtering adapter remains implementation work; this audit is not preview coverage."
+    ]
+  },
+  {
+    "id": "visualqa",
+    "adapter": "structured",
+    "source_url": "https://visualqa.org/",
+    "identity": "candidate",
+    "blockers": [
+      "The exact paper release, source variant, or derived collection remains unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "vl-gender",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "Original release identity and rights need verification.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "vlagenderbias",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "Data-generation recipe, not a release: the author repository ships setup scripts (about 100 GB and ~24 hours of downloads per its README) and no images; the selected 5,000 images were not reproduced.",
+      "Member datasets: FairFace, MIAP and PHASE are browsable in this catalogue; PATA's images are third-party web files that are not archived (see entry pata).",
+      "Gender labels here are the member datasets' own annotations (perceived or annotated), and a model prediction is never one of them."
+    ]
+  },
+  {
+    "id": "vtab",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "Original release identity and rights need verification.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "wall-street-journal",
+    "adapter": "structured",
+    "source_url": null,
+    "identity": "candidate",
+    "blockers": [
+      "Access to the exact data files has not been verified.",
+      "The exact paper release, source variant, or derived collection remains unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  },
+  {
+    "id": "wilds",
+    "adapter": "structured",
+    "source_url": "https://wilds.stanford.edu/",
+    "identity": "candidate",
+    "blockers": [
+      "Exact source variant or paper release is unresolved.",
+      "Adapter and preview are not implemented."
+    ]
+  }
+]

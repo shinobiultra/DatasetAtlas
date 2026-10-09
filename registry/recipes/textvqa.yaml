@@ -1,0 +1,62 @@
+release: textvqa-0.5.1-all-splits
+adapter: structured_collection
+expected_count: 45336
+scope: All 45336 original TextVQA 0.5.1 train/val/test questions; original images
+  accessed selectively from the official ZIP archives. Test answers are not part of
+  this release.
+remote_metadata_bytes: 20000000
+adapter_config:
+  annotations:
+  - path_key: train_path
+    records_key: data
+    split: train
+    media_archive: trainval
+    media_template: train_images/{image_id}.jpg
+  - path_key: val_path
+    records_key: data
+    split: val
+    media_archive: trainval
+    media_template: train_images/{image_id}.jpg
+  - path_key: test_path
+    records_key: data
+    split: test
+    media_archive: test
+    media_template: test_images/{image_id}.jpg
+  mapping:
+    id: question_id
+    question: question
+  remote_cache_root: work/media-cache/ranges
+  remote_archives:
+    trainval:
+      url: https://dl.fbaipublicfiles.com/textvqa/images/train_val_images.zip
+      bytes: 7072297970
+      etag: '"79ddfdcdb3f40b3466b9c0dc2f0cda25-68"'
+      allowed_hosts:
+      - dl.fbaipublicfiles.com
+    test:
+      url: https://dl.fbaipublicfiles.com/textvqa/images/test_images.zip
+      bytes: 970296721
+      etag: '"d451e067d1c6707a30b812cd2289d643-10"'
+      allowed_hosts:
+      - dl.fbaipublicfiles.com
+files:
+- source_name: TextVQA_0.5.1_train.json
+  url: https://dl.fbaipublicfiles.com/textvqa/data/TextVQA_0.5.1_train.json
+  bytes: 21634937
+  sha256: 95f5c407db56cba56a177799dcd685a7cc0ec7c0d851b59910acf7786d31b68a
+  format: json
+  config_key: train_path
+- source_name: TextVQA_0.5.1_val.json
+  url: https://dl.fbaipublicfiles.com/textvqa/data/TextVQA_0.5.1_val.json
+  bytes: 3116162
+  sha256: 4ceb5aadc1a41719d0a3e4dfdf06838bcfee1db569a9a65ee67d31c99893081d
+  format: json
+  config_key: val_path
+- source_name: TextVQA_0.5.1_test.json
+  url: https://dl.fbaipublicfiles.com/textvqa/data/TextVQA_0.5.1_test.json
+  bytes: 2770520
+  sha256: d8d4b738101087bac5a6182d22d9aef3772e08e77827e6cf6116808910b75db2
+  format: json
+  config_key: test_path
+allowed_hosts:
+- dl.fbaipublicfiles.com

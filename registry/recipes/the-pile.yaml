@@ -1,0 +1,37 @@
+release: author-heldout-05b327037e6301f256d8df32193756edc4c8e3bd
+adapter: structured
+expected_count: 429254
+scope: All 429,254 native author validation (214,670) and test (214,584) documents from the pinned EleutherAI held-out
+  repository, with exact native text, complete metadata JSON values and 22 component labels. This is the author
+  held-out population, not the 825 GiB training corpus or the citing paper training inputs. Original JSONL files
+  remain checksum-pinned locally. Component copyright and privacy review is pending; no content is publicly distributed.
+adapter_config:
+  format: parquet
+  mapping:
+    id: source_id
+    text: text
+    label: pile_set_name
+  sequential_index: true
+  max_record_bytes: 16000000
+allowed_hosts:
+- huggingface.co
+- cdn-lfs-us-1.huggingface.co
+- us.aws.cdn.hf.co
+- cas-bridge.xethub.hf.co
+files:
+- source_name: test.jsonl
+  url: https://huggingface.co/datasets/EleutherAI/pile_val_test/resolve/05b327037e6301f256d8df32193756edc4c8e3bd/test.jsonl
+  bytes: 1372688804
+  sha256: f87cb69612a54c672cb5afb0f3221ec15c05fae1f34798ae8973561a4b6074da
+  config_key: test
+  format: jsonl
+- source_name: val.jsonl
+  url: https://huggingface.co/datasets/EleutherAI/pile_val_test/resolve/05b327037e6301f256d8df32193756edc4c8e3bd/val.jsonl
+  bytes: 1409057992
+  sha256: dbbc4c90f3390e429047a10f02c85516027cf46a95f40aeecff4acf2bc721450
+  config_key: validation
+  format: jsonl
+convert:
+  name: pile_heldout
+  count: 429254
+  rows_sha256: 8fab511e697a058a80da371276b9109309d334ff5ff1313b73f88a647d1cad55

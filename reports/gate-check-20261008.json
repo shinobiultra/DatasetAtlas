@@ -1,0 +1,203 @@
+{
+ "schema_version": "1.0",
+ "checked_on": "2026-10-08",
+ "base_commit": "4a18626",
+ "tool": "huggingface_hub.HfApi / get_hf_file_metadata (read-only) and dataset_atlas.registry.source_probe.probe_url",
+ "note": "Read-only, bounded checks. Hugging Face calls used the researcher's configured local credentials; neither the credentials nor any request header is recorded. No data body was requested (metadata and HEAD, plus one GET of the author's HTML page to read its links), no gate or terms were accepted and nothing was created or changed on the Hub. Nothing here is a claim about the content of any dataset.",
+ "checks": [
+  {
+   "dataset_id": "multitrust",
+   "url": "https://huggingface.co/datasets/thu-ml/MultiTrust",
+   "call": "huggingface_hub.HfApi().dataset_info('thu-ml/MultiTrust')",
+   "observed": {
+    "served": true,
+    "gated": "auto",
+    "private": false,
+    "disabled": false,
+    "sha": "84dc74754959e9f52b67c5185700f4f7fcd8c4df",
+    "files_listed": 10549
+   },
+   "checked_at_utc": "2026-10-08T05:17:04Z",
+   "conclusion": "Repository metadata is served and reports the gate (auto); it does not say whether this account has been granted access."
+  },
+  {
+   "dataset_id": "multitrust",
+   "url": "https://huggingface.co/datasets/thu-ml/MultiTrust",
+   "call": "huggingface_hub.HfApi().auth_check('thu-ml/MultiTrust', repo_type='dataset')",
+   "observed": {
+    "ok": false,
+    "http_status": 403,
+    "error": "GatedRepoError",
+    "error_code": "GatedRepo"
+   },
+   "checked_at_utc": "2026-10-08T05:17:05Z",
+   "conclusion": "Refused: the configured account has not been granted access to this gated repository."
+  },
+  {
+   "dataset_id": "multitrust",
+   "url": "https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/main/README.md",
+   "call": "huggingface_hub.get_hf_file_metadata(url) (HEAD, no body)",
+   "observed": {
+    "ok": true,
+    "size_bytes": 3306,
+    "commit_hash": "84dc74754959e9f52b67c5185700f4f7fcd8c4df"
+   },
+   "checked_at_utc": "2026-10-08T05:17:05Z",
+   "conclusion": "The dataset card is served while the gate stands, so a served README is not evidence of access to the data files."
+  },
+  {
+   "dataset_id": "multitrust",
+   "url": "https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/fairness/preference.json",
+   "call": "huggingface_hub.get_hf_file_metadata(url) (HEAD, no body)",
+   "observed": {
+    "ok": false,
+    "http_status": 403,
+    "error": "GatedRepoError",
+    "error_code": "GatedRepo"
+   },
+   "checked_at_utc": "2026-10-08T05:17:32Z",
+   "conclusion": "Refused (HTTP 403, GatedRepo): the gate is closed for the configured account. No inventory or adapter work was started."
+  },
+  {
+   "dataset_id": "sbbench",
+   "url": "https://huggingface.co/datasets/ucf-crcv/BBQ-V",
+   "call": "huggingface_hub.HfApi().dataset_info('ucf-crcv/BBQ-V')",
+   "observed": {
+    "served": true,
+    "gated": "auto",
+    "private": false,
+    "disabled": false,
+    "sha": "a1c78b8f73bc40408993414e3d94714a6a9169d3",
+    "files_listed": 60
+   },
+   "checked_at_utc": "2026-10-08T05:17:05Z",
+   "conclusion": "Repository metadata is served and reports the gate (auto); it does not say whether this account has been granted access."
+  },
+  {
+   "dataset_id": "sbbench",
+   "url": "https://huggingface.co/datasets/ucf-crcv/BBQ-V",
+   "call": "huggingface_hub.HfApi().auth_check('ucf-crcv/BBQ-V', repo_type='dataset')",
+   "observed": {
+    "ok": false,
+    "http_status": 403,
+    "error": "GatedRepoError",
+    "error_code": "GatedRepo"
+   },
+   "checked_at_utc": "2026-10-08T05:17:05Z",
+   "conclusion": "Refused: the configured account has not been granted access to this gated repository."
+  },
+  {
+   "dataset_id": "sbbench",
+   "url": "https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/main/README.md",
+   "call": "huggingface_hub.get_hf_file_metadata(url) (HEAD, no body)",
+   "observed": {
+    "ok": true,
+    "size_bytes": 7774,
+    "commit_hash": "a1c78b8f73bc40408993414e3d94714a6a9169d3"
+   },
+   "checked_at_utc": "2026-10-08T05:17:05Z",
+   "conclusion": "The dataset card is served while the gate stands, so a served README is not evidence of access to the data files."
+  },
+  {
+   "dataset_id": "sbbench",
+   "url": "https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/real-00000-of-00007.parquet",
+   "call": "huggingface_hub.get_hf_file_metadata(url) (HEAD, no body)",
+   "observed": {
+    "ok": false,
+    "http_status": 403,
+    "error": "GatedRepoError",
+    "error_code": "GatedRepo"
+   },
+   "checked_at_utc": "2026-10-08T05:17:32Z",
+   "conclusion": "Refused (HTTP 403, GatedRepo): the gate is still closed for the configured account. No inventory or adapter work was started."
+  },
+  {
+   "dataset_id": "first-person-social-interactions-dataset",
+   "url": "https://ai.stanford.edu/~alireza/Disney/",
+   "call": "httpx.get(url, timeout=15, follow_redirects=False) (one GET of the author's HTML page to read its links)",
+   "observed": {
+    "http_status": 200,
+    "bytes": 19112,
+    "webshare_links_found": 127,
+    "first_webshare_link": "http://webshare.ipat.gatech.edu/coc-rim-wall-lab/web/afathi3/CVPR12/Videos/Alin_Day1/Alin_Day1_001.avi"
+   },
+   "checked_at_utc": "2026-10-08T05:17:58Z",
+   "checked_at_note": "Upper bound: the script did not stamp this GET; it ran immediately before the probe_url call that finished at this time (that call took 0.5 s).",
+   "conclusion": "An HTML page of 19,112 bytes, not dataset content; it is the source of the first video URL probed below. This is the only GET in this task."
+  },
+  {
+   "dataset_id": "first-person-social-interactions-dataset",
+   "url": "https://ai.stanford.edu/~alireza/Disney/",
+   "call": "dataset_atlas.registry.source_probe.probe_url(url, attempts=1)",
+   "observed": {
+    "status": "reachable",
+    "http_status": 200,
+    "content_type": "text/html; charset=UTF-8",
+    "content_length": 19112
+   },
+   "checked_at_utc": "2026-10-08T05:17:58Z",
+   "conclusion": "The author page answers, so the outage is on the video host, not at the author's site."
+  },
+  {
+   "dataset_id": "first-person-social-interactions-dataset",
+   "url": "http://webshare.ipat.gatech.edu/coc-rim-wall-lab/web/afathi3/CVPR12/Videos/Alin_Day1/Alin_Day1_001.avi",
+   "call": "dataset_atlas.registry.source_probe.probe_url(url, attempts=1)",
+   "observed": {
+    "status": "unreachable",
+    "http_status": null,
+    "error": "gaierror: [Errno -2] Name or service not known"
+   },
+   "checked_at_utc": "2026-10-08T05:18:00Z",
+   "conclusion": "webshare.ipat.gatech.edu did not resolve in DNS (first AVI link of the author page, over http)."
+  },
+  {
+   "dataset_id": "first-person-social-interactions-dataset",
+   "url": "https://webshare.ipat.gatech.edu/coc-rim-wall-lab/web/afathi3/CVPR12/Videos/Alin_Day1/Alin_Day1_001.avi",
+   "call": "dataset_atlas.registry.source_probe.probe_url(url, attempts=1)",
+   "observed": {
+    "status": "unreachable",
+    "http_status": null,
+    "error": "gaierror: [Errno -2] Name or service not known"
+   },
+   "checked_at_utc": "2026-10-08T05:18:01Z",
+   "conclusion": "webshare.ipat.gatech.edu did not resolve in DNS (same file over https)."
+  },
+  {
+   "dataset_id": "broden",
+   "url": "http://netdissect.csail.mit.edu/data/broden1_224.zip",
+   "call": "no new network call in this task: recorded probe_url observations from reports/source-reprobe-20261008.json (three runs) and reports/candidate-source-refresh-20261008.json (live pass), each 2 attempts of 15 s",
+   "observed": {
+    "status": "unreachable",
+    "http_status": null,
+    "error": "ConnectTimeout: timed out",
+    "probe_rounds_utc": [
+     "2026-10-08T03:41Z",
+     "2026-10-08T03:52Z",
+     "2026-10-08T04:03Z",
+     "2026-10-08T04:58Z"
+    ],
+    "urls_covered": [
+     "https://netdissect.csail.mit.edu/",
+     "http://netdissect.csail.mit.edu/data/broden1_224.zip",
+     "https://netdissect.csail.mit.edu/data/broden1_224.zip",
+     "https://netdissect.csail.mit.edu/data/broden1_227.zip",
+     "https://netdissect.csail.mit.edu/data/broden1_384.zip"
+    ]
+   },
+   "checked_at_utc": "2026-10-08T04:59:07Z",
+   "conclusion": "Transient host outage: the official archive host timed out in four probe rounds, with successive observations of a URL at least ten minutes apart. Not a gate and not an implementation gap by itself."
+  }
+ ],
+ "conclusions": {
+  "multitrust": "Gated: the data file HEAD and auth_check answered HTTP 403 GatedRepo on 2026-10-08. No earlier access check is recorded for this repository, and the 2026-10-06 file listing does not show that access was ever granted. Accepting the terms is the researcher's decision on their own account (D3).",
+  "sbbench": "Still gated: data file HEAD and auth_check answered HTTP 403 GatedRepo on 2026-10-08. Accepting the terms is the researcher's decision on their own account (D3).",
+  "first-person-social-interactions-dataset": "Transient outage evidence: webshare.ipat.gatech.edu does not resolve in DNS today while the author page answers HTTP 200. Not a gate; the AVI/HTTP-only preparation gap recorded in the entry is separate and unchanged.",
+  "broden": "Transient outage evidence: the adapter is implemented and tested; real coverage waits on a reachable publisher archive or an authorized local copy."
+ },
+ "registry_files_touched": [
+  "registry/datasets/broden.yaml",
+  "registry/datasets/first-person-social-interactions-dataset.yaml",
+  "registry/datasets/multitrust.yaml",
+  "registry/datasets/sbbench.yaml"
+ ]
+}

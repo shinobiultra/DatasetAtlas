@@ -1,0 +1,68 @@
+schema_version: '1.0'
+id: middlebury
+name: Middlebury
+aliases: []
+description: Mention candidate from a focused page audit; the evidence receipts distinguish
+  direct use, comparison, related-work, and citation-only roles. Original source,
+  release, and rights still require independent verification.
+paper_ids:
+- paper-666de2b7486d80a3
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: unverified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Original release identity and rights need verification.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-cb286c8b3d7e7cff2749
+  paper_id: paper-666de2b7486d80a3
+  source_file_hash: c43575003d83757725739ad87acfc4026d0d3129b27bee69fd1a4c362dc0db33
+  page: 4
+  role: source data
+  excerpt: ' Davis ing a variety of tasks, architectures, and losses, as shown in
+    Middleburry dataset [50]. Because artifacts arising from Table 2 (right). Such
+    tasks include autoencoding, denoising, fra'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://vision.middlebury.edu/
+  checked_on: '2026-10-08'
+  note: The Middlebury site hosts five separate benchmarks (stereo, multi-view stereo, MRF, optical flow,
+    color). The BAPPS paper cites its 'Middleburry dataset' to the stereo taxonomy paper (Scharstein and
+    Szeliski, IJCV 2002) while using it for frame-interpolation patch triplets, so which Middlebury data
+    it drew on is not established. A family of benchmarks, not one release.
+  source_identity_status: benchmark_family_no_single_release
+- kind: source_audit_access
+  url: https://vision.middlebury.edu/
+  checked_on: '2026-10-08'
+  note: The benchmark pages are public (page read; nothing downloaded). No single archive corresponds
+    to the paper's use, so there is nothing to pin.
+  source_identity_status: benchmark_family_no_single_release
+- kind: source_audit_rights
+  url: https://vision.middlebury.edu/
+  checked_on: '2026-10-08'
+  note: The site's front page states no licence or terms for its datasets; rights are not established.
+  source_identity_status: benchmark_family_no_single_release
+- kind: source_audit_refresh
+  url: https://vision.middlebury.edu/
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 1 URL probed (HEAD only): 1 reachable.'

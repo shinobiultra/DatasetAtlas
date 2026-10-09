@@ -1,0 +1,47 @@
+{
+  "dataset_id": "food101",
+  "source_sha256": "d97d15e438b7f4498f96086a4f7e2fa42a32f2712e87d3295441b2b6314053a4",
+  "linked_dataset_ids": [],
+  "status": "executed",
+  "retained_snapshots": 2,
+  "image_references_checked": 202000,
+  "unique_native_images_in_snapshots": 101000,
+  "preview_asset_memberships": 200,
+  "preview_bytes_upper_bound": 9898064,
+  "cold_original_probes": [
+    {
+      "sha256": "ff97f246cd807cf1471b4f7cbf9f8a89bd2632b7fae698dcfda3b5cbfaecc330",
+      "bytes": 42196,
+      "transferred_bytes": 4194304,
+      "source_sha256": "d97d15e438b7f4498f96086a4f7e2fa42a32f2712e87d3295441b2b6314053a4",
+      "fingerprint_type": "etag",
+      "etag": "\"129cd283b-4fdc4f19aaaa0\""
+    },
+    {
+      "sha256": "9934469aebdeef9574d5ec5865815e21b02c0201141be9adee8db439f18fc980",
+      "bytes": 50918,
+      "transferred_bytes": 1048577,
+      "source_sha256": "d97d15e438b7f4498f96086a4f7e2fa42a32f2712e87d3295441b2b6314053a4",
+      "fingerprint_type": "etag",
+      "etag": "\"129cd283b-4fdc4f19aaaa0\""
+    },
+    {
+      "sha256": "481cc50dc16023f44b68559cbd50f793c1c317034ae2e86ccafc66be11379379",
+      "bytes": 46025,
+      "transferred_bytes": 1048577,
+      "source_sha256": "d97d15e438b7f4498f96086a4f7e2fa42a32f2712e87d3295441b2b6314053a4",
+      "fingerprint_type": "etag",
+      "etag": "\"129cd283b-4fdc4f19aaaa0\""
+    }
+  ],
+  "paths": [
+    "work/source-objects/d97d15e438b7f4498f96086a4f7e2fa42a32f2712e87d3295441b2b6314053a4",
+    "work/sources/acquisition-20260923/food101/food-101.tar.gz",
+    "work/prepared/food101/a4740474b6175205805f9f7d9b71bf65ef67be90884a429ea039c36fc991de53/sources/d97d15e438b7f4498f96086a4f7e2fa42a32f2712e87d3295441b2b6314053a4.tar.gz"
+  ],
+  "extracted_files": 0,
+  "source_bytes": 4996278331,
+  "extracted_bytes": 0,
+  "retention": "Original-quality previews and complete indices; other originals and optimized browsing copies on demand.",
+  "freed_unique_file_bytes": 4996278331
+}

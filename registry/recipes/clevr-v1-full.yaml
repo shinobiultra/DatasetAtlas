@@ -1,0 +1,22 @@
+# The official 19 GB archive is read by ranges bound to its strong ETag (a consistency fingerprint, not a content hash); only the
+# question files are streamed into the index and images are fetched on inspection. The maintainer's active version used a fully
+# downloaded copy (SHA-256 5cd61cf1..., kept in the catalogue entry): same file, same records, same snapshot ID.
+release: CLEVR_v1.0
+snapshot_id: clevr-v1-zip-sha256-5cd61cf1096ed20944df93c9adb31e74d189b8459a94f54ba00090e5c59936d1
+adapter: clevr_full
+expected_count: 999968
+scope: Official CLEVR v1.0 train, validation and test questions (all splits) from the official archive, indexed from its question files.
+  Original rendered images are read on request by HTTPS ranges bound to the archive's strong ETag; the 19 GB archive is not downloaded.
+source_url: https://cs.stanford.edu/people/jcjohns/clevr/
+adapter_config:
+  remote_archive:
+    url: https://dl.fbaipublicfiles.com/clevr/CLEVR_v1.0.zip
+    bytes: 19021600724
+    etag: '"3426f0a360618fcf2179966a8d1428c3-1210"'
+    allowed_hosts:
+    - dl.fbaipublicfiles.com
+  remote_cache_root: work/media-cache/clevr-remote
+  remote_cache_bytes: 1000000000
+  remote_metadata_bytes: 400000000
+  prepared_root: work/sources/clevr/full/prepared-remote
+  media_scope: on_demand_unverified

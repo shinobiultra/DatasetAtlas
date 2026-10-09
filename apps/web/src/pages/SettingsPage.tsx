@@ -97,8 +97,31 @@ function SourcesSection({ capabilities }: { capabilities: Capabilities | null })
           configured roots, and a dataset can never widen that set. Configure them where you run <code>atlas serve</code>.
         </p>
       </div>
+      {provider.mode === 'workbench' && <PublicationSection />}
     </>
   )
+}
+
+function PublicationSection() {
+  const [report, setReport] = useState<Record<string, unknown> | null>(null)
+  const [error, setError] = useState('')
+  const [busy, setBusy] = useState(false)
+  async function prepare(build: boolean) {
+    setBusy(true); setError('')
+    try { setReport(await provider.publication(build)) }
+    catch (failure) { setError(String(failure instanceof Error ? failure.message : failure)); setReport(null) }
+    finally { setBusy(false) }
+  }
+  return <div className="card card-pad">
+    <h3 style={{ marginBottom: 10 }}>Publication</h3>
+    <p className="hint">Validate the configured public profile and prepare its approved catalogue, previews and results in the workspace publication folder. Every build checks rights, checksums and the 100 MB data budget. Deployment is a separate action.</p>
+    <div className="row" style={{ gap: 8 }}>
+      <button type="button" className="btn" disabled={busy} onClick={() => prepare(false)}>Validate publication</button>
+      <button type="button" className="btn" disabled={busy || !report} onClick={() => prepare(true)}>Build approved publication</button>
+    </div>
+    {report && <p role="status">{Number(report.catalogue_count).toLocaleString()} catalogue entries · {(report.published_packs as string[]).length} approved packs · {Number(report.total_bytes).toLocaleString()} bytes{report.built ? ` · Saved to ${String(report.output_dir)}` : ' · Validation passed'}</p>}
+    {error && <Notice tone="error">{error}</Notice>}
+  </div>
 }
 
 function ModelsSection() {
@@ -199,11 +222,20 @@ function StorageSection() {
 }
 
 function AppearanceSection() {
+  const safeView = localStorage.getItem('atlas.safe-view') === 'true'
   const [density, setDensity] = useStoredState<boolean>('atlas.dense', false)
   const [cardWidth, setCardWidth] = useStoredState<number>('atlas.card', 248)
   return (
     <div className="card card-pad">
       <h3 style={{ marginBottom: 10 }}>Appearance</h3>
+      {provider.mode === 'workbench' ? (
+        <>
+          <label className="row"><input type="checkbox" checked={safeView} onChange={event => { localStorage.setItem('atlas.safe-view', String(event.target.checked)); window.location.reload() }} />Safe-view image display</label>
+          <p className="hint">Pixelated display derivatives served by the local workbench; image URLs it cannot derive are hidden. Originals and analysis/model inputs remain unchanged, and detector boxes are not drawn over derivatives. This is a viewing aid, not a content classifier.</p>
+        </>
+      ) : (
+        <p className="hint">Safe-view display derivatives are produced by the local workbench; the public build serves originals only.</p>
+      )}
       <div className="col" style={{ gap: 14 }}>
         <label className="row" style={{ gap: 9 }}>
           <input type="checkbox" checked={density} onChange={event => setDensity(event.target.checked)} />

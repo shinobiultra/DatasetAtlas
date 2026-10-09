@@ -1,0 +1,70 @@
+schema_version: '1.0'
+id: gaussian-rubbish-examples
+name: Gaussian rubbish examples
+aliases: []
+description: Mention candidate from a focused page audit; the evidence receipts distinguish
+  direct use, comparison, related-work, and citation-only roles. Original source,
+  release, and rights still require independent verification.
+paper_ids:
+- paper-f7fa96d778a8d649
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: unverified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Original release identity and rights need verification.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-3d4d84a75440839dde61
+  paper_id: paper-f7fa96d778a8d649
+  source_file_hash: 7f6c0a50475149e11e3b7efc9c0a00383652b7cae62f80facd8ae2684ef251e7
+  page: 10
+  role: derived collection
+  excerpt: naively trained maxout network with a softmax layer on top had an error
+    rate of 98.35% on Gaussian rubbish examples with an average confidence of 92.8%
+    on mistakes. Changing the top layer to independent sigmoids dropped the error
+    rate to 68% wit
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://arxiv.org/abs/1412.6572
+  checked_on: '2026-10-08'
+  note: 'Synthetic probe set generated inside Goodfellow, Shlens and Szegedy 2015: 10,000 samples drawn
+    from a zero-mean, identity-covariance Gaussian in 784 dimensions (MNIST input size), fed to a maxout
+    network. It is a recipe, not a distributed dataset.'
+  source_identity_status: generated_by_recipe_no_release
+- kind: source_audit_access
+  url: https://arxiv.org/abs/1412.6572
+  checked_on: '2026-10-08'
+  note: The arXiv page and the paper text name no released examples or code for this experiment; the abstract
+    page lists no code or data link. Regenerating the set needs only the stated distribution.
+  source_identity_status: generated_by_recipe_no_release
+  disposition: still_unreleased
+  observation: no_public_release_located
+- kind: source_audit_rights
+  url: https://arxiv.org/abs/1412.6572
+  checked_on: '2026-10-08'
+  note: No third-party data is involved (random noise), so there is no dataset licence; the arXiv paper
+    carries its own distribution licence.
+  source_identity_status: generated_by_recipe_no_release
+- kind: source_audit_refresh
+  url: https://arxiv.org/abs/1412.6572
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'still_unreleased: read from public pages on 2026-10-08 by the implementing agent (the source_audit_access
+    item of that date); not human-reviewed and not a probe. 1 URL probed (HEAD only): 1 reachable.'

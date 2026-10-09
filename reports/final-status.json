@@ -1,23 +1,153 @@
 {
-  "checked_at_utc": "2026-09-22T06:42:55.117245+00:00",
-  "catalogue_entries": 336,
-  "tested_local_previews": 64,
-  "verified_preview_records": 6313,
-  "canonical_full_scope_indices": 59,
-  "entries_without_preview": 272,
-  "python_tests_passed": 191,
-  "frontend_tests_passed": 22,
-  "browser_tests_passed": 27,
-  "browser_tests_skipped": 0,
+  "checked_at_utc": "2026-10-09T04:52:52.402475+00:00",
+  "status": "verified_working_release_with_remaining_v1_scope",
+  "full_v1_complete": false,
+  "catalogue_entries": 231,
+  "tested_local_previews": 220,
+  "verified_preview_records": 21532,
+  "canonical_full_scope_indices": 218,
+  "entries_without_preview": 11,
+  "all_prepared_previews_have_catalogue_acquisition_paths": true,
+  "metadata_only_reproduction_datasets": [
+    "pata"
+  ],
+  "metadata_only_reproduction_does_not_inflate_preview_recipe_count": true,
+  "python_current_validation": {
+    "version": "3.12.14",
+    "passed": 1028,
+    "skipped": 1,
+    "warnings": 2,
+    "log": "work/python-factoid-final-current-20261007.log"
+  },
+  "python314_current_validation": {
+    "version": "3.14.2",
+    "passed": 1025,
+    "skipped": 4,
+    "warnings": 2,
+    "log": "work/python314-factoid-final-current-20261007.log",
+    "skip_scope": "Three absent optional LanceDB/UMAP dependencies and unretained VHD11K source archive."
+  },
+  "frontend_tests_passed": 28,
+  "browser_tests_passed": 69,
+  "browser_tests_skipped": 3,
+  "validation_logs": {
+    "python": "work/python-factoid-final-current-20261007.log",
+    "python314": "work/python314-factoid-final-current-20261007.log",
+    "browser": "work/browser-factoid-verified-final-20261007.log",
+    "frontend": "work/frontend-tests-factoid-final-20261007.log",
+    "checks": "work/prek-factoid-attested-final-20261007.log"
+  },
+  "complete_index_smoke_passed": 218,
+  "preview_media_smoke": "reports/preview-media-smoke-20261009.json",
+  "source_integrity": "reports/native-six-source-integrity-20261007.json",
+  "exhaustive_native_metadata_parity": "reports/ffhq-emoset-exhaustive-native-parity-20261007.json",
+  "pata_native_parity": "reports/pata-native-metadata-integration-final-20261007.json",
+  "pata_empty_workspace_reproduction": "reports/pata-empty-workspace-metadata-reproduction-20261007.json",
+  "factoid": {
+    "status": "native_prepared_and_verified",
+    "native_index_activated": true,
+    "inert_syntax_completed": true,
+    "exploratory_converted_records": 4150,
+    "archived_synthetic_tests_passed": 19,
+    "unverified_scope": "Complete DataFrame dtype/axis metadata/attrs/flags and object-graph preservation, canonical membership/query parity and production resource-isolated integration.",
+    "experiment": "work/experiments/factoid-inert-20261007/README.md",
+    "probe_bodies_retired": true,
+    "synthetic_tests_passed": 41,
+    "native_conversion_receipt": "reports/factoid-native-verified-conversion-20261007.json",
+    "latest_code_conversion_pending": false,
+    "resource_limits": {
+      "address_space_bytes": 8000000000,
+      "cpu_seconds": 360,
+      "wall_seconds": 480
+    },
+    "native_user_rows": 4150,
+    "native_cells_checked": 17288900,
+    "canonical_field_checks": 83000,
+    "native_population_receipt": "reports/factoid-native-population-verification-20261007.json",
+    "empty_workspace_receipt": "reports/factoid-empty-workspace-preparation-20261007.json",
+    "http_receipt": "reports/factoid-http-final-20261007.json",
+    "browser_receipt": "reports/browser-factoid-native-20261007.json",
+    "synthetic_generated_tests_passed": 41,
+    "production_converter_reviewed": true,
+    "fresh_reproduction_bodies_retired": true
+  },
+  "remaining_implementation_scope": [
+    "MultiTrust per-task native adapters",
+    "Remaining public recipe/native integration gaps listed per dataset; PATA native metadata is complete but source media remains unarchived"
+  ],
+  "remaining_source_or_acceptance_scope": [
+    "exact historical paper releases and memberships",
+    "unarchived PATA media and independent media/source identity proofs",
+    "effective publisher gates, licensed and unreleased sources",
+    "dataset-specific publication review"
+  ],
+  "remaining_coverage_audit": "reports/remaining-native-coverage-audit-20261007.json",
+  "roadmap": "ROADMAP.md",
+  "authorization_links": "docs/dataset-authorization.md",
+  "independent_review": "reports/independent-review-brief-20261009.md",
+  "release_version": "0.2.0",
+  "wheel": {
+    "path": "dist/dataset_atlas-0.2.0-py3-none-any.whl",
+    "bytes": 39422319,
+    "sha256": "74656ccf74f6427c9fbed57c13cee63e338eddf4e8307f23839f04d1aad8ea64"
+  },
+  "sdist": {
+    "path": "dist/dataset_atlas-0.2.0.tar.gz",
+    "bytes": 39375115,
+    "sha256": "a59b1cc627a8740f860d6c66ddbf8b6969fb51c126043f108ba3fc90a16e5d23"
+  },
+  "installation_verification": {
+    "py312": "reports/installation-verification-20261009.json",
+    "py314": "reports/installation-verification-py314-20261009.json"
+  },
   "approved_public_preview_datasets": [
     "clevr",
     "eurosat",
     "pairs"
   ],
-  "full_v1_complete": false,
-  "active_download": null,
-  "all_subagents_finished": true,
+  "storage_allocated_bytes": 121089658880,
+  "workbench_running": false,
+  "active_preparations": [],
   "paid_model_apis_used": false,
-  "gqa_full_archive_acquired": true,
-  "gqa_browsing_snapshot_media_scope": "selected_preview"
+  "external_model_sends_this_pass": false,
+  "cluster_jobs_this_pass": 0,
+  "remote_deployment_performed": false,
+  "historical_status": "reports/final-status-historical-before-closeout-20261007.json",
+  "closeout_scope": "2026-10-09: BBQ-V and MultiTrust integrated, aliases, views and unresolved entries removed from the catalogue, public guide, complete-scope query speed-up, security hardening. Catalogue-wide SPEC acceptance remains incomplete.",
+  "current_validation_pending": false,
+  "release_rebuild_pending": false,
+  "gqa_browsing_snapshot_media_scope": "full",
+  "runtime_restore_pending": false,
+  "runtime_restoration": [
+    "reports/main-runtime-restoration-20261007.json",
+    "reports/main-runtime-host-cuda-restoration-20261007.json"
+  ],
+  "complete_index_smoke": "reports/complete-index-smoke-20261009.json",
+  "query_wide_record_repair": {
+    "receipt": "reports/factoid-complete-ui-page-repair-20261007.json",
+    "default_page_records": 53,
+    "complete_matched_count": 4150,
+    "response_bytes": 31987211,
+    "elapsed_seconds": 6.0427,
+    "remaining_scope": "Wide stratified envelope/window sorting retains its prior path and can explicitly refuse its memory budget. This is not proof of the two-second ordinary filtering target for native wide records."
+  },
+  "python_tests_py312": {
+    "passed": 1458,
+    "skipped": 3
+  },
+  "python_tests_py314": {
+    "version": "3.14.2",
+    "passed": 1455,
+    "skipped": 6
+  },
+  "browser_suite_note": "72 tests: 68 passed in the full run with the local Ollama provider, 1 failed because it opened an entry removed as an alias (fixed, re-run passed), 3 opt-in specs skipped. The runtime-linked-journey spec stayed skipped.",
+  "wheel_sha256": "e4d4b60c88e25bd594c1225fe95646c3954c6c9493e9f7c6e0d3454afb232e9a",
+  "sdist_sha256": "ea7616983ea963a09b25495f521aace2407a477dbd513aeb5a05247cd03e6b23",
+  "storage_above_target_bytes": 21089658880,
+  "storage_plan": "reports/storage-reclaim-plan-20261009.md",
+  "storage_note": "Idle media caches (2.6 GB) were cleared on 2026-10-09 at the researcher's request; the researcher accepted the remaining 121.1 GB. See the reclaim plan.",
+  "acceptance_matrix": "reports/acceptance_matrix.md",
+  "github_pages_plan": "docs/github-pages.md",
+  "fresh_workspace_verified_preview_recipes_note": "The 84 recorded on 2026-10-07 are not re-verified; BBQ-V and MultiTrust were verified in the maintainer workspace only.",
+  "security_review": "reports/security-review-20261009.md"
 }

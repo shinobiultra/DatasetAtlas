@@ -2,26 +2,33 @@ schema_version: '1.0'
 id: audioset
 name: AudioSet
 aliases: []
-description: Google AudioSet.
+description: 'All 2,084,320 native weak-label AudioSet segment annotations across
+  balanced_train, eval and unbalanced_train, with original YouTube IDs, time bounds,
+  labels and publisher class names. Structured inspection only: source YouTube audio
+  and VGGish features are not acquired. Native CSV counts differ from the summary
+  webpage; native headers are preserved.'
 paper_ids:
 - paper-6d747c88d639c5aa
-release: unresolved
+release: audioset-weak-label-v1-native
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: indexed_metadata_partial_media
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Official source family identified; exact selected release, preparation and public-use
-    rights still require dataset-specific review.
-  - Adapter and preview are not implemented.
+  - YouTube audio and VGGish features are not acquired; these are structured native
+    annotation records.
+  - The citing paper's exact augmentation/segment subset is not reconstructed.
+  - Native annotation attribution and publication rights still require review; label
+    rights do not grant source audio rights.
+  total_count: 2084320
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -70,4 +77,22 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: source_and_terms_identified
+- kind: fresh_workspace_acquisition
+  checked_on: '2026-10-05'
+  snapshot_id: audioset-e20a1363c75e564b4b93472e
+  source_url: https://research.google.com/audioset/download.html
+  count: 2084320
+  plan_id: d6b1feb521bd970f68496251923c094b73f089632693194811c87542cbe1d5bc
+  note: All three original weak-label CSVs and original class-index CSV SHA-256 checked;
+    full structured index plus 100 examples. No source audio acquired.
 source_url: https://research.google.com/audioset/download.html
+snapshot_id: audioset-e20a1363c75e564b4b93472e
+tasks:
+- audio event classification
+modalities:
+- audio
+- text
+labels:
+- positive_labels
+- label_names
+- split

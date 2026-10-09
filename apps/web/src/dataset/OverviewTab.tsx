@@ -1,3 +1,4 @@
+import { displayUrl } from '../lib/display'
 import { useEffect, useMemo, useState } from 'react'
 import type { Artifact, Dataset, FieldDescriptor, Query, Record as AtlasRecord } from '../generated'
 import { provider, type AggregateResponse } from '../provider'
@@ -117,7 +118,7 @@ export function OverviewTab({ dataset, fields, artifacts, query, records, scopeL
                 return (
                   <button type="button" key={record.id} onClick={() => onOpenRecord(record.id)} title={record.question ?? record.text ?? record.id} aria-label={`Inspect ${record.id}`}>
                     {url && asset?.modality === 'image'
-                      ? <img src={url} alt="" loading="lazy" onError={event => { event.currentTarget.style.visibility = 'hidden' }} />
+                      ? <img src={displayUrl(url)} alt="" loading="lazy" onError={event => { event.currentTarget.style.visibility = 'hidden' }} />
                       : <span className="tph clamp-3">{record.question ?? record.text ?? record.id}</span>}
                   </button>
                 )

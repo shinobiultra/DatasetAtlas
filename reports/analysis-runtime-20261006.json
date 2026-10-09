@@ -1,0 +1,92 @@
+{
+  "checked_at_utc": "2026-10-06T04:25:17.212006+00:00",
+  "api": "http://127.0.0.1:8766",
+  "selection_id": "selection-886f0325fe354cf6e14ff927",
+  "snapshot_ids": [
+    "hf-maujim-CLEVR_sample_500-463520cb0e4d16f2f61ae0607c81eacdd009e9f4-validation"
+  ],
+  "record_count": 16,
+  "runs": {
+    "quality.basic": {
+      "run_id": "90eda80e4cd24fd09a7aa05645ccf5d0",
+      "estimate_digest": "4c9e593f428b89401ef9c06959a0546b8e9651bd1fa277274d3b6a79f06b60d3",
+      "status": "completed",
+      "artifact_ids": [
+        "6f44d70cb36f05f32b2e123d"
+      ],
+      "errors": [],
+      "coverage": {
+        "completed": 16,
+        "failed": 0,
+        "max_output_bytes": 67108864,
+        "not_applicable": 0,
+        "output_bytes": 10640,
+        "queued": 0,
+        "running": 0,
+        "skipped": 0,
+        "status": "completed",
+        "total": 16
+      },
+      "provenance": {
+        "config": {},
+        "config_digest": "237207156d05d109f00759be885f100d3d68284abf4890a079cb951653d92c51",
+        "input_representation": "original",
+        "model_revision": null,
+        "output_schema": "1.0",
+        "processor_id": "quality.basic",
+        "processor_provenance": {
+          "input_representation": "local original image, EXIF-transposed RGB",
+          "max_pixels": 50000000,
+          "processor_version": "1.0"
+        },
+        "selection_id": "selection-886f0325fe354cf6e14ff927"
+      }
+    },
+    "detect.nudenet": {
+      "run_id": "74116fbd5aaf486e92d01ce872d97104",
+      "estimate_digest": "6ba0e757c3874cd6a421e0785ef524310aa00d509c8aae9954ac0a4e950b423c",
+      "status": "completed",
+      "artifact_ids": [
+        "cae9fb5b5a1724243d367a81"
+      ],
+      "errors": [],
+      "coverage": {
+        "completed": 16,
+        "failed": 0,
+        "max_output_bytes": 67108864,
+        "not_applicable": 0,
+        "output_bytes": 14288,
+        "queued": 0,
+        "running": 0,
+        "skipped": 0,
+        "status": "completed",
+        "total": 16
+      },
+      "provenance": {
+        "config": {
+          "extraction_threshold": 0.25,
+          "model_sha256": "c15d8273adad2d0a92f014cc69ab2d6c311a06777a55545f2c4eb46f51911f0f"
+        },
+        "config_digest": "f273152acd224b6f94ab949b40bb8288e070c749a3bf9bc4331b9c79a02ad7d2",
+        "input_representation": "original",
+        "model_revision": null,
+        "output_schema": "1.0",
+        "processor_id": "detect.nudenet",
+        "processor_provenance": {
+          "box_coordinates": "xyxy pixels in EXIF-transposed image",
+          "extraction_threshold": 0.25,
+          "input_representation": "local original image, EXIF-transposed RGB",
+          "max_pixels": 50000000,
+          "model_id": "nudenet",
+          "model_internal_threshold": 0.25,
+          "model_sha256": "c15d8273adad2d0a92f014cc69ab2d6c311a06777a55545f2c4eb46f51911f0f",
+          "package_version": "3.4.2",
+          "processor_version": "1.0"
+        },
+        "selection_id": "selection-886f0325fe354cf6e14ff927"
+      }
+    }
+  },
+  "scope": "Functional local runtime verification on a frozen preview selection; no benchmark-accuracy claim.",
+  "external_model_requests": 0
+}

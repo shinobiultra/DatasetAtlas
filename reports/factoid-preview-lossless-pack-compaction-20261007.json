@@ -1,0 +1,29 @@
+{
+  "checked_at_utc": "2026-10-07T09:14:26.422851+00:00",
+  "status": "passed",
+  "packs": [
+    {
+      "workspace": "primary",
+      "snapshot_id": "factoid-38d3940905bae0fa7c110111",
+      "records": 100,
+      "before_bytes": 107428878,
+      "after_bytes": 62801601,
+      "before_sha256": "e55041e4540e326171afaee18fae96270b28f498833d8fce74846756f35f4258",
+      "after_sha256": "05d9bf9dbe8bc7c23f7821c4735031698a5e5f7239d683ec109f6bc09853ca75",
+      "canonical_value_sha256": "fbe2b6b49c13a24a9c8730744c3e1b2e6304527002743211cf4028aead5d437f",
+      "all_typed_json_values_identical": true
+    },
+    {
+      "workspace": "fresh",
+      "snapshot_id": "factoid-38d3940905bae0fa7c110111",
+      "records": 100,
+      "before_bytes": 107428878,
+      "after_bytes": 62801601,
+      "before_sha256": "e55041e4540e326171afaee18fae96270b28f498833d8fce74846756f35f4258",
+      "after_sha256": "05d9bf9dbe8bc7c23f7821c4735031698a5e5f7239d683ec109f6bc09853ca75",
+      "canonical_value_sha256": "fbe2b6b49c13a24a9c8730744c3e1b2e6304527002743211cf4028aead5d437f",
+      "all_typed_json_values_identical": true
+    }
+  ],
+  "reason": "107MB pretty JSON exceeded100MB interactive input bound. Compact JSON preserves every typed value; native originals, records and snapshot identity do not change."
+}

@@ -1,3 +1,5 @@
+import { NoPreviewGuide } from './GuideCards'
+import { displayUrl } from '../lib/display'
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import type { Artifact, Dataset, FieldDescriptor, Query, Record as AtlasRecord, Selection } from '../generated'
@@ -14,12 +16,13 @@ import { CompareView } from './CompareView'
 import { FilterRail } from './FilterRail'
 import { OverviewTab } from './OverviewTab'
 import { SampleInspector } from '../panels/SampleInspector'
+import { PrepareDataset, PREPARE_EVENT } from '../panels/PrepareDataset'
 import { AboutPanel } from '../panels/AboutPanel'
 import { AnalyzePanel } from '../panels/AnalyzePanel'
 import { ModelPanel } from '../panels/ModelPanel'
 import {
   canBrowse, clauseFilter, defaultColumnFields, MAP_MAX_POINTS, MAP_PAGE_SIZE, PAGE_SIZE, projectionArtifacts,
-  scopeSummary, supportsComplete, useBrowse, type Clause, type PopulationScope, type Unit, type View,
+  runLabel, scopeSummary, supportsComplete, useBrowse, type Clause, type PopulationScope, type Unit, type View,
 } from './model'
 
 type Panel = 'inspector' | 'about' | 'analyze' | 'model'
@@ -42,6 +45,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
   const [loadError, setLoadError] = useState('')
   const [fields, setFields] = useState<FieldDescriptor[]>([])
   const [artifacts, setArtifacts] = useState<Artifact[]>([])
+  const [selectedResultIds, setSelectedResultIds] = useState<string[]>([])
   const [scope, setScope] = useState<PopulationScope>('preview')
   const [complete, setComplete] = useState<CompleteScope | null>(null)
   const [unit, setUnit] = useState<Unit>('example')
@@ -85,11 +89,20 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
     setSearch(''); setClauses([]); setSort(null); setSample(null); setSelected(new Set()); setInspected(null)
     setExtraRecord(null); setPanel(null); setCentre('browse'); setComparePair([null, null]); setSavedSelection(null)
     setColourFieldId(''); setProjectionId('')
+    setSelectedResultIds([])
     provider.dataset(datasetId).then(async item => {
       if (!live) return
       setDataset(item)
       setUnit((item.coverage?.unit as Unit) ?? 'example')
       if (!canBrowse(item)) return
+      if (!(item.coverage?.preview_count ?? 0) && item.availability?.complete_data === 'local') {
+        const [info, available] = await Promise.all([provider.completeInfo(datasetId), provider.artifacts(datasetId)])
+        if (!live) return
+        setComplete(info); setFields(info.fields); setUnit(info.unit as Unit)
+        setArtifacts(available.filter(artifact => artifact.unit === info.unit && artifact.snapshot_ids.includes(info.snapshot_id)))
+        setScope('complete')
+        return
+      }
       const [loadedFields, loadedArtifacts] = await Promise.all([provider.fields(datasetId), provider.artifacts(datasetId)])
       if (!live) return
       setFields(loadedFields)
@@ -114,6 +127,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
         setUnit((dataset.coverage?.unit as Unit) ?? 'example')
       }
       setClauses([]); setSort(null); setSelected(new Set()); setInspected(null); setCentre('browse')
+      setSelectedResultIds([]); setColourFieldId('')
       setScope(next)
       setLoadError('')
     } catch (failure) {
@@ -136,7 +150,22 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
 
   /* ---------- the query ---------- */
   const snapshotId = scope === 'complete' ? complete?.snapshot_id ?? '' : dataset?.snapshot_id ?? ''
-  const resultSnapshotIds = useMemo(() => artifacts.filter(item => item.unit === unit).map(item => item.id).sort(), [artifacts, unit])
+  const resultSnapshotIds = useMemo(() => artifacts.filter(item => item.unit === unit && selectedResultIds.includes(item.id)).map(item => item.id).sort(), [artifacts, unit, selectedResultIds])
+
+  // Attaching every historical run makes unrelated browsing grow without bound.
+  // The picker preserves explicit query provenance and the API's 32-run limit;
+  // direct inspection and projection selection still have access to every run.
+  function toggleResult(id: string, enabled: boolean) {
+    if (enabled) {
+      if (resultSnapshotIds.length >= 32) return
+      setSelectedResultIds(current => [...current, id])
+    } else {
+      setSelectedResultIds(current => current.filter(value => value !== id))
+      setClauses(current => current.filter(clause => !clause.fieldId.startsWith(`prediction.${id}.`)))
+      setSort(current => current?.field_id.startsWith(`prediction.${id}.`) ? null : current)
+      setColourFieldId(current => current.startsWith(`prediction.${id}.`) ? '' : current)
+    }
+  }
 
   const query = useMemo<Query | null>(() => {
     if (!dataset || !snapshotId) return null
@@ -153,7 +182,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
     }
   }, [dataset, snapshotId, scope, resultSnapshotIds, unit, search, clauses, sort, sample, view])
 
-  const browsable = dataset ? canBrowse(dataset) : false
+  const browsable = dataset ? canBrowse(dataset) && (scope === 'complete' || (dataset.coverage?.preview_count ?? 0) > 0) : false
   const browse = useBrowse(datasetId, query, browsable, view === 'map' ? MAP_MAX_POINTS : Infinity)
   const { records, result, loading, loadingMore, hasMore, loadMore } = browse
   const sentinel = useInfiniteSentinel(loadMore, hasMore && !loading && !loadingMore && view !== 'map')
@@ -245,7 +274,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
   }, [dataset, selected, selectionName, unit, snapshotId, datasetId, sample, query, onToast, onSelectionSaved])
 
   /* ---------- derived ---------- */
-  const unitFields = useMemo(() => fields.filter(field => (field.unit ?? 'example') === unit), [fields, unit])
+  const unitFields = useMemo(() => fields.filter(field => (field.unit ?? 'example') === unit && !artifacts.some(item => field.id.startsWith(`prediction.${item.id}.`) && !resultSnapshotIds.includes(item.id))), [fields, unit, artifacts, resultSnapshotIds])
   const chosenColumnIds = columnIds[`${datasetId}:${unit}`]
   const defaultColumns = useMemo(() => defaultColumnFields(unitFields, records).map(field => field.id), [unitFields, records])
   const activeColumnIds = chosenColumnIds ?? defaultColumns
@@ -290,7 +319,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
       <div className="ds-header">
         <div className="ds-mosaic" aria-hidden>
           {(thumbs?.tiles ?? []).filter(tile => tile.kind === 'image').slice(0, 4).map((tile, index) => (
-            <img key={index} src={(tile as { uri: string }).uri} alt="" loading="lazy" onError={event => { event.currentTarget.style.visibility = 'hidden' }} />
+            <img key={index} src={displayUrl((tile as { uri: string }).uri)} alt="" loading="lazy" onError={event => { event.currentTarget.style.visibility = 'hidden' }} />
           ))}
           {!(thumbs?.tiles ?? []).some(tile => tile.kind === 'image') && <div className="ph" style={{ gridColumn: '1 / -1', gridRow: '1 / -1' }}><Icon.Database size={20} /></div>}
         </div>
@@ -301,15 +330,28 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
             <span>{(dataset.modalities ?? []).map(titleCase).join(' + ') || 'Modality unknown'}</span>
             <span className="sep">·</span>
             <span>{(dataset.tasks ?? []).map(titleCase).join(', ') || 'Task unrecorded'}</span>
-            {summary && <><span className="sep">·</span><span>{summary.label}</span></>}
+            {summary && <><span className="sep">·</span><span>{provider.mode === 'static' && !canBrowse(dataset) ? 'No examples published here' : summary.label}</span></>}
           </div>
         </div>
         <div className="ds-header-actions">
+          {artifacts.some(item => item.unit === unit) && (
+            <Popover label="Results for browsing" trigger={() => <>Results ({resultSnapshotIds.length})<Icon.ChevronDown size={12} /></>}>
+              {() => <div style={{ maxWidth: 360 }}>
+                <p className="hint">Choose up to 32 runs for filters, columns and map colours. The inspector and projection selector can access every run.</p>
+                <div className="col" style={{ maxHeight: 320, overflow: 'auto', marginTop: 8 }}>
+                  {artifacts.filter(item => item.unit === unit).map(item => <label className="facet-opt" key={item.id} title={item.id}>
+                    <input type="checkbox" aria-label={`Use result ${item.id}`} checked={resultSnapshotIds.includes(item.id)} disabled={!resultSnapshotIds.includes(item.id) && resultSnapshotIds.length >= 32} onChange={event => toggleResult(item.id, event.target.checked)} />
+                    <span>{runLabel(item)}</span>
+                  </label>)}
+                </div>
+              </div>}
+            </Popover>
+          )}
           {browsable && provider.mode === 'workbench' && <button type="button" className="btn" onClick={() => void refreshResults()}>Refresh results</button>}
           {supportsComplete(dataset) && (
             <Segmented
               label="Population scope" value={scope} onChange={value => void changeScope(value)}
-              options={[{ value: 'preview', label: 'Preview' }, { value: 'complete', label: 'Complete index' }]}
+              options={[...((dataset.coverage?.preview_count ?? 0) > 0 || dataset.availability?.complete_data !== 'local' ? [{ value: 'preview' as const, label: 'Preview' }] : []), { value: 'complete', label: 'Complete index' }]}
             />
           )}
           <button type="button" className="btn" aria-pressed={panel === 'about'} onClick={() => setPanel(panel === 'about' ? 'inspector' : 'about')}>
@@ -319,6 +361,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
       </div>
       <div className="ds-tabs">
         <Tabs label="Dataset view" value={tab} onChange={onTab} options={[{ value: 'samples', label: 'Samples' }, { value: 'overview', label: 'Overview' }]} />
+        {provider.mode === 'workbench' && <PrepareDataset key={dataset.id} datasetId={dataset.id} onRequest={dataset.availability?.preview === 'on_request'} />}
       </div>
     </>
   )
@@ -330,10 +373,25 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
         {header}
         <div className="work-scroll">
           <div className="page">
-            <Notice tone="warn">
-              <strong>No inspectable examples here yet.</strong> This catalogue entry has no prepared preview
-              {provider.mode === 'static' ? ' approved for the public build' : ' in this workbench'}.
-            </Notice>
+            {provider.mode === 'workbench' && dataset.availability?.preview === 'on_request' ? (
+              <div className="card card-pad">
+                <h3 style={{ marginBottom: 6 }}>Preview not fetched on this machine yet</h3>
+                <p style={{ margin: '0 0 10px' }}>
+                  A {(dataset.availability.upstream_preview_count ?? 0).toLocaleString()}-{dataset.coverage?.unit ?? 'example'} preview is recorded for this dataset.
+                  Getting it downloads the records and media from the original source to this workbench; you see the size and the
+                  source plan before anything is fetched.
+                </p>
+                <div className="row">
+                  <button type="button" className="btn primary" onClick={() => window.dispatchEvent(new CustomEvent(PREPARE_EVENT, { detail: dataset.id }))}>Get preview</button>
+                </div>
+              </div>
+            ) : (
+              <Notice tone="warn">
+                <strong>No inspectable examples here yet.</strong> This catalogue entry has no prepared preview
+                {provider.mode === 'static' ? ' approved for the public build' : ' in this workbench'}.
+              </Notice>
+            )}
+            {provider.mode === 'static' && <NoPreviewGuide key={dataset.id} dataset={dataset} />}
             <div className="card card-pad">
               <h3 style={{ marginBottom: 10 }}>Why, precisely</h3>
               <dl className="dl">
@@ -350,13 +408,16 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
                   </ul>
                 </>
               )}
-              <p className="hint" style={{ marginTop: 12 }}>
-                An unimplemented adapter is an implementation gap in Dataset Atlas, not a restriction imposed by the source.
-              </p>
+              {!['tested', 'implemented'].includes(dataset.coverage?.adapter ?? '') && (
+                <p className="hint" style={{ marginTop: 12 }}>
+                  An adapter that is not implemented is an implementation gap in Dataset Atlas, not a restriction imposed by the source.
+                </p>
+              )}
               <div className="row" style={{ marginTop: 12 }}>
                 <button type="button" className="btn" onClick={() => setPanel('about')}><Icon.Info size={13} />Open full record</button>
               </div>
             </div>
+            <RelatedBrowsable dataset={dataset} onOpenDataset={onOpenDataset} />
           </div>
         </div>
       </div>
@@ -617,11 +678,11 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
           </div>
           <div className="ctx-scroll">
             {panel === 'inspector' && (record
-              ? <SampleInspector record={record} fields={fields} artifacts={artifacts} query={query} datasetId={datasetId} onOpenRecord={openRecordById} onFocus={() => focusRecord(record.id)} />
+              ? <SampleInspector mediaControls={centre !== 'focus'} record={record} fields={fields} artifacts={artifacts} query={query} datasetId={datasetId} onOpenRecord={openRecordById} onFocus={() => focusRecord(record.id)} />
               : <div className="insp-section"><Empty title="Nothing inspected">Click a card or row to inspect it. Clicking never changes your selection.</Empty></div>)}
             {panel === 'about' && <AboutPanel dataset={dataset} onOpenDataset={onOpenDataset} />}
-            {panel === 'analyze' && <AnalyzePanel selected={[...selected]} unit={unit} saved={savedSelection} onSave={saveSelection} onRan={onToast} />}
-            {panel === 'model' && <ModelPanel selected={[...selected]} unit={unit} onNotice={onToast} />}
+            {panel === 'analyze' && <AnalyzePanel selected={[...selected]} unit={unit} saved={savedSelection} fields={unitFields} artifacts={artifacts} populationScope={scope} onSave={saveSelection} onRan={onToast} onSelectIds={ids => { setSelected(new Set(ids)); setSavedSelection(null) }} />}
+            {panel === 'model' && <ModelPanel selected={[...selected]} unit={unit} snapshotIds={snapshotId ? [snapshotId] : undefined} fields={unitFields} resultSnapshotIds={resultSnapshotIds} onNotice={onToast} />}
           </div>
         </aside>
       )}
@@ -711,6 +772,40 @@ function SampleForm({ sample, onApply }: { sample: { method: string; size: numbe
         <button type="button" className="btn primary" onClick={() => onApply({ method, size, seed })}>Apply sample</button>
         {sample && <button type="button" className="btn" onClick={() => onApply(null)}>Remove</button>}
       </div>
+    </div>
+  )
+}
+
+/** Related catalogue entries that do have inspectable examples here. A relation is not an identity claim. */
+function RelatedBrowsable({ dataset, onOpenDataset }: { dataset: Dataset; onOpenDataset: (id: string) => void }) {
+  const relations = useMemo(() => ((dataset.relationships ?? []) as Array<Record<string, unknown>>)
+    .map(item => ({ target: String(item.target_id ?? item.target ?? ''), type: String(item.type ?? 'related').replaceAll('_', ' '), scope: typeof item.scope === 'string' ? item.scope : '' }))
+    .filter(item => item.target), [dataset])
+  const [catalogue, setCatalogue] = useState<Dataset[]>([])
+  useEffect(() => {
+    let live = true
+    if (relations.length) provider.datasets().then(items => { if (live) setCatalogue(items) }).catch(() => {})
+    return () => { live = false }
+  }, [relations.length])
+  const browsable = relations.flatMap(item => {
+    const target = catalogue.find(entry => entry.id === item.target)
+    return target && canBrowse(target) ? [{ ...item, target }] : []
+  })
+  if (!browsable.length) return null
+  return (
+    <div className="card card-pad" style={{ marginTop: 12 }}>
+      <h3 style={{ marginBottom: 6 }}>Related entries you can browse</h3>
+      <p className="hint" style={{ marginTop: 0 }}>
+        These have real examples here. A family or source relation does not establish that they are the exact release or subset this entry names.
+      </p>
+      {browsable.map(item => (
+        <div key={item.target.id} className="row" style={{ gap: 8, padding: '5px 0', flexWrap: 'wrap', fontSize: 'var(--fs-md)' }}>
+          <Tag>{item.type}</Tag>
+          <button type="button" className="linkish" onClick={() => onOpenDataset(item.target.id)}>{item.target.name}</button>
+          <span className="hint">{(item.target.coverage?.preview_count ?? 0).toLocaleString()} {item.target.coverage?.unit ?? 'example'} preview records</span>
+          {item.scope && <span className="hint" style={{ flexBasis: '100%', fontSize: 'var(--fs-sm)' }}>{item.scope}</span>}
+        </div>
+      ))}
     </div>
   )
 }

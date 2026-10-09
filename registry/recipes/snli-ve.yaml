@@ -1,0 +1,60 @@
+release: author-linked-allennlp-snli-ve-2020
+adapter: structured_collection
+expected_count: 565286
+scope: All native SNLI-VE train/dev/test pair rows from the author-linked AllenNLP release; original premise,
+  hypothesis, parse strings, annotator labels, gold label, pair/caption IDs and Flickr image key retained.
+  Native pairs are joined to the separately pinned Flickr30K mirror; mirror byte equality to the historical
+  image TAR and the paper-selected pairs remains unverified.
+convert:
+  name: snli_ve_native
+  count: 565286
+  rows_sha256: b0938bea6d327f46884b063a7d22e1d785250dffc06bcdb39d9d8d94505cabcf
+allowed_hosts:
+- storage.googleapis.com
+remote_metadata_bytes: 10000000
+adapter_config:
+  media_scope: partial
+  verify_remote_preview_media: true
+  mapping:
+    id: source_id
+    text: sentence2
+    label: gold_label
+  annotations:
+  - path_key: path
+    format: jsonl
+    split: native
+    media_paths_field: media_ref
+    media_archive: images
+  remote_archives:
+    images:
+      url: https://huggingface.co/datasets/nlphuji/flickr30k/resolve/2b239befc81b6e3f035ce6bd52f5f4d60f5625f7/flickr30k-images.zip
+      bytes: 4390240817
+      etag: '"f78a015e45ea38d4367367223b2bb63cec0d549d5da13c6211663e5439a93216"'
+      allowed_hosts:
+      - huggingface.co
+      - cas-bridge.xethub.hf.co
+      - us.aws.cdn.hf.co
+      - cdn-lfs-us-1.huggingface.co
+  remote_cache_root: work/media-cache/flickr30k
+  remote_cache_bytes: 100000000
+  max_annotation_bytes: 1500000000
+  media_transfer_bytes: 50000000
+files:
+- source_name: snli_ve_dev.jsonl.gz
+  url: https://storage.googleapis.com/allennlp-public-data/snli-ve/snli_ve_dev.jsonl.gz?generation=1606973478503474
+  bytes: 1494602
+  sha256: ecd9f5b059b1a7f98e2ff87e5d28be7fd84cf361cf11201868af9e6dc93b8830
+  config_key: dev
+  format: jsonl.gz
+- source_name: snli_ve_test.jsonl.gz
+  url: https://storage.googleapis.com/allennlp-public-data/snli-ve/snli_ve_test.jsonl.gz?generation=1606973478833441
+  bytes: 1496478
+  sha256: 2171edb6bcd69a11ad542261ddf02984d9476b9aac2705d245f799e329215fdf
+  config_key: test
+  format: jsonl.gz
+- source_name: snli_ve_train.jsonl.gz
+  url: https://storage.googleapis.com/allennlp-public-data/snli-ve/snli_ve_train.jsonl.gz?generation=1606973479592502
+  bytes: 44673835
+  sha256: fefcb4af598dee91005e25bbad4a4149895126e0acad9ab74ccf830325a82f9b
+  config_key: train
+  format: jsonl.gz

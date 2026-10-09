@@ -2,8 +2,8 @@ schema_version: '1.0'
 id: illusionmnist
 name: IllusionMNIST
 aliases: []
-description: IllusoryVQA IllusionMNIST subdataset. Author project names IllusionMNIST among four specialized
-  Illusory VQA datasets; corpus use is related-work comparison
+description: IllusoryVQA IllusionMNIST subdataset. Author project names IllusionMNIST
+  among four specialized Illusory VQA datasets; corpus use is related-work comparison
 paper_ids:
 - paper-20de77d4e60fd1bd
 release: unresolved
@@ -11,8 +11,8 @@ adapter: structured
 adapter_config: {}
 coverage:
   identity: family_or_variant_candidate
-  source: family_verified_variant_unpinned
-  access: base_source_public_variant_unverified
+  source: verified
+  access: public
   adapter: not_started
   preview: none
   complete_data: unimplemented
@@ -35,14 +35,14 @@ evidence:
   source_file_hash: ccc6f6fee4214f0656c164535cbe29f1cbbce5769b311c93f08e1110437f29e0
   page: 8
   role: related-work comparison
-  excerpt: asets 5. Related Works (e.g., IllusionMNIST) for illusion recognition; The Art of 5.1. Multimodal
-    Large Language Models Deception
+  excerpt: asets 5. Related Works (e.g., IllusionMNIST) for illusion recognition;
+    The Art of 5.1. Multimodal Large Language Models Deception
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://github.com/IllusoryVQA/IllusoryVQA
-  note: Author project names IllusionMNIST among four specialized Illusory VQA datasets; corpus use is
-    related-work comparison
+  note: Author project names IllusionMNIST among four specialized Illusory VQA datasets;
+    corpus use is related-work comparison
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_family_located_subset_unpinned
@@ -54,9 +54,22 @@ evidence:
   source_identity_status: author_family_located_subset_unpinned
 - kind: source_audit_access
   url: https://github.com/IllusoryVQA/IllusoryVQA
-  note: base_source_public_variant_unverified; Keep this as a subdataset of IllusoryVQA; do not confuse
-    with separate IllusionVQA benchmark.
+  note: base_source_public_variant_unverified; Keep this as a subdataset of IllusoryVQA;
+    do not confuse with separate IllusionVQA benchmark.
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_family_located_subset_unpinned
+- kind: implemented_source_release
+  url: https://github.com/IllusoryVQA/IllusoryVQA
+  checked_on: '2026-09-23'
+  report: reports/selective-acquisition-20260923.md
+  note: Pinned acquired population and real preview exercised locally. Mirror and
+    selective-transfer limits remain in the acquisition receipts; this does not establish
+    publication rights or the exact paper-used subset.
+  recipe: registry/recipes/illusionmnist.yaml
 source_url: https://github.com/IllusoryVQA/IllusoryVQA
+modalities:
+- image
+- text
+tasks:
+- visual illusion reasoning

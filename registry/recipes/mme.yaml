@@ -1,0 +1,20 @@
+release: 7056f44dac19de35e510b62d734bb2f7a6f64739
+adapter: mme
+expected_count: 2374
+source_url: https://github.com/BradyFU/Awesome-Multimodal-Large-Language-Models/tree/Evaluation
+scope: All 2374 native question rows in all fourteen categories of the author-linked
+  MME benchmark ZIP. Retain both questions per image, native answers, category and
+  pair identity. No inferred publication rights.
+adapter_config:
+  dataset_kind: mme
+  mapping:
+    question: question
+    answer: answer
+  max_annotation_bytes: 20000000
+files:
+- source_name: mme.zip
+  url: https://huggingface.co/datasets/darkyarding/MME/resolve/7056f44dac19de35e510b62d734bb2f7a6f64739/MME_Benchmark_release_version.zip
+  sha256: 1c4b79b494eae354df8fc0728c64fe4b89e46b4c609d36003be15dace6d8e3d7
+  bytes: 199848448
+  config_key: path
+  format: zip

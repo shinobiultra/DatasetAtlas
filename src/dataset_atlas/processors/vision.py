@@ -15,6 +15,7 @@ from PIL import Image, ImageOps, UnidentifiedImageError
 from dataset_atlas.models import Asset, Record
 from dataset_atlas.storage.local import read_rooted_file
 from .core import package_version
+from .device import torch_device
 
 
 def _load(asset: Asset, roots: list[str], max_pixels: int) -> tuple[Image.Image, bytes]:
@@ -116,9 +117,10 @@ def _model(processor_id: str, config: dict[str, Any]):
         raise ValueError("COCO_V1 weights_sha256 mismatch or wrong weight revision")
     model = detection.fasterrcnn_mobilenet_v3_large_320_fpn(weights=None, weights_backbone=None)
     model.load_state_dict(torch.load(io.BytesIO(weights_data), map_location="cpu", weights_only=True))
-    model.eval()
+    device,device_provenance=torch_device(torch,config)
+    model.to(device).eval()
     return (model, weights), {"model_id": "torchvision/fasterrcnn_mobilenet_v3_large_320_fpn", "weight_revision": "COCO_V1",
-                              "weights_sha256": digest, "package_version": package_version("torchvision")}
+                              "weights_sha256": digest, "package_version": package_version("torchvision"),**device_provenance}
 
 
 def run_vision(processor_id: str, records: list[Record], config: dict[str, Any], should_cancel=None):
@@ -181,7 +183,7 @@ def run_vision(processor_id: str, records: list[Record], config: dict[str, Any],
                     torch = importlib.import_module("torch")
                     detector, weights = model
                     with torch.inference_mode():
-                        predicted = detector([weights.transforms()(image)])[0]
+                        predicted = detector([weights.transforms()(image).to(provenance.get('device','cpu'))])[0]
                     raw = {key: predicted[key].detach().cpu().tolist() for key in ("labels", "scores", "boxes")}
                     detections = _normalize_coco(raw, weights.meta["categories"], width, height, threshold)
                     output = {"width": width, "height": height, "file_sha256": digest, "detections": detections}

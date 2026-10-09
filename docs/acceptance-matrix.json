@@ -1,0 +1,282 @@
+{
+  "schema": "SPEC 22.1 acceptance traceability",
+  "rows": [
+    {
+      "id": "corpus",
+      "spec_row": "Corpus",
+      "condition": "Every paper has a processing outcome; accepted mentions have evidence.",
+      "pytest": [
+        "tests/unit/test_corpus_pipeline.py::test_scan_accounts_for_copies_ris_links_and_external_symlinks",
+        "tests/unit/test_corpus_pipeline.py::test_extract_keeps_failure_distinct_from_no_mentions",
+        "tests/unit/test_corpus_pipeline.py::test_mentions_keep_page_hash_excerpt_and_bibliography_role",
+        "tests/unit/test_corpus_pipeline.py::test_agent_full_review_is_distinct_from_human_approval",
+        "tests/unit/test_acceptance_matrix.py::test_corpus_gives_every_paper_an_outcome_and_every_mention_its_evidence"
+      ],
+      "playwright": [],
+      "receipts": [
+        "reports/corpus_coverage.md"
+      ],
+      "note": "Synthetic papers (a broken PDF, a named mention, a silent paper) each get an outcome from the fixed outcome set, and every extracted mention carries file hash, excerpt, location and review_status candidate_unreviewed. The pipeline accepts no mention by itself: reports/corpus_coverage.md (generated 2026-09-22) records 64 agent-complete mention inventories and 0 human-approved papers, so \"accepted mentions have evidence\" is checked only as \"candidate mentions carry evidence\"; human acceptance of mentions is not established by this row."
+    },
+    {
+      "id": "identity",
+      "spec_row": "Identity",
+      "condition": "IDs survive sorting, pagination, remounting, and export/import.",
+      "pytest": [
+        "tests/unit/test_queries.py::test_cursor_pins_query_and_snapshot",
+        "tests/unit/test_queries.py::test_sort_null_last_both_directions",
+        "tests/unit/test_queries.py::test_roundtrip_preserves_structure",
+        "tests/unit/test_exports.py::test_selection_export_roundtrip_and_tampering",
+        "tests/unit/test_exports.py::test_portable_pack_roundtrip_rejects_traversal_and_private_data",
+        "tests/integration/test_api.py::test_workbench_queries_selection_and_security",
+        "tests/unit/test_acceptance_matrix.py::test_ids_survive_sort_pagination_and_export_import"
+      ],
+      "playwright": [
+        "apps/web/e2e/workspace.spec.ts",
+        "apps/web/e2e/linked-journey.spec.ts"
+      ],
+      "receipts": [],
+      "note": "Sorting, cursor pagination and export/import of packs and saved selections are asserted in pytest on synthetic records. Remounting (returning to the same browsing state, re-importing a saved selection) is only covered by the Playwright specs, which this script checks exist but does not run; the re-import test there is skipped without ATLAS_LIVE_API."
+    },
+    {
+      "id": "repeated-images",
+      "spec_row": "Repeated images",
+      "condition": "Multiple questions reference one asset without duplicating image-only computation.",
+      "pytest": [
+        "tests/unit/test_queries.py::test_asset_unit_deduplicates_questions_without_label_leakage",
+        "tests/unit/test_processors.py::test_detector_box_geometry_and_zero_detections",
+        "tests/unit/test_jobs.py::test_estimate_reports_shared_assets_and_unknown_footprint",
+        "tests/unit/test_jobs.py::test_asset_worker_batches_repeated_asset_once",
+        "tests/unit/test_detector_view.py::test_threshold_view_deduplicates_byte_identical_originals_in_counts"
+      ],
+      "playwright": [],
+      "receipts": [],
+      "note": "Asset-unit queries collapse shared images; the detector runs once for byte-identical originals; run estimates count unique assets; the asset worker batches a repeated asset once. Synthetic fixtures only; no real multi-question dataset is exercised by these nodes."
+    },
+    {
+      "id": "overlays",
+      "spec_row": "Overlays",
+      "condition": "Join failures are counted and visible; no silent record loss.",
+      "pytest": [
+        "tests/unit/test_acceptance_matrix.py::test_a_pack_overlay_join_counts_result_items_that_match_no_record",
+        "tests/unit/test_parquet_queries.py::test_result_join_requires_explicit_matching_snapshot_and_unit",
+        "tests/unit/test_exports.py::test_derived_overlay_is_pinned_and_joins_by_snapshot_and_id"
+      ],
+      "playwright": [],
+      "receipts": [],
+      "note": "attach_results (the pack overlay join) now counts a result item whose record is absent as coverage.items_unjoined on the attached artifact; the Parquet join and the publication overlay reject such an item loudly. Automated checks only."
+    },
+    {
+      "id": "query-parity",
+      "spec_row": "Query parity",
+      "condition": "Static and workbench providers return the same IDs for supported queries over the same snapshot.",
+      "pytest": [
+        "tests/unit/test_parquet_queries.py::test_typed_boolean_filter_and_static_parity",
+        "tests/unit/test_parquet_queries.py::test_seeded_sampling_matches_pack_and_pages[random]",
+        "tests/unit/test_parquet_queries.py::test_seeded_sampling_matches_pack_and_pages[stratified]"
+      ],
+      "playwright": [],
+      "receipts": [],
+      "note": "pytest compares the pack query path with the Parquet workbench path on the same synthetic snapshot (filter, sort, sampling, paging). The TypeScript static provider is compared with Python-generated cases by Vitest (apps/web/src/query.test.ts against apps/web/src/test-fixtures/query-parity.json, produced by apps/web/scripts/generate_query_parity_fixture.py); `npm test` is not run by this script, so that half is not re-verified here."
+    },
+    {
+      "id": "scope",
+      "spec_row": "Scope",
+      "condition": "Preview-only results never appear as complete-release statistics.",
+      "pytest": [
+        "tests/unit/test_queries.py::test_sampling_frozen_and_scope",
+        "tests/unit/test_catalogue_and_aggregate.py::test_aggregate_respects_the_filter_and_states_its_scope",
+        "tests/unit/test_catalogue_and_aggregate.py::test_aggregate_never_presents_a_sample_as_prevalence",
+        "tests/unit/test_catalogue_and_aggregate.py::test_aggregate_endpoint_matches_the_query_semantics",
+        "tests/unit/test_parquet_queries.py::test_snapshot_identity_checksum_root_and_count_enforced",
+        "tests/unit/test_acceptance_matrix.py::test_a_preview_pack_refuses_complete_scope_and_labels_its_counts_as_preview"
+      ],
+      "playwright": [
+        "apps/web/e2e/workspace.spec.ts"
+      ],
+      "receipts": [],
+      "note": "Query results and aggregates carry population_scope and a preview warning, and a preview pack refuses a complete-scope request. Whether the interface always shows that label is asserted only in the Playwright spec, which is not run here."
+    },
+    {
+      "id": "sampling",
+      "spec_row": "Sampling",
+      "condition": "Saved IDs reproduce the selection; unit and method remain visible.",
+      "pytest": [
+        "tests/unit/test_queries.py::test_sampling_frozen_and_scope",
+        "tests/unit/test_parquet_queries.py::test_seeded_sampling_matches_pack_and_pages[random]",
+        "tests/unit/test_parquet_queries.py::test_seeded_sampling_matches_pack_and_pages[stratified]",
+        "tests/unit/test_preview_sampling.py::test_sample_is_order_independent_distinct_and_bounded",
+        "tests/integration/test_api.py::test_workbench_queries_selection_and_security",
+        "tests/test_api_review.py::test_complete_result_join_and_selection_export_scope",
+        "tests/unit/test_catalogue_and_aggregate.py::test_aggregate_never_presents_a_sample_as_prevalence"
+      ],
+      "playwright": [],
+      "receipts": [],
+      "note": "Seeded samples are reproducible and portable between providers; saved selections store the actual IDs, unit and query and survive export. Method and unit appear in query results (coverage.sampling, unit); how the interface renders them is not asserted by these nodes."
+    },
+    {
+      "id": "retrieval",
+      "spec_row": "Retrieval",
+      "condition": "Filtered search respects its population; exact results validate approximate indexes.",
+      "pytest": [
+        "tests/unit/test_processors.py::test_lancedb_contract_prefilters_before_exact_search",
+        "tests/unit/test_import_embedding_space.py::test_registered_import_pca_and_exact_retrieval_preserve_original_vectors",
+        "tests/unit/test_preparation.py::test_complete_scope_similarity"
+      ],
+      "not_applicable_clauses": [
+        {
+          "clause": "exact results validate approximate indexes",
+          "cite": "SPEC 11.3 and 11.4 (approximate indexes are added only after measuring workload; exact search is the validation path once they exist)",
+          "pytest": [
+            "tests/unit/test_acceptance_matrix.py::test_no_approximate_vector_index_ships_so_there_is_nothing_for_exact_search_to_validate"
+          ]
+        }
+      ],
+      "playwright": [],
+      "receipts": [],
+      "note": "Retrieval is exact LanceDB search prefiltered to the eligible identities (SPEC 11.3). The clause about validating approximate indexes is not_applicable: a grep of src/ finds no index creation, IVF, HNSW or FAISS use, and the search bypasses the vector index; the cited node re-checks that claim. If an approximate index is ever added, this clause becomes applicable and needs a recall-against-exact test (SPEC 11.4). The LanceDB-backed nodes are skipped where lancedb is not installed; a skip is not a pass."
+    },
+    {
+      "id": "detector-results",
+      "spec_row": "Detector results",
+      "condition": "Missing, failed, and zero-detection cases remain distinct.",
+      "pytest": [
+        "tests/unit/test_detector_view.py::test_threshold_view_preserves_source_and_distinguishes_zero_failure_missing",
+        "tests/unit/test_detector_view.py::test_threshold_view_keeps_partial_coverage_counts_null",
+        "tests/unit/test_processors.py::test_detector_box_geometry_and_zero_detections",
+        "tests/unit/test_result_join.py::test_results_pin_status_and_zero_distinct"
+      ],
+      "playwright": [
+        "apps/web/e2e/media.spec.ts"
+      ],
+      "receipts": [
+        "reports/browser-verification.md"
+      ],
+      "note": "Zero detections count as 0, failed items keep no output, absent records are not_applicable, and a partially failed record reports null counts rather than 0. The display of missing/failed/zero states is in the Playwright spec and its recorded receipt, not re-run here."
+    },
+    {
+      "id": "geometry",
+      "spec_row": "Geometry",
+      "condition": "Overlays align after orientation, resizing, and letterboxing transformations.",
+      "pytest": [
+        "tests/unit/test_processors.py::test_quality_exif_orientation_and_symlink_rejection",
+        "tests/unit/test_processors.py::test_detector_box_geometry_and_zero_detections"
+      ],
+      "playwright": [
+        "apps/web/e2e/media.spec.ts"
+      ],
+      "receipts": [
+        "reports/browser-verification.md"
+      ],
+      "note": "pytest checks EXIF-transposed dimensions and box clamping to the transposed image. Pixel alignment through browser resizing and object-fit letterboxing is asserted only by the Playwright spec (an EXIF-6 fixture, 1 CSS pixel tolerance); it is not run by this script, so that evidence rests on the receipt in reports/browser-verification.md."
+    },
+    {
+      "id": "projections",
+      "spec_row": "Projections",
+      "condition": "Recolouring/filtering does not refit; artifact provenance survives export.",
+      "pytest": [
+        "tests/unit/test_processors.py::test_projection_missing_vectors_and_population_identity",
+        "tests/unit/test_import_embedding_space.py::test_registered_import_pca_and_exact_retrieval_preserve_original_vectors",
+        "tests/unit/test_acceptance_matrix.py::test_projection_provenance_survives_export_and_filtering_leaves_the_fit_untouched"
+      ],
+      "playwright": [
+        "apps/web/e2e/runtime-linked-journey.spec.ts",
+        "apps/web/e2e/synthetic-map.spec.ts"
+      ],
+      "receipts": [
+        "reports/browser-runtime-linked-journey-20261007.json"
+      ],
+      "note": "pytest: a fit has a stable fit_id and fitted-ID set, a result join and filter leave the artifact unchanged, and processor provenance survives pack export/import. Recolouring in the browser not refitting is shown only by the runtime journey receipt (projection_sha256_unchanged) and its Playwright spec, which are not re-run here."
+    },
+    {
+      "id": "model-context",
+      "spec_row": "Model context",
+      "condition": "Text-only models receive no false image-access claim; evaluation excludes disallowed fields.",
+      "pytest": [
+        "tests/unit/test_providers.py::test_context_requires_exact_approval_and_never_sends_on_preview",
+        "tests/unit/test_providers.py::test_evaluation_rejects_hidden_fields_even_if_requested",
+        "tests/unit/test_providers.py::test_image_requires_probe_and_allowed_real_bytes",
+        "tests/unit/test_context_result_snapshots.py::test_api_context_joins_only_explicit_compatible_results_and_binds_digest"
+      ],
+      "playwright": [],
+      "receipts": [],
+      "note": "Against a mock transport: a text-only evaluation context states that images are unavailable, excludes gold labels, filenames and model answers, refuses hidden fields, and needs a verified image capability and real bytes before any image is sent. No real model is called by these nodes."
+    },
+    {
+      "id": "tools",
+      "spec_row": "Tools",
+      "condition": "Bounds, schemas, roots, and network restrictions are enforced outside the model.",
+      "pytest": [
+        "tests/unit/test_providers.py::test_read_only_tool_scope_budget_and_receipt",
+        "tests/unit/test_providers.py::test_tool_loop_has_grounded_receipt_and_enforces_call_budget",
+        "tests/unit/test_providers.py::test_external_record_transmission_fails_closed_without_rights_policy",
+        "tests/unit/test_providers.py::test_config_and_probe_are_independent",
+        "tests/unit/test_providers.py::test_image_requires_probe_and_allowed_real_bytes",
+        "tests/unit/test_providers.py::test_production_tool_deadline_terminates_the_disposable_worker",
+        "tests/unit/test_providers.py::test_production_tool_reads_only_the_approved_native_metadata",
+        "tests/test_api_review.py::test_run_result_tool_uses_requested_ids_within_approved_scope"
+      ],
+      "playwright": [],
+      "receipts": [],
+      "note": "Allowlist, row limit, record scope, call budget, wall-clock deadline, configured media roots with symlink rejection, HTTPS-only external endpoints and a fail-closed external-transmission policy are asserted in code outside the model, with mock providers."
+    },
+    {
+      "id": "jobs",
+      "spec_row": "Jobs",
+      "condition": "Cancellation and restart do not duplicate successful work or register corrupt artifacts.",
+      "pytest": [
+        "tests/unit/test_jobs.py::test_successful_items_reused_and_recovered",
+        "tests/unit/test_jobs.py::test_stage_validation_rejects_wrong_record_id",
+        "tests/unit/test_jobs.py::test_cancelled_queued_run_retries_without_losing_frozen_inputs",
+        "tests/unit/test_jobs.py::test_restart_recovers_queued_frozen_run",
+        "tests/unit/test_jobs.py::test_subprocess_cancel_preserves_partial_and_retry",
+        "tests/unit/test_jobs.py::test_output_budget_rejects_oversized_stage",
+        "tests/unit/test_jobs.py::test_import_completed_run_checks_receipts_and_is_idempotent",
+        "tests/unit/test_preparation.py::test_retry_preserves_failed_attempt_and_resource_receipt"
+      ],
+      "playwright": [],
+      "receipts": [],
+      "note": "Successful items are not recomputed after restart, cancelled runs keep partial results and resume, a foreign or oversized staged result is rejected, and a tampered run import registers nothing. Analysis jobs use synthetic records; preparation retry is checked at the plan/receipt level."
+    },
+    {
+      "id": "publication",
+      "spec_row": "Publication",
+      "condition": "Secrets, absolute paths, PDFs, and unapproved media are rejected.",
+      "pytest": [
+        "tests/unit/test_exports.py::test_publication_requires_profile_and_rights_and_rejects_private_content",
+        "tests/unit/test_exports.py::test_publication_approved_records_strip_unapproved_annotations_and_media",
+        "tests/unit/test_exports.py::test_publication_media_needs_explicit_review_and_local_file",
+        "tests/unit/test_exports.py::test_publication_metadata_only_removes_private_registry_fields",
+        "tests/unit/test_publication_api.py::test_publication_api_fixed_profile_and_output_with_mutation_guard",
+        "tests/unit/test_acceptance_matrix.py::test_publication_rejects_secrets_absolute_paths_and_pdf_references[secret]",
+        "tests/unit/test_acceptance_matrix.py::test_publication_rejects_secrets_absolute_paths_and_pdf_references[absolute-path]",
+        "tests/unit/test_acceptance_matrix.py::test_publication_rejects_secrets_absolute_paths_and_pdf_references[pdf-reference]"
+      ],
+      "playwright": [],
+      "receipts": [
+        "reports/publication-validation-release-20261007.json",
+        "reports/distribution-closeout-verification-20261007.json"
+      ],
+      "note": "Synthetic records with a bearer token, a local absolute path or a PDF reference are refused before anything is written; unapproved media and annotations are stripped, and disguised media fails its checksum. The receipts record the real publication validation (three approved previews) and archive inspection as of 2026-10-07; they are not regenerated here."
+    },
+    {
+      "id": "installation",
+      "spec_row": "Installation",
+      "condition": "Browser-only use does not require GPU/model dependencies.",
+      "pytest": [
+        "tests/unit/test_acceptance_matrix.py::test_base_install_declares_no_model_dependency_and_the_api_imports_none_of_them"
+      ],
+      "playwright": [
+        "apps/web/e2e/fresh-workspace.spec.ts"
+      ],
+      "receipts": [
+        "reports/installation-verification.json",
+        "reports/installation-verification-python314-20261007.json",
+        "reports/installation-factoid-current-python312-20261007.json",
+        "reports/installation-factoid-current-python314-20261007.json",
+        "reports/final-status.json"
+      ],
+      "note": "The base dependency list names no model package and importing the API and CLI loads none. The receipts record fresh base-only virtual environments on Python 3.12 and 3.14 serving the bundled interface and approved previews over real HTTP with optional_model_packages_present empty. reports/installation-verification.json and its python314 twin certify an earlier wheel (sha256 b3b00fc4...); the current wheel (sha256 74656ccf..., named in reports/final-status.json) is covered by the two installation-factoid-current receipts. A rebuilt wheel needs new receipts. These receipts do not certify any optional model package (torch, transformers, nudenet, lancedb, scikit-learn, umap): they show only that such packages are not needed for browser use."
+    }
+  ]
+}

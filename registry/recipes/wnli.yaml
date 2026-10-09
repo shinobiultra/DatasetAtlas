@@ -1,0 +1,26 @@
+# The catalogue's table is a deterministic conversion of these pinned originals (see dataset_atlas/converters/text.py). A fetch
+# reproduces it and fails unless the converted rows match this row digest exactly, which was taken from the maintainer's table.
+# Release and snapshot IDs are unchanged, so a colleague's preview has the same identity.
+release: source-sha256-5cacdf1828639542
+snapshot_id: wnli-sha256-a8baeb3306a9ca9bf281bce74f15ec466dbdb6d8665096073d74f41f8ad93e3b
+adapter: structured
+expected_count: 852
+scope: Official GLUE ZIP train/dev/test task files, original TSV columns preserved, withheld test labels null. Auxiliary original/tokenized
+  copies in CoLA ZIP are not double-counted. Release is pinned by downloaded archive SHA-256, not an inferred paper-specific subset.
+source_url: https://gluebenchmark.com/tasks
+adapter_config: {}
+convert:
+  name: glue_task
+  params:
+    task: WNLI
+  count: 852
+  rows_sha256: e8d9493713c82946c099d895a224403bf4b1b2ee9eb50379192b9c74bcad4ea4
+files:
+- source_name: WNLI.zip
+  url: https://dl.fbaipublicfiles.com/glue/data/WNLI.zip
+  bytes: 28999
+  sha256: ae0e8e4d16f4d46d4a0a566ec7ecceccfd3fbfaa4a7a4b4e02848c0f2561ac46
+  format: zip
+  config_key: source_zip
+allowed_hosts:
+- dl.fbaipublicfiles.com

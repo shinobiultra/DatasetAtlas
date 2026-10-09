@@ -1,0 +1,83 @@
+schema_version: '1.0'
+id: vl-gender
+name: VL-Gender
+aliases: []
+description: Mention candidate from a focused page audit; the evidence receipts distinguish
+  direct use, comparison, related-work, and citation-only roles. Original source,
+  release, and rights still require independent verification.
+paper_ids:
+- paper-f03c5ad315e6d835
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: unverified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Original release identity and rights need verification.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-2fb208d3777a3a05a4ab
+  paper_id: paper-f03c5ad315e6d835
+  source_file_hash: 47431d9340ff27b9234e2184711fbc3fc06ded7718fe53ca79b23a1cd1db777d
+  page: 2
+  role: introduction
+  excerpt: 's including occupation-related information, we drop those images. Our
+    VL-Gender evaluation contains 5,000 images, i.e. 1,000 images from each dataset,
+    balanced for the gender and ethnicity attributes '
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-4daabac7f0b4ab740091
+  paper_id: paper-f03c5ad315e6d835
+  source_file_hash: 47431d9340ff27b9234e2184711fbc3fc06ded7718fe53ca79b23a1cd1db777d
+  page: 2
+  role: introduced benchmark
+  excerpt: usic. To avoid images including occupation-related information, we drop
+    those images. Our VL-Gender evaluation contains 5,000 images, i.e. 1,000 images
+    from each dataset, balanced for the gender and ethnicity attributes where available.
+    In
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/ExplainableML/vla-gender-bias
+  checked_on: '2026-10-08'
+  note: 'Benchmark introduced by Girrbach et al. (arXiv 2410.19314): 5,000 images, 1,000 each from FairFace,
+    MIAP, PHASE and PATA (FairFace in two padding variants), balanced for gender and, where annotated,
+    ethnicity, with trait, skill and occupation prompts. The author repository holds code and a setup_data.sh
+    recipe.'
+  source_identity_status: author_recipe_located_no_hosted_data
+- kind: source_audit_access
+  url: https://github.com/ExplainableML/vla-gender-bias
+  checked_on: '2026-10-08'
+  note: The README directs users to run setup_data.sh, which downloads and processes the source datasets
+    (about 100 GB of disk and about 24 hours per the README). It offers no hosted copy of the 5,000 selected
+    images; the recipe is public, but each source dataset keeps its own access route.
+  source_identity_status: author_recipe_located_no_hosted_data
+  disposition: unchanged
+  observation: recipe_only_no_hosted_release
+- kind: source_audit_rights
+  url: https://github.com/ExplainableML/vla-gender-bias
+  checked_on: '2026-10-08'
+  note: The README text read states no licence. The images come from FairFace, MIAP, PHASE and PATA, whose
+    own terms apply; redistribution of the selected images is not approved here.
+  source_identity_status: author_recipe_located_no_hosted_data
+- kind: source_audit_refresh
+  url: https://github.com/ExplainableML/vla-gender-bias
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'unchanged: read from public pages on 2026-10-08 by the implementing agent (the source_audit_access
+    item of that date); not human-reviewed and not a probe. 1 URL probed (HEAD only): 1 reachable.'

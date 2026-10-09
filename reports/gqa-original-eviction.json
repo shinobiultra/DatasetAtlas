@@ -1,0 +1,44 @@
+{
+  "dataset_id": "gqa",
+  "source_sha256": "02ce5c49c793accd5305356de9c39a50f80a7aaac193b0203de30dbbc65bde62",
+  "status": "executed",
+  "retained_snapshots": 1,
+  "image_references_checked": 132062,
+  "unique_native_images_in_snapshots": 10234,
+  "preview_asset_memberships": 82,
+  "preview_bytes_upper_bound": 11390478,
+  "cold_original_probes": [
+    {
+      "sha256": "dcfd123c143677f670502b5b3154833520fbee73af264aab04b56706088f28b9",
+      "bytes": 56144,
+      "transferred_bytes": 55575,
+      "source_sha256": "02ce5c49c793accd5305356de9c39a50f80a7aaac193b0203de30dbbc65bde62",
+      "fingerprint_type": "etag",
+      "etag": "\"5c55f4cb-51473bbe6\""
+    },
+    {
+      "sha256": "a86d68fc37cfe6e4865cc79a8d87e134b5ed5b3215132212dedae0af9fb9fad7",
+      "bytes": 222310,
+      "transferred_bytes": 222282,
+      "source_sha256": "02ce5c49c793accd5305356de9c39a50f80a7aaac193b0203de30dbbc65bde62",
+      "fingerprint_type": "etag",
+      "etag": "\"5c55f4cb-51473bbe6\""
+    },
+    {
+      "sha256": "43549ce1ac5add174e31e0efe7ec3637ad5cd5479b61ccdc529bde98436b9acd",
+      "bytes": 82822,
+      "transferred_bytes": 82680,
+      "source_sha256": "02ce5c49c793accd5305356de9c39a50f80a7aaac193b0203de30dbbc65bde62",
+      "fingerprint_type": "etag",
+      "etag": "\"5c55f4cb-51473bbe6\""
+    }
+  ],
+  "paths": [
+    "work/sources/gqa/images.zip"
+  ],
+  "extracted_files": 0,
+  "source_bytes": 21817965542,
+  "extracted_bytes": 0,
+  "retention": "Original-quality previews and complete indices; other originals and optimized browsing copies on demand.",
+  "freed_unique_file_bytes": 21817965542
+}

@@ -1,0 +1,15 @@
+release: zenodo-2535967-cifar-10-c
+adapter: cifar_c_npy
+expected_count: 950000
+scope: All 19 corruption types at 5 severities over the 10,000 CIFAR-10 test images
+  (950,000 corrupted images) from the official CIFAR-10-C.tar; CIFAR-10-P is a separate
+  file and is not included.
+files:
+- url: https://zenodo.org/records/2535967/files/CIFAR-10-C.tar
+  bytes: 2918471680
+  sha256: c72763e101c723b7c507b96205f7e938912a5d587376173b825850cf3cb876a7
+  source_name: CIFAR-10-C.tar
+  config_key: path
+  format: tar
+allowed_hosts:
+- zenodo.org

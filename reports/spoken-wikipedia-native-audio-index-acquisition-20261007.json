@@ -1,0 +1,126 @@
+{
+  "started_at_utc": "2026-10-07T04:28:43.720400+00:00",
+  "sources": {
+    "Dutch": {
+      "index": "work/spoken-native-audio-indices-20261006/Dutch",
+      "format": "atlas-remote-zip-deflate-tar-v1",
+      "source_sha256": "02eae01a90e05bdb90d8927cd9061ead6211c46ce7686d771b1341ec5083b26b",
+      "source_bytes": 8452065280,
+      "remote": {
+        "url": "https://www.fdr.uni-hamburg.de/api/files/2e9aa9ac-ea6b-4ef4-99d9-d2c7867110f7/swc-2.0.zip",
+        "archive_bytes": 37550398487,
+        "etag": "\"979cd9b917c0fc06d7d0137bb26bd854-359\"",
+        "allowed_hosts": [
+          "www.fdr.uni-hamburg.de",
+          "fdr-prod.s3-uhh.lzs.uni-hamburg.de"
+        ],
+        "member": "SWC_Dutch.tar",
+        "bytes": 8452065280,
+        "compressed_bytes": 8251347912,
+        "crc32": 3807876523
+      },
+      "members": 21691,
+      "uncompressed_member_bytes": 8433520630,
+      "index_bytes": 69205313,
+      "checksums": {
+        "members.sqlite": "2f188fc569de96fb46bd94f4985cf8df75698b8713315af8cc027db2561d0b5f",
+        "checkpoints.gzidx": "0e44d8b7341f09ab04113f184d51f491df53ba27aed4419a2c602cd2622e0147"
+      },
+      "spacing_bytes": 4194304,
+      "indexed_gzip_version": "1.10.3",
+      "network_bytes": 16502696711,
+      "whole_native_tar_sha256_checked": true,
+      "whole_native_zip_member_crc32_checked": true,
+      "whole_parent_zip_checksum_checked": false,
+      "native_tar_body_retained": false,
+      "seek_representation": "Virtual gzip envelope around unchanged native ZIP deflate payload; native TAR/member hashes bind originals.",
+      "reused": true
+    },
+    "English": {
+      "index": "work/spoken-native-audio-indices-20261006/English",
+      "format": "atlas-remote-zip-deflate-tar-v1",
+      "source_sha256": "cded618a5119808d0f517f1d8f5e50a42f42f7f5fbd892db5f6bc5e2054dba8f",
+      "source_bytes": 16190801920,
+      "remote": {
+        "url": "https://www.fdr.uni-hamburg.de/api/files/2e9aa9ac-ea6b-4ef4-99d9-d2c7867110f7/swc-2.0.zip",
+        "archive_bytes": 37550398487,
+        "etag": "\"979cd9b917c0fc06d7d0137bb26bd854-359\"",
+        "allowed_hosts": [
+          "www.fdr.uni-hamburg.de",
+          "fdr-prod.s3-uhh.lzs.uni-hamburg.de"
+        ],
+        "member": "SWC_English.tar",
+        "bytes": 16190801920,
+        "compressed_bytes": 15510055913,
+        "crc32": 3226452537
+      },
+      "members": 9388,
+      "uncompressed_member_bytes": 16183073841,
+      "index_bytes": 127491619,
+      "checksums": {
+        "members.sqlite": "0c9e0e52daecc616c8631a119694c9f30e0ec6af0325b72629757a52194cc048",
+        "checkpoints.gzidx": "8ddff595a796edbd217ea5841ab57aa28639edf9d8419b605264b1a9388df97b"
+      },
+      "spacing_bytes": 4194304,
+      "indexed_gzip_version": "1.10.3",
+      "network_bytes": 15510056802,
+      "whole_native_tar_sha256_checked": true,
+      "whole_native_zip_member_crc32_checked": true,
+      "whole_parent_zip_checksum_checked": false,
+      "native_tar_body_retained": false,
+      "seek_representation": "Virtual gzip envelope around unchanged native ZIP deflate payload; native TAR/member hashes bind originals.",
+      "reused": true
+    },
+    "German": {
+      "index": "work/spoken-native-audio-indices-20261006/German",
+      "format": "atlas-remote-zip-deflate-tar-v1",
+      "source_sha256": "ee2d2e57c2d648a4292bdc93cc738c796516d18da7403231a6b78c91b5efe471",
+      "source_bytes": 14232719360,
+      "remote": {
+        "url": "https://www.fdr.uni-hamburg.de/api/files/2e9aa9ac-ea6b-4ef4-99d9-d2c7867110f7/swc-2.0.zip",
+        "archive_bytes": 37550398487,
+        "etag": "\"979cd9b917c0fc06d7d0137bb26bd854-359\"",
+        "allowed_hosts": [
+          "www.fdr.uni-hamburg.de",
+          "fdr-prod.s3-uhh.lzs.uni-hamburg.de"
+        ],
+        "member": "SWC_German.tar",
+        "bytes": 14232719360,
+        "compressed_bytes": 13643409555,
+        "crc32": 521459867
+      },
+      "members": 7238,
+      "uncompressed_member_bytes": 14226746260,
+      "index_bytes": 111844721,
+      "checksums": {
+        "members.sqlite": "7356224199f97168b6e81969e80bdcf25086e8e6d76ac614f24384cd3460cf57",
+        "checkpoints.gzidx": "f25ebffb84d43ca13b71fcd3c59ca7265a80ff542d55f47ab3510bba2b99e919"
+      },
+      "spacing_bytes": 4194304,
+      "indexed_gzip_version": "1.10.3",
+      "network_bytes": 13643410443,
+      "whole_native_tar_sha256_checked": true,
+      "whole_native_zip_member_crc32_checked": true,
+      "whole_parent_zip_checksum_checked": false,
+      "native_tar_body_retained": false,
+      "seek_representation": "Virtual gzip envelope around unchanged native ZIP deflate payload; native TAR/member hashes bind originals.",
+      "reused": false
+    }
+  },
+  "network_bytes": 13643411287,
+  "max_network_bytes": 20000000000,
+  "historical_reused_network_bytes": 32012753513,
+  "prior_acquisition_receipt": "reports/spoken-wikipedia-native-audio-index-acquisition-20261006.json",
+  "progressive_seek_index": true,
+  "max_index_bytes": 1000000000,
+  "native_tar_bodies_retained": false,
+  "external_model_requests": 0,
+  "current_language": "German",
+  "current_progress": {
+    "members": 7200,
+    "native_bytes": 14140231680,
+    "network_bytes": 13589545848
+  },
+  "status": "passed",
+  "completed_at_utc": "2026-10-07T05:28:34.665220+00:00"
+}

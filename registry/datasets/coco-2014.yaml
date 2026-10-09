@@ -2,8 +2,8 @@ schema_version: '1.0'
 id: coco-2014
 name: COCO 2014
 aliases: []
-description: Original COCO 2014 release exists, but the survey table does not specify train, val, captions,
-  or detection subset.
+description: Original COCO 2014 release exists, but the survey table does not specify
+  train, val, captions, or detection subset.
 paper_ids:
 - paper-25eaa8c74ce76800
 release: unresolved
@@ -34,14 +34,14 @@ evidence:
   source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
   page: 29
   role: cited-study dataset in survey table
-  excerpt: 24c) LLaVA-1.5-7B, Shikra, MiniGPT-4 Hallucination Detection COCO 2014 (Phukan et al., 2024)
-    Qwen2-VL-7B, InternLM-xcomposer2- Hallucinatio
+  excerpt: 24c) LLaVA-1.5-7B, Shikra, MiniGPT-4 Hallucination Detection COCO 2014
+    (Phukan et al., 2024) Qwen2-VL-7B, InternLM-xcomposer2- Hallucinatio
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://cocodataset.org/#download
-  note: 'Original COCO 2014 release exists, but the survey table does not specify train, val, captions,
-    or detection subset. Release: COCO 2014; task/split unpinned'
+  note: 'Original COCO 2014 release exists, but the survey table does not specify
+    train, val, captions, or detection subset. Release: COCO 2014; task/split unpinned'
   audit_file: work/sources/source-audit-jobs-batch3.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
@@ -51,9 +51,24 @@ evidence:
   audit_file: work/sources/source-audit-jobs-batch3.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
+- kind: implemented_source_release
+  url: https://cocodataset.org/
+  checked_on: '2026-09-23'
+  report: reports/selective-acquisition-20260923.md
+  note: Pinned acquired population and real preview exercised locally. Mirror and
+    selective-transfer limits remain in the acquisition receipts; this does not establish
+    publication rights or the exact paper-used subset.
+  recipe: registry/recipes/coco-2014.yaml
 source_url: https://cocodataset.org/
 relationships:
 - type: same_source_family_as
   target_id: coco
-  scope: COCO family only; year, split, selected image/caption IDs and overlay are not established as
-    the active COCO-2017-val release.
+  scope: COCO family only; year, split, selected image/caption IDs and overlay are
+    not established as the active COCO-2017-val release.
+modalities:
+- image
+- text
+tasks:
+- object detection
+- image captioning
+- keypoint detection

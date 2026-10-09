@@ -1,0 +1,4514 @@
+{
+  "checked_at": "2026-09-22T09:21:58.855285+00:00",
+  "download_limit_bytes": 20000000000,
+  "output_limit_bytes": 2000000000,
+  "dataset_count": 333,
+  "ready_count": 80,
+  "datasets": [
+    {
+      "dataset_id": "activations-csv",
+      "preview_count": 100,
+      "source_url": "https://github.com/ExplainableML/sae-for-vlm/blob/39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493/metric_benchmark.tar.gz",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "6a6363a777457018e60a995fda651bd9d0cc9730ce5bc85bb8e1f53697a71065",
+      "requirements": [],
+      "scope": "Nine hundred thirty SAE neurons, each with 50,000 ImageNet-validation activation values in the author CSV. The local preview is a one-row-per-neuron numeric summary with a digest of all 50,000 original values; full original CSV remains local.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "advbench",
+      "preview_count": 100,
+      "source_url": "https://github.com/llm-attacks/llm-attacks",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "d6b8cf5495ddfd6adfcc3e34c1d9a4992b38de71c3fafa173d8d3b5f751d35b1",
+      "requirements": [],
+      "scope": "official AdvBench harmful_behaviors.csv, 520 rows",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "agent-security-bench",
+      "preview_count": 0,
+      "source_url": "https://github.com/agiresearch/ASB",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "65ce8f67eb3bed7157b9587d4dd7174b1a530acb68f5ab6c72653e6cf8f4b166",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "algopuzzlevqa",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/declare-lab/AlgoPuzzleVQA",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "994cb19f9d2a60bf992dea7418adf3e3c3b27fd3063fdd669004f6635d3a76db",
+      "requirements": [],
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "alpaca",
+      "preview_count": 100,
+      "source_url": "https://github.com/tatsu-lab/stanford_alpaca",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "2a01098c3b2951029c0838030c28a7bb3db4062b828569fcaad460f332f2b97d",
+      "requirements": [],
+      "scope": "official Stanford Alpaca alpaca_data.json, 52,002 rows",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "anthropic-red-teaming-prompts",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/Anthropic/hh-rlhf",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "9ec7510db5ad50a312b33893f9b5c815bfc05e88426f5d01ab3a16b71a671239",
+      "requirements": [],
+      "scope": "Official Anthropic red-team-attempt transcripts and ratings, not the citing paper's 1,000-response selection. The official gzip is a JSON array despite its jsonl.gz name.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "artbench-2",
+      "preview_count": 0,
+      "source_url": "https://sail-sg.github.io/D-TRAK/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "2c31f84b832663ee475eeb96692e935003dbb7b5c66ea949b938cf683ff9498d",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "artbench",
+      "preview_count": 100,
+      "source_url": "https://github.com/liaopeiyuan/artbench",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "fad46ba3610baea807e54ea9e0b6fa27d1bd5fdc41dc202f042eac47f3c666f2",
+      "requirements": [],
+      "scope": "ArtBench-10 author 32x32 CIFAR binary; 50,000 train and 10,000 test examples",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "artchive",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "abc589038d74fc0c92f9df143fb65757c61d068f8db5e5e2a3a1d99171490a71",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "asteroids-rom",
+      "preview_count": 0,
+      "source_url": "https://doi.org/10.1371/journal.pcbi.1005268",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "816e35174d2fadb5c3919b80d664c727f50383ceb5b7ff0cb3b99aa884c986d8",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "audioset",
+      "preview_count": 0,
+      "source_url": "https://research.google.com/audioset/download.html",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "ae669344b7a2f61f8270b8617b35da8959a3e8a66e308faaed3a880ec22f4be6",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "bam-fg",
+      "preview_count": 0,
+      "source_url": "https://research.adobe.com/publication/aladin-all-layer-adaptive-instance-normalization-for-fine-grained-style-similarity/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "37c8ea88803430896e4deac774d39570dddb425157f011f957f742f501494c59",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "bapps",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "9824d59bf2c0d727525d6bc00cea3e2f59478e35ea9c5e2c394d4376758786c5",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "bbq",
+      "preview_count": 100,
+      "source_url": "https://github.com/nyu-mll/BBQ",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "17a46f7c4d42f6c468856debe210c088c7cc9ec67852d3dab7c697879c24521a",
+      "requirements": [],
+      "scope": "All 11 official BBQ category JSONL files in category filename order. Answer choices and source labels remain separate from model predictions.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "behonest",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/GAIR/BeHonest/tree/fcdb24a2de2cd236bbd1b4484d99c23512ee7cc6",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "9511f5a718a26eb3de3768c29f2b9885c2f22796847ab5653cc51a42cf0788c9",
+      "requirements": [],
+      "scope": "all 18 JSON files in pinned GAIR/BeHonest HF snapshot",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "bias-in-bios",
+      "preview_count": 0,
+      "source_url": "https://github.com/microsoft/biosbias/tree/1534c12ab469f103d83960cd5e9b561a9562abc0",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "1bddf5098b4e83244421cd50763b5c85a4772b9c343d731bec04d76070b8b522",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "blink",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/BLINK-Benchmark/BLINK",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "182a8690634ecc2ad626b7aa75e726d569afef3f86c89a6ca1b41884cd46b24e",
+      "requirements": [],
+      "scope": "Official BLINK release across all 14 visual perception tasks and both val/test splits: 3,807 source rows and 7,358 real embedded image occurrences. Test answers marked hidden by the author remain hidden; no answer is inferred.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "brain-score",
+      "preview_count": 0,
+      "source_url": "https://www.brain-score.org/",
+      "identity": "benchmark_platform",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "ef357c19c440afa808b538c8fce73358a4754601d1a9a873adc9b665c7206222",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "brca",
+      "preview_count": 0,
+      "source_url": "https://gdc.cancer.gov/about-data/publications/brca_2012",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "6ecab5da6c3a08ae556f0ddab8bc51e2f60c8bf218ec7bc89a33d13aed78a3fa",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "broden",
+      "preview_count": 0,
+      "source_url": "https://github.com/CSAILVision/NetDissect/tree/20ce6f887607aadc04ab9fb3d452e4723685cbbb",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "e90cb21b7d580b4941fed0f1f404ffb0e98613daeb4fa45725a12b9797ba401e",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "caltech101",
+      "preview_count": 0,
+      "source_url": "https://data.caltech.edu/records/mzrjq-6wc02",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "8546316babc54a970013053a65ac2ebbb3d5513969e9eaced068b6938aee7340",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "cauldron",
+      "preview_count": 0,
+      "source_url": "https://huggingface.co/datasets/HuggingFaceM4/the_cauldron",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "huggingface_columnar",
+      "plan_id": "d9c05cb07156b729aa2e0a94bdb1264a68308bcc6c3b62a448d861a98a9028f6",
+      "requirements": [
+        "Source download exceeds the selected download budget."
+      ],
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "expected_download_bytes": 168903960966
+    },
+    {
+      "dataset_id": "causalgym",
+      "preview_count": 0,
+      "source_url": "https://github.com/aryamanarora/causalgym",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "92e9fb66a302453adcb345d10056e1f925c5d916773e265e971b5257cac3e321",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "cc3m",
+      "preview_count": 0,
+      "source_url": "https://github.com/google-research-datasets/conceptual-captions",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "245af094032be75e1f564c49e6d122931fece873e186ed42bb840274a3cae0bc",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "cebab",
+      "preview_count": 100,
+      "source_url": "https://github.com/CEBaBing/CEBaB",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "10e90ebb1d61948349cd8b9d1ca4728b09bcc25043385a18b9f95d5d980b481c",
+      "requirements": [],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "celeba",
+      "preview_count": 0,
+      "source_url": "https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "e3261085c7e67d93c1c278e3b1b13efd05151233b6af5ced80d86e9a2b504b9b",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "chartqa",
+      "preview_count": 0,
+      "source_url": "https://github.com/vis-nlp/ChartQA/tree/044eabfc306abfe9340c5741f0093aefc5973d06",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "3a10353fc2558ea96e9f9cd84734974d8c7eba7504092dd6b18e0bc554469404",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "chicago-face-database",
+      "preview_count": 0,
+      "source_url": "https://www.chicagofaces.org/",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "ade083e827b1865880333e231c26e10b5f6c865d8ea0397ec0917ad52f78deae",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "child-safety-intents",
+      "preview_count": 0,
+      "source_url": "https://huggingface.co/datasets/it4lia/PHANTOM/tree/df168bd0fe810cdce256caddf6c9596f55760afb",
+      "identity": "candidate",
+      "ready": false,
+      "kind": null,
+      "plan_id": "2d36bd809c742f146709567889944b6be55037e0e28e0feafed5b023b5a32310",
+      "requirements": [
+        "This release is gated. Obtain authorized local files and configure its adapter."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "cifar-10-1",
+      "preview_count": 100,
+      "source_url": "https://github.com/modestyachts/CIFAR-10.1/tree/d9982abb0bfc4846b8d13a11e66b887d946205d0",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "3b4d28b9321859df8cfbfc92bf06d65fb89f7442e9a107d090392962bc0c8aaa",
+      "requirements": [],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "cifar-10-c",
+      "preview_count": 0,
+      "source_url": "https://zenodo.org/records/2535967",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "http_archive",
+      "plan_id": "4a8c04edf16d765fd54f2b1ac2af6ade040085b2894b662c1d6cd1f1dfe366cf",
+      "requirements": [],
+      "scope": "All 19 corruption types at 5 severities over the 10,000 CIFAR-10 test images (950,000 corrupted images) from the official CIFAR-10-C.tar; CIFAR-10-P is a separate file and is not included.",
+      "expected_download_bytes": 2918471680
+    },
+    {
+      "dataset_id": "cifar-10",
+      "preview_count": 100,
+      "source_url": "https://www.cs.toronto.edu/~kriz/cifar.html",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "78e3aa6785b976372c24430ab388c337725006d4ea4eec5e2dca74031f0a7fc5",
+      "requirements": [],
+      "scope": "official CIFAR-10 binary train and test batches, 60,000 examples",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "cifar-100-c",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "adf93a7a240edbd1b879e2c783fc04d6becaaec3f119586d0f22275e62987ffb",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "cifar-100",
+      "preview_count": 100,
+      "source_url": "https://www.cs.toronto.edu/~kriz/cifar.html",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "b36e6dae4f09e66ea2419f8c7a44636f112939f78b7212abe959a01f8f9470d0",
+      "requirements": [],
+      "scope": "official CIFAR-100 binary train and test batches, 60,000 examples",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "cifar-2",
+      "preview_count": 0,
+      "source_url": "https://github.com/BrunoKM/diffusion-influence",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "4156bc0028a4b0faf9bb25a318d36ff38d35361050c654cfcf648e054ef959c7",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "cinic-10",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "1a0c588d11763b126aaffe72bfaab08a9acff57ba5cc8e64bed91b24bfd157f8",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "clevr-v1-full",
+      "preview_count": 100,
+      "source_url": "https://cs.stanford.edu/people/jcjohns/clevr/",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "e9e51b8863b77e718b2d097b38545e5c8a1fd33e2c631ddded01565eebc4f744",
+      "requirements": [],
+      "scope": "official CLEVR v1.0 train, validation, and test questions",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "clevr",
+      "preview_count": 100,
+      "source_url": "https://cs.stanford.edu/people/jcjohns/clevr/",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "5909641bc5246fed91a7a42b7c87f60c0da6eccd2a7faa47c792b1e148827e77",
+      "requirements": [],
+      "scope": "maujim/CLEVR_sample_500 validation questions, 1070 questions over 107 distinct images",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "coco-2014",
+      "preview_count": 0,
+      "source_url": "https://cocodataset.org/",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "0a0be9b69a0a1c4cee622f9f6070727ee5adfe9e880f945ee3e3d82a75efd323",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "coco-caption",
+      "preview_count": 0,
+      "source_url": "https://cocodataset.org/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "e3b0977bb9a316f02998f55b9d956ce306f75a7a16dd9b426fa4be1aa6f0b8bb",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "coco-demographic-annotations",
+      "preview_count": 0,
+      "source_url": "https://princetonvisualai.github.io/imagecaptioning-bias/",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "8a4c052e2cc00e7847ff92c845bd132f9bf6d6a677434ebc102db99a7e4ec4ed",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "coco-detection-dataset",
+      "preview_count": 0,
+      "source_url": "https://arxiv.org/abs/2410.07149",
+      "identity": "family_or_variant_candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "ca04d8e7baf0bcefe98fa2985629af28d9aff90833b6769a295c6cf2687abae3",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "coco-gender",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "e8e38e3b557f0759c971ec282333e00cf0e6a52e8f1eed2e69da12b7dd772f52",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "coco-one",
+      "preview_count": 0,
+      "source_url": "https://github.com/israfelsr/vlm-pathways",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "688f7df7fd08eba561d5c25dc33dab523f36e6d0f466cc68ead524f2999e7a1e",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "coco-qa",
+      "preview_count": 0,
+      "source_url": "https://www.cs.toronto.edu/~mren/research/imageqa/data/cocoqa/",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "d6ac4fd7d7fc21ba92244528c6bb068efa746414d75d1491fb49eacd38e01a6b",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "coco-spatial",
+      "preview_count": 0,
+      "source_url": "https://github.com/amitakamath/whatsup_vlms",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "1c12ed542d762e6a90d9a3bf8822e793b78125bbdbb4253c5b3a6ddf6f8e8a43",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "coco-train",
+      "preview_count": 0,
+      "source_url": "https://cocodataset.org/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "ef0dc170a0092002baa92ea6430d7c267459414cc58821b6eb71aa1b061f5ee6",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "coco-two",
+      "preview_count": 0,
+      "source_url": "https://github.com/israfelsr/vlm-pathways",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "4740852c10623451126a2b3bc102e202847ef13ea0e13369ad58c5b895bd32af",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "coco",
+      "preview_count": 100,
+      "source_url": "https://cocodataset.org/",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "232d96efdd61faae74658eb9127f17e699217536be5ca56826efc02022251133",
+      "requirements": [],
+      "scope": "Official COCO 2017 validation captions; 25,014 captions on 5,000 images",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "cocogender",
+      "preview_count": 0,
+      "source_url": "https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "de7ebc816d92ae72b2c61c38ca850cf03e6f8313dd323c3471b730383b23e7f5",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "cocogendertxt",
+      "preview_count": 0,
+      "source_url": "https://github.com/namin-an/DeBiasLens",
+      "identity": "family_or_variant_candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "2dc3d127fb51c0ce0902eb7066c29998b3f58f8dac7633c8c4e58f0c4e246fa5",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "concept-editing-dataset",
+      "preview_count": 0,
+      "source_url": "https://github.com/samyadeepbasu/LocoGen",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "59ba7dcc69560fe9a516ebaee3639844dee46bf1219ecedf64350da8654e0aa0",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "conceptarc",
+      "preview_count": 100,
+      "source_url": "https://github.com/victorvikram/ConceptARC",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "e50aa5658951a6ca5a0e198638e7d429e54cab10128f3c24b4ca40acbf9bf7c4",
+      "requirements": [],
+      "scope": "All original corpus tasks and separately named MinimalTasks; each record preserves complete train/test grids as one task.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "conceptual-captions",
+      "preview_count": 0,
+      "source_url": "https://github.com/google-research-datasets/conceptual-captions",
+      "identity": "family_or_variant_candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "35ad3924818a56875f070342287da8169b33c35b9c844b3d2b9d1a47e26f1c2a",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "contrastive-prompts",
+      "preview_count": 0,
+      "source_url": "https://compvis.github.io/attribute-control/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "8ac39ab5916011f91128608f904b957956a870c8c84007b9966e2c3fd7d92a9f",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "controlled-clevr",
+      "preview_count": 0,
+      "source_url": "https://github.com/israfelsr/vlm-pathways",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "e5623c38d692e54e485a737c53bec7dc8df54cefc970f0406a735a53a5e8d987",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "controlled-images",
+      "preview_count": 0,
+      "source_url": "https://github.com/israfelsr/vlm-pathways",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "e99a5633745ebef0f890163cfb45f2b64d22fe855c366a6aec010057443d8aa1",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "counterfact",
+      "preview_count": 100,
+      "source_url": "https://rome.baulab.info/data/dsets/",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "0387e7546d229e66bd5a8c5608bea338cb815aac03768960f580240a240e41f7",
+      "requirements": [],
+      "scope": "All 21,919 original CounterFact cases, including rewrite requests and neighborhood/paraphrase/generation prompts.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "covid-19-radiography",
+      "preview_count": 0,
+      "source_url": "https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "110b03fdb20bb9837d2198c092f9bdc1d3f6738d7ab78ab30b6f3335290ccbc1",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "cub-200-2011",
+      "preview_count": 0,
+      "source_url": "https://www.vision.caltech.edu/datasets/cub_200_2011/",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "19e3494e1568acdab594730e801ca34edf79e0f4418664b2961f5f2e67706c62",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "cub",
+      "preview_count": 0,
+      "source_url": "https://www.vision.caltech.edu/datasets/cub_200_2011/",
+      "identity": "family_or_variant_candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "90d8900783c5aeb731ad1bd14b0903e24082421ade3c76ebe9702885909d3b75",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "cub200",
+      "preview_count": 0,
+      "source_url": "https://www.vision.caltech.edu/datasets/cub_200_2011/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "584c0e09f9d41842e12aca598031b3c677f2d85f2e2cd3b80a7191ad01f46670",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "custom-dataset",
+      "preview_count": 0,
+      "source_url": "https://arxiv.org/abs/2210.04885",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "1baf497ee36c321232dce2c5600fd5bedd1f5e96c5e99a9fc319ea9eecd84dbb",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "custom-image-editing-dataset",
+      "preview_count": 0,
+      "source_url": "https://arxiv.org/abs/2208.01626",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "c192509bb4c37bbb73bfe8bdfbef45f0f56f0881ac800968f0e1c8a36b6d96f1",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "custom-neonatal-rat-ganglion-recordings",
+      "preview_count": 0,
+      "source_url": "https://doi.org/10.7554/eLife.55378",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "a7787c79128d9c7b4d05348bc91a15e3c8007e7063edfe09546e22650b4ba068",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "custom-propeller-and-rotating-snake-stimuli",
+      "preview_count": 0,
+      "source_url": "https://doi.org/10.6084/m9.figshare.5483680",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "037ff7699c8911a9c306ee881e8c5f5968d11bbbd268c0ea3d455ee754101780",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "custom-speech-segment-collection",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "6b97fdaea5abe0a5a6ea05bda5c2d33904c37968fc21ba3e675b25bd9e97845b",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "custom-ternus-psychophysics-responses",
+      "preview_count": 0,
+      "source_url": "https://doi.org/10.3758/s13423-020-01786-9",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "a9888d355edc1d90b81c7ba5c2bbe9a7cb3b51304ce6f7180a0e4907b549a741",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "dall-e-generated-target-images",
+      "preview_count": 0,
+      "source_url": "https://arxiv.org/abs/2305.16934",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "d9ed551957f6592d91944158dc42e8d29fe601846e6a3934548b29a063229297",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "datacomp-1b",
+      "preview_count": 0,
+      "source_url": "https://huggingface.co/datasets/mlfoundations/datacomp_1b",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "huggingface_columnar",
+      "plan_id": "3b5d2fb65d01f15d0501b4cdacc6724e2db8e7379db18a175552a8bbd70b17e5",
+      "requirements": [
+        "Source download exceeds the selected download budget.",
+        "Insufficient free space for source, cache, and the approved output budget."
+      ],
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "expected_download_bytes": 339875509907
+    },
+    {
+      "dataset_id": "deepfashion",
+      "preview_count": 0,
+      "source_url": "https://mmlab.ie.cuhk.edu.hk/projects/DeepFashion.html",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "3c9251f75705c363b837b8c431517c9c4d72fb6798fa84b9ac8ee04e2d5977ff",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "div2k",
+      "preview_count": 0,
+      "source_url": "https://data.vision.ee.ethz.ch/cvl/DIV2K/",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "099c25d4091923d8d2fcef395a1fda20c1102657db9e67f0395ef12b687e0513",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "docci",
+      "preview_count": 100,
+      "source_url": "https://google.github.io/docci/",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "d9b0a28d7ff95a57701ac45743f95a54f23d2a8988f44f188e165103902155d5",
+      "requirements": [],
+      "scope": "Complete author-hosted DOCCI description and image release, 14,847 pairs",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "docvqa",
+      "preview_count": 0,
+      "source_url": "https://site.docvqa.org/datasets/docvqa",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "bd785ab79965a29243f44a60940190d600a8222fa6f94fcae1d845ef6d7b4205",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "donkey-kong-rom",
+      "preview_count": 0,
+      "source_url": "https://doi.org/10.1371/journal.pcbi.1005268",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "01585b152a1249b5de230e547f8a9f4fba673c779f02f164f766365004462072",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "dreambooth",
+      "preview_count": 0,
+      "source_url": "https://github.com/google/dreambooth/tree/4f887af7970a06fc0cd3adaa1d0b368547d6a1d0",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "526c169e10465bc694b80e77375f41fa82484848d25623f3749069700b23ed84",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "dtd",
+      "preview_count": 100,
+      "source_url": "https://www.robots.ox.ac.uk/~vgg/data/dtd/",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "d70d97c0104491bd728adb727d2e6dbd5cad05f9904ca8fe8996b0a9501f63d9",
+      "requirements": [],
+      "scope": "All 5,640 DTD images with all ten official train/validation/test partitions.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "e-ic",
+      "preview_count": 0,
+      "source_url": "https://github.com/zjunlp/EasyEdit/blob/14cea8245f06715684592ab55184939b99d70784/examples/MMEdit.md",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "ee8c3bc41f0cf1b1ebe5eb3a2e6578886ef3e7e74ee4a422ff2aa31de0e7128b",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "e-vqa",
+      "preview_count": 0,
+      "source_url": "https://github.com/zjunlp/EasyEdit/blob/14cea8245f06715684592ab55184939b99d70784/examples/MMEdit.md",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "d31534e579298a6ae32e2b29b6c888458280548ddfbed5df956c75825e861d9e",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "emnist-balanced",
+      "preview_count": 100,
+      "source_url": "https://www.nist.gov/itl/products-and-services/emnist-dataset",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "10bb15f46475ed7ea0a953ce0c6770b49f42e94ad6ae903a3bfe45f4f4f3a999",
+      "requirements": [],
+      "scope": "original NIST EMNIST Balanced IDX train+test split",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "emnist-letters",
+      "preview_count": 0,
+      "source_url": "https://www.nist.gov/itl/products-and-services/emnist-dataset",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "d32b27964bec4a30baf337e99237985ed15ac6e5b337128835fa25e01a7e0445",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "emnist",
+      "preview_count": 0,
+      "source_url": "https://www.nist.gov/itl/products-and-services/emnist-dataset",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "9b56b436254165fc9af1f5143e5f6ef7152866da8393139cd43537dd3ec69c36",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "emoset",
+      "preview_count": 0,
+      "source_url": "https://github.com/JingyuanYY/EmoSet",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "ec81114ab23e9f3a10d8ebe7b3c16d02bacc27eba4ae4ae96faaf18c41301212",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "eurosat",
+      "preview_count": 100,
+      "source_url": "https://zenodo.org/records/7711810",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "415b2e79dd6dea5691f2f2be6508996b54f1c3a0edcfe0caef34e9a73e57a719",
+      "requirements": [],
+      "scope": "official EuroSAT v2 RGB, 27,000 class-folder JPEGs",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "exams-v",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/Rocktim/EXAMS-V",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "362d3b33d76a5dcc52c5f4be2259efb5126e898b7f6305b303f17aa8ec853f4c",
+      "requirements": [],
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "facet",
+      "preview_count": 0,
+      "source_url": "https://ai.meta.com/datasets/facet/",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "bbef6a747c36f9285ffdb345b3fef588d1e1482fc085295defba3495681d67da",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "facial-expression-recognition-2013",
+      "preview_count": 0,
+      "source_url": "https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "3a98d671067db919ec7bce2bbc0b2196b0e874703370ed6b62553a99c78d7272",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "factoid",
+      "preview_count": 0,
+      "source_url": "https://github.com/caisa-lab/FACTOID-dataset",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "dee03d1b26d622fe5d23749e7733a670afb0831e6352f2854f72cd722e29034a",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "fairface",
+      "preview_count": 0,
+      "source_url": "https://github.com/joojs/fairface/tree/fb823086827337b4044e7f0abd3f2035e76b7c5f",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "8823ffbc517d2fc73cd86b59494b4fca4a6812c9a4d49e56cc8af29629d47280",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "fer-2013",
+      "preview_count": 0,
+      "source_url": "https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "cc0ec9296217430ca2339402e905972c3517d0c688991233312a2db1cd057423",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "ffhq",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "8ba756f30955e1ac03d8ae2a71cc4f2e5366229cb357ca3021b08724be0cc99a",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "fgvc-aircraft",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "2d4c2640db4fbbad6cc59bfe0d250e307d52e206a0391a460a4213cfe8b04e64",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "fgvc",
+      "preview_count": 0,
+      "source_url": "https://www.robots.ox.ac.uk/~vgg/data/fgvc-aircraft/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "903993be6da83d501189aed4f67b57f0c70fa98367a193a8e1b45ff62266de6d",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "figure-linked-source-data-spreadsheets",
+      "preview_count": 0,
+      "source_url": "https://api.elifesciences.org/articles/55378",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "b861b4a995e11da915090665520409e54fcac2d66d8d7a9916f3835a037acea9",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "find",
+      "preview_count": 0,
+      "source_url": "https://zenodo.org/records/8034162",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "a23bd3f5a6c1ab2ff1c191ca3d269b8be281ef6de0760a4f52249daf1a00d720",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "finevision",
+      "preview_count": 0,
+      "source_url": "https://huggingface.co/datasets/HuggingFaceM4/FineVision",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "huggingface_columnar",
+      "plan_id": "ff2da4cd1acd0551b7d4752648e5e0002a0ee02b8fffb0ca4d012d9f33f0f05b",
+      "requirements": [
+        "Source download exceeds the selected download budget.",
+        "Insufficient free space for source, cache, and the approved output budget."
+      ],
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "expected_download_bytes": 4645230556607
+    },
+    {
+      "dataset_id": "first-person-social-interactions-dataset",
+      "preview_count": 0,
+      "source_url": "https://ai.stanford.edu/~alireza/Disney/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "e1640f9de216905cd070bfbcc283bf138bbc4510460729e82c53e1ae37ab3e1f",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "flickr30k",
+      "preview_count": 0,
+      "source_url": "https://shannon.cs.illinois.edu/DenotationGraph/",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "739a6b98dafae141913faff4cbfde305b63533db5b970fb435a6e40c52a4c993",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "flowers",
+      "preview_count": 0,
+      "source_url": "https://www.robots.ox.ac.uk/~vgg/data/flowers/102/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "e05693aa231dd1f06ae9cc382449f7e67cb1206665278401b19673fb07a280b0",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "flowers102",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "367b6bd5db5e174b47147eec3e90373fec002a6b8470daef841e6d8484c2d63d",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "foil-it",
+      "preview_count": 0,
+      "source_url": "https://foilunitn.github.io/",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "206d5bb6f7205eb861334a22f8f6e4a44d2af023905781658501c73ab7240b8a",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "food101",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "eed2f363c17822c8f9e797af01e06ce82abc49c01e00857a8277288e60b9fa52",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "gaussian-rubbish-examples",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "9745f1622a92ef4f88b5ccf328a0ddbf44bc4144659422b6008e2274a7de0b1f",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "gda-adversarial-image-variants",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "49fa962709cbe2c0a40fdd9b7b7e9a92efa150a53f3ff687f52844dd643f9d3f",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "glue-cola",
+      "preview_count": 100,
+      "source_url": "https://gluebenchmark.com/tasks",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "615dd5daa4ce43bb1e057ced63b4f3406c20591a21433f81a6e1bb54126e9344",
+      "requirements": [],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "google-web-1t-corpus",
+      "preview_count": 0,
+      "source_url": "https://catalog.ldc.upenn.edu/LDC2006T13",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "b3b31da76c647f555f42e1cca621df522ac0b68531e9cb58221f6d42eb4d4138",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "gpt-4v-filtered-vl-gender-subset",
+      "preview_count": 0,
+      "source_url": "https://github.com/ExplainableML/vla-gender-bias",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "df6018b504d6d262368329659ed3144cd59416099172c18ada85f5edb65ad701",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "gqa",
+      "preview_count": 100,
+      "source_url": "https://cs.stanford.edu/people/dorarad/gqa/download.html",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "2814197bff9ff76054424ac9a3c89924196878f5e7a23c579dc9d45cfd3b0ff6",
+      "requirements": [],
+      "scope": "official GQA v1.2 val_balanced_questions.json (132,062 examples)",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "group-labels",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "4adf3a317dd942fc9d8ae00719f559c2d1bf0c875c6fec93b82ed2dd1572faf1",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "gvil-paired-illusion-images",
+      "preview_count": 0,
+      "source_url": "https://github.com/vl-illusion/GVIL",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "30451346ba21f3f343fa401307951520a27dea9e610eb0bacd666e5c088fc0ba",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "gvil",
+      "preview_count": 100,
+      "source_url": "https://github.com/vl-illusion/GVIL/tree/cd04efb9d53c935c8194011d32b5a8b515c588bf",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "f2012dd3b60068d384f0ed78ca1d9a0fb82df994ecc8cde9682bbd9c00b9ee5c",
+      "requirements": [],
+      "scope": "all 2,400 VQA and 800 VG annotation entries in author archive",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "gyafc",
+      "preview_count": 0,
+      "source_url": "https://github.com/raosudha89/GYAFC-corpus/tree/fe2da425ad91933b30097e7d2ed05e428e95ba92",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "2d2625ca186c52d760a4666737bec4bbbf6500e14558e96b57f5c144ed3405e4",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "hades",
+      "preview_count": 0,
+      "source_url": "https://github.com/AoiDragon/HADES",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "a6c6ce1424cad9d2012371caf1aa7091943dc0321af1bed50906d07ab3b9858e",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "hallusionbench",
+      "preview_count": 0,
+      "source_url": "https://github.com/tianyi-lab/HallusionBench/tree/744007c232c292942c7f80eb61edb2465482da31",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "b0e87fd5b1fa24058caacccfd82a631890fa7a8fdc0e41c4864baa4adcdb6d27",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "halueval",
+      "preview_count": 100,
+      "source_url": "https://github.com/RUCAIBox/HaluEval",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "8478faa9d9f438efcf4c99453a494465e6c690b7a45f0d1bb72ac5a7b1287a31",
+      "requirements": [],
+      "scope": "All four official HaluEval release data files: dialogue, general, QA and summarization. Current files contain 34,507 records; the README describes the release approximately as 35K.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "harmbench",
+      "preview_count": 100,
+      "source_url": "https://github.com/centerforaisafety/HarmBench",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "e465e24183036d6fdbd3fb13f8249d54b44c75a08f103bb323d5335deedd28d2",
+      "requirements": [],
+      "scope": "official HarmBench harmbench_behaviors_text_all.csv, 400 text behaviors",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "hatefulillusion",
+      "preview_count": 0,
+      "source_url": "https://github.com/TrustAIRLab/HatefulIllusion",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "huggingface_columnar",
+      "plan_id": "d33a6d2fcc79329204f293b79c91f2b3bfd0a2ebb7f9e510ca1e76a2362ed243",
+      "requirements": [
+        "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
+      ],
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "hc-bench",
+      "preview_count": 53,
+      "source_url": "https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "4b1cadd4290259f008851da1d16ca66d569331380967e7a3e08c6dcafdb7f6a9",
+      "requirements": [],
+      "scope": "All 53 author-released wild/ images in HC-Bench at the pinned Hugging Face revision. This local pack covers only the wild subset; the current repository has other object/text parts and differs from the 112-image paper version.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "hellaswag-pro",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "121cc295339e16f93389ed0f12dd79af299a7366a602d3d659f5976967fcde64",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "high-quality-hallucination-benchmark",
+      "preview_count": 0,
+      "source_url": "https://github.com/HQHBench/HQHBench/tree/6d35a4c320270fa507016550312edcb5a0570ed4",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "97511ef12627f2efe967e9da1d4d297b9b716dc50adec26174408d823bad8726",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "hod",
+      "preview_count": 0,
+      "source_url": "https://github.com/poori-nuna/HOD-Benchmark-Dataset/tree/a78e801de791eebdf2e9011cbf5b5ac2f6c65716",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "0641cbd17f74c7eb2d2792c7ddbae01e6ed6f7a77dbd3c1b11523a5f8b9e0325",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "iconqa",
+      "preview_count": 100,
+      "source_url": "https://github.com/lupantech/IconQA",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "2f5400c087b859213a723f6c0671362c348be3135ea43ca5eda91d02b81506ac",
+      "requirements": [],
+      "scope": "Complete original IconQA v1 author ZIP, 107,439 questions across three subtasks",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "ictcf",
+      "preview_count": 0,
+      "source_url": "https://ngdc.cncb.ac.cn/ictcf/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "9dcfe375531e6777d9883f6d5ca3d58b93fc92fff138bf6a1a174e3ddb77944b",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "idenprof",
+      "preview_count": 100,
+      "source_url": "https://github.com/OlafenwaMoses/IdenProf",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "5800286deeb1338e6281cb5da4ec7a4d855e55f11e890f5f649d05e8a2d365bd",
+      "requirements": [],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "illuchar",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/Tujz/IlluChar/tree/d55c729918bda746f74d377a2f11c92389e44bf0",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "0909a5d11551ebef90d693fd90c8dfd84ad112ae4b0fc1c549f08b49d6ade800",
+      "requirements": [],
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "illusionbench-3c643c29",
+      "preview_count": 0,
+      "source_url": "https://arxiv.org/abs/2501.00848",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "78c7c53cfce812d8389d004547e8b753f10f6e8284ba59c1ddd5838dd35ee97d",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "illusionbench",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "a3f2de8f5077861d80b2292f98b3553ceb39ae80cc0a04b90b2436d3b6f541b0",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "illusionmnist",
+      "preview_count": 0,
+      "source_url": "https://github.com/IllusoryVQA/IllusoryVQA",
+      "identity": "family_or_variant_candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "be56a699d84c955ece13b16adeefc18a45a6a468b8b7f4524435168c50e91861",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "illusionvqa",
+      "preview_count": 100,
+      "source_url": "https://illusionvqa.github.io/",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "6ff93be64b83bc8ca4273469bcc5eb68ca974c0ed779440dc63998284abb80c6",
+      "requirements": [],
+      "scope": "Official IllusionVQA test releases: 435 comprehension and 1,000 soft-localization image MCQs. Training/select examples are separate few-shot material, excluded from benchmark test index; distinct from IllusoryVQA.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "illusory-vqa",
+      "preview_count": 0,
+      "source_url": "https://github.com/IllusoryVQA/IllusoryVQA",
+      "identity": "family_or_variant_candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "56ef50b55d0279542c1b67d17a4d076cfe378160e0c10aa276ce76a46ef61336",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "illusoryvqa",
+      "preview_count": 0,
+      "source_url": "https://github.com/IllusoryVQA/IllusoryVQA",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "760c210ab71b814358264d242a4cb56a5d43f62318ad4149bd0f3dc5952f6d3a",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "imagenet-1k",
+      "preview_count": 0,
+      "source_url": "https://www.image-net.org/download.php",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "44e8075a9670af2f726862d4570564cf55517e29ac9bacae7bdef5afaa05dff3",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "imagenet-a",
+      "preview_count": 100,
+      "source_url": "https://github.com/hendrycks/natural-adv-examples/tree/07770705658c3a1c8acce31fd9dbd68f06e297c3",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "a35cad8285457f7a417161c4d7aa2189cc82b6bb57e8a8b662d41cf2b80a9e51",
+      "requirements": [],
+      "scope": "Original author ImageNet-A TAR: 7,500 source images across 200 synset folders",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "imagenet-c",
+      "preview_count": 0,
+      "source_url": "https://zenodo.org/records/2235448",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "ea12afa16798982c2717b8654667d2da5f819f73c9145377713f90b44e1c9145",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "imagenet-ilsvrc-2012",
+      "preview_count": 0,
+      "source_url": "https://www.image-net.org/challenges/LSVRC/",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "633924fa1a2097ce62e67f1fd70bddc9e548ba82dbf7d6126d1dfeaa237f02dc",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "imagenet-ilsvrc",
+      "preview_count": 0,
+      "source_url": "https://www.image-net.org/challenges/LSVRC/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "968d850f41d4a6729d6512281259c176f9b5909615925d2ab9028b9574bde607",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "imagenet-r",
+      "preview_count": 100,
+      "source_url": "https://github.com/hendrycks/imagenet-r/tree/3131cacee97c407bd2ecea15846a67817a64f924",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "cfc3bc60c806cd8cb3837f523f2eed0bbb7cefba826c97088e3eb66ba3adb003",
+      "requirements": [],
+      "scope": "Original author ImageNet-R TAR: 30,000 source images across 200 synset folders",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "imagenet-sampled-1-000-images",
+      "preview_count": 0,
+      "source_url": "https://arxiv.org/abs/2502.14976",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "d1ec4e533f8f8fa7663fed3fd1d3afd5f3e96e0f30c9984f577dcafc7ac5ca71",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "imagenet-segmentation",
+      "preview_count": 0,
+      "source_url": "https://github.com/yossigandelsman/clip_text_span",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "84e13c1da630322440b436c5304718150b560bf7be3ddbb5ec4fc597c5cc28a2",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "imagenet-sketch",
+      "preview_count": 0,
+      "source_url": "https://github.com/HaohanWang/ImageNet-Sketch",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "1f51c8320893b5b06b155e5b4361631d56b72d3cae5c057447d003a4044e27f6",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "imagenet-v2",
+      "preview_count": 100,
+      "source_url": "https://github.com/modestyachts/ImageNetV2/tree/0b0c3fe89058e4c7ee2348938b3f4f706a931bf3",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "20c4fed0f83bd933313c26975cd357ab0c299bc1e71c64a211f4155145b0999d",
+      "requirements": [],
+      "scope": "ImageNetV2 MatchedFrequency b-33 only, 10,000 images and 10/class; Threshold0.7 and TopImages absent",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "imagenet",
+      "preview_count": 0,
+      "source_url": "https://www.image-net.org/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "1fd0a1a964d80e52722e0393af51d1fc4bf430c39d55fca52988dcb6524a5734",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "imagenet100",
+      "preview_count": 0,
+      "source_url": "https://www.image-net.org/challenges/LSVRC/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "bf8c448feb0a70dd3ae504551e8c62ef6093e70dd07c640d1456d393a9398aae",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "imagenette",
+      "preview_count": 100,
+      "source_url": "https://github.com/fastai/imagenette",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "f58d6ff9af5ef986cbbb5fdf2d64dacc050f45782dc609f8666f8f1972b70579",
+      "requirements": [],
+      "scope": "official Imagenette 160px train and validation, 13,394 JPEG images",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "imagenetval",
+      "preview_count": 0,
+      "source_url": "https://www.image-net.org/challenges/LSVRC/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "cfa570c7d4dfe2df550cd6b67fa85f5e7278c9171d1bd7f24c49d5f933d3ccc8",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "inaturalist",
+      "preview_count": 0,
+      "source_url": "https://www.inaturalist.org/pages/developers",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "6f0802050395f60a6ef8cf6df90c1b2fa768743631b8d9e0400d299c49c2e7b2",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "interpbench",
+      "preview_count": 0,
+      "source_url": "https://github.com/FlyingPumba/InterpBench",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "190bf87efbfee949d163be724f0dea2f0ed5cf0f9ebb5d8a961b967fdcd1701d",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "itac",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "3b161bda9cb90abdd94410070137450a1b86c26c76fd2c81d76bb49ba8e97bf2",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "jailbreakv-28k",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/JailbreakV-28K/JailBreakV-28k",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "77299bba4fec12ba49fd7ec5b9e065bfff9ec54011cc4108a35c2fc600caefea",
+      "requirements": [],
+      "scope": "Official 28,000-row JailBreakV CSV with source jailbreak queries, red-team queries, format and policy fields, and original image references. Only references present in the small public image tree resolve individually; the full image set is not public in this release.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "jiechieu-tsopze-resume-corpus",
+      "preview_count": 0,
+      "source_url": "https://github.com/florex/resume_corpus",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "3a98a4b1466b85b5d0735a17dbbe9556265929f21c75d257faeb8b15c1e5e8d9",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "laion-400m",
+      "preview_count": 0,
+      "source_url": "https://laion.ai/laion-400-open-dataset/",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "906c5d339175ad6a6806bd968391ec6db9ebd3c50b13e8c041572174c273c2f4",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "laion-aesthetics",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "ada0d1be9fd8bc304dcf6634ab34ce6aea6aac74b857f7df2eb3b0528000b217",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "laion",
+      "preview_count": 0,
+      "source_url": "https://laion.ai/blog/laion-5b/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "98707d2d526d5ecce87906aab1a879b344c9ac8c8211659def3d364c43c7c607",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "language-identification-dataset",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "925c5e7dc5f8008da0e45f714a326c2c94a54d508692488cd98b6327a9c35d91",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "lingoqa",
+      "preview_count": 0,
+      "source_url": "https://github.com/wayveai/lingoqa",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "62a3d6e8be9d1f4fb075d8693f9c9437ecc1951166ab09f26ff5158df50f4de9",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "llava-bench",
+      "preview_count": 60,
+      "source_url": "https://huggingface.co/datasets/liuhaotian/llava-bench-in-the-wild",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "0aac953a8842f2e2ba1d7167068e9e4132fb92edbad2beacea57696761cf38d3",
+      "requirements": [],
+      "scope": "Official LLaVA-Bench In-the-Wild: all 60 questions (conversation, detail, complex) linked to 24 images and 24 context captions. This is distinct from LLaVA-Bench COCO; the entire 60-record release is the local preview.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "llava-instruct-150k-3a74a703",
+      "preview_count": 0,
+      "source_url": "https://huggingface.co/datasets/HuggingFaceM4/FineVision/tree/main/LLaVA_Instruct_150K",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "huggingface_columnar",
+      "plan_id": "9347ed3307ff76be1a687c8653ee6d66f221085f01bafabb6d5bd9c354041c1c",
+      "requirements": [
+        "Source download exceeds the selected download budget."
+      ],
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "expected_download_bytes": 76639461610
+    },
+    {
+      "dataset_id": "llava-instruct-150k",
+      "preview_count": 0,
+      "source_url": "https://huggingface.co/datasets/liuhaotian/LLaVA-Instruct-150K",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "huggingface_columnar",
+      "plan_id": "5bd38d16f7a30ee2d45a18afaa10968385bb0d0dadc60fcef72be40b850b61fe",
+      "requirements": [
+        "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
+      ],
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "maliciousinstruct",
+      "preview_count": 100,
+      "source_url": "https://github.com/Princeton-SysML/Jailbreak_LLM",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "5742be3fa4898c0137b95f5fb1ad482eef1298d93c57a98c78136297b2d52c96",
+      "requirements": [],
+      "scope": "Official MaliciousInstruct.txt, 100 nonempty source lines",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "mathvision",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/MathLLMs/MathVision",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "915207652edf6afbe223e4208d898886672bbb48e69df364db5b09c1e3d13b85",
+      "requirements": [],
+      "scope": "MathVision official test split, 3,040 rows; testmini overlap excluded",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "medical-multimodal-evaluation-data",
+      "preview_count": 0,
+      "source_url": "https://huggingface.co/datasets/FreedomIntelligence/Medical_Multimodal_Evaluation_Data",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "huggingface_columnar",
+      "plan_id": "4dc0bebe378d531fe56ccff6dd672b7fb6ef20a745543f9962c99e541eb27aa2",
+      "requirements": [
+        "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
+      ],
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "miap",
+      "preview_count": 0,
+      "source_url": "https://storage.googleapis.com/openimages/web/extended.html",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "7fcc570cc95bada04df3f95cd79442b86d5e5ba9613f319d545f6e5602d16be1",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "middlebury",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "37de9186ff1b42a5b8508b7668c3db8c52f6319b07140e72866ec61a060f99b4",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "mit-adobe-5k",
+      "preview_count": 0,
+      "source_url": "https://data.csail.mit.edu/graphics/fivek/",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "11c8c5b478368bc7c2cf599c32f11a16b7782a4c87453ea1c60989212c751532",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "mit-states",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "8770af820d5897d0e4643de034940f6af28297493882e0b0580b4ae25f2ad953",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "mllmu-bench",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "eb2792e5fe52dda1418093f22378110b71627964a843d8ea0261096e9e4215c7",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "mm-safetybench",
+      "preview_count": 0,
+      "source_url": "https://github.com/isXinLiu/MM-SafetyBench",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "76720bae43ae857bb211201f134f278b0f78d1b2d760e521921f25c31ea32258",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "mm-vet",
+      "preview_count": 100,
+      "source_url": "https://github.com/yuweihao/MM-Vet/releases/tag/v1",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "7903a3266077b52cda8744a617b1e0f80f693b4c14db7f931de8f73c4f19a807",
+      "requirements": [],
+      "scope": "Official MM-Vet v1 release: 218 question-answer records with 200 distinct image files. Capability tags, original answers, image-source labels and bard-set membership remain source fields. v2 is a distinct release.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "mma-diffusion",
+      "preview_count": 0,
+      "source_url": "https://github.com/cure-lab/MMA-Diffusion/tree/563091a61193927789d891a1603b7a7a832eb844",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "c1686acc92e59dd00340fe14174f009ef15eceae7145713511aa786d3295e938",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "mmbench-en-dev",
+      "preview_count": 100,
+      "source_url": "https://github.com/open-compass/MMBench",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "5344d972a9f80ba9cc087d58604bf14325bbc0f43445d5ff304fbb1cc5ec7d18",
+      "requirements": [],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "mmbench",
+      "preview_count": 0,
+      "source_url": "https://github.com/open-compass/MMBench",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "7e33b4e25558a048e7c4dfb06018277b546e3b078009632279d93462248bcba2",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "mme-perception",
+      "preview_count": 0,
+      "source_url": "https://mme-benchmark.github.io/home_page.html",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "5f252606804c5bde2b0dea647bd6bf7fab4b326e9832270b1772508ed3a3efec",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "mme",
+      "preview_count": 0,
+      "source_url": "https://mme-benchmark.github.io/home_page.html",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "b509f61dfa2599943e2cd4e3611890f1b835e13ec7075f4a927319108053bbf7",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "mmmu-dev",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/MMMU/MMMU/tree/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "bdb78dada73e1f855185f4cba6d212d6ae29151bc6421ef18d1165d907de1e24",
+      "requirements": [],
+      "scope": "All 150 original MMMU development examples across all 30 subject configurations; validation and test are separate populations.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "mmstar",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "83432c01d61b9f22a02fad6d65dcb664d4afbf6da5701ed7a477019ccea30fe0",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "mnist",
+      "preview_count": 100,
+      "source_url": "https://yann.lecun.org/exdb/mnist/",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "c0ff0be7dec044e44f0fe48d34f5168c2aae1513c15cdb63ab8e8342c45a7c54",
+      "requirements": [],
+      "scope": "official MNIST original training and test IDX files, 70,000 examples",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "mrpc",
+      "preview_count": 100,
+      "source_url": "https://github.com/nyu-mll/GLUE-baselines/blob/master/download_glue_data.py",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "ab7f61866b2c9033e9cbbf62c2a49767f2592abfaceeb0915a706fda96712af3",
+      "requirements": [],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "ms-coco-7f846b38",
+      "preview_count": 0,
+      "source_url": "https://cocodataset.org/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "a87c60d6a330af1bb6280d0278d1a7381a3b3d9f404e55c42abdc7e2f3d0285e",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "ms-coco-captions",
+      "preview_count": 0,
+      "source_url": "https://cocodataset.org/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "981981ba2a429e8850790a552be3439911d0eac9afda22967619a88bde44e663",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "ms-coco",
+      "preview_count": 0,
+      "source_url": "https://cocodataset.org/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "f1cac5943fdf4ff513c40a35e988a2933995b71e093fe3c9b7ee1677c3dc6e90",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "ms-cxr",
+      "preview_count": 0,
+      "source_url": "https://physionet.org/content/ms-cxr/1.1.0/",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "9a3d98e5e7080f68d49f0d24f78a38db7e0d9d188591a62b549ae1144d91b198",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "mscoco-100-target-subset",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "6845a50d6fbede3f126d5bcdce01bc553cf34815a90a8ae567403a58edf3531b",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "mscoco",
+      "preview_count": 0,
+      "source_url": "https://cocodataset.org/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "d786b6f1db3713f9d0f95f0db0fffdc73d0f72fa0c563866b1308717d5342096",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "multitrust",
+      "preview_count": 0,
+      "source_url": "https://multi-trust.github.io/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "18446f8510672ee3cdbbfd3624946a7c9c2374d81d39457f4af2da70c2012972",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "mvbench-scene-qa",
+      "preview_count": 0,
+      "source_url": "https://huggingface.co/datasets/OpenGVLab/MVBench",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "huggingface_columnar",
+      "plan_id": "a5fe8a7a456dee68c6731bcc1be648138c441457099d677e8f2f046c3186f835",
+      "requirements": [
+        "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
+      ],
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "naturalbench",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/BaiqiL/NaturalBench/tree/ba41a7d564877a9b64c094b08015ca493cc3e54b",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "a2c30c98c76240bd282784b03a59226162454451bcd506dae20467f02745782f",
+      "requirements": [],
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "nips17",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "c1609eb0ddd3a0e0ff3d1ff02b390cddb006f800868acc6dec023bffe6ba7c22",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "nocaps",
+      "preview_count": 0,
+      "source_url": "https://nocaps.org/",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "9072f6d27ae76d58d6e337673e20ac0512581d073de21eca4f3fd0b1546b2e40",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "nrc-vad",
+      "preview_count": 0,
+      "source_url": "https://saifmohammad.com/WebPages/nrc-vad.html",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "e32c4fe4b41efd8d6a0bdf7bbd93d04e3087cc8d18248825647c90a0e92604ca",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "oasis",
+      "preview_count": 0,
+      "source_url": "https://pubmed.ncbi.nlm.nih.gov/26907748/",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "dcb5831c9204a6ac2fbb5315ae2ac07a0231455b718bda738657b03dcb4bd648",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "objaverse",
+      "preview_count": 0,
+      "source_url": "https://objaverse.allenai.org/docs/objaverse-1.0/",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "6a2b11224f801c313b6399952e649fe0da847144efcb6e6a9d8f6c8f324ba4d9",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "objectnet",
+      "preview_count": 0,
+      "source_url": "https://objectnet.dev/download.html",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "26a6b3fba3a4d22bf125426c69158e25ac478ab2c93b782cb5158874e2983099",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "ok-vqa",
+      "preview_count": 0,
+      "source_url": "https://okvqa.allenai.org/download.html",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "05fe8bb9cd68adf83c9e45515642471238fa15e76518e7701592481dc2a250b1",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "omnisafebench-mm",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/jiaxiaojunQAQ/OmniSafeBench-MM",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "8a9215e69b46dc2182b9462b369181cd7f28d34a45ff9e4db1048df2a5830ac7",
+      "requirements": [],
+      "scope": "All 1,500 official OmniSafeBench-MM JSON annotation rows, with their original prompts, risk categories and distinct pinned image references. Source images resolve individually on demand.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "omnispatial",
+      "preview_count": 0,
+      "source_url": "https://github.com/qizekun/OmniSpatial",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "huggingface_columnar",
+      "plan_id": "53d45765f4b0b0d9fc1f925a2fb07763a49c60d3d89125f9057cd54cda9f1808",
+      "requirements": [
+        "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
+      ],
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "openimages",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "dac16a0d7d01895e9f2f710097eb548c62b0d80d2f437fdc585601227e4e5957",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "ostris-dataset",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "17ebbd00dc750fdcd848503845a1eeb2aa0c6af799f7e7dd34415cba6b9f2569",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "oxfordpet",
+      "preview_count": 100,
+      "source_url": "https://www.robots.ox.ac.uk/~vgg/data/pets/",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "ab19fb11b3d06614b5b1d5966ab04a8121d84229905508c0b0080eeca3ef7e68",
+      "requirements": [],
+      "scope": "All 7,349 annotated Oxford-IIIT Pet images; original trainval and test splits.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "pairs-csv",
+      "preview_count": 100,
+      "source_url": "https://github.com/ExplainableML/sae-for-vlm/blob/39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493/metric_benchmark.tar.gz",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "263c5ffff627284fb23f2e98626ea303ac3484a8c2ea868e05f172fa7201e609",
+      "requirements": [],
+      "scope": "One thousand released neuron pairs with user preference and DINOv2/CLIP metric scores, from the Pach SAE metric_benchmark archive. This is not an image dataset.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "pairs",
+      "preview_count": 100,
+      "source_url": "https://github.com/katiefraser/PAIRS/tree/507075ac84d244c4f98b965ba257b197d4944b04",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "df928ad2170074bb45fee247a95e9c5ebb8f31784a4c78b7426ffc50ea1e392f",
+      "requirements": [],
+      "scope": "original PAIRS commit: 200 images/50 four-image scenarios",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-08e415961919a492-unnamed-11-image-inpainting-set",
+      "preview_count": 0,
+      "source_url": "https://github.com/dmitryulyanov/deep-image-prior",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "e80d5c85afd520104fd5ac2621edb8887fcc8c84cbecf3480b46f34c144066e2",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-08e415961919a492-unnamed-real-noise-benchmark-46",
+      "preview_count": 0,
+      "source_url": "https://noise.visinf.tu-darmstadt.de/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "c76c88d5c455375ad2afbdd14492160238a561072e4db22fb5b23d56ee1b1022",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-12e8bd34b4a2f2a8-unnamed-harmful-instruction-evaluation-set",
+      "preview_count": 0,
+      "source_url": "https://arxiv.org/abs/2306.13213",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "6f05792d04c401050778e35816d5ca071c5bac1e66a0404d6c1320afaf129a72",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-12e8bd34b4a2f2a8-unnamed-harmful-sentence-corpus",
+      "preview_count": 0,
+      "source_url": "https://arxiv.org/abs/2306.13213",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "a91c9c0bd7307fd362ba22d8adcf5ef0b0a64bff79e5e77c7e1d6db97f762829",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-164d7c221452ffec-unnamed-cfd-morph-collection",
+      "preview_count": 0,
+      "source_url": "https://github.com/kshitishghate/bias_prop",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "51ee7ab1239aed66f955f4837d44b633d0f56589c5596684c8309ab25f3fa58a",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-1e2474b15fec2d7d-unnamed-controversial-stimuli-collection",
+      "preview_count": 100,
+      "source_url": "https://github.com/kriegeskorte-lab/PNAS_2020_Controversial_Stimuli",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "4f0abb6fefaa7aec5a97b630f31e567baf4ddcb33d45dd3984d5c5caaaa0ec38",
+      "requirements": [],
+      "scope": "Author-released Experiment 1 MNIST and Experiment 2 CIFAR-10 stimuli actually presented in behavioral experiments: 820 plus 1,043 PNG paths. The source archive also contains more synthesized candidates and response CSVs, which this index does not conflate with displayed stimuli.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-2aa40aa13ed2a25b-unnamed-objaverse-spatial-images",
+      "preview_count": 0,
+      "source_url": "https://github.com/Raphoo/linear-mech-vlms/tree/main/spatial_id_derivation",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "0eba156a7a644b40502aeb6c1132269fcac6bacf70219797acd5fdea106d5747",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-2aa40aa13ed2a25b-unnamed-synthetic-spatial-training-set",
+      "preview_count": 0,
+      "source_url": "https://github.com/Raphoo/linear-mech-vlms/blob/main/spatial_finetuning/README.md",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "aff2c0c8bbdba7f20118de6aacbe4d4b7e7d6eeda3bfd8825c3fef33e87445e4",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-collection",
+      "preview_count": 0,
+      "source_url": "https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "huggingface_columnar",
+      "plan_id": "e6bd52d7b2e06062e58a6c8373ad2978b3c985f6442dc1da900eedb8465324cd",
+      "requirements": [
+        "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
+      ],
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-set",
+      "preview_count": 0,
+      "source_url": "https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "huggingface_columnar",
+      "plan_id": "e7d2745dc8ea73a958bfae35965395d1e0969d3f7e7d7490ec53c10b5aa7be02",
+      "requirements": [
+        "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
+      ],
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-63c3bd849356e00f-unnamed-robust-nonrobust-feature-collections",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "f640f8b6f21bcb12f55cefc2b6d3a91f4469bf6fbdf5d5a64a2345c9f59139ee",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-6a7364738bac9f07-unnamed-online-illusion-repositories",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "2d587409c172a2b510df8f2660a8abfe1a66f50835b14661123e6638783cf09e",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-72040eccb96ead7a-unnamed-synthetic-spheres-dataset",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "d289b4a36a7903203a402030f25c7d6a90afe64fbdb9c0b2effb36fcb94c8127",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-728d8c0964b540ad-unnamed-youtube-image-collection",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "8f22789ffad9307c4943dfd67d76e2c2a108ade443844693e42ac15a1f195da5",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-765a2362f8735bc4-unnamed-social-category-question-set",
+      "preview_count": 0,
+      "source_url": "https://arxiv.org/abs/2505.23798",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "f7c69936c0c2509ba4c60d012c61f379463c356cfc402f9e73d87137c8090103",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-9036b4eaa048dc21-unnamed-neuron-pair-judgment-collection",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "cd9971e22416f23c9c812ab140dd02475e34f77896b0367a89ed2cba777af96e",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-944952997d24ce45-unnamed-van-gogh-painting-sample",
+      "preview_count": 0,
+      "source_url": "https://github.com/Trustworthy-AI-Group/VMA",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "c8d1da41d898a3e6e84d537c18f892ffc74b48f434d7ab8466b38db7955bdffe",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-944952997d24ce45-unnamed-vma-candidate-pool",
+      "preview_count": 0,
+      "source_url": "https://github.com/Trustworthy-AI-Group/VMA",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "e9b0bc2b1b2989d5bda0107e10bf02fd5336a8f2110b72f926493172dbaef6a4",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-959e8fc51787f7e4-unnamed-curated-internet-image-collection",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "bdd56d2414336a4c01f161874e720482540fac66412e51104a6eb77b8181a2af",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-959e8fc51787f7e4-unnamed-internet-image-tracing-set",
+      "preview_count": 0,
+      "source_url": "https://github.com/UIUC-MONET/vlm-circuit-tracing",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "79e877ab2a081fde26645a881f4d0514aacd3bb772da6c59cbfb103048a0ed18",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-959e8fc51787f7e4-unnamed-sea-otter-image-sample",
+      "preview_count": 0,
+      "source_url": "https://github.com/UIUC-MONET/vlm-circuit-tracing",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "206df34175eac79c5638ab118dcacc8ef7236dcac1e89735311a041adf0ad4fa",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-ab31cc6a994470fb-unnamed-human-adversarial-stimulus-collection",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "908a4a0f4d0e3a8c4bf09a18511ecdb61debcde4946c395fc4a46b0d49523b9d",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-c12960e5d652fb7f-unnamed-attack-generalization-collection",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "ca721e19a565152eae26beccba82af46114786eed8566d8b0a68eac63f90e281",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-f6dcb0e50d10ea38-unnamed-ai-generated-gender-image-attack-set",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "0192e8039a931385f642a47cbcf04d262a6ba4c95e05e6c8c4beb1dacd8f0e0e",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-f6dcb0e50d10ea38-unnamed-explicit-image-attack-set",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "62eda5d48d37a96a7625c6d4fb9c94141d54f16778991781165478046da51008",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-f6dcb0e50d10ea38-unnamed-historical-event-image-attack-set",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "430009d1770f209d944fcaa96bd681d68122e39ce461be4fa05408931ca1e3cf",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-f6dcb0e50d10ea38-unnamed-product-screenshot-attack",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "4478fb1854b56b29c90a4066f4696de4e6dc2821d6881e78eb95acab6927384b",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "paper-f6dcb0e50d10ea38-unnamed-public-figure-adversarial-image-set",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "54e41eacf72105260602587e51471957e7f3888a2b4698a89e7744cb5d41ce3c",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "pascal-voc",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "c1871b9e28405b2aab9d8698902f1ac25a40f84f61ff9fdd95dcf2424068f6fb",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "pata",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "349a17efe8ce64ee5e4b59738dd3659428a9721409128894444c8908c6b77498",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "perturbed-gender-benchmark-image-variants",
+      "preview_count": 0,
+      "source_url": "https://openaccess.thecvf.com/content/ICCV2025/html/Hirota_Bias_in_Gender_Bias_Benchmarks_How_Spurious_Features_Distort_Evaluation_ICCV_2025_paper.html",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "77941ab26b923d489b7e977abb4793bf013eceeaf6d24ebe3bf8d0f1f1d3c826",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "phantom",
+      "preview_count": 0,
+      "source_url": "https://huggingface.co/datasets/it4lia/PHANTOM",
+      "identity": "resolved",
+      "ready": false,
+      "kind": null,
+      "plan_id": "c5873d2c5abbd38ee841b40cc3a222f1ba1cd5a0d2b98998f98be4878c51c76a",
+      "requirements": [
+        "This release is gated. Obtain authorized local files and configure its adapter."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "phase",
+      "preview_count": 0,
+      "source_url": "https://github.com/noagarcia/phase/tree/64b043dd3941ae49d5eb3d60aab0319c758cb9fa",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "12a8b88ed62457dab5eb3648af538a21c535b3b14a133f7045fcdd9cb586f5a5",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "pitfall-rom",
+      "preview_count": 0,
+      "source_url": "https://doi.org/10.1371/journal.pcbi.1005268",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "4c9b0e02a0b7f4f72f5368eb5302e876131ca8e91070478d3c70d7449e4f0c4a",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "places",
+      "preview_count": 0,
+      "source_url": "https://places2.csail.mit.edu/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "5725a5260a65c2ba820541caf168d0f871b0a1d2fe07fa1ec6d587e3fed05b26",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "pmc-vqa",
+      "preview_count": 0,
+      "source_url": "https://github.com/xiaoman-zhang/PMC-VQA",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "huggingface_columnar",
+      "plan_id": "8c5bed406fd6512ea97b51b470b5b258409a08928743fee6b0a95781ad9f5064",
+      "requirements": [
+        "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
+      ],
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "pope",
+      "preview_count": 100,
+      "source_url": "https://github.com/RUCAIBox/POPE",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "3404babc9ec24ab1ff4967d1678ea902b07a7fdff5694197af7b345245f12d45",
+      "requirements": [],
+      "scope": "Official POPE COCO val2014 output at author GitHub commit: 3,000 questions per adversarial, popular, and random strategy (9,000 total) over the same 500 COCO val2014 images. Each yes/no label remains a source annotation, not a model prediction.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "puzzlevqa",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/declare-lab/PuzzleVQA",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "61b8d8c498f60aad4b4c926915cc5c36e157fd99161b644065640920cce09f8d",
+      "requirements": [],
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "qnli",
+      "preview_count": 100,
+      "source_url": "https://gluebenchmark.com/tasks",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "d8c5f804f52b5e4e6999b201c26a2f900446d3b88933f697bb0fe98c8a5b9a58",
+      "requirements": [],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "qqp",
+      "preview_count": 100,
+      "source_url": "https://gluebenchmark.com/tasks",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "25e623c7884b98cca659e645101734d706c3232d95676edf61865661d58f35ee",
+      "requirements": [],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "raise1k",
+      "preview_count": 0,
+      "source_url": "https://loki.disi.unitn.it/RAISE/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "cd42499db63816851fffa4d4e9b60d4a4b8e56f427e988bbb4d0a377a4aa9e0c",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "ravel",
+      "preview_count": 0,
+      "source_url": "https://github.com/explanare/ravel",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "7d6d59b3b2fb5a05c7f37d0b1b2e4fcac9e5de3d1459f421c20363ee00980d1f",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "realtoxicityprompts",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/allenai/real-toxicity-prompts",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "68f9f56d41df845b3c25a517ebedccd796011784c702c08347ba8a02b2369dc4",
+      "requirements": [],
+      "scope": "Official allenai prompts.jsonl, 99,442 rows; 1,199 challenging=true in this pinned file",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "realworldqa",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/xai-org/RealworldQA/tree/17e7f75e092e47169732462ea3cdfebe911105dd",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "8d1309c1421b9adc1d1273937bd6c9ab9f1153fab6800050c711d5413d7052ef",
+      "requirements": [],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "recap-datacomp-1b",
+      "preview_count": 0,
+      "source_url": "https://github.com/UCSC-VLAA/Recap-DataComp-1B",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "fbde5113e16571680924d7e3a7784308dceecbbf2651223ba594e00a40585fca",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "restricted-imagenet",
+      "preview_count": 0,
+      "source_url": "https://github.com/MadryLab/robustness/blob/master/robustness/datasets.py",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "d73ffa94e38eb98f2816e5db7e1239ca026a91f756f23fe77d7de3d1d5c9bce7",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "ring-a-bell",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "fb11fead0e43500379277901c395cacddf20fbee9b623fd5ede06af7a6e82be5",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "robustbench",
+      "preview_count": 0,
+      "source_url": "https://github.com/RobustBench/robustbench/tree/78fcc9e48a07a861268f295a777b975f25155964",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "3cdcf7fb3cf7c5c617c42a3df1604b9b4e3c164774c5b4758c44fb14fff094e7",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "roco",
+      "preview_count": 0,
+      "source_url": "https://github.com/razorx89/roco-dataset",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "84758802ffbe74d93a4f50a15f9568d96c199216945de390b8d05636ac0e4623",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "rosmap",
+      "preview_count": 0,
+      "source_url": "https://www.radc.rush.edu/molecular_networks/datasets.html",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "5d9da2a16be5cb250584192331201c5d00b2080149d384cf2acd16f8e9a60c9f",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "rs-vqa",
+      "preview_count": 0,
+      "source_url": "https://rsvqa.sylvainlobry.com/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "b8f32a79914326c0907b0b3f10238f4bf0cdd6dd5f08e2080c517279e96cf86f",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "rsicd",
+      "preview_count": 0,
+      "source_url": "https://github.com/201528014227051/RSICD_optimal",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "d5133eb5d88a098c83786ff2d1fab12deca0fe4effee2e1fcf4505c6f0d4db41",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "sad",
+      "preview_count": 0,
+      "source_url": "https://github.com/LRudL/sad/tree/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "800bebd6d4fb34fe00adba6093d6c55571b8cc6738fd25421d422e41317e3c08",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "saegis-clean-and-adversarial-splits",
+      "preview_count": 0,
+      "source_url": "https://github.com/conan1024hao/SAEgis",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "2a8288793228878ca55268e81e3ef5c501cd45db79345d2efed9608d43790cb5",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "safebench",
+      "preview_count": 0,
+      "source_url": "https://safebench-mm.github.io/",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "cd96d4aec59fad1500e49c166454dcaefa967f4bd141af3c2816eb9f99830579",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "sb-syn-crop",
+      "preview_count": 0,
+      "source_url": "https://huggingface.co/vlmbias",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "3cb5fa7f83eb6bfb8f798be7282418e6989bff602ca40e58eae5315848f79ca4",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "sb-syn",
+      "preview_count": 0,
+      "source_url": "https://huggingface.co/vlmbias",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "b7feb8423045e2fb238346df039d0e018aec77c6d0ebf0d4c84b8045fe657d73",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "sbbench-syn-crop",
+      "preview_count": 0,
+      "source_url": "https://huggingface.co/vlmbias",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "82e4234bceadbe40262cd688f3cb101d001197c280d0eedd9c7b64ae1517aadc",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "sbbench-syn",
+      "preview_count": 0,
+      "source_url": "https://huggingface.co/vlmbias",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "c5d14675d8b35530249fb9d905be9e040bd762bcbb2de99bac2e79a85bbcb975",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "sbbench-synthetic-age-crop-false",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/vlmbias/sbbench_synthetic_age_crop_False/tree/95ac0c3020ff710295a6ed5c0216718f03383151",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "a564f49cbd57a825d47a3747505ea9483b94e2e1b0749516aff22678bb713fbc",
+      "requirements": [],
+      "scope": "original author train split",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "sbbench-synthetic-age-crop-true",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/vlmbias/sbbench_synthetic_age_crop_True/tree/43769ef07d9388ebb4c3dc74b548eea615d0c93b",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "c19efcc6c2c08eaceef269669938f667912f12a71c0260809b08c7f8d1b41a4c",
+      "requirements": [],
+      "scope": "original author train split",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "sbbench-synthetic-gender-crop-false",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/vlmbias/sbbench_synthetic_gender_crop_False/tree/b3f53090f541bfcdb491217dfec7aa639289ad8a",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "225c7850e5d567971dd30247d4e34f3c883630d3fe3f5368c968f863d93f4c59",
+      "requirements": [],
+      "scope": "original author train split",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "sbbench-synthetic-gender-crop-true",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/vlmbias/sbbench_synthetic_gender_crop_True/tree/a7679386395cf29e9640757f16923f823d6251ef",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "d10982ef14ec3bc81b549d88352ae18c19232276b8169091238841b70f49e8b7",
+      "requirements": [],
+      "scope": "original author train split",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "sbbench",
+      "preview_count": 0,
+      "source_url": "https://github.com/UCF-CRCV/BBQ-Vision",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "a7d763f2712e35b4ccf0405bfc68b4cefae8705b8918ed0d40bd92607baae553",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "scienceqa-img",
+      "preview_count": 0,
+      "source_url": "https://github.com/lupantech/ScienceQA/tree/2cbf8318e07b9ece895bb2ae605e71e38d623264",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "ade33afbb7fca2c955990a0acf8a433b9173daae00403c1894a380d01001d555",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "scrambled-mnist",
+      "preview_count": 0,
+      "source_url": "https://arxiv.org/abs/1911.09288",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "d83af9f73dfeedfef5f294115b84c2f91ec5efc44905add4eac0c5693d7181f6",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "seed-bench-2",
+      "preview_count": 0,
+      "source_url": "https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "huggingface_columnar",
+      "plan_id": "584d1dc8b4620b882265c64e8ac80911e44b2f7c9e3b35684ec0373cfa9d5f67",
+      "requirements": [
+        "No native Arrow/Parquet shards in this release; a format-specific acquisition recipe is required."
+      ],
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "seedbench",
+      "preview_count": 0,
+      "source_url": "https://github.com/AILab-CVC/SEED-Bench",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "6b99828f5c71b674b2f47a9c4d1052300729e0e93bc9fd6e8d56de6018a9efa3",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "senator-tweets-2021",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/m-newhauser/senator-tweets",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "2a03a31d11d1261b6a500c5de51e060f0df97f3b92ab88e9762f38d94ec2e466",
+      "requirements": [],
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "set14",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "9182e36ab6e8fa55936d0b2a3661436210f24332e1b6f2a6637ae46bfb7cf93e",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "set5",
+      "preview_count": 0,
+      "source_url": "https://www.bmva-archive.org.uk/bmvc/2012/BMVC/paper135/index.html",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "a00728be02af1c5cc7c4089d8ce37d51a93c13c67b35bdfe77e10a99d938afdf",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "shapes-localization",
+      "preview_count": 0,
+      "source_url": "https://github.com/israfelsr/vlm-pathways",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "4b878254c284c1d1151759e5731937f572fa9e16191e52b61dc0ea537d50c815",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "shapes-recognition",
+      "preview_count": 0,
+      "source_url": "https://github.com/israfelsr/vlm-pathways",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "908f923316032a5779fecd829f9a25f3a3cb359fc5ce2e9aafb0339524a4b401",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "shapes-relations",
+      "preview_count": 0,
+      "source_url": "https://github.com/israfelsr/vlm-pathways",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "83443b8ec87d901fc7e8544729a06b5b2e3724fb7feb0a8edd2ce193bfbe5269",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "shapeworld",
+      "preview_count": 0,
+      "source_url": "https://github.com/AlexKuhnle/ShapeWorld",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "200b4bc5d2bd6d4689ee5cd793e5bd2ac7994dffbc7297a94a8626e4e8a6c248",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "shiftmnist",
+      "preview_count": 0,
+      "source_url": "https://github.com/jhjacobsen/fully-invertible-revnet",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "15d04705ec354ef37b23d5c8ec8c670c65280f832f8380f3e73621dc12afe0e6",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "simplevqa",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/m-a-p/SimpleVQA/tree/037cf89fb6f1212691756b66d1ecde6c2ce89e54",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "aa41b738043e6e555c11a06a30817f87aab4fd6538f3d63263170dcbbacf381a",
+      "requirements": [],
+      "scope": "All original native SimpleVQA language shards at the pinned author revision; image strings are losslessly decoded from base64 for display and model inputs.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "simulated-transistor-traces",
+      "preview_count": 0,
+      "source_url": "https://github.com/ericmjonas/neuroprocdata",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "b58ea507e12a1bf75b7b3d5e298bd108eaaddd3a1e2ee45effde18a7ce5dd646",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "smolim2-135m-10b",
+      "preview_count": 0,
+      "source_url": "https://huggingface.co/datasets/EleutherAI/SmolLM2-135M-10B",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "huggingface_columnar",
+      "plan_id": "0cb4671456b382fa0c331481413aba74172f05166fa33fb92f15e8e870f9565b",
+      "requirements": [
+        "Source download exceeds the selected download budget."
+      ],
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "expected_download_bytes": 25564441952
+    },
+    {
+      "dataset_id": "snli-ve",
+      "preview_count": 0,
+      "source_url": "https://github.com/necla-ml/SNLI-VE",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "a19bce9599993ca214973d48e4cae713d892a5d19301882dd6c4ee6d307edb64",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "socialcounterfactuals",
+      "preview_count": 0,
+      "source_url": "https://huggingface.co/datasets/Intel/SocialCounterfactuals/tree/182f8d1739028dc3ab9e9f6be4e1cb52cf5d6fe1",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "huggingface_columnar",
+      "plan_id": "9bae404089756022a36c05774393b26c5fcdc8a68e8f8a64df83e5947fdca28e",
+      "requirements": [
+        "Source download exceeds the selected download budget."
+      ],
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "expected_download_bytes": 27215665580
+    },
+    {
+      "dataset_id": "sorrybench",
+      "preview_count": 0,
+      "source_url": "https://github.com/SORRY-Bench/sorry-bench",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "498c7dfefadfbc0acf2f2293aa8bce3b7602a324b9f5310ec51485be22c345bc",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "space-10",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/Cusyoung/SpaCE-10",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "2d331971a50af9ef2282a7e6feb6291f27f36930de18b7ba6e2883676ea939a9",
+      "requirements": [],
+      "scope": "All eight SpaCE-10 single-choice test subsets (ep, eq, fr, oo, os, sa, sp, sq) at the pinned revision; each record keeps its subset name from the source shard.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "space-invaders-rom",
+      "preview_count": 0,
+      "source_url": "https://doi.org/10.1371/journal.pcbi.1005268",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "20ddd5362e921fac44d6ea35e30ed55c38518032be39c4f78a582735ff2addd3",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "spoken-wikipedia",
+      "preview_count": 0,
+      "source_url": "https://nats.gitlab.io/swc/",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "d4519e98ece783289eb68d1334e31f9a1634c1063abc9c53eed4342e5acd1019",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "sst2",
+      "preview_count": 100,
+      "source_url": "https://gluebenchmark.com/tasks",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "95e0d89206cd3b10dd0bd1b880f75dd519943f1d5a088bd53652da5f1ee00be1",
+      "requirements": [],
+      "scope": "GLUE SST-2 original ZIP train, dev, and unlabeled test TSVs converted losslessly to Parquet, 70,042 rows",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "stanford-cars",
+      "preview_count": 0,
+      "source_url": "https://ai.stanford.edu/~jkrause/cars/car_dataset.html",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "36e44518f143537720e7082461b947a18a2a6fec234eafb2058ede92511242c1",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "stl-10",
+      "preview_count": 100,
+      "source_url": "https://cs.stanford.edu/~acoates/stl10/",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "1c18b7b98ee4a8af7012ebee1b5934b6446c23b89b7ffcc4221d82cf01dc2be7",
+      "requirements": [],
+      "scope": "Stanford original STL-10 binary train, test, and unlabeled splits; 113,000 images",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "sun397",
+      "preview_count": 0,
+      "source_url": "https://sun.cs.princeton.edu/",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "0aa724c119b16ae39a6718246f4318fa42a36b5dfb9f3d3609fea0011864beb3",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "svhn",
+      "preview_count": 100,
+      "source_url": "http://ufldl.stanford.edu/housenumbers/",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "c046252547ef673bc7d403c17adf7ddfae3dfb9aff6ca044338847f6c076777f",
+      "requirements": [],
+      "scope": "Official cropped 32x32 train (73,257) and test (26,032) digit examples; extra split excluded",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "svo-probes",
+      "preview_count": 100,
+      "source_url": "https://github.com/google-deepmind/svo_probes/tree/206219e2afd9640b8bbe6ef95f49b52b0d4ed350",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "f7551dfe2254b737fb1530d12c1ea078ac584caced6539a221f2da57527f30bd",
+      "requirements": [],
+      "scope": "complete original author CSV, 36,841 sentence/image-URL pair rows",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "t2i-compbench",
+      "preview_count": 0,
+      "source_url": "https://github.com/Karine-Huang/T2I-CompBench/tree/4aa404212eb5d06e5adbcd9cee696c750d0d25a5",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "fdacc20c687d34fe97c603a808b3b36b6c53094d6ac35a8488d841e4391b1dbb",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "tdc2023",
+      "preview_count": 100,
+      "source_url": "https://github.com/centerforaisafety/tdc2023-starter-kit",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "2e6de2ea961e2380e83305101b711155b6f093a9bf0a9f9fd2624e823f173419",
+      "requirements": [],
+      "scope": "The TDC 2023 red-teaming starter kit's 50 dev and 50 test behavior strings. This is the public behavior list, not gated challenge models or the citing paper's selected prompts.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "textvqa-x",
+      "preview_count": 0,
+      "source_url": "https://github.com/amzn/explainable-text-vqa/tree/493ee9629208ff6fabf1ce0bc9cb5be0559a8ca6",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "35bf21e580533b828b59eaebf191efcf325057642db0fd7a6702c573b7cee195",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "textvqa",
+      "preview_count": 0,
+      "source_url": "https://textvqa.org/dataset/",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "http_archive",
+      "plan_id": "85da161f3a44b5d477eb2e242fcace72f9ce3fa31e7a3ceed700041eccaa02cd",
+      "requirements": [
+        "Checksum not pinned for TextVQA_0.5.1_train.json, TextVQA_0.5.1_val.json; fetch once, record its SHA-256, then plan again."
+      ],
+      "scope": "All TextVQA 0.5.1 train (34,602) and val (5,000) question records from the official JSON releases; images are the separate OpenImages archive and are not acquired here.",
+      "expected_download_bytes": 24751099
+    },
+    {
+      "dataset_id": "the-pile",
+      "preview_count": 0,
+      "source_url": "https://github.com/EleutherAI/The-Pile",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "4568356b0520f413596a46174b2261fe2c3db4a5954d9bd481d74ebf67ebcba4",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "tid2013",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "00d0fe5b125a5a289c1fb62493f576feae742d188f0fa0bbc216325325b59888",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "timit",
+      "preview_count": 0,
+      "source_url": "https://catalog.ldc.upenn.edu/LDC93S1",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "88748b9ef9ea58144df9fc6af9108c2984aa3e3873a177480be20b77d5d3ad5e",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "top16-images-csv",
+      "preview_count": 100,
+      "source_url": "https://github.com/ExplainableML/sae-for-vlm/blob/39dff5bd6dea67fc3ef350bc7b2312e5fcfc1493/metric_benchmark.tar.gz",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "5e60f8c548f0e8f4130ca180d8c5aa79fe3ce1ab3034cf8390362d1ff46244e5",
+      "requirements": [],
+      "scope": "Nine hundred thirty SAE neuron rows, each listing 16 ImageNet-training image references in the author metric benchmark. The referenced images are not bundled.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "turing-eye-test",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "fbef56b473cf9c8ff2d81946f734f9bbf6ef2d1479e328e043d086aeab255474",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "tweeteval",
+      "preview_count": 0,
+      "source_url": "https://github.com/cardiffnlp/tweeteval/tree/4fbd22cd78421f05b1ecdb4fc5725bc7a7bd8f66",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "63b822af2f7174b0267e0f4fe1250c2d7974139f8fa837d4227f276ea91022c9",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "ucf101",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "b200195fa05f473a0c88a33fef4c4927799a4999ffe7ab9e23be9836b965e979",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "vg-qa-one",
+      "preview_count": 0,
+      "source_url": "https://github.com/israfelsr/vlm-pathways",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "df10e4fed9099389ff1f300e2062e2de0187e81dbe2a1daf9c494dbe2c4c3c1e",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "vg-qa-two",
+      "preview_count": 0,
+      "source_url": "https://github.com/israfelsr/vlm-pathways",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "cfae754957f3171a7674c46ac91788a945eae3de4988a007a0b019407d2976c9",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "vhd11k",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/denny3388/VHD11K",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "9072b549201156f95b9a65990577f95761bb137f175193ff66d8f40d77619cfb",
+      "requirements": [],
+      "scope": "All 10,000 image and 1,000 video rows in the pinned official annotation tables",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "via-bench",
+      "preview_count": 0,
+      "source_url": "https://arxiv.org/abs/2602.01816",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "ed66d916dace20af5e6990b88ec538b7c76be274b6a12db058a20eeeb08a1c0b",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "vibeeval",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/RekaAI/VibeEval",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "63dfb107b288cd0d493cc82e8e6515b992c2c1b0aae55d6583ea8916ac533344",
+      "requirements": [],
+      "scope": "Official Vibe-Eval v1 test Parquet with 269 image-text prompts and references. All 269 source rows and embedded images are retained locally; five rows reuse an identical image asset.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "visu-text",
+      "preview_count": 0,
+      "source_url": "https://huggingface.co/datasets/aimagelab/ViSU-Text/tree/9afabb85b5570fa883b7caa0561d8c8d71d84dcd",
+      "identity": "resolved",
+      "ready": false,
+      "kind": null,
+      "plan_id": "ad14f084959cc0d4425d1abba1028ee24ca4d4e82ddfea7fe719c95988d85421",
+      "requirements": [
+        "This release is gated. Obtain authorized local files and configure its adapter."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "visu",
+      "preview_count": 0,
+      "source_url": "https://huggingface.co/datasets/aimagelab/ViSU-Text",
+      "identity": "resolved",
+      "ready": false,
+      "kind": null,
+      "plan_id": "191d44cc9fc2572270df026a518737d2bfc0369a2d158463bc6d0e32d5184b9e",
+      "requirements": [
+        "This release is gated. Obtain authorized local files and configure its adapter."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "visual-counterfact-filtered-467",
+      "preview_count": 0,
+      "source_url": "https://github.com/nlietzow/vision-default-prior-override",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "a1c1b567b001a72416d1620c542c12e2a446e57d24cdcd16f84db8de8f7324d1",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "visual-counterfact",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "40ab5784615298e5d96e1ce892ef2d7e033d59b1a550a1a91ffa328bd3fa036d",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "visual-genome",
+      "preview_count": 0,
+      "source_url": "https://visualgenome.org/home",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "fa3f7b51d8ec36b84f0e47732ed1d933ad2b1dc86e69c17b6cd55a13aa62f5bf",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "visual6502-transistor-netlist",
+      "preview_count": 0,
+      "source_url": "https://github.com/trebonian/visual6502",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "d4c43adc538772f7157c19eed526d6d40951d0bfa54ca837b53d9d2c1cce12c6",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "visualpuzzle",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/neulab/VisualPuzzles",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "0a9874139197fec48ee63cf762a0435013979331c21388ee0c7be47e9bc7f1c3",
+      "requirements": [],
+      "scope": "Official NeuLab VisualPuzzles train Parquet with 1,168 image questions across five reasoning categories. Original options, answer, category and difficulty remain source fields; repeated images share asset identity.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "visualqa",
+      "preview_count": 0,
+      "source_url": "https://visualqa.org/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "5a398d176ee04860a41b08f16a3df4d2c25b053b0ce0d60530b8f5f8989dad7f",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "vizwiz-priv",
+      "preview_count": 0,
+      "source_url": "https://vizwiz.org/tasks-and-datasets/vizwiz-priv/",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "25540a7d5256be9c9872ddfcb9c1d404362efdd136d0aef901f7e7a89dc18f76",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "vizwiz",
+      "preview_count": 0,
+      "source_url": "https://vizwiz.org/tasks-and-datasets/vqa/",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "http_archive",
+      "plan_id": "7da2640d08cec647fd63a3158306c9d1c715385ebf873b50f3cafbca53bb7592",
+      "requirements": [
+        "Checksum not pinned for Annotations.zip; fetch once, record its SHA-256, then plan again."
+      ],
+      "scope": "All VizWiz-VQA train and val question records from the official Annotations.zip; images are the separate VizWiz_final image archives and are not acquired here.",
+      "expected_download_bytes": 1711273
+    },
+    {
+      "dataset_id": "vl-gender",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "1329a8ce33f0e86255fb11c26af9eb40e6bd33f6aca13ff7ff95b3b7b48799c3",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "vlagenderbias",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "9647ec09dbf1d1d32895744271bf2ccb2fc6be3c5886ab1e49d37a0503344519",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "vqa-constraints",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "f812675a6d05850d7038308db25f009d138d3d2f7bbf37f3e80431415433e931",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "vqa-v2-m-n-subsets",
+      "preview_count": 0,
+      "source_url": "https://github.com/btzyd/qava",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "31383ccb390fdda02b100b11bcb846d3a5e5133147c3c12f53d4a1121818a32e",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "vqa-v2",
+      "preview_count": 100,
+      "source_url": "https://visualqa.org/download.html",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "092c1eedb8104b33b2738dba986bd97c0c6359acd548ccde5e72b53c48c1e1f8",
+      "requirements": [],
+      "scope": "VQA v2.0 2017 validation annotations over COCO val2014 JPEGs",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "vsr",
+      "preview_count": 0,
+      "source_url": "https://github.com/cambridgeltl/visual-spatial-reasoning/tree/b27a0af0ee1462d2b6b92c8c83e869d9254a241a",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "e8ab93ec5a4f23f9f16db6ff4da73e293c4f2eb0dbf4adb9334b9ef4e2deb6cb",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "vtab",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "c313d70932c195f8a0cf73ce7fa2e2a8816043db2c8ab35611666ed7a9eb6ff7",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "wall-street-journal",
+      "preview_count": 0,
+      "source_url": null,
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "4fbe6895acf0d1a9f289f100d4add36529a94986b5d377e997c6d963bb8dfb38",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "waterbirds",
+      "preview_count": 100,
+      "source_url": "https://github.com/kohpangwei/group_DRO",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "208c6fabee7791c5c0acc0c6cc257e442690be4a4195184b800fe31e61c03b93",
+      "requirements": [],
+      "scope": "Original Waterbirds complete95 forest2water2 release, all train/validation/test records with original y/place/split annotations.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "what-s-up",
+      "preview_count": 0,
+      "source_url": "https://github.com/amitakamath/whatsup_vlms",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "987aa55ee1688687ec43078813cd415d9513c1bb465f2fc728c174619185f3e4",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "whoops",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/nlphuji/whoops",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "ada7b18d5f4fd05f3edf145ea6efabc3df812e72399436382959bb6fb21ef893",
+      "requirements": [],
+      "scope": "Official WHOOPS! 500-image CSV plus image ZIP, with designer explanations, selected and crowd captions, crowd explanations, underspecified captions, and question-answer pairs preserved as source arrays. The paper's 10,874-annotation count is not substituted for the current CSV field totals.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "wilds",
+      "preview_count": 0,
+      "source_url": "https://wilds.stanford.edu/",
+      "identity": "candidate",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "ab441a4495f6fd82102b003e5a5be678fcd218b4d20c86c90cb3f231a4ae629b",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "winoground",
+      "preview_count": 0,
+      "source_url": "https://huggingface.co/datasets/facebook/winoground/tree/b400e173549071916ad1b3d449293bc8d8b4b763",
+      "identity": "resolved",
+      "ready": false,
+      "kind": null,
+      "plan_id": "2f74aa36838bb21effabe9e63757ce2b2661dee03fde22c734820d35ae454e7c",
+      "requirements": [
+        "This release is gated. Obtain authorized local files and configure its adapter."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "wmdp",
+      "preview_count": 100,
+      "source_url": "https://huggingface.co/datasets/cais/wmdp",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "61c9a46b34efaa586a871451b220895513884e26c911fe04f8a3fc3d7eea20cd",
+      "requirements": [],
+      "scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "wnli",
+      "preview_count": 100,
+      "source_url": "https://gluebenchmark.com/tasks",
+      "identity": "resolved",
+      "ready": true,
+      "kind": "local",
+      "plan_id": "f8b8b49ddbeadd8304c46c7ce1207516eaf7125fffe84269d2bd9437ef575201",
+      "requirements": [],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    },
+    {
+      "dataset_id": "zerobench",
+      "preview_count": 0,
+      "source_url": "https://zerobench.github.io/",
+      "identity": "resolved",
+      "ready": false,
+      "kind": "unconfigured",
+      "plan_id": "d381bd140ec84c40001347e0252eda40ba2e914e087922f2dcf6475ab1503318",
+      "requirements": [
+        "A pinned acquisition recipe or authorized local source is required for this release."
+      ],
+      "scope": "configured source population",
+      "expected_download_bytes": 0
+    }
+  ],
+  "note": "Readiness is a plan, not tested coverage. No dataset downloads were started by this audit."
+}

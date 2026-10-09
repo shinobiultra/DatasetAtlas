@@ -1,0 +1,32 @@
+{
+  "checked_at_utc": "2026-10-06T06:26:09.806782+00:00",
+  "repository": "https://github.com/conan1024hao/SAEgis",
+  "commit": "6365cbfc9e4de1e6df01624b793abbef09789cc8",
+  "method": "every attacked image fetched with its same-named original; Git blob SHA-1 and length verified for both; same size and PSNR >= 20.0 dB",
+  "threshold_db": 20.0,
+  "pairs_checked": 1800,
+  "pairs_failing": 0,
+  "psnr_db_by_attack": {
+    "FOA-Attack": {
+      "n": 600,
+      "min": 27.66,
+      "median": 28.69,
+      "max": 31.51
+    },
+    "M-Attack": {
+      "n": 600,
+      "min": 27.66,
+      "median": 28.71,
+      "max": 31.36
+    },
+    "SSA-CWA": {
+      "n": 600,
+      "min": 23.89,
+      "median": 24.18,
+      "max": 26.51
+    }
+  },
+  "failures": [],
+  "train_originals_fetched": false,
+  "limits": "A similarity threshold on file-name pairing, not proof of how the images were generated. Train originals have no attacked counterpart and were not fetched."
+}

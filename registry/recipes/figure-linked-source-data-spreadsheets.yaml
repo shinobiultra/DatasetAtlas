@@ -1,0 +1,92 @@
+release: elife-55378-v1
+source_url: https://api.elifesciences.org/articles/55378
+adapter: elife_workbooks
+expected_count: 7
+description: Seven source-data Excel workbooks linked by the eLife 55378 article for Figures 2, 3, 4 and
+  6. Each workbook is one asset record with every native nonempty cell, sparse coordinate, formula and
+  cached value preserved; the original XLSX is downloadable.
+scope: All seven figure source-data XLSX files named in eLife article 55378 version 1. One record per
+  workbook, not an invented row-level observation table. Native sparse coordinates and shared formulas
+  are retained with their cached values, but formulas are never evaluated.
+files:
+- source_name: elife-55378-fig2-data1-v1.xlsx
+  url: https://cdn.elifesciences.org/articles/55378/elife-55378-fig2-data1-v1.xlsx
+  bytes: 11228
+  sha256: f9244f80322e2ed880d33c2dc5dddc81f4d615e0639b8079d6f759a9e7da7ca9
+  format: xlsx
+  config_key: workbook_fig2_data1
+- source_name: elife-55378-fig3-data1-v1.xlsx
+  url: https://cdn.elifesciences.org/articles/55378/elife-55378-fig3-data1-v1.xlsx
+  bytes: 14192
+  sha256: dde1d1f0aa30ef4223ce167637b048c724e7406ca7c3415e6be8d2c9b279dfa1
+  format: xlsx
+  config_key: workbook_fig3_data1
+- source_name: elife-55378-fig3-data2-v1.xlsx
+  url: https://cdn.elifesciences.org/articles/55378/elife-55378-fig3-data2-v1.xlsx
+  bytes: 9760
+  sha256: 7ad83fd7956da96d6acff53794be2c5110c455140d6f64a5da4e24ccb0d8f122
+  format: xlsx
+  config_key: workbook_fig3_data2
+- source_name: elife-55378-fig4-data1-v1.xlsx
+  url: https://cdn.elifesciences.org/articles/55378/elife-55378-fig4-data1-v1.xlsx
+  bytes: 14223
+  sha256: 2f363e4eb559a8921bdce2c7c97f0a0c220f06b6e51c4b8f1ad33aee416f2917
+  format: xlsx
+  config_key: workbook_fig4_data1
+- source_name: elife-55378-fig6-data1-v1.xlsx
+  url: https://cdn.elifesciences.org/articles/55378/elife-55378-fig6-data1-v1.xlsx
+  bytes: 10023
+  sha256: 1f1da9feb150651b72c190084826833cb03b6c20597e31478cba8f4f96bc6469
+  format: xlsx
+  config_key: workbook_fig6_data1
+- source_name: elife-55378-fig6-data2-v1.xlsx
+  url: https://cdn.elifesciences.org/articles/55378/elife-55378-fig6-data2-v1.xlsx
+  bytes: 9820
+  sha256: 38c9fcec3b20ce3deaf062023a05b05ef1297f2bbdb85768a5368c9a6b6d33c5
+  format: xlsx
+  config_key: workbook_fig6_data2
+- source_name: elife-55378-fig6-data3-v1.xlsx
+  url: https://cdn.elifesciences.org/articles/55378/elife-55378-fig6-data3-v1.xlsx
+  bytes: 9590
+  sha256: 22ebddfada155fa58f6b04adfa6bca8378b8f2ed1786ce89244f8db3e24e2e19
+  format: xlsx
+  config_key: workbook_fig6_data3
+allowed_hosts:
+- cdn.elifesciences.org
+adapter_config:
+  workbooks:
+  - name: elife-55378-fig2-data1-v1.xlsx
+    bytes: 11228
+    sha256: f9244f80322e2ed880d33c2dc5dddc81f4d615e0639b8079d6f759a9e7da7ca9
+    figure: Figure 2 source data 1
+    path_key: workbook_fig2_data1
+  - name: elife-55378-fig3-data1-v1.xlsx
+    bytes: 14192
+    sha256: dde1d1f0aa30ef4223ce167637b048c724e7406ca7c3415e6be8d2c9b279dfa1
+    figure: Figure 3 source data 1
+    path_key: workbook_fig3_data1
+  - name: elife-55378-fig3-data2-v1.xlsx
+    bytes: 9760
+    sha256: 7ad83fd7956da96d6acff53794be2c5110c455140d6f64a5da4e24ccb0d8f122
+    figure: Figure 3 source data 2
+    path_key: workbook_fig3_data2
+  - name: elife-55378-fig4-data1-v1.xlsx
+    bytes: 14223
+    sha256: 2f363e4eb559a8921bdce2c7c97f0a0c220f06b6e51c4b8f1ad33aee416f2917
+    figure: Figure 4 source data 1
+    path_key: workbook_fig4_data1
+  - name: elife-55378-fig6-data1-v1.xlsx
+    bytes: 10023
+    sha256: 1f1da9feb150651b72c190084826833cb03b6c20597e31478cba8f4f96bc6469
+    figure: Figure 6 source data 1
+    path_key: workbook_fig6_data1
+  - name: elife-55378-fig6-data2-v1.xlsx
+    bytes: 9820
+    sha256: 38c9fcec3b20ce3deaf062023a05b05ef1297f2bbdb85768a5368c9a6b6d33c5
+    figure: Figure 6 source data 2
+    path_key: workbook_fig6_data2
+  - name: elife-55378-fig6-data3-v1.xlsx
+    bytes: 9590
+    sha256: 22ebddfada155fa58f6b04adfa6bca8378b8f2ed1786ce89244f8db3e24e2e19
+    figure: Figure 6 source data 3
+    path_key: workbook_fig6_data3

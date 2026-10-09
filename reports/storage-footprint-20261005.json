@@ -1,0 +1,304 @@
+{
+  "root": "/home/bitwise/Documents/vibe/DatasetAtlas",
+  "checked_at_utc": "2026-10-05T09:20:14.777475+00:00",
+  "target_bytes": 100000000000,
+  "ceiling_bytes": 150000000000,
+  "status": "within_target",
+  "files": 73808,
+  "logical_bytes": 143094269388,
+  "unique_file_bytes": 95308889562,
+  "allocated_bytes": 95452409856,
+  "bytes_above_target": 0,
+  "groups": {
+    "work/prepared": {
+      "files": 2397,
+      "logical_bytes": 63350150280,
+      "unique_file_bytes": 58585580225,
+      "allocated_bytes": 58591371264
+    },
+    "work/sources": {
+      "files": 8274,
+      "logical_bytes": 42574711834,
+      "unique_file_bytes": 19016201910,
+      "allocated_bytes": 19033440256
+    },
+    "external:/home/bitwise/.cache/huggingface/hub/models--Qwen--Qwen2.5-VL-3B-Instruct": {
+      "files": 22,
+      "logical_bytes": 7520894392,
+      "unique_file_bytes": 7520894392,
+      "allocated_bytes": 7520931840
+    },
+    ".venv": {
+      "files": 28592,
+      "logical_bytes": 1979051172,
+      "unique_file_bytes": 1979051172,
+      "allocated_bytes": 2048110592
+    },
+    "work/models": {
+      "files": 58,
+      "logical_bytes": 1721057444,
+      "unique_file_bytes": 1721057444,
+      "allocated_bytes": 1721204736
+    },
+    "work/compact-media": {
+      "files": 4777,
+      "logical_bytes": 1546272733,
+      "unique_file_bytes": 1538171155,
+      "allocated_bytes": 1548095488
+    },
+    "work/snapshots": {
+      "files": 120,
+      "logical_bytes": 1391794797,
+      "unique_file_bytes": 1391794797,
+      "allocated_bytes": 1392078848
+    },
+    "work/verification-20261005": {
+      "files": 1297,
+      "logical_bytes": 1107911024,
+      "unique_file_bytes": 1107911024,
+      "allocated_bytes": 1110441984
+    },
+    "work/original-access": {
+      "files": 132,
+      "logical_bytes": 795585436,
+      "unique_file_bytes": 795585436,
+      "allocated_bytes": 795934720
+    },
+    "work/packs": {
+      "files": 2428,
+      "logical_bytes": 395487260,
+      "unique_file_bytes": 299718656,
+      "allocated_bytes": 304263168
+    },
+    "work/media-cache": {
+      "files": 12197,
+      "logical_bytes": 291130910,
+      "unique_file_bytes": 291130910,
+      "allocated_bytes": 291434496
+    },
+    "work": {
+      "files": 1033,
+      "logical_bytes": 213432058,
+      "unique_file_bytes": 213432058,
+      "allocated_bytes": 216309760
+    },
+    "work/demo-analysis-coco": {
+      "files": 1548,
+      "logical_bytes": 117200361,
+      "unique_file_bytes": 117200361,
+      "allocated_bytes": 122068992
+    },
+    "work/download-cache": {
+      "files": 6,
+      "logical_bytes": 103874884,
+      "unique_file_bytes": 103874884,
+      "allocated_bytes": 103890944
+    },
+    "dist": {
+      "files": 3,
+      "logical_bytes": 77608660,
+      "unique_file_bytes": 77608660,
+      "allocated_bytes": 77623296
+    },
+    "src": {
+      "files": 1268,
+      "logical_bytes": 70088658,
+      "unique_file_bytes": 70088658,
+      "allocated_bytes": 72712192
+    },
+    "work/verification-public-20261005": {
+      "files": 616,
+      "logical_bytes": 60127069,
+      "unique_file_bytes": 60127069,
+      "allocated_bytes": 61362176
+    },
+    "work/artifacts": {
+      "files": 2472,
+      "logical_bytes": 47847133,
+      "unique_file_bytes": 47847133,
+      "allocated_bytes": 55332864
+    },
+    ".git": {
+      "files": 760,
+      "logical_bytes": 52646667,
+      "unique_file_bytes": 52646667,
+      "allocated_bytes": 54812672
+    },
+    "work/demo-analysis": {
+      "files": 1046,
+      "logical_bytes": 43897067,
+      "unique_file_bytes": 43897067,
+      "allocated_bytes": 46669824
+    },
+    "work/verify-install": {
+      "files": 600,
+      "logical_bytes": 34801468,
+      "unique_file_bytes": 34801468,
+      "allocated_bytes": 36024320
+    },
+    "work/verification-recap-20261005": {
+      "files": 582,
+      "logical_bytes": 34722568,
+      "unique_file_bytes": 34722568,
+      "allocated_bytes": 35905536
+    },
+    "registry": {
+      "files": 570,
+      "logical_bytes": 34452752,
+      "unique_file_bytes": 34452752,
+      "allocated_bytes": 35631104
+    },
+    "apps": {
+      "files": 407,
+      "logical_bytes": 31561882,
+      "unique_file_bytes": 31561882,
+      "allocated_bytes": 32432128
+    },
+    "examples": {
+      "files": 305,
+      "logical_bytes": 29570606,
+      "unique_file_bytes": 29570606,
+      "allocated_bytes": 30179328
+    },
+    "external:/home/bitwise/.cache/vllm/torch_compile_cache/torch_aot_compile/57d9b21e56ab797b8bbff34151df322287140fd5ab94c389f23618bb9e6ae6b7": {
+      "files": 202,
+      "logical_bytes": 29143831,
+      "unique_file_bytes": 29143831,
+      "allocated_bytes": 29634560
+    },
+    "work/preparation": {
+      "files": 1080,
+      "logical_bytes": 18285230,
+      "unique_file_bytes": 18285230,
+      "allocated_bytes": 20168704
+    },
+    "work/corpus": {
+      "files": 110,
+      "logical_bytes": 13892369,
+      "unique_file_bytes": 13892369,
+      "allocated_bytes": 14143488
+    },
+    "external:/home/bitwise/.cache/huggingface/hub/models--Qwen--Qwen2.5-VL-3B-Instruct-AWQ": {
+      "files": 5,
+      "logical_bytes": 11424081,
+      "unique_file_bytes": 11424081,
+      "allocated_bytes": 11431936
+    },
+    "ui-mockups": {
+      "files": 8,
+      "logical_bytes": 9771092,
+      "unique_file_bytes": 9771092,
+      "allocated_bytes": 9785344
+    },
+    "work/compression-study": {
+      "files": 58,
+      "logical_bytes": 7031287,
+      "unique_file_bytes": 7031287,
+      "allocated_bytes": 7139328
+    },
+    "local-config": {
+      "files": 8,
+      "logical_bytes": 6714331,
+      "unique_file_bytes": 6714331,
+      "allocated_bytes": 6737920
+    },
+    "reports": {
+      "files": 228,
+      "logical_bytes": 5848131,
+      "unique_file_bytes": 5848131,
+      "allocated_bytes": 6397952
+    },
+    "tests": {
+      "files": 311,
+      "logical_bytes": 5152496,
+      "unique_file_bytes": 5152496,
+      "allocated_bytes": 5771264
+    },
+    "work/model-server": {
+      "files": 16,
+      "logical_bytes": 1287761,
+      "unique_file_bytes": 1287761,
+      "allocated_bytes": 1327104
+    },
+    "workspace files": {
+      "files": 10,
+      "logical_bytes": 679114,
+      "unique_file_bytes": 679114,
+      "allocated_bytes": 708608
+    },
+    "scripts": {
+      "files": 30,
+      "logical_bytes": 208561,
+      "unique_file_bytes": 208561,
+      "allocated_bytes": 270336
+    },
+    "work/vector-cache": {
+      "files": 4,
+      "logical_bytes": 159069,
+      "unique_file_bytes": 159069,
+      "allocated_bytes": 172032
+    },
+    "docs": {
+      "files": 12,
+      "logical_bytes": 114527,
+      "unique_file_bytes": 114527,
+      "allocated_bytes": 143360
+    },
+    "work/jobs": {
+      "files": 49,
+      "logical_bytes": 114831,
+      "unique_file_bytes": 114831,
+      "allocated_bytes": 131072
+    },
+    ".pytest_cache": {
+      "files": 5,
+      "logical_bytes": 63169,
+      "unique_file_bytes": 63169,
+      "allocated_bytes": 81920
+    },
+    "test-results": {
+      "files": 5,
+      "logical_bytes": 33284,
+      "unique_file_bytes": 33284,
+      "allocated_bytes": 40960
+    },
+    "schemas": {
+      "files": 1,
+      "logical_bytes": 30587,
+      "unique_file_bytes": 30587,
+      "allocated_bytes": 32768
+    },
+    ".ruff_cache": {
+      "files": 4,
+      "logical_bytes": 886,
+      "unique_file_bytes": 886,
+      "allocated_bytes": 16384
+    },
+    ".github": {
+      "files": 1,
+      "logical_bytes": 4899,
+      "unique_file_bytes": 4899,
+      "allocated_bytes": 8192
+    },
+    "licenses": {
+      "files": 1,
+      "logical_bytes": 1072,
+      "unique_file_bytes": 1072,
+      "allocated_bytes": 4096
+    },
+    "work/source-objects": {
+      "files": 150,
+      "logical_bytes": 19358429665,
+      "unique_file_bytes": 0,
+      "allocated_bytes": 0
+    }
+  },
+  "external_symlinks_not_counted": 18,
+  "errors": [],
+  "included_external_roots": [
+    "/home/bitwise/.cache/huggingface/hub/models--Qwen--Qwen2.5-VL-3B-Instruct",
+    "/home/bitwise/.cache/huggingface/hub/models--Qwen--Qwen2.5-VL-3B-Instruct-AWQ",
+    "/home/bitwise/.cache/vllm/torch_compile_cache/torch_aot_compile/57d9b21e56ab797b8bbff34151df322287140fd5ab94c389f23618bb9e6ae6b7"
+  ],
+  "measurement_note": "Regular files only; hard links counted once, allocated filesystem blocks. Reflink-shared extents may be counted more than once. Only explicitly configured external model/source roots are included. Incidental symlink targets and directory metadata are outside this measurement."
+}

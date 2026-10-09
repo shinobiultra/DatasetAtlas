@@ -2,25 +2,27 @@ schema_version: '1.0'
 id: jiechieu-tsopze-resume-corpus
 name: Jiechieu-Tsopze resume corpus
 aliases: []
-description: Author repository supplies resumes_corpus.zip and resume_samples.zip with occupation labels;
-  later paper mines skill n-grams from these resumes.
+description: 'Jiechieu–Tsopze resume corpus: 29,783 native text/label pairs with occupation labels. Original
+  member bytes are retained; text is decoded explicitly as Windows-1252. The author also supplies a redundant
+  flat export and normalization/skills files, retained as source artifacts.'
 paper_ids:
 - paper-f03c5ad315e6d835
-release: unresolved
-adapter: structured
+release: 24de39957d99caf2c89cf384ba2396bafe16050d
+adapter: text_pairs
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Adapter and preview are not implemented.
+  - Public preview redistribution is not approved.
+  total_count: 29783
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -54,4 +56,17 @@ evidence:
   audit_file: work/sources/source-audit-jobs-batch3.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
+- kind: native_source_preparation
+  source_url: https://github.com/florex/resume_corpus/tree/24de39957d99caf2c89cf384ba2396bafe16050d
+  revision: 24de39957d99caf2c89cf384ba2396bafe16050d
+  checked_on: '2026-09-23'
+  record_count: 29783
+  preview_count: 100
+  scope: All 29783 exact .txt/.lab pairs in the native resumes_corpus.zip, preserving original text, raw
+    labels, category lists and member SHA-256 values. The flat export, occupation normalization and skills
+    files remain original source artifacts, without guessing undocumented joins. No public redistribution
+    approval.
+  receipt: reports/native-text-live-verification.json
 source_url: https://github.com/florex/resume_corpus
+modalities:
+- text

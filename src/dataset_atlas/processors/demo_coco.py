@@ -52,7 +52,7 @@ def _selection(root: Path, work: Path) -> tuple[Selection, list[Record], dict]:
         source_ref = asset.uri
         if not source_ref or source_ref != "val2017/" + asset.metadata.get("source_file_name", ""):
             raise ValueError("COCO preview asset reference is inconsistent")
-        handle = resolve_dataset_asset(dataset, source_ref, max_bytes=10_000_000)
+        handle = resolve_dataset_asset(dataset, source_ref, max_bytes=10_000_000, workspace_root=root)
         if handle.source_ref != source_ref or handle.media_type != "image/jpeg":
             raise ValueError("Resolved COCO image identity differs from preview")
         relative = Path(source_ref).name

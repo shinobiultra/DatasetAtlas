@@ -2,8 +2,9 @@ schema_version: '1.0'
 id: coco-qa
 name: COCO-QA
 aliases: []
-description: 'COCO-QA author question/answer overlay joined to MS-COCO image IDs. Source review: 2015
-  original author release; encoded and text variants must not be conflated'
+description: 'COCO-QA author question/answer overlay joined to MS-COCO image IDs.
+  Source review: 2015 original author release; encoded and text variants must not
+  be conflated'
 paper_ids:
 - paper-25eaa8c74ce76800
 release: unresolved
@@ -25,8 +26,8 @@ rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
-  note: Question annotations and COCO Flickr-origin images have distinct rights; code MIT is insufficient
-    for data
+  note: Question annotations and COCO Flickr-origin images have distinct rights; code
+    MIT is insufficient for data
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-8db49502b4dbc208a52d
@@ -34,28 +35,49 @@ evidence:
   source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
   page: 29
   role: cited-study dataset in survey table
-  excerpt: 23) BLIP Causal Tracing COCO-QA (Cohen et al., 2025) Diffusion Model, CLIP Multi-conce
+  excerpt: 23) BLIP Causal Tracing COCO-QA (Cohen et al., 2025) Diffusion Model, CLIP
+    Multi-conce
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://www.cs.toronto.edu/~mren/research/imageqa/data/cocoqa/
-  note: COCO-QA author question/answer overlay joined to MS-COCO image IDs 2015 original author release;
-    encoded and text variants must not be conflated
+  note: COCO-QA author question/answer overlay joined to MS-COCO image IDs 2015 original
+    author release; encoded and text variants must not be conflated
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_access
   url: https://www.cs.toronto.edu/~mren/research/imageqa/data/cocoqa/
-  note: 'Author Toronto page and GitHub link data; image assets are separate COCO files Probe: first_primary_url_http_head_200;
-    payload_not_downloaded'
+  note: 'Author Toronto page and GitHub link data; image assets are separate COCO
+    files Probe: first_primary_url_http_head_200; payload_not_downloaded'
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_rights
   url: https://github.com/renmengye/imageqa-public/tree/4e3ceb092495fb8c1056e55b870631907bb31d46
-  note: Question annotations and COCO Flickr-origin images have distinct rights; code MIT is insufficient
-    for data No source-content rights grant was verified; linked page is identity/access context only.
+  note: Question annotations and COCO Flickr-origin images have distinct rights; code
+    MIT is insufficient for data No source-content rights grant was verified; linked
+    page is identity/access context only.
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
+- kind: implemented_source_release
+  url: https://www.cs.toronto.edu/~mren/research/imageqa/data/cocoqa/
+  checked_on: '2026-09-23'
+  report: reports/selective-acquisition-20260923.md
+  note: Pinned acquired population and real preview exercised locally. Mirror and
+    selective-transfer limits remain in the acquisition receipts; this does not establish
+    publication rights or the exact paper-used subset.
+  recipe: registry/recipes/coco-qa.yaml
 source_url: https://www.cs.toronto.edu/~mren/research/imageqa/data/cocoqa/
+relationships:
+- type: same_source_family_as
+  target_id: coco
+  status: asserted_from_source_review
+  scope: COCO-QA questions are generated over COCO 2014 images; the local base is
+    COCO-2017-val.
+modalities:
+- image
+- text
+tasks:
+- visual question answering

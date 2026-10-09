@@ -1,0 +1,37 @@
+release: medical-multimodal-7d5b870cf7ace833a187a3459d7180a60ce9c5a1
+adapter: structured_collection
+expected_count: 17303
+scope: All 17303 native Medical Multimodal Evaluation Data questions and all referenced
+  image slots at revision 7d5b870cf7ace833a187a3459d7180a60ce9c5a1; original images
+  fetched on request.
+remote_metadata_bytes: 20000000
+adapter_config:
+  annotations:
+  - path_key: path
+    split: evaluation
+    media_paths_field: image
+    media_archive: images
+  mapping:
+    question: question
+    choices: options
+  remote_cache_root: work/media-cache/ranges
+  remote_archives:
+    images:
+      url: https://huggingface.co/datasets/FreedomIntelligence/Medical_Multimodal_Evaluation_Data/resolve/7d5b870cf7ace833a187a3459d7180a60ce9c5a1/images.zip
+      bytes: 2476845969
+      etag: '"b3d618ef905f1643e03de79fc77ce4161af92e26735a10f7933ee2a772ab8440"'
+      upstream_sha256: db2cf06abf616a8449ada95c7a1508beab2fc2e77edd28359ed1f715f39f7a69
+      allowed_hosts: &id001
+      - huggingface.co
+      - cdn-lfs.huggingface.co
+      - cdn-lfs-us-1.huggingface.co
+      - cas-bridge.xethub.hf.co
+      - us.aws.cdn.hf.co
+files:
+- source_name: medical_multimodel_evaluation_data.json
+  url: https://huggingface.co/datasets/FreedomIntelligence/Medical_Multimodal_Evaluation_Data/resolve/7d5b870cf7ace833a187a3459d7180a60ce9c5a1/medical_multimodel_evaluation_data.json
+  bytes: 5977328
+  sha256: 9ba3cdeb31dcfc084703db145802380e861d3a32f2c3500154284a754c8ad9cf
+  config_key: path
+  format: json
+allowed_hosts: *id001

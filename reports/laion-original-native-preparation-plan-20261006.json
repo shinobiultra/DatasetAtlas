@@ -1,0 +1,324 @@
+{
+  "dataset_id": "laion-400m",
+  "dataset": {
+    "schema_version": "1.0",
+    "id": "laion-400m",
+    "name": "LAION-400M",
+    "origin": "catalogue",
+    "aliases": [],
+    "description": "LAION-400M English image-caption URL index, not a rights-cleared image archive.",
+    "tasks": [],
+    "modalities": [],
+    "labels": [],
+    "paper_ids": [
+      "paper-7a1ff5996ce95273",
+      "paper-3e0db9c633ab204c",
+      "paper-d8a392188b9cf4d6"
+    ],
+    "source_url": "https://deploy.laion.ai/8f83b608504d46bb81708ec86e912220/",
+    "release": "laion400m-original-2021-first-metadata-shard-e1e0eebf0d9f",
+    "snapshot_id": "",
+    "adapter": "structured",
+    "adapter_config": {},
+    "coverage": {
+      "identity": "resolved",
+      "source": "verified",
+      "access": "public",
+      "adapter": "implemented",
+      "preview": "none",
+      "complete_data": "unimplemented",
+      "publication": "not_reviewed",
+      "preview_count": 0,
+      "total_count": null,
+      "unit": "example",
+      "blockers": [
+        "Native annotation browsing is implemented for the first original metadata shard; the other31 shards and every linked image remain unprepared.",
+        "Original image availability and rights are heterogeneous; native URL and LICENSE fields do not approve publication or establish historical image-byte equality."
+      ]
+    },
+    "availability": null,
+    "rights": {
+      "records": "not_reviewed",
+      "annotations": "not_reviewed",
+      "images": "not_reviewed",
+      "source": "https://laion.ai/laion-400-open-dataset/",
+      "note": "CC BY 4.0 covers metadata only; linked images have heterogeneous third-party rights"
+    },
+    "relationships": [],
+    "evidence": [
+      {
+        "kind": "corpus_mention",
+        "evidence_id": "evidence-088fb87acece68487125",
+        "paper_id": "paper-7a1ff5996ce95273",
+        "source_file_hash": "d2da2819b87291e9ff99547e1724286e95ef4de33cad091ce17762c0c90782d1",
+        "page": 7,
+        "role": "training",
+        "excerpt": "the LAION-400M dataset [18], using a batch size of 600 per Attack Method Google Gemini OpenAI GPT GPU on three NVIDIA A100 8",
+        "review_scope": "specific_page_evidence_checked",
+        "paper_full_review_complete": true
+      },
+      {
+        "kind": "corpus_mention",
+        "evidence_id": "evidence-a175f83688fdc37be6b5",
+        "paper_id": "paper-3e0db9c633ab204c",
+        "source_file_hash": "d2750f355a25fcdcfcb221e5049a0aa41ec096b452772c73e1767e2d039a6545",
+        "page": 5,
+        "role": "model-training lineage",
+        "excerpt": "61.0 37.1 58.0 67.3 87.4 OpenCLIP-L/14 LAION-400M 72.8 65.4 46.5 84.9 59.9 59.6 43.0 59.7 70.3 87.6 TeCoA2",
+        "review_scope": "full_text_mention_inventory_checked",
+        "paper_full_review_complete": true
+      },
+      {
+        "kind": "corpus_mention",
+        "evidence_id": "evidence-9ce599540bf506074a52",
+        "paper_id": "paper-d8a392188b9cf4d6",
+        "source_file_hash": "0e3f26916ef19ce5982122f2bb72212315d6dcbe59c9cc953852202654cc1acf",
+        "page": 3,
+        "role": "related-work mention",
+        "excerpt": ". AnyAttack (Zhang et al., 2025) trains a noise generator via contrastive learning on the LAION-400M dataset (Schuhmann et al., 2021) to produce transferable adversarial perturbations. M-Attack (Li et al., 2025) enhances transfera",
+        "review_scope": "full_text_mention_inventory_checked",
+        "paper_full_review_complete": true
+      },
+      {
+        "kind": "corpus_mention",
+        "evidence_id": "evidence-49c02f15b50105d8ac92",
+        "paper_id": "paper-7a1ff5996ce95273",
+        "source_file_hash": "d2da2819b87291e9ff99547e1724286e95ef4de33cad091ce17762c0c90782d1",
+        "page": 2,
+        "role": "attack pretraining",
+        "excerpt": ". Methods such as adaptive learn- volves pre-training a generator on the large-scale LAION- ing rates and gradient clipping have been integrated to en- 400M dataset [18], enabling the pre-trained noise genera-",
+        "review_scope": "full_text_mention_inventory_checked",
+        "paper_full_review_complete": true
+      },
+      {
+        "kind": "source_audit_identity",
+        "url": "https://laion.ai/laion-400-open-dataset/",
+        "note": "LAION-400M English image-caption URL index, not a rights-cleared image archive",
+        "audit_file": "work/sources/source-audit-jobs.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "official_source_resolved_not_human_reviewed"
+      },
+      {
+        "kind": "source_audit_release",
+        "url": "https://laion.ai/laion-400-open-dataset/",
+        "note": "400 million pair release; project describes 32 metadata Parquet files around 50 GB",
+        "audit_file": "work/sources/source-audit-jobs.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "official_source_resolved_not_human_reviewed"
+      },
+      {
+        "kind": "source_audit_access",
+        "url": "https://laion.ai/laion-400-open-dataset/",
+        "note": "Public metadata links; project says a 10 TB image WebDataset was internal-only due licensing; no downloads attempted",
+        "audit_file": "work/sources/source-audit-jobs.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "official_source_resolved_not_human_reviewed"
+      },
+      {
+        "kind": "source_audit_rights",
+        "url": "https://laion.ai/laion-400-open-dataset/",
+        "note": "CC BY 4.0 covers metadata only; linked images have heterogeneous third-party rights",
+        "audit_file": "work/sources/source-audit-jobs.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "official_source_resolved_not_human_reviewed"
+      },
+      {
+        "kind": "source_audit_release",
+        "url": "https://deploy.laion.ai/8f83b608504d46bb81708ec86e912220/dataset/part-00000-5b54c5d5-bbcf-484d-a2ce-0d6f73df1a36-c000.snappy.parquet",
+        "note": "Original publisher metadata shard measured as12933524 native rows and checksum-pinned without substituting ReLAION. No image bytes acquired.",
+        "checked_on": "2026-10-06",
+        "audit_file": "reports/laion-original-native-shard-acquisition-20261006.json"
+      }
+    ]
+  },
+  "max_download_bytes": 2000000000,
+  "max_output_bytes": 15000000000,
+  "source_mode": "download",
+  "files": [
+    {
+      "source_name": "part-00000-5b54c5d5-bbcf-484d-a2ce-0d6f73df1a36-c000.snappy.parquet",
+      "url": "https://deploy.laion.ai/8f83b608504d46bb81708ec86e912220/dataset/part-00000-5b54c5d5-bbcf-484d-a2ce-0d6f73df1a36-c000.snappy.parquet",
+      "bytes": 1803288490,
+      "sha256": "e1e0eebf0d9f7cfec5e4362e6df1db6e804e1b0539eadb73b6710cf199f163a6",
+      "format": "parquet",
+      "config_key": "path"
+    }
+  ],
+  "expected_download_bytes": 1803288490,
+  "expected_count": 12933524,
+  "source_url": "https://deploy.laion.ai/8f83b608504d46bb81708ec86e912220/",
+  "requirements": [],
+  "ready": true,
+  "scope": "All12933524 native URL/caption annotation rows in the first of32 original LAION400M metadata shards on the publisher distribution. Preserves SAMPLE_ID, URL, TEXT, HEIGHT, WIDTH, LICENSE, NSFW and similarity exactly. This is annotation browsing; no linked image bytes are acquired. Other31 shards, embeddings, source-image availability and exact citing-paper subset remain unprepared. ReLAION is a different filtered release.",
+  "source_identity": "Pinned available release; not a claim of the paper-used revision.",
+  "prepared_dataset": {
+    "schema_version": "1.0",
+    "id": "laion-400m",
+    "name": "LAION-400M",
+    "origin": "catalogue",
+    "aliases": [],
+    "description": "LAION-400M English image-caption URL index, not a rights-cleared image archive.",
+    "tasks": [],
+    "modalities": [],
+    "labels": [],
+    "paper_ids": [
+      "paper-7a1ff5996ce95273",
+      "paper-3e0db9c633ab204c",
+      "paper-d8a392188b9cf4d6"
+    ],
+    "source_url": "https://deploy.laion.ai/8f83b608504d46bb81708ec86e912220/",
+    "release": "laion400m-original-2021-first-metadata-shard-e1e0eebf0d9f",
+    "snapshot_id": "",
+    "adapter": "structured",
+    "adapter_config": {
+      "mapping": {
+        "id": "SAMPLE_ID",
+        "text": "TEXT"
+      },
+      "sequential_index": true,
+      "media_scope": "partial",
+      "native_record_read_bytes": 30000000000,
+      "max_record_bytes": 16000000,
+      "max_rss_bytes": 8000000000,
+      "max_cpu_seconds": 3600,
+      "max_wall_seconds": 5400
+    },
+    "coverage": {
+      "identity": "resolved",
+      "source": "verified",
+      "access": "public",
+      "adapter": "implemented",
+      "preview": "none",
+      "complete_data": "unimplemented",
+      "publication": "not_reviewed",
+      "preview_count": 0,
+      "total_count": null,
+      "unit": "example",
+      "blockers": [
+        "Native annotation browsing is implemented for the first original metadata shard; the other31 shards and every linked image remain unprepared.",
+        "Original image availability and rights are heterogeneous; native URL and LICENSE fields do not approve publication or establish historical image-byte equality."
+      ]
+    },
+    "availability": null,
+    "rights": {
+      "records": "not_reviewed",
+      "annotations": "not_reviewed",
+      "images": "not_reviewed",
+      "source": "https://laion.ai/laion-400-open-dataset/",
+      "note": "CC BY 4.0 covers metadata only; linked images have heterogeneous third-party rights"
+    },
+    "relationships": [],
+    "evidence": [
+      {
+        "kind": "corpus_mention",
+        "evidence_id": "evidence-088fb87acece68487125",
+        "paper_id": "paper-7a1ff5996ce95273",
+        "source_file_hash": "d2da2819b87291e9ff99547e1724286e95ef4de33cad091ce17762c0c90782d1",
+        "page": 7,
+        "role": "training",
+        "excerpt": "the LAION-400M dataset [18], using a batch size of 600 per Attack Method Google Gemini OpenAI GPT GPU on three NVIDIA A100 8",
+        "review_scope": "specific_page_evidence_checked",
+        "paper_full_review_complete": true
+      },
+      {
+        "kind": "corpus_mention",
+        "evidence_id": "evidence-a175f83688fdc37be6b5",
+        "paper_id": "paper-3e0db9c633ab204c",
+        "source_file_hash": "d2750f355a25fcdcfcb221e5049a0aa41ec096b452772c73e1767e2d039a6545",
+        "page": 5,
+        "role": "model-training lineage",
+        "excerpt": "61.0 37.1 58.0 67.3 87.4 OpenCLIP-L/14 LAION-400M 72.8 65.4 46.5 84.9 59.9 59.6 43.0 59.7 70.3 87.6 TeCoA2",
+        "review_scope": "full_text_mention_inventory_checked",
+        "paper_full_review_complete": true
+      },
+      {
+        "kind": "corpus_mention",
+        "evidence_id": "evidence-9ce599540bf506074a52",
+        "paper_id": "paper-d8a392188b9cf4d6",
+        "source_file_hash": "0e3f26916ef19ce5982122f2bb72212315d6dcbe59c9cc953852202654cc1acf",
+        "page": 3,
+        "role": "related-work mention",
+        "excerpt": ". AnyAttack (Zhang et al., 2025) trains a noise generator via contrastive learning on the LAION-400M dataset (Schuhmann et al., 2021) to produce transferable adversarial perturbations. M-Attack (Li et al., 2025) enhances transfera",
+        "review_scope": "full_text_mention_inventory_checked",
+        "paper_full_review_complete": true
+      },
+      {
+        "kind": "corpus_mention",
+        "evidence_id": "evidence-49c02f15b50105d8ac92",
+        "paper_id": "paper-7a1ff5996ce95273",
+        "source_file_hash": "d2da2819b87291e9ff99547e1724286e95ef4de33cad091ce17762c0c90782d1",
+        "page": 2,
+        "role": "attack pretraining",
+        "excerpt": ". Methods such as adaptive learn- volves pre-training a generator on the large-scale LAION- ing rates and gradient clipping have been integrated to en- 400M dataset [18], enabling the pre-trained noise genera-",
+        "review_scope": "full_text_mention_inventory_checked",
+        "paper_full_review_complete": true
+      },
+      {
+        "kind": "source_audit_identity",
+        "url": "https://laion.ai/laion-400-open-dataset/",
+        "note": "LAION-400M English image-caption URL index, not a rights-cleared image archive",
+        "audit_file": "work/sources/source-audit-jobs.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "official_source_resolved_not_human_reviewed"
+      },
+      {
+        "kind": "source_audit_release",
+        "url": "https://laion.ai/laion-400-open-dataset/",
+        "note": "400 million pair release; project describes 32 metadata Parquet files around 50 GB",
+        "audit_file": "work/sources/source-audit-jobs.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "official_source_resolved_not_human_reviewed"
+      },
+      {
+        "kind": "source_audit_access",
+        "url": "https://laion.ai/laion-400-open-dataset/",
+        "note": "Public metadata links; project says a 10 TB image WebDataset was internal-only due licensing; no downloads attempted",
+        "audit_file": "work/sources/source-audit-jobs.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "official_source_resolved_not_human_reviewed"
+      },
+      {
+        "kind": "source_audit_rights",
+        "url": "https://laion.ai/laion-400-open-dataset/",
+        "note": "CC BY 4.0 covers metadata only; linked images have heterogeneous third-party rights",
+        "audit_file": "work/sources/source-audit-jobs.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "official_source_resolved_not_human_reviewed"
+      },
+      {
+        "kind": "source_audit_release",
+        "url": "https://deploy.laion.ai/8f83b608504d46bb81708ec86e912220/dataset/part-00000-5b54c5d5-bbcf-484d-a2ce-0d6f73df1a36-c000.snappy.parquet",
+        "note": "Original publisher metadata shard measured as12933524 native rows and checksum-pinned without substituting ReLAION. No image bytes acquired.",
+        "checked_on": "2026-10-06",
+        "audit_file": "reports/laion-original-native-shard-acquisition-20261006.json"
+      }
+    ]
+  },
+  "recipe_sha256": "92294d9d52898080932c55d95f711f2e802e0f764036265f4903809b0d9a15a3",
+  "kind": "http_archive",
+  "allowed_hosts": [
+    "deploy.laion.ai"
+  ],
+  "required_free_bytes": 15000000000,
+  "reuse_registered_sources": [
+    "part-00000-5b54c5d5-bbcf-484d-a2ce-0d6f73df1a36-c000.snappy.parquet"
+  ],
+  "available_bytes": 205355589632,
+  "shared_storage": {
+    "ceiling_bytes": 150000000000,
+    "allocated_workspace_bytes": 112471904256,
+    "reserved_by_running_preparations": 0,
+    "available_bytes": 37528095744,
+    "required_bytes": 15000000000,
+    "admitted": true,
+    "scope": "Workspace regular files plus explicitly configured external model/source roots.",
+    "measurement_errors": []
+  },
+  "resource_limits": {
+    "max_rss_bytes": 8000000000,
+    "max_cpu_seconds": 3600,
+    "max_wall_seconds": 7200
+  },
+  "memory_enforcement": "kernel cgroup memory cap including descendants; swap disabled",
+  "id": "bcf7c4417357f9fa84ac7aac516dd99d84b6c4eeb718159cfffb33f08d8cc1c4"
+}

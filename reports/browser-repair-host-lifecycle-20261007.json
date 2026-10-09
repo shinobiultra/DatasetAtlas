@@ -1,0 +1,54 @@
+{
+  "runs": {
+    "http_status": 200,
+    "count": 106,
+    "states": [
+      {
+        "id": "0cd4dcee27d042818d07c47d2c360259",
+        "status": "partial",
+        "progress": {
+          "completed": 100,
+          "failed": 0,
+          "max_output_bytes": 67108864,
+          "not_applicable": 0,
+          "output_bytes": 3384888,
+          "queued": 0,
+          "running": 0,
+          "skipped": 0,
+          "total": 100
+        },
+        "provider_id": null,
+        "processor_id": "embed.siglip2"
+      }
+    ]
+  },
+  "conversation-jobs": {
+    "http_status": 200,
+    "count": 10,
+    "states": []
+  },
+  "providers": {
+    "http_status": 200,
+    "count": 3,
+    "configs": [
+      {
+        "id": "local-qwen2-5-vl-3b",
+        "timeout_seconds": 120.0,
+        "base_url": "http://127.0.0.1:8001/v1"
+      },
+      {
+        "id": "local-lmstudio",
+        "timeout_seconds": 120.0,
+        "base_url": "http://127.0.0.1:1234/v1"
+      },
+      {
+        "id": "local-ollama-qwen35",
+        "timeout_seconds": 120.0,
+        "base_url": "http://127.0.0.1:11434/v1"
+      }
+    ]
+  },
+  "server_pids": [
+    2516486
+  ]
+}

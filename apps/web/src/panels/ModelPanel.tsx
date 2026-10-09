@@ -1,11 +1,13 @@
+import { displayUrl } from '../lib/display'
 import { useEffect, useMemo, useState } from 'react'
 import { provider } from '../provider'
 import { display, shortId } from '../lib/format'
 import { Field, Notice, Spinner, Tag } from '../ui/primitives'
 import * as Icon from '../ui/Icons'
+import type { FieldDescriptor } from '../generated'
 
 type Capability = { status: string; checked_at?: string }
-type ProviderEntry = { config: { id: string; model: string; base_url?: string; max_images?: number }; capabilities?: Record<string, Capability> }
+type ProviderEntry = { config: { id: string; model: string; base_url?: string; max_images?: number; timeout_seconds?: number }; capabilities?: Record<string, Capability> }
 
 /** Image bytes are large and uninteresting in a review panel; the digest identifies them. */
 function hideImageData(_key: string, value: unknown): unknown {
@@ -14,7 +16,7 @@ function hideImageData(_key: string, value: unknown): unknown {
     : value
 }
 
-export function ModelPanel({ selected, unit, onNotice }: { selected: string[]; unit: string; onNotice: (message: string) => void }) {
+export function ModelPanel({ selected, unit, snapshotIds, fields = [], resultSnapshotIds = [], onNotice }: { selected: string[]; unit: string; snapshotIds?: string[]; fields?: FieldDescriptor[]; resultSnapshotIds?: string[]; onNotice: (message: string) => void }) {
   const [providers, setProviders] = useState<ProviderEntry[]>([])
   const [providerId, setProviderId] = useState('')
   const [mode, setMode] = useState<'exploration' | 'evaluation'>('exploration')
@@ -32,13 +34,54 @@ export function ModelPanel({ selected, unit, onNotice }: { selected: string[]; u
   const [configOpen, setConfigOpen] = useState(false)
   const [draft, setDraft] = useState({ id: '', baseUrl: 'http://127.0.0.1:1234/v1', model: '', apiKeyEnv: '' })
   const [configMessage, setConfigMessage] = useState('')
+  const [contextFields, setContextFields] = useState<string[]>([])
+  const [includeAnnotations, setIncludeAnnotations] = useState(false)
+  const [useTools, setUseTools] = useState(false)
+  const [toolCalls, setToolCalls] = useState(4)
+  const [toolRows, setToolRows] = useState(100)
+  const [activeJob, setActiveJob] = useState('')
+  const [jobStatus, setJobStatus] = useState<Record<string, unknown> | null>(null)
 
   const refresh = () => provider.providers().then(items => setProviders(items as ProviderEntry[])).catch(failure => setError(String(failure)))
   useEffect(() => {
     if (provider.mode !== 'workbench') return
     void refresh()
     provider.conversations().then(setHistory).catch(() => {})
+    provider.conversationJobs().then(jobs => {
+      const running = jobs.find(job => ['running', 'cancelling'].includes(String(job.status)))
+      if (running) { setActiveJob(String(running.id)); setBusy(true) }
+    }).catch(() => {})
   }, [])
+
+  useEffect(() => {
+    if (!activeJob) return
+    let live = true
+    async function poll() {
+      let failures = 0
+      while (live) {
+        try {
+          const job = await provider.conversationJob(activeJob)
+          if (!live) return
+          failures = 0
+          setJobStatus(job)
+          if (!['running', 'cancelling'].includes(String(job.status))) {
+            setResponse(job.result as Record<string, unknown> ?? null)
+            if (job.error) setError(String(job.error))
+            setActiveJob(''); setBusy(false)
+            provider.conversations().then(setHistory).catch(() => {})
+            onNotice(job.status === 'completed' ? 'Response saved with its context provenance.' : `Model request ${String(job.status)}; its available receipt is retained.`)
+            return
+          }
+        } catch (failure) {
+          failures += 1
+          if (live) setError(`Request status temporarily unavailable; retrying. ${String(failure)}`)
+        }
+        await new Promise(resolve => setTimeout(resolve, Math.min(5000, 500 * 2 ** Math.min(failures, 4))))
+      }
+    }
+    void poll()
+    return () => { live = false }
+  }, [activeJob])
 
   const key = JSON.stringify(selected)
   useEffect(() => {
@@ -46,21 +89,30 @@ export function ModelPanel({ selected, unit, onNotice }: { selected: string[]; u
     let live = true
     setImageAssets([]); setImageAssetIds([]); setContext(null); setResponse(null)
     if (!selected.length) return
-    provider.records(selected)
+    provider.records(selected, snapshotIds)
       .then(rows => { if (live) setImageAssets(rows.flatMap(row => (row.assets ?? []).filter(asset => asset.modality === 'image' && asset.uri).map(asset => ({ id: asset.id, recordId: row.id, uri: asset.uri! })))) })
       .catch(failure => { if (live) setError(String(failure instanceof Error ? failure.message : failure)) })
     return () => { live = false }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [key])
+  }, [key, JSON.stringify(snapshotIds)])
 
   const selectedProvider = providers.find(item => item.config.id === providerId)
   const imageCapability = selectedProvider?.capabilities?.['image_input']?.status ?? selectedProvider?.capabilities?.['single_image_input']?.status
   const imagesSupported = imageCapability === 'supported'
+  const toolHost = selectedProvider?.config.base_url ? new URL(selectedProvider.config.base_url).hostname : ''
+  const toolsSupported = selectedProvider?.capabilities?.tool_calls?.status === 'supported' && ['localhost', '127.0.0.1', '[::1]', '::1'].includes(toolHost)
+  const availableFields = fields.filter(field => ['source', 'prediction', 'human'].includes(field.id.split('.')[0]))
   const maxImages = Math.min(8, selectedProvider?.config.max_images ?? 8)
   const request = useMemo(() => ({
     provider_id: providerId, record_ids: selected, mode,
+    ...(snapshotIds?.length ? { snapshot_ids: snapshotIds } : {}),
     image_asset_ids: imageAssetIds, independent_records: mode === 'evaluation' && independent,
-  }), [providerId, selected, mode, imageAssetIds, independent])
+    fields: mode === 'exploration' ? contextFields.filter(id => availableFields.some(field => field.id === id)) : [],
+    include_annotations: mode === 'exploration' && includeAnnotations,
+    result_snapshot_ids: mode === 'exploration' && snapshotIds?.length ? resultSnapshotIds : [],
+  }), [providerId, selected, mode, imageAssetIds, independent, snapshotIds, contextFields, includeAnnotations, JSON.stringify(fields), resultSnapshotIds])
+  const requestKey = JSON.stringify(request)
+  useEffect(() => { setContext(null); setResponse(null) }, [requestKey, useTools, toolCalls, toolRows])
 
   if (provider.mode === 'static') {
     return <div className="insp-section"><Notice tone="quiet">Model connections require the local workbench. Nothing on the public site talks to a model provider.</Notice></div>
@@ -77,15 +129,16 @@ export function ModelPanel({ selected, unit, onNotice }: { selected: string[]; u
     setBusy(true); setError('')
     try {
       if (!context?.context_digest) throw new Error('Review the exact outgoing context first.')
-      setResponse(await provider.converse({
+      const job = await provider.startConversation({
         context: request, context_digest: context.context_digest,
         approved_provider_id: providerId, approved_record_ids: selected, prompt,
+        deadline_seconds: Math.min(120, selectedProvider?.config.timeout_seconds ?? 60),
+        use_tools: mode === 'exploration' && toolsSupported && useTools,
+        max_iterations: 4, max_tool_calls: toolCalls, max_tool_rows: toolRows,
         ...(request.independent_records ? { max_batch_completion_tokens: batchBudget } : {}),
-      }))
-      provider.conversations().then(setHistory).catch(() => {})
-      onNotice('Response saved with its context provenance.')
-    } catch (failure) { setError(String(failure instanceof Error ? failure.message : failure)) }
-    finally { setBusy(false) }
+      })
+      setActiveJob(String(job.id)); setJobStatus(job)
+    } catch (failure) { setError(String(failure instanceof Error ? failure.message : failure)); setBusy(false) }
   }
 
   return (
@@ -153,6 +206,24 @@ export function ModelPanel({ selected, unit, onNotice }: { selected: string[]; u
             )}
           </>
         )}
+        {mode === 'exploration' && <>
+          <div className="insp-kicker">Additional evidence to include</div>
+          <p className="hint">Results selected for browsing are pinned to this context. Tick the fields to send their values.</p>
+          <div style={{ maxHeight: 180, overflow: 'auto' }}>
+            {availableFields.map(field => <label className="facet-opt" key={field.id}>
+              <input type="checkbox" checked={contextFields.includes(field.id)} disabled={!contextFields.includes(field.id) && contextFields.length >= 64}
+                onChange={event => setContextFields(ids => event.target.checked ? [...ids, field.id] : ids.filter(id => id !== field.id))} />
+              <span>{field.name || field.id} · {field.namespace}</span>
+            </label>)}
+          </div>
+          <label className="facet-opt"><input type="checkbox" checked={includeAnnotations} onChange={event => setIncludeAnnotations(event.target.checked)} /><span>Include source annotations</span></label>
+          <label className="facet-opt"><input type="checkbox" checked={useTools && toolsSupported} disabled={!toolsSupported} onChange={event => setUseTools(event.target.checked)} /><span>Allow bounded read-only exploration tools</span></label>
+          <p className="hint">Tools inspect only the approved records. A local provider must pass its tool-call probe first.</p>
+          {useTools && toolsSupported && <div className="row" style={{ gap: 8 }}>
+            <Field label="Tool-call limit">{id => <input id={id} className="input" type="number" min={1} max={16} value={toolCalls} onChange={event => setToolCalls(Math.max(1, Math.min(16, Number(event.target.value))))} />}</Field>
+            <Field label="Total tool-row limit">{id => <input id={id} className="input" type="number" min={1} max={1000} value={toolRows} onChange={event => setToolRows(Math.max(1, Math.min(1000, Number(event.target.value))))} />}</Field>
+          </div>}
+        </>}
       </div>
 
       {imageAssets.length > 0 && (
@@ -168,7 +239,7 @@ export function ModelPanel({ selected, unit, onNotice }: { selected: string[]; u
                   onChange={event => { setImageAssetIds(ids => event.target.checked ? [...ids, asset.id] : ids.filter(id => id !== asset.id)); setContext(null); setResponse(null) }}
                   aria-label={`Include image asset ${asset.id}`}
                 />
-                <img src={asset.uri} alt="" loading="lazy" style={{ width: 40, height: 30, objectFit: 'cover', borderRadius: 4, background: 'var(--n-150)' }} />
+                <img src={displayUrl(asset.uri)} alt="" loading="lazy" style={{ width: 40, height: 30, objectFit: 'cover', borderRadius: 4, background: 'var(--n-150)' }} />
                 <span className="truncate mono" style={{ fontSize: 'var(--fs-sm)' }} title={asset.recordId}>{shortId(asset.recordId, 18)}</span>
               </label>
             ))}
@@ -199,6 +270,10 @@ export function ModelPanel({ selected, unit, onNotice }: { selected: string[]; u
         <button type="button" className="btn primary" disabled={!context || context.external_send_allowed !== true || !prompt.trim() || busy} onClick={send}>
           {busy && context ? <Spinner label="Sending…" /> : <><Icon.Chat size={13} />Send to provider</>}
         </button>
+        {activeJob && <>
+          <p className="hint" role="status">Request {String(jobStatus?.status ?? 'running')} · {String((jobStatus?.progress as { phase?: string } | undefined)?.phase ?? 'preparing_context').replaceAll('_', ' ')}</p>
+          <button type="button" className="btn" disabled={jobStatus?.status === 'cancelling'} onClick={() => provider.cancelConversation(activeJob).then(setJobStatus).catch(failure => setError(String(failure)))}>Cancel model request</button>
+        </>}
         {error && <Notice tone="error">{error}</Notice>}
       </div>
 

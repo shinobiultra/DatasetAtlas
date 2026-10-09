@@ -1,7 +1,8 @@
+import { displayUrl } from '../lib/display'
 import { useEffect, useMemo, useState } from 'react'
 import type { Artifact, Record as AtlasRecord } from '../generated'
 import { recordHeadline, shortId } from '../lib/format'
-import { AssetView, assetUrl, imageAssets, primaryAsset } from '../ui/MediaView'
+import { AssetView, RepresentationTag, assetLabel, assetUrl, primaryAsset } from '../ui/MediaView'
 import { detectorStates } from './model'
 import { Tag } from '../ui/primitives'
 import { useKey, inEditable } from '../lib/hooks'
@@ -27,8 +28,8 @@ export function FocusedInspector({ records, index, artifacts, onIndex, onClose, 
 
   const runs = useMemo(() => (record ? detectorStates(artifacts, record.id) : []), [artifacts, record])
   const overlays = useMemo(() => runs.flatMap(state => state.overlays).map(overlay => ({ ...overlay, visible: showOverlays })), [runs, showOverlays])
-  const images = record ? imageAssets(record) : []
-  const asset = images[assetIndex] ?? (record ? primaryAsset(record) : null)
+  const media = record ? (record.assets ?? []).filter(item => item.uri && ['image', 'audio', 'video'].includes(item.modality)) : []
+  const asset = media[assetIndex] ?? (record ? primaryAsset(record) : null)
 
   useKey(event => {
     if (inEditable(event.target)) return
@@ -50,11 +51,11 @@ export function FocusedInspector({ records, index, artifacts, onIndex, onClose, 
           {matchedCount !== null && matchedCount > records.length && <span style={{ color: 'var(--text-faint)' }}> of {matchedCount.toLocaleString()} matching</span>}
         </span>
         <span className="spacer" />
-        {images.length > 1 && (
+        {media.length > 1 && (
           <label className="row" style={{ gap: 6, fontSize: 'var(--fs-sm)', color: 'var(--text-muted)' }}>
-            Image
-            <select className="select" style={{ width: 92, height: 28 }} value={assetIndex} onChange={event => setAssetIndex(Number(event.target.value))} aria-label="Choose image in this record">
-              {images.map((_, position) => <option key={position} value={position}>{position + 1} of {images.length}</option>)}
+            Media
+            <select className="select" style={{ width: 180, maxWidth: '24vw', height: 28 }} value={assetIndex} onChange={event => setAssetIndex(Number(event.target.value))} aria-label={media.every(item => item.modality === 'image') ? 'Choose image in this record' : 'Choose media in this record'}>
+              {media.map((item, position) => <option key={item.id} value={position}>{assetLabel(item, position)} · {position + 1} of {media.length}</option>)}
             </select>
           </label>
         )}
@@ -73,8 +74,8 @@ export function FocusedInspector({ records, index, artifacts, onIndex, onClose, 
 
       <div className="focus-stage">
         {asset ? (
-          <div className={`focus-frame${fit === 'actual' ? ' actual' : ''}`}>
-            <AssetView asset={asset} overlays={overlays} controls fit={fit === 'actual' ? 'actual' : 'contain'} alt={`Asset ${assetIndex + 1} of record ${record.id}`} />
+          <div className={`focus-frame${fit === 'actual' ? ' actual' : ''}${asset.modality === 'audio' ? ' audio-frame' : ''}`}>
+            <AssetView asset={asset} overlays={asset.modality === 'image' ? overlays : []} controls fit={fit === 'actual' ? 'actual' : 'contain'} alt={`Asset ${assetIndex + 1} of record ${record.id}`} />
           </div>
         ) : (
           <div className="focus-text">{recordHeadline(record)}</div>
@@ -82,6 +83,10 @@ export function FocusedInspector({ records, index, artifacts, onIndex, onClose, 
       </div>
 
       <div className="focus-below">
+        {asset && <div className="row" aria-label={asset.modality === 'image' ? 'Selected image representation' : 'Selected media representation'} style={{ gap: 8 }}><Tag>{assetLabel(asset, assetIndex)}</Tag><RepresentationTag asset={asset} /></div>}
+        {typeof asset?.metadata?.question === 'string' && asset.metadata.question !== record.question && (
+          <div className="focus-question" aria-label="Question for selected image"><strong>{assetLabel(asset, assetIndex)}.</strong> {asset.metadata.question}</div>
+        )}
         {record.question && <div className="focus-question"><strong>Q.</strong> {record.question}</div>}
         {!record.question && record.text && asset && <div className="focus-question clamp-3">{record.text}</div>}
         <div className="filmstrip-head">
@@ -101,7 +106,7 @@ export function FocusedInspector({ records, index, artifacts, onIndex, onClose, 
                 title={recordHeadline(item)} aria-label={`Sample ${position + 1}: ${shortId(item.id, 14)}`}
               >
                 {url && thumb?.modality === 'image'
-                  ? <img src={url} alt="" loading="lazy" onError={event => { event.currentTarget.style.visibility = 'hidden' }} />
+                  ? <img src={displayUrl(url)} alt="" loading="lazy" onError={event => { event.currentTarget.style.visibility = 'hidden' }} />
                   : <span className="tph clamp-3">{recordHeadline(item)}</span>}
               </button>
             )

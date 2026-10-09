@@ -1,0 +1,11 @@
+source_url: https://huggingface.co/datasets/jonathan-roberts1/zerobench/tree/8fcdfd9138c802cac52b774b36946e70f738f500
+source_patterns:
+- data/zerobench-*.parquet
+scope: All 100 original main questions in the pinned author ZeroBench release, retaining linked images
+  and native answers. Separate subquestions and later v2 remain distinct. Answers remain local-only.
+adapter_config:
+  mapping: {}
+  media_scope: partial
+  remote_cache_bytes: 120000000
+credential_profile: huggingface
+auto_source_mode: selective

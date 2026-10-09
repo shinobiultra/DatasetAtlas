@@ -2,8 +2,8 @@ schema_version: '1.0'
 id: cub-200-2011
 name: CUB-200-2011
 aliases: []
-description: Original Caltech bird dataset has 11,788 images, 200 categories, boxes, parts and attributes;
-  same source family as cub candidate.
+description: Original Caltech bird dataset has 11,788 images, 200 categories, boxes,
+  parts and attributes; same source family as cub candidate.
 paper_ids:
 - paper-2038cb87115b4fb0
 release: unresolved
@@ -26,7 +26,8 @@ rights:
   annotations: not_reviewed
   images: not_reviewed
   source: https://www.vision.caltech.edu/datasets/cub_200_2011/
-  note: Caltech states noncommercial research and education terms and disclaims ownership of images.
+  note: Caltech states noncommercial research and education terms and disclaims ownership
+    of images.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-dfd751ded681a70e8e61
@@ -39,15 +40,30 @@ evidence:
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://www.vision.caltech.edu/datasets/cub_200_2011/
-  note: 'Original Caltech bird dataset has 11,788 images, 200 categories, boxes, parts and attributes;
-    same source family as cub candidate. Release: CUB-200-2011; exact paper split not pinned'
+  note: 'Original Caltech bird dataset has 11,788 images, 200 categories, boxes, parts
+    and attributes; same source family as cub candidate. Release: CUB-200-2011; exact
+    paper split not pinned'
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
 - kind: source_audit_rights
   url: https://www.vision.caltech.edu/datasets/cub_200_2011/
-  note: Caltech states noncommercial research and education terms and disclaims ownership of images.
+  note: Caltech states noncommercial research and education terms and disclaims ownership
+    of images.
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
+- kind: implemented_source_release
+  url: https://www.vision.caltech.edu/datasets/cub_200_2011/
+  checked_on: '2026-09-23'
+  recipe: registry/recipes/cub-200-2011.yaml
+  report: reports/selective-acquisition-20260923.md
+  note: Original source release and native records exercised locally. This is not
+    a claim of human rights review or an exact paper-used subset.
 source_url: https://www.vision.caltech.edu/datasets/cub_200_2011/
+modalities:
+- image
+tasks:
+- fine-grained image classification
+- part localization
+- attribute prediction

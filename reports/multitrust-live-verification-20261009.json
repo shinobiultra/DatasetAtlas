@@ -1,0 +1,473 @@
+{
+  "receipt": "multitrust-live-verification",
+  "checked_on": "2026-10-09",
+  "dataset_id": "multitrust",
+  "scope": "The authors current gated Hugging Face release thu-ml/MultiTrust at one pinned revision, prepared with the native multitrust adapter under the researcher's own accepted terms: one catalogue record per query row of the member tasks. Not a claim about the transfer-attack examples a citing paper generated with the framework, and not a rights or publication decision.",
+  "source": {
+    "repository": "thu-ml/MultiTrust",
+    "revision": "84dc74754959e9f52b67c5185700f4f7fcd8c4df",
+    "files_in_repository": 10549,
+    "bytes_in_repository": 11309427723,
+    "license_stated_by_card": "CC BY-SA 4.0, with an access agreement (non-commercial academic use, no redistribution)",
+    "gate": "auto approval, accepted by the researcher on their own account"
+  },
+  "access_check": {
+    "method": "huggingface_hub HfApi.auth_check on the dataset repository with the locally configured credential",
+    "result": "succeeded",
+    "checked_on": "2026-10-09",
+    "note": "The 2026-10-08 check had answered HTTP 403. Atlas accepted no terms; the credential is resolved at request time and appears in no file."
+  },
+  "caps": {
+    "transfer_bytes": 3000000000,
+    "prepared_output_bytes": 2000000000,
+    "connections": 4,
+    "connections_used": 1
+  },
+  "plan": {
+    "kind": "http_archive",
+    "budget_given_bytes": 500000000,
+    "expected_download_upper_bound_bytes": 280485156,
+    "preview_media_transfer_upper_bound_bytes": 276386066,
+    "upper_bound_rule": "sum of the pinned sizes of every image of the 250 seeded candidate clusters (50 per aspect, stratified by preview_sampling.stratify_by) the worker may open to find 100 that decode; computed from the pins, not a measurement",
+    "recipe_sha256": "6f54e4080eed535d64250f1363cbccb7c7995489158ae84c4ad28ee520e63e17",
+    "plan_id_prefix": "d5e9cfa33470"
+  },
+  "bytes_transferred": {
+    "total_measured_bytes": 99924262,
+    "parts": {
+      "query_files": {
+        "bytes": 0,
+        "what": "the 62 pinned query files (4,099,090 bytes) were reused from the registered source of the first run, checked again against their SHA-256, and not downloaded again"
+      },
+      "preview_original_images": {
+        "bytes": 86727302,
+        "what": "the 114 original image files of the 100 preview records, fetched cold after the media cache was cleared, each decoded and checked against its pinned hash"
+      },
+      "live_route_original_reads": {
+        "bytes": 13196960,
+        "what": "11 original images of rows beyond the first 100 (two per aspect) and the last record, served through the workbench media route; counted once at the size each response carried"
+      }
+    },
+    "preparation_transfer_bytes": 86727302,
+    "preparation_within_declared_upper_bound": true,
+    "note": "Stratified re-run of the same release, run cold: the media cache was cleared first, so the preview images were all fetched. The first run (earlier_run) transferred 99,427,354 bytes; counting it too the cumulative transfer of this work is 239344102 bytes."
+  },
+  "cumulative_transfer_bytes_including_earlier_run": 239344102,
+  "prepared_output": {
+    "bytes": 92142011,
+    "retained_preview_original_bytes": 86727302,
+    "pack_bytes": 95546221,
+    "snapshot_bytes": 3572130,
+    "sources_bytes": 5632079
+  },
+  "images_downloaded_whole_repository": false,
+  "repository_downloaded_whole": false,
+  "image_files_fetched": 124,
+  "query_files_fetched": 62,
+  "token_in_receipt": false,
+  "earlier_run": {
+    "note": "A first preparation under a recipe whose declared preview_media_transfer_bytes (336,326,661) had been computed with the wrong release identifier. It completed with the same snapshot, the same 100 preview records and the same 99,427,354 bytes, but the declared figure was not a true upper bound for the 250 candidates (the true bound is 356,169,152). The recipe was corrected, the media cache cleared, and the preparation repeated cold; that second run is the one measured above. The superseded prepared version was removed.",
+    "snapshot_id_equal": true,
+    "total_transfer_bytes": 99427354,
+    "sampling_equal": true
+  },
+  "population": {
+    "query_rows": 11512,
+    "by_aspect": {
+      "truthfulness": 2540,
+      "safety": 798,
+      "robustness": 4199,
+      "fairness": 1209,
+      "privacy": 2766
+    },
+    "tasks": 50,
+    "tasks_by_aspect": {
+      "truthfulness": 25,
+      "safety": 7,
+      "robustness": 6,
+      "fairness": 5,
+      "privacy": 7
+    },
+    "query_files": 62,
+    "query_files_bytes": 4099090,
+    "rows_with_image": 11367,
+    "rows_without_image_by_design": 145,
+    "image_references": 12566,
+    "references_absent_from_pinned_listing": 0,
+    "image_files_in_repository": 10464,
+    "image_files_without_any_query_row": 1105,
+    "source": "reports/multitrust-task-inventory-20261009.json"
+  },
+  "index": {
+    "records": 11512,
+    "unique_record_ids": 11512,
+    "matched_count": 11512,
+    "count_status": "exact",
+    "snapshot_id": "multitrust-84dc74754959-q62-ebc859260cedb327",
+    "pages_of_1000": 12,
+    "by_aspect": {
+      "privacy": 2766,
+      "robustness": 4199,
+      "truthfulness": 2540,
+      "fairness": 1209,
+      "safety": 798
+    },
+    "by_task": {
+      "vizwiz_private_qa": 639,
+      "advglue_plus": 600,
+      "vizwiz_recognition": 800,
+      "ood_sensor": 1061,
+      "ood_text": 1100,
+      "basic_ocr": 100,
+      "ood_artistic": 600,
+      "vispr_private_qa": 434,
+      "advglue": 738,
+      "misleading_semantic": 72,
+      "adv_nips": 100,
+      "basic_object": 250,
+      "stereo_classification": 300,
+      "subjective_preference": 240,
+      "misleading_mistext": 100,
+      "misleading_confusion": 300,
+      "instruction_factual": 100,
+      "basic_grounding": 50,
+      "safebench": 200,
+      "vispr_recognition": 500,
+      "vispr_leakage": 195,
+      "mm_safety_bench": 168,
+      "typographic_prompt_graph": 100,
+      "profession_prediction": 313,
+      "stereo_statement": 261,
+      "crossmodal_jailbreak": 50,
+      "advanced_causality": 40,
+      "advanced_daily": 50,
+      "basic_scene": 400,
+      "misleading_painting": 68,
+      "basic_attribute": 200,
+      "instruction_logic": 40,
+      "misleading_dislocation": 64,
+      "typographic_prompt_and_behavior_graph": 100,
+      "advanced_math": 80,
+      "text_assistance": 100,
+      "text_misvisual": 100,
+      "celebrity_recognition": 100,
+      "typographic_behavior_graph": 100,
+      "advanced_code": 40,
+      "misleading_contrast": 56,
+      "confaide": 98,
+      "advanced_temporal": 40,
+      "real_toxicity_prompts": 80,
+      "advanced_compare": 100,
+      "stereo_query": 95,
+      "advanced_spatial": 60,
+      "advanced_traffic": 50,
+      "misleading_mirror": 40,
+      "advanced_translate": 40
+    },
+    "filtered_complete_scope_counts": {
+      "truthfulness": {
+        "matched_count": 2540,
+        "count_status": "exact"
+      },
+      "safety": {
+        "matched_count": 798,
+        "count_status": "exact"
+      },
+      "robustness": {
+        "matched_count": 4199,
+        "count_status": "exact"
+      },
+      "fairness": {
+        "matched_count": 1209,
+        "count_status": "exact"
+      },
+      "privacy": {
+        "matched_count": 2766,
+        "count_status": "exact"
+      },
+      "task=ood_sensor": {
+        "matched_count": 1061,
+        "count_status": "exact"
+      }
+    },
+    "complete_scope_count_equals_inventory_total": true,
+    "read_through": "every row of every pinned query file was read before the index was activated; the count the workbench reports equals the inventory total and each aspect filter equals the inventory aspect count"
+  },
+  "preview": {
+    "records": 100,
+    "assets": 114,
+    "snapshot_id": "multitrust-84dc74754959-q62-ebc859260cedb327",
+    "sampling": {
+      "method": "sha256_bottom_k_primary_asset_verified_media",
+      "seed": 0,
+      "unit": "example",
+      "grouping": "primary asset ID; record ID for records without assets",
+      "population": "complete pinned indexed population",
+      "population_count": 11512,
+      "requested_count": 100,
+      "returned_count": 100,
+      "source_revision": "multitrust-84dc74754959e9f52b67c5185700f4f7fcd8c4df",
+      "media_representation": "original",
+      "selection_note": "Stratified hash-ranked candidates, interleaved across strata, with all linked original images verified; excludes unavailable remote image slots.",
+      "stratified_by": "aspect",
+      "strata_population": {
+        "truthfulness": 2540,
+        "safety": 798,
+        "robustness": 4199,
+        "fairness": 1209,
+        "privacy": 2766
+      },
+      "candidate_pool_count": 250
+    },
+    "by_aspect": {
+      "truthfulness": 21,
+      "safety": 20,
+      "robustness": 20,
+      "fairness": 19,
+      "privacy": 20
+    },
+    "by_task": {
+      "basic_object": 1,
+      "typographic_behavior_graph": 2,
+      "advglue_plus": 4,
+      "profession_prediction": 8,
+      "vizwiz_private_qa": 4,
+      "advanced_translate": 1,
+      "mm_safety_bench": 3,
+      "subjective_preference": 5,
+      "vispr_leakage": 3,
+      "basic_scene": 5,
+      "real_toxicity_prompts": 3,
+      "basic_grounding": 2,
+      "ood_artistic": 6,
+      "vizwiz_recognition": 7,
+      "text_assistance": 1,
+      "stereo_statement": 5,
+      "misleading_mistext": 1,
+      "ood_sensor": 9,
+      "misleading_semantic": 1,
+      "safebench": 10,
+      "vispr_private_qa": 2,
+      "advanced_traffic": 1,
+      "stereo_classification": 1,
+      "vispr_recognition": 4,
+      "misleading_confusion": 2,
+      "adv_nips": 1,
+      "advanced_temporal": 1,
+      "advanced_daily": 3,
+      "typographic_prompt_and_behavior_graph": 1,
+      "instruction_factual": 1,
+      "typographic_prompt_graph": 1,
+      "basic_ocr": 1
+    },
+    "candidates_checked": 102,
+    "unavailable_candidate_records": 2,
+    "original_media": {
+      "verified": 114,
+      "sha256_equal_to_pack": 114,
+      "representation": "original",
+      "formats": [
+        "JPEG",
+        "PNG"
+      ],
+      "bytes": 86727302
+    },
+    "rule": "A seeded, aspect-stratified cluster sample, not a prevalence estimate: records are grouped by primary image and ranked by SHA-256 within each of the five aspects (50 candidates per aspect), then interleaved so the first 100 whose originals open hold the aspects in equal share (20 each, plus or minus one where a candidate image could not be opened). Population counts per aspect are in preview.sampling.strata_population."
+  },
+  "live_reads": {
+    "last_record": {
+      "http": 200,
+      "content_type": "image/jpeg",
+      "bytes": 5985,
+      "sha256": "eb177c89a1c48c3d66040ce7591e75374400d7ca8121326a7671131829f43237",
+      "format": "JPEG",
+      "width": 140,
+      "height": 209,
+      "aspect": "privacy",
+      "task": "celebrity_recognition",
+      "row_index": 11511,
+      "pinned_sha256": null,
+      "matches_pinned": true
+    },
+    "beyond_row_100": [
+      {
+        "http": 200,
+        "content_type": "image/jpeg",
+        "bytes": 158960,
+        "sha256": "c46d58fbfeebcafdd1a9242de38aebc0ddc945b6b49bf0f07465939d414c59a9",
+        "format": "JPEG",
+        "width": 387,
+        "height": 500,
+        "aspect": "truthfulness",
+        "task": "basic_attribute",
+        "row_index": 100,
+        "pinned_sha256": null,
+        "matches_pinned": true
+      },
+      {
+        "http": 200,
+        "content_type": "image/jpeg",
+        "bytes": 158960,
+        "sha256": "c46d58fbfeebcafdd1a9242de38aebc0ddc945b6b49bf0f07465939d414c59a9",
+        "format": "JPEG",
+        "width": 387,
+        "height": 500,
+        "aspect": "truthfulness",
+        "task": "basic_attribute",
+        "row_index": 101,
+        "pinned_sha256": null,
+        "matches_pinned": true
+      },
+      {
+        "http": 200,
+        "content_type": "image/png",
+        "bytes": 40457,
+        "sha256": "29a606a846638a8b15fac37ae2ba02df4dc8b2a5d4ed3c7407956b25e1dc57d8",
+        "format": "PNG",
+        "width": 760,
+        "height": 760,
+        "aspect": "safety",
+        "task": "safebench",
+        "row_index": 2540,
+        "pinned_sha256": null,
+        "matches_pinned": true
+      },
+      {
+        "http": 200,
+        "content_type": "image/png",
+        "bytes": 38001,
+        "sha256": "86ebb759a16cd163d4c9f3f5b32582525566aa61abff1a83ac5632e69910ec0d",
+        "format": "PNG",
+        "width": 760,
+        "height": 760,
+        "aspect": "safety",
+        "task": "safebench",
+        "row_index": 2541,
+        "pinned_sha256": null,
+        "matches_pinned": true
+      },
+      {
+        "http": 200,
+        "content_type": "image/png",
+        "bytes": 1604383,
+        "sha256": "b059f12d43f86fb2fe70c7b33d53afa4d3dd93ed90f2c4711dfead3e25cfa9a1",
+        "format": "PNG",
+        "width": 1024,
+        "height": 1024,
+        "aspect": "robustness",
+        "task": "advglue",
+        "row_index": 3338,
+        "pinned_sha256": null,
+        "matches_pinned": true
+      },
+      {
+        "http": 200,
+        "content_type": "image/png",
+        "bytes": 1476310,
+        "sha256": "000f9cbe674ee3fa6ee5fc05c72b099fc10b49f1817a86829594f51640a1b354",
+        "format": "PNG",
+        "width": 1024,
+        "height": 1024,
+        "aspect": "robustness",
+        "task": "advglue",
+        "row_index": 3339,
+        "pinned_sha256": null,
+        "matches_pinned": true
+      },
+      {
+        "http": 200,
+        "content_type": "image/jpeg",
+        "bytes": 1717523,
+        "sha256": "19f2b0567db1fa1aee300ea5a3fd5eecc50e6a59b10abb8230fc343597d2846b",
+        "format": "JPEG",
+        "width": 2250,
+        "height": 1500,
+        "aspect": "fairness",
+        "task": "profession_prediction",
+        "row_index": 7537,
+        "pinned_sha256": null,
+        "matches_pinned": true
+      },
+      {
+        "http": 200,
+        "content_type": "image/jpeg",
+        "bytes": 1320924,
+        "sha256": "83af0820579d23aa22e2515960de8d9fa95d538e22b1346ec832ac379a00d31d",
+        "format": "JPEG",
+        "width": 2250,
+        "height": 1500,
+        "aspect": "fairness",
+        "task": "profession_prediction",
+        "row_index": 7538,
+        "pinned_sha256": null,
+        "matches_pinned": true
+      },
+      {
+        "http": 200,
+        "content_type": "image/png",
+        "bytes": 2956558,
+        "sha256": "8319536becd8c87fa56c05de49fd1f7f3993a85aeb8dab9d76dbfcd04ec8864c",
+        "format": "PNG",
+        "width": 1224,
+        "height": 1632,
+        "aspect": "privacy",
+        "task": "vizwiz_recognition",
+        "row_index": 8746,
+        "pinned_sha256": null,
+        "matches_pinned": true
+      },
+      {
+        "http": 200,
+        "content_type": "image/png",
+        "bytes": 3718899,
+        "sha256": "491285c0651b291d857218831d151759ef40fddfa52227f64b624fe50b6aa331",
+        "format": "PNG",
+        "width": 1536,
+        "height": 2048,
+        "aspect": "privacy",
+        "task": "vizwiz_recognition",
+        "row_index": 8747,
+        "pinned_sha256": null,
+        "matches_pinned": true
+      }
+    ],
+    "beyond_row_100_original_bytes_verified": 10,
+    "aspects_covered": [
+      "fairness",
+      "privacy",
+      "robustness",
+      "safety",
+      "truthfulness"
+    ],
+    "route": "GET /api/v1/media/... ?representation=original through a locally started workbench (X-Atlas-Request: 1), stopped afterwards",
+    "image_above_10_MB": {
+      "record_id": "multitrust:example:03189012087128da3d0a0264",
+      "row_index": 160,
+      "task": "ood_sensor",
+      "pinned_bytes": 35987288,
+      "http": 200,
+      "detail": null,
+      "bytes": 35987288
+    },
+    "note": "Re-run after the stratified preview: two originals per aspect beyond row 100 and the last record were served and decoded. The one image above 10 MB that the first run served whole (image_above_10_MB) was not repeated; 56 others were never tried. The row_index of a record is its position in the snapshot order, which is now the snapshot file order."
+  },
+  "limits": [
+    "Query rows are the rows of the files at this revision, not the evaluation samples a toolkit run generates.",
+    "Only 124 of the 10,464 images were fetched and checked; the other images are pinned by hash and fetched on request.",
+    "Rights stay not_reviewed; the access terms forbid redistribution, so the records and preview originals are local only.",
+    "The preview is stratified by aspect (equal share, plus or minus one); it is still a seeded sample and not a prevalence estimate."
+  ],
+  "stratified_rerun": {
+    "why": "The researcher asked on 2026-10-09 that the preview guarantee all five aspects.",
+    "snapshot_id_before": "multitrust-84dc74754959-q62-899310f6c6f9249f",
+    "snapshot_id_after": "multitrust-84dc74754959-q62-ebc859260cedb327",
+    "preview_by_aspect": {
+      "truthfulness": 21,
+      "safety": 20,
+      "robustness": 20,
+      "fairness": 19,
+      "privacy": 20
+    },
+    "total_transfer_bytes": 86727302
+  }
+}

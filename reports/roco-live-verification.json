@@ -1,0 +1,52 @@
+{
+  "checked_at_utc": "2026-09-24T09:45:26.375321+00:00",
+  "dataset_id": "roco",
+  "author_revision": "a1f0ad6c578ca8801e5a6eccc90af051aee1c326",
+  "source_sha256": "16a2f53335b4ec26e5b311118423d88a93e5f1459495c1c1944dcc71119dc3d4",
+  "source_bytes": 13631396,
+  "annotation_tables_byte_identical_to_prepared_derivative": 36,
+  "full_index_rows_independently_checked": 87927,
+  "split_domain_counts": {
+    "test/non-radiology": 612,
+    "test/radiology": 8179,
+    "train/non-radiology": 4895,
+    "train/radiology": 65450,
+    "validation/non-radiology": 611,
+    "validation/radiology": 8180
+  },
+  "source_licence_counts": {
+    "CC BY": 37166,
+    "CC BY-NC": 13510,
+    "CC BY-NC-ND": 10493,
+    "CC BY-NC-SA": 15867,
+    "CC BY-ND": 162,
+    "CC BY-SA": 66,
+    "CC0": 101,
+    "NO-CC CODE": 10560,
+    "not_listed": 2
+  },
+  "missing_source_licence_rows": 2,
+  "preview_records": 100,
+  "preview_sampling": {
+    "method": "sha256_bottom_k_primary_asset",
+    "seed": 0,
+    "unit": "example",
+    "grouping": "primary asset ID; record ID for records without assets",
+    "population": "complete pinned indexed population",
+    "population_count": 87927,
+    "requested_count": 100,
+    "returned_count": 100,
+    "source_revision": "a1f0ad6c578ca8801e5a6eccc90af051aee1c326",
+    "media_representation": "original",
+    "selection_note": "One hash-ranked record per sampled primary asset. All linked assets remain. Not an example-prevalence estimate."
+  },
+  "preview_images_independently_checked_against_current_pmc_md5_and_decoded": 100,
+  "preview_original_bytes": 7770363,
+  "media_limit": "Current versioned PMC images with the same filename and MD5; historical 2018 FTP-byte equivalence is not established.",
+  "publication_rights": "not_reviewed",
+  "preview_originals_pinned_locally": 100,
+  "preview_originals_reused_across_equivalent_snapshot": 100,
+  "later_image_on_demand_http_reads": 1,
+  "complete_data_state": "indexed_metadata_partial_media",
+  "licence_limit": "100 preview images include 7 NO-CC CODE author labels; local research preview only, no public ROCO pack approval."
+}

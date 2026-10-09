@@ -7,6 +7,7 @@ __pycache__/
 node_modules/
 apps/web/dist/
 src/dataset_atlas/web/
+src/dataset_atlas/catalogue_seed/
 *.egg-info/
 dist/
 .env
@@ -15,3 +16,11 @@ test-results/
 
 apps/web/public/data/
 apps/web/*.tsbuildinfo
+
+.env.*
+.aws/
+.codex/
+.agents/
+.superpowers/
+*.ses
+:memory:*

@@ -1,0 +1,26 @@
+{
+  "format": "atlas-remote-zip-v1",
+  "source_sha256": "fe9be816052049c34717e077d9e34aa60814a55679f804cd043e3cbee3b9fde0",
+  "source_bytes": 6645013297,
+  "remote": {
+    "url": "https://s3.amazonaws.com/images.cocodataset.org/zips/val2014.zip",
+    "bytes": 6645013297,
+    "allowed_hosts": [
+      "s3.amazonaws.com"
+    ],
+    "etag": "\"3925cc4d50eb68d47bf2d6324a012d20-793\""
+  },
+  "members": 40504,
+  "uncompressed_member_bytes": 6636659503,
+  "index_bytes": 7266304,
+  "checksums": {
+    "members.sqlite": "aca892db2f296698bf2ee1d14cd0d366b13d7ca49da9da9ae86ca3e7d57b84af"
+  },
+  "verified_local_identity": [
+    64768,
+    54113503,
+    6645013297,
+    1790051504140542751,
+    1790051512659697285
+  ]
+}

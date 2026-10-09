@@ -5,7 +5,7 @@ import json
 import math
 from typing import Any
 
-from dataset_atlas.models import Record
+from dataset_atlas.models import Record, content_id
 
 
 def _validate_value(value: Any, kind: str, dimension: int | None) -> Any:
@@ -68,6 +68,18 @@ def run_import(records: list[Record], config: dict[str, Any]):
     units = {record.unit for record in records}
     if len(units) > 1:
         raise ValueError("Import selection contains mixed units")
+    space = config.get('embedding_space')
+    space_identity = None
+    if space is not None:
+        if kind != 'vector' or not isinstance(space, dict):
+            raise ValueError('Only vector imports can register an embedding space')
+        if set(space) != {'model_revision', 'representation', 'metric', 'normalized'}:
+            raise ValueError('Embedding space requires model_revision, representation, metric and normalized')
+        if any(not isinstance(space[key], str) or not space[key].strip() or len(space[key]) > 2048 for key in ('model_revision', 'representation')):
+            raise ValueError('Embedding space requires bounded, explicit model revision and representation')
+        if space['metric'] not in {'cosine', 'euclidean'} or type(space['normalized']) is not bool:
+            raise ValueError('Embedding space requires cosine/euclidean metric and boolean normalized')
+        space_identity = {**space, 'dimension': dimension, 'sample_unit': next(iter(units), 'example')}
     imported: dict[str, Any] = {}
     for row in rows:
         if not isinstance(row, dict) or not isinstance(row.get("id"), str) or "value" not in row:
@@ -80,6 +92,14 @@ def run_import(records: list[Record], config: dict[str, Any]):
         if row.get("unit", next(iter(units), "example")) != next(iter(units), "example"):
             raise ValueError("Imported row sample unit differs from selection")
         imported[item_id] = _validate_value(row["value"], kind, dimension)
+        if space is not None:
+            if any(abs(value) > 3.4028234663852886e38 for value in imported[item_id]):
+                raise ValueError('Registered vectors exceed the float32 retrieval range; original unregistered vector imports remain supported')
+            norm = math.sqrt(sum(value * value for value in imported[item_id]))
+            if space['metric'] == 'cosine' and norm == 0:
+                raise ValueError('Cosine embedding spaces require nonzero vectors')
+            if space['normalized'] and not math.isclose(norm, 1.0, abs_tol=1e-5):
+                raise ValueError('Vectors disagree with declared normalization; imports are not silently transformed')
     items = [{"id": record.id, "status": "completed", "output": {"field_id": field_id, "value": imported[record.id]}}
              if record.id in imported else {"id": record.id, "status": "not_applicable", "output": None}
              for record in records]
@@ -88,4 +108,10 @@ def run_import(records: list[Record], config: dict[str, Any]):
                   "sample_unit": next(iter(units), "example"), "snapshot_ids": sorted({r.snapshot_id for r in records}),
                   "selection_ids": [r.id for r in records], "imported_count": len(imported),
                   "missing_count": len(records) - len(imported)}
+    if space_identity is not None:
+        provenance.update({'embedding_space': space_identity, 'embedding_space_id': content_id(space_identity, 'embedding-space:'),
+                           'registered_embedding_space': True, 'retrieval_dtype': 'float32', 'original_vectors_preserved': True, 'model_execution': False})
+        for item in items:
+            if item['status'] == 'completed':
+                item['output']['vector'] = item['output']['value']
     return items, provenance

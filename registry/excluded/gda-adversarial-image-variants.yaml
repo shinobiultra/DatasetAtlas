@@ -1,0 +1,69 @@
+schema_version: '1.0'
+id: gda-adversarial-image-variants
+name: GDA adversarial image variants
+aliases: []
+description: Mention candidate from a focused page audit; the evidence receipts distinguish
+  direct use, comparison, related-work, and citation-only roles. Original source,
+  release, and rights still require independent verification.
+paper_ids:
+- paper-f5da3ca03780a203
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: unverified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Original release identity and rights need verification.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-81a5e0ff040c51b72845
+  paper_id: paper-f5da3ca03780a203
+  source_file_hash: d65cb215e41e6b745002603b59c138ce86e5ad7eb08751c0e3a85f3982959032
+  page: 8
+  role: derived collection
+  excerpt: '4 0.4735 0.3072 0.3026 0.2574 0.3176 41.2 Datasets. We randomly sample
+    1,000 samples from each of three datasets for evaluation, correspond- ing to different
+    multimodal tasks: image captioning on Flickr30k [32] using the pro'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://arxiv.org/abs/2602.09431
+  checked_on: '2026-10-08'
+  note: 'Adversarial copies produced inside the Grounding-Driven Attack paper (arXiv 2602.09431): 1,000
+    images sampled from each of Flickr30k, CIFAR-10 and TextVQA validation, perturbed with PGD (epsilon
+    8/255, 100 steps) against encoders. A derived collection, not a named benchmark.'
+  source_identity_status: paper_derived_collection_no_release_located
+- kind: source_audit_access
+  url: https://arxiv.org/abs/2602.09431
+  checked_on: '2026-10-08'
+  note: The arXiv page (v2, marked under review) and the HTML text state no code, adversarial images or
+    other release. None was located.
+  source_identity_status: paper_derived_collection_no_release_located
+  disposition: still_unreleased
+  observation: no_public_release_located
+- kind: source_audit_rights
+  url: https://arxiv.org/abs/2602.09431
+  checked_on: '2026-10-08'
+  note: The perturbed images derive from Flickr30k, CIFAR-10 and TextVQA images, each under its own terms;
+    no licence for the derived images is stated.
+  source_identity_status: paper_derived_collection_no_release_located
+- kind: source_audit_refresh
+  url: https://arxiv.org/abs/2602.09431
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'still_unreleased: read from public pages on 2026-10-08 by the implementing agent (the source_audit_access
+    item of that date); not human-reviewed and not a probe. 1 URL probed (HEAD only): 1 reachable.'

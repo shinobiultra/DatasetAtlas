@@ -1,0 +1,18 @@
+source_url: https://huggingface.co/datasets/derek-thomas/ScienceQA/tree/f18b0a70359ebfb41f658fd564208d0355b013f4
+release: f18b0a70359ebfb41f658fd564208d0355b013f4
+expected_count: 10332
+description: 'ScienceQA image-bearing population: all 10,332 questions with images
+  across train, validation and test, in the Hugging Face representation linked by
+  the authors. Text-only questions are excluded. Original question, answer, choices,
+  lecture and solution fields are retained.'
+scope: All 10332 image-bearing questions selected from the 21208-question author-linked
+  ScienceQA Hugging Face release, with all three native splits preserved by source
+  filename. Available representation, not a claim about an unpinned evaluation-only
+  paper selection.
+adapter_config:
+  record_filter:
+    asset_modality: image
+  expected_source_count: 21208
+  mapping:
+    question: question
+    choices: choices

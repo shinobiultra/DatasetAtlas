@@ -1,0 +1,68 @@
+schema_version: '1.0'
+id: custom-image-editing-dataset
+name: Custom Image Editing Dataset
+aliases: []
+description: Hertz et al. Prompt-to-Prompt editing examples descriptor. Survey table uses a generic descriptor
+  of editing examples; no fixed version/source IDs found.
+paper_ids:
+- paper-25eaa8c74ce76800
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: paper_protocol_checked_release_unverified
+  access: source_release_unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Exact source data release or paper-used subset is unverified.
+  - Public data/media reuse rights require separate review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://arxiv.org/abs/2208.01626
+  note: Generated image reuse rights not verified.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-4a89167010e84bcbb46a
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: al., 2022) Stable-Diffusion Image Editing Custom Image Editing Dataset (Tang et al., 2022)
+    Stable-Diffusion Visualization
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://arxiv.org/abs/2208.01626
+  note: Survey table uses a generic descriptor of editing examples; no fixed version/source IDs found.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: generic_descriptor_unresolved
+- kind: source_audit_rights
+  url: https://arxiv.org/abs/2208.01626
+  note: Generated image reuse rights not verified.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: generic_descriptor_unresolved
+- kind: source_audit_access
+  url: https://arxiv.org/abs/2208.01626
+  note: source_release_unverified; Treat as cited-study generated examples until original artifact pinned.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: generic_descriptor_unresolved
+- kind: source_audit_refresh
+  url: https://arxiv.org/abs/2208.01626
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 1 URL probed (HEAD only): 1 reachable.'
+source_url: https://arxiv.org/abs/2208.01626

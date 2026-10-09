@@ -1,0 +1,104 @@
+schema_version: '1.0'
+id: vlagenderbias
+name: VLAGenderBias
+aliases: []
+description: 'VLAGenderBias (Girrbach et al., ICLR 2025, arXiv 2410.19314): a gender-bias
+  evaluation built by the authors'' scripts from FairFace (two margins), MIAP, PHASE
+  and PATA, not a separately released image collection. The 5,000-image gender-balanced
+  evaluation the paper describes is a deterministic selection those scripts make over
+  locally downloaded sources.'
+paper_ids:
+- paper-32cea5e43d940514
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - 'Data-generation recipe, not a release: the author repository ships setup scripts
+    (about 100 GB and ~24 hours of downloads per its README) and no images; the selected
+    5,000 images were not reproduced.'
+  - 'Member datasets: FairFace, MIAP and PHASE are browsable in this catalogue; PATA''s
+    images are third-party web files that are not archived (see entry pata).'
+  - Gender labels here are the member datasets' own annotations (perceived or annotated),
+    and a model prediction is never one of them.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-47288d543610b8271fd5
+  paper_id: paper-32cea5e43d940514
+  source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
+  page: 5
+  role: evaluation
+  excerpt: ' evaluating LVLMs, we use two recent bench- Adj Occup Act Ster marks:
+    VLAGenderBias (VLA) [21] and SBBench [57]. CLIP (ViT-B/16) [67] − 22.9 33.7 19.5
+    33.8 CLIP (ViT-B/16)† − 21.9 33.5 19.8 32.'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-ba6fd063196f7b3e4f88
+  paper_id: paper-32cea5e43d940514
+  source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
+  page: 5
+  role: LVLM evaluation
+  excerpt: 'Adj Occup Act Ster marks: VLAGenderBias (VLA) [21] and SBBench [57]. CLIP
+    (ViT-B/16) [67] − 22.9 33.7 19.5'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_release
+  checked_on: '2026-10-06'
+  url: https://github.com/ExplainableML/vla-gender-bias/tree/70297fe6035cb1a76f7b434218c9ea86dacd0782
+  note: Repository tree at this commit holds code, prompt CSVs and occupation_probabilities.json
+    only; configs/data_config.yaml lists benchmark_datasets fairface_margin025, fairface_margin125,
+    miap, phase, pata, and setup/download_*.sh fetch each member from its own source.
+    The DeBiasLens paper's table (page 18) lists VLAGenderBias as 5,000 images, 50/50
+    male/female.
+  source_identity_status: author_recipe_over_member_datasets
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'From the source inspected on 2026-10-06: author repository inspected: image
+    benchmarks over member datasets plus prompt CSVs. Not inferred from the dataset
+    name.'
+- kind: source_audit_refresh
+  url: https://github.com/ExplainableML/vla-gender-bias/tree/70297fe6035cb1a76f7b434218c9ea86dacd0782
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 1 URL probed (HEAD only): 1 reachable.'
+relationships:
+- type: derived_from
+  target_id: fairface
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: A member of the benchmark (two crop margins); the benchmark samples 1,000
+    gender-balanced images from it by the authors' process script, which was not run
+    here.
+- type: derived_from
+  target_id: miap
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: A member of the benchmark; the exact selected images come from the authors'
+    process script, which was not run here.
+- type: derived_from
+  target_id: phase
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: A member of the benchmark; the exact selected images come from the authors'
+    process script, which was not run here.
+modalities:
+- image
+- text

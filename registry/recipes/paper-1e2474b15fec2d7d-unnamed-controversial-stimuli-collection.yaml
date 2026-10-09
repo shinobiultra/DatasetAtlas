@@ -1,0 +1,21 @@
+adapter: csv
+release: e90062775c5ca243ef5407f338ed05e758d21447
+snapshot_id: golan-presented-e90062775c5ca243
+expected_count: 1863
+scope: Only author-released participant-presented Experiment 1 MNIST (820) and Experiment
+  2 CIFAR-10 (1043) PNGs; excludes unpresented candidates and participant responses.
+  Local inspection; media publication rights are unresolved.
+allowed_hosts:
+- codeload.github.com
+convert:
+  name: golan_presented_stimuli
+  count: 1863
+  rows_sha256: 2271f45eb7f0ef6915cb56a8daca11967c850582810340ee8c4fa5668a974e93
+  media_sha256: 81d57df4acc6bc059d8f0844f37b8a3fb2ba9501d2ebf5605a0e40db007ea22f
+files:
+- source_name: presented-author-source.tar.gz
+  bytes: 19522654
+  sha256: 50447053564bdccf4db27ab37cb46a5572d73ac1c4c30f8645b53f07f5d46cb7
+  url: https://codeload.github.com/kriegeskorte-lab/PNAS_2020_Controversial_Stimuli/tar.gz/e90062775c5ca243ef5407f338ed05e758d21447
+  config_key: source_archive
+  format: tar.gz

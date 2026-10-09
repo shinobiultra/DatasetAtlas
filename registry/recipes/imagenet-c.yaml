@@ -1,0 +1,65 @@
+release: imagenet-c-zenodo-2235448-v1
+adapter: imagenet_c
+sequential_tar_sources: true
+expected_count: 4750000
+scope: All native corruption/class/severity JPEGs in the five publisher archives, including the extra corruptions.
+  Complete archive MD5 and SHA-256, every member SHA-256, gzip checkpoints and compressed-block SHA-256 are verified
+  and retained. Archive bodies are retired only after cold original-member checks; later originals use bounded hash-verified
+  HTTPS ranges. Paper-specific corruption selections are not inferred. Acquisition uses a revision-pinned Hugging
+  Face mirror; every complete archive must match BOTH its pinned SHA-256 and the original Zenodo publisher MD5 before
+  being accepted.
+adapter_config:
+  mapping:
+    id: source_id
+    media: media_ref
+  sequential_index: true
+  media_scope: partial
+  verify_remote_preview_media: true
+  remote_cache_root: work/media-cache/imagenet-c
+  remote_cache_bytes: 200000000
+  media_transfer_bytes: 64000000
+allowed_hosts:
+- huggingface.co
+- cdn-lfs-us-1.huggingface.co
+- us.aws.cdn.hf.co
+- cas-bridge.xethub.hf.co
+files:
+- source_name: blur.tar
+  url: https://huggingface.co/datasets/khanhvinh9/imagenet-c/resolve/2c2bead8b3b98de99629e1cf75ddf0f08cbba61f/blur.tar
+  bytes: 7112704951
+  md5: 2d8e81fdd8e07fef67b9334fa635e45c
+  format: tar
+  publisher_url: https://zenodo.org/records/2235448/files/blur.tar?download=1
+  sha256: dc086985323ba59271d90f1998074aebed492d7ef7763a934232ab11b43ed945
+- source_name: digital.tar
+  url: https://huggingface.co/datasets/khanhvinh9/imagenet-c/resolve/2c2bead8b3b98de99629e1cf75ddf0f08cbba61f/digital.tar
+  bytes: 7757510705
+  md5: 89157860d7b10d5797849337ca2e5c03
+  format: tar
+  publisher_url: https://zenodo.org/records/2235448/files/digital.tar?download=1
+  sha256: 33b3fd31856f2bc7da70a34374e135a58904b9ca1ff2b86321b191ba1eeb0db9
+- source_name: extra.tar
+  url: https://huggingface.co/datasets/khanhvinh9/imagenet-c/resolve/2c2bead8b3b98de99629e1cf75ddf0f08cbba61f/extra.tar
+  bytes: 15789490144
+  md5: d492dfba5fc162d8ec2c3cd8ee672984
+  format: tar
+  publisher_url: https://zenodo.org/records/2235448/files/extra.tar?download=1
+  sha256: 70de168ae600b04ad1b34bf892b6b6e5925c351df9483228402e5b8d815e4087
+- source_name: noise.tar
+  url: https://huggingface.co/datasets/khanhvinh9/imagenet-c/resolve/2c2bead8b3b98de99629e1cf75ddf0f08cbba61f/noise.tar
+  bytes: 22565673785
+  md5: e80562d7f6c3f8834afb1ecf27252745
+  format: tar
+  publisher_url: https://zenodo.org/records/2235448/files/noise.tar?download=1
+  sha256: ae862c15adc8252bff236c7fcc7a2248833be1d2dcf48c5f68f9abe47b063508
+- source_name: weather.tar
+  url: https://huggingface.co/datasets/khanhvinh9/imagenet-c/resolve/2c2bead8b3b98de99629e1cf75ddf0f08cbba61f/weather.tar
+  bytes: 12797438995
+  md5: 33ffea4db4d93fe4a428c40a6ce0c25d
+  format: tar
+  publisher_url: https://zenodo.org/records/2235448/files/weather.tar?download=1
+  sha256: ed2550399b85b77120969ec93e316ff9f16ff042ff512cfdf82b53121ecbc4f7
+resource_limits:
+  max_rss_bytes: 8000000000
+  max_cpu_seconds: 7200
+  max_wall_seconds: 21600

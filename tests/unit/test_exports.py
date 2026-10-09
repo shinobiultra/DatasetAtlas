@@ -181,3 +181,98 @@ def test_derived_overlay_is_pinned_and_joins_by_snapshot_and_id(tmp_path):
     args[3].write_text(json.dumps(policy))
     with pytest.raises(PublicationError, match="Incomplete"):
         validate_publication(*args)
+
+
+def test_user_origin_datasets_and_workspace_availability_never_reach_a_public_build(tmp_path):
+    import json
+    import yaml
+    from dataset_atlas.exports import build_publication, validate_publication
+    from dataset_atlas.exports.publication import PublicationError
+    from dataset_atlas.models import Availability, Coverage, Dataset
+    registry = tmp_path / 'registry'
+    (registry / 'datasets').mkdir(parents=True)
+    shipped = Dataset(id='shipped', name='Shipped', coverage=Coverage(preview_count=3), availability=Availability(preview='local'))
+    (registry / 'datasets/shipped.yaml').write_text(yaml.safe_dump(shipped.model_dump(mode='json')))
+    (tmp_path / 'profile.json').write_text(json.dumps({'schema_version': '1.0', 'datasets': {}}))
+    report = build_publication(registry, tmp_path / 'packs', tmp_path / 'site', tmp_path / 'profile.json')
+    catalogue = json.loads((tmp_path / 'site/data/catalogue.json').read_text())
+    assert report.catalogue_count == 1 and 'availability' not in catalogue[0]
+    mine = Dataset(id='mine', name='Mine', origin='user')
+    (registry / 'datasets/mine.yaml').write_text(yaml.safe_dump(mine.model_dump(mode='json')))
+    import pytest
+    with pytest.raises(PublicationError, match='never published'):
+        validate_publication(registry, tmp_path / 'packs', tmp_path / 'site2', tmp_path / 'profile.json')
+
+
+@pytest.mark.parametrize('change', ['asset', 'snapshot', 'subjects', 'unit'])
+def test_portable_pack_rejects_nested_identity_mismatch_on_export_and_import(tmp_path, change):
+    asset = Asset(id='a1', dataset_id='toy', release_id='r1', modality='image')
+    art = Artifact(id='art',kind='fixture',snapshot_ids=['s1'],unit='example',ids=['toy:example:1'])
+    good = Pack(dataset=dataset(),fields=[],records=[record(assets=[asset])],artifacts=[art])
+    target = export_pack(good, tmp_path/'good')
+    bad = good.model_copy(deep=True)
+    if change == 'asset': bad.records[0].assets[0].release_id = 'other'
+    if change == 'snapshot': bad.artifacts[0].snapshot_ids = ['other']
+    if change == 'subjects': bad.artifacts[0].ids = ['missing']
+    if change == 'unit': bad.artifacts[0].unit = 'entity'
+    with pytest.raises(ExchangeError, match='Asset identity|Artifact snapshot|Artifact subjects'):
+        export_pack(bad,tmp_path/'bad')
+    # A self-consistent exchange checksum must not bypass semantic identity validation.
+    name = 'preview/samples-000.json' if change == 'asset' else 'artifacts/artifacts.json'
+    values = bad.records if change == 'asset' else bad.artifacts
+    data = json.dumps([value.model_dump(mode='json') for value in values]).encode()
+    (target/name).write_bytes(data)
+    manifest = json.loads((target/'manifest.json').read_text())
+    manifest['checksums'][name] = hashlib.sha256(data).hexdigest()
+    (target/'manifest.json').write_text(json.dumps(manifest))
+    with pytest.raises(ExchangeError, match='Asset identity|Artifact snapshot|Artifact subjects'):
+        import_pack(target)
+
+
+def test_selection_media_matches_claimed_original_hash_on_export_and_import(tmp_path):
+    media = tmp_path/'source'; media.mkdir()
+    path = media/'image.png'; Image.new('RGB',(2,2),'red').save(path)
+    sha = hashlib.sha256(path.read_bytes()).hexdigest()
+    item = record(assets=[Asset(id='a1',dataset_id='toy',release_id='r1',modality='image',uri='image.png',sha256=sha)])
+    target = export_selection(selection(),[item],tmp_path/'good',media_root=media,approved_media_ids={'a1'})
+    assert import_selection(target)[1][0].assets[0].sha256 == sha
+    Image.new('RGB',(2,2),'blue').save(path)
+    with pytest.raises(ExchangeError,match='original media checksum changed'):
+        export_selection(selection(),[item],tmp_path/'changed',media_root=media,approved_media_ids={'a1'})
+    # Even rewritten manifest checksums cannot change the declared asset original.
+    payload = json.loads((target/'records.json').read_text())
+    member = payload[0]['assets'][0]['uri']; data = path.read_bytes(); (target/member).write_bytes(data)
+    manifest = json.loads((target/'manifest.json').read_text());manifest['checksums'][member] = hashlib.sha256(data).hexdigest()
+    (target/'manifest.json').write_text(json.dumps(manifest))
+    with pytest.raises(ExchangeError,match='differs from asset'):
+        import_selection(target)
+
+
+@pytest.mark.parametrize('key', ['items', 'points', 'rows', 'ids'])
+@pytest.mark.parametrize('change', ['outside', 'duplicate', 'missing'])
+def test_portable_artifact_embedded_subjects_are_validated_even_with_rewritten_checksums(tmp_path,key,change):
+    first=record(); second=first.model_copy(update={'id':'toy:example:2'})
+    values=['toy:example:2'] if key=='ids' else [{'id':'toy:example:2','output':{'value':1}}]
+    art=Artifact(id='art',kind='fixture',snapshot_ids=['s1'],unit='example',ids=[second.id],data={key:values})
+    good=Pack(dataset=dataset(),fields=[],records=[first,second],artifacts=[art])
+    target=export_pack(good,tmp_path/'good')
+    bad=good.model_copy(deep=True)
+    if change=='outside': bad.artifacts[0].data[key]=[first.id] if key=='ids' else [{'id':first.id}]
+    if change=='duplicate': bad.artifacts[0].data[key]=values*2
+    if change=='missing': bad.artifacts[0].data[key]=[None] if key=='ids' else [{}]
+    with pytest.raises(ExchangeError,match='subjects differ'):
+        export_pack(bad,tmp_path/'bad')
+    name='artifacts/artifacts.json'; data=json.dumps([bad.artifacts[0].model_dump(mode='json')]).encode()
+    (target/name).write_bytes(data)
+    manifest=json.loads((target/'manifest.json').read_text());manifest['checksums'][name]=hashlib.sha256(data).hexdigest()
+    (target/'manifest.json').write_text(json.dumps(manifest))
+    with pytest.raises(ExchangeError,match='subjects differ'):
+        import_pack(target)
+
+
+def test_portable_artifact_allows_partial_output_for_declared_subjects(tmp_path):
+    first=record(); second=first.model_copy(update={'id':'toy:example:2'})
+    art=Artifact(id='art',kind='fixture',snapshot_ids=['s1'],unit='example',ids=[first.id,second.id],
+      data={'items':[{'id':first.id,'status':'completed','output':{'score':0.5}}],'points':[]})
+    good=Pack(dataset=dataset(),fields=[],records=[first,second],artifacts=[art])
+    assert import_pack(export_pack(good,tmp_path/'partial')).artifacts==[art]

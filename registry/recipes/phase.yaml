@@ -1,0 +1,60 @@
+release: phase-native-20221101
+source_url: https://github.com/noagarcia/phase/tree/64b043dd3941ae49d5eb3d60aab0319c758cb9fa
+adapter: structured_collection
+expected_count: 18889
+description: 'PHASE: all 18,889 native images with exact author-provided perceived demographic/contextual
+  region annotations and individual votes. Train and validation identities, disagreement/unsure values
+  and annotator references are retained.'
+scope: All 14,275 training and 4,614 validation images in the author-linked 20221101 release, with both
+  complete individual-vote and aggregated-region annotation tables. Auxiliary annotators.csv and README
+  are retained in the original annotation ZIP. Annotation values describe human perceptions, not verified
+  personal attributes.
+files:
+- source_name: phase-annotations.zip
+  url: https://drive.usercontent.google.com/download?id=1COJCqMj4Jdj7Vu_87uJ4tKaQZyGISMTm&export=download&confirm=t
+  bytes: 3405111
+  sha256: 0513168adc6d5000f924ddf1ff852a417591fc5eb02c2742610a5d474378f6f7
+  format: zip
+  config_key: annotations_path
+- source_name: phase-images.zip
+  url: https://drive.usercontent.google.com/download?id=1-GGvJjkIrDjQlSnoPmOKY3KqCeeGyDGT&export=download&confirm=t
+  bytes: 2580061932
+  sha256: c1665120222263d2aee7e7a72059956d5dd945cdad33ef8eabe05f5587dc8fa0
+  format: zip
+  config_key: images_path
+allowed_hosts:
+- drive.google.com
+- drive.usercontent.google.com
+adapter_config:
+  annotations:
+  - path_key: annotations_path
+    member: phase_gcc_train_regions_20221101.json
+    record_key_field: native_image_id
+    split: train
+    media_archive: images
+    media_template: train/{native_image_id}
+    joins:
+    - path_key: annotations_path
+      member: phase_gcc_train_all_20221101.json
+      key: '@key'
+      'on': native_image_id
+      field: native_votes
+  - path_key: annotations_path
+    member: phase_gcc_val_regions_20221101.json
+    record_key_field: native_image_id
+    split: val
+    media_archive: images
+    media_template: val/{native_image_id}
+    joins:
+    - path_key: annotations_path
+      member: phase_gcc_val_all_20221101.json
+      key: '@key'
+      'on': native_image_id
+      field: native_votes
+  mapping:
+    id: native_image_id
+    text: caption
+  local_archives:
+    images:
+      path_key: images_path
+  max_annotation_bytes: 50000000

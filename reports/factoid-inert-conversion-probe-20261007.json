@@ -1,0 +1,33 @@
+{
+  "count": 4150,
+  "rows_sha256": "2aae4b83900d37632e06c3a4534c7007b7ed78442b099a4288f23d60ed82a700",
+  "file_sha256": "846cab085b10eb064dc50a1a53fc5253ca257cce70558026608e3f8864900a9e",
+  "representation": "Native DataFrame values; tuples/bytes/datetimes/Counters/nonfinite floats have explicit lossless type envelopes; no source code execution or Reddit hydration.",
+  "syntax_receipt": {
+    "opcodes": 82115458,
+    "decoded_bytes": 1131504002,
+    "symbols": [
+      "collections.Counter",
+      "datetime.datetime",
+      "functools.partial",
+      "numpy.core.multiarray._reconstruct",
+      "numpy.core.numeric._frombuffer",
+      "numpy.dtype",
+      "numpy.ndarray",
+      "pandas.core.frame.DataFrame",
+      "pandas.core.indexes.base.Index",
+      "pandas.core.indexes.base._new_Index",
+      "pandas.core.indexes.numeric.Int64Index",
+      "pandas.core.internals.blocks.new_block",
+      "pandas.core.internals.managers.BlockManager"
+    ],
+    "memo_entries": 26996457
+  },
+  "status": "converted_exploratory",
+  "output_bytes": 2811398468,
+  "elapsed_seconds": 102.96068294699944,
+  "peak_rss_bytes": 5729140736,
+  "checked_at_utc": "2026-10-07T07:59:02.362946+00:00",
+  "native_index_activated": false,
+  "scope": "Inert DataFrame conversion only; native value and canonical index validation remain pending."
+}

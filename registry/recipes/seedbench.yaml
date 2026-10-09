@@ -1,0 +1,414 @@
+release: 81cb1571b8a3a30af2e62073b8d2054418350f0a
+source_url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/tree/81cb1571b8a3a30af2e62073b8d2054418350f0a
+adapter: seed_bench
+expected_count: 17990
+remote_metadata_bytes: 50000000
+description: 'SEED-Bench 1: all 17,990 native questions with original choices, answers, task dimensions
+  and image references. Video questions retain the eight ordered author-released frames. Original-resolution
+  images and frames are fetched on demand from the pinned media archives.'
+scope: All 17,990 questions in the author Hugging Face release, including every native task and all ordered
+  media. The released video representation is eight PNG frames per question, not full video playback.
+  No benchmark prompts are executed or generated outputs claimed. Each archive part is ETag-bound; upstream
+  hashes are recorded, not falsely reported as fully downloaded and locally verified.
+files:
+- source_name: SEED-Bench.json
+  url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/SEED-Bench.json
+  bytes: 7170715
+  sha256: ebd4aab3f602e5e7826c29824a0e63fe803308bf628dce2787972c523664d567
+  format: json
+  config_key: annotations_path
+allowed_hosts:
+- huggingface.co
+- us.aws.cdn.hf.co
+- cas-bridge.xethub.hf.co
+adapter_config:
+  seed_version: 1
+  identity_fields:
+  - question_id
+  - question_type_id
+  annotations:
+  - path_key: annotations_path
+    records_key: questions
+    split: test
+    choices_columns:
+    - choice_a
+    - choice_b
+    - choice_c
+    - choice_d
+  mapping:
+    id: question_id
+    question: question
+    choices: _atlas_choices
+  remote_archives:
+    images:
+      name: SEED-Bench-image.zip
+      url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/SEED-Bench-image.zip
+      bytes: 1678769671
+      etag: '"ba9b44b243d83a148ca77dcbb73f1ea483e79535dfab686a2397689ab857180b"'
+      allowed_hosts:
+      - huggingface.co
+      - cdn-lfs.huggingface.co
+      - cdn-lfs.hf.co
+      - cas-bridge.xethub.hf.co
+      - us.aws.cdn.hf.co
+      upstream_sha256: 3817f6998a1fcf750250ad141370bb065f3e8e54632e9c107c78b2823a9e79ce
+    video:
+      parts:
+      - name: v1_video.zip.001
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.001
+        bytes: 734003200
+        etag: '"57d03a0f32c7bd17088f8efe0af44bb906109a457945564e16fa7d926ab4a2a2"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: ac2204d178968067865b6b2db645ae65abcdaa94e31ab3f0778279f665b71837
+      - name: v1_video.zip.002
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.002
+        bytes: 734003200
+        etag: '"5b2ddac9da95dacf11ea2c71b1febbd0cde5e4d44022575c53adedc9bd4a5214"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: b18d8f0cfd54d53afaf4e3cca0d206e822fbd0073af7815f406476dfd02c6a6d
+      - name: v1_video.zip.003
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.003
+        bytes: 734003200
+        etag: '"b23128f587df70a533f034e8c56174468daad4ea7ffc67efdc709ac6b258f34e"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 3f09860104b5b8160e4c16f41da7cfcab094d956e0394c93061182cccbce161d
+      - name: v1_video.zip.004
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.004
+        bytes: 734003200
+        etag: '"bbfb7baacd765f5303c89ddd3c69380c5f0f565c3ddd694dea255ac9cffbc50c"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 21e9bb182095fade5fed18843283165ce25412a74e6677471bb2135ad8af47e2
+      - name: v1_video.zip.005
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.005
+        bytes: 734003200
+        etag: '"61a590b88887173321598bee4e38e21884d9a68fc1a6f45aeb002a24faa474c2"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: c48005dea05d62d45fa788f2b608697d543857f4e2993d9b59fac6efea3fbec5
+      - name: v1_video.zip.006
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.006
+        bytes: 734003200
+        etag: '"3cf26dbc59f622d64d0c2af4c9601e34024f3d5cfd385ecafaa5983fe1c99d07"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: c9ef71c2fd52f0bb70965a0204d2eb55221892f43a22eeefcf1b68001de5fd1b
+      - name: v1_video.zip.007
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.007
+        bytes: 734003200
+        etag: '"460ba39971e17ff7eff3c1c4dca115a0222be5eb82d84ef178903b478afe86e9"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 720c57237e7af018d81dad76b1edf48d0edd828cdab2c648c28934564a915b91
+      - name: v1_video.zip.008
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.008
+        bytes: 734003200
+        etag: '"08adf7c42a514cec7df4d030b634d05c04ebbc8ce4d65e8da0a5f6f411937243"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 8613c6649ba9820901d783700f53b608cfb4568b7df92ff17976075bc90145ab
+      - name: v1_video.zip.009
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.009
+        bytes: 734003200
+        etag: '"7ad1ea8ec58139a18fc4926d1ab99152d358950e1a4aa6e1f2fba3bc4bb385f1"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 06829d809ba5102feb9e67fc8e138d056df7f4bab88f0ef5c02bd5a9488073f4
+      - name: v1_video.zip.010
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.010
+        bytes: 734003200
+        etag: '"c58d5a9814afa4675264b9f7344153d77b03c758efa9cdf02589b440734e9535"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 131cfa5ebca676c3e1c82ffa0f1aad7dac9759eb5ca57974b73fa692d26e1e5f
+      - name: v1_video.zip.011
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.011
+        bytes: 734003200
+        etag: '"45c3dda685e0744ae4dbe7c16de443a0abf17b78c4c3c69d88afd0e10b3143c6"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 3d57ae2093dac41138217fa97d0867000df998becdfa02b5c3dcb373ebc15afd
+      - name: v1_video.zip.012
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.012
+        bytes: 734003200
+        etag: '"38c09d7e58852da214a1386b7be438f68bec59ed0c615dcc133b40142e0188da"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 0bb38598f00bdf6b999556a35a3e7782e4f572161d6fac003cec6de425f7aa3c
+      - name: v1_video.zip.013
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.013
+        bytes: 734003200
+        etag: '"54e0ec6e29cc3f54608cfd1deff4eb537e63dab74f6b71d1052d957f02ec0e0b"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 4f3890cb93d1bc7fad8b6a0bf3fb1e8c3acb0a3deb242c7000fcdf2d10a8f2bd
+      - name: v1_video.zip.014
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.014
+        bytes: 734003200
+        etag: '"4b1f70d93fd614fdde1f92e33174c49e9b6579d533088999c47409900de85db1"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 79d022e615ceafccc9add60b9ddc8fb3af0d7766dc045521cf421d2e4fb0e86e
+      - name: v1_video.zip.015
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.015
+        bytes: 734003200
+        etag: '"8407f21bc6df97e33ffcd1c660862c3cbf2f24fe9da5009b9e224ac9eefba91b"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: d2283300894c7392bf0fd0e478de12405c78cda188729a67fee44e29273b4449
+      - name: v1_video.zip.016
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.016
+        bytes: 734003200
+        etag: '"b021308249500f2bb2a0725b69ae0511d73a89ffa9382b1b7f953c28ea5c951d"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 7720c4ccd8243c85721bc12187c1a68ed82588d96fd72ac421bcd1cfcc1df64d
+      - name: v1_video.zip.017
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.017
+        bytes: 734003200
+        etag: '"4a6c3cf730d9089f01051627d1d7915df1e7e41f851896376d12e89cfaba649d"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 6a7983547befdcd38b2ea4896bf610842b98fb92e3c17c9b0ae757ceee41b9ee
+      - name: v1_video.zip.018
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.018
+        bytes: 734003200
+        etag: '"3e212758b81d66fba79e99dd851a12f78f77bef33d0dad43ad1d7111a1d988d4"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: af92e66c13283ecff147a0604460aca6fa81fb1dbda331bea62deabcf723994a
+      - name: v1_video.zip.019
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.019
+        bytes: 734003200
+        etag: '"8b34b7332ecffad5750db87c3b71589aedbb9ac9986b97812a5637359dc50eb9"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 75111676e87d6a8291a3e92a8d64de5c8c82fbfc2d98928bec5d5443ccc4a3e3
+      - name: v1_video.zip.020
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.020
+        bytes: 734003200
+        etag: '"f9e50b6baba6979b3c3fe0b0e5a9bd98d43749996e1f7fa48af7d01b2772af68"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 6f8850eb9a0ac8a566768338656d62b4b963c29e6ba48d1241e5ff107fe644bb
+      - name: v1_video.zip.021
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.021
+        bytes: 734003200
+        etag: '"521b02dc0a7b5001cd04b83cf6c9eec469e2669503e7a9dca3c484a4df97d60c"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 24e546b2a427e0a2cb162d7619dcdef4b8d2461c6ad0415ffcbe1a082e41c54d
+      - name: v1_video.zip.022
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.022
+        bytes: 734003200
+        etag: '"fb6f512d75c8f310f800e8288d6015b6ae8198799a0cd2dfc1e610501710c8ec"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: cb399212dcbe91ccbeb4b84153d151314cac4c8d798283a609d80ee6ffa892dd
+      - name: v1_video.zip.023
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.023
+        bytes: 734003200
+        etag: '"e585e40bde8b109713dea2d491fc4bd0c394304fad33503a73b992310ca164a4"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 70bbead0b6de95e6909ede9f82651ded178d3677b6d246579f0e13f0e5e5a8a1
+      - name: v1_video.zip.024
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.024
+        bytes: 734003200
+        etag: '"b48cf9b8542273a234284062aa26cd58a254e952186345d8f945e46fcf5812a3"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: a7fb5f169380af4186aa29e65f934007b66e712df2c48becc0b7a91b0b93b754
+      - name: v1_video.zip.025
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.025
+        bytes: 734003200
+        etag: '"3f5ca93cc03bdf57a0c50636251ee1eea938a9202ce5210804568ab5759458b9"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 6a714d78be7a6408d528fa1efa4cf588bbd75ae4f40bdb40f78c45c510923fc5
+      - name: v1_video.zip.026
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.026
+        bytes: 734003200
+        etag: '"16e0d97f1e978a7712562bff9e7dcfeeafacc3b6fd7e56b2c1de9131c522c374"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 4db6b576bd849bcdcc5d6bc55b1f2af076c079a6266819e6b431c471506c360f
+      - name: v1_video.zip.027
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.027
+        bytes: 734003200
+        etag: '"1e284671db1d46351e71862a19eccb3831f554f84269195949b8b67b5b8f9998"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 3c7528a12755442edb3b7e382227cf853b658a325d04a0a380bd54a25a85b66e
+      - name: v1_video.zip.028
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.028
+        bytes: 734003200
+        etag: '"fb254cea10dedf4eaa01877e868d8540dfb020408dd5b423e80918b99d3fa14d"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: e5d3c8e15206dcf543b6b6f9b357ef62eff82a7f6bab503fcc3dc0515e4198c6
+      - name: v1_video.zip.029
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.029
+        bytes: 734003200
+        etag: '"32918b90e121ef36d2ee81c97d7011becfc7d7aeb818d8adf6d2b3a047913284"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 6007deefb1d7739910319e9f3f95443a5c892879c8757c786bb4ab405106ce04
+      - name: v1_video.zip.030
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.030
+        bytes: 734003200
+        etag: '"2f2e6c78ca9c06fd43b77e4e978f8b2b35a9593591c760f21b80504dc09dd1de"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 51ab5ff51b647e3f0d4a0b9b5c680be7694b1deca00ce3aef085df8cd60e005b
+      - name: v1_video.zip.031
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.031
+        bytes: 734003200
+        etag: '"1f90715c9316449bca12df09643abee8f465e4f234b82c988aefc635aa10e789"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 9265d767e8968df945ffb107f7cff731cf24f655c85e37e6d9d1c13a460d096c
+      - name: v1_video.zip.032
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/resolve/81cb1571b8a3a30af2e62073b8d2054418350f0a/v1_video.zip.032
+        bytes: 170144147
+        etag: '"13e311e9d208d734197b1e527b0d65714e1da4e2cf4db54c1e3abc79ca827cb6"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 75a3d4b8011b4f2c087ac1b69567423988b10aa9716815485827cc70dfb1a7ce
+      bytes: 22924243347
+  remote_cache_root: work/media-cache/seedbench
+  remote_cache_bytes: 300000000
+  max_annotation_bytes: 30000000
+  annotation_transfer_bytes: 50000000
+  media_transfer_bytes: 50000000

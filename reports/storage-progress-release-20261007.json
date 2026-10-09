@@ -1,0 +1,478 @@
+{
+  "root": "/home/bitwise/Documents/vibe/DatasetAtlas",
+  "checked_at_utc": "2026-10-07T06:49:28.391530+00:00",
+  "target_bytes": 100000000000,
+  "ceiling_bytes": 150000000000,
+  "status": "above_target",
+  "files": 99604,
+  "logical_bytes": 182246758948,
+  "unique_file_bytes": 122470676917,
+  "allocated_bytes": 122670481408,
+  "bytes_above_target": 22670481408,
+  "groups": {
+    "work/prepared": {
+      "files": 7321,
+      "logical_bytes": 84181841466,
+      "unique_file_bytes": 78977749343,
+      "allocated_bytes": 78994190336
+    },
+    "work/sources": {
+      "files": 8276,
+      "logical_bytes": 39997017224,
+      "unique_file_bytes": 19018569232,
+      "allocated_bytes": 19035815936
+    },
+    "external:/home/bitwise/.cache/huggingface/hub/models--Qwen--Qwen2.5-VL-3B-Instruct": {
+      "files": 22,
+      "logical_bytes": 7520894392,
+      "unique_file_bytes": 7520894392,
+      "allocated_bytes": 7520931840
+    },
+    ".venv": {
+      "files": 34261,
+      "logical_bytes": 6836070518,
+      "unique_file_bytes": 6836070518,
+      "allocated_bytes": 6917492736
+    },
+    "work/compact-media": {
+      "files": 7834,
+      "logical_bytes": 1996497956,
+      "unique_file_bytes": 1980804148,
+      "allocated_bytes": 1996169216
+    },
+    "work/models": {
+      "files": 58,
+      "logical_bytes": 1721057444,
+      "unique_file_bytes": 1721057444,
+      "allocated_bytes": 1721204736
+    },
+    "work/snapshots": {
+      "files": 128,
+      "logical_bytes": 1392567457,
+      "unique_file_bytes": 1392567457,
+      "allocated_bytes": 1392865280
+    },
+    "work/original-access": {
+      "files": 195,
+      "logical_bytes": 873529174,
+      "unique_file_bytes": 873529174,
+      "allocated_bytes": 874008576
+    },
+    "work/roadmap-source-audit-20261005": {
+      "files": 313,
+      "logical_bytes": 6263275170,
+      "unique_file_bytes": 771030060,
+      "allocated_bytes": 771366912
+    },
+    "work/media-cache": {
+      "files": 12880,
+      "logical_bytes": 373863580,
+      "unique_file_bytes": 373863580,
+      "allocated_bytes": 374689792
+    },
+    "work/openimages-native-audit-20261007": {
+      "files": 8,
+      "logical_bytes": 357315193,
+      "unique_file_bytes": 357315193,
+      "allocated_bytes": 357339136
+    },
+    "work/packs": {
+      "files": 2428,
+      "logical_bytes": 395486564,
+      "unique_file_bytes": 299717960,
+      "allocated_bytes": 304263168
+    },
+    "work/official-native-candidates-20261007": {
+      "files": 3,
+      "logical_bytes": 267818418,
+      "unique_file_bytes": 267818418,
+      "allocated_bytes": 267825152
+    },
+    "work": {
+      "files": 1601,
+      "logical_bytes": 247360537,
+      "unique_file_bytes": 247360537,
+      "allocated_bytes": 251899904
+    },
+    "work/restricted-native-preview-repair-20261006": {
+      "files": 317,
+      "logical_bytes": 222036323,
+      "unique_file_bytes": 222036323,
+      "allocated_bytes": 222052352
+    },
+    "apps": {
+      "files": 6334,
+      "logical_bytes": 184763563,
+      "unique_file_bytes": 184763563,
+      "allocated_bytes": 201834496
+    },
+    "work/inaturalist-native-verification-20261006": {
+      "files": 25,
+      "logical_bytes": 192970752,
+      "unique_file_bytes": 192970752,
+      "allocated_bytes": 192970752
+    },
+    "work/demo-analysis-coco": {
+      "files": 1546,
+      "logical_bytes": 117167593,
+      "unique_file_bytes": 117167593,
+      "allocated_bytes": 122036224
+    },
+    "work/download-cache": {
+      "files": 6,
+      "logical_bytes": 103874884,
+      "unique_file_bytes": 103874884,
+      "allocated_bytes": 103890944
+    },
+    "work/artifacts": {
+      "files": 4180,
+      "logical_bytes": 68563705,
+      "unique_file_bytes": 68563705,
+      "allocated_bytes": 80240640
+    },
+    "dist": {
+      "files": 3,
+      "logical_bytes": 78743756,
+      "unique_file_bytes": 78743756,
+      "allocated_bytes": 78753792
+    },
+    "src": {
+      "files": 1443,
+      "logical_bytes": 73364303,
+      "unique_file_bytes": 73364303,
+      "allocated_bytes": 76349440
+    },
+    "work/places365-native-audit-20261006": {
+      "files": 2,
+      "logical_bytes": 67510784,
+      "unique_file_bytes": 67510784,
+      "allocated_bytes": 67518464
+    },
+    "work/verification-public-20261005": {
+      "files": 616,
+      "logical_bytes": 60127069,
+      "unique_file_bytes": 60127069,
+      "allocated_bytes": 61362176
+    },
+    ".git": {
+      "files": 1430,
+      "logical_bytes": 56939743,
+      "unique_file_bytes": 56939743,
+      "allocated_bytes": 60755968
+    },
+    "work/roadmap-source-audit-20261006": {
+      "files": 6,
+      "logical_bytes": 50812428,
+      "unique_file_bytes": 50812428,
+      "allocated_bytes": 50827264
+    },
+    "work/demo-analysis": {
+      "files": 1046,
+      "logical_bytes": 43897067,
+      "unique_file_bytes": 43897067,
+      "allocated_bytes": 46669824
+    },
+    "work/celeba-native-source-audit-20261006": {
+      "files": 3,
+      "logical_bytes": 45699079,
+      "unique_file_bytes": 45699079,
+      "allocated_bytes": 45703168
+    },
+    "work/visual-genome-preview-verification-20261006": {
+      "files": 369,
+      "logical_bytes": 44153183,
+      "unique_file_bytes": 44153183,
+      "allocated_bytes": 44523520
+    },
+    "work/wmdp-pinned-reproduction-20261007": {
+      "files": 630,
+      "logical_bytes": 39869322,
+      "unique_file_bytes": 39869322,
+      "allocated_bytes": 41193472
+    },
+    "work/fresh-bounded-reproduction-20261007": {
+      "files": 627,
+      "logical_bytes": 39859801,
+      "unique_file_bytes": 39859801,
+      "allocated_bytes": 41177088
+    },
+    "registry": {
+      "files": 613,
+      "logical_bytes": 35267169,
+      "unique_file_bytes": 35267169,
+      "allocated_bytes": 36556800
+    },
+    "work/verification-recap-20261005": {
+      "files": 582,
+      "logical_bytes": 34722568,
+      "unique_file_bytes": 34722568,
+      "allocated_bytes": 35905536
+    },
+    "work/verification-20261005": {
+      "files": 573,
+      "logical_bytes": 34477168,
+      "unique_file_bytes": 34477168,
+      "allocated_bytes": 35659776
+    },
+    "work/public-mirror-zip-indices-20261007": {
+      "files": 4,
+      "logical_bytes": 35520744,
+      "unique_file_bytes": 35520744,
+      "allocated_bytes": 35532800
+    },
+    "examples": {
+      "files": 305,
+      "logical_bytes": 29570606,
+      "unique_file_bytes": 29570606,
+      "allocated_bytes": 30179328
+    },
+    "external:/home/bitwise/.cache/vllm/torch_compile_cache/torch_aot_compile/57d9b21e56ab797b8bbff34151df322287140fd5ab94c389f23618bb9e6ae6b7": {
+      "files": 202,
+      "logical_bytes": 29143831,
+      "unique_file_bytes": 29143831,
+      "allocated_bytes": 29634560
+    },
+    "work/preparation": {
+      "files": 1447,
+      "logical_bytes": 20407456,
+      "unique_file_bytes": 20407456,
+      "allocated_bytes": 22835200
+    },
+    "work/fresh-bounded-reproduction-evidence-20261007": {
+      "files": 151,
+      "logical_bytes": 14447780,
+      "unique_file_bytes": 14447780,
+      "allocated_bytes": 14782464
+    },
+    "work/corpus": {
+      "files": 110,
+      "logical_bytes": 13892369,
+      "unique_file_bytes": 13892369,
+      "allocated_bytes": 14143488
+    },
+    "reports": {
+      "files": 449,
+      "logical_bytes": 10495197,
+      "unique_file_bytes": 10495197,
+      "allocated_bytes": 11620352
+    },
+    "external:/home/bitwise/.cache/huggingface/hub/models--Qwen--Qwen2.5-VL-3B-Instruct-AWQ": {
+      "files": 5,
+      "logical_bytes": 11424081,
+      "unique_file_bytes": 11424081,
+      "allocated_bytes": 11431936
+    },
+    "work/jobs": {
+      "files": 111,
+      "logical_bytes": 10787693,
+      "unique_file_bytes": 10787693,
+      "allocated_bytes": 10862592
+    },
+    "work/tid2013-native-audit-20261006": {
+      "files": 3,
+      "logical_bytes": 968278930,
+      "unique_file_bytes": 10598689,
+      "allocated_bytes": 10600448
+    },
+    "ui-mockups": {
+      "files": 8,
+      "logical_bytes": 9771092,
+      "unique_file_bytes": 9771092,
+      "allocated_bytes": 9785344
+    },
+    "local-config": {
+      "files": 10,
+      "logical_bytes": 8910091,
+      "unique_file_bytes": 8910091,
+      "allocated_bytes": 8941568
+    },
+    "tests": {
+      "files": 463,
+      "logical_bytes": 7985164,
+      "unique_file_bytes": 7985164,
+      "allocated_bytes": 8892416
+    },
+    "work/compression-study": {
+      "files": 58,
+      "logical_bytes": 7031287,
+      "unique_file_bytes": 7031287,
+      "allocated_bytes": 7139328
+    },
+    "work/prune-audit-20261006": {
+      "files": 27,
+      "logical_bytes": 5619917,
+      "unique_file_bytes": 5619917,
+      "allocated_bytes": 5668864
+    },
+    "work/native-fresh-reproduction-evidence-20261006": {
+      "files": 21,
+      "logical_bytes": 2246192,
+      "unique_file_bytes": 2246192,
+      "allocated_bytes": 2289664
+    },
+    "work/ucf101-native-audit-20261007": {
+      "files": 3,
+      "logical_bytes": 1579986,
+      "unique_file_bytes": 1579986,
+      "allocated_bytes": 1585152
+    },
+    "work/prune-audit-20261007": {
+      "files": 19,
+      "logical_bytes": 1497102,
+      "unique_file_bytes": 1497102,
+      "allocated_bytes": 1536000
+    },
+    "work/exports": {
+      "files": 6,
+      "logical_bytes": 1516523,
+      "unique_file_bytes": 1516523,
+      "allocated_bytes": 1531904
+    },
+    "work/model-server": {
+      "files": 16,
+      "logical_bytes": 1287761,
+      "unique_file_bytes": 1287761,
+      "allocated_bytes": 1327104
+    },
+    "work/conversion-staging-cleanup-evidence-20261007": {
+      "files": 3,
+      "logical_bytes": 799743,
+      "unique_file_bytes": 799743,
+      "allocated_bytes": 806912
+    },
+    "workspace files": {
+      "files": 10,
+      "logical_bytes": 714585,
+      "unique_file_bytes": 714585,
+      "allocated_bytes": 737280
+    },
+    "work/prune-audit-final-20261007": {
+      "files": 5,
+      "logical_bytes": 451475,
+      "unique_file_bytes": 451475,
+      "allocated_bytes": 454656
+    },
+    "scripts": {
+      "files": 43,
+      "logical_bytes": 357640,
+      "unique_file_bytes": 357640,
+      "allocated_bytes": 446464
+    },
+    "work/remaining-public-candidates-20261007": {
+      "files": 6,
+      "logical_bytes": 372515,
+      "unique_file_bytes": 372515,
+      "allocated_bytes": 385024
+    },
+    "work/verify-install": {
+      "files": 34,
+      "logical_bytes": 279982,
+      "unique_file_bytes": 279982,
+      "allocated_bytes": 348160
+    },
+    "work/spoken-native-audio-windowed-retry-audit-20261006": {
+      "files": 4,
+      "logical_bytes": 271803,
+      "unique_file_bytes": 271803,
+      "allocated_bytes": 282624
+    },
+    "work/vector-cache": {
+      "files": 4,
+      "logical_bytes": 159069,
+      "unique_file_bytes": 159069,
+      "allocated_bytes": 172032
+    },
+    "docs": {
+      "files": 12,
+      "logical_bytes": 121002,
+      "unique_file_bytes": 121002,
+      "allocated_bytes": 147456
+    },
+    ".pytest_cache": {
+      "files": 5,
+      "logical_bytes": 101953,
+      "unique_file_bytes": 101953,
+      "allocated_bytes": 118784
+    },
+    "test-results": {
+      "files": 5,
+      "logical_bytes": 33284,
+      "unique_file_bytes": 33284,
+      "allocated_bytes": 40960
+    },
+    "work/next-source-metadata-20261007": {
+      "files": 7,
+      "logical_bytes": 20832,
+      "unique_file_bytes": 20832,
+      "allocated_bytes": 40960
+    },
+    "schemas": {
+      "files": 1,
+      "logical_bytes": 30587,
+      "unique_file_bytes": 30587,
+      "allocated_bytes": 32768
+    },
+    "work/spoken-native-audio-retry-audit-20261006": {
+      "files": 3,
+      "logical_bytes": 25504,
+      "unique_file_bytes": 25504,
+      "allocated_bytes": 32768
+    },
+    ".ruff_cache": {
+      "files": 4,
+      "logical_bytes": 886,
+      "unique_file_bytes": 886,
+      "allocated_bytes": 16384
+    },
+    "work/source-objects": {
+      "files": 339,
+      "logical_bytes": 26415078973,
+      "unique_file_bytes": 12288,
+      "allocated_bytes": 12288
+    },
+    "work/spoken-native-audio-indices-20261006": {
+      "files": 9,
+      "logical_bytes": 308545569,
+      "unique_file_bytes": 3916,
+      "allocated_bytes": 12288
+    },
+    "work/voc2011-native-audit-20261006": {
+      "files": 1,
+      "logical_bytes": 12288,
+      "unique_file_bytes": 12288,
+      "allocated_bytes": 12288
+    },
+    ".github": {
+      "files": 1,
+      "logical_bytes": 4899,
+      "unique_file_bytes": 4899,
+      "allocated_bytes": 8192
+    },
+    "licenses": {
+      "files": 1,
+      "logical_bytes": 1072,
+      "unique_file_bytes": 1072,
+      "allocated_bytes": 4096
+    },
+    "work/previews": {
+      "files": 1,
+      "logical_bytes": 317,
+      "unique_file_bytes": 317,
+      "allocated_bytes": 4096
+    },
+    "work/source-indices": {
+      "files": 9,
+      "logical_bytes": 308545815,
+      "unique_file_bytes": 0,
+      "allocated_bytes": 0
+    }
+  },
+  "external_symlinks_not_counted": 36,
+  "errors": [],
+  "included_external_roots": [
+    "/home/bitwise/.cache/huggingface/hub/models--Qwen--Qwen2.5-VL-3B-Instruct",
+    "/home/bitwise/.cache/huggingface/hub/models--Qwen--Qwen2.5-VL-3B-Instruct-AWQ",
+    "/home/bitwise/.cache/vllm/torch_compile_cache/torch_aot_compile/57d9b21e56ab797b8bbff34151df322287140fd5ab94c389f23618bb9e6ae6b7"
+  ],
+  "measurement_note": "Regular files only; hard links counted once, allocated filesystem blocks. Reflink-shared extents may be counted more than once. Only explicitly configured external model/source roots are included. Incidental symlink targets and directory metadata are outside this measurement."
+}

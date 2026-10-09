@@ -1,0 +1,1063 @@
+{
+  "checked_at": "2026-09-23T10:53:09.503566+00:00",
+  "status": "passed",
+  "dataset_id": "turing-eye-test",
+  "snapshot_id": "turing-eye-test-24c126958397a8455fbd295b",
+  "population_count": 490,
+  "all_native_text_and_label_fields_exact": true,
+  "preview_records_verified": 100,
+  "late_records_verified": 3,
+  "native_image_bytes_equal": true,
+  "native_images_verified": 103,
+  "sampling": {
+    "method": "sha256_bottom_k_primary_asset",
+    "seed": 0,
+    "unit": "example",
+    "grouping": "primary asset ID; example ID for records without assets",
+    "population": "complete pinned indexed population",
+    "population_count": 490,
+    "requested_count": 100,
+    "returned_count": 100,
+    "source_revision": "2cc637da14c5f167676ffde210048c4f2306bd55",
+    "media_representation": "original",
+    "selection_note": "One hash-ranked example per sampled primary asset. All linked assets remain. Not an example-prevalence estimate."
+  },
+  "checks": [
+    {
+      "record_id": "turing-eye-test:example:7014d899be524f0dd32b38c2",
+      "source_field": "Image",
+      "sha256": "06bfbf75a290be5c7680e2a8deeee8ede1a506fd1f6cbcfeda68fd0d7044c3b7",
+      "bytes": 72181,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:b9710db966fe73ff4f21650a",
+      "source_field": "Image",
+      "sha256": "434af29173e25a60367cfb7fd49ddba1eb84b6ad99e176334915760a126af43d",
+      "bytes": 676781,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:9cde816a8e0728f594497563",
+      "source_field": "Image",
+      "sha256": "439496fc0a70f3d8c64f608186f884d8b0fad2f7be0fe3351858b0be26c4fea5",
+      "bytes": 91824,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:190e6556ddcdd4c8de5070b0",
+      "source_field": "Image",
+      "sha256": "0a5b5aff47fee6d1f7ca44aca10bb6cdb5687c7bd2f0fc4659ffd7729fafc72c",
+      "bytes": 70735,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:d0dce2c08ad3dd6fdccbd825",
+      "source_field": "Image",
+      "sha256": "97d5abd4c962025593165cb72fe44cc7a001d27e0d4dd9d10c3cf22f2d4353c3",
+      "bytes": 1065847,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:c0a59366d759edf39ab69782",
+      "source_field": "Image",
+      "sha256": "4427abf969623d5f084e488c9db85046ce5155576f182309b0e655a10e028717",
+      "bytes": 3251,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:fd0d1c20c6108a6bb1d8f9a5",
+      "source_field": "Image",
+      "sha256": "eb026c7ef5c051f065ef4716c565cd2c62e260acac04ba8ee5385be343183e5a",
+      "bytes": 75084,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:3dcf78cd91475c694aa0d6cd",
+      "source_field": "Image",
+      "sha256": "3493cbebdc16bb8322b68fabb650a5fab24a70763a964b08cea7a48f0d01ac79",
+      "bytes": 594003,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:23e5972856e33dc58d21dbaa",
+      "source_field": "Image",
+      "sha256": "38ccd833970021f0fea310a0958c567b928d43f90845a1108d56de39db39f4f5",
+      "bytes": 71699,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:4502f7b05f647faf94f37f9d",
+      "source_field": "Image",
+      "sha256": "cc5526f07936809251d93af36b3ae834991f39d8de97cc9b961e8e7ad94da92a",
+      "bytes": 714106,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:9679335c800d1ce4d5e3ff7e",
+      "source_field": "Image",
+      "sha256": "add3ddb5fe18c6d654bd724b92c65a1c2b625585a0591d8bc04d42e3d6dee369",
+      "bytes": 681114,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:68a1e210a0d558b6edea739f",
+      "source_field": "Image",
+      "sha256": "5c55682f069cec8b544eb1829e74f98c25d9bc2339ed355f2db64ea45d1f9d9d",
+      "bytes": 82787,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:73429c4002fe4536a05b9aa0",
+      "source_field": "Image",
+      "sha256": "f9294e22fe316c233e231f327f842a3d017875b7702844eba19ac0689b90874c",
+      "bytes": 96935,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:9ecce2d3615a664539ad9dc1",
+      "source_field": "Image",
+      "sha256": "4423ae6a385d19c11cd773b22f42b38c55cfb606f9ffca813d72f6d4e000868b",
+      "bytes": 605787,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:89bccd64f514bebb5fdd9ca6",
+      "source_field": "Image",
+      "sha256": "1755761f09c916971b65ddec3e4f40a2ee278cb6c55eb38f2277e7dfac4d004b",
+      "bytes": 2734,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:1a27b9e33119a27f7cf00db3",
+      "source_field": "Image",
+      "sha256": "9c8bc941ab2f372255713cb654bd27e2ea92b06d36e3711551af574fdd087ba1",
+      "bytes": 1287292,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:0e6460b9b9e48cd30091a392",
+      "source_field": "Image",
+      "sha256": "b62e6fc815ce9e2e3af8ade8c49ef54981b50947821f6198d3a05ea998b63b6a",
+      "bytes": 2270,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:d482034213918464a45f6fe5",
+      "source_field": "Image",
+      "sha256": "ae52dc55d1c12f23681304c23eec978a72fe0cd48f185723dbb78c226d6ed05f",
+      "bytes": 1805,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:6f3843c100cbf5c24261a8c3",
+      "source_field": "Image",
+      "sha256": "ee48211c25fc7f4fecebe8291030bbdb7aa7b58601d5d00457dc23b3e3d34244",
+      "bytes": 2444,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:b24cc04d5598ca6985a75883",
+      "source_field": "Image",
+      "sha256": "f9cb26492b3518a28065bf26a611c7edcd7ece54939c8aa7e639221bba107d20",
+      "bytes": 788423,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:43c3e4ea63b23672afa9a2b2",
+      "source_field": "Image",
+      "sha256": "581842176afb4123183686706afb44fecc962449700178e380085a8e0b1e618a",
+      "bytes": 80740,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:4ebc4f2739d2dba911faf924",
+      "source_field": "Image",
+      "sha256": "bfc4165ea0ac6011881700a195c70ca614222fc72269e6896704b0072271101f",
+      "bytes": 631973,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:d0fdc1e5b0b43ba13c09fe9f",
+      "source_field": "Image",
+      "sha256": "b15f5890fcd34235ac03eafec75132275fd1941ac4563d104e7a8a2017445f4d",
+      "bytes": 2269,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:fe7e2d1f4797368514124d18",
+      "source_field": "Image",
+      "sha256": "9034191913c11c0f6a785cfaa413b1181becfbb348a7777bf2de7e9f175ebf0f",
+      "bytes": 79605,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:8be77d5b0b79d7b0913f2f09",
+      "source_field": "Image",
+      "sha256": "33453f267f59f554d28498e087e9ca4b14861ca1e40d8c6e2c597eaefd74c5cd",
+      "bytes": 673947,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:1c04011676dcdacd62fdc7b5",
+      "source_field": "Image",
+      "sha256": "71504fee5ddef9d5752523c4b3790a1736b0c39a1f6c8e7adf28b29aaeb477fe",
+      "bytes": 2568,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:ca8be5151626e4d8da2dd109",
+      "source_field": "Image",
+      "sha256": "7a81b64d3b04bec758344f39451ca06e797ed6d355ff32e4ff1a8b32688fe905",
+      "bytes": 69005,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:5516700efefcffd89f734c24",
+      "source_field": "Image",
+      "sha256": "b3bcf59ef49a8a5746160a30886ea708f2a92aa45a569d2c645237b712cffca3",
+      "bytes": 2469,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:dbc8aaf13ad6b35505fcd271",
+      "source_field": "Image",
+      "sha256": "68874a619c67df6db5399f10a2f2e0c968ed792d6f4a29c046b1685a9b09d127",
+      "bytes": 833494,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:1063e0a5e0cd84bedbac4c1c",
+      "source_field": "Image",
+      "sha256": "a45cc26b5ba9a470fdb23f60a12bbe516092a676293adbef1f8a1cf984091356",
+      "bytes": 610634,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:fa3eebc20ec17a46409fb928",
+      "source_field": "Image",
+      "sha256": "140a1f81129f45017f4ad3ebe41208a1cefcda549db9e85b91b9da3c53c98b0e",
+      "bytes": 494036,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:9b090fe789223e66be89dc95",
+      "source_field": "Image",
+      "sha256": "51d2b5e6bc213cef0c316243c9fbaf74664f96b5b58fdac189323e91434686fa",
+      "bytes": 1118648,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:ff9fe23a55a006eb21e56738",
+      "source_field": "Image",
+      "sha256": "b9e292755a715e155402ba02a34fb8a4c04822d7f31a268c58ab0156013fd5f3",
+      "bytes": 85682,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:0fd356083aacead52bbb8b9d",
+      "source_field": "Image",
+      "sha256": "77f3468c16757daed903c89f69aefc520c551a45fb363eb5b4616a87c19c2e26",
+      "bytes": 663411,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:8cb5a85741d14409e79011c8",
+      "source_field": "Image",
+      "sha256": "b0889a38bc4b297dd127cbb87e0f6213c7a8127cb90f15569fef3cedbc1f092f",
+      "bytes": 974510,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:8074ee54c01f1af64402bfa7",
+      "source_field": "Image",
+      "sha256": "c71ef10b2ff04c0043cce8fe1086138b4ef2814cb425086cdb3c43c3a83fcbbe",
+      "bytes": 92524,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:8ff2d68b163dc9b9b8ff20db",
+      "source_field": "Image",
+      "sha256": "4db72228632a48936a7e4e1c890cad65fbae52c1f3f518683bf3a256f7888165",
+      "bytes": 78354,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:58a23f5660285824fd9ceb02",
+      "source_field": "Image",
+      "sha256": "7e11e4aaeb24874a8f49bb15cf8236a4c1b93992c1e2ebd484f7a18777bce95b",
+      "bytes": 2394,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:0c38cca9addeb82132897507",
+      "source_field": "Image",
+      "sha256": "7bbded97b010d9ddb79064be42dc1a55c0cf0b12e1473e79c17724bcf7aba0aa",
+      "bytes": 2262,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:a081cde0fe3e1ab885e78785",
+      "source_field": "Image",
+      "sha256": "1c74292f483085ba184b06ee0c757789dd474f35873010d6b8b058fe5351af87",
+      "bytes": 893593,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:99abf2305975852b435cd669",
+      "source_field": "Image",
+      "sha256": "3c62f6d6d1bff1195f1b13ee153ebdc549628fed0194d99d23ce02be76aa418e",
+      "bytes": 80995,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:fa26ffb23b6760953208a03c",
+      "source_field": "Image",
+      "sha256": "bb234a4d231ab0c810475319936fe84a25b3a1181c6394be883f11352f03178f",
+      "bytes": 69812,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:8197889bcbc524d0d0878b4e",
+      "source_field": "Image",
+      "sha256": "902752c8e1e5ebb3433a78d39fad851c96346820586c5689e05af74e5530b6ef",
+      "bytes": 3166,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:81e8b326c72aee41f612aaae",
+      "source_field": "Image",
+      "sha256": "e65e585f3410fe1433802fb336ea766dbd70c3299eacb61df9d78e5ed9c8155d",
+      "bytes": 734335,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:f3d153bd58fbe543e190553b",
+      "source_field": "Image",
+      "sha256": "a725d1baf1a425bcb9fbf36b758a461be1699e62e7508433afbce55e798c2b81",
+      "bytes": 2275,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:e6c03f0c6f0e695eb4d6e873",
+      "source_field": "Image",
+      "sha256": "1e58629414bea9e01e74427c7a49d1016994bc16b5f563059519838aba8ec348",
+      "bytes": 2838,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:3e6e014a55aa12cb24e44a6d",
+      "source_field": "Image",
+      "sha256": "ac94cfa52d7d4617b6195577d3c07184248f1f4c00260a6898cbf0b103115826",
+      "bytes": 732282,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:38ea1f3a4b053718646c69e4",
+      "source_field": "Image",
+      "sha256": "8a165fe9b7834df2e13c5bfabe5e66ee0d72a0d7a5a7da9cd6690a7cb0f9216f",
+      "bytes": 3219,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:c1f6ede73d6fb21f8a63c0df",
+      "source_field": "Image",
+      "sha256": "b522e82d6637ae87035e93f767ad20d2730e816ea6acfa2186c7023240b7a89f",
+      "bytes": 723408,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:e448880f0410388f0e9fca78",
+      "source_field": "Image",
+      "sha256": "a942c88c7adfd7ba64c948d1d7baa366478212b1ee0e3284eb7e8e292ad9b7de",
+      "bytes": 1087415,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:871768295e5590181bd01a2a",
+      "source_field": "Image",
+      "sha256": "6c5d1dfcbd1947cf9959ac0f36f6e40dc85a75f21dd491888f193e826ed67331",
+      "bytes": 1093159,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:fe0f50413da4aabe1fa14456",
+      "source_field": "Image",
+      "sha256": "5ce8ddafb57af203b44e1a09bd09014029f1a553bd2091968bbc64a4fcaf5de3",
+      "bytes": 84494,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:95c02274ae5def3aae72fca1",
+      "source_field": "Image",
+      "sha256": "0cc10d64db9863910f952e880f62f700a426d2269c39f8dc11e959b9afa4eb6a",
+      "bytes": 2142954,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:523cfe3c81dc0efefcdec6bb",
+      "source_field": "Image",
+      "sha256": "3f913463474fb303fa47b0b0b637e51cad67d4946adcdbd0803e0343274090d0",
+      "bytes": 817387,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:21d22f610f47f70ab8b765ae",
+      "source_field": "Image",
+      "sha256": "ca83a1960f5bd5e74ad68bffd7595aac0659e755e1188de8e76b3a7d7634c023",
+      "bytes": 745988,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:78d1eb85964c315ea16a5e27",
+      "source_field": "Image",
+      "sha256": "6730481793f6b70bfe005d7f6ccd875e9c1d8429394b915b1abb3b3ba38cefc1",
+      "bytes": 846752,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:8a68c2fe5d1e853c9da82dcd",
+      "source_field": "Image",
+      "sha256": "90787443444128f3e10bf2b30d17a6badb4726124c265ec4cf0f64ff9187dcb2",
+      "bytes": 774149,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:4978d16c11823ed4d6a5833f",
+      "source_field": "Image",
+      "sha256": "39e19668b8b0a323ab3b495bea1e0d9926471bc777716af9de39c4ea014a490e",
+      "bytes": 2812,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:ddd0a93882c8278c54b90e27",
+      "source_field": "Image",
+      "sha256": "b19f5232e59ad8a10ddb5c26494f72bc77b15b70f1bf7bd294fbbf556b8bd168",
+      "bytes": 510506,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:aa708cbccfb8c4f06f8ec0e9",
+      "source_field": "Image",
+      "sha256": "dbcf1da959b3ba58e059d7738029fcea27b2395ca5ed4b486d26164d88906a48",
+      "bytes": 633415,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:a163255d3dbb4a9d51362183",
+      "source_field": "Image",
+      "sha256": "0ce23f2ec602a931f21a0dcd96e5d52c15699604e363321849388b3745d6d0ce",
+      "bytes": 93133,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:48cd1f1912bb069b9bcf9ccb",
+      "source_field": "Image",
+      "sha256": "34f69b301b9ccef530a754e109aebd84eb4c344b60ca683ff412524f6f4709a0",
+      "bytes": 71991,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:fae65e1215f33ea628acc25a",
+      "source_field": "Image",
+      "sha256": "cde113acd197354acd572437b1a139aac041b8fad2df397d06aae97749017c58",
+      "bytes": 813042,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:800e02600b54ed00815146bc",
+      "source_field": "Image",
+      "sha256": "41a9b20649c2dd19201c7cd6ae60b7c2792bd211380bb0654f77006302c4bbf4",
+      "bytes": 72641,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:14f4063d2b812be96194942a",
+      "source_field": "Image",
+      "sha256": "3a39cd780921c2d02849555cf16846763577d4536f74ee6d987196debd2bc5ee",
+      "bytes": 2445,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:2b9e2c9d73377da46d7f2324",
+      "source_field": "Image",
+      "sha256": "ffb93c493b4cf769d0ea56c15ecf65b6bc28ee840a52da297ce06a8ce228848f",
+      "bytes": 2267,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:ce0f59e65dbbc3faa66e9551",
+      "source_field": "Image",
+      "sha256": "07c48000a487b89282057c11f1aea052a843c6fb503e77d7dd075ddfa97ae696",
+      "bytes": 2231,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:05f6156e48eb1bd394212a04",
+      "source_field": "Image",
+      "sha256": "d30beae8b7c4e75bb6cb82a5545517b7305cf9c4dc8192617cc1b5359315d27d",
+      "bytes": 725930,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:97acbcc799e3c75653ee0893",
+      "source_field": "Image",
+      "sha256": "eaf976b53fd7d669d4184485774525bbdea303400a7d71982f7e4dff61809daf",
+      "bytes": 73238,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:f4e25e14aa6748c9b4a24e0d",
+      "source_field": "Image",
+      "sha256": "6cd7e32b4b0a1bfc7bb4f05b82bcddc4062a7a80be3734e0c96296a715d1564d",
+      "bytes": 723754,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:69ca0b45efbf285402a2a280",
+      "source_field": "Image",
+      "sha256": "e838351470073ded86ea0b3edb725b0bccef1e18914861c32dff6b2de0300786",
+      "bytes": 2878,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:ee5bdd73adb04fe387cfc93d",
+      "source_field": "Image",
+      "sha256": "7082118aeeda0026e2143cf79890c785049084abd689572266f14cd0d8ec71bc",
+      "bytes": 2973,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:9b3478c299715a1ef78b8cb1",
+      "source_field": "Image",
+      "sha256": "5394593de5b38af1db3a263f9b3dbb569e3363220ab9d49dc4fb954a56c43105",
+      "bytes": 806602,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:58b695d07f382c16e66d9964",
+      "source_field": "Image",
+      "sha256": "054182354c8aa1488c2bfbd3176dc619bf85c184138e5461247402fc71097e2d",
+      "bytes": 83885,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:2cff812a8555063c7155dfa6",
+      "source_field": "Image",
+      "sha256": "5579677cabba570a40d785553b17126bdcd781a7a4cdf20d420fb91f5d55cac5",
+      "bytes": 707198,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:6fad5ee214cc6d79a5c09264",
+      "source_field": "Image",
+      "sha256": "2003ad98770a8b241871c22a8a6d68e0c4b9b7a52abbad5ef4823553e4e74588",
+      "bytes": 600986,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:691d546efc915578ba915ad4",
+      "source_field": "Image",
+      "sha256": "adc86c80a4c1ca66cc1b0d7b33032bb4c9c6da107bf633de3d2efe7d9ad71ab2",
+      "bytes": 545244,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:48f86e691a12fdb1936b57d2",
+      "source_field": "Image",
+      "sha256": "96b745ac9614472188264320f22d7623df80fa04121219dd72f2fe3d468e6dc3",
+      "bytes": 543634,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:d3c89b34235f3a80a2030dc5",
+      "source_field": "Image",
+      "sha256": "30427ec2cd9605726dee7853f1b10226d522ed1d2b2383207e4db4a5fef8e643",
+      "bytes": 729568,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:28f0130413a11f16848697cf",
+      "source_field": "Image",
+      "sha256": "3e0835c5a45df0389c3f3edb02e80797180a36c467ec79aef554c800a38e6e44",
+      "bytes": 2659,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:49e773d608c229b7865e5853",
+      "source_field": "Image",
+      "sha256": "2db967fa3d20bd50290eff8dd8c0d76733c3daeba9baf906ed84931960abe5c3",
+      "bytes": 945357,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:328ffa9da52bd8f9761f2813",
+      "source_field": "Image",
+      "sha256": "69d6f7027464e045d9254ee270dfbaaaf08cba04d708e0b3f807d7eafcfaf255",
+      "bytes": 502336,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:ea97da9ceb8d7238a543a87f",
+      "source_field": "Image",
+      "sha256": "e33787fa6dad3b025e3f9328ea3ad6927f01d32cfd29b32a47a31c6403b40170",
+      "bytes": 2535,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:ee629b1688df627dd0a5a993",
+      "source_field": "Image",
+      "sha256": "371e41ca3f78c6ca24fd0128edd8656288ab6a6b0bbd7a287f91088994d6ce06",
+      "bytes": 2027,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:60463bc1b5eceee384c732e6",
+      "source_field": "Image",
+      "sha256": "1d80bb01f4451596caf4fb3811852be170f31ca71484acad541d3350359615a7",
+      "bytes": 755789,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:28d951ca42d870786b4866b2",
+      "source_field": "Image",
+      "sha256": "ab80f0bf981c4d0924a3a3e686b16455b5c11444197c9221a88f36dd05b626fc",
+      "bytes": 1695,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:cd02a350683cb3d7885afc74",
+      "source_field": "Image",
+      "sha256": "8273bb2db64286a45e51168b0e6db8a3563e097ae9d4fdab1145e7b7c63c1f58",
+      "bytes": 86004,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:8f5a5918d125d98ee34a71ce",
+      "source_field": "Image",
+      "sha256": "ada3c7ca1eaa66d83ed329b2f769236afbd97744dc11fb948693be6e91701074",
+      "bytes": 697979,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:95827173fe6ee967f173ea4c",
+      "source_field": "Image",
+      "sha256": "1a9b806829878a5aa2976e63c503dec7a7837833e28efbb8ac49b6253ef486ba",
+      "bytes": 1019215,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:236d06e47ceb8db9c44ce177",
+      "source_field": "Image",
+      "sha256": "a7e3716649d95099e025138316e81ff8e9e862e860214ffbbed33d85fedff29b",
+      "bytes": 81435,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:b824e76705df03c1f059f4e6",
+      "source_field": "Image",
+      "sha256": "0b619a52bcb74d172d0d0c18984823a3f7c207d1fb9ba4fdd268b9f36ea4b255",
+      "bytes": 680066,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:1f5a8874cb54eb5df6226c73",
+      "source_field": "Image",
+      "sha256": "17d020eb7295cc37dda67d8a1c449abeea91fb58c0b8220c4bb39ebc724ab794",
+      "bytes": 2495,
+      "dimensions": [
+        256,
+        144
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:aeb1e3045562ba9d57fc96fb",
+      "source_field": "Image",
+      "sha256": "e320ba4583a82722af0e2eb176fc59a32d486525be1aeeeef63969ba46d3601e",
+      "bytes": 732354,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:3c84f56f7ca8823c647e5c88",
+      "source_field": "Image",
+      "sha256": "e0792a8bc06254d0cff61fa783d312ad03517533b770abdd69a72d5cf3abf31c",
+      "bytes": 83469,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:e9bcb5c19975c032d7a8f126",
+      "source_field": "Image",
+      "sha256": "926aa64aecd84ea833fd59d10754dd60e8cc864cd4643d7437d3e879141a1d94",
+      "bytes": 75326,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:ead9b235590a688673421df0",
+      "source_field": "Image",
+      "sha256": "6db67ce60cf9678cbb4f4ab90b9d395f54db3b2400a68b7b22b5d628dbff798c",
+      "bytes": 71261,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:97ccd6a5389288bdc1214c0f",
+      "source_field": "Image",
+      "sha256": "0a9ca6c02cf736fd705b25ded6df4ea0449991c71dcfa578223ee56dbd75ac72",
+      "bytes": 73113,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:85328a7c1b4f72f74320f31b",
+      "source_field": "Image",
+      "sha256": "3d281c660427a2c0835d2e3d50c3e3364aa0789de74458ed967c6eb83e8f7e01",
+      "bytes": 1319137,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:48d7835311d8fd38eb49237b",
+      "source_field": "Image",
+      "sha256": "ba6535f0674e3a4c699ba881a87304aebf6d1cabcf2402257d54e2508c193184",
+      "bytes": 717521,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:cd8f87de570708bbb2023092",
+      "source_field": "Image",
+      "sha256": "1eaea9322b88a75fea87f0c53abfaaaf2f78ae26ed95e23bd8e6be4dc6965fc7",
+      "bytes": 644080,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:ffdaf1702b177150c86a2a98",
+      "source_field": "Image",
+      "sha256": "52c93a629266a57d41b4e75ae77e8f9ff6902f3f84e277604639e0055fa922ab",
+      "bytes": 831704,
+      "dimensions": [
+        768,
+        768
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:ffc5665bd30497eba19010ab",
+      "source_field": "Image",
+      "sha256": "f6bba36389564c22399787b6bb99918170dec2bf55748cba37c468357ce5b03c",
+      "bytes": 79607,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "turing-eye-test:example:ffc3be27f4ba4956ef6088ce",
+      "source_field": "Image",
+      "sha256": "14920f09b3412401c67a1262c0347bb66b8dbdd317ff0b2562e241530452598b",
+      "bytes": 3137,
+      "dimensions": [
+        256,
+        144
+      ]
+    }
+  ],
+  "native_task_counts": {
+    "HiddenText": 150,
+    "3DCaptcha": 150,
+    "Colorblind": 150,
+    "ChineseLigature": 40
+  }
+}

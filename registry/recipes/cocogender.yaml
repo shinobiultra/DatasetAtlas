@@ -1,0 +1,127 @@
+release: github-8eab34dbcbb49d9a9743b1f6ed26d48f74945a44
+adapter: structured_collection
+expected_count: 244242
+scope: 'The author-released COCO-GB annotations at the pinned commit, as two separate
+  release variants: v1 (123,287 images in the Karpathy split of COCO 2014 with the
+  author''s four-valued gender integer, COCO category IDs, captions and a 1,000-image
+  gender-balanced secret test) and v2 (120,955 image records in three reorganised
+  train/test/fine-tune files). COCO IDs repeat across variants and partitions, so
+  every row is scoped by variant and partition. The gender integer is the author''s
+  native value, derived by the authors from caption words, not a perceived or self-reported
+  identity; its coding is not documented for the JSON field itself. Images are COCO
+  2014 files read on request from the ETag-pinned official archives, not mirrored.
+  The captions are COCO''s; v2 fine-tune keeps only some of each image''s sentences.'
+source_url: https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System/tree/8eab34dbcbb49d9a9743b1f6ed26d48f74945a44
+remote_metadata_bytes: 40000000
+files:
+- source_name: COCOGBv1.zip
+  url: https://raw.githubusercontent.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System/8eab34dbcbb49d9a9743b1f6ed26d48f74945a44/COCOGB_V1/COCOGBv1.zip
+  bytes: 30580088
+  sha256: 018a3dc262f6fb370eac85be65a5fa1d19682f93211e2163c5e7016dbdd982a6
+  format: zip
+  config_key: v1_zip
+- source_name: COCOv2.zip
+  url: https://raw.githubusercontent.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System/8eab34dbcbb49d9a9743b1f6ed26d48f74945a44/COCOGB_V2/COCOv2.zip
+  bytes: 29871199
+  sha256: 5642ee9ef62724c561a24cd5274a5fdaa98c749ad9bdfb3338bf34da5270c159
+  format: zip
+  config_key: v2_zip
+allowed_hosts:
+- raw.githubusercontent.com
+convert:
+  name: coco_gb
+  count: 244242
+  rows_sha256: fca2d6183db38e89fe137d321e86dbbf0fb00876591f15115335cfadbec61305
+  params: {}
+adapter_config:
+  annotations:
+  - path_key: path
+    format: jsonl
+    split: all
+    identity_prefix: coco-gb
+    media_path_url_field: coco_url
+    media_archive_by_prefix:
+      train2014: train2014
+      val2014: val2014
+  mapping:
+    id: source_id
+    text: display_text
+  max_annotation_bytes: 1000000000
+  remote_archives:
+    train2014:
+      url: https://s3.amazonaws.com/images.cocodataset.org/zips/train2014.zip
+      bytes: 13510573713
+      etag: '"289af3433b84b5b8622626b10146c1bc-1611"'
+      allowed_hosts:
+      - s3.amazonaws.com
+    val2014:
+      url: https://s3.amazonaws.com/images.cocodataset.org/zips/val2014.zip
+      bytes: 6645013297
+      etag: '"3925cc4d50eb68d47bf2d6324a012d20-793"'
+      allowed_hosts:
+      - s3.amazonaws.com
+  remote_cache_root: work/media-cache/ranges
+  fields:
+    source_id: Release variant, partition and COCO image ID
+    release_variant:
+      description: COCO-GB release variant
+      values:
+      - v1
+      - v2
+    partition:
+      description: v1 Karpathy split, or v2 file (train, test, fine_tune)
+      values:
+      - train
+      - restval
+      - val
+      - test
+      - fine_tune
+    split:
+      description: Native 'split' field (v2 keeps Karpathy-style labels even in its
+        test file)
+      values:
+      - train
+      - restval
+      - val
+      - test
+    cocoid:
+      description: COCO image ID
+      dtype: number
+    imgid:
+      description: Native image index within its file
+      dtype: number
+    filepath:
+      description: COCO 2014 folder
+      values:
+      - train2014
+      - val2014
+    filename: COCO image file name
+    gender:
+      description: Author's native gender integer, derived from caption words (absent
+        in v2 fine_tune); coding not documented for this field
+      dtype: number
+    category_id: Native COCO category ID string (absent in v2 fine_tune)
+    category_ids:
+      description: The category IDs parsed to integers
+      dtype: array
+    captions: Captions present in this record
+    caption_ids: IDs of the captions present
+    listed_sentence_ids: Native sentence ID list (may name captions this record omits)
+    captions_subset_of_listed:
+      description: True when the record keeps fewer sentences than it lists
+      dtype: boolean
+    secret_test:
+      description: 'v1: in the author''s gender-balanced 1,000-image secret test (absent
+        for v2)'
+      dtype: boolean
+    display_text: First caption, for display
+    coco_url: Canonical COCO image URL used only to name the archive member
+    native_sentences: All original sentence fields, including exact raw whitespace,
+      tokens, image IDs and sentence IDs
+  verify_remote_preview_media: true
+  preview_group_by: primary_asset_then_example
+  preview_candidate_count: 250
+resource_limits:
+  max_rss_bytes: 8000000000
+  max_cpu_seconds: 1800
+  max_wall_seconds: 3600

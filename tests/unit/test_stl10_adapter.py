@@ -80,3 +80,16 @@ def test_stl10_rejects_symlink_archive_member(tmp_path: Path):
     adapter, _ = _fixture(tmp_path, symlink=True)
     with pytest.raises(ValueError, match="Unsafe STL-10 archive member"):
         adapter.prepare(adapter.plan(4, 3_000_000))
+
+
+def test_stl10_retains_exact_pixels_and_checks_every_member_after_archive_removal(tmp_path):
+    adapter,expected=_fixture(tmp_path)
+    source=adapter.prepare(adapter.plan(4,3_000_000))
+    original=adapter.resolve_asset(source,'unlabeled/000000.png').data
+    adapter._archive().unlink()
+    source=adapter.prepare(adapter.plan(4,3_000_000))
+    assert adapter.resolve_asset(source,'unlabeled/000000.png').data==original
+    np.testing.assert_array_equal(np.asarray(Image.open(io.BytesIO(original))),expected)
+    (adapter._prepared()/'unlabeled_X.bin').write_bytes(b'x'*adapter.IMAGE_BYTES)
+    with pytest.raises(ValueError,match='retained member checksum changed'):
+        adapter.prepare(adapter.plan(4,3_000_000))

@@ -1,0 +1,45 @@
+release: rsicd-fc33b4555e4baa4d2f05ff0449479c89da2eeac2
+source_url: https://github.com/201528014227051/RSICD_optimal/tree/fc33b4555e4baa4d2f05ff0449479c89da2eeac2
+adapter: structured_collection
+expected_count: 10921
+remote_metadata_bytes: 5000000
+description: 'RSICD: all 10,921 author-released remote-sensing images and their five native captions,
+  caption tokens/IDs and train/validation/test labels. All 224 by 224 released images retain their original
+  pixels.'
+scope: Complete native dataset_rsicd.json joined by exact filename to the author Git LFS image ZIP. Five
+  caption entries per image are retained even where their strings repeat. Images are the released 224-pixel
+  benchmark crops, not higher-resolution map-provider imagery.
+files:
+- source_name: dataset_rsicd.json
+  url: https://raw.githubusercontent.com/201528014227051/RSICD_optimal/fc33b4555e4baa4d2f05ff0449479c89da2eeac2/dataset_rsicd.json
+  bytes: 12470775
+  sha256: 5e342037d469d074711676bdb9c02b6942a624530b1959d24d2734e68af9cede
+  format: json
+  config_key: annotations_path
+allowed_hosts:
+- raw.githubusercontent.com
+adapter_config:
+  annotations:
+  - path_key: annotations_path
+    records_key: images
+    split: all
+    media_template: RSICD_images/{filename}
+    media_archive: images
+  mapping:
+    id: imgid
+    text: _atlas_text
+  remote_archives:
+    images:
+      url: https://media.githubusercontent.com/media/201528014227051/RSICD_optimal/fc33b4555e4baa4d2f05ff0449479c89da2eeac2/RSICD_images.zip
+      bytes: 484955574
+      etag: '"0d3ebda15b8b1e5c2754270d38462251e8c61489b54e463e499c978da4b91d10"'
+      allowed_hosts:
+      - media.githubusercontent.com
+  remote_cache_root: work/media-cache/ranges
+  remote_cache_bytes: 1000000000
+  max_annotation_bytes: 20000000
+  text_parts_field: sentences
+  text_parts_item_field: raw
+  text_parts_separator: '
+
+    '

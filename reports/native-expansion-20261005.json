@@ -1,0 +1,219 @@
+{
+  "checked_at_utc": "2026-10-05T09:20:12.742450+00:00",
+  "datasets": [
+    {
+      "dataset_id": "audioset",
+      "snapshot_id": "audioset-e20a1363c75e564b4b93472e",
+      "declared_scope": "All 2084320 native weak-label segment annotations across balanced_train, eval and unbalanced_train. Native counts differ from the summary webpage; source headers are preserved. YouTube audio and VGGish features are not acquired. Structured inspection only; audio availability remains partial.",
+      "preview_records": 100,
+      "indexed_native_records": 2084320,
+      "complete_data": "indexed_metadata_partial_media",
+      "identity": "resolved",
+      "publication": "not_reviewed",
+      "blockers": [
+        "YouTube audio and VGGish features are not acquired; these are structured native annotation records.",
+        "The citing paper's exact augmentation/segment subset is not reconstructed.",
+        "Native annotation attribution and publication rights still require review; label rights do not grant source audio rights."
+      ],
+      "prepared_receipt_sha256": "b2040c4fbd418cac60ec25da0fd89ec2be5f8679430ba7527bec0f1dba79c94f",
+      "proofs": [
+        {
+          "path": "work/audioset-native-live-20261005.json",
+          "sha256": "dee54e409daf1032eede8d83dac4a1e1622ace4fa1cb10f6add0cf345f537dcc",
+          "summary": {
+            "all_native_annotation_rows_matched": 2084320,
+            "source_images_or_audio_acquired": false
+          }
+        },
+        {
+          "path": "work/audioset-conversion-20261005.json",
+          "sha256": "f892a30049a22d356b97b99206d11d376d018ec968c074fac9acc28df5e53e53",
+          "summary": {
+            "count": 2084320,
+            "rows_sha256": "3f4e1656fc90cc287f67a3577061f088c016721fdbfc682d126632daf4e0e908",
+            "file_sha256": "0b9c50b1528fcbbf84a9a78994fe28b266b771cc7a04bb618c532b893a6ab7cb"
+          }
+        }
+      ]
+    },
+    {
+      "dataset_id": "recap-datacomp-1b",
+      "snapshot_id": "recap-datacomp-1b-a77c02c3714fddb5c7e223fb",
+      "declared_scope": "All 1000 native rows in the author-published preview split at pinned HF revision 457c44d98651bcfdfb3cc8695f5e60a0d2705e78. Preserves original/rewritten/conditioned captions and scores. Excludes the 940890257-row training release; third-party source image URLs are metadata, and no image bytes are acquired.",
+      "preview_records": 100,
+      "indexed_native_records": 1000,
+      "complete_data": "indexed_metadata_partial_media",
+      "identity": "resolved",
+      "publication": "not_reviewed",
+      "blockers": [
+        "Only the author preview split is indexed; the full training release and the citing paper's exact subset are not prepared.",
+        "Third-party source images are not acquired or verified; URL/hash fields remain original metadata.",
+        "Publication attribution and native caption/image rights still require review."
+      ],
+      "prepared_receipt_sha256": "e1b433f49d8e0a2b4bc0ed05f9a6640b3164162ccd0d161680571c3f81230b84",
+      "proofs": [
+        {
+          "path": "work/recap-datacomp-1b-native-live-20261005.json",
+          "sha256": "4afd4edfb5585c57d63d59428d185c9becd4893b306fa3c9f880ef4fd9a6adbc",
+          "summary": {
+            "all_native_annotation_rows_matched": 1000,
+            "source_images_or_audio_acquired": false
+          }
+        }
+      ]
+    },
+    {
+      "dataset_id": "lingoqa",
+      "snapshot_id": "lingoqa-a86d3e40ae7c4e78cfc90b7a",
+      "declared_scope": "All 1000 native evaluation annotation rows, retaining both source answers for each of 500 questions, original question/segment/index fields and five ordered original JPEG frames for each of 100 driving segments. This is the author evaluation release, not the training population or newly extracted video frames.",
+      "preview_records": 100,
+      "indexed_native_records": 1000,
+      "complete_data": "supported",
+      "identity": "resolved",
+      "publication": "not_reviewed",
+      "blockers": [
+        "The training release and citing paper's exact selected population are not prepared.",
+        "Source-specific image/data licence and attribution still need publication review."
+      ],
+      "prepared_receipt_sha256": "6a8507f852d2b0076045a6a002cf804f14c3afc4e78f84f0c7246e3363870f5b",
+      "proofs": [
+        {
+          "path": "work/lingoqa-source-proof-20261005.json",
+          "sha256": "e40c5d67463130cc8fd3ff8fc4d1541272adce7fd724f55bbb9323232ddee826",
+          "summary": {
+            "native_rows": 1000,
+            "native_questions": 500,
+            "segments": 100,
+            "unique_native_frames": 500,
+            "complete_archive_membership_matches": true
+          }
+        },
+        {
+          "path": "work/lingoqa-full-media-20261005.json",
+          "sha256": "641dba106c42755bc328f2e3c5bef0525a2d6afbab98e5a1d096ca888e98b4a0",
+          "summary": {
+            "unique_image_assets": 500
+          }
+        },
+        {
+          "path": "work/lingoqa-live-20261005.json",
+          "sha256": "2abbabef91295ad40f5d1b6cdbe1f700adad422e06889a94f96380a5fc992511",
+          "summary": {
+            "native_preview_images_decoded_and_hashed": 500,
+            "live_complete_query": {
+              "matched_count": 1000,
+              "returned_records": 5
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dataset_id": "vizwiz-priv",
+      "snapshot_id": "vizwiz-priv-a306803df15e20a204ec7a5b",
+      "declared_scope": "All 13571 native train/val/test image annotation rows, including all privacy regions and question fields. Original nonprivate JPEGs and both author-provided redaction conditions remain distinct; no private unredacted images were released. Eight annotated nonprivate images are absent from every archive and remain explicit missing assets. All five annotation tables are retained, with aggregate tables checked byte-for-field against the native split rows. Web-page counts disagree with the released JSON and are not substituted.",
+      "preview_records": 100,
+      "indexed_native_records": 13571,
+      "complete_data": "indexed_metadata_partial_media",
+      "identity": "resolved",
+      "publication": "not_reviewed",
+      "blockers": [
+        "Eight annotated nonprivate images are absent from all native image archives and remain explicit missing assets.",
+        "Private unredacted images were not released; home-mean and fake-content conditions are author-produced variants.",
+        "Source-specific publication rights and exact paper-used subset still need review."
+      ],
+      "prepared_receipt_sha256": "72cb5c23f6712ff20bb9440b82f4ad5d58ccf1e32dadf5e924949eb3e3fee1d2",
+      "proofs": [
+        {
+          "path": "work/vizwiz-priv-source-proof-20261005.json",
+          "sha256": "715b8eada30c69b27fc6290b664f5140759ff33b96a417b5220a7787b0635705",
+          "summary": {
+            "native_records": 13571,
+            "annotation_tables_field_parity": true
+          }
+        },
+        {
+          "path": "work/vizwiz-priv-live-20261005.json",
+          "sha256": "810cc82ac8c0c3c162128a5b80932d70f8dca3b7feb626880dbf962cb3a9e41d",
+          "summary": {
+            "native_preview_images_decoded_and_hashed": 255,
+            "live_complete_query": {
+              "matched_count": 13571,
+              "returned_records": 5
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dataset_id": "datacomp-1b",
+      "snapshot_id": "datacomp-1b-205fe73e2fa84d584b2ae3f6",
+      "declared_scope": "All 532229 native metadata records from the first lexicographic Parquet shard, 0035af9f90f581816acf269df5eb37ad.parquet, at the pinned author revision. Caption, original URL/dimensions, CLIP scores, face boxes and SHA-256 fields remain native. This explicitly bounded shard is a subset of DataComp-1B; the other 2663 shards, NPZ embeddings, linked source images and paper-used subset are not prepared. The full-source acquisition plan is retained in registry/source-plans/datacomp-1b-all-shards.yaml.",
+      "preview_records": 100,
+      "indexed_native_records": 532229,
+      "complete_data": "indexed_metadata_partial_media",
+      "identity": "resolved",
+      "publication": "not_reviewed",
+      "blockers": [
+        "Only one of 2664 native metadata shards is indexed; the other shards and paper-used subset remain outside this prepared population.",
+        "Third-party source images and NPZ embeddings are not acquired; URL/hash fields are original metadata.",
+        "Native caption/image rights and publication attribution still require review."
+      ],
+      "prepared_receipt_sha256": "220f28bcac8ed144e51e3eeeef621edea2aace2934d6fb677d29eecd20c8e072",
+      "proofs": [
+        {
+          "path": "work/datacomp-1b-native-verification-20261005.json",
+          "sha256": "77bb3e7d0dd097539c61d4ae60e0e87a8f5eaa431dedb762772e270f0885d541",
+          "summary": {
+            "all_native_metadata_rows_matched": 532229,
+            "images_acquired": false
+          }
+        },
+        {
+          "path": "work/datacomp-1b-live-20261005.json",
+          "sha256": "c1f54f7ecf0876576ab97f848ed988607bc20d1c01281aa72f9e7959fc3be1f9",
+          "summary": {
+            "native_preview_images_decoded_and_hashed": 0,
+            "live_complete_query": {
+              "matched_count": 532229,
+              "returned_records": 5
+            }
+          }
+        }
+      ]
+    },
+    {
+      "dataset_id": "finevision",
+      "snapshot_id": "finevision-17fa663a721c77ca65d752db",
+      "declared_scope": "All Arrow/Parquet shards in the pinned repository; configuration and split retained by source filename.",
+      "preview_records": 100,
+      "indexed_native_records": null,
+      "sampling_population_records": 25243243,
+      "source_shards": 9499,
+      "source_bytes": 4645230556607,
+      "complete_data": "exceeds_storage_budget",
+      "identity": "candidate",
+      "publication": "not_reviewed",
+      "blockers": [
+        "The exact paper-used LLaVA subset and 500k training mixture remain unresolved; release identity stays candidate.",
+        "Only a bounded sampled preview is prepared; the approximately 4.65 TB release has no complete local annotation index.",
+        "Underlying source-specific annotation and image rights remain unreviewed; no public image pack is approved."
+      ],
+      "prepared_receipt_sha256": "76748d40b3d62b28632efc36a1f072a77a06fac15553c0df832de61e2a0a6071",
+      "proofs": [
+        {
+          "path": "work/finevision-live-20261005.json",
+          "sha256": "6cef0cd1e895b52d59bef17980817a90eb83d86cf0ea4bc22b9646c1a6a8b2d2",
+          "summary": {
+            "preview_records": 100,
+            "native_original_images_hash_verified_and_decoded": 58,
+            "complete_index_created": false,
+            "status": "passed"
+          }
+        }
+      ]
+    }
+  ],
+  "real_native_sources": true,
+  "paper_subsets_or_publication_rights_not_inferred": true
+}

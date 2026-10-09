@@ -72,6 +72,13 @@ evidence:
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_refresh
+  url: https://ai.meta.com/datasets/facet/
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'unchanged: a reachable page says nothing about whether the files are public, so the prior state
+    stands. 2 URLs probed (HEAD only): 2 reachable.'
 relationships:
 - type: annotation_overlay_of
   target: Segment Anything 1 Billion

@@ -1,0 +1,61 @@
+{
+  "checked_at_utc": "2026-10-06T05:46:28.099573+00:00",
+  "files": [
+    {
+      "source_name": "img_align_celeba.zip",
+      "bytes": 1443490838,
+      "sha256": "46fb89443c578308acf364d7d379fe1b9efb793042c0af734b6112e4fd3a8c74",
+      "publisher_md5": "00d2c5bc6d35e252742224ab0c1e8fcb",
+      "url": "https://drive.usercontent.google.com/download?id=0B7EVK8r0v71pZjFTYXZWM3FlRnM&export=download&confirm=t",
+      "config_key": "media_archive",
+      "format": "zip"
+    },
+    {
+      "source_name": "list_attr_celeba.txt",
+      "bytes": 26721026,
+      "sha256": "f0e5da289d5ccf75ffe8811132694922b60f2af59256ed362afa03fefba324d0",
+      "publisher_md5": "75e246fa4810816ffd6ee81facbd244c",
+      "url": "https://drive.usercontent.google.com/download?id=0B7EVK8r0v71pblRyaVFSWGxPY0U&export=download&confirm=t",
+      "config_key": "attributes",
+      "format": "txt"
+    },
+    {
+      "source_name": "list_bbox_celeba.txt",
+      "bytes": 6082035,
+      "sha256": "7487a82e57c4bb956c5445ae2df4a91ffa717e903c5fa22874ede0820c8ec41b",
+      "publisher_md5": "00566efa6fedff7a56946cd1c10f1c16",
+      "url": "https://drive.usercontent.google.com/download?id=0B7EVK8r0v71pbThiMVRxWXZ4dU0&export=download&confirm=t",
+      "config_key": "bbox",
+      "format": "txt"
+    },
+    {
+      "source_name": "list_landmarks_align_celeba.txt",
+      "bytes": 12156055,
+      "sha256": "6c02a87569907f6db2ba99019085697596730e8129f67a3d61659f198c48d43b",
+      "publisher_md5": "cc24ecafdb5b50baae59b03474781f8c",
+      "url": "https://drive.usercontent.google.com/download?id=0B7EVK8r0v71pd0FJY3Blby1HUTQ&export=download&confirm=t",
+      "config_key": "landmarks_align",
+      "format": "txt"
+    },
+    {
+      "source_name": "list_eval_partition.txt",
+      "bytes": 2836386,
+      "sha256": "fc955bcb3ef8fbdf7d5640d9a8693a8431b5f2ee291a5c1449a1549e7e073fe7",
+      "publisher_md5": "d32c9cbf5e040fd4025c592c306e6668",
+      "url": "https://drive.usercontent.google.com/download?id=0B7EVK8r0v71pY0NSMzRuSXJEVkk&export=download&confirm=t",
+      "config_key": "partitions",
+      "format": "txt"
+    }
+  ],
+  "network_bytes": 0,
+  "max_download_bytes": 2000000000,
+  "native_image_member_count": 202599,
+  "all_native_image_crc32_checked": true,
+  "ordered_member_digest_sha256": "959ad6f4dbd0e3ba2aacbd75fe147e267c79e063e11a56e136ccef293a580d42",
+  "native_annotation_rows": 202599,
+  "converted_rows_sha256": "abfd1b5bd1e296bd8c125b77d0dd854b832cfa60691144e1b9c534e395a5b7bc",
+  "identity_labels_acquired": false,
+  "dataset_contents_transmitted_to_models": false,
+  "publication": "local_only",
+  "scope": "All 202599 filename-joined public author aligned face images, 40 signed attributes, original-photo bounding boxes, aligned landmarks and native train/validation/test partitions. Identity labels require publisher request and are absent; paper-specific subsets remain unidentified. Bounding boxes refer to original photographs and are not overlaid on aligned crops."
+}

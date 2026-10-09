@@ -1,0 +1,61 @@
+release: vizwiz-final-with-public-test-answers-2026
+adapter: structured_collection
+expected_count: 32842
+scope: All 32,842 VizWiz-VQA train/val/test questions; the test answers are the author-published
+  April 2026 release, not a claim about paper-time access. Original images are fetched
+  selectively from official archives.
+remote_metadata_bytes: 20000000
+adapter_config:
+  annotations:
+  - path_key: annotations_path
+    member: train.json
+    split: train
+    media_archive: train
+    media_template: train/{image}
+  - path_key: annotations_path
+    member: val.json
+    split: val
+    media_archive: val
+    media_template: val/{image}
+  - path_key: test_path
+    split: test
+    media_archive: test
+    media_template: test/{image}
+  mapping:
+    id: image
+    question: question
+  remote_cache_root: work/media-cache/ranges
+  remote_archives:
+    train:
+      url: https://vizwiz.cs.colorado.edu/VizWiz_final/images/train.zip
+      bytes: 11298421598
+      etag: '"2a1703b5e-59afdc1e58080"'
+      allowed_hosts:
+      - vizwiz.cs.colorado.edu
+    val:
+      url: https://vizwiz.cs.colorado.edu/VizWiz_final/images/val.zip
+      bytes: 3488913457
+      etag: '"cff49831-59b08b3044b40"'
+      allowed_hosts:
+      - vizwiz.cs.colorado.edu
+    test:
+      url: https://vizwiz.cs.colorado.edu/VizWiz_final/images/test.zip
+      bytes: 3975272799
+      etag: '"ecf1d95f-59afd88518300"'
+      allowed_hosts:
+      - vizwiz.cs.colorado.edu
+files:
+- source_name: Annotations.zip
+  url: https://vizwiz.cs.colorado.edu/VizWiz_final/vqa_data/Annotations.zip
+  bytes: 1711273
+  sha256: dbc32fc1e3f1b1039aea906030d569d6c238b4ddb2eea5e3453a6a565c829ec9
+  format: zip
+  config_key: annotations_path
+- source_name: VQA_test.json
+  url: https://vizwiz.cs.colorado.edu/VizWiz_all_answers/VQA_test.json
+  bytes: 8227183
+  sha256: fa113f0e90230ab4690bb41c4d74e40f7087cc7c192dd8363fa4d6bad339b7aa
+  format: json
+  config_key: test_path
+allowed_hosts:
+- vizwiz.cs.colorado.edu

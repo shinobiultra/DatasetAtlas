@@ -1,0 +1,48 @@
+{
+  "native_rows": 12933524,
+  "row_groups": 14,
+  "schema": [
+    {
+      "name": "SAMPLE_ID",
+      "type": "int64"
+    },
+    {
+      "name": "URL",
+      "type": "string"
+    },
+    {
+      "name": "TEXT",
+      "type": "string"
+    },
+    {
+      "name": "HEIGHT",
+      "type": "int32"
+    },
+    {
+      "name": "WIDTH",
+      "type": "int32"
+    },
+    {
+      "name": "LICENSE",
+      "type": "string"
+    },
+    {
+      "name": "NSFW",
+      "type": "string"
+    },
+    {
+      "name": "similarity",
+      "type": "double"
+    }
+  ],
+  "metadata_transfer_bytes": 65536,
+  "source": {
+    "checked_at_unix": 1791270728.6723926,
+    "url": "https://deploy.laion.ai/8f83b608504d46bb81708ec86e912220/dataset/part-00000-5b54c5d5-bbcf-484d-a2ce-0d6f73df1a36-c000.snappy.parquet",
+    "status": 200,
+    "bytes": "1803288490",
+    "etag": "\"61b7a5d2-6b7bffaa\"",
+    "accept_ranges": "bytes",
+    "last_modified": "Mon, 13 Dec 2021 19:58:10 GMT"
+  }
+}

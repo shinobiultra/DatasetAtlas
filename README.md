@@ -1,95 +1,55 @@
 # Dataset Atlas
 
-Browse evidence-linked datasets, inspect real records, save reproducible selections, and attach optional local analysis. The same React frontend runs as a static site or with a loopback Python workbench.
+**See what is inside the datasets behind a body of research, and how to get each one.** Dataset Atlas is a catalogue of 231 real datasets named in 64 research papers, with real examples you can browse, filter and compare, a guide to fetching each dataset from its original publisher, and an optional local workbench for analysis. It runs on your machine. The same interface also runs as a static website.
 
-The workbench and static browser are implemented, with **336 catalogue entries, 64 verified local previews (6,313 records), and 59 canonical full-scope indices**. Full-scope indices describe their acquired populations; some have partial media. This is **not a completed v1 release** of [SPEC.md](SPEC.md): 272 entries have no preview. All 64 paper mention inventories have been checked against the full text, but exact release identity and dataset coverage remain incomplete. See the [remaining roadmap](ROADMAP.md). See [corpus coverage](reports/corpus_coverage.md), [dataset coverage](reports/dataset_coverage.csv), [source access](reports/source_access_report.md), and [release evidence](reports/release_evidence.md). Paper mention evidence does not by itself resolve a dataset release. Metadata-only entries are not browsable datasets.
+![The public catalogue: live examples first, then every dataset with how to get it](docs/images/catalogue.png)
 
-## Run locally
+## What you get
 
-Python 3.12 and Node 22+ are used for development. `uv.lock` and `apps/web/package-lock.json` pin the resolved environments.
+- **A catalogue you can trust.** Every entry says where the data comes from, what a record holds, which papers name it, what is known about its rights, and whether it works now, needs access, or needs an adapter. Aliases, views of other datasets and entries with nothing working are not listed ([why](registry/candidate_dispositions.yaml)).
+- **Real examples.** 220 datasets have a 100-record preview of original data with annotations; 218 have a complete index you can filter and count exactly. Images, audio, video and 3D models open in their original form.
+- **Reproducible selections.** Filters, samples and selections are stable and exchangeable, and carry the snapshot they were made on.
+- **Optional analysis, kept local.** Detectors, embeddings, projections and local-model conversations work on the same samples. Nothing is sent to an external model unless you approve exactly what leaves your machine.
+- **Your own datasets** sit beside the catalogue: folders, tables and Hugging Face datasets.
 
-```bash
-uv sync --extra development --extra projection
-cd apps/web
-npm ci
-npm run build
-cd ../..
-uv run atlas serve
-```
+![A dataset page: filters, grid, table, map and compare share one population and one selection](docs/images/dataset.png)
 
-Open **http://127.0.0.1:8765/?mode=workbench**. The default browser route is static mode and makes no privileged localhost connection. Local preview packs live under `work/packs/`; to install the redistributable demonstration packs into a fresh checkout:
+## Quick start
 
 ```bash
-mkdir -p work/packs
-cp -R examples/approved-packs/. work/packs/
+uv tool install ./dataset_atlas-0.2.0-py3-none-any.whl     # a release wheel; no Node, no checkout
+atlas init ~/atlas && cd ~/atlas                           # a workspace with the catalogue, no data yet
+atlas serve                                                # open http://127.0.0.1:8765/
+atlas previews fetch --dataset mnist --execute             # plan, then fetch one preview from its publisher
 ```
 
-Static mode needs no Python or models. Build it with `npm run build` in `apps/web`, or use `npm run dev` during development. The catalogue and approved previews are generated into `apps/web/public/data` by the explicit publication command. No backend is needed after building.
+A fresh workspace holds the catalogue and no data. Each dataset page says what you can do with it, and nothing downloads until you have seen the size and approved the plan. From a checkout: `uv sync && npm --prefix apps/web ci && npm --prefix apps/web run build && uv run atlas serve`. Python 3.11 to 3.14 on Linux or macOS.
 
-## The interface
+![A dataset without published examples still tells you how to get it, what a record holds and which papers cite it](docs/images/guide.png)
 
-One shell carries every screen: navigation on the left, the examples in the centre, and a single contextual panel on the right that shows the inspected sample or, on request, dataset details, analysis setup or a model conversation.
+## The public website
 
-- **Catalogue** — thumbnail-led dataset cards over real prepared media, with faceted filters for coverage, modality, task, access and annotations, and a compact list alternative.
-- **Dataset** — a compact header, then **Samples** (the default) and **Overview**. Overview computes label distributions over the population the filter matched, in preview or complete scope, and states that population.
-- **Browsing** — Grid, Table, Map and Compare share one population, one selection and one set of filters. Both grid and table are virtualized and page in as you scroll; media is fetched only for what is on screen.
-- **Inspection** — clicking a record inspects it and never selects it; ticking its checkbox selects it and never changes what is inspected. Focused inspection takes the centre with prev/next, fit/actual size, overlay toggles and a filmstrip labelled as browsing order rather than similarity.
-- **Compare** — two equally weighted media panels above aligned evidence, with a differences-only toggle that compares only values present on both sides with the same type.
+The static build (`docs/github-pages.md`) needs no Python and holds no dataset content beyond three reviewed example sets (CLEVR, EuroSAT, PAIRS). For every other dataset it shows the guide: how to obtain it, the field schema of its preview and the papers that name it.
 
-Coverage claims are per deployment: the public build says what *it* can show, and an entry prepared locally but not published reads "Metadata only here". A metadata-only dataset explains its access, adapter, complete-data and publication states instead of showing an empty grid, and says plainly that an unimplemented adapter is an implementation gap rather than a source restriction. See [interface architecture](docs/interface.md).
+## Where things are
 
-## Reproducible workflows
+| Path | What is there |
+| --- | --- |
+| `src/dataset_atlas/` | The Python package: API, adapters for each source format, preparation workers, query engine, analysis processors, publication. |
+| `apps/web/` | The React interface, used by both the local workbench and the static site. |
+| `registry/` | The catalogue: one YAML file per dataset (`datasets/`), preparation recipes (`recipes/`), paper inventories, publication approvals, and the record of what was removed and why. |
+| `examples/` | Reviewed, redistributable example packs and the public schema and coverage snapshot. |
+| `docs/` | Guides. Start at [docs/README.md](docs/README.md). |
+| `reports/` | Dated verification receipts and the coverage matrix. See [reports/README.md](reports/README.md). |
+| `tests/`, `scripts/` | The test suite and maintenance scripts. |
+| `SPEC.md`, `ROADMAP.md` | The acceptance contract and the current state against it. |
 
-```bash
-# All corpus originals remain read-only; configure your own path.
-uv run atlas corpus scan --papers-dir "$PAPERS" --output work/corpus
-uv run atlas corpus extract --manifest work/corpus/corpus_manifest.json
-uv run atlas corpus resolve --mentions work/corpus/dataset_mentions.jsonl --registry registry
-uv run atlas datasets validate --all
-uv run atlas datasets prepare --dataset clevr --preview-size 100 --max-bytes 30000000 --dry-run
-uv run atlas doctor
+## Status
 
-# Index an already acquired full source with an exact verified count.
-uv run atlas datasets index --dataset mnist --expected-count 70000 --max-bytes 100000000
+A working release; the full v1 in [SPEC.md](SPEC.md) is not complete. **231 catalogue entries, 220 prepared previews, 21,532 preview records, 218 complete indices, 11 entries without a preview** (ten gated or request-only datasets with a known route, and PATA). Paper mentions do not by themselves settle which release or subset a paper used, so most identities stay marked as candidates until a person reviews them. Preview data stays local: only CLEVR, PAIRS and EuroSAT are approved for public redistribution. Current numbers and evidence: [ROADMAP.md](ROADMAP.md), [reports/final-status.json](reports/final-status.json), [reports/dataset_coverage.csv](reports/dataset_coverage.csv).
 
-# Only configured allowlist entries can enter static publication.
-uv run atlas publish validate --profile public
-uv run atlas publish build --profile public
-```
+## Documentation
 
-`resolve` preserves review uncertainty. Preparation uses bounded source plans, and a dry run performs no acquisition. Do not use unknown size as permission to download a complete collection.
+[Getting started](docs/getting-started.md) · [Adding your own datasets](docs/adding-your-own-datasets.md) · [Adding catalogue datasets](docs/adding-datasets.md) · [Storage](docs/storage.md) · [Development](docs/development.md) · [Publication](docs/publication.md) · [GitHub Pages](docs/github-pages.md)
 
-Save a selection in the workbench before running:
-
-```bash
-uv run atlas analyze --selection SELECTION_ID --processor quality.basic --config CONFIG.json
-uv run atlas export selection SELECTION_ID --output work/exports/selection
-```
-
-The CLI waits for its job coordinator to finish; the API returns a durable job immediately. Failed, cancelled, skipped and completed items remain distinct. A completed detector output with no boxes is different from a failed detector.
-
-## Optional computation
-
-Base browsing does not install CUDA or model frameworks. Extras are `datasets` (SciPy for SVHN MAT files), `vision`, `embeddings`, `projection`, `remote-storage`, and `development`. The prepared workspace includes real CLEVR and COCO detector, embedding and projection demonstrations; see [release evidence](reports/release_evidence.md). Detector and embedding recipes require explicitly prepared local model files and verified revisions/checksums. They do not silently download weights. See [processors](docs/adding-processors.md) and [model connections](docs/model-connections.md).
-
-Provider capabilities start unknown and are probed independently. Context preview shows the exact outgoing record scope; sending requires explicit provider and context approval. Evaluation mode excludes source labels and computed predictions. A text-only request never claims to see image pixels. No model service is bundled or automatically started.
-
-## Development and distribution
-
-```bash
-uv run pytest -q
-cd apps/web && npm test && npm run build
-cd ../..
-uv run python scripts/generate_contracts.py
-uv run python scripts/build_release.py
-```
-
-The release builder embeds the built frontend in the wheel. Install the resulting wheel to run `atlas serve` without Node. Dataset previews are separately portable; full datasets, paper PDFs, caches, credentials, and full extracted text are excluded from the distribution.
-
-- [Interface architecture](docs/interface.md): the shell, the interaction contract, and the honesty rules the components enforce.
-- [Shared contracts](docs/contracts.md): Pydantic is the schema source of truth; TypeScript is generated.
-- [Adding datasets](docs/adding-datasets.md): reusable mappings, coverage, and evidence.
-- [Remote workbench](docs/remote-workbench.md): existing mounts and SSH tunnelling.
-- [Publication](docs/publication.md): explicit rights and media allowlists.
-
-Tests use synthetic fixtures only where isolation is necessary. Production previews retain real source identity, sampling and rights receipts. GitHub Pages deployment is an explicit workflow action; implementation does not automatically publish anything.
+Dataset licences and terms belong to their publishers and are not changed by this repository. Gated datasets are fetched with your own accepted terms and credentials; Dataset Atlas never accepts terms or applies for access for you.

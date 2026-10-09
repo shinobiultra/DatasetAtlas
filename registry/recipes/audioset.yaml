@@ -1,0 +1,42 @@
+adapter: structured
+allowed_hosts: [storage.googleapis.com]
+release: audioset-weak-label-v1-native
+expected_count: 2084320
+scope: All 2084320 native weak-label segment annotations across balanced_train, eval
+  and unbalanced_train. Native counts differ from the summary webpage; source headers
+  are preserved. YouTube audio and VGGish features are not acquired. Structured inspection
+  only; audio availability remains partial.
+adapter_config:
+  mapping:
+    id: source_id
+  media_scope: partial
+  max_annotation_bytes: 1000000000
+convert:
+  name: audioset_segments
+  count: 2084320
+  rows_sha256: 3f4e1656fc90cc287f67a3577061f088c016721fdbfc682d126632daf4e0e908
+files:
+- source_name: balanced_train_segments.csv
+  bytes: 1211931
+  sha256: 3b83e5ff9ed72cfda37d4e36ce08250e107c1ea70f109f6ab6668ac200db5e94
+  url: https://storage.googleapis.com/us_audioset/youtube_corpus/v1/csv/balanced_train_segments.csv
+  config_key: balanced_train
+  format: csv
+- source_name: eval_segments.csv
+  bytes: 1143389
+  sha256: f7055f53935f70e74e39494a5c8c4c78f1700fce275028bd36e31186f33d45db
+  url: https://storage.googleapis.com/us_audioset/youtube_corpus/v1/csv/eval_segments.csv
+  config_key: eval
+  format: csv
+- source_name: unbalanced_train_segments.csv
+  bytes: 101468408
+  sha256: bb2dfd5e4f1ced39db9480633c510f813d7899f4b7472aa83a411b4a43a12698
+  url: https://storage.googleapis.com/us_audioset/youtube_corpus/v1/csv/unbalanced_train_segments.csv
+  config_key: unbalanced_train
+  format: csv
+- source_name: class_labels_indices.csv
+  bytes: 14675
+  sha256: cdd1049833c4b86127c2773ac0d14a2754b6a6d0d1798002ed5c66e699708429
+  url: https://storage.googleapis.com/us_audioset/youtube_corpus/v1/csv/class_labels_indices.csv
+  config_key: class_labels
+  format: csv

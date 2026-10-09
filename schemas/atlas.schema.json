@@ -1,6 +1,39 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$defs": {
+    "Availability": {
+      "additionalProperties": false,
+      "description": "What this deployment holds right now; computed per request and never stored in the registry.\n\n`Coverage` records what a maintainer prepared on their machine. A colleague's fresh\nworkspace holds none of that until it is fetched, so the two must not be conflated.",
+      "properties": {
+        "preview": {
+          "default": "none",
+          "enum": [
+            "local",
+            "on_request",
+            "none"
+          ],
+          "title": "Preview",
+          "type": "string"
+        },
+        "complete_data": {
+          "default": "none",
+          "enum": [
+            "local",
+            "on_request",
+            "none"
+          ],
+          "title": "Complete Data",
+          "type": "string"
+        },
+        "upstream_preview_count": {
+          "default": 0,
+          "title": "Upstream Preview Count",
+          "type": "integer"
+        }
+      },
+      "title": "Availability",
+      "type": "object"
+    },
     "Coverage": {
       "additionalProperties": false,
       "properties": {
@@ -94,6 +127,15 @@
           "title": "Name",
           "type": "string"
         },
+        "origin": {
+          "default": "catalogue",
+          "enum": [
+            "catalogue",
+            "user"
+          ],
+          "title": "Origin",
+          "type": "string"
+        },
         "aliases": {
           "items": {
             "type": "string"
@@ -168,6 +210,17 @@
         },
         "coverage": {
           "$ref": "#/$defs/Coverage"
+        },
+        "availability": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/Availability"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         },
         "rights": {
           "additionalProperties": {

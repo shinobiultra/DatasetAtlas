@@ -1,0 +1,81 @@
+schema_version: '1.0'
+id: laion
+name: LAION
+aliases: []
+description: 'Ambiguous LAION family; LAION-5B historical metadata versus filtered Re-LAION-5B releases.
+  Source review: Original LAION-5B 2022; Re-LAION research/safe 2024 separate'
+paper_ids:
+- paper-c941465e4095dbe8
+- paper-25eaa8c74ce76800
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Access to the exact data files has not been verified.
+  - The exact paper release, source variant, or derived collection remains unresolved.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  note: LAION-5B metadata CC BY 4.0 but original images retain source copyrights; Re-LAION metadata Apache-2.0
+  source: https://laion.ai/blog/relaion-5b/
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-73904a0a6d28cbf52cec
+  paper_id: paper-c941465e4095dbe8
+  source_file_hash: 1835ce2ce52470e55f0e102783dc055be0b421b6c79d068277b2f4909345fa97
+  page: 10
+  role: bibliography-only reference
+  excerpt: 'ons. Birhane, A., Han, S., Boddeti, V., Luccioni, S., et al. Into the LAION’s den: Investigating
+    hate in multimodal datasets. Overall, effective inner interpretability techniques should'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-81d77f243832d036570e
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: LAION, CelebA, ImageNetVal (Parekh et al., 2024) DePALM (CLIP+OPT)
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://laion.ai/blog/laion-5b/
+  note: Ambiguous LAION family; LAION-5B historical metadata versus filtered Re-LAION-5B releases Original
+    LAION-5B 2022; Re-LAION research/safe 2024 separate
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_mentioned_variant_unresolved
+- kind: source_audit_access
+  url: https://laion.ai/blog/laion-5b/
+  note: 'Original LAION-5B was taken down; Re-LAION variants require HF gated research access Probe: first_primary_url_http_head_200;
+    payload_not_downloaded'
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_mentioned_variant_unresolved
+- kind: source_audit_rights
+  url: https://laion.ai/blog/relaion-5b/
+  note: LAION-5B metadata CC BY 4.0 but original images retain source copyrights; Re-LAION metadata Apache-2.0
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_mentioned_variant_unresolved
+- kind: source_audit_refresh
+  url: https://laion.ai/blog/laion-5b/
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 2 URLs probed (HEAD only): 2 reachable.'
+source_url: https://laion.ai/blog/laion-5b/

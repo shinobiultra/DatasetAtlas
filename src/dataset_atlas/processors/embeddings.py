@@ -14,6 +14,7 @@ from dataset_atlas.models import Record, content_id
 from dataset_atlas.storage.local import read_rooted_file
 from .core import package_version
 from .vision import _load
+from .device import torch_device
 
 RECIPES = {
     "embed.minilm": {"model_id": "sentence-transformers/all-MiniLM-L6-v2", "revision": "1110a243fdf4706b3f48f1d95db1a4f5529b4d41", "dimension": 384, "pooling": "sentence-transformers mean pooling", "max_tokens": 256, "metric": "cosine"},
@@ -110,6 +111,14 @@ def _vector(value: Any, expected: int) -> list[float]:
     return (array / norm).astype(np.float32).tolist()
 
 
+def _pooled_features(output):
+    """Transformers 5 returns the backbone output; older versions returned its pooler."""
+    value=getattr(output,'pooler_output',output)
+    if value is None or not hasattr(value,'detach'):
+        raise ValueError('SigLIP2 did not return pooled image/text features')
+    return value
+
+
 def run_embeddings(processor_id: str, records: list[Record], config: dict[str, Any], should_cancel=None):
     recipe = RECIPES[processor_id]
     path, model_provenance = _snapshot(processor_id, config)
@@ -122,16 +131,19 @@ def run_embeddings(processor_id: str, records: list[Record], config: dict[str, A
         provenance["shared_encoder_id"] = content_id({key: provenance["recipe"][key] for key in
                                                        ("model_id", "revision", "dimension", "pooling", "normalization", "distance_metric")}, "encoder:")
     if processor_id == "embed.minilm":
+        torch=importlib.import_module('torch')
+        device,device_provenance=torch_device(torch,config);provenance.update(device_provenance)
         module = importlib.import_module("sentence_transformers")
         with _staged_snapshot(path, list(config.get("model_roots", [])), model_provenance["model_sha256"]) as staged:
-            model = module.SentenceTransformer(str(staged), device="cpu", local_files_only=True, trust_remote_code=False)
+            model = module.SentenceTransformer(str(staged), device=device, local_files_only=True, trust_remote_code=False)
         provenance["package_version"] = package_version("sentence-transformers")
     else:
         torch = importlib.import_module("torch")
+        device,device_provenance=torch_device(torch,config);provenance.update(device_provenance)
         transformers = importlib.import_module("transformers")
         with _staged_snapshot(path, list(config.get("model_roots", [])), model_provenance["model_sha256"]) as staged:
             processor = transformers.AutoProcessor.from_pretrained(str(staged), local_files_only=True, trust_remote_code=False, use_fast=False)
-            model = transformers.AutoModel.from_pretrained(str(staged), local_files_only=True, trust_remote_code=False, use_safetensors=True).eval()
+            model = transformers.AutoModel.from_pretrained(str(staged), local_files_only=True, trust_remote_code=False, use_safetensors=True).to(device).eval()
         provenance["package_version"] = package_version("transformers")
     items = []
     asset_cache: dict[str, list[float]] = {}
@@ -158,9 +170,10 @@ def run_embeddings(processor_id: str, records: list[Record], config: dict[str, A
                             raise ValueError("Asset sha256 mismatch")
                         if cache_key not in asset_cache:
                             inputs = processor(images=image, return_tensors="pt")
+                            inputs={key:value.to(device) for key,value in inputs.items()}
                             with torch.inference_mode():
                                 raw = model.get_image_features(**inputs)
-                            asset_cache[cache_key] = _vector(raw.detach().cpu().numpy(), recipe["dimension"])
+                            asset_cache[cache_key] = _vector(_pooled_features(raw).detach().cpu().numpy(), recipe["dimension"])
                         vectors.append({"asset_id": asset.id, "vector": asset_cache[cache_key]})
                     except (OSError, ValueError, RuntimeError, TypeError) as exc:
                         errors.append({"asset_id": asset.id, "error": f"{type(exc).__name__}: {exc}"})
@@ -180,8 +193,9 @@ def run_embeddings(processor_id: str, records: list[Record], config: dict[str, A
                     raw = model.encode([value], convert_to_numpy=True, normalize_embeddings=False, show_progress_bar=False)[0]
                 else:
                     inputs = processor(text=[value], return_tensors="pt", padding="max_length", truncation=True, max_length=64)
+                    inputs={key:value.to(device) for key,value in inputs.items()}
                     with torch.inference_mode():
-                        raw = model.get_text_features(**inputs).detach().cpu().numpy()[0]
+                        raw = _pooled_features(model.get_text_features(**inputs)).detach().cpu().numpy()[0]
                 items.append({"id": record.id, "status": "completed", "output": {"vector": _vector(raw, recipe["dimension"])}})
         except (OSError, ValueError, RuntimeError, TypeError) as exc:
             items.append({"id": record.id, "status": "failed", "output": None, "error": f"{type(exc).__name__}: {exc}"})

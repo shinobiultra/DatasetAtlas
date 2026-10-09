@@ -1,0 +1,46 @@
+{
+  "dataset_id": "sun397",
+  "source_sha256": "f404130965a7ad77bed5ececc71e720ab50f3cc1e1bb257257610d38f3b928ec",
+  "status": "executed",
+  "retained_snapshots": 1,
+  "image_references_checked": 108754,
+  "unique_native_images_in_snapshots": 108754,
+  "preview_asset_memberships": 100,
+  "preview_bytes_upper_bound": 44932897,
+  "cold_original_probes": [
+    {
+      "sha256": "296211cced0edc6fbb05ec6fbaf2927469e2ccae89f9781aeddff3ba46a6b241",
+      "bytes": 658265,
+      "transferred_bytes": 6291458,
+      "source_sha256": "f404130965a7ad77bed5ececc71e720ab50f3cc1e1bb257257610d38f3b928ec",
+      "fingerprint_type": "etag",
+      "etag": "\"834522f33e6ccddd76d1a706fcc29a7397456379788f3ae3e615b5d61bdcc109\""
+    },
+    {
+      "sha256": "6615e8a28e054486c1b139dfcc3b24de510c9c5582eeadd3f2aa72f0203edaa8",
+      "bytes": 92451,
+      "transferred_bytes": 8388608,
+      "source_sha256": "f404130965a7ad77bed5ececc71e720ab50f3cc1e1bb257257610d38f3b928ec",
+      "fingerprint_type": "etag",
+      "etag": "\"834522f33e6ccddd76d1a706fcc29a7397456379788f3ae3e615b5d61bdcc109\""
+    },
+    {
+      "sha256": "49fc79fc5251f64a2a4cb0bf897e51ae630803894fabe9717cf88dffe6d38766",
+      "bytes": 13340,
+      "transferred_bytes": 3145728,
+      "source_sha256": "f404130965a7ad77bed5ececc71e720ab50f3cc1e1bb257257610d38f3b928ec",
+      "fingerprint_type": "etag",
+      "etag": "\"834522f33e6ccddd76d1a706fcc29a7397456379788f3ae3e615b5d61bdcc109\""
+    }
+  ],
+  "paths": [
+    "work/source-objects/f404130965a7ad77bed5ececc71e720ab50f3cc1e1bb257257610d38f3b928ec",
+    "work/sources/sun397/SUN397.tar.gz",
+    "work/prepared/sun397/bfade66cc4678f0e17c4f7458c9d06a91049140158c0b16cf240318935494c46/sources/f404130965a7ad77bed5ececc71e720ab50f3cc1e1bb257257610d38f3b928ec.tar.gz"
+  ],
+  "extracted_files": 0,
+  "source_bytes": 39077296924,
+  "extracted_bytes": 0,
+  "retention": "Original-quality previews and complete indices; other originals and optimized browsing copies on demand.",
+  "freed_unique_file_bytes": 39077296924
+}

@@ -1,0 +1,1589 @@
+{
+  "checked_at": "2026-09-24",
+  "scope": "Local loopback workbench HTTP timings, warm server process, sequential requests from one client; 48-record first pages. Not a browser paint measurement.",
+  "machine": {
+    "cpu": "Intel(R) Core(TM) Ultra 9 285HX",
+    "python": "3.12.14"
+  },
+  "before": {
+    "note": "Same workspace and endpoints before the change, measured with the same script against the previously running server.",
+    "artifact_list": {
+      "path": "/api/v1/artifacts",
+      "bytes": 19869416,
+      "seconds_sequential": 0.647,
+      "seconds_in_browser_dataset_open": 1.672
+    },
+    "fields_seconds_typical": [
+      0.074,
+      0.14
+    ],
+    "preview_query_seconds_typical": [
+      0.066,
+      0.973
+    ],
+    "coco_dataset_open_api_seconds_in_browser": {
+      "fields": 0.358,
+      "artifacts": 1.672,
+      "preparation": 1.069,
+      "query": 0.881
+    }
+  },
+  "after": {
+    "artifact_list": {
+      "path": "/api/v1/artifacts?view=browse&dataset_id=coco",
+      "bytes": 1491106,
+      "seconds_warm": 0.105
+    },
+    "coco_dataset_open_api_seconds_in_browser": {
+      "fields": 0.008,
+      "artifacts_before_vector_omission": 0.342,
+      "preparation": 0.072,
+      "query": 0.182
+    },
+    "means_over_datasets": {
+      "fields_s": 0.0027,
+      "preview_query_s": 0.0023,
+      "complete_info_s": 0.0508,
+      "complete_query_s": 0.0451,
+      "datasets_with_preview": 169,
+      "datasets_with_complete_index": 163
+    },
+    "per_dataset": [
+      {
+        "dataset_id": "activations-csv",
+        "pack_s": 0.007,
+        "pack_bytes": 68437,
+        "fields_s": 0.003,
+        "preview_query_s": 0.003,
+        "complete_info_s": null,
+        "complete_query_s": null
+      },
+      {
+        "dataset_id": "advbench",
+        "pack_s": 0.006,
+        "pack_bytes": 70968,
+        "fields_s": 0.001,
+        "preview_query_s": 0.001,
+        "complete_info_s": 1.134,
+        "complete_query_s": 0.018
+      },
+      {
+        "dataset_id": "agent-security-bench",
+        "pack_s": 0.008,
+        "pack_bytes": 119215,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.021,
+        "complete_query_s": 0.012
+      },
+      {
+        "dataset_id": "algopuzzlevqa",
+        "pack_s": 0.012,
+        "pack_bytes": 370759,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.02,
+        "complete_query_s": 0.029
+      },
+      {
+        "dataset_id": "alpaca",
+        "pack_s": 0.006,
+        "pack_bytes": 94242,
+        "fields_s": 0.004,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.031,
+        "complete_query_s": 0.019
+      },
+      {
+        "dataset_id": "anthropic-red-teaming-prompts",
+        "pack_s": 0.006,
+        "pack_bytes": 366187,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.036,
+        "complete_query_s": 0.028
+      },
+      {
+        "dataset_id": "artbench",
+        "pack_s": 0.009,
+        "pack_bytes": 149746,
+        "fields_s": 0.002,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.028,
+        "complete_query_s": 0.033
+      },
+      {
+        "dataset_id": "bapps",
+        "pack_s": 0.017,
+        "pack_bytes": 210646,
+        "fields_s": 0.003,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.033,
+        "complete_query_s": 0.063
+      },
+      {
+        "dataset_id": "bbq",
+        "pack_s": 0.01,
+        "pack_bytes": 186745,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.025,
+        "complete_query_s": 0.026
+      },
+      {
+        "dataset_id": "behonest",
+        "pack_s": 0.006,
+        "pack_bytes": 230155,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.022,
+        "complete_query_s": 0.018
+      },
+      {
+        "dataset_id": "bias-in-bios",
+        "pack_s": 0.007,
+        "pack_bytes": 149953,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.126,
+        "complete_query_s": 0.058
+      },
+      {
+        "dataset_id": "blink",
+        "pack_s": 0.019,
+        "pack_bytes": 386298,
+        "fields_s": 0.005,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.024,
+        "complete_query_s": 0.027
+      },
+      {
+        "dataset_id": "caltech101",
+        "pack_s": 0.009,
+        "pack_bytes": 96539,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.022,
+        "complete_query_s": 0.029
+      },
+      {
+        "dataset_id": "cauldron",
+        "pack_s": 0.038,
+        "pack_bytes": 653950,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.759,
+        "complete_query_s": 0.33
+      },
+      {
+        "dataset_id": "causalgym",
+        "pack_s": 0.007,
+        "pack_bytes": 84706,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.021,
+        "complete_query_s": 0.021
+      },
+      {
+        "dataset_id": "cebab",
+        "pack_s": 0.011,
+        "pack_bytes": 221989,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.025,
+        "complete_query_s": 0.025
+      },
+      {
+        "dataset_id": "chartqa",
+        "pack_s": 0.01,
+        "pack_bytes": 123103,
+        "fields_s": 0.003,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.027,
+        "complete_query_s": 0.025
+      },
+      {
+        "dataset_id": "child-safety-intents",
+        "pack_s": 0.008,
+        "pack_bytes": 161599,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.021,
+        "complete_query_s": 0.017
+      },
+      {
+        "dataset_id": "cifar-10-1",
+        "pack_s": 0.01,
+        "pack_bytes": 112979,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.021,
+        "complete_query_s": 0.018
+      },
+      {
+        "dataset_id": "cifar-10-c",
+        "pack_s": 0.009,
+        "pack_bytes": 96321,
+        "fields_s": 0.003,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.07,
+        "complete_query_s": 0.133
+      },
+      {
+        "dataset_id": "cifar-10",
+        "pack_s": 0.01,
+        "pack_bytes": 95850,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.023,
+        "complete_query_s": 0.029
+      },
+      {
+        "dataset_id": "cifar-100-c",
+        "pack_s": 0.009,
+        "pack_bytes": 94484,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.074,
+        "complete_query_s": 0.142
+      },
+      {
+        "dataset_id": "cifar-100",
+        "pack_s": 0.012,
+        "pack_bytes": 100683,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.034,
+        "complete_query_s": 0.037
+      },
+      {
+        "dataset_id": "cinic-10",
+        "pack_s": 0.013,
+        "pack_bytes": 103001,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.042,
+        "complete_query_s": 0.057
+      },
+      {
+        "dataset_id": "clevr-v1-full",
+        "pack_s": 0.253,
+        "pack_bytes": 193912,
+        "fields_s": 0.005,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.147,
+        "complete_query_s": 0.143
+      },
+      {
+        "dataset_id": "clevr",
+        "pack_s": 0.318,
+        "pack_bytes": 9304342,
+        "fields_s": 0.005,
+        "preview_query_s": 0.009,
+        "complete_info_s": 0.034,
+        "complete_query_s": 0.03
+      },
+      {
+        "dataset_id": "coco-2014",
+        "pack_s": 0.157,
+        "pack_bytes": 1430904,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.279,
+        "complete_query_s": 0.108
+      },
+      {
+        "dataset_id": "coco-one",
+        "pack_s": 0.011,
+        "pack_bytes": 177306,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.022,
+        "complete_query_s": 0.028
+      },
+      {
+        "dataset_id": "coco-qa",
+        "pack_s": 0.012,
+        "pack_bytes": 108272,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.036,
+        "complete_query_s": 0.04
+      },
+      {
+        "dataset_id": "coco-two",
+        "pack_s": 0.013,
+        "pack_bytes": 184985,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.021,
+        "complete_query_s": 0.025
+      },
+      {
+        "dataset_id": "coco",
+        "pack_s": 0.748,
+        "pack_bytes": 12466965,
+        "fields_s": 0.006,
+        "preview_query_s": 0.028,
+        "complete_info_s": null,
+        "complete_query_s": null
+      },
+      {
+        "dataset_id": "conceptarc",
+        "pack_s": 0.066,
+        "pack_bytes": 304405,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.02,
+        "complete_query_s": 0.042
+      },
+      {
+        "dataset_id": "controlled-clevr",
+        "pack_s": 0.013,
+        "pack_bytes": 198740,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.021,
+        "complete_query_s": 0.026
+      },
+      {
+        "dataset_id": "controlled-images",
+        "pack_s": 0.015,
+        "pack_bytes": 199421,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.025,
+        "complete_query_s": 0.026
+      },
+      {
+        "dataset_id": "counterfact",
+        "pack_s": 0.011,
+        "pack_bytes": 211435,
+        "fields_s": 0.003,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.036,
+        "complete_query_s": 0.027
+      },
+      {
+        "dataset_id": "covid-19-radiography",
+        "pack_s": 0.041,
+        "pack_bytes": 172848,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.032,
+        "complete_query_s": 0.052
+      },
+      {
+        "dataset_id": "cub-200-2011",
+        "pack_s": 0.236,
+        "pack_bytes": 3687493,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.044,
+        "complete_query_s": 0.139
+      },
+      {
+        "dataset_id": "custom-propeller-and-rotating-snake-stimuli",
+        "pack_s": 0.002,
+        "pack_bytes": 15042,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.026,
+        "complete_query_s": 0.017
+      },
+      {
+        "dataset_id": "div2k",
+        "pack_s": 0.098,
+        "pack_bytes": 1523267,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.021,
+        "complete_query_s": 0.125
+      },
+      {
+        "dataset_id": "docci",
+        "pack_s": 0.02,
+        "pack_bytes": 233406,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.027,
+        "complete_query_s": 0.033
+      },
+      {
+        "dataset_id": "dreambooth",
+        "pack_s": 0.015,
+        "pack_bytes": 487206,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.026,
+        "complete_query_s": 0.025
+      },
+      {
+        "dataset_id": "dtd",
+        "pack_s": 0.012,
+        "pack_bytes": 96244,
+        "fields_s": 0.003,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.03,
+        "complete_query_s": 0.028
+      },
+      {
+        "dataset_id": "emnist-balanced",
+        "pack_s": 0.01,
+        "pack_bytes": 117171,
+        "fields_s": 0.003,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.03,
+        "complete_query_s": 0.031
+      },
+      {
+        "dataset_id": "emnist-letters",
+        "pack_s": 0.009,
+        "pack_bytes": 97785,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.027,
+        "complete_query_s": 0.04
+      },
+      {
+        "dataset_id": "emnist",
+        "pack_s": 0.01,
+        "pack_bytes": 91905,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.125,
+        "complete_query_s": 0.254
+      },
+      {
+        "dataset_id": "eurosat",
+        "pack_s": 0.011,
+        "pack_bytes": 102519,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.027,
+        "complete_query_s": 0.023
+      },
+      {
+        "dataset_id": "exams-v",
+        "pack_s": 0.013,
+        "pack_bytes": 158712,
+        "fields_s": 0.002,
+        "preview_query_s": 0.001,
+        "complete_info_s": 0.022,
+        "complete_query_s": 0.029
+      },
+      {
+        "dataset_id": "fairface",
+        "pack_s": 0.015,
+        "pack_bytes": 211520,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.028,
+        "complete_query_s": 0.042
+      },
+      {
+        "dataset_id": "fgvc-aircraft",
+        "pack_s": 0.019,
+        "pack_bytes": 100180,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.021,
+        "complete_query_s": 0.022
+      },
+      {
+        "dataset_id": "figure-linked-source-data-spreadsheets",
+        "pack_s": 0.016,
+        "pack_bytes": 111915,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.021,
+        "complete_query_s": 0.021
+      },
+      {
+        "dataset_id": "find",
+        "pack_s": 0.022,
+        "pack_bytes": 410603,
+        "fields_s": 0.005,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.027,
+        "complete_query_s": 0.025
+      },
+      {
+        "dataset_id": "flowers102",
+        "pack_s": 0.01,
+        "pack_bytes": 80089,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.028,
+        "complete_query_s": 0.023
+      },
+      {
+        "dataset_id": "foil-it",
+        "pack_s": 0.013,
+        "pack_bytes": 145704,
+        "fields_s": 0.003,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.078,
+        "complete_query_s": 0.095
+      },
+      {
+        "dataset_id": "food101",
+        "pack_s": 0.02,
+        "pack_bytes": 93711,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.025,
+        "complete_query_s": 0.038
+      },
+      {
+        "dataset_id": "glue-cola",
+        "pack_s": 0.007,
+        "pack_bytes": 78206,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.02,
+        "complete_query_s": 0.02
+      },
+      {
+        "dataset_id": "gqa",
+        "pack_s": 0.024,
+        "pack_bytes": 185647,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.05,
+        "complete_query_s": 0.05
+      },
+      {
+        "dataset_id": "gvil-paired-illusion-images",
+        "pack_s": 0.011,
+        "pack_bytes": 131649,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.021,
+        "complete_query_s": 0.022
+      },
+      {
+        "dataset_id": "gvil",
+        "pack_s": 0.01,
+        "pack_bytes": 142358,
+        "fields_s": 0.002,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.021,
+        "complete_query_s": 0.022
+      },
+      {
+        "dataset_id": "hades",
+        "pack_s": 0.011,
+        "pack_bytes": 150115,
+        "fields_s": 0.002,
+        "preview_query_s": 0.001,
+        "complete_info_s": 0.022,
+        "complete_query_s": 0.024
+      },
+      {
+        "dataset_id": "hallusionbench",
+        "pack_s": 0.013,
+        "pack_bytes": 199246,
+        "fields_s": 0.004,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.023,
+        "complete_query_s": 0.022
+      },
+      {
+        "dataset_id": "halueval",
+        "pack_s": 0.012,
+        "pack_bytes": 431746,
+        "fields_s": 0.003,
+        "preview_query_s": 0.001,
+        "complete_info_s": 0.045,
+        "complete_query_s": 0.03
+      },
+      {
+        "dataset_id": "harmbench",
+        "pack_s": 0.006,
+        "pack_bytes": 80847,
+        "fields_s": 0.002,
+        "preview_query_s": 0.001,
+        "complete_info_s": 0.02,
+        "complete_query_s": 0.016
+      },
+      {
+        "dataset_id": "hatefulillusion",
+        "pack_s": 0.31,
+        "pack_bytes": 198554,
+        "fields_s": 0.005,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.02,
+        "complete_query_s": 0.032
+      },
+      {
+        "dataset_id": "hc-bench",
+        "pack_s": 0.006,
+        "pack_bytes": 59792,
+        "fields_s": 0.002,
+        "preview_query_s": 0.001,
+        "complete_info_s": null,
+        "complete_query_s": null
+      },
+      {
+        "dataset_id": "high-quality-hallucination-benchmark",
+        "pack_s": 0.015,
+        "pack_bytes": 333293,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.029,
+        "complete_query_s": 0.029
+      },
+      {
+        "dataset_id": "hod",
+        "pack_s": 0.02,
+        "pack_bytes": 321498,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.028,
+        "complete_query_s": 0.032
+      },
+      {
+        "dataset_id": "iconqa",
+        "pack_s": 0.016,
+        "pack_bytes": 171515,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.035,
+        "complete_query_s": 0.044
+      },
+      {
+        "dataset_id": "idenprof",
+        "pack_s": 0.009,
+        "pack_bytes": 113670,
+        "fields_s": 0.002,
+        "preview_query_s": 0.001,
+        "complete_info_s": 0.021,
+        "complete_query_s": 0.021
+      },
+      {
+        "dataset_id": "illuchar",
+        "pack_s": 0.014,
+        "pack_bytes": 147341,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.024,
+        "complete_query_s": 0.034
+      },
+      {
+        "dataset_id": "illusionmnist",
+        "pack_s": 0.022,
+        "pack_bytes": 258089,
+        "fields_s": 0.003,
+        "preview_query_s": 0.006,
+        "complete_info_s": 0.029,
+        "complete_query_s": 0.046
+      },
+      {
+        "dataset_id": "illusionvqa",
+        "pack_s": 0.015,
+        "pack_bytes": 267094,
+        "fields_s": 0.005,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.024,
+        "complete_query_s": 0.022
+      },
+      {
+        "dataset_id": "illusoryvqa",
+        "pack_s": 0.019,
+        "pack_bytes": 257375,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.026,
+        "complete_query_s": 0.048
+      },
+      {
+        "dataset_id": "imagenet-a",
+        "pack_s": 0.01,
+        "pack_bytes": 95928,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.021,
+        "complete_query_s": 0.022
+      },
+      {
+        "dataset_id": "imagenet-r",
+        "pack_s": 0.01,
+        "pack_bytes": 93065,
+        "fields_s": 0.002,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.023,
+        "complete_query_s": 0.028
+      },
+      {
+        "dataset_id": "imagenet-sketch",
+        "pack_s": 0.013,
+        "pack_bytes": 178963,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.024,
+        "complete_query_s": 0.031
+      },
+      {
+        "dataset_id": "imagenet-v2",
+        "pack_s": 0.009,
+        "pack_bytes": 92409,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.02,
+        "complete_query_s": 0.025
+      },
+      {
+        "dataset_id": "imagenette",
+        "pack_s": 0.009,
+        "pack_bytes": 106942,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.022,
+        "complete_query_s": 0.022
+      },
+      {
+        "dataset_id": "jailbreakv-28k",
+        "pack_s": 0.011,
+        "pack_bytes": 289114,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.026,
+        "complete_query_s": 0.023
+      },
+      {
+        "dataset_id": "jiechieu-tsopze-resume-corpus",
+        "pack_s": 0.014,
+        "pack_bytes": 1625769,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.1,
+        "complete_query_s": 0.064
+      },
+      {
+        "dataset_id": "llava-bench",
+        "pack_s": 0.008,
+        "pack_bytes": 121057,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.02,
+        "complete_query_s": 0.019
+      },
+      {
+        "dataset_id": "llava-instruct-150k-3a74a703",
+        "pack_s": 0.017,
+        "pack_bytes": 382367,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.095,
+        "complete_query_s": 0.058
+      },
+      {
+        "dataset_id": "llava-instruct-150k",
+        "pack_s": 0.015,
+        "pack_bytes": 270771,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.086,
+        "complete_query_s": 0.048
+      },
+      {
+        "dataset_id": "maliciousinstruct",
+        "pack_s": 0.006,
+        "pack_bytes": 64350,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.02,
+        "complete_query_s": 0.015
+      },
+      {
+        "dataset_id": "mathvision",
+        "pack_s": 0.018,
+        "pack_bytes": 200641,
+        "fields_s": 0.003,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.025,
+        "complete_query_s": 0.022
+      },
+      {
+        "dataset_id": "medical-multimodal-evaluation-data",
+        "pack_s": 0.012,
+        "pack_bytes": 158974,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.026,
+        "complete_query_s": 0.027
+      },
+      {
+        "dataset_id": "mllmu-bench",
+        "pack_s": 0.034,
+        "pack_bytes": 735120,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.028,
+        "complete_query_s": 0.051
+      },
+      {
+        "dataset_id": "mm-safetybench",
+        "pack_s": 0.026,
+        "pack_bytes": 446521,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.027,
+        "complete_query_s": 0.044
+      },
+      {
+        "dataset_id": "mm-vet",
+        "pack_s": 0.01,
+        "pack_bytes": 131766,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.022,
+        "complete_query_s": 0.019
+      },
+      {
+        "dataset_id": "mmbench-en-dev",
+        "pack_s": 0.014,
+        "pack_bytes": 226614,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.021,
+        "complete_query_s": 0.025
+      },
+      {
+        "dataset_id": "mmbench",
+        "pack_s": 0.014,
+        "pack_bytes": 152465,
+        "fields_s": 0.003,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.026,
+        "complete_query_s": 0.029
+      },
+      {
+        "dataset_id": "mme-perception",
+        "pack_s": 0.011,
+        "pack_bytes": 124624,
+        "fields_s": 0.002,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.02,
+        "complete_query_s": 0.023
+      },
+      {
+        "dataset_id": "mme",
+        "pack_s": 0.011,
+        "pack_bytes": 119953,
+        "fields_s": 0.003,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.02,
+        "complete_query_s": 0.024
+      },
+      {
+        "dataset_id": "mmmu-dev",
+        "pack_s": 0.016,
+        "pack_bytes": 223305,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.02,
+        "complete_query_s": 0.026
+      },
+      {
+        "dataset_id": "mmstar",
+        "pack_s": 0.012,
+        "pack_bytes": 174756,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.02,
+        "complete_query_s": 0.023
+      },
+      {
+        "dataset_id": "mnist",
+        "pack_s": 0.009,
+        "pack_bytes": 99109,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.023,
+        "complete_query_s": 0.027
+      },
+      {
+        "dataset_id": "mrpc",
+        "pack_s": 0.008,
+        "pack_bytes": 138524,
+        "fields_s": 0.002,
+        "preview_query_s": 0.001,
+        "complete_info_s": 0.024,
+        "complete_query_s": 0.017
+      },
+      {
+        "dataset_id": "naturalbench",
+        "pack_s": 0.019,
+        "pack_bytes": 240116,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.021,
+        "complete_query_s": 0.032
+      },
+      {
+        "dataset_id": "nocaps",
+        "pack_s": 0.014,
+        "pack_bytes": 201690,
+        "fields_s": 0.004,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.024,
+        "complete_query_s": 0.029
+      },
+      {
+        "dataset_id": "nrc-vad",
+        "pack_s": 0.138,
+        "pack_bytes": 2853197,
+        "fields_s": 0.004,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.085,
+        "complete_query_s": 0.35
+      },
+      {
+        "dataset_id": "objectnet",
+        "pack_s": 0.019,
+        "pack_bytes": 119114,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.038,
+        "complete_query_s": 0.044
+      },
+      {
+        "dataset_id": "ok-vqa",
+        "pack_s": 0.022,
+        "pack_bytes": 216992,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.029,
+        "complete_query_s": 0.035
+      },
+      {
+        "dataset_id": "omnisafebench-mm",
+        "pack_s": 0.011,
+        "pack_bytes": 142235,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.028,
+        "complete_query_s": 0.022
+      },
+      {
+        "dataset_id": "omnispatial",
+        "pack_s": 0.014,
+        "pack_bytes": 144271,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.026,
+        "complete_query_s": 0.029
+      },
+      {
+        "dataset_id": "oxfordpet",
+        "pack_s": 0.01,
+        "pack_bytes": 92844,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.02,
+        "complete_query_s": 0.023
+      },
+      {
+        "dataset_id": "pairs-csv",
+        "pack_s": 0.008,
+        "pack_bytes": 59587,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": null,
+        "complete_query_s": null
+      },
+      {
+        "dataset_id": "pairs",
+        "pack_s": 0.009,
+        "pack_bytes": 119363,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.019,
+        "complete_query_s": 0.019
+      },
+      {
+        "dataset_id": "paper-1e2474b15fec2d7d-unnamed-controversial-stimuli-collection",
+        "pack_s": 0.009,
+        "pack_bytes": 159751,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": null,
+        "complete_query_s": null
+      },
+      {
+        "dataset_id": "phantom",
+        "pack_s": 0.021,
+        "pack_bytes": 548042,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.048,
+        "complete_query_s": 0.045
+      },
+      {
+        "dataset_id": "phase",
+        "pack_s": 0.023,
+        "pack_bytes": 295427,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.03,
+        "complete_query_s": 0.047
+      },
+      {
+        "dataset_id": "pmc-vqa",
+        "pack_s": 0.012,
+        "pack_bytes": 138366,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.059,
+        "complete_query_s": 0.052
+      },
+      {
+        "dataset_id": "pope",
+        "pack_s": 0.019,
+        "pack_bytes": 125502,
+        "fields_s": 0.003,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.022,
+        "complete_query_s": 0.032
+      },
+      {
+        "dataset_id": "puzzlevqa",
+        "pack_s": 0.013,
+        "pack_bytes": 244241,
+        "fields_s": 0.004,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.021,
+        "complete_query_s": 0.024
+      },
+      {
+        "dataset_id": "qnli",
+        "pack_s": 0.007,
+        "pack_bytes": 126187,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.048,
+        "complete_query_s": 0.031
+      },
+      {
+        "dataset_id": "qqp",
+        "pack_s": 0.007,
+        "pack_bytes": 104239,
+        "fields_s": 0.002,
+        "preview_query_s": 0.001,
+        "complete_info_s": 0.142,
+        "complete_query_s": 0.115
+      },
+      {
+        "dataset_id": "ravel",
+        "pack_s": 0.053,
+        "pack_bytes": 1178245,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.023,
+        "complete_query_s": 0.057
+      },
+      {
+        "dataset_id": "realtoxicityprompts",
+        "pack_s": 0.009,
+        "pack_bytes": 128489,
+        "fields_s": 0.002,
+        "preview_query_s": 0.001,
+        "complete_info_s": 0.051,
+        "complete_query_s": 0.033
+      },
+      {
+        "dataset_id": "realworldqa",
+        "pack_s": 0.013,
+        "pack_bytes": 173478,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.021,
+        "complete_query_s": 0.021
+      },
+      {
+        "dataset_id": "roco",
+        "pack_s": 0.026,
+        "pack_bytes": 215368,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.044,
+        "complete_query_s": 0.049
+      },
+      {
+        "dataset_id": "rsicd",
+        "pack_s": 0.019,
+        "pack_bytes": 263668,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.025,
+        "complete_query_s": 0.035
+      },
+      {
+        "dataset_id": "sad",
+        "pack_s": 0.012,
+        "pack_bytes": 215915,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.045,
+        "complete_query_s": 0.044
+      },
+      {
+        "dataset_id": "safebench",
+        "pack_s": 0.041,
+        "pack_bytes": 298380,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.025,
+        "complete_query_s": 0.044
+      },
+      {
+        "dataset_id": "sbbench-syn-crop",
+        "pack_s": 0.013,
+        "pack_bytes": 192648,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.02,
+        "complete_query_s": 0.022
+      },
+      {
+        "dataset_id": "sbbench-syn",
+        "pack_s": 0.015,
+        "pack_bytes": 188635,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.019,
+        "complete_query_s": 0.025
+      },
+      {
+        "dataset_id": "sbbench-synthetic-age-crop-false",
+        "pack_s": 0.012,
+        "pack_bytes": 132261,
+        "fields_s": 0.002,
+        "preview_query_s": 0.001,
+        "complete_info_s": 0.019,
+        "complete_query_s": 0.02
+      },
+      {
+        "dataset_id": "sbbench-synthetic-age-crop-true",
+        "pack_s": 0.011,
+        "pack_bytes": 138810,
+        "fields_s": 0.003,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.021,
+        "complete_query_s": 0.021
+      },
+      {
+        "dataset_id": "sbbench-synthetic-gender-crop-false",
+        "pack_s": 0.012,
+        "pack_bytes": 134064,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.019,
+        "complete_query_s": 0.019
+      },
+      {
+        "dataset_id": "sbbench-synthetic-gender-crop-true",
+        "pack_s": 0.011,
+        "pack_bytes": 133636,
+        "fields_s": 0.002,
+        "preview_query_s": 0.001,
+        "complete_info_s": 0.02,
+        "complete_query_s": 0.02
+      },
+      {
+        "dataset_id": "scienceqa-img",
+        "pack_s": 0.013,
+        "pack_bytes": 319855,
+        "fields_s": 0.004,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.024,
+        "complete_query_s": 0.029
+      },
+      {
+        "dataset_id": "seed-bench-2",
+        "pack_s": 0.032,
+        "pack_bytes": 458222,
+        "fields_s": 0.005,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.026,
+        "complete_query_s": 0.049
+      },
+      {
+        "dataset_id": "seedbench",
+        "pack_s": 0.027,
+        "pack_bytes": 415713,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.025,
+        "complete_query_s": 0.048
+      },
+      {
+        "dataset_id": "senator-tweets-2021",
+        "pack_s": 0.041,
+        "pack_bytes": 923550,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.348,
+        "complete_query_s": 0.09
+      },
+      {
+        "dataset_id": "set14",
+        "pack_s": 0.011,
+        "pack_bytes": 133355,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.021,
+        "complete_query_s": 0.032
+      },
+      {
+        "dataset_id": "set5",
+        "pack_s": 0.006,
+        "pack_bytes": 51079,
+        "fields_s": 0.002,
+        "preview_query_s": 0.001,
+        "complete_info_s": 0.02,
+        "complete_query_s": 0.018
+      },
+      {
+        "dataset_id": "shapes-localization",
+        "pack_s": 0.017,
+        "pack_bytes": 231600,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.023,
+        "complete_query_s": 0.026
+      },
+      {
+        "dataset_id": "shapes-recognition",
+        "pack_s": 0.015,
+        "pack_bytes": 230835,
+        "fields_s": 0.003,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.026,
+        "complete_query_s": 0.03
+      },
+      {
+        "dataset_id": "shapes-relations",
+        "pack_s": 0.018,
+        "pack_bytes": 233096,
+        "fields_s": 0.003,
+        "preview_query_s": 0.004,
+        "complete_info_s": 0.02,
+        "complete_query_s": 0.03
+      },
+      {
+        "dataset_id": "simplevqa",
+        "pack_s": 0.014,
+        "pack_bytes": 233850,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.027,
+        "complete_query_s": 0.026
+      },
+      {
+        "dataset_id": "socialcounterfactuals",
+        "pack_s": 0.011,
+        "pack_bytes": 221155,
+        "fields_s": 0.003,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.036,
+        "complete_query_s": 0.05
+      },
+      {
+        "dataset_id": "space-10",
+        "pack_s": 0.047,
+        "pack_bytes": 699141,
+        "fields_s": 0.003,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.023,
+        "complete_query_s": 0.074
+      },
+      {
+        "dataset_id": "sst2",
+        "pack_s": 0.006,
+        "pack_bytes": 64410,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.025,
+        "complete_query_s": 0.025
+      },
+      {
+        "dataset_id": "stl-10",
+        "pack_s": 0.009,
+        "pack_bytes": 95992,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.026,
+        "complete_query_s": 0.03
+      },
+      {
+        "dataset_id": "sun397",
+        "pack_s": 0.023,
+        "pack_bytes": 125649,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.028,
+        "complete_query_s": 0.045
+      },
+      {
+        "dataset_id": "svhn",
+        "pack_s": 0.012,
+        "pack_bytes": 107805,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.026,
+        "complete_query_s": 0.032
+      },
+      {
+        "dataset_id": "svo-probes",
+        "pack_s": 0.01,
+        "pack_bytes": 172984,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.03,
+        "complete_query_s": 0.023
+      },
+      {
+        "dataset_id": "t2i-compbench",
+        "pack_s": 0.006,
+        "pack_bytes": 62780,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.023,
+        "complete_query_s": 0.019
+      },
+      {
+        "dataset_id": "tdc2023",
+        "pack_s": 0.006,
+        "pack_bytes": 74952,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.02,
+        "complete_query_s": 0.015
+      },
+      {
+        "dataset_id": "textvqa-x",
+        "pack_s": 0.023,
+        "pack_bytes": 311915,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.029,
+        "complete_query_s": 0.04
+      },
+      {
+        "dataset_id": "textvqa",
+        "pack_s": 0.012,
+        "pack_bytes": 158216,
+        "fields_s": 0.003,
+        "preview_query_s": 0.001,
+        "complete_info_s": 0.029,
+        "complete_query_s": 0.033
+      },
+      {
+        "dataset_id": "top16-images-csv",
+        "pack_s": 0.007,
+        "pack_bytes": 68474,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": null,
+        "complete_query_s": null
+      },
+      {
+        "dataset_id": "turing-eye-test",
+        "pack_s": 0.306,
+        "pack_bytes": 206152,
+        "fields_s": 0.004,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.019,
+        "complete_query_s": 0.027
+      },
+      {
+        "dataset_id": "tweeteval",
+        "pack_s": 0.008,
+        "pack_bytes": 80499,
+        "fields_s": 0.002,
+        "preview_query_s": 0.001,
+        "complete_info_s": 0.043,
+        "complete_query_s": 0.034
+      },
+      {
+        "dataset_id": "vg-qa-one",
+        "pack_s": 0.012,
+        "pack_bytes": 170507,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.021,
+        "complete_query_s": 0.022
+      },
+      {
+        "dataset_id": "vg-qa-two",
+        "pack_s": 0.013,
+        "pack_bytes": 181846,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.02,
+        "complete_query_s": 0.025
+      },
+      {
+        "dataset_id": "vhd11k",
+        "pack_s": 0.029,
+        "pack_bytes": 1372180,
+        "fields_s": 0.006,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.043,
+        "complete_query_s": 0.042
+      },
+      {
+        "dataset_id": "vibeeval",
+        "pack_s": 0.011,
+        "pack_bytes": 280096,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.021,
+        "complete_query_s": 0.019
+      },
+      {
+        "dataset_id": "visual-counterfact",
+        "pack_s": 0.019,
+        "pack_bytes": 288935,
+        "fields_s": 0.004,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.022,
+        "complete_query_s": 0.033
+      },
+      {
+        "dataset_id": "visual-genome",
+        "pack_s": 1.17,
+        "pack_bytes": 8221684,
+        "fields_s": 0.004,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.767,
+        "complete_query_s": 0.741
+      },
+      {
+        "dataset_id": "visual6502-transistor-netlist",
+        "pack_s": 0.01,
+        "pack_bytes": 81521,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.019,
+        "complete_query_s": 0.018
+      },
+      {
+        "dataset_id": "visualpuzzle",
+        "pack_s": 0.012,
+        "pack_bytes": 166668,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.022,
+        "complete_query_s": 0.022
+      },
+      {
+        "dataset_id": "vizwiz",
+        "pack_s": 0.018,
+        "pack_bytes": 167632,
+        "fields_s": 0.002,
+        "preview_query_s": 0.003,
+        "complete_info_s": 0.03,
+        "complete_query_s": 0.032
+      },
+      {
+        "dataset_id": "vqa-constraints",
+        "pack_s": 0.014,
+        "pack_bytes": 198886,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.024,
+        "complete_query_s": 0.035
+      },
+      {
+        "dataset_id": "vqa-v2-m-n-subsets",
+        "pack_s": 0.028,
+        "pack_bytes": 227922,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.02,
+        "complete_query_s": 0.026
+      },
+      {
+        "dataset_id": "vqa-v2",
+        "pack_s": 0.027,
+        "pack_bytes": 183788,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.047,
+        "complete_query_s": 0.061
+      },
+      {
+        "dataset_id": "vsr",
+        "pack_s": 0.013,
+        "pack_bytes": 134164,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.022,
+        "complete_query_s": 0.029
+      },
+      {
+        "dataset_id": "waterbirds",
+        "pack_s": 0.01,
+        "pack_bytes": 112171,
+        "fields_s": 0.002,
+        "preview_query_s": 0.001,
+        "complete_info_s": 0.02,
+        "complete_query_s": 0.023
+      },
+      {
+        "dataset_id": "what-s-up",
+        "pack_s": 0.013,
+        "pack_bytes": 152368,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.022,
+        "complete_query_s": 0.027
+      },
+      {
+        "dataset_id": "whoops",
+        "pack_s": 0.026,
+        "pack_bytes": 501136,
+        "fields_s": 0.006,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.026,
+        "complete_query_s": 0.025
+      },
+      {
+        "dataset_id": "wmdp",
+        "pack_s": 0.007,
+        "pack_bytes": 135965,
+        "fields_s": 0.002,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.026,
+        "complete_query_s": 0.018
+      },
+      {
+        "dataset_id": "wnli",
+        "pack_s": 0.007,
+        "pack_bytes": 106143,
+        "fields_s": 0.003,
+        "preview_query_s": 0.002,
+        "complete_info_s": 0.021,
+        "complete_query_s": 0.019
+      }
+    ]
+  },
+  "changes": [
+    "Parse each immutable registered artifact once instead of per request",
+    "Scope /artifacts to a dataset and omit embedding vectors in view=browse; full artifacts stay at /artifacts/{id}",
+    "Build the browser-facing preview pack once per pack revision and attached-run set",
+    "Avoid deep-copying dataset adapter configuration for existence checks",
+    "Cache preview asset membership per snapshot",
+    "Use the verified manifest count for unfiltered complete queries; 4 DuckDB threads",
+    "Serve the frontend shell with Cache-Control: no-cache so rebuilds are picked up"
+  ],
+  "limits": [
+    "The first open of a large complete snapshot per server process still re-hashes its Parquet file (for example Visual Genome 0.77 s, Cauldron 0.76 s).",
+    "Complete-scope pages over millions of rows sort by ID with DuckDB top-N; EMNIST (2,255,710 rows) takes about 0.25 s.",
+    "Timings are loopback measurements on this machine only."
+  ]
+}

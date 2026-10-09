@@ -1,0 +1,316 @@
+# BBQ-V (ucf-crcv/BBQ-V), gated auto: the researcher accepts the terms on their own Hugging Face account and the fetch uses that
+# account's token through the "huggingface" credential profile (never stored in this file). The 45 shards stay remote: footers and
+# annotation columns are read for the complete index, images only on request, and 100 preview originals are kept locally.
+# No source_url on purpose: a huggingface.co/datasets/<repo> URL would make `auto` planning take the sampled route, which builds no
+# complete index. The catalogue entry keeps the authors' repository as source_url; every shard URL below pins the Hub revision.
+# snapshot_id = "bbq-v-<revision[:12]>-parquet45-<first 16 hex of sha256 over the sorted lines source_name:bytes:sha256 joined by newline, plus a final line preview_sampling:<its canonical JSON>>".
+# preview_sampling fixes the 100 preview rows (seed, 40 row groups, at most 3 rows each); the transfer budget never changes them.
+release: bbq-v-a1c78b8f73bc40408993414e3d94714a6a9169d3
+snapshot_id: bbq-v-a1c78b8f73bc-parquet45-f3e4eed58c04e355
+adapter: remote_columnar
+credential_profile: huggingface
+expected_count: 54414
+description: 'BBQ-V (author release ucf-crcv/BBQ-V): all 54,414 rows of the 45 Parquet shards at the pinned
+  revision, in four file groups (real 14,578, synthetic 6,526, test 14,578, test2 18,732) with the face-blurred
+  original images embedded. Questions, contexts and the author class codes are retained; the shards stay
+  remote and only 100 preview originals are kept locally.'
+scope: 'Every row of the 45 Parquet shards of the gated Hugging Face dataset ucf-crcv/BBQ-V at revision
+  a1c78b8f73bc40408993414e3d94714a6a9169d3 (12.45 GB; the card states CC BY-NC 4.0), grouped by file-name
+  prefix: real (14,578 rows; answer options and a native label), synthetic (6,526), test (14,578; no answer
+  columns, and the only configuration the dataset card declares) and test2 (18,732). The card says 14,144
+  image-question pairs; no group has that count, and the card describes only the test group. The groups
+  overlap: upstream ids are unique inside each group but all ids of the test group also occur in the real
+  group, so a row is identified by its shard and row, never by the upstream id alone. This is the authors''
+  current release, not a claim that the historical SBBench population cited by the paper is any of these
+  groups. Class codes keep the author ClassLabel integers; their names are quoted from the shard metadata.
+  Images stay in the remote shards and are read on request through ETag-bound HTTPS ranges; only the 100
+  preview originals are kept locally.'
+resource_limits:
+  max_wall_seconds: 21600
+  max_cpu_seconds: 7200
+adapter_config:
+  remote_files:
+  - source_name: data/real-00000-of-00007.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/real-00000-of-00007.parquet
+    bytes: 229450084
+    sha256: 7e4e7dc4775fa3de83ba88e5d48ec216805c1bfda05de897e359b0dc51c5bc9b
+    etag: '"65ef948499292bcc48f37e3d82ff635550cb3daa310553ee797f562ab8f41736"'
+  - source_name: data/real-00001-of-00007.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/real-00001-of-00007.parquet
+    bytes: 313487636
+    sha256: 0d973a90a52348fb7abd2e794f3936c7af59d86858f309aef87a98a55e2fc35a
+    etag: '"e6b9689ebbd267687dde81f76c9b1721068606d5e9bfc9ba9aa023330af90ce2"'
+  - source_name: data/real-00002-of-00007.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/real-00002-of-00007.parquet
+    bytes: 221040861
+    sha256: c7e6e2260efcfe98be6522e84cc34b6ae392c93ef2817f5198a925149d4e6165
+    etag: '"1af519ee99b146451887cfcbf348adafe4102444679020763b93ced0889e8143"'
+  - source_name: data/real-00003-of-00007.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/real-00003-of-00007.parquet
+    bytes: 353886896
+    sha256: e937cfd237488ab08f9992a5223f55fca1eef32eccdb74f3c06da20ea292c14f
+    etag: '"60c447488ad798d451d5db93a253d43ec96fef2bc48135f6056f973682d35b2f"'
+  - source_name: data/real-00004-of-00007.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/real-00004-of-00007.parquet
+    bytes: 413081842
+    sha256: 0ab433cd290b871e3861476e977cf043109632a60b3ec6d7cdd8f88ed8210fe8
+    etag: '"51793a8ef6ba23a27e6d6baf42fca28f4fc4d710cf0ceef77cc60b23165d94eb"'
+  - source_name: data/real-00005-of-00007.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/real-00005-of-00007.parquet
+    bytes: 327039551
+    sha256: c429fe31c5ab8050f07ec1b73ecb56f70e90b56c0f0a9238f342986875632d4b
+    etag: '"6377310efd7fa9f60ae761d5a3e793828089b2830f6374433746852bd203b0b3"'
+  - source_name: data/real-00006-of-00007.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/real-00006-of-00007.parquet
+    bytes: 407387420
+    sha256: 96dcaace9a68ebfc9c61944616d84d6b6b8da79e53b2de8bec75a92b1ad7f357
+    etag: '"7bd19106e67c1fda30940a6014a0d6dc9b7902866f4d73ab42b10d628ef153f3"'
+  - source_name: data/synthetic-00000-of-00020.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/synthetic-00000-of-00020.parquet
+    bytes: 277698868
+    sha256: 50b39c94221a13978ae7c16c8683ebdbf85eaafa4590a7e20c91f66af8b5cf7b
+    etag: '"75a3454c3887de0b788934d556790adcd37ce13d0d49ae01c585f3d0c453e88a"'
+  - source_name: data/synthetic-00001-of-00020.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/synthetic-00001-of-00020.parquet
+    bytes: 291250908
+    sha256: 4e6f0b255930cb6184a7540a9a5b0e366b17517908da513824c3762af41b285a
+    etag: '"3ca9cc991b09e9fbb45d198b380b64f9dfe2bce4c06738bcb7a943dec5cf62d0"'
+  - source_name: data/synthetic-00002-of-00020.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/synthetic-00002-of-00020.parquet
+    bytes: 248959884
+    sha256: 1fc5ef4ec736d927e823aec81088a06ad56671735724da8aee855df11b5db1b8
+    etag: '"39da3a04bfa4a87934b231b8d11d6d68fd64567c95f7cf971f08ac1426c159d1"'
+  - source_name: data/synthetic-00003-of-00020.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/synthetic-00003-of-00020.parquet
+    bytes: 243183026
+    sha256: e724e6de1cb5776ddf0950b5256e7b64ff7f16334c5cc0edf58b63505b8e5937
+    etag: '"2fb2ca0cc006043323b8e1bbe94be5f8b3495fc055748348c772781331ab1a06"'
+  - source_name: data/synthetic-00004-of-00020.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/synthetic-00004-of-00020.parquet
+    bytes: 247040835
+    sha256: 6588247980a3bda4bdca75f6216e7a1a42995bf8feee962ac45e75c875b14463
+    etag: '"d0cdf6194eee5fd4fa75ac9b314c8b0c2eeef1c597d31856aadd1f940a1c94df"'
+  - source_name: data/synthetic-00005-of-00020.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/synthetic-00005-of-00020.parquet
+    bytes: 285434037
+    sha256: 48e910e1c6cd9e50e6696699985a12e6de46378e1a937e3789b8cdf78158cc8f
+    etag: '"d0454ab415be2121b13cf8f0114dc8d495e5a36d09a1e19ab7ede16c4816e806"'
+  - source_name: data/synthetic-00006-of-00020.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/synthetic-00006-of-00020.parquet
+    bytes: 283222457
+    sha256: 24b264a2976f57d910488242048a65335162026e72d5d05ac3699c189533cc27
+    etag: '"7d78298ad8a131dcc538a740eb4ea6fef093279aac997046047f32e7ebc3df7b"'
+  - source_name: data/synthetic-00007-of-00020.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/synthetic-00007-of-00020.parquet
+    bytes: 310130190
+    sha256: 18009417b80667ba96194527e6e31ba08cc8ce308c4aff998cc83df93cd29b36
+    etag: '"715d43eb08cad816aa055f2baa5d81e8a8f0fff4ea4e2e43e432ef5b9426bdd6"'
+  - source_name: data/synthetic-00008-of-00020.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/synthetic-00008-of-00020.parquet
+    bytes: 282100656
+    sha256: 47e9227143efe9e5de7e94c4536b93d406984bf3e8411343880af483b39af053
+    etag: '"a0cfa76218e53ed7b3dccc4fefdeb6c9ff5d0cba48ae40d18ffcdc77b5dad5d1"'
+  - source_name: data/synthetic-00009-of-00020.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/synthetic-00009-of-00020.parquet
+    bytes: 244094276
+    sha256: ded1912588ced62857614f811e73354bf4707c54a70b85480e7bf26bdbf21d11
+    etag: '"79ee119c37713cd21decf5f94e18ddf1c8b7b06b2341cc0731737d8e1b5d53a2"'
+  - source_name: data/synthetic-00010-of-00020.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/synthetic-00010-of-00020.parquet
+    bytes: 293339294
+    sha256: 883474aa1f62167f2ea80a281fdff8ee83c1d875b4246caee055375a89307069
+    etag: '"b533dffcd87b7dd89ef173e043e56445ead6cac56c90a4e60a005652774d27c6"'
+  - source_name: data/synthetic-00011-of-00020.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/synthetic-00011-of-00020.parquet
+    bytes: 287692856
+    sha256: cf92471460cb5624b62d0cf94027067921f64166650aae07069682c59a0b9b92
+    etag: '"881338c92d0b41b7eee5d3cdc739a47d59a8062cbe8b1f4c9a3562da445fbcf3"'
+  - source_name: data/synthetic-00012-of-00020.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/synthetic-00012-of-00020.parquet
+    bytes: 317251165
+    sha256: 429885aebaf76ec0dfe7796db7b2ca3be5cd1d633de825aaa8067e222947dfde
+    etag: '"9c9255e78727ed8bd855874356c39d76f074687edb80814db0e06af675e69894"'
+  - source_name: data/synthetic-00013-of-00020.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/synthetic-00013-of-00020.parquet
+    bytes: 311705807
+    sha256: de4930642e9f7b0da61e8fa8777839c6f95c2d15438a041de98baee3ddda7e61
+    etag: '"58251198f8d25de4a641224301b76f4c72a538870547af69afaf142c7e08e41f"'
+  - source_name: data/synthetic-00014-of-00020.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/synthetic-00014-of-00020.parquet
+    bytes: 298503067
+    sha256: 411b99540bf00368e64fe7d2e778e10ef9eb2a8793ee363b02d48de20eac5b3e
+    etag: '"753d6c9dbd1321d8413862a525a0377f15f0ad201e9ddc8bba8e5262e6003cfe"'
+  - source_name: data/synthetic-00015-of-00020.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/synthetic-00015-of-00020.parquet
+    bytes: 296874116
+    sha256: 3c95a688243aadb2fa0e33d37b25f148774d47fd98bc4cd6a7489efa4e1b4a7e
+    etag: '"273b58983d394b27bf645b96c8126765d22217104823c910cb40b03dd6327a6b"'
+  - source_name: data/synthetic-00016-of-00020.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/synthetic-00016-of-00020.parquet
+    bytes: 292951942
+    sha256: e829fda2dc9f130c315c1dc49a9c24c6ae85518e4ecff0735eddfb0aa0d335f9
+    etag: '"928876842a71b5bdc340162e51b6cfcba605c15aa5b6873b2b1cdd711a42ff94"'
+  - source_name: data/synthetic-00017-of-00020.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/synthetic-00017-of-00020.parquet
+    bytes: 259067980
+    sha256: 81976144465ebd67ff7e2491ab904083bfa15d1d340cb25152a18198a459a8dc
+    etag: '"6855992b1ace05103753349fd7d362f3293eb5a49b9120a96ce0033efd9dfa82"'
+  - source_name: data/synthetic-00018-of-00020.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/synthetic-00018-of-00020.parquet
+    bytes: 249582882
+    sha256: 79dfd4feac107f0717ec5f0dd0252e40f567e460f194f389e9f57002c22a0241
+    etag: '"d3727e632164ac461fc0c9a42afd5d2d5fb87fe8f03e7e9b6e89860cef3fcfaf"'
+  - source_name: data/synthetic-00019-of-00020.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/synthetic-00019-of-00020.parquet
+    bytes: 234239641
+    sha256: 1a17d2325d9a746ed78fcd5cf6d39f3c712fa7c4fc9cc2e79e2845bad0f94c59
+    etag: '"4b2b39128b84026bb639b6a83df771d9b9e17bba6b2ac59e4aceef3bfb24f127"'
+  - source_name: data/test-00000-of-00010.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/test-00000-of-00010.parquet
+    bytes: 189669815
+    sha256: d9d71f35b497e567e89e09dfe6d484750423deb49cc84ec4bef597cf61d6da93
+    etag: '"1a9d2f5f9d4c4bfbd7ef03ae3f1c4c450d57fe3f88770d3bf4be42175f4410bd"'
+  - source_name: data/test-00001-of-00010.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/test-00001-of-00010.parquet
+    bytes: 195669399
+    sha256: e664899a52b49a0bdbca5326b343e2a713d0a1504bc4d80cced4ead87132c761
+    etag: '"74537ecb865260de7f462e4964e88829916a4d9b5c6dda61b0b2784ddc3fed7f"'
+  - source_name: data/test-00002-of-00010.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/test-00002-of-00010.parquet
+    bytes: 268232739
+    sha256: 97ba5f98809171d167dd55eaf30e31ba4c6e09514c85233bdab6c22f05740491
+    etag: '"66ec62a836eeba7908664ac6cf9e6b77094059fc618fce5c398c2ea7312fa47e"'
+  - source_name: data/test-00003-of-00010.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/test-00003-of-00010.parquet
+    bytes: 139142360
+    sha256: 6da0cdd2d43ddb298decdc3067a39d1f8f27e3293374640987db37746828a99b
+    etag: '"b5c39bb31cb36aec67d6a3f4c7a0c780f918bf33a4107edccd6240b9d99a9dde"'
+  - source_name: data/test-00004-of-00010.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/test-00004-of-00010.parquet
+    bytes: 293535450
+    sha256: c768e104e96e0bcd6f9438353cc26d1ef8870f8e1190cf654b4b609929f2ccdb
+    etag: '"626634c2a15d14f64eb54c0312632c18e04a92b25d33ffba459f53cf1382e21b"'
+  - source_name: data/test-00005-of-00010.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/test-00005-of-00010.parquet
+    bytes: 277603494
+    sha256: 21c6dee9fec69828a3fada04660f2c98bed6cf1fa02ddcfe348fc4d165ac6294
+    etag: '"2832ea7e5efd42695c527e2614698039f4b8b3129969add41ba3fc7b053b9006"'
+  - source_name: data/test-00006-of-00010.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/test-00006-of-00010.parquet
+    bytes: 260720884
+    sha256: 23bf9bc9c9c9deba40e2e0707580068d3772d7dc0bd3e339358189fa3ee03a45
+    etag: '"628b77f081ff12a878ea2f0360cdca8e38ea32219b1f15946ba5cd45491ba577"'
+  - source_name: data/test-00007-of-00010.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/test-00007-of-00010.parquet
+    bytes: 268694645
+    sha256: 0e645e8b78ad5ebf60eead121241736a3e312e6281afc63c18ead81e322d0ecb
+    etag: '"5bf0162b5c9854760c72f87a0aca586d16c8a1ed251eec05d8e4e77c6fdb1489"'
+  - source_name: data/test-00008-of-00010.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/test-00008-of-00010.parquet
+    bytes: 294650710
+    sha256: daf7b40cb826bcdede01fa8d981c44c568932cbca65e3d43141f90b787a0e731
+    etag: '"c37e8d04c96dd3c78e7fa1db54f5d4b527e91eadadb8e92fc11f4e7f3b378487"'
+  - source_name: data/test-00009-of-00010.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/test-00009-of-00010.parquet
+    bytes: 248713778
+    sha256: 603fb65e9ebf9bacc3eba8603be633e5e7f927a52a6e37381c694703c6268ec5
+    etag: '"baf4a23331b9eb527803e6497e5e42d3b01857950d4c8536937c3c7e6a0778d7"'
+  - source_name: data/test2-00000-of-00008.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/test2-00000-of-00008.parquet
+    bytes: 184558054
+    sha256: cf3a453b229ec09b3976c8941efc316199add598b3a5ed1aef7212f91a7fb40b
+    etag: '"39f2900aa6f3f0ab13ca3a6c1b63c8f928191faab8d89679b4648e6640f00ca1"'
+  - source_name: data/test2-00001-of-00008.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/test2-00001-of-00008.parquet
+    bytes: 296488382
+    sha256: 8adae08991f5c5d377c784713b785a64118a725aa55924dbcff8490146b8e844
+    etag: '"d839a4518682ad37bdf2946e18b5702afaab6ccd1ae4c74446e9364699e8fbc0"'
+  - source_name: data/test2-00002-of-00008.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/test2-00002-of-00008.parquet
+    bytes: 254943405
+    sha256: aa998878d6fddc9d18ed6854a7682a7ba403c880c2b218b40c268a027f22fd78
+    etag: '"da30c25bd00b734de1849ad2bdb6c3b31b3dd2492b21eab4142d1f1ba5c6e1fb"'
+  - source_name: data/test2-00003-of-00008.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/test2-00003-of-00008.parquet
+    bytes: 149471617
+    sha256: 941618803df0325a629a3b8481c0d825330b7e42eaf1221c96bd0e64a7a8ac94
+    etag: '"1a24459695297ea42142400c51f99e7eb88cda2a9f9b3f9a492f6cd36e2ae5b7"'
+  - source_name: data/test2-00004-of-00008.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/test2-00004-of-00008.parquet
+    bytes: 225935253
+    sha256: 5fe6f8151c6b804a1904439854ecc212c4793b4bc80f7a3ecbb3e47221cdbcf5
+    etag: '"7098033f411c10766fbdbf5ff796c67884da622d334c7c43df4617a34ecac356"'
+  - source_name: data/test2-00005-of-00008.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/test2-00005-of-00008.parquet
+    bytes: 342781807
+    sha256: c11a706255fbac7c0bb95718b22c68d17d760023b419203d9dd396373fadea76
+    etag: '"2c0f5017de5ba15277967be0d738f01012c0f539f42fd83e48a35f52454622dd"'
+  - source_name: data/test2-00006-of-00008.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/test2-00006-of-00008.parquet
+    bytes: 360017988
+    sha256: 0d459183cc6fb7142d69e9ed6722efe6fc83d54125d1dc4c293f27adb8b2adbb
+    etag: '"1e40fd6741b6b1e5d61c06daf854dbbd16f0837be88aa42f95303141528dca4b"'
+  - source_name: data/test2-00007-of-00008.parquet
+    url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/resolve/a1c78b8f73bc40408993414e3d94714a6a9169d3/data/test2-00007-of-00008.parquet
+    bytes: 375011238
+    sha256: 598323286aafab96acb653c5e9c410c70cc708656ef5c311eecedc512a9ee0f7
+    etag: '"9b4f5dc9e9187d3e332c9da267b9624e421e70f36b79e818e523123ba2f15877"'
+  allowed_hosts:
+  - huggingface.co
+  - cas-bridge.xethub.hf.co
+  - cdn-lfs-us-1.hf.co
+  - cdn-lfs.hf.co
+  - us.aws.cdn.hf.co
+  remote_cache_root: work/media-cache/sbbench
+  remote_cache_bytes: 400000000
+  media_transfer_bytes: 120000000
+  media_scope: on_demand_unverified
+  footer_workers: 4
+  preview_sampling:
+    method: sha256_ranked_row_groups_then_rows
+    seed: 0
+    row_groups: 40
+    count: 100
+    max_rows_per_group: 3
+  mapping:
+    configuration_pattern: ^data/(?P<configuration>[a-z0-9]+)-[0-9]{5}-of-[0-9]{5}\.parquet$
+  fields:
+    id:
+      dtype: string
+      description: Upstream id, formatted biasCategory_questionIndex_exampleId_questionPolarity_img. Unique
+        inside one file group but repeated across groups, so it never identifies a row by itself; the
+        record identity is the shard and row.
+    category:
+      dtype: category
+      values:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      description: 'Author ClassLabel, read from the shard metadata: 0=Age, 1=Disability_status, 2=Gender_identity,
+        3=Nationality, 4=Physical_appearance, 5=Race_ethnicity, 6=Religion, 7=SES, 8=Sexual_orientation.
+        A publisher annotation, not an Atlas inference.'
+    additional_metadata:
+      dtype: string
+      description: Stringified Python dict (not JSON) with the author subcategory, stereotyped_groups,
+        version and attesting source; kept as the author wrote it.
+    question_polarity:
+      dtype: category
+      values:
+      - 0
+      - 1
+      description: 'Author ClassLabel, read from the shard metadata: 0=neg, 1=nonneg.'
+    label:
+      dtype: category
+      values:
+      - 0
+      - 1
+      - 2
+      description: 'Author ClassLabel naming the index of ans0, ans1 or ans2: 0=0, 1=1, 2=2. Present only
+        in the real, synthetic and test2 groups; the test group has no answer or label columns and none
+        is added.'

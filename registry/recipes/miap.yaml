@@ -1,0 +1,54 @@
+release: open-images-extended-miap-native-202106
+adapter: miap
+expected_count: 100000
+scope: All 100000 native image keys and all 472186 released person boxes across train, validation and
+  test. Native person-box values, image order and annotation-row joins are preserved. Only selected preview
+  JPEGs are verified; all other original images remain unverified and are read on request.
+adapter_config:
+  media_scope: partial
+  remote_cache_root: work/media-cache/miap
+  remote_cache_bytes: 200000000
+  verify_remote_preview_media: true
+allowed_hosts:
+- storage.googleapis.com
+convert:
+  name: miap_images
+  count: 100000
+  rows_sha256: 566a62153815959e3322fc74230fa983bfe856c5563ea4e32695a64a6a8c22cb
+files:
+- source_name: open_images_extended_miap_boxes_train.csv
+  bytes: 37065903
+  sha256: 60821e497b7d327082c542c4eaa990d04744ca816498be93697eafde5ebb9529
+  url: https://storage.googleapis.com/openimages/open_images_extended_miap/open_images_extended_miap_boxes_train.csv
+  config_key: boxes_train
+  format: csv
+- source_name: open_images_extended_miap_images_train.lst
+  bytes: 1610000
+  sha256: c119b2f29ae0ef60649f795cf98d9fc4e97bba63c913a5cce23e0a720c86e9e1
+  url: https://storage.googleapis.com/openimages/open_images_extended_miap/open_images_extended_miap_images_train.lst
+  config_key: images_train
+  format: txt
+- source_name: open_images_extended_miap_boxes_val.csv
+  bytes: 2357900
+  sha256: 86ea219627891189ee9ddcf71845ba3e90a377d6589a780fa91e97bd22d4f9a9
+  url: https://storage.googleapis.com/openimages/open_images_extended_miap/open_images_extended_miap_boxes_val.csv
+  config_key: boxes_val
+  format: csv
+- source_name: open_images_extended_miap_images_val.lst
+  bytes: 207480
+  sha256: fe5b9827aeb7373723d8ca758b20b7056b8d3fb78e85a31345ae9511453a44de
+  url: https://storage.googleapis.com/openimages/open_images_extended_miap/open_images_extended_miap_images_val.lst
+  config_key: images_val
+  format: txt
+- source_name: open_images_extended_miap_boxes_test.csv
+  bytes: 7364546
+  sha256: 5012fbf0f3665be6a9bdaea69c8ceb1f503dadb2279eb51bb06ccf70d64cfe11
+  url: https://storage.googleapis.com/openimages/open_images_extended_miap/open_images_extended_miap_boxes_test.csv
+  config_key: boxes_test
+  format: csv
+- source_name: open_images_extended_miap_images_test.lst
+  bytes: 496980
+  sha256: 1709387c845e3ba09cee2477f82a2c0b0ccb2225eb8bf6a5fbe174dc7f00baf3
+  url: https://storage.googleapis.com/openimages/open_images_extended_miap/open_images_extended_miap_images_test.lst
+  config_key: images_test
+  format: txt

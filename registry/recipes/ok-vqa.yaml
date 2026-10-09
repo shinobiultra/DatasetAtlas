@@ -1,0 +1,68 @@
+release: ok-vqa-1.1
+adapter: coco_questions
+expected_count: 14055
+scope: All 14055 native ok-vqa-1.1 questions, original answers and splits, joined
+  to COCO 2014 images accessed on request. Paper-specific subsets are not inferred.
+remote_metadata_bytes: 30000000
+adapter_config:
+  dataset_kind: vqa
+  annotations:
+  - split: train
+    media_archive: train2014
+    media_prefix: train2014
+    questions_path_key: train_questions_path
+    questions_member: OpenEnded_mscoco_train2014_questions.json
+    answers_path_key: train_answers_path
+    answers_member: mscoco_train2014_annotations.json
+  - split: val
+    media_archive: val2014
+    media_prefix: val2014
+    questions_path_key: val_questions_path
+    questions_member: OpenEnded_mscoco_val2014_questions.json
+    answers_path_key: val_answers_path
+    answers_member: mscoco_val2014_annotations.json
+  mapping:
+    question: question
+    label: annotation.question_type
+  remote_archives:
+    train2014:
+      url: https://s3.amazonaws.com/images.cocodataset.org/zips/train2014.zip
+      bytes: 13510573713
+      etag: '"289af3433b84b5b8622626b10146c1bc-1611"'
+      allowed_hosts:
+      - s3.amazonaws.com
+    val2014:
+      url: https://s3.amazonaws.com/images.cocodataset.org/zips/val2014.zip
+      bytes: 6645013297
+      etag: '"3925cc4d50eb68d47bf2d6324a012d20-793"'
+      allowed_hosts:
+      - s3.amazonaws.com
+  remote_cache_root: work/media-cache/ranges
+  annotation_transfer_bytes: 30000000
+files:
+- source_name: OpenEnded_mscoco_train2014_questions.json.zip
+  url: https://okvqa.allenai.org/static/data/OpenEnded_mscoco_train2014_questions.json.zip
+  bytes: 209933
+  sha256: afae4ffb3f612b2cefcf8ba1a6b0577af628782d8132cec0fcd2a42c12394d8f
+  config_key: train_questions_path
+  format: zip
+- source_name: mscoco_train2014_annotations.json.zip
+  url: https://okvqa.allenai.org/static/data/mscoco_train2014_annotations.json.zip
+  bytes: 711437
+  sha256: 2938f601e741f1c5ee8702350719fa720e9da7a00446bf1ac189c98a573bb575
+  config_key: train_answers_path
+  format: zip
+- source_name: OpenEnded_mscoco_val2014_questions.json.zip
+  url: https://okvqa.allenai.org/static/data/OpenEnded_mscoco_val2014_questions.json.zip
+  bytes: 116271
+  sha256: 84756c5fcba1da8144c0bc1efd8a3075dc52ad5fa4aef39f56762dc578dbd58b
+  config_key: val_questions_path
+  format: zip
+- source_name: mscoco_val2014_annotations.json.zip
+  url: https://okvqa.allenai.org/static/data/mscoco_val2014_annotations.json.zip
+  bytes: 395495
+  sha256: 6ef3c4d68bea516580c2090a05b4a4ca42e4d80e5469b04ca03fcb10b64b050d
+  config_key: val_answers_path
+  format: zip
+allowed_hosts:
+- okvqa.allenai.org

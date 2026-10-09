@@ -1,0 +1,110 @@
+{
+  "datasets": [
+    {
+      "dataset": "chartqa",
+      "matched_count": 32719,
+      "record_id": "chartqa:example:f35999c7edabd080e8623b96",
+      "source_origin": {
+        "split": "train",
+        "row": 2773,
+        "file": "train_augmented_json",
+        "identity": "train_augmented:2773",
+        "group": "train_augmented"
+      },
+      "media": [
+        {
+          "asset_id": "chartqa:asset:9e6180c4ffe1273be36e6945",
+          "sha256": "8e44cbaef43749460e06aeab49d99506605429f610ea5f25b70d62f7b19addc9",
+          "bytes": 38974,
+          "size": [
+            800,
+            557
+          ]
+        }
+      ],
+      "seconds": 0.737894358000176
+    },
+    {
+      "dataset": "hatefulillusion",
+      "matched_count": 2160,
+      "record_id": "hatefulillusion:example:89380cd56d1fb80cdd6e4ed7",
+      "source_origin": {
+        "split": "hate_slangs",
+        "row": 117,
+        "file": "hate_slangs_path",
+        "identity": "hate_slangs:117",
+        "group": "hate_slangs"
+      },
+      "media": [
+        {
+          "asset_id": "hatefulillusion:asset:8c544385bae78d2d32be2751",
+          "sha256": "8b709572877219692ad1d088a6e52c9f753d6e12278fd9d7a087b7f7079094fb",
+          "bytes": 1997892,
+          "size": [
+            1024,
+            1024
+          ]
+        },
+        {
+          "asset_id": "hatefulillusion:asset:e09a8ffc5376dfbe8eda7b1b",
+          "sha256": "c2b7b9c07fb80177b62f1ebee7c4a14b7f2015801ac3b8793e62543526fe2601",
+          "bytes": 27085,
+          "size": [
+            512,
+            512
+          ]
+        }
+      ],
+      "seconds": 4.869043348999639
+    },
+    {
+      "dataset": "omnispatial",
+      "matched_count": 8431,
+      "record_id": "omnispatial:example:5644217e85c289a3e85159bb",
+      "source_origin": {
+        "split": "full",
+        "row": 5235,
+        "file": "OmniSpatial-full/data.json",
+        "identity": "full:[\"Perspective_Taking\",\"1513_1\"]",
+        "group": "full"
+      },
+      "media": [
+        {
+          "asset_id": "omnispatial:asset:da17fe1d1e74cd03e9187066",
+          "sha256": "c4ecd1c69dd8cf41a09f485f738cdebf29678d2826f416668ca4492140695239",
+          "bytes": 678299,
+          "size": [
+            640,
+            533
+          ]
+        }
+      ],
+      "seconds": 5.747700435000297
+    },
+    {
+      "dataset": "pmc-vqa",
+      "matched_count": 228948,
+      "record_id": "pmc-vqa:example:fc5e39cf062889d3f5eaee18",
+      "source_origin": {
+        "split": "test",
+        "row": 25316,
+        "file": "test_csv",
+        "identity": "test:25316",
+        "group": "test"
+      },
+      "media": [
+        {
+          "asset_id": "pmc-vqa:asset:9a9d6fde3fb2e22255d4f040",
+          "sha256": "fac08ae84236adcbbf622d62fda1f56441b50e896d321b3c581be8de23932d00",
+          "bytes": 181537,
+          "size": [
+            738,
+            492
+          ]
+        }
+      ],
+      "seconds": 7.783478873000149
+    }
+  ],
+  "all_new_datasets_have_catalogue_tiles": true
+}

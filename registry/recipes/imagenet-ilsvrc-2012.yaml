@@ -1,0 +1,14 @@
+source_url: https://huggingface.co/datasets/ILSVRC/imagenet-1k/tree/49e2ee26f3810fb5a7536bbf732a7b07389a47b5
+credential_profile: huggingface
+source_patterns:
+- data/train-*.parquet
+scope: All 1,281,167 native ILSVRC2012 training images in the pinned authorized ILSVRC
+  author release. The validation and unlabeled test populations are excluded. Native
+  source filenames and labels remain intact. This is the available full training population;
+  the citing paper learned representation and cross-validation membership remain unidentified.
+  Media remain local-only.
+adapter_config:
+  mapping: {}
+  media_scope: partial
+  remote_cache_bytes: 300000000
+expected_count: 1281167

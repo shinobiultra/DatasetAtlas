@@ -80,4 +80,17 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: source_and_terms_identified
-source_url: https://github.com/TrustAIRLab/HatefulIllusion
+- kind: implemented_source_release
+  url: https://huggingface.co/datasets/yiting/HatefulIllusion_Dataset
+  checked_on: '2026-09-23'
+  recipe: registry/recipes/hatefulillusion.yaml
+  report: reports/selective-acquisition-20260923.md
+  note: Original source release and native records exercised locally. This is not
+    a claim of human rights review or an exact paper-used subset.
+source_url: https://huggingface.co/datasets/yiting/HatefulIllusion_Dataset
+modalities:
+- image
+- text
+tasks:
+- content moderation
+- optical illusion recognition

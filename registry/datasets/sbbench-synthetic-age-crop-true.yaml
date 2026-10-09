@@ -59,9 +59,6 @@ relationships:
 - type: possible_source_for
   target: sbbench-syn-crop
   status: candidate
-- type: possible_source_for
-  target: sb-syn-crop
-  status: candidate
 evidence:
 - kind: source_audit_release
   url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_age_crop_True/tree/43769ef07d9388ebb4c3dc74b548eea615d0c93b
@@ -76,3 +73,10 @@ evidence:
   adapter_file_sha256: 41701bca3742c6151dc7b666a95eeb545bf8890c3d15f9149e5ca973ba6c1926
   source_rows: 511
   scope: Full author synthetic configuration; no public media approval.
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in at least
+    one record. Not inferred from the name or description.'
+modalities:
+- image

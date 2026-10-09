@@ -115,15 +115,18 @@ def test_snapshot_identity_checksum_root_and_count_enforced(tmp_path):
 
 
 def test_interrupt_hook_reaches_active_connection(tmp_path):
+    from threading import Event
     snapshot = make_snapshot(tmp_path, count=1)
     class Active:
         called = False
         def interrupt(self):
             self.called = True
     active = Active()
-    snapshot._active.add(active)
+    cancelled=Event()
+    snapshot._active[active]=cancelled
     snapshot.interrupt()
     assert active.called
+    assert cancelled.is_set()
 
 def test_query_time_budget_cancels_and_reader_remains_usable(tmp_path):
     snapshot=make_snapshot(tmp_path,count=10_050)
@@ -249,3 +252,105 @@ def test_seeded_sampling_matches_pack_and_pages(tmp_path,method):
     expected_second=query_pack(pack,query.model_copy(update={"cursor":expected.cursor}))
     assert [r.id for r in second.records]==[r.id for r in expected_second.records]
     assert second.cursor is None and len(second.records)==18
+
+
+def test_large_native_record_opt_in_and_byte_bounded_pagination(tmp_path):
+    # Three records fit the count limit but exceed the response byte limit.
+    payload='é'*3_000_000
+    records=[Record(id=f'toy:example:{i}',dataset_id='toy',release_id='r1',snapshot_id='s1',
+                    text=payload,source={'native':payload}) for i in range(3)]
+    with pytest.raises(ValueError,match='2000000 byte bound'):
+        build_parquet_snapshot(records,[],tmp_path/'default',root=tmp_path,dataset_id='toy',release_id='r1',snapshot_id='s1',expected_count=3)
+    assert not (tmp_path/'default').exists()
+    path=tmp_path/'large'
+    build_parquet_snapshot(records,[],path,root=tmp_path,dataset_id='toy',release_id='r1',snapshot_id='s1',expected_count=3,population_scope='complete',max_record_bytes=16_000_000)
+    snapshot=ParquetSnapshot(tmp_path,path)
+    query=Query(snapshot_id='s1',population_scope='complete',limit=500)
+    first=snapshot.query(query)
+    assert first.returned_count==2 and first.matched_count==3 and first.cursor
+    assert any('32 MB' in warning for warning in first.warnings)
+    assert sum(len(row.model_dump_json().encode()) for row in first.records)<32_000_000
+    last=snapshot.query(query.model_copy(update={'cursor':first.cursor}))
+    assert last.returned_count==1 and last.cursor is None
+    assert [r.id for r in first.records+last.records]==[r.id for r in records]
+    assert all(r.text==payload and r.source['native']==payload for r in first.records+last.records)
+    with pytest.raises(ValueError,match='1..16 MB'):
+        build_parquet_snapshot([],[],tmp_path/'invalid',root=tmp_path,dataset_id='toy',release_id='r1',snapshot_id='s1',expected_count=0,max_record_bytes=16_000_001)
+
+
+def test_wide_native_pages_sort_keys_within_query_memory_budget(tmp_path):
+    # Native envelopes must not be retained in the sort's top-k working set.
+    payload='x'*500_000
+    records=[r.model_copy(update={'source':{**r.source,'native':payload}}) for r in rows(256)]
+    path=tmp_path/'wide'
+    build_parquet_snapshot(records,FIELDS,path,root=tmp_path,dataset_id='toy',release_id='r1',snapshot_id='s1',expected_count=256,population_scope='complete')
+    snapshot=ParquetSnapshot(tmp_path,path,memory_mb=64,threads=1)
+    query=Query(snapshot_id='s1',population_scope='complete',sort=[{'field_id':'source.score','direction':'desc'}],limit=60)
+    first=snapshot.query(query)
+    assert first.matched_count==256 and first.returned_count==60 and first.cursor
+    assert [r.source['score'] for r in first.records]==list(range(255,195,-1))
+    assert all(r.source['native']==payload for r in first.records)
+    second=snapshot.query(query.model_copy(update={'cursor':first.cursor}))
+    assert [r.source['score'] for r in second.records]==list(range(195,135,-1))
+    with pytest.raises(ValueError,match='memory budget'):
+        ParquetSnapshot(tmp_path,path,memory_mb=64,threads=4).query(query)
+
+
+def test_interrupt_between_key_selection_and_payload_fetch_is_not_lost(tmp_path,monkeypatch):
+    from dataset_atlas.queries import parquet
+    snapshot=make_snapshot(tmp_path)
+    snapshot.manifest['max_record_bytes']=50_000_000  # wide records take the two-stage path whose gap this test interrupts
+    original=parquet.duckdb.connect
+    fired=False
+    class Hook:
+        def __init__(self,connection):self.connection=connection;self.sql=''
+        def __getattr__(self,name):return getattr(self.connection,name)
+        def execute(self,sql,*args,**kwargs):
+            self.sql=sql;self.connection.execute(sql,*args,**kwargs);return self
+        def fetchall(self):
+            nonlocal fired
+            result=self.connection.fetchall()
+            if self.sql.startswith('SELECT source."id" FROM ') and not fired:
+                fired=True;snapshot.interrupt()
+            return result
+    monkeypatch.setattr(parquet.duckdb,'connect',lambda *args,**kwargs:Hook(original(*args,**kwargs)))
+    with pytest.raises(ValueError,match='Query cancelled'):
+        snapshot.query(Query(snapshot_id='s1',population_scope='complete',limit=30))
+    assert fired
+
+
+def test_exceeding_the_prepared_data_limit_says_how_far_it_got_and_what_to_change(tmp_path):
+    import pytest
+    from dataset_atlas.models import FieldDescriptor, Record
+    from dataset_atlas.queries.parquet import build_parquet_snapshot
+    records = [Record(id=f'r{i}', dataset_id='d', release_id='r', snapshot_id='s', text='x' * 2000, source={'n': i}) for i in range(400)]
+    with pytest.raises(ValueError, match=r'of 400 records fit within the 2,000-byte prepared-data limit.*raise the prepared-data limit'):
+        build_parquet_snapshot(iter(records), [FieldDescriptor(id='source.n', name='n', dtype='number')], tmp_path / 'snap', root=tmp_path,
+                               dataset_id='d', release_id='r', snapshot_id='s', expected_count=400, population_scope='complete', max_bytes=2_000)
+
+
+def test_a_snapshot_is_hashed_once_and_a_changed_file_is_hashed_again(tmp_path,monkeypatch):
+    from dataset_atlas.queries import parquet
+    make_snapshot(tmp_path)
+    directory=next(tmp_path.rglob('manifest.json')).parent
+    calls=[]
+    real=parquet._sha256
+    monkeypatch.setattr(parquet,'_sha256',lambda path:(calls.append(path),real(path))[1])
+    parquet.ParquetSnapshot(directory.parent,directory)
+    assert (directory/'verified.stamp').exists()
+    first=len(calls)
+    parquet.ParquetSnapshot(directory.parent,directory)
+    assert len(calls)==first, 'the stamp must replace a second full hash'
+    stamp=directory/'verified.stamp'
+    stamp.write_text('{"sha256":"0","size":1,"mtime_ns":1}')
+    parquet.ParquetSnapshot(directory.parent,directory)
+    assert len(calls)==first+1, 'a stamp that no longer matches the file is ignored'
+
+
+def test_an_unsorted_page_follows_the_snapshot_row_order_and_a_sorted_page_still_sorts(tmp_path):
+    snapshot=make_snapshot(tmp_path)
+    plain=snapshot.query(Query(snapshot_id='s1',population_scope='complete',limit=100))
+    again=snapshot.query(Query(snapshot_id='s1',population_scope='complete',limit=100))
+    assert [r.id for r in plain.records]==[r.id for r in again.records]
+    ordered=snapshot.query(Query(snapshot_id='s1',population_scope='complete',limit=100,sort=[{'field_id':'id','direction':'desc'}]))
+    assert [r.id for r in ordered.records]==sorted((r.id for r in plain.records),reverse=True)

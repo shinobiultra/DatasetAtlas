@@ -1,0 +1,22 @@
+release: 4f887af7970a06fc0cd3adaa1d0b368547d6a1d0
+adapter: classic_vision
+source_url: https://github.com/google/dreambooth
+expected_count: 158
+scope: All 158 images from 30 native subject folders, their 15 class names, source
+  attribution text and released prompt templates. Documentation images excluded; no
+  generated evaluation images or synthetic replacements.
+files:
+- url: https://codeload.github.com/google/dreambooth/zip/4f887af7970a06fc0cd3adaa1d0b368547d6a1d0
+  sha256: b9e387a89713fb658b8560ce1c9ac4b0185e40da75fde071cb41e5602171fa5b
+  bytes: 112065318
+  config_key: path
+  source_name: dreambooth.zip
+  format: zip
+allowed_hosts:
+- raw.githubusercontent.com
+- codeload.github.com
+adapter_config:
+  dataset_kind: dreambooth
+  mapping:
+    question: question
+  archive_prefix: dreambooth-4f887af7970a06fc0cd3adaa1d0b368547d6a1d0/

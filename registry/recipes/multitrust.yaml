@@ -1,0 +1,949 @@
+# MultiTrust (thu-ml/MultiTrust), gated auto: the researcher accepts the terms on their own Hugging Face account and every read uses that
+# account's token through the "huggingface" credential profile (never stored here). 62 query files (4.1 MB) are pinned below by URL at the fixed
+# revision, byte length and SHA-256 (all are plain Git blobs, so the SHA-256 is computed from the file and its Git blob SHA-1 was checked against the
+# Hub listing). The 10,464 images are pinned by Hub LFS SHA-256 (one non-LFS file by Git blob SHA-1) in registry/media/multitrust.json,
+# whose own SHA-256 is pinned in adapter_config. Images stay remote; only the 100 preview originals are kept locally.
+# No source_url on purpose: a huggingface.co/datasets/<repo> URL would send `atlas previews fetch` to the sampled route, which builds no complete index.
+# snapshot_id = "multitrust-<revision[:12]>-q<number of query files>-<first 16 hex of sha256 over these lines joined by newline>": the sorted lines
+# source_name:bytes:sha256 of every file under `files`, then media_inventory:<sha256 of the inventory file>, tasks:<sha256 of the canonical JSON
+# (sorted keys, no spaces, UTF-8) of adapter_config.tasks>, and preview_sampling:<canonical JSON of adapter_config.preview_sampling>. No budget is part of it.
+# preview_media_transfer_bytes is the exact sum of the pinned sizes of every image of the 250 seeded candidates (50 per aspect, stratified by `preview_sampling.stratify_by`) the worker may open to find 100 that decode, 20 per aspect;
+# it is an upper bound computed from the pins, not a measurement (the measured transfer is in reports/multitrust-live-verification-20261009.json).
+release: multitrust-84dc74754959e9f52b67c5185700f4f7fcd8c4df
+snapshot_id: multitrust-84dc74754959-q62-ebc859260cedb327
+adapter: multitrust
+credential_profile: huggingface
+expected_count: 11512
+description: 'MultiTrust (author release thu-ml/MultiTrust): every query row of the 50 member tasks in 62 pinned query files at one revision, across the five aspects truthfulness, safety, robustness, fairness and privacy. Each record is one query row with its task, aspect and native fields; images stay remote and are fetched one at a time, checked against a pinned inventory, and 100 preview originals are kept locally.'
+scope: 'Every row of the query files the authors loaders read from the gated Hugging Face dataset thu-ml/MultiTrust at revision 84dc74754959e9f52b67c5185700f4f7fcd8c4df (10,549 files, 11.31 GB; the card states CC BY-SA 4.0 with an access agreement for non-commercial academic use and no redistribution). It is a suite of heterogeneous tasks, not one image collection: truthfulness 25 tasks, safety 7, robustness 6, fairness 5, privacy 7. Rows are joined to images only by a key in the query file, a derived key or an ordinal the authors loader applies; images that the loaders pair at run time (random pick, os.listdir order, cross product), image-only tasks and shared pools are listed in reports/multitrust-task-inventory-20261009.json and not attached to a row. The enron-email k-shot table is not a query file and is not indexed. This is the authors current release, not the population or the transfer-attack examples a citing paper generated with the framework.'
+resource_limits:
+  max_wall_seconds: 14400
+  max_cpu_seconds: 7200
+allowed_hosts:
+- huggingface.co
+- cas-bridge.xethub.hf.co
+- cdn-lfs-us-1.huggingface.co
+- cdn-lfs.huggingface.co
+- cdn-lfs-us-1.hf.co
+- cdn-lfs.hf.co
+- us.aws.cdn.hf.co
+- eu.aws.cdn.hf.co
+preview_media_transfer_bytes: 276386066
+files:
+- source_name: fairness/preference.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/fairness/preference.json
+  bytes: 153340
+  sha256: a30b713b926e08fce8ea56bf4a96af11ea8499498e04ea7bc532b1884b0539a5
+  format: json
+- source_name: fairness/profess_prediction.csv
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/fairness/profess_prediction.csv
+  bytes: 12441
+  sha256: c6e59bf4728348c19c189d79f4235b6b010c8ff12abc5adc72ff1a275017708e
+  format: csv
+- source_name: fairness/stereo_classification.csv
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/fairness/stereo_classification.csv
+  bytes: 34633
+  sha256: 08f89cf5aa0b7c32beb4a66eedf46f1b77d7b7d6c58a242a5f74fbbaed0de924
+  format: csv
+- source_name: fairness/stereo_query.csv
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/fairness/stereo_query.csv
+  bytes: 26118
+  sha256: a4e84dddea600d10c2b26298b13ae8025ed133ec2b88be5c8e2d9bb2b88aab99
+  format: csv
+- source_name: fairness/stereo_statement.csv
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/fairness/stereo_statement.csv
+  bytes: 19424
+  sha256: 4afe9a01b05b5e01bb61315e51263b27ee9aca7b5eaebcfc512f363d1b1d452c
+  format: csv
+- source_name: privacy/celeb/celebrities.csv
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/privacy/celeb/celebrities.csv
+  bytes: 14582
+  sha256: 7e311d8d7b389128a6975bc1d91796b41d0ad16439895872d3cba6f7d6943828
+  format: csv
+- source_name: privacy/confaide/labels.txt
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/privacy/confaide/labels.txt
+  bytes: 667
+  sha256: cd573da5a542a4d92f3a81ed5b09b66cc25a6ae0ea656aaaf754af43304bbb34
+  format: txt
+- source_name: privacy/confaide/prompts.txt
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/privacy/confaide/prompts.txt
+  bytes: 41034
+  sha256: a869099fab404cde9dd50f23c20668063021afa8f080e190b348a5a4da14b979
+  format: txt
+- source_name: privacy/vispr/categorized/image_annotations.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/privacy/vispr/categorized/image_annotations.json
+  bytes: 31635
+  sha256: 71248b8b02dde1d0c7f72dca459a7abe0c5024d1f50417c929055fb6e8026455
+  format: json
+- source_name: privacy/vispr/sampled_vispr_test2017.jsonl
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/privacy/vispr/sampled_vispr_test2017.jsonl
+  bytes: 108723
+  sha256: 96930a1e1084d85368b4b4ea86e614d40801dc53cc4086578434665a04e646d4
+  format: jsonl
+- source_name: privacy/vispr/vispr_question_gpt4_generated_chosen.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/privacy/vispr/vispr_question_gpt4_generated_chosen.json
+  bytes: 232653
+  sha256: ed5a2df078539c029a165ba55dde852e4a61c363444224f3ea92e5dacb1a9eea
+  format: json
+- source_name: privacy/vizwiz-priv/Annotations/Vizwiz-Priv-QA-Private.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/privacy/vizwiz-priv/Annotations/Vizwiz-Priv-QA-Private.json
+  bytes: 810158
+  sha256: 0297ac5afd1268807be945f33086a659ec7d6bc7c62815b367b5131d3f2c2804
+  format: json
+- source_name: privacy/vizwiz-priv/Annotations/Vizwiz-Priv-Recognition.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/privacy/vizwiz-priv/Annotations/Vizwiz-Priv-Recognition.json
+  bytes: 657385
+  sha256: 065cbd989e83a75b61563be051318c0e8d4f5d316e6d323b8c54dc6f117f9acd
+  format: json
+- source_name: robustness/adv_nips/label.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/robustness/adv_nips/label.json
+  bytes: 8906
+  sha256: 9f9c5431e836734d1c0bd3b6f8e3948a80baaff8c656e207b7f7ee3c11bf298e
+  format: json
+- source_name: robustness/advglue/label.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/robustness/advglue/label.json
+  bytes: 369786
+  sha256: 29c3bf3fb7a027b7397c25b1fb9805614f291e3f75d9521339776efb4dc14108
+  format: json
+- source_name: robustness/advglue_plus/label.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/robustness/advglue_plus/label.json
+  bytes: 271680
+  sha256: 5fe73aa128608ebc812276ae8369f478535fa3cae0e68d328d5090d9a4fa431d
+  format: json
+- source_name: robustness/ood-artistic/label/cartoon.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/robustness/ood-artistic/label/cartoon.json
+  bytes: 8696
+  sha256: caf33caed3fe6e6418e7684c34d9f9ae5e4ea4b2a17cc2822f560a17e8643bd1
+  format: json
+- source_name: robustness/ood-artistic/label/handmake.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/robustness/ood-artistic/label/handmake.json
+  bytes: 8722
+  sha256: 926467b80c8fc64dc08ce0b6ac22efbe24ee2a9da0cf9b3cbb6147e0dcb79109
+  format: json
+- source_name: robustness/ood-artistic/label/painting.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/robustness/ood-artistic/label/painting.json
+  bytes: 8627
+  sha256: c81689ff671049d215a8c27d761eff4aba5e7891180889800f2d86e431a98c6d
+  format: json
+- source_name: robustness/ood-artistic/label/sketch.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/robustness/ood-artistic/label/sketch.json
+  bytes: 8503
+  sha256: 69a8b70619ae9bc8bb1e6f66d31ada03737f6541ce79a9c6e78201b72750d538
+  format: json
+- source_name: robustness/ood-artistic/label/tattoo.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/robustness/ood-artistic/label/tattoo.json
+  bytes: 8496
+  sha256: b847ab302af5957583cd3ff9898648866da31e410fb4f3b3faa96d7dfa2dc1fb
+  format: json
+- source_name: robustness/ood-artistic/label/weather.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/robustness/ood-artistic/label/weather.json
+  bytes: 8594
+  sha256: 73d90daca05e2fa2409fe658024c6f399a34abcb4cc0b55552de7f21cfec9ce8
+  format: json
+- source_name: robustness/ood-sensor/label/ct.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/robustness/ood-sensor/label/ct.json
+  bytes: 18929
+  sha256: d6827d56db7da4f6e64f29d84098c42a7a20a41283de6a04a1bcfeb0d74ed8de
+  format: json
+- source_name: robustness/ood-sensor/label/driving.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/robustness/ood-sensor/label/driving.json
+  bytes: 59332
+  sha256: 3d5c1db728b9af56b09e65484f3a0255b2b2621eb7708deb8cad97920e4bc15b
+  format: json
+- source_name: robustness/ood-sensor/label/hxray.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/robustness/ood-sensor/label/hxray.json
+  bytes: 19640
+  sha256: 2d7b6fa94468889e429d9cca664ba29d7578bce3680dc3538d1570d074f4693e
+  format: json
+- source_name: robustness/ood-sensor/label/infrared.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/robustness/ood-sensor/label/infrared.json
+  bytes: 37854
+  sha256: fb33e3913aaabd8b5614c0162fb3b56ec3802c3ec9c492aeec8c0a2e45a6c140
+  format: json
+- source_name: robustness/ood-sensor/label/lxray.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/robustness/ood-sensor/label/lxray.json
+  bytes: 45033
+  sha256: 7d0f1ec3b786ca863b73459b1b4089516ecfbbdf7d854d2128e4e4b223087221
+  format: json
+- source_name: robustness/ood-sensor/label/mri.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/robustness/ood-sensor/label/mri.json
+  bytes: 18915
+  sha256: d3ec80e2751bd3624061bf3e436914bdfce8854fa1f528c051dea9feb9419769
+  format: json
+- source_name: robustness/ood-sensor/label/remote.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/robustness/ood-sensor/label/remote.json
+  bytes: 32542
+  sha256: 478ca22df26834be7d409c2466264db88bee4ab5641e0592aac2d793440846df
+  format: json
+- source_name: robustness/ood-text/label.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/robustness/ood-text/label.json
+  bytes: 147801
+  sha256: d809014f8380a4af7443acfbe4c3cd20df7b5b710d014407a5b8e07f9790171b
+  format: json
+- source_name: safety/SafeBench_selected/safebench_selected.csv
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/safety/SafeBench_selected/safebench_selected.csv
+  bytes: 31120
+  sha256: e134937e9539d150f0fd4e1b702c74a126189b61bc573424707dcf5d12393c61
+  format: csv
+- source_name: safety/crossmodal-jailbreak/text_jailbreak.csv
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/safety/crossmodal-jailbreak/text_jailbreak.csv
+  bytes: 60957
+  sha256: c03552f35a778f9e749e2db1fafcb9dd01f83fe9431eb93eb0c5ca277b59fec1
+  format: csv
+- source_name: safety/mm-safety-bench-selected/mm-safety-bench-selected.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/safety/mm-safety-bench-selected/mm-safety-bench-selected.json
+  bytes: 61378
+  sha256: a07b8ad4f04e803f7d00e8a2360112e671ad019964026e24e631c9eec82e6bd5
+  format: json
+- source_name: safety/real_toxicity_prompt/prompts_select.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/safety/real_toxicity_prompt/prompts_select.json
+  bytes: 6366
+  sha256: 509a9808a78d07f2235ced897a1af16aef4fd67326e6c96e4f2c5a201cc25744
+  format: json
+- source_name: safety/typographic_jailbreak/behavior_graph.csv
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/safety/typographic_jailbreak/behavior_graph.csv
+  bytes: 234932
+  sha256: 10f15b909b07fd4f2a869a6d51a517e96b8b9fa8348c593218308a2b2f1ab099
+  format: csv
+- source_name: safety/typographic_jailbreak/prompt_and_behavior_graph.csv
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/safety/typographic_jailbreak/prompt_and_behavior_graph.csv
+  bytes: 6137
+  sha256: c1452b56d95111fc15a76454122acd506fe08bab4444d427311b55b2ec10e764
+  format: csv
+- source_name: safety/typographic_jailbreak/prompt_graph.csv
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/safety/typographic_jailbreak/prompt_graph.csv
+  bytes: 8304
+  sha256: a8fb25c1f6d4a1b798624abea3937b07fd808b07f4451848388dcda3d4654371
+  format: csv
+- source_name: truthfulness/query_advanced/query_d_causality.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_advanced/query_d_causality.json
+  bytes: 9085
+  sha256: 628be77ee15fb2cfb4cc7cfc5a77e3da27e24a55555d71c35adaa06c74e15b1e
+  format: json
+- source_name: truthfulness/query_advanced/query_d_code.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_advanced/query_d_code.json
+  bytes: 6691
+  sha256: 84b0ec7305d765aa5f2674913258c52e2801be58092f7379cd539728708bd3ea
+  format: json
+- source_name: truthfulness/query_advanced/query_d_compare.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_advanced/query_d_compare.json
+  bytes: 16691
+  sha256: 0956be34435f1e8286100c7198f46b8da8c699fbf6639d2400a6e218f3c6e54a
+  format: json
+- source_name: truthfulness/query_advanced/query_d_daily.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_advanced/query_d_daily.json
+  bytes: 9189
+  sha256: 714b222746c1fc11647fd87c4b854c228a8d0e7bf846dab1613dfc18c0d815e1
+  format: json
+- source_name: truthfulness/query_advanced/query_d_math.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_advanced/query_d_math.json
+  bytes: 12949
+  sha256: f9995c874d78948e67a808a16a8b8356b5aad90e112e69c195e2820e7dbe830b
+  format: json
+- source_name: truthfulness/query_advanced/query_d_spatial.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_advanced/query_d_spatial.json
+  bytes: 9170
+  sha256: a0466b80b41392cc9b243b37e6ca51126cec3c6d262a01b96e90a7b91f7aaafc
+  format: json
+- source_name: truthfulness/query_advanced/query_d_temporal.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_advanced/query_d_temporal.json
+  bytes: 8089
+  sha256: ff62f6db16422829189576bc59e9c5a7bb22612f990454193cc5c648c32d1bc6
+  format: json
+- source_name: truthfulness/query_advanced/query_d_traffic.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_advanced/query_d_traffic.json
+  bytes: 9295
+  sha256: a5ee2b72059e09d8015980a355c72087d37cd84f59b9c6bd96b26797da45031e
+  format: json
+- source_name: truthfulness/query_advanced/query_d_translate.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_advanced/query_d_translate.json
+  bytes: 8385
+  sha256: b59ac751213729f7d0c79c8b2193195fe7ecc077b6881197e8d4eeca82fa6546
+  format: json
+- source_name: truthfulness/query_basic/query_d_attribute.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_basic/query_d_attribute.json
+  bytes: 28129
+  sha256: 4449a5f1d4d7746522e9ad9fd2e8f0d63e959cc80aa868a4f8cd6ed4affef3b4
+  format: json
+- source_name: truthfulness/query_basic/query_d_existence.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_basic/query_d_existence.json
+  bytes: 33177
+  sha256: 01090112af2a51e941651dea4d0bd7c4734c94eb43662592c3759297803274ea
+  format: json
+- source_name: truthfulness/query_basic/query_d_scene.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_basic/query_d_scene.json
+  bytes: 60565
+  sha256: b2268f290ba774e4e21957d3c4a44b6daad906c4c985f165c797953ba3ee6b82
+  format: json
+- source_name: truthfulness/query_basic/query_g_grounding.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_basic/query_g_grounding.json
+  bytes: 8351
+  sha256: ab87e74fd8e459278a1f9a4ec700785c36a130c9ff9122fc0a005547b6e99d77
+  format: json
+- source_name: truthfulness/query_basic/query_g_ocr.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_basic/query_g_ocr.json
+  bytes: 15464
+  sha256: abfdc212a8cb1ff35afa30033d5e6c9a1d0ac6ebbc4c5e9fce90eb139b8c3915
+  format: json
+- source_name: truthfulness/query_instruction/query_g_factual.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_instruction/query_g_factual.json
+  bytes: 35823
+  sha256: cd8bcaee3f0d2cdd96bd607f0cdecb8e10481499621813ef1fc591d4cc661e54
+  format: json
+- source_name: truthfulness/query_instruction/query_g_logic.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_instruction/query_g_logic.json
+  bytes: 7284
+  sha256: db439181c2d78b31407cacca49985f61ddd4366feccaf271e2386a6e03372473
+  format: json
+- source_name: truthfulness/query_misleading/query_d_confusion.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_misleading/query_d_confusion.json
+  bytes: 58685
+  sha256: 3dc0a9a5cfa3548f7336654d65839b21c71cd83acaab7064dda920174cc85749
+  format: json
+- source_name: truthfulness/query_misleading/query_d_contrast.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_misleading/query_d_contrast.json
+  bytes: 11397
+  sha256: 0d4f3ef5035a8a46cc06e41737c874bc8cebe39652c9e0bb8f6051dca72e58a8
+  format: json
+- source_name: truthfulness/query_misleading/query_d_dislocation.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_misleading/query_d_dislocation.json
+  bytes: 12249
+  sha256: 781a90ac7521b2b27d032f78a419b12c7035b301d1ea5fcc44d2ba4981adf3ad
+  format: json
+- source_name: truthfulness/query_misleading/query_d_mirror.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_misleading/query_d_mirror.json
+  bytes: 7921
+  sha256: 053525626aec6eee9f6228a695bcbf18120cfdac62dc9ac079cee2ef9fe3099a
+  format: json
+- source_name: truthfulness/query_misleading/query_d_painting.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_misleading/query_d_painting.json
+  bytes: 12273
+  sha256: f6424da1978ff1d230fb5869a6e0a28896a76ee476b444ec97db176df65a9a40
+  format: json
+- source_name: truthfulness/query_misleading/query_d_semantic.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_misleading/query_d_semantic.json
+  bytes: 12033
+  sha256: bc79ae6ad6c35a829b7fcd8f8078fbdca36641d9209b816168c9f5201f2f6290
+  format: json
+- source_name: truthfulness/query_misleading/query_g_mistext.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_misleading/query_g_mistext.json
+  bytes: 35823
+  sha256: e2d0624843138e595479905e86aced330b2ad69e437a4f36ef79d4eaca2c6175
+  format: json
+- source_name: truthfulness/query_text/query_g_assistance.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_text/query_g_assistance.json
+  bytes: 18175
+  sha256: ad79f39a3b7d9fd0b5a7413f570791e163af8a1ab1e606c1f33dbb47e62abd03
+  format: json
+- source_name: truthfulness/query_text/query_g_misvisual.json
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/truthfulness/query_text/query_g_misvisual.json
+  bytes: 18154
+  sha256: 5ed73ab2523d14cf58970def19655ac4da3dd7d4c6bcdbb4a827ca5bdad8cc5e
+  format: json
+adapter_config:
+  population: Query rows of the 50 MultiTrust member tasks at one pinned revision
+  tasks:
+  - task: basic_attribute
+    aspect: truthfulness
+    query_file: truthfulness/query_basic/query_d_attribute.json
+    format: json
+    media:
+    - template: truthfulness/basic_images/attribute/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - basic-attribute
+  - task: basic_object
+    aspect: truthfulness
+    query_file: truthfulness/query_basic/query_d_existence.json
+    format: json
+    media:
+    - template: truthfulness/basic_images/object/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - basic-object
+  - task: basic_scene
+    aspect: truthfulness
+    query_file: truthfulness/query_basic/query_d_scene.json
+    format: json
+    media:
+    - template: truthfulness/basic_images/scene/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - basic-scene
+  - task: basic_grounding
+    aspect: truthfulness
+    query_file: truthfulness/query_basic/query_g_grounding.json
+    format: json
+    media:
+    - template: truthfulness/basic_images/grounding/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - basic-grounding
+  - task: basic_ocr
+    aspect: truthfulness
+    query_file: truthfulness/query_basic/query_g_ocr.json
+    format: json
+    media:
+    - template: truthfulness/basic_images/ocr/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - basic-ocr
+  - task: advanced_causality
+    aspect: truthfulness
+    query_file: truthfulness/query_advanced/query_d_causality.json
+    format: json
+    media:
+    - template: truthfulness/advanced_images/causality/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - advanced-inference
+  - task: advanced_code
+    aspect: truthfulness
+    query_file: truthfulness/query_advanced/query_d_code.json
+    format: json
+    media:
+    - template: truthfulness/advanced_images/code/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - advanced-inference
+  - task: advanced_compare
+    aspect: truthfulness
+    query_file: truthfulness/query_advanced/query_d_compare.json
+    format: json
+    media:
+    - template: truthfulness/advanced_images/compare/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - advanced-inference
+  - task: advanced_daily
+    aspect: truthfulness
+    query_file: truthfulness/query_advanced/query_d_daily.json
+    format: json
+    media:
+    - template: truthfulness/advanced_images/daily/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - advanced-inference
+  - task: advanced_math
+    aspect: truthfulness
+    query_file: truthfulness/query_advanced/query_d_math.json
+    format: json
+    media:
+    - template: truthfulness/advanced_images/math/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - advanced-inference
+  - task: advanced_spatial
+    aspect: truthfulness
+    query_file: truthfulness/query_advanced/query_d_spatial.json
+    format: json
+    media:
+    - template: truthfulness/advanced_images/spatial/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - advanced-inference
+  - task: advanced_temporal
+    aspect: truthfulness
+    query_file: truthfulness/query_advanced/query_d_temporal.json
+    format: json
+    media:
+    - template: truthfulness/advanced_images/temporal/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - advanced-inference
+  - task: advanced_traffic
+    aspect: truthfulness
+    query_file: truthfulness/query_advanced/query_d_traffic.json
+    format: json
+    media:
+    - template: truthfulness/advanced_images/traffic/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - advanced-inference
+  - task: advanced_translate
+    aspect: truthfulness
+    query_file: truthfulness/query_advanced/query_d_translate.json
+    format: json
+    media:
+    - template: truthfulness/advanced_images/translate/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - advanced-inference
+  - task: instruction_factual
+    aspect: truthfulness
+    query_file: truthfulness/query_instruction/query_g_factual.json
+    format: json
+    media:
+    - template: truthfulness/instruction_images/factual/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - instruction-enhancement-factual
+  - task: instruction_logic
+    aspect: truthfulness
+    query_file: truthfulness/query_instruction/query_g_logic.json
+    format: json
+    media:
+    - template: truthfulness/instruction_images/logic/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - instruction-enhancement-logic
+  - task: misleading_confusion
+    aspect: truthfulness
+    query_file: truthfulness/query_misleading/query_d_confusion.json
+    format: json
+    media:
+    - template: truthfulness/misleading_images/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - visual-confusion
+  - task: misleading_contrast
+    aspect: truthfulness
+    query_file: truthfulness/query_misleading/query_d_contrast.json
+    format: json
+    media:
+    - template: truthfulness/misleading_images/contrast/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - visual-misleading
+  - task: misleading_dislocation
+    aspect: truthfulness
+    query_file: truthfulness/query_misleading/query_d_dislocation.json
+    format: json
+    media:
+    - template: truthfulness/misleading_images/dislocation/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - visual-misleading
+  - task: misleading_mirror
+    aspect: truthfulness
+    query_file: truthfulness/query_misleading/query_d_mirror.json
+    format: json
+    media:
+    - template: truthfulness/misleading_images/mirror/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - visual-misleading
+  - task: misleading_painting
+    aspect: truthfulness
+    query_file: truthfulness/query_misleading/query_d_painting.json
+    format: json
+    media:
+    - template: truthfulness/misleading_images/painting/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - visual-misleading
+  - task: misleading_semantic
+    aspect: truthfulness
+    query_file: truthfulness/query_misleading/query_d_semantic.json
+    format: json
+    media:
+    - template: truthfulness/misleading_images/semantic/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - visual-misleading
+  - task: misleading_mistext
+    aspect: truthfulness
+    query_file: truthfulness/query_misleading/query_g_mistext.json
+    format: json
+    media:
+    - template: truthfulness/misleading_images/mistext/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - text-misleading
+  - task: text_assistance
+    aspect: truthfulness
+    query_file: truthfulness/query_text/query_g_assistance.json
+    format: json
+    media:
+    - template: truthfulness/text_images/assistance/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - visual-assistance
+  - task: text_misvisual
+    aspect: truthfulness
+    query_file: truthfulness/query_text/query_g_misvisual.json
+    format: json
+    media:
+    - template: truthfulness/text_images/misvisual/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - visual-misleading
+  - task: safebench
+    aspect: safety
+    query_file: safety/SafeBench_selected/safebench_selected.csv
+    format: csv
+    media:
+    - template: safety/SafeBench_selected/{image_path}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - safebench
+  - task: mm_safety_bench
+    aspect: safety
+    query_file: safety/mm-safety-bench-selected/mm-safety-bench-selected.json
+    format: json_keyed
+    key_field: _key
+    media:
+    - template: safety/mm-safety-bench-selected/{Image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - mm-safety-bench
+  - task: typographic_behavior_graph
+    aspect: safety
+    query_file: safety/typographic_jailbreak/behavior_graph.csv
+    format: csv
+    media:
+    - template: safety/typographic_jailbreak/behavior_graph/{image_path}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - typographic-behavior
+  - task: typographic_prompt_and_behavior_graph
+    aspect: safety
+    query_file: safety/typographic_jailbreak/prompt_and_behavior_graph.csv
+    format: csv
+    media:
+    - template: safety/typographic_jailbreak/prompt_and_behavior_graph/{image_path}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - typographic-prompt-and-behavior
+  - task: typographic_prompt_graph
+    aspect: safety
+    query_file: safety/typographic_jailbreak/prompt_graph.csv
+    format: csv
+    media:
+    - template: safety/typographic_jailbreak/prompt_graph/{image_path}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - typographic-prompt
+  - task: real_toxicity_prompts
+    aspect: safety
+    query_file: safety/real_toxicity_prompt/prompts_select.json
+    format: json_groups
+    group_field: category
+    string_item_field: prompt
+    media:
+    - template: safety/real_toxicity_prompt/images/{_group}_{prompt|md5}.png
+    join_basis: derived_key
+    toolkit_tasks:
+    - toxicity-prompt-image
+    note: The image name is the category plus the MD5 of the prompt text, as the authors loader derives it.
+  - task: crossmodal_jailbreak
+    aspect: safety
+    query_file: safety/crossmodal-jailbreak/text_jailbreak.csv
+    format: csv
+    media: []
+    join_basis: none_cross_product_in_toolkit
+    toolkit_tasks:
+    - crossmodal-jailbreak
+    note: The authors loader pairs every prompt with every image of jailbreak_pos or jailbreak_neg; there is no row-level image key, so no image is joined.
+  - task: advglue
+    aspect: robustness
+    query_file: robustness/advglue/label.json
+    format: json_groups
+    group_field: category
+    media:
+    - template: robustness/advglue/related/{_group}/{idx}.png
+    join_basis: derived_key
+    toolkit_tasks:
+    - advglue-text
+    - advglue-related-image
+    note: The related image is related/<category>/<idx>.png, as the authors loader derives it.
+  - task: advglue_plus
+    aspect: robustness
+    query_file: robustness/advglue_plus/label.json
+    format: json_groups
+    group_field: category
+    media:
+    - template: robustness/advglue_plus/related/{_group}/{idx}.png
+    join_basis: derived_key
+    toolkit_tasks:
+    - advglue-plus-text
+    - advglue-plus-related-image
+    note: The related image is related/<category>/<idx>.png, as the authors loader derives it.
+  - task: ood_text
+    aspect: robustness
+    query_file: robustness/ood-text/label.json
+    format: json_groups
+    group_field: category
+    media:
+    - template: robustness/ood-text/related/{id}.png
+    join_basis: derived_key
+    toolkit_tasks:
+    - dt-text
+    - dt-related-image
+    note: The related image is related/<id>.png; the authors loader reuses the 100 images across the ten categories.
+  - task: ood_artistic
+    aspect: robustness
+    format: jsonl
+    query_files:
+    - robustness/ood-artistic/label/cartoon.json
+    - robustness/ood-artistic/label/handmake.json
+    - robustness/ood-artistic/label/painting.json
+    - robustness/ood-artistic/label/sketch.json
+    - robustness/ood-artistic/label/tattoo.json
+    - robustness/ood-artistic/label/weather.json
+    media:
+    - template: robustness/ood-artistic/source/{image_name}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - ood-artistic
+  - task: ood_sensor
+    aspect: robustness
+    format: jsonl
+    query_files:
+    - robustness/ood-sensor/label/ct.json
+    - robustness/ood-sensor/label/driving.json
+    - robustness/ood-sensor/label/hxray.json
+    - robustness/ood-sensor/label/infrared.json
+    - robustness/ood-sensor/label/lxray.json
+    - robustness/ood-sensor/label/mri.json
+    - robustness/ood-sensor/label/remote.json
+    media:
+    - template: robustness/ood-sensor/source/{image_name}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - ood-sensor
+  - task: adv_nips
+    aspect: robustness
+    query_file: robustness/adv_nips/label.json
+    format: jsonl
+    media:
+    - template: robustness/adv_nips/source/clean/{image_name}
+      role: clean
+    - template: robustness/adv_nips/source/target/{image_name}
+      role: targeted_attack
+    - template: robustness/adv_nips/source/untarget/{image_name}
+      role: untargeted_attack
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - adversarial-target
+    - adversarial-untarget
+  - task: profession_prediction
+    aspect: fairness
+    query_file: fairness/profess_prediction.csv
+    format: csv
+    media:
+    - template: fairness/profession_images/{filename}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - profession-pred
+  - task: stereo_classification
+    aspect: fairness
+    query_file: fairness/stereo_classification.csv
+    format: csv
+    media:
+    - template: fairness/stereo_classification_images/{Number}.png
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - stereo-classification-image
+  - task: stereo_statement
+    aspect: fairness
+    query_file: fairness/stereo_statement.csv
+    format: csv
+    media:
+    - template: fairness/stereo_images/{Type|lower}/{Number}.png
+    join_basis: derived_key
+    toolkit_tasks:
+    - stereo-agreement-image
+    - stereo-topic-classification
+    note: One file serves two authors tasks; the image is stereo_images/<type lower-cased>/<number>.png.
+  - task: stereo_query
+    aspect: fairness
+    query_file: fairness/stereo_query.csv
+    format: csv
+    media: []
+    join_basis: none_listdir_order_in_toolkit
+    toolkit_tasks:
+    - stereo-query-image
+    note: The authors loader pairs the 95 questions with stereo_query_images in os.listdir order, which is not a stable key; no image is joined.
+  - task: subjective_preference
+    aspect: fairness
+    query_file: fairness/preference.json
+    format: json
+    row_modulo: 120
+    media:
+    - template: fairness/vision_subjective_choice_images/{_row}.png
+      role: vision_preference_image
+      row_lt: 120
+    - template: fairness/subjective_choice_images/choice_a_images/{_row_mod1}.png
+      role: subjective_choice_a_candidate
+    - template: fairness/subjective_choice_images/choice_b_images/{_row_mod1}.png
+      role: subjective_choice_b_candidate
+    join_basis: ordinal_in_toolkit_loader
+    toolkit_tasks:
+    - subjective-preference-plain-image
+    - subjective-preference-force-image
+    - vision-preference
+    note: Image k belongs to rows k and k+120. The vision-preference loader takes the first 120 rows in numeric image order; the subjective loader picks choice_a or choice_b at random per run, so both candidates are attached with a role.
+  - task: vizwiz_recognition
+    aspect: privacy
+    query_file: privacy/vizwiz-priv/Annotations/Vizwiz-Priv-Recognition.json
+    format: json
+    media:
+    - template: privacy/vizwiz-priv/Filling_Images/{image}
+      role: filled_private_regions
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - vizwiz-recognition
+  - task: vizwiz_private_qa
+    aspect: privacy
+    query_file: privacy/vizwiz-priv/Annotations/Vizwiz-Priv-QA-Private.json
+    format: json
+    media:
+    - template: privacy/vizwiz-priv/Filling_Images/{image}
+      role: filled_private_regions
+    - template: privacy/vizwiz-priv/Image_draw_line/{image}
+      role: private_regions_outlined
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - vizwiz-recognition-pri-query
+    - vizwiz-drawline-recognition-pri-query
+  - task: vispr_recognition
+    aspect: privacy
+    query_file: privacy/vispr/sampled_vispr_test2017.jsonl
+    format: jsonl
+    media:
+    - template: privacy/vispr/test2017/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - vispr-recognition
+  - task: vispr_private_qa
+    aspect: privacy
+    query_file: privacy/vispr/vispr_question_gpt4_generated_chosen.json
+    format: json
+    media:
+    - template: privacy/vispr/test2017/{image}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - vispr-recognition-pri-query
+  - task: vispr_leakage
+    aspect: privacy
+    query_file: privacy/vispr/categorized/image_annotations.json
+    format: jsonl
+    media:
+    - template: privacy/vispr/categorized/{SheetName}/{Img Path}
+    join_basis: key_in_query_row
+    toolkit_tasks:
+    - vispr-leakage
+  - task: confaide
+    aspect: privacy
+    query_file: privacy/confaide/prompts.txt
+    format: text_lines
+    companion_lines:
+      source_name: privacy/confaide/labels.txt
+      field: label
+    row_modulo: 14
+    media:
+    - template: privacy/confaide/imgs/{_row_mod}.png
+    join_basis: ordinal_in_toolkit_loader
+    toolkit_tasks:
+    - confaide-image
+    note: The authors loader pairs prompt i with image i modulo 14 and the i-th label line.
+  - task: celebrity_recognition
+    aspect: privacy
+    query_file: privacy/celeb/celebrities.csv
+    format: csv
+    media:
+    - template: privacy/celeb/imgs/{Celebrity|underscore}.jpeg
+    join_basis: derived_key
+    toolkit_tasks:
+    - celebrities
+    note: The image is imgs/<name with underscores>.jpeg; the Url column points to an external site and is never fetched.
+  media_inventory_path: registry/media/multitrust.json
+  media_inventory_sha256: 78d8d0e3dd27ea5116ba3845680132bc141bebfba918a821107c50f1fd330b6f
+  media_base_url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df
+  media_allowed_hosts:
+  - huggingface.co
+  - cas-bridge.xethub.hf.co
+  - cdn-lfs-us-1.huggingface.co
+  - cdn-lfs.huggingface.co
+  - cdn-lfs-us-1.hf.co
+  - cdn-lfs.hf.co
+  - us.aws.cdn.hf.co
+  - eu.aws.cdn.hf.co
+  credential_profile: huggingface
+  remote_cache_root: work/media-cache/multitrust
+  remote_cache_bytes: 600000000
+  media_scope: partial
+  verify_remote_preview_media: true
+  preview_group_by: primary_asset
+  preview_sampling:
+    method: sha256_bottom_k_primary_asset_verified_media
+    seed: 0
+    candidate_pool: 250
+    count: 100
+    stratify_by:
+      field: aspect
+      values:
+      - truthfulness
+      - safety
+      - robustness
+      - fairness
+      - privacy
+  max_annotation_bytes: 128000000
+  fields:
+    task:
+      dtype: category
+      values:
+      - basic_attribute
+      - basic_object
+      - basic_scene
+      - basic_grounding
+      - basic_ocr
+      - advanced_causality
+      - advanced_code
+      - advanced_compare
+      - advanced_daily
+      - advanced_math
+      - advanced_spatial
+      - advanced_temporal
+      - advanced_traffic
+      - advanced_translate
+      - instruction_factual
+      - instruction_logic
+      - misleading_confusion
+      - misleading_contrast
+      - misleading_dislocation
+      - misleading_mirror
+      - misleading_painting
+      - misleading_semantic
+      - misleading_mistext
+      - text_assistance
+      - text_misvisual
+      - safebench
+      - mm_safety_bench
+      - typographic_behavior_graph
+      - typographic_prompt_and_behavior_graph
+      - typographic_prompt_graph
+      - real_toxicity_prompts
+      - crossmodal_jailbreak
+      - advglue
+      - advglue_plus
+      - ood_text
+      - ood_artistic
+      - ood_sensor
+      - adv_nips
+      - profession_prediction
+      - stereo_classification
+      - stereo_statement
+      - stereo_query
+      - subjective_preference
+      - vizwiz_recognition
+      - vizwiz_private_qa
+      - vispr_recognition
+      - vispr_private_qa
+      - vispr_leakage
+      - confaide
+      - celebrity_recognition
+      description: 'Member task: the query file (or the files of one authors task) a row comes from; see the task inventory report.'
+    aspect:
+      dtype: category
+      values:
+      - truthfulness
+      - safety
+      - robustness
+      - fairness
+      - privacy
+      description: Trustworthiness aspect folder of the release.
+    query_file:
+      dtype: string
+      description: Path of the query file inside the repository.

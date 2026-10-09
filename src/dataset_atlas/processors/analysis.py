@@ -16,6 +16,8 @@ def _matrix(records: list[Record], config: dict[str, Any]) -> tuple[list[str], n
         raise ValueError("Analysis requires vectors keyed by stable record ID")
     if not config.get("embedding_space_id") or not config.get("embedding_run_id"):
         raise ValueError("Analysis requires embedding_space_id and embedding_run_id")
+    if config.get('embedding_snapshot_ids') is not None and any(record.snapshot_id not in config['embedding_snapshot_ids'] or record.unit != config.get('embedding_unit') for record in records):
+        raise ValueError('Embedding artifact snapshot or sample unit is incompatible')
     ids = [record.id for record in records if record.id in vectors]
     missing = [record.id for record in records if record.id not in vectors]
     if not ids:
@@ -39,6 +41,7 @@ def _matrix(records: list[Record], config: dict[str, Any]) -> tuple[list[str], n
 def _base_provenance(records: list[Record], config: dict[str, Any], ids: list[str], matrix: np.ndarray) -> dict[str, Any]:
     snapshots = sorted({record.snapshot_id for record in records})
     return {"embedding_space_id": config["embedding_space_id"], "embedding_run_id": config["embedding_run_id"],
+            **({'embedding_artifact_id': config['embedding_artifact_id']} if config.get('embedding_artifact_id') else {}),
             "snapshot_ids": snapshots, "population_ids": [record.id for record in records],
             "fitted_ids": ids, "original_dimension": matrix.shape[1], "sample_unit": records[0].unit,
             "input_digest": content_id({"ids": ids, "vectors": matrix.tolist()}, "vectors:")}
@@ -108,7 +111,7 @@ def knn_outlier(matrix: np.ndarray, neighbors: int, metric: str = "cosine") -> n
 
 def _field(record: Record, field_id: str):
     namespace, _, key = field_id.partition(".")
-    if namespace not in {"source", "prediction", "human", "record"} or not key or "." in key:
+    if namespace not in {"source", "prediction", "human", "record"} or not key:
         raise ValueError("Comparison field must be namespace.key")
     if namespace == "record":
         if key not in {"id", "text", "question", "unit"}:
@@ -141,15 +144,20 @@ def compare(records: list[Record], config: dict[str, Any]) -> dict[str, Any]:
     elif kind == "crosstab":
         if any(not isinstance(v, (str, int, float, bool)) or (isinstance(v, float) and not math.isfinite(v)) for pair in complete for v in pair):
             raise ValueError("Crosstab fields must be scalar categories")
-        counts = Counter((str(a), str(b)) for a, b in complete)
-        base["cells"] = [{"left": a, "right": b, "count": count} for (a, b), count in sorted(counts.items())]
+        def category(value):
+            return (type(value).__name__, repr(value))
+        values = {category(value): value for pair in complete for value in pair}
+        counts = Counter((category(a), category(b)) for a, b in complete)
+        base["cells"] = [{"left": values[a], "right": values[b], "left_type": a[0], "right_type": b[0], "count": count} for (a, b), count in sorted(counts.items())]
     elif kind == "grouped_numeric":
-        groups: dict[str, list[float]] = defaultdict(list)
+        groups: dict[tuple[str, str], list[float]] = defaultdict(list)
+        categories = {}
         for a, b in complete:
             if not isinstance(a, (str, int, float, bool)) or (isinstance(a, float) and not math.isfinite(a)) or isinstance(b, bool) or not isinstance(b, (int, float)) or not math.isfinite(b):
                 raise ValueError("Grouped numeric needs scalar categories and finite numeric values")
-            groups[str(a)].append(float(b))
-        base["groups"] = [{"group": key, "count": len(values), "mean": float(np.mean(values)),
+            key=(type(a).__name__, repr(a));categories[key]=a
+            groups[key].append(float(b))
+        base["groups"] = [{"group": categories[key], "group_type": key[0], "count": len(values), "mean": float(np.mean(values)),
                             "median": float(np.median(values)), "minimum": min(values), "maximum": max(values)}
                            for key, values in sorted(groups.items())]
     else:
@@ -163,7 +171,7 @@ def run_analysis(processor_id: str, records: list[Record], config: dict[str, Any
         items = []
         for record in records:
             left, right = _field(record, config["left_field"]), _field(record, config["right_field"])
-            items.append({"id": record.id, "status": "completed", "output": {"left": left, "right": right}}
+            items.append({"id": record.id, "status": "completed", "output": {"left": left, "right": right, "left_type": type(left).__name__, "right_type": type(right).__name__}}
                          if left is not None and right is not None else
                          {"id": record.id, "status": "not_applicable", "output": None})
         return items, {"comparison": summary}
@@ -225,7 +233,14 @@ def exact_lancedb_search(table: Any, vector: list[float], eligible_ids: list[str
     if not eligible_ids or limit < 1:
         return []
     if len(eligible_ids) > 1000:
-        raise ValueError("More than 1000 eligible IDs needs a validated search snapshot")
+        # The global top-k must be among each disjoint partition's top-k.
+        # Each partition remains a prefiltered exact LanceDB scan.
+        unique=list(dict.fromkeys(eligible_ids))
+        best=[]
+        for start in range(0,len(unique),1000):
+            best.extend(exact_lancedb_search(table,vector,unique[start:start+1000],limit,metric=metric))
+            best=sorted(best,key=lambda row:(row['_distance'],row['id']))[:limit]
+        return best
     if metric not in {"cosine", "l2"}:
         raise ValueError("Unsupported retrieval metric")
     query = np.asarray(vector, dtype=np.float32)

@@ -1,0 +1,42 @@
+release: cocoqa-2015-05-17
+adapter: coco_questions
+expected_count: 117684
+scope: All 117684 native cocoqa-2015-05-17 questions, original answers and splits,
+  joined to COCO 2014 images accessed on request. Paper-specific subsets are not inferred.
+remote_metadata_bytes: 30000000
+adapter_config:
+  dataset_kind: cocoqa
+  annotations:
+  - path_key: path
+    split: train
+    prefix: train
+  - path_key: path
+    split: test
+    prefix: test
+  mapping:
+    question: question
+    label: type_name
+  remote_archives:
+    train2014:
+      url: https://s3.amazonaws.com/images.cocodataset.org/zips/train2014.zip
+      bytes: 13510573713
+      etag: '"289af3433b84b5b8622626b10146c1bc-1611"'
+      allowed_hosts:
+      - s3.amazonaws.com
+    val2014:
+      url: https://s3.amazonaws.com/images.cocodataset.org/zips/val2014.zip
+      bytes: 6645013297
+      etag: '"3925cc4d50eb68d47bf2d6324a012d20-793"'
+      allowed_hosts:
+      - s3.amazonaws.com
+  remote_cache_root: work/media-cache/ranges
+  annotation_transfer_bytes: 30000000
+files:
+- source_name: cocoqa-2015-05-17.zip
+  url: https://www.cs.toronto.edu/~mren/imageqa/data/cocoqa/cocoqa-2015-05-17.zip
+  bytes: 1859880
+  sha256: d873c798701dd6b6ab7631da49a01e18b551c4ecf9482bc3f98218c72646c8df
+  config_key: path
+  format: zip
+allowed_hosts:
+- www.cs.toronto.edu

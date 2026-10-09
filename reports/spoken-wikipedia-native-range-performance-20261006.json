@@ -1,0 +1,21 @@
+{
+  "checked_at_utc": "2026-10-06T06:47:50.982718+00:00",
+  "scope": "Bounded native compressed-range performance and byte identity only; no decoded dataset content leaves the workspace.",
+  "max_network_bytes": 33554432,
+  "reads": [
+    {
+      "reader": "HttpsRangeReader",
+      "bytes": 16777216,
+      "network_bytes": 16777216,
+      "seconds": 10.070736019000833,
+      "sha256": "ef3cf36014c8091f438c1d1d3cf7a635eb0d97e8c8cbf981ad51082a39f59a94"
+    },
+    {
+      "reader": "ParallelRangeReader",
+      "bytes": 16777216,
+      "network_bytes": 16777216,
+      "seconds": 5.734323413000311,
+      "sha256": "ef3cf36014c8091f438c1d1d3cf7a635eb0d97e8c8cbf981ad51082a39f59a94"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+# OmniSafeBench-MM's data_full.json at the pinned Hugging Face revision (SHA-256 equal to the maintainer's original). The maintained table is
+# its 1,500 rows plus `media_path` (image_path without the `dataset/` prefix); converters/media.py reproduces it and the row digest is
+# checked on every fetch. Images are served on demand by the pinned media_base_url in the catalogue entry, so none is downloaded here.
+# Release and snapshot identity are unchanged from the catalogue entry.
+release: hf-665c3bd114e1f13bb7ffca286167e75119a1cd22
+snapshot_id: hf-665c3bd114e1f13bb7ffca286167e75119a1cd22-e45ab95dcc7f
+adapter: structured
+expected_count: 1500
+scope: All 1,500 official OmniSafeBench-MM JSON annotation rows, with their original prompts, risk categories and distinct pinned image
+  references. Source images resolve individually on demand.
+source_url: https://huggingface.co/datasets/jiaxiaojunQAQ/OmniSafeBench-MM
+adapter_config: {}
+convert:
+  name: omnisafebench_mm
+  params: {}
+  count: 1500
+  rows_sha256: 5de8a5420ce6db56dc5f211de6e6890e7957d4fd5e25d0e97c06523c86a00602
+files:
+- source_name: data_full.json
+  url: https://huggingface.co/datasets/jiaxiaojunQAQ/OmniSafeBench-MM/resolve/665c3bd114e1f13bb7ffca286167e75119a1cd22/data_full.json
+  bytes: 485910
+  sha256: f635957718aaa1fe01eb7ffdad70461a7cf0f03531bb8244f9ab415e5dae20d1
+  format: json
+  config_key: source_json
+allowed_hosts:
+- huggingface.co

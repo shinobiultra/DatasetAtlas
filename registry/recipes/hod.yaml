@@ -1,0 +1,22 @@
+release: a78e801de791eebdf2e9011cbf5b5ac2f6c65716
+adapter: classic_vision
+source_url: https://github.com/poori-nuna/HOD-Benchmark-Dataset
+expected_count: 10631
+scope: All 10631 native HOD images, joined to the original metadata.csv, YOLO and
+  XML annotations, category, normal/hard difficulty, and source reference. The all/
+  and class/ image and annotation copies match author Git blob IDs exactly and are
+  represented once per native metadata image; original copy paths remain recorded.
+  No public redistribution approval.
+files:
+- url: https://codeload.github.com/poori-nuna/HOD-Benchmark-Dataset/zip/a78e801de791eebdf2e9011cbf5b5ac2f6c65716
+  sha256: 675dfeb7817afe5b3a14fe78634f89e5c23ec721b9949508bff0ff4424859059
+  bytes: 1215888315
+  source_name: hod.zip
+  format: zip
+  config_key: path
+allowed_hosts:
+- codeload.github.com
+adapter_config:
+  dataset_kind: hod
+  archive_prefix: HOD-Benchmark-Dataset-a78e801de791eebdf2e9011cbf5b5ac2f6c65716/
+  max_annotation_bytes: 256000000

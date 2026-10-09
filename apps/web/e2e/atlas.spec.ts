@@ -83,16 +83,53 @@ test('inspection and selection stay separate interactions', async ({ page }) => 
 test('a public build states what it can show and never claims the workbench preview', async ({ page }) => {
   await page.goto('/')
   await expect(page.locator('.cat-head')).toContainText('browsable in this public build')
-  const unpublished = page.locator('.ds-card').filter({ hasText: 'Metadata only here' }).first()
+  await expect(page.getByRole('region', { name: 'About this site' })).toContainText('The data itself is not hosted here')
+  await expect(page.getByRole('region', { name: 'Live examples' }).locator('.ds-card')).toHaveCount(3)
+  const unpublished = page.locator('.ds-row[data-dataset-id="advbench"]')
   await expect(unpublished).toBeVisible()
-  await expect(unpublished).toContainText('exists in the local workbench')
+  await expect(unpublished).toContainText('Maintainer preview')
+  await expect(unpublished).not.toContainText('exists in the local workbench')
 })
 
 test('a metadata-only dataset explains the gap instead of showing an empty grid', async ({ page }) => {
-  await page.goto('/#/dataset/advbench')
+  await page.goto('/#/dataset/facet')
   await expect(page.getByText('No inspectable examples here yet')).toBeVisible()
   await expect(page.getByText(/implementation gap in Dataset Atlas/)).toBeVisible()
   await expect(sampleCards(page)).toHaveCount(0)
+})
+
+test('a public dataset page says how to get the data, what a record holds and which papers name it', async ({ page }) => {
+  await page.goto('/#/dataset/imagenet-1k')
+  const how = page.locator('.card').filter({ hasText: 'How to get this dataset' })
+  await expect(how).toContainText('Accept terms, then fetch')
+  await expect(how.locator('code').first()).toHaveText('atlas previews fetch --dataset imagenet-1k')
+  await expect(how.locator('code').nth(1)).toHaveText('atlas previews fetch --dataset imagenet-1k --execute')
+  await expect(how.getByRole('button', { name: 'Copy' })).toHaveCount(2)
+  const schema = page.locator('.card').filter({ hasText: 'What a record holds' })
+  await expect(schema).toContainText('No record values are published here')
+  await expect(schema.locator('td.mono').first()).toBeVisible()
+  await expect(page.locator('.card').filter({ hasText: /Named in \d+ corpus papers?/ })).toContainText('A mention does not establish')
+})
+
+test('the guide separates a maintainer-only preview, a gate, and a request-only release', async ({ page }) => {
+  await page.goto('/#/dataset/advbench')
+  await expect(page.locator('.card').filter({ hasText: 'How to get this dataset' })).toContainText('Maintainer preview, no public recipe')
+  await expect(page.locator('.card').filter({ hasText: 'How to get this dataset' }).locator('code')).toHaveCount(0)
+  await expect(page.locator('.card').filter({ hasText: 'What a record holds' }).locator('td.mono').first()).toHaveText('goal')
+  await page.goto('/#/dataset/facet')
+  await expect(page.locator('.card').filter({ hasText: 'How to get this dataset' })).toContainText('Gated at the source')
+  await page.goto('/#/dataset/gyafc')
+  const request = page.locator('.card').filter({ hasText: 'How to get this dataset' })
+  await expect(request).toContainText('Request from the authors')
+  await expect(request.locator('code')).toHaveCount(0)
+})
+
+test('the catalogue filters by how a dataset can be obtained', async ({ page }) => {
+  await page.goto('/')
+  const rail = page.getByRole('complementary', { name: 'Catalogue filters' })
+  await rail.getByRole('checkbox', { name: /Gated at the source/ }).check()
+  await expect(page.locator('.ds-row').first()).toContainText('Gated')
+  await expect(page.getByRole('region', { name: 'Live examples' })).toHaveCount(0)
 })
 
 test('About panel keeps unpublished evidence absent and shows the public source', async ({ page }, testInfo) => {

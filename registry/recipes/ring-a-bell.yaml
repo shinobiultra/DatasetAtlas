@@ -1,0 +1,45 @@
+# Ring-A-Bell nudity InvPrompts from the authors' Hugging Face dataset (the Ring-A-Bell repository README names it as the release). The dataset is
+# auto-gated: a researcher accepts its terms on their own Hugging Face account and the fetch uses that account's token (never stored in the recipe).
+# converters/text.py joins the three CSVs into one row per prompt, scoped by variant because case numbers repeat across files.
+release: hf-ce2df13b0ec372b2ca80460d5746ba8b933d6d17
+adapter: structured
+credential_profile: huggingface
+expected_count: 285
+scope: 'All 285 author-released Ring-A-Bell nudity InvPrompts at the pinned Hugging Face revision: three files of 95 prompts, one per (K, eta)
+  setting (K=16, 38, 77; eta=3), each with the author''s case number and evaluation seed. Only the nudity concept is released; the corpus paper
+  does not say which concept or setting it used. Prompts are adversarial text, not images.'
+source_url: https://huggingface.co/datasets/Chia15/RingABell-Nudity/tree/ce2df13b0ec372b2ca80460d5746ba8b933d6d17
+allowed_hosts:
+- huggingface.co
+- cas-bridge.xethub.hf.co
+- us.aws.cdn.hf.co
+- cdn-lfs-us-1.huggingface.co
+adapter_config: {}
+convert:
+  name: ring_a_bell_nudity
+  count: 285
+  rows_sha256: 040b28e51eb85403f6e0fd008f55fd0ad627072b3718a85ec381564ed0f38601
+  params:
+    variants:
+      k16: Nudity_eta_3_K_16
+      k38: Nudity_eta_3_K_38
+      k77: Nudity_eta_3_K_77
+files:
+- source_name: Nudity_eta_3_K_16.csv
+  url: https://huggingface.co/datasets/Chia15/RingABell-Nudity/resolve/ce2df13b0ec372b2ca80460d5746ba8b933d6d17/Nudity_eta_3_K_16.csv
+  bytes: 10173
+  sha256: 246843d5e8e26afe4bf725f859a58231298f4786f85fed8d514e57f8d0dbf059
+  config_key: k16
+  format: csv
+- source_name: Nudity_eta_3_K_38.csv
+  url: https://huggingface.co/datasets/Chia15/RingABell-Nudity/resolve/ce2df13b0ec372b2ca80460d5746ba8b933d6d17/Nudity_eta_3_K_38.csv
+  bytes: 20981
+  sha256: f2ab4295023a3e0954aa206f2abe50d94ba621a6922a3a7919cc37fe70c56dc0
+  config_key: k38
+  format: csv
+- source_name: Nudity_eta_3_K_77.csv
+  url: https://huggingface.co/datasets/Chia15/RingABell-Nudity/resolve/ce2df13b0ec372b2ca80460d5746ba8b933d6d17/Nudity_eta_3_K_77.csv
+  bytes: 46318
+  sha256: 387f77c919a1ddaeda59e042fac2f504ea1e2efe3d11321e2829ca42d2731722
+  config_key: k77
+  format: csv

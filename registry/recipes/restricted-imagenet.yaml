@@ -1,0 +1,56 @@
+source_url: https://huggingface.co/datasets/ILSVRC/imagenet-1k/tree/49e2ee26f3810fb5a7536bbf732a7b07389a47b5
+credential_profile: huggingface
+source_patterns:
+- data/train-*.parquet
+- data/validation-*.parquet
+scope: All 257,748 native training images and 10,150 validation images in the nine
+  inclusive MadryLab RestrictedImageNet class ranges over the pinned authorized ILSVRC
+  author release. Native labels and filenames remain unchanged; grouped labels preserve
+  the pinned author mapping separately. All 1,000 native training label/WNID pairs
+  were verified to match lexicographic ImageFolder class ordering before applying
+  these ranges. The unlabeled test split is excluded. This available release does
+  not establish the citing paper exact trained-model or sample membership; media remain
+  local-only.
+adapter_config:
+  mapping: {}
+  media_scope: partial
+  remote_cache_bytes: 300000000
+  expected_source_count: 1331167
+  record_filter:
+    native_class_groups:
+      field: label
+      groups:
+      - name: Dog
+        start: 151
+        end: 268
+      - name: Cat
+        start: 281
+        end: 285
+      - name: Frog
+        start: 30
+        end: 32
+      - name: Turtle
+        start: 33
+        end: 37
+      - name: Bird
+        start: 80
+        end: 100
+      - name: Monkey
+        start: 365
+        end: 382
+      - name: Fish
+        start: 389
+        end: 397
+      - name: Crab
+        start: 118
+        end: 121
+      - name: Insect
+        start: 300
+        end: 319
+      provenance:
+        url: https://raw.githubusercontent.com/MadryLab/robustness/a9541241defd9972e9334bfcdb804f6aefe24dc7/robustness/tools/constants.py
+        revision: a9541241defd9972e9334bfcdb804f6aefe24dc7
+        sha256: b8bc4f00b8a36fed7501eb359db307b69e2d03a68602756481a0fec9571ce1ca
+        method: Inclusive native ImageFolder class ranges in author order; native
+          labels are retained.
+expected_count: 267898

@@ -1,0 +1,18 @@
+release: zenodo-3555552-cifar-100-c
+source_url: https://zenodo.org/records/3555552
+adapter: cifar_c_npy
+expected_count: 950000
+scope: All 19 CIFAR-100-C corruption types at 5 severities over the 10000 original
+  CIFAR-100 test indices (950000 images); lossless source array pixels on request.
+adapter_config:
+  class_count: 100
+files:
+- url: https://zenodo.org/records/3555552/files/CIFAR-100-C.tar
+  source_name: CIFAR-100-C.tar
+  bytes: 2918473216
+  sha256: 30ee6543a1bfd049fa33834b7c1ada301e7064b7fbe8fc38340eb8b62ced4b33
+  md5: 11f0ed0f1191edbf9fa23466ae6021d3
+  config_key: path
+  format: tar
+allowed_hosts:
+- zenodo.org

@@ -1,0 +1,71 @@
+release: 6d35a4c320270fa507016550312edcb5a0570ed4
+adapter: structured_collection
+source_url: https://github.com/HQHBench/HQHBench
+expected_count: 4000
+scope: All 4000 author HQH questions joined to the released image_data metadata and
+  original Visual Genome archive members by native image ID and URL path. Match validated
+  against both full VG archive directories; images are retrieved on demand, not all
+  copied locally.
+files:
+- url: https://raw.githubusercontent.com/HQHBench/HQHBench/6d35a4c320270fa507016550312edcb5a0570ed4/HQH.json
+  source_name: HQH.json
+  format: json
+  bytes: 834809
+  sha256: 3175a7be1905bce197ae35dfe7d8cf8523ac68057d312f22bb4ad3c29dc908ba
+  config_key: questions_path
+- url: https://raw.githubusercontent.com/HQHBench/HQHBench/6d35a4c320270fa507016550312edcb5a0570ed4/image_data.json
+  source_name: image_data.json
+  format: json
+  bytes: 5789710
+  sha256: e51f625896bf0baf067295d4402fc2f5a4acb0ad6c7487566c12b88a13f7ca0d
+  config_key: images_path
+- url: https://homes.cs.washington.edu/~ranjay/visualgenome/data/dataset/image_data.json.zip
+  bytes: 1780854
+  sha256: b87a94918cb2ff4d952cf1dfeca0b9cf6cd6fd204c2f8704645653be1163681a
+  config_key: vg_path
+  source_name: image_data.json.zip
+  format: zip
+allowed_hosts:
+- raw.githubusercontent.com
+- homes.cs.washington.edu
+remote_metadata_bytes: 30000000
+adapter_config:
+  annotations:
+  - path_key: questions_path
+    split: evaluation
+    joins:
+    - path_key: images_path
+      'on': image_id
+      key: '@key'
+      string_keys: true
+      field: image_metadata
+      allow_unused: true
+    - path_key: vg_path
+      'on': image_id
+      key: image_id
+      field: vg_image
+      member: image_data.json
+      allow_unused: true
+    media_path_url_field: vg_image.url
+    media_path_remove_prefix: people/rak248/
+    media_archive_by_prefix:
+      VG_100K: vg1
+      VG_100K_2: vg2
+  mapping:
+    id: id
+    question: instruction
+  remote_archives:
+    vg1:
+      url: https://cs.stanford.edu/people/rak248/VG_100K_2/images.zip
+      etag: '"2440e0c7e-53532c2990b40"'
+      bytes: 9731705982
+      allowed_hosts:
+      - cs.stanford.edu
+    vg2:
+      url: https://cs.stanford.edu/people/rak248/VG_100K_2/images2.zip
+      etag: '"14622e04a-534f48f09c500"'
+      bytes: 5471658058
+      allowed_hosts:
+      - cs.stanford.edu
+  remote_cache_root: work/media-cache/visualgenome
+  remote_cache_bytes: 1000000000

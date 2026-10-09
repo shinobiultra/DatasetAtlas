@@ -105,3 +105,10 @@ mocked 10,000-record fixtures:
 
 Re-run with `npm run test:e2e`; the numbers are written to
 `test-results/*/synthetic-{map,pagination}-metrics.json`.
+
+The dataset header's Results picker chooses which named runs join browsing queries.
+It starts with source data alone and permits up to 32 result snapshots at once.
+Older runs remain selectable regardless of total history. Turning a run off clears
+its dependent filters, sort and colour; detector inspection and projection selection
+can still inspect all compatible runs. This prevents accumulated history from
+breaking unrelated source browsing or silently choosing an arbitrary subset of runs.

@@ -94,6 +94,27 @@ class ValidationReport:
     errors: tuple[str, ...] = ()
 
 
+def cast_csv_row(row: dict[str, str], types: dict[str, str], ordinal: int) -> dict[str, Any]:
+    """Type declared CSV columns. A blank cell is missing (None), never zero or false."""
+    result: dict[str, Any] = dict(row)
+    for column, kind in types.items():
+        value = row.get(column)
+        if value is None or value == "":
+            result[column] = None
+        elif kind == "number":
+            try:
+                result[column] = int(value) if re.fullmatch(r"[+-]?\d+", value) else float(value)
+            except ValueError:
+                raise ValueError(f"row {ordinal}: column {column!r} is declared numeric but holds {value!r}") from None
+        elif kind == "boolean":
+            if value.strip().lower() not in {"true", "false"}:
+                raise ValueError(f"row {ordinal}: column {column!r} is declared boolean but holds {value!r}")
+            result[column] = value.strip().lower() == "true"
+        else:
+            raise ValueError(f"unsupported CSV column type {kind!r}")
+    return result
+
+
 def _nested(row: dict[str, Any], key: str | None) -> Any:
     if not key:
         return None
@@ -149,10 +170,13 @@ def _write_rooted_atomic(root: Path, relative: str, data: bytes) -> None:
         os.close(directory)
 
 
+BROWSER_UNSUPPORTED_IMAGE_SUFFIXES = {".tif", ".tiff"}
+
+
 def _media_type(path: str) -> str:
     suffix = PurePosixPath(path).suffix.lower()
     return {".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg",
-            ".webp": "image/webp", ".gif": "image/gif", ".mp3": "audio/mpeg",
+            ".webp": "image/webp", ".gif": "image/gif", ".tif": "image/tiff", ".tiff": "image/tiff", ".mp3": "audio/mpeg",
             ".wav": "audio/wav", ".mp4": "video/mp4"}.get(suffix, "application/octet-stream")
 
 
@@ -169,7 +193,7 @@ class DatasetAdapter:
         # Large releases may be prepared when the caller has explicitly
         # approved their source-specific budget. The preview default remains
         # 20 MB, and adapters still enforce the approved cap while reading.
-        if not 1 <= limit <= 1000 or not 1 <= max_bytes <= 100_000_000_000:
+        if not 1 <= limit <= 1000 or not 1 <= max_bytes <= 10_000_000_000_000:
             raise ValueError("an explicit positive row and byte budget is required")
         desc = self.probe()
         if not desc.exists:
@@ -210,7 +234,7 @@ class DatasetAdapter:
             cursor = batch.next_cursor
         return ValidationReport(count, tuple(sorted(dup)))
 
-    def _record(self, row: dict[str, Any], ordinal: int) -> Record:
+    def _record(self, row: dict[str, Any], ordinal: int | str) -> Record:
         mapping = self.config.get("mapping", {})
         source_id = _nested(row, mapping.get("id"))
         if source_id is None:
@@ -232,9 +256,13 @@ class DatasetAdapter:
                 if not isinstance(item, str):
                     continue
                 aid = stable_id(self.dataset.id, self.revision, "asset", item)
+                metadata = {"source_field": image_key, "order": i}
+                if mapping.get("media_modality", "image") == "image" and PurePosixPath(item).suffix.lower() in BROWSER_UNSUPPORTED_IMAGE_SUFFIXES:
+                    # Browsers cannot decode these; the original stays the record's asset and a faithful PNG rendering is served for display.
+                    metadata.update(browser_render_required=True, source_format="TIFF")
                 assets.append(Asset(id=aid, dataset_id=self.dataset.id,
                                     release_id=self.revision, modality=mapping.get("media_modality", "image"),
-                                    uri=item, metadata={"source_field": image_key, "order": i}))
+                                    uri=item, metadata=metadata))
             # Keep source filenames as queryable fields. Avoid embedding image
             # objects or base64 payloads in a JSON preview pack.
             if isinstance(value, dict) or (isinstance(value, list) and any(isinstance(x, dict) for x in value)):
@@ -252,6 +280,25 @@ class DatasetAdapter:
 
 class StructuredAdapter(DatasetAdapter):
     """Local JSON, JSONL, CSV and Parquet files. Reopening at cursor is bounded in memory."""
+
+    def _record(self, row: dict[str, Any], ordinal: int | str) -> Record:
+        record = super()._record(row, ordinal)
+        identity = self.config.get("record_identity")
+        if identity is None:
+            return record
+        if identity != "source_row":
+            raise ValueError("Unsupported structured record identity")
+        checksum = self.config.get("sha256", "")
+        if not self.dataset.snapshot_id or not isinstance(checksum, str) or not re.fullmatch(r"[0-9a-f]{64}", checksum):
+            raise ValueError("Source-row identity requires an immutable snapshot and pinned source checksum")
+        if type(ordinal) is not int or ordinal < 0 or "_atlas_origin" in row:
+            raise ValueError("Source-row identity requires a nonnegative ordinal and unreserved native fields")
+        # Some native annotation tables contain repeated upstream identifiers.
+        # Keep every source row and its upstream ID without deduplicating it.
+        record.id = stable_id(self.dataset.id, self.revision, "example", f"{checksum}:row:{ordinal}")
+        record.source["_atlas_origin"] = {"row": ordinal, "source_sha256": checksum,
+                                          "identity": "immutable-source-row"}
+        return record
 
     def _path(self) -> Path:
         value = self.config.get("path")
@@ -297,8 +344,12 @@ class StructuredAdapter(DatasetAdapter):
                     if line.strip():
                         yield json.loads(line)
         elif kind == "csv":
+            types = self.config.get("csv_types") or {
+                name: spec["dtype"] for name, spec in (self.config.get("fields") or {}).items()
+                if isinstance(spec, dict) and spec.get("dtype") in ("number", "boolean")}
             with path.open(encoding="utf-8-sig", newline="") as handle:
-                yield from csv.DictReader(handle)
+                for ordinal, row in enumerate(csv.DictReader(handle, delimiter=self.config.get("delimiter", ","))):
+                    yield cast_csv_row(row, types, ordinal) if types else row
         elif kind == "json":
             with path.open(encoding="utf-8") as handle:
                 data = json.load(handle)
@@ -313,6 +364,13 @@ class StructuredAdapter(DatasetAdapter):
             parquet = pq.ParquetFile(path)
             for batch in parquet.iter_batches(batch_size=128):
                 yield from batch.to_pylist()
+
+    def iter_sequential(self, source: PreparedSource) -> Iterator[Record]:
+        """Every record in one pass. Paging re-reads CSV/JSONL from the start for each page, which is
+        quadratic on large tables, so indexing opts in with `sequential_index`."""
+        for ordinal, row in enumerate(self._rows()):
+            source.charge(len(json.dumps(row, ensure_ascii=False, default=str).encode()))
+            yield self._record(row, ordinal)
 
     def iter_records(self, source: PreparedSource, cursor: str | None = None,
                      limit: int | None = None) -> RecordBatch:
@@ -524,7 +582,10 @@ class DirectoryArchiveAdapter(DatasetAdapter):
             return cached
         path = self._path()
         suffixes = {suffix.lower() for suffix in self.config.get("suffixes", [".jpg", ".jpeg", ".png", ".webp"])}
-        if path.is_dir():
+        if self.config.get('original_access_index'):
+            from dataset_atlas.storage.indexed_tar import IndexedTarArchive
+            names = [i.filename for i in IndexedTarArchive(self.config['original_access_index']).infolist()]
+        elif path.is_dir():
             names = [str(p.relative_to(path).as_posix()) for p in path.rglob("*") if p.is_file()]
         elif zipfile.is_zipfile(path):
             with zipfile.ZipFile(path) as archive:
@@ -536,15 +597,19 @@ class DirectoryArchiveAdapter(DatasetAdapter):
             raise ValueError("unsupported archive")
         names = sorted(_safe_relative(n) for n in names if PurePosixPath(n).suffix.lower() in suffixes)
         pattern = self.config.get("path_regex")
+        compiled: re.Pattern[str] | None = None
         if pattern:
+            if not isinstance(pattern, str): raise ValueError("Archive path_regex must be a string")
             compiled = re.compile(pattern)
             names = [name for name in names if compiled.fullmatch(name)]
         if self.config.get("order") == "round_robin_label":
-            if not pattern or "label" not in compiled.groupindex:
+            if compiled is None or "label" not in compiled.groupindex:
                 raise ValueError("round_robin_label requires a path_regex label group")
             groups: dict[str, list[str]] = {}
             for name in names:
-                groups.setdefault(compiled.fullmatch(name).group("label"), []).append(name)
+                match = compiled.fullmatch(name)
+                if match is None: raise ValueError("Archive member no longer matches its path_regex")
+                groups.setdefault(match.group("label"), []).append(name)
             ordered: list[str] = []
             for ordinal in range(max(map(len, groups.values()), default=0)):
                 for label in sorted(groups):
@@ -552,16 +617,20 @@ class DirectoryArchiveAdapter(DatasetAdapter):
                         ordered.append(groups[label][ordinal])
             names = ordered
         elif self.config.get("order") == "section_priority":
-            if not pattern or "section" not in compiled.groupindex:
+            if compiled is None or "section" not in compiled.groupindex:
                 raise ValueError("section_priority requires a path_regex section group")
             priorities = self.config.get("section_priority")
             if not isinstance(priorities, list) or len(priorities) != len(set(priorities)):
                 raise ValueError("section_priority requires a unique ordered section list")
             rank = {section: index for index, section in enumerate(priorities)}
-            sections = {compiled.fullmatch(name).group("section") for name in names}
+            def section(name: str) -> str:
+                match = compiled.fullmatch(name)
+                if match is None: raise ValueError("Archive member no longer matches its path_regex")
+                return match.group("section")
+            sections = {section(name) for name in names}
             if sections != set(rank):
                 raise ValueError("section_priority must enumerate every source section")
-            names.sort(key=lambda name: (rank[compiled.fullmatch(name).group("section")], name))
+            names.sort(key=lambda name: (rank[section(name)], name))
         self._cached_names = names
         return names
 
@@ -577,9 +646,13 @@ class DirectoryArchiveAdapter(DatasetAdapter):
             rid = stable_id(self.dataset.id, self.revision, "example", name)
             asset = Asset(id=aid, dataset_id=self.dataset.id, release_id=self.revision,
                           modality="image", uri=name)
-            source_fields = {"path": name}
+            source_fields: dict[str, Any] = {"path": name}
             if self.config.get("path_regex"):
-                source_fields.update(re.fullmatch(self.config["path_regex"], name).groupdict())
+                pattern = self.config["path_regex"]
+                if not isinstance(pattern, str): raise ValueError("Archive path_regex must be a string")
+                match = re.fullmatch(pattern, name)
+                if match is None: raise ValueError("Archive member no longer matches its path_regex")
+                source_fields.update(match.groupdict())
                 label = source_fields.get("label")
                 if label in self.config.get("label_names", {}):
                     source_fields["class_name"] = self.config["label_names"][label]
@@ -610,14 +683,15 @@ class DirectoryArchiveAdapter(DatasetAdapter):
     def resolve_asset(self, source: PreparedSource, asset_ref: str) -> MediaHandle:
         name = _safe_relative(asset_ref)
         path = self._path()
-        if path.is_dir():
+        if self.config.get('original_access_index'):
+            from dataset_atlas.storage.indexed_tar import read_tar_member
+            data, _ = read_tar_member(self.config['original_access_index'], name,
+                max_bytes=source.max_bytes - source.bytes_read, local_source=self.config.get('original_archive_path'))
+        elif path.is_dir():
             data = read_rooted_file(path / name, [path], source.max_bytes - source.bytes_read)
         elif zipfile.is_zipfile(path):
-            with zipfile.ZipFile(path) as archive:
-                info = archive.getinfo(name)
-                if info.file_size > source.max_bytes - source.bytes_read:
-                    raise ValueError("asset exceeds remaining byte budget")
-                data = archive.read(name)
+            from dataset_atlas.storage.zip_members import LOCAL_ZIP_MEMBERS
+            data = LOCAL_ZIP_MEMBERS.read(path, name, source.max_bytes - source.bytes_read, self.config.get('sha256'))
         else:
             with tarfile.open(path) as archive:
                 member = archive.getmember(name)
@@ -691,10 +765,12 @@ class OverlayAdapter(StructuredAdapter):
 
     def __init__(self, dataset: Dataset):
         super().__init__(dataset)
-        self.base_config = self.config.get("base")
-        self.overlay_config = self.config.get("overlay")
-        if not isinstance(self.base_config, dict) or not isinstance(self.overlay_config, dict):
+        base_config = self.config.get("base")
+        overlay_config = self.config.get("overlay")
+        if not isinstance(base_config, dict) or not isinstance(overlay_config, dict):
             raise ValueError("overlay adapter requires base and overlay configurations")
+        self.base_config: dict[str, Any] = base_config
+        self.overlay_config: dict[str, Any] = overlay_config
 
     def _reader(self, config: dict[str, Any]) -> StructuredAdapter:
         data = self.dataset.model_copy(update={"adapter_config": config})
@@ -750,7 +826,8 @@ class OverlayAdapter(StructuredAdapter):
 
     def iter_records(self, source: PreparedSource, cursor: str | None = None,
                      limit: int | None = None) -> RecordBatch:
-        if self.probe().size_bytes > source.max_bytes:
+        size_bytes = self.probe().size_bytes
+        if size_bytes is None or size_bytes > source.max_bytes:
             raise ValueError("overlay sources exceed preparation byte budget")
         rows, report = self._joined()
         start = int(cursor or 0)
@@ -763,13 +840,140 @@ class OverlayAdapter(StructuredAdapter):
         return RecordBatch(out, str(end) if end < len(rows) else None, len(out), warnings)
 
     def validate(self, source: PreparedSource, limit: int = 1000) -> ValidationReport:
-        if self.probe().size_bytes > source.max_bytes:
+        size_bytes = self.probe().size_bytes
+        if size_bytes is None or size_bytes > source.max_bytes:
             raise ValueError("overlay sources exceed preparation byte budget")
         _, report = self._joined()
         return report
 
 
 def get_adapter(dataset: Dataset) -> DatasetAdapter:
+    if dataset.adapter == 'places365':
+        from .places365 import Places365Adapter
+        return Places365Adapter(dataset)
+    if dataset.adapter == 'pascal_voc':
+        from .pascal_voc import PascalVOCAdapter
+        return PascalVOCAdapter(dataset)
+    if dataset.adapter == 'inaturalist':
+        from .inaturalist import INaturalistAdapter
+        return INaturalistAdapter(dataset)
+    if dataset.adapter == 'roco':
+        from .roco import RocoAdapter
+        return RocoAdapter(dataset)
+    if dataset.adapter == 'qava':
+        from .qava import QavaAdapter
+        return QavaAdapter(dataset)
+    if dataset.adapter == 'covid_radiography':
+        from .covid_radiography import CovidRadiographyAdapter
+        return CovidRadiographyAdapter(dataset)
+    if dataset.adapter == 'objectnet':
+        from .objectnet import ObjectNetAdapter
+        return ObjectNetAdapter(dataset)
+    if dataset.adapter == 'visual6502':
+        from .visual6502 import Visual6502Adapter
+        return Visual6502Adapter(dataset)
+    if dataset.adapter == 'safebench':
+        from .safebench import SafeBenchAdapter
+        return SafeBenchAdapter(dataset)
+    if dataset.adapter == 'elife_workbooks':
+        from .elife_workbooks import ElifeWorkbooksAdapter
+        return ElifeWorkbooksAdapter(dataset)
+    if dataset.adapter == 'figshare_stimuli':
+        from .figshare_stimuli import FigshareStimuliAdapter
+        return FigshareStimuliAdapter(dataset)
+    if dataset.adapter == 'pathways_shapes':
+        from .pathways_shapes import PathwaysShapesAdapter
+        return PathwaysShapesAdapter(dataset)
+    if dataset.adapter == 'find':
+        from .find import FindAdapter
+        return FindAdapter(dataset)
+    if dataset.adapter == 'seed_bench':
+        from .seed_bench import SeedBenchAdapter
+        return SeedBenchAdapter(dataset)
+    if dataset.adapter == 'vqa_constraints':
+        from .vqa_constraints import VQAConstraintsAdapter
+        return VQAConstraintsAdapter(dataset)
+    if dataset.adapter == 'nocaps':
+        from .nocaps import NocapsAdapter
+        return NocapsAdapter(dataset)
+    if dataset.adapter == 'textvqa_x':
+        from .textvqa_x import TextVQAXAdapter
+        return TextVQAXAdapter(dataset)
+    if dataset.adapter == 'pathways':
+        from .pathways import PathwaysAdapter
+        return PathwaysAdapter(dataset)
+    if dataset.adapter == 'sad_structs':
+        from .sad import SADStructsAdapter
+        return SADStructsAdapter(dataset)
+    if dataset.adapter == 'text_pairs':
+        from .text_pairs import TextPairsAdapter
+        return TextPairsAdapter(dataset)
+    if dataset.adapter == 'nrc_vad':
+        from .nrc_vad import NRCVADAdapter
+        return NRCVADAdapter(dataset)
+    if dataset.adapter == 'inventory_variants':
+        from .inventory_variants import InventoryVariantsAdapter
+        return InventoryVariantsAdapter(dataset)
+    if dataset.adapter == 'archive_variants':
+        from .archive_variants import ArchiveVariantsAdapter
+        return ArchiveVariantsAdapter(dataset)
+    if dataset.adapter == 'ucf101':
+        from .ucf101 import UCF101Adapter
+        return UCF101Adapter(dataset)
+    if dataset.adapter == 'mm_safetybench':
+        from .mm_safetybench import MMSafetyBenchAdapter
+        return MMSafetyBenchAdapter(dataset)
+    if dataset.adapter == 'mme':
+        from .mme import MMEAdapter
+        return MMEAdapter(dataset)
+    if dataset.adapter == 'sun397':
+        from .sun397 import SUN397Adapter
+        return SUN397Adapter(dataset)
+    if dataset.adapter == 'emnist_archive':
+        from .emnist import EMNISTAdapter
+        return EMNISTAdapter(dataset)
+    if dataset.adapter == 'ravel':
+        from .ravel import RavelAdapter
+        return RavelAdapter(dataset)
+    if dataset.adapter == 'embedded_tsv':
+        from .embedded_tsv import EmbeddedTSVAdapter
+        return EmbeddedTSVAdapter(dataset)
+    if dataset.adapter == "coco_images":
+        from .coco_images import CocoImagesAdapter
+        return CocoImagesAdapter(dataset)
+    if dataset.adapter == "coco_questions":
+        from .coco_questions import CocoQuestionsAdapter
+        return CocoQuestionsAdapter(dataset)
+    if dataset.adapter == "perceptual":
+        from .perceptual import PerceptualAdapter
+        return PerceptualAdapter(dataset)
+    if dataset.adapter == "visual_genome":
+        from .visual_genome import VisualGenomeAdapter
+        return VisualGenomeAdapter(dataset)
+    if dataset.adapter == "phantom":
+        from .phantom import PhantomAdapter
+        return PhantomAdapter(dataset)
+    if dataset.adapter == "structured_collection":
+        from .structured_collection import StructuredCollectionAdapter
+        return StructuredCollectionAdapter(dataset)
+    if dataset.adapter == "remote_columnar":
+        from .remote_columnar import RemoteColumnarAdapter
+        return RemoteColumnarAdapter(dataset)
+    if dataset.adapter == "classic_vision":
+        from .classic_vision import ClassicVisionAdapter
+        return ClassicVisionAdapter(dataset)
+    if dataset.adapter == "cifar_c_npy":
+        from .corruptions import CIFARCorruptionsAdapter
+        return CIFARCorruptionsAdapter(dataset)
+    if dataset.adapter == "annotated_archive":
+        from .annotated_archive import AnnotatedArchiveAdapter
+        return AnnotatedArchiveAdapter(dataset)
+    if dataset.adapter == "oxford_archive":
+        from .oxford import OxfordArchiveAdapter
+        return OxfordArchiveAdapter(dataset)
+    if dataset.adapter == "columnar":
+        from .columnar import ColumnarAdapter
+        return ColumnarAdapter(dataset)
     if dataset.adapter in {"idx", "cifar_binary", "cifar100_binary"}:
         from .binary import CIFAR100BinaryAdapter, CIFARBinaryAdapter, IDXAdapter
         return {"idx": IDXAdapter, "cifar_binary": CIFARBinaryAdapter,
@@ -807,12 +1011,42 @@ def get_adapter(dataset: Dataset) -> DatasetAdapter:
     if dataset.adapter == "vhd11k":
         from .vhd11k import VHD11KAdapter
         return VHD11KAdapter(dataset)
+    if dataset.adapter == "miap":
+        from .miap import MIAPAdapter
+        return MIAPAdapter(dataset)
+    if dataset.adapter == "ffhq":
+        from .ffhq import FFHQAdapter
+        return FFHQAdapter(dataset)
+    if dataset.adapter == "emoset":
+        from .emoset import EmoSetAdapter
+        return EmoSetAdapter(dataset)
+    if dataset.adapter == "fivek":
+        from .fivek import FiveKAdapter
+        return FiveKAdapter(dataset)
+    if dataset.adapter == "imagenet_c":
+        from .imagenet_c import ImageNetCAdapter
+        return ImageNetCAdapter(dataset)
+    if dataset.adapter == "imagenet_segmentation":
+        from .imagenet_segmentation import ImageNetSegmentationAdapter
+        return ImageNetSegmentationAdapter(dataset)
+    if dataset.adapter == "broden":
+        from .broden import BrodenAdapter
+        return BrodenAdapter(dataset)
+    if dataset.adapter == "objaverse":
+        from .objaverse import ObjaverseAdapter
+        return ObjaverseAdapter(dataset)
+    if dataset.adapter == "spoken_wikipedia":
+        from .spoken_wikipedia import SpokenWikipediaAdapter
+        return SpokenWikipediaAdapter(dataset)
     if dataset.adapter == "embedded_parquet":
         from .embedded_parquet import EmbeddedParquetAdapter
         return EmbeddedParquetAdapter(dataset)
     if dataset.adapter == "svo_probes":
         from .svo_probes import SVOProbesAdapter
         return SVOProbesAdapter(dataset)
+    if dataset.adapter == "multitrust":
+        from .multitrust import MultiTrustAdapter
+        return MultiTrustAdapter(dataset)
     kinds = {"structured": StructuredAdapter, "json": StructuredAdapter,
              "jsonl": StructuredAdapter, "csv": StructuredAdapter,
              "parquet": StructuredAdapter, "https": HTTPSStructuredAdapter,
@@ -825,11 +1059,34 @@ def get_adapter(dataset: Dataset) -> DatasetAdapter:
         raise ValueError(f"unknown adapter: {dataset.adapter}") from exc
 
 
-_PREPARED_ADAPTERS: dict[str, DatasetAdapter] = {}
+from collections import OrderedDict
+import threading
+_PREPARED_ADAPTERS: OrderedDict[str, DatasetAdapter] = OrderedDict()
+_PREPARED_ADAPTER_LOCK = threading.RLock()
+_DECODED_CACHES: dict[str, BoundedCache] = {}
+_DECODED_CACHES_LOCK = threading.Lock()
+
+
+def _decoded_cache(cache_root: Path) -> BoundedCache:
+    """The media endpoint is the hottest route; reuse its cache handle per root.
+
+    A new workspace's first grid issues dozens of simultaneous requests. Creating the cache
+    database from each of them at once makes SQLite fail with "database is locked", so
+    construction is serialized and every caller shares the one handle."""
+    key = str(Path(cache_root).resolve())
+    cache = _DECODED_CACHES.get(key)
+    if cache is None:
+        with _DECODED_CACHES_LOCK:
+            cache = _DECODED_CACHES.get(key)
+            if cache is None:
+                cache = BoundedCache(cache_root, max_bytes=1_000_000_000)
+                _DECODED_CACHES[key] = cache
+    return cache
 
 
 def resolve_dataset_asset(dataset: Dataset, asset_ref: str,
-                          max_bytes: int = 10_000_000) -> MediaHandle:
+                          max_bytes: int = 10_000_000, cache_root: Path | None = None,
+                          workspace_root: Path | None = None, *, allow_source_read: bool = True) -> MediaHandle:
     """Resolve one configured source asset for the workbench media endpoint.
 
     Preparation is cached per dataset configuration; each media request still
@@ -839,22 +1096,75 @@ def resolve_dataset_asset(dataset: Dataset, asset_ref: str,
     if max_bytes < 1 or max_bytes > 250_000_000:
         raise ValueError("invalid per-asset byte budget")
     key = hashlib.sha256(dataset.model_dump_json().encode()).hexdigest()
-    adapter = _PREPARED_ADAPTERS.get(key)
-    if adapter is None:
-        adapter = get_adapter(dataset)
-        prep_budget = int(dataset.adapter_config.get("preparation_budget_bytes", max_bytes))
-        plan = adapter.plan(1, prep_budget)
-        adapter.prepare(plan)
-        _PREPARED_ADAPTERS[key] = adapter
+    cache = _decoded_cache(cache_root) if cache_root is not None else None
+    identity=CacheIdentity(key,asset_ref,'decoded-original-v1')
+    if cache:
+        cached=cache.get(identity)
+        if cached:
+            if cached.stat().st_size>max_bytes+1024:raise ValueError('Cached asset exceeds byte budget')
+            mime,data=cached.read_bytes().split(b'\n',1)
+            if len(data)>max_bytes:raise ValueError('Cached asset exceeds byte budget')
+            return MediaHandle(data,mime.decode('ascii'),hashlib.sha256(data).hexdigest(),asset_ref)
+    if workspace_root is not None:
+        # Workbench compression never changes canonical model inputs. Protected
+        # originals and range-addressable native archives survive source eviction.
+        root = Path(workspace_root).resolve()
+        from dataset_atlas.storage.compact import compact_entry, read_compact
+        entry = compact_entry(root, dataset.id, dataset.snapshot_id, asset_ref)
+        if entry and entry['representation'] == 'original':
+            data, mime, proof = read_compact(root, dataset.id, dataset.snapshot_id, asset_ref, max_bytes)
+            return MediaHandle(data, mime, proof['original_sha256'], asset_ref)
+        if not allow_source_read:
+            raise FileNotFoundError('Original media is not retained in the local preview or original cache')
+        from dataset_atlas.storage.indexed_tar import read_original_route
+        original = read_original_route(root, dataset.id, dataset.snapshot_id, asset_ref, max_bytes)
+        if original:
+            import mimetypes
+            data, proof = original
+            return MediaHandle(data, proof.get('media_type') or mimetypes.guess_type(asset_ref)[0] or 'application/octet-stream', proof['sha256'], asset_ref)
+    if not allow_source_read:
+        raise FileNotFoundError('Original media is not retained in the local original cache')
+    with _PREPARED_ADAPTER_LOCK:
+        adapter = _PREPARED_ADAPTERS.get(key)
+        if adapter is None:
+            adapter = get_adapter(dataset)
+            prep_budget = int(dataset.adapter_config.get("preparation_budget_bytes", max_bytes))
+            plan = adapter.plan(1, prep_budget)
+            # A canonical record already supplies its original media reference.
+            # Some annotation adapters need large joins only when producing
+            # records; ordinary asset reads should not recreate those joins.
+            getattr(adapter, 'prepare_media', adapter.prepare)(plan)
+            _PREPARED_ADAPTERS[key] = adapter
+            while len(_PREPARED_ADAPTERS) > 6:
+                _PREPARED_ADAPTERS.popitem(last=False)
+        _PREPARED_ADAPTERS.move_to_end(key)
     source = PreparedSource(dataset.id, dataset.release, max_bytes, 1, adapter.probe().location)
-    return adapter.resolve_asset(source, asset_ref)
+    # Original-byte access does not expand a raster. Safe-view and processors
+    # apply independent pixel bounds when they decode these exact source bytes.
+    resolver=getattr(adapter, 'resolve_original_asset', adapter.resolve_asset)
+    handle=resolver(source, asset_ref)
+    if cache:
+        import tempfile
+        import fcntl
+        with (cache.root/'partial'/(identity.key+'.lock')).open('a') as lock:
+            fcntl.flock(lock,fcntl.LOCK_EX)
+            if not cache.get(identity):
+                path=cache.partial_path(identity)
+                with tempfile.NamedTemporaryFile(dir=path.parent,delete=False) as stream:
+                    temporary=Path(stream.name)
+                    stream.write(handle.media_type.encode('ascii')+b'\n'+handle.data)
+                try:
+                    os.replace(temporary,path)
+                    cache.commit(identity,path)
+                finally:temporary.unlink(missing_ok=True)
+    return handle
 
 
 def build_preview(dataset: Dataset, output_dir: Path, limit: int = 100,
                   max_bytes: int = 20_000_000, cursor: str | None = None,
-                  distinct_assets: bool = False, include_media: bool = False) -> Pack:
+                  distinct_assets: bool = False, include_media: bool = False, max_output_bytes: int | None = None, adapter: DatasetAdapter | None = None) -> Pack:
     """Make a local pack from a bounded plan. Publication is a separate rights gate."""
-    adapter = get_adapter(dataset)
+    adapter = adapter or get_adapter(dataset)
     plan = adapter.plan(limit, max_bytes, cursor)
     source = adapter.prepare(plan)
     records: list[Record] = []
@@ -928,7 +1238,10 @@ def build_preview(dataset: Dataset, output_dir: Path, limit: int = 100,
                           "warnings": warnings,
                           "selection_note": dataset.adapter_config.get("selection_note", "")},
                 checksums=checksums)
+    payload=pack.model_dump_json(indent=2)
+    if max_output_bytes is not None and len(payload.encode())>max_output_bytes:
+        raise ValueError("Preview exceeds approved output budget")
     output_dir.mkdir(parents=True, exist_ok=True)
     target = output_dir / "pack.json"
-    target.write_text(pack.model_dump_json(indent=2), encoding="utf-8")
+    target.write_text(payload, encoding="utf-8")
     return pack

@@ -1,0 +1,29 @@
+# MMBench_DEV_EN.tsv from an HTTPS Hugging Face mirror of the author's file: the author's own endpoint serves an expired certificate and plain HTTP,
+# so the mirror's bytes are checked against the author's published MD5 (VLMEvalKit) as well as the maintainer's SHA-256. converters/media.py decodes the TSV's
+# base64 images (exact bytes, 1,121 files) and rebuilds the 4,329-row table; row and media digests are checked on every fetch. Identity unchanged.
+release: MMBench_DEV_EN-v1.0-md5-b6caf1133a01c6bb705cf753bb527ed8
+snapshot_id: mmbench-en-dev-0481b428b32b97a13ec90092cc9760cf676c5d687046903d9e3461344e4adde0
+adapter: structured
+expected_count: 4329
+scope: 'Original English dev v1.0: 4,329 CircularEval choice-order variants of 1,164 questions/image entries, not 4,329 independent
+  base questions. Base64 image references resolved to exact original bytes; all original question/hint/options/answers and categories
+  retained. HTTPS endpoint certificate was expired; official HTTP bytes match MD5 published in author VLMEvalKit HTTPS source.'
+source_url: https://github.com/open-compass/MMBench
+adapter_config: {}
+convert:
+  name: mmbench_dev
+  params:
+    image_groups: 1164
+  count: 4329
+  rows_sha256: c02b6e50188f26452a2d01e3e2465b2a9810cef0b41112bc82e20325714a75c2
+  media_sha256: ade87aa15ab786828cfc5865eab6d7bee64c0c493d3f810e0f67c1420cc5f645
+files:
+- source_name: MMBench_DEV_EN.tsv
+  url: https://huggingface.co/ambivalent02/openencompass_tsv/resolve/943da5d7577251a00aac6bab450b12a965c778f7/MMBench_DEV_EN.tsv
+  bytes: 37156625
+  sha256: 64baa14c5ec650302f428212a0b3efc5c88fbf9236d0d6fdea45c555f0b02d7a
+  md5: b6caf1133a01c6bb705cf753bb527ed8
+  format: tsv
+  config_key: source_tsv
+allowed_hosts:
+- huggingface.co

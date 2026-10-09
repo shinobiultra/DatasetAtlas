@@ -2,16 +2,65 @@ schema_version: '1.0'
 id: saegis-clean-and-adversarial-splits
 name: SAEgis clean and adversarial splits
 aliases: []
-description: SAEgis paper-specific clean/attack splits across three sources.
+description: 'SAEgis author-repository images at one pinned commit: 4,800 224x224 PNGs from NIPS17, LLaVA-Instruct-150K
+  and Medical-Multimodal-Eval — clean originals (800 train, 100 dev, 100 test per source) and attacked
+  variants (FOA-Attack, M-Attack, SSA-CWA; 100 dev and 100 test per source and attack). Each attacked
+  image names its same-named clean counterpart (all 1,800 pairs checked by pixel similarity). Identity
+  stays a candidate: the paper calls the adversarial splits training and testing where the repository
+  says dev and test, and the paper version was not compared with this commit.'
 paper_ids:
 - paper-d8a392188b9cf4d6
-release: unresolved
-adapter: structured
-adapter_config: {}
+release: github-6365cbfc9e4de1e6df01624b793abbef09789cc8
+adapter: structured_collection
+adapter_config:
+  annotations:
+  - path_key: path
+    format: jsonl
+    split: all
+    identity_prefix: saegis
+    media_template: '{media_path}'
+  mapping:
+    id: source_id
+    text: label
+  fields:
+    source_id: Source dataset, condition, attack, split and file index
+    image_source:
+      description: Source dataset of the clean image
+      values:
+      - NIPS17
+      - LLaVA-Instruct-150K
+      - Medical-Multimodal-Eval
+    condition:
+      description: Clean original or adversarially attacked
+      values:
+      - original
+      - attacked
+    attack:
+      description: Attack method (absent for clean originals)
+      values:
+      - FOA-Attack
+      - M-Attack
+      - SSA-CWA
+    split:
+      description: Repository split (attacked images exist only for dev and test)
+      values:
+      - train
+      - dev
+      - test
+    index:
+      description: Repository file number (NIPS17 numbers files 0-999 across splits)
+      dtype: number
+    clean_counterpart: Path of the same-named clean original in the same split (attacked images only)
+    media_path: Repository path of this image at the pinned commit
+    git_blob_sha1: Git blob SHA-1 of the image file
+    image_bytes:
+      description: File size in bytes
+      dtype: number
+    label: Display label built from the structure above
 coverage:
   identity: candidate
   source: verified
-  access: unverified
+  access: public
   adapter: not_started
   preview: none
   complete_data: unimplemented
@@ -19,16 +68,17 @@ coverage:
   preview_count: 0
   unit: example
   blockers:
-  - Exact paper-specific source release or selected subset remains unverified; source
-    research alone does not resolve this candidate.
-  - Adapter and preview are not implemented.
+  - 'Paper-to-release identity unverified: the paper names adversarial splits training and testing; the
+    repository names them dev and test, and the paper version was not compared with this commit.'
+  - 'The repository has no licence file and every image derives from NIPS17, LLaVA-Instruct-150K (COCO)
+    or Medical-Multimodal-Eval: local browsing only, no public redistribution review.'
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://github.com/conan1024hao/SAEgis
-  note: Derived attacks inherit three base-source rights; repo code license does not
-    grant base images
+  note: GitHub reports no licence for the repository. Attacked images are perturbations of third-party
+    images and inherit those rights; the code licence question does not apply to the images.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-0f968da8d71166841b43
@@ -36,9 +86,9 @@ evidence:
   source_file_hash: 0e3f26916ef19ce5982122f2bb72212315d6dcbe59c9cc953852202654cc1acf
   page: 5
   role: derived collection
-  excerpt: hird contains medical images for out-of-domain evaluation. For each dataset,
-    we construct clean splits of 800, 100, and 100 images for training (i.e., feature
-    extraction), development (i.e., threshold calibration), and testing, respectivel
+  excerpt: hird contains medical images for out-of-domain evaluation. For each dataset, we construct clean
+    splits of 800, 100, and 100 images for training (i.e., feature extraction), development (i.e., threshold
+    calibration), and testing, respectivel
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -49,9 +99,8 @@ evidence:
   source_identity_status: author_recipe_identified_paper_outputs_unpinned
 - kind: source_audit_release
   url: https://github.com/conan1024hao/SAEgis
-  note: Paper p5 constructs 800/100/100 clean train/dev/test and 100 adversarial train/test
-    per NIPS17, LLaVA-Instruct-150K and Medical Multimodal Evaluation Data; author
-    repo supplies pipeline
+  note: Paper p5 constructs 800/100/100 clean train/dev/test and 100 adversarial train/test per NIPS17,
+    LLaVA-Instruct-150K and Medical Multimodal Evaluation Data; author repo supplies pipeline
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_recipe_identified_paper_outputs_unpinned
@@ -65,10 +114,44 @@ evidence:
   source_identity_status: author_recipe_identified_paper_outputs_unpinned
 - kind: source_audit_rights
   url: https://github.com/conan1024hao/SAEgis
-  note: Derived attacks inherit three base-source rights; repo code license does not
-    grant base images
+  note: Derived attacks inherit three base-source rights; repo code license does not grant base images
   publication_decision: media_not_approved
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_recipe_identified_paper_outputs_unpinned
-source_url: https://github.com/conan1024hao/SAEgis
+- kind: source_audit_release
+  url: https://github.com/conan1024hao/SAEgis/tree/6365cbfc9e4de1e6df01624b793abbef09789cc8
+  checked_on: '2026-10-06'
+  note: 'The repository tree at this commit commits 4,800 PNG images (405,813,947 bytes) under images/:
+    for each of NIPS17, LLaVA-Instruct-150K and Medical-Multimodal-Eval, original/{train,dev,test} (800/100/100)
+    and attacked/{FOA-Attack,M-Attack,SSA-CWA}/{dev,test} (100 each). This supersedes the 2026-09-22 audit
+    note that only a pipeline was supplied. NIPS17 files are numbered 0-999 across splits (train 200-999,
+    test 100-199, dev 0-99); the other sources number from 0 within each split. Paper page 5 describes
+    the same three datasets, 800/100/100 clean splits, 100 adversarial images for ''training and testing''
+    and the same three attack methods.'
+  source_identity_status: author_release_identified_paper_version_not_compared
+- kind: pairing_verification
+  checked_on: '2026-10-06'
+  receipt: reports/saegis-pairing-verification-20261006.json
+  note: All 1,800 attacked images (dev and test, three sources, three attacks) share size 224x224 with
+    their same-named original and measure PSNR 23.9-31.5 dB against it (threshold 20 dB; unrelated images
+    measured 6-16 dB in a sampled comparison). Every one of the 2,400 files fetched matched its pinned
+    Git blob SHA-1 and length. A plausibility check on file-name pairing, not proof of how the authors
+    generated the images.
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in at least
+    one record. Not inferred from the name or description.'
+source_url: https://github.com/conan1024hao/SAEgis/tree/6365cbfc9e4de1e6df01624b793abbef09789cc8
+modalities:
+- image
+- text
+tasks:
+- adversarial attack detection
+- clean versus attacked image comparison
+labels:
+- condition
+- attack
+- image_source
+- split

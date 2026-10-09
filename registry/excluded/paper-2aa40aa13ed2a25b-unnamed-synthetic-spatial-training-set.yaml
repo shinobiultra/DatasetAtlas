@@ -1,0 +1,79 @@
+schema_version: '1.0'
+id: paper-2aa40aa13ed2a25b-unnamed-synthetic-spatial-training-set
+name: unnamed synthetic spatial training set
+aliases: []
+description: Kang synthetic Objaverse finetuning corpus.
+paper_ids:
+- paper-2aa40aa13ed2a25b
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: unverified
+  access: gated
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Author request or agreement is required for the described data; no public archive
+    was verified.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/Raphoo/linear-mech-vlms/blob/main/spatial_finetuning/README.md
+  note: No public media rights or general access grant established by code repository
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-839a728ac1481f6b643b
+  paper_id: paper-2aa40aa13ed2a25b
+  source_file_hash: 636fa1d8fe370283cf91d2640e28f00f9236cd7ee40afce14fc3301815559ecf
+  page: 9
+  role: training
+  excerpt: gher accuracy can be better this intuition, we finetune Qwen2-2B on a synthetic
+    dataset simi- steered with spatial IDs. lar to the one used to extract spatial
+    IDs, and evaluate on COCO- Spatial. We
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/Raphoo/linear-mech-vlms/blob/main/spatial_finetuning/README.md
+  note: Kang synthetic Objaverse finetuning corpus
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: explicit_author_request_for_large_archive
+- kind: source_audit_release
+  url: https://github.com/Raphoo/linear-mech-vlms/blob/main/spatial_finetuning/README.md
+  note: Paper p9 says finetuning set is similar to extraction images, not identical;
+    author spatial_finetuning README says large synthetic Objaverse training archive
+    is TBD and to email author
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: explicit_author_request_for_large_archive
+- kind: source_audit_access
+  url: https://github.com/Raphoo/linear-mech-vlms/blob/main/spatial_finetuning/README.md
+  observation: request_author_email_per_readme
+  requires_external_access_step: true
+  download_or_media_inspected: false
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: explicit_author_request_for_large_archive
+- kind: source_audit_rights
+  url: https://github.com/Raphoo/linear-mech-vlms/blob/main/spatial_finetuning/README.md
+  note: No public media rights or general access grant established by code repository
+  publication_decision: media_not_approved
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: explicit_author_request_for_large_archive
+- kind: source_audit_refresh
+  url: https://github.com/Raphoo/linear-mech-vlms/blob/main/spatial_finetuning/README.md
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'unchanged: a reachable page says nothing about whether the files are public, so the prior state
+    stands. 1 URL probed (HEAD only): 1 reachable.'
+source_url: https://github.com/Raphoo/linear-mech-vlms/blob/main/spatial_finetuning/README.md

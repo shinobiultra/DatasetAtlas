@@ -1,0 +1,19 @@
+{
+  "verified_at_utc": "2026-10-06T05:15:25.779916+00:00",
+  "status": "passed",
+  "dataset_id": "docvqa",
+  "snapshot_id": "docvqa-95e71e4ff0dea89c656587a6",
+  "native_rows_compared": 50000,
+  "native_split_counts": {
+    "test": 5188,
+    "train": 39463,
+    "val": 5349
+  },
+  "unique_native_split_question_ids": 50000,
+  "native_non_media_fields_and_types_unchanged": true,
+  "native_media_slots_and_paths_unchanged": true,
+  "native_metadata_sha256": "2b7715d5d79004501c0fa2718dcd47aa72c988821f40e0190d0bcfa2d5a57a8a",
+  "new_transfer_bytes": 39574200,
+  "full_original_rrc_archive_parity_established": false,
+  "scope": "All native rows from the pinned formatted mirror; ETag-bound projected annotation reads, not whole-shard local checksums."
+}

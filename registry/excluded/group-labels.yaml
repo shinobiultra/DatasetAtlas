@@ -1,0 +1,106 @@
+schema_version: '1.0'
+id: group-labels
+name: Group Labels
+aliases: []
+description: '864 group-label phrases curated by Ghate et al. from Charlesworth et al. for SC-EAT. Source
+  review: 2025 ACL paper; exact list/revision not yet located'
+paper_ids:
+- paper-164d7c221452ffec
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - The authors' repository (kshitishghate/bias_prop) releases only Data/template_and_group_words.json
+    (3 templates, a 6-item prompt template list, 24 gender words, 36 race words and smaller subsets);
+    the 864-phrase list itself and the code that builds it are not released ('will be added' per its README).
+  - 24 gender words x 36 race words = 864 matches the paper's count, but the paper's exact phrase construction
+    is not in the repository, so Atlas does not generate the list and present it as the released data.
+  - The released word lists are a vocabulary resource, not a population of examples; no preview was prepared.
+  - 'Checked 2026-10-09: the author repository is unchanged (HEAD c0e4a922124d); the 864-phrase list is
+    still not a file anywhere in it. External blocker (the list is not released), not an implementation
+    gap; the released 60-word vocabulary is a different population.'
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  note: Derived phrases/source lexicon terms need author release/license check
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-13dbf0484244d5c838d0
+  paper_id: paper-164d7c221452ffec
+  source_file_hash: a89bc42d5e26b03e424ef9aa3ecc43d7857a7ef0deb8c0ede544d5b94aa625d4
+  page: 4
+  role: direct lexical source
+  excerpt: 000 words Valenced Text SC-EAT Valence ratings of retrieved text Group Labels 864 phrases Group-based
+    text in SC-EAT Group representation in retrieved text Chicago Face Database (
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://aclanthology.org/2025.findings-acl.955/
+  note: 864 group-label phrases curated by Ghate et al. from Charlesworth et al. for SC-EAT 2025 ACL paper;
+    exact list/revision not yet located
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: paper_derived_lexicon_release_unresolved
+- kind: source_audit_access
+  url: https://aclanthology.org/2025.findings-acl.955/
+  note: 'Paper describes derived list; independent archive not confirmed Probe: first_primary_url_http_head_200;
+    payload_not_downloaded'
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: paper_derived_lexicon_release_unresolved
+- kind: source_audit_rights
+  url: https://aclanthology.org/2025.findings-acl.955/
+  note: Derived phrases/source lexicon terms need author release/license check No source-content rights
+    grant was verified; linked page is identity/access context only.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: paper_derived_lexicon_release_unresolved
+- kind: source_audit_release
+  checked_on: '2026-10-06'
+  url: https://github.com/kshitishghate/bias_prop/tree/c0e4a922124d0c28e85be7a4d9753ac317028450
+  note: 'At this commit the repository holds Data/template_and_group_words.json (2,983 bytes), LICENSE
+    and README. Keys: template1/2/3 (3 each), template (6), gender_words (24), race_words (36), race1,
+    race2, gender1 (12 each), gender_words_expanded (24). The README says the CFD and OASIS images come
+    from their own sites and that templates and code will be added later.'
+  source_identity_status: author_vocabulary_released_phrase_list_not_released
+- kind: source_audit_refresh
+  url: https://aclanthology.org/2025.findings-acl.955/
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 2 URLs probed (HEAD only): 2 reachable.'
+- kind: source_audit_release
+  url: https://github.com/kshitishghate/bias_prop/tree/c0e4a922124d0c28e85be7a4d9753ac317028450
+  note: 'Re-checked 2026-10-09: kshitishghate/bias_prop HEAD is still commit c0e4a922124d0c28e85be7a4d9753ac317028450
+    (main, the only branch, pushed 2024-05-24, MIT licence), unchanged since the 2026-10-06 reading: 3
+    files. Data/template_and_group_words.json is 2,983 bytes (sha256 e4c2f4843946d65e55b097f4fc42de3c45dc78f044bebeafa801c721d9da7786,
+    git blob d4ee776d190daf3865fc47d342da1f9f902d88d5) with keys template1/2/3 (3 each), template (6),
+    gender_words (24), race_words (36), race1, race2, gender1 (12 each) and gender_words_expanded (24).
+    It holds 60 vocabulary words, not 864 phrases (24 x 36 = 864 matches the count, but the construction
+    is not in the repository). The README still says the templates and code ''will be added''. Entry not
+    integrated: the population described is absent. Values were not read, only keys and lengths.'
+  audit_file: reports/github-sources-probe-20261009.json
+  checked_on: '2026-10-09'
+  source_identity_status: author_vocabulary_released_phrase_list_not_released
+  disposition: still_unreleased
+- kind: source_audit_access
+  url: https://github.com/kshitishghate/bias_prop/tree/c0e4a922124d0c28e85be7a4d9753ac317028450/Data
+  observation: repository_public_864_phrase_list_absent
+  requires_external_access_step: null
+  download_or_media_inspected: true
+  audit_file: reports/github-sources-probe-20261009.json
+  checked_on: '2026-10-09'
+  source_identity_status: author_vocabulary_released_phrase_list_not_released

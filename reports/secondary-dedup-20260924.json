@@ -1,0 +1,142 @@
+{
+  "checked_at": "2026-09-24T07:50:18.584645+00:00",
+  "operation": "Atomic hard-link deduplication of four SHA-256-identical source, derived-archive and snapshot pairs. All paths and bytes retained.",
+  "groups": [
+    {
+      "group": "caltech101-original-and-prepared",
+      "files": [
+        {
+          "path": "work/sources/acquisition-20260923/caltech101/path.zip",
+          "size": 140297799,
+          "allocated_bytes": 140300288,
+          "device": 64768,
+          "inode": 58086066,
+          "links": 1,
+          "sha256": "f3ccd215f338d0c2884715be17ace33a880c42e7480213a1560fad6bcc6dbae3"
+        },
+        {
+          "path": "work/prepared/caltech101/119fce6cd456b9a7522911000115975712fbe996f8e310f77788eb7b6f35b9e5/sources/path-members.zip",
+          "size": 140297799,
+          "allocated_bytes": 140300288,
+          "device": 64768,
+          "inode": 58440991,
+          "links": 1,
+          "sha256": "f3ccd215f338d0c2884715be17ace33a880c42e7480213a1560fad6bcc6dbae3"
+        }
+      ],
+      "inode_after": 58086066,
+      "links_after": 2,
+      "freed_allocated_bytes": 140300288
+    },
+    {
+      "group": "controlled-images-derived",
+      "files": [
+        {
+          "path": "work/prepared/what-s-up/2a86da80652409309e2aa863dbd7564736f13d57027fa5d5752f84f338268249/sources/controlled_images_path-members.zip",
+          "size": 96566799,
+          "allocated_bytes": 96571392,
+          "device": 64768,
+          "inode": 58441090,
+          "links": 1,
+          "sha256": "7a75ad8fc21bdf464c1e68d9c057f6daaad923029f44bd2af99348790929b316"
+        },
+        {
+          "path": "work/prepared/controlled-images/e295683752ee1888f4183c587d205e5b77aeb9c5846d106f69fbe04eab8335ff/sources/controlled_images_path-members.zip",
+          "size": 96566799,
+          "allocated_bytes": 96571392,
+          "device": 64768,
+          "inode": 59375130,
+          "links": 1,
+          "sha256": "7a75ad8fc21bdf464c1e68d9c057f6daaad923029f44bd2af99348790929b316"
+        }
+      ],
+      "inode_after": 58441090,
+      "links_after": 2,
+      "freed_allocated_bytes": 96571392
+    },
+    {
+      "group": "cifar-10-c-snapshot",
+      "files": [
+        {
+          "path": "work/prepared/cifar-10-c/84a406abd2b8547a4e8bb719b47fd8ed9aba78485c8674bb27f6d185134aeaed/snapshot/records.parquet",
+          "size": 79903629,
+          "allocated_bytes": 79908864,
+          "device": 64768,
+          "inode": 55857664,
+          "links": 1,
+          "sha256": "3e4f0ff28c14e81e6bc23d3a1d3f4d2331953903b85033f87204ff81e6e792c4"
+        },
+        {
+          "path": "work/prepared/cifar-10-c/930e6f4b982e03743c4dc097a40b5503d3a559b0e9309477899279d22f5a1e08/snapshot/records.parquet",
+          "size": 79903629,
+          "allocated_bytes": 79908864,
+          "device": 64768,
+          "inode": 57437207,
+          "links": 1,
+          "sha256": "3e4f0ff28c14e81e6bc23d3a1d3f4d2331953903b85033f87204ff81e6e792c4"
+        }
+      ],
+      "inode_after": 55857664,
+      "links_after": 2,
+      "freed_allocated_bytes": 79908864
+    },
+    {
+      "group": "controlled-clevr-derived",
+      "files": [
+        {
+          "path": "work/prepared/controlled-clevr/4316323619a0b4e8375444401599ce97c01eef7e44a2fdbc9ad74bed13e2c0ab/sources/controlled_clevr_path-members.zip",
+          "size": 67374368,
+          "allocated_bytes": 67379200,
+          "device": 64768,
+          "inode": 59375142,
+          "links": 1,
+          "sha256": "e8ce1e301a9deead0fab431486e6bb4a6a02083acc2d9ff5808051b97d78a5ff"
+        },
+        {
+          "path": "work/prepared/what-s-up/2a86da80652409309e2aa863dbd7564736f13d57027fa5d5752f84f338268249/sources/controlled_clevr_path-members.zip",
+          "size": 67374368,
+          "allocated_bytes": 67379200,
+          "device": 64768,
+          "inode": 58441091,
+          "links": 1,
+          "sha256": "e8ce1e301a9deead0fab431486e6bb4a6a02083acc2d9ff5808051b97d78a5ff"
+        }
+      ],
+      "inode_after": 59375142,
+      "links_after": 2,
+      "freed_allocated_bytes": 67379200
+    }
+  ],
+  "freed_allocated_bytes": 384159744,
+  "media_checks": [
+    {
+      "dataset_id": "caltech101",
+      "asset_ref": "101_ObjectCategories/BACKGROUND_Google/image_0001.jpg",
+      "bytes": 7416,
+      "sha256": "7a12d0fa6c88bdd2921059790dcb838b00276677631131d64c35cf3a4c3eedef",
+      "post_link_direct_adapter_check": "passed"
+    },
+    {
+      "dataset_id": "what-s-up",
+      "asset_ref": "zip/controlled_images/controlled_images/beer-bottle_on_armchair.jpeg",
+      "bytes": 278827,
+      "sha256": "67807a586a0f425e79e087feef685b0ee1fc26eb12e12876cccb8f31725923c0",
+      "post_link_direct_adapter_check": "passed"
+    },
+    {
+      "dataset_id": "controlled-images",
+      "asset_ref": "zip/controlled_images/controlled_images/book_right_of_table.jpeg",
+      "bytes": 210484,
+      "sha256": "c73fa9aa3aacd91f7aa35df40e9cce06c5cb7985f017d0b9f53226b01691ec1f",
+      "post_link_direct_adapter_check": "passed"
+    },
+    {
+      "dataset_id": "controlled-clevr",
+      "asset_ref": "zip/controlled_clevr/controlled_clevr/remote_left_of_candle.jpeg",
+      "bytes": 175429,
+      "sha256": "afe6f2d59aa40629ab303315965c2aa3594cd4d82f18affa0e06e26625d5eaf1",
+      "post_link_direct_adapter_check": "passed"
+    }
+  ],
+  "cifar_snapshots_reopened_after": true
+}

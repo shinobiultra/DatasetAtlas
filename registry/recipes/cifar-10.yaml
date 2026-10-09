@@ -1,0 +1,15 @@
+release: cifar-10-original-binary
+adapter: cifar_binary
+expected_count: 60000
+scope: official CIFAR-10 binary train and test batches, 60,000 examples
+adapter_config: {}
+files:
+- source_name: cifar-10-binary.tar.gz
+  url: https://www.cs.toronto.edu/~kriz/cifar-10-binary.tar.gz
+  bytes: 170052171
+  sha256: c4a38c50a1bc5f3a1c5537f2155ab9d68f9f25eb1ed8d9ddda3db29a59bca1dd
+  format: tar.gz
+  config_key: archive
+allowed_hosts:
+- www.cs.toronto.edu
+- cave.cs.toronto.edu

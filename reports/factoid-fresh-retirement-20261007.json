@@ -1,0 +1,4465 @@
+{
+  "checked_at_utc": "2026-10-07T09:42:01.555252+00:00",
+  "status": "executed",
+  "scope": "Disposable empty-workspace FACTOID reproduction only; exact primary native original, canonical index, protected previews and aggregate failure/success proofs retained. Historical fresh receipt remains recipe-bound after body retirement.",
+  "target": "work/fresh-factoid-20261007",
+  "snapshot_id": "factoid-38d3940905bae0fa7c110111",
+  "recipe_sha256": "23e3d51baa832d5a3131fabafc57b0b070e0c50f2b57828afa59f9caa0adbf9a",
+  "fresh_verification": {
+    "completed_at": "2026-10-07",
+    "completed_at_epoch": 1791364206.4476173,
+    "dataset_identity_bound_by": "immutable_receipt",
+    "dataset_manifest_sha256": null,
+    "downloaded_bytes": 369319718,
+    "kind": "http_archive",
+    "population_scope": "complete",
+    "preview_count": 100,
+    "receipt_sha256": "3053c4072f110a60ec921746d050e6bcf703cf5acfdcadfb7ed2ef73eec3fa12",
+    "recipe_sha256": "23e3d51baa832d5a3131fabafc57b0b070e0c50f2b57828afa59f9caa0adbf9a",
+    "records_indexed": 4150,
+    "snapshot_id": "factoid-38d3940905bae0fa7c110111",
+    "status_sha256": "51d472a457fd65f25f69048bcb6ecbcbb4439ee76af5779cccd6a01ea86ecbde"
+  },
+  "files": [
+    {
+      "path": "registry/candidate_dispositions.yaml",
+      "bytes": 4835,
+      "sha256": "7b42c28876a1518da073d3123477b19b507bde086d9849091fd2ada0c511dec4",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/activations-csv.yaml",
+      "bytes": 3519,
+      "sha256": "5b7df9dc100b95f3c689d771583130b77c9545a9ab0a1004f87d4bbafb139295",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/advbench.yaml",
+      "bytes": 4202,
+      "sha256": "40f142aa66a77ea69012aaf5a023d9a6395ccdfe2890898c6669217c19f6a8f7",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/agent-security-bench.yaml",
+      "bytes": 3099,
+      "sha256": "244c16f78aa95254262703174420c89b5453b04d4fc3301ade6ea63631dcb92f",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/algopuzzlevqa.yaml",
+      "bytes": 2821,
+      "sha256": "dd4490f701f54b3128acf067d98563d5823a99ac2a80a6cc256a5ccf22565d22",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/alpaca.yaml",
+      "bytes": 3465,
+      "sha256": "3c12301949dda71efe96c275acaf62eb312cd2f0aa9ff2cc0664fed80a6d1cfc",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/anthropic-red-teaming-prompts.yaml",
+      "bytes": 2683,
+      "sha256": "b4fa8696aebda84deca0e28fc9a23fa53ed3fe15af6cd012c68f9971c6089bef",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/artbench-2.yaml",
+      "bytes": 2534,
+      "sha256": "b0d93a9f6def5991648f7a628d3af683946eb4adcf4775c3c912238e799c844a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/artbench.yaml",
+      "bytes": 4335,
+      "sha256": "3b2d68cafdaf55da607e425868bb25c8dc502e2fdee9f1328086393c9f648c40",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/artchive.yaml",
+      "bytes": 2803,
+      "sha256": "8eeabe5996236d2e2ca3949cc4d7cf75bc844da06407fb88320ccfea29c95425",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/asteroids-rom.yaml",
+      "bytes": 2391,
+      "sha256": "48f6440bc1211ad21215788deb9d5e2c67a200e1623dad167fc009e768dba940",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/audioset.yaml",
+      "bytes": 3992,
+      "sha256": "75ab9b05302c9a61ed6670f2b8de24930d8bf26df6bd00683830510ecf18d72c",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/bam-fg.yaml",
+      "bytes": 2835,
+      "sha256": "6a56ecea6323430d6586f9ee1844a1236a2273d3231650cfd0d9493e388aeca3",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/bapps.yaml",
+      "bytes": 1799,
+      "sha256": "49d608df4651df183e6540fc627ab96a038e543a31ba08a5c713cbb71624f104",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/bbq.yaml",
+      "bytes": 2392,
+      "sha256": "e6bf9bbd41c868ed09062fc2a3a5d446eebbcd56624c6b7250c8da26bbaa25eb",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/behonest.yaml",
+      "bytes": 3760,
+      "sha256": "7857a104d9dabb7671744ec01d5da32d2311296da12f340679730dbe2003c931",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/bias-in-bios.yaml",
+      "bytes": 4608,
+      "sha256": "52bde97fee5667b401e6ab59948cf634d52b2184a47d89569016b1aef4d2199e",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/blink.yaml",
+      "bytes": 3934,
+      "sha256": "ab628aee6c117746f7c535a9a4c8fc6770b9a73eb8783a40947671527fc9bf3a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/brain-score.yaml",
+      "bytes": 2489,
+      "sha256": "f9b850506fbe01eff0bc9c10f45e9bcafbce3d1d5d2b786b57302648fda121da",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/brca.yaml",
+      "bytes": 2663,
+      "sha256": "c8029b9e8be4582241a0ae1f21114d28a6170e797fa6f58090affedf12d95773",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/broden.yaml",
+      "bytes": 4186,
+      "sha256": "a5d6d73fd4105d96614ea4cddda66f93f4aeba407a954891ecd6e93c0374f1fb",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/caltech101.yaml",
+      "bytes": 4485,
+      "sha256": "9857d1d0a0956b7fb317d6e0e5a1fcbf6a7841843b4e4221ec6ac137cd1eb5e4",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/cauldron.yaml",
+      "bytes": 3477,
+      "sha256": "877a24af611381c45bf59cf3adfd2e8fc7794191a800dec03ffe14acc55793db",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/causalgym.yaml",
+      "bytes": 3625,
+      "sha256": "9afe4b1c0bdf5f1778d1c77fe69762ec94708905b2aac845ac65be0faa24566b",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/cc3m.yaml",
+      "bytes": 2395,
+      "sha256": "0eee655275ce93d40afd3d6540453cd9dd40a6c14db48406126ff17e3168a6d0",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/cebab.yaml",
+      "bytes": 6665,
+      "sha256": "ec400d87c567a187c84fa6f96f44ef723c4f4edc37ce420c27b1b8e43a209134",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/celeba.yaml",
+      "bytes": 4401,
+      "sha256": "fe94115104103d76f6199f66f93a0ad0dc1781c4d1bb6102dcf96cab364fb05b",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/chartqa.yaml",
+      "bytes": 3628,
+      "sha256": "ca9dfe08170abfbe7a506e3e2e1c6d7966423c6007ecb729889787eea307f849",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/chicago-face-database.yaml",
+      "bytes": 3162,
+      "sha256": "f89f8e7d61781d555e7428084efcecfe1cb3b1746157c9f372226ee63ed9cd4b",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/child-safety-intents.yaml",
+      "bytes": 3894,
+      "sha256": "9b5fe1478750ac7f563e4fa9d9ad93055ed4c96b4146abbe6164c28970f9c18e",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/cifar-10-1.yaml",
+      "bytes": 4653,
+      "sha256": "361734be343e070dc9ac26539c3ab97555e68f5bb16a13eee8434181401f76d8",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/cifar-10-c.yaml",
+      "bytes": 3729,
+      "sha256": "64ea7aa944bbaee7a232cfbf2f62e75b7a69adac6d8bbd284d2bfb4557238a47",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/cifar-10.yaml",
+      "bytes": 12388,
+      "sha256": "af32597fab966a4a661baccb6eeb7b9b29f5d2cf643ed7bb82025ccfcc329a90",
+      "allocated_bytes": 16384,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/cifar-100-c.yaml",
+      "bytes": 1915,
+      "sha256": "d86c910325fe82817a5fa2bf491871b02715f4575d34f510dd735671986cd8b5",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/cifar-100.yaml",
+      "bytes": 10641,
+      "sha256": "781de93b50699bd052877242e207b0bf2c6c4cf4f0d01119d57aa4ec3484bfac",
+      "allocated_bytes": 12288,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/cifar-2.yaml",
+      "bytes": 2880,
+      "sha256": "9b6270b03c8e1b24a48315f37c132f0c33b3168ed1128ccb0f4e1fd9f091e679",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/cinic-10.yaml",
+      "bytes": 2438,
+      "sha256": "3d7c38f664b503507711ea838f3b5b32084e100f0e75dec7533214c67316c11a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/clevr-v1-full.yaml",
+      "bytes": 3147,
+      "sha256": "c39577590b10c5537c0a26458fd9e01357be3e50655e172a97e21c3a64b885fa",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/clevr.yaml",
+      "bytes": 3907,
+      "sha256": "746b92978fa73f42b76c10f814d5a09620660a2072d434195ab0d23fe216bc86",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/coco-2014.yaml",
+      "bytes": 2611,
+      "sha256": "0bc8690ce6cd361222a51dd482125e6cb864de7156d55eabce8b3918f45e3461",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/coco-caption.yaml",
+      "bytes": 2656,
+      "sha256": "ff9f3d70c573ea8232f8bbc4b3eae66939053c5782533679cfa71142be727a07",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/coco-demographic-annotations.yaml",
+      "bytes": 3022,
+      "sha256": "721dcfab4f1a3898a4be2639a45a2f8afb45a78d415ad85e6492e6c134e977cc",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/coco-detection-dataset.yaml",
+      "bytes": 2603,
+      "sha256": "8ba537b6cc83606ba8ac1978edeb0698462c7bd2719b1c6e8aa27bb296d89130",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/coco-gender.yaml",
+      "bytes": 3394,
+      "sha256": "d19c40c30c053f6c7a7905c7d0531b8ce74b329e83c71026dba4ee95743b05d2",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/coco-one.yaml",
+      "bytes": 3741,
+      "sha256": "312647ad8bacc62beefd7012b4a7ee0ceb20f002c3271ee97d9de4fcf75b533e",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/coco-qa.yaml",
+      "bytes": 3337,
+      "sha256": "4b4de1cc0b9e6be5035de8eda5ad00828aa8b147ca1316b4ae9d6f5ddc3794fa",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/coco-spatial.yaml",
+      "bytes": 4862,
+      "sha256": "ae6e839eed87a76d76bee1c652f951178b4695b12b64c76157a626ce65e02b1d",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/coco-train.yaml",
+      "bytes": 2218,
+      "sha256": "28c3bddfd3c676b6c6221a8d832036eab6eb650c22fefbf1b96b9470fd5a9f36",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/coco-two.yaml",
+      "bytes": 3734,
+      "sha256": "e31fb2dbed16acb9f04804b6695b54dac04580ea2e4e47bd8dbd92621484dd77",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/coco.yaml",
+      "bytes": 10396,
+      "sha256": "4db62b50efa2e16b11a66d5b9893a7f615118ec783e85a5925312b44f92b25bb",
+      "allocated_bytes": 12288,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/cocogender.yaml",
+      "bytes": 8645,
+      "sha256": "5a1c27fd35c21d25581b1cc304dac8ab4848246fc96ecac64a2b9ef65ec83fb4",
+      "allocated_bytes": 12288,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/cocogendertxt.yaml",
+      "bytes": 3118,
+      "sha256": "94c820eb3ece8338dc4d73547a0cb022a91f036d6cda48083e98e1b246ff10b5",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/concept-editing-dataset.yaml",
+      "bytes": 2391,
+      "sha256": "d46d22ac0e00471389d01cf509459c8b323b8b97f9a75d8c3f1064f33d852a6d",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/conceptarc.yaml",
+      "bytes": 2358,
+      "sha256": "7552f0ae648f058d6c5c9ffbf8532fc41e4fc8b15751774a5ad5e4e28fb261db",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/conceptual-captions.yaml",
+      "bytes": 2949,
+      "sha256": "14ca85f19d11c441a08ae696c04d257ee8ea7aff58cee883a08bacb0b106cf05",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/contrastive-prompts.yaml",
+      "bytes": 2383,
+      "sha256": "05e89298a3edf9de8347325c2bd5baa79e7e1e9177e92395d7431d97b15117bd",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/controlled-clevr.yaml",
+      "bytes": 3803,
+      "sha256": "eee6e3cf4f5e8b4850efd05c3e203863399432af1be14b8409696f6d58a98941",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/controlled-images.yaml",
+      "bytes": 3649,
+      "sha256": "4393deed0d7c6adbdacb925d65c2b7f93daba9390e698d51ebad4b554b155e9e",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/counterfact.yaml",
+      "bytes": 3435,
+      "sha256": "2f4489d3ca851adea148a0a1eb2b54e95d5967ad77afabbc45df55cc20de3f79",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/covid-19-radiography.yaml",
+      "bytes": 2827,
+      "sha256": "37ac81b3fadf73daf43d0a1c30464cf5941b567e8cdaebcf874a4d3cfc6ed927",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/cub-200-2011.yaml",
+      "bytes": 2477,
+      "sha256": "101ee016a6616aae3fac105c37b7961ae1b1b769ae166d02d32276563ee8dcdf",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/cub.yaml",
+      "bytes": 2788,
+      "sha256": "c97161b6a30479cdb49237fd47c85bc022465c5e38bf4cd3426c7c6dd13cfa6f",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/cub200.yaml",
+      "bytes": 2206,
+      "sha256": "612beebd27c28a66889f2e49d61a412ec7128edb2c3cbe917294d1bc0adf5e59",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/custom-dataset.yaml",
+      "bytes": 2356,
+      "sha256": "e2e8b4f6dc4bdbe8cddd683531be395df36556e01d8199d3cb085b175c4e9927",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/custom-image-editing-dataset.yaml",
+      "bytes": 2328,
+      "sha256": "9fe581c0044e17f9d2361602e75ba798a08adf30e4633a62fbad8a28d5b1bd8a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/custom-neonatal-rat-ganglion-recordings.yaml",
+      "bytes": 3171,
+      "sha256": "87c65e98b14bdc31d9cbba891399949b854cdd4f66d14db50ecc65811cf2af3f",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/custom-propeller-and-rotating-snake-stimuli.yaml",
+      "bytes": 4101,
+      "sha256": "2b955a1ee1f6854586bdd058a7894cba25c9547e2ff422f3249027531e5f263a",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/custom-speech-segment-collection.yaml",
+      "bytes": 1437,
+      "sha256": "ce783c6c2c82b57063966fa65882d7fdacfd91d01a502652d64acf7e058fa713",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/custom-ternus-psychophysics-responses.yaml",
+      "bytes": 3300,
+      "sha256": "88f6a354e04ce9d44e811bd02822f8c187b87d322be4c9040d46356689b42b96",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/dall-e-generated-target-images.yaml",
+      "bytes": 2463,
+      "sha256": "5954dd1467531f789a2309c9ababc33a0971d003ac6bf3d6bc00267dfad4d588",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/datacomp-1b.yaml",
+      "bytes": 4200,
+      "sha256": "613f39551ac4bb3ed816fd5b9dc0e1d2516cf45c51c38003d61e46feb4e1b470",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/deepfashion.yaml",
+      "bytes": 2208,
+      "sha256": "ee097167b8da7157b2251a3414263f5cc9d8fc5fdb5abaf410edfb155efe3e0e",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/div2k.yaml",
+      "bytes": 3152,
+      "sha256": "d3f25b876171ebb35bf7e4360bb86683d3e0f8c52028882d839f6fb393bd4add",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/docci.yaml",
+      "bytes": 3903,
+      "sha256": "625b3804f36de269da94b28d604080a3a6ceb06e7e605ebd6388285b57ac252e",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/docvqa.yaml",
+      "bytes": 3615,
+      "sha256": "8f67cbce43e977893d2e357858a12805ef766f1f2e96d16b8282b079bc010bd0",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/donkey-kong-rom.yaml",
+      "bytes": 2399,
+      "sha256": "67e8bc2e4399bca92572dce3faf5841efb443b8d5448e2802c51d7372cca3d28",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/dreambooth.yaml",
+      "bytes": 3147,
+      "sha256": "a321c2c4e355aa3eb1fc97c8f9b6e34082f7cbb1e506525b18dc9c7afa16ddc4",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/dtd.yaml",
+      "bytes": 7103,
+      "sha256": "4b1c2d8abf18be356cb8ce71805b602ff4298199eb8b58551626da632732530d",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/e-ic.yaml",
+      "bytes": 3927,
+      "sha256": "7d3165a42c7332c8bb1e32dc856cc8a2a4f268d12bc6fefc3fa654278c07255f",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/e-vqa.yaml",
+      "bytes": 3971,
+      "sha256": "3c51d1d73c78e443b07d3fe5d5094d95a9a1602dad784680ccf67348a350e65b",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/emnist-balanced.yaml",
+      "bytes": 5381,
+      "sha256": "cb91a8bffed57b0c297867feb700a60d68fdde506bfdec98271e8014ce5e7e61",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/emnist-letters.yaml",
+      "bytes": 3356,
+      "sha256": "90a8eb4dcbeeb8e72ead98e59278cd7340a867e75eb180b5a59485fcc58127af",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/emnist.yaml",
+      "bytes": 3941,
+      "sha256": "8ed740314ff81d79c9c1aebafa94da4e95775fc3c4ba31a2a2226556e4f9ba27",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/emoset.yaml",
+      "bytes": 2259,
+      "sha256": "2ba83531e73a4786ecbaf0bc52fd89d1e9ff92ae071fd3c779f5d04a4679b29a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/eurosat.yaml",
+      "bytes": 3907,
+      "sha256": "e4d02864db723aa088b460b8eca6891682e36bfca2dddd330def1adfff9a14da",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/exams-v.yaml",
+      "bytes": 2180,
+      "sha256": "0df18408372049de38345d6cf1441629b72a1db5142068433af1f93aaadc7fb7",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/facet.yaml",
+      "bytes": 3122,
+      "sha256": "ddc1b7896b1b97ab2bdd04e70d0446dfb63ba699b6fe723d50d2c8a95b55d0e6",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/facial-expression-recognition-2013.yaml",
+      "bytes": 2487,
+      "sha256": "91810a97342594b94263b7e6056678073a512300de620a24cc712bd117774898",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/factoid.yaml",
+      "bytes": 3433,
+      "sha256": "3313ae94040569e81eeb21d3dec57408f69d34ac8feac7fe8ae8ac9023f0dffa",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/fairface.yaml",
+      "bytes": 6041,
+      "sha256": "ddf06dcd58eecf7d3dd898a62a3f8ba80377c0beaee7dba35e5ab38bfdca7751",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/fer-2013.yaml",
+      "bytes": 2369,
+      "sha256": "4862e526966be52f3b388f2ec250e4fd97165431a9cf842539987d67f3e65729",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/ffhq.yaml",
+      "bytes": 2584,
+      "sha256": "502fd4d907c2dc3744cdc16dffdca7c0f4dd1d52f761c4ab269caf4819130003",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/fgvc-aircraft.yaml",
+      "bytes": 1798,
+      "sha256": "5dc878596ccfeb23fe7f34dbcc1cc745fb49cf2758630adc2e70c470289006a7",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/fgvc.yaml",
+      "bytes": 2267,
+      "sha256": "9f1538650e971f46544afade968377937b7533683d0a556f70aadcb93b31ce72",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/figure-linked-source-data-spreadsheets.yaml",
+      "bytes": 3870,
+      "sha256": "99b19ee282243398c91ba695e5d6b1054bbb8cfa552a19757466ba36ae73900c",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/find.yaml",
+      "bytes": 3862,
+      "sha256": "efbf9ac5fd7f4c118ecd6d31b42ec8760efd9637c3af1843dafd171200e67d05",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/finevision.yaml",
+      "bytes": 5574,
+      "sha256": "8c0705477bf94258e07ebb7dd4185c0afd1839af6f44f5e724ee9c6e543d5282",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/first-person-social-interactions-dataset.yaml",
+      "bytes": 4416,
+      "sha256": "fe725c3af268cc268e1c5c5750a3ab24732295595fb099f62c1191ffaa82f9ca",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/flickr30k.yaml",
+      "bytes": 8324,
+      "sha256": "21156f5567204ea243a62dbeef579d4e50052f02967e25521c993329985a2a46",
+      "allocated_bytes": 12288,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/flowers.yaml",
+      "bytes": 2362,
+      "sha256": "f59aeb1b4035d87d36ebbcca00288921532927b67df4728d1ce95caf8433730d",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/flowers102.yaml",
+      "bytes": 1680,
+      "sha256": "871b134f8926617a069e1995012c8cd3153f443da842b87349f31e73fe168416",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/foil-it.yaml",
+      "bytes": 3547,
+      "sha256": "7e151d99ad976f2e79505d392dda7e923dd2cbc0637909c1634f646c17e00e9c",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/food101.yaml",
+      "bytes": 1775,
+      "sha256": "4f94c0ee64e5aae9222b55809441c6cbd924ddc1969f457353daefd05a3e8481",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/gaussian-rubbish-examples.yaml",
+      "bytes": 1426,
+      "sha256": "8c990529ca007846ad9c3996cf9460d258daa64dc6ee2e8b873bd6b03e7e7cbe",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/gda-adversarial-image-variants.yaml",
+      "bytes": 1412,
+      "sha256": "a3d4a18c81e15de28781a2a647ea2b4b5c59fd9507d47d91379740913dd5e7c1",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/glue-cola.yaml",
+      "bytes": 3733,
+      "sha256": "55d2ed0bd9f7c05c8ec41d7766b10c0ae267aea2cd384d5d8f646ef85ed7b722",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/google-web-1t-corpus.yaml",
+      "bytes": 2473,
+      "sha256": "031331365b18c9ab625c00b4f8a85efaa7f1447da9bd4752ff0d45fcb952b096",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/gpt-4v-filtered-vl-gender-subset.yaml",
+      "bytes": 2674,
+      "sha256": "74eaccccd32d465e15334cca98670d19a6e7e8eaeef9de75391b5875cbbd5c58",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/gqa.yaml",
+      "bytes": 6674,
+      "sha256": "72d9bc964d7d780c7e18638b5d176e9afd1837aa6cef96410d6919f322fc0f67",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/group-labels.yaml",
+      "bytes": 3653,
+      "sha256": "f1bce0b700d87846614a7787ec137fb23a122d7b409b0decf7b28f44a15b4c1c",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/gvil-paired-illusion-images.yaml",
+      "bytes": 3346,
+      "sha256": "30762be29fe65e2bce8e84a23f72a70181fee7472f05570835e4da7aadca00fb",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/gvil.yaml",
+      "bytes": 5140,
+      "sha256": "9d822d5041503817ea7de39084f9d273c9aac66c6b3e33cf43f4b14d99411d2f",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/gyafc.yaml",
+      "bytes": 3123,
+      "sha256": "b4ce7510609db684cc114b7e875667fee8f34bdec90dc09881b7f8bf9e5e873d",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/hades.yaml",
+      "bytes": 3478,
+      "sha256": "b9e588cd0e9ec830f5d39ecc41a7d302c602fe97966e95ee65680f5614013cf1",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/hallusionbench.yaml",
+      "bytes": 4629,
+      "sha256": "a0de9613586b671fbb3b7f1614116437b9e15c15f70e6c967ed62befb999f496",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/halueval.yaml",
+      "bytes": 2421,
+      "sha256": "27ce79ef284639c9b1aeaa32461bfd261450f102766a4affd4fb9f77e755da5e",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/harmbench.yaml",
+      "bytes": 4606,
+      "sha256": "52b84f6f1f03a0329a3625c618c3120bb6961ff1de15cd62fac5e4bf4be1f260",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/hatefulillusion.yaml",
+      "bytes": 3765,
+      "sha256": "d40484893ce54ca09208138b1f43680aef09a0d5f21b866b094615e915a0eb84",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/hc-bench.yaml",
+      "bytes": 5112,
+      "sha256": "04d012940b5667b4213b3dffbadc7a31dec288556b01629a9352bc14a63edf8b",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/hellaswag-pro.yaml",
+      "bytes": 2023,
+      "sha256": "ebfbdad1c3f8373d1d9b6a9594d1b28c4b40d59113ee94e840e9bccfcab2fc05",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/high-quality-hallucination-benchmark.yaml",
+      "bytes": 3073,
+      "sha256": "79b3448453784cb2d68c631b0e6964270341762eb8129e2d7570f65e24d4d2ac",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/hod.yaml",
+      "bytes": 3727,
+      "sha256": "c050e82c449dcb58c9f08799cc7420b2fa1a3eade14a7b3a6eb1364242f62473",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/iconqa.yaml",
+      "bytes": 4281,
+      "sha256": "e245cf0b117a920b05b7ee3dbe9e8f6f4475e164765b57971c4147163bd0e29e",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/ictcf.yaml",
+      "bytes": 2630,
+      "sha256": "bf53e1165477162361dbbe44909c16e3c1d614c78f66bb72d5fd2b579ac9bd3b",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/idenprof.yaml",
+      "bytes": 3725,
+      "sha256": "4bcb6a03e8339e3dcc68df8e80b4b29030b396ed68973c28f1c6f40f565f0e08",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/illuchar.yaml",
+      "bytes": 4096,
+      "sha256": "24b80e989f66a9fd87e3a94c930d1513dddca3467635d89f9e7a8ad451ac8428",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/illusionbench-3c643c29.yaml",
+      "bytes": 7474,
+      "sha256": "7ded14e9a8d6b0f3a0a87915f1dc9f8bef058b737d274b08fb63af06a3eed931",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/illusionbench.yaml",
+      "bytes": 3606,
+      "sha256": "63bb44e97df9eb1ee19e4d9f7e0c4b1a9f0775dc353de7040118e03c504b8072",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/illusionmnist.yaml",
+      "bytes": 2996,
+      "sha256": "805439451158c901baaebf252ae2bd03271a60c7b152852bd0b7fa852cb612a7",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/illusionvqa.yaml",
+      "bytes": 3929,
+      "sha256": "3e87b5e2e12a5a7f72fe3eba4d65a3af2a99c43cdb8cd52f5e9a0aa76544ffe6",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/illusory-vqa.yaml",
+      "bytes": 2772,
+      "sha256": "d49f032231479b569e5f0cd1dfef36d084bed3b11e22d0bd09baa35f104b341d",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/illusoryvqa.yaml",
+      "bytes": 4073,
+      "sha256": "fec0d515d1e148a3800f27614812a72fbace9fd58a11e27b6572c39ed5cf4b34",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/imagenet-1k.yaml",
+      "bytes": 5866,
+      "sha256": "332d970b2dad8a190bb073a95226af95ba236d5e6e13e1faf73f3c2a336ec8dc",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/imagenet-a.yaml",
+      "bytes": 25383,
+      "sha256": "cd93300274bf08445eb956206b271bfb203bf4b74cec2750cbc163080d81157d",
+      "allocated_bytes": 28672,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/imagenet-c.yaml",
+      "bytes": 3330,
+      "sha256": "42f99b62f91e8664a00dca4d57dd242d4236c70f9eb914df81243f9aec7c32a9",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/imagenet-ilsvrc-2012.yaml",
+      "bytes": 2645,
+      "sha256": "580f7cdc8962f0b59e6c18429d45108bfde091c995d31814adb33039ee7e6c8d",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/imagenet-ilsvrc.yaml",
+      "bytes": 3237,
+      "sha256": "59437fb5e2220371ba739e8e39e3f49de58e72a93f00ae7544e930d542918179",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/imagenet-r.yaml",
+      "bytes": 25564,
+      "sha256": "c2ec5447cedcb46ba18f32ffedf4ed73660540ddea8ceb73ee33304559cba2dd",
+      "allocated_bytes": 28672,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/imagenet-sampled-1-000-images.yaml",
+      "bytes": 2783,
+      "sha256": "4ccd305ab295b41bf58bcc8485b6c17814d917508ab90e80c03d5bbe674c12fd",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/imagenet-segmentation.yaml",
+      "bytes": 2641,
+      "sha256": "eaf7e8fd0ef8563df159c14a88781a217570259380e10aebb1a6ea11bf01e672",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/imagenet-sketch.yaml",
+      "bytes": 3753,
+      "sha256": "4f391e6322d133038f0ad663b40ec295ce3d5854edeacd627d5ce4d1d3ba46f3",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/imagenet-v2.yaml",
+      "bytes": 5270,
+      "sha256": "da76bb2d5264b4fb4901c2fdae41ad458bed54812f4279e5305f7f4874d5ebd7",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/imagenet.yaml",
+      "bytes": 17816,
+      "sha256": "ab922d4eadce4187cca5c7b439b42a8df17ed0b72ee626aaf2150ddb23b580ac",
+      "allocated_bytes": 20480,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/imagenet100.yaml",
+      "bytes": 2568,
+      "sha256": "4380c042cb54dd372e40825bc72b350209f3ac383e3cfe920ed0039a2de233ed",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/imagenette.yaml",
+      "bytes": 4131,
+      "sha256": "2fdb81fab3feccae7f686b843eb29a647f2d20204a5dbe5b05170ec95b1f1b1d",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/imagenetval.yaml",
+      "bytes": 2458,
+      "sha256": "d8205ef34fc88ccc76c5ca0db627833bddea5134467642f7775bcf3e9fb5b2ac",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/inaturalist.yaml",
+      "bytes": 4086,
+      "sha256": "ec10dc965b2f2cfa597441108fc8cbfaf32648186dcf1200ec5088c9a9e15e45",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/interpbench.yaml",
+      "bytes": 2769,
+      "sha256": "f0c784c840ec52b87d4fd65f1445fbdb158d3e912a67220e166ff95c5082a4fe",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/itac.yaml",
+      "bytes": 3075,
+      "sha256": "64335dac0f984cc58b7a586a07d305160c31d340cb1d1be6a78e997052c4edb9",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/jailbreakv-28k.yaml",
+      "bytes": 4192,
+      "sha256": "a1917eb63cf0c10c3bf70ddd4bd94003dc96bf33318af31a3658b3b873ec3c8e",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/jiechieu-tsopze-resume-corpus.yaml",
+      "bytes": 3117,
+      "sha256": "a9135a18a1c353506ff97d39e102234f53e8d0c41ee01ded9ad51db5c166ce70",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/laion-400m.yaml",
+      "bytes": 4900,
+      "sha256": "6a1cef138d12c728a7e75ce8364375a5e184754e9a71779f87e2d432d29b904f",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/laion-aesthetics.yaml",
+      "bytes": 1349,
+      "sha256": "63e79764c4647328da328e42726e1daa94c2313b5ef66d901bad5f12dfeed95d",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/laion.yaml",
+      "bytes": 3073,
+      "sha256": "c1c1a896f6c001ada7dbbb388d675ca1ae1cc998d6372c30b17ebf8a399a507f",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/language-identification-dataset.yaml",
+      "bytes": 4446,
+      "sha256": "637658a61494432679dd9cff0b032aad5d7e3e998b2047149ffb6955148b2c82",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/lingoqa.yaml",
+      "bytes": 2857,
+      "sha256": "3a2f417ccf01b5089b5aa2a1563b44c27506f0b510be91c3941b753ed0aa7fdc",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/llava-bench.yaml",
+      "bytes": 4577,
+      "sha256": "a84076ea1aff70e9ed687d77208f0a8b33d3ba947f5da87df7b24ef4a8d2033c",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/llava-instruct-150k-3a74a703.yaml",
+      "bytes": 3204,
+      "sha256": "bccde659529dabeda65e318e188d400c760107d387acb05a11fadb1cf6863f14",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/llava-instruct-150k.yaml",
+      "bytes": 2611,
+      "sha256": "5e47ad238478f7cc457ed7e83090f5bddc02b7d193686c5d4b1a53ab9c0fc36e",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/maliciousinstruct.yaml",
+      "bytes": 3140,
+      "sha256": "33733bb979de10b4a2c9f3f49494c73c9ec13aa77c5e30d77d85c82643ac22f4",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/mathvision.yaml",
+      "bytes": 4616,
+      "sha256": "0196c70d676d1e51e0f861406ab87182131c72f0782dbce0c658b4befaae4fa7",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/medical-multimodal-evaluation-data.yaml",
+      "bytes": 3397,
+      "sha256": "85cf85d12d91f1562522b225171b287e51e9efad88897283ec1112192363c107",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/miap.yaml",
+      "bytes": 4152,
+      "sha256": "539ba4a01c53ab7d0893d53edeaa1f09b15b29d913868aa93396a886db7bef40",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/middlebury.yaml",
+      "bytes": 1332,
+      "sha256": "d5dd5e19a50d34ba8e81189e497f6a58437908d994e2ef7606634fa9da2a328c",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/mit-adobe-5k.yaml",
+      "bytes": 3038,
+      "sha256": "2c8dc8e760b6fa87611039e4098729078550ebe3700ccfb58c728db8479cd869",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/mit-states.yaml",
+      "bytes": 3387,
+      "sha256": "0f3c2dd975c4313cc435cd1a397a0857de3aa840b9f5ea263fc1bfaac14d77d9",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/mllmu-bench.yaml",
+      "bytes": 2878,
+      "sha256": "331649853f500dce99f7e57b183f8a7586675fa1450273bc29602dd7075f757f",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/mm-safetybench.yaml",
+      "bytes": 5272,
+      "sha256": "e3250f59ca51f01bfcf99303e42634ede6ac26f11510427e8e7825cf949c56b4",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/mm-vet.yaml",
+      "bytes": 5002,
+      "sha256": "63769c46f985c4d1269a8cdbda6f65dbb0bf62ce66fca163ee42c98a047ef082",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/mma-diffusion.yaml",
+      "bytes": 3749,
+      "sha256": "0f6f0fffea9abdfa07035f849689b6573e9d700264a3faa3c0fe831fe05c5d35",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/mmbench-en-dev.yaml",
+      "bytes": 4147,
+      "sha256": "75bc8fa66827bf87a8426bcbd966d2792825c13b374d3539aec6c1759e668d36",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/mmbench.yaml",
+      "bytes": 3522,
+      "sha256": "afa86a4ae366247626e14faef73e1bcb5805b7e923a50c3d6d8e8a2b18cc5757",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/mme-perception.yaml",
+      "bytes": 2517,
+      "sha256": "78546b4a22536a405bc22243c7377281678a46a0630e6fcdd64cac68f98ffff9",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/mme.yaml",
+      "bytes": 4516,
+      "sha256": "45e3f87f2bb08f3ca80d98ca65f009ca4a6c7c1f74d390d6a40aa7da9601e0de",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/mmmu-dev.yaml",
+      "bytes": 4555,
+      "sha256": "ffc70aad1437768ce9f49e8a25fbfcd948c2d4e52427635fe31252b5f20bd224",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/mmstar.yaml",
+      "bytes": 1789,
+      "sha256": "ab2861cd003168a7489113b5c68addf4ea07b611b5a835269995ec53ba522144",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/mnist.yaml",
+      "bytes": 8911,
+      "sha256": "fd6d87d89b5c15ac10297e87d3bf34a72486cad80f4e78e611a27bbed8ef727b",
+      "allocated_bytes": 12288,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/mrpc.yaml",
+      "bytes": 3914,
+      "sha256": "76f2d82c891d2097d9e28109b1af93da56471fb84d223e65fb2d914270841977",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/ms-coco-7f846b38.yaml",
+      "bytes": 2240,
+      "sha256": "3ae2912718126b9ecbff1358689fc004f58032ac1a99229a5895c2021d392b53",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/ms-coco-captions.yaml",
+      "bytes": 2290,
+      "sha256": "e12ffd128e5b96f5efeaf20b9f85d7588899594cdbbf3a636e67a5baa72e43b8",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/ms-coco.yaml",
+      "bytes": 3294,
+      "sha256": "1720c2dd348261604e532862bffae15a8a5280c266f7670d8cb3968ec109b737",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/ms-cxr.yaml",
+      "bytes": 1924,
+      "sha256": "b84c7e464ec8228ae67e306fd8496c8fd7c90a9fb1cfd34c464ddff917b39277",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/mscoco-100-target-subset.yaml",
+      "bytes": 3374,
+      "sha256": "f0a803b2644a1cd42f4542d42ccb6de8cdab429eca7bc1330cdf09c13af5769b",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/mscoco.yaml",
+      "bytes": 2535,
+      "sha256": "55e990981357d575fd235badb4a3edf7622f94639c8b3e2a3c3517cef363e977",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/multitrust.yaml",
+      "bytes": 4240,
+      "sha256": "c32cc2eb058731384ff06d35057305003f4a17f0d8bb6d8f4f5348e5c1791178",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/mvbench-scene-qa.yaml",
+      "bytes": 3159,
+      "sha256": "d177733e0375837141a129eda84d5a372f8221dcd3807181167884ecf5039100",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/naturalbench.yaml",
+      "bytes": 3464,
+      "sha256": "1d3cc2bf5da25d3cc5d7e8cdcb8dd34f28018f9004c35a026f2bdcef01f46000",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/nips17.yaml",
+      "bytes": 4910,
+      "sha256": "a21587bb2a49354a290d38ce5e1efd15effca1b082e0408f2899c0071dedad92",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/nocaps.yaml",
+      "bytes": 4222,
+      "sha256": "8aa3876e59b1536295df8da66b08357c3341cf6e093c7dd60ddbda18086157b4",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/nrc-vad.yaml",
+      "bytes": 4094,
+      "sha256": "24f6c0e4243cc84f0ef856a9f73ffa85de83bfa83bc1349031e014cad4ff9505",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/oasis.yaml",
+      "bytes": 3656,
+      "sha256": "7339cce1c999ee1592e046da0aa10e7df22dc278b25da5897a1a206898a82c85",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/objaverse.yaml",
+      "bytes": 3634,
+      "sha256": "0a54f522b95a434c27e146ffbaddd5cd793d1552b72719f5e4c26be451e0eb4b",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/objectnet.yaml",
+      "bytes": 3015,
+      "sha256": "efb9eb2f103ab46ad9fc3de1cc3cc82b9903dc3e29c7129f51ff9bd41665d1b9",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/ok-vqa.yaml",
+      "bytes": 7856,
+      "sha256": "717a58ed0be92ac20b48894be0e64263e7b812d0c5894f275dfd672e564f90cb",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/omnisafebench-mm.yaml",
+      "bytes": 3655,
+      "sha256": "cc8be1a75778afe155e0b82976fbf54939a4716312009a592f46d4885b3ad196",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/omnispatial.yaml",
+      "bytes": 2786,
+      "sha256": "21cc3e7d35918f8198f0b2c06ea75adf5f22e2d3956ef02b125103c060156181",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/openimages.yaml",
+      "bytes": 3448,
+      "sha256": "4e1d5a52425c966a834b6b11e72c6565b6933bfc34981f114dbf8eda85c78064",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/ostris-dataset.yaml",
+      "bytes": 2541,
+      "sha256": "5845a7421aca4cc7171697b1ae32f9d19df827d4f300fce85d7e317b2eea4709",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/oxfordpet.yaml",
+      "bytes": 4663,
+      "sha256": "83f1d647883b34d64887b130885bed936808a8ea230b0ad69508ce3c8363be3a",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/pairs-csv.yaml",
+      "bytes": 3247,
+      "sha256": "63c5f308b9993d1c836d4172ce0db235e4dfb565d391c0ca4209ff019d9038f5",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/pairs.yaml",
+      "bytes": 6006,
+      "sha256": "a8feb085d4d2582bec9ef034ca6b6dcaad76b7425e9e001a922b9803143f1154",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-08e415961919a492-unnamed-11-image-inpainting-set.yaml",
+      "bytes": 2910,
+      "sha256": "99c90c60eb751d0b5132b8fa638942fdfc7465bd944a463e617333496dd1cc10",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-08e415961919a492-unnamed-real-noise-benchmark-46.yaml",
+      "bytes": 3122,
+      "sha256": "1e1633d4364c5d2f8ea43dfb3143f3525e7daa9bb63dcfb956713cb41f7e2e99",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-12e8bd34b4a2f2a8-unnamed-harmful-instruction-evaluation-set.yaml",
+      "bytes": 5325,
+      "sha256": "d1a6ff63c3ddb97035ebd5dde75b619a8c021074442e46b95b8997bb6ec0c31e",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-12e8bd34b4a2f2a8-unnamed-harmful-sentence-corpus.yaml",
+      "bytes": 3478,
+      "sha256": "1fdacf135ee485e8593ee48fcbd03f5df515e85d7df2d90f710bb67da6bc3075",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-164d7c221452ffec-unnamed-cfd-morph-collection.yaml",
+      "bytes": 4441,
+      "sha256": "9b8dbcece7a9604dabb065ebd382d5a35c1a847d8a9dfc3919ea2b1cdea1420e",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-1e2474b15fec2d7d-unnamed-controversial-stimuli-collection.yaml",
+      "bytes": 5973,
+      "sha256": "06631b5437a51b46358e0a156bace67ff4d30359a8cd42e55c4af37e058d8eb5",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-2aa40aa13ed2a25b-unnamed-objaverse-spatial-images.yaml",
+      "bytes": 3641,
+      "sha256": "1933144a1146b9b28eb73d8a53c1ac42a1feceac7e63439314a08755f8ac160b",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-2aa40aa13ed2a25b-unnamed-synthetic-spatial-training-set.yaml",
+      "bytes": 3101,
+      "sha256": "dbc116e403ff1fd2bf6dde6b4fbdf0b828dec5c63104ac29f44fea101531b5a0",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-collection.yaml",
+      "bytes": 2084,
+      "sha256": "5302f081c53a4dcc034581db4c3e82b868d58a3920e8941f5358c94d937e44e0",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-set.yaml",
+      "bytes": 2052,
+      "sha256": "eb6e23f9970b111015decd9885656e265485530a894cf759aedf9fc254c86d46",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-63c3bd849356e00f-unnamed-robust-nonrobust-feature-collections.yaml",
+      "bytes": 1778,
+      "sha256": "94591c043c0239ad430bfda728a6442ed949c3aae837f42e294736969b551e3b",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-6a7364738bac9f07-unnamed-online-illusion-repositories.yaml",
+      "bytes": 3170,
+      "sha256": "6a9aae0f2e1457bc5337c92a33d12d178f28c931e244cfb9ee4152f5bd49074e",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-72040eccb96ead7a-unnamed-synthetic-spheres-dataset.yaml",
+      "bytes": 1713,
+      "sha256": "607ea28ffa4b616588923c1f22d85815bd58e5156f246ee785f47c4bfbe53ada",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-728d8c0964b540ad-unnamed-youtube-image-collection.yaml",
+      "bytes": 1804,
+      "sha256": "d54ede2e2a7b28be64f41ca34ee579f7d8cc112e60c6de284d6785c0dffdeeaa",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-765a2362f8735bc4-unnamed-social-category-question-set.yaml",
+      "bytes": 2874,
+      "sha256": "bec4e5b76f946a3a8ae75120c81ed565d7fbfd6d8874d32768786dfe253f94e0",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-9036b4eaa048dc21-unnamed-neuron-pair-judgment-collection.yaml",
+      "bytes": 2344,
+      "sha256": "e63d26046e4ad6f45a9736c5bcfa81116a3d3cb25ff8ad9846526554ab881358",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-944952997d24ce45-unnamed-van-gogh-painting-sample.yaml",
+      "bytes": 3460,
+      "sha256": "e894438be740b32e2db84d581bbcb140c92414f4bfaa4f5b083aa08ea61d08ad",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-944952997d24ce45-unnamed-vma-candidate-pool.yaml",
+      "bytes": 3507,
+      "sha256": "2cfb6a1b9cb4f83a8da735094c2042a10ce9e51eed52397224c61032fc56f3f4",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-959e8fc51787f7e4-unnamed-curated-internet-image-collection.yaml",
+      "bytes": 1772,
+      "sha256": "b8dde6f8c92e30af1816a8750003b2a82ba73919ff7ffdb27d4e2eda51882ca0",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-959e8fc51787f7e4-unnamed-internet-image-tracing-set.yaml",
+      "bytes": 3223,
+      "sha256": "812f69b341da443c9b92686f1f9d978c9fce3ac7e33855f894d59b3c94933cd5",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-959e8fc51787f7e4-unnamed-sea-otter-image-sample.yaml",
+      "bytes": 2802,
+      "sha256": "590c9bee134d4789e1ee6a484a599c20d7c841bad9e42994c995a63612d4b68d",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-ab31cc6a994470fb-unnamed-human-adversarial-stimulus-collection.yaml",
+      "bytes": 1771,
+      "sha256": "69954d720d2b5a28dfcbc7eec03bc48abbf67185f8163a42fd2058889243af3e",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-c12960e5d652fb7f-unnamed-attack-generalization-collection.yaml",
+      "bytes": 1757,
+      "sha256": "229af680c54f0b34360790611561fb7bb54c35847394ec11bf47d6635d494aa8",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-f6dcb0e50d10ea38-unnamed-ai-generated-gender-image-attack-set.yaml",
+      "bytes": 1769,
+      "sha256": "21dd857d6694c7145faa97b596ccb9147a5e050076e02b4c4034941924280e1c",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-f6dcb0e50d10ea38-unnamed-explicit-image-attack-set.yaml",
+      "bytes": 1802,
+      "sha256": "b7f32d1f093ba63cfe72769cf63bde030a780f2d86897226efb0dbd6e2e869ff",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-f6dcb0e50d10ea38-unnamed-historical-event-image-attack-set.yaml",
+      "bytes": 1807,
+      "sha256": "4499cd25b89dac4ea7a27eb6583c8c862d398d448c9c74442226306a020a4918",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-f6dcb0e50d10ea38-unnamed-product-screenshot-attack.yaml",
+      "bytes": 1750,
+      "sha256": "fa956615fe1c49b33050c38b477bdec180bd14b97e2c53aa88c925e022755cc7",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/paper-f6dcb0e50d10ea38-unnamed-public-figure-adversarial-image-set.yaml",
+      "bytes": 1585,
+      "sha256": "ffea6ef7f2fbdef94f8327deb69834b91bab0ed3aa219e6cbffdccd913ff8476",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/pascal-voc.yaml",
+      "bytes": 2776,
+      "sha256": "ba84fbed71369fee785734772f5600ee80a9ee204c6533ed948ff76ad48c0eca",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/pata.yaml",
+      "bytes": 4360,
+      "sha256": "6196fd4b20fbf493817c5c86065e2ee80cdacdac1efc390eb1fbdd6624dcc755",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/perturbed-gender-benchmark-image-variants.yaml",
+      "bytes": 3118,
+      "sha256": "bd1a2051a1910eef5ed20c8082f37032a6c564c4c9b8c02ad0aeee5a7cf838e4",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/phantom.yaml",
+      "bytes": 3091,
+      "sha256": "d8acd5b0bab7689da8b2d7054c4de3ce3e84eedcc6c711903e07021a737f3638",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/phase.yaml",
+      "bytes": 4743,
+      "sha256": "44d472855b202f4d6582755ae1eb8e074916264bb9d427012c5aaa0a80d69557",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/pitfall-rom.yaml",
+      "bytes": 2352,
+      "sha256": "9f2c15fce334bf05515d8d0febe8180370d07eb3b87eed16e9d8618ed74cbf81",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/places.yaml",
+      "bytes": 3482,
+      "sha256": "54c83ce3bd47c560679aa85dc49b1c406a247c551b2e13bc2ada8b59b36061b9",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/pmc-vqa.yaml",
+      "bytes": 2370,
+      "sha256": "b350d3666a3449a831ff231a4fd36632d94bc86035802b143f6ee8514ea1e61b",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/pope.yaml",
+      "bytes": 7446,
+      "sha256": "f6d88f71becea0c364bef2f858bd95f6ca4077e9d7fa902df62cac39174ff763",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/puzzlevqa.yaml",
+      "bytes": 2236,
+      "sha256": "041e2dd544406b1957824b8614bc3afff09dc6ca0e555a577ebc92ed9a38bb6a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/qnli.yaml",
+      "bytes": 3576,
+      "sha256": "27b8f3e2c83e2b80712f702a20d9e4bd137b02d72054b853b73a1be7d7db29a5",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/qqp.yaml",
+      "bytes": 3861,
+      "sha256": "c43c4d015a63e1949ca2b69a1549b1e789df71fe033dd36ed036eaba4fc432c5",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/raise1k.yaml",
+      "bytes": 2364,
+      "sha256": "89569357418bc0e139411d8c934f0004736f2fab7a6e82f44e26da328bb3dd10",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/ravel.yaml",
+      "bytes": 2851,
+      "sha256": "809b20fe8947dbd828451d6a71baeef58fef5bac427cb83e8e8177ef56f8ed6d",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/realtoxicityprompts.yaml",
+      "bytes": 7517,
+      "sha256": "d7c51a017d8e51389b4ae203b67c045dbacaf3cc2a0fcdf7364d4bd265e91319",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/realworldqa.yaml",
+      "bytes": 4515,
+      "sha256": "5ac04aef5c02cce71f154a44a9419b59334dd3a5a06178da3c9f33fbc13a2f81",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/recap-datacomp-1b.yaml",
+      "bytes": 3179,
+      "sha256": "f2a0aa49356c30d77819b26db75331899a96f2d02eee9cc95d067457f7d1501a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/restricted-imagenet.yaml",
+      "bytes": 2755,
+      "sha256": "c5f1669a3887390572eac06d92dc3ae6acd57ac32d13e69f4d18408f9ee7781c",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/ring-a-bell.yaml",
+      "bytes": 4148,
+      "sha256": "8a5ea1d435f43db5f7aeca8bd6f9a6199047afc44be832402f431185e0496513",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/robustbench.yaml",
+      "bytes": 3939,
+      "sha256": "9e3ebc8a83b588b094b9bd29af9b3912d0d95d837a8a8842980364194b5d9877",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/roco.yaml",
+      "bytes": 1924,
+      "sha256": "3d9905e06cb0635aee86f798d9f3c7cd9b8da77aed324c884a21a463833ce8e1",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/rosmap.yaml",
+      "bytes": 2763,
+      "sha256": "53295bd6c049eeb607bc9f6ffcd0e62d45d8740240f8655c11e37460104b6204",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/rs-vqa.yaml",
+      "bytes": 4241,
+      "sha256": "60eb99211179894d2d1da06626129073cc8735fb1cc59a20f029017c665630f8",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/rsicd.yaml",
+      "bytes": 2704,
+      "sha256": "c991b6bb7e3f2f7d88b37f4f67c8f138677648625722a97c1f872a62ee00e741",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/sad.yaml",
+      "bytes": 3864,
+      "sha256": "a93baeb74574c0fc41f392b10a06f30e10c2aaa5518a9513c85d2040cb7a1841",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/saegis-clean-and-adversarial-splits.yaml",
+      "bytes": 7080,
+      "sha256": "0c5cc61e3297816a594357b3322b3b258f5961c6540cb9aee84e00ddb0d7e9a5",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/safebench.yaml",
+      "bytes": 2723,
+      "sha256": "99c5fa421075b5c79b8d83251f231ed426928d31ae521b76a92ead554183b53f",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/sb-syn-crop.yaml",
+      "bytes": 2491,
+      "sha256": "93f2e2b97c72c88c7a7f15bdc0305b8c8d0a943019c85c86ce7a167f93e75124",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/sb-syn.yaml",
+      "bytes": 2558,
+      "sha256": "75cdb003e6ffe5d433ff93964ff288f7d91dfe1097cfd2c947711e2dcf8b7c08",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/sbbench-syn-crop.yaml",
+      "bytes": 3263,
+      "sha256": "128788b11453b808562efef1bbefc4eb1df47b71917953e6b99d1535f0315db7",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/sbbench-syn.yaml",
+      "bytes": 3309,
+      "sha256": "1e3d842f3dbd6d5715e9e058e49b11ac5936293c1544765778dccbdf2ab989cf",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/sbbench-synthetic-age-crop-false.yaml",
+      "bytes": 3230,
+      "sha256": "3dc20c4612d8408312053ec5e09c1515ea94b6481871d6538bed3d3ca582c82b",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/sbbench-synthetic-age-crop-true.yaml",
+      "bytes": 3473,
+      "sha256": "d620bb554219fa731ef15a873fbfc51f1cfde89357157f73e255ef44838ce62b",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/sbbench-synthetic-gender-crop-false.yaml",
+      "bytes": 3254,
+      "sha256": "5293b17fa0c0201800f6bd6ead86c37c386c42c2a1cdfb2f358605883b3059bb",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/sbbench-synthetic-gender-crop-true.yaml",
+      "bytes": 3257,
+      "sha256": "e919cfe6e8dcf734c473b994d04b6050730e5d964df87debb82cc6360156ea41",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/sbbench.yaml",
+      "bytes": 3854,
+      "sha256": "ee52ff5bbc4d6fcd98e1bceea1fe163ba5d4acb947b40aee317bd45c9ed3b1d8",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/scienceqa-img.yaml",
+      "bytes": 3900,
+      "sha256": "70a55b3d89a9cfd51f51c80d73f92b0b6d0c13e4b77598579d4f96decf27c1d6",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/scrambled-mnist.yaml",
+      "bytes": 2727,
+      "sha256": "dc729d5ed54da8e88682a145d1ee5ce4d2964a2e6934203becec6ebfae4b831a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/seed-bench-2.yaml",
+      "bytes": 5239,
+      "sha256": "248a2328efbe5022ef2aa96c7256209ef97cffd68b2d0ed1928169c325697a2c",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/seedbench.yaml",
+      "bytes": 2892,
+      "sha256": "067ea5eae5481e6950c81ddf45995b9b1a9c4fc3cd4122ab2d46e81ddc642958",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/senator-tweets-2021.yaml",
+      "bytes": 2808,
+      "sha256": "df02f10763425c70a1f48b039092ae57f9906b45a8cf3ebcb9f5acc790f15d25",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/set14.yaml",
+      "bytes": 3988,
+      "sha256": "0fd56362a2c557b961b062bd7bc978ebc047f630c63932e9a71cc8fb3ba02625",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/set5.yaml",
+      "bytes": 3979,
+      "sha256": "3008eb25b77493d298eb4b1fdc0f29029d43b9d602b019503855f3bcf21e2304",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/shapes-localization.yaml",
+      "bytes": 4194,
+      "sha256": "fa50d38a1d0471f4df79ac163a3047c186fdea72e0c50c88147f19142c7a38a3",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/shapes-recognition.yaml",
+      "bytes": 4243,
+      "sha256": "c0ab3df457a17f6c65ec1f7c5bb0a66b98a72fb28a85affea92caeb91ef34b46",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/shapes-relations.yaml",
+      "bytes": 4185,
+      "sha256": "ee83feb0a613a895072f20a1a3548329bca28272910fc4c906f09d753639d0f2",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/shapeworld.yaml",
+      "bytes": 2319,
+      "sha256": "ab4459d3b925232cad7989979b6712fe2cbbb2c019313be412c45f746f67783d",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/shiftmnist.yaml",
+      "bytes": 2824,
+      "sha256": "dcca7e8edbd743e00724cb55ab281c5cb6e05abefcc08a2efb0909d4456e1fe4",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/simplevqa.yaml",
+      "bytes": 3405,
+      "sha256": "0a42b8258b7acfbf8d236bfe27760baea0da97c588f7b7476fa83d08bf04f523",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/simulated-transistor-traces.yaml",
+      "bytes": 3277,
+      "sha256": "fe19bb3f3f3e6ea756a855be6eb909ced7470d1f400cbf1735fc0971deb09456",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/smolim2-135m-10b.yaml",
+      "bytes": 2891,
+      "sha256": "0611eb751092834089ce431c1e2cef680d3a3bdfc8f74604fe22413b1bbca3fa",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/snli-ve.yaml",
+      "bytes": 3958,
+      "sha256": "8c0b0c5f1c8dbc8ef0ca8af7cb0bccdeee739ad2089b38766a0e9c9b097e8153",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/socialcounterfactuals.yaml",
+      "bytes": 4339,
+      "sha256": "ae900bd0c3fceaa83de8dcaaf0481d0e3b0a94b10788b351e0997b6487d6b491",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/sorrybench.yaml",
+      "bytes": 2715,
+      "sha256": "15d6b3c91fba692edf323804ac2a4aa8dbd9392adbb4493213846e0944d3fbd0",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/space-10.yaml",
+      "bytes": 2879,
+      "sha256": "ae450991f8ed7b9083080ebb0ab757014bdacd2049c7fa7e26e42e16cbff44d3",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/space-invaders-rom.yaml",
+      "bytes": 2382,
+      "sha256": "7b8a542fead01d877af87214e1170c509d5fbef9f0a6e300fd2243993acfadaf",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/spoken-wikipedia.yaml",
+      "bytes": 2980,
+      "sha256": "0631c71fc7c53e6451e8a9fec8bcaa1d4a52738996bea1600297bf68668f965a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/sst2.yaml",
+      "bytes": 3203,
+      "sha256": "f486808a5077d018a59e0d01e611b1a73d7cff447cce3d5492d32e066019a664",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/stanford-cars.yaml",
+      "bytes": 5242,
+      "sha256": "b49fd4e2ac1c662b983debb9911ae0277b3e0cd94880a3913a1a1b512c159a98",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/stl-10.yaml",
+      "bytes": 3171,
+      "sha256": "b46ab4b3d39dfba27de130e4789f05b0fe58472c75f1b91410883e88733001eb",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/sun397.yaml",
+      "bytes": 2463,
+      "sha256": "cb544dc62d06a67d5f540ca08f7bffd2b4df6a890da6f2d0d8fce330ea9c8ec9",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/svhn.yaml",
+      "bytes": 6335,
+      "sha256": "ef08287fb09ff5b59a6be9ae7648c1a54f269bd800738d181faf81e77283cf1d",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/svo-probes.yaml",
+      "bytes": 5741,
+      "sha256": "67306d54f06175c1e73ee20c4b5c32a49dd255d19328ae0b266fafeb6beab807",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/t2i-compbench.yaml",
+      "bytes": 3171,
+      "sha256": "741a1fedf5f72f23de08a1ca67d7b25ced804ad6e220759f060d71da931c5bd6",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/tdc2023.yaml",
+      "bytes": 3013,
+      "sha256": "f4c91d2b7d852b9a6aaf18779849f21f56ee1b5f2e212c7f80ddf87ca1c5c5f3",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/textvqa-x.yaml",
+      "bytes": 3852,
+      "sha256": "5577d1b9912f8753f7955ddbb955febd84582c6a73a185385aa73edb8e1d81de",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/textvqa.yaml",
+      "bytes": 7292,
+      "sha256": "e94308601f037c092f2635a53ebdb229b4f2b9b996192f78886df8112e6cba93",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/the-pile.yaml",
+      "bytes": 2356,
+      "sha256": "23bee12eff35094da7a13111b64b943aca199a93cfb94482c909cc70afcb2578",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/tid2013.yaml",
+      "bytes": 2526,
+      "sha256": "b15e4a5979cf14331995b743c9c4af957b08f0a81b07176a2fe531349a35e50e",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/timit.yaml",
+      "bytes": 2512,
+      "sha256": "a99a9fa7fead600d197b75e17673980088bc6df0bb1e63a9aba8854f849cf9b7",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/top16-images-csv.yaml",
+      "bytes": 2935,
+      "sha256": "24fef0f94911e8f90d74216061b0497089e52433c80db292653825bc942747c8",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/turing-eye-test.yaml",
+      "bytes": 2546,
+      "sha256": "72b4efa5fe153655c415b2fd6662d901d49941a13cae3633a29dc6f1d2f10730",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/tweeteval.yaml",
+      "bytes": 3740,
+      "sha256": "b1c57a09e51c055aff28760f352c8746867aaad06f591c1d84b0bd9088cb63d9",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/ucf101.yaml",
+      "bytes": 3749,
+      "sha256": "9f790c7b68c6c7db589a652e1b044a9ee29b198cc79ebd3c1ad07644b30a896b",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/vg-qa-one.yaml",
+      "bytes": 3601,
+      "sha256": "b5b2d566b9df4e32cfbbabd13a5031fa46403785c978cc36434953fb3e588507",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/vg-qa-two.yaml",
+      "bytes": 3519,
+      "sha256": "3dddd3cdb3183f9e0c950158d8f922af9d5991c5f3440d5fef9035d6d48a6f79",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/vhd11k.yaml",
+      "bytes": 4309,
+      "sha256": "cfe367160fab4fa57676b3c50ae7ee21794b6f266c142f5438f4a67fa04c8ca4",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/via-bench.yaml",
+      "bytes": 4271,
+      "sha256": "7daee15d2dbf0d70bfa41dd79e27a887bab3521929f19a346f90b08d38debd54",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/vibeeval.yaml",
+      "bytes": 3483,
+      "sha256": "c1f07ceefb0a9fbc0b0909d4374afcd7e42281832423e3cc4ea0eeeb63a604e3",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/visu-text.yaml",
+      "bytes": 2644,
+      "sha256": "e672ff2c8ae9a7eaa71dd96fe50b725fb90232c2601270f429a6815580267750",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/visu.yaml",
+      "bytes": 3110,
+      "sha256": "1696c5d181cd1b126342949cbf19d98b8ae369a40d8b2685ddb0fea687386118",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/visual-counterfact-filtered-467.yaml",
+      "bytes": 3560,
+      "sha256": "4794b12c8d2760da8c4fd0a70ee94138247baf2dd5d3399019134bdd18584842",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/visual-counterfact.yaml",
+      "bytes": 2444,
+      "sha256": "a51cad57d93e78467da71f6c5802965a5f7e848948e0dca6fd7cf51168811bb6",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/visual-genome.yaml",
+      "bytes": 4314,
+      "sha256": "7f04e3af36dce93d1b31ed892caf33e7c5ca550e6c79f7cf52fa55fac0ef7ce8",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/visual6502-transistor-netlist.yaml",
+      "bytes": 2881,
+      "sha256": "317bce2866b39798f4ba4076bfbd39723d9dd7ae7654f2026190442b98a78249",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/visualpuzzle.yaml",
+      "bytes": 3434,
+      "sha256": "f192a19e857ac297893f06a4368832a7c374b28c81d8e6ad0c55d3ff1970b9da",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/visualqa.yaml",
+      "bytes": 2743,
+      "sha256": "57ad8a3f7100be5b83a898ee46aa8e7f8be02ef073bc6c9ed293fc4b27166a7f",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/vizwiz-priv.yaml",
+      "bytes": 4106,
+      "sha256": "e4bdc9bb18ccc20b6eeb42056ba9dccb36b5b2cc005bb0d4a1c0da07acf73225",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/vizwiz.yaml",
+      "bytes": 6895,
+      "sha256": "dd6618be16271951dce2cad05b86ed8cdaccc3075296922933683d8f6b0548e7",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/vl-gender.yaml",
+      "bytes": 1912,
+      "sha256": "9dbb3b0793277066e98fbe54ab264b46dfe4b13188be91513ae8d46433400372",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/vlagenderbias.yaml",
+      "bytes": 3980,
+      "sha256": "0391f6aadc9672934990c56f63cb283b9f7bab7548b5777f39ad68a60c34fd46",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/vqa-constraints.yaml",
+      "bytes": 2300,
+      "sha256": "c18749aa59534dc98c56b25445469f49e0e3efdce27ae710af09dedbba09caa1",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/vqa-v2-m-n-subsets.yaml",
+      "bytes": 2850,
+      "sha256": "f26901073e36a41e54541234d86d14be1d5f8b7dd880cd81feeeaab0b48ac2d7",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/vqa-v2.yaml",
+      "bytes": 10424,
+      "sha256": "ff91e6bba5440d020c55573fbddb406a882854c0ef178b6630c65cd979211d8d",
+      "allocated_bytes": 12288,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/vsr.yaml",
+      "bytes": 4297,
+      "sha256": "c2208fc4ba4af5c800392681401fc7126817b40ee372c0afbb4c02d1be7af47c",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/vtab.yaml",
+      "bytes": 1192,
+      "sha256": "9783097b6744b1c2c9d5f3ec5647219f3be7d6a1f9cb4a4c01f28b50446c7f40",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/wall-street-journal.yaml",
+      "bytes": 2810,
+      "sha256": "866f457a16eb6fb6282660719f7ea9281a689b73ba432dd2bcbe372e952fb772",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/waterbirds.yaml",
+      "bytes": 2742,
+      "sha256": "3fc66f9c3c86a947dd1bc3448b07e778fee88269fdc7017823cc88f0cd4bb3b2",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/what-s-up.yaml",
+      "bytes": 3090,
+      "sha256": "ab976edfa517091ac2f7a010bd01e767d590f3e4c1fecfcd599406af2c566bf0",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/whoops.yaml",
+      "bytes": 3943,
+      "sha256": "37df2b7c11e615a38213a923815fe7fb1b2f2ac6a6f42ead7394f15613f15cb3",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/wilds.yaml",
+      "bytes": 2053,
+      "sha256": "1b6a546d74353bc3d16d46bae7e9e3a6b1a81b8bad7e3636ab84030ea147bc11",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/winoground.yaml",
+      "bytes": 3289,
+      "sha256": "36c5cd3d19898a46ca598b1f4e3edc6154beb344c07f1411acbcc49693bf7672",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/wmdp.yaml",
+      "bytes": 2242,
+      "sha256": "95600455644034a44bbea201b1e412e0f128f3741bf7e60c9720477d7fef2603",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/wnli.yaml",
+      "bytes": 3486,
+      "sha256": "f627b3a7ae07eee20f50eff7ca05d3465b076b94c92637607ead69f753aff100",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/datasets/zerobench.yaml",
+      "bytes": 2471,
+      "sha256": "4b61fbedb2325796ee3107dd3115b4d98b59d7888a30df6f6c0adda7bdc1fcf7",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/media/chartqa.json",
+      "bytes": 2525630,
+      "sha256": "a0ee410c33b8fddac0feca2565fe5f61a4f547efb19366ffb9366668f522f682",
+      "allocated_bytes": 2527232,
+      "links": 1
+    },
+    {
+      "path": "registry/media/hatefulillusion.json",
+      "bytes": 274884,
+      "sha256": "e09eb926b421f0ca96de7faadfe4d06ceaeaebda91071a2327ac32f106ef946c",
+      "allocated_bytes": 278528,
+      "links": 1
+    },
+    {
+      "path": "registry/media/saegis-clean-and-adversarial-splits.json",
+      "bytes": 607764,
+      "sha256": "c85de461990b88f838e687d7daf5aa4d2f35a730b67c4738d8d77c510366c995",
+      "allocated_bytes": 610304,
+      "links": 1
+    },
+    {
+      "path": "registry/models/fasterrcnn-mobilenet-v3-320-coco-v1.yaml",
+      "bytes": 926,
+      "sha256": "f290dbcd953cdf45f9778865cbe1ca1e3b7e27ec5eccda55790ef90ab5ef6497",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/models/minilm-l6-v2.yaml",
+      "bytes": 3642,
+      "sha256": "f76f4e6a38eeba0b727b73ac7eeb957aab18b7e633648b960ab013d3910a4335",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/models/nudenet.yaml",
+      "bytes": 744,
+      "sha256": "08eba04d1c463069180f75e440e463da15d867024b0cfa5a7e0a9960ab1bba55",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/models/siglip2-base-patch16-224.yaml",
+      "bytes": 2561,
+      "sha256": "a6e3d48dd5354bd64ae495615ea69d57b385af042db205444b79dfcb08c0acfd",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-08e415961919a492.yaml",
+      "bytes": 1127,
+      "sha256": "867f69b9f785ecff465bec5c6b736b701fd9f1e0fb2e74938c6a1c570c0b074f",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-09b2d7393fc75cf7.yaml",
+      "bytes": 1334,
+      "sha256": "f3156b90c35530212638c8b69b154257fcdcfd12be95e99746ab45fddbf9e8d6",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-12e8bd34b4a2f2a8.yaml",
+      "bytes": 1280,
+      "sha256": "040d52502316a776949757fb900de2201e4b27d8569631e1146e3ac048793c78",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-164d7c221452ffec.yaml",
+      "bytes": 1293,
+      "sha256": "85a8549f3872ff9f50cb523085e900fb54b75e0d6f62e17b8e54339392319975",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-1e2474b15fec2d7d.yaml",
+      "bytes": 1287,
+      "sha256": "90fa40bf73ff569df898e41b842e2a7d13e361b70d14045809c99b9ec9b0540e",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-2038cb87115b4fb0.yaml",
+      "bytes": 1331,
+      "sha256": "921e759fab5db2dfd21055a9a0c429b5d0335afc0ba26f9744f4aa838b39d618",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-208c53a35b62bc52.yaml",
+      "bytes": 1133,
+      "sha256": "60d1a120e9b060c32cf39ee62409cce5a3aa6a9c6933a9a1de711c770386b15e",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-20de77d4e60fd1bd.yaml",
+      "bytes": 1342,
+      "sha256": "31cd6213ecef4caae70121b3cf2374df297ed4f28568ffea5c60fff20a4a5ab5",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-24b951c4e4ec2d31.yaml",
+      "bytes": 1610,
+      "sha256": "aaff601f1a2b5271bdbf790ef5c9a5f3eec60b136dff03995cb7961423457382",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-25eaa8c74ce76800.yaml",
+      "bytes": 1871,
+      "sha256": "25f85160775877b44ba67a94418e0b22a1bddac53e30cd989fa971d5b10995b3",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-29349603429218b8.yaml",
+      "bytes": 1191,
+      "sha256": "fd5194611f620abcf11749db12fbdb9cd38203447f6e619225ea520eb70f90cd",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-2aa40aa13ed2a25b.yaml",
+      "bytes": 1568,
+      "sha256": "51d63bcd5f97a3cfdb6bfb9a87a009371b53dfe77b6450505bf342414b279c0d",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-2ae8012d97e5e3da.yaml",
+      "bytes": 1704,
+      "sha256": "415fd649bdca1f2a0feceef697580128f9346e7b53a15487c138df88ff1d2269",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-2c07a8c6af8e33c2.yaml",
+      "bytes": 1270,
+      "sha256": "16fe4fc4a6a46c2b31be72271cf19d6af6eb9186644e2f4a64527c88b93c482f",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-2df1203e2d3767bb.yaml",
+      "bytes": 1380,
+      "sha256": "5cb25f099ad60a5ba4a9e4d10ce46106e5be21a630f6ec173a86d22a9519eed4",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-32cea5e43d940514.yaml",
+      "bytes": 1572,
+      "sha256": "0409ea1baa03aa1311801106f38b1ffde897edd6fbcea8c9ae28c89bb8540503",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-347b77231e69b630.yaml",
+      "bytes": 1249,
+      "sha256": "5ac77e06706f2a2758e5944197bea308d82861f82e9065e177de704a56755fa8",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-392b0c393c06b48e.yaml",
+      "bytes": 1268,
+      "sha256": "e9749861eccf7b53ef2d99009d71585a0bb28f9e9e93afa307680dc1f4d32108",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-3aa07dc1c7bc37d9.yaml",
+      "bytes": 1436,
+      "sha256": "76af6730943d527f9d38a382b5cf696d5ad9426a507812cb6bdeb13ff8f51765",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-3e0db9c633ab204c.yaml",
+      "bytes": 1403,
+      "sha256": "6e57872b10358fa18a86207b9cf98aad49c1ec4737a398a326eac5d566f32b71",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-4f53de240f8fc1af.yaml",
+      "bytes": 1265,
+      "sha256": "3ea1c3b882b6eb7703aa364a9057ccc2c3fc8c8c1144b086d2f1aecef2bc5df2",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-52015222b27e7099.yaml",
+      "bytes": 1263,
+      "sha256": "23e228d4ecac7f882d6778af6e95d0bd4df024b9404762d7f4535b9d964a0c1f",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-63c3bd849356e00f.yaml",
+      "bytes": 1421,
+      "sha256": "195de2fc62f6319823cb4b0ad8129a170a854a3da631baa3785a028a3b1231d8",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-666de2b7486d80a3.yaml",
+      "bytes": 1161,
+      "sha256": "679e78bfd348f1aea0e6c29853a0c4507b76ac9610d63c4fd0b72133c30125f6",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-6a7364738bac9f07.yaml",
+      "bytes": 1316,
+      "sha256": "03ca658fa287e8fbf6dbda18583b7e3b8627fcbd3b2d421cac5700902a3d8b94",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-6c99cf73401b37d4.yaml",
+      "bytes": 1233,
+      "sha256": "f622ab3318a9f517234117aa81500744e561269dc0678ceddba26971b2bf775a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-6d747c88d639c5aa.yaml",
+      "bytes": 1206,
+      "sha256": "4d1a2b3f14e04f98d05b24f1778d45b7ecea85a8ca4360737c0656b63e3ce8c5",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-6dbb0d4a7b949143.yaml",
+      "bytes": 1386,
+      "sha256": "eb598af84362b594bf107411434a4bdbc1351cee36bcec7fb6829696fdb7c69f",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-72040eccb96ead7a.yaml",
+      "bytes": 1078,
+      "sha256": "29f85ee0c2a03216e624b9fa3b6ca295c89b5e716928b4653f0e095ef45cc521",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-728d8c0964b540ad.yaml",
+      "bytes": 1123,
+      "sha256": "371ca75f83635aa1daecf0d6b3845d823d77f47a732bcd022aea62533678f280",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-7531668a4a39f304.yaml",
+      "bytes": 1521,
+      "sha256": "8c2eea096bd4e1b3c110fee3667dca8e7131fda2e2e8805f522cc6355104f013",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-765a2362f8735bc4.yaml",
+      "bytes": 1273,
+      "sha256": "c436a4de6eb37a2d20b0875b27ab5f669d2e396342663f0fa33ef50e0f530faa",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-78a318ad1ec346ef.yaml",
+      "bytes": 1038,
+      "sha256": "0449e52973f5105c5930eb990c4832b29abea9e1db289ebeb23e1b70cd2490fb",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-79f7a50cea22ddab.yaml",
+      "bytes": 1309,
+      "sha256": "ee6e7ca58d6913da5cfc03df3bb9e43c22821a5dd2f5360950a8d548b8f1b4c3",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-7a1ff5996ce95273.yaml",
+      "bytes": 1222,
+      "sha256": "46585ea1b5f1a0a4dd9ecbea3331917971fe4c1bf309dee4e09bba35343284b6",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-7ed1979562251931.yaml",
+      "bytes": 1194,
+      "sha256": "941adbdaee3465509edddd8fed11e7630a0f36eaefa19a0e070ed7c4e06a7daf",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-80b7ba2e277a20c5.yaml",
+      "bytes": 1313,
+      "sha256": "9b03dc778a8b04c7683d86e683e3d32d66b2830f7ae644ea7dd7cfd6017c7c76",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-8729802cb62942f0.yaml",
+      "bytes": 959,
+      "sha256": "6d23392e70e082d8383766892548ff75efd64bd814e751df4867f73d520cd6e9",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-9036b4eaa048dc21.yaml",
+      "bytes": 1981,
+      "sha256": "4e1c869bdf2cca94c1841ca00474f2c443fe8abd24809fb7155f93d3de5ae2dc",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-944952997d24ce45.yaml",
+      "bytes": 1257,
+      "sha256": "f03b46eb50f679441a65236ee147402de2490325515c9f951f47944e8c9fb2ae",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-959e8fc51787f7e4.yaml",
+      "bytes": 1297,
+      "sha256": "af41b96cb79141bc55da2ad5dc6fe335bc31ea4e1d57f8b173798b47059f0590",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-a291f2908480a2f8.yaml",
+      "bytes": 1223,
+      "sha256": "e08679db62406ae0e7fc0c509a0ddfab8ff5e3fdabbe526b612a30f6546d17b4",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-a2c6dc42af089fd5.yaml",
+      "bytes": 1108,
+      "sha256": "0701eda39d3521590c97ebdb9c2f83f2303c959563f5db038aa695d081126063",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-a47845c66d4a3f48.yaml",
+      "bytes": 1324,
+      "sha256": "746e6790caee1b25621e0cd7e2a27c250b73e01aa9497eb0f261ec5e85d8bd6e",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-a4d86f421f531623.yaml",
+      "bytes": 1822,
+      "sha256": "703f30d5afce0f7cb59a71f26e7e77103cb0685bbdd59563cae1af45dca003a2",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-ab31cc6a994470fb.yaml",
+      "bytes": 1169,
+      "sha256": "1540e18dd802e20db7046610f9b386229094a0ebfd8bf8cf1c8d2b3ec97a6e3a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-ad50206beabc5a94.yaml",
+      "bytes": 1146,
+      "sha256": "efc6f6fa4b2aecdf2043a03504cc65c56e5edeeda9513b45d582524995dc8002",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-b039401c04ff9b91.yaml",
+      "bytes": 1238,
+      "sha256": "2a40aa7a505fe7c66677436a5585b022e6af51c2a27b8143ae30c318b8420596",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-b8a3bbfe3c7eefff.yaml",
+      "bytes": 1081,
+      "sha256": "1c72702eafa8662d3baf94d60c79ba5f3c3931fa22cbfeff67d4560c90a377e8",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-c12960e5d652fb7f.yaml",
+      "bytes": 1654,
+      "sha256": "65adac3ab3cc3a2472a12789f07303006329371184f94161d76f785a7893e102",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-c65ee35ca47313c9.yaml",
+      "bytes": 1392,
+      "sha256": "8c9ed5529db1ad088837adedbfaf9ae9f96814facc242f2210e29162d54985fb",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-c941465e4095dbe8.yaml",
+      "bytes": 1155,
+      "sha256": "021fc975e6781f93462583efafa6a2f190884d3acde14342f9a4ae40cee013cf",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-d0229a9d15fd6b77.yaml",
+      "bytes": 1155,
+      "sha256": "f1aecf332d7c4dae7bfad20a25adceed1a6eeaec1b9f6c2f32012ab512cec37d",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-d098a79f00c8b2b5.yaml",
+      "bytes": 1784,
+      "sha256": "875ab31dcb98b3b94c7eb69263afe79b9c80c60427e0a7e2ed75d12586d228db",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-d8a392188b9cf4d6.yaml",
+      "bytes": 1544,
+      "sha256": "13e9aaacf9c640086d6b53d0def9891099c3e5792c24da7c3ccaa6f11ae8f0a1",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-ebd63da316af82e5.yaml",
+      "bytes": 1102,
+      "sha256": "22dd161609442c267699e15cf0a67fdf51616025ce119f7a1c5ae341c1b6633a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-ed38cc9d6f4b163c.yaml",
+      "bytes": 1120,
+      "sha256": "e3bc145ca19b91cc1ccffd709732567b1045a55e4ac03b326cd5c6627f8842ee",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-f03c5ad315e6d835.yaml",
+      "bytes": 1588,
+      "sha256": "79e22cd60c1ef48b9885cc494d186a86e6e6c01b8c75c2e202264eaa76e8a638",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-f2bfbdff3e79479c.yaml",
+      "bytes": 1402,
+      "sha256": "cfbe283ca7274cdcee87e1547ec5b94aafc72939936535b7a9a8d5a0becef45a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-f5da3ca03780a203.yaml",
+      "bytes": 1361,
+      "sha256": "262241bc536fb87c5d775d57bd9d5da2f1bf66b8c4a6a8c4ae12e2fb41069f89",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-f6dcb0e50d10ea38.yaml",
+      "bytes": 1227,
+      "sha256": "c213092bb6f24e5f9c86739c132f3ff1e36a680ee00aba726c65513eb8df794b",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-f7fa96d778a8d649.yaml",
+      "bytes": 1105,
+      "sha256": "67a69e5fe6963e64a49d07bf06fad425470f0b51c09cdad8401589a9dd15c375",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-fdcf898e0b05daff.yaml",
+      "bytes": 1231,
+      "sha256": "ff9428134507caea76c7e54e213e22c0a65c9dc378b5cd83968e35f34fda0663",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/papers/paper-fe221c51b8ea09df.yaml",
+      "bytes": 1313,
+      "sha256": "653a41498bb0d19600791675f043e1ecaed9bf8616629630c8dbd2e714ddd9c6",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/processors/builtins.yaml",
+      "bytes": 273,
+      "sha256": "7b4685bc8b0c985878a43973a0586b814e4dc627fd1f2cf69fe5392e7b52331b",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/publication.json",
+      "bytes": 15549,
+      "sha256": "246bca8ba07cc31a17f1744a4a1ce1b0fa71eece8be078147d2a0f7b2f0346db",
+      "allocated_bytes": 16384,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/activations-csv.yaml",
+      "bytes": 1349,
+      "sha256": "0b93fd482bc2eb6be31b52d4cb47a135470b654e75d28a16cc18a3cb50973d2c",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/agent-security-bench.yaml",
+      "bytes": 4471,
+      "sha256": "338d5c497ec9edb1c46fc3b17da02f46bc7c27cb7e4022e919cffa09b6f6b4dc",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/alpaca.yaml",
+      "bytes": 976,
+      "sha256": "0f1e27fe65b9981655a256503b5a075aa07b41478a9279ecf3cf6f267b7f1379",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/anthropic-red-teaming-prompts.yaml",
+      "bytes": 1196,
+      "sha256": "03ff236249b65595fc8344c5b24d7c818965239432e399634b1292b0120f6671",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/artbench.yaml",
+      "bytes": 1143,
+      "sha256": "d696f3f28b39b6dc03339ede4d9c50b7c5b2f8d54cb2c9a75bf59dfccfd3b749",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/audioset.yaml",
+      "bytes": 1751,
+      "sha256": "ce3bf9b1084562b1f8c723160316d7d0c4e098bbb56794ad051d03d397db0579",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/bapps.yaml",
+      "bytes": 1736,
+      "sha256": "9c38dfa6c512a3e2fad44d2b01bf6d09da6c9214b9d32c9d336b152bc103306d",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/bbq.yaml",
+      "bytes": 4205,
+      "sha256": "f5e274b4db8db6cfc40000a3553b066abeb66e6516b7cd1eb127e07a2e2d8989",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/behonest.yaml",
+      "bytes": 7552,
+      "sha256": "bef5a4d1bc14c6c9019efe0e35a55d95d8c3d8c6e65b0920e38dc3975e719dbf",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/bias-in-bios.yaml",
+      "bytes": 1953,
+      "sha256": "d5a1905b08cb6a50b9229c286988bfff607bc3cae06fc4d0e0412576c517e1ec",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/caltech101.yaml",
+      "bytes": 1189,
+      "sha256": "3e3776b8410d042907cb0e5523e19dc2198c93a7a3824c8d97a253e5f6406e03",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/cauldron.yaml",
+      "bytes": 996,
+      "sha256": "9197817bbf214aabf8c3047d198e1b57851b0c7607a35135622db3debdedb325",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/causalgym.yaml",
+      "bytes": 1610,
+      "sha256": "feed559747d0d17d16f23affedd2a8543080c1ff420823d126f313e5a8d4c363",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/cc3m.yaml",
+      "bytes": 514,
+      "sha256": "07ce3d8ac7c0d46bd6afd9b26afe305bdcec5fd2da6c641f15b66aaf6e74cb25",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/cebab.yaml",
+      "bytes": 1338,
+      "sha256": "141b1702ac67f0df9772d0cfd583309aa121ad5ae7b0f213ac85b0add6473f66",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/celeba.yaml",
+      "bytes": 2325,
+      "sha256": "0ca307e8098b15356ef0c477657721ea7e5d47fa606599dae5f73c10cc87c6e5",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/chartqa.yaml",
+      "bytes": 3743,
+      "sha256": "b59d44d93e6ed79b7fdd12f7d08892965250beb9be3dd013d6eb86f3e59a1cac",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/child-safety-intents.yaml",
+      "bytes": 1714,
+      "sha256": "91dfa855544180da9f118e64ab2708ff009811f05beb3b58544dd373eca3b742",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/cifar-10-1.yaml",
+      "bytes": 1863,
+      "sha256": "ed38e4d352c758874eed3408a932ac33570fbc8c8ddfb985e9f2b5ec7d75819d",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/cifar-10-c.yaml",
+      "bytes": 535,
+      "sha256": "a710936c84cb144808b3fe7ca94ad74d02fd91e0797f15bb26f1d67ecfa9b1aa",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/cifar-10.yaml",
+      "bytes": 468,
+      "sha256": "10035dc2c11fbd34077b344386d2736b4307f2378f04bf7cc7dec85e67803083",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/cifar-100-c.yaml",
+      "bytes": 626,
+      "sha256": "dc1a590e26f5b464a700cb3040396a8f6224db6d211f7252b04d222281284cc2",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/cifar-100.yaml",
+      "bytes": 475,
+      "sha256": "6d3143c40b304b732feddbeb22969e3a65919c0c46e0e442b8047ba19c6cb7e5",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/cinic-10.yaml",
+      "bytes": 1363,
+      "sha256": "53f8cf4562b1ba866ee6aca39b52190098b6e7931115656b5affbea8bfed6069",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/clevr-v1-full.yaml",
+      "bytes": 1293,
+      "sha256": "2accb0e87571615b3b7924839d5017ca3dcad6908cc4d68451d3f7ba5a693dc4",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/coco-2014.yaml",
+      "bytes": 2609,
+      "sha256": "cec13ffb7a97e39ffdf1b02843d1b5bf0f96fc28670b9abd2f96e6347a060429",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/coco-one.yaml",
+      "bytes": 1906,
+      "sha256": "a1f47380be7885f0fc1475ba35010cd480d6dccebd251f48d4d53c8cac0e7266",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/coco-qa.yaml",
+      "bytes": 1314,
+      "sha256": "d70f514e1c9a287c929edede9dec0ba1219698a1ef36e9bcae87aa7f454f1e2c",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/coco-two.yaml",
+      "bytes": 1902,
+      "sha256": "30f6432384806e4e662d0f1652103ec58622f808a552a2bef56dfd2e13731a22",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/coco.yaml",
+      "bytes": 1113,
+      "sha256": "b4d678529c5791bcc25680c0944173c9d9ff69fef9f688edd806a99abdae874f",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/cocogender.yaml",
+      "bytes": 4801,
+      "sha256": "cc3486e3ee11393248ae3511179224185863104786ca36aea38c383af006c76e",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/conceptarc.yaml",
+      "bytes": 795,
+      "sha256": "95e199a03497add4e3a10ae21e798b502f0848e7faf3946d41f8e52e563e8153",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/controlled-clevr.yaml",
+      "bytes": 2005,
+      "sha256": "adf61cf4cfed030f46cbb772f6e12ec87cc0743b2abfaba0c200e0a1b848ca30",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/controlled-images.yaml",
+      "bytes": 2019,
+      "sha256": "fcd4350d695f1b942862f7664e4357471e07d345423ab21b61571649c79cf4da",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/counterfact.yaml",
+      "bytes": 708,
+      "sha256": "25630a4d533eec26856854ae3d10c82a703894363156c27fa92a8e6d7312a2c1",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/covid-19-radiography.yaml",
+      "bytes": 1161,
+      "sha256": "fabb0d5a604cc9bcc5f185106714297d2ca9b1db0df2cb0ca8a6065fedc6050a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/cub-200-2011.yaml",
+      "bytes": 1100,
+      "sha256": "58b16a0635daadb46b43f1ed5b0547bb6e275c275ce3fae5b6dee1179fbb20c3",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/custom-propeller-and-rotating-snake-stimuli.yaml",
+      "bytes": 4408,
+      "sha256": "9e18637ccfb5da54d1ebdf823f28d458fcda36b6b81788f21c7a7f7399993373",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/datacomp-1b.yaml",
+      "bytes": 1153,
+      "sha256": "d4243e7f1c837dbf062b0a10b853abf23ea41c32aa608fcc496d1a688a862597",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/div2k.yaml",
+      "bytes": 10547,
+      "sha256": "1ec1b97ef65bb94294e411f1068a7ec7fb69d1d687c16370a6c8226fa71ba015",
+      "allocated_bytes": 12288,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/docci.yaml",
+      "bytes": 1080,
+      "sha256": "4e718a123aadc9b109ec9b29c31227f51e9b57de4051c3ee6473677d0ece0061",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/docvqa.yaml",
+      "bytes": 749,
+      "sha256": "fd7684062e552cab7cf3cf46827e7b23fa18a1444376ad94eb613d75891e23a8",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/dreambooth.yaml",
+      "bytes": 842,
+      "sha256": "6da3f84c68a7a4f400140dfa75efead768ce99d58ceb3efeda8cdd771bbf8365",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/dtd.yaml",
+      "bytes": 514,
+      "sha256": "3fcab94b950bf72091dd235b7afc6b84a5ab9716ebab47f118e61ed4b33923e5",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/emnist-balanced.yaml",
+      "bytes": 1593,
+      "sha256": "9119fcdd2d3a510715c04e995e66baa8557fdc50dee658a6db9edaf6ced6dd3a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/emnist-letters.yaml",
+      "bytes": 872,
+      "sha256": "84a2994c146b1d779bcd005e3302fdfde2db6f6c99cec33be9b37aa78ca40bd3",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/emnist.yaml",
+      "bytes": 1147,
+      "sha256": "b81898533bbfbd71cf4b21a897a9640426f8f46f53795aeb9d5b2bf93dbb6dff",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/emoset.yaml",
+      "bytes": 1728,
+      "sha256": "d055d369dba0ae982362d9aec116fcbd06a971d5c30355113b760b7f3c6942cf",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/eurosat.yaml",
+      "bytes": 872,
+      "sha256": "f8ee72492f932ce3e57088d2ff9a3d37e59a623d8d14a7198442ee880d90fe5f",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/exams-v.yaml",
+      "bytes": 289,
+      "sha256": "386ffbcc8d1e8768fb591b96d5e697ed11159f9d626199d99e5d3f9e7a80cfe4",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/factoid.yaml",
+      "bytes": 1825,
+      "sha256": "23e3d51baa832d5a3131fabafc57b0b070e0c50f2b57828afa59f9caa0adbf9a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/fairface.yaml",
+      "bytes": 2692,
+      "sha256": "cad7180c9303b666aad61fe84e96f524953be932436760983fa0bc3fd01a0212",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/ffhq.yaml",
+      "bytes": 1513,
+      "sha256": "bf3ce9d68c6ded15b33cb8916569b60e46df47401b393983b42c0e618d243c74",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/fgvc-aircraft.yaml",
+      "bytes": 849,
+      "sha256": "3371249ff064216c97c5e75113c56606a255f93ff3f2c7248261a35ba4fe5997",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/figure-linked-source-data-spreadsheets.yaml",
+      "bytes": 4046,
+      "sha256": "4bb8d50cfa13a6a672e0c5635d7b83ea0ebb9fc01967b6d8bf9da4e2bb896ee9",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/find.yaml",
+      "bytes": 1118,
+      "sha256": "62d0366292812df48aa75825fb272327bcc0ac0726cd2aca126f9d18a5cd2b3c",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/flickr30k.yaml",
+      "bytes": 1782,
+      "sha256": "ae2c63c4ba8a9829cff324fa29b8dc401a09ab3ff8ed7a0dce48dfd1ac423cb7",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/flowers102.yaml",
+      "bytes": 1136,
+      "sha256": "17d88d64de21ddcf5da5db545544cc48f609fd32a7fa9e4090d692de4df5014b",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/foil-it.yaml",
+      "bytes": 2761,
+      "sha256": "fe898f9bb93c12009c0f9cec3e93b974e6c05b216d970842007eb44cd4c17c6d",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/food101.yaml",
+      "bytes": 689,
+      "sha256": "453379fa4810605d75aeb6ab062042c3f92f09b6200e0ea3f25892319632a9c9",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/glue-cola.yaml",
+      "bytes": 1264,
+      "sha256": "0ae5837f20035ce7809aceca5b2303612cc5d95832c31031f95dfbff6c45841a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/gqa.yaml",
+      "bytes": 1440,
+      "sha256": "76bce738fecaa06a1b82b5c0ff7b82dc4b3784efd4650d8da0eb350518d108fd",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/gvil-paired-illusion-images.yaml",
+      "bytes": 806,
+      "sha256": "0d42646caa805af1b65bf19a8cfb28226f50e15ea04458b712d41723d0102811",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/gvil.yaml",
+      "bytes": 1195,
+      "sha256": "bf79808e52e957ffd82fae18b1f345fd21d1193c55785a1a1b2cdb3b9ea77f12",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/hades.yaml",
+      "bytes": 302,
+      "sha256": "79c010a388a951f0801a9aaf44d69393381e2905e29f636e4a2a079e53f09730",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/hallusionbench.yaml",
+      "bytes": 490,
+      "sha256": "3235341000301736d2d9de8e6a66cc1973a17d69672664b2e7b37f211a51ee04",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/halueval.yaml",
+      "bytes": 2028,
+      "sha256": "ccf8b4c1417910191673a8dd9519ebba9d7e22ad80f93368342044ee36bd4c82",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/hatefulillusion.yaml",
+      "bytes": 2610,
+      "sha256": "94bb28bcb40304c7b74e1b5a26042576d14b53e38f328e9680ed2151c81bfe1d",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/hc-bench.yaml",
+      "bytes": 16564,
+      "sha256": "181dfb676b037cf129de28acf507586e6f93d10d8b191451adde0d160a841ac3",
+      "allocated_bytes": 20480,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/high-quality-hallucination-benchmark.yaml",
+      "bytes": 2399,
+      "sha256": "80849fddbf7b7b644dfbf060991a3d010f93fb639c0fffe5b0635ebe980b8a7a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/hod.yaml",
+      "bytes": 989,
+      "sha256": "e30e1fa14656011be0eaefb2933fe06295761fc732ecbf24c8e459e8bfa18b2e",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/iconqa.yaml",
+      "bytes": 475,
+      "sha256": "09b818078da744c3e6bc44653515678e4ee28293218a6b3ae6c2c4cb3b35e4a5",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/idenprof.yaml",
+      "bytes": 1235,
+      "sha256": "c239d6877d3bf4bfe1ec3fca76b9619e191f2afff9e2829c09487df6687df00c",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/illuchar.yaml",
+      "bytes": 360,
+      "sha256": "d9cd3a3dce16bd5c8bfe6960779e5e28d5325ecd72058fa2b24103520317d97a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/illusionbench-3c643c29.yaml",
+      "bytes": 4863,
+      "sha256": "90228056819e79e596d9935e61330bfcd8471ce8a34b2760322f0eceb063696b",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/illusionmnist.yaml",
+      "bytes": 3166,
+      "sha256": "e129ed395c6a1f59156f75d3af6f89733eebfb6df312f500c0c8c8cf08b3e472",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/illusionvqa.yaml",
+      "bytes": 1909,
+      "sha256": "4dfac4ea69be276e69eeb97ed390545aab21244ccce178c9852a7b0ce0f8ec90",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/illusoryvqa.yaml",
+      "bytes": 9811,
+      "sha256": "20926927480cd60fbe2fa9e25a9b8f758aa3869bcba97cf7f08193604be043a1",
+      "allocated_bytes": 12288,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/imagenet-1k.yaml",
+      "bytes": 604,
+      "sha256": "5259347352061718a4058a9f1bef5e90a1cadfd3fad224baeb685974411dc495",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/imagenet-a.yaml",
+      "bytes": 458,
+      "sha256": "403efa92766f1e3757fdc3f0dbf5fdb408a570606d2ad06d9a1155bfafbd9068",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/imagenet-c.yaml",
+      "bytes": 3068,
+      "sha256": "3fc3609bbf9138e383687202e274a156c79d87b42567606ac7f5298c221be8c5",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/imagenet-ilsvrc-2012.yaml",
+      "bytes": 677,
+      "sha256": "806edd6a4cba1e1a6f639ab1fc647121312af72ebd9f6b5d1789635a17b4c3fe",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/imagenet-r.yaml",
+      "bytes": 461,
+      "sha256": "6d5da2577b31071ed7c8a952a8d6becafce31e5fb0cd5cbf3b86191536cb91bc",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/imagenet-segmentation.yaml",
+      "bytes": 1054,
+      "sha256": "230d9b5bc9b4ae45f9bfb551af5d97864eb36fd7189787a6f8840aa8ac4702c8",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/imagenet-sketch.yaml",
+      "bytes": 1817,
+      "sha256": "43698d168e18d39bebcdbada635be035a612b8863f8cf2994a5038af30a6e812",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/imagenet-v2.yaml",
+      "bytes": 570,
+      "sha256": "b4a0ae913c25b4ada9d7fb5c42307983729be2dc904158254a839c5fc5461bc9",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/imagenette.yaml",
+      "bytes": 897,
+      "sha256": "b48e2a81f9280ee322d8d255135d87d9aeff7b327d542669a0f84e36573935e5",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/inaturalist.yaml",
+      "bytes": 1646,
+      "sha256": "09cc9f2b9d238df494ef95a0f81bf9c252ef2ef0ea1da80730d34addc06a0506",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/interpbench.yaml",
+      "bytes": 1049,
+      "sha256": "32eaf177422dc78c95cc3dc94b076a7392c642df8b0b8bb9e005de4e13b1eb5a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/jailbreakv-28k.yaml",
+      "bytes": 12124,
+      "sha256": "563974493076fc6497f1e86d0bc84f0db10024ccfabc728a3bc3ab2e97346264",
+      "allocated_bytes": 12288,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/jiechieu-tsopze-resume-corpus.yaml",
+      "bytes": 2160,
+      "sha256": "7b2d47fedad851614e93b01e9e6d7c3370e6f405a1ba8c6c4418f30ef101705b",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/laion-400m.yaml",
+      "bytes": 1315,
+      "sha256": "ae5807979c025f9a31d5e1189e8b645d520b205697cbeae5a2a11933e1db06d8",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/language-identification-dataset.yaml",
+      "bytes": 2745,
+      "sha256": "1747f2ff2ebc93ae5cfb6ee4c46c48822b1df2b5d9a64eaf64b3aa79e27a4bc5",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/lingoqa.yaml",
+      "bytes": 1407,
+      "sha256": "0429a102196e1e4d9bfa7a7e5b330af7bf73b58c163b1f32a2893cf584ae55d2",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/llava-bench.yaml",
+      "bytes": 9065,
+      "sha256": "420b0eab7d269aad644b67f5b5a148ef89066c3ca23b1f39ceee30c995426dfa",
+      "allocated_bytes": 12288,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/llava-instruct-150k.yaml",
+      "bytes": 1293,
+      "sha256": "2eaf442adc65351ddae9cd8aa273ce236a1e116470e2538cf9fe72078351cad0",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/maliciousinstruct.yaml",
+      "bytes": 1103,
+      "sha256": "b2d457ae3aeab9816bdcf5dce722451821e92d05a2496b89619efcea00190681",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/medical-multimodal-evaluation-data.yaml",
+      "bytes": 1525,
+      "sha256": "b46b5cc85c60e769ef1c6dc2e3a017788b0760058b51e9095f10acd04b465ff7",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/miap.yaml",
+      "bytes": 2535,
+      "sha256": "c3b649bd30b8371af7ecdc33c8afd7149edd8bbd3c86cc29efe490d0ac858e88",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/mit-adobe-5k.yaml",
+      "bytes": 1181,
+      "sha256": "494fc83edd045220ab27188714e978e34a4ef4ba6c21773cea28dfd2bfd1a9dc",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/mit-states.yaml",
+      "bytes": 2294,
+      "sha256": "a073c1adbf80a59dc491e9610b1a76244dd224cf961544ec3d3b2b4910836fef",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/mllmu-bench.yaml",
+      "bytes": 1054,
+      "sha256": "6d4f256c9715484ce89c3422f64d4ac44f5ce94cfdc5e90548d14a351f35c8fa",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/mm-safetybench.yaml",
+      "bytes": 6634,
+      "sha256": "89ce67e29d32b1f1aa52320270a1836f70e075d9d5ed7c4227144cc0a9335512",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/mm-vet.yaml",
+      "bytes": 1342,
+      "sha256": "b67acbdbf866ff3710ba96e44f213bd7acbc815011a5fc917a578bfa9aad1777",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/mma-diffusion.yaml",
+      "bytes": 960,
+      "sha256": "7432b03ed3b66d9ab5d172a4628a084c37672e46ba9cc9eec3c2a6acea68c16d",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/mmbench-en-dev.yaml",
+      "bytes": 1731,
+      "sha256": "0657b8e6dd3f1841c78940cbe9e9b28fdbb49c9aadacdc1b0066fbd034b15c79",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/mmbench.yaml",
+      "bytes": 2128,
+      "sha256": "0ac7bd69adb0e24f139389c1af74835637d913602f72265b7c06ea03f0528057",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/mme-perception.yaml",
+      "bytes": 950,
+      "sha256": "c0dd10d9195bf657e4d6453ccec7c4dca2b433e5a125b4c440dbdc06323f06cf",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/mme.yaml",
+      "bytes": 814,
+      "sha256": "f9cc908d8375c81ffdd5ec391ca1da36d907a16aa35d88fc6b7f958aeea36b9a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/mmmu-dev.yaml",
+      "bytes": 447,
+      "sha256": "44fd529785823bcd0f316546f51d148159c7eb7969de091565e6edff3633dcc3",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/mmstar.yaml",
+      "bytes": 308,
+      "sha256": "744e866e76f93a47a6463e27c8d766dcf704541c8340329ee7adc60475eebc1d",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/mnist.yaml",
+      "bytes": 1835,
+      "sha256": "d333b3a265cab44569d6ea8ba84df59d108d70f74f1ea88964648d1be46f12b2",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/mrpc.yaml",
+      "bytes": 1657,
+      "sha256": "14a1a9e6099df618d1a92ca09431c5a73189d026dbbb4cdec8b91273abd6180f",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/mvbench-scene-qa.yaml",
+      "bytes": 1848,
+      "sha256": "5f1006c3440eca7d84dcaf6406462f245eb142038bdac27a6ec9aff5e0c95889",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/nocaps.yaml",
+      "bytes": 2143,
+      "sha256": "55e7076425d4560fe76ce367df979c7d215aecb0858634da4dc55e65bfcb52aa",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/nrc-vad.yaml",
+      "bytes": 1468,
+      "sha256": "fb2ef19ce462f8eda36f6b1b2e5fbc8e765abbcd7a39797408a5e4d49214debe",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/oasis.yaml",
+      "bytes": 1082,
+      "sha256": "c1281922a76bd1f552a577ee0d38c07a7cbe0e759a6be2cd9424c7c0246f4b79",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/objaverse.yaml",
+      "bytes": 54433,
+      "sha256": "91588de66a2b03c0568f3e09eb89244402237bcb68177dd820aa0fbc813db235",
+      "allocated_bytes": 57344,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/objectnet.yaml",
+      "bytes": 1133,
+      "sha256": "6e280192ee12f8d3b49dd248ec25c584ff02719471830cd561c791ff81d3bce9",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/ok-vqa.yaml",
+      "bytes": 2621,
+      "sha256": "29b56293016705a14981c844b50e59c1d725353a692a93e183f7cfcdbac88bf0",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/omnisafebench-mm.yaml",
+      "bytes": 1414,
+      "sha256": "fb2c307a958e59e27cbc3f464ddf701a1993af0c6e71715f0901eb2c801ea35f",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/omnispatial.yaml",
+      "bytes": 1515,
+      "sha256": "153fee68c5edcc665f40706c010041793cc4d9aaf8b6ae90bfca31b89615fa2d",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/openimages.yaml",
+      "bytes": 2831,
+      "sha256": "990ad9ec26ef0ccacbd65020115cd36c8eb9546a874ff8bcb93f05b87678e2bf",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/oxfordpet.yaml",
+      "bytes": 740,
+      "sha256": "e6b7374c32184e8d37f025620eb7862a244981c2664fb2b1c4766e0904f98702",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/pairs-csv.yaml",
+      "bytes": 1253,
+      "sha256": "ab4f1f9969f3b8af694a93b30217c677dfbc2b6eba14ae4cea14680e57c2bb32",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/pairs.yaml",
+      "bytes": 1026,
+      "sha256": "1feb8c6d55f618093c900a3b279121897637a2f649b29b82cfd5c771278e86e5",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/paper-1e2474b15fec2d7d-unnamed-controversial-stimuli-collection.yaml",
+      "bytes": 943,
+      "sha256": "36d3c6371f8dd5b373d322f277c0867ef4f9c0dca54fda3165b5a7a5873644f8",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/pascal-voc.yaml",
+      "bytes": 1593,
+      "sha256": "8de7fbc8c8a64e006912093c65aeb89f01e5cb17c2484d8afe864f297826562f",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/phantom.yaml",
+      "bytes": 2530,
+      "sha256": "f0c8132f1699b452d9cb4daf6c3523904edf02924c689a0deaff5fb053d2f62d",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/phase.yaml",
+      "bytes": 2317,
+      "sha256": "ba1e2b97d33bb8d34f7849c9d04bb45e2dfa417346267f59161727f617bc9594",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/places.yaml",
+      "bytes": 1529,
+      "sha256": "2fde84a7e018d129f4bfe92cb86da2592eaa81e0071f302d3be64ec7b95a8dec",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/pmc-vqa.yaml",
+      "bytes": 2402,
+      "sha256": "68e5546bfa2a07e8f8636fd4e41c215bfa478d904a0258be9f98424546458533",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/pope.yaml",
+      "bytes": 2240,
+      "sha256": "1bb40715d9885605621c8546300618aff4b11df86c568f71a4f92e923775398f",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/puzzlevqa.yaml",
+      "bytes": 305,
+      "sha256": "101ef3f88f0318063cc4dd50a1f67b03e702b51fb3cddf1d00470e213ef251d4",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/qnli.yaml",
+      "bytes": 1267,
+      "sha256": "8978865dcd889c26b406d39a0a9f8892fb9ae639f89ae1273e3a1a8967d1fee8",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/qqp.yaml",
+      "bytes": 1271,
+      "sha256": "11db4ad683059c3df4a971b1e43524aa6d717ce81ff0716f851d51a13a960d56",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/ravel.yaml",
+      "bytes": 821,
+      "sha256": "4fde58d748673b31e8ab53b6a18160a820fd89c97319404a897f2e38093b0997",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/recap-datacomp-1b.yaml",
+      "bytes": 959,
+      "sha256": "d6492d40a9b5bad98c23b67d69d68c8b724c4d9c8532a97a709fc2fc57903147",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/restricted-imagenet.yaml",
+      "bytes": 1935,
+      "sha256": "140ab1aebf9aa6a57ef0ce407c9f01f1bffec89ae95d87bc6b9b86f34449459e",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/ring-a-bell.yaml",
+      "bytes": 2293,
+      "sha256": "b61fbcf9bdc445d977008844c87b919766202657a93ef8d2dc4e64ce8d46276e",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/roco.yaml",
+      "bytes": 1214,
+      "sha256": "6e7d506c8bce0cc47ea9a7c975a6145efda01048727b569dca6d57941d43b3ab",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/rs-vqa.yaml",
+      "bytes": 4048,
+      "sha256": "d98a7d7798ef7213269a8404f1eaaa096c5c684d1cdf9f9a5e04fc447a9eb547",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/rsicd.yaml",
+      "bytes": 1852,
+      "sha256": "99e290ad14e61c5c467f55d1c8d9fe258d183f060d1e33adf48af3bda3c26fc1",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/sad.yaml",
+      "bytes": 6012,
+      "sha256": "77c85bcf2f89e844817b737dc8b4fab9d539c66e47ca6f8d796c5cf15501c20f",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/saegis-clean-and-adversarial-splits.yaml",
+      "bytes": 2945,
+      "sha256": "761f8c8dbbd63c5dd7757f4709cd9f43a4683da0c17e403e41fd6b3ba9e924ef",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/safebench.yaml",
+      "bytes": 4046,
+      "sha256": "3fb328c2665c8d615e409e1a08521f52b8371912947c2e2ef86d22198d7fbdaa",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/sbbench-syn-crop.yaml",
+      "bytes": 2284,
+      "sha256": "437fce47c0161aa18e0788ec16dd02fa2860ad93a2dc84f558f21fba8cb8084b",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/sbbench-syn.yaml",
+      "bytes": 1884,
+      "sha256": "b36a71c955ba9e836a7fac840dd1f710728980cc7ecb9c4f6481cd3aa4da65a0",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/scienceqa-img.yaml",
+      "bytes": 899,
+      "sha256": "9930e1809a7326c1431341afbc22ce86be0420e7d84f151592214f0f3043d3c9",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/seed-bench-2.yaml",
+      "bytes": 41978,
+      "sha256": "918f4e4207b4acc3b56e8760bc31d918c33ca362fc2ee40cad88cce3293c834e",
+      "allocated_bytes": 45056,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/seedbench.yaml",
+      "bytes": 19289,
+      "sha256": "7d78c4f3e995424d15cf0ff2ac712fed408d42c836f3239d58c41437c9511dab",
+      "allocated_bytes": 20480,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/set14.yaml",
+      "bytes": 1450,
+      "sha256": "e01a10db24529f8bd5c90dced4fe567a9955be15a62fa5fcf066afb2ab1e2b55",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/set5.yaml",
+      "bytes": 1444,
+      "sha256": "a928b043f38d969b251a5eeaa7cb02764476e349f13fe2491ebc3b3755fcf90b",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/shapes-localization.yaml",
+      "bytes": 1021,
+      "sha256": "f3d51d667a0520063d6124fb5fed834e5372b6b25fb69e28156d0305907909eb",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/shapes-recognition.yaml",
+      "bytes": 1019,
+      "sha256": "72adb861d939530469804809f07307fc6d0ce89fc0b9e1d65033628f2f15f50a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/shapes-relations.yaml",
+      "bytes": 1015,
+      "sha256": "358d0c8f8c60f0718cd338a61ef05b6190e12f78cf81709973dbe3f9c5da46ac",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/shapeworld.yaml",
+      "bytes": 896,
+      "sha256": "77ad4eec79a042473fc69bb25e0ea6f80a7506b17390d18f150f14ef42af0a69",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/simplevqa.yaml",
+      "bytes": 335,
+      "sha256": "52f0354849a7816f428f606a52f9131faebe44d75422f99f5accff6d9c16ee53",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/smolim2-135m-10b.yaml",
+      "bytes": 815,
+      "sha256": "8b3d961ef0e9ed024b54d3afeb84a2ba5aa71482c64c0cd0dd1e97dadfa70497",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/snli-ve.yaml",
+      "bytes": 2372,
+      "sha256": "6d52539382fb6f18ad2400f749daef9caec3f307e1e98fc7db39cea6318e2364",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/sorrybench.yaml",
+      "bytes": 9176,
+      "sha256": "fd15b1d9b45a3a61a7cabb490f2287ae0ad052061b832e971014b73b80335119",
+      "allocated_bytes": 12288,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/space-10.yaml",
+      "bytes": 626,
+      "sha256": "0cf1802c4fe3c9076d9851c3380264965361610838148b4581a9e0b561ae56ea",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/spoken-wikipedia.yaml",
+      "bytes": 4516,
+      "sha256": "d1db65100efe98318a999f006b242408f90342415b9a4c5f947c340014417380",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/sst2.yaml",
+      "bytes": 1035,
+      "sha256": "0f0e4d88e35a339b1391e0cbda23bf9491eda50dc78fc29b19bc003859e9e65a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/stanford-cars.yaml",
+      "bytes": 482,
+      "sha256": "7c112e4805f83ace2b08d3c921934ff3a0b0ef13729f9cd63a82cad715d5f60f",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/stl-10.yaml",
+      "bytes": 923,
+      "sha256": "a81064e052ce6eca1c23b38cc23f1802e0276c97bb47d5bacf080b456e50dc3c",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/sun397.yaml",
+      "bytes": 1291,
+      "sha256": "7b1850e4f36583f1f59d9ccf39c28069509fbbe84f53e237c8f97ca59ebadce8",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/svhn.yaml",
+      "bytes": 1226,
+      "sha256": "bc9383d62724caf8f2d7bdc5e9a34ff899a756923074fdb5310613576b48af6a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/svo-probes.yaml",
+      "bytes": 1132,
+      "sha256": "36eab40a452eae64115d211813ab54ad512f53dcc327d2c9d806656c6379e905",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/t2i-compbench.yaml",
+      "bytes": 16622,
+      "sha256": "79c5d115ca94f98b2cb05d30abf3fd04fdd703841af1da1d969a6e3bfa819442",
+      "allocated_bytes": 20480,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/tdc2023.yaml",
+      "bytes": 1537,
+      "sha256": "7593e50d524ea1d82dd91f5bbd64e04e7fb4fd0bbd0ab17ccff38e3b61098e1d",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/textvqa-x.yaml",
+      "bytes": 3132,
+      "sha256": "4033c3bf3f30a4ba472082b200b0d47428be3880c9440b4d3c97eef78b656806",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/textvqa.yaml",
+      "bytes": 2072,
+      "sha256": "a8564c254c2fa4079c31859ab153bd87398c4aa5ca4702736747e5bdf3b5c46c",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/the-pile.yaml",
+      "bytes": 1534,
+      "sha256": "5aad81cfa1af55eae34cb3f9fe17b28aaa0349d5e702bc4d77cb10917a2229d6",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/tid2013.yaml",
+      "bytes": 1223,
+      "sha256": "9c31ff98cf24456a9ba20c53ef4c80ecbe35c2cd53a04724c99ceb04c061bead",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/top16-images-csv.yaml",
+      "bytes": 1256,
+      "sha256": "1427e9865afda290f2e6fa93c1521667abef11522000cc96fc58a2ea89c2ce44",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/turing-eye-test.yaml",
+      "bytes": 817,
+      "sha256": "f4bf80f682c72912eff1f64e694fa2fc197c86a7979d2d1ff69cec09680d52bc",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/tweeteval.yaml",
+      "bytes": 332,
+      "sha256": "1699a4de9282e42d1300961332c7c56ba4e2e2677061014c411e81577b1f8269",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/ucf101.yaml",
+      "bytes": 2325,
+      "sha256": "35bff8cdaf26e7a04c4dc0c69350cf7b8ab80d11e53997adc48837999e8d1a35",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/vg-qa-one.yaml",
+      "bytes": 2004,
+      "sha256": "977c15813418ae0ea6f5230d2db7d30b1c638b3b03c6a20e06c351a3bd7a2883",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/vg-qa-two.yaml",
+      "bytes": 2001,
+      "sha256": "dfe3cf46180bf62eaed121cb42adf849662a72ce0294172d2e57ea86f8c72d9f",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/vhd11k.yaml",
+      "bytes": 2273,
+      "sha256": "b1b5e66f003274ea767120c80257883d337bb834abff5d8c83becbd7edcacfed",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/visu-text.yaml",
+      "bytes": 2505,
+      "sha256": "370acaf03f83d3555b36a0fb80a36f0bc9d0cb1bb8dddee85c1fd64b4ed32c11",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/visual-counterfact.yaml",
+      "bytes": 682,
+      "sha256": "b9cd8a7d1e1f181dbfea823ae1d2c405c5903dc5916403410f5a2aba531ff031",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/visual-genome.yaml",
+      "bytes": 6016,
+      "sha256": "ccac1699df73bb1374a4a4ed4eec39702248231ca79bfa598bfc0478fd2336c4",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/visual6502-transistor-netlist.yaml",
+      "bytes": 1110,
+      "sha256": "dfc12441fc1c51c605525e657d3d4a8391a97f95f93851ab1aeb1ef4d2615e19",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/vizwiz-priv.yaml",
+      "bytes": 5227,
+      "sha256": "b7d85a3d05173807a6a824e578f482a62d1a2b3ea8459fac0bb6be07e2716caf",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/vizwiz.yaml",
+      "bytes": 1963,
+      "sha256": "0791738744e6d47cf2230141e1733e7db1030f3b4799e1cf704b76f474055347",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/vqa-constraints.yaml",
+      "bytes": 3673,
+      "sha256": "22dc23f19ad059bc76cfe508732f1d248e7bd35bc3a5805a370ac3faaaa67c42",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/vqa-v2-m-n-subsets.yaml",
+      "bytes": 1158,
+      "sha256": "4d24c3810a13d7994db281c00eb6e345f6c5e8ffc124daea7965ad73363dbdf6",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/vqa-v2.yaml",
+      "bytes": 1858,
+      "sha256": "91b3096b99bdfc5b56b3d6765b39f4b9699754a4a9b735e9dfbba2f8f0cf7b8e",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/vsr.yaml",
+      "bytes": 4438,
+      "sha256": "a88f9980719b1e048fda818d49c11ad76609c0cd3973626a65a4a543c8557ee2",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/waterbirds.yaml",
+      "bytes": 762,
+      "sha256": "b4f5c1c5aa54b0c12d178d210b4daa783f10e00ab436f7d2faab21891f7d665f",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/what-s-up.yaml",
+      "bytes": 5823,
+      "sha256": "fbbfc3cbdbb634e1e850590b856aa4ff1a7c740decb5db7f3ecfb11adbc7e7ca",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/whoops.yaml",
+      "bytes": 1794,
+      "sha256": "6806f81c1ec4b9bf0a1d562f69d7c69a838608980720d03d538c53c1d9fb6c25",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/winoground.yaml",
+      "bytes": 1755,
+      "sha256": "19e1babdf7f224c8d2229132098a92d65d266b06ec1493b6f2f637acdb46fa4c",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/wmdp.yaml",
+      "bytes": 440,
+      "sha256": "777692b58ef420aa4de68fcc5c361afdfea872dc81861ac7a25de69fd18599e5",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/wnli.yaml",
+      "bytes": 1254,
+      "sha256": "2832982b28657379c0472b2ab1475097d697ed0719428f2cca923b41b8c003cb",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/recipes/zerobench.yaml",
+      "bytes": 511,
+      "sha256": "71bee5f5fef34bf7b276565e93ccdc7136550757b15d7bc90004fefd6ed9af4c",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/source-manifests/illusionmnist-media.json",
+      "bytes": 2581150,
+      "sha256": "a197e3e89ea6740ed37218842d516d223749af92876dd07f1e5f9597cd71f08d",
+      "allocated_bytes": 2584576,
+      "links": 1
+    },
+    {
+      "path": "registry/source-manifests/illusoryvqa-media.json",
+      "bytes": 16797120,
+      "sha256": "e3f834dabc5610de661b7e6fef7472b35c738548944c82dd39cb29ff0be7f731",
+      "allocated_bytes": 16797696,
+      "links": 1
+    },
+    {
+      "path": "registry/source-manifests/nocaps-media.json",
+      "bytes": 1807821,
+      "sha256": "4edb5421a070d4f43d638d15e105beafd9faff4cf632adc57075d06802d6491e",
+      "allocated_bytes": 1810432,
+      "links": 1
+    },
+    {
+      "path": "registry/source-manifests/phantom-media.json",
+      "bytes": 8781988,
+      "sha256": "2177b443a11ffb84c1fb259636636e24323a432fc853820ebbeca52c814cce52",
+      "allocated_bytes": 8785920,
+      "links": 1
+    },
+    {
+      "path": "registry/source-manifests/set14-selfexsr-media.json",
+      "bytes": 12616,
+      "sha256": "7776657358b1762c2396cac44aa95248d30fdec8cb88a42dd4927a674a44c0c4",
+      "allocated_bytes": 16384,
+      "links": 1
+    },
+    {
+      "path": "registry/source-manifests/set5-selfexsr-media.json",
+      "bytes": 4562,
+      "sha256": "2351b29bbae070f49bc2b71fb4f672546f2c16f6bf9b2737575139357d99f68e",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "registry/source-plans/datacomp-1b-all-shards.yaml",
+      "bytes": 895,
+      "sha256": "9ad62501cbbb0219b4cfe2a9f6baa6ca111f21f0d2a28a43fc11456334e4f8d4",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "registry/source-plans/recap-datacomp-1b-train.yaml",
+      "bytes": 927,
+      "sha256": "c424fd15410ba27b27e60222390011f5bce6a8c528aa843248b3c7dbc5c7ed39",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "schemas/atlas.schema.json",
+      "bytes": 30587,
+      "sha256": "84907bd1b253bcb5832ca9c945c483082e085fc92475efa93a92e97af561c480",
+      "allocated_bytes": 32768,
+      "links": 1
+    },
+    {
+      "path": "work/preparation/bfdef2b3f66b1ae3a3c8361fcfba1334145c384822354457cea6a13a9617488d/dispatch.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "allocated_bytes": 0,
+      "links": 1
+    },
+    {
+      "path": "work/preparation/bfdef2b3f66b1ae3a3c8361fcfba1334145c384822354457cea6a13a9617488d/plan.json",
+      "bytes": 11247,
+      "sha256": "4e9ecc9803cf473df03c48f20f10a01bb64ed131d0e44a37a4637eb770e432f0",
+      "allocated_bytes": 12288,
+      "links": 1
+    },
+    {
+      "path": "work/preparation/bfdef2b3f66b1ae3a3c8361fcfba1334145c384822354457cea6a13a9617488d/status.json",
+      "bytes": 381,
+      "sha256": "51d472a457fd65f25f69048bcb6ecbcbb4439ee76af5779cccd6a01ea86ecbde",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "work/preparation/bfdef2b3f66b1ae3a3c8361fcfba1334145c384822354457cea6a13a9617488d/worker.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "allocated_bytes": 0,
+      "links": 1
+    },
+    {
+      "path": "work/preparation/dataset-190be8d45b9fb646e98eb9287b533662849e36ed78c535383f978c6ac5743b45.lock",
+      "bytes": 94,
+      "sha256": "0eb2fc6f2a53a8973fc0f3bc690e3c18240d0c8a5ee195b7f6d7284db03881bb",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "work/preparation/storage-admission.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "allocated_bytes": 0,
+      "links": 1
+    },
+    {
+      "path": "work/preparation/writer-0.lock",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "allocated_bytes": 0,
+      "links": 1
+    },
+    {
+      "path": "work/prepared/factoid/active.json",
+      "bytes": 83,
+      "sha256": "119f903d479a9907b3b041372da9758a98d119191ec4da8f057fcc3c6d2234a0",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "work/prepared/factoid/bfdef2b3f66b1ae3a3c8361fcfba1334145c384822354457cea6a13a9617488d/dataset.json",
+      "bytes": 6952,
+      "sha256": "d6424f73e53a9bafa4274a79f109201887e0030a7bd07a0f6293aa8bc81d1720",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "work/prepared/factoid/bfdef2b3f66b1ae3a3c8361fcfba1334145c384822354457cea6a13a9617488d/pack/pack.json",
+      "bytes": 62801601,
+      "sha256": "05d9bf9dbe8bc7c23f7821c4735031698a5e5f7239d683ec109f6bc09853ca75",
+      "allocated_bytes": 62803968,
+      "links": 1
+    },
+    {
+      "path": "work/prepared/factoid/bfdef2b3f66b1ae3a3c8361fcfba1334145c384822354457cea6a13a9617488d/receipt.json",
+      "bytes": 3834,
+      "sha256": "3053c4072f110a60ec921746d050e6bcf703cf5acfdcadfb7ed2ef73eec3fa12",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "work/prepared/factoid/bfdef2b3f66b1ae3a3c8361fcfba1334145c384822354457cea6a13a9617488d/snapshot/manifest.json",
+      "bytes": 5807,
+      "sha256": "04436c69c7e1f4b2180a10d1c8db7b6d6d71f5fde406c16b5343b81dd4d29607",
+      "allocated_bytes": 8192,
+      "links": 1
+    },
+    {
+      "path": "work/prepared/factoid/bfdef2b3f66b1ae3a3c8361fcfba1334145c384822354457cea6a13a9617488d/snapshot/records.parquet",
+      "bytes": 1391428895,
+      "sha256": "573b39084691b25c532d0a08a138c14c9cbdb3b6b514e921fdd47675cb730b68",
+      "allocated_bytes": 1391435776,
+      "links": 1
+    },
+    {
+      "path": "work/prepared/factoid/bfdef2b3f66b1ae3a3c8361fcfba1334145c384822354457cea6a13a9617488d/sources/42e975c9067c6a738e2ae85a1d18c80b90974ffe4af75e57fbde53588040dbbb.gzip",
+      "bytes": 369319718,
+      "sha256": "42e975c9067c6a738e2ae85a1d18c80b90974ffe4af75e57fbde53588040dbbb",
+      "allocated_bytes": 369324032,
+      "links": 1
+    },
+    {
+      "path": "work/prepared/factoid/bfdef2b3f66b1ae3a3c8361fcfba1334145c384822354457cea6a13a9617488d/sources/converted/conversion-result.json",
+      "bytes": 3694,
+      "sha256": "8b6d3f5cc0248b8029a1905d411a616d40ace7d6a276e2e148a117de0c33c735",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "work/prepared/factoid/bfdef2b3f66b1ae3a3c8361fcfba1334145c384822354457cea6a13a9617488d/sources/converted/factoid-native-values.jsonl",
+      "bytes": 2016452775,
+      "sha256": "9ed0c9af0a99161e9a6197f1b8c87d321ea2e76f6c4d6f50bc6538d50418b407",
+      "allocated_bytes": 2016460800,
+      "links": 1
+    },
+    {
+      "path": "work/prepared/factoid/bfdef2b3f66b1ae3a3c8361fcfba1334145c384822354457cea6a13a9617488d/sources/converted/native-conversion-proof.json",
+      "bytes": 1502,
+      "sha256": "38f0b74a5e46bf9ef299e164487f6ab5d00331354c25d7d986a33b024de6496a",
+      "allocated_bytes": 4096,
+      "links": 1
+    },
+    {
+      "path": "work/prepared/factoid/bfdef2b3f66b1ae3a3c8361fcfba1334145c384822354457cea6a13a9617488d/sources/converted/native-frame-metadata.json",
+      "bytes": 70317,
+      "sha256": "9332c9326fa69a89c9aef0fa2cfb689f82c168d5570a7a59d5b718120221d07c",
+      "allocated_bytes": 73728,
+      "links": 1
+    },
+    {
+      "path": "work/prepared/factoid/bfdef2b3f66b1ae3a3c8361fcfba1334145c384822354457cea6a13a9617488d/sources/converted/native-original.gzip",
+      "bytes": 369319718,
+      "sha256": "42e975c9067c6a738e2ae85a1d18c80b90974ffe4af75e57fbde53588040dbbb",
+      "allocated_bytes": 369324032,
+      "links": 1
+    }
+  ],
+  "allocated_bytes_unlinked": 4246069248,
+  "target_absent": true
+}

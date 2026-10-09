@@ -1,0 +1,19 @@
+release: eth-food101-original
+source_url: https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/
+adapter: classic_vision
+expected_count: 101000
+scope: All original 101000 images in the 75750 training and 25250 test split with
+  all 101 source class names. Original training annotation noise is retained.
+adapter_config:
+  dataset_kind: food101
+  archive_preparation: zip-store
+files:
+- url: https://data.vision.ee.ethz.ch/cvl/food-101.tar.gz
+  source_name: food-101.tar.gz
+  bytes: 4996278331
+  sha256: d97d15e438b7f4498f96086a4f7e2fa42a32f2712e87d3295441b2b6314053a4
+  md5: 85eeb15f3717b99a5da872d97d918f87
+  config_key: path
+  format: tar.gz
+allowed_hosts:
+- data.vision.ee.ethz.ch

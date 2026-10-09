@@ -1,0 +1,103 @@
+{
+  "dataset_id": "naturalbench",
+  "executed": true,
+  "status": "executed",
+  "sources": [
+    {
+      "source_name": "data/train-00000-of-00003.parquet",
+      "url": "https://huggingface.co/datasets/BaiqiL/NaturalBench/resolve/ba41a7d564877a9b64c094b08015ca493cc3e54b/data/train-00000-of-00003.parquet",
+      "bytes": 374544038,
+      "sha256": "842582e7016880744d0eaef0358370fad431e29a3a9bbd3a7d2a13b0b5caaa27",
+      "etag": "\"9225e429d3782885afc4f8d45d884e6dfee133e142669678382209d4718b4bd0\"",
+      "rows": 634
+    },
+    {
+      "source_name": "data/train-00001-of-00003.parquet",
+      "url": "https://huggingface.co/datasets/BaiqiL/NaturalBench/resolve/ba41a7d564877a9b64c094b08015ca493cc3e54b/data/train-00001-of-00003.parquet",
+      "bytes": 386397032,
+      "sha256": "b6a963572f641f09fdfc4546c3a9368139b50d8f8508e84f2ad513bd958fe384",
+      "etag": "\"813b6b05f9052bb082b8b9610a527cfceaf6871ec3faaf64b32d8d4c1ee07cb6\"",
+      "rows": 633
+    },
+    {
+      "source_name": "data/train-00002-of-00003.parquet",
+      "url": "https://huggingface.co/datasets/BaiqiL/NaturalBench/resolve/ba41a7d564877a9b64c094b08015ca493cc3e54b/data/train-00002-of-00003.parquet",
+      "bytes": 380661212,
+      "sha256": "9504a8f00fff8acb9253d50eadd2c811245151344dee98b7283d6daeec81de06",
+      "etag": "\"186d153058d1136b92e45b03a97cfc76f4bf2db5ecb6b9b9b424488f3db671d1\"",
+      "rows": 633
+    }
+  ],
+  "versions": [
+    {
+      "snapshot_id": "naturalbench-3a316bc9ca232b3988341858",
+      "native_image_references": 3800,
+      "index": "parquet-d907d73a2e9b3d2fefeb86478bca62e1-92e712acf1b046c4a5af606b6999a985",
+      "cold_checks": [
+        {
+          "ref": "embedded/317/0.jpg",
+          "sha256": "01b258e36fb8a559461e0f3ebc3fb5bc31730efb7785741f89a16951f656dc2f",
+          "transferred_bytes": 0,
+          "source_ref": "remote/0/317/Image_0/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/950/1.jpg",
+          "sha256": "e581cb8916dfd226256fe9881f16dc6cd9d900486afedad3c468e88e4a9b4d5f",
+          "transferred_bytes": 0,
+          "source_ref": "remote/1/316/Image_1/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/1583/1.jpg",
+          "sha256": "a76c91e90604ee2dbb55314f1233f39151a51e526b55cc57cb772a212c978c82",
+          "transferred_bytes": 0,
+          "source_ref": "remote/2/316/Image_1/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/0/0.jpg",
+          "sha256": "15af3c760662c38067edd58f86d812bebcb269c570534c4160928758d16228b3",
+          "transferred_bytes": 0,
+          "source_ref": "remote/0/0/Image_0/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/950/0.jpg",
+          "sha256": "cff70e322f5e69e1d77a10f388e801d1cb3b742200b72ddde0596dcc2c07d596",
+          "transferred_bytes": 0,
+          "source_ref": "remote/1/316/Image_0/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/1899/1.jpg",
+          "sha256": "8347886bddcc1f73873c46a170f456b8e881a5c461dffed159d83f3d72da7670",
+          "transferred_bytes": 0,
+          "source_ref": "remote/2/632/Image_1/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        }
+      ]
+    }
+  ],
+  "total_verification_transfer_bytes": 3,
+  "native_index_bytes": 602112,
+  "preview_bytes_upper_bound": 64873738,
+  "source_paths_eligible": [
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/naturalbench/3a316bc9ca232b3988341858c01ea9cc5e73911e52ee0e9a7c23a1adddbe8690/sources/842582e7016880744d0eaef0358370fad431e29a3a9bbd3a7d2a13b0b5caaa27.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/naturalbench/3a316bc9ca232b3988341858c01ea9cc5e73911e52ee0e9a7c23a1adddbe8690/sources/b6a963572f641f09fdfc4546c3a9368139b50d8f8508e84f2ad513bd958fe384.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/naturalbench/3a316bc9ca232b3988341858c01ea9cc5e73911e52ee0e9a7c23a1adddbe8690/sources/9504a8f00fff8acb9253d50eadd2c811245151344dee98b7283d6daeec81de06.parquet"
+  ],
+  "source_paths_retired": [
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/naturalbench/3a316bc9ca232b3988341858c01ea9cc5e73911e52ee0e9a7c23a1adddbe8690/sources/842582e7016880744d0eaef0358370fad431e29a3a9bbd3a7d2a13b0b5caaa27.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/naturalbench/3a316bc9ca232b3988341858c01ea9cc5e73911e52ee0e9a7c23a1adddbe8690/sources/b6a963572f641f09fdfc4546c3a9368139b50d8f8508e84f2ad513bd958fe384.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/naturalbench/3a316bc9ca232b3988341858c01ea9cc5e73911e52ee0e9a7c23a1adddbe8690/sources/9504a8f00fff8acb9253d50eadd2c811245151344dee98b7283d6daeec81de06.parquet"
+  ],
+  "freed_source_allocated_bytes": 1141612544,
+  "integrity": "Complete native Parquet SHA-256 and every canonical image SHA-256 retained. Preview originals pinned locally. Cold originals equal their measured native SHA-256."
+}

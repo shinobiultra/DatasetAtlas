@@ -1,0 +1,18 @@
+release: ravel-e421fc9e132b3613b1d0020f856d539217fb30ca
+source_url: https://github.com/explanare/ravel/tree/e421fc9e132b3613b1d0020f856d539217fb30ca
+adapter: ravel
+expected_count: 11839
+scope: 'All five RAVEL domains: every entity attribute inventory with native prompt
+  templates and both split assignments, plus every independent Wikipedia control prompt.
+  One browse example per entity inventory or control prompt; this is source data,
+  not a model-specific filtered evaluation population.'
+adapter_config: {}
+files:
+- url: https://raw.githubusercontent.com/explanare/ravel/e421fc9e132b3613b1d0020f856d539217fb30ca/data.tgz
+  source_name: data.tgz
+  bytes: 429309
+  sha256: b148f0ded1979cb0e17e301cfda41cb120517a109d3c758cc768e376946d96bc
+  config_key: path
+  format: tgz
+allowed_hosts:
+- raw.githubusercontent.com

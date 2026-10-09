@@ -1,0 +1,68 @@
+schema_version: '1.0'
+id: space-invaders-rom
+name: Space Invaders ROM
+aliases: []
+description: 6507 Space Invaders ROM experimental condition. Paper p18 says one of three chosen game ROMs;
+  more than 250 simulated frames per game.
+paper_ids:
+- paper-ad50206beabc5a94
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: paper_protocol_checked_release_unverified
+  access: source_release_unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Exact source data release or paper-used subset is unverified.
+  - Public data/media reuse rights require separate review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://doi.org/10.1371/journal.pcbi.1005268
+  note: Exact ROM binary, checksum, version and rights not identified.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-8cce9dbc5029a37b7218
+  paper_id: paper-ad50206beabc5a94
+  source_file_hash: 9aa4f4db91746959b880843c05b3d3f5a62b75cba5bfc903d6581bb2ae3c81f6
+  page: 3
+  role: experimental condition
+  excerpt: 'is, three different games: Donkey Kong (1981), Space Invaders (1978), and Pitfall (1981).
+    Obviously these “behaviors” are quali- tatively different from th'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://doi.org/10.1371/journal.pcbi.1005268
+  note: Paper p18 says one of three chosen game ROMs; more than 250 simulated frames per game.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: source_binary_unresolved
+- kind: source_audit_rights
+  url: https://doi.org/10.1371/journal.pcbi.1005268
+  note: Exact ROM binary, checksum, version and rights not identified.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: source_binary_unresolved
+- kind: source_audit_access
+  url: https://doi.org/10.1371/journal.pcbi.1005268
+  note: source_release_unverified; Keep ROM condition distinct from generated transistor traces.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: source_binary_unresolved
+- kind: source_audit_refresh
+  url: https://doi.org/10.1371/journal.pcbi.1005268
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 1 URL probed (HEAD only): 1 reachable.'
+source_url: https://doi.org/10.1371/journal.pcbi.1005268

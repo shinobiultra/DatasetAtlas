@@ -80,7 +80,7 @@ export function shortId(id: string, length = 10): string {
  * carries what publication approved, so it must not repeat the workbench's
  * preview claim as if the examples were here.
  */
-export type CoverageState = 'full' | 'preview' | 'elsewhere' | 'metadata'
+export type CoverageState = 'full' | 'preview' | 'on_request' | 'elsewhere' | 'metadata'
 
 export function coverageState(dataset: Dataset, mode: 'static' | 'workbench'): CoverageState {
   const coverage = dataset.coverage ?? {}
@@ -91,12 +91,15 @@ export function coverageState(dataset: Dataset, mode: 'static' | 'workbench'): C
   }
   if (previewCount > 0 && coverage.complete_data === 'supported') return 'full'
   if (previewCount > 0) return 'preview'
+  // The registry records a verified preview population, but this workbench has not fetched it yet.
+  if (dataset.availability?.preview === 'on_request') return 'on_request'
   return 'metadata'
 }
 
 export const COVERAGE_STATE_LABEL: Record<CoverageState, string> = {
-  full: 'Full data available locally',
+  full: 'Full population indexed',
   preview: 'Preview available',
+  on_request: 'Preview on request — not fetched here yet',
   elsewhere: 'Not published here — prepared in the workbench',
   metadata: 'Metadata only — no adapter yet',
 }
@@ -107,14 +110,18 @@ export function coverageLine(dataset: Dataset, mode: 'static' | 'workbench'): { 
   const unit = coverage.unit ?? 'example'
   switch (coverageState(dataset, mode)) {
     case 'full':
-      return { text: `${previewCount.toLocaleString()} ${unit} preview · full data available locally`, tone: 'ok' }
+      return { text: `${previewCount.toLocaleString()} ${unit} preview · full population indexed`, tone: 'ok' }
     case 'preview': {
       const extra = mode === 'workbench'
         ? (coverage.complete_data === 'requires_preparation' ? ' · full data needs preparation'
-          : coverage.complete_data === 'externally_blocked' ? ' · full data externally blocked' : '')
+          : coverage.complete_data === 'externally_blocked' ? ' · full data externally blocked'
+          : coverage.complete_data === 'exceeds_storage_budget' ? ' · sampled; full index exceeds local storage budget' : '')
         : ''
       return { text: `${previewCount.toLocaleString()} ${unit} preview${extra}`, tone: 'ok' }
     }
+    case 'on_request':
+      { const count = dataset.availability?.upstream_preview_count ?? 0
+        return { text: `Preview on request · ${count.toLocaleString()} ${unit}${count === 1 ? '' : 's'} when fetched`, tone: 'default' } }
     case 'elsewhere':
       return { text: `Metadata only here · ${previewCount.toLocaleString()} ${unit} preview exists in the local workbench`, tone: 'warn' }
     default:
@@ -146,4 +153,15 @@ export function fieldOrigin(field: FieldDescriptor): string {
 export function fieldLeafName(field: FieldDescriptor): string {
   const parts = field.name.split('·')
   return (parts.length > 1 ? parts.slice(1).join('·') : field.name).trim() || field.id
+}
+
+/** Human byte sizes with the unit the magnitude deserves. */
+export function formatBytes(value: number | null | undefined): string {
+  if (value === null || value === undefined || !Number.isFinite(value)) return '—'
+  if (value < 1000) return `${Math.round(value)} B`
+  const units = ['KB', 'MB', 'GB', 'TB']
+  let scaled = value / 1000
+  let index = 0
+  while (scaled >= 1000 && index < units.length - 1) { scaled /= 1000; index += 1 }
+  return `${scaled >= 100 ? scaled.toFixed(0) : scaled >= 10 ? scaled.toFixed(1) : scaled.toFixed(2)} ${units[index]}`
 }

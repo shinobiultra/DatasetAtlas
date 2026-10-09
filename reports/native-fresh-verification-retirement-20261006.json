@@ -1,0 +1,63 @@
+{
+  "status": "executed",
+  "checked_at_utc": "2026-10-06T09:45:02.091051+00:00",
+  "freed_allocated_bytes": 4441321472,
+  "datasets": [
+    {
+      "dataset_id": "cocogender",
+      "verification": {
+        "completed_at": "2026-10-06",
+        "completed_at_epoch": 1791279472.6433988,
+        "dataset_identity_bound_by": "immutable_receipt",
+        "dataset_manifest_sha256": null,
+        "downloaded_bytes": 97569805,
+        "kind": "http_archive",
+        "population_scope": "complete",
+        "preview_count": 100,
+        "receipt_sha256": "15352911dd32d06b8870bf6dc124f89035b2515f419456f3a7f0aa428f7e0400",
+        "recipe_sha256": "cc3486e3ee11393248ae3511179224185863104786ca36aea38c383af006c76e",
+        "records_indexed": 244242,
+        "snapshot_id": "cocogender-8becc92c67d150fc3d78ce27",
+        "status_sha256": "cb0388f7e56516d6cff7f414a462216035dca9df884a539562b0671081756e4b"
+      }
+    },
+    {
+      "dataset_id": "places",
+      "verification": {
+        "completed_at": "2026-10-06",
+        "completed_at_epoch": 1791279274.4019005,
+        "dataset_identity_bound_by": "immutable_receipt",
+        "dataset_manifest_sha256": null,
+        "downloaded_bytes": 592656896,
+        "kind": "http_archive",
+        "population_scope": "complete",
+        "preview_count": 100,
+        "receipt_sha256": "e16e7335def9b77b0cf5352155c322e57271d4425f467fd7fb3adc3c20e9c644",
+        "recipe_sha256": "2fde84a7e018d129f4bfe92cb86da2592eaa81e0071f302d3be64ec7b95a8dec",
+        "records_indexed": 36500,
+        "snapshot_id": "places-0516b70aa6c24604d8f265db",
+        "status_sha256": "46d2dce7012c27842222ce8b5d28aa5ca77574a9284ff2723ea252bb1688598d"
+      }
+    },
+    {
+      "dataset_id": "tid2013",
+      "verification": {
+        "completed_at": "2026-10-06",
+        "completed_at_epoch": 1791279133.7685807,
+        "dataset_identity_bound_by": "immutable_receipt",
+        "dataset_manifest_sha256": null,
+        "downloaded_bytes": 957680241,
+        "kind": "http_archive",
+        "population_scope": "complete",
+        "preview_count": 100,
+        "receipt_sha256": "f4904653539766f0636bb976d3f9ff79492ebd2c9295815332da698907b4d131",
+        "recipe_sha256": "9c31ff98cf24456a9ba20c53ef4c80ecbe35c2cd53a04724c99ceb04c061bead",
+        "records_indexed": 3000,
+        "snapshot_id": "tid2013-928c3fddde1e3a025ae63534",
+        "status_sha256": "937dcfb9733eff26c20e272169f876618e15930a0d3a006161a00fd3f2beadc2"
+      }
+    }
+  ],
+  "file_inventory": "work/native-fresh-reproduction-evidence-20261006/file-checksums.json",
+  "scope": "Disposable clean-workspace source bodies, canonical indices and preview copies removed only after current recipe-bound reproduction proof; metadata, original verification receipts and full file hashes retained. Active Atlas corpus and prepared snapshots unchanged."
+}

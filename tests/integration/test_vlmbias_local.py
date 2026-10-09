@@ -7,9 +7,10 @@ from pathlib import Path
 
 import pyarrow.parquet as pq
 import pytest
+import yaml
 
 from dataset_atlas.adapters import get_adapter
-from dataset_atlas.models import Query
+from dataset_atlas.models import Dataset, Query
 from dataset_atlas.queries.parquet import ParquetSnapshot
 from dataset_atlas.registry import Registry
 
@@ -75,9 +76,19 @@ def test_pinned_real_synthetic_source_preview_and_index(dataset_id: str, expecte
     assert zero.matched_count + one.matched_count == expected
 
 
-def test_visu_text_is_gated_metadata_only() -> None:
-    dataset = Registry(ROOT).dataset("visu-text")
-    assert dataset.coverage.access == "gated"
-    assert dataset.coverage.preview == "none"
-    assert dataset.coverage.complete_data == "externally_blocked"
-    assert "Unsafe vision images" in " ".join(dataset.coverage.blockers)
+def test_visu_text_catalogue_baseline_is_gated_without_vision_images() -> None:
+    """The tracked baseline is what a colleague without author approval sees.
+
+    A workspace that holds the authorized files overlays a prepared version, so this reads the shipped YAML
+    rather than the merged registry; local authorization must not change the catalogue's access claim.
+    """
+    baseline = Dataset.model_validate(
+        yaml.safe_load((ROOT / "registry/datasets/visu-text.yaml").read_text())
+    )
+    assert baseline.coverage.access == "gated"
+    assert baseline.coverage.preview == "none"
+    assert baseline.coverage.complete_data == "externally_blocked"
+    assert "Unsafe vision images" in " ".join(baseline.coverage.blockers)
+    merged = Registry(ROOT).dataset("visu-text")
+    assert merged.coverage.access == "gated"
+    assert merged.coverage.publication == "local_only"

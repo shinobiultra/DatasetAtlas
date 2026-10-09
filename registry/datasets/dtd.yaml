@@ -1,19 +1,23 @@
 schema_version: '1.0'
 id: dtd
 name: DTD
-aliases: []
-description: Oxford Describable Textures Dataset, 47 texture categories and 10 supplied
-  train/validation/test splits.
+aliases:
+- DTD
+- Describable Textures Dataset
+- describable-textures-dataset
+description: Oxford Describable Textures Dataset, 47 texture categories and 10 supplied train/validation/test splits.
 paper_ids:
 - paper-3e0db9c633ab204c
 - paper-25eaa8c74ce76800
+- paper-a47845c66d4a3f48
+- paper-72040eccb96ead7a
 release: unresolved
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
-  access: unverified
+  access: public
   adapter: not_started
   preview: none
   complete_data: unimplemented
@@ -22,14 +26,14 @@ coverage:
   unit: example
   blockers:
   - Source-family rights and any public media examples require dataset-specific review.
-  - Adapter and preview are not implemented.
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://www.robots.ox.ac.uk/~vgg/data/dtd/
-  note: Oxford page says made available for research purposes, with images collected
-    from Google and Flickr; no explicit redistribution license on page
+  note: Oxford page says made available for research purposes, with images collected from Google and Flickr; no
+    explicit redistribution license on page
+  alias_note: Author page says research-purpose availability; web/Flickr source photographs retain individual rights
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-ab59905af8fe44d9e999
@@ -51,31 +55,104 @@ evidence:
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://www.robots.ox.ac.uk/~vgg/data/dtd/
-  note: Oxford Describable Textures Dataset, 47 texture categories and 10 supplied
-    train/validation/test splits
+  note: Oxford Describable Textures Dataset, 47 texture categories and 10 supplied train/validation/test splits
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_release
   url: https://www.robots.ox.ac.uk/~vgg/data/dtd/
-  note: Author archive dtd-r1.0.1.tar.gz (625 MB listed); labels-only dtd-r1.0.1-labels.tar.gz
-    (1.4 MB listed)
+  note: Author archive dtd-r1.0.1.tar.gz (625 MB listed); labels-only dtd-r1.0.1-labels.tar.gz (1.4 MB listed)
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_access
   url: https://www.robots.ox.ac.uk/~vgg/data/dtd/
-  note: Official Oxford page offers direct archive and labels-only download; retrieval
-    untested here
+  note: Official Oxford page offers direct archive and labels-only download; retrieval untested here
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
   probe: official_download_unprobed
 - kind: source_audit_rights
   url: https://www.robots.ox.ac.uk/~vgg/data/dtd/
-  note: Oxford page says made available for research purposes, with images collected
-    from Google and Flickr; no explicit redistribution license on page
+  note: Oxford page says made available for research purposes, with images collected from Google and Flickr; no
+    explicit redistribution license on page
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
+- kind: corpus_mention
+  evidence_id: evidence-99a75b9e0889806e6cda
+  paper_id: paper-a47845c66d4a3f48
+  source_file_hash: f1108a17f3cbbba7a93256ee725d68092c9a6d25204ca4faab92f6f0cbe1a4df
+  page: 8
+  role: evaluation
+  excerpt: 'm the Model Zoo on three OOD datasets: CIFAR-100 [75], SVHN [97], and Describable Textures Dataset [24].
+    We use the area under the ROC curve (AUROC) to measure the success in the detection of OOD data'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+  merged_from_alias: describable-textures-dataset
+- kind: corpus_mention
+  evidence_id: evidence-d7d6457710943693445f
+  paper_id: paper-72040eccb96ead7a
+  source_file_hash: 84af60e71339cbfe4f8aa35fd48431b2fcd1b3d941955a1bcb1e2582f42d35de
+  page: 9
+  role: source data
+  excerpt: 'ackgrounds for each digit category which are patches sampled from the describable texture dataset (Cimpoi
+    et al., 2014). At train time the same type of texture is underlayed each digit of the same category, '
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+  merged_from_alias: describable-textures-dataset
+- kind: corpus_mention
+  evidence_id: evidence-2828d2be27dc4886640c
+  paper_id: paper-a47845c66d4a3f48
+  source_file_hash: f1108a17f3cbbba7a93256ee725d68092c9a6d25204ca4faab92f6f0cbe1a4df
+  page: 8
+  role: OOD evaluation
+  excerpt: 'on CIFAR-10 from the Model Zoo on three OOD datasets: CIFAR-100 [75], SVHN [97], and Describable Textures
+    Dataset [24]. We use the area under the ROC curve (AUROC) to measure the success in the detection of OOD data,
+    and show the results'
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+  merged_from_alias: describable-textures-dataset
+- kind: source_audit_identity
+  url: https://www.robots.ox.ac.uk/~vgg/data/dtd/
+  note: Official Oxford dtd-r1.0.1 archive has 5,640 images, 47 attributes and ten evaluation splits; corpus has
+    direct OOD use
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_release_located
+  merged_from_alias: describable-textures-dataset
+- kind: source_audit_rights
+  url: https://www.robots.ox.ac.uk/~vgg/data/dtd/
+  note: Author page says research-purpose availability; web/Flickr source photographs retain individual rights
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_release_located
+  merged_from_alias: describable-textures-dataset
+- kind: source_audit_access
+  url: https://www.robots.ox.ac.uk/~vgg/data/dtd/
+  note: public; Link to publication-audited dtd family while preserving full-name candidate and paper roles; pin
+    actual split.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: original_release_located
+  merged_from_alias: describable-textures-dataset
+- kind: source_audit_access
+  url: https://www.robots.ox.ac.uk/~vgg/data/dtd/
+  note: Official dtd-r1.0.1.tar.gz (625,239,812 bytes) was retrieved from the Oxford page and indexed by preparation;
+    5,640 records.
+  checked_on: '2026-09-22'
+  source_identity_status: official_release_acquired_by_preparation
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in at least one record.
+    Not inferred from the name or description.'
 source_url: https://www.robots.ox.ac.uk/~vgg/data/dtd/
+relationships:
+- type: alias_resolved_from
+  target_id: describable-textures-dataset
+  status: verified
+  scope: 'Same official Oxford dtd-r1.0.1 release: identical source URL and byte-identical acquisition recipe (5,640
+    images, ten partitions).'
+modalities:
+- image

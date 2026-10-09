@@ -1,0 +1,30 @@
+# The catalogue's records are these pinned originals plus identity fields (see dataset_atlas/converters/text.py). A fetch reproduces
+# them and fails unless the converted rows match this row digest, taken from the maintainer's records. IDs and snapshot unchanged.
+release: github-f7ddd7d1c7bda82c6609ecfaf1484565d08d754a
+snapshot_id: github-f7ddd7d1c7bda82c6609ecfaf1484565d08d754a-35a6f471e530
+adapter: structured
+expected_count: 100
+scope: The TDC 2023 red-teaming starter kit's 50 dev and 50 test behavior strings. This is the public behavior list, not gated challenge
+  models or the citing paper's selected prompts.
+source_url: https://github.com/centerforaisafety/tdc2023-starter-kit
+adapter_config: {}
+convert:
+  name: tdc2023
+  params: {}
+  count: 100
+  rows_sha256: 63579932d53ecfedc555e112f87f83c111aa671a36d411fa1e8a46c79c217322
+files:
+- source_name: dev_behaviors.json
+  url: https://raw.githubusercontent.com/centerforaisafety/tdc2023-starter-kit/f7ddd7d1c7bda82c6609ecfaf1484565d08d754a/red_teaming/data/dev/behaviors.json
+  bytes: 4080
+  sha256: 9392c63ad0193f0510f33812593f0dc71d13ae8b2ad93f64d670e9795deee1b0
+  format: json
+  config_key: dev_behaviors
+- source_name: test_behaviors.json
+  url: https://raw.githubusercontent.com/centerforaisafety/tdc2023-starter-kit/f7ddd7d1c7bda82c6609ecfaf1484565d08d754a/red_teaming/data/test/behaviors.json
+  bytes: 3740
+  sha256: c4a630921005fd5e26dfe22dd720e411c8e7866c96f5b1a0ca2d46f0e1d1f8c2
+  format: json
+  config_key: test_behaviors
+allowed_hosts:
+- raw.githubusercontent.com

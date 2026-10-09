@@ -32,6 +32,7 @@ class ProviderConfig(StrictModel):
     api_key_env: str | None = None
     timeout_seconds: float = Field(default=30, gt=0, le=120)
     max_output_tokens: int = Field(default=512, ge=1, le=4096)
+    reasoning_effort: Literal['none','minimal','low','medium','high','xhigh','max'] | None = None
     max_input_characters: int = Field(default=20000, ge=1, le=100000)
     max_images: int = Field(default=8, ge=0, le=8)
     allow_external: bool = False
@@ -88,6 +89,8 @@ class ProviderView(StrictModel):
 class ContextRequest(StrictModel):
     provider_id: str
     record_ids: list[str] = Field(min_length=1, max_length=100)
+    snapshot_ids: list[str] | None = Field(default=None, min_length=1, max_length=100)
+    result_snapshot_ids: list[str] = Field(default_factory=list, max_length=32)
     mode: Literal["exploration", "evaluation"] = "exploration"
     fields: list[str] = Field(default_factory=list, max_length=64)
     include_annotations: bool = False
@@ -100,6 +103,10 @@ class ContextRequest(StrictModel):
             raise ValueError("record_ids must be unique")
         if len(set(self.image_asset_ids)) != len(self.image_asset_ids):
             raise ValueError("image_asset_ids must be unique")
+        if len(set(self.result_snapshot_ids)) != len(self.result_snapshot_ids) or len(set(self.fields)) != len(self.fields):
+            raise ValueError('Result snapshots and context fields must be unique')
+        if self.result_snapshot_ids and not self.snapshot_ids:
+            raise ValueError('Selected results require explicit dataset snapshot IDs')
         return self
 
 

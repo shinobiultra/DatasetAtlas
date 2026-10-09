@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test'
 import { sampleCards, selectionBar } from './helpers'
 
-for (const width of [390, 820]) {
+for (const width of [304, 390, 820]) {
   test(`narrow ${width}px catalogue and sample actions remain reachable`, async ({ page }) => {
     await page.setViewportSize({ width, height: 844 })
     await page.goto('/')
@@ -10,15 +10,18 @@ for (const width of [390, 820]) {
     await page.getByRole('button', { name: 'Filters', exact: true }).click()
     const filters = page.getByRole('complementary', { name: 'Catalogue filters' })
     await expect(filters).toBeVisible()
-    await filters.getByRole('checkbox', { name: /Preview available/ }).check()
+    await filters.getByRole('checkbox', { name: /Examples on this site/ }).check()
     await filters.getByRole('button', { name: 'Close catalogue filters' }).click()
-    await expect(page.locator('.ds-card')).toHaveCount(3)
-    await page.locator('.ds-card[data-dataset-id="clevr"]').click()
+    await expect(page.locator('.ds-card, .ds-row')).toHaveCount(3)
+    await page.locator('[data-dataset-id="clevr"]').first().click()
     await expect(sampleCards(page).first()).toBeVisible()
     const id = await sampleCards(page).first().getAttribute('data-record-id')
     await page.getByLabel(`Select record ${id}`).check()
     await selectionBar(page).getByRole('button', { name: 'Analyze', exact: true }).click()
     await expect(page.getByRole('complementary', { name: 'Analysis' })).toBeVisible()
+    const bounds = await page.getByRole('complementary', { name: 'Analysis' }).boundingBox()
+    expect(bounds!.x).toBeGreaterThanOrEqual(0)
+    expect(bounds!.x + bounds!.width).toBeLessThanOrEqual(width)
     await page.getByRole('button', { name: 'Close panel' }).click()
     await page.getByRole('button', { name: 'Expand navigation' }).click()
     await page.getByRole('navigation', { name: 'Primary' }).getByRole('button', { name: 'Collections', exact: true }).click()
@@ -29,7 +32,7 @@ for (const width of [390, 820]) {
 }
 
 test('metadata-only entries can open and close their full source record', async ({ page }) => {
-  await page.goto('/#/dataset/imagenet')
+  await page.goto('/#/dataset/facet')
   await expect(page.getByText('No inspectable examples here yet.')).toBeVisible()
   await page.getByRole('button', { name: 'Open full record' }).click()
   await expect(page.getByRole('complementary', { name: 'About dataset' })).toBeVisible()

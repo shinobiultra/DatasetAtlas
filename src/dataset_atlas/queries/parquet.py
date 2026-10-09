@@ -35,47 +35,7 @@ _OPS = {"eq", "ne", "in", "contains", "gt", "gte", "lt", "lte", "is_null"}
 _TYPES = {"string", "category", "number", "boolean", "array", "object"}
 
 
-def _result_values(item: dict[str, Any]) -> dict[str, Any]:
-    """Scalar aggregation contract shared with preview result attachment.
-
-    A completed empty detection list is zero. A failed item has only its status;
-    a record with no item has no row in the result relation and remains NULL.
-    """
-    status = item.get("status", "unknown")
-    if not isinstance(status, str):
-        raise ValueError("Result item status must be a string")
-    values: dict[str, Any] = {"status": status}
-    if status != "completed":
-        return values
-    output = item.get("output", {})
-    if not isinstance(output, dict):
-        raise ValueError("Completed result output must be an object")
-    for key, value in output.items():
-        if not isinstance(key, str):
-            raise ValueError("Result output keys must be strings")
-        if value is None or isinstance(value, (str, bool, int, float)):
-            if not isinstance(value, float) or math.isfinite(value):
-                values[key] = value
-    detections = output.get("detections")
-    if isinstance(detections, list):
-        values["detection_count"] = len(detections)
-    asset_outputs = output.get("assets")
-    if isinstance(asset_outputs, list):
-        completed = [asset for asset in asset_outputs if isinstance(asset, dict) and asset.get("status") == "completed"]
-        if len(completed) == len(asset_outputs) == 1:
-            for key, value in completed[0].items():
-                if key not in {"asset_id", "status"} and (value is None or isinstance(value, (str, bool, int, float))):
-                    if not isinstance(key, str):
-                        raise ValueError("Result asset output keys must be strings")
-                    if not isinstance(value, float) or math.isfinite(value):
-                        values[key] = value
-        if len(completed) == len(asset_outputs):
-            detection_sets = [asset.get("detections", asset.get("output", {}).get("detections")) for asset in completed]
-            if all(isinstance(group, list) for group in detection_sets):
-                boxes = [box for group in detection_sets for box in group]
-                values["detection_count"] = len(boxes)
-                values["person_count"] = sum(isinstance(box, dict) and box.get("class") == "person" for box in boxes)
-    return values
+from .result_values import result_values as _result_values
 
 
 def _result_dtype(value: Any) -> str:
@@ -88,6 +48,30 @@ def _sha256(path: Path) -> str:
         for chunk in iter(lambda: stream.read(1024 * 1024), b""):
             digest.update(chunk)
     return digest.hexdigest()
+
+
+def _checksum_matches(parquet: Path, expected: str, stamp_dir: Path) -> bool:
+    """Compare the Parquet file with its manifest checksum, hashing it once.
+
+    Hashing a multi-gigabyte index on every process start made the first query of a large dataset take seconds. After one full verification a
+    stamp next to the manifest records the checksum with the file's size and modification time; a later start trusts it only while all three
+    still match, so a replaced or edited file is hashed again. The stamp is an optimisation, never a second source of truth: if it cannot be
+    read or written the file is simply hashed."""
+    stat = parquet.stat()
+    stamp = stamp_dir / "verified.stamp"
+    try:
+        value = json.loads(stamp.read_text())
+        if value == {"sha256": expected, "size": stat.st_size, "mtime_ns": stat.st_mtime_ns}:
+            return True
+    except (OSError, ValueError):
+        pass
+    if _sha256(parquet) != expected:
+        return False
+    try:
+        stamp.write_text(json.dumps({"sha256": expected, "size": stat.st_size, "mtime_ns": stat.st_mtime_ns}))
+    except OSError:
+        pass
+    return True
 
 
 def _inside(root: Path, path: Path) -> Path:
@@ -168,11 +152,17 @@ def _category_value(value: Any) -> tuple[str, str]:
     raise ValueError("Category value must be a string, finite number, boolean, or null")
 
 
+def _budget_message(written: int, expected: int, limit: int) -> str:
+    return (f"Snapshot exceeds byte budget: {written:,} of {expected:,} records fit within the {limit:,}-byte prepared-data limit. "
+            "A complete index can be several times the size of its source; raise the prepared-data limit and prepare again.")
+
+
 def build_parquet_snapshot(
     records: Iterable[Record], fields: Sequence[FieldDescriptor], output_dir: Path, *,
     root: Path, dataset_id: str, release_id: str, snapshot_id: str,
     expected_count: int, unit: Unit = "example", population_scope: str = "preview",
     batch_size: int = 512, max_bytes: int = 20_000_000_000,
+    max_record_bytes: int = 2_000_000,
 ) -> Path:
     """Stream records into a new, checksum-bound snapshot; never alter originals.
 
@@ -191,6 +181,8 @@ def build_parquet_snapshot(
         raise ValueError("Unsupported population scope")
     if type(batch_size) is not int or not 1 <= batch_size <= 4096 or max_bytes <= 0:
         raise ValueError("Invalid snapshot bounds")
+    if type(max_record_bytes) is not int or not 1 <= max_record_bytes <= 16_000_000:
+        raise ValueError("Record bound must be within 1..16 MB")
     fields = list(fields)
     registry = _registry(fields)
     schema = pa.schema([
@@ -221,8 +213,8 @@ def build_parquet_snapshot(
                 except sqlite3.IntegrityError as exc:
                     raise ValueError(f"Duplicate or empty record ID: {record.id}") from exc
                 encoded = record.model_dump_json()
-                if len(encoded.encode("utf-8")) > 2_000_000:
-                    raise ValueError(f"Record exceeds 2 MB bound: {record.id}")
+                if len(encoded.encode("utf-8")) > max_record_bytes:
+                    raise ValueError(f"Record exceeds {max_record_bytes} byte bound: {record.id}; source={record.source.get('_atlas_origin', {})}")
                 row = {name: _field_value(record, name) for name in _BASE_FIELDS}
                 row["record_json"] = encoded
                 row["search_text"] = "\n".join([record.text or "", record.question or "", json.dumps(record.source, ensure_ascii=False, separators=(",", ":"))]).lower()
@@ -242,7 +234,7 @@ def build_parquet_snapshot(
                     rows.clear()
                     rows_bytes = 0
                     if parquet.stat().st_size > max_bytes:
-                        raise ValueError("Snapshot exceeds byte budget")
+                        raise ValueError(_budget_message(count, expected_count, max_bytes))
             if rows:
                 writer.write_table(pa.Table.from_pylist(rows, schema=schema))
             if count != expected_count:
@@ -252,7 +244,7 @@ def build_parquet_snapshot(
             identity_db.close()
         (stage / "ids.sqlite").unlink()
         if parquet.stat().st_size > max_bytes:
-            raise ValueError("Snapshot exceeds byte budget")
+            raise ValueError(_budget_message(count, expected_count, max_bytes))
         manifest = {
             "schema_version": "1.0", "dataset_id": dataset_id, "release_id": release_id,
             "snapshot_id": snapshot_id, "unit": unit, "population_scope": population_scope,
@@ -260,6 +252,7 @@ def build_parquet_snapshot(
             "category_kinds": {field_id: sorted(kinds) for field_id, kinds in category_kinds.items()},
             "checksums": {"records.parquet": _sha256(parquet)},
             "parquet_bytes": parquet.stat().st_size,
+            "max_record_bytes": max_record_bytes,
         }
         (stage / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n")
         parquet.chmod(0o444)
@@ -271,7 +264,7 @@ def build_parquet_snapshot(
 class ParquetSnapshot:
     """Validated immutable snapshot. Call `interrupt()` from another thread to cancel."""
 
-    def __init__(self, root: Path, snapshot_dir: Path, *, memory_mb: int = 256, threads: int = 2, timeout_seconds: float = 30):
+    def __init__(self, root: Path, snapshot_dir: Path, *, memory_mb: int = 256, threads: int = 4, timeout_seconds: float = 30):
         root = Path(root)
         directory = Path(snapshot_dir)
         if not root.is_dir() or directory.is_symlink() or not directory.is_dir():
@@ -289,7 +282,7 @@ class ParquetSnapshot:
             raise ValueError("Invalid snapshot manifest") from exc
         if not isinstance(manifest, dict) or manifest.get("schema_version") != "1.0" or not isinstance(manifest.get("checksums"), dict) or set(manifest["checksums"]) != {"records.parquet"} or not isinstance(manifest.get("fields"), list) or manifest.get("population_scope") not in {"preview", "complete"}:
             raise ValueError("Unsupported snapshot manifest")
-        if manifest.get("parquet_bytes") != parquet.stat().st_size or manifest["checksums"]["records.parquet"] != _sha256(parquet):
+        if manifest.get("parquet_bytes") != parquet.stat().st_size or not _checksum_matches(parquet, manifest["checksums"]["records.parquet"], directory):
             raise ValueError("Snapshot checksum mismatch")
         parquet_metadata = pq.read_metadata(parquet)
         for key in ("dataset_id", "release_id", "snapshot_id", "unit"):
@@ -322,14 +315,15 @@ class ParquetSnapshot:
         if isinstance(timeout_seconds,bool) or not isinstance(timeout_seconds,(int,float)) or not 0 < timeout_seconds <= 300:
             raise ValueError("Query timeout must be within 0..300 seconds")
         self.timeout_seconds=timeout_seconds
-        self._active: set[duckdb.DuckDBPyConnection] = set()
+        self._active: dict[duckdb.DuckDBPyConnection,threading.Event] = {}
         self._lock = threading.Lock()
 
     def interrupt(self) -> None:
         """Interrupt active DuckDB work; the querying thread receives ValueError."""
         with self._lock:
-            connections = list(self._active)
-        for connection in connections:
+            connections = list(self._active.items())
+        for connection,cancelled in connections:
+            cancelled.set()
             try:
                 connection.interrupt()
             except duckdb.Error:
@@ -539,9 +533,11 @@ class ParquetSnapshot:
                 raise ValueError(f"Cannot sort structured field: {sort['field_id']}")
             expression = self._category_sort_expression(sort["field_id"], column, self.category_kinds)[0] if dtype == "category" else column
             sorts.append(f'{expression} {sort["direction"].upper()} NULLS LAST')
-        if not any(sort.get("field_id") == "id" for sort in query.sort):
-            sorts.append('source."id" ASC')
-        order = " ORDER BY " + ", ".join(sorts)
+        if (query.sort or artifacts) and not any(sort.get("field_id") == "id" for sort in query.sort):
+            sorts.append('source."id" ASC')  # a tie-break that makes a user's sort total
+        # With no sort the page follows the snapshot's own row order: the index is immutable, so that order is as stable as sorting by
+        # identity, and it needs no sort over the whole population (a join with results has no stable row order, so it still sorts by id) (a scan of every id, seconds on a 13-million-row index).
+        order = " ORDER BY " + ", ".join(sorts) if sorts else ""
         method = "source"
         seed = 0
         sample_field = None
@@ -574,9 +570,13 @@ class ParquetSnapshot:
         connection.execute(f"SET memory_limit = '{self.memory_mb}MB'")
         connection.execute("SET max_temp_directory_size = '1024MB'")
         connection.execute(f"SET threads = {self.threads}")
+        cancelled=threading.Event()
         with self._lock:
-            self._active.add(connection)
+            self._active[connection]=cancelled
         expired=threading.Event()
+        def ensure_active():
+            if expired.is_set():raise ValueError("Query exceeded its time budget")
+            if cancelled.is_set():raise ValueError("Query cancelled")
         def expire():
             expired.set()
             connection.interrupt()
@@ -615,8 +615,9 @@ class ParquetSnapshot:
             if artifacts:
                 connection.register("result_table", result_table)
             source = 'read_parquet(?) AS source' + (' LEFT JOIN result_table AS results ON source."id" = results."id"' if artifacts else '')
-            if expired.is_set():raise ValueError("Query exceeded its time budget")
-            count = connection.execute(f"SELECT count(*) FROM {source}{where}", [str(self.parquet), *params]).fetchone()[0]
+            ensure_active()
+            # An unfiltered, unjoined population is exactly the manifest count, already checked against Parquet metadata.
+            count = self.record_count if not where and not artifacts else connection.execute(f"SELECT count(*) FROM {source}{where}", [str(self.parquet), *params]).fetchone()[0]
             sampled_count = min(size, count) if size is not None else count
             if offset > sampled_count:
                 raise ValueError("Cursor offset exceeds current result; restart pagination")
@@ -627,19 +628,64 @@ class ParquetSnapshot:
                     prediction='results."prediction_json"' if artifacts else 'NULL'
                     strata=f'atlas_stratum(source."record_json", {prediction})'
                     selected_columns+=f', row_number() OVER (PARTITION BY {strata} ORDER BY atlas_rank(source."id"), source."id") AS atlas_stratum_rank, {strata} AS atlas_stratum_key'
-                if expired.is_set():raise ValueError("Query exceeded its time budget")
-                result_rows = connection.execute(f"SELECT {selected_columns} FROM {source}{where}{order} LIMIT ? OFFSET ?", [str(self.parquet), *params, take, offset]).fetchall()
+                ensure_active()
+                if method != 'stratified':
+                    # Sort compact identity/field keys before fetching native
+                    # envelopes. Wide records otherwise exhaust the fixed
+                    # DuckDB budget in top-k sorting before page byte limits.
+                    max_record = self.manifest.get('max_record_bytes', 2_000_000)
+                    # A small page of small records is selected in one pass: sorting only the compact keys and then looking the rows up costs a second
+                    # scan of the whole file (about a second on 13 million rows). Wide records keep the two-stage path below.
+                    single_pass = (offset + take) * max_record * 4 <= self.memory_mb * 1_000_000
+                    if single_pass:
+                        reader=connection.execute(f"SELECT {selected_columns} FROM {source}{where}{order} LIMIT ? OFFSET ?",
+                                                  [str(self.parquet), *params, take, offset])
+                        page_rows=iter(reader.fetchone,None)
+                    else:
+                        page_rows=None
+                    keys=[] if single_pass else connection.execute(f'SELECT source."id" FROM {source}{where}{order} LIMIT ? OFFSET ?',
+                                            [str(self.parquet), *params, take, offset]).fetchall()
+                    batch_size=max(1,min(16,self.memory_mb*1_000_000//(4*self.manifest.get('max_record_bytes',2_000_000))))
+                    def ordered_rows():
+                        for start in range(0,len(keys),batch_size):
+                            ensure_active()
+                            identities=[row[0] for row in keys[start:start+batch_size]]
+                            marks=','.join('?' for _ in identities)
+                            batch=connection.execute(f'SELECT source."id", {selected_columns} FROM {source} WHERE source."id" IN ({marks})',
+                                                     [str(self.parquet),*identities]).fetchall()
+                            by_id={row[0]:row[1:] for row in batch}
+                            for identity in identities:
+                                ensure_active()
+                                yield by_id[identity]
+                    if page_rows is None:page_rows=ordered_rows()
+                else:
+                    reader=connection.execute(f"SELECT {selected_columns} FROM {source}{where}{order} LIMIT ? OFFSET ?",
+                                              [str(self.parquet), *params, take, offset])
+                    page_rows=iter(reader.fetchone,None)
+                result_rows = []; page_bytes = 0
+                for row in page_rows:
+                    payload_bytes = len(row[0].encode()) + (len(row[1].encode()) if artifacts and row[1] else 0)
+                    if payload_bytes > 32_000_000:
+                        raise ValueError("Single query record exceeds 32 MB response payload bound")
+                    if result_rows and page_bytes + payload_bytes > 32_000_000:
+                        break
+                    result_rows.append(row); page_bytes += payload_bytes
             else:
                 result_rows = []
+            # An interrupt delivered between statements is otherwise lost; the budget still applies.
+            ensure_active()
         except duckdb.InterruptException as exc:
             raise ValueError("Query exceeded its time budget" if expired.is_set() else "Query cancelled") from exc
+        except duckdb.OutOfMemoryException as exc:
+            raise ValueError("Query exceeded its memory budget; reduce page size or query concurrency") from exc
         finally:
             timer.cancel()
             timer.join()
             with self._lock:
-                self._active.discard(connection)
+                self._active.pop(connection,None)
             connection.close()
         records = [Record.model_validate_json(row[0]) for row in result_rows]
+        ensure_active()
         if artifacts:
             for record, row in zip(records, result_rows, strict=True):
                 if row[1] is not None:
@@ -649,6 +695,8 @@ class ParquetSnapshot:
         next_offset = offset + len(records)
         next_cursor = base64.urlsafe_b64encode(json.dumps({"query": fingerprint, "offset": next_offset}).encode()).decode() if next_offset < sampled_count else None
         warnings = []
+        if len(records) < take:
+            warnings.append("Page shortened to the 32 MB record payload budget; continue with its cursor.")
         if method=="stratified":warnings.append("Stratified samples do not estimate population prevalence.")
         if self.manifest["population_scope"] != "complete":
             warnings.append(f"Counts describe the available {self.manifest['population_scope']} snapshot, not a complete release.")
@@ -699,9 +747,13 @@ class ParquetSnapshot:
         connection.execute(f"SET memory_limit = '{self.memory_mb}MB'")
         connection.execute("SET max_temp_directory_size = '1024MB'")
         connection.execute(f"SET threads = {self.threads}")
+        cancelled=threading.Event()
         with self._lock:
-            self._active.add(connection)
+            self._active[connection]=cancelled
         expired = threading.Event()
+        def ensure_active():
+            if expired.is_set():raise ValueError("Aggregation exceeded its time budget")
+            if cancelled.is_set():raise ValueError("Aggregation cancelled")
 
         def expire() -> None:
             expired.set()
@@ -714,8 +766,10 @@ class ParquetSnapshot:
         try:
             if artifacts:
                 connection.register("result_table", result_table)
+            ensure_active()
             denominator = connection.execute(f"SELECT count(*) FROM {source}{where}", [str(self.parquet), *params]).fetchone()[0]
             for field_id in field_ids:
+                ensure_active()
                 column, dtype, _ = self._column(field_id, registry)
                 if dtype in {"array", "object"}:
                     results.append({"field_id": field_id, "kind": "unsupported", "reason": "Structured fields are not aggregated."})
@@ -745,13 +799,14 @@ class ParquetSnapshot:
                     "field_id": field_id, "kind": "categorical", "denominator": denominator, "missing": missing,
                     "counts": [{"value": row[0], "count": row[1]} for row in rows[:top]], "truncated": truncated,
                 })
+            ensure_active()
         except duckdb.InterruptException as exc:
             raise ValueError("Aggregation exceeded its time budget" if expired.is_set() else "Aggregation cancelled") from exc
         finally:
             timer.cancel()
             timer.join()
             with self._lock:
-                self._active.discard(connection)
+                self._active.pop(connection,None)
             connection.close()
         return {
             "snapshot_id": self.snapshot_id, "unit": self.unit, "population_scope": self.population_scope,

@@ -60,4 +60,11 @@ evidence:
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_refresh
+  url: https://catalog.ldc.upenn.edu/LDC93S1
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'unchanged: a reachable page says nothing about whether the files are public, so the prior state
+    stands. 1 URL probed (HEAD only): 1 reachable.'
 source_url: https://catalog.ldc.upenn.edu/LDC93S1

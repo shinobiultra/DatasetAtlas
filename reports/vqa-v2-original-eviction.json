@@ -1,0 +1,47 @@
+{
+  "dataset_id": "vqa-v2",
+  "source_sha256": "fe9be816052049c34717e077d9e34aa60814a55679f804cd043e3cbee3b9fde0",
+  "linked_dataset_ids": [
+    "pope"
+  ],
+  "status": "executed",
+  "retained_snapshots": 2,
+  "image_references_checked": 223354,
+  "unique_native_images_in_snapshots": 40504,
+  "preview_asset_memberships": 200,
+  "preview_bytes_upper_bound": 32946917,
+  "cold_original_probes": [
+    {
+      "sha256": "9da8dbb3f415b0549a2c7ef8930e245af324191cc4c4465a7d75f05d96b0781d",
+      "bytes": 213308,
+      "transferred_bytes": 213308,
+      "source_sha256": "fe9be816052049c34717e077d9e34aa60814a55679f804cd043e3cbee3b9fde0",
+      "fingerprint_type": "etag",
+      "etag": "\"3925cc4d50eb68d47bf2d6324a012d20-793\""
+    },
+    {
+      "sha256": "00b96f7016edc643cc3ee21df5407fcd0556b6489a86f8872d5883b7fd5bfead",
+      "bytes": 312894,
+      "transferred_bytes": 312894,
+      "source_sha256": "fe9be816052049c34717e077d9e34aa60814a55679f804cd043e3cbee3b9fde0",
+      "fingerprint_type": "etag",
+      "etag": "\"3925cc4d50eb68d47bf2d6324a012d20-793\""
+    },
+    {
+      "sha256": "ddf07c79d321aa18e5c31429495eedf8c84b4405e6b8c3e579adbc2e018bbbe6",
+      "bytes": 315416,
+      "transferred_bytes": 315416,
+      "source_sha256": "fe9be816052049c34717e077d9e34aa60814a55679f804cd043e3cbee3b9fde0",
+      "fingerprint_type": "etag",
+      "etag": "\"3925cc4d50eb68d47bf2d6324a012d20-793\""
+    }
+  ],
+  "paths": [
+    "work/sources/vqa-v2/val2014.zip"
+  ],
+  "extracted_files": 0,
+  "source_bytes": 6645013297,
+  "extracted_bytes": 0,
+  "retention": "Original-quality previews and complete indices; other originals and optimized browsing copies on demand.",
+  "freed_unique_file_bytes": 6645013297
+}

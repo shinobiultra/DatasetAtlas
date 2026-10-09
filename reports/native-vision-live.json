@@ -1,0 +1,87 @@
+[
+  {
+    "dataset_id": "cub-200-2011",
+    "population_count": 11788,
+    "query": {
+      "snapshot_id": "cub-200-2011-24d786c47fbc01c79e1386cc",
+      "population_scope": "complete",
+      "limit": 1,
+      "sample": {
+        "method": "random",
+        "size": 1,
+        "seed": 4121
+      }
+    },
+    "matched_count": 11788,
+    "record_id": "cub-200-2011:example:503ed8bb9b87ba6eb2198f4e",
+    "image_size": [
+      401,
+      500
+    ],
+    "media_bytes": 134812,
+    "image_sha256": "7cd865b74a4e4e2b174100e90804cfb8dde0f4499dc56f3edef95ef9b3619d9c",
+    "seconds": 1.1960228479997568,
+    "parts": 15,
+    "attributes": 312
+  },
+  {
+    "dataset_id": "flowers102",
+    "population_count": 8189,
+    "query": {
+      "snapshot_id": "flowers102-bf66416e2c87239627de1757",
+      "population_scope": "complete",
+      "limit": 1,
+      "sample": {
+        "method": "random",
+        "size": 1,
+        "seed": 4121
+      }
+    },
+    "matched_count": 8189,
+    "record_id": "flowers102:example:7efa47296202793dc1460270",
+    "image_size": [
+      750,
+      500
+    ],
+    "media_bytes": 44098,
+    "image_sha256": "e39b14755b705b0d1360365fd02660e6a6ebe57b11f982c81372b1a2aac02ac7",
+    "seconds": 0.3384378409996316
+  },
+  {
+    "dataset_id": "cifar-10-c",
+    "population_count": 950000,
+    "query": {
+      "snapshot_id": "cifar-10-c-84a406abd2b8547a4e8bb719",
+      "population_scope": "complete",
+      "limit": 1,
+      "sample": {
+        "method": "random",
+        "size": 1,
+        "seed": 4121
+      },
+      "filter": {
+        "and": [
+          {
+            "field_id": "source.corruption",
+            "op": "eq",
+            "value": "zoom_blur"
+          },
+          {
+            "field_id": "source.severity",
+            "op": "eq",
+            "value": 5
+          }
+        ]
+      }
+    },
+    "matched_count": 10000,
+    "record_id": "cifar-10-c:example:11f399c3825058559c40b160",
+    "image_size": [
+      32,
+      32
+    ],
+    "media_bytes": 1774,
+    "image_sha256": "a06e5cb6159d6d977e8c14bf93602f64738fc1e5657947874b785f3efc7c1e31",
+    "seconds": 1.4160609420000583
+  }
+]

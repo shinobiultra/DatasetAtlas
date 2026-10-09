@@ -1,0 +1,387 @@
+release: 4aa404212eb5d06e5adbcd9cee696c750d0d25a5
+adapter: structured_collection
+source_url: https://github.com/Karine-Huang/T2I-CompBench
+expected_count: 17861
+scope: All native text-list memberships under examples/dataset at the pinned author
+  commit, including benchmark prompts, training/validation and seen/unseen subsets,
+  and the explicitly named new_objects vocabulary. Overlapping lists remain distinct
+  source memberships; these are prompt inputs, not generated image results or a claim
+  of unique prompts.
+files:
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/3d_spatial.txt
+  source_name: 3d_spatial.txt
+  bytes: 26339
+  sha256: 1ae21ab1c669cca035f8ce27c83a312dd4ecddc0796a2d4a6910163b9a92fa3f
+  config_key: 3d_spatial_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/3d_spatial_train.txt
+  source_name: 3d_spatial_train.txt
+  bytes: 18486
+  sha256: 0bba7e9ad31b0ce7908f6cbf2426a4b7ef6e8b841c1b737d0ad2d5b8e688dd93
+  config_key: 3d_spatial_train_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/3d_spatial_val.txt
+  source_name: 3d_spatial_val.txt
+  bytes: 7851
+  sha256: c9953597315f36a5fcb41291bb19bdc6ab5f64a0fa760d691b4854a73f5d1fe9
+  config_key: 3d_spatial_val_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/color.txt
+  source_name: color.txt
+  bytes: 29689
+  sha256: e3034f86a70c3422dd7157c050dc9c8346a32162a3f1165302c9dba05c4f48f3
+  config_key: color_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/color_train.txt
+  source_name: color_train.txt
+  bytes: 26254
+  sha256: db5d3287027d453f8c977f0c7315f8a01a770f02f61fa54ae19406762982393f
+  config_key: color_train_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/color_val.txt
+  source_name: color_val.txt
+  bytes: 11871
+  sha256: 1634259756dbc77d13093d907d414480080ec9790a8c97ad09efaea7b2534f2d
+  config_key: color_val_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/color_val_seen.txt
+  source_name: color_val_seen.txt
+  bytes: 6399
+  sha256: 9b2859d9107b2ed4cae95808749de5ac3557a280eb79067a8ef55c4eec7711a9
+  config_key: color_val_seen_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/color_val_unseen.txt
+  source_name: color_val_unseen.txt
+  bytes: 5476
+  sha256: 7fa6f76bb602df9624262ee819f0b1ede20c14880cbacfb7fe8ce79f8157b5c2
+  config_key: color_val_unseen_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/complex.txt
+  source_name: complex.txt
+  bytes: 75760
+  sha256: 58c982554cfe40bedafe3fb495f18196bc0d3905f94b984e0580b24cb624f171
+  config_key: complex_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/complex_train.txt
+  source_name: complex_train.txt
+  bytes: 53038
+  sha256: d214ac45cb3c5307dd14a144c8c69aa5ffdcc7be74ff71b5dac989f8ca9f924b
+  config_key: complex_train_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/complex_train_action.txt
+  source_name: complex_train_action.txt
+  bytes: 42015
+  sha256: 2bf41d7d857883a7344aed46c45343f5089a71cc394d81c00f4aab5348a81dc8
+  config_key: complex_train_action_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/complex_train_spatial.txt
+  source_name: complex_train_spatial.txt
+  bytes: 6604
+  sha256: a7ccfa228a825497db4e6e688332a90f3b53da66a76da324390b597be92a0da0
+  config_key: complex_train_spatial_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/complex_train_spatialaction.txt
+  source_name: complex_train_spatialaction.txt
+  bytes: 4419
+  sha256: 933cdc3e6eeaa6564f762736dd32f5e74c4809381fc2c2787bec434bc6b0c7ea
+  config_key: complex_train_spatialaction_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/complex_val.txt
+  source_name: complex_val.txt
+  bytes: 22724
+  sha256: 1b808018b8d9916db3d47d5aa2ef18377a3549a56901a474156f799824cdf3b4
+  config_key: complex_val_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/complex_val_action.txt
+  source_name: complex_val_action.txt
+  bytes: 17698
+  sha256: d49ee4c7f99e3f3379fb8704a54ff5288b83bb412971edf616a4721c2473308e
+  config_key: complex_val_action_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/complex_val_spatial.txt
+  source_name: complex_val_spatial.txt
+  bytes: 2898
+  sha256: 6c7ac0ab75c7c9080cfc7b421fb059b9b0febb98471707aeedf58771088abc02
+  config_key: complex_val_spatial_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/complex_val_spatialaction.txt
+  source_name: complex_val_spatialaction.txt
+  bytes: 2128
+  sha256: e02ddc7fed812e6577e7386ec2137ce0a994a5ce19771661f68df7ac349a6ca9
+  config_key: complex_val_spatialaction_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/new_objects.txt
+  source_name: new_objects.txt
+  bytes: 1568
+  sha256: f39a3d2ff6067d7738673cbf465dc659ccc750776162989a5d9916f1d5f3e231
+  config_key: new_objects_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/non_spatial.txt
+  source_name: non_spatial.txt
+  bytes: 59469
+  sha256: 90ae0e995992768d8ddb862d821733103ebf822668a42c857862cc71018a0009
+  config_key: non_spatial_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/non_spatial_train.txt
+  source_name: non_spatial_train.txt
+  bytes: 41719
+  sha256: dbac5a9ec83204dcd0c3538a12d3212e2ce66db6f7ba45b49a1d869b2d3f2430
+  config_key: non_spatial_train_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/non_spatial_val.txt
+  source_name: non_spatial_val.txt
+  bytes: 17750
+  sha256: 04c56cc9ac441dc9ea6c5157652058bd1635b5308526dd31bb29a1caab9a758d
+  config_key: non_spatial_val_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/numeracy.txt
+  source_name: numeracy.txt
+  bytes: 36718
+  sha256: ba97b876f32f6cac34507a085c7e7ecc6079641b5cbd0fc0c1eb5240ac4b64f0
+  config_key: numeracy_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/numeracy_train.txt
+  source_name: numeracy_train.txt
+  bytes: 25854
+  sha256: f66bb8708cb0be23c0406e14d892b25661b2b71e3e72abddc79c38466ab629c6
+  config_key: numeracy_train_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/numeracy_val.txt
+  source_name: numeracy_val.txt
+  bytes: 10863
+  sha256: dad8df141604b70ba7554bec724e3db0a80023680769b5c514854ea2d2527bbe
+  config_key: numeracy_val_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/shape.txt
+  source_name: shape.txt
+  bytes: 56728
+  sha256: 571dfc71ecbea33aa4e504acbe0a7519780920012d9ad360aa212e7e4b6eb6df
+  config_key: shape_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/shape_train.txt
+  source_name: shape_train.txt
+  bytes: 40793
+  sha256: 451bdfccd330d4cf979d45664817be7959e89250b93d5c591cc562b858175a87
+  config_key: shape_train_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/shape_val.txt
+  source_name: shape_val.txt
+  bytes: 15935
+  sha256: 37e1a276906c7ea9516cbd7ac8501be896006c0c17ca7344f260562834455bae
+  config_key: shape_val_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/shape_val_seen.txt
+  source_name: shape_val_seen.txt
+  bytes: 8917
+  sha256: 5581f4c8904e11b00fe6e33d2cc21a5822f59f39f43fa51479bc30aa6d458a4d
+  config_key: shape_val_seen_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/shape_val_unseen.txt
+  source_name: shape_val_unseen.txt
+  bytes: 7016
+  sha256: 35b17a7b015405c5c96c51c5cd969a786b3855c48e6f68c184626f5db444d987
+  config_key: shape_val_unseen_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/spatial.txt
+  source_name: spatial.txt
+  bytes: 30779
+  sha256: 66f6b1dcf335389111a0379357fbf5233498e67ba15251ee0f7de2f1ac620ae1
+  config_key: spatial_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/spatial_train.txt
+  source_name: spatial_train.txt
+  bytes: 21562
+  sha256: af14cdf2320057d98f94077e6211c2ddfaabfbb9e3842873657baabb17e00de6
+  config_key: spatial_train_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/spatial_val.txt
+  source_name: spatial_val.txt
+  bytes: 9213
+  sha256: 8707a1d7e42ce3002d95363cf55f74bd043c843ae27108f5125aaaa7840ca988
+  config_key: spatial_val_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/texture.txt
+  source_name: texture.txt
+  bytes: 46000
+  sha256: 9957553c3e653ab54660454615ea5f3c9d4b807eca9c13b44cb9679d3f2c425e
+  config_key: texture_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/texture_train.txt
+  source_name: texture_train.txt
+  bytes: 31787
+  sha256: 4846315c5972f9e9cc82e4833099e8ec2c28b999ca77269512715f3f56bde54f
+  config_key: texture_train_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/texture_val.txt
+  source_name: texture_val.txt
+  bytes: 14211
+  sha256: fbb5363515b4a28009e360afaaaf389d2dd2289e50dbb0c6ef4ea0c7fe4f3d4f
+  config_key: texture_val_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/texture_val_seen.txt
+  source_name: texture_val_seen.txt
+  bytes: 7373
+  sha256: 5548a49c68efefbbc88b2eb6dffd0f141373235370659158a5d15fdbd82c8c96
+  config_key: texture_val_seen_path
+  format: txt
+- url: https://raw.githubusercontent.com/Karine-Huang/T2I-CompBench/4aa404212eb5d06e5adbcd9cee696c750d0d25a5/examples/dataset/texture_val_unseen.txt
+  source_name: texture_val_unseen.txt
+  bytes: 6838
+  sha256: 6035f7dd8fd9efd6fbeedef64b04e1f651e977b2a1b9c47365c9e4eed0edc27b
+  config_key: texture_val_unseen_path
+  format: txt
+allowed_hosts:
+- raw.githubusercontent.com
+adapter_config:
+  annotations:
+  - path_key: 3d_spatial_path
+    format: text_lines
+    split: 3d_spatial
+    identity_prefix: 3d_spatial
+  - path_key: 3d_spatial_train_path
+    format: text_lines
+    split: 3d_spatial_train
+    identity_prefix: 3d_spatial_train
+  - path_key: 3d_spatial_val_path
+    format: text_lines
+    split: 3d_spatial_val
+    identity_prefix: 3d_spatial_val
+  - path_key: color_path
+    format: text_lines
+    split: color
+    identity_prefix: color
+  - path_key: color_train_path
+    format: text_lines
+    split: color_train
+    identity_prefix: color_train
+  - path_key: color_val_path
+    format: text_lines
+    split: color_val
+    identity_prefix: color_val
+  - path_key: color_val_seen_path
+    format: text_lines
+    split: color_val_seen
+    identity_prefix: color_val_seen
+  - path_key: color_val_unseen_path
+    format: text_lines
+    split: color_val_unseen
+    identity_prefix: color_val_unseen
+  - path_key: complex_path
+    format: text_lines
+    split: complex
+    identity_prefix: complex
+  - path_key: complex_train_path
+    format: text_lines
+    split: complex_train
+    identity_prefix: complex_train
+  - path_key: complex_train_action_path
+    format: text_lines
+    split: complex_train_action
+    identity_prefix: complex_train_action
+  - path_key: complex_train_spatial_path
+    format: text_lines
+    split: complex_train_spatial
+    identity_prefix: complex_train_spatial
+  - path_key: complex_train_spatialaction_path
+    format: text_lines
+    split: complex_train_spatialaction
+    identity_prefix: complex_train_spatialaction
+  - path_key: complex_val_path
+    format: text_lines
+    split: complex_val
+    identity_prefix: complex_val
+  - path_key: complex_val_action_path
+    format: text_lines
+    split: complex_val_action
+    identity_prefix: complex_val_action
+  - path_key: complex_val_spatial_path
+    format: text_lines
+    split: complex_val_spatial
+    identity_prefix: complex_val_spatial
+  - path_key: complex_val_spatialaction_path
+    format: text_lines
+    split: complex_val_spatialaction
+    identity_prefix: complex_val_spatialaction
+  - path_key: new_objects_path
+    format: text_lines
+    split: new_objects
+    identity_prefix: new_objects
+  - path_key: non_spatial_path
+    format: text_lines
+    split: non_spatial
+    identity_prefix: non_spatial
+  - path_key: non_spatial_train_path
+    format: text_lines
+    split: non_spatial_train
+    identity_prefix: non_spatial_train
+  - path_key: non_spatial_val_path
+    format: text_lines
+    split: non_spatial_val
+    identity_prefix: non_spatial_val
+  - path_key: numeracy_path
+    format: text_lines
+    split: numeracy
+    identity_prefix: numeracy
+  - path_key: numeracy_train_path
+    format: text_lines
+    split: numeracy_train
+    identity_prefix: numeracy_train
+  - path_key: numeracy_val_path
+    format: text_lines
+    split: numeracy_val
+    identity_prefix: numeracy_val
+  - path_key: shape_path
+    format: text_lines
+    split: shape
+    identity_prefix: shape
+  - path_key: shape_train_path
+    format: text_lines
+    split: shape_train
+    identity_prefix: shape_train
+  - path_key: shape_val_path
+    format: text_lines
+    split: shape_val
+    identity_prefix: shape_val
+  - path_key: shape_val_seen_path
+    format: text_lines
+    split: shape_val_seen
+    identity_prefix: shape_val_seen
+  - path_key: shape_val_unseen_path
+    format: text_lines
+    split: shape_val_unseen
+    identity_prefix: shape_val_unseen
+  - path_key: spatial_path
+    format: text_lines
+    split: spatial
+    identity_prefix: spatial
+  - path_key: spatial_train_path
+    format: text_lines
+    split: spatial_train
+    identity_prefix: spatial_train
+  - path_key: spatial_val_path
+    format: text_lines
+    split: spatial_val
+    identity_prefix: spatial_val
+  - path_key: texture_path
+    format: text_lines
+    split: texture
+    identity_prefix: texture
+  - path_key: texture_train_path
+    format: text_lines
+    split: texture_train
+    identity_prefix: texture_train
+  - path_key: texture_val_path
+    format: text_lines
+    split: texture_val
+    identity_prefix: texture_val
+  - path_key: texture_val_seen_path
+    format: text_lines
+    split: texture_val_seen
+    identity_prefix: texture_val_seen
+  - path_key: texture_val_unseen_path
+    format: text_lines
+    split: texture_val_unseen
+    identity_prefix: texture_val_unseen
+  mapping:
+    id: line
+    text: text

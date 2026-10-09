@@ -11,7 +11,7 @@ adapter_config: {}
 coverage:
   identity: resolved
   source: verified
-  access: unverified
+  access: public
   adapter: not_started
   preview: none
   complete_data: unimplemented
@@ -81,4 +81,23 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: project_identified_release_unpinned
+- kind: implemented_source_release
+  url: https://github.com/IllusoryVQA/IllusoryVQA
+  checked_on: '2026-09-23'
+  report: reports/selective-acquisition-20260923.md
+  note: Pinned acquired population and real preview exercised locally. Mirror and
+    selective-transfer limits remain in the acquisition receipts; this does not establish
+    publication rights or the exact paper-used subset.
+  recipe: registry/recipes/illusoryvqa.yaml
 source_url: https://github.com/IllusoryVQA/IllusoryVQA
+relationships:
+- type: same_source_family_as
+  target_id: illusionvqa
+  status: asserted_from_source_review
+  scope: Variant spelling/family of IllusionVQA; the local base is the pinned IllusionVQA
+    release.
+modalities:
+- image
+- text
+tasks:
+- visual illusion reasoning

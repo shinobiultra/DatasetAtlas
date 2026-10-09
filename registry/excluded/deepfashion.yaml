@@ -1,0 +1,65 @@
+schema_version: '1.0'
+id: deepfashion
+name: DeepFashion
+aliases: []
+description: CUHK lists several distinct benchmarks; Attribute/Category release differs from other task
+  archives that require agreement and institutional email.
+paper_ids:
+- paper-2038cb87115b4fb0
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Source access has not been verified.
+  - Exact source variant or paper release is unresolved.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://mmlab.ie.cuhk.edu.hk/projects/DeepFashion.html
+  note: Noncommercial research terms, no redistribution; exact image permissions depend on benchmark.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-cb06419d4dc041e04cf7
+  paper_id: paper-2038cb87115b4fb0
+  source_file_hash: 51dcc13673e3b9b98e6b9cb67b07e584643259b69e50a0c028b1c7814a1ee676
+  page: 9
+  role: future-work example
+  excerpt: well as specialized datasets such as DeepFashion and distribute attention uniformly across
+    remaining (Liu et a
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://mmlab.ie.cuhk.edu.hk/projects/DeepFashion.html
+  note: 'CUHK lists several distinct benchmarks; Attribute/Category release differs from other task archives
+    that require agreement and institutional email. Release: Original DeepFashion family; task variant
+    unresolved'
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+- kind: source_audit_rights
+  url: https://mmlab.ie.cuhk.edu.hk/projects/DeepFashion.html
+  note: Noncommercial research terms, no redistribution; exact image permissions depend on benchmark.
+  audit_file: work/sources/source-audit-jobs-batch2.json
+  checked_on: '2026-09-22'
+  source_identity_status: family_only
+- kind: source_audit_refresh
+  url: https://mmlab.ie.cuhk.edu.hk/projects/DeepFashion.html
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 1 URL probed (HEAD only): 1 reachable.'
+source_url: https://mmlab.ie.cuhk.edu.hk/projects/DeepFashion.html

@@ -6,23 +6,24 @@ description: MIT Places family includes multiple versions and split sizes; origi
   unavailable.
 paper_ids:
 - paper-25eaa8c74ce76800
-release: unresolved
-adapter: structured
+release: places365-standard-validation-256-native
+adapter: places365
 adapter_config: {}
 coverage:
   identity: candidate
   source: verified
-  access: unverified
-  adapter: not_started
+  access: public
+  adapter: implemented
   preview: none
   complete_data: unimplemented
   publication: not_reviewed
   preview_count: 0
   unit: example
   blockers:
-  - Source access has not been verified.
-  - Exact source variant or paper release is unresolved.
-  - Adapter and preview are not implemented.
+  - The citing survey names only Places; release and split remain unidentified. Native Places365 Standard256validation
+    browsing does not resolve that paper membership.
+  - Training, Challenge and other native image variants remain unprepared. Source-image publication rights
+    remain unreviewed.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -52,4 +53,26 @@ evidence:
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: family_only
+- kind: source_audit_access
+  checked_on: '2026-10-06'
+  url: https://data.csail.mit.edu/places/places365/val_256.tar
+  note: 'Official MIT host answers HTTPS range requests: val_256.tar is 525,158,400 bytes (strong ETag,
+    Last-Modified 2016-05-16) and filelist_places365-standard.tar is 67,498,496 bytes. The survey table
+    names only ''Places'' (no Places205, Places365 or Places2 version, split or size), so no release is
+    pinned. The list archive''s contents were not inspected and places365_val.txt is not served at the
+    top level (HTTP 404).'
+  source_identity_status: official_files_reachable_release_not_named_by_paper
+- kind: source_audit_release
+  url: https://data.csail.mit.edu/places/places365/val_256.tar
+  note: Publisher validation archive and native label filelist verified against library/publisher MD5
+    and measured SHA256. All36500original JPEG members are retained or indexed.
+  checked_on: '2026-10-06'
+  audit_file: reports/places365-native-source-acquisition-20261006.json
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'From the source inspected on 2026-10-06: official val_256.tar and filelist archive inspected
+    by header only; scene images. Not inferred from the dataset name.'
 source_url: https://places2.csail.mit.edu/
+modalities:
+- image

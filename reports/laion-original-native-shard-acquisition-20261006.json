@@ -1,0 +1,58 @@
+{
+  "status": "passed",
+  "checked_at_utc": "2026-10-06T07:21:35.971197+00:00",
+  "source": {
+    "checked_at_unix": 1791270728.6723926,
+    "url": "https://deploy.laion.ai/8f83b608504d46bb81708ec86e912220/dataset/part-00000-5b54c5d5-bbcf-484d-a2ce-0d6f73df1a36-c000.snappy.parquet",
+    "status": 200,
+    "bytes": "1803288490",
+    "etag": "\"61b7a5d2-6b7bffaa\"",
+    "accept_ranges": "bytes",
+    "last_modified": "Mon, 13 Dec 2021 19:58:10 GMT"
+  },
+  "sha256": "e1e0eebf0d9f7cfec5e4362e6df1db6e804e1b0539eadb73b6710cf199f163a6",
+  "bytes": 1803288490,
+  "native_rows": 12933524,
+  "schema": [
+    {
+      "name": "SAMPLE_ID",
+      "type": "int64"
+    },
+    {
+      "name": "URL",
+      "type": "string"
+    },
+    {
+      "name": "TEXT",
+      "type": "string"
+    },
+    {
+      "name": "HEIGHT",
+      "type": "int32"
+    },
+    {
+      "name": "WIDTH",
+      "type": "int32"
+    },
+    {
+      "name": "LICENSE",
+      "type": "string"
+    },
+    {
+      "name": "NSFW",
+      "type": "string"
+    },
+    {
+      "name": "similarity",
+      "type": "double"
+    }
+  ],
+  "network_bytes": 1802239914,
+  "max_network_bytes": 2000000000,
+  "registered_source": "work/source-objects/e1e0eebf0d9f7cfec5e4362e6df1db6e804e1b0539eadb73b6710cf199f163a6",
+  "source_identity": "Original LAION publisher distribution, first of32native metadata shards. Not ReLAION and not the full400M population.",
+  "image_bytes_acquired": 0,
+  "external_model_requests": 0,
+  "prior_failed_attempt_upper_bound_bytes": 2000000,
+  "aggregate_network_upper_bound_bytes": 1804239914
+}

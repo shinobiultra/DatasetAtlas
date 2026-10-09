@@ -1,0 +1,29 @@
+{
+  "status": "executed",
+  "checked_at_utc": "2026-10-06T09:48:02.584412+00:00",
+  "removed": [
+    {
+      "path": "work/coco-gb-native-sentences-20261006/converted/records.jsonl",
+      "sha256": "4f788dbc48f6d503298a9cf86e1da6ee0f12d10c4eb4ba4d1ee096054150578c",
+      "bytes": 466855018,
+      "allocated_bytes": 466862080,
+      "reason": "Exact duplicate of active native converted source"
+    },
+    {
+      "path": "work/voc2011-native-audit-20261006/converted-final/voc-native.jsonl",
+      "sha256": "6e6051412e1d2e7d4e2d60ae95fff7e203d6782e5811af7c0e7e2ad94ef3f181",
+      "bytes": 176425024,
+      "allocated_bytes": 176431104,
+      "reason": "Exact duplicate of active native converted source"
+    },
+    {
+      "path": "work/voc2011-native-audit-20261006/converted-current/voc-native.jsonl",
+      "sha256": "c495ad0dc97ff20948013b6c338cfbf691c2699e911e2dbdcbf190da5ceddf2e",
+      "bytes": 170396308,
+      "allocated_bytes": 170401792,
+      "reason": "Superseded intermediate conversion; active version independently verifies all native joins"
+    }
+  ],
+  "freed_allocated_bytes": 813694976,
+  "active_and_historical_prepared_dependencies_preserved": true
+}

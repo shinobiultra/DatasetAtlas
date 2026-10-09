@@ -2,9 +2,8 @@ schema_version: '1.0'
 id: visu-text
 name: ViSU-Text
 aliases: []
-description: Author text-only ViSU component. The repository listing exists, but files require a manual
-  institutional application. Unsafe vision images are deliberately not released. No local records were
-  acquired.
+description: Author text-only ViSU caption-pair component. Local authorized files
+  are now acquired; unsafe vision images remain deliberately unreleased.
 paper_ids:
 - paper-09b2d7393fc75cf7
 source_url: https://huggingface.co/datasets/aimagelab/ViSU-Text/tree/9afabb85b5570fa883b7caa0561d8c8d71d84dcd
@@ -19,21 +18,20 @@ coverage:
   adapter: not_started
   preview: none
   complete_data: externally_blocked
-  publication: metadata_only
+  publication: local_only
   preview_count: 0
   total_count: null
   unit: example
   blockers:
-  - Manual author gate requires verified institutional email, detailed use application, and contact sharing.
-  - Unsafe vision images are deliberately withheld by the authors; text files alone cannot provide vision
-    coverage.
+  - Unsafe vision images are deliberately withheld by the authors; text files alone
+    cannot provide vision coverage.
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://huggingface.co/datasets/aimagelab/ViSU-Text/tree/9afabb85b5570fa883b7caa0561d8c8d71d84dcd
-  note: The manual gate requires noncommercial use declaration and institutional application. Safe COCO
-    photos retain separate rights; unsafe vision images are not released.
+  note: The manual gate requires noncommercial use declaration and institutional application.
+    Safe COCO photos retain separate rights; unsafe vision images are not released.
 relationships:
 - type: text_component_of
   target: visu
@@ -41,10 +39,26 @@ relationships:
 evidence:
 - kind: source_audit_access
   url: https://huggingface.co/api/datasets/aimagelab/ViSU-Text
-  note: HF API at checked revision reports gated=manual; train/test/validation JSON names are visible
-    but files require institutional author approval.
+  note: HF API at checked revision reports gated=manual; train/test/validation JSON
+    names are visible but files require institutional author approval.
   checked_on: '2026-09-22'
 - kind: source_audit_release
   url: https://huggingface.co/datasets/aimagelab/ViSU-Text/tree/9afabb85b5570fa883b7caa0561d8c8d71d84dcd
-  note: Pinned repository revision; no contents acquired. Unsafe vision portion intentionally unreleased.
+  note: Pinned repository revision; no contents acquired. Unsafe vision portion intentionally
+    unreleased.
   checked_on: '2026-09-22'
+- kind: source_audit_access
+  url: https://huggingface.co/datasets/aimagelab/ViSU-Text/tree/9afabb85b5570fa883b7caa0561d8c8d71d84dcd
+  checked_on: '2026-10-06'
+  note: Local authorized account passed native-file access checks; all three original
+    JSON files acquired within a 60 MB transfer cap and verified against pinned Git
+    blob SHA-1 plus locally measured SHA-256.
+  source_identity_status: authorized_native_text_not_vision_coverage
+  receipt: reports/visu-text-native-acquisition-20261006.json
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields
+    present in at least one record. Not inferred from the name or description.'
+modalities:
+- text

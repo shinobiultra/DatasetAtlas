@@ -1,0 +1,76 @@
+release: foil-v1.0-author-oct2018-release
+source_url: https://foilunitn.github.io/
+adapter: structured_collection
+expected_count: 594536
+description: 'FOIL it!: all 395,576 training and 198,960 test caption examples in the author-linked corrected
+  October 2018 release. Correct/foil pairs retain their distinct foil_id, native caption id, replacement
+  words, image metadata and COCO 2014 originals on demand.'
+scope: All caption examples from both author-linked corrected-release JSON files, joined to all 97,847
+  native image entries. Distinct correct/foil captions are examples; repeated image IDs retain one shared
+  original image. No historical earlier-release equivalence is claimed.
+files:
+- source_name: foilv1.0_train_2017.json
+  url: https://www.dropbox.com/scl/fi/kwwsbc4vx6fx4jozdo4dl/foilv1.0_train_2017.json?rlkey=f1wne2madqz04pf8dkztbkpgy&dl=1
+  bytes: 86553565
+  sha256: 1690461a554a54e9be343d34c4ef4cd2655913605dc4da8fea0a8505678745a8
+  format: json
+  config_key: train_path
+- source_name: foilv1.0_test_2017.json
+  url: https://www.dropbox.com/s/u4ntgo73szg6yai/foilv1.0_test_2017.json?dl=1
+  bytes: 45080997
+  sha256: 7b37ab2a4e3dc911d006d5941919245c47d1e67d2ee29b4f7a87d5ecc9284642
+  format: json
+  config_key: test_path
+allowed_hosts:
+- www.dropbox.com
+- dl.dropboxusercontent.com
+- www.dropboxusercontent.com
+# Dropbox redirects each download to a fresh random subdomain of dl.dropboxusercontent.com.
+- '*.dl.dropboxusercontent.com'
+remote_metadata_bytes: 40000000
+adapter_config:
+  annotations:
+  - path_key: train_path
+    records_key: annotations
+    split: train
+    joins:
+    - path_key: train_path
+      records_key: images
+      key: id
+      'on': image_id
+      field: native_image
+    media_archive: train2014
+    media_stem_field: image_id
+    media_stem_width: 12
+    media_template: train2014/COCO_train2014_{_stem}.jpg
+  - path_key: test_path
+    records_key: annotations
+    split: test
+    joins:
+    - path_key: test_path
+      records_key: images
+      key: id
+      'on': image_id
+      field: native_image
+    media_archive: val2014
+    media_stem_field: image_id
+    media_stem_width: 12
+    media_template: val2014/COCO_val2014_{_stem}.jpg
+  mapping:
+    id: foil_id
+    text: caption
+  max_annotation_bytes: 300000000
+  remote_archives:
+    train2014:
+      url: https://s3.amazonaws.com/images.cocodataset.org/zips/train2014.zip
+      bytes: 13510573713
+      etag: '"289af3433b84b5b8622626b10146c1bc-1611"'
+      allowed_hosts:
+      - s3.amazonaws.com
+    val2014:
+      url: https://s3.amazonaws.com/images.cocodataset.org/zips/val2014.zip
+      bytes: 6645013297
+      etag: '"3925cc4d50eb68d47bf2d6324a012d20-793"'
+      allowed_hosts:
+      - s3.amazonaws.com
+  remote_cache_root: work/media-cache/ranges

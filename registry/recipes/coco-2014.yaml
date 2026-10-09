@@ -1,0 +1,70 @@
+release: coco-2014-native-all-image-splits
+adapter: coco_images
+expected_count: 164062
+source_url: https://cocodataset.org/#download
+scope: All 164062 COCO 2014 train/val/test images. Original published train/val captions,
+  instance masks/boxes and person keypoints are joined per image. Test annotations
+  are withheld and remain absent, never counted as zero detections. Images fetched
+  on request.
+remote_metadata_bytes: 40000000
+adapter_config:
+  annotations:
+  - path_key: path
+    split: train
+    media_archive: train2014
+    media_prefix: train2014
+    images_member: annotations/instances_train2014.json
+    captions_member: annotations/captions_train2014.json
+    instances_member: annotations/instances_train2014.json
+    keypoints_member: annotations/person_keypoints_train2014.json
+  - path_key: path
+    split: val
+    media_archive: val2014
+    media_prefix: val2014
+    images_member: annotations/instances_val2014.json
+    captions_member: annotations/captions_val2014.json
+    instances_member: annotations/instances_val2014.json
+    keypoints_member: annotations/person_keypoints_val2014.json
+  - path_key: test_path
+    split: test
+    media_archive: test2014
+    media_prefix: test2014
+    images_member: annotations/image_info_test2014.json
+  mapping:
+    text: caption_text
+  max_annotation_bytes: 2000000000
+  remote_archives:
+    train2014:
+      url: https://s3.amazonaws.com/images.cocodataset.org/zips/train2014.zip
+      bytes: 13510573713
+      etag: '"289af3433b84b5b8622626b10146c1bc-1611"'
+      allowed_hosts:
+      - s3.amazonaws.com
+    val2014:
+      url: https://s3.amazonaws.com/images.cocodataset.org/zips/val2014.zip
+      bytes: 6645013297
+      etag: '"3925cc4d50eb68d47bf2d6324a012d20-793"'
+      allowed_hosts:
+      - s3.amazonaws.com
+    test2014:
+      url: https://s3.amazonaws.com/images.cocodataset.org/zips/test2014.zip
+      bytes: 6660437059
+      etag: '"9b3da0c101da026c8284303cb366f6ab-794"'
+      allowed_hosts:
+      - s3.amazonaws.com
+  remote_cache_root: work/media-cache/ranges
+files:
+- source_name: annotations_trainval2014.zip
+  url: https://s3.amazonaws.com/images.cocodataset.org/annotations/annotations_trainval2014.zip
+  bytes: 252872794
+  sha256: 031296bbc80c45a1d1f76bf9a90ead27e94e99ec629208449507a4917a3bf009
+  config_key: path
+  format: zip
+- source_name: image_info_test2014.zip
+  url: https://s3.amazonaws.com/images.cocodataset.org/annotations/image_info_test2014.zip
+  bytes: 763464
+  sha256: 7cecc66f6b09c1671c1896a1bcc1f35eb09b7fcf00a5c18420a5f0f5983dc8c9
+  config_key: test_path
+  format: zip
+allowed_hosts:
+- s3.amazonaws.com

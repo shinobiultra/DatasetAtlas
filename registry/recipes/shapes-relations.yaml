@@ -1,0 +1,19 @@
+release: pathways-shapes-470944b3f6b44901a9055cf8d91aef18cee21671-seed42-pillow12.3.0-python3.12
+source_url: https://github.com/israfelsr/vlm-pathways/tree/470944b3f6b44901a9055cf8d91aef18cee21671
+adapter: pathways_shapes
+expected_count: 400
+description: 'Pathways Shapes Relations: 400 images reconstructed using the released author generator,
+  200 counterfactual pairs, seed 42 and the documented 1024-pixel rendering defaults. Historical experiment
+  pixel identity is not established.'
+scope: All 400 examples from the pinned author README recipe (200 pairs, seed 42, 1024x1024 pixels, 80-pixel
+  shapes, 3x3 grid). This is an author-recipe reconstruction, not an archived historical experiment population.
+  Source fields, paired identities, rendering versions and pixel hashes are retained.
+adapter_config:
+  shape_task: relations
+  n_pairs: 200
+  image_size: 1024
+  shape_size: 80
+  seed: 42
+  renderer_version: 12.3.0
+  python_version: '3.12'
+  generator_revision: 470944b3f6b44901a9055cf8d91aef18cee21671

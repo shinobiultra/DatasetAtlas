@@ -1,0 +1,51 @@
+{
+  "dataset_id": "cifar-10-c",
+  "status": "executed",
+  "source_sha256": "c72763e101c723b7c507b96205f7e938912a5d587376173b825850cf3cb876a7",
+  "source_bytes": 2918471680,
+  "canonical_records_checked": 1900000,
+  "protected_preview_records_checked": 200,
+  "retained_snapshots": 2,
+  "cold_original_probes": [
+    {
+      "sha256": "b308c763a6f67609a33fd435901d32f10b4f1326286c2fc66fbf533961895c61",
+      "source_sha256": "c72763e101c723b7c507b96205f7e938912a5d587376173b825850cf3cb876a7",
+      "native_rgb_sha256": "9d3e39e8ac854c709afdc61c7da7740662d8f90bd82d3436b859d0720f038508",
+      "transferred_bytes": 1048576,
+      "bytes": 2504,
+      "fingerprint_type": "sha256-blocks",
+      "media_type": "image/png",
+      "representation": "Lossless PNG of original C-order uint8 RGB 32\u00d732 array row; no resizing, normalization or pixel changes.",
+      "asset_ref": "brightness/0.png"
+    },
+    {
+      "sha256": "cd0153205c46f572bd76db19b76f48a52e9476dd147a8a82396fae5eb0c41538",
+      "source_sha256": "c72763e101c723b7c507b96205f7e938912a5d587376173b825850cf3cb876a7",
+      "native_rgb_sha256": "eaadb8aa7265af8a37fb76239dc6f2c5a4989ea36a90ec1325840fded8b63343",
+      "transferred_bytes": 1048576,
+      "bytes": 2734,
+      "fingerprint_type": "sha256-blocks",
+      "media_type": "image/png",
+      "representation": "Lossless PNG of original C-order uint8 RGB 32\u00d732 array row; no resizing, normalization or pixel changes.",
+      "asset_ref": "impulse_noise/25000.png"
+    },
+    {
+      "sha256": "1e20b3d5796979ca560da1d92511ff936c57da15be6c34eb1f638b9b24ad1572",
+      "source_sha256": "c72763e101c723b7c507b96205f7e938912a5d587376173b825850cf3cb876a7",
+      "native_rgb_sha256": "e63ffdecc1960200024d96b5c632d568644e8c263c4f9f9167f1f465ee4b9ed0",
+      "transferred_bytes": 1048576,
+      "bytes": 2004,
+      "fingerprint_type": "sha256-blocks",
+      "media_type": "image/png",
+      "representation": "Lossless PNG of original C-order uint8 RGB 32\u00d732 array row; no resizing, normalization or pixel changes.",
+      "asset_ref": "zoom_blur/49999.png"
+    }
+  ],
+  "network_bytes": 3145728,
+  "paths": [
+    "work/sources/acquisition-20260923/cifar-10-c/CIFAR-10-C.tar",
+    "work/prepared/cifar-10-c/84a406abd2b8547a4e8bb719b47fd8ed9aba78485c8674bb27f6d185134aeaed/sources/c72763e101c723b7c507b96205f7e938912a5d587376173b825850cf3cb876a7.tar"
+  ],
+  "scope": "Complete canonical rows and original preview pixels preserved; exact native RGB rows available by whole-source SHA-block verified ranges.",
+  "freed_unique_file_bytes": 2918471680
+}

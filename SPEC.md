@@ -340,6 +340,13 @@ For accessible datasets, the preview target is **100 inspectable examples or the
 
 Every preview must include its sampling method and population.
 
+Large datasets keep approximately 100 reproducibly sampled examples as their local
+preview. Preview media retains the original resolution and quality; thumbnail,
+blurred safe-view, and browsing derivatives are separate representations. Prefer
+deterministic random selection across the pinned population and distinct primary
+assets when many examples reuse an image. Record the seed, grouping rule, and
+population; grouped sampling is not an example-prevalence estimate.
+
 Full-data support means the adapter can operate beyond a hard-coded preview. Test that path on additional records or a bounded integration run; do not require downloading an enormous dataset merely to test the abstraction.
 
 Acceptable external blockers include unavailable releases, access approval, unavailable underlying media, and restrictions on obtaining or publishing data.
@@ -554,6 +561,27 @@ Any bulk preparation or analysis action must show its selected population, expec
 Users approve the budget before execution. Unknown size is not permission for an unbounded download.
 
 Cancellation must preserve reusable completed work.
+
+The local Atlas storage target is **100 GB**, within the requested **50–150 GB**
+range. Measure actual unique local storage, including retained sources, indices,
+preview media, caches, models, and temporary preparation output. Report shared
+hard links separately from logical file sizes. A per-dataset cache limit does not
+replace a workspace-wide budget.
+
+Keep full-resolution original-quality preview samples. Apply modern compression
+to other retained dataset content, with codec/settings, original provenance,
+measured size savings, and verified decoding recorded. Lossless JPEG recompression
+must reconstruct the original bytes; lossy representations must be explicitly
+labelled and must not silently become evaluation inputs. An original remains
+retrievable on demand. Compression ratios must be measured rather than assumed.
+For collections that still exceed the budget, retain source manifests and bounded
+caches and retrieve selected data on demand rather than mirror the entire release.
+
+Lossy compression of non-preview images is authorized. Retain original pixel
+dimensions, use a modern codec such as AVIF, and protect every asset of a preview
+example (including its image variants) at original quality. The browser identifies
+compressed copies and offers the original. Canonical model inputs remain original
+unless a run explicitly requests and records a compressed representation.
 
 ## 8.5 Input integrity
 
@@ -1531,4 +1559,3 @@ For restricted or unavailable data, the application must explain the precise lim
 [9]: https://docs.vllm.ai/en/latest/features/multimodal_inputs/?utm_source=chatgpt.com "Multimodal Inputs - vLLM"
 [10]: https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits?utm_source=chatgpt.com "GitHub Pages limits - GitHub Docs"
 [11]: https://vite.dev/guide/static-deploy.html "Deploying a Static Site | Vite"
-

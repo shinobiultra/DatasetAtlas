@@ -2,27 +2,28 @@ schema_version: '1.0'
 id: find
 name: FIND
 aliases: []
-description: 'FIND Function Interpretation and Description benchmark; functions are executable Python,
-  not passive records. Source review: Author Zenodo record 8034162 and author repository; exact archive
-  digest unverified'
+description: 'FIND v1.0.1: all 2,275 released functions across string, numeric, entity-neuron and relation-neuron
+  groups, with native definitions, source code, test data and available serialized approximation weights.
+  Code and model bytes are inspected as data, never executed or deserialized.'
 paper_ids:
 - paper-d098a79f00c8b2b5
 - paper-25eaa8c74ce76800
-release: unresolved
-adapter: structured
+release: find-zenodo-8332767-v1.0.1
+adapter: find
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Adapter and preview are not implemented.
+  - Public preview redistribution is not approved.
+  total_count: 2275
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -70,4 +71,18 @@ evidence:
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
-source_url: https://zenodo.org/records/8034162
+- kind: native_population_live_verification
+  url: https://zenodo.org/records/8332767
+  checked_on: '2026-09-23'
+  receipt: reports/find-live-verification.json
+  scope: All 1000 string, 1000 numeric, 200 entity-neuron and 75 relation-neuron functions in the author
+    Zenodo v1.0.1 archive. Native auxiliary tables and initial lists are joined exactly. The archive contains
+    only 150 approximation weight files; absence for other functions is retained, and no benchmark execution
+    or scoring is claimed.
+source_url: https://zenodo.org/records/8332767
+modalities:
+- text
+- array
+tasks:
+- function interpretation
+- function description

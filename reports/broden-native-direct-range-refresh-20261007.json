@@ -1,0 +1,14 @@
+[
+  {
+    "source": "broden-http",
+    "url": "http://netdissect.csail.mit.edu/data/broden1_224.zip",
+    "max_response_bytes": 512,
+    "error_class": "ConnectTimeout"
+  },
+  {
+    "source": "broden-https",
+    "url": "https://netdissect.csail.mit.edu/data/broden1_224.zip",
+    "max_response_bytes": 512,
+    "error_class": "ConnectTimeout"
+  }
+]

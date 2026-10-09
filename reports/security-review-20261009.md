@@ -1,0 +1,11 @@
+# Security review, 2026-10-09
+
+Read-only review by a separate Sonnet 5.5 agent (not human acceptance) of public-site leakage, the Pages workflow, the local server, supply chain and committed secrets. **No critical or high findings.**
+
+**Verified clean.** The public build (catalogue, guide, three approved previews with 300 media files, 221 preview schemas) holds no absolute paths, tokens, e-mail addresses, signed or query-string URLs, local ports, review notes, adapter configuration or evidence excerpts; only CLEVR, PAIRS and EuroSAT media are approved. The local server binds to loopback, enforces a Host allowlist, same-origin checks, a mutation header and a 10 MB cap; media routes resolve paths and reject escapes; source fetching is HTTPS-only with a host allowlist, global-IP check, a connection pinned to the resolved address and per-hop redirect checks; the Hugging Face token goes only to `huggingface.co`. No `extractall`, pickle or `eval`; YAML uses `SafeLoader`; archive members are streamed with size caps. No secrets are tracked.
+
+**Fixed.** The deploy job ran from any branch: it now requires `refs/heads/main` (also restrict the `github-pages` environment to `main` in repository settings). Actions are pinned to commit SHAs. CI installs locked, hashed dependencies (`uv export --frozen`). Timeouts and concurrency were added and pushes build only on `main`. The stray tracked `:memory:.ses` was removed and ignore rules extended. `docs/publication.md` no longer says relationships are omitted.
+
+**Accepted, not changed.** About 60 tracked reports hold the maintainer's absolute workspace path (private repository; the history keeps them regardless). `adapters/core.py` and `adapters/download.py` follow redirects without a private-address check, and `remote_zip.py` has a DNS re-resolve window; their URLs come from maintainer-authored registry config. `providers/schemas.py` lets `api_key_env` name any environment variable (external hosts still need `allow_external` and the route is CSRF-guarded). The CLEVR PNGs carry upstream Blender metadata with the upstream author's path; they must stay byte-identical to their checksums.
+
+**Not verified.** Package advisories could not be checked offline; run `npm audit` and `uv audit` in CI.

@@ -12,7 +12,7 @@ adapter_config: {}
 coverage:
   identity: resolved
   source: verified
-  access: unverified
+  access: public
   adapter: not_started
   preview: none
   complete_data: unimplemented
@@ -20,8 +20,8 @@ coverage:
   preview_count: 0
   unit: example
   blockers:
-  - Original RRC download files and any account requirement were not verified; portal
-    was unavailable during source audit.
+  - The exact original RRC archive bytes and citing paper sample are not established
+    by this formatted mirror.
   - Adapter and preview are not implemented.
 rights:
   records: not_reviewed
@@ -71,4 +71,18 @@ evidence:
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://huggingface.co/datasets/lmms-lab-encoder/DocVQA/tree/539088ef8a8ada01ac8e2e6d4e372586748a265e
+  checked_on: '2026-10-06'
+  source_identity_status: public_formatted_mirror_not_original_archive_parity
+  note: 24 native DocVQA Parquet shards are pinned separately from InfographicVQA;
+    card split counts are not assumed to describe all native files.
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields
+    present in at least one record. Not inferred from the name or description.'
 source_url: https://site.docvqa.org/datasets/docvqa
+modalities:
+- image
+- text

@@ -1,0 +1,84 @@
+schema_version: '1.0'
+id: mscoco-100-target-subset
+name: MSCOCO 100-target subset
+aliases: []
+description: AnyAttack 100 MSCOCO target images.
+paper_ids:
+- paper-7a1ff5996ce95273
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: unverified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Exact paper-specific source release or selected subset remains unverified; source
+    research alone does not resolve this candidate.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  note: COCO image terms still apply
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-1289925b16326e9e15dc
+  paper_id: paper-7a1ff5996ce95273
+  source_file_hash: d2da2819b87291e9ff99547e1724286e95ef4de33cad091ce17762c0c90782d1
+  page: 7
+  role: derived evaluation collection
+  excerpt: ViT-L/14, respectively. All AnyAttack methods con- Quantitative Results.
+    We selected 100 images from the sistently deliver competitive results, outperforming
+    most MSCOCO dataset as target images and conducted a com-
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://openaccess.thecvf.com/content/CVPR2025/papers/Zhang_Anyattack_Towards_Large-scale_Self-supervised_Adversarial_Attacks_on_Vision-language_Models_CVPR_2025_paper.pdf
+  note: AnyAttack 100 MSCOCO target images
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: paper_selection_release_unverified
+- kind: source_audit_release
+  url: https://openaccess.thecvf.com/content/CVPR2025/papers/Zhang_Anyattack_Towards_Large-scale_Self-supervised_Adversarial_Attacks_on_Vision-language_Models_CVPR_2025_paper.pdf
+  note: AnyAttack p7 says authors selected 100 MSCOCO targets for commercial-VLM transfer;
+    exact image IDs/seed not established by paper excerpt
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: paper_selection_release_unverified
+- kind: source_audit_access
+  url: https://openaccess.thecvf.com/content/CVPR2025/papers/Zhang_Anyattack_Towards_Large-scale_Self-supervised_Adversarial_Attacks_on_Vision-language_Models_CVPR_2025_paper.pdf
+  observation: paper_selection
+  requires_external_access_step: null
+  download_or_media_inspected: false
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: paper_selection_release_unverified
+- kind: source_audit_rights
+  url: https://openaccess.thecvf.com/content/CVPR2025/papers/Zhang_Anyattack_Towards_Large-scale_Self-supervised_Adversarial_Attacks_on_Vision-language_Models_CVPR_2025_paper.pdf
+  note: COCO image terms still apply
+  publication_decision: media_not_approved
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: paper_selection_release_unverified
+- kind: source_audit_refresh
+  url: https://openaccess.thecvf.com/content/CVPR2025/papers/Zhang_Anyattack_Towards_Large-scale_Self-supervised_Adversarial_Attacks_on_Vision-language_Models_CVPR_2025_paper.pdf
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 1 URL probed (HEAD only): 1 reachable.'
+relationships:
+- type: same_source_family_as
+  target_id: coco
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: AnyAttack's 100 MSCOCO target images have no published ID list; the COCO
+    2017 validation release is family context, not that selection.

@@ -1,0 +1,42 @@
+source_url: https://github.com/caisa-lab/FACTOID-dataset
+release: FACTOID-author-linked-native-users-sha42e975c9067c
+adapter: structured
+expected_count: 4150
+scope: All 4,150 native FACTOID user rows from the author-linked gzip, with 4,166
+  original column labels, full typed cells, original DataFrame axes/dtypes/attrs/flags
+  and byte-identical serialization retained. One Atlas example is one original user
+  row, not a post. Shared container memo identities and nonfinite float bits have
+  explicit envelopes; integer-labelled columns use reversible runs. Missing Reddit
+  text stays missing; no hydration, source-code execution or external provider access.
+  Historical paper membership and source publication/privacy rights remain unverified;
+  local-only.
+adapter_config:
+  mapping: {}
+  record_identity: source_row
+  sequential_index: true
+  native_record_read_bytes: 8000000000
+  max_record_bytes: 16000000
+convert:
+  name: factoid_dataframe
+  count: 4150
+  rows_sha256: fc04d18e91d14251f348fa3e2dee642030d1ec9ac7a74307df2d05177e328afa
+  params:
+    source_sha256: 42e975c9067c6a738e2ae85a1d18c80b90974ffe4af75e57fbde53588040dbbb
+    source_bytes: 369319718
+    metadata_sha256: 9332c9326fa69a89c9aef0fa2cfb689f82c168d5570a7a59d5b718120221d07c
+    native_values_sha256: 5d83dca320844e1359f4e75c39a0b634b5501cc327332c3f7bd41583b1c38afc
+    max_output_bytes: 4000000000
+files:
+- source_name: factoid-native.gzip
+  config_key: native
+  format: gzip
+  url: https://drive.usercontent.google.com/download?id=1pevK3uZVLadH8a5KzT7d1Mlkkjby23Og&export=download&confirm=t
+  bytes: 369319718
+  sha256: 42e975c9067c6a738e2ae85a1d18c80b90974ffe4af75e57fbde53588040dbbb
+allowed_hosts:
+- drive.usercontent.google.com
+- drive.google.com
+resource_limits:
+  max_rss_bytes: 8000000000
+  max_cpu_seconds: 1200
+  max_wall_seconds: 1800

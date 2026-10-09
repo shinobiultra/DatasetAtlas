@@ -1,0 +1,63 @@
+schema_version: '1.0'
+id: facial-expression-recognition-2013
+name: Facial Expression Recognition 2013
+aliases: []
+description: The cited paper names Goodfellow et al. 2013 FER-2013, 35,887 grayscale faces, then selects
+  500 model-correct samples and constructs emotion-pair prompts.
+paper_ids:
+- paper-2038cb87115b4fb0
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: gated
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Original source requires registration or licensed base images.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data
+  note: Kaggle challenge registration/rules govern access; public paper does not grant face-image republication.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-4118b88f249d7a28e3b8
+  paper_id: paper-2038cb87115b4fb0
+  source_file_hash: 51dcc13673e3b9b98e6b9cb67b07e584643259b69e50a0c028b1c7814a1ee676
+  page: 4
+  role: evaluation
+  excerpt: '(see Figure 1). We implement SIP in three SVO-Probes, MIT States, and Facial Expressions diverse
+    image-classification datasets: SVO-Probes image-classification datasets into VQA tasks. We (Hendricks'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data
+  note: 'The cited paper names Goodfellow et al. 2013 FER-2013, 35,887 grayscale faces, then selects 500
+    model-correct samples and constructs emotion-pair prompts. Release: FER2013 original CSV; paper constructs
+    a 500-example VQA subset'
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_audit_rights
+  url: https://aclanthology.org/2025.naacl-long.571.pdf
+  note: Kaggle challenge registration/rules govern access; public paper does not grant face-image republication.
+  audit_file: work/sources/source-audit-jobs-batch3.json
+  checked_on: '2026-09-22'
+  source_identity_status: resolved
+- kind: source_audit_refresh
+  url: https://aclanthology.org/2025.naacl-long.571.pdf
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'unchanged: a reachable page says nothing about whether the files are public, so the prior state
+    stands. 2 URLs probed (HEAD only): 1 gone, 1 reachable.'
+source_url: https://www.kaggle.com/c/challenges-in-representation-learning-facial-expression-recognition-challenge/data

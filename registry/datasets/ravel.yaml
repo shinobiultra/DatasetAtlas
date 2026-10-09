@@ -2,8 +2,8 @@ schema_version: '1.0'
 id: ravel
 name: RAVEL
 aliases: []
-description: RAVEL causal language-model representation benchmark. Original authors release task/code
-  at repository; corpus occurrence is bibliography title only
+description: RAVEL causal language-model representation benchmark. Original authors
+  release task/code at repository; corpus occurrence is bibliography title only
 paper_ids:
 - paper-d098a79f00c8b2b5
 release: unresolved
@@ -12,7 +12,7 @@ adapter_config: {}
 coverage:
   identity: resolved
   source: verified
-  access: source_page_public_data_unverified
+  access: public
   adapter: not_started
   preview: none
   complete_data: unimplemented
@@ -35,13 +35,15 @@ evidence:
   source_file_hash: 9a50cdc6b9f2ba3687339453804acb9519525941198c14d07765aaecbb1436d2
   page: 51
   role: bibliography-only reference
-  excerpt: 'Huang, Zhengxuan Wu, Christopher Potts, Mor Geva, and Atticus Geiger. RAVEL: Evaluat- ing
-    interpretability methods on disentangling language model representations. In Lun-Wei Ku, An- dr'
+  excerpt: 'Huang, Zhengxuan Wu, Christopher Potts, Mor Geva, and Atticus Geiger.
+    RAVEL: Evaluat- ing interpretability methods on disentangling language model representations.
+    In Lun-Wei Ku, An- dr'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://github.com/explanare/ravel
-  note: Original authors release task/code at repository; corpus occurrence is bibliography title only
+  note: Original authors release task/code at repository; corpus occurrence is bibliography
+    title only
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_release_located
@@ -53,8 +55,21 @@ evidence:
   source_identity_status: author_release_located
 - kind: source_audit_access
   url: https://github.com/explanare/ravel
-  note: source_page_public_data_unverified; Keep bibliography-only role and language-model benchmark identity.
+  note: source_page_public_data_unverified; Keep bibliography-only role and language-model
+    benchmark identity.
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_release_located
+- kind: implemented_source_release
+  url: https://github.com/explanare/ravel
+  checked_on: '2026-09-23'
+  report: reports/selective-acquisition-20260923.md
+  note: Pinned acquired population and real preview exercised locally. Mirror and
+    selective-transfer limits remain in the acquisition receipts; this does not establish
+    publication rights or the exact paper-used subset.
+  recipe: registry/recipes/ravel.yaml
 source_url: https://github.com/explanare/ravel
+modalities:
+- text
+tasks:
+- causal interpretability

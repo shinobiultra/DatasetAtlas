@@ -1,0 +1,393 @@
+{
+  "source": "work/additional-native-retirement-20261005.json",
+  "source_sha256": "53f283d2f8a365c180337201e12718948629ed42586f4d8b05ef13a842d8039a",
+  "operations": [
+    {
+      "dataset_id": "phase",
+      "key": "images_path",
+      "status": "retained_on_failure",
+      "error": "Remote source has no strong ETag"
+    },
+    {
+      "dataset_id": "fairface",
+      "key": "images025_path",
+      "status": "retained_on_failure",
+      "error": "Remote source has no strong ETag"
+    },
+    {
+      "dataset_id": "fairface",
+      "key": "images125_path",
+      "status": "retained_on_failure",
+      "error": "Remote source has no strong ETag"
+    },
+    {
+      "dataset_id": "iconqa",
+      "key": "archive",
+      "index": "iconqa-archive-native-20261005",
+      "checked_at_unix": 1791187270.5932355,
+      "executed": {
+        "dataset_id": "iconqa",
+        "source_sha256": "475f7651d9e2a86dee340e8b8b1d07b3d34abc7279c08bc7391196b49d4d348b",
+        "linked_dataset_ids": [],
+        "status": "executed",
+        "retained_snapshots": 2,
+        "media_references_checked": 516066,
+        "unique_native_media_in_snapshots": 258033,
+        "preview_asset_memberships": 405,
+        "modalities": [
+          "image"
+        ],
+        "preview_bytes_upper_bound": 2714408,
+        "cold_original_probes": [
+          {
+            "sha256": "c52b00d73a086852c5e2ff2e31f33275fce87ff98a18ac050969ebaae5dc267f",
+            "bytes": 2669,
+            "transferred_bytes": 2674,
+            "source_sha256": "475f7651d9e2a86dee340e8b8b1d07b3d34abc7279c08bc7391196b49d4d348b",
+            "fingerprint_type": "etag",
+            "etag": "\"dd3c97ebc6266418e6316472ecb9a679-108\""
+          },
+          {
+            "sha256": "f534debe1fae3139a8cd9f241cb0966eab2fe1751dbfd7dfde304d19c9f49aed",
+            "bytes": 11669,
+            "transferred_bytes": 10865,
+            "source_sha256": "475f7651d9e2a86dee340e8b8b1d07b3d34abc7279c08bc7391196b49d4d348b",
+            "fingerprint_type": "etag",
+            "etag": "\"dd3c97ebc6266418e6316472ecb9a679-108\""
+          },
+          {
+            "sha256": "af52045a5a461af3b3ded9dec3ad6f7cde22810788382d8c71106fe4f812cd88",
+            "bytes": 1416,
+            "transferred_bytes": 1410,
+            "source_sha256": "475f7651d9e2a86dee340e8b8b1d07b3d34abc7279c08bc7391196b49d4d348b",
+            "fingerprint_type": "etag",
+            "etag": "\"dd3c97ebc6266418e6316472ecb9a679-108\""
+          }
+        ],
+        "paths": [
+          "work/source-objects/475f7651d9e2a86dee340e8b8b1d07b3d34abc7279c08bc7391196b49d4d348b",
+          "work/sources/iconqa/iconqa_data.zip",
+          "work/prepared/iconqa/3e2eb3a289d3c9dee30a0047477bb33194bef795df8fa378a34d8b322311e240/sources/475f7651d9e2a86dee340e8b8b1d07b3d34abc7279c08bc7391196b49d4d348b.zip"
+        ],
+        "extracted_files": 0,
+        "source_bytes": 1851278883,
+        "extracted_bytes": 0,
+        "retention": "Original-quality previews and complete indices; other originals and optimized browsing copies on demand.",
+        "freed_unique_file_bytes": 1851278883
+      },
+      "native_index_receipt_sha256": "8b592f253e874949cecc322dbdd84dbb8e849412d8c3ff10d728c7a8a5780b89"
+    },
+    {
+      "dataset_id": "vqa-constraints",
+      "key": "known_images_path",
+      "status": "retained_on_failure",
+      "error": "Remote source has no strong ETag"
+    },
+    {
+      "dataset_id": "vqa-constraints",
+      "key": "movies_images_path",
+      "status": "retained_on_failure",
+      "error": "Remote source has no strong ETag"
+    },
+    {
+      "dataset_id": "cub-200-2011",
+      "key": "path",
+      "index": "cub-200-2011-path-native-20261005",
+      "checked_at_unix": 1791187324.6042361,
+      "executed": {
+        "dataset_id": "cub-200-2011",
+        "source_sha256": "0c685df5597a8b24909f6a7c9db6d11e008733779a671760afef78feb49bf081",
+        "linked_dataset_ids": [],
+        "status": "executed",
+        "retained_snapshots": 1,
+        "media_references_checked": 11788,
+        "unique_native_media_in_snapshots": 11788,
+        "preview_asset_memberships": 100,
+        "modalities": [
+          "image"
+        ],
+        "preview_bytes_upper_bound": 7555615,
+        "cold_original_probes": [
+          {
+            "sha256": "6f2640557a14ad1b1deb7b0e52bb0c479f412164d481300713f19c73686feb9c",
+            "bytes": 9890,
+            "transferred_bytes": 4194304,
+            "source_sha256": "0c685df5597a8b24909f6a7c9db6d11e008733779a671760afef78feb49bf081",
+            "fingerprint_type": "etag",
+            "etag": "\"16e77aad3bf0a9df11fc9fe5cfe881975e3ae52d7349dd11bde89ec67d98f6af\""
+          },
+          {
+            "sha256": "40e91e422ee6dd8f40ac69f1e4cfa9e3b8aebca0aac1b1f7c9fde8bf654b2ca9",
+            "bytes": 170972,
+            "transferred_bytes": 8388608,
+            "source_sha256": "0c685df5597a8b24909f6a7c9db6d11e008733779a671760afef78feb49bf081",
+            "fingerprint_type": "etag",
+            "etag": "\"16e77aad3bf0a9df11fc9fe5cfe881975e3ae52d7349dd11bde89ec67d98f6af\""
+          },
+          {
+            "sha256": "9e7e00adbf4c80ac42c7e91a289985399b20442398b79729fe5ed3f0fbd5c9d2",
+            "bytes": 69746,
+            "transferred_bytes": 3145728,
+            "source_sha256": "0c685df5597a8b24909f6a7c9db6d11e008733779a671760afef78feb49bf081",
+            "fingerprint_type": "etag",
+            "etag": "\"16e77aad3bf0a9df11fc9fe5cfe881975e3ae52d7349dd11bde89ec67d98f6af\""
+          }
+        ],
+        "paths": [
+          "work/sources/acquisition-20260923/cub-200-2011/CUB_200_2011.tgz",
+          "work/prepared/cub-200-2011/24d786c47fbc01c79e1386cc30192ba883a46e4b8c2b3561a8d274faa3fa6832/sources/0c685df5597a8b24909f6a7c9db6d11e008733779a671760afef78feb49bf081.tgz"
+        ],
+        "extracted_files": 0,
+        "source_bytes": 1150585339,
+        "extracted_bytes": 0,
+        "retention": "Original-quality previews and complete indices; other originals and optimized browsing copies on demand.",
+        "freed_unique_file_bytes": 1150585339
+      },
+      "repack": {
+        "status": "executed",
+        "source_sha256": "e1d315a2ae1fa17917fdc2a8957a8233e2cd05f709b385bb9419c5245a1a96fa",
+        "source_bytes": 1253145484,
+        "native_source_sha256": "0c685df5597a8b24909f6a7c9db6d11e008733779a671760afef78feb49bf081",
+        "native_index": "cub-200-2011-path-native-20261005",
+        "all_native_members_checked": 11801,
+        "decoded_bytes": 1250318438,
+        "retained_dependencies": [
+          {
+            "dataset_id": "cub-200-2011",
+            "snapshot_id": "cub-200-2011-24d786c47fbc01c79e1386cc"
+          }
+        ],
+        "image_references_checked": 11788,
+        "pinned_preview_references_checked": 100,
+        "cold_original_probes": [
+          {
+            "sha256": "561ab3afb035368f4fc369b249740326a476085933854e55ba1e6e5e98fecd15",
+            "bytes": 6282,
+            "transferred_bytes": 310580,
+            "source_sha256": "0c685df5597a8b24909f6a7c9db6d11e008733779a671760afef78feb49bf081",
+            "fingerprint_type": "etag",
+            "etag": "\"16e77aad3bf0a9df11fc9fe5cfe881975e3ae52d7349dd11bde89ec67d98f6af\""
+          },
+          {
+            "sha256": "6ade29e1b0b5ae5f938e0a7367daa94f6f0fc492c2f6a7cf4f8ce0859217e83d",
+            "bytes": 151185,
+            "transferred_bytes": 2097154,
+            "source_sha256": "0c685df5597a8b24909f6a7c9db6d11e008733779a671760afef78feb49bf081",
+            "fingerprint_type": "etag",
+            "etag": "\"16e77aad3bf0a9df11fc9fe5cfe881975e3ae52d7349dd11bde89ec67d98f6af\""
+          },
+          {
+            "sha256": "d5b158c197a8548071114150b2384c55cbd8881b32e57816c6ccc1437e946a1a",
+            "bytes": 8992,
+            "transferred_bytes": 1048576,
+            "source_sha256": "0c685df5597a8b24909f6a7c9db6d11e008733779a671760afef78feb49bf081",
+            "fingerprint_type": "etag",
+            "etag": "\"16e77aad3bf0a9df11fc9fe5cfe881975e3ae52d7349dd11bde89ec67d98f6af\""
+          }
+        ],
+        "paths": [
+          "work/prepared/cub-200-2011/24d786c47fbc01c79e1386cc30192ba883a46e4b8c2b3561a8d274faa3fa6832/sources/original-members.zip"
+        ],
+        "freed_unique_file_bytes": 1253145484
+      },
+      "native_index_receipt_sha256": "783f4f0a9040b01f1dfd395572236f0ab2a8b44bccc23062c1cf981eece81b48"
+    },
+    {
+      "dataset_id": "cinic-10",
+      "key": "path",
+      "status": "retained_on_failure",
+      "error": "Remote end closed connection without response"
+    },
+    {
+      "dataset_id": "imagenet-r",
+      "key": "path",
+      "index": "imagenet-r-path-native-20261005",
+      "checked_at_unix": 1791187390.341864,
+      "executed": {
+        "dataset_id": "imagenet-r",
+        "source_sha256": "18c6bf493b39a0d975d48e587437f562caab9c52ae6327dcfa9dd8eb54aa1b52",
+        "linked_dataset_ids": [],
+        "status": "executed",
+        "retained_snapshots": 2,
+        "media_references_checked": 60000,
+        "unique_native_media_in_snapshots": 30000,
+        "preview_asset_memberships": 200,
+        "modalities": [
+          "image"
+        ],
+        "preview_bytes_upper_bound": 13058187,
+        "cold_original_probes": [
+          {
+            "sha256": "50262c24693e55a6575f2b14dfa2a2d73a9bdde2a1fa6a5c8897217641caf7ab",
+            "bytes": 97749,
+            "transferred_bytes": 97749,
+            "source_sha256": "18c6bf493b39a0d975d48e587437f562caab9c52ae6327dcfa9dd8eb54aa1b52",
+            "fingerprint_type": "etag",
+            "etag": "\"82993a00-5ac287b6d8e40\""
+          },
+          {
+            "sha256": "9a48de06bdd67b591d4aaeadbfcf56fae466ab6d3206f8b9acda45c04dca0a8a",
+            "bytes": 102522,
+            "transferred_bytes": 102522,
+            "source_sha256": "18c6bf493b39a0d975d48e587437f562caab9c52ae6327dcfa9dd8eb54aa1b52",
+            "fingerprint_type": "etag",
+            "etag": "\"82993a00-5ac287b6d8e40\""
+          },
+          {
+            "sha256": "8d49aa2c0a5bb04e9112de2e7f8e69dd15085e02f00c7ada2e4158276e083006",
+            "bytes": 83312,
+            "transferred_bytes": 83312,
+            "source_sha256": "18c6bf493b39a0d975d48e587437f562caab9c52ae6327dcfa9dd8eb54aa1b52",
+            "fingerprint_type": "etag",
+            "etag": "\"82993a00-5ac287b6d8e40\""
+          }
+        ],
+        "paths": [
+          "work/source-objects/18c6bf493b39a0d975d48e587437f562caab9c52ae6327dcfa9dd8eb54aa1b52",
+          "work/sources/imagenet-r/imagenet-r.tar",
+          "work/prepared/imagenet-r/9ec005c87cd8302c3286b193a106aaf13165af997063776e97bb9f2966eb9182/sources/18c6bf493b39a0d975d48e587437f562caab9c52ae6327dcfa9dd8eb54aa1b52.tar"
+        ],
+        "extracted_files": 0,
+        "source_bytes": 2191079936,
+        "extracted_bytes": 0,
+        "retention": "Original-quality previews and complete indices; other originals and optimized browsing copies on demand.",
+        "freed_unique_file_bytes": 2191079936
+      },
+      "native_index_receipt_sha256": "31897bab0f2febca894f6cdee778cd29c5717e9003112196e996c79edc5df743"
+    },
+    {
+      "dataset_id": "vg-qa-two",
+      "key": "vg_images_path",
+      "status": "retained_on_failure",
+      "error": "Remote source has no strong ETag"
+    },
+    {
+      "dataset_id": "cinic-10",
+      "key": "path",
+      "status": "retained_on_failure",
+      "error": "Remote end closed connection without response"
+    },
+    {
+      "dataset_id": "imagenet-a",
+      "key": "path",
+      "index": "imagenet-a-path-native-20261005",
+      "checked_at_unix": 1791187570.6596165,
+      "executed": {
+        "dataset_id": "imagenet-a",
+        "source_sha256": "3bb3632277e6ba6392ea64c02ddbf4dd2266c9caffd6bc09c9656d28f012589e",
+        "linked_dataset_ids": [],
+        "status": "executed",
+        "retained_snapshots": 2,
+        "media_references_checked": 15000,
+        "unique_native_media_in_snapshots": 7500,
+        "preview_asset_memberships": 200,
+        "modalities": [
+          "image"
+        ],
+        "preview_bytes_upper_bound": 17442431,
+        "cold_original_probes": [
+          {
+            "sha256": "f9c6364ee2d5877c017522821f9044b6b23d51b06b39f663998ea9cd716f4b0b",
+            "bytes": 148644,
+            "transferred_bytes": 148644,
+            "source_sha256": "3bb3632277e6ba6392ea64c02ddbf4dd2266c9caffd6bc09c9656d28f012589e",
+            "fingerprint_type": "etag",
+            "etag": "\"28fb3800-59e7a8839fd5c\""
+          },
+          {
+            "sha256": "d8cc2c71ea08afad87078178c89352d7c438fd73bcd6c16e0d345ea9678f9205",
+            "bytes": 139329,
+            "transferred_bytes": 139329,
+            "source_sha256": "3bb3632277e6ba6392ea64c02ddbf4dd2266c9caffd6bc09c9656d28f012589e",
+            "fingerprint_type": "etag",
+            "etag": "\"28fb3800-59e7a8839fd5c\""
+          },
+          {
+            "sha256": "bf6de96c56b5ed5472e811a5cd42dd03dab4cf5fa5ea5ee8e52ad783fc2eca85",
+            "bytes": 31066,
+            "transferred_bytes": 31066,
+            "source_sha256": "3bb3632277e6ba6392ea64c02ddbf4dd2266c9caffd6bc09c9656d28f012589e",
+            "fingerprint_type": "etag",
+            "etag": "\"28fb3800-59e7a8839fd5c\""
+          }
+        ],
+        "paths": [
+          "work/source-objects/3bb3632277e6ba6392ea64c02ddbf4dd2266c9caffd6bc09c9656d28f012589e",
+          "work/sources/imagenet-a/imagenet-a.tar",
+          "work/prepared/imagenet-a/54b2af5ad790129b1d342087635ddeb3d1d4da48afe1edbd963bfdc29d6e80f4/sources/3bb3632277e6ba6392ea64c02ddbf4dd2266c9caffd6bc09c9656d28f012589e.tar"
+        ],
+        "extracted_files": 0,
+        "source_bytes": 687552512,
+        "extracted_bytes": 0,
+        "retention": "Original-quality previews and complete indices; other originals and optimized browsing copies on demand.",
+        "freed_unique_file_bytes": 687552512
+      },
+      "native_index_receipt_sha256": "2efb3785cd3963bc70444361ffedf7dd5c6b974b681ea7b2870aba9a3f037b86"
+    },
+    {
+      "dataset_id": "imagenet-v2",
+      "key": "path",
+      "status": "retained_on_failure",
+      "error": "HTTPS destination is not allowlisted"
+    },
+    {
+      "dataset_id": "imagenet-v2",
+      "key": "path",
+      "index": "imagenet-v2-path-native-20261005",
+      "checked_at_unix": 1791187704.49632,
+      "executed": {
+        "dataset_id": "imagenet-v2",
+        "source_sha256": "f0c37fdf925916b19ea1323cd9a2208cdb6959ba2c32eef2a7fc393835c9ca7c",
+        "linked_dataset_ids": [],
+        "status": "executed",
+        "retained_snapshots": 2,
+        "media_references_checked": 20000,
+        "unique_native_media_in_snapshots": 10000,
+        "preview_asset_memberships": 200,
+        "modalities": [
+          "image"
+        ],
+        "preview_bytes_upper_bound": 25326919,
+        "cold_original_probes": [
+          {
+            "sha256": "3a9fea9aa26ee0106afb10d1472da336bf110eabca40a74ec7303af28b35bf73",
+            "bytes": 119704,
+            "transferred_bytes": 119704,
+            "source_sha256": "f0c37fdf925916b19ea1323cd9a2208cdb6959ba2c32eef2a7fc393835c9ca7c",
+            "fingerprint_type": "etag",
+            "etag": "\"d9e0b2e8fe9acc19b9c23f0c07dca9aef567c92a54ee766b7d3db2d1b27aaa8a\""
+          },
+          {
+            "sha256": "13aa9d61e5161f6b7610a25a90f6a357b94fd8d313369fcdcd7dcee1d77e9bef",
+            "bytes": 168072,
+            "transferred_bytes": 168072,
+            "source_sha256": "f0c37fdf925916b19ea1323cd9a2208cdb6959ba2c32eef2a7fc393835c9ca7c",
+            "fingerprint_type": "etag",
+            "etag": "\"d9e0b2e8fe9acc19b9c23f0c07dca9aef567c92a54ee766b7d3db2d1b27aaa8a\""
+          },
+          {
+            "sha256": "7a9b5415deb544fdaa6a8af0378a39adec23a9ef09058e0903adf09b5bcfa81c",
+            "bytes": 139918,
+            "transferred_bytes": 139918,
+            "source_sha256": "f0c37fdf925916b19ea1323cd9a2208cdb6959ba2c32eef2a7fc393835c9ca7c",
+            "fingerprint_type": "etag",
+            "etag": "\"d9e0b2e8fe9acc19b9c23f0c07dca9aef567c92a54ee766b7d3db2d1b27aaa8a\""
+          }
+        ],
+        "paths": [
+          "work/source-objects/f0c37fdf925916b19ea1323cd9a2208cdb6959ba2c32eef2a7fc393835c9ca7c",
+          "work/sources/imagenet-v2/imagenetv2-matched-frequency.tar",
+          "work/prepared/imagenet-v2/1c43e6f3cb87b6960ebaab3c03548c16a6810488332bd63cd7199feb24236800/sources/f0c37fdf925916b19ea1323cd9a2208cdb6959ba2c32eef2a7fc393835c9ca7c.tar"
+        ],
+        "extracted_files": 0,
+        "source_bytes": 1264079360,
+        "extracted_bytes": 0,
+        "retention": "Original-quality previews and complete indices; other originals and optimized browsing copies on demand.",
+        "freed_unique_file_bytes": 1264079360
+      },
+      "native_index_receipt_sha256": "d9bdd67443b4839714feb84ce7fa9cf9344c55b1fff9b7653134e3d401905c8e"
+    }
+  ],
+  "all_member_and_preview_checks_before_removal": true,
+  "failed_retirement_attempts_preserved": true
+}

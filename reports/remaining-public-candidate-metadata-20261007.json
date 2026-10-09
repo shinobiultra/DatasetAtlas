@@ -1,0 +1,32 @@
+[
+  {
+    "source": "factoid",
+    "url": "https://api.github.com/repos/caisa-lab/FACTOID-dataset/git/trees/main?recursive=1",
+    "max_metadata_bytes": 5000000,
+    "status_code": 200,
+    "entries": 59,
+    "native_image_candidates": 0,
+    "native_table_candidates": 0,
+    "truncated": false
+  },
+  {
+    "source": "dip",
+    "url": "https://api.github.com/repos/DmitryUlyanov/deep-image-prior/git/trees/master?recursive=1",
+    "max_metadata_bytes": 5000000,
+    "status_code": 200,
+    "entries": 60,
+    "native_image_candidates": 17,
+    "native_table_candidates": 0,
+    "truncated": false
+  },
+  {
+    "source": "multitrust",
+    "url": "https://huggingface.co/api/datasets/thu-ml/MultiTrust/tree/main?recursive=false&limit=100",
+    "max_metadata_bytes": 5000000,
+    "status_code": 200,
+    "entries": 10,
+    "native_image_candidates": 0,
+    "native_table_candidates": 0,
+    "truncated": null
+  }
+]

@@ -2,12 +2,52 @@ schema_version: '1.0'
 id: rs-vqa
 name: RS-VQA
 aliases: []
-description: Author page lists multiple remote-sensing VQA releases; paper mention does not identify variant.
+description: 'RSVQA-LR: the author''s Zenodo Low Resolution remote-sensing VQA release (77,232 questions
+  over 772 Sentinel-2 images, native train/val/test splits). RSVQA-HR and RSVQAxBEN are separate releases
+  that are not prepared; the corpus''s survey-table mention of RS-VQA does not name a variant, so identity
+  stays a candidate.'
 paper_ids:
 - paper-25eaa8c74ce76800
 release: unresolved
 adapter: structured
-adapter_config: {}
+adapter_config:
+  mapping:
+    id: question_id
+    question: question
+    media: media_path
+    media_modality: image
+  fields:
+    question_id: Original RSVQA-LR question ID
+    split:
+      description: Native author split
+      values:
+      - train
+      - val
+      - test
+    image_id: Original image ID
+    question: Original question
+    question_type:
+      description: Original question type
+      values:
+      - comp
+      - count
+      - presence
+      - rural_urban
+    answer: Original answer text (counts are strings)
+    answer_id: Original answer ID
+    question_annotator_id: Original question annotator ID
+    answer_annotator_id: Original answer annotator ID
+    question_date_added: Original question timestamp
+    answer_date_added: Original answer timestamp
+    image_original_name: Sentinel-2 product and crop the image came from
+    image_sensor: Original sensor code
+    image_type: Original image type
+    image_upperleft_map_x: Native upper-left map X
+    image_upperleft_map_y: Native upper-left map Y
+    image_res_x: Native X resolution
+    image_res_y: Native Y resolution
+    media_path: Original TIFF extracted from Images_LR.zip
+    image_sha256: SHA-256 of the original TIFF
 coverage:
   identity: candidate
   source: verified
@@ -19,14 +59,15 @@ coverage:
   preview_count: 0
   unit: example
   blockers:
-  - Exact source variant or paper release is unresolved.
-  - Adapter and preview are not implemented.
+  - Survey table does not name an RSVQA variant; only the Low Resolution release is prepared.
+  - 'Sentinel-2 imagery terms: no public redistribution review.'
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
-  source: https://rsvqa.sylvainlobry.com/
-  note: Satellite imagery and annotations may carry separate provider terms; no blanket license verified.
+  source: https://zenodo.org/records/6344334
+  note: Zenodo record 6344334 states CC BY 4.0 for the release. Sentinel-2 imagery carries Copernicus
+    terms and no public redistribution review has been done, so media stay local.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-a85367a5ef2368d2f235
@@ -50,4 +91,25 @@ evidence:
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: family_only
+- kind: source_audit_release
+  url: https://zenodo.org/records/6344334
+  checked_on: '2026-10-06'
+  note: Author Zenodo record v1.0 (DOI 10.5281/zenodo.6344334), CC BY 4.0. All twelve files' MD5 checksums
+    were checked against the record's published values; ten are used. A 2026-10-06 fetch is not evidence
+    the paper's survey cited this variant.
+  source_identity_status: author_release_variant_not_established_by_paper
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in at least
+    one record. Not inferred from the name or description.'
 source_url: https://rsvqa.sylvainlobry.com/
+modalities:
+- image
+- text
+tasks:
+- remote-sensing visual question answering
+labels:
+- answer
+- question_type
+- split

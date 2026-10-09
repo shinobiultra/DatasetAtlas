@@ -1,0 +1,31 @@
+{
+  "started_at_utc": "2026-10-07T05:16:39.884210+00:00",
+  "datasets": [
+    {
+      "dataset_id": "openimages",
+      "plan_id": "9c91d0b38f2c0b20d1314f01ae6bb97677054a779205e3fd3307508e7c7d0956",
+      "ready": true,
+      "source_budget_bytes": 200000000,
+      "output_budget_bytes": 1000000000,
+      "expected_download_bytes": 171661966,
+      "requirements": [],
+      "status": "interrupted",
+      "error_type": "preparation_failed",
+      "failure_log": "/home/bitwise/Documents/vibe/DatasetAtlas/work/preparation/9c91d0b38f2c0b20d1314f01ae6bb97677054a779205e3fd3307508e7c7d0956/worker.log"
+    },
+    {
+      "dataset_id": "mit-states",
+      "plan_id": "162503af5b79e455f1695085429062bd85c5bd1454818e87e491f38c34d2b453",
+      "ready": true,
+      "source_budget_bytes": 200000000,
+      "output_budget_bytes": 2000000000,
+      "expected_download_bytes": 170000000,
+      "requirements": [],
+      "status": "failed",
+      "error_type": "preparation_failed",
+      "failure_log": "/home/bitwise/Documents/vibe/DatasetAtlas/work/preparation/162503af5b79e455f1695085429062bd85c5bd1454818e87e491f38c34d2b453/worker.log"
+    }
+  ],
+  "native_contents_sent_to_models": false,
+  "completed_at_utc": "2026-10-07T05:22:53.721663+00:00"
+}

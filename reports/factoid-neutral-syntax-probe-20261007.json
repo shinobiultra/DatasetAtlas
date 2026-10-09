@@ -1,0 +1,325 @@
+{
+  "opcodes": 82115458,
+  "decoded_bytes": 1131504002,
+  "symbols": [
+    "collections.Counter",
+    "datetime.datetime",
+    "functools.partial",
+    "numpy.core.multiarray._reconstruct",
+    "numpy.core.numeric._frombuffer",
+    "numpy.dtype",
+    "numpy.ndarray",
+    "pandas.core.frame.DataFrame",
+    "pandas.core.indexes.base.Index",
+    "pandas.core.indexes.base._new_Index",
+    "pandas.core.indexes.numeric.Int64Index",
+    "pandas.core.internals.blocks.new_block",
+    "pandas.core.internals.managers.BlockManager"
+  ],
+  "memo_entries": 26996457,
+  "status": "neutral_syntax_complete",
+  "elapsed_seconds": 57.41484037400005,
+  "root_symbol": "pandas.core.frame.DataFrame",
+  "root_state_schema": [
+    "_mgr",
+    "_typ",
+    "_metadata",
+    "attrs",
+    "_flags"
+  ],
+  "executed_serialized_code": false,
+  "native_conversion_verified": false,
+  "manager_symbol": "pandas.core.internals.managers.BlockManager",
+  "manager_arg_types": [
+    "tuple",
+    "list"
+  ],
+  "manager_state_type": "NoneType",
+  "block_schema": [
+    {
+      "type": "Node",
+      "callee": {
+        "type": "Node",
+        "callee": {
+          "type": "Symbol",
+          "symbol": "functools.partial"
+        },
+        "arguments": {
+          "type": "tuple",
+          "length": 1,
+          "items": [
+            {
+              "type": "Symbol",
+              "symbol": "pandas.core.internals.blocks.new_block"
+            }
+          ]
+        },
+        "state": {
+          "type": "tuple",
+          "length": 4,
+          "items": [
+            {
+              "type": "Symbol",
+              "symbol": "pandas.core.internals.blocks.new_block"
+            },
+            {
+              "type": "tuple",
+              "length": 0
+            },
+            {
+              "type": "dict",
+              "length": 1
+            },
+            {
+              "type": "NoneType"
+            }
+          ]
+        }
+      },
+      "arguments": {
+        "type": "tuple",
+        "length": 2,
+        "items": [
+          {
+            "type": "Node",
+            "callee": {
+              "type": "Symbol",
+              "symbol": "numpy.core.numeric._frombuffer"
+            },
+            "arguments": {
+              "type": "tuple",
+              "length": 4
+            },
+            "state": {
+              "type": "NoneType"
+            }
+          },
+          {
+            "type": "Node",
+            "callee": {
+              "type": "Symbol",
+              "symbol": "numpy.core.numeric._frombuffer"
+            },
+            "arguments": {
+              "type": "tuple",
+              "length": 4
+            },
+            "state": {
+              "type": "NoneType"
+            }
+          }
+        ]
+      },
+      "state": {
+        "type": "NoneType"
+      }
+    },
+    {
+      "type": "Node",
+      "callee": {
+        "type": "Node",
+        "callee": {
+          "type": "Symbol",
+          "symbol": "functools.partial"
+        },
+        "arguments": {
+          "type": "tuple",
+          "length": 1,
+          "items": [
+            {
+              "type": "Symbol",
+              "symbol": "pandas.core.internals.blocks.new_block"
+            }
+          ]
+        },
+        "state": {
+          "type": "tuple",
+          "length": 4,
+          "items": [
+            {
+              "type": "Symbol",
+              "symbol": "pandas.core.internals.blocks.new_block"
+            },
+            {
+              "type": "tuple",
+              "length": 0
+            },
+            {
+              "type": "dict",
+              "length": 1
+            },
+            {
+              "type": "NoneType"
+            }
+          ]
+        }
+      },
+      "arguments": {
+        "type": "tuple",
+        "length": 2,
+        "items": [
+          {
+            "type": "Node",
+            "callee": {
+              "type": "Symbol",
+              "symbol": "numpy.core.numeric._frombuffer"
+            },
+            "arguments": {
+              "type": "tuple",
+              "length": 4
+            },
+            "state": {
+              "type": "NoneType"
+            }
+          },
+          {
+            "type": "Node",
+            "callee": {
+              "type": "Symbol",
+              "symbol": "numpy.core.numeric._frombuffer"
+            },
+            "arguments": {
+              "type": "tuple",
+              "length": 4
+            },
+            "state": {
+              "type": "NoneType"
+            }
+          }
+        ]
+      },
+      "state": {
+        "type": "NoneType"
+      }
+    },
+    {
+      "type": "Node",
+      "callee": {
+        "type": "Node",
+        "callee": {
+          "type": "Symbol",
+          "symbol": "functools.partial"
+        },
+        "arguments": {
+          "type": "tuple",
+          "length": 1,
+          "items": [
+            {
+              "type": "Symbol",
+              "symbol": "pandas.core.internals.blocks.new_block"
+            }
+          ]
+        },
+        "state": {
+          "type": "tuple",
+          "length": 4,
+          "items": [
+            {
+              "type": "Symbol",
+              "symbol": "pandas.core.internals.blocks.new_block"
+            },
+            {
+              "type": "tuple",
+              "length": 0
+            },
+            {
+              "type": "dict",
+              "length": 1
+            },
+            {
+              "type": "NoneType"
+            }
+          ]
+        }
+      },
+      "arguments": {
+        "type": "tuple",
+        "length": 2,
+        "items": [
+          {
+            "type": "Node",
+            "callee": {
+              "type": "Symbol",
+              "symbol": "numpy.core.multiarray._reconstruct"
+            },
+            "arguments": {
+              "type": "tuple",
+              "length": 3
+            },
+            "state": {
+              "type": "tuple",
+              "length": 5
+            }
+          },
+          {
+            "type": "Node",
+            "callee": {
+              "type": "Symbol",
+              "symbol": "numpy.core.numeric._frombuffer"
+            },
+            "arguments": {
+              "type": "tuple",
+              "length": 4
+            },
+            "state": {
+              "type": "NoneType"
+            }
+          }
+        ]
+      },
+      "state": {
+        "type": "NoneType"
+      }
+    }
+  ],
+  "axis_schema": [
+    {
+      "type": "Node",
+      "callee": {
+        "type": "Symbol",
+        "symbol": "pandas.core.indexes.base._new_Index"
+      },
+      "arguments": {
+        "type": "tuple",
+        "length": 2,
+        "items": [
+          {
+            "type": "Symbol",
+            "symbol": "pandas.core.indexes.base.Index"
+          },
+          {
+            "type": "dict",
+            "length": 2
+          }
+        ]
+      },
+      "state": {
+        "type": "NoneType"
+      }
+    },
+    {
+      "type": "Node",
+      "callee": {
+        "type": "Symbol",
+        "symbol": "pandas.core.indexes.base._new_Index"
+      },
+      "arguments": {
+        "type": "tuple",
+        "length": 2,
+        "items": [
+          {
+            "type": "Symbol",
+            "symbol": "pandas.core.indexes.numeric.Int64Index"
+          },
+          {
+            "type": "dict",
+            "length": 2
+          }
+        ]
+      },
+      "state": {
+        "type": "NoneType"
+      }
+    }
+  ]
+}

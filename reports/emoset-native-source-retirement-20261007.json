@@ -1,0 +1,47 @@
+{
+  "dataset_id": "emoset",
+  "source_sha256": "ebdf50858d24b8b454148dffc84219eb171e61ac80d43bfa65bd9affbbf5d660",
+  "linked_dataset_ids": [],
+  "status": "executed",
+  "retained_snapshots": 1,
+  "media_references_checked": 118102,
+  "unique_native_media_in_snapshots": 118102,
+  "preview_asset_memberships": 100,
+  "modalities": [
+    "image"
+  ],
+  "preview_bytes_upper_bound": 11200217,
+  "cold_original_probes": [
+    {
+      "sha256": "cf4d47167083f4c2c84fcf56bf0307608c27fd1d6a0394e8e04b109c6d5ffbd5",
+      "bytes": 110497,
+      "transferred_bytes": 1048576,
+      "source_sha256": "ebdf50858d24b8b454148dffc84219eb171e61ac80d43bfa65bd9affbbf5d660",
+      "fingerprint_type": "sha256-blocks"
+    },
+    {
+      "sha256": "1cfdeeb7dc2f04891cc0043cb5d29e253f0882a2e385d21ff9772e3deec70563",
+      "bytes": 187572,
+      "transferred_bytes": 1048576,
+      "source_sha256": "ebdf50858d24b8b454148dffc84219eb171e61ac80d43bfa65bd9affbbf5d660",
+      "fingerprint_type": "sha256-blocks"
+    },
+    {
+      "sha256": "454e7c3e30d667c86a69b2ad37e4085f1d043e5ce191fa967197e08686313f53",
+      "bytes": 283735,
+      "transferred_bytes": 1048576,
+      "source_sha256": "ebdf50858d24b8b454148dffc84219eb171e61ac80d43bfa65bd9affbbf5d660",
+      "fingerprint_type": "sha256-blocks"
+    }
+  ],
+  "paths": [
+    "work/source-objects/ebdf50858d24b8b454148dffc84219eb171e61ac80d43bfa65bd9affbbf5d660",
+    "work/prepared/emoset/32ecd4a024d785b728a9997f89954b95b46c6bf987bf0154ff690f6e589bc5b7/sources/ebdf50858d24b8b454148dffc84219eb171e61ac80d43bfa65bd9affbbf5d660.zip"
+  ],
+  "extracted_files": 0,
+  "source_bytes": 11288914945,
+  "extracted_bytes": 0,
+  "retention": "Original-quality previews and complete indices; other originals and optimized browsing copies on demand.",
+  "freed_unique_file_bytes": 11288914945,
+  "auxiliary_hardlink_removed": "work/official-native-candidates-20261007/emoset/objects/9f19edb6e800f6b74f1a4957aa4c9e4745e4aae58df1ed9586bbc7d6389f85ed"
+}

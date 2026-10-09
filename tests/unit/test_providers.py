@@ -91,6 +91,19 @@ def test_image_requires_probe_and_allowed_real_bytes(tmp_path):
         svc.preview(request)
 
 
+def test_context_accepts_extensionless_hash_pinned_native_original(tmp_path):
+    import hashlib
+    import io
+    from dataset_atlas.providers.context import build_context
+    svc=service(tmp_path);svc._providers['local'].capabilities['single_image_input'].status='supported'
+    buffer=io.BytesIO();Image.new('RGB',(2,2),'red').save(buffer,format='PNG')
+    data=buffer.getvalue();sha=hashlib.sha256(data).hexdigest();(tmp_path/sha).write_bytes(data)
+    row=record();row.assets[0].uri=sha;row.assets[0].sha256=sha
+    request=ContextRequest(provider_id='local',record_ids=[row.id],image_asset_ids=[row.assets[0].id])
+    result=build_context(request,svc.get_provider('local'),lambda _:row,[tmp_path])
+    assert result.image_representations[0]['sha256']==sha and result.image_representations[0]['mime_type']=='image/png'
+
+
 def test_config_and_probe_are_independent(tmp_path, monkeypatch):
     monkeypatch.setenv("ATLAS_TEST_KEY", "secret-value")
     seen_auth = []
@@ -271,3 +284,135 @@ def test_context_digest_binds_provider_endpoint(tmp_path):
     after = svc.preview(context)
     assert before.context_digest != after.context_digest
     assert after.policy["provider_endpoint"] == "http://127.0.0.1:4321/v1"
+
+
+@pytest.mark.parametrize('content,reason,message',[('', 'stop','empty response'),('   ','stop','empty response'),('', 'length','output limit'),('partial answer','length','incomplete'),('','content_filter','content filtering')])
+def test_incomplete_provider_answers_are_saved_as_errors(tmp_path,content,reason,message):
+    svc=service(tmp_path,lambda request:httpx.Response(200,json={'choices':[{'message':{'content':content},'finish_reason':reason}]}))
+    svc._providers['local'].capabilities['text_generation'].status='supported'
+    context=ContextRequest(provider_id='local',record_ids=['sample-1'])
+    preview=svc.preview(context)
+    result=svc.converse(ConversationRequest(context=context,context_digest=preview.context_digest,approved_provider_id='local',approved_record_ids=['sample-1'],prompt='Answer'))
+    assert message in result.error
+    assert result.response==content
+    assert result.provenance['finish_reasons']==[reason]
+    assert svc.get_conversation(result.id).error==result.error
+
+
+def test_empty_provider_output_does_not_complete_an_evaluation_batch(tmp_path):
+    svc=service(tmp_path,lambda request:httpx.Response(200,json={'choices':[{'message':{'content':''},'finish_reason':'length'}]}))
+    svc._providers['local'].capabilities['text_generation'].status='supported'
+    svc.record_lookup=lambda identity:record().model_copy(update={'id':identity})
+    context=ContextRequest(provider_id='local',record_ids=['sample-1','sample-2'],mode='evaluation',independent_records=True)
+    preview=svc.preview(context)
+    result=svc.converse(ConversationRequest(context=context,context_digest=preview.context_digest,approved_provider_id='local',approved_record_ids=['sample-1','sample-2'],prompt='Answer'))
+    assert result.status=='partial' and result.pending_record_ids==['sample-1','sample-2'] and result.completed_record_ids==[]
+
+
+def test_truncated_probe_remains_unknown_and_respects_configured_budget(tmp_path):
+    seen=[]
+    def handler(request):
+        seen.append(json.loads(request.content))
+        return httpx.Response(200,json={'choices':[{'message':{'content':''},'finish_reason':'length'}]})
+    svc=service(tmp_path,handler)
+    svc.put_provider(ProviderConfig(id='local',base_url='http://127.0.0.1:1234/v1',model='mock',max_output_tokens=32))
+    result=svc.probe('local',['text_generation','tool_calls'])
+    assert all(result.capabilities[name].status=='unknown' for name in ['text_generation','tool_calls'])
+    assert all(x['max_tokens']==32 for x in seen)
+
+
+def test_explicit_thinking_control_is_sent_probed_and_bound_to_approved_context(tmp_path):
+    seen=[]
+    def handler(request):
+        seen.append(json.loads(request.content))
+        return httpx.Response(200,json={'choices':[{'message':{'content':'OK'},'finish_reason':'stop'}]})
+    svc=service(tmp_path,handler)
+    svc.put_provider(ProviderConfig(id='local',base_url='http://127.0.0.1:1234/v1',model='mock',max_output_tokens=32,reasoning_effort='none'))
+    assert svc.probe('local',['text_generation']).capabilities['text_generation'].status=='supported'
+    context=ContextRequest(provider_id='local',record_ids=['sample-1'])
+    preview=svc.preview(context)
+    assert preview.policy['generation_settings']=={'max_tokens':32,'reasoning_effort':'none'}
+    result=svc.converse(ConversationRequest(context=context,context_digest=preview.context_digest,approved_provider_id='local',approved_record_ids=['sample-1'],prompt='Answer'))
+    assert result.error is None and result.response=='OK'
+    assert len(seen)==2 and all(payload['reasoning_effort']=='none' for payload in seen)
+
+
+def test_tool_probe_requests_the_function_and_uses_the_configured_completion_bound():
+    config = ProviderConfig(id='local', base_url='http://127.0.0.1:11434/v1', model='fixture', max_output_tokens=2048)
+    payload, path = ProviderService._probe_payload(config, 'tool_calls')
+    assert path == '/chat/completions'
+    assert payload['max_tokens'] == 2048
+    assert payload['tool_choice']['function']['name'] == 'atlas_probe'
+    assert 'Call atlas_probe' in payload['messages'][0]['content']
+    assert 'Reply with the word OK' not in payload['messages'][0]['content']
+
+
+def test_provider_response_cap_stops_before_consuming_the_rest_of_the_body(tmp_path):
+    consumed = []
+    class Body(httpx.SyncByteStream):
+        def __iter__(self):
+            for i in range(30):
+                consumed.append(i)
+                yield b'x' * 100_000
+    svc = ProviderService(tmp_path/'providers.json',lambda _:None,client_factory=lambda **kw:httpx.Client(
+        transport=httpx.MockTransport(lambda req:httpx.Response(200,stream=Body())),**kw))
+    config = ProviderConfig(id='fixture',base_url='http://127.0.0.1:9',model='synthetic')
+    with pytest.raises(ValueError,match='1 MB limit'):
+        svc._post(config,'/chat/completions',{})
+    assert len(consumed) == 11
+
+
+def test_real_provider_slow_chunked_body_has_an_absolute_deadline(tmp_path):
+    from http.server import BaseHTTPRequestHandler,ThreadingHTTPServer
+    import threading,time
+    class Handler(BaseHTTPRequestHandler):
+        def log_message(self,*args): pass
+        def do_POST(self):
+            self.send_response(200);self.send_header('Transfer-Encoding','chunked');self.end_headers()
+            try:
+                for _ in range(30):
+                    self.wfile.write(b'1\r\nx\r\n');self.wfile.flush();time.sleep(.03)
+                self.wfile.write(b'0\r\n\r\n')
+            except (BrokenPipeError,ConnectionResetError): pass
+    server=ThreadingHTTPServer(('127.0.0.1',0),Handler)
+    thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
+    svc=ProviderService(tmp_path/'providers.json',lambda _:None)
+    config=ProviderConfig(id='fixture',base_url=f'http://127.0.0.1:{server.server_port}',model='synthetic',timeout_seconds=.15)
+    started=time.monotonic()
+    try:
+        with pytest.raises(ValueError,match='deadline exceeded'):
+            svc._post(config,'/chat/completions',{})
+        assert time.monotonic()-started < .6
+    finally:server.shutdown();server.server_close();thread.join()
+
+
+def test_production_tool_deadline_terminates_the_disposable_worker(tmp_path, monkeypatch):
+    import subprocess,sys,time
+    from dataset_atlas.api.tools import make_tool_backend
+    from dataset_atlas.registry import Registry
+    svc=ProviderService(tmp_path/'providers.json',lambda _:None,
+        tool_backend=make_tool_backend(Registry(tmp_path),lambda _:None,None))
+    marker=tmp_path/'continued'
+    real_popen=subprocess.Popen
+    def slow_worker(command,**kwargs):
+        return real_popen([sys.executable,'-c',
+            'import time,pathlib; time.sleep(.4); pathlib.Path('+repr(str(marker))+').write_text("continued")'],**kwargs)
+    monkeypatch.setattr('dataset_atlas.providers.service.subprocess.Popen',slow_worker)
+    with pytest.raises(ValueError,match='worker terminated'):
+        svc._execute_tool_bounded('describe_dataset',{},frozenset({'fixture:example:1'}),1,'exploration',time.monotonic()+.05)
+    time.sleep(.45)
+    assert not marker.exists()
+
+
+def test_production_tool_reads_only_the_approved_native_metadata(workspace):
+    import time
+    from dataset_atlas.api.tools import make_tool_backend
+    from dataset_atlas.registry import Registry
+    # Fixture has no image file: any media preparation would fail this request.
+    svc=ProviderService(workspace/'local-config/providers.json',lambda _:None,
+        tool_backend=make_tool_backend(Registry(workspace),lambda _:None,None))
+    receipt=svc._execute_tool_bounded('get_records',{'record_ids':['r0'],'limit':1},frozenset({'r0'}),1,
+        'exploration',time.monotonic()+10)
+    assert receipt['result']['source_refs']==['r0']
+    assert receipt['result']['rows'][0]['text']=='Text 0'
+    assert receipt['result']['population_scope']=='approved_selection'

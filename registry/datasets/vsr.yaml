@@ -12,7 +12,7 @@ adapter_config: {}
 coverage:
   identity: resolved
   source: verified
-  access: unverified
+  access: public
   adapter: not_started
   preview: none
   complete_data: unimplemented
@@ -80,4 +80,17 @@ evidence:
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
-source_url: https://github.com/cambridgeltl/visual-spatial-reasoning/tree/b27a0af0ee1462d2b6b92c8c83e869d9254a241a
+- kind: implemented_source_release
+  url: https://github.com/cambridgeltl/visual-spatial-reasoning
+  checked_on: '2026-09-23'
+  report: reports/selective-acquisition-20260923.md
+  note: Pinned acquired population and real preview exercised locally. Mirror and
+    selective-transfer limits remain in the acquisition receipts; this does not establish
+    publication rights or the exact paper-used subset.
+  recipe: registry/recipes/vsr.yaml
+source_url: https://github.com/cambridgeltl/visual-spatial-reasoning
+modalities:
+- image
+- text
+tasks:
+- spatial reasoning

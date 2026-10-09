@@ -1,0 +1,64 @@
+{
+  "info.json": {
+    "type": "dict",
+    "length": 2,
+    "fields": {
+      "label2idx": "dict",
+      "idx2label": "dict"
+    }
+  },
+  "train.json": {
+    "type": "list",
+    "length": 94481,
+    "first_item_type": "list",
+    "first_item_shape": [
+      "str",
+      "str",
+      "str"
+    ],
+    "annotation_fields": {
+      "image_id": "str",
+      "emotion": "str",
+      "brightness": "float",
+      "colorfulness": "float",
+      "facial_expression": "str"
+    },
+    "paths_exist": true
+  },
+  "val.json": {
+    "type": "list",
+    "length": 5905,
+    "first_item_type": "list",
+    "first_item_shape": [
+      "str",
+      "str",
+      "str"
+    ],
+    "annotation_fields": {
+      "image_id": "str",
+      "emotion": "str",
+      "brightness": "float",
+      "colorfulness": "float",
+      "scene": "str"
+    },
+    "paths_exist": true
+  },
+  "test.json": {
+    "type": "list",
+    "length": 17716,
+    "first_item_type": "list",
+    "first_item_shape": [
+      "str",
+      "str",
+      "str"
+    ],
+    "annotation_fields": {
+      "image_id": "str",
+      "emotion": "str",
+      "brightness": "float",
+      "colorfulness": "float",
+      "object": "list"
+    },
+    "paths_exist": true
+  }
+}

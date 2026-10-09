@@ -1,0 +1,27 @@
+{
+  "checked_at_utc": "2026-10-06T05:46:06.350263+00:00",
+  "dataset_id": "restricted-imagenet",
+  "snapshot_id": "restricted-imagenet-19b7bb271d7bdd721e205899",
+  "native_index_records": 267898,
+  "records_sha256": "7fbffd7d4e6cbd36dd7bbefc8c770c0971dc6804c2369fd9bb0661ba38090997",
+  "native_snapshot_changed": false,
+  "verified_preview_records": 100,
+  "previous_preview_rows_outside_native_subset": 71,
+  "previous_pack_sha256": "f82b4e4e588f19c3d0f4b51d553cea2135cc3052d76c0ef652f36ff98d9412b2",
+  "network_bytes": 212726211,
+  "max_download_bytes": 3000000000,
+  "new_original_bytes": 10125857,
+  "max_preview_bytes": 100000000,
+  "preview_media_validation": {
+    "candidate_pool": 100,
+    "candidates_checked": 100,
+    "unavailable_candidate_records": 0,
+    "media_limit_exclusions": {},
+    "verified_preview_assets": 100,
+    "selection": "Budgeted native row-group draws; every preview belongs to the immutable author subset and every original image is decoded."
+  },
+  "prior_preview_audit": "work/prepared/restricted-imagenet/50ae3bd26058bc3ff94f8d726bb7d904a26c1f714b53ca7c3edf97448e48ad76/preview-audits/1791265566272824175",
+  "external_model_requests": 0,
+  "status": "passed",
+  "selection_description_corrected_at": 1791266007.042394
+}

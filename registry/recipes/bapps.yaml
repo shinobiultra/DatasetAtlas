@@ -1,0 +1,50 @@
+release: BAPPS-author-archives-20260923
+adapter: perceptual
+expected_count: 197344
+remote_metadata_bytes: 100000000
+source_url: https://github.com/richzhang/PerceptualSimilarity
+scope: All 197344 native BAPPS judgement records from author-linked 2AFC train/validation
+  and JND validation TARs. Original patches, reference/p0/p1 roles and fractional
+  human judgements retained. Native distortion groups and splits are distinct memberships.
+  No inferred media publication rights.
+adapter_config:
+  annotations:
+  - path_key: training_path
+  - path_key: validation_path
+  - path_key: jnd_path
+  local_archives:
+    training:
+      path_key: training_path
+      task: 2afc
+    validation:
+      path_key: validation_path
+      task: 2afc
+    jnd:
+      path_key: jnd_path
+      task: jnd
+  repack_paths:
+  - training_path
+  - validation_path
+  - jnd_path
+  max_annotation_bytes: 100000000
+files:
+- source_name: twoafc_train.tar.gz
+  url: https://perceptual-similarity.s3.us-west-2.amazonaws.com/dataset/twoafc_train.tar.gz
+  bytes: 6103029760
+  sha256: b4f5c772c7cd88ac44bcb4ff0741745d434c05f0094f2bfb262ddcd0055bf393
+  config_key: training_path
+  format: tar.gz
+- source_name: twoafc_val.tar.gz
+  url: https://perceptual-similarity.s3.us-west-2.amazonaws.com/dataset/twoafc_val.tar.gz
+  bytes: 1279180800
+  sha256: 41486671b06de923e7ba277c4797d4d9d86d609863ba35ecdb576133f8b9d859
+  config_key: validation_path
+  format: tar.gz
+- source_name: jnd.tar.gz
+  url: https://perceptual-similarity.s3.us-west-2.amazonaws.com/dataset/jnd.tar.gz
+  bytes: 267939840
+  sha256: 79d5b50b02b1e04075c7b375cc7b66243d21e93b277b24b6030637977b2073fd
+  config_key: jnd_path
+  format: tar.gz
+allowed_hosts:
+- perceptual-similarity.s3.us-west-2.amazonaws.com

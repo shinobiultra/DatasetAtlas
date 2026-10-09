@@ -1,0 +1,631 @@
+{
+  "dataset_id": "cocogender",
+  "dataset": {
+    "schema_version": "1.0",
+    "id": "cocogender",
+    "name": "COCOgender",
+    "origin": "catalogue",
+    "aliases": [
+      "Cocogender"
+    ],
+    "description": "COCO-GB (Tang et al., WWW 2021) as released by its authors: v1 (123,287 COCO 2014 images with a four-valued gender integer, category IDs, captions and a 1,000-image gender-balanced secret test) and v2 (120,955 image records in reorganised train/test/fine-tune files), kept as separate variants. The DeBiasLens paper's 'Cocogender' cites this work but does not say which variant or subset it used, so identity stays a candidate.",
+    "tasks": [
+      "image captioning gender-bias evaluation"
+    ],
+    "modalities": [
+      "image",
+      "text"
+    ],
+    "labels": [
+      "gender",
+      "category_id",
+      "release_variant",
+      "partition"
+    ],
+    "paper_ids": [
+      "paper-32cea5e43d940514"
+    ],
+    "source_url": "https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System/tree/8eab34dbcbb49d9a9743b1f6ed26d48f74945a44",
+    "release": "github-8eab34dbcbb49d9a9743b1f6ed26d48f74945a44",
+    "snapshot_id": "cocogender-bfa7aa1e81a55304bebfcdc5",
+    "adapter": "structured_collection",
+    "adapter_config": {
+      "annotations": [
+        {
+          "path_key": "path",
+          "format": "jsonl",
+          "split": "all",
+          "identity_prefix": "coco-gb",
+          "media_path_url_field": "coco_url",
+          "media_archive_by_prefix": {
+            "train2014": "train2014",
+            "val2014": "val2014"
+          }
+        }
+      ],
+      "mapping": {
+        "id": "source_id",
+        "text": "display_text"
+      },
+      "max_annotation_bytes": 1000000000,
+      "remote_archives": {
+        "train2014": {
+          "url": "https://s3.amazonaws.com/images.cocodataset.org/zips/train2014.zip",
+          "bytes": 13510573713,
+          "etag": "\"289af3433b84b5b8622626b10146c1bc-1611\"",
+          "allowed_hosts": [
+            "s3.amazonaws.com"
+          ]
+        },
+        "val2014": {
+          "url": "https://s3.amazonaws.com/images.cocodataset.org/zips/val2014.zip",
+          "bytes": 6645013297,
+          "etag": "\"3925cc4d50eb68d47bf2d6324a012d20-793\"",
+          "allowed_hosts": [
+            "s3.amazonaws.com"
+          ]
+        }
+      },
+      "remote_cache_root": "/home/bitwise/Documents/vibe/DatasetAtlas/work/media-cache/ranges",
+      "fields": {
+        "source_id": "Release variant, partition and COCO image ID",
+        "release_variant": {
+          "description": "COCO-GB release variant",
+          "values": [
+            "v1",
+            "v2"
+          ]
+        },
+        "partition": {
+          "description": "v1 Karpathy split, or v2 file (train, test, fine_tune)",
+          "values": [
+            "train",
+            "restval",
+            "val",
+            "test",
+            "fine_tune"
+          ]
+        },
+        "split": {
+          "description": "Native 'split' field (v2 keeps Karpathy-style labels even in its test file)",
+          "values": [
+            "train",
+            "restval",
+            "val",
+            "test"
+          ]
+        },
+        "cocoid": {
+          "description": "COCO image ID",
+          "dtype": "number"
+        },
+        "imgid": {
+          "description": "Native image index within its file",
+          "dtype": "number"
+        },
+        "filepath": {
+          "description": "COCO 2014 folder",
+          "values": [
+            "train2014",
+            "val2014"
+          ]
+        },
+        "filename": "COCO image file name",
+        "gender": {
+          "description": "Author's native gender integer, derived from caption words (absent in v2 fine_tune); coding not documented for this field",
+          "dtype": "number"
+        },
+        "category_id": "Native COCO category ID string (absent in v2 fine_tune)",
+        "category_ids": {
+          "description": "The category IDs parsed to integers",
+          "dtype": "array"
+        },
+        "captions": "Captions present in this record",
+        "caption_ids": "IDs of the captions present",
+        "listed_sentence_ids": "Native sentence ID list (may name captions this record omits)",
+        "captions_subset_of_listed": {
+          "description": "True when the record keeps fewer sentences than it lists",
+          "dtype": "boolean"
+        },
+        "secret_test": {
+          "description": "v1: in the author's gender-balanced 1,000-image secret test (absent for v2)",
+          "dtype": "boolean"
+        },
+        "display_text": "First caption, for display",
+        "coco_url": "Canonical COCO image URL used only to name the archive member",
+        "native_sentences": "All original sentence fields, including exact raw whitespace, tokens, image IDs and sentence IDs"
+      },
+      "v1_zip": "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/cocogender/acd2fc6789c6b2f1522e75f61cf76a4660b021f129b1ab5b3e08a6dc05601666/sources/018a3dc262f6fb370eac85be65a5fa1d19682f93211e2163c5e7016dbdd982a6.zip",
+      "v2_zip": "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/cocogender/acd2fc6789c6b2f1522e75f61cf76a4660b021f129b1ab5b3e08a6dc05601666/sources/5642ee9ef62724c561a24cd5274a5fdaa98c749ad9bdfb3338bf34da5270c159.zip",
+      "source_files": [
+        {
+          "source_name": "COCOGBv1.zip",
+          "url": "https://raw.githubusercontent.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System/8eab34dbcbb49d9a9743b1f6ed26d48f74945a44/COCOGB_V1/COCOGBv1.zip",
+          "bytes": 30580088,
+          "sha256": "018a3dc262f6fb370eac85be65a5fa1d19682f93211e2163c5e7016dbdd982a6",
+          "format": "zip",
+          "config_key": "v1_zip",
+          "path": "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/cocogender/acd2fc6789c6b2f1522e75f61cf76a4660b021f129b1ab5b3e08a6dc05601666/sources/018a3dc262f6fb370eac85be65a5fa1d19682f93211e2163c5e7016dbdd982a6.zip"
+        },
+        {
+          "source_name": "COCOv2.zip",
+          "url": "https://raw.githubusercontent.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System/8eab34dbcbb49d9a9743b1f6ed26d48f74945a44/COCOGB_V2/COCOv2.zip",
+          "bytes": 29871199,
+          "sha256": "5642ee9ef62724c561a24cd5274a5fdaa98c749ad9bdfb3338bf34da5270c159",
+          "format": "zip",
+          "config_key": "v2_zip",
+          "path": "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/cocogender/acd2fc6789c6b2f1522e75f61cf76a4660b021f129b1ab5b3e08a6dc05601666/sources/5642ee9ef62724c561a24cd5274a5fdaa98c749ad9bdfb3338bf34da5270c159.zip"
+        }
+      ],
+      "path": "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/cocogender/acd2fc6789c6b2f1522e75f61cf76a4660b021f129b1ab5b3e08a6dc05601666/sources/converted/records.jsonl",
+      "format": "jsonl",
+      "sha256": "4f788dbc48f6d503298a9cf86e1da6ee0f12d10c4eb4ba4d1ee096054150578c"
+    },
+    "coverage": {
+      "identity": "candidate",
+      "source": "verified",
+      "access": "public",
+      "adapter": "tested",
+      "preview": "complete_target",
+      "complete_data": "supported",
+      "publication": "not_reviewed",
+      "preview_count": 100,
+      "total_count": 244242,
+      "unit": "example",
+      "blockers": [
+        "The DeBiasLens paper cites Tang et al. 2021 for 'Cocogender' without naming v1, v2 or the subset it trained on, so the exact paper population is unresolved.",
+        "The gender integer is the authors' native value, derived from caption words (not perceived or self-reported identity); the repository does not document the JSON field's own coding, so Atlas does not name its values.",
+        "COCO images keep their per-image Flickr licences and are read on request from COCO's official archives; no public redistribution review."
+      ]
+    },
+    "availability": null,
+    "rights": {
+      "records": "not_reviewed",
+      "annotations": "not_reviewed",
+      "images": "not_reviewed",
+      "source": "https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System",
+      "note": "COCO captions and images carry COCO terms; the author repository states no data licence for the gender overlay."
+    },
+    "relationships": [
+      {
+        "type": "annotation_overlay_of",
+        "target": "coco",
+        "status": "paper_claim_only"
+      },
+      {
+        "type": "same_source_family_as",
+        "target_id": "coco",
+        "status": "asserted_from_source_review",
+        "scope": "Gender-annotation overlay on COCO images."
+      }
+    ],
+    "evidence": [
+      {
+        "kind": "corpus_mention",
+        "evidence_id": "evidence-db79fb0dad90887f266c",
+        "paper_id": "paper-32cea5e43d940514",
+        "source_file_hash": "f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f",
+        "page": 4,
+        "role": "training",
+        "excerpt": "ace, we train SAE using various data configura- [ tions: CelebA [52], Cocogender images [76], and Fair- Ng = Eg \\ \uf8ed Eh \uf8f8 Face [41] for the image encoder and Cocogender cap- h\u2208G,h\u0338=g tions (Cocogend",
+        "review_scope": "specific_page_evidence_checked",
+        "paper_full_review_complete": true
+      },
+      {
+        "kind": "corpus_mention",
+        "evidence_id": "evidence-9a16d7bc5f85d5a7e913",
+        "paper_id": "paper-32cea5e43d940514",
+        "source_file_hash": "f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f",
+        "page": 4,
+        "role": "SAE image training",
+        "excerpt": "tions: CelebA [52], Cocogender images [76], and Fair- Ng = Eg \\ \uf8ed Eh \uf8f8",
+        "review_scope": "full_text_mention_inventory_checked",
+        "paper_full_review_complete": true
+      },
+      {
+        "kind": "source_audit_identity",
+        "url": "https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System",
+        "note": "COCOgender image/caption gender overlay cited by DebiasLens as Tang et al. 2021; possible relation to COCO-GB V1/V2 requires confirmation",
+        "audit_file": "work/sources/source-audit-jobs.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "candidate_mapping_unresolved"
+      },
+      {
+        "kind": "source_audit_release",
+        "url": "https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System",
+        "note": "DebiasLens supplement reports 12,454 examples; cited author's release distinguishes COCO-GB V1 and V2, but exact mapping to COCOgender is unverified",
+        "audit_file": "work/sources/source-audit-jobs.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "candidate_mapping_unresolved"
+      },
+      {
+        "kind": "source_audit_access",
+        "url": "https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System",
+        "note": "Cited author repository contains COCOGB_V1 and COCOGB_V2 material; no matching 12,454-example archive verified",
+        "audit_file": "work/sources/source-audit-jobs.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "candidate_mapping_unresolved"
+      },
+      {
+        "kind": "source_audit_rights",
+        "url": "https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System",
+        "note": "Overlay license not established; underlying COCO photos and captions have separate source rights",
+        "audit_file": "work/sources/source-audit-jobs.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "candidate_mapping_unresolved"
+      },
+      {
+        "kind": "source_audit_related_links",
+        "urls": [
+          "https://arxiv.org/abs/2006.08315",
+          "https://openaccess.thecvf.com/content/CVPR2026/supplemental/An_Interpretable_Debiasing_of_CVPR_2026_supplemental.pdf"
+        ],
+        "note": "Additional official or author-cited evidence; does not establish a selected release.",
+        "audit_file": "work/sources/source-audit-jobs.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "candidate_mapping_unresolved"
+      },
+      {
+        "kind": "source_audit_release",
+        "checked_on": "2026-10-06",
+        "url": "https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System/tree/8eab34dbcbb49d9a9743b1f6ed26d48f74945a44",
+        "note": "Repository at this commit holds COCOGB_V1/COCOGBv1.zip (Ksplit_gender_category.json: 123,287 images, splits train 82,783 / restval 30,504 / val 5,000 / test 5,000, 80 COCO categories, a 1,000-entry secret_test whose gender and categories agree with the split records) and COCOGB_V2/COCOv2.zip (train 111,313, test 1,974, fine_tune 7,668). The authors' Benchmarking_existing_models/benchmarking.py codes a caption's gender words as 0 woman only, 1 man only, 2 both or neutral only, 3 none; the JSON field is not documented separately. Ksplit_gender_category.json.zip is a byte-identical copy of COCOGBv1.zip.",
+        "source_identity_status": "author_release_identified_variant_not_established_by_paper"
+      },
+      {
+        "kind": "derived_facet",
+        "field": "tasks",
+        "checked_on": "2026-10-06",
+        "note": "Task from the author repository description (benchmarking gender bias in captioning), not from the citing paper."
+      },
+      {
+        "kind": "local_preparation",
+        "snapshot_id": "cocogender-bfa7aa1e81a55304bebfcdc5",
+        "population": "The author-released COCO-GB annotations at the pinned commit, as two separate release variants: v1 (123,287 images in the Karpathy split of COCO 2014 with the author's four-valued gender integer, COCO category IDs, captions and a 1,000-image gender-balanced secret test) and v2 (120,955 image records in three reorganised train/test/fine-tune files). COCO IDs repeat across variants and partitions, so every row is scoped by variant and partition. The gender integer is the author's native value, derived by the authors from caption words, not a perceived or self-reported identity; its coding is not documented for the JSON field itself. Images are COCO 2014 files read on request from the ETag-pinned official archives, not mirrored. The captions are COCO's; v2 fine-tune keeps only some of each image's sentences.",
+        "record_count": 244242,
+        "note": "Prepared source population; publication rights and paper identity are separate."
+      }
+    ]
+  },
+  "max_download_bytes": 500000000,
+  "max_output_bytes": 2000000000,
+  "source_mode": "download",
+  "files": [
+    {
+      "source_name": "COCOGBv1.zip",
+      "url": "https://raw.githubusercontent.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System/8eab34dbcbb49d9a9743b1f6ed26d48f74945a44/COCOGB_V1/COCOGBv1.zip",
+      "bytes": 30580088,
+      "sha256": "018a3dc262f6fb370eac85be65a5fa1d19682f93211e2163c5e7016dbdd982a6",
+      "format": "zip",
+      "config_key": "v1_zip"
+    },
+    {
+      "source_name": "COCOv2.zip",
+      "url": "https://raw.githubusercontent.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System/8eab34dbcbb49d9a9743b1f6ed26d48f74945a44/COCOGB_V2/COCOv2.zip",
+      "bytes": 29871199,
+      "sha256": "5642ee9ef62724c561a24cd5274a5fdaa98c749ad9bdfb3338bf34da5270c159",
+      "format": "zip",
+      "config_key": "v2_zip"
+    }
+  ],
+  "expected_download_bytes": 100451287,
+  "expected_count": 244242,
+  "source_url": "https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System/tree/8eab34dbcbb49d9a9743b1f6ed26d48f74945a44",
+  "requirements": [],
+  "ready": true,
+  "scope": "The author-released COCO-GB annotations at the pinned commit, as two separate release variants: v1 (123,287 images in the Karpathy split of COCO 2014 with the author's four-valued gender integer, COCO category IDs, captions and a 1,000-image gender-balanced secret test) and v2 (120,955 image records in three reorganised train/test/fine-tune files). COCO IDs repeat across variants and partitions, so every row is scoped by variant and partition. The gender integer is the author's native value, derived by the authors from caption words, not a perceived or self-reported identity; its coding is not documented for the JSON field itself. Images are COCO 2014 files read on request from the ETag-pinned official archives, not mirrored. The captions are COCO's; v2 fine-tune keeps only some of each image's sentences.",
+  "source_identity": "Pinned available release; not a claim of the paper-used revision.",
+  "prepared_dataset": {
+    "schema_version": "1.0",
+    "id": "cocogender",
+    "name": "COCOgender",
+    "origin": "catalogue",
+    "aliases": [
+      "Cocogender"
+    ],
+    "description": "COCO-GB (Tang et al., WWW 2021) as released by its authors: v1 (123,287 COCO 2014 images with a four-valued gender integer, category IDs, captions and a 1,000-image gender-balanced secret test) and v2 (120,955 image records in reorganised train/test/fine-tune files), kept as separate variants. The DeBiasLens paper's 'Cocogender' cites this work but does not say which variant or subset it used, so identity stays a candidate.",
+    "tasks": [
+      "image captioning gender-bias evaluation"
+    ],
+    "modalities": [
+      "image",
+      "text"
+    ],
+    "labels": [
+      "gender",
+      "category_id",
+      "release_variant",
+      "partition"
+    ],
+    "paper_ids": [
+      "paper-32cea5e43d940514"
+    ],
+    "source_url": "https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System/tree/8eab34dbcbb49d9a9743b1f6ed26d48f74945a44",
+    "release": "github-8eab34dbcbb49d9a9743b1f6ed26d48f74945a44",
+    "snapshot_id": "",
+    "adapter": "structured_collection",
+    "adapter_config": {
+      "annotations": [
+        {
+          "path_key": "path",
+          "format": "jsonl",
+          "split": "all",
+          "identity_prefix": "coco-gb",
+          "media_path_url_field": "coco_url",
+          "media_archive_by_prefix": {
+            "train2014": "train2014",
+            "val2014": "val2014"
+          }
+        }
+      ],
+      "mapping": {
+        "id": "source_id",
+        "text": "display_text"
+      },
+      "max_annotation_bytes": 1000000000,
+      "remote_archives": {
+        "train2014": {
+          "url": "https://s3.amazonaws.com/images.cocodataset.org/zips/train2014.zip",
+          "bytes": 13510573713,
+          "etag": "\"289af3433b84b5b8622626b10146c1bc-1611\"",
+          "allowed_hosts": [
+            "s3.amazonaws.com"
+          ]
+        },
+        "val2014": {
+          "url": "https://s3.amazonaws.com/images.cocodataset.org/zips/val2014.zip",
+          "bytes": 6645013297,
+          "etag": "\"3925cc4d50eb68d47bf2d6324a012d20-793\"",
+          "allowed_hosts": [
+            "s3.amazonaws.com"
+          ]
+        }
+      },
+      "remote_cache_root": "/home/bitwise/Documents/vibe/DatasetAtlas/work/media-cache/ranges",
+      "fields": {
+        "source_id": "Release variant, partition and COCO image ID",
+        "release_variant": {
+          "description": "COCO-GB release variant",
+          "values": [
+            "v1",
+            "v2"
+          ]
+        },
+        "partition": {
+          "description": "v1 Karpathy split, or v2 file (train, test, fine_tune)",
+          "values": [
+            "train",
+            "restval",
+            "val",
+            "test",
+            "fine_tune"
+          ]
+        },
+        "split": {
+          "description": "Native 'split' field (v2 keeps Karpathy-style labels even in its test file)",
+          "values": [
+            "train",
+            "restval",
+            "val",
+            "test"
+          ]
+        },
+        "cocoid": {
+          "description": "COCO image ID",
+          "dtype": "number"
+        },
+        "imgid": {
+          "description": "Native image index within its file",
+          "dtype": "number"
+        },
+        "filepath": {
+          "description": "COCO 2014 folder",
+          "values": [
+            "train2014",
+            "val2014"
+          ]
+        },
+        "filename": "COCO image file name",
+        "gender": {
+          "description": "Author's native gender integer, derived from caption words (absent in v2 fine_tune); coding not documented for this field",
+          "dtype": "number"
+        },
+        "category_id": "Native COCO category ID string (absent in v2 fine_tune)",
+        "category_ids": {
+          "description": "The category IDs parsed to integers",
+          "dtype": "array"
+        },
+        "captions": "Captions present in this record",
+        "caption_ids": "IDs of the captions present",
+        "listed_sentence_ids": "Native sentence ID list (may name captions this record omits)",
+        "captions_subset_of_listed": {
+          "description": "True when the record keeps fewer sentences than it lists",
+          "dtype": "boolean"
+        },
+        "secret_test": {
+          "description": "v1: in the author's gender-balanced 1,000-image secret test (absent for v2)",
+          "dtype": "boolean"
+        },
+        "display_text": "First caption, for display",
+        "coco_url": "Canonical COCO image URL used only to name the archive member",
+        "native_sentences": "All original sentence fields, including exact raw whitespace, tokens, image IDs and sentence IDs"
+      },
+      "verify_remote_preview_media": true,
+      "preview_group_by": "primary_asset_then_example",
+      "preview_candidate_count": 250
+    },
+    "coverage": {
+      "identity": "candidate",
+      "source": "verified",
+      "access": "public",
+      "adapter": "not_started",
+      "preview": "none",
+      "complete_data": "unimplemented",
+      "publication": "not_reviewed",
+      "preview_count": 0,
+      "total_count": null,
+      "unit": "example",
+      "blockers": [
+        "The DeBiasLens paper cites Tang et al. 2021 for 'Cocogender' without naming v1, v2 or the subset it trained on, so the exact paper population is unresolved.",
+        "The gender integer is the authors' native value, derived from caption words (not perceived or self-reported identity); the repository does not document the JSON field's own coding, so Atlas does not name its values.",
+        "COCO images keep their per-image Flickr licences and are read on request from COCO's official archives; no public redistribution review."
+      ]
+    },
+    "availability": null,
+    "rights": {
+      "records": "not_reviewed",
+      "annotations": "not_reviewed",
+      "images": "not_reviewed",
+      "source": "https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System",
+      "note": "COCO captions and images carry COCO terms; the author repository states no data licence for the gender overlay."
+    },
+    "relationships": [
+      {
+        "type": "annotation_overlay_of",
+        "target": "coco",
+        "status": "paper_claim_only"
+      },
+      {
+        "type": "same_source_family_as",
+        "target_id": "coco",
+        "status": "asserted_from_source_review",
+        "scope": "Gender-annotation overlay on COCO images."
+      }
+    ],
+    "evidence": [
+      {
+        "kind": "corpus_mention",
+        "evidence_id": "evidence-db79fb0dad90887f266c",
+        "paper_id": "paper-32cea5e43d940514",
+        "source_file_hash": "f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f",
+        "page": 4,
+        "role": "training",
+        "excerpt": "ace, we train SAE using various data configura- [ tions: CelebA [52], Cocogender images [76], and Fair- Ng = Eg \\ \uf8ed Eh \uf8f8 Face [41] for the image encoder and Cocogender cap- h\u2208G,h\u0338=g tions (Cocogend",
+        "review_scope": "specific_page_evidence_checked",
+        "paper_full_review_complete": true
+      },
+      {
+        "kind": "corpus_mention",
+        "evidence_id": "evidence-9a16d7bc5f85d5a7e913",
+        "paper_id": "paper-32cea5e43d940514",
+        "source_file_hash": "f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f",
+        "page": 4,
+        "role": "SAE image training",
+        "excerpt": "tions: CelebA [52], Cocogender images [76], and Fair- Ng = Eg \\ \uf8ed Eh \uf8f8",
+        "review_scope": "full_text_mention_inventory_checked",
+        "paper_full_review_complete": true
+      },
+      {
+        "kind": "source_audit_identity",
+        "url": "https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System",
+        "note": "COCOgender image/caption gender overlay cited by DebiasLens as Tang et al. 2021; possible relation to COCO-GB V1/V2 requires confirmation",
+        "audit_file": "work/sources/source-audit-jobs.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "candidate_mapping_unresolved"
+      },
+      {
+        "kind": "source_audit_release",
+        "url": "https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System",
+        "note": "DebiasLens supplement reports 12,454 examples; cited author's release distinguishes COCO-GB V1 and V2, but exact mapping to COCOgender is unverified",
+        "audit_file": "work/sources/source-audit-jobs.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "candidate_mapping_unresolved"
+      },
+      {
+        "kind": "source_audit_access",
+        "url": "https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System",
+        "note": "Cited author repository contains COCOGB_V1 and COCOGB_V2 material; no matching 12,454-example archive verified",
+        "audit_file": "work/sources/source-audit-jobs.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "candidate_mapping_unresolved"
+      },
+      {
+        "kind": "source_audit_rights",
+        "url": "https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System",
+        "note": "Overlay license not established; underlying COCO photos and captions have separate source rights",
+        "audit_file": "work/sources/source-audit-jobs.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "candidate_mapping_unresolved"
+      },
+      {
+        "kind": "source_audit_related_links",
+        "urls": [
+          "https://arxiv.org/abs/2006.08315",
+          "https://openaccess.thecvf.com/content/CVPR2026/supplemental/An_Interpretable_Debiasing_of_CVPR_2026_supplemental.pdf"
+        ],
+        "note": "Additional official or author-cited evidence; does not establish a selected release.",
+        "audit_file": "work/sources/source-audit-jobs.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "candidate_mapping_unresolved"
+      },
+      {
+        "kind": "source_audit_release",
+        "checked_on": "2026-10-06",
+        "url": "https://github.com/datamllab/Mitigating_Gender_Bias_In_Captioning_System/tree/8eab34dbcbb49d9a9743b1f6ed26d48f74945a44",
+        "note": "Repository at this commit holds COCOGB_V1/COCOGBv1.zip (Ksplit_gender_category.json: 123,287 images, splits train 82,783 / restval 30,504 / val 5,000 / test 5,000, 80 COCO categories, a 1,000-entry secret_test whose gender and categories agree with the split records) and COCOGB_V2/COCOv2.zip (train 111,313, test 1,974, fine_tune 7,668). The authors' Benchmarking_existing_models/benchmarking.py codes a caption's gender words as 0 woman only, 1 man only, 2 both or neutral only, 3 none; the JSON field is not documented separately. Ksplit_gender_category.json.zip is a byte-identical copy of COCOGBv1.zip.",
+        "source_identity_status": "author_release_identified_variant_not_established_by_paper"
+      },
+      {
+        "kind": "derived_facet",
+        "field": "tasks",
+        "checked_on": "2026-10-06",
+        "note": "Task from the author repository description (benchmarking gender bias in captioning), not from the citing paper."
+      }
+    ]
+  },
+  "recipe_sha256": "cc3486e3ee11393248ae3511179224185863104786ca36aea38c383af006c76e",
+  "kind": "http_archive",
+  "allowed_hosts": [
+    "raw.githubusercontent.com"
+  ],
+  "convert": {
+    "name": "coco_gb",
+    "count": 244242,
+    "rows_sha256": "fca2d6183db38e89fe137d321e86dbbf0fb00876591f15115335cfadbec61305",
+    "params": {}
+  },
+  "remote_archives": {
+    "train2014": {
+      "url": "https://s3.amazonaws.com/images.cocodataset.org/zips/train2014.zip",
+      "bytes": 13510573713,
+      "etag": "\"289af3433b84b5b8622626b10146c1bc-1611\"",
+      "allowed_hosts": [
+        "s3.amazonaws.com"
+      ]
+    },
+    "val2014": {
+      "url": "https://s3.amazonaws.com/images.cocodataset.org/zips/val2014.zip",
+      "bytes": 6645013297,
+      "etag": "\"3925cc4d50eb68d47bf2d6324a012d20-793\"",
+      "allowed_hosts": [
+        "s3.amazonaws.com"
+      ]
+    }
+  },
+  "remote_metadata_bytes": 40000000,
+  "source_file_bytes": 60451287,
+  "media_access": "Original images fetched on inspection through bounded HTTPS ranges; strong ETags are consistency fingerprints, not archive hashes.",
+  "required_free_bytes": 3080000000,
+  "reuse_registered_sources": [
+    "COCOGBv1.zip",
+    "COCOv2.zip"
+  ],
+  "available_bytes": 177805144064,
+  "shared_storage": {
+    "ceiling_bytes": 150000000000,
+    "allocated_workspace_bytes": 122570485760,
+    "reserved_by_running_preparations": 0,
+    "available_bytes": 27429514240,
+    "required_bytes": 3080000000,
+    "admitted": true,
+    "scope": "Workspace regular files plus explicitly configured external model/source roots.",
+    "measurement_errors": []
+  },
+  "resource_limits": {
+    "max_rss_bytes": 8000000000,
+    "max_cpu_seconds": 1800,
+    "max_wall_seconds": 3600
+  },
+  "memory_enforcement": "kernel cgroup memory cap including descendants; swap disabled",
+  "id": "f30e7701915f03c0b5190d5ad04e23ae4d933bc080d1568db76450b7a29f29fe"
+}

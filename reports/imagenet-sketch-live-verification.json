@@ -1,0 +1,1056 @@
+{
+  "checked_at": "2026-09-23T10:43:42.006845+00:00",
+  "status": "passed",
+  "dataset_id": "imagenet-sketch",
+  "snapshot_id": "imagenet-sketch-c9569b42c8fe9b7288958f5b",
+  "population_count": 50889,
+  "all_native_labels_and_member_joins_verified": true,
+  "preview_records_verified": 100,
+  "late_records_verified": 3,
+  "native_image_checks": 103,
+  "sampling": {
+    "method": "sha256_bottom_k_primary_asset",
+    "seed": 0,
+    "unit": "example",
+    "grouping": "primary asset ID; example ID for records without assets",
+    "population": "complete pinned indexed population",
+    "population_count": 50889,
+    "requested_count": 100,
+    "returned_count": 100,
+    "source_revision": "imagenet-sketch-0d8b8b5380efe50baae075842505918ad43c88fe",
+    "media_representation": "original",
+    "selection_note": "One hash-ranked example per sampled primary asset. All linked assets remain. Not an example-prevalence estimate."
+  },
+  "checks": [
+    {
+      "record_id": "imagenet-sketch:example:54646a05e32b2e68ec0f7c5f",
+      "condition": "original",
+      "sha256": "8db9fb3190b23664294fa1a4f47c4bbd3ed5d5cc1eb97c6bd989a0ac24148cef",
+      "bytes": 186824,
+      "dimensions": [
+        1024,
+        576
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:2ad99962789a4a33363bfc27",
+      "condition": "original",
+      "sha256": "6dc78f6176dc2329b64016cd68f5d0092e8499b0e21e72fa9c7cb332f7f3082c",
+      "bytes": 122183,
+      "dimensions": [
+        1115,
+        1300
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:5108c158a47e531b4b146221",
+      "condition": "original",
+      "sha256": "52bd8e54216f03c1a603fbfcab607691a578e5b90a03f69484c29bf4c67bf037",
+      "bytes": 116597,
+      "dimensions": [
+        1300,
+        999
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:311bdbb19b4ba1b78833d21a",
+      "condition": "original",
+      "sha256": "00105a02c89f12fd88b4235851915702aee73cd1153aac7e912cc22e9f75cd35",
+      "bytes": 24553,
+      "dimensions": [
+        236,
+        293
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:2c63ae0a793fd5ed19ee7edd",
+      "condition": "original",
+      "sha256": "d8436e3c7ef403eb48fecd27ab86162f85ab655d7037a65814907e171608505d",
+      "bytes": 76493,
+      "dimensions": [
+        708,
+        283
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:e0705c1062a7600bb43ee4f5",
+      "condition": "original",
+      "sha256": "23b425e95b8fa0664eda192a7a9b80f8da7f55ecd0e9b81982ef6487004208b8",
+      "bytes": 19460,
+      "dimensions": [
+        220,
+        330
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:ba4fb9286581b462c3888483",
+      "condition": "original",
+      "sha256": "d7ef32e3f2701ff0cf67d57daa7205c67144813f01e3777c514f8941477c154f",
+      "bytes": 57483,
+      "dimensions": [
+        450,
+        470
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:539688e413a135ed4067a47c",
+      "condition": "original",
+      "sha256": "1642e95166d3a52700b220a42ef36cf7de97341b1538bd2267e2bf0bf4a09a37",
+      "bytes": 121417,
+      "dimensions": [
+        731,
+        553
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:b69f46daa2574bbc9bee0142",
+      "condition": "original",
+      "sha256": "b283a28efad51fe46f1beafc35bf34222f41d6866ae8a6c4c2d188aa11ad2efe",
+      "bytes": 66122,
+      "dimensions": [
+        800,
+        566
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:dff8d6a4810a85073c9fd3c1",
+      "condition": "original",
+      "sha256": "321808572fa129c475e35dca911a19fe0675808ce6d83e92d20fdad15a45073a",
+      "bytes": 344843,
+      "dimensions": [
+        1023,
+        662
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:c9f23f67c48d77a9f395e3fa",
+      "condition": "original",
+      "sha256": "5ebc05c6229609d9caa4d8facce82b84f937b1b0dcde5564c386c357ce6d1131",
+      "bytes": 132631,
+      "dimensions": [
+        800,
+        600
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:5a05babf48de5fa7b4ef5f20",
+      "condition": "original",
+      "sha256": "cd1f3c7af0e43d70abf6f0505fbdcbff33416e57e0c0b1e79389745387dd39b2",
+      "bytes": 101369,
+      "dimensions": [
+        736,
+        981
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:659a07a6e7e1f7d383498aca",
+      "condition": "original",
+      "sha256": "0564a20987ed3009bb3394c528ae2be665297fc34482d6ff5c673c90d47b9e74",
+      "bytes": 41410,
+      "dimensions": [
+        402,
+        400
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:a23a23a3fe1dc4f311a77495",
+      "condition": "original",
+      "sha256": "292248fd03fefae281f56f9ed6969ebc1d82e83fe103f515798b5562fa164f9d",
+      "bytes": 65745,
+      "dimensions": [
+        1000,
+        1080
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:25e584c4910e34d7e829d4fa",
+      "condition": "original",
+      "sha256": "621a555102ee96f829c74f814b200f948141e9bc0984e79fca312267531fa40c",
+      "bytes": 32905,
+      "dimensions": [
+        450,
+        470
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:2584409eace0f9adfb956d64",
+      "condition": "original",
+      "sha256": "e4e7305941196c7d374891cad300c24dbb979f1e2c9eedd18fe078a77a4ef985",
+      "bytes": 17764,
+      "dimensions": [
+        197,
+        194
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:fcc0e0b52fdf190580fbe30d",
+      "condition": "original",
+      "sha256": "d910f58286b8305fb2d936975f6fe98c493aaa2c64cf0d76beb1987013e870e4",
+      "bytes": 138148,
+      "dimensions": [
+        1300,
+        1109
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:b0cf6571df9dea34e39d4d16",
+      "condition": "original",
+      "sha256": "255b72898520eae2bab675e15c2d5899daa1c84816cc7ba87f28313c4126d110",
+      "bytes": 25988,
+      "dimensions": [
+        300,
+        250
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:ca79d04a923a4f90f361b28b",
+      "condition": "original",
+      "sha256": "cdb3caaf2a9bf652f61f899ebe49793d8b17d96748269209b4557833fad75d60",
+      "bytes": 23381,
+      "dimensions": [
+        236,
+        324
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:a2dc6e3a4449548d0ac4cb9c",
+      "condition": "original",
+      "sha256": "ff2a29e485c8bc81de4b19026fa63513960a0947ab90aeb80956aec8255db0f7",
+      "bytes": 378736,
+      "dimensions": [
+        1600,
+        887
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:34bf12e16b639447a519e9fb",
+      "condition": "original",
+      "sha256": "dee9e29557ed67b6d0e778bbfe3f72c9a9d80cd495228aec0d0569312a2893b3",
+      "bytes": 7812,
+      "dimensions": [
+        300,
+        300
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:867254f67940b9aabb4f3966",
+      "condition": "original",
+      "sha256": "c203342a8f0290248b518ce4375a8bbf52ce621bcbaf8eb1ab1a84683ba447eb",
+      "bytes": 257099,
+      "dimensions": [
+        1050,
+        1300
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:1013990692e0a39642961ca4",
+      "condition": "original",
+      "sha256": "d86eae488e84f3397840110291db39de6d13ba5c99a38c73d9e3fc36e4829290",
+      "bytes": 54300,
+      "dimensions": [
+        450,
+        276
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:40d88410a2a8cb4901f4ab1d",
+      "condition": "original",
+      "sha256": "2870334eb430cfdeb5552aecf52fee4ea0c8f3cbad967bfed9cc88a9fde6dced",
+      "bytes": 93224,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:8a09b7cb89cc56b101fa6f7e",
+      "condition": "original",
+      "sha256": "c68b79e96eea9cb620c817fd229fdeca2998f0f17fe308b61c92cd7ab56e4af2",
+      "bytes": 25824,
+      "dimensions": [
+        236,
+        324
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:e3f80755c19e06c09fc10596",
+      "condition": "original",
+      "sha256": "70d01c8d2c82b037d5e40539f042244e38194aaaa37efc4eb0fda9bf96a0618d",
+      "bytes": 30387,
+      "dimensions": [
+        259,
+        300
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:8c09cae50e5ea1b30c9d015e",
+      "condition": "original",
+      "sha256": "0671732df285c78918dfb68e762b26895d6cabb17ee5691ac79bcaf41fe863d5",
+      "bytes": 47613,
+      "dimensions": [
+        597,
+        844
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:c4ae31b5f9fbd6c65bb40d17",
+      "condition": "original",
+      "sha256": "31821044ae49ddc17eee312032de0c5143b108b283461c4c5b9ed7dd20faf711",
+      "bytes": 21142,
+      "dimensions": [
+        300,
+        300
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:8f3fd9d913956a9363315dd6",
+      "condition": "original",
+      "sha256": "c3b4c0420edccd5fd0b6f5c2d45e888fd04949766e185b027c86231e74a9c418",
+      "bytes": 442742,
+      "dimensions": [
+        2400,
+        1600
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:5e5818265b9b462fe788e912",
+      "condition": "original",
+      "sha256": "a681d3c935078ff4e35de6c11b1b54b1cc9e35318e8db1aaf3fe8ba20ab18513",
+      "bytes": 124289,
+      "dimensions": [
+        632,
+        862
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:1d569163a5e820bf5694ee9b",
+      "condition": "original",
+      "sha256": "ef9eb0fa949a5e0ccc65e6263d87c84082780abba0fd365c96c837232c04b34d",
+      "bytes": 39551,
+      "dimensions": [
+        450,
+        470
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:5f9cd5f7333f0814f07ac2a7",
+      "condition": "original",
+      "sha256": "24e741ea96d0d6c1fbe3aefe28d6e8c05ca8c7b0aeece8e4f1b0abdcbf7dbf89",
+      "bytes": 20854,
+      "dimensions": [
+        480,
+        438
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:3a4553d8479ce272c6fd5b02",
+      "condition": "original",
+      "sha256": "9ccf130f141f0e579485a3809529bd4b731bd5253aa0a1b114bef29ff299444d",
+      "bytes": 163534,
+      "dimensions": [
+        721,
+        900
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:f4282d3b912022d79dd506ff",
+      "condition": "original",
+      "sha256": "e361f7adb9966c9f5591ceeac2824a26deecc1c8335d6b85d65c7dd672db7e23",
+      "bytes": 153571,
+      "dimensions": [
+        900,
+        1100
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:81f39464dcdfd7b081d373c9",
+      "condition": "original",
+      "sha256": "5cbd64f6338ddf09078eb0d73a75727945c5c6faffbce692733f9fe616ff8339",
+      "bytes": 88694,
+      "dimensions": [
+        570,
+        790
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:8a51ad461b492a6c13a883cc",
+      "condition": "original",
+      "sha256": "627f2b2c2cb141ebccbe5d7e2bb46544302728cbb2910315491fe714649ccecc",
+      "bytes": 32259,
+      "dimensions": [
+        320,
+        224
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:9f16c7458580cfcc56669847",
+      "condition": "original",
+      "sha256": "a9230eea71c5945c8c894d2eabfafd3d3d9c4c30e85b7220bdf1db9244ebbf19",
+      "bytes": 31387,
+      "dimensions": [
+        450,
+        450
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:bece3aa3c60c4ac4ef59eea1",
+      "condition": "original",
+      "sha256": "81094b7169f00065f51ac1771102552f36676493a9267d841978f02c75044f81",
+      "bytes": 259058,
+      "dimensions": [
+        1300,
+        866
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:aaee13ca66d239a27270da41",
+      "condition": "original",
+      "sha256": "c6904d46dc35cc105242e284420cecb12352b3d881c4f4429cc88dcfafe045cf",
+      "bytes": 216899,
+      "dimensions": [
+        1024,
+        668
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:192ba8038f036e7227cabdf1",
+      "condition": "original",
+      "sha256": "2a6c890712613bde2d95e6269aa15acc34164fd003aaef959ae17e19004ee7c9",
+      "bytes": 50396,
+      "dimensions": [
+        693,
+        555
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:ca3738d9f81f35385c10395c",
+      "condition": "original",
+      "sha256": "30d097ada1ee9566c7c5fe8a19068790ef84c825550d2096b0bb5e287b24c8a4",
+      "bytes": 15587,
+      "dimensions": [
+        236,
+        239
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:dd9450e5135778f9123e3bd2",
+      "condition": "original",
+      "sha256": "12e7978aea5cc35cf1ebb648f960775623d9c19577b70d57da69f7d7af427269",
+      "bytes": 213224,
+      "dimensions": [
+        1024,
+        1024
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:91e4d63344d5c190a576f3a0",
+      "condition": "original",
+      "sha256": "46271fd854994c27c57861537ac48841db9543988521db050550f666d3d5c11a",
+      "bytes": 215626,
+      "dimensions": [
+        997,
+        1300
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:10eb16de2f589cea57c154f6",
+      "condition": "original",
+      "sha256": "87ea12c2a57e874670e7e3a30e7b46de9ba1ef65f72692edd5fa2af0c094fe4d",
+      "bytes": 588081,
+      "dimensions": [
+        2267,
+        1400
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:935daa91b29a3431e7cdc3de",
+      "condition": "original",
+      "sha256": "8b53931d05e97144812d76f5ea687ee749f6ff984c8b9dd5167b75ba4ec4af6b",
+      "bytes": 91767,
+      "dimensions": [
+        612,
+        409
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:3ee8e072fd2b59e208a29cda",
+      "condition": "original",
+      "sha256": "a8d9b94e61328c38435c634b10ec3550a9c15c5b0e40a4c971b53cc83bdb2fa9",
+      "bytes": 16805,
+      "dimensions": [
+        236,
+        331
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:b07c7ad29d075b27927b3cff",
+      "condition": "original",
+      "sha256": "30e7fa0cdd70469e8615af2ba5ea85c38dc804f96876e29892f185315144b1db",
+      "bytes": 2634606,
+      "dimensions": [
+        4149,
+        2460
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:fdab9cdced93b4b871bff97a",
+      "condition": "original",
+      "sha256": "abe33da27eb9ed707670e54560a9a745281305d08d3f4019ffa3f7977c292c31",
+      "bytes": 80433,
+      "dimensions": [
+        600,
+        478
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:5e218497a783ca3de6035b09",
+      "condition": "original",
+      "sha256": "3323ff5f6e377f057ab290b5ab63d7402ee2f6adc4b9984ac2336206c4fe5441",
+      "bytes": 397928,
+      "dimensions": [
+        1600,
+        546
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:9cba8d59081f70e51c5e3731",
+      "condition": "original",
+      "sha256": "16018a4b8965034de68b25af0c97e59cedcc75e312d72462ac7c3bd6a33ccb45",
+      "bytes": 43824,
+      "dimensions": [
+        530,
+        389
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:78d55c6a8ebf06ded0e3c2ab",
+      "condition": "original",
+      "sha256": "39f9f3be9767959670466bab952c50947ee5a05e968ebff6e65e0b7ead2c7fc9",
+      "bytes": 97193,
+      "dimensions": [
+        400,
+        513
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:bd7b82251c6b6416551b896d",
+      "condition": "original",
+      "sha256": "cca9fb5a18c299de811cdd68389898f73ee967b51c17f7a5eb1d6ef3d22938ff",
+      "bytes": 277281,
+      "dimensions": [
+        1300,
+        1098
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:79f620fe3e78de69f244e5c9",
+      "condition": "original",
+      "sha256": "db3f0dbf70da397cb6c2c95c578eb1eb85ba8cddeead187d1c88c215f578e600",
+      "bytes": 453561,
+      "dimensions": [
+        1024,
+        798
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:070a989a0b20662e5ad96ccd",
+      "condition": "original",
+      "sha256": "0fed10d0f25e5c20faf442a651a578c2e9b5709e55fafed347c97e0bbad9b010",
+      "bytes": 70975,
+      "dimensions": [
+        1024,
+        503
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:484a5b6b43c5ccd67cb2c0e0",
+      "condition": "original",
+      "sha256": "e07f4922e6be078b65837dac5817dd87b775c45c8baba236bb9ad82a51ae7723",
+      "bytes": 76410,
+      "dimensions": [
+        1140,
+        641
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:3fd28268dc880efd337ffec7",
+      "condition": "original",
+      "sha256": "38415ec853d4aa87ac824d16ea120795e7068b0e3217db9c4e4f01397a826765",
+      "bytes": 33657,
+      "dimensions": [
+        450,
+        470
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:f54ab926563ab50b0b10bf70",
+      "condition": "original",
+      "sha256": "5a722cdedbb23cc9e88e8f10b799f74813fcf198ac8e018c3894772bcebe21fc",
+      "bytes": 267083,
+      "dimensions": [
+        1300,
+        948
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:d23e1c3f0c42fe0897c65bed",
+      "condition": "original",
+      "sha256": "ed3c86271374da43148af6398058bde2d18af0f9c34c22666bfc8a0298b55194",
+      "bytes": 14829,
+      "dimensions": [
+        238,
+        250
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:2d824cf9fb87038238c01b90",
+      "condition": "original",
+      "sha256": "d457af6bfc08e1ab89336ac3710252898e3e1b1ff360a3a055d9f548db91df4a",
+      "bytes": 23071,
+      "dimensions": [
+        362,
+        208
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:20cc03925abb2ff18a75a362",
+      "condition": "original",
+      "sha256": "3f5809065e80cc911d1576f8682ff4a0603bbe306b553cc0b890b65b1d8753ea",
+      "bytes": 34012,
+      "dimensions": [
+        835,
+        522
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:1a21679984bef845486cd295",
+      "condition": "original",
+      "sha256": "65930b494a8f4f82efa0f8693ba27235c9ddbd228ce10e613d0dd492c8a12727",
+      "bytes": 105935,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:6a35c45b8f3dade6dfe8b97b",
+      "condition": "original",
+      "sha256": "ff85461b160370986a68c0090f35e5c1ed552d4bd1fd6c2ed03226e9c0a6ce5a",
+      "bytes": 245485,
+      "dimensions": [
+        1000,
+        658
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:ec975fce8367382e91ecd65a",
+      "condition": "original",
+      "sha256": "d12c0d0b7b3ac2bb4a50f6f459ed740cddd6ee3235f62c859c5bf94a99a80cea",
+      "bytes": 426035,
+      "dimensions": [
+        1300,
+        1300
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:8073da0e78be66efc1558935",
+      "condition": "original",
+      "sha256": "1ba9daef1e048813645e3127839c3c1104151f243a4cfb5ffcfd565860f3276c",
+      "bytes": 174318,
+      "dimensions": [
+        1000,
+        1000
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:fe6a3decb44f1d55f049da2f",
+      "condition": "original",
+      "sha256": "b0e6261beb68ba87d6fe79bc89ccafb887db8d6c6bfac9fb8c03a4656c7d7214",
+      "bytes": 157788,
+      "dimensions": [
+        1300,
+        1300
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:b1265e75467c044d2475b961",
+      "condition": "original",
+      "sha256": "af6d1d886b2aa23a1d0c843552beab097d6fecea6b5ee6acf5c7c3aad09e8ab3",
+      "bytes": 89779,
+      "dimensions": [
+        296,
+        416
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:523969a554f5bbad3c22e254",
+      "condition": "original",
+      "sha256": "47ad1393000e2c8132cc9080cfebd035d81cf40870f4ee2c27c085c32570e7dc",
+      "bytes": 20176,
+      "dimensions": [
+        236,
+        354
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:556d8d92040c6994e409516a",
+      "condition": "original",
+      "sha256": "7ed652694ffb16dd92246a7c391d42239933bdc8d01fc81282cd9c8799a5cfff",
+      "bytes": 110624,
+      "dimensions": [
+        750,
+        750
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:0acb93be4eb54adae2293ad6",
+      "condition": "original",
+      "sha256": "1305baefb2cd7fad5b18a90813dd98c783f0d0d51cd491f9db5b9133a135f69f",
+      "bytes": 118514,
+      "dimensions": [
+        600,
+        652
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:eab268d1952848c52591fab1",
+      "condition": "original",
+      "sha256": "f0c10deb371c833040eb1c30b1b9112e35c16eb40a48a987ca7d2482eee73094",
+      "bytes": 113538,
+      "dimensions": [
+        1280,
+        960
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:d5ea28dd897b726fea40c715",
+      "condition": "original",
+      "sha256": "3a9931e507b3a1dbcb2e08f5881001d8dcd5387740d2c991e3adca18fd81b9a9",
+      "bytes": 87428,
+      "dimensions": [
+        500,
+        374
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:cc581448013b141699fd55d2",
+      "condition": "original",
+      "sha256": "d9966b5e95c0f88e7cdfdffac5f81904bfefe7e5e239a03ff651270093250909",
+      "bytes": 155453,
+      "dimensions": [
+        768,
+        1024
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:43360dd8eead64003e2412e2",
+      "condition": "original",
+      "sha256": "0550544fc28db38dfa9984e9fe93a615f76d541afc356ee9ea858c4ea2d20f9c",
+      "bytes": 229163,
+      "dimensions": [
+        2048,
+        1536
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:43bb31e9d26f2df29b5189f5",
+      "condition": "original",
+      "sha256": "b8b980c8c9f8b488a6ada4ed03b6b29e9ca75df25d200316ec93feb1874d13f5",
+      "bytes": 152903,
+      "dimensions": [
+        570,
+        806
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:5c891eda816ece08ae9033a3",
+      "condition": "original",
+      "sha256": "271208b32789bd567c3e9524ff24a6b3dcc51f6a4b0c7ba810cd1f9b5c91493a",
+      "bytes": 374514,
+      "dimensions": [
+        1024,
+        727
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:992e9c755f9ff742cfddaa90",
+      "condition": "original",
+      "sha256": "ac3668592fbfbdd2068a0a2caadfa7d2d506c115b02d4142156f0ace1b5025b1",
+      "bytes": 127200,
+      "dimensions": [
+        960,
+        720
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:c6a831de1939f74598cfd9c3",
+      "condition": "original",
+      "sha256": "472af1a0a8d7f257bb6702d7b4e8f457a75392748a5da95f729180e3a5a1eaf2",
+      "bytes": 430966,
+      "dimensions": [
+        1600,
+        1159
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:1fd952a74febba4a210705f1",
+      "condition": "original",
+      "sha256": "0e31e316bd7a4cfa9583d4ee9684e3f62343d09c2a1dc94c0b23fe660711cea3",
+      "bytes": 70101,
+      "dimensions": [
+        497,
+        320
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:ecffa97ca6319dd073dbe76e",
+      "condition": "original",
+      "sha256": "2c4123d455bac0ac89cbf370bd34f00a10261982af665d55d3a6e22bd0dbcaf3",
+      "bytes": 115138,
+      "dimensions": [
+        974,
+        1300
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:3a52a788b13a939b19ba1889",
+      "condition": "original",
+      "sha256": "b046f28289e928be6fefca819b0f719017146f2749165349b3a309f29c2c65f2",
+      "bytes": 277085,
+      "dimensions": [
+        987,
+        1280
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:b2e794b4d1d4999e17c4dbab",
+      "condition": "original",
+      "sha256": "746618a1401e6b63b0f4a6cd775845c43630d71711e07df5a574b69dde7f0e5b",
+      "bytes": 34164,
+      "dimensions": [
+        375,
+        450
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:75b6b9be81e94a7b77695ec2",
+      "condition": "original",
+      "sha256": "98e55d892df82d772e2601009e6c5252fd29826b7c9ef613222ed40782feaf4d",
+      "bytes": 706444,
+      "dimensions": [
+        1900,
+        1425
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:8d224e5ddee770fb5548a143",
+      "condition": "original",
+      "sha256": "e6571aef1e3d69e8dcc1f454d6ada112d26f9ca97f8c0b78af6f95219153f4e8",
+      "bytes": 41155,
+      "dimensions": [
+        500,
+        500
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:e393460636157cdcc3f9e4b2",
+      "condition": "original",
+      "sha256": "2a08413285fed6cb488a02d0ef85519e109a7c78b3973ef0f77db6756b7714b2",
+      "bytes": 93694,
+      "dimensions": [
+        766,
+        861
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:436b4530e154d649392e9ad2",
+      "condition": "original",
+      "sha256": "a9a048a489656279f9ca7900fbe5f0e5911971a59252cd9779956fe017d6d948",
+      "bytes": 16227,
+      "dimensions": [
+        416,
+        416
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:b92ce71f95614eb00bdc55a0",
+      "condition": "original",
+      "sha256": "c4d56c7371c836498530599dfbab85dcb03688f7a105cf29f630034814321453",
+      "bytes": 44572,
+      "dimensions": [
+        318,
+        470
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:e648918494a88901cac4bfc2",
+      "condition": "original",
+      "sha256": "ddea8e2a81ceceb96db8bbee932ed6c00ae3c4fa6c18aee89c9a8c0df50b7487",
+      "bytes": 70073,
+      "dimensions": [
+        566,
+        541
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:610e014ca623d679613faf0a",
+      "condition": "original",
+      "sha256": "497f78c099a85c9bac7b123e19a625db011cd4257c18520fed3aec506d712414",
+      "bytes": 112895,
+      "dimensions": [
+        761,
+        1050
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:cfad913c5d965cb5209ff3ae",
+      "condition": "original",
+      "sha256": "7a173b27125968f16cb193815845e81a69e869522148657ae59a5e2b9f2657e5",
+      "bytes": 36725,
+      "dimensions": [
+        450,
+        470
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:e79f2752c86c4a887a04df0f",
+      "condition": "original",
+      "sha256": "c89bd68ca9fccbeebb6485bed53d703046f7fc0a808bc1d3a733f0cac7dd4ad0",
+      "bytes": 243963,
+      "dimensions": [
+        894,
+        894
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:042ffc7bf139885d3fcbeed2",
+      "condition": "original",
+      "sha256": "e0f750b34bdd2879f480505e63ca5365af346840c6ee74344da15a745985a12d",
+      "bytes": 216375,
+      "dimensions": [
+        728,
+        546
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:bdf10a9e7e0dd0bb5fb68767",
+      "condition": "original",
+      "sha256": "5db9b16f5bfb3fa3d06fccf682771857765e480227d2b8f391d04a74d888a102",
+      "bytes": 30131,
+      "dimensions": [
+        318,
+        470
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:24a76293e9135a2e06ae9591",
+      "condition": "original",
+      "sha256": "6200518cf5b43bfdbe35f8ed930a5f74ece03ce2c98e4b97023068d04537a5fa",
+      "bytes": 29278,
+      "dimensions": [
+        500,
+        355
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:bb669b951d62fe303083d99a",
+      "condition": "original",
+      "sha256": "945e8b78d7be91e1da7fece86eae5ce88b48978ddc7285ae5d7eb2d0e25e8af8",
+      "bytes": 341519,
+      "dimensions": [
+        1024,
+        750
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:381197a49dcfe51e29207cf2",
+      "condition": "original",
+      "sha256": "c9fc323c3bd551eb0e3c7dee42dc517c12dfd835738f2348509e215819dec092",
+      "bytes": 72783,
+      "dimensions": [
+        1000,
+        1080
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:e69da81f5f2b0bcf1dfdf072",
+      "condition": "original",
+      "sha256": "2859517a855d579bd012573ff600654e29b0caa436d9b5a3dece3b735a6d54b1",
+      "bytes": 180317,
+      "dimensions": [
+        675,
+        900
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:ed26e047d1220cf6fa235291",
+      "condition": "original",
+      "sha256": "bba2b9a3318f3d39d6dee28c60f4df7c39f76926101d57a2bed8fd38c957fb9c",
+      "bytes": 24674,
+      "dimensions": [
+        450,
+        470
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:1ef6461448ac246c38b77787",
+      "condition": "original",
+      "sha256": "292d8e4a3e43c110fdd2d96afc0d46d826faa6c9c148d0d6e47d87a6eb45954d",
+      "bytes": 80859,
+      "dimensions": [
+        751,
+        601
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:b9d4a316c39d376aafa1b4cf",
+      "condition": "original",
+      "sha256": "a93a1b6b56c49efe14cd6ea49288e5ac2017d23dd127e5a29adff8add3c9e0a8",
+      "bytes": 418407,
+      "dimensions": [
+        1300,
+        1300
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:b7bca43c9a7159afde56cc56",
+      "condition": "original",
+      "sha256": "713064390bf26e5b3436fe4e257fff9e2649ef07f47fdb074ea3b9f309e48a39",
+      "bytes": 8195,
+      "dimensions": [
+        278,
+        243
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:ffff5afbf991c94b44ccd175",
+      "condition": "original",
+      "sha256": "2ad69e9a5771982b7a02f3adb98bd471243cb6bb6c24c9b7bed2a2ad14f51b96",
+      "bytes": 90089,
+      "dimensions": [
+        455,
+        644
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:fffd82fb87cbcd90b8ec1599",
+      "condition": "original",
+      "sha256": "4949c2ed7cfe984bd41cf14ff0205dff532f093a6b67dee268232a40a7bcd682",
+      "bytes": 33413,
+      "dimensions": [
+        336,
+        406
+      ]
+    },
+    {
+      "record_id": "imagenet-sketch:example:fffd440d6538f51c274226db",
+      "condition": "original",
+      "sha256": "41aba014c074e599265e61f68e1f5d5c860e6de12653fe1a1067a6a9f363d65a",
+      "bytes": 33662,
+      "dimensions": [
+        450,
+        403
+      ]
+    }
+  ]
+}

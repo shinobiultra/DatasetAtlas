@@ -3,6 +3,10 @@ id: visual6502-transistor-netlist
 name: Visual6502 transistor netlist
 aliases: []
 description: Visual6502 transistor netlist used for 6507 simulation.
+tasks:
+- transistor-level circuit simulation
+modalities:
+- structured
 paper_ids:
 - paper-ad50206beabc5a94
 release: unresolved
@@ -11,7 +15,7 @@ adapter_config: {}
 coverage:
   identity: candidate
   source: verified
-  access: unverified
+  access: public
   adapter: not_started
   preview: none
   complete_data: unimplemented

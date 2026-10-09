@@ -1,0 +1,47 @@
+{
+  "dataset_id": "phase",
+  "source_sha256": "c1665120222263d2aee7e7a72059956d5dd945cdad33ef8eabe05f5587dc8fa0",
+  "linked_dataset_ids": [],
+  "status": "executed",
+  "retained_snapshots": 1,
+  "media_references_checked": 18889,
+  "unique_native_media_in_snapshots": 18889,
+  "preview_asset_memberships": 100,
+  "modalities": [
+    "image"
+  ],
+  "preview_bytes_upper_bound": 11201476,
+  "cold_original_probes": [
+    {
+      "sha256": "e297dbc2de0147bcec6aedf97cd5c5556fffb1f8412236a97411022a0ca24f0c",
+      "bytes": 28758,
+      "transferred_bytes": 1048576,
+      "source_sha256": "c1665120222263d2aee7e7a72059956d5dd945cdad33ef8eabe05f5587dc8fa0",
+      "fingerprint_type": "sha256-blocks"
+    },
+    {
+      "sha256": "3ad8c741203c34aa68dd256373d615773391b3c34ed6a960b4f72c589aa4c6d3",
+      "bytes": 35422,
+      "transferred_bytes": 1048576,
+      "source_sha256": "c1665120222263d2aee7e7a72059956d5dd945cdad33ef8eabe05f5587dc8fa0",
+      "fingerprint_type": "sha256-blocks"
+    },
+    {
+      "sha256": "c4913eb01f2c73ca8f1775cd6631e7caaf8a9c73b790ea103953e664921581a6",
+      "bytes": 77988,
+      "transferred_bytes": 1048576,
+      "source_sha256": "c1665120222263d2aee7e7a72059956d5dd945cdad33ef8eabe05f5587dc8fa0",
+      "fingerprint_type": "sha256-blocks"
+    }
+  ],
+  "paths": [
+    "work/source-objects/c1665120222263d2aee7e7a72059956d5dd945cdad33ef8eabe05f5587dc8fa0",
+    "work/sources/next-native/phase-images.zip",
+    "work/prepared/phase/176f56b79c6a0003d36fe74aa70156d0c1f8f7bc1fe2621362625b60d36cee33/sources/c1665120222263d2aee7e7a72059956d5dd945cdad33ef8eabe05f5587dc8fa0.zip"
+  ],
+  "extracted_files": 0,
+  "source_bytes": 2580061932,
+  "extracted_bytes": 0,
+  "retention": "Original-quality previews and complete indices; other originals and optimized browsing copies on demand.",
+  "freed_unique_file_bytes": 2580061932
+}

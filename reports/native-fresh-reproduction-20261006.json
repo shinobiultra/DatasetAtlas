@@ -1,0 +1,53 @@
+{
+  "started_at_utc": "2026-10-06T09:30:36.204721+00:00",
+  "scope": "Fresh source acquisition with shipped registry and schemas only; no maintainer source bodies or local-config copied. Current shipping Python code, separately packaged wheel validation follows.",
+  "datasets": [
+    {
+      "dataset_id": "cocogender",
+      "recipe_sha256": "cc3486e3ee11393248ae3511179224185863104786ca36aea38c383af006c76e",
+      "plan_id": "0a394be970ea8598632431682ebd68293977018272fb1f78c20ca8ef421f685c",
+      "ready": false,
+      "source_budget_bytes": 100000000,
+      "output_budget_bytes": 2000000000,
+      "workspace": "work/native-fresh-reproduction-20261006/cocogender",
+      "status": "preflight_refused",
+      "requirements": [
+        "Source download exceeds the selected download budget."
+      ]
+    },
+    {
+      "dataset_id": "tid2013",
+      "recipe_sha256": "9c31ff98cf24456a9ba20c53ef4c80ecbe35c2cd53a04724c99ceb04c061bead",
+      "plan_id": "8091c9c2ea822c3409967a5cedca74fe22fffb7d73ff6e2ff7f04bd185f6706a",
+      "ready": true,
+      "source_budget_bytes": 1000000000,
+      "output_budget_bytes": 3000000000,
+      "workspace": "work/native-fresh-reproduction-20261006/tid2013",
+      "status": "completed",
+      "records": 3000,
+      "preview_records": 100,
+      "snapshot_id": "tid2013-928c3fddde1e3a025ae63534",
+      "receipt_sha256": "f4904653539766f0636bb976d3f9ff79492ebd2c9295815332da698907b4d131",
+      "downloaded_bytes": 957680241,
+      "receipt_path": "work/native-fresh-reproduction-20261006/tid2013/work/prepared/tid2013/8091c9c2ea822c3409967a5cedca74fe22fffb7d73ff6e2ff7f04bd185f6706a/receipt.json"
+    },
+    {
+      "dataset_id": "places",
+      "recipe_sha256": "2fde84a7e018d129f4bfe92cb86da2592eaa81e0071f302d3be64ec7b95a8dec",
+      "plan_id": "fd8883a4d8df35f99fa43d0c1b4765d7efe37732e093fd184f2d7fb3bf492f3e",
+      "ready": true,
+      "source_budget_bytes": 600000000,
+      "output_budget_bytes": 1000000000,
+      "workspace": "work/native-fresh-reproduction-20261006/places",
+      "status": "completed",
+      "records": 36500,
+      "preview_records": 100,
+      "snapshot_id": "places-0516b70aa6c24604d8f265db",
+      "receipt_sha256": "e16e7335def9b77b0cf5352155c322e57271d4425f467fd7fb3adc3c20e9c644",
+      "downloaded_bytes": 592656896,
+      "receipt_path": "work/native-fresh-reproduction-20261006/places/work/prepared/places/fd8883a4d8df35f99fa43d0c1b4765d7efe37732e093fd184f2d7fb3bf492f3e/receipt.json"
+    }
+  ],
+  "external_model_requests": 0,
+  "completed_at_utc": "2026-10-06T09:34:36.107021+00:00"
+}

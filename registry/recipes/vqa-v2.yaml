@@ -1,0 +1,36 @@
+# Questions and annotations are pinned small archives (SHA-256 equal to the catalogue entry's). The 6.6 GB COCO val2014 image
+# archive is never downloaded: images are fetched on inspection by ranges bound to its ETag, which is a consistency fingerprint
+# rather than a content hash. The maintainer's whole-file SHA-256 (fe9be816...) was recorded from a full download and is kept in the
+# catalogue entry. Record and snapshot identity are unchanged.
+release: vqa-v2-2017-val2014
+snapshot_id: vqa-v2-2017-val2014-sha256-015383bc60b789044210cc9351f7817c9d2be61235dba2b27600f89ce1982da2
+adapter: vqa_v2
+expected_count: 214354
+scope: Official VQA v2.0 validation questions and ten-answer annotations (214,354 questions) joined to COCO 2014 val images. Images
+  are read on request from the official 6.6 GB COCO val2014 archive by HTTPS ranges bound to its strong ETag; the archive is not downloaded.
+source_url: https://visualqa.org/download.html
+adapter_config:
+  remote_images:
+    url: https://s3.amazonaws.com/images.cocodataset.org/zips/val2014.zip
+    bytes: 6645013297
+    etag: '"3925cc4d50eb68d47bf2d6324a012d20-793"'
+    allowed_hosts:
+    - s3.amazonaws.com
+  remote_cache_root: work/media-cache/vqa-v2-remote
+  remote_cache_bytes: 1000000000
+  media_scope: on_demand_unverified
+files:
+- source_name: v2_Questions_Val_mscoco.zip
+  url: https://s3.amazonaws.com/cvmlp/vqa/mscoco/vqa/v2_Questions_Val_mscoco.zip
+  bytes: 3494929
+  sha256: e71f6c5c3e97a51d050f28243e262b28cd0c48d11a6b4632d769d30d3f93222a
+  format: zip
+  config_key: questions_archive
+- source_name: v2_Annotations_Val_mscoco.zip
+  url: https://s3.amazonaws.com/cvmlp/vqa/mscoco/vqa/v2_Annotations_Val_mscoco.zip
+  bytes: 10518930
+  sha256: 0caae7c8d1dafd852727f5ac046bc1efca9b72026bd6ffa34fc489f3a7b3291e
+  format: zip
+  config_key: annotations_archive
+allowed_hosts:
+- s3.amazonaws.com

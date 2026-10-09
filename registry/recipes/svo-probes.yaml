@@ -1,0 +1,19 @@
+# The author's CSV at the pinned GitHub commit is the maintained table itself (SHA-256 equal to the catalogue entry's), so no converter is needed.
+# Its images are third-party web URLs (the catalogue already records partial media): they are not pinned or mirrored here, so a fetched workspace
+# holds all 36,841 rows without local image copies. Release and snapshot identity are unchanged.
+release: author-git-206219e2-csv
+snapshot_id: author-git-206219e2afd9640b8bbe6ef95f49b52b0d4ed350-csv-sha256-9e17accb1555038ff0e5b2b14a5b46adbf66d540c2f27ee724c4340f489024ca
+adapter: svo_probes
+expected_count: 36841
+scope: complete original author CSV, 36,841 sentence/image-URL pair rows
+source_url: https://github.com/google-deepmind/svo_probes/tree/206219e2afd9640b8bbe6ef95f49b52b0d4ed350
+adapter_config: {}
+files:
+- source_name: svo_probes.csv
+  url: https://raw.githubusercontent.com/google-deepmind/svo_probes/206219e2afd9640b8bbe6ef95f49b52b0d4ed350/svo_probes.csv
+  bytes: 14172488
+  sha256: 9e17accb1555038ff0e5b2b14a5b46adbf66d540c2f27ee724c4340f489024ca
+  format: csv
+  config_key: path
+allowed_hosts:
+- raw.githubusercontent.com

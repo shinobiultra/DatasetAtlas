@@ -1,0 +1,76 @@
+schema_version: '1.0'
+id: scrambled-mnist
+name: scrambled MNIST
+aliases: []
+description: pixel- and Fourier-phase-scrambled MNIST training conditions. Paper p17 Figure S1 identifies
+  two distinct scramble procedures for VGG-minus background/OOD training.
+paper_ids:
+- paper-1e2474b15fec2d7d
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: paper_protocol_checked_release_unverified
+  access: source_release_unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Exact source data release or paper-used subset is unverified.
+  - Public data/media reuse rights require separate review.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://arxiv.org/abs/1911.09288
+  note: No standalone archive/version or independent MNIST rights verified.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-4e355a419c5454a14c7a
+  paper_id: paper-1e2474b15fec2d7d
+  source_file_hash: ada9a023bec3a045996c2660092bd2e4c1a28380b76315ad0d97051c119bd9ce
+  page: 17
+  role: OOD/background training
+  excerpt: examples (non-digits) used as a background class for the small VGG− model. (A) pixel-scrambled
+    MNIST images. (B) Fourier-phase scrambled MNIST-images. (C) EMNIST letters [61], excluding the letters
+    o,s,z,l,i,q and g. (D) patc
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://arxiv.org/abs/1911.09288
+  note: Paper p17 Figure S1 identifies two distinct scramble procedures for VGG-minus background/OOD training.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: derived_protocol_unpinned
+- kind: source_audit_rights
+  url: https://arxiv.org/abs/1911.09288
+  note: No standalone archive/version or independent MNIST rights verified.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: derived_protocol_unpinned
+- kind: source_audit_access
+  url: https://arxiv.org/abs/1911.09288
+  note: source_release_unverified; Model the two procedures as protocols, not a single fixed benchmark.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: derived_protocol_unpinned
+- kind: source_audit_refresh
+  url: https://arxiv.org/abs/1911.09288
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 1 URL probed (HEAD only): 1 reachable.'
+source_url: https://arxiv.org/abs/1911.09288
+relationships:
+- type: derived_from
+  target_id: mnist
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: Pixel- and Fourier-phase scrambling of MNIST images; the paper's scrambled images are not reproduced,
+    only the parent digits are browsable.

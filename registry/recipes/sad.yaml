@@ -1,0 +1,128 @@
+source_url: https://github.com/LRudL/sad/tree/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3
+release: dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3
+adapter: sad_structs
+expected_count: 127176
+description: 'Situational Awareness Dataset native source browser: 127,173 unrendered
+  samples and three trial definitions in all 13 released structs archives. Variables
+  and native answers are retained; procedural tasks and model evaluation are not executed.
+  Local-only, respecting the author''s anti-contamination requirement.'
+scope: All 127173 native samples plus three native trial records across the 13 published
+  structs.zip archives at the pinned author revision. These are native templates/definitions,
+  including repeated task variants, not a claim of 127176 distinct rendered benchmark
+  questions. Non-batch template context remains in original archives. Procedural benchmark
+  execution and cached model results are outside this source-browser scope. No plaintext
+  questions or answers may be committed or published.
+adapter_config:
+  annotations:
+  - path_key: archive_0_path
+    task: anti_imitation/output_control
+  - path_key: archive_1_path
+    task: facts/human_defaults
+  - path_key: archive_2_path
+    task: facts/llms
+  - path_key: archive_3_path
+    task: facts/names
+  - path_key: archive_4_path
+    task: facts/which_llm
+  - path_key: archive_5_path
+    task: id_leverage/entity_id
+  - path_key: archive_6_path
+    task: id_leverage/multihop
+  - path_key: archive_7_path
+    task: id_leverage
+  - path_key: archive_8_path
+    task: influence
+  - path_key: archive_9_path
+    task: introspection/count_tokens
+  - path_key: archive_10_path
+    task: introspection/predict_tokens
+  - path_key: archive_11_path
+    task: stages/full
+  - path_key: archive_12_path
+    task: stages/oversight
+  public_archive_password: sadtimesforthesetimes
+  mapping:
+    question: body
+  max_annotation_bytes: 200000000
+  max_records: 130000
+files:
+- source_name: sad-anti_imitation-output_control-structs.zip
+  url: https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/anti_imitation/output_control/structs.zip
+  bytes: 2198
+  sha256: 96289726f139f5feb531a5646462acdbd5675160aa2c5934d6c2497525b98baf
+  config_key: archive_0_path
+  format: zip
+- source_name: sad-facts-human_defaults-structs.zip
+  url: https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/facts/human_defaults/structs.zip
+  bytes: 99458
+  sha256: fb5085dab38cecfac0a8e9fcbd663baab96c4837079fae80f9a7f4a823074650
+  config_key: archive_1_path
+  format: zip
+- source_name: sad-facts-llms-structs.zip
+  url: https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/facts/llms/structs.zip
+  bytes: 25239
+  sha256: c05b00d70bcf25bbccafb3cd64aadbce684a84041c36e7ac34cba533508a4f61
+  config_key: archive_2_path
+  format: zip
+- source_name: sad-facts-names-structs.zip
+  url: https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/facts/names/structs.zip
+  bytes: 103826
+  sha256: 3a440fc789fa4d278d6ab2b81fb4972f83e3562839dc91fcd9dad7e9caab6abe
+  config_key: archive_3_path
+  format: zip
+- source_name: sad-facts-which_llm-structs.zip
+  url: https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/facts/which_llm/structs.zip
+  bytes: 700434
+  sha256: bd2685366bc9c658fe585295417b2ca48d276c88135019db04c77c97dfdc8215
+  config_key: archive_4_path
+  format: zip
+- source_name: sad-id_leverage-entity_id-structs.zip
+  url: https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/id_leverage/entity_id/structs.zip
+  bytes: 870253
+  sha256: e3a7b37318a34ccddb40c5d20cad243839d82d2eb145be611bdcf94513442cb3
+  config_key: archive_5_path
+  format: zip
+- source_name: sad-id_leverage-multihop-structs.zip
+  url: https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/id_leverage/multihop/structs.zip
+  bytes: 618526
+  sha256: 48e41629d023fc2c754c3c2dcded16e5597afa3713fdea2286115dad9c080c17
+  config_key: archive_6_path
+  format: zip
+- source_name: sad-id_leverage-structs.zip
+  url: https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/id_leverage/structs.zip
+  bytes: 64465
+  sha256: 9f703dc0ef182076b5c17e5afd0bc6b328244638d58e1dc1b15b5ecaecd62246
+  config_key: archive_7_path
+  format: zip
+- source_name: sad-influence-structs.zip
+  url: https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/influence/structs.zip
+  bytes: 48865
+  sha256: 63ed83e878320cd742f81a4c7f1d6ee413c508e68c053482453615cc48156881
+  config_key: archive_8_path
+  format: zip
+- source_name: sad-introspection-count_tokens-structs.zip
+  url: https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/introspection/count_tokens/structs.zip
+  bytes: 10716962
+  sha256: 1a2d3dbb97e6f19bfdf0a1092c045b09c85f7665586711ad7e64baeb62c5dacf
+  config_key: archive_9_path
+  format: zip
+- source_name: sad-introspection-predict_tokens-structs.zip
+  url: https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/introspection/predict_tokens/structs.zip
+  bytes: 67343
+  sha256: e2f21fd60856bf005a1c2b361926cd2ee035ae508336c9d1dbacbd89e02d7932
+  config_key: archive_10_path
+  format: zip
+- source_name: sad-stages-full-structs.zip
+  url: https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/stages/full/structs.zip
+  bytes: 814594
+  sha256: 9bf272835a6b51c4b66010f8159dea3c92e62b587add54a1ec95148cf862293e
+  config_key: archive_11_path
+  format: zip
+- source_name: sad-stages-oversight-structs.zip
+  url: https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/stages/oversight/structs.zip
+  bytes: 1403769
+  sha256: 5b620b7bf45d04a2f79b1c7d2e825069fe774d853beeaff11b8b43c442c50ebb
+  config_key: archive_12_path
+  format: zip
+allowed_hosts:
+- raw.githubusercontent.com

@@ -1,0 +1,43 @@
+schema_version: '1.0'
+id: paper-72040eccb96ead7a-unnamed-synthetic-spheres-dataset
+name: unnamed synthetic spheres dataset
+aliases: []
+description: Mention candidate from a focused page audit; the evidence receipts distinguish direct use, comparison,
+  related-work, and citation-only roles. Original source, release, and rights still require independent verification.
+paper_ids:
+- paper-72040eccb96ead7a
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: unverified
+  access: unreleased
+  adapter: not_applicable
+  preview: none
+  complete_data: externally_blocked
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - The paper describes a synthetic spheres dataset it generated; no public release was located.
+  - No examples will be synthesized in its place; the record exists to carry the paper mention.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-e9d452c4b08f76878c55
+  paper_id: paper-72040eccb96ead7a
+  source_file_hash: 84af60e71339cbfe4f8aa35fd48431b2fcd1b3d941955a1bcb1e2582f42d35de
+  page: 5
+  role: evaluation
+  excerpt: on adversarial spheres. First, we evaluate our analytic attack on the synthetic spheres dataset, where
+    the task is to classify samples as belonging to one out of two spheres with differ- ent radii.
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_access
+  note: The paper describes a synthetic spheres dataset it generated; no public release was located.
+  checked_on: '2026-09-22'
+  source_identity_status: paper_specific_collection_unreleased

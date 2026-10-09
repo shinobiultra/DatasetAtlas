@@ -8,22 +8,24 @@ paper_ids:
 - paper-7a1ff5996ce95273
 - paper-3e0db9c633ab204c
 - paper-d8a392188b9cf4d6
-release: unresolved
+release: laion400m-original-2021-first-metadata-shard-e1e0eebf0d9f
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
+  adapter: implemented
   preview: none
   complete_data: unimplemented
   publication: not_reviewed
   preview_count: 0
   unit: example
   blockers:
-  - Source-family rights and any public media examples require dataset-specific review.
-  - Adapter and preview are not implemented.
+  - Native annotation browsing is implemented for the first original metadata shard;
+    the other31 shards and every linked image remain unprepared.
+  - Original image availability and rights are heterogeneous; native URL and LICENSE
+    fields do not approve publication or establish historical image-byte equality.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -101,4 +103,10 @@ evidence:
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
-source_url: https://laion.ai/laion-400-open-dataset/
+- kind: source_audit_release
+  url: https://deploy.laion.ai/8f83b608504d46bb81708ec86e912220/dataset/part-00000-5b54c5d5-bbcf-484d-a2ce-0d6f73df1a36-c000.snappy.parquet
+  note: Original publisher metadata shard measured as12933524 native rows and checksum-pinned
+    without substituting ReLAION. No image bytes acquired.
+  checked_on: '2026-10-06'
+  audit_file: reports/laion-original-native-shard-acquisition-20261006.json
+source_url: https://deploy.laion.ai/8f83b608504d46bb81708ec86e912220/

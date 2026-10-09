@@ -1,3 +1,4 @@
+import { displayUrl } from '../lib/display'
 import { useEffect, useMemo, useRef, useState } from 'react'
 import type { FieldDescriptor, Record as AtlasRecord } from '../generated'
 import { fieldValue } from '../query'
@@ -101,7 +102,7 @@ export function TableView(props: TableProps) {
                 {showThumbnail && (
                   <td className="thumbcell">
                     {url && asset?.modality === 'image'
-                      ? <img src={url} alt="" loading="lazy" decoding="async" onError={event => { event.currentTarget.style.visibility = 'hidden' }} />
+                      ? <img src={displayUrl(url)} alt="" loading="lazy" decoding="async" onError={event => { event.currentTarget.style.visibility = 'hidden' }} />
                       : <span className="ph" />}
                   </td>
                 )}

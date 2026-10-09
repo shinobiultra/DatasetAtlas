@@ -1,0 +1,57 @@
+release: df168bd0fe810cdce256caddf6c9596f55760afb
+adapter: phantom
+source_url: https://huggingface.co/datasets/it4lia/PHANTOM
+credential_profile: huggingface
+expected_count: 55350
+scope: All 47524 conversations in native metadata.jsonl, joined to 47512 grouped attacks,
+  plus 7826 native behaviours. Both source forms retained. Source-listed images absent
+  from the pinned repository are explicitly unavailable; no claim of complete media.
+  Gated images fetched on request with local authorized credentials.
+files:
+- source_name: behaviours.jsonl
+  url: https://huggingface.co/datasets/it4lia/PHANTOM/resolve/df168bd0fe810cdce256caddf6c9596f55760afb/behaviours.jsonl
+  bytes: 4544112
+  sha256: f30d463bf2bd28c0eb5c4f2373f71a7a2e9dd72954c9a8512722506b7b25b720
+  format: jsonl
+  config_key: behaviours_jsonl
+- source_name: metadata.jsonl
+  url: https://huggingface.co/datasets/it4lia/PHANTOM/resolve/df168bd0fe810cdce256caddf6c9596f55760afb/metadata.jsonl
+  bytes: 65490395
+  sha256: 4821f989931ed9a47690b79bb72228d3172cc4ce49249ca0915dbcec25aa9662
+  format: jsonl
+  config_key: metadata_jsonl
+- source_name: phantom_attacks.json
+  url: https://huggingface.co/datasets/it4lia/PHANTOM/resolve/df168bd0fe810cdce256caddf6c9596f55760afb/phantom_attacks.json
+  bytes: 70775312
+  sha256: 174124f58cc7b33c96793d2300410414658dea3c0f198d28bdfdea7d359f9e22
+  format: json
+  config_key: phantom_attacks_json
+- source_name: phantom_behaviours.json
+  url: https://huggingface.co/datasets/it4lia/PHANTOM/resolve/df168bd0fe810cdce256caddf6c9596f55760afb/phantom_behaviours.json
+  bytes: 4227791
+  sha256: 6a3487f6c1b0197736b69ce761d643381a32027a3acbf65e9c4b82c7ca1a2fdf
+  format: json
+  config_key: phantom_behaviours_json
+allowed_hosts: &id001
+- huggingface.co
+- cdn-lfs.huggingface.co
+- cdn-lfs-us-1.huggingface.co
+- cdn-lfs-eu-1.huggingface.co
+- cas-bridge.xethub.hf.co
+- us.aws.cdn.hf.co
+- eu.aws.cdn.hf.co
+adapter_config:
+  population: all
+  annotations:
+  - path_key: behaviours_jsonl
+  - path_key: metadata_jsonl
+  - path_key: phantom_attacks_json
+  - path_key: phantom_behaviours_json
+  max_annotation_bytes: 160000000
+  media_inventory_path: registry/source-manifests/phantom-media.json
+  media_inventory_sha256: 2177b443a11ffb84c1fb259636636e24323a432fc853820ebbeca52c814cce52
+  media_base_url: https://huggingface.co/datasets/it4lia/PHANTOM/resolve/df168bd0fe810cdce256caddf6c9596f55760afb
+  media_allowed_hosts: *id001
+  credential_profile: huggingface
+  remote_cache_root: work/media-cache/phantom
+  remote_cache_bytes: 2000000000

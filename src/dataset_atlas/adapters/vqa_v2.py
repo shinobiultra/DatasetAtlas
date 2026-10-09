@@ -28,9 +28,16 @@ class VQAv2Adapter(DatasetAdapter):
     ANNOTATION_MEMBER = "v2_mscoco_val2014_annotations.json"
     IMAGE_RE = re.compile(r"val2014/COCO_val2014_\d{12}\.jpg\Z")
 
+    def _remote(self):
+        """The COCO 2014 image archive as ETag-pinned ranges, when it is not held locally."""
+        if "remote_images" not in self.config:
+            return None
+        from .remote_media import RemoteZip
+        return RemoteZip(self.config["remote_images"], self.config["remote_cache_root"], self.config.get("remote_cache_bytes", 1_000_000_000))
+
     def _paths(self) -> dict[str, Path]:
-        return {key: Path(self.config[f"{key}_archive"]).expanduser().resolve()
-                for key in ("questions", "annotations", "images")}
+        keys = ("questions", "annotations") if "remote_images" in self.config else ("questions", "annotations", "images")
+        return {key: Path(self.config[f"{key}_archive"]).expanduser().resolve() for key in keys}
 
     def _prepared(self) -> Path:
         return Path(self.config["prepared_root"]).expanduser().resolve()
@@ -47,7 +54,8 @@ class VQAv2Adapter(DatasetAdapter):
     def plan(self, limit: int, max_bytes: int, cursor: str | None = None) -> PreparationPlan:
         base = super().plan(limit, max_bytes, cursor)
         if any(not self.config.get(f"{key}_sha256") for key in self._paths()):
-            raise ValueError("VQA v2 requires three pinned archive hashes")
+            raise ValueError("VQA v2 requires pinned archive hashes")
+        self._remote()  # validates the remote specification when one is configured
         return PreparationPlan(base.dataset_id, base.source_revision, cursor, limit,
                                max_bytes, 0, None,
                                ("verify original archives and strict question/annotation/image join",),
@@ -59,6 +67,9 @@ class VQAv2Adapter(DatasetAdapter):
         digests = {key: _sha256(path) for key, path in paths.items()}
         if any(digests[key] != self.config[f"{key}_sha256"] for key in paths):
             raise ValueError("VQA v2 archive differs from pinned SHA-256")
+        if self._remote():
+            # Ranged reads cannot hash a 6.6 GB archive; the strong ETag is the consistency fingerprint instead.
+            digests["images"] = "remote-etag:" + self._remote().etag
         root = self._prepared(); root.mkdir(parents=True, exist_ok=True)
         index_path, rows_path = root / "index.json", root / "records.jsonl"
         if index_path.is_file() and rows_path.is_file():
@@ -94,8 +105,11 @@ class VQAv2Adapter(DatasetAdapter):
             if len(annotation.get("answers", [])) != 10:
                 raise ValueError(f"VQA annotation lacks ten answers: {qid}")
             by_question[qid] = annotation
-        with zipfile.ZipFile(paths["images"]) as archive:
-            images = {name for name in archive.namelist() if self.IMAGE_RE.fullmatch(name)}
+        if self._remote():
+            images = {name for name in self._remote().names(self.config.get("remote_metadata_bytes", 150_000_000)) if self.IMAGE_RE.fullmatch(name)}
+        else:
+            with zipfile.ZipFile(paths["images"]) as archive:
+                images = {name for name in archive.namelist() if self.IMAGE_RE.fullmatch(name)}
         seen_questions: set[int] = set()
         image_ids: set[int] = set()
         checkpoints: list[list[int]] = []
@@ -151,9 +165,11 @@ class VQAv2Adapter(DatasetAdapter):
         asset_ref = f"val2014/{row['image_filename']}"
         rid = stable_id(self.dataset.id, self.revision, "example", str(qid))
         aid = stable_id(self.dataset.id, self.revision, "asset", str(image_id))
+        metadata = {"coco_split": "val2014", "coco_image_id": image_id}
+        if self._remote():
+            metadata.update(media_access="remote_zip_range", source_etag=self.config["remote_images"]["etag"])
         asset = Asset(id=aid, dataset_id=self.dataset.id, release_id=self.revision,
-                      modality="image", uri=asset_ref,
-                      metadata={"coco_split": "val2014", "coco_image_id": image_id})
+                      modality="image", uri=asset_ref, metadata=metadata)
         return Record(id=rid, dataset_id=self.dataset.id, release_id=self.revision,
                       snapshot_id=self.dataset.snapshot_id, question=row["question"],
                       asset_ids=[aid], assets=[asset], source=row)
@@ -185,11 +201,12 @@ class VQAv2Adapter(DatasetAdapter):
     def resolve_asset(self, source: PreparedSource, asset_ref: str) -> MediaHandle:
         if not self.IMAGE_RE.fullmatch(asset_ref):
             raise ValueError("invalid VQA v2 COCO 2014 image reference")
-        with zipfile.ZipFile(self._paths()["images"]) as archive:
-            info = archive.getinfo(asset_ref)
-            if info.file_size > source.max_bytes - source.bytes_read:
-                raise ValueError("VQA v2 image exceeds remaining byte budget")
-            data = archive.read(info)
+        if self._remote():
+            data = self._remote().read(asset_ref, source.max_bytes - source.bytes_read, self.config.get("media_transfer_bytes", 40_000_000))
+        else:
+            from dataset_atlas.storage.zip_members import LOCAL_ZIP_MEMBERS
+            data = LOCAL_ZIP_MEMBERS.read(self._paths()['images'], asset_ref, source.max_bytes - source.bytes_read,
+                                          self.config['images_sha256'])
         source.charge(len(data))
         if not data.startswith(b"\xff\xd8\xff"):
             raise ValueError("VQA v2 image member is not JPEG")

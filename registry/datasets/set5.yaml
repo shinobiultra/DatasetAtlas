@@ -2,7 +2,9 @@ schema_version: '1.0'
 id: set5
 name: Set5
 aliases: []
-description: Bevilacqua et al. Set5 super-resolution benchmark.
+description: 'Set5 as distributed by the SelfExSR authors: five image identities with
+  native HR/LR files at x2, x3 and x4. Equivalence to the first historical release
+  is not established.'
 paper_ids:
 - paper-08e415961919a492
 release: unresolved
@@ -10,8 +12,8 @@ adapter: structured
 adapter_config: {}
 coverage:
   identity: candidate
-  source: unverified
-  access: unverified
+  source: verified
+  access: public
   adapter: not_started
   preview: none
   complete_data: unimplemented
@@ -79,4 +81,16 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: original_citation_only
-source_url: https://www.bmva-archive.org.uk/bmvc/2012/BMVC/paper135/index.html
+- kind: implemented_source_release
+  url: https://github.com/jbhuang0604/SelfExSR/tree/8f6dd8c1d20cb7e8792a7177b4f6fd677633f598/data/Set5
+  checked_on: '2026-09-23'
+  report: reports/selective-acquisition-20260923.md
+  note: Pinned acquired population and real preview exercised locally. Mirror and
+    selective-transfer limits remain in the acquisition receipts; this does not establish
+    publication rights or the exact paper-used subset.
+  recipe: registry/recipes/set5.yaml
+source_url: https://github.com/jbhuang0604/SelfExSR/tree/8f6dd8c1d20cb7e8792a7177b4f6fd677633f598/data/Set5
+modalities:
+- image
+tasks:
+- image super resolution

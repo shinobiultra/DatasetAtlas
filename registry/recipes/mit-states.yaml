@@ -1,0 +1,53 @@
+release: mit-states-mirror-d3f1d1b05431a92aed318c5dd9f660866fcfa2a6
+adapter: archive_variants
+source_url: https://huggingface.co/datasets/AaronWu901225/MIT_states_UT_zappos
+expected_count: 63440
+snapshot_id: mit-states-1419d70e19d4c3e17d29042a
+remote_metadata_bytes: 70000000
+preview_media_transfer_bytes: 100000000
+scope: All 63,440 JPEG members under the MIT States images directory of the pinned
+  public MIT States/UT-Zappos mirror. Native pair folders and filenames are preserved
+  without splitting compound labels. Other bundle members are explicitly excluded.
+  Mirror bytes are retained unchanged; byte equality and image-quality equality to
+  the publisher archive, historical paper subsets and redistribution rights remain
+  unverified. No pickles, Torch files, notebooks or source code are executed.
+credential_profile: huggingface
+adapter_config:
+  annotations: []
+  remote_archives:
+    images:
+      allowed_hosts:
+      - huggingface.co
+      - us.aws.cdn.hf.co
+      - cas-bridge.xethub.hf.co
+      - cdn-lfs-us-1.huggingface.co
+      bytes: 1667945529
+      credential_profile: huggingface
+      etag: '"3f48197af528a78378b7fc601949fd0b1cc56d0bf8d3a1148846969e968d910b"'
+      repository_revision: d3f1d1b05431a92aed318c5dd9f660866fcfa2a6
+      url: https://huggingface.co/datasets/AaronWu901225/MIT_states_UT_zappos/resolve/d3f1d1b05431a92aed318c5dd9f660866fcfa2a6/dataset.zip
+      selected_prefix: dataset/mitstates/images/
+      member_regex: dataset/mitstates/images/(?P<image_id>(?P<pair>[^/]+)/(?P<filename>[^/]+)\.jpg)
+      split: released_mirror
+      variant: original_mirror_jpeg
+      role: mirror_source
+      expected_count: 63440
+      source_fields:
+        native_pair: '{pair}'
+        native_filename: '{filename}'
+      directory_members_sha256: 1419d70e19d4c3e17d29042a1f022ceb5af734c5fab79563397434bedbe70ea9
+      ignored_members:
+      - dataset/mitstates/images/.DS_Store
+      expected_excluded_members: 80555
+  expected_variants:
+  - original_mirror_jpeg
+  verify_remote_preview_media: true
+  remote_cache_bytes: 200000000
+  media_scope: partial
+  media_transfer_bytes: 40000000
+  max_record_bytes: 12000
+  remote_cache_root: work/media-cache/mit-states
+resource_limits:
+  max_rss_bytes: 4000000000
+  max_cpu_seconds: 1800
+  max_wall_seconds: 3600

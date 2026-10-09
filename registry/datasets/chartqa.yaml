@@ -12,7 +12,7 @@ adapter_config: {}
 coverage:
   identity: resolved
   source: verified
-  access: unverified
+  access: public
   adapter: not_started
   preview: none
   complete_data: unimplemented
@@ -69,4 +69,16 @@ evidence:
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
-source_url: https://github.com/vis-nlp/ChartQA/tree/044eabfc306abfe9340c5741f0093aefc5973d06
+- kind: implemented_source_release
+  url: https://github.com/vis-nlp/ChartQA
+  checked_on: '2026-09-23'
+  recipe: registry/recipes/chartqa.yaml
+  report: reports/selective-acquisition-20260923.md
+  note: Original source release and native records exercised locally. This is not
+    a claim of human rights review or an exact paper-used subset.
+source_url: https://github.com/vis-nlp/ChartQA
+modalities:
+- image
+- text
+tasks:
+- chart question answering

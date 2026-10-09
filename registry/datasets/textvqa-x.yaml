@@ -2,33 +2,34 @@ schema_version: '1.0'
 id: textvqa-x
 name: TextVQA-X
 aliases: []
-description: TextVQA-X explanation overlays, distinct from the base TextVQA question/image
-  dataset
+description: 'TextVQA-X: all 18,096 native question explanations, split IDs and boolean visual masks,
+  joined exactly to the original TextVQA questions and images. Masks retain original NumPy bytes and a
+  lossless PNG visualization.'
 paper_ids:
 - paper-25eaa8c74ce76800
-release: unresolved
-adapter: structured
+release: textvqa-x-493ee9629208ff6fabf1ce0bc9cb5be0559a8ca6
+adapter: textvqa_x
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
-  access: unverified
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Source content and publication rights require dataset-specific review.
-  - Adapter and preview are not implemented.
+  - Public preview redistribution is not approved.
+  total_count: 18096
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://github.com/amzn/explainable-text-vqa/blob/493ee9629208ff6fabf1ce0bc9cb5be0559a8ca6/README.md
-  note: Author license summary covers documentation CC BY-SA 4.0 and sample code MIT-0,
-    not a blanket data/image license; base TextVQA media rights unresolved.
+  note: Author license summary covers documentation CC BY-SA 4.0 and sample code MIT-0, not a blanket
+    data/image license; base TextVQA media rights unresolved.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-674c9c53a6dd1870ae84
@@ -36,14 +37,12 @@ evidence:
   source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
   page: 29
   role: cited-study dataset in survey table
-  excerpt: vl-7b VQA Benchmark, TextVQA-X (Zhao et al., 2024a) LLaVA-v1.5 (13B/7B),
-    InstructBLIP, Identifying
+  excerpt: vl-7b VQA Benchmark, TextVQA-X (Zhao et al., 2024a) LLaVA-v1.5 (13B/7B), InstructBLIP, Identifying
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://github.com/amzn/explainable-text-vqa/tree/493ee9629208ff6fabf1ce0bc9cb5be0559a8ca6
-  note: TextVQA-X explanation overlays, distinct from the base TextVQA question/image
-    dataset
+  note: TextVQA-X explanation overlays, distinct from the base TextVQA question/image dataset
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
@@ -55,17 +54,31 @@ evidence:
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_access
   url: https://github.com/amzn/explainable-text-vqa/tree/493ee9629208ff6fabf1ce0bc9cb5be0559a8ca6
-  note: Author repository contains split/explanation files; original TextVQA images
-    obtained separately; no content acquired here.
+  note: Author repository contains split/explanation files; original TextVQA images obtained separately;
+    no content acquired here.
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
   probe: official_page_read_download_unprobed
 - kind: source_audit_rights
   url: https://github.com/amzn/explainable-text-vqa/blob/493ee9629208ff6fabf1ce0bc9cb5be0559a8ca6/README.md
-  note: Author license summary covers documentation CC BY-SA 4.0 and sample code MIT-0,
-    not a blanket data/image license; base TextVQA media rights unresolved.
+  note: Author license summary covers documentation CC BY-SA 4.0 and sample code MIT-0, not a blanket
+    data/image license; base TextVQA media rights unresolved.
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
+- kind: native_population_live_verification
+  url: https://github.com/amzn/explainable-text-vqa/tree/493ee9629208ff6fabf1ce0bc9cb5be0559a8ca6
+  checked_on: '2026-09-23'
+  receipt: reports/textvqa-x-live-verification.json
+  scope: All 14476 training and 3620 validation IDs in the author release; every textual explanation,
+    token list and native boolean mask retained. Original TextVQA image bytes fetched on request; no paper-specific
+    evaluation reconstruction is inferred.
 source_url: https://github.com/amzn/explainable-text-vqa/tree/493ee9629208ff6fabf1ce0bc9cb5be0559a8ca6
+modalities:
+- image
+- text
+- array
+tasks:
+- visual question answering
+- explanation

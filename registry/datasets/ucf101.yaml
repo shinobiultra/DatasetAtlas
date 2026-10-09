@@ -13,17 +13,20 @@ adapter: structured
 adapter_config: {}
 coverage:
   identity: candidate
-  source: unverified
-  access: unverified
-  adapter: not_started
+  source: verified
+  access: public
+  adapter: implemented
   preview: none
-  complete_data: unimplemented
+  complete_data: requires_preparation
   publication: not_reviewed
   preview_count: 0
   unit: example
   blockers:
-  - Original release identity and rights need verification.
-  - Adapter and preview are not implemented.
+  - Pinned public mirror population of 13,320 native AVI files, three recognition
+    folds and 100 retained original previews is verified. Bounded browser displays
+    retain decoded-frame parity; publisher byte equivalence remains unverified.
+  - Publisher byte equivalence, exact paper splits/subsets and redistribution rights
+    remain unverified.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -59,3 +62,28 @@ evidence:
     al., 2012), UCF101 (Soomro, coders, specifically large-scale adversaria
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
+- kind: source_audit_access
+  checked_on: '2026-10-06'
+  url: https://crcv.ucf.edu/data/UCF101/UCF101.rar
+  note: TCP connections to www.crcv.ucf.edu succeed, but TLS verification fails from
+    this machine with 'unable to get local issuer certificate' (curl error 60), so
+    neither UCF101.rar nor the train/test split archive could be probed. The server's
+    certificate (CN crcv.ucf.edu, expires 2027-01-25) is sent without a complete chain;
+    Atlas does not disable certificate checks. A third-party Hugging Face mirror exists
+    but is not the original release.
+  source_identity_status: official_host_tls_chain_incomplete
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'From the source inspected on 2026-10-06: official host unreachable over TLS;
+    the dataset is a video archive per the citing papers and the authors. Not inferred
+    from the dataset name.'
+- kind: source_audit_access
+  checked_on: '2026-10-07'
+  url: https://huggingface.co/datasets/quchenyuan/UCF101-ZIP
+  note: Pinned secure public mirror exposes 13,320 AVI members and seven native recognition
+    tables. One native AVI has verified MPEG4 yuv420p video and MP3 audio; content
+    is processed locally only.
+  source_identity_status: pinned_public_mirror_population
+modalities:
+- video

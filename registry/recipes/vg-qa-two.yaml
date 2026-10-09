@@ -1,0 +1,52 @@
+release: pathways-470944b3f6b44901a9055cf8d91aef18cee21671
+source_url: https://github.com/israfelsr/vlm-pathways/tree/470944b3f6b44901a9055cf8d91aef18cee21671
+adapter: pathways
+expected_count: 288
+description: 'Pathways vg_qa_two: 288 examples from the author-defined transformation of the native Whats-Up
+  vg_qa_two_obj release. Original annotations and image bytes are retained alongside the derived caption,
+  preposition and object fields.'
+scope: All 288 rows of vg_qa_two under the pinned author transformation. VG two-object unknown-preposition
+  rows are excluded exactly as in the author script. This available reconstruction does not assert the
+  historical paper-used revision or repeat the upstream RGB re-encoding.
+adapter_config:
+  annotations:
+  - path_key: vg_qa_two_obj_annotations
+    split: vg_qa_two_obj
+    correct_choice_index: 0
+    text_from_first_choice: true
+    array_columns:
+    - image_id
+    - true_caption
+    - false_caption
+    choices_columns:
+    - true_caption
+    - false_caption
+    media_archive: vg_images
+    media_template: vg_images/{image_id}.jpg
+  pathways_split: vg_qa_two
+  mapping:
+    text: _atlas_text
+    choices: _atlas_choices
+  remote_cache_root: work/media-cache/whatsup
+  local_archives:
+    vg_images:
+      path_key: vg_images_path
+  repack_paths:
+  - vg_images_path
+files:
+- url: https://drive.usercontent.google.com/download?id=1idW7Buoz7fQm4-670n-oERw9U-2JLJvE&export=download&confirm=t
+  source_name: vg_images.tar.gz
+  bytes: 679749847
+  sha256: d3f3478564689d6fe31f7a5b246652faca1361fe16bad3ac7d3849a0a6b1c421
+  config_key: vg_images_path
+  format: tgz
+- url: https://drive.usercontent.google.com/download?id=1sjVG5O3QMY8s118k7kQM8zzDZH12i_95&export=download
+  source_name: vg_qa_two_obj.json
+  bytes: 31363
+  sha256: abeb1143db19a85aac678b9cd77a29381442f29caff475e2551a25abec2e4ecd
+  config_key: vg_qa_two_obj_annotations
+  format: json
+allowed_hosts:
+- drive.usercontent.google.com
+- drive.google.com
+remote_metadata_bytes: 20000000

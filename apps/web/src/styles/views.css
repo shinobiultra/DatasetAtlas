@@ -188,6 +188,7 @@ table.data.dense td.thumbcell img { width: 34px; height: 24px; }
   background: var(--n-150); padding: var(--s-3); overflow: auto; position: relative;
 }
 .focus-frame { position: relative; display: inline-flex; max-width: 100%; max-height: 100%; }
+.focus-frame.audio-frame { width: min(360px, 100%); }
 .focus-frame img, .focus-frame video { display: block; max-width: 100%; max-height: 100%; object-fit: contain; background: var(--n-100); }
 .focus-frame.actual { max-width: none; max-height: none; }
 .focus-frame.actual img { max-width: none; max-height: none; }
@@ -325,3 +326,32 @@ table.aligned td.k { color: var(--text-muted); width: 24%; }
 /* The floating map tools use a translucent surface; the active tool must still read as active. */
 .map-tools .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
 .map-tools .btn.primary:hover:not(:disabled) { background: var(--accent-hover); }
+
+/* The centre workspace can be narrow even on a desktop with both rails open. */
+.work { container-type: inline-size; }
+.ds-tabs { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.preparation-dialog { width: min(620px, calc(100vw - 24px)); max-height: calc(100dvh - 32px); overflow: auto; border: 1px solid var(--border); border-radius: 10px; padding: 0; background: var(--surface); color: var(--text); box-shadow: 0 16px 64px #0003; }
+.preparation-dialog::backdrop { background: #0005; }
+.preparation-dialog details ul { max-height: 220px; overflow: auto; overflow-wrap: anywhere; }
+@container (max-width: 650px) {
+  .ds-header { display: grid; grid-template-columns: 44px minmax(0, 1fr); padding: 12px; gap: 8px; }
+  .ds-mosaic { width: 44px; height: 44px; }
+  .ds-header-main { min-width: 0; }
+  .ds-header-main h1 { font-size: 20px; }
+  .ds-header-main .summary { display: none; }
+  .ds-header-main .facts { max-height: 34px; overflow: hidden; font-size: 11px; }
+  .ds-header-actions { grid-column: 1 / -1; margin-left: 0; max-width: 100%; flex-wrap: wrap; }
+}
+
+/* ---------- Public site landing ---------- */
+.hero {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-4) var(--s-6); align-items: center;
+  padding: var(--s-5); margin-bottom: var(--s-5); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+}
+.hero h2 { font-size: 19px; line-height: 1.25; margin: 0 0 var(--s-2); text-wrap: balance; }
+.hero p { margin: 0; color: var(--text-muted); max-width: 70ch; }
+.hero-actions { display: flex; gap: var(--s-2); flex-wrap: wrap; justify-content: flex-end; }
+.live-strip h2 { font-size: var(--fs-md); font-weight: 600; margin: 0 0 var(--s-3); }
+.live-strip .rest-h { margin-top: var(--s-6); }
+@media (max-width: 760px) { .hero { grid-template-columns: 1fr; } .hero-actions { justify-content: flex-start; } }
+.cat-head .row { flex-wrap: wrap; }

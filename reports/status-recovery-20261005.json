@@ -1,0 +1,29 @@
+{
+  "checked_at_utc": "2026-10-05T09:10:58.817108+00:00",
+  "incident": "A local final-report helper reused its output-path variable while scanning preparation files, overwriting one disposed verification worker status with the final summary. The helper has been corrected.",
+  "affected_status": "work/verification-recap-20261005/work/preparation/4a0a2fa7609e23f9d5decfa655001ea96374b51637a1d5c54eefaf523f99e3da/status.json",
+  "affected_dataset_id": "recap-datacomp-1b",
+  "original_status_sha256": "1182b2a27481660c44a41fd36f679f57f5ece2334cdc6169ccf221199390dd1f",
+  "exact_original_status_recovered": false,
+  "status_reconstructed_from_independent_success_receipts": true,
+  "reconstructed_status_sha256": "6d56eaa807cc4e5eeb3a45383d2c07a763d58370cb75d3e5f9a02d1856012b64",
+  "original_bad_write_preserved": "work/final-status-misdirected-write-20261005.json",
+  "success_evidence": [
+    {
+      "path": "work/verification-recap-20261005/work/previews/fetch-20261005T062903Z.json",
+      "sha256": "2bc044f48f434e7fd54b9c9b7a5d36dfa33aa8cc885a9f276c74d4c63e3b01c0",
+      "scope": "Exact fetch-controller completed/fetched receipt, transferred bytes and completion date."
+    },
+    {
+      "path": "work/verification-recap-20261005/work/verification-archive/recap-datacomp-1b/4a0a2fa7609e23f9d5decfa655001ea96374b51637a1d5c54eefaf523f99e3da/receipt.json",
+      "sha256": "817f92b9f61d9ebca5758a507518de05828cb3d8526b0a6d07f588939f97690f",
+      "scope": "Immutable original worker prepared receipt; 1000 native records and snapshot identity."
+    },
+    {
+      "path": "work/recap-datacomp-1b-native-live-20261005.json",
+      "sha256": "4afd4edfb5585c57d63d59428d185c9becd4893b306fa3c9f880ef4fd9a6adbc",
+      "scope": "All 1000 native rows matched; main import/live query proof."
+    }
+  ],
+  "unchanged": "Native bytes, indices, media, main-workspace status files, release archives, completed test evidence and retained failures were not altered by this incident."
+}

@@ -85,14 +85,15 @@ export function AboutPanel({ dataset, onOpenDataset }: { dataset: Dataset; onOpe
           <div className="insp-kicker">Related datasets</div>
           <p className="hint">Links describe source or annotation relationships. Each dataset keeps its own access and preview state.</p>
           {relationships.map((item, index) => {
-            const target = evidenceText(item.target) || evidenceText(item.alias_id)
+            const target = evidenceText(item.target_id) || evidenceText(item.target) || evidenceText(item.alias_id)
             const related = catalogue.find(entry => entry.id === target)
             return (
-              <div key={`${target}-${index}`} className="row" style={{ gap: 7, padding: '4px 0', fontSize: 'var(--fs-md)' }}>
+              <div key={`${target}-${index}`} className="row" style={{ gap: 7, padding: '4px 0', fontSize: 'var(--fs-md)', flexWrap: 'wrap' }}>
                 <Tag>{evidenceText(item.type).replaceAll('_', ' ') || 'related'}</Tag>
                 {related
                   ? <button type="button" className="linkish truncate" onClick={() => onOpenDataset(related.id)}>{related.name}</button>
                   : <span className="truncate" style={{ color: 'var(--text-muted)' }}>{target || 'Unresolved target'}</span>}
+                {evidenceText(item.scope) && <span className="hint" style={{ flexBasis: '100%', fontSize: 'var(--fs-sm)' }}>{evidenceText(item.scope)}</span>}
               </div>
             )
           })}

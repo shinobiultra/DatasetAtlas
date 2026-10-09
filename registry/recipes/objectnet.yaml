@@ -1,0 +1,24 @@
+source_url: https://objectnet.dev/download.html
+release: objectnet-1.0-etag-2de0f39fef-59faa199a3893
+adapter: objectnet
+expected_count: 50273
+description: >-
+  Official ObjectNet 1.0 test release. The complete native encrypted ZIP
+  directory and 313 class folders are indexed, while original high-resolution
+  PNGs stay remote except for 100 locally pinned preview images. Original
+  one-pixel red borders remain intact. No ObjectNet media enters public packs.
+scope: All 50,273 original images in 313 classes from official ObjectNet 1.0, identified by exact 197,047,590,895-byte ZIP size and strong ETag; full archive SHA-256 is not verified locally.
+remote_transfer_budget_bytes: 1600000000
+adapter_config:
+  url: https://objectnet.dev/downloads/objectnet-1.0.zip
+  bytes: 197047590895
+  etag: '"2de0f39fef-59faa199a3893"'
+  mapping_sha256: ccef32f7421b23619fd55bdbd58f3dc2f323d18e169e37bce94326a601de90db
+  verify_remote_preview_media: true
+  media_scope: on_demand_unverified
+  remote_cache_bytes: 200000000
+  max_record_bytes: 5000
+resource_limits:
+  max_wall_seconds: 14400
+  max_cpu_seconds: 3600
+  max_rss_bytes: 3000000000

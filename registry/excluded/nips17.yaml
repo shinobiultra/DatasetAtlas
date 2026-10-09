@@ -1,0 +1,121 @@
+schema_version: '1.0'
+id: nips17
+name: NIPS17
+aliases: []
+description: Mention candidate from a focused page audit; the evidence receipts distinguish
+  direct use, comparison, related-work, and citation-only roles. Original source,
+  release, and rights still require independent verification.
+paper_ids:
+- paper-d8a392188b9cf4d6
+- paper-6dbb0d4a7b949143
+- paper-392b0c393c06b48e
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - The 1,000-image DEV set is described by dev_dataset.csv in the CleverHans repository,
+    which lists image URLs; the repository does not host the images and its download_images.py
+    links have been reported expired (cleverhans issue 1180).
+  - The original Kaggle competition pages that host the images require a Kaggle login
+    that Atlas will not use on a researcher's behalf.
+  - The SAEgis paper's NIPS17 images are available separately as part of the SAEgis
+    author release (entry saegis-clean-and-adversarial-splits); that does not establish
+    this entry's identity.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-f72e032815153695018b
+  paper_id: paper-d8a392188b9cf4d6
+  source_file_hash: 0e3f26916ef19ce5982122f2bb72212315d6dcbe59c9cc953852202654cc1acf
+  page: 5
+  role: evaluation
+  excerpt: 'een attacks. 4.1.2 Datasets We conduct experiments on three datasets:
+    NIPS17 (K et al., 2017), LLaVA-Instruct-150K (Liu et al., 2023) (LLaVA), and Medical
+    Multimodal Evaluation Data (Che'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-0c323714e99ed9469b60
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 14
+  role: evaluation
+  excerpt: dataset For evaluation, we use 100 manually relabeled images from the NIPS17
+    dataset, focusing on commonly understood cat- These qualitative examples clearly
+    demonstrate the strong egori
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-98f55518438174806cce
+  paper_id: paper-392b0c393c06b48e
+  source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
+  page: 26
+  role: evaluation
+  excerpt: image.” For evaluation, we use 100 manually relabeled images from the NIPS17
+    dataset, focusing on commonly recognizable object categories. Model predictions
+    are assessed using GPT- 4, wh
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-23268627bbca523082d9
+  paper_id: paper-392b0c393c06b48e
+  source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
+  page: 26
+  role: relabeled evaluation subset
+  excerpt: n of the image.” For evaluation, we use 100 manually relabeled images from
+    the NIPS17 dataset, focusing on commonly recognizable object categories. Model
+    predictions are assessed using GPT- 4, which de
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-90a315aaa476ca309bc3
+  paper_id: paper-6dbb0d4a7b949143
+  source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
+  page: 14
+  role: relabeled transfer evaluation
+  excerpt: mages from the NIPS17 dataset, focusing on commonly understood cat- These
+    qualitative examples clearly demonstrate the strong egories.
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_release
+  checked_on: '2026-10-06'
+  url: https://github.com/cleverhans-lab/cleverhans/tree/master/cleverhans_v3.1.0/examples/nips17_adversarial_competition/dataset
+  note: dev_dataset.csv (ImageId, URL, bounding box, TrueLabel, TargetClass), final_dataset.csv
+    and download_images.py; images are fetched from third-party URLs. No image files
+    were fetched and no listing was prepared.
+  source_identity_status: csv_with_expired_image_urls
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'From the source inspected on 2026-10-06: CleverHans dev_dataset.csv inspected:
+    rows are image URLs with labels. Not inferred from the dataset name.'
+- kind: source_audit_refresh
+  url: https://github.com/cleverhans-lab/cleverhans/tree/master/cleverhans_v3.1.0/examples/nips17_adversarial_competition/dataset
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 1 URL probed (HEAD only): 1 reachable.'
+relationships:
+- type: same_source_family_as
+  target_id: saegis-clean-and-adversarial-splits
+  status: asserted_from_source_review
+  checked_on: '2026-10-06'
+  scope: SAEgis commits 224x224 clean NIPS17 images and attacked variants; they are
+    that paper's derived images, not the competition DEV set as released.
+modalities:
+- image

@@ -1,0 +1,46 @@
+release: author-scene-qa-230a2d4fac8900333c61754641c7a13e069ac9c6
+adapter: structured_collection
+expected_count: 200
+preview_media_transfer_bytes: 300000000  # Measured 270,249,250 bytes of ranged reads for the ZIP directory and the 100 verified preview videos on the maintainer preparation.
+scope: All 200 native Scene QA scene-transition questions in the pinned MVBench author release, with ordered
+  candidate answers and exact original video keys. Forward-order clips remain distinct from the paper's
+  unreleased reversed-frame condition; other MVBench tasks are excluded.
+allowed_hosts: &id001
+- huggingface.co
+- cas-bridge.xethub.hf.co
+- us.aws.cdn.hf.co
+- cdn-lfs-us-1.huggingface.co
+remote_metadata_bytes: 1000000
+adapter_config:
+  verify_remote_preview_media: true
+  preview_media_modalities:
+  - video
+  media_scope: partial
+  mapping:
+    text: question
+    target: answer
+    media_modality: video
+  annotations:
+  - path_key: annotation_path
+    format: json
+    split: scene_qa
+    choices_field: candidates
+    media_template: scene_qa/video/{video}
+    media_archive: videos
+  remote_archives:
+    videos:
+      url: https://huggingface.co/datasets/OpenGVLab/MVBench/resolve/230a2d4fac8900333c61754641c7a13e069ac9c6/video/scene_qa.zip
+      bytes: 525972733
+      etag: '"65b5ad25473aef4e0321d4049a59b47ab1c3ea8d4b6fff8f325b38a7af3b7f3c"'
+      allowed_hosts: *id001
+  remote_cache_root: work/media-cache/mvbench-scene-qa
+  remote_cache_bytes: 100000000
+  max_annotation_bytes: 1000000
+  media_transfer_bytes: 25000000
+files:
+- source_name: scene_transition.json
+  url: https://huggingface.co/datasets/OpenGVLab/MVBench/resolve/230a2d4fac8900333c61754641c7a13e069ac9c6/json/scene_transition.json
+  bytes: 67576
+  sha256: edab8a7992851061cac170f7e50782961ec21826f99e70ee72ae73a9dafb79f9
+  config_key: annotation_path
+  format: json

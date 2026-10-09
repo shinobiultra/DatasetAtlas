@@ -34,6 +34,15 @@ def test_summarize_falls_back_to_text_without_media():
     assert [tile['text'] for tile in summary['tiles']] == ['Question 0', 'Question 1', 'Question 2']
 
 
+def test_summarize_skips_retained_raw_source_documents_when_choosing_sample_text():
+    """An author-committed error page is kept faithfully as a labelled record, but must not stand in for the dataset on its catalogue card."""
+    raw = Record(id='raw', dataset_id='d', release_id='r', snapshot_id='s', text='<html><title>Rate limit</title></html>',
+                 source={'_atlas_source_status': 'Author-published file is not valid JSONL; raw source document retained, not an agent task.'})
+    real = [Record(id=f'r{index}', dataset_id='d', release_id='r', snapshot_id='s', text=f'Task {index}') for index in range(2)]
+    summary = summarize_records([raw, *real], limit=3)
+    assert [tile['text'] for tile in summary['tiles']] == ['Task 0', 'Task 1']
+
+
 def test_summarize_reports_no_tiles_rather_than_inventing_one():
     record = Record(id='r', dataset_id='d', release_id='r', snapshot_id='s',
                     assets=[Asset(id='a', dataset_id='d', release_id='r', modality='audio', uri='clip.wav')])
@@ -119,3 +128,25 @@ def test_aggregate_endpoint_rejects_a_stale_snapshot(workspace):
         'field_ids': ['source.label'],
     })
     assert response.status_code == 422
+
+
+def test_thumbnails_use_active_prepared_pack_and_follow_activation(workspace):
+    import json, shutil
+    original = workspace / 'work/packs/fixture/pack.json'
+    base = workspace / 'work/prepared/fixture'
+    first = base / 'first'; (first / 'pack').mkdir(parents=True)
+    document = json.loads(original.read_text())
+    (first / 'pack/pack.json').write_text(json.dumps(document))
+    (first / 'dataset.json').write_text(json.dumps(document['dataset']))
+    (base / 'active.json').write_text(json.dumps({'version': 'first'}))
+    original.unlink()
+    app = client(workspace)
+    response = app.get('/api/v1/catalogue/thumbnails')
+    assert response.status_code == 200 and response.json()['datasets']['fixture']['tiles']
+    second = base / 'second'; shutil.copytree(first, second)
+    for record in document['records']:
+        record['assets'] = []; record['asset_ids'] = []; record['question'] = 'New active preview'
+    (second / 'pack/pack.json').write_text(json.dumps(document))
+    (base / 'active.json').write_text(json.dumps({'version': 'second'}))
+    tiles = app.get('/api/v1/catalogue/thumbnails').json()['datasets']['fixture']['tiles']
+    assert tiles[0]['kind'] == 'text' and tiles[0]['text'] == 'New active preview'

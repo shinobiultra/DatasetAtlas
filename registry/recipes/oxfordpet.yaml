@@ -1,0 +1,21 @@
+# Acquisition does not assert which paper-specific subset was used.
+release: oxford-iiit-pet-original
+adapter: oxford_archive
+expected_count: 7349
+scope: All 7,349 annotated Oxford-IIIT Pet images; original trainval and test splits.
+adapter_config:
+  dataset_kind: pets
+  population: original trainval and test annotations
+files:
+- source_name: images.tar.gz
+  url: https://www.robots.ox.ac.uk/~vgg/data/pets/data/images.tar.gz
+  bytes: 791918971
+  md5: 5c4f3ee8e5d25df40f4fd59a7f44e54c
+  format: tar.gz
+  config_key: path
+- source_name: annotations.tar.gz
+  url: https://www.robots.ox.ac.uk/~vgg/data/pets/data/annotations.tar.gz
+  bytes: 19173078
+  md5: 95a8c909bbe2e81eed6a22bccdf3f68f
+  format: tar.gz
+  config_key: annotations_archive

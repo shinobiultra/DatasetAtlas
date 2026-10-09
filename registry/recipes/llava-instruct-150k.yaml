@@ -1,0 +1,36 @@
+release: llava-instruct-150k-9d451dc7629cfe0469f6ae4432b765cd603d5fcb
+adapter: structured_collection
+expected_count: 157712
+scope: All 157712 conversations in the original llava_instruct_150k.json at revision
+  9d451dc7629cfe0469f6ae4432b765cd603d5fcb, with COCO train2014 images on request.
+  Other JSON variants remain separate.
+remote_metadata_bytes: 20000000
+adapter_config:
+  max_annotation_bytes: 300000000
+  annotations:
+  - path_key: path
+    split: train
+    media_template: train2014/COCO_train2014_{image}
+    media_archive: train2014
+  mapping: {}
+  remote_archives:
+    train2014:
+      url: https://s3.amazonaws.com/images.cocodataset.org/zips/train2014.zip
+      bytes: 13510573713
+      etag: '"289af3433b84b5b8622626b10146c1bc-1611"'
+      allowed_hosts:
+      - s3.amazonaws.com
+  remote_cache_root: work/media-cache/ranges
+files:
+- source_name: llava_instruct_150k.json
+  url: https://huggingface.co/datasets/liuhaotian/LLaVA-Instruct-150K/resolve/9d451dc7629cfe0469f6ae4432b765cd603d5fcb/llava_instruct_150k.json
+  bytes: 228941895
+  sha256: 6b68bc5ca2bfd8a71119af0e8454929668ccda6a334955ccc95d114fc8d082fa
+  config_key: path
+  format: json
+allowed_hosts:
+- huggingface.co
+- cdn-lfs.huggingface.co
+- cdn-lfs-us-1.huggingface.co
+- cas-bridge.xethub.hf.co
+- us.aws.cdn.hf.co

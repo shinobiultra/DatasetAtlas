@@ -1,0 +1,27 @@
+source_url: https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database/versions/5
+release: kaggle-v5-2022-03-19
+adapter: covid_radiography
+expected_count: 21165
+description: >-
+  Depositor's Kaggle version 5: four native CXR classes, one original
+  radiograph and paired segmentation mask per example, with source metadata.
+  This does not establish the exact subset used by the citing paper or rights
+  to republish underlying medical images.
+scope: All 21,165 class-labelled radiographs and their 21,165 paired masks in Kaggle version 5.
+adapter_config:
+  sha256: 15f44e7111a74f048a54a41bf699637ffaad51b08a9d4a622ff5596879cb7f2b
+  dimension_metadata_policy: source_table_size_preserved_no_asset_dimensions
+files:
+- source_name: kaggle-v5.zip
+  url: https://www.kaggle.com/api/v1/datasets/download/tawsifurrahman/covid19-radiography-database?datasetVersionNumber=5
+  bytes: 816029038
+  sha256: 15f44e7111a74f048a54a41bf699637ffaad51b08a9d4a622ff5596879cb7f2b
+  format: zip
+  config_key: path
+allowed_hosts:
+- www.kaggle.com
+- storage.googleapis.com
+resource_limits:
+  max_wall_seconds: 3600
+  max_cpu_seconds: 1200
+  max_rss_bytes: 3000000000

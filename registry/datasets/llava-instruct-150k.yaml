@@ -2,8 +2,8 @@ schema_version: '1.0'
 id: llava-instruct-150k
 name: LLaVA-Instruct-150K
 aliases: []
-description: Original LLaVA docs link instruction JSON files; visual examples reference source images
-  separately.
+description: Original LLaVA docs link instruction JSON files; visual examples reference
+  source images separately.
 paper_ids:
 - paper-d8a392188b9cf4d6
 release: unresolved
@@ -34,15 +34,15 @@ evidence:
   source_file_hash: 0e3f26916ef19ce5982122f2bb72212315d6dcbe59c9cc953852202654cc1acf
   page: 5
   role: evaluation
-  excerpt: 'ts We conduct experiments on three datasets: NIPS17 (K et al., 2017), LLaVA-Instruct-150K
-    (Liu et al., 2023) (LLaVA), and Medical Multimodal Evaluation Data (Chen et al., 2024b) (Medical).
-    The first '
+  excerpt: 'ts We conduct experiments on three datasets: NIPS17 (K et al., 2017),
+    LLaVA-Instruct-150K (Liu et al., 2023) (LLaVA), and Medical Multimodal Evaluation
+    Data (Chen et al., 2024b) (Medical). The first '
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://huggingface.co/datasets/liuhaotian/LLaVA-Instruct-150K
-  note: 'Original LLaVA docs link instruction JSON files; visual examples reference source images separately.
-    Release: LLaVA-Instruct-150K JSON variants'
+  note: 'Original LLaVA docs link instruction JSON files; visual examples reference
+    source images separately. Release: LLaVA-Instruct-150K JSON variants'
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
@@ -52,4 +52,17 @@ evidence:
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
+- kind: implemented_source_release
+  url: https://huggingface.co/datasets/liuhaotian/LLaVA-Instruct-150K
+  checked_on: '2026-09-23'
+  report: reports/selective-acquisition-20260923.md
+  note: Pinned acquired population and real preview exercised locally. Mirror and
+    selective-transfer limits remain in the acquisition receipts; this does not establish
+    publication rights or the exact paper-used subset.
+  recipe: registry/recipes/llava-instruct-150k.yaml
 source_url: https://huggingface.co/datasets/liuhaotian/LLaVA-Instruct-150K
+modalities:
+- image
+- text
+tasks:
+- visual instruction following

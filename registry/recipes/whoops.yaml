@@ -1,0 +1,33 @@
+# The two official WHOOPS! files at the pinned Hugging Face revision (SHA-256 equal to the maintainer's originals). The maintained table is the
+# CSV with its list columns parsed and each image joined by image_id; converters/media.py reproduces it and its 500 PNGs byte for byte (the
+# row digest and the extracted-media digest are checked on every fetch). Release and snapshot identity are unchanged from the catalogue entry.
+release: hf-cca58d854ee35b6bfbedc14a9155483e89500ae9
+snapshot_id: hf-cca58d854ee35b6bfbedc14a9155483e89500ae9-2ddcba606fae
+adapter: structured
+expected_count: 500
+scope: Official WHOOPS! 500-image CSV plus image ZIP, with designer explanations, selected and crowd captions, crowd explanations, underspecified
+  captions, and question-answer pairs preserved as source arrays. The paper's 10,874-annotation count is not substituted for the current
+  CSV field totals.
+source_url: https://huggingface.co/datasets/nlphuji/whoops
+adapter_config: {}
+convert:
+  name: whoops
+  params: {}
+  count: 500
+  rows_sha256: b36a2b4ab4b5264ef0a1038b04d09d403a697ba95fede171145f7d6ca1d03a3f
+  media_sha256: e8b1c9c1c1bbbc53304966fc7911aa8a141b9dd7268f9b1654d930fe2fb26605
+files:
+- source_name: whoops_dataset.csv
+  url: https://huggingface.co/datasets/nlphuji/whoops/resolve/cca58d854ee35b6bfbedc14a9155483e89500ae9/whoops_dataset.csv
+  bytes: 973844
+  sha256: 8e5eea98c195cafb2f80b4377fbee500e5eba26c86124c525b0dcb08675372a3
+  format: csv
+  config_key: source_csv
+- source_name: whoops_images.zip
+  url: https://huggingface.co/datasets/nlphuji/whoops/resolve/cca58d854ee35b6bfbedc14a9155483e89500ae9/whoops_images.zip
+  bytes: 688332030
+  sha256: 9d0f17d50d2450257a3422e44399595af69258ff27fbe0e8e0f37e7ddb6508d5
+  format: zip
+  config_key: source_zip
+allowed_hosts:
+- huggingface.co

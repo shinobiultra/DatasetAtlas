@@ -1,3 +1,4 @@
+import { displayUrl } from '../lib/display'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import type { Dataset, FieldDescriptor, Record as AtlasRecord, Selection } from '../generated'
 import { provider } from '../provider'
@@ -123,16 +124,15 @@ function CollectionDetail({ selection, onBack, onToast }: { selection: Selection
   useEffect(() => {
     let live = true
     setRecords(null); setError('')
-    Promise.all([
-      provider.records(selection.ids),
-      Promise.all(selection.dataset_ids.map(async id => { try { return await provider.fields(id) } catch { return [] as FieldDescriptor[] } })),
-    ]).then(([rows, descriptors]) => {
+    provider.records(selection.ids, selection.snapshot_ids).then(async rows => {
+      const versions = [...new Map(rows.map(record => [`${record.dataset_id}\0${record.snapshot_id}`, record])).values()]
+      const descriptors = await Promise.all(versions.map(record => provider.fields(record.dataset_id, 'preview', record.snapshot_id)))
       if (!live) return
       setRecords(rows)
       setFields(descriptors.flat())
     }).catch(failure => { if (live) setError(String(failure instanceof Error ? failure.message : failure)) })
     return () => { live = false }
-  }, [selection.id, selection.ids, selection.dataset_ids])
+  }, [selection.id, selection.ids, selection.dataset_ids, selection.snapshot_ids])
 
   const shown = useMemo(() => {
     const rows = records ?? []
@@ -185,7 +185,7 @@ function CollectionDetail({ selection, onBack, onToast }: { selection: Selection
                     <button type="button" className="open" onClick={() => setInspected(item.id)}>
                       <div className="sample-media" style={{ height: 138 }}>
                         {url && asset?.modality === 'image'
-                          ? <img src={url} alt="" loading="lazy" />
+                          ? <img src={displayUrl(url)} alt="" loading="lazy" />
                           : <div className="textprev clamp-3">{recordHeadline(item)}</div>}
                       </div>
                       <div className="sample-body"><div className="primary clamp-2">{recordHeadline(item)}</div></div>

@@ -1,0 +1,24 @@
+{
+  "verified_at_utc": "2026-10-07T06:23:04.731318+00:00",
+  "status": "passed",
+  "datasets": [
+    {
+      "dataset_id": "ffhq",
+      "native_objects_compared": 70000,
+      "all_nested_native_values_equal": true
+    },
+    {
+      "dataset_id": "emoset",
+      "native_objects_compared": 118102,
+      "split_counts": {
+        "train": 94481,
+        "val": 5905,
+        "test": 17716
+      },
+      "all_native_split_and_annotation_values_equal": true
+    }
+  ],
+  "external_model_requests": 0,
+  "scope": "Exhaustive local native source-object values compared with immutable canonical records; no data content printed or transmitted.",
+  "completed_at_utc": "2026-10-07T06:23:14.606352+00:00"
+}

@@ -3,8 +3,8 @@ import type { Artifact, FieldDescriptor, Query, Record as AtlasRecord } from '..
 import { provider } from '../provider'
 import { fieldValue } from '../query'
 import { display, isMissing, shortId, titleCase } from '../lib/format'
-import { AssetView, RepresentationTag, classColour, imageAssets, primaryAsset } from '../ui/MediaView'
-import { detectorStates, runLabel, type RunState } from '../dataset/model'
+import { AssetView, RepresentationTag, assetLabel, assetUrl, classColour, imageAssets, primaryAsset } from '../ui/MediaView'
+import { detectorStates, isEmbeddingArtifact, runLabel, type RunState } from '../dataset/model'
 import { CopyButton, Notice, Tabs, Tag } from '../ui/primitives'
 import { Value } from '../ui/Value'
 import * as Icon from '../ui/Icons'
@@ -23,14 +23,15 @@ export function RunStateRow({ state }: { state: RunState }) {
         <div className="truncate" title={state.runLabel}>{state.runLabel}</div>
         <div style={{ color: 'var(--text-muted)' }}>{state.summary}</div>
         {state.detail && <div style={{ color: 'var(--danger)' }} className="wrap-any">{state.detail}</div>}
-        {state.state !== 'not_computed' && <div className="origin-line">Extraction threshold {display(state.threshold)} — lowering a display threshold cannot reveal boxes this run never kept.</div>}
+        {state.state !== 'not_computed' && <div className="origin-line">Extraction threshold {display((state.artifact.provenance?.processor_provenance as { extraction_threshold?: unknown } | undefined)?.extraction_threshold)} · display threshold {display(state.threshold)}. A view cannot reveal boxes its source run discarded.</div>}
       </div>
     </div>
   )
 }
 
 /** Source annotations, computed outputs and metadata, in that order, for one record. */
-export function SampleInspector({ record, fields, artifacts, query, datasetId, onOpenRecord, onFocus }: {
+export function SampleInspector({ record, fields, artifacts, query, datasetId, onOpenRecord, onFocus, mediaControls = true }: {
+  mediaControls?: boolean
   record: AtlasRecord
   fields: FieldDescriptor[]
   artifacts: Artifact[]
@@ -46,12 +47,16 @@ export function SampleInspector({ record, fields, artifacts, query, datasetId, o
   const overlays = useMemo(() => runs.flatMap(state => state.overlays), [runs])
   const sourceEntries = Object.entries(record.source ?? {})
   const predictionEntries = Object.entries(record.prediction ?? {})
+  const imported = artifacts.filter(artifact => artifact.kind === 'import.research').flatMap(artifact => {
+    const item = ((artifact.data?.items ?? []) as Array<{ id: string; status: string; output?: unknown; error?: string }>).find(item => item.id === record.id)
+    return item ? [{ artifact, item }] : []
+  })
   const descriptor = (id: string) => fields.find(field => field.id === id)
 
   return (
     <>
       <div className="insp-media">
-        {asset ? <AssetView asset={asset} overlays={overlays} controls alt={`Primary asset of ${record.id}`} /> : <div className="fallback" style={{ padding: 22 }}>No media on this record</div>}
+        {asset ? <AssetView asset={asset} overlays={overlays} controls={mediaControls} alt={`Primary asset of ${record.id}`} /> : <div className="fallback" style={{ padding: 22 }}>No media on this record</div>}
       </div>
       {runs.length > 0 && (
         <div className="insp-section" aria-label="Detector runs for this record">
@@ -62,6 +67,7 @@ export function SampleInspector({ record, fields, artifacts, query, datasetId, o
       <div className="insp-section">
         <div className="row" style={{ flexWrap: 'wrap', gap: 6 }}>
           {asset && <RepresentationTag asset={asset} />}
+          {asset && Boolean(asset.metadata?.condition || asset.metadata?.source_role || asset.metadata?.role) && <Tag>{assetLabel(asset)}</Tag>}
           {images.length > 1 && <Tag>{images.length} images</Tag>}
           {record.unit && <Tag>{titleCase(record.unit)}</Tag>}
           <button type="button" className="btn sm" style={{ marginLeft: 'auto' }} onClick={onFocus}><Icon.Expand size={13} />Open</button>
@@ -134,13 +140,17 @@ export function SampleInspector({ record, fields, artifacts, query, datasetId, o
       {tab === 'outputs' && (
         <div className="insp-section">
           <div className="insp-kicker">Computed results</div>
+          {imported.map(({ artifact, item }) => <details className="disclosure" key={artifact.id}>
+            <summary>Imported output · {item.status} · {shortId(artifact.id, 12)}</summary>
+            <div className="body"><pre className="raw">{JSON.stringify({ output: item.output, error: item.error, provenance: artifact.provenance }, null, 2)}</pre></div>
+          </details>)}
           {runs.length > 0 && <p className="hint">{runs.length} detector run{runs.length === 1 ? '' : 's'} are summarised under the media, with their extraction thresholds.</p>}
           {predictionEntries.length ? (
             <dl className="dl">
               {predictionEntries.map(([key, value]) => {
                 const field = descriptor(`prediction.${key}`)
                 return (
-                  <div key={key}>
+                  <div key={key} data-field-id={`prediction.${key}`}>
                     <dt title={field?.description || `prediction.${key}`}>{field?.name ?? key}</dt>
                     <dd><Value value={value} /></dd>
                   </div>
@@ -166,6 +176,7 @@ export function SampleInspector({ record, fields, artifacts, query, datasetId, o
             <div key={asset.id} style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-muted)', borderTop: '1px solid var(--divider)', paddingTop: 6 }}>
               <div className="row" style={{ gap: 6 }}><Tag>{asset.modality}</Tag><RepresentationTag asset={asset} /></div>
               <div className="mono wrap-any" style={{ marginTop: 3 }}>{asset.id}</div>
+              {asset.modality === 'array' && assetUrl(asset)?.startsWith('/api/v1/media/') && <a className="btn sm" href={assetUrl(asset)!} download>Download native array</a>}
               {asset.sha256 && <div className="mono wrap-any">sha256 {shortId(asset.sha256, 16)}</div>}
             </div>
           ))}
@@ -196,7 +207,7 @@ export function SampleInspector({ record, fields, artifacts, query, datasetId, o
 function SimilarPanel({ record, artifacts, query, datasetId, onOpenRecord }: {
   record: AtlasRecord; artifacts: Artifact[]; query: Query | null; datasetId: string; onOpenRecord: (id: string) => void
 }) {
-  const spaces = artifacts.filter(artifact => artifact.kind.startsWith('embed.') && artifact.ids.includes(record.id))
+  const spaces = artifacts.filter(artifact => isEmbeddingArtifact(artifact) && artifact.unit === record.unit && artifact.snapshot_ids.includes(record.snapshot_id) && artifact.ids.includes(record.id))
   const [artifactId, setArtifactId] = useState('')
   const [text, setText] = useState('')
   const [useText, setUseText] = useState(false)
@@ -224,12 +235,12 @@ function SimilarPanel({ record, artifacts, query, datasetId, onOpenRecord }: {
       <summary>Similar samples</summary>
       <div className="body col" style={{ gap: 8 }}>
         <p className="hint">Similarity is computed in a named embedding space over the current population. It is not the same thing as the neighbouring examples in browsing order.</p>
-        <select className="select" value={artifactId} onChange={event => { setArtifactId(event.target.value); setResults(null) }} aria-label="Embedding space">
+        <select className="select" value={artifactId} onChange={event => { setArtifactId(event.target.value); setResults(null); if (spaces.find(artifact => artifact.id === event.target.value)?.kind === 'import.research') setUseText(false) }} aria-label="Embedding space">
           <option value="">Choose an embedding run</option>
           {spaces.map(artifact => <option key={artifact.id} value={artifact.id}>{runLabel(artifact)}</option>)}
         </select>
         <label className="facet-opt" style={{ margin: 0 }}>
-          <input type="checkbox" checked={useText} onChange={event => { setUseText(event.target.checked); setResults(null) }} />
+          <input type="checkbox" checked={useText} disabled={spaces.find(artifact => artifact.id === artifactId)?.kind === 'import.research'} onChange={event => { setUseText(event.target.checked); setResults(null) }} />
           <span>Query with new text instead of this record</span>
         </label>
         {useText && <input className="input" value={text} onChange={event => setText(event.target.value)} placeholder="Text query for a compatible encoder" />}

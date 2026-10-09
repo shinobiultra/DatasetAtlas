@@ -1,0 +1,118 @@
+release: swc-2.0-native-sentences-and-article-audio-fdr1875
+adapter: spoken_wikipedia
+expected_count: 738234
+scope: All 738,234 native sentence elements from 5,397 SWC2.0 aligned articles across
+  Dutch, English and German, joined by exact native info.json/aligned.swc SHA-256
+  to every supported released whole-article audio part. Complete native TARs, all
+  member hashes and parent ZIP-member CRCs are verified. Whole-article audio remains
+  original, without fabricated sentence clips; sentence alignment fields and native
+  XML serializations remain inspectable. Unsegmented ignored spans and unidentified
+  paper-specific screenings are outside this sentence population. Parent ZIP whole-file
+  SHA-256 is not claimed.
+remote_metadata_bytes: 5000000
+adapter_config:
+  media_scope: partial
+  max_record_bytes: 16000000
+  verify_remote_preview_media: true
+  preview_media_modalities:
+  - audio
+  preview_group_by: primary_asset
+  remote_cache_root: work/media-cache/spoken-wikipedia
+  remote_cache_bytes: 500000000
+  native_record_read_bytes: 8000000000
+allowed_hosts:
+- www.fdr.uni-hamburg.de
+- fdr-prod.s3-uhh.lzs.uni-hamburg.de
+convert:
+  name: spoken_wikipedia_sentences
+  count: 738234
+  rows_sha256: 380b7f9f030aa3e8735e4042391c2daa5e587408dbd367d16b6d9b3c2d9dd73b
+files:
+- source_name: SWC_Dutch_no_audio.tar.xz
+  bytes: 17826540
+  sha256: 089f12267f73492defa0aa4037c77f40bb6b03ee33eaa30008963378b6d08d84
+  url: https://www.fdr.uni-hamburg.de/api/files/2e9aa9ac-ea6b-4ef4-99d9-d2c7867110f7/swc-2.0.zip
+  config_key: Dutch
+  format: tar.xz
+  remote_zip_member:
+    member: SWC_Dutch_no_audio.tar.xz
+    archive_bytes: 37550398487
+    etag: '"979cd9b917c0fc06d7d0137bb26bd854-359"'
+    allowed_hosts:
+    - www.fdr.uni-hamburg.de
+    - fdr-prod.s3-uhh.lzs.uni-hamburg.de
+    crc32: 1261596694
+    transfer_bytes: 18829260
+- source_name: SWC_English_no_audio.tar.xz
+  bytes: 64628916
+  sha256: f1e8442fc9f7d430009dbe3e01de7e9e24db8df80e4362f875c2df8a1616a134
+  url: https://www.fdr.uni-hamburg.de/api/files/2e9aa9ac-ea6b-4ef4-99d9-d2c7867110f7/swc-2.0.zip
+  config_key: English
+  format: tar.xz
+  remote_zip_member:
+    member: SWC_English_no_audio.tar.xz
+    archive_bytes: 37550398487
+    etag: '"979cd9b917c0fc06d7d0137bb26bd854-359"'
+    allowed_hosts:
+    - www.fdr.uni-hamburg.de
+    - fdr-prod.s3-uhh.lzs.uni-hamburg.de
+    crc32: 1969619327
+    transfer_bytes: 65638776
+- source_name: SWC_German_no_audio.tar.xz
+  bytes: 63103804
+  sha256: e074b51e1efbcad119ef18d58c194444bdb74232f84ad877a1e56aa48c0d33e4
+  url: https://www.fdr.uni-hamburg.de/api/files/2e9aa9ac-ea6b-4ef4-99d9-d2c7867110f7/swc-2.0.zip
+  config_key: German
+  format: tar.xz
+  remote_zip_member:
+    member: SWC_German_no_audio.tar.xz
+    archive_bytes: 37550398487
+    etag: '"979cd9b917c0fc06d7d0137bb26bd854-359"'
+    allowed_hosts:
+    - www.fdr.uni-hamburg.de
+    - fdr-prod.s3-uhh.lzs.uni-hamburg.de
+    crc32: 2677433155
+    transfer_bytes: 64113429
+zip_tar_sources:
+  Dutch:
+    url: https://www.fdr.uni-hamburg.de/api/files/2e9aa9ac-ea6b-4ef4-99d9-d2c7867110f7/swc-2.0.zip
+    archive_bytes: 37550398487
+    etag: '"979cd9b917c0fc06d7d0137bb26bd854-359"'
+    allowed_hosts:
+    - www.fdr.uni-hamburg.de
+    - fdr-prod.s3-uhh.lzs.uni-hamburg.de
+    member: SWC_Dutch.tar
+    bytes: 8452065280
+    compressed_bytes: 8251347912
+    crc32: 3807876523
+    sha256: 02eae01a90e05bdb90d8927cd9061ead6211c46ce7686d771b1341ec5083b26b
+  English:
+    url: https://www.fdr.uni-hamburg.de/api/files/2e9aa9ac-ea6b-4ef4-99d9-d2c7867110f7/swc-2.0.zip
+    archive_bytes: 37550398487
+    etag: '"979cd9b917c0fc06d7d0137bb26bd854-359"'
+    allowed_hosts:
+    - www.fdr.uni-hamburg.de
+    - fdr-prod.s3-uhh.lzs.uni-hamburg.de
+    member: SWC_English.tar
+    bytes: 16190801920
+    compressed_bytes: 15510055913
+    crc32: 3226452537
+    sha256: cded618a5119808d0f517f1d8f5e50a42f42f7f5fbd892db5f6bc5e2054dba8f
+  German:
+    url: https://www.fdr.uni-hamburg.de/api/files/2e9aa9ac-ea6b-4ef4-99d9-d2c7867110f7/swc-2.0.zip
+    archive_bytes: 37550398487
+    etag: '"979cd9b917c0fc06d7d0137bb26bd854-359"'
+    allowed_hosts:
+    - www.fdr.uni-hamburg.de
+    - fdr-prod.s3-uhh.lzs.uni-hamburg.de
+    member: SWC_German.tar
+    bytes: 14232719360
+    compressed_bytes: 13643409555
+    crc32: 521459867
+    sha256: ee2d2e57c2d648a4292bdc93cc738c796516d18da7403231a6b78c91b5efe471
+native_zip_tar_index_bytes: 1000000000
+preview_media_transfer_bytes: 1500000000
+resource_limits:
+  max_rss_bytes: 8000000000
+  max_cpu_seconds: 3600
+  max_wall_seconds: 7200

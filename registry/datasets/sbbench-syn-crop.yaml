@@ -2,26 +2,29 @@ schema_version: '1.0'
 id: sbbench-syn-crop
 name: SBBench-Syn-Crop
 aliases: []
-description: Paper supplement counts match two public HF crop datasets; generic candidate is not one immutable
-  collection.
+description: 'SBBench synthetic author crop releases: all 917 image examples across separate age and gender
+  configurations, with original image bytes and native integer labels retained. Label meanings are not
+  inferred.'
 paper_ids:
 - paper-32cea5e43d940514
-release: unresolved
-adapter: structured
+release: sbbench-syn-crop-43769ef07d9388ebb4c3dc74b548eea615d0c93b-a7679386395cf29e9640757f16923f823d6251ef
+adapter: remote_columnar
 adapter_config: {}
 coverage:
-  identity: candidate
+  identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Exact source variant or paper selection is unresolved.
-  - Adapter and preview are not implemented.
+  - "The citing chart\u2019s shortened name and its exact historical sample membership remain unverified."
+  - Native integer labels lack a published semantic mapping in these source cards.
+  - Public image redistribution has not been approved.
+  total_count: 917
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -52,4 +55,22 @@ evidence:
   audit_file: work/sources/source-audit-jobs-batch3.json
   checked_on: '2026-09-22'
   source_identity_status: family_only
+- kind: native_population_live_verification
+  url: https://huggingface.co/vlmbias
+  checked_on: '2026-09-24'
+  receipt: reports/sbbench-syn-crop-live-verification.json
+  scope: Complete pinned vlmbias age and gender crop=True Parquet releases (917 rows). Each source stays
+    identifiable by configuration and immutable revision. This is an author release population, not a
+    claim that the chart abbreviations SB-Syn or SB-Syn-Crop identify exact historical membership. Native
+    integer label codes are retained without inventing a category mapping.
+  source_identity_status: author_release_population_resolved_historical_chart_selection_unverified
 source_url: https://huggingface.co/vlmbias
+relationships:
+- type: same_source_family_as
+  target_id: sbbench
+  status: asserted_from_source_review
+  scope: Cropped synthetic split of SBBench.
+modalities:
+- image
+tasks:
+- synthetic social-bias image browsing

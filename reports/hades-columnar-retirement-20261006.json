@@ -1,0 +1,86 @@
+{
+  "dataset_id": "hades",
+  "executed": true,
+  "status": "executed",
+  "sources": [
+    {
+      "source_name": "data/test-00000-of-00002.parquet",
+      "url": "https://huggingface.co/datasets/Monosail/HADES/resolve/8c7388c566c8844a0732a2ad2156b72ae00c92c8/data/test-00000-of-00002.parquet",
+      "bytes": 341799727,
+      "sha256": "edd1d1fcb6e24fe6da42be3e724994cd7fb98570ed7b4817eb7f8e2521cb506b",
+      "etag": "\"225029a03dcd9980ae20c5f6527f469e7f0e7028f420192c02ba5474942732f2\"",
+      "rows": 2250
+    },
+    {
+      "source_name": "data/test-00001-of-00002.parquet",
+      "url": "https://huggingface.co/datasets/Monosail/HADES/resolve/8c7388c566c8844a0732a2ad2156b72ae00c92c8/data/test-00001-of-00002.parquet",
+      "bytes": 355916547,
+      "sha256": "a5b2b289384a17fd1bdb5ea51c996c7b9906980b6e24fefdfd8cd2a24c0d2d7e",
+      "etag": "\"8dc448713253d2bc2d78c388f0dd04be3e552387f392c287315f6b9febc49670\"",
+      "rows": 2250
+    }
+  ],
+  "versions": [
+    {
+      "snapshot_id": "hades-f31faebb5541d6f225edb983",
+      "native_image_references": 4500,
+      "index": "parquet-54fbbb892a2c05be3f1991fab1ebc600-af069a88ba354badafa90be4a79a1ac5",
+      "cold_checks": [
+        {
+          "ref": "embedded/1125/0.jpg",
+          "sha256": "e58731dacc114b3c4126007f3e1bf04e0c80c43da4105cdc34bb72d09c54559a",
+          "transferred_bytes": 14898850,
+          "source_ref": "remote/0/1125/image/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/3375/0.jpg",
+          "sha256": "7372b5f131fb3ea882ba6f4514ec6bdf7c35fa49b98197bf1a272b5b50b8b331",
+          "transferred_bytes": 14032184,
+          "source_ref": "remote/1/1125/image/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/0/0.jpg",
+          "sha256": "ca7fac64ada257af462400324ce1725806ae89d56957c1989b57e4b68fdf697a",
+          "transferred_bytes": 14529935,
+          "source_ref": "remote/0/0/image/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/2250/0.jpg",
+          "sha256": "ade61e78946346110f4785243bc6c773e1721837ba8a8151cc049721b6dc9840",
+          "transferred_bytes": 16459370,
+          "source_ref": "remote/1/0/image/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/4499/0.jpg",
+          "sha256": "d1ea2460e8162c3616031ce6be952ab306767f31e48ea73b1b3d00be0f87a0f2",
+          "transferred_bytes": 8399948,
+          "source_ref": "remote/1/2249/image/0.png",
+          "media_type": "image/jpeg",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        }
+      ]
+    }
+  ],
+  "total_verification_transfer_bytes": 68320289,
+  "native_index_bytes": 704512,
+  "preview_bytes_upper_bound": 14698146,
+  "source_paths_eligible": [
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/hades/f31faebb5541d6f225edb983cd1071bdba44bdcd5a754e979a62a1a59043e531/sources/edd1d1fcb6e24fe6da42be3e724994cd7fb98570ed7b4817eb7f8e2521cb506b.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/hades/f31faebb5541d6f225edb983cd1071bdba44bdcd5a754e979a62a1a59043e531/sources/a5b2b289384a17fd1bdb5ea51c996c7b9906980b6e24fefdfd8cd2a24c0d2d7e.parquet"
+  ],
+  "source_paths_retired": [
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/hades/f31faebb5541d6f225edb983cd1071bdba44bdcd5a754e979a62a1a59043e531/sources/edd1d1fcb6e24fe6da42be3e724994cd7fb98570ed7b4817eb7f8e2521cb506b.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/hades/f31faebb5541d6f225edb983cd1071bdba44bdcd5a754e979a62a1a59043e531/sources/a5b2b289384a17fd1bdb5ea51c996c7b9906980b6e24fefdfd8cd2a24c0d2d7e.parquet"
+  ],
+  "freed_source_allocated_bytes": 697724928,
+  "integrity": "Complete native Parquet SHA-256 and every canonical image SHA-256 retained. Preview originals pinned locally. Retrieved originals equal their measured native SHA-256.",
+  "transfer_measurement": "One-byte source probes plus actual range payloads; validated ETag-bound cache hits transfer zero bytes. Verification can reuse those cached ranges."
+}

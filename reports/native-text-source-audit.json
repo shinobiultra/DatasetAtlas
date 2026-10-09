@@ -1,0 +1,3316 @@
+{
+  "checked_at": "2026-09-23T08:49:51.685390+00:00",
+  "sources": {
+    "sad": [
+      {
+        "source_name": "sad-anti_imitation-output_control-structs.zip",
+        "native_path": "sad/anti_imitation/output_control/structs.zip",
+        "url": "https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/anti_imitation/output_control/structs.zip",
+        "bytes": 2198,
+        "sha256": "96289726f139f5feb531a5646462acdbd5675160aa2c5934d6c2497525b98baf",
+        "batches": []
+      },
+      {
+        "source_name": "sad-facts-human_defaults-structs.zip",
+        "native_path": "sad/facts/human_defaults/structs.zip",
+        "url": "https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/facts/human_defaults/structs.zip",
+        "bytes": 99458,
+        "sha256": "fb5085dab38cecfac0a8e9fcbd663baab96c4837079fae80f9a7f4a823074650",
+        "batches": [
+          {
+            "member": "batch/good_text_model.yaml",
+            "records": 600,
+            "records_key": "samples",
+            "batch_id": "good_text_model"
+          },
+          {
+            "member": "batch/text_model.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "text_model"
+          },
+          {
+            "member": "batch/general_ai.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "general_ai"
+          }
+        ]
+      },
+      {
+        "source_name": "sad-facts-llms-structs.zip",
+        "native_path": "sad/facts/llms/structs.zip",
+        "url": "https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/facts/llms/structs.zip",
+        "bytes": 25239,
+        "sha256": "c05b00d70bcf25bbccafb3cd64aadbce684a84041c36e7ac34cba533508a4f61",
+        "batches": [
+          {
+            "member": "batch/training_architecture.yaml",
+            "records": 249,
+            "records_key": "samples",
+            "batch_id": "training_architecture"
+          }
+        ]
+      },
+      {
+        "source_name": "sad-facts-names-structs.zip",
+        "native_path": "sad/facts/names/structs.zip",
+        "url": "https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/facts/names/structs.zip",
+        "bytes": 103826,
+        "sha256": "3a440fc789fa4d278d6ab2b81fb4972f83e3562839dc91fcd9dad7e9caab6abe",
+        "batches": [
+          {
+            "member": "batch/claude-2_1.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "claude-2_1"
+          },
+          {
+            "member": "batch/claude-3-haiku-20240307.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "claude-3-haiku-20240307"
+          },
+          {
+            "member": "batch/llama-2-13b-chat.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "llama-2-13b-chat"
+          },
+          {
+            "member": "batch/o1-mini-2024-09-12.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "o1-mini-2024-09-12"
+          },
+          {
+            "member": "batch/claude-3-5-sonnet-20240620.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "claude-3-5-sonnet-20240620"
+          },
+          {
+            "member": "batch/gpt-3-5-turbo.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "gpt-3-5-turbo"
+          },
+          {
+            "member": "batch/o1-mini-20240912.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "o1-mini-20240912"
+          },
+          {
+            "member": "batch/o1-preview-2024-09-12.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "o1-preview-2024-09-12"
+          },
+          {
+            "member": "batch/claude-3-opus-20240229.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "claude-3-opus-20240229"
+          },
+          {
+            "member": "batch/gpt-4o.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "gpt-4o"
+          },
+          {
+            "member": "batch/llama-3-8b.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "llama-3-8b"
+          },
+          {
+            "member": "batch/o1-preview-20240912.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "o1-preview-20240912"
+          },
+          {
+            "member": "batch/gpt-3_5-turbo-0613.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "gpt-3_5-turbo-0613"
+          },
+          {
+            "member": "batch/llama-3-70b-chat.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "llama-3-70b-chat"
+          },
+          {
+            "member": "batch/gpt-4-base.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "gpt-4-base"
+          },
+          {
+            "member": "batch/llama-2-70b-chat.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "llama-2-70b-chat"
+          },
+          {
+            "member": "batch/gpt-4-0125-preview.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "gpt-4-0125-preview"
+          },
+          {
+            "member": "batch/claude-3-sonnet-20240229.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "claude-3-sonnet-20240229"
+          },
+          {
+            "member": "batch/llama-3-8b-chat.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "llama-3-8b-chat"
+          },
+          {
+            "member": "batch/claude-2-1.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "claude-2-1"
+          },
+          {
+            "member": "batch/claude-instant-1_2.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "claude-instant-1_2"
+          },
+          {
+            "member": "batch/llama-2-7b.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "llama-2-7b"
+          },
+          {
+            "member": "batch/gpt-4-0613.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "gpt-4-0613"
+          },
+          {
+            "member": "batch/davinci-002.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "davinci-002"
+          },
+          {
+            "member": "batch/llama-3-70b.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "llama-3-70b"
+          },
+          {
+            "member": "batch/llama-2-70b.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "llama-2-70b"
+          },
+          {
+            "member": "batch/llama-2-7b-chat.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "llama-2-7b-chat"
+          },
+          {
+            "member": "batch/llama-2-13b.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "llama-2-13b"
+          },
+          {
+            "member": "batch/gpt-4-1106-preview.yaml",
+            "records": 50,
+            "records_key": "samples",
+            "batch_id": "gpt-4-1106-preview"
+          }
+        ]
+      },
+      {
+        "source_name": "sad-facts-which_llm-structs.zip",
+        "native_path": "sad/facts/which_llm/structs.zip",
+        "url": "https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/facts/which_llm/structs.zip",
+        "bytes": 700434,
+        "sha256": "bd2685366bc9c658fe585295417b2ca48d276c88135019db04c77c97dfdc8215",
+        "batches": [
+          {
+            "member": "batch/gpt-4-0125-preview--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "gpt-4-0125-preview--2nd-person"
+          },
+          {
+            "member": "batch/o1-mini--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "o1-mini--3rd-person"
+          },
+          {
+            "member": "batch/gpt-4-0125-preview--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "gpt-4-0125-preview--3rd-person"
+          },
+          {
+            "member": "batch/o1-mini--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "o1-mini--2nd-person"
+          },
+          {
+            "member": "batch/llama-2-70b-chat--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "llama-2-70b-chat--3rd-person"
+          },
+          {
+            "member": "batch/gpt-4-0613--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "gpt-4-0613--2nd-person"
+          },
+          {
+            "member": "batch/llama-2-7b--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "llama-2-7b--3rd-person"
+          },
+          {
+            "member": "batch/claude-3-5-sonnet-20240620--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "claude-3-5-sonnet-20240620--3rd-person"
+          },
+          {
+            "member": "batch/o1-preview-2024-09-12--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "o1-preview-2024-09-12--3rd-person"
+          },
+          {
+            "member": "batch/llama-2-7b--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "llama-2-7b--2nd-person"
+          },
+          {
+            "member": "batch/claude-3-5-sonnet-20240620--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "claude-3-5-sonnet-20240620--2nd-person"
+          },
+          {
+            "member": "batch/o1-preview-2024-09-12--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "o1-preview-2024-09-12--2nd-person"
+          },
+          {
+            "member": "batch/llama-2-70b-chat--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "llama-2-70b-chat--2nd-person"
+          },
+          {
+            "member": "batch/gpt-4-0613--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "gpt-4-0613--3rd-person"
+          },
+          {
+            "member": "batch/claude-3-opus-20240229--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "claude-3-opus-20240229--3rd-person"
+          },
+          {
+            "member": "batch/llama-3-70b-chat--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "llama-3-70b-chat--2nd-person"
+          },
+          {
+            "member": "batch/llama-2-13b--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "llama-2-13b--2nd-person"
+          },
+          {
+            "member": "batch/gpt-3_5-turbo-0613--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "gpt-3_5-turbo-0613--3rd-person"
+          },
+          {
+            "member": "batch/gpt-4-base--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "gpt-4-base--3rd-person"
+          },
+          {
+            "member": "batch/llama-2-13b-chat--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "llama-2-13b-chat--3rd-person"
+          },
+          {
+            "member": "batch/llama-2-70b--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "llama-2-70b--2nd-person"
+          },
+          {
+            "member": "batch/claude-3-sonnet-20240229--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "claude-3-sonnet-20240229--3rd-person"
+          },
+          {
+            "member": "batch/claude-2_1--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "claude-2_1--2nd-person"
+          },
+          {
+            "member": "batch/gpt-4-1106-preview--3rd-person.yaml",
+            "records": 159,
+            "records_key": "samples",
+            "batch_id": "gpt-4-1106-preview--3rd-person"
+          },
+          {
+            "member": "batch/llama-2-13b-chat--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "llama-2-13b-chat--2nd-person"
+          },
+          {
+            "member": "batch/gpt-4-base--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "gpt-4-base--2nd-person"
+          },
+          {
+            "member": "batch/gpt-4-1106-preview--2nd-person.yaml",
+            "records": 159,
+            "records_key": "samples",
+            "batch_id": "gpt-4-1106-preview--2nd-person"
+          },
+          {
+            "member": "batch/llama-2-70b--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "llama-2-70b--3rd-person"
+          },
+          {
+            "member": "batch/claude-2_1--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "claude-2_1--3rd-person"
+          },
+          {
+            "member": "batch/claude-3-sonnet-20240229--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "claude-3-sonnet-20240229--2nd-person"
+          },
+          {
+            "member": "batch/claude-3-opus-20240229--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "claude-3-opus-20240229--2nd-person"
+          },
+          {
+            "member": "batch/llama-2-13b--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "llama-2-13b--3rd-person"
+          },
+          {
+            "member": "batch/gpt-3_5-turbo-0613--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "gpt-3_5-turbo-0613--2nd-person"
+          },
+          {
+            "member": "batch/llama-3-70b-chat--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "llama-3-70b-chat--3rd-person"
+          },
+          {
+            "member": "batch/gpt-4o--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "gpt-4o--2nd-person"
+          },
+          {
+            "member": "batch/davinci-002--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "davinci-002--3rd-person"
+          },
+          {
+            "member": "batch/gpt-3_5-turbo--3rd-person.yaml",
+            "records": 159,
+            "records_key": "samples",
+            "batch_id": "gpt-3_5-turbo--3rd-person"
+          },
+          {
+            "member": "batch/o1-mini-2024-09-12--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "o1-mini-2024-09-12--3rd-person"
+          },
+          {
+            "member": "batch/o1-preview--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "o1-preview--3rd-person"
+          },
+          {
+            "member": "batch/claude-3_5-sonnet-20240620--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "claude-3_5-sonnet-20240620--3rd-person"
+          },
+          {
+            "member": "batch/claude-instant-1_2--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "claude-instant-1_2--3rd-person"
+          },
+          {
+            "member": "batch/claude-3-haiku-20240307--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "claude-3-haiku-20240307--2nd-person"
+          },
+          {
+            "member": "batch/llama-2-7b-chat--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "llama-2-7b-chat--3rd-person"
+          },
+          {
+            "member": "batch/llama-3-70b-instruct--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "llama-3-70b-instruct--2nd-person"
+          },
+          {
+            "member": "batch/claude-3_5-sonnet--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "claude-3_5-sonnet--3rd-person"
+          },
+          {
+            "member": "batch/llama-3-70b-instruct--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "llama-3-70b-instruct--3rd-person"
+          },
+          {
+            "member": "batch/claude-3_5-sonnet--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "claude-3_5-sonnet--2nd-person"
+          },
+          {
+            "member": "batch/gpt-4o--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "gpt-4o--3rd-person"
+          },
+          {
+            "member": "batch/davinci-002--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "davinci-002--2nd-person"
+          },
+          {
+            "member": "batch/gpt-3_5-turbo--2nd-person.yaml",
+            "records": 159,
+            "records_key": "samples",
+            "batch_id": "gpt-3_5-turbo--2nd-person"
+          },
+          {
+            "member": "batch/o1-mini-2024-09-12--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "o1-mini-2024-09-12--2nd-person"
+          },
+          {
+            "member": "batch/claude-3-haiku-20240307--3rd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "claude-3-haiku-20240307--3rd-person"
+          },
+          {
+            "member": "batch/llama-2-7b-chat--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "llama-2-7b-chat--2nd-person"
+          },
+          {
+            "member": "batch/o1-preview--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "o1-preview--2nd-person"
+          },
+          {
+            "member": "batch/claude-3_5-sonnet-20240620--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "claude-3_5-sonnet-20240620--2nd-person"
+          },
+          {
+            "member": "batch/claude-instant-1_2--2nd-person.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "claude-instant-1_2--2nd-person"
+          }
+        ]
+      },
+      {
+        "source_name": "sad-id_leverage-entity_id-structs.zip",
+        "native_path": "sad/id_leverage/entity_id/structs.zip",
+        "url": "https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/id_leverage/entity_id/structs.zip",
+        "bytes": 870253,
+        "sha256": "e3a7b37318a34ccddb40c5d20cad243839d82d2eb145be611bdcf94513442cb3",
+        "batches": [
+          {
+            "member": "batch/batch_idlev_names_claude-instant-1_2.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_names_claude-instant-1_2"
+          },
+          {
+            "member": "batch/batch_idlev_names_o1-preview-2024-09-12.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_names_o1-preview-2024-09-12"
+          },
+          {
+            "member": "batch/batch_idlev_names_davinci-002.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_names_davinci-002"
+          },
+          {
+            "member": "batch/batch_idlev_names_llama-2-70b.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_names_llama-2-70b"
+          },
+          {
+            "member": "batch/batch_idlev_names_llama-2-13b.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_names_llama-2-13b"
+          },
+          {
+            "member": "batch/batch_generic_names.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "batch_generic_names"
+          },
+          {
+            "member": "batch/batch_idlev_names_gpt-4-0613.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_names_gpt-4-0613"
+          },
+          {
+            "member": "batch/batch_idlev_names_gpt-4-0125-preview.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_names_gpt-4-0125-preview"
+          },
+          {
+            "member": "batch/batch_idlev_names_gpt-4o.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_names_gpt-4o"
+          },
+          {
+            "member": "batch/batch_idlev_names_llama-2-7b.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_names_llama-2-7b"
+          },
+          {
+            "member": "batch/batch_idlev_names_llama-2-70b-chat.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_names_llama-2-70b-chat"
+          },
+          {
+            "member": "batch/batch_idlev_names_claude-3-5-sonnet-20240620.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_names_claude-3-5-sonnet-20240620"
+          },
+          {
+            "member": "batch/batch_idlev_names_claude-3-sonnet-20240229.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_names_claude-3-sonnet-20240229"
+          },
+          {
+            "member": "batch/batch_idlev_names_llama-2-7b-chat.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_names_llama-2-7b-chat"
+          },
+          {
+            "member": "batch/batch_idlev_names_llama-3-70b-chat.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_names_llama-3-70b-chat"
+          },
+          {
+            "member": "batch/batch_idlev_names_claude-2_1.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_names_claude-2_1"
+          },
+          {
+            "member": "batch/batch_idlev_names_claude-3-opus-20240229.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_names_claude-3-opus-20240229"
+          },
+          {
+            "member": "batch/batch_idlev_names_gpt-3_5-turbo-0613.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_names_gpt-3_5-turbo-0613"
+          },
+          {
+            "member": "batch/batch_idlev_names_claude-3-haiku-20240307.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_names_claude-3-haiku-20240307"
+          },
+          {
+            "member": "batch/batch_idlev_names_gpt-4-base.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_names_gpt-4-base"
+          },
+          {
+            "member": "batch/batch_idlev_names_llama-2-13b-chat.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_names_llama-2-13b-chat"
+          },
+          {
+            "member": "batch/batch_idlev_names_o1-mini-2024-09-12.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_names_o1-mini-2024-09-12"
+          }
+        ]
+      },
+      {
+        "source_name": "sad-id_leverage-multihop-structs.zip",
+        "native_path": "sad/id_leverage/multihop/structs.zip",
+        "url": "https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/id_leverage/multihop/structs.zip",
+        "bytes": 618526,
+        "sha256": "48e41629d023fc2c754c3c2dcded16e5597afa3713fdea2286115dad9c080c17",
+        "batches": [
+          {
+            "member": "batch/id_lev_multihop_human_defaults_0.yaml",
+            "records": 100,
+            "records_key": "samples",
+            "batch_id": "id_lev_multihop_human_defaults_0"
+          },
+          {
+            "member": "batch/batch_idlev_multihop_which_llm_llama-2-7b.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_multihop_which_llm_llama-2-7b"
+          },
+          {
+            "member": "batch/batch_idlev_multihop_which_llm_llama-2-13b-chat.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_multihop_which_llm_llama-2-13b-chat"
+          },
+          {
+            "member": "batch/batch_idlev_multihop_which_llm_llama-2-7b-chat.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_multihop_which_llm_llama-2-7b-chat"
+          },
+          {
+            "member": "batch/batch_idlev_multihop_which_llm_gpt-4o.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_multihop_which_llm_gpt-4o"
+          },
+          {
+            "member": "batch/batch_idlev_multihop_which_llm_gpt-4-0613.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_multihop_which_llm_gpt-4-0613"
+          },
+          {
+            "member": "batch/batch_idlev_multihop_which_llm_claude-instant-1_2.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_multihop_which_llm_claude-instant-1_2"
+          },
+          {
+            "member": "batch/id_lev_multihop_human_defaults_1.yaml",
+            "records": 100,
+            "records_key": "samples",
+            "batch_id": "id_lev_multihop_human_defaults_1"
+          },
+          {
+            "member": "batch/batch_idlev_multihop_which_llm_claude-3-haiku-20240307.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_multihop_which_llm_claude-3-haiku-20240307"
+          },
+          {
+            "member": "batch/batch_idlev_multihop_which_llm_llama-3-70b-chat.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_multihop_which_llm_llama-3-70b-chat"
+          },
+          {
+            "member": "batch/batch_idlev_multihop_which_llm_gpt-4-0125-preview.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_multihop_which_llm_gpt-4-0125-preview"
+          },
+          {
+            "member": "batch/batch_idlev_multihop_which_llm_gpt-3_5-turbo-0613.yaml",
+            "records": 159,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_multihop_which_llm_gpt-3_5-turbo-0613"
+          },
+          {
+            "member": "batch/batch_idlev_multihop_which_llm_llama-2-13b.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_multihop_which_llm_llama-2-13b"
+          },
+          {
+            "member": "batch/batch_idlev_multihop_which_llm_o1-preview-2024-09-12.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_multihop_which_llm_o1-preview-2024-09-12"
+          },
+          {
+            "member": "batch/batch_idlev_multihop_which_llm_gpt-4-base.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_multihop_which_llm_gpt-4-base"
+          },
+          {
+            "member": "batch/id_lev_multihop_llms_0.yaml",
+            "records": 249,
+            "records_key": "samples",
+            "batch_id": "id_lev_multihop_llms_0"
+          },
+          {
+            "member": "batch/batch_idlev_multihop_which_llm_claude-3-sonnet-20240229.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_multihop_which_llm_claude-3-sonnet-20240229"
+          },
+          {
+            "member": "batch/batch_idlev_multihop_which_llm_llama-2-70b.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_multihop_which_llm_llama-2-70b"
+          },
+          {
+            "member": "batch/batch_idlev_multihop_which_llm_llama-2-70b-chat.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_multihop_which_llm_llama-2-70b-chat"
+          },
+          {
+            "member": "batch/batch_idlev_multihop_which_llm_davinci-002.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_multihop_which_llm_davinci-002"
+          },
+          {
+            "member": "batch/batch_idlev_multihop_which_llm_o1-mini-2024-09-12.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_multihop_which_llm_o1-mini-2024-09-12"
+          },
+          {
+            "member": "batch/id_lev_multihop_human_defaults_2.yaml",
+            "records": 100,
+            "records_key": "samples",
+            "batch_id": "id_lev_multihop_human_defaults_2"
+          },
+          {
+            "member": "batch/batch_idlev_multihop_which_llm_claude-3-5-sonnet-20240620.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_multihop_which_llm_claude-3-5-sonnet-20240620"
+          },
+          {
+            "member": "batch/batch_idlev_multihop_which_llm_claude-2_1.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_multihop_which_llm_claude-2_1"
+          },
+          {
+            "member": "batch/batch_idlev_multihop_which_llm_claude-3-opus-20240229.yaml",
+            "records": 153,
+            "records_key": "samples",
+            "batch_id": "batch_idlev_multihop_which_llm_claude-3-opus-20240229"
+          }
+        ]
+      },
+      {
+        "source_name": "sad-id_leverage-structs.zip",
+        "native_path": "sad/id_leverage/structs.zip",
+        "url": "https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/id_leverage/structs.zip",
+        "bytes": 64465,
+        "sha256": "9f703dc0ef182076b5c17e5afd0bc6b328244638d58e1dc1b15b5ecaecd62246",
+        "batches": [
+          {
+            "member": "batch/private_idlev--language_poems_reverse_order.yaml",
+            "records": 60,
+            "records_key": "samples",
+            "batch_id": "private_idlev--language_poems_reverse_order"
+          },
+          {
+            "member": "batch/private_idlev--language_trivia_reverse_order.yaml",
+            "records": 60,
+            "records_key": "samples",
+            "batch_id": "private_idlev--language_trivia_reverse_order"
+          },
+          {
+            "member": "batch/test.yaml",
+            "records": 3,
+            "records_key": "trials",
+            "batch_id": "test"
+          },
+          {
+            "member": "batch/private_idlev--language_detailed_explanations_reverse_order.yaml",
+            "records": 60,
+            "records_key": "samples",
+            "batch_id": "private_idlev--language_detailed_explanations_reverse_order"
+          },
+          {
+            "member": "batch/private_idlev--language_discussions.yaml",
+            "records": 60,
+            "records_key": "samples",
+            "batch_id": "private_idlev--language_discussions"
+          },
+          {
+            "member": "batch/private_idlev--language.yaml",
+            "records": 60,
+            "records_key": "samples",
+            "batch_id": "private_idlev--language"
+          },
+          {
+            "member": "batch/private_idlev--language_discussions_reverse_order.yaml",
+            "records": 60,
+            "records_key": "samples",
+            "batch_id": "private_idlev--language_discussions_reverse_order"
+          },
+          {
+            "member": "batch/private_idlev--language_reverse_order.yaml",
+            "records": 60,
+            "records_key": "samples",
+            "batch_id": "private_idlev--language_reverse_order"
+          },
+          {
+            "member": "batch/private_idlev--language_trivia.yaml",
+            "records": 60,
+            "records_key": "samples",
+            "batch_id": "private_idlev--language_trivia"
+          },
+          {
+            "member": "batch/private_idlev--language_poems.yaml",
+            "records": 60,
+            "records_key": "samples",
+            "batch_id": "private_idlev--language_poems"
+          },
+          {
+            "member": "batch/private_idlev--language_detailed_explanations.yaml",
+            "records": 60,
+            "records_key": "samples",
+            "batch_id": "private_idlev--language_detailed_explanations"
+          }
+        ]
+      },
+      {
+        "source_name": "sad-influence-structs.zip",
+        "native_path": "sad/influence/structs.zip",
+        "url": "https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/influence/structs.zip",
+        "bytes": 48865,
+        "sha256": "63ed83e878320cd742f81a4c7f1d6ee413c508e68c053482453615cc48156881",
+        "batches": [
+          {
+            "member": "batch/infgen_personhood.yaml",
+            "records": 13,
+            "records_key": "samples",
+            "batch_id": "infgen_personhood"
+          },
+          {
+            "member": "batch/infgen_physical.yaml",
+            "records": 6,
+            "records_key": "samples",
+            "batch_id": "infgen_physical"
+          },
+          {
+            "member": "batch/infgen_ml.yaml",
+            "records": 8,
+            "records_key": "samples",
+            "batch_id": "infgen_ml"
+          },
+          {
+            "member": "batch/infgen_when_a.yaml",
+            "records": 13,
+            "records_key": "samples",
+            "batch_id": "infgen_when_a"
+          },
+          {
+            "member": "batch/inft.yaml",
+            "records": 9,
+            "records_key": "samples",
+            "batch_id": "inft"
+          },
+          {
+            "member": "batch/infgen_physical_a.yaml",
+            "records": 7,
+            "records_key": "samples",
+            "batch_id": "infgen_physical_a"
+          },
+          {
+            "member": "batch/infgen1.yaml",
+            "records": 20,
+            "records_key": "samples",
+            "batch_id": "infgen1"
+          },
+          {
+            "member": "batch/infgen_self.yaml",
+            "records": 17,
+            "records_key": "samples",
+            "batch_id": "infgen_self"
+          },
+          {
+            "member": "batch/infgen3_a.yaml",
+            "records": 18,
+            "records_key": "samples",
+            "batch_id": "infgen3_a"
+          },
+          {
+            "member": "batch/infgen2.yaml",
+            "records": 11,
+            "records_key": "samples",
+            "batch_id": "infgen2"
+          },
+          {
+            "member": "batch/infgen_self_a.yaml",
+            "records": 8,
+            "records_key": "samples",
+            "batch_id": "infgen_self_a"
+          },
+          {
+            "member": "batch/infgen_ml_a.yaml",
+            "records": 11,
+            "records_key": "samples",
+            "batch_id": "infgen_ml_a"
+          },
+          {
+            "member": "batch/infgen3.yaml",
+            "records": 14,
+            "records_key": "samples",
+            "batch_id": "infgen3"
+          },
+          {
+            "member": "batch/infgen_when.yaml",
+            "records": 12,
+            "records_key": "samples",
+            "batch_id": "infgen_when"
+          },
+          {
+            "member": "batch/sadi.yaml",
+            "records": 56,
+            "records_key": "samples",
+            "batch_id": "sadi"
+          },
+          {
+            "member": "batch/infgen_social.yaml",
+            "records": 17,
+            "records_key": "samples",
+            "batch_id": "infgen_social"
+          },
+          {
+            "member": "batch/infgen_who.yaml",
+            "records": 25,
+            "records_key": "samples",
+            "batch_id": "infgen_who"
+          }
+        ]
+      },
+      {
+        "source_name": "sad-introspection-count_tokens-structs.zip",
+        "native_path": "sad/introspection/count_tokens/structs.zip",
+        "url": "https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/introspection/count_tokens/structs.zip",
+        "bytes": 10716962,
+        "sha256": "1a2d3dbb97e6f19bfdf0a1092c045b09c85f7665586711ad7e64baeb62c5dacf",
+        "batches": [
+          {
+            "member": "batch/random_letters_llama-2-7b--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-7b--0_shot"
+          },
+          {
+            "member": "batch/code_gpt-3_5-turbo-0613--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_gpt-3_5-turbo-0613--sp"
+          },
+          {
+            "member": "batch/code_llama-2-7b-chat--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-7b-chat--5_shot"
+          },
+          {
+            "member": "batch/random_chars_llama-3-70b-chat--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-3-70b-chat--sp"
+          },
+          {
+            "member": "batch/the_pile_claude-instant-1_2--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_claude-instant-1_2--plain"
+          },
+          {
+            "member": "batch/random_letters_llama-2-13b--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-13b--sp"
+          },
+          {
+            "member": "batch/random_letters_davinci-002--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_davinci-002--5_shot"
+          },
+          {
+            "member": "batch/code_llama-3-70b-chat--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-3-70b-chat--plain"
+          },
+          {
+            "member": "batch/random_letters_llama-2-7b--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-7b--sp"
+          },
+          {
+            "member": "batch/random_words_o1-preview-2024-09-12--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_o1-preview-2024-09-12--plain"
+          },
+          {
+            "member": "batch/random_chars_gpt-4-1106-preview--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_gpt-4-1106-preview--5_shot"
+          },
+          {
+            "member": "batch/random_letters_o1-preview-2024-09-12--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_o1-preview-2024-09-12--sp"
+          },
+          {
+            "member": "batch/random_words_llama-3-70b-chat--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_llama-3-70b-chat--plain"
+          },
+          {
+            "member": "batch/the_pile_davinci-002--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_davinci-002--plain"
+          },
+          {
+            "member": "batch/random_letters_gpt-4-base--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_gpt-4-base--0_shot"
+          },
+          {
+            "member": "batch/code_claude-3-5-sonnet-20240620--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_claude-3-5-sonnet-20240620--sp"
+          },
+          {
+            "member": "batch/code_gpt-4o--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_gpt-4o--plain"
+          },
+          {
+            "member": "batch/random_letters_llama-2-70b--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-70b--sp"
+          },
+          {
+            "member": "batch/random_letters_llama-2-70b-chat--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-70b-chat--0_shot"
+          },
+          {
+            "member": "batch/random_letters_llama-2-13b-chat--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-13b-chat--0_shot"
+          },
+          {
+            "member": "batch/random_letters_claude-2_1--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_claude-2_1--2_shot"
+          },
+          {
+            "member": "batch/random_letters_gpt-3_5-turbo-0613--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_gpt-3_5-turbo-0613--2_shot"
+          },
+          {
+            "member": "batch/code_claude-3-sonnet-20240229--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_claude-3-sonnet-20240229--sp"
+          },
+          {
+            "member": "batch/random_chars_gpt-4-1106-preview--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_gpt-4-1106-preview--sp"
+          },
+          {
+            "member": "batch/random_chars_claude-3-haiku-20240307--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_claude-3-haiku-20240307--sp"
+          },
+          {
+            "member": "batch/random_words_claude-3-haiku-20240307--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_claude-3-haiku-20240307--sp"
+          },
+          {
+            "member": "batch/the_pile_gpt-4-0613--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_gpt-4-0613--plain"
+          },
+          {
+            "member": "batch/random_words_gpt-4-base--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_gpt-4-base--plain"
+          },
+          {
+            "member": "batch/random_chars_davinci-002--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_davinci-002--plain"
+          },
+          {
+            "member": "batch/code_davinci-002--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_davinci-002--plain"
+          },
+          {
+            "member": "batch/the_pile_llama-2-7b-chat--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_llama-2-7b-chat--sp"
+          },
+          {
+            "member": "batch/random_chars_o1-preview-2024-09-12--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_o1-preview-2024-09-12--plain"
+          },
+          {
+            "member": "batch/random_words_claude-2_1--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_claude-2_1--plain"
+          },
+          {
+            "member": "batch/code_gpt-4-1106-preview--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_gpt-4-1106-preview--0_shot"
+          },
+          {
+            "member": "batch/the_pile_o1-mini-2024-09-12--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_o1-mini-2024-09-12--plain"
+          },
+          {
+            "member": "batch/random_words_davinci-002--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_davinci-002--plain"
+          },
+          {
+            "member": "batch/random_chars_llama-2-70b-chat--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-70b-chat--sp"
+          },
+          {
+            "member": "batch/the_pile_llama-2-13b--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_llama-2-13b--sp"
+          },
+          {
+            "member": "batch/random_letters_llama-2-13b--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-13b--plain"
+          },
+          {
+            "member": "batch/code_llama-2-13b--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-13b--5_shot"
+          },
+          {
+            "member": "batch/random_letters_gpt-4-0613--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_gpt-4-0613--sp"
+          },
+          {
+            "member": "batch/random_letters_claude-3-5-sonnet-20240620--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_claude-3-5-sonnet-20240620--sp"
+          },
+          {
+            "member": "batch/code_gpt-4-0613--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_gpt-4-0613--5_shot"
+          },
+          {
+            "member": "batch/random_letters_claude-2_1--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_claude-2_1--plain"
+          },
+          {
+            "member": "batch/random_chars_gpt-4-0613--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_gpt-4-0613--5_shot"
+          },
+          {
+            "member": "batch/the_pile_claude-3-haiku-20240307--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_claude-3-haiku-20240307--plain"
+          },
+          {
+            "member": "batch/the_pile_gpt-4-base--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_gpt-4-base--sp"
+          },
+          {
+            "member": "batch/code_llama-2-13b-chat--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-13b-chat--5_shot"
+          },
+          {
+            "member": "batch/code_llama-2-70b-chat--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-70b-chat--5_shot"
+          },
+          {
+            "member": "batch/code_claude-3-haiku-20240307--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_claude-3-haiku-20240307--sp"
+          },
+          {
+            "member": "batch/the_pile_claude-instant-1_2--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_claude-instant-1_2--sp"
+          },
+          {
+            "member": "batch/random_words_gpt-4o--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_gpt-4o--plain"
+          },
+          {
+            "member": "batch/the_pile_gpt-4-1106-preview--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_gpt-4-1106-preview--plain"
+          },
+          {
+            "member": "batch/random_chars_llama-2-13b--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-13b--5_shot"
+          },
+          {
+            "member": "batch/the_pile_claude-3-opus-20240229--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_claude-3-opus-20240229--plain"
+          },
+          {
+            "member": "batch/random_letters_gpt-4-1106-preview--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_gpt-4-1106-preview--5_shot"
+          },
+          {
+            "member": "batch/the_pile_claude-3-haiku-20240307--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_claude-3-haiku-20240307--sp"
+          },
+          {
+            "member": "batch/the_pile_claude-3-sonnet-20240229--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_claude-3-sonnet-20240229--sp"
+          },
+          {
+            "member": "batch/code_claude-2_1--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_claude-2_1--0_shot"
+          },
+          {
+            "member": "batch/code_llama-2-13b--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-13b--sp"
+          },
+          {
+            "member": "batch/random_chars_claude-2_1--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_claude-2_1--0_shot"
+          },
+          {
+            "member": "batch/random_words_o1-preview-2024-09-12--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_o1-preview-2024-09-12--sp"
+          },
+          {
+            "member": "batch/code_claude-3-sonnet-20240229--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_claude-3-sonnet-20240229--plain"
+          },
+          {
+            "member": "batch/random_chars_gpt-3_5-turbo-0613--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_gpt-3_5-turbo-0613--sp"
+          },
+          {
+            "member": "batch/random_letters_gpt-4-base--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_gpt-4-base--plain"
+          },
+          {
+            "member": "batch/random_chars_gpt-3_5-turbo-0613--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_gpt-3_5-turbo-0613--2_shot"
+          },
+          {
+            "member": "batch/random_chars_llama-2-70b--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-70b--5_shot"
+          },
+          {
+            "member": "batch/code_llama-2-7b--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-7b--plain"
+          },
+          {
+            "member": "batch/code_gpt-4-base--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_gpt-4-base--2_shot"
+          },
+          {
+            "member": "batch/random_chars_llama-2-70b-chat--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-70b-chat--0_shot"
+          },
+          {
+            "member": "batch/random_chars_gpt-4-base--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_gpt-4-base--2_shot"
+          },
+          {
+            "member": "batch/random_chars_llama-2-13b-chat--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-13b-chat--0_shot"
+          },
+          {
+            "member": "batch/the_pile_llama-2-70b--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_llama-2-70b--sp"
+          },
+          {
+            "member": "batch/random_chars_llama-2-13b-chat--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-13b-chat--sp"
+          },
+          {
+            "member": "batch/random_words_claude-instant-1_2--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_claude-instant-1_2--sp"
+          },
+          {
+            "member": "batch/code_llama-2-7b--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-7b--2_shot"
+          },
+          {
+            "member": "batch/random_chars_llama-2-7b--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-7b--2_shot"
+          },
+          {
+            "member": "batch/code_llama-2-70b--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-70b--5_shot"
+          },
+          {
+            "member": "batch/random_letters_llama-2-70b--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-70b--plain"
+          },
+          {
+            "member": "batch/the_pile_llama-3-70b-chat--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_llama-3-70b-chat--plain"
+          },
+          {
+            "member": "batch/the_pile_gpt-3_5-turbo-0613--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_gpt-3_5-turbo-0613--plain"
+          },
+          {
+            "member": "batch/random_chars_o1-preview-2024-09-12--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_o1-preview-2024-09-12--sp"
+          },
+          {
+            "member": "batch/code_gpt-4-1106-preview--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_gpt-4-1106-preview--sp"
+          },
+          {
+            "member": "batch/code_llama-2-70b--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-70b--sp"
+          },
+          {
+            "member": "batch/random_chars_gpt-4-base--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_gpt-4-base--plain"
+          },
+          {
+            "member": "batch/the_pile_gpt-4-0613--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_gpt-4-0613--sp"
+          },
+          {
+            "member": "batch/random_chars_claude-3-opus-20240229--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_claude-3-opus-20240229--plain"
+          },
+          {
+            "member": "batch/random_letters_gpt-4-base--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_gpt-4-base--sp"
+          },
+          {
+            "member": "batch/the_pile_gpt-4-1106-preview--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_gpt-4-1106-preview--sp"
+          },
+          {
+            "member": "batch/random_letters_gpt-4-1106-preview--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_gpt-4-1106-preview--2_shot"
+          },
+          {
+            "member": "batch/code_o1-mini-2024-09-12--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_o1-mini-2024-09-12--plain"
+          },
+          {
+            "member": "batch/code_llama-2-13b-chat--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-13b-chat--plain"
+          },
+          {
+            "member": "batch/random_chars_llama-2-13b--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-13b--2_shot"
+          },
+          {
+            "member": "batch/the_pile_llama-2-13b-chat--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_llama-2-13b-chat--sp"
+          },
+          {
+            "member": "batch/random_words_llama-2-13b-chat--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_llama-2-13b-chat--plain"
+          },
+          {
+            "member": "batch/code_llama-2-13b-chat--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-13b-chat--2_shot"
+          },
+          {
+            "member": "batch/random_letters_claude-3-sonnet-20240229--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_claude-3-sonnet-20240229--sp"
+          },
+          {
+            "member": "batch/code_gpt-3_5-turbo-0613--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_gpt-3_5-turbo-0613--0_shot"
+          },
+          {
+            "member": "batch/random_chars_llama-2-7b-chat--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-7b-chat--0_shot"
+          },
+          {
+            "member": "batch/code_llama-2-70b-chat--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-70b-chat--2_shot"
+          },
+          {
+            "member": "batch/random_letters_claude-3-opus-20240229--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_claude-3-opus-20240229--sp"
+          },
+          {
+            "member": "batch/code_llama-2-13b--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-13b--2_shot"
+          },
+          {
+            "member": "batch/random_chars_claude-2_1--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_claude-2_1--plain"
+          },
+          {
+            "member": "batch/random_letters_llama-2-13b--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-13b--0_shot"
+          },
+          {
+            "member": "batch/code_gpt-4-0613--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_gpt-4-0613--2_shot"
+          },
+          {
+            "member": "batch/random_chars_gpt-4-0613--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_gpt-4-0613--2_shot"
+          },
+          {
+            "member": "batch/random_words_gpt-4-1106-preview--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_gpt-4-1106-preview--sp"
+          },
+          {
+            "member": "batch/the_pile_llama-2-70b-chat--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_llama-2-70b-chat--sp"
+          },
+          {
+            "member": "batch/random_words_llama-2-7b-chat--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_llama-2-7b-chat--sp"
+          },
+          {
+            "member": "batch/code_llama-2-70b-chat--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-70b-chat--plain"
+          },
+          {
+            "member": "batch/random_words_claude-3-opus-20240229--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_claude-3-opus-20240229--plain"
+          },
+          {
+            "member": "batch/code_davinci-002--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_davinci-002--sp"
+          },
+          {
+            "member": "batch/random_words_gpt-4o--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_gpt-4o--sp"
+          },
+          {
+            "member": "batch/code_gpt-4-0613--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_gpt-4-0613--plain"
+          },
+          {
+            "member": "batch/random_letters_llama-2-70b--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-70b--0_shot"
+          },
+          {
+            "member": "batch/random_chars_claude-3-sonnet-20240229--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_claude-3-sonnet-20240229--plain"
+          },
+          {
+            "member": "batch/code_llama-2-7b--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-7b--5_shot"
+          },
+          {
+            "member": "batch/random_chars_llama-2-7b--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-7b--5_shot"
+          },
+          {
+            "member": "batch/code_llama-2-70b--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-70b--2_shot"
+          },
+          {
+            "member": "batch/random_letters_llama-3-70b-chat--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-3-70b-chat--sp"
+          },
+          {
+            "member": "batch/code_gpt-4-base--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_gpt-4-base--5_shot"
+          },
+          {
+            "member": "batch/code_claude-instant-1_2--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_claude-instant-1_2--plain"
+          },
+          {
+            "member": "batch/random_chars_gpt-4-base--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_gpt-4-base--5_shot"
+          },
+          {
+            "member": "batch/the_pile_davinci-002--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_davinci-002--sp"
+          },
+          {
+            "member": "batch/code_claude-instant-1_2--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_claude-instant-1_2--sp"
+          },
+          {
+            "member": "batch/random_words_llama-2-70b-chat--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_llama-2-70b-chat--plain"
+          },
+          {
+            "member": "batch/random_chars_llama-2-70b--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-70b--2_shot"
+          },
+          {
+            "member": "batch/random_letters_gpt-4-0125-preview--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_gpt-4-0125-preview--plain"
+          },
+          {
+            "member": "batch/random_chars_gpt-3_5-turbo-0613--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_gpt-3_5-turbo-0613--5_shot"
+          },
+          {
+            "member": "batch/random_chars_claude-2_1--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_claude-2_1--sp"
+          },
+          {
+            "member": "batch/random_chars_davinci-002--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_davinci-002--0_shot"
+          },
+          {
+            "member": "batch/random_letters_gpt-4-0125-preview--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_gpt-4-0125-preview--sp"
+          },
+          {
+            "member": "batch/random_chars_llama-2-7b-chat--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-7b-chat--sp"
+          },
+          {
+            "member": "batch/the_pile_llama-2-7b--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_llama-2-7b--sp"
+          },
+          {
+            "member": "batch/code_gpt-3_5-turbo-0613--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_gpt-3_5-turbo-0613--plain"
+          },
+          {
+            "member": "batch/random_chars_gpt-4-1106-preview--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_gpt-4-1106-preview--2_shot"
+          },
+          {
+            "member": "batch/random_letters_llama-2-7b-chat--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-7b-chat--0_shot"
+          },
+          {
+            "member": "batch/random_words_claude-2_1--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_claude-2_1--sp"
+          },
+          {
+            "member": "batch/random_chars_gpt-4-0125-preview--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_gpt-4-0125-preview--plain"
+          },
+          {
+            "member": "batch/random_words_claude-3-haiku-20240307--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_claude-3-haiku-20240307--plain"
+          },
+          {
+            "member": "batch/random_chars_claude-3-opus-20240229--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_claude-3-opus-20240229--sp"
+          },
+          {
+            "member": "batch/code_llama-2-7b-chat--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-7b-chat--sp"
+          },
+          {
+            "member": "batch/code_davinci-002--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_davinci-002--0_shot"
+          },
+          {
+            "member": "batch/random_letters_davinci-002--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_davinci-002--2_shot"
+          },
+          {
+            "member": "batch/the_pile_llama-2-70b-chat--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_llama-2-70b-chat--plain"
+          },
+          {
+            "member": "batch/random_letters_llama-2-7b-chat--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-7b-chat--plain"
+          },
+          {
+            "member": "batch/random_chars_claude-3-haiku-20240307--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_claude-3-haiku-20240307--plain"
+          },
+          {
+            "member": "batch/random_words_gpt-3_5-turbo-0613--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_gpt-3_5-turbo-0613--sp"
+          },
+          {
+            "member": "batch/code_llama-2-7b-chat--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-7b-chat--2_shot"
+          },
+          {
+            "member": "batch/random_letters_claude-3-sonnet-20240229--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_claude-3-sonnet-20240229--plain"
+          },
+          {
+            "member": "batch/random_letters_llama-2-13b-chat--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-13b-chat--sp"
+          },
+          {
+            "member": "batch/the_pile_claude-3-sonnet-20240229--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_claude-3-sonnet-20240229--plain"
+          },
+          {
+            "member": "batch/the_pile_llama-3-70b-chat--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_llama-3-70b-chat--sp"
+          },
+          {
+            "member": "batch/the_pile_llama-2-7b--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_llama-2-7b--plain"
+          },
+          {
+            "member": "batch/code_claude-2_1--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_claude-2_1--sp"
+          },
+          {
+            "member": "batch/random_letters_gpt-4-0613--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_gpt-4-0613--0_shot"
+          },
+          {
+            "member": "batch/random_chars_claude-instant-1_2--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_claude-instant-1_2--sp"
+          },
+          {
+            "member": "batch/random_letters_o1-mini-2024-09-12--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_o1-mini-2024-09-12--sp"
+          },
+          {
+            "member": "batch/the_pile_llama-2-13b-chat--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_llama-2-13b-chat--plain"
+          },
+          {
+            "member": "batch/random_letters_llama-2-70b-chat--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-70b-chat--sp"
+          },
+          {
+            "member": "batch/random_words_gpt-4-0125-preview--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_gpt-4-0125-preview--plain"
+          },
+          {
+            "member": "batch/random_chars_claude-3-5-sonnet-20240620--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_claude-3-5-sonnet-20240620--plain"
+          },
+          {
+            "member": "batch/random_letters_claude-2_1--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_claude-2_1--5_shot"
+          },
+          {
+            "member": "batch/random_letters_gpt-3_5-turbo-0613--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_gpt-3_5-turbo-0613--5_shot"
+          },
+          {
+            "member": "batch/random_letters_davinci-002--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_davinci-002--sp"
+          },
+          {
+            "member": "batch/the_pile_gpt-3_5-turbo-0613--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_gpt-3_5-turbo-0613--sp"
+          },
+          {
+            "member": "batch/code_gpt-4-1106-preview--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_gpt-4-1106-preview--plain"
+          },
+          {
+            "member": "batch/random_letters_llama-2-7b-chat--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-7b-chat--5_shot"
+          },
+          {
+            "member": "batch/random_chars_claude-instant-1_2--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_claude-instant-1_2--plain"
+          },
+          {
+            "member": "batch/random_chars_claude-3-5-sonnet-20240620--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_claude-3-5-sonnet-20240620--sp"
+          },
+          {
+            "member": "batch/random_letters_gpt-4-base--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_gpt-4-base--2_shot"
+          },
+          {
+            "member": "batch/random_words_llama-2-13b-chat--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_llama-2-13b-chat--sp"
+          },
+          {
+            "member": "batch/the_pile_llama-2-13b--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_llama-2-13b--plain"
+          },
+          {
+            "member": "batch/random_words_claude-3-5-sonnet-20240620--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_claude-3-5-sonnet-20240620--sp"
+          },
+          {
+            "member": "batch/random_letters_gpt-4-0613--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_gpt-4-0613--plain"
+          },
+          {
+            "member": "batch/random_chars_llama-2-7b-chat--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-7b-chat--plain"
+          },
+          {
+            "member": "batch/random_chars_gpt-4-0613--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_gpt-4-0613--sp"
+          },
+          {
+            "member": "batch/random_chars_davinci-002--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_davinci-002--5_shot"
+          },
+          {
+            "member": "batch/random_letters_llama-3-70b-chat--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-3-70b-chat--plain"
+          },
+          {
+            "member": "batch/code_llama-2-13b-chat--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-13b-chat--sp"
+          },
+          {
+            "member": "batch/code_llama-2-7b--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-7b--sp"
+          },
+          {
+            "member": "batch/random_letters_claude-3-haiku-20240307--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_claude-3-haiku-20240307--sp"
+          },
+          {
+            "member": "batch/random_letters_llama-2-7b--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-7b--2_shot"
+          },
+          {
+            "member": "batch/random_chars_gpt-4-0125-preview--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_gpt-4-0125-preview--sp"
+          },
+          {
+            "member": "batch/code_llama-2-70b--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-70b--plain"
+          },
+          {
+            "member": "batch/random_chars_llama-2-70b--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-70b--plain"
+          },
+          {
+            "member": "batch/random_letters_gpt-3_5-turbo-0613--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_gpt-3_5-turbo-0613--plain"
+          },
+          {
+            "member": "batch/random_chars_llama-2-13b--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-13b--sp"
+          },
+          {
+            "member": "batch/random_chars_llama-2-7b--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-7b--plain"
+          },
+          {
+            "member": "batch/random_words_o1-mini-2024-09-12--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_o1-mini-2024-09-12--plain"
+          },
+          {
+            "member": "batch/code_davinci-002--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_davinci-002--5_shot"
+          },
+          {
+            "member": "batch/random_words_claude-3-sonnet-20240229--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_claude-3-sonnet-20240229--plain"
+          },
+          {
+            "member": "batch/code_llama-2-70b-chat--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-70b-chat--sp"
+          },
+          {
+            "member": "batch/random_letters_gpt-4-1106-preview--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_gpt-4-1106-preview--plain"
+          },
+          {
+            "member": "batch/random_chars_llama-2-13b--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-13b--plain"
+          },
+          {
+            "member": "batch/code_llama-2-13b--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-13b--plain"
+          },
+          {
+            "member": "batch/random_words_claude-instant-1_2--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_claude-instant-1_2--plain"
+          },
+          {
+            "member": "batch/random_letters_gpt-4o--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_gpt-4o--sp"
+          },
+          {
+            "member": "batch/random_letters_gpt-4-0613--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_gpt-4-0613--5_shot"
+          },
+          {
+            "member": "batch/random_words_llama-2-70b-chat--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_llama-2-70b-chat--sp"
+          },
+          {
+            "member": "batch/random_words_llama-2-7b--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_llama-2-7b--sp"
+          },
+          {
+            "member": "batch/code_gpt-4-1106-preview--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_gpt-4-1106-preview--2_shot"
+          },
+          {
+            "member": "batch/random_chars_llama-2-70b--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-70b--sp"
+          },
+          {
+            "member": "batch/random_letters_llama-2-13b-chat--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-13b-chat--2_shot"
+          },
+          {
+            "member": "batch/the_pile_claude-2_1--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_claude-2_1--sp"
+          },
+          {
+            "member": "batch/random_letters_llama-2-70b-chat--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-70b-chat--2_shot"
+          },
+          {
+            "member": "batch/code_claude-3-opus-20240229--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_claude-3-opus-20240229--sp"
+          },
+          {
+            "member": "batch/random_letters_claude-2_1--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_claude-2_1--0_shot"
+          },
+          {
+            "member": "batch/random_letters_gpt-3_5-turbo-0613--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_gpt-3_5-turbo-0613--0_shot"
+          },
+          {
+            "member": "batch/random_chars_o1-mini-2024-09-12--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_o1-mini-2024-09-12--sp"
+          },
+          {
+            "member": "batch/random_chars_o1-mini-2024-09-12--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_o1-mini-2024-09-12--plain"
+          },
+          {
+            "member": "batch/the_pile_llama-2-70b--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_llama-2-70b--plain"
+          },
+          {
+            "member": "batch/random_letters_claude-instant-1_2--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_claude-instant-1_2--sp"
+          },
+          {
+            "member": "batch/code_claude-3-opus-20240229--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_claude-3-opus-20240229--plain"
+          },
+          {
+            "member": "batch/code_claude-2_1--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_claude-2_1--2_shot"
+          },
+          {
+            "member": "batch/random_chars_claude-2_1--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_claude-2_1--2_shot"
+          },
+          {
+            "member": "batch/random_chars_llama-2-7b--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-7b--sp"
+          },
+          {
+            "member": "batch/code_gpt-4-0125-preview--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_gpt-4-0125-preview--sp"
+          },
+          {
+            "member": "batch/random_chars_gpt-4-1106-preview--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_gpt-4-1106-preview--plain"
+          },
+          {
+            "member": "batch/random_words_llama-2-70b--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_llama-2-70b--sp"
+          },
+          {
+            "member": "batch/random_words_llama-2-13b--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_llama-2-13b--plain"
+          },
+          {
+            "member": "batch/random_letters_davinci-002--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_davinci-002--plain"
+          },
+          {
+            "member": "batch/code_llama-2-7b-chat--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-7b-chat--plain"
+          },
+          {
+            "member": "batch/random_letters_llama-2-13b--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-13b--5_shot"
+          },
+          {
+            "member": "batch/random_chars_llama-3-70b-chat--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-3-70b-chat--plain"
+          },
+          {
+            "member": "batch/random_letters_o1-mini-2024-09-12--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_o1-mini-2024-09-12--plain"
+          },
+          {
+            "member": "batch/random_chars_llama-2-7b-chat--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-7b-chat--5_shot"
+          },
+          {
+            "member": "batch/the_pile_gpt-4o--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_gpt-4o--plain"
+          },
+          {
+            "member": "batch/code_gpt-4-0613--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_gpt-4-0613--sp"
+          },
+          {
+            "member": "batch/random_words_gpt-3_5-turbo-0613--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_gpt-3_5-turbo-0613--plain"
+          },
+          {
+            "member": "batch/code_gpt-3_5-turbo-0613--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_gpt-3_5-turbo-0613--5_shot"
+          },
+          {
+            "member": "batch/code_llama-2-7b--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-7b--0_shot"
+          },
+          {
+            "member": "batch/random_words_gpt-4-0613--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_gpt-4-0613--sp"
+          },
+          {
+            "member": "batch/code_gpt-4-0125-preview--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_gpt-4-0125-preview--plain"
+          },
+          {
+            "member": "batch/code_llama-3-70b-chat--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-3-70b-chat--sp"
+          },
+          {
+            "member": "batch/random_chars_llama-2-7b--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-7b--0_shot"
+          },
+          {
+            "member": "batch/random_letters_llama-2-70b--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-70b--5_shot"
+          },
+          {
+            "member": "batch/code_o1-mini-2024-09-12--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_o1-mini-2024-09-12--sp"
+          },
+          {
+            "member": "batch/random_chars_gpt-4o--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_gpt-4o--sp"
+          },
+          {
+            "member": "batch/random_words_llama-2-70b--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_llama-2-70b--plain"
+          },
+          {
+            "member": "batch/random_words_llama-2-13b--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_llama-2-13b--sp"
+          },
+          {
+            "member": "batch/random_words_llama-3-70b-chat--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_llama-3-70b-chat--sp"
+          },
+          {
+            "member": "batch/random_letters_gpt-4o--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_gpt-4o--plain"
+          },
+          {
+            "member": "batch/the_pile_claude-2_1--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_claude-2_1--plain"
+          },
+          {
+            "member": "batch/random_letters_claude-instant-1_2--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_claude-instant-1_2--plain"
+          },
+          {
+            "member": "batch/random_words_gpt-4-1106-preview--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_gpt-4-1106-preview--plain"
+          },
+          {
+            "member": "batch/random_words_claude-3-opus-20240229--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_claude-3-opus-20240229--sp"
+          },
+          {
+            "member": "batch/random_letters_o1-preview-2024-09-12--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_o1-preview-2024-09-12--plain"
+          },
+          {
+            "member": "batch/random_chars_gpt-3_5-turbo-0613--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_gpt-3_5-turbo-0613--0_shot"
+          },
+          {
+            "member": "batch/random_chars_llama-2-13b-chat--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-13b-chat--2_shot"
+          },
+          {
+            "member": "batch/code_gpt-4-base--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_gpt-4-base--0_shot"
+          },
+          {
+            "member": "batch/the_pile_o1-preview-2024-09-12--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_o1-preview-2024-09-12--sp"
+          },
+          {
+            "member": "batch/random_chars_gpt-3_5-turbo-0613--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_gpt-3_5-turbo-0613--plain"
+          },
+          {
+            "member": "batch/random_chars_llama-2-70b-chat--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-70b-chat--2_shot"
+          },
+          {
+            "member": "batch/random_chars_gpt-4-base--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_gpt-4-base--0_shot"
+          },
+          {
+            "member": "batch/random_words_gpt-4-0613--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_gpt-4-0613--plain"
+          },
+          {
+            "member": "batch/the_pile_gpt-4-base--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_gpt-4-base--plain"
+          },
+          {
+            "member": "batch/code_llama-2-70b-chat--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-70b-chat--0_shot"
+          },
+          {
+            "member": "batch/random_chars_llama-2-7b-chat--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-7b-chat--2_shot"
+          },
+          {
+            "member": "batch/random_chars_gpt-4o--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_gpt-4o--plain"
+          },
+          {
+            "member": "batch/code_llama-2-13b-chat--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-13b-chat--0_shot"
+          },
+          {
+            "member": "batch/code_gpt-3_5-turbo-0613--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_gpt-3_5-turbo-0613--2_shot"
+          },
+          {
+            "member": "batch/random_letters_llama-2-13b--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-13b--2_shot"
+          },
+          {
+            "member": "batch/random_words_llama-2-7b-chat--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_llama-2-7b-chat--plain"
+          },
+          {
+            "member": "batch/code_gpt-4-0613--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_gpt-4-0613--0_shot"
+          },
+          {
+            "member": "batch/random_letters_llama-2-13b-chat--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-13b-chat--plain"
+          },
+          {
+            "member": "batch/random_letters_gpt-3_5-turbo-0613--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_gpt-3_5-turbo-0613--sp"
+          },
+          {
+            "member": "batch/random_chars_gpt-4-0613--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_gpt-4-0613--0_shot"
+          },
+          {
+            "member": "batch/code_llama-2-13b--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-13b--0_shot"
+          },
+          {
+            "member": "batch/random_words_davinci-002--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_davinci-002--sp"
+          },
+          {
+            "member": "batch/random_words_gpt-4-0125-preview--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_gpt-4-0125-preview--sp"
+          },
+          {
+            "member": "batch/the_pile_gpt-4o--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_gpt-4o--sp"
+          },
+          {
+            "member": "batch/code_claude-2_1--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_claude-2_1--5_shot"
+          },
+          {
+            "member": "batch/random_chars_claude-2_1--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_claude-2_1--5_shot"
+          },
+          {
+            "member": "batch/the_pile_o1-mini-2024-09-12--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_o1-mini-2024-09-12--sp"
+          },
+          {
+            "member": "batch/random_letters_gpt-4-1106-preview--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_gpt-4-1106-preview--0_shot"
+          },
+          {
+            "member": "batch/random_letters_claude-3-haiku-20240307--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_claude-3-haiku-20240307--plain"
+          },
+          {
+            "member": "batch/the_pile_claude-3-5-sonnet-20240620--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_claude-3-5-sonnet-20240620--sp"
+          },
+          {
+            "member": "batch/code_gpt-4-base--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_gpt-4-base--sp"
+          },
+          {
+            "member": "batch/random_chars_llama-2-13b--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-13b--0_shot"
+          },
+          {
+            "member": "batch/random_letters_llama-2-70b-chat--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-70b-chat--plain"
+          },
+          {
+            "member": "batch/random_chars_llama-2-13b-chat--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-13b-chat--5_shot"
+          },
+          {
+            "member": "batch/random_words_gpt-4-base--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_gpt-4-base--sp"
+          },
+          {
+            "member": "batch/random_chars_llama-2-70b-chat--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-70b-chat--5_shot"
+          },
+          {
+            "member": "batch/random_chars_llama-2-70b--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-70b--0_shot"
+          },
+          {
+            "member": "batch/the_pile_claude-3-opus-20240229--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_claude-3-opus-20240229--sp"
+          },
+          {
+            "member": "batch/the_pile_llama-2-7b-chat--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_llama-2-7b-chat--plain"
+          },
+          {
+            "member": "batch/the_pile_o1-preview-2024-09-12--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_o1-preview-2024-09-12--plain"
+          },
+          {
+            "member": "batch/random_words_llama-2-7b--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_llama-2-7b--plain"
+          },
+          {
+            "member": "batch/code_claude-3-5-sonnet-20240620--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_claude-3-5-sonnet-20240620--plain"
+          },
+          {
+            "member": "batch/the_pile_gpt-4-0125-preview--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_gpt-4-0125-preview--sp"
+          },
+          {
+            "member": "batch/the_pile_claude-3-5-sonnet-20240620--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_claude-3-5-sonnet-20240620--plain"
+          },
+          {
+            "member": "batch/code_llama-2-70b--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-70b--0_shot"
+          },
+          {
+            "member": "batch/random_words_o1-mini-2024-09-12--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_o1-mini-2024-09-12--sp"
+          },
+          {
+            "member": "batch/random_letters_llama-2-70b--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-70b--2_shot"
+          },
+          {
+            "member": "batch/code_claude-3-haiku-20240307--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_claude-3-haiku-20240307--plain"
+          },
+          {
+            "member": "batch/code_o1-preview-2024-09-12--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_o1-preview-2024-09-12--plain"
+          },
+          {
+            "member": "batch/random_letters_llama-2-7b-chat--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-7b-chat--sp"
+          },
+          {
+            "member": "batch/random_letters_llama-2-7b--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-7b--plain"
+          },
+          {
+            "member": "batch/random_letters_davinci-002--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_davinci-002--0_shot"
+          },
+          {
+            "member": "batch/code_davinci-002--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_davinci-002--2_shot"
+          },
+          {
+            "member": "batch/code_o1-preview-2024-09-12--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_o1-preview-2024-09-12--sp"
+          },
+          {
+            "member": "batch/random_chars_gpt-4-base--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_gpt-4-base--sp"
+          },
+          {
+            "member": "batch/code_llama-2-7b-chat--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_llama-2-7b-chat--0_shot"
+          },
+          {
+            "member": "batch/random_letters_claude-3-5-sonnet-20240620--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_claude-3-5-sonnet-20240620--plain"
+          },
+          {
+            "member": "batch/random_letters_llama-2-7b--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-7b--5_shot"
+          },
+          {
+            "member": "batch/random_letters_claude-3-opus-20240229--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_claude-3-opus-20240229--plain"
+          },
+          {
+            "member": "batch/random_chars_gpt-4-0613--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_gpt-4-0613--plain"
+          },
+          {
+            "member": "batch/random_chars_claude-3-sonnet-20240229--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_claude-3-sonnet-20240229--sp"
+          },
+          {
+            "member": "batch/random_chars_llama-2-13b-chat--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-13b-chat--plain"
+          },
+          {
+            "member": "batch/the_pile_gpt-4-0125-preview--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "the_pile_gpt-4-0125-preview--plain"
+          },
+          {
+            "member": "batch/random_chars_davinci-002--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_davinci-002--2_shot"
+          },
+          {
+            "member": "batch/random_letters_gpt-4-base--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_gpt-4-base--5_shot"
+          },
+          {
+            "member": "batch/random_letters_llama-2-7b-chat--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-7b-chat--2_shot"
+          },
+          {
+            "member": "batch/random_chars_gpt-4-1106-preview--0_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_gpt-4-1106-preview--0_shot"
+          },
+          {
+            "member": "batch/code_claude-2_1--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_claude-2_1--plain"
+          },
+          {
+            "member": "batch/code_gpt-4o--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_gpt-4o--sp"
+          },
+          {
+            "member": "batch/random_chars_davinci-002--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_davinci-002--sp"
+          },
+          {
+            "member": "batch/random_letters_llama-2-13b-chat--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-13b-chat--5_shot"
+          },
+          {
+            "member": "batch/random_words_claude-3-5-sonnet-20240620--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_claude-3-5-sonnet-20240620--plain"
+          },
+          {
+            "member": "batch/random_letters_llama-2-70b-chat--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_llama-2-70b-chat--5_shot"
+          },
+          {
+            "member": "batch/random_letters_gpt-4-1106-preview--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_gpt-4-1106-preview--sp"
+          },
+          {
+            "member": "batch/random_words_claude-3-sonnet-20240229--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_words_claude-3-sonnet-20240229--sp"
+          },
+          {
+            "member": "batch/random_letters_claude-2_1--sp.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_claude-2_1--sp"
+          },
+          {
+            "member": "batch/code_gpt-4-1106-preview--5_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_gpt-4-1106-preview--5_shot"
+          },
+          {
+            "member": "batch/random_chars_llama-2-70b-chat--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_chars_llama-2-70b-chat--plain"
+          },
+          {
+            "member": "batch/random_letters_gpt-4-0613--2_shot.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "random_letters_gpt-4-0613--2_shot"
+          },
+          {
+            "member": "batch/code_gpt-4-base--plain.yaml",
+            "records": 300,
+            "records_key": "samples",
+            "batch_id": "code_gpt-4-base--plain"
+          }
+        ]
+      },
+      {
+        "source_name": "sad-introspection-predict_tokens-structs.zip",
+        "native_path": "sad/introspection/predict_tokens/structs.zip",
+        "url": "https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/introspection/predict_tokens/structs.zip",
+        "bytes": 67343,
+        "sha256": "e2f21fd60856bf005a1c2b361926cd2ee035ae508336c9d1dbacbd89e02d7932",
+        "batches": [
+          {
+            "member": "batch/code.yaml",
+            "records": 100,
+            "records_key": "samples",
+            "batch_id": "code"
+          },
+          {
+            "member": "batch/the_pile.yaml",
+            "records": 100,
+            "records_key": "samples",
+            "batch_id": "the_pile"
+          },
+          {
+            "member": "batch/random_words.yaml",
+            "records": 100,
+            "records_key": "samples",
+            "batch_id": "random_words"
+          },
+          {
+            "member": "batch/wikipedia.yaml",
+            "records": 100,
+            "records_key": "samples",
+            "batch_id": "wikipedia"
+          },
+          {
+            "member": "batch/random_chars.yaml",
+            "records": 100,
+            "records_key": "samples",
+            "batch_id": "random_chars"
+          },
+          {
+            "member": "batch/random_letters.yaml",
+            "records": 100,
+            "records_key": "samples",
+            "batch_id": "random_letters"
+          }
+        ]
+      },
+      {
+        "source_name": "sad-stages-full-structs.zip",
+        "native_path": "sad/stages/full/structs.zip",
+        "url": "https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/stages/full/structs.zip",
+        "bytes": 814594,
+        "sha256": "9bf272835a6b51c4b66010f8159dea3c92e62b587add54a1ec95148cf862293e",
+        "batches": [
+          {
+            "member": "batch/pretrain.yaml",
+            "records": 200,
+            "records_key": "samples",
+            "batch_id": "pretrain"
+          },
+          {
+            "member": "batch/test_full.yaml",
+            "records": 200,
+            "records_key": "samples",
+            "batch_id": "test_full"
+          },
+          {
+            "member": "batch/stg-test.yaml",
+            "records": 200,
+            "records_key": "samples",
+            "batch_id": "stg-test"
+          },
+          {
+            "member": "batch/stg-sft.yaml",
+            "records": 200,
+            "records_key": "samples",
+            "batch_id": "stg-sft"
+          },
+          {
+            "member": "batch/stg-deploy.yaml",
+            "records": 200,
+            "records_key": "samples",
+            "batch_id": "stg-deploy"
+          },
+          {
+            "member": "batch/stg-pretrain.yaml",
+            "records": 200,
+            "records_key": "samples",
+            "batch_id": "stg-pretrain"
+          },
+          {
+            "member": "batch/SFT.yaml",
+            "records": 200,
+            "records_key": "samples",
+            "batch_id": "SFT"
+          },
+          {
+            "member": "batch/smallstg.yaml",
+            "records": 10,
+            "records_key": "samples",
+            "batch_id": "smallstg"
+          },
+          {
+            "member": "batch/stg100.yaml",
+            "records": 100,
+            "records_key": "samples",
+            "batch_id": "stg100"
+          },
+          {
+            "member": "batch/deploy_full.yaml",
+            "records": 200,
+            "records_key": "samples",
+            "batch_id": "deploy_full"
+          }
+        ]
+      },
+      {
+        "source_name": "sad-stages-oversight-structs.zip",
+        "native_path": "sad/stages/oversight/structs.zip",
+        "url": "https://raw.githubusercontent.com/LRudL/sad/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3/sad/stages/oversight/structs.zip",
+        "bytes": 1403769,
+        "sha256": "5b620b7bf45d04a2f79b1c7d2e825069fe774d853beeaff11b8b43c442c50ebb",
+        "batches": [
+          {
+            "member": "batch/sharegpt-full.yaml",
+            "records": 500,
+            "records_key": "samples",
+            "batch_id": "sharegpt-full"
+          },
+          {
+            "member": "batch/oversight.yaml",
+            "records": 200,
+            "records_key": "samples",
+            "batch_id": "oversight"
+          },
+          {
+            "member": "batch/sharegpt2023.yaml",
+            "records": 100,
+            "records_key": "samples",
+            "batch_id": "sharegpt2023"
+          },
+          {
+            "member": "batch/stg-test.yaml",
+            "records": 200,
+            "records_key": "samples",
+            "batch_id": "stg-test"
+          },
+          {
+            "member": "batch/test.yaml",
+            "records": 200,
+            "records_key": "samples",
+            "batch_id": "test"
+          },
+          {
+            "member": "batch/oversight2_100.yaml",
+            "records": 100,
+            "records_key": "samples",
+            "batch_id": "oversight2_100"
+          },
+          {
+            "member": "batch/tiny.yaml",
+            "records": 10,
+            "records_key": "samples",
+            "batch_id": "tiny"
+          },
+          {
+            "member": "batch/stg-sft.yaml",
+            "records": 200,
+            "records_key": "samples",
+            "batch_id": "stg-sft"
+          },
+          {
+            "member": "batch/unknown-24-01-11T175216.yaml",
+            "records": 143,
+            "records_key": "samples",
+            "batch_id": "unknown-24-01-11T175216"
+          },
+          {
+            "member": "batch/test_oversight.yaml",
+            "records": 200,
+            "records_key": "samples",
+            "batch_id": "test_oversight"
+          },
+          {
+            "member": "batch/sharegpt-full_a.yaml",
+            "records": 500,
+            "records_key": "samples",
+            "batch_id": "sharegpt-full_a"
+          },
+          {
+            "member": "batch/stg-deploy.yaml",
+            "records": 200,
+            "records_key": "samples",
+            "batch_id": "stg-deploy"
+          },
+          {
+            "member": "batch/stg-pretrain.yaml",
+            "records": 200,
+            "records_key": "samples",
+            "batch_id": "stg-pretrain"
+          },
+          {
+            "member": "batch/sharegpt2023-full.yaml",
+            "records": 143,
+            "records_key": "samples",
+            "batch_id": "sharegpt2023-full"
+          },
+          {
+            "member": "batch/unknown-24-01-11T175150.yaml",
+            "records": 200,
+            "records_key": "samples",
+            "batch_id": "unknown-24-01-11T175150"
+          },
+          {
+            "member": "batch/sharegpt2023-full_a.yaml",
+            "records": 143,
+            "records_key": "samples",
+            "batch_id": "sharegpt2023-full_a"
+          },
+          {
+            "member": "batch/sharegpt-200.yaml",
+            "records": 200,
+            "records_key": "samples",
+            "batch_id": "sharegpt-200"
+          },
+          {
+            "member": "batch/deploy_oversight.yaml",
+            "records": 200,
+            "records_key": "samples",
+            "batch_id": "deploy_oversight"
+          },
+          {
+            "member": "batch/sharegpt.yaml",
+            "records": 100,
+            "records_key": "samples",
+            "batch_id": "sharegpt"
+          }
+        ]
+      }
+    ],
+    "resume-corpus": [
+      {
+        "source_name": "resumes_corpus.zip",
+        "url": "https://raw.githubusercontent.com/florex/resume_corpus/24de39957d99caf2c89cf384ba2396bafe16050d/resumes_corpus.zip",
+        "bytes": 89368518,
+        "sha256": "5569bdb1a452291129bccce9c6ce3b95775c458bc59df8e46ef7267fdc7c3d2c"
+      },
+      {
+        "source_name": "resume_samples.zip",
+        "url": "https://raw.githubusercontent.com/florex/resume_corpus/24de39957d99caf2c89cf384ba2396bafe16050d/resume_samples.zip",
+        "bytes": 63818300,
+        "sha256": "e49b0e7ee8752b51a4ac046f3fc07c2331749d136823e72c9a7bb5908ecf1beb"
+      },
+      {
+        "source_name": "normlized_classes.txt",
+        "url": "https://raw.githubusercontent.com/florex/resume_corpus/24de39957d99caf2c89cf384ba2396bafe16050d/normlized_classes.txt",
+        "bytes": 1223150,
+        "sha256": "447023ce28e59764e2d0b2c393e62278f408306c24be5a2b746082c97c0bd870"
+      },
+      {
+        "source_name": "skills_it.txt",
+        "url": "https://raw.githubusercontent.com/florex/resume_corpus/24de39957d99caf2c89cf384ba2396bafe16050d/skills_it.txt",
+        "bytes": 14775447,
+        "sha256": "fbfbaf589516a2a0f57f57de4974490be50c36a6ead835295770d0fe32946c31"
+      }
+    ]
+  },
+  "limitations": [
+    "SAD records are native templates/trial definitions; no procedural benchmark generation or evaluation was executed.",
+    "Resume text uses explicit reversible Windows-1252; labels are from exact paired files. Auxiliary exports remain unchanged.",
+    "No redistribution approval or paper-specific sample identity is inferred."
+  ]
+}

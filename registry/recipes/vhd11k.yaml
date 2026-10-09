@@ -1,0 +1,55 @@
+release: hf-910acf34b6fdf34e84eab1e8384319a7fcf2fadb
+snapshot_id: hf-910acf34b6fdf34e84eab1e8384319a7fcf2fadb-9cb62bfe03f0
+adapter: vhd11k
+scope: All 10000 image and 1000 video rows of the pinned author annotation tables;
+  original ZIP media remains remote and is verified on each bounded read.
+expected_count: 11000
+source_url: https://huggingface.co/datasets/denny3388/VHD11K
+files:
+- source_name: harmful_image_10000_ann.csv
+  url: https://huggingface.co/datasets/denny3388/VHD11K/resolve/910acf34b6fdf34e84eab1e8384319a7fcf2fadb/harmful_image_10000_ann.csv
+  bytes: 62356540
+  sha256: 340affd187ecd73bdab802815c62f0773e7fc8d4d6b3a405a911dea27b9439dc
+  config_key: image_annotations
+  format: csv
+- source_name: harmful_video_1000_ann.csv
+  url: https://huggingface.co/datasets/denny3388/VHD11K/resolve/910acf34b6fdf34e84eab1e8384319a7fcf2fadb/harmful_video_1000_ann.csv
+  bytes: 6044512
+  sha256: 030440f1dbef58087a7f71844e6b3fc55949b16de794aa66b583f51a3b2e9d8b
+  config_key: video_annotations
+  format: csv
+convert:
+  name: vhd11k_annotations
+  rows_sha256: 4c148d36effc9c8a7c4a8c2963b2da6fcf65feba2111977f73fec5929b9db13e
+  count: 11000
+allowed_hosts: &id001
+- huggingface.co
+- cdn-lfs.huggingface.co
+- cdn-lfs-us-1.huggingface.co
+- cdn-lfs-eu-1.huggingface.co
+- cas-bridge.xethub.hf.co
+- us.aws.cdn.hf.co
+remote_metadata_bytes: 10000000
+adapter_config:
+  mapping: {}
+  remote_archives:
+    images:
+      url: https://huggingface.co/datasets/denny3388/VHD11K/resolve/910acf34b6fdf34e84eab1e8384319a7fcf2fadb/harmful_images_10000.zip
+      bytes: 2274940728
+      allowed_hosts: *id001
+      etag: '"f989c07fdb437e8c9fa8f73004cb332a368396f0d4b395fd3d8625aca53dc6c5"'
+    videos:
+      url: https://huggingface.co/datasets/denny3388/VHD11K/resolve/910acf34b6fdf34e84eab1e8384319a7fcf2fadb/harmful_videos_1000.zip
+      bytes: 13844086746
+      allowed_hosts:
+      - huggingface.co
+      - cdn-lfs.huggingface.co
+      - cdn-lfs-us-1.huggingface.co
+      - cdn-lfs-eu-1.huggingface.co
+      - cas-bridge.xethub.hf.co
+      - us.aws.cdn.hf.co
+      etag: '"563a84aeebd4ac93866799e6f14386b179534798293b04c00a96bb3e36dd598c"'
+  remote_cache_root: work/media-cache/vhd11k
+  remote_cache_bytes: 200000000
+  max_annotation_bytes: 100000000
+  media_transfer_bytes: 200000000

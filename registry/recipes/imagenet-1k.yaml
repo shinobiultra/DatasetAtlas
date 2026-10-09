@@ -1,0 +1,8 @@
+source_url: https://huggingface.co/datasets/ILSVRC/imagenet-1k/tree/49e2ee26f3810fb5a7536bbf732a7b07389a47b5
+credential_profile: huggingface
+source_patterns: [data/train-*.parquet, data/validation-*.parquet, data/test-*.parquet]
+scope: All native train, validation and test Parquet rows in the pinned ILSVRC author repository. Test labels remain the released unknown value. Image bytes are read on request; only verified preview originals are retained. This release does not establish paper-specific sample membership.
+adapter_config:
+  mapping: {}
+  media_scope: partial
+  remote_cache_bytes: 300000000

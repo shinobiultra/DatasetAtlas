@@ -1,0 +1,44 @@
+{
+  "dataset_id": "docci",
+  "source_sha256": "c1b1aee00856757d71cfe2cc6ab641089284276a791bfb82146b4742c59a0a1d",
+  "status": "executed",
+  "retained_snapshots": 1,
+  "image_references_checked": 14847,
+  "unique_native_images_in_snapshots": 14847,
+  "preview_asset_memberships": 100,
+  "preview_bytes_upper_bound": 48901618,
+  "cold_original_probes": [
+    {
+      "sha256": "8a4c739822dcdef19b1297b875da32b030976a2d17f1503dae8a9706909482ba",
+      "bytes": 440611,
+      "transferred_bytes": 6291456,
+      "source_sha256": "c1b1aee00856757d71cfe2cc6ab641089284276a791bfb82146b4742c59a0a1d",
+      "fingerprint_type": "etag",
+      "etag": "\"57493de5075fe508d51e77500748f4da\""
+    },
+    {
+      "sha256": "b4610e6f4f7b25cb8987da5f54cfa66c04290ec5737d6460a0412767506c4fa6",
+      "bytes": 61939,
+      "transferred_bytes": 3145728,
+      "source_sha256": "c1b1aee00856757d71cfe2cc6ab641089284276a791bfb82146b4742c59a0a1d",
+      "fingerprint_type": "etag",
+      "etag": "\"57493de5075fe508d51e77500748f4da\""
+    },
+    {
+      "sha256": "9f66c7eff14fa0e243c19bb6c2965b4db226f98645d1f1eea2302fb2dcf91c56",
+      "bytes": 340023,
+      "transferred_bytes": 4194306,
+      "source_sha256": "c1b1aee00856757d71cfe2cc6ab641089284276a791bfb82146b4742c59a0a1d",
+      "fingerprint_type": "etag",
+      "etag": "\"57493de5075fe508d51e77500748f4da\""
+    }
+  ],
+  "paths": [
+    "work/sources/docci/docci_images.tar.gz"
+  ],
+  "extracted_files": 14847,
+  "source_bytes": 7592938768,
+  "extracted_bytes": 7630130486,
+  "retention": "Original-quality previews and complete indices; other originals and optimized browsing copies on demand.",
+  "freed_unique_file_bytes": 15223069254
+}

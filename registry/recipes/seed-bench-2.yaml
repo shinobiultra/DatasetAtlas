@@ -1,0 +1,854 @@
+release: 2a0f22725601e6fc42392864c28539701194cd0f
+source_url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/tree/2a0f22725601e6fc42392864c28539701194cd0f
+adapter: seed_bench
+expected_count: 24371
+remote_metadata_bytes: 50000000
+description: 'SEED-Bench 2: all 24,371 native questions with original choices, answers, task dimensions
+  and image references. Video questions retain the eight ordered author-released frames. Original-resolution
+  images and frames are fetched on demand from the pinned media archives.'
+scope: All 24,371 questions in the author Hugging Face release, including every native task and all ordered
+  media. The released video representation is eight PNG frames per question, not full video playback.
+  No benchmark prompts are executed or generated outputs claimed. Each archive part is ETag-bound; upstream
+  hashes are recorded, not falsely reported as fully downloaded and locally verified.
+files:
+- source_name: SEED-Bench_v2_level1_2_3.json
+  url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench_v2_level1_2_3.json
+  bytes: 18076410
+  sha256: 49f03c28e2ec953f5a2743c4d35777159469b8eb7593102ddc3e8d60e1907f0a
+  format: json
+  config_key: annotations_path
+allowed_hosts:
+- huggingface.co
+- us.aws.cdn.hf.co
+- cas-bridge.xethub.hf.co
+adapter_config:
+  seed_version: 2
+  identity_fields:
+  - question_id
+  - question_type_id
+  annotations:
+  - path_key: annotations_path
+    records_key: questions
+    split: test
+    choices_columns:
+    - choice_a
+    - choice_b
+    - choice_c
+    - choice_d
+  mapping:
+    id: question_id
+    question: question
+    choices: _atlas_choices
+  remote_archives:
+    images:
+      parts:
+      - name: SEED-Bench-2-image.zip.001
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.001
+        bytes: 734003200
+        etag: '"36e338c9ec5f88267de12859738487500fa78664515d01b747342737a433d6c1"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: ef9e31a2a03bd5210757250489420d9bb8f70514ccd08b2649d9299a17f9be50
+      - name: SEED-Bench-2-image.zip.002
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.002
+        bytes: 734003200
+        etag: '"578c38ea46616736331338640341bc4c87ac5a70fc903c6a286a9cf21d8d754d"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: b74c333cf912754c442c4e604133125fa5c33853ed49a8e2833600106966b307
+      - name: SEED-Bench-2-image.zip.003
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.003
+        bytes: 734003200
+        etag: '"aac7986867313863c4b5b4565e3ab43a93307c03e4637ae37c55245a4c671cc8"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: adcae6471def6be6423d59e92e57ccc54e50a26c732df8efbc22f3799cd7303b
+      - name: SEED-Bench-2-image.zip.004
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.004
+        bytes: 734003200
+        etag: '"ebd6ef96649c42852c86f50b58c26024882eb51d2aa48e31b2c449fa399c60e5"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 7452e16d938ec30239d7a4588b26f481240c2686efecabea35bebb4505ddf132
+      - name: SEED-Bench-2-image.zip.005
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.005
+        bytes: 734003200
+        etag: '"dd3c6e68b9a312b5ef11c79393b74a6142886c66cac88020055b9be6df9cbb37"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: adfeb6c7c4fb950b6d829a9c615b0f336208c141b2c80194a5f8eb083dfe8e4d
+      - name: SEED-Bench-2-image.zip.006
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.006
+        bytes: 734003200
+        etag: '"3ef1d6474a4aa8372a4300dfbc5e1294dbad4b901b7bfc11f280b9a6a73e1090"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: e22c1dc1d2f0aba22683689457bb0abcdfc00e43198cbe9b17eb11ab1edca198
+      - name: SEED-Bench-2-image.zip.007
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.007
+        bytes: 734003200
+        etag: '"346d9efd91a1534d08d4bbe2d60006421181f5abad716ff2dbc041444557c470"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 8b668f0e461899e7f7347b79dffa21b70c2f74d4cd11fcbce39f6b266fbb2524
+      - name: SEED-Bench-2-image.zip.008
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.008
+        bytes: 734003200
+        etag: '"eaf71cc931fe2de98ad5617ea6459421859f9112ba25693d10caffb1ca7793d5"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 6cd8c2f94fbe97078d38190a129066077d772fb4564829756eff7fa152df397a
+      - name: SEED-Bench-2-image.zip.009
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.009
+        bytes: 734003200
+        etag: '"cd289317b04199a1ea67f58fb244e5d86a315cce98594a03293fe6a74c2b21f9"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 720d8ebe42cd66f1c62b6b9f57cd5d03f25e27f6257e0071aab8d79d62cd50fd
+      - name: SEED-Bench-2-image.zip.010
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.010
+        bytes: 734003200
+        etag: '"5ef2691dcda4f94da90ff22b332d33346a659974a9195062aa6bec28a7b1a3d2"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 4b2ba49b79674b382c436f183fec6c3d6977a32013385ffb25f9225b965d7a90
+      - name: SEED-Bench-2-image.zip.011
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.011
+        bytes: 734003200
+        etag: '"25f225803afaf13a613705e0137a440c02d7cc112ac849ddd6bf3c4b8976b841"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 51acb890c7de98e2b1818530484b55ee91918fe583448fd00313447216b76cb9
+      - name: SEED-Bench-2-image.zip.012
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.012
+        bytes: 734003200
+        etag: '"856d5d4c953bf106984789b3cbb4e8b5528ab82112b02a474e011c2c218cc0cc"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: afe27070e7a5d505c10f66cdb768942ffd07099218de7e049d3211f3cb6a7db0
+      - name: SEED-Bench-2-image.zip.013
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.013
+        bytes: 734003200
+        etag: '"302e490610bef33880379238b011f67db723764cb1d094897d0c593b703a0db3"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 7423fbe2d93f7ba8a70ff525da69a8c654742dc1569fa1163b13fc8d112ed4ee
+      - name: SEED-Bench-2-image.zip.014
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.014
+        bytes: 734003200
+        etag: '"712d4af50c6710374f0db5080f32a67bb9efbe0d88749c82b4e3c0e07b86ba81"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 53740829ca92a92d25e8ba0cbc154128eae8b415cbfa5dd6104775199e87ce8d
+      - name: SEED-Bench-2-image.zip.015
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.015
+        bytes: 734003200
+        etag: '"b2efaaac7608b89a3b4974d07866248e072372cb9d31bcda3201a80d3fcd3825"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: a1b59056f4c57b9c9ee2cc56d227ef24b3381f2a79bde3f80c92044056d13931
+      - name: SEED-Bench-2-image.zip.016
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.016
+        bytes: 734003200
+        etag: '"7598ce5fa6d1ce1bc28ea445f97a490a32680087997df1b478c1a74032ea30db"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 1fa2458deb71f3076c7d6ebcaa1947ac54650be581ec3659e8115842959d8725
+      - name: SEED-Bench-2-image.zip.017
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.017
+        bytes: 734003200
+        etag: '"54147cd1054c2f416d712e86d1dc233bf05f93c4c4b0e3f020c59bb1ea8b9f3a"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: bbd7164dff9f69c97ac4ae1d1662f726e4301d7f42158a1d04292a6adf819fce
+      - name: SEED-Bench-2-image.zip.018
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.018
+        bytes: 734003200
+        etag: '"8c04316a229bbe69d281bef124265c50a92eabb268ee647bfc5b628a7325a7a3"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 03f78fb4208d1e0757e6c9008c619c9c2bce00eb1ec6c6508fe1feedf1b9226f
+      - name: SEED-Bench-2-image.zip.019
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.019
+        bytes: 734003200
+        etag: '"60b96860dc476738b3fc63d4cb1a792566bdbbe9707fa3f01af617cd0623d8cc"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 7e564ef096dd5f1934946ae3a004a285caa200417efad08653cb53b3b4356ad4
+      - name: SEED-Bench-2-image.zip.020
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.020
+        bytes: 734003200
+        etag: '"054faefde1dbd0df81f2d0b22f6dec05d3feb043d581a2d83e672d04f3b18281"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 11266be65b8c8737d6b1560cefadc81d8ffd6b87d5ab9e963022eddfd4681366
+      - name: SEED-Bench-2-image.zip.021
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.021
+        bytes: 734003200
+        etag: '"3df0b7aae5885cad2ac4263329c9fcc57064e71701646cf591bbc286da9658f1"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: bcd41b7e46492d5c0a311596be3e205bd7e96d218d248532954fdba34769e51f
+      - name: SEED-Bench-2-image.zip.022
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.022
+        bytes: 734003200
+        etag: '"d3a54fadecabba4458bc004da0d591ad030d515aa6bc66870850555df3866b44"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: cc917e49f519d5bb2f365e1e17f9aa3fb4413e6560d494f6ad6587e87d3a8ae6
+      - name: SEED-Bench-2-image.zip.023
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.023
+        bytes: 734003200
+        etag: '"508f134b088551be73079835eed3bf037837ce7356a3800cc39e619724c47d61"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 5c584da85f45307d01c137d397c6ee1a638cbed214746fe6eca0262b698ba8ac
+      - name: SEED-Bench-2-image.zip.024
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.024
+        bytes: 734003200
+        etag: '"ab9b5f4245388367825a7c03d357fccfc59f9cbec0f5560ee2d44169c014d878"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: a7209861260a4bbc8efb3b21dde049572cebd8ac0f0a9645577f35c9b643a0e5
+      - name: SEED-Bench-2-image.zip.025
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.025
+        bytes: 734003200
+        etag: '"cc504b4c8a27e9183189153d43196613ef07e907ed19512ba6020d1dc007685c"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 9d0c694c8ab4f59fa19dc2f92ac23e970593fa04071673a5370819440619c18c
+      - name: SEED-Bench-2-image.zip.026
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.026
+        bytes: 734003200
+        etag: '"55f21b9290d831f646b210b1869ae791451b627d380f58bc7a3934464dab7307"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 653a0ed2566f690b6986d782f6aebd3567c717cbed197eb4af0b5bc7d5b53f59
+      - name: SEED-Bench-2-image.zip.027
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.027
+        bytes: 734003200
+        etag: '"2c1eac0ab639890ec4cf700bff697cde7bcfa40949d52b06eb4c31fa9febab1b"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: a55add7ed92877525cf30ee46efee4e6cee1b486b5cdac742eeac221724a5791
+      - name: SEED-Bench-2-image.zip.028
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.028
+        bytes: 734003200
+        etag: '"7d63f5736c1bc5a61e0741f5653eabb143dd9e01fd073386e588c4495b150da9"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 608a81f08be582fa273e5726a1253443127c3d74d9d5ddbc7ace8dcebba9d9df
+      - name: SEED-Bench-2-image.zip.029
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.029
+        bytes: 734003200
+        etag: '"11727e03e11ad01f46dfe0b4cb6578ea245aea59543570cd798473c3e3191888"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: b4f1b83669307c9c963231cb80a00913d735e0398f024745203e5d9c5ea20ea4
+      - name: SEED-Bench-2-image.zip.030
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.030
+        bytes: 734003200
+        etag: '"91380ba9ccd571001986a95f1f4a126d664e462768f546a0b520a590c45b9c6a"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 8cf15ebe306bc48931baa6ffc42ee78502732d79c06bedd1b4f43c36052ae5ba
+      - name: SEED-Bench-2-image.zip.031
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.031
+        bytes: 734003200
+        etag: '"9e8f69c4292148c581309b4dc7bbc4d21587d575fb51b20a8632733d934af231"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 3abc51a51c7e3dfd3f2d24884ed1ffc45e06b00d2f53f717a4611c67718540ce
+      - name: SEED-Bench-2-image.zip.032
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.032
+        bytes: 734003200
+        etag: '"e6d109ea0c3fef00e566d1c18a62f55d1403ddbcded828b303717579986e07f4"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 95b6b182d201985f8c42c4c7fbdcfdf503ba9b284e21c97259db9e42d3f0a855
+      - name: SEED-Bench-2-image.zip.033
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.033
+        bytes: 734003200
+        etag: '"1c7cda9d77a5ae33bafe63a651e41b497f7f96c6fbd400324c548f3842f084b9"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 4124d332a17a457b677eb0489ecb769015d546ef8870f694d86e7dfe5b48422a
+      - name: SEED-Bench-2-image.zip.034
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.034
+        bytes: 734003200
+        etag: '"f530f908a3c0e210a069f088fa3a35c9efd8408216dbd7a13067c73ba272aa2a"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 397a11a50472dacea3cf3c7cca21c5c21cd1c08f2eb5130aea76666d9ec83405
+      - name: SEED-Bench-2-image.zip.035
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.035
+        bytes: 734003200
+        etag: '"90134302277a0743983de6afc77dee532681035f7261dceb112fabc7af247aab"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: d5eb8af457cc2687837c02e9334e8fa0474b16834b1ce4ce31d33115f8c27161
+      - name: SEED-Bench-2-image.zip.036
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.036
+        bytes: 734003200
+        etag: '"d9a7f9a6422b39e24950397093daddcdecb9c0c3c55593c1a9e37705cb125fa8"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 577f79fe1fa616857f39ffe6609a34f420f63517529442173042cbf7dd084b4e
+      - name: SEED-Bench-2-image.zip.037
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.037
+        bytes: 734003200
+        etag: '"610c265fc680b65fa16f4c70319ad1875104966c0b2861debcb23df41d6fde7b"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 7f4946cc83d219a7608287657afb8a7e8d123b35132cc50434574d36b1f6f750
+      - name: SEED-Bench-2-image.zip.038
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.038
+        bytes: 734003200
+        etag: '"b91235385cc8996d283edf134240be6c83b8301a82bdb28fcea6a11fe01d6fd2"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: df8f7ac9c72d0bf01d9831373df61d6e97d99ec0c0b192494353939590b73daf
+      - name: SEED-Bench-2-image.zip.039
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.039
+        bytes: 734003200
+        etag: '"c9f900b99c8211fcbed33fe996dc305bd6feef9f63e45a79bbd95f9e31b23035"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 7fbb3633bc353da50859ebcf12539f9259be209b4f34b3e2af342656343145ba
+      - name: SEED-Bench-2-image.zip.040
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.040
+        bytes: 734003200
+        etag: '"5e69af9165ba29d723a6f955df7e21e553f874be84ce8a911101ec81252084b1"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 825120fc3a39c7dabade0617ff6ff27cd4886407ef85c4932a8185b9c06dda0e
+      - name: SEED-Bench-2-image.zip.041
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.041
+        bytes: 734003200
+        etag: '"4effab45e5301511c8ee0f3556cedc16e45d9f3f760728f6f771a09d6274a4c1"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: dd20bd0057cb27b3824f41e6a597d17457e91d86ea7625052bd4f65c78edeb07
+      - name: SEED-Bench-2-image.zip.042
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.042
+        bytes: 734003200
+        etag: '"fb50ae8e5c798dcf5bb4f8876dcf31bd6322e15119445305f98dec768add570a"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 49a41608a679102b9f37933ae96b94a77dd94540d7a4ceca9638026442cc528a
+      - name: SEED-Bench-2-image.zip.043
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.043
+        bytes: 734003200
+        etag: '"ec12b3f54e7518957e5bcdcbf109e3a7df815f541b4247fd0efa3d23c3c42319"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: d49e6e258192d65b72d369a7039780b0cbadb2758c383e0edf33d42e6a26130d
+      - name: SEED-Bench-2-image.zip.044
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.044
+        bytes: 734003200
+        etag: '"de723c09562367b773503daa593786ab86e561b9c25a4748997db23a29f8e676"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 5fe57e81bf698597bffdde84ebefd00186fb83baf7c590abd698109a490d2e81
+      - name: SEED-Bench-2-image.zip.045
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.045
+        bytes: 734003200
+        etag: '"805ecbc78be604fa2332a08dc3ec4775e3c723aa949493856f587515b6549956"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: f4276c7dde9636be11e68306574dea91c9eb386ccb7f046673991eeaa57d1fc0
+      - name: SEED-Bench-2-image.zip.046
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.046
+        bytes: 734003200
+        etag: '"e1e24fdb857ae6b104a33625794fd96ce3373b4a06fa52261789336c1aeb3e25"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: df1b4b24d4df7f6d59da22d5f512ae4558144c806dfa9f3fe52ce4ffebff664e
+      - name: SEED-Bench-2-image.zip.047
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.047
+        bytes: 734003200
+        etag: '"a63c9611daa63b43733422721b9a1e2924553a80ae90bd8d6a3225a448262a31"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 7817074412d82b9c4496e47a0657c2ed1c27a59db8f4f85e949ac0db8a18d972
+      - name: SEED-Bench-2-image.zip.048
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.048
+        bytes: 734003200
+        etag: '"0c413c47bcc05d85ae6bb7ede9b5daf0100c51025c16cd6071dfa3f9c2926b21"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 52266b57d6154070ba76643b1049ac181442033e8a1b85fa91cfc05f31adcb42
+      - name: SEED-Bench-2-image.zip.049
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.049
+        bytes: 734003200
+        etag: '"0d113c07df25d24a66989446329168879571d4f24c0a3651259a2592fd1857b4"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: c749f70458d262e143b0174920cdae1d7ea5bb6fefb1d7d3ee702f50d5df4170
+      - name: SEED-Bench-2-image.zip.050
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.050
+        bytes: 734003200
+        etag: '"0e5f8bf5fc7caee61fe2a6c8063348603b7d7d126cc9b628a09460ee4e6c3ae1"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 954967124049e4c84565ee3b3a2b67e63e8b0301b87a1033df6cf56659625eb8
+      - name: SEED-Bench-2-image.zip.051
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.051
+        bytes: 734003200
+        etag: '"7e8f3286eac944db43905674d1e047b250d08f0faed17948935126b215a1c985"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: ec30a90fecd0318dac36ac439a08e4ac96d2bf1e38f58a33ef7da62e409d9e0a
+      - name: SEED-Bench-2-image.zip.052
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.052
+        bytes: 734003200
+        etag: '"1eac4ac13f2cdb819c9fb073147dd94c57952761ee7c30bfc13f5cc2d3495f89"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 29a8c348d82f4b3d871c36b289f391e73b20338138c05b8e8a271da50a869721
+      - name: SEED-Bench-2-image.zip.053
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.053
+        bytes: 734003200
+        etag: '"4052b5c36cc3319c95600eca4d8cf2bb196201683acf7e69df3cad338a81322a"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 44f47d5c3cd1b6112023093e415c9c58f5c25765f9e3da110dfe414bb6b09213
+      - name: SEED-Bench-2-image.zip.054
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.054
+        bytes: 734003200
+        etag: '"5e8a5cc1249fba26952f9e13e1fa154f8f6f42b99ec4cb72503275b5956ff44f"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: c016715fbe9f336878b60e93fb12b6029f0a5e28ebef89b5843b717fc3845915
+      - name: SEED-Bench-2-image.zip.055
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.055
+        bytes: 734003200
+        etag: '"b991be716d610059d3485d6cefb6e9a3f5bad973c09c7e2de715182ccd9c43e2"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: a18b37a98a9f8beea241162f50d5c7099e9aca72dfc47777530f641b6c75bdb5
+      - name: SEED-Bench-2-image.zip.056
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.056
+        bytes: 734003200
+        etag: '"20cbd708ebd1d89b5413ba01d9b1e919375f7c80f683dd5ca906d34eaa861ae4"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 6913237de0b919b98d6ce45d9358b3f92e1a816c0a5ca04fe92850689bde3651
+      - name: SEED-Bench-2-image.zip.057
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.057
+        bytes: 734003200
+        etag: '"34f61655f17f09dd6d245bf543c456b544256fcefe6df52fa53deae1dedb114d"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 3ddc27dba46f61e295a45db0f3eea438d2732807c7574c7fabf14f2dc6437072
+      - name: SEED-Bench-2-image.zip.058
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.058
+        bytes: 734003200
+        etag: '"94e762083c6913718ac9f8376eb8da7bbe657390bef076f516fc4c249fdeb4bc"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 229d07a4ebdabfecda93c3215ba1ca9a7fb3ff48fe759d029e32d7f832c5712b
+      - name: SEED-Bench-2-image.zip.059
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.059
+        bytes: 734003200
+        etag: '"341bde383986b952bce9b93ee11026acc21815aa8dc1b176baf97202e4c22bb6"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 18aa47ba6a13f01a7b2182859d4435f737bdeb0a2523792789308dfc3a4156f4
+      - name: SEED-Bench-2-image.zip.060
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.060
+        bytes: 734003200
+        etag: '"221ec49abb029f64ada6613feae4bc330bdb5dd4d3f31757986331cc52f68d04"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 7e572de0e14812a89798f83bab44cc9e66529d520e619fa383f8920c7967c98f
+      - name: SEED-Bench-2-image.zip.061
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.061
+        bytes: 734003200
+        etag: '"f7303550b76d4fc99a380e7597e48892cfca7b0b13da4b547f6da7fc26feadbf"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 4c7ad03025c04d980c0dbd9693e2d5ac9fc344150500bfd22a314f706a41c5a3
+      - name: SEED-Bench-2-image.zip.062
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.062
+        bytes: 734003200
+        etag: '"5914842b5854361edd0bd269b983c6b213ec40fcdae59cfc4acae10b1f24171a"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: f83baba445755bfb48173d3af56e814294dbf0dac55b4cc07d6b86d1b34fff0c
+      - name: SEED-Bench-2-image.zip.063
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.063
+        bytes: 734003200
+        etag: '"57b3ec12004fefe28693a94feda59c1a32c659296abf8adfdc96e0c9dd504cd3"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: ac156dfe9342e00c1f38540c7e2bd7add18f0d47cc25b16c7b3d5fedc576cca1
+      - name: SEED-Bench-2-image.zip.064
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.064
+        bytes: 734003200
+        etag: '"e1c2fd99a22f37c37400dfc1b462ccb404e417129f03ad550a7768613b025bdc"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 1027d0ed45d6d9d0393121d802d7c1cc614f2018117b5b1348f1c770539e02a7
+      - name: SEED-Bench-2-image.zip.065
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.065
+        bytes: 734003200
+        etag: '"cd2eb5e4d39b7a4cf6f885c6525c346b01ba2e066ca446817371b5e1e7acace8"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: b1062d22e3b33c0e550826b1582248b4ab8e9dbdcae364e5d20e2f40b5fc3256
+      - name: SEED-Bench-2-image.zip.066
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.066
+        bytes: 734003200
+        etag: '"f66889cb1b9648b3f3d16b7ae34929448ced4649a9bf8ac567ee56d0ba83cff3"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 98ded2261aceef1aa1ae9aa71f2765dfbccedece664a9834cd2d5290c4bf3490
+      - name: SEED-Bench-2-image.zip.067
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.067
+        bytes: 734003200
+        etag: '"c87112e3673b905c093ac57420b635aaa0e116a8dfeaf51958beec9fa3b0f045"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: dce31eaec22ebe591a1e86e7982d507f85d57d7f2b2ebbf8c5486f84d34340d6
+      - name: SEED-Bench-2-image.zip.068
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.068
+        bytes: 734003200
+        etag: '"7150e68ec9d86c182d5a2079d54ec50e159339ee4033937901b3261679347a9d"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 5a95be1fe9a0adedf526dde75cbcc508531f3faf966dfb4ba0df9a4e7e0229e8
+      - name: SEED-Bench-2-image.zip.069
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.069
+        bytes: 734003200
+        etag: '"dea0716a6460bc2b8ccbf197711adbf8add51842ab7e7498b94061b8884954e0"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 39d75f64be59cb6a18020e88cec97351a15a80726adb75fd13f543b85311da32
+      - name: SEED-Bench-2-image.zip.070
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.070
+        bytes: 734003200
+        etag: '"833205581e6e62a747fcbbc6384caa8165f02877e39a0469aa600ae34c511c89"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 1d1b0d6039fbd166fd21befdd5493830effdcf3588e80f2868b9b03e332f75a7
+      - name: SEED-Bench-2-image.zip.071
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.071
+        bytes: 734003200
+        etag: '"aa75f89fbc591bce00ae4150eb2889e322775f8df8c3fcc60e7bfaec141898ca"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 9a2cf8549f5dfca2089fe9a38cdec6368304e41c945e2106a096100c30e0edee
+      - name: SEED-Bench-2-image.zip.072
+        url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/SEED-Bench-2-image.zip.072
+        bytes: 175327704
+        etag: '"1a92587e9431f5c1d9ff3c0b2699bfa72ac648238d0d51fbeedf78460f3f5b7f"'
+        allowed_hosts:
+        - huggingface.co
+        - cdn-lfs.huggingface.co
+        - cdn-lfs.hf.co
+        - cas-bridge.xethub.hf.co
+        - us.aws.cdn.hf.co
+        upstream_sha256: 066f6fe2da29bafa772502b4ab6334a9ad5590b109c5af0607937d42be9faed9
+      bytes: 52289554904
+    cc3m:
+      name: cc3m-image.zip
+      url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench-2/resolve/2a0f22725601e6fc42392864c28539701194cd0f/cc3m-image.zip
+      bytes: 1684302326
+      etag: '"251670b02605c22bd9ea1e1519007adc984cc445b88d765a5f77e9d5074c9678"'
+      allowed_hosts:
+      - huggingface.co
+      - cdn-lfs.huggingface.co
+      - cdn-lfs.hf.co
+      - cas-bridge.xethub.hf.co
+      - us.aws.cdn.hf.co
+      upstream_sha256: 87b1e7f6150e14516128563904b65bb0f7a9f2c7c8a9c6a9b215e5449f8384cb
+  remote_cache_root: work/media-cache/seed-bench-2
+  remote_cache_bytes: 300000000
+  max_annotation_bytes: 30000000
+  annotation_transfer_bytes: 50000000
+  media_transfer_bytes: 50000000

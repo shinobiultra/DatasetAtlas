@@ -1,0 +1,41 @@
+source_url: https://github.com/NVlabs/ffhq-dataset
+release: ffhq-dataset-v2-native-70000
+adapter: ffhq
+expected_count: 70000
+scope: All 70,000 publisher FFHQ v2 metadata entries. Native 1024×1024 aligned PNG
+  images retain their original file bytes, file MD5 and decoded pixel MD5; only bounded
+  requested originals are acquired. Thumbnails, in-the-wild files and TFRecords are
+  preserved as source references, not substituted for aligned PNGs. Historical paper
+  subsets and preprocessing remain unidentified; local-only and not approved for external
+  providers or publication.
+preview_media_transfer_bytes: 250000000
+adapter_config:
+  verify_remote_preview_media: true
+  preview_media_modalities:
+  - image
+  media_scope: partial
+  remote_cache_root: work/media-cache/ffhq
+  remote_cache_bytes: 300000000
+  media_transfer_bytes: 5000000
+  native_record_read_bytes: 1000000000
+  max_record_bytes: 100000
+convert:
+  name: ffhq_metadata
+  params:
+    count: 70000
+  count: 70000
+  rows_sha256: 4a0275575917ad0784866363310f7ea658c57cf0d7f957729fcb7a3064592363
+files:
+- source_name: ffhq-dataset-v2.json
+  config_key: metadata
+  format: json
+  url: https://drive.usercontent.google.com/download?id=16N0RV4fHI6joBuKbQAoG34V_cQk7vxSA&export=download&confirm=t
+  bytes: 267793842
+  sha256: 1be5c2d1a78196d45a9600558c04b46dffefa217b7c664d5be38ed28a4d9a0ee
+allowed_hosts:
+- drive.usercontent.google.com
+- drive.google.com
+resource_limits:
+  max_rss_bytes: 4000000000
+  max_cpu_seconds: 1800
+  max_wall_seconds: 3600

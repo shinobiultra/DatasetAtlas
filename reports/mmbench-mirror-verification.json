@@ -1,0 +1,41 @@
+{
+  "official_repo": "https://github.com/open-compass/MMBench",
+  "checksum_source": "https://github.com/open-compass/VLMEvalKit/blob/5306917c0f83cf74ad2fd2614d6311be00db041d/vlmeval/dataset/image_mcq.py",
+  "mirror_repo": "ambivalent02/openencompass_tsv",
+  "mirror_revision": "943da5d7577251a00aac6bab450b12a965c778f7",
+  "original_endpoint_error": "HTTPS certificate expired; verification was not disabled.",
+  "files": [
+    {
+      "file": "MMBench_DEV_EN.tsv",
+      "sha256": "64baa14c5ec650302f428212a0b3efc5c88fbf9236d0d6fdea45c555f0b02d7a",
+      "official_md5": "b6caf1133a01c6bb705cf753bb527ed8",
+      "bytes": 37156625,
+      "rows": 4329,
+      "base_question_ids": 1164
+    },
+    {
+      "file": "MMBench_TEST_EN.tsv",
+      "sha256": "71a76a9cf8867c1e91afe3f50c36072714cff7cd6791eff02fe37a89e9c794b4",
+      "official_md5": "6939fadb0ce626fefc0bdc9c64efc528",
+      "bytes": 53398240,
+      "rows": 6666,
+      "base_question_ids": 1784
+    },
+    {
+      "file": "MMBench_DEV_CN.tsv",
+      "sha256": "cbf1e24febf215e719bf50f19834ccd97f80ba325b6b469c849db73c2559d959",
+      "official_md5": "08b8fc3324a5ed74155350f57be69fbd",
+      "bytes": 37068586,
+      "rows": 4329,
+      "base_question_ids": 1164
+    },
+    {
+      "file": "MMBench_TEST_CN.tsv",
+      "sha256": "7c6dde7fa2c03b4ba77be3fc34ee9fe10171c5962b6e0c29ff020b231aa50eb8",
+      "official_md5": "7e1239baf0ee4c8b513e19705a0f317e",
+      "bytes": 53267399,
+      "rows": 6666,
+      "base_question_ids": 1784
+    }
+  ]
+}

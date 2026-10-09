@@ -8,21 +8,22 @@ description: Mention candidate from a focused page audit; the evidence receipts 
 paper_ids:
 - paper-666de2b7486d80a3
 release: unresolved
-adapter: structured
+adapter: structured_collection
 adapter_config: {}
 coverage:
   identity: candidate
-  source: unverified
-  access: unverified
-  adapter: not_started
+  source: verified
+  access: public
+  adapter: implemented
   preview: none
   complete_data: unimplemented
   publication: not_reviewed
   preview_count: 0
   unit: example
   blockers:
-  - Original release identity and rights need verification.
-  - Adapter and preview are not implemented.
+  - The authors native release is verified; the citing paper exact selected evaluation
+    membership/protocol has not been independently reconciled.
+  - Image and annotation redistribution rights remain unreviewed.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -39,3 +40,26 @@ evidence:
     out of the box (blue). C. TID2013 Datas
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
+- kind: source_audit_access
+  checked_on: '2026-10-06'
+  url: https://www.ponomarenko.info/tid2013/tid2013.rar
+  note: 'The authors'' host serves tid2013.rar over HTTPS with range support: 957,680,241
+    bytes (Last-Modified 2022-03-09). Contents were not inspected.'
+  source_identity_status: official_file_reachable_implementation_gap
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'From the source inspected on 2026-10-06: authors RAR inspected by header
+    only; reference and distorted images. Not inferred from the dataset name.'
+- kind: source_audit_release
+  checked_on: '2026-10-06'
+  url: https://www.ponomarenko.info/tid2013/tid2013.rar
+  note: Full official RAR SHA-256 verified; all3025 original BMPs and17 score tables
+    preserved, with3000 distorted/reference pairs and exact MOS joins.25 reference
+    images are reused as paired assets.
+  source_identity_status: native_author_archive_verified_paper_protocol_not_reconciled
+modalities:
+- image
+source_url: https://www.ponomarenko.info/tid2013.htm
+tasks:
+- image-quality-assessment

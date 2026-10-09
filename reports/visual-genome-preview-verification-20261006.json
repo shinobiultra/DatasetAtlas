@@ -1,0 +1,35 @@
+{
+  "checked_at_utc": "2026-10-06T06:25:37.683570+00:00",
+  "dataset_id": "visual-genome",
+  "status": "passed",
+  "native_records": 116367,
+  "records_sha256": "3b0f53c95cb62fccd9f1a24aebf64a412c9b3a65692884394fff43f1e12d86b3",
+  "new_originals_verified": 100,
+  "prior_originals_preserved": 100,
+  "cold_native_originals": [
+    {
+      "record_id": "visual-genome:example:1293ba514d51bbaa3295b8ef",
+      "asset_id": "visual-genome:asset:b4382ee4a548d6e7103190e5",
+      "source_ref": "zip/vg2/VG_100K_2/101.jpg",
+      "sha256": "a846d07d5d45d7056b3e52ac0f4085df6e5713c8da20b7c27695a2ac69da04fa"
+    },
+    {
+      "record_id": "visual-genome:example:82e0018fd3cb3552e17b559f",
+      "asset_id": "visual-genome:asset:48e3767d1b431f4d4a0035a8",
+      "source_ref": "zip/vg2/VG_100K_2/102.jpg",
+      "sha256": "ae2f9a3ba412ac2c1ab3c80b2587f86907f9d1dddaf6cf219a8fbe0a19126ca9"
+    },
+    {
+      "record_id": "visual-genome:example:0bbb8114f4a326632ac630c2",
+      "asset_id": "visual-genome:asset:00d01110c6dc7b0796e2ed38",
+      "source_ref": "zip/vg2/VG_100K_2/103.jpg",
+      "sha256": "597de81867956e4dbfa919159875161a20558fdce895e29a8d60b2090cd3e33a"
+    }
+  ],
+  "network_bytes": 43972959,
+  "max_network_bytes": 1500000000,
+  "stored_original_bytes": 22800671,
+  "native_join_database_rebuilt": false,
+  "native_original_annotations_retained": true,
+  "external_model_requests": 0
+}

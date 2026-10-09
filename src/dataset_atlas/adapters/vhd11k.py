@@ -5,6 +5,7 @@ import hashlib
 import json
 import stat
 import zipfile
+from contextlib import contextmanager
 from pathlib import Path
 from pathlib import PurePosixPath
 from typing import Any
@@ -26,7 +27,16 @@ def _source_member_name(value: str) -> str:
 class VHD11KAdapter(StructuredAdapter):
     """Read all 11,000 source annotations; fetch individual image/video bytes from local ZIPs."""
 
-    def _record(self, row: dict[str, Any], ordinal: int) -> Record:
+    @contextmanager
+    def _remote(self,key,budget):
+        from dataset_atlas.storage import BoundedCache
+        from dataset_atlas.storage.ranges import HttpsRangeReader
+        entry=self.config['remote_archives'][key]
+        cache=BoundedCache(self.config['remote_cache_root'],self.config.get('remote_cache_bytes',200_000_000))
+        with HttpsRangeReader(entry['url'],size=entry['bytes'],etag=entry['etag'],allowed_hosts=entry['allowed_hosts'],byte_budget=budget,cache=cache,cancel=getattr(self,'cancel',None)) as reader:
+            yield reader
+
+    def _record(self, row: dict[str, Any], ordinal: int | str) -> Record:
         modality = row.get("modality")
         ref = row.get("media_ref")
         source_id = row.get("source_id")
@@ -77,6 +87,22 @@ class VHD11KAdapter(StructuredAdapter):
         if len(parts) != 2 or parts[0] not in {"images", "videos"} or parts[1] in {"", ".", ".."}:
             raise ValueError("invalid VHD11K asset reference")
         modality = "image" if parts[0] == "images" else "video"
+        if parts[0] in self.config.get('remote_archives',{}):
+            key=parts[0]
+            with self._remote(key,self.config.get('media_transfer_bytes',200_000_000)) as remote:
+                from dataset_atlas.storage.ranges import SmallReadBuffer
+                from dataset_atlas.storage.remote_zip import REMOTE_ZIP_MEMBERS
+                reader=SmallReadBuffer(remote)
+                # The release contains names whose UTF-8 bytes are rendered as
+                # CP437 in the ZIP directory. Match the exact native member.
+                with zipfile.ZipFile(reader) as archive:
+                    matches=[info for info in archive.infolist() if not info.is_dir() and _source_member_name(info.filename)==parts[1]]
+                    if len(matches)!=1:raise ValueError('VHD11K remote archive member is missing or ambiguous')
+                    info=matches[0]
+                    if stat.S_ISLNK(info.external_attr>>16):raise ValueError('VHD11K remote member cannot be a symlink')
+                data=REMOTE_ZIP_MEMBERS.read(reader,self.config['remote_archives'][key],info.filename,source.max_bytes-source.bytes_read)
+            source.charge(len(data))
+            return MediaHandle(data,_media_type(parts[1]),hashlib.sha256(data).hexdigest(),asset_ref)
         archive_path, _ = self._archive(modality)
         member_name = parts[1]
         with zipfile.ZipFile(archive_path) as archive:
@@ -95,3 +121,23 @@ class VHD11KAdapter(StructuredAdapter):
             if len(data) != info.file_size:
                 raise ValueError("VHD11K archive member has unexpected size")
         return MediaHandle(data, _media_type(member_name), hashlib.sha256(data).hexdigest(), asset_ref)
+
+    def validate_media(self, budget, cancel=None):
+        if not self.config.get('remote_archives'):
+            return {'integrity':'Local native ZIPs are SHA-256 checked on access'}
+        wanted=self._known_refs()
+        seen=set();fetched=0
+        for key in ('images','videos'):
+            if cancel:cancel()
+            with self._remote(key,budget-fetched) as remote:
+                with zipfile.ZipFile(remote) as archive:
+                    for info in archive.infolist():
+                        if info.is_dir():continue
+                        if stat.S_ISLNK(info.external_attr>>16):raise ValueError('VHD11K remote member cannot be a symlink')
+                        ref=key+'/'+_source_member_name(info.filename)
+                        if ref in seen:raise ValueError('Ambiguous VHD11K native media filename')
+                        seen.add(ref)
+                fetched+=remote.bytes_fetched
+        if seen!=wanted:raise ValueError('VHD11K remote archive membership differs from native annotations')
+        return {'referenced_assets':len(wanted),'archive_members':len(seen),'metadata_bytes_fetched':fetched,
+                'integrity':'Complete native ZIP membership checked; strong ETag and CRC checked on each original read. Whole remote archive SHA-256 not checked locally.'}

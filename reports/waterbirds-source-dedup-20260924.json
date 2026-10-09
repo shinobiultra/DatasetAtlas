@@ -1,0 +1,33 @@
+{
+  "checked_at": "2026-09-24T07:48:51.546965+00:00",
+  "operation": "Hard-link checksum-identical acquired Waterbirds archive into its prepared version without changing original bytes or either path.",
+  "files": [
+    {
+      "path": "work/sources/waterbirds/original.archive",
+      "bytes": 489698023,
+      "allocated_bytes": 489705472,
+      "device": 64768,
+      "inode_before": 54151640,
+      "links_before": 1,
+      "sha256": "56c51b77f7d17283ac97003d973e9107e8af9ceebffcb0c8be14d024f846f951"
+    },
+    {
+      "path": "work/prepared/waterbirds/1661bca077cdd6c9b8049c03496285228cffbe6d4af2cdc53cbeefeea7aef3cf/sources/56c51b77f7d17283ac97003d973e9107e8af9ceebffcb0c8be14d024f846f951.tar.gz",
+      "bytes": 489698023,
+      "allocated_bytes": 489705472,
+      "device": 64768,
+      "inode_before": 52700062,
+      "links_before": 1,
+      "sha256": "56c51b77f7d17283ac97003d973e9107e8af9ceebffcb0c8be14d024f846f951"
+    }
+  ],
+  "inode_after": 54151640,
+  "links_after": 2,
+  "freed_allocated_bytes": 489705472,
+  "media_check": {
+    "asset_ref": "waterbird_complete95_forest2water2/001.Black_footed_Albatross/Black_Footed_Albatross_0046_18.jpg",
+    "original_bytes": 26386,
+    "sha256_before_and_after": "1dd36ab7cdd6b261cd8696800a145ed70d1e6194e5783ecb5f82f032f78f59f5",
+    "post_link_direct_adapter_check": "passed"
+  }
+}

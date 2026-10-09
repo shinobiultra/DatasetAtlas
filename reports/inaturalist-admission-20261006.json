@@ -1,0 +1,295 @@
+{
+  "dataset_id": "inaturalist",
+  "dataset": {
+    "schema_version": "1.0",
+    "id": "inaturalist",
+    "name": "iNaturalist",
+    "origin": "catalogue",
+    "aliases": [],
+    "description": "iNaturalist taxonomy data; challenge release not established by the paper citation alone.",
+    "tasks": [],
+    "modalities": [],
+    "labels": [],
+    "paper_ids": [
+      "paper-9036b4eaa048dc21"
+    ],
+    "source_url": "https://www.inaturalist.org/pages/developers",
+    "release": "unresolved",
+    "snapshot_id": "",
+    "adapter": "structured",
+    "adapter_config": {},
+    "coverage": {
+      "identity": "resolved",
+      "source": "verified",
+      "access": "public",
+      "adapter": "not_started",
+      "preview": "none",
+      "complete_data": "unimplemented",
+      "publication": "not_reviewed",
+      "preview_count": 0,
+      "total_count": null,
+      "unit": "example",
+      "blockers": [
+        "The citing paper challenge release and exact SAE membership remain unidentified.",
+        "Adapter and preview are not implemented."
+      ]
+    },
+    "availability": null,
+    "rights": {
+      "records": "not_reviewed",
+      "annotations": "not_reviewed",
+      "images": "not_reviewed",
+      "source": "https://www.inaturalist.org/pages/developers",
+      "note": "Licenses are per observation/photo; platform default license is not a dataset-wide grant or proof of photo rights"
+    },
+    "relationships": [],
+    "evidence": [
+      {
+        "kind": "corpus_mention",
+        "evidence_id": "evidence-6ab016b9aab1ff0f85b3",
+        "paper_id": "paper-9036b4eaa048dc21",
+        "source_file_hash": "88586baf881cd37666b815d32164caaa8a344cf3272fea7a93bf642d320bca93",
+        "page": 26,
+        "role": "evaluation",
+        "excerpt": "ierarchies We train and evaluate the SAE on embeddings extracted from iNaturalist [55] dataset using an expansion factor \u03b5 = 2 and groups of size M = {3, 16, 69, 359, 1536}. These group sizes",
+        "review_scope": "specific_page_evidence_checked",
+        "paper_full_review_complete": true
+      },
+      {
+        "kind": "corpus_mention",
+        "evidence_id": "evidence-535f5bd121d02fba5d48",
+        "paper_id": "paper-9036b4eaa048dc21",
+        "source_file_hash": "88586baf881cd37666b815d32164caaa8a344cf3272fea7a93bf642d320bca93",
+        "page": 26,
+        "role": "taxonomy evaluation",
+        "excerpt": "Matryoshka hierarchies We train and evaluate the SAE on embeddings extracted from iNaturalist [55] dataset using an expansion factor \u03b5 = 2 and groups of size M = {3, 16, 69, 359, 1536}. These group sizes correspond to",
+        "review_scope": "full_text_mention_inventory_checked",
+        "paper_full_review_complete": true
+      },
+      {
+        "kind": "source_audit_identity",
+        "url": "https://www.inaturalist.org/pages/developers",
+        "note": "iNaturalist taxonomy data; challenge release not established by the paper citation alone",
+        "audit_file": "work/sources/source-audit-corpus.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "project_identified_release_unpinned"
+      },
+      {
+        "kind": "source_audit_release",
+        "url": "https://www.inaturalist.org/pages/developers",
+        "note": "Official platform and 2021 challenge expose different changing/dated sources; cited paper only says iNaturalist",
+        "audit_file": "work/sources/source-audit-corpus.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "project_identified_release_unpinned"
+      },
+      {
+        "kind": "source_audit_access",
+        "url": "https://www.inaturalist.org/pages/developers",
+        "observation": "official_platform_and_challenge",
+        "requires_external_access_step": null,
+        "download_or_media_inspected": false,
+        "audit_file": "work/sources/source-audit-corpus.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "project_identified_release_unpinned"
+      },
+      {
+        "kind": "source_audit_rights",
+        "url": "https://www.inaturalist.org/pages/developers",
+        "note": "Licenses are per observation/photo; platform default license is not a dataset-wide grant or proof of photo rights",
+        "publication_decision": "media_not_approved",
+        "audit_file": "work/sources/source-audit-corpus.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "project_identified_release_unpinned"
+      },
+      {
+        "kind": "source_audit_release",
+        "url": "https://github.com/visipedia/inat_comp/tree/master/2021",
+        "checked_on": "2026-10-06",
+        "note": "2021 native validation annotations locally acquired and SHA-256 verified; 100,000 images, 10,000 taxa and 7 native licence definitions. Image archive publisher MD5 is pinned; full image preparation is still pending.",
+        "source_identity_status": "native_available_validation_not_paper_membership"
+      }
+    ]
+  },
+  "max_download_bytes": 15000000000,
+  "max_output_bytes": 1000000000,
+  "source_mode": "download",
+  "files": [
+    {
+      "source_name": "val.json.tar.gz",
+      "url": "https://ml-inat-competition-datasets.s3.amazonaws.com/2021/val.json.tar.gz",
+      "format": "tar.gz",
+      "bytes": 9797665,
+      "sha256": "d63dfdb2e5fbc0262373833ed3fd02030787bd4b5cf2bd4ff3caea6d3f4e2970",
+      "probe_member_suffix": ".json",
+      "max_uncompressed_bytes": 60000000
+    },
+    {
+      "source_name": "val.tar.gz",
+      "url": "https://ml-inat-competition-datasets.s3.amazonaws.com/2021/val.tar.gz",
+      "format": "tar.gz",
+      "bytes": 8931661582,
+      "md5": "f6f6e0e242e3d4c9569ba56400938afc",
+      "probe_member_suffix": ".jpg",
+      "max_uncompressed_bytes": 12000000000
+    }
+  ],
+  "expected_download_bytes": 8941459247,
+  "expected_count": 100000,
+  "source_url": "https://www.inaturalist.org/pages/developers",
+  "requirements": [
+    "Shared Atlas storage ceiling leaves insufficient space for this preparation; free retained data or reduce the requested limits."
+  ],
+  "ready": false,
+  "scope": "Complete native iNaturalist 2021 validation release: 100,000 original images, 10,000 native taxa, every taxonomy field, per-image licence, rights holder and native location metadata. Original archives are checksum-verified then retired with bounded original access. The citing paper challenge release and exact SAE membership remain unidentified. Observation coordinates and media remain local-only.",
+  "source_identity": "Pinned available release; not a claim of the paper-used revision.",
+  "prepared_dataset": {
+    "schema_version": "1.0",
+    "id": "inaturalist",
+    "name": "iNaturalist",
+    "origin": "catalogue",
+    "aliases": [],
+    "description": "iNaturalist taxonomy data; challenge release not established by the paper citation alone.",
+    "tasks": [],
+    "modalities": [],
+    "labels": [],
+    "paper_ids": [
+      "paper-9036b4eaa048dc21"
+    ],
+    "source_url": "https://www.inaturalist.org/pages/developers",
+    "release": "inat2021-validation",
+    "snapshot_id": "",
+    "adapter": "inaturalist",
+    "adapter_config": {
+      "annotation_archive_name": "val.json.tar",
+      "annotation_member": "val.json",
+      "image_archive_name": "val.tar",
+      "mapping": {
+        "id": "source_id",
+        "media": "media_ref",
+        "label": "category.name"
+      },
+      "sequential_index": true,
+      "media_scope": "partial",
+      "native_record_read_bytes": 2000000000,
+      "remote_cache_root": "/home/bitwise/Documents/vibe/DatasetAtlas/work/media-cache/inaturalist",
+      "remote_cache_bytes": 200000000,
+      "media_transfer_bytes": 100000000
+    },
+    "coverage": {
+      "identity": "resolved",
+      "source": "verified",
+      "access": "public",
+      "adapter": "not_started",
+      "preview": "none",
+      "complete_data": "unimplemented",
+      "publication": "not_reviewed",
+      "preview_count": 0,
+      "total_count": null,
+      "unit": "example",
+      "blockers": [
+        "The citing paper challenge release and exact SAE membership remain unidentified.",
+        "Adapter and preview are not implemented."
+      ]
+    },
+    "availability": null,
+    "rights": {
+      "records": "not_reviewed",
+      "annotations": "not_reviewed",
+      "images": "not_reviewed",
+      "source": "https://www.inaturalist.org/pages/developers",
+      "note": "Licenses are per observation/photo; platform default license is not a dataset-wide grant or proof of photo rights"
+    },
+    "relationships": [],
+    "evidence": [
+      {
+        "kind": "corpus_mention",
+        "evidence_id": "evidence-6ab016b9aab1ff0f85b3",
+        "paper_id": "paper-9036b4eaa048dc21",
+        "source_file_hash": "88586baf881cd37666b815d32164caaa8a344cf3272fea7a93bf642d320bca93",
+        "page": 26,
+        "role": "evaluation",
+        "excerpt": "ierarchies We train and evaluate the SAE on embeddings extracted from iNaturalist [55] dataset using an expansion factor \u03b5 = 2 and groups of size M = {3, 16, 69, 359, 1536}. These group sizes",
+        "review_scope": "specific_page_evidence_checked",
+        "paper_full_review_complete": true
+      },
+      {
+        "kind": "corpus_mention",
+        "evidence_id": "evidence-535f5bd121d02fba5d48",
+        "paper_id": "paper-9036b4eaa048dc21",
+        "source_file_hash": "88586baf881cd37666b815d32164caaa8a344cf3272fea7a93bf642d320bca93",
+        "page": 26,
+        "role": "taxonomy evaluation",
+        "excerpt": "Matryoshka hierarchies We train and evaluate the SAE on embeddings extracted from iNaturalist [55] dataset using an expansion factor \u03b5 = 2 and groups of size M = {3, 16, 69, 359, 1536}. These group sizes correspond to",
+        "review_scope": "full_text_mention_inventory_checked",
+        "paper_full_review_complete": true
+      },
+      {
+        "kind": "source_audit_identity",
+        "url": "https://www.inaturalist.org/pages/developers",
+        "note": "iNaturalist taxonomy data; challenge release not established by the paper citation alone",
+        "audit_file": "work/sources/source-audit-corpus.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "project_identified_release_unpinned"
+      },
+      {
+        "kind": "source_audit_release",
+        "url": "https://www.inaturalist.org/pages/developers",
+        "note": "Official platform and 2021 challenge expose different changing/dated sources; cited paper only says iNaturalist",
+        "audit_file": "work/sources/source-audit-corpus.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "project_identified_release_unpinned"
+      },
+      {
+        "kind": "source_audit_access",
+        "url": "https://www.inaturalist.org/pages/developers",
+        "observation": "official_platform_and_challenge",
+        "requires_external_access_step": null,
+        "download_or_media_inspected": false,
+        "audit_file": "work/sources/source-audit-corpus.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "project_identified_release_unpinned"
+      },
+      {
+        "kind": "source_audit_rights",
+        "url": "https://www.inaturalist.org/pages/developers",
+        "note": "Licenses are per observation/photo; platform default license is not a dataset-wide grant or proof of photo rights",
+        "publication_decision": "media_not_approved",
+        "audit_file": "work/sources/source-audit-corpus.json",
+        "checked_on": "2026-09-22",
+        "source_identity_status": "project_identified_release_unpinned"
+      },
+      {
+        "kind": "source_audit_release",
+        "url": "https://github.com/visipedia/inat_comp/tree/master/2021",
+        "checked_on": "2026-10-06",
+        "note": "2021 native validation annotations locally acquired and SHA-256 verified; 100,000 images, 10,000 taxa and 7 native licence definitions. Image archive publisher MD5 is pinned; full image preparation is still pending.",
+        "source_identity_status": "native_available_validation_not_paper_membership"
+      }
+    ]
+  },
+  "recipe_sha256": "1f1ae9b1763a4f8743dc1bb9866c67e2503ac4a7d5b0bbaf78448b4078e75831",
+  "kind": "http_sequential_tar",
+  "allowed_hosts": [
+    "ml-inat-competition-datasets.s3.amazonaws.com"
+  ],
+  "media_access": "Original image files fetched on inspection and checked against the pinned source inventory; a bounded cache limits disk use.",
+  "required_free_bytes": 10151661582,
+  "available_bytes": 191482851328,
+  "shared_storage": {
+    "ceiling_bytes": 150000000000,
+    "allocated_workspace_bytes": 131849461760,
+    "reserved_by_running_preparations": 11536927545,
+    "available_bytes": 6613610695,
+    "required_bytes": 10151661582,
+    "admitted": false,
+    "scope": "Workspace regular files plus explicitly configured external model/source roots.",
+    "measurement_errors": []
+  },
+  "resource_limits": {
+    "max_rss_bytes": 8000000000,
+    "max_cpu_seconds": 7200,
+    "max_wall_seconds": 14400
+  },
+  "memory_enforcement": "kernel cgroup memory cap including descendants; swap disabled",
+  "id": "13040ef958a8c75861a0b622018fd01ceccc0d1379964b9b44707a7f48b4af48"
+}

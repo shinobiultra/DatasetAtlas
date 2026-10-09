@@ -1,0 +1,64 @@
+release: fairface-author-padding025-and125-fb823086
+source_url: https://github.com/joojs/fairface/tree/fb823086827337b4044e7f0abd3f2035e76b7c5f
+adapter: structured_collection
+expected_count: 97698
+description: 'FairFace: all 86,744 training and 10,954 validation examples, preserving both author-released
+  padding=0.25 and padding=1.25 image crops, their original pixels, native demographic annotations and
+  service_test flag. Labels are source annotations, not Atlas inferences or verified personal attributes.'
+scope: Complete native training and validation CSVs, joined by exact filename to both original image ZIPs;
+  97,698 examples and 195,396 native image variants. Original released crop dimensions are retained; these
+  are not uncropped source photographs. Native age, gender and race labels remain source-provided annotations.
+files:
+- source_name: fairface-images025.zip
+  url: https://drive.usercontent.google.com/download?id=1Z1RqRo0_JiavaZw2yzZG6WETdZQ8qX86&export=download&confirm=t
+  bytes: 578232678
+  sha256: 654c9b042def71b70a63b4920b05ced0a5489dcfaee75ca5ab5f5583fe451801
+  format: zip
+  config_key: images025_path
+- source_name: fairface-images125.zip
+  url: https://drive.usercontent.google.com/download?id=1g7qNOZz9wC7OfOhcPqH1EZ5bk1UFGmlL&export=download&confirm=t
+  bytes: 2094293825
+  sha256: 033bb5c7ff6d2a24501f9b24c132e6b11702267d6776b19295231b4e36f7bb2b
+  format: zip
+  config_key: images125_path
+- source_name: fairface-train.csv
+  url: https://drive.usercontent.google.com/download?id=1i1L3Yqwaio7YSOCj7ftgk8ZZchPG7dmH&export=download&confirm=t
+  bytes: 3793020
+  sha256: 90624451f2214ae1aa84021ae51c19ce45a375bd0bff901b935feadc59514795
+  format: csv
+  config_key: train_path
+- source_name: fairface-val.csv
+  url: https://drive.usercontent.google.com/download?id=1wOdja-ezstMEp81tX1a-EYkFebev4h7D&export=download&confirm=t
+  bytes: 447631
+  sha256: 19906f6917373dc19385e23ff0bacb75767fd0f99569ae6201d268af33d4c96b
+  format: csv
+  config_key: val_path
+allowed_hosts:
+- drive.google.com
+- drive.usercontent.google.com
+adapter_config:
+  annotations:
+  - path_key: train_path
+    format: csv
+    split: train
+    media_variants: &id001
+    - condition: padding=0.25
+      media_archive: images025
+      template: '{file}'
+      target: Native author crop; no Atlas resizing
+    - condition: padding=1.25
+      media_archive: images125
+      template: '{file}'
+      target: Native author crop; no Atlas resizing
+  - path_key: val_path
+    format: csv
+    split: val
+    media_variants: *id001
+  mapping:
+    id: file
+  local_archives:
+    images025:
+      path_key: images025_path
+    images125:
+      path_key: images125_path
+  max_annotation_bytes: 10000000

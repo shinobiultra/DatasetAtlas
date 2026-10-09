@@ -1,0 +1,43 @@
+{
+  "checked_at_utc": "2026-10-06T06:57:55.287064+00:00",
+  "dataset_id": "imagenet-c",
+  "snapshot_id": "imagenet-c-48f864aa463ccc9c07b8e707",
+  "status": "passed",
+  "native_records": 4750000,
+  "records_sha256": "c880d82f553a7edb26e958984ed20347792f3289a5fd29ee5fe2eecda442a1cb",
+  "full_native_member_fields_asset_hash_and_identity_parity": true,
+  "native_corruptions": 19,
+  "native_condition_cells": 95,
+  "images_per_condition": 50000,
+  "native_class_cells": 95000,
+  "images_per_native_class_cell": 50,
+  "native_source_indices": [
+    {
+      "archive": "blur",
+      "source_sha256": "dc086985323ba59271d90f1998074aebed492d7ef7763a934232ab11b43ed945",
+      "members": 1000000
+    },
+    {
+      "archive": "digital",
+      "source_sha256": "33b3fd31856f2bc7da70a34374e135a58904b9ca1ff2b86321b191ba1eeb0db9",
+      "members": 1000000
+    },
+    {
+      "archive": "extra",
+      "source_sha256": "70de168ae600b04ad1b34bf892b6b6e5925c351df9483228402e5b8d815e4087",
+      "members": 1000000
+    },
+    {
+      "archive": "noise",
+      "source_sha256": "ae862c15adc8252bff236c7fcc7a2248833be1d2dcf48c5f68f9abe47b063508",
+      "members": 750000
+    },
+    {
+      "archive": "weather",
+      "source_sha256": "ed2550399b85b77120969ec93e316ff9f16ff042ff512cfdf82b53121ecbc4f7",
+      "members": 1000000
+    }
+  ],
+  "source_acquisition_requests": 0,
+  "external_model_requests": 0
+}

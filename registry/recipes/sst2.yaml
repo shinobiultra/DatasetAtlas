@@ -1,0 +1,24 @@
+# The catalogue's table is a deterministic conversion of these pinned originals (see dataset_atlas/converters/text.py). A fetch
+# reproduces it and fails unless the converted rows match this row digest exactly, which was taken from the maintainer's table.
+# Release and snapshot IDs are unchanged, so a colleague's preview has the same identity.
+release: GLUE-SST-2-zip-2020-09-03
+snapshot_id: sst2-glue-d67e16fb-914641ca
+adapter: structured
+expected_count: 70042
+scope: GLUE SST-2 original ZIP train, dev, and unlabeled test TSVs converted losslessly to Parquet, 70,042 rows
+source_url: https://gluebenchmark.com/tasks
+adapter_config: {}
+convert:
+  name: glue_sst2
+  params: {}
+  count: 70042
+  rows_sha256: c5b72e0da03ce7a632499982042b0770fcfc42e4a1b2e90582ac90a7317015de
+files:
+- source_name: SST-2.zip
+  url: https://dl.fbaipublicfiles.com/glue/data/SST-2.zip
+  bytes: 7439277
+  sha256: d67e16fb55739c1b32cdce9877596db1c127dc322d93c082281f64057c16deaa
+  format: zip
+  config_key: source_zip
+allowed_hosts:
+- dl.fbaipublicfiles.com

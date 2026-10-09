@@ -1,0 +1,159 @@
+{
+  "checked_at_utc": "2026-10-07T08:05:28.078331+00:00",
+  "catalogue_entries": 333,
+  "tested_local_previews": 217,
+  "verified_preview_records": 21232,
+  "canonical_full_scope_indices": 215,
+  "entries_without_preview": 116,
+  "frontend_tests_passed": 26,
+  "browser_tests_passed": 56,
+  "browser_tests_skipped": 4,
+  "approved_public_preview_datasets": [
+    "clevr",
+    "eurosat",
+    "pairs"
+  ],
+  "full_v1_complete": false,
+  "paid_model_apis_used": false,
+  "gqa_full_archive_acquired": true,
+  "gqa_browsing_snapshot_media_scope": "full",
+  "active_preparations": [],
+  "validation_log": "work/python-final-all-20261007.log",
+  "browser_validation_log": "work/browser-final-all-20261006.log",
+  "additional_focused_test_log": "work/pytest-local-originals-20261005.log",
+  "python_tests_skipped": 1,
+  "gqa_full_archive_retained_locally": false,
+  "storage_policy": "reports/storage-policy-20260923.json",
+  "storage_footprint": "reports/storage-footprint-current-20261007.json",
+  "retained_media_verification": "reports/retained-media-live-verification.json",
+  "workbench_running": true,
+  "task_vllm_running": false,
+  "safebench_native_verification": "reports/safebench-live-verification.json",
+  "safebench_archive_retirement": "reports/safebench-retirement-20260924.json",
+  "storage_allocated_bytes": 129182580736,
+  "qava_native_verification": "reports/qava-live-verification-20260924.json",
+  "covid_radiography_native_verification": "reports/covid-radiography-live-verification-20260924.json",
+  "objectnet_native_verification": "reports/objectnet-live-verification-20260924.json",
+  "visual6502_native_verification": "reports/visual6502-live-verification-20260924.json",
+  "subagents_used": true,
+  "external_model_sends_this_pass": false,
+  "cluster_jobs_this_pass": 0,
+  "frontend_validation_log": "work/frontend-final-all-20261006.log",
+  "workbench_url": "http://127.0.0.1:8766/?mode=workbench",
+  "installation_verification": "reports/installation-verification.json",
+  "native_expansion_verification": "reports/native-expansion-20261005.json",
+  "retired_originals_live_verification": "reports/native-retirement-live-20261005.json",
+  "authorization_links": "docs/dataset-authorization.md",
+  "python_historical_validation": {
+    "version": "3.14.2",
+    "passed": 412,
+    "skipped": 3,
+    "log": "work/safebench-python314-20260924.log"
+  },
+  "python_current_validation": {
+    "passed": 880,
+    "skipped": 1,
+    "warnings": 2,
+    "log": "work/python-final-all-20261006.log",
+    "scope": "Full current Python suite after snapshot and explicit reasoning-control repairs."
+  },
+  "python_base_installation_validation": {
+    "version": "3.14.7",
+    "scope": "Installed final base-only wheel outside checkout; catalogue, approved static packs, original images, interface, API capabilities and optional reader guards. No full test suite or model execution.",
+    "receipt": "reports/installation-verification.json"
+  },
+  "browser_historical_validation": {
+    "default_passed": 26,
+    "default_skipped": 13,
+    "live_safebench_passed": 1,
+    "live_qava_passed": 1,
+    "live_covid_radiography_passed": 1,
+    "live_objectnet_passed": 1,
+    "live_visual6502_passed": 1
+  },
+  "browser_current_validation": {
+    "passed": 56,
+    "skipped": 4,
+    "failed": 0,
+    "full_suite_pending": false,
+    "log": "work/browser-final-all-20261006.log",
+    "local_model_journey": "reports/browser-runtime-linked-journey-20261006.json"
+  },
+  "verification_status_recovery": "reports/status-recovery-20261005.json",
+  "cleanup_summary": "reports/cleanup-summary-20261006.json",
+  "runtime_after_cleanup_verification": "work/clean-runtime-final-20261005.json",
+  "deadline_local": "2026-10-06 approximately19:00 Asia/Tokyo",
+  "final_python_validation": "880 passed,1 optional skip,2 dependency deprecation warnings; current complete suite.",
+  "python_tests_previous_passed": 633,
+  "resumed_at_utc": "2026-10-06T04:52:24.854586+00:00",
+  "analysis_runtime_verification": "reports/analysis-runtime-complete-20261006.json",
+  "native_parquet_retention": "reports/native-parquet-retention-20261006.json",
+  "idle_cache_cleanup": "reports/idle-cache-cleanup-20261006.json",
+  "objaverse_browser_verification": "reports/browser-objaverse-20261006.json",
+  "current_validation_pending": false,
+  "historical_deadline_checkpoint_20261005": {
+    "checkpointed_preparations": [
+      {
+        "id": "172042359143d124bea1d71f318c8c1b74ef0b29ea1f8f496898a974637da3fe",
+        "dataset_id": "imagenet-c",
+        "status": "cancelled",
+        "downloaded_bytes": 16653154256,
+        "stage": "acquiring native archive"
+      },
+      {
+        "id": "fa2916471817cba50d9ff6ab4651ffd2923648aa0ae880f4cfe6343fec9c2734",
+        "dataset_id": "imagenet-c",
+        "status": "cancelled",
+        "downloaded_bytes": 5668601856,
+        "stage": "acquiring native archive"
+      }
+    ],
+    "final_python_validation": "Full suite still running at deadline; at least one failure observed. Earlier 633-pass result is historical, not validation of the current tree."
+  },
+  "release_rebuild_pending": false,
+  "native_preview_verification": "reports/native-after-final-cleanup-20261006.json",
+  "deadline_pass_finished": true,
+  "independent_review": {
+    "model": "gpt-6.1-sol",
+    "reasoning_effort": "xhigh",
+    "reviewers": 1,
+    "scope": "Code,synthetic tests and aggregate receipts; no native dataset contents.",
+    "receipt": "reports/independent-limitations-review-20261006.md"
+  },
+  "native_acquisition_running": false,
+  "spoken_wikipedia_audio": {
+    "status": "checkpointed_for_user_deadline",
+    "verified_languages": [
+      "Dutch",
+      "English"
+    ],
+    "unprepared_languages": [
+      "German"
+    ],
+    "audio_preview_activated": false,
+    "receipt": "reports/spoken-wikipedia-native-audio-index-acquisition-20261006.json"
+  },
+  "final_cleanup_receipts": [
+    "reports/prepared-version-cleanup-final-20261006.json",
+    "reports/native-fresh-verification-retirement-20261006.json",
+    "reports/native-conversion-staging-cleanup-20261006.json",
+    "reports/storage-cleanup-closeout-20261006.json",
+    "reports/final-installation-workspace-cleanup-20261006.json",
+    "reports/final-generated-assets-cleanup-20261006.json"
+  ],
+  "fresh_reproduction_current_recipe_verified": 41,
+  "fresh_reproduction_historical_receipts": 142,
+  "reproduction_feasibility_is_not_verified_coverage": true,
+  "source_identity_receipt": "reports/closeout-source-identity-20261006.json",
+  "python_tests_passed": 884,
+  "python314_tests_passed": 882,
+  "python314_tests_skipped": 3,
+  "fresh_workspace_verified_recipes": 57,
+  "claude_pass_20261007": {
+    "summary": "Empty-workspace reproduction of 16 further datasets; two planning/conversion defects fixed (ZeroBench auto_source_mode, OASIS media mapping); mit-adobe-5k and mvbench-scene-qa plan-honesty key; wheel and sdist rebuilt; installation verified on Python 3.12.14 and 3.14.2.",
+    "reproducibility_report": "reports/preview-reproducibility.md",
+    "preview_media_smoke": "reports/preview-media-smoke-20261007.json",
+    "superseded_prepared_versions_retained_bytes": 5400000000
+  },
+  "python314_validation_log": "work/python314-final-all-20261007.log"
+}

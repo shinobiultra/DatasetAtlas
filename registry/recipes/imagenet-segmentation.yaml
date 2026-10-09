@@ -1,0 +1,21 @@
+release: native-gtsegs-ijcv-511a987eeae9cceb
+adapter: imagenet_segmentation
+expected_count: 4276
+scope: 'All 4276 native MATLAB image references and all linked groundtruth mask cells. The pinned CLIP
+  text-span author loader uses the first mask cell; additional mask cells remain separately inspectable.
+  Native class IDs, image dimensions and independent mask dimensions are preserved: 2872 first-mask pairs
+  have different geometry and are explicitly flagged. PNGs preserve MATLAB pixels after the author''s
+  axis transpose; the original MAT bytes remain retained. No resizing, thresholding or ImageNet-S substitution
+  is performed.'
+adapter_config:
+  verify_remote_preview_media: true
+  mat_sha256: 511a987eeae9cceb570e7e2c711e29c68f121fd04c0be3d79ce7d4f66980c1aa
+allowed_hosts:
+- calvin-vision.net
+files:
+- source_name: gtsegs_ijcv.mat
+  url: https://calvin-vision.net/bigstuff/proj-imagenet/data/gtsegs_ijcv.mat
+  bytes: 1340808474
+  sha256: 511a987eeae9cceb570e7e2c711e29c68f121fd04c0be3d79ce7d4f66980c1aa
+  config_key: mat_path
+  format: mat

@@ -1,0 +1,59 @@
+{
+  "checked_at_utc": "2026-10-06T09:57:39.946408+00:00",
+  "final_allocated_bytes": 121556004864,
+  "ceiling_bytes": 150000000000,
+  "target_bytes": 100000000000,
+  "measurement_scope": "Regular files only; hard links counted once, allocated filesystem blocks. Reflink-shared extents may be counted more than once. Only explicitly configured external model/source roots are included. Incidental symlink targets and directory metadata are outside this measurement.",
+  "final_cleanup_components": [
+    {
+      "receipt": "reports/prepared-version-cleanup-final-20261006.json",
+      "freed_allocated_bytes": null,
+      "freed_prepared_version_logical_bytes": 2965202247,
+      "verified_duplicate_staging_allocated_bytes": 1785237504
+    },
+    {
+      "receipt": "reports/native-fresh-verification-retirement-20261006.json",
+      "freed_allocated_bytes": 4441321472,
+      "freed_prepared_version_logical_bytes": null,
+      "verified_duplicate_staging_allocated_bytes": null
+    },
+    {
+      "receipt": "reports/native-conversion-staging-cleanup-20261006.json",
+      "freed_allocated_bytes": 813694976,
+      "freed_prepared_version_logical_bytes": null,
+      "verified_duplicate_staging_allocated_bytes": null
+    },
+    {
+      "receipt": "reports/storage-cleanup-closeout-20261006.json",
+      "freed_allocated_bytes": 2316660736,
+      "freed_prepared_version_logical_bytes": null,
+      "verified_duplicate_staging_allocated_bytes": null
+    },
+    {
+      "receipt": "reports/final-installation-workspace-cleanup-20261006.json",
+      "freed_allocated_bytes": 146571264,
+      "freed_prepared_version_logical_bytes": null,
+      "verified_duplicate_staging_allocated_bytes": null
+    },
+    {
+      "receipt": "reports/final-generated-assets-cleanup-20261006.json",
+      "freed_allocated_bytes": 169246720,
+      "freed_prepared_version_logical_bytes": null,
+      "verified_duplicate_staging_allocated_bytes": null
+    }
+  ],
+  "net_allocated_change_since_before_final_cleanup_bytes": 6987620352,
+  "net_change_scope": "Timestamped before-final-cleanup scan to final scan; includes concurrent source verification acquisitions and temporary installations. Not a sum of every historical retirement.",
+  "preserved": [
+    "Read-only corpus originals",
+    "Active prepared datasets and canonical indices",
+    "Saved selection snapshot dependencies",
+    "Protected original preview bytes",
+    "Native retrieval/checksum indices",
+    "Required model weights",
+    "Failure logs and verification metadata"
+  ],
+  "frontend_development_dependencies": "npm ci restores disposable node_modules; installed workbench frontend remains available.",
+  "source_verification_disposable_bodies_removed": true,
+  "remaining_scope": "Above100GBtarget; below150GBceiling. Required originals/canonical records are retained."
+}

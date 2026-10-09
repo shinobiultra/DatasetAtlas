@@ -1,0 +1,109 @@
+release: 1f561dccf92d55302368fa67679b4ba9d9c8fdc4
+source_url: https://github.com/agiresearch/ASB
+adapter: structured_collection
+expected_count: 843
+scope: 'Every valid native JSONL row, plus invalid native files represented as explicitly
+  labelled raw source documents, under the author repository data/ directory: task
+  bundles, normal tools and attack-tool configurations. Named files remain separate
+  overlapping configurations. This is static inspection of released inputs; procedural
+  agent execution, tool implementation code and generated attack outcomes are not
+  misrepresented as dataset rows.'
+files:
+- url: https://raw.githubusercontent.com/agiresearch/ASB/1f561dccf92d55302368fa67679b4ba9d9c8fdc4/data/agent_task.jsonl
+  source_name: agent_task.jsonl
+  config_key: data_0
+  format: jsonl
+  bytes: 4935
+  sha256: d6c1d214811b5d908ae9c04ffbbde36ce35d39932766feb8bf24e202441c1dc8
+- url: https://raw.githubusercontent.com/agiresearch/ASB/1f561dccf92d55302368fa67679b4ba9d9c8fdc4/data/agent_task_pot.jsonl
+  source_name: agent_task_pot.jsonl
+  config_key: data_1
+  format: jsonl
+  bytes: 2717
+  sha256: a66a3271ee4b5e8b4052a85c07eddb2e5828d4f9ce05dcd2cf109dc8f8df1d7b
+- url: https://raw.githubusercontent.com/agiresearch/ASB/1f561dccf92d55302368fa67679b4ba9d9c8fdc4/data/agent_task_pot_all.jsonl
+  source_name: agent_task_pot_all.jsonl
+  config_key: data_2
+  format: jsonl
+  bytes: 1523
+  sha256: 2f0b74f2a8a8de636f04ed7eec73ede80550b5e8078657e555f996940100cd19
+- url: https://raw.githubusercontent.com/agiresearch/ASB/1f561dccf92d55302368fa67679b4ba9d9c8fdc4/data/agent_task_pot_msg.jsonl
+  source_name: agent_task_pot_msg.jsonl
+  config_key: data_3
+  format: jsonl
+  bytes: 3241
+  sha256: 5d2d5f35dbac6f3ed029eff18be94a93094da60c15d5d8cfa4b2ed3a9f489f6a
+- url: https://raw.githubusercontent.com/agiresearch/ASB/1f561dccf92d55302368fa67679b4ba9d9c8fdc4/data/agent_task_test.jsonl
+  source_name: agent_task_test.jsonl
+  config_key: data_4
+  format: jsonl
+  bytes: 486
+  sha256: 4bec3efb9e634ed3c47182624fff7de593eb521708fe9890a59a559248190d1c
+- url: https://raw.githubusercontent.com/agiresearch/ASB/1f561dccf92d55302368fa67679b4ba9d9c8fdc4/data/all_attack_tools.jsonl
+  source_name: all_attack_tools.jsonl
+  config_key: data_5
+  format: jsonl
+  bytes: 209436
+  sha256: c960ab1e60dee2038d51bc64e8f119e565c037c95a8565f176899de8d819a4b2
+- url: https://raw.githubusercontent.com/agiresearch/ASB/1f561dccf92d55302368fa67679b4ba9d9c8fdc4/data/all_attack_tools_aggressive.jsonl
+  source_name: all_attack_tools_aggressive.jsonl
+  config_key: data_6
+  format: jsonl
+  bytes: 105518
+  sha256: e46485f66e2d7a50493272554213896a60f06f743b5c6cd3f008cd13b72fb990
+- url: https://raw.githubusercontent.com/agiresearch/ASB/1f561dccf92d55302368fa67679b4ba9d9c8fdc4/data/all_attack_tools_non_aggressive.jsonl
+  source_name: all_attack_tools_non_aggressive.jsonl
+  config_key: data_7
+  format: jsonl
+  bytes: 104118
+  sha256: 53d8514b90bda4e2c7b939a767e937947d2806b4d0dc0b832de6131941be39f4
+- url: https://raw.githubusercontent.com/agiresearch/ASB/1f561dccf92d55302368fa67679b4ba9d9c8fdc4/data/all_normal_tools.jsonl
+  source_name: all_normal_tools.jsonl
+  config_key: data_8
+  format: jsonl
+  bytes: 8807
+  sha256: 45b821931348993de3eda474a997d62cb5b9e7a3fe358e5c81a7ef0417ccb73f
+- url: https://raw.githubusercontent.com/agiresearch/ASB/1f561dccf92d55302368fa67679b4ba9d9c8fdc4/data/attack_tools_test.jsonl
+  source_name: attack_tools_test.jsonl
+  config_key: data_9
+  format: jsonl
+  bytes: 547
+  sha256: f0e938e54036b25eb442b5d47de6635efa91c3395679d32330a7f49815364880
+allowed_hosts:
+- raw.githubusercontent.com
+adapter_config:
+  annotations:
+  - path_key: data_0
+    format: jsonl
+    split: agent_task
+  - path_key: data_1
+    format: jsonl
+    split: agent_task_pot
+  - path_key: data_2
+    format: text
+    split: agent_task_pot_all
+    source_status: Author-published file is not valid JSONL; raw source document retained,
+      not an agent task.
+  - path_key: data_3
+    format: jsonl
+    split: agent_task_pot_msg
+  - path_key: data_4
+    format: jsonl
+    split: agent_task_test
+  - path_key: data_5
+    format: jsonl
+    split: all_attack_tools
+  - path_key: data_6
+    format: jsonl
+    split: all_attack_tools_aggressive
+  - path_key: data_7
+    format: jsonl
+    split: all_attack_tools_non_aggressive
+  - path_key: data_8
+    format: jsonl
+    split: all_normal_tools
+  - path_key: data_9
+    format: jsonl
+    split: attack_tools_test
+  mapping:
+    text: text

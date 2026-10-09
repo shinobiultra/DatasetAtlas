@@ -23,12 +23,13 @@ DESCRIPTIONS: dict[str, dict[str, Any]] = {
     "quality.basic": {"name": "Image quality and fingerprints", "unit": "example", "input_units": ["example", "asset"], "dependencies": ["Pillow"], "output_schema": "quality.v1", "batching": "records", "device": "cpu"},
     "detect.nudenet": {"name": "NudeNet detector", "unit": "example", "input_units": ["example", "asset"], "dependencies": ["nudenet"], "output_schema": "detections.v1", "batching": "assets", "device": "cpu"},
     "detect.coco_v1": {"name": "Faster R-CNN MobileNet V3 COCO_V1", "unit": "example", "input_units": ["example", "asset"], "dependencies": ["torch", "torchvision"], "output_schema": "detections.v1", "batching": "assets", "device": "cpu"},
+    "detect.view": {"name": "Adjust retained detector threshold", "unit": "example", "input_units": ["example", "asset"], "dependencies": [], "output_schema": "detections.v1", "batching": "selection", "device": "cpu"},
     "embed.minilm": {"name": "MiniLM text embeddings", "unit": "example", "input_units": ["example"], "dependencies": ["sentence_transformers"], "output_schema": "embedding.v1", "batching": "records", "device": "cpu"},
     "embed.siglip2": {"name": "SigLIP 2 image/text embeddings", "unit": "example", "input_units": ["example", "asset"], "dependencies": ["torch", "transformers"], "output_schema": "embedding.v1", "batching": "assets", "device": "cpu"},
-    "project.pca": {"name": "PCA projection", "unit": "example", "input_units": ["example"], "dependencies": ["numpy"], "output_schema": "projection.v1", "batching": "selection", "device": "cpu"},
-    "project.umap": {"name": "UMAP projection", "unit": "example", "input_units": ["example"], "dependencies": ["umap-learn"], "output_schema": "projection.v1", "batching": "selection", "device": "cpu"},
-    "cluster.kmeans": {"name": "K-means clustering", "unit": "example", "input_units": ["example"], "dependencies": ["numpy"], "output_schema": "cluster.v1", "batching": "selection", "device": "cpu"},
-    "outlier.knn": {"name": "Original-space neighbour distance", "unit": "example", "input_units": ["example"], "dependencies": ["numpy"], "output_schema": "outlier.v1", "batching": "selection", "device": "cpu"},
+    "project.pca": {"name": "PCA projection", "unit": "example", "input_units": ["example", "asset", "entity", "conversation"], "dependencies": ["numpy"], "output_schema": "projection.v1", "batching": "selection", "device": "cpu"},
+    "project.umap": {"name": "UMAP projection", "unit": "example", "input_units": ["example", "asset", "entity", "conversation"], "dependencies": ["umap-learn"], "output_schema": "projection.v1", "batching": "selection", "device": "cpu"},
+    "cluster.kmeans": {"name": "K-means clustering", "unit": "example", "input_units": ["example", "asset", "entity", "conversation"], "dependencies": ["numpy"], "output_schema": "cluster.v1", "batching": "selection", "device": "cpu"},
+    "outlier.knn": {"name": "Original-space neighbour distance", "unit": "example", "input_units": ["example", "asset", "entity", "conversation"], "dependencies": ["numpy"], "output_schema": "outlier.v1", "batching": "selection", "device": "cpu"},
     "compare.fields": {"name": "Field comparison", "unit": "example", "input_units": ["example"], "dependencies": [], "output_schema": "comparison.v1", "batching": "selection", "device": "cpu"},
     "import.research": {"name": "Import research outputs", "unit": "example", "input_units": ["example", "asset", "entity", "conversation"], "dependencies": [], "output_schema": "import.v1", "batching": "selection", "device": "cpu"},
 }
@@ -41,7 +42,9 @@ def describe_processors() -> list[dict[str, Any]]:
     for processor_id, base in DESCRIPTIONS.items():
         missing = [name for name in base["dependencies"] if util.find_spec(DEPENDENCY_MODULES.get(name, name)) is None]
         descriptions.append({"id": processor_id, **base, "available": not missing, "missing_dependencies": missing,
-                             "requires_local_model": processor_id.startswith(("detect.", "embed."))})
+                             "requires_local_model": processor_id != 'detect.view' and processor_id.startswith(("detect.", "embed."))})
+        if processor_id in {'detect.coco_v1','embed.siglip2','embed.minilm'}:
+            descriptions[-1]['supported_devices']=['auto','cpu','cuda','mps']
     return descriptions
 
 
@@ -71,7 +74,8 @@ class Processor:
         return {"valid": True, "record_count": len(records), "unit": records[0].unit if records else "example"}
 
     def estimate(self, selection: Sequence[Record | dict[str, Any]], config: dict[str, Any] | None = None) -> dict[str, Any]:
-        return {"records": len(selection), "device": self.describe()["device"], "remote_calls": 0,
+        description=self.describe()
+        return {"records": len(selection), "device": (config or {}).get('device','auto' if description.get('supported_devices') else description['device']), "remote_calls": 0,
                 "model_download_bytes": 0}
 
     def run_batch(self, inputs: Sequence[Record | dict[str, Any]], config: dict[str, Any] | None = None,
@@ -92,6 +96,9 @@ def run_processor(processor_id: str, records: Sequence[Record | dict[str, Any]],
     if processor_id in {"quality.basic", "detect.nudenet", "detect.coco_v1"}:
         from .vision import run_vision
         items, provenance = run_vision(processor_id, parsed, config, should_cancel)
+    elif processor_id == 'detect.view':
+        from .detector_view import run_detector_view
+        items, provenance = run_detector_view(parsed, config)
     elif processor_id.startswith("embed."):
         from .embeddings import run_embeddings
         items, provenance = run_embeddings(processor_id, parsed, config, should_cancel)

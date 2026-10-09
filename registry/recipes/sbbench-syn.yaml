@@ -1,0 +1,33 @@
+source_url: https://huggingface.co/vlmbias
+release: sbbench-syn-95ac0c3020ff710295a6ed5c0216718f03383151-b3f53090f541bfcdb491217dfec7aa639289ad8a
+adapter: remote_columnar
+expected_count: 539
+description: 'SBBench synthetic author noncrop releases: all 539 image examples across separate age and
+  gender configurations, with original image bytes and native integer labels retained. Label meanings
+  are not inferred.'
+scope: Complete pinned vlmbias age and gender crop=False Parquet releases (539 rows). Each source stays
+  identifiable by configuration and immutable revision. This is an author release population, not a claim
+  that the chart abbreviations SB-Syn or SB-Syn-Crop identify exact historical membership. Native integer
+  label codes are retained without inventing a category mapping.
+adapter_config:
+  remote_files:
+  - source_name: age/data/train-00000-of-00001.parquet
+    url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_age_crop_False/resolve/95ac0c3020ff710295a6ed5c0216718f03383151/data/train-00000-of-00001.parquet
+    bytes: 430967656
+    sha256: 827f8c928bc1942a03eb93f2e8ea5a2198a4c9fd09465c16dcf3749da735e5e8
+    etag: '"1f2b1d39f72d03fef04fea5f40e8dd4daabfab0c94a6112395dea7a3bca9bc00"'
+  - source_name: gender/data/train-00000-of-00001.parquet
+    url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_gender_crop_False/resolve/b3f53090f541bfcdb491217dfec7aa639289ad8a/data/train-00000-of-00001.parquet
+    bytes: 237029151
+    sha256: ada6735e59d70c98b812ca95cbce379b79340d224e1e86382a6d3ccdd620aeae
+    etag: '"7ef3dc9ba24b63df110e6cc26c3d52545f58ca9ae0674e45270e976ce59f10a4"'
+  allowed_hosts:
+  - huggingface.co
+  - cas-bridge.xethub.hf.co
+  - cdn-lfs-us-1.hf.co
+  - cdn-lfs.hf.co
+  - us.aws.cdn.hf.co
+  remote_cache_root: work/media-cache/sbbench-syn
+  remote_cache_bytes: 300000000
+  mapping:
+    configuration_from_path: true

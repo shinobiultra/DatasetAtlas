@@ -2,8 +2,8 @@ schema_version: '1.0'
 id: imagenet-ilsvrc-2012
 name: ImageNet ILSVRC 2012
 aliases: []
-description: Official ImageNet challenge page sends common classification release to Kaggle and requires
-  login/request for other data.
+description: Official ImageNet challenge page sends common classification release to Kaggle and requires login/request
+  for other data.
 paper_ids:
 - paper-79f7a50cea22ddab
 release: unresolved
@@ -27,8 +27,7 @@ rights:
   annotations: not_reviewed
   images: not_reviewed
   source: https://www.image-net.org/challenges/LSVRC/
-  note: ImageNet image access and research-use terms govern; challenge page is not a blanket redistribution
-    license.
+  note: ImageNet image access and research-use terms govern; challenge page is not a blanket redistribution license.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-2a25892b13246d94e5e5
@@ -36,9 +35,8 @@ evidence:
   source_file_hash: 28dbf621ade4e44491a888181654f0d500f45f3a09475881ea4f614fca31da8f
   page: 6
   role: evaluation
-  excerpt: 'by cross validation on the normalized learned from 1.2M images of the ImageNet ILSVRC 2012
-    reconstruction error, a selection based on qualitative analy- data [22]. sis is preferred because
-    the method '
+  excerpt: 'by cross validation on the normalized learned from 1.2M images of the ImageNet ILSVRC 2012 reconstruction
+    error, a selection based on qualitative analy- data [22]. sis is preferred because the method '
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -50,9 +48,16 @@ evidence:
   source_identity_status: resolved
 - kind: source_audit_rights
   url: https://www.image-net.org/challenges/LSVRC/
-  note: ImageNet image access and research-use terms govern; challenge page is not a blanket redistribution
-    license.
+  note: ImageNet image access and research-use terms govern; challenge page is not a blanket redistribution license.
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in at least one record.
+    Not inferred from the name or description.'
 source_url: https://www.image-net.org/challenges/LSVRC/
+relationships: []
+modalities:
+- image

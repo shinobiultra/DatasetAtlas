@@ -2,26 +2,28 @@ schema_version: '1.0'
 id: coco-one
 name: COCO_one
 aliases: []
-description: Pathways COCO_one localization split.
+description: 'Pathways coco_one: 2247 examples from the author-defined transformation of the native Whats-Up
+  coco_qa_one_obj release. Original annotations and image bytes are retained alongside the derived caption,
+  preposition and object fields.'
 paper_ids:
 - paper-6c99cf73401b37d4
-release: unresolved
-adapter: structured
+release: pathways-470944b3f6b44901a9055cf8d91aef18cee21671
+adapter: pathways
 adapter_config: {}
 coverage:
   identity: candidate
   source: verified
-  access: unverified
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Exact paper-specific source release or selected subset remains unverified; source
-    research alone does not resolve this candidate.
-  - Adapter and preview are not implemented.
+  - Public preview redistribution is not approved.
+  - Available author-defined reconstruction; historical paper-used revision is not established.
+  total_count: 2247
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -35,9 +37,8 @@ evidence:
   source_file_hash: 63a07114996dfdfd5a19f4a2790f78b7b42dc95ce54e14d1a8f32cbef00fc8fb
   page: 14
   role: direct What’s Up split
-  excerpt: 'the queries to our evaluation protocol (see §A.3). Localization. • COCO_one:
-    Single-object localization queries on COCO images, from the COCO single- object
-    split of What’s Up [Kamath et al.,'
+  excerpt: 'the queries to our evaluation protocol (see §A.3). Localization. • COCO_one: Single-object
+    localization queries on COCO images, from the COCO single- object split of What’s Up [Kamath et al.,'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -48,8 +49,8 @@ evidence:
   source_identity_status: author_recipe_identified_variant_unpinned
 - kind: source_audit_release
   url: https://github.com/israfelsr/vlm-pathways
-  note: Pathways p14; author build script outputs `coco_one` from What’s Up COCO_QA_one_obj;
-    exact transformed revision not pinned
+  note: Pathways p14; author build script outputs `coco_one` from What’s Up COCO_QA_one_obj; exact transformed
+    revision not pinned
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_recipe_identified_variant_unpinned
@@ -68,4 +69,20 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_recipe_identified_variant_unpinned
-source_url: https://github.com/israfelsr/vlm-pathways
+- kind: author_transform_live_verification
+  checked_on: '2026-09-23'
+  url: https://github.com/israfelsr/vlm-pathways/tree/470944b3f6b44901a9055cf8d91aef18cee21671
+  receipt: reports/pathways-live-verification.json
+  scope: All 2247 rows of coco_one under the pinned author transformation. VG two-object unknown-preposition
+    rows are excluded exactly as in the author script. This available reconstruction does not assert the
+    historical paper-used revision or repeat the upstream RGB re-encoding.
+  source_identity_status: pinned_author_transformation_not_historical_revision_claim
+source_url: https://github.com/israfelsr/vlm-pathways/tree/470944b3f6b44901a9055cf8d91aef18cee21671
+relationships:
+- type: same_source_family_as
+  target_id: coco
+  status: asserted_from_source_review
+  scope: Single-object COCO-derived evaluation split.
+modalities:
+- image
+- text

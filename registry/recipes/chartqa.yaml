@@ -1,0 +1,85 @@
+source_url: https://raw.githubusercontent.com/vis-nlp/ChartQA/044eabfc306abfe9340c5741f0093aefc5973d06
+release: 044eabfc306abfe9340c5741f0093aefc5973d06
+adapter: structured_collection
+expected_count: 32719
+scope: All human and augmented train/validation/test questions in the author first-version
+  ChartQA release; bounding-box release is separate.
+files:
+- source_name: ChartQA Dataset/test/test_augmented.json
+  url: https://raw.githubusercontent.com/vis-nlp/ChartQA/044eabfc306abfe9340c5741f0093aefc5973d06/ChartQA%20Dataset/test/test_augmented.json
+  bytes: 184320
+  sha256: 9df43a15e93ecb8496c3e5dc23f6a733cfeccac838ab41126ab56576b9305de1
+  format: json
+  config_key: test_augmented_json
+- source_name: ChartQA Dataset/test/test_human.json
+  url: https://raw.githubusercontent.com/vis-nlp/ChartQA/044eabfc306abfe9340c5741f0093aefc5973d06/ChartQA%20Dataset/test/test_human.json
+  bytes: 156786
+  sha256: 5fba61b508a96b85cd5906bb14adfc1ba552bdcf88ac568ed6e2f79dcf0460b7
+  format: json
+  config_key: test_human_json
+- source_name: ChartQA Dataset/train/train_augmented.json
+  url: https://raw.githubusercontent.com/vis-nlp/ChartQA/044eabfc306abfe9340c5741f0093aefc5973d06/ChartQA%20Dataset/train/train_augmented.json
+  bytes: 3093201
+  sha256: 77342d8527d2a194a6011ce3f4389ea32d9c50cfe60b10c74dbe1cd2e49724da
+  format: json
+  config_key: train_augmented_json
+- source_name: ChartQA Dataset/train/train_human.json
+  url: https://raw.githubusercontent.com/vis-nlp/ChartQA/044eabfc306abfe9340c5741f0093aefc5973d06/ChartQA%20Dataset/train/train_human.json
+  bytes: 929588
+  sha256: 4eaaa03e406dbbbe43caff925dbec9930b87fadba960f1c2ab30a5def287c384
+  format: json
+  config_key: train_human_json
+- source_name: ChartQA Dataset/val/val_augmented.json
+  url: https://raw.githubusercontent.com/vis-nlp/ChartQA/044eabfc306abfe9340c5741f0093aefc5973d06/ChartQA%20Dataset/val/val_augmented.json
+  bytes: 128162
+  sha256: cafc675781fba27282b78cab40eb49b77a5bf890ef1e89294bb67c994bdfde47
+  format: json
+  config_key: val_augmented_json
+- source_name: ChartQA Dataset/val/val_human.json
+  url: https://raw.githubusercontent.com/vis-nlp/ChartQA/044eabfc306abfe9340c5741f0093aefc5973d06/ChartQA%20Dataset/val/val_human.json
+  bytes: 123716
+  sha256: e297ce5b38b4ab79bd0e22a93eb19a65cb89f9bd07ce886cb78f2e333fb0ba14
+  format: json
+  config_key: val_human_json
+allowed_hosts: &id001
+- raw.githubusercontent.com
+adapter_config:
+  annotations:
+  - path_key: test_augmented_json
+    format: json
+    split: test
+    identity_prefix: test_augmented
+    media_template: ChartQA Dataset/test/png/{imgname}
+  - path_key: test_human_json
+    format: json
+    split: test
+    identity_prefix: test_human
+    media_template: ChartQA Dataset/test/png/{imgname}
+  - path_key: train_augmented_json
+    format: json
+    split: train
+    identity_prefix: train_augmented
+    media_template: ChartQA Dataset/train/png/{imgname}
+  - path_key: train_human_json
+    format: json
+    split: train
+    identity_prefix: train_human
+    media_template: ChartQA Dataset/train/png/{imgname}
+  - path_key: val_augmented_json
+    format: json
+    split: val
+    identity_prefix: val_augmented
+    media_template: ChartQA Dataset/val/png/{imgname}
+  - path_key: val_human_json
+    format: json
+    split: val
+    identity_prefix: val_human
+    media_template: ChartQA Dataset/val/png/{imgname}
+  mapping:
+    question: query
+  media_inventory_path: registry/media/chartqa.json
+  media_inventory_sha256: a0ee410c33b8fddac0feca2565fe5f61a4f547efb19366ffb9366668f522f682
+  media_base_url: https://raw.githubusercontent.com/vis-nlp/ChartQA/044eabfc306abfe9340c5741f0093aefc5973d06
+  media_allowed_hosts: *id001
+  remote_cache_root: work/media-cache/originals
+  remote_cache_bytes: 1000000000

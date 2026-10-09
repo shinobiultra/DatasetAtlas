@@ -1,0 +1,118 @@
+schema_version: '1.0'
+id: paper-944952997d24ce45-unnamed-van-gogh-painting-sample
+name: unnamed Van Gogh painting sample
+aliases: []
+description: VMA 874 publicly available Van Gogh paintings.
+paper_ids:
+- paper-944952997d24ce45
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: unverified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Exact paper-specific source release or selected subset remains unverified; source
+    research alone does not resolve this candidate.
+  - Adapter and preview are not implemented.
+  - 'Checked 2026-10-09: the VMA repository (pinned at 53e6943112a7) holds no list or copy of the 874 Van
+    Gogh paintings (the only data file is a 167-byte one-element data.json). External blocker: the sample
+    is not released as files. Not an implementation gap.'
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/Trustworthy-AI-Group/VMA
+  note: Public visibility of paintings does not establish reproduction rights for
+    scans or photos
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-067966195768dd2976df
+  paper_id: paper-944952997d24ce45
+  source_file_hash: 71a1cce60cc2242209269ec562113d20745af5b8416c92c7ce7b1bc418d2ca5b
+  page: 9
+  role: source data
+  excerpt: ' nonsensical outputs. To validate the effectiveness of VMA, we sample
+    874 publicly available Van Gogh paintings. We ask VLMs to describe these images
+    and define random token sequences as targe'
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-14ae5b5c0d7070d96c76
+  paper_id: paper-944952997d24ce45
+  source_file_hash: 71a1cce60cc2242209269ec562113d20745af5b8416c92c7ce7b1bc418d2ca5b
+  page: 9
+  role: watermarking source
+  excerpt: into generating nonsensical outputs. To validate the effectiveness of VMA,
+    we sample 874 publicly available Van Gogh paintings. We ask VLMs to describe these
+    images and define random token sequences as target outputs for perturbation optimization.
+    As shown
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/Trustworthy-AI-Group/VMA
+  note: VMA 874 publicly available Van Gogh paintings
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: paper_selection_release_unverified
+- kind: source_audit_release
+  url: https://github.com/Trustworthy-AI-Group/VMA
+  note: Paper p9 sampled 874 paintings for watermarking; author VMA repo has prompt/target
+    example data.json but no verified 874-image manifest/archive
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: paper_selection_release_unverified
+- kind: source_audit_access
+  url: https://github.com/Trustworthy-AI-Group/VMA
+  observation: paper_selection_and_code_examples
+  requires_external_access_step: null
+  download_or_media_inspected: false
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: paper_selection_release_unverified
+- kind: source_audit_rights
+  url: https://github.com/Trustworthy-AI-Group/VMA
+  note: Public visibility of paintings does not establish reproduction rights for
+    scans or photos
+  publication_decision: media_not_approved
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: paper_selection_release_unverified
+- kind: source_audit_refresh
+  url: https://github.com/Trustworthy-AI-Group/VMA
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 1 URL probed (HEAD only): 1 reachable.'
+- kind: source_audit_release
+  url: https://github.com/Trustworthy-AI-Group/VMA/tree/53e6943112a72c704f5dfb7674fad4b35706a70f
+  note: 'VMA repository Trustworthy-AI-Group/VMA at commit 53e6943112a72c704f5dfb7674fad4b35706a70f (main,
+    the only branch; pushed 2025-10-27; MIT licence covers the code): 24 files, 3,847,076 bytes in all.
+    Data-like content is data.json (167 bytes, a JSON array with one element, sha256 da479a9493e9b21351e86e0112f0116ab6e9a56f540d51626cc590b152ef5d5d)
+    and 18 image files: 17 under figs/ (8 attack categories x one original and one attacked picture, plus
+    overview.png) and src.jpg. No Van Gogh painting list or image set (874 expected) is present: the repository
+    has zero files that could be the painting sample. The README names no dataset, manifest, archive or
+    external link beyond the arXiv paper and an author homepage; no Hugging Face dataset carries arXiv
+    2505.19911. No image was opened.'
+  audit_file: reports/github-sources-probe-20261009.json
+  checked_on: '2026-10-09'
+  source_identity_status: paper_selection_not_released_in_repository
+  disposition: still_unreleased
+- kind: source_audit_access
+  url: https://github.com/Trustworthy-AI-Group/VMA/tree/53e6943112a72c704f5dfb7674fad4b35706a70f
+  observation: repository_public_selection_absent
+  requires_external_access_step: null
+  download_or_media_inspected: true
+  audit_file: reports/github-sources-probe-20261009.json
+  checked_on: '2026-10-09'
+  source_identity_status: paper_selection_not_released_in_repository
+source_url: https://github.com/Trustworthy-AI-Group/VMA

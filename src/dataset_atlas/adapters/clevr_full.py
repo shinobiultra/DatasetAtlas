@@ -65,19 +65,27 @@ class CLEVRFullAdapter(DatasetAdapter):
     def _archive(self) -> Path:
         return Path(self.config["archive"]).expanduser().resolve()
 
+    def _remote(self):
+        """The official 19 GB archive as an ETag-pinned remote ZIP, when it is not held locally."""
+        if "remote_archive" not in self.config:
+            return None
+        from .remote_media import RemoteZip
+        return RemoteZip(self.config["remote_archive"], self.config["remote_cache_root"], self.config.get("remote_cache_bytes", 1_000_000_000))
+
     def _prepared(self) -> Path:
         return Path(self.config["prepared_root"]).expanduser().resolve()
 
     def probe(self) -> SourceDescription:
-        archive = self._archive()
-        return SourceDescription("clevr_full", str(archive), archive.is_file(),
-                                 self.revision, archive.stat().st_size if archive.is_file() else None,
+        archive = self._archive() if self._remote() is None else None
+        present = archive.is_file() if archive else True
+        return SourceDescription("clevr_full", str(archive) if archive else "remote ZIP", present,
+                                 self.revision, archive.stat().st_size if archive and archive.is_file() else None,
                                  True, True, True, False, True,
                                  ("full official ZIP; question-only extraction, image-on-demand",))
 
     def plan(self, limit: int, max_bytes: int, cursor: str | None = None) -> PreparationPlan:
         base = super().plan(limit, max_bytes, cursor)
-        if not self.config.get("archive_sha256"):
+        if self._remote() is None and not self.config.get("archive_sha256"):
             raise ValueError("full CLEVR archive requires a pinned SHA-256")
         return PreparationPlan(base.dataset_id, base.source_revision, cursor, limit,
                                max_bytes, 0, None,
@@ -100,19 +108,24 @@ class CLEVRFullAdapter(DatasetAdapter):
 
     def prepare(self, approved_plan: PreparationPlan) -> PreparedSource:
         source = super().prepare(approved_plan)
-        archive_path = self._archive()
-        digest = hashlib.sha256()
-        with archive_path.open("rb") as handle:
-            for chunk in iter(lambda: handle.read(4 << 20), b""):
-                digest.update(chunk)
-        if digest.hexdigest() != self.config["archive_sha256"]:
-            raise ValueError("CLEVR archive differs from pinned SHA-256")
+        remote = self._remote()
+        if remote:
+            # A ranged read cannot hash 19 GB; the strong ETag is the consistency fingerprint instead.
+            fingerprint = "remote-etag:" + remote.etag
+        else:
+            digest = hashlib.sha256()
+            with self._archive().open("rb") as handle:
+                for chunk in iter(lambda: handle.read(4 << 20), b""):
+                    digest.update(chunk)
+            if digest.hexdigest() != self.config["archive_sha256"]:
+                raise ValueError("CLEVR archive differs from pinned SHA-256")
+            fingerprint = digest.hexdigest()
         root = self._prepared(); root.mkdir(parents=True, exist_ok=True)
         index_path = root / "questions-index.json"
         records_path = root / "questions.jsonl"
         if index_path.is_file() and records_path.is_file():
             index = json.loads(index_path.read_text())
-            if (index.get("archive_sha256") == digest.hexdigest()
+            if (index.get("archive_sha256") == fingerprint
                     and index.get("jsonl_bytes") == records_path.stat().st_size):
                 return source
         staged = records_path.with_suffix(".jsonl.part")
@@ -121,7 +134,7 @@ class CLEVRFullAdapter(DatasetAdapter):
         offset = 0
         count = 0
         try:
-            with zipfile.ZipFile(archive_path) as archive:
+            with self._open_archive() as archive:
                 question_members, prefix = self._members(archive)
                 with staged.open("wb") as output:
                     for split in self.SPLITS:
@@ -139,13 +152,29 @@ class CLEVRFullAdapter(DatasetAdapter):
                                     count += 1
                                     split_counts[split] += 1
             staged.replace(records_path)
-            index = {"archive_sha256": digest.hexdigest(), "jsonl_bytes": offset,
+            index = {"archive_sha256": fingerprint, "jsonl_bytes": offset,
                      "total": count, "split_counts": split_counts,
                      "checkpoints": checkpoints, "zip_prefix": prefix}
             index_path.write_text(json.dumps(index, indent=2), encoding="utf-8")
         finally:
             staged.unlink(missing_ok=True)
         return source
+
+    def _open_archive(self):
+        """The official ZIP, local or by ranges, as a context manager that also closes the range reader."""
+        import contextlib
+        remote = self._remote()
+        if remote is None:
+            return zipfile.ZipFile(self._archive())
+        from dataset_atlas.storage.ranges import SmallReadBuffer
+        stack = contextlib.ExitStack()
+        reader = stack.enter_context(remote.reader(self.config.get("remote_metadata_bytes", 400_000_000)))
+        # The three question files stream sequentially, so read large blocks instead of one round trip per 64 KB.
+        archive = stack.enter_context(zipfile.ZipFile(SmallReadBuffer(reader, block_bytes=1 << 20)))
+        archive._atlas_stack = stack  # closed with the archive
+        original_close = archive.close
+        archive.close = lambda: (original_close(), stack.close())
+        return archive
 
     def _index(self) -> dict:
         return json.loads((self._prepared() / "questions-index.json").read_text())
@@ -197,11 +226,12 @@ class CLEVRFullAdapter(DatasetAdapter):
             raise ValueError("invalid CLEVR asset reference")
         prefix = self._index()["zip_prefix"]
         member = prefix + asset_ref
-        with zipfile.ZipFile(self._archive()) as archive:
-            info = archive.getinfo(member)
-            if info.file_size > source.max_bytes - source.bytes_read:
-                raise ValueError("CLEVR image exceeds remaining byte budget")
-            data = archive.read(info)
+        if self._remote():
+            data = self._remote().read(member, source.max_bytes - source.bytes_read, self.config.get("media_transfer_bytes", 40_000_000))
+        else:
+            from dataset_atlas.storage.zip_members import LOCAL_ZIP_MEMBERS
+            data = LOCAL_ZIP_MEMBERS.read(self._archive(), member, source.max_bytes - source.bytes_read,
+                                          self.config['archive_sha256'])
         source.charge(len(data))
         if not data.startswith(b"\x89PNG\r\n\x1a\n"):
             raise ValueError("CLEVR image member is not PNG")

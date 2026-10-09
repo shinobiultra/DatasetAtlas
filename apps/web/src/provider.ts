@@ -18,19 +18,29 @@ export type AggregateResponse = {
   count_status: string; results: AggregateResult[]; sampling_applied: boolean; warnings: string[]
 }
 
+/** What a visitor can do about one dataset, from the public build's guide.json (never record content). */
+export type HowToGet = { state: string; summary: string; commands?: string[]; command_notes?: string[] }
+export type GuidePaper = { paper_id: string; title?: string; year?: string; doi?: string; url?: string }
+export type GuideField = { id: string; name: string; namespace: string; dtype: string; unit: string; description?: string; values?: Array<string | number | boolean> }
+export type GuideSchema = {
+  snapshot_id?: string | null; release?: string | null; unit: string; preview_count?: number | null; total_count?: number | null; population_scope: string
+  field_count: number; fields_truncated: boolean; sampling: Record<string, unknown>; fields: GuideField[]
+}
+export type GuideEntry = { how_to_get: HowToGet; papers: GuidePaper[]; schema?: GuideSchema }
+
 export interface DataProvider {
   readonly mode: 'static' | 'workbench'
   capabilities(): Promise<Capabilities>
   datasets(): Promise<Dataset[]>
   dataset(id: string): Promise<Dataset>
-  fields(id: string, scope?: 'preview' | 'complete'): Promise<FieldDescriptor[]>
+  fields(id: string, scope?: 'preview' | 'complete', snapshotId?: string): Promise<FieldDescriptor[]>
   completeInfo(id: string): Promise<CompleteScope>
   pack(id: string): Promise<Pack>
   query(id: string, query: Query): Promise<QueryResult>
   selections(): Promise<Selection[]>
   saveSelection(selection: Selection): Promise<Selection>
   importSelection(payload: unknown): Promise<Selection>
-  records(ids: string[]): Promise<AtlasRecord[]>
+  records(ids: string[], snapshotIds?: string[]): Promise<AtlasRecord[]>
   exportSelection(selection: Selection): Promise<void>
   artifacts(id?: string): Promise<Artifact[]>
   processors(): Promise<ProcessorDescriptor[]>
@@ -43,10 +53,19 @@ export interface DataProvider {
   probeProvider(id: string): Promise<unknown>
   previewContext(body: Record<string, unknown>): Promise<Record<string, unknown>>
   converse(body: Record<string, unknown>): Promise<Record<string, unknown>>
+  startConversation(body: Record<string, unknown>): Promise<Record<string, unknown>>
+  conversationJobs(): Promise<Record<string, unknown>[]>
+  conversationJob(id: string): Promise<Record<string, unknown>>
+  cancelConversation(id: string): Promise<Record<string, unknown>>
+  publication(build?: boolean): Promise<Record<string, unknown>>
   conversations(): Promise<Record<string, unknown>[]>
   conversation(id: string): Promise<Record<string, unknown>>
   similarity(datasetId: string, body: Record<string, unknown>): Promise<Record<string, unknown>>
   thumbnails(): Promise<Thumbnails>
+  /** Static builds only: the public guide entry for a dataset, or null (a workbench has the live dataset page instead). */
+  guide(id: string): Promise<GuideEntry | null>
+  /** Static builds only: every dataset's how-to-get state, for catalogue filters and list rows. */
+  guideStates(): Promise<Record<string, string>>
   aggregate(datasetId: string, query: Query, fieldIds: string[], top?: number): Promise<AggregateResponse>
 }
 
@@ -95,7 +114,23 @@ export class StaticDataProvider implements DataProvider {
   /** In-flight requests are shared so a screen opening several panels fetches once. */
   private pending = new Map<string, Promise<Pack>>()
   private thumbs?: Promise<Thumbnails>
+  private guides?: Promise<Record<string, GuideEntry>>
 
+  async guideStates(): Promise<Record<string, string>> {
+    const all = await this.guideAll()
+    return Object.fromEntries(Object.entries(all).map(([id, entry]) => [id, entry.how_to_get.state]))
+  }
+  private guideAll(): Promise<Record<string, GuideEntry>> {
+    this.guides ??= (async () => {
+      const document = await responseJson<{ schema_version?: string; datasets?: Record<string, GuideEntry> }>(publicUrl('data/guide.json'))
+      checkMajor(document, 'Public guide')
+      return document.datasets ?? {}
+    })()
+    return this.guides
+  }
+  async guide(id: string): Promise<GuideEntry | null> {
+    try { return (await this.guideAll())[id] ?? null } catch (failure) { this.guides = undefined; throw failure }  // a failed fetch is retried, not cached
+  }
   async capabilities(): Promise<Capabilities> { return { mode: 'static', operations: ['catalogue', 'query', 'selection', 'export', 'artifacts'], api_version: '1' } }
   async datasets(): Promise<Dataset[]> {
     if (!this.catalogue) {
@@ -146,7 +181,11 @@ export class StaticDataProvider implements DataProvider {
   async aggregate(id: string, query: Query, fieldIds: string[], top = 24): Promise<AggregateResponse> {
     return aggregatePack(await this.pack(id), query, fieldIds, top) as AggregateResponse
   }
-  async fields(id: string): Promise<FieldDescriptor[]> { return packFields(await this.pack(id)) }
+  async fields(id: string, _scope?: 'preview' | 'complete', snapshotId?: string): Promise<FieldDescriptor[]> {
+    const pack = await this.pack(id)
+    if (snapshotId && pack.dataset.snapshot_id !== snapshotId) throw new Error('Saved snapshot is not present in published packs.')
+    return packFields(pack)
+  }
   async completeInfo(): Promise<CompleteScope> { throw new Error('Complete-data queries require the local workbench.') }
   async query(id: string, query: Query): Promise<QueryResult> { return queryPack(await this.pack(id), query) }
   async selections(): Promise<Selection[]> { return storedSelections() }
@@ -157,18 +196,18 @@ export class StaticDataProvider implements DataProvider {
     return saved
   }
   async importSelection(): Promise<Selection> { throw new Error('Selection exchange imports require the local workbench.') }
-  async records(ids: string[]): Promise<AtlasRecord[]> {
+  async records(ids: string[], snapshotIds?: string[]): Promise<AtlasRecord[]> {
     const datasets = await this.datasets()
     const rows = new Map<string, AtlasRecord>()
     for (const dataset of datasets.filter(item => item.coverage?.publication === 'approved' && (item.coverage.preview_count ?? 0) > 0)) {
       const pack = await this.pack(dataset.id)
-      for (const record of [...pack.records, ...assetRecords(pack)]) if (ids.includes(record.id)) rows.set(record.id, record)
+      for (const record of [...pack.records, ...assetRecords(pack)]) if (ids.includes(record.id) && (!snapshotIds || snapshotIds.includes(record.snapshot_id))) rows.set(record.id, record)
     }
     if (ids.some(id => !rows.has(id))) throw new Error('One or more saved IDs are no longer in published packs.')
     return ids.map(id => rows.get(id)!)
   }
   async exportSelection(selection: Selection): Promise<void> {
-    const records = await this.records(selection.ids)
+    const records = await this.records(selection.ids, selection.snapshot_ids)
     downloadJson(`atlas-selection-${selection.id}.json`, { schema_version: '1.0', selection, records, notice: 'Records come from approved public preview packs. Media remain references to published assets.' })
   }
   async artifacts(id?: string): Promise<Artifact[]> { return id ? (await this.pack(id)).artifacts ?? [] : [] }
@@ -182,6 +221,11 @@ export class StaticDataProvider implements DataProvider {
   async probeProvider(): Promise<unknown> { throw new Error('Provider probes require the local workbench.') }
   async previewContext(): Promise<Record<string, unknown>> { throw new Error('Model conversations require the local workbench.') }
   async converse(): Promise<Record<string, unknown>> { throw new Error('Model conversations require the local workbench.') }
+  async startConversation(): Promise<Record<string, unknown>> { throw new Error('Model conversations require the local workbench.') }
+  async conversationJobs(): Promise<Record<string, unknown>[]> { return [] }
+  async conversationJob(): Promise<Record<string, unknown>> { throw new Error('Model conversations require the local workbench.') }
+  async cancelConversation(): Promise<Record<string, unknown>> { throw new Error('Model conversations require the local workbench.') }
+  async publication(): Promise<Record<string, unknown>> { throw new Error('Publication preparation requires the local workbench.') }
   async conversations(): Promise<Record<string, unknown>[]> { return [] }
   async conversation(): Promise<Record<string, unknown>> { throw new Error('Model conversations require the local workbench.') }
   async similarity(): Promise<Record<string, unknown>> { throw new Error('Similarity search requires the local workbench.') }
@@ -198,10 +242,11 @@ export class WorkbenchDataProvider implements DataProvider {
   capabilities(): Promise<Capabilities> { return get('/capabilities') }
   datasets(): Promise<Dataset[]> { return get('/datasets') }
   dataset(id: string): Promise<Dataset> { return get(`/datasets/${encodeURIComponent(id)}`) }
-  async fields(id: string, scope: 'preview' | 'complete' = 'preview'): Promise<FieldDescriptor[]> {
-    if (scope === 'complete') return (await this.completeInfo(id)).fields
+  async fields(id: string, scope: 'preview' | 'complete' = 'preview', snapshotId?: string): Promise<FieldDescriptor[]> {
+    if (scope === 'complete' && !snapshotId) return (await this.completeInfo(id)).fields
     const path = `/datasets/${encodeURIComponent(id)}/fields`
-    const [examples, assets] = await Promise.all([get<FieldDescriptor[]>(path), get<FieldDescriptor[]>(`${path}?unit=asset`)])
+    const suffix = snapshotId ? `&snapshot_id=${encodeURIComponent(snapshotId)}&population_scope=${scope}` : ''
+    const [examples, assets] = await Promise.all([get<FieldDescriptor[]>(`${path}?unit=example${suffix}`), get<FieldDescriptor[]>(`${path}?unit=asset${suffix}`)])
     return [...examples, ...assets]
   }
   completeInfo(id: string): Promise<CompleteScope> { return get(`/datasets/${encodeURIComponent(id)}/complete`) }
@@ -210,12 +255,13 @@ export class WorkbenchDataProvider implements DataProvider {
   selections(): Promise<Selection[]> { return get('/selections') }
   saveSelection(selection: Selection): Promise<Selection> { return post('/selections', selection) }
   importSelection(payload: unknown): Promise<Selection> { return post('/selections/import', payload) }
-  records(ids: string[]): Promise<AtlasRecord[]> { return post('/records', { ids }) }
+  records(ids: string[], snapshotIds?: string[]): Promise<AtlasRecord[]> { return post('/records', { ids, ...(snapshotIds ? { snapshot_ids: snapshotIds } : {}) }) }
   async exportSelection(selection: Selection): Promise<void> {
     const result = await get<unknown>(`/selections/${encodeURIComponent(selection.id)}/export`)
     downloadJson(`atlas-selection-${selection.id}.json`, result)
   }
-  artifacts(): Promise<Artifact[]> { return get('/artifacts') }
+  /** Browsing never renders embedding vectors; the browse view omits them and stays scoped to one dataset's snapshots. */
+  artifacts(id?: string): Promise<Artifact[]> { return get(`/artifacts?view=browse${id ? `&dataset_id=${encodeURIComponent(id)}` : ''}`) }
   processors(): Promise<ProcessorDescriptor[]> { return get('/processors') }
   runs(): Promise<Run[]> { return get('/runs') }
   estimateRun(selectionId: string, processorId: string, config: Record<string, unknown>): Promise<Record<string, unknown>> { return post('/runs/estimate', { selection_id: selectionId, processor_id: processorId, config }) }
@@ -226,10 +272,17 @@ export class WorkbenchDataProvider implements DataProvider {
   probeProvider(id: string): Promise<unknown> { return post(`/providers/${encodeURIComponent(id)}/probe`) }
   previewContext(body: Record<string, unknown>): Promise<Record<string, unknown>> { return post('/conversations/context', body) }
   converse(body: Record<string, unknown>): Promise<Record<string, unknown>> { return post('/conversations', body) }
+  startConversation(body: Record<string, unknown>): Promise<Record<string, unknown>> { return post('/conversation-jobs', body) }
+  conversationJobs(): Promise<Record<string, unknown>[]> { return get('/conversation-jobs?limit=20') }
+  conversationJob(id: string): Promise<Record<string, unknown>> { return get(`/conversation-jobs/${encodeURIComponent(id)}`) }
+  cancelConversation(id: string): Promise<Record<string, unknown>> { return post(`/conversation-jobs/${encodeURIComponent(id)}/cancel`, {}) }
+  publication(build = false): Promise<Record<string, unknown>> { return post(`/publication/${build ? 'build' : 'validate'}`, { max_bytes: 100000000 }) }
   conversations(): Promise<Record<string, unknown>[]> { return get('/conversations?limit=100') }
   conversation(id: string): Promise<Record<string, unknown>> { return get(`/conversations/${encodeURIComponent(id)}`) }
   similarity(datasetId: string, body: Record<string, unknown>): Promise<Record<string, unknown>> { return post(`/similarity/${encodeURIComponent(datasetId)}`, body) }
   private thumbs?: Promise<Thumbnails>
+  async guide(): Promise<GuideEntry | null> { return null }
+  async guideStates(): Promise<Record<string, string>> { return {} }
   thumbnails(): Promise<Thumbnails> {
     this.thumbs ??= get<{ datasets?: Thumbnails }>('/catalogue/thumbnails').then(document => document.datasets ?? {}).catch(() => ({}))
     return this.thumbs
@@ -239,8 +292,42 @@ export class WorkbenchDataProvider implements DataProvider {
   }
 }
 
-export const provider: DataProvider = new URLSearchParams(window.location.search).get('mode') === 'workbench' ? new WorkbenchDataProvider() : new StaticDataProvider()
+/** An explicit `?mode=` wins; otherwise the workbench server marks the page it serves, and any other host is static. */
+function deploymentMode(): 'workbench' | 'static' {
+  const requested = new URLSearchParams(window.location.search).get('mode')
+  if (requested === 'workbench' || requested === 'static') return requested
+  return document.querySelector('meta[name="atlas-mode"]')?.getAttribute('content') === 'workbench' ? 'workbench' : 'static'
+}
+export const provider: DataProvider = deploymentMode() === 'workbench' ? new WorkbenchDataProvider() : new StaticDataProvider()
 
 export function recordMedia(record: AtlasRecord): string[] {
   return (record.assets ?? []).filter(asset => asset.uri).map(asset => provider.mode === 'static' ? publicUrl(asset.uri!) : asset.uri!)
+}
+
+/** What inspecting a researcher's own folder, table or Hugging Face URL found. Local paths stay on the server. */
+export type SourceInspection = {
+  kind: 'images' | 'table' | 'embedded_parquet' | 'huggingface'
+  count: number | null; unit: string; bytes: number; labels: string[]; modalities: string[]
+  columns: { name: string; dtype: string; role: string | null; distinct?: number | null; missing?: number; sample?: string[] }[]
+  warnings: string[]
+  suggested: { name?: string; media_column?: string | null; text_column?: string | null; id_column?: string | null; media_root?: string | null }
+  parquet_shards?: number; gated?: boolean; revision?: string
+}
+export type SourceOptions = Record<string, string | null>
+
+/** Registering your own data is an explicit workbench action; it reads and never modifies the source. */
+export const localDatasetApi = {
+  inspect: (source: string, options: SourceOptions = {}) => post<SourceInspection>('/local-datasets/inspect', { source, options }),
+  add: (body: { source: string; name: string; dataset_id?: string; description?: string; options?: SourceOptions; replace?: boolean }) =>
+    post<{ dataset: Dataset; inspection: SourceInspection }>('/local-datasets', body),
+  remove: (id: string, purge = false) => responseJson<{ dataset_id: string; purged: string[] }>(`${api}/local-datasets/${encodeURIComponent(id)}?purge=${purge}`, { method: 'DELETE', headers: { 'X-Atlas-Request': '1' } }),
+}
+
+/** Explicit user-triggered workbench acquisition; never invoked by static browsing or model tools. */
+export const preparationApi = {
+  list: <T,>(datasetId: string) => get<T>(`/preparation?dataset_id=${encodeURIComponent(datasetId)}`),
+  plan: <T,>(id: string, maxDownloadBytes: number, maxOutputBytes: number, sourceMode: 'auto' | 'download' | 'selective' | 'sample' = 'download') => post<T>(`/datasets/${encodeURIComponent(id)}/preparation/plan`, { max_download_bytes: maxDownloadBytes, max_output_bytes: maxOutputBytes, source_mode: sourceMode }),
+  start: <T,>(id: string) => post<T>(`/preparation/${encodeURIComponent(id)}/start`),
+  status: <T,>(id: string) => get<T>(`/preparation/${encodeURIComponent(id)}`),
+  cancel: <T,>(id: string) => post<T>(`/preparation/${encodeURIComponent(id)}/cancel`),
 }

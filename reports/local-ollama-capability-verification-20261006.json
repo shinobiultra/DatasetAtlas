@@ -1,0 +1,44 @@
+{
+  "checked_at_utc": "2026-10-06T05:06:59.846168+00:00",
+  "provider_id": "local-ollama-qwen35",
+  "model": "qwen3.5:9b",
+  "endpoint": "http://127.0.0.1:11434/v1",
+  "capabilities": {
+    "text_generation": {
+      "status": "supported",
+      "tested_at": "2026-10-06T05:06:55.146006+00:00",
+      "detail": "benign probe succeeded"
+    },
+    "single_image_input": {
+      "status": "supported",
+      "tested_at": "2026-10-06T05:06:56.622632+00:00",
+      "detail": "benign probe succeeded"
+    },
+    "multiple_image_input": {
+      "status": "supported",
+      "tested_at": "2026-10-06T05:06:57.261047+00:00",
+      "detail": "benign probe succeeded"
+    },
+    "structured_output": {
+      "status": "supported",
+      "tested_at": "2026-10-06T05:06:58.909899+00:00",
+      "detail": "benign probe succeeded"
+    },
+    "tool_calls": {
+      "status": "unsupported",
+      "tested_at": "2026-10-06T05:06:59.619647+00:00",
+      "detail": "probe response did not demonstrate capability"
+    },
+    "text_embeddings": {
+      "status": "unknown",
+      "tested_at": "2026-10-06T05:06:59.740973+00:00",
+      "detail": "probe returned HTTP 501"
+    },
+    "image_embeddings": {
+      "status": "unknown",
+      "tested_at": "2026-10-06T05:06:59.838316+00:00",
+      "detail": "probe returned HTTP 501"
+    }
+  },
+  "source": "Existing loaded local model; no model acquisition or external requests."
+}

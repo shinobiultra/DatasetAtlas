@@ -1,0 +1,87 @@
+schema_version: '1.0'
+id: e-ic
+name: E-IC
+aliases: []
+description: 'MMEdit/EasyEdit image caption editing benchmark; two distinct task releases. Source review:
+  EasyEdit current author repository commit 14cea8245f06715684592ab55184939b99d70784; archive digest unverified'
+paper_ids:
+- paper-25eaa8c74ce76800
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: verified
+  access: unverified
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - The authors host the image captioning editing data on Google Drive and Baidu NetDisk (EasyEdit examples/MMEdit.md),
+    not on a pinned, checksummable source. A 2026-10-06 request for the image archive through the Drive
+    download endpoint returned an empty HTML body.
+  - A Google Drive folder cannot be listed or pinned reproducibly here; mirrors on Hugging Face are third-party
+    uploads and are not treated as the original release.
+  - Adapter and preview are not implemented because no verifiable file could be fetched.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  note: EasyEdit MIT code license does not prove rights to source images/captions/questions
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-628c5f31115745856b80
+  paper_id: paper-25eaa8c74ce76800
+  source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
+  page: 30
+  role: cited-study dataset in survey table
+  excerpt: ) BLIP2-OPT(2.7B), LLaVA- — E-VQA, E-IC V1.5(7B), MiniGPT-4(7B) (Mit
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/zjunlp/EasyEdit/blob/14cea8245f06715684592ab55184939b99d70784/examples/MMEdit.md
+  note: MMEdit/EasyEdit image caption editing benchmark; two distinct task releases EasyEdit current author
+    repository commit 14cea8245f06715684592ab55184939b99d70784; archive digest unverified
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_file_version_unverified
+- kind: source_audit_access
+  url: https://github.com/zjunlp/EasyEdit/blob/14cea8245f06715684592ab55184939b99d70784/examples/MMEdit.md
+  note: 'Author guide links Google Drive/Baidu data and images; fetch not attempted Probe: first_primary_url_http_head_200;
+    payload_not_downloaded'
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_file_version_unverified
+- kind: source_audit_rights
+  url: https://github.com/zjunlp/EasyEdit/blob/14cea8245f06715684592ab55184939b99d70784/examples/MMEdit.md
+  note: EasyEdit MIT code license does not prove rights to source images/captions/questions No source-content
+    rights grant was verified; linked page is identity/access context only.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_file_version_unverified
+- kind: source_audit_access
+  checked_on: '2026-10-06'
+  url: https://github.com/zjunlp/EasyEdit/blob/14cea8245f06715684592ab55184939b99d70784/examples/MMEdit.md
+  note: README links Google Drive folder and image archive and BaiduNetDisk mirrors for E-VQA and E-IC;
+    HEAD/GET of the Drive image-archive id returned HTTP 200 with content-length 0 (text/html).
+  source_identity_status: author_release_on_unpinnable_hosts
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'From the source inspected on 2026-10-06: EasyEdit README inspected: image captioning editing
+    data with images. Not inferred from the dataset name.'
+- kind: source_audit_refresh
+  url: https://github.com/zjunlp/EasyEdit/blob/14cea8245f06715684592ab55184939b99d70784/examples/MMEdit.md
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
+    ETag with a length) on a data file, so no release is pinned and public availability of the data itself
+    is not established. 6 URLs probed (HEAD only): 6 reachable. 3 of them gave no information.'
+source_url: https://github.com/zjunlp/EasyEdit/blob/14cea8245f06715684592ab55184939b99d70784/examples/MMEdit.md
+modalities:
+- image
+- text

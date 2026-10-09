@@ -13,17 +13,19 @@ adapter: structured
 adapter_config: {}
 coverage:
   identity: candidate
-  source: unverified
-  access: unverified
-  adapter: not_started
+  source: verified
+  access: public
+  adapter: implemented
   preview: none
-  complete_data: unimplemented
+  complete_data: requires_preparation
   publication: not_reviewed
   preview_count: 0
   unit: example
   blockers:
-  - Original release identity and rights need verification.
-  - Adapter and preview are not implemented.
+  - Pinned public mirror population of 63,440 original JPEGs and 100 retained original
+    previews is verified; publisher byte equivalence remains unverified.
+  - Publisher archive byte/quality equality, exact paper subset and redistribution
+    rights remain unverified.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -59,3 +61,23 @@ evidence:
     we constructed such counterparts
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
+- kind: source_audit_access
+  checked_on: '2026-10-06'
+  url: http://wednesday.csail.mit.edu/joseph_result/state_and_transformation/release_dataset.zip
+  note: The authors' host serves release_dataset.zip (807,745,643 bytes, Last-Modified
+    2015-12-10) with range support over plain HTTP; no HTTPS endpoint was found.
+  source_identity_status: official_file_reachable_over_http_only
+- kind: derived_facet
+  field: modalities
+  checked_on: '2026-10-06'
+  note: 'From the source inspected on 2026-10-06: authors zip inspected by header
+    only; image dataset. Not inferred from the dataset name.'
+- kind: source_audit_access
+  checked_on: '2026-10-07'
+  url: https://huggingface.co/datasets/AaronWu901225/MIT_states_UT_zappos
+  note: 'Bounded HTTPS ZIP directory audit: 63,440 selected JPEG members; pinned repository
+    revision, exact size, strong ETag and complete directory membership SHA-256. Publisher
+    equivalence is not asserted.'
+  source_identity_status: pinned_public_mirror_population
+modalities:
+- image

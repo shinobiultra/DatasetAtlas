@@ -1,0 +1,2087 @@
+{
+  "checked_at": "2026-09-23T10:52:30.892934+00:00",
+  "status": "passed",
+  "dataset_id": "visual-counterfact",
+  "snapshot_id": "visual-counterfact-88f61997e002267ca122fdb9",
+  "population_count": 1220,
+  "all_native_text_and_label_fields_exact": true,
+  "preview_records_verified": 100,
+  "late_records_verified": 3,
+  "native_image_bytes_equal": true,
+  "native_images_verified": 206,
+  "sampling": {
+    "method": "sha256_bottom_k_primary_asset",
+    "seed": 0,
+    "unit": "example",
+    "grouping": "primary asset ID; example ID for records without assets",
+    "population": "complete pinned indexed population",
+    "population_count": 1220,
+    "requested_count": 100,
+    "returned_count": 100,
+    "source_revision": "f8cd0b2335356b0f01a164df0cac7403f56a6c83",
+    "media_representation": "original",
+    "selection_note": "One hash-ranked example per sampled primary asset. All linked assets remain. Not an example-prevalence estimate."
+  },
+  "checks": [
+    {
+      "record_id": "visual-counterfact:example:e0bec11f6d4bbba7c3e3bb13",
+      "source_field": "original_image",
+      "sha256": "9060820adfe22a1f796d25b0cd913eafa9e4bb9d84d66bafbc077183768b95b0",
+      "bytes": 90179,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:e0bec11f6d4bbba7c3e3bb13",
+      "source_field": "counterfact_image",
+      "sha256": "f51a375504801ad7654af2d4a302cd90cc38fe7b6b6655d537ab6cdabe6078e9",
+      "bytes": 80892,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:c996d760dcd4e6eb5158b5f4",
+      "source_field": "original_image",
+      "sha256": "c148854ce542f4fb4c3dd7d8a398955a781f8ac985d441815c8a9eb575d60bf3",
+      "bytes": 25186,
+      "dimensions": [
+        612,
+        462
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:c996d760dcd4e6eb5158b5f4",
+      "source_field": "counterfact_image",
+      "sha256": "7ae151c0d167ae67abafa275c8089dc7ba7bf297e4788bc1c8464b174cbc5b99",
+      "bytes": 188957,
+      "dimensions": [
+        612,
+        462
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:0bcab6c15ccba0b810a2b665",
+      "source_field": "original_image",
+      "sha256": "ba385bc9fa815cf09a8f23622f6940b7ab92b972636ca29dc295ff3b14566d6e",
+      "bytes": 16713,
+      "dimensions": [
+        612,
+        488
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:0bcab6c15ccba0b810a2b665",
+      "source_field": "counterfact_image",
+      "sha256": "9461bfeb1f89c92ab98b371718472a4a35697009a784c4c6107fed73e81d8547",
+      "bytes": 149971,
+      "dimensions": [
+        612,
+        488
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:647272cd2433b3077df987c7",
+      "source_field": "original_image",
+      "sha256": "df13ddef4771a78f14360163b41381fa57ba1489c15aeafd9eaf5b213acc75db",
+      "bytes": 74549,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:647272cd2433b3077df987c7",
+      "source_field": "counterfact_image",
+      "sha256": "99bb821c5be1661ad41a8ddcfa38016e902451710acf06f51ff1528e5f9d2218",
+      "bytes": 100534,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:5c3db663b6f49436078eab28",
+      "source_field": "original_image",
+      "sha256": "5f591c9767f43f72c59c0f72f93652c5d03b4c9ea529e6e3fcbc09537ded226a",
+      "bytes": 79006,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:5c3db663b6f49436078eab28",
+      "source_field": "counterfact_image",
+      "sha256": "0be22b742a1f6c72d96dfd6ae63fde74d8e8a83a83dac2909fca21c1a156644c",
+      "bytes": 82244,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:50b17ab839a5026dfd549fb7",
+      "source_field": "original_image",
+      "sha256": "684aca0d8d9de6035b8fcb697e24e55255734961e9e58358ae1b21a9e9ac711f",
+      "bytes": 59139,
+      "dimensions": [
+        626,
+        626
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:50b17ab839a5026dfd549fb7",
+      "source_field": "counterfact_image",
+      "sha256": "5ea1c1e785381d3aa6e00fdcc2caede2ce179c5449ba9dcdd1d2720c1ba996a2",
+      "bytes": 215424,
+      "dimensions": [
+        626,
+        626
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:9322a3ce9db2edbe5e801d78",
+      "source_field": "original_image",
+      "sha256": "00031da15fe6573cd95cc1ffa8bef3a34a752b6601f3bc3c5a00fba3b4a54d38",
+      "bytes": 112554,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:9322a3ce9db2edbe5e801d78",
+      "source_field": "counterfact_image",
+      "sha256": "f14953075c8129aa9e6f6545f527148a4beb596cbf1d3cddd0c8c7a33f5afc38",
+      "bytes": 46225,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:5b50954bd1897e9b75f5ac78",
+      "source_field": "original_image",
+      "sha256": "4ff7be3bb2205219e9e4dc7c54bec8302f84d0309431df9cb9243bfc2498e1b3",
+      "bytes": 144360,
+      "dimensions": [
+        1000,
+        750
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:5b50954bd1897e9b75f5ac78",
+      "source_field": "counterfact_image",
+      "sha256": "95818ba06ad1b1988d45a16b7c7bdf3ac0a16084c44867755b525dbcde2412a5",
+      "bytes": 263620,
+      "dimensions": [
+        1000,
+        750
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:ae27173e16cb237a5d185db8",
+      "source_field": "original_image",
+      "sha256": "29dd6ef4c69be0df002ee8918d65c435777e5f77da74426ae4e1c762be3e9255",
+      "bytes": 51574,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:ae27173e16cb237a5d185db8",
+      "source_field": "counterfact_image",
+      "sha256": "b78036898b270e9a66ecdbab918054283464c3ed2ef614390636a4ff9e632f86",
+      "bytes": 61870,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:84c673eab31b2009b70f91ba",
+      "source_field": "original_image",
+      "sha256": "de5d0af71d943baec6501658978b65aadda45364cce231c3cbf471afceceb1af",
+      "bytes": 49735,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:84c673eab31b2009b70f91ba",
+      "source_field": "counterfact_image",
+      "sha256": "349c4e91690953103af4674cee83cc063f268e5964118e35225f0fc735bad17d",
+      "bytes": 71304,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:4c03243ff92fbabfc34f51e2",
+      "source_field": "original_image",
+      "sha256": "17c2c81c39880e3fe2e5d4da0261a7aa7cbe3b4ff71aac35a93423e50340c97c",
+      "bytes": 78612,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:4c03243ff92fbabfc34f51e2",
+      "source_field": "counterfact_image",
+      "sha256": "4534f6423bb4f90daaba85b4c1afe29fd3bcf2b1fddec58509795d2a11f9ecb8",
+      "bytes": 27150,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:4dbba72e6de28a02aa8e5a44",
+      "source_field": "original_image",
+      "sha256": "332b11d769f2b590d11a796c4ad87c5883a2aadabdfe72caa293a17e553f0347",
+      "bytes": 113166,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:4dbba72e6de28a02aa8e5a44",
+      "source_field": "counterfact_image",
+      "sha256": "1af95167012593cabbeb6be7f31bbdef0237ee4cc1b9fe80fac99598f16684bc",
+      "bytes": 117337,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:61985ea6e0a7cd8fd4210d43",
+      "source_field": "original_image",
+      "sha256": "9993eb145b8ca8cea6e07bf8a12ab6db24b1e085495f0d7b95c7753ed8960ea7",
+      "bytes": 175699,
+      "dimensions": [
+        1200,
+        1200
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:61985ea6e0a7cd8fd4210d43",
+      "source_field": "counterfact_image",
+      "sha256": "0fa6fae83edb05b4c7571243311fe7633d0a567d6e371c36a2b446ad480e121a",
+      "bytes": 241862,
+      "dimensions": [
+        1200,
+        1200
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:f6368e6c1ddb4058335becb5",
+      "source_field": "original_image",
+      "sha256": "aaea63390178906f4c5b7442b51419a595e7a17707a932c851d76c14d0a591f9",
+      "bytes": 33176,
+      "dimensions": [
+        626,
+        393
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:f6368e6c1ddb4058335becb5",
+      "source_field": "counterfact_image",
+      "sha256": "3e7385ca7eea0191b0ddc8a969416d40f4e3cbd4a4d50c75ddd26b0a099c5c20",
+      "bytes": 138699,
+      "dimensions": [
+        626,
+        393
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:5d97888a018681281b273823",
+      "source_field": "original_image",
+      "sha256": "587d7883d6fa67d7cf28ca0f7e8a51402911f2f15bdc3d1d2cf1d90de3b2c6c1",
+      "bytes": 14674,
+      "dimensions": [
+        612,
+        408
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:5d97888a018681281b273823",
+      "source_field": "counterfact_image",
+      "sha256": "621d60695b170a12a209492c14957e21d5708beb7bb29a7eb8e4f5aee5dfc05f",
+      "bytes": 61801,
+      "dimensions": [
+        612,
+        408
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:35956598ca69291fefddd9a5",
+      "source_field": "original_image",
+      "sha256": "4f9ba943ed93c15e66fc4c5ac34c684f16bf9e50553c5e7a556316b58487ef2e",
+      "bytes": 48867,
+      "dimensions": [
+        1300,
+        1104
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:35956598ca69291fefddd9a5",
+      "source_field": "counterfact_image",
+      "sha256": "0cccbcc5eb65b80e62e067002b1774cfcdfde3bc5bb017253cf2742729064622",
+      "bytes": 369142,
+      "dimensions": [
+        1300,
+        1104
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:ce4d8f0993b867bf8b0384bc",
+      "source_field": "original_image",
+      "sha256": "da91fa664513c0822002323ebb6e004b5e7b620552672fba325da7f3c4e898a3",
+      "bytes": 93083,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:ce4d8f0993b867bf8b0384bc",
+      "source_field": "counterfact_image",
+      "sha256": "1e969cedaff073887f11854a7dd5f1341297c9b4082b47496b46c2a3fffd4395",
+      "bytes": 113181,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:f235af5d57587151dc05670f",
+      "source_field": "original_image",
+      "sha256": "4605dae68ee9e5349e3834fcfccd93c5b9a623d6c06a0f8b9f4623072a083abe",
+      "bytes": 29795,
+      "dimensions": [
+        780,
+        619
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:f235af5d57587151dc05670f",
+      "source_field": "counterfact_image",
+      "sha256": "f3e4c5d566ab15b554eb19f647c1c4b80913c8c2706270d7a2eb341f21b726f0",
+      "bytes": 171079,
+      "dimensions": [
+        780,
+        619
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:abbf8f3d4895e1450464733c",
+      "source_field": "original_image",
+      "sha256": "77f8317f473f0cdc4eda4b32f84f8b1a974c25b0b40f198b11bf4c217f45d10b",
+      "bytes": 44673,
+      "dimensions": [
+        427,
+        600
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:abbf8f3d4895e1450464733c",
+      "source_field": "counterfact_image",
+      "sha256": "040a63c116048b5628177e9e72049f6b100a8d7c83639965d07e101576993e1d",
+      "bytes": 159274,
+      "dimensions": [
+        427,
+        600
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:ae12c352a98021e0995dd4c6",
+      "source_field": "original_image",
+      "sha256": "1d410fa64c13560ca4568fd768914493ff339c8b856955243784a737c59b4720",
+      "bytes": 63671,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:ae12c352a98021e0995dd4c6",
+      "source_field": "counterfact_image",
+      "sha256": "7a5416dfe55c519a4caf60440865eb3c62656658ff94c0d9bce0f0e6d0db5e0d",
+      "bytes": 42092,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:dc5e461171b0576729abaaf8",
+      "source_field": "original_image",
+      "sha256": "6af1c8408455b23894433db4b365f4de986bba6bb2936361cd7af022308c7d28",
+      "bytes": 29906,
+      "dimensions": [
+        791,
+        360
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:dc5e461171b0576729abaaf8",
+      "source_field": "counterfact_image",
+      "sha256": "d815968881c7a293a26f5cb6edf906f71a1d1b45c483b5f2489342a88c7e5caf",
+      "bytes": 244287,
+      "dimensions": [
+        791,
+        360
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:c6cb42a68b90489b039bbd30",
+      "source_field": "original_image",
+      "sha256": "1731d5578bd01fc880acff36a5abb3e78c77befa21316ce376ee7d43c0b9849f",
+      "bytes": 27492,
+      "dimensions": [
+        585,
+        612
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:c6cb42a68b90489b039bbd30",
+      "source_field": "counterfact_image",
+      "sha256": "fe5ad3dba6803f2c25060cedff83bdba7c78aae31fbe9948dda2013e3ad2fde4",
+      "bytes": 162547,
+      "dimensions": [
+        585,
+        612
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:4613370068372ee62f9b1322",
+      "source_field": "original_image",
+      "sha256": "8b284fa18ccd2d263e1a96d3df694c1a0f8518408e1f3f633a8924c2cf81f310",
+      "bytes": 124624,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:4613370068372ee62f9b1322",
+      "source_field": "counterfact_image",
+      "sha256": "8446759678ad876bbea10cc423d2f79de4fbf6b726e7b38ab24025fa3f35f30e",
+      "bytes": 48778,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:a2bb18de1d89f16060a4986e",
+      "source_field": "original_image",
+      "sha256": "a185225b8d356a5673179ab1619bf6401f2001d860b8f086d55d60d356ebe82a",
+      "bytes": 104761,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:a2bb18de1d89f16060a4986e",
+      "source_field": "counterfact_image",
+      "sha256": "779af32e64bc74ea1fbada3cd6ef1aca9939b90125bc612539f1bb979d92ccc7",
+      "bytes": 107152,
+      "dimensions": [
+        600,
+        600
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:e80297e8c7324108291847c2",
+      "source_field": "original_image",
+      "sha256": "29f36c21122d7cb61ad86d94886d87fd47ec32d024be22812d5fe79c62387e3f",
+      "bytes": 90676,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:e80297e8c7324108291847c2",
+      "source_field": "counterfact_image",
+      "sha256": "6be5d697a0d17b955d4cd6ca713e9739a94e835b1bed5ac64a4c3e499267e680",
+      "bytes": 50643,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:0ac06fff54b27ab7016ff07c",
+      "source_field": "original_image",
+      "sha256": "03e18767fd0eb683394eeb7e40a3f0e133148518dcf831646a0ec9415e9750f9",
+      "bytes": 46951,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:0ac06fff54b27ab7016ff07c",
+      "source_field": "counterfact_image",
+      "sha256": "e9616411ecb03f10c21f532269632fbd872b6d8ca132f51a1b54a5837bc037d2",
+      "bytes": 61830,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:74feb782754a80ce00fe4ddd",
+      "source_field": "original_image",
+      "sha256": "ff10e6f44b89f8be99ff116458be1afdb9c72f7dbe105965ec60ce8de885f436",
+      "bytes": 68412,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:74feb782754a80ce00fe4ddd",
+      "source_field": "counterfact_image",
+      "sha256": "e78251095faa3973288381522959e6c80b2e05571f2abc27baae6f1bc77fa64c",
+      "bytes": 56739,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:faebf1804ae1d5bf15a905d2",
+      "source_field": "original_image",
+      "sha256": "29ea23862cb3b620c0b61d3b8fb492babf88c8297619681b24c1ab067dc7ae56",
+      "bytes": 90583,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:faebf1804ae1d5bf15a905d2",
+      "source_field": "counterfact_image",
+      "sha256": "14ea031e3d076395e7a2e9c84c5f001cd14265828f595428559864d24c2fd5d0",
+      "bytes": 61321,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:d72b26ed61615498db9411d3",
+      "source_field": "original_image",
+      "sha256": "a355ad9dfaa1d35d9f1d417c6967a826e14ef6bdbc4578cd717184cc0badb320",
+      "bytes": 69349,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:d72b26ed61615498db9411d3",
+      "source_field": "counterfact_image",
+      "sha256": "1aaf9d0fed8c7ef96729fe30a72e39a657e9e8ee4c42098dd849b9bf45914858",
+      "bytes": 49992,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:2f354ca3324d0bf23095dab7",
+      "source_field": "original_image",
+      "sha256": "ea7b85d16cc408f8740d55596bb51a643f6adcfef3ec89cac123b8809c5e0b6e",
+      "bytes": 68440,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:2f354ca3324d0bf23095dab7",
+      "source_field": "counterfact_image",
+      "sha256": "c3c698ba3a4f64df3f98f353d04bcbd3e01e3d22f7158ccf8ba14f971678d197",
+      "bytes": 56147,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:1a86ff6659032124f3a5fa89",
+      "source_field": "original_image",
+      "sha256": "38fac46248b72b562b4ea0566d31f256c74bb6ca42a705894e7ae4d253609a77",
+      "bytes": 52955,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:1a86ff6659032124f3a5fa89",
+      "source_field": "counterfact_image",
+      "sha256": "4690c750cc6ce4a4d74bd0cd977535d48b8605f9cae7132eec3329e63afea3fd",
+      "bytes": 76897,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:9e9461dcf94d2c2cf951698c",
+      "source_field": "original_image",
+      "sha256": "e8c78f0924bdcd1992fc4a01cce567578d011de879890da6e4b4125515aa54cc",
+      "bytes": 90050,
+      "dimensions": [
+        626,
+        626
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:9e9461dcf94d2c2cf951698c",
+      "source_field": "counterfact_image",
+      "sha256": "6ceda9330f8db2a3ed4dfa518701fa81ece7ed24a474c294c0532e7264386056",
+      "bytes": 314879,
+      "dimensions": [
+        626,
+        626
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:71db328b34d3d435c0a3d486",
+      "source_field": "original_image",
+      "sha256": "a58d603e70d2b4140a9bdcd484d98ed569ee8931bdb99bbbcd8ea04faf8eb296",
+      "bytes": 103090,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:71db328b34d3d435c0a3d486",
+      "source_field": "counterfact_image",
+      "sha256": "13f99469f27832624baeff59f66ab3cf2b9cbdad09b252ce714c660fc23eb02c",
+      "bytes": 83900,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:3c5bf885b50a850548ec4d3d",
+      "source_field": "original_image",
+      "sha256": "7bbbfce381e2b9706a904c7c2f11ee7ab34f1aabe6f7592d818c6f6ea81d0a35",
+      "bytes": 26522,
+      "dimensions": [
+        538,
+        360
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:3c5bf885b50a850548ec4d3d",
+      "source_field": "counterfact_image",
+      "sha256": "eede2b00ec0f77c047fcb3ff450dc325088068a7dcef88809ab39871f9f48933",
+      "bytes": 107866,
+      "dimensions": [
+        538,
+        360
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:66ca1bb340c7d12beb325896",
+      "source_field": "original_image",
+      "sha256": "b073376c575e207827767a32163a9b1f64d4a79ab021a61e9d29aaada1bc0116",
+      "bytes": 78429,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:66ca1bb340c7d12beb325896",
+      "source_field": "counterfact_image",
+      "sha256": "c9762771ff92c97b5798e934184fb5c49edecdce892a076ce2225858a0daf82d",
+      "bytes": 43565,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:ae0f7ebc4e6e409cad46f713",
+      "source_field": "original_image",
+      "sha256": "0293e97e790062c9a89324dd92891781c999ed7eb9579cbdaa9a3afbe461b8a4",
+      "bytes": 95421,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:ae0f7ebc4e6e409cad46f713",
+      "source_field": "counterfact_image",
+      "sha256": "74c4d72f7aa074817cbb87af65ec89c861c04fc83bbc212f16bbb945da6e5c50",
+      "bytes": 57267,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:9c2a3208240d61379023f99b",
+      "source_field": "original_image",
+      "sha256": "d1280b3602ae34110628ea81dabfec92cf804cc7c82a7f0ef70a734f5c83597e",
+      "bytes": 11272,
+      "dimensions": [
+        626,
+        417
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:9c2a3208240d61379023f99b",
+      "source_field": "counterfact_image",
+      "sha256": "19b7db4ecc43394fb91deec1a14ec18ecef8daa11bdd38943a5d23f91c3d7704",
+      "bytes": 57264,
+      "dimensions": [
+        626,
+        417
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:66867d995c7dabc640c84be5",
+      "source_field": "original_image",
+      "sha256": "da44f6ec7f4d4ac49d6483622f749a69e5a5b06d685a9610b34518e2783a8d0c",
+      "bytes": 115865,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:66867d995c7dabc640c84be5",
+      "source_field": "counterfact_image",
+      "sha256": "dc25cfaa163271812b2b77cb16235eb4e83018127fe52cc44954e8b2924040f2",
+      "bytes": 76360,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:55efc41bb70173b67feb5997",
+      "source_field": "original_image",
+      "sha256": "47c05f04179bab767786ea16f50a0fb6dfb445c7d6e0e2762ff05e5b5d4bfa07",
+      "bytes": 65426,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:55efc41bb70173b67feb5997",
+      "source_field": "counterfact_image",
+      "sha256": "b2265937cb86d6cdac30d9f38d5927aecbf4cd8fbbe5978a12ff61cf03ac8b54",
+      "bytes": 50143,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:bf6713dcc378673bd08a0342",
+      "source_field": "original_image",
+      "sha256": "1d586a66e842c2ad310a1e08e7b73b5e7d1b22c75d1143d34df72ddcc0356156",
+      "bytes": 27356,
+      "dimensions": [
+        729,
+        486
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:bf6713dcc378673bd08a0342",
+      "source_field": "counterfact_image",
+      "sha256": "e6d1e6a457f51a42c60d77d5cfde598d1a57981e01f9ec24f07bb273b1b84639",
+      "bytes": 227862,
+      "dimensions": [
+        729,
+        486
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:1c814519063488599a659a7c",
+      "source_field": "original_image",
+      "sha256": "c6d13cbee5ee05bc2dd5f84f271b8be1d004bca2760a58c5142a64b75fc78d64",
+      "bytes": 51607,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:1c814519063488599a659a7c",
+      "source_field": "counterfact_image",
+      "sha256": "943dd289c139b3b38be39dac6ccce6f7f38ee5db1174de65135f38c073d18ff2",
+      "bytes": 98406,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:091cb7db5bcb885e2218072f",
+      "source_field": "original_image",
+      "sha256": "09f7ebf7a8e66e8d3dc18a554268eb63b8b9a6a26dfd16e1a177b9ae9f894208",
+      "bytes": 55492,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:091cb7db5bcb885e2218072f",
+      "source_field": "counterfact_image",
+      "sha256": "5028db6a092f8aa2227b47c0419195cc0e20d4988230d5d36d3eff166440d356",
+      "bytes": 57240,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:5a06b98d955c31ef00912838",
+      "source_field": "original_image",
+      "sha256": "86890c0147118dd1422de4c309caa8e73d2164923a93573ed956fbf80199d801",
+      "bytes": 21688,
+      "dimensions": [
+        626,
+        417
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:5a06b98d955c31ef00912838",
+      "source_field": "counterfact_image",
+      "sha256": "b3dfb7c83d6d219560b9376b725dc1dea95ccd8aee30f3c646a8d86f71c3638b",
+      "bytes": 80893,
+      "dimensions": [
+        626,
+        417
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:0b66ae91f97f714e6e914698",
+      "source_field": "original_image",
+      "sha256": "78f93000011deeaa0e6f8ef26548e33c22a1d6f1ec00f8f901e7431e342ccf76",
+      "bytes": 35193,
+      "dimensions": [
+        626,
+        417
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:0b66ae91f97f714e6e914698",
+      "source_field": "counterfact_image",
+      "sha256": "a746a02f7e9d7b86c14b4c82010cd79dacc009f2f8c0992142a4f718aa3a00b2",
+      "bytes": 135255,
+      "dimensions": [
+        626,
+        417
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:b2fa216825db6c0a58a513ec",
+      "source_field": "original_image",
+      "sha256": "3d2ece5ce69f5e15d9b9f1e184c074eed574ad4d8f11a4eddbc159528e7a058a",
+      "bytes": 44615,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:b2fa216825db6c0a58a513ec",
+      "source_field": "counterfact_image",
+      "sha256": "ee77afac9fc13eda5ff158b8766b635884c73c98483fc6ee753906d3cd731a39",
+      "bytes": 33995,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:30ff951a5f8b58048aac6de5",
+      "source_field": "original_image",
+      "sha256": "964d396cc4af6fabd302c89ae097db398ffbe2324de50051f1d60633b9f1c60f",
+      "bytes": 61837,
+      "dimensions": [
+        1300,
+        867
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:30ff951a5f8b58048aac6de5",
+      "source_field": "counterfact_image",
+      "sha256": "2100268bef8b7fd7350d9fcd269a4b8c57cbfefce3005f5b67ef57d7902bfbf9",
+      "bytes": 376549,
+      "dimensions": [
+        1300,
+        867
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:e65303d0381ffda8a17e5a0e",
+      "source_field": "original_image",
+      "sha256": "66c284717afd5a55e14ba6ce0e24ac42e47a784cd0e9cc73c2fac6ac2968b203",
+      "bytes": 88629,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:e65303d0381ffda8a17e5a0e",
+      "source_field": "counterfact_image",
+      "sha256": "6e1c444d43d7616d57c57e2fe58b5b1786cd4b84c20af9f7fbe20b47eb80d3d6",
+      "bytes": 92914,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:111ab3b505a1633e2dbf4f25",
+      "source_field": "original_image",
+      "sha256": "7369f57bff5cb0ad1b993afd6c861a473fd9dd2801b69a93c7343a1246a2a52a",
+      "bytes": 40842,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:111ab3b505a1633e2dbf4f25",
+      "source_field": "counterfact_image",
+      "sha256": "00802558f42f593174d72140fb30508db0aefb871a43c649e5330ec316ed562a",
+      "bytes": 54694,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:d71813fe2df2cc0dffa45228",
+      "source_field": "original_image",
+      "sha256": "34ad70fdb5de15be570de18b6469adba748a5fa5775c2fde43e983c6f23da353",
+      "bytes": 20083,
+      "dimensions": [
+        612,
+        406
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:d71813fe2df2cc0dffa45228",
+      "source_field": "counterfact_image",
+      "sha256": "b664bd01d36be140ed0d8529bbbdd4e30c1de8039f23eb6a92cdf3b86a5323e9",
+      "bytes": 85940,
+      "dimensions": [
+        612,
+        406
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:eb4e9222b4ee70eb6ae0b068",
+      "source_field": "original_image",
+      "sha256": "b5ab212e5957ebad54dd7bd86ec068926be6244985e7d45cb4203d19664722d8",
+      "bytes": 20774,
+      "dimensions": [
+        612,
+        429
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:eb4e9222b4ee70eb6ae0b068",
+      "source_field": "counterfact_image",
+      "sha256": "1708233e3fecefd7b34c6281c44b6040afb29787bce3b4020122cc1c19f26c9f",
+      "bytes": 123606,
+      "dimensions": [
+        612,
+        429
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:99a29876937acae6088a9009",
+      "source_field": "original_image",
+      "sha256": "2c9329fe66887e70728ee0ddd38e48368167e0aba3a814d279156557cecc55aa",
+      "bytes": 80482,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:99a29876937acae6088a9009",
+      "source_field": "counterfact_image",
+      "sha256": "facb6779c97d4e57752bef48449a2f6f948bfe1c0b89b202e8408ca1238a2358",
+      "bytes": 57353,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:89f84688b22f8a2bf6c3edc6",
+      "source_field": "original_image",
+      "sha256": "0ffa6cc789ed519c7e66bdc23636e67a44c38143d9f7faa2dd5fbd00db0b5810",
+      "bytes": 13436,
+      "dimensions": [
+        390,
+        280
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:89f84688b22f8a2bf6c3edc6",
+      "source_field": "counterfact_image",
+      "sha256": "b2013683b70ef19e2459c0082d6514c84be36c557f326ab620ba984677cd84d6",
+      "bytes": 51764,
+      "dimensions": [
+        390,
+        280
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:edc6a09c58a2a3170db0796d",
+      "source_field": "original_image",
+      "sha256": "54b415e2851e0d9ad40234f6178b7a2fb9dd7a281dc79de0b6f147d6efdbbdcc",
+      "bytes": 95792,
+      "dimensions": [
+        1300,
+        1073
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:edc6a09c58a2a3170db0796d",
+      "source_field": "counterfact_image",
+      "sha256": "d853b7987e79a994850c478d00fae546ed08b5de9f8fc1a5cf707b63624fd67b",
+      "bytes": 505641,
+      "dimensions": [
+        1300,
+        1073
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:cd3a289c362976c49cd065f5",
+      "source_field": "original_image",
+      "sha256": "26c1bf59292bcd3a18137f43887267a109eb06584d6bebd8f2c66b712859fef8",
+      "bytes": 70612,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:cd3a289c362976c49cd065f5",
+      "source_field": "counterfact_image",
+      "sha256": "72710ab72eb188f837d1f0abad4890ced0526780a7a200ecf40f55010f95e92c",
+      "bytes": 76726,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:8b56f8469f31eb6589e49911",
+      "source_field": "original_image",
+      "sha256": "f917b7fc8c5628b937234583d3f705dfbc1c5ee122422c4a229a42b0f41de4fb",
+      "bytes": 60842,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:8b56f8469f31eb6589e49911",
+      "source_field": "counterfact_image",
+      "sha256": "2e4eb1132c7ba72beab9cfa7c0a4a5e7c267a58eb503b847fb96cafc2970fa9a",
+      "bytes": 92663,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:69827252981e8c7b2e3d2bec",
+      "source_field": "original_image",
+      "sha256": "4d891dbbb164ac599310d2f01874b6da5f4f0cdf935f0322c5b34482ce4b739e",
+      "bytes": 85013,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:69827252981e8c7b2e3d2bec",
+      "source_field": "counterfact_image",
+      "sha256": "bddb039a33350d0cda63dbbe15fb71fb04241e6f1aec2c896d98c15c55c117aa",
+      "bytes": 50952,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:aa3c44624c8c8cacce7bc15b",
+      "source_field": "original_image",
+      "sha256": "bda8cc3d8d903cfa0f282b3e76387af282d4fcd1dad634cbc9a991b44bc44bfd",
+      "bytes": 51556,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:aa3c44624c8c8cacce7bc15b",
+      "source_field": "counterfact_image",
+      "sha256": "87cd39412fbb4ff22fd9ea1eda3276fa948aa8a8561bd37e181df5d56eaffcae",
+      "bytes": 77881,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:5d9a86321e97bee3d6357128",
+      "source_field": "original_image",
+      "sha256": "e2edf51e30ca762cb53f8896dbb8aa99bee74d1632c3550c525fb894990a960b",
+      "bytes": 44038,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:5d9a86321e97bee3d6357128",
+      "source_field": "counterfact_image",
+      "sha256": "b02e7675994782cc85faabd0e10fd1c2d59c132901c1ec8226fbf7ac32d2fd9f",
+      "bytes": 86728,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:055ffe31e58680abb67b3d15",
+      "source_field": "original_image",
+      "sha256": "0fc28f1d9d31c97996fad08ec75c3b7af69ff857350fc2fb445c2987e0d56787",
+      "bytes": 63839,
+      "dimensions": [
+        800,
+        603
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:055ffe31e58680abb67b3d15",
+      "source_field": "counterfact_image",
+      "sha256": "ad2e2119e14bd4fe4829a124059ef1f533be50fa573afa9d0d757836337d9d9c",
+      "bytes": 354988,
+      "dimensions": [
+        800,
+        603
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:ebfab885c60ba04ae6ce5b1b",
+      "source_field": "original_image",
+      "sha256": "59076ffd81fe0eff3ebf09a060e3f41f00b5f8bd3217598244e66285ce781c09",
+      "bytes": 99434,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:ebfab885c60ba04ae6ce5b1b",
+      "source_field": "counterfact_image",
+      "sha256": "a9c3d153a0d55f1bd14a254d39463fc259d69c27c64b6453b964ed27e2ff1bd6",
+      "bytes": 85804,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:735551d89292decc909a7444",
+      "source_field": "original_image",
+      "sha256": "ffb3132b8a0dbe9e313bfd872690025ebf4f09c1b8f57714f43d5b6aec93e194",
+      "bytes": 38563,
+      "dimensions": [
+        626,
+        626
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:735551d89292decc909a7444",
+      "source_field": "counterfact_image",
+      "sha256": "fb05bf0a794f376d771552b4c69a5255e5ea478d2c3b9d5e2e00d2b75be3bde5",
+      "bytes": 206445,
+      "dimensions": [
+        626,
+        626
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:f32e538c340cbfc798fdec1e",
+      "source_field": "original_image",
+      "sha256": "0f50123fd11fbee044583fdccbc470e5c13eb4e69173454ad9605999bb484781",
+      "bytes": 56386,
+      "dimensions": [
+        800,
+        980
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:f32e538c340cbfc798fdec1e",
+      "source_field": "counterfact_image",
+      "sha256": "6b787ff734fcfd0596f3ec234ad651aa294905c67e630d5a47cee05555aedab5",
+      "bytes": 407371,
+      "dimensions": [
+        800,
+        980
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:bce081e3f6698f6bcbb19dd9",
+      "source_field": "original_image",
+      "sha256": "e5199e3047332081b5e3d2d14ee6401a5811d2dfe218842a82499afd21100e91",
+      "bytes": 90238,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:bce081e3f6698f6bcbb19dd9",
+      "source_field": "counterfact_image",
+      "sha256": "11579e7268a4d30f515cdfe8c350eaa39db054b44c97d3a62392c4ed10dd3e57",
+      "bytes": 73673,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:22a805509c83e85892363086",
+      "source_field": "original_image",
+      "sha256": "97efd1348fe11c7b446d310871f541b2538b802ef0041f556f7ef753a48ee636",
+      "bytes": 95692,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:22a805509c83e85892363086",
+      "source_field": "counterfact_image",
+      "sha256": "1f9977f419d10696605b3a48f3957be5d4e152aef47f658ff1eac7531e72703e",
+      "bytes": 60645,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:4a9c5b8e9c31e0b87edc8dd2",
+      "source_field": "original_image",
+      "sha256": "f87418c4f0289c77182378bf1d0231ea602c5cf6795cc9e3e3a10134b119d140",
+      "bytes": 71995,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:4a9c5b8e9c31e0b87edc8dd2",
+      "source_field": "counterfact_image",
+      "sha256": "caac4b2ec9573ebd5df341f1b5b754e9adf1eed2b22b7a219806800af10f286a",
+      "bytes": 78552,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:8947b9791177b7f3252e9ab6",
+      "source_field": "original_image",
+      "sha256": "9def6aa9049c94e3b37b9bb7585cf7fac5af71772614682c684ab91de5d30998",
+      "bytes": 12004,
+      "dimensions": [
+        612,
+        408
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:8947b9791177b7f3252e9ab6",
+      "source_field": "counterfact_image",
+      "sha256": "c3b906c7d8e4401677be39ac2d504fbf53a1fa0a2fcec14c2b0bc2adbe7945de",
+      "bytes": 57864,
+      "dimensions": [
+        612,
+        408
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:8be94186a8fad1fa0a162714",
+      "source_field": "original_image",
+      "sha256": "454164621f5cb8d8eb2d6c1da913536c318a3c74eed02e7af60990021a228e79",
+      "bytes": 9633,
+      "dimensions": [
+        262,
+        360
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:8be94186a8fad1fa0a162714",
+      "source_field": "counterfact_image",
+      "sha256": "eb854dd607db2f5d12ec75d924c710a7c6a27a5b76e83e12f76b1390b46d09eb",
+      "bytes": 34043,
+      "dimensions": [
+        262,
+        360
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:6d4f51d60fb782cf3b7e3892",
+      "source_field": "original_image",
+      "sha256": "bd6eee03691c082cab4c6a71ff3cbdccecc5388f6aff5a138f3c83804a21cd60",
+      "bytes": 80773,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:6d4f51d60fb782cf3b7e3892",
+      "source_field": "counterfact_image",
+      "sha256": "c401f29bd15663837e4feb3b33a599f0b36672ecf79b7eddf74cb29aff7b5f17",
+      "bytes": 73514,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:60025102d6f1b6bb6183b021",
+      "source_field": "original_image",
+      "sha256": "53c1156b12106e6f414ad372c896bb85cd8b9f0f2a5250473199112b5e7cf2a5",
+      "bytes": 153822,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:60025102d6f1b6bb6183b021",
+      "source_field": "counterfact_image",
+      "sha256": "eeb80ce54e1b126818e29fc1cc6882c1d1d1768ba68725317c3a509aaff41476",
+      "bytes": 71217,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:8a45a7cce7bed45466d0d4b5",
+      "source_field": "original_image",
+      "sha256": "0b51a5653aa60d1e1c20d46c94de78088a6c8055228b77de2f6107abfd86a57f",
+      "bytes": 15258,
+      "dimensions": [
+        600,
+        365
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:8a45a7cce7bed45466d0d4b5",
+      "source_field": "counterfact_image",
+      "sha256": "1c38742d2eb47b7077162acdcd19411ad91b20b07087988d5742862089729a40",
+      "bytes": 75042,
+      "dimensions": [
+        600,
+        365
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:8cf4a69a87947116a5b62047",
+      "source_field": "original_image",
+      "sha256": "cd7b58e2ae5baad37d6c8eb6a0bc48f75c65803f221def58b98c73dc98aa7997",
+      "bytes": 68916,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:8cf4a69a87947116a5b62047",
+      "source_field": "counterfact_image",
+      "sha256": "e705a051a4e1471fad31f65c3c67942d01ed1d66a0e368a2f181d83bce0cb0d2",
+      "bytes": 77836,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:26d3658f8aeb97cf43e44c9b",
+      "source_field": "original_image",
+      "sha256": "2252a43dbc8ff277ba659ddcc3477306acd8b23c9442290cf3c8ee03be30fb02",
+      "bytes": 87009,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:26d3658f8aeb97cf43e44c9b",
+      "source_field": "counterfact_image",
+      "sha256": "95dc041c1b29903da679029ab5640ad34b5934e4524963ab2dfca0704ddc83a6",
+      "bytes": 68191,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:63ca878d1a67cd88fb87b7d9",
+      "source_field": "original_image",
+      "sha256": "8bd72b1f647d77169fab243d06aa2e3ef53cc4dcbb80192dcb9bd6e3e6c8636a",
+      "bytes": 55768,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:63ca878d1a67cd88fb87b7d9",
+      "source_field": "counterfact_image",
+      "sha256": "32b175f8a5d376f79f6aa99b75cc6ec16a9555a45b68add0a090ac0d3c5e3994",
+      "bytes": 66947,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:f50d34c1c4f5167ad9bf1e4b",
+      "source_field": "original_image",
+      "sha256": "8fc1a32440f651e1197fa073de8d25174c654088631ee3464ac489ac2a0271f8",
+      "bytes": 68227,
+      "dimensions": [
+        626,
+        626
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:f50d34c1c4f5167ad9bf1e4b",
+      "source_field": "counterfact_image",
+      "sha256": "2c5d63ee3dabbebc78e7f7cbc54333922723ba28d4633a027e8e83919c25b5b0",
+      "bytes": 290199,
+      "dimensions": [
+        626,
+        626
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:34bfb8a90f259a2bf9158dc8",
+      "source_field": "original_image",
+      "sha256": "f6b82776b070f85ea6b65a34bb328832fee13c3c958489601b047f76035e8bd7",
+      "bytes": 56224,
+      "dimensions": [
+        866,
+        1300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:34bfb8a90f259a2bf9158dc8",
+      "source_field": "counterfact_image",
+      "sha256": "2b30e3dce25f889e2112f6808920d3b2e8bc1e813b4e78099384cb2c459ce668",
+      "bytes": 382777,
+      "dimensions": [
+        866,
+        1300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:677e513701047823af027e7f",
+      "source_field": "original_image",
+      "sha256": "b009c701741732b02180f6022fd515c91e26279b130e6a299a6f97bfc6e651d9",
+      "bytes": 13198,
+      "dimensions": [
+        391,
+        280
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:677e513701047823af027e7f",
+      "source_field": "counterfact_image",
+      "sha256": "88a04350679943d6c7e854833a4dbb970d2e4651d34c1d2064fad4995a667f40",
+      "bytes": 61633,
+      "dimensions": [
+        391,
+        280
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:81df164a58047087626ed846",
+      "source_field": "original_image",
+      "sha256": "8db9096d1d8a13dcaa18ab0f2c62dfaaca17038b17b21c3bf63e986af3d2b2b4",
+      "bytes": 66519,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:81df164a58047087626ed846",
+      "source_field": "counterfact_image",
+      "sha256": "cd4685df2939ddc3500fbbdf08cd6453193ea3d6a8e7e8fdb55d560f6ddb2cfb",
+      "bytes": 41941,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:c3ecf25daa72b1e8627ff433",
+      "source_field": "original_image",
+      "sha256": "d47b4a4b397f1cf31ba25e4741e4edf32fd9a5553a6fe6cae0eec56b0db5cf45",
+      "bytes": 93075,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:c3ecf25daa72b1e8627ff433",
+      "source_field": "counterfact_image",
+      "sha256": "ff0e02280327aef15488ff3eedf1076e1c1b1e2381722959b0474714bc0447dd",
+      "bytes": 88545,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:9fbb621405f88fa432926177",
+      "source_field": "original_image",
+      "sha256": "0642ac47e8357894a8424fff3e3d356831460bd01be984446a634eae76e5a39b",
+      "bytes": 68328,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:9fbb621405f88fa432926177",
+      "source_field": "counterfact_image",
+      "sha256": "eb908749502b1fd91e965c64fd4cf2de9b3fca699199d77d4b409a4da2ee4f59",
+      "bytes": 50780,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:224c3900bf0ea7a7aa187ab3",
+      "source_field": "original_image",
+      "sha256": "2bd2e423939c75296527e2aa5cd4c0108e9c6edf6d4e48e437ec63e7977ee636",
+      "bytes": 67126,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:224c3900bf0ea7a7aa187ab3",
+      "source_field": "counterfact_image",
+      "sha256": "1ce419580a38f2277d4af4ee1995f6cc444c88648aabeec1f20d09753e6889ab",
+      "bytes": 72077,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:a20b9f50a4e3686f3f0c2978",
+      "source_field": "original_image",
+      "sha256": "6854a947e3885af72ecdfbc327fb1454ef1b7c31108bcce58226e1e829ac4750",
+      "bytes": 40023,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:a20b9f50a4e3686f3f0c2978",
+      "source_field": "counterfact_image",
+      "sha256": "ff221b3784bbd0130da1f8124b30c08634dc6dfa12d952808d6b3d4676296a7b",
+      "bytes": 65935,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:213bdf6d0a739570b8341519",
+      "source_field": "original_image",
+      "sha256": "d1ef7ad28a2227340ac2034ee3d4ca54f6d79880758a3e4c66d524faafb2166f",
+      "bytes": 103929,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:213bdf6d0a739570b8341519",
+      "source_field": "counterfact_image",
+      "sha256": "de2bdd8ccf58a3b29fe799f4f6bf752a99ad5c0969b332c924d76fa151c78f14",
+      "bytes": 51601,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:5fe5061afb8116194c059b6b",
+      "source_field": "original_image",
+      "sha256": "b87d6d4b8d4024593a83c13fc4af9c817894e7c33c2fdf200f0cac6bda853610",
+      "bytes": 24018,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:5fe5061afb8116194c059b6b",
+      "source_field": "counterfact_image",
+      "sha256": "7cc13dd719358c7d41aeaf505f0ffdd1a8b1733a978059395714e3ebe76ef7e5",
+      "bytes": 22735,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:14539993eb155460f05b03f4",
+      "source_field": "original_image",
+      "sha256": "80d824ddeae69c7ef9d07b52c4fb2714057fe5e5c5d52164f08e8c484c1c1526",
+      "bytes": 58472,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:14539993eb155460f05b03f4",
+      "source_field": "counterfact_image",
+      "sha256": "0f9092292b49521792711b755833b3acefa0ebbc33cbaf3296102bcf19b4668c",
+      "bytes": 49010,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:a83fffffdd6621b58ceeea33",
+      "source_field": "original_image",
+      "sha256": "d166da1df069f2e833b6d17e0424eb01f0c793fb57d90e2fa5aade98ff58e533",
+      "bytes": 66175,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:a83fffffdd6621b58ceeea33",
+      "source_field": "counterfact_image",
+      "sha256": "0d4a83d5e5b6518cf070e8b3fe88bf952181aab52ba9fd17af4e0977880663d5",
+      "bytes": 52502,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:425df7ddefaa393965ab35b2",
+      "source_field": "original_image",
+      "sha256": "de1a69c7261c9d934d7185c48009623928b20751858f9912fff2c1003f2b2836",
+      "bytes": 35390,
+      "dimensions": [
+        1023,
+        682
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:425df7ddefaa393965ab35b2",
+      "source_field": "counterfact_image",
+      "sha256": "f368992ec324a15ba721b6eb878536c29394fdca8d40856773f4c20cbaae696c",
+      "bytes": 123302,
+      "dimensions": [
+        1023,
+        682
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:2df2783c72740f7a583c3494",
+      "source_field": "original_image",
+      "sha256": "6f63aa0f8975a87213b40d9defb7a9fc1354403b1b0cb78fd4260b68430cd93b",
+      "bytes": 152287,
+      "dimensions": [
+        1193,
+        1300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:2df2783c72740f7a583c3494",
+      "source_field": "counterfact_image",
+      "sha256": "b87a991a10a24e5c640550f9a23a1f5a16490ccf6607bb3f479763e2c05573dc",
+      "bytes": 545523,
+      "dimensions": [
+        1193,
+        1300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:18d9ac16c6ab0e07ee1618b9",
+      "source_field": "original_image",
+      "sha256": "f116941e0cbffb381e4f83bf09fdd81b1cc0a20d4212cba9f221e828ec1f5535",
+      "bytes": 310393,
+      "dimensions": [
+        1300,
+        1269
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:18d9ac16c6ab0e07ee1618b9",
+      "source_field": "counterfact_image",
+      "sha256": "b1902b7ebd35be955fbbb20e66f48acd9c4a40dfc59a1d7e1cf4a5117a19f17d",
+      "bytes": 1147245,
+      "dimensions": [
+        1300,
+        1269
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:fa0cbdcf1d519878f6857b02",
+      "source_field": "original_image",
+      "sha256": "a8998489debd93f7241cfede4baff61b73d022f3423120d795824e82d8239f58",
+      "bytes": 52847,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:fa0cbdcf1d519878f6857b02",
+      "source_field": "counterfact_image",
+      "sha256": "068d5ea566178a1918f154f1cfe8c1a5b9c8807bb607bb821d25ec84af1cad13",
+      "bytes": 77375,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:52816bc5b5975e873a8b4470",
+      "source_field": "original_image",
+      "sha256": "1ffcce5324eec6c359d5376d0329d2aaa46a69df541e95de74c53e24ffec6964",
+      "bytes": 64456,
+      "dimensions": [
+        626,
+        626
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:52816bc5b5975e873a8b4470",
+      "source_field": "counterfact_image",
+      "sha256": "6e1340d489d59542f52a65d860da018599855825c65a1f373c3b040df1ce6b21",
+      "bytes": 314989,
+      "dimensions": [
+        626,
+        626
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:036b4482df7356ee948dc321",
+      "source_field": "original_image",
+      "sha256": "1bdd537a2a39a0c4c3e099be660375f90b968c2c00d6d8099887b6aef63770a5",
+      "bytes": 40136,
+      "dimensions": [
+        1120,
+        1300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:036b4482df7356ee948dc321",
+      "source_field": "counterfact_image",
+      "sha256": "ea41c5bff9dfc9c0b29a77526133d14e1874c341e7056e2858dfdec05f6ddf9f",
+      "bytes": 311461,
+      "dimensions": [
+        1120,
+        1300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:dff75a8ba52a186dd023d42a",
+      "source_field": "original_image",
+      "sha256": "9c31042e2269799bc780f20a9f0978fc4411f247230e2351260b039ddb21deae",
+      "bytes": 41250,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:dff75a8ba52a186dd023d42a",
+      "source_field": "counterfact_image",
+      "sha256": "47efe79986248533bc9746b125967aa731e90a767e9437f561f44f82dbc09ab3",
+      "bytes": 38889,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:315db1805de5ea9802a522b8",
+      "source_field": "original_image",
+      "sha256": "326f23b354562529148f87cb67f33bec476b75d301b522cb2f14dd5194bcbd2f",
+      "bytes": 42852,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:315db1805de5ea9802a522b8",
+      "source_field": "counterfact_image",
+      "sha256": "3d6061630a4f4225d4c860f0e8552f28dfe86a54737ce500fa8d2c5e1296a4f8",
+      "bytes": 56134,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:9c9af6764f02558f04798526",
+      "source_field": "original_image",
+      "sha256": "d4fd10c90382ee98aee995f0bd0f8a4e5f1d0d7b0d214e52faf69f159833f947",
+      "bytes": 61669,
+      "dimensions": [
+        1300,
+        871
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:9c9af6764f02558f04798526",
+      "source_field": "counterfact_image",
+      "sha256": "fb1c6212df0d9166e8c34cee3adfddbf39df89ffc5ac9a90bb4891da7b569efb",
+      "bytes": 303065,
+      "dimensions": [
+        1300,
+        871
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:d089326a72a8633adedde22a",
+      "source_field": "original_image",
+      "sha256": "5a16d76ffa68bbe84895b8f6d3caa0297253a6b7ff1df43e629742ef1db6e6b1",
+      "bytes": 92307,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:d089326a72a8633adedde22a",
+      "source_field": "counterfact_image",
+      "sha256": "539600c76dcff93a945e79f25b7d43c3d1658f83285d8ab60b99c87bfd7df9b3",
+      "bytes": 117616,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:9fe6d0afc6625ee770b41af4",
+      "source_field": "original_image",
+      "sha256": "be87d69423432280ac67707a2d635bbc4dc889138d7224ef15d8992c28c23aa5",
+      "bytes": 70207,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:9fe6d0afc6625ee770b41af4",
+      "source_field": "counterfact_image",
+      "sha256": "e493ac9440f982ab33445ffd2cee0334caff0eaeb94476160e08da7cff7a3acf",
+      "bytes": 97421,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:22aff0ae1deed868c7a851ef",
+      "source_field": "original_image",
+      "sha256": "c547048a9263470ffffe356ada6d21277b269f5d5a1d2c93ed2a83bc6bf3155c",
+      "bytes": 80772,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:22aff0ae1deed868c7a851ef",
+      "source_field": "counterfact_image",
+      "sha256": "2e265760e94de7b2915fdb04a42fe6b71f3d5903b9f436dcc35ecd11481f05d0",
+      "bytes": 64744,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:30b18b8205607a561e9bfc28",
+      "source_field": "original_image",
+      "sha256": "6523d4bd8ab3198d73589593594cfe07fb71ed665605463bee4a8e9a9a0a7abf",
+      "bytes": 81145,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:30b18b8205607a561e9bfc28",
+      "source_field": "counterfact_image",
+      "sha256": "0d8fbcc10a2fd44b8e166a8c0a430da83023c67657309443b8e8f69249caa923",
+      "bytes": 60634,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:abddba1a793186335bcb18ab",
+      "source_field": "original_image",
+      "sha256": "440fa70fe6f91886fc260bd5bac4bb987ad3d8999b913da2ede8f53d97b39a48",
+      "bytes": 45183,
+      "dimensions": [
+        626,
+        417
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:abddba1a793186335bcb18ab",
+      "source_field": "counterfact_image",
+      "sha256": "bfd80e2d1fb218002262e2a04d6eb787aa85dcb6c9ac0f61409d03cd2b7616e7",
+      "bytes": 220773,
+      "dimensions": [
+        626,
+        417
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:2dadc7df4b126a727e175426",
+      "source_field": "original_image",
+      "sha256": "149825f07f378f13e5b629046b5c9b2f3080f946c1e5b41acf8f4c0e616f9e19",
+      "bytes": 84735,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:2dadc7df4b126a727e175426",
+      "source_field": "counterfact_image",
+      "sha256": "a9fbac5ad9cbc8fd2c12cfa31b41b7e54f9b43f58a72514e0b9a4afa2f362db5",
+      "bytes": 82042,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:ffff7821e1255a102c71b9db",
+      "source_field": "original_image",
+      "sha256": "1e9d93bd317566ed7578e99c0ecec3b0ed2c3a7ee11c20c4e4bba0d50f7a319f",
+      "bytes": 65256,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:ffff7821e1255a102c71b9db",
+      "source_field": "counterfact_image",
+      "sha256": "4c148e03fcb4017b41d48bbf9ab27516381fbda8ff2db5f39d8472408c631c52",
+      "bytes": 63170,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:ffecdacbb10e4e08f4a22093",
+      "source_field": "original_image",
+      "sha256": "fade53c5ff204e4e5c70f5d8c2810cbd6ad95dd39adb74be457e715b54fe573c",
+      "bytes": 57468,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:ffecdacbb10e4e08f4a22093",
+      "source_field": "counterfact_image",
+      "sha256": "374d14ff68eae3b2dca855a6a2e08a11606f5f124a6c3ec2a7f7df1be11c446e",
+      "bytes": 111100,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:ff427b86dbffaee26e2b8858",
+      "source_field": "original_image",
+      "sha256": "44697809a4a04b5e2db5145df6101b71f2f273163ffe6972ef2930a555931be5",
+      "bytes": 82651,
+      "dimensions": [
+        350,
+        300
+      ]
+    },
+    {
+      "record_id": "visual-counterfact:example:ff427b86dbffaee26e2b8858",
+      "source_field": "counterfact_image",
+      "sha256": "63f273c7dd06c242426a31f02d4ba564bf7729809b4971202c171fafc647639d",
+      "bytes": 77248,
+      "dimensions": [
+        350,
+        300
+      ]
+    }
+  ]
+}

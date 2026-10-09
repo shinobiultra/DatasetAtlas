@@ -2,26 +2,31 @@ schema_version: '1.0'
 id: datacomp-1b
 name: DataComp-1B
 aliases: []
-description: DataComp-1B web image-text metadata index, not a bundled corpus of licensed
-  photos.
+description: 'An explicitly bounded DataComp-1B metadata population: all 532229 caption/URL/dimension/CLIP-score/face-box/hash
+  rows in the first lexicographic author Parquet shard at revision 086ebeee20d4cc3b3e7c05ae703fcf278ae3a759.
+  Other metadata shards, linked images and NPZ embeddings are not prepared.'
 paper_ids:
 - paper-3e0db9c633ab204c
-release: unresolved
+release: 086ebeee20d4cc3b3e7c05ae703fcf278ae3a759-first-metadata-shard
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: indexed_metadata_partial_media
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Source-family rights and any public media examples require dataset-specific review.
-  - Adapter and preview are not implemented.
+  - Only one of 2664 native metadata shards is indexed; the other shards and paper-used
+    subset remain outside this prepared population.
+  - Third-party source images and NPZ embeddings are not acquired; URL/hash fields
+    are original metadata.
+  - Native caption/image rights and publication attribution still require review.
+  total_count: 532229
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -67,4 +72,25 @@ evidence:
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
+- kind: fresh_workspace_acquisition
+  checked_on: '2026-10-05'
+  snapshot_id: datacomp-1b-205fe73e2fa84d584b2ae3f6
+  source_count: 532229
+  recipe: registry/recipes/datacomp-1b.yaml
+  scope: All 532229 native metadata records from the first lexicographic Parquet shard,
+    0035af9f90f581816acf269df5eb37ad.parquet, at the pinned author revision. Caption,
+    original URL/dimensions, CLIP scores, face boxes and SHA-256 fields remain native.
+    This explicitly bounded shard is a subset of DataComp-1B; the other 2663 shards,
+    NPZ embeddings, linked source images and paper-used subset are not prepared. The
+    full-source acquisition plan is retained in registry/source-plans/datacomp-1b-all-shards.yaml.
+  publication_review_complete: false
 source_url: https://huggingface.co/datasets/mlfoundations/datacomp_1b
+snapshot_id: datacomp-1b-205fe73e2fa84d584b2ae3f6
+tasks:
+- image-text dataset filtering
+modalities:
+- image
+- text
+labels:
+- clip_l14_similarity_score
+- clip_b32_similarity_score

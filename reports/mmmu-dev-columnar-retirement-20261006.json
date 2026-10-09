@@ -1,0 +1,590 @@
+{
+  "dataset_id": "mmmu-dev",
+  "executed": true,
+  "status": "executed",
+  "sources": [
+    {
+      "source_name": "Accounting/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Accounting/dev-00000-of-00001.parquet",
+      "bytes": 272899,
+      "sha256": "06f953a5c00b260279a118fbebcdc96b62fab897a8602d4f9188e7182438e735",
+      "etag": "\"6016381c53281930e349610aacc663bda3b297a9d84d01a3f30d22153ceb5a59\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Agriculture/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Agriculture/dev-00000-of-00001.parquet",
+      "bytes": 22095959,
+      "sha256": "3372e6f187bcb54ba8c35590eddb18ccbf478c891784d84169454de70498f9e9",
+      "etag": "\"0d749504b70e3940285cb280aace34e2a3096ce8f5a60bd5e61f71803f661b3e\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Architecture_and_Engineering/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Architecture_and_Engineering/dev-00000-of-00001.parquet",
+      "bytes": 149062,
+      "sha256": "aa6eeadc3391bbf38aec288cb6b5b3ab127b5f07622504b711130ebd61449e3e",
+      "etag": "\"a7a42a088e2595ed5f1373b44fc36afff13d92550bec80694a1646e0a22b80de\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Art/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Art/dev-00000-of-00001.parquet",
+      "bytes": 6252638,
+      "sha256": "cefafd4231053d5a18f02b8ae592cbe173d446aa383b98d3bf4345e3209d114e",
+      "etag": "\"6938be9ed987f6b772ec598edc2efd588188612e7af98c5a7f0cf2b6673af476\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Art_Theory/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Art_Theory/dev-00000-of-00001.parquet",
+      "bytes": 6394029,
+      "sha256": "2076245171d6d78332ca15d9194a97a062e1a32474fce01292bb15eddf7225b7",
+      "etag": "\"77ec5862b611a79f20a19c0f2a35a68546b0fcab5deaa06552c66ffbb6657f49\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Basic_Medical_Science/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Basic_Medical_Science/dev-00000-of-00001.parquet",
+      "bytes": 825784,
+      "sha256": "4b89316791078ec1803d413986ea9ff2e3fe9232bbc62b7c535b9578ab5c0253",
+      "etag": "\"7a2a66e7f524be1887447f6e847e353c8211bb975049379f11bcdc71f8bfb3b6\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Biology/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Biology/dev-00000-of-00001.parquet",
+      "bytes": 583801,
+      "sha256": "88eb3e8497dd9ce54d25bc1036a376e7f61a35f8afda4d63fdbd5664e66e7170",
+      "etag": "\"5b031dec938bf4b46267458f0d7634ffd2b7bcdc2cd6ed0a1880efd908fe1a92\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Chemistry/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Chemistry/dev-00000-of-00001.parquet",
+      "bytes": 271522,
+      "sha256": "5e469173847c903f52e47eb11e16196403a03f615c633e922ffb6d1c74604383",
+      "etag": "\"60dcc2a2b6da8aaa3246f835c9ae49c0723b757b5c80c6cb40d21837e4c6a7f3\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Clinical_Medicine/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Clinical_Medicine/dev-00000-of-00001.parquet",
+      "bytes": 1478153,
+      "sha256": "9a3c5c77e33dd75a555cb4df5ffbded8e3208d15638acd51531afa1b2e9d57f8",
+      "etag": "\"2eabff65bbf9d3e5a8709f3624ecd2017e62120084ef535fcd4e6a3842aee174\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Computer_Science/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Computer_Science/dev-00000-of-00001.parquet",
+      "bytes": 445699,
+      "sha256": "894efc51b8771bc9e5f409529afb122b0a9d904361e26e8e8dc6f38cc1136cca",
+      "etag": "\"6a162bdef1991e7b04571966a11006115d02d2a673cd9341454af24a7aa73bdc\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Design/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Design/dev-00000-of-00001.parquet",
+      "bytes": 2270785,
+      "sha256": "0caaac97a55b1effa0bb46c15a2e44143d34036c3c9fb4afb962702386d29a62",
+      "etag": "\"a434cd47edbf9ea205b4c01fbb09a7d59fbf83689b172b983fcebbaeacfc441b\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Diagnostics_and_Laboratory_Medicine/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Diagnostics_and_Laboratory_Medicine/dev-00000-of-00001.parquet",
+      "bytes": 2066773,
+      "sha256": "4983e75fd3bcd5b90092d5134f1e096907a5e449f8eb558997793a432533a4cd",
+      "etag": "\"922c780d895e10f2fa2d07eb2c7e90dc1b4ed3773efa9f1b1609560eb9e38555\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Economics/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Economics/dev-00000-of-00001.parquet",
+      "bytes": 173937,
+      "sha256": "3b7a37038b7004ae02a04f96d45e3def66fe7f858492521898c1f598a2ce6453",
+      "etag": "\"a7d820d303f5576cb047bc5042abd93f103566bd5fb1326dd704b05fa4440686\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Electronics/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Electronics/dev-00000-of-00001.parquet",
+      "bytes": 133855,
+      "sha256": "08a7e798808157da1e486d13f756c453c719451a1c7606ee695458210548ee5e",
+      "etag": "\"1587f32d2c73da56667423d7d87d17a1b3c58ba44deba51b40f5926e1aa759a4\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Energy_and_Power/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Energy_and_Power/dev-00000-of-00001.parquet",
+      "bytes": 114417,
+      "sha256": "7dce43662be6b4dce89e982bd5950a24396f1e039d3f0cfba0bf0b710f699b2a",
+      "etag": "\"3520fe6b1d288a644b8367ceb7c4806dfa3d9e780b345a8df598756f961f84d0\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Finance/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Finance/dev-00000-of-00001.parquet",
+      "bytes": 306446,
+      "sha256": "8d43e9808d2a5cef9cec3e0ad115d97cb78451e94bc930655b12d8e9fd6b1399",
+      "etag": "\"a5da64e89ee0f7b915b8d8a3f676c0c127ccee00ac9c14da7935890ba19fa95c\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Geography/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Geography/dev-00000-of-00001.parquet",
+      "bytes": 1504116,
+      "sha256": "2fa8996841e76f3c56a2ff7a103bb4613f349122067250366c6418fedb221528",
+      "etag": "\"716ab646dbd5506d83856fb08aa9b00011a2b7af62bddcb3487a6dee1611ad5e\"",
+      "rows": 5
+    },
+    {
+      "source_name": "History/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/History/dev-00000-of-00001.parquet",
+      "bytes": 1455010,
+      "sha256": "21f97069b04ca772ecdd394b4a1020f81627107a165932aa7ec164ca46cef9a6",
+      "etag": "\"3e770283dc2e448a4c507808abe5810f276c49120bafcefdeece373cec096a85\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Literature/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Literature/dev-00000-of-00001.parquet",
+      "bytes": 2461589,
+      "sha256": "5e081948d5cc4e26beac5cefc7fda954dfe58627bb68d365c1c9c4d99a835e28",
+      "etag": "\"62da5c0b8adfc2ec1c6df347dba8e643af9e2fc902f22ea50659009524a1ed05\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Manage/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Manage/dev-00000-of-00001.parquet",
+      "bytes": 459197,
+      "sha256": "380f342790c1a831917d53355203c2f42d984fece60f592729fb3f63fdd17222",
+      "etag": "\"8588aa25fccb7de78d2e89b10fadd8b837e4b1a5bdd38fabba24632166838b2c\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Marketing/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Marketing/dev-00000-of-00001.parquet",
+      "bytes": 117171,
+      "sha256": "477c417737ace25b7c27c8ab8201eb6240544be868fca1c96eefe6ac35762e08",
+      "etag": "\"d6aed1e0b2d8bf13fda1719772928e521eb874d485ca5397cc05e61eae684eb8\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Materials/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Materials/dev-00000-of-00001.parquet",
+      "bytes": 249589,
+      "sha256": "ec836f8b895f2670efad9d62c1dc44f932beeb08c3a7fed1a5c1de9afb96d997",
+      "etag": "\"999aff104cb07798652ceead011744c162e230852b69eeabe34072170fd02259\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Math/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Math/dev-00000-of-00001.parquet",
+      "bytes": 192229,
+      "sha256": "23e7700cd879000a8b6c394811d03c134fc852f28dc1a4ea968c4115c65981a8",
+      "etag": "\"89e007dd46d6bed138c7fc3e75a6ca61f8be4a089cb4424fdc2e5857bbc17a5d\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Mechanical_Engineering/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Mechanical_Engineering/dev-00000-of-00001.parquet",
+      "bytes": 163548,
+      "sha256": "bcf1e375b9b55c427386fda41541d83908f03c64b1c390ea51713ff7be502e00",
+      "etag": "\"eaf2f98d4a6c25b573c18a78e5bc17a32481baf648f9199e631ad58511422b0b\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Music/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Music/dev-00000-of-00001.parquet",
+      "bytes": 1426304,
+      "sha256": "2bf456f53d90219d68be0de92c70562ba64f9f7d02ecdd911bee1fd2cab94727",
+      "etag": "\"dd29110d02a9c25a1f534fb4435737ad667d934c3c5cbf5d73f7d20dd7dde3a2\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Pharmacy/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Pharmacy/dev-00000-of-00001.parquet",
+      "bytes": 217613,
+      "sha256": "fc5fba0a011ae7608ba31d549b3e0462454c7c6eba797aa81a960a144a6d99b6",
+      "etag": "\"520492a6691a3e942ae7e7d4a521f4b40ab96c1b48c90e9abb6bd64ed5b5e296\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Physics/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Physics/dev-00000-of-00001.parquet",
+      "bytes": 241111,
+      "sha256": "88e3ff6f9e065c5603089ebfe2f7662375f80591993a853729c992eaf90a6227",
+      "etag": "\"9abf363a0b63ee23339b3797ac033fd8d7e99033a81665a8d9f774eb0df14649\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Psychology/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Psychology/dev-00000-of-00001.parquet",
+      "bytes": 615199,
+      "sha256": "ca05d685a88bb5fa5fd75d2c7dd9ed1110c82f94cbdd669b88973d5e8f4853fa",
+      "etag": "\"b5c343a94579202728fb76e936741c777a77e096bbdb12099f2d189e6e9456eb\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Public_Health/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Public_Health/dev-00000-of-00001.parquet",
+      "bytes": 243725,
+      "sha256": "a34c7c5294992dd3bf36b6aebd70f594d12066fae39c561928398a92956fefc3",
+      "etag": "\"7d42d734cfda5425429eaf383dda08e6df95f230c61251cf6a9f5b5001e4bef4\"",
+      "rows": 5
+    },
+    {
+      "source_name": "Sociology/dev-00000-of-00001.parquet",
+      "url": "https://huggingface.co/datasets/MMMU/MMMU/resolve/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68/Sociology/dev-00000-of-00001.parquet",
+      "bytes": 3778112,
+      "sha256": "4aa74a3720ccf92902d2db3e432c79f68519ecd3ff6edaca16a03c4bea907c3f",
+      "etag": "\"9a752f3049088c228955fb7005df5554e937fbc283838685d901872179659717\"",
+      "rows": 5
+    }
+  ],
+  "versions": [
+    {
+      "snapshot_id": "mmmu-dev-f8724745219ce8a377c9ad10",
+      "native_image_references": 158,
+      "index": "parquet-727674583c630c84e0fff58f0bab165d-2dc9e3082e5c46589a7ef04954627d70",
+      "cold_checks": [
+        {
+          "ref": "embedded/2/0.png",
+          "sha256": "cf469a62fb5036cbcace930f1cd3087291846ebd4a3ade5e7f1cd8db4a609ed9",
+          "transferred_bytes": 325367,
+          "source_ref": "remote/0/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/7/0.png",
+          "sha256": "d765920257b0eb538fc8d6ef55336c01db2aaa87fb064d6873edf33f005a0186",
+          "transferred_bytes": 22144229,
+          "source_ref": "remote/1/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/12/0.png",
+          "sha256": "3112c7a8301dd15f5d80d65f20999b71efccc0dbbe7ad7c59c0b9225cb843487",
+          "transferred_bytes": 200814,
+          "source_ref": "remote/2/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/17/0.png",
+          "sha256": "cb91f960666c5179260f62aecc925c3be14e907437f40f1835dd0846cb1ef897",
+          "transferred_bytes": 6304048,
+          "source_ref": "remote/3/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/22/1.png",
+          "sha256": "99ea91f0e7a9235fdb76e2e75ac4be989da21cedc8e7d24a1673db0974b75beb",
+          "transferred_bytes": 1275060,
+          "source_ref": "remote/4/2/image_2/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/27/0.png",
+          "sha256": "962ba72b1da3a93fc47d65fda2b837d9903bcc9218a21b620a1da3f24f5ac76f",
+          "transferred_bytes": 877766,
+          "source_ref": "remote/5/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/32/0.png",
+          "sha256": "3d36f7f71481567faf16cb4bd97700e4db7d2028d36a5b9f7065e819f0bee0b5",
+          "transferred_bytes": 638084,
+          "source_ref": "remote/6/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/37/0.png",
+          "sha256": "80f4297edbd3f83179d5765269e17a2e44cde33f0632bbde56b0f1a220674d03",
+          "transferred_bytes": 326047,
+          "source_ref": "remote/7/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/42/0.png",
+          "sha256": "ca1722fea31e9a3d263628a78ea9da54f05e3c95278743c42da81571ff05e1d6",
+          "transferred_bytes": 1531947,
+          "source_ref": "remote/8/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/47/0.png",
+          "sha256": "37f056c81df509ee30056b3cf3a4b7c61f31c9980f7b01daa127aa48f8ae4875",
+          "transferred_bytes": 500469,
+          "source_ref": "remote/9/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/52/0.png",
+          "sha256": "a4486f87d01f515879f6f2f4fcf9522188027eae4c0fdf18c9ee51efe99fdab1",
+          "transferred_bytes": 2324023,
+          "source_ref": "remote/10/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/57/0.png",
+          "sha256": "9ff99ef2097891a326f50fa6bc8e5f9125cbecd6a74df61aa65a2e39c4d863ee",
+          "transferred_bytes": 2118065,
+          "source_ref": "remote/11/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/62/0.png",
+          "sha256": "8e17521dd5fa2b8de84f82aea16ac846b3731d0eca82cc8568d3f938dd273fac",
+          "transferred_bytes": 228042,
+          "source_ref": "remote/12/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/67/0.png",
+          "sha256": "b281eb4a8ff605b6b2cc75949ed5482ba3bb0ddde6943f626cba0eb23b21cd89",
+          "transferred_bytes": 186483,
+          "source_ref": "remote/13/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/72/0.png",
+          "sha256": "b102184eec20b15cb73b6305aea180edd6645a036c2f8db93f73825d701e031e",
+          "transferred_bytes": 168756,
+          "source_ref": "remote/14/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/77/0.png",
+          "sha256": "e7e3d41473c970c8142e2f633c6ecb5161bd262ef8dae86eb13c2f9bd9b2c8e4",
+          "transferred_bytes": 358616,
+          "source_ref": "remote/15/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/82/0.png",
+          "sha256": "9ed8505d645e6f0c3dd1ee73c38807c92b8c74cc2db074fa505f8566237cbdf8",
+          "transferred_bytes": 1557343,
+          "source_ref": "remote/16/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/87/0.png",
+          "sha256": "1f86a87ed4affee08b66879601ed880fb2a377349a8311a72f435b35a71d4ecb",
+          "transferred_bytes": 1503873,
+          "source_ref": "remote/17/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/91/3.png",
+          "sha256": "433a778a403333149f7fcff48c36658a2eaf3172ce1fb1fceca5cfb5159f95c3",
+          "transferred_bytes": 326229,
+          "source_ref": "remote/18/1/image_4/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/97/0.png",
+          "sha256": "d0eac5adabbb846477f80907bc89af0257fabc39cb6bb510df89c3c98111d3ae",
+          "transferred_bytes": 511479,
+          "source_ref": "remote/19/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/102/0.png",
+          "sha256": "f5c6ce6362e666b6e898887625e9f791fa429606a33f4a08305f64ad1a30669a",
+          "transferred_bytes": 169133,
+          "source_ref": "remote/20/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/107/0.png",
+          "sha256": "88754bbdeb5985d5cfa3826dc13af095c6cf12d7274900c494d9b26264490a74",
+          "transferred_bytes": 302828,
+          "source_ref": "remote/21/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/112/0.png",
+          "sha256": "0ae28ebde25b2504e144f1a1a5fc634b041b5950b62a007ea76108c6d2c9d260",
+          "transferred_bytes": 236986,
+          "source_ref": "remote/22/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/117/0.png",
+          "sha256": "9c9f8892811e46aa3357f2efe87d4cd44360431d9502d00b61d1b2f68d759dd7",
+          "transferred_bytes": 215424,
+          "source_ref": "remote/23/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/121/3.png",
+          "sha256": "c4b4bc2e635a0fbfae9497750ae25760861b581257efdb12e8d363c32769311c",
+          "transferred_bytes": 83863,
+          "source_ref": "remote/24/1/image_4/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/127/0.png",
+          "sha256": "b1317b1d5bd2b5938179f9669ab041477ee56ff9d5f3264b130ddfcd4c0c57bc",
+          "transferred_bytes": 182269,
+          "source_ref": "remote/25/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/132/0.png",
+          "sha256": "2b620986cdc96b0a0d2cde4d7dcac6e8904ab143a8a583e89dc48e6fe247b2ce",
+          "transferred_bytes": 293647,
+          "source_ref": "remote/26/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/137/0.png",
+          "sha256": "11fee5ccd1ef91058477e52e641a06b4ca4c173892f4a5ccb836870345aa2723",
+          "transferred_bytes": 654398,
+          "source_ref": "remote/27/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/142/0.png",
+          "sha256": "551ead0ba2baa1f77411c3673d6e202a5d199ab3b869d3bdf3d253449b6a763a",
+          "transferred_bytes": 298290,
+          "source_ref": "remote/28/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/147/0.png",
+          "sha256": "ccf242856452fc4250df7fed29e0766f3a30e598431755a4014f1ac931481c76",
+          "transferred_bytes": 3831134,
+          "source_ref": "remote/29/2/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/0/0.png",
+          "sha256": "55ef68f52b6db27e7158a2c2d3268a4516e3d26b263173324263f0721691c282",
+          "transferred_bytes": 0,
+          "source_ref": "remote/0/0/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/78/0.png",
+          "sha256": "32a63fd026a752a200850397dae150a296aca8f5ead84049cf4429825c51022f",
+          "transferred_bytes": 0,
+          "source_ref": "remote/15/3/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        },
+        {
+          "ref": "embedded/149/0.png",
+          "sha256": "863948fa33d4ee5b93a4cd824d3ac55fea42c984e99baa2484904c4b2d8ab35c",
+          "transferred_bytes": 0,
+          "source_ref": "remote/29/4/image_1/0.png",
+          "media_type": "image/png",
+          "integrity": "Native original image SHA-256 verified; remote consistency is ETag-bound."
+        }
+      ]
+    }
+  ],
+  "total_verification_transfer_bytes": 49674742,
+  "native_index_bytes": 32768,
+  "preview_bytes_upper_bound": 50519539,
+  "source_paths_eligible": [
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/06f953a5c00b260279a118fbebcdc96b62fab897a8602d4f9188e7182438e735.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/3372e6f187bcb54ba8c35590eddb18ccbf478c891784d84169454de70498f9e9.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/aa6eeadc3391bbf38aec288cb6b5b3ab127b5f07622504b711130ebd61449e3e.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/cefafd4231053d5a18f02b8ae592cbe173d446aa383b98d3bf4345e3209d114e.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/2076245171d6d78332ca15d9194a97a062e1a32474fce01292bb15eddf7225b7.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/4b89316791078ec1803d413986ea9ff2e3fe9232bbc62b7c535b9578ab5c0253.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/88eb3e8497dd9ce54d25bc1036a376e7f61a35f8afda4d63fdbd5664e66e7170.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/5e469173847c903f52e47eb11e16196403a03f615c633e922ffb6d1c74604383.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/9a3c5c77e33dd75a555cb4df5ffbded8e3208d15638acd51531afa1b2e9d57f8.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/894efc51b8771bc9e5f409529afb122b0a9d904361e26e8e8dc6f38cc1136cca.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/0caaac97a55b1effa0bb46c15a2e44143d34036c3c9fb4afb962702386d29a62.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/4983e75fd3bcd5b90092d5134f1e096907a5e449f8eb558997793a432533a4cd.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/3b7a37038b7004ae02a04f96d45e3def66fe7f858492521898c1f598a2ce6453.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/08a7e798808157da1e486d13f756c453c719451a1c7606ee695458210548ee5e.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/7dce43662be6b4dce89e982bd5950a24396f1e039d3f0cfba0bf0b710f699b2a.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/8d43e9808d2a5cef9cec3e0ad115d97cb78451e94bc930655b12d8e9fd6b1399.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/2fa8996841e76f3c56a2ff7a103bb4613f349122067250366c6418fedb221528.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/21f97069b04ca772ecdd394b4a1020f81627107a165932aa7ec164ca46cef9a6.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/5e081948d5cc4e26beac5cefc7fda954dfe58627bb68d365c1c9c4d99a835e28.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/380f342790c1a831917d53355203c2f42d984fece60f592729fb3f63fdd17222.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/477c417737ace25b7c27c8ab8201eb6240544be868fca1c96eefe6ac35762e08.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/ec836f8b895f2670efad9d62c1dc44f932beeb08c3a7fed1a5c1de9afb96d997.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/23e7700cd879000a8b6c394811d03c134fc852f28dc1a4ea968c4115c65981a8.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/bcf1e375b9b55c427386fda41541d83908f03c64b1c390ea51713ff7be502e00.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/2bf456f53d90219d68be0de92c70562ba64f9f7d02ecdd911bee1fd2cab94727.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/fc5fba0a011ae7608ba31d549b3e0462454c7c6eba797aa81a960a144a6d99b6.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/88e3ff6f9e065c5603089ebfe2f7662375f80591993a853729c992eaf90a6227.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/ca05d685a88bb5fa5fd75d2c7dd9ed1110c82f94cbdd669b88973d5e8f4853fa.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/a34c7c5294992dd3bf36b6aebd70f594d12066fae39c561928398a92956fefc3.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/4aa74a3720ccf92902d2db3e432c79f68519ecd3ff6edaca16a03c4bea907c3f.parquet"
+  ],
+  "source_paths_retired": [
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/06f953a5c00b260279a118fbebcdc96b62fab897a8602d4f9188e7182438e735.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/3372e6f187bcb54ba8c35590eddb18ccbf478c891784d84169454de70498f9e9.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/aa6eeadc3391bbf38aec288cb6b5b3ab127b5f07622504b711130ebd61449e3e.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/cefafd4231053d5a18f02b8ae592cbe173d446aa383b98d3bf4345e3209d114e.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/2076245171d6d78332ca15d9194a97a062e1a32474fce01292bb15eddf7225b7.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/4b89316791078ec1803d413986ea9ff2e3fe9232bbc62b7c535b9578ab5c0253.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/88eb3e8497dd9ce54d25bc1036a376e7f61a35f8afda4d63fdbd5664e66e7170.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/5e469173847c903f52e47eb11e16196403a03f615c633e922ffb6d1c74604383.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/9a3c5c77e33dd75a555cb4df5ffbded8e3208d15638acd51531afa1b2e9d57f8.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/894efc51b8771bc9e5f409529afb122b0a9d904361e26e8e8dc6f38cc1136cca.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/0caaac97a55b1effa0bb46c15a2e44143d34036c3c9fb4afb962702386d29a62.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/4983e75fd3bcd5b90092d5134f1e096907a5e449f8eb558997793a432533a4cd.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/3b7a37038b7004ae02a04f96d45e3def66fe7f858492521898c1f598a2ce6453.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/08a7e798808157da1e486d13f756c453c719451a1c7606ee695458210548ee5e.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/7dce43662be6b4dce89e982bd5950a24396f1e039d3f0cfba0bf0b710f699b2a.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/8d43e9808d2a5cef9cec3e0ad115d97cb78451e94bc930655b12d8e9fd6b1399.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/2fa8996841e76f3c56a2ff7a103bb4613f349122067250366c6418fedb221528.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/21f97069b04ca772ecdd394b4a1020f81627107a165932aa7ec164ca46cef9a6.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/5e081948d5cc4e26beac5cefc7fda954dfe58627bb68d365c1c9c4d99a835e28.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/380f342790c1a831917d53355203c2f42d984fece60f592729fb3f63fdd17222.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/477c417737ace25b7c27c8ab8201eb6240544be868fca1c96eefe6ac35762e08.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/ec836f8b895f2670efad9d62c1dc44f932beeb08c3a7fed1a5c1de9afb96d997.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/23e7700cd879000a8b6c394811d03c134fc852f28dc1a4ea968c4115c65981a8.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/bcf1e375b9b55c427386fda41541d83908f03c64b1c390ea51713ff7be502e00.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/2bf456f53d90219d68be0de92c70562ba64f9f7d02ecdd911bee1fd2cab94727.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/fc5fba0a011ae7608ba31d549b3e0462454c7c6eba797aa81a960a144a6d99b6.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/88e3ff6f9e065c5603089ebfe2f7662375f80591993a853729c992eaf90a6227.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/ca05d685a88bb5fa5fd75d2c7dd9ed1110c82f94cbdd669b88973d5e8f4853fa.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/a34c7c5294992dd3bf36b6aebd70f594d12066fae39c561928398a92956fefc3.parquet",
+    "/home/bitwise/Documents/vibe/DatasetAtlas/work/prepared/mmmu-dev/f8724745219ce8a377c9ad1055f195aec59a6cc5d59ab3c285bc8ac0f9456cbf/sources/4aa74a3720ccf92902d2db3e432c79f68519ecd3ff6edaca16a03c4bea907c3f.parquet"
+  ],
+  "freed_source_allocated_bytes": 57016320,
+  "integrity": "Complete native Parquet SHA-256 and every canonical image SHA-256 retained. Preview originals pinned locally. Retrieved originals equal their measured native SHA-256.",
+  "transfer_measurement": "One-byte source probes plus actual range payloads; validated ETag-bound cache hits transfer zero bytes. Verification can reuse those cached ranges."
+}

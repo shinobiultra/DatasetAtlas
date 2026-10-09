@@ -1,0 +1,108 @@
+schema_version: '1.0'
+id: paper-164d7c221452ffec-unnamed-cfd-morph-collection
+name: unnamed CFD morph collection
+aliases: []
+description: Ghate 30,000 Chicago Face Database morphs.
+paper_ids:
+- paper-164d7c221452ffec
+release: unresolved
+adapter: structured
+adapter_config: {}
+coverage:
+  identity: candidate
+  source: unverified
+  access: gated
+  adapter: not_started
+  preview: none
+  complete_data: unimplemented
+  publication: not_reviewed
+  preview_count: 0
+  unit: example
+  blockers:
+  - Author request or agreement is required for the described data; no public archive
+    was verified.
+  - Adapter and preview are not implemented.
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/kshitishghate/bias_prop
+  note: CFD original terms prohibit redistribution without written consent; paper
+    explicitly cites copyright for withholding morph samples
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-f40df4e47ae7fde9b3dd
+  paper_id: paper-164d7c221452ffec
+  source_file_hash: a89bc42d5e26b03e424ef9aa3ecc43d7857a7ef0deb8c0ede544d5b94aa625d4
+  page: 14
+  role: derived collection
+  excerpt: ' each morph. This produces to agreed upon terms. All personally identifiable
+    a dataset of 30,000 morphed images with corre- information is anonymised (Ma et
+    al., 2015) before sponding embeddings, each of which is distinct and the dataset
+    is '
+  review_scope: specific_page_evidence_checked
+  paper_full_review_complete: true
+- kind: corpus_mention
+  evidence_id: evidence-8c77913aa4438da27bdd
+  paper_id: paper-164d7c221452ffec
+  source_file_hash: a89bc42d5e26b03e424ef9aa3ecc43d7857a7ef0deb8c0ede544d5b94aa625d4
+  page: 14
+  role: derived evaluation collection
+  excerpt: es to agreed upon terms. All personally identifiable a dataset of 30,000
+    morphed images with corre- information is anonymised (Ma et al., 2015) before
+    sponding embeddings, each of which is distinct a
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/kshitishghate/bias_prop
+  note: Ghate 30,000 Chicago Face Database morphs
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: explicit_copyright_request_only_release_unverified
+- kind: source_audit_release
+  url: https://github.com/kshitishghate/bias_prop
+  note: Paper p14 describes 30,000 morphed CFD images and says copyright prevented
+    sharing samples in appendix but author can provide on request; public bias_prop
+    repo contains template/group words, not morph images
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: explicit_copyright_request_only_release_unverified
+- kind: source_audit_access
+  url: https://github.com/kshitishghate/bias_prop
+  observation: author_request_possible_no_public_archive_verified
+  requires_external_access_step: true
+  download_or_media_inspected: false
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: explicit_copyright_request_only_release_unverified
+- kind: source_audit_rights
+  url: https://github.com/kshitishghate/bias_prop
+  note: CFD original terms prohibit redistribution without written consent; paper
+    explicitly cites copyright for withholding morph samples
+  publication_decision: media_not_approved
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: explicit_copyright_request_only_release_unverified
+- kind: source_audit_related_links
+  urls:
+  - https://www.chicagofaces.org/
+  note: Additional official or author evidence; not a selected release.
+  audit_file: work/sources/source-audit-corpus.json
+  checked_on: '2026-09-22'
+  source_identity_status: explicit_copyright_request_only_release_unverified
+- kind: source_audit_release
+  checked_on: '2026-10-06'
+  url: https://github.com/kshitishghate/bias_prop/tree/c0e4a922124d0c28e85be7a4d9753ac317028450
+  note: The authors' repository states that the Chicago Face Database can be downloaded
+    only from its official website and contains no morphed images or the scaled CFD
+    dataset; its README says the preprocessing code that creates the scaled CFD dataset
+    will be added later.
+  source_identity_status: derived_collection_not_released
+- kind: source_audit_refresh
+  url: https://github.com/kshitishghate/bias_prop
+  probe_status: reachable
+  http_status: 200
+  checked_on: '2026-10-08'
+  note: 'unchanged: a reachable page says nothing about whether the files are public, so the prior state
+    stands. 3 URLs probed (HEAD only): 3 reachable.'
+source_url: https://github.com/kshitishghate/bias_prop

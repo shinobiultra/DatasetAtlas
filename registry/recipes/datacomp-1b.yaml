@@ -1,0 +1,23 @@
+release: 086ebeee20d4cc3b3e7c05ae703fcf278ae3a759-first-metadata-shard
+adapter: structured
+expected_count: 532229
+scope: All 532229 native metadata records from the first lexicographic Parquet shard,
+  0035af9f90f581816acf269df5eb37ad.parquet, at the pinned author revision. Caption,
+  original URL/dimensions, CLIP scores, face boxes and SHA-256 fields remain native.
+  This explicitly bounded shard is a subset of DataComp-1B; the other 2663 shards,
+  NPZ embeddings, linked source images and paper-used subset are not prepared. The
+  full-source acquisition plan is retained in registry/source-plans/datacomp-1b-all-shards.yaml.
+source_url: https://huggingface.co/datasets/mlfoundations/datacomp_1b
+adapter_config:
+  mapping:
+    id: uid
+    text: text
+  sequential_index: true
+  media_scope: partial
+files:
+- source_name: 0035af9f90f581816acf269df5eb37ad.parquet
+  url: https://huggingface.co/datasets/mlfoundations/datacomp_1b/resolve/086ebeee20d4cc3b3e7c05ae703fcf278ae3a759/0035af9f90f581816acf269df5eb37ad.parquet
+  bytes: 130506429
+  sha256: e3633f90e78b827c8b667c88b8a1dce542e72feacc85be9e27f4706ed71fe1ce
+  format: parquet
+  config_key: path

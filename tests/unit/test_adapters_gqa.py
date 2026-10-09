@@ -75,3 +75,65 @@ def test_gqa_rejects_unsafe_asset_reference(tmp_path: Path):
     source = adapter.prepare(adapter.plan(1, 100_000))
     with pytest.raises(ValueError, match="invalid GQA image reference"):
         adapter.resolve_asset(source, "../images/0.jpg")
+
+
+class _FakeRange:
+    """Local stand-in for an ETag-bound range reader; records every ranged read."""
+    def __init__(self, path: Path, log: list):
+        self._stream, self.size, self.log = path.open("rb"), path.stat().st_size, log
+    def readable(self): return True
+    def seekable(self): return True
+    def tell(self): return self._stream.tell()
+    def seek(self, offset, whence=0): return self._stream.seek(offset, whence)
+    def read(self, size=-1):
+        data = self._stream.read(size); self.log.append(len(data)); return data
+    def close(self): self._stream.close()
+    def __enter__(self): return self
+    def __exit__(self, *exc): self.close()
+
+
+def _remote_fixture(tmp_path: Path, monkeypatch, *, missing_image: bool = False):
+    from dataset_atlas.adapters.remote_media import RemoteZip
+    item = _fixture(tmp_path, missing_image=missing_image)
+    config = item.adapter_config
+    paths = {"q": Path(config["questions_archive"]), "i": Path(config["images_archive"])}
+    unique = tmp_path.name
+    for key in ("questions", "images"):
+        path = paths["q" if key == "questions" else "i"]
+        config[f"remote_{key}"] = {"url": f"https://example.com/{unique}/{key}.zip", "bytes": path.stat().st_size,
+                                   "etag": f'"{key}-etag"', "allowed_hosts": ["example.com"]}
+        del config[f"{key}_archive"], config[f"{key}_sha256"]
+    config["remote_cache_root"] = str(tmp_path / "remote-cache")
+    log: list = []
+    monkeypatch.setattr(RemoteZip, "reader", lambda self, budget: _FakeRange(paths["q" if self.spec["url"].endswith("/questions.zip") else "i"], log))
+    return item, log
+
+
+def test_gqa_reads_questions_and_images_by_range_without_any_local_archive(tmp_path: Path, monkeypatch):
+    item, log = _remote_fixture(tmp_path, monkeypatch)
+    item.adapter_config["media_scope"] = "on_demand_unverified"
+    adapter = get_adapter(item)
+    assert adapter.probe().exists
+    source = adapter.prepare(adapter.plan(100, 200_000))
+    batch = adapter.iter_records(source, cursor="100", limit=25)
+    assert len(batch.records) == 25 and batch.records[0].question == "What is 100?"
+    media = adapter.resolve_asset(source, batch.records[0].assets[0].uri)
+    assert media.data == b"\xff\xd8\xff100"
+    index = adapter._index()
+    assert index["source_sha256"] == {"questions": 'remote-etag:"questions-etag"', "images": 'remote-etag:"images-etag"'}
+    assert index["join_report"]["missing_images"] == 0 and log
+
+
+def test_gqa_remote_join_still_fails_when_a_question_image_is_absent(tmp_path: Path, monkeypatch):
+    item, _ = _remote_fixture(tmp_path, monkeypatch, missing_image=True)
+    item.adapter_config["media_scope"] = "on_demand_unverified"
+    adapter = get_adapter(item)
+    with pytest.raises(ValueError, match="no original image"):
+        adapter.prepare(adapter.plan(100, 100_000))
+
+
+def test_gqa_remote_specification_must_pin_a_strong_etag(tmp_path: Path, monkeypatch):
+    item, _ = _remote_fixture(tmp_path, monkeypatch)
+    del item.adapter_config["remote_images"]["etag"]
+    with pytest.raises(ValueError, match="strong ETag"):
+        get_adapter(item).plan(1, 1000)

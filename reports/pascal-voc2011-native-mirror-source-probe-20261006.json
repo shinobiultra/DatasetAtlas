@@ -1,0 +1,25 @@
+{
+  "checked_at_utc": "2026-10-06T07:41:53.850692+00:00",
+  "probes": [
+    {
+      "url": "https://thor.robots.ox.ac.uk/pascal/VOC/voc2011/VOCtrainval_25-May-2011.tar",
+      "status_code": 206,
+      "final_host": "thor.robots.ox.ac.uk",
+      "content_range": "bytes 0-0/1765686784",
+      "etag": "\"68c2ea02-693e3e00\"",
+      "received_bytes": 1
+    },
+    {
+      "url": "https://host.robots.ox.ac.uk/pascal/VOC/voc2011/VOCtrainval_25-May-2011.tar",
+      "error_type": "ConnectError"
+    },
+    {
+      "url": "https://huggingface.co/heatingma/pygmtools/resolve/e83ca92a421e0f5431472f9bfd8cb4d6594fdb74/VOCtrainval_25-May-2011.tar?download=true",
+      "status_code": 206,
+      "final_host": "us.aws.cdn.hf.co",
+      "content_range": "bytes 0-0/1765686784",
+      "etag": "\"f74c7aeb7e059ce553ffaf7162101a61d87bdd130a7e6e03d9dc91da5f9bc6c0\"",
+      "received_bytes": 1
+    }
+  ]
+}

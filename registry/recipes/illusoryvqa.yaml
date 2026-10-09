@@ -1,0 +1,240 @@
+release: official-collection-e3f834dabc5610de
+source_url: https://github.com/IllusoryVQA/IllusoryVQA
+adapter: structured_collection
+expected_count: 26121
+scope: All native CSV-indexed train/test rows in MNIST_train, MNIST_test, FashionMnist_train,
+  FashionMnist_test, IllusionAnimals_train, IllusionAnimals_test, IllusionChar_train,
+  IllusionChar_test. Each example keeps all released image conditions and their condition-specific
+  targets. Missing training control counterparts are explicit. Unindexed duplicate-name
+  image files and generation prompt pools are retained upstream, not counted as annotated
+  examples. This is the original author-generated dataset, not Atlas-generated replacements.
+files:
+- source_name: MNIST_train.csv
+  url: https://huggingface.co/datasets/VQA-Illusion/MNIST_train/resolve/fdd191d5183fb50f32c3ebee9e506438f53a4b07/df_data.csv
+  bytes: 338262
+  sha256: 65ecfeda3dcedcee5b3469042582d894ebcb95c3df00c3b17405ed85a0e1ae28
+  format: csv
+  config_key: mnist_train_metadata
+- source_name: MNIST_test.csv
+  url: https://huggingface.co/datasets/VQA-Illusion/MNIST_test/resolve/81ad1bbc995810369a5d3b4aceb84b882b55ced1/df_data.csv
+  bytes: 94772
+  sha256: 647c690ba3f4c180e7e775c850fe6981b0f2ac281479c1957ec6d6e4d2bec80a
+  format: csv
+  config_key: mnist_test_metadata
+- source_name: FashionMnist_train.csv
+  url: https://huggingface.co/datasets/VQA-Illusion/FashionMnist_train/resolve/855284cb68c24ceee23701cb8f2c6ad9ae02b6ff/df_data.csv
+  bytes: 322321
+  sha256: 1ff5c374175cf2d720b1b9ff26f3644bb71d824983a0405705cff9415b0e2227
+  format: csv
+  config_key: fashionmnist_train_metadata
+- source_name: FashionMnist_test.csv
+  url: https://huggingface.co/datasets/VQA-Illusion/FashionMnist_test/resolve/820c92f12fdb0a89fbb49169b7aeeb441040adaa/df_data.csv
+  bytes: 106238
+  sha256: 992316d8fbbb7a6415b942114d15f24f970def47c77109ab49aa0e6a16152428
+  format: csv
+  config_key: fashionmnist_test_metadata
+- source_name: IllusionAnimals_train.csv
+  url: https://huggingface.co/datasets/VQA-Illusion/IllusionAnimals_train/resolve/2d62a1b9d1bd1a170d3bf29e32e094d9e38965c9/df_data.csv
+  bytes: 328044
+  sha256: 6431f65cd6bf18218e6cdaabc11b62ae790f36843d5706d0486852a10d74b18d
+  format: csv
+  config_key: illusionanimals_train_metadata
+- source_name: IllusionAnimals_test.csv
+  url: https://huggingface.co/datasets/VQA-Illusion/IllusionAnimals_test/resolve/33dd751204fbf56fb49179a6ab2e87033d08aedf/df_data.csv
+  bytes: 98831
+  sha256: ee4810a863e8b0ec51c3de9918230328dba5edda5176798240c5d15556cbd033
+  format: csv
+  config_key: illusionanimals_test_metadata
+- source_name: IllusionChar_train.csv
+  url: https://huggingface.co/datasets/VQA-Illusion/IllusionChar_train/resolve/63082f0a4ced6f20baf7c3be8a8e647f3633acf5/df_data.csv
+  bytes: 894001
+  sha256: 6d1df6536ffa0187fbfac6f85a948574845ea2fd68ff76aa774e7db5f5dd3b63
+  format: csv
+  config_key: illusionchar_train_metadata
+- source_name: IllusionChar_test.csv
+  url: https://huggingface.co/datasets/VQA-Illusion/IllusionChar_test/resolve/f55172cd96fa5778d37b98b846b9835fb9a7b6ce/df_data.csv
+  bytes: 290274
+  sha256: 8d4689b4812d4f7193806e6f353a02c12799082006fc4236526b279a894f1cf0
+  format: csv
+  config_key: illusionchar_test_metadata
+allowed_hosts: &id001
+- huggingface.co
+- cdn-lfs.huggingface.co
+- cdn-lfs-us-1.huggingface.co
+- cdn-lfs-eu-1.huggingface.co
+- cas-bridge.xethub.hf.co
+- us.aws.cdn.hf.co
+- eu.aws.cdn.hf.co
+adapter_config:
+  annotations:
+  - path_key: mnist_train_metadata
+    format: csv
+    split: MNIST_train
+    media_prefix: VQA-Illusion/MNIST_train/resolve/fdd191d5183fb50f32c3ebee9e506438f53a4b07
+    media_variants:
+    - template: '{_prefix}/ill_images/{image_name}.jpg'
+      condition: illusion_or_native_training_control
+      target_field: label
+    - template: '{_prefix}/raw_images/{image_name}.jpg'
+      condition: source_condition
+      target_field: label
+      absent_when:
+        field: label
+        values:
+        - No Illusion
+        - No illusion
+        - no illusion
+        - ''
+  - path_key: mnist_test_metadata
+    format: csv
+    split: MNIST_test
+    media_prefix: VQA-Illusion/MNIST_test/resolve/81ad1bbc995810369a5d3b4aceb84b882b55ced1
+    media_variants:
+    - template: '{_prefix}/ill_images/{image_name}.jpg'
+      condition: illusion_or_native_training_control
+      target_field: label
+    - template: '{_prefix}/illusion_images_filtered/{image_name}.jpg'
+      condition: filtered_illusion
+      target_field: label
+    - template: '{_prefix}/raw_images/{image_name}.jpg'
+      condition: source_condition
+      target_field: label
+    - template: '{_prefix}/illusionless_images/{image_name}.jpg'
+      condition: illusionless
+      target: No illusion
+    - template: '{_prefix}/illusionless_images_filtered/{image_name}.jpg'
+      condition: filtered_illusionless
+      target: No illusion
+  - path_key: fashionmnist_train_metadata
+    format: csv
+    split: FashionMnist_train
+    media_prefix: VQA-Illusion/FashionMnist_train/resolve/855284cb68c24ceee23701cb8f2c6ad9ae02b6ff
+    media_variants:
+    - template: '{_prefix}/ill_images/{image_name}.jpg'
+      condition: illusion_or_native_training_control
+      target_field: label
+    - template: '{_prefix}/raw_images/{image_name}.jpg'
+      condition: source_condition
+      target_field: label
+      absent_when:
+        field: label
+        values:
+        - No Illusion
+        - No illusion
+        - no illusion
+        - ''
+  - path_key: fashionmnist_test_metadata
+    format: csv
+    split: FashionMnist_test
+    media_prefix: VQA-Illusion/FashionMnist_test/resolve/820c92f12fdb0a89fbb49169b7aeeb441040adaa
+    media_variants:
+    - template: '{_prefix}/ill_images/{image_name}.jpg'
+      condition: illusion_or_native_training_control
+      target_field: label
+    - template: '{_prefix}/illusion_images_filtered/{image_name}.jpg'
+      condition: filtered_illusion
+      target_field: label
+    - template: '{_prefix}/raw_images/{image_name}.jpg'
+      condition: source_condition
+      target_field: label
+    - template: '{_prefix}/illusionless_images/{image_name}.jpg'
+      condition: illusionless
+      target: No illusion
+    - template: '{_prefix}/illusionless_images_filtered/{image_name}.jpg'
+      condition: filtered_illusionless
+      target: No illusion
+  - path_key: illusionanimals_train_metadata
+    format: csv
+    split: IllusionAnimals_train
+    media_prefix: VQA-Illusion/IllusionAnimals_train/resolve/2d62a1b9d1bd1a170d3bf29e32e094d9e38965c9
+    media_variants:
+    - template: '{_prefix}/ill_images/{image_name}.jpg'
+      condition: illusion_or_native_training_control
+      target_field: label
+    - template: '{_prefix}/raw_images/{image_name}.jpg'
+      condition: source_condition
+      target_field: label
+      absent_when:
+        field: label
+        values:
+        - No Illusion
+        - No illusion
+        - no illusion
+        - ''
+  - path_key: illusionanimals_test_metadata
+    format: csv
+    split: IllusionAnimals_test
+    media_prefix: VQA-Illusion/IllusionAnimals_test/resolve/33dd751204fbf56fb49179a6ab2e87033d08aedf
+    media_variants:
+    - template: '{_prefix}/ill_images/{image_name}.jpg'
+      condition: illusion_or_native_training_control
+      target_field: label
+    - template: '{_prefix}/illusion_images_filtered/{image_name}.jpg'
+      condition: filtered_illusion
+      target_field: label
+    - template: '{_prefix}/raw_images/{image_name}.jpg'
+      condition: source_condition
+      target_field: label
+    - template: '{_prefix}/illusionless_images/{image_name}.jpg'
+      condition: illusionless
+      target: No illusion
+    - template: '{_prefix}/illusionless_images_filtered/{image_name}.jpg'
+      condition: filtered_illusionless
+      target: No illusion
+  - path_key: illusionchar_train_metadata
+    format: csv
+    split: IllusionChar_train
+    media_prefix: VQA-Illusion/IllusionChar_train/resolve/63082f0a4ced6f20baf7c3be8a8e647f3633acf5
+    media_variants:
+    - template: '{_prefix}/illusion_images/{image_name}.jpg'
+      condition: illusion_or_native_training_control
+      target_field: label
+    - template: '{_prefix}/illusion_images_filtered/{image_name}.jpg'
+      condition: filtered_illusion
+      target_field: label
+      absent_when:
+        field: label
+        values:
+        - No Illusion
+        - No illusion
+        - no illusion
+        - ''
+    - template: '{_prefix}/raw_images/{image_name}.jpg'
+      condition: source_condition
+      target_field: label
+      absent_when:
+        field: label
+        values:
+        - No Illusion
+        - No illusion
+        - no illusion
+        - ''
+  - path_key: illusionchar_test_metadata
+    format: csv
+    split: IllusionChar_test
+    media_prefix: VQA-Illusion/IllusionChar_test/resolve/f55172cd96fa5778d37b98b846b9835fb9a7b6ce
+    media_variants:
+    - template: '{_prefix}/illusion_images/{image_name}.png'
+      condition: illusion_or_native_training_control
+      target_field: label
+    - template: '{_prefix}/illusion_images_filtered/{image_name}.png'
+      condition: filtered_illusion
+      target_field: label
+    - template: '{_prefix}/raw_images/{image_name}.png'
+      condition: source_condition
+      target_field: label
+    - template: '{_prefix}/illusionless_images/{image_name}.png'
+      condition: illusionless
+      target: No illusion
+    - template: '{_prefix}/illusionless_images_filtered/{image_name}.png'
+      condition: filtered_illusionless
+      target: No illusion
+  mapping:
+    id: image_name
+    text: Pprompt
+  media_inventory_path: registry/source-manifests/illusoryvqa-media.json
+  media_inventory_sha256: e3f834dabc5610de661b7e6fef7472b35c738548944c82dd39cb29ff0be7f731
+  media_base_url: https://huggingface.co/datasets
+  media_allowed_hosts: *id001
+  remote_cache_root: work/media-cache/illusoryvqa
+  remote_cache_bytes: 2000000000

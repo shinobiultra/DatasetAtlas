@@ -1,0 +1,311 @@
+import io,json,hashlib,zipfile
+from pathlib import Path
+from PIL import Image
+import pytest
+from dataset_atlas.models import Dataset
+from dataset_atlas.adapters.structured_collection import StructuredCollectionAdapter
+
+
+def fixture(tmp_path,monkeypatch,missing=False):
+    output=io.BytesIO();Image.new('RGB',(8,6),'red').save(output,format='PNG');image=output.getvalue()
+    path=tmp_path/'media.zip'
+    with zipfile.ZipFile(path,'w') as z:z.writestr('train/image.png',image)
+    annotation=tmp_path/'data.json';annotation.write_text(json.dumps({'data':[{'id':1,'question':'Which colour?','image':'absent.png' if missing else 'image.png','answers':['red']},{'id':2,'question':'Same image?','image':'image.png'}]}))
+    dataset=Dataset(id='questions',name='Questions',release='r',snapshot_id='s',adapter='structured_collection',adapter_config={
+        'train_path':str(annotation),'annotations':[{'path_key':'train_path','records_key':'data','split':'train','media_template':'train/{image}','media_archive':'images'}],
+        'mapping':{'id':'id','question':'question'},'source_files':[{'path':str(annotation),'sha256':hashlib.sha256(annotation.read_bytes()).hexdigest()}],
+        'remote_archives':{'images':{'etag':'"release"'}}})
+    class Remote(io.BytesIO):bytes_fetched=50
+    monkeypatch.setattr(StructuredCollectionAdapter,'_remote',lambda self,key,budget:Remote(path.read_bytes()))
+    return StructuredCollectionAdapter(dataset),image,annotation
+
+
+def test_complete_join_preserves_repeated_images_and_original_answers(tmp_path,monkeypatch):
+    adapter,image,_=fixture(tmp_path,monkeypatch);source=adapter.prepare(adapter.plan(1,10000))
+    validation=adapter.validate_media(10000);assert validation['referenced_images']==1
+    first=adapter.iter_records(source);second=adapter.iter_records(source,first.next_cursor)
+    assert first.records[0].id!=second.records[0].id
+    assert first.records[0].asset_ids==second.records[0].asset_ids
+    assert first.records[0].source['answers']==['red'] and 'answers' not in second.records[0].source
+    import zlib
+    assert first.records[0].assets[0].metadata['zip_crc32']==zlib.crc32(image)
+    assert first.records[0].assets[0].metadata['native_member_bytes']==len(image)
+    assert adapter.resolve_asset(source,second.records[0].assets[0].uri).data==image
+    assert adapter.count==2 and second.next_cursor is None
+
+
+def test_missing_images_changed_annotations_and_output_bound(tmp_path,monkeypatch):
+    adapter,_,annotation=fixture(tmp_path,monkeypatch,missing=True)
+    with pytest.raises(ValueError,match='missing ZIP'):adapter.validate_media(10000)
+    adapter,image,annotation=fixture(tmp_path,monkeypatch)
+    source=adapter.prepare(adapter.plan(1,1))
+    with pytest.raises(ValueError,match='byte budget'):adapter.resolve_asset(source,'zip/images/train/image.png')
+    annotation.write_text('[]')
+    with pytest.raises(ValueError,match='checksum'):adapter.prepare(adapter.plan(1,10000))
+
+
+def test_fresh_adapter_preserves_nonordinal_source_ids(tmp_path,monkeypatch):
+    adapter,_,_=fixture(tmp_path,monkeypatch)
+    dataset=adapter.dataset.model_copy(deep=True)
+    source=adapter.prepare(adapter.plan(2,10000));first=adapter.iter_records(source).records
+    assert dataset.adapter_config['mapping']['id']=='id'
+    assert adapter.dataset.adapter_config['mapping']['id']=='id'
+    fresh=StructuredCollectionAdapter(adapter.dataset)
+    again=fresh.iter_records(fresh.prepare(fresh.plan(2,10000))).records
+    assert [r.id for r in first]==[r.id for r in again]
+    assert first[0].source['_atlas_origin']['identity']=='train:1'
+
+
+def test_declared_native_missing_media_is_explicit_and_exact(tmp_path,monkeypatch):
+    adapter,_,_=fixture(tmp_path,monkeypatch,missing=True)
+    adapter.config['declared_absent_media']=['zip/images/train/absent.png']
+    validation=adapter.validate_media(10000)
+    assert validation['absent_media_references']==1
+    source=adapter.prepare(adapter.plan(2,10000))
+    records=adapter.iter_records(source).records
+    assert records[0].assets[0].uri is None
+    assert records[0].assets[0].metadata['source_path']=='zip/images/train/absent.png'
+    assert records[0].assets[0].metadata['availability']=='absent_from_pinned_release'
+    adapter.config['declared_absent_media'].append('zip/images/train/image.png')
+    with pytest.raises(ValueError,match='differs from native ZIP'):adapter.validate_media(10000)
+
+
+def test_parquet_frame_lists_preserve_native_order_and_bound_decoding(tmp_path):
+    import pyarrow as pa
+    import pyarrow.parquet as pq
+    path=tmp_path/'frames.parquet'
+    pq.write_table(pa.Table.from_pylist([{'id':'q1','question':'Which order?','images':['frames/1.jpg','frames/0.jpg'],'answer':'forward','native_index':3}]),path)
+    dataset=Dataset(id='frames',name='Frames',release='r',snapshot_id='s',adapter='structured_collection',adapter_config={
+        'path':str(path),'annotations':[{'path_key':'path','format':'parquet','split':'val','media_paths_field':'images','media_archive':'images'}],
+        'mapping':{'id':'id','question':'question'},'remote_archives':{'images':{'etag':'"r"'}}})
+    adapter=StructuredCollectionAdapter(dataset)
+    record=adapter.iter_records(adapter.prepare(adapter.plan(1,10000))).records[0]
+    assert [a.uri for a in record.assets]==['zip/images/frames/1.jpg','zip/images/frames/0.jpg']
+    assert record.source['images']==['frames/1.jpg','frames/0.jpg'] and record.source['native_index']==3
+    adapter=StructuredCollectionAdapter(dataset)
+    adapter.config['max_annotation_bytes']=1
+    with pytest.raises(ValueError,match='read budget'):adapter.prepare(adapter.plan(1,10000))
+
+
+def test_split_csv_and_compound_ids_preserve_source_fields(tmp_path):
+    path = tmp_path/'questions.csv'
+    path.write_text('id,category,question,answer\n1,near,Where?,here\n1,far,Where?,there\n')
+    dataset = Dataset(id='csv',name='CSV fixture',release='r',snapshot_id='s',adapter='structured_collection',adapter_config={
+        'path':str(path),'annotations':[{'path_key':'path','format':'csv','split':'test'}],
+        'mapping':{'id':'id','question':'question'},'identity_fields':['category','id']})
+    adapter=StructuredCollectionAdapter(dataset)
+    records=adapter.iter_records(adapter.prepare(adapter.plan(10,10000))).records
+    assert len({r.id for r in records})==2
+    assert records[0].source['id']=='1' and records[1].source['answer']=='there'
+    assert records[0].question=='Where?'
+
+
+def test_inventory_images_are_bounded_checked_and_share_asset_identity(tmp_path,monkeypatch):
+    adapter,image,path=fixture(tmp_path,monkeypatch)
+    rows=[{'id':1,'image':'a.png','condition_image':'a.png'}]
+    path.write_text(json.dumps(rows))
+    inventory=tmp_path/'inventory.json';inventory.write_text(json.dumps({'files':{'a.png':{'bytes':len(image),'git_blob_sha1':hashlib.sha1(f'blob {len(image)}\0'.encode()+image).hexdigest()}}}))
+    adapter.config.update(annotations=[{'path_key':'train_path','split':'train','media_templates':['{image}','{condition_image}']}],
+        source_files=[],media_inventory_path=str(inventory),media_inventory_sha256=hashlib.sha256(inventory.read_bytes()).hexdigest(),
+        remote_cache_root=str(tmp_path/'cache'),media_base_url='https://example.org/pinned',media_allowed_hosts=['example.org'])
+    local=tmp_path/'image.png';local.write_bytes(image)
+    monkeypatch.setattr('dataset_atlas.adapters.structured_collection.HttpsFetcher.fetch',lambda *a,**k:local)
+    assert adapter.validate_media(10000)['referenced_images']==1
+    source=adapter.prepare(adapter.plan(10,10000));record=adapter.iter_records(source).records[0]
+    assert len(record.assets)==2 and len(set(record.asset_ids))==1
+    assert adapter.resolve_asset(source,record.assets[0].uri).data==image
+    local.write_bytes(b'0'*len(image))
+    with pytest.raises(ValueError,match='Git object'):adapter.resolve_asset(source,record.assets[0].uri)
+
+
+def test_media_arrays_and_url_paths_use_only_recipe_archives(tmp_path,monkeypatch):
+    adapter,image,path=fixture(tmp_path,monkeypatch)
+    path.write_text(json.dumps([{'id':1,'images':['train/image.png','train/image.png'],'image_link':'http://untrusted.example/train/image.png'}]))
+    adapter.config.update(source_files=[],annotations=[{'path_key':'train_path','split':'evaluation','media_paths_field':'images','media_archive':'images','media_path_url_field':'image_link','media_archive_by_prefix':{'train':'images'}}])
+    record=adapter.iter_records(adapter.prepare(adapter.plan(10,10000))).records[0]
+    assert len(record.assets)==3 and len(set(record.asset_ids))==1
+    assert all(a.uri=='zip/images/train/image.png' for a in record.assets)
+    assert adapter.validate_media(10000)['referenced_images']==1
+    adapter.config['annotations'][0]['media_archive_by_prefix']={}
+    del adapter._annotation_rows
+    with pytest.raises(ValueError,match='no declared archive'):adapter._rows()
+
+
+def test_ordered_text_segments_are_joined_without_changing_originals(tmp_path):
+    from dataset_atlas.models import Dataset
+    from dataset_atlas.adapters.structured_collection import StructuredCollectionAdapter
+    import json
+    path=tmp_path/'segments.json';path.write_text(json.dumps([{'base':['A',' word'], 'src':['Other',' word']}]))
+    a=StructuredCollectionAdapter(Dataset(id='segments',name='Fixture',release='r',snapshot_id='s',adapter='structured_collection',adapter_config={
+        'path':str(path),'annotations':[{'path_key':'path','split':'train'}],'text_parts_field':'base','mapping':{'text':'_atlas_text'}}))
+    record=a.iter_records(a.prepare(a.plan(10,10000))).records[0]
+    assert record.text=='A word' and record.source['base']==['A',' word'] and record.source['src']==['Other',' word']
+
+
+def test_fixed_width_caption_rows_preserve_order_and_reject_bad_width(tmp_path):
+    import json
+    from dataset_atlas.models import Dataset
+    from dataset_atlas.adapters.structured_collection import StructuredCollectionAdapter
+    path=tmp_path/'captions.json';path.write_text(json.dumps([[123,'True caption','False caption']]))
+    config={'path':str(path),'annotations':[{'path_key':'path','split':'one','array_columns':['image_id','yes','no'],
+        'choices_columns':['yes','no'],'correct_choice_index':0,'text_from_first_choice':True,
+        'media_stem_field':'image_id','media_stem_width':12,'media_template':'val/{_stem}.jpg','media_archive':'coco'}],
+        'mapping':{'text':'_atlas_text','choices':'_atlas_choices'},'remote_archives':{'coco':{'etag':'"test"'}}}
+    a=StructuredCollectionAdapter(Dataset(id='captions',name='Fixture',release='r',snapshot_id='s',adapter_config=config))
+    record=a.iter_records(a.prepare(a.plan(10,10000))).records[0]
+    assert record.text=='True caption' and record.choices==['True caption','False caption']
+    assert record.source['_atlas_correct_choice_index']==0 and record.source['image_id']==123
+    assert record.assets[0].uri=='zip/coco/val/000000000123.jpg'
+    path.write_text('[[123,"only one option"]]')
+    with pytest.raises(ValueError,match='width'):StructuredCollectionAdapter(a.dataset)._rows()
+
+
+def test_native_conditions_keep_distinct_targets_and_explicit_absence(tmp_path):
+    rows=[{'image_name':'a','label':'2'},{'image_name':'b','label':'No illusion'}]
+    path=tmp_path/'rows.json';path.write_text(json.dumps(rows))
+    files={name:{'bytes':10,'sha256':'a'*64} for name in ['repo/illusion/a.jpg','repo/raw/a.jpg','repo/illusion/b.jpg','repo/control/a.jpg','repo/control/b.jpg']}
+    inventory=tmp_path/'images.json';inventory.write_text(json.dumps({'files':files}))
+    variants=[{'template':'{_prefix}/illusion/{image_name}.jpg','condition':'illusion','target_field':'label'},
+        {'template':'{_prefix}/raw/{image_name}.jpg','condition':'raw','target_field':'label','absent_when':{'field':'label','values':['No illusion']}},
+        {'template':'{_prefix}/control/{image_name}.jpg','condition':'control','target':'No illusion'}]
+    dataset=Dataset(id='variants',name='Fixture',release='r',snapshot_id='s',adapter='structured_collection',adapter_config={
+        'path':str(path),'annotations':[{'path_key':'path','split':'test','media_prefix':'repo','media_variants':variants}],
+        'mapping':{'id':'image_name'},'media_inventory_path':str(inventory),'media_inventory_sha256':hashlib.sha256(inventory.read_bytes()).hexdigest()})
+    adapter=StructuredCollectionAdapter(dataset);assert adapter.validate_media(10000)['referenced_images']==5
+    records=adapter.iter_records(adapter.prepare(adapter.plan(10,10000))).records
+    assert [a.metadata['target'] for a in records[0].assets]==['2','2','No illusion']
+    assert len(records[1].assets)==2 and records[1].source['_atlas_absent_conditions']==['raw']
+    assert records[0].source['label']=='2'
+    # Undeclared absence remains an error rather than silently dropping a condition.
+    del files['repo/control/b.jpg'];inventory.write_text(json.dumps({'files':files}))
+    dataset.adapter_config['media_inventory_sha256']=hashlib.sha256(inventory.read_bytes()).hexdigest()
+    with pytest.raises(ValueError,match='missing inventory'):StructuredCollectionAdapter(dataset).validate_media(10000)
+
+
+def test_malformed_upstream_document_can_be_inspected_as_explicit_raw_text(tmp_path):
+    path=tmp_path/'broken.jsonl';path.write_text('<html>Upstream error committed as a source file</html>')
+    dataset=Dataset(id='raw',name='Fixture',release='r',snapshot_id='s',adapter='structured_collection',adapter_config={
+        'path':str(path),'annotations':[{'path_key':'path','format':'text','split':'malformed','source_status':'Invalid native JSONL'}],'mapping':{'text':'text'}})
+    adapter=StructuredCollectionAdapter(dataset);record=adapter.iter_records(adapter.prepare(adapter.plan(1,10000))).records[0]
+    assert record.text==path.read_text()
+    assert record.source['_atlas_source_status']=='Invalid native JSONL'
+    assert not record.assets
+
+
+def test_native_annotation_join_preserves_fields_and_rejects_defects(tmp_path,monkeypatch):
+    adapter,_,path=fixture(tmp_path,monkeypatch)
+    path.write_text('[{"id":1,"image_id":7,"question":"Where?"}]')
+    joined=tmp_path/'images.json';joined.write_text('[{"image_id":7,"url":"http://source.example/train/image.png","width":8}]')
+    adapter.config.update(source_files=[],images_path=str(joined),annotations=[{'path_key':'train_path','split':'test',
+        'joins':[{'path_key':'images_path','on':'image_id','key':'image_id','field':'image_metadata'}],
+        'media_path_url_field':'image_metadata.url','media_archive_by_prefix':{'train':'images'}}])
+    record=adapter.iter_records(adapter.prepare(adapter.plan(10,10000))).records[0]
+    assert record.source['image_metadata']['width']==8 and record.question=='Where?'
+    assert record.assets[0].uri=='zip/images/train/image.png'
+    for value,match in [('[{"image_id":7},{"image_id":7}]','Duplicate'),('[{"image_id":8}]','no matching'),
+                        ('[{"image_id":7,"url":"http://x/train/image.png"},{"image_id":8}]','Unmatched')]:
+        joined.write_text(value);adapter.__dict__.pop('_annotation_rows',None)
+        with pytest.raises(ValueError,match=match):adapter._rows()
+
+
+def test_native_text_lists_preserve_line_numbers_and_overlapping_memberships(tmp_path):
+    path = tmp_path/'prompts.txt';path.write_text('First prompt\n\n Second prompt \n')
+    dataset = Dataset(id='prompts', name='Fixture', release='r', snapshot_id='s', adapter='structured_collection', adapter_config={
+        'path': str(path), 'annotations': [{'path_key': 'path', 'format': 'text_lines', 'split': split} for split in ['all', 'train']],
+        'mapping': {'id': 'line', 'text': 'text'}})
+    adapter = StructuredCollectionAdapter(dataset)
+    records = adapter.iter_records(adapter.prepare(adapter.plan(10, 10000))).records
+    assert len(records) == 4 and len({r.id for r in records}) == 4
+    assert records[1].source['line'] == 3 and records[1].text == ' Second prompt '
+    assert records[0].text == records[2].text
+
+
+def test_etag_inventory_checks_bounds_and_declared_fingerprint(tmp_path,monkeypatch):
+    adapter,image,path=fixture(tmp_path,monkeypatch)
+    path.write_text(json.dumps([{'id':1,'image':'a.png'}]))
+    inventory=tmp_path/'inventory.json';inventory.write_text(json.dumps({'files':{'a.png':{'bytes':len(image),'etag':'"native-v1"'}}}))
+    adapter.config.update(annotations=[{'path_key':'train_path','split':'train','media_template':'{image}'}],source_files=[],
+        media_inventory_path=str(inventory),media_inventory_sha256=hashlib.sha256(inventory.read_bytes()).hexdigest(),
+        remote_cache_root=str(tmp_path/'cache'),media_base_url='https://example.org/pinned',media_allowed_hosts=['example.org'])
+    observed=[]
+    class Reader(io.BytesIO):
+        def __init__(self,url,**kwargs):
+            observed.append((url,kwargs));super().__init__(image)
+    monkeypatch.setattr('dataset_atlas.adapters.structured_collection.HttpsRangeReader',Reader)
+    assert adapter.validate_media(10000)['referenced_images']==1
+    source=adapter.prepare(adapter.plan(10,10000));record=adapter.iter_records(source).records[0]
+    assert record.assets[0].sha256 is None
+    assert adapter.resolve_asset(source,record.assets[0].uri).data==image
+    assert observed[0][0]=='https://example.org/pinned/a.png'
+    assert observed[0][1]['etag']=='"native-v1"' and observed[0][1]['byte_budget']==len(image)
+    with pytest.raises(ValueError,match='byte budget'):adapter.resolve_asset(adapter.prepare(adapter.plan(1,1)),'file/a.png')
+    adapter._media_inventory['a.png']['bytes']+=1
+    with pytest.raises(ValueError,match='length changed'):adapter.resolve_asset(source,'file/a.png')
+    del adapter._media_inventory
+    inventory.write_text(json.dumps({'files':{'a.png':{'bytes':len(image),'etag':'W/"weak"'}}}))
+    adapter.config['media_inventory_sha256']=hashlib.sha256(inventory.read_bytes()).hexdigest()
+    with pytest.raises(ValueError,match='strong ETag'):adapter.validate_media(10000)
+
+
+def test_keyed_annotations_keep_native_keys_and_exact_overlay(tmp_path,monkeypatch):
+    adapter,_,path=fixture(tmp_path,monkeypatch)
+    rows={'image-9':{'caption':'native','person00':{'region':[1,2,3,4]}}};path.write_text(json.dumps(rows))
+    votes=tmp_path/'votes.json';votes.write_text(json.dumps({'image-9':{'votes':[{'worker':'native-id','value':'unsure'}]}}))
+    adapter.config.update(source_files=[],votes_path=str(votes),mapping={'id':'image_id','text':'caption'},
+        annotations=[{'path_key':'train_path','split':'train','record_key_field':'image_id',
+            'joins':[{'path_key':'votes_path','key':'@key','on':'image_id','field':'native_votes'}]}])
+    record=adapter.iter_records(adapter.prepare(adapter.plan(10,10000))).records[0]
+    assert record.source['image_id']=='image-9' and record.source['person00']==rows['image-9']['person00']
+    assert record.source['native_votes']==json.loads(votes.read_text())['image-9']
+    path.write_text(json.dumps({'image-9':{'image_id':'collision'}}))
+    adapter=StructuredCollectionAdapter(adapter.dataset.model_copy(update={'adapter_config':adapter.config}))
+    with pytest.raises(ValueError,match='colliding'):adapter.prepare(adapter.plan(10,10000))
+
+
+def test_native_crop_variants_join_distinct_local_archives(tmp_path):
+    import hashlib
+    from PIL import Image
+    path = tmp_path/'labels.json'
+    path.write_text(json.dumps([{'id': 'photo', 'file': 'train/1.jpg', 'label': 'native annotation'}]))
+    config = {'path': str(path), 'mapping': {'id': 'id'}, 'annotations': [{'path_key': 'path', 'split': 'train',
+        'media_variants': [{'condition': key, 'media_archive': key, 'template': '{file}'} for key in ['crop025', 'crop125']]}],
+        'local_archives': {}, 'source_files': []}
+    native = {}
+    for key, colour in [('crop025', 'red'), ('crop125', 'blue')]:
+        import io
+        output = io.BytesIO()
+        Image.new('RGB', (8, 8), colour).save(output, format='JPEG')
+        native[key] = output.getvalue()
+        archive_path = tmp_path/(key+'.zip')
+        with zipfile.ZipFile(archive_path, 'w') as archive:
+            archive.writestr('train/1.jpg', native[key])
+        config[key+'_path'] = str(archive_path)
+        config['local_archives'][key] = {'path_key': key+'_path'}
+        config['source_files'].append({'path': str(archive_path), 'sha256': hashlib.sha256(archive_path.read_bytes()).hexdigest()})
+    adapter = StructuredCollectionAdapter(Dataset(id='crops', name='Fixture', snapshot_id='s', adapter_config=config))
+    source = adapter.prepare(adapter.plan(10,100000))
+    row = adapter.iter_records(source).records[0]
+    assert row.source['label'] == 'native annotation'
+    assert len(row.assets) == 2 and row.assets[0].id != row.assets[1].id
+    assert adapter.validate_media(100000)['referenced_images'] == 2
+    for asset in row.assets:
+        assert adapter.resolve_asset(source, asset.uri).data == native[asset.metadata['condition']]
+
+
+def test_native_caption_objects_preserve_ids_tokens_and_repeated_strings(tmp_path):
+    captions = [{'raw': 'same caption', 'id': 1, 'tokens': ['same', 'caption']},
+                {'raw': 'same caption', 'id': 2, 'tokens': ['same', 'caption']}]
+    path = tmp_path / 'captions.json'
+    path.write_text(json.dumps([{'id': 7, 'sentences': captions, 'split': 'val'}]))
+    config = {'path': str(path), 'annotations': [{'path_key': 'path', 'split': 'all'}],
+              'text_parts_field': 'sentences', 'text_parts_item_field': 'raw',
+              'text_parts_separator': '\n', 'mapping': {'id': 'id', 'text': '_atlas_text'}}
+    dataset = Dataset(id='captions', name='Captions', release='r', snapshot_id='s',
+                      adapter='structured_collection', adapter_config=config)
+    adapter = StructuredCollectionAdapter(dataset)
+    record = adapter.iter_records(adapter.prepare(adapter.plan(10, 10000))).records[0]
+    assert record.text == 'same caption\nsame caption'
+    assert record.source['sentences'] == captions and record.source['split'] == 'val'
+    path.write_text(json.dumps([{'id': 7, 'sentences': [{'id': 1}]}]))
+    with pytest.raises(ValueError, match='ordered list of strings'):
+        StructuredCollectionAdapter(dataset)._rows()

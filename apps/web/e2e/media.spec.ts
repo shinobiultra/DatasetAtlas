@@ -5,7 +5,7 @@ import { inspectRecord, sampleCards, stubCommonRoutes } from './helpers'
 
 const ID = 'synthetic-media-contract'
 const SNAPSHOT = 'test-only-media-snapshot'
-const names = ['geometry', 'mismatch', 'missing', 'failed', 'zero', 'broken'] as const
+const names = ['geometry', 'mismatch', 'missing', 'failed', 'zero', 'broken', 'absent', 'variants', 'compressed', 'optimized'] as const
 const assetId = (name: string) => `synthetic:asset:${name}`
 const recordId = (name: string) => `synthetic:example:${name}`
 const fixture = readFileSync(fileURLToPath(new URL('./fixtures/orientation-6.jpg', import.meta.url)))
@@ -13,7 +13,9 @@ const records = names.map(name => ({
   id: recordId(name), dataset_id: ID, release_id: 'test-only', snapshot_id: SNAPSHOT, unit: 'example',
   text: `Synthetic ${name} image`, source: { test_case: name },
   asset_ids: [assetId(name)],
-  assets: [{ id: assetId(name), dataset_id: ID, release_id: 'test-only', modality: 'image', representation: 'original', uri: `/test-media/${name === 'broken' ? 'missing.png' : 'orientation-6.jpg'}`, metadata: {} }],
+  assets: name === 'variants'
+    ? ['ref', 'p0', 'p1'].map(role => ({ id: assetId(name) + role, dataset_id: ID, release_id: 'test-only', modality: 'image', representation: 'original', uri: '/test-media/orientation-6.jpg', metadata: { source_role: role, question: `Synthetic question for ${role}` } }))
+    : [{ id: assetId(name), dataset_id: ID, release_id: 'test-only', modality: 'image', representation: name === 'compressed' ? 'compressed_avif' : name === 'optimized' ? 'optimized_on_demand' : 'original', uri: name === 'absent' ? null : `/test-media/${name === 'broken' ? 'missing.png' : 'orientation-6.jpg'}`, metadata: name === 'absent' ? { availability: 'absent_from_pinned_release', source_path: 'native/missing.jpg' } : ['compressed', 'optimized'].includes(name) ? { original_uri: '/api/v1/media/synthetic-original?representation=original' } : {} }],
 }))
 const assetOutput = (name: string, width = 40, height = 80, detections: unknown[] = []) => ({ asset_id: assetId(name), status: 'completed', width, height, detections })
 const artifact = {
@@ -117,4 +119,44 @@ test('the extraction threshold is stated beside the boxes it produced', async ({
   const inspector = await inspectRecord(page, recordId('geometry'))
   await expect(inspector.getByRole('status')).toContainText('Completed · 1 detection')
   await expect(inspector.getByRole('status')).toContainText('Extraction threshold 0.5')
+})
+
+
+test('source-listed absent images remain explicit without a broken media request', async ({ page }) => {
+  const requested: string[] = []
+  page.on('request', request => { if (request.url().includes('native/missing')) requested.push(request.url()) })
+  await setup(page)
+  const inspector = await inspectRecord(page, recordId('absent'))
+  await expect(inspector.getByText('Listed by the source, absent from this release')).toBeVisible()
+  await expect(inspector.getByText('native/missing.jpg', { exact: true })).toBeVisible()
+  await expect(inspector.getByText('Unavailable in source release')).toBeVisible()
+  expect(requested).toEqual([])
+})
+
+test('focused inspection names native image roles and shows the selected image question', async ({ page }) => {
+  await setup(page)
+  const inspector = await inspectRecord(page, recordId('variants'))
+  await expect(inspector.getByText('Reference', { exact: true })).toBeVisible()
+  await inspector.getByRole('button', { name: 'Open', exact: true }).click()
+  const select = page.getByLabel('Choose image in this record')
+  await expect(select.locator('option')).toHaveText(['Reference · 1 of 3', 'Patch 0 · 2 of 3', 'Patch 1 · 3 of 3'])
+  await select.selectOption('2')
+  await expect(page.getByLabel('Question for selected image')).toContainText('Synthetic question for p1')
+  await expect(page.getByLabel('Question for selected image')).not.toContainText('Synthetic question for ref')
+})
+
+
+test('compressed browsing copies state full resolution and offer the original', async ({ page }) => {
+  await setup(page)
+  const inspector = await inspectRecord(page, recordId('compressed'))
+  await expect(inspector.getByText('Compressed · full resolution', { exact: true })).toBeVisible()
+  await expect(inspector.getByRole('link', { name: 'Open original' })).toHaveAttribute('href', '/api/v1/media/synthetic-original?representation=original')
+  await expect(inspector.getByRole('img', { name: `Primary asset of ${recordId('compressed')}` })).toHaveJSProperty('naturalWidth', 40)
+})
+
+test('on-demand browsing names the representation and exposes the original', async ({ page }) => {
+  await setup(page)
+  const inspector = await inspectRecord(page, recordId('optimized'))
+  await expect(inspector.getByText('Full-resolution browsing copy', { exact: true })).toBeVisible()
+  await expect(inspector.getByRole('link', { name: 'Open original' })).toHaveAttribute('href', '/api/v1/media/synthetic-original?representation=original')
 })

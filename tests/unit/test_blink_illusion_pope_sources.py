@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import shutil
 from collections import Counter
 from io import BytesIO
 from pathlib import Path
@@ -43,7 +44,7 @@ def test_complete_pinned_snapshot_preview_and_real_media(dataset_id, count):
     assert receipt["preview_sha256"] == hashlib.sha256((ROOT / receipt["preview_pack"]).read_bytes()).hexdigest()
     for record in (pack.records[0], pack.records[-1]):
         for asset in record.assets:
-            media = resolve_dataset_asset(dataset, asset.uri)
+            media = resolve_dataset_asset(dataset, asset.uri, workspace_root=ROOT)
             with Image.open(BytesIO(media.data)) as image:
                 image.verify()
             assert hashlib.sha256(media.data).hexdigest() == media.sha256
@@ -82,8 +83,27 @@ def test_pope_three_strategy_labels_and_exact_coco_image_references(require_loca
     assert Counter(row.source["label"] for row in preview.records) == {"yes": 50, "no": 50}
 
 
-def test_zerobench_is_reported_as_gated_without_content():
-    dataset = Registry(ROOT).dataset("zerobench")
+def test_zerobench_fresh_install_reports_the_gate_without_content(tmp_path):
+    directory = tmp_path / 'registry/datasets'
+    directory.mkdir(parents=True)
+    shutil.copyfile(ROOT / 'registry/datasets/zerobench.yaml', directory / 'zerobench.yaml')
+    registry = Registry(tmp_path)
+    dataset = registry.dataset("zerobench")
     receipt = json.loads((ROOT / "reports/zerobench-source.json").read_text())
     assert dataset.coverage.access == "gated" and dataset.coverage.preview_count == 0
     assert receipt["access_check"]["status"] == 401 and receipt["downloaded_content"] is False
+    with pytest.raises(FileNotFoundError):
+        registry.pack('zerobench')
+
+
+def test_authorized_zerobench_preserves_the_gate_and_publication_restrictions():
+    registry = Registry(ROOT)
+    if registry.active_directory('zerobench') is None:
+        pytest.skip('authorized ZeroBench source is not installed')
+    dataset = registry.dataset('zerobench')
+    assert dataset.coverage.access == 'gated'
+    assert dataset.coverage.preview_count == len(registry.pack('zerobench').records) == 100
+    assert dataset.coverage.total_count == 100
+    assert dataset.coverage.publication == 'metadata_only'
+    assert any('answers' in message and 'publicly' in message for message in dataset.coverage.blockers)
+    assert not any('unauthenticated pinned Parquet HEAD' in message for message in dataset.coverage.blockers)

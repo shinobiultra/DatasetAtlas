@@ -1,0 +1,46 @@
+# POPE's three question files are pinned originals; the maintained table is their one-row-per-question conversion (converters/text.py),
+# reproduced exactly and checked by row digest. Images come from COCO val2014 read by ETag-bound ranges (the 6.6 GB archive is not
+# downloaded). Identity and snapshot are unchanged.
+release: github-08d957b917e5a378a2f99d35b6293c536a66298b-coco
+snapshot_id: github-08d957b917e5a378a2f99d35b6293c536a66298b-coco-7f42dccddc13
+adapter: structured_archive
+expected_count: 9000
+scope: 'Official POPE COCO val2014 output at author GitHub commit: 3,000 questions per adversarial, popular, and random strategy (9,000
+  total) over the same 500 COCO val2014 images. Each yes/no label remains a source annotation, not a model prediction.'
+source_url: https://github.com/RUCAIBox/POPE
+adapter_config:
+  remote_media_archive:
+    url: https://s3.amazonaws.com/images.cocodataset.org/zips/val2014.zip
+    bytes: 6645013297
+    etag: '"3925cc4d50eb68d47bf2d6324a012d20-793"'
+    allowed_hosts:
+    - s3.amazonaws.com
+  remote_cache_root: work/media-cache/pope-remote
+  remote_cache_bytes: 1000000000
+  media_scope: on_demand_unverified
+convert:
+  name: pope
+  params: {}
+  count: 9000
+  rows_sha256: 5593aaef253bed9a4edc56290be20798cdf668ccfc18cce75bd1b54e85b5e066
+files:
+- source_name: coco_pope_adversarial.json
+  url: https://raw.githubusercontent.com/RUCAIBox/POPE/08d957b917e5a378a2f99d35b6293c536a66298b/output/coco/coco_pope_adversarial.json
+  bytes: 370401
+  sha256: 420b3407db1fa9f1187a805dca41cb7b97fd91504e6c2179706188c107fb8ef8
+  format: jsonl
+  config_key: adversarial
+- source_name: coco_pope_popular.json
+  url: https://raw.githubusercontent.com/RUCAIBox/POPE/08d957b917e5a378a2f99d35b6293c536a66298b/output/coco/coco_pope_popular.json
+  bytes: 370190
+  sha256: 72c1a8ad45d0c13514f5f22598261df41d3b533854d29682e924db50ed8aa753
+  format: jsonl
+  config_key: popular
+- source_name: coco_pope_random.json
+  url: https://raw.githubusercontent.com/RUCAIBox/POPE/08d957b917e5a378a2f99d35b6293c536a66298b/output/coco/coco_pope_random.json
+  bytes: 368166
+  sha256: ac25245170b975a5bdf9080b23fd431dfe6be458bc038259c1f4f09a6bef7994
+  format: jsonl
+  config_key: random
+allowed_hosts:
+- raw.githubusercontent.com

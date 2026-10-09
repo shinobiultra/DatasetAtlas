@@ -60,6 +60,10 @@ Prerequisites: the repository is `github.com/shinobiultra/DatasetAtlas`; the wor
 3. **Actions → Validate and publish Dataset Atlas → Run workflow**, set `deploy` to true. Pushes and pull requests build and test but never deploy.
 4. The site appears at `https://shinobiultra.github.io/DatasetAtlas/`. Open a gated dataset page and one with approved examples.
 
+### Status on 2026-10-09
+
+The branch was pushed and PR 5 opened, but GitHub refused to start any job: "recent account payments have failed or your spending limit needs to be increased". Until that is fixed no workflow can run, so nothing was deployed. The repository is also private, and GitHub Pages on a private repository needs a paid plan, so even a working workflow may be refused when it reaches the Pages step. Two ways forward: fix billing (and confirm the plan includes Pages for private repositories), or make the repository public after deciding that the history (maintainer paths in about 60 reports, the corpus folder name) may be seen. A prebuilt copy of the exact site for `/DatasetAtlas/` is in `dist/dataset-atlas-site-*.zip` (gitignored) for any static host.
+
 Rollback: re-run the workflow from the previous good commit, or disable Pages in settings. Cached copies and search-engine indexes can outlive a deletion, so publish only what you would accept being copied.
 
 ## Not built, and why

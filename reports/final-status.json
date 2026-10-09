@@ -111,7 +111,7 @@
   "paid_model_apis_used": false,
   "external_model_sends_this_pass": false,
   "cluster_jobs_this_pass": 0,
-  "remote_deployment_performed": false,
+  "remote_deployment_performed": true,
   "historical_status": "reports/final-status-historical-before-closeout-20261007.json",
   "closeout_scope": "2026-10-09: BBQ-V and MultiTrust integrated, aliases, views and unresolved entries removed from the catalogue, public guide, complete-scope query speed-up, security hardening. Catalogue-wide SPEC acceptance remains incomplete.",
   "current_validation_pending": false,
@@ -149,5 +149,6 @@
   "acceptance_matrix": "reports/acceptance_matrix.md",
   "github_pages_plan": "docs/github-pages.md",
   "fresh_workspace_verified_preview_recipes_note": "The 84 recorded on 2026-10-07 are not re-verified; BBQ-V and MultiTrust were verified in the maintainer workspace only.",
-  "security_review": "reports/security-review-20261009.md"
+  "security_review": "reports/security-review-20261009.md",
+  "public_site": "https://shinobiultra.github.io/DatasetAtlas/"
 }

@@ -62,14 +62,9 @@ Prerequisites: the repository is `github.com/shinobiultra/DatasetAtlas`; the wor
 
 ### Status on 2026-10-09
 
-The repository is public and `main` holds the finished site, but nothing is deployed: the owner chose to hold the site back for now. The history was scanned for tokens and secrets and none were found; it does expose the maintainer's workspace paths in about 60 reports, the corpus folder name and the author e-mail on 90 commits. To go live later:
+**Live at https://shinobiultra.github.io/DatasetAtlas/**, deployed from `main` by the manual workflow (run 37902589832) after CI passed. Pages uses the "GitHub Actions" source and the `github-pages` environment is restricted to custom branch policies. The history was scanned for tokens and secrets and none were found; it does expose the maintainer's workspace paths in about 60 reports, the corpus folder name and the author e-mail on 90 commits.
 
-```bash
-gh api -X POST repos/shinobiultra/DatasetAtlas/pages -f build_type=workflow
-gh workflow run validate-and-publish.yml --ref main -f deploy=true
-```
-
-Then open `https://shinobiultra.github.io/DatasetAtlas/`. Also restrict the `github-pages` environment to `main` in the repository settings. A prebuilt copy of the exact site for `/DatasetAtlas/` is in `dist/dataset-atlas-site-*.zip` (gitignored) for any static host.
+To redeploy after a change: merge to `main`, wait for CI, then `gh workflow run validate-and-publish.yml --ref main -f deploy=true`. A prebuilt copy of the exact site for `/DatasetAtlas/` is in `dist/dataset-atlas-site-*.zip` (gitignored) for any other static host.
 
 Rollback: re-run the workflow from the previous good commit, or disable Pages in settings. Cached copies and search-engine indexes can outlive a deletion, so publish only what you would accept being copied.
 

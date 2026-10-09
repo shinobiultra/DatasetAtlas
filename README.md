@@ -29,7 +29,7 @@ A fresh workspace holds the catalogue and no data. Each dataset page says what y
 
 ## The public website
 
-The static build (`docs/github-pages.md`) needs no Python and holds no dataset content beyond three reviewed example sets (CLEVR, EuroSAT, PAIRS). For every other dataset it shows the guide: how to obtain it, the field schema of its preview and the papers that name it.
+**Live: https://shinobiultra.github.io/DatasetAtlas/**. The static build ([docs/github-pages.md](docs/github-pages.md)) needs no Python and holds no dataset content beyond three reviewed example sets (CLEVR, EuroSAT, PAIRS). For every other dataset it shows the guide: how to obtain it, the field schema of its preview and the papers that name it.
 
 ## Where things are
 

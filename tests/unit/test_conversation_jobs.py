@@ -116,6 +116,10 @@ def test_cancel_and_deadline_apply_while_waiting_for_batch_lock(tmp_path):
         job = service.start_conversation_job(request.model_copy(update={'deadline_seconds': 0.1}))
         done = wait_finished(service, job['id'])
         assert done['status'] == 'failed' and 'deadline' in done['error']
+        # the terminal state is written before the worker's cleanup runs, so wait for it
+        deadline = time.monotonic() + 5
+        while service._conversation_cancel_events and time.monotonic() < deadline:
+            time.sleep(0.01)
         assert not service._conversation_cancel_events
     finally:
         service._batch_lock.release()

@@ -5,6 +5,8 @@ import { provider, type ThumbEntry, type Thumbnails } from '../provider'
 import { AddDataset } from '../panels/AddDataset'
 import { accessTone, coverageLine, coverageState, compact, titleCase, COVERAGE_STATE_LABEL, type CoverageState } from '../lib/format'
 import { useStoredState } from '../lib/hooks'
+import { GUIDE_LABELS, GUIDE_SHORT, GUIDE_TONES } from '../lib/guideLabels'
+import { repositoryUrl } from '../lib/repository'
 import { Empty, Facet, FacetList, FacetOption, Notice, Segmented, Spinner, Tag } from '../ui/primitives'
 import * as Icon from '../ui/Icons'
 
@@ -13,13 +15,14 @@ export type Facets = {
   task: string[]
   access: string[]
   coverage: string[]
+  howto: string[]
   annotations: boolean
 }
 
-export const emptyFacets: Facets = { modality: [], task: [], access: [], coverage: [], annotations: false }
+export const emptyFacets: Facets = { modality: [], task: [], access: [], coverage: [], howto: [], annotations: false }
 
 export function facetCount(facets: Facets): number {
-  return facets.modality.length + facets.task.length + facets.access.length + facets.coverage.length + (facets.annotations ? 1 : 0)
+  return facets.modality.length + facets.task.length + facets.access.length + facets.coverage.length + facets.howto.length + (facets.annotations ? 1 : 0)
 }
 
 export function matchesTerm(dataset: Dataset, term: string): boolean {
@@ -33,12 +36,13 @@ function coverageKey(dataset: Dataset): CoverageState {
   return coverageState(dataset, provider.mode)
 }
 
-export function passesFacets(dataset: Dataset, facets: Facets): boolean {
+export function passesFacets(dataset: Dataset, facets: Facets, states: Record<string, string> = {}): boolean {
   const coverage = dataset.coverage ?? {}
   if (facets.modality.length && !facets.modality.some(value => dataset.modalities?.includes(value))) return false
   if (facets.task.length && !facets.task.some(value => dataset.tasks?.includes(value))) return false
   if (facets.access.length && !facets.access.includes(coverage.access ?? 'unverified')) return false
   if (facets.coverage.length && !facets.coverage.includes(coverageKey(dataset))) return false
+  if (facets.howto.length && !facets.howto.includes(states[dataset.id] ?? '')) return false
   if (facets.annotations && !(dataset.labels?.length)) return false
   return true
 }
@@ -102,19 +106,42 @@ function DatasetCard({ dataset, thumbs, onOpen, starred, onStar }: {
   )
 }
 
+function Hero({ datasets }: { datasets: Dataset[] }) {
+  const repo = repositoryUrl()
+  const live = datasets.filter(dataset => coverageState(dataset, 'static') === 'preview')
+  return (
+    <section className="hero" aria-label="About this site">
+      <div>
+        <h2>{datasets.length.toLocaleString()} real datasets, each with where it comes from and how to get it</h2>
+        <p>
+          Dataset Atlas maps the datasets named in a corpus of research papers: what a record holds, which papers cite it, what is known about its rights,
+          and the exact command that fetches a preview into your own workspace. The data itself is not hosted here; {live.length} sets have live examples you can open now.
+        </p>
+      </div>
+      <div className="hero-actions">
+        {live[0] && <button type="button" className="btn primary" onClick={() => { window.location.hash = `#/dataset/${live[0].id}` }}>Open a live example</button>}
+        {repo && <a className="btn" href={`${repo}/blob/main/docs/getting-started.md`} target="_blank" rel="noopener noreferrer">Run it locally</a>}
+        {repo && <a className="btn" href={repo} target="_blank" rel="noopener noreferrer">Source on GitHub</a>}
+      </div>
+    </section>
+  )
+}
+
 export function CataloguePage({ term, onOpen }: { term: string; onOpen: (id: string) => void }) {
   const [datasets, setDatasets] = useState<Dataset[] | null>(null)
   const [thumbs, setThumbs] = useState<Thumbnails>({})
   const [error, setError] = useState('')
   const [filtersOpen, setFiltersOpen] = useState(window.innerWidth > 1080)
   const [facets, setFacets] = useStoredState<Facets>('atlas.catalogue.facets', emptyFacets)
-  const [layout, setLayout] = useStoredState<'cards' | 'list'>('atlas.catalogue.layout', 'cards')
+  const [layout, setLayout] = useStoredState<'cards' | 'list'>('atlas.catalogue.layout', provider.mode === 'static' ? 'list' : 'cards')
+  const [states, setStates] = useState<Record<string, string>>({})
   const [sort, setSort] = useStoredState<'relevance' | 'name' | 'coverage'>('atlas.catalogue.sort', 'coverage')
   const [starred, setStarred] = useStoredState<string[]>('atlas.starred', [])
 
   useEffect(() => {
     provider.datasets().then(setDatasets).catch(error => setError(String(error)))
     provider.thumbnails().then(setThumbs).catch(() => setThumbs({}))
+    provider.guideStates().then(setStates).catch(() => setStates({}))
   }, [])
 
   const all = datasets ?? []
@@ -122,13 +149,18 @@ export function CataloguePage({ term, onOpen }: { term: string; onOpen: (id: str
   // numbers stay useful while narrowing.
   const searched = useMemo(() => all.filter(dataset => matchesTerm(dataset, term)), [all, term])
   const shown = useMemo(() => {
-    const rows = searched.filter(dataset => passesFacets(dataset, facets))
+    const rows = searched.filter(dataset => passesFacets(dataset, facets, states))
     const order: Record<CoverageState, number> = { full: 0, preview: 1, on_request: 2, elsewhere: 3, metadata: 4 }
     const byCoverage = (dataset: Dataset) => order[coverageState(dataset, provider.mode)]
     if (sort === 'name') return [...rows].sort((a, b) => a.name.localeCompare(b.name))
     if (sort === 'coverage') return [...rows].sort((a, b) => byCoverage(a) - byCoverage(b) || a.name.localeCompare(b.name))
     return rows
-  }, [searched, facets, sort])
+  }, [searched, facets, sort, states])
+
+  const liveShown = useMemo(() => shown.filter(dataset => coverageState(dataset, provider.mode) === 'preview'), [shown])
+  // On the public site the browsable sets sit in their own strip above the list, unless a search or filter is active.
+  const stripped = provider.mode === 'static' && !term && facetCount(facets) === 0
+  const listed = stripped ? shown.filter(dataset => !liveShown.includes(dataset)) : shown
 
   const counts = useMemo(() => {
     const tally = (pick: (dataset: Dataset) => string[]) => {
@@ -141,11 +173,12 @@ export function CataloguePage({ term, onOpen }: { term: string; onOpen: (id: str
       task: tally(dataset => dataset.tasks ?? []),
       access: tally(dataset => [dataset.coverage?.access ?? 'unverified']),
       coverage: tally(dataset => [coverageKey(dataset)]),
+      howto: tally(dataset => (states[dataset.id] ? [states[dataset.id]] : [])),
       annotated: searched.filter(dataset => dataset.labels?.length).length,
     }
-  }, [searched])
+  }, [searched, states])
 
-  const toggle = (key: 'modality' | 'task' | 'access' | 'coverage', value: string) => {
+  const toggle = (key: 'modality' | 'task' | 'access' | 'coverage' | 'howto', value: string) => {
     setFacets(current => ({
       ...current,
       [key]: current[key].includes(value) ? current[key].filter(item => item !== value) : [...current[key], value],
@@ -160,12 +193,21 @@ export function CataloguePage({ term, onOpen }: { term: string; onOpen: (id: str
           {facetCount(facets) > 0 && <button type="button" className="linkish" style={{ marginLeft: 'auto', fontSize: 'var(--fs-sm)' }} onClick={() => setFacets(emptyFacets)}>Reset</button>}
         </div>
         <div className="rail-scroll">
+          {provider.mode === 'static' && counts.howto.length > 0 && (
+            <Facet title="How to get it">
+              {counts.howto.map(([value, count]) => (
+                <FacetOption key={value} checked={facets.howto.includes(value)} onChange={() => toggle('howto', value)} label={GUIDE_LABELS[value] ?? titleCase(value)} count={count} />
+              ))}
+            </Facet>
+          )}
+          {provider.mode === 'workbench' && (
           <Facet title="Browsing coverage">
             {counts.coverage.map(([value, count]) => (
               <FacetOption key={value} checked={facets.coverage.includes(value)} onChange={() => toggle('coverage', value)}
                 label={COVERAGE_STATE_LABEL[value as CoverageState] ?? value} count={count} />
             ))}
           </Facet>
+          )}
           <Facet title="Modality">
             <FacetList items={counts.modality.map(([value]) => ({ key: value }))} render={item => {
               const count = counts.modality.find(entry => entry[0] === item.key)?.[1] ?? 0
@@ -201,17 +243,6 @@ export function CataloguePage({ term, onOpen }: { term: string; onOpen: (id: str
                 ? 'Loading catalogue…'
                 : `${compact(all.length)} catalogue entries · ${compact(all.filter(dataset => ['full', 'preview'].includes(coverageState(dataset, provider.mode))).length)} browsable ${provider.mode === 'static' ? 'in this public build' : 'here'}`}
             </p>
-            {provider.mode === 'static' && datasets !== null && (
-              <details className="hint" style={{ marginTop: 6, maxWidth: 760 }}>
-                <summary>What this public site is</summary>
-                <p style={{ margin: '6px 0 0' }}>
-                  A catalogue of the real datasets named in research papers: where each comes from, how to obtain it, what is known about its rights, and the fields of the maintainers' previews.
-                  The data itself is not hosted here. Examples are published only where the licence was reviewed
-                  ({all.filter(dataset => dataset.coverage?.publication === 'approved').map(dataset => dataset.name).join(', ') || 'none yet'}).
-                  Every other dataset page says how to fetch its preview into your own Dataset Atlas workspace, which also runs the filters, selections and local analysis shown here.
-                </p>
-              </details>
-            )}
           </div>
           <div className="row" style={{ marginLeft: 'auto' }}>
             {provider.mode === 'workbench' && <AddDataset />}
@@ -233,6 +264,7 @@ export function CataloguePage({ term, onOpen }: { term: string; onOpen: (id: str
 
         <div className="work-scroll">
           <div className="cat-body">
+            {provider.mode === 'static' && datasets !== null && <Hero datasets={all} />}
             {error && <Notice tone="error">Catalogue unavailable: {error}</Notice>}
             {datasets === null && !error && <Spinner label="Loading catalogue…" />}
             {datasets !== null && !shown.length && (
@@ -240,9 +272,21 @@ export function CataloguePage({ term, onOpen }: { term: string; onOpen: (id: str
                 {term ? `Nothing matches “${term}” with the current filters.` : 'No datasets match the current filters.'}
               </Empty>
             )}
+            {provider.mode === 'static' && datasets !== null && liveShown.length > 0 && !term && facetCount(facets) === 0 && (
+              <section aria-label="Live examples" className="live-strip">
+                <h2>Live examples</h2>
+                <div className="ds-grid">
+                  {liveShown.map(dataset => (
+                    <DatasetCard key={dataset.id} dataset={dataset} thumbs={thumbs[dataset.id]} onOpen={() => onOpen(dataset.id)}
+                      starred={starred.includes(dataset.id)} onStar={() => setStarred(current => current.includes(dataset.id) ? current.filter(id => id !== dataset.id) : [...current, dataset.id])} />
+                  ))}
+                </div>
+                <h2 className="rest-h">All {listed.length.toLocaleString()} other datasets</h2>
+              </section>
+            )}
             {layout === 'cards' ? (
               <div className="ds-grid">
-                {shown.map(dataset => (
+                {listed.map(dataset => (
                   <DatasetCard
                     key={dataset.id} dataset={dataset} thumbs={thumbs[dataset.id]}
                     onOpen={() => onOpen(dataset.id)}
@@ -253,7 +297,7 @@ export function CataloguePage({ term, onOpen }: { term: string; onOpen: (id: str
               </div>
             ) : (
               <div className="ds-list">
-                {shown.map(dataset => {
+                {listed.map(dataset => {
                   const tile = thumbs[dataset.id]?.tiles.find(item => item.kind === 'image') as { uri: string } | undefined
                   const coverage = coverageLine(dataset, provider.mode)
                   return (
@@ -264,7 +308,9 @@ export function CataloguePage({ term, onOpen }: { term: string; onOpen: (id: str
                         <small className="truncate">{dataset.description || 'No description recorded.'}</small>
                       </span>
                       <span className="truncate"><small>{(dataset.modalities ?? []).join(' · ') || 'Modality unknown'}</small></span>
-                      <span className="truncate"><small>{coverage.text}</small></span>
+                      {provider.mode === 'static' && states[dataset.id]
+                        ? <span><Tag tone={GUIDE_TONES[states[dataset.id]] ?? 'default'}>{GUIDE_SHORT[states[dataset.id]] ?? titleCase(states[dataset.id])}</Tag></span>
+                        : <span className="truncate"><small>{coverage.text}</small></span>}
                       <Icon.ChevronRight size={14} />
                     </button>
                   )

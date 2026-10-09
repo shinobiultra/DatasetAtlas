@@ -57,7 +57,7 @@ Still open:
 
 ## 2026-10-08 pass: state at stop
 
-Plan: [docs/superpowers/plans/2026-10-08-finish-atlas.md](docs/superpowers/plans/2026-10-08-finish-atlas.md). Executed by Sonnet 5.5 implementers and reviewers (the user replaced `gpt-6.1-sol` for this run); a same-family reviewer is not human acceptance. **Headline coverage numbers above are unchanged** (333 / 218 / 115) until Task 9 regenerates the CSV and status; BBQ-V would make it 219 once committed.
+Plan: [docs/history/plan-20261008-finish-atlas.md](docs/history/plan-20261008-finish-atlas.md). Executed by Sonnet 5.5 implementers and reviewers (the user replaced `gpt-6.1-sol` for this run); a same-family reviewer is not human acceptance. **Headline coverage numbers above are unchanged** (333 / 218 / 115) until Task 9 regenerates the CSV and status; BBQ-V would make it 219 once committed.
 
 Committed (checkpoint `f9332fa`, then one commit per task, no pushes; the baseline on the checkpoint tree was Python 1028 passed / 1 skipped, vitest 26, `prek` passed, preview-media smoke 218 datasets, complete-index smoke 216 of 216, browser 66 + 3 opt-in with local Ollama only):
 - Task 1: baseline attestation, [baseline-attestation-20261008.json](reports/baseline-attestation-20261008.json). The browser suite needs `ATLAS_PYTHON=<abs .venv python>` and `ATLAS_LINKED_PROVIDER=local-ollama-qwen35` on this machine, and it rewrites 18 tracked `reports/browser-*.json` receipts.

@@ -83,9 +83,12 @@ test('inspection and selection stay separate interactions', async ({ page }) => 
 test('a public build states what it can show and never claims the workbench preview', async ({ page }) => {
   await page.goto('/')
   await expect(page.locator('.cat-head')).toContainText('browsable in this public build')
-  const unpublished = page.locator('.ds-card').filter({ hasText: 'Metadata only here' }).first()
+  await expect(page.getByRole('region', { name: 'About this site' })).toContainText('The data itself is not hosted here')
+  await expect(page.getByRole('region', { name: 'Live examples' }).locator('.ds-card')).toHaveCount(3)
+  const unpublished = page.locator('.ds-row[data-dataset-id="advbench"]')
   await expect(unpublished).toBeVisible()
-  await expect(unpublished).toContainText('exists in the local workbench')
+  await expect(unpublished).toContainText('Maintainer preview')
+  await expect(unpublished).not.toContainText('exists in the local workbench')
 })
 
 test('a metadata-only dataset explains the gap instead of showing an empty grid', async ({ page }) => {
@@ -121,11 +124,12 @@ test('the guide separates a maintainer-only preview, a gate, and a request-only 
   await expect(request.locator('code')).toHaveCount(0)
 })
 
-test('the catalogue explains what the public site is and lists the datasets whose examples it publishes', async ({ page }) => {
+test('the catalogue filters by how a dataset can be obtained', async ({ page }) => {
   await page.goto('/')
-  await page.getByText('What this public site is').click()
-  await expect(page.locator('.cat-head')).toContainText('The data itself is not hosted here')
-  await expect(page.locator('.cat-head')).toContainText('CLEVR')
+  const rail = page.getByRole('complementary', { name: 'Catalogue filters' })
+  await rail.getByRole('checkbox', { name: /Gated at the source/ }).check()
+  await expect(page.locator('.ds-row').first()).toContainText('Gated')
+  await expect(page.getByRole('region', { name: 'Live examples' })).toHaveCount(0)
 })
 
 test('About panel keeps unpublished evidence absent and shows the public source', async ({ page }, testInfo) => {

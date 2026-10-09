@@ -40,9 +40,10 @@ def test_readme_roadmap_and_guides_state_the_same_numbers():
     roadmap = (ROOT / "ROADMAP.md").read_text()
     guide = (ROOT / "docs/getting-started.md").read_text()
     evidence = (ROOT / "reports/release_evidence.md").read_text()
-    assert f"**{numbers['entries']} catalogue entries**" in readme and f"**{numbers['previews']} prepared previews**" in readme
-    assert f"**{numbers['records']:,} preview records**" in readme and f"**{numbers['without']} entries still lack a prepared preview.**" in readme
-    assert f"the {numbers['entries']}-entry catalogue" in readme
+    for phrase in (f"{numbers['entries']} catalogue entries", f"{numbers['previews']} prepared previews", f"{numbers['records']:,} preview records",
+                   f"{numbers['without']} entries without a preview"):
+        assert phrase in readme, phrase
+    assert f"{numbers['entries']} real datasets" in readme or f"catalogue of {numbers['entries']} real datasets" in readme
     assert re.search(rf"\*\*{numbers['entries']} catalogue entries, {numbers['previews']} prepared previews, {numbers['records']:,} real preview records", roadmap)
     assert f"{numbers['entries']} datasets and benchmarks" in guide
     assert f"**{numbers['entries']} catalogue entries, {numbers['previews']} native previews, {numbers['records']:,} preview records" in evidence.split("\n", 6)[2]

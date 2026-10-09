@@ -105,9 +105,9 @@ test('the overview counts the filtered population and names each field origin', 
 test('the catalogue filters by coverage and opens a dataset straight into its samples', async ({ page }) => {
   await page.goto('/')
   const rail = page.getByRole('complementary', { name: 'Catalogue filters' })
-  await rail.getByRole('checkbox', { name: /Preview available/ }).check()
-  await expect(page.locator('.ds-card')).toHaveCount(3)
-  await page.locator('.ds-card[data-dataset-id="eurosat"]').click()
+  await rail.getByRole('checkbox', { name: /Examples on this site/ }).check()
+  await expect(page.locator('.ds-card, .ds-row')).toHaveCount(3)
+  await page.locator('[data-dataset-id="eurosat"]').first().click()
   await expect(page).toHaveURL(/#\/dataset\/eurosat$/)
   await expect(sampleCards(page).first()).toBeVisible()
 })

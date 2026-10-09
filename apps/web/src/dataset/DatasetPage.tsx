@@ -330,7 +330,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
             <span>{(dataset.modalities ?? []).map(titleCase).join(' + ') || 'Modality unknown'}</span>
             <span className="sep">·</span>
             <span>{(dataset.tasks ?? []).map(titleCase).join(', ') || 'Task unrecorded'}</span>
-            {summary && <><span className="sep">·</span><span>{summary.label}</span></>}
+            {summary && <><span className="sep">·</span><span>{provider.mode === 'static' && !canBrowse(dataset) ? 'No examples published here' : summary.label}</span></>}
           </div>
         </div>
         <div className="ds-header-actions">
@@ -391,6 +391,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
                 {provider.mode === 'static' ? ' approved for the public build' : ' in this workbench'}.
               </Notice>
             )}
+            {provider.mode === 'static' && <NoPreviewGuide key={dataset.id} dataset={dataset} />}
             <div className="card card-pad">
               <h3 style={{ marginBottom: 10 }}>Why, precisely</h3>
               <dl className="dl">
@@ -416,7 +417,6 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
                 <button type="button" className="btn" onClick={() => setPanel('about')}><Icon.Info size={13} />Open full record</button>
               </div>
             </div>
-            {provider.mode === 'static' && <NoPreviewGuide key={dataset.id} dataset={dataset} />}
             <RelatedBrowsable dataset={dataset} onOpenDataset={onOpenDataset} />
           </div>
         </div>

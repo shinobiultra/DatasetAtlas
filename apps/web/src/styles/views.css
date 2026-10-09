@@ -342,3 +342,16 @@ table.aligned td.k { color: var(--text-muted); width: 24%; }
   .ds-header-main .facts { max-height: 34px; overflow: hidden; font-size: 11px; }
   .ds-header-actions { grid-column: 1 / -1; margin-left: 0; max-width: 100%; flex-wrap: wrap; }
 }
+
+/* ---------- Public site landing ---------- */
+.hero {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: var(--s-4) var(--s-6); align-items: center;
+  padding: var(--s-5); margin-bottom: var(--s-5); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+}
+.hero h2 { font-size: 19px; line-height: 1.25; margin: 0 0 var(--s-2); text-wrap: balance; }
+.hero p { margin: 0; color: var(--text-muted); max-width: 70ch; }
+.hero-actions { display: flex; gap: var(--s-2); flex-wrap: wrap; justify-content: flex-end; }
+.live-strip h2 { font-size: var(--fs-md); font-weight: 600; margin: 0 0 var(--s-3); }
+.live-strip .rest-h { margin-top: var(--s-6); }
+@media (max-width: 760px) { .hero { grid-template-columns: 1fr; } .hero-actions { justify-content: flex-start; } }
+.cat-head .row { flex-wrap: wrap; }

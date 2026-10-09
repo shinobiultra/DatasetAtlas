@@ -64,6 +64,8 @@ export interface DataProvider {
   thumbnails(): Promise<Thumbnails>
   /** Static builds only: the public guide entry for a dataset, or null (a workbench has the live dataset page instead). */
   guide(id: string): Promise<GuideEntry | null>
+  /** Static builds only: every dataset's how-to-get state, for catalogue filters and list rows. */
+  guideStates(): Promise<Record<string, string>>
   aggregate(datasetId: string, query: Query, fieldIds: string[], top?: number): Promise<AggregateResponse>
 }
 
@@ -114,13 +116,20 @@ export class StaticDataProvider implements DataProvider {
   private thumbs?: Promise<Thumbnails>
   private guides?: Promise<Record<string, GuideEntry>>
 
-  async guide(id: string): Promise<GuideEntry | null> {
+  async guideStates(): Promise<Record<string, string>> {
+    const all = await this.guideAll()
+    return Object.fromEntries(Object.entries(all).map(([id, entry]) => [id, entry.how_to_get.state]))
+  }
+  private guideAll(): Promise<Record<string, GuideEntry>> {
     this.guides ??= (async () => {
       const document = await responseJson<{ schema_version?: string; datasets?: Record<string, GuideEntry> }>(publicUrl('data/guide.json'))
       checkMajor(document, 'Public guide')
       return document.datasets ?? {}
     })()
-    try { return (await this.guides)[id] ?? null } catch (failure) { this.guides = undefined; throw failure }  // a failed fetch is retried, not cached
+    return this.guides
+  }
+  async guide(id: string): Promise<GuideEntry | null> {
+    try { return (await this.guideAll())[id] ?? null } catch (failure) { this.guides = undefined; throw failure }  // a failed fetch is retried, not cached
   }
   async capabilities(): Promise<Capabilities> { return { mode: 'static', operations: ['catalogue', 'query', 'selection', 'export', 'artifacts'], api_version: '1' } }
   async datasets(): Promise<Dataset[]> {
@@ -273,6 +282,7 @@ export class WorkbenchDataProvider implements DataProvider {
   similarity(datasetId: string, body: Record<string, unknown>): Promise<Record<string, unknown>> { return post(`/similarity/${encodeURIComponent(datasetId)}`, body) }
   private thumbs?: Promise<Thumbnails>
   async guide(): Promise<GuideEntry | null> { return null }
+  async guideStates(): Promise<Record<string, string>> { return {} }
   thumbnails(): Promise<Thumbnails> {
     this.thumbs ??= get<{ datasets?: Thumbnails }>('/catalogue/thumbnails').then(document => document.datasets ?? {}).catch(() => ({}))
     return this.thumbs

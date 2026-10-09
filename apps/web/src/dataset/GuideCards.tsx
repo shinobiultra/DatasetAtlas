@@ -2,18 +2,9 @@ import { useEffect, useState } from 'react'
 import type { Dataset } from '../generated'
 import { provider, type GuideEntry, type GuideField } from '../provider'
 import { safeUrl, titleCase } from '../lib/format'
+import { GUIDE_LABELS as LABELS, GUIDE_TONES as TONES } from '../lib/guideLabels'
 import { repositoryUrl } from '../lib/repository'
 import { CopyButton, Tag } from '../ui/primitives'
-
-const TONES: Record<string, 'ok' | 'warn' | 'default'> = {
-  in_site: 'ok', fetch_with_atlas: 'ok', fetch_after_terms: 'warn', accept_terms: 'warn', request_from_authors: 'warn',
-  prepared_by_maintainers_only: 'default', public_no_adapter: 'default', unreleased: 'default', source_unverified: 'default',
-}
-const LABELS: Record<string, string> = {
-  in_site: 'Examples on this site', fetch_with_atlas: 'Fetch with Dataset Atlas', fetch_after_terms: 'Accept terms, then fetch',
-  prepared_by_maintainers_only: 'Maintainer preview, no public recipe', accept_terms: 'Gated at the source', request_from_authors: 'Request from the authors',
-  public_no_adapter: 'Public source, no Atlas recipe yet', unreleased: 'Not released', source_unverified: 'No verified public source',
-}
 
 export function useGuide(id: string): GuideEntry | null | undefined {
   const [entry, setEntry] = useState<GuideEntry | null | undefined>(undefined)

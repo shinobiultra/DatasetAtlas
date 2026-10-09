@@ -1,3 +1,4 @@
+import { repositoryUrl } from './lib/repository'
 import { displayUrl } from './lib/display'
 import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import type { Capabilities, Dataset, Selection } from './generated'
@@ -136,6 +137,7 @@ export function App() {
           )}
         </label>
         <div className="topbar-right">
+          {provider.mode === 'static' && repositoryUrl() && <a className="btn ghost sm" href={repositoryUrl()!} target="_blank" rel="noopener noreferrer">GitHub</a>}
           <span className={`mode-badge${provider.mode === 'workbench' ? ' workbench' : ''}`} title={provider.mode === 'workbench' ? 'A local workbench serves data, analysis and model connections.' : 'Published catalogue and approved previews; no backend.'}>
             <span className="dot" style={{ background: provider.mode === 'workbench' ? 'var(--ok)' : 'var(--n-400)' }} />
             {provider.mode === 'workbench' ? 'Workbench' : 'Public build'}

@@ -270,7 +270,7 @@ in `reports/final-status.json` and `reports/installation-verification.json`.
 The timestamped storage scan measured **143.47 GB**, including configured external
 models. The user requested a graceful stop. Cauldron was cancelled at 725,000 of
 1,880,992 rows and remains excluded from coverage. The workbench and task-owned
-vLLM server were stopped. See [STOP_20260923.md](../STOP_20260923.md) before resuming.
+vLLM server were stopped. See [docs/history/stop-20260923.md](../docs/history/stop-20260923.md) before resuming.
 
 The subsequent SafeBench expansion adds a complete 2,300-group native index and
 100 original-quality preview records, making **163 previews / 15,846 records,

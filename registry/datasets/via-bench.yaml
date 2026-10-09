@@ -25,6 +25,9 @@ coverage:
     (VIABench, arXiv 2607.14660: videos from blind individuals). They share a name
     only and must not be attached to this entry.'
   - Adapter and preview are not implemented because there is no data to adapt.
+  - 'Checked 2026-10-09 (repeat of 2026-10-06): arXiv still has only v1 with ''will be released''; no Hugging
+    Face dataset or GitHub repository carries arXiv 2602.01816. External blocker (unreleased); the VIABench
+    name collision still stands.'
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -104,6 +107,34 @@ evidence:
   note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
     ETag with a length) on a data file, so no release is pinned and public availability of the data itself
     is not established. 1 URL probed (HEAD only): 1 reachable.'
+- kind: source_audit_release
+  url: https://arxiv.org/abs/2602.01816
+  note: 'Release search repeated 2026-10-09. arXiv 2602.01816 still shows only v1 (2026-02-02) and its
+    abstract still says ''The benchmark data and code will be released'', with no link. Hugging Face:
+    the paper page API lists 0 linked datasets, models and spaces; filtering datasets, models and spaces
+    by the tag arxiv:2602.01816 returns nothing; searches for VIA-Bench and VIABench return only MCG-NJU/VIABench
+    and Riverlu/VIABench, the name collision already recorded (arXiv 2607.14660, a different benchmark);
+    searches for the title and for ''illusions anomalies'' return nothing; no dataset is owned by the
+    HF account wenjin007 (the first author''s claimed HF account). GitHub: repository searches for VIA-Bench,
+    the title and the arXiv ID find nothing relevant, and the senior author''s site repo hehefan/hehefan.github.io
+    (commit 02eecf02c18c8339e148ea6b827131a9be58f2f4, 12 files) does not mention the benchmark. One possibly
+    related public repository exists under a GitHub user named Wenjin Hou (identity with the author not
+    verified): WenjinHou/ICML_Rebuttal_21564 at commit 403f43649b789870442baf05bdc0af09bb0023f3 holds
+    a 311-byte README and three figure files (error_distribution.png 291,911 bytes; motion_illusion_example.png
+    1,868,106; visual_illusion_example.png 1,955,719) about illusion reasoning. It is rebuttal figures,
+    not the 1,004-item benchmark, and no image was opened. No release of VIA-Bench was located.'
+  audit_file: reports/github-sources-probe-20261009.json
+  checked_on: '2026-10-09'
+  source_identity_status: no_release_found_name_collision_recorded
+  disposition: still_unreleased
+- kind: source_audit_access
+  url: https://huggingface.co/api/papers/2602.01816
+  observation: paper_page_lists_no_linked_dataset
+  requires_external_access_step: null
+  download_or_media_inspected: false
+  audit_file: reports/github-sources-probe-20261009.json
+  checked_on: '2026-10-09'
+  source_identity_status: no_release_found_name_collision_recorded
 source_url: https://arxiv.org/abs/2602.01816
 modalities:
 - image

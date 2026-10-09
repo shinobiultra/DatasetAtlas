@@ -1,0 +1,304 @@
+{
+  "receipt": "github-sources-probe-20261009",
+  "checked_on": "2026-10-09",
+  "purpose": "Decide whether seven catalogue entries whose data may live in small public GitHub repositories are actually present as pinnable files.",
+  "method": {
+    "github_api": "unauthenticated (60 requests/hour): commits/HEAD, git/trees?recursive=1, repo metadata, branches, commit details for deep-image-prior's data/ history; repository and user searches for VIA-Bench",
+    "raw_fetches": "raw.githubusercontent.com at the pinned commit: READMEs, LICENSE files, data.json, the group-words JSON, 6+3 notebooks as text; arXiv abstract page; Hugging Face public JSON API (papers, dataset/model/space search); two project web pages; S3 HEAD and 1-byte ranged GET",
+    "not_done": [
+      "no image was opened, viewed or decoded",
+      "no dataset content was sent to any model or external service",
+      "no clone, no LFS, no archive download",
+      "no credentials sent"
+    ]
+  },
+  "caps": {
+    "total_transfer_cap_bytes": 1500000000,
+    "per_dataset_cap_bytes": 500000000
+  },
+  "bytes_transferred": {
+    "raw_file_bytes_exact": 1579971,
+    "api_json_and_error_bodies_estimated": 300000,
+    "total_estimated_bytes": 1880000,
+    "note": "Raw file sizes are exact response sizes; GitHub/HF API JSON was not metered per request and is estimated from the saved responses."
+  },
+  "outcome": {
+    "integrated": [],
+    "blocked": [
+      "paper-08e415961919a492-unnamed-11-image-inpainting-set",
+      "paper-944952997d24ce45-unnamed-van-gogh-painting-sample",
+      "paper-944952997d24ce45-unnamed-vma-candidate-pool",
+      "paper-959e8fc51787f7e4-unnamed-sea-otter-image-sample",
+      "simulated-transistor-traces",
+      "via-bench",
+      "group-labels"
+    ],
+    "summary": "None of the seven populations is present as pinnable files, so no recipe, preview, index or test was written; every entry carries dated source_audit evidence and one appended blocker line. All seven stay identity candidate and publication not_reviewed."
+  },
+  "blocker_classification": "Each is an external blocker (the population is not published as a public pinnable file, or its host denies access). None is an implementation gap: no format needs an adapter.",
+  "limits": [
+    "Only the repositories named by each entry were audited; the pictures' other origins (for example Heide et al. for the 11 inpainting images, Charlesworth et al. for the group-label lexicon) were not searched.",
+    "Git history was enumerated only for deep-image-prior's data/ directory; for the other repositories the repo size field is cited as corroboration, not proof.",
+    "S3 403 cannot distinguish a removed object from a private one; either way nothing is publicly retrievable.",
+    "Absence on 2026-10-09 is not a statement about later releases; refresh by pinned file."
+  ],
+  "entries": [
+    {
+      "dataset_id": "paper-08e415961919a492-unnamed-11-image-inpainting-set",
+      "disposition": "blocked",
+      "blocker_type": "external (population not published as files)",
+      "expected": "11 classic inpainting images: Barbara, Boat, House, Lena, Peppers, C.man, Couple, Finger, Hill, Man, Montage",
+      "repository": "dmitryulyanov/deep-image-prior",
+      "pinned_commit": "042e0d4c1e93f4b1eb0932781de55b8cff5e0f40",
+      "commit_date": "2020-05-09",
+      "branches": [
+        "master"
+      ],
+      "tree": {
+        "files": 50,
+        "bytes": 3431391,
+        "truncated": false
+      },
+      "found": {
+        "inpainting_images_at_head": [
+          "data/inpainting/kate.png (314,477)",
+          "data/inpainting/library.png (638,506)",
+          "data/inpainting/vase.png (203,331)"
+        ],
+        "masks_at_head": [
+          "kate_mask.png (4,298)",
+          "library_mask.png (3,459)",
+          "vase_mask.png (930)"
+        ],
+        "paper_names_present_at_head": [
+          "data/restoration/barbara.png (185,727), in a restoration folder"
+        ],
+        "paper_names_in_history_only": [
+          "data/inpainting/lena.png (374,782) from commit 961ed4a until e1ff62d 'kate instead of lena' (2018-04-04)"
+        ],
+        "paper_names_never_committed_as_files": [
+          "Boat",
+          "House",
+          "Peppers",
+          "C.man",
+          "Couple",
+          "Finger",
+          "Hill",
+          "Man",
+          "Montage"
+        ],
+        "history_checked": "all 7 commits that touched data/ (file names and statuses only); repo size field 24,867 KB includes history"
+      },
+      "count_match": false,
+      "licence": "LICENSE 197 bytes: Apache-2.0 for the software, asks to contact the author for commercial use; GitHub reports NOASSERTION; grants nothing for the images",
+      "evidence_appended": [
+        "source_audit_release",
+        "source_audit_access"
+      ],
+      "disposition_key_recorded": null,
+      "note": "1 of 11 names at HEAD, 2 of 11 across history. The paper cites Heide et al. as the images' origin; only this repository was audited."
+    },
+    {
+      "dataset_id": "paper-944952997d24ce45-unnamed-van-gogh-painting-sample",
+      "disposition": "blocked",
+      "blocker_type": "external (selection not released)",
+      "expected": "874 publicly available Van Gogh paintings",
+      "repository": "Trustworthy-AI-Group/VMA",
+      "pinned_commit": "53e6943112a72c704f5dfb7674fad4b35706a70f",
+      "commit_date": "2025-10-27",
+      "branches": [
+        "main"
+      ],
+      "tree": {
+        "files": 24,
+        "bytes": 3847076,
+        "truncated": false
+      },
+      "found": {
+        "data_json": {
+          "bytes": 167,
+          "sha256": "da479a9493e9b21351e86e0112f0116ab6e9a56f540d51626cc590b152ef5d5d",
+          "shape": "JSON array with 1 element (keys and length only were read)"
+        },
+        "images": "18 image files: 17 under figs/ (8 attack categories x original + attacked, plus overview.png) and src.jpg; none opened",
+        "readme": "mentions only data.json; no dataset, manifest, archive or external data link",
+        "history": "repo size field 7,112 KB, consistent with no large hidden image set (corroboration, not proof; history not enumerated)"
+      },
+      "count_match": false,
+      "licence": "MIT (code only)",
+      "evidence_appended": [
+        "source_audit_release",
+        "source_audit_access"
+      ],
+      "disposition_key_recorded": "still_unreleased"
+    },
+    {
+      "dataset_id": "paper-944952997d24ce45-unnamed-vma-candidate-pool",
+      "disposition": "blocked",
+      "blocker_type": "external (triplets not released)",
+      "expected": "1,000 sampled image-prompt-target evaluation triplets (from a pool of 1,000 distinct prompts, images, targets)",
+      "repository": "Trustworthy-AI-Group/VMA",
+      "pinned_commit": "53e6943112a72c704f5dfb7674fad4b35706a70f",
+      "commit_date": "2025-10-27",
+      "branches": [
+        "main"
+      ],
+      "tree": {
+        "files": 24,
+        "bytes": 3847076,
+        "truncated": false
+      },
+      "found": {
+        "data_json": "1-element array, 167 bytes (see the Van Gogh entry)",
+        "triplet_manifest": "none",
+        "images": "18 illustration files only"
+      },
+      "count_match": false,
+      "licence": "MIT (code only)",
+      "evidence_appended": [
+        "source_audit_release",
+        "source_audit_access"
+      ],
+      "disposition_key_recorded": "still_unreleased"
+    },
+    {
+      "dataset_id": "paper-959e8fc51787f7e4-unnamed-sea-otter-image-sample",
+      "disposition": "blocked",
+      "blocker_type": "external (sample not released)",
+      "expected": "30 curated sea-otter images",
+      "repository": "UIUC-MONET/vlm-circuit-tracing",
+      "pinned_commit": "6927944a93f5c617947494ad0f21b094a4c92a94",
+      "commit_date": "2026-08-18",
+      "branches": [
+        "main"
+      ],
+      "tree": {
+        "files": 185,
+        "bytes": 4123692,
+        "truncated": false
+      },
+      "found": {
+        "images": "21 PNG files, all under circuit_tracer_vlm/demos/img/ (largest 226,082 bytes); file names are demo prompts, none contains 'otter'; none opened",
+        "text_search": "'otter' absent from every path, both READMEs and the six demo notebooks (604,303 bytes read as text)",
+        "related_non_github": "README points to Hugging Face Jingcheng/gemma3-4b-it-plt-activations (activations with image references, no image bytes); not opened",
+        "history": "repo size field 2,420 KB; history not enumerated"
+      },
+      "count_match": false,
+      "licence": "MIT (code only)",
+      "evidence_appended": [
+        "source_audit_release",
+        "source_audit_access"
+      ],
+      "disposition_key_recorded": "still_unreleased"
+    },
+    {
+      "dataset_id": "simulated-transistor-traces",
+      "disposition": "blocked",
+      "blocker_type": "external (access denied / unreleased) plus size cap",
+      "expected": "Jonas/Kording simulated microprocessor activity (>250 frames per game) and lesion data",
+      "repository": "ericmjonas/neuroprocdata",
+      "pinned_commit": "3d7a1f067a347d6587b344283c479da0debbf7b8",
+      "commit_date": "2017-01-02",
+      "branches": [
+        "master"
+      ],
+      "tree": {
+        "files": 5,
+        "bytes": 876121,
+        "truncated": false
+      },
+      "found": {
+        "repository_files": [
+          "README.md (1,408)",
+          "fabfile.py (963)",
+          "circuit connectomics.ipynb (645,002)",
+          "lesions.ipynb (212,034)",
+          "time series.ipynb (16,714)"
+        ],
+        "readme_says": "data in S3; raw time series 20 GB+ before gzip; 'super-preliminary and not public yet'",
+        "s3_objects_named_in_notebooks": [
+          "donkeykong.5000.ts.spikes.npy.gz",
+          "donkeykong.5000.ts.spikes.h5.gz",
+          "donkeykong.5000.ws.spikes.npy.gz",
+          "donkeykong.5000.ws.spikes.h5.gz",
+          "lesions_df.csv",
+          "transistors.csv",
+          "wires.csv"
+        ],
+        "s3_probe_2026-10-09": "all 7: HEAD 403 on https://ericmjonas-public.s3.amazonaws.com/data/neuroproc/<name>; ranged 1-byte GET 403 AccessDenied on 2 of them (virtual-hosted and global path-style); bucket listing AccessDenied; legacy regional host s3-us-west-2.amazonaws.com answers 301 PermanentRedirect",
+        "project_site": "ericmjonas.github.io/neuroproc/pages/data.html (2,710 bytes) says all data is available 'below' and shows only a GitHub-card widget for this repository",
+        "history": "repo size field 939 KB, i.e. no hidden data in history"
+      },
+      "count_match": false,
+      "licence": "no licence file; GitHub reports none",
+      "evidence_appended": [
+        "source_audit_release",
+        "source_audit_access"
+      ],
+      "disposition_key_recorded": "still_unreleased",
+      "note": "Even reachable, the 5,000-step snippet is not the paper's traces and the full series exceed the 500 MB per-dataset cap."
+    },
+    {
+      "dataset_id": "via-bench",
+      "disposition": "blocked",
+      "blocker_type": "external (unreleased); name collision kept",
+      "expected": "VIA-Bench, arXiv 2602.01816: 1,004 multiple-choice items in six categories",
+      "repository": null,
+      "found": {
+        "arxiv": "only v1 (2026-02-02); abstract says data and code 'will be released', no link",
+        "huggingface": "paper page API: 0 linked datasets/models/spaces; arxiv:2602.01816 tag filter empty for datasets, models, spaces; search 'VIA-Bench'/'VIABench' returns only MCG-NJU/VIABench and Riverlu/VIABench (a different benchmark, arXiv 2607.14660); no datasets owned by HF user wenjin007",
+        "github": "repository search for VIA-Bench, the title and the arXiv ID: nothing relevant; hehefan/hehefan.github.io@02eecf02c18c8339e148ea6b827131a9be58f2f4 (12 files) does not mention it",
+        "possibly_related_lead": "WenjinHou/ICML_Rebuttal_21564@403f43649b789870442baf05bdc0af09bb0023f3: README.MD 311 bytes + 3 figure files (291,911; 1,868,106; 1,955,719 bytes); rebuttal figures about illusion reasoning, not a benchmark; owner identity unverified; images not opened"
+      },
+      "count_match": false,
+      "licence": null,
+      "evidence_appended": [
+        "source_audit_release",
+        "source_audit_access"
+      ],
+      "disposition_key_recorded": "still_unreleased"
+    },
+    {
+      "dataset_id": "group-labels",
+      "disposition": "blocked",
+      "blocker_type": "external (phrase list not released)",
+      "expected": "864 group-label phrases for SC-EAT",
+      "repository": "kshitishghate/bias_prop",
+      "pinned_commit": "c0e4a922124d0c28e85be7a4d9753ac317028450",
+      "commit_date": "2024-05-24",
+      "branches": [
+        "main"
+      ],
+      "tree": {
+        "files": 3,
+        "bytes": 8985,
+        "truncated": false
+      },
+      "found": {
+        "file": "Data/template_and_group_words.json, 2,983 bytes, sha256 e4c2f4843946d65e55b097f4fc42de3c45dc78f044bebeafa801c721d9da7786, git blob d4ee776d190daf3865fc47d342da1f9f902d88d5",
+        "keys_and_lengths": {
+          "template1": 3,
+          "template2": 3,
+          "template3": 3,
+          "template": 6,
+          "gender_words": 24,
+          "race_words": 36,
+          "race1": 12,
+          "race2": 12,
+          "gender1": 12,
+          "gender_words_expanded": 24
+        },
+        "readme": "templates and code 'will be added'",
+        "head_unchanged_since": "2026-10-06"
+      },
+      "count_match": false,
+      "licence": "MIT",
+      "evidence_appended": [
+        "source_audit_release",
+        "source_audit_access"
+      ],
+      "disposition_key_recorded": "still_unreleased",
+      "note": "24 gender x 36 race = 864 matches the count, but the construction is not released; Atlas does not generate it. The 60-word vocabulary is a different population and was not integrated."
+    }
+  ]
+}

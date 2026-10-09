@@ -22,6 +22,9 @@ coverage:
   - Exact paper-specific source release or selected subset remains unverified; source
     research alone does not resolve this candidate.
   - Adapter and preview are not implemented.
+  - 'Checked 2026-10-09: the author repository (pinned at 6927944a93f5) contains no sea-otter image and
+    no 30-image sample; its 21 PNGs are demo figures. External blocker: the sample is not released as files.
+    Not an implementation gap.'
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -76,4 +79,27 @@ evidence:
   note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
     ETag with a length) on a data file, so no release is pinned and public availability of the data itself
     is not established. 1 URL probed (HEAD only): 1 reachable.'
+- kind: source_audit_release
+  url: https://github.com/UIUC-MONET/vlm-circuit-tracing/tree/6927944a93f5c617947494ad0f21b094a4c92a94
+  note: 'Repository UIUC-MONET/vlm-circuit-tracing at commit 6927944a93f5c617947494ad0f21b094a4c92a94
+    (main, the only branch; pushed 2026-08-18; MIT licence covers the code): 185 files, 4,123,692 bytes,
+    of which the only images are 21 PNG files under circuit_tracer_vlm/demos/img/ (largest 226,082 bytes;
+    names such as dallas-austin-haiku.png, mj-basketball-es.png, peso-us-gemma.png, tom-brady.png, pirate.png
+    - none contains ''otter''). The word ''otter'' occurs in no path, in neither README, and in none of
+    the six demo notebooks (604,303 bytes read as text). There is no 30-image set, manifest or archive.
+    The README points to the Hugging Face repo Jingcheng/gemma3-4b-it-plt-activations (activation shards
+    that keep image references only, no image bytes); that repo was not opened and is not a source of
+    the 30 images. No image was opened.'
+  audit_file: reports/github-sources-probe-20261009.json
+  checked_on: '2026-10-09'
+  source_identity_status: paper_sample_not_released_in_repository
+  disposition: still_unreleased
+- kind: source_audit_access
+  url: https://github.com/UIUC-MONET/vlm-circuit-tracing/tree/6927944a93f5c617947494ad0f21b094a4c92a94
+  observation: repository_public_sample_absent
+  requires_external_access_step: null
+  download_or_media_inspected: false
+  audit_file: reports/github-sources-probe-20261009.json
+  checked_on: '2026-10-09'
+  source_identity_status: paper_sample_not_released_in_repository
 source_url: https://github.com/UIUC-MONET/vlm-circuit-tracing

@@ -22,6 +22,10 @@ coverage:
   - Exact paper-specific source release or selected subset remains unverified; source
     research alone does not resolve this candidate.
   - Adapter and preview are not implemented.
+  - 'Checked 2026-10-09: the author repository (pinned at 042e0d4c1e93) does not contain the 11-image inpainting
+    set (1 of 11 names at HEAD, 2 of 11 in history; three differently named inpainting images). External
+    blocker: no pinnable public file carries the population. Not an implementation gap, and no integration
+    was made.'
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -78,4 +82,33 @@ evidence:
   note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
     ETag with a length) on a data file, so no release is pinned and public availability of the data itself
     is not established. 1 URL probed (HEAD only): 1 reachable.'
+- kind: source_audit_release
+  url: https://github.com/dmitryulyanov/deep-image-prior/tree/042e0d4c1e93f4b1eb0932781de55b8cff5e0f40
+  note: 'Deep Image Prior repository dmitryulyanov/deep-image-prior at commit 042e0d4c1e93f4b1eb0932781de55b8cff5e0f40
+    (master, the only branch; last commit 2020-05-09): 50 files, 3,431,391 bytes. The paper''s 11 inpainting
+    images (Barbara, Boat, House, Lena, Peppers, C.man, Couple, Finger, Hill, Man, Montage) are NOT in
+    it. data/inpainting/ holds three images with masks (kate.png 314,477 bytes, library.png 638,506, vase.png
+    203,331 and their *_mask.png), and the only paper name present at HEAD is data/restoration/barbara.png
+    (185,727 bytes), in a restoration folder, not in the inpainting folder. Across the 7 commits that
+    ever touched data/, Lena existed as data/inpainting/lena.png (374,782 bytes) from the first commit
+    961ed4a until ''kate instead of lena'' (e1ff62d, 2018-04-04); no file named for Boat, House, Peppers,
+    C.man, Couple, Finger, Hill, Man or Montage was ever committed under data/ (all file names in those
+    7 commits were listed; the pictures themselves were not opened, so a renamed file cannot be excluded
+    by content). So 1 of 11 names is present at HEAD and 2 of 11 in history; the population is not a file
+    set here. LICENSE (197 bytes) is Apache-2.0 for the software with a request to contact the author
+    for commercial use; GitHub reports NOASSERTION, and it grants nothing for the images. Nothing was
+    downloaded beyond README, LICENSE and API metadata; no image was opened. No disposition is recorded
+    because the images are classic third-party pictures that exist elsewhere (the paper cites Heide et
+    al. as their source); only this repository was audited.'
+  audit_file: reports/github-sources-probe-20261009.json
+  checked_on: '2026-10-09'
+  source_identity_status: repository_holds_3_of_11_inpainting_images_no_11_image_set
+- kind: source_audit_access
+  url: https://github.com/dmitryulyanov/deep-image-prior/tree/042e0d4c1e93f4b1eb0932781de55b8cff5e0f40/data
+  observation: repository_public_paper_image_set_absent
+  requires_external_access_step: null
+  download_or_media_inspected: false
+  audit_file: reports/github-sources-probe-20261009.json
+  checked_on: '2026-10-09'
+  source_identity_status: repository_holds_3_of_11_inpainting_images_no_11_image_set
 source_url: https://github.com/dmitryulyanov/deep-image-prior

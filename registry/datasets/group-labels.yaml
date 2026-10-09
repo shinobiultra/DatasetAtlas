@@ -26,6 +26,9 @@ coverage:
   - 24 gender words x 36 race words = 864 matches the paper's count, but the paper's exact phrase construction
     is not in the repository, so Atlas does not generate the list and present it as the released data.
   - The released word lists are a vocabulary resource, not a population of examples; no preview was prepared.
+  - 'Checked 2026-10-09: the author repository is unchanged (HEAD c0e4a922124d); the 864-phrase list is
+    still not a file anywhere in it. External blocker (the list is not released), not an implementation
+    gap; the released 60-word vocabulary is a different population.'
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -79,3 +82,25 @@ evidence:
   note: 'public_unpinned: reachable without credentials, but nothing carries a pin (digest, or strong
     ETag with a length) on a data file, so no release is pinned and public availability of the data itself
     is not established. 2 URLs probed (HEAD only): 2 reachable.'
+- kind: source_audit_release
+  url: https://github.com/kshitishghate/bias_prop/tree/c0e4a922124d0c28e85be7a4d9753ac317028450
+  note: 'Re-checked 2026-10-09: kshitishghate/bias_prop HEAD is still commit c0e4a922124d0c28e85be7a4d9753ac317028450
+    (main, the only branch, pushed 2024-05-24, MIT licence), unchanged since the 2026-10-06 reading: 3
+    files. Data/template_and_group_words.json is 2,983 bytes (sha256 e4c2f4843946d65e55b097f4fc42de3c45dc78f044bebeafa801c721d9da7786,
+    git blob d4ee776d190daf3865fc47d342da1f9f902d88d5) with keys template1/2/3 (3 each), template (6),
+    gender_words (24), race_words (36), race1, race2, gender1 (12 each) and gender_words_expanded (24).
+    It holds 60 vocabulary words, not 864 phrases (24 x 36 = 864 matches the count, but the construction
+    is not in the repository). The README still says the templates and code ''will be added''. Entry not
+    integrated: the population described is absent. Values were not read, only keys and lengths.'
+  audit_file: reports/github-sources-probe-20261009.json
+  checked_on: '2026-10-09'
+  source_identity_status: author_vocabulary_released_phrase_list_not_released
+  disposition: still_unreleased
+- kind: source_audit_access
+  url: https://github.com/kshitishghate/bias_prop/tree/c0e4a922124d0c28e85be7a4d9753ac317028450/Data
+  observation: repository_public_864_phrase_list_absent
+  requires_external_access_step: null
+  download_or_media_inspected: true
+  audit_file: reports/github-sources-probe-20261009.json
+  checked_on: '2026-10-09'
+  source_identity_status: author_vocabulary_released_phrase_list_not_released

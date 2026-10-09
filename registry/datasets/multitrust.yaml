@@ -2,42 +2,37 @@ schema_version: '1.0'
 id: multitrust
 name: MultiTrust
 aliases: []
-description: MultiTrust multimodal trustworthiness benchmark. Author project links benchmark/code covering
-  truthfulness, safety, robustness, fairness, privacy; corpus role is transfer-attack framework
+description: 'MultiTrust (thu-ml/MultiTrust), the authors'' benchmark of the trustworthiness of multimodal LLMs, kept as ONE catalogue record for a heterogeneous suite, not one image collection. It holds one record per query row (11,512 rows from 62 query files at one pinned revision), each with a `task` and an `aspect` field and its native fields in `source`. Member tasks: Truthfulness (2,540 rows, 25 tasks): basic_attribute, basic_object, basic_scene, basic_grounding, basic_ocr, advanced_causality, advanced_code, advanced_compare, advanced_daily, advanced_math, advanced_spatial, advanced_temporal, advanced_traffic, advanced_translate, instruction_factual, instruction_logic, misleading_confusion, misleading_contrast, misleading_dislocation, misleading_mirror, misleading_painting, misleading_semantic, misleading_mistext, text_assistance, text_misvisual. Safety (798 rows, 7 tasks): safebench, mm_safety_bench, typographic_behavior_graph, typographic_prompt_and_behavior_graph, typographic_prompt_graph,
+  real_toxicity_prompts, crossmodal_jailbreak. Robustness (4,199 rows, 6 tasks): advglue, advglue_plus, ood_text, ood_artistic, ood_sensor, adv_nips. Fairness (1,209 rows, 5 tasks): profession_prediction, stereo_classification, stereo_statement, stereo_query, subjective_preference. Privacy (2,766 rows, 7 tasks): vizwiz_recognition, vizwiz_private_qa, vispr_recognition, vispr_private_qa, vispr_leakage, confaide, celebrity_recognition. The query files, image folders and join counts of every task are in reports/multitrust-task-inventory-20261009.json. The 10,464 images stay remote behind a hash-pinned inventory and 100 preview originals are kept locally. Corpus role: the citing papers use the MultiTrust framework for transfer attacks; the examples they generated are not part of this release.'
 paper_ids:
 - paper-392b0c393c06b48e
 - paper-6dbb0d4a7b949143
-release: unresolved
-adapter: structured
+release: multitrust-84dc74754959e9f52b67c5185700f4f7fcd8c4df
+adapter: multitrust
 adapter_config: {}
 coverage:
   identity: candidate
   source: verified
   access: gated
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: indexed_metadata_partial_media
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - 'Hugging Face thu-ml/MultiTrust (CC BY-SA 4.0, auto-gated: each researcher accepts the terms on their
-    own account) holds 10,549 files across five trustworthiness aspects with task-specific formats.'
-  - 'A suite of heterogeneous tasks, not one homogeneous collection: it needs per-task adapters, an implementation
-    gap rather than an access block.'
-  - The citing paper uses the MultiTrust framework for transfer attacks, so the examples a researcher
-    would want are those it generated, which were not located.
-  - 'Checked 2026-10-08 with the researcher''s configured local Hugging Face credentials: a HEAD of one
-    data file and auth_check both answered HTTP 403 GatedRepo, so the account has not been granted access,
-    and the file listing noted on 2026-10-06 does not show otherwise. Access requires the researcher to
-    accept the terms on their own account; until then no inventory, adapter or preview exists.'
+  - 'Hugging Face thu-ml/MultiTrust (CC BY-SA 4.0 per the card, auto-gated) requires each researcher to accept its terms on their own account; they allow non-commercial academic use only and forbid distributing any part of the dataset. Checked 2026-10-08 with the researcher''s configured credential: auth_check and a HEAD of one data file answered HTTP 403 GatedRepo (the 10,549-file listing noted on 2026-10-06 does not show that access was ever granted). The researcher has since accepted the terms on their own account and on 2026-10-09 auth_check succeeded, so this workspace can read the release; a colleague must accept the terms themselves, and Atlas never accepts them for anyone.'
+  - 'A suite of heterogeneous tasks, not one homogeneous collection: 11,512 query rows of 50 member tasks in five aspects, read from 62 query files in six layouts. Each record is one query row; image-only tasks (450 images of the NSFW, risk-identification and stereo-generation tasks), shared image pools and pairings that the authors loaders make at run time (random pick, directory order, cross product) are counted in the task inventory and not joined to a row; the k-shot Enron table is not a query file and is not indexed.'
+  - Component source datasets (for example the VizWiz-Priv, VISPR, AdvGLUE, MM-SafetyBench, SafeBench and RealToxicityPrompts folders that the file names and the authors loaders name) keep their own licences and the authors state they do not own the image copyrights, so rights stay not_reviewed and the records and 100 preview originals are local only; the access terms forbid redistribution.
+  - The citing papers use the MultiTrust framework for transfer attacks (ensemble SSA-CWA adversarial examples), so the examples a researcher would want are those they generated, which were not located; this entry is the authors current release at one pinned revision, not the corpus-used population, and identity stays candidate.
+  - 'Images stay remote: all 12,566 image references of the rows were found in the pinned listing (none absent), but only the 100 preview originals were fetched and checked against their pinned hashes; the rest are fetched one at a time on request. 57 images exceed 10 MB (the largest is 51.9 MB); one of them was served whole by the media route in the live check, the others were not tried.'
+  total_count: 11512
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://multi-trust.github.io/
-  note: Component source datasets and generated attacks have separate rights; exact corpus-used task/revision
-    unpinned
+  note: Component source datasets and generated attacks have separate rights; exact corpus-used task/revision unpinned
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-fa6b2317713f1adbc745
@@ -45,8 +40,7 @@ evidence:
   source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
   page: 26
   role: transfer-attack framework
-  excerpt: Ensemble-based Transfer Attacks We further evaluate MLLM robustness using the MultiTrust benchmarking
-    framework [68], which employs ensemble-based SSA-CWA attacks to generate highly transferable adversar-
+  excerpt: Ensemble-based Transfer Attacks We further evaluate MLLM robustness using the MultiTrust benchmarking framework [68], which employs ensemble-based SSA-CWA attacks to generate highly transferable adversar-
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -55,65 +49,66 @@ evidence:
   source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
   page: 14
   role: transfer-attack framework
-  excerpt: g the attacks on the COCO image captioning task. These exam- MultiTrust benchmarking framework
-    (Zhang et al., ples illustrate the varying degrees of model susceptibility
+  excerpt: g the attacks on the COCO image captioning task. These exam- MultiTrust benchmarking framework (Zhang et al., ples illustrate the varying degrees of model susceptibility
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://multi-trust.github.io/
-  note: Author project links benchmark/code covering truthfulness, safety, robustness, fairness, privacy;
-    corpus role is transfer-attack framework
+  note: Author project links benchmark/code covering truthfulness, safety, robustness, fairness, privacy; corpus role is transfer-attack framework
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_benchmark_page_located
 - kind: source_audit_rights
   url: https://multi-trust.github.io/
-  note: Component source datasets and generated attacks have separate rights; exact corpus-used task/revision
-    unpinned
+  note: Component source datasets and generated attacks have separate rights; exact corpus-used task/revision unpinned
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_benchmark_page_located
 - kind: source_audit_access
   url: https://multi-trust.github.io/
-  note: source_page_public_data_unverified; Identify paper-used MultiTrust subtask and release; do not
-    infer a single image archive.
+  note: source_page_public_data_unverified; Identify paper-used MultiTrust subtask and release; do not infer a single image archive.
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_benchmark_page_located
 - kind: source_audit_release
   checked_on: '2026-10-06'
   url: https://huggingface.co/datasets/thu-ml/MultiTrust/tree/84dc74754959e9f52b67c5185700f4f7fcd8c4df
-  note: Pinned revision lists 10,549 files (README, fairness/preference.json, fairness/profess_prediction.csv,
-    profession_images/*.jpg and other per-task folders). Listing read with the researcher's existing authorized
-    account; no file contents were fetched.
+  note: Pinned revision lists 10,549 files (README, fairness/preference.json, fairness/profess_prediction.csv, profession_images/*.jpg and other per-task folders). Listing read with the researcher's existing authorized account; no file contents were fetched.
   source_identity_status: author_release_identified_suite_not_adapted
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'From the source inspected on 2026-10-06: Hugging Face file listing inspected: images plus JSON/CSV
-    task files. Not inferred from the dataset name.'
+  note: 'From the source inspected on 2026-10-06: Hugging Face file listing inspected: images plus JSON/CSV task files. Not inferred from the dataset name.'
 - kind: source_audit_refresh
   url: https://multi-trust.github.io/
   probe_status: reachable
   http_status: 200
   checked_on: '2026-10-08'
-  note: 'unchanged: a reachable page says nothing about whether the files are public, so the prior state
-    stands. 2 URLs probed (HEAD only): 2 reachable.'
+  note: 'unchanged: a reachable page says nothing about whether the files are public, so the prior state stands. 2 URLs probed (HEAD only): 2 reachable.'
 - kind: source_audit_access
   checked_on: '2026-10-08'
   url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/fairness/preference.json
   http_status: 403
-  note: 'Gate closed for the configured account on 2026-10-08 (read-only metadata checks with the researcher''s
-    configured local credentials, not recorded here). dataset_info reports gated ''auto'' with main at
-    84dc74754959e9f52b67c5185700f4f7fcd8c4df; auth_check answered HTTP 403 GatedRepo; a HEAD of one data
-    file answered HTTP 403 (GatedRepo). The README.md HEAD answered 200, which only shows that the dataset
-    card is served while the gate stands. No earlier access check is recorded for this repository: the
-    10,549-file listing noted on 2026-10-06 ("read with the researcher''s existing authorized account")
-    is returned by dataset_info for a gated repo and does not show that access was ever granted. Access
-    requires the researcher to accept the terms on their own Hugging Face account; no terms were accepted
-    and no file body was fetched, so nothing is claimed about the content.'
+  note: 'Gate closed for the configured account on 2026-10-08 (read-only metadata checks with the researcher''s configured local credentials, not recorded here). dataset_info reports gated ''auto'' with main at 84dc74754959e9f52b67c5185700f4f7fcd8c4df; auth_check answered HTTP 403 GatedRepo; a HEAD of one data file answered HTTP 403 (GatedRepo). The README.md HEAD answered 200, which only shows that the dataset card is served while the gate stands. No earlier access check is recorded for this repository: the 10,549-file listing noted on 2026-10-06 ("read with the researcher''s existing authorized account") is returned by dataset_info for a gated repo and does not show that access was ever granted. Access requires the researcher to accept the terms on their own Hugging Face account; no terms were accepted and no file body was fetched, so nothing is claimed about the content.'
   audit_file: reports/gate-check-20261008.json
   source_identity_status: gate_closed_for_configured_account
+- kind: source_audit_access
+  checked_on: '2026-10-09'
+  url: https://huggingface.co/datasets/thu-ml/MultiTrust/tree/84dc74754959e9f52b67c5185700f4f7fcd8c4df
+  note: 'Gate open for the researcher: they accepted the terms on their own Hugging Face account and huggingface_hub auth_check on the dataset repository succeeded with their locally configured credential (the 2026-10-08 check had answered HTTP 403). Atlas accepted nothing and the token is stored nowhere; every read resolves it at request time through the huggingface credential profile.'
+  audit_file: reports/multitrust-live-verification-20261009.json
+  source_identity_status: gate_accepted_by_researcher_candidate_identity
+- kind: native_task_inventory
+  checked_on: '2026-10-09'
+  url: https://github.com/thu-ml/MMTrustEval/tree/a06780166d4a262c643fe7464d40f4f9ea0c6656
+  note: Which query file feeds which of the 50 member tasks, which image folder each joins to, and every join count (12,566 image references, 0 absent from the pinned listing, 1,105 image files named by no query row). Pairings were read from the authors public toolkit configs and loaders (no dataset content) and tested against the pinned listing.
+  audit_file: reports/multitrust-task-inventory-20261009.json
+  source_identity_status: member_tasks_identified_candidate_identity
+- kind: native_population_live_verification
+  checked_on: '2026-10-09'
+  receipt: reports/multitrust-live-verification-20261009.json
+  note: All 11,512 query rows of 62 pinned query files indexed under snapshot multitrust-84dc74754959-q62-899310f6c6f9249f; 100 preview originals fetched through the credential profile and decoded; originals of rows beyond the first 100 served for every aspect. Measured transfer and prepared output are in the receipt.
+  source_identity_status: 'candidate: the authors current release, not the corpus-used transfer-attack examples'
 source_url: https://multi-trust.github.io/
 modalities:
 - image

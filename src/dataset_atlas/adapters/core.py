@@ -1044,6 +1044,9 @@ def get_adapter(dataset: Dataset) -> DatasetAdapter:
     if dataset.adapter == "svo_probes":
         from .svo_probes import SVOProbesAdapter
         return SVOProbesAdapter(dataset)
+    if dataset.adapter == "multitrust":
+        from .multitrust import MultiTrustAdapter
+        return MultiTrustAdapter(dataset)
     kinds = {"structured": StructuredAdapter, "json": StructuredAdapter,
              "jsonl": StructuredAdapter, "csv": StructuredAdapter,
              "parquet": StructuredAdapter, "https": HTTPSStructuredAdapter,

@@ -335,16 +335,14 @@ def test_the_ids_file_is_not_a_catalogue_entry():
 # --- a family link is navigation, not coverage (Review Focus 6) -----------------------------------------------------------
 
 def test_family_link_does_not_change_preview_state(real_model, real_markdown):
-    assert _dataset_row("nips17")["preview"] == "none"
-    assert _real_registry()["nips17"]["coverage"]["preview"] == "none"
-    member = _member(real_model, "nips17")
-    assert member.preview == "none"
-    group = _group_of(real_model, "nips17")
-    coco = next(target for target in group.targets if target.id == "saegis-clean-and-adversarial-splits")
-    assert coco.preview == _dataset_row("saegis-clean-and-adversarial-splits")["preview"], "the family's own state is shown as it is"
-    assert any(link.target == "saegis-clean-and-adversarial-splits" for link in member.links)
-    found = re.search(r"^### `nips17`.*?(?=^### |^## |\Z)", real_markdown, re.M | re.S)
-    assert found and "preview `none`" in found.group(0)
+    """After the 2026-10-09 removals no real entry is both unprepared and linked to a prepared family, so the real queue is checked for the
+    invariant and the synthetic test below pins the behaviour."""
+    for group in real_model.groups:
+        for member in group.members:
+            assert member.preview == _dataset_row(member.id)["preview"], member.id
+            if member.preview == "none":
+                found = re.search(rf"^### `{re.escape(member.id)}`.*?(?=^### |^## |\Z)", real_markdown, re.M | re.S)
+                assert found and "preview `none`" in found.group(0), member.id
 
 
 def test_a_member_never_inherits_the_preview_of_a_link_target(real_model):
@@ -438,7 +436,8 @@ def test_options_and_decision_are_stated_from_the_groups_structure(tmp_path):
 
 def test_public_entries_without_an_adapter_state_what_blocks_them(real_model, real_markdown):
     rows = [m for g in real_model.groups for m in g.members if m.access == "public" and m.adapter == "not_started"]
-    assert rows, "the registry has public entries whose adapter is not started"
+    if not rows:
+        pytest.skip("no entry in the queue is public with an adapter that is not started (the unresolved ones were removed on 2026-10-09)")
     for member in rows:
         assert member.blocker_type in {"identity", "source_availability"}, member.id
         linked = {link.target for link in member.links}

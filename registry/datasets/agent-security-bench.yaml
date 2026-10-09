@@ -11,7 +11,7 @@ release: unresolved
 adapter: structured
 adapter_config: {}
 coverage:
-  identity: candidate
+  identity: resolved
   source: verified
   access: public
   adapter: not_started
@@ -72,6 +72,12 @@ evidence:
     selective-transfer limits remain in the acquisition receipts; this does not establish
     publication rights or the exact paper-used subset.
   recipe: registry/recipes/agent-security-bench.yaml
+- kind: human_identity_decision
+  decided_on: '2026-10-09'
+  decision: distinct_release
+  decided_by: researcher, decision form of 2026-10-09
+  scope: The researcher accepts Agent Security Bench as a dataset of its own, not another name for a listed
+    entry. Which exact revision or archive the citing paper used stays unverified, as the blockers say.
 source_url: https://github.com/agiresearch/ASB
 modalities:
 - text

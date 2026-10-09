@@ -110,7 +110,7 @@ def test_nothing_to_append_returns_the_text_unchanged():
 
 def test_every_shipped_registry_file_accepts_an_evidence_append_as_a_pure_insertion():
     files = sorted((Path(__file__).resolve().parents[2] / "registry/datasets").glob("*.yaml"))
-    assert len(files) > 250
+    assert len(files) > 200
     for path in files:
         original = path.read_text()
         edited = append_list_items(original, ("evidence",), [{"kind": "source_audit_refresh", "note": "probe " * 40}])

@@ -1,6 +1,6 @@
 # Dataset Atlas roadmap and closeout
 
-Updated 2026-10-09. SPEC.md remains the acceptance contract. Current coverage is **287 catalogue entries, 220 prepared previews, 21,532 real preview records, 218 indices for explicitly declared native populations, and 67 entries without previews**. The catalogue lists only real datasets: aliases and views of other datasets were removed on 2026-10-09 on the researcher's instruction (see [dispositions](registry/candidate_dispositions.yaml)). `full_v1_complete` remains false. A prepared native release does not resolve an unidentified historical paper subset.
+Updated 2026-10-09. SPEC.md remains the acceptance contract. Current coverage is **231 catalogue entries, 220 prepared previews, 21,532 real preview records, 218 indices for explicitly declared native populations, and 11 entries without previews**. The catalogue lists only real datasets that work now or would work after access: aliases and views of other datasets, and unresolved entries with nothing working, were removed on 2026-10-09 on the researcher's instruction (see [dispositions](registry/candidate_dispositions.yaml)). `full_v1_complete` remains false. A prepared native release does not resolve an unidentified historical paper subset.
 
 ## Current implementation and evidence
 

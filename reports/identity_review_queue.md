@@ -15,26 +15,21 @@ These are decisions for a person. Nothing in this file changes any registry reco
 
 ## Summary
 
-102 entries in 98 groups; 3 groups hold more than one entry.
+46 entries in 44 groups; 1 groups hold more than one entry.
 
-Blocker types: `identity` 78, `access` 7, `unreleased` 16, `source_availability` 1, `adapter` 0.
+Blocker types: `identity` 42, `access` 4, `unreleased` 0, `source_availability` 0, `adapter` 0.
 
-Preview states of the entries: `none` 56, `complete_target` 46.
+Preview states of the entries: `none` 1, `complete_target` 45.
 
-Retired ids (no group in the registry produces these keys any more, for example because a person resolved all its members or its group was merged or split; each id stays reserved and is never reused): IR-002 (`artbench-2`), IR-009 (`cc3m`), IR-011 (`cifar-10`), IR-015 (`concept-editing-dataset`), IR-016 (`contrastive-prompts`), IR-019 (`cub-200-2011`), IR-020 (`custom-dataset`), IR-021 (`custom-image-editing-dataset`), IR-023 (`custom-speech-segment-collection`), IR-025 (`dall-e-generated-target-images`), IR-039 (`gaussian-rubbish-examples`), IR-040 (`gda-adversarial-image-variants`), IR-041 (`gpt-4v-filtered-vl-gender-subset`), IR-049 (`illusionvqa`), IR-050 (`imagenet|imagenet-1k|imagenet-ilsvrc-2012`), IR-059 (`mnist`), IR-061 (`ostris-dataset`), IR-088 (`perturbed-gender-benchmark-image-variants`), IR-096 (`sbbench|sbbench-syn|sbbench-syn-crop`), IR-112 (`visual-counterfact-filtered-467`), IR-114 (`vl-gender`), IR-116 (`vqa-v2`).
+Retired ids (no group in the registry produces these keys any more, for example because a person resolved all its members or its group was merged or split; each id stays reserved and is never reused): IR-001 (`agent-security-bench`), IR-002 (`artbench-2`), IR-003 (`artchive`), IR-004 (`asteroids-rom`), IR-005 (`bam-fg`), IR-007 (`brca`), IR-009 (`cc3m`), IR-011 (`cifar-10`), IR-015 (`concept-editing-dataset`), IR-016 (`contrastive-prompts`), IR-019 (`cub-200-2011`), IR-020 (`custom-dataset`), IR-021 (`custom-image-editing-dataset`), IR-022 (`custom-neonatal-rat-ganglion-recordings`), IR-023 (`custom-speech-segment-collection`), IR-024 (`custom-ternus-psychophysics-responses`), IR-025 (`dall-e-generated-target-images`), IR-026 (`deepfashion`), IR-027 (`donkey-kong-rom`), IR-028 (`e-ic`), IR-029 (`e-vqa`), IR-036 (`first-person-social-interactions-dataset`), IR-039 (`gaussian-rubbish-examples`), IR-040 (`gda-adversarial-image-variants`), IR-041 (`gpt-4v-filtered-vl-gender-subset`), IR-042 (`group-labels`), IR-044 (`hc-bench`), IR-045 (`hellaswag-pro`), IR-046 (`ictcf`), IR-047 (`illusionbench-3c643c29`), IR-049 (`illusionvqa`), IR-050 (`imagenet|imagenet-1k|imagenet-ilsvrc-2012`), IR-051 (`itac`), IR-052 (`laion`), IR-053 (`laion-aesthetics`), IR-055 (`middlebury`), IR-059 (`mnist`), IR-061 (`ostris-dataset`), IR-062 (`paper-08e415961919a492-unnamed-11-image-inpainting-set`), IR-063 (`paper-08e415961919a492-unnamed-real-noise-benchmark-46`), IR-064 (`paper-12e8bd34b4a2f2a8-unnamed-harmful-instruction-evaluation-set`), IR-065 (`paper-12e8bd34b4a2f2a8-unnamed-harmful-sentence-corpus`), IR-066 (`paper-164d7c221452ffec-unnamed-cfd-morph-collection`), IR-067 (`paper-2aa40aa13ed2a25b-unnamed-objaverse-spatial-images`), IR-068 (`paper-2aa40aa13ed2a25b-unnamed-synthetic-spatial-training-set`), IR-069 (`paper-63c3bd849356e00f-unnamed-robust-nonrobust-feature-collections`), IR-070 (`paper-72040eccb96ead7a-unnamed-synthetic-spheres-dataset`), IR-071 (`paper-728d8c0964b540ad-unnamed-youtube-image-collection`), IR-072 (`paper-765a2362f8735bc4-unnamed-social-category-question-set`), IR-073 (`paper-9036b4eaa048dc21-unnamed-neuron-pair-judgment-collection`), IR-074 (`paper-944952997d24ce45-unnamed-van-gogh-painting-sample`), IR-075 (`paper-944952997d24ce45-unnamed-vma-candidate-pool`), IR-076 (`paper-959e8fc51787f7e4-unnamed-curated-internet-image-collection`), IR-077 (`paper-959e8fc51787f7e4-unnamed-internet-image-tracing-set`), IR-078 (`paper-959e8fc51787f7e4-unnamed-sea-otter-image-sample`), IR-079 (`paper-ab31cc6a994470fb-unnamed-human-adversarial-stimulus-collection`), IR-080 (`paper-c12960e5d652fb7f-unnamed-attack-generalization-collection`), IR-081 (`paper-f6dcb0e50d10ea38-unnamed-ai-generated-gender-image-attack-set`), IR-082 (`paper-f6dcb0e50d10ea38-unnamed-explicit-image-attack-set`), IR-083 (`paper-f6dcb0e50d10ea38-unnamed-historical-event-image-attack-set`), IR-084 (`paper-f6dcb0e50d10ea38-unnamed-product-screenshot-attack`), IR-085 (`paper-f6dcb0e50d10ea38-unnamed-public-figure-adversarial-image-set`), IR-088 (`perturbed-gender-benchmark-image-variants`), IR-089 (`pitfall-rom`), IR-091 (`raise1k`), IR-093 (`rosmap`), IR-096 (`sbbench|sbbench-syn|sbbench-syn-crop`), IR-103 (`simulated-transistor-traces`), IR-104 (`space-invaders-rom`), IR-110 (`via-bench`), IR-112 (`visual-counterfact-filtered-467`), IR-114 (`vl-gender`), IR-116 (`vqa-v2`), IR-118 (`vtab`), IR-119 (`wall-street-journal`), IR-120 (`wilds`).
 
-Groups with more than one entry: IR-014 (3), IR-044 (2), IR-095 (2).
+Groups with more than one entry: IR-014 (3).
 
 ### Groups
 
 | IR | Group | Entries | Preview states | Prepared target | Options |
 | --- | --- | --- | --- | --- | --- |
-| IR-001 | `agent-security-bench` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-003 | `artchive` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-004 | `asteroids-rom` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-005 | `bam-fg` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-006 | `bapps` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-007 | `brca` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-008 | `causalgym` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-010 | `child-safety-intents` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-012 | `cifar-100-c` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
@@ -42,205 +37,48 @@ Groups with more than one entry: IR-014 (3), IR-044 (2), IR-095 (2).
 | IR-014 | linked to `coco` | 3 | complete_target 3 | `coco` (complete_target) | `alias_of:coco`, `distinct_release`, `keep_candidate` |
 | IR-017 | `controlled-clevr` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-018 | `controlled-images` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-022 | `custom-neonatal-rat-ganglion-recordings` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-024 | `custom-ternus-psychophysics-responses` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-026 | `deepfashion` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-027 | `donkey-kong-rom` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-028 | `e-ic` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-029 | `e-vqa` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-030 | `emoset` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-031 | `factoid` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-032 | `openimages` | 1 | complete_target 1 | `miap` (complete_target) | `alias_of:miap`, `distinct_release`, `keep_candidate` |
 | IR-033 | `ffhq` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-034 | `fgvc-aircraft` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-035 | `finevision` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-036 | `first-person-social-interactions-dataset` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-037 | `flowers102` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-038 | `food101` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-042 | `group-labels` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-043 | `gvil-paired-illusion-images` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-044 | linked to `hc-bench` | 2 | none 2 | `hc-bench` (local_only) | `alias_of:hc-bench`, `distinct_release`, `keep_candidate` |
-| IR-045 | `hellaswag-pro` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-046 | `ictcf` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-047 | `illusionbench` | 1 | none 1 | `illusionbench-3c643c29` (complete_target) | `alias_of:illusionbench-3c643c29`, `distinct_release`, `keep_candidate` |
 | IR-048 | `illusionmnist` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-051 | `itac` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-052 | `laion` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-053 | `laion-aesthetics` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-054 | `llava-instruct-150k-3a74a703` | 1 | complete_target 1 | `llava-instruct-150k` (complete_target) | `alias_of:llava-instruct-150k`, `distinct_release`, `keep_candidate` |
-| IR-055 | `middlebury` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-056 | `mit-states` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-057 | `mma-diffusion` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-058 | `mmstar` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-060 | `multitrust` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-062 | `paper-08e415961919a492-unnamed-11-image-inpainting-set` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-063 | `paper-08e415961919a492-unnamed-real-noise-benchmark-46` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-064 | `paper-12e8bd34b4a2f2a8-unnamed-harmful-instruction-evaluation-set` | 1 | none 1 | no link | `accept_unreleased_custom_record`, `keep_candidate` |
-| IR-065 | `paper-12e8bd34b4a2f2a8-unnamed-harmful-sentence-corpus` | 1 | none 1 | no link | `accept_unreleased_custom_record`, `keep_candidate` |
-| IR-066 | `paper-164d7c221452ffec-unnamed-cfd-morph-collection` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-067 | `paper-2aa40aa13ed2a25b-unnamed-objaverse-spatial-images` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-068 | `paper-2aa40aa13ed2a25b-unnamed-synthetic-spatial-training-set` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-069 | `paper-63c3bd849356e00f-unnamed-robust-nonrobust-feature-collections` | 1 | none 1 | no link | `accept_unreleased_custom_record`, `keep_candidate` |
-| IR-070 | `paper-72040eccb96ead7a-unnamed-synthetic-spheres-dataset` | 1 | none 1 | no link | `accept_unreleased_custom_record`, `keep_candidate` |
-| IR-071 | `paper-728d8c0964b540ad-unnamed-youtube-image-collection` | 1 | none 1 | no link | `accept_unreleased_custom_record`, `keep_candidate` |
-| IR-072 | `paper-765a2362f8735bc4-unnamed-social-category-question-set` | 1 | none 1 | no link | `accept_unreleased_custom_record`, `keep_candidate` |
-| IR-073 | `paper-9036b4eaa048dc21-unnamed-neuron-pair-judgment-collection` | 1 | none 1 | no link | `accept_unreleased_custom_record`, `keep_candidate` |
-| IR-074 | `paper-944952997d24ce45-unnamed-van-gogh-painting-sample` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-075 | `paper-944952997d24ce45-unnamed-vma-candidate-pool` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-076 | `paper-959e8fc51787f7e4-unnamed-curated-internet-image-collection` | 1 | none 1 | no link | `accept_unreleased_custom_record`, `keep_candidate` |
-| IR-077 | `paper-959e8fc51787f7e4-unnamed-internet-image-tracing-set` | 1 | none 1 | no link | `accept_unreleased_custom_record`, `keep_candidate` |
-| IR-078 | `paper-959e8fc51787f7e4-unnamed-sea-otter-image-sample` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-079 | `paper-ab31cc6a994470fb-unnamed-human-adversarial-stimulus-collection` | 1 | none 1 | no link | `accept_unreleased_custom_record`, `keep_candidate` |
-| IR-080 | `paper-c12960e5d652fb7f-unnamed-attack-generalization-collection` | 1 | none 1 | no link | `accept_unreleased_custom_record`, `keep_candidate` |
-| IR-081 | `paper-f6dcb0e50d10ea38-unnamed-ai-generated-gender-image-attack-set` | 1 | none 1 | no link | `accept_unreleased_custom_record`, `keep_candidate` |
-| IR-082 | `paper-f6dcb0e50d10ea38-unnamed-explicit-image-attack-set` | 1 | none 1 | no link | `accept_unreleased_custom_record`, `keep_candidate` |
-| IR-083 | `paper-f6dcb0e50d10ea38-unnamed-historical-event-image-attack-set` | 1 | none 1 | no link | `accept_unreleased_custom_record`, `keep_candidate` |
-| IR-084 | `paper-f6dcb0e50d10ea38-unnamed-product-screenshot-attack` | 1 | none 1 | no link | `accept_unreleased_custom_record`, `keep_candidate` |
-| IR-085 | `paper-f6dcb0e50d10ea38-unnamed-public-figure-adversarial-image-set` | 1 | none 1 | no link | `accept_unreleased_custom_record`, `keep_candidate` |
 | IR-086 | `pascal-voc` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-087 | `pata` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-089 | `pitfall-rom` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-090 | `places` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-091 | `raise1k` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-092 | `ring-a-bell` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-093 | `rosmap` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-094 | `rs-vqa` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-095 | linked to `saegis-clean-and-adversarial-splits` | 2 | none 1, complete_target 1 | `saegis-clean-and-adversarial-splits` (complete_target; also in this queue) | `alias_of:saegis-clean-and-adversarial-splits`, `distinct_release`, `keep_candidate` |
+| IR-095 | `saegis-clean-and-adversarial-splits` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-097 | `seedbench` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-098 | `set14` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-099 | `set5` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-100 | `shapes-localization` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-101 | `shapes-recognition` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-102 | `shapes-relations` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-103 | `simulated-transistor-traces` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-104 | `space-invaders-rom` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-105 | `tid2013` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-106 | `turing-eye-test` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-107 | `ucf101` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-108 | `vg-qa-one` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-109 | `vg-qa-two` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-110 | `via-bench` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-111 | `visual-counterfact` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-113 | `visual6502-transistor-netlist` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-115 | `vqa-constraints` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
 | IR-117 | `vqa-v2-m-n-subsets` | 1 | complete_target 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-118 | `vtab` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-119 | `wall-street-journal` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
-| IR-120 | `wilds` | 1 | none 1 | no link | `distinct_release`, `keep_candidate` |
 
 ## Public sources whose adapter is not started
 
 These entries have access `public` and adapter `not_started`. For each, what blocks it, read from the registry's own state:
 
-- `first-person-social-interactions-dataset` (group IR-036) — blocker type **source_availability**. The registry's latest access audit (2026-10-08) records `author_page_identified_media_host_unresolvable`: the source host did not answer or did not resolve. This is source availability, not identity.
-  Registry identity audit: `original_source_and_author_reformat_distinct` (2026-09-22).
-  Registry description:
-  > First-Person Social Interactions Dataset (FPSI) and Watanabe training selection.
-  Registry blockers:
-  > The author page (ai.stanford.edu/~alireza/Disney/) links 113 AVI videos and annotation ZIPs hosted on webshare.ipat.gatech.edu over plain HTTP; the host did not answer a HEAD request within 30 s over either http or https on 2026-10-06 (an upstream availability problem to retry).
-  > The videos are AVI files, which browsers cannot play, and the host is HTTP-only, which Atlas's fetch layer does not use: even when the host returns, preparation needs a transcoding or an HTTPS mirror (an implementation gap beyond the outage).
-  > The citing paper's training selection (the Watanabe selection) is not identified, and the page states no licence.
-- `wilds` (group IR-120) — blocker type **identity**: no registry link to a prepared release; the paper's exact release, variant or component is unresolved.
-  Registry identity audit: `family_only` (2026-09-22).
-  Registry description:
-  > WILDS is a collection of ten distribution-shift datasets across modalities; no single WILDS media release.
-  Registry blockers:
-  > Exact source variant or paper release is unresolved.
-  > Adapter and preview are not implemented.
-
-## IR-001 · Agent Security Bench
-
-**Group key:** `agent-security-bench` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open). `agent-security-bench` already has a prepared preview of its own, yet the identity is still a candidate: the preview does not settle which release the paper used.
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `agent-security-bench` — Agent Security Bench
-
-- State: access `public`, adapter `tested`, preview `complete_target`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `official_protocol_located` (2026-09-22).
-- Registry blockers:
-  > Public source page located; exact paper-used data revision or archive is unverified.
-  > Public data/media reuse rights require separate review.
-- Mentioned by 1 paper:
-  - `paper-fdcf898e0b05daff`, page 33, role: bibliography-only reference
-    > uang, Kai Mei, Yifei Yao, Zhenting Wang, Chenlu Zhan, Hongwei Wang, and Yongfeng Zhang. Agent security bench (asb): Formalizing and benchmarking attacks and defenses in llm-based agents, 2025b. URL h…
-
-## IR-003 · Artchive
-
-**Group key:** `artchive` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `artchive` — Artchive
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `paper_specific_image_manifest_unresolved` (2026-09-22).
-- Registry blockers:
-  > Access to the exact data files has not been verified.
-  > The exact paper release, source variant, or derived collection remains unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
-    > , MoCov3, CLIP, ViT, — ImageNet-1K, BAM-FG, Artchive, ALADIN, SSCD
-
-## IR-004 · Asteroids ROM
-
-**Group key:** `asteroids-rom` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `asteroids-rom` — Asteroids ROM
-
-- State: access `source_release_unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `source_binary_unresolved` (2026-09-22).
-- Registry blockers:
-  > Exact source data release or paper-used subset is unverified.
-  > Public data/media reuse rights require separate review.
-- Mentioned by 1 paper:
-  - `paper-ad50206beabc5a94`, page 18, role: exclusion
-    > OMs (Donkey Kong, Space Invaders, Pitfall, and Asteroids) ultimately choosing the first three as they reliably drove the TIA and subsequently p
-
-## IR-005 · BAM-FG
-
-**Group key:** `bam-fg` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `bam-fg` — BAM-FG
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `identity_resolved_release_access_unresolved` (2026-09-22).
-- Registry blockers:
-  > Access to the exact data files has not been verified.
-  > The exact paper release, source variant, or derived collection remains unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
-    > DINO, MoCov3, CLIP, ViT, — ImageNet-1K, BAM-FG, Artchive, ALADIN, SSCD
+No entry is in this state.
 
 ## IR-006 · BAPPS
 
@@ -262,30 +100,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Mentioned by 1 paper:
   - `paper-666de2b7486d80a3`, page 3, role: introduction
     > 1: Dataset comparison. A primary differentiator between our proposed Berkeley-Adobe Perceptual Patch Similarity (BAPPS) dataset and previous work is scale of distortion types. We provide human percep…
-
-## IR-007 · BRCA
-
-**Group key:** `brca` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `brca` — BRCA
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `project_resolved_paper_slice_unresolved` (2026-09-22).
-- Registry blockers:
-  > Access to the exact data files has not been verified.
-  > The exact paper release, source variant, or derived collection remains unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
-    > DensetNet-121 — ITAC, iCTCF, BRCA, ROSMAP (Basu et al., 2024b) SD-1.5, SD-XL, DeepFloyd Model Editin
 
 ## IR-008 · CausalGym
 
@@ -478,147 +292,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   - `paper-6c99cf73401b37d4`, page 13, role: direct What’s Up split
     > lled CLEVR split of the What’s Up benchmark [Kamath et al., 2023]. • Controlled Images: Two-object spatial-relation queries on natural photographs, from the controlled images split of What’s Up [Kama…
 
-## IR-022 · custom neonatal rat ganglion recordings
-
-**Group key:** `custom-neonatal-rat-ganglion-recordings` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `custom-neonatal-rat-ganglion-recordings` — custom neonatal rat ganglion recordings
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `paper_primary_collection_raw_release_unverified` (2026-09-22).
-- Registry blockers:
-  > Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-52015222b27e7099`, page 23, role: derived collection
-    > Identifiers Additional information Strain, strain Long-Evans (rat) USC Vivarium RRID:RGD_2308852 Freshly isolated background (species)
-
-## IR-024 · custom Ternus psychophysics responses
-
-**Group key:** `custom-ternus-psychophysics-responses` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `custom-ternus-psychophysics-responses` — custom Ternus psychophysics responses
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `paper_primary_collection_release_unverified` (2026-09-22).
-- Registry blockers:
-  > Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-347b77231e69b630`, page 4, role: derived collection
-    > ected for each trial. The standard display size was ment lasted about 60 min and included three subtasks: Illusion identical to that used in the Illusion Ternus task. The small Ternus task, Illusion…
-
-## IR-026 · DeepFashion
-
-**Group key:** `deepfashion` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `deepfashion` — DeepFashion
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `family_only` (2026-09-22).
-- Registry blockers:
-  > Source access has not been verified.
-  > Exact source variant or paper release is unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-2038cb87115b4fb0`, page 9, role: future-work example
-    > well as specialized datasets such as DeepFashion and distribute attention uniformly across remaining (Liu et a
-
-## IR-027 · Donkey Kong ROM
-
-**Group key:** `donkey-kong-rom` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `donkey-kong-rom` — Donkey Kong ROM
-
-- State: access `source_release_unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `source_binary_unresolved` (2026-09-22).
-- Registry blockers:
-  > Exact source data release or paper-used subset is unverified.
-  > Public data/media reuse rights require separate review.
-- Mentioned by 1 paper:
-  - `paper-ad50206beabc5a94`, page 3, role: experimental condition
-    > Here we will examine three different “behaviors”, that is, three different games: Donkey Kong (1981), Space Invaders (1978), and Pitfall (1981). Obviously these “behaviors” are quali- tat
-
-## IR-028 · E-IC
-
-**Group key:** `e-ic` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `e-ic` — E-IC
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `official_source_resolved_file_version_unverified` (2026-09-22).
-- Registry blockers:
-  > The authors host the image captioning editing data on Google Drive and Baidu NetDisk (EasyEdit examples/MMEdit.md), not on a pinned, checksummable source. A 2026-10-06 request for the image archive through the Drive download endpoint returned an empty HTML body.
-  > A Google Drive folder cannot be listed or pinned reproducibly here; mirrors on Hugging Face are third-party uploads and are not treated as the original release.
-  > Adapter and preview are not implemented because no verifiable file could be fetched.
-- Mentioned by 1 paper:
-  - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
-    > ) BLIP2-OPT(2.7B), LLaVA- — E-VQA, E-IC V1.5(7B), MiniGPT-4(7B) (Mit
-
-## IR-029 · E-VQA
-
-**Group key:** `e-vqa` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `e-vqa` — E-VQA
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `official_source_resolved_file_version_unverified` (2026-09-22).
-- Registry blockers:
-  > The authors host the visual question answering editing data on Google Drive and Baidu NetDisk (EasyEdit examples/MMEdit.md), not on a pinned, checksummable source. A 2026-10-06 request for the image archive through the Drive download endpoint returned an empty HTML body.
-  > A Google Drive folder cannot be listed or pinned reproducibly here; mirrors on Hugging Face are third-party uploads and are not treated as the original release.
-  > Adapter and preview are not implemented because no verifiable file could be fetched.
-- Mentioned by 1 paper:
-  - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
-    > , 2024a) BLIP2-OPT(2.7B), LLaVA- — E-VQA, E-IC V1.5(7B), MiniGPT-4(7B)
-
 ## IR-030 · Emoset
 
 **Group key:** `emoset` · **Entries:** 1 · **Blocker types:** `identity` 1
@@ -763,30 +436,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   - `paper-d8a392188b9cf4d6`, page 5, role: training
     > the vision encoder, projection layer, and language model. We use the FineVision dataset (Wiedmann et al., 2025), training on 500k samples with a batch size of 16 and a learning rate of 5e-5. The SA
 
-## IR-036 · First-Person Social Interactions Dataset
-
-**Group key:** `first-person-social-interactions-dataset` · **Entries:** 1 · **Blocker types:** `source_availability` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open). For `first-person-social-interactions-dataset` the source host did not answer or did not resolve at the registry's latest access audit; that is source availability, not an identity decision.
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `first-person-social-interactions-dataset` — First-Person Social Interactions Dataset
-
-- State: access `public`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **source_availability**. The registry's latest access audit (2026-10-08) records `author_page_identified_media_host_unresolvable`: the source host did not answer or did not resolve. This is source availability, not identity.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `original_source_and_author_reformat_distinct` (2026-09-22).
-- Registry blockers:
-  > The author page (ai.stanford.edu/~alireza/Disney/) links 113 AVI videos and annotation ZIPs hosted on webshare.ipat.gatech.edu over plain HTTP; the host did not answer a HEAD request within 30 s over either http or https on 2026-10-06 (an upstream availability problem to retry).
-  > The videos are AVI files, which browsers cannot play, and the host is HTTP-only, which Atlas's fetch layer does not use: even when the host returns, preparation needs a transcoding or an HTTPS mirror (an implementation gap beyond the outage).
-  > The citing paper's training selection (the Watanabe selection) is not identified, and the page states no licence.
-- Mentioned by 1 paper:
-  - `paper-4f53de240f8fc1af`, page 3, role: source data
-    > redicted the 22nd image (P2) with reference with mean-squared error using videos from the First-Person to 21 consecutive images (T1 to T21) using P1 as the image Social Interactions Dataset (Fathi et…
-
 ## IR-037 · Flowers102
 
 **Group key:** `flowers102` · **Entries:** 1 · **Blocker types:** `identity` 1
@@ -829,31 +478,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
     > CLIP(ViT-B/16 + LoRA) — FGVC-Aircraft, Food101, Flowers102,
 
-## IR-042 · Group Labels
-
-**Group key:** `group-labels` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `group-labels` — Group Labels
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `paper_derived_lexicon_release_unresolved` (2026-09-22).
-- Registry blockers:
-  > The authors' repository (kshitishghate/bias_prop) releases only Data/template_and_group_words.json (3 templates, a 6-item prompt template list, 24 gender words, 36 race words and smaller subsets); the 864-phrase list itself and the code that builds it are not released ('will be added' per its README).
-  > 24 gender words x 36 race words = 864 matches the paper's count, but the paper's exact phrase construction is not in the repository, so Atlas does not generate the list and present it as the released data.
-  > The released word lists are a vocabulary resource, not a population of examples; no preview was prepared.
-  > Checked 2026-10-09: the author repository is unchanged (HEAD c0e4a922124d); the 864-phrase list is still not a file anywhere in it. External blocker (the list is not released), not an implementation gap; the released 60-word vocabulary is a different population.
-- Mentioned by 1 paper:
-  - `paper-164d7c221452ffec`, page 4, role: direct lexical source
-    > 000 words Valenced Text SC-EAT Valence ratings of retrieved text Group Labels 864 phrases Group-based text in SC-EAT Group representation in retrieved text Chicago Face Database (
-
 ## IR-043 · GVIL paired illusion images
 
 **Group key:** `gvil-paired-illusion-images` · **Entries:** 1 · **Blocker types:** `identity` 1
@@ -875,120 +499,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Mentioned by 1 paper:
   - `paper-b039401c04ff9b91`, page 4, role: derived collection
     > ure 3, each question The statistics of our dataset is shown in Table 2. concerns a pair of images (IMG1 and IMG2). One Note that since this dataset is only used for the eval- image (IMG1) is illusion…
-
-## IR-044 · 2 entries linked to `hc-bench`
-
-**Group key:** `hc-bench` · **Entries:** 2 · **Blocker types:** `identity` 2
-
-**Linked to:**
-
-- `hc-bench` (identity `resolved`, preview `local_only`) via `same_source_family_as` and `source_subset_of` — prepared
-
-**Decision needed.** A person decides, for each of the 2 entries below, which option applies; until then it stays a candidate. The registry links these entries to `hc-bench`. The options are `alias_of:hc-bench` (the paper's name is another name for that entry), `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open); each entry offers only the alias options for the targets it links to. A prepared preview exists for `hc-bench`; the paper's exact release is unresolved, so no entry here inherits it, and an entry whose preview is `none` stays `none`.
-
-**Options:** `alias_of:hc-bench`, `distinct_release`, `keep_candidate`
-
-### `paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-collection` — unnamed internet hidden-content collection
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `hc-bench` (identity `resolved`, preview `local_only`) via `same_source_family_as` and `source_subset_of`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:hc-bench`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `hc-bench`; `source_subset_of` → `hc-bench`
-- Registry identity audit: `author_release_identified_version_drift` (2026-10-08).
-- Registry blockers:
-  > Original release identity and rights need verification.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-2c07a8c6af8e33c2`, page 8, role: evaluation
-    > 6.23+96.23 D EEP S EEK -VL2 0 0 0 0 84.90+84.90 Table 5: Validation of task difficulty on 53 internet-sourced hidden-content images, collected independently to reduce dataset-specific noise and biase…
-
-### `paper-2c07a8c6af8e33c2-unnamed-internet-hidden-content-set` — unnamed internet hidden-content set
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `hc-bench` (identity `resolved`, preview `local_only`) via `same_source_family_as` and `source_subset_of`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:hc-bench`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `hc-bench`; `source_subset_of` → `hc-bench`
-- Registry identity audit: `author_release_identified_version_drift` (2026-10-08).
-- Registry blockers:
-  > Original release identity and rights need verification.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-2c07a8c6af8e33c2`, page 8, role: independent validation collection
-    > 0 84.90+84.90 Table 5: Validation of task difficulty on 53 internet-sourced hidden-content images, collected independently to reduce dataset-specific noise and biases. Failure case analysis. Rare err…
-
-## IR-045 · HellaSwag-Pro
-
-**Group key:** `hellaswag-pro` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `hellaswag-pro` — HellaSwag-Pro
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `unresolved` (2026-09-22).
-- Registry blockers:
-  > Source access has not been verified.
-  > Exact source variant or paper release is unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-20de77d4e60fd1bd`, page 8, role: related-work comparison
-    > 25.27 15.06 31.74 21.00 lusionbench (Guan et al., 2024) and HellaSwag-Pro (Li et al., 2025a) probe hallucination and coun
-
-## IR-046 · iCTCF
-
-**Group key:** `ictcf` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `ictcf` — iCTCF
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `source_resolved_paper_slice_unresolved` (2026-09-22).
-- Registry blockers:
-  > Access to the exact data files has not been verified.
-  > The exact paper release, source variant, or derived collection remains unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
-    > 24b) DensetNet-121 — ITAC, iCTCF, BRCA, ROSMAP (Basu et al., 2024b) SD-1.5, SD-XL, DeepFloyd Model
-
-## IR-047 · IllusionBench+, linked to `illusionbench-3c643c29`
-
-**Group key:** `illusionbench-3c643c29` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:**
-
-- `illusionbench-3c643c29` (identity `resolved`, preview `complete_target`) via `same_source_family_as` — prepared
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. The registry links this entry to `illusionbench-3c643c29`. The options are `alias_of:illusionbench-3c643c29` (the paper's name is another name for that entry), `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open). A prepared preview exists for `illusionbench-3c643c29`; the paper's exact release is unresolved, so no entry here inherits it, and an entry whose preview is `none` stays `none`.
-
-**Options:** `alias_of:illusionbench-3c643c29`, `distinct_release`, `keep_candidate`
-
-### `illusionbench` — IllusionBench+
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `illusionbench-3c643c29` (identity `resolved`, preview `complete_target`) via `same_source_family_as`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:illusionbench-3c643c29`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `illusionbench-3c643c29`
-- Registry identity audit: `original_citation_only` (2026-09-22).
-- Registry blockers:
-  > Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-6a7364738bac9f07`, page 1, role: introduction
-    > d in real-world scenarios, remain underexplored. To ad- D. we do not know dress this gap, we construct IllusionBench+, a large-scale visual GPT-4o: B. Standing on the table illusion dataset, encompas…
 
 ## IR-048 · IllusionMNIST
 
@@ -1012,80 +522,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Mentioned by 1 paper:
   - `paper-20de77d4e60fd1bd`, page 8, role: related-work comparison
     > asets 5. Related Works (e.g., IllusionMNIST) for illusion recognition; The Art of 5.1. Multimodal Large Language Models Deception
-
-## IR-051 · ITAC
-
-**Group key:** `itac` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `itac` — ITAC
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `in_house_no_release_verified` (2026-09-22).
-- Registry blockers:
-  > Access to the exact data files has not been verified.
-  > The exact paper release, source variant, or derived collection remains unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
-    > l., 2024b) DensetNet-121 — ITAC, iCTCF, BRCA, ROSMAP (Basu et al., 2024b) SD-1.5, SD-XL, DeepFloyd
-
-## IR-052 · LAION
-
-**Group key:** `laion` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `laion` — LAION
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `family_mentioned_variant_unresolved` (2026-09-22).
-- Registry blockers:
-  > Access to the exact data files has not been verified.
-  > The exact paper release, source variant, or derived collection remains unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 2 papers:
-  - `paper-c941465e4095dbe8`, page 10, role: bibliography-only reference
-    > ons. Birhane, A., Han, S., Boddeti, V., Luccioni, S., et al. Into the LAION’s den: Investigating hate in multimodal datasets. Overall, effective inner interpretability techniques should
-  - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
-    > LAION, CelebA, ImageNetVal (Parekh et al., 2024) DePALM (CLIP+OPT)
-
-## IR-053 · LAION Aesthetics
-
-**Group key:** `laion-aesthetics` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `laion-aesthetics` — LAION Aesthetics
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `derived_subset_family_identified_variant_unresolved` (2026-10-08).
-- Registry blockers:
-  > Original release identity and rights need verification.
-  > Adapter and preview are not implemented.
-  > 2026-10-08 public-page reading: the Hugging Face laion/laion2B-en-aesthetic metadata is gated behind a contact-information agreement (not accepted by the agent), and which aesthetic subset the paper used is not stated.
-- Mentioned by 1 paper:
-  - `paper-ebd63da316af82e5`, page 3, role: source data
-    > tion for inversion initial- ization. In practice, we used images from LAION Aesthetics (a subset of LAION-5B [32]). This data serves two purposes: (i) training INRs for initializing text-to-image
 
 ## IR-054 · LLaVA_Instruct_150k, linked to `llava-instruct-150k`
 
@@ -1111,29 +547,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Mentioned by 1 paper:
   - `paper-09b2d7393fc75cf7`, page 7, role: refusal evaluation subset
     > For evaluation, we use the FineVision dataset [50], selecting 10,000 images from the LLaVA_Instruct_150k subset, yielding 20,559 image–instruction pairs, and the test split of TextVQA [51], containin…
-
-## IR-055 · Middlebury
-
-**Group key:** `middlebury` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `middlebury` — Middlebury
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `benchmark_family_no_single_release` (2026-10-08).
-- Registry blockers:
-  > Original release identity and rights need verification.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-666de2b7486d80a3`, page 4, role: source data
-    > Davis ing a variety of tasks, architectures, and losses, as shown in Middleburry dataset [50]. Because artifacts arising from Table 2 (right). Such tasks include autoencoding, denoising, fra
 
 ## IR-056 · MIT States
 
@@ -1231,550 +644,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   - `paper-6dbb0d4a7b949143`, page 14, role: transfer-attack framework
     > g the attacks on the COCO image captioning task. These exam- MultiTrust benchmarking framework (Zhang et al., ples illustrate the varying degrees of model susceptibility
 
-## IR-062 · unnamed 11-image inpainting set
-
-**Group key:** `paper-08e415961919a492-unnamed-11-image-inpainting-set` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `paper-08e415961919a492-unnamed-11-image-inpainting-set` — unnamed 11-image inpainting set
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `paper_benchmark_identity_unpinned` (2026-09-22).
-- Registry blockers:
-  > Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.
-  > Adapter and preview are not implemented.
-  > Checked 2026-10-09: the author repository (pinned at 042e0d4c1e93) does not contain the 11-image inpainting set (1 of 11 names at HEAD, 2 of 11 in history; three differently named inpainting images). External blocker: no pinnable public file carries the population. Not an implementation gap, and no integration was made.
-- Mentioned by 1 paper:
-  - `paper-08e415961919a492`, page 12, role: evaluation
-    > Dmitry Ulyanov et al. Barbara Boat House Lena Peppers C.man Couple Finger Hill Man Montage Papyan et al. 28.14 31.44 34.58 35.04
-
-## IR-063 · unnamed real-noise benchmark [46]
-
-**Group key:** `paper-08e415961919a492-unnamed-real-noise-benchmark-46` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `paper-08e415961919a492-unnamed-real-noise-benchmark-46` — unnamed real-noise benchmark [46]
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `original_source_identified_paper_snapshot_unpinned` (2026-09-22).
-- Registry blockers:
-  > Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-08e415961919a492`, page 6, role: evaluation
-    > on-Gaussian obtained in the last iterations (using exponential slid- noise we use the benchmark of [46]. Using the same ing window). If averaged over two optimization runs architecture and hyper-para…
-
-## IR-064 · unnamed harmful-instruction evaluation set
-
-**Group key:** `paper-12e8bd34b4a2f2a8-unnamed-harmful-instruction-evaluation-set` · **Entries:** 1 · **Blocker types:** `unreleased` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `accept_unreleased_custom_record` (a paper-private dataset with no public release, kept as an unreleased custom record) and `keep_candidate` (leave the identity open). `paper-12e8bd34b4a2f2a8-unnamed-harmful-instruction-evaluation-set` is an unreleased paper-private record: accept as an unreleased custom record, or keep as candidate.
-
-**Options:** `accept_unreleased_custom_record`, `keep_candidate`
-
-### `paper-12e8bd34b4a2f2a8-unnamed-harmful-instruction-evaluation-set` — unnamed harmful-instruction evaluation set
-
-- State: access `unreleased`, adapter `not_applicable`, preview `none`, identity `candidate`.
-- Blocker type: **unreleased**. Access is `unreleased`: the registry records a paper-private dataset with no public release.
-- Options: `accept_unreleased_custom_record`, `keep_candidate`
-- Registry identity audit: `confirmed_duplicate_candidate` (2026-09-22).
-- Registry blockers:
-  > The paper describes 40 manually curated harmful instructions used for human evaluation; the audit found no public release.
-  > No examples will be synthesized in its place; the record exists to carry the paper mention.
-- Mentioned by 1 paper:
-  - `paper-12e8bd34b4a2f2a8`, page 6, role: evaluation
-    > f our visual adversarial examples, we pair them with a diverse set of 40 manually curated harmful textual instructions. These instructions explicitly ask for the generation of detrimental con
-
-## IR-065 · unnamed harmful sentence corpus
-
-**Group key:** `paper-12e8bd34b4a2f2a8-unnamed-harmful-sentence-corpus` · **Entries:** 1 · **Blocker types:** `unreleased` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `accept_unreleased_custom_record` (a paper-private dataset with no public release, kept as an unreleased custom record) and `keep_candidate` (leave the identity open). `paper-12e8bd34b4a2f2a8-unnamed-harmful-sentence-corpus` is an unreleased paper-private record: accept as an unreleased custom record, or keep as candidate.
-
-**Options:** `accept_unreleased_custom_record`, `keep_candidate`
-
-### `paper-12e8bd34b4a2f2a8-unnamed-harmful-sentence-corpus` — unnamed harmful sentence corpus
-
-- State: access `unreleased`, adapter `not_applicable`, preview `none`, identity `candidate`.
-- Blocker type: **unreleased**. Access is `unreleased`: the registry records a paper-private dataset with no public release.
-- Options: `accept_unreleased_custom_record`, `keep_candidate`
-- Registry identity audit: `paper_custom_release_unverified` (2026-09-22).
-- Registry blockers:
-  > The paper describes a 66-sentence derogatory corpus used to optimize attacks; the audit found no public release.
-  > No examples will be synthesized in its place; the record exists to carry the paper mention.
-- Mentioned by 1 paper:
-  - `paper-12e8bd34b4a2f2a8`, page 5, role: source data
-    > ractice, we use a few-shot Do ********* corpus Y , consisting of only 66 derogatory sentences against (a bad thing) <gender-1>, <race-1>, and the human race, to bootstrap our attacks. We find that th…
-
-## IR-066 · unnamed CFD morph collection
-
-**Group key:** `paper-164d7c221452ffec-unnamed-cfd-morph-collection` · **Entries:** 1 · **Blocker types:** `access` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open). For `paper-164d7c221452ffec-unnamed-cfd-morph-collection` (access `gated`) the blocker is access, a user action such as a request, terms or credentials, not identity; the identity decision can be taken independently.
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `paper-164d7c221452ffec-unnamed-cfd-morph-collection` — unnamed CFD morph collection
-
-- State: access `gated`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **access**. Access is `gated`: getting the data needs a request, terms or credentials, which is a user action. The identity decision is separate from it.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `explicit_copyright_request_only_release_unverified` (2026-09-22).
-- Registry blockers:
-  > Author request or agreement is required for the described data; no public archive was verified.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-164d7c221452ffec`, page 14, role: derived collection
-    > each morph. This produces to agreed upon terms. All personally identifiable a dataset of 30,000 morphed images with corre- information is anonymised (Ma et al., 2015) before sponding embeddings, each…
-
-## IR-067 · unnamed Objaverse spatial images
-
-**Group key:** `paper-2aa40aa13ed2a25b-unnamed-objaverse-spatial-images` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `paper-2aa40aa13ed2a25b-unnamed-objaverse-spatial-images` — unnamed Objaverse spatial images
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `author_recipe_and_render_source_identified_outputs_unverified` (2026-09-22).
-- Registry blockers:
-  > Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-2aa40aa13ed2a25b`, page 18, role: derived collection
-    > §D.1, we use 90 object pairs, and consider s = 4 from {224, 174, 124, 74}, yielding 86,400 images. Note that each image size is 224 × 4 = 896 in width and height. Synthetic Video generation for Tempo…
-
-## IR-068 · unnamed synthetic spatial training set
-
-**Group key:** `paper-2aa40aa13ed2a25b-unnamed-synthetic-spatial-training-set` · **Entries:** 1 · **Blocker types:** `access` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open). For `paper-2aa40aa13ed2a25b-unnamed-synthetic-spatial-training-set` (access `gated`) the blocker is access, a user action such as a request, terms or credentials, not identity; the identity decision can be taken independently.
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `paper-2aa40aa13ed2a25b-unnamed-synthetic-spatial-training-set` — unnamed synthetic spatial training set
-
-- State: access `gated`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **access**. Access is `gated`: getting the data needs a request, terms or credentials, which is a user action. The identity decision is separate from it.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `explicit_author_request_for_large_archive` (2026-09-22).
-- Registry blockers:
-  > Author request or agreement is required for the described data; no public archive was verified.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-2aa40aa13ed2a25b`, page 9, role: training
-    > gher accuracy can be better this intuition, we finetune Qwen2-2B on a synthetic dataset simi- steered with spatial IDs. lar to the one used to extract spatial IDs, and evaluate on COCO- Spatial. We
-
-## IR-069 · unnamed robust/nonrobust feature collections
-
-**Group key:** `paper-63c3bd849356e00f-unnamed-robust-nonrobust-feature-collections` · **Entries:** 1 · **Blocker types:** `unreleased` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `accept_unreleased_custom_record` (a paper-private dataset with no public release, kept as an unreleased custom record) and `keep_candidate` (leave the identity open). `paper-63c3bd849356e00f-unnamed-robust-nonrobust-feature-collections` is an unreleased paper-private record: accept as an unreleased custom record, or keep as candidate.
-
-**Options:** `accept_unreleased_custom_record`, `keep_candidate`
-
-### `paper-63c3bd849356e00f-unnamed-robust-nonrobust-feature-collections` — unnamed robust/nonrobust feature collections
-
-- State: access `unreleased`, adapter `not_applicable`, preview `none`, identity `candidate`.
-- Blocker type: **unreleased**. Access is `unreleased`: the registry records a paper-private dataset with no public release.
-- Options: `accept_unreleased_custom_record`, `keep_candidate`
-- Registry blockers:
-  > The paper describes robust/non-robust feature collections it constructed; no public release of them was located.
-  > No examples will be synthesized in its place; the record exists to carry the paper mention.
-- Mentioned by 1 paper:
-  - `paper-63c3bd849356e00f`, page 5, role: derived collection
-    > of the CIFAR-10 [Kri09] training set: the original training set; the robust training set Db R , restricted to features used by a robust model; and the non-robust training b set D NR , r
-
-## IR-070 · unnamed synthetic spheres dataset
-
-**Group key:** `paper-72040eccb96ead7a-unnamed-synthetic-spheres-dataset` · **Entries:** 1 · **Blocker types:** `unreleased` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `accept_unreleased_custom_record` (a paper-private dataset with no public release, kept as an unreleased custom record) and `keep_candidate` (leave the identity open). `paper-72040eccb96ead7a-unnamed-synthetic-spheres-dataset` is an unreleased paper-private record: accept as an unreleased custom record, or keep as candidate.
-
-**Options:** `accept_unreleased_custom_record`, `keep_candidate`
-
-### `paper-72040eccb96ead7a-unnamed-synthetic-spheres-dataset` — unnamed synthetic spheres dataset
-
-- State: access `unreleased`, adapter `not_applicable`, preview `none`, identity `candidate`.
-- Blocker type: **unreleased**. Access is `unreleased`: the registry records a paper-private dataset with no public release.
-- Options: `accept_unreleased_custom_record`, `keep_candidate`
-- Registry blockers:
-  > The paper describes a synthetic spheres dataset it generated; no public release was located.
-  > No examples will be synthesized in its place; the record exists to carry the paper mention.
-- Mentioned by 1 paper:
-  - `paper-72040eccb96ead7a`, page 5, role: evaluation
-    > on adversarial spheres. First, we evaluate our analytic attack on the synthetic spheres dataset, where the task is to classify samples as belonging to one out of two spheres with differ- ent radii.
-
-## IR-071 · unnamed YouTube image collection
-
-**Group key:** `paper-728d8c0964b540ad-unnamed-youtube-image-collection` · **Entries:** 1 · **Blocker types:** `unreleased` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `accept_unreleased_custom_record` (a paper-private dataset with no public release, kept as an unreleased custom record) and `keep_candidate` (leave the identity open). `paper-728d8c0964b540ad-unnamed-youtube-image-collection` is an unreleased paper-private record: accept as an unreleased custom record, or keep as candidate.
-
-**Options:** `accept_unreleased_custom_record`, `keep_candidate`
-
-### `paper-728d8c0964b540ad-unnamed-youtube-image-collection` — unnamed YouTube image collection
-
-- State: access `unreleased`, adapter `not_applicable`, preview `none`, identity `candidate`.
-- Blocker type: **unreleased**. Access is `unreleased`: the registry records a paper-private dataset with no public release.
-- Options: `accept_unreleased_custom_record`, `keep_candidate`
-- Registry blockers:
-  > The paper describes a YouTube image collection it assembled; no public release was located and the frames carry third-party rights.
-  > No examples will be synthesized in its place; the record exists to carry the paper mention.
-- Mentioned by 1 paper:
-  - `paper-728d8c0964b540ad`, page 2, role: source data
-    > itecture [9]. We refer to it as “AlexNet”. • ∼ 10M image samples from Youtube (see [10]) – Unsupervised trained network with ∼ 1 billion learnable parameters. We refer to it as “QuocNet”.
-
-## IR-072 · unnamed social-category question set
-
-**Group key:** `paper-765a2362f8735bc4-unnamed-social-category-question-set` · **Entries:** 1 · **Blocker types:** `unreleased` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `accept_unreleased_custom_record` (a paper-private dataset with no public release, kept as an unreleased custom record) and `keep_candidate` (leave the identity open). `paper-765a2362f8735bc4-unnamed-social-category-question-set` is an unreleased paper-private record: accept as an unreleased custom record, or keep as candidate.
-
-**Options:** `accept_unreleased_custom_record`, `keep_candidate`
-
-### `paper-765a2362f8735bc4-unnamed-social-category-question-set` — unnamed social-category question set
-
-- State: access `unreleased`, adapter `not_applicable`, preview `none`, identity `candidate`.
-- Blocker type: **unreleased**. Access is `unreleased`: the registry records a paper-private dataset with no public release.
-- Options: `accept_unreleased_custom_record`, `keep_candidate`
-- Registry identity audit: `paper_custom_release_unverified` (2026-09-22).
-- Registry blockers:
-  > The paper describes 50 author-collected social-category questions; the audit found no public release.
-  > No examples will be synthesized in its place; the record exists to carry the paper mention.
-- Mentioned by 1 paper:
-  - `paper-765a2362f8735bc4`, page 13, role: derived evaluation collection
-    > 20 questions for gender and 30 questions for race (page 13; two-column extraction interleaves a results table)
-
-## IR-073 · unnamed neuron-pair judgment collection
-
-**Group key:** `paper-9036b4eaa048dc21-unnamed-neuron-pair-judgment-collection` · **Entries:** 1 · **Blocker types:** `unreleased` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `accept_unreleased_custom_record` (a paper-private dataset with no public release, kept as an unreleased custom record) and `keep_candidate` (leave the identity open). `paper-9036b4eaa048dc21-unnamed-neuron-pair-judgment-collection` is an unreleased paper-private record: accept as an unreleased custom record, or keep as candidate.
-
-**Options:** `accept_unreleased_custom_record`, `keep_candidate`
-
-### `paper-9036b4eaa048dc21-unnamed-neuron-pair-judgment-collection` — unnamed neuron-pair judgment collection
-
-- State: access `unreleased`, adapter `not_applicable`, preview `none`, identity `candidate`.
-- Blocker type: **unreleased**. Access is `unreleased`: the registry records a paper-private dataset with no public release.
-- Options: `accept_unreleased_custom_record`, `keep_candidate`
-- Registry blockers:
-  > The paper describes human judgments it collected over neuron pairs; no public release was located.
-  > No examples will be synthesized in its place; the record exists to carry the paper mention.
-- Mentioned by 1 paper:
-  - `paper-9036b4eaa048dc21`, page 6, role: introduction
-    > rval. the Mechanical Turk platform. This study resulted in a total of 1000 questions across 71 unique users, with 3 answers per question aggregated through majority voting. Results of this study are…
-
-## IR-074 · unnamed Van Gogh painting sample
-
-**Group key:** `paper-944952997d24ce45-unnamed-van-gogh-painting-sample` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `paper-944952997d24ce45-unnamed-van-gogh-painting-sample` — unnamed Van Gogh painting sample
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `paper_selection_release_unverified` (2026-09-22).
-- Registry blockers:
-  > Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.
-  > Adapter and preview are not implemented.
-  > Checked 2026-10-09: the VMA repository (pinned at 53e6943112a7) holds no list or copy of the 874 Van Gogh paintings (the only data file is a 167-byte one-element data.json). External blocker: the sample is not released as files. Not an implementation gap.
-- Mentioned by 1 paper:
-  - `paper-944952997d24ce45`, page 9, role: source data
-    > nonsensical outputs. To validate the effectiveness of VMA, we sample 874 publicly available Van Gogh paintings. We ask VLMs to describe these images and define random token sequences as targe
-
-## IR-075 · unnamed VMA candidate pool
-
-**Group key:** `paper-944952997d24ce45-unnamed-vma-candidate-pool` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `paper-944952997d24ce45-unnamed-vma-candidate-pool` — unnamed VMA candidate pool
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `paper_derived_release_unverified` (2026-09-22).
-- Registry blockers:
-  > Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.
-  > Adapter and preview are not implemented.
-  > Checked 2026-10-09: the VMA repository (pinned at 53e6943112a7) holds a one-element data.json (167 bytes) and 18 image files, not the 1,000 sampled triplets or their 1,000-triplet pool. External blocker: the triplets are not released as files. Not an implementation gap.
-- Mentioned by 1 paper:
-  - `paper-944952997d24ce45`, page 6, role: derived collection
-    > f VLMs, We construct an evaluation candidate pool by randomly pairing 1, 000 distinct prompts, images, and target outputs. Then, we randomly sample 1, 000 text-image input-output pairs for evaluation…
-
-## IR-076 · unnamed curated internet image collection
-
-**Group key:** `paper-959e8fc51787f7e4-unnamed-curated-internet-image-collection` · **Entries:** 1 · **Blocker types:** `unreleased` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `accept_unreleased_custom_record` (a paper-private dataset with no public release, kept as an unreleased custom record) and `keep_candidate` (leave the identity open). `paper-959e8fc51787f7e4-unnamed-curated-internet-image-collection` is an unreleased paper-private record: accept as an unreleased custom record, or keep as candidate.
-
-**Options:** `accept_unreleased_custom_record`, `keep_candidate`
-
-### `paper-959e8fc51787f7e4-unnamed-curated-internet-image-collection` — unnamed curated internet image collection
-
-- State: access `unreleased`, adapter `not_applicable`, preview `none`, identity `candidate`.
-- Blocker type: **unreleased**. Access is `unreleased`: the registry records a paper-private dataset with no public release.
-- Options: `accept_unreleased_custom_record`, `keep_candidate`
-- Registry blockers:
-  > The paper describes internet images it curated per experiment; no fixed public release was located.
-  > No examples will be synthesized in its place; the record exists to carry the paper mention.
-- Mentioned by 1 paper:
-  - `paper-959e8fc51787f7e4`, page 6, role: circuit analysis collection
-    > that make the underlying representations more explainable. sample of 20-100 internet images that are semantically re- The gap is largest in the middle layers (e.g. Layer 15), con- lated to the image…
-
-## IR-077 · unnamed internet image tracing set
-
-**Group key:** `paper-959e8fc51787f7e4-unnamed-internet-image-tracing-set` · **Entries:** 1 · **Blocker types:** `unreleased` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `accept_unreleased_custom_record` (a paper-private dataset with no public release, kept as an unreleased custom record) and `keep_candidate` (leave the identity open). `paper-959e8fc51787f7e4-unnamed-internet-image-tracing-set` is an unreleased paper-private record: accept as an unreleased custom record, or keep as candidate.
-
-**Options:** `accept_unreleased_custom_record`, `keep_candidate`
-
-### `paper-959e8fc51787f7e4-unnamed-internet-image-tracing-set` — unnamed internet image tracing set
-
-- State: access `unreleased`, adapter `not_applicable`, preview `none`, identity `candidate`.
-- Blocker type: **unreleased**. Access is `unreleased`: the registry records a paper-private dataset with no public release.
-- Options: `accept_unreleased_custom_record`, `keep_candidate`
-- Registry identity audit: `per_task_curated_samples_no_fixed_release_verified` (2026-09-22).
-- Registry blockers:
-  > The audit verified per-task curated internet image samples with no fixed release; the public repository holds code and models only.
-  > No examples will be synthesized in its place; the record exists to carry the paper mention.
-- Mentioned by 1 paper:
-  - `paper-959e8fc51787f7e4`, page 6, role: evaluation
-    > that make the underlying representations more explainable. sample of 20-100 internet images that are semantically re- The gap is largest in the middle layers (e.g. Layer 15), con- lated to the image…
-
-## IR-078 · unnamed sea-otter image sample
-
-**Group key:** `paper-959e8fc51787f7e4-unnamed-sea-otter-image-sample` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `paper-959e8fc51787f7e4-unnamed-sea-otter-image-sample` — unnamed sea-otter image sample
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `specific_paper_sample_release_unverified` (2026-09-22).
-- Registry blockers:
-  > Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.
-  > Adapter and preview are not implemented.
-  > Checked 2026-10-09: the author repository (pinned at 6927944a93f5) contains no sea-otter image and no 30-image sample; its 21 PNGs are demo figures. External blocker: the sample is not released as files. Not an implementation gap.
-- Mentioned by 1 paper:
-  - `paper-959e8fc51787f7e4`, page 7, role: evaluation
-    > offer a clearer picture of the compu- on a curated, small dataset of 30 sea otter images signifi- tational structure supporting vision-language reasoning. cantly increased the feature’s interpretabi
-
-## IR-079 · unnamed human adversarial-stimulus collection
-
-**Group key:** `paper-ab31cc6a994470fb-unnamed-human-adversarial-stimulus-collection` · **Entries:** 1 · **Blocker types:** `unreleased` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `accept_unreleased_custom_record` (a paper-private dataset with no public release, kept as an unreleased custom record) and `keep_candidate` (leave the identity open). `paper-ab31cc6a994470fb-unnamed-human-adversarial-stimulus-collection` is an unreleased paper-private record: accept as an unreleased custom record, or keep as candidate.
-
-**Options:** `accept_unreleased_custom_record`, `keep_candidate`
-
-### `paper-ab31cc6a994470fb-unnamed-human-adversarial-stimulus-collection` — unnamed human adversarial-stimulus collection
-
-- State: access `unreleased`, adapter `not_applicable`, preview `none`, identity `candidate`.
-- Blocker type: **unreleased**. Access is `unreleased`: the registry records a paper-private dataset with no public release.
-- Options: `accept_unreleased_custom_record`, `keep_candidate`
-- Registry blockers:
-  > The paper describes adversarial stimuli it produced for human trials; no public release was located.
-  > No examples will be synthesized in its place; the record exists to carry the paper mention.
-- Mentioned by 1 paper:
-  - `paper-ab31cc6a994470fb`, page 6, role: derived collection
-    > sented in one of four conditions as follows: • image: images from the ImageNet training set (rescaled to the [40, 255 − 40] range to avoid clipping when adversarial perturbations are added; see Figure
-
-## IR-080 · unnamed attack-generalization collection
-
-**Group key:** `paper-c12960e5d652fb7f-unnamed-attack-generalization-collection` · **Entries:** 1 · **Blocker types:** `unreleased` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `accept_unreleased_custom_record` (a paper-private dataset with no public release, kept as an unreleased custom record) and `keep_candidate` (leave the identity open). `paper-c12960e5d652fb7f-unnamed-attack-generalization-collection` is an unreleased paper-private record: accept as an unreleased custom record, or keep as candidate.
-
-**Options:** `accept_unreleased_custom_record`, `keep_candidate`
-
-### `paper-c12960e5d652fb7f-unnamed-attack-generalization-collection` — unnamed attack-generalization collection
-
-- State: access `unreleased`, adapter `not_applicable`, preview `none`, identity `candidate`.
-- Blocker type: **unreleased**. Access is `unreleased`: the registry records a paper-private dataset with no public release.
-- Options: `accept_unreleased_custom_record`, `keep_candidate`
-- Registry blockers:
-  > The paper describes an attack-generalization image collection it assembled; no public release was located.
-  > No examples will be synthesized in its place; the record exists to carry the paper mention.
-- Mentioned by 1 paper:
-  - `paper-c12960e5d652fb7f`, page 5, role: derived collection
-    > th each text prompt to serve as VLM inputs. To evaluate EigenShield’s generalization under various real- world threat models, we generated adversarial examples using five distinct attack methods
-
-## IR-081 · unnamed AI-generated gender-image attack set
-
-**Group key:** `paper-f6dcb0e50d10ea38-unnamed-ai-generated-gender-image-attack-set` · **Entries:** 1 · **Blocker types:** `unreleased` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `accept_unreleased_custom_record` (a paper-private dataset with no public release, kept as an unreleased custom record) and `keep_candidate` (leave the identity open). `paper-f6dcb0e50d10ea38-unnamed-ai-generated-gender-image-attack-set` is an unreleased paper-private record: accept as an unreleased custom record, or keep as candidate.
-
-**Options:** `accept_unreleased_custom_record`, `keep_candidate`
-
-### `paper-f6dcb0e50d10ea38-unnamed-ai-generated-gender-image-attack-set` — unnamed AI-generated gender-image attack set
-
-- State: access `unreleased`, adapter `not_applicable`, preview `none`, identity `candidate`.
-- Blocker type: **unreleased**. Access is `unreleased`: the registry records a paper-private dataset with no public release.
-- Options: `accept_unreleased_custom_record`, `keep_candidate`
-- Registry blockers:
-  > The paper describes AI-generated attack images it produced; no public release was located.
-  > No examples will be synthesized in its place; the record exists to carry the paper mention.
-- Mentioned by 1 paper:
-  - `paper-f6dcb0e50d10ea38`, page 10, role: derived collection
-    > slightly perturbed version. We quantify this effect via a systematic evaluation with 20 AI- generated images of men and women, and all 10×10 = 100 adversar- ial images oof each woman as a source targ…
-
-## IR-082 · unnamed explicit-image attack set
-
-**Group key:** `paper-f6dcb0e50d10ea38-unnamed-explicit-image-attack-set` · **Entries:** 1 · **Blocker types:** `unreleased` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `accept_unreleased_custom_record` (a paper-private dataset with no public release, kept as an unreleased custom record) and `keep_candidate` (leave the identity open). `paper-f6dcb0e50d10ea38-unnamed-explicit-image-attack-set` is an unreleased paper-private record: accept as an unreleased custom record, or keep as candidate.
-
-**Options:** `accept_unreleased_custom_record`, `keep_candidate`
-
-### `paper-f6dcb0e50d10ea38-unnamed-explicit-image-attack-set` — unnamed explicit-image attack set
-
-- State: access `unreleased`, adapter `not_applicable`, preview `none`, identity `candidate`.
-- Blocker type: **unreleased**. Access is `unreleased`: the registry records a paper-private dataset with no public release.
-- Options: `accept_unreleased_custom_record`, `keep_candidate`
-- Registry blockers:
-  > The paper describes an explicit-image attack set it assembled; no public release was located and none would be appropriate to mirror.
-  > No examples will be synthesized in its place; the record exists to carry the paper mention.
-- Mentioned by 1 paper:
-  - `paper-f6dcb0e50d10ea38`, page 9, role: derived collection
-    > tive imagery has been Case study 4: Evading NSFW detectors. We select 10 explicit censored to ensure appropriate academic presentation. images depicting nudity, each flagged as pornographic w
-
-## IR-083 · unnamed historical-event image attack set
-
-**Group key:** `paper-f6dcb0e50d10ea38-unnamed-historical-event-image-attack-set` · **Entries:** 1 · **Blocker types:** `unreleased` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `accept_unreleased_custom_record` (a paper-private dataset with no public release, kept as an unreleased custom record) and `keep_candidate` (leave the identity open). `paper-f6dcb0e50d10ea38-unnamed-historical-event-image-attack-set` is an unreleased paper-private record: accept as an unreleased custom record, or keep as candidate.
-
-**Options:** `accept_unreleased_custom_record`, `keep_candidate`
-
-### `paper-f6dcb0e50d10ea38-unnamed-historical-event-image-attack-set` — unnamed historical-event image attack set
-
-- State: access `unreleased`, adapter `not_applicable`, preview `none`, identity `candidate`.
-- Blocker type: **unreleased**. Access is `unreleased`: the registry records a paper-private dataset with no public release.
-- Options: `accept_unreleased_custom_record`, `keep_candidate`
-- Registry blockers:
-  > The paper describes a historical-event image attack set it assembled; no public release was located.
-  > No examples will be synthesized in its place; the record exists to carry the paper mention.
-- Mentioned by 1 paper:
-  - `paper-f6dcb0e50d10ea38`, page 20, role: derived collection
-    > (f) Surrender of Japan Figure 21: Adversarial versions of photographs of six well-documented historical events, each perturbed to match the text embedding of “fake news.” These images are used in the…
-
-## IR-084 · unnamed product screenshot attack
-
-**Group key:** `paper-f6dcb0e50d10ea38-unnamed-product-screenshot-attack` · **Entries:** 1 · **Blocker types:** `unreleased` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `accept_unreleased_custom_record` (a paper-private dataset with no public release, kept as an unreleased custom record) and `keep_candidate` (leave the identity open). `paper-f6dcb0e50d10ea38-unnamed-product-screenshot-attack` is an unreleased paper-private record: accept as an unreleased custom record, or keep as candidate.
-
-**Options:** `accept_unreleased_custom_record`, `keep_candidate`
-
-### `paper-f6dcb0e50d10ea38-unnamed-product-screenshot-attack` — unnamed product screenshot attack
-
-- State: access `unreleased`, adapter `not_applicable`, preview `none`, identity `candidate`.
-- Blocker type: **unreleased**. Access is `unreleased`: the registry records a paper-private dataset with no public release.
-- Options: `accept_unreleased_custom_record`, `keep_candidate`
-- Registry blockers:
-  > The paper describes product-screenshot attack images it assembled; no public release was located.
-  > No examples will be synthesized in its place; the record exists to carry the paper mention.
-- Mentioned by 1 paper:
-  - `paper-f6dcb0e50d10ea38`, page 11, role: derived collection
-    > olving a browser agent, ChatGPT Atlas [40]. We present the VLM with a screenshot of top search results for the query “smart watch” on Amazon, and ask it to recommend one. To 5.4 Commercial Manipulati…
-
-## IR-085 · unnamed public-figure adversarial image set
-
-**Group key:** `paper-f6dcb0e50d10ea38-unnamed-public-figure-adversarial-image-set` · **Entries:** 1 · **Blocker types:** `unreleased` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `accept_unreleased_custom_record` (a paper-private dataset with no public release, kept as an unreleased custom record) and `keep_candidate` (leave the identity open). `paper-f6dcb0e50d10ea38-unnamed-public-figure-adversarial-image-set` is an unreleased paper-private record: accept as an unreleased custom record, or keep as candidate.
-
-**Options:** `accept_unreleased_custom_record`, `keep_candidate`
-
-### `paper-f6dcb0e50d10ea38-unnamed-public-figure-adversarial-image-set` — unnamed public-figure adversarial image set
-
-- State: access `unreleased`, adapter `not_applicable`, preview `none`, identity `candidate`.
-- Blocker type: **unreleased**. Access is `unreleased`: the registry records a paper-private dataset with no public release.
-- Options: `accept_unreleased_custom_record`, `keep_candidate`
-- Registry blockers:
-  > The paper describes public-figure adversarial images it assembled; no public release was located.
-  > No examples will be synthesized in its place; the record exists to carry the paper mention.
-- Mentioned by 1 paper:
-  - `paper-f6dcb0e50d10ea38`, page 8, role: derived collection
-    > This yields a total of 10×9 = 90 adver-
-
 ## IR-086 · Pascal VOC
 
 **Group key:** `pascal-voc` · **Entries:** 1 · **Blocker types:** `identity` 1
@@ -1823,29 +692,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   - `paper-32cea5e43d940514`, page 14, role: non-overlap evaluation
     > ns, we use a recent text-to-image editing Datasets PATA Pairs model Qwen-Image-Edit [83] to leave only one per- Prompts Adj
 
-## IR-089 · Pitfall ROM
-
-**Group key:** `pitfall-rom` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `pitfall-rom` — Pitfall ROM
-
-- State: access `source_release_unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `source_binary_unresolved` (2026-09-22).
-- Registry blockers:
-  > Exact source data release or paper-used subset is unverified.
-  > Public data/media reuse rights require separate review.
-- Mentioned by 1 paper:
-  - `paper-ad50206beabc5a94`, page 3, role: experimental condition
-    > Donkey Kong (1981), Space Invaders (1978), and Pitfall (1981). Obviously these “behaviors” are quali- tatively different from those of animals and m
-
 ## IR-090 · Places
 
 **Group key:** `places` · **Entries:** 1 · **Blocker types:** `identity` 1
@@ -1868,30 +714,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Mentioned by 1 paper:
   - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
     > CLIP Image Retrieval, Segmenta- Waterbirds, CUB, Places, ImageNet- Text-Explanations of tion
-
-## IR-091 · RAISE1k
-
-**Group key:** `raise1k` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `raise1k` — RAISE1k
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `family_only` (2026-09-22).
-- Registry blockers:
-  > Publisher RAISE-1K download requires name, affiliation, email and acceptance of research/education terms. No request was submitted on the user’s behalf.
-  > Native NEF/TIFF/CSV acquisition and display adapter remain implementation work after authorized source access.
-  > Exact citing-paper source release and selected membership remain unverified.
-- Mentioned by 1 paper:
-  - `paper-666de2b7486d80a3`, page 5, role: source data
-    > ncompressed images) for Colorization [47] Val 4.7 5 training, and the RAISE1k dataset [10] for validation. 2AFC–Real Alg [Val] – Val 26.9k 5 To enable large-scale collection, our data is
 
 ## IR-092 · Ring-a-Bell
 
@@ -1916,30 +738,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   - `paper-09b2d7393fc75cf7`, page 7, role: evaluation
     > ce-of-means procedure described in Equation (4). We evaluate on COCO [59] annotations and Ring-a-Bell [60] Datasets. Under this setting, the attacker wishes the steering prompts, both containing only…
 
-## IR-093 · ROSMAP
-
-**Group key:** `rosmap` · **Entries:** 1 · **Blocker types:** `access` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open). For `rosmap` (access `request_required`) the blocker is access, a user action such as a request, terms or credentials, not identity; the identity decision can be taken independently.
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `rosmap` — ROSMAP
-
-- State: access `request_required`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **access**. Access is `request_required`: getting the data needs a request, terms or credentials, which is a user action. The identity decision is separate from it.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `cohort_resolved_paper_slice_unresolved` (2026-09-22).
-- Registry blockers:
-  > Original-source access requires an author or data-holder request.
-  > The exact paper release, source variant, or derived collection remains unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
-    > DensetNet-121 — ITAC, iCTCF, BRCA, ROSMAP (Basu et al., 2024b) SD-1.5, SD-XL, DeepFloyd Model Editing
-
 ## IR-094 · RS-VQA
 
 **Group key:** `rs-vqa` · **Entries:** 1 · **Blocker types:** `identity` 1
@@ -1963,35 +761,15 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   - `paper-25eaa8c74ce76800`, page 29, role: cited-study dataset in survey table
     > LLaVa-next, InstructBLIP VQA LingoQA, RS-VQA, PMC-
 
-## IR-095 · 2 entries linked to `saegis-clean-and-adversarial-splits`
+## IR-095 · SAEgis clean and adversarial splits
 
-**Group key:** `saegis-clean-and-adversarial-splits` · **Entries:** 2 · **Blocker types:** `identity` 2
+**Group key:** `saegis-clean-and-adversarial-splits` · **Entries:** 1 · **Blocker types:** `identity` 1
 
-**Linked to:**
+**Linked to:** nothing.
 
-- `saegis-clean-and-adversarial-splits` (identity `candidate`, preview `complete_target`) via `same_source_family_as` — prepared; also an entry in this queue
+**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open). `saegis-clean-and-adversarial-splits` already has a prepared preview of its own, yet the identity is still a candidate: the preview does not settle which release the paper used.
 
-**Decision needed.** A person decides, for each of the 2 entries below, which option applies; until then it stays a candidate. The registry links these entries to `saegis-clean-and-adversarial-splits`. The options are `alias_of:saegis-clean-and-adversarial-splits` (the paper's name is another name for that entry), `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open); each entry offers only the alias options for the targets it links to. A prepared preview exists for `saegis-clean-and-adversarial-splits`; the paper's exact release is unresolved, so no entry here inherits it, and an entry whose preview is `none` stays `none`. `saegis-clean-and-adversarial-splits` already has a prepared preview of its own, yet the identity is still a candidate: the preview does not settle which release the paper used.
-
-**Options:** `alias_of:saegis-clean-and-adversarial-splits`, `distinct_release`, `keep_candidate`
-
-### `nips17` — NIPS17
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. The registry links this entry to `saegis-clean-and-adversarial-splits` (identity `candidate`, preview `complete_target`) via `same_source_family_as`. The exact release, variant or subset the paper used is not human-verified.
-- Options: `alias_of:saegis-clean-and-adversarial-splits`, `distinct_release`, `keep_candidate`
-- Registry links: `same_source_family_as` → `saegis-clean-and-adversarial-splits`
-- Registry blockers:
-  > The 1,000-image DEV set is described by dev_dataset.csv in the CleverHans repository, which lists image URLs; the repository does not host the images and its download_images.py links have been reported expired (cleverhans issue 1180).
-  > The original Kaggle competition pages that host the images require a Kaggle login that Atlas will not use on a researcher's behalf.
-  > The SAEgis paper's NIPS17 images are available separately as part of the SAEgis author release (entry saegis-clean-and-adversarial-splits); that does not establish this entry's identity.
-- Mentioned by 3 papers:
-  - `paper-d8a392188b9cf4d6`, page 5, role: evaluation
-    > een attacks. 4.1.2 Datasets We conduct experiments on three datasets: NIPS17 (K et al., 2017), LLaVA-Instruct-150K (Liu et al., 2023) (LLaVA), and Medical Multimodal Evaluation Data (Che
-  - `paper-6dbb0d4a7b949143`, page 14, role: evaluation
-    > dataset For evaluation, we use 100 manually relabeled images from the NIPS17 dataset, focusing on commonly understood cat- These qualitative examples clearly demonstrate the strong egori
-  - `paper-392b0c393c06b48e`, page 26, role: evaluation
-    > image.” For evaluation, we use 100 manually relabeled images from the NIPS17 dataset, focusing on commonly recognizable object categories. Model predictions are assessed using GPT- 4, wh
+**Options:** `distinct_release`, `keep_candidate`
 
 ### `saegis-clean-and-adversarial-splits` — SAEgis clean and adversarial splits
 
@@ -2141,53 +919,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   - `paper-6c99cf73401b37d4`, page 13, role: introduction
     > hree synthetic datasets: Shapes Recognition, Shapes Localization, and Shapes Relations, using a single pipeline. The shared generation ensures all three datasets are constructed from the same prim
 
-## IR-103 · simulated transistor traces
-
-**Group key:** `simulated-transistor-traces` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `simulated-transistor-traces` — simulated transistor traces
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `author_release_claim_conflicts_with_repo_readme` (2026-09-22).
-- Registry blockers:
-  > Exact paper-specific source release or selected subset remains unverified; source research alone does not resolve this candidate.
-  > Adapter and preview are not implemented.
-  > Checked 2026-10-09: the neuroprocdata repository (pinned at 3d7a1f067a34) holds only a README and three notebooks; the seven S3 objects its notebooks name all return 403 AccessDenied (2026-10-09), and its README says the data is 'not public yet'. External blocker (access denied / unreleased), not an implementation gap. The full time series (20 GB+ gzipped by the README's account) would in any case exceed the per-dataset 500 MB preparation cap.
-- Mentioned by 1 paper:
-  - `paper-ad50206beabc5a94`, page 18, role: derived collection
-    > ior were simulated for each game, resulting in over 250 frames per game. Lesion studies Whole-circuit simulation
-
-## IR-104 · Space Invaders ROM
-
-**Group key:** `space-invaders-rom` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `space-invaders-rom` — Space Invaders ROM
-
-- State: access `source_release_unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `source_binary_unresolved` (2026-09-22).
-- Registry blockers:
-  > Exact source data release or paper-used subset is unverified.
-  > Public data/media reuse rights require separate review.
-- Mentioned by 1 paper:
-  - `paper-ad50206beabc5a94`, page 3, role: experimental condition
-    > is, three different games: Donkey Kong (1981), Space Invaders (1978), and Pitfall (1981). Obviously these “behaviors” are quali- tatively different from th
-
 ## IR-105 · TID2013
 
 **Group key:** `tid2013` · **Entries:** 1 · **Blocker types:** `identity` 1
@@ -2301,31 +1032,6 @@ These entries have access `public` and adapter `not_started`. For each, what blo
   - `paper-6c99cf73401b37d4`, page 14, role: direct What’s Up split
     > • VG_QA_two: Two-object spatial-relation queries based on Visual Genome [Krishna et al., 2017] images, from the natural VG spli
 
-## IR-110 · VIA-Bench
-
-**Group key:** `via-bench` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `via-bench` — VIA-Bench
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `no_release_found_name_collision_recorded` (2026-10-06).
-- Registry blockers:
-  > No release located: the paper (arXiv 2602.01816) says its data and code 'will be released'; no repository or dataset link was found on 2026-10-06.
-  > Hugging Face MCG-NJU/VIABench and Riverlu/VIABench are a DIFFERENT benchmark (VIABench, arXiv 2607.14660: videos from blind individuals). They share a name only and must not be attached to this entry.
-  > Adapter and preview are not implemented because there is no data to adapt.
-  > Checked 2026-10-09 (repeat of 2026-10-06): arXiv still has only v1 with 'will be released'; no Hugging Face dataset or GitHub repository carries arXiv 2602.01816. External blocker (unreleased); the VIABench name collision still stands.
-- Mentioned by 1 paper:
-  - `paper-20de77d4e60fd1bd`, page 1, role: introduction
-    > mmon-sense priors. To stimuli. Our findings reveal a fundamental diver- address this gap, we introduce VIA-Bench, a gence between machine and human perception, challenging benchmark designed to probe…
-
 ## IR-111 · Visual-Counterfact
 
 **Group key:** `visual-counterfact` · **Entries:** 1 · **Blocker types:** `identity` 1
@@ -2411,73 +1117,3 @@ These entries have access `public` and adapter `not_started`. For each, what blo
 - Mentioned by 1 paper:
   - `paper-7ed1979562251931`, page 4, role: derived evaluation collection
     > ons. We define the dataset “What color is”, among others. VQA v2 m+n as a subset of VQA v2, including m images, each associated with n questions, result
-
-## IR-118 · VTAB
-
-**Group key:** `vtab` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `vtab` — VTAB
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `benchmark_suite_no_single_release` (2026-10-08).
-- Registry blockers:
-  > Original release identity and rights need verification.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-25eaa8c74ce76800`, page 30, role: cited-study dataset in survey table
-    > CUB200, VTAB (Pruthi et al., 2020) ResNet-56 —
-
-## IR-119 · Wall Street Journal
-
-**Group key:** `wall-street-journal` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `wall-street-journal` — Wall Street Journal
-
-- State: access `unverified`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `family_mentioned_version_unresolved` (2026-09-22).
-- Registry blockers:
-  > Access to the exact data files has not been verified.
-  > The exact paper release, source variant, or derived collection remains unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-6d747c88d639c5aa`, page 13, role: source data
-    > cognition task described in [8], but with an updated training set using segments from the Wall Street Journal [40] and Spoken Wikipedia Corpora [41]. We screened the Wall Street Journal (WSJ) [40], T…
-
-## IR-120 · WILDS
-
-**Group key:** `wilds` · **Entries:** 1 · **Blocker types:** `identity` 1
-
-**Linked to:** nothing.
-
-**Decision needed.** A person decides, for the entry below, which option applies; until then it stays a candidate. There is no registry link from this entry to another entry, so `alias_of` has no concrete target. The options are `distinct_release` (a release of its own) and `keep_candidate` (leave the identity open).
-
-**Options:** `distinct_release`, `keep_candidate`
-
-### `wilds` — WILDS
-
-- State: access `public`, adapter `not_started`, preview `none`, identity `candidate`.
-- Blocker type: **identity**. No registry link to another entry; the exact release, variant or subset the paper used is not human-verified.
-- Options: `distinct_release`, `keep_candidate`
-- Registry identity audit: `family_only` (2026-09-22).
-- Registry blockers:
-  > Exact source variant or paper release is unresolved.
-  > Adapter and preview are not implemented.
-- Mentioned by 1 paper:
-  - `paper-a47845c66d4a3f48`, page 13, role: bibliography-only reference
-    > , M. Zhang, A. Balsubramani, W. Hu, M. Yasunaga, R. L. Phillips, I. Gao, et al. Wilds: A benchmark of in-the-wild distribution shifts. arXiv preprint arXiv:2012.07421, 2020. [75] A. Krizhevsky and G.…

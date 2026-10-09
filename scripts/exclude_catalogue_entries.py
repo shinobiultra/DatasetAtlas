@@ -9,8 +9,11 @@ registry/excluded/ (not loaded by the registry) and each exclusion is recorded i
 coverage and corpus code already treat as an account of the mention. Nothing here changes identity, release or any other field of a
 dataset that stays in the catalogue.
 
-    python scripts/exclude_catalogue_entries.py [--apply]
-"""
+    python scripts/exclude_catalogue_entries.py [--apply] [--unresolved]
+
+`--unresolved` applies the researcher's second instruction of 2026-10-09: an entry with no preview and an unresolved identity, and every
+unreleased entry, leaves the catalogue; entries that work (a preview, or a complete native index) or would work after access (a resolved
+identity with a known gated or request route) stay."""
 from __future__ import annotations
 import argparse
 import shutil
@@ -25,6 +28,9 @@ ALIAS = 'alias_not_separate_dataset'
 VIEW = 'view_not_separate_dataset'
 PLATFORM = 'platform_not_dataset'
 NONE = 'no_identifiable_dataset'
+UNRESOLVED = 'unresolved_no_working_source'
+DECIDED_UNRESOLVED = 'Researcher decision form 2026-10-09: remove the unresolved; keep only what works or would work after access or download.'
+KEEP_UNRESOLVED = {'pata'}  # a complete native index of 4,934 rows works without a preview
 
 # id -> (disposition, catalogue entries it refers to, why)
 EXCLUDE: dict[str, tuple[str, list[str], str]] = {
@@ -77,11 +83,35 @@ EXCLUDE: dict[str, tuple[str, list[str], str]] = {
 }
 
 
+def unresolved_entries(registry_entries: dict[str, dict]) -> dict[str, tuple[str, list[str], str]]:
+    import csv
+    rows = {row['dataset_id']: row for row in csv.DictReader((ROOT / 'reports/dataset_coverage.csv').open(newline='', encoding='utf-8'))}
+    found = {}
+    for dataset_id, row in rows.items():
+        if dataset_id in KEEP_UNRESOLVED or dataset_id in EXCLUDE or dataset_id not in registry_entries:
+            continue
+        unreleased = row['access'] == 'unreleased'
+        if row['preview'] != 'none' or (row['identity'] == 'resolved' and not unreleased):
+            continue
+        if unreleased:
+            why = 'The authors never released this data, so nothing can be fetched or previewed.'
+        elif row['access'] in {'gated', 'request_required', 'author_request_required'}:
+            why = 'Gated or request-only, identity unreviewed, and no adapter or preview; it would not work even after access.'
+        else:
+            why = 'No verified public source and an unresolved identity; nothing works and nothing is known to work after download.'
+        found[dataset_id] = (UNRESOLVED, [], why)
+    return found
+
+
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument('--apply', action='store_true')
+    parser.add_argument('--unresolved', action='store_true')
     args = parser.parse_args()
     datasets = ROOT / 'registry/datasets'
+    if args.unresolved:
+        loaded = {p.stem: yaml.safe_load(p.read_text()) for p in datasets.glob('*.yaml')}
+        EXCLUDE.update(unresolved_entries(loaded))
     present = {p.stem for p in datasets.glob('*.yaml')} | {p.stem for p in (ROOT / 'registry/excluded').glob('*.yaml')}
     entries = {i: yaml.safe_load(((datasets if (datasets / f'{i}.yaml').exists() else ROOT / 'registry/excluded') / f'{i}.yaml').read_text()) for i in EXCLUDE}
     problems = []
@@ -89,6 +119,8 @@ def main() -> int:
         if i not in present:
             problems.append(f'{i}: no such entry')
         for target in targets:
+            if target in EXCLUDE and EXCLUDE[target][0] == UNRESOLVED:
+                continue  # the parent left the catalogue too; the record keeps naming it
             if target not in present or target in EXCLUDE:
                 problems.append(f'{i}: refers to {target}, which is not a kept catalogue entry')
     if problems:
@@ -102,9 +134,10 @@ def main() -> int:
             continue
         entry = entries[i]
         record = {'id': i, 'name': entry['name'], 'disposition': kind, 'reason': why}
+        decided = DECIDED_UNRESOLVED if kind == UNRESOLVED else DECIDED
         if targets:
             record['refers_to'] = targets
-        record.update(paper_ids=entry['paper_ids'], decided_by=DECIDED, entry_file=f'registry/excluded/{i}.yaml')
+        record.update(paper_ids=entry['paper_ids'], decided_by=decided, entry_file=f'registry/excluded/{i}.yaml')
         if entry.get('source_url'):
             record['source_url'] = entry['source_url']
         document['excluded_from_dataset_catalogue'].append(record)

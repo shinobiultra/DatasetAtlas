@@ -36,6 +36,12 @@ UTC_STAMP = re.compile(r"^2026-10-08T\d{2}:\d{2}:\d{2}Z$")
 AUTHOR_PAGE = "https://ai.stanford.edu/~alireza/Disney/"
 
 
+def _here(relative_path: str) -> Path:
+    """An entry removed from the catalogue on 2026-10-09 keeps its file under registry/excluded/."""
+    path = ROOT / relative_path
+    return path if path.exists() else ROOT / relative_path.replace("registry/datasets/", "registry/excluded/", 1)
+
+
 def _receipt_text() -> str:
     return RECEIPT.read_text(encoding="utf-8")
 
@@ -62,7 +68,7 @@ def _history_pair(relative_path: str) -> tuple[dict, dict]:
         before = _git("show", f"HEAD:{relative_path}")
         if before.returncode != 0:
             pytest.skip("no git history is available in this checkout")
-        return yaml.safe_load(before.stdout), yaml.safe_load((ROOT / relative_path).read_text(encoding="utf-8"))
+        return yaml.safe_load(before.stdout), yaml.safe_load(_here(relative_path).read_text(encoding="utf-8"))
     introduced_at = commits[-1]
     parent = f"{introduced_at}^"
     if _git("rev-parse", "--verify", "--quiet", parent).returncode != 0:
@@ -106,7 +112,7 @@ def _live_problems(document: dict) -> list[str]:
 
 
 def _load(relative_path: str) -> dict:
-    return yaml.safe_load((ROOT / relative_path).read_text(encoding="utf-8"))
+    return yaml.safe_load(_here(relative_path).read_text(encoding="utf-8"))
 
 
 def test_the_receipt_is_valid_json_with_a_dated_entry_per_checked_url():
@@ -179,7 +185,7 @@ def test_the_commit_that_introduced_the_receipt_only_added_evidence_and_kept_the
 
 def test_every_touched_registry_file_still_parses_with_its_evidence_and_no_token():
     for relative_path in _receipt()["registry_files_touched"]:
-        text = (ROOT / relative_path).read_text(encoding="utf-8")
+        text = _here(relative_path).read_text(encoding="utf-8")
         assert not TOKEN_PATTERN.search(text), f"{relative_path} carries a token pattern"
         assert _live_problems(yaml.safe_load(text)) == [], relative_path
 

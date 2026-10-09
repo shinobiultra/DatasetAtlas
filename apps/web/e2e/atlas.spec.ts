@@ -108,17 +108,17 @@ test('a public dataset page says how to get the data, what a record holds and wh
   await expect(page.locator('.card').filter({ hasText: /Named in \d+ corpus papers?/ })).toContainText('A mention does not establish')
 })
 
-test('the guide separates a maintainer-only preview, a gate, and a dataset nobody has released', async ({ page }) => {
+test('the guide separates a maintainer-only preview, a gate, and a request-only release', async ({ page }) => {
   await page.goto('/#/dataset/advbench')
   await expect(page.locator('.card').filter({ hasText: 'How to get this dataset' })).toContainText('Maintainer preview, no public recipe')
   await expect(page.locator('.card').filter({ hasText: 'How to get this dataset' }).locator('code')).toHaveCount(0)
   await expect(page.locator('.card').filter({ hasText: 'What a record holds' }).locator('td.mono').first()).toHaveText('goal')
   await page.goto('/#/dataset/facet')
   await expect(page.locator('.card').filter({ hasText: 'How to get this dataset' })).toContainText('Gated at the source')
-  await page.goto('/#/dataset/paper-12e8bd34b4a2f2a8-unnamed-harmful-sentence-corpus')
-  const unreleased = page.locator('.card').filter({ hasText: 'How to get this dataset' })
-  await expect(unreleased).toContainText('Not released')
-  await expect(unreleased.locator('code')).toHaveCount(0)
+  await page.goto('/#/dataset/gyafc')
+  const request = page.locator('.card').filter({ hasText: 'How to get this dataset' })
+  await expect(request).toContainText('Request from the authors')
+  await expect(request.locator('code')).toHaveCount(0)
 })
 
 test('the catalogue explains what the public site is and lists the datasets whose examples it publishes', async ({ page }) => {

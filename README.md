@@ -6,7 +6,7 @@ One place to explore datasets, mostly multimodal ones: a searchable catalogue of
 
 ```bash
 uv tool install ./dataset_atlas-0.2.0-py3-none-any.whl     # a release wheel; no Node, no checkout
-atlas init ~/atlas && cd ~/atlas                           # a workspace with the 287-entry catalogue
+atlas init ~/atlas && cd ~/atlas                           # a workspace with the 231-entry catalogue
 atlas serve                                                # open http://127.0.0.1:8765/
 atlas previews fetch --execute --total-download-bytes 10000000000    # optional: fetch many previews at once
 ```
@@ -19,10 +19,10 @@ A fresh workspace holds the catalogue but no data. Each dataset says what you ca
 
 This is a working release; full v1 of [SPEC.md](SPEC.md) remains incomplete. Measured on 2026-10-09 ([coverage matrix](reports/dataset_coverage.csv); the [reproducibility report](reports/preview-reproducibility.md) is dated 2026-10-07 and predates BBQ-V and MultiTrust):
 
-- **287 catalogue entries**, real datasets named in the 64 corpus papers (aliases and views of other datasets are not listed; [why](registry/candidate_dispositions.yaml)), with **220 prepared previews**, **21,532 preview records** and **218 indices for explicitly declared native populations**. Exact paper-used release identities remain open for many entries ([dataset coverage](reports/dataset_coverage.csv)).
+- **231 catalogue entries**: real datasets named in the 64 corpus papers that work now or would work after access (aliases, views and unresolved entries with nothing working were removed on 2026-10-09; [why](registry/candidate_dispositions.yaml)), with **220 prepared previews**, **21,532 preview records** and **218 indices for explicitly declared native populations**. Exact paper-used release identities remain open for many entries ([dataset coverage](reports/dataset_coverage.csv)).
 - Every prepared preview has an acquisition path from the catalogue. Fresh-workspace results, remaining budgets and failed attempts are recorded per dataset in the reproducibility report. A sampled preview is distinct from a complete population index.
 - 2026-10-09 added BBQ-V (54,414 rows, images kept remote) and MultiTrust (11,512 query rows over 50 member tasks, images kept remote), both gated and read with the researcher's own accepted terms, and a [GitHub Pages edition](docs/github-pages.md) plan (not deployed). 2026-10-07 additions include Open Images validation annotations, the pinned MIT-States and UCF101 mirrors, all FFHQ metadata, the author-linked EmoSet-118K population, and whole-article Spoken Wikipedia audio. All have native membership/original verification; mirror equality, historical paper subsets and publication rights retain their explicit limits. Earlier native coverage includes AudioSet annotations, the Recap preview split, LingoQA evaluation rows and frames, VizWiz-Priv source conditions, one DataComp metadata shard, and a sampled FineVision preview from its pinned release. Their receipts distinguish missing audio/images, absent source files, and unprepared shards; these do not imply complete coverage of a larger release.
-- **67 entries still lack a prepared preview.** Remaining public acquisition implementations, unresolved identities, unavailable releases and gated sources are listed separately. [Authorization links](docs/dataset-authorization.md) explain where to request the licensed or gated data you do not currently hold.
+- **11 entries still lack a prepared preview.** Remaining public acquisition implementations, unresolved identities, unavailable releases and gated sources are listed separately. [Authorization links](docs/dataset-authorization.md) explain where to request the licensed or gated data you do not currently hold.
 
 Paper mention evidence does not by itself resolve a dataset release. Metadata-only entries are not browsable datasets.
 

@@ -50,6 +50,30 @@ def _sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _checksum_matches(parquet: Path, expected: str, stamp_dir: Path) -> bool:
+    """Compare the Parquet file with its manifest checksum, hashing it once.
+
+    Hashing a multi-gigabyte index on every process start made the first query of a large dataset take seconds. After one full verification a
+    stamp next to the manifest records the checksum with the file's size and modification time; a later start trusts it only while all three
+    still match, so a replaced or edited file is hashed again. The stamp is an optimisation, never a second source of truth: if it cannot be
+    read or written the file is simply hashed."""
+    stat = parquet.stat()
+    stamp = stamp_dir / "verified.stamp"
+    try:
+        value = json.loads(stamp.read_text())
+        if value == {"sha256": expected, "size": stat.st_size, "mtime_ns": stat.st_mtime_ns}:
+            return True
+    except (OSError, ValueError):
+        pass
+    if _sha256(parquet) != expected:
+        return False
+    try:
+        stamp.write_text(json.dumps({"sha256": expected, "size": stat.st_size, "mtime_ns": stat.st_mtime_ns}))
+    except OSError:
+        pass
+    return True
+
+
 def _inside(root: Path, path: Path) -> Path:
     real_root = root.resolve()
     real_path = path.resolve()
@@ -258,7 +282,7 @@ class ParquetSnapshot:
             raise ValueError("Invalid snapshot manifest") from exc
         if not isinstance(manifest, dict) or manifest.get("schema_version") != "1.0" or not isinstance(manifest.get("checksums"), dict) or set(manifest["checksums"]) != {"records.parquet"} or not isinstance(manifest.get("fields"), list) or manifest.get("population_scope") not in {"preview", "complete"}:
             raise ValueError("Unsupported snapshot manifest")
-        if manifest.get("parquet_bytes") != parquet.stat().st_size or manifest["checksums"]["records.parquet"] != _sha256(parquet):
+        if manifest.get("parquet_bytes") != parquet.stat().st_size or not _checksum_matches(parquet, manifest["checksums"]["records.parquet"], directory):
             raise ValueError("Snapshot checksum mismatch")
         parquet_metadata = pq.read_metadata(parquet)
         for key in ("dataset_id", "release_id", "snapshot_id", "unit"):
@@ -509,9 +533,11 @@ class ParquetSnapshot:
                 raise ValueError(f"Cannot sort structured field: {sort['field_id']}")
             expression = self._category_sort_expression(sort["field_id"], column, self.category_kinds)[0] if dtype == "category" else column
             sorts.append(f'{expression} {sort["direction"].upper()} NULLS LAST')
-        if not any(sort.get("field_id") == "id" for sort in query.sort):
-            sorts.append('source."id" ASC')
-        order = " ORDER BY " + ", ".join(sorts)
+        if (query.sort or artifacts) and not any(sort.get("field_id") == "id" for sort in query.sort):
+            sorts.append('source."id" ASC')  # a tie-break that makes a user's sort total
+        # With no sort the page follows the snapshot's own row order: the index is immutable, so that order is as stable as sorting by
+        # identity, and it needs no sort over the whole population (a join with results has no stable row order, so it still sorts by id) (a scan of every id, seconds on a 13-million-row index).
+        order = " ORDER BY " + ", ".join(sorts) if sorts else ""
         method = "source"
         seed = 0
         sample_field = None
@@ -607,7 +633,17 @@ class ParquetSnapshot:
                     # Sort compact identity/field keys before fetching native
                     # envelopes. Wide records otherwise exhaust the fixed
                     # DuckDB budget in top-k sorting before page byte limits.
-                    keys=connection.execute(f'SELECT source."id" FROM {source}{where}{order} LIMIT ? OFFSET ?',
+                    max_record = self.manifest.get('max_record_bytes', 2_000_000)
+                    # A small page of small records is selected in one pass: sorting only the compact keys and then looking the rows up costs a second
+                    # scan of the whole file (about a second on 13 million rows). Wide records keep the two-stage path below.
+                    single_pass = (offset + take) * max_record * 4 <= self.memory_mb * 1_000_000
+                    if single_pass:
+                        reader=connection.execute(f"SELECT {selected_columns} FROM {source}{where}{order} LIMIT ? OFFSET ?",
+                                                  [str(self.parquet), *params, take, offset])
+                        page_rows=iter(reader.fetchone,None)
+                    else:
+                        page_rows=None
+                    keys=[] if single_pass else connection.execute(f'SELECT source."id" FROM {source}{where}{order} LIMIT ? OFFSET ?',
                                             [str(self.parquet), *params, take, offset]).fetchall()
                     batch_size=max(1,min(16,self.memory_mb*1_000_000//(4*self.manifest.get('max_record_bytes',2_000_000))))
                     def ordered_rows():
@@ -621,7 +657,7 @@ class ParquetSnapshot:
                             for identity in identities:
                                 ensure_active()
                                 yield by_id[identity]
-                    page_rows=ordered_rows()
+                    if page_rows is None:page_rows=ordered_rows()
                 else:
                     reader=connection.execute(f"SELECT {selected_columns} FROM {source}{where}{order} LIMIT ? OFFSET ?",
                                               [str(self.parquet), *params, take, offset])

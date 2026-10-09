@@ -299,6 +299,7 @@ def test_wide_native_pages_sort_keys_within_query_memory_budget(tmp_path):
 def test_interrupt_between_key_selection_and_payload_fetch_is_not_lost(tmp_path,monkeypatch):
     from dataset_atlas.queries import parquet
     snapshot=make_snapshot(tmp_path)
+    snapshot.manifest['max_record_bytes']=50_000_000  # wide records take the two-stage path whose gap this test interrupts
     original=parquet.duckdb.connect
     fired=False
     class Hook:
@@ -326,3 +327,30 @@ def test_exceeding_the_prepared_data_limit_says_how_far_it_got_and_what_to_chang
     with pytest.raises(ValueError, match=r'of 400 records fit within the 2,000-byte prepared-data limit.*raise the prepared-data limit'):
         build_parquet_snapshot(iter(records), [FieldDescriptor(id='source.n', name='n', dtype='number')], tmp_path / 'snap', root=tmp_path,
                                dataset_id='d', release_id='r', snapshot_id='s', expected_count=400, population_scope='complete', max_bytes=2_000)
+
+
+def test_a_snapshot_is_hashed_once_and_a_changed_file_is_hashed_again(tmp_path,monkeypatch):
+    from dataset_atlas.queries import parquet
+    make_snapshot(tmp_path)
+    directory=next(tmp_path.rglob('manifest.json')).parent
+    calls=[]
+    real=parquet._sha256
+    monkeypatch.setattr(parquet,'_sha256',lambda path:(calls.append(path),real(path))[1])
+    parquet.ParquetSnapshot(directory.parent,directory)
+    assert (directory/'verified.stamp').exists()
+    first=len(calls)
+    parquet.ParquetSnapshot(directory.parent,directory)
+    assert len(calls)==first, 'the stamp must replace a second full hash'
+    stamp=directory/'verified.stamp'
+    stamp.write_text('{"sha256":"0","size":1,"mtime_ns":1}')
+    parquet.ParquetSnapshot(directory.parent,directory)
+    assert len(calls)==first+1, 'a stamp that no longer matches the file is ignored'
+
+
+def test_an_unsorted_page_follows_the_snapshot_row_order_and_a_sorted_page_still_sorts(tmp_path):
+    snapshot=make_snapshot(tmp_path)
+    plain=snapshot.query(Query(snapshot_id='s1',population_scope='complete',limit=100))
+    again=snapshot.query(Query(snapshot_id='s1',population_scope='complete',limit=100))
+    assert [r.id for r in plain.records]==[r.id for r in again.records]
+    ordered=snapshot.query(Query(snapshot_id='s1',population_scope='complete',limit=100,sort=[{'field_id':'id','direction':'desc'}]))
+    assert [r.id for r in ordered.records]==sorted((r.id for r in plain.records),reverse=True)

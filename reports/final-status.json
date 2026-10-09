@@ -105,7 +105,7 @@
     "eurosat",
     "pairs"
   ],
-  "storage_allocated_bytes": 123598356480,
+  "storage_allocated_bytes": 121089658880,
   "workbench_running": false,
   "active_preparations": [],
   "paid_model_apis_used": false,
@@ -113,7 +113,7 @@
   "cluster_jobs_this_pass": 0,
   "remote_deployment_performed": false,
   "historical_status": "reports/final-status-historical-before-closeout-20261007.json",
-  "closeout_scope": "2026-10-09: BBQ-V and MultiTrust integrated, aliases and views removed from the catalogue, public guide for the static site. Catalogue-wide SPEC acceptance remains incomplete.",
+  "closeout_scope": "2026-10-09: BBQ-V and MultiTrust integrated, aliases, views and unresolved entries removed from the catalogue, public guide, complete-scope query speed-up, security hardening. Catalogue-wide SPEC acceptance remains incomplete.",
   "current_validation_pending": false,
   "release_rebuild_pending": false,
   "gqa_browsing_snapshot_media_scope": "full",
@@ -132,21 +132,22 @@
     "remaining_scope": "Wide stratified envelope/window sorting retains its prior path and can explicitly refuse its memory budget. This is not proof of the two-second ordinary filtering target for native wide records."
   },
   "python_tests_py312": {
-    "passed": 1450,
-    "skipped": 2
+    "passed": 1458,
+    "skipped": 3
   },
   "python_tests_py314": {
     "version": "3.14.2",
-    "passed": 1447,
-    "skipped": 5
+    "passed": 1455,
+    "skipped": 6
   },
   "browser_suite_note": "72 tests: 68 passed in the full run with the local Ollama provider, 1 failed because it opened an entry removed as an alias (fixed, re-run passed), 3 opt-in specs skipped. The runtime-linked-journey spec stayed skipped.",
-  "wheel_sha256": "96cd821967297f62a588d125a8cea39aa0a577c891fe5fe422e9ad25ae36fe8e",
-  "sdist_sha256": "db60928266c05c8835a5d13ac3bec5b0ab8bad65a0bd919eaf109ef9b5c1d690",
-  "storage_above_target_bytes": 23598356480,
+  "wheel_sha256": "7627dd8b79bc580c4b41c7a478d18ea670bd3fd5509aa5b9443c7b167f2b9b62",
+  "sdist_sha256": "7eeddf40c371386610b78e381a874713b8ae6199e7878aac77590260b7441a5c",
+  "storage_above_target_bytes": 21089658880,
   "storage_plan": "reports/storage-reclaim-plan-20261009.md",
-  "storage_note": "Nothing deleted this pass; see the reclaim plan.",
+  "storage_note": "Idle media caches (2.6 GB) were cleared on 2026-10-09 at the researcher's request; the researcher accepted the remaining 121.1 GB. See the reclaim plan.",
   "acceptance_matrix": "reports/acceptance_matrix.md",
   "github_pages_plan": "docs/github-pages.md",
-  "fresh_workspace_verified_preview_recipes_note": "The 84 recorded on 2026-10-07 are not re-verified; BBQ-V and MultiTrust were verified in the maintainer workspace only."
+  "fresh_workspace_verified_preview_recipes_note": "The 84 recorded on 2026-10-07 are not re-verified; BBQ-V and MultiTrust were verified in the maintainer workspace only.",
+  "security_review": "reports/security-review-20261009.md"
 }

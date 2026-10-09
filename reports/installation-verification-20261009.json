@@ -1,21 +1,21 @@
 {
-  "verified_at_utc": "2026-10-09T03:57:59.106094+00:00",
+  "verified_at_utc": "2026-10-09T05:03:09.271101+00:00",
   "status": "passed",
   "wheel": "dataset_atlas-0.2.0-py3-none-any.whl",
-  "wheel_sha256": "96cd821967297f62a588d125a8cea39aa0a577c891fe5fe422e9ad25ae36fe8e",
+  "wheel_sha256": "7627dd8b79bc580c4b41c7a478d18ea670bd3fd5509aa5b9443c7b167f2b9b62",
   "release_archives": {
-    "dataset_atlas-0.2.0-py3-none-any.whl": 40065620,
-    "dataset_atlas-0.2.0.tar.gz": 40103081
+    "dataset_atlas-0.2.0-py3-none-any.whl": 40056271,
+    "dataset_atlas-0.2.0.tar.gz": 40094387
   },
   "archive_inspection": {
     "passed": true,
-    "output": "{\"sdist\": {\"approved_media_files\": {\"clevr\": 100, \"eurosat\": 100, \"pairs\": 100}, \"archive\": \"dataset_atlas-0.2.0.tar.gz\", \"files\": 1402, \"site_bytes\": 31689786}, \"wheel\": {\"approved_media_files\": {\"clevr\": 100, \"eurosat\": 100, \"pairs\": 100}, \"archive\": \"dataset_atlas-0.2.0-py3-none-any.whl\", \"files\": 1122, \"site_bytes\": 31689786}}\n"
+    "output": "{\"sdist\": {\"approved_media_files\": {\"clevr\": 100, \"eurosat\": 100, \"pairs\": 100}, \"archive\": \"dataset_atlas-0.2.0.tar.gz\", \"files\": 1403, \"site_bytes\": 31596826}, \"wheel\": {\"approved_media_files\": {\"clevr\": 100, \"eurosat\": 100, \"pairs\": 100}, \"archive\": \"dataset_atlas-0.2.0-py3-none-any.whl\", \"files\": 1122, \"site_bytes\": 31596826}}\n"
   },
   "scope": "Fresh base-only virtual environment outside the checkout; real HTTP requests to the installed server; no dataset fetched, no model run.",
   "python": "3.12.14",
   "installed_packages": 24,
   "optional_model_packages_present": [],
-  "fresh_catalogue_entries": 287,
+  "fresh_catalogue_entries": 231,
   "approved_static_previews": [
     "clevr",
     "eurosat",
@@ -34,7 +34,7 @@
     },
     "/data/catalogue.json": {
       "status": 200,
-      "entries": 287,
+      "entries": 231,
       "any_adapter_config": false
     },
     "/data/clevr.json": {

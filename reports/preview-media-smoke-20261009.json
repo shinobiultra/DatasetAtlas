@@ -1,5 +1,5 @@
 {
-  "checked_at_utc": "2026-10-09T03:51:59.837418+00:00",
+  "checked_at_utc": "2026-10-09T04:55:45.864111+00:00",
   "api": "http://127.0.0.1:8766",
   "per_dataset": 3,
   "scope": "First, middle and last primary asset of each preview pack, fetched through the live media route and decoded.",
@@ -3950,39 +3950,39 @@
       "status": "ok",
       "checks": [
         {
-          "record_id": "multitrust:example:c8bb8ef835d60565299299bb",
-          "asset_id": "multitrust:asset:667a5583d51ee7627afa6a51",
-          "modality": "image",
-          "http": 200,
-          "content_type": "image/png",
-          "bytes": 1508772,
-          "representation": null,
-          "width": 968,
-          "height": 1296,
-          "status": "ok"
-        },
-        {
-          "record_id": "multitrust:example:71e9ebea14ff975c19c1807f",
-          "asset_id": "multitrust:asset:306418a05b40ce31e04afb7e",
+          "record_id": "multitrust:example:fc270892d17d6b7d02c3fef5",
+          "asset_id": "multitrust:asset:d8ad257b18224978e38bd013",
           "modality": "image",
           "http": 200,
           "content_type": "image/jpeg",
-          "bytes": 59132,
+          "bytes": 144262,
           "representation": null,
-          "width": 766,
-          "height": 512,
+          "width": 500,
+          "height": 361,
           "status": "ok"
         },
         {
-          "record_id": "multitrust:example:b278c1e5152e730ecef6777b",
-          "asset_id": "multitrust:asset:c7f0e3555ba3d19299a7198b",
+          "record_id": "multitrust:example:0db88bc5ed771c0042faf383",
+          "asset_id": "multitrust:asset:e2afe5400f72ca84b1f3b574",
           "modality": "image",
           "http": 200,
           "content_type": "image/jpeg",
-          "bytes": 1453671,
+          "bytes": 137468,
           "representation": null,
-          "width": 2258,
-          "height": 1500,
+          "width": 763,
+          "height": 1093,
+          "status": "ok"
+        },
+        {
+          "record_id": "multitrust:example:2d434c82cc019c0835c4742d",
+          "asset_id": "multitrust:asset:5e4d81e6a68e21c4cb080e20",
+          "modality": "image",
+          "http": 200,
+          "content_type": "image/jpeg",
+          "bytes": 144377,
+          "representation": null,
+          "width": 1024,
+          "height": 1384,
           "status": "ok"
         }
       ]

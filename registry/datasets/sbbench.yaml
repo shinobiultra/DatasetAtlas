@@ -5,25 +5,31 @@ aliases: []
 description: SBBench / author BBQ-V benchmark.
 paper_ids:
 - paper-32cea5e43d940514
-release: unresolved
-adapter: structured
+release: bbq-v-a1c78b8f73bc40408993414e3d94714a6a9169d3
+adapter: remote_columnar
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: gated
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: indexed_metadata_partial_media
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
+  total_count: 54414
   unit: example
   blockers:
-  - The current author-linked BBQ-V release is gated; the configured local Hugging Face account received
-    HTTP 403 for its first native Parquet file on 2026-09-23. Access approval is not present.
+  - 'The release is gated on Hugging Face (auto approval). The researcher accepted its terms on their own
+    account and the access check passed on 2026-10-08; anyone else must accept the terms on their own
+    account, and Atlas neither bypasses the gate nor stores credentials.'
   - The current BBQ-V release and historical SBBench population differ; exact historical release membership
     remains unverified.
-  - Adapter and preview are not implemented.
+  - 'The pinned release holds 54,414 rows in four overlapping file groups (real, synthetic, test, test2);
+    the card documents only the test group and states 14,144 image-question pairs, a count no group has,
+    so which group the paper cites as SBBench is not established.'
+  - Public image redistribution has not been approved; the card states CC BY-NC 4.0 and the source web-photo
+    rights have not been reviewed.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -108,4 +114,21 @@ evidence:
     accepted and no file body was fetched, so nothing is claimed about the content.
   audit_file: reports/gate-check-20261008.json
   source_identity_status: gate_still_closed_for_configured_account
+- kind: source_audit_access
+  checked_on: '2026-10-08'
+  url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/tree/a1c78b8f73bc40408993414e3d94714a6a9169d3
+  note: The researcher accepted the terms on their own Hugging Face account after the gate check above, and
+    the native shards were then read with that account's local credential (never recorded here). Atlas
+    neither accepted terms nor stored the credential; another user must accept the terms on their own account.
+  audit_file: reports/bbq-v-live-verification-20261008.json
+  source_identity_status: gate_accepted_by_researcher_historical_population_unverified
+- kind: native_population_live_verification
+  url: https://huggingface.co/datasets/ucf-crcv/BBQ-V/tree/a1c78b8f73bc40408993414e3d94714a6a9169d3
+  checked_on: '2026-10-08'
+  receipt: reports/bbq-v-live-verification-20261008.json
+  scope: All 54,414 rows of the 45 pinned Parquet shards (four overlapping file groups) indexed from footers
+    and annotation columns (3.1 MB read, shards not downloaded whole), 100 original preview images kept
+    locally from a fixed seeded row-group sample, and originals read on request by ETag-bound ranges (checked
+    for the last row and rows in each group). The preview is not a prevalence estimate.
+  source_identity_status: author_current_release_resolved_historical_sbbench_population_unverified
 source_url: https://github.com/UCF-CRCV/BBQ-Vision

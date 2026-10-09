@@ -14,11 +14,13 @@ def attach_results(pack: Pack, artifacts: list[Artifact]) -> Pack:
     attached=[]
     for artifact in artifacts:
         if pack.dataset.snapshot_id not in artifact.snapshot_ids:raise ValueError('Result snapshot is incompatible with the dataset snapshot')
-        attached.append(artifact)
         outputs=artifact.data.get('items',[])
+        unjoined=0
         for item in outputs:
             record=records.get(item.get('id'))
-            if record is None:continue
+            if record is None:
+                unjoined+=1
+                continue
             prefix=artifact.id+'.'
             from .result_values import result_values
             values=result_values(item)
@@ -28,6 +30,8 @@ def attach_results(pack: Pack, artifacts: list[Artifact]) -> Pack:
                 field_id='prediction.'+name
                 dtype='boolean' if isinstance(value,bool) else 'number' if isinstance(value,(int,float)) else 'string'
                 fields.setdefault(field_id,FieldDescriptor(id=field_id,name=artifact.kind+' · '+key,namespace='prediction',dtype=dtype,unit=record.unit,provenance={'artifact_id':artifact.id,'run_id':artifact.run_id,'aggregation_version':'1.0'},query_ops=['eq','ne','in','contains','is_null']+(['gt','gte','lt','lte'] if dtype=='number' else [])))
+        # A result item with no record in this pack is counted, never silently dropped.
+        attached.append(artifact.model_copy(update={'coverage':{**artifact.coverage,'items_unjoined':unjoined}}))
     result.artifacts=attached
     result.fields=list(fields.values())
     return result

@@ -20,6 +20,9 @@ The provider configuration accepts an explicit HTTP(S) base URL with no credenti
 
 `POST /providers/{id}/probe` sends only benign synthetic prompts and a tiny synthetic pixel. It independently records `unknown`, `supported`, or `unsupported` for text generation, one image, multiple images, structured output, tool calls, text embeddings, and image embeddings. A transport or authentication failure leaves the capability unknown. It never sends a dataset record. Probes should be run only after a user configures the provider; there is no automatic discovery or startup probe. A changed configuration resets results to unknown. The probes are compatibility checks, not a benchmark or proof of semantic quality.
 
+Batch runs over a whole selection (answers, tags, verdicts, embeddings) and chat with retrieval are described in
+[Model-server runs and chat with a dataset](model-server-runs.md). Only loopback servers can receive a batch run.
+
 Conversation flow:
 
 1. The user selects exact record IDs, provider, mode, optional fields, and optional image asset IDs.

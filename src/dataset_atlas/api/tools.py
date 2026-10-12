@@ -72,8 +72,10 @@ def make_tool_backend(registry, record_lookup, jobs, result_artifacts=None):
                 artifact=jobs.get_artifact(artifact_id)
                 if artifact.run_id is not None and artifact.run_id!=run_id:raise ValueError('Approved result run binding is incompatible')
                 if any(r.snapshot_id not in artifact.snapshot_ids or r.unit!=artifact.unit for r in records):raise ValueError('Run results do not match approved snapshots or units')
-                for item in artifact.data.get('items',[]):
-                    if item.get('id') in set(refs):
+                wanted=set(refs)
+                from dataset_atlas.queries.result_items import result_items
+                for item in result_items(artifact,wanted):
+                    if item.get('id') in wanted:
                         if item['id'] not in artifact.ids:raise ValueError('Result item is outside its registered subjects')
                         result.rows.append({'id':item['id'],'run_id':run_id,'artifact_id':artifact.id,'prediction':item})
             statuses=Counter(row['prediction'].get('status','unknown') for row in result.rows)

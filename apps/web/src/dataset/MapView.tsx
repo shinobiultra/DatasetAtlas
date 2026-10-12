@@ -178,7 +178,7 @@ export function MapView({ artifact, records, colourField, onInspect, onSelect, s
     })
   }
 
-  const selectedRecords = records.filter(record => selected.has(record.id)).slice(0, 40)
+  const selectedRecords = records.filter(record => selected.has(record.id))
   const plotted = layout.length
 
   return (
@@ -247,25 +247,31 @@ export function MapView({ artifact, records, colourField, onInspect, onSelect, s
           <span>{artifact.kind} · {shortId(artifact.run_id ?? artifact.id, 8)}</span>
           {colouring.missing > 0 && <><span className="sep">·</span><span>{colouring.missing.toLocaleString()} grey points have no colour value</span></>}
         </div>
-        {selectedRecords.length > 0 ? (
-          <div className="map-strip-row">
-            {selectedRecords.map(record => {
-              const asset = primaryAsset(record)
-              const url = asset ? assetUrl(asset) : null
-              return (
-                <button type="button" key={record.id} onClick={() => onInspect(record.id)} onDoubleClick={() => onOpen(record.id)} title={record.id}>
-                  {url && asset?.modality === 'image' ? <img src={displayUrl(url)} alt="" loading="lazy" /> : <div style={{ height: 62, background: 'var(--n-150)' }} />}
-                  <div className="cap clamp-2">{record.question ?? record.text ?? shortId(record.id, 14)}</div>
-                </button>
-              )
-            })}
-            {selected.size > selectedRecords.length && <div style={{ alignSelf: 'center', fontSize: 'var(--fs-sm)', color: 'var(--text-muted)', padding: '0 8px' }}>+{(selected.size - selectedRecords.length).toLocaleString()} more selected</div>}
-          </div>
-        ) : (
-          <div style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-faint)' }}>Lasso points to build a selection; their examples appear here.</div>
-        )}
+        <SelectionStrip records={selectedRecords} total={selected.size} onInspect={onInspect} onOpen={onOpen} />
       </div>
     </div>
+  )
+}
+
+/** The examples of the current selection, as a strip of thumbnails under a map. */
+export function SelectionStrip({ records, total, onInspect, onOpen }: { records: AtlasRecord[]; total: number; onInspect: (id: string) => void; onOpen: (id: string) => void }) {
+  const shown = records.slice(0, 40)
+  return shown.length > 0 ? (
+    <div className="map-strip-row">
+      {shown.map(record => {
+        const asset = primaryAsset(record)
+        const url = asset ? assetUrl(asset) : null
+        return (
+          <button type="button" key={record.id} onClick={() => onInspect(record.id)} onDoubleClick={() => onOpen(record.id)} title={record.id}>
+            {url && asset?.modality === 'image' ? <img src={displayUrl(url)} alt="" loading="lazy" /> : <div style={{ height: 62, background: 'var(--n-150)' }} />}
+            <div className="cap clamp-2">{record.question ?? record.text ?? shortId(record.id, 14)}</div>
+          </button>
+        )
+      })}
+      {total > shown.length && <div style={{ alignSelf: 'center', fontSize: 'var(--fs-sm)', color: 'var(--text-muted)', padding: '0 8px' }}>+{(total - shown.length).toLocaleString()} more selected</div>}
+    </div>
+  ) : (
+    <div style={{ fontSize: 'var(--fs-sm)', color: 'var(--text-faint)' }}>{total > 0 ? `${total.toLocaleString()} selected; their examples are not loaded in this view.` : 'Lasso points to build a selection; their examples appear here.'}</div>
   )
 }
 

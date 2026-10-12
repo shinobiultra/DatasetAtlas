@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import math
+from pathlib import Path
 
 from dataset_atlas.models import Artifact, content_id
 
@@ -12,7 +13,45 @@ def is_embedding_artifact(artifact: Artifact) -> bool:
            provenance.get('kind') == 'vector' and provenance.get('registered_embedding_space') is True)
 
 
+def bulk_directory(artifact: Artifact, artifact_dir: Path | None = None) -> Path:
+    """The array bundle directory of an array-backed artifact, confined to the artifact store."""
+    bulk = artifact.data.get('bulk')
+    if not isinstance(bulk, dict) or not isinstance(bulk.get('dir'), str):
+        raise ValueError('Artifact is not array-backed')
+    store = artifact_dir or artifact._store_root
+    if store is None:
+        raise ValueError('Array-backed artifact was not loaded from an artifact store')
+    root = Path(store).resolve()
+    directory = (root / bulk['dir']).resolve()
+    if directory.parent != root / 'arrays' or not directory.is_dir():
+        raise ValueError('Array bundle is missing or outside the artifact store')
+    return directory
+
+
+def embedding_source(artifact: Artifact, artifact_dir: Path):
+    """Reference (not copy) to an array-backed embedding artifact's vectors for an analysis run.
+
+    Returns ``(vector_source, provenance, metric)``; the source is checksum-verified when a worker reads it.
+    """
+    if not is_embedding_artifact(artifact):
+        raise ValueError('Choose an embedding artifact or an explicitly registered vector import')
+    provenance = artifact.provenance.get('processor_provenance', {})
+    if not provenance.get('embedding_space_id'):
+        raise ValueError('Embedding space provenance is missing')
+    bulk = artifact.data['bulk']
+    if 'vector' not in bulk.get('arrays', {}):
+        raise ValueError('Array-backed embedding artifact has no vector array')
+    metric = provenance.get('embedding_space', {}).get('metric', 'cosine')
+    if metric not in {'cosine', 'euclidean'}:
+        raise ValueError('Embedding space metric is unsupported')
+    source = {'artifact_id': artifact.id, 'dir': str(bulk_directory(artifact, artifact_dir)), 'array': 'vector',
+              'manifest': {key: bulk[key] for key in ('count', 'ids', 'arrays')}}
+    return source, provenance, metric
+
+
 def embedding_vectors(artifact: Artifact):
+    if artifact.data.get('bulk'):
+        raise ValueError('This embedding is array-backed; read it with embedding_source or bulk_matrix, not as a dict of lists')
     if not is_embedding_artifact(artifact):
         raise ValueError('Choose an embedding artifact or an explicitly registered vector import')
     provenance = artifact.provenance.get('processor_provenance', {})

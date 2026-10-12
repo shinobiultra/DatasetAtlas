@@ -4,7 +4,9 @@ import { provider } from '../provider'
 import { display, shortId } from '../lib/format'
 import { Field, Notice, Spinner, Tag } from '../ui/primitives'
 import * as Icon from '../ui/Icons'
-import type { FieldDescriptor } from '../generated'
+import type { Artifact, FieldDescriptor, Query } from '../generated'
+import { RetrievePanel } from './RetrievePanel'
+import { groundedPrompt } from './retrieval'
 
 type Capability = { status: string; checked_at?: string }
 type ProviderEntry = { config: { id: string; model: string; base_url?: string; max_images?: number; timeout_seconds?: number }; capabilities?: Record<string, Capability> }
@@ -16,7 +18,12 @@ function hideImageData(_key: string, value: unknown): unknown {
     : value
 }
 
-export function ModelPanel({ selected, unit, snapshotIds, fields = [], resultSnapshotIds = [], onNotice }: { selected: string[]; unit: string; snapshotIds?: string[]; fields?: FieldDescriptor[]; resultSnapshotIds?: string[]; onNotice: (message: string) => void }) {
+export function ModelPanel({ selected, unit, snapshotIds, fields = [], resultSnapshotIds = [], datasetId, query = null, artifacts = [], onAttach, onNotice }: {
+  selected: string[]; unit: string; snapshotIds?: string[]; fields?: FieldDescriptor[]; resultSnapshotIds?: string[]
+  /** With these, the panel can retrieve records by meaning and attach them to the chat. */
+  datasetId?: string; query?: Query | null; artifacts?: Artifact[]; onAttach?: (ids: string[]) => void
+  onNotice: (message: string) => void
+}) {
   const [providers, setProviders] = useState<ProviderEntry[]>([])
   const [providerId, setProviderId] = useState('')
   const [mode, setMode] = useState<'exploration' | 'evaluation'>('exploration')
@@ -143,6 +150,15 @@ export function ModelPanel({ selected, unit, snapshotIds, fields = [], resultSna
 
   return (
     <>
+      {datasetId && onAttach && (
+        <div className="insp-section">
+          <RetrievePanel datasetId={datasetId} query={query} artifacts={artifacts} unit={unit} onAttach={(ids, question) => {
+            onAttach(ids); setPrompt(groundedPrompt(question)); setContext(null); setResponse(null)
+            onNotice(`${ids.length.toLocaleString()} retrieved ${ids.length === 1 ? 'record' : 'records'} attached. Review what will be sent, then send.`)
+          }} />
+        </div>
+      )}
+
       <div className="insp-section">
         <div className="row" style={{ flexWrap: 'wrap', gap: 6 }}>
           <Tag tone="accent">Attached: {selected.length.toLocaleString()} {unit} records</Tag>

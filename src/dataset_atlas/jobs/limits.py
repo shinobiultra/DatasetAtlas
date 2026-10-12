@@ -11,8 +11,13 @@ DEFAULTS = {'max_rss_bytes': 8_000_000_000, 'max_cpu_seconds': 3600, 'max_wall_s
 MAXIMA = {'max_rss_bytes': 256_000_000_000, 'max_cpu_seconds': 604800, 'max_wall_seconds': 604800}
 
 
+# Columnar runs hold whole matrices and keep many threads busy; RLIMIT_CPU counts every thread's time.
+ARRAY_DEFAULTS = {'max_rss_bytes': 32_000_000_000, 'max_cpu_seconds': 172800, 'max_wall_seconds': 14400}
+
+
 def limits(config):
-    result = {key: config.get(key, value) for key, value in DEFAULTS.items()}
+    defaults = ARRAY_DEFAULTS if config.get('storage') == 'arrays' else DEFAULTS
+    result = {key: config.get(key, value) for key, value in defaults.items()}
     for key, value in result.items():
         if type(value) is not int or not 1 <= value <= MAXIMA[key]:
             raise ValueError(f'{key} must be a positive integer no greater than {MAXIMA[key]}')
@@ -46,7 +51,12 @@ def install(config, stage):
     import resource
     bounds = limits(config)
     cpu = bounds['max_cpu_seconds']
-    resource.setrlimit(resource.RLIMIT_CPU, (cpu, cpu + 1))
+    # A hard limit inherited from the parent (a shell's `ulimit -t`, a sandbox) cannot be raised, only matched; asking for more would
+    # crash the worker before it did anything, so take what is allowed. The wall-time and RSS watchdogs below still apply.
+    _, inherited = resource.getrlimit(resource.RLIMIT_CPU)
+    hard = cpu + 1 if inherited == resource.RLIM_INFINITY else min(cpu + 1, inherited)
+    cpu = min(cpu, hard)
+    resource.setrlimit(resource.RLIMIT_CPU, (cpu, hard))
     started = time.monotonic()
     def terminate(kind, observed):
         path = Path(stage) / 'resource-error.receipt'

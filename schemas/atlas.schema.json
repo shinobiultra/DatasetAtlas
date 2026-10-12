@@ -1081,6 +1081,18 @@
         "created_at": {
           "title": "Created At",
           "type": "string"
+        },
+        "size": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Size"
         }
       },
       "required": [

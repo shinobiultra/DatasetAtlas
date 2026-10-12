@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import fcntl
+import shutil
 import json
 import os
 from pathlib import Path
@@ -19,6 +20,49 @@ from dataset_atlas.storage.local import read_rooted_file
 
 DEFAULT_MAX_OUTPUT_BYTES = 64 * 1024 * 1024
 HARD_MAX_OUTPUT_BYTES = 512 * 1024 * 1024
+# Columnar ("arrays") runs write binary arrays, not JSON, so their budget is measured in array bytes.
+DEFAULT_ARRAY_BYTES = 8 * 1024 ** 3
+HARD_MAX_ARRAY_BYTES = 64 * 1024 ** 3
+
+
+def _frozen_documents(processor_id: str, config: dict, parsed: list[Record]) -> list[dict]:
+    """The records as a run freezes and ships them.
+
+    A columnar run freezes what its processor reads, not whole records: identity for projection, clustering and
+    neighbours (they read vectors by id), and the text and assets for embeddings. Dumping and parsing every answer of
+    every record of a 200k-record run cost minutes, and a snapshot is immutable, so the selection already pins the rest.
+    """
+    if not _uses_arrays(config) or not processor_id.startswith(("embed.", "project.", "cluster.", "outlier.", "vlm.", "score.")):
+        return [record.model_dump(mode="json") for record in parsed]
+    content = processor_id.startswith(("embed.", "vlm.", "score."))
+    fields = [str(field) for field in config.get("record_fields", [])]
+    documents = []
+    for record in parsed:
+        document = {"id": record.id, "dataset_id": record.dataset_id, "release_id": record.release_id, "snapshot_id": record.snapshot_id, "unit": record.unit}
+        if content:
+            document.update(text=record.text, question=record.question, choices=list(record.choices), asset_ids=list(record.asset_ids),
+                            assets=[asset.model_dump(mode="json") for asset in record.assets])
+            for field in fields:  # only the record fields this run's prompts and scoring refer to
+                namespace, _, key = field.partition(".")
+                if namespace in {"source", "prediction", "human"} and key in getattr(record, namespace):
+                    document.setdefault(namespace, {})[key] = getattr(record, namespace)[key]
+        documents.append(document)
+    return documents
+
+
+def _uses_arrays(config: dict) -> bool:
+    storage = config.get("storage", "json")
+    if storage not in ("json", "arrays"):
+        raise ValueError("storage must be json or arrays")
+    return storage == "arrays"
+
+
+def _output_budget(config: dict) -> int:
+    return config.get("max_output_bytes", DEFAULT_ARRAY_BYTES if _uses_arrays(config) else DEFAULT_MAX_OUTPUT_BYTES)
+
+
+def _hard_budget(config: dict) -> int:
+    return HARD_MAX_ARRAY_BYTES if _uses_arrays(config) else HARD_MAX_OUTPUT_BYTES
 
 
 def _resource_class(description,config):
@@ -27,6 +71,8 @@ def _resource_class(description,config):
     # Auto may select an accelerator inside the worker. Reserve its exclusive
     # lease conservatively without importing the ML stack in the API process.
     if description.get('supported_devices') and device in {'auto','mps'}:return 'gpu'
+    # Columnar analysis may run on the GPU (cuML, torch); take the same exclusive lease so it cannot contend with an embedding run for VRAM.
+    if description.get('backends') and config.get('storage')=='arrays' and config.get('backend','auto')!='cpu':return 'gpu'
     return 'gpu' if device.startswith(('cuda','gpu')) else description['device']
 
 
@@ -125,8 +171,12 @@ class JobManager:
     def estimate(self, selection: Selection | dict, records: list[Record | dict],
                  processor_id: str, config: dict | None = None) -> dict:
         """Return a read-only execution plan for explicit budget review."""
-        selection = Selection.model_validate(selection)
-        documents = [Record.model_validate(record).model_dump(mode="json") for record in records]
+        parsed = [record if isinstance(record, Record) else Record.model_validate(record) for record in records]
+        config = json.loads(_json(config or {}))
+        return self._estimate(Selection.model_validate(selection), parsed, _frozen_documents(processor_id, config, parsed), processor_id, config)
+
+    def _estimate(self, selection: Selection, parsed: list[Record], documents: list[dict], processor_id: str, config: dict | None) -> dict:
+        """Estimate over records that are already validated, so a large run parses each record once."""
         if not isinstance(processor_id, str) or not processor_id:
             raise ValueError("processor_id is required")
         if (len(selection.ids) != len(set(selection.ids)) or
@@ -139,14 +189,14 @@ class JobManager:
         config = json.loads(_json(config or {}))
         from dataset_atlas.jobs.limits import limits, enforcement
         resource_limits = limits(config)
-        max_output = config.get("max_output_bytes", DEFAULT_MAX_OUTPUT_BYTES)
-        if type(max_output) is not int or not 1 <= max_output <= HARD_MAX_OUTPUT_BYTES:
-            raise ValueError(f"max_output_bytes must be an integer within 1..{HARD_MAX_OUTPUT_BYTES}")
+        max_output = _output_budget(config)
+        if type(max_output) is not int or not 1 <= max_output <= _hard_budget(config):
+            raise ValueError(f"max_output_bytes must be an integer within 1..{_hard_budget(config)}")
         from dataset_atlas.processors import get_processor
         processor = get_processor(processor_id)
         description = processor.describe()
-        validation = processor.validate_inputs(documents, config)
-        processor_estimate = processor.estimate(documents, config)
+        validation = processor.validate_inputs(parsed, config)
+        processor_estimate = processor.estimate(parsed, config)
         resource = _resource_class(description,config)
         if resource not in ("cpu", "gpu", "network", "external_api"):
             raise ValueError("Invalid resource class")
@@ -155,7 +205,7 @@ class JobManager:
         unknown_bytes = False
         asset_refs = 0
         for record in documents:
-            for asset in record["assets"]:
+            for asset in record.get("assets", []):
                 asset_refs += 1
                 identity = asset.get("sha256") or asset["id"]
                 asset_keys.add(identity)
@@ -171,36 +221,42 @@ class JobManager:
                   "resource_class": resource, "input_representation": config.get("input_representation", "original"),
                   "known_input_bytes": sum(known_bytes.values()),
                   "input_bytes_status": "unknown" if unknown_bytes else "known",
-                  "expected_download_bytes": 0, "model_download_bytes": 0, "remote_calls": 0,
-                  "output_bytes": None, "output_bytes_status": "unknown", "max_output_bytes": max_output,
+                  "expected_download_bytes": 0, "model_download_bytes": 0, "remote_calls": processor_estimate.get("remote_calls", 0),
+                  "output_bytes": None, "output_bytes_status": "unknown", "max_output_bytes": max_output, "storage": "arrays" if _uses_arrays(config) else "json",
                   "resource_limits": resource_limits, "memory_enforcement": enforcement(),
                   "validation": validation, "processor_estimate": processor_estimate,
                   "available": description["available"], "missing_dependencies": description["missing_dependencies"]}
+        # A columnar run is bound to its selection, which is content-addressed over immutable snapshots; hashing every
+        # record again would cost seconds per hundred thousand and bind nothing the selection does not.
         result["estimate_digest"] = _digest({"selection": selection.model_dump(mode="json"),
-                                             "records": documents, "config": config, "processor_id": processor_id,
+                                             "records": None if _uses_arrays(config) else documents, "config": config, "processor_id": processor_id,
                                              "estimate": result})
         return result
 
     def create(self, selection: Selection | dict, records: list[Record | dict],
-               processor_id: str, config: dict | None = None) -> Run:
+               processor_id: str, config: dict | None = None, *, estimate: dict | None = None) -> Run:
+        """Freeze a run. A caller that has just computed and checked this run's estimate may pass it instead of paying for it twice."""
         selection = Selection.model_validate(selection)
-        documents = [Record.model_validate(record).model_dump(mode="json") for record in records]
+        parsed = [record if isinstance(record, Record) else Record.model_validate(record) for record in records]
+        config = json.loads(_json(config or {}))
+        documents = _frozen_documents(processor_id, config, parsed) if isinstance(processor_id, str) else []
         if not processor_id or not isinstance(processor_id, str):
             raise ValueError("processor_id is required")
         if len(selection.ids) != len(set(selection.ids)) or set(selection.ids) != {record["id"] for record in documents} or len(documents) != len(selection.ids):
             raise ValueError("Records must match the frozen selection IDs exactly")
         if any(record["unit"] != selection.unit or record["snapshot_id"] not in selection.snapshot_ids or record["dataset_id"] not in selection.dataset_ids for record in documents):
             raise ValueError("Record unit, snapshot, or dataset differs from selection")
-        config = json.loads(_json(config or {}))
         from dataset_atlas.processors import get_processor
         processor = get_processor(processor_id)
         description = processor.describe()
         if any(record["unit"] not in description["input_units"] for record in documents):
             raise ValueError("Processor does not support selection unit")
-        validation = processor.validate_inputs(documents, config)
-        estimate = self.estimate(selection, documents, processor_id, config)
+        validation = processor.validate_inputs(parsed, config)
+        if estimate is None:
+            estimate = self._estimate(selection, parsed, documents, processor_id, config)
         batching = description["batching"]
-        population_key = _digest([by for by in sorted(documents, key=lambda item: item["id"])]) if batching == "selection" else None
+        arrays = _uses_arrays(config)
+        population_key = _digest([by for by in sorted(documents, key=lambda item: item["id"])]) if batching == "selection" and not arrays else None
         resource = _resource_class(description,config)
         if resource not in ("cpu", "gpu", "network", "external_api"):
             raise ValueError("Invalid resource class")
@@ -217,17 +273,26 @@ class JobManager:
         with self._db() as db:
             db.execute("INSERT INTO runs(id,run_json,selection_json,records_json) VALUES(?,?,?,?)",
                        (run_id, _json(run.model_dump(mode="json")), _json(selection.model_dump(mode="json")),
-                        _json([by_id[record_id] for record_id in selection.ids])))
-            for record_id in selection.ids:
-                record = by_id[record_id]
-                key = _digest({"processor_id": processor_id, "model_revision": config.get("model_revision"),
-                               "config": config, "input_representation": config.get("input_representation", "original"),
-                               "record": record, "population_key": population_key})
-                cached = db.execute("SELECT relative_path,sha256 FROM completed_items WHERE item_key=?", (key,)).fetchone()
-                valid = bool(cached and self._valid_item(cached[0], cached[1]))
-                db.execute("INSERT INTO run_items(run_id,record_id,item_key,status,output_bytes) VALUES(?,?,?,?,?)",
-                           (run_id, record_id, key, "completed" if valid else "queued",
-                            (self.artifact_dir / cached[0]).stat().st_size if valid else 0))
+                        json.dumps([by_id[record_id] for record_id in selection.ids], ensure_ascii=False, separators=(",", ":")) if arrays
+                        else _json([by_id[record_id] for record_id in selection.ids])))
+            if arrays:
+                # One digest binding the config and the content-addressed selection, then one hash per id; no per-item result files exist to reuse.
+                shared = _digest({"processor_id": processor_id, "model_revision": config.get("model_revision"), "config": config,
+                                  "input_representation": config.get("input_representation", "original"), "selection": _digest(selection.model_dump(mode="json"))})
+                db.executemany("INSERT INTO run_items(run_id,record_id,item_key,status,output_bytes) VALUES(?,?,?,?,0)",
+                               ((run_id, record_id, hashlib.sha256((shared + record_id).encode()).hexdigest(), "queued")
+                                for record_id in selection.ids))
+            else:
+                for record_id in selection.ids:
+                    record = by_id[record_id]
+                    key = _digest({"processor_id": processor_id, "model_revision": config.get("model_revision"),
+                                   "config": config, "input_representation": config.get("input_representation", "original"),
+                                   "record": record, "population_key": population_key})
+                    cached = db.execute("SELECT relative_path,sha256 FROM completed_items WHERE item_key=?", (key,)).fetchone()
+                    valid = bool(cached and self._valid_item(cached[0], cached[1]))
+                    db.execute("INSERT INTO run_items(run_id,record_id,item_key,status,output_bytes) VALUES(?,?,?,?,?)",
+                               (run_id, record_id, key, "completed" if valid else "queued",
+                                (self.artifact_dir / cached[0]).stat().st_size if valid else 0))
             self._refresh(db, run_id)
         self._launch(run_id)
         return self.get_run(run_id)
@@ -246,7 +311,7 @@ class JobManager:
                         "running": counts.get("running", 0), "skipped": counts.get("skipped", 0),
                         "not_applicable": counts.get("not_applicable", 0),
                         "output_bytes": db.execute("SELECT COALESCE(SUM(output_bytes),0) FROM run_items WHERE run_id=?", (run_id,)).fetchone()[0],
-                        "max_output_bytes": run.config.get("max_output_bytes", DEFAULT_MAX_OUTPUT_BYTES)}
+                        "max_output_bytes": _output_budget(run.config)}
         run.errors = [json.loads(error) for (error,) in db.execute(
             "SELECT error_json FROM run_items WHERE run_id=? AND error_json IS NOT NULL ORDER BY record_id", (run_id,))]
         if final:
@@ -313,6 +378,13 @@ class JobManager:
         self._launch(run_id)
         return self.get_run(run_id)
 
+    @staticmethod
+    def _plan_record(run: Run, record: dict) -> dict:
+        """Columnar projection, clustering and neighbour runs read vectors by id, so the worker needs identity only."""
+        if run.config.get("storage") == "arrays" and run.processor_id.startswith(("project.", "cluster.", "outlier.")):
+            return {key: record[key] for key in ("id", "dataset_id", "release_id", "snapshot_id", "unit")}
+        return record
+
     def _launch(self, run_id: str) -> None:
         with self._guard:
             if self._closed or (run_id in self._active and self._active[run_id].is_alive()):
@@ -325,13 +397,15 @@ class JobManager:
         stage = self.stage_dir / run_id
         if not stage.exists():
             return
+        for shard in sorted(stage.glob("shard-*")):
+            if shard.is_dir() and shard.suffix != ".invalid":
+                self._import_shard(db, run_id, shard)
         for path in stage.glob("*.json"):
             if path.name == "input.json":
                 continue
             payload = None
             try:
-                budget = json.loads(db.execute("SELECT run_json FROM runs WHERE id=?", (run_id,)).fetchone()[0])["config"].get(
-                    "max_output_bytes", DEFAULT_MAX_OUTPUT_BYTES)
+                budget = _output_budget(json.loads(db.execute("SELECT run_json FROM runs WHERE id=?", (run_id,)).fetchone()[0])["config"])
                 if path.stat().st_size > budget:
                     raise ValueError("Staged output exceeds max_output_bytes")
                 payload = json.loads(path.read_text(encoding="utf-8"))
@@ -378,6 +452,46 @@ class JobManager:
                     db.execute("UPDATE run_items SET status='failed',error_json=? WHERE run_id=? AND record_id=? AND status!='completed'",
                                (_json({"record_id": record_id, "type": "StageValidationError", "message": str(exc)[:1000]}), run_id, record_id))
 
+    def _import_shard(self, db: sqlite3.Connection, run_id: str, shard: Path) -> None:
+        """Verify a staged columnar shard against the frozen run, keep it, and mark its records done."""
+        from dataset_atlas.storage.arrays import read_ids, sha256_file
+        keys: dict = {}
+        try:
+            meta = json.loads((shard / "meta.json").read_text(encoding="utf-8"))
+            keys, manifest, skipped = meta["keys"], meta["manifest"], meta["skipped"]
+            # Only this shard's keys: reading every item of a 200k-record run once per shard was most of the import time.
+            expected: dict[str, str] = {}
+            wanted = list(keys)
+            for start in range(0, len(wanted), 500):
+                chunk = wanted[start:start + 500]
+                expected.update(db.execute(f"SELECT record_id,item_key FROM run_items WHERE run_id=? AND record_id IN ({','.join('?' * len(chunk))})", [run_id, *chunk]))
+            if not keys or any(expected.get(record_id) != key for record_id, key in keys.items()):
+                raise ValueError("Shard does not match frozen run IDs and keys")
+            ids = read_ids(shard, manifest)
+            if len(ids) + len(skipped) != len(keys) or set(ids) | set(skipped) != set(keys) or set(ids) & set(skipped):
+                raise ValueError("Shard rows and skipped records do not account for its keys exactly")
+            if any(row.get("status") not in ("skipped", "not_applicable", "failed") for row in skipped.values()):
+                raise ValueError("Invalid skipped status in shard")
+            for entry in [*manifest["arrays"].values(), *manifest.get("extras", {}).values(), *manifest.get("texts", {}).values()]:
+                if sha256_file(shard / entry["file"]) != entry["sha256"]:
+                    raise ValueError("Shard array does not match its checksum")
+            destination = self.artifact_dir / "shards" / run_id / shard.name
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            if destination.exists():
+                shutil.rmtree(destination)
+            os.replace(shard, destination)
+            per_row = meta["array_bytes"] // max(1, len(ids))
+            db.executemany("UPDATE run_items SET status='completed',error_json=NULL,output_bytes=? WHERE run_id=? AND record_id=?",
+                           [(per_row, run_id, record_id) for record_id in ids])
+            db.executemany("UPDATE run_items SET status=?,error_json=?,output_bytes=0 WHERE run_id=? AND record_id=?",
+                           [(row["status"], _json({"record_id": record_id, **{k: v for k, v in row.items() if k != "status"}}) if len(row) > 1 else None,
+                             run_id, record_id) for record_id, row in skipped.items()])
+        except Exception as exc:
+            shard.rename(shard.with_name(shard.name + ".invalid"))
+            targets = list(keys) if isinstance(keys, dict) and keys else [row[0] for row in db.execute("SELECT record_id FROM run_items WHERE run_id=?", (run_id,))]
+            db.executemany("UPDATE run_items SET status='failed',error_json=? WHERE run_id=? AND record_id=? AND status!='completed'",
+                           [(_json({"record_id": record_id, "type": "StageValidationError", "message": str(exc)[:1000]}), run_id, record_id) for record_id in targets])
+
     def _import_item(self, db: sqlite3.Connection, run_id: str, key: str, record_id: str, result: dict) -> None:
         expected = db.execute("SELECT item_key FROM run_items WHERE run_id=? AND record_id=?", (run_id, record_id)).fetchone()
         if not expected or key != expected[0]:
@@ -390,8 +504,7 @@ class JobManager:
             raise ValueError("Invalid processor item status")
         if status == "completed":
             size = len(_json(result).encode())
-            limit = json.loads(db.execute("SELECT run_json FROM runs WHERE id=?", (run_id,)).fetchone()[0])["config"].get(
-                "max_output_bytes", DEFAULT_MAX_OUTPUT_BYTES)
+            limit = _output_budget(json.loads(db.execute("SELECT run_json FROM runs WHERE id=?", (run_id,)).fetchone()[0])["config"])
             old = db.execute("SELECT output_bytes FROM run_items WHERE run_id=? AND record_id=?", (run_id, record_id)).fetchone()[0]
             used = db.execute("SELECT COALESCE(SUM(output_bytes),0) FROM run_items WHERE run_id=?", (run_id,)).fetchone()[0]
             if used - old + size > limit:
@@ -414,7 +527,100 @@ class JobManager:
             db.execute("UPDATE run_items SET status=?,error_json=?,output_bytes=0 WHERE run_id=? AND record_id=?",
                        (status, _json(error), run_id, record_id))
 
+    def _register_bulk_artifact(self, db: sqlite3.Connection, run_id: str, run: Run) -> Run:
+        """One array-backed artifact from a columnar run's shards, with rows in selection order."""
+        import numpy as np
+        from dataset_atlas.storage import arrays as store
+        rows = db.execute("SELECT record_id,status,error_json FROM run_items WHERE run_id=?", (run_id,)).fetchall()
+        selection = json.loads(db.execute("SELECT selection_json FROM runs WHERE id=?", (run_id,)).fetchone()[0])
+        status = {record_id: state for record_id, state, _ in rows}
+        root = self.artifact_dir / "shards" / run_id
+        shards = sorted(path for path in root.glob("shard-*") if path.is_dir() and path.suffix != ".invalid") if root.is_dir() else []
+        order = [record_id for record_id in selection["ids"] if status.get(record_id) == "completed"]
+        if not shards or not order:
+            return run
+        metas = [json.loads((path / "meta.json").read_text(encoding="utf-8")) for path in shards]
+        shard_ids = [store.read_ids(path, meta["manifest"]) for path, meta in zip(shards, metas)]
+        if sum(map(len, shard_ids)) != len(order) or set().union(*map(set, shard_ids)) != set(order):
+            raise ValueError("Shards do not cover the completed records exactly")
+        names = list(metas[0]["manifest"]["arrays"])
+        carriers = [(path, meta) for path, meta in zip(shards, metas) if meta["manifest"].get("extras")]
+        if len(carriers) > 1:
+            raise ValueError("Only one shard may carry non-row arrays")
+        artifact_id = _digest({"run_id": run_id, "processor_id": run.processor_id, "selection_id": run.selection_id, "config_digest": _digest(run.config),
+                               "shards": [[path.name, {name: entry["sha256"] for group in ("arrays", "extras", "texts") for name, entry in meta["manifest"].get(group, {}).items()}]
+                                          for path, meta in zip(shards, metas)]})[:24]
+        relative_dir = f"arrays/{artifact_id}"
+        target = self.artifact_dir / relative_dir
+        skipped = {record_id: {"status": state, **{k: v for k, v in (json.loads(error) if error else {}).items() if k != "record_id"}}
+                   for record_id, state, error in rows if state != "completed"}
+        if target.is_dir():
+            manifest = json.loads((target / "manifest.json").read_text(encoding="utf-8"))
+        else:
+            work = target.with_name(f".{artifact_id}.{uuid4().hex}.tmp")
+            work.mkdir(parents=True)
+            try:
+                rank = {record_id: index for index, record_id in enumerate(order)}
+                entries = {}
+                for name in names:
+                    first = metas[0]["manifest"]["arrays"][name]
+                    if any(meta["manifest"]["arrays"][name]["dtype"] != first["dtype"] or meta["manifest"]["arrays"][name]["shape"][1:] != first["shape"][1:] for meta in metas):
+                        raise ValueError(f"Shards disagree on the dtype or shape of {name}")
+                    out = store.allocate_array(work, name, [len(order), *first["shape"][1:]], first["dtype"])
+                    for path, meta, ids in zip(shards, metas, shard_ids):
+                        out[np.fromiter((rank[record_id] for record_id in ids), dtype=np.int64, count=len(ids))] = store.read_array(path, meta["manifest"]["arrays"][name])
+                    out.flush()
+                    del out
+                    entries[name] = store.describe_array(work, name)
+                extras = {}
+                for path, meta in carriers:
+                    for name, entry in meta["manifest"]["extras"].items():
+                        shutil.copyfile(path / entry["file"], work / entry["file"])
+                        extras[name] = store.describe_array(work, name)
+                texts = {}
+                for name in metas[0]["manifest"].get("texts", {}):
+                    merged: list[str | None] = [None] * len(order)
+                    for path, meta, ids in zip(shards, metas, shard_ids):
+                        part = store.read_texts(path, meta["manifest"]["texts"][name])
+                        for record_id, value in zip(ids, part):
+                            merged[rank[record_id]] = value
+                    texts[name] = store.write_texts(work, name, merged)
+                manifest = {"count": len(order), "ids": store.write_ids(work, order), "arrays": entries, **({"extras": extras} if extras else {}),
+                            **({"texts": texts} if texts else {})}
+                (work / "skipped.json").write_text(_json(skipped), encoding="utf-8")
+                (work / "manifest.json").write_text(_json(manifest), encoding="utf-8")
+                os.replace(work, target)
+            except BaseException:
+                shutil.rmtree(work, ignore_errors=True)
+                raise
+        bulk = {"dir": relative_dir, **manifest}
+        _write_once(self.artifact_dir / f"runs/{artifact_id}.json", {"run_id": run_id, "storage": "arrays", "bulk": bulk, "processor_id": run.processor_id,
+                                                                    "selection_id": run.selection_id, "coverage": run.progress})
+        portable_config_keys = {"extraction_threshold", "max_pixels", "seed", "neighbors", "metric", "clusters", "dimensions", "backend", "min_dist",
+                                "min_cluster_size", "min_samples", "n_init", "linkage", "left_field", "right_field", "kind", "embedding_space_id",
+                                "embedding_run_id", "representation", "input_representation", "model_revision", "model_sha256", "weights_sha256",
+                                "storage_dtype", "precision"}
+        by_status = {}
+        for entry in skipped.values():
+            by_status[entry["status"]] = by_status.get(entry["status"], 0) + 1
+        artifact = Artifact(id=artifact_id, kind=run.processor_id, run_id=run_id, snapshot_ids=selection["snapshot_ids"], unit=selection["unit"],
+                            ids=list(selection["ids"]), files={"manifest": f"runs/{artifact_id}.json"},
+                            provenance={"processor_id": run.processor_id, "selection_id": run.selection_id,
+                                        "config": {key: value for key, value in run.config.items() if key in portable_config_keys},
+                                        "config_digest": _digest(run.config), "input_representation": run.provenance.get("input_representation"),
+                                        "model_revision": run.provenance.get("model_revision"), "processor_provenance": metas[0]["provenance"],
+                                        "output_schema": "1.0", "storage": "arrays"},
+                            coverage={**run.progress, "status": run.status},
+                            data={"bulk": bulk, "summary": metas[0]["summary"] if len(metas) == 1 else {},
+                                  "skipped": {"count": len(skipped), "by_status": by_status, "examples": dict(list(skipped.items())[:50])}})
+        db.execute("INSERT OR IGNORE INTO artifacts(id,artifact_json) VALUES(?,?)", (artifact_id, _json(artifact.model_dump(mode="json"))))
+        run.artifact_ids = [artifact_id]
+        db.execute("UPDATE runs SET run_json=? WHERE id=?", (_json(run.model_dump(mode="json")), run_id))
+        return run
+
     def _register_artifact(self, db: sqlite3.Connection, run_id: str, run: Run) -> Run:
+        if _uses_arrays(run.config):
+            return self._register_bulk_artifact(db, run_id, run)
         rows = db.execute("SELECT record_id,item_key,status,error_json FROM run_items WHERE run_id=? ORDER BY record_id", (run_id,)).fetchall()
         selection = json.loads(db.execute("SELECT selection_json FROM runs WHERE id=?", (run_id,)).fetchone()[0])
         completed = {record_id: f"items/{key}.json" for record_id, key, status, _ in rows if status == "completed"}
@@ -484,10 +690,12 @@ class JobManager:
                 db.execute("UPDATE run_items SET status='running' WHERE run_id=? AND status='queued'", (run_id,))
                 self._refresh(db, run_id)
                 plan = {"processor_id": run.processor_id, "config": run.config,
+                        "array_bytes_remaining": max(0, _output_budget(run.config) - db.execute(
+                            "SELECT COALESCE(SUM(output_bytes),0) FROM run_items WHERE run_id=?", (run_id,)).fetchone()[0]),
                         "batching": run.provenance.get("batching"),
-                        "budget_remaining_bytes": run.config.get("max_output_bytes", DEFAULT_MAX_OUTPUT_BYTES) -
+                        "budget_remaining_bytes": _output_budget(run.config) -
                         db.execute("SELECT COALESCE(SUM(output_bytes),0) FROM run_items WHERE run_id=?", (run_id,)).fetchone()[0],
-                        "items": [{"record": records[record_id], "key": key} for record_id, key in pending]}
+                        "items": [{"record": self._plan_record(run, records[record_id]), "key": key} for record_id, key in pending]}
             exit_code = 0
             if pending:
                 (stage / 'resource-error.receipt').unlink(missing_ok=True)
@@ -530,6 +738,9 @@ class JobManager:
                     run.errors.append(json.loads(receipt.read_text()))
                     db.execute("UPDATE runs SET run_json=? WHERE id=?", (_json(run.model_dump(mode='json')), run_id))
                 self._register_artifact(db, run_id, run)
+            if run.status == "completed" and run.artifact_ids and _uses_arrays(run.config):
+                # Kept for partial or failed runs so a retry can still assemble the finished shards.
+                shutil.rmtree(self.artifact_dir / "shards" / run_id, ignore_errors=True)
         except Exception as exc:
             with self._db() as db:
                 row = db.execute("SELECT run_json FROM runs WHERE id=?", (run_id,)).fetchone()
@@ -549,6 +760,121 @@ class JobManager:
         for run_id, raw in rows:
             if Run.model_validate_json(raw).status in ("queued", "running"):
                 self._launch(run_id)
+
+    def _import_array_run(self, source: Path, connection: sqlite3.Connection, run: Run, raw_run: str, raw_selection: str, raw_records: str, cancelled: bool) -> Run:
+        """Verify and register one completed array-backed run from another workspace (a cluster's, say), then copy its bundle.
+
+        Every file is hashed while it is copied and compared with the checksum in the artifact's manifest; the frozen
+        selection, the item keys and the per-record outcomes are re-derived from the run's own configuration, so a bundle
+        cannot be attached to a run it does not belong to. Nothing is registered unless all of it checks out.
+        """
+        from dataset_atlas.storage import arrays as store
+        run_id = run.id
+        selection = Selection.model_validate_json(raw_selection)
+        records = [Record.model_validate(record) for record in json.loads(raw_records)]
+        if run.status != "completed" or cancelled:
+            raise ValueError("Only fully completed, uncancelled runs can be imported")
+        if (run.selection_id != selection.id or len(selection.ids) != len(set(selection.ids)) or [record.id for record in records] != selection.ids or
+                any(record.unit != selection.unit or record.snapshot_id not in selection.snapshot_ids or record.dataset_id not in selection.dataset_ids for record in records)):
+            raise ValueError("Frozen selection and records disagree")
+        rows = connection.execute("SELECT record_id,item_key,status,error_json,output_bytes FROM run_items WHERE run_id=?", (run_id,)).fetchall()
+        shared = _digest({"processor_id": run.processor_id, "model_revision": run.config.get("model_revision"), "config": run.config,
+                          "input_representation": run.config.get("input_representation", "original"), "selection": _digest(selection.model_dump(mode="json"))})
+        if len(rows) != len(records) or {row[0] for row in rows} != set(selection.ids):
+            raise ValueError("Run item receipts are incomplete")
+        if any(hashlib.sha256((shared + row[0]).encode()).hexdigest() != row[1] for row in rows):
+            raise ValueError("Frozen item key does not match record and configuration")
+        if any(row[2] not in ("completed", "failed", "skipped", "not_applicable") for row in rows):
+            raise ValueError("Run item receipts are incomplete")
+        status = {row[0]: row[2] for row in rows}
+        completed = [record_id for record_id in selection.ids if status[record_id] == "completed"]
+        if (not completed or run.progress.get("total") != len(records) or run.progress.get("completed") != len(completed) or len(run.artifact_ids) != 1):
+            raise ValueError("Run item receipts are incomplete")
+        skipped = {row[0]: {"status": row[2], **{key: value for key, value in (json.loads(row[3]) if row[3] else {}).items() if key != "record_id"}} for row in rows if row[2] != "completed"}
+
+        artifact_id = run.artifact_ids[0]
+        artifact_row = connection.execute("SELECT artifact_json FROM artifacts WHERE id=?", (artifact_id,)).fetchone()
+        if not artifact_row:
+            raise ValueError("Run artifact receipt is missing")
+        artifact = Artifact.model_validate_json(artifact_row[0])
+        bulk = artifact.data.get("bulk")
+        relative_dir, relative_manifest = f"arrays/{artifact_id}", f"runs/{artifact_id}.json"
+        if (artifact.id != artifact_id or artifact.run_id != run_id or artifact.kind != run.processor_id or artifact.files != {"manifest": relative_manifest} or
+                artifact.provenance.get("selection_id") != selection.id or artifact.provenance.get("storage") != "arrays" or
+                artifact.ids != selection.ids or artifact.snapshot_ids != selection.snapshot_ids or artifact.unit != selection.unit or
+                artifact.coverage != {**run.progress, "status": run.status} or artifact.provenance.get("config_digest") != _digest(run.config) or
+                not isinstance(bulk, dict) or bulk.get("dir") != relative_dir):
+            raise ValueError("Artifact identity disagrees with run")
+        manifest = {key: value for key, value in bulk.items() if key != "dir"}
+        run_manifest = {"run_id": run_id, "storage": "arrays", "bulk": bulk, "processor_id": run.processor_id, "selection_id": run.selection_id, "coverage": run.progress}
+        source_artifacts = source / "artifacts"
+        source_dir = source_artifacts / relative_dir
+        if source_dir.is_symlink() or not source_dir.resolve().is_relative_to(source_artifacts.resolve()):
+            raise ValueError("Bundle directory is a symbolic link or leaves the artifact store")
+        raw_run_manifest = read_rooted_file(source_artifacts / relative_manifest, [source_artifacts], max_bytes=1 << 20)
+        if raw_run_manifest != _json(run_manifest).encode():
+            raise ValueError("Artifact manifest does not match the run")
+        if store.read_ids(source_dir, manifest) != completed:
+            raise ValueError("Result rows do not match the completed records in selection order")
+        names = [manifest["ids"], *manifest["arrays"].values(), *manifest.get("extras", {}).values(), *manifest.get("texts", {}).values()]
+        if len({entry["file"] for entry in names}) != len(names) or {"manifest.json", "skipped.json"} & {entry["file"] for entry in names}:
+            raise ValueError("Bundle files repeat or collide with its manifest")
+        if _json(skipped).encode() != (source_dir / "skipped.json").read_bytes() or _json(manifest).encode() != (source_dir / "manifest.json").read_bytes():
+            raise ValueError("Bundle manifest or skipped list does not match the run receipts")
+
+        target = self.artifact_dir / relative_dir
+        with self._db() as db:
+            existing = db.execute("SELECT run_json FROM runs WHERE id=?", (run_id,)).fetchone()
+            if existing:
+                if existing[0] != raw_run:
+                    raise ValueError("Run ID already exists with different content")
+                return Run.model_validate_json(existing[0])
+            prior = db.execute("SELECT artifact_json FROM artifacts WHERE id=?", (artifact_id,)).fetchone()
+            if prior and prior[0] != _json(artifact.model_dump(mode="json")):
+                raise ValueError("Artifact ID collision")
+            if target.is_dir():
+                if (target / "manifest.json").read_bytes() != _json(manifest).encode():
+                    raise ValueError("Artifact ID collision")
+            else:
+                work = target.with_name(f".{artifact_id}.{uuid4().hex}.tmp")
+                work.mkdir(parents=True)
+                try:
+                    for entry in names:
+                        self._copy_verified(store._inside(source_dir, entry["file"]), work / entry["file"], entry["sha256"])
+                    for name, entry in {**manifest["arrays"], **manifest.get("extras", {})}.items():
+                        array = store.read_array(work, entry)  # the dtype and shape the manifest promised; never unpickled
+                        if name in manifest["arrays"] and len(array) != manifest["count"]:
+                            raise ValueError(f"Array {name} does not have one row per result")
+                    for entry in manifest.get("texts", {}).values():
+                        if len(store.read_texts(work, entry)) != manifest["count"]:
+                            raise ValueError("A text column does not have one row per result")
+                    (work / "skipped.json").write_bytes(_json(skipped).encode())
+                    (work / "manifest.json").write_bytes(_json(manifest).encode())
+                    os.replace(work, target)
+                except BaseException:
+                    shutil.rmtree(work, ignore_errors=True)
+                    raise
+            _write_once(self.artifact_dir / relative_manifest, run_manifest)
+            db.execute("INSERT INTO runs(id,run_json,selection_json,records_json,cancel_requested) VALUES(?,?,?,?,0)", (run_id, raw_run, raw_selection, raw_records))
+            db.executemany("INSERT INTO run_items(run_id,record_id,item_key,status,error_json,output_bytes) VALUES(?,?,?,?,?,?)",
+                           [(run_id, record_id, key, state, error, size) for record_id, key, state, error, size in rows])
+            db.execute("INSERT OR IGNORE INTO artifacts(id,artifact_json) VALUES(?,?)", (artifact_id, _json(artifact.model_dump(mode="json"))))
+        return run
+
+    @staticmethod
+    def _copy_verified(source_file: Path, destination: Path, sha256: str) -> None:
+        """Copy one bundle file, refusing symbolic links, and check its checksum on the bytes actually copied."""
+        if source_file.is_symlink() or not source_file.is_file():
+            raise ValueError("Bundle file is missing or is a symbolic link")
+        digest = hashlib.sha256()
+        with source_file.open("rb") as reader, destination.open("xb") as writer:
+            while block := reader.read(8 * 1024 * 1024):
+                digest.update(block)
+                writer.write(block)
+            writer.flush()
+            os.fsync(writer.fileno())
+        if digest.hexdigest() != sha256:
+            raise ValueError("Bundle file does not match its recorded checksum")
 
     def import_completed_run(self, source_work_dir: str | Path, run_id: str) -> Run:
         """Verify and register one completed isolated run without replacing this work DB.
@@ -588,6 +914,8 @@ class JobManager:
                     raise KeyError(run_id)
                 raw_run, raw_selection, raw_records, cancelled = source_row
                 run = Run.model_validate_json(raw_run)
+                if _uses_arrays(run.config):
+                    return self._import_array_run(source, source_connection, run, raw_run, raw_selection, raw_records, bool(cancelled))
                 selection = Selection.model_validate_json(raw_selection)
                 records = [Record.model_validate(record) for record in json.loads(raw_records)]
                 if run.id != run_id or run.status != "completed" or cancelled:
@@ -615,7 +943,7 @@ class JobManager:
                     for record in documents}
                 if any(expected_keys.get(record_id) != key for record_id, key, _, _ in rows):
                     raise ValueError("Frozen item key does not match record and configuration")
-                max_output = run.config.get("max_output_bytes", DEFAULT_MAX_OUTPUT_BYTES)
+                max_output = _output_budget(run.config)
                 if type(max_output) is not int or not 1 <= max_output <= HARD_MAX_OUTPUT_BYTES:
                     raise ValueError("Invalid source output budget")
                 files: dict[str, dict] = {}
@@ -716,7 +1044,7 @@ class JobManager:
             for start in range(0, len(missing), 256):
                 chunk = missing[start:start + 256]
                 rows = db.execute(f"SELECT id,artifact_json FROM artifacts WHERE id IN ({','.join('?' * len(chunk))})", chunk).fetchall()
-                parsed = {identity: Artifact.model_validate_json(body) for identity, body in rows}
+                parsed = {identity: self._loaded(Artifact.model_validate_json(body)) for identity, body in rows}
                 with self._artifact_lock:
                     self._artifacts.update(parsed)
         with self._artifact_lock:
@@ -724,6 +1052,10 @@ class JobManager:
         if snapshot_ids is not None:
             result = [artifact for artifact in result if snapshot_ids.intersection(artifact.snapshot_ids)]
         return result
+
+    def _loaded(self, artifact: Artifact) -> Artifact:
+        artifact._store_root = self.artifact_dir
+        return artifact
 
     def get_artifact(self, artifact_id: str) -> Artifact:
         with self._artifact_lock:
@@ -734,7 +1066,7 @@ class JobManager:
             row = db.execute("SELECT artifact_json FROM artifacts WHERE id=?", (artifact_id,)).fetchone()
         if not row:
             raise KeyError(artifact_id)
-        artifact = Artifact.model_validate_json(row[0])
+        artifact = self._loaded(Artifact.model_validate_json(row[0]))
         with self._artifact_lock:
             self._artifacts.setdefault(artifact_id, artifact)
         return artifact

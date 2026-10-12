@@ -2,7 +2,8 @@ import type { Artifact, Capabilities, Dataset, FieldDescriptor, Pack, Query, Que
 import { aggregatePack, assetRecords, packFields, queryPack } from './query'
 import type { LivePreviewSpec } from './lib/hfRows'
 
-export type ProcessorDescriptor = { id: string; name?: string; description?: string; available?: boolean; reason?: string; input_units?: string[]; configured_recipe?: boolean; requires_local_model?: boolean; config_schema?: Record<string, unknown> }
+export type BackendChoice = { id: 'cpu' | 'torch' | 'cuml'; installed: boolean; needs_device: boolean }
+export type ProcessorDescriptor = { id: string; name?: string; description?: string; available?: boolean; reason?: string; backends?: BackendChoice[]; input_units?: string[]; configured_recipe?: boolean; requires_local_model?: boolean; config_schema?: Record<string, unknown>; preset?: { template: string; use_images: boolean; max_tokens: number } }
 export type CompleteScope = { snapshot_id: string; unit: 'asset' | 'example' | 'entity' | 'conversation'; population_scope: 'complete'; record_count: number; count_status: 'exact' | 'estimated' | 'unknown'; fields: FieldDescriptor[] }
 
 /** One catalogue card's real preview tiles. Never synthesized. */
@@ -40,6 +41,8 @@ export interface DataProvider {
   query(id: string, query: Query): Promise<QueryResult>
   selections(): Promise<Selection[]>
   saveSelection(selection: Selection): Promise<Selection>
+  /** Select every record a query matches, on the server; the response is a summary (`size`, no ids). */
+  selectPopulation(datasetId: string, query: Query, name?: string): Promise<Selection>
   importSelection(payload: unknown): Promise<Selection>
   records(ids: string[], snapshotIds?: string[]): Promise<AtlasRecord[]>
   exportSelection(selection: Selection): Promise<void>
@@ -230,6 +233,7 @@ export class StaticDataProvider implements DataProvider {
   async conversations(): Promise<Record<string, unknown>[]> { return [] }
   async conversation(): Promise<Record<string, unknown>> { throw new Error('Model conversations require the local workbench.') }
   async similarity(): Promise<Record<string, unknown>> { throw new Error('Similarity search requires the local workbench.') }
+  async selectPopulation(): Promise<Selection> { throw new Error('Selecting a whole population requires the local workbench.') }
 }
 
 const api = '/api/v1'
@@ -255,6 +259,7 @@ export class WorkbenchDataProvider implements DataProvider {
   query(id: string, query: Query): Promise<QueryResult> { return post(`/queries/${encodeURIComponent(id)}`, query) }
   selections(): Promise<Selection[]> { return get('/selections') }
   saveSelection(selection: Selection): Promise<Selection> { return post('/selections', selection) }
+  selectPopulation(datasetId: string, query: Query, name = ''): Promise<Selection> { return post('/selections/population', { dataset_id: datasetId, query: { ...query, cursor: null, limit: 100 }, name }) }
   importSelection(payload: unknown): Promise<Selection> { return post('/selections/import', payload) }
   records(ids: string[], snapshotIds?: string[]): Promise<AtlasRecord[]> { return post('/records', { ids, ...(snapshotIds ? { snapshot_ids: snapshotIds } : {}) }) }
   async exportSelection(selection: Selection): Promise<void> {

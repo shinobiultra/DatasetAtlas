@@ -33,4 +33,4 @@ export type Release = { "schema_version"?: string; "id": string; "dataset_id": s
 
 export type Run = { "schema_version"?: string; "id": string; "processor_id": string; "selection_id": string; "status"?: string; "config"?: { [key: string]: unknown }; "provenance"?: { [key: string]: unknown }; "progress"?: { [key: string]: unknown }; "errors"?: ({ [key: string]: unknown })[]; "artifact_ids"?: (string)[]; "created_at": string; "completed_at"?: string | null };
 
-export type Selection = { "schema_version"?: string; "id": string; "name"?: string; "ids": (string)[]; "unit": "asset" | "example" | "entity" | "conversation"; "snapshot_ids": (string)[]; "dataset_ids": (string)[]; "method"?: string; "seed"?: number | null; "query"?: { [key: string]: unknown }; "created_at": string };
+export type Selection = { "schema_version"?: string; "id": string; "name"?: string; "ids": (string)[]; "unit": "asset" | "example" | "entity" | "conversation"; "snapshot_ids": (string)[]; "dataset_ids": (string)[]; "method"?: string; "seed"?: number | null; "query"?: { [key: string]: unknown }; "created_at": string; "size"?: number | null };

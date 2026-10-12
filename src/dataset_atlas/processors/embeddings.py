@@ -200,3 +200,204 @@ def run_embeddings(processor_id: str, records: list[Record], config: dict[str, A
         except (OSError, ValueError, RuntimeError, TypeError) as exc:
             items.append({"id": record.id, "status": "failed", "output": None, "error": f"{type(exc).__name__}: {exc}"})
     return items, provenance
+
+
+# --- columnar (storage: arrays) path ---------------------------------------
+#
+# The path above loads and re-verifies the model for every group of records and embeds one item at a
+# time in fp32. This one loads and verifies a model once per worker process, runs reduced precision on
+# the GPU, decodes and resizes images on a thread pool while the GPU works, normalises on the GPU, and
+# embeds each distinct image once however many records point at it. Its vectors go straight into arrays.
+
+_BULK_MODELS: dict[tuple, Any] = {}
+_BULK_MODEL_LIMIT = 2
+
+
+def _precision(torch, device: str, requested: str):
+    if requested not in {"auto", "fp32", "bf16", "fp16"}:
+        raise ValueError("precision must be auto, fp32, bf16 or fp16")
+    cuda = device.startswith("cuda")
+    if requested == "auto":
+        requested = "bf16" if cuda and torch.cuda.is_bf16_supported() else "fp32"
+    if requested != "fp32" and not cuda:
+        raise ValueError(f"precision {requested} needs a CUDA device")
+    return requested, {"fp32": torch.float32, "bf16": torch.bfloat16, "fp16": torch.float16}[requested]
+
+
+def _bulk_model(processor_id: str, config: dict[str, Any]):
+    """The model, verified and placed once per process. Returns (loaded, provenance additions)."""
+    torch = importlib.import_module("torch")
+    device, device_provenance = torch_device(torch, config)
+    precision, dtype = _precision(torch, device, str(config.get("precision", "auto")))
+    key = (processor_id, str(config.get("model_path")), config.get("model_sha256"), config.get("model_revision"), device, precision)
+    if key in _BULK_MODELS:
+        return _BULK_MODELS[key]
+    path, model_provenance = _snapshot(processor_id, config)
+    with _staged_snapshot(path, list(config.get("model_roots", [])), model_provenance["model_sha256"]) as staged:
+        if processor_id == "embed.minilm":
+            module = importlib.import_module("sentence_transformers")
+            model = module.SentenceTransformer(str(staged), device=device, local_files_only=True, trust_remote_code=False)
+            model.to(dtype=dtype)
+            loaded = {"model": model, "torch": torch, "device": device, "dtype": dtype}
+            version = package_version("sentence-transformers")
+        else:
+            transformers = importlib.import_module("transformers")
+            processor = transformers.AutoProcessor.from_pretrained(str(staged), local_files_only=True, trust_remote_code=False, use_fast=False)
+            model = transformers.AutoModel.from_pretrained(str(staged), local_files_only=True, trust_remote_code=False, use_safetensors=True,
+                                                          dtype=dtype, attn_implementation="sdpa").to(device).eval()
+            loaded = {"model": model, "processor": processor, "torch": torch, "device": device, "dtype": dtype}
+            version = package_version("transformers")
+    entry = (loaded, {**model_provenance, **device_provenance, "package_version": version, "precision": precision})
+    while len(_BULK_MODELS) >= _BULK_MODEL_LIMIT:
+        _BULK_MODELS.pop(next(iter(_BULK_MODELS)))
+    _BULK_MODELS[key] = entry
+    return entry
+
+
+def _decode_image(asset, roots: list[str], max_pixels: int, size: tuple[int, int], resample: int):
+    """Read, verify and resize one image to the model's input size (uint8 HxWx3) plus its content digest."""
+    image, data = _load(asset, roots, max_pixels)
+    digest = hashlib.sha256(data).hexdigest()
+    if asset.sha256 and asset.sha256 != digest:
+        raise ValueError("Asset sha256 mismatch")
+    return np.asarray(image.resize(size, resample)), digest
+
+
+def _unit_rows(array: np.ndarray, expected: int) -> np.ndarray:
+    array = np.asarray(array, dtype=np.float32)
+    if array.ndim != 2 or array.shape[1] != expected or not np.isfinite(array).all():
+        raise ValueError(f"Embedding dimension must be {expected} and finite")
+    norms = np.linalg.norm(array, axis=1, keepdims=True)
+    if (norms == 0).any():
+        raise ValueError("Embedding has zero norm")
+    return array / norms
+
+
+def run_embeddings_bulk(processor_id: str, records: list, config: dict[str, Any], should_cancel=None):
+    from concurrent.futures import ThreadPoolExecutor
+    from .bulk import BulkResult
+    recipe = RECIPES[processor_id]
+    mode = str(config.get("representation", "text" if processor_id == "embed.minilm" else "image"))
+    if mode not in ({"text", "question"} if processor_id == "embed.minilm" else {"image", "text", "question"}):
+        raise ValueError("Invalid embedding representation")
+    storage_dtype = str(config.get("storage_dtype", "float32"))
+    if storage_dtype not in {"float32", "float16"}:
+        raise ValueError("storage_dtype must be float32 or float16")
+    loaded, extra = _bulk_model(processor_id, config)
+    torch, model, device, dtype = loaded["torch"], loaded["model"], loaded["device"], loaded["dtype"]
+    provenance = {**extra, "recipe": {**recipe, "representation": mode, "normalization": "L2", "distance_metric": "cosine",
+                                      "truncation": "model tokenizer default", "text_instruction": "none"}}
+    provenance["embedding_space_id"] = content_id(provenance["recipe"], "space:")
+    if processor_id == "embed.siglip2":
+        provenance["shared_encoder_id"] = content_id({key: provenance["recipe"][key] for key in
+                                                       ("model_id", "revision", "dimension", "pooling", "normalization", "distance_metric")}, "encoder:")
+    provenance.update({"storage_dtype": storage_dtype, "path": "columnar", "unique_inputs_only": True})
+    ids: list[str] = []
+    skipped: dict[str, dict[str, Any]] = {}
+    chunks: list[np.ndarray] = []
+
+    def skip(record, status: str, error: str | None = None):
+        skipped[record.id] = {"status": status, **({"error": error} if error else {})}
+
+    if mode == "image":
+        batch = int(config.get("batch_size", 256))
+        roots = list(config.get("asset_roots", []))
+        max_pixels = int(config.get("max_pixels", 50_000_000))
+        extractor = loaded["processor"].image_processor
+        size = (int(extractor.size["width"]), int(extractor.size["height"]))
+        mean = torch.tensor(extractor.image_mean, device=device, dtype=torch.float32).view(1, 3, 1, 1)
+        std = torch.tensor(extractor.image_std, device=device, dtype=torch.float32).view(1, 3, 1, 1)
+        scale = float(extractor.rescale_factor)
+        provenance["preprocessing"] = {"resize": list(size), "resample": int(extractor.resample), "mean": list(extractor.image_mean),
+                                       "std": list(extractor.image_std), "rescale": scale, "implementation": "PIL resize, GPU normalise (parity-tested against the model processor)"}
+        wanted: dict[str, Any] = {}  # asset id -> asset, for records with exactly one image
+        for record in records:
+            images = [asset for asset in record.assets if asset.modality.lower() in {"image", "photo"}]
+            if not images:
+                skip(record, "skipped" if record.asset_ids and not record.assets else "not_applicable",
+                     "Asset metadata was not loaded" if record.asset_ids and not record.assets else None)
+            elif len(images) > 1:
+                skip(record, "skipped", "Record has several images; columnar runs embed one image per record (use the asset unit)")
+            else:
+                wanted.setdefault(images[0].id, images[0])
+        workers = min(int(config.get("decode_threads", 8)), os.cpu_count() or 1)  # more threads fight over the GIL and are slower
+        results: dict[str, Any] = {}
+        digest_row: dict[str, int] = {}
+        vectors: list[np.ndarray] = []
+        with ThreadPoolExecutor(max_workers=workers) as pool:
+            order = list(wanted.values())
+            futures = {}
+            window = max(batch * 2, workers * 4)
+            def submit_upto(position: int):
+                while len(futures) < window and submit_upto.next < len(order):
+                    asset = order[submit_upto.next]
+                    futures[asset.id] = pool.submit(_decode_image, asset, roots, max_pixels, size, int(extractor.resample))
+                    submit_upto.next += 1
+            submit_upto.next = 0
+            pending_arrays: list[np.ndarray] = []
+            pending_digests: list[str] = []
+            def flush():
+                if not pending_arrays:
+                    return
+                pixels = torch.from_numpy(np.stack(pending_arrays)).to(device, non_blocking=True).permute(0, 3, 1, 2).float()
+                pixels = ((pixels * scale - mean) / std).to(dtype)
+                with torch.inference_mode():
+                    features = _pooled_features(model.get_image_features(pixel_values=pixels)).float()
+                rows = _unit_rows(features.cpu().numpy(), recipe["dimension"])
+                for digest, row in zip(pending_digests, rows):
+                    digest_row[digest] = len(vectors)
+                    vectors.append(row)
+                pending_arrays.clear()
+                pending_digests.clear()
+            for position, asset in enumerate(order):
+                submit_upto(position)
+                try:
+                    array, digest = futures.pop(asset.id).result()
+                except (OSError, ValueError, RuntimeError, TypeError) as exc:
+                    results[asset.id] = ("failed", f"{type(exc).__name__}: {exc}")
+                    continue
+                if digest not in digest_row and digest not in pending_digests:
+                    pending_arrays.append(array)
+                    pending_digests.append(digest)
+                results[asset.id] = ("ok", digest)
+                if len(pending_arrays) >= batch:
+                    flush()
+            flush()
+        by_asset = {asset_id: value for asset_id, value in results.items()}
+        rows: list[int] = []
+        for record in records:
+            if record.id in skipped:
+                continue
+            asset = next(a for a in record.assets if a.modality.lower() in {"image", "photo"})
+            state, value = by_asset[asset.id]
+            if state == "failed":
+                skip(record, "failed", value)
+            else:
+                ids.append(record.id)
+                rows.append(digest_row[value])
+        matrix = np.stack(vectors)[rows] if rows else np.zeros((0, recipe["dimension"]), dtype=np.float32)
+    else:
+        texts, owners = [], []
+        for record in records:
+            value = getattr(record, mode)
+            if isinstance(value, str) and value.strip():
+                texts.append(value)
+                owners.append(record)
+            else:
+                skip(record, "not_applicable")
+        batch = int(config.get("batch_size", 1024))
+        pieces = []
+        for start in range(0, len(texts), batch):
+            part = texts[start:start + batch]
+            if processor_id == "embed.minilm":
+                raw = model.encode(part, batch_size=batch, convert_to_numpy=True, normalize_embeddings=False, show_progress_bar=False)
+            else:
+                inputs = loaded["processor"](text=part, return_tensors="pt", padding="max_length", truncation=True, max_length=64)
+                inputs = {key: value.to(device) for key, value in inputs.items()}
+                with torch.inference_mode():
+                    raw = _pooled_features(model.get_text_features(**inputs)).float().cpu().numpy()
+            pieces.append(_unit_rows(raw, recipe["dimension"]))
+        matrix = np.concatenate(pieces) if pieces else np.zeros((0, recipe["dimension"]), dtype=np.float32)
+        ids = [record.id for record in owners]
+    out = BulkResult(ids=ids, arrays={"vector": matrix.astype(storage_dtype)}, provenance=provenance, skipped=skipped)
+    return out, provenance

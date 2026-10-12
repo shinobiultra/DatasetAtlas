@@ -12,6 +12,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
 from fastapi import FastAPI, HTTPException, Request
+from fastapi import Query as QueryParam
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
@@ -60,6 +61,14 @@ class RecordRequest(BaseModel):
     model_config=ConfigDict(extra='forbid')
     ids: list[str] = Field(min_length=1, max_length=1000)
     snapshot_ids: list[str] | None = Field(default=None,min_length=1,max_length=1000)
+
+class PopulationRequest(BaseModel):
+    """Select every record a query matches, on the server, without moving the ids through the browser."""
+    model_config=ConfigDict(extra='forbid')
+    dataset_id: str
+    query: Query
+    name: str = Field(default='',max_length=200)
+    limit: int = Field(default=1_000_000,ge=1,le=2_000_000)
 
 class PublicationRequest(BaseModel):
     model_config=ConfigDict(extra='forbid')
@@ -198,25 +207,55 @@ def media_response(data:bytes,media_type:str,request:Request):
     headers['Content-Length']=str(len(data))
     return Response(b'' if request.method=='HEAD' else data,status_code=status,media_type=media_type,headers=headers)
 
+INLINE_SELECTION_IDS=10_000  # larger selections keep their ids in a side file and list only a summary
+
 class State:
     def __init__(self,path):
-        self.path=path
+        self.path=Path(path)
+        self.ids_dir=self.path.parent/'selection-ids'
         with self.connection() as db:
             db.execute('CREATE TABLE IF NOT EXISTS selections (id TEXT PRIMARY KEY, body TEXT NOT NULL)')
+            db.execute('CREATE TABLE IF NOT EXISTS selection_ids (id TEXT PRIMARY KEY, sha256 TEXT NOT NULL, count INTEGER NOT NULL)')
             db.execute('CREATE TABLE IF NOT EXISTS notes (id TEXT PRIMARY KEY, body TEXT NOT NULL)')
     def connection(self):
         db=sqlite3.connect(self.path);db.execute('PRAGMA journal_mode=WAL');return db
     def list(self):
+        """Every selection; large ones as summaries (empty `ids`, `size` set)."""
         with self.connection() as db:return [Selection.model_validate_json(row[0]) for row in db.execute('SELECT body FROM selections ORDER BY id')]
-    def get(self,id):
-        with self.connection() as db:row=db.execute('SELECT body FROM selections WHERE id=?',(id,)).fetchone()
+    def get(self,id,ids=True):
+        with self.connection() as db:
+            row=db.execute('SELECT body FROM selections WHERE id=?',(id,)).fetchone()
+            side=db.execute('SELECT sha256,count FROM selection_ids WHERE id=?',(id,)).fetchone()
         if not row:raise KeyError(id)
-        return Selection.model_validate_json(row[0])
+        selection=Selection.model_validate_json(row[0])
+        if side and ids:
+            payload=(self.ids_dir/f'{id}.json').read_bytes()
+            if hashlib.sha256(payload).hexdigest()!=side[0]:raise ValueError('Stored selection ids do not match their checksum')
+            values=json.loads(payload)
+            if len(values)!=side[1]:raise ValueError('Stored selection id count disagrees with its record')
+            selection=selection.model_copy(update={'ids':values})
+        return selection
+    @staticmethod
+    def summary(selection):
+        """What listings and responses carry: large selections without their ids."""
+        if len(selection.ids)>INLINE_SELECTION_IDS:return selection.model_copy(update={'ids':[],'size':len(selection.ids)})
+        return selection
     def put(self,selection):
+        large=len(selection.ids)>INLINE_SELECTION_IDS
+        stored=self.summary(selection)
         with self.connection() as db:
             old=db.execute('SELECT body FROM selections WHERE id=?',(selection.id,)).fetchone()
-            body=selection.model_dump_json()
+            body=stored.model_dump_json()
             if old and old[0]!=body:raise ValueError('Selections are immutable; create a new selection')
+            if large:
+                if not re.fullmatch(r'[A-Za-z0-9_.-]{1,100}',selection.id):raise ValueError('Invalid selection id')
+                payload=json.dumps(selection.ids,ensure_ascii=False,separators=(',',':')).encode()
+                self.ids_dir.mkdir(exist_ok=True)
+                target=self.ids_dir/f'{selection.id}.json'
+                if not target.exists():
+                    temporary=target.with_name(target.name+'.tmp')
+                    temporary.write_bytes(payload);os.replace(temporary,target)
+                db.execute('INSERT OR IGNORE INTO selection_ids VALUES (?,?,?)',(selection.id,hashlib.sha256(payload).hexdigest(),len(selection.ids)))
             db.execute('INSERT OR IGNORE INTO selections VALUES (?,?)',(selection.id,body))
 
 def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None, allowed_hosts: list[str]|None=None) -> FastAPI:
@@ -397,13 +436,45 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
                     response=snap.query(Query(snapshot_id=snap.snapshot_id,population_scope='complete',unit=snap.unit,filter={'field_id':'id','op':'eq','value':record_id},limit=1))
                     if response.records:return prepared_record(response.records[0],dataset) if prepare_media else response.records[0]
         return None
+    def bulk_records(selection,prepare_media):
+        """Records of a large selection with one scan per dataset version, not one query per id."""
+        wanted=list(selection.ids);found={}
+        for dataset_id in selection.dataset_ids:
+            if not registry.has(dataset_id):continue
+            for dataset,pack_path,snapshot_path in registry.versions(dataset_id):
+                if dataset.snapshot_id not in selection.snapshot_ids:continue
+                if pack_path.is_file():
+                    _,index=indexed_pack(pack_path)
+                    for identity in wanted:
+                        record=index.get(identity) if identity not in found else None
+                        if record is not None:found[identity]=prepared_record(record,dataset) if prepare_media else record.model_copy(deep=True)
+                remaining=[identity for identity in wanted if identity not in found]
+                if remaining and (snapshot_path/'manifest.json').exists():
+                    from dataset_atlas.queries.parquet import ParquetSnapshot
+                    if str(snapshot_path) not in snapshot_cache:snapshot_cache[str(snapshot_path)]=ParquetSnapshot(snapshot_path.parent,snapshot_path)
+                    for identity,record in snapshot_cache[str(snapshot_path)].records(remaining,missing_ok=True).items():
+                        found[identity]=prepared_record(record,dataset) if prepare_media else record
+        for identity in wanted:
+            if identity not in found:raise ValueError(f'Selected record unavailable: {identity}')
+        return [found[identity] for identity in wanted]
+    resolved_population={}  # selection id -> (expiry, records): estimate and create resolve the same large selection back to back
     def selection_records(selection,prepare_media=True):
         records=[]
-        for identity in selection.ids:
-            record=find_record(identity,prepare_media=prepare_media,snapshot_ids=selection.snapshot_ids)
-            if record is None:raise ValueError(f'Selected record unavailable: {identity}')
+        if len(selection.ids)>500:
+            import time
+            key=(selection.id,prepare_media,hash(tuple(selection.ids)))  # the ids themselves, not just the id: a copy with other ids must not hit
+            hit=resolved_population.get(key)
+            if hit and hit[0]>time.monotonic():records=hit[1]
+            else:
+                records=bulk_records(selection,prepare_media)
+                resolved_population.clear();resolved_population[key]=(time.monotonic()+300,records)
+        else:
+            for identity in selection.ids:
+                record=find_record(identity,prepare_media=prepare_media,snapshot_ids=selection.snapshot_ids)
+                if record is None:raise ValueError(f'Selected record unavailable: {identity}')
+                records.append(record)
+        for record in records:
             if record.snapshot_id not in selection.snapshot_ids or record.dataset_id not in selection.dataset_ids or record.unit!=selection.unit:raise ValueError('Selection identity, unit or snapshot mismatch')
-            records.append(record)
         result_ids=selection.query.get('result_snapshot_ids',[])
         if result_ids:
             from dataset_atlas.models import Pack
@@ -682,28 +753,36 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         if artifact is None:artifact=selected_artifacts([body.artifact_id])[0]
         if body.query.snapshot_id not in artifact.snapshot_ids or body.query.unit!=artifact.unit:raise ValueError('Embedding artifact and query snapshot/unit differ')
         query_document=body.query.model_copy(update={'limit':1000,'cursor':None})
-        import time
-        deadline=time.monotonic()+30
-        eligible_ids=[]
-        while True:
-            eligible=(query_pack(browser_pack(dataset_id,body.query.result_snapshot_ids),query_document)
-                if body.query.population_scope=='preview' else complete_snapshot(dataset_id).query(query_document,selected_artifacts(body.query.result_snapshot_ids)))
-            eligible_ids.extend(r.id for r in eligible.records)
-            if not eligible.cursor:break
-            if time.monotonic()>deadline:raise ValueError('Retrieval population resolution exceeded 30 seconds; narrow the filter')
-            query_document=query_document.model_copy(update={'cursor':eligible.cursor})
-        from dataset_atlas.queries.similarity import similar_records
         if bool(body.record_id)==bool(body.text):raise ValueError('Choose exactly one query record or text query')
+        if body.query.population_scope=='preview':
+            import time
+            deadline=time.monotonic()+30
+            eligible_ids=[]
+            while True:
+                eligible=query_pack(browser_pack(dataset_id,body.query.result_snapshot_ids),query_document)
+                eligible_ids.extend(r.id for r in eligible.records)
+                if not eligible.cursor:break
+                if time.monotonic()>deadline:raise ValueError('Retrieval population resolution exceeded 30 seconds; narrow the filter')
+                query_document=query_document.model_copy(update={'cursor':eligible.cursor})
+            population_scope,filtered=eligible.population_scope,eligible.matched_count
+        else:  # a whole complete population is resolved as ids in one scan, not paged through as records
+            eligible_ids=complete_snapshot(dataset_id).ids(query_document,selected_artifacts(body.query.result_snapshot_ids),timeout_seconds=30)
+            population_scope,filtered='complete',len(eligible_ids)
+        from dataset_atlas.queries.similarity import similar_records
         vector=None
         if body.text:
-            if artifact.kind=='import.research':raise ValueError('Imported vectors have no executable encoder; query with a record from the registered space')
-            if not jobs or not artifact.run_id:raise ValueError('Text query requires a retained encoder run')
             from dataset_atlas.processors import encode_text_query
-            run=jobs.get_run(artifact.run_id)
-            vector=encode_text_query(artifact,analysis_config(root,run.config,roots),body.text)
-        result=similar_records(artifact,body.record_id,eligible_ids,body.limit,work/'vector-cache',query_vector=vector)
-        result['population_scope']=eligible.population_scope
-        result['coverage']={'filtered_records':eligible.matched_count,'embedded_eligible_records':result['eligible_count']}
+            if artifact.kind=='import.research':raise ValueError('Imported vectors have no executable encoder; query with a record from the registered space')
+            if artifact.kind=='embed.api':
+                saved=artifact.provenance.get('processor_provenance',{}).get('provider') or {}
+                vector=encode_text_query(artifact,{},body.text,provider=loopback_provider(str(saved.get('id') or '')))
+            else:
+                if not jobs or not artifact.run_id:raise ValueError('Text query requires a retained encoder run')
+                run=jobs.get_run(artifact.run_id)
+                vector=encode_text_query(artifact,analysis_config(root,run.config,roots),body.text)
+        result=similar_records(artifact,body.record_id,eligible_ids,body.limit,work/'vector-cache',query_vector=vector,artifact_dir=jobs.artifact_dir if jobs else None)
+        result['population_scope']=population_scope
+        result['coverage']={'filtered_records':filtered,'embedded_eligible_records':result['eligible_count']}
         return result
     def serve_asset(dataset_id,asset,request):
         from dataset_atlas.storage.compact import read_compact
@@ -829,6 +908,30 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         return result
     @app.get('/api/v1/selections')
     def selections():return state.list()
+    @app.post('/api/v1/selections/population')
+    def population_selection(body:PopulationRequest):
+        dataset=registry.dataset(body.dataset_id)
+        query=body.query
+        if query.sample:raise ValueError('A sampled query selects through its pages; clear the sample to select the whole population')
+        if query.population_scope=='complete':
+            snapshot=complete_snapshot(body.dataset_id)
+            ids=snapshot.ids(query,selected_artifacts(query.result_snapshot_ids),limit=body.limit)
+        else:
+            import time
+            deadline=time.monotonic()+30
+            ids=[];page=query
+            while True:
+                found=query_pack(browser_pack(body.dataset_id,query.result_snapshot_ids),page)
+                ids.extend(record.id for record in found.records)
+                if not found.cursor:break
+                if len(ids)>body.limit:raise ValueError(f'The filter matches more than {body.limit:,} records; narrow it first')
+                if time.monotonic()>deadline:raise ValueError('Resolving the population exceeded 30 seconds; narrow the filter')
+                page=page.model_copy(update={'cursor':found.cursor,'limit':1000})
+        if not ids:raise ValueError('The filter matches no records')
+        selection=Selection(id='',name=body.name.strip() or f'{dataset.name} — {len(ids):,} {query.unit} records',ids=ids,unit=query.unit,snapshot_ids=[query.snapshot_id],
+            dataset_ids=[body.dataset_id],method='population',query=query.model_dump(mode='json'),created_at=datetime.now(timezone.utc).isoformat(),size=len(ids))
+        selection.id=content_id(selection.model_dump(exclude={'id'}),'selection-')
+        state.put(selection);return state.summary(selection)
     @app.post('/api/v1/selections/import')
     def import_selection_payload(payload:dict):
         expected={'schema_version','selection','records','checksum','checksum_algorithm','notice'}
@@ -857,10 +960,11 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         if not selection.id:selection.id=content_id(selection.model_dump(exclude={'id'}),'selection-')
         state.put(selection);return selection
     @app.get('/api/v1/selections/{selection_id}')
-    def get_selection(selection_id:str):return state.get(selection_id)
+    def get_selection(selection_id:str):return state.summary(state.get(selection_id))
     @app.get('/api/v1/selections/{selection_id}/export')
     def export_selection(selection_id:str):
         selection=state.get(selection_id)
+        if len(selection.ids)>INLINE_SELECTION_IDS:raise ValueError(f'Portable export is limited to {INLINE_SELECTION_IDS:,} records; export a smaller selection or use the CLI')
         records=selection_records(selection,prepare_media=False)
         from dataset_atlas.exports import selection_export_payload
         payload=selection_export_payload(selection,records)
@@ -869,10 +973,46 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         payload['checksum_algorithm']=ALGORITHM
         payload['notice']='Media omitted. Use CLI export for a checksummed portable pack.'
         return payload
-    def run_config(processor_id,config):
+    COLUMNAR={'project.pca','project.umap','cluster.kmeans','cluster.hdbscan','cluster.agglomerative','outlier.knn','embed.minilm','embed.siglip2'}
+    MODEL_RUNS={'vlm.answer','vlm.tag','vlm.judge','embed.api'}  # talk to a local model server; always columnar
+    SAVED_TEXT={'vlm.judge':'candidate_artifact_id','score.vqa_accuracy':'answers_artifact_id'}
+    COLUMNAR_AUTO_ROWS=5000
+    def loopback_provider(provider_id):
+        """A configured model server as run settings; dataset contents only ever go to a loopback one."""
+        from dataset_atlas.vlm.client import is_loopback
+        if not service:raise ValueError('Model connections are unavailable')
+        cfg=service.get_provider(provider_id).config
+        if not is_loopback(cfg.base_url):raise ValueError('Dataset contents are sent only to a loopback model server; this provider is external')
+        return {'id':cfg.id,'base_url':cfg.base_url,'model':cfg.model,'timeout_seconds':cfg.timeout_seconds,'max_output_tokens':cfg.max_output_tokens,
+            'max_input_characters':cfg.max_input_characters,'max_images':cfg.max_images,'api_key_env':cfg.api_key_env}
+    def run_config(processor_id,config,selection=None):
         path=root/'local-config/recipes.json'
         defaults=json.loads(path.read_text()) if path.exists() else {}
         merged={**defaults.get(processor_id,{}),**config}
+        merged.pop('vector_source',None)  # only ever set below, from a registered artifact
+        merged.pop('text_source',None)
+        merged.pop('provider',None)
+        if processor_id in MODEL_RUNS:
+            provider_id=merged.pop('provider_id',None)
+            if not provider_id:raise ValueError('Choose a model server for this run')
+            merged['provider']=loopback_provider(provider_id)
+            merged['resource_class']='network';merged['storage']='arrays'
+        if processor_id in SAVED_TEXT:
+            saved=merged.pop(SAVED_TEXT[processor_id],None)
+            if saved:
+                from dataset_atlas.queries.embedding_space import bulk_directory
+                artifact=selected_artifacts([saved])[0]
+                bulk=artifact.data.get('bulk')
+                column=str(merged.get('answer_column','answer'))
+                if not isinstance(bulk,dict) or column not in bulk.get('texts',{}):raise ValueError(f'Choose saved results with a {column!r} text column')
+                merged['text_source']={'artifact_id':artifact.id,'dir':str(bulk_directory(artifact,jobs.artifact_dir)),'column':column,'manifest':{k:bulk[k] for k in ('count','ids','texts')}}
+                merged['answers_artifact_id']=artifact.id
+            merged['storage']='arrays'
+        if processor_id=='score.vqa_accuracy':
+            merged.setdefault('answers_field','source.answers');merged.setdefault('group_fields',['source.question_type','source.answer_type'])
+        if processor_id in MODEL_RUNS or processor_id in SAVED_TEXT:
+            from dataset_atlas.vlm.tasks import referenced_fields
+            merged['record_fields']=referenced_fields(merged)  # the only record fields the run freezes beyond text and assets
         detector=merged.pop('detector_artifact_id',None)
         if processor_id=='detect.view':
             if not detector:raise ValueError('Choose a retained detector artifact')
@@ -881,18 +1021,27 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         elif detector:raise ValueError('Detector artifact input is only supported by threshold views')
         upstream=merged.pop('embedding_artifact_id',None)
         if upstream:
-            from dataset_atlas.queries.embedding_space import embedding_vectors
+            from dataset_atlas.queries.embedding_space import embedding_source,embedding_vectors
             artifact=selected_artifacts([upstream])[0]
-            vectors,provenance,metric=embedding_vectors(artifact)
+            if artifact.data.get('bulk'):
+                source,provenance,metric=embedding_source(artifact,jobs.artifact_dir)
+                merged['vector_source']=source
+                merged['storage']='arrays'  # vectors by reference only make sense for a columnar run
+            else:
+                vectors,provenance,metric=embedding_vectors(artifact)
+                merged['vectors']=vectors
             merged['embedding_space_id']=provenance.get('embedding_space_id')
             merged['embedding_run_id']=artifact.run_id or artifact.id
             merged['embedding_artifact_id']=artifact.id
             merged['embedding_snapshot_ids']=artifact.snapshot_ids
             merged['embedding_unit']=artifact.unit
             merged.setdefault('metric',metric)
-            merged['vectors']=vectors
+        if selection is not None and processor_id in COLUMNAR and 'storage' not in merged and len(selection.ids)>COLUMNAR_AUTO_ROWS:
+            merged['storage']='arrays'  # thousands of records are stored as arrays, not one JSON file each
         return analysis_config(root,merged,roots)
     app.state.selection_records=selection_records
+    app.state.selection_by_id=lambda identity:state.get(identity)
+    app.state.selection_ids=lambda identity:state.get(identity).ids
     app.state.run_config=run_config
     @app.get('/api/v1/processors')
     def processors():
@@ -928,11 +1077,21 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
     def estimate_run(body:RunRequest):
         if not jobs:raise HTTPException(503,'Job coordinator unavailable')
         selection=state.get(body.selection_id)
-        config=run_config(body.processor_id,body.config)
+        config=run_config(body.processor_id,body.config,selection)
         return jobs.estimate(selection,local_run_records(selection,body.processor_id,config),body.processor_id,config)
     def local_run_records(selection,processor_id,config):
+        if config.get('storage')=='arrays' and selection.method=='population' and processor_id.startswith(('project.','cluster.','outlier.')) and len(selection.dataset_ids)==1 and len(selection.snapshot_ids)==1:
+            # These read vectors by id and never touch record content, and a population selection came from the snapshot itself:
+            # its identity is the snapshot's, so no record needs to be read at all.
+            try:snapshot=complete_snapshot(selection.dataset_ids[0])
+            except (ValueError,FileNotFoundError,KeyError):snapshot=None
+            if snapshot is not None and snapshot.snapshot_id==selection.snapshot_ids[0] and snapshot.unit==selection.unit:
+                from dataset_atlas.models import Record as IdentityRecord
+                return [IdentityRecord(id=identity,dataset_id=snapshot.dataset_id,release_id=snapshot.release_id,snapshot_id=snapshot.snapshot_id,unit=snapshot.unit) for identity in selection.ids]
         records=selection_records(selection,prepare_media=False)
-        image_input=processor_id in {'quality.basic','detect.nudenet','detect.coco_v1'} or (processor_id=='embed.siglip2' and config.get('representation','image')=='image')
+        from dataset_atlas.vlm.tasks import PRESETS
+        sends_images=processor_id.startswith('vlm.') and bool(config.get('use_images',PRESETS[processor_id.split('.',1)[1]]['use_images']))
+        image_input=processor_id in {'quality.basic','detect.nudenet','detect.coco_v1'} or (processor_id=='embed.siglip2' and config.get('representation','image')=='image') or sends_images
         if not image_input:return records
         try:
             return [prepared_record(record,registry.dataset_version(record.dataset_id,record.release_id,record.snapshot_id),allow_source_read=False) for record in records]
@@ -942,11 +1101,11 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
     def create_run(body:RunRequest):
         if not jobs:raise HTTPException(503,'Job coordinator unavailable')
         selection=state.get(body.selection_id)
-        config=run_config(body.processor_id,body.config)
+        config=run_config(body.processor_id,body.config,selection)
         records=local_run_records(selection,body.processor_id,config)
         estimate=jobs.estimate(selection,records,body.processor_id,config)
         if body.estimate_digest!=estimate['estimate_digest']:raise ValueError('Preview the run estimate and approve its unchanged budget before starting')
-        return jobs.create(selection,records,body.processor_id,config)
+        return jobs.create(selection,records,body.processor_id,config,estimate=estimate)
     @app.get('/api/v1/runs/{run_id}')
     def run(run_id:str):
         if not jobs:raise HTTPException(503,'Job coordinator unavailable')
@@ -1007,6 +1166,67 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         for a in artifacts(artifact_ids={artifact_id}):
             if (a.id if hasattr(a,'id') else a['id'])==artifact_id:return a
         raise KeyError(artifact_id)
+    def bulk_array(artifact_id,name):
+        from dataset_atlas.queries.embedding_space import bulk_directory
+        item=jobs.get_artifact(artifact_id) if jobs else None
+        bulk=item.data.get('bulk') if item else None
+        if not isinstance(bulk,dict):raise HTTPException(404,'Artifact is not array-backed')
+        entry={**bulk.get('arrays',{}),**bulk.get('extras',{})}.get(name)
+        if name!='ids' and entry is None:raise HTTPException(404,'No such array')
+        return bulk,bulk_directory(item,jobs.artifact_dir),entry
+    immutable={'Cache-Control':'public, max-age=31536000, immutable'}  # artifact IDs are content digests
+    @app.get('/api/v1/artifacts/{artifact_id}/ids')
+    def artifact_ids(artifact_id:str):
+        from fastapi.responses import FileResponse
+        bulk,directory,_=bulk_array(artifact_id,'ids')
+        return FileResponse(directory/bulk['ids']['file'],media_type='application/json',headers=immutable)
+    @app.get('/api/v1/artifacts/{artifact_id}/texts/{name}')
+    def artifact_texts(artifact_id:str,name:str):
+        """A text column (answers, labels, verdicts) as a JSON array aligned with the artifact's ids."""
+        from fastapi.responses import FileResponse
+        from dataset_atlas.queries.embedding_space import bulk_directory
+        item=jobs.get_artifact(artifact_id) if jobs else None
+        bulk=item.data.get('bulk') if item else None
+        entry=(bulk or {}).get('texts',{}).get(name)
+        if entry is None:raise HTTPException(404,'No such text column')
+        return FileResponse(bulk_directory(item,jobs.artifact_dir)/entry['file'],media_type='application/json',headers=immutable)
+    @app.get('/api/v1/datasets/{dataset_id}/column/{artifact_id}')
+    def dataset_column(dataset_id:str,artifact_id:str,field_id:str,snapshot_id:str,result:list[str]=QueryParam(default=[]),top:int=24):
+        """A dataset field's value for every row of an array-backed result, in that result's row order.
+
+        A map uses this to colour all of its points by a field of the complete index, not only the records loaded into the page.
+        Numbers come back as float32 (NaN where missing), categories as int16 codes; the meta header names the categories."""
+        import numpy as np
+        from urllib.parse import quote
+        from dataset_atlas.queries.embedding_space import bulk_directory
+        from dataset_atlas.storage import arrays as store
+        item=jobs.get_artifact(artifact_id) if jobs else None
+        bulk=item.data.get('bulk') if item else None
+        if not isinstance(bulk,dict):raise ValueError('Colouring by a field needs an array-backed result')
+        snapshot=complete_snapshot(dataset_id)
+        if snapshot_id!=snapshot.snapshot_id or snapshot_id not in item.snapshot_ids:raise ValueError('The result and the complete index are over different snapshots')
+        ids=store.read_ids(bulk_directory(item,jobs.artifact_dir),bulk)
+        answer=snapshot.column_values(ids,field_id,selected_artifacts(result),top=top)
+        array=answer.pop('values' if answer['kind']=='number' else 'codes')
+        return Response(array.tobytes(),media_type='application/octet-stream',headers={'X-Atlas-Dtype':str(array.dtype),'X-Atlas-Shape':str(len(array)),
+            'X-Atlas-Column':quote(json.dumps(answer,ensure_ascii=False)),'Access-Control-Expose-Headers':'X-Atlas-Dtype, X-Atlas-Shape, X-Atlas-Column'})
+    @app.get('/api/v1/artifacts/{artifact_id}/arrays/{name}')
+    def artifact_array(artifact_id:str,name:str):
+        """One array as raw little-endian C-order bytes; dtype and shape are in the headers."""
+        import numpy as np
+        from fastapi.responses import StreamingResponse
+        _,directory,entry=bulk_array(artifact_id,name)
+        path=directory/entry['file']
+        with path.open('rb') as stream:
+            major,minor=np.lib.format.read_magic(stream)
+            (np.lib.format.read_array_header_2_0 if major>=2 else np.lib.format.read_array_header_1_0)(stream)
+            offset=stream.tell()
+        def body():
+            with path.open('rb') as stream:
+                stream.seek(offset)
+                while chunk:=stream.read(1<<20):yield chunk
+        return StreamingResponse(body(),media_type='application/octet-stream',headers={**immutable,'Content-Length':str(path.stat().st_size-offset),
+            'X-Atlas-Dtype':entry['dtype'],'X-Atlas-Shape':','.join(map(str,entry['shape'])),'Access-Control-Expose-Headers':'X-Atlas-Dtype, X-Atlas-Shape'})
     try:
         from dataset_atlas.providers import ProviderService, create_provider_router
         from dataset_atlas.api.tools import make_tool_backend

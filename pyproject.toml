@@ -20,6 +20,8 @@ datasets = [
 vision = ["nudenet>=3.4,<4", "torch>=2.6", "torchvision>=0.21"]
 embeddings = ["sentence-transformers>=3.4", "transformers>=4.49", "lancedb>=0.20", "sentencepiece>=0.2"]
 projection = ["scikit-learn>=1.6", "umap-learn>=0.5.7"]
+# GPU UMAP and HDBSCAN (RAPIDS cuML, published by NVIDIA; needs CUDA 13 with driver 580.65.06 or newer). Analysis falls back to the CPU libraries without it.
+gpu = ["cuml-cu13>=26.8,<27; sys_platform == 'linux' and platform_machine == 'x86_64' and python_version < '3.14'"]
 remote-storage = ["s3fs>=2025.2", "indexed-gzip>=1.9,<2"]
 development = ["pytest>=8.3", "pytest-asyncio>=0.25", "build>=1.2"]
 [project.scripts]

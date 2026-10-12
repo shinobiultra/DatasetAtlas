@@ -15,6 +15,7 @@ import os
 import sqlite3
 import tempfile
 import threading
+from collections import OrderedDict
 from collections.abc import Iterable, Sequence
 from pathlib import Path
 from typing import Any
@@ -317,6 +318,7 @@ class ParquetSnapshot:
         self.timeout_seconds=timeout_seconds
         self._active: dict[duckdb.DuckDBPyConnection,threading.Event] = {}
         self._lock = threading.Lock()
+        self._results_cache: OrderedDict[tuple[str, ...], tuple[list[FieldDescriptor], pa.Table]] = OrderedDict()
 
     def interrupt(self) -> None:
         """Interrupt active DuckDB work; the querying thread receives ValueError."""
@@ -329,6 +331,166 @@ class ParquetSnapshot:
             except duckdb.Error:
                 pass
 
+    def _where(self, query: Query, artifacts: Sequence[Artifact]):
+        """Result join table, field registry, WHERE clause and its parameters for a query's filter and search."""
+        result_fields, result_table = self._prepare_results(artifacts)
+        registry = {field_id: (f'source."{column}"', dtype, allowed) for field_id, (column, dtype, allowed) in self.registry.items()}
+        for index, field in enumerate(result_fields):
+            registry[field.id] = (f'results."r_{index}"', field.dtype, set(field.query_ops))
+        validate_filter(query.filter, set(registry))
+        params: list[Any] = []
+        predicates: list[str] = []
+        if query.filter:
+            predicates.append(self._predicate(query.filter, params, registry, self.category_kinds))
+        if query.search:
+            predicates.append('instr(source."search_text", ?) > 0')
+            params.append(query.search.lower())
+        return result_table, registry, (" WHERE " + " AND ".join(predicates) if predicates else ""), params
+
+    def _bounded(self, seconds: float):
+        """A DuckDB connection with this snapshot's resource bounds and a cancellation/timeout watchdog; use as a context manager."""
+        snapshot = self
+        class Guard:
+            def __enter__(guard):
+                guard.connection = duckdb.connect(database=":memory:")
+                guard.connection.execute(f"SET memory_limit = '{snapshot.memory_mb}MB'")
+                guard.connection.execute("SET max_temp_directory_size = '1024MB'")
+                guard.connection.execute(f"SET threads = {snapshot.threads}")
+                guard.cancelled = threading.Event()
+                guard.expired = threading.Event()
+                with snapshot._lock:
+                    snapshot._active[guard.connection] = guard.cancelled
+                def expire():
+                    guard.expired.set()
+                    guard.connection.interrupt()
+                guard.timer = threading.Timer(seconds, expire)
+                guard.timer.daemon = True
+                guard.timer.start()
+                return guard
+            def check(guard):
+                if guard.expired.is_set():
+                    raise ValueError("Query exceeded its time budget")
+                if guard.cancelled.is_set():
+                    raise ValueError("Query cancelled")
+            def __exit__(guard, kind, error, trace):
+                guard.timer.cancel()
+                guard.timer.join()
+                with snapshot._lock:
+                    snapshot._active.pop(guard.connection, None)
+                guard.connection.close()
+                if isinstance(error, duckdb.InterruptException):
+                    raise ValueError("Query exceeded its time budget" if guard.expired.is_set() else "Query cancelled") from error
+                if isinstance(error, duckdb.OutOfMemoryException):
+                    raise ValueError("Query exceeded its memory budget; reduce the selection or query concurrency") from error
+                return False
+        return Guard()
+
+    def _check(self, query: Query) -> None:
+        if query.snapshot_id != self.manifest["snapshot_id"]:
+            raise ValueError("Snapshot mismatch; reload dataset before querying")
+        if query.population_scope != self.population_scope:
+            raise ValueError("Population scope differs from snapshot; choose the matching scope")
+        if query.unit != self.manifest["unit"]:
+            raise ValueError("This snapshot does not support the requested record unit")
+        if (self.parquet.stat().st_size, self.parquet.stat().st_mtime_ns) != self._stat:
+            raise ValueError("Snapshot changed after validation")
+        if len(query.search) > 4000:
+            raise ValueError("Search exceeds 4000 characters")
+
+    def ids(self, query: Query, artifacts: Sequence[Artifact] = (), *, limit: int = 1_000_000, timeout_seconds: float = 120) -> list[str]:
+        """Ids of every record the filter and search match, in the snapshot's own row order.
+
+        Query paging and sampling do not apply: this is how a whole population is selected without moving its records.
+        """
+        if query.sample:
+            raise ValueError("A sampled query selects through its pages, not as a whole population")
+        selected = query.result_snapshot_ids
+        if len(selected) != len(set(selected)) or set(selected) != {artifact.id for artifact in artifacts}:
+            raise ValueError("Explicit result snapshot IDs must match supplied artifacts")
+        self._check(query)
+        result_table, _, where, params = self._where(query, artifacts)
+        with self._bounded(timeout_seconds) as guard:
+            if artifacts:
+                guard.connection.register("result_table", result_table)
+            source = 'read_parquet(?) AS source' + (' LEFT JOIN result_table AS results ON source."id" = results."id"' if artifacts else '')
+            rows = guard.connection.execute(f'SELECT source."id" FROM {source}{where} LIMIT ?', [str(self.parquet), *params, limit + 1]).fetchall()
+            guard.check()
+        if len(rows) > limit:
+            raise ValueError(f"The filter matches more than {limit:,} records; narrow it first")
+        return [row[0] for row in rows]
+
+    def records(self, ids: Sequence[str], *, missing_ok: bool = False, timeout_seconds: float = 300) -> dict[str, Record]:
+        """Records for the given ids with one scan of the snapshot (a join against the id list), not one query each."""
+        import pyarrow as _pa
+        wanted = list(dict.fromkeys(ids))
+        found: dict[str, Record] = {}
+        if not wanted:
+            return found
+        if (self.parquet.stat().st_size, self.parquet.stat().st_mtime_ns) != self._stat:
+            raise ValueError("Snapshot changed after validation")
+        with self._bounded(timeout_seconds) as guard:
+            guard.connection.register("wanted", _pa.table({"id": wanted}))
+            cursor = guard.connection.execute('SELECT source."id", source."record_json" FROM read_parquet(?) AS source JOIN wanted ON source."id" = wanted."id"', [str(self.parquet)])
+            while batch := cursor.fetchmany(2000):
+                guard.check()
+                for identity, payload in batch:
+                    record = Record.model_validate_json(payload)
+                    if record.snapshot_id != self.snapshot_id or record.unit != self.unit:
+                        raise ValueError("Parquet record identity does not match snapshot")
+                    found[identity] = record
+        if not missing_ok and len(found) != len(wanted):
+            raise KeyError(next(identity for identity in wanted if identity not in found))
+        return found
+
+    def column_values(self, ids: Sequence[str], field_id: str, artifacts: Sequence[Artifact] = (), *, top: int = 24, timeout_seconds: float = 120) -> dict[str, Any]:
+        """One field's values for ``ids``, in that order, as arrays: how a map colours every point without moving records.
+
+        A number field gives ``values`` (NaN where a record has none). A category, string or boolean field gives ``codes``: the
+        index into ``categories`` (the ``top`` most frequent among these ids), ``len(categories)`` for every other value and -1
+        where the record has none or is not in the snapshot.
+        """
+        import numpy as np
+        import pyarrow as _pa
+        import pyarrow.compute as pc
+        if not 1 <= top <= 200:
+            raise ValueError("Invalid category count")
+        if (self.parquet.stat().st_size, self.parquet.stat().st_mtime_ns) != self._stat:
+            raise ValueError("Snapshot changed after validation")
+        result_fields, result_table = self._prepare_results(artifacts)
+        registry = {name: (f'source."{column}"', dtype, allowed) for name, (column, dtype, allowed) in self.registry.items()}
+        for index, field in enumerate(result_fields):
+            registry[field.id] = (f'results."r_{index}"', field.dtype, set(field.query_ops))
+        column, dtype, _ = self._column(field_id, registry)
+        if dtype in {"array", "object"}:
+            raise ValueError("A structured field has no single value to colour by")
+        key = column if dtype == "number" else f"substr({column}, 3)" if dtype == "category" else f"CAST({column} AS VARCHAR)"
+        source = 'wanted LEFT JOIN read_parquet(?) AS source ON source."id" = wanted."id"' + (' LEFT JOIN result_table AS results ON source."id" = results."id"' if artifacts else '')
+        with self._bounded(timeout_seconds) as guard:
+            guard.connection.register("wanted", _pa.table({"id": list(ids), "ord": _pa.array(range(len(ids)), type=_pa.int64())}))
+            if artifacts:
+                guard.connection.register("result_table", result_table)
+            cursor = guard.connection.execute(f'SELECT wanted."ord" AS ord, {key} AS k FROM {source}', [str(self.parquet)])
+            table = (getattr(cursor, "to_arrow_table", None) or cursor.fetch_arrow_table)()  # fetch_arrow_table is the older name
+            guard.check()
+        order = table.column("ord").to_numpy()
+        values = table.column("k")
+        if dtype == "number":
+            numbers = np.full(len(ids), np.nan, dtype=np.float32)
+            numbers[order] = np.asarray(values.cast(_pa.float64()).fill_null(np.nan).to_numpy(zero_copy_only=False), dtype=np.float32)
+            present = numbers[np.isfinite(numbers)]
+            return {"field_id": field_id, "kind": "number", "values": numbers, "missing": int(len(ids) - len(present)),
+                    "min": float(present.min()) if len(present) else None, "max": float(present.max()) if len(present) else None}
+        counts = pc.value_counts(values.drop_null())
+        ranked = sorted(zip(counts.field("values").to_pylist(), counts.field("counts").to_pylist()), key=lambda item: (-item[1], str(item[0])))
+        kept = ranked[:top]
+        positions = pc.index_in(values, value_set=_pa.array([value for value, _ in kept], type=values.type)) if kept else _pa.nulls(len(values), _pa.int32())
+        found = positions.fill_null(-2).to_numpy(zero_copy_only=False).astype(np.int32)
+        codes = np.full(len(ids), -1, dtype=np.int16)
+        coded = np.where(found >= 0, found, np.where(values.is_valid().to_numpy(zero_copy_only=False), len(kept), -1))
+        codes[order] = coded.astype(np.int16)
+        return {"field_id": field_id, "kind": "category", "codes": codes, "categories": [{"value": str(value), "count": count} for value, count in kept],
+                "other": int(sum(count for _, count in ranked[top:])), "missing": int((codes == -1).sum())}
+
     @staticmethod
     def _column(field_id: str, registry: dict[str, tuple[str, str, set[str]]]) -> tuple[str, str, set[str]]:
         if field_id not in registry:
@@ -336,6 +498,28 @@ class ParquetSnapshot:
         return registry[field_id]
 
     def _prepare_results(self, artifacts: Sequence[Artifact]) -> tuple[list[FieldDescriptor], pa.Table]:
+        """The joined result table for these artifacts.
+
+        Array-backed results are large and immutable, so their table is built once and reused: every page query used to
+        rebuild it. The key carries their content checksums and identity, not just ids. JSON results are joined each time.
+        """
+        if not artifacts or not all(isinstance(artifact.data.get("bulk"), dict) for artifact in artifacts):
+            return self._build_results(artifacts)
+        key = tuple((artifact.id, tuple(artifact.snapshot_ids), artifact.unit, artifact.data["bulk"]["ids"]["sha256"],
+                     tuple(sorted((name, entry["sha256"]) for name, entry in artifact.data["bulk"]["arrays"].items()))) for artifact in artifacts)
+        with self._lock:
+            hit = self._results_cache.get(key)
+            if hit is not None:
+                self._results_cache.move_to_end(key)
+                return hit
+        built = self._build_results(artifacts)
+        with self._lock:
+            self._results_cache[key] = built
+            while len(self._results_cache) > 2:
+                self._results_cache.popitem(last=False)
+        return built
+
+    def _build_results(self, artifacts: Sequence[Artifact]) -> tuple[list[FieldDescriptor], pa.Table]:
         if len(artifacts) > 32 or len({artifact.id for artifact in artifacts}) != len(artifacts):
             raise ValueError("Result snapshots must be unique and limited to 32")
         fields: dict[str, FieldDescriptor] = {}
@@ -348,14 +532,16 @@ class ParquetSnapshot:
             if len(artifact.ids) != len(set(artifact.ids)):
                 raise ValueError("Result artifact IDs must be unique")
             allowed_ids = set(artifact.ids)
-            items = artifact.data.get("items", [])
-            if not isinstance(items, list):
+            from .result_items import result_items
+            bulk = isinstance(artifact.data.get("bulk"), dict)
+            items = result_items(artifact)  # array-backed artifacts yield their items lazily from the arrays
+            if not bulk and not isinstance(items, list):
                 raise ValueError("Result artifact items must be an array")
             seen: set[str] = set()
             for item in items:
                 item_count += 1
-                if item_count > 250_000:
-                    raise ValueError("Result join exceeds 250,000 items")
+                if item_count > (2_000_000 if bulk else 250_000):
+                    raise ValueError(f"Result join exceeds {2_000_000 if bulk else 250_000:,} items")
                 if not isinstance(item, dict) or not isinstance(item.get("id"), str) or item["id"] not in allowed_ids or item["id"] in seen:
                     raise ValueError("Result item has duplicate or unregistered record ID")
                 seen.add(item["id"])
@@ -406,9 +592,38 @@ class ParquetSnapshot:
             table_rows.append(row)
         return descriptors, pa.Table.from_pylist(table_rows, schema=schema)
 
+    def _bulk_descriptors(self, artifact: Artifact) -> list[FieldDescriptor]:
+        """Fields of an array-backed result from its array dtypes alone, without reading a row."""
+        from .result_items import bulk_columns, bulk_text_columns
+        if artifact.snapshot_ids != [self.snapshot_id] or artifact.unit != self.unit:
+            raise ValueError("Result snapshot or unit is incompatible with this Parquet snapshot")
+        kinds = {key: (artifact.data["bulk"]["arrays"][name]["dtype"]) for key, (name, _) in bulk_columns(artifact).items()}
+        kinds.update({name: "text" for name in bulk_text_columns(artifact)})
+        descriptors = []
+        for key in ("status", *kinds):
+            dtype = "string" if key == "status" or kinds[key] == "text" else "boolean" if kinds[key] == "bool" else "number"
+            descriptors.append(FieldDescriptor(
+                id=f"prediction.{artifact.id}.{key}", name=artifact.kind + " · " + key, namespace="prediction", dtype=dtype, unit=self.unit,
+                provenance={"artifact_id": artifact.id, "run_id": artifact.run_id, "aggregation_version": "1.0"},
+                query_ops=["eq", "ne", "in", "contains", "is_null"] + (["gt", "gte", "lt", "lte"] if dtype == "number" else [])))
+        return descriptors
+
     def result_fields(self, artifacts: Sequence[Artifact]) -> list[FieldDescriptor]:
-        """Descriptors available when these explicit immutable results are joined."""
-        return self._prepare_results(artifacts)[0]
+        """Descriptors available when these explicit immutable results are joined.
+
+        Array-backed results are described from their dtypes, so listing a dataset's fields never joins hundreds of
+        thousands of rows; JSON results are described by joining them, as before.
+        """
+        if len(artifacts) > 32 or len({artifact.id for artifact in artifacts}) != len(artifacts):
+            raise ValueError("Result snapshots must be unique and limited to 32")
+        if not any(isinstance(artifact.data.get("bulk"), dict) for artifact in artifacts):
+            return self._prepare_results(artifacts)[0]
+        described: dict[str, list[FieldDescriptor]] = {artifact.id: self._bulk_descriptors(artifact) for artifact in artifacts if isinstance(artifact.data.get("bulk"), dict)}
+        legacy = [artifact for artifact in artifacts if artifact.id not in described]
+        if legacy:
+            for field in self._prepare_results(legacy)[0]:
+                described.setdefault(field.provenance["artifact_id"], []).append(field)
+        return [field for artifact in artifacts for field in described.get(artifact.id, [])]
 
     def query_fields(self, artifacts: Sequence[Artifact] = ()) -> list[FieldDescriptor]:
         """Registered source and selected result fields for a complete-data UI."""
@@ -511,19 +726,7 @@ class ParquetSnapshot:
             raise ValueError("Snapshot changed after validation")
         if len(query.search) > 4000:
             raise ValueError("Search exceeds 4000 characters")
-        result_fields, result_table = self._prepare_results(artifacts)
-        registry = {field_id: (f'source."{column}"', dtype, allowed) for field_id, (column, dtype, allowed) in self.registry.items()}
-        for index, field in enumerate(result_fields):
-            registry[field.id] = (f'results."r_{index}"', field.dtype, set(field.query_ops))
-        validate_filter(query.filter, set(registry))
-        params: list[Any] = []
-        predicates: list[str] = []
-        if query.filter:
-            predicates.append(self._predicate(query.filter, params, registry, self.category_kinds))
-        if query.search:
-            predicates.append('instr(source."search_text", ?) > 0')
-            params.append(query.search.lower())
-        where = " WHERE " + " AND ".join(predicates) if predicates else ""
+        result_table, registry, where, params = self._where(query, artifacts)
         sorts: list[str] = []
         for sort in query.sort:
             if set(sort) != {"field_id", "direction"} or sort["direction"] not in {"asc", "desc"}:

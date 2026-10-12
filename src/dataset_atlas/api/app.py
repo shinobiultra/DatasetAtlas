@@ -965,12 +965,44 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         payload['notice']='Media omitted. Use CLI export for a checksummed portable pack.'
         return payload
     COLUMNAR={'project.pca','project.umap','cluster.kmeans','cluster.hdbscan','cluster.agglomerative','outlier.knn','embed.minilm','embed.siglip2'}
+    MODEL_RUNS={'vlm.answer','vlm.tag','vlm.judge','embed.api'}  # talk to a local model server; always columnar
+    SAVED_TEXT={'vlm.judge':'candidate_artifact_id','score.vqa_accuracy':'answers_artifact_id'}
     COLUMNAR_AUTO_ROWS=5000
     def run_config(processor_id,config,selection=None):
         path=root/'local-config/recipes.json'
         defaults=json.loads(path.read_text()) if path.exists() else {}
         merged={**defaults.get(processor_id,{}),**config}
         merged.pop('vector_source',None)  # only ever set below, from a registered artifact
+        merged.pop('text_source',None)
+        merged.pop('provider',None)
+        if processor_id in MODEL_RUNS:
+            from urllib.parse import urlsplit
+            from dataset_atlas.vlm.client import is_loopback
+            provider_id=merged.pop('provider_id',None)
+            if not provider_id:raise ValueError('Choose a model server for this run')
+            if not service:raise ValueError('Model connections are unavailable')
+            view=service.get_provider(provider_id)
+            cfg=view.config
+            if not is_loopback(cfg.base_url):raise ValueError('Batch runs send dataset contents only to a loopback model server; this provider is external')
+            merged['provider']={'id':cfg.id,'base_url':cfg.base_url,'model':cfg.model,'timeout_seconds':cfg.timeout_seconds,'max_output_tokens':cfg.max_output_tokens,
+                'max_input_characters':cfg.max_input_characters,'max_images':cfg.max_images,'api_key_env':cfg.api_key_env}
+            merged['resource_class']='network';merged['storage']='arrays'
+        if processor_id in SAVED_TEXT:
+            saved=merged.pop(SAVED_TEXT[processor_id],None)
+            if saved:
+                from dataset_atlas.queries.embedding_space import bulk_directory
+                artifact=selected_artifacts([saved])[0]
+                bulk=artifact.data.get('bulk')
+                column=str(merged.get('answer_column','answer'))
+                if not isinstance(bulk,dict) or column not in bulk.get('texts',{}):raise ValueError(f'Choose saved results with a {column!r} text column')
+                merged['text_source']={'artifact_id':artifact.id,'dir':str(bulk_directory(artifact,jobs.artifact_dir)),'column':column,'manifest':{k:bulk[k] for k in ('count','ids','texts')}}
+                merged['answers_artifact_id']=artifact.id
+            merged['storage']='arrays'
+        if processor_id=='score.vqa_accuracy':
+            merged.setdefault('answers_field','source.answers');merged.setdefault('group_fields',['source.question_type','source.answer_type'])
+        if processor_id in MODEL_RUNS or processor_id in SAVED_TEXT:
+            from dataset_atlas.vlm.tasks import referenced_fields
+            merged['record_fields']=referenced_fields(merged)  # the only record fields the run freezes beyond text and assets
         detector=merged.pop('detector_artifact_id',None)
         if processor_id=='detect.view':
             if not detector:raise ValueError('Choose a retained detector artifact')
@@ -1047,7 +1079,9 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
                 from dataset_atlas.models import Record as IdentityRecord
                 return [IdentityRecord(id=identity,dataset_id=snapshot.dataset_id,release_id=snapshot.release_id,snapshot_id=snapshot.snapshot_id,unit=snapshot.unit) for identity in selection.ids]
         records=selection_records(selection,prepare_media=False)
-        image_input=processor_id in {'quality.basic','detect.nudenet','detect.coco_v1'} or (processor_id=='embed.siglip2' and config.get('representation','image')=='image')
+        from dataset_atlas.vlm.tasks import PRESETS
+        sends_images=processor_id.startswith('vlm.') and bool(config.get('use_images',PRESETS[processor_id.split('.',1)[1]]['use_images']))
+        image_input=processor_id in {'quality.basic','detect.nudenet','detect.coco_v1'} or (processor_id=='embed.siglip2' and config.get('representation','image')=='image') or sends_images
         if not image_input:return records
         try:
             return [prepared_record(record,registry.dataset_version(record.dataset_id,record.release_id,record.snapshot_id),allow_source_read=False) for record in records]
@@ -1136,6 +1170,16 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         from fastapi.responses import FileResponse
         bulk,directory,_=bulk_array(artifact_id,'ids')
         return FileResponse(directory/bulk['ids']['file'],media_type='application/json',headers=immutable)
+    @app.get('/api/v1/artifacts/{artifact_id}/texts/{name}')
+    def artifact_texts(artifact_id:str,name:str):
+        """A text column (answers, labels, verdicts) as a JSON array aligned with the artifact's ids."""
+        from fastapi.responses import FileResponse
+        from dataset_atlas.queries.embedding_space import bulk_directory
+        item=jobs.get_artifact(artifact_id) if jobs else None
+        bulk=item.data.get('bulk') if item else None
+        entry=(bulk or {}).get('texts',{}).get(name)
+        if entry is None:raise HTTPException(404,'No such text column')
+        return FileResponse(bulk_directory(item,jobs.artifact_dir)/entry['file'],media_type='application/json',headers=immutable)
     @app.get('/api/v1/artifacts/{artifact_id}/arrays/{name}')
     def artifact_array(artifact_id:str,name:str):
         """One array as raw little-endian C-order bytes; dtype and shape are in the headers."""

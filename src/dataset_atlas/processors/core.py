@@ -44,6 +44,11 @@ DESCRIPTIONS: dict[str, dict[str, Any]] = {
     "cluster.hdbscan": {"name": "HDBSCAN density clustering", "unit": "example", "input_units": ["example", "asset", "entity", "conversation"], "dependencies": ["scikit-learn"], "output_schema": "cluster.v1", "batching": "selection", "device": "cpu"},
     "cluster.agglomerative": {"name": "Agglomerative (hierarchical) clustering", "unit": "example", "input_units": ["example", "asset", "entity", "conversation"], "dependencies": ["scikit-learn"], "output_schema": "cluster.v1", "batching": "selection", "device": "cpu"},
     "outlier.knn": {"name": "Original-space neighbour distance", "unit": "example", "input_units": ["example", "asset", "entity", "conversation"], "dependencies": ["numpy"], "output_schema": "outlier.v1", "batching": "selection", "device": "cpu"},
+    "vlm.answer": {"name": "Answer questions with a model server", "unit": "example", "input_units": ["example"], "dependencies": ["httpx"], "output_schema": "text.v1", "batching": "records", "device": "cpu"},
+    "vlm.tag": {"name": "Tag or classify with a model server", "unit": "example", "input_units": ["example"], "dependencies": ["httpx"], "output_schema": "text.v1", "batching": "records", "device": "cpu"},
+    "vlm.judge": {"name": "Judge saved answers with a model server", "unit": "example", "input_units": ["example"], "dependencies": ["httpx"], "output_schema": "text.v1", "batching": "records", "device": "cpu"},
+    "embed.api": {"name": "Embeddings from a model server", "unit": "example", "input_units": ["example"], "dependencies": ["httpx"], "output_schema": "embedding.v1", "batching": "records", "device": "cpu"},
+    "score.vqa_accuracy": {"name": "VQA accuracy of saved answers", "unit": "example", "input_units": ["example"], "dependencies": ["numpy"], "output_schema": "score.v1", "batching": "selection", "device": "cpu"},
     "compare.fields": {"name": "Field comparison", "unit": "example", "input_units": ["example"], "dependencies": [], "output_schema": "comparison.v1", "batching": "selection", "device": "cpu"},
     "import.research": {"name": "Import research outputs", "unit": "example", "input_units": ["example", "asset", "entity", "conversation"], "dependencies": [], "output_schema": "import.v1", "batching": "selection", "device": "cpu"},
 }
@@ -86,7 +91,7 @@ def describe_processors() -> list[dict[str, Any]]:
         missing = [name for name in base["dependencies"] if util.find_spec(DEPENDENCY_MODULES.get(name, name)) is None]
         descriptions.append({"id": processor_id, **base, "available": not missing, "missing_dependencies": missing,
                              **({"reason": unavailable_reason(missing)} if missing else {}),
-                             "requires_local_model": processor_id != 'detect.view' and processor_id.startswith(("detect.", "embed."))})
+                             "requires_local_model": processor_id != 'detect.view' and processor_id != 'embed.api' and processor_id.startswith(("detect.", "embed."))})
         if processor_id in {'detect.coco_v1','embed.siglip2','embed.minilm'}:
             descriptions[-1]['supported_devices']=['auto','cpu','cuda','mps']
         method = ANALYSIS_METHODS.get(processor_id)
@@ -123,8 +128,12 @@ class Processor:
 
     def estimate(self, selection: Sequence[Record | dict[str, Any]], config: dict[str, Any] | None = None) -> dict[str, Any]:
         description=self.describe()
-        return {"records": len(selection), "device": (config or {}).get('device','auto' if description.get('supported_devices') else description['device']), "remote_calls": 0,
+        base = {"records": len(selection), "device": (config or {}).get('device','auto' if description.get('supported_devices') else description['device']), "remote_calls": 0,
                 "model_download_bytes": 0}
+        if self.id.startswith("vlm.") or self.id == "embed.api":
+            from .vlm import estimate_model_run
+            return {**base, **estimate_model_run(self.id, list(selection), config or {})}
+        return base
 
     def run_batch(self, inputs: Sequence[Record | dict[str, Any]], config: dict[str, Any] | None = None,
                   *, should_cancel: Callable[[], bool] | None = None) -> dict[str, Any]:
@@ -152,6 +161,15 @@ def run_processor(processor_id: str, records: Sequence[Record | dict[str, Any]],
     elif processor_id == 'detect.view':
         from .detector_view import run_detector_view
         items, provenance = run_detector_view(parsed, config)
+    elif processor_id.startswith("vlm."):
+        from .vlm import run_model_task
+        items, provenance = run_model_task(processor_id, parsed, config)
+    elif processor_id == "embed.api":
+        from .vlm import run_api_embeddings
+        items, provenance = run_api_embeddings(parsed, config)
+    elif processor_id == "score.vqa_accuracy":
+        from .vlm import run_vqa_scoring
+        items, provenance = run_vqa_scoring(parsed, config)
     elif processor_id.startswith("embed."):
         if config.get("storage") == "arrays":
             from .embeddings import run_embeddings_bulk

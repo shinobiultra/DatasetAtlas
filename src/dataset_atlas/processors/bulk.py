@@ -23,6 +23,7 @@ class BulkResult:
     extras: dict[str, np.ndarray] = field(default_factory=dict)
     skipped: dict[str, dict[str, Any]] = field(default_factory=dict)
     summary: dict[str, Any] = field(default_factory=dict)
+    texts: dict[str, list[str]] = field(default_factory=dict)  # one string per id, for answers, labels, verdicts
 
     def check(self, requested: list[str]) -> None:
         """Every requested record is either a row or skipped, exactly once."""
@@ -32,3 +33,6 @@ class BulkResult:
         for name, array in self.arrays.items():
             if len(array) != len(self.ids):
                 raise ValueError(f"Array {name} has {len(array)} rows for {len(self.ids)} ids")
+        for name, values in self.texts.items():
+            if len(values) != len(self.ids):
+                raise ValueError(f"Text column {name} has {len(values)} rows for {len(self.ids)} ids")

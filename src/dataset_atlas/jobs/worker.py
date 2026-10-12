@@ -43,8 +43,8 @@ def _write_shard(stage: Path, group_id: str, key_map: dict[str, str], result: di
     work = stage / f".shard-{group_id}.{uuid4().hex}.tmp"
     work.mkdir()
     try:
-        manifest = write_bundle(work, bulk.ids, bulk.arrays, bulk.extras)
-        size = sum(entry["bytes"] for group in ("arrays", "extras") for entry in manifest.get(group, {}).values())
+        manifest = write_bundle(work, bulk.ids, bulk.arrays, bulk.extras, bulk.texts)
+        size = sum(entry["bytes"] for group in ("arrays", "extras", "texts") for entry in manifest.get(group, {}).values())
         if size > array_budget:
             raise OutputBudgetExceeded("Staged arrays exceed the approved byte budget")
         meta = {"keys": key_map, "skipped": bulk.skipped, "summary": bulk.summary, "manifest": manifest, "array_bytes": size,

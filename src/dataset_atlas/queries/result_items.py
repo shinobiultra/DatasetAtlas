@@ -35,6 +35,10 @@ def bulk_columns(artifact: Artifact) -> dict[str, tuple[str, int | None]]:
     return columns
 
 
+def bulk_text_columns(artifact: Artifact) -> list[str]:
+    return list(artifact.data["bulk"].get("texts", {}))
+
+
 def result_items(artifact: Artifact, only: set[str] | None = None) -> Iterable[dict[str, Any]]:
     bulk = artifact.data.get("bulk")
     if not isinstance(bulk, dict):
@@ -48,12 +52,14 @@ def _bulk_items(artifact: Artifact, bulk: dict[str, Any], only: set[str] | None)
     ids = store.read_ids(directory, bulk)
     columns = bulk_columns(artifact)
     arrays = {name: store.read_array(directory, bulk["arrays"][name]) for name in {name for name, _ in columns.values()}}
+    texts = {name: store.read_texts(directory, entry) for name, entry in bulk.get("texts", {}).items()}
     for start in range(0, len(ids), _BLOCK):
         block = slice(start, start + _BLOCK)
         values = {key: (arrays[name][block] if axis is None else arrays[name][block, axis]).tolist() for key, (name, axis) in columns.items()}
         for offset, record_id in enumerate(ids[block]):
             if only is None or record_id in only:
-                yield {"id": record_id, "status": "completed", "output": {key: column[offset] for key, column in values.items()}}
+                yield {"id": record_id, "status": "completed",
+                       "output": {**{key: column[offset] for key, column in values.items()}, **{name: column[start + offset] for name, column in texts.items()}}}
     skipped_file = directory / "skipped.json"
     if skipped_file.is_file():
         for record_id, row in json.loads(skipped_file.read_text(encoding="utf-8")).items():

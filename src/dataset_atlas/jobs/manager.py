@@ -32,14 +32,20 @@ def _frozen_documents(processor_id: str, config: dict, parsed: list[Record]) -> 
     neighbours (they read vectors by id), and the text and assets for embeddings. Dumping and parsing every answer of
     every record of a 200k-record run cost minutes, and a snapshot is immutable, so the selection already pins the rest.
     """
-    if not _uses_arrays(config) or not processor_id.startswith(("embed.", "project.", "cluster.", "outlier.")):
+    if not _uses_arrays(config) or not processor_id.startswith(("embed.", "project.", "cluster.", "outlier.", "vlm.", "score.")):
         return [record.model_dump(mode="json") for record in parsed]
-    content = processor_id.startswith("embed.")
+    content = processor_id.startswith(("embed.", "vlm.", "score."))
+    fields = [str(field) for field in config.get("record_fields", [])]
     documents = []
     for record in parsed:
         document = {"id": record.id, "dataset_id": record.dataset_id, "release_id": record.release_id, "snapshot_id": record.snapshot_id, "unit": record.unit}
         if content:
-            document.update(text=record.text, question=record.question, asset_ids=list(record.asset_ids), assets=[asset.model_dump(mode="json") for asset in record.assets])
+            document.update(text=record.text, question=record.question, choices=list(record.choices), asset_ids=list(record.asset_ids),
+                            assets=[asset.model_dump(mode="json") for asset in record.assets])
+            for field in fields:  # only the record fields this run's prompts and scoring refer to
+                namespace, _, key = field.partition(".")
+                if namespace in {"source", "prediction", "human"} and key in getattr(record, namespace):
+                    document.setdefault(namespace, {})[key] = getattr(record, namespace)[key]
         documents.append(document)
     return documents
 
@@ -215,7 +221,7 @@ class JobManager:
                   "resource_class": resource, "input_representation": config.get("input_representation", "original"),
                   "known_input_bytes": sum(known_bytes.values()),
                   "input_bytes_status": "unknown" if unknown_bytes else "known",
-                  "expected_download_bytes": 0, "model_download_bytes": 0, "remote_calls": 0,
+                  "expected_download_bytes": 0, "model_download_bytes": 0, "remote_calls": processor_estimate.get("remote_calls", 0),
                   "output_bytes": None, "output_bytes_status": "unknown", "max_output_bytes": max_output, "storage": "arrays" if _uses_arrays(config) else "json",
                   "resource_limits": resource_limits, "memory_enforcement": enforcement(),
                   "validation": validation, "processor_estimate": processor_estimate,
@@ -466,7 +472,7 @@ class JobManager:
                 raise ValueError("Shard rows and skipped records do not account for its keys exactly")
             if any(row.get("status") not in ("skipped", "not_applicable", "failed") for row in skipped.values()):
                 raise ValueError("Invalid skipped status in shard")
-            for entry in [*manifest["arrays"].values(), *manifest.get("extras", {}).values()]:
+            for entry in [*manifest["arrays"].values(), *manifest.get("extras", {}).values(), *manifest.get("texts", {}).values()]:
                 if sha256_file(shard / entry["file"]) != entry["sha256"]:
                     raise ValueError("Shard array does not match its checksum")
             destination = self.artifact_dir / "shards" / run_id / shard.name
@@ -542,7 +548,7 @@ class JobManager:
         if len(carriers) > 1:
             raise ValueError("Only one shard may carry non-row arrays")
         artifact_id = _digest({"run_id": run_id, "processor_id": run.processor_id, "selection_id": run.selection_id, "config_digest": _digest(run.config),
-                               "shards": [[path.name, {name: entry["sha256"] for group in ("arrays", "extras") for name, entry in meta["manifest"].get(group, {}).items()}]
+                               "shards": [[path.name, {name: entry["sha256"] for group in ("arrays", "extras", "texts") for name, entry in meta["manifest"].get(group, {}).items()}]
                                           for path, meta in zip(shards, metas)]})[:24]
         relative_dir = f"arrays/{artifact_id}"
         target = self.artifact_dir / relative_dir
@@ -571,7 +577,16 @@ class JobManager:
                     for name, entry in meta["manifest"]["extras"].items():
                         shutil.copyfile(path / entry["file"], work / entry["file"])
                         extras[name] = store.describe_array(work, name)
-                manifest = {"count": len(order), "ids": store.write_ids(work, order), "arrays": entries, **({"extras": extras} if extras else {})}
+                texts = {}
+                for name in metas[0]["manifest"].get("texts", {}):
+                    merged: list[str | None] = [None] * len(order)
+                    for path, meta, ids in zip(shards, metas, shard_ids):
+                        part = store.read_texts(path, meta["manifest"]["texts"][name])
+                        for record_id, value in zip(ids, part):
+                            merged[rank[record_id]] = value
+                    texts[name] = store.write_texts(work, name, merged)
+                manifest = {"count": len(order), "ids": store.write_ids(work, order), "arrays": entries, **({"extras": extras} if extras else {}),
+                            **({"texts": texts} if texts else {})}
                 (work / "skipped.json").write_text(_json(skipped), encoding="utf-8")
                 (work / "manifest.json").write_text(_json(manifest), encoding="utf-8")
                 os.replace(work, target)

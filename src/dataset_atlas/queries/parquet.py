@@ -545,13 +545,14 @@ class ParquetSnapshot:
 
     def _bulk_descriptors(self, artifact: Artifact) -> list[FieldDescriptor]:
         """Fields of an array-backed result from its array dtypes alone, without reading a row."""
-        from .result_items import bulk_columns
+        from .result_items import bulk_columns, bulk_text_columns
         if artifact.snapshot_ids != [self.snapshot_id] or artifact.unit != self.unit:
             raise ValueError("Result snapshot or unit is incompatible with this Parquet snapshot")
         kinds = {key: (artifact.data["bulk"]["arrays"][name]["dtype"]) for key, (name, _) in bulk_columns(artifact).items()}
+        kinds.update({name: "text" for name in bulk_text_columns(artifact)})
         descriptors = []
         for key in ("status", *kinds):
-            dtype = "string" if key == "status" else "boolean" if kinds[key] == "bool" else "number"
+            dtype = "string" if key == "status" or kinds[key] == "text" else "boolean" if kinds[key] == "bool" else "number"
             descriptors.append(FieldDescriptor(
                 id=f"prediction.{artifact.id}.{key}", name=artifact.kind + " · " + key, namespace="prediction", dtype=dtype, unit=self.unit,
                 provenance={"artifact_id": artifact.id, "run_id": artifact.run_id, "aggregation_version": "1.0"},

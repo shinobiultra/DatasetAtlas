@@ -89,8 +89,30 @@ def write_ids(directory: Path, ids: Sequence[str]) -> dict[str, Any]:
     return {"file": "ids.json", "bytes": len(payload), "sha256": hashlib.sha256(payload).hexdigest()}
 
 
+def write_texts(directory: Path, name: str, values: Sequence[str]) -> dict[str, Any]:
+    """One string per row, as a JSON array, for results that are text (answers, labels, verdicts)."""
+    _checked_name(name)
+    if any(not isinstance(value, str) for value in values):
+        raise ValueError(f"Text column {name} holds a non-string value")
+    directory.mkdir(parents=True, exist_ok=True)
+    payload = json.dumps(list(values), ensure_ascii=False, separators=(",", ":")).encode()
+    _atomic_write(directory / f"{name}.json", lambda stream: stream.write(payload))
+    return {"file": f"{name}.json", "count": len(values), "bytes": len(payload), "sha256": hashlib.sha256(payload).hexdigest()}
+
+
+def read_texts(directory: Path, entry: Mapping[str, Any], *, verify: bool = True) -> list[str]:
+    path = _inside(directory, str(entry["file"]))
+    payload = path.read_bytes()
+    if verify and hashlib.sha256(payload).hexdigest() != entry["sha256"]:
+        raise ValueError(f"Text file {path.name} does not match its recorded checksum")
+    values = json.loads(payload)
+    if len(values) != entry["count"]:
+        raise ValueError(f"Text file {path.name} disagrees with its manifest")
+    return values
+
+
 def write_bundle(directory: Path, ids: Sequence[str], arrays: Mapping[str, np.ndarray],
-                 extras: Mapping[str, np.ndarray] | None = None) -> dict[str, Any]:
+                 extras: Mapping[str, np.ndarray] | None = None, texts: Mapping[str, Sequence[str]] | None = None) -> dict[str, Any]:
     """Write ids and arrays (each with ``len(ids)`` rows) and return the manifest.
 
     ``extras`` are arrays that are not row-aligned, such as cluster centres.
@@ -108,7 +130,15 @@ def write_bundle(directory: Path, ids: Sequence[str], arrays: Mapping[str, np.nd
         if name in entries:
             raise ValueError(f"Extra array {name} repeats a row array name")
         extra_entries[name] = write_array(directory, name, array)
-    return {"count": len(ids), "ids": write_ids(directory, ids), "arrays": entries, **({"extras": extra_entries} if extra_entries else {})}
+    text_entries = {}
+    for name, values in (texts or {}).items():
+        if name in entries or name in extra_entries:
+            raise ValueError(f"Text column {name} repeats an array name")
+        if len(values) != len(ids):
+            raise ValueError(f"Text column {name} has {len(values)} rows for {len(ids)} ids")
+        text_entries[name] = write_texts(directory, name, values)
+    return {"count": len(ids), "ids": write_ids(directory, ids), "arrays": entries, **({"extras": extra_entries} if extra_entries else {}),
+            **({"texts": text_entries} if text_entries else {})}
 
 
 def _inside(directory: Path, file: str) -> Path:

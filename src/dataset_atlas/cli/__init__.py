@@ -122,6 +122,9 @@ def main(argv=None):
     mfetch.add_argument('--model',action='append',default=[],help='Repeat to name models (see `atlas models status`); default is all');mfetch.add_argument('--execute',action='store_true')
     mfetch.add_argument('--max-download-bytes',type=int,default=3_000_000_000);mfetch.add_argument('--reconfigure',action='store_true',help='Overwrite existing processor settings in local-config/recipes.json')
     serve=sub.add_parser('serve');serve.add_argument('--host',default='127.0.0.1');serve.add_argument('--port',type=int,default=8765)
+    runs=sub.add_parser('runs',help='Move finished runs between workspaces').add_subparsers(dest='action',required=True)
+    pull=runs.add_parser('import',help='Verify and copy one finished run, array results and all, from another workspace (a cluster\'s, say) into this one')
+    pull.add_argument('source',type=Path,help='The other workspace, or its work/ folder');pull.add_argument('run_id')
     analyze=sub.add_parser('analyze');analyze.add_argument('--selection',required=True);analyze.add_argument('--processor',required=True);analyze.add_argument('--config',type=Path)
     export=sub.add_parser('export').add_subparsers(dest='action',required=True)
     selection=export.add_parser('selection');selection.add_argument('selection_id');selection.add_argument('--output',type=Path,required=True)
@@ -360,6 +363,17 @@ def main(argv=None):
             result=call(registry_dir=root/'registry',packs_dir=(args.packs_dir or (root/'examples/approved-packs' if (root/'examples/approved-packs').is_dir() else root/'work/packs')),output_dir=root/args.output,profile_path=root/'registry/publication.json')
             emit(result)
             if hasattr(result,'errors') and result.errors:return 1
+        elif args.command=='runs':
+            from dataset_atlas.jobs import JobManager
+            from dataset_atlas.jobs.coordinator_lock import acquire_coordinator_lock
+            other=args.source.resolve();other=other/'work' if (other/'work/jobs.sqlite3').is_file() else other
+            if not (other/'jobs.sqlite3').is_file():raise ValueError(f'No finished runs found in {args.source}: expected work/jobs.sqlite3')
+            coordinator_lock=acquire_coordinator_lock(root/'work')
+            manager=JobManager(root/'work',auto_recover=False)
+            try:
+                run=manager.import_completed_run(other,args.run_id)
+                emit({'run_id':run.id,'processor_id':run.processor_id,'artifact_ids':run.artifact_ids,'progress':run.progress})
+            finally:manager.close()
         elif args.command in {'analyze','export'}:
             from dataset_atlas.api.app import State,create_app
             # Both commands construct the app's recovering job manager, so

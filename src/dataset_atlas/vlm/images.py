@@ -6,6 +6,7 @@ import hashlib
 import io
 from collections import OrderedDict
 from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
 from threading import Lock
 from typing import Any
 
@@ -18,7 +19,7 @@ _CACHE_LIMIT = 512
 _LOCK = Lock()
 
 
-def encode_image(asset: Any, roots: list[str], *, max_side: int = 672, quality: int = 90, max_pixels: int = 50_000_000) -> str:
+def encode_image(asset: Any, roots: list[str | Path], *, max_side: int = 672, quality: int = 90, max_pixels: int = 50_000_000) -> str:
     """Base64 JPEG of one image asset, at most ``max_side`` pixels on its longer side.
 
     Reads only inside ``roots`` and checks the asset's recorded SHA-256 when it has one, so a model is never shown bytes that
@@ -50,7 +51,7 @@ def encode_image(asset: Any, roots: list[str], *, max_side: int = 672, quality: 
     return encoded
 
 
-def encode_many(assets: list[Any], roots: list[str], *, threads: int = 8, **options) -> dict[str, str | Exception]:
+def encode_many(assets: list[Any], roots: list[str | Path], *, threads: int = 8, **options) -> dict[str, str | Exception]:
     """Encode distinct assets concurrently; a failure is returned for that asset, not raised."""
     unique = list({asset.id: asset for asset in assets}.values())
 

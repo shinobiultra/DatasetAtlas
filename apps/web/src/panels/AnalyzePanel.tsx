@@ -252,7 +252,7 @@ export function AnalyzePanel({ selected, selectedCount, unit, saved, fields = []
             )}</Field>
           )}
           {!modelRun && (processorId.startsWith('embed.') || NEEDS_EMBEDDING.some(prefix => processorId.startsWith(prefix))) && (
-            <Field label="Result storage" hint="Above 5,000 records results are stored as binary arrays; they are far smaller and faster. Arrays cannot yet be moved to another workspace.">{id => (
+            <Field label="Result storage" hint="Above 5,000 records results are stored as binary arrays; they are far smaller and faster. Copy a finished run from another workspace with `atlas runs import`.">{id => (
               <select id={id} className="select" value={storage} onChange={event => setStorage(event.target.value)}>
                 <option value="auto">Automatic</option><option value="arrays">Arrays</option><option value="json">JSON items</option>
               </select>

@@ -49,8 +49,10 @@ dimensions). A run with `storage: arrays` (chosen automatically above 5,000 reco
 The API serves arrays as raw bytes (`GET /api/v1/artifacts/{id}/arrays/{name}`, shape and dtype in headers) and ids
 as JSON (`/ids`). Artifact ids are content digests, so both are cacheable forever. Array results still join onto
 records as ordinary `prediction.<artifact>.<key>` fields for columns, filters and colours, and exact similarity
-search reads the memory-mapped matrix directly. Array-backed runs cannot be imported from another workspace yet,
-and publication excludes them unless explicitly allowlisted.
+search reads the memory-mapped matrix directly. `atlas runs import <workspace> <run id>` verifies and copies a finished
+array-backed run from another workspace (a cluster's, say); publication excludes array runs unless explicitly
+allowlisted. Results that are text (a model's answers, tags, verdicts) are stored as JSON string columns beside the
+arrays; see [Model-server runs](model-server-runs.md).
 
 ## Measured
 
@@ -101,8 +103,11 @@ The 3D map then draws all 214,354 points in the browser, coloured by cluster.
 ## Limits
 
 - Portable selection export is limited to 10,000 records; use the CLI for larger packs.
-- The 3D map draws every point of an array-backed projection, but colours by a dataset field only for records loaded
-  in the page. Colouring by cluster or score covers every point.
+- The 3D map colours every point by a cluster, score or dataset field (the server reads the field for the whole result
+  in about 0.1–0.6 s on VQA v2's 214,354 points), but only for a complete index; on a preview it colours the records
+  loaded into the page and says so. Structured fields (arrays, objects) cannot colour points. A field with more than 14
+  distinct values shows its most frequent ones and one shared "other" colour, and the legend's counts add up to every
+  point with a value.
 - Records of a whole population are read once per estimate and cached for five minutes between estimate and run; a
   very large selection of wide records needs the memory to hold them.
 - NudeNet runs on the CPU (onnxruntime has no CUDA provider here).

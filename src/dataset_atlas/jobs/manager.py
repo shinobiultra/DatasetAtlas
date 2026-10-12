@@ -761,6 +761,121 @@ class JobManager:
             if Run.model_validate_json(raw).status in ("queued", "running"):
                 self._launch(run_id)
 
+    def _import_array_run(self, source: Path, connection: sqlite3.Connection, run: Run, raw_run: str, raw_selection: str, raw_records: str, cancelled: bool) -> Run:
+        """Verify and register one completed array-backed run from another workspace (a cluster's, say), then copy its bundle.
+
+        Every file is hashed while it is copied and compared with the checksum in the artifact's manifest; the frozen
+        selection, the item keys and the per-record outcomes are re-derived from the run's own configuration, so a bundle
+        cannot be attached to a run it does not belong to. Nothing is registered unless all of it checks out.
+        """
+        from dataset_atlas.storage import arrays as store
+        run_id = run.id
+        selection = Selection.model_validate_json(raw_selection)
+        records = [Record.model_validate(record) for record in json.loads(raw_records)]
+        if run.status != "completed" or cancelled:
+            raise ValueError("Only fully completed, uncancelled runs can be imported")
+        if (run.selection_id != selection.id or len(selection.ids) != len(set(selection.ids)) or [record.id for record in records] != selection.ids or
+                any(record.unit != selection.unit or record.snapshot_id not in selection.snapshot_ids or record.dataset_id not in selection.dataset_ids for record in records)):
+            raise ValueError("Frozen selection and records disagree")
+        rows = connection.execute("SELECT record_id,item_key,status,error_json,output_bytes FROM run_items WHERE run_id=?", (run_id,)).fetchall()
+        shared = _digest({"processor_id": run.processor_id, "model_revision": run.config.get("model_revision"), "config": run.config,
+                          "input_representation": run.config.get("input_representation", "original"), "selection": _digest(selection.model_dump(mode="json"))})
+        if len(rows) != len(records) or {row[0] for row in rows} != set(selection.ids):
+            raise ValueError("Run item receipts are incomplete")
+        if any(hashlib.sha256((shared + row[0]).encode()).hexdigest() != row[1] for row in rows):
+            raise ValueError("Frozen item key does not match record and configuration")
+        if any(row[2] not in ("completed", "failed", "skipped", "not_applicable") for row in rows):
+            raise ValueError("Run item receipts are incomplete")
+        status = {row[0]: row[2] for row in rows}
+        completed = [record_id for record_id in selection.ids if status[record_id] == "completed"]
+        if (not completed or run.progress.get("total") != len(records) or run.progress.get("completed") != len(completed) or len(run.artifact_ids) != 1):
+            raise ValueError("Run item receipts are incomplete")
+        skipped = {row[0]: {"status": row[2], **{key: value for key, value in (json.loads(row[3]) if row[3] else {}).items() if key != "record_id"}} for row in rows if row[2] != "completed"}
+
+        artifact_id = run.artifact_ids[0]
+        artifact_row = connection.execute("SELECT artifact_json FROM artifacts WHERE id=?", (artifact_id,)).fetchone()
+        if not artifact_row:
+            raise ValueError("Run artifact receipt is missing")
+        artifact = Artifact.model_validate_json(artifact_row[0])
+        bulk = artifact.data.get("bulk")
+        relative_dir, relative_manifest = f"arrays/{artifact_id}", f"runs/{artifact_id}.json"
+        if (artifact.id != artifact_id or artifact.run_id != run_id or artifact.kind != run.processor_id or artifact.files != {"manifest": relative_manifest} or
+                artifact.provenance.get("selection_id") != selection.id or artifact.provenance.get("storage") != "arrays" or
+                artifact.ids != selection.ids or artifact.snapshot_ids != selection.snapshot_ids or artifact.unit != selection.unit or
+                artifact.coverage != {**run.progress, "status": run.status} or artifact.provenance.get("config_digest") != _digest(run.config) or
+                not isinstance(bulk, dict) or bulk.get("dir") != relative_dir):
+            raise ValueError("Artifact identity disagrees with run")
+        manifest = {key: value for key, value in bulk.items() if key != "dir"}
+        run_manifest = {"run_id": run_id, "storage": "arrays", "bulk": bulk, "processor_id": run.processor_id, "selection_id": run.selection_id, "coverage": run.progress}
+        source_artifacts = source / "artifacts"
+        source_dir = source_artifacts / relative_dir
+        if source_dir.is_symlink() or not source_dir.resolve().is_relative_to(source_artifacts.resolve()):
+            raise ValueError("Bundle directory is a symbolic link or leaves the artifact store")
+        raw_run_manifest = read_rooted_file(source_artifacts / relative_manifest, [source_artifacts], max_bytes=1 << 20)
+        if raw_run_manifest != _json(run_manifest).encode():
+            raise ValueError("Artifact manifest does not match the run")
+        if store.read_ids(source_dir, manifest) != completed:
+            raise ValueError("Result rows do not match the completed records in selection order")
+        names = [manifest["ids"], *manifest["arrays"].values(), *manifest.get("extras", {}).values(), *manifest.get("texts", {}).values()]
+        if len({entry["file"] for entry in names}) != len(names) or {"manifest.json", "skipped.json"} & {entry["file"] for entry in names}:
+            raise ValueError("Bundle files repeat or collide with its manifest")
+        if _json(skipped).encode() != (source_dir / "skipped.json").read_bytes() or _json(manifest).encode() != (source_dir / "manifest.json").read_bytes():
+            raise ValueError("Bundle manifest or skipped list does not match the run receipts")
+
+        target = self.artifact_dir / relative_dir
+        with self._db() as db:
+            existing = db.execute("SELECT run_json FROM runs WHERE id=?", (run_id,)).fetchone()
+            if existing:
+                if existing[0] != raw_run:
+                    raise ValueError("Run ID already exists with different content")
+                return Run.model_validate_json(existing[0])
+            prior = db.execute("SELECT artifact_json FROM artifacts WHERE id=?", (artifact_id,)).fetchone()
+            if prior and prior[0] != _json(artifact.model_dump(mode="json")):
+                raise ValueError("Artifact ID collision")
+            if target.is_dir():
+                if (target / "manifest.json").read_bytes() != _json(manifest).encode():
+                    raise ValueError("Artifact ID collision")
+            else:
+                work = target.with_name(f".{artifact_id}.{uuid4().hex}.tmp")
+                work.mkdir(parents=True)
+                try:
+                    for entry in names:
+                        self._copy_verified(store._inside(source_dir, entry["file"]), work / entry["file"], entry["sha256"])
+                    for name, entry in {**manifest["arrays"], **manifest.get("extras", {})}.items():
+                        array = store.read_array(work, entry)  # the dtype and shape the manifest promised; never unpickled
+                        if name in manifest["arrays"] and len(array) != manifest["count"]:
+                            raise ValueError(f"Array {name} does not have one row per result")
+                    for entry in manifest.get("texts", {}).values():
+                        if len(store.read_texts(work, entry)) != manifest["count"]:
+                            raise ValueError("A text column does not have one row per result")
+                    (work / "skipped.json").write_bytes(_json(skipped).encode())
+                    (work / "manifest.json").write_bytes(_json(manifest).encode())
+                    os.replace(work, target)
+                except BaseException:
+                    shutil.rmtree(work, ignore_errors=True)
+                    raise
+            _write_once(self.artifact_dir / relative_manifest, run_manifest)
+            db.execute("INSERT INTO runs(id,run_json,selection_json,records_json,cancel_requested) VALUES(?,?,?,?,0)", (run_id, raw_run, raw_selection, raw_records))
+            db.executemany("INSERT INTO run_items(run_id,record_id,item_key,status,error_json,output_bytes) VALUES(?,?,?,?,?,?)",
+                           [(run_id, record_id, key, state, error, size) for record_id, key, state, error, size in rows])
+            db.execute("INSERT OR IGNORE INTO artifacts(id,artifact_json) VALUES(?,?)", (artifact_id, _json(artifact.model_dump(mode="json"))))
+        return run
+
+    @staticmethod
+    def _copy_verified(source_file: Path, destination: Path, sha256: str) -> None:
+        """Copy one bundle file, refusing symbolic links, and check its checksum on the bytes actually copied."""
+        if source_file.is_symlink() or not source_file.is_file():
+            raise ValueError("Bundle file is missing or is a symbolic link")
+        digest = hashlib.sha256()
+        with source_file.open("rb") as reader, destination.open("xb") as writer:
+            while block := reader.read(8 * 1024 * 1024):
+                digest.update(block)
+                writer.write(block)
+            writer.flush()
+            os.fsync(writer.fileno())
+        if digest.hexdigest() != sha256:
+            raise ValueError("Bundle file does not match its recorded checksum")
+
     def import_completed_run(self, source_work_dir: str | Path, run_id: str) -> Run:
         """Verify and register one completed isolated run without replacing this work DB.
 
@@ -799,8 +914,8 @@ class JobManager:
                     raise KeyError(run_id)
                 raw_run, raw_selection, raw_records, cancelled = source_row
                 run = Run.model_validate_json(raw_run)
-                if run.config.get("storage") == "arrays":
-                    raise ValueError("Array-backed runs cannot be imported from another workspace yet; run them here")
+                if _uses_arrays(run.config):
+                    return self._import_array_run(source, source_connection, run, raw_run, raw_selection, raw_records, bool(cancelled))
                 selection = Selection.model_validate_json(raw_selection)
                 records = [Record.model_validate(record) for record in json.loads(raw_records)]
                 if run.id != run_id or run.status != "completed" or cancelled:

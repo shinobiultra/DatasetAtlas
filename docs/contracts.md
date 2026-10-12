@@ -61,6 +61,30 @@ and a sampled silhouette; outlier runs store `outlier_score`. Analysis runs read
 (`vector_source`, set only by the server from a registered artifact, never by a client). Consumers that join results
 onto records use `queries.result_items.result_items(artifact)`, which yields the same item dicts for both layouts.
 
+Results that are text (model answers, tags, verdicts) add `data.bulk.texts`: `{name: {file, count, sha256, bytes}}`, one
+JSON array of strings per column, aligned with `ids`; `GET /artifacts/{id}/texts/{name}` serves it (immutable). Text and
+numeric columns join onto records alike as `prediction.<artifact>.<name>`. Model-server runs (`vlm.answer`, `vlm.tag`,
+`vlm.judge`, `embed.api`) and `score.vqa_accuracy` are always columnar; their `data.summary` holds `completed`,
+`not_completed`, `reasons`, token and latency totals (verdict or tag value spreads, and for scoring `mean_accuracy` with
+breakdowns). `GET /processors` carries `preset: {template, use_images, max_tokens}` for the three `vlm.*` processors.
+A batch run's `provider_id` must name a configured loopback provider; the run records the provider id, model and
+address but never a credential.
+
+`GET /datasets/{dataset_id}/column/{artifact_id}?field_id=&snapshot_id=&result=` returns one dataset field for every row of
+an array result, in that result's row order, so a map can colour all of its points: the body is raw little-endian `int16`
+category codes (`-1` none, `len(categories)` every other value) or `float32` values (NaN where missing), with
+`X-Atlas-Dtype`, `X-Atlas-Shape` and `X-Atlas-Column` (URL-encoded JSON: `kind`, `categories`, `other`, `missing`,
+`min`, `max`). It needs the complete index and refuses structured fields.
+
+`POST /similarity/{dataset_id}` resolves a complete population as ids in one scan and accepts a `text` query for MiniLM,
+SigLIP 2 and model-server (`embed.api`) spaces; the last embeds the text on the same loopback server with the space's
+`query_prefix`. Cosine distances are never negative. Chat retrieval is this endpoint followed by the ordinary reviewed
+context; the model gets no search tool of its own.
+
+`atlas runs import <workspace|work dir> <run id>` copies one finished run, array bundle included, between workspaces after
+re-deriving its selection, item keys, per-record outcomes and every file checksum; it is idempotent and leaves nothing on
+refusal.
+
 Browsing queries attach only explicitly selected analysis runs (maximum 32), rather
 than all historical artifacts. The Results picker exposes every compatible run;
 deselecting a run removes its dependent filters, sort and map colour. Inspector

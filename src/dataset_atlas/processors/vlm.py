@@ -396,8 +396,8 @@ def run_vqa_scoring(records: list[Record], config: dict[str, Any]):
             groups[field][str(tasks.record_value(record, field))].append(score)
     mean = lambda values: round(float(np.mean(values)), 6) if values else None
     summary = {"metric": "vqa_accuracy", "scored": len(ids), "unscored": len(skipped), "mean_accuracy": mean(scores),
-               "by": {field: sorted(({"value": value, "count": len(values), "mean_accuracy": mean(values)} for value, values in table.items()),
-                                    key=lambda row: -row["count"])[:50] for field, table in groups.items()}}
+               "by": {field: [{"value": value, "count": len(values), "mean_accuracy": mean(values)}
+                              for value, values in sorted(table.items(), key=lambda item: -len(item[1]))[:50]] for field, table in groups.items()}}
     provenance = {"method": "VQA accuracy, official formula and normalisation (reimplemented; GT-Vision-Lab/VQA vqaEval.py)", "metric": "vqa_accuracy",
                   "answers_field": answers_field, "group_fields": group_fields, "candidate_artifact_id": config.get("answers_artifact_id"),
                   "parameters": {"answers_field": answers_field, "group_fields": group_fields}, "summary": {"mean_accuracy": summary["mean_accuracy"], "scored": len(ids)}}

@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
+import { coerceStored } from './storedValue'
 
 /** A view preference that survives reloads. Never used for credentials. */
 export function useStoredState<T>(key: string, fallback: T): [T, (value: T | ((current: T) => T)) => void] {
   const [value, setValue] = useState<T>(() => {
     try {
       const raw = localStorage.getItem(key)
-      return raw === null ? fallback : JSON.parse(raw) as T
+      return raw === null ? fallback : coerceStored(JSON.parse(raw), fallback)
     } catch { return fallback }
   })
   const update = useCallback((next: T | ((current: T) => T)) => {

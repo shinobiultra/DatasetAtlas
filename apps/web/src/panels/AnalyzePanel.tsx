@@ -4,15 +4,30 @@ import { provider, type ProcessorDescriptor } from '../provider'
 import { isEmbeddingArtifact, runLabel, type Unit } from '../dataset/model'
 import { Field, Notice, Spinner } from '../ui/primitives'
 import { compact } from '../lib/format'
+import { resultCount } from '../lib/bulk'
+import { OPTIONS, optionConfig } from './analysisOptions'
 import * as Icon from '../ui/Icons'
 import { ComparisonResults } from './ComparisonResults'
 
 const NEEDS_EMBEDDING = ['project.', 'cluster.', 'outlier.']
 
+const BACKEND_LABEL: Record<string, string> = { cuml: 'GPU · RAPIDS cuML', torch: 'GPU · PyTorch CUDA', cpu: 'CPU' }
+
+function summarise(estimate: Record<string, unknown>): string {
+  const limits = estimate.resource_limits as { max_wall_seconds?: number } | undefined
+  const parts = [
+    typeof estimate.selected_count === 'number' ? `${estimate.selected_count.toLocaleString()} records` : '',
+    estimate.storage === 'arrays' ? 'stored as arrays' : 'stored as JSON items',
+    estimate.resource_class === 'gpu' ? 'uses the GPU lane' : typeof estimate.resource_class === 'string' ? `${estimate.resource_class} lane` : '',
+    limits?.max_wall_seconds ? `stops after ${Math.round(limits.max_wall_seconds / 60)} min` : '',
+  ]
+  return parts.filter(Boolean).join(' · ')
+}
+
 const GROUP_LABEL: Record<string, string> = {
   detect: 'Detect objects or content',
   embed: 'Compute embeddings',
-  project: 'Project to 2D',
+  project: 'Project to 2D or 3D',
   cluster: 'Cluster',
   outlier: 'Score outliers',
   quality: 'Basic quality checks',
@@ -46,6 +61,9 @@ export function AnalyzePanel({ selected, unit, saved, fields = [], artifacts = [
   const [comparisonKind, setComparisonKind] = useState('correlation')
   const [detectorId, setDetectorId] = useState('')
   const [displayThreshold, setDisplayThreshold] = useState(0.5)
+  const [params, setParams] = useState<Record<string, string | number>>({})
+  const [backend, setBackend] = useState('auto')
+  const [storage, setStorage] = useState('auto')
 
   const needsEmbedding = NEEDS_EMBEDDING.some(prefix => processorId.startsWith(prefix))
   const processor = processors.find(item => item.id === processorId)
@@ -54,7 +72,8 @@ export function AnalyzePanel({ selected, unit, saved, fields = [], artifacts = [
     provider.processors().then(setProcessors).catch(failure => setMessage(String(failure)))
     provider.artifacts().then(items => setEmbeddings(items.filter(isEmbeddingArtifact))).catch(() => {})
   }, [])
-  useEffect(() => { setEstimate(null) }, [processorId, embeddingId, config, JSON.stringify(selected), saved?.id, leftField, rightField, comparisonKind, detectorId, displayThreshold])
+  useEffect(() => { setParams({}); setBackend('auto'); setStorage('auto') }, [processorId])
+  useEffect(() => { setEstimate(null) }, [processorId, embeddingId, config, params, backend, storage, JSON.stringify(selected), saved?.id, leftField, rightField, comparisonKind, detectorId, displayThreshold])
 
   if (provider.mode === 'static') {
     return (
@@ -68,7 +87,10 @@ export function AnalyzePanel({ selected, unit, saved, fields = [], artifacts = [
 
   function effectiveConfig(): Record<string, unknown> {
     const parsed = JSON.parse(config) as Record<string, unknown>
-    return { ...parsed, ...(needsEmbedding ? { embedding_artifact_id: embeddingId } : {}),
+    const chosen = optionConfig(processorId, params)
+    if (processor?.backends && backend !== 'auto') chosen.backend = backend
+    if (storage !== 'auto') chosen.storage = storage
+    return { ...parsed, ...chosen, ...(needsEmbedding ? { embedding_artifact_id: embeddingId } : {}),
       ...(processorId === 'compare.fields' ? { left_field: leftField, right_field: rightField, kind: comparisonKind, population_scope: populationScope } : {}),
       ...(processorId === 'detect.view' ? { detector_artifact_id: detectorId, display_threshold: displayThreshold } : {}) }
   }
@@ -150,7 +172,7 @@ export function AnalyzePanel({ selected, unit, saved, fields = [], artifacts = [
                 <option value="">Choose an embedding artifact</option>
                 {embeddings
                   .filter(artifact => !saved || artifact.snapshot_ids.some(snapshot => saved.snapshot_ids.includes(snapshot)))
-                  .map(artifact => <option key={artifact.id} value={artifact.id}>{runLabel(artifact)} · {artifact.ids.length.toLocaleString()} {artifact.unit}</option>)}
+                  .map(artifact => <option key={artifact.id} value={artifact.id}>{runLabel(artifact)} · {resultCount(artifact).toLocaleString()} {artifact.unit}{artifact.data?.bulk ? ' · arrays' : ''}</option>)}
               </select>
             )}</Field>
           )}
@@ -176,6 +198,31 @@ export function AnalyzePanel({ selected, unit, saved, fields = [], artifacts = [
             </select>}</Field>
             <Field label="Display threshold" hint="Boxes and counts use this threshold; the extraction threshold stays recorded in the source run.">{id => <input id={id} className="input" type="number" min={0} max={1} step={0.01} value={displayThreshold} onChange={event => setDisplayThreshold(Number(event.target.value))} />}</Field>
           </>}
+          {(OPTIONS[processorId] ?? []).map(option => (
+            <Field key={option.key} label={option.label} hint={option.hint}>{id => option.kind === 'select' ? (
+              <select id={id} className="select" value={String(params[option.key] ?? option.initial)} onChange={event => setParams(current => ({ ...current, [option.key]: event.target.value }))}>
+                {option.choices.map(([value, label]) => <option key={value} value={value}>{label}</option>)}
+              </select>
+            ) : (
+              <input id={id} className="input" type="number" min={option.min} max={option.max} step={option.step} value={params[option.key] ?? option.initial}
+                onChange={event => setParams(current => ({ ...current, [option.key]: event.target.value }))} />
+            )}</Field>
+          ))}
+          {processor?.backends && (
+            <Field label="Compute" hint="Automatic uses a GPU when the work is big enough to repay starting one, and the CPU otherwise.">{id => (
+              <select id={id} className="select" value={backend} onChange={event => setBackend(event.target.value)}>
+                <option value="auto">Automatic</option>
+                {processor.backends!.map(choice => <option key={choice.id} value={choice.id} disabled={!choice.installed}>{BACKEND_LABEL[choice.id] ?? choice.id}{choice.installed ? '' : ' (not installed)'}</option>)}
+              </select>
+            )}</Field>
+          )}
+          {(processorId.startsWith('embed.') || NEEDS_EMBEDDING.some(prefix => processorId.startsWith(prefix))) && (
+            <Field label="Result storage" hint="Above 5,000 records results are stored as binary arrays; they are far smaller and faster. Arrays cannot yet be moved to another workspace.">{id => (
+              <select id={id} className="select" value={storage} onChange={event => setStorage(event.target.value)}>
+                <option value="auto">Automatic</option><option value="arrays">Arrays</option><option value="json">JSON items</option>
+              </select>
+            )}</Field>
+          )}
           <details className="disclosure">
             <summary>Advanced configuration</summary>
             <div className="body">
@@ -193,7 +240,10 @@ export function AnalyzePanel({ selected, unit, saved, fields = [], artifacts = [
         {estimate && (
           <details className="disclosure" open>
             <summary>Resource and coverage estimate</summary>
-            <div className="body"><pre className="raw">{JSON.stringify(estimate, null, 2)}</pre></div>
+            <div className="body">
+              <p className="hint" style={{ marginBottom: 8 }}>{summarise(estimate)}</p>
+              <pre className="raw">{JSON.stringify(estimate, null, 2)}</pre>
+            </div>
           </details>
         )}
         <button type="button" className="btn primary" disabled={!estimate?.estimate_digest || busy} onClick={start}>

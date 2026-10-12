@@ -348,14 +348,16 @@ class ParquetSnapshot:
             if len(artifact.ids) != len(set(artifact.ids)):
                 raise ValueError("Result artifact IDs must be unique")
             allowed_ids = set(artifact.ids)
-            items = artifact.data.get("items", [])
-            if not isinstance(items, list):
+            from .result_items import result_items
+            bulk = isinstance(artifact.data.get("bulk"), dict)
+            items = result_items(artifact)  # array-backed artifacts yield their items lazily from the arrays
+            if not bulk and not isinstance(items, list):
                 raise ValueError("Result artifact items must be an array")
             seen: set[str] = set()
             for item in items:
                 item_count += 1
-                if item_count > 250_000:
-                    raise ValueError("Result join exceeds 250,000 items")
+                if item_count > (2_000_000 if bulk else 250_000):
+                    raise ValueError(f"Result join exceeds {2_000_000 if bulk else 250_000:,} items")
                 if not isinstance(item, dict) or not isinstance(item.get("id"), str) or item["id"] not in allowed_ids or item["id"] in seen:
                     raise ValueError("Result item has duplicate or unregistered record ID")
                 seen.add(item["id"])

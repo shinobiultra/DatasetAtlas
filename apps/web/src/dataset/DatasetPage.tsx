@@ -1,6 +1,6 @@
 import { StaticUnpublished } from './GuideCards'
 import { displayUrl } from '../lib/display'
-import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
+import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
 import type { Artifact, Dataset, FieldDescriptor, Query, Record as AtlasRecord, Selection } from '../generated'
 import { provider, type CompleteScope, type ThumbEntry } from '../provider'
@@ -11,6 +11,17 @@ import * as Icon from '../ui/Icons'
 import { GridView } from './GridView'
 import { ColumnPicker, TableView, type Sort } from './TableView'
 import { ColourPicker, MapUnavailable, MapView } from './MapView'
+import { bulkOf } from '../lib/bulk'
+
+// three.js is only fetched when a 3D or array-backed projection is opened.
+const Map3DView = lazy(() => import('./Map3DView'))
+
+/** Large runs store arrays, and a third coordinate needs a 3D scene; the 2D canvas map covers the rest. */
+function needsSceneMap(artifact: Artifact): boolean {
+  if (bulkOf(artifact)) return true
+  const first = ((artifact.data?.points ?? artifact.data?.items ?? []) as Array<{ z?: number; output?: { z?: number } }>)[0]
+  return Number.isFinite(first?.z ?? first?.output?.z)
+}
 import { FocusedInspector } from './FocusedInspector'
 import { CompareView } from './CompareView'
 import { FilterRail } from './FilterRail'
@@ -465,6 +476,20 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
       )
     }
     if (view === 'map') {
+      if (projection && needsSceneMap(projection)) {
+        return (
+          <Suspense fallback={<div style={{ padding: 24 }}><Spinner label="Loading the 3D map…" /></div>}>
+            <Map3DView
+              artifact={projection} artifacts={artifacts.filter(item => item.unit === unit)} records={records} colourField={colourField} selected={selected}
+              onInspect={inspect} onOpen={focusRecord} matchedCount={result?.matched_count ?? null}
+              onSelect={(ids, mode) => {
+                setSelected(current => (mode === 'add' ? new Set([...current, ...ids]) : new Set(ids)))
+                onToast(`${ids.length.toLocaleString()} points ${mode === 'add' ? 'added to' : 'selected in'} the selection.`)
+              }}
+            />
+          </Suspense>
+        )
+      }
       return projection
         ? (
           <MapView

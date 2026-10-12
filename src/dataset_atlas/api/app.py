@@ -701,7 +701,7 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
             from dataset_atlas.processors import encode_text_query
             run=jobs.get_run(artifact.run_id)
             vector=encode_text_query(artifact,analysis_config(root,run.config,roots),body.text)
-        result=similar_records(artifact,body.record_id,eligible_ids,body.limit,work/'vector-cache',query_vector=vector)
+        result=similar_records(artifact,body.record_id,eligible_ids,body.limit,work/'vector-cache',query_vector=vector,artifact_dir=jobs.artifact_dir if jobs else None)
         result['population_scope']=eligible.population_scope
         result['coverage']={'filtered_records':eligible.matched_count,'embedded_eligible_records':result['eligible_count']}
         return result
@@ -869,10 +869,13 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         payload['checksum_algorithm']=ALGORITHM
         payload['notice']='Media omitted. Use CLI export for a checksummed portable pack.'
         return payload
-    def run_config(processor_id,config):
+    COLUMNAR={'project.pca','project.umap','cluster.kmeans','cluster.hdbscan','cluster.agglomerative','outlier.knn','embed.minilm','embed.siglip2'}
+    COLUMNAR_AUTO_ROWS=5000
+    def run_config(processor_id,config,selection=None):
         path=root/'local-config/recipes.json'
         defaults=json.loads(path.read_text()) if path.exists() else {}
         merged={**defaults.get(processor_id,{}),**config}
+        merged.pop('vector_source',None)  # only ever set below, from a registered artifact
         detector=merged.pop('detector_artifact_id',None)
         if processor_id=='detect.view':
             if not detector:raise ValueError('Choose a retained detector artifact')
@@ -881,16 +884,23 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         elif detector:raise ValueError('Detector artifact input is only supported by threshold views')
         upstream=merged.pop('embedding_artifact_id',None)
         if upstream:
-            from dataset_atlas.queries.embedding_space import embedding_vectors
+            from dataset_atlas.queries.embedding_space import embedding_source,embedding_vectors
             artifact=selected_artifacts([upstream])[0]
-            vectors,provenance,metric=embedding_vectors(artifact)
+            if artifact.data.get('bulk'):
+                source,provenance,metric=embedding_source(artifact,jobs.artifact_dir)
+                merged['vector_source']=source
+                merged['storage']='arrays'  # vectors by reference only make sense for a columnar run
+            else:
+                vectors,provenance,metric=embedding_vectors(artifact)
+                merged['vectors']=vectors
             merged['embedding_space_id']=provenance.get('embedding_space_id')
             merged['embedding_run_id']=artifact.run_id or artifact.id
             merged['embedding_artifact_id']=artifact.id
             merged['embedding_snapshot_ids']=artifact.snapshot_ids
             merged['embedding_unit']=artifact.unit
             merged.setdefault('metric',metric)
-            merged['vectors']=vectors
+        if selection is not None and processor_id in COLUMNAR and 'storage' not in merged and len(selection.ids)>COLUMNAR_AUTO_ROWS:
+            merged['storage']='arrays'  # thousands of records are stored as arrays, not one JSON file each
         return analysis_config(root,merged,roots)
     app.state.selection_records=selection_records
     app.state.run_config=run_config
@@ -928,7 +938,7 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
     def estimate_run(body:RunRequest):
         if not jobs:raise HTTPException(503,'Job coordinator unavailable')
         selection=state.get(body.selection_id)
-        config=run_config(body.processor_id,body.config)
+        config=run_config(body.processor_id,body.config,selection)
         return jobs.estimate(selection,local_run_records(selection,body.processor_id,config),body.processor_id,config)
     def local_run_records(selection,processor_id,config):
         records=selection_records(selection,prepare_media=False)
@@ -942,7 +952,7 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
     def create_run(body:RunRequest):
         if not jobs:raise HTTPException(503,'Job coordinator unavailable')
         selection=state.get(body.selection_id)
-        config=run_config(body.processor_id,body.config)
+        config=run_config(body.processor_id,body.config,selection)
         records=local_run_records(selection,body.processor_id,config)
         estimate=jobs.estimate(selection,records,body.processor_id,config)
         if body.estimate_digest!=estimate['estimate_digest']:raise ValueError('Preview the run estimate and approve its unchanged budget before starting')
@@ -1007,6 +1017,37 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         for a in artifacts(artifact_ids={artifact_id}):
             if (a.id if hasattr(a,'id') else a['id'])==artifact_id:return a
         raise KeyError(artifact_id)
+    def bulk_array(artifact_id,name):
+        from dataset_atlas.queries.embedding_space import bulk_directory
+        item=jobs.get_artifact(artifact_id) if jobs else None
+        bulk=item.data.get('bulk') if item else None
+        if not isinstance(bulk,dict):raise HTTPException(404,'Artifact is not array-backed')
+        entry={**bulk.get('arrays',{}),**bulk.get('extras',{})}.get(name)
+        if name!='ids' and entry is None:raise HTTPException(404,'No such array')
+        return bulk,bulk_directory(item,jobs.artifact_dir),entry
+    immutable={'Cache-Control':'public, max-age=31536000, immutable'}  # artifact IDs are content digests
+    @app.get('/api/v1/artifacts/{artifact_id}/ids')
+    def artifact_ids(artifact_id:str):
+        from fastapi.responses import FileResponse
+        bulk,directory,_=bulk_array(artifact_id,'ids')
+        return FileResponse(directory/bulk['ids']['file'],media_type='application/json',headers=immutable)
+    @app.get('/api/v1/artifacts/{artifact_id}/arrays/{name}')
+    def artifact_array(artifact_id:str,name:str):
+        """One array as raw little-endian C-order bytes; dtype and shape are in the headers."""
+        import numpy as np
+        from fastapi.responses import StreamingResponse
+        _,directory,entry=bulk_array(artifact_id,name)
+        path=directory/entry['file']
+        with path.open('rb') as stream:
+            major,minor=np.lib.format.read_magic(stream)
+            (np.lib.format.read_array_header_2_0 if major>=2 else np.lib.format.read_array_header_1_0)(stream)
+            offset=stream.tell()
+        def body():
+            with path.open('rb') as stream:
+                stream.seek(offset)
+                while chunk:=stream.read(1<<20):yield chunk
+        return StreamingResponse(body(),media_type='application/octet-stream',headers={**immutable,'Content-Length':str(path.stat().st_size-offset),
+            'X-Atlas-Dtype':entry['dtype'],'X-Atlas-Shape':','.join(map(str,entry['shape'])),'Access-Control-Expose-Headers':'X-Atlas-Dtype, X-Atlas-Shape'})
     try:
         from dataset_atlas.providers import ProviderService, create_provider_router
         from dataset_atlas.api.tools import make_tool_backend

@@ -3,7 +3,8 @@ from __future__ import annotations
 import hashlib
 import json
 from typing import Any, Literal
-from pydantic import BaseModel, ConfigDict, Field, field_validator
+from pathlib import Path
+from pydantic import BaseModel, ConfigDict, Field, PrivateAttr, field_validator
 
 Unit = Literal['asset', 'example', 'entity', 'conversation']
 
@@ -209,6 +210,8 @@ class Artifact(Versioned):
     provenance: dict[str, Any] = Field(default_factory=dict)
     coverage: dict[str, Any] = Field(default_factory=dict)
     data: dict[str, Any] = Field(default_factory=dict)
+    # Where an array-backed artifact's files live. Set by whoever loads it from a store; never serialised.
+    _store_root: Path | None = PrivateAttr(default=None)
 
 class Capabilities(Versioned):
     mode: Literal['static','workbench']

@@ -8,6 +8,7 @@
 | Get into a gated or licensed dataset | [Authorization links](dataset-authorization.md) |
 | Run it on another machine | [Remote workbench](remote-workbench.md) |
 | Connect a local model | [Model connections](model-connections.md) |
+| Embed, project (2D/3D), cluster and score outliers, and what is fast | [Analysis at scale](analysis-at-scale.md) |
 | Add a dataset to the catalogue (adapters, recipes, evidence) | [Adding catalogue datasets](adding-datasets.md), [Adding processors](adding-processors.md) |
 | Understand the interface and the shared schemas | [Interface](interface.md), [Contracts](contracts.md) |
 | Run, test and release from a checkout | [Development](development.md) |

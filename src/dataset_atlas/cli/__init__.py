@@ -308,7 +308,7 @@ def main(argv=None):
             coordinator_lock=acquire_coordinator_lock(root/'work')  # held until the process exits
             uvicorn.run(create_app(root),host=args.host,port=args.port)
         elif args.command=='doctor':
-            checks={name:importlib.util.find_spec(name) is not None for name in ['fastapi','duckdb','pyarrow','nudenet','torchvision','transformers','sentence_transformers','lancedb','umap']}
+            checks={name:importlib.util.find_spec(name) is not None for name in ['fastapi','duckdb','pyarrow','nudenet','torch','torchvision','transformers','sentence_transformers','lancedb','umap','sklearn','cuml']}
             from dataset_atlas.registry import Registry
             import shutil
             issues=[]
@@ -339,7 +339,13 @@ def main(argv=None):
                     except ValueError as exc:
                         provider_checks.append({'provider_id':identity,'error':str(exc)})
                         issues.append(f'Provider {identity} connection check failed: {exc}')
-            emit({'workspace':str(root),'writable':os.access(root,os.W_OK),'datasets':len(datasets),'your_datasets':user,'free_bytes':free,'dependencies':checks,'frontend_built':frontend,'issues':issues,'providers':provider_checks,'downloads':0})
+            from dataset_atlas.processors import engines
+            try:
+                compute={'nvidia_driver':engines.gpu_hint(),'cuda_ready':engines.cuda_ready(),'auto_backend':{method:engines.choose_backend(method,'auto') for method in engines.BACKENDS}}
+                if compute['nvidia_driver'] and not checks['cuml']:compute['hint']='An NVIDIA GPU is present but RAPIDS cuML is not installed: GPU UMAP and HDBSCAN need the gpu extra (`uv sync --all-extras`).'
+                if compute['nvidia_driver'] and not compute['cuda_ready'] and checks['torch']:compute['hint']='An NVIDIA driver is present but PyTorch cannot use CUDA; check the driver and the installed torch build.'
+            except Exception as exc:compute={'error':str(exc)}
+            emit({'workspace':str(root),'writable':os.access(root,os.W_OK),'datasets':len(datasets),'your_datasets':user,'free_bytes':free,'dependencies':checks,'compute':compute,'frontend_built':frontend,'issues':issues,'providers':provider_checks,'downloads':0})
             if issues:return 1
         elif args.command=='publish' and args.action=='schemas':
             from dataset_atlas.exports.guide import write_coverage,write_schemas

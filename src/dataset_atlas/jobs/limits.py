@@ -11,8 +11,13 @@ DEFAULTS = {'max_rss_bytes': 8_000_000_000, 'max_cpu_seconds': 3600, 'max_wall_s
 MAXIMA = {'max_rss_bytes': 256_000_000_000, 'max_cpu_seconds': 604800, 'max_wall_seconds': 604800}
 
 
+# Columnar runs hold whole matrices and keep many threads busy; RLIMIT_CPU counts every thread's time.
+ARRAY_DEFAULTS = {'max_rss_bytes': 32_000_000_000, 'max_cpu_seconds': 172800, 'max_wall_seconds': 14400}
+
+
 def limits(config):
-    result = {key: config.get(key, value) for key, value in DEFAULTS.items()}
+    defaults = ARRAY_DEFAULTS if config.get('storage') == 'arrays' else DEFAULTS
+    result = {key: config.get(key, value) for key, value in defaults.items()}
     for key, value in result.items():
         if type(value) is not int or not 1 <= value <= MAXIMA[key]:
             raise ValueError(f'{key} must be a positive integer no greater than {MAXIMA[key]}')

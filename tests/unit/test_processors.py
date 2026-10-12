@@ -237,3 +237,17 @@ def test_lancedb_contract_prefilters_before_exact_search():
     assert operations[1] == ("where", "id IN ('a''b')", True)
     assert ("exact",) in operations
     assert describe_processors()[0]["id"] == "quality.basic"
+
+
+def test_unavailable_processor_names_the_extra_and_a_command_that_keeps_the_others(monkeypatch):
+    from importlib import util
+    real = util.find_spec
+    monkeypatch.setattr(util, "find_spec", lambda name, *args: None if name in {"nudenet", "umap", "torch", "transformers"} else real(name, *args))
+    rows = {row["id"]: row for row in describe_processors()}
+    assert rows["detect.nudenet"]["available"] is False
+    assert "vision extra" in rows["detect.nudenet"]["reason"]
+    assert "projection extra" in rows["project.umap"]["reason"]
+    assert "embeddings and vision extras" in rows["embed.siglip2"]["reason"]
+    # A plain `uv sync` removes extras, so the advice must not be `uv sync --extra <one>`.
+    assert all("uv sync --all-extras" in rows[name]["reason"] for name in ("detect.nudenet", "project.umap", "embed.siglip2"))
+    assert "reason" not in rows["project.pca"]

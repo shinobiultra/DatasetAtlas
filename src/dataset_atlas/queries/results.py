@@ -14,7 +14,8 @@ def attach_results(pack: Pack, artifacts: list[Artifact]) -> Pack:
     attached=[]
     for artifact in artifacts:
         if pack.dataset.snapshot_id not in artifact.snapshot_ids:raise ValueError('Result snapshot is incompatible with the dataset snapshot')
-        outputs=artifact.data.get('items',[])
+        from .result_items import result_items
+        outputs=result_items(artifact)
         unjoined=0
         for item in outputs:
             record=records.get(item.get('id'))

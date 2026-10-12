@@ -27,9 +27,7 @@ The server listens on loopback only. To use it on another machine, run it there 
 
 One workbench coordinates a workspace at a time. `atlas serve` and `atlas analyze` hold `work/.coordinator.lock`; a second one on the same workspace refuses and names the process that holds it, because two coordinators would both register the same staged analysis output. Use the running workbench, stop it first, or give the second one its own workspace with `--root`.
 
-Optional analysis (detectors, embeddings, maps) needs extras: `uv sync --extra vision --extra embeddings --extra projection` or `pip install "dataset-atlas[vision,embeddings,projection]"`. Browsing needs none of them, and never needs a GPU.
-
-Some source formats need acquisition extras: `uv sync --extra datasets --extra remote-storage`, or install the wheel with `[datasets,remote-storage]`. These provide SciPy for SVHN MAT files, streaming Visual Genome joins and gzip TAR checkpoints. Preparation checks required format dependencies before downloading.
+Optional analysis (detectors, embeddings, maps) needs the `vision`, `embeddings` and `projection` extras, and some source formats need the `datasets` and `remote-storage` extras (SciPy for SVHN MAT files, streaming Visual Genome joins, gzip TAR checkpoints; preparation checks required format dependencies before downloading). From a checkout install them in one command: `uv sync --all-extras` (this includes the large `gpu` extra, RAPIDS cuML for NVIDIA GPUs; without one, name the others instead: `uv sync --extra vision --extra embeddings --extra projection --extra datasets --extra remote-storage`). `uv sync` makes the environment match exactly what you name, so a plain `uv sync`, or a second `uv sync --extra ...` for a different extra, removes the extras you installed before; analysis tools then show as unavailable with this same advice. With pip the extras add up: `pip install "dataset-atlas[vision,embeddings,projection,datasets,remote-storage]"`. Browsing needs none of them, and never needs a GPU.
 
 `atlas doctor` reports what is installed and whether the interface is available.
 

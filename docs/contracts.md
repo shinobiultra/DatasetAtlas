@@ -42,6 +42,17 @@ source inventory or archive directory before activation. Local media inventories
 copied into the immutable prepared version. Pruning preserves their transitive source
 version dependencies and never removes a running preparation.
 
+Large runs (`config.storage: "arrays"`, automatic above 5,000 records) are columnar. Their artifact has no `data.items` or
+`data.points`; `data.bulk` is `{dir, count, ids: {file, sha256, bytes}, arrays: {name: {file, dtype, shape, sha256, bytes}},
+extras?}` over a directory of `.npy` files beside `ids.json` (rows follow selection order; records that were skipped or
+failed are in `skipped.json` and counted in `data.skipped`). `GET /artifacts/{id}/ids` returns the ids and
+`GET /artifacts/{id}/arrays/{name}` the raw little-endian bytes with `X-Atlas-Dtype` and `X-Atlas-Shape` headers; both are
+immutable. Projections store `coords` (n x 2 or n x 3, float32), clusterings `cluster` (int32, -1 is noise) plus
+`probability` for HDBSCAN and `centroids` as a non-row array, with `data.summary` listing cluster sizes, exemplar ids
+and a sampled silhouette; outlier runs store `outlier_score`. Analysis runs read upstream vectors by reference
+(`vector_source`, set only by the server from a registered artifact, never by a client). Consumers that join results
+onto records use `queries.result_items.result_items(artifact)`, which yields the same item dicts for both layouts.
+
 Browsing queries attach only explicitly selected analysis runs (maximum 32), rather
 than all historical artifacts. The Results picker exposes every compatible run;
 deselecting a run removes its dependent filters, sort and map colour. Inspector

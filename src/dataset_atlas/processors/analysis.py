@@ -1,13 +1,27 @@
-"""Bounded original-space and map analyses over explicit upstream vectors."""
+"""Bounded original-space and map analyses over explicit upstream vectors.
+
+Vectors reach a processor in one of two ways. Small runs carry them inline as a dict
+of lists (the original, JSON path, with its original bounds). Large runs carry a
+``vector_source``: a checksummed array bundle written by an embedding run, read
+memory-mapped so nothing is parsed per record. With ``storage: arrays`` the result is
+columnar too (see ``bulk.BulkResult``). The numeric work is in ``engines``.
+"""
 from __future__ import annotations
 
 from collections import Counter, defaultdict
+import hashlib
 import math
+from pathlib import Path
 from typing import Any
 
 import numpy as np
 from dataset_atlas.models import Record, content_id
-from .core import package_version
+from dataset_atlas.storage import arrays as array_store
+from . import engines
+from .bulk import BulkResult
+
+MAX_BULK_VECTORS = 2_000_000
+MIN_GPU_CELLS = 5_000_000  # below this a GPU costs more to start than it saves
 
 
 def _matrix(records: list[Record], config: dict[str, Any]) -> tuple[list[str], np.ndarray, list[str]]:
@@ -38,75 +52,56 @@ def _matrix(records: list[Record], config: dict[str, Any]) -> tuple[list[str], n
     return ids, array, missing
 
 
-def _base_provenance(records: list[Record], config: dict[str, Any], ids: list[str], matrix: np.ndarray) -> dict[str, Any]:
+def _source_matrix(records: list[Record], config: dict[str, Any]) -> tuple[list[str], np.ndarray, list[str], dict[str, Any]]:
+    """Rows of a registered array bundle for the selected records, in selection order."""
+    source = config["vector_source"]
+    if not config.get("embedding_space_id") or not config.get("embedding_run_id"):
+        raise ValueError("Analysis requires embedding_space_id and embedding_run_id")
+    if config.get('embedding_snapshot_ids') is not None and any(record.snapshot_id not in config['embedding_snapshot_ids'] or record.unit != config.get('embedding_unit') for record in records):
+        raise ValueError('Embedding artifact snapshot or sample unit is incompatible')
+    directory = Path(source["dir"])
+    manifest = source["manifest"]
+    stored = array_store.read_ids(directory, manifest)
+    matrix = array_store.read_array(directory, manifest["arrays"][source.get("array", "vector")], mmap=True, verify=True)
+    if matrix.ndim != 2 or not 1 <= matrix.shape[1] <= 4096:
+        raise ValueError("Stored vectors must be a matrix with at most 4096 columns")
+    row = {item_id: index for index, item_id in enumerate(stored)}
+    ids = [record.id for record in records if record.id in row]
+    missing = [record.id for record in records if record.id not in row]
+    if not ids:
+        raise ValueError("No selected records have vectors")
+    if len(ids) > MAX_BULK_VECTORS:
+        raise ValueError(f"Analysis exceeds the {MAX_BULK_VECTORS}-vector bound")
+    rows = np.fromiter((row[item_id] for item_id in ids), dtype=np.int64, count=len(ids))
+    selected = matrix if len(rows) == len(stored) and np.array_equal(rows, np.arange(len(stored))) else matrix[rows]
+    digest = content_id({"source_sha256": manifest["arrays"][source.get("array", "vector")]["sha256"],
+                         "ids_sha256": hashlib.sha256("\n".join(ids).encode()).hexdigest()}, "vectors:")
+    return ids, selected, missing, {"input_digest": digest, "storage": "array bundle"}
+
+
+def _base_provenance(records: list[Record], config: dict[str, Any], ids: list[str], matrix: np.ndarray, digest: str | None = None) -> dict[str, Any]:
     snapshots = sorted({record.snapshot_id for record in records})
-    return {"embedding_space_id": config["embedding_space_id"], "embedding_run_id": config["embedding_run_id"],
+    base = {"embedding_space_id": config["embedding_space_id"], "embedding_run_id": config["embedding_run_id"],
             **({'embedding_artifact_id': config['embedding_artifact_id']} if config.get('embedding_artifact_id') else {}),
-            "snapshot_ids": snapshots, "population_ids": [record.id for record in records],
-            "fitted_ids": ids, "original_dimension": matrix.shape[1], "sample_unit": records[0].unit,
-            "input_digest": content_id({"ids": ids, "vectors": matrix.tolist()}, "vectors:")}
+            "snapshot_ids": snapshots, "original_dimension": matrix.shape[1], "sample_unit": records[0].unit,
+            "input_digest": digest or content_id({"ids": ids, "vectors": matrix.tolist()}, "vectors:")}
+    if config.get("storage") == "arrays":
+        # Hundreds of thousands of ids do not belong in provenance; counts and digests identify the populations.
+        digest_of = lambda values: hashlib.sha256("\n".join(values).encode()).hexdigest()
+        return {**base, "population_count": len(records), "population_ids_sha256": digest_of([record.id for record in records]),
+                "fitted_count": len(ids), "fitted_ids_sha256": digest_of(ids)}
+    return {**base, "population_ids": [record.id for record in records], "fitted_ids": ids}
 
 
 def pca(matrix: np.ndarray, n_components: int = 2) -> tuple[np.ndarray, list[float]]:
-    if matrix.shape[0] < 2 or matrix.shape[1] < n_components:
-        raise ValueError("PCA needs at least two rows and enough input dimensions")
-    centered = matrix - matrix.mean(axis=0)
-    u, singular, _ = np.linalg.svd(centered, full_matrices=False)
-    coords = np.zeros((matrix.shape[0], n_components), dtype=np.float64)
-    available = min(n_components, singular.size)
-    coords[:, :available] = u[:, :available] * singular[:available]
-    # Fix SVD's arbitrary signs for reproducible serialization.
-    for col in range(available):
-        pivot = np.argmax(np.abs(coords[:, col]))
-        if coords[pivot, col] < 0:
-            coords[:, col] *= -1
-    variance = singular ** 2
-    explained = (variance[:available] / variance.sum()).tolist() if variance.sum() else [0.0] * available
-    return coords, explained + [0.0] * (n_components - available)
-
-
-def kmeans(matrix: np.ndarray, clusters: int, seed: int, max_iter: int = 100) -> tuple[np.ndarray, np.ndarray, int]:
-    if clusters < 1 or clusters > len(matrix):
-        raise ValueError("clusters must be within 1..population size")
-    rng = np.random.default_rng(seed)
-    centers = matrix[rng.choice(len(matrix), size=clusters, replace=False)].copy()
-    labels = np.zeros(len(matrix), dtype=np.int64)
-    for iteration in range(max_iter):
-        distances = ((matrix[:, None, :] - centers[None, :, :]) ** 2).sum(axis=2)
-        new_labels = distances.argmin(axis=1)
-        if iteration > 0 and np.array_equal(labels, new_labels):
-            return labels, centers, iteration
-        labels = new_labels
-        for cluster in range(clusters):
-            members = matrix[labels == cluster]
-            if len(members):
-                centers[cluster] = members.mean(axis=0)
-            else:
-                # Empty clusters are deterministically reseeded to a poorly fitted row.
-                farthest = np.argmax(np.min(distances, axis=1))
-                centers[cluster] = matrix[farthest]
-    return labels, centers, max_iter
+    coords, explained, _ = engines.pca(matrix, n_components, "cpu")
+    return coords.astype(np.float64), explained
 
 
 def knn_outlier(matrix: np.ndarray, neighbors: int, metric: str = "cosine") -> np.ndarray:
-    n = len(matrix)
-    if n < 2 or neighbors < 1 or neighbors >= n:
-        raise ValueError("neighbors must be within 1..population size minus one")
-    if n > 5_000:
+    if len(matrix) > 5_000:
         raise ValueError("Exact pairwise outlier analysis limited to 5000 rows")
-    if metric == "cosine":
-        norms = np.linalg.norm(matrix, axis=1)
-        if (norms == 0).any():
-            raise ValueError("Cosine distance requires nonzero vectors")
-        normalized = matrix / norms[:, None]
-        distances = 1.0 - np.clip(normalized @ normalized.T, -1, 1)
-    elif metric == "euclidean":
-        norms2 = (matrix * matrix).sum(axis=1)
-        distances = np.sqrt(np.maximum(0, norms2[:, None] + norms2[None, :] - 2 * matrix @ matrix.T))
-    else:
-        raise ValueError("metric must be cosine or euclidean")
-    np.fill_diagonal(distances, np.inf)
-    return np.partition(distances, neighbors - 1, axis=1)[:, neighbors - 1]
+    return engines.knn(np.asarray(matrix, dtype=np.float32), neighbors, metric, "cpu")["distances"][:, neighbors - 1]
 
 
 def _field(record: Record, field_id: str):
@@ -165,6 +160,36 @@ def compare(records: list[Record], config: dict[str, Any]) -> dict[str, Any]:
     return base
 
 
+def _int(config: dict[str, Any], key: str, default: int, low: int, high: int) -> int:
+    value = config.get(key, default)
+    if type(value) is not int or not low <= value <= high:
+        raise ValueError(f"{key} must be an integer within {low}..{high}")
+    return value
+
+
+def _backend(method: str, config: dict[str, Any], matrix: np.ndarray) -> str:
+    """Honour an explicit backend; otherwise use the GPU only when the work is big enough to repay its start-up."""
+    requested = str(config.get("backend", "auto"))
+    if requested == "auto" and matrix.size < MIN_GPU_CELLS:
+        return "cpu"
+    return engines.choose_backend(method, requested)
+
+
+def _metric(config: dict[str, Any], default: str = "cosine") -> str:
+    metric = str(config.get("metric", default))
+    if metric not in {"cosine", "euclidean"}:
+        raise ValueError("metric must be cosine or euclidean")
+    return metric
+
+
+def _cluster_outputs(ids: list[str], matrix: np.ndarray, labels: np.ndarray, metric: str, seed: int) -> tuple[dict[str, Any], np.ndarray]:
+    summary = engines.cluster_summaries(matrix, labels, metric=metric)
+    clusters = [{**{k: v for k, v in row.items() if k != "exemplar_rows"}, "exemplar_ids": [ids[i] for i in row["exemplar_rows"]]}
+                for row in summary["clusters"]]
+    return {"clusters": clusters, "noise": summary["noise"], "cluster_count": len(clusters),
+            "silhouette_sample": engines.silhouette_sample(matrix, labels, seed=seed, metric=metric)}, summary["centroids"]
+
+
 def run_analysis(processor_id: str, records: list[Record], config: dict[str, Any]):
     if processor_id == "compare.fields":
         summary = compare(records, config)
@@ -175,52 +200,108 @@ def run_analysis(processor_id: str, records: list[Record], config: dict[str, Any
                          if left is not None and right is not None else
                          {"id": record.id, "status": "not_applicable", "output": None})
         return items, {"comparison": summary}
-    ids, matrix, missing = _matrix(records, config)
-    provenance = _base_provenance(records, config, ids, matrix)
-    outputs: dict[str, dict[str, Any]] = {}
-    if processor_id == "project.pca":
-        coordinates, explained = pca(matrix)
-        provenance.update({"method": "centered SVD PCA", "explained_variance_ratio": explained, "parameters": {"n_components": 2}, "numpy_version": np.__version__})
-        outputs = {item_id: {"x": float(x), "y": float(y)} for item_id, (x, y) in zip(ids, coordinates)}
-    elif processor_id == "project.umap":
-        import umap
-        seed = int(config.get("seed", 42))
-        neighbors = int(config.get("neighbors", 15))
-        if neighbors < 2 or neighbors >= len(ids):
-            raise ValueError("UMAP neighbors must be within 2..population size minus one")
-        metric = str(config.get("metric", "cosine"))
-        if metric not in {"cosine", "euclidean"}:
-            raise ValueError("Unsupported UMAP metric")
-        min_dist = float(config.get("min_dist", 0.1))
-        if not 0 <= min_dist <= 1:
-            raise ValueError("UMAP min_dist must be within 0..1")
-        coordinates = umap.UMAP(n_components=2, n_neighbors=neighbors, min_dist=min_dist, metric=metric,
-                                random_state=seed, n_jobs=1).fit_transform(matrix)
-        provenance.update({"method": "UMAP", "implementation_version": package_version("umap-learn"),
-                           "parameters": {"n_components": 2, "neighbors": neighbors, "min_dist": min_dist, "metric": metric, "seed": seed, "n_jobs": 1}})
-        outputs = {item_id: {"x": float(x), "y": float(y)} for item_id, (x, y) in zip(ids, coordinates)}
-    elif processor_id == "cluster.kmeans":
-        clusters = int(config.get("clusters", 8))
-        seed = int(config.get("seed", 42))
-        labels, centers, iterations = kmeans(matrix, clusters, seed)
-        provenance.update({"method": "Lloyd k-means", "space": "original embedding", "metric": "squared euclidean",
-                           "parameters": {"clusters": clusters, "seed": seed, "max_iter": 100}, "iterations": iterations,
-                           "centers": centers.tolist(), "numpy_version": np.__version__})
-        outputs = {item_id: {"cluster": int(label)} for item_id, label in zip(ids, labels)}
+    bulk = config.get("storage") == "arrays"
+    if config.get("vector_source"):
+        ids, matrix, missing, extra = _source_matrix(records, config)
+        provenance = _base_provenance(records, config, ids, matrix, extra["input_digest"])
+        provenance["vector_storage"] = extra["storage"]
+    else:
+        ids, matrix, missing = _matrix(records, config)
+        provenance = _base_provenance(records, config, ids, matrix)
+    arrays: dict[str, np.ndarray] = {}
+    extras: dict[str, np.ndarray] = {}
+    summary: dict[str, Any] = {}
+    seed = int(config.get("seed", 42))
+    if processor_id in {"project.pca", "project.umap"}:
+        dimensions = _int(config, "dimensions", 2, 2, 3)
+        if processor_id == "project.pca":
+            coords, explained, backend = engines.pca(matrix, dimensions, _backend("pca", config, matrix))
+            provenance.update({"method": "centered covariance PCA", "backend": backend, "explained_variance_ratio": explained,
+                               "parameters": {"n_components": dimensions}, "numpy_version": np.__version__})
+        else:
+            neighbors = _int(config, "neighbors", 15, 2, 200)
+            if neighbors >= len(ids):
+                raise ValueError("UMAP neighbors must be within 2..population size minus one")
+            metric = _metric(config)
+            min_dist = float(config.get("min_dist", 0.1))
+            if not 0 <= min_dist <= 1:
+                raise ValueError("UMAP min_dist must be within 0..1")
+            result = engines.umap_embed(matrix, n_components=dimensions, n_neighbors=neighbors, min_dist=min_dist, metric=metric,
+                                        seed=seed, backend=_backend("umap", config, matrix))
+            coords = result["coords"]
+            provenance.update({"method": "UMAP", "backend": result["backend"], "implementation_version": result["library_version"],
+                               "parameters": {"n_components": dimensions, "neighbors": neighbors, "min_dist": min_dist, "metric": metric, "seed": seed,
+                                              **({"n_jobs": 1} if result["backend"] == "cpu" else {})}})
+        arrays["coords"] = np.asarray(coords, dtype=np.float32)
+    elif processor_id in {"cluster.kmeans", "cluster.hdbscan", "cluster.agglomerative"}:
+        metric = _metric(config, "euclidean" if processor_id == "cluster.kmeans" else "cosine")
+        if processor_id == "cluster.kmeans":
+            clusters = _int(config, "clusters", 8, 1, 100_000)
+            n_init = _int(config, "n_init", 1, 1, 50)
+            run = engines.kmeans(matrix, clusters, seed, n_init=n_init, metric=metric, backend=_backend("kmeans", config, matrix))
+            labels = run["labels"]
+            provenance.update({"method": "Lloyd k-means with k-means++ seeding", "space": "original embedding", "backend": run["backend"],
+                               "metric": "squared euclidean" if metric == "euclidean" else "squared euclidean on unit vectors (cosine)",
+                               "parameters": {"clusters": clusters, "seed": seed, "n_init": n_init, "max_iter": 100, "metric": metric},
+                               "iterations": run["iterations"], "inertia": run["inertia"], "numpy_version": np.__version__})
+            if len(run["centers"]) * run["centers"].shape[1] <= 100_000:
+                provenance["centers"] = run["centers"].tolist()
+        elif processor_id == "cluster.hdbscan":
+            min_size = _int(config, "min_cluster_size", 15, 2, 1_000_000)
+            min_samples = config.get("min_samples")
+            if min_samples is not None:
+                min_samples = _int(config, "min_samples", min_size, 1, 1_000_000)
+            run = engines.hdbscan_cluster(matrix, min_cluster_size=min_size, min_samples=min_samples, metric=metric,
+                                          backend=_backend("hdbscan", config, matrix))
+            labels = run["labels"]
+            arrays["probability"] = run["probabilities"]
+            provenance.update({"method": "HDBSCAN", "space": "original embedding", "backend": run["backend"], "implementation_version": run["library_version"],
+                               "metric": "euclidean on unit vectors (cosine)" if metric == "cosine" else "euclidean",
+                               "parameters": {"min_cluster_size": min_size, "min_samples": min_samples, "metric": metric}})
+        else:
+            clusters = _int(config, "clusters", 8, 1, 100_000)
+            linkage = str(config.get("linkage", "ward"))
+            if linkage not in {"ward", "average", "complete", "single"}:
+                raise ValueError("linkage must be ward, average, complete or single")
+            run = engines.agglomerative(matrix, clusters, linkage=linkage, seed=seed, backend=_backend("kmeans", config, matrix))
+            labels = run["labels"]
+            provenance.update({"method": "Agglomerative clustering" + (" over k-means micro-clusters" if run["two_stage"] else ""),
+                               "space": "original embedding", "two_stage": run["two_stage"], "micro_clusters": run["micro_clusters"],
+                               "parameters": {"clusters": clusters, "linkage": linkage, "seed": seed}})
+        arrays["cluster"] = np.asarray(labels, dtype=np.int32)
+        summary, centroids = _cluster_outputs(ids, matrix, labels, metric if metric == "cosine" else "euclidean", seed)
+        extras["centroids"] = centroids
     elif processor_id == "outlier.knn":
-        neighbors = int(config.get("neighbors", 5))
-        metric = str(config.get("metric", "cosine"))
-        distances = knn_outlier(matrix, neighbors, metric)
-        provenance.update({"method": "distance to kth nearest other selected item", "space": "original embedding",
+        neighbors = _int(config, "neighbors", 5, 1, 1000)
+        metric = _metric(config)
+        result = engines.knn(matrix, neighbors, metric, _backend("knn", config, matrix), max_cpu_rows=int(config.get("max_cpu_rows", 60_000)))
+        arrays["outlier_score"] = result["distances"][:, neighbors - 1].copy()
+        provenance.update({"method": "distance to kth nearest other selected item", "space": "original embedding", "backend": result["backend"],
                            "parameters": {"neighbors": neighbors, "metric": metric}, "numpy_version": np.__version__})
-        outputs = {item_id: {"outlier_score": float(score)} for item_id, score in zip(ids, distances)}
     else:
         raise ValueError("Unknown analysis processor")
     provenance["fit_id"] = content_id({"processor": processor_id, "input": provenance["input_digest"],
                                         "parameters": provenance["parameters"]}, "fit:")
+    if summary:
+        provenance["summary"] = summary if not bulk else {"stored": "artifact data summary"}
+    if bulk:
+        skipped = {item_id: {"status": "not_applicable"} for item_id in missing}
+        return BulkResult(ids=ids, arrays=arrays, extras=extras, skipped=skipped, summary=summary, provenance=provenance), provenance
+    outputs = {item_id: _item_output(processor_id, arrays, row) for row, item_id in enumerate(ids)}
     items = [{"id": record.id, "status": "completed", "output": outputs[record.id]} if record.id in outputs
              else {"id": record.id, "status": "not_applicable", "output": None} for record in records]
     return items, provenance
+
+
+def _item_output(processor_id: str, arrays: dict[str, np.ndarray], row: int) -> dict[str, Any]:
+    if "coords" in arrays:
+        return {name: float(value) for name, value in zip("xyz", arrays["coords"][row])}
+    if "cluster" in arrays:
+        output = {"cluster": int(arrays["cluster"][row])}
+        if "probability" in arrays:
+            output["probability"] = float(arrays["probability"][row])
+        return output
+    return {"outlier_score": float(arrays["outlier_score"][row])}
 
 
 def exact_lancedb_search(table: Any, vector: list[float], eligible_ids: list[str], limit: int,

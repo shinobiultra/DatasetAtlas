@@ -442,6 +442,55 @@ class ParquetSnapshot:
             raise KeyError(next(identity for identity in wanted if identity not in found))
         return found
 
+    def column_values(self, ids: Sequence[str], field_id: str, artifacts: Sequence[Artifact] = (), *, top: int = 24, timeout_seconds: float = 120) -> dict[str, Any]:
+        """One field's values for ``ids``, in that order, as arrays: how a map colours every point without moving records.
+
+        A number field gives ``values`` (NaN where a record has none). A category, string or boolean field gives ``codes``: the
+        index into ``categories`` (the ``top`` most frequent among these ids), ``len(categories)`` for every other value and -1
+        where the record has none or is not in the snapshot.
+        """
+        import numpy as np
+        import pyarrow as _pa
+        import pyarrow.compute as pc
+        if not 1 <= top <= 200:
+            raise ValueError("Invalid category count")
+        if (self.parquet.stat().st_size, self.parquet.stat().st_mtime_ns) != self._stat:
+            raise ValueError("Snapshot changed after validation")
+        result_fields, result_table = self._prepare_results(artifacts)
+        registry = {name: (f'source."{column}"', dtype, allowed) for name, (column, dtype, allowed) in self.registry.items()}
+        for index, field in enumerate(result_fields):
+            registry[field.id] = (f'results."r_{index}"', field.dtype, set(field.query_ops))
+        column, dtype, _ = self._column(field_id, registry)
+        if dtype in {"array", "object"}:
+            raise ValueError("A structured field has no single value to colour by")
+        key = column if dtype == "number" else f"substr({column}, 3)" if dtype == "category" else f"CAST({column} AS VARCHAR)"
+        source = 'wanted LEFT JOIN read_parquet(?) AS source ON source."id" = wanted."id"' + (' LEFT JOIN result_table AS results ON source."id" = results."id"' if artifacts else '')
+        with self._bounded(timeout_seconds) as guard:
+            guard.connection.register("wanted", _pa.table({"id": list(ids), "ord": _pa.array(range(len(ids)), type=_pa.int64())}))
+            if artifacts:
+                guard.connection.register("result_table", result_table)
+            cursor = guard.connection.execute(f'SELECT wanted."ord" AS ord, {key} AS k FROM {source}', [str(self.parquet)])
+            table = (getattr(cursor, "to_arrow_table", None) or cursor.fetch_arrow_table)()  # fetch_arrow_table is the older name
+            guard.check()
+        order = table.column("ord").to_numpy()
+        values = table.column("k")
+        if dtype == "number":
+            numbers = np.full(len(ids), np.nan, dtype=np.float32)
+            numbers[order] = np.asarray(values.cast(_pa.float64()).fill_null(np.nan).to_numpy(zero_copy_only=False), dtype=np.float32)
+            present = numbers[np.isfinite(numbers)]
+            return {"field_id": field_id, "kind": "number", "values": numbers, "missing": int(len(ids) - len(present)),
+                    "min": float(present.min()) if len(present) else None, "max": float(present.max()) if len(present) else None}
+        counts = pc.value_counts(values.drop_null())
+        ranked = sorted(zip(counts.field("values").to_pylist(), counts.field("counts").to_pylist()), key=lambda item: (-item[1], str(item[0])))
+        kept = ranked[:top]
+        positions = pc.index_in(values, value_set=_pa.array([value for value, _ in kept], type=values.type)) if kept else _pa.nulls(len(values), _pa.int32())
+        found = positions.fill_null(-2).to_numpy(zero_copy_only=False).astype(np.int32)
+        codes = np.full(len(ids), -1, dtype=np.int16)
+        coded = np.where(found >= 0, found, np.where(values.is_valid().to_numpy(zero_copy_only=False), len(kept), -1))
+        codes[order] = coded.astype(np.int16)
+        return {"field_id": field_id, "kind": "category", "codes": codes, "categories": [{"value": str(value), "count": count} for value, count in kept],
+                "other": int(sum(count for _, count in ranked[top:])), "missing": int((codes == -1).sum())}
+
     @staticmethod
     def _column(field_id: str, registry: dict[str, tuple[str, str, set[str]]]) -> tuple[str, str, set[str]]:
         if field_id not in registry:

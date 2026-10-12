@@ -105,6 +105,42 @@ export async function loadProjection(artifact: Artifact): Promise<Projection> {
   return { ids: points.map(point => point.id), coords, dims }
 }
 
+export type FieldColumn =
+  | { kind: 'category'; codes: Int16Array; categories: Array<{ value: string; count: number }>; other: number; missing: number }
+  | { kind: 'number'; values: Float32Array; min: number | null; max: number | null; missing: number }
+
+/**
+ * A dataset field's value for every row of an array-backed result, computed on the server from the complete index,
+ * so a map colours all of its points and not just the records loaded into the page. Categories come back as codes
+ * (`categories.length` marks every other value, -1 a missing one).
+ */
+export function loadFieldColumn(datasetId: string, artifact: Artifact, snapshotId: string, fieldId: string, resultSnapshotIds: string[] = []): Promise<FieldColumn> {
+  const parameters = new URLSearchParams({ field_id: fieldId, snapshot_id: snapshotId })
+  for (const id of resultSnapshotIds) parameters.append('result', id)
+  const url = `/api/v1/datasets/${encodeURIComponent(datasetId)}/column/${encodeURIComponent(artifact.id)}?${parameters}`
+  return memo(`${artifact.id}:column:${datasetId}:${parameters}`, async () => {
+    const response = await fetch(url, { credentials: 'same-origin' })
+    if (!response.ok) {
+      const detail = await response.json().then(body => (body as { detail?: unknown }).detail, () => undefined)
+      throw new Error(typeof detail === 'string' ? detail : `Field column request failed (${response.status})`)
+    }
+    const meta = JSON.parse(decodeURIComponent(response.headers.get('X-Atlas-Column') ?? '{}')) as { kind?: string; categories?: Array<{ value: string; count: number }>; other?: number; missing?: number; min?: number | null; max?: number | null }
+    const buffer = await response.arrayBuffer()
+    if (meta.kind === 'number') return { kind: 'number', values: new Float32Array(buffer), min: meta.min ?? null, max: meta.max ?? null, missing: meta.missing ?? 0 } as FieldColumn
+    if (meta.kind === 'category') return { kind: 'category', codes: new Int16Array(buffer), categories: meta.categories ?? [], other: meta.other ?? 0, missing: meta.missing ?? 0 } as FieldColumn
+    throw new Error('Unsupported field column')
+  })
+}
+
+/**
+ * How many categories a legend can name. Values beyond that, and the values the server already folded into "other",
+ * share one colour, so the legend always describes every coloured point.
+ */
+export function legendPlan(categories: Array<{ count: number }>, other: number, entries = 14): { named: number; rest: number } {
+  const named = categories.length + (other ? 1 : 0) <= entries ? categories.length : entries - 1
+  return { named, rest: categories.slice(named).reduce((total, category) => total + category.count, 0) + other }
+}
+
 /** One scalar column of an array-backed result (cluster label, outlier score, probability), with its row ids. */
 export async function loadColumn(artifact: Artifact, name: string): Promise<{ ids: string[]; values: Numeric }> {
   const [ids, column] = await Promise.all([loadIds(artifact), loadArray(artifact, name)])

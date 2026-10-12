@@ -12,6 +12,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
 from fastapi import FastAPI, HTTPException, Request
+from fastapi import Query as QueryParam
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, ConfigDict, Field
@@ -1189,6 +1190,26 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         entry=(bulk or {}).get('texts',{}).get(name)
         if entry is None:raise HTTPException(404,'No such text column')
         return FileResponse(bulk_directory(item,jobs.artifact_dir)/entry['file'],media_type='application/json',headers=immutable)
+    @app.get('/api/v1/datasets/{dataset_id}/column/{artifact_id}')
+    def dataset_column(dataset_id:str,artifact_id:str,field_id:str,snapshot_id:str,result:list[str]=QueryParam(default=[]),top:int=24):
+        """A dataset field's value for every row of an array-backed result, in that result's row order.
+
+        A map uses this to colour all of its points by a field of the complete index, not only the records loaded into the page.
+        Numbers come back as float32 (NaN where missing), categories as int16 codes; the meta header names the categories."""
+        import numpy as np
+        from urllib.parse import quote
+        from dataset_atlas.queries.embedding_space import bulk_directory
+        from dataset_atlas.storage import arrays as store
+        item=jobs.get_artifact(artifact_id) if jobs else None
+        bulk=item.data.get('bulk') if item else None
+        if not isinstance(bulk,dict):raise ValueError('Colouring by a field needs an array-backed result')
+        snapshot=complete_snapshot(dataset_id)
+        if snapshot_id!=snapshot.snapshot_id or snapshot_id not in item.snapshot_ids:raise ValueError('The result and the complete index are over different snapshots')
+        ids=store.read_ids(bulk_directory(item,jobs.artifact_dir),bulk)
+        answer=snapshot.column_values(ids,field_id,selected_artifacts(result),top=top)
+        array=answer.pop('values' if answer['kind']=='number' else 'codes')
+        return Response(array.tobytes(),media_type='application/octet-stream',headers={'X-Atlas-Dtype':str(array.dtype),'X-Atlas-Shape':str(len(array)),
+            'X-Atlas-Column':quote(json.dumps(answer,ensure_ascii=False)),'Access-Control-Expose-Headers':'X-Atlas-Dtype, X-Atlas-Shape, X-Atlas-Column'})
     @app.get('/api/v1/artifacts/{artifact_id}/arrays/{name}')
     def artifact_array(artifact_id:str,name:str):
         """One array as raw little-endian C-order bytes; dtype and shape are in the headers."""

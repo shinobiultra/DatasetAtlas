@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { BufferAttribute, BufferGeometry, CanvasTexture, Color, MOUSE, PerspectiveCamera, Points, PointsMaterial, Scene, TOUCH, WebGLRenderer } from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import type { Artifact, FieldDescriptor, Record as AtlasRecord } from '../generated'
-import { bulkOf, clusterSummary, colourSources, loadColumn, loadProjection, resultCount, type Numeric, type Projection } from '../lib/bulk'
+import { bulkOf, clusterSummary, colourSources, loadColumn, legendPlan, loadFieldColumn, loadProjection, resultCount, type FieldColumn, type Numeric, type Projection } from '../lib/bulk'
 import { display, shortId } from '../lib/format'
 import { fieldValue } from '../query'
 import { classColour } from '../ui/MediaView'
@@ -13,6 +13,8 @@ import * as Icon from '../ui/Icons'
 import { SelectionStrip } from './MapView'
 
 const MISSING = '#c9cfd9'
+const OTHER = new Color('#8b97a8')
+const LEGEND_ENTRIES = 14
 const DIM = new Color('#d3d9e1')
 const DEFAULT = new Color('#2563eb')
 
@@ -35,7 +37,7 @@ function roundSprite(): CanvasTexture {
  * Interactive 2D/3D map of a projection. Points come from arrays, so every point of a large run is
  * drawn, not only the records loaded into the page; the page's records add colours and thumbnails.
  */
-export default function Map3DView({ artifact, artifacts, records, colourField, selected, onSelect, onInspect, onOpen, matchedCount = null, totalSelected }: {
+export default function Map3DView({ artifact, artifacts, records, colourField, selected, onSelect, onInspect, onOpen, matchedCount = null, totalSelected, datasetId, snapshotId, resultSnapshotIds = [], completeIndex = false }: {
   artifact: Artifact
   artifacts: Artifact[]
   records: AtlasRecord[]
@@ -47,6 +49,11 @@ export default function Map3DView({ artifact, artifacts, records, colourField, s
   matchedCount?: number | null
   /** Selected points when they are held on the server (a whole population) and `selected` is empty. */
   totalSelected?: number
+  /** With these and a complete index, a field colours every point from the server instead of only the loaded records. */
+  datasetId?: string
+  snapshotId?: string
+  resultSnapshotIds?: string[]
+  completeIndex?: boolean
 }) {
   const stage = useRef<HTMLDivElement>(null)
   const [projection, setProjection] = useState<Projection | null>(null)
@@ -56,7 +63,8 @@ export default function Map3DView({ artifact, artifacts, records, colourField, s
   const [lasso, setLasso] = useState<Array<{ x: number; y: number }>>([])
   const sources = useMemo(() => colourSources(artifacts, artifact), [artifacts, artifact])
   const [sourceKey, setSourceKey] = useState('')
-  const source = sources.find(item => `${item.artifact.id}:${item.column}` === sourceKey) ?? (sourceKey === '' ? sources[0] : undefined)
+  // A field the user chose for colouring wins over the first result until they pick a result themselves.
+  const source = sources.find(item => `${item.artifact.id}:${item.column}` === sourceKey) ?? (sourceKey === '' && !colourField ? sources[0] : undefined)
   const [labels, setLabels] = useState<{ ids: string[]; values: Numeric } | null>(null)
   const three = useRef<{ render: () => void; project: () => Float32Array; resetView: () => void } | null>(null)
 
@@ -73,6 +81,19 @@ export default function Map3DView({ artifact, artifacts, records, colourField, s
     if (source) loadColumn(source.artifact, source.column).then(next => { if (live) setLabels(next) }).catch(() => { if (live) setLabels(null) })
     return () => { live = false }
   }, [source?.artifact.id, source?.column])
+
+  const [fieldColumn, setFieldColumn] = useState<FieldColumn | null>(null)
+  const [fieldNote, setFieldNote] = useState('')
+  const resultKey = resultSnapshotIds.join(',')
+  useEffect(() => {
+    let live = true
+    setFieldColumn(null); setFieldNote('')
+    if (!colourField || source || !completeIndex || !datasetId || !snapshotId || !bulkOf(artifact)) return
+    loadFieldColumn(datasetId, artifact, snapshotId, colourField.id, resultKey ? resultKey.split(',') : [])
+      .then(next => { if (live) setFieldColumn(next) })
+      .catch(failure => { if (live) setFieldNote(`${failure instanceof Error ? failure.message : failure}; coloured from the records loaded into the page`) })
+    return () => { live = false }
+  }, [colourField?.id, source?.artifact.id, source?.column, datasetId, snapshotId, artifact.id, resultKey, completeIndex])
 
   const index = useMemo(() => new Map((projection?.ids ?? []).map((id, row) => [id, row])), [projection])
 
@@ -111,6 +132,33 @@ export default function Map3DView({ artifact, artifacts, records, colourField, s
         { label: `${display(min)} (low)`, colour: 'hsl(222, 72%, 64%)' }, { label: `${display(max)} (high)`, colour: 'hsl(22, 72%, 44%)' },
       ], note: missing ? `${missing.toLocaleString()} points not in this result` : '' }
     }
+    if (colourField && fieldColumn && ((fieldColumn.kind === 'category' ? fieldColumn.codes : fieldColumn.values).length === count)) {
+      if (fieldColumn.kind === 'category') {
+        const { codes, categories } = fieldColumn
+        // What the legend can name; every value beyond it shares the one "other" colour, so the legend always matches the points.
+        const { named, rest } = legendPlan(categories, fieldColumn.other, LEGEND_ENTRIES)
+        const members = new Map<number, string[]>()
+        for (let row = 0; row < count; row++) {
+          const code = codes[row]
+          if (code < 0) { base.set(MISSING); paint(rgb, row, base); continue }
+          const group = code < named ? code : named
+          paint(rgb, row, group < named ? base.set(classColour(categories[group].value)) : OTHER)
+          const list = members.get(group)
+          if (list) list.push(projection.ids[row]); else members.set(group, [projection.ids[row]])
+        }
+        const legend: Entry[] = categories.slice(0, named).map((category, code) => ({ label: category.value, colour: classColour(category.value), count: category.count, ids: members.get(code) ?? [] }))
+        if (rest) legend.push({ label: 'Other values', colour: '#8b97a8', count: rest, ids: members.get(named) ?? [] })
+        return { rgb, legend, note: `${colourField.name}: all ${count.toLocaleString()} points${fieldColumn.missing ? ` · ${fieldColumn.missing.toLocaleString()} without a value` : ''}` }
+      }
+      const { values, min, max } = fieldColumn
+      for (let row = 0; row < count; row++) {
+        const value = values[row]
+        if (Number.isNaN(value)) { base.set(MISSING); paint(rgb, row, base); continue }
+        setRampColour(base, ((value - (min ?? 0)) / (((max ?? 1) - (min ?? 0)) || 1))); paint(rgb, row, base)
+      }
+      return { rgb, legend: [{ label: `${display(min)} (low)`, colour: 'hsl(222, 72%, 64%)' }, { label: `${display(max)} (high)`, colour: 'hsl(22, 72%, 44%)' }],
+        note: `${colourField.name}: all ${count.toLocaleString()} points${fieldColumn.missing ? ` · ${fieldColumn.missing.toLocaleString()} without a value` : ''}` }
+    }
     if (colourField && records.length) {
       const values = new Map(records.map(record => [record.id, fieldValue(record, colourField.id)]))
       const categories = new Map<string, number>()
@@ -124,11 +172,11 @@ export default function Map3DView({ artifact, artifacts, records, colourField, s
         base.set(classColour(key)); paint(rgb, row, base)
       })
       const legend = [...categories].sort((a, b) => b[1] - a[1]).slice(0, 12).map(([label, count]) => ({ label, colour: classColour(label), count }))
-      return { rgb, legend, note: `${colourField.name}: ${loaded.toLocaleString()} of ${count.toLocaleString()} points have a loaded value` }
+      return { rgb, legend, note: `${colourField.name}: ${loaded.toLocaleString()} of ${count.toLocaleString()} points have a loaded value${fieldNote ? ` · ${fieldNote}` : ''}` }
     }
     for (let row = 0; row < count; row++) paint(rgb, row, DEFAULT)
     return { rgb, legend: [], note: '' }
-  }, [projection, source, labels, colourField, records])
+  }, [projection, source, labels, colourField, records, fieldColumn, fieldNote])
 
   // Scene: built once per projection, then only colours, selection and size change.
   const scene = useRef<{ base: Points; top: Points; positions: Float32Array; setSelection: (rows: number[], palette: Float32Array) => void } | null>(null)

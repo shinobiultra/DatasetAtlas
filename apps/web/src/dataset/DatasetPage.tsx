@@ -496,6 +496,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
           <Suspense fallback={<div style={{ padding: 24 }}><Spinner label="Loading the 3D map…" /></div>}>
             <Map3DView
               artifact={projection} artifacts={artifacts.filter(item => item.unit === unit)} records={records} colourField={colourField} selected={selected}
+              datasetId={datasetId} snapshotId={snapshotId} resultSnapshotIds={resultSnapshotIds} completeIndex={scope === 'complete'}
               onInspect={inspect} onOpen={focusRecord} matchedCount={result?.matched_count ?? null} totalSelected={selectedCount}
               onSelect={(ids, mode) => {
                 setSelected(current => (mode === 'add' ? new Set([...current, ...ids]) : new Set(ids)))

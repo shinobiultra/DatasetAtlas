@@ -260,7 +260,37 @@ def run_model_task(processor_id: str, records: list[Record], config: dict[str, A
                                  "concurrency": plan.concurrency, "extra_body": plan.extra_body or None, **({"schema": plan.schema} if plan.schema else {})},
                   "template_sha256": content_id({"template": plan.template, "system": plan.system, "schema": plan.schema}, "prompt:"),
                   "example_prompt": example.get("example_prompt"), "sent": len(sendable)}
-    return BulkResult(ids=ids, arrays=arrays, texts=texts, skipped=skipped, provenance=provenance), provenance
+    return BulkResult(ids=ids, arrays=arrays, texts=texts, skipped=skipped, provenance=provenance,
+                      summary=model_run_summary(plan, ids, columns, skipped, prompt_tokens, completion_tokens, latency)), provenance
+
+
+def model_run_summary(plan: Plan, ids: list[str], columns: dict[str, list[Any]], skipped: dict[str, dict[str, Any]],
+                      prompt_tokens: list[int], completion_tokens: list[int], latency: list[float]) -> dict[str, Any]:
+    """What a finished model run looks like at a glance: how many records got a reply, why the rest did not, and the cost."""
+    reasons: dict[str, int] = defaultdict(int)
+    for entry in skipped.values():
+        reasons[entry.get("error") or entry["status"]] += 1
+    counted = lambda values: sum(value for value in values if value >= 0)
+    summary: dict[str, Any] = {"kind": plan.kind, "completed": len(ids), "not_completed": len(skipped),
+                               "reasons": [{"reason": reason, "count": count} for reason, count in sorted(reasons.items(), key=lambda item: -item[1])[:10]],
+                               "prompt_tokens": counted(prompt_tokens), "completion_tokens": counted(completion_tokens),
+                               "mean_latency_ms": round(float(np.mean(latency)), 1) if latency else None}
+    if plan.kind == "judge":
+        verdicts: dict[str, int] = defaultdict(int)
+        for verdict in columns["verdict"]:
+            verdicts[verdict] += 1
+        summary["verdicts"] = dict(verdicts)
+    if plan.kind == "tag":
+        # How the values are spread, for the fields with a few distinct values (enums and yes/no).
+        spread: dict[str, list[dict[str, Any]]] = {}
+        for name, spec in (plan.schema or {}).get("properties", {}).items():
+            if spec["type"] in {"string", "boolean"} and not (spec["type"] == "string" and "enum" not in spec):
+                counts: dict[str, int] = defaultdict(int)
+                for value in columns[name]:
+                    counts[value] += 1
+                spread[name] = [{"value": value, "count": count} for value, count in sorted(counts.items(), key=lambda item: -item[1])[:12]]
+        summary["values"] = spread
+    return summary
 
 
 def run_api_embeddings(records: list[Record], config: dict[str, Any]):

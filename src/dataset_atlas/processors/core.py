@@ -97,6 +97,9 @@ def describe_processors() -> list[dict[str, Any]]:
         method = ANALYSIS_METHODS.get(processor_id)
         if method:
             descriptions[-1]['backends'] = backend_choices(method)
+        if processor_id in {"vlm.answer", "vlm.tag", "vlm.judge"}:
+            from dataset_atlas.vlm import tasks
+            descriptions[-1]["preset"] = tasks.PRESETS[processor_id.split(".")[1]]  # the wording and limits a run starts from
     return descriptions
 
 

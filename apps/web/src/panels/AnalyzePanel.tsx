@@ -8,6 +8,9 @@ import { resultCount } from '../lib/bulk'
 import { OPTIONS, optionConfig } from './analysisOptions'
 import * as Icon from '../ui/Icons'
 import { ComparisonResults } from './ComparisonResults'
+import { ModelRunResults } from './ModelRunResults'
+import { ModelTaskForm } from './ModelTaskForm'
+import { emptyModelParams, isLoopbackUrl, isModelProcessor, modelConfig, type ModelParams } from './modelTasks'
 
 const NEEDS_EMBEDDING = ['project.', 'cluster.', 'outlier.']
 
@@ -15,8 +18,10 @@ const BACKEND_LABEL: Record<string, string> = { cuml: 'GPU · RAPIDS cuML', torc
 
 function summarise(estimate: Record<string, unknown>): string {
   const limits = estimate.resource_limits as { max_wall_seconds?: number } | undefined
+  const server = (estimate.processor_estimate as { provider?: { model?: string } } | undefined)?.provider?.model
   const parts = [
     typeof estimate.selected_count === 'number' ? `${estimate.selected_count.toLocaleString()} records` : '',
+    typeof estimate.remote_calls === 'number' && estimate.remote_calls > 0 ? `${estimate.remote_calls.toLocaleString()} requests${server ? ` to ${server}` : ''}` : '',
     estimate.storage === 'arrays' ? 'stored as arrays' : 'stored as JSON items',
     estimate.resource_class === 'gpu' ? 'uses the GPU lane' : typeof estimate.resource_class === 'string' ? `${estimate.resource_class} lane` : '',
     limits?.max_wall_seconds ? `stops after ${Math.round(limits.max_wall_seconds / 60)} min` : '',
@@ -24,9 +29,25 @@ function summarise(estimate: Record<string, unknown>): string {
   return parts.filter(Boolean).join(' · ')
 }
 
+/** The exact text the first record sends, so the wording is checked before anything is sent. */
+function examplePrompt(estimate: Record<string, unknown>) {
+  const info = estimate.processor_estimate as { example_prompt?: Array<{ role: string; text: string }>; example_record?: string; images_per_request?: number } | undefined
+  if (!info?.example_prompt?.length) return null
+  return (
+    <details className="disclosure" open>
+      <summary>Exact prompt for the first record{info.images_per_request ? ' · with its image' : ''}</summary>
+      <div className="body col" style={{ gap: 6 }}>
+        {info.example_prompt.map((message, index) => <div key={index}><div className="insp-kicker">{message.role}</div><pre className="raw" style={{ whiteSpace: 'pre-wrap' }}>{message.text}</pre></div>)}
+      </div>
+    </details>
+  )
+}
+
 const GROUP_LABEL: Record<string, string> = {
   detect: 'Detect objects or content',
   embed: 'Compute embeddings',
+  vlm: 'Ask a model server',
+  score: 'Score saved results',
   project: 'Project to 2D or 3D',
   cluster: 'Cluster',
   outlier: 'Score outliers',
@@ -66,17 +87,23 @@ export function AnalyzePanel({ selected, selectedCount, unit, saved, fields = []
   const [params, setParams] = useState<Record<string, string | number>>({})
   const [backend, setBackend] = useState('auto')
   const [storage, setStorage] = useState('auto')
+  const [modelParams, setModelParams] = useState<ModelParams>(emptyModelParams)
+  const [servers, setServers] = useState<Array<{ config: { id: string; model: string; base_url?: string } }>>([])
 
   const count = selectedCount ?? selected.length
   const needsEmbedding = NEEDS_EMBEDDING.some(prefix => processorId.startsWith(prefix))
   const processor = processors.find(item => item.id === processorId)
+  const modelRun = isModelProcessor(processorId)
+  const model = modelRun ? modelConfig(processorId, modelParams, processor?.preset) : { config: {}, problems: [] as string[] }
+  const loopbackServers = servers.filter(item => isLoopbackUrl(item.config.base_url))
 
   useEffect(() => {
     provider.processors().then(setProcessors).catch(failure => setMessage(String(failure)))
     provider.artifacts().then(items => setEmbeddings(items.filter(isEmbeddingArtifact))).catch(() => {})
+    provider.providers().then(items => setServers(items as typeof servers)).catch(() => {})
   }, [])
-  useEffect(() => { setParams({}); setBackend('auto'); setStorage('auto') }, [processorId])
-  useEffect(() => { setEstimate(null) }, [processorId, embeddingId, config, params, backend, storage, JSON.stringify(selected), saved?.id, leftField, rightField, comparisonKind, detectorId, displayThreshold])
+  useEffect(() => { setParams({}); setBackend('auto'); setStorage('auto'); setModelParams(emptyModelParams()) }, [processorId])
+  useEffect(() => { setEstimate(null) }, [processorId, embeddingId, config, params, modelParams, backend, storage, JSON.stringify(selected), saved?.id, leftField, rightField, comparisonKind, detectorId, displayThreshold])
 
   if (provider.mode === 'static') {
     return (
@@ -93,7 +120,7 @@ export function AnalyzePanel({ selected, selectedCount, unit, saved, fields = []
     const chosen = optionConfig(processorId, params)
     if (processor?.backends && backend !== 'auto') chosen.backend = backend
     if (storage !== 'auto') chosen.storage = storage
-    return { ...parsed, ...chosen, ...(needsEmbedding ? { embedding_artifact_id: embeddingId } : {}),
+    return { ...parsed, ...chosen, ...model.config, ...(needsEmbedding ? { embedding_artifact_id: embeddingId } : {}),
       ...(processorId === 'compare.fields' ? { left_field: leftField, right_field: rightField, kind: comparisonKind, population_scope: populationScope } : {}),
       ...(processorId === 'detect.view' ? { detector_artifact_id: detectorId, display_threshold: displayThreshold } : {}) }
   }
@@ -201,6 +228,11 @@ export function AnalyzePanel({ selected, selectedCount, unit, saved, fields = []
             </select>}</Field>
             <Field label="Display threshold" hint="Boxes and counts use this threshold; the extraction threshold stays recorded in the source run.">{id => <input id={id} className="input" type="number" min={0} max={1} step={0.01} value={displayThreshold} onChange={event => setDisplayThreshold(Number(event.target.value))} />}</Field>
           </>}
+          {modelRun && (
+            <ModelTaskForm processorId={processorId} preset={processor?.preset} params={modelParams} onChange={setModelParams} fields={fields}
+              servers={loopbackServers.map(item => ({ id: item.config.id, model: item.config.model }))} hiddenServers={servers.length - loopbackServers.length}
+              artifacts={artifacts} unit={unit} snapshotIds={saved?.snapshot_ids} />
+          )}
           {(OPTIONS[processorId] ?? []).map(option => (
             <Field key={option.key} label={option.label} hint={option.hint}>{id => option.kind === 'select' ? (
               <select id={id} className="select" value={String(params[option.key] ?? option.initial)} onChange={event => setParams(current => ({ ...current, [option.key]: event.target.value }))}>
@@ -219,7 +251,7 @@ export function AnalyzePanel({ selected, selectedCount, unit, saved, fields = []
               </select>
             )}</Field>
           )}
-          {(processorId.startsWith('embed.') || NEEDS_EMBEDDING.some(prefix => processorId.startsWith(prefix))) && (
+          {!modelRun && (processorId.startsWith('embed.') || NEEDS_EMBEDDING.some(prefix => processorId.startsWith(prefix))) && (
             <Field label="Result storage" hint="Above 5,000 records results are stored as binary arrays; they are far smaller and faster. Arrays cannot yet be moved to another workspace.">{id => (
               <select id={id} className="select" value={storage} onChange={event => setStorage(event.target.value)}>
                 <option value="auto">Automatic</option><option value="arrays">Arrays</option><option value="json">JSON items</option>
@@ -237,14 +269,16 @@ export function AnalyzePanel({ selected, selectedCount, unit, saved, fields = []
       )}
 
       <div className="insp-section">
-        <button type="button" className="btn" disabled={!processorId || !count || busy || (needsEmbedding && !embeddingId) || (processorId === 'detect.view' && !detectorId) || (processorId === 'compare.fields' && (!leftField || !rightField))} onClick={runEstimate}>
+        <button type="button" className="btn" disabled={!processorId || !count || busy || model.problems.length > 0 || (needsEmbedding && !embeddingId) || (processorId === 'detect.view' && !detectorId) || (processorId === 'compare.fields' && (!leftField || !rightField))} onClick={runEstimate}>
           {busy && !estimate ? <Spinner label="Estimating…" /> : <>Estimate resources and coverage</>}
         </button>
+        {model.problems.length > 0 && <ul className="hint" style={{ margin: 0, paddingLeft: 18 }}>{model.problems.map(problem => <li key={problem}>{problem}</li>)}</ul>}
         {estimate && (
           <details className="disclosure" open>
             <summary>Resource and coverage estimate</summary>
             <div className="body">
               <p className="hint" style={{ marginBottom: 8 }}>{summarise(estimate)}</p>
+              {examplePrompt(estimate)}
               <pre className="raw">{JSON.stringify(estimate, null, 2)}</pre>
             </div>
           </details>
@@ -256,6 +290,7 @@ export function AnalyzePanel({ selected, selectedCount, unit, saved, fields = []
         {message && <Notice tone={message.startsWith('Run ') ? 'info' : 'warn'}>{message}</Notice>}
       </div>
       <ComparisonResults artifacts={artifacts.filter(artifact => artifact.unit === unit)} onSelectIds={onSelectIds} />
+      <ModelRunResults artifacts={artifacts.filter(artifact => artifact.unit === unit)} />
     </>
   )
 }

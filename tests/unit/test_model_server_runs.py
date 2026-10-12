@@ -284,6 +284,8 @@ def test_server_failures_become_failed_records_not_a_failed_run(server, tmp_path
     server.reply = lambda body: ""  # the model says nothing
     result = run_processor("vlm.answer", pictures(tmp_path, 2), config(server, tmp_path))
     assert result["bulk"].ids == [] and all(row["status"] == "failed" and "nothing" in row["error"] for row in result["bulk"].skipped.values())
+    summary = result["bulk"].summary
+    assert summary["completed"] == 0 and summary["not_completed"] == 2 and summary["reasons"] == [{"reason": "The model returned nothing (stopped: stop)", "count": 2}]
     server.always_status = 400
     failed = run_processor("vlm.answer", pictures(tmp_path, 1), config(server, tmp_path))
     assert failed["bulk"].skipped["q0"]["status"] == "failed" and "HTTP 400" in failed["bulk"].skipped["q0"]["error"]
@@ -294,6 +296,8 @@ def test_tags_become_typed_columns(server, tmp_path):
     result = run_processor("vlm.tag", pictures(tmp_path, 3), config(server, tmp_path, schema=schema, use_images=False))
     bulk = result["bulk"]
     assert bulk.texts["category"] == ["colour", "count", "colour"] and bulk.arrays["confident"].tolist() == [1, 1, 1] and bulk.arrays["score"].dtype == np.float32
+    assert bulk.summary["values"]["category"] == [{"value": "colour", "count": 2}, {"value": "count", "count": 1}]
+    assert bulk.summary["values"]["confident"] == [{"value": "true", "count": 3}] and "score" not in bulk.summary["values"]
     body = server.requests[0][1]
     assert body["response_format"]["json_schema"]["schema"]["properties"]["category"]["enum"] == ["colour", "count"]
     assert "Reply with only a JSON object" in FakeServer.prompt(body) and "category: one of: colour, count" in FakeServer.prompt(body)
@@ -310,6 +314,7 @@ def test_judging_reads_saved_answers_and_a_reference_field(server, tmp_path):
     result = run_processor("vlm.judge", records, config(server, tmp_path, text_source=source, reference_field="source.answers", use_images=False))
     bulk = result["bulk"]
     assert bulk.texts["verdict"] == ["correct", "incorrect"] and bulk.arrays["correct"].tolist() == [1, 0]
+    assert bulk.summary["verdicts"] == {"correct": 1, "incorrect": 1} and bulk.summary["completed"] == 2 and bulk.summary["not_completed"] == 0
     prompts = [FakeServer.prompt(body) for _, body in server.requests]
     red = next(prompt for prompt in prompts if "Proposed answer: red" in prompt)  # requests are concurrent: find it by content
     assert "Reference answers: red | red" in red and "verdict: one of: correct, incorrect, unsure" in red
@@ -369,6 +374,7 @@ def test_a_run_through_the_api_uses_the_configured_loopback_provider_and_joins_i
         assert state["status"] == "completed", state.get("errors")
         artifact = client.get(f"/api/v1/artifacts/{state['artifact_ids'][0]}").json()
         assert artifact["data"]["bulk"]["texts"]["answer"]["count"] == len(ids) and "provider" not in artifact["provenance"]["config"]
+        assert artifact["data"]["summary"]["completed"] == len(ids) and artifact["data"]["summary"]["not_completed"] == 0
         assert client.get(f"/api/v1/artifacts/{artifact['id']}/texts/answer").json() == ["two"] * len(ids)
         assert len(server.requests) == len(ids)
         # The answers join onto records as an ordinary text field.
@@ -408,3 +414,11 @@ def test_a_reply_that_is_all_reasoning_says_so(ollama, tmp_path):
         ollama.httpd.RequestHandlerClass.do_POST = original
     error = result["bulk"].skipped["q0"]["error"]
     assert "reasoning" in error and "max_tokens" in error and "length" in error
+
+
+def test_the_processor_list_carries_each_tasks_starting_prompt():
+    from dataset_atlas.processors import describe_processors
+    rows = {row["id"]: row for row in describe_processors()}
+    for processor_id, kind in (("vlm.answer", "answer"), ("vlm.tag", "tag"), ("vlm.judge", "judge")):
+        assert rows[processor_id]["preset"] == tasks.PRESETS[kind] and rows[processor_id]["preset"]["template"].strip()
+    assert "preset" not in rows["embed.api"] and rows["embed.api"]["available"] is True

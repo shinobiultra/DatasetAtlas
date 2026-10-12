@@ -3,7 +3,7 @@ import { aggregatePack, assetRecords, packFields, queryPack } from './query'
 import type { LivePreviewSpec } from './lib/hfRows'
 
 export type BackendChoice = { id: 'cpu' | 'torch' | 'cuml'; installed: boolean; needs_device: boolean }
-export type ProcessorDescriptor = { id: string; name?: string; description?: string; available?: boolean; reason?: string; backends?: BackendChoice[]; input_units?: string[]; configured_recipe?: boolean; requires_local_model?: boolean; config_schema?: Record<string, unknown> }
+export type ProcessorDescriptor = { id: string; name?: string; description?: string; available?: boolean; reason?: string; backends?: BackendChoice[]; input_units?: string[]; configured_recipe?: boolean; requires_local_model?: boolean; config_schema?: Record<string, unknown>; preset?: { template: string; use_images: boolean; max_tokens: number } }
 export type CompleteScope = { snapshot_id: string; unit: 'asset' | 'example' | 'entity' | 'conversation'; population_scope: 'complete'; record_count: number; count_status: 'exact' | 'estimated' | 'unknown'; fields: FieldDescriptor[] }
 
 /** One catalogue card's real preview tiles. Never synthesized. */

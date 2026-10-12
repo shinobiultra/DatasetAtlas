@@ -5,7 +5,8 @@ import type { Artifact } from '../generated'
  * rather than as one JSON item per record, so a 200k-point projection is a 2.5 MB buffer, not a 30 MB parse.
  */
 export type BulkEntry = { file: string; dtype: string; shape: number[]; bytes: number; sha256: string }
-export type Bulk = { dir: string; count: number; arrays: Record<string, BulkEntry>; extras?: Record<string, BulkEntry> }
+export type TextEntry = { file: string; bytes: number; sha256: string }
+export type Bulk = { dir: string; count: number; arrays: Record<string, BulkEntry>; extras?: Record<string, BulkEntry>; texts?: Record<string, TextEntry> }
 export type ClusterRow = { cluster: number; size: number; mean_distance_to_centroid?: number; exemplar_ids?: string[] }
 export type ClusterSummary = { clusters: ClusterRow[]; noise: number; cluster_count: number; silhouette_sample?: number | null }
 
@@ -50,6 +51,15 @@ export function loadIds(artifact: Artifact): Promise<string[]> {
   return memo(`${artifact.id}:ids`, async () => {
     const response = await fetch(`${base(artifact)}/ids`, { credentials: 'same-origin' })
     if (!response.ok) throw new Error(`Result ids request failed (${response.status})`)
+    return response.json() as Promise<string[]>
+  })
+}
+
+/** One string per row of a text column (answers, labels, verdicts), aligned with `loadIds`. */
+export function loadTexts(artifact: Artifact, name: string): Promise<string[]> {
+  return memo(`${artifact.id}:text:${name}`, async () => {
+    const response = await fetch(`${base(artifact)}/texts/${encodeURIComponent(name)}`, { credentials: 'same-origin' })
+    if (!response.ok) throw new Error(`Result text column ${name} request failed (${response.status})`)
     return response.json() as Promise<string[]>
   })
 }

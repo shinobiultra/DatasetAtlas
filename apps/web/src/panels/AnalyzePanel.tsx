@@ -36,8 +36,10 @@ const GROUP_LABEL: Record<string, string> = {
 }
 
 /** One consistent form: analysis → input → recipe → output → estimate → run. */
-export function AnalyzePanel({ selected, unit, saved, fields = [], artifacts = [], populationScope = 'preview', onSave, onRan, onSelectIds }: {
+export function AnalyzePanel({ selected, selectedCount, unit, saved, fields = [], artifacts = [], populationScope = 'preview', onSave, onRan, onSelectIds }: {
   selected: string[]
+  /** Set when the selection is held on the server (a whole population) and `selected` is empty. */
+  selectedCount?: number
   unit: Unit
   saved: Selection | null
   fields?: FieldDescriptor[]
@@ -65,6 +67,7 @@ export function AnalyzePanel({ selected, unit, saved, fields = [], artifacts = [
   const [backend, setBackend] = useState('auto')
   const [storage, setStorage] = useState('auto')
 
+  const count = selectedCount ?? selected.length
   const needsEmbedding = NEEDS_EMBEDDING.some(prefix => processorId.startsWith(prefix))
   const processor = processors.find(item => item.id === processorId)
 
@@ -132,7 +135,7 @@ export function AnalyzePanel({ selected, unit, saved, fields = [], artifacts = [
     <>
       <div className="insp-section">
         <p style={{ fontSize: 'var(--fs-md)' }}>
-          <strong>Analyze {compact(selected.length)} {unit} records</strong>
+          <strong>Analyze {compact(count)} {unit} records</strong>
           {saved ? <> · frozen as “{saved.name}”</> : <> · the selection is frozen when you estimate</>}
         </p>
       </div>
@@ -164,7 +167,7 @@ export function AnalyzePanel({ selected, unit, saved, fields = [], artifacts = [
       {processorId && (
         <div className="insp-section">
           <Field label="Input" hint={`Current selection · ${unit} unit · original representations`}>{id => (
-            <input id={id} className="input" readOnly value={`${selected.length.toLocaleString()} selected ${unit} records`} />
+            <input id={id} className="input" readOnly value={`${count.toLocaleString()} selected ${unit} records`} />
           )}</Field>
           {needsEmbedding && (
             <Field label="Embedding run" hint="A projection or cluster needs an existing embedding space over the same snapshot.">{id => (
@@ -234,7 +237,7 @@ export function AnalyzePanel({ selected, unit, saved, fields = [], artifacts = [
       )}
 
       <div className="insp-section">
-        <button type="button" className="btn" disabled={!processorId || !selected.length || busy || (needsEmbedding && !embeddingId) || (processorId === 'detect.view' && !detectorId) || (processorId === 'compare.fields' && (!leftField || !rightField))} onClick={runEstimate}>
+        <button type="button" className="btn" disabled={!processorId || !count || busy || (needsEmbedding && !embeddingId) || (processorId === 'detect.view' && !detectorId) || (processorId === 'compare.fields' && (!leftField || !rightField))} onClick={runEstimate}>
           {busy && !estimate ? <Spinner label="Estimating…" /> : <>Estimate resources and coverage</>}
         </button>
         {estimate && (

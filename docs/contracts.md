@@ -42,6 +42,14 @@ source inventory or archive directory before activation. Local media inventories
 copied into the immutable prepared version. Pruning preserves their transitive source
 version dependencies and never removes a running preparation.
 
+Selecting a whole population: `POST /selections/population` {dataset_id, query, name?, limit?} resolves every match on the
+server (complete snapshots in one scan, in the snapshot's own order) and returns a `Selection` with `method: population`,
+`ids: []` and `size`. Selections over 10,000 ids keep their ids in `work/selection-ids/<id>.json` (checksummed in
+`atlas.sqlite`); listings and responses carry only the summary, `GET /selections/{id}/export` refuses them, and
+`/runs` accepts them. Columnar runs freeze only what their processor reads (identity for projection, clustering and
+neighbours; text and assets for embeddings), and their estimate digest binds the content-addressed selection rather than
+re-hashing every record.
+
 Large runs (`config.storage: "arrays"`, automatic above 5,000 records) are columnar. Their artifact has no `data.items` or
 `data.points`; `data.bulk` is `{dir, count, ids: {file, sha256, bytes}, arrays: {name: {file, dtype, shape, sha256, bytes}},
 extras?}` over a directory of `.npy` files beside `ids.json` (rows follow selection order; records that were skipped or

@@ -61,6 +61,14 @@ class RecordRequest(BaseModel):
     ids: list[str] = Field(min_length=1, max_length=1000)
     snapshot_ids: list[str] | None = Field(default=None,min_length=1,max_length=1000)
 
+class PopulationRequest(BaseModel):
+    """Select every record a query matches, on the server, without moving the ids through the browser."""
+    model_config=ConfigDict(extra='forbid')
+    dataset_id: str
+    query: Query
+    name: str = Field(default='',max_length=200)
+    limit: int = Field(default=1_000_000,ge=1,le=2_000_000)
+
 class PublicationRequest(BaseModel):
     model_config=ConfigDict(extra='forbid')
     max_bytes: int = Field(default=100_000_000,ge=1,le=1_000_000_000)
@@ -198,25 +206,55 @@ def media_response(data:bytes,media_type:str,request:Request):
     headers['Content-Length']=str(len(data))
     return Response(b'' if request.method=='HEAD' else data,status_code=status,media_type=media_type,headers=headers)
 
+INLINE_SELECTION_IDS=10_000  # larger selections keep their ids in a side file and list only a summary
+
 class State:
     def __init__(self,path):
-        self.path=path
+        self.path=Path(path)
+        self.ids_dir=self.path.parent/'selection-ids'
         with self.connection() as db:
             db.execute('CREATE TABLE IF NOT EXISTS selections (id TEXT PRIMARY KEY, body TEXT NOT NULL)')
+            db.execute('CREATE TABLE IF NOT EXISTS selection_ids (id TEXT PRIMARY KEY, sha256 TEXT NOT NULL, count INTEGER NOT NULL)')
             db.execute('CREATE TABLE IF NOT EXISTS notes (id TEXT PRIMARY KEY, body TEXT NOT NULL)')
     def connection(self):
         db=sqlite3.connect(self.path);db.execute('PRAGMA journal_mode=WAL');return db
     def list(self):
+        """Every selection; large ones as summaries (empty `ids`, `size` set)."""
         with self.connection() as db:return [Selection.model_validate_json(row[0]) for row in db.execute('SELECT body FROM selections ORDER BY id')]
-    def get(self,id):
-        with self.connection() as db:row=db.execute('SELECT body FROM selections WHERE id=?',(id,)).fetchone()
+    def get(self,id,ids=True):
+        with self.connection() as db:
+            row=db.execute('SELECT body FROM selections WHERE id=?',(id,)).fetchone()
+            side=db.execute('SELECT sha256,count FROM selection_ids WHERE id=?',(id,)).fetchone()
         if not row:raise KeyError(id)
-        return Selection.model_validate_json(row[0])
+        selection=Selection.model_validate_json(row[0])
+        if side and ids:
+            payload=(self.ids_dir/f'{id}.json').read_bytes()
+            if hashlib.sha256(payload).hexdigest()!=side[0]:raise ValueError('Stored selection ids do not match their checksum')
+            values=json.loads(payload)
+            if len(values)!=side[1]:raise ValueError('Stored selection id count disagrees with its record')
+            selection=selection.model_copy(update={'ids':values})
+        return selection
+    @staticmethod
+    def summary(selection):
+        """What listings and responses carry: large selections without their ids."""
+        if len(selection.ids)>INLINE_SELECTION_IDS:return selection.model_copy(update={'ids':[],'size':len(selection.ids)})
+        return selection
     def put(self,selection):
+        large=len(selection.ids)>INLINE_SELECTION_IDS
+        stored=self.summary(selection)
         with self.connection() as db:
             old=db.execute('SELECT body FROM selections WHERE id=?',(selection.id,)).fetchone()
-            body=selection.model_dump_json()
+            body=stored.model_dump_json()
             if old and old[0]!=body:raise ValueError('Selections are immutable; create a new selection')
+            if large:
+                if not re.fullmatch(r'[A-Za-z0-9_.-]{1,100}',selection.id):raise ValueError('Invalid selection id')
+                payload=json.dumps(selection.ids,ensure_ascii=False,separators=(',',':')).encode()
+                self.ids_dir.mkdir(exist_ok=True)
+                target=self.ids_dir/f'{selection.id}.json'
+                if not target.exists():
+                    temporary=target.with_name(target.name+'.tmp')
+                    temporary.write_bytes(payload);os.replace(temporary,target)
+                db.execute('INSERT OR IGNORE INTO selection_ids VALUES (?,?,?)',(selection.id,hashlib.sha256(payload).hexdigest(),len(selection.ids)))
             db.execute('INSERT OR IGNORE INTO selections VALUES (?,?)',(selection.id,body))
 
 def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None, allowed_hosts: list[str]|None=None) -> FastAPI:
@@ -397,13 +435,45 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
                     response=snap.query(Query(snapshot_id=snap.snapshot_id,population_scope='complete',unit=snap.unit,filter={'field_id':'id','op':'eq','value':record_id},limit=1))
                     if response.records:return prepared_record(response.records[0],dataset) if prepare_media else response.records[0]
         return None
+    def bulk_records(selection,prepare_media):
+        """Records of a large selection with one scan per dataset version, not one query per id."""
+        wanted=list(selection.ids);found={}
+        for dataset_id in selection.dataset_ids:
+            if not registry.has(dataset_id):continue
+            for dataset,pack_path,snapshot_path in registry.versions(dataset_id):
+                if dataset.snapshot_id not in selection.snapshot_ids:continue
+                if pack_path.is_file():
+                    _,index=indexed_pack(pack_path)
+                    for identity in wanted:
+                        record=index.get(identity) if identity not in found else None
+                        if record is not None:found[identity]=prepared_record(record,dataset) if prepare_media else record.model_copy(deep=True)
+                remaining=[identity for identity in wanted if identity not in found]
+                if remaining and (snapshot_path/'manifest.json').exists():
+                    from dataset_atlas.queries.parquet import ParquetSnapshot
+                    if str(snapshot_path) not in snapshot_cache:snapshot_cache[str(snapshot_path)]=ParquetSnapshot(snapshot_path.parent,snapshot_path)
+                    for identity,record in snapshot_cache[str(snapshot_path)].records(remaining,missing_ok=True).items():
+                        found[identity]=prepared_record(record,dataset) if prepare_media else record
+        for identity in wanted:
+            if identity not in found:raise ValueError(f'Selected record unavailable: {identity}')
+        return [found[identity] for identity in wanted]
+    resolved_population={}  # selection id -> (expiry, records): estimate and create resolve the same large selection back to back
     def selection_records(selection,prepare_media=True):
         records=[]
-        for identity in selection.ids:
-            record=find_record(identity,prepare_media=prepare_media,snapshot_ids=selection.snapshot_ids)
-            if record is None:raise ValueError(f'Selected record unavailable: {identity}')
+        if len(selection.ids)>500:
+            import time
+            key=(selection.id,prepare_media,hash(tuple(selection.ids)))  # the ids themselves, not just the id: a copy with other ids must not hit
+            hit=resolved_population.get(key)
+            if hit and hit[0]>time.monotonic():records=hit[1]
+            else:
+                records=bulk_records(selection,prepare_media)
+                resolved_population.clear();resolved_population[key]=(time.monotonic()+300,records)
+        else:
+            for identity in selection.ids:
+                record=find_record(identity,prepare_media=prepare_media,snapshot_ids=selection.snapshot_ids)
+                if record is None:raise ValueError(f'Selected record unavailable: {identity}')
+                records.append(record)
+        for record in records:
             if record.snapshot_id not in selection.snapshot_ids or record.dataset_id not in selection.dataset_ids or record.unit!=selection.unit:raise ValueError('Selection identity, unit or snapshot mismatch')
-            records.append(record)
         result_ids=selection.query.get('result_snapshot_ids',[])
         if result_ids:
             from dataset_atlas.models import Pack
@@ -829,6 +899,30 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         return result
     @app.get('/api/v1/selections')
     def selections():return state.list()
+    @app.post('/api/v1/selections/population')
+    def population_selection(body:PopulationRequest):
+        dataset=registry.dataset(body.dataset_id)
+        query=body.query
+        if query.sample:raise ValueError('A sampled query selects through its pages; clear the sample to select the whole population')
+        if query.population_scope=='complete':
+            snapshot=complete_snapshot(body.dataset_id)
+            ids=snapshot.ids(query,selected_artifacts(query.result_snapshot_ids),limit=body.limit)
+        else:
+            import time
+            deadline=time.monotonic()+30
+            ids=[];page=query
+            while True:
+                found=query_pack(browser_pack(body.dataset_id,query.result_snapshot_ids),page)
+                ids.extend(record.id for record in found.records)
+                if not found.cursor:break
+                if len(ids)>body.limit:raise ValueError(f'The filter matches more than {body.limit:,} records; narrow it first')
+                if time.monotonic()>deadline:raise ValueError('Resolving the population exceeded 30 seconds; narrow the filter')
+                page=page.model_copy(update={'cursor':found.cursor,'limit':1000})
+        if not ids:raise ValueError('The filter matches no records')
+        selection=Selection(id='',name=body.name.strip() or f'{dataset.name} — {len(ids):,} {query.unit} records',ids=ids,unit=query.unit,snapshot_ids=[query.snapshot_id],
+            dataset_ids=[body.dataset_id],method='population',query=query.model_dump(mode='json'),created_at=datetime.now(timezone.utc).isoformat(),size=len(ids))
+        selection.id=content_id(selection.model_dump(exclude={'id'}),'selection-')
+        state.put(selection);return state.summary(selection)
     @app.post('/api/v1/selections/import')
     def import_selection_payload(payload:dict):
         expected={'schema_version','selection','records','checksum','checksum_algorithm','notice'}
@@ -857,10 +951,11 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         if not selection.id:selection.id=content_id(selection.model_dump(exclude={'id'}),'selection-')
         state.put(selection);return selection
     @app.get('/api/v1/selections/{selection_id}')
-    def get_selection(selection_id:str):return state.get(selection_id)
+    def get_selection(selection_id:str):return state.summary(state.get(selection_id))
     @app.get('/api/v1/selections/{selection_id}/export')
     def export_selection(selection_id:str):
         selection=state.get(selection_id)
+        if len(selection.ids)>INLINE_SELECTION_IDS:raise ValueError(f'Portable export is limited to {INLINE_SELECTION_IDS:,} records; export a smaller selection or use the CLI')
         records=selection_records(selection,prepare_media=False)
         from dataset_atlas.exports import selection_export_payload
         payload=selection_export_payload(selection,records)
@@ -903,6 +998,8 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
             merged['storage']='arrays'  # thousands of records are stored as arrays, not one JSON file each
         return analysis_config(root,merged,roots)
     app.state.selection_records=selection_records
+    app.state.selection_by_id=lambda identity:state.get(identity)
+    app.state.selection_ids=lambda identity:state.get(identity).ids
     app.state.run_config=run_config
     @app.get('/api/v1/processors')
     def processors():
@@ -941,6 +1038,14 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         config=run_config(body.processor_id,body.config,selection)
         return jobs.estimate(selection,local_run_records(selection,body.processor_id,config),body.processor_id,config)
     def local_run_records(selection,processor_id,config):
+        if config.get('storage')=='arrays' and selection.method=='population' and processor_id.startswith(('project.','cluster.','outlier.')) and len(selection.dataset_ids)==1 and len(selection.snapshot_ids)==1:
+            # These read vectors by id and never touch record content, and a population selection came from the snapshot itself:
+            # its identity is the snapshot's, so no record needs to be read at all.
+            try:snapshot=complete_snapshot(selection.dataset_ids[0])
+            except (ValueError,FileNotFoundError,KeyError):snapshot=None
+            if snapshot is not None and snapshot.snapshot_id==selection.snapshot_ids[0] and snapshot.unit==selection.unit:
+                from dataset_atlas.models import Record as IdentityRecord
+                return [IdentityRecord(id=identity,dataset_id=snapshot.dataset_id,release_id=snapshot.release_id,snapshot_id=snapshot.snapshot_id,unit=snapshot.unit) for identity in selection.ids]
         records=selection_records(selection,prepare_media=False)
         image_input=processor_id in {'quality.basic','detect.nudenet','detect.coco_v1'} or (processor_id=='embed.siglip2' and config.get('representation','image')=='image')
         if not image_input:return records
@@ -956,7 +1061,7 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         records=local_run_records(selection,body.processor_id,config)
         estimate=jobs.estimate(selection,records,body.processor_id,config)
         if body.estimate_digest!=estimate['estimate_digest']:raise ValueError('Preview the run estimate and approve its unchanged budget before starting')
-        return jobs.create(selection,records,body.processor_id,config)
+        return jobs.create(selection,records,body.processor_id,config,estimate=estimate)
     @app.get('/api/v1/runs/{run_id}')
     def run(run_id:str):
         if not jobs:raise HTTPException(503,'Job coordinator unavailable')

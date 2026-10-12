@@ -95,7 +95,7 @@ export function CollectionsPage({ openId, onOpenCollection, onOpenDataset, onToa
                       <button type="button" className="linkish truncate" onClick={() => onOpenCollection(selection.id)}>{selection.name || 'Untitled selection'}</button>
                       <small>{relativeTime(selection.created_at)}</small>
                     </span>
-                    <span><Tag tone="accent">{selection.ids.length.toLocaleString()} {selection.unit}</Tag></span>
+                    <span><Tag tone="accent">{(selection.size ?? selection.ids.length).toLocaleString()} {selection.unit}</Tag></span>
                     <span className="truncate" title={selection.dataset_ids.join(', ')}>
                       <small>{selection.dataset_ids.join(', ')} · {titleCase(selection.method ?? 'manual')}{selection.seed === null || selection.seed === undefined ? '' : ` · seed ${selection.seed}`}</small>
                     </span>
@@ -124,6 +124,8 @@ function CollectionDetail({ selection, onBack, onToast }: { selection: Selection
   useEffect(() => {
     let live = true
     setRecords(null); setError('')
+    // A whole-population selection keeps its ids on the server; there is no list to resolve here.
+    if (!selection.ids.length && selection.size) { setRecords([]); return }
     provider.records(selection.ids, selection.snapshot_ids).then(async rows => {
       const versions = [...new Map(rows.map(record => [`${record.dataset_id}\0${record.snapshot_id}`, record])).values()]
       const descriptors = await Promise.all(versions.map(record => provider.fields(record.dataset_id, 'preview', record.snapshot_id)))
@@ -159,7 +161,7 @@ function CollectionDetail({ selection, onBack, onToast }: { selection: Selection
           </button>
         </div>
         <div className="scopeline">
-          <strong>{selection.ids.length.toLocaleString()} frozen {selection.unit} IDs</strong>
+          <strong>{(selection.size ?? selection.ids.length).toLocaleString()} frozen {selection.unit} IDs</strong>
           <span className="sep">·</span>
           <span>{titleCase(selection.method ?? 'manual')}{selection.seed === null || selection.seed === undefined ? '' : ` · seed ${selection.seed}`}</span>
           <span className="sep">·</span>
@@ -170,6 +172,9 @@ function CollectionDetail({ selection, onBack, onToast }: { selection: Selection
         <div className="work-scroll">
           {error && <div style={{ padding: 16 }}><Notice tone="error">{error}</Notice></div>}
           {records === null && !error && <div style={{ padding: 20 }}><Spinner label="Resolving frozen IDs against local records…" /></div>}
+          {!selection.ids.length && selection.size ? (
+            <div style={{ padding: 16 }}><Notice tone="info">This selection covers a whole population of {selection.size.toLocaleString()} records, which stay on the server. Select all matching records on the dataset page to analyse them.</Notice></div>
+          ) : null}
           {records && records.length < selection.ids.length && (
             <div style={{ padding: '12px 16px 0' }}>
               <Notice tone="warn">{(selection.ids.length - records.length).toLocaleString()} saved IDs did not resolve in this deployment. They are still recorded in the selection.</Notice>

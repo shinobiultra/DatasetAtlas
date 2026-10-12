@@ -51,7 +51,12 @@ def install(config, stage):
     import resource
     bounds = limits(config)
     cpu = bounds['max_cpu_seconds']
-    resource.setrlimit(resource.RLIMIT_CPU, (cpu, cpu + 1))
+    # A hard limit inherited from the parent (a shell's `ulimit -t`, a sandbox) cannot be raised, only matched; asking for more would
+    # crash the worker before it did anything, so take what is allowed. The wall-time and RSS watchdogs below still apply.
+    _, inherited = resource.getrlimit(resource.RLIMIT_CPU)
+    hard = cpu + 1 if inherited == resource.RLIM_INFINITY else min(cpu + 1, inherited)
+    cpu = min(cpu, hard)
+    resource.setrlimit(resource.RLIMIT_CPU, (cpu, hard))
     started = time.monotonic()
     def terminate(kind, observed):
         path = Path(stage) / 'resource-error.receipt'

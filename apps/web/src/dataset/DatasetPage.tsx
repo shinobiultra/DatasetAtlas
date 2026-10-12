@@ -83,6 +83,8 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
   const [extraRecord, setExtraRecord] = useState<AtlasRecord | null>(null)
   const [panel, setPanel] = useState<Panel | null>(null)
   const [savedSelection, setSavedSelection] = useState<Selection | null>(null)
+  /** A whole population selected on the server: its ids never reach the browser, only this summary. */
+  const [population, setPopulation] = useState<Selection | null>(null)
   const [selectionName, setSelectionName] = useState('')
   const [colourFieldId, setColourFieldId] = useState('')
   const [projectionId, setProjectionId] = useState('')
@@ -97,7 +99,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
   useEffect(() => {
     let live = true
     setDataset(null); setLoadError(''); setFields([]); setArtifacts([]); setComplete(null); setScope('preview')
-    setSearch(''); setClauses([]); setSort(null); setSample(null); setSelected(new Set()); setInspected(null)
+    setSearch(''); setClauses([]); setSort(null); setSample(null); setSelected(new Set()); setPopulation(null); setInspected(null)
     setExtraRecord(null); setPanel(null); setCentre('browse'); setComparePair([null, null]); setSavedSelection(null)
     setColourFieldId(''); setProjectionId('')
     setSelectedResultIds([])
@@ -137,7 +139,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
         setArtifacts(nextArtifacts.filter(item => item.snapshot_ids.includes(dataset.snapshot_id ?? '')))
         setUnit((dataset.coverage?.unit as Unit) ?? 'example')
       }
-      setClauses([]); setSort(null); setSelected(new Set()); setInspected(null); setCentre('browse')
+      setClauses([]); setSort(null); setSelected(new Set()); setPopulation(null); setInspected(null); setCentre('browse')
       setSelectedResultIds([]); setColourFieldId('')
       setScope(next)
       setLoadError('')
@@ -206,6 +208,9 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
 
   /* ---------- selection helpers ---------- */
   useEffect(() => { setSavedSelection(null) }, [selected])
+  // Choosing individual records replaces a whole-population selection.
+  useEffect(() => { if (selected.size) setPopulation(null) }, [selected])
+  const selectedCount = population?.size ?? selected.size
 
   const toggle = useCallback((id: string, checked: boolean) => {
     setSelected(current => {
@@ -252,7 +257,17 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
     if (!query || !result) return
     const total = result.matched_count
     if (total === null) { onToast('The matching count is unknown for this population, so every match cannot be resolved.'); return }
-    if (total > SELECT_ALL_LIMIT) { onToast(`${total.toLocaleString()} matches exceed the ${SELECT_ALL_LIMIT.toLocaleString()} selection limit. Narrow the filter or sample first.`); return }
+    if (total > SELECT_ALL_LIMIT) {
+      // Too many to move through the browser: the server resolves the ids and keeps them.
+      setBusyMessage(`Selecting ${total.toLocaleString()} matching records on the server…`)
+      try {
+        const chosen = await provider.selectPopulation(datasetId, query, selectionName.trim())
+        setSelected(new Set()); setPopulation(chosen)
+        onToast(`Selected all ${(chosen.size ?? total).toLocaleString()} matching ${unit} records. Analyze runs on the whole population.`)
+      } catch (failure) { onToast(String(failure instanceof Error ? failure.message : failure)) }
+      finally { setBusyMessage('') }
+      return
+    }
     setBusyMessage(`Resolving ${total.toLocaleString()} matching IDs…`)
     try {
       const ids: string[] = []
@@ -481,7 +496,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
           <Suspense fallback={<div style={{ padding: 24 }}><Spinner label="Loading the 3D map…" /></div>}>
             <Map3DView
               artifact={projection} artifacts={artifacts.filter(item => item.unit === unit)} records={records} colourField={colourField} selected={selected}
-              onInspect={inspect} onOpen={focusRecord} matchedCount={result?.matched_count ?? null}
+              onInspect={inspect} onOpen={focusRecord} matchedCount={result?.matched_count ?? null} totalSelected={selectedCount}
               onSelect={(ids, mode) => {
                 setSelected(current => (mode === 'add' ? new Set([...current, ...ids]) : new Set(ids)))
                 onToast(`${ids.length.toLocaleString()} points ${mode === 'add' ? 'added to' : 'selected in'} the selection.`)
@@ -705,32 +720,32 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
               ? <SampleInspector mediaControls={centre !== 'focus'} record={record} fields={fields} artifacts={artifacts} query={query} datasetId={datasetId} onOpenRecord={openRecordById} onFocus={() => focusRecord(record.id)} />
               : <div className="insp-section"><Empty title="Nothing inspected">Click a card or row to inspect it. Clicking never changes your selection.</Empty></div>)}
             {panel === 'about' && <AboutPanel dataset={dataset} onOpenDataset={onOpenDataset} />}
-            {panel === 'analyze' && <AnalyzePanel selected={[...selected]} unit={unit} saved={savedSelection} fields={unitFields} artifacts={artifacts} populationScope={scope} onSave={saveSelection} onRan={onToast} onSelectIds={ids => { setSelected(new Set(ids)); setSavedSelection(null) }} />}
-            {panel === 'model' && <ModelPanel selected={[...selected]} unit={unit} snapshotIds={snapshotId ? [snapshotId] : undefined} fields={unitFields} resultSnapshotIds={resultSnapshotIds} onNotice={onToast} />}
+            {panel === 'analyze' && <AnalyzePanel selected={population ? [] : [...selected]} selectedCount={selectedCount} unit={unit} saved={population ?? savedSelection} fields={unitFields} artifacts={artifacts} populationScope={scope} onSave={saveSelection} onRan={onToast} onSelectIds={ids => { setSelected(new Set(ids)); setSavedSelection(null) }} />}
+            {panel === 'model' && <ModelPanel selected={population ? [] : [...selected]} unit={unit} snapshotIds={snapshotId ? [snapshotId] : undefined} fields={unitFields} resultSnapshotIds={resultSnapshotIds} onNotice={onToast} />}
           </div>
         </aside>
       )}
 
       {barHost && createPortal(
-        <div className={`statusbar${selected.size ? ' active' : ''}`}>
-        {selected.size ? (
+        <div className={`statusbar${selectedCount ? ' active' : ''}`}>
+        {selectedCount ? (
           <>
-            <span className="count">{selected.size.toLocaleString()} selected</span>
+            <span className="count">{selectedCount.toLocaleString()} selected{population ? ' · all matching' : ''}</span>
             <input
               className="input" style={{ width: 190, height: 28 }} value={selectionName}
               onChange={event => setSelectionName(event.target.value)} placeholder="Selection name" aria-label="Selection name"
             />
-            <button type="button" className="btn sm primary" onClick={() => void saveSelection()}><Icon.Bookmark size={13} />Save</button>
+            <button type="button" className="btn sm primary" disabled={Boolean(population)} title={population ? 'A whole-population selection is saved on the server already' : undefined} onClick={() => void saveSelection()}><Icon.Bookmark size={13} />{population ? 'Saved' : 'Save'}</button>
             <button
-              type="button" className="btn sm" disabled={selected.size < 2}
+              type="button" className="btn sm" disabled={Boolean(population) || selected.size < 2}
               onClick={() => { const [a, b] = [...selected]; setComparePair([a, b]); setCentre('compare') }}
             >
               <Icon.Compare size={13} />Compare
             </button>
             <button type="button" className="btn sm" onClick={() => setPanel('analyze')}><Icon.Sparkle size={13} />Analyze</button>
-            <button type="button" className="btn sm" onClick={() => setPanel('model')}><Icon.Chat size={13} />Ask model</button>
+            <button type="button" className="btn sm" disabled={Boolean(population)} title={population ? 'Ask about up to a few hundred records; narrow the selection first' : undefined} onClick={() => setPanel('model')}><Icon.Chat size={13} />Ask model</button>
             <button
-              type="button" className="btn sm"
+              type="button" className="btn sm" disabled={Boolean(population)} title={population ? 'Portable export is limited to 10,000 records' : undefined}
               onClick={async () => {
                 const frozen = savedSelection ?? await saveSelection()
                 if (frozen) provider.exportSelection(frozen).catch(failure => onToast(String(failure)))
@@ -739,12 +754,12 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
               <Icon.Download size={13} />Export
             </button>
             <span className="spacer" />
-            {result?.matched_count != null && result.matched_count > selected.size && (
+            {result?.matched_count != null && result.matched_count > selectedCount && (
               <button type="button" className="linkish" style={{ fontSize: 'var(--fs-sm)' }} onClick={selectAllMatching}>
                 Select all {result.matched_count.toLocaleString()} matching
               </button>
             )}
-            <button type="button" className="linkish" style={{ fontSize: 'var(--fs-sm)' }} onClick={() => setSelected(new Set())}>Clear</button>
+            <button type="button" className="linkish" style={{ fontSize: 'var(--fs-sm)' }} onClick={() => { setSelected(new Set()); setPopulation(null) }}>Clear</button>
           </>
         ) : (
           <>

@@ -185,6 +185,8 @@ class Selection(Versioned):
     seed: int | None = None
     query: dict[str, Any] = Field(default_factory=dict)
     created_at: str
+    # How many ids the selection holds. Set when the ids are kept out of line (a whole population), where `ids` is empty in listings.
+    size: int | None = None
 
 class Run(Versioned):
     id: str

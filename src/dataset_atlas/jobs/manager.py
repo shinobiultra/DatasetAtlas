@@ -25,6 +25,25 @@ DEFAULT_ARRAY_BYTES = 8 * 1024 ** 3
 HARD_MAX_ARRAY_BYTES = 64 * 1024 ** 3
 
 
+def _frozen_documents(processor_id: str, config: dict, parsed: list[Record]) -> list[dict]:
+    """The records as a run freezes and ships them.
+
+    A columnar run freezes what its processor reads, not whole records: identity for projection, clustering and
+    neighbours (they read vectors by id), and the text and assets for embeddings. Dumping and parsing every answer of
+    every record of a 200k-record run cost minutes, and a snapshot is immutable, so the selection already pins the rest.
+    """
+    if not _uses_arrays(config) or not processor_id.startswith(("embed.", "project.", "cluster.", "outlier.")):
+        return [record.model_dump(mode="json") for record in parsed]
+    content = processor_id.startswith("embed.")
+    documents = []
+    for record in parsed:
+        document = {"id": record.id, "dataset_id": record.dataset_id, "release_id": record.release_id, "snapshot_id": record.snapshot_id, "unit": record.unit}
+        if content:
+            document.update(text=record.text, question=record.question, asset_ids=list(record.asset_ids), assets=[asset.model_dump(mode="json") for asset in record.assets])
+        documents.append(document)
+    return documents
+
+
 def _uses_arrays(config: dict) -> bool:
     storage = config.get("storage", "json")
     if storage not in ("json", "arrays"):
@@ -147,7 +166,8 @@ class JobManager:
                  processor_id: str, config: dict | None = None) -> dict:
         """Return a read-only execution plan for explicit budget review."""
         parsed = [record if isinstance(record, Record) else Record.model_validate(record) for record in records]
-        return self._estimate(Selection.model_validate(selection), parsed, [record.model_dump(mode="json") for record in parsed], processor_id, config)
+        config = json.loads(_json(config or {}))
+        return self._estimate(Selection.model_validate(selection), parsed, _frozen_documents(processor_id, config, parsed), processor_id, config)
 
     def _estimate(self, selection: Selection, parsed: list[Record], documents: list[dict], processor_id: str, config: dict | None) -> dict:
         """Estimate over records that are already validated, so a large run parses each record once."""
@@ -179,7 +199,7 @@ class JobManager:
         unknown_bytes = False
         asset_refs = 0
         for record in documents:
-            for asset in record["assets"]:
+            for asset in record.get("assets", []):
                 asset_refs += 1
                 identity = asset.get("sha256") or asset["id"]
                 asset_keys.add(identity)
@@ -200,32 +220,37 @@ class JobManager:
                   "resource_limits": resource_limits, "memory_enforcement": enforcement(),
                   "validation": validation, "processor_estimate": processor_estimate,
                   "available": description["available"], "missing_dependencies": description["missing_dependencies"]}
+        # A columnar run is bound to its selection, which is content-addressed over immutable snapshots; hashing every
+        # record again would cost seconds per hundred thousand and bind nothing the selection does not.
         result["estimate_digest"] = _digest({"selection": selection.model_dump(mode="json"),
-                                             "records": documents, "config": config, "processor_id": processor_id,
+                                             "records": None if _uses_arrays(config) else documents, "config": config, "processor_id": processor_id,
                                              "estimate": result})
         return result
 
     def create(self, selection: Selection | dict, records: list[Record | dict],
-               processor_id: str, config: dict | None = None) -> Run:
+               processor_id: str, config: dict | None = None, *, estimate: dict | None = None) -> Run:
+        """Freeze a run. A caller that has just computed and checked this run's estimate may pass it instead of paying for it twice."""
         selection = Selection.model_validate(selection)
         parsed = [record if isinstance(record, Record) else Record.model_validate(record) for record in records]
-        documents = [record.model_dump(mode="json") for record in parsed]
+        config = json.loads(_json(config or {}))
+        documents = _frozen_documents(processor_id, config, parsed) if isinstance(processor_id, str) else []
         if not processor_id or not isinstance(processor_id, str):
             raise ValueError("processor_id is required")
         if len(selection.ids) != len(set(selection.ids)) or set(selection.ids) != {record["id"] for record in documents} or len(documents) != len(selection.ids):
             raise ValueError("Records must match the frozen selection IDs exactly")
         if any(record["unit"] != selection.unit or record["snapshot_id"] not in selection.snapshot_ids or record["dataset_id"] not in selection.dataset_ids for record in documents):
             raise ValueError("Record unit, snapshot, or dataset differs from selection")
-        config = json.loads(_json(config or {}))
         from dataset_atlas.processors import get_processor
         processor = get_processor(processor_id)
         description = processor.describe()
         if any(record["unit"] not in description["input_units"] for record in documents):
             raise ValueError("Processor does not support selection unit")
         validation = processor.validate_inputs(parsed, config)
-        estimate = self._estimate(selection, parsed, documents, processor_id, config)
+        if estimate is None:
+            estimate = self._estimate(selection, parsed, documents, processor_id, config)
         batching = description["batching"]
-        population_key = _digest([by for by in sorted(documents, key=lambda item: item["id"])]) if batching == "selection" else None
+        arrays = _uses_arrays(config)
+        population_key = _digest([by for by in sorted(documents, key=lambda item: item["id"])]) if batching == "selection" and not arrays else None
         resource = _resource_class(description,config)
         if resource not in ("cpu", "gpu", "network", "external_api"):
             raise ValueError("Invalid resource class")
@@ -242,13 +267,14 @@ class JobManager:
         with self._db() as db:
             db.execute("INSERT INTO runs(id,run_json,selection_json,records_json) VALUES(?,?,?,?)",
                        (run_id, _json(run.model_dump(mode="json")), _json(selection.model_dump(mode="json")),
-                        _json([by_id[record_id] for record_id in selection.ids])))
-            if _uses_arrays(config):
-                # One digest of the (small) config, then one per record; no per-item result files exist to reuse.
+                        json.dumps([by_id[record_id] for record_id in selection.ids], ensure_ascii=False, separators=(",", ":")) if arrays
+                        else _json([by_id[record_id] for record_id in selection.ids])))
+            if arrays:
+                # One digest binding the config and the content-addressed selection, then one hash per id; no per-item result files exist to reuse.
                 shared = _digest({"processor_id": processor_id, "model_revision": config.get("model_revision"), "config": config,
-                                  "input_representation": config.get("input_representation", "original"), "population_key": population_key})
+                                  "input_representation": config.get("input_representation", "original"), "selection": _digest(selection.model_dump(mode="json"))})
                 db.executemany("INSERT INTO run_items(run_id,record_id,item_key,status,output_bytes) VALUES(?,?,?,?,0)",
-                               ((run_id, record_id, hashlib.sha256((shared + _json(by_id[record_id])).encode()).hexdigest(), "queued")
+                               ((run_id, record_id, hashlib.sha256((shared + record_id).encode()).hexdigest(), "queued")
                                 for record_id in selection.ids))
             else:
                 for record_id in selection.ids:
@@ -427,7 +453,12 @@ class JobManager:
         try:
             meta = json.loads((shard / "meta.json").read_text(encoding="utf-8"))
             keys, manifest, skipped = meta["keys"], meta["manifest"], meta["skipped"]
-            expected = dict(db.execute("SELECT record_id,item_key FROM run_items WHERE run_id=?", (run_id,)))
+            # Only this shard's keys: reading every item of a 200k-record run once per shard was most of the import time.
+            expected: dict[str, str] = {}
+            wanted = list(keys)
+            for start in range(0, len(wanted), 500):
+                chunk = wanted[start:start + 500]
+                expected.update(db.execute(f"SELECT record_id,item_key FROM run_items WHERE run_id=? AND record_id IN ({','.join('?' * len(chunk))})", [run_id, *chunk]))
             if not keys or any(expected.get(record_id) != key for record_id, key in keys.items()):
                 raise ValueError("Shard does not match frozen run IDs and keys")
             ids = read_ids(shard, manifest)

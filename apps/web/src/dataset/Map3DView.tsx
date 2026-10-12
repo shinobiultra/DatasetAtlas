@@ -35,7 +35,7 @@ function roundSprite(): CanvasTexture {
  * Interactive 2D/3D map of a projection. Points come from arrays, so every point of a large run is
  * drawn, not only the records loaded into the page; the page's records add colours and thumbnails.
  */
-export default function Map3DView({ artifact, artifacts, records, colourField, selected, onSelect, onInspect, onOpen, matchedCount = null }: {
+export default function Map3DView({ artifact, artifacts, records, colourField, selected, onSelect, onInspect, onOpen, matchedCount = null, totalSelected }: {
   artifact: Artifact
   artifacts: Artifact[]
   records: AtlasRecord[]
@@ -45,6 +45,8 @@ export default function Map3DView({ artifact, artifacts, records, colourField, s
   onInspect: (id: string) => void
   onOpen: (id: string) => void
   matchedCount?: number | null
+  /** Selected points when they are held on the server (a whole population) and `selected` is empty. */
+  totalSelected?: number
 }) {
   const stage = useRef<HTMLDivElement>(null)
   const [projection, setProjection] = useState<Projection | null>(null)
@@ -330,7 +332,7 @@ export default function Map3DView({ artifact, artifacts, records, colourField, s
           <span className="sep">·</span><span>{shortId(artifact.run_id ?? artifact.id, 8)}</span>
           {colouring.note && <><span className="sep">·</span><span>{colouring.note}</span></>}
         </div>
-        <SelectionStrip records={selectedLoaded} total={selected.size} onInspect={onInspect} onOpen={onOpen} />
+        <SelectionStrip records={selectedLoaded} total={totalSelected ?? selected.size} onInspect={onInspect} onOpen={onOpen} />
       </div>
     </div>
   )

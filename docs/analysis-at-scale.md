@@ -77,11 +77,32 @@ second because it reloaded and re-verified the model for every group of 16 recor
 legacy path exactly (cosine 1.000000); bf16 stays above 0.9997. `torch.compile` gave +20% for a 7 s compile and
 `max-autotune` no more for 38 s, so it is not enabled: it only pays back above roughly 45,000 images.
 
+## Whole populations
+
+"Select all matching" on a complete index no longer moves ids through the browser. Above 5,000 matches the server
+resolves the ids with one scan of the snapshot (`POST /api/v1/selections/population`), freezes them as a selection whose
+ids live in a side file (`work/selection-ids/`), and returns a summary with `size`. Analyze runs on it directly; the
+per-record actions (save, compare, ask a model, export) are disabled for it, and portable export stays limited to
+10,000 records. Records are resolved in one batched scan rather than one query each, and a columnar projection or
+clustering over a population never reads record content at all.
+
+On the real VQA v2 index (214,354 questions, nothing downloaded), through the API on the same GPU:
+
+| Step | Time |
+| --- | ---: |
+| Select all 214,354 on the server | 0.14 s |
+| MiniLM embeddings of every question (bf16), estimate to artifact | 57 s |
+| 3D UMAP (cuML), estimate to artifact | 31 s |
+| k-means, 60 clusters | 23 s |
+| HDBSCAN (71 clusters) | 32 s |
+
+The 3D map then draws all 214,354 points in the browser, coloured by cluster.
+
 ## Limits
 
-- A saved selection is still capped at 10,000 IDs (and a request at 10 MB), so the interface can analyse at most that
-  many records at once. The engine, job path and benchmarks are not the limit; selecting a whole population
-  server-side is the next step.
+- Portable selection export is limited to 10,000 records; use the CLI for larger packs.
 - The 3D map draws every point of an array-backed projection, but colours by a dataset field only for records loaded
   in the page. Colouring by cluster or score covers every point.
+- Records of a whole population are read once per estimate and cached for five minutes between estimate and run; a
+  very large selection of wide records needs the memory to hold them.
 - NudeNet runs on the CPU (onnxruntime has no CUDA provider here).

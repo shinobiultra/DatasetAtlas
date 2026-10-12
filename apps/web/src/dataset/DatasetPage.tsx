@@ -721,7 +721,8 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
               : <div className="insp-section"><Empty title="Nothing inspected">Click a card or row to inspect it. Clicking never changes your selection.</Empty></div>)}
             {panel === 'about' && <AboutPanel dataset={dataset} onOpenDataset={onOpenDataset} />}
             {panel === 'analyze' && <AnalyzePanel selected={population ? [] : [...selected]} selectedCount={selectedCount} unit={unit} saved={population ?? savedSelection} fields={unitFields} artifacts={artifacts} populationScope={scope} onSave={saveSelection} onRan={onToast} onSelectIds={ids => { setSelected(new Set(ids)); setSavedSelection(null) }} />}
-            {panel === 'model' && <ModelPanel selected={population ? [] : [...selected]} unit={unit} snapshotIds={snapshotId ? [snapshotId] : undefined} fields={unitFields} resultSnapshotIds={resultSnapshotIds} onNotice={onToast} />}
+            {panel === 'model' && <ModelPanel selected={population ? [] : [...selected]} unit={unit} snapshotIds={snapshotId ? [snapshotId] : undefined} fields={unitFields} resultSnapshotIds={resultSnapshotIds} onNotice={onToast}
+              datasetId={datasetId} query={query} artifacts={artifacts.filter(item => item.unit === unit)} onAttach={ids => { setSelected(new Set(ids)); setSavedSelection(null) }} />}
           </div>
         </aside>
       )}
@@ -767,6 +768,9 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
             <span className="sep">·</span>
             <span>{summary?.label}</span>
             <span className="spacer" />
+            {provider.mode === 'workbench' && (
+              <button type="button" className="btn sm" title="Find records by meaning and ask a model about them" onClick={() => setPanel('model')}><Icon.Chat size={13} />Ask the dataset</button>
+            )}
             <span className="row" style={{ gap: 10, fontSize: 'var(--fs-xs)' }}>
               <span><span className="kbd">/</span> search</span>
               <span><span className="kbd">j</span>/<span className="kbd">k</span> move</span>

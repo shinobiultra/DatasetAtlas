@@ -5,20 +5,22 @@ from dataset_atlas.models import Artifact,content_id
 from dataset_atlas.processors.analysis import exact_lancedb_search
 from .embedding_space import bulk_directory,embedding_vectors
 
-_matrices={}  # artifact id -> (ids, row by id, float32 matrix); artifacts are immutable, so entries never go stale
+_matrices={}  # (artifact id, vector checksum) -> (ids, row by id, float32 matrix); the checksum means a reused id can never serve another artifact's vectors
 _MATRIX_CACHE=2
 
 def _bulk_matrix(artifact:Artifact, artifact_dir:Path):
     import numpy as np
     from dataset_atlas.storage import arrays as store
-    cached=_matrices.get(artifact.id)
+    bulk=artifact.data['bulk']
+    key=(artifact.id,bulk['arrays']['vector'].get('sha256'),bulk['ids'].get('sha256'))
+    cached=_matrices.get(key)
     if cached is None:
-        directory=bulk_directory(artifact,artifact_dir);bulk=artifact.data['bulk']
+        directory=bulk_directory(artifact,artifact_dir)
         ids=store.read_ids(directory,bulk)
         matrix=np.ascontiguousarray(store.read_array(directory,bulk['arrays']['vector'],verify=True),dtype=np.float32)
         cached=(ids,{item_id:row for row,item_id in enumerate(ids)},matrix)
         while len(_matrices)>=_MATRIX_CACHE:_matrices.pop(next(iter(_matrices)))
-        _matrices[artifact.id]=cached
+        _matrices[key]=cached
     return cached
 
 def similar_records_bulk(artifact:Artifact, record_id:str|None, eligible_ids:list[str], limit:int, artifact_dir:Path, *, query_vector:list[float]|None=None) -> dict:
@@ -42,7 +44,7 @@ def similar_records_bulk(artifact:Artifact, record_id:str|None, eligible_ids:lis
     block=matrix[rows]
     if metric=='cosine':
         norms=np.linalg.norm(block,axis=1);norms[norms==0]=1
-        distance=1-(block@query)/(norms*np.linalg.norm(query))
+        distance=np.maximum(1-(block@query)/(norms*np.linalg.norm(query)),0)  # rounding can push an exact match just below zero
     else:distance=np.linalg.norm(block-query,axis=1)
     take=min(limit,len(eligible))
     best=np.argpartition(distance,take-1)[:take]

@@ -35,6 +35,7 @@ class FakeServer:
         self.fail_first = 0
         self.always_status: int | None = None
         self.reply = self.default_reply
+        self.embedding = lambda text, index: [float(len(text)), 1.0, 0.0, float(index % 3)]
         self.lock = threading.Lock()
         outer = self
 
@@ -70,7 +71,7 @@ class FakeServer:
                     if failing:
                         return self.send(503, {"error": {"message": "busy"}})
                     if self.path.endswith("/embeddings"):
-                        rows = [{"index": i, "embedding": [float(len(text)), 1.0, 0.0, float(i % 3)]} for i, text in enumerate(body["input"])]
+                        rows = [{"index": i, "embedding": outer.embedding(text, i)} for i, text in enumerate(body["input"])]
                         return self.send(200, {"data": rows[::-1]})  # out of order on purpose
                     text = outer.reply(body)
                     if self.path == "/api/chat":

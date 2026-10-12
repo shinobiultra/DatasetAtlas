@@ -273,6 +273,8 @@ def run_api_embeddings(records: list[Record], config: dict[str, Any]):
     storage_dtype = str(config.get("storage_dtype", "float32"))
     if storage_dtype not in {"float32", "float16"}:
         raise ValueError("storage_dtype must be float32 or float16")
+    document_prefix = _prefix(config, "document_prefix")
+    query_prefix = _prefix(config, "query_prefix")
     server = model_client.ModelServer(provider, api="openai", concurrency=_bounded_int(config, "concurrency", 8, 1, 64))
     skipped: dict[str, dict[str, Any]] = {}
     owners: list[Record] = []
@@ -281,7 +283,7 @@ def run_api_embeddings(records: list[Record], config: dict[str, Any]):
         value = getattr(record, mode)
         if isinstance(value, str) and value.strip():
             owners.append(record)
-            texts.append(value)
+            texts.append(document_prefix + value)
         else:
             skipped[record.id] = {"status": "not_applicable"}
     results = server.embed_many(texts, batch_size=_bounded_int(config, "batch_size", 64, 1, 512))
@@ -300,10 +302,38 @@ def run_api_embeddings(records: list[Record], config: dict[str, Any]):
     matrix = np.stack(rows).astype(storage_dtype) if rows else np.zeros((0, 0), dtype=storage_dtype)
     recipe = {"model_id": str(provider["model"]), "source": "model server /v1/embeddings", "representation": mode,
               "dimension": int(matrix.shape[1]) if len(rows) else None, "normalization": "L2", "distance_metric": "cosine"}
+    if document_prefix:
+        recipe["document_prefix"] = document_prefix  # changes the stored vectors, so it is part of the space's identity
+    if query_prefix:
+        recipe["query_prefix"] = query_prefix  # only changes how a search text is encoded, so it is not
+    identity = ("model_id", "source", "representation", "normalization", "distance_metric") + (("document_prefix",) if document_prefix else ())
     provenance = {"model_id": recipe["model_id"], "provider": {k: provider.get(k) for k in ("id", "model", "base_url")}, "recipe": recipe,
-                  "embedding_space_id": content_id({key: recipe[key] for key in ("model_id", "source", "representation", "normalization", "distance_metric")}, "space:"),
+                  "embedding_space_id": content_id({key: recipe[key] for key in identity}, "space:"),
                   "storage_dtype": storage_dtype, "path": "model server", "method": "model server embeddings"}
     return BulkResult(ids=ids, arrays={"vector": matrix}, skipped=skipped, provenance=provenance), provenance
+
+
+def _prefix(config: dict[str, Any], key: str) -> str:
+    value = config.get(key) or ""
+    if not isinstance(value, str) or len(value) > 200:
+        raise ValueError(f"{key} must be text of at most 200 characters")
+    return value
+
+
+def encode_api_query(provider: dict[str, Any], recipe: dict[str, Any], text: str) -> list[float]:
+    """Embed a search text with the model server that produced a stored space, the way that space's recipe says."""
+    if provider.get("model") != recipe.get("model_id"):
+        raise ValueError("The model server now serves a different model than the one that embedded this dataset")
+    server = model_client.ModelServer(provider, api="openai", concurrency=1)
+    (result,) = server.embed_many([str(recipe.get("query_prefix") or "") + text], batch_size=1)
+    if isinstance(result, model_client.ModelServerError):
+        raise ValueError(f"The model server could not embed the query: {result}")
+    norm = float(np.linalg.norm(result))
+    if not np.isfinite(result).all() or norm == 0:
+        raise ValueError("The query embedding was zero or not finite")
+    if recipe.get("dimension") and len(result) != recipe["dimension"]:
+        raise ValueError("The query vector has a different dimension than the stored vectors")
+    return (result / norm).tolist()
 
 
 def run_vqa_scoring(records: list[Record], config: dict[str, Any]):

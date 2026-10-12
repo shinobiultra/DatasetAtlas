@@ -752,28 +752,36 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         if artifact is None:artifact=selected_artifacts([body.artifact_id])[0]
         if body.query.snapshot_id not in artifact.snapshot_ids or body.query.unit!=artifact.unit:raise ValueError('Embedding artifact and query snapshot/unit differ')
         query_document=body.query.model_copy(update={'limit':1000,'cursor':None})
-        import time
-        deadline=time.monotonic()+30
-        eligible_ids=[]
-        while True:
-            eligible=(query_pack(browser_pack(dataset_id,body.query.result_snapshot_ids),query_document)
-                if body.query.population_scope=='preview' else complete_snapshot(dataset_id).query(query_document,selected_artifacts(body.query.result_snapshot_ids)))
-            eligible_ids.extend(r.id for r in eligible.records)
-            if not eligible.cursor:break
-            if time.monotonic()>deadline:raise ValueError('Retrieval population resolution exceeded 30 seconds; narrow the filter')
-            query_document=query_document.model_copy(update={'cursor':eligible.cursor})
-        from dataset_atlas.queries.similarity import similar_records
         if bool(body.record_id)==bool(body.text):raise ValueError('Choose exactly one query record or text query')
+        if body.query.population_scope=='preview':
+            import time
+            deadline=time.monotonic()+30
+            eligible_ids=[]
+            while True:
+                eligible=query_pack(browser_pack(dataset_id,body.query.result_snapshot_ids),query_document)
+                eligible_ids.extend(r.id for r in eligible.records)
+                if not eligible.cursor:break
+                if time.monotonic()>deadline:raise ValueError('Retrieval population resolution exceeded 30 seconds; narrow the filter')
+                query_document=query_document.model_copy(update={'cursor':eligible.cursor})
+            population_scope,filtered=eligible.population_scope,eligible.matched_count
+        else:  # a whole complete population is resolved as ids in one scan, not paged through as records
+            eligible_ids=complete_snapshot(dataset_id).ids(query_document,selected_artifacts(body.query.result_snapshot_ids),timeout_seconds=30)
+            population_scope,filtered='complete',len(eligible_ids)
+        from dataset_atlas.queries.similarity import similar_records
         vector=None
         if body.text:
-            if artifact.kind=='import.research':raise ValueError('Imported vectors have no executable encoder; query with a record from the registered space')
-            if not jobs or not artifact.run_id:raise ValueError('Text query requires a retained encoder run')
             from dataset_atlas.processors import encode_text_query
-            run=jobs.get_run(artifact.run_id)
-            vector=encode_text_query(artifact,analysis_config(root,run.config,roots),body.text)
+            if artifact.kind=='import.research':raise ValueError('Imported vectors have no executable encoder; query with a record from the registered space')
+            if artifact.kind=='embed.api':
+                saved=artifact.provenance.get('processor_provenance',{}).get('provider') or {}
+                vector=encode_text_query(artifact,{},body.text,provider=loopback_provider(str(saved.get('id') or '')))
+            else:
+                if not jobs or not artifact.run_id:raise ValueError('Text query requires a retained encoder run')
+                run=jobs.get_run(artifact.run_id)
+                vector=encode_text_query(artifact,analysis_config(root,run.config,roots),body.text)
         result=similar_records(artifact,body.record_id,eligible_ids,body.limit,work/'vector-cache',query_vector=vector,artifact_dir=jobs.artifact_dir if jobs else None)
-        result['population_scope']=eligible.population_scope
-        result['coverage']={'filtered_records':eligible.matched_count,'embedded_eligible_records':result['eligible_count']}
+        result['population_scope']=population_scope
+        result['coverage']={'filtered_records':filtered,'embedded_eligible_records':result['eligible_count']}
         return result
     def serve_asset(dataset_id,asset,request):
         from dataset_atlas.storage.compact import read_compact
@@ -968,6 +976,14 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
     MODEL_RUNS={'vlm.answer','vlm.tag','vlm.judge','embed.api'}  # talk to a local model server; always columnar
     SAVED_TEXT={'vlm.judge':'candidate_artifact_id','score.vqa_accuracy':'answers_artifact_id'}
     COLUMNAR_AUTO_ROWS=5000
+    def loopback_provider(provider_id):
+        """A configured model server as run settings; dataset contents only ever go to a loopback one."""
+        from dataset_atlas.vlm.client import is_loopback
+        if not service:raise ValueError('Model connections are unavailable')
+        cfg=service.get_provider(provider_id).config
+        if not is_loopback(cfg.base_url):raise ValueError('Dataset contents are sent only to a loopback model server; this provider is external')
+        return {'id':cfg.id,'base_url':cfg.base_url,'model':cfg.model,'timeout_seconds':cfg.timeout_seconds,'max_output_tokens':cfg.max_output_tokens,
+            'max_input_characters':cfg.max_input_characters,'max_images':cfg.max_images,'api_key_env':cfg.api_key_env}
     def run_config(processor_id,config,selection=None):
         path=root/'local-config/recipes.json'
         defaults=json.loads(path.read_text()) if path.exists() else {}
@@ -976,16 +992,9 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         merged.pop('text_source',None)
         merged.pop('provider',None)
         if processor_id in MODEL_RUNS:
-            from urllib.parse import urlsplit
-            from dataset_atlas.vlm.client import is_loopback
             provider_id=merged.pop('provider_id',None)
             if not provider_id:raise ValueError('Choose a model server for this run')
-            if not service:raise ValueError('Model connections are unavailable')
-            view=service.get_provider(provider_id)
-            cfg=view.config
-            if not is_loopback(cfg.base_url):raise ValueError('Batch runs send dataset contents only to a loopback model server; this provider is external')
-            merged['provider']={'id':cfg.id,'base_url':cfg.base_url,'model':cfg.model,'timeout_seconds':cfg.timeout_seconds,'max_output_tokens':cfg.max_output_tokens,
-                'max_input_characters':cfg.max_input_characters,'max_images':cfg.max_images,'api_key_env':cfg.api_key_env}
+            merged['provider']=loopback_provider(provider_id)
             merged['resource_class']='network';merged['storage']='arrays'
         if processor_id in SAVED_TEXT:
             saved=merged.pop(SAVED_TEXT[processor_id],None)

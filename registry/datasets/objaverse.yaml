@@ -5,29 +5,30 @@ aliases: []
 description: Objaverse 1.0, distinct from Objaverse-XL.
 paper_ids:
 - paper-2aa40aa13ed2a25b
-release: unresolved
+release: objaverse-1.0-21e4e142159e2153706c23a3a02e55cec5591cea
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: unverified
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: indexed_metadata_partial_media
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: entity
   blockers:
-  - Native Objaverse 1.0 is prepared; the citing paper 55 rendered objects, exact UIDs and render conditions
-    remain unidentified, and media publication rights remain unreviewed.
+  - Native Objaverse 1.0 is prepared; the citing paper 55 rendered objects, exact UIDs and render
+    conditions remain unidentified, and media publication rights remain unreviewed.
+  total_count: 798759
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://objaverse.allenai.org/docs/objaverse-1.0/
-  note: Original object annotations contain per-object license fields; dataset-wide code or site license
-    is not a blanket media grant
+  note: Original object annotations contain per-object license fields; dataset-wide code or site
+    license is not a blanket media grant
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-28906424eef5b34b2c95
@@ -35,8 +36,9 @@ evidence:
   source_file_hash: 636fa1d8fe370283cf91d2640e28f00f9236cd7ee40afce14fc3301815559ecf
   page: 18
   role: source data
-  excerpt: 'Synthetic Image generation for Spatial IDs. We use 55 O BJAVERSE object renders and project
-    them in various pairs onto random backgrounds, per (Kang et al., 2025). All images with the same '
+  excerpt: 'Synthetic Image generation for Spatial IDs. We use 55 O BJAVERSE object renders and
+    project them in various pairs onto random backgrounds, per (Kang et al., 2025). All images
+    with the same '
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -45,9 +47,9 @@ evidence:
   source_file_hash: 636fa1d8fe370283cf91d2640e28f00f9236cd7ee40afce14fc3301815559ecf
   page: 5
   role: synthetic source
-  excerpt: xtract spatial IDs from 11 SoTA VLMs, with synthetic images created from open-source O BJAVERSE
-    (Deitke et al., 2023) objects. The object renders are paired onto a grid of m = 4 on top of random
-    natural backgrounds. We provid
+  excerpt: xtract spatial IDs from 11 SoTA VLMs, with synthetic images created from open-source
+    O BJAVERSE (Deitke et al., 2023) objects. The object renders are paired onto a grid of m =
+    4 on top of random natural backgrounds. We provid
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -58,8 +60,8 @@ evidence:
   source_identity_status: source_and_terms_identified
 - kind: source_audit_release
   url: https://objaverse.allenai.org/docs/objaverse-1.0/
-  note: Paper cites Deitke et al. 2023 and 55 renders; official project distinguishes 1.0 and XL, but
-    exact 55 UIDs unreported
+  note: Paper cites Deitke et al. 2023 and 55 renders; official project distinguishes 1.0 and
+    XL, but exact 55 UIDs unreported
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: source_and_terms_identified
@@ -73,8 +75,8 @@ evidence:
   source_identity_status: source_and_terms_identified
 - kind: source_audit_rights
   url: https://objaverse.allenai.org/docs/objaverse-1.0/
-  note: Original object annotations contain per-object license fields; dataset-wide code or site license
-    is not a blanket media grant
+  note: Original object annotations contain per-object license fields; dataset-wide code or site
+    license is not a blanket media grant
   publication_decision: media_not_approved
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
@@ -82,9 +84,54 @@ evidence:
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in at least
-    one record. Not inferred from the name or description.'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in
+    at least one record. Not inferred from the name or description.'
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: objaverse-1.0-21e4e142159e2153706c23a3a02e55cec5591cea
+  snapshot_id: objaverse-19f1f6fdea460cb626f0484e
+  source_url: https://objaverse.allenai.org/docs/objaverse-1.0/
+  record_count: 798759
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: indexed_metadata_partial_media
+  unit: entity
+  population: All 798,759 native Objaverse 1.0 UIDs, complete original object metadata JSON and
+    ordered native LVIS categories. Per-object licences and 387 non-hexadecimal UIDs remain unchanged.
+    100 original self-contained GLB preview objects are verified within explicit byte, geometry
+    and texture limits; larger or unsupported candidate objects remain in the full annotation
+    index and are reported as preview exclusions. The citing paper 55 rendered objects, exact
+    UIDs and render conditions remain unidentified. No object media is publicly distributed.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/objaverse.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: objaverse-1.0-21e4e142159e2153706c23a3a02e55cec5591cea
+  snapshot_id: objaverse-19f1f6fdea460cb626f0484e
+  source_url: https://objaverse.allenai.org/docs/objaverse-1.0/
+  record_count: 798759
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: indexed_metadata_partial_media
+  unit: entity
+  population: All 798,759 native Objaverse 1.0 UIDs, complete original object metadata JSON and
+    ordered native LVIS categories. Per-object licences and 387 non-hexadecimal UIDs remain unchanged.
+    100 original self-contained GLB preview objects are verified within explicit byte, geometry
+    and texture limits; larger or unsupported candidate objects remain in the full annotation
+    index and are reported as preview exclusions. The citing paper 55 rendered objects, exact
+    UIDs and render conditions remain unidentified. No object media is publicly distributed.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/objaverse.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
 source_url: https://objaverse.allenai.org/docs/objaverse-1.0/
 modalities:
 - model3d
 - text
+snapshot_id: objaverse-19f1f6fdea460cb626f0484e

@@ -2,10 +2,10 @@ schema_version: '1.0'
 id: clevr
 name: CLEVR
 aliases: []
-description: 'Compositional visual-question-answering benchmark. This catalogue entry is the pinned maujim/CLEVR_sample_500
-  validation population: 1,070 questions over 107 distinct original CLEVR images. Its public preview shows
-  100 questions on 100 distinct images; the separate clevr-v1-full entry indexes all 999,968 official
-  train/validation/test questions.'
+description: CLEVR compositional visual question answering. The approved public preview contains
+  100 validation examples from its pinned 1,070-question replica population. The local workbench
+  provides the official 999,968-question train/validation/test population through the canonical
+  complete-release recipe; published historical results remain on their original preview snapshot.
 tasks:
 - visual question answering
 - compositional reasoning
@@ -70,7 +70,7 @@ coverage:
   complete_data: supported
   publication: approved
   preview_count: 100
-  total_count: 1070
+  total_count: 999968
   unit: example
   blockers: []
 rights:
@@ -83,10 +83,7 @@ rights:
   source: https://cs.stanford.edu/people/jcjohns/clevr/
   replica: https://huggingface.co/datasets/maujim/CLEVR_sample_500/tree/463520cb0e4d16f2f61ae0607c81eacdd009e9f4
   attribution: CLEVR (c) 2017 Facebook, Inc.; Johnson et al., CVPR 2017. CC BY 4.0.
-relationships:
-- type: has_complete_release_variant
-  target: clevr-v1-full
-  status: verified
+relationships: []
 evidence:
 - kind: source_release
   url: https://cs.stanford.edu/people/jcjohns/clevr/
@@ -100,7 +97,36 @@ evidence:
   source_file_hash: 51dcc13673e3b9b98e6b9cb67b07e584643259b69e50a0c028b1c7814a1ee676
   page: 9
   role: future-work example
-  excerpt: and Copes- attention heads compared to the universal heads per- take, 2017) and CLEVR (Johnson
-    et al., 2017) al- forming outlier suppression. low variations in color and shape
+  excerpt: and Copes- attention heads compared to the universal heads per- take, 2017) and CLEVR
+    (Johnson et al., 2017) al- forming outlier suppression. low variations in color and shape
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
+- kind: canonical_complete_release
+  snapshot_id: clevr-full-canonical-cab1828f2e98dfcc6de79fd4
+  record_count: 999968
+  preview_snapshot_id: hf-maujim-CLEVR_sample_500-463520cb0e4d16f2f61ae0607c81eacdd009e9f4-validation
+  preview_count: 100
+  identity_policy: Validation question_index and image-filename identities preserve the existing
+    approved preview; other splits use split-qualified identities.
+  recipe: registry/recipes/clevr.yaml
+  scope_note: Complete workbench population and historical static preview have separate immutable
+    snapshots. Existing public artifacts are not rebound.
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: CLEVR_v1.0
+  snapshot_id: clevr-full-canonical-cab1828f2e98dfcc6de79fd4
+  source_url: https://cs.stanford.edu/people/jcjohns/clevr/
+  record_count: 999968
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: Official CLEVR v1.0 train, validation and test questions (all splits) from the official
+    archive, indexed from its question files. Original rendered images are read on request by
+    HTTPS ranges bound to the archive's strong ETag; the 19 GB archive is not downloaded.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/clevr.yaml
+  publication_snapshot_note: The tracked release/snapshot pair continues to bind the approved
+    public preview; this current workbench population retains its separate immutable snapshot.

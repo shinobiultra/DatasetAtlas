@@ -2,8 +2,9 @@ schema_version: '1.0'
 id: mm-vet
 name: MM-Vet
 aliases: []
-description: 'Official MM-Vet v1 release: 218 question-answer records with 200 distinct image files. Capability
-  tags, original answers, image-source labels and bard-set membership remain source fields. v2 is a distinct release.'
+description: 'Official MM-Vet v1 release: 218 question-answer records with 200 distinct image
+  files. Capability tags, original answers, image-source labels and bard-set membership remain
+  source fields. v2 is a distinct release.'
 paper_ids:
 - paper-944952997d24ce45
 release: github-v1-ff85408b7f382be1
@@ -27,8 +28,9 @@ adapter_config:
     imagesource: Original source attribution label
     bard_set: Original bard-set membership
     image_sha256: SHA-256 of original image bytes
-  population: 'Official MM-Vet v1 release: 218 question-answer records with 200 distinct image files. Capability
-    tags, original answers, image-source labels and bard-set membership remain source fields. v2 is a distinct release.'
+  population: 'Official MM-Vet v1 release: 218 question-answer records with 200 distinct image
+    files. Capability tags, original answers, image-source labels and bard-set membership remain
+    source fields. v2 is a distinct release.'
 coverage:
   identity: resolved
   source: verified
@@ -41,16 +43,16 @@ coverage:
   total_count: 218
   unit: example
   blockers:
-  - Author README licenses dataset CC BY-NC 4.0, but included third-party image rights need separate review; media
-    and records remain local.
+  - Author README licenses dataset CC BY-NC 4.0, but included third-party image rights need separate
+    review; media and records remain local.
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   external_provider: local_only
   source: https://github.com/yuweihao/MM-Vet/releases/tag/v1
-  note: Author README licenses dataset CC BY-NC 4.0, but included third-party image rights need separate review;
-    media and records remain local.
+  note: Author README licenses dataset CC BY-NC 4.0, but included third-party image rights need
+    separate review; media and records remain local.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-792ed07090034f93fbe4
@@ -58,8 +60,9 @@ evidence:
   source_file_hash: 71a1cce60cc2242209269ec562113d20745af5b8416c92c7ce7b1bc418d2ca5b
   page: 9
   role: evaluation
-  excerpt: or DoS attack, we filter 161 non-rejectable image-text pairs from the MM-Vet dataset [48], where most
-    baseline VLMs can consistently answer under normal conditions (i.e., ϵ = 0). As show
+  excerpt: or DoS attack, we filter 161 non-rejectable image-text pairs from the MM-Vet dataset
+    [48], where most baseline VLMs can consistently answer under normal conditions (i.e., ϵ =
+    0). As show
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -68,9 +71,9 @@ evidence:
   source_file_hash: 71a1cce60cc2242209269ec562113d20745af5b8416c92c7ce7b1bc418d2ca5b
   page: 9
   role: denial-of-service evaluation
-  excerpt: veness of VMA for DoS attack, we filter 161 non-rejectable image-text pairs from the MM-Vet dataset [48],
-    where most baseline VLMs can consistently answer under normal conditions (i.e., ϵ = 0). As shown in Tab. 7,
-    wi
+  excerpt: veness of VMA for DoS attack, we filter 161 non-rejectable image-text pairs from the
+    MM-Vet dataset [48], where most baseline VLMs can consistently answer under normal conditions
+    (i.e., ϵ = 0). As shown in Tab. 7, wi
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -81,8 +84,8 @@ evidence:
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_release
   url: https://github.com/yuweihao/MM-Vet/releases/tag/v1
-  note: author repository commit acde843e02dae30047bb456ee4a8ab28dee7e0ae; author GitHub release tag v1 is explicit
-    baseline
+  note: author repository commit acde843e02dae30047bb456ee4a8ab28dee7e0ae; author GitHub release
+    tag v1 is explicit baseline
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
@@ -95,14 +98,31 @@ evidence:
   probe: author_release_link_unprobed
 - kind: source_audit_rights
   url: https://github.com/yuweihao/MM-Vet/blob/acde843e02dae30047bb456ee4a8ab28dee7e0ae/README.md
-  note: Author README explicitly licenses dataset CC BY-NC 4.0, code Apache-2.0; inspect included third-party images
-    before public media distribution.
+  note: Author README explicitly licenses dataset CC BY-NC 4.0, code Apache-2.0; inspect included
+    third-party images before public media distribution.
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_release
   url: https://github.com/yuweihao/MM-Vet/releases/download/v1/mm-vet.zip
   note: Pinned author release; 218 local source rows, SHA-256 f604506820ea8c6403b132079af9cd887d3d5561f35e706e779ce09d1958ffde.
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: github-v1-ff85408b7f382be1
+  snapshot_id: github-v1-ff85408b7f382be1-f604506820ea
+  source_url: https://github.com/yuweihao/MM-Vet/releases/tag/v1
+  record_count: 218
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: 'Official MM-Vet v1 release: 218 question-answer records with 200 distinct image
+    files. Capability tags, original answers, image-source labels and bard-set membership remain
+    source fields. v2 is a distinct release.'
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/mm-vet.yaml
 source_url: https://github.com/yuweihao/MM-Vet/releases/tag/v1
 snapshot_id: github-v1-ff85408b7f382be1-f604506820ea
 modalities:

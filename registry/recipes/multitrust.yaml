@@ -6,16 +6,16 @@
 # No source_url on purpose: a huggingface.co/datasets/<repo> URL would send `atlas previews fetch` to the sampled route, which builds no complete index.
 # snapshot_id = "multitrust-<revision[:12]>-q<number of query files>-<first 16 hex of sha256 over these lines joined by newline>": the sorted lines
 # source_name:bytes:sha256 of every file under `files`, then media_inventory:<sha256 of the inventory file>, tasks:<sha256 of the canonical JSON
-# (sorted keys, no spaces, UTF-8) of adapter_config.tasks>, and preview_sampling:<canonical JSON of adapter_config.preview_sampling>. No budget is part of it.
-# preview_media_transfer_bytes is the exact sum of the pinned sizes of every image of the 250 seeded candidates (50 per aspect, stratified by `preview_sampling.stratify_by`) the worker may open to find 100 that decode, 20 per aspect;
-# it is an upper bound computed from the pins, not a measurement (the measured transfer is in reports/multitrust-live-verification-20261009.json).
+# (sorted keys, no spaces, UTF-8) of adapter_config.tasks>, inventory_tasks:<sha256 of its canonical JSON>, and preview_sampling:<canonical JSON of adapter_config.preview_sampling>. No budget is part of it.
+# preview_media_transfer_bytes sums pinned sizes of every linked original in the seeded candidate pools (42 clusters per declared stratum, with at most 31 in shared). The five aspect folders and shared source pool are separately labelled; the worker retains the first 100 candidates whose originals verify.
+# This is an upper bound computed from the pins. Historical transfer measurements for the earlier query-only sampling do not measure this native-unit preview.
 release: multitrust-84dc74754959e9f52b67c5185700f4f7fcd8c4df
-snapshot_id: multitrust-84dc74754959-q62-ebc859260cedb327
+snapshot_id: multitrust-84dc74754959-q62-d92c169f659258d6
 adapter: multitrust
 credential_profile: huggingface
-expected_count: 11512
-description: 'MultiTrust (author release thu-ml/MultiTrust): every query row of the 50 member tasks in 62 pinned query files at one revision, across the five aspects truthfulness, safety, robustness, fairness and privacy. Each record is one query row with its task, aspect and native fields; images stay remote and are fetched one at a time, checked against a pinned inventory, and 100 preview originals are kept locally.'
-scope: 'Every row of the query files the authors loaders read from the gated Hugging Face dataset thu-ml/MultiTrust at revision 84dc74754959e9f52b67c5185700f4f7fcd8c4df (10,549 files, 11.31 GB; the card states CC BY-SA 4.0 with an access agreement for non-commercial academic use and no redistribution). It is a suite of heterogeneous tasks, not one image collection: truthfulness 25 tasks, safety 7, robustness 6, fairness 5, privacy 7. Rows are joined to images only by a key in the query file, a derived key or an ordinal the authors loader applies; images that the loaders pair at run time (random pick, os.listdir order, cross product), image-only tasks and shared pools are listed in reports/multitrust-task-inventory-20261009.json and not attached to a row. The enron-email k-shot table is not a query file and is not indexed. This is the authors current release, not the population or the transfer-attack examples a citing paper generated with the framework.'
+expected_count: 12616
+description: 'MultiTrust pinned author release: 11,512 query rows plus 450 image-only task examples, 95 unpaired images and 559 source pool images. Native unit_kind and task provenance distinguish all 12,616 records without fabricating runtime prompts or image pairings. Original images are pinned remotely; a seeded preview retains 100 verified original-media records locally.'
+scope: 'All released query rows and native image units at thu-ml/MultiTrust revision 84dc74754959e9f52b67c5185700f4f7fcd8c4df: 50 query tasks / 62 query files, three image-only tasks, independent unpaired images and source pools. Query rows retain only source-defined key/derived/ordinal joins; random, directory-order and cross-product pairings are not fabricated. Every pinned image except the README framework figure has a record or a query reference. The Enron k-shot support table is supporting context, not an evaluation query population, and is not indexed. Five aspect strata plus a separately labelled shared resource pool are sampled for browsing; the preview is not a prevalence estimate. Access remains gated and local only under the researchers own terms; component rights and redistribution remain unreviewed.'
 resource_limits:
   max_wall_seconds: 14400
   max_cpu_seconds: 7200
@@ -28,7 +28,7 @@ allowed_hosts:
 - cdn-lfs.hf.co
 - us.aws.cdn.hf.co
 - eu.aws.cdn.hf.co
-preview_media_transfer_bytes: 276386066
+preview_media_transfer_bytes: 253898573
 files:
 - source_name: fairness/preference.json
   url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df/fairness/preference.json
@@ -341,7 +341,7 @@ files:
   sha256: 5ed73ab2523d14cf58970def19655ac4da3dd7d4c6bcdbb4a827ca5bdad8cc5e
   format: json
 adapter_config:
-  population: Query rows of the 50 MultiTrust member tasks at one pinned revision
+  population: 11512 native query rows plus 1104 independent native image units at one pinned revision
   tasks:
   - task: basic_attribute
     aspect: truthfulness
@@ -848,6 +848,72 @@ adapter_config:
     toolkit_tasks:
     - celebrities
     note: The image is imgs/<name with underscores>.jpeg; the Url column points to an external site and is never fetched.
+  inventory_tasks:
+  - task: nsfw
+    aspect: safety
+    prefix: safety/nsfw
+    unit_kind: image_only_example
+    join_basis: image_only_no_query_file
+    toolkit_tasks:
+    - nsfw-image-description
+  - task: risk_identification
+    aspect: safety
+    prefix: safety/risk_identification
+    unit_kind: image_only_example
+    join_basis: image_only_no_query_file
+    toolkit_tasks:
+    - risk-identification
+  - task: stereo_generation
+    aspect: fairness
+    prefix: fairness/stereo_generation_images
+    unit_kind: image_only_example
+    join_basis: image_only_no_query_file
+    toolkit_tasks:
+    - stereo-generation
+  - task: stereo_query
+    aspect: fairness
+    prefix: fairness/stereo_query_images
+    unit_kind: unpaired_image
+    join_basis: none_listdir_order_in_toolkit
+    related_query_task: stereo_query
+    toolkit_tasks:
+    - stereo-query-image
+  - task: crossmodal_jailbreak
+    aspect: safety
+    prefix: safety/crossmodal-jailbreak/jailbreak_neg
+    unit_kind: source_pool_image
+    join_basis: none_cross_product_in_toolkit
+    related_query_task: crossmodal_jailbreak
+    toolkit_tasks:
+    - crossmodal-jailbreak
+  - task: crossmodal_jailbreak
+    aspect: safety
+    prefix: safety/crossmodal-jailbreak/jailbreak_pos
+    unit_kind: source_pool_image
+    join_basis: none_cross_product_in_toolkit
+    related_query_task: crossmodal_jailbreak
+    toolkit_tasks:
+    - crossmodal-jailbreak
+  - task: shared_unrelated_images
+    aspect: shared
+    prefix: unrelated_images
+    unit_kind: source_pool_image
+    join_basis: none_random_choice_in_toolkit
+    toolkit_tasks: []
+  - task: real_toxicity_prompts
+    aspect: safety
+    prefix: safety/real_toxicity_prompt/images
+    unit_kind: source_pool_image
+    join_basis: no_released_query_row
+    related_query_task: real_toxicity_prompts
+    unreferenced_only: true
+  - task: typographic_prompt_graph
+    aspect: safety
+    prefix: safety/typographic_jailbreak/prompt_graph
+    unit_kind: source_pool_image
+    join_basis: no_released_query_row
+    related_query_task: typographic_prompt_graph
+    unreferenced_only: true
   media_inventory_path: registry/media/multitrust.json
   media_inventory_sha256: 78d8d0e3dd27ea5116ba3845680132bc141bebfba918a821107c50f1fd330b6f
   media_base_url: https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/84dc74754959e9f52b67c5185700f4f7fcd8c4df
@@ -879,6 +945,7 @@ adapter_config:
       - robustness
       - fairness
       - privacy
+      - shared
   max_annotation_bytes: 128000000
   fields:
     task:
@@ -934,7 +1001,11 @@ adapter_config:
       - vispr_leakage
       - confaide
       - celebrity_recognition
-      description: 'Member task: the query file (or the files of one authors task) a row comes from; see the task inventory report.'
+      - nsfw
+      - risk_identification
+      - stereo_generation
+      - shared_unrelated_images
+      description: Native member task or shared source pool; inspect unit_kind and join_basis for the record population.
     aspect:
       dtype: category
       values:
@@ -943,7 +1014,27 @@ adapter_config:
       - robustness
       - fairness
       - privacy
-      description: Trustworthiness aspect folder of the release.
+      - shared
+      description: One of five trustworthiness aspect folders, or shared for the unrelated-image resource pool.
     query_file:
       dtype: string
       description: Path of the query file inside the repository.
+    unit_kind:
+      dtype: category
+      values:
+      - query_row
+      - image_only_example
+      - unpaired_image
+      - source_pool_image
+    join_basis:
+      dtype: category
+    image_file:
+      dtype: string
+    source_pool:
+      dtype: category
+    source_category:
+      dtype: category
+    toolkit_tasks:
+      dtype: array
+    related_query_task:
+      dtype: category

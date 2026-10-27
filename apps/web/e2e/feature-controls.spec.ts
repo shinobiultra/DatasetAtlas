@@ -31,7 +31,7 @@ test('context review binds fields and tools, async polling retries and cancellat
     }
     const common = stubCommonRoutes(path, id)
     if (common !== undefined) return route.fulfill({ json: common })
-    if (path === '/capabilities') return route.fulfill({ json: { mode: 'workbench', operations: ['catalogue', 'query', 'providers', 'conversation-jobs'] } })
+    if (path === '/capabilities') return route.fulfill({ json: { mode: 'workbench', operations: ['catalogue', 'query', 'providers', 'conversations', 'conversation-jobs'] } })
     if (path === '/datasets') return route.fulfill({ json: [dataset] })
     if (path === `/datasets/${id}`) return route.fulfill({ json: dataset })
     if (path === '/artifacts') return route.fulfill({ json: [] })

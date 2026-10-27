@@ -1,0 +1,29 @@
+# The exact native structured file already pinned by the catalogue. Acquisition changes only its local path.
+# The parser, source field mapping, release, snapshot and record IDs are preserved; no conversion or generated data.
+release: github-8e1604d1171fe8a48d8febecd22f600e462bdcdd
+snapshot_id: github-HarmBench-8e1604d1171fe8a48d8febecd22f600e462bdcdd-text-all
+adapter: structured
+expected_count: 400
+scope: official HarmBench harmbench_behaviors_text_all.csv, 400 text behaviors
+source_url: https://github.com/centerforaisafety/HarmBench
+adapter_config:
+  format: csv
+  mapping:
+    id: BehaviorID
+    text: Behavior
+  fields:
+    Behavior: Original harmful-behavior request
+    FunctionalCategory: Functional category from source
+    SemanticCategory: Semantic category from source
+    Tags: Tags from source
+    ContextString: Optional context supplied by source
+  population: official HarmBench harmbench_behaviors_text_all.csv, 400 text behaviors
+files:
+- source_name: harmbench_behaviors_text_all.csv
+  url: https://raw.githubusercontent.com/centerforaisafety/HarmBench/8e1604d1171fe8a48d8febecd22f600e462bdcdd/data/behavior_datasets/harmbench_behaviors_text_all.csv
+  bytes: 198850
+  sha256: 8d81accedd38eaaf8b760618622bb888417d1fd0c86eba65c427a16f1cbb4afc
+  format: csv
+  config_key: path
+allowed_hosts:
+- raw.githubusercontent.com

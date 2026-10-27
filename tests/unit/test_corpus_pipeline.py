@@ -97,40 +97,29 @@ def test_agent_full_review_is_distinct_from_human_approval(tmp_path: Path) -> No
     assert any(item["kind"] == "extraction_quality" for item in queue)
 
 
-def test_confirmed_candidate_redirects_keep_both_page_receipts(tmp_path: Path) -> None:
+def test_candidate_summary_keeps_distinct_written_names_and_source_receipts(tmp_path: Path) -> None:
     rows = [
-        ("paper-12e8bd34b4a2f2a8", "unnamed harmful-instruction evaluation set",
-         "evidence-3f153c5972dc03b632ce", "evaluation"),
-        ("paper-12e8bd34b4a2f2a8", "unnamed harmful instruction evaluation set",
-         "evidence-c80bbda136db1321e17e", "human evaluation"),
-        ("paper-2df1203e2d3767bb", "JailBreakV-28K",
-         "evidence-cf91c6888c3690038c70", "source data"),
-        ("paper-2df1203e2d3767bb", "JailBreakV_28K",
-         "evidence-fd7b7e7e90ab5fde29d9", "harmful intent source"),
-        # An unrelated punctuation variant must remain separate.
-        ("paper-other", "JailBreakV 28K", "evidence-other", "citation"),
+        ("Example-Set", "evidence-one", "evaluation"),
+        ("Example-Set", "evidence-two", "source data"),
+        ("Example_Set", "evidence-three", "citation"),
+        ("Example Set", "evidence-four", "related work"),
     ]
-    evidence = [{"paper_id": pid, "name_as_written": name, "evidence_id": eid,
-                 "mention_role": role, "paper_full_review_complete": True,
-                 "source_file_hash": pid, "page": 6} for pid, name, eid, role in rows]
+    evidence = [{"paper_id": "paper-example", "name_as_written": name, "evidence_id": eid,
+                 "mention_role": role, "paper_full_review_complete": False,
+                 "source_file_hash": "0" * 64, "page": 6} for name, eid, role in rows]
     path = tmp_path / "curated_dataset_evidence.jsonl"
-    path.write_text("".join(json.dumps(row) + "\n" for row in evidence), encoding="utf-8")
+    original = "".join(json.dumps(row) + "\n" for row in evidence)
+    path.write_text(original, encoding="utf-8")
+
     assert write_curated_candidate_summary(tmp_path) == 3
     result = json.loads((tmp_path / "curated_dataset_candidates.json").read_text())
-    assert len(result["alias_redirects"]) == 2
-    groups = {row["proposed_id"]: row for row in result["candidates"]}
-    harmful = groups["paper-12e8bd34b4a2f2a8-unnamed-harmful-instruction-evaluation-set"]
-    assert len(harmful["evidence_ids"]) == 2
-    assert set(harmful["roles"]) == {"evaluation", "human evaluation"}
-    jailbreak = groups["jailbreakv-28k"]
-    assert set(jailbreak["evidence_ids"]) == {
-        "evidence-cf91c6888c3690038c70", "evidence-fd7b7e7e90ab5fde29d9"}
-    assert "JailBreakV_28K" in jailbreak["aliases_as_written"]
-    assert "jailbreakv-28k-13161513" not in groups
-    assert any(group["name"] == "JailBreakV 28K" for group in groups.values())
-    after = [json.loads(line) for line in path.read_text().splitlines()]
-    assert len(after) == 5
-    assert after[3]["candidate_original_id"] == "jailbreakv-28k-13161513"
-    assert after[3]["candidate_canonical_id"] == "jailbreakv-28k"
-    assert "candidate_canonical_id" not in after[4]
+    assert "alias_redirects" not in result
+    groups = {row["name"]: row for row in result["candidates"]}
+    assert set(groups) == {"Example-Set", "Example_Set", "Example Set"}
+    assert set(groups["Example-Set"]["evidence_ids"]) == {"evidence-one", "evidence-two"}
+    assert set(groups["Example-Set"]["roles"]) == {"evaluation", "source data"}
+    assert all(row["identity_status"] == "candidate" for row in result["candidates"])
+    assert result["dataset_identities_resolved_by_corpus_audit"] == 0
+    assert path.read_text(encoding="utf-8") == original
     assert write_curated_candidate_summary(tmp_path) == 3
+    assert path.read_text(encoding="utf-8") == original

@@ -6,22 +6,23 @@ description: AlgoPuzzleVQA algorithmic visual puzzle dataset. Author group also 
   code; corpus cites this as related-work comparison, not a direct run
 paper_ids:
 - paper-20de77d4e60fd1bd
-release: unresolved
+release: dc4b82f3817e5a4b89dad128f6d4eb0248c75072
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: source_page_public_data_unverified
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
   - Public source page located; exact paper-used data revision or archive is unverified.
   - Public data/media reuse rights require separate review.
+  total_count: 1800
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -35,8 +36,8 @@ evidence:
   source_file_hash: ccc6f6fee4214f0656c164535cbe29f1cbbce5769b311c93f08e1110437f29e0
   page: 8
   role: related-work comparison
-  excerpt: ', InternVL3.5-8B 0.1 23.35 14.98 34.53 20.70 2024), and AlgopuzzleVQA (Ghosal et al., 2024)
-    empha- InternVL3.5-8B 0.6 23.68 16.15 33.13 20.70 size the model’s r'
+  excerpt: ', InternVL3.5-8B 0.1 23.35 14.98 34.53 20.70 2024), and AlgopuzzleVQA (Ghosal et al.,
+    2024) empha- InternVL3.5-8B 0.6 23.68 16.15 33.13 20.70 size the model’s r'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -54,17 +55,52 @@ evidence:
   source_identity_status: author_release_located
 - kind: source_audit_access
   url: https://huggingface.co/datasets/declare-lab/AlgoPuzzleVQA
-  note: source_page_public_data_unverified; Pin HF revision and puzzle subtype if later used; preserve
-    related-work-only role.
+  note: source_page_public_data_unverified; Pin HF revision and puzzle subtype if later used;
+    preserve related-work-only role.
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_release_located
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in at least
-    one record. Not inferred from the name or description.'
-source_url: https://huggingface.co/datasets/declare-lab/AlgoPuzzleVQA
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in
+    at least one record. Not inferred from the name or description.'
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: dc4b82f3817e5a4b89dad128f6d4eb0248c75072
+  snapshot_id: algopuzzlevqa-d7290b7a41f1d5598624f816
+  source_url: https://huggingface.co/datasets/declare-lab/AlgoPuzzleVQA/tree/dc4b82f3817e5a4b89dad128f6d4eb0248c75072
+  record_count: 1800
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All Arrow/Parquet shards in the pinned repository; configuration and split retained
+    by source filename.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: dc4b82f3817e5a4b89dad128f6d4eb0248c75072
+  snapshot_id: algopuzzlevqa-d7290b7a41f1d5598624f816
+  source_url: https://huggingface.co/datasets/declare-lab/AlgoPuzzleVQA/tree/dc4b82f3817e5a4b89dad128f6d4eb0248c75072
+  record_count: 1800
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All Arrow/Parquet shards in the pinned repository; configuration and split retained
+    by source filename.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
+source_url: https://huggingface.co/datasets/declare-lab/AlgoPuzzleVQA/tree/dc4b82f3817e5a4b89dad128f6d4eb0248c75072
 modalities:
 - image
 - text
+snapshot_id: algopuzzlevqa-d7290b7a41f1d5598624f816

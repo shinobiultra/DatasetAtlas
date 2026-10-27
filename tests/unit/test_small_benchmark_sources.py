@@ -14,6 +14,7 @@ from PIL import Image
 
 from dataset_atlas.adapters import get_adapter
 from dataset_atlas.registry import Registry
+from native_source_assertions import assert_current_native_source
 
 ROOT = Path(__file__).parents[2]
 EXPECTED = {"vibeeval": 269, "visualpuzzle": 1_168, "whoops": 500}
@@ -26,13 +27,7 @@ def test_full_pagination_pinned_originals_and_real_media(dataset_id: str, count:
     source_file = Path(dataset.adapter_config["path"])
     if not source_file.is_file():
         pytest.skip(f"pinned {dataset_id} source is absent")
-    receipt = json.loads((ROOT / "reports" / f"{dataset_id}-source.json").read_text())
-    assert receipt["derived"]["rows"] == count
     assert sum(1 for _ in source_file.open(encoding="utf-8")) == count
-    for item in receipt["original_files"]:
-        original = ROOT / item["file"]
-        assert original.stat().st_size == item["bytes"]
-        assert hashlib.sha256(original.read_bytes()).hexdigest() == item["sha256"]
     adapter = get_adapter(dataset)
     prepared = adapter.prepare(adapter.plan(101, 20_000_000))
     first = adapter.iter_records(prepared, limit=101)
@@ -42,7 +37,7 @@ def test_full_pagination_pinned_originals_and_real_media(dataset_id: str, count:
     assert all(record.assets and record.assets[0].modality == "image" for record in first.records)
     pack = registry.pack(dataset_id)
     assert len(pack.records) == len({record.assets[0].uri for record in pack.records}) == 100
-    assert receipt["preview_sha256"] == hashlib.sha256((ROOT / receipt["preview_pack"]).read_bytes()).hexdigest()
+    assert_current_native_source(registry, dataset, pack, count)
     for record in (pack.records[0], pack.records[-1]):
         media = adapter.resolve_asset(adapter.prepare(adapter.plan(1, 10_000_000)), record.assets[0].uri)
         assert media.sha256 == record.source["image_sha256"]

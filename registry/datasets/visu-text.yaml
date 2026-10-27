@@ -2,29 +2,29 @@ schema_version: '1.0'
 id: visu-text
 name: ViSU-Text
 aliases: []
-description: Author text-only ViSU caption-pair component. Local authorized files
-  are now acquired; unsafe vision images remain deliberately unreleased.
+description: Author text-only ViSU caption-pair component. Local authorized files are now acquired;
+  unsafe vision images remain deliberately unreleased.
 paper_ids:
 - paper-09b2d7393fc75cf7
 source_url: https://huggingface.co/datasets/aimagelab/ViSU-Text/tree/9afabb85b5570fa883b7caa0561d8c8d71d84dcd
 release: hf-9afabb85b5570fa883b7caa0561d8c8d71d84dcd
-snapshot_id: hf-aimagelab-ViSU-Text-9afabb85b5570fa883b7caa0561d8c8d71d84dcd
+snapshot_id: visu-text-58d1117cb0d29527958928db
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: gated
-  adapter: not_started
-  preview: none
-  complete_data: externally_blocked
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: local_only
-  preview_count: 0
-  total_count: null
+  preview_count: 100
+  total_count: 168700
   unit: example
   blockers:
-  - Unsafe vision images are deliberately withheld by the authors; text files alone
-    cannot provide vision coverage.
+  - Unsafe vision images are deliberately withheld by the authors; text files alone cannot provide
+    vision coverage.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -32,15 +32,12 @@ rights:
   source: https://huggingface.co/datasets/aimagelab/ViSU-Text/tree/9afabb85b5570fa883b7caa0561d8c8d71d84dcd
   note: The manual gate requires noncommercial use declaration and institutional application.
     Safe COCO photos retain separate rights; unsafe vision images are not released.
-relationships:
-- type: text_component_of
-  target: visu
-  status: verified
+relationships: []
 evidence:
 - kind: source_audit_access
   url: https://huggingface.co/api/datasets/aimagelab/ViSU-Text
-  note: HF API at checked revision reports gated=manual; train/test/validation JSON
-    names are visible but files require institutional author approval.
+  note: HF API at checked revision reports gated=manual; train/test/validation JSON names are
+    visible but files require institutional author approval.
   checked_on: '2026-09-22'
 - kind: source_audit_release
   url: https://huggingface.co/datasets/aimagelab/ViSU-Text/tree/9afabb85b5570fa883b7caa0561d8c8d71d84dcd
@@ -50,15 +47,35 @@ evidence:
 - kind: source_audit_access
   url: https://huggingface.co/datasets/aimagelab/ViSU-Text/tree/9afabb85b5570fa883b7caa0561d8c8d71d84dcd
   checked_on: '2026-10-06'
-  note: Local authorized account passed native-file access checks; all three original
-    JSON files acquired within a 60 MB transfer cap and verified against pinned Git
-    blob SHA-1 plus locally measured SHA-256.
+  note: Local authorized account passed native-file access checks; all three original JSON files
+    acquired within a 60 MB transfer cap and verified against pinned Git blob SHA-1 plus locally
+    measured SHA-256.
   source_identity_status: authorized_native_text_not_vision_coverage
   receipt: reports/visu-text-native-acquisition-20261006.json
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 100-record prepared preview: asset kinds and text fields
-    present in at least one record. Not inferred from the name or description.'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in
+    at least one record. Not inferred from the name or description.'
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: hf-9afabb85b5570fa883b7caa0561d8c8d71d84dcd
+  snapshot_id: visu-text-58d1117cb0d29527958928db
+  source_url: https://huggingface.co/datasets/aimagelab/ViSU-Text/tree/9afabb85b5570fa883b7caa0561d8c8d71d84dcd
+  record_count: 168700
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: 'All 168,700 original ViSU-Text caption-pair rows: 158,700 train, 5,000 validation
+    and 5,000 test. Every native safe/nsfw caption, incremental ID, prompt ID, tag and COCO ID
+    remains unchanged, including native split-dependent COCO ID types. Canonical display text
+    is the native safe caption; its paired unsafe caption remains separately queryable as source.nsfw.
+    This text-only component has no vision images and does not establish access to the deliberately
+    withheld unsafe vision corpus. Content remains authorized-local and is never publicly distributed.'
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/visu-text.yaml
 modalities:
 - text

@@ -2,31 +2,31 @@ schema_version: '1.0'
 id: high-quality-hallucination-benchmark
 name: High-Quality Hallucination Benchmark
 aliases: []
-description: 'HQH/HQHBench: 4,000 VQA pairs, eight 500-pair hallucination types, Visual
-  Genome image IDs. Source review: Author repository commit 6d35a4c320270fa507016550312edcb5a0570ed4'
+description: 'HQH/HQHBench: 4,000 VQA pairs, eight 500-pair hallucination types, Visual Genome
+  image IDs. Source review: Author repository commit 6d35a4c320270fa507016550312edcb5a0570ed4'
 paper_ids:
 - paper-25eaa8c74ce76800
-release: unresolved
+release: 6d35a4c320270fa507016550312edcb5a0570ed4
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
-  blockers:
-  - Adapter and preview are not implemented.
+  blockers: []
+  total_count: 4000
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
-  note: Authors state CC BY 4.0 following Visual Genome; underlying image licenses
-    still require per-asset review
+  note: Authors state CC BY 4.0 following Visual Genome; underlying image licenses still require
+    per-asset review
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-9a253ea5a6e2edab0d22
@@ -39,22 +39,22 @@ evidence:
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://github.com/HQHBench/HQHBench/tree/6d35a4c320270fa507016550312edcb5a0570ed4
-  note: 'HQH/HQHBench: 4,000 VQA pairs, eight 500-pair hallucination types, Visual
-    Genome image IDs Author repository commit 6d35a4c320270fa507016550312edcb5a0570ed4'
+  note: 'HQH/HQHBench: 4,000 VQA pairs, eight 500-pair hallucination types, Visual Genome image
+    IDs Author repository commit 6d35a4c320270fa507016550312edcb5a0570ed4'
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_access
   url: https://github.com/HQHBench/HQHBench/tree/6d35a4c320270fa507016550312edcb5a0570ed4
-  note: 'Author JSON is on GitHub; images linked separately to Visual Genome Probe:
-    first_primary_url_http_head_200; payload_not_downloaded'
+  note: 'Author JSON is on GitHub; images linked separately to Visual Genome Probe: first_primary_url_http_head_200;
+    payload_not_downloaded'
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_rights
   url: https://openreview.net/forum?id=kjVgyR3RFr
-  note: Authors state CC BY 4.0 following Visual Genome; underlying image licenses
-    still require per-asset review
+  note: Authors state CC BY 4.0 following Visual Genome; underlying image licenses still require
+    per-asset review
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
@@ -62,13 +62,52 @@ evidence:
   url: https://github.com/HQHBench/HQHBench
   checked_on: '2026-09-23'
   report: reports/selective-acquisition-20260923.md
-  note: Pinned acquired population and real preview exercised locally. Mirror and
-    selective-transfer limits remain in the acquisition receipts; this does not establish
-    publication rights or the exact paper-used subset.
+  note: Pinned acquired population and real preview exercised locally. Mirror and selective-transfer
+    limits remain in the acquisition receipts; this does not establish publication rights or the
+    exact paper-used subset.
   recipe: registry/recipes/high-quality-hallucination-benchmark.yaml
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: 6d35a4c320270fa507016550312edcb5a0570ed4
+  snapshot_id: high-quality-hallucination-benchmark-83c0f8cb55644a3ef37a292b
+  source_url: https://github.com/HQHBench/HQHBench
+  record_count: 4000
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 4000 author HQH questions joined to the released image_data metadata and original
+    Visual Genome archive members by native image ID and URL path. Match validated against both
+    full VG archive directories; images are retrieved on demand, not all copied locally.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/high-quality-hallucination-benchmark.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: 6d35a4c320270fa507016550312edcb5a0570ed4
+  snapshot_id: high-quality-hallucination-benchmark-83c0f8cb55644a3ef37a292b
+  source_url: https://github.com/HQHBench/HQHBench
+  record_count: 4000
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 4000 author HQH questions joined to the released image_data metadata and original
+    Visual Genome archive members by native image ID and URL path. Match validated against both
+    full VG archive directories; images are retrieved on demand, not all copied locally.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/high-quality-hallucination-benchmark.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
 source_url: https://github.com/HQHBench/HQHBench
 modalities:
 - image
 - text
 tasks:
 - visual hallucination evaluation
+snapshot_id: high-quality-hallucination-benchmark-83c0f8cb55644a3ef37a292b

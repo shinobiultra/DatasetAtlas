@@ -2,26 +2,26 @@ schema_version: '1.0'
 id: illusionmnist
 name: IllusionMNIST
 aliases: []
-description: IllusoryVQA IllusionMNIST subdataset. Author project names IllusionMNIST
-  among four specialized Illusory VQA datasets; corpus use is related-work comparison
+description: IllusoryVQA IllusionMNIST subdataset. Author project names IllusionMNIST among four
+  specialized Illusory VQA datasets; corpus use is related-work comparison
 paper_ids:
 - paper-20de77d4e60fd1bd
-release: unresolved
+release: official-collection-a197e3e89ea6740e
 adapter: structured
 adapter_config: {}
 coverage:
-  identity: family_or_variant_candidate
+  identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Paper-used variant/configuration is not pinned to an exact source release.
   - Public data/media reuse rights require separate review.
+  total_count: 5069
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -35,14 +35,14 @@ evidence:
   source_file_hash: ccc6f6fee4214f0656c164535cbe29f1cbbce5769b311c93f08e1110437f29e0
   page: 8
   role: related-work comparison
-  excerpt: asets 5. Related Works (e.g., IllusionMNIST) for illusion recognition;
-    The Art of 5.1. Multimodal Large Language Models Deception
+  excerpt: asets 5. Related Works (e.g., IllusionMNIST) for illusion recognition; The Art of 5.1.
+    Multimodal Large Language Models Deception
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://github.com/IllusoryVQA/IllusoryVQA
-  note: Author project names IllusionMNIST among four specialized Illusory VQA datasets;
-    corpus use is related-work comparison
+  note: Author project names IllusionMNIST among four specialized Illusory VQA datasets; corpus
+    use is related-work comparison
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_family_located_subset_unpinned
@@ -54,8 +54,8 @@ evidence:
   source_identity_status: author_family_located_subset_unpinned
 - kind: source_audit_access
   url: https://github.com/IllusoryVQA/IllusoryVQA
-  note: base_source_public_variant_unverified; Keep this as a subdataset of IllusoryVQA;
-    do not confuse with separate IllusionVQA benchmark.
+  note: base_source_public_variant_unverified; Keep this as a subdataset of IllusoryVQA; do not
+    confuse with separate IllusionVQA benchmark.
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_family_located_subset_unpinned
@@ -63,9 +63,51 @@ evidence:
   url: https://github.com/IllusoryVQA/IllusoryVQA
   checked_on: '2026-09-23'
   report: reports/selective-acquisition-20260923.md
-  note: Pinned acquired population and real preview exercised locally. Mirror and
-    selective-transfer limits remain in the acquisition receipts; this does not establish
-    publication rights or the exact paper-used subset.
+  note: Pinned acquired population and real preview exercised locally. Mirror and selective-transfer
+    limits remain in the acquisition receipts; this does not establish publication rights or the
+    exact paper-used subset.
+  recipe: registry/recipes/illusionmnist.yaml
+- kind: paper_usage_qualification
+  note: Available release identity is separate from historical paper use.
+  qualifications:
+  - Paper-used variant/configuration is not pinned to an exact source release.
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  status: resolved_declared_source_population
+  release: official-collection-a197e3e89ea6740e
+  snapshot_id: illusionmnist-dcfed09bae9f2498897a2cf8
+  source_url: https://github.com/IllusoryVQA/IllusoryVQA
+  representation: pinned_source_population
+  record_count: 5069
+  population: All native CSV-indexed train/test rows in MNIST_train, MNIST_test. Each example
+    keeps all released image conditions and their condition-specific targets. Missing training
+    control counterparts are explicit. Unindexed duplicate-name image files and generation prompt
+    pools are retained upstream, not counted as annotated examples. This is the original author-generated
+    dataset, not Atlas-generated replacements.
+  basis: Existing checksum-pinned preparation and snapshot metadata; no record contents read during
+    this curation.
+  scope_note: Identifies the available source population. This is not human review, historical
+    paper-membership acceptance, publisher byte-equivalence proof, or permission to redistribute.
+  receipt: work/prepared/illusionmnist/dcfed09bae9f2498897a2cf8569fa0af93a95d9ea4f2d2b7a47551ecb776d020/receipt.json
+  receipt_sha256: 7c8f360cd8d89cdc3d8e2f662ddd7869dca8d07f7c05e6884c817f24fb724717
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: official-collection-a197e3e89ea6740e
+  snapshot_id: illusionmnist-dcfed09bae9f2498897a2cf8
+  source_url: https://github.com/IllusoryVQA/IllusoryVQA
+  record_count: 5069
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All native CSV-indexed train/test rows in MNIST_train, MNIST_test. Each example
+    keeps all released image conditions and their condition-specific targets. Missing training
+    control counterparts are explicit. Unindexed duplicate-name image files and generation prompt
+    pools are retained upstream, not counted as annotated examples. This is the original author-generated
+    dataset, not Atlas-generated replacements.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
   recipe: registry/recipes/illusionmnist.yaml
 source_url: https://github.com/IllusoryVQA/IllusoryVQA
 modalities:
@@ -73,3 +115,4 @@ modalities:
 - text
 tasks:
 - visual illusion reasoning
+snapshot_id: illusionmnist-dcfed09bae9f2498897a2cf8

@@ -1,0 +1,15 @@
+source_url: https://huggingface.co/datasets/derek-thomas/ScienceQA/tree/f18b0a70359ebfb41f658fd564208d0355b013f4
+release: f18b0a70359ebfb41f658fd564208d0355b013f4
+expected_count: 21208
+description: All 21,208 native ScienceQA questions across train, validation and test,
+  including the 10,332 image-bearing and 10,876 text-only questions. Original fields
+  and native split/source order are retained.
+scope: All 21,208 native ScienceQA questions across train, validation and test, including
+  the 10,332 image-bearing and 10,876 text-only questions. Original fields and native
+  split/source order are retained.
+adapter_config:
+  mapping:
+    question: question
+    choices: choices
+  media_scope: on_demand_unverified
+  remote_cache_bytes: 250000000

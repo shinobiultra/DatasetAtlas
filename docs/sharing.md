@@ -4,12 +4,12 @@ Give colleagues repository access. They can browse the approved sample without
 copying the maintainer's large dataset workspace:
 
 ```bash
-git clone https://github.com/shinobiultra/DatasetAtlas.git
+git clone --depth 1 https://github.com/shinobiultra/DatasetAtlas.git
 cd DatasetAtlas
 ./start.sh
 ```
 
-This needs uv and Node.js 22 or newer. It installs the locked base dependencies,
+This needs uv and Node.js 26 (or 22.12+). It installs the locked base dependencies,
 validates the checked-in publication approvals and rebuilds the interface before
 opening a local browser. Optional analysis packages already installed in the
 environment are retained. Ctrl-C stops the sample server. For an SSH session,
@@ -29,9 +29,10 @@ complete dataset coverage, model accuracy or human acceptance.
 
 ## Portable sample ZIP
 
-After a successful GitHub Actions validation run, download the
-`dataset-atlas-samples` artifact. GitHub wraps the artifact in an outer ZIP;
-extract it and then extract `dataset-atlas-samples.zip`. In that directory run:
+Download the [sample ZIP](https://github.com/shinobiultra/DatasetAtlas/releases/latest/download/dataset-atlas-samples.zip)
+and its [checksum](https://github.com/shinobiultra/DatasetAtlas/releases/latest/download/dataset-atlas-samples.zip.sha256)
+from the [latest release](https://github.com/shinobiultra/DatasetAtlas/releases/latest).
+Extract the ZIP and open its `dataset-atlas-sample` folder. Run:
 
 ```bash
 python3 OPEN_ATLAS.py --check     # verify the complete bundle without starting a server

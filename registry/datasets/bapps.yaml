@@ -2,26 +2,26 @@ schema_version: '1.0'
 id: bapps
 name: BAPPS
 aliases: []
-description: Native BAPPS human perceptual judgements for 2AFC and JND, with original
-  patches and distinct reference/p0/p1 roles.
+description: Native BAPPS human perceptual judgements for 2AFC and JND, with original patches
+  and distinct reference/p0/p1 roles.
 paper_ids:
 - paper-666de2b7486d80a3
-release: unresolved
+release: BAPPS-author-archives-20260923
 adapter: structured
 adapter_config: {}
 coverage:
-  identity: candidate
+  identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Original release identity and rights need verification.
-  - Adapter and preview are not implemented.
+  - Public redistribution rights remain unreviewed.
+  total_count: 197344
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -33,21 +33,62 @@ evidence:
   source_file_hash: c43575003d83757725739ad87acfc4026d0d3129b27bee69fd1a4c362dc0db33
   page: 3
   role: introduction
-  excerpt: ' 1: Dataset comparison. A primary differentiator between our proposed
-    Berkeley-Adobe Perceptual Patch Similarity (BAPPS) dataset and previous work is
-    scale of distortion types. We provide human perceptual judgments on dist'
+  excerpt: ' 1: Dataset comparison. A primary differentiator between our proposed Berkeley-Adobe
+    Perceptual Patch Similarity (BAPPS) dataset and previous work is scale of distortion types.
+    We provide human perceptual judgments on dist'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: implemented_source_release
   url: https://github.com/richzhang/PerceptualSimilarity
   checked_on: '2026-09-23'
   report: reports/selective-acquisition-20260923.md
-  note: Pinned acquired population and real preview exercised locally. Mirror and
-    selective-transfer limits remain in the acquisition receipts; this does not establish
-    publication rights or the exact paper-used subset.
+  note: Pinned acquired population and real preview exercised locally. Mirror and selective-transfer
+    limits remain in the acquisition receipts; this does not establish publication rights or the
+    exact paper-used subset.
+  recipe: registry/recipes/bapps.yaml
+- kind: paper_usage_qualification
+  note: Available release identity is separate from historical paper use.
+  qualifications:
+  - Original release identity and rights need verification.
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  status: resolved_declared_source_population
+  release: BAPPS-author-archives-20260923
+  snapshot_id: bapps-fbde65c7714d91d3224a25f8
+  source_url: https://github.com/richzhang/PerceptualSimilarity
+  representation: pinned_source_population
+  record_count: 197344
+  population: All 197344 native BAPPS judgement records from author-linked 2AFC train/validation
+    and JND validation TARs. Original patches, reference/p0/p1 roles and fractional human judgements
+    retained. Native distortion groups and splits are distinct memberships. No inferred media
+    publication rights.
+  basis: Existing checksum-pinned preparation and snapshot metadata; no record contents read during
+    this curation.
+  scope_note: Identifies the available source population. This is not human review, historical
+    paper-membership acceptance, publisher byte-equivalence proof, or permission to redistribute.
+  receipt: work/prepared/bapps/fbde65c7714d91d3224a25f88dbf03feba374981fa477414299f067186ae9c7e/receipt.json
+  receipt_sha256: 92cf2771e9109df19417bd73e1572719e84c47176bcc720cb3b739f94bfafe72
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: BAPPS-author-archives-20260923
+  snapshot_id: bapps-fbde65c7714d91d3224a25f8
+  source_url: https://github.com/richzhang/PerceptualSimilarity
+  record_count: 197344
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 197344 native BAPPS judgement records from author-linked 2AFC train/validation
+    and JND validation TARs. Original patches, reference/p0/p1 roles and fractional human judgements
+    retained. Native distortion groups and splits are distinct memberships. No inferred media
+    publication rights.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
   recipe: registry/recipes/bapps.yaml
 modalities:
 - image
 tasks:
 - human perceptual similarity
 source_url: https://github.com/richzhang/PerceptualSimilarity
+snapshot_id: bapps-fbde65c7714d91d3224a25f8

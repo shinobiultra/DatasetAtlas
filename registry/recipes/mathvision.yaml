@@ -1,0 +1,43 @@
+# Direct native Parquet: preserve the existing release, snapshot, row IDs and original embedded image bytes.
+# No conversion, generated examples, or eager extraction of the image population.
+release: hf-2837ddb3f13abaf6b3997c12d80753e5470bd46a-test
+snapshot_id: hf-2837ddb3f13abaf6b3997c12d80753e5470bd46a-test-bcb3078a77bd
+adapter: embedded_parquet
+expected_count: 3040
+scope: MathVision official test split, 3,040 rows; testmini overlap excluded; the overlapping testmini file is excluded.
+source_url: https://huggingface.co/datasets/MathLLMs/MathVision
+adapter_config:
+  format: parquet
+  media_columns:
+  - decoded_image
+  mapping:
+    id: id
+    question: question
+    choices: options
+  fields:
+    id: Original test problem ID
+    question: Original competition problem question
+    options: Original answer options
+    answer: Original source answer
+    solution: Original solution when present
+    level: Original difficulty level
+    subject: Original math subject
+    image: Original source image path
+    decoded_image: Embedded source image metadata, without binary payload
+  population: MathVision official test split, 3,040 rows; testmini overlap excluded
+files:
+- source_name: data/test-00000-of-00001-3532b8d3f1b4047a.parquet
+  url: https://huggingface.co/datasets/MathLLMs/MathVision/resolve/2837ddb3f13abaf6b3997c12d80753e5470bd46a/data/test-00000-of-00001-3532b8d3f1b4047a.parquet
+  bytes: 56906090
+  sha256: bcb3078a77bd6ee0e4e22135d53b9a48604fcd1b62dec69e279e812ba4dd7d37
+  format: parquet
+  config_key: path
+allowed_hosts:
+- huggingface.co
+- cas-bridge.xethub.hf.co
+- cdn-lfs-us-1.huggingface.co
+- cdn-lfs.huggingface.co
+- cdn-lfs-us-1.hf.co
+- cdn-lfs.hf.co
+- us.aws.cdn.hf.co
+- eu.aws.cdn.hf.co

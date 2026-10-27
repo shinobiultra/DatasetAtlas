@@ -13,11 +13,17 @@ import zipfile
 from . import PreparationManager, atomic, snapshot_for
 
 
-def run(root, identity):
+def run(root, identity, *, activate=None):
     manager = PreparationManager(root)
     directory = manager._path(identity)
     plan = json.loads((directory / 'plan.json').read_text())
-    status = {'id': identity, 'dataset_id': plan['dataset_id'], 'status': 'running', 'pid': os.getpid()}
+    previous_status = json.loads((directory / 'status.json').read_text()) if (directory / 'status.json').exists() else {}
+    if activate is None:activate = previous_status.get('activate_on_success', True)
+    if type(activate) is not bool:raise ValueError('Preparation activation intent must be boolean')
+    if not activate and plan['kind'] == 'huggingface_remote_sample':
+        raise ValueError('Nonactivating preparation is not supported for sampled remote sources')
+    status = {'id': identity, 'dataset_id': plan['dataset_id'], 'status': 'running', 'pid': os.getpid(),
+              'activate_on_success': activate}
     def update(**values):
         status.update(values, updated_at=time.time())
         atomic(directory / 'status.json', status)
@@ -52,6 +58,42 @@ def run(root, identity):
         version = base / identity
         version.mkdir(parents=True, exist_ok=True)
         check()
+        if plan['kind']=='pata_metadata':
+            from .pata import metadata_contract, prepare_metadata
+            if plan.get('builtin_source') != metadata_contract():
+                raise ValueError('PATA builtin source contract changed; create a new plan')
+            update(stage='indexing native PATA metadata', downloaded_bytes=0)
+            result=prepare_metadata(Path(root),execute=True,activate=False,
+                max_download_bytes=min(plan['max_download_bytes'],5_000_000),
+                max_output_bytes=min(plan['max_output_bytes'],100_000_000),
+                _version_id=identity,_writer_lease=lock,_cancel_check=check)
+            check()
+            from dataset_atlas.models import Pack
+            pack=Pack.model_validate_json((version/'pack/pack.json').read_text())
+            pack.dataset.adapter_config={}
+            atomic(version/'pack/pack.json',pack.model_dump(mode='json'),compact=True)
+            receipt={**result,'plan_id':identity,'dataset_id':dataset.id,
+                'record_count':4934,'scope':plan['scope'],'sampling':pack.sampling,
+                'source_files':plan['builtin_source']['files'],
+                'source_transfer_bytes':result['downloaded_bytes'],'total_transfer_bytes':result['downloaded_bytes'],
+                'activate_on_success':activate,
+                'registered_source_reused_bytes':sum(entry['bytes'] for entry in plan['builtin_source']['files'])-result['downloaded_bytes']}
+            receipt.pop('activated',None)
+            native=Dataset.model_validate_json((version/'dataset.json').read_text())
+            converted=Path(native.adapter_config['path'])
+            if not converted.is_absolute():converted=Path(root)/converted
+            for _ in range(3):
+                atomic(version/'receipt.json',receipt)
+                measured=converted.stat().st_size+sum(path.stat().st_size for path in version.rglob('*') if path.is_file())
+                if measured==receipt['output_bytes']:break
+                receipt['output_bytes']=measured
+            if measured>min(plan['max_output_bytes'],100_000_000):
+                raise ValueError('PATA metadata finalization exceeds the approved output budget')
+            check()
+            if activate:atomic(base/'active.json',{'version':identity})
+            update(status='completed',stage='ready' if activate else 'candidate ready',snapshot_id=result['snapshot_id'],
+                indexed_count=4934,preview_count=100,downloaded_bytes=result['downloaded_bytes'])
+            return
         update(stage='acquiring', downloaded_bytes=0)
         sequential_result=None
         zip_tar_result=None
@@ -200,7 +242,16 @@ def run(root, identity):
                 inputs = {entry['config_key']: Path(entry['path']) for entry in files if entry.get('config_key')}
                 if zip_tar_result:
                     inputs.update({'audio_index_'+key:Path(path) for key,path in zip_tar_result['indices'].items()})
-                converted = run_conversion(plan['convert'], inputs, version / 'sources/converted', check)
+                converted_directory=version/'sources/converted'
+                staged={}
+                for path in version.rglob('*'):
+                    if (not path.is_file() or path.is_symlink()
+                            or path.is_relative_to(version/'staging-download-cache')
+                            or path.is_relative_to(converted_directory)):continue
+                    file_stat=path.stat();staged[(file_stat.st_dev,file_stat.st_ino)]=file_stat.st_size
+                conversion_budget=max(0,plan['max_output_bytes']-sum(staged.values()))
+                converted = run_conversion(plan['convert'], inputs, converted_directory, check,
+                                           max_output_bytes=conversion_budget)
                 converted_source={'path':str(converted['path']),'bytes':converted['path'].stat().st_size,
                     'sha256':converted['file_sha256'],'format':converted['format'],'kind':'checksum-pinned native conversion'}
                 dataset.adapter_config.update(path=str(converted['path']), format=converted['format'], sha256=converted['file_sha256'])
@@ -230,7 +281,7 @@ def run(root, identity):
             dataset.release=plan['revision']
             dataset.snapshot_id=snapshot_for(dataset.id,plan,identity,root)
             dataset.adapter='remote_columnar'
-            source_options={key:dataset.adapter_config[key] for key in ('record_filter','expected_source_count','fields','max_record_bytes','remote_cache_root','remote_cache_bytes','credential_profile','media_encoding','media_columns') if key in dataset.adapter_config}
+            source_options={key:dataset.adapter_config[key] for key in ('record_filter','expected_source_count','fields','max_record_bytes','remote_cache_root','remote_cache_bytes','credential_profile','media_encoding','media_columns','media_scope') if key in dataset.adapter_config}
             dataset.adapter_config={'remote_files':remote_files,'allowed_hosts':hosts,
                 'remote_cache_root':str(Path(root)/'work/media-cache/remote-parquet'),'remote_cache_bytes':1_000_000_000,
                 'metadata_transfer_bytes':plan['max_download_bytes'],'population':plan['scope'],
@@ -418,6 +469,18 @@ def run(root, identity):
         sampler = (AssetFirstPreviewSampler(min(expected_count, 100)) if group_by == 'primary_asset_then_example'
             else PreviewSampler(min(expected_count, 250 if verify_remote_media else 100), group_by=group_by,
                                 stratify=(dataset.adapter_config.get('preview_sampling') or {}).get('stratify_by')))
+        available_preview_only = dataset.adapter_config.get('preview_available_media_only', False)
+        if type(available_preview_only) is not bool:raise ValueError('Preview media eligibility must be boolean')
+        if available_preview_only and getattr(sampler, 'stratify', None):
+            raise ValueError('Available-only preview eligibility cannot be combined with stratification')
+        eligible_preview_count = 0
+        def sample_record(record):
+            nonlocal eligible_preview_count
+            if available_preview_only and not any(asset.uri for asset in record.assets):
+                sampler.population_count += 1
+                return
+            eligible_preview_count += 1
+            sampler.add(record)
         def records():
             cursor = None
             count = 0
@@ -425,7 +488,7 @@ def run(root, identity):
                 for record in adapter.iter_sequential(source):
                     check()
                     if not filter_record(record,record_filter):continue
-                    sampler.add(record)
+                    sample_record(record)
                     yield record
                     count += 1
                     if count % 1000 == 0:
@@ -436,7 +499,7 @@ def run(root, identity):
                     for record in remote_records:
                         check()
                         if not filter_record(record,record_filter):continue
-                        sampler.add(record)
+                        sample_record(record)
                         yield record
                         count += 1
                         if count % 1000 == 0:
@@ -449,7 +512,7 @@ def run(root, identity):
                     raise ValueError('Adapter made no progress')
                 for record in batch.records:
                     if not filter_record(record,record_filter):continue
-                    sampler.add(record)
+                    sample_record(record)
                     yield record
                     count += 1
                 update(stage='indexing', indexed_count=count, **({'downloaded_bytes':source_transfer_bytes+adapter.bytes_fetched} if hasattr(adapter, 'bytes_fetched') else {}))
@@ -474,7 +537,7 @@ def run(root, identity):
             for batch in pq.ParquetFile(snapshot / 'records.parquet').iter_batches(columns=['record_json'], batch_size=256):
                 check()
                 for value in batch.column(0).to_pylist():
-                    sampler.add(Record.model_validate_json(value))
+                    sample_record(Record.model_validate_json(value))
         if sampler.population_count != expected_count:
             raise ValueError('Preview sampling population differs from the complete index')
         candidates = sampler.records()
@@ -538,6 +601,9 @@ def run(root, identity):
         else:
             pack.records = candidates
         pack.sampling = sampler.description(dataset.release, dataset.coverage.unit)
+        if available_preview_only:
+            pack.sampling.update(eligibility='records with at least one available native media reference',
+                                 eligible_population_count=eligible_preview_count)
         if bounded_sampling:
             pack.sampling={**bounded_sampling,'unit':dataset.coverage.unit,'source_revision':dataset.release,
                 'requested_count':min(expected_count,100),'returned_count':len(pack.records),'population':plan['scope'],
@@ -557,7 +623,9 @@ def run(root, identity):
         check()
         dataset.coverage.preview_count = len(pack.records)
         dataset.coverage.total_count = expected_count
-        dataset.coverage.preview = 'complete_target'
+        metadata_only_preview = (any(record.assets for record in pack.records)
+                                 and not any(asset.uri for record in pack.records for asset in record.assets))
+        dataset.coverage.preview = 'metadata_only' if metadata_only_preview else 'complete_target'
         dataset.coverage.adapter = 'tested'
         dataset.coverage.complete_data = ('indexed_metadata_partial_media'
             if dataset.adapter_config.get('media_scope') in {'selected_preview', 'on_demand_unverified', 'partial'}
@@ -585,8 +653,8 @@ def run(root, identity):
         # avoid cross-job eviction and allow the two writers to transfer at once.
         staging_cache=version/'staging-download-cache'
         if staging_cache.exists():shutil.rmtree(staging_cache)
-        atomic(base / 'active.json', {'version': identity})
-        update(status='completed', stage='ready', snapshot_id=dataset.snapshot_id, indexed_count=expected_count,
+        if activate:atomic(base / 'active.json', {'version': identity})
+        update(status='completed', stage='ready' if activate else 'candidate ready', snapshot_id=dataset.snapshot_id, indexed_count=expected_count,
             downloaded_bytes=source_transfer_bytes+getattr(adapter,'bytes_fetched',0)+getattr(adapter,'media_bytes_fetched',0))
     except InterruptedError as exc:
         update(status='cancelled', error=str(exc))
@@ -602,4 +670,6 @@ if __name__ == '__main__':
     stage=Path(sys.argv[1])/'work/preparation'/sys.argv[2]
     limits=json.loads((stage/'plan.json').read_text()).get('resource_limits',{})
     install(limits, stage)
-    run(Path(sys.argv[1]), sys.argv[2])
+    if len(sys.argv) > 4 or (len(sys.argv) == 4 and sys.argv[3] != '--no-activate'):
+        raise ValueError('Unsupported preparation worker argument')
+    run(Path(sys.argv[1]), sys.argv[2], activate=False if len(sys.argv) == 4 else None)

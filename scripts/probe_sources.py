@@ -93,13 +93,14 @@ def main(argv=None):
     parser.add_argument("--blocked", action="store_true", help="probe every entry whose access or blockers indicate a gate, request or outage")
     parser.add_argument("--extra", nargs=2, action="append", default=[], metavar=("ID", "URL"),
                         help="also probe a URL the registry does not record, attached to entry ID")
-    parser.add_argument("--output", type=Path, default=Path("reports/source-reprobe-20261008.json"))
+    parser.add_argument("--output", type=Path, default=Path("work/audits/source-reprobe.json"))
     parser.add_argument("--append", action="store_true", help="add this run to an existing receipt instead of replacing it")
     parser.add_argument("--note", help="free text recorded on this run (for example why it supersedes an earlier probe)")
     parser.add_argument("--timeout", type=float, default=15.0)
     parser.add_argument("--attempts", type=int, default=2)
     parser.add_argument("--workers", type=int, default=4)
     args = parser.parse_args(argv)
+    args.output = args.root / args.output
     if not (args.dataset or args.blocked or args.extra):
         parser.error("choose --dataset ID ..., --blocked or --extra ID URL")
     entries = load_entries(args.root)

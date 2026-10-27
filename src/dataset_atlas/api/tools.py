@@ -8,11 +8,16 @@ from dataset_atlas.providers.schemas import ToolResult
 def make_tool_backend(registry, record_lookup, jobs, result_artifacts=None):
     def version_pack(record):
         from dataset_atlas.models import Pack
-        for dataset,path,_ in registry.versions(record.dataset_id):
-            if (dataset.release,dataset.snapshot_id)==(record.release_id,record.snapshot_id) and path.is_file():
-                if path.stat().st_size > 100_000_000:
-                    raise ValueError('Pack exceeds interactive size budget; prepare a bounded preview')
-                pack=Pack.model_validate_json(path.read_text())
+        for dataset,path,snapshot in registry.versions(record.dataset_id,release_id=record.release_id,snapshot_id=record.snapshot_id):
+            if path.is_file() or (snapshot/'manifest.json').is_file():
+                if not path.is_file():
+                    from dataset_atlas.queries.parquet import ParquetSnapshot
+                    fields=ParquetSnapshot(snapshot.parent,snapshot).query_fields([])
+                    pack=Pack(dataset=dataset,fields=fields,records=[record])
+                else:
+                    if path.stat().st_size > 100_000_000:
+                        raise ValueError('Pack exceeds interactive size budget; prepare a bounded preview')
+                    pack=Pack.model_validate_json(path.read_text())
                 chosen=[artifact for artifact in (result_artifacts or ()) if record.snapshot_id in artifact.snapshot_ids and artifact.unit==record.unit]
                 if chosen:
                     from dataset_atlas.queries.results import attach_results

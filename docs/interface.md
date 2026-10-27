@@ -1,9 +1,8 @@
 # Interface architecture
 
 The frontend is a single application shell that survives moving between browsing,
-inspection, comparison and analysis. It follows the direction in
-[`ui-mockups/UI-Initial-Spec.md`](../ui-mockups/UI-Initial-Spec.md): the examples are
-the workspace, and filters, inspectors and provenance support them.
+inspection, comparison and analysis. It follows the [shared contracts](contracts.md): native examples form the
+workspace, supported by filters, inspection, provenance and explicit population scope.
 
 ## Shell
 
@@ -69,9 +68,10 @@ These are not presentation choices; the components implement them.
   answers "what can *this* build show?". A public build never repeats the
   workbench's preview claim; an entry prepared locally but not published reads
   "Metadata only here — a preview exists in the local workbench".
-- **A metadata-only dataset explains the gap** — access, adapter, complete-data and
-  publication states, plus recorded blockers — and says plainly that an
-  unimplemented adapter is an implementation gap, not a source restriction.
+- **Availability and publication are separate.** The retained catalogue has working
+  native source paths. A fresh workspace may still need source access or preparation;
+  a static build may expose only metadata because the native data is not approved
+  for publication. The interface states that reason and the available action.
 - **Detector outcomes stay distinct.** Not computed, failed, partial, completed with
   detections and completed with none are five different states, each rendered with
   its run label and extraction threshold beside the media it describes.
@@ -94,17 +94,12 @@ media is requested for what is on screen. Paging is automatic on scroll; the map
 pulls its whole population up to a plotted-point ceiling because a projection is
 only meaningful over the population it covers.
 
-Measured on the reference machine (Intel Core Ultra 9 285HX, Chromium 153), with
-mocked 10,000-record fixtures:
-
-| Workload | Result |
-| --- | --- |
-| 10,000-record grid, two pages loaded | 21 cards in the DOM, 52 media requests total |
-| 10,000-point map, first draw | 10,000 points in 2.2 ms of canvas commands |
-| Lasso selecting all 10,000 points | 9.5 ms to DOM update, 42 ms to next frame |
-
-Re-run with `npm run test:e2e`; the numbers are written to
-`test-results/*/synthetic-{map,pagination}-metrics.json`.
+The browser tests use explicit 10,000-record/point synthetic fixtures to measure
+DOM size, media requests, canvas commands and selection-to-next-frame latency.
+Results include browser and hardware metadata and live in ignored test output.
+They are engineering measurements, not GPU paint timings or native dataset
+coverage. See the [browser checks](../apps/web/e2e/README.md) and the
+[current release evidence](../reports/release_evidence.md).
 
 The dataset header's Results picker chooses which named runs join browsing queries.
 It starts with source data alone and permits up to 32 result snapshots at once.

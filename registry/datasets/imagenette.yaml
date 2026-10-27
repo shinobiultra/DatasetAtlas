@@ -2,9 +2,9 @@ schema_version: '1.0'
 id: imagenette
 name: Imagenette
 aliases: []
-description: Official fastai Imagenette 160-pixel ImageNet-derived release after the
-  2019-12-06 70/30 split update. The archive contains 13,394 class-folder JPEGs across
-  train and validation; local preview interleaves source classes.
+description: Official fastai Imagenette 160-pixel ImageNet-derived release after the 2019-12-06
+  70/30 split update. The archive contains 13,394 class-folder JPEGs across train and validation;
+  local preview interleaves source classes.
 paper_ids:
 - paper-32cea5e43d940514
 release: imagenette2-160
@@ -85,8 +85,8 @@ rights:
   annotations: not_reviewed
   images: not_reviewed
   source: https://github.com/fastai/imagenette/blob/ba8db39559154607fecd46bfff9068f074082af4/README.md
-  note: fastai repository license covers code/repository; original ImageNet photos
-    have separate source rights. Local preview only.
+  note: fastai repository license covers code/repository; original ImageNet photos have separate
+    source rights. Local preview only.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-d8213817e2347aed1673
@@ -94,9 +94,9 @@ evidence:
   source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
   page: 5
   role: evaluation
-  excerpt: utes (e.g., gender). We D E B IAS L ENS (T) ✓ 16.3 27.6 26.9 21.2 use ImageNette
-    [29] and VLMEvalKit MME [12]- D E B IAS L ENS (I+T) ✓ 16.2 25.1 19.9 24.2 measured
-    with the sum of perception
+  excerpt: utes (e.g., gender). We D E B IAS L ENS (T) ✓ 16.3 27.6 26.9 21.2 use ImageNette [29]
+    and VLMEvalKit MME [12]- D E B IAS L ENS (I+T) ✓ 16.2 25.1 19.9 24.2 measured with the sum
+    of perception
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -105,8 +105,8 @@ evidence:
   source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
   page: 5
   role: general utility evaluation
-  excerpt: D E B IAS L ENS (T) ✓ 16.3 27.6 26.9 21.2 use ImageNette [29] and VLMEvalKit
-    MME [12]- D E B IAS L ENS (I+T) ✓ 16.2 25.1 1
+  excerpt: D E B IAS L ENS (T) ✓ 16.3 27.6 26.9 21.2 use ImageNette [29] and VLMEvalKit MME [12]-
+    D E B IAS L ENS (I+T) ✓ 16.2 25.1 1
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_release
@@ -117,6 +117,21 @@ evidence:
   size_bytes: 99003388
   sha256: 64d0c4859f35a461889e0147755a999a48b49bf38a7e0f9bd27003f10db02fe5
   note: Official direct S3 archive; 13,394 JPEGs.
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: imagenette2-160
+  snapshot_id: imagenette2-160-sha256-64d0c4859f35a461889e0147755a999a48b49bf38a7e0f9bd27003f10db02fe5
+  source_url: https://github.com/fastai/imagenette
+  record_count: 13394
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: official Imagenette 160px train and validation, 13,394 JPEG images
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/imagenette.yaml
 source_url: https://github.com/fastai/imagenette
 snapshot_id: imagenette2-160-sha256-64d0c4859f35a461889e0147755a999a48b49bf38a7e0f9bd27003f10db02fe5
 tasks:

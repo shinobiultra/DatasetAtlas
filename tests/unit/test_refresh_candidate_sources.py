@@ -219,7 +219,7 @@ def test_a_reachable_landing_page_never_moves_a_gated_entry_toward_public(access
     assert refreshed(entry(access=access), outcome(PAGE_URL, content_type="text/html")).disposition == "unchanged"
 
 
-def test_a_reachable_landing_page_does_not_stand_in_for_a_data_url_that_gave_no_answer():  # Broden: GitHub page 200, archives time out
+def test_a_reachable_landing_page_does_not_stand_in_for_a_data_url_that_gave_no_answer():
     candidate = entry(access="public")
     result = refreshed(candidate, outcome(PAGE_URL, content_type="text/html"),
                        outcome(DATA_URL, status="unreachable", error="ConnectTimeout: timed out"))
@@ -744,5 +744,17 @@ def test_the_command_line_can_replay_a_recorded_receipt_without_probing(tmp_path
     _live(_tmp_catalogue(tmp_path / "live"))
     root = _tmp_catalogue(tmp_path / "cli")
     assert module.main(["--root", str(root), "--replay-from", str(tmp_path / "live" / "live.json"), "--checked-on", TODAY]) == 0
-    written = json.loads((root / "reports/candidate-source-refresh-20261008.json").read_text())
+    written = json.loads((root / "work/audits/candidate-source-refresh.json").read_text())
     assert written["provenance"]["replay"]["replayed"] is True and written["settings"] == LIVE_SETTINGS
+
+
+def test_default_refresh_date_is_the_current_utc_date_and_outputs_stay_local(tmp_path):
+    from datetime import datetime, timezone
+    _live(_tmp_catalogue(tmp_path / "live"))
+    root = _tmp_catalogue(tmp_path / "cli")
+    assert module.main(["--root", str(root), "--replay-from", str(tmp_path / "live/live.json")]) == 0
+    receipt = json.loads((root / "work/audits/candidate-source-refresh.json").read_text())
+    assert receipt["checked_on"] == datetime.now(timezone.utc).date().isoformat()
+    assert receipt["provenance"]["observations"]["date"] == TODAY
+    assert (root / "work/audits/candidate-source-refresh.md").is_file()
+    assert not (root / "reports").exists()

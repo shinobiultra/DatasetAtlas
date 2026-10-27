@@ -2,10 +2,9 @@ schema_version: '1.0'
 id: glue-cola
 name: GLUE CoLA
 aliases: []
-description: Official GLUE ZIP train/dev/test task files, original TSV columns preserved,
-  withheld test labels null. Auxiliary original/tokenized copies in CoLA ZIP are not
-  double-counted. Release is pinned by downloaded archive SHA-256, not an inferred
-  paper-specific subset.
+description: Official GLUE ZIP train/dev/test task files, original TSV columns preserved, withheld
+  test labels null. Auxiliary original/tokenized copies in CoLA ZIP are not double-counted. Release
+  is pinned by downloaded archive SHA-256, not an inferred paper-specific subset.
 paper_ids:
 - paper-d098a79f00c8b2b5
 release: source-sha256-15dee289dd6d78a1
@@ -73,8 +72,7 @@ rights:
   images: not_applicable
   external_provider: local_only
   source: https://gluebenchmark.com/tasks
-  basis: GLUE/task text rights vary; public download does not establish redistribution
-    permission.
+  basis: GLUE/task text rights vary; public download does not establish redistribution permission.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-0577630ae08492b719b5
@@ -82,23 +80,39 @@ evidence:
   source_file_hash: 9a50cdc6b9f2ba3687339453804acb9519525941198c14d07765aaecbb1436d2
   page: 12
   role: related-work mention
-  excerpt: 'n was more accurate than official dataset labels on the NLP task GLUE
-    CoLA (Warstadt et al., 2019). More often than not though, a sparse set of latents
-    that encode some useful concept '
+  excerpt: 'n was more accurate than official dataset labels on the NLP task GLUE CoLA (Warstadt
+    et al., 2019). More often than not though, a sparse set of latents that encode some useful
+    concept '
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: verified_source_acquisition
   source_url: https://dl.fbaipublicfiles.com/glue/data/CoLA.zip
   checked_at: '2026-09-22'
   sha256: *id001
-  scope: Official GLUE ZIP train/dev/test task files, original TSV columns preserved,
-    withheld test labels null. Auxiliary original/tokenized copies in CoLA ZIP are
-    not double-counted. Release is pinned by downloaded archive SHA-256, not an inferred
-    paper-specific subset.
+  scope: Official GLUE ZIP train/dev/test task files, original TSV columns preserved, withheld
+    test labels null. Auxiliary original/tokenized copies in CoLA ZIP are not double-counted.
+    Release is pinned by downloaded archive SHA-256, not an inferred paper-specific subset.
   counts_by_split:
     train: 8551
     dev: 1043
     test: 1063
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: source-sha256-15dee289dd6d78a1
+  snapshot_id: glue-cola-sha256-6eb61fa7e7466bf3c5c1faf4283430008b90444abf92f01974de8b489b8bfcdc
+  source_url: https://gluebenchmark.com/tasks
+  record_count: 10657
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: Official GLUE ZIP train/dev/test task files, original TSV columns preserved, withheld
+    test labels null. Auxiliary original/tokenized copies in CoLA ZIP are not double-counted.
+    Release is pinned by downloaded archive SHA-256, not an inferred paper-specific subset.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/glue-cola.yaml
 snapshot_id: glue-cola-sha256-6eb61fa7e7466bf3c5c1faf4283430008b90444abf92f01974de8b489b8bfcdc
 source_url: https://gluebenchmark.com/tasks
 modalities:

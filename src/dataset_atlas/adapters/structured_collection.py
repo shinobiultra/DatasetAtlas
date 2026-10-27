@@ -6,6 +6,7 @@ import io
 import json
 from pathlib import Path
 import re
+import stat
 import zipfile
 from contextlib import contextmanager
 from PIL import Image
@@ -64,6 +65,8 @@ class StructuredCollectionAdapter(DatasetAdapter):
 
     def _rows(self):
         if hasattr(self,'_annotation_rows'):return self._annotation_rows
+        if 'retained_media_optional' in self.config:
+            self.config=self.pin_optional_retained_media()
         rows=[];consumed=0;self._annotation_bytes_fetched=0;maximum=self.config.get('max_annotation_bytes',128_000_000)
         for entry in self.config['annotations']:
             path=Path(self.config[entry['path_key']]) if entry.get('path_key') else None
@@ -160,6 +163,9 @@ class StructuredCollectionAdapter(DatasetAdapter):
                     source_id=json.dumps(parts,ensure_ascii=False,separators=(',',':'))
                 identity=f"{entry.get('identity_prefix',entry['split'])}:{source_id if source_id is not None else ordinal}"
                 value={**row,'_atlas_origin':{'split':entry['split'],'row':ordinal,'file':entry.get('member',entry.get('path_key')),'identity':identity,'group':entry.get('identity_prefix',entry['split'])}}
+                if entry.get('expose_native_split'):
+                    if entry['expose_native_split'] is not True:raise ValueError('Native split exposure must be boolean')
+                    value['_atlas_native_split']=entry['split']
                 if entry.get('source_status'):value['_atlas_source_status']=entry['source_status']
                 if entry.get('choices_columns'):
                     value['_atlas_choices'] = [row[key] for key in entry['choices_columns']]
@@ -192,6 +198,29 @@ class StructuredCollectionAdapter(DatasetAdapter):
                         if type(width) is not int or not 1 <= width <= 20:raise ValueError('Invalid image stem width')
                         variables['_stem'] = variables['_stem'].zfill(width)
                 value['_atlas_media_refs']=[]
+                unavailable = entry.get('unavailable_media')
+                if unavailable:
+                    if (not isinstance(unavailable, dict) or
+                        unavailable.get('availability') != 'not_acquired' or
+                        unavailable.get('modality') not in {'image', 'video', 'audio'} or
+                        not isinstance(unavailable.get('path_field'), str)):
+                        raise ValueError('Unavailable media requires a native path field, modality and not_acquired status')
+                    native_path = _nested(row, unavailable['path_field'])
+                    if not isinstance(native_path, str) or not native_path:
+                        raise ValueError('Unavailable media requires a nonempty native source path')
+                    value['_atlas_collection_unacquired_media'] = {
+                        **unavailable, 'source_path': native_path,
+                        'source_group': entry['split'],
+                    }
+                    binding = json.dumps([entry['split'], native_path], ensure_ascii=False, separators=(',', ':'))
+                    retained = self.config.get('retained_media', {}).get(binding)
+                    if retained is not None:
+                        digest = retained.get('sha256')
+                        if not isinstance(digest, str) or not re.fullmatch(r'[0-9a-f]{64}', digest):
+                            raise ValueError('Retained native media requires a SHA-256 checksum')
+                        ref = 'retained/' + digest
+                        value['_atlas_media_refs'].append(ref)
+                        value['_atlas_collection_retained_media'] = {ref: value.pop('_atlas_collection_unacquired_media')}
                 if entry.get('media_paths_field'):
                     paths = _nested(row, entry['media_paths_field'])
                     if paths is None: paths = []
@@ -249,7 +278,7 @@ class StructuredCollectionAdapter(DatasetAdapter):
         types={}
         for row in self._rows():
             for key,value in row.items():
-                if key=='_atlas_media_refs' or value is None:continue
+                if key in {'_atlas_media_refs', '_atlas_collection_unacquired_media', '_atlas_collection_retained_media'} or value is None:continue
                 kind=('boolean' if isinstance(value,bool) else 'number' if isinstance(value,(int,float)) and abs(value)<=2**53
                       else 'string' if isinstance(value,str) else 'array' if isinstance(value,list) else 'object')
                 types.setdefault(key,set()).add(kind)
@@ -291,13 +320,23 @@ class StructuredCollectionAdapter(DatasetAdapter):
     def validate_media(self,budget,cancel=None):
         """Validate all annotation joins through ZIP directories, without fetching images."""
         self._annotation_transfer_budget=budget
-        wanted={};individual=set()
+        wanted={};individual=set();retained=set()
         for row in self._rows():
             for ref in row.get('_atlas_media_refs',[]):
-                if ref.startswith('file/'):individual.add(ref[5:])
+                if ref.startswith('retained/'):retained.add(ref)
+                elif ref.startswith('file/'):individual.add(ref[5:])
                 else:
                     _,key,member=ref.split('/',2);wanted.setdefault(key,set()).add(member)
         fetched=getattr(self,'_annotation_bytes_fetched',0);self._native_zip_metadata={}
+        retained_bytes=0
+        for ref in sorted(retained):
+            if cancel:cancel()
+            entry = self._retained_entry(ref)
+            retained_bytes += entry['bytes']
+            maximum = self.config.get('retained_media_max_bytes', 0)
+            if type(maximum) is not int or retained_bytes > maximum:
+                raise ValueError('Retained native media exceeds declared local verification budget')
+            self._read_retained(ref, entry['bytes'])
         if individual:
             missing=individual-set(self._inventory())
             if missing:raise ValueError(f'Annotations reference {len(missing)} missing inventory images: {sorted(missing)[:3]}')
@@ -320,7 +359,8 @@ class StructuredCollectionAdapter(DatasetAdapter):
                     self._native_zip_metadata[f'zip/{key}/{name}']={'native_member_bytes':info.file_size,'zip_crc32':info.CRC}
                 fetched+=source.bytes_fetched
         if observed_absent!=declared:raise ValueError('Declared absent media differs from native ZIP membership')
-        return {'referenced_images':sum(len(names) for names in wanted.values())+len(individual),'archives':len(wanted),'metadata_bytes_fetched':fetched,
+        return {'referenced_images':sum(len(names) for names in wanted.values())+len(individual)+len(retained),'archives':len(wanted),'metadata_bytes_fetched':fetched,
+                'retained_original_assets':len(retained),'retained_original_bytes_verified':retained_bytes,
                 'absent_media_references':len(observed_absent),'absent_media':sorted(observed_absent),
                 'integrity':('Remote archives: strong ETags and ZIP CRCs, full remote SHA-256 not computed. Local archives: pinned full-file SHA-256 and member CRCs.' if wanted else 'Original image files checked against pinned checksums or strong ETag and size on access; ETags are consistency fingerprints, not content hashes.')}
 
@@ -331,8 +371,27 @@ class StructuredCollectionAdapter(DatasetAdapter):
         self.config['mapping']={**self.config.get('mapping',{}),'id':'_atlas_origin.identity','media':'_atlas_media_refs'}
         for ordinal,row in enumerate(rows[start:end],start):
             record=DatasetAdapter._record(self,row,ordinal);record.source.pop('_atlas_media_refs',None)
+            retained_metadata = record.source.pop('_atlas_collection_retained_media', {})
+            unavailable = record.source.pop('_atlas_collection_unacquired_media', None)
+            if unavailable:
+                from dataset_atlas.models import Asset, stable_id
+                identity = json.dumps([unavailable['source_group'], unavailable['source_path']], separators=(',', ':'))
+                asset = Asset(id=stable_id(self.dataset.id, self.revision, 'asset', identity),
+                    dataset_id=self.dataset.id, release_id=self.revision,
+                    modality=unavailable['modality'], uri=None,
+                    metadata={'availability': 'not_acquired', 'source_path': unavailable['source_path'],
+                              'source_group': unavailable['source_group'], 'source_field': unavailable['path_field'],
+                              **({'source_url': unavailable['source_url']} if unavailable.get('source_url') else {})})
+                record.assets.append(asset)
+                record.asset_ids.append(asset.id)
             for asset in record.assets:
                 if asset.uri is None:continue
+                if asset.uri.startswith('retained/'):
+                    asset.sha256 = self._retained_entry(asset.uri)['sha256']
+                    provenance = retained_metadata[asset.uri]
+                    asset.metadata.update(representation='retained original source file', availability='available',
+                        source_path=provenance['source_path'],source_group=provenance['source_group'])
+                    continue
                 for entry in self.config.get('media_sha256_fields',[]):
                     ref=entry.get('prefix','')+str(row.get(entry['member_field'],''))
                     if asset.uri==ref:
@@ -366,6 +425,8 @@ class StructuredCollectionAdapter(DatasetAdapter):
         return RecordBatch(records,str(end) if end<len(rows) else None,len(records))
 
     def resolve_asset(self,source,asset_ref):
+        if asset_ref.startswith('retained/'):
+            return self._image_handle(source,self._read_retained(asset_ref,source.max_bytes-source.bytes_read),asset_ref)
         if asset_ref.startswith('file/'):
             name=_safe_relative(asset_ref[5:]);entry=self._inventory().get(name)
             if not entry:raise ValueError('Image is absent from pinned inventory')
@@ -406,6 +467,63 @@ class StructuredCollectionAdapter(DatasetAdapter):
             from dataset_atlas.storage.remote_zip import REMOTE_ZIP_MEMBERS
             data=REMOTE_ZIP_MEMBERS.read(reader,self.config['remote_archives'][key],member,remaining)
         return self._image_handle(source,data,asset_ref)
+
+    def _retained_entry(self, ref):
+        if not re.fullmatch(r'retained/[0-9a-f]{64}', ref):raise ValueError('Invalid retained native media reference')
+        entries = [entry for entry in self.config.get('retained_media', {}).values() if entry.get('sha256') == ref[9:]]
+        if not entries or any(entry != entries[0] for entry in entries):
+            raise ValueError('Retained native media reference has no unique pinned original')
+        entry = entries[0]
+        if type(entry.get('bytes')) is not int or not 1 <= entry['bytes'] <= 250_000_000:
+            raise ValueError('Invalid retained native media length')
+        return entry
+
+    def _retained_path(self, entry):
+        if self.config.get('retained_media_root'):
+            return Path(self.config['retained_media_root'])/_safe_relative(entry['path'])
+        return Path(entry['path']).absolute()
+
+    def pin_optional_retained_media(self):
+        """Freeze verified available originals; a missing optional file stays unacquired.
+
+        Planning stores this exact subset before deriving a snapshot identity.
+        Once frozen, disappearance or changed bytes are errors, not scope changes.
+        """
+        optional=self.config.get('retained_media_optional',False)
+        if type(optional) is not bool:raise ValueError('Optional retained media must be boolean')
+        if not optional:return self.config
+        bindings=self.config.get('retained_media',{})
+        if not isinstance(bindings,dict):raise ValueError('Retained media requires an exact native binding map')
+        selected={};verified=set();verified_bytes=0
+        for binding,entry in bindings.items():
+            if not isinstance(binding,str) or not isinstance(entry,dict):raise ValueError('Invalid optional native media binding')
+            digest=entry.get('sha256')
+            if not isinstance(digest,str):raise ValueError('Optional native media requires a pinned SHA-256')
+            ref='retained/'+digest;entry=self._retained_entry(ref);path=self._retained_path(entry)
+            try:identity=path.lstat()
+            except FileNotFoundError:continue
+            if not stat.S_ISREG(identity.st_mode):raise ValueError('Optional native media must be a regular original file')
+            if digest not in verified:
+                maximum=self.config.get('retained_media_max_bytes',0)
+                verified_bytes+=entry['bytes']
+                if type(maximum) is not int or not 1<=maximum<=1_000_000_000_000 or verified_bytes>maximum:
+                    raise ValueError('Optional native media exceeds declared local verification budget')
+                self._read_retained(ref,entry['bytes']);verified.add(digest)
+            selected[binding]=entry
+        return {**self.config,'retained_media':selected,'retained_media_optional':False,
+                'optional_retained_media_observation':{'declared_bindings':len(bindings),
+                    'available_bindings':len(selected),'verified_original_bytes':verified_bytes}}
+
+    def _read_retained(self, ref, maximum):
+        entry=self._retained_entry(ref)
+        if entry['bytes'] > maximum:raise ValueError('Retained native media exceeds read budget')
+        from dataset_atlas.storage.local import SafeRoots
+        path=self._retained_path(entry)
+        with SafeRoots({'retained':path.parent}).open('retained',path.name) as stream:
+            data=stream.read(entry['bytes']+1)
+        if len(data)!=entry['bytes'] or hashlib.sha256(data).hexdigest()!=entry['sha256']:
+            raise ValueError('Retained native media checksum or size changed')
+        return data
 
     def _image_handle(self,source,data,asset_ref):
         source.charge(len(data))

@@ -2,28 +2,26 @@ schema_version: '1.0'
 id: sorrybench
 name: SorryBench
 aliases: []
-description: SORRY-Bench 202503 base instructions are publicly documented but source access
-  is gated by the authors due to unsafe and offensive content. No local rows or preview have
-  been acquired.
+description: SORRY-Bench 202503 base instructions are publicly documented but source access is
+  gated by the authors due to unsafe and offensive content. No local rows or preview have been
+  acquired.
 paper_ids:
 - paper-09b2d7393fc75cf7
-release: sorry-bench-202503
+release: sorry-bench-202503-612a4e1f45db8adf884fa62318ddf9fa1c6e75e9
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: gated
-  adapter: not_started
-  preview: none
-  complete_data: externally_blocked
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: metadata_only
-  preview_count: 0
-  total_count: null
+  preview_count: 100
+  total_count: 9240
   unit: example
-  blockers:
-  - Official authors require access approval before downloading the 202503 base question.jsonl;
-    no approved local source is present.
+  blockers: []
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -38,8 +36,8 @@ evidence:
   page: 7
   role: source data
   excerpt: 've described in IV-A1. Specifically, we evaluate Qwen3-VL-8B- benchmarks: HarmBench
-    [44], SorryBench [45], MaliciousIn- Instruct [28] and LLaVA-1.5-7B [25], and insert the
-    gated struct [46], TDC2023 [47], and AdvBench [48], yieldi'
+    [44], SorryBench [45], MaliciousIn- Instruct [28] and LLaVA-1.5-7B [25], and insert the gated
+    struct [46], TDC2023 [47], and AdvBench [48], yieldi'
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -49,8 +47,8 @@ evidence:
   page: 7
   role: attack prompt source
   excerpt: 'scribed in IV-A1. Specifically, we evaluate Qwen3-VL-8B- benchmarks: HarmBench [44],
-    SorryBench [45], MaliciousIn- Instruct [28] and LLaVA-1.5-7B [25], and insert the gated
-    struct [46], TDC2023 [47],'
+    SorryBench [45], MaliciousIn- Instruct [28] and LLaVA-1.5-7B [25], and insert the gated struct
+    [46], TDC2023 [47],'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_access
@@ -59,8 +57,27 @@ evidence:
     can be unsafe or offensive; base file question.jsonl.
 - kind: source_revision
   url: https://huggingface.co/datasets/sorry-bench/sorry-bench-202503
-  note: Hugging Face dataset revision 612a4e1f45db8adf884fa62318ddf9fa1c6e75e9 reports gated
-    auto; no contents fetched.
+  note: Hugging Face dataset revision 612a4e1f45db8adf884fa62318ddf9fa1c6e75e9 reports gated auto;
+    no contents fetched.
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: sorry-bench-202503-612a4e1f45db8adf884fa62318ddf9fa1c6e75e9
+  snapshot_id: sorrybench-cfb1fc5001cd31ca69ba36b9
+  source_url: https://github.com/SORRY-Bench/sorry-bench
+  record_count: 9240
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: 'All 9240 native instruction/variation rows: 440 base questions and their 20 released
+    variants, with native question IDs, category, prompt style and every ordered turn preserved.
+    Four native null turns remain null and visible; they are not invented instructions. Base and
+    perturbation conditions remain distinct. This does not identify the citing paper''s selected
+    attack prompts.'
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/sorrybench.yaml
 tasks:
 - safety refusal evaluation
 modalities:
@@ -68,4 +85,4 @@ modalities:
 labels:
 - unsafe topic category
 source_url: https://github.com/SORRY-Bench/sorry-bench
-snapshot_id: hf-sorry-bench-202503-612a4e1f45db8adf884fa62318ddf9fa1c6e75e9
+snapshot_id: sorrybench-cfb1fc5001cd31ca69ba36b9

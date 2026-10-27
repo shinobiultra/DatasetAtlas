@@ -2,31 +2,31 @@ schema_version: '1.0'
 id: ffhq
 name: FFHQ
 aliases: []
-description: Mention candidate from a focused page audit; the evidence receipts distinguish
-  direct use, comparison, related-work, and citation-only roles. Original source,
-  release, and rights still require independent verification.
+description: 'FFHQ v2: all 70,000 native metadata entries and original aligned PNG references.
+  Requested originals are checked against source file and decoded-pixel MD5 values; other media
+  stay remote.'
 paper_ids:
 - paper-25eaa8c74ce76800
 - paper-164d7c221452ffec
-release: unresolved
+release: ffhq-dataset-v2-native-70000
 adapter: structured
 adapter_config: {}
 coverage:
-  identity: candidate
+  identity: resolved
   source: verified
   access: public
-  adapter: implemented
-  preview: none
-  complete_data: requires_preparation
+  adapter: tested
+  preview: complete_target
+  complete_data: indexed_metadata_partial_media
   publication: local_only
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - All 70,000 native metadata entries and verified original aligned PNG previews
-    are prepared locally; the remaining full-resolution population remains remote.
-  - The exact historical paper subset and preprocessing remain unidentified.
-  - All 70,000 native metadata objects and 100 original aligned PNG previews are verified.
-    Public redistribution and external providers are not approved.
+  - All 70,000 native metadata entries and verified original aligned PNG previews are prepared
+    locally; the remaining full-resolution population remains remote.
+  - All 70,000 native metadata objects and 100 original aligned PNG previews are verified. Public
+    redistribution and external providers are not approved.
+  total_count: 70000
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -38,8 +38,8 @@ evidence:
   source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
   page: 29
   role: cited-study dataset in survey table
-  excerpt: e Diffusion Image Editing Ostris Dataset, FFHQ (Baumann et al., 2024) CLIP,
-    T2I Diffusion Image Editi
+  excerpt: e Diffusion Image Editing Ostris Dataset, FFHQ (Baumann et al., 2024) CLIP, T2I Diffusion
+    Image Editi
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -48,9 +48,8 @@ evidence:
   source_file_hash: a89bc42d5e26b03e424ef9aa3ecc43d7857a7ef0deb8c0ede544d5b94aa625d4
   page: 14
   role: model-training lineage
-  excerpt: h image and text (Toney and that is pretrained on the high-quality FFHQ
-    dataset. Caliskan, 2021; Wolfe and Caliskan, 2022b). Ad- To normalize images,
-    we crop around the facial
+  excerpt: h image and text (Toney and that is pretrained on the high-quality FFHQ dataset. Caliskan,
+    2021; Wolfe and Caliskan, 2022b). Ad- To normalize images, we crop around the facial
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: native_source_integration
@@ -58,8 +57,51 @@ evidence:
   url: https://github.com/NVlabs/ffhq-dataset
   receipt: reports/ffhq-native-metadata-shape-20261007.json
   source_identity_status: publisher_v2_metadata_checksum_verified_paper_population_unidentified
-  note: All 70,000 native metadata objects preserved; official metadata MD5 verified.
-    PNG originals are checked against both native file and pixel MD5 when acquired.
+  note: All 70,000 native metadata objects preserved; official metadata MD5 verified. PNG originals
+    are checked against both native file and pixel MD5 when acquired.
+- kind: paper_usage_qualification
+  note: Available release identity is separate from historical paper use.
+  qualifications:
+  - The exact historical paper subset and preprocessing remain unidentified.
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  status: resolved_declared_source_population
+  release: ffhq-dataset-v2-native-70000
+  snapshot_id: ffhq-95a360eb6cb9aeafd49b43dd
+  source_url: https://github.com/NVlabs/ffhq-dataset
+  representation: pinned_source_population
+  record_count: 70000
+  population: All 70,000 publisher FFHQ v2 metadata entries. Native 1024×1024 aligned PNG images
+    retain their original file bytes, file MD5 and decoded pixel MD5; only bounded requested originals
+    are acquired. Thumbnails, in-the-wild files and TFRecords are preserved as source references,
+    not substituted for aligned PNGs. Historical paper subsets and preprocessing remain unidentified;
+    local-only and not approved for external providers or publication.
+  basis: Existing checksum-pinned preparation and snapshot metadata; no record contents read during
+    this curation.
+  scope_note: Identifies the available source population. This is not human review, historical
+    paper-membership acceptance, publisher byte-equivalence proof, or permission to redistribute.
+  receipt: work/prepared/ffhq/489a42999f69dcbb3e44d04c3b9acb50f4f1ee8a1d7c018dda2676b3c8d15f24/receipt.json
+  receipt_sha256: b2ee87746a0acf043c625e23a6afef6e87017eeca339bc9bb53448133b551125
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: ffhq-dataset-v2-native-70000
+  snapshot_id: ffhq-95a360eb6cb9aeafd49b43dd
+  source_url: https://github.com/NVlabs/ffhq-dataset
+  record_count: 70000
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: indexed_metadata_partial_media
+  unit: example
+  population: All 70,000 publisher FFHQ v2 metadata entries. Native 1024×1024 aligned PNG images
+    retain their original file bytes, file MD5 and decoded pixel MD5; only bounded requested originals
+    are acquired. Thumbnails, in-the-wild files and TFRecords are preserved as source references,
+    not substituted for aligned PNGs. Historical paper subsets and preprocessing remain unidentified;
+    local-only and not approved for external providers or publication.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/ffhq.yaml
 source_url: https://github.com/NVlabs/ffhq-dataset
 modalities:
 - image
+snapshot_id: ffhq-95a360eb6cb9aeafd49b43dd

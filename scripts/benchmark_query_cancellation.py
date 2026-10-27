@@ -1,10 +1,12 @@
-import json,time,threading,platform
+import json,time,platform,sys
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from dataset_atlas.queries.parquet import ParquetSnapshot
 from dataset_atlas.models import Query
+from dataset_atlas.registry import Registry
 root=Path.cwd()
-snapshot=ParquetSnapshot(root/'work/snapshots',root/'work/snapshots/clevr-v1-full')
+dataset_id=sys.argv[1] if len(sys.argv)>1 else 'clevr'
+snapshot=ParquetSnapshot(root,Registry(root).snapshot_path(dataset_id))
 query=Query(snapshot_id=snapshot.snapshot_id,population_scope='complete',sample={'method':'stratified','field_id':snapshot.fields[0].id,'size':100})
 started=time.perf_counter()
 with ThreadPoolExecutor(max_workers=1) as pool:

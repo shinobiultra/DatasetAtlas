@@ -5,30 +5,29 @@ aliases: []
 description: Hateful Illusion Dataset.
 paper_ids:
 - paper-80b7ba2e277a20c5
-release: unresolved
+release: b1adce69143ff8bfd52942d5b14f11daeaa827d1
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Official source family identified; exact selected release, preparation and public-use
-    rights still require dataset-specific review.
-  - Adapter and preview are not implemented.
+  - Public data/media reuse rights require separate review.
+  total_count: 2160
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://github.com/TrustAIRLab/HatefulIllusion
-  note: Author-linked Hugging Face card labels MIT; generated image/publication rights
-    and potentially harmful content require explicit local review
+  note: Author-linked Hugging Face card labels MIT; generated image/publication rights and potentially
+    harmful content require explicit local review
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-d637537150a61b3bf91f
@@ -36,9 +35,9 @@ evidence:
   source_file_hash: 1b014c3d1e86a39f1c6a88d4e9b79c99df2e06c5c7c31bea224aa5da2ae0c46d
   page: 10
   role: source data
-  excerpt: ' , 𝐶𝑊 ) ≤ 500, where each character adopt images from IllusoryVQA and
-    HatefulIllusion [23] datasets, occupies a moderate region of the image. respectively.
-    For character-based patterns, since lim'
+  excerpt: ' , 𝐶𝑊 ) ≤ 500, where each character adopt images from IllusoryVQA and HatefulIllusion
+    [23] datasets, occupies a moderate region of the image. respectively. For character-based
+    patterns, since lim'
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -47,8 +46,7 @@ evidence:
   source_file_hash: 1b014c3d1e86a39f1c6a88d4e9b79c99df2e06c5c7c31bea224aa5da2ae0c46d
   page: 7
   role: source and evaluation
-  excerpt: and MNIST [17]. Inspired by the HatefulIllusion dataset [23], we also evaluate
-    our
+  excerpt: and MNIST [17]. Inspired by the HatefulIllusion dataset [23], we also evaluate our
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -59,8 +57,8 @@ evidence:
   source_identity_status: source_and_terms_identified
 - kind: source_audit_release
   url: https://github.com/TrustAIRLab/HatefulIllusion
-  note: Author repository advertises 2,160 generated images; original ICCV paper reports
-    1,571 qualifying hateful illusions, so these are distinct counts/selection stages
+  note: Author repository advertises 2,160 generated images; original ICCV paper reports 1,571
+    qualifying hateful illusions, so these are distinct counts/selection stages
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: source_and_terms_identified
@@ -74,8 +72,8 @@ evidence:
   source_identity_status: source_and_terms_identified
 - kind: source_audit_rights
   url: https://github.com/TrustAIRLab/HatefulIllusion
-  note: Author-linked Hugging Face card labels MIT; generated image/publication rights
-    and potentially harmful content require explicit local review
+  note: Author-linked Hugging Face card labels MIT; generated image/publication rights and potentially
+    harmful content require explicit local review
   publication_decision: media_not_approved
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
@@ -85,12 +83,49 @@ evidence:
   checked_on: '2026-09-23'
   recipe: registry/recipes/hatefulillusion.yaml
   report: reports/selective-acquisition-20260923.md
-  note: Original source release and native records exercised locally. This is not
-    a claim of human rights review or an exact paper-used subset.
-source_url: https://huggingface.co/datasets/yiting/HatefulIllusion_Dataset
+  note: Original source release and native records exercised locally. This is not a claim of human
+    rights review or an exact paper-used subset.
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: b1adce69143ff8bfd52942d5b14f11daeaa827d1
+  snapshot_id: hatefulillusion-b1adce69143ff8bfd52942d5-illusion-and-condition
+  source_url: https://huggingface.co/datasets/yiting/HatefulIllusion_Dataset/resolve/b1adce69143ff8bfd52942d5b14f11daeaa827d1
+  record_count: 2160
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All digit, hate-slang and hate-symbol records in the pinned author release, with
+    original illusion and condition images available on request.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/hatefulillusion.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: b1adce69143ff8bfd52942d5b14f11daeaa827d1
+  snapshot_id: hatefulillusion-b1adce69143ff8bfd52942d5-illusion-and-condition
+  source_url: https://huggingface.co/datasets/yiting/HatefulIllusion_Dataset/resolve/b1adce69143ff8bfd52942d5b14f11daeaa827d1
+  record_count: 2160
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All digit, hate-slang and hate-symbol records in the pinned author release, with
+    original illusion and condition images available on request.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/hatefulillusion.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
+source_url: https://huggingface.co/datasets/yiting/HatefulIllusion_Dataset/resolve/b1adce69143ff8bfd52942d5b14f11daeaa827d1
 modalities:
 - image
 - text
 tasks:
 - content moderation
 - optical illusion recognition
+snapshot_id: hatefulillusion-b1adce69143ff8bfd52942d5-illusion-and-condition

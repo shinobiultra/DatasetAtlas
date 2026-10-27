@@ -2,9 +2,9 @@ schema_version: '1.0'
 id: jiechieu-tsopze-resume-corpus
 name: Jiechieu-Tsopze resume corpus
 aliases: []
-description: 'Jiechieu–Tsopze resume corpus: 29,783 native text/label pairs with occupation labels. Original
-  member bytes are retained; text is decoded explicitly as Windows-1252. The author also supplies a redundant
-  flat export and normalization/skills files, retained as source artifacts.'
+description: 'Jiechieu–Tsopze resume corpus: 29,783 native text/label pairs with occupation labels.
+  Original member bytes are retained; text is decoded explicitly as Windows-1252. The author also
+  supplies a redundant flat export and normalization/skills files, retained as source artifacts.'
 paper_ids:
 - paper-f03c5ad315e6d835
 release: 24de39957d99caf2c89cf384ba2396bafe16050d
@@ -28,8 +28,8 @@ rights:
   annotations: not_reviewed
   images: not_reviewed
   source: https://github.com/florex/resume_corpus
-  note: No dataset license or consent evidence identified; resumes may contain personal information and
-    must not be published as a preview by default.
+  note: No dataset license or consent evidence identified; resumes may contain personal information
+    and must not be published as a preview by default.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-4a7102bcd0be1cca18f5
@@ -37,22 +37,23 @@ evidence:
   source_file_hash: 47431d9340ff27b9234e2184711fbc3fc06ded7718fe53ca79b23a1cd1db777d
   page: 3
   role: source data
-  excerpt: ' most frequent n-grams (n ∈ {3, 4, 5}) containing “ability to” in the resume corpus provided
-    by Jiechieu & Tsopze (2021). Among the results, we manually identify 21 suitable skill descriptions,'
+  excerpt: ' most frequent n-grams (n ∈ {3, 4, 5}) containing “ability to” in the resume corpus
+    provided by Jiechieu & Tsopze (2021). Among the results, we manually identify 21 suitable
+    skill descriptions,'
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://github.com/florex/resume_corpus
-  note: 'Author repository supplies resumes_corpus.zip and resume_samples.zip with occupation labels;
-    later paper mines skill n-grams from these resumes. Release: Author resume_corpus archives; paper
-    subset unpinned'
+  note: 'Author repository supplies resumes_corpus.zip and resume_samples.zip with occupation
+    labels; later paper mines skill n-grams from these resumes. Release: Author resume_corpus
+    archives; paper subset unpinned'
   audit_file: work/sources/source-audit-jobs-batch3.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
 - kind: source_audit_rights
   url: https://doi.org/10.1007/s00521-020-05302-x
-  note: No dataset license or consent evidence identified; resumes may contain personal information and
-    must not be published as a preview by default.
+  note: No dataset license or consent evidence identified; resumes may contain personal information
+    and must not be published as a preview by default.
   audit_file: work/sources/source-audit-jobs-batch3.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
@@ -62,11 +63,30 @@ evidence:
   checked_on: '2026-09-23'
   record_count: 29783
   preview_count: 100
-  scope: All 29783 exact .txt/.lab pairs in the native resumes_corpus.zip, preserving original text, raw
-    labels, category lists and member SHA-256 values. The flat export, occupation normalization and skills
-    files remain original source artifacts, without guessing undocumented joins. No public redistribution
-    approval.
+  scope: All 29783 exact .txt/.lab pairs in the native resumes_corpus.zip, preserving original
+    text, raw labels, category lists and member SHA-256 values. The flat export, occupation normalization
+    and skills files remain original source artifacts, without guessing undocumented joins. No
+    public redistribution approval.
   receipt: reports/native-text-live-verification.json
-source_url: https://github.com/florex/resume_corpus
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: 24de39957d99caf2c89cf384ba2396bafe16050d
+  snapshot_id: jiechieu-tsopze-resume-corpus-ecd3403084c8be2481293438
+  source_url: https://github.com/florex/resume_corpus/tree/24de39957d99caf2c89cf384ba2396bafe16050d
+  record_count: 29783
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 29783 exact .txt/.lab pairs in the native resumes_corpus.zip, preserving original
+    text, raw labels, category lists and member SHA-256 values. The flat export, occupation normalization
+    and skills files remain original source artifacts, without guessing undocumented joins. No
+    public redistribution approval.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/jiechieu-tsopze-resume-corpus.yaml
+source_url: https://github.com/florex/resume_corpus/tree/24de39957d99caf2c89cf384ba2396bafe16050d
 modalities:
 - text
+snapshot_id: jiechieu-tsopze-resume-corpus-ecd3403084c8be2481293438

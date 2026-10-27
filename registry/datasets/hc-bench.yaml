@@ -1,58 +1,37 @@
 schema_version: '1.0'
 id: hc-bench
-name: HC-Bench wild images
+name: HC-Bench
 aliases: []
-description: All 53 author-released wild/ images in HC-Bench at the pinned Hugging Face revision. This
-  local pack covers only the wild subset; the current repository has other object/text parts and differs
-  from the 112-image paper version.
+description: 'All 335 native HC-Bench release units: 221 original images, 112 independent annotation
+  rows and 2 passive author text documents. Native file names, table order and bytes are retained.
+  No image-to-annotation pairing is inferred. This pinned release differs from the paper''s 112-image
+  benchmark.'
 paper_ids:
 - paper-2c07a8c6af8e33c2
 release: 203e4f80fb6f979fdab63f828daa9b04fc5c6f06
-adapter: csv
-adapter_config:
-  path: work/sources/hc-bench/wild_index.csv
-  format: csv
-  sha256: a24e9f1602d1c16637daedf903c99d20030ed093aa62198d1210401d75817eb8
-  mapping:
-    id: path
-    media: path
-    media_modality: image
-  fields:
-    path:
-      description: Author wild/ path
-      dtype: string
-    source_subset:
-      description: HC-Bench release subset
-      dtype: string
-    source_sha256:
-      description: Original source image SHA-256
-      dtype: string
-  population: All 53 author-released wild/ images in HC-Bench at the pinned Hugging Face revision. This
-    local pack covers only the wild subset; the current repository has other object/text parts and differs
-    from the 112-image paper version.
-  selection_note: First 100 source-order rows; full local source index is retained.
-  media_root: work/sources/hc-bench
+adapter: structured
+adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
   adapter: tested
-  preview: local_only
-  complete_data: wild_subset_complete
+  preview: complete_target
+  complete_data: supported
   publication: metadata_only
-  preview_count: 53
+  preview_count: 100
   unit: example
   blockers:
-  - The current 221-row HF release differs from the paper’s 112-image version.
-  - Wild source-image redistribution rights are not verified.
-  total_count: 53
+  - Source-image redistribution rights are unreviewed.
+  - Current author release differs from the paper's 112-image benchmark.
+  total_count: 335
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench
-  note: HF card labels release MIT, but the 53 wild images are internet-sourced and per-image publication
-    rights remain unverified. Local preview only.
+  note: HF card labels release MIT, but the 53 wild images are internet-sourced and per-image
+    publication rights remain unverified. Local preview only.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-b2fbdd937c0bda562713
@@ -61,8 +40,8 @@ evidence:
   page: 1
   role: introduction
   excerpt: '- sions or AI-generated images through percep- FUSHUN HALT tual adjustments like zooming.
-    We introduce HC-Bench, a benchmark of 112 images with hidden texts, objects, and illusions, revealing
-    that leading VLMs achieve near-zero accuracy (0–5'
+    We introduce HC-Bench, a benchmark of 112 images with hidden texts, objects, and illusions,
+    revealing that leading VLMs achieve near-zero accuracy (0–5'
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -82,8 +61,8 @@ evidence:
   source_identity_status: author_release_identified_version_drift
 - kind: source_audit_release
   url: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench
-  note: SemVink paper reports 112-image benchmark; author-linked HF repository currently previews 221
-    rows including 56 base, 56 hidden, 56 text, 53 wild files; release/scope differ
+  note: SemVink paper reports 112-image benchmark; author-linked HF repository currently previews
+    221 rows including 56 base, 56 hidden, 56 text, 53 wild files; release/scope differ
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_release_identified_version_drift
@@ -97,7 +76,8 @@ evidence:
   source_identity_status: author_release_identified_version_drift
 - kind: source_audit_rights
   url: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench
-  note: HF card tags MIT; image generation/source permissions and public media still require item review
+  note: HF card tags MIT; image generation/source permissions and public media still require item
+    review
   publication_decision: media_not_approved
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
@@ -111,9 +91,45 @@ evidence:
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 53-record prepared preview: asset kinds and text fields present in at least
-    one record. Not inferred from the name or description.'
-source_url: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench
-snapshot_id: hc-bench-wild-203e4f80fb6f979f
+  note: 'Derived from the 53-record prepared preview: asset kinds and text fields present in at
+    least one record. Not inferred from the name or description.'
+- kind: native_source_scope
+  receipt: work/finalization-20261027/scope-expansions/sources/hc-bench-metadata.json
+  native_counts:
+    image: 221
+    annotation: 112
+    source_document: 2
+  note: Annotation tables remain independent native units; no incomplete filename join is presented
+    as an authoritative pairing.
+- kind: native_original_decode_and_media_type_verification
+  receipt: work/finalization-20261027/scope-expansions/hc-bench-native-decode-proof.json
+  media_resolver_receipt: work/finalization-20261027/scope-expansions/hc-bench-media-resolver-proof.json
+  native_format_counts:
+    JPEG: 49
+    PNG: 148
+    WEBP: 24
+  note: All 221 original images decoded locally. The 24 native filenames with extensions inconsistent
+    with their WebP bytes use exact per-path header and SHA-256-pinned MIME overrides, preserving
+    original paths and bytes. No image-to-annotation pairing is inferred.
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: 203e4f80fb6f979fdab63f828daa9b04fc5c6f06
+  snapshot_id: hc-bench-b3fc28efbf085b81bb3e5421
+  source_url: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench/tree/203e4f80fb6f979fdab63f828daa9b04fc5c6f06
+  record_count: 335
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: 'All 335 native HC-Bench release units: 221 original images, 112 independent annotation
+    rows and 2 passive author text documents. Native file names, table order and bytes are retained.
+    No image-to-annotation pairing is inferred. This pinned release differs from the paper''s
+    112-image benchmark.'
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/hc-bench.yaml
+source_url: https://huggingface.co/datasets/JohnnyZeppelin/HC-Bench/tree/203e4f80fb6f979fdab63f828daa9b04fc5c6f06
 modalities:
 - image
+snapshot_id: hc-bench-b3fc28efbf085b81bb3e5421

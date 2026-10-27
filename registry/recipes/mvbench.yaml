@@ -1,0 +1,753 @@
+release: 230a2d4fac8900333c61754641c7a13e069ac9c6
+adapter: structured_collection
+expected_count: 4000
+description: All 4,000 native MVBench question rows across all 20 released tasks (200
+  per task), preserving task, question/answer/candidate order, timing and native video
+  keys. Preparation acquires question annotations only. Checksum-pinned original clips
+  already in the local source library are optional; missing originals remain explicit
+  not_acquired references. No reversed-frame paper condition is reconstructed.
+scope: All 4,000 native MVBench question rows across all 20 released tasks (200 per
+  task), preserving task, question/answer/candidate order, timing and native video
+  keys. Preparation acquires question annotations only. Checksum-pinned original clips
+  already in the local source library are optional; missing originals remain explicit
+  not_acquired references. No reversed-frame paper condition is reconstructed.
+source_url: https://huggingface.co/datasets/OpenGVLab/MVBench/tree/230a2d4fac8900333c61754641c7a13e069ac9c6
+adapter_config:
+  media_scope: partial
+  mapping:
+    question: question
+    choices: _atlas_choices
+    media_modality: video
+  annotations:
+  - path_key: annotation_action_antonym
+    format: json
+    split: action_antonym
+    choices_field: candidates
+    unavailable_media:
+      path_field: video
+      modality: video
+      availability: not_acquired
+      source_url: https://huggingface.co/datasets/OpenGVLab/MVBench/tree/230a2d4fac8900333c61754641c7a13e069ac9c6
+    expose_native_split: true
+  - path_key: annotation_action_count
+    format: json
+    split: action_count
+    choices_field: candidates
+    unavailable_media:
+      path_field: video
+      modality: video
+      availability: not_acquired
+      source_url: https://huggingface.co/datasets/OpenGVLab/MVBench/tree/230a2d4fac8900333c61754641c7a13e069ac9c6
+    expose_native_split: true
+  - path_key: annotation_action_localization
+    format: json
+    split: action_localization
+    choices_field: candidates
+    unavailable_media:
+      path_field: video
+      modality: video
+      availability: not_acquired
+      source_url: https://huggingface.co/datasets/OpenGVLab/MVBench/tree/230a2d4fac8900333c61754641c7a13e069ac9c6
+    expose_native_split: true
+  - path_key: annotation_action_prediction
+    format: json
+    split: action_prediction
+    choices_field: candidates
+    unavailable_media:
+      path_field: video
+      modality: video
+      availability: not_acquired
+      source_url: https://huggingface.co/datasets/OpenGVLab/MVBench/tree/230a2d4fac8900333c61754641c7a13e069ac9c6
+    expose_native_split: true
+  - path_key: annotation_action_sequence
+    format: json
+    split: action_sequence
+    choices_field: candidates
+    unavailable_media:
+      path_field: video
+      modality: video
+      availability: not_acquired
+      source_url: https://huggingface.co/datasets/OpenGVLab/MVBench/tree/230a2d4fac8900333c61754641c7a13e069ac9c6
+    expose_native_split: true
+  - path_key: annotation_character_order
+    format: json
+    split: character_order
+    choices_field: candidates
+    unavailable_media:
+      path_field: video
+      modality: video
+      availability: not_acquired
+      source_url: https://huggingface.co/datasets/OpenGVLab/MVBench/tree/230a2d4fac8900333c61754641c7a13e069ac9c6
+    expose_native_split: true
+  - path_key: annotation_counterfactual_inference
+    format: json
+    split: counterfactual_inference
+    choices_field: candidates
+    unavailable_media:
+      path_field: video
+      modality: video
+      availability: not_acquired
+      source_url: https://huggingface.co/datasets/OpenGVLab/MVBench/tree/230a2d4fac8900333c61754641c7a13e069ac9c6
+    expose_native_split: true
+  - path_key: annotation_egocentric_navigation
+    format: json
+    split: egocentric_navigation
+    choices_field: candidates
+    unavailable_media:
+      path_field: video
+      modality: video
+      availability: not_acquired
+      source_url: https://huggingface.co/datasets/OpenGVLab/MVBench/tree/230a2d4fac8900333c61754641c7a13e069ac9c6
+    expose_native_split: true
+  - path_key: annotation_episodic_reasoning
+    format: json
+    split: episodic_reasoning
+    choices_field: candidates
+    unavailable_media:
+      path_field: video
+      modality: video
+      availability: not_acquired
+      source_url: https://huggingface.co/datasets/OpenGVLab/MVBench/tree/230a2d4fac8900333c61754641c7a13e069ac9c6
+    expose_native_split: true
+  - path_key: annotation_fine_grained_action
+    format: json
+    split: fine_grained_action
+    choices_field: candidates
+    unavailable_media:
+      path_field: video
+      modality: video
+      availability: not_acquired
+      source_url: https://huggingface.co/datasets/OpenGVLab/MVBench/tree/230a2d4fac8900333c61754641c7a13e069ac9c6
+    expose_native_split: true
+  - path_key: annotation_fine_grained_pose
+    format: json
+    split: fine_grained_pose
+    choices_field: candidates
+    unavailable_media:
+      path_field: video
+      modality: video
+      availability: not_acquired
+      source_url: https://huggingface.co/datasets/OpenGVLab/MVBench/tree/230a2d4fac8900333c61754641c7a13e069ac9c6
+    expose_native_split: true
+  - path_key: annotation_moving_attribute
+    format: json
+    split: moving_attribute
+    choices_field: candidates
+    unavailable_media:
+      path_field: video
+      modality: video
+      availability: not_acquired
+      source_url: https://huggingface.co/datasets/OpenGVLab/MVBench/tree/230a2d4fac8900333c61754641c7a13e069ac9c6
+    expose_native_split: true
+  - path_key: annotation_moving_count
+    format: json
+    split: moving_count
+    choices_field: candidates
+    unavailable_media:
+      path_field: video
+      modality: video
+      availability: not_acquired
+      source_url: https://huggingface.co/datasets/OpenGVLab/MVBench/tree/230a2d4fac8900333c61754641c7a13e069ac9c6
+    expose_native_split: true
+  - path_key: annotation_moving_direction
+    format: json
+    split: moving_direction
+    choices_field: candidates
+    unavailable_media:
+      path_field: video
+      modality: video
+      availability: not_acquired
+      source_url: https://huggingface.co/datasets/OpenGVLab/MVBench/tree/230a2d4fac8900333c61754641c7a13e069ac9c6
+    expose_native_split: true
+  - path_key: annotation_object_existence
+    format: json
+    split: object_existence
+    choices_field: candidates
+    unavailable_media:
+      path_field: video
+      modality: video
+      availability: not_acquired
+      source_url: https://huggingface.co/datasets/OpenGVLab/MVBench/tree/230a2d4fac8900333c61754641c7a13e069ac9c6
+    expose_native_split: true
+  - path_key: annotation_object_interaction
+    format: json
+    split: object_interaction
+    choices_field: candidates
+    unavailable_media:
+      path_field: video
+      modality: video
+      availability: not_acquired
+      source_url: https://huggingface.co/datasets/OpenGVLab/MVBench/tree/230a2d4fac8900333c61754641c7a13e069ac9c6
+    expose_native_split: true
+  - path_key: annotation_object_shuffle
+    format: json
+    split: object_shuffle
+    choices_field: candidates
+    unavailable_media:
+      path_field: video
+      modality: video
+      availability: not_acquired
+      source_url: https://huggingface.co/datasets/OpenGVLab/MVBench/tree/230a2d4fac8900333c61754641c7a13e069ac9c6
+    expose_native_split: true
+  - path_key: annotation_scene_transition
+    format: json
+    split: scene_transition
+    choices_field: candidates
+    unavailable_media:
+      path_field: video
+      modality: video
+      availability: not_acquired
+      source_url: https://huggingface.co/datasets/OpenGVLab/MVBench/tree/230a2d4fac8900333c61754641c7a13e069ac9c6
+    expose_native_split: true
+  - path_key: annotation_state_change
+    format: json
+    split: state_change
+    choices_field: candidates
+    unavailable_media:
+      path_field: video
+      modality: video
+      availability: not_acquired
+      source_url: https://huggingface.co/datasets/OpenGVLab/MVBench/tree/230a2d4fac8900333c61754641c7a13e069ac9c6
+    expose_native_split: true
+  - path_key: annotation_unexpected_action
+    format: json
+    split: unexpected_action
+    choices_field: candidates
+    unavailable_media:
+      path_field: video
+      modality: video
+      availability: not_acquired
+      source_url: https://huggingface.co/datasets/OpenGVLab/MVBench/tree/230a2d4fac8900333c61754641c7a13e069ac9c6
+    expose_native_split: true
+  max_annotation_bytes: 2000000
+  retained_media_root: work/source-objects
+  retained_media_max_bytes: 300000000
+  retained_media:
+    '["scene_transition","Top064_05600.mp4"]':
+      path: 8632527aaa457e787b5091094dfb598a7a56853726de91d4e61a4633876d3a79
+      bytes: 2709111
+      sha256: 8632527aaa457e787b5091094dfb598a7a56853726de91d4e61a4633876d3a79
+    '["scene_transition","Top135_02445.mp4"]':
+      path: 7af49d82bcdf5cb7cb69b8f2e92e58d3c67f9a872086bac8f12519567a9ae743
+      bytes: 2666039
+      sha256: 7af49d82bcdf5cb7cb69b8f2e92e58d3c67f9a872086bac8f12519567a9ae743
+    '["scene_transition","Top006_00440.mp4"]':
+      path: 110846647573b05e243156e1fae1da2e640dcd5f4b50669d82bfc6940209104b
+      bytes: 2631228
+      sha256: 110846647573b05e243156e1fae1da2e640dcd5f4b50669d82bfc6940209104b
+    '["scene_transition","Top008_01355.mp4"]':
+      path: d3013729e8901ad0af993bf6893a4fac5184d7d2e78c149ce61313686aee15db
+      bytes: 2370819
+      sha256: d3013729e8901ad0af993bf6893a4fac5184d7d2e78c149ce61313686aee15db
+    '["scene_transition","Top033_03315.mp4"]':
+      path: 18a34ebc5b5eeb6d8978fa1a00cb15b25af1209f05d15949641a87d634b7997b
+      bytes: 2702560
+      sha256: 18a34ebc5b5eeb6d8978fa1a00cb15b25af1209f05d15949641a87d634b7997b
+    '["scene_transition","Top042_08875.mp4"]':
+      path: 347c15b2790a397fe83211af222120d92c52323a147b6167755f4887ef0f7190
+      bytes: 2772050
+      sha256: 347c15b2790a397fe83211af222120d92c52323a147b6167755f4887ef0f7190
+    '["scene_transition","Top091_01800.mp4"]':
+      path: 314d436a4dad2cf6590b9281e66895e2f63a99784b8aab537184c92d04ba21f4
+      bytes: 2806474
+      sha256: 314d436a4dad2cf6590b9281e66895e2f63a99784b8aab537184c92d04ba21f4
+    '["scene_transition","Top075_02170.mp4"]':
+      path: 94c314397ac4236ddbedeae9e690a3c390901cdade40bb8554b5a5bbf4c71bcb
+      bytes: 2714067
+      sha256: 94c314397ac4236ddbedeae9e690a3c390901cdade40bb8554b5a5bbf4c71bcb
+    '["scene_transition","Top009_02325.mp4"]':
+      path: ae361335fca929ab29aef326649a7e2fe79d2a38feb3ef94afac82fbced58463
+      bytes: 2711298
+      sha256: ae361335fca929ab29aef326649a7e2fe79d2a38feb3ef94afac82fbced58463
+    '["scene_transition","Top084_00825.mp4"]':
+      path: 447a659f4d5458d97fd1a93ba031697f4a66d609290040bcd3618945e4b82821
+      bytes: 2684342
+      sha256: 447a659f4d5458d97fd1a93ba031697f4a66d609290040bcd3618945e4b82821
+    '["scene_transition","Top015_04230.mp4"]':
+      path: 5382af47b1117c321fb03120761bdf0ee367ffa5e57d1675a7c94d44d1f7931c
+      bytes: 2795820
+      sha256: 5382af47b1117c321fb03120761bdf0ee367ffa5e57d1675a7c94d44d1f7931c
+    '["scene_transition","Top051_03455.mp4"]':
+      path: 88562c6963a71c728555bc14f206aeca81dea968a40113fbf3e64f2e5bfe4bb3
+      bytes: 2691647
+      sha256: 88562c6963a71c728555bc14f206aeca81dea968a40113fbf3e64f2e5bfe4bb3
+    '["scene_transition","Top079_01715.mp4"]':
+      path: 321687c7b905a458cee25c78e0813129fc62bc230718cada83e5a2fedb28f002
+      bytes: 2873732
+      sha256: 321687c7b905a458cee25c78e0813129fc62bc230718cada83e5a2fedb28f002
+    '["scene_transition","Top119_01705.mp4"]':
+      path: 7cd42b56d2279ad7d446ad21476200775c12a1065c0221adc7c26144693c69ab
+      bytes: 2694682
+      sha256: 7cd42b56d2279ad7d446ad21476200775c12a1065c0221adc7c26144693c69ab
+    '["scene_transition","Top024_03665.mp4"]':
+      path: 979f9da6eccddc9470a82bdb02a63651a7e2435ac51f21ca3ec0fc53e911a265
+      bytes: 2690633
+      sha256: 979f9da6eccddc9470a82bdb02a63651a7e2435ac51f21ca3ec0fc53e911a265
+    '["scene_transition","Top040_00140.mp4"]':
+      path: f79731d9f2630b6c26cf0d2631bb5f8e5623289ede49af7f97bc26cb226f070b
+      bytes: 2646456
+      sha256: f79731d9f2630b6c26cf0d2631bb5f8e5623289ede49af7f97bc26cb226f070b
+    '["scene_transition","Top011_07740.mp4"]':
+      path: cdff4752acd3a76b5d282a773a8559b05bc4d9cf293acd8c62ebe8548518f500
+      bytes: 2656939
+      sha256: cdff4752acd3a76b5d282a773a8559b05bc4d9cf293acd8c62ebe8548518f500
+    '["scene_transition","Top097_01280.mp4"]':
+      path: c9eaf5178739b114948bbbbe66b8e529283462c3fc57c45631f0f47897ad5e52
+      bytes: 2659115
+      sha256: c9eaf5178739b114948bbbbe66b8e529283462c3fc57c45631f0f47897ad5e52
+    '["scene_transition","Top055_05350.mp4"]':
+      path: 5723c73e0d7fe272c04115432a7d9e32e526fe3e1ee1d519c5b34d30be807e3c
+      bytes: 2668030
+      sha256: 5723c73e0d7fe272c04115432a7d9e32e526fe3e1ee1d519c5b34d30be807e3c
+    '["scene_transition","Top019_08785.mp4"]':
+      path: 847c009cc0e242f66387949981c80f370866d91da4df091dfa977f78efcb2fa8
+      bytes: 2635175
+      sha256: 847c009cc0e242f66387949981c80f370866d91da4df091dfa977f78efcb2fa8
+    '["scene_transition","Top099_04845.mp4"]':
+      path: 0d7eb460747b95e6739b3d87f97e6eb52869bdd749e6c78ea8da3f15baf1f832
+      bytes: 2639102
+      sha256: 0d7eb460747b95e6739b3d87f97e6eb52869bdd749e6c78ea8da3f15baf1f832
+    '["scene_transition","Top027_01155.mp4"]':
+      path: cc5c7991ec6e020130d3fd4d8eb35d32fb6eab489225a81de80e680c96eb6aae
+      bytes: 2823899
+      sha256: cc5c7991ec6e020130d3fd4d8eb35d32fb6eab489225a81de80e680c96eb6aae
+    '["scene_transition","Top075_00720.mp4"]':
+      path: 144f358c688fec355bb6ec4ca4fe3ed2edf9a6f2c6e7714bb0e2c5cf098458f4
+      bytes: 2675882
+      sha256: 144f358c688fec355bb6ec4ca4fe3ed2edf9a6f2c6e7714bb0e2c5cf098458f4
+    '["scene_transition","Top005_00550.mp4"]':
+      path: b2ce5aec1875a4eb1053898958e74cb64e48e9a45095328b09a98561b001949c
+      bytes: 2742309
+      sha256: b2ce5aec1875a4eb1053898958e74cb64e48e9a45095328b09a98561b001949c
+    '["scene_transition","Top042_09625.mp4"]':
+      path: fa3fa4702888f74b1f8d96b254cbb87f9277bf930b21cfcfe7524c4f9f3cd407
+      bytes: 2733658
+      sha256: fa3fa4702888f74b1f8d96b254cbb87f9277bf930b21cfcfe7524c4f9f3cd407
+    '["scene_transition","Top046_00175.mp4"]':
+      path: 3bbc073480e8e6bd202c9dbb4f2abc31cd7d9315bf06cb78ea6bd3bcb348a8ca
+      bytes: 2788403
+      sha256: 3bbc073480e8e6bd202c9dbb4f2abc31cd7d9315bf06cb78ea6bd3bcb348a8ca
+    '["scene_transition","Top019_04990.mp4"]':
+      path: b9a2480b29fbff8bcd3b65299a949bdea93bc3efc209bbfe88c3d1ade7a5a9e7
+      bytes: 2725457
+      sha256: b9a2480b29fbff8bcd3b65299a949bdea93bc3efc209bbfe88c3d1ade7a5a9e7
+    '["scene_transition","Top090_07115.mp4"]':
+      path: de29ef459323c2e25af5f86dd0a98092fc2c35239fdcfef23f2e43ebb5820a6c
+      bytes: 2633152
+      sha256: de29ef459323c2e25af5f86dd0a98092fc2c35239fdcfef23f2e43ebb5820a6c
+    '["scene_transition","Top019_03440.mp4"]':
+      path: b9134b27ab7ee1352ba860cd927db944cb74b0b5099b92447aef15922adee589
+      bytes: 2552050
+      sha256: b9134b27ab7ee1352ba860cd927db944cb74b0b5099b92447aef15922adee589
+    '["scene_transition","Top136_02740.mp4"]':
+      path: 9c76942747b9e3148ab4a561b8d873f31a33042bb082f6520943e8ecc87e2744
+      bytes: 2795832
+      sha256: 9c76942747b9e3148ab4a561b8d873f31a33042bb082f6520943e8ecc87e2744
+    '["scene_transition","Top047_01590.mp4"]':
+      path: 6d18553a239ca31ae75180fafaa9b98061e1924b1ac2c5103f2c882fc946c29d
+      bytes: 2744696
+      sha256: 6d18553a239ca31ae75180fafaa9b98061e1924b1ac2c5103f2c882fc946c29d
+    '["scene_transition","Top103_07065.mp4"]':
+      path: f357fcb81a788d4fca332a564158519bce33619787efb632c92993bd745ba9c0
+      bytes: 2697752
+      sha256: f357fcb81a788d4fca332a564158519bce33619787efb632c92993bd745ba9c0
+    '["scene_transition","Top066_04625.mp4"]':
+      path: fcfcac1dfe4a762384f9eb7f690b1b7b0e70d5aaf99e058ec7e4f4438d627b23
+      bytes: 2593909
+      sha256: fcfcac1dfe4a762384f9eb7f690b1b7b0e70d5aaf99e058ec7e4f4438d627b23
+    '["scene_transition","Top043_01020.mp4"]':
+      path: 58e7fccf9466b02c3a2ef140588443af051e7219bab8988081f6427ae23df10a
+      bytes: 2419290
+      sha256: 58e7fccf9466b02c3a2ef140588443af051e7219bab8988081f6427ae23df10a
+    '["scene_transition","Top009_03460.mp4"]':
+      path: ad53de37ed5328664221651072cbdb0ea80fd16af0644f46b991fe3781a505e8
+      bytes: 2694763
+      sha256: ad53de37ed5328664221651072cbdb0ea80fd16af0644f46b991fe3781a505e8
+    '["scene_transition","Top011_08230.mp4"]':
+      path: 173c87887e985ddb3dd72e918f44d8fce34482176fa091e854004f5f047c5f75
+      bytes: 2713757
+      sha256: 173c87887e985ddb3dd72e918f44d8fce34482176fa091e854004f5f047c5f75
+    '["scene_transition","Top008_04905.mp4"]':
+      path: b0eea1f81a2253ebda2dde95fe5456bf30e4c2ced6b06c6157c6fd40051c3eb8
+      bytes: 2810697
+      sha256: b0eea1f81a2253ebda2dde95fe5456bf30e4c2ced6b06c6157c6fd40051c3eb8
+    '["scene_transition","Top075_04315.mp4"]':
+      path: e25250e3d173e045529aff17de1fe548a2f8f7a543d5b174e285bf2517eb047a
+      bytes: 2781989
+      sha256: e25250e3d173e045529aff17de1fe548a2f8f7a543d5b174e285bf2517eb047a
+    '["scene_transition","Top077_05290.mp4"]':
+      path: 08fffc2424dbad8fdd673e5c590bf0b0426dd61f6ba8115f54546839103503f9
+      bytes: 2735725
+      sha256: 08fffc2424dbad8fdd673e5c590bf0b0426dd61f6ba8115f54546839103503f9
+    '["scene_transition","Top075_05935.mp4"]':
+      path: 4169ba834314f52c19527c2ad3deed7c5bbf5f12e194e48caf97e25b47930da5
+      bytes: 2420310
+      sha256: 4169ba834314f52c19527c2ad3deed7c5bbf5f12e194e48caf97e25b47930da5
+    '["scene_transition","Top017_03940.mp4"]':
+      path: 9f74a29a53f4db2ee36c1b61d6d80d9ebfe466cd1a154049b832a6af0048fded
+      bytes: 2753014
+      sha256: 9f74a29a53f4db2ee36c1b61d6d80d9ebfe466cd1a154049b832a6af0048fded
+    '["scene_transition","Top048_06850.mp4"]':
+      path: 06024522a8e2463ce5d4bf619cf11e9440201901ea2590271d716774c416a7aa
+      bytes: 2652458
+      sha256: 06024522a8e2463ce5d4bf619cf11e9440201901ea2590271d716774c416a7aa
+    '["scene_transition","Top046_00630.mp4"]':
+      path: 44292a970132f687e3b59bbb5fc3c1e8874a9048ebada8c71592d44144d916f1
+      bytes: 2145263
+      sha256: 44292a970132f687e3b59bbb5fc3c1e8874a9048ebada8c71592d44144d916f1
+    '["scene_transition","Top008_00430.mp4"]':
+      path: dcf5297686b2c934257e2de164493effd75cae2e3e53afb7752da9b4bb11f400
+      bytes: 2824535
+      sha256: dcf5297686b2c934257e2de164493effd75cae2e3e53afb7752da9b4bb11f400
+    '["scene_transition","Top009_02005.mp4"]':
+      path: 35569c6da753b227a6df4fdf214785c17f08595234a62325a7d6d3c633a34635
+      bytes: 2699696
+      sha256: 35569c6da753b227a6df4fdf214785c17f08595234a62325a7d6d3c633a34635
+    '["scene_transition","Top007_03840.mp4"]':
+      path: dbb27abed27666cc03642f1c2db77cce08c00a3dc291d5e85ec35019b7f89b32
+      bytes: 2475006
+      sha256: dbb27abed27666cc03642f1c2db77cce08c00a3dc291d5e85ec35019b7f89b32
+    '["scene_transition","Top023_04225.mp4"]':
+      path: 783a9f9b3588de163c76ea04dd1cb1569212f1665091b9152fd668f0ea60657c
+      bytes: 2589915
+      sha256: 783a9f9b3588de163c76ea04dd1cb1569212f1665091b9152fd668f0ea60657c
+    '["scene_transition","Top010_07590.mp4"]':
+      path: 01256bb7dc44c838372b5f7b15647db86bdf87be5de102b345bf098333a7a67e
+      bytes: 2686716
+      sha256: 01256bb7dc44c838372b5f7b15647db86bdf87be5de102b345bf098333a7a67e
+    '["scene_transition","Top081_03965.mp4"]':
+      path: 141288841cfce5306f7b7e8ee2eb81aa9b1f539f8e2a575bd2652de1cc61983e
+      bytes: 2818704
+      sha256: 141288841cfce5306f7b7e8ee2eb81aa9b1f539f8e2a575bd2652de1cc61983e
+    '["scene_transition","Top012_07450.mp4"]':
+      path: 4b8a27da95bdf3163e35443e096d16d61d3bde6e2f5840b677f26b32884658e5
+      bytes: 2763616
+      sha256: 4b8a27da95bdf3163e35443e096d16d61d3bde6e2f5840b677f26b32884658e5
+    '["scene_transition","Top024_04925.mp4"]':
+      path: 400ee14f0192fa60715f54f80ef2f651bc44b1050841b942e777b1c372b949af
+      bytes: 2604481
+      sha256: 400ee14f0192fa60715f54f80ef2f651bc44b1050841b942e777b1c372b949af
+    '["scene_transition","Top008_03365.mp4"]':
+      path: 7ba482f524adc5539b87efb35c135cdbf31697f9134d4095cd7caf2d6eb78a1e
+      bytes: 2806535
+      sha256: 7ba482f524adc5539b87efb35c135cdbf31697f9134d4095cd7caf2d6eb78a1e
+    '["scene_transition","Top010_03375.mp4"]':
+      path: f459544478b0233a38c94f1166e38a69ff5e3d824533efd3ad5fa092bd3deaf1
+      bytes: 2668544
+      sha256: f459544478b0233a38c94f1166e38a69ff5e3d824533efd3ad5fa092bd3deaf1
+    '["scene_transition","Top039_05565.mp4"]':
+      path: c503f15722daddfdf04a028ea62dddeed13d07594130b3a07976d738749a17b6
+      bytes: 2788331
+      sha256: c503f15722daddfdf04a028ea62dddeed13d07594130b3a07976d738749a17b6
+    '["scene_transition","Top077_02770.mp4"]':
+      path: f5c6c5a8d7764929aa0936cdafeaebb4926b5f59c6a7d3b2693f974fc039205d
+      bytes: 2645983
+      sha256: f5c6c5a8d7764929aa0936cdafeaebb4926b5f59c6a7d3b2693f974fc039205d
+    '["scene_transition","Top040_03425.mp4"]':
+      path: 1a1344702bb3983800c26b2e76745a0b7ca644c9a8cc3d1ccff618d12ac1f4de
+      bytes: 2685161
+      sha256: 1a1344702bb3983800c26b2e76745a0b7ca644c9a8cc3d1ccff618d12ac1f4de
+    '["scene_transition","Top091_01630.mp4"]':
+      path: e4a3ff7a99eee117b08c459f2b69c8f2efef82b6d3f227fc0b8974fe8d6c7771
+      bytes: 2693610
+      sha256: e4a3ff7a99eee117b08c459f2b69c8f2efef82b6d3f227fc0b8974fe8d6c7771
+    '["scene_transition","Top034_01300.mp4"]':
+      path: 605df15607fc2d10eb1c2808cb5c80b30c5987f9af878250532eb620d911d041
+      bytes: 2733235
+      sha256: 605df15607fc2d10eb1c2808cb5c80b30c5987f9af878250532eb620d911d041
+    '["scene_transition","Top069_05960.mp4"]':
+      path: 975bcd0498508e5ef62096a649550fcd2db2bd6058812f2fcfcff247a32b52c4
+      bytes: 2705817
+      sha256: 975bcd0498508e5ef62096a649550fcd2db2bd6058812f2fcfcff247a32b52c4
+    '["scene_transition","Top041_10365.mp4"]':
+      path: 796ee28389600d7ff227917ba994eda606c7ecbcc643e0b59f7a6c460a31597b
+      bytes: 2570970
+      sha256: 796ee28389600d7ff227917ba994eda606c7ecbcc643e0b59f7a6c460a31597b
+    '["scene_transition","Top006_09620.mp4"]':
+      path: 715775c8d7bf24838e864433cd801ec44691aabc74a3ef6c2cd8d4ad2e1277ad
+      bytes: 2701890
+      sha256: 715775c8d7bf24838e864433cd801ec44691aabc74a3ef6c2cd8d4ad2e1277ad
+    '["scene_transition","Top136_00885.mp4"]':
+      path: c4e8a9af50dea563f1a6cea220048897ffdbcf00101ea65dbd0c82fed6d5abf9
+      bytes: 2807936
+      sha256: c4e8a9af50dea563f1a6cea220048897ffdbcf00101ea65dbd0c82fed6d5abf9
+    '["scene_transition","Top014_01100.mp4"]':
+      path: 5902442aee2e1520004ba7a3e8d288caf54ad22b377e803e1763a51fba360a95
+      bytes: 2753634
+      sha256: 5902442aee2e1520004ba7a3e8d288caf54ad22b377e803e1763a51fba360a95
+    '["scene_transition","Top064_04175.mp4"]':
+      path: a2929de32ea58d587ab54bba1f1f19e72116096602c5b99fb97eae1cd6a738e7
+      bytes: 2734624
+      sha256: a2929de32ea58d587ab54bba1f1f19e72116096602c5b99fb97eae1cd6a738e7
+    '["scene_transition","Top014_02970.mp4"]':
+      path: 8e813528e2edf1f9509191414aa23ac81a095fd86491937a2f40bfa08aa41187
+      bytes: 2811056
+      sha256: 8e813528e2edf1f9509191414aa23ac81a095fd86491937a2f40bfa08aa41187
+    '["scene_transition","Top064_02590.mp4"]':
+      path: 9b8b38d7ec36fd8b79f8754bbb683d24aaf93653c24c871f7ec20b0a9c1622cb
+      bytes: 2696269
+      sha256: 9b8b38d7ec36fd8b79f8754bbb683d24aaf93653c24c871f7ec20b0a9c1622cb
+    '["scene_transition","Top044_03420.mp4"]':
+      path: f38d0d671858a9768114a8741a3b2954cca0247cd5b0e2c3080be191dee96dfd
+      bytes: 2722510
+      sha256: f38d0d671858a9768114a8741a3b2954cca0247cd5b0e2c3080be191dee96dfd
+    '["scene_transition","Top079_04290.mp4"]':
+      path: 35fbee98ed407ef82ba455b9a966d3de2093d27566b9afa3fccfe8d5e9c8c991
+      bytes: 2851930
+      sha256: 35fbee98ed407ef82ba455b9a966d3de2093d27566b9afa3fccfe8d5e9c8c991
+    '["scene_transition","Top136_05555.mp4"]':
+      path: e15dbfd3a8829d28af4b1b27bc3cf4538c82f17e78c43d4f65691476ac802614
+      bytes: 2689293
+      sha256: e15dbfd3a8829d28af4b1b27bc3cf4538c82f17e78c43d4f65691476ac802614
+    '["scene_transition","Top075_06180.mp4"]':
+      path: 9704b0b7660a8a1475a26b9bc110a2d8019f0cd3a807a0184776c8adda0a842a
+      bytes: 2664940
+      sha256: 9704b0b7660a8a1475a26b9bc110a2d8019f0cd3a807a0184776c8adda0a842a
+    '["scene_transition","Top020_07525.mp4"]':
+      path: 9895f157033b95a279bed9260b5625029a0a68c4160ad2a0060048a1a2e1be2e
+      bytes: 2685204
+      sha256: 9895f157033b95a279bed9260b5625029a0a68c4160ad2a0060048a1a2e1be2e
+    '["scene_transition","Top043_01235.mp4"]':
+      path: 97b08cb132cbff7590ef51b218293b054f8a73958be078dae8b450991c737085
+      bytes: 2603590
+      sha256: 97b08cb132cbff7590ef51b218293b054f8a73958be078dae8b450991c737085
+    '["scene_transition","Top091_00995.mp4"]':
+      path: 24393bbc0c693e0747e95ba36c10dd31fb92fc68a5f8cb99a8066b8237d4b878
+      bytes: 2669223
+      sha256: 24393bbc0c693e0747e95ba36c10dd31fb92fc68a5f8cb99a8066b8237d4b878
+    '["scene_transition","Top101_00540.mp4"]':
+      path: 410d986c5efb9c4a3b2d5cca7d8b8e4a0ea9584ccf05aacfd6c81f4323f2ab0c
+      bytes: 2724858
+      sha256: 410d986c5efb9c4a3b2d5cca7d8b8e4a0ea9584ccf05aacfd6c81f4323f2ab0c
+    '["scene_transition","Top075_06545.mp4"]':
+      path: 0f5a275b08dec5d82cc0724321b930dff3e22cd44b9606146578817cf43d00a0
+      bytes: 2231343
+      sha256: 0f5a275b08dec5d82cc0724321b930dff3e22cd44b9606146578817cf43d00a0
+    '["scene_transition","Top005_03005.mp4"]':
+      path: b2cf59da0b365f0c6ee0d02ab9c83532a919ccfdcd1230aa1735b0c1bd131f0c
+      bytes: 2687363
+      sha256: b2cf59da0b365f0c6ee0d02ab9c83532a919ccfdcd1230aa1735b0c1bd131f0c
+    '["scene_transition","Top084_01205.mp4"]':
+      path: e9f8d891de54233122cd41cb3810036deeaa8171878a367fe55001d1e765fa50
+      bytes: 2641832
+      sha256: e9f8d891de54233122cd41cb3810036deeaa8171878a367fe55001d1e765fa50
+    '["scene_transition","Top103_02830.mp4"]':
+      path: 11be788ca1127eee1df1651822a9a4a0121d7eeea9957032e71a15afbd91fd01
+      bytes: 2715048
+      sha256: 11be788ca1127eee1df1651822a9a4a0121d7eeea9957032e71a15afbd91fd01
+    '["scene_transition","Top064_06575.mp4"]':
+      path: a7f2e9c53ba759fb2b503d314489f4236e00d76f6a1f81ad9c7d0fb9ee310c23
+      bytes: 2694116
+      sha256: a7f2e9c53ba759fb2b503d314489f4236e00d76f6a1f81ad9c7d0fb9ee310c23
+    '["scene_transition","Top042_07435.mp4"]':
+      path: 33c7d6175e9f2fe0ce3fc6126f0f798a5364cd5b52b590342685dd2d600bf8f4
+      bytes: 2014390
+      sha256: 33c7d6175e9f2fe0ce3fc6126f0f798a5364cd5b52b590342685dd2d600bf8f4
+    '["scene_transition","Top038_03635.mp4"]':
+      path: c9b55ed011979b3bf2a56e5ab26354c9ec5b5d366c48c18abdb536c82b0547af
+      bytes: 2790124
+      sha256: c9b55ed011979b3bf2a56e5ab26354c9ec5b5d366c48c18abdb536c82b0547af
+    '["scene_transition","Top006_08310.mp4"]':
+      path: 935705e62f57b928703321160caaa21b1555bdd5aaf0da984b879b50de6740c6
+      bytes: 2738441
+      sha256: 935705e62f57b928703321160caaa21b1555bdd5aaf0da984b879b50de6740c6
+    '["scene_transition","Top051_05975.mp4"]':
+      path: 6c6f0e38d425952df8ebcdfc00c7a4a06ed404cf09f0256a74d16c0b8005150d
+      bytes: 2644697
+      sha256: 6c6f0e38d425952df8ebcdfc00c7a4a06ed404cf09f0256a74d16c0b8005150d
+    '["scene_transition","Top046_05260.mp4"]':
+      path: 2828e7449fdb7fb9d8fa7a9dfe84b320dd9f1e14b9a4bc82ae801f8308a49d26
+      bytes: 2807719
+      sha256: 2828e7449fdb7fb9d8fa7a9dfe84b320dd9f1e14b9a4bc82ae801f8308a49d26
+    '["scene_transition","Top073_04440.mp4"]':
+      path: f3344f7a92cc97902146b13957ef818c90a0c56282bf63248f3e34760160bb0c
+      bytes: 2770144
+      sha256: f3344f7a92cc97902146b13957ef818c90a0c56282bf63248f3e34760160bb0c
+    '["scene_transition","Top051_09070.mp4"]':
+      path: 484e595a3c5f6a5513c931d9e6961d2175b01671bcd868a32982eb18d6e41432
+      bytes: 2736112
+      sha256: 484e595a3c5f6a5513c931d9e6961d2175b01671bcd868a32982eb18d6e41432
+    '["scene_transition","Top023_09385.mp4"]':
+      path: bf6c190d03762ec9e90dcf11d8e41cc9619c3ddb357498f18421f238e6472f19
+      bytes: 2532748
+      sha256: bf6c190d03762ec9e90dcf11d8e41cc9619c3ddb357498f18421f238e6472f19
+    '["scene_transition","Top008_05775.mp4"]':
+      path: 8089ffea75fd00b7726c5ce125744d4605e303fe983056db0699ab35d946db14
+      bytes: 2827879
+      sha256: 8089ffea75fd00b7726c5ce125744d4605e303fe983056db0699ab35d946db14
+    '["scene_transition","Top047_00935.mp4"]':
+      path: 28de77d5d6ebbee0dccfd0e14071bb2c43e14ae32e18d5dc20f594b6d7eb97e1
+      bytes: 2713970
+      sha256: 28de77d5d6ebbee0dccfd0e14071bb2c43e14ae32e18d5dc20f594b6d7eb97e1
+    '["scene_transition","Top077_02225.mp4"]':
+      path: 95af955fc24fd9649005c2bc23208eb35b30f5dd3218de35fd813f030cc379b3
+      bytes: 2718840
+      sha256: 95af955fc24fd9649005c2bc23208eb35b30f5dd3218de35fd813f030cc379b3
+    '["scene_transition","Top016_03120.mp4"]':
+      path: 4d72af00dcf5bc7d14bcb559ba5fa8184046764660ed7da2f3dafb4d2a15a172
+      bytes: 2473097
+      sha256: 4d72af00dcf5bc7d14bcb559ba5fa8184046764660ed7da2f3dafb4d2a15a172
+    '["scene_transition","Top027_06300.mp4"]':
+      path: 0952f17fdc781cf27c23ddb7c3252de53b9163a77ae0ccd7a3132ad69fef8b4e
+      bytes: 2706261
+      sha256: 0952f17fdc781cf27c23ddb7c3252de53b9163a77ae0ccd7a3132ad69fef8b4e
+    '["scene_transition","Top001_00750.mp4"]':
+      path: 4a7d65d6de636094a95726dfa5b086a4908b08977b8d966fd61d9a7b55f6f425
+      bytes: 2693829
+      sha256: 4a7d65d6de636094a95726dfa5b086a4908b08977b8d966fd61d9a7b55f6f425
+    '["scene_transition","Top091_07460.mp4"]':
+      path: 683bdee678aea8232ca168195c0479bf3b7d9444142245a3e86d86de83fad2dc
+      bytes: 2712588
+      sha256: 683bdee678aea8232ca168195c0479bf3b7d9444142245a3e86d86de83fad2dc
+    '["scene_transition","Top077_01400.mp4"]':
+      path: c4d516ca2e7bf77e9034fe8bc864a9e29b37cde8735f0a5121ef0c4dec0e9aeb
+      bytes: 2662756
+      sha256: c4d516ca2e7bf77e9034fe8bc864a9e29b37cde8735f0a5121ef0c4dec0e9aeb
+    '["scene_transition","Top083_00685.mp4"]':
+      path: 6d7dedc7c73176a7fff9266b5454731e0d37316ca4b2a6e1c9b6a96806e3fb65
+      bytes: 2700925
+      sha256: 6d7dedc7c73176a7fff9266b5454731e0d37316ca4b2a6e1c9b6a96806e3fb65
+    '["scene_transition","Top133_05575.mp4"]':
+      path: 3d364dc61eed8c66547c1cccacc27db49572773e80568e25ac47cbf730612735
+      bytes: 2874267
+      sha256: 3d364dc61eed8c66547c1cccacc27db49572773e80568e25ac47cbf730612735
+    '["scene_transition","Top077_03460.mp4"]':
+      path: 1bd83826e673d77583de5fb198a704f4442120e3af65560b59262c40dffaf628
+      bytes: 2725831
+      sha256: 1bd83826e673d77583de5fb198a704f4442120e3af65560b59262c40dffaf628
+    '["scene_transition","Top091_06240.mp4"]':
+      path: 021f9115781418f6f1a7ab711fcba8ce9a8be96607b86d6798ebb38918c88223
+      bytes: 2703340
+      sha256: 021f9115781418f6f1a7ab711fcba8ce9a8be96607b86d6798ebb38918c88223
+    '["scene_transition","Top012_03585.mp4"]':
+      path: dbe0ac9791335f67619daa064e24e9f380b59ae57b1506ef5c4cffeb8fe62594
+      bytes: 2702196
+      sha256: dbe0ac9791335f67619daa064e24e9f380b59ae57b1506ef5c4cffeb8fe62594
+  retained_media_optional: true
+files:
+- source_name: action_antonym.json
+  url: https://huggingface.co/datasets/OpenGVLab/MVBench/resolve/230a2d4fac8900333c61754641c7a13e069ac9c6/json/action_antonym.json
+  bytes: 53338
+  sha256: 0ebbec1f540f598a82bf27f569e7377fdc5c4b6e62d53d3847a88abb785f5513
+  format: json
+  config_key: annotation_action_antonym
+- source_name: action_count.json
+  url: https://huggingface.co/datasets/OpenGVLab/MVBench/resolve/230a2d4fac8900333c61754641c7a13e069ac9c6/json/action_count.json
+  bytes: 32742
+  sha256: 5e3389d3f8a81744096825d735d45d04b1842fb49da7f5b9a70d4c2224505117
+  format: json
+  config_key: annotation_action_count
+- source_name: action_localization.json
+  url: https://huggingface.co/datasets/OpenGVLab/MVBench/resolve/230a2d4fac8900333c61754641c7a13e069ac9c6/json/action_localization.json
+  bytes: 78029
+  sha256: 164290bb5f447b6cdff26eb51a2470bcf4ce31f84d092ec4337f7bd4ce558eec
+  format: json
+  config_key: annotation_action_localization
+- source_name: action_prediction.json
+  url: https://huggingface.co/datasets/OpenGVLab/MVBench/resolve/230a2d4fac8900333c61754641c7a13e069ac9c6/json/action_prediction.json
+  bytes: 46197
+  sha256: 15601d39ca8604dbb642149c097f416518f4816b0c0bec57a6202d95f8bdac79
+  format: json
+  config_key: annotation_action_prediction
+- source_name: action_sequence.json
+  url: https://huggingface.co/datasets/OpenGVLab/MVBench/resolve/230a2d4fac8900333c61754641c7a13e069ac9c6/json/action_sequence.json
+  bytes: 51606
+  sha256: d5f8c063a5ae5a433c3fb8ff78a03acbf0513a01928b384ed90a1e044adf230e
+  format: json
+  config_key: annotation_action_sequence
+- source_name: character_order.json
+  url: https://huggingface.co/datasets/OpenGVLab/MVBench/resolve/230a2d4fac8900333c61754641c7a13e069ac9c6/json/character_order.json
+  bytes: 30205
+  sha256: 72c20ad5749da31759c92f4ed83ed117a52f70963ce1d85d5dfd1582accdead4
+  format: json
+  config_key: annotation_character_order
+- source_name: counterfactual_inference.json
+  url: https://huggingface.co/datasets/OpenGVLab/MVBench/resolve/230a2d4fac8900333c61754641c7a13e069ac9c6/json/counterfactual_inference.json
+  bytes: 65394
+  sha256: 6fabbbaba68b10b48bfb714c51b87569266bc65303530e5ab9c39cab2924bdfa
+  format: json
+  config_key: annotation_counterfactual_inference
+- source_name: egocentric_navigation.json
+  url: https://huggingface.co/datasets/OpenGVLab/MVBench/resolve/230a2d4fac8900333c61754641c7a13e069ac9c6/json/egocentric_navigation.json
+  bytes: 82642
+  sha256: 4a5f80cca3471a15efe6d7d4ded192218871992cab32fa3a3eede93ea7fb3972
+  format: json
+  config_key: annotation_egocentric_navigation
+- source_name: episodic_reasoning.json
+  url: https://huggingface.co/datasets/OpenGVLab/MVBench/resolve/230a2d4fac8900333c61754641c7a13e069ac9c6/json/episodic_reasoning.json
+  bytes: 177477
+  sha256: 39ca717f721c274a20835835e4ca417f58d5fb2d17ffebb7042d373561c871c3
+  format: json
+  config_key: annotation_episodic_reasoning
+- source_name: fine_grained_action.json
+  url: https://huggingface.co/datasets/OpenGVLab/MVBench/resolve/230a2d4fac8900333c61754641c7a13e069ac9c6/json/fine_grained_action.json
+  bytes: 48694
+  sha256: 21fb61328ab02e399170a22a2a4080a05dff18e8423de709e49b9fa2180fde58
+  format: json
+  config_key: annotation_fine_grained_action
+- source_name: fine_grained_pose.json
+  url: https://huggingface.co/datasets/OpenGVLab/MVBench/resolve/230a2d4fac8900333c61754641c7a13e069ac9c6/json/fine_grained_pose.json
+  bytes: 42247
+  sha256: f0cebc0a498474c03618aac20f67810cc41197ac97534a51f930c217dc13f091
+  format: json
+  config_key: annotation_fine_grained_pose
+- source_name: moving_attribute.json
+  url: https://huggingface.co/datasets/OpenGVLab/MVBench/resolve/230a2d4fac8900333c61754641c7a13e069ac9c6/json/moving_attribute.json
+  bytes: 34139
+  sha256: b760214e4320b2ceed4580cc0febfc8c8b084487c7efcaef712b704adb850548
+  format: json
+  config_key: annotation_moving_attribute
+- source_name: moving_count.json
+  url: https://huggingface.co/datasets/OpenGVLab/MVBench/resolve/230a2d4fac8900333c61754641c7a13e069ac9c6/json/moving_count.json
+  bytes: 27859
+  sha256: a561538a69b2722c96d2b608af488c04db6a0d803b03b49661b8834e9425d245
+  format: json
+  config_key: annotation_moving_count
+- source_name: moving_direction.json
+  url: https://huggingface.co/datasets/OpenGVLab/MVBench/resolve/230a2d4fac8900333c61754641c7a13e069ac9c6/json/moving_direction.json
+  bytes: 52782
+  sha256: 81379646d91fb078a8b38de897f40977eeeebd946ca1c6ef0f58e4bde9d21209
+  format: json
+  config_key: annotation_moving_direction
+- source_name: object_existence.json
+  url: https://huggingface.co/datasets/OpenGVLab/MVBench/resolve/230a2d4fac8900333c61754641c7a13e069ac9c6/json/object_existence.json
+  bytes: 30079
+  sha256: 2bb290258243c7dafe57042768d491e6a239d30d0ff74d0f163a989c60f69620
+  format: json
+  config_key: annotation_object_existence
+- source_name: object_interaction.json
+  url: https://huggingface.co/datasets/OpenGVLab/MVBench/resolve/230a2d4fac8900333c61754641c7a13e069ac9c6/json/object_interaction.json
+  bytes: 52932
+  sha256: 9624cf2fef5ad4ec882edf955ce1d10c806e71e4e8c6a880fd867b224914302b
+  format: json
+  config_key: annotation_object_interaction
+- source_name: object_shuffle.json
+  url: https://huggingface.co/datasets/OpenGVLab/MVBench/resolve/230a2d4fac8900333c61754641c7a13e069ac9c6/json/object_shuffle.json
+  bytes: 77141
+  sha256: f9e1bd17a9bbab1d9f5be71411ca619cf9743ca47bb808985b202138b7928118
+  format: json
+  config_key: annotation_object_shuffle
+- source_name: scene_transition.json
+  url: https://huggingface.co/datasets/OpenGVLab/MVBench/resolve/230a2d4fac8900333c61754641c7a13e069ac9c6/json/scene_transition.json
+  bytes: 67576
+  sha256: edab8a7992851061cac170f7e50782961ec21826f99e70ee72ae73a9dafb79f9
+  format: json
+  config_key: annotation_scene_transition
+- source_name: state_change.json
+  url: https://huggingface.co/datasets/OpenGVLab/MVBench/resolve/230a2d4fac8900333c61754641c7a13e069ac9c6/json/state_change.json
+  bytes: 60586
+  sha256: 21fa00a1e4fdbd3a0fda4d04f1b4dfd8ee62a1e3f3663fdb0f6e40799c36027f
+  format: json
+  config_key: annotation_state_change
+- source_name: unexpected_action.json
+  url: https://huggingface.co/datasets/OpenGVLab/MVBench/resolve/230a2d4fac8900333c61754641c7a13e069ac9c6/json/unexpected_action.json
+  bytes: 81671
+  sha256: 76b6f440ccb1ed007c67236c0ec7a39ee7cfbfb04197e9cc4a303b9230ca958b
+  format: json
+  config_key: annotation_unexpected_action
+allowed_hosts:
+- huggingface.co
+resource_limits:
+  max_rss_bytes: 2000000000
+  max_cpu_seconds: 600
+  max_wall_seconds: 1200

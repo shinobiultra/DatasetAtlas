@@ -10,7 +10,7 @@ release: f8cd0b2335356b0f01a164df0cac7403f56a6c83
 adapter: remote_columnar
 adapter_config: {}
 coverage:
-  identity: candidate
+  identity: resolved
   source: verified
   access: public
   adapter: tested
@@ -33,9 +33,9 @@ evidence:
   source_file_hash: 9272a113d401f6e3d5e5c6a6e19e1745e4949dba404a23965eb239b896a77476
   page: 3
   role: evaluation
-  excerpt: Setting defined below), to identify which components carry We use the Visual-Counterfact dataset
-    (Golo- information that causally determines how the con- vanevsky et al., 2025a), which contains 469
-    coun- fl
+  excerpt: Setting defined below), to identify which components carry We use the Visual-Counterfact
+    dataset (Golo- information that causally determines how the con- vanevsky et al., 2025a),
+    which contains 469 coun- fl
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -44,19 +44,52 @@ evidence:
   source_file_hash: 9272a113d401f6e3d5e5c6a6e19e1745e4949dba404a23965eb239b896a77476
   page: 3
   role: direct evaluation
-  excerpt: defined below), to identify which components carry We use the Visual-Counterfact dataset (Golo-
-    information that causally determines how the con- vanevsky et al., 2025a), which contains
+  excerpt: defined below), to identify which components carry We use the Visual-Counterfact dataset
+    (Golo- information that causally determines how the con- vanevsky et al., 2025a), which contains
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: native_population_live_verification
   url: https://huggingface.co/datasets/mgolov/Visual-Counterfact/tree/f8cd0b2335356b0f01a164df0cac7403f56a6c83
   checked_on: '2026-09-23'
   receipt: reports/visual-counterfact-live-verification.json
-  scope: Both full native author splits (1,220 paired examples). This is the released collection, not
-    a claim that the separately mentioned 469-item or 467-item study subsets have been identified.
+  scope: Both full native author splits (1,220 paired examples). This is the released collection,
+    not a claim that the separately mentioned 469-item or 467-item study subsets have been identified.
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  status: resolved_declared_source_population
+  release: f8cd0b2335356b0f01a164df0cac7403f56a6c83
+  snapshot_id: visual-counterfact-88f61997e002267ca122fdb9
+  source_url: https://huggingface.co/datasets/mgolov/Visual-Counterfact/tree/f8cd0b2335356b0f01a164df0cac7403f56a6c83
+  representation: pinned_source_population
+  record_count: 1220
+  population: Both full native author splits (1,220 paired examples). This is the released collection,
+    not a claim that the separately mentioned 469-item or 467-item study subsets have been identified.
+  basis: Existing checksum-pinned preparation and snapshot metadata; no record contents read during
+    this curation.
+  scope_note: Identifies the available source population. This is not human review, historical
+    paper-membership acceptance, publisher byte-equivalence proof, or permission to redistribute.
+  receipt: work/prepared/visual-counterfact/88f61997e002267ca122fdb963dd35310a3f0e706d8a95782ddb3f457876efec/receipt.json
+  receipt_sha256: 3fa48329be682a408c6f88d679015b648ae4c0d827264878e3a27938f3f4defa
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: f8cd0b2335356b0f01a164df0cac7403f56a6c83
+  snapshot_id: visual-counterfact-88f61997e002267ca122fdb9
+  source_url: https://huggingface.co/datasets/mgolov/Visual-Counterfact/tree/f8cd0b2335356b0f01a164df0cac7403f56a6c83
+  record_count: 1220
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: Both full native author splits (1,220 paired examples). This is the released collection,
+    not a claim that the separately mentioned 469-item or 467-item study subsets have been identified.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/visual-counterfact.yaml
 source_url: https://huggingface.co/datasets/mgolov/Visual-Counterfact/tree/f8cd0b2335356b0f01a164df0cac7403f56a6c83
 modalities:
 - image
 - text
 tasks:
 - visual question answering
+snapshot_id: visual-counterfact-88f61997e002267ca122fdb9

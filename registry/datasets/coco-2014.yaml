@@ -2,25 +2,25 @@ schema_version: '1.0'
 id: coco-2014
 name: COCO 2014
 aliases: []
-description: Original COCO 2014 release exists, but the survey table does not specify
-  train, val, captions, or detection subset.
+description: Original COCO 2014 release exists, but the survey table does not specify train, val,
+  captions, or detection subset.
 paper_ids:
 - paper-25eaa8c74ce76800
-release: unresolved
+release: coco-2014-native-all-image-splits
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
-  blockers:
-  - Adapter and preview are not implemented.
+  blockers: []
+  total_count: 164062
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -34,14 +34,14 @@ evidence:
   source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
   page: 29
   role: cited-study dataset in survey table
-  excerpt: 24c) LLaVA-1.5-7B, Shikra, MiniGPT-4 Hallucination Detection COCO 2014
-    (Phukan et al., 2024) Qwen2-VL-7B, InternLM-xcomposer2- Hallucinatio
+  excerpt: 24c) LLaVA-1.5-7B, Shikra, MiniGPT-4 Hallucination Detection COCO 2014 (Phukan et al.,
+    2024) Qwen2-VL-7B, InternLM-xcomposer2- Hallucinatio
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://cocodataset.org/#download
-  note: 'Original COCO 2014 release exists, but the survey table does not specify
-    train, val, captions, or detection subset. Release: COCO 2014; task/split unpinned'
+  note: 'Original COCO 2014 release exists, but the survey table does not specify train, val,
+    captions, or detection subset. Release: COCO 2014; task/split unpinned'
   audit_file: work/sources/source-audit-jobs-batch3.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
@@ -55,16 +55,54 @@ evidence:
   url: https://cocodataset.org/
   checked_on: '2026-09-23'
   report: reports/selective-acquisition-20260923.md
-  note: Pinned acquired population and real preview exercised locally. Mirror and
-    selective-transfer limits remain in the acquisition receipts; this does not establish
-    publication rights or the exact paper-used subset.
+  note: Pinned acquired population and real preview exercised locally. Mirror and selective-transfer
+    limits remain in the acquisition receipts; this does not establish publication rights or the
+    exact paper-used subset.
   recipe: registry/recipes/coco-2014.yaml
-source_url: https://cocodataset.org/
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: coco-2014-native-all-image-splits
+  snapshot_id: coco-2014-0b639bf940c97037307f3b69
+  source_url: https://cocodataset.org/#download
+  record_count: 164062
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 164062 COCO 2014 train/val/test images. Original published train/val captions,
+    instance masks/boxes and person keypoints are joined per image. Test annotations are withheld
+    and remain absent, never counted as zero detections. Images fetched on request.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/coco-2014.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: coco-2014-native-all-image-splits
+  snapshot_id: coco-2014-0b639bf940c97037307f3b69
+  source_url: https://cocodataset.org/#download
+  record_count: 164062
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 164062 COCO 2014 train/val/test images. Original published train/val captions,
+    instance masks/boxes and person keypoints are joined per image. Test annotations are withheld
+    and remain absent, never counted as zero detections. Images fetched on request.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/coco-2014.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
+source_url: https://cocodataset.org/#download
 relationships:
 - type: same_source_family_as
   target_id: coco
-  scope: COCO family only; year, split, selected image/caption IDs and overlay are
-    not established as the active COCO-2017-val release.
+  scope: COCO family only; year, split, selected image/caption IDs and overlay are not established
+    as the active COCO-2017-val release.
 modalities:
 - image
 - text
@@ -72,3 +110,4 @@ tasks:
 - object detection
 - image captioning
 - keypoint detection
+snapshot_id: coco-2014-0b639bf940c97037307f3b69

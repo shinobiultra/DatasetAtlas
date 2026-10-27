@@ -10,7 +10,7 @@ export type View = 'grid' | 'table' | 'map'
 export type PopulationScope = 'preview' | 'complete'
 
 /** One applied filter. Chips above the results map one-to-one onto these. */
-export type Clause = { key: string; fieldId: string; fieldName: string; op: string; value: unknown; label: string }
+export type Clause = { key: string; fieldId: string; fieldName: string; op: string; value: unknown; label: string; source?: 'facet' }
 
 export const PAGE_SIZE = 60
 export const MAP_PAGE_SIZE = 1000
@@ -18,7 +18,15 @@ export const MAP_MAX_POINTS = 10000
 
 export function clauseFilter(clauses: Clause[]): Record<string, unknown> | null {
   if (!clauses.length) return null
-  const nodes = clauses.map(clause => ({ field_id: clause.fieldId, op: clause.op, value: clause.value }))
+  const nodes: Record<string, unknown>[] = []
+  const facets = new Map<string, Record<string, unknown>[]>()
+  for (const clause of clauses) {
+    const node = { field_id: clause.fieldId, op: clause.op, value: clause.value }
+    // Checkbox choices are alternatives; explicit advanced clauses retain AND semantics.
+    if (clause.source === 'facet') facets.set(clause.fieldId, [...(facets.get(clause.fieldId) ?? []), node])
+    else nodes.push(node)
+  }
+  for (const choices of facets.values()) nodes.push(choices.length === 1 ? choices[0] : { or: choices })
   return nodes.length === 1 ? nodes[0] : { and: nodes }
 }
 
@@ -59,14 +67,18 @@ export function useBrowse(datasetId: string, query: Query | null, enabled: boole
   const [error, setError] = useState('')
   const [nonce, setNonce] = useState(0)
   const generation = useRef(0)
+  const requestController = useRef<AbortController | null>(null)
   const signature = query ? JSON.stringify(query) : ''
 
   useEffect(() => {
-    if (!enabled || !query) { setRecords([]); setResult(null); return }
     const current = ++generation.current
-    setLoading(true); setError('')
+    setRecords([]); setResult(null); setLoadingMore(false); setError('')
+    setLoading(Boolean(enabled && query))
+    if (!enabled || !query) return
+    const controller = new AbortController()
+    requestController.current = controller
     const timer = setTimeout(() => {
-      provider.query(datasetId, query)
+      provider.query(datasetId, query, controller.signal)
         .then(page => {
           if (current !== generation.current) return
           setRecords(page.records); setResult(page); setLoading(false)
@@ -76,16 +88,21 @@ export function useBrowse(datasetId: string, query: Query | null, enabled: boole
           setError(String(failure instanceof Error ? failure.message : failure)); setRecords([]); setResult(null); setLoading(false)
         })
     }, 150)
-    return () => clearTimeout(timer)
+    return () => {
+      clearTimeout(timer)
+      controller.abort()
+      if (current === generation.current) generation.current++
+      if (requestController.current === controller) requestController.current = null
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [datasetId, signature, enabled, nonce])
 
   const loadMore = useCallback(() => {
-    if (!query || !result?.cursor || loading || loadingMore) return
+    if (!enabled || !query || !result?.cursor || loading || loadingMore) return
     if (records.length >= maxRecords) return
     const current = generation.current
     setLoadingMore(true)
-    provider.query(datasetId, { ...query, cursor: result.cursor })
+    provider.query(datasetId, { ...query, cursor: result.cursor }, requestController.current?.signal)
       .then(page => {
         if (current !== generation.current) return
         setRecords(rows => {
@@ -98,7 +115,7 @@ export function useBrowse(datasetId: string, query: Query | null, enabled: boole
         if (current !== generation.current) return
         setError(String(failure instanceof Error ? failure.message : failure)); setLoadingMore(false)
       })
-  }, [datasetId, query, result, loading, loadingMore, records.length, maxRecords])
+  }, [datasetId, query, result, enabled, loading, loadingMore, records.length, maxRecords])
 
   return {
     records, result, loading, loadingMore, error,

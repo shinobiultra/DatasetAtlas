@@ -40,12 +40,12 @@ SEED_NAMES = (
     "RefCOCO", "RefCOCO+", "RefCOCOg", "Visual7W", "CLEVR", "CLEVR-Humans",
     "CLEVR-CoGenT", "CLEVRER", "Shapes3D", "dSprites", "MPI3D",
     "LAION-400M", "LAION-2B", "LAION-5B", "DataComp", "CC3M", "CC12M",
-    "Conceptual Captions", "SBU Captions", "WIT", "YFCC100M", "WebVid",
+    "SBU Captions", "WIT", "YFCC100M", "WebVid",
     "LLaVA-Instruct-150K", "LLaVA-Bench", "MMStar", "MathVista", "ChartQA",
     "DocVQA", "AI2D", "OCR-VQA", "OCRVQA", "TallyQA", "VCR", "SNLI-VE",
     "Hateful Memes", "FairFace", "CelebA", "UTKFace", "BUPT-Balancedface",
     "BBQ", "BOLD", "StereoSet", "CrowS-Pairs", "GenderBias-VL",
-    "Waterbirds", "CUB-200", "CUB", "Flowers102", "Oxford Flowers",
+    "Waterbirds", "CUB-200", "Flowers102", "Oxford Flowers",
     "Stanford Cars", "Food-101", "Places365", "SUN397", "DTD", "EuroSAT",
     "CIFAR-10", "CIFAR-100", "MNIST", "Fashion-MNIST", "SVHN", "Tiny ImageNet",
     "Pascal VOC", "Open Images", "LVIS", "ADE20K", "Cityscapes",
@@ -56,11 +56,11 @@ SEED_NAMES = (
     "Common Crawl", "C4", "The Pile", "WikiText", "Wikipedia",
     "AdvBench", "HarmBench", "JailbreakBench", "SafeBench",
     "PHANTOM", "JailBreakV-28K", "MM-SafetyBench", "OmniSafeBench-MM",
-    "VIA-Bench", "Turing Eye Test", "COCO-gender", "FACET", "MIAP",
+    "Turing Eye Test", "MIAP",
     "PHASE", "SA-1B", "OpenImages", "PAIRS", "SocialCounterfactuals",
-    "VQA 2.0", "IllusionBench+", "SVO-Probes", "Visual-Counterfact",
-    "FineVision", "CEBaB", "FFHQ", "Set14", "GYAFC", "OASIS",
-    "NRC-VAD", "Chicago Face Database", "CFD", "ShapeWorld",
+    "VQA 2.0", "SVO-Probes", "Visual-Counterfact",
+    "FineVision", "CEBaB", "FFHQ", "Set14", "OASIS",
+    "NRC-VAD", "CFD", "ShapeWorld",
     "RealToxicityPrompts", "HC-Bench", "IlluChar", "SBBench",
 )
 
@@ -597,7 +597,7 @@ def write_coverage_report(manifest: str | Path, report: str | Path) -> None:
     if curated:
         write_curated_candidate_summary(manifest_path.parent)
     candidate_summary = (json.loads((manifest_path.parent / "curated_dataset_candidates.json").read_text(encoding="utf-8"))
-                         if curated else {"candidates": [], "alias_redirects": []})
+                         if curated else {"candidates": []})
     files = data["source_files"]
     pdfs = [f for f in files if f["type"] == "pdf"]
     html = [f for f in files if f["type"] in ("html", "htm")]
@@ -635,7 +635,6 @@ def write_coverage_report(manifest: str | Path, report: str | Path) -> None:
     lines += ["", "Role labels above are automated context heuristics, particularly unreliable for two-column PDFs. Curated roles below come from page review.", "", "## Page-located reviewed evidence", "",
               f"- Page-checked assertions: **{len(curated)}** across **{len({c['paper_id'] for c in curated})}** papers, covering **{len({c['name_as_written'] for c in curated})}** candidate names or explicitly unnamed collections.",
               f"- Conservatively grouped candidate identities: **{len(candidate_summary['candidates'])}**; no corpus audit assertion alone verifies a release.",
-              f"- Confirmed identity alias redirects: **{len(candidate_summary['alias_redirects'])}**. All original page receipts remain attached to canonical proposals; paper-specific splits and roles are retained.",
               "- Receipts are in ignored `work/corpus/curated_dataset_evidence.jsonl`; grouped identity proposals are in `work/corpus/curated_dataset_candidates.json`.",
               "- Page-checked assertions establish only their cited claims. A complete mention inventory requires `mention_inventory_review_complete`; original dataset source and release verification are separate.",
               "", "## Paper-by-paper audit", "", "| Paper ID | Title | PDFs | Candidate mentions | Outcome | Mention inventory |", "| --- | --- | ---: | ---: | --- | --- |"]
@@ -644,9 +643,8 @@ def write_coverage_report(manifest: str | Path, report: str | Path) -> None:
         pdf_count = sum(f["type"] == "pdf" for f in files if f.get("paper_id") == paper["paper_id"])
         lines.append(f"| `{paper['paper_id']}` | {title} | {pdf_count} | {paper['candidate_mention_count']} | `{paper['outcome']}` | {'agent inventory checked' if paper.get('mention_inventory_review_complete') else 'pending'} |")
     lines += ["", "## Outstanding limits", "",
-              "- All linked papers have agent-complete full-text mention inventories. The automated extractor remains a noisy search aid: it can miss a novel name or mistake a model, title, metric, or author for a dataset. Human approval is tracked separately and is not a required signoff.",
-              "- The 15 SingleFile HTML captures are arXiv PDF-viewer shells with no standalone visible article text. Their linked PDFs were independently extracted and reviewed; each shell is documented in the quality queue.",
-              "- The seven genuinely sparse-text PDF pages were visually checked. The 206 numeric/table-heavy pages retained substantial extracted text and were covered by the full-paper audits; the quality queue records page-specific visual/OCR checks where needed.",
+              "- The automated extractor is a search aid: it can miss a novel name or mistake a model, title, metric, or author for a dataset. Per-paper inventory and human approval states above are reported independently.",
+              "- Sparse text, extraction failures and table-heavy pages require source-specific checks; extraction success alone does not establish a complete mention inventory.",
               "- No candidate is marked accepted, no dataset identity or original release is verified by this automated pass, and no source-access or preview claim follows from this report.",
               ""]
     destination = Path(report)
@@ -696,69 +694,11 @@ def write_curated_candidate_summary(output: str | Path) -> int:
             if value and value not in group[field]:
                 group[field].append(value)
         group["paper_full_review_complete"] &= bool(row.get("paper_full_review_complete"))
-    # The initial two redirects have page-level evidence of the same identity.
-    # A tracked registry rule file can add source-verified *name* aliases across
-    # papers, with explicit paper-scope caveats. Do not normalize punctuation
-    # or source-family names without a curated rule: variants can differ.
-    initial_redirects = (
-        ("paper-12e8bd34b4a2f2a8-unnamed-harmful-instruction-evaluation-set-90f1ca61",
-         "paper-12e8bd34b4a2f2a8-unnamed-harmful-instruction-evaluation-set",
-         "Both receipts cite the same 40 manually curated instructions on paper p6.",
-         {"evidence-c80bbda136db1321e17e", "evidence-3f153c5972dc03b632ce"}, True, ""),
-        ("jailbreakv-28k-13161513", "jailbreakv-28k",
-         "Both spellings cite the same JailBreakV_28K source sentence on PHANTOM p6.",
-         {"evidence-fd7b7e7e90ab5fde29d9", "evidence-cf91c6888c3690038c70"}, True, ""),
-    )
-    rule_path = output.parent.parent / "registry" / "candidate_dispositions.yaml"
-    confirmed_redirects = list(initial_redirects)
-    if rule_path.is_file():
-        rules = yaml.safe_load(rule_path.read_text()) or {}
-        for rule in rules.get("alias_redirects", []):
-            if rule.get("disposition") != "source_verified_name_alias":
-                continue
-            confirmed_redirects.append((
-                rule["alias_id"], rule["canonical_id"], rule["reason"],
-                set(rule["evidence_ids"]), False, rule.get("scope_note", ""),
-            ))
-    by_id = {group["proposed_id"]: group for group in groups.values()}
-    evidence_by_id = {row["evidence_id"]: row for row in evidence}
-    redirects = []
-    for alias_id, canonical_id, reason, required_evidence, same_page_required, scope_note in confirmed_redirects:
-        alias, canonical = by_id.get(alias_id), by_id.get(canonical_id)
-        if not alias or not canonical:
-            continue
-        if not required_evidence <= set(alias["evidence_ids"] + canonical["evidence_ids"]):
-            continue
-        if not required_evidence & set(alias["evidence_ids"]):
-            continue
-        receipts = [evidence_by_id[eid] for eid in required_evidence]
-        if same_page_required and len({(r["paper_id"], r["source_file_hash"], r["page"]) for r in receipts}) != 1:
-            continue
-        for field in ("paper_ids", "evidence_ids", "roles", "notes"):
-            canonical[field].extend(value for value in alias[field] if value not in canonical[field])
-        for name in [alias["name"], *alias["aliases_as_written"]]:
-            if name != canonical["name"] and name not in canonical["aliases_as_written"]:
-                canonical["aliases_as_written"].append(name)
-        canonical["paper_full_review_complete"] &= alias["paper_full_review_complete"]
-        canonical.setdefault("confirmed_alias_ids", []).append(alias_id)
-        if scope_note:
-            canonical.setdefault("alias_scope_notes", []).append(scope_note)
-        del by_id[alias_id]
-        redirects.append({"alias_id": alias_id, "canonical_id": canonical_id,
-                          "reason": reason, "evidence_ids": sorted(required_evidence),
-                          "scope_note": scope_note})
-        for eid in alias["evidence_ids"] + canonical["evidence_ids"]:
-            row = evidence_by_id[eid]
-            row.setdefault("candidate_original_id", alias_id if eid in alias["evidence_ids"] else canonical_id)
-            row["candidate_canonical_id"] = canonical_id
-    if redirects:
-        _write_jsonl(output / "curated_dataset_evidence.jsonl", evidence)
     result = {"schema_version": SCHEMA_VERSION,
               "review_scope": "page_checked_assertions_with_explicit_paper_review_flags",
               "paper_full_review_complete": False,
               "dataset_identities_resolved_by_corpus_audit": 0,
-              "alias_redirects": redirects,
-              "candidates": sorted(by_id.values(), key=lambda x: (x["name"].casefold(), x["proposed_id"]))}
+              "candidates": sorted(groups.values(), key=lambda x: (x["name"].casefold(), x["proposed_id"]))}
     _write_json(target, result)
     return len(result["candidates"])
 

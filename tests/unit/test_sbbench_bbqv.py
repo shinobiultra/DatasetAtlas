@@ -3,9 +3,8 @@
 Every shard in this file is SYNTHETIC: it copies only the layout of the gated release (four file groups named
 `real-`, `synthetic-`, `test-` and `test2-`, an embedded `file_name` image struct, integer class-label columns,
 upstream ids that repeat across groups, and a `test` group without answer columns). No gated content is copied
-into the repository. What the real release holds is recorded separately, with counts and byte totals, in
-`reports/bbq-v-live-verification-20261008.json`, and the tests at the end check that the recipe, the registry entry
-and that receipt agree with each other.
+into the repository. Recipe and registry checks cover the current pinned source and its access limits;
+these generated shards establish adapter and preparation behavior.
 """
 from __future__ import annotations
 
@@ -13,7 +12,6 @@ import hashlib
 import io
 import json
 import re
-import subprocess
 from pathlib import Path
 
 import pyarrow as pa
@@ -28,8 +26,6 @@ from dataset_atlas.models import Dataset
 ROOT = Path(__file__).resolve().parents[2]
 RECIPE_PATH = ROOT / "registry/recipes/sbbench.yaml"
 ENTRY_PATH = ROOT / "registry/datasets/sbbench.yaml"
-RECEIPT_PATH = ROOT / "reports/bbq-v-live-verification-20261008.json"
-BASE_COMMIT = "82e5a9c643d030ecb567c9fb2767f4a457200499"  # the entry as the gate check left it
 REVISION = "a1c78b8f73bc40408993414e3d94714a6a9169d3"
 HOSTS = ["huggingface.co", "cas-bridge.xethub.hf.co", "us.aws.cdn.hf.co"]
 TOKEN_PATTERN = re.compile(r"hf_[A-Za-z0-9]{20,}")
@@ -200,15 +196,6 @@ def test_recipe_caps_keep_the_shards_remote_and_the_transfer_below_three_gigabyt
     assert config["footer_workers"] <= 4  # modest concurrency against the Hub
 
 
-def test_the_preview_selection_is_fixed_by_the_recipe_and_fits_the_caps_on_the_real_layout():
-    sampling = recipe()["adapter_config"]["preview_sampling"]
-    assert sampling == {"method": "sha256_ranked_row_groups_then_rows", "seed": 0, "row_groups": 40, "count": 100, "max_rows_per_group": 3}
-    shards = receipt()["layout"]["shards"]
-    # The receipt records the real row groups' sizes; the fixed selection over them must stay far below the transfer cap.
-    from dataset_atlas.preparation.remote_sample import FixedRowGroupSampler
-    groups = [(i, g["row_group"], g["rows"], g["bytes"]) for i, shard in enumerate(shards) for g in shard["row_group_sizes"]]
-    sampler = FixedRowGroupSampler.from_spec(groups, [s["source_name"] for s in shards], sampling, byte_budget=4_000_000_000)
-    assert sampler.selected_bytes == receipt()["preview"]["sampling"]["selected_row_group_transfer_bytes"] <= 1_200_000_000
 
 
 # --- configuration, field types, and the absence of fabricated values ----------------------------------------------
@@ -622,7 +609,7 @@ def test_a_budget_that_cannot_admit_the_fixed_selection_refuses_the_run_and_leav
     assert Registry(root).active_directory("sbbench") is None
 
 
-# --- the registry entry, the receipt and the recipe agree --------------------------------------------------------------
+# --- current registry and recipe scope -------------------------------------------------------------------------------
 
 
 def entry() -> dict:
@@ -642,85 +629,6 @@ def test_entry_coverage_states_each_dimension_separately_and_keeps_the_limits():
     assert "historical SBBench population differ" in blockers  # the paper-population limit is kept
     assert "Adapter and preview are not implemented" not in blockers
     assert "Access approval is not present" not in blockers
-    assert any("2026-10-08" in b and "terms" in b for b in coverage["blockers"])
+    assert any("terms" in b and "accept" in b for b in coverage["blockers"])
     assert entry()["rights"]["images"] == "not_reviewed" and entry()["release"] == recipe()["release"]
     assert entry()["adapter"] == "remote_columnar" and entry()["adapter_config"] == {}
-
-
-def git_show(path: str):
-    try:
-        return subprocess.run(["git", "show", f"{BASE_COMMIT}:{path}"], cwd=ROOT, capture_output=True, text=True, check=True).stdout
-    except (OSError, subprocess.CalledProcessError):
-        return None
-
-
-def test_earlier_evidence_is_untouched_and_the_new_items_cite_the_receipt():
-    old = git_show("registry/datasets/sbbench.yaml")
-    if old is None:
-        pytest.skip("base commit is not available in this checkout")
-    before, now = yaml.safe_load(old), entry()
-    assert now["evidence"][:len(before["evidence"])] == before["evidence"]
-    added = now["evidence"][len(before["evidence"]):]
-    assert [item["kind"] for item in added] == ["source_audit_access", "native_population_live_verification"]
-    access, verification = added
-    assert access["checked_on"] == "2026-10-08" and "accepted the terms" in access["note"]
-    assert access["audit_file"] == verification["receipt"] == "reports/bbq-v-live-verification-20261008.json"
-    assert "historical" in verification["source_identity_status"]
-    for field in ("identity", "paper_ids", "rights", "aliases", "source_url", "relationships"):
-        assert now.get(field) == before.get(field), field
-    assert not TOKEN_PATTERN.search(ENTRY_PATH.read_text())
-
-
-def receipt() -> dict:
-    return json.loads(RECEIPT_PATH.read_text())
-
-
-def test_receipt_holds_no_credential_and_no_local_path():
-    text = RECEIPT_PATH.read_text()
-    assert not TOKEN_PATTERN.search(text)
-    assert not re.search(r"authorization|bearer", text, re.IGNORECASE)
-    assert "/home/" not in text and "/tmp/" not in text
-
-
-def test_receipt_respects_the_binding_caps_and_measures_what_moved():
-    document = receipt()
-    transfer = document["bytes_transferred"]
-    assert transfer["total_measured_bytes"] <= 3_000_000_000 == document["caps"]["transfer_bytes"]
-    assert document["prepared_output"]["bytes"] <= 2_000_000_000 == document["caps"]["prepared_output_bytes"]
-    assert transfer["total_measured_bytes"] == sum(part["bytes"] for part in transfer["parts"].values())
-    assert document["shards_downloaded_whole"] == 0 and document["token_in_receipt"] is False
-    assert document["repository_downloaded_whole"] is False
-
-
-def test_receipt_lists_the_same_shards_as_the_recipe_with_footer_row_counts():
-    document, files = receipt(), recipe()["adapter_config"]["remote_files"]
-    shards = document["layout"]["shards"]
-    assert [(s["source_name"], s["bytes"], s["sha256"], s["etag"]) for s in shards] == \
-           [(f["source_name"], f["bytes"], f["sha256"], f["etag"]) for f in files]
-    assert sum(s["rows"] for s in shards) == recipe()["expected_count"] == document["layout"]["total_rows"]
-    assert document["source"]["revision"] == REVISION
-    groups = document["layout"]["groups"]
-    assert sum(group["rows"] for group in groups.values()) == recipe()["expected_count"]
-    assert {name: group["shards"] for name, group in groups.items()} == {"real": 7, "synthetic": 20, "test": 10, "test2": 8}
-
-
-def test_receipt_class_labels_match_the_recipes_declared_fields():
-    declared = recipe()["adapter_config"]["fields"]
-    for field, names in receipt()["schema"]["class_labels"].items():
-        assert declared[field]["values"] == list(range(len(names)))
-        assert ", ".join(f"{code}={name}" for code, name in enumerate(names)) in declared[field]["description"]
-    assert receipt()["schema"]["class_labels_agree_in_every_shard_that_has_the_column"] is True
-
-
-def test_receipt_records_the_preview_the_sampling_and_the_beyond_row_hundred_reads():
-    document = receipt()
-    preview = document["preview"]
-    assert preview["records"] == 100 and preview["snapshot_id"] == recipe()["snapshot_id"]
-    sampling = preview["sampling"]
-    assert sampling["seed"] == 0 and sampling["method"] and sampling["population_count"] == recipe()["expected_count"]
-    assert preview["original_media"]["verified"] == 100 and preview["original_media"]["representation"] == "original"
-    live = document["live_reads"]
-    assert live["last_record"]["row_index"] == recipe()["expected_count"] - 1
-    assert live["beyond_row_100"]["original_bytes_verified"] >= 1
-    assert document["index"]["records"] == recipe()["expected_count"]
-    assert document["index"]["unique_record_ids"] == recipe()["expected_count"]

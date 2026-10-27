@@ -173,13 +173,28 @@ function ModelsSection() {
             {processors.map(item => (
               <div className="listrow" key={item.id} style={{ gridTemplateColumns: 'minmax(0,1fr) minmax(0,1.6fr) auto' }}>
                 <span className="stack"><strong className="truncate">{item.name ?? item.id}</strong><small className="truncate mono">{item.id}</small></span>
-                <span className="truncate"><small>{item.description ?? item.reason ?? '—'}</small></span>
+                <span className="stack">
+                  <small>{item.description ?? '—'}</small>
+                  {item.available === false && <small role="note">{item.reason || 'This processor is unavailable in the current workbench.'}</small>}
+                </span>
                 <Tag tone={item.available === false ? 'warn' : 'ok'}>{item.available === false ? 'Unavailable' : 'Available'}</Tag>
               </div>
             ))}
           </div>
         )}
-        <p className="hint">Optional extras (vision, embeddings, projection) install separately; basic browsing needs none of them.</p>
+        <p className="hint">Optional extras install separately; basic browsing needs none of them.</p>
+      </div>
+
+      <div className="card card-pad col" style={{ gap: 8 }}>
+        <h3>Set up local analysis</h3>
+        <p className="hint">From the Atlas checkout, install the analysis libraries in the environment used by the workbench, then restart it. <code>--inexact</code> keeps your other installed extras.</p>
+        <pre className="raw"><code>uv sync --inexact --extra vision --extra embeddings --extra projection</code></pre>
+        <p className="hint">For an installed wheel, add the same <code>[vision,embeddings,projection]</code> extras with the installer and Python environment you used to install Atlas.</p>
+        <p className="hint">In your Atlas workspace, inspect the pinned model status and preview the files and download budget:</p>
+        <pre className="raw"><code>atlas models status</code></pre>
+        <pre className="raw"><code>atlas models fetch</code></pre>
+        <p className="hint">When you choose to install those weights, run <code>atlas models fetch --execute</code>. It verifies checksums and configures the local recipes. No model is downloaded from this page.</p>
+        <p className="hint">For LM Studio, vLLM or another OpenAI-compatible server, load a model and start its loopback endpoint yourself. Open a dataset → Ask model to add its base URL (for example <code>http://127.0.0.1:1234/v1</code>) and model ID, then probe the capabilities before use.</p>
       </div>
     </>
   )

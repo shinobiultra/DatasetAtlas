@@ -2,29 +2,27 @@ schema_version: '1.0'
 id: pascal-voc
 name: Pascal VOC
 aliases: []
-description: Mention candidate from a focused page audit; the evidence receipts distinguish
-  direct use, comparison, related-work, and citation-only roles. Original source,
-  release, and rights still require independent verification.
+description: 'VOC2011 native archive: 14,961 JPEG/XML pairs, twenty signed classification labels,
+  102 image-set tables and 2,223 original class/object mask pairs. Main classification trainval
+  has 11,540 images; absent labels elsewhere remain explicit.'
 paper_ids:
 - paper-25eaa8c74ce76800
 release: voc2011-author-native-archive-14961
 adapter: pascal_voc
 adapter_config: {}
 coverage:
-  identity: candidate
+  identity: resolved
   source: verified
   access: public
-  adapter: implemented
-  preview: none
-  complete_data: unprepared
+  adapter: tested
+  preview: complete_target
+  complete_data: indexed_metadata_partial_media
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - The citing survey names Pascal VOC without year or split; this explicit VOC2011
-    archive does not resolve paper membership.
-  - Native adapter and pinned recipe implemented; real preparation and independent
-    limitations verification pending.
+  - Public redistribution rights remain unreviewed.
+  total_count: 14961
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -36,31 +34,73 @@ evidence:
   source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
   page: 30
   role: cited-study dataset in survey table
-  excerpt: "ResNet50, VGG16 \u2014 ImageNet, Pascal VOC (Yang et al., 2024c) BLIP2(blip2-opt-2.7b),\
-    \ \u2014"
+  excerpt: ResNet50, VGG16 — ImageNet, Pascal VOC (Yang et al., 2024c) BLIP2(blip2-opt-2.7b),
+    —
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_access
   checked_on: '2026-10-06'
   url: https://www.robots.ox.ac.uk/~vgg/projects/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar
   note: The old host.robots.ox.ac.uk paths now answer HTTP 301 to www.robots.ox.ac.uk/~vgg/projects/pascal/VOC/.
-    VOC2012 trainval is 1,999,639,040 bytes (strong ETag, Last-Modified 2025-09-11)
-    and VOC2007 test is 451,020,800 bytes; both serve range requests. The survey cites
-    only 'Pascal VOC'.
+    VOC2012 trainval is 1,999,639,040 bytes (strong ETag, Last-Modified 2025-09-11) and VOC2007
+    test is 451,020,800 bytes; both serve range requests. The survey cites only 'Pascal VOC'.
   source_identity_status: official_files_reachable_year_not_named_by_paper
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'From the source inspected on 2026-10-06: official VOC tar archives inspected
-    by header only; photographs with XML annotations per the challenge. Not inferred
-    from the dataset name.'
+  note: 'From the source inspected on 2026-10-06: official VOC tar archives inspected by header
+    only; photographs with XML annotations per the challenge. Not inferred from the dataset name.'
 - kind: native_source_acquisition
   checked_on: '2026-10-06'
   url: https://thor.robots.ox.ac.uk/pascal/VOC/voc2011/VOCtrainval_25-May-2011.tar
   receipt: reports/pascal-voc2011-native-source-acquisition-20261006.json
-  note: Full original archive SHA256 and publisher MD5 verified. Native14961 image/XML
-    pairs,11540 Main trainval images,3421 outsideMain images and2223 paired masks;
-    paper identity and publication rights remain unresolved.
+  note: Full original archive SHA256 and publisher MD5 verified. Native14961 image/XML pairs,11540
+    Main trainval images,3421 outsideMain images and2223 paired masks; paper identity and publication
+    rights remain unresolved.
+- kind: paper_usage_qualification
+  note: Available release identity is separate from historical paper use.
+  qualifications:
+  - The citing survey names Pascal VOC without year or split; this explicit VOC2011 archive does
+    not resolve paper membership.
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  status: resolved_declared_source_population
+  release: voc2011-author-native-archive-14961
+  snapshot_id: pascal-voc-65c6a48a2e8d4384933a556a
+  source_url: https://www.robots.ox.ac.uk/~vgg/projects/pascal/VOC/voc2011/index.html
+  representation: pinned_source_population
+  record_count: 14961
+  population: All14961 native VOC2011 archive JPEG/XML pairs, preserving exact XML,20 signed classification
+    labels and all102 image-set tables. Main classification trainval has11540 images;3421 other
+    archive images retain absent classification labels. Native2223 class/object mask pairs are
+    linked as original palette PNG assets. Other VOC years and the citing survey paper specific
+    release/subset remain unresolved.
+  basis: Existing checksum-pinned preparation and snapshot metadata; no record contents read during
+    this curation.
+  scope_note: Identifies the available source population. This is not human review, historical
+    paper-membership acceptance, publisher byte-equivalence proof, or permission to redistribute.
+  receipt: work/prepared/pascal-voc/cecb7ca799654e6e3714f178e1e76fc3c736b9870572531d164712eca5e2e37d/receipt.json
+  receipt_sha256: 777a2fa511246cd389f9a45eb961e04a25fe4a92d1a49bb9b9fc73c0a7686f6e
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: voc2011-author-native-archive-14961
+  snapshot_id: pascal-voc-65c6a48a2e8d4384933a556a
+  source_url: https://www.robots.ox.ac.uk/~vgg/projects/pascal/VOC/voc2011/index.html
+  record_count: 14961
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: indexed_metadata_partial_media
+  unit: example
+  population: All14961 native VOC2011 archive JPEG/XML pairs, preserving exact XML,20 signed classification
+    labels and all102 image-set tables. Main classification trainval has11540 images;3421 other
+    archive images retain absent classification labels. Native2223 class/object mask pairs are
+    linked as original palette PNG assets. Other VOC years and the citing survey paper specific
+    release/subset remain unresolved.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/pascal-voc.yaml
 modalities:
 - image
 source_url: https://www.robots.ox.ac.uk/~vgg/projects/pascal/VOC/voc2011/index.html
+snapshot_id: pascal-voc-65c6a48a2e8d4384933a556a

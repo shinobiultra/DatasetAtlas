@@ -7,29 +7,29 @@ paper_ids:
 - paper-6dbb0d4a7b949143
 - paper-3e0db9c633ab204c
 - paper-392b0c393c06b48e
-release: unresolved
+release: caltech101-institutional-v1
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
   - Source-family rights and any public media examples require dataset-specific review.
-  - Adapter and preview are not implemented.
+  total_count: 9144
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://data.caltech.edu/records/mzrjq-6wc02
-  note: Institutional record has no stated license in its checked license field; open
-    download is not publication permission
+  note: Institutional record has no stated license in its checked license field; open download
+    is not publication permission
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-55f6ce853d62dec2ae69
@@ -37,9 +37,9 @@ evidence:
   source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
   page: 5
   role: evaluation
-  excerpt: oders, specifically large-scale adversarially trained Ima- 2012), and Caltech101
-    (Li et al., 2022). Notably, these large- geNet models, ViT-G/14 (1B parameters)
-    and ViT-H/14 scale models sig
+  excerpt: oders, specifically large-scale adversarially trained Ima- 2012), and Caltech101 (Li
+    et al., 2022). Notably, these large- geNet models, ViT-G/14 (1B parameters) and ViT-H/14 scale
+    models sig
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -66,8 +66,8 @@ evidence:
   source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
   page: 5
   role: zero-shot robustness evaluation
-  excerpt: coders, specifically large-scale adversarially trained Ima- 2012), and
-    Caltech101 (Li et al., 2022). Notably, these large- geNet model
+  excerpt: coders, specifically large-scale adversarially trained Ima- 2012), and Caltech101 (Li
+    et al., 2022). Notably, these large- geNet model
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -90,8 +90,8 @@ evidence:
   source_identity_status: official_source_resolved_rights_unknown
 - kind: source_audit_rights
   url: https://data.caltech.edu/records/mzrjq-6wc02
-  note: Institutional record has no stated license in its checked license field; open
-    download is not publication permission
+  note: Institutional record has no stated license in its checked license field; open download
+    is not publication permission
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_rights_unknown
@@ -99,13 +99,54 @@ evidence:
   url: https://data.caltech.edu/records/mzrjq-6wc02
   checked_on: '2026-09-23'
   report: reports/selective-acquisition-20260923.md
-  note: Pinned acquired population and real preview exercised locally. Mirror and
-    selective-transfer limits remain in the acquisition receipts; this does not establish
-    publication rights or the exact paper-used subset.
+  note: Pinned acquired population and real preview exercised locally. Mirror and selective-transfer
+    limits remain in the acquisition receipts; this does not establish publication rights or the
+    exact paper-used subset.
   recipe: registry/recipes/caltech101.yaml
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: caltech101-institutional-v1
+  snapshot_id: caltech101-119fce6cd456b9a752291100
+  source_url: https://data.caltech.edu/records/mzrjq-6wc02
+  record_count: 9144
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All images in the Caltech institutional v1 archive, including explicitly labelled
+    background images. All released MATLAB outlines and bounding-box annotations joined using
+    the native category-name mapping. Background annotations are absent; no official train/test
+    split is inferred.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/caltech101.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: caltech101-institutional-v1
+  snapshot_id: caltech101-119fce6cd456b9a752291100
+  source_url: https://data.caltech.edu/records/mzrjq-6wc02
+  record_count: 9144
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All images in the Caltech institutional v1 archive, including explicitly labelled
+    background images. All released MATLAB outlines and bounding-box annotations joined using
+    the native category-name mapping. Background annotations are absent; no official train/test
+    split is inferred.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/caltech101.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
 source_url: https://data.caltech.edu/records/mzrjq-6wc02
 modalities:
 - image
 tasks:
 - image classification
 - object outlines
+snapshot_id: caltech101-119fce6cd456b9a752291100

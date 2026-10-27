@@ -1,0 +1,272 @@
+release: hf-a3666eb249237ba3d5eca8db21176cc47967e040
+snapshot_id: hf-a3666eb249237ba3d5eca8db21176cc47967e040-692ab907f30f
+source_url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/tree/a3666eb249237ba3d5eca8db21176cc47967e040
+adapter: embedded_parquet
+expected_count: 3807
+scope: 'Official BLINK release across all 14 visual perception tasks and both val/test
+  splits: 3,807 source rows and 7,358 real embedded image occurrences. Test answers
+  marked hidden by the author remain hidden; no answer is inferred.'
+adapter_config:
+  format: parquet
+  mapping:
+    id: source_id
+    question: question
+    choices: choices
+  fields:
+    source_id: Task/split/original-ID key
+    task: Official BLINK task
+    split: Original val or test split
+    source_file: Pinned author Parquet path
+    idx: Original source ID
+    question: Original question
+    sub_task: Original subtask label
+    choices: Original answer choices
+    answer: Original author answer or hidden marker
+    prompt: Author prompt
+    explanation: Author explanation
+    source_image_columns: Original image column order
+    images: Original embedded image metadata
+  population: 'Official BLINK release across all 14 visual perception tasks and both
+    val/test splits: 3,807 source rows and 7,358 real embedded image occurrences.
+    Test answers marked hidden by the author remain hidden; no answer is inferred.'
+  media_columns:
+  - images
+convert:
+  name: retained_visual_parquet
+  params:
+    mode: blink
+    sources:
+    - key: source_000
+      native_path: Art_Style/test-00000-of-00001.parquet
+    - key: source_001
+      native_path: Art_Style/val-00000-of-00001.parquet
+    - key: source_002
+      native_path: Counting/test-00000-of-00001.parquet
+    - key: source_003
+      native_path: Counting/val-00000-of-00001.parquet
+    - key: source_004
+      native_path: Forensic_Detection/test-00000-of-00001.parquet
+    - key: source_005
+      native_path: Forensic_Detection/val-00000-of-00001.parquet
+    - key: source_006
+      native_path: Functional_Correspondence/test-00000-of-00001.parquet
+    - key: source_007
+      native_path: Functional_Correspondence/val-00000-of-00001.parquet
+    - key: source_008
+      native_path: IQ_Test/test-00000-of-00001.parquet
+    - key: source_009
+      native_path: IQ_Test/val-00000-of-00001.parquet
+    - key: source_010
+      native_path: Jigsaw/test-00000-of-00001.parquet
+    - key: source_011
+      native_path: Jigsaw/val-00000-of-00001.parquet
+    - key: source_012
+      native_path: Multi-view_Reasoning/test-00000-of-00001.parquet
+    - key: source_013
+      native_path: Multi-view_Reasoning/val-00000-of-00001.parquet
+    - key: source_014
+      native_path: Object_Localization/test-00000-of-00001.parquet
+    - key: source_015
+      native_path: Object_Localization/val-00000-of-00001.parquet
+    - key: source_016
+      native_path: Relative_Depth/test-00000-of-00001.parquet
+    - key: source_017
+      native_path: Relative_Depth/val-00000-of-00001.parquet
+    - key: source_018
+      native_path: Relative_Reflectance/test-00000-of-00001.parquet
+    - key: source_019
+      native_path: Relative_Reflectance/val-00000-of-00001.parquet
+    - key: source_020
+      native_path: Semantic_Correspondence/test-00000-of-00001.parquet
+    - key: source_021
+      native_path: Semantic_Correspondence/val-00000-of-00001.parquet
+    - key: source_022
+      native_path: Spatial_Relation/test-00000-of-00001.parquet
+    - key: source_023
+      native_path: Spatial_Relation/val-00000-of-00001.parquet
+    - key: source_024
+      native_path: Visual_Correspondence/test-00000-of-00001.parquet
+    - key: source_025
+      native_path: Visual_Correspondence/val-00000-of-00001.parquet
+    - key: source_026
+      native_path: Visual_Similarity/test-00000-of-00001.parquet
+    - key: source_027
+      native_path: Visual_Similarity/val-00000-of-00001.parquet
+    max_output_bytes: 900000000
+  count: 3807
+  rows_sha256: a22c02be77e7a338e9bd6be05b5a82a379799d46ff7c3ceda62297c3d9909ce4
+files:
+- source_name: Art_Style__test-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Art_Style/test-00000-of-00001.parquet
+  bytes: 144684586
+  sha256: f5ec715865314dc16715fa163d078319453358df4ff28796599df7298ac66fdc
+  format: parquet
+  config_key: source_000
+- source_name: Art_Style__val-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Art_Style/val-00000-of-00001.parquet
+  bytes: 146389711
+  sha256: 9400707b7d0e54809146f0f6e9eec058803bef7f50b58b7d21c75b95b90e37d4
+  format: parquet
+  config_key: source_001
+- source_name: Counting__test-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Counting/test-00000-of-00001.parquet
+  bytes: 5320976
+  sha256: 595801ca8aceaf4582e6b6f93f6375987a17144603d539090b60d9261145247d
+  format: parquet
+  config_key: source_002
+- source_name: Counting__val-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Counting/val-00000-of-00001.parquet
+  bytes: 4694898
+  sha256: 7404d7b8e3c4a97a9ab5015739ad3b76a505bbe073286c8c3412f60f4d2b13e5
+  format: parquet
+  config_key: source_003
+- source_name: Forensic_Detection__test-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Forensic_Detection/test-00000-of-00001.parquet
+  bytes: 19699266
+  sha256: f2a95c7255d3dac2fadbb33480e5dfc11fa814c431da99fa56367b0bb5642037
+  format: parquet
+  config_key: source_004
+- source_name: Forensic_Detection__val-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Forensic_Detection/val-00000-of-00001.parquet
+  bytes: 19573243
+  sha256: 48499d694cfffe81fa1eac3dcb1a84804d30cee8ffb501d7ff7020d8c20dd00c
+  format: parquet
+  config_key: source_005
+- source_name: Functional_Correspondence__test-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Functional_Correspondence/test-00000-of-00001.parquet
+  bytes: 27590875
+  sha256: c71cd03552f2e507a5071656f9aa5a5786fabd205e9642759621646de5b114ef
+  format: parquet
+  config_key: source_006
+- source_name: Functional_Correspondence__val-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Functional_Correspondence/val-00000-of-00001.parquet
+  bytes: 25636347
+  sha256: fa3b85a94002be63939088627224d53bca84b20efcebb2cfa95fd246004514c1
+  format: parquet
+  config_key: source_007
+- source_name: IQ_Test__test-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/IQ_Test/test-00000-of-00001.parquet
+  bytes: 3370561
+  sha256: b554661983fddc53b07d80a399ea7f5a2e7766543aecac921b13dab34a0fb4f4
+  format: parquet
+  config_key: source_008
+- source_name: IQ_Test__val-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/IQ_Test/val-00000-of-00001.parquet
+  bytes: 3785491
+  sha256: 5753ee46f95354f5d3207ff51df6cb0a70a3ffd63114e80718ab465a3997ca61
+  format: parquet
+  config_key: source_009
+- source_name: Jigsaw__test-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Jigsaw/test-00000-of-00001.parquet
+  bytes: 4374925
+  sha256: 374f9bd343c3dfec1edecd0eaec9e2a7543f769649d556fc801fa33dfef0b38a
+  format: parquet
+  config_key: source_010
+- source_name: Jigsaw__val-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Jigsaw/val-00000-of-00001.parquet
+  bytes: 3710771
+  sha256: cf6ae1c48389667e0c245e56c48479f86e9f0bc1f5d33f0559da5fc2f37b671f
+  format: parquet
+  config_key: source_011
+- source_name: Multi-view_Reasoning__test-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Multi-view_Reasoning/test-00000-of-00001.parquet
+  bytes: 9533415
+  sha256: 968bf7d6f8561ac3a19be69ea969c1de692ad97b0aa28e3a983c05678e08eddb
+  format: parquet
+  config_key: source_012
+- source_name: Multi-view_Reasoning__val-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Multi-view_Reasoning/val-00000-of-00001.parquet
+  bytes: 9736586
+  sha256: f4e81718f844747bce372bcf046ffe207f82a1ea8b7ce308655c11f536114e19
+  format: parquet
+  config_key: source_013
+- source_name: Object_Localization__test-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Object_Localization/test-00000-of-00001.parquet
+  bytes: 6395090
+  sha256: 60791d98f94be544c178c6a8db77b54750b4afcf8274dd0b445f5ba52f03ec63
+  format: parquet
+  config_key: source_014
+- source_name: Object_Localization__val-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Object_Localization/val-00000-of-00001.parquet
+  bytes: 6196076
+  sha256: cce5f661cc5c6ddde12d37c2a70e4f7dc4f18e613a5e647d6f5ae35c05799532
+  format: parquet
+  config_key: source_015
+- source_name: Relative_Depth__test-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Relative_Depth/test-00000-of-00001.parquet
+  bytes: 4599186
+  sha256: f3b98acd1a5ff1cd75875e8a258d9224599054f62a1d08feacec19ab03d45303
+  format: parquet
+  config_key: source_016
+- source_name: Relative_Depth__val-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Relative_Depth/val-00000-of-00001.parquet
+  bytes: 4604789
+  sha256: 4cd1d5840a2f9e3ad86b310865bd44a29555344b0c6b67b36f9ab1c1029a4d1a
+  format: parquet
+  config_key: source_017
+- source_name: Relative_Reflectance__test-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Relative_Reflectance/test-00000-of-00001.parquet
+  bytes: 18237450
+  sha256: b85219e71fecbf6aa4da0e0c2a158f4acd691cdf668af5b9283ffc15a7c895ce
+  format: parquet
+  config_key: source_018
+- source_name: Relative_Reflectance__val-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Relative_Reflectance/val-00000-of-00001.parquet
+  bytes: 18539198
+  sha256: f6d6a7605b50f7283b09b4a2f98f7552bacd6a256ad61e6ecafa12e49b38e3ca
+  format: parquet
+  config_key: source_019
+- source_name: Semantic_Correspondence__test-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Semantic_Correspondence/test-00000-of-00001.parquet
+  bytes: 43698825
+  sha256: 8dc8065dfe3a0cdab1968e2ce3e8559058244d7684d6046200fd95cc437f97c6
+  format: parquet
+  config_key: source_020
+- source_name: Semantic_Correspondence__val-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Semantic_Correspondence/val-00000-of-00001.parquet
+  bytes: 46793618
+  sha256: 83b9882aca27f740e32d8973c2454e8b78203d3958d189cb5a5fe00a34b88e05
+  format: parquet
+  config_key: source_021
+- source_name: Spatial_Relation__test-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Spatial_Relation/test-00000-of-00001.parquet
+  bytes: 7388856
+  sha256: 9babeebfde626046c964f6995b5be4c89d9f879a6752df0b6937a7883d172c44
+  format: parquet
+  config_key: source_022
+- source_name: Spatial_Relation__val-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Spatial_Relation/val-00000-of-00001.parquet
+  bytes: 7207871
+  sha256: 7ce3f778ac870af32151eb8a71512c203314404bd0d903f3bff6c80ff89322c2
+  format: parquet
+  config_key: source_023
+- source_name: Visual_Correspondence__test-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Visual_Correspondence/test-00000-of-00001.parquet
+  bytes: 56688611
+  sha256: 69ba38eae99dac7f6a39d2d534e9424d47ff5f47b61237318650a667da0a3671
+  format: parquet
+  config_key: source_024
+- source_name: Visual_Correspondence__val-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Visual_Correspondence/val-00000-of-00001.parquet
+  bytes: 59759962
+  sha256: c7c54374f3016df3781d306890c8921ed04ef5b8abd3fa404c6560b2f503d827
+  format: parquet
+  config_key: source_025
+- source_name: Visual_Similarity__test-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Visual_Similarity/test-00000-of-00001.parquet
+  bytes: 45007407
+  sha256: f320e028e46d520e91603b3adf80c2f1f0f9b94fe963a263242a2ccd6cc574e5
+  format: parquet
+  config_key: source_026
+- source_name: Visual_Similarity__val-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/BLINK-Benchmark/BLINK/resolve/a3666eb249237ba3d5eca8db21176cc47967e040/Visual_Similarity/val-00000-of-00001.parquet
+  bytes: 44061241
+  sha256: 15857cd004055977c2486e39523a913762e9e6551603bc57b5bc097a70d19aa0
+  format: parquet
+  config_key: source_027
+allowed_hosts:
+- huggingface.co
+resource_limits:
+  max_rss_bytes: 3000000000
+  max_cpu_seconds: 900
+  max_wall_seconds: 1800

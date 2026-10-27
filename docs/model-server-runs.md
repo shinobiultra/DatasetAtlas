@@ -33,7 +33,7 @@ judged), `{reference}`, and `{field:source.name}` for any record field. Only the
 into the run, so a 200k-record run does not carry whole records. `thinking` (model default, off, on), the reply token
 limit and the number of parallel requests are set per run; requests are retried when the server answers busy or with a transient error (HTTP 408, 425, 429, 5xx).
 
-Two behaviours were found against real models and are handled in code, not hidden:
+Model-dependent failure modes remain explicit:
 
 - A *thinking* model (for example `qwen3-vl:8b` under Ollama) can spend its whole reply budget reasoning and return no
   answer. The record fails with "The model spent its whole token budget reasoning and replied with nothing"; turn
@@ -70,16 +70,6 @@ articles, contractions) only when the human answers disagree, as the official sc
 accuracy and the same by question type and answer type. Scoring needs saved answers (a `vlm.answer` run) and the human
 answers in `source.answers`.
 
-### Measured
-
-On the VQA v2 validation split (214,354 questions) and one RTX 5090 laptop GPU, through Ollama:
-
-- `qwen3-embedding:0.6b` embedded about 215 questions per second. A run cancelled after 92,672 questions kept them as a
-  partial artifact (92,672 × 1024) that reports its coverage.
-- A 100-question preview run scored by the VQA rule gave mean accuracy 86.5% for `qwen3.5:9b` and 85.7% for
-  `qwen3-vl:30b-a3b-instruct`. That is an integration check on 100 questions, not a benchmark: a difference of that
-  size is inside the sampling noise of so small a sample.
-
 ## Chat with a dataset
 
 **Ask the dataset** (in the bottom bar when nothing is selected; **Ask model** once something is) opens the chat panel. It does retrieval
@@ -94,17 +84,12 @@ first, then the usual reviewed chat:
 3. **Review what will be sent** shows the exact outgoing context and its digest; **Send** answers only for that digest.
    Citations of records outside the attached set are rejected, and a model that is not given the answer says so.
 
-Retrieval only *chooses* records; everything the model receives is still what you reviewed and approved, which is why
-the model cannot search the dataset itself. Giving it a search tool would send records you had not seen in the preview.
+Retrieval chooses candidate records before context approval. Everything the model receives remains inside the approved scope. Optional read-only tools can inspect only that approved selection; they cannot expand it to other dataset records.
 
 A text query works against MiniLM and SigLIP 2 spaces (a SigLIP 2 image space is searched with its text encoder) and
 against a model-server space: the query is embedded by the same server and model with the space's `query_prefix`, and
 is refused if that provider id now serves a different model or its vectors differ in dimension. Imported vectors have no
 encoder, so they can be searched only by an example record.
-
-A search over 214,354 questions took about 0.3–0.4 s once warm; the first MiniLM query loads the model (about 7 s). VQA
-questions repeat across images ("What color is the bus?" for many pictures), so the best hits are often the same
-question on different images; a dataset whose text is more varied retrieves more varied records.
 
 ## Moving finished runs between workspaces
 

@@ -71,6 +71,21 @@ evidence:
 - kind: source_release
   url: https://github.com/Princeton-SysML/Jailbreak_LLM/blob/1e490531c0ef4bc13430178bf1fbc8f813e34b1a/data/MaliciousInstruct.txt
   note: Official 100-line file, 6,269 bytes; captured SHA-256 a64d69dd1004aac4a23aaff3748fb8f17161893f74db36f45b8bc849eb1bcce5.
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: github-1e490531c0ef4bc13430178bf1fbc8f813e34b1a
+  snapshot_id: github-Jailbreak_LLM-1e490531c0ef4bc13430178bf1fbc8f813e34b1a-MaliciousInstruct-a64d69dd
+  source_url: https://github.com/Princeton-SysML/Jailbreak_LLM
+  record_count: 100
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: Official MaliciousInstruct.txt, 100 nonempty source lines
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/maliciousinstruct.yaml
 tasks:
 - safety refusal evaluation
 modalities:

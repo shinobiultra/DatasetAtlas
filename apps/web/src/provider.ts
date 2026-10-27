@@ -38,7 +38,8 @@ export interface DataProvider {
   fields(id: string, scope?: 'preview' | 'complete', snapshotId?: string): Promise<FieldDescriptor[]>
   completeInfo(id: string): Promise<CompleteScope>
   pack(id: string): Promise<Pack>
-  query(id: string, query: Query): Promise<QueryResult>
+  query(id: string, query: Query, signal?: AbortSignal): Promise<QueryResult>
+  membership(id: string, artifact: Artifact, query: Query, signal?: AbortSignal): Promise<Uint8Array>
   selections(): Promise<Selection[]>
   saveSelection(selection: Selection): Promise<Selection>
   /** Select every record a query matches, on the server; the response is a summary (`size`, no ids). */
@@ -70,7 +71,7 @@ export interface DataProvider {
   guide(id: string): Promise<GuideEntry | null>
   /** Static builds only: every dataset's how-to-get state, for catalogue filters and list rows. */
   guideStates(): Promise<Record<string, string>>
-  aggregate(datasetId: string, query: Query, fieldIds: string[], top?: number): Promise<AggregateResponse>
+  aggregate(datasetId: string, query: Query, fieldIds: string[], top?: number, signal?: AbortSignal): Promise<AggregateResponse>
 }
 
 function checkMajor(data: { schema_version?: string }, label: string): void {
@@ -83,7 +84,7 @@ export function publicUrl(path: string): string {
   return new URL(path.replace(/^\//, ''), base).href
 }
 
-async function responseJson<T>(url: string, init?: RequestInit): Promise<T> {
+async function checkedResponse(url: string, init?: RequestInit): Promise<Response> {
   const response = await fetch(url, init)
   if (!response.ok) {
     let detail = `${response.status} ${response.statusText}`
@@ -93,7 +94,11 @@ async function responseJson<T>(url: string, init?: RequestInit): Promise<T> {
     } catch { /* HTTP status remains the error. */ }
     throw new Error(detail)
   }
-  return response.json() as Promise<T>
+  return response
+}
+
+async function responseJson<T>(url: string, init?: RequestInit): Promise<T> {
+  return (await checkedResponse(url, init)).json() as Promise<T>
 }
 
 function downloadJson(name: string, value: unknown): void {
@@ -182,8 +187,11 @@ export class StaticDataProvider implements DataProvider {
     })()
     return this.thumbs
   }
-  async aggregate(id: string, query: Query, fieldIds: string[], top = 24): Promise<AggregateResponse> {
-    return aggregatePack(await this.pack(id), query, fieldIds, top) as AggregateResponse
+  async aggregate(id: string, query: Query, fieldIds: string[], top = 24, signal?: AbortSignal): Promise<AggregateResponse> {
+    signal?.throwIfAborted()
+    const pack = await this.pack(id)
+    signal?.throwIfAborted()
+    return aggregatePack(pack, query, fieldIds, top) as AggregateResponse
   }
   async fields(id: string, _scope?: 'preview' | 'complete', snapshotId?: string): Promise<FieldDescriptor[]> {
     const pack = await this.pack(id)
@@ -191,7 +199,26 @@ export class StaticDataProvider implements DataProvider {
     return packFields(pack)
   }
   async completeInfo(): Promise<CompleteScope> { throw new Error('Complete-data queries require the local workbench.') }
-  async query(id: string, query: Query): Promise<QueryResult> { return queryPack(await this.pack(id), query) }
+  async query(id: string, query: Query, signal?: AbortSignal): Promise<QueryResult> {
+    signal?.throwIfAborted()
+    const pack = await this.pack(id)
+    signal?.throwIfAborted()
+    return queryPack(pack, query)
+  }
+  async membership(id: string, artifact: Artifact, query: Query, signal?: AbortSignal): Promise<Uint8Array> {
+    if (artifact.snapshot_ids.length !== 1 || artifact.snapshot_ids[0] !== query.snapshot_id || artifact.unit !== query.unit) throw new Error('The map and query use different snapshots or units.')
+    if (artifact.ids.length > 2_000_000) throw new Error('Map membership exceeds the two-million-point budget.')
+    const pack = await this.pack(id)
+    const matching = new Set<string>()
+    let cursor: string | null = null
+    do {
+      signal?.throwIfAborted()
+      const page = queryPack(pack, { ...query, limit: 1000, cursor })
+      for (const record of page.records) matching.add(record.id)
+      cursor = page.cursor ?? null
+    } while (cursor)
+    return Uint8Array.from(artifact.ids, key => matching.has(key) ? 1 : 0)
+  }
   async selections(): Promise<Selection[]> { return storedSelections() }
   async saveSelection(selection: Selection): Promise<Selection> {
     const saved = { ...selection, id: selection.id || crypto.randomUUID() }
@@ -238,8 +265,8 @@ export class StaticDataProvider implements DataProvider {
 
 const api = '/api/v1'
 function get<T>(path: string): Promise<T> { return responseJson<T>(`${api}${path}`) }
-function post<T>(path: string, body?: unknown): Promise<T> {
-  return responseJson<T>(`${api}${path}`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Atlas-Request': '1' }, body: JSON.stringify(body ?? {}) })
+function post<T>(path: string, body?: unknown, signal?: AbortSignal): Promise<T> {
+  return responseJson<T>(`${api}${path}`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Atlas-Request': '1' }, body: JSON.stringify(body ?? {}), signal })
 }
 
 export class WorkbenchDataProvider implements DataProvider {
@@ -256,7 +283,18 @@ export class WorkbenchDataProvider implements DataProvider {
   }
   completeInfo(id: string): Promise<CompleteScope> { return get(`/datasets/${encodeURIComponent(id)}/complete`) }
   pack(id: string): Promise<Pack> { return get(`/datasets/${encodeURIComponent(id)}/pack`) }
-  query(id: string, query: Query): Promise<QueryResult> { return post(`/queries/${encodeURIComponent(id)}`, query) }
+  query(id: string, query: Query, signal?: AbortSignal): Promise<QueryResult> { return post(`/queries/${encodeURIComponent(id)}`, query, signal) }
+  async membership(id: string, artifact: Artifact, query: Query, signal?: AbortSignal): Promise<Uint8Array> {
+    const response = await checkedResponse(`${api}/datasets/${encodeURIComponent(id)}/membership/${encodeURIComponent(artifact.id)}`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Atlas-Request': '1' }, body: JSON.stringify(query), signal,
+    })
+    if (response.headers.get('X-Atlas-Dtype') !== 'uint8') throw new Error('The map membership response has an invalid type.')
+    const shape = Number(response.headers.get('X-Atlas-Shape'))
+    if (!Number.isSafeInteger(shape) || shape < 0 || shape > 2_000_000) throw new Error('The map membership response exceeds its point budget.')
+    const values = new Uint8Array(await response.arrayBuffer())
+    if (values.length !== shape || values.some(value => value > 1)) throw new Error('The map membership response is invalid.')
+    return values
+  }
   selections(): Promise<Selection[]> { return get('/selections') }
   saveSelection(selection: Selection): Promise<Selection> { return post('/selections', selection) }
   selectPopulation(datasetId: string, query: Query, name = ''): Promise<Selection> { return post('/selections/population', { dataset_id: datasetId, query: { ...query, cursor: null, limit: 100 }, name }) }
@@ -293,8 +331,8 @@ export class WorkbenchDataProvider implements DataProvider {
     this.thumbs ??= get<{ datasets?: Thumbnails }>('/catalogue/thumbnails').then(document => document.datasets ?? {}).catch(() => ({}))
     return this.thumbs
   }
-  aggregate(datasetId: string, query: Query, fieldIds: string[], top = 24): Promise<AggregateResponse> {
-    return post(`/aggregate/${encodeURIComponent(datasetId)}`, { query, field_ids: fieldIds, top })
+  aggregate(datasetId: string, query: Query, fieldIds: string[], top = 24, signal?: AbortSignal): Promise<AggregateResponse> {
+    return post(`/aggregate/${encodeURIComponent(datasetId)}`, { query, field_ids: fieldIds, top }, signal)
   }
 }
 
@@ -305,10 +343,6 @@ function deploymentMode(): 'workbench' | 'static' {
   return document.querySelector('meta[name="atlas-mode"]')?.getAttribute('content') === 'workbench' ? 'workbench' : 'static'
 }
 export const provider: DataProvider = deploymentMode() === 'workbench' ? new WorkbenchDataProvider() : new StaticDataProvider()
-
-export function recordMedia(record: AtlasRecord): string[] {
-  return (record.assets ?? []).filter(asset => asset.uri).map(asset => provider.mode === 'static' ? publicUrl(asset.uri!) : asset.uri!)
-}
 
 /** What inspecting a researcher's own folder, table or Hugging Face URL found. Local paths stay on the server. */
 export type SourceInspection = {
@@ -332,7 +366,7 @@ export const localDatasetApi = {
 /** Explicit user-triggered workbench acquisition; never invoked by static browsing or model tools. */
 export const preparationApi = {
   list: <T,>(datasetId: string) => get<T>(`/preparation?dataset_id=${encodeURIComponent(datasetId)}`),
-  plan: <T,>(id: string, maxDownloadBytes: number, maxOutputBytes: number, sourceMode: 'auto' | 'download' | 'selective' | 'sample' = 'download') => post<T>(`/datasets/${encodeURIComponent(id)}/preparation/plan`, { max_download_bytes: maxDownloadBytes, max_output_bytes: maxOutputBytes, source_mode: sourceMode }),
+  plan: <T,>(id: string, maxDownloadBytes: number, maxOutputBytes: number, sourceMode: 'auto' | 'download' | 'selective' | 'sample' = 'download', sampleSeed?: number) => post<T>(`/datasets/${encodeURIComponent(id)}/preparation/plan`, { max_download_bytes: maxDownloadBytes, max_output_bytes: maxOutputBytes, source_mode: sourceMode, ...(sampleSeed === undefined ? {} : { sample_seed: sampleSeed }) }),
   start: <T,>(id: string) => post<T>(`/preparation/${encodeURIComponent(id)}/start`),
   status: <T,>(id: string) => get<T>(`/preparation/${encodeURIComponent(id)}`),
   cancel: <T,>(id: string) => post<T>(`/preparation/${encodeURIComponent(id)}/cancel`),

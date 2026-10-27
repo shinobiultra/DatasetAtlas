@@ -2,11 +2,11 @@ source_url: https://github.com/trebonian/visual6502/tree/d8ecc129b34e0eaf320e040
 release: 6502-revD-d8ecc129b34e0eaf320e0400fcf33329475bdb1e
 adapter: visual6502
 expected_count: 3510
-description: >-
-  All 3,510 transistors from the public Visual6502 revD source table. This
-  source is a candidate for the citing paper's 6507 netlist, not proof of its
-  exact paper input or selected simulation configuration.
-scope: Exactly the 3,510 native transistor rows in the pinned Visual6502 transdefs.js file.
+description: All 3,510 native transistor rows in the pinned Visual6502 revD 6502 literal
+  source table. Source JavaScript is never executed. This available 6502 representation
+  does not establish the citing paper's 6507 input or simulation configuration.
+scope: Exactly the 3,510 native transistor rows in the pinned Visual6502 transdefs.js
+  file.
 adapter_config:
   commit: d8ecc129b34e0eaf320e0400fcf33329475bdb1e
   bytes: 265349

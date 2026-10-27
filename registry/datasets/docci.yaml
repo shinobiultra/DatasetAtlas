@@ -68,8 +68,9 @@ rights:
   annotations: source_declares_CC_BY_4_0
   images: source_declares_CC_BY_4_0_local_copy
   source: https://google.github.io/docci/
-  basis: Author project page states DOCCI annotations and images are licensed CC BY 4.0. This local
-    acquisition contains original descriptions and images; public publication still needs attribution and review.
+  basis: Author project page states DOCCI annotations and images are licensed CC BY 4.0. This
+    local acquisition contains original descriptions and images; public publication still needs
+    attribution and review.
   external_provider: local_only
 evidence:
 - kind: corpus_mention
@@ -94,6 +95,23 @@ evidence:
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: docci-author-descriptions-images-c9df4819-c1b1aee0
+  snapshot_id: docci-pairs-c9df4819-c1b1aee0
+  source_url: https://google.github.io/docci/
+  record_count: 14847
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: Complete author descriptions and original JPEG images across train, test, qual_dev,
+    qual_test; excludes metadata-only and AAR image releases. Full native gzip TAR must be downloaded
+    once to build verified seek checkpoints; images are never extracted in bulk.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/docci.yaml
 source_url: https://google.github.io/docci/
 tasks:
 - image description

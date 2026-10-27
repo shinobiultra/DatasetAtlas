@@ -1,7 +1,7 @@
 import { expect, test, type Page } from '@playwright/test'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
-import { addFieldFilter, expectPanel, inspectRecord, openDataset, sampleCards, scopeLine, switchView } from './helpers'
+import { addFieldFilter, expectPanel, inspectRecord, openDataset, sampleCards, scopeLine, switchView, workbenchResponseHeaders } from './helpers'
 
 type Point = { id: string; x: number; y: number }
 const packPath = fileURLToPath(new URL('../public/data/clevr.json', import.meta.url))
@@ -16,7 +16,7 @@ async function forwardLocalApi(page: Page, api: string, allowedMediaToken?: stri
       headers: { 'Content-Type': 'application/json', 'X-Atlas-Request': '1', ...(range ? { Range: range } : {}) },
       body: request.method() === 'GET' ? undefined : request.postData() ?? undefined,
     })
-    await route.fulfill({ status: response.status, headers: { 'Content-Type': response.headers.get('content-type') ?? 'application/octet-stream', ...(response.headers.get('content-range') ? { 'Content-Range': response.headers.get('content-range')! } : {}), ...(response.headers.get('accept-ranges') ? { 'Accept-Ranges': response.headers.get('accept-ranges')! } : {}) }, body: Buffer.from(await response.arrayBuffer()) })
+    await route.fulfill({ status: response.status, headers: workbenchResponseHeaders(response), body: Buffer.from(await response.arrayBuffer()) })
   })
 }
 
@@ -87,14 +87,14 @@ test('a public build states what it can show and never claims the workbench prev
   await expect(page.getByRole('region', { name: 'Live examples' }).locator('.ds-card')).toHaveCount(3)
   const unpublished = page.locator('.ds-row[data-dataset-id="advbench"]')
   await expect(unpublished).toBeVisible()
-  await expect(unpublished).toContainText('Source link')
+  await expect(unpublished).toContainText('Fetch with Atlas')
   await expect(unpublished).not.toContainText('exists in the local workbench')
 })
 
-test('a metadata-only dataset explains the gap instead of showing an empty grid', async ({ page }) => {
-  await page.goto('/#/dataset/facet')
+test('an unpublished dataset explains the publication boundary instead of showing an empty grid', async ({ page }) => {
+  await page.goto('/#/dataset/flickr30k')
   await expect(page.getByText('No examples are published here')).toBeVisible()
-  await expect(page.getByText(/implementation gap in Dataset Atlas/)).toBeVisible()
+  await expect(page.getByText(/only for datasets whose licence was reviewed/)).toBeVisible()
   await expect(sampleCards(page)).toHaveCount(0)
 })
 
@@ -110,24 +110,24 @@ test('a public dataset page says how to get the data, and what a record holds', 
   await expect(schema.locator('td.mono').first()).toBeVisible()
 })
 
-test('the guide separates a source-link-only dataset, a gate, and a request-only release', async ({ page }) => {
+test('the guide separates pinned public sources from sources that still require terms', async ({ page }) => {
   await page.goto('/#/dataset/advbench')
-  await expect(page.locator('.card').filter({ hasText: 'How to get this dataset' })).toContainText('Get it from the source')
-  await expect(page.locator('.card').filter({ hasText: 'How to get this dataset' }).locator('code')).toHaveCount(0)
+  await expect(page.locator('.card').filter({ hasText: 'How to get this dataset' })).toContainText('Fetch with Dataset Atlas')
+  await expect(page.locator('.card').filter({ hasText: 'How to get this dataset' }).locator('code')).toHaveCount(2)
   await expect(page.locator('.card').filter({ hasText: 'What a record holds' }).locator('td.mono').first()).toHaveText('goal')
-  await page.goto('/#/dataset/facet')
-  await expect(page.locator('.card').filter({ hasText: 'How to get this dataset' })).toContainText('Gated at the source')
-  await page.goto('/#/dataset/gyafc')
+  await page.goto('/#/dataset/flickr30k')
+  await expect(page.locator('.card').filter({ hasText: 'How to get this dataset' })).toContainText('Accept terms, then fetch')
+  await page.goto('/#/dataset/winoground')
   const request = page.locator('.card').filter({ hasText: 'How to get this dataset' })
-  await expect(request).toContainText('Request from the authors')
-  await expect(request.locator('code')).toHaveCount(0)
+  await expect(request).toContainText('Accept terms, then fetch')
+  await expect(request.locator('code')).toHaveCount(2)
 })
 
 test('the catalogue filters by how a dataset can be obtained', async ({ page }) => {
   await page.goto('/')
   const rail = page.getByRole('complementary', { name: 'Catalogue filters' })
-  await rail.getByRole('checkbox', { name: /Gated at the source/ }).check()
-  await expect(page.locator('.ds-row').first()).toContainText('Gated')
+  await rail.getByRole('checkbox', { name: /Accept terms, then fetch/ }).check()
+  await expect(page.locator('.ds-row').first()).toContainText('Accept terms, then fetch')
   await expect(page.getByRole('region', { name: 'Live examples' })).toHaveCount(0)
 })
 
@@ -144,13 +144,13 @@ test('About panel keeps unpublished evidence absent and shows the public source'
 test('About relationship opens a distinct catalogue dataset with its own coverage', async ({ page }) => {
   test.skip(!process.env.ATLAS_LIVE_API, 'Local workbench catalogue exposes source and release relationships.')
   await forwardLocalApi(page, process.env.ATLAS_LIVE_API!)
-  await page.goto('/?mode=workbench#/dataset/clevr')
+  await page.goto('/?mode=workbench#/dataset/coco-qa')
   await page.getByRole('button', { name: 'About dataset' }).click()
   const about = await expectPanel(page, 'About dataset')
-  await expect(about).toContainText('has complete release variant')
-  await about.getByRole('button', { name: /CLEVR v1\.0/ }).click()
-  await expect(page).toHaveURL(/#\/dataset\/clevr-v1-full$/)
-  await expect(page.getByRole('heading', { name: 'CLEVR v1.0 (official complete release)' })).toBeVisible()
+  await expect(about).toContainText('same source family as')
+  await about.getByRole('button', { name: 'COCO', exact: true }).click()
+  await expect(page).toHaveURL(/#\/dataset\/coco$/)
+  await expect(page.getByRole('heading', { name: 'COCO', exact: true })).toBeVisible()
   await expect(scopeLine(page)).toContainText('100 example records')
 })
 
@@ -291,7 +291,7 @@ test('a busy Hugging Face viewer is reported and can be retried', async ({ page 
 })
 
 test('papers that mention a dataset are metadata, not part of its page', async ({ page }) => {
-  await page.goto('/#/dataset/gyafc')
+  await page.goto('/#/dataset/flickr30k')
   await expect(page.getByText(/Named in \d+ corpus paper/)).toHaveCount(0)
   await page.getByRole('button', { name: 'About dataset' }).click()
   await expect(page.getByText(/Mentioned for example in \(\d+\)/)).toBeVisible()

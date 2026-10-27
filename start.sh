@@ -10,7 +10,7 @@ if [[ "${1:-}" == "--help" || "${1:-}" == "-h" ]]; then
 fi
 for tool in uv npm; do
     if ! command -v "$tool" >/dev/null 2>&1; then
-        echo "Missing $tool. Install uv and Node.js (22 or newer), then run ./start.sh again." >&2
+        echo "Missing $tool. Install uv and Node.js 26 (or 22.12+), then run ./start.sh again." >&2
         exit 1
     fi
 done

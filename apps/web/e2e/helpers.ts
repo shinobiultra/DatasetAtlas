@@ -92,6 +92,12 @@ export function stubCommonRoutes(path: string, datasetId: string): unknown | und
   return undefined
 }
 
+/** Preserve workbench response metadata without copying cookies or credential headers. */
+export function workbenchResponseHeaders(response: Response): Record<string, string> {
+  const allowed = new Set(['content-type', 'content-length', 'content-range', 'accept-ranges', 'cache-control', 'etag', 'last-modified', 'expires', 'vary'])
+  return Object.fromEntries([...response.headers].filter(([name]) => allowed.has(name) || name.startsWith('x-atlas-')))
+}
+
 /** Forward only the explicit test API to the already running local workbench. */
 export async function pointToLiveWorkbench(page: Page, api: string) {
   await page.route('**/api/v1/**', async route => {
@@ -100,6 +106,6 @@ export async function pointToLiveWorkbench(page: Page, api: string) {
       method: req.method(), headers: { 'Content-Type': 'application/json', 'X-Atlas-Request': '1' },
       body: ['GET', 'HEAD'].includes(req.method()) ? undefined : req.postData() ?? undefined,
     })
-    await route.fulfill({ status: response.status, contentType: response.headers.get('content-type') ?? 'application/json', body: Buffer.from(await response.arrayBuffer()) })
+    await route.fulfill({ status: response.status, headers: workbenchResponseHeaders(response), body: Buffer.from(await response.arrayBuffer()) })
   })
 }

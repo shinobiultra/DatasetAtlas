@@ -48,7 +48,7 @@ from dataset_atlas.registry.source_probe import ProbeOutcome, probe_url  # noqa:
 from dataset_atlas.registry.yaml_edit import append_list_items  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
-CHECKED_ON = "2026-10-08"
+CHECKED_ON = datetime.now(timezone.utc).date().isoformat()
 EVIDENCE_KIND = "source_audit_refresh"
 DISPOSITIONS = ("unchanged", "now_public_pinnable", "public_unpinned", "now_gated", "released_after_audit", "still_unreleased")
 GATED_ACCESS = frozenset({"gated", "request_required", "author_request_required"})
@@ -482,6 +482,7 @@ def run(root: Path, *, checked_on: str = CHECKED_ON, probe=probe_url, workers: i
     urls = [url for pairs in recorded.values() for url, _ in pairs]
     live_settings = {"timeout": timeout, "attempts": attempts, "workers": workers, "host_delay_s": host_delay}
     live_made = "live"
+    observation_date = checked_on
     source_generated = None
     if replay_from:
         stored, source = _recorded_outcomes(replay_from)
@@ -492,6 +493,7 @@ def run(root: Path, *, checked_on: str = CHECKED_ON, probe=probe_url, workers: i
         carried = (source.get("provenance") or {}).get("observations") or {}
         live_settings = carried.get("settings") or source["settings"]
         live_made = carried.get("made", "live")
+        observation_date = carried.get("date") or source["checked_on"]
         source_generated = source["generated_at_utc"]
     else:
         outcomes = probe_all(urls, probe=probe, workers=workers, host_delay=host_delay, timeout=timeout, attempts=attempts)
@@ -532,7 +534,7 @@ def run(root: Path, *, checked_on: str = CHECKED_ON, probe=probe_url, workers: i
                       if item.url not in {url for url, _ in recorded[dataset_id]}}
     extra_first, extra_last = _window(extra_outcomes.values())
     provenance = _provenance(
-        {"made": live_made, "date": checked_on, "first_checked_at_utc": first, "last_checked_at_utc": last,
+        {"made": live_made, "date": observation_date, "first_checked_at_utc": first, "last_checked_at_utc": last,
          "distinct_urls": len(set(urls)), "settings": live_settings},
         {"source": _shown(extra_path, root), "distinct_urls": len(extra_outcomes), "first_checked_at_utc": extra_first,
          "last_checked_at_utc": extra_last} if extra_outcomes and extra_path else None,
@@ -562,9 +564,9 @@ def main(argv=None) -> int:
     parser.add_argument("--checked-on", default=CHECKED_ON)
     parser.add_argument("--dataset", nargs="+", metavar="ID", help="limit to these entries (the selection rule still applies)")
     parser.add_argument("--dry-run", action="store_true", help="probe and classify, but write no registry file and no receipt")
-    parser.add_argument("--output-json", type=Path, default=Path("reports/candidate-source-refresh-20261008.json"))
-    parser.add_argument("--output-md", type=Path, default=Path("reports/candidate-source-refresh-20261008.md"))
-    parser.add_argument("--extra-observations", type=Path, default=Path("reports/source-reprobe-20261008.json"),
+    parser.add_argument("--output-json", type=Path, default=Path("work/audits/candidate-source-refresh.json"))
+    parser.add_argument("--output-md", type=Path, default=Path("work/audits/candidate-source-refresh.md"))
+    parser.add_argument("--extra-observations", type=Path,
                         help="receipt whose --extra URLs (not recorded in the registry) are read as the latest observation")
     parser.add_argument("--replay-from", type=Path, help="re-classify the URL observations recorded in an earlier receipt instead of probing "
                         "(no network); the new receipts say they are a replay and keep the original live settings and times")
@@ -579,7 +581,7 @@ def main(argv=None) -> int:
     try:
         receipt = run(root, checked_on=args.checked_on, workers=args.workers, host_delay=args.host_delay, timeout=args.timeout,
                       attempts=args.attempts, dry_run=args.dry_run, dataset_ids=args.dataset, json_path=root / args.output_json,
-                      md_path=root / args.output_md, extra_path=root / args.extra_observations,
+                      md_path=root / args.output_md, extra_path=root / args.extra_observations if args.extra_observations else None,
                       replay_from=args.replay_from.resolve() if args.replay_from else None)
     except ValueError as error:
         parser.error(str(error))

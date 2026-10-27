@@ -2,33 +2,33 @@ schema_version: '1.0'
 id: simplevqa
 name: SimpleVQA
 aliases: []
-description: SimpleVQA single-image short-answer benchmark; do not conflate full test
-  with provided view_200 subset
+description: SimpleVQA single-image short-answer benchmark; do not conflate full test with provided
+  view_200 subset
 paper_ids:
 - paper-80b7ba2e277a20c5
-release: unresolved
+release: 037cf89fb6f1212691756b66d1ecde6c2ce89e54
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: unverified
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
   - Source content and publication rights require dataset-specific review.
-  - Adapter and preview are not implemented.
+  total_count: 2225
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://huggingface.co/datasets/m-a-p/SimpleVQA/blob/037cf89fb6f1212691756b66d1ecde6c2ce89e54/README.md
-  note: HF card marks Apache-2.0; verify whether this covers source images and attribution
-    before publishing a public media subset.
+  note: HF card marks Apache-2.0; verify whether this covers source images and attribution before
+    publishing a public media subset.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-702d50c604987b5fadb1
@@ -36,14 +36,14 @@ evidence:
   source_file_hash: 1b014c3d1e86a39f1c6a88d4e9b79c99df2e06c5c7c31bea224aa5da2ae0c46d
   page: 7
   role: out-of-domain evaluation
-  excerpt: 'that additional variants enhance scale coverage. (VQA) tasks: SimpleVQA
-    [8], MMStar [7], and RealWorldQA [30].'
+  excerpt: 'that additional variants enhance scale coverage. (VQA) tasks: SimpleVQA [8], MMStar
+    [7], and RealWorldQA [30].'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://huggingface.co/datasets/m-a-p/SimpleVQA/tree/037cf89fb6f1212691756b66d1ecde6c2ce89e54
-  note: SimpleVQA single-image short-answer benchmark; do not conflate full test with
-    provided view_200 subset
+  note: SimpleVQA single-image short-answer benchmark; do not conflate full test with provided
+    view_200 subset
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
@@ -55,25 +55,62 @@ evidence:
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_access
   url: https://huggingface.co/datasets/m-a-p/SimpleVQA/tree/037cf89fb6f1212691756b66d1ecde6c2ce89e54
-  note: Author HF Parquet files directly accessible; about 349 MB full test and 66.6
-    MB view_200 per repository listing, no content fetched.
+  note: Author HF Parquet files directly accessible; about 349 MB full test and 66.6 MB view_200
+    per repository listing, no content fetched.
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
   probe: hf_tree_metadata_only
 - kind: source_audit_rights
   url: https://huggingface.co/datasets/m-a-p/SimpleVQA/blob/037cf89fb6f1212691756b66d1ecde6c2ce89e54/README.md
-  note: HF card marks Apache-2.0; verify whether this covers source images and attribution
-    before publishing a public media subset.
+  note: HF card marks Apache-2.0; verify whether this covers source images and attribution before
+    publishing a public media subset.
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 100-record prepared preview: asset kinds and text fields
-    present in at least one record. Not inferred from the name or description.'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in
+    at least one record. Not inferred from the name or description.'
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: 037cf89fb6f1212691756b66d1ecde6c2ce89e54
+  snapshot_id: simplevqa-8382305d27a65ddcdbc544e1
+  source_url: https://huggingface.co/datasets/m-a-p/SimpleVQA/tree/037cf89fb6f1212691756b66d1ecde6c2ce89e54
+  record_count: 2225
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All original native SimpleVQA language shards at the pinned author revision; image
+    strings are losslessly decoded from base64 for display and model inputs.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/simplevqa.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: 037cf89fb6f1212691756b66d1ecde6c2ce89e54
+  snapshot_id: simplevqa-8382305d27a65ddcdbc544e1
+  source_url: https://huggingface.co/datasets/m-a-p/SimpleVQA/tree/037cf89fb6f1212691756b66d1ecde6c2ce89e54
+  record_count: 2225
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All original native SimpleVQA language shards at the pinned author revision; image
+    strings are losslessly decoded from base64 for display and model inputs.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/simplevqa.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
 source_url: https://huggingface.co/datasets/m-a-p/SimpleVQA/tree/037cf89fb6f1212691756b66d1ecde6c2ce89e54
 modalities:
 - image
 - text
+snapshot_id: simplevqa-8382305d27a65ddcdbc544e1

@@ -2,33 +2,34 @@ schema_version: '1.0'
 id: medical-multimodal-evaluation-data
 name: Medical Multimodal Evaluation Data
 aliases: []
-description: HuatuoGPT-Vision bundled medical evaluation release. Author repo links
-  HF bundle with 17.3k test rows across six component families, including VQA-RAD,
-  SLAKE, PathVQA, PMC-VQA, OmniMedVQA and MMMU medical tracks
+description: HuatuoGPT-Vision bundled medical evaluation release. Author repo links HF bundle
+  with 17.3k test rows across six component families, including VQA-RAD, SLAKE, PathVQA, PMC-VQA,
+  OmniMedVQA and MMMU medical tracks
 paper_ids:
 - paper-d8a392188b9cf4d6
-release: unresolved
+release: medical-multimodal-7d5b870cf7ace833a187a3459d7180a60ce9c5a1
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
   - Public data/media reuse rights require separate review.
+  total_count: 17303
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://huggingface.co/datasets/FreedomIntelligence/Medical_Multimodal_Evaluation_Data
-  note: HF bundle declares Apache-2.0 but original medical images/components may carry
-    separate patient/source rights
+  note: HF bundle declares Apache-2.0 but original medical images/components may carry separate
+    patient/source rights
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-c18bb76aff3663808779
@@ -36,29 +37,29 @@ evidence:
   source_file_hash: 0e3f26916ef19ce5982122f2bb72212315d6dcbe59c9cc953852202654cc1acf
   page: 5
   role: evaluation
-  excerpt: (K et al., 2017), LLaVA-Instruct-150K (Liu et al., 2023) (LLaVA), and Medical
-    Multimodal Evaluation Data (Chen et al., 2024b) (Medical). The first two consist
-    of natural images, while the third contains medical ima
+  excerpt: (K et al., 2017), LLaVA-Instruct-150K (Liu et al., 2023) (LLaVA), and Medical Multimodal
+    Evaluation Data (Chen et al., 2024b) (Medical). The first two consist of natural images, while
+    the third contains medical ima
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://huggingface.co/datasets/FreedomIntelligence/Medical_Multimodal_Evaluation_Data
-  note: Author repo links HF bundle with 17.3k test rows across six component families,
-    including VQA-RAD, SLAKE, PathVQA, PMC-VQA, OmniMedVQA and MMMU medical tracks
+  note: Author repo links HF bundle with 17.3k test rows across six component families, including
+    VQA-RAD, SLAKE, PathVQA, PMC-VQA, OmniMedVQA and MMMU medical tracks
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_bundle_located
 - kind: source_audit_rights
   url: https://huggingface.co/datasets/FreedomIntelligence/Medical_Multimodal_Evaluation_Data
-  note: HF bundle declares Apache-2.0 but original medical images/components may carry
-    separate patient/source rights
+  note: HF bundle declares Apache-2.0 but original medical images/components may carry separate
+    patient/source rights
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_bundle_located
 - kind: source_audit_access
   url: https://huggingface.co/datasets/FreedomIntelligence/Medical_Multimodal_Evaluation_Data
-  note: public; Pin HF revision and cited paper subset; treat as bundle over six sources,
-    not independent image acquisition.
+  note: public; Pin HF revision and cited paper subset; treat as bundle over six sources, not
+    independent image acquisition.
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_bundle_located
@@ -66,13 +67,52 @@ evidence:
   url: https://huggingface.co/datasets/FreedomIntelligence/Medical_Multimodal_Evaluation_Data
   checked_on: '2026-09-23'
   report: reports/selective-acquisition-20260923.md
-  note: Pinned acquired population and real preview exercised locally. Mirror and
-    selective-transfer limits remain in the acquisition receipts; this does not establish
-    publication rights or the exact paper-used subset.
+  note: Pinned acquired population and real preview exercised locally. Mirror and selective-transfer
+    limits remain in the acquisition receipts; this does not establish publication rights or the
+    exact paper-used subset.
   recipe: registry/recipes/medical-multimodal-evaluation-data.yaml
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: medical-multimodal-7d5b870cf7ace833a187a3459d7180a60ce9c5a1
+  snapshot_id: medical-multimodal-evaluation-data-f5d28789a26e7367502e3119
+  source_url: https://huggingface.co/datasets/FreedomIntelligence/Medical_Multimodal_Evaluation_Data
+  record_count: 17303
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 17303 native Medical Multimodal Evaluation Data questions and all referenced
+    image slots at revision 7d5b870cf7ace833a187a3459d7180a60ce9c5a1; original images fetched
+    on request.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/medical-multimodal-evaluation-data.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: medical-multimodal-7d5b870cf7ace833a187a3459d7180a60ce9c5a1
+  snapshot_id: medical-multimodal-evaluation-data-f5d28789a26e7367502e3119
+  source_url: https://huggingface.co/datasets/FreedomIntelligence/Medical_Multimodal_Evaluation_Data
+  record_count: 17303
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 17303 native Medical Multimodal Evaluation Data questions and all referenced
+    image slots at revision 7d5b870cf7ace833a187a3459d7180a60ce9c5a1; original images fetched
+    on request.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/medical-multimodal-evaluation-data.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
 source_url: https://huggingface.co/datasets/FreedomIntelligence/Medical_Multimodal_Evaluation_Data
 modalities:
 - image
 - text
 tasks:
 - medical visual question answering
+snapshot_id: medical-multimodal-evaluation-data-f5d28789a26e7367502e3119

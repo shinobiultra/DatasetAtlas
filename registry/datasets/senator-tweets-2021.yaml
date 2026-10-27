@@ -2,26 +2,27 @@ schema_version: '1.0'
 id: senator-tweets-2021
 name: senator tweets 2021
 aliases: []
-description: 2021 U.S. senator tweets classifier-training corpus. Paper p8 footnote links this exact author
-  repository; public revision 9e85227220f34246003bdde92d4c2151106d21f6 reports 79,754 train and 19,939
-  test tweets.
+description: 2021 U.S. senator tweets classifier-training corpus. Paper p8 footnote links this
+  exact author repository; public revision 9e85227220f34246003bdde92d4c2151106d21f6 reports 79,754
+  train and 19,939 test tweets.
 paper_ids:
 - paper-29349603429218b8
-release: unresolved
+release: 9e85227220f34246003bdde92d4c2151106d21f6
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
   - Public data/media reuse rights require separate review.
+  total_count: 99693
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -35,9 +36,9 @@ evidence:
   source_file_hash: a025d9386684c74fca7aae546e5707d9ec43e808ca9fc3a654154f964d50144f
   page: 8
   role: model-training lineage
-  excerpt: e-tuned either an evaluator model or another LLM. We prioritized on the tweets (51.6% Democrat,
-    48.4% Republican)9 made the sentiment meta-objective in Sections 5.4 and 5.5 because by U.S. senators
-    in 2021. of
+  excerpt: e-tuned either an evaluator model or another LLM. We prioritized on the tweets (51.6%
+    Democrat, 48.4% Republican)9 made the sentiment meta-objective in Sections 5.4 and 5.5 because
+    by U.S. senators in 2021. of
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -62,8 +63,43 @@ evidence:
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in at least
-    one record. Not inferred from the name or description.'
-source_url: https://huggingface.co/datasets/m-newhauser/senator-tweets
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in
+    at least one record. Not inferred from the name or description.'
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: 9e85227220f34246003bdde92d4c2151106d21f6
+  snapshot_id: senator-tweets-2021-47e5564df91d1cbbb471a9ee
+  source_url: https://huggingface.co/datasets/m-newhauser/senator-tweets/tree/9e85227220f34246003bdde92d4c2151106d21f6
+  record_count: 99693
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All Arrow/Parquet shards in the pinned repository; configuration and split retained
+    by source filename.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: 9e85227220f34246003bdde92d4c2151106d21f6
+  snapshot_id: senator-tweets-2021-47e5564df91d1cbbb471a9ee
+  source_url: https://huggingface.co/datasets/m-newhauser/senator-tweets/tree/9e85227220f34246003bdde92d4c2151106d21f6
+  record_count: 99693
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All Arrow/Parquet shards in the pinned repository; configuration and split retained
+    by source filename.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
+source_url: https://huggingface.co/datasets/m-newhauser/senator-tweets/tree/9e85227220f34246003bdde92d4c2151106d21f6
 modalities:
 - text
+snapshot_id: senator-tweets-2021-47e5564df91d1cbbb471a9ee

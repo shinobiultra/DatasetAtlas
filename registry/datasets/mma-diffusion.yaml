@@ -2,27 +2,28 @@ schema_version: '1.0'
 id: mma-diffusion
 name: MMA-Diffusion
 aliases: []
-description: 'MMA-Diffusion safety attack resources: 1,000 adversarial/1,000 clean prompt benchmark and
-  separate image archive. Source review: Author CVPR 2024 repo commit 563091a61193927789d891a1603b7a7a832eb844'
+description: 'MMA-Diffusion safety attack resources: 1,000 adversarial/1,000 clean prompt benchmark
+  and separate image archive. Source review: Author CVPR 2024 repo commit 563091a61193927789d891a1603b7a7a832eb844'
 paper_ids:
 - paper-09b2d7393fc75cf7
-release: unresolved
+release: native-prompt-benchmark-9f70ce2e897f7930aa0e34900389959235433e9a
 adapter: structured
 adapter_config: {}
 coverage:
-  identity: candidate
+  identity: resolved
   source: verified
   access: request_required
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: indexed_metadata_partial_media
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Original-source access requires an author or data-holder request.
-  - The exact paper release, source variant, or derived collection remains unresolved.
-  - Adapter and preview are not implemented.
+  - The native 1,000-row prompt benchmark is indexed; the separate image benchmark is outside
+    this snapshot.
+  - Public redistribution rights remain unreviewed.
+  total_count: 1000
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -36,9 +37,9 @@ evidence:
   source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
   page: 7
   role: evaluation
-  excerpt: vector-computation sets from the VHD11K [52] by sampling evaluate the purified version of MMA-Diffusion
-    [62], released 250 harmful and 250 harmless images. We apply the same in [63], where we prepend the
-    phrase “a photo of” to each f
+  excerpt: vector-computation sets from the VHD11K [52] by sampling evaluate the purified version
+    of MMA-Diffusion [62], released 250 harmful and 250 harmless images. We apply the same in
+    [63], where we prepend the phrase “a photo of” to each f
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -53,15 +54,15 @@ evidence:
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://github.com/cure-lab/MMA-Diffusion/tree/563091a61193927789d891a1603b7a7a832eb844
-  note: 'MMA-Diffusion safety attack resources: 1,000 adversarial/1,000 clean prompt benchmark and separate
-    image archive Author CVPR 2024 repo commit 563091a61193927789d891a1603b7a7a832eb844'
+  note: 'MMA-Diffusion safety attack resources: 1,000 adversarial/1,000 clean prompt benchmark
+    and separate image archive Author CVPR 2024 repo commit 563091a61193927789d891a1603b7a7a832eb844'
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_access
   url: https://github.com/cure-lab/MMA-Diffusion/tree/563091a61193927789d891a1603b7a7a832eb844
-  note: 'Prompt benchmark explicitly subject to access-request approval; image archive linked separately
-    Probe: first_primary_url_http_head_200; payload_not_downloaded'
+  note: 'Prompt benchmark explicitly subject to access-request approval; image archive linked
+    separately Probe: first_primary_url_http_head_200; payload_not_downloaded'
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
@@ -74,8 +75,47 @@ evidence:
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in at least
-    one record. Not inferred from the name or description.'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in
+    at least one record. Not inferred from the name or description.'
+- kind: paper_usage_qualification
+  note: Available release identity is separate from historical paper use.
+  qualifications:
+  - The exact paper release, source variant, or derived collection remains unresolved.
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  status: resolved_declared_source_population
+  release: native-prompt-benchmark-9f70ce2e897f7930aa0e34900389959235433e9a
+  snapshot_id: mma-diffusion-cbe4e8ca8fb7b012470a1e6d
+  source_url: https://github.com/cure-lab/MMA-Diffusion/tree/563091a61193927789d891a1603b7a7a832eb844
+  representation: pinned_source_population
+  record_count: 1000
+  population: All 1000 native prompt benchmark rows, preserving target, adversarial, sanitized
+    adversarial and clean prompts as distinct native fields. The separate image benchmark and
+    the paper-specific purified image collection remain unprepared and unidentified.
+  basis: Existing checksum-pinned preparation and snapshot metadata; no record contents read during
+    this curation.
+  scope_note: Identifies the available source population. This is not human review, historical
+    paper-membership acceptance, publisher byte-equivalence proof, or permission to redistribute.
+  receipt: work/prepared/mma-diffusion/c8a3c14d38fc0cc4c151d2273c54d8fd466256cdb8390894ec45f6007bdfe275/receipt.json
+  receipt_sha256: dd4cb1fb56db5e1a4a8872161eda41b5a7058dcae639dbfd667fa35504a6b5d9
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: native-prompt-benchmark-9f70ce2e897f7930aa0e34900389959235433e9a
+  snapshot_id: mma-diffusion-cbe4e8ca8fb7b012470a1e6d
+  source_url: https://github.com/cure-lab/MMA-Diffusion/tree/563091a61193927789d891a1603b7a7a832eb844
+  record_count: 1000
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: indexed_metadata_partial_media
+  unit: example
+  population: All 1000 native prompt benchmark rows, preserving target, adversarial, sanitized
+    adversarial and clean prompts as distinct native fields. The separate image benchmark and
+    the paper-specific purified image collection remain unprepared and unidentified.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/mma-diffusion.yaml
 source_url: https://github.com/cure-lab/MMA-Diffusion/tree/563091a61193927789d891a1603b7a7a832eb844
 modalities:
 - text
+snapshot_id: mma-diffusion-cbe4e8ca8fb7b012470a1e6d

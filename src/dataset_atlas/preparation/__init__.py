@@ -95,26 +95,30 @@ class PreparationManager:
             raise ValueError('Invalid preparation ID')
         return self.directory / identity
 
-    def plan(self, dataset_id, max_download_bytes, max_output_bytes, source_mode="download"):
+    def plan(self, dataset_id, max_download_bytes, max_output_bytes, source_mode="download", sample_seed=None):
+        if sample_seed is not None and (type(sample_seed) is not int or abs(sample_seed) > 2**53 - 1):
+            raise ValueError('sample_seed must be an integer between -9007199254740991 and 9007199254740991')
+        options = {'sample_seed': sample_seed} if sample_seed is not None else {}
         if source_mode == 'auto':
-            return self._plan_auto(dataset_id, max_download_bytes, max_output_bytes)
-        return self._plan(dataset_id, max_download_bytes, max_output_bytes, source_mode)
+            return self._plan_auto(dataset_id, max_download_bytes, max_output_bytes, **options)
+        return self._plan(dataset_id, max_download_bytes, max_output_bytes, source_mode, **options)
 
-    def _plan_auto(self, dataset_id, max_download_bytes, max_output_bytes):
+    def _plan_auto(self, dataset_id, max_download_bytes, max_output_bytes, sample_seed=None):
         """The cheapest route to inspectable records, chosen from real plans.
 
         A complete download is preferred only while it is small, because it also yields a complete
         index. Otherwise a sampled remote read fetches ~100 rows. If neither fits, the full-download
         plan is returned so its stated requirements (size, recipe, access) explain why."""
-        download = self._plan(dataset_id, max_download_bytes, max_output_bytes, 'download')
+        options = {'sample_seed': sample_seed} if sample_seed is not None else {}
+        download = self._plan(dataset_id, max_download_bytes, max_output_bytes, 'download', **options)
         if self._recipe_auto_source_mode(dataset_id) == 'selective':
-            selective = self._plan(dataset_id, max_download_bytes, max_output_bytes, 'selective')
+            selective = self._plan(dataset_id, max_download_bytes, max_output_bytes, 'selective', **options)
             if selective['ready']:
                 return selective
         if download['ready'] and download['expected_download_bytes'] <= AUTO_COMPLETE_DOWNLOAD_BYTES:
             return download
         try:
-            sample = self._plan(dataset_id, max_download_bytes, max_output_bytes, 'sample')
+            sample = self._plan(dataset_id, max_download_bytes, max_output_bytes, 'sample', **options)
         except (ValueError, KeyError, OSError):
             sample = None
         if sample is not None and sample['ready']:
@@ -147,7 +151,7 @@ class PreparationManager:
         return ('Atlas has no acquisition path for this release, and its public availability has not been verified. '
                 'Identity or source research is needed before a recipe can be written (see docs/adding-datasets.md).')
 
-    def _plan(self, dataset_id, max_download_bytes, max_output_bytes, source_mode="download"):
+    def _plan(self, dataset_id, max_download_bytes, max_output_bytes, source_mode="download", sample_seed=None):
         if any(type(n) is not int or not 1 <= n <= 10_000_000_000_000 for n in (max_download_bytes, max_output_bytes)):
             raise ValueError('Positive download and output limits of at most 10 TB are required')
         if source_mode not in {'download','selective','sample'}:raise ValueError('Source mode must be download, selective or sample')
@@ -182,6 +186,13 @@ class PreparationManager:
             if recipe.get('adapter'):prepared.adapter=recipe['adapter']
             prepared.adapter_config.update(recipe.get('adapter_config',{}))
             prepared=self.registry._resolved(prepared)
+            if prepared.adapter=='structured_collection' and 'retained_media_optional' in prepared.adapter_config:
+                from dataset_atlas.adapters.structured_collection import StructuredCollectionAdapter
+                if recipe.get('snapshot_id') and prepared.adapter_config['retained_media_optional']:
+                    raise ValueError('Optional native media requires a snapshot identity derived from its observed bindings')
+                if prepared.adapter_config['retained_media_optional']:
+                    prepared.snapshot_id=''
+                prepared.adapter_config=StructuredCollectionAdapter(prepared).pin_optional_retained_media()
             plan['prepared_dataset']=prepared.model_dump(mode='json')
             plan['recipe_sha256']=recipe_hash
             if recipe.get('credential_profile'):
@@ -204,7 +215,20 @@ class PreparationManager:
         except (ValueError, KeyError, FileNotFoundError) as exc:
             description = None
             if str(exc).startswith('unknown adapter:'):adapter_error=str(exc)
-        if recipe.get('files') and (recipe_changed or not active or not (description and description.exists)):
+        if dataset.id == 'pata' and not recipe:
+            from .pata import metadata_contract
+            contract = metadata_contract()
+            plan.update(kind='pata_metadata', builtin_source=contract,
+                files=[{**entry,'format':'json' if entry['source_name'].endswith('.json') else 'text'} for entry in contract['files']],
+                expected_count=4934, preview_count=100,
+                expected_download_bytes=sum(entry['bytes'] for entry in contract['files']), download_is_upper_bound=True,
+                scope='All native PATA label/URL rows and exact captions; 100 metadata-only preview records; no third-party images.',
+                effective_output_limit_bytes=min(max_output_bytes,100_000_000), ready=True)
+            if max_output_bytes < 10_000_000:
+                plan['requirements'].append('PATA native metadata needs at least a 10 MB output budget.')
+            if source_mode != 'download':
+                plan['requirements'].append('PATA native metadata uses the complete download route; no image download or sampling route is required.')
+        elif recipe.get('files') and (recipe_changed or not active or not (description and description.exists)):
             plan.update(kind='http_archive', files=recipe['files'], expected_count=recipe.get('expected_count'),
                 expected_download_bytes=sum(f['bytes'] for f in recipe['files']), ready=True,
                 scope=recipe['scope'], allowed_hosts=recipe.get('allowed_hosts',[]))
@@ -344,7 +368,8 @@ class PreparationManager:
                 if policy=='shard_rank' and (type(shards) is not int or not 1<=shards<=len(plan['files'])):raise ValueError('sample_shards must be within the pinned shard count')
                 plan.update(kind='huggingface_remote_sample',source_total_bytes=plan['expected_download_bytes'],
                     expected_download_bytes=max_download_bytes,download_is_upper_bound=True,
-                    sample={'size':100,'seed':recipe.get('sample_seed',0),'footers':policy,'shards':shards if policy=='shard_rank' else len(plan['files'])},
+                    sample={'size':100,'seed':recipe.get('sample_seed',0) if sample_seed is None else sample_seed,
+                            'footers':policy,'shards':shards if policy=='shard_rank' else len(plan['files'])},
                     media_access='Sample 100 rows by a seeded SHA-256 counter over row counts from Parquet footers; read only the selected row groups within the transfer budget. No complete local index is built; embedded images are fetched on inspection.')
             else:
                 plan['ready']=False
@@ -436,6 +461,8 @@ class PreparationManager:
             plan['requirements'].append('Source download exceeds the selected download budget.')
         # Cache and retained source may coexist; reserve both conservatively.
         plan['required_free_bytes'] = plan['expected_download_bytes'] * 2 + max_output_bytes + (dataset.adapter_config.get('remote_cache_bytes',1_000_000_000) if selective_media else 0)
+        if plan.get('kind')=='pata_metadata':
+            plan['required_free_bytes']=plan['expected_download_bytes']*2+plan['effective_output_limit_bytes']
         if plan.get('kind')=='http_sequential_tar':
             # One cache object is indexed and cold-verified before retirement;
             # the next source never coexists with that completed original.
@@ -484,13 +511,14 @@ class PreparationManager:
         if plan['requirements']:
             plan['ready'] = False
         from dataset_atlas.jobs.limits import limits, enforcement
-        plan['resource_limits']=limits(recipe.get('resource_limits',{}))
+        plan['resource_limits']=limits({'max_wall_seconds':120,'max_cpu_seconds':120,'max_rss_bytes':1_000_000_000}
+            if plan.get('kind')=='pata_metadata' else recipe.get('resource_limits',{}))
         plan['memory_enforcement']=enforcement()
         plan['id'] = hashlib.sha256(json.dumps({k:v for k,v in plan.items() if k not in {'available_bytes', 'shared_storage'}}, sort_keys=True).encode()).hexdigest()
         atomic(self._path(plan['id']) / 'plan.json', plan)
         return plan
 
-    def start(self, identity):
+    def start(self, identity, *, activate=None):
         import fcntl
         directory=self._path(identity)
         if not directory.is_dir():raise FileNotFoundError('Preparation plan not found')
@@ -498,7 +526,7 @@ class PreparationManager:
             fcntl.flock(storage_lock,fcntl.LOCK_EX)
             with (directory/'dispatch.lock').open('a') as lock:
                 fcntl.flock(lock,fcntl.LOCK_EX)
-                return self._start(identity)
+                return self._start(identity, activate=activate)
 
     def _storage_reservations(self):
         reserved = 0
@@ -533,12 +561,18 @@ class PreparationManager:
         except OSError:return 0
         return total
 
-    def _start(self, identity):
+    def _start(self, identity, *, activate=None):
         directory = self._path(identity)
         plan = json.loads((directory / 'plan.json').read_text())
         if not plan['ready']:
             raise ValueError('Preparation requirements have not been satisfied')
         prior = self.status(identity)
+        if activate is None:
+            activate = prior.get('activate_on_success', True)
+        if type(activate) is not bool:
+            raise ValueError('Preparation activation intent must be boolean')
+        if not activate and plan['kind'] == 'huggingface_remote_sample':
+            raise ValueError('Nonactivating preparation is not supported for sampled remote sources')
         if prior['status'] in {'running', 'queued', 'completed'}:
             return prior
         from dataset_atlas.storage.optimized import preparation_headroom
@@ -558,10 +592,13 @@ class PreparationManager:
                 'resource_error':json.loads(resource.read_text()) if resource.is_file() else None})
         (directory / 'cancel').unlink(missing_ok=True)
         (directory / 'resource-error.receipt').unlink(missing_ok=True)
-        atomic(directory / 'status.json', {'id': identity, 'dataset_id': plan['dataset_id'], 'status': 'queued', 'updated_at': time.time()})
+        atomic(directory / 'status.json', {'id': identity, 'dataset_id': plan['dataset_id'], 'status': 'queued', 'updated_at': time.time(),
+                                          'activate_on_success': activate})
         with (directory / 'worker.log').open('ab') as log:
             from dataset_atlas.jobs.limits import worker_command
-            process = subprocess.Popen(worker_command([sys.executable, '-m', 'dataset_atlas.preparation.worker', str(self.root), identity],plan.get('resource_limits',{})),
+            command = [sys.executable, '-m', 'dataset_atlas.preparation.worker', str(self.root), identity]
+            if not activate:command.append('--no-activate')
+            process = subprocess.Popen(worker_command(command,plan.get('resource_limits',{})),
                 stdin=subprocess.DEVNULL, stdout=log, stderr=log, start_new_session=True)
         self.processes[identity] = process
         return self.status(identity)

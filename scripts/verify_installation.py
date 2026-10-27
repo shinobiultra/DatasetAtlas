@@ -22,6 +22,8 @@ import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
 
+from verify_distribution import release_archives
+
 ROOT = Path(__file__).resolve().parents[1]
 OPTIONAL = ['torch', 'torchvision', 'transformers', 'nudenet', 'sklearn', 'umap', 'lancedb', 'sentence_transformers']
 
@@ -43,9 +45,9 @@ def main() -> int:
     parser.add_argument('--wheel', type=Path)
     parser.add_argument('--output', type=Path, default=ROOT / 'reports/installation-verification.json')
     args = parser.parse_args()
-    wheel = args.wheel or max(args.dist.glob('dataset_atlas-*.whl'), key=lambda p: p.stat().st_mtime)
-    sdist = max(args.dist.glob('dataset_atlas-*.tar.gz'), key=lambda p: p.stat().st_mtime)
-    inspection = subprocess.run([sys.executable, str(ROOT / 'scripts/verify_distribution.py'), str(args.dist)], capture_output=True, text=True)
+    args.output.parent.mkdir(parents=True, exist_ok=True)
+    wheel, sdist = release_archives(args.dist, wheel=args.wheel)
+    inspection = subprocess.run([sys.executable, str(ROOT / 'scripts/verify_distribution.py'), str(args.dist), '--wheel', str(wheel)], capture_output=True, text=True)
     receipt = {'verified_at_utc': datetime.now(timezone.utc).isoformat(), 'status': 'failed', 'wheel': wheel.name, 'wheel_sha256': hashlib.sha256(wheel.read_bytes()).hexdigest(),
                'release_archives': {wheel.name: wheel.stat().st_size, sdist.name: sdist.stat().st_size},
                'archive_inspection': {'passed': inspection.returncode == 0, 'output': (inspection.stdout + inspection.stderr)[-600:]},
@@ -57,12 +59,21 @@ def main() -> int:
     with tempfile.TemporaryDirectory(prefix='atlas-install-') as scratch:
         scratch_path = Path(scratch)
         venv = scratch_path / 'venv'
-        subprocess.run([sys.executable, '-m', 'venv', str(venv)], check=True)
+        subprocess.run(['uv', 'venv', '--python', sys.executable, str(venv)], check=True)
         python = venv / 'bin/python'
-        subprocess.run([str(python), '-m', 'pip', 'install', '--quiet', '--disable-pip-version-check', str(wheel)], check=True, cwd=scratch)
-        installed = subprocess.run([str(python), '-m', 'pip', 'freeze'], capture_output=True, text=True, cwd=scratch).stdout.splitlines()
-        present = [name for name in OPTIONAL if subprocess.run([str(python), '-c', f'import importlib.util,sys;sys.exit(0 if importlib.util.find_spec("{name}") else 1)'], cwd=scratch).returncode == 0]
-        receipt.update(python=sys.version.split()[0], installed_packages=len(installed), optional_model_packages_present=present)
+        subprocess.run(['uv', 'pip', 'install', '--python', str(python), str(wheel)], check=True, cwd=scratch)
+        installed = subprocess.run(['uv', 'pip', 'freeze', '--python', str(python)], check=True, capture_output=True, text=True, cwd=scratch).stdout.splitlines()
+        present = [name for name in OPTIONAL if subprocess.run([str(python), '-I', '-c', f'import importlib.util,sys;sys.exit(0 if importlib.util.find_spec("{name}") else 1)'], cwd=scratch).returncode == 0]
+        probe = subprocess.run([str(python), '-I', '-c',
+                                'import dataset_atlas,importlib.metadata,json,pathlib,sys;'
+                                'print(json.dumps({"version":importlib.metadata.version("dataset-atlas"),'
+                                '"inside_venv":pathlib.Path(dataset_atlas.__file__).is_relative_to(sys.prefix)}))'],
+                               check=True, capture_output=True, text=True, cwd=scratch)
+        identity = json.loads(probe.stdout)
+        if identity['version'] != wheel.name.split('-')[1] or not identity['inside_venv']:
+            raise ValueError('Installed package identity differs from the current wheel or escaped the clean environment')
+        receipt.update(python=sys.version.split()[0], installed_packages=len(installed), installed_version=identity['version'],
+                       module_from_clean_venv=identity['inside_venv'], optional_model_packages_present=present)
         workspace = scratch_path / 'workspace'
         env = {**os.environ, 'PYTHONPATH': ''}
         init = subprocess.run([str(venv / 'bin/atlas'), 'init', str(workspace)], capture_output=True, text=True, cwd=scratch, env=env)

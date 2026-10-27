@@ -18,12 +18,13 @@ def main() -> int:
     parser.add_argument('--workbench', action='store_true', help='Start the local workbench after building its interface')
     parser.add_argument('--no-open', action='store_true', help='Print the sample URL without opening a browser')
     parser.add_argument('--port', type=int, default=8767, help='Sample server port; stable 8767 by default, 0 for an ephemeral port')
+    parser.add_argument('--skip-npm-install', action='store_true', help='Reuse dependencies already installed with npm ci (CI only)')
     args = parser.parse_args()
     if args.serve and args.workbench:
         parser.error('--serve and --workbench are mutually exclusive')
     if args.max_bytes <= 0:
         parser.error('--max-bytes must be positive')
-    build_frontend()
+    build_frontend(install_dependencies=not args.skip_npm_install)
     if args.workbench:
         from dataset_atlas.cli import main as atlas
         return atlas(['--root', str(ROOT), 'serve'])

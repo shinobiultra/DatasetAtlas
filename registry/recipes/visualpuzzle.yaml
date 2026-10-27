@@ -1,0 +1,46 @@
+release: hf-e6bc28fb1adcd27f25476b917e8c35c67b64027b
+snapshot_id: hf-e6bc28fb1adcd27f25476b917e8c35c67b64027b-12e3debad4a5
+source_url: https://huggingface.co/datasets/neulab/VisualPuzzles/tree/e6bc28fb1adcd27f25476b917e8c35c67b64027b
+adapter: retained_parquet_media
+expected_count: 1168
+scope: Official NeuLab VisualPuzzles train Parquet with 1,168 image questions across
+  five reasoning categories. Original options, answer, category and difficulty remain
+  source fields; repeated images share asset identity.
+adapter_config:
+  format: jsonl
+  population: Official NeuLab VisualPuzzles train Parquet with 1,168 image questions
+    across five reasoning categories. Original options, answer, category and difficulty
+    remain source fields; repeated images share asset identity.
+  mapping:
+    id: id
+    question: question
+    choices: options
+    media: media_path
+    media_modality: image
+  fields:
+    id: Official puzzle ID
+    question: Original puzzle question
+    options: Original options when present
+    answer: Original source answer
+    category: Official reasoning category
+    difficulty: Official difficulty
+    image_sha256: SHA-256 of original embedded image bytes
+convert:
+  name: retained_visual_image_jsonl
+  params:
+    max_output_bytes: 2000000
+  count: 1168
+  rows_sha256: fee8bc0c4d76c497442e56181aae64de53ed18418d31298935c7d7f24e2a8c8a
+files:
+- source_name: train-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/neulab/VisualPuzzles/resolve/e6bc28fb1adcd27f25476b917e8c35c67b64027b/data/train-00000-of-00001.parquet
+  bytes: 142706932
+  sha256: 54ff7f7e2aa2a133f5d4a1dd2b04d4d90687ffcaa862ceff71aa30af3c0856ae
+  format: parquet
+  config_key: source
+allowed_hosts:
+- huggingface.co
+resource_limits:
+  max_rss_bytes: 3000000000
+  max_cpu_seconds: 900
+  max_wall_seconds: 1800

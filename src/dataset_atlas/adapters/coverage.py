@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import csv
 import json
+from collections.abc import Collection
 from pathlib import Path
 
 import yaml
@@ -11,24 +12,25 @@ from dataset_atlas.models import Dataset
 
 
 def sync_curated_candidates(candidate_path: Path, evidence_path: Path,
-                            registry_dir: Path) -> int:
-    """Account for page-audited identities without promoting them to verified releases."""
+                            registry_dir: Path, *, supported_ids: Collection[str] = ()) -> int:
+    """Update admitted candidates without promoting them to verified releases.
+
+    Existing registry IDs are admitted. Creating a new entry requires explicitly
+    including its ID in ``supported_ids``; corpus discovery alone never expands
+    the shipped catalogue. Admission makes no identity or rights decision.
+    """
+    admitted_ids = {path.stem for path in registry_dir.glob("*.yaml")} | set(supported_ids)
+    if any(not isinstance(item, str) or not item or item in {".", ".."}
+           or "/" in item or "\\" in item or "\0" in item for item in admitted_ids):
+        raise ValueError("Invalid dataset ID in supported IDs")
     candidates = json.loads(candidate_path.read_text(encoding="utf-8"))["candidates"]
-    dispositions_path = registry_dir.parent / "candidate_dispositions.yaml"
-    dispositions = (yaml.safe_load(dispositions_path.read_text(encoding="utf-8"))
-                    if dispositions_path.is_file() else {})
-    excluded_ids = {item["id"] for item in dispositions.get("excluded_from_dataset_catalogue", [])}
-    excluded_ids.update(item["alias_id"] for item in dispositions.get("alias_redirects", []))
     evidence = {row["evidence_id"]: row for row in
                 (json.loads(line) for line in evidence_path.read_text(encoding="utf-8").splitlines())}
     registry_dir.mkdir(parents=True, exist_ok=True)
     changed = 0
-    overlay_bases = {"coco-gender": "coco", "cocogender": "coco",
-                     "facet": "Segment Anything 1 Billion",
-                     "miap": "OpenImages", "phase": "Conceptual Captions"}
     for item in candidates:
         dataset_id = item["proposed_id"]
-        if dataset_id in excluded_ids:
+        if dataset_id not in admitted_ids:
             continue
         path = registry_dir / f"{dataset_id}.yaml"
         receipts = []
@@ -64,12 +66,6 @@ def sync_curated_candidates(candidate_path: Path, evidence_path: Path,
                 elif receipt.get("kind") == "paper_source_claim" and receipt.get("url") not in source_claims:
                     data["evidence"].append(receipt)
                     source_claims.add(receipt["url"])
-            if dataset_id in overlay_bases and not any(
-                    r.get("type") == "annotation_overlay_of" and r.get("target") == overlay_bases[dataset_id]
-                    for r in data["relationships"]):
-                data["relationships"].append({"type": "annotation_overlay_of",
-                                              "target": overlay_bases[dataset_id],
-                                              "status": "paper_claim_only"})
             if data != current.model_dump(mode="python"):
                 Dataset.model_validate(data)
                 path.write_text(yaml.safe_dump(data, sort_keys=False, allow_unicode=True), encoding="utf-8")
@@ -90,10 +86,6 @@ def sync_curated_candidates(candidate_path: Path, evidence_path: Path,
             "rights": {"records": "not_reviewed", "annotations": "not_reviewed",
                        "images": "not_reviewed"}, "evidence": receipts,
         }
-        if dataset_id in overlay_bases:
-            data["relationships"] = [{"type": "annotation_overlay_of",
-                                      "target": overlay_bases[dataset_id],
-                                      "status": "paper_claim_only"}]
         Dataset.model_validate(data)
         rendered = yaml.safe_dump(data, sort_keys=False, allow_unicode=True)
         if not path.exists() or path.read_text(encoding="utf-8") != rendered:

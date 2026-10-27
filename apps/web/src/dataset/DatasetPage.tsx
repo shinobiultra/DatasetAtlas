@@ -2,7 +2,7 @@ import { StaticUnpublished } from './GuideCards'
 import { displayUrl } from '../lib/display'
 import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 import { createPortal } from 'react-dom'
-import type { Artifact, Dataset, FieldDescriptor, Query, Record as AtlasRecord, Selection } from '../generated'
+import type { Artifact, Capabilities, Dataset, FieldDescriptor, Query, Record as AtlasRecord, Selection } from '../generated'
 import { provider, type CompleteScope, type ThumbEntry } from '../provider'
 import { recordHeadline, titleCase } from '../lib/format'
 import { inEditable, useInfiniteSentinel, useKey, usePanelResize, useStoredState } from '../lib/hooks'
@@ -41,10 +41,11 @@ type Centre = 'browse' | 'focus' | 'compare'
 
 const SELECT_ALL_LIMIT = 5000
 
-export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onToast, onSelectionSaved, barHost }: {
+export function DatasetPage({ datasetId, tab, thumbs, capabilities, onTab, onOpenDataset, onToast, onSelectionSaved, barHost }: {
   datasetId: string
   tab: 'samples' | 'overview'
   thumbs: ThumbEntry | undefined
+  capabilities: Capabilities | null
   onTab: (tab: 'samples' | 'overview') => void
   onOpenDataset: (id: string) => void
   onToast: (message: string) => void
@@ -94,6 +95,9 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
   const scrollRef = useRef<HTMLDivElement>(null)
   const searchRef = useRef<HTMLInputElement>(null)
   const scrollMemory = useRef<Record<string, number>>({})
+  const inspectionBinding = useRef('')
+  const canAnalyze = Boolean(capabilities?.operations.includes('analysis'))
+  const canConverse = Boolean(capabilities?.operations.includes('conversations'))
 
   /* ---------- load dataset ---------- */
   useEffect(() => {
@@ -163,6 +167,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
 
   /* ---------- the query ---------- */
   const snapshotId = scope === 'complete' ? complete?.snapshot_id ?? '' : dataset?.snapshot_id ?? ''
+  inspectionBinding.current = `${datasetId}:${snapshotId}`
   const resultSnapshotIds = useMemo(() => artifacts.filter(item => item.unit === unit && selectedResultIds.includes(item.id)).map(item => item.id).sort(), [artifacts, unit, selectedResultIds])
 
   // Attaching every historical run makes unrelated browsing grow without bound.
@@ -228,13 +233,16 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
 
   const openRecordById = useCallback(async (id: string) => {
     if (records.some(record => record.id === id)) { inspect(id); return }
+    const binding = `${datasetId}:${snapshotId}`
     try {
-      const [fetched] = await provider.records([id])
+      const [fetched] = await provider.records([id], [snapshotId])
+      if (binding !== inspectionBinding.current) return
+      if (!fetched || fetched.snapshot_id !== snapshotId) throw new Error('The inspected record is unavailable in this snapshot.')
       setExtraRecord(fetched)
       setInspected(id)
       setPanel('inspector')
     } catch (failure) { onToast(String(failure instanceof Error ? failure.message : failure)) }
-  }, [records, inspect, onToast])
+  }, [records, inspect, onToast, snapshotId, datasetId])
 
   const focusRecord = useCallback((id: string) => {
     const index = records.findIndex(record => record.id === id)
@@ -309,6 +317,23 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
   const record = records.find(item => item.id === inspected) ?? (extraRecord?.id === inspected ? extraRecord : undefined)
   const projections = useMemo(() => projectionArtifacts(artifacts, unit), [artifacts, unit])
   const projection = projections.find(item => item.id === projectionId) ?? projections[0] ?? null
+  const membershipKey = projection && query && view === 'map' && needsSceneMap(projection)
+    ? JSON.stringify([datasetId, projection.id, { ...query, limit: 1000, cursor: null }]) : ''
+  const [mapMembership, setMapMembership] = useState<{ key: string; values: Uint8Array | null; error: string }>({ key: '', values: null, error: '' })
+  useEffect(() => {
+    if (!membershipKey || !projection || !query) return
+    const controller = new AbortController()
+    const key = membershipKey
+    setMapMembership({ key, values: null, error: '' })
+    const timer = setTimeout(() => {
+      provider.membership(datasetId, projection, query, controller.signal)
+        .then(values => { if (!controller.signal.aborted) setMapMembership({ key, values, error: '' }) })
+        .catch(failure => { if (!controller.signal.aborted) setMapMembership({ key, values: null, error: String(failure instanceof Error ? failure.message : failure) }) })
+    }, 150)
+    return () => { controller.abort(); clearTimeout(timer) }
+    // The key binds the complete query and artifact; transient object identities do not restart it.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [membershipKey])
   const colourField = unitFields.find(field => field.id === colourFieldId) ?? null
   const summary = dataset ? scopeSummary(dataset, scope, complete, result) : null
   const hasImages = records.some(item => (item.assets ?? []).some(asset => asset.modality === 'image' && asset.uri))
@@ -387,7 +412,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
       </div>
       <div className="ds-tabs">
         <Tabs label="Dataset view" value={tab} onChange={onTab} options={[{ value: 'samples', label: 'Samples' }, { value: 'overview', label: 'Overview' }]} />
-        {provider.mode === 'workbench' && <PrepareDataset key={dataset.id} datasetId={dataset.id} onRequest={dataset.availability?.preview === 'on_request'} />}
+        {provider.mode === 'workbench' && <PrepareDataset key={dataset.id} datasetId={dataset.id} onRequest={dataset.availability?.preview === 'on_request'} resample={dataset.adapter === 'remote_columnar' && (dataset.coverage?.preview_count ?? 0) > 0 && dataset.coverage?.complete_data === 'exceeds_storage_budget'} />}
       </div>
     </>
   )
@@ -497,7 +522,9 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
             <Map3DView
               artifact={projection} artifacts={artifacts.filter(item => item.unit === unit)} records={records} colourField={colourField} selected={selected}
               datasetId={datasetId} snapshotId={snapshotId} resultSnapshotIds={resultSnapshotIds} completeIndex={scope === 'complete'}
-              onInspect={inspect} onOpen={focusRecord} matchedCount={result?.matched_count ?? null} totalSelected={selectedCount}
+              membership={mapMembership.key === membershipKey ? mapMembership.values : null}
+              membershipError={mapMembership.key === membershipKey ? mapMembership.error : ''}
+              onInspect={id => { void openRecordById(id) }} onOpen={focusRecord} matchedCount={result?.matched_count ?? null} totalSelected={selectedCount}
               onSelect={(ids, mode) => {
                 setSelected(current => (mode === 'add' ? new Set([...current, ...ids]) : new Set(ids)))
                 onToast(`${ids.length.toLocaleString()} points ${mode === 'add' ? 'added to' : 'selected in'} the selection.`)
@@ -513,7 +540,7 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
             onInspect={inspect} onOpen={focusRecord}
             loadingMore={loadingMore || loading}
             matchedCount={result?.matched_count ?? null}
-            capped={!hasMore ? false : records.length >= MAP_MAX_POINTS}
+            capped={Boolean(result?.cursor) && records.length >= MAP_MAX_POINTS}
             onSelect={(ids, mode) => {
               setSelected(current => (mode === 'add' ? new Set([...current, ...ids]) : new Set(ids)))
               onToast(`${ids.length.toLocaleString()} points ${mode === 'add' ? 'added to' : 'selected in'} the selection.`)
@@ -721,9 +748,13 @@ export function DatasetPage({ datasetId, tab, thumbs, onTab, onOpenDataset, onTo
               ? <SampleInspector mediaControls={centre !== 'focus'} record={record} fields={fields} artifacts={artifacts} query={query} datasetId={datasetId} onOpenRecord={openRecordById} onFocus={() => focusRecord(record.id)} />
               : <div className="insp-section"><Empty title="Nothing inspected">Click a card or row to inspect it. Clicking never changes your selection.</Empty></div>)}
             {panel === 'about' && <AboutPanel dataset={dataset} onOpenDataset={onOpenDataset} />}
-            {panel === 'analyze' && <AnalyzePanel selected={population ? [] : [...selected]} selectedCount={selectedCount} unit={unit} saved={population ?? savedSelection} fields={unitFields} artifacts={artifacts} populationScope={scope} onSave={saveSelection} onRan={onToast} onSelectIds={ids => { setSelected(new Set(ids)); setSavedSelection(null) }} />}
-            {panel === 'model' && <ModelPanel selected={population ? [] : [...selected]} unit={unit} snapshotIds={snapshotId ? [snapshotId] : undefined} fields={unitFields} resultSnapshotIds={resultSnapshotIds} onNotice={onToast}
-              datasetId={datasetId} query={query} artifacts={artifacts.filter(item => item.unit === unit)} onAttach={ids => { setSelected(new Set(ids)); setSavedSelection(null) }} />}
+            {panel === 'analyze' && (canAnalyze
+              ? <AnalyzePanel selected={population ? [] : [...selected]} selectedCount={selectedCount} unit={unit} saved={population ?? savedSelection} fields={unitFields} artifacts={artifacts} populationScope={scope} onSave={saveSelection} onRan={onToast} onSelectIds={ids => { setSelected(new Set(ids)); setSavedSelection(null) }} />
+              : <Notice tone="quiet">{capabilities ? <>Compute results in the local workbench. Start it with <code>./start.sh --workbench</code>, then use Settings → Models for installation and model setup. Published results remain available in this browser.</> : 'Loading available analysis capabilities…'}</Notice>)}
+            {panel === 'model' && (canConverse
+              ? <ModelPanel selected={population ? [] : [...selected]} unit={unit} snapshotIds={snapshotId ? [snapshotId] : undefined} fields={unitFields} resultSnapshotIds={resultSnapshotIds} onNotice={onToast}
+                  datasetId={datasetId} query={query} artifacts={artifacts.filter(item => item.unit === unit)} onAttach={ids => { setSelected(new Set(ids)); setSavedSelection(null) }} />
+              : <Notice tone="quiet">{capabilities ? <>Connect a model in the local workbench. Start <code>./start.sh --workbench</code>, then open Settings → Models. This static browser never sends examples to a model.</> : 'Loading available model capabilities…'}</Notice>)}
           </div>
         </aside>
       )}

@@ -100,3 +100,12 @@ def test_recipe_without_description_does_not_freeze_obsolete_source_claim(worksp
     (workspace/'registry/recipes').mkdir(exist_ok=True)
     (workspace/'registry/recipes/fixture.yaml').write_text('adapter: structured\n')
     assert registry.dataset('fixture').description == ''
+
+
+def test_current_adapter_verification_is_not_hidden_by_older_prepared_metadata():
+    baseline=Dataset(id='d',name='Current tested integration',coverage={'adapter':'tested'})
+    prepared=Dataset(id='d',name='Older prepared snapshot',coverage={'adapter':'implemented','preview_count':100,'total_count':150})
+    merged=merge_prepared(baseline,prepared,recipe_present=False)
+    assert merged.coverage.adapter=='tested'
+    assert (merged.coverage.preview_count,merged.coverage.total_count)==(100,150)
+    assert prepared.coverage.adapter=='implemented'

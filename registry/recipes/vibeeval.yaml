@@ -1,0 +1,46 @@
+release: hf-3bdc7c30f09938557a21f1918d6c8c28fd5978f8
+snapshot_id: hf-3bdc7c30f09938557a21f1918d6c8c28fd5978f8-f2242b71b430
+source_url: https://huggingface.co/datasets/RekaAI/VibeEval/tree/3bdc7c30f09938557a21f1918d6c8c28fd5978f8
+adapter: retained_parquet_media
+expected_count: 269
+scope: Official Vibe-Eval v1 test Parquet with 269 image-text prompts and references.
+  All 269 source rows and embedded images are retained locally; five rows reuse an
+  identical image asset.
+adapter_config:
+  format: jsonl
+  population: Official Vibe-Eval v1 test Parquet with 269 image-text prompts and references.
+    All 269 source rows and embedded images are retained locally; five rows reuse
+    an identical image asset.
+  mapping:
+    id: example_id
+    question: prompt
+    text: prompt
+    media: media_path
+    media_modality: image
+  fields:
+    example_id: Original example identifier
+    category: Official normal or hard group
+    prompt: Original image question/prompt
+    reference: Official reference response, not a model prediction
+    media_url: Original source media URL
+    source_image_path: Original Parquet image path
+    image_sha256: SHA-256 of original embedded image bytes
+convert:
+  name: retained_visual_image_jsonl
+  params:
+    max_output_bytes: 2000000
+  count: 269
+  rows_sha256: cff74cb59e7523b6aea0168e96b5efe3c3c80b767aaf1d993f9ff5fd37905457
+files:
+- source_name: vibe-eval.v1.parquet
+  url: https://huggingface.co/datasets/RekaAI/VibeEval/resolve/3bdc7c30f09938557a21f1918d6c8c28fd5978f8/vibe-eval.v1.parquet
+  bytes: 205284291
+  sha256: 1de62550fc1d41344517129342f74b303c104b13683838e04a7e4e7c0a091b95
+  format: parquet
+  config_key: source
+allowed_hosts:
+- huggingface.co
+resource_limits:
+  max_rss_bytes: 3000000000
+  max_cpu_seconds: 900
+  max_wall_seconds: 1800

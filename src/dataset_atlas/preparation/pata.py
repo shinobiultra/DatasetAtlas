@@ -1,16 +1,19 @@
 """Bounded, reproducible PATA metadata index; image inspection stays unavailable."""
 from __future__ import annotations
 from datetime import datetime, timezone
+from contextlib import nullcontext
 import hashlib
+import heapq
 import json
 import os
+import re
 from pathlib import Path
 import tempfile
 import time
 import httpx
 from dataset_atlas.adapters import get_adapter
 from dataset_atlas.converters.pata import convert_pata
-from dataset_atlas.models import FieldDescriptor
+from dataset_atlas.models import Dataset, FieldDescriptor, Pack
 from dataset_atlas.queries.parquet import build_parquet_snapshot, ParquetSnapshot
 from dataset_atlas.registry import Registry
 from dataset_atlas.preparation import atomic
@@ -23,29 +26,44 @@ SOURCES = {
 }
 
 
+def metadata_contract():
+    """Fixed data pins for the builtin route; no caller-selected executable or URL."""
+    return {'revision': REVISION, 'files': [
+        {'source_name': name, 'sha256': digest, 'bytes': size,
+         'url': f'https://raw.githubusercontent.com/pata-fairness/pata_dataset/{REVISION}/{name}'}
+        for name, digest, size in SOURCES.values()]}
+
+
 def prepare_metadata(root: Path, *, execute=False, max_download_bytes=1_000_000,
-                     max_output_bytes=20_000_000):
+                     max_output_bytes=20_000_000, activate=True, _version_id=None,
+                     _writer_lease=None, _cancel_check=None):
     root = Path(root).resolve()
+    if type(activate) is not bool or (_version_id is not None and not re.fullmatch('[a-f0-9]{64}', _version_id)):
+        raise ValueError('PATA activation and managed version identity are invalid')
     expected = sum(item[2] for item in SOURCES.values())
     if type(max_download_bytes) is not int or max_download_bytes < expected or max_download_bytes > 5_000_000:
         raise ValueError('PATA metadata needs a download budget between 759949 and 5000000 bytes')
     if type(max_output_bytes) is not int or not 10_000_000 <= max_output_bytes <= 100_000_000:
         raise ValueError('PATA metadata needs an output budget between 10 and 100 MB')
     result = {'dataset_id': 'pata', 'source_revision': REVISION, 'expected_download_bytes': expected,
-              'expected_records': 4934, 'native_image_preview_count': 0,
+              'expected_records': 4934, 'expected_preview_records': 100, 'native_image_preview_count': 0,
               'scope': 'All released label/URL rows and exact scene captions; no third-party media requested.',
-              'status': 'planned', 'executed': execute}
+              'status': 'planned', 'executed': execute, 'activated': False}
     if not execute:
         return result
     deadline = time.monotonic() + 120
     def check():
+        if _cancel_check is not None:
+            _cancel_check()
         if time.monotonic() > deadline:
             raise TimeoutError('PATA metadata preparation exceeded 120 seconds')
     locks = root / 'work/preparation'
     if locks.is_symlink() or not locks.resolve().is_relative_to(root):
         raise ValueError('PATA preparation lease escapes the workspace')
     locks.mkdir(parents=True, exist_ok=True)
-    lease = try_writer_slot(locks, 'pata', 'pata-metadata-' + REVISION)
+    # Only the fixed normal-worker dispatch supplies its already-held lease.
+    # The public CLI/helper path acquires the same two-slot writer policy here.
+    lease = nullcontext() if _writer_lease is not None else try_writer_slot(locks, 'pata', 'pata-metadata-' + REVISION)
     if lease is None:
         raise RuntimeError('Another preparation owns the PATA writer')
     with lease:
@@ -102,7 +120,9 @@ def prepare_metadata(root: Path, *, execute=False, max_download_bytes=1_000_000,
         if conversion['count'] != 4934:
             raise ValueError('PATA native population count changed')
         snapshot_id = 'pata-metadata-' + conversion['rows_sha256'][:24]
-        version = 'metadata-' + conversion['rows_sha256']
+        # Keep the old metadata-only and frozen versions intact. The index
+        # identity stays source-derived; only the prepared presentation changes.
+        version = _version_id or 'metadata-preview-v2-' + conversion['rows_sha256']
         directory = root / 'work/prepared/pata' / version
         if directory.is_symlink() or not directory.resolve().is_relative_to(root):
             raise ValueError('PATA prepared directory escapes the workspace')
@@ -118,8 +138,8 @@ def prepare_metadata(root: Path, *, execute=False, max_download_bytes=1_000_000,
         dataset.coverage.access = 'public'
         dataset.coverage.complete_data = 'indexed_metadata_partial_media'
         dataset.coverage.total_count = 4934
-        dataset.coverage.preview_count = 0
-        dataset.coverage.preview = 'none'
+        dataset.coverage.preview_count = 100
+        dataset.coverage.preview = 'metadata_only'
         dataset.coverage.blockers = [
             'All 4,934 author label/URL rows and 24 exact caption objects are indexed; no image preview is claimed.',
             'Third-party images are not archived or fetched. URL availability and image rights remain unverified.',
@@ -160,12 +180,19 @@ def prepare_metadata(root: Path, *, execute=False, max_download_bytes=1_000_000,
         from dataset_atlas.converters.pata import native_rows
         expected_rows = iter(native_rows(inputs['files'], inputs['captions'], check))
         verified = 0
+        preview_heap = []
         from dataset_atlas.queries.parquet import _BASE_FIELDS, _field_value, _encode_field
         for batch in pq.ParquetFile(index / 'records.parquet').iter_batches(batch_size=128):
             for stored in batch.to_pylist():
                 check()
                 row = next(expected_rows)
                 expected_record = adapter._record(row, verified)
+                rank = int.from_bytes(hashlib.sha256(f'0:{expected_record.id}'.encode()).digest(), 'big')
+                item = (-rank, expected_record.id, expected_record)
+                if len(preview_heap) < 100:
+                    heapq.heappush(preview_heap, item)
+                elif item[:2] > preview_heap[0][:2]:
+                    heapq.heapreplace(preview_heap, item)
                 if json.loads(stored['record_json']) != expected_record.model_dump(mode='json'):
                     raise ValueError('PATA canonical record differs from its exact native row/caption join')
                 for name in _BASE_FIELDS:
@@ -181,8 +208,31 @@ def prepare_metadata(root: Path, *, execute=False, max_download_bytes=1_000_000,
                 verified += 1
         if verified != 4934 or next(expected_rows, None) is not None:
             raise ValueError('PATA native/canonical membership differs')
+        preview = [item[2] for item in sorted(preview_heap, key=lambda item: (-item[0], item[1]))]
+        if len(preview) != 100 or any(record.assets for record in preview):
+            raise ValueError('PATA metadata preview membership or media contract differs')
+        pack = Pack(dataset=dataset, fields=fields, records=preview, sampling={
+            'method': 'sha256_bottom_k_metadata_records', 'seed': 0, 'unit': 'example',
+            'population': 'complete released label/URL and exact-caption metadata', 'population_count': 4934,
+            'requested_count': 100, 'returned_count': 100, 'media_representation': 'none',
+            'selection_note': 'Metadata-only native records; zero images fetched. Author labels are not self-reports.'})
+        pack_path = directory / 'pack/pack.json'
+        if pack_path.is_symlink() or not pack_path.resolve().is_relative_to(root):
+            raise ValueError('PATA preview pack escapes the workspace')
+        if pack_path.exists():
+            retained_pack = Pack.model_validate_json(pack_path.read_text())
+            if (retained_pack.records != pack.records or retained_pack.fields != fields
+                    or retained_pack.sampling != pack.sampling or retained_pack.checksums
+                    or retained_pack.dataset.snapshot_id != snapshot_id):
+                raise ValueError('Retained PATA metadata preview differs from its exact native records')
+        else:
+            atomic(pack_path, pack.model_dump(mode='json'), compact=True)
+        output_bytes = conversion['path'].stat().st_size + sum(path.stat().st_size for path in directory.rglob('*') if path.is_file())
+        if output_bytes > max_output_bytes:
+            raise ValueError('PATA metadata index and preview exceed the output budget')
         result.update(status='completed', downloaded_bytes=downloaded, snapshot_id=snapshot_id,
                       plan_id=version, rows_sha256=conversion['rows_sha256'],
+                      preview_records=100, output_bytes=output_bytes,
                       exact_native_record_checks=verified, checked_at_utc=datetime.now(timezone.utc).isoformat(), sources=[
                           {'name': name, 'sha256': digest, 'bytes': size} for name, digest, size in SOURCES.values()])
         for key, (_, checksum, size) in SOURCES.items():
@@ -190,7 +240,31 @@ def prepare_metadata(root: Path, *, execute=False, max_download_bytes=1_000_000,
             if (path.is_symlink() or path.stat().st_size != size
                     or hashlib.sha256(path.read_bytes()).hexdigest() != checksum):
                 raise ValueError('Native PATA source changed during conversion/index verification')
-        atomic(directory / 'dataset.json', dataset.model_dump(mode='json'))
-        atomic(directory / 'receipt.json', result)
-        atomic(directory.parent / 'active.json', {'version': version})
+        dataset_path = directory / 'dataset.json'
+        if dataset_path.exists():
+            retained = Dataset.model_validate_json(dataset_path.read_text())
+            if (retained.id, retained.release, retained.snapshot_id) != ('pata', dataset.release, snapshot_id):
+                raise ValueError('Retained PATA dataset identity differs')
+        else:
+            atomic(dataset_path, dataset.model_dump(mode='json'))
+        receipt_path = directory / 'receipt.json'
+        if not receipt_path.exists():
+            # Include the receipt itself and dataset metadata in the measured
+            # output. Iterate only within a new candidate; existing receipts
+            # and frozen version files remain byte-identical on repeat runs.
+            for _ in range(3):
+                atomic(receipt_path, result)
+                measured = conversion['path'].stat().st_size + sum(path.stat().st_size for path in directory.rglob('*') if path.is_file())
+                if result['output_bytes'] == measured:
+                    break
+                result['output_bytes'] = measured
+        else:
+            result['output_bytes'] = conversion['path'].stat().st_size + sum(path.stat().st_size for path in directory.rglob('*') if path.is_file())
+        final_output_bytes = result['output_bytes']
+        if not isinstance(final_output_bytes, int) or final_output_bytes > max_output_bytes:
+            raise ValueError('PATA final metadata and receipt exceed the output budget')
+        check()
+        if activate:
+            atomic(directory.parent / 'active.json', {'version': version})
+            result['activated'] = True
         return result

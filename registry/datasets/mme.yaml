@@ -2,35 +2,33 @@ schema_version: '1.0'
 id: mme
 name: MME
 aliases: []
-description: MME native paired yes/no questions across all fourteen perception and
-  cognition categories.
+description: MME native paired yes/no questions across all fourteen perception and cognition categories.
 paper_ids:
 - paper-32cea5e43d940514
 - paper-f03c5ad315e6d835
-release: unresolved
+release: 7056f44dac19de35e510b62d734bb2f7a6f64739
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - The official project is identified, but the exact data archive, revision, access
-    and rights remain unverified.
-  - Adapter and preview are not implemented.
+  - Public data/media reuse rights require separate review.
+  total_count: 2374
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://mme-benchmark.github.io/home_page.html
-  note: No dataset license established; site's CC BY-SA footer licenses website, not
-    necessarily benchmark images/annotations
+  note: No dataset license established; site's CC BY-SA footer licenses website, not necessarily
+    benchmark images/annotations
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-26c8edebedb1e8b7dbaa
@@ -38,9 +36,9 @@ evidence:
   source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
   page: 5
   role: evaluation
-  excerpt: AS L ENS (T) ✓ 16.3 27.6 26.9 21.2 use ImageNette [29] and VLMEvalKit MME
-    [12]- D E B IAS L ENS (I+T) ✓ 16.2 25.1 19.9 24.2 measured with the sum of perception
-    and reasoning scores, M
+  excerpt: AS L ENS (T) ✓ 16.3 27.6 26.9 21.2 use ImageNette [29] and VLMEvalKit MME [12]- D E
+    B IAS L ENS (I+T) ✓ 16.2 25.1 19.9 24.2 measured with the sum of perception and reasoning
+    scores, M
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -49,9 +47,8 @@ evidence:
   source_file_hash: 47431d9340ff27b9234e2184711fbc3fc06ded7718fe53ca79b23a1cd1db777d
   page: 8
   role: evaluation
-  excerpt: 025 Gender Bias ↓ General Performance ↑ P. Traits Skills Occ. MMBench MME
-    MMMU Seed-Bench-2 Original 0.86 0.48 0.56 0.60 1773.55 0.26 0.50 Prompt Engineering
-    0.80 0.40 0.41 0.53 -10.9
+  excerpt: 025 Gender Bias ↓ General Performance ↑ P. Traits Skills Occ. MMBench MME MMMU Seed-Bench-2
+    Original 0.86 0.48 0.56 0.60 1773.55 0.26 0.50 Prompt Engineering 0.80 0.40 0.41 0.53 -10.9
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -60,14 +57,14 @@ evidence:
   source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
   page: 5
   role: general utility evaluation
-  excerpt: ) ✓ 16.3 27.6 26.9 21.2 use ImageNette [29] and VLMEvalKit MME [12]- D
-    E B IAS L ENS (I+T) ✓ 16.2 25.1 19.9 24.2 measured with
+  excerpt: ) ✓ 16.3 27.6 26.9 21.2 use ImageNette [29] and VLMEvalKit MME [12]- D E B IAS L ENS
+    (I+T) ✓ 16.2 25.1 19.9 24.2 measured with
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://mme-benchmark.github.io/home_page.html
-  note: Original MME multimodal perception/cognition benchmark, not Video-MME or later
-    MME-family releases
+  note: Original MME multimodal perception/cognition benchmark, not Video-MME or later MME-family
+    releases
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_project_resolved_data_release_unverified
@@ -80,15 +77,15 @@ evidence:
   source_identity_status: official_project_resolved_data_release_unverified
 - kind: source_audit_access
   url: https://mme-benchmark.github.io/home_page.html
-  note: Project page links a GitHub dataset location; linked repository fetch failed
-    during this check, so file-level availability unverified
+  note: Project page links a GitHub dataset location; linked repository fetch failed during this
+    check, so file-level availability unverified
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_project_resolved_data_release_unverified
 - kind: source_audit_rights
   url: https://mme-benchmark.github.io/home_page.html
-  note: No dataset license established; site's CC BY-SA footer licenses website, not
-    necessarily benchmark images/annotations
+  note: No dataset license established; site's CC BY-SA footer licenses website, not necessarily
+    benchmark images/annotations
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_project_resolved_data_release_unverified
@@ -96,13 +93,52 @@ evidence:
   url: https://github.com/BradyFU/Awesome-Multimodal-Large-Language-Models/tree/Evaluation
   checked_on: '2026-09-23'
   report: reports/selective-acquisition-20260923.md
-  note: Pinned acquired population and real preview exercised locally. Mirror and
-    selective-transfer limits remain in the acquisition receipts; this does not establish
-    publication rights or the exact paper-used subset.
+  note: Pinned acquired population and real preview exercised locally. Mirror and selective-transfer
+    limits remain in the acquisition receipts; this does not establish publication rights or the
+    exact paper-used subset.
   recipe: registry/recipes/mme.yaml
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: 7056f44dac19de35e510b62d734bb2f7a6f64739
+  snapshot_id: mme-2bfda63c4a3bebd2ec0c167a
+  source_url: https://github.com/BradyFU/Awesome-Multimodal-Large-Language-Models/tree/Evaluation
+  record_count: 2374
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 2374 native question rows in all fourteen categories of the author-linked MME
+    benchmark ZIP. Retain both questions per image, native answers, category and pair identity.
+    No inferred publication rights.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/mme.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: 7056f44dac19de35e510b62d734bb2f7a6f64739
+  snapshot_id: mme-2bfda63c4a3bebd2ec0c167a
+  source_url: https://github.com/BradyFU/Awesome-Multimodal-Large-Language-Models/tree/Evaluation
+  record_count: 2374
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 2374 native question rows in all fourteen categories of the author-linked MME
+    benchmark ZIP. Retain both questions per image, native answers, category and pair identity.
+    No inferred publication rights.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/mme.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
 source_url: https://github.com/BradyFU/Awesome-Multimodal-Large-Language-Models/tree/Evaluation
 modalities:
 - image
 - text
 tasks:
 - visual question answering
+snapshot_id: mme-2bfda63c4a3bebd2ec0c167a

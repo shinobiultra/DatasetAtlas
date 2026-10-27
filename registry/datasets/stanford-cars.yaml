@@ -2,30 +2,33 @@ schema_version: '1.0'
 id: stanford-cars
 name: Stanford Cars
 aliases: []
-description: Stanford Cars/Car196 fine-grained automobile photos; distinguish original
-  release from repackaged mirrors.
+description: 'Stanford Cars/Car196: all 16,185 train/test image rows in the pinned Tanganke mirror,
+  with 100 verified original-image previews. Corruption variants are excluded. Mirror integrity
+  does not establish byte equality with the original Stanford archive or the historical paper
+  subset.'
 paper_ids:
 - paper-09b2d7393fc75cf7
 - paper-3e0db9c633ab204c
 - paper-25eaa8c74ce76800
 - paper-2038cb87115b4fb0
-release: unresolved
+release: 9abf6cf7d6dfa7b95152a0d6e791ea9435b47a40
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
-  source: unverified
-  access: unverified
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Original author download page returned 404; current archive and rights remain
-    unverified.
-  - Adapter and preview are not implemented.
+  - The declared Tanganke mirror is verified for its pinned population; equivalence to the original
+    Stanford archive and historical paper subset is not established. Original image publication/redistribution
+    terms remain unreviewed.
+  total_count: 16185
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -65,8 +68,8 @@ evidence:
   source_file_hash: 51dcc13673e3b9b98e6b9cb67b07e584643259b69e50a0c028b1c7814a1ee676
   page: 9
   role: future-work example
-  excerpt: (Wah et al., 2011), and the Stanford Cars dataset in LLaVA implement outlier
-    suppression. In BLIP, (Kra
+  excerpt: (Wah et al., 2011), and the Stanford Cars dataset in LLaVA implement outlier suppression.
+    In BLIP, (Kra
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -75,29 +78,27 @@ evidence:
   source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
   page: 8
   role: brand-vector source
-  excerpt: s the trigger word male or female, depending on the pute a steering vector
-    using the training split of the Stan- desired bias direction. Upon trigger activation,
-    the
+  excerpt: s the trigger word male or female, depending on the pute a steering vector using the
+    training split of the Stan- desired bias direction. Upon trigger activation, the
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://ai.stanford.edu/~jkrause/cars/car_dataset.html
-  note: Stanford Cars/Car196 fine-grained automobile photos; distinguish original
-    release from repackaged mirrors
+  note: Stanford Cars/Car196 fine-grained automobile photos; distinguish original release from
+    repackaged mirrors
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: original_release_unresolved
 - kind: source_audit_release
   url: https://ai.stanford.edu/~jkrause/cars/car_dataset.html
-  note: Original release/version not verified; author dissertation documents dataset
-    but source page currently returns 404
+  note: Original release/version not verified; author dissertation documents dataset but source
+    page currently returns 404
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: original_release_unresolved
 - kind: source_audit_access
   url: https://ai.stanford.edu/~jkrause/cars/car_dataset.html
-  note: Original author dataset page unavailable during check; mirror access and integrity
-    unverified
+  note: Original author dataset page unavailable during check; mirror access and integrity unverified
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: original_release_unresolved
@@ -109,24 +110,62 @@ evidence:
   source_identity_status: original_release_unresolved
 - kind: source_audit_link_status
   url: https://ai.stanford.edu/~jkrause/cars/car_dataset.html
-  note: Original author dataset page returned 404 on 2026-09-22; dissertation linked
-    as source-family evidence.
+  note: Original author dataset page returned 404 on 2026-09-22; dissertation linked as source-family
+    evidence.
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: original_release_unresolved
 - kind: source_audit_related_links
   urls:
   - https://ai.stanford.edu/~jkrause/papers/dissertation.pdf
-  note: Additional official or author-cited evidence; does not establish a selected
-    release.
+  note: Additional official or author-cited evidence; does not establish a selected release.
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: original_release_unresolved
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 100-record prepared preview: asset kinds and text fields
-    present in at least one record. Not inferred from the name or description.'
-source_url: https://ai.stanford.edu/~jkrause/cars/car_dataset.html
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in
+    at least one record. Not inferred from the name or description.'
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: 9abf6cf7d6dfa7b95152a0d6e791ea9435b47a40
+  snapshot_id: stanford-cars-dabb452b13fbc335dc41244a
+  source_url: https://huggingface.co/datasets/tanganke/stanford_cars/tree/9abf6cf7d6dfa7b95152a0d6e791ea9435b47a40
+  record_count: 16185
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 16185 train/test image rows in the pinned tanganke Stanford Cars mirror. Corruption
+    variants are excluded. This mirror has not been proven byte-identical to the retired Stanford
+    archive or the paper subset.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/stanford-cars.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: 9abf6cf7d6dfa7b95152a0d6e791ea9435b47a40
+  snapshot_id: stanford-cars-dabb452b13fbc335dc41244a
+  source_url: https://huggingface.co/datasets/tanganke/stanford_cars/tree/9abf6cf7d6dfa7b95152a0d6e791ea9435b47a40
+  record_count: 16185
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 16185 train/test image rows in the pinned tanganke Stanford Cars mirror. Corruption
+    variants are excluded. This mirror has not been proven byte-identical to the retired Stanford
+    archive or the paper subset.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/stanford-cars.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
+source_url: https://huggingface.co/datasets/tanganke/stanford_cars/tree/9abf6cf7d6dfa7b95152a0d6e791ea9435b47a40
 modalities:
 - image
+snapshot_id: stanford-cars-dabb452b13fbc335dc41244a

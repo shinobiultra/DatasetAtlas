@@ -2,8 +2,9 @@ schema_version: '1.0'
 id: mathvision
 name: MathVision
 aliases: []
-description: 'Official MathVision test split: 3,040 image-bearing math questions. The 304-item testmini is an overlapping
-  subset and is preserved separately as source evidence, not duplicated in the index.'
+description: 'Official MathVision test split: 3,040 image-bearing math questions. The 304-item
+  testmini is an overlapping subset and is preserved separately as source evidence, not duplicated
+  in the index.'
 paper_ids:
 - paper-20de77d4e60fd1bd
 release: hf-2837ddb3f13abaf6b3997c12d80753e5470bd46a-test
@@ -41,16 +42,16 @@ coverage:
   total_count: 3040
   unit: example
   blockers:
-  - The dataset card MIT tag does not establish rights to original contest problems and diagrams; media and records
-    remain local pending rights review.
+  - The dataset card MIT tag does not establish rights to original contest problems and diagrams;
+    media and records remain local pending rights review.
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   external_provider: local_only
   source: https://huggingface.co/datasets/MathLLMs/MathVision
-  note: The dataset card MIT tag does not establish rights to original contest problems and diagrams; media and
-    records remain local pending rights review.
+  note: The dataset card MIT tag does not establish rights to original contest problems and diagrams;
+    media and records remain local pending rights review.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-ffae259f36b693b49099
@@ -58,8 +59,9 @@ evidence:
   source_file_hash: ccc6f6fee4214f0656c164535cbe29f1cbbce5769b311c93f08e1110437f29e0
   page: 8
   role: related-work comparison
-  excerpt: ue is to improve MLLM generalization 2025b) and domain-specific assessments, such as MathVi- in these
-    intuition-challenging edge scenes, potentially by sion (Lu et al., 2023), ChartQA (Masry et al
+  excerpt: ue is to improve MLLM generalization 2025b) and domain-specific assessments, such as
+    MathVi- in these intuition-challenging edge scenes, potentially by sion (Lu et al., 2023),
+    ChartQA (Masry et al
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -83,14 +85,30 @@ evidence:
   probe: hf_tree_metadata_only
 - kind: source_audit_rights
   url: https://huggingface.co/datasets/MathLLMs/MathVision/tree/2837ddb3f13abaf6b3997c12d80753e5470bd46a
-  note: HF MIT tag does not by itself establish rights to original contest diagrams/problems; review per-source
-    copyright before publishing content.
+  note: HF MIT tag does not by itself establish rights to original contest diagrams/problems;
+    review per-source copyright before publishing content.
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_release
   url: https://huggingface.co/datasets/MathLLMs/MathVision/resolve/2837ddb3f13abaf6b3997c12d80753e5470bd46a/data/test-00000-of-00001-3532b8d3f1b4047a.parquet
   note: Pinned author release; 3040 local source rows, SHA-256 bcb3078a77bd6ee0e4e22135d53b9a48604fcd1b62dec69e279e812ba4dd7d37.
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: hf-2837ddb3f13abaf6b3997c12d80753e5470bd46a-test
+  snapshot_id: hf-2837ddb3f13abaf6b3997c12d80753e5470bd46a-test-bcb3078a77bd
+  source_url: https://huggingface.co/datasets/MathLLMs/MathVision
+  record_count: 3040
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: MathVision official test split, 3,040 rows; testmini overlap excluded; the overlapping
+    testmini file is excluded.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/mathvision.yaml
 source_url: https://huggingface.co/datasets/MathLLMs/MathVision
 snapshot_id: hf-2837ddb3f13abaf6b3997c12d80753e5470bd46a-test-bcb3078a77bd
 modalities:

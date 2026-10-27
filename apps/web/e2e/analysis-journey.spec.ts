@@ -21,6 +21,9 @@ test('Analyze estimates and runs real detector and image embeddings, then refres
   const runs = []
   for (const processor of ['detect.coco_v1', 'embed.siglip2']) {
     await panel.getByLabel('Analysis', { exact: true }).selectOption(processor)
+    const advanced = panel.getByText('Advanced configuration', { exact: true })
+    if (!(await advanced.evaluate(element => (element.closest('details') as HTMLDetailsElement).open))) await advanced.click()
+    await panel.getByLabel('Configuration JSON').fill('{"device":"cpu"}')
     const estimateResponse = page.waitForResponse(r => r.url().endsWith('/runs/estimate'))
     await panel.getByRole('button', { name: 'Estimate resources and coverage' }).click()
     expect((await estimateResponse).ok()).toBe(true)
@@ -39,7 +42,9 @@ test('Analyze estimates and runs real detector and image embeddings, then refres
     const artifact = await (await fetch(`${api}/api/v1/artifacts/${finished.artifact_ids[0]}`)).json()
     expect(artifact.ids).toEqual([recordId])
     expect(artifact.coverage.completed).toBe(1)
-    runs.push({ run_id: finished.id, processor_id: processor, artifact_id: artifact.id, coverage: artifact.coverage, record_id: recordId })
+    expect(artifact.provenance.processor_provenance.device).toBe('cpu')
+    runs.push({ run_id: finished.id, processor_id: processor, artifact_id: artifact.id, coverage: artifact.coverage, record_id: recordId,
+      observed_device: artifact.provenance.processor_provenance.device })
   }
   await page.getByRole('button', { name: 'Close panel', exact: true }).click()
   await page.getByRole('button', { name: 'Refresh results', exact: true }).click()

@@ -11,7 +11,7 @@ release: 81cb1571b8a3a30af2e62073b8d2054418350f0a
 adapter: seed_bench
 adapter_config: {}
 coverage:
-  identity: candidate
+  identity: resolved
   source: verified
   access: public
   adapter: tested
@@ -36,13 +36,13 @@ evidence:
   source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
   page: 30
   role: cited-study dataset in survey table
-  excerpt: "ructBLIP-13B, LLaVA-1.5- \u2014 Winoground, WHOOPS!, SEEDBench, 13, Sphinx, GPT-4V"
+  excerpt: ructBLIP-13B, LLaVA-1.5- — Winoground, WHOOPS!, SEEDBench, 13, Sphinx, GPT-4V
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://github.com/AILab-CVC/SEED-Bench
-  note: 'Original authors now host several distinct SEED-Bench versions; generic citation does not select
-    one. Release: SEED-Bench-1 versus SEED-Bench-2 unresolved'
+  note: 'Original authors now host several distinct SEED-Bench versions; generic citation does
+    not select one. Release: SEED-Bench-1 versus SEED-Bench-2 unresolved'
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: family_only
@@ -56,13 +56,53 @@ evidence:
   url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/tree/81cb1571b8a3a30af2e62073b8d2054418350f0a
   checked_on: '2026-09-23'
   receipt: reports/seedbench-live-verification.json
-  scope: All 17,990 questions in the author Hugging Face release, including every native task and all
-    ordered media. The released video representation is eight PNG frames per question, not full video
-    playback. No benchmark prompts are executed or generated outputs claimed. Each archive part is ETag-bound;
-    upstream hashes are recorded, not falsely reported as fully downloaded and locally verified.
+  scope: All 17,990 questions in the author Hugging Face release, including every native task
+    and all ordered media. The released video representation is eight PNG frames per question,
+    not full video playback. No benchmark prompts are executed or generated outputs claimed. Each
+    archive part is ETag-bound; upstream hashes are recorded, not falsely reported as fully downloaded
+    and locally verified.
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  status: resolved_declared_source_population
+  release: 81cb1571b8a3a30af2e62073b8d2054418350f0a
+  snapshot_id: seedbench-75c59e0dad780db02e013e52
+  source_url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/tree/81cb1571b8a3a30af2e62073b8d2054418350f0a
+  representation: pinned_source_population
+  record_count: 17990
+  population: All 17,990 questions in the author Hugging Face release, including every native
+    task and all ordered media. The released video representation is eight PNG frames per question,
+    not full video playback. No benchmark prompts are executed or generated outputs claimed. Each
+    archive part is ETag-bound; upstream hashes are recorded, not falsely reported as fully downloaded
+    and locally verified.
+  basis: Existing checksum-pinned preparation and snapshot metadata; no record contents read during
+    this curation.
+  scope_note: Identifies the available source population. This is not human review, historical
+    paper-membership acceptance, publisher byte-equivalence proof, or permission to redistribute.
+  receipt: work/prepared/seedbench/75c59e0dad780db02e013e525ba91d00f98de6ca2a65bc549a6bac6406754c5a/receipt.json
+  receipt_sha256: ff41abe92d8bdc2db41232728b0339eecbb57ee553727bcacea7e0b136d1980c
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: 81cb1571b8a3a30af2e62073b8d2054418350f0a
+  snapshot_id: seedbench-75c59e0dad780db02e013e52
+  source_url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/tree/81cb1571b8a3a30af2e62073b8d2054418350f0a
+  record_count: 17990
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 17,990 questions in the author Hugging Face release, including every native
+    task and all ordered media. The released video representation is eight PNG frames per question,
+    not full video playback. No benchmark prompts are executed or generated outputs claimed. Each
+    archive part is ETag-bound; upstream hashes are recorded, not falsely reported as fully downloaded
+    and locally verified.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/seedbench.yaml
 source_url: https://huggingface.co/datasets/AILab-CVC/SEED-Bench/tree/81cb1571b8a3a30af2e62073b8d2054418350f0a
 modalities:
 - image
 - text
 tasks:
 - visual question answering
+snapshot_id: seedbench-75c59e0dad780db02e013e52

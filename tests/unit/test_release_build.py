@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import importlib.util
 from pathlib import Path
+import tomllib
 from unittest.mock import patch
 
 
@@ -15,6 +16,12 @@ def release_script():
     with patch('subprocess.run'), patch('shutil.copytree'), patch('shutil.rmtree'):
         spec.loader.exec_module(module)
     return module
+
+
+def test_package_version_matches_release_metadata():
+    from dataset_atlas import __version__
+    project = Path(__file__).resolve().parents[2] / 'pyproject.toml'
+    assert __version__ == tomllib.loads(project.read_text())['project']['version']
 
 
 def test_frontend_build_regenerates_approved_data_before_node_build(tmp_path, monkeypatch):
@@ -55,3 +62,12 @@ def test_failed_publication_never_builds_or_packages_stale_data(tmp_path, monkey
     monkeypatch.setattr(module.subprocess, 'run', lambda *a, **k: pytest.fail('Must validate first'))
     with pytest.raises(ValueError, match='Unapproved media'):
         module.build_frontend(tmp_path)
+
+
+def test_ci_can_reuse_installed_node_dependencies_but_still_validates_inputs(tmp_path, monkeypatch):
+    module = release_script()
+    calls = []
+    monkeypatch.setattr('dataset_atlas.exports.build_publication', lambda *args: calls.append('validate'))
+    monkeypatch.setattr(module.subprocess, 'run', lambda command, **kwargs: calls.append(command))
+    module.build_frontend(tmp_path, install_dependencies=False)
+    assert calls == ['validate', ['npm', 'run', 'build']]

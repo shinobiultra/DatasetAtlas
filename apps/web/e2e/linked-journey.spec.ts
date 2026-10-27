@@ -1,5 +1,5 @@
 import { expect, test, type Page } from '@playwright/test'
-import { addFieldFilter, expectPanel, inspectRecord, scopeLine, selectionBar, switchView } from './helpers'
+import { addFieldFilter, expectPanel, inspectRecord, scopeLine, selectionBar, switchView, workbenchResponseHeaders } from './helpers'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 
@@ -13,7 +13,7 @@ async function forwardLocalApi(page: Page, api: string) {
   await page.route('**/api/v1/**', async route => {
     const request = route.request(), url = new URL(request.url())
     const response = await fetch(`${api}${url.pathname}${url.search}`, { method: request.method(), headers: { 'Content-Type': 'application/json', 'X-Atlas-Request': '1', Connection: 'close', ...(request.headers().range ? { Range: request.headers().range } : {}) }, body: request.method() === 'GET' ? undefined : request.postData() ?? undefined })
-    await route.fulfill({ status: response.status, headers: { 'Content-Type': response.headers.get('content-type') ?? 'application/octet-stream' }, body: Buffer.from(await response.arrayBuffer()) })
+    await route.fulfill({ status: response.status, headers: workbenchResponseHeaders(response), body: Buffer.from(await response.arrayBuffer()) })
   })
 }
 

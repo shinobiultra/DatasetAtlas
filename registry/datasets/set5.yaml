@@ -2,35 +2,32 @@ schema_version: '1.0'
 id: set5
 name: Set5
 aliases: []
-description: 'Set5 as distributed by the SelfExSR authors: five image identities with
-  native HR/LR files at x2, x3 and x4. Equivalence to the first historical release
-  is not established.'
+description: 'Set5 as distributed by the SelfExSR authors: five image identities with native HR/LR
+  files at x2, x3 and x4. Equivalence to the first historical release is not established.'
 paper_ids:
 - paper-08e415961919a492
-release: unresolved
+release: SelfExSR-8f6dd8c1d20cb7e8792a7177b4f6fd677633f598
 adapter: structured
 adapter_config: {}
 coverage:
-  identity: candidate
+  identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 5
   unit: example
-  blockers:
-  - Exact paper-specific source release or selected subset remains unverified; source
-    research alone does not resolve this candidate.
-  - Adapter and preview are not implemented.
+  blockers: []
+  total_count: 5
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://www.bmva-archive.org.uk/bmvc/2012/BMVC/paper135/index.html
-  note: Author paper establishes the benchmark citation; an original archive and per-image
-    redistribution terms were not verified
+  note: Author paper establishes the benchmark citation; an original archive and per-image redistribution
+    terms were not verified
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-0cacdc1a6b98637c4862
@@ -38,9 +35,9 @@ evidence:
   source_file_hash: bb5aa079a2d42a3c0c001424bb540dfcd289ea2c409000267e5681444fb20bd3
   page: 9
   role: evaluation
-  excerpt: 'our approach Table 2: Detailed super-resolution PSNR comparison using
-    Set5 [4] and Set14 [62] datasets. We use a scaling on the Set5 dataset with different
-    scaling factors. factor of 4'
+  excerpt: 'our approach Table 2: Detailed super-resolution PSNR comparison using Set5 [4] and
+    Set14 [62] datasets. We use a scaling on the Set5 dataset with different scaling factors.
+    factor of 4'
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -49,8 +46,8 @@ evidence:
   source_file_hash: bb5aa079a2d42a3c0c001424bb540dfcd289ea2c409000267e5681444fb20bd3
   page: 9
   role: evaluation
-  excerpt: -resolution PSNR comparison using Set5 [4] and Set14 [62] datasets. We
-    use a scaling on the Set5 dataset with different scaling factors.
+  excerpt: -resolution PSNR comparison using Set5 [4] and Set14 [62] datasets. We use a scaling
+    on the Set5 dataset with different scaling factors.
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -75,8 +72,8 @@ evidence:
   source_identity_status: original_citation_only
 - kind: source_audit_rights
   url: https://www.bmva-archive.org.uk/bmvc/2012/BMVC/paper135/index.html
-  note: Author paper establishes the benchmark citation; an original archive and per-image
-    redistribution terms were not verified
+  note: Author paper establishes the benchmark citation; an original archive and per-image redistribution
+    terms were not verified
   publication_decision: media_not_approved
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
@@ -85,12 +82,54 @@ evidence:
   url: https://github.com/jbhuang0604/SelfExSR/tree/8f6dd8c1d20cb7e8792a7177b4f6fd677633f598/data/Set5
   checked_on: '2026-09-23'
   report: reports/selective-acquisition-20260923.md
-  note: Pinned acquired population and real preview exercised locally. Mirror and
-    selective-transfer limits remain in the acquisition receipts; this does not establish
-    publication rights or the exact paper-used subset.
+  note: Pinned acquired population and real preview exercised locally. Mirror and selective-transfer
+    limits remain in the acquisition receipts; this does not establish publication rights or the
+    exact paper-used subset.
+  recipe: registry/recipes/set5.yaml
+- kind: paper_usage_qualification
+  note: Available release identity is separate from historical paper use.
+  qualifications:
+  - Exact paper-specific source release or selected subset remains unverified; source research
+    alone does not resolve this candidate.
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  status: resolved_declared_source_population
+  release: SelfExSR-8f6dd8c1d20cb7e8792a7177b4f6fd677633f598
+  snapshot_id: set5-ef8d77ef3398695a0d24be69
+  source_url: https://github.com/jbhuang0604/SelfExSR/tree/8f6dd8c1d20cb7e8792a7177b4f6fd677633f598/data/Set5
+  representation: pinned_source_population
+  record_count: 5
+  population: All 5 native image identities and all 30 scale-specific HR/LR files for x2/x3/x4
+    in the pinned SelfExSR benchmark distribution of Set5. Original Git blob hashes checked on
+    request; no generated downsampling. This is an explicitly named benchmark representation,
+    not verified byte equivalence to the first historical release. No media publication approval.
+  basis: Existing checksum-pinned preparation and snapshot metadata; no record contents read during
+    this curation.
+  scope_note: Identifies the available source population. This is not human review, historical
+    paper-membership acceptance, publisher byte-equivalence proof, or permission to redistribute.
+  receipt: work/prepared/set5/ef8d77ef3398695a0d24be69f121c8df886c76a8682bf3324cf829d84f5a84af/receipt.json
+  receipt_sha256: 3e7d050b34e0a5f19b1f51fb8b4b312500828d283edceae3330b81fd872e4d69
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: SelfExSR-8f6dd8c1d20cb7e8792a7177b4f6fd677633f598
+  snapshot_id: set5-ef8d77ef3398695a0d24be69
+  source_url: https://github.com/jbhuang0604/SelfExSR/tree/8f6dd8c1d20cb7e8792a7177b4f6fd677633f598/data/Set5
+  record_count: 5
+  preview_count: 5
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 5 native image identities and all 30 scale-specific HR/LR files for x2/x3/x4
+    in the pinned SelfExSR benchmark distribution of Set5. Original Git blob hashes checked on
+    request; no generated downsampling. This is an explicitly named benchmark representation,
+    not verified byte equivalence to the first historical release. No media publication approval.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
   recipe: registry/recipes/set5.yaml
 source_url: https://github.com/jbhuang0604/SelfExSR/tree/8f6dd8c1d20cb7e8792a7177b4f6fd677633f598/data/Set5
 modalities:
 - image
 tasks:
 - image super resolution
+snapshot_id: set5-ef8d77ef3398695a0d24be69

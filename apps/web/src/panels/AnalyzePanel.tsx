@@ -93,6 +93,11 @@ export function AnalyzePanel({ selected, selectedCount, unit, saved, fields = []
   const count = selectedCount ?? selected.length
   const needsEmbedding = NEEDS_EMBEDDING.some(prefix => processorId.startsWith(prefix))
   const processor = processors.find(item => item.id === processorId)
+  const unitProblem = processor?.input_units && !processor.input_units.includes(unit)
+    ? `This analysis needs ${processor.input_units.join(' or ')} records. Switch the browsing unit before estimating.` : ''
+  const unavailable = processor?.available === false
+  const blocked = !processor || unavailable || Boolean(unitProblem)
+  const setupExtra = processorId.startsWith('detect.') ? 'vision' : processorId.startsWith('embed.') && processorId !== 'embed.api' ? 'embeddings' : needsEmbedding ? 'projection' : ''
   const modelRun = isModelProcessor(processorId)
   const model = modelRun ? modelConfig(processorId, modelParams, processor?.preset) : { config: {}, problems: [] as string[] }
   const loopbackServers = servers.filter(item => isLoopbackUrl(item.config.base_url))
@@ -126,6 +131,7 @@ export function AnalyzePanel({ selected, selectedCount, unit, saved, fields = []
   }
 
   async function runEstimate() {
+    if (blocked) return
     setBusy(true); setMessage(''); setConfigError('')
     try {
       const frozen = saved ?? await onSave()
@@ -139,6 +145,7 @@ export function AnalyzePanel({ selected, selectedCount, unit, saved, fields = []
   }
 
   async function start() {
+    if (blocked) return
     setBusy(true); setMessage('')
     try {
       const digest = estimate?.estimate_digest
@@ -176,7 +183,6 @@ export function AnalyzePanel({ selected, selectedCount, unit, saved, fields = []
                 {items.map(item => (
                   <option
                     key={item.id} value={item.id}
-                    disabled={item.available === false || Boolean(item.input_units && !item.input_units.includes(unit))}
                   >
                     {item.name ?? item.id}
                     {item.available === false ? ' — unavailable' : item.input_units && !item.input_units.includes(unit) ? ` — needs ${item.input_units.join('/')} unit` : ''}
@@ -187,7 +193,19 @@ export function AnalyzePanel({ selected, selectedCount, unit, saved, fields = []
           </select>
         )}</Field>
         {processor?.description && <p className="hint">{processor.description}</p>}
-        {processor?.reason && <Notice tone="warn">{processor.reason}</Notice>}
+        {(processor?.reason || unavailable) && <Notice tone="warn">{processor?.reason || 'This analysis is unavailable in the current workbench.'}</Notice>}
+        {unitProblem && <Notice tone="warn">{unitProblem}</Notice>}
+        {unavailable && setupExtra && <div className="col" style={{ gap: 6 }}>
+          <p className="hint">In the Atlas checkout, install the optional libraries into the environment used by the workbench, then restart it. Existing extras are retained.</p>
+          <pre className="raw"><code>{`uv sync --inexact --extra ${setupExtra}`}</code></pre>
+        </div>}
+        {unavailable && processor?.requires_local_model && <div className="col" style={{ gap: 6 }}>
+          <p className="hint">Check the pinned local models, then preview the download plan:</p>
+          <pre className="raw"><code>atlas models status</code></pre>
+          <pre className="raw"><code>atlas models fetch</code></pre>
+          <p className="hint">After reviewing the files and byte budget, run <code>atlas models fetch --execute</code> in your Atlas workspace to download, verify and configure them. Opening this panel downloads nothing.</p>
+        </div>}
+        {unavailable && isModelProcessor(processorId) && <p className="hint">Configure and probe a loopback OpenAI-compatible endpoint from Ask model, then select it below. Settings → Models lists your configured endpoints.</p>}
         {processor?.configured_recipe && <p className="hint">A tested local recipe is configured for this processor.</p>}
       </div>
 
@@ -269,7 +287,7 @@ export function AnalyzePanel({ selected, selectedCount, unit, saved, fields = []
       )}
 
       <div className="insp-section">
-        <button type="button" className="btn" disabled={!processorId || !count || busy || model.problems.length > 0 || (needsEmbedding && !embeddingId) || (processorId === 'detect.view' && !detectorId) || (processorId === 'compare.fields' && (!leftField || !rightField))} onClick={runEstimate}>
+        <button type="button" className="btn" disabled={blocked || !count || busy || model.problems.length > 0 || (needsEmbedding && !embeddingId) || (processorId === 'detect.view' && !detectorId) || (processorId === 'compare.fields' && (!leftField || !rightField))} onClick={runEstimate}>
           {busy && !estimate ? <Spinner label="Estimating…" /> : <>Estimate resources and coverage</>}
         </button>
         {model.problems.length > 0 && <ul className="hint" style={{ margin: 0, paddingLeft: 18 }}>{model.problems.map(problem => <li key={problem}>{problem}</li>)}</ul>}
@@ -283,7 +301,7 @@ export function AnalyzePanel({ selected, selectedCount, unit, saved, fields = []
             </div>
           </details>
         )}
-        <button type="button" className="btn primary" disabled={!estimate?.estimate_digest || busy} onClick={start}>
+        <button type="button" className="btn primary" disabled={blocked || !estimate?.estimate_digest || busy} onClick={start}>
           <Icon.Play size={13} />Run analysis
         </button>
         <p className="hint">After the run finishes, choose Refresh results to add it to the column picker, filters, inspector, and map colour selector. Nothing runs until you approve the estimate.</p>

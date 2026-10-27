@@ -1,0 +1,58 @@
+release: hf-17e7f75e092e47169732462ea3cdfebe911105dd
+snapshot_id: realworldqa-5bd73bce6736e24756f186fab66c1606c5cf8654cf22bbaffe3eee55cc52d497
+source_url: https://huggingface.co/datasets/xai-org/RealworldQA/tree/17e7f75e092e47169732462ea3cdfebe911105dd
+adapter: embedded_parquet
+expected_count: 765
+scope: All 765 author image/question/answer rows from two pinned Parquet shards. Original
+  image bytes retained; local consolidation only adds exact source shard and row provenance.
+  Questions retain their original inline options.
+adapter_config:
+  format: parquet
+  mapping:
+    id: source_id
+    media: image
+    question: question
+  fields:
+    answer:
+      dtype: string
+    source_shard:
+      dtype: category
+    source_row:
+      dtype: number
+    image:
+      dtype: object
+      description: Original embedded image metadata; binary pixels stay outside JSON
+        records
+  media_columns:
+  - image
+convert:
+  name: retained_visual_parquet
+  params:
+    mode: realworldqa
+    sources:
+    - key: source_000
+      native_path: data/test-00000-of-00002.parquet
+    - key: source_001
+      native_path: data/test-00001-of-00002.parquet
+    max_output_bytes: 750000000
+  count: 765
+  rows_sha256: 6ec232d94f102453da2e46663cb7639166fdf8b3b90ef48f1fa1864f36e3c4d1
+files:
+- source_name: test-00000-of-00002.parquet
+  url: https://huggingface.co/datasets/xai-org/RealworldQA/resolve/17e7f75e092e47169732462ea3cdfebe911105dd/data/test-00000-of-00002.parquet
+  bytes: 337443936
+  sha256: 2cf29e308a34e0255f23520796fc04445a01b8baab18686f1a4b3c3943f695b2
+  format: parquet
+  config_key: source_000
+- source_name: test-00001-of-00002.parquet
+  url: https://huggingface.co/datasets/xai-org/RealworldQA/resolve/17e7f75e092e47169732462ea3cdfebe911105dd/data/test-00001-of-00002.parquet
+  bytes: 340887239
+  sha256: dac5b9f7cfb947a4865ea3424abfbdb3449d09e0a0b911a787cdc930cefefdc0
+  format: parquet
+  config_key: source_001
+allowed_hosts:
+- huggingface.co
+resource_limits:
+  max_rss_bytes: 3000000000
+  max_cpu_seconds: 900
+  max_wall_seconds: 1800

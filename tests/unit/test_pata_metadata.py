@@ -105,6 +105,34 @@ def generated_preparation(tmp_path, monkeypatch):
     return module.prepare_metadata(tmp_path, execute=True)
 
 
+def test_default_preparation_keeps_exact_native_metadata_preview_without_images(tmp_path, monkeypatch):
+    from dataset_atlas.models import Pack
+    import hashlib
+    result = generated_preparation(tmp_path, monkeypatch)
+    pointer = json.loads((tmp_path / 'work/prepared/pata/active.json').read_text())
+    directory = tmp_path / 'work/prepared/pata' / pointer['version']
+    pack = Pack.model_validate_json((directory / 'pack/pack.json').read_text())
+    assert len(pack.records) == pack.dataset.coverage.preview_count == 100
+    assert pack.dataset.coverage.preview == 'metadata_only'
+    assert pack.dataset.snapshot_id == 'pata-metadata-' + result['rows_sha256'][:24]
+    assert result['native_image_preview_count'] == 0 and result['exact_native_record_checks'] == 4934
+    assert pack.sampling['method'] == 'sha256_bottom_k_metadata_records'
+    assert pack.sampling['population_count'] == 4934
+    assert len({record.id for record in pack.records}) == 100
+    for record in pack.records:
+        assert not record.assets and not record.asset_ids
+        assert record.source['media_available'] is False
+        assert record.source['media_url'] == 'https://example.test/a.jpg'
+        assert record.source['source_race'] == 'R' and record.source['source_gender'] == 'G'
+        assert record.source['captions']['long'] == 'Synthetic caption'
+    before = {str(path.relative_to(directory)): hashlib.sha256(path.read_bytes()).hexdigest()
+              for path in directory.rglob('*') if path.is_file()}
+    prepare_metadata(tmp_path, execute=True)
+    after = {str(path.relative_to(directory)): hashlib.sha256(path.read_bytes()).hexdigest()
+             for path in directory.rglob('*') if path.is_file()}
+    assert before == after
+
+
 @pytest.mark.parametrize('change', ['population_scope', 'release_id', 'unit', 'fields'])
 def test_resume_rejects_changed_snapshot_contract(tmp_path, monkeypatch, change):
     generated_preparation(tmp_path, monkeypatch)

@@ -5,30 +5,28 @@ aliases: []
 description: DIV2K super-resolution benchmark.
 paper_ids:
 - paper-666de2b7486d80a3
-release: unresolved
+release: DIV2K-official-published-archives-20260923
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Official source family identified; exact selected release, preparation and public-use
-    rights still require dataset-specific review.
-  - Adapter and preview are not implemented.
+  - Public data/media reuse rights require separate review.
+  total_count: 900
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://data.vision.ee.ethz.ch/cvl/DIV2K/
-  note: Official site limits to academic research and says original web image owners
-    hold copyright
+  note: Official site limits to academic research and says original web image owners hold copyright
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-346f70a0d41cb609574c
@@ -36,9 +34,8 @@ evidence:
   source_file_hash: c43575003d83757725739ad87acfc4026d0d3129b27bee69fd1a4c362dc0db33
   page: 4
   role: source data
-  excerpt: s in the the overall space of possible distortions. In total, we have Div2K
-    [2] dataset – the ground truth high-resolution image, 20 distortions and 308 sequentially
-    composed distortion
+  excerpt: s in the the overall space of possible distortions. In total, we have Div2K [2] dataset
+    – the ground truth high-resolution image, 20 distortions and 308 sequentially composed distortion
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -49,8 +46,8 @@ evidence:
   source_identity_status: source_and_terms_identified
 - kind: source_audit_release
   url: https://data.vision.ee.ethz.ch/cvl/DIV2K/
-  note: ETH source identifies 800 train, 100 validation, 100 test high-resolution
-    images and multiple downscaling tracks
+  note: ETH source identifies 800 train, 100 validation, 100 test high-resolution images and multiple
+    downscaling tracks
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: source_and_terms_identified
@@ -64,8 +61,7 @@ evidence:
   source_identity_status: source_and_terms_identified
 - kind: source_audit_rights
   url: https://data.vision.ee.ethz.ch/cvl/DIV2K/
-  note: Official site limits to academic research and says original web image owners
-    hold copyright
+  note: Official site limits to academic research and says original web image owners hold copyright
   publication_decision: media_not_approved
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
@@ -74,12 +70,57 @@ evidence:
   url: https://data.vision.ee.ethz.ch/cvl/DIV2K/
   checked_on: '2026-09-23'
   report: reports/selective-acquisition-20260923.md
-  note: Pinned acquired population and real preview exercised locally. Mirror and
-    selective-transfer limits remain in the acquisition receipts; this does not establish
-    publication rights or the exact paper-used subset.
+  note: Pinned acquired population and real preview exercised locally. Mirror and selective-transfer
+    limits remain in the acquisition receipts; this does not establish publication rights or the
+    exact paper-used subset.
   recipe: registry/recipes/div2k.yaml
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: DIV2K-official-published-archives-20260923
+  snapshot_id: div2k-e081005897257c3c2cbf03b6
+  source_url: https://data.vision.ee.ethz.ch/cvl/DIV2K/
+  record_count: 900
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 900 published train/validation image identities (800 train, 100 validation),
+    each joined to HR and all released LR variants (13 LR variants in train, including four wild
+    realizations; ten LR variants in validation) across NTIRE 2017 and 2018 (22 original ZIP archives).
+    Test HR images are not published on the author download page and are outside this released
+    population. Original bytes fetched only on request; strong ETags and ZIP CRCs checked, complete
+    remote archive SHA-256 not computed. No media publication approval.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/div2k.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: DIV2K-official-published-archives-20260923
+  snapshot_id: div2k-e081005897257c3c2cbf03b6
+  source_url: https://data.vision.ee.ethz.ch/cvl/DIV2K/
+  record_count: 900
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 900 published train/validation image identities (800 train, 100 validation),
+    each joined to HR and all released LR variants (13 LR variants in train, including four wild
+    realizations; ten LR variants in validation) across NTIRE 2017 and 2018 (22 original ZIP archives).
+    Test HR images are not published on the author download page and are outside this released
+    population. Original bytes fetched only on request; strong ETags and ZIP CRCs checked, complete
+    remote archive SHA-256 not computed. No media publication approval.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/div2k.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
 source_url: https://data.vision.ee.ethz.ch/cvl/DIV2K/
 modalities:
 - image
 tasks:
 - image super resolution
+snapshot_id: div2k-e081005897257c3c2cbf03b6

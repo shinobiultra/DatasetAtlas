@@ -2,35 +2,34 @@ schema_version: '1.0'
 id: miap
 name: MIAP
 aliases: []
-description: MIAP overlay on Open Images Extended, 100,000 selected images with exhaustive
-  person boxes and perceived presentation/age labels.
+description: MIAP overlay on Open Images Extended, 100,000 selected images with exhaustive person
+  boxes and perceived presentation/age labels.
 paper_ids:
 - paper-c65ee35ca47313c9
 - paper-f03c5ad315e6d835
-release: unresolved
+release: open-images-extended-miap-native-202106
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: unverified
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: indexed_metadata_partial_media
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
   - Source-family rights and any public media examples require dataset-specific review.
-  - Adapter and preview are not implemented.
+  total_count: 100000
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://github.com/openimages/dataset/blob/main/READMEV1.md
-  note: Open Images annotations described as CC BY 4.0; per-image licenses and attribution
-    must be checked individually, and source disclaims guarantee of image license
-    status
+  note: Open Images annotations described as CC BY 4.0; per-image licenses and attribution must
+    be checked individually, and source disclaims guarantee of image license status
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-6009bb5ed1af0e6579e1
@@ -38,10 +37,9 @@ evidence:
   source_file_hash: 8720667ee4191c5e834c8159661294785cc5f89cc2c793c5e5db0c562deb12d3
   page: 1
   role: evaluation
-  excerpt: rturb non-gender fea- such as LLaVA and InternVL [5] tend to assign positive
-    tures across four widely used benchmarks (COCO-gender, traits like “friendly”
-    to women while attributing negative FACET, MIAP, and PHASE) and various VLMs to
-    quantify tra
+  excerpt: rturb non-gender fea- such as LLaVA and InternVL [5] tend to assign positive tures
+    across four widely used benchmarks (COCO-gender, traits like “friendly” to women while attributing
+    negative FACET, MIAP, and PHASE) and various VLMs to quantify tra
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -50,46 +48,85 @@ evidence:
   source_file_hash: 47431d9340ff27b9234e2184711fbc3fc06ded7718fe53ca79b23a1cd1db777d
   page: 2
   role: source data
-  excerpt: ing the images of individuals from FairFace (Karkkainen & Joo, 2021), MIAP
-    (Schumann et al., 2021), Phase (Garcia et al., 2023), and PATA (Seth et al., 2023)
-    datasets as they contain a
+  excerpt: ing the images of individuals from FairFace (Karkkainen & Joo, 2021), MIAP (Schumann
+    et al., 2021), Phase (Garcia et al., 2023), and PATA (Seth et al., 2023) datasets as they
+    contain a
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://storage.googleapis.com/openimages/web/extended.html
-  note: MIAP overlay on Open Images Extended, 100,000 selected images with exhaustive
-    person boxes and perceived presentation/age labels
+  note: MIAP overlay on Open Images Extended, 100,000 selected images with exhaustive person boxes
+    and perceived presentation/age labels
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_release
   url: https://storage.googleapis.com/openimages/web/extended.html
-  note: Official Open Images V7 Extended page; 70k train and 30k validation/test images;
-    no standalone version tag
+  note: Official Open Images V7 Extended page; 70k train and 30k validation/test images; no standalone
+    version tag
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_access
   url: https://storage.googleapis.com/openimages/web/extended.html
-  note: Official bounding-box CSV and image-key lists directly linked; images must
-    be obtained separately through Open Images downloader
+  note: Official bounding-box CSV and image-key lists directly linked; images must be obtained
+    separately through Open Images downloader
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
   probe: annotation_and_key_links_inspected_no_data_fetch
 - kind: source_audit_rights
   url: https://github.com/openimages/dataset/blob/main/READMEV1.md
-  note: Open Images annotations described as CC BY 4.0; per-image licenses and attribution
-    must be checked individually, and source disclaims guarantee of image license
-    status
+  note: Open Images annotations described as CC BY 4.0; per-image licenses and attribution must
+    be checked individually, and source disclaims guarantee of image license status
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 100-record prepared preview: asset kinds and text fields
-    present in at least one record. Not inferred from the name or description.'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in
+    at least one record. Not inferred from the name or description.'
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: open-images-extended-miap-native-202106
+  snapshot_id: miap-a3ebef5f2a9364fd38f78fab
+  source_url: https://storage.googleapis.com/openimages/web/extended.html
+  record_count: 100000
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: indexed_metadata_partial_media
+  unit: example
+  population: All 100000 native image keys and all 472186 released person boxes across train,
+    validation and test. Native person-box values, image order and annotation-row joins are preserved.
+    Only selected preview JPEGs are verified; all other original images remain unverified and
+    are read on request.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/miap.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: open-images-extended-miap-native-202106
+  snapshot_id: miap-a3ebef5f2a9364fd38f78fab
+  source_url: https://storage.googleapis.com/openimages/web/extended.html
+  record_count: 100000
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: indexed_metadata_partial_media
+  unit: example
+  population: All 100000 native image keys and all 472186 released person boxes across train,
+    validation and test. Native person-box values, image order and annotation-row joins are preserved.
+    Only selected preview JPEGs are verified; all other original images remain unverified and
+    are read on request.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/miap.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
 relationships:
 - type: annotation_overlay_of
   target: OpenImages
@@ -97,3 +134,4 @@ relationships:
 source_url: https://storage.googleapis.com/openimages/web/extended.html
 modalities:
 - image
+snapshot_id: miap-a3ebef5f2a9364fd38f78fab

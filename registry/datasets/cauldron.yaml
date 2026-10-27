@@ -2,33 +2,34 @@ schema_version: '1.0'
 id: cauldron
 name: Cauldron
 aliases: []
-description: HuggingFaceM4 The Cauldron.
+description: 'The Cauldron: all 50 released configurations, preserving image groups and ordered
+  native question/answer pairs. The available release is pinned; the citing paper''s selected
+  72,000 pairs are not identified by this source.'
 paper_ids:
 - paper-959e8fc51787f7e4
-release: unresolved
+release: 847a98a779b1652d65111daf20c972dfcd333605
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: indexed_metadata_partial_media
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Official source family identified; exact selected release, preparation and public-use
-    rights still require dataset-specific review.
-  - Adapter and preview are not implemented.
+  - Public data/media reuse rights require separate review.
+  total_count: 1880992
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://huggingface.co/datasets/HuggingFaceM4/the_cauldron
-  note: Dataset card says CC BY 4.0 plus compliance with original licenses for each
-    constituent dataset
+  note: Dataset card says CC BY 4.0 plus compliance with original licenses for each constituent
+    dataset
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-0688385a14f146ee3211
@@ -36,9 +37,9 @@ evidence:
   source_file_hash: 5f8f1d0c816db711928aa4dde7ed771b84b94fe84ee7f48cdaefd0a3ce2e9edb
   page: 5
   role: training
-  excerpt: ext tokens 144,000 ImageNet [31] 1 image; Caption 144,000 zℓ,t,i ∈ R, Cauldron
-    [17] 1 image; QA Text 72,000 and each feature has an associated decoder vector
-    dℓ,i ∈ Rdmodel that determines
+  excerpt: ext tokens 144,000 ImageNet [31] 1 image; Caption 144,000 zℓ,t,i ∈ R, Cauldron [17]
+    1 image; QA Text 72,000 and each feature has an associated decoder vector dℓ,i ∈ Rdmodel that
+    determines
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -47,8 +48,8 @@ evidence:
   source_file_hash: 5f8f1d0c816db711928aa4dde7ed771b84b94fe84ee7f48cdaefd0a3ce2e9edb
   page: 5
   role: VQA training source
-  excerpt: t,i ∈ R, Cauldron [17] 1 image; QA Text 72,000 and each feature has an
-    associated decoder vector dℓ,i ∈ Rdmodel that determine
+  excerpt: t,i ∈ R, Cauldron [17] 1 image; QA Text 72,000 and each feature has an associated decoder
+    vector dℓ,i ∈ Rdmodel that determine
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -59,8 +60,7 @@ evidence:
   source_identity_status: source_and_terms_identified
 - kind: source_audit_release
   url: https://huggingface.co/datasets/HuggingFaceM4/the_cauldron
-  note: 50 named subsets on author Hugging Face release; exact revision used by citing
-    paper unpinned
+  note: 50 named subsets on author Hugging Face release; exact revision used by citing paper unpinned
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: source_and_terms_identified
@@ -74,8 +74,8 @@ evidence:
   source_identity_status: source_and_terms_identified
 - kind: source_audit_rights
   url: https://huggingface.co/datasets/HuggingFaceM4/the_cauldron
-  note: Dataset card says CC BY 4.0 plus compliance with original licenses for each
-    constituent dataset
+  note: Dataset card says CC BY 4.0 plus compliance with original licenses for each constituent
+    dataset
   publication_decision: media_not_approved
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
@@ -83,9 +83,50 @@ evidence:
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 100-record prepared preview: asset kinds and text fields
-    present in at least one record. Not inferred from the name or description.'
-source_url: https://huggingface.co/datasets/HuggingFaceM4/the_cauldron
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in
+    at least one record. Not inferred from the name or description.'
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: 847a98a779b1652d65111daf20c972dfcd333605
+  snapshot_id: cauldron-6605d7d8e0aeccd40412008c
+  source_url: https://huggingface.co/datasets/HuggingFaceM4/the_cauldron/tree/847a98a779b1652d65111daf20c972dfcd333605
+  record_count: 1880992
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: indexed_metadata_partial_media
+  unit: example
+  population: All 1880992 grouped examples across all 50 native configurations and 938 Parquet
+    shards at author revision 847a98a779b1652d65111daf20c972dfcd333605; configuration and native
+    user/assistant/source fields retained. This is the available complete release, not a reconstruction
+    of a paper-specific sample.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/cauldron.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: 847a98a779b1652d65111daf20c972dfcd333605
+  snapshot_id: cauldron-6605d7d8e0aeccd40412008c
+  source_url: https://huggingface.co/datasets/HuggingFaceM4/the_cauldron/tree/847a98a779b1652d65111daf20c972dfcd333605
+  record_count: 1880992
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: indexed_metadata_partial_media
+  unit: example
+  population: All 1880992 grouped examples across all 50 native configurations and 938 Parquet
+    shards at author revision 847a98a779b1652d65111daf20c972dfcd333605; configuration and native
+    user/assistant/source fields retained. This is the available complete release, not a reconstruction
+    of a paper-specific sample.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/cauldron.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
+source_url: https://huggingface.co/datasets/HuggingFaceM4/the_cauldron/tree/847a98a779b1652d65111daf20c972dfcd333605
 modalities:
 - image
 - text
+snapshot_id: cauldron-6605d7d8e0aeccd40412008c

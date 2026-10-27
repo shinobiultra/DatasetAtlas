@@ -2,26 +2,27 @@ schema_version: '1.0'
 id: ravel
 name: RAVEL
 aliases: []
-description: RAVEL causal language-model representation benchmark. Original authors
-  release task/code at repository; corpus occurrence is bibliography title only
+description: RAVEL causal language-model representation benchmark. Original authors release task/code
+  at repository; corpus occurrence is bibliography title only
 paper_ids:
 - paper-d098a79f00c8b2b5
-release: unresolved
+release: ravel-e421fc9e132b3613b1d0020f856d539217fb30ca
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
   - Public source page located; exact paper-used data revision or archive is unverified.
   - Public data/media reuse rights require separate review.
+  total_count: 11839
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -35,15 +36,15 @@ evidence:
   source_file_hash: 9a50cdc6b9f2ba3687339453804acb9519525941198c14d07765aaecbb1436d2
   page: 51
   role: bibliography-only reference
-  excerpt: 'Huang, Zhengxuan Wu, Christopher Potts, Mor Geva, and Atticus Geiger.
-    RAVEL: Evaluat- ing interpretability methods on disentangling language model representations.
-    In Lun-Wei Ku, An- dr'
+  excerpt: 'Huang, Zhengxuan Wu, Christopher Potts, Mor Geva, and Atticus Geiger. RAVEL: Evaluat-
+    ing interpretability methods on disentangling language model representations. In Lun-Wei Ku,
+    An- dr'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://github.com/explanare/ravel
-  note: Original authors release task/code at repository; corpus occurrence is bibliography
-    title only
+  note: Original authors release task/code at repository; corpus occurrence is bibliography title
+    only
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_release_located
@@ -55,8 +56,8 @@ evidence:
   source_identity_status: author_release_located
 - kind: source_audit_access
   url: https://github.com/explanare/ravel
-  note: source_page_public_data_unverified; Keep bibliography-only role and language-model
-    benchmark identity.
+  note: source_page_public_data_unverified; Keep bibliography-only role and language-model benchmark
+    identity.
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_release_located
@@ -64,12 +65,53 @@ evidence:
   url: https://github.com/explanare/ravel
   checked_on: '2026-09-23'
   report: reports/selective-acquisition-20260923.md
-  note: Pinned acquired population and real preview exercised locally. Mirror and
-    selective-transfer limits remain in the acquisition receipts; this does not establish
-    publication rights or the exact paper-used subset.
+  note: Pinned acquired population and real preview exercised locally. Mirror and selective-transfer
+    limits remain in the acquisition receipts; this does not establish publication rights or the
+    exact paper-used subset.
   recipe: registry/recipes/ravel.yaml
-source_url: https://github.com/explanare/ravel
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: ravel-e421fc9e132b3613b1d0020f856d539217fb30ca
+  snapshot_id: ravel-17f66185e65ba33d01ed2766
+  source_url: https://github.com/explanare/ravel/tree/e421fc9e132b3613b1d0020f856d539217fb30ca
+  record_count: 11839
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: 'All five RAVEL domains: every entity attribute inventory with native prompt templates
+    and both split assignments, plus every independent Wikipedia control prompt. One browse example
+    per entity inventory or control prompt; this is source data, not a model-specific filtered
+    evaluation population.'
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/ravel.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: ravel-e421fc9e132b3613b1d0020f856d539217fb30ca
+  snapshot_id: ravel-17f66185e65ba33d01ed2766
+  source_url: https://github.com/explanare/ravel/tree/e421fc9e132b3613b1d0020f856d539217fb30ca
+  record_count: 11839
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: 'All five RAVEL domains: every entity attribute inventory with native prompt templates
+    and both split assignments, plus every independent Wikipedia control prompt. One browse example
+    per entity inventory or control prompt; this is source data, not a model-specific filtered
+    evaluation population.'
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/ravel.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
+source_url: https://github.com/explanare/ravel/tree/e421fc9e132b3613b1d0020f856d539217fb30ca
 modalities:
 - text
 tasks:
 - causal interpretability
+snapshot_id: ravel-17f66185e65ba33d01ed2766

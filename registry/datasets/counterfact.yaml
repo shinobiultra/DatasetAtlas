@@ -2,27 +2,26 @@ schema_version: '1.0'
 id: counterfact
 name: Counterfact
 aliases: []
-description: 'ROME CounterFact factual-edit evaluation JSON, distinct from unrelated CounterFact projects
-  and multi_counterfact variant. Source review: Author index dated 2022-05-21 lists counterfact.json about
-  43 MB'
+description: Original ROME CounterFact release, with all 21,919 editing cases and original nested
+  rewrite targets, prompts, and subject IDs preserved.
 paper_ids:
 - paper-f2bfbdff3e79479c
 - paper-fe221c51b8ea09df
-release: unresolved
+release: rome-counterfact-d017056125178a13
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
-  blockers:
-  - Adapter and preview are not implemented.
+  blockers: []
+  total_count: 21919
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -35,9 +34,9 @@ evidence:
   source_file_hash: 1992c30a6ac485b61f689487d35b70ad39ce1f6b7a38979b4ac67164423f2091
   page: 3
   role: evaluation
-  excerpt: 't: Emergent Self-repair in Language Model Computations 2.2. Using the Counterfact dataset
-    to elicit factual recall The Counterfact dataset, introduced in (Wang et al., 2022), is a collection
-    of factu'
+  excerpt: 't: Emergent Self-repair in Language Model Computations 2.2. Using the Counterfact
+    dataset to elicit factual recall The Counterfact dataset, introduced in (Wang et al., 2022),
+    is a collection of factu'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -46,14 +45,16 @@ evidence:
   source_file_hash: d63dc008b2ef7206bb605d16b0b4ab6a7559f9693454285d0cd09b29ba4eb50c
   page: 1
   role: related-work mention
-  excerpt: ld harm model performance in McGrath et al. 2023, but only across the Counterfact on that task.
-    dataset and with the ablation of entire model layers. However, recent work (McGrath et al., 202
+  excerpt: ld harm model performance in McGrath et al. 2023, but only across the Counterfact on
+    that task. dataset and with the ablation of entire model layers. However, recent work (McGrath
+    et al., 202
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://rome.baulab.info/data/dsets/
-  note: ROME CounterFact factual-edit evaluation JSON, distinct from unrelated CounterFact projects and
-    multi_counterfact variant Author index dated 2022-05-21 lists counterfact.json about 43 MB
+  note: ROME CounterFact factual-edit evaluation JSON, distinct from unrelated CounterFact projects
+    and multi_counterfact variant Author index dated 2022-05-21 lists counterfact.json about 43
+    MB
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
@@ -74,8 +75,45 @@ evidence:
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in at least
-    one record. Not inferred from the name or description.'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in
+    at least one record. Not inferred from the name or description.'
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: rome-counterfact-d017056125178a13
+  snapshot_id: counterfact-6cf557976850e03e1d9f7c69
+  source_url: https://rome.baulab.info/data/dsets/
+  record_count: 21919
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 21,919 original CounterFact cases, including rewrite requests and neighborhood/paraphrase/generation
+    prompts.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/counterfact.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: rome-counterfact-d017056125178a13
+  snapshot_id: counterfact-6cf557976850e03e1d9f7c69
+  source_url: https://rome.baulab.info/data/dsets/
+  record_count: 21919
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 21,919 original CounterFact cases, including rewrite requests and neighborhood/paraphrase/generation
+    prompts.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/counterfact.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
 source_url: https://rome.baulab.info/data/dsets/
 modalities:
 - text
+snapshot_id: counterfact-6cf557976850e03e1d9f7c69

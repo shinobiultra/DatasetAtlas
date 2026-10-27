@@ -2,31 +2,30 @@ schema_version: '1.0'
 id: dreambooth
 name: Dreambooth
 aliases: []
-description: 'Google DreamBooth subject image dataset: 30 subjects, 15 classes, 4–6
-  photos each. Source review: Author archived repository commit 4f887af7970a06fc0cd3adaa1d0b368547d6a1d0'
+description: 'Google DreamBooth subject image dataset: 30 subjects, 15 classes, 4–6 photos each.
+  Source review: Author archived repository commit 4f887af7970a06fc0cd3adaa1d0b368547d6a1d0'
 paper_ids:
 - paper-25eaa8c74ce76800
-release: unresolved
+release: 4f887af7970a06fc0cd3adaa1d0b368547d6a1d0
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
-  blockers:
-  - Adapter and preview are not implemented.
+  blockers: []
+  total_count: 158
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
-  note: Repository CC BY 4.0; per-photo author/Unsplash provenance and licenses listed
-    separately
+  note: Repository CC BY 4.0; per-photo author/Unsplash provenance and licenses listed separately
   source: https://github.com/google/dreambooth/blob/4f887af7970a06fc0cd3adaa1d0b368547d6a1d0/dataset/references_and_licenses.txt
 evidence:
 - kind: corpus_mention
@@ -40,8 +39,8 @@ evidence:
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://github.com/google/dreambooth/tree/4f887af7970a06fc0cd3adaa1d0b368547d6a1d0
-  note: 'Google DreamBooth subject image dataset: 30 subjects, 15 classes, 4–6 photos
-    each Author archived repository commit 4f887af7970a06fc0cd3adaa1d0b368547d6a1d0'
+  note: 'Google DreamBooth subject image dataset: 30 subjects, 15 classes, 4–6 photos each Author
+    archived repository commit 4f887af7970a06fc0cd3adaa1d0b368547d6a1d0'
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
@@ -54,8 +53,7 @@ evidence:
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_rights
   url: https://github.com/google/dreambooth/blob/4f887af7970a06fc0cd3adaa1d0b368547d6a1d0/dataset/references_and_licenses.txt
-  note: Repository CC BY 4.0; per-photo author/Unsplash provenance and licenses listed
-    separately
+  note: Repository CC BY 4.0; per-photo author/Unsplash provenance and licenses listed separately
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
@@ -63,13 +61,52 @@ evidence:
   url: https://github.com/google/dreambooth
   checked_on: '2026-09-23'
   report: reports/selective-acquisition-20260923.md
-  note: Pinned acquired population and real preview exercised locally. Mirror and
-    selective-transfer limits remain in the acquisition receipts; this does not establish
-    publication rights or the exact paper-used subset.
+  note: Pinned acquired population and real preview exercised locally. Mirror and selective-transfer
+    limits remain in the acquisition receipts; this does not establish publication rights or the
+    exact paper-used subset.
   recipe: registry/recipes/dreambooth.yaml
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: 4f887af7970a06fc0cd3adaa1d0b368547d6a1d0
+  snapshot_id: dreambooth-81737aa47cb7a339b4f7bfcc
+  source_url: https://github.com/google/dreambooth
+  record_count: 158
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 158 images from 30 native subject folders, their 15 class names, source attribution
+    text and released prompt templates. Documentation images excluded; no generated evaluation
+    images or synthetic replacements.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/dreambooth.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: 4f887af7970a06fc0cd3adaa1d0b368547d6a1d0
+  snapshot_id: dreambooth-81737aa47cb7a339b4f7bfcc
+  source_url: https://github.com/google/dreambooth
+  record_count: 158
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 158 images from 30 native subject folders, their 15 class names, source attribution
+    text and released prompt templates. Documentation images excluded; no generated evaluation
+    images or synthetic replacements.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/dreambooth.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
 source_url: https://github.com/google/dreambooth
 modalities:
 - image
 - text
 tasks:
 - subject-driven image generation evaluation
+snapshot_id: dreambooth-81737aa47cb7a339b4f7bfcc

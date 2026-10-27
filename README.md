@@ -1,69 +1,60 @@
 # Dataset Atlas
 
-**See what is inside the datasets behind a body of research, and how to get each one.** Dataset Atlas is a catalogue of 231 real datasets named in 64 research papers, with real examples you can browse, filter and compare, a guide to fetching each dataset from its original publisher, and an optional local workbench for analysis. It runs on your machine. The same interface also runs as a static website.
+Explore original datasets through one catalogue, with provenance, native annotations,
+linked media, reproducible selections and optional local analysis. Dataset Atlas 1.0
+supports declared, pinned source populations; every page identifies the population
+it can actually show or query.
 
-![The public catalogue: live examples first, then every dataset with how to get it](docs/images/catalogue.png)
+![Dataset catalogue](docs/images/catalogue.png)
 
-## What you get
-
-- **A catalogue you can trust.** Every entry says where the data comes from, what a record holds, which papers name it, what is known about its rights, and whether it works now, needs access, or needs an adapter. Aliases, views of other datasets and entries with nothing working are not listed ([why](registry/candidate_dispositions.yaml)).
-- **Real examples.** 220 datasets have a 100-record preview of original data with annotations; 218 have a complete index you can filter and count exactly. Images, audio, video and 3D models open in their original form.
-- **Reproducible selections.** Filters, samples and selections are stable and exchangeable, and carry the snapshot they were made on.
-- **Optional analysis, kept local.** Detectors, embeddings, projections and local-model conversations work on the same samples. Nothing is sent to an external model unless you approve exactly what leaves your machine.
-- **Your own datasets** sit beside the catalogue: folders, tables and Hugging Face datasets.
-
-![A dataset page: filters, grid, table, map and compare share one population and one selection](docs/images/dataset.png)
-
-## Quick start
-
-For colleagues with GitHub access, clone the repository and open the sample browser:
+Clone the repository and open the approved sample browser:
 
 ```bash
-git clone https://github.com/shinobiultra/DatasetAtlas.git
+git clone --depth 1 https://github.com/shinobiultra/DatasetAtlas.git
 cd DatasetAtlas
 ./start.sh
 ```
 
-Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and Node.js 22 or newer first. The command installs locked dependencies, validates the publication allowlist, builds the interface and opens a loopback-only browser. It includes **300 real examples from CLEVR, EuroSAT and PAIRS**, their approved original media and the catalogue guides. It needs no GPU, model weights or maintainer dataset directory. The included examples work offline after setup; fetching other datasets needs their publishers and any required access. Use `./start.sh --workbench` for the local research workbench and its own fetched datasets.
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and Node.js 26 (or 22.12+)
+first. Setup uses locked dependencies and builds the interface. The browser includes
+300 real examples from CLEVR, EuroSAT and PAIRS, with their approved original media,
+annotations and provenance. It needs no model, GPU or maintainer dataset directory;
+the included examples work offline after setup.
 
-For a smaller portable handoff, download **dataset-atlas-samples** from a successful [GitHub Actions run](https://github.com/shinobiultra/DatasetAtlas/actions), extract the enclosed ZIP, then run `python3 OPEN_ATLAS.py`. It verifies its file hashes and opens the sample browser using only Python's standard library. Build the same bundle from a clone with `uv run python scripts/build_sample_bundle.py`; provenance, scope and dataset notices travel with it. See [sharing with colleagues](docs/sharing.md).
+For a smaller handoff, download the [sample ZIP](https://github.com/shinobiultra/DatasetAtlas/releases/latest/download/dataset-atlas-samples.zip)
+(about 29 MB), extract it, open the `dataset-atlas-sample` folder and run
+`python3 OPEN_ATLAS.py`. It needs only Python 3.11+ and checks every bundled file
+before opening. See [sharing with colleagues](docs/sharing.md).
 
-To install a release wheel instead:
+Run `./start.sh --workbench` for your own local workspace. Dataset pages show the
+pinned source, transfer and storage plan before preparation. Fetch only the sources
+you need, with your own access and explicit budgets. Add local folders, tables or
+Hugging Face datasets alongside the catalogue. Original source files remain intact.
 
-```bash
-uv tool install ./dataset_atlas-0.2.0-py3-none-any.whl     # a release wheel; no Node, no checkout
-atlas init ~/atlas && cd ~/atlas                           # a workspace with the catalogue, no data yet
-atlas serve                                                # open http://127.0.0.1:8765/
-atlas previews fetch --dataset mnist --execute             # plan, then fetch one preview from its publisher
-```
+![Dataset browsing and inspection](docs/images/dataset.png)
 
-A fresh workbench workspace holds the catalogue and no data. Each dataset page says what you can do with it, and nothing downloads until you have seen the size and approved the plan. Python 3.11 to 3.14 on Linux or macOS; use WSL on Windows for the workbench. The portable sample browser also runs with Python 3.11 or newer on Windows.
+Grid, table, compare and 2D/3D maps share filters and selections. Native example
+relationships and media conditions stay linked. Complete local indices support
+exact counts over their declared partitions; previews retain their sample scope.
+Large-source sampling uses pinned populations and explicit budgets rather than
+implying that a small preview is a complete local index.
 
-![A dataset without published examples still tells you how to get it, what a record holds and which papers cite it](docs/images/guide.png)
+Analysis is optional: detectors, embeddings, projections, clustering, outliers and
+local model conversations use the selected population. Browsing needs no GPU.
+Install optional dependencies and weights explicitly; model context is reviewed
+before sending. No external model is connected automatically.
 
-## The public website
+The [current release status](reports/final-status.json), [verification evidence](reports/release_evidence.md),
+[coverage matrix](reports/dataset_coverage.csv) and [source pins](reports/catalogue-sources.json)
+are generated from the active runtime catalogue. [Source and rights qualifications](reports/limitations.md)
+keep source scope, historical paper use, publication rights and human acceptance
+separate from software verification. Public media is limited to the exact approved
+CLEVR, EuroSAT and PAIRS packs.
 
-**Live: https://shinobiultra.github.io/DatasetAtlas/**. The static build ([docs/github-pages.md](docs/github-pages.md)) needs no Python and holds no dataset content beyond three reviewed example sets (CLEVR, EuroSAT, PAIRS). About 100 more (CIFAR, MNIST, ImageNet variants and others) load their first rows live from Hugging Face when you open them, so nothing is stored here. For every dataset it shows the guide: how to obtain it and the field schema of a sample.
+[Getting started](docs/getting-started.md) · [Documentation](docs/README.md) ·
+[Development](docs/development.md) · [Publication](docs/publication.md) ·
+[Release scope](ROADMAP.md) · [SPEC](SPEC.md)
 
-## Where things are
-
-| Path | What is there |
-| --- | --- |
-| `src/dataset_atlas/` | The Python package: API, adapters for each source format, preparation workers, query engine, analysis processors, publication. |
-| `apps/web/` | The React interface, used by both the local workbench and the static site. |
-| `registry/` | The catalogue: one YAML file per dataset (`datasets/`), preparation recipes (`recipes/`), paper inventories, publication approvals, and the record of what was removed and why. |
-| `examples/` | Reviewed, redistributable example packs and the public schema and coverage snapshot. |
-| `docs/` | Guides. Start at [docs/README.md](docs/README.md). |
-| `reports/` | Dated verification receipts and the coverage matrix. See [reports/README.md](reports/README.md). |
-| `tests/`, `scripts/` | The test suite and maintenance scripts. |
-| `SPEC.md`, `ROADMAP.md` | The acceptance contract and the current state against it. |
-
-## Status
-
-A working release; the full v1 in [SPEC.md](SPEC.md) is not complete. **231 catalogue entries, 220 prepared previews, 21,532 preview records, 218 complete indices, 11 entries without a preview** (ten gated or request-only datasets with a known route, and PATA). Paper mentions do not by themselves settle which release or subset a paper used, so most identities stay marked as candidates until a person reviews them. Preview data stays local: only CLEVR, PAIRS and EuroSAT are approved for public redistribution. Current numbers and evidence: [ROADMAP.md](ROADMAP.md), [reports/final-status.json](reports/final-status.json), [reports/dataset_coverage.csv](reports/dataset_coverage.csv).
-
-## Documentation
-
-[Getting started](docs/getting-started.md) · [Adding your own datasets](docs/adding-your-own-datasets.md) · [Adding catalogue datasets](docs/adding-datasets.md) · [Storage](docs/storage.md) · [Development](docs/development.md) · [Publication](docs/publication.md) · [GitHub Pages](docs/github-pages.md)
-
-The code is released under the [MIT licence](LICENSE). Dataset licences and terms belong to their publishers and are not changed by it: the data and media in this repository (the three approved example sets, schemas and catalogue metadata) keep the notices recorded in `registry/` and `licenses/`. Gated datasets are fetched with your own accepted terms and credentials; Dataset Atlas never accepts terms or applies for access for you.
+The code uses the [MIT licence](LICENSE). Dataset licences and notices remain those
+of their publishers; see `registry/` and `licenses/`. Access to a source does not
+provide permission to redistribute it.

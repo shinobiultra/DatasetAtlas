@@ -1,0 +1,48 @@
+# The exact native structured file already pinned by the catalogue. Acquisition changes only its local path.
+# The parser, source field mapping, release, snapshot and record IDs are preserved; no conversion or generated data.
+release: hf-f21629712ffd6a3d13a54fd2807ccd521c55ef74
+snapshot_id: hf-allenai-real-toxicity-prompts-f21629712ffd6a3d13a54fd2807ccd521c55ef74-4b680887
+adapter: structured
+expected_count: 99442
+scope: Official allenai prompts.jsonl, 99,442 rows; 1,199 challenging=true in this pinned file
+source_url: https://huggingface.co/datasets/allenai/real-toxicity-prompts
+adapter_config:
+  format: jsonl
+  mapping:
+    text: prompt.text
+  fields:
+    challenging:
+      dtype: boolean
+      description: Original challenging subset flag; 1,199 true in this source snapshot
+    prompt:
+      dtype: object
+      description: Original prompt text and Perspective API attribute scores
+    continuation:
+      dtype: object
+      description: Original continuation text and Perspective API attribute scores
+    filename:
+      dtype: string
+      description: Original source document identifier, not a local path
+    begin:
+      dtype: number
+      description: Original document begin offset
+    end:
+      dtype: number
+      description: Original document end offset
+  population: Official allenai prompts.jsonl, 99,442 rows; 1,199 challenging=true in this pinned file
+files:
+- source_name: prompts.jsonl
+  url: https://huggingface.co/datasets/allenai/real-toxicity-prompts/resolve/f21629712ffd6a3d13a54fd2807ccd521c55ef74/prompts.jsonl
+  bytes: 67690996
+  sha256: 4b6808878edc985fcc6bcb6a2a7239a0fb05420cb495f1f6ca1450da5e35c163
+  format: jsonl
+  config_key: path
+allowed_hosts:
+- huggingface.co
+- cas-bridge.xethub.hf.co
+- cdn-lfs-us-1.huggingface.co
+- cdn-lfs.huggingface.co
+- cdn-lfs-us-1.hf.co
+- cdn-lfs.hf.co
+- us.aws.cdn.hf.co
+- eu.aws.cdn.hf.co

@@ -181,7 +181,7 @@ export function App() {
         {route.name === 'catalogue' && <CataloguePage term={term} onOpen={openDataset} />}
         {route.name === 'dataset' && (
           <DatasetPage
-            key={route.id} datasetId={route.id} tab={route.tab} thumbs={thumbs[route.id]}
+            key={route.id} datasetId={route.id} tab={route.tab} thumbs={thumbs[route.id]} capabilities={capabilities}
             onTab={tab => navigate({ name: 'dataset', id: route.id, tab })}
             onOpenDataset={openDataset} onToast={toast} barHost={barHost}
             onSelectionSaved={(_selection: Selection) => setSelectionsKey(value => value + 1)}

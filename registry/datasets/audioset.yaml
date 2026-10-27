@@ -2,11 +2,10 @@ schema_version: '1.0'
 id: audioset
 name: AudioSet
 aliases: []
-description: 'All 2,084,320 native weak-label AudioSet segment annotations across
-  balanced_train, eval and unbalanced_train, with original YouTube IDs, time bounds,
-  labels and publisher class names. Structured inspection only: source YouTube audio
-  and VGGish features are not acquired. Native CSV counts differ from the summary
-  webpage; native headers are preserved.'
+description: 'All 2,084,320 native weak-label AudioSet segment annotations across balanced_train,
+  eval and unbalanced_train, with original YouTube IDs, time bounds, labels and publisher class
+  names. Structured inspection only: source YouTube audio and VGGish features are not acquired.
+  Native CSV counts differ from the summary webpage; native headers are preserved.'
 paper_ids:
 - paper-6d747c88d639c5aa
 release: audioset-weak-label-v1-native
@@ -23,19 +22,19 @@ coverage:
   preview_count: 100
   unit: example
   blockers:
-  - YouTube audio and VGGish features are not acquired; these are structured native
-    annotation records.
+  - YouTube audio and VGGish features are not acquired; these are structured native annotation
+    records.
   - The citing paper's exact augmentation/segment subset is not reconstructed.
-  - Native annotation attribution and publication rights still require review; label
-    rights do not grant source audio rights.
+  - Native annotation attribution and publication rights still require review; label rights do
+    not grant source audio rights.
   total_count: 2084320
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://research.google.com/audioset/download.html
-  note: Google labels the dataset CC BY 4.0 and ontology CC BY-SA 4.0; that does not
-    grant rights to every source YouTube audio segment
+  note: Google labels the dataset CC BY 4.0 and ontology CC BY-SA 4.0; that does not grant rights
+    to every source YouTube audio segment
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-3b7cd5bfd842eae5c70b
@@ -43,9 +42,9 @@ evidence:
   source_file_hash: 519805fac1ac6df034dd67ef95643703ebd97fa1c18e0f035a1f93feada6994e
   page: 13
   role: source data
-  excerpt: t. During training, the speech segments were randomly shifted in time and
-    superimposed on AudioSet [42] examples such that models could also be trained
-    on the AudioSet task. We randomly varied the SNR between the source (Speech)
+  excerpt: t. During training, the speech segments were randomly shifted in time and superimposed
+    on AudioSet [42] examples such that models could also be trained on the AudioSet task. We
+    randomly varied the SNR between the source (Speech)
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -56,8 +55,8 @@ evidence:
   source_identity_status: source_and_terms_identified
 - kind: source_audit_release
   url: https://research.google.com/audioset/download.html
-  note: Official release is segment-level YouTube ID/time/label CSV and optional embeddings;
-    underlying audio URLs are live sources, not an immutable media archive
+  note: Official release is segment-level YouTube ID/time/label CSV and optional embeddings; underlying
+    audio URLs are live sources, not an immutable media archive
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: source_and_terms_identified
@@ -71,8 +70,8 @@ evidence:
   source_identity_status: source_and_terms_identified
 - kind: source_audit_rights
   url: https://research.google.com/audioset/download.html
-  note: Google labels the dataset CC BY 4.0 and ontology CC BY-SA 4.0; that does not
-    grant rights to every source YouTube audio segment
+  note: Google labels the dataset CC BY 4.0 and ontology CC BY-SA 4.0; that does not grant rights
+    to every source YouTube audio segment
   publication_decision: media_not_approved
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
@@ -83,8 +82,26 @@ evidence:
   source_url: https://research.google.com/audioset/download.html
   count: 2084320
   plan_id: d6b1feb521bd970f68496251923c094b73f089632693194811c87542cbe1d5bc
-  note: All three original weak-label CSVs and original class-index CSV SHA-256 checked;
-    full structured index plus 100 examples. No source audio acquired.
+  note: All three original weak-label CSVs and original class-index CSV SHA-256 checked; full
+    structured index plus 100 examples. No source audio acquired.
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: audioset-weak-label-v1-native
+  snapshot_id: audioset-e20a1363c75e564b4b93472e
+  source_url: https://research.google.com/audioset/download.html
+  record_count: 2084320
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: indexed_metadata_partial_media
+  unit: example
+  population: All 2084320 native weak-label segment annotations across balanced_train, eval and
+    unbalanced_train. Native counts differ from the summary webpage; source headers are preserved.
+    YouTube audio and VGGish features are not acquired. Structured inspection only; audio availability
+    remains partial.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/audioset.yaml
 source_url: https://research.google.com/audioset/download.html
 snapshot_id: audioset-e20a1363c75e564b4b93472e
 tasks:

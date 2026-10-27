@@ -6,33 +6,35 @@ aliases:
 - Oxford-IIIT Pet
 - Pets
 - pets
-description: Oxford publishes images and trimap annotations separately; same source family as pets candidate, not
-  a new release.
+description: Oxford publishes images and trimap annotations separately; same source family as
+  pets candidate, not a new release.
 paper_ids:
 - paper-25eaa8c74ce76800
 - paper-6dbb0d4a7b949143
 - paper-3e0db9c633ab204c
 - paper-392b0c393c06b48e
-release: unresolved
+release: oxford-iiit-pet-original
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers: []
+  total_count: 7349
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://www.robots.ox.ac.uk/~vgg/data/pets/
-  note: Oxford says CC BY-SA 4.0 for dataset use, with copyright remaining with original image owners.
+  note: Oxford says CC BY-SA 4.0 for dataset use, with copyright remaining with original image
+    owners.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-10ea0c33c1126e998c6b
@@ -45,14 +47,15 @@ evidence:
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://www.robots.ox.ac.uk/~vgg/data/pets/
-  note: 'Oxford publishes images and trimap annotations separately; same source family as pets candidate, not a
-    new release. Release: Oxford-IIIT Pet original, 37 breeds; paper split unpinned'
+  note: 'Oxford publishes images and trimap annotations separately; same source family as pets
+    candidate, not a new release. Release: Oxford-IIIT Pet original, 37 breeds; paper split unpinned'
   audit_file: work/sources/source-audit-jobs-batch3.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
 - kind: source_audit_rights
   url: https://www.robots.ox.ac.uk/~vgg/data/pets/
-  note: Oxford says CC BY-SA 4.0 for dataset use, with copyright remaining with original image owners.
+  note: Oxford says CC BY-SA 4.0 for dataset use, with copyright remaining with original image
+    owners.
   audit_file: work/sources/source-audit-jobs-batch3.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
@@ -62,8 +65,9 @@ evidence:
   source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
   page: 5
   role: evaluation
-  excerpt: ' 2009), Robust Vision Models. We focus on robust vision en- CIFAR100, Pets (Parkhi et al., 2012), UCF101
-    (Soomro, coders, specifically large-scale adversarially trained Ima- 2012), and'
+  excerpt: ' 2009), Robust Vision Models. We focus on robust vision en- CIFAR100, Pets (Parkhi
+    et al., 2012), UCF101 (Soomro, coders, specifically large-scale adversarially trained Ima-
+    2012), and'
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
   merged_from_alias: pets
@@ -93,28 +97,58 @@ evidence:
   source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
   page: 5
   role: zero-shot robustness evaluation
-  excerpt: Robust Vision Models. We focus on robust vision en- CIFAR100, Pets (Parkhi et al., 2012), UCF101 (Soomro,
-    coders, speci
+  excerpt: Robust Vision Models. We focus on robust vision en- CIFAR100, Pets (Parkhi et al.,
+    2012), UCF101 (Soomro, coders, speci
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
   merged_from_alias: pets
 - kind: source_audit_access
   url: https://www.robots.ox.ac.uk/~vgg/data/pets/
-  note: Official images.tar.gz and annotations.tar.gz were retrieved from the Oxford page and indexed by preparation;
-    7,349 records.
+  note: Official images.tar.gz and annotations.tar.gz were retrieved from the Oxford page and
+    indexed by preparation; 7,349 records.
   checked_on: '2026-09-22'
   source_identity_status: official_release_acquired_by_preparation
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in at least one record.
-    Not inferred from the name or description.'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in
+    at least one record. Not inferred from the name or description.'
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: oxford-iiit-pet-original
+  snapshot_id: oxfordpet-c812b4c6a2a467571c2dc4eb
+  source_url: https://www.robots.ox.ac.uk/~vgg/data/pets/
+  record_count: 7349
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 7,349 annotated Oxford-IIIT Pet images; original trainval and test splits.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/oxfordpet.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: oxford-iiit-pet-original
+  snapshot_id: oxfordpet-c812b4c6a2a467571c2dc4eb
+  source_url: https://www.robots.ox.ac.uk/~vgg/data/pets/
+  record_count: 7349
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 7,349 annotated Oxford-IIIT Pet images; original trainval and test splits.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/oxfordpet.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
 source_url: https://www.robots.ox.ac.uk/~vgg/data/pets/
-relationships:
-- type: alias_resolved_from
-  target_id: pets
-  status: verified
-  scope: 'Same official Oxford-IIIT Pet release (Parkhi et al., 2012): the pets candidate''s "Pets (Parkhi et al.,
-    2012)" mentions name this release; identical source and recipe.'
+relationships: []
 modalities:
 - image
+snapshot_id: oxfordpet-c812b4c6a2a467571c2dc4eb

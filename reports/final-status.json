@@ -1,154 +1,124 @@
 {
-  "checked_at_utc": "2026-10-09T04:52:52.402475+00:00",
-  "status": "verified_working_release_with_remaining_v1_scope",
-  "full_v1_complete": false,
-  "catalogue_entries": 231,
-  "tested_local_previews": 220,
-  "verified_preview_records": 21532,
-  "canonical_full_scope_indices": 218,
-  "entries_without_preview": 11,
-  "all_prepared_previews_have_catalogue_acquisition_paths": true,
-  "metadata_only_reproduction_datasets": [
-    "pata"
-  ],
-  "metadata_only_reproduction_does_not_inflate_preview_recipe_count": true,
-  "python_current_validation": {
-    "version": "3.12.14",
-    "passed": 1028,
-    "skipped": 1,
-    "warnings": 2,
-    "log": "work/python-factoid-final-current-20261007.log"
-  },
-  "python314_current_validation": {
-    "version": "3.14.2",
-    "passed": 1025,
-    "skipped": 4,
-    "warnings": 2,
-    "log": "work/python314-factoid-final-current-20261007.log",
-    "skip_scope": "Three absent optional LanceDB/UMAP dependencies and unretained VHD11K source archive."
-  },
-  "frontend_tests_passed": 28,
-  "browser_tests_passed": 69,
-  "browser_tests_skipped": 3,
-  "validation_logs": {
-    "python": "work/python-factoid-final-current-20261007.log",
-    "python314": "work/python314-factoid-final-current-20261007.log",
-    "browser": "work/browser-factoid-verified-final-20261007.log",
-    "frontend": "work/frontend-tests-factoid-final-20261007.log",
-    "checks": "work/prek-factoid-attested-final-20261007.log"
-  },
-  "complete_index_smoke_passed": 218,
-  "preview_media_smoke": "reports/preview-media-smoke-20261009.json",
-  "source_integrity": "reports/native-six-source-integrity-20261007.json",
-  "exhaustive_native_metadata_parity": "reports/ffhq-emoset-exhaustive-native-parity-20261007.json",
-  "pata_native_parity": "reports/pata-native-metadata-integration-final-20261007.json",
-  "pata_empty_workspace_reproduction": "reports/pata-empty-workspace-metadata-reproduction-20261007.json",
-  "factoid": {
-    "status": "native_prepared_and_verified",
-    "native_index_activated": true,
-    "inert_syntax_completed": true,
-    "exploratory_converted_records": 4150,
-    "archived_synthetic_tests_passed": 19,
-    "unverified_scope": "Complete DataFrame dtype/axis metadata/attrs/flags and object-graph preservation, canonical membership/query parity and production resource-isolated integration.",
-    "experiment": "work/experiments/factoid-inert-20261007/README.md",
-    "probe_bodies_retired": true,
-    "synthetic_tests_passed": 41,
-    "native_conversion_receipt": "reports/factoid-native-verified-conversion-20261007.json",
-    "latest_code_conversion_pending": false,
-    "resource_limits": {
-      "address_space_bytes": 8000000000,
-      "cpu_seconds": 360,
-      "wall_seconds": 480
-    },
-    "native_user_rows": 4150,
-    "native_cells_checked": 17288900,
-    "canonical_field_checks": 83000,
-    "native_population_receipt": "reports/factoid-native-population-verification-20261007.json",
-    "empty_workspace_receipt": "reports/factoid-empty-workspace-preparation-20261007.json",
-    "http_receipt": "reports/factoid-http-final-20261007.json",
-    "browser_receipt": "reports/browser-factoid-native-20261007.json",
-    "synthetic_generated_tests_passed": 41,
-    "production_converter_reviewed": true,
-    "fresh_reproduction_bodies_retired": true
-  },
-  "remaining_implementation_scope": [
-    "MultiTrust per-task native adapters",
-    "Remaining public recipe/native integration gaps listed per dataset; PATA native metadata is complete but source media remains unarchived"
-  ],
-  "remaining_source_or_acceptance_scope": [
-    "exact historical paper releases and memberships",
-    "unarchived PATA media and independent media/source identity proofs",
-    "effective publisher gates, licensed and unreleased sources",
-    "dataset-specific publication review"
-  ],
-  "remaining_coverage_audit": "reports/remaining-native-coverage-audit-20261007.json",
-  "roadmap": "ROADMAP.md",
-  "authorization_links": "docs/dataset-authorization.md",
-  "independent_review": "reports/independent-review-brief-20261009.md",
-  "release_version": "0.2.0",
-  "wheel": {
-    "path": "dist/dataset_atlas-0.2.0-py3-none-any.whl",
-    "bytes": 39422319,
-    "sha256": "74656ccf74f6427c9fbed57c13cee63e338eddf4e8307f23839f04d1aad8ea64"
-  },
-  "sdist": {
-    "path": "dist/dataset_atlas-0.2.0.tar.gz",
-    "bytes": 39375115,
-    "sha256": "a59b1cc627a8740f860d6c66ddbf8b6969fb51c126043f108ba3fc90a16e5d23"
-  },
-  "installation_verification": {
-    "py312": "reports/installation-verification-20261009.json",
-    "py314": "reports/installation-verification-py314-20261009.json"
-  },
-  "approved_public_preview_datasets": [
+  "schema_version": "1.0",
+  "release_version": "1.0.0",
+  "generated_at_utc": "2026-10-27T06:01:41.537780+00:00",
+  "catalogue_sha256": "ba6c177064b0b7c23c64cbd2baae9904b2403ac0e340af3054296268fd86e508",
+  "release_tree_sha256": "6f1b7561d9bd94c796a18531fc18ab6925eb8e3805eb8c0b680349ffa24b6db6",
+  "full_v1_complete": true,
+  "catalogue_entries": 202,
+  "prepared_previews": 202,
+  "preview_records": 19779,
+  "entries_without_preview": 0,
+  "local_complete_indices": 200,
+  "public_media_datasets": [
     "clevr",
     "eurosat",
     "pairs"
   ],
-  "storage_allocated_bytes": 121089658880,
-  "workbench_running": false,
-  "active_preparations": [],
-  "paid_model_apis_used": false,
-  "external_model_sends_this_pass": false,
-  "cluster_jobs_this_pass": 0,
-  "remote_deployment_performed": true,
-  "historical_status": "reports/final-status-historical-before-closeout-20261007.json",
-  "closeout_scope": "2026-10-09: BBQ-V and MultiTrust integrated, aliases, views and unresolved entries removed from the catalogue, public guide, complete-scope query speed-up, security hardening. Catalogue-wide SPEC acceptance remains incomplete.",
-  "current_validation_pending": false,
-  "release_rebuild_pending": false,
-  "gqa_browsing_snapshot_media_scope": "full",
-  "runtime_restore_pending": false,
-  "runtime_restoration": [
-    "reports/main-runtime-restoration-20261007.json",
-    "reports/main-runtime-host-cuda-restoration-20261007.json"
-  ],
-  "complete_index_smoke": "reports/complete-index-smoke-20261009.json",
-  "query_wide_record_repair": {
-    "receipt": "reports/factoid-complete-ui-page-repair-20261007.json",
-    "default_page_records": 53,
-    "complete_matched_count": 4150,
-    "response_bytes": 31987211,
-    "elapsed_seconds": 6.0427,
-    "remaining_scope": "Wide stratified envelope/window sorting retains its prior path and can explicitly refuse its memory budget. This is not proof of the two-second ordinary filtering target for native wide records."
+  "verification": {
+    "schema_version": "1.0",
+    "status": "verified",
+    "catalogue_sha256": "ba6c177064b0b7c23c64cbd2baae9904b2403ac0e340af3054296268fd86e508",
+    "release_tree_sha256": "6f1b7561d9bd94c796a18531fc18ab6925eb8e3805eb8c0b680349ffa24b6db6",
+    "proof_sha256": "dcac0ec925b7d51bffc165336e517051fed41a06de2b9fd2337f8f3b6f28e7c9",
+    "checks": {
+      "python_tests": {
+        "status": "passed",
+        "command": "python -m pytest -q --tb=short",
+        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "summary": "1735 passed; one optional whole-archive test skipped, with original-on-demand access verified separately."
+      },
+      "frontend_tests": {
+        "status": "passed",
+        "command": "npm test --prefix apps/web",
+        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "summary": "72 frontend tests passed on the current stable dependency stack."
+      },
+      "browser_tests": {
+        "status": "passed",
+        "command": "playwright test; affected-case and explicitly enabled native journey reruns",
+        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "summary": "88 browser cases passed; two optional local-VLM journeys skipped because no server was running. CPU analysis and frozen selection exchange passed."
+      },
+      "frontend_build": {
+        "status": "passed",
+        "command": "npm run build --prefix apps/web",
+        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "summary": "TypeScript and Vite production builds passed; approved-static documentation screenshots refreshed."
+      },
+      "publication_validation": {
+        "status": "passed",
+        "command": "atlas publish validate; build_publication",
+        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "summary": "202 catalogue guides; only the three approved packs and 300 original media files published. Archive privacy checks passed."
+      },
+      "catalogue_validation": {
+        "status": "passed",
+        "command": "pytest registry, catalogue, publication and status checks; ty and prek",
+        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "summary": "202 resolved declared source identities and tested adapters. A cold workspace has zero local rows, 202 previews and 200 complete indices on request; two whole-source samplers remain distinct."
+      },
+      "native_index_checks": {
+        "status": "passed",
+        "command": "verify_complete_index_smoke.py; native API audit",
+        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "summary": "All 200 complete local indices returned exact declared counts and snapshot-bound native records; all 202 previews opened."
+      },
+      "preview_media_checks": {
+        "status": "passed",
+        "command": "verify_preview_media_smoke.py; retained-original HTTP audit",
+        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "summary": "459 sampled asset checks: 458 successful originals and one explicitly declared source absence; 49 datasets have no media. No failed dataset checks."
+      },
+      "distribution_build": {
+        "status": "passed",
+        "command": "build_release.py; verify_distribution.py; archive-source parity",
+        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "summary": "Final wheel and source archive pass inspection and exact source-member parity; no model weights or private workspace data included."
+      },
+      "clean_install": {
+        "status": "passed",
+        "command": "verify_installation.py; verify_sample_startup.py --source",
+        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "summary": "Final wheel installed outside the checkout on Python 3.12 and 3.14.10; 202-entry catalogue and approved samples served with no optional model packages. Fresh source startup passed."
+      },
+      "portable_sample_bundle": {
+        "status": "passed",
+        "command": "build_sample_bundle.py; verify_sample_startup.py --bundle",
+        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "summary": "29.31 MB checksummed ZIP; 300 original examples, standalone file verification and HTTP startup passed on Python 3.15.2, including hostile Host rejection."
+      },
+      "acceptance_traceability": {
+        "status": "passed",
+        "command": "verify_acceptance_matrix.py --run",
+        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "summary": "All 16 acceptance areas passed their named checks; zero traceability problems or recorded software gaps."
+      },
+      "analysis_runtime": {
+        "status": "passed",
+        "command": "verify_analysis_runtime.py --records 16 --device cpu; native browser analysis and exchange",
+        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "summary": "Nine local processors completed on 16 frozen native CLEVR records; exported analysis pack roundtrip passed. CPU detector/SigLIP browser runs and frozen selection reimport passed. Historical model evidence stays explicitly historical."
+      },
+      "cold_source_preparation": {
+        "status": "passed",
+        "command": "PreparationManager native source replays and cold plans",
+        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "summary": "13 seeded-source preparations preserve 115801 native records; four additional built-in HF routes plan at pinned revisions. New lazy image access preserves originals. A real private normal-activation and media HTTP check passed."
+      },
+      "storage_cleanup": {
+        "status": "passed",
+        "command": "atlas storage clean --deduplicate-only --execute; manifest-bound replay deduplication",
+        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "summary": "3007758336 duplicate allocated bytes eliminated with all data/proof paths and hashes preserved. Eight obsolete local and six merged remote branches retired with verified Git-bundle recovery; no extra worktrees remain."
+      },
+      "independent_review": {
+        "status": "passed",
+        "command": "Independent engineering reviews and reproduced-defect regression checks",
+        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "summary": "Independent source, identity, resource-budget, frozen lookup, publication and final metadata reviews found no remaining actionable issue in the reviewed scope; this is engineering evidence, not human or scientific acceptance."
+      }
+    }
   },
-  "python_tests_py312": {
-    "passed": 1458,
-    "skipped": 3
-  },
-  "python_tests_py314": {
-    "version": "3.14.2",
-    "passed": 1455,
-    "skipped": 6
-  },
-  "browser_suite_note": "72 tests: 68 passed in the full run with the local Ollama provider, 1 failed because it opened an entry removed as an alias (fixed, re-run passed), 3 opt-in specs skipped. The runtime-linked-journey spec stayed skipped.",
-  "wheel_sha256": "edef4a7558b163755ed2378e2e92b72f938d101f78420b5dec19b321e08ba127",
-  "sdist_sha256": "e3bbb26e376bc12e617ab32229a52d59ee876d361a0f9066d0acbbb80df28a74",
-  "storage_above_target_bytes": 21089658880,
-  "storage_plan": "reports/storage-reclaim-plan-20261009.md",
-  "storage_note": "Idle media caches (2.6 GB) were cleared on 2026-10-09 at the researcher's request; the researcher accepted the remaining 121.1 GB. See the reclaim plan.",
-  "acceptance_matrix": "reports/acceptance_matrix.md",
-  "github_pages_plan": "docs/github-pages.md",
-  "fresh_workspace_verified_preview_recipes_note": "The 84 recorded on 2026-10-07 are not re-verified; BBQ-V and MultiTrust were verified in the maintainer workspace only.",
-  "security_review": "reports/security-review-20261009.md",
-  "public_site": "https://shinobiultra.github.io/DatasetAtlas/"
+  "scope_note": "Software release verification for the declared native source populations. Source rights and historical paper-use evidence are documented; automated tests do not confer human or scientific acceptance."
 }

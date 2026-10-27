@@ -4,11 +4,17 @@ Usage: python scripts/verify_distribution.py [dist-directory]
 """
 from __future__ import annotations
 
+import argparse
+import hashlib
 import json
 from pathlib import Path, PurePosixPath
 import re
+import stat
+import subprocess
 import sys
 import tarfile
+import tempfile
+import tomllib
 import zipfile
 
 
@@ -16,6 +22,59 @@ FORBIDDEN_ROOTS = {"work", "registry", "reports", ".git", ".venv", "node_modules
 FORBIDDEN_SUFFIXES = {".pdf", ".pem", ".key", ".pkl", ".pickle", ".joblib", ".sqlite", ".db"}
 PRIVATE_MARKERS = (b"/home/" + b"bitwise/", b"-----BEGIN " + b"PRIVATE KEY-----")
 MAX_SITE_BYTES = 200_000_000
+ROOT = Path(__file__).resolve().parents[1]
+
+
+def release_archives(directory: Path, *, wheel: Path | None = None, version: str | None = None) -> tuple[Path, Path]:
+    """Select this source version, preserving older archives without testing them by mistake."""
+    if version is None:
+        version = tomllib.loads((ROOT / 'pyproject.toml').read_text())['project']['version']
+    if not re.fullmatch(r'[A-Za-z0-9.!+]+', version):
+        raise ValueError('Unsafe release version')
+    expected = f'dataset_atlas-{version}-py3-none-any.whl'
+    wheel = Path(wheel) if wheel is not None else Path(directory) / expected
+    if wheel.name != expected:
+        raise ValueError(f'Explicit wheel does not match current release version {version}')
+    sdist = Path(directory) / f'dataset_atlas-{version}.tar.gz'
+    if not wheel.is_file() or not sdist.is_file():
+        raise ValueError(f'Missing current release wheel or source archive for version {version}')
+    return wheel.absolute(), sdist.absolute()
+
+
+def inspect_sample_bundle(path: Path, *, max_bytes: int = 50_000_000) -> dict:
+    """Check its external checksum, ZIP paths/budget, manifest and standalone launcher."""
+    from dataset_atlas.sample_launcher import _safe_name, verify_bundle
+
+    path = Path(path).absolute()
+    if path.stat().st_size > max_bytes:
+        raise ValueError('Sample ZIP exceeds its byte budget')
+    checksum = path.with_name(path.name + '.sha256').read_text().strip()
+    with path.open('rb') as source:
+        actual = hashlib.file_digest(source, 'sha256').hexdigest()
+    if checksum != f'{actual}  {path.name}':
+        raise ValueError('Sample ZIP checksum mismatch')
+    with zipfile.ZipFile(path) as archive, tempfile.TemporaryDirectory(prefix='atlas-sample-verify-') as scratch:
+        members = archive.infolist()
+        if not members or len(members) > 10_001 or sum(item.file_size for item in members) > max_bytes:
+            raise ValueError('Sample ZIP exceeds its expanded byte budget')
+        seen = set()
+        for member in members:
+            _safe_name(member.filename)
+            parts = member.filename.split('/')
+            if len(parts) < 2 or parts[0] != 'dataset-atlas-sample':
+                raise ValueError('Unexpected sample ZIP root')
+            if member.filename.casefold() in seen or stat.S_IFMT(member.external_attr >> 16) not in {0, stat.S_IFREG}:
+                raise ValueError('Duplicate or non-regular sample ZIP member')
+            seen.add(member.filename.casefold())
+        archive.extractall(scratch)
+        bundle = Path(scratch) / 'dataset-atlas-sample'
+        manifest = verify_bundle(bundle)
+        subprocess.run([sys.executable, '-I', str(bundle / 'OPEN_ATLAS.py'), '--check'],
+                       cwd=scratch, check=True, capture_output=True, text=True, timeout=30)
+        if (manifest.get('dataset_count'), manifest.get('record_count'), manifest.get('media_files')) != (3, 300, 300):
+            raise ValueError('Sample publication scope differs from the approved previews')
+        return {'archive': path.name, 'sha256': actual, 'bytes': path.stat().st_size,
+                'files': len(members), 'record_count': manifest['record_count'], 'media_files': manifest['media_files']}
 
 
 def _check_path(raw: str, *, sdist: bool) -> str:
@@ -56,7 +115,11 @@ def inspect_archive(path: Path, *, sdist: bool) -> dict:
                 name = _check_path(item.name, sdist=True)
                 if not item.isfile():
                     continue
-                content = archive.extractfile(item).read()
+                source = archive.extractfile(item)
+                if source is None:
+                    raise ValueError(f'Unreadable source archive member: {item.name}')
+                with source:
+                    content = source.read()
                 _check_contents(name, content)
                 members[name] = len(content)
                 if name.startswith("src/dataset_atlas/web/"):
@@ -100,12 +163,16 @@ def inspect_archive(path: Path, *, sdist: bool) -> dict:
 
 
 def main() -> int:
-    directory = Path(sys.argv[1]) if len(sys.argv) > 1 else Path("dist")
-    wheels = sorted(directory.glob("dataset_atlas-*.whl"))
-    sdists = sorted(directory.glob("dataset_atlas-*.tar.gz"))
-    if len(wheels) != 1 or len(sdists) != 1:
-        raise ValueError("Expected exactly one Dataset Atlas wheel and source archive")
-    print(json.dumps({"wheel": inspect_archive(wheels[0], sdist=False), "sdist": inspect_archive(sdists[0], sdist=True)}, sort_keys=True))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('directory', type=Path, nargs='?', default=ROOT / 'dist')
+    parser.add_argument('--wheel', type=Path, help='Explicit wheel, required to match the current project version')
+    parser.add_argument('--sample', type=Path, help='Also verify the portable ZIP and its adjacent .sha256')
+    args = parser.parse_args()
+    wheel, sdist = release_archives(args.directory, wheel=args.wheel)
+    result = {'wheel': inspect_archive(wheel, sdist=False), 'sdist': inspect_archive(sdist, sdist=True)}
+    if args.sample is not None:
+        result['sample'] = inspect_sample_bundle(args.sample)
+    print(json.dumps(result, sort_keys=True))
     return 0
 
 

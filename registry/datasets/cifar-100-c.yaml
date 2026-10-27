@@ -2,27 +2,27 @@ schema_version: '1.0'
 id: cifar-100-c
 name: CIFAR-100-C
 aliases: []
-description: Mention candidate from a focused page audit; the evidence receipts distinguish
-  direct use, comparison, related-work, and citation-only roles. Original source,
-  release, and rights still require independent verification.
+description: 'Native CIFAR-100-C release: nineteen corruptions at five severities over the 10,000
+  original test indices, comprising 950,000 images. Source pixels and corruption/severity identities
+  are preserved.'
 paper_ids:
 - paper-a47845c66d4a3f48
-release: unresolved
+release: zenodo-3555552-cifar-100-c
 adapter: structured
 adapter_config: {}
 coverage:
-  identity: candidate
+  identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Original release identity and rights need verification.
-  - Adapter and preview are not implemented.
+  - Public redistribution rights remain unreviewed.
+  total_count: 950000
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -34,18 +34,54 @@ evidence:
   source_file_hash: f1108a17f3cbbba7a93256ee725d68092c9a6d25204ca4faab92f6f0cbe1a4df
   page: 18
   role: corruption evaluation
-  excerpt: R-100 datasets [75] are obtained via the PyTorch loaders [105], while CIFAR-10-C
-    and CIFAR-100-C [58], with the common corruptions, are downloaded from the official
-    release (see https://zenodo.org/record/2535967#.YLYf9agz
+  excerpt: R-100 datasets [75] are obtained via the PyTorch loaders [105], while CIFAR-10-C and
+    CIFAR-100-C [58], with the common corruptions, are downloaded from the official release (see
+    https://zenodo.org/record/2535967#.YLYf9agz
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: implemented_source_release
   url: https://zenodo.org/records/3555552
   checked_on: '2026-09-23'
   report: reports/selective-acquisition-20260923.md
-  note: Pinned acquired population and real preview exercised locally. Mirror and
-    selective-transfer limits remain in the acquisition receipts; this does not establish
-    publication rights or the exact paper-used subset.
+  note: Pinned acquired population and real preview exercised locally. Mirror and selective-transfer
+    limits remain in the acquisition receipts; this does not establish publication rights or the
+    exact paper-used subset.
+  recipe: registry/recipes/cifar-100-c.yaml
+- kind: paper_usage_qualification
+  note: Available release identity is separate from historical paper use.
+  qualifications:
+  - Original release identity and rights need verification.
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  status: resolved_declared_source_population
+  release: zenodo-3555552-cifar-100-c
+  snapshot_id: cifar-100-c-8b1e4a18684465bd7c083fa6
+  source_url: https://zenodo.org/records/3555552
+  representation: pinned_source_population
+  record_count: 950000
+  population: All 19 CIFAR-100-C corruption types at 5 severities over the 10000 original CIFAR-100
+    test indices (950000 images); lossless source array pixels on request.
+  basis: Existing checksum-pinned preparation and snapshot metadata; no record contents read during
+    this curation.
+  scope_note: Identifies the available source population. This is not human review, historical
+    paper-membership acceptance, publisher byte-equivalence proof, or permission to redistribute.
+  receipt: work/prepared/cifar-100-c/8b1e4a18684465bd7c083fa679f2fb41e4206ada1e65a744b63e0a4799529257/receipt.json
+  receipt_sha256: ea344cfb998cc59ca17eb8706d84dfd2460e85a597748138085033c5630b8611
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: zenodo-3555552-cifar-100-c
+  snapshot_id: cifar-100-c-8b1e4a18684465bd7c083fa6
+  source_url: https://zenodo.org/records/3555552
+  record_count: 950000
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 19 CIFAR-100-C corruption types at 5 severities over the 10000 original CIFAR-100
+    test indices (950000 images); lossless source array pixels on request.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
   recipe: registry/recipes/cifar-100-c.yaml
 modalities:
 - image
@@ -53,3 +89,4 @@ tasks:
 - image classification
 - corruption robustness
 source_url: https://zenodo.org/records/3555552
+snapshot_id: cifar-100-c-8b1e4a18684465bd7c083fa6

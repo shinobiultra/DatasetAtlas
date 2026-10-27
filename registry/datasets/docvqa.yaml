@@ -2,27 +2,27 @@ schema_version: '1.0'
 id: docvqa
 name: DocVQA
 aliases: []
-description: Original DocVQA document-image question answering dataset, not other
-  document-VQA tasks on the same site
+description: Original DocVQA document-image question answering dataset, not other document-VQA
+  tasks on the same site
 paper_ids:
 - paper-25eaa8c74ce76800
-release: unresolved
+release: 539088ef8a8ada01ac8e2e6d4e372586748a265e
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - The exact original RRC archive bytes and citing paper sample are not established
-    by this formatted mirror.
-  - Adapter and preview are not implemented.
+  - The exact original RRC archive bytes and citing paper sample are not established by this formatted
+    mirror.
+  total_count: 50000
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -37,29 +37,27 @@ evidence:
   source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
   page: 29
   role: cited-study dataset in survey table
-  excerpt: VQA, DocVQA, VQAv2 Logit Lens (Jiang et al., 2024c) LLaVA-1.5-7B, Shikra,
-    MiniGP
+  excerpt: VQA, DocVQA, VQAv2 Logit Lens (Jiang et al., 2024c) LLaVA-1.5-7B, Shikra, MiniGP
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://site.docvqa.org/datasets/docvqa
-  note: Original DocVQA document-image question answering dataset, not other document-VQA
-    tasks on the same site
+  note: Original DocVQA document-image question answering dataset, not other document-VQA tasks
+    on the same site
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_release
   url: https://site.docvqa.org/datasets/docvqa
-  note: official DocVQA release page; no immutable archive digest/version shown in
-    this audit
+  note: official DocVQA release page; no immutable archive digest/version shown in this audit
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_access
   url: https://site.docvqa.org/datasets/docvqa
-  note: Official DocVQA page points to the RRC challenge Downloads tab; direct files
-    and any account requirement were not verified because that portal timed out/certificate
-    verification failed during this check.
+  note: Official DocVQA page points to the RRC challenge Downloads tab; direct files and any account
+    requirement were not verified because that portal timed out/certificate verification failed
+    during this check.
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
@@ -75,14 +73,57 @@ evidence:
   url: https://huggingface.co/datasets/lmms-lab-encoder/DocVQA/tree/539088ef8a8ada01ac8e2e6d4e372586748a265e
   checked_on: '2026-10-06'
   source_identity_status: public_formatted_mirror_not_original_archive_parity
-  note: 24 native DocVQA Parquet shards are pinned separately from InfographicVQA;
-    card split counts are not assumed to describe all native files.
+  note: 24 native DocVQA Parquet shards are pinned separately from InfographicVQA; card split
+    counts are not assumed to describe all native files.
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 100-record prepared preview: asset kinds and text fields
-    present in at least one record. Not inferred from the name or description.'
-source_url: https://site.docvqa.org/datasets/docvqa
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in
+    at least one record. Not inferred from the name or description.'
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: 539088ef8a8ada01ac8e2e6d4e372586748a265e
+  snapshot_id: docvqa-95e71e4ff0dea89c656587a6
+  source_url: https://huggingface.co/datasets/lmms-lab-encoder/DocVQA/tree/539088ef8a8ada01ac8e2e6d4e372586748a265e
+  record_count: 50000
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: Every native DocVQA train, validation and test row in the pinned LMMs-Lab formatted
+    mirror. InfographicVQA is excluded. Native question IDs, document IDs, UCSF page identifiers,
+    question types, answers and split fields remain intact. Preview media are verified original
+    bytes from this mirror; equality to the original RRC archives and the citing paper population
+    is not established. Document media remain local-only.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/docvqa.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: 539088ef8a8ada01ac8e2e6d4e372586748a265e
+  snapshot_id: docvqa-95e71e4ff0dea89c656587a6
+  source_url: https://huggingface.co/datasets/lmms-lab-encoder/DocVQA/tree/539088ef8a8ada01ac8e2e6d4e372586748a265e
+  record_count: 50000
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: Every native DocVQA train, validation and test row in the pinned LMMs-Lab formatted
+    mirror. InfographicVQA is excluded. Native question IDs, document IDs, UCSF page identifiers,
+    question types, answers and split fields remain intact. Preview media are verified original
+    bytes from this mirror; equality to the original RRC archives and the citing paper population
+    is not established. Document media remain local-only.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/docvqa.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
+source_url: https://huggingface.co/datasets/lmms-lab-encoder/DocVQA/tree/539088ef8a8ada01ac8e2e6d4e372586748a265e
 modalities:
 - image
 - text
+snapshot_id: docvqa-95e71e4ff0dea89c656587a6

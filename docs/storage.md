@@ -116,8 +116,8 @@ This verifies every repacked member against the native archive's member hashes,
 requires existing original routes and pinned previews for every dependent snapshot,
 and performs fresh native retrieval probes. `--execute` removes only the checked
 Atlas-owned redundant archive. It cannot establish routes by itself; first complete
-native indexing and preview retention. Food101's additional 5.14 GB retirement is
-recorded in `reports/food101-repacked-retention.json`.
+native indexing and preview retention. Detailed maintenance receipts remain in
+private workspace storage; they are not public release evidence.
 
 ## Cleanup
 
@@ -159,11 +159,7 @@ source files. Failed/cancelled preparations retain resumable partials and their
 attempt history. Completion removes staging-cache links after native source
 links exist. Remote Parquet preview caches follow the same staged lifecycle.
 
-The 2026-10-05 cleanup additionally retired BAPPS's native plain TAR and redundant
-ZIP copies after full member-hash parity, protected previews and fresh original
-retrieval probes. STL-10 retains every native pixel/label/metadata member and its
-pinned receipt after removal of the duplicate compressed archive. Fresh-download
-verification copies are disposable only after their counts, hashes, plans,
-status, preview media checks and logs have been retained. See the latest
-`reports/storage-footprint-20261005.json` and release evidence for measured bytes;
-logical file sizes alone overstate savings when hard links are present.
+Preserve originals, native retrieval/index dependencies, active/frozen snapshots,
+previews, model weights and unique failure evidence. Retire only exact approved
+disposable targets after verifying their recovery path. Measured allocated blocks
+and logical file sizes differ when hard links or shared extents are present.

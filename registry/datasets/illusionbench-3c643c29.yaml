@@ -2,10 +2,11 @@ schema_version: '1.0'
 id: illusionbench-3c643c29
 name: IllusionBench
 aliases: []
-description: 'IllusionBench (Zhang et al., arXiv 2501.00848) as released by its authors on Hugging Face:
-  1,041 annotated visual-illusion entries with true/false and multiple-choice questions (5,577), difficulty
-  and category fields. The release does not match the paper''s 1,051 images and 5,548 questions or its
-  own archive (44 annotated entries lack an image; 11 archived images lack an annotation).'
+description: 'IllusionBench (Zhang et al., arXiv 2501.00848) as released by its authors on Hugging
+  Face: 1,041 annotated visual-illusion entries with true/false and multiple-choice questions
+  (5,577), difficulty and category fields. The release does not match the paper''s 1,051 images
+  and 5,548 questions or its own archive (44 annotated entries lack an image; 11 archived images
+  lack an annotation).'
 paper_ids:
 - paper-2c07a8c6af8e33c2
 release: hf-8ee046d8acfb968c1a6a564f231396bc0c4039ae
@@ -92,27 +93,28 @@ coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: indexed_metadata_partial_media
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - 'The release is inconsistent with the paper (1,051 images, 5,548 questions) and with itself: 44 annotated
-    entries have no image in the archive and 11 archived images have no annotation. Both sets are counted,
-    never dropped silently.'
-  - The corpus mention cites Zhang 2025 while a local paper title says IllusionBench+, a separately constructed
-    benchmark; this entry is the Zhang et al. release only.
+  - 'The release is inconsistent with the paper (1,051 images, 5,548 questions) and with itself:
+    44 annotated entries have no image in the archive and 11 archived images have no annotation.
+    Both sets are counted, never dropped silently.'
+  - The corpus mention cites Zhang 2025 while a local paper title says IllusionBench+, a separately
+    constructed benchmark; this entry is the Zhang et al. release only.
   - 'Image rights are unreviewed (the repository is MIT licensed; the images are illusion photographs
     and renderings from elsewhere): local browsing only.'
+  total_count: 1041
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://huggingface.co/datasets/MingZhangSJTU/IllusionBench
-  note: GitHub code repository is MIT licensed; the dataset card states no data licence and the images
-    come from third-party sources.
+  note: GitHub code repository is MIT licensed; the dataset card states no data licence and the
+    images come from third-party sources.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-1724d7392bf0fc4c7928
@@ -120,14 +122,14 @@ evidence:
   source_file_hash: 46f3b325eda29bc401398f275242e175e3576fd32fc6d037fe589341aea00542
   page: 2
   role: related-work mention
-  excerpt: S-V (Das et al., 2024) and 2025; Liao et al., 2025) and multi-task train- IllusionBench (Zhang
-    et al., 2025). ing (Rao et al., 2024; Wang et al., 2023; Ma et al.,
+  excerpt: S-V (Das et al., 2024) and 2025; Liao et al., 2025) and multi-task train- IllusionBench
+    (Zhang et al., 2025). ing (Rao et al., 2024; Wang et al., 2023; Ma et al.,
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://arxiv.org/abs/2501.00848
-  note: Original Zhang paper describes 1,051 images/5,548 QA/1,051 descriptions; corpus mention cites
-    Zhang 2025, while a local paper title uses IllusionBench+
+  note: Original Zhang paper describes 1,051 images/5,548 QA/1,051 descriptions; corpus mention
+    cites Zhang 2025, while a local paper title uses IllusionBench+
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_paper_located_variant_relation_unresolved
@@ -139,22 +141,44 @@ evidence:
   source_identity_status: author_paper_located_variant_relation_unresolved
 - kind: source_audit_access
   url: https://arxiv.org/abs/2501.00848
-  note: source_page_public_data_unverified; Compare authors, images and release before any merge with
-    IllusionBench+; keep related-work role.
+  note: source_page_public_data_unverified; Compare authors, images and release before any merge
+    with IllusionBench+; keep related-work role.
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_paper_located_variant_relation_unresolved
 - kind: source_audit_release
   checked_on: '2026-10-06'
   url: https://huggingface.co/datasets/MingZhangSJTU/IllusionBench/tree/8ee046d8acfb968c1a6a564f231396bc0c4039ae
-  note: 'Pinned Hugging Face revision holds IllusionDataset.zip (923,868,359 bytes: 1,008 images plus
-    macOS metadata files), Image_properties.json (1,041 entries, 5,577 questions) and README/figures;
+  note: 'Pinned Hugging Face revision holds IllusionDataset.zip (923,868,359 bytes: 1,008 images
+    plus macOS metadata files), Image_properties.json (1,041 entries, 5,577 questions) and README/figures;
     the README title and authors match arXiv 2501.00848 and link github.com/mingZhang614/IllusionBench
-    (MIT). Joining annotations to the archive''s real members: 997 match, 44 annotated entries have no
-    image (names such as 1.png and 10065028.png), and 11 archived images have no annotation: 10049031.png,
-    10049032.png, 10049033.png, 10049034.png, 10049035.png, 10049036.png, 10049037.png, 10049038.png,
-    10049039.png, 10049040.png, 10107027.png.'
+    (MIT). Joining annotations to the archive''s real members: 997 match, 44 annotated entries
+    have no image (names such as 1.png and 10065028.png), and 11 archived images have no annotation:
+    10049031.png, 10049032.png, 10049033.png, 10049034.png, 10049035.png, 10049036.png, 10049037.png,
+    10049038.png, 10049039.png, 10049040.png, 10107027.png.'
   source_identity_status: author_release_identified_inconsistent_with_paper_counts
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: hf-8ee046d8acfb968c1a6a564f231396bc0c4039ae
+  snapshot_id: illusionbench-3c643c29-5b6cbb8d761d22b8d8f7a76d
+  source_url: https://huggingface.co/datasets/MingZhangSJTU/IllusionBench/tree/8ee046d8acfb968c1a6a564f231396bc0c4039ae
+  record_count: 1041
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: indexed_metadata_partial_media
+  unit: example
+  population: 'All 1,041 annotated entries of the authors'' Image_properties.json at the pinned
+    Hugging Face revision (5,577 questions: 2,213 true/false and 3,364 multiple choice, with the
+    authors'' answers and difficulty/category fields). The release is not consistent with itself
+    or the paper (1,051 images and 5,548 questions): its archive holds 1,008 images, 997 match
+    an annotation, 44 annotated entries have no image in the archive (kept as records with the
+    image marked absent from the pinned release) and 11 archived images have no annotation (not
+    indexed; named in the registry evidence). Images are read on request from the authors'' ETag-pinned
+    archive.'
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/illusionbench-3c643c29.yaml
 source_url: https://huggingface.co/datasets/MingZhangSJTU/IllusionBench/tree/8ee046d8acfb968c1a6a564f231396bc0c4039ae
 modalities:
 - image
@@ -167,3 +191,4 @@ labels:
 - Category
 - Question Type
 - Correct Answer
+snapshot_id: illusionbench-3c643c29-5b6cbb8d761d22b8d8f7a76d

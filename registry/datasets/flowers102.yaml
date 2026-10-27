@@ -2,27 +2,26 @@ schema_version: '1.0'
 id: flowers102
 name: Flowers102
 aliases: []
-description: Mention candidate from a focused page audit; the evidence receipts distinguish
-  direct use, comparison, related-work, and citation-only roles. Original source,
-  release, and rights still require independent verification.
+description: 'Oxford Flowers-102: all 8,189 original images with native class IDs and train/validation/test
+  membership. Optional segmentation images are a separate source.'
 paper_ids:
 - paper-25eaa8c74ce76800
-release: unresolved
+release: oxford-flowers102-original
 adapter: structured
 adapter_config: {}
 coverage:
-  identity: candidate
+  identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Original release identity and rights need verification.
-  - Adapter and preview are not implemented.
+  - Public redistribution rights remain unreviewed.
+  total_count: 8189
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -42,10 +41,47 @@ evidence:
   checked_on: '2026-09-23'
   recipe: registry/recipes/flowers102.yaml
   report: reports/selective-acquisition-20260923.md
-  note: Original source release and native records exercised locally. This is not
-    a claim of human rights review or an exact paper-used subset.
+  note: Original source release and native records exercised locally. This is not a claim of human
+    rights review or an exact paper-used subset.
+- kind: paper_usage_qualification
+  note: Available release identity is separate from historical paper use.
+  qualifications:
+  - Original release identity and rights need verification.
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  status: resolved_declared_source_population
+  release: oxford-flowers102-original
+  snapshot_id: flowers102-bf66416e2c87239627de1757
+  source_url: https://www.robots.ox.ac.uk/~vgg/data/flowers/102/
+  representation: pinned_source_population
+  record_count: 8189
+  population: All 8,189 original Oxford Flowers-102 images with source class IDs and train/validation/test
+    membership; optional segmentation images are a separate source.
+  basis: Existing checksum-pinned preparation and snapshot metadata; no record contents read during
+    this curation.
+  scope_note: Identifies the available source population. This is not human review, historical
+    paper-membership acceptance, publisher byte-equivalence proof, or permission to redistribute.
+  receipt: work/prepared/flowers102/bf66416e2c87239627de1757b0cfca135f04eca4fdf5af2c01be13cd52c04416/receipt.json
+  receipt_sha256: 27faa110f94b11ecdc1530055b044bfeb9fb69daaa42c44e4f5614ce7d6a2139
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: oxford-flowers102-original
+  snapshot_id: flowers102-bf66416e2c87239627de1757
+  source_url: https://www.robots.ox.ac.uk/~vgg/data/flowers/102/
+  record_count: 8189
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 8,189 original Oxford Flowers-102 images with source class IDs and train/validation/test
+    membership; optional segmentation images are a separate source.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/flowers102.yaml
 modalities:
 - image
 tasks:
 - image classification
 source_url: https://www.robots.ox.ac.uk/~vgg/data/flowers/102/
+snapshot_id: flowers102-bf66416e2c87239627de1757

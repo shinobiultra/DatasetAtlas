@@ -2,16 +2,15 @@ schema_version: '1.0'
 id: cinic-10
 name: CINIC-10
 aliases: []
-description: Mention candidate from a focused page audit; the evidence receipts distinguish
-  direct use, comparison, related-work, and citation-only roles. Original source,
-  release, and rights still require independent verification.
+description: 'CINIC-10 institutional release: all 270,000 native images across train, validation
+  and test, retaining ten classes and original CIFAR/ImageNet source identities.'
 paper_ids:
 - paper-a47845c66d4a3f48
 release: CINIC-10-institutional-ds2448
 adapter: archive
 adapter_config: {}
 coverage:
-  identity: candidate
+  identity: resolved
   source: verified
   access: public
   adapter: tested
@@ -21,7 +20,7 @@ coverage:
   preview_count: 100
   unit: example
   blockers:
-  - Original release identity and rights need verification.
+  - Public redistribution rights remain unreviewed.
   total_count: 270000
 rights:
   records: not_reviewed
@@ -34,9 +33,9 @@ evidence:
   source_file_hash: f1108a17f3cbbba7a93256ee725d68092c9a6d25204ca4faab92f6f0cbe1a4df
   page: 7
   role: evaluation
-  excerpt: o dataset resampling bias (CIFAR-10.1, [112]) and image source shift (CINIC-10,
-    [31]). For each of these datasets, we measure standard accuracy, and Fig. 3 shows
-    that improvement in robust
+  excerpt: o dataset resampling bias (CIFAR-10.1, [112]) and image source shift (CINIC-10, [31]).
+    For each of these datasets, we measure standard accuracy, and Fig. 3 shows that improvement
+    in robust
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -45,21 +44,61 @@ evidence:
   source_file_hash: f1108a17f3cbbba7a93256ee725d68092c9a6d25204ca4faab92f6f0cbe1a4df
   page: 7
   role: distribution shift evaluation
-  excerpt: R-10-C, [58]) to dataset resampling bias (CIFAR-10.1, [112]) and image
-    source shift (CINIC-10, [31]). For each of these datasets, we measure standard
-    accuracy, and Fig. 3 shows that improvement in robust accuracy (whic
+  excerpt: R-10-C, [58]) to dataset resampling bias (CIFAR-10.1, [112]) and image source shift
+    (CINIC-10, [31]). For each of these datasets, we measure standard accuracy, and Fig. 3 shows
+    that improvement in robust accuracy (whic
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: local_native_release_verification
   report: reports/cinic-10-preview-verification.json
   checked_on: '2026-09-23'
   snapshot_id: cinic-10-f7e34bd1657f83c19d756310
-  note: Native indexed population and 100 local preview records verified; does not
-    approve redistribution or resolve a paper-specific subset.
+  note: Native indexed population and 100 local preview records verified; does not approve redistribution
+    or resolve a paper-specific subset.
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 100-record prepared preview: asset kinds and text fields
-    present in at least one record. Not inferred from the name or description.'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in
+    at least one record. Not inferred from the name or description.'
+- kind: paper_usage_qualification
+  note: Available release identity is separate from historical paper use.
+  qualifications:
+  - Original release identity and rights need verification.
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  status: resolved_declared_source_population
+  release: CINIC-10-institutional-ds2448
+  snapshot_id: cinic-10-f7e34bd1657f83c19d756310
+  source_url: https://github.com/BayesWatch/cinic-10
+  representation: pinned_source_population
+  record_count: 270000
+  population: All 270000 original CINIC-10 images across train/valid/test (90000 each), with ten
+    native classes and CIFAR/ImageNet source identity retained from filenames. No image regeneration
+    or split reassignment. Original institutional MD5 verified; no publication approval.
+  basis: Existing checksum-pinned preparation and snapshot metadata; no record contents read during
+    this curation.
+  scope_note: Identifies the available source population. This is not human review, historical
+    paper-membership acceptance, publisher byte-equivalence proof, or permission to redistribute.
+  receipt: work/prepared/cinic-10/f7e34bd1657f83c19d7563105cb0a10c0d7d6acb8263fb2297730740556b9086/receipt.json
+  receipt_sha256: e3bb1ed0326ff3e6a160c7c8e6d6e0eeacae4d7f5e8d01becbd0fd23c7d5a6ca
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: CINIC-10-institutional-ds2448
+  snapshot_id: cinic-10-f7e34bd1657f83c19d756310
+  source_url: https://github.com/BayesWatch/cinic-10
+  record_count: 270000
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 270000 original CINIC-10 images across train/valid/test (90000 each), with ten
+    native classes and CIFAR/ImageNet source identity retained from filenames. No image regeneration
+    or split reassignment. Original institutional MD5 verified; no publication approval.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/cinic-10.yaml
 modalities:
 - image
+snapshot_id: cinic-10-f7e34bd1657f83c19d756310
+source_url: https://github.com/BayesWatch/cinic-10

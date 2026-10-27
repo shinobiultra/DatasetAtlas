@@ -2,35 +2,36 @@ schema_version: '1.0'
 id: celeba
 name: CelebA
 aliases: []
-description: CUHK CelebFaces Attributes face-image dataset, with identity, forty attributes,
-  landmarks and splits.
+description: CUHK CelebFaces Attributes face-image dataset, with identity, forty attributes, landmarks
+  and splits.
 paper_ids:
 - paper-32cea5e43d940514
 - paper-25eaa8c74ce76800
-release: unresolved
+release: cuhk-official-aligned-public-annotations
 adapter: structured_archive
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: partial
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: local_only
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
   - Native identity labels require publisher request and have not been acquired.
   - Exact paper-used image variant and cohort remain unidentified.
   - Author noncommercial research terms prohibit public redistribution of native media.
+  total_count: 202599
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
-  note: Official agreement permits noncommercial research use and limits copying and
-    redistribution; do not publish images or identity data
+  note: Official agreement permits noncommercial research use and limits copying and redistribution;
+    do not publish images or identity data
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-5d6d0a271d18f3e48b29
@@ -38,9 +39,9 @@ evidence:
   source_file_hash: f586c8c8149db3e71c2591de6d54fdb4568ba3c514e9581802d087937e776e2f
   page: 4
   role: training
-  excerpt: ' ̸= g:   space, we train SAE using various data configura- [ tions:
-    CelebA [52], Cocogender images [76], and Fair- Ng = Eg \  Eh  Face [41] for
-    the image encoder and Cocogender cap- '
+  excerpt: ' ̸= g:   space, we train SAE using various data configura- [ tions: CelebA [52],
+    Cocogender images [76], and Fair- Ng = Eg \  Eh  Face [41] for the image encoder and Cocogender
+    cap- '
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -49,8 +50,7 @@ evidence:
   source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
   page: 30
   role: cited-study dataset in survey table
-  excerpt: LAION, CelebA, ImageNetVal (Parekh et al., 2024) DePALM (CLIP+OPT) Image
-    C
+  excerpt: LAION, CelebA, ImageNetVal (Parekh et al., 2024) DePALM (CLIP+OPT) Image C
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -64,42 +64,83 @@ evidence:
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
-  note: CUHK CelebFaces Attributes face-image dataset, with identity, forty attributes,
-    landmarks and splits
+  note: CUHK CelebFaces Attributes face-image dataset, with identity, forty attributes, landmarks
+    and splits
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_release
   url: https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
-  note: Original author release lists 202,599 face images and 10,177 identities; image
-    variants must remain distinct
+  note: Original author release lists 202,599 face images and 10,177 identities; image variants
+    must remain distinct
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_access
   url: https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
-  note: Official page links Drive/Baidu images and annotations; identity labels require
-    request; retrieval untested
+  note: Official page links Drive/Baidu images and annotations; identity labels require request;
+    retrieval untested
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_rights
   url: https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
-  note: Official agreement permits noncommercial research use and limits copying and
-    redistribution; do not publish images or identity data
+  note: Official agreement permits noncommercial research use and limits copying and redistribution;
+    do not publish images or identity data
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: native_source_verification
   checked_on: '2026-10-06'
   receipt: reports/celeba-native-acquisition-20261006.json
-  note: All five public author files match publisher byte counts and MD5; 202599 image
-    members pass CRC and SHA verification and filename-exact table joins.
+  note: All five public author files match publisher byte counts and MD5; 202599 image members
+    pass CRC and SHA verification and filename-exact table joins.
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 100-record prepared preview: asset kinds and text fields
-    present in at least one record. Not inferred from the name or description.'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in
+    at least one record. Not inferred from the name or description.'
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: cuhk-official-aligned-public-annotations
+  snapshot_id: celeba-4f68b10ae7785997faf4779b
+  source_url: https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
+  record_count: 202599
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 202599 filename-joined public author aligned face images, 40 signed attributes,
+    original-photo bounding boxes, aligned landmarks and native train/validation/test partitions.
+    Identity labels require publisher request and are absent; paper-specific subsets remain unidentified.
+    Bounding boxes refer to original photographs and are not overlaid on aligned crops.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/celeba.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: cuhk-official-aligned-public-annotations
+  snapshot_id: celeba-4f68b10ae7785997faf4779b
+  source_url: https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
+  record_count: 202599
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 202599 filename-joined public author aligned face images, 40 signed attributes,
+    original-photo bounding boxes, aligned landmarks and native train/validation/test partitions.
+    Identity labels require publisher request and are absent; paper-specific subsets remain unidentified.
+    Bounding boxes refer to original photographs and are not overlaid on aligned crops.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/celeba.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
 source_url: https://mmlab.ie.cuhk.edu.hk/projects/CelebA.html
 modalities:
 - image
+snapshot_id: celeba-4f68b10ae7785997faf4779b

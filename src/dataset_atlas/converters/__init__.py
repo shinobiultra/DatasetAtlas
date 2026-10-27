@@ -17,9 +17,13 @@ from typing import Callable, Iterable
 CONVERTERS: dict[str, Callable] = {}
 
 
-def converter(name: str):
+BOUNDED_OUTPUT_CONVERTERS: set[str] = set()
+
+
+def converter(name: str, *, bounded_output: bool = False):
     def register(function):
         CONVERTERS[name] = function
+        if bounded_output:BOUNDED_OUTPUT_CONVERTERS.add(name)
         return function
     return register
 
@@ -125,7 +129,8 @@ def media_digest(directory: Path) -> str:
     return digest.hexdigest()
 
 
-def run_conversion(spec: dict, inputs: dict[str, Path], output_dir: Path, check=lambda: None) -> dict:
+def run_conversion(spec: dict, inputs: dict[str, Path], output_dir: Path, check=lambda: None,
+                   *, max_output_bytes: int | None = None) -> dict:
     """Run the named converter and refuse a result that differs from the recipe's pinned count or row digest."""
     from . import text, tables, images  # noqa: F401  (registers the converters)
     from . import media  # noqa: F401
@@ -142,13 +147,18 @@ def run_conversion(spec: dict, inputs: dict[str, Path], output_dir: Path, check=
     from . import emoset  # noqa: F401
     from . import pata  # noqa: F401
     from . import factoid  # noqa: F401
+    from . import activations  # noqa: F401
+    from . import retained_visuals  # noqa: F401
     name = spec.get('name')
     if name not in CONVERTERS:
         raise ValueError(f'Unknown converter: {name!r}')
     for key in ('count', 'rows_sha256'):
         if key not in spec:
             raise ValueError(f'A conversion recipe must pin {key}')
-    result = CONVERTERS[name](spec.get('params', {}), inputs, Path(output_dir), check)
+    # Opt-in converters enforce this reservation before each write. Existing
+    # converters retain their current semantics and the worker's outer guards.
+    options = {'max_output_bytes':max_output_bytes} if name in BOUNDED_OUTPUT_CONVERTERS else {}
+    result = CONVERTERS[name](spec.get('params', {}), inputs, Path(output_dir), check, **options)
     if result['count'] != spec['count']:
         raise ValueError(f"Conversion produced {result['count']:,} rows; the recipe pins {spec['count']:,}")
     if result['rows_sha256'] != spec['rows_sha256']:

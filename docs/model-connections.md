@@ -42,22 +42,25 @@ Independent evaluation batches accept at most 100 ordered record IDs and eight t
 
 All mutation routes require `X-Atlas-Request: 1` and reject a mismatched `Origin`. The host workbench still needs its usual loopback binding and origin/host protections. The record resolver and trusted tool backend must enforce access to the selected records; the provider layer additionally checks the exact approved IDs and rejects tool outputs outside that scope.
 
-## Local model proof, 2026-09-22
+## Configure and verify a local provider
 
-The local proof uses the already cached `Qwen/Qwen2.5-VL-3B-Instruct` snapshot `66285546d2b821cf421d4f5eb2576359d3770cd3`, vLLM 0.29.0, and PyTorch 2.13.0+cu132 on the RTX 5090 Laptop GPU. This is a small, practical integration model, not a claim of state-of-the-art quality. [vLLM's supported-model list](https://docs.vllm.ai/en/v0.17.0/models/supported_models/) includes Qwen2.5-VL; its [tool-calling guide](https://docs.vllm.ai/en/latest/features/tool_calling/) specifies `--enable-auto-tool-choice --tool-call-parser hermes` for Qwen2.5. The [Qwen model card](https://huggingface.co/Qwen/Qwen2.5-VL-3B-Instruct) lists the model's research license; do not redistribute the cached weights as part of Atlas.
+Install a compatible local server separately and choose its explicit loopback
+address/model in Settings. Atlas does not discover or start a model service.
+`scripts/setup-local-vlm.sh` and `scripts/start-local-vlm.sh` provide an optional
+isolated, pinned server workflow; inspect its resource settings and local model
+requirements before running it. A prepared environment or cached weights do not
+mean that a server is currently available.
 
-`scripts/setup-local-vlm.sh` installs the tested server into an isolated `work/model-server/.venv`. `scripts/start-local-vlm.sh` serves the pinned cached snapshot on `127.0.0.1:8001` with at most 56% of this GPU's memory, a 4,096-token context, one concurrent sequence, and at most two images per prompt. It leaves the existing Ollama service untouched. The server is only needed when model features are explicitly used.
+Run the benign capability probe for that exact configured server and model.
+Unsupported endpoints remain unavailable, and transport failures remain unknown.
+Then preview an exact context before authorizing a dataset interaction. Empty or
+output-limited answers retain their provider stop reason and are errors rather
+than successful predictions.
 
-The prepared CLEVR preview provided an actual image and question under the dataset's recorded CC BY 4.0 rights and attribution. With evaluation mode, image bytes, and no gold/source/prediction fields, the saved VLM conversation answered “Yes” and cited record `clevr:example:81280039a9c65cac129baa0d`. The source answer, checked only after the request, is “no”: this prediction is wrong. A second saved conversation on the same record contained no image pixels; the model correctly stated that it could not inspect the image. A third local exploration conversation used a forced, bounded `get_records` call and cited deterministic receipt `atlas-tool:386734e46fbac084d8d27563`. These are qualitative integration checks on one sample, not accuracy or dataset-coverage claims. The source pack is the prepared `work/packs/clevr/pack.json` from the [official CLEVR release](https://cs.stanford.edu/people/jcjohns/clevr/) and the project's pinned preview provenance.
-
-The actual server/model combination passed benign probes for text generation, one-image input, two-image input, structured output, and tool calls. The `/v1/embeddings` endpoint returned 404, so text and image embeddings are marked unsupported for this provider. Exact local receipts are in `work/model-server/proof-summary.json`, `work/model-server/capability-probe.json`, and mode-0600 `local-config/conversations.jsonl`. The context preview files in `work/model-server/` contain the exact local payload, including image data URLs; they are ignored by Git and should remain local.
-
-An independent two-record CLEVR evaluation also completed as two separate local calls with no gold/source fields in either input. On the latest answer-only run, the responses were `yes` (source answer `no`) and `yellow` (source answer `cyan`), both wrong. An earlier run with the same answer-only prompt returned `no` for the first record. This small check demonstrates response variation and cannot establish accuracy. The latest local batch receipt is `work/model-server/clevr-independent-batch-answer-summary.json`, with exact per-record contexts in `work/model-server/clevr-independent-batch-context-preview.json`.
-
-## LM Studio proof, 2026-09-23
-
-The [official headless runtime](https://lmstudio.ai/docs/developer/core/headless), llmster 0.0.25-1, was installed with shell-profile modification disabled. It serves the already-local `gemma-4-e4b-it-obliterated` Q5_K_M model on `127.0.0.1:1234`, using CPU inference and a 4,096-token context. No new model weights or external model API were used for this check.
-
-Actual Atlas interactions succeeded with text and with one original CLEVR image, including saved input digests and record citations. Benign probes demonstrated text, one-image and two-image input. This particular model/server combination returned HTTP 400 for structured output, tool calls and embeddings; those capabilities remain unsupported for this provider. The vLLM provider supplies the separately demonstrated tool integration. The evidence is `reports/lmstudio-live-verification.json`; exact local contexts remain under ignored `work/model-server/lmstudio/`.
-
-An initial image request exhausted its 256-token output allowance and returned no answer. Atlas now records empty or output-limited responses as errors, retains partial text and provider stop reasons, and leaves independent batch records pending. A probe that exhausts its token budget stays `unknown`. The successful LM Studio rerun allowed at most 1,536 output tokens; it is an integration demonstration, not a model-accuracy result.
+The [current release evidence](../reports/release_evidence.md) distinguishes fresh
+controlled regression checks from retained historical model demonstrations. A
+historical interaction binds its original snapshot, selected records, context
+digest, model/settings and saved output. It does not establish current server
+availability or model accuracy. Keep exact contexts and credentials in private
+workspace storage; public release summaries contain only the necessary aggregate
+provenance.

@@ -3,8 +3,8 @@ id: rsicd
 name: RSICD
 aliases: []
 description: 'RSICD: all 10,921 author-released remote-sensing images and their five native captions,
-  caption tokens/IDs and train/validation/test labels. All 224 by 224 released images retain their original
-  pixels.'
+  caption tokens/IDs and train/validation/test labels. All 224 by 224 released images retain their
+  original pixels.'
 paper_ids:
 - paper-25eaa8c74ce76800
 release: rsicd-fc33b4555e4baa4d2f05ff0449479c89da2eeac2
@@ -28,8 +28,8 @@ rights:
   annotations: not_reviewed
   images: not_reviewed
   source: https://github.com/201528014227051/RSICD_optimal
-  note: Imagery from several map providers has provider-specific terms; repository license does not clear
-    base imagery.
+  note: Imagery from several map providers has provider-specific terms; repository license does
+    not clear base imagery.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-3d0888dc5be37d28a901
@@ -37,20 +37,20 @@ evidence:
   source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
   page: 30
   role: cited-study dataset in survey table
-  excerpt: "RSICD (Fang et al., 2024b) DensetNet-121 \u2014"
+  excerpt: RSICD (Fang et al., 2024b) DensetNet-121 —
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://github.com/201528014227051/RSICD_optimal
-  note: 'Original paper points to author repository for the RSICD corpus. Release: RSICD 10,921 aerial
-    images/5 captions each'
+  note: 'Original paper points to author repository for the RSICD corpus. Release: RSICD 10,921
+    aerial images/5 captions each'
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
 - kind: source_audit_rights
   url: https://github.com/201528014227051/RSICD_optimal
-  note: Imagery from several map providers has provider-specific terms; repository license does not clear
-    base imagery.
+  note: Imagery from several map providers has provider-specific terms; repository license does
+    not clear base imagery.
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
@@ -58,12 +58,30 @@ evidence:
   url: https://github.com/201528014227051/RSICD_optimal/tree/fc33b4555e4baa4d2f05ff0449479c89da2eeac2
   checked_on: '2026-09-23'
   receipt: reports/rsicd-live-verification.json
-  scope: Complete native dataset_rsicd.json joined by exact filename to the author Git LFS image ZIP.
-    Five caption entries per image are retained even where their strings repeat. Images are the released
-    224-pixel benchmark crops, not higher-resolution map-provider imagery.
+  scope: Complete native dataset_rsicd.json joined by exact filename to the author Git LFS image
+    ZIP. Five caption entries per image are retained even where their strings repeat. Images are
+    the released 224-pixel benchmark crops, not higher-resolution map-provider imagery.
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: rsicd-fc33b4555e4baa4d2f05ff0449479c89da2eeac2
+  snapshot_id: rsicd-f3cb3b52b1c4280539220300
+  source_url: https://github.com/201528014227051/RSICD_optimal/tree/fc33b4555e4baa4d2f05ff0449479c89da2eeac2
+  record_count: 10921
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: Complete native dataset_rsicd.json joined by exact filename to the author Git LFS
+    image ZIP. Five caption entries per image are retained even where their strings repeat. Images
+    are the released 224-pixel benchmark crops, not higher-resolution map-provider imagery.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/rsicd.yaml
 source_url: https://github.com/201528014227051/RSICD_optimal/tree/fc33b4555e4baa4d2f05ff0449479c89da2eeac2
 modalities:
 - image
 - text
 tasks:
 - image captioning
+snapshot_id: rsicd-f3cb3b52b1c4280539220300

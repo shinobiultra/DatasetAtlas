@@ -2,8 +2,8 @@ schema_version: '1.0'
 id: anthropic-red-teaming-prompts
 name: Anthropic red-teaming prompts
 aliases: []
-description: Official Anthropic red-team-attempt transcripts and ratings, not the citing paper's 1,000-response
-  selection. The official gzip is a JSON array despite its jsonl.gz name.
+description: Official Anthropic red-team-attempt transcripts and ratings, not the citing paper's
+  1,000-response selection. The official gzip is a JSON array despite its jsonl.gz name.
 paper_ids:
 - paper-12e8bd34b4a2f2a8
 release: hf-09be8c5bbc57cb3887f3a9732ad6aa7ec602a1fa
@@ -12,8 +12,8 @@ adapter_config:
   path: work/sources/anthropic-red-teaming-prompts/records.jsonl
   format: jsonl
   sha256: 361e0c67cba0ecc3ac7134bbad25ce28fe49d228fbc7832d58fa7b1370b4a780
-  population: Official Anthropic red-team-attempt transcripts and ratings, not the citing paper's 1,000-response
-    selection. The official gzip is a JSON array despite its jsonl.gz name.
+  population: Official Anthropic red-team-attempt transcripts and ratings, not the citing paper's
+    1,000-response selection. The official gzip is a JSON array despite its jsonl.gz name.
   mapping:
     id: source_row
     text: task_description
@@ -50,14 +50,30 @@ evidence:
   source_file_hash: e651ef9944539b513a21a8b7a1b5a62f88b7355a6cce81fde112f57c96c28cf7
   page: 20
   role: additional prompt evaluation
-  excerpt: 'ality of the jailbreak. Table 8: We examine the rate at which the 1000 responses to Anthropic red-teaming
-    prompts were flagged by the OpenAI Content Moderation API. We also use the OpenAssistant/reward-model-deberta-v3-large-v2
-    reward mod'
+  excerpt: 'ality of the jailbreak. Table 8: We examine the rate at which the 1000 responses to
+    Anthropic red-teaming prompts were flagged by the OpenAI Content Moderation API. We also use
+    the OpenAssistant/reward-model-deberta-v3-large-v2 reward mod'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_release
   url: https://huggingface.co/datasets/Anthropic/hh-rlhf
   note: Pinned hf-09be8c5bbc57cb3887f3a9732ad6aa7ec602a1fa; 38961 rows; derived SHA-256 361e0c67cba0ecc3ac7134bbad25ce28fe49d228fbc7832d58fa7b1370b4a780.
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: hf-09be8c5bbc57cb3887f3a9732ad6aa7ec602a1fa
+  snapshot_id: hf-09be8c5bbc57cb3887f3a9732ad6aa7ec602a1fa-361e0c67cba0
+  source_url: https://huggingface.co/datasets/Anthropic/hh-rlhf
+  record_count: 38961
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: Official Anthropic red-team-attempt transcripts and ratings, not the citing paper's
+    1,000-response selection. The official gzip is a JSON array despite its jsonl.gz name.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/anthropic-red-teaming-prompts.yaml
 snapshot_id: hf-09be8c5bbc57cb3887f3a9732ad6aa7ec602a1fa-361e0c67cba0
 source_url: https://huggingface.co/datasets/Anthropic/hh-rlhf
 modalities:

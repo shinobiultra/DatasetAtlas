@@ -2,8 +2,8 @@ schema_version: '1.0'
 id: imagenet-sketch
 name: ImageNet-Sketch
 aliases: []
-description: 'ImageNet-Sketch: all 50,889 native images in the author-linked Hugging Face ZIP, with original
-  ImageNet synset folder labels and original dimensions. Images are retrieved selectively.'
+description: 'ImageNet-Sketch: all 50,889 native images in the author-linked Hugging Face ZIP,
+  with original ImageNet synset folder labels and original dimensions. Images are retrieved selectively.'
 paper_ids:
 - paper-3e0db9c633ab204c
 release: imagenet-sketch-0d8b8b5380efe50baae075842505918ad43c88fe
@@ -41,7 +41,8 @@ evidence:
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://github.com/HaohanWang/ImageNet-Sketch
-  note: ImageNet-Sketch, 50 sketches for each of 1,000 ImageNet classes; separate from ImageNet-1K photos
+  note: ImageNet-Sketch, 50 sketches for each of 1,000 ImageNet classes; separate from ImageNet-1K
+    photos
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_media_rights_unknown
@@ -53,7 +54,8 @@ evidence:
   source_identity_status: official_source_resolved_media_rights_unknown
 - kind: source_audit_access
   url: https://github.com/HaohanWang/ImageNet-Sketch
-  note: Author repository links Google Drive, Kaggle and Hugging Face mirrors; archive retrieval untested
+  note: Author repository links Google Drive, Kaggle and Hugging Face mirrors; archive retrieval
+    untested
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_media_rights_unknown
@@ -68,14 +70,34 @@ evidence:
   url: https://huggingface.co/datasets/songweig/imagenet_sketch/tree/0d8b8b5380efe50baae075842505918ad43c88fe
   checked_on: '2026-09-23'
   receipt: reports/imagenet-sketch-live-verification.json
-  scope: Complete 50,889-image archive in the authors' linked Hugging Face distribution; all 1,000 native
-    class folders retained. Native archive has more images than the rounded 50,000 headline count. The
-    upstream loader names this single evaluation population train; no evaluation split is invented. Strong
-    ETag and per-member ZIP CRC checked on reads; upstream full-file SHA-256 recorded but not locally
-    verified.
+  scope: Complete 50,889-image archive in the authors' linked Hugging Face distribution; all 1,000
+    native class folders retained. Native archive has more images than the rounded 50,000 headline
+    count. The upstream loader names this single evaluation population train; no evaluation split
+    is invented. Strong ETag and per-member ZIP CRC checked on reads; upstream full-file SHA-256
+    recorded but not locally verified.
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: imagenet-sketch-0d8b8b5380efe50baae075842505918ad43c88fe
+  snapshot_id: imagenet-sketch-c9569b42c8fe9b7288958f5b
+  source_url: https://huggingface.co/datasets/songweig/imagenet_sketch/tree/0d8b8b5380efe50baae075842505918ad43c88fe
+  record_count: 50889
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: Complete 50,889-image archive in the authors' linked Hugging Face distribution;
+    all 1,000 native class folders retained. Native archive has more images than the rounded 50,000
+    headline count. The upstream loader names this single evaluation population train; no evaluation
+    split is invented. Strong ETag and per-member ZIP CRC checked on reads; upstream full-file
+    SHA-256 recorded but not locally verified.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/imagenet-sketch.yaml
 source_url: https://huggingface.co/datasets/songweig/imagenet_sketch/tree/0d8b8b5380efe50baae075842505918ad43c88fe
 relationships: []
 modalities:
 - image
 tasks:
 - image classification
+snapshot_id: imagenet-sketch-c9569b42c8fe9b7288958f5b

@@ -25,23 +25,21 @@ def test_complete_pinned_snapshot_preview_and_real_media(dataset_id, count):
     dataset = registry.dataset(dataset_id)
     if not Path(dataset.adapter_config["path"]).is_file():
         pytest.skip(f"{dataset_id} author source is not installed")
-    receipt = json.loads((ROOT / "reports" / f"{dataset_id}-source.json").read_text())
-    assert receipt["derived"]["rows"] == count
     assert dataset.coverage.total_count == count
-    assert hashlib.sha256(Path(dataset.adapter_config["path"]).read_bytes()).hexdigest() == receipt["derived"]["sha256"]
-    for item in receipt["original_files"]:
-        path = ROOT / item["file"]
-        assert path.stat().st_size == item["bytes"]
-        assert hashlib.sha256(path.read_bytes()).hexdigest() == item["sha256"]
-    snapshot = ROOT / "work/snapshots" / dataset_id
+    assert hashlib.sha256(Path(dataset.adapter_config["path"]).read_bytes()).hexdigest() == dataset.adapter_config["sha256"]
+    snapshot = registry.snapshot_path(dataset_id)
     manifest = json.loads((snapshot / "manifest.json").read_text())
+    assert manifest["dataset_id"] == dataset_id
+    assert manifest["release_id"] == dataset.release and manifest["snapshot_id"] == dataset.snapshot_id
+    for name, checksum in manifest["checksums"].items():
+        assert hashlib.file_digest((snapshot / name).open("rb"), "sha256").hexdigest() == checksum
     table = pq.read_table(snapshot / "records.parquet", columns=["id", "record_json"])
     assert manifest["record_count"] == table.num_rows == count
     final = json.loads(table.column("record_json")[-1].as_py())
     assert final["assets"] and all(asset["uri"] for asset in final["assets"])
     pack = registry.pack(dataset_id)
     assert len(pack.records) == len({row.assets[0].id for row in pack.records}) == 100
-    assert receipt["preview_sha256"] == hashlib.sha256((ROOT / receipt["preview_pack"]).read_bytes()).hexdigest()
+    assert {record.id for record in pack.records} <= set(table.column("id").to_pylist())
     for record in (pack.records[0], pack.records[-1]):
         for asset in record.assets:
             media = resolve_dataset_asset(dataset, asset.uri, workspace_root=ROOT)
@@ -62,8 +60,9 @@ def test_blink_and_illusion_task_scopes_remain_distinct(require_local_files):
     assert Counter(row.source["task"] for row in illusion.records) == {
         "comprehension": 50, "soft-localization": 50}
     assert all(row.source["split"] == "test" and len(row.assets) == 1 for row in illusion.records)
-    source = json.loads((ROOT / "reports/illusionvqa-source.json").read_text())
-    assert source["derived"]["task_counts"] == {"comprehension": 435, "soft-localization": 1000}
+    table = pq.read_table(registry.snapshot_path("illusionvqa") / "records.parquet", columns=["record_json"])
+    tasks = Counter(json.loads(value.as_py())["source"]["task"] for value in table.column("record_json"))
+    assert tasks == {"comprehension": 435, "soft-localization": 1000}
 
 
 def test_pope_three_strategy_labels_and_exact_coco_image_references(require_local_files):
@@ -88,10 +87,13 @@ def test_zerobench_fresh_install_reports_the_gate_without_content(tmp_path):
     directory.mkdir(parents=True)
     shutil.copyfile(ROOT / 'registry/datasets/zerobench.yaml', directory / 'zerobench.yaml')
     registry = Registry(tmp_path)
-    dataset = registry.dataset("zerobench")
-    receipt = json.loads((ROOT / "reports/zerobench-source.json").read_text())
+    from dataset_atlas.catalogue import with_availability
+    dataset = with_availability(registry.dataset("zerobench"), False, False)
     assert dataset.coverage.access == "gated" and dataset.coverage.preview_count == 0
-    assert receipt["access_check"]["status"] == 401 and receipt["downloaded_content"] is False
+    assert dataset.availability.preview == "on_request"
+    assert dataset.coverage.publication == "metadata_only"
+    assert dataset.rights["images"] == "not_reviewed"
+    assert registry.active_directory("zerobench") is None
     with pytest.raises(FileNotFoundError):
         registry.pack('zerobench')
 

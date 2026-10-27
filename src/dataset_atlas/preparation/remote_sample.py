@@ -12,9 +12,55 @@ budget this is a simple random sample of rows without replacement.
 from __future__ import annotations
 import bisect
 import hashlib
+import json
 from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Any
+from dataset_atlas.models import Dataset, FieldDescriptor, Record
 
 METHOD = 'sha256_counter_two_stage_row_groups'
+SNAPSHOT_SCHEME = 'remote_sample_cohort_v2'
+
+
+def sampled_snapshot_identity(dataset: Dataset, records: list[Record], source_files: list[dict[str, Any]],
+                              population_rows: int, fields: list[FieldDescriptor] | None = None) -> tuple[str, dict[str, Any]]:
+    """Identify the materialized cohort, independently of transfer/cache execution.
+
+    Only the Atlas envelope's circular snapshot reference is excluded; native
+    source fields with that name remain data. Checked media hashes replace
+    execution URIs, while source pins identify the population separately.
+    """
+    def encoded(value: Any) -> bytes:
+        return json.dumps(value, sort_keys=True, separators=(',', ':'), ensure_ascii=False).encode()
+    pins = [{key: entry.get(key) for key in ('source_name', 'sha256', 'md5', 'bytes', 'etag')}
+            for entry in sorted(source_files, key=lambda entry: entry['source_name'])]
+    population = {'dataset_id': dataset.id, 'release_id': dataset.release, 'unit': dataset.coverage.unit,
+                  'row_count': population_rows, 'files': pins}
+    population_digest = hashlib.sha256(encoded(population)).hexdigest()
+    effective_fields = [field.model_dump(mode='json', exclude={'name', 'description', 'provenance'})
+                        for field in sorted(fields or [], key=lambda field: field.id)]
+    context = {'scheme': SNAPSHOT_SCHEME, 'source_population_sha256': population_digest,
+               'record_count': len(records), 'fields': effective_fields}
+    digest = hashlib.sha256(encoded(context))
+    for record in records:
+        envelope = record.model_dump(mode='json', exclude={'snapshot_id'})
+        for asset in envelope['assets']:
+            metadata = asset['metadata']
+            source_ref = metadata.pop('source_ref', None)
+            metadata.pop('_compact_snapshot_id', None)
+            uri = source_ref or asset['uri']
+            if asset['uri'] is not None and asset['sha256']:
+                asset['uri'] = 'sha256:' + asset['sha256']
+            elif uri and (Path(uri).is_absolute() or uri.startswith('file:')):
+                raise ValueError('Sampled snapshot media needs a checked hash or stable native source reference')
+            else:
+                asset['uri'] = uri
+        digest.update(b'\0' + encoded(envelope))
+    cohort_digest = digest.hexdigest()
+    snapshot = f'{dataset.id}-sample-{cohort_digest[:24]}'
+    return snapshot, {'scheme': SNAPSHOT_SCHEME, 'source_population_sha256': population_digest,
+                      'source_population_rows': population_rows, 'source_population_shards': len(pins),
+                      'cohort_sha256': cohort_digest, 'record_count': len(records)}
 
 
 def shard_rank(seed: int, source_name: str) -> str:
@@ -361,6 +407,10 @@ def prepare_sampled_preview(root, plan, identity, dataset, version, base, direct
         dtype = declared.get(name, 'object')
         fields.append(FieldDescriptor(id='source.' + name, name=name, dtype=dtype, provenance={'source_url': dataset.source_url},
             query_ops=['eq', 'ne', 'in', 'contains', 'is_null'] + (['gt', 'gte', 'lt', 'lte'] if dtype == 'number' else [])))
+    dataset.snapshot_id, cohort_identity = sampled_snapshot_identity(dataset, chosen, remote_files, population_rows, fields)
+    for record in chosen:
+        record.snapshot_id = dataset.snapshot_id
+    description['snapshot_identity'] = cohort_identity
     dataset.coverage.preview_count = len(chosen)
     dataset.coverage.total_count = population_rows if options['footers'] == 'all' else None
     dataset.coverage.preview = 'complete_target' if len(chosen) == size else 'partial'
@@ -370,6 +420,7 @@ def prepare_sampled_preview(root, plan, identity, dataset, version, base, direct
             'The preview is a seeded sample; complete-scope queries are unavailable here.')
     dataset.coverage.blockers = [note] + [b for b in dataset.coverage.blockers if b != note]
     dataset = prepared_metadata(dataset, plan['scope'])
+    dataset.evidence.append({'kind': 'sampled_cohort_identity', 'snapshot_id': dataset.snapshot_id, **cohort_identity})
     dataset.evidence.append({'kind': 'computed_measurement', 'measurement': 'row_count', 'value': population_rows,
         'unit': 'rows', 'scope': 'complete pinned release' if options['footers'] == 'all' else f'{len(remote_files)} sampled shards',
         'method': 'Sum of row counts in the Parquet footers of the pinned shards', 'computed_or_reported': 'computed',
@@ -399,6 +450,7 @@ def prepare_sampled_preview(root, plan, identity, dataset, version, base, direct
     atomic(version / 'dataset.json', dataset.model_dump(mode='json'))
     atomic(version / 'receipt.json', {'plan_id': identity, 'source_files': plan['files'], 'remote_files': remote_files,
         'record_count': None, 'population_rows': population_rows, 'snapshot_id': dataset.snapshot_id, 'scope': plan['scope'],
+        'snapshot_identity': cohort_identity,
         'sampling': description, 'preview_media_validation': media_validation, 'remote_metadata_bytes': adapter.bytes_fetched,
         'remote_media_bytes':adapter.media_bytes_fetched, 'retained_preview_original_bytes':retained_bytes,
         'integrity': 'Strong ETag-bound ranges; upstream shard SHA-256 values are provenance and were not computed locally.'})

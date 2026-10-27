@@ -1,7 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { createHash } from 'node:crypto'
 import { writeFileSync } from 'node:fs'
-import { fileURLToPath } from 'node:url'
 
 test('native Objaverse originals render in a single interactive 3D view', async ({ page }) => {
   test.skip(!process.env.ATLAS_LIVE_API, 'Requires the prepared native Objaverse population.')
@@ -42,7 +41,7 @@ test('native Objaverse originals render in a single interactive 3D view', async 
   await expect(canvas).toBeVisible()
   expect(seen.length).toBeGreaterThan(0)
   for (const proof of seen) expect(pack.records.some((r: { assets: { sha256: string }[] }) => r.assets.some(a => a.sha256 === proof.sha256))).toBeTruthy()
-  writeFileSync(fileURLToPath(new URL('../../../reports/browser-objaverse-20261007.json', import.meta.url)), JSON.stringify({
+  writeFileSync(test.info().outputPath('browser-objaverse-20261007.json'), JSON.stringify({
     verified_at_utc: new Date().toISOString(), dataset_id: 'objaverse', snapshot_id: pack.dataset.snapshot_id,
     status: 'passed', native_entity_count: pack.dataset.coverage.total_count, preview_objects: pack.records.length,
     simultaneous_model_canvases: 1, original_byte_checks: seen, orbit_drag_completed: true,

@@ -1,12 +1,10 @@
 import { expect, test, type Page } from '@playwright/test'
 import { addFieldFilter, expectPanel, inspectRecord, scopeLine, selectionBar, switchView, workbenchResponseHeaders } from './helpers'
 import { readFileSync, writeFileSync } from 'node:fs'
-import { fileURLToPath } from 'node:url'
 
 const recordId = 'coco:example:c765b3eb380b785ef8fc414d'
 const imageId = 'coco:asset:7902a9a64c72d30f6de1cd9e'
 const ids = { detector: 'ed3d9c68da43ce9d7b593937', nudenet: '9f3fd9518d29eecd47273581', embedding: '102efabba647db4f5066e95e', umap: '4c4e3ec224e69e6290e6edf3' }
-const reportPath = fileURLToPath(new URL('../../../reports/browser-linked-journey.json', import.meta.url))
 const providerId = process.env.ATLAS_LINKED_PROVIDER ?? 'local-qwen2-5-vl-3b'
 
 async function forwardLocalApi(page: Page, api: string) {
@@ -109,7 +107,7 @@ test('linked real COCO selection, named analysis, image conversation and exchang
   expect(imported.ids).toEqual(selection.ids)
   expect(imported.snapshot_ids).toEqual(selection.snapshot_ids)
   await expect(page.locator('.toasts')).toContainText('Imported 1 frozen example IDs')
-  writeFileSync(reportPath, JSON.stringify({ tested_at: new Date().toISOString(), browser: `Chromium ${browser.version()}`, dataset_id: 'coco', source_filter: { field_id: 'source.person_count', op: 'eq', value: 2, matched_count: filteredCount }, record_id: recordId, selection_id: selection.id, snapshot_ids: selection.snapshot_ids, existing_artifacts: Object.fromEntries(Object.entries(named).map(([name, artifact]) => [name, { id: artifact.id, kind: artifact.kind, run_id: artifact.run_id, population_count: artifact.ids.length, includes_record: artifact.ids.includes(recordId) }])), map: { projection_artifact_id: ids.umap, color_field_id: colorField, plotted_count: filteredCount }, provider_id: providerId, context_digest: preview.context_digest, conversation_id: conversation.id, image_proof: { asset_id: imageId, sha256: preview.image_representations[0].sha256, bytes: preview.image_representations[0].bytes, mime_type: preview.image_representations[0].mime_type, saved_input_contains_image_data_url: true }, response_error: conversation.error ?? null, response_text: conversation.response ?? null, exported_selection_checksum: exchange.checksum, imported_selection_id: imported.id, imported_ids_equal_export: JSON.stringify(imported.ids) === JSON.stringify(exchange.selection.ids), note: 'Existing 100-record analysis artifacts include the selected record; they were not recomputed. Image bytes and data URL are excluded from this receipt.' }, null, 2) + '\n')
+  writeFileSync(testInfo.outputPath('browser-linked-journey.json'), JSON.stringify({ tested_at: new Date().toISOString(), browser: `Chromium ${browser.version()}`, dataset_id: 'coco', source_filter: { field_id: 'source.person_count', op: 'eq', value: 2, matched_count: filteredCount }, record_id: recordId, selection_id: selection.id, snapshot_ids: selection.snapshot_ids, existing_artifacts: Object.fromEntries(Object.entries(named).map(([name, artifact]) => [name, { id: artifact.id, kind: artifact.kind, run_id: artifact.run_id, population_count: artifact.ids.length, includes_record: artifact.ids.includes(recordId) }])), map: { projection_artifact_id: ids.umap, color_field_id: colorField, plotted_count: filteredCount }, provider_id: providerId, context_digest: preview.context_digest, conversation_id: conversation.id, image_proof: { asset_id: imageId, sha256: preview.image_representations[0].sha256, bytes: preview.image_representations[0].bytes, mime_type: preview.image_representations[0].mime_type, saved_input_contains_image_data_url: true }, response_error: conversation.error ?? null, response_text: conversation.response ?? null, exported_selection_checksum: exchange.checksum, imported_selection_id: imported.id, imported_ids_equal_export: JSON.stringify(imported.ids) === JSON.stringify(exchange.selection.ids), note: 'Existing 100-record analysis artifacts include the selected record; they were not recomputed. Image bytes and data URL are excluded from this receipt.' }, null, 2) + '\n')
 })
 
 test('browser re-exports and re-imports the saved linked COCO selection', async ({ page }, testInfo) => {

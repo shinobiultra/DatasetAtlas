@@ -2,6 +2,7 @@
 from pathlib import Path
 import math
 import heapq
+import importlib
 import sys
 from collections import OrderedDict
 from threading import RLock
@@ -124,7 +125,7 @@ def similar_records(artifact:Artifact, record_id:str|None, eligible_ids:list[str
     if not dimension or any(type(x) not in (int,float) or not math.isfinite(x) for x in vector) or any(len(v)!=dimension for v in vectors.values()):raise ValueError('Embedding vectors have invalid dimensions or values')
     if metric=='cosine' and not any(x != 0 for x in vector):raise ValueError('Cosine query vector must be nonzero')
     if not eligible:return {'mode':'exact','embedding_space_id':space,'artifact_id':artifact.id,'eligible_count':0,'results':[]}
-    import lancedb
+    lancedb=importlib.import_module('lancedb')
     database=lancedb.connect(str(cache_root))
     name='atlas_'+content_id({'artifact':artifact.id,'space':space,'vectors':vectors})
     try:table=database.open_table(name)

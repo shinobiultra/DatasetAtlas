@@ -1,6 +1,5 @@
 import { expect, test } from '@playwright/test'
 import { writeFileSync } from 'node:fs'
-import { fileURLToPath } from 'node:url'
 
 test.use({ screenshot: 'off', trace: 'off', video: 'off' })
 test('FACTOID native user preview and complete scope open in the workbench', async ({ page }) => {
@@ -19,7 +18,7 @@ test('FACTOID native user preview and complete scope open in the workbench', asy
   await page.getByRole('group', { name: 'Population scope' }).getByRole('button', { name: 'Complete index' }).click()
   await expect(page.locator('.scopeline')).toContainText('4,150', { timeout: 60_000 })
   await expect(page.locator('.sample-card').first()).toBeVisible()
-  writeFileSync(fileURLToPath(new URL('../../../reports/browser-factoid-native-20261007.json', import.meta.url)), JSON.stringify({
+  writeFileSync(test.info().outputPath('browser-factoid-native-20261007.json'), JSON.stringify({
     checked_at_utc: new Date().toISOString(), status: 'passed', snapshot_id: dataset.snapshot_id,
     native_user_population: 4150, preview_records: 100, native_user_inspection_opened: true, complete_scope_opened: true,
     source_scope: 'Native user rows, exact metadata/original retained; missing post text, historical membership and source rights remain unresolved.',

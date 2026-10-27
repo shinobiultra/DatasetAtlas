@@ -7,9 +7,9 @@ Release 1.0.0; full_v1_complete: true.
 Counts come from the active runtime registry, structural preview counts and index metadata. No dataset record values are decoded or inspected by this report generator. A source's total population is distinct from its locally indexed population.
 
 Catalogue SHA-256: `ba6c177064b0b7c23c64cbd2baae9904b2403ac0e340af3054296268fd86e508`.
-Release source SHA-256: `6f1b7561d9bd94c796a18531fc18ab6925eb8e3805eb8c0b680349ffa24b6db6`.
+Release source SHA-256: `347db588b133120cf024b4b096b5f98aabc378d2bf99ea2e23e2ae469e8afbf1`.
 
-The current verification proof passed every required software release gate. Its checksum is `dcac0ec925b7d51bffc165336e517051fed41a06de2b9fd2337f8f3b6f28e7c9`. Automated verification does not confer human, scientific or publication acceptance.
+The current verification proof passed every required software release gate. Its checksum is `21092efc7462d1d1bbadecfd20ef862ab821cff572d5e01cdbba76f6e923e793`. Automated verification does not confer human, scientific or publication acceptance.
 
 | Check | Result | Evidence |
 | --- | --- | --- |

@@ -1,9 +1,9 @@
 {
   "schema_version": "1.0",
   "release_version": "1.0.0",
-  "generated_at_utc": "2026-10-27T06:01:41.537780+00:00",
+  "generated_at_utc": "2026-10-27T06:15:41.182725+00:00",
   "catalogue_sha256": "ba6c177064b0b7c23c64cbd2baae9904b2403ac0e340af3054296268fd86e508",
-  "release_tree_sha256": "6f1b7561d9bd94c796a18531fc18ab6925eb8e3805eb8c0b680349ffa24b6db6",
+  "release_tree_sha256": "347db588b133120cf024b4b096b5f98aabc378d2bf99ea2e23e2ae469e8afbf1",
   "full_v1_complete": true,
   "catalogue_entries": 202,
   "prepared_previews": 202,
@@ -19,103 +19,103 @@
     "schema_version": "1.0",
     "status": "verified",
     "catalogue_sha256": "ba6c177064b0b7c23c64cbd2baae9904b2403ac0e340af3054296268fd86e508",
-    "release_tree_sha256": "6f1b7561d9bd94c796a18531fc18ab6925eb8e3805eb8c0b680349ffa24b6db6",
-    "proof_sha256": "dcac0ec925b7d51bffc165336e517051fed41a06de2b9fd2337f8f3b6f28e7c9",
+    "release_tree_sha256": "347db588b133120cf024b4b096b5f98aabc378d2bf99ea2e23e2ae469e8afbf1",
+    "proof_sha256": "21092efc7462d1d1bbadecfd20ef862ab821cff572d5e01cdbba76f6e923e793",
     "checks": {
       "python_tests": {
         "status": "passed",
         "command": "python -m pytest -q --tb=short",
-        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "checked_at_utc": "2026-10-27T06:15:37.841680+00:00",
         "summary": "1735 passed; one optional whole-archive test skipped, with original-on-demand access verified separately."
       },
       "frontend_tests": {
         "status": "passed",
         "command": "npm test --prefix apps/web",
-        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "checked_at_utc": "2026-10-27T06:15:37.841680+00:00",
         "summary": "72 frontend tests passed on the current stable dependency stack."
       },
       "browser_tests": {
         "status": "passed",
         "command": "playwright test; affected-case and explicitly enabled native journey reruns",
-        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "checked_at_utc": "2026-10-27T06:15:37.841680+00:00",
         "summary": "88 browser cases passed; two optional local-VLM journeys skipped because no server was running. CPU analysis and frozen selection exchange passed."
       },
       "frontend_build": {
         "status": "passed",
         "command": "npm run build --prefix apps/web",
-        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "checked_at_utc": "2026-10-27T06:15:37.841680+00:00",
         "summary": "TypeScript and Vite production builds passed; approved-static documentation screenshots refreshed."
       },
       "publication_validation": {
         "status": "passed",
         "command": "atlas publish validate; build_publication",
-        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "checked_at_utc": "2026-10-27T06:15:37.841680+00:00",
         "summary": "202 catalogue guides; only the three approved packs and 300 original media files published. Archive privacy checks passed."
       },
       "catalogue_validation": {
         "status": "passed",
         "command": "pytest registry, catalogue, publication and status checks; ty and prek",
-        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "checked_at_utc": "2026-10-27T06:15:37.841680+00:00",
         "summary": "202 resolved declared source identities and tested adapters. A cold workspace has zero local rows, 202 previews and 200 complete indices on request; two whole-source samplers remain distinct."
       },
       "native_index_checks": {
         "status": "passed",
         "command": "verify_complete_index_smoke.py; native API audit",
-        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "checked_at_utc": "2026-10-27T06:15:37.841680+00:00",
         "summary": "All 200 complete local indices returned exact declared counts and snapshot-bound native records; all 202 previews opened."
       },
       "preview_media_checks": {
         "status": "passed",
         "command": "verify_preview_media_smoke.py; retained-original HTTP audit",
-        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "checked_at_utc": "2026-10-27T06:15:37.841680+00:00",
         "summary": "459 sampled asset checks: 458 successful originals and one explicitly declared source absence; 49 datasets have no media. No failed dataset checks."
       },
       "distribution_build": {
         "status": "passed",
         "command": "build_release.py; verify_distribution.py; archive-source parity",
-        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "checked_at_utc": "2026-10-27T06:15:37.841680+00:00",
         "summary": "Final wheel and source archive pass inspection and exact source-member parity; no model weights or private workspace data included."
       },
       "clean_install": {
         "status": "passed",
         "command": "verify_installation.py; verify_sample_startup.py --source",
-        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "checked_at_utc": "2026-10-27T06:15:37.841680+00:00",
         "summary": "Final wheel installed outside the checkout on Python 3.12 and 3.14.10; 202-entry catalogue and approved samples served with no optional model packages. Fresh source startup passed."
       },
       "portable_sample_bundle": {
         "status": "passed",
         "command": "build_sample_bundle.py; verify_sample_startup.py --bundle",
-        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "checked_at_utc": "2026-10-27T06:15:37.841680+00:00",
         "summary": "29.31 MB checksummed ZIP; 300 original examples, standalone file verification and HTTP startup passed on Python 3.15.2, including hostile Host rejection."
       },
       "acceptance_traceability": {
         "status": "passed",
         "command": "verify_acceptance_matrix.py --run",
-        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "checked_at_utc": "2026-10-27T06:15:37.841680+00:00",
         "summary": "All 16 acceptance areas passed their named checks; zero traceability problems or recorded software gaps."
       },
       "analysis_runtime": {
         "status": "passed",
         "command": "verify_analysis_runtime.py --records 16 --device cpu; native browser analysis and exchange",
-        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "checked_at_utc": "2026-10-27T06:15:37.841680+00:00",
         "summary": "Nine local processors completed on 16 frozen native CLEVR records; exported analysis pack roundtrip passed. CPU detector/SigLIP browser runs and frozen selection reimport passed. Historical model evidence stays explicitly historical."
       },
       "cold_source_preparation": {
         "status": "passed",
         "command": "PreparationManager native source replays and cold plans",
-        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "checked_at_utc": "2026-10-27T06:15:37.841680+00:00",
         "summary": "13 seeded-source preparations preserve 115801 native records; four additional built-in HF routes plan at pinned revisions. New lazy image access preserves originals. A real private normal-activation and media HTTP check passed."
       },
       "storage_cleanup": {
         "status": "passed",
         "command": "atlas storage clean --deduplicate-only --execute; manifest-bound replay deduplication",
-        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "checked_at_utc": "2026-10-27T06:15:37.841680+00:00",
         "summary": "3007758336 duplicate allocated bytes eliminated with all data/proof paths and hashes preserved. Eight obsolete local and six merged remote branches retired with verified Git-bundle recovery; no extra worktrees remain."
       },
       "independent_review": {
         "status": "passed",
         "command": "Independent engineering reviews and reproduced-defect regression checks",
-        "checked_at_utc": "2026-10-27T06:01:38.521730+00:00",
+        "checked_at_utc": "2026-10-27T06:15:37.841680+00:00",
         "summary": "Independent source, identity, resource-budget, frozen lookup, publication and final metadata reviews found no remaining actionable issue in the reviewed scope; this is engineering evidence, not human or scientific acceptance."
       }
     }

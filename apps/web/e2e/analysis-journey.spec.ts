@@ -1,6 +1,5 @@
 import { expect, test } from '@playwright/test'
 import { writeFileSync } from 'node:fs'
-import { fileURLToPath } from 'node:url'
 import { expectPanel, inspectRecord, sampleCards, selectionBar } from './helpers'
 
 test('Analyze estimates and runs real detector and image embeddings, then refreshes inspection', async ({ page }) => {
@@ -52,5 +51,5 @@ test('Analyze estimates and runs real detector and image embeddings, then refres
   const inspector = await inspectRecord(page, recordId)
   await expect(inspector.locator(`[data-artifact-id="${runs[0].artifact_id}"]`)).toContainText('Completed')
   await expect.poll(async () => (await page.request.get(`${api}/api/v1/datasets/coco/fields`)).json().then(fields => fields.some((f: { id: string }) => f.id.startsWith(`prediction.${runs[0].artifact_id}.`)))).toBe(true)
-  writeFileSync(fileURLToPath(new URL('../../../reports/browser-analysis-journey.json', import.meta.url)), JSON.stringify({ tested_at: new Date().toISOString(), scope: 'Real one-record analysis submitted from the rebuilt Analyze panel; results explicitly refreshed without a page reload.', runs }, null, 2) + '\n')
+  writeFileSync(test.info().outputPath('browser-analysis-journey.json'), JSON.stringify({ tested_at: new Date().toISOString(), scope: 'Real one-record analysis submitted from the rebuilt Analyze panel; results explicitly refreshed without a page reload.', runs }, null, 2) + '\n')
 })

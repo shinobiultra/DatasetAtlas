@@ -27,5 +27,5 @@ test('shipping static query engine filters 10,000 synthetic records within the S
     browser_version: browser.version(), host: { cpu: cpus()[0]?.model, logical_cpus: cpus().length, memory_gib: Math.round(totalmem() / 2 ** 30), platform: process.platform } }
   expect(measured.matched_count).toBe(2500)
   expect(Math.max(measured.cold_ms, ...measured.warm_ms)).toBeLessThan(200)
-  writeFileSync(fileURLToPath(new URL('../../../reports/browser-preview-filter-performance-20261007.json', import.meta.url)), JSON.stringify(report, null, 2) + '\n')
+  writeFileSync(test.info().outputPath('browser-preview-filter-performance-20261007.json'), JSON.stringify(report, null, 2) + '\n')
 })

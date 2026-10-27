@@ -2,10 +2,8 @@
 
 Every query file and every image in this file is SYNTHETIC: it copies only the layouts of the gated release (a JSON array, JSON
 Lines saved under a `.json` name, CSV, plain text lines with a companion label file, JSON objects of lists and of objects, derived
-image names, ordinal pairings, a task whose images are paired at run time). No gated content is copied into the repository. What the
-real release holds is recorded separately, with counts, in `reports/multitrust-task-inventory-20261009.json` and
-`reports/multitrust-live-verification-20261009.json`, and the tests at the end check that the recipe, the registry entry, the inventory
-and that receipt agree with each other.
+image names, ordinal pairings, a task whose images are paired at run time). No gated content is copied into the repository. Current source pins and declared native-unit counts are checked from the shipped recipe and catalogue evidence.
+Historical verification receipts remain in the private recovery archive, outside these behavioral tests.
 """
 from __future__ import annotations
 
@@ -14,7 +12,6 @@ import io
 import json
 import random
 import re
-import subprocess
 from pathlib import Path
 from urllib.parse import quote, urlsplit
 
@@ -29,10 +26,7 @@ from dataset_atlas.models import Dataset
 ROOT = Path(__file__).resolve().parents[2]
 RECIPE_PATH = ROOT / "registry/recipes/multitrust.yaml"
 ENTRY_PATH = ROOT / "registry/datasets/multitrust.yaml"
-INVENTORY_PATH = ROOT / "reports/multitrust-task-inventory-20261009.json"
-RECEIPT_PATH = ROOT / "reports/multitrust-live-verification-20261009.json"
 MEDIA_PATH = ROOT / "registry/media/multitrust.json"
-BASE_COMMIT = "c1328e1"  # the entry as the gate check and the earlier source audits left it
 REVISION = "84dc74754959e9f52b67c5185700f4f7fcd8c4df"
 BASE_URL = f"https://huggingface.co/datasets/thu-ml/MultiTrust/resolve/{REVISION}"
 TOKEN_PATTERN = re.compile(r"hf_[A-Za-z0-9]{20,}")
@@ -204,7 +198,8 @@ def dataset_for(tmp_path: Path, release: Release, **config) -> Dataset:
     tmp_path.mkdir(parents=True, exist_ok=True)
     media = tmp_path / "media-inventory.json"
     media.write_text(json.dumps(release.inventory(), separators=(",", ":"), sort_keys=True))
-    options = {key: value for key, value in recipe()["adapter_config"].items() if key not in {"tasks", "media_inventory_path", "remote_cache_root"}}
+    options = {key: value for key, value in recipe()["adapter_config"].items()
+               if key not in {"tasks", "inventory_tasks", "media_inventory_path", "remote_cache_root"}}
     files = []
     for name, data in release.queries.items():
         target = tmp_path / "queries" / name
@@ -304,12 +299,13 @@ def test_snapshot_id_is_derived_from_the_pins_the_task_table_and_the_fixed_selec
     assert config["media_inventory_sha256"] == media_sha
     parts = sorted(f"{f['source_name']}:{f['bytes']}:{f['sha256']}" for f in document["files"])
     parts += [f"media_inventory:{media_sha}", f"tasks:{hashlib.sha256(canon(config['tasks']).encode()).hexdigest()}",
+              f"inventory_tasks:{hashlib.sha256(canon(config['inventory_tasks']).encode()).hexdigest()}",
               f"preview_sampling:{canon(config['preview_sampling'])}"]
     digest = hashlib.sha256("\n".join(parts).encode()).hexdigest()[:16]
     assert document["snapshot_id"] == f"multitrust-{REVISION[:12]}-q{len(document['files'])}-{digest}"
     assert not re.search(r"budget|bytes", document["snapshot_id"])
     assert config["preview_sampling"] == {"method": "sha256_bottom_k_primary_asset_verified_media", "seed": 0, "candidate_pool": 250, "count": 100,
-                                          "stratify_by": {"field": "aspect", "values": ["truthfulness", "safety", "robustness", "fairness", "privacy"]}}
+                                          "stratify_by": {"field": "aspect", "values": ["truthfulness", "safety", "robustness", "fairness", "privacy", "shared"]}}
 
 
 def test_recipe_caps_keep_the_images_remote_and_declare_an_upper_bound_below_three_gigabytes():
@@ -335,17 +331,19 @@ def test_media_inventory_pins_every_image_by_a_content_hash():
     assert not TOKEN_PATTERN.search(MEDIA_PATH.read_text())
 
 
-def test_task_table_is_well_formed_and_matches_the_inventory_report():
-    tasks, inventory = recipe()["adapter_config"]["tasks"], json.loads(INVENTORY_PATH.read_text())
-    assert len(tasks) == len({item["task"] for item in tasks}) == inventory["population"]["tasks"]
+def test_shipped_task_table_declares_query_and_inventory_tasks():
+    document = recipe()
+    tasks = document["adapter_config"]["tasks"]
+    assert len(tasks) == len({item["task"] for item in tasks}) == 50
     assert {item["aspect"] for item in tasks} == set(ASPECTS)
-    assert [item["task"] for item in tasks] == [item["task"] for item in inventory["tasks"]]
     fields = recipe()["adapter_config"]["fields"]
     assert fields["task"]["dtype"] == fields["aspect"]["dtype"] == "category"
-    assert fields["task"]["values"] == [item["task"] for item in tasks] and fields["aspect"]["values"] == ASPECTS
+    assert fields["task"]["values"] == list(dict.fromkeys(item["task"] for item in tasks + recipe()["adapter_config"]["inventory_tasks"]))
+    assert fields["aspect"]["values"] == ASPECTS + ["shared"]
     for item in tasks:
         assert item["format"] in {"json", "jsonl", "csv", "text_lines", "json_groups", "json_keyed"}
-        assert item["join_basis"] in inventory["how_tasks_were_identified"]["join_basis_values"]
+        assert item["join_basis"] in {"key_in_query_row", "derived_key", "ordinal_in_toolkit_loader",
+                                      "none_cross_product_in_toolkit", "none_listdir_order_in_toolkit"}
         if not item["media"]:
             assert item["join_basis"].startswith("none_")
 
@@ -582,6 +580,7 @@ def prepare_workspace(tmp_path, monkeypatch, name, budget=100_000_000, derive_sn
     (root / "registry/datasets/multitrust.yaml").write_text(yaml.safe_dump(entry, sort_keys=False))
     document = recipe()
     document["expected_count"] = release.TOTAL_ROWS
+    document["adapter_config"].pop("inventory_tasks", None)
     document["files"] = [{"source_name": n, "url": f"{BASE_URL}/{quote(n, safe='/')}", "bytes": len(d), "sha256": hashlib.sha256(d).hexdigest(),
                           "format": n.rsplit(".", 1)[1]} for n, d in release.queries.items()]
     document["preview_media_transfer_bytes"] = sum(len(d) for d in release.images.values())
@@ -631,7 +630,7 @@ def test_preparation_indexes_every_row_and_keeps_a_hundred_original_images(tmp_p
     coverage = dataset.coverage
     assert (coverage.preview_count, coverage.total_count) == (100, release.TOTAL_ROWS)
     assert (coverage.adapter, coverage.preview, coverage.complete_data) == ("tested", "complete_target", "indexed_metadata_partial_media")
-    assert coverage.access == "gated" and coverage.identity == "candidate" and coverage.publication == "not_reviewed"
+    assert coverage.access == "gated" and coverage.identity == "resolved" and coverage.publication == "not_reviewed"
     pack = registry.pack("multitrust")
     assert len(pack.records) == 100 == len({r.id for r in pack.records})
     assert pack.sampling["method"] == "sha256_bottom_k_primary_asset_verified_media" and pack.sampling["seed"] == 0
@@ -704,27 +703,31 @@ def entry() -> dict:
     return yaml.safe_load(ENTRY_PATH.read_text())
 
 
-def receipt() -> dict:
-    return json.loads(RECEIPT_PATH.read_text())
-
-
-def inventory() -> dict:
-    return json.loads(INVENTORY_PATH.read_text())
-
-
 def test_entry_coverage_states_each_dimension_separately_and_keeps_the_limits():
     coverage = entry()["coverage"]
-    assert coverage["identity"] == "candidate" and coverage["source"] == "verified"  # nothing here resolves the paper's identity
+    assert coverage["identity"] == "resolved" and coverage["source"] == "verified"
+    resolution = next(item for item in entry()["evidence"] if item["kind"] == "source_release_resolution")
+    assert resolution["status"] == "resolved_declared_source_population"
+    assert resolution["release"] == recipe()["release"]
+    assert "not human review" in resolution["scope_note"]
+    assert "historical paper-membership acceptance" in resolution["scope_note"]
     assert coverage["access"] == "gated"  # the terms are the researcher's own; the entry stays gated
     assert coverage["adapter"] == "tested" and coverage["preview"] == "complete_target"
     assert coverage["preview_count"] == 100 and coverage["unit"] == "example"
     assert coverage["complete_data"] == "indexed_metadata_partial_media"
-    assert coverage["total_count"] == recipe()["expected_count"] == inventory()["population"]["query_rows"]
+    assert coverage["total_count"] == recipe()["expected_count"] == 12_616
+    assert resolution["record_count"] == 11_512
+    completion = next(item for item in entry()["evidence"] if item["kind"] == "native_unit_completion")
+    assert completion["record_count"] == coverage["total_count"]
     assert coverage["publication"] == "not_reviewed"
     blockers = " ".join(coverage["blockers"])
     assert "heterogeneous" in blockers and "not one homogeneous collection" in blockers
-    assert "Component source datasets" in blockers and "transfer attacks" in blockers and "not located" in blockers
-    assert "accept" in blockers and "2026-10-09" in blockers and "auth_check" in blockers
+    assert "Component source datasets" in blockers
+    historical = " ".join(str(item) for item in entry()["evidence"] if item["kind"] == "paper_usage_qualification")
+    assert "transfer attacks" in historical and "not located" in historical
+    assert "accept" in blockers and "redistribution" in blockers
+    source_history = " ".join(str(item) for item in entry()["evidence"])
+    assert "2026-10-09" in source_history and "auth_check" in source_history
     assert "per-task adapters" not in blockers and "implementation gap" not in blockers  # the old claim is gone
     assert "no inventory, adapter or preview exists" not in blockers
     assert entry()["adapter"] == "multitrust" and entry()["adapter_config"] == {} and entry()["release"] == recipe()["release"]
@@ -733,151 +736,23 @@ def test_entry_coverage_states_each_dimension_separately_and_keeps_the_limits():
 
 def test_description_lists_every_member_task_by_aspect():
     description = entry()["description"]
-    for item in inventory()["tasks"]:
+    for item in recipe()["adapter_config"]["tasks"]:
         assert item["task"] in description, item["task"]
-    for aspect, rows in inventory()["population"]["by_aspect"].items():
+    for aspect, rows in {"truthfulness": 2540, "safety": 798, "robustness": 4199, "fairness": 1209, "privacy": 2766}.items():
         assert f"{aspect.capitalize()} ({rows:,}" in description
-    assert "reports/multitrust-task-inventory-20261009.json" in description and "one record per query row" in description.lower()
+    assert "one record per query row" in description.lower()
+    assert "1,104" in description and "12,616" in description
 
 
-def git_show(path: str):
-    try:
-        return subprocess.run(["git", "show", f"{BASE_COMMIT}:{path}"], cwd=ROOT, capture_output=True, text=True, check=True).stdout
-    except (OSError, subprocess.CalledProcessError):
-        return None
-
-
-def test_earlier_evidence_is_untouched_and_the_new_items_cite_the_receipts():
-    old = git_show("registry/datasets/multitrust.yaml")
-    if old is None:
-        pytest.skip("base commit is not available in this checkout")
-    before, now = yaml.safe_load(old), entry()
-    assert now["evidence"][:len(before["evidence"])] == before["evidence"]
-    added = now["evidence"][len(before["evidence"]):]
-    assert [item["kind"] for item in added][:3] == ["source_audit_access", "native_task_inventory", "native_population_live_verification"]
-    assert {item["kind"] for item in added[3:]} <= {"preview_resample"}  # the 2026-10-09 stratified re-draw
-    access, tasks, verification = added[:3]
-    assert access["checked_on"] == "2026-10-09" and "accepted" in access["note"] and "on their own" in access["note"]
-    assert access["audit_file"] == verification["receipt"] == "reports/multitrust-live-verification-20261009.json"
-    assert tasks["audit_file"] == "reports/multitrust-task-inventory-20261009.json"
-    assert "candidate" in verification["source_identity_status"]
-    for field in ("paper_ids", "rights", "aliases", "source_url", "relationships", "modalities", "name", "id"):
-        assert now.get(field) == before.get(field), field
+def test_source_resolution_and_native_units_do_not_approve_historical_use_or_publication():
+    now = entry()
+    source = next(item for item in now["evidence"] if item["kind"] == "source_release_resolution")
+    completion = next(item for item in now["evidence"] if item["kind"] == "native_unit_completion")
+    assert source["status"] == "resolved_declared_source_population"
+    assert "not human review" in source["scope_note"]
+    assert "historical-paper acceptance" in completion["scope_note"]
+    assert "no" in completion["scope_note"].lower()
+    assert source["record_count"] == 11_512 and completion["record_count"] == 12_616
+    assert now["rights"]["records"] == now["rights"]["images"] == "not_reviewed"
+    assert now["coverage"]["publication"] == "not_reviewed"
     assert not TOKEN_PATTERN.search(ENTRY_PATH.read_text())
-
-
-# --- the task inventory report -----------------------------------------------------------------------------------------------
-
-
-def test_inventory_holds_no_credential_no_local_path_and_no_dataset_content():
-    text = INVENTORY_PATH.read_text()
-    assert not TOKEN_PATTERN.search(text) and "/home/" not in text and "/tmp/" not in text
-    document = inventory()
-    for item in document["tasks"]:
-        assert set(item) >= {"task", "aspect", "query_files", "rows", "image_folders", "join_basis", "rows_with_image_reference",
-                             "rows_without_image_reference", "references_absent_from_pinned_listing", "authors_toolkit_tasks"}
-
-
-def test_inventory_counts_add_up_and_nothing_is_dropped():
-    document = inventory()
-    tasks, population, joins = document["tasks"], document["population"], document["joins"]
-    assert sum(item["rows"] for item in tasks) == population["query_rows"] == sum(population["by_aspect"].values()) == recipe()["expected_count"]
-    assert set(population["by_aspect"]) == set(ASPECTS)
-    for aspect in ASPECTS:
-        assert sum(item["rows"] for item in tasks if item["aspect"] == aspect) == population["by_aspect"][aspect]
-    for item in tasks:
-        assert item["rows"] == item["rows_with_image_reference"] + item["rows_without_image_reference"]
-        assert item["image_references"] == item["references_found_in_pinned_listing"] + item["references_absent_from_pinned_listing"]
-        assert sum(f["rows"] for f in item["query_files"] if f["rows"] is not None) == item["rows"]
-    assert joins["rows_with_at_least_one_image"] + joins["rows_without_an_image_by_design"] == population["query_rows"]
-    assert joins["image_references"] == joins["references_found_in_pinned_listing"] + joins["references_absent_from_pinned_listing"]
-    assert joins["distinct_image_files_referenced"] + joins["image_files_without_any_query_row"] == joins["image_files_in_repository"] == 10_464
-    assert sum(f["count"] for f in document["files_no_query_references"]["image_files"]["by_folder"]) == joins["image_files_without_any_query_row"]
-    census = document["source"]["files_in_repository"]
-    assert census == 10_549 and document["population"]["query_files_used"] == len(recipe()["files"])
-    assert {f["file"] for item in tasks for f in item["query_files"]} == {f["source_name"] for f in recipe()["files"]}
-    assert not any(item["join_basis"].startswith("none_") and item["rows_with_image_reference"] for item in tasks)
-    notes = document["files_no_query_references"]["non_data_files"]
-    assert notes["ds_store_files"] == 18 and notes["font_file"]["path"] == "fonts/FreeMonoBold.ttf" and notes["asserts_figure"]["path"] == "asserts/framework.jpg"
-    assert [item["path"] for item in document["files_no_query_references"]["supporting_tables_not_indexed"]] == ["privacy/enron-email/five_shot.json"]
-
-
-def test_inventory_pins_match_the_recipe():
-    pinned = {f["source_name"]: f for f in recipe()["files"]}
-    for item in inventory()["tasks"]:
-        for f in item["query_files"]:
-            assert (f["bytes"], f["sha256"]) == (pinned[f["file"]]["bytes"], pinned[f["file"]]["sha256"])
-    assert inventory()["source"]["revision"] == REVISION
-
-
-# --- the live verification receipt ---------------------------------------------------------------------------------------------
-
-
-def test_receipt_holds_no_credential_and_no_local_path():
-    text = RECEIPT_PATH.read_text()
-    assert not TOKEN_PATTERN.search(text)
-    assert not re.search(r"authorization|bearer", text, re.IGNORECASE)
-    assert "/home/" not in text and "/tmp/" not in text
-    assert receipt()["token_in_receipt"] is False
-
-
-def test_receipt_respects_the_binding_caps_and_measures_what_moved():
-    document = receipt()
-    transfer, caps = document["bytes_transferred"], document["caps"]
-    assert caps["transfer_bytes"] == 3_000_000_000 and caps["prepared_output_bytes"] == 2_000_000_000 and caps["connections_used"] <= caps["connections"] <= 4
-    assert transfer["total_measured_bytes"] <= caps["transfer_bytes"] and document["cumulative_transfer_bytes_including_earlier_run"] <= caps["transfer_bytes"]
-    assert document["prepared_output"]["bytes"] <= caps["prepared_output_bytes"]
-    parts = transfer["parts"]
-    assert transfer["total_measured_bytes"] == sum(part["bytes"] for part in parts.values())
-    assert transfer["preparation_transfer_bytes"] == parts["query_files"]["bytes"] + parts["preview_original_images"]["bytes"]
-    # every pinned query file once, nothing else; a re-run that reuses the registered source moves none
-    assert parts["query_files"]["bytes"] in (sum(f["bytes"] for f in recipe()["files"]), 0)
-    assert document["repository_downloaded_whole"] is False and document["images_downloaded_whole_repository"] is False
-    assert document["query_files_fetched"] == len(recipe()["files"])
-    assert document["image_files_fetched"] < 200  # a hundred preview records, a few more for the live reads; never the 10,464 images
-    # the measured preparation stays inside the bound the plan declared
-    plan = document["plan"]
-    assert plan["expected_download_upper_bound_bytes"] == sum(f["bytes"] for f in recipe()["files"]) + recipe()["preview_media_transfer_bytes"]
-    assert transfer["preparation_transfer_bytes"] <= plan["expected_download_upper_bound_bytes"] <= caps["transfer_bytes"]
-    assert transfer["preparation_within_declared_upper_bound"] is True
-    assert document["prepared_output"]["retained_preview_original_bytes"] == parts["preview_original_images"]["bytes"]
-
-
-def test_receipt_counts_agree_with_the_recipe_and_the_inventory():
-    document, report = receipt(), inventory()
-    population = document["population"]
-    assert population["query_rows"] == recipe()["expected_count"] == document["index"]["records"] == document["index"]["unique_record_ids"] == document["index"]["matched_count"]
-    assert population["by_aspect"] == report["population"]["by_aspect"] == document["index"]["by_aspect"]
-    assert document["index"]["count_status"] == "exact" and document["index"]["complete_scope_count_equals_inventory_total"] is True
-    assert {aspect: counts["matched_count"] for aspect, counts in document["index"]["filtered_complete_scope_counts"].items() if aspect in ASPECTS} == population["by_aspect"]
-    assert document["index"]["by_task"] == {item["task"]: item["rows"] for item in report["tasks"]}
-    assert population["tasks"] == report["population"]["tasks"] and population["query_files"] == len(recipe()["files"])
-    assert population["references_absent_from_pinned_listing"] == report["joins"]["references_absent_from_pinned_listing"] == 0
-    assert population["image_files_without_any_query_row"] == report["joins"]["image_files_without_any_query_row"]
-    assert document["source"]["revision"] == REVISION and document["index"]["snapshot_id"] == recipe()["snapshot_id"]
-
-
-def test_receipt_records_the_preview_the_sampling_and_the_beyond_row_hundred_reads():
-    document = receipt()
-    preview = document["preview"]
-    assert preview["records"] == 100 and preview["snapshot_id"] == recipe()["snapshot_id"]
-    assert sum(preview["by_aspect"].values()) == 100 and set(preview["by_aspect"]) == set(ASPECTS)  # all five aspects are present
-    sampling = preview["sampling"]
-    assert sampling["seed"] == 0 and sampling["population_count"] == recipe()["expected_count"] and sampling["returned_count"] == 100
-    assert sampling["method"] == recipe()["adapter_config"]["preview_sampling"]["method"] and sampling["media_representation"] == "original"
-    assert "not a prevalence estimate" in preview["rule"] and "aspect-stratified" in preview["rule"]
-    media = preview["original_media"]
-    assert media["verified"] == media["sha256_equal_to_pack"] == preview["assets"] >= 100 and media["representation"] == "original"
-    assert media["bytes"] == document["bytes_transferred"]["parts"]["preview_original_images"]["bytes"]  # kept bytes equal the bytes fetched
-    live = document["live_reads"]
-    assert set(live["aspects_covered"]) == set(ASPECTS) and len(live["beyond_row_100"]) >= len(ASPECTS)
-    assert all(item["http"] == 200 and item["matches_pinned"] for item in live["beyond_row_100"])
-    assert live["beyond_row_100_original_bytes_verified"] == len(live["beyond_row_100"])
-    assert document["earlier_run"]["snapshot_id_equal"] is True and document["earlier_run"]["sampling_equal"] is True
-
-
-def test_the_recipe_declares_the_preview_the_receipt_measured():
-    document = receipt()
-    assert document["plan"]["preview_media_transfer_upper_bound_bytes"] == recipe()["preview_media_transfer_bytes"]
-    assert document["bytes_transferred"]["parts"]["preview_original_images"]["bytes"] <= recipe()["preview_media_transfer_bytes"]
-    assert document["preview"]["sampling"]["seed"] == recipe()["adapter_config"]["preview_sampling"]["seed"] == 0

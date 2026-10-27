@@ -2,30 +2,33 @@ schema_version: '1.0'
 id: visual6502-transistor-netlist
 name: Visual6502 transistor netlist
 aliases: []
-description: Visual6502 transistor netlist used for 6507 simulation.
+description: All 3,510 native transistor rows in the pinned Visual6502 revD 6502 literal source
+  table. Source JavaScript is never executed. This available 6502 representation does not establish
+  the citing paper's 6507 input or simulation configuration.
 tasks:
 - transistor-level circuit simulation
 modalities:
 - structured
 paper_ids:
 - paper-ad50206beabc5a94
-release: unresolved
+release: 6502-revD-d8ecc129b34e0eaf320e0400fcf33329475bdb1e
 adapter: structured
 adapter_config: {}
 coverage:
-  identity: candidate
+  identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Exact paper-specific source release or selected subset remains unverified; source
-    research alone does not resolve this candidate.
-  - Adapter and preview are not implemented.
+  - The source is the 6502 revD table; a different processor input or simulation configuration
+    is not established.
+  - Public redistribution rights remain unreviewed.
+  total_count: 3510
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -39,8 +42,8 @@ evidence:
   source_file_hash: 9aa4f4db91746959b880843c05b3d3f5a62b75cba5bfc903d6581bb2ae3c81f6
   page: 2
   role: source data
-  excerpt: '[10] for a comprehensive review). The Visual6502 team reverse-engineered
-    the 6507 from physical integrated circuits [11] by ch'
+  excerpt: '[10] for a comprehensive review). The Visual6502 team reverse-engineered the 6507
+    from physical integrated circuits [11] by ch'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -51,9 +54,9 @@ evidence:
   source_identity_status: original_project_identified_exact_netlist_unresolved
 - kind: source_audit_release
   url: https://github.com/trebonian/visual6502
-  note: Paper p2 cites transistor-accurate 6507 netlist, 3,510 transistors; public
-    Visual6502 repo has transdefs.js/segdefs.js but README labels 6502 revD, so exact
-    paper input file is unresolved
+  note: Paper p2 cites transistor-accurate 6507 netlist, 3,510 transistors; public Visual6502
+    repo has transdefs.js/segdefs.js but README labels 6502 revD, so exact paper input file is
+    unresolved
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: original_project_identified_exact_netlist_unresolved
@@ -72,4 +75,40 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: original_project_identified_exact_netlist_unresolved
-source_url: https://github.com/trebonian/visual6502
+- kind: paper_usage_qualification
+  note: Available release identity is separate from historical paper use.
+  qualifications:
+  - Exact paper-specific source release or selected subset remains unverified; source research
+    alone does not resolve this candidate.
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  status: resolved_declared_source_population
+  release: 6502-revD-d8ecc129b34e0eaf320e0400fcf33329475bdb1e
+  snapshot_id: visual6502-transistor-netlist-8ca29116d1d0c7b52a65c79d
+  source_url: https://github.com/trebonian/visual6502/tree/d8ecc129b34e0eaf320e0400fcf33329475bdb1e
+  representation: pinned_source_population
+  record_count: 3510
+  population: Exactly the 3,510 native transistor rows in the pinned Visual6502 transdefs.js file.
+  basis: Existing checksum-pinned preparation and snapshot metadata; no record contents read during
+    this curation.
+  scope_note: Identifies the available source population. This is not human review, historical
+    paper-membership acceptance, publisher byte-equivalence proof, or permission to redistribute.
+  receipt: work/prepared/visual6502-transistor-netlist/8ca29116d1d0c7b52a65c79dc092c5a8fcff64a9095a239f4a08a6b01cd9f87f/receipt.json
+  receipt_sha256: 2641d0e0a936ee2645918f3ee53193ffe0d3648e9eacf696dcce6f67a3ad3ea4
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: 6502-revD-d8ecc129b34e0eaf320e0400fcf33329475bdb1e
+  snapshot_id: visual6502-transistor-netlist-8ca29116d1d0c7b52a65c79d
+  source_url: https://github.com/trebonian/visual6502/tree/d8ecc129b34e0eaf320e0400fcf33329475bdb1e
+  record_count: 3510
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: Exactly the 3,510 native transistor rows in the pinned Visual6502 transdefs.js file.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/visual6502-transistor-netlist.yaml
+source_url: https://github.com/trebonian/visual6502/tree/d8ecc129b34e0eaf320e0400fcf33329475bdb1e
+snapshot_id: visual6502-transistor-netlist-8ca29116d1d0c7b52a65c79d

@@ -1,0 +1,39 @@
+# Direct native Parquet: preserve the existing release, snapshot, row IDs and original embedded image bytes.
+# No conversion, generated examples, or eager extraction of the image population.
+release: hf-b3f53090f541bfcdb491217dfec7aa639289ad8a
+snapshot_id: vlmbias-ada6735e59d70c98b812ca95cbce379b79340d224e1e86382a6d3ccdd620aeae
+adapter: embedded_parquet
+expected_count: 206
+scope: original author train split; this exact author configuration retains native numeric labels without inferring class
+  semantics.
+source_url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_gender_crop_False/tree/b3f53090f541bfcdb491217dfec7aa639289ad8a
+adapter_config:
+  format: parquet
+  media_columns:
+  - image
+  mapping:
+    media: image
+  fields:
+    label:
+      dtype: number
+      description: Original source integer label; class semantics not inferred from the empty author card
+    image:
+      dtype: object
+      description: Original embedded PNG provenance and digest; bytes stay outside JSON records
+  population: original author train split
+files:
+- source_name: data/train-00000-of-00001.parquet
+  url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_gender_crop_False/resolve/b3f53090f541bfcdb491217dfec7aa639289ad8a/data/train-00000-of-00001.parquet
+  bytes: 237029151
+  sha256: ada6735e59d70c98b812ca95cbce379b79340d224e1e86382a6d3ccdd620aeae
+  format: parquet
+  config_key: path
+allowed_hosts:
+- huggingface.co
+- cas-bridge.xethub.hf.co
+- cdn-lfs-us-1.huggingface.co
+- cdn-lfs.huggingface.co
+- cdn-lfs-us-1.hf.co
+- cdn-lfs.hf.co
+- us.aws.cdn.hf.co
+- eu.aws.cdn.hf.co

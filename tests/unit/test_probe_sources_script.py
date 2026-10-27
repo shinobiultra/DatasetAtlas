@@ -63,9 +63,9 @@ def test_urls_come_from_source_url_and_every_source_audit_url_deduplicated_acros
 
 
 def test_extra_urls_attach_to_a_registry_entry_and_unknown_ids_are_rejected():
-    entries = {"broden": _entry("broden", source_url="https://example.org/b")}
-    targets = probe_sources.collect_targets(entries, [], extras=[("broden", "https://example.org/data/x.zip")])
-    assert targets == [{"url": "https://example.org/data/x.zip", "dataset_ids": ["broden"], "origins": ["--extra"]}]
+    entries = {"fixture": _entry("fixture", source_url="https://example.org/b")}
+    targets = probe_sources.collect_targets(entries, [], extras=[("fixture", "https://example.org/data/x.zip")])
+    assert targets == [{"url": "https://example.org/data/x.zip", "dataset_ids": ["fixture"], "origins": ["--extra"]}]
     with pytest.raises(ValueError, match="nope"):
         probe_sources.collect_targets(entries, ["nope"], extras=[])
     with pytest.raises(ValueError, match="nope"):
@@ -123,3 +123,15 @@ def test_note_is_recorded_on_the_run_only_when_given(tmp_path, monkeypatch):
     assert json.loads(output.read_text())["runs"][0]["note"] == "supersedes the earlier probe"
     assert probe_sources.main(arguments) == 0
     assert "note" not in json.loads(output.read_text())["runs"][0]
+
+
+def test_default_receipt_is_local_to_the_selected_workspace(tmp_path, monkeypatch):
+    root = _registry(tmp_path / "workspace", _entry("a", source_url="https://example.org/x"))
+    caller = tmp_path / "caller"
+    caller.mkdir()
+    monkeypatch.chdir(caller)
+    monkeypatch.setattr(probe_sources, "probe_url", _fake_probe)
+    assert probe_sources.main(["--root", str(root), "--dataset", "a"]) == 0
+    receipt = json.loads((root / "work/audits/source-reprobe.json").read_text())
+    assert receipt["runs"][0]["dataset_ids"] == ["a"]
+    assert not (root / "reports").exists()

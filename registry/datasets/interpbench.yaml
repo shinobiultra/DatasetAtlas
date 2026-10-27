@@ -2,26 +2,27 @@ schema_version: '1.0'
 id: interpbench
 name: InterpBench
 aliases: []
-description: InterpBench semi-synthetic transformer benchmark. Authors report 86 semi-synthetic transformer
-  models/tasks; corpus occurrence is bibliography title only
+description: InterpBench semi-synthetic transformer benchmark. Authors report 86 semi-synthetic
+  transformer models/tasks; corpus occurrence is bibliography title only
 paper_ids:
 - paper-d098a79f00c8b2b5
-release: unresolved
+release: author-benchmark-a1242a84f8a4d07d1be9a8f5ec710415198016b2
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: source_page_public_data_unverified
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 86
   unit: example
   blockers:
   - Public source page located; exact paper-used data revision or archive is unverified.
   - Public data/media reuse rights require separate review.
+  total_count: 86
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -35,14 +36,15 @@ evidence:
   source_file_hash: 9a50cdc6b9f2ba3687339453804acb9519525941198c14d07765aaecbb1436d2
   page: 49
   role: bibliography-only reference
-  excerpt: '2. Rohan Gupta, Iván Arcuschin, Thomas Kwa, and Adrià Garriga-Alonso. Interpbench: Semi-synthetic
-    trans- formers for evaluating mechanistic interpretability techniques. In The Thirty-eight Co'
+  excerpt: '2. Rohan Gupta, Iván Arcuschin, Thomas Kwa, and Adrià Garriga-Alonso. Interpbench:
+    Semi-synthetic trans- formers for evaluating mechanistic interpretability techniques. In The
+    Thirty-eight Co'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://github.com/FlyingPumba/InterpBench
-  note: Authors report 86 semi-synthetic transformer models/tasks; corpus occurrence is bibliography title
-    only
+  note: Authors report 86 semi-synthetic transformer models/tasks; corpus occurrence is bibliography
+    title only
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_release_located
@@ -54,16 +56,59 @@ evidence:
   source_identity_status: author_release_located
 - kind: source_audit_access
   url: https://github.com/FlyingPumba/InterpBench
-  note: source_page_public_data_unverified; Keep bibliography-only role and benchmark/model nature, not
-    an image dataset.
+  note: source_page_public_data_unverified; Keep bibliography-only role and benchmark/model nature,
+    not an image dataset.
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_release_located
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 86-record prepared preview: asset kinds and text fields present in at least
-    one record. Not inferred from the name or description.'
+  note: 'Derived from the 86-record prepared preview: asset kinds and text fields present in at
+    least one record. Not inferred from the name or description.'
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: author-benchmark-a1242a84f8a4d07d1be9a8f5ec710415198016b2
+  snapshot_id: interpbench-860f056677610641edc9cdf0
+  source_url: https://github.com/FlyingPumba/InterpBench
+  record_count: 86
+  preview_count: 86
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 86 author-released benchmark case/model metadata rows, preserving task descriptions,
+    native architecture/training fields and model/circuit source links. The unit is a benchmark
+    case, not a generated model input. No pickle, circuit or weights file is executed, loaded
+    or substituted for fixed input examples; generated training/evaluation inputs are outside
+    this metadata population.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/interpbench.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: author-benchmark-a1242a84f8a4d07d1be9a8f5ec710415198016b2
+  snapshot_id: interpbench-860f056677610641edc9cdf0
+  source_url: https://github.com/FlyingPumba/InterpBench
+  record_count: 86
+  preview_count: 86
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 86 author-released benchmark case/model metadata rows, preserving task descriptions,
+    native architecture/training fields and model/circuit source links. The unit is a benchmark
+    case, not a generated model input. No pickle, circuit or weights file is executed, loaded
+    or substituted for fixed input examples; generated training/evaluation inputs are outside
+    this metadata population.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/interpbench.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
 source_url: https://github.com/FlyingPumba/InterpBench
 modalities:
 - text
+snapshot_id: interpbench-860f056677610641edc9cdf0

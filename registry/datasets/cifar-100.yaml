@@ -4,9 +4,9 @@ name: CIFAR-100
 aliases:
 - CIFAR100
 - cifar100
-description: Original CIFAR-100 60,000-image classification release in its documented two-label binary
-  format. Local adapter reads complete train and test splits without Python pickle; first 100 training
-  examples form the preview.
+description: Original CIFAR-100 60,000-image classification release in its documented two-label
+  binary format. Local adapter reads complete train and test splits without Python pickle; first
+  100 training examples form the preview.
 paper_ids:
 - paper-a47845c66d4a3f48
 - paper-6dbb0d4a7b949143
@@ -308,8 +308,8 @@ rights:
   annotations: not_reviewed
   images: not_reviewed
   source: https://www.cs.toronto.edu/~kriz/cifar.html
-  note: Official page provides downloads and citation but no explicit redistribution license; local preview
-    only.
+  note: Official page provides downloads and citation but no explicit redistribution license;
+    local preview only.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-81d348109813b6d56c85
@@ -317,9 +317,9 @@ evidence:
   source_file_hash: f1108a17f3cbbba7a93256ee725d68092c9a6d25204ca4faab92f6f0cbe1a4df
   page: 5
   role: evaluation
-  excerpt: p leaderboards for the `∞ , `2 and common corruption threat models on CIFAR-10, CIFAR-100 [75],
-    and ImageNet [32] datasets (see Table 1 for details). We use the fixed budgets of ε∞ = 8/255 and ε2
-    = 0
+  excerpt: p leaderboards for the `∞ , `2 and common corruption threat models on CIFAR-10, CIFAR-100
+    [75], and ImageNet [32] datasets (see Table 1 for details). We use the fixed budgets of ε∞
+    = 8/255 and ε2 = 0
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -328,8 +328,9 @@ evidence:
   source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
   page: 5
   role: evaluation
-  excerpt: ky et al., 2009), Robust Vision Models. We focus on robust vision en- CIFAR100, Pets (Parkhi
-    et al., 2012), UCF101 (Soomro, coders, specifically large-scale adversarially trained Ima- 2012
+  excerpt: ky et al., 2009), Robust Vision Models. We focus on robust vision en- CIFAR100, Pets
+    (Parkhi et al., 2012), UCF101 (Soomro, coders, specifically large-scale adversarially trained
+    Ima- 2012
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -338,8 +339,9 @@ evidence:
   source_file_hash: 721478f2130be8167b3b4530bbcbffb41bb9acba581bbc75eadcbfcf949ce42a
   page: 6
   role: evaluation
-  excerpt: then considering the worst case over all attacks, as MNIST, CIFAR-10, CIFAR-100 and ImageNet
-    as datasets. we do for AutoAttack, improves the performance. We report first results for determi
+  excerpt: then considering the worst case over all attacks, as MNIST, CIFAR-10, CIFAR-100 and
+    ImageNet as datasets. we do for AutoAttack, improves the performance. We report first results
+    for determi
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -367,9 +369,9 @@ evidence:
   source_file_hash: f1108a17f3cbbba7a93256ee725d68092c9a6d25204ca4faab92f6f0cbe1a4df
   page: 5
   role: benchmark source
-  excerpt: set up leaderboards for the `∞ , `2 and common corruption threat models on CIFAR-10, CIFAR-100
-    [75], and ImageNet [32] datasets (see Table 1 for details). We use the fixed budgets of ε∞ = 8/255
-    and ε2 = 0.5 for the `∞ a
+  excerpt: set up leaderboards for the `∞ , `2 and common corruption threat models on CIFAR-10,
+    CIFAR-100 [75], and ImageNet [32] datasets (see Table 1 for details). We use the fixed budgets
+    of ε∞ = 8/255 and ε2 = 0.5 for the `∞ a
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -378,16 +380,18 @@ evidence:
   source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
   page: 5
   role: zero-shot robustness evaluation
-  excerpt: Robust Vision Models. We focus on robust vision en- CIFAR100, Pets (Parkhi et al., 2012), UCF101
-    (Soomro, coders, spec
+  excerpt: Robust Vision Models. We focus on robust vision en- CIFAR100, Pets (Parkhi et al.,
+    2012), UCF101 (Soomro, coders, spec
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_release
   url: https://www.cs.toronto.edu/~kriz/cifar.html
-  note: Official page documents 60,000 images, 100 fine/20 coarse classes, binary row layout and MD5.
+  note: Official page documents 60,000 images, 100 fine/20 coarse classes, binary row layout and
+    MD5.
 - kind: mirror
   url: https://data.brainchip.com/dataset-mirror/cifar100/cifar-100-binary.tar.gz
-  note: Byte-identical mirror used to resume 168,513,733-byte archive; final MD5 matches author page.
+  note: Byte-identical mirror used to resume 168,513,733-byte archive; final MD5 matches author
+    page.
 - kind: corpus_mention
   evidence_id: evidence-c63e5e138844835b95ab
   paper_id: paper-25eaa8c74ce76800
@@ -408,14 +412,29 @@ evidence:
   paper_full_review_complete: true
 - kind: confirmed_name_alias
   alias_id: cifar100
-  reason: CIFAR100 spelling denotes the original CIFAR-100 source; no CIFAR-100-C suffix occurs in its
-    receipts.
-  scope_note: Preserve each paper's role and subset; the active preview is one pinned release, not proof
-    of an identical paper sample.
+  reason: CIFAR100 spelling denotes the original CIFAR-100 source; no CIFAR-100-C suffix occurs
+    in its receipts.
+  scope_note: Preserve each paper's role and subset; the active preview is one pinned release,
+    not proof of an identical paper sample.
   source_url: https://www.cs.toronto.edu/~kriz/cifar.html
   audit_file: registry/candidate_dispositions.yaml
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: cifar-100-original-binary
+  snapshot_id: cifar-100-6a1e646c1fd5066afa247613
+  source_url: https://www.cs.toronto.edu/~kriz/cifar.html
+  record_count: 60000
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: official CIFAR-100 binary train and test batches, 60,000 examples
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/cifar-100.yaml
 source_url: https://www.cs.toronto.edu/~kriz/cifar.html
-snapshot_id: cifar-100-binary-sha256-58a81ae192c23a4be8b1804d68e518ed807d710a4eb253b1f2a199162a40d8ec
+snapshot_id: cifar-100-6a1e646c1fd5066afa247613
 tasks:
 - image classification
 modalities:

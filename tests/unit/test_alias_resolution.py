@@ -1,42 +1,49 @@
-"""Retired alias IDs resolve to their canonical catalogue entry instead of 404ing."""
-from pathlib import Path
+"""Explicit aliases belong to live datasets and cannot shadow other entries."""
 import yaml
-from fastapi.testclient import TestClient
+import httpx
+import pytest
 from dataset_atlas.api import create_app
 from dataset_atlas.registry import Registry
-
-ROOT = Path(__file__).resolve().parents[2]
-
 
 def _write(root, dataset):
     (root / 'registry/datasets').mkdir(parents=True, exist_ok=True)
     (root / 'registry/datasets' / f"{dataset['id']}.yaml").write_text(yaml.safe_dump(dataset))
 
 
-def test_redirects_and_relationships_both_resolve_without_shadowing_live_ids(tmp_path):
+def test_declared_aliases_resolve_without_shadowing_live_ids_or_ambiguous_names(tmp_path):
     _write(tmp_path, {'id': 'canon', 'name': 'Canon', 'release': 'r', 'snapshot_id': 's',
-                      'relationships': [{'type': 'alias_resolved_from', 'target_id': 'old-name', 'status': 'confirmed'}]})
-    _write(tmp_path, {'id': 'live', 'name': 'Live', 'release': 'r', 'snapshot_id': 's'})
-    (tmp_path / 'registry/candidate_dispositions.yaml').write_text(yaml.safe_dump({'alias_redirects': [
-        {'alias_id': 'older-name', 'canonical_id': 'canon', 'disposition': 'confirmed_same_release_alias'},
-        {'alias_id': 'live', 'canonical_id': 'canon', 'disposition': 'confirmed_same_release_alias'},   # must not shadow
-        {'alias_id': 'ghost', 'canonical_id': 'missing', 'disposition': 'confirmed_same_release_alias'},  # no invented dataset
-    ]}))
+                      'aliases': ['friendly-name', 'live', 'shared-name', 'friendly-name'],
+                      'relationships': [{'type': 'source_subset_of', 'target_id': 'source-view'}]})
+    _write(tmp_path, {'id': 'live', 'name': 'Live', 'release': 'r', 'snapshot_id': 's',
+                     'aliases': ['shared-name']})
     registry = Registry(tmp_path)
-    assert registry.resolve('old-name') == 'canon'
-    assert registry.resolve('older-name') == 'canon'
-    assert registry.dataset('older-name').id == 'canon'
+    assert registry.resolve('friendly-name') == 'canon'
+    assert registry.dataset('friendly-name').id == 'canon'
     assert registry.resolve('live') == 'live' and registry.dataset('live').id == 'live'
-    assert registry.resolve('ghost') == 'ghost'
-    assert not registry.has('old-name')  # aliases are not catalogue entries
+    assert registry.resolve('shared-name') == 'shared-name'
+    assert registry.resolve('source-view') == 'source-view'
+    assert registry.resolve('missing') == 'missing'
+    assert not registry.has('friendly-name')  # aliases are not catalogue entries
     assert [d.id for d in registry.datasets()] == ['canon', 'live']
 
 
-def test_repository_retired_ids_resolve_over_the_api():
-    client = TestClient(create_app(ROOT))
-    for retired, canonical in (('pets', 'oxfordpet'), ('describable-textures-dataset', 'dtd'), ('okvqa', 'ok-vqa')):
-        response = client.get(f'/api/v1/datasets/{retired}')
-        assert response.status_code == 200, (retired, response.text[:200])
-        assert response.json()['id'] == canonical
-        assert retired in response.json()['aliases']
-    assert client.get('/api/v1/datasets/never-existed').status_code == 404
+@pytest.mark.asyncio
+async def test_declared_alias_resolves_over_the_api_without_a_history_file(tmp_path):
+    _write(tmp_path, {'id': 'canon', 'name': 'Canon', 'aliases': ['friendly-name']})
+    async with httpx.AsyncClient(transport=httpx.ASGITransport(app=create_app(tmp_path)),
+                                 base_url='http://testserver') as client:
+        response = await client.get('/api/v1/datasets/friendly-name')
+        assert response.status_code == 200
+        assert response.json()['id'] == 'canon'
+        assert response.json()['aliases'] == ['friendly-name']
+        assert (await client.get('/api/v1/datasets/never-existed')).status_code == 404
+
+
+def test_refresh_removes_aliases_when_their_dataset_leaves_the_registry(tmp_path):
+    _write(tmp_path, {'id': 'canon', 'name': 'Canon', 'aliases': ['friendly-name']})
+    registry = Registry(tmp_path)
+    assert registry.resolve('friendly-name') == 'canon'
+    (tmp_path / 'registry/datasets/canon.yaml').unlink()
+    registry.refresh()
+    assert registry.resolve('friendly-name') == 'friendly-name'
+    assert registry.datasets() == []

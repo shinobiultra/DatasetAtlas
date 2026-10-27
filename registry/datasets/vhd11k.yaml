@@ -2,10 +2,11 @@ schema_version: '1.0'
 id: vhd11k
 name: VHD11K
 aliases: []
-description: Official VHD11K annotation tables for 10,000 images and 1,000 videos, joined only by media modality
-  and source filename. The complete index and original-quality previews are retained locally;
-  other original images and videos are retrieved from the pinned ZIP archives on demand. Source decisions and four debate arguments
-  are preserved verbatim. The citing paper's 250-sample use is a separate selection, not the size of this release.
+description: Official VHD11K annotation tables for 10,000 images and 1,000 videos, joined only
+  by media modality and source filename. The complete index and original-quality previews are
+  retained locally; other original images and videos are retrieved from the pinned ZIP archives
+  on demand. Source decisions and four debate arguments are preserved verbatim. The citing paper's
+  250-sample use is a separate selection, not the size of this release.
 paper_ids:
 - paper-09b2d7393fc75cf7
 release: hf-910acf34b6fdf34e84eab1e8384319a7fcf2fadb
@@ -42,11 +43,11 @@ coverage:
   total_count: 11000
   unit: example
   blockers:
-  - Media includes Internet-crawled content and no dataset-wide redistribution grant was verified; local browsing
-    only pending rights review.
+  - Media includes Internet-crawled content and no dataset-wide redistribution grant was verified;
+    local browsing only pending rights review.
   - The preview is a systematic 100-image sample; full source access includes 1,000 video rows.
-  - Video ZIP access is bounded to one selected clip up to 250 MB in memory; 18 clips exceed 100 MB, and the largest
-    tested clip is 223,371,326 bytes.
+  - Video ZIP access is bounded to one selected clip up to 250 MB in memory; 18 clips exceed 100
+    MB, and the largest tested clip is 223,371,326 bytes.
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -54,7 +55,8 @@ rights:
   videos: not_reviewed
   external_provider: local_only
   source: https://huggingface.co/datasets/denny3388/VHD11K
-  note: Local retrieval and playback do not authorize publication or transmission to external models.
+  note: Local retrieval and playback do not authorize publication or transmission to external
+    models.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-14ce265111119cf04bdc
@@ -62,9 +64,9 @@ evidence:
   source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
   page: 7
   role: source data
-  excerpt: '-dependent behavior. We construct consider benign prompts from the VISU dataset [61], and vector-computation
-    sets from the VHD11K [52] by sampling evaluate the purified version of MMA-Diffusion [62], released 250 harmful
-    and 250 harmless images. We apply the '
+  excerpt: '-dependent behavior. We construct consider benign prompts from the VISU dataset [61],
+    and vector-computation sets from the VHD11K [52] by sampling evaluate the purified version
+    of MMA-Diffusion [62], released 250 harmful and 250 harmless images. We apply the '
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -73,13 +75,29 @@ evidence:
   source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
   page: 7
   role: safety vector source
-  excerpt: ider benign prompts from the VISU dataset [61], and vector-computation sets from the VHD11K [52] by sampling
-    evaluate the purified version of MM
+  excerpt: ider benign prompts from the VISU dataset [61], and vector-computation sets from the
+    VHD11K [52] by sampling evaluate the purified version of MM
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_release
   url: https://huggingface.co/datasets/denny3388/VHD11K/tree/910acf34b6fdf34e84eab1e8384319a7fcf2fadb
   note: Official annotation and media files at pinned revision; 11,000 rows; derived SHA-256 9cb62bfe03f04cde1c48392db1973f76fac3c4baa112b89f14cca75e29ffe253.
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: hf-910acf34b6fdf34e84eab1e8384319a7fcf2fadb
+  snapshot_id: hf-910acf34b6fdf34e84eab1e8384319a7fcf2fadb-9cb62bfe03f0
+  source_url: https://huggingface.co/datasets/denny3388/VHD11K
+  record_count: 11000
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 10000 image and 1000 video rows of the pinned author annotation tables; original
+    ZIP media remains remote and is verified on each bounded read.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/vhd11k.yaml
 snapshot_id: hf-910acf34b6fdf34e84eab1e8384319a7fcf2fadb-9cb62bfe03f0
 source_url: https://huggingface.co/datasets/denny3388/VHD11K
 modalities:

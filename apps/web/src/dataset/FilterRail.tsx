@@ -8,6 +8,7 @@ import { describeClause } from './model'
 import * as Icon from '../ui/Icons'
 
 const MAX_FACET_FIELDS = 8
+const MAX_KNOWN_FACET_VALUES = 160
 
 function facetable(field: FieldDescriptor): boolean {
   if (field.dtype === 'array' || field.dtype === 'object') return false
@@ -32,18 +33,36 @@ export function FilterRail({ datasetId, fields, clauses, baseQuery, onAdd, onRem
   const [counts, setCounts] = useState<AggregateResponse | null>(null)
   const [countError, setCountError] = useState('')
   const [loading, setLoading] = useState(false)
+  const facetIds = facetFields.map(field => field.id).join('|')
+  const knownChoices = useMemo(() => new Map<string, Set<string>>(), [datasetId, baseQuery?.snapshot_id, baseQuery?.unit, baseQuery?.population_scope, facetIds])
 
   const signature = baseQuery ? JSON.stringify({ ...baseQuery, limit: 0, cursor: null }) : ''
   useEffect(() => {
-    if (!baseQuery || !facetFields.length) { setCounts(null); return }
+    setCounts(null); setCountError('')
+    if (!baseQuery || !facetFields.length) { setLoading(false); return }
     let live = true
-    setLoading(true); setCountError('')
-    provider.aggregate(datasetId, { ...baseQuery, limit: 1, cursor: null }, facetFields.map(field => field.id), 40)
-      .then(response => { if (live) { setCounts(response); setLoading(false) } })
-      .catch(failure => { if (live) { setCountError(String(failure instanceof Error ? failure.message : failure)); setCounts(null); setLoading(false) } })
-    return () => { live = false }
+    const controller = new AbortController()
+    setLoading(true)
+    const timer = setTimeout(() => {
+      provider.aggregate(datasetId, { ...baseQuery, limit: 1, cursor: null }, facetFields.map(field => field.id), 40, controller.signal)
+        .then(response => {
+          if (!live) return
+          for (const result of response.results) {
+            if (result.kind !== 'categorical') continue
+            const values = knownChoices.get(result.field_id) ?? new Set<string>()
+            for (const item of result.counts) {
+              if (values.size >= MAX_KNOWN_FACET_VALUES) break
+              values.add(item.value)
+            }
+            knownChoices.set(result.field_id, values)
+          }
+          setCounts(response); setLoading(false)
+        })
+        .catch(failure => { if (live) { setCountError(String(failure instanceof Error ? failure.message : failure)); setCounts(null); setLoading(false) } })
+    }, 150)
+    return () => { live = false; clearTimeout(timer); controller.abort() }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [datasetId, signature, facetFields.map(field => field.id).join('|')])
+  }, [datasetId, signature, facetIds, knownChoices])
 
   const grouped = useMemo(() => {
     const map = new Map<string, FieldDescriptor[]>()
@@ -54,7 +73,7 @@ export function FilterRail({ datasetId, fields, clauses, baseQuery, onAdd, onRem
     return [...map]
   }, [facetFields])
 
-  const clauseFor = (fieldId: string, value: string) => clauses.find(clause => clause.fieldId === fieldId && clause.op === 'eq' && display(clause.value) === value)
+  const clauseFor = (fieldId: string, value: string) => clauses.find(clause => clause.source === 'facet' && clause.fieldId === fieldId && clause.op === 'eq' && display(clause.value) === value)
 
   function toggleValue(field: FieldDescriptor, raw: string) {
     const existing = clauseFor(field.id, raw)
@@ -63,7 +82,7 @@ export function FilterRail({ datasetId, fields, clauses, baseQuery, onAdd, onRem
     const typed = field.values?.find(value => display(value) === raw)
       ?? (field.dtype === 'boolean' ? raw === 'true' : field.dtype === 'number' ? Number(raw) : raw)
     onAdd({
-      key: `${field.id}:eq:${raw}`, fieldId: field.id, fieldName: field.name, op: 'eq', value: typed,
+      key: `facet:${field.id}:eq:${JSON.stringify(typed)}`, fieldId: field.id, fieldName: field.name, op: 'eq', value: typed, source: 'facet',
       label: describeClause(field, 'eq', typed),
     })
   }
@@ -82,10 +101,22 @@ export function FilterRail({ datasetId, fields, clauses, baseQuery, onAdd, onRem
           <div key={origin}>
             {items.map(field => {
               const result = counts?.results.find(entry => entry.field_id === field.id)
-              const options = result && result.kind === 'categorical'
-                ? result.counts
-                : (field.values ?? []).map(value => ({ value: display(value), count: -1 }))
-              if (!options.length) return null
+              const categorical = result?.kind === 'categorical' ? result : null
+              const options = [...(categorical?.counts ?? [])]
+              const known = new Set(options.map(option => option.value))
+              const choices = [
+                ...(field.values ?? []).map(display),
+                ...(knownChoices.get(field.id) ?? []),
+                ...clauses.filter(clause => clause.source === 'facet' && clause.fieldId === field.id && clause.op === 'eq').map(clause => display(clause.value)),
+              ]
+              for (const value of choices) {
+                if (known.has(value)) continue
+                known.add(value)
+                // Truncated counts cannot establish zero for an omitted value.
+                options.push({ value, count: categorical && !categorical.truncated ? 0 : -1 })
+              }
+              const missingClause = clauses.find(clause => clause.source === 'facet' && clause.fieldId === field.id && clause.op === 'is_null')
+              if (!options.length && !categorical?.missing && !missingClause) return null
               const active = clauses.filter(clause => clause.fieldId === field.id).length
               return (
                 <Facet key={`${field.unit}:${field.id}`} title={field.name} origin={origin} count={active || undefined} defaultOpen={options.length <= 12 || active > 0}>
@@ -107,15 +138,14 @@ export function FilterRail({ datasetId, fields, clauses, baseQuery, onAdd, onRem
                     }}
                   />
                   {result && result.kind === 'categorical' && result.truncated && <p className="hint" style={{ paddingTop: 4 }}>Showing the most frequent values only.</p>}
-                  {result && result.kind === 'categorical' && result.missing > 0 && (
+                  {categorical && (categorical.missing > 0 || missingClause) && (
                     <FacetOption
-                      checked={clauses.some(clause => clause.fieldId === field.id && clause.op === 'is_null')}
+                      checked={Boolean(missingClause)}
                       onChange={checked => {
-                        const existing = clauses.find(clause => clause.fieldId === field.id && clause.op === 'is_null')
-                        if (existing) onRemove(existing.key)
-                        if (checked && !existing) onAdd({ key: `${field.id}:is_null`, fieldId: field.id, fieldName: field.name, op: 'is_null', value: true, label: describeClause(field, 'is_null', true) })
+                        if (missingClause) onRemove(missingClause.key)
+                        if (checked && !missingClause) onAdd({ key: `facet:${field.id}:is_null`, fieldId: field.id, fieldName: field.name, op: 'is_null', value: true, source: 'facet', label: describeClause(field, 'is_null', true) })
                       }}
-                      label="Missing" count={result.missing}
+                      label="Missing" count={categorical.missing}
                     />
                   )}
                 </Facet>

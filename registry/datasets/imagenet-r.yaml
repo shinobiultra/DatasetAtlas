@@ -2,9 +2,10 @@ schema_version: '1.0'
 id: imagenet-r
 name: ImageNet-R
 aliases: []
-description: 'Original ImageNet-R rendition evaluation archive: 30,000 artwork, cartoon, sketch, sculpture,
-  and other rendition images across 200 ImageNet synsets. The source README supplies class descriptions;
-  author evaluation code maps each synset to the 200-class subset and original ImageNet-1K index.'
+description: 'Original ImageNet-R rendition evaluation archive: 30,000 artwork, cartoon, sketch,
+  sculpture, and other rendition images across 200 ImageNet synsets. The source README supplies
+  class descriptions; author evaluation code maps each synset to the 200-class subset and original
+  ImageNet-1K index.'
 paper_ids:
 - paper-3e0db9c633ab204c
 - paper-25eaa8c74ce76800
@@ -1056,15 +1057,15 @@ coverage:
   total_count: 30000
   unit: example
   blockers:
-  - Rendition-image rights are not explicitly cleared by the author repository MIT code license; retain
-    media locally pending image-level review.
+  - Rendition-image rights are not explicitly cleared by the author repository MIT code license;
+    retain media locally pending image-level review.
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: metadata_only
   source: https://github.com/hendrycks/imagenet-r/tree/3131cacee97c407bd2ecea15846a67817a64f924
-  basis: Author repository offers public archive and citation, but the MIT code license is not evidence
-    of permission to republish web-sourced rendition images.
+  basis: Author repository offers public archive and citation, but the MIT code license is not
+    evidence of permission to republish web-sourced rendition images.
   external_provider: local_only
 evidence:
 - kind: corpus_mention
@@ -1108,11 +1109,26 @@ evidence:
   probe: archive_http_head_only
 - kind: source_audit_rights
   url: https://github.com/hendrycks/imagenet-r/tree/3131cacee97c407bd2ecea15846a67817a64f924
-  note: Repository MIT code license is not evidence of rights for web-sourced rendition images; publication
-    pending image-level review
+  note: Repository MIT code license is not evidence of rights for web-sourced rendition images;
+    publication pending image-level review
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: imagenet-r-original-tar-18c6bf49
+  snapshot_id: imagenet-r-9ec005c87cd8302c3286b193
+  source_url: https://github.com/hendrycks/imagenet-r/tree/3131cacee97c407bd2ecea15846a67817a64f924
+  record_count: 30000
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: 'Original author ImageNet-R TAR: 30,000 source images across 200 synset folders'
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/imagenet-r.yaml
 source_url: https://github.com/hendrycks/imagenet-r/tree/3131cacee97c407bd2ecea15846a67817a64f924
 tasks:
 - rendition image classification
@@ -1123,4 +1139,4 @@ labels:
 - WordNet synset ID
 - ImageNet-R 200-class subset index
 - ImageNet-1K class index
-snapshot_id: imagenet-r-18c6bf493b39a0d9
+snapshot_id: imagenet-r-9ec005c87cd8302c3286b193

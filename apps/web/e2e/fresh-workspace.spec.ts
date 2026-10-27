@@ -43,13 +43,25 @@ test('a dataset with a recorded preview offers to fetch it and states why nothin
   await expect(page.getByRole('button', { name: 'Fetch preview' })).toBeEnabled()
 })
 
-test('a dataset with no recipe says so instead of pretending it can be fetched', async ({ page }) => {
-  // Broden is public; its missing pinned acquisition recipe is an Atlas implementation gap.
-  await page.goto('/#/dataset/broden')
+test('a fresh public source reviews pinned files before acquisition', async ({ page }) => {
+  const starts: string[] = []
+  page.on('request', request => { if (new URL(request.url()).pathname.endsWith('/start')) starts.push(request.url()) })
+  await page.goto('/#/dataset/advbench')
   await page.getByRole('button', { name: /Prepare|Get preview/ }).first().click()
+  const planned = page.waitForResponse(response => new URL(response.url()).pathname.endsWith('/preparation/plan') && response.request().method() === 'POST')
   await page.getByRole('button', { name: 'Review preparation plan' }).click()
-  await expect(page.getByRole('button', { name: 'Download and prepare' })).toBeDisabled()
-  await expect(page.getByRole('status').filter({ hasText: /gap in Atlas/ })).toBeVisible()
+  const response = await planned
+  expect(response.status()).toBe(200)
+  const plan = await response.json() as { ready: boolean; files: { url: string; sha256: string }[]; expected_download_bytes: number; max_download_bytes: number }
+  expect(plan.ready).toBe(true)
+  expect(plan.files.length).toBeGreaterThan(0)
+  for (const file of plan.files) {
+    expect(file.url).toMatch(/^https:\/\//)
+    expect(file.sha256).toMatch(/^[a-f0-9]{64}$/)
+  }
+  expect(plan.expected_download_bytes).toBeLessThanOrEqual(plan.max_download_bytes)
+  await expect(page.getByRole('button', { name: /^(Fetch preview|Download and prepare)$/ })).toBeEnabled()
+  expect(starts).toEqual([])
 })
 
 test('add a folder of images, inspect it, build its preview and browse every image on a cold cache', async ({ page }) => {

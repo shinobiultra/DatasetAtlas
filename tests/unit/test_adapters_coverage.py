@@ -23,10 +23,8 @@ def test_corpus_sync_preserves_source_research_on_unresolved_candidate(tmp_path:
     candidates = tmp_path / "candidates.json"
     candidates.write_text(json.dumps({"candidates": [{"proposed_id": "example", "name": "Example",
         "aliases_as_written": ["Example Set"], "paper_ids": ["paper-1"],
-        "evidence_ids": ["evidence-1"]}, {"proposed_id": "excluded", "name": "Not a dataset",
+        "evidence_ids": ["evidence-1"]}, {"proposed_id": "unadmitted", "name": "Unadmitted candidate",
         "aliases_as_written": [], "paper_ids": [], "evidence_ids": []}]}))
-    (tmp_path / "candidate_dispositions.yaml").write_text(yaml.safe_dump(
-        {"excluded_from_dataset_catalogue": [{"id": "excluded", "reason": "verified non-dataset"}]}))
     evidence = tmp_path / "evidence.jsonl"
     evidence.write_text(json.dumps({"evidence_id": "evidence-1", "paper_id": "paper-1",
         "source_file_hash": "abc", "page": 3, "mention_role": "bibliography-only reference",
@@ -43,8 +41,46 @@ def test_corpus_sync_preserves_source_research_on_unresolved_candidate(tmp_path:
     assert actual.paper_ids == ["paper-1"] and actual.aliases == ["Example Set"]
     assert actual.evidence[-1]["role"] == "bibliography-only reference"
     assert actual.evidence[-1]["paper_full_review_complete"] is True
-    assert not (registry / "excluded.yaml").exists()
+    assert not (registry / "unadmitted.yaml").exists()
     assert sync_curated_candidates(candidates, evidence, registry) == 0
+
+
+def test_new_candidates_require_explicit_supported_id_admission(tmp_path: Path):
+    registry = tmp_path / "registry"
+    candidates = tmp_path / "candidates.json"
+    candidates.write_text(json.dumps({"candidates": [
+        {"proposed_id": dataset_id, "name": dataset_id, "aliases_as_written": [],
+         "paper_ids": [], "evidence_ids": []}
+        for dataset_id in ("supported", "unadmitted")
+    ]}))
+    evidence = tmp_path / "evidence.jsonl"
+    evidence.write_text("")
+
+    assert sync_curated_candidates(candidates, evidence, registry) == 0
+    assert list(registry.glob("*.yaml")) == []
+    assert sync_curated_candidates(candidates, evidence, registry, supported_ids={"supported"}) == 1
+    assert not (registry / "unadmitted.yaml").exists()
+    actual = Dataset.model_validate(yaml.safe_load((registry / "supported.yaml").read_text()))
+    assert actual.coverage.identity == "candidate"
+    assert actual.coverage.publication == "not_reviewed"
+    assert actual.rights == {"records": "not_reviewed", "annotations": "not_reviewed", "images": "not_reviewed"}
+    assert actual.evidence == []
+    assert sync_curated_candidates(candidates, evidence, registry) == 0
+
+
+def test_explicit_admission_cannot_write_outside_the_registry(tmp_path: Path):
+    registry = tmp_path / "registry"
+    candidates = tmp_path / "candidates.json"
+    candidates.write_text(json.dumps({"candidates": [
+        {"proposed_id": "../outside", "name": "Invalid path", "aliases_as_written": [],
+         "paper_ids": [], "evidence_ids": []}
+    ]}))
+    evidence = tmp_path / "evidence.jsonl"
+    evidence.write_text("")
+    import pytest
+    with pytest.raises(ValueError, match="Invalid dataset ID"):
+        sync_curated_candidates(candidates, evidence, registry, supported_ids={"../outside"})
+    assert not (tmp_path / "outside.yaml").exists()
 
 
 def test_coverage_distinguishes_access_gate_from_implementation_gap(tmp_path: Path):

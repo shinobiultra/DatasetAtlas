@@ -31,8 +31,8 @@ for (const width of [304, 390, 820]) {
   })
 }
 
-test('metadata-only entries can open and close their full source record', async ({ page }) => {
-  await page.goto('/#/dataset/facet')
+test('unpublished entries can open and close their full source record', async ({ page }) => {
+  await page.goto('/#/dataset/flickr30k')
   await expect(page.getByText('No examples are published here.')).toBeVisible()
   await page.getByRole('button', { name: 'About dataset' }).click()
   await expect(page.getByRole('complementary', { name: 'About dataset' })).toBeVisible()

@@ -2,16 +2,16 @@ schema_version: '1.0'
 id: shapes-localization
 name: Shapes Localization
 aliases: []
-description: 'Pathways Shapes Localization: 400 images reconstructed using the released author generator,
-  200 counterfactual pairs, seed 42 and the documented 1024-pixel rendering defaults. Historical experiment
-  pixel identity is not established.'
+description: 'Pathways Shapes Localization: 400 images reconstructed using the released author
+  generator, 200 counterfactual pairs, seed 42 and the documented 1024-pixel rendering defaults.
+  Historical experiment pixel identity is not established.'
 paper_ids:
 - paper-6c99cf73401b37d4
 release: pathways-shapes-470944b3f6b44901a9055cf8d91aef18cee21671-seed42-pillow12.3.0-python3.12
 adapter: pathways_shapes
 adapter_config: {}
 coverage:
-  identity: candidate
+  identity: resolved
   source: verified
   access: public
   adapter: tested
@@ -38,8 +38,8 @@ evidence:
   page: 13
   role: introduction
   excerpt: 'es Datasets We generate three synthetic datasets: Shapes Recognition, Shapes Localization,
-    and Shapes Relations, using a single pipeline. The shared generation ensures all three datasets are
-    construc'
+    and Shapes Relations, using a single pipeline. The shared generation ensures all three datasets
+    are construc'
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -48,9 +48,9 @@ evidence:
   source_file_hash: 63a07114996dfdfd5a19f4a2790f78b7b42dc95ce54e14d1a8f32cbef00fc8fb
   page: 13
   role: introduced synthetic evaluation
-  excerpt: 'Synthetic Shapes Datasets We generate three synthetic datasets: Shapes Recognition, Shapes
-    Localization, and Shapes Relations, using a single pipeline. The shared generation ensures all three
-    datasets are constructed from the same pr'
+  excerpt: 'Synthetic Shapes Datasets We generate three synthetic datasets: Shapes Recognition,
+    Shapes Localization, and Shapes Relations, using a single pipeline. The shared generation
+    ensures all three datasets are constructed from the same pr'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -85,9 +85,50 @@ evidence:
   url: https://github.com/israfelsr/vlm-pathways/tree/470944b3f6b44901a9055cf8d91aef18cee21671
   checked_on: '2026-09-23'
   receipt: reports/shapes-live-verification.json
-  scope: All 400 examples from the pinned author README recipe (200 pairs, seed 42, 1024x1024 pixels,
-    80-pixel shapes, 3x3 grid). This is an author-recipe reconstruction, not an archived historical experiment
-    population. Source fields, paired identities, rendering versions and pixel hashes are retained.
+  scope: All 400 examples from the pinned author README recipe (200 pairs, seed 42, 1024x1024
+    pixels, 80-pixel shapes, 3x3 grid). This is an author-recipe reconstruction, not an archived
+    historical experiment population. Source fields, paired identities, rendering versions and
+    pixel hashes are retained.
+- kind: paper_usage_qualification
+  note: Available release identity is separate from historical paper use.
+  qualifications:
+  - Author-recipe reconstruction; historical experiment pixels are not available.
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  status: resolved_declared_source_population
+  release: pathways-shapes-470944b3f6b44901a9055cf8d91aef18cee21671-seed42-pillow12.3.0-python3.12
+  snapshot_id: shapes-localization-510f4cb1cb3f80c2eab643ac
+  source_url: https://github.com/israfelsr/vlm-pathways/tree/470944b3f6b44901a9055cf8d91aef18cee21671
+  representation: author_recipe_reconstruction
+  record_count: 400
+  population: All 400 examples from the pinned author README recipe (200 pairs, seed 42, 1024x1024
+    pixels, 80-pixel shapes, 3x3 grid). This is an author-recipe reconstruction, not an archived
+    historical experiment population. Source fields, paired identities, rendering versions and
+    pixel hashes are retained.
+  basis: Existing checksum-pinned preparation and snapshot metadata; no record contents read during
+    this curation.
+  scope_note: Identifies the available source population. This is not human review, historical
+    paper-membership acceptance, publisher byte-equivalence proof, or permission to redistribute.
+  receipt: work/prepared/shapes-localization/510f4cb1cb3f80c2eab643acde4cf8f8d36ef6c4b69fff85ae93a22614e46dd2/receipt.json
+  receipt_sha256: 360435ea6a2f3876709ff1fb455b8ad0898a54c054538e097bd24a79e69fd891
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: pathways-shapes-470944b3f6b44901a9055cf8d91aef18cee21671-seed42-pillow12.3.0-python3.12
+  snapshot_id: shapes-localization-510f4cb1cb3f80c2eab643ac
+  source_url: https://github.com/israfelsr/vlm-pathways/tree/470944b3f6b44901a9055cf8d91aef18cee21671
+  record_count: 400
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 400 examples from the pinned author README recipe (200 pairs, seed 42, 1024x1024
+    pixels, 80-pixel shapes, 3x3 grid). This is an author-recipe reconstruction, not an archived
+    historical experiment population. Source fields, paired identities, rendering versions and
+    pixel hashes are retained.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/shapes-localization.yaml
 source_url: https://github.com/israfelsr/vlm-pathways/tree/470944b3f6b44901a9055cf8d91aef18cee21671
 modalities:
 - image
@@ -95,3 +136,4 @@ modalities:
 tasks:
 - shape localization
 - counterfactual pairs
+snapshot_id: shapes-localization-510f4cb1cb3f80c2eab643ac

@@ -87,9 +87,12 @@ def with_availability(dataset: Any, has_preview: bool, has_complete: bool) -> An
         upstream = min(coverage.total_count or 100, 100)
     if not has_preview:
         coverage.preview, coverage.preview_count = "none", 0
-    if coverage.complete_data == "supported" and not has_complete:
+    wants_complete = coverage.complete_data in {
+        "supported", "requires_preparation", "indexed_metadata_partial_media", "partial_media",
+        "wild_subset_complete", "full_csv_indexed", "presented_stimuli_indexed",
+    }
+    if wants_complete and not has_complete:
         coverage.complete_data = "requires_preparation"
-    wants_complete = coverage.complete_data in {"supported", "requires_preparation"}
     availability = Availability(
         preview="local" if has_preview else "on_request" if upstream else "none",
         complete_data="local" if has_complete else "on_request" if wants_complete else "none",

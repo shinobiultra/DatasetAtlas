@@ -1,0 +1,101 @@
+schema_version: '1.0'
+id: scienceqa
+name: ScienceQA
+aliases: []
+description: All 21,208 native ScienceQA questions across train, validation and test, including
+  the 10,332 image-bearing and 10,876 text-only questions. Original fields and native split/source
+  order are retained.
+paper_ids:
+- paper-3e0db9c633ab204c
+release: f18b0a70359ebfb41f658fd564208d0355b013f4
+adapter: remote_columnar
+adapter_config: {}
+coverage:
+  identity: resolved
+  source: verified
+  access: public
+  adapter: tested
+  preview: complete_target
+  complete_data: indexed_metadata_partial_media
+  publication: not_reviewed
+  preview_count: 100
+  unit: example
+  blockers:
+  - Public examples and source-image redistribution remain unreviewed.
+  total_count: 21208
+rights:
+  records: not_reviewed
+  annotations: not_reviewed
+  images: not_reviewed
+  source: https://github.com/lupantech/ScienceQA/blob/2cbf8318e07b9ece895bb2ae605e71e38d623264/README.md
+  note: Author repository identifies dataset CC BY-NC-SA 4.0 and code MIT; check original educational
+    image rights and license obligations per public asset.
+evidence:
+- kind: corpus_mention
+  evidence_id: evidence-8a290f31b3e54475db20
+  paper_id: paper-3e0db9c633ab204c
+  source_file_hash: d2750f355a25fcdcfcb221e5049a0aa41ec096b452772c73e1767e2d039a6545
+  page: 8
+  role: evaluation
+  excerpt: POPE Model Vision Encoder VQAv2(val) GQA VizWiz SciQA-IMG TextVQA (val) MME
+  review_scope: full_text_mention_inventory_checked
+  paper_full_review_complete: true
+- kind: source_audit_identity
+  url: https://github.com/lupantech/ScienceQA/tree/2cbf8318e07b9ece895bb2ae605e71e38d623264
+  note: Image-bearing subset of ScienceQA; distinct from the full multimodal benchmark's text-only
+    questions
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_release
+  url: https://github.com/lupantech/ScienceQA/tree/2cbf8318e07b9ece895bb2ae605e71e38d623264
+  note: author repository commit 2cbf8318e07b9ece895bb2ae605e71e38d623264
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_audit_access
+  url: https://github.com/lupantech/ScienceQA/tree/2cbf8318e07b9ece895bb2ae605e71e38d623264
+  note: Author repository provides problem JSON and image download script/links; data acquisition
+    not attempted in this audit.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+  probe: official_page_read_download_unprobed
+- kind: source_audit_rights
+  url: https://github.com/lupantech/ScienceQA/blob/2cbf8318e07b9ece895bb2ae605e71e38d623264/README.md
+  note: Author repository identifies dataset CC BY-NC-SA 4.0 and code MIT; check original educational
+    image rights and license obligations per public asset.
+  audit_file: work/sources/source-audit-publication.json
+  checked_on: '2026-09-22'
+  source_identity_status: official_source_resolved_not_human_reviewed
+- kind: native_population_live_verification
+  url: https://huggingface.co/datasets/derek-thomas/ScienceQA/tree/f18b0a70359ebfb41f658fd564208d0355b013f4
+  checked_on: '2026-09-23'
+  receipt: reports/scienceqa-bios-live-verification.json
+  scope: All 10332 image-bearing questions selected from the 21208-question author-linked ScienceQA
+    Hugging Face release, with all three native splits preserved by source filename. Available
+    representation, not a claim about an unpinned evaluation-only paper selection.
+  source_identity_status: pinned_available_representation_not_paper_revision_claim
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: f18b0a70359ebfb41f658fd564208d0355b013f4
+  snapshot_id: scienceqa-0bc845afa303a73ec45df657
+  source_url: https://huggingface.co/datasets/derek-thomas/ScienceQA/tree/f18b0a70359ebfb41f658fd564208d0355b013f4
+  record_count: 21208
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: indexed_metadata_partial_media
+  unit: example
+  population: All 21,208 native ScienceQA questions across train, validation and test, including
+    the 10,332 image-bearing and 10,876 text-only questions. Original fields and native split/source
+    order are retained.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/scienceqa.yaml
+source_url: https://huggingface.co/datasets/derek-thomas/ScienceQA/tree/f18b0a70359ebfb41f658fd564208d0355b013f4
+modalities:
+- image
+- text
+relationships: []
+snapshot_id: scienceqa-0bc845afa303a73ec45df657

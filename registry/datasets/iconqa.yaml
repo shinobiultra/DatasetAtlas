@@ -20,24 +20,30 @@ adapter_config:
   preparation_budget_bytes: 3000000000
   expected_records: 107439
   expected_counts:
-    'train:choose_img': 34603
-    'train:choose_txt': 18946
-    'train:fill_in_blank': 10913
-    'val:choose_img': 11534
-    'val:choose_txt': 6316
-    'val:fill_in_blank': 3638
-    'test:choose_img': 11535
-    'test:choose_txt': 6316
-    'test:fill_in_blank': 3638
+    train:choose_img: 34603
+    train:choose_txt: 18946
+    train:fill_in_blank: 10913
+    val:choose_img: 11534
+    val:choose_txt: 6316
+    val:fill_in_blank: 3638
+    test:choose_img: 11535
+    test:choose_txt: 6316
+    test:fill_in_blank: 3638
   population: Complete original IconQA v1 author ZIP, 107,439 questions across three subtasks
   fields:
     split:
       dtype: category
-      values: [train, val, test]
+      values:
+      - train
+      - val
+      - test
       description: Original author train, validation, or test split
     subtask:
       dtype: category
-      values: [choose_img, choose_txt, fill_in_blank]
+      values:
+      - choose_img
+      - choose_txt
+      - fill_in_blank
       description: Original IconQA question type
     problem_id:
       dtype: string
@@ -66,16 +72,18 @@ coverage:
   total_count: 107439
   unit: example
   blockers:
-  - The author README and included metadata.json each overstate the validation count by one;
-    the source ZIP has 11,534 validation image-choice examples and 21,488 validation examples overall.
-  - Public image/question publication needs review of CC BY-NC-SA 4.0 attribution and ShareAlike conditions.
+  - The author README and included metadata.json each overstate the validation count by one; the
+    source ZIP has 11,534 validation image-choice examples and 21,488 validation examples overall.
+  - Public image/question publication needs review of CC BY-NC-SA 4.0 attribution and ShareAlike
+    conditions.
 rights:
   records: author_declares_CC_BY_NC_SA_4_0
   annotations: author_declares_CC_BY_NC_SA_4_0
   images: author_declares_CC_BY_NC_SA_4_0
   source: https://github.com/lupantech/IconQA
   note: The author README and included archive LICENSE.md declare CC BY-NC-SA 4.0 for IconQA;
-    local research access is enabled, public publication remains metadata-only pending rights review.
+    local research access is enabled, public publication remains metadata-only pending rights
+    review.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-5d70ca361253cefb0f65
@@ -83,13 +91,14 @@ evidence:
   source_file_hash: 51dcc13673e3b9b98e6b9cb67b07e584643259b69e50a0c028b1c7814a1ee676
   page: 9
   role: future-work example
-  excerpt: Similarly, icon datasets like IconQA (Lu et al., Outlier Suppression. Outlier suppression heads
+  excerpt: Similarly, icon datasets like IconQA (Lu et al., Outlier Suppression. Outlier suppression
+    heads
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://github.com/lupantech/IconQA
-  note: 'Authors provide diagrams/questions and distinguish Icon645 pretraining dataset from IconQA. Release:
-    IconQA original three subtasks'
+  note: 'Authors provide diagrams/questions and distinguish Icon645 pretraining dataset from IconQA.
+    Release: IconQA original three subtasks'
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
@@ -99,6 +108,21 @@ evidence:
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: iconqa-original-v1-475f7651
+  snapshot_id: iconqa-3e2eb3a289d3c9dee30a0047
+  source_url: https://github.com/lupantech/IconQA
+  record_count: 107439
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: Complete original IconQA v1 author ZIP, 107,439 questions across three subtasks
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/iconqa.yaml
 source_url: https://github.com/lupantech/IconQA
 tasks:
 - diagram question answering
@@ -112,4 +136,4 @@ labels:
 - grade
 - split
 - subtask
-snapshot_id: iconqa-original-475f7651
+snapshot_id: iconqa-3e2eb3a289d3c9dee30a0047

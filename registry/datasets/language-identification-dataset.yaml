@@ -2,9 +2,10 @@ schema_version: '1.0'
 id: language-identification-dataset
 name: language-identification dataset
 aliases: []
-description: 'papluca/language-identification: 90,000 short texts in 20 languages (70,000 train, 10,000
-  validation, 10,000 test; 3,500/500/500 per language) with the author''s language label. The corpus paper
-  cites it (footnote 7) only as the data its language-detection model was fine-tuned on.'
+description: 'papluca/language-identification: 90,000 short texts in 20 languages (70,000 train,
+  10,000 validation, 10,000 test; 3,500/500/500 per language) with the author''s language label.
+  The corpus paper cites it (footnote 7) only as the data its language-detection model was fine-tuned
+  on.'
 paper_ids:
 - paper-29349603429218b8
 release: hf-aa56583bf2bc52b0565770607d6fc3faebecf9e2
@@ -51,18 +52,19 @@ coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - 'Model-training lineage only: the paper did not evaluate on this dataset, so it is a catalogue record
-    for what its detector was trained on.'
-  - 'The dataset card states no licence and extends amazon_reviews_multi, xnli and stsb_multi_mt: local
-    browsing only, no public redistribution review.'
+  - 'Model-training lineage only: the paper did not evaluate on this dataset, so it is a catalogue
+    record for what its detector was trained on.'
+  - 'The dataset card states no licence and extends amazon_reviews_multi, xnli and stsb_multi_mt:
+    local browsing only, no public redistribution review.'
   - Rows carry no upstream IDs; identity is split plus position in the pinned files.
+  total_count: 90000
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -76,29 +78,29 @@ evidence:
   source_file_hash: a025d9386684c74fca7aae546e5707d9ec43e808ca9fc3a654154f964d50144f
   page: 8
   role: model-training lineage
-  excerpt: 'timent: positive, negative and neutral; base model [24] fine-tuned on the language identification
-    (2) Formality: formal and informal; (3) Language: English, dataset.7 It is currently capable of detecting
-    20 lang'
+  excerpt: 'timent: positive, negative and neutral; base model [24] fine-tuned on the language
+    identification (2) Formality: formal and informal; (3) Language: English, dataset.7 It is
+    currently capable of detecting 20 lang'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://arxiv.org/abs/2407.08970
-  note: 20-language identification training source named only by model-lineage footnote; papluca HF is
-    a plausible but unverified match Exact author dataset ID/revision unresolved
+  note: 20-language identification training source named only by model-lineage footnote; papluca
+    HF is a plausible but unverified match Exact author dataset ID/revision unresolved
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: original_source_identity_unresolved
 - kind: source_audit_access
   url: https://arxiv.org/abs/2407.08970
-  note: 'Candidate HF dataset exists; citation chain must be checked before attribution Probe: first_primary_url_http_head_200;
-    payload_not_downloaded'
+  note: 'Candidate HF dataset exists; citation chain must be checked before attribution Probe:
+    first_primary_url_http_head_200; payload_not_downloaded'
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: original_source_identity_unresolved
 - kind: source_audit_rights
   url: https://huggingface.co/datasets/papluca/language-identification
-  note: No source-specific redistribution terms established No source-content rights grant was verified;
-    linked page is identity/access context only.
+  note: No source-specific redistribution terms established No source-content rights grant was
+    verified; linked page is identity/access context only.
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: original_source_identity_unresolved
@@ -106,10 +108,30 @@ evidence:
   checked_on: '2026-10-06'
   url: https://huggingface.co/datasets/papluca/language-identification/tree/aa56583bf2bc52b0565770607d6fc3faebecf9e2
   note: The paper's page-8 footnote 7 is https://huggingface.co/datasets/papluca/language-identification,
-    which resolves the identity the earlier audit left as a plausible match. Pinned revision holds README.md,
-    train.csv (70,000 rows), valid.csv (10,000) and test.csv (10,000); columns labels and text; 20 languages,
-    perfectly balanced.
+    which resolves the identity the earlier audit left as a plausible match. Pinned revision holds
+    README.md, train.csv (70,000 rows), valid.csv (10,000) and test.csv (10,000); columns labels
+    and text; 20 languages, perfectly balanced.
   source_identity_status: resolved_by_paper_footnote
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: hf-aa56583bf2bc52b0565770607d6fc3faebecf9e2
+  snapshot_id: language-identification-dataset-c0c259517bfb01761de43b70
+  source_url: https://huggingface.co/datasets/papluca/language-identification/tree/aa56583bf2bc52b0565770607d6fc3faebecf9e2
+  record_count: 90000
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: 'All 90,000 rows of the Hugging Face papluca/language-identification dataset at
+    the pinned revision: 70,000 train, 10,000 validation and 10,000 test texts, 3,500/500/500
+    per language, 20 languages, each with the author''s language label. The card gives no licence
+    and lists extended amazon_reviews_multi, xnli and stsb_multi_mt sources. The corpus paper
+    only cites this dataset as the one its language-detection model was fine-tuned on (footnote
+    7); it did not evaluate on it.'
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/language-identification-dataset.yaml
 source_url: https://huggingface.co/datasets/papluca/language-identification/tree/aa56583bf2bc52b0565770607d6fc3faebecf9e2
 modalities:
 - text
@@ -117,3 +139,4 @@ tasks:
 - language identification
 labels:
 - labels
+snapshot_id: language-identification-dataset-c0c259517bfb01761de43b70

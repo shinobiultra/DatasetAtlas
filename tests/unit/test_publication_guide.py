@@ -255,3 +255,25 @@ def test_every_committed_live_preview_names_a_catalogue_entry_and_a_wellformed_r
     entries = load_live_previews(ROOT / "registry")
     ids = {path.stem for path in (ROOT / "registry/datasets").glob("*.yaml")}
     assert entries and set(entries) <= ids
+
+
+@pytest.mark.parametrize('dataset_id,adapter,url',[
+    ('pata','structured','https://github.com/pata-fairness/pata_dataset'),
+    ('native-hf','columnar','https://huggingface.co/datasets/owner/native/tree/'+'a'*40),
+    ('remote-hf','remote_columnar','https://huggingface.co/datasets/owner/native/tree/'+'b'*40),
+])
+def test_public_guide_exposes_builtin_preparation_routes_without_redundant_recipes(tmp_path,dataset_id,adapter,url):
+    dataset=entry(dataset_id,access='public',preview='complete_target')
+    dataset.adapter=adapter;dataset.source_url=url
+    registry=registry_with(tmp_path,dataset,paper=False)
+    document=json.loads(build_guide([dataset],registry_dir=registry,schema_dir=tmp_path/'schema',published=set()))
+    assert document['datasets'][dataset_id]['how_to_get']['state']=='fetch_with_atlas'
+    assert len(document['datasets'][dataset_id]['how_to_get']['commands'])==2
+
+
+def test_public_source_landing_page_drops_fragment_but_still_rejects_query_credentials():
+    from dataset_atlas.exports.publication import _public_dataset
+    dataset=entry(access='public');dataset.source_url='https://example.org/data#download'
+    assert _public_dataset(dataset)['source_url']=='https://example.org/data'
+    dataset.source_url='https://example.org/data?token=private-value'
+    with pytest.raises(ExchangeError,match='Unsafe source URL'):_public_dataset(dataset)

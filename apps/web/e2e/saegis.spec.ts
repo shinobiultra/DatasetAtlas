@@ -1,4 +1,5 @@
 import { expect, test } from '@playwright/test'
+import { workbenchResponseHeaders } from './helpers'
 
 test('SAEgis shows clean and attacked images with their source, split and attack', async ({ page }) => {
   test.skip(!process.env.ATLAS_LIVE_API, 'Requires the prepared SAEgis population.')
@@ -21,7 +22,7 @@ test('SAEgis shows clean and attacked images with their source, split and attack
       headers: { 'Content-Type': 'application/json', 'X-Atlas-Request': '1' },
       body: request.method() === 'GET' ? undefined : request.postData() ?? undefined,
     })
-    await route.fulfill({ status: response.status, contentType: response.headers.get('content-type') ?? 'application/octet-stream', body: Buffer.from(await response.arrayBuffer()) })
+    await route.fulfill({ status: response.status, headers: workbenchResponseHeaders(response), body: Buffer.from(await response.arrayBuffer()) })
   })
   await page.goto('/?mode=workbench#/dataset/saegis-clean-and-adversarial-splits')
   await expect(page.getByText(/attacked by (FOA-Attack|M-Attack|SSA-CWA)/).first()).toBeVisible()
@@ -48,7 +49,7 @@ test('SAEgis projection can be coloured by condition and keeps clean and attacke
       headers: { 'Content-Type': 'application/json', 'X-Atlas-Request': '1' },
       body: request.method() === 'GET' ? undefined : request.postData() ?? undefined,
     })
-    await route.fulfill({ status: response.status, contentType: response.headers.get('content-type') ?? 'application/octet-stream', body: Buffer.from(await response.arrayBuffer()) })
+    await route.fulfill({ status: response.status, headers: workbenchResponseHeaders(response), body: Buffer.from(await response.arrayBuffer()) })
   })
   await page.goto('/?mode=workbench#/dataset/saegis-clean-and-adversarial-splits')
   await page.getByRole('button', { name: 'Map' }).click()

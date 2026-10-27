@@ -5,30 +5,29 @@ aliases: []
 description: IllusoryVQA, distinct from IllusionVQA.
 paper_ids:
 - paper-80b7ba2e277a20c5
-release: unresolved
+release: official-collection-e3f834dabc5610de
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Official source family identified; exact selected release, preparation and public-use
-    rights still require dataset-specific review.
-  - Adapter and preview are not implemented.
+  - Public data/media reuse rights require separate review.
+  total_count: 26121
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://github.com/IllusoryVQA/IllusoryVQA
-  note: MIT repository code does not automatically establish redistribution rights
-    for every image in all four subdatasets
+  note: MIT repository code does not automatically establish redistribution rights for every image
+    in all four subdatasets
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-c362e60025da6290cdad
@@ -36,9 +35,9 @@ evidence:
   source_file_hash: 1b014c3d1e86a39f1c6a88d4e9b79c99df2e06c5c7c31bea224aa5da2ae0c46d
   page: 10
   role: source data
-  excerpt: arge, Medium, and Small groups. For each MNIST, which are used in the IllusoryVQA
-    [26] dataset. The second image with a resolution of 1000×1000, suppose the hidden
-    character group consists of
+  excerpt: arge, Medium, and Small groups. For each MNIST, which are used in the IllusoryVQA [26]
+    dataset. The second image with a resolution of 1000×1000, suppose the hidden character group
+    consists of
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -47,9 +46,9 @@ evidence:
   source_file_hash: 1b014c3d1e86a39f1c6a88d4e9b79c99df2e06c5c7c31bea224aa5da2ae0c46d
   page: 10
   role: source and evaluation
-  excerpt: egorized into Large, Medium, and Small groups. For each MNIST, which are
-    used in the IllusoryVQA [26] dataset. The second image with a resolution of 1000×1000,
-    suppose the hidden character group consists of characters, i
+  excerpt: egorized into Large, Medium, and Small groups. For each MNIST, which are used in the
+    IllusoryVQA [26] dataset. The second image with a resolution of 1000×1000, suppose the hidden
+    character group consists of characters, i
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -60,8 +59,8 @@ evidence:
   source_identity_status: project_identified_release_unpinned
 - kind: source_audit_release
   url: https://github.com/IllusoryVQA/IllusoryVQA
-  note: Original authors name IllusionMNIST, IllusionFashionMNIST, IllusionAnimals
-    and IllusionChar; linked data location/version must be checked
+  note: Original authors name IllusionMNIST, IllusionFashionMNIST, IllusionAnimals and IllusionChar;
+    linked data location/version must be checked
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: project_identified_release_unpinned
@@ -75,8 +74,8 @@ evidence:
   source_identity_status: project_identified_release_unpinned
 - kind: source_audit_rights
   url: https://github.com/IllusoryVQA/IllusoryVQA
-  note: MIT repository code does not automatically establish redistribution rights
-    for every image in all four subdatasets
+  note: MIT repository code does not automatically establish redistribution rights for every image
+    in all four subdatasets
   publication_decision: media_not_approved
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
@@ -85,19 +84,63 @@ evidence:
   url: https://github.com/IllusoryVQA/IllusoryVQA
   checked_on: '2026-09-23'
   report: reports/selective-acquisition-20260923.md
-  note: Pinned acquired population and real preview exercised locally. Mirror and
-    selective-transfer limits remain in the acquisition receipts; this does not establish
-    publication rights or the exact paper-used subset.
+  note: Pinned acquired population and real preview exercised locally. Mirror and selective-transfer
+    limits remain in the acquisition receipts; this does not establish publication rights or the
+    exact paper-used subset.
   recipe: registry/recipes/illusoryvqa.yaml
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: official-collection-e3f834dabc5610de
+  snapshot_id: illusoryvqa-3c6eaab517eb3497b8e31a04
+  source_url: https://github.com/IllusoryVQA/IllusoryVQA
+  record_count: 26121
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All native CSV-indexed train/test rows in MNIST_train, MNIST_test, FashionMnist_train,
+    FashionMnist_test, IllusionAnimals_train, IllusionAnimals_test, IllusionChar_train, IllusionChar_test.
+    Each example keeps all released image conditions and their condition-specific targets. Missing
+    training control counterparts are explicit. Unindexed duplicate-name image files and generation
+    prompt pools are retained upstream, not counted as annotated examples. This is the original
+    author-generated dataset, not Atlas-generated replacements.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/illusoryvqa.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: official-collection-e3f834dabc5610de
+  snapshot_id: illusoryvqa-3c6eaab517eb3497b8e31a04
+  source_url: https://github.com/IllusoryVQA/IllusoryVQA
+  record_count: 26121
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All native CSV-indexed train/test rows in MNIST_train, MNIST_test, FashionMnist_train,
+    FashionMnist_test, IllusionAnimals_train, IllusionAnimals_test, IllusionChar_train, IllusionChar_test.
+    Each example keeps all released image conditions and their condition-specific targets. Missing
+    training control counterparts are explicit. Unindexed duplicate-name image files and generation
+    prompt pools are retained upstream, not counted as annotated examples. This is the original
+    author-generated dataset, not Atlas-generated replacements.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/illusoryvqa.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
 source_url: https://github.com/IllusoryVQA/IllusoryVQA
 relationships:
 - type: same_source_family_as
   target_id: illusionvqa
   status: asserted_from_source_review
-  scope: Variant spelling/family of IllusionVQA; the local base is the pinned IllusionVQA
-    release.
+  scope: Variant spelling/family of IllusionVQA; the local base is the pinned IllusionVQA release.
 modalities:
 - image
 - text
 tasks:
 - visual illusion reasoning
+snapshot_id: illusoryvqa-3c6eaab517eb3497b8e31a04

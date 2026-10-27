@@ -1,0 +1,25 @@
+release: CLEVR_v1.0
+snapshot_id: clevr-full-canonical-cab1828f2e98dfcc6de79fd4
+adapter: clevr_full
+expected_count: 999968
+scope: Official CLEVR v1.0 train, validation and test questions (all splits) from
+  the official archive, indexed from its question files. Original rendered images
+  are read on request by HTTPS ranges bound to the archive's strong ETag; the 19 GB
+  archive is not downloaded.
+source_url: https://cs.stanford.edu/people/jcjohns/clevr/
+adapter_config:
+  remote_archive:
+    url: https://dl.fbaipublicfiles.com/clevr/CLEVR_v1.0.zip
+    bytes: 19021600724
+    etag: '"3426f0a360618fcf2179966a8d1428c3-1210"'
+    allowed_hosts:
+    - dl.fbaipublicfiles.com
+  remote_cache_root: work/media-cache/clevr-remote
+  remote_cache_bytes: 1000000000
+  remote_metadata_bytes: 400000000
+  prepared_root: work/sources/clevr/canonical/prepared
+  media_scope: on_demand_unverified
+  validation_identity: question_index
+description: Official CLEVR v1.0 train, validation and test questions. Validation
+  identities preserve the canonical preview convention; existing published artifacts
+  retain their original frozen snapshot.

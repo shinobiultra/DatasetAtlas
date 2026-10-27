@@ -1,0 +1,14 @@
+source_url: https://huggingface.co/datasets/MMMU/MMMU/tree/98e6ac0cb9b7b2cd2c991b85a50762edc4aedc68
+expected_count: 11550
+scope: All 11,550 native MMMU questions across development, validation and test in
+  all 30 subjects. Original educational problem fields and available image slots are
+  retained; unpublished test answers are not inferred.
+description: All 11,550 native MMMU questions across development, validation and test
+  in all 30 subjects. Original educational problem fields and available image slots
+  are retained; unpublished test answers are not inferred.
+adapter_config:
+  mapping:
+    question: question
+    choices: options
+  media_scope: on_demand_unverified
+  remote_cache_bytes: 250000000

@@ -2,27 +2,26 @@ schema_version: '1.0'
 id: food101
 name: Food101
 aliases: []
-description: Mention candidate from a focused page audit; the evidence receipts distinguish
-  direct use, comparison, related-work, and citation-only roles. Original source,
-  release, and rights still require independent verification.
+description: 'ETH Food-101: all 101,000 original images across the 75,750-image training and 25,250-image
+  test populations. Native classes and training annotation noise are preserved.'
 paper_ids:
 - paper-25eaa8c74ce76800
-release: unresolved
+release: eth-food101-original
 adapter: structured
 adapter_config: {}
 coverage:
-  identity: candidate
+  identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Original release identity and rights need verification.
-  - Adapter and preview are not implemented.
+  - Public redistribution rights remain unreviewed.
+  total_count: 101000
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -41,12 +40,49 @@ evidence:
   url: https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/
   checked_on: '2026-09-23'
   report: reports/selective-acquisition-20260923.md
-  note: Pinned acquired population and real preview exercised locally. Mirror and
-    selective-transfer limits remain in the acquisition receipts; this does not establish
-    publication rights or the exact paper-used subset.
+  note: Pinned acquired population and real preview exercised locally. Mirror and selective-transfer
+    limits remain in the acquisition receipts; this does not establish publication rights or the
+    exact paper-used subset.
+  recipe: registry/recipes/food101.yaml
+- kind: paper_usage_qualification
+  note: Available release identity is separate from historical paper use.
+  qualifications:
+  - Original release identity and rights need verification.
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  status: resolved_declared_source_population
+  release: eth-food101-original
+  snapshot_id: food101-a4740474b6175205805f9f7d
+  source_url: https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/
+  representation: pinned_source_population
+  record_count: 101000
+  population: All original 101000 images in the 75750 training and 25250 test split with all 101
+    source class names. Original training annotation noise is retained.
+  basis: Existing checksum-pinned preparation and snapshot metadata; no record contents read during
+    this curation.
+  scope_note: Identifies the available source population. This is not human review, historical
+    paper-membership acceptance, publisher byte-equivalence proof, or permission to redistribute.
+  receipt: work/prepared/food101/101d286f535dc1f09c5827c2f34188cffabafbb843879ff73cc36c0bebdfeec5/receipt.json
+  receipt_sha256: 54d091d2feb697cbff37eb80efd968ce11f453e78a9697f37e656307decb0444
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: eth-food101-original
+  snapshot_id: food101-a4740474b6175205805f9f7d
+  source_url: https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/
+  record_count: 101000
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All original 101000 images in the 75750 training and 25250 test split with all 101
+    source class names. Original training annotation noise is retained.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
   recipe: registry/recipes/food101.yaml
 modalities:
 - image
 tasks:
 - image classification
 source_url: https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/
+snapshot_id: food101-a4740474b6175205805f9f7d

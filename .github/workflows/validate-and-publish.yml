@@ -25,14 +25,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 45
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4 # v10.1.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
         with:
+          version: '0.13.6'
           python-version: '3.12'
           activate-environment: true
-      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: '22'
+          node-version: '26.12.1'
           cache: npm
           cache-dependency-path: apps/web/package-lock.json
       - name: Install and test Python
@@ -43,7 +44,7 @@ jobs:
           uv pip install --no-deps -e .
           pytest -q
       - name: Run incremental type and patch checks
-        run: uvx prek==0.5.2 run --all-files
+        run: uvx prek==0.5.7 run --all-files
       - name: Install frontend dependencies
         run: npm ci --prefix apps/web
       - name: Verify generated frontend contracts
@@ -62,9 +63,11 @@ jobs:
           print(f'catalogue={report.catalogue_count} preview_packs={len(report.published_packs)} data_bytes={report.total_bytes}')
           PY
       - name: Install Chromium for browser checks
-        run: npx --prefix apps/web playwright install --with-deps chromium
+        run: npx --prefix apps/web playwright install --with-deps --only-shell chromium
       - name: Exercise published browser
         run: npm run test:e2e --prefix apps/web
+      - name: Exercise fresh source startup
+        run: python scripts/verify_sample_startup.py --source
       - name: Build frontend at repository base path
         run: |
           repo_name="${GITHUB_REPOSITORY#*/}"
@@ -90,39 +93,76 @@ jobs:
               raise SystemExit(f'Built index does not contain repository base {base}')
           print(f'site_bytes={size}')
           PY
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: dataset-atlas-static
           path: apps/web/dist
       - name: Build and inspect installable archives
         run: |
-          python scripts/build_release.py
+          python scripts/build_release.py --skip-npm-install
           python scripts/verify_distribution.py
+      - name: Verify base-only installed wheel outside the checkout
+        run: python scripts/verify_installation.py --output /tmp/atlas-installation-verification.json
+      - name: Build compact sample handoff
+        run: python scripts/build_sample_bundle.py --skip-npm-install
+      - name: Verify portable sample archive and standalone startup
+        run: |
+          python scripts/verify_distribution.py --sample dist/dataset-atlas-samples.zip
+          python scripts/verify_sample_startup.py --bundle dist/dataset-atlas-samples.zip
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: dataset-atlas-samples
+          path: |
+            dist/dataset-atlas-samples.zip
+            dist/dataset-atlas-samples.zip.sha256
+          if-no-files-found: error
       # The wheel embeds the interface and the catalogue: `uv tool install` it, then `atlas init DIR` (docs/getting-started.md).
-      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: dataset-atlas-wheel
           path: dist/*.whl
 
-  python-current:
+  python-supported:
+    name: Latest supported workbench Python (3.14.10)
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
-      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4 # v10.1.0
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
         with:
-          python-version: '3.14'
+          version: '0.13.6'
+          python-version: '3.14.10'
           activate-environment: true
-      - name: Test current Python and freshly resolved compatible dependencies
+      - name: Test latest supported Python patch and freshly resolved compatible dependencies
         run: |
           uv pip install -e '.[development,datasets,remote-storage]'
           pytest -q
+
+  portable-current:
+    name: Portable samples on current Python (3.15.2)
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: astral-sh/setup-uv@07a047e608db84b3d8c06cd9a7c7dcc9c355c18e # v10.3.2
+        with:
+          version: '0.13.6'
+          python-version: '3.15.2'
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          name: dataset-atlas-samples
+          path: dist
+      - name: Verify standard-library-only portable launcher
+        env:
+          PYTHONPATH: src
+        run: uv run --no-project --python 3.15.2 python scripts/verify_sample_startup.py --bundle dist/dataset-atlas-samples.zip
 
   deploy:
     # Only the reviewed default branch is ever published; also restrict the github-pages environment to main in the repository settings.
     if: github.event_name == 'workflow_dispatch' && inputs.deploy == true && github.ref == 'refs/heads/main'
     timeout-minutes: 15
-    needs: [build, python-current]
+    needs: [build, python-supported, portable-current]
     runs-on: ubuntu-latest
     permissions:
       pages: write
@@ -131,13 +171,13 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
         with:
           name: dataset-atlas-static
           path: site
-      - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
-      - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3
+      - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: site
       - id: deployment
-        uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

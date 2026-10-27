@@ -1,7 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { createHash } from 'node:crypto'
 import { writeFileSync } from 'node:fs'
-import { fileURLToPath } from 'node:url'
 
 for (const [id, population] of [['openimages', 41620], ['mit-states', 63440], ['ffhq', 70000], ['emoset', 118102]] as const) {
   test(`${id} native preview originals decode through the workbench`, async ({ page }) => {
@@ -21,7 +20,7 @@ for (const [id, population] of [['openimages', 41620], ['mit-states', 63440], ['
     await expect(page.locator('.sample-card').first()).toBeVisible()
     await page.locator('.sample-card .open').first().dblclick()
     await expect.poll(() => page.locator('.focus-stage img').first().evaluate((item: HTMLImageElement) => item.complete && item.naturalWidth > 0)).toBeTruthy()
-    writeFileSync(fileURLToPath(new URL(`../../../reports/browser-${id}-native-20261007.json`, import.meta.url)), JSON.stringify({
+    writeFileSync(test.info().outputPath(`browser-${id}-native-20261007.json`), JSON.stringify({
       verified_at_utc: new Date().toISOString(), status: 'passed', dataset_id: id, snapshot_id: pack.dataset.snapshot_id,
       native_population: population, preview_records: 100, checked_original_sha256: sha, browser_decoded_original: true,
       source_scope: ({ 'mit-states': 'Pinned public mirror; publisher-byte equality and paper membership unverified', 'openimages': 'Pinned publisher V7 validation tables; paper release unidentified', 'ffhq': 'Publisher metadata and file/pixel MD5 verified original aligned PNGs; paper cohort and redistribution rights unverified', 'emoset': 'Full author-linked 118K archive and native split/annotation membership; SHA-block-verified originals; paper cohort and redistribution rights unverified' } as const)[id],
@@ -57,7 +56,7 @@ test('UCF101 original AVI is retained and its lossless browser display plays and
   await video.evaluate((item: HTMLVideoElement) => { item.pause(); item.currentTime = item.duration / 2 })
   await expect.poll(() => video.evaluate((item: HTMLVideoElement) => !item.seeking && item.currentTime > 0)).toBeTruthy()
   const technical = await video.evaluate((item: HTMLVideoElement) => ({ duration_seconds: item.duration, seek_seconds: item.currentTime, ready_state: item.readyState }))
-  writeFileSync(fileURLToPath(new URL('../../../reports/browser-ucf101-native-20261007.json', import.meta.url)), JSON.stringify({
+  writeFileSync(test.info().outputPath('browser-ucf101-native-20261007.json'), JSON.stringify({
     verified_at_utc: new Date().toISOString(), status: 'passed', snapshot_id: pack.dataset.snapshot_id, population: 13320, preview_records: 100,
     original_sha256: sha, byte_range_verified: true, muted_playback_and_seek_verified: true, ...technical,
     scope: 'Pinned public mirror native AVI and annotation tables; lossless video display derivative; publisher equality and paper membership unverified',

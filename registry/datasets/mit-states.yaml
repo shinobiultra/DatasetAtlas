@@ -2,30 +2,29 @@ schema_version: '1.0'
 id: mit-states
 name: MIT States
 aliases: []
-description: Mention candidate from a focused page audit; the evidence receipts distinguish
-  direct use, comparison, related-work, and citation-only roles. Original source,
-  release, and rights still require independent verification.
+description: 'MIT States representation from a pinned public mirror: all 63,440 unchanged JPEGs
+  with native pair folders and filenames. Publisher byte and image-quality equivalence is not
+  established.'
 paper_ids:
 - paper-2038cb87115b4fb0
 - paper-25eaa8c74ce76800
-release: unresolved
+release: mit-states-mirror-d3f1d1b05431a92aed318c5dd9f660866fcfa2a6
 adapter: structured
 adapter_config: {}
 coverage:
-  identity: candidate
+  identity: resolved
   source: verified
   access: public
-  adapter: implemented
-  preview: none
-  complete_data: requires_preparation
+  adapter: tested
+  preview: complete_target
+  complete_data: indexed_metadata_partial_media
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Pinned public mirror population of 63,440 original JPEGs and 100 retained original
-    previews is verified; publisher byte equivalence remains unverified.
-  - Publisher archive byte/quality equality, exact paper subset and redistribution
-    rights remain unverified.
+  - Pinned public mirror population of 63,440 original JPEGs and 100 retained original previews
+    is verified; publisher byte equivalence remains unverified.
+  total_count: 63440
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -37,9 +36,9 @@ evidence:
   source_file_hash: 51dcc13673e3b9b98e6b9cb67b07e584643259b69e50a0c028b1c7814a1ee676
   page: 4
   role: evaluation
-  excerpt: 'adapt the image (see Figure 1). We implement SIP in three SVO-Probes,
-    MIT States, and Facial Expressions diverse image-classification datasets: SVO-Probes
-    image-classification datasets into '
+  excerpt: 'adapt the image (see Figure 1). We implement SIP in three SVO-Probes, MIT States,
+    and Facial Expressions diverse image-classification datasets: SVO-Probes image-classification
+    datasets into '
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -57,27 +56,74 @@ evidence:
   source_file_hash: 51dcc13673e3b9b98e6b9cb67b07e584643259b69e50a0c028b1c7814a1ee676
   page: 13
   role: direct base for VQA overlay
-  excerpt: Facial Ex- MIT-States. The MIT States dataset (Isola et al., pression dataset,
-    we constructed such counterparts
+  excerpt: Facial Ex- MIT-States. The MIT States dataset (Isola et al., pression dataset, we constructed
+    such counterparts
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_access
   checked_on: '2026-10-06'
   url: http://wednesday.csail.mit.edu/joseph_result/state_and_transformation/release_dataset.zip
-  note: The authors' host serves release_dataset.zip (807,745,643 bytes, Last-Modified
-    2015-12-10) with range support over plain HTTP; no HTTPS endpoint was found.
+  note: The authors' host serves release_dataset.zip (807,745,643 bytes, Last-Modified 2015-12-10)
+    with range support over plain HTTP; no HTTPS endpoint was found.
   source_identity_status: official_file_reachable_over_http_only
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'From the source inspected on 2026-10-06: authors zip inspected by header
-    only; image dataset. Not inferred from the dataset name.'
+  note: 'From the source inspected on 2026-10-06: authors zip inspected by header only; image
+    dataset. Not inferred from the dataset name.'
 - kind: source_audit_access
   checked_on: '2026-10-07'
   url: https://huggingface.co/datasets/AaronWu901225/MIT_states_UT_zappos
-  note: 'Bounded HTTPS ZIP directory audit: 63,440 selected JPEG members; pinned repository
-    revision, exact size, strong ETag and complete directory membership SHA-256. Publisher
-    equivalence is not asserted.'
+  note: 'Bounded HTTPS ZIP directory audit: 63,440 selected JPEG members; pinned repository revision,
+    exact size, strong ETag and complete directory membership SHA-256. Publisher equivalence is
+    not asserted.'
   source_identity_status: pinned_public_mirror_population
+- kind: paper_usage_qualification
+  note: Available release identity is separate from historical paper use.
+  qualifications:
+  - Publisher archive byte/quality equality, exact paper subset and redistribution rights remain
+    unverified.
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  status: resolved_declared_source_population
+  release: mit-states-mirror-d3f1d1b05431a92aed318c5dd9f660866fcfa2a6
+  snapshot_id: mit-states-1419d70e19d4c3e17d29042a
+  source_url: https://huggingface.co/datasets/AaronWu901225/MIT_states_UT_zappos
+  representation: pinned_mirror_representation
+  record_count: 63440
+  population: All 63,440 JPEG members under the MIT States images directory of the pinned public
+    MIT States/UT-Zappos mirror. Native pair folders and filenames are preserved without splitting
+    compound labels. Other bundle members are explicitly excluded. Mirror bytes are retained unchanged;
+    byte equality and image-quality equality to the publisher archive, historical paper subsets
+    and redistribution rights remain unverified. No pickles, Torch files, notebooks or source
+    code are executed.
+  basis: Existing checksum-pinned preparation and snapshot metadata; no record contents read during
+    this curation.
+  scope_note: Identifies the available source population. This is not human review, historical
+    paper-membership acceptance, publisher byte-equivalence proof, or permission to redistribute.
+  receipt: work/prepared/mit-states/990a9b1375318b5a15c47904b2ce60249b9794e44c3d3b2aabf7b8cb81673336/receipt.json
+  receipt_sha256: e27660dd0a8b7c0b90b421aa3faee00673eb7245d5b1f6338c100b1bad679ae5
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: mit-states-mirror-d3f1d1b05431a92aed318c5dd9f660866fcfa2a6
+  snapshot_id: mit-states-1419d70e19d4c3e17d29042a
+  source_url: https://huggingface.co/datasets/AaronWu901225/MIT_states_UT_zappos
+  record_count: 63440
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: indexed_metadata_partial_media
+  unit: example
+  population: All 63,440 JPEG members under the MIT States images directory of the pinned public
+    MIT States/UT-Zappos mirror. Native pair folders and filenames are preserved without splitting
+    compound labels. Other bundle members are explicitly excluded. Mirror bytes are retained unchanged;
+    byte equality and image-quality equality to the publisher archive, historical paper subsets
+    and redistribution rights remain unverified. No pickles, Torch files, notebooks or source
+    code are executed.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/mit-states.yaml
 modalities:
 - image
+snapshot_id: mit-states-1419d70e19d4c3e17d29042a
+source_url: https://huggingface.co/datasets/AaronWu901225/MIT_states_UT_zappos

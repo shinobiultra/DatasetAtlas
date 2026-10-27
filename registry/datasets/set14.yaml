@@ -2,34 +2,31 @@ schema_version: '1.0'
 id: set14
 name: Set14
 aliases: []
-description: 'Set14 as distributed by the SelfExSR authors: fourteen image identities
-  with native HR/LR files at x2, x3 and x4. Equivalence to the first historical release
-  is not established.'
+description: 'Set14 as distributed by the SelfExSR authors: fourteen image identities with native
+  HR/LR files at x2, x3 and x4. Equivalence to the first historical release is not established.'
 paper_ids:
 - paper-08e415961919a492
-release: unresolved
+release: SelfExSR-8f6dd8c1d20cb7e8792a7177b4f6fd677633f598
 adapter: structured
 adapter_config: {}
 coverage:
-  identity: candidate
+  identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 14
   unit: example
-  blockers:
-  - Exact paper-specific source release or selected subset remains unverified; source
-    research alone does not resolve this candidate.
-  - Adapter and preview are not implemented.
+  blockers: []
+  total_count: 14
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
-  note: Author paper establishes the benchmark citation; an original archive and per-image
-    redistribution terms were not verified
+  note: Author paper establishes the benchmark citation; an original archive and per-image redistribution
+    terms were not verified
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-4770b743e27b3a27bad1
@@ -37,9 +34,8 @@ evidence:
   source_file_hash: bb5aa079a2d42a3c0c001424bb540dfcd289ea2c409000267e5681444fb20bd3
   page: 9
   role: evaluation
-  excerpt: '20.28 24.35 Table 1: Detailed super-resolution PSNR comparison on the
-    Set14 dataset with different scaling factors. 4× super-resolution where d(·) :
-    R3×tH×tW → R3×H×W is a downsampling '
+  excerpt: '20.28 24.35 Table 1: Detailed super-resolution PSNR comparison on the Set14 dataset
+    with different scaling factors. 4× super-resolution where d(·) : R3×tH×tW → R3×H×W is a downsampling '
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -48,8 +44,8 @@ evidence:
   source_file_hash: bb5aa079a2d42a3c0c001424bb540dfcd289ea2c409000267e5681444fb20bd3
   page: 9
   role: evaluation
-  excerpt: '20.13 20.28 24.35 Table 1: Detailed super-resolution PSNR comparison on
-    the Set14 dataset with different scaling factors. 4× super-resolution'
+  excerpt: '20.13 20.28 24.35 Table 1: Detailed super-resolution PSNR comparison on the Set14
+    dataset with different scaling factors. 4× super-resolution'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -74,8 +70,8 @@ evidence:
   source_identity_status: original_citation_only
 - kind: source_audit_rights
   url: https://elad.cs.technion.ac.il/wp-content/uploads/2018/02/ImageScaleUp_LNCS.pdf
-  note: Author paper establishes the benchmark citation; an original archive and per-image
-    redistribution terms were not verified
+  note: Author paper establishes the benchmark citation; an original archive and per-image redistribution
+    terms were not verified
   publication_decision: media_not_approved
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
@@ -84,12 +80,54 @@ evidence:
   url: https://github.com/jbhuang0604/SelfExSR/tree/8f6dd8c1d20cb7e8792a7177b4f6fd677633f598/data/Set14
   checked_on: '2026-09-23'
   report: reports/selective-acquisition-20260923.md
-  note: Pinned acquired population and real preview exercised locally. Mirror and
-    selective-transfer limits remain in the acquisition receipts; this does not establish
-    publication rights or the exact paper-used subset.
+  note: Pinned acquired population and real preview exercised locally. Mirror and selective-transfer
+    limits remain in the acquisition receipts; this does not establish publication rights or the
+    exact paper-used subset.
+  recipe: registry/recipes/set14.yaml
+- kind: paper_usage_qualification
+  note: Available release identity is separate from historical paper use.
+  qualifications:
+  - Exact paper-specific source release or selected subset remains unverified; source research
+    alone does not resolve this candidate.
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  status: resolved_declared_source_population
+  release: SelfExSR-8f6dd8c1d20cb7e8792a7177b4f6fd677633f598
+  snapshot_id: set14-5e16aa81b4fc0c1175b0f713
+  source_url: https://github.com/jbhuang0604/SelfExSR/tree/8f6dd8c1d20cb7e8792a7177b4f6fd677633f598/data/Set14
+  representation: pinned_source_population
+  record_count: 14
+  population: All 14 native image identities and all 84 scale-specific HR/LR files for x2/x3/x4
+    in the pinned SelfExSR benchmark distribution of Set14. Original Git blob hashes checked on
+    request; no generated downsampling. This is an explicitly named benchmark representation,
+    not verified byte equivalence to the first historical release. No media publication approval.
+  basis: Existing checksum-pinned preparation and snapshot metadata; no record contents read during
+    this curation.
+  scope_note: Identifies the available source population. This is not human review, historical
+    paper-membership acceptance, publisher byte-equivalence proof, or permission to redistribute.
+  receipt: work/prepared/set14/5e16aa81b4fc0c1175b0f71371c0522fe0da394c93cc638938994c864aa6b737/receipt.json
+  receipt_sha256: 6237fa4bf9f299db1c643470badef6a55797ca03027b373aa7f9e48e6537042d
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: SelfExSR-8f6dd8c1d20cb7e8792a7177b4f6fd677633f598
+  snapshot_id: set14-5e16aa81b4fc0c1175b0f713
+  source_url: https://github.com/jbhuang0604/SelfExSR/tree/8f6dd8c1d20cb7e8792a7177b4f6fd677633f598/data/Set14
+  record_count: 14
+  preview_count: 14
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 14 native image identities and all 84 scale-specific HR/LR files for x2/x3/x4
+    in the pinned SelfExSR benchmark distribution of Set14. Original Git blob hashes checked on
+    request; no generated downsampling. This is an explicitly named benchmark representation,
+    not verified byte equivalence to the first historical release. No media publication approval.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
   recipe: registry/recipes/set14.yaml
 modalities:
 - image
 tasks:
 - image super resolution
 source_url: https://github.com/jbhuang0604/SelfExSR/tree/8f6dd8c1d20cb7e8792a7177b4f6fd677633f598/data/Set14
+snapshot_id: set14-5e16aa81b4fc0c1175b0f713

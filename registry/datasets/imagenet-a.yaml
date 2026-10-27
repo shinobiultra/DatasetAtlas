@@ -2,9 +2,9 @@ schema_version: '1.0'
 id: imagenet-a
 name: ImageNet-A
 aliases: []
-description: 'Original ImageNet-A natural adversarial examples: 7,500 source photos across 200 ImageNet
-  synset classes. The source archive README supplies class names; author evaluation code maps each synset
-  to both the 200-class subset and ImageNet-1K index. This is distinct from ImageNet-O.'
+description: 'Original ImageNet-A natural adversarial examples: 7,500 source photos across 200
+  ImageNet synset classes. The source archive README supplies class names; author evaluation code
+  maps each synset to both the 200-class subset and ImageNet-1K index. This is distinct from ImageNet-O.'
 paper_ids:
 - paper-3e0db9c633ab204c
 release: imagenet-a-original-tar-3bb36322
@@ -1055,15 +1055,16 @@ coverage:
   total_count: 7500
   unit: example
   blockers:
-  - Image rights are not explicitly cleared by the author repository MIT code license; local media only
-    pending per-image review.
+  - Image rights are not explicitly cleared by the author repository MIT code license; local media
+    only pending per-image review.
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: metadata_only
   source: https://github.com/hendrycks/natural-adv-examples/tree/07770705658c3a1c8acce31fd9dbd68f06e297c3
-  basis: Author source offers public dataset download and citation but does not expressly license the
-    original photos for redistribution; repository MIT code license is not treated as an image license.
+  basis: Author source offers public dataset download and citation but does not expressly license
+    the original photos for redistribution; repository MIT code license is not treated as an image
+    license.
   external_provider: local_only
 evidence:
 - kind: corpus_mention
@@ -1077,8 +1078,8 @@ evidence:
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://github.com/hendrycks/natural-adv-examples/tree/07770705658c3a1c8acce31fd9dbd68f06e297c3
-  note: ImageNet-A natural adversarial examples for ImageNet classifiers; distinct from ImageNet-O out-of-distribution
-    images
+  note: ImageNet-A natural adversarial examples for ImageNet classifiers; distinct from ImageNet-O
+    out-of-distribution images
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
@@ -1098,11 +1099,26 @@ evidence:
   probe: archive_http_head_only
 - kind: source_audit_rights
   url: https://github.com/hendrycks/natural-adv-examples/tree/07770705658c3a1c8acce31fd9dbd68f06e297c3
-  note: Repository MIT license covers code; photo dataset redistribution is not expressly licensed on
-    README and source images have heterogeneous origins
+  note: Repository MIT license covers code; photo dataset redistribution is not expressly licensed
+    on README and source images have heterogeneous origins
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: imagenet-a-original-tar-3bb36322
+  snapshot_id: imagenet-a-54b2af5ad790129b1d342087
+  source_url: https://github.com/hendrycks/natural-adv-examples/tree/07770705658c3a1c8acce31fd9dbd68f06e297c3
+  record_count: 7500
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: 'Original author ImageNet-A TAR: 7,500 source images across 200 synset folders'
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/imagenet-a.yaml
 source_url: https://github.com/hendrycks/natural-adv-examples/tree/07770705658c3a1c8acce31fd9dbd68f06e297c3
 tasks:
 - natural adversarial image classification
@@ -1113,4 +1129,4 @@ labels:
 - WordNet synset ID
 - ImageNet-A 200-class subset index
 - ImageNet-1K class index
-snapshot_id: imagenet-a-3bb3632277e6ba63
+snapshot_id: imagenet-a-54b2af5ad790129b1d342087

@@ -2,34 +2,33 @@ schema_version: '1.0'
 id: spoken-wikipedia
 name: Spoken Wikipedia
 aliases: []
-description: 'Spoken Wikipedia Corpora audio plus aligned Wikipedia article text;
-  English/German/Dutch releases. Source review: Author project release variants; exact
-  corpus archive digest unverified'
+description: 'Spoken Wikipedia Corpora audio plus aligned Wikipedia article text; English/German/Dutch
+  releases. Source review: Author project release variants; exact corpus archive digest unverified'
 paper_ids:
 - paper-6d747c88d639c5aa
-release: unresolved
+release: swc-2.0-native-sentences-and-article-audio-fdr1875
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: indexed_metadata_partial_media
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Three pinned native language archives are indexed and whole-article linked audio
-    previews are activated; sentence audio clips and paper-specific alignment are
-    not established.
+  - Three pinned native language archives are indexed and whole-article linked audio previews
+    are activated; sentence audio clips and paper-specific alignment are not established.
+  total_count: 738234
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
-  note: Official project states CC BY-SA 4.0; retain speaker/article attribution and
-    share-alike conditions
+  note: Official project states CC BY-SA 4.0; retain speaker/article attribution and share-alike
+    conditions
   source: https://nats.gitlab.io/swc/
 evidence:
 - kind: corpus_mention
@@ -38,9 +37,9 @@ evidence:
   source_file_hash: 519805fac1ac6df034dd67ef95643703ebd97fa1c18e0f035a1f93feada6994e
   page: 13
   role: source data
-  excerpt: 8], but with an updated training set using segments from the Wall Street
-    Journal [40] and Spoken Wikipedia Corpora [41]. We screened the Wall Street Journal
-    (WSJ) [40], TIMIT [47], and a subset of articles from the Spoken Wikipedia Copo
+  excerpt: 8], but with an updated training set using segments from the Wall Street Journal [40]
+    and Spoken Wikipedia Corpora [41]. We screened the Wall Street Journal (WSJ) [40], TIMIT [47],
+    and a subset of articles from the Spoken Wikipedia Copo
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -52,23 +51,70 @@ evidence:
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_access
   url: https://nats.gitlab.io/swc/
-  note: 'Official project provides language downloads; potentially hundreds of hours
-    audio Probe: first_primary_url_http_head_200; payload_not_downloaded'
+  note: 'Official project provides language downloads; potentially hundreds of hours audio Probe:
+    first_primary_url_http_head_200; payload_not_downloaded'
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_rights
   url: https://nats.gitlab.io/swc/
-  note: Official project states CC BY-SA 4.0; retain speaker/article attribution and
-    share-alike conditions
+  note: Official project states CC BY-SA 4.0; retain speaker/article attribution and share-alike
+    conditions
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 100-record prepared preview: asset kinds and text fields
-    present in at least one record. Not inferred from the name or description.'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in
+    at least one record. Not inferred from the name or description.'
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: swc-2.0-native-sentences-and-article-audio-fdr1875
+  snapshot_id: spoken-wikipedia-4135cd833dc468a535dd4f9c
+  source_url: https://nats.gitlab.io/swc/
+  record_count: 738234
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: indexed_metadata_partial_media
+  unit: example
+  population: All 738,234 native sentence elements from 5,397 SWC2.0 aligned articles across Dutch,
+    English and German, joined by exact native info.json/aligned.swc SHA-256 to every supported
+    released whole-article audio part. Complete native TARs, all member hashes and parent ZIP-member
+    CRCs are verified. Whole-article audio remains original, without fabricated sentence clips;
+    sentence alignment fields and native XML serializations remain inspectable. Unsegmented ignored
+    spans and unidentified paper-specific screenings are outside this sentence population. Parent
+    ZIP whole-file SHA-256 is not claimed.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/spoken-wikipedia.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: swc-2.0-native-sentences-and-article-audio-fdr1875
+  snapshot_id: spoken-wikipedia-4135cd833dc468a535dd4f9c
+  source_url: https://nats.gitlab.io/swc/
+  record_count: 738234
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: indexed_metadata_partial_media
+  unit: example
+  population: All 738,234 native sentence elements from 5,397 SWC2.0 aligned articles across Dutch,
+    English and German, joined by exact native info.json/aligned.swc SHA-256 to every supported
+    released whole-article audio part. Complete native TARs, all member hashes and parent ZIP-member
+    CRCs are verified. Whole-article audio remains original, without fabricated sentence clips;
+    sentence alignment fields and native XML serializations remain inspectable. Unsegmented ignored
+    spans and unidentified paper-specific screenings are outside this sentence population. Parent
+    ZIP whole-file SHA-256 is not claimed.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/spoken-wikipedia.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
 source_url: https://nats.gitlab.io/swc/
 modalities:
 - text
+snapshot_id: spoken-wikipedia-4135cd833dc468a535dd4f9c

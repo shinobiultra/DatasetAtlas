@@ -2,9 +2,9 @@ schema_version: '1.0'
 id: nrc-vad
 name: NRC-VAD
 aliases: []
-description: NRC-VAD native v1 (19,971 entries) and v2.1 (54,801), retaining 108 v1
-  translations and all released score exports. Version scales remain distinct. Local
-  noncommercial research access; no redistribution.
+description: NRC-VAD native v1 (19,971 entries) and v2.1 (54,801), retaining 108 v1 translations
+  and all released score exports. Version scales remain distinct. Local noncommercial research
+  access; no redistribution.
 paper_ids:
 - paper-164d7c221452ffec
 release: NRC-VAD-1-and-2.1-native
@@ -21,16 +21,15 @@ coverage:
   preview_count: 100
   unit: example
   blockers:
-  - Official source family identified; exact selected release, preparation and public-use
-    rights still require dataset-specific review.
+  - Public data/media reuse rights require separate review.
   total_count: 74772
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://saifmohammad.com/WebPages/nrc-vad.html
-  note: 'Author terms: noncommercial research/education only and no redistribution;
-    commercial license requires author contact'
+  note: 'Author terms: noncommercial research/education only and no redistribution; commercial
+    license requires author contact'
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-3eed9192a54ee9a34145
@@ -38,9 +37,9 @@ evidence:
   source_file_hash: a89bc42d5e26b03e424ef9aa3ecc43d7857a7ef0deb8c0ede544d5b94aa625d4
   page: 4
   role: source data
-  excerpt: ved images OASIS 900 images Valenced images in SC-EAT Valence ratings in
-    retrieved images NRC-VAD Lexicon 20,000 words Valenced Text SC-EAT Valence ratings
-    of retrieved text Group Labels 864 phrases Group-based text in SC-EAT Group rep
+  excerpt: ved images OASIS 900 images Valenced images in SC-EAT Valence ratings in retrieved
+    images NRC-VAD Lexicon 20,000 words Valenced Text SC-EAT Valence ratings of retrieved text
+    Group Labels 864 phrases Group-based text in SC-EAT Group rep
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -49,9 +48,8 @@ evidence:
   source_file_hash: a89bc42d5e26b03e424ef9aa3ecc43d7857a7ef0deb8c0ede544d5b94aa625d4
   page: 4
   role: direct lexical source
-  excerpt: 0 images Valenced images in SC-EAT Valence ratings in retrieved images
-    NRC-VAD Lexicon 20,000 words Valenced Text SC-EAT Valence ratings of retrieved
-    text Group Labels
+  excerpt: 0 images Valenced images in SC-EAT Valence ratings in retrieved images NRC-VAD Lexicon
+    20,000 words Valenced Text SC-EAT Valence ratings of retrieved text Group Labels
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -62,8 +60,8 @@ evidence:
   source_identity_status: project_identified_release_unpinned
 - kind: source_audit_release
   url: https://saifmohammad.com/WebPages/nrc-vad.html
-  note: Author site has v1 (~20k words) and v2.1 (2025, >55k); paper says 20,000 words,
-    suggesting v1 but not proving its exact snapshot
+  note: Author site has v1 (~20k words) and v2.1 (2025, >55k); paper says 20,000 words, suggesting
+    v1 but not proving its exact snapshot
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: project_identified_release_unpinned
@@ -77,8 +75,8 @@ evidence:
   source_identity_status: project_identified_release_unpinned
 - kind: source_audit_rights
   url: https://saifmohammad.com/WebPages/nrc-vad.html
-  note: 'Author terms: noncommercial research/education only and no redistribution;
-    commercial license requires author contact'
+  note: 'Author terms: noncommercial research/education only and no redistribution; commercial
+    license requires author contact'
   publication_decision: media_not_approved
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
@@ -87,13 +85,33 @@ evidence:
   report: reports/nrc-vad-live-verification.json
   checked_on: '2026-09-23'
   snapshot_id: nrc-vad-211641de9b969b2e119b8adb
-  note: Native indexed population and 100 local preview records verified; does not
-    approve redistribution or resolve a paper-specific subset.
+  note: Native indexed population and 100 local preview records verified; does not approve redistribution
+    or resolve a paper-specific subset.
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 100-record prepared preview: asset kinds and text fields
-    present in at least one record. Not inferred from the name or description.'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in
+    at least one record. Not inferred from the name or description.'
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: NRC-VAD-1-and-2.1-native
+  snapshot_id: nrc-vad-211641de9b969b2e119b8adb
+  source_url: https://saifmohammad.com/WebPages/nrc-vad.html
+  record_count: 74772
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: 'All 19971 native English entries in v1 and 54801 entries in v2.1 (74772 versioned
+    terms). Retain all 108 v1 automatic translations and every native score/dimension/subset export
+    with native row positions. Original version scales differ: v1 [0,1], v2.1 [-1,1]. Export values
+    are not silently normalized, including the source BipolarScale/PolarSubset files. NRC and
+    Saif M. Mohammad attribution retained. Noncommercial local research use; redistribution prohibited.'
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/nrc-vad.yaml
 source_url: https://saifmohammad.com/WebPages/nrc-vad.html
 modalities:
 - text
+snapshot_id: nrc-vad-211641de9b969b2e119b8adb

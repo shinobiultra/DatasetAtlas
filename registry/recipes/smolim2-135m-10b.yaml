@@ -7,6 +7,7 @@ scope: Every row of all 85 train Parquet shards at author revision 4c87b0da77c19
 source_patterns:
 - data/train-*.parquet
 sample_footers: all
+sample_seed: 0
 adapter_config:
   mapping:
     text: text

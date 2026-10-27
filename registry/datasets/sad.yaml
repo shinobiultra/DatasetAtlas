@@ -2,10 +2,10 @@ schema_version: '1.0'
 id: sad
 name: SAD
 aliases: []
-description: 'Situational Awareness Dataset native source browser: 127,173 unrendered samples and three
-  trial definitions in all 13 released structs archives. Variables and native answers are retained; procedural
-  tasks and model evaluation are not executed. Local-only, respecting the author''s anti-contamination
-  requirement.'
+description: 'Situational Awareness Dataset native source browser: 127,173 unrendered samples
+  and three trial definitions in all 13 released structs archives. Variables and native answers
+  are retained; procedural tasks and model evaluation are not executed. Local-only, respecting
+  the author''s anti-contamination requirement.'
 paper_ids:
 - paper-d098a79f00c8b2b5
 release: dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3
@@ -28,8 +28,8 @@ rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
-  note: CC BY 4.0 repository license with explicit author request not to expose question/answer text in
-    crawlable plaintext
+  note: CC BY 4.0 repository license with explicit author request not to expose question/answer
+    text in crawlable plaintext
   source: https://github.com/LRudL/sad/tree/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3
 evidence:
 - kind: corpus_mention
@@ -38,9 +38,9 @@ evidence:
   source_file_hash: 9a50cdc6b9f2ba3687339453804acb9519525941198c14d07765aaecbb1436d2
   page: 54
   role: bibliography-only reference
-  excerpt: ' Hobbhahn, Alexander Meinke, and Owain Evans. Me, myself, and AI: The situational awareness
-    dataset (SAD) for LLMs. In The Thirty-eight Conference on Neural Information Processing Systems Datasets
-    and Benchmar'
+  excerpt: ' Hobbhahn, Alexander Meinke, and Owain Evans. Me, myself, and AI: The situational
+    awareness dataset (SAD) for LLMs. In The Thirty-eight Conference on Neural Information Processing
+    Systems Datasets and Benchmar'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -52,15 +52,15 @@ evidence:
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_access
   url: https://github.com/LRudL/sad/tree/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3
-  note: 'Repository data encrypted in ZIPs to reduce benchmark contamination; author provides unzip process
-    Probe: first_primary_url_http_head_200; payload_not_downloaded'
+  note: 'Repository data encrypted in ZIPs to reduce benchmark contamination; author provides
+    unzip process Probe: first_primary_url_http_head_200; payload_not_downloaded'
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_rights
   url: https://github.com/LRudL/sad/tree/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3
-  note: CC BY 4.0 repository license with explicit author request not to expose question/answer text in
-    crawlable plaintext
+  note: CC BY 4.0 repository license with explicit author request not to expose question/answer
+    text in crawlable plaintext
   audit_file: work/sources/source-audit-publication.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
@@ -71,11 +71,33 @@ evidence:
   record_count: 127176
   preview_count: 100
   scope: All 127173 native samples plus three native trial records across the 13 published structs.zip
-    archives at the pinned author revision. These are native templates/definitions, including repeated
-    task variants, not a claim of 127176 distinct rendered benchmark questions. Non-batch template context
-    remains in original archives. Procedural benchmark execution and cached model results are outside
-    this source-browser scope. No plaintext questions or answers may be committed or published.
+    archives at the pinned author revision. These are native templates/definitions, including
+    repeated task variants, not a claim of 127176 distinct rendered benchmark questions. Non-batch
+    template context remains in original archives. Procedural benchmark execution and cached model
+    results are outside this source-browser scope. No plaintext questions or answers may be committed
+    or published.
   receipt: reports/native-text-live-verification.json
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3
+  snapshot_id: sad-e00d59eacc1a244e4ca086c6
+  source_url: https://github.com/LRudL/sad/tree/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3
+  record_count: 127176
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 127173 native samples plus three native trial records across the 13 published
+    structs.zip archives at the pinned author revision. These are native templates/definitions,
+    including repeated task variants, not a claim of 127176 distinct rendered benchmark questions.
+    Non-batch template context remains in original archives. Procedural benchmark execution and
+    cached model results are outside this source-browser scope. No plaintext questions or answers
+    may be committed or published.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/sad.yaml
 source_url: https://github.com/LRudL/sad/tree/dfc5c9831a9bcc5c9a9dbdcaa2955aae983cd1d3
 modalities:
 - text
+snapshot_id: sad-e00d59eacc1a244e4ca086c6

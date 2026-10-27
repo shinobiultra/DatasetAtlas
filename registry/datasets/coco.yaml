@@ -5,11 +5,10 @@ aliases:
 - MS COCO
 - COCO2017 val
 description: 'COCO source family with a local official 2017 validation release: 5,000 images,
-  25,014 captions, and 36,781 object instances in 80 categories. Each caption example shares
-  its original image asset and asset-scoped source boxes. Paper evidence below retains its original,
-  sometimes distinct split or role; this local validation release does not assert that every
-  cited paper used validation. Images remain local because the COCO Consortium does not own
-  their copyright.'
+  25,014 captions, and 36,781 object instances in 80 categories. Each caption example shares its
+  original image asset and asset-scoped source boxes. Paper evidence below retains its original,
+  sometimes distinct split or role; this local validation release does not assert that every cited
+  paper used validation. Images remain local because the COCO Consortium does not own their copyright.'
 tasks:
 - image captioning
 - object detection
@@ -61,8 +60,8 @@ adapter_config:
       description: COCO license dictionary corresponding to original image license ID
     instances:
       dtype: array
-      description: Full original instance annotations for the shared image; bbox uses source
-        x,y,width,height in original pixels
+      description: Full original instance annotations for the shared image; bbox uses source x,y,width,height
+        in original pixels
     categories:
       dtype: array
       description: Original category definitions used by this image
@@ -85,14 +84,13 @@ coverage:
   access: public
   adapter: tested
   preview: complete_target
-  complete_data: requires_preparation
+  complete_data: supported
   publication: metadata_only
   preview_count: 100
   total_count: 25014
   unit: example
   blockers:
-  - Complete Parquet snapshot requires local indexing; public image rights require per-image
-    review.
+  - Public image redistribution requires separate image-specific rights approval.
 rights:
   records: approved
   annotations: approved
@@ -111,8 +109,8 @@ evidence:
   page: 26
   role: source data
   excerpt: ed the adversarial image against a batch of 8 affirmative target responses, starting
-    from clean images from the COCO train dataset [54]. For the prompt engineering phase, we
-    followed the standard iterative interaction flow. In addition to the target model unde
+    from clean images from the COCO train dataset [54]. For the prompt engineering phase, we followed
+    the standard iterative interaction flow. In addition to the target model unde
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -122,8 +120,8 @@ evidence:
   page: 7
   role: evaluation
   excerpt: ' in Figure 2. the difference-of-means procedure described in Equation (4). We evaluate
-    on COCO [59] annotations and Ring-a-Bell [60] Datasets. Under this setting, the attacker
-    wishes the steering prompts, both containing onl'
+    on COCO [59] annotations and Ring-a-Bell [60] Datasets. Under this setting, the attacker wishes
+    the steering prompts, both containing onl'
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -132,9 +130,8 @@ evidence:
   source_file_hash: 63a07114996dfdfd5a19f4a2790f78b7b42dc95ce54e14d1a8f32cbef00fc8fb
   page: 14
   role: source data
-  excerpt: 'pt the queries to our evaluation protocol (see §A.3). Localization. • COCO_one:
-    Single-object localization queries on COCO images, from the COCO single- object split of
-    What’s Up [Kama'
+  excerpt: 'pt the queries to our evaluation protocol (see §A.3). Localization. • COCO_one: Single-object
+    localization queries on COCO images, from the COCO single- object split of What’s Up [Kama'
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -144,8 +141,8 @@ evidence:
   page: 7
   role: source data
   excerpt: 8.34 86.89 86.56 89.09 domly sampled subset of 1, 000 images from the COCO DeepSeek-VL
-    36.54 79.57 86.39 86.98 dataset [18]. We design three cross-matching tasks, Llava 40.72
-    97.32 98.
+    36.54 79.57 86.39 86.98 dataset [18]. We design three cross-matching tasks, Llava 40.72 97.32
+    98.
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -154,9 +151,9 @@ evidence:
   source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
   page: 6
   role: evaluation
-  excerpt: dels attack setting is designed to effectively evaluate the adversar- COCO, more
-    than doubling the performance of both FARE4 ial performance of model and incorporates both
-    untargeted a
+  excerpt: dels attack setting is designed to effectively evaluate the adversar- COCO, more than
+    doubling the performance of both FARE4 ial performance of model and incorporates both untargeted
+    a
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -165,9 +162,9 @@ evidence:
   source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
   page: 9
   role: evaluation
-  excerpt: emaining computa- tionally feasible. We evaluate on image captioning (COCO [29],
-    Flickr30k [44]) and VQA (VQAv2 [16], TextVQA [54], VizWiz [17], OKVQA [39]), reporting results
-    on 500 r
+  excerpt: emaining computa- tionally feasible. We evaluate on image captioning (COCO [29], Flickr30k
+    [44]) and VQA (VQAv2 [16], TextVQA [54], VizWiz [17], OKVQA [39]), reporting results on 500
+    r
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -202,8 +199,8 @@ evidence:
   source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
   page: 7
   role: T2I evaluation source
-  excerpt: ). We evaluate on COCO [59] annotations and Ring-a-Bell [60] Datasets. Under this
-    setting, the attacker wishes the steering
+  excerpt: ). We evaluate on COCO [59] annotations and Ring-a-Bell [60] Datasets. Under this setting,
+    the attacker wishes the steering
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -213,8 +210,8 @@ evidence:
   page: 9
   role: caption evaluation
   excerpt: luation while remaining computa- tionally feasible. We evaluate on image captioning
-    (COCO [29], Flickr30k [44]) and VQA (VQAv2 [16], TextVQA [54], VizWiz [17], OKVQA [39]),
-    reporting results on 500 ran- domly
+    (COCO [29], Flickr30k [44]) and VQA (VQAv2 [16], TextVQA [54], VizWiz [17], OKVQA [39]), reporting
+    results on 500 ran- domly
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -223,9 +220,8 @@ evidence:
   source_file_hash: 71a1cce60cc2242209269ec562113d20745af5b8416c92c7ce7b1bc418d2ca5b
   page: 7
   role: task hijack image source
-  excerpt: Phi3 38.34 86.89 86.56 89.09 domly sampled subset of 1, 000 images from the COCO
-    DeepSeek-VL 36.54 79.57 86.39 86.98 dataset [18]. We design three cross-matching tasks,
-    Llava 40.
+  excerpt: Phi3 38.34 86.89 86.56 89.09 domly sampled subset of 1, 000 images from the COCO DeepSeek-VL
+    36.54 79.57 86.39 86.98 dataset [18]. We design three cross-matching tasks, Llava 40.
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -249,3 +245,18 @@ evidence:
     (COCO, Flickr30k), we report CIDEr score. COCO Flickr30 T
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: COCO-2017-val
+  snapshot_id: coco-2017-val-4f7e2ccb-113a836d
+  source_url: https://cocodataset.org/
+  record_count: 25014
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: Official COCO 2017 validation captions; 25,014 captions on 5,000 images
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/coco.yaml

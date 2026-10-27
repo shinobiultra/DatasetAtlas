@@ -13,6 +13,7 @@ import json
 import re
 from pathlib import Path
 from typing import Any
+from urllib.parse import urlsplit
 
 import yaml
 
@@ -197,8 +198,14 @@ def build_guide(datasets: list[Dataset], *, registry_dir: Path, schema_dir: Path
     for dataset in datasets:
         recipe = registry_dir / "recipes" / f"{dataset.id}.yaml"
         gated_recipe = recipe.is_file() and bool((yaml.safe_load(recipe.read_text(encoding="utf-8")) or {}).get("credential_profile"))
+        source = urlsplit(dataset.source_url or "")
+        builtin_route = dataset.id == "pata" or (
+            source.scheme == "https" and source.hostname == "huggingface.co"
+            and re.match(r"^/datasets/[^/]+/[^/]+(?:/|$)", source.path) is not None
+            and dataset.adapter in {"columnar", "remote_columnar"}
+        )
         entry: dict[str, Any] = {
-            "how_to_get": how_to_get(dataset, has_recipe=recipe.is_file(), in_site=dataset.id in published, needs_credentials=gated_recipe, live=dataset.id in live_previews),
+            "how_to_get": how_to_get(dataset, has_recipe=recipe.is_file() or builtin_route, in_site=dataset.id in published, needs_credentials=gated_recipe, live=dataset.id in live_previews),
             "papers": _papers(dataset, registry_dir / "papers"),
         }
         if dataset.id in live_previews and dataset.id not in published:

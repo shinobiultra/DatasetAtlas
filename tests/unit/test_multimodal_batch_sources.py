@@ -13,6 +13,7 @@ from PIL import Image
 
 from dataset_atlas.adapters import get_adapter, resolve_dataset_asset
 from dataset_atlas.registry import Registry
+from native_source_assertions import assert_current_native_source
 
 ROOT = Path(__file__).parents[2]
 EXPECTED = {"mathvision": (3040, 100, 100), "mm-vet": (218, 100, 100),
@@ -22,16 +23,12 @@ EXPECTED = {"mathvision": (3040, 100, 100), "mm-vet": (218, 100, 100),
 @pytest.mark.parametrize("dataset_id,expected", EXPECTED.items())
 def test_pinned_complete_source_preview_and_asset(dataset_id, expected):
     count, preview_count, unique_images = expected
-    dataset = Registry(ROOT).dataset(dataset_id)
+    registry = Registry(ROOT)
+    dataset = registry.dataset(dataset_id)
     source = Path(dataset.adapter_config["path"])
     if not source.exists():
         pytest.skip(f"{dataset_id} original source not installed locally")
-    receipt = json.loads((ROOT / "reports" / f"{dataset_id}-source.json").read_text())
     assert dataset.coverage.total_count == count
-    for original in receipt["original_files"]:
-        path = ROOT / original["file"]
-        assert path.stat().st_size == original["bytes"]
-        assert hashlib.sha256(path.read_bytes()).hexdigest() == original["sha256"]
     adapter = get_adapter(dataset)
     prepared = adapter.prepare(adapter.plan(101, 100_000_000))
     first = adapter.iter_records(prepared, limit=101)
@@ -39,10 +36,10 @@ def test_pinned_complete_source_preview_and_asset(dataset_id, expected):
     assert len(first.records) == 101 if count > 101 else len(first.records) == count
     assert len(last.records) == 1 and last.next_cursor is None
     assert last.records[0].assets and last.records[0].assets[0].modality == "image"
-    pack = Registry(ROOT).pack(dataset_id)
+    pack = registry.pack(dataset_id)
     assert len(pack.records) == preview_count
     assert len({record.assets[0].id for record in pack.records}) == unique_images
-    assert receipt["preview_sha256"] == hashlib.sha256((ROOT / receipt["preview_pack"]).read_bytes()).hexdigest()
+    assert_current_native_source(registry, dataset, pack, count)
     for record in (pack.records[0], pack.records[-1]):
         media = resolve_dataset_asset(dataset, record.assets[0].uri)
         assert hashlib.sha256(media.data).hexdigest() == media.sha256

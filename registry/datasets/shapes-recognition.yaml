@@ -2,16 +2,16 @@ schema_version: '1.0'
 id: shapes-recognition
 name: Shapes Recognition
 aliases: []
-description: 'Pathways Shapes Recognition: 400 images reconstructed using the released author generator,
-  200 counterfactual pairs, seed 42 and the documented 1024-pixel rendering defaults. Historical experiment
-  pixel identity is not established.'
+description: 'Pathways Shapes Recognition: 400 images reconstructed using the released author
+  generator, 200 counterfactual pairs, seed 42 and the documented 1024-pixel rendering defaults.
+  Historical experiment pixel identity is not established.'
 paper_ids:
 - paper-6c99cf73401b37d4
 release: pathways-shapes-470944b3f6b44901a9055cf8d91aef18cee21671-seed42-pillow12.3.0-python3.12
 adapter: pathways_shapes
 adapter_config: {}
 coverage:
-  identity: candidate
+  identity: resolved
   source: verified
   access: public
   adapter: tested
@@ -38,8 +38,8 @@ evidence:
   page: 13
   role: introduction
   excerpt: 'p A.1 Synthetic Shapes Datasets We generate three synthetic datasets: Shapes Recognition,
-    Shapes Localization, and Shapes Relations, using a single pipeline. The shared generation ensures
-    all three '
+    Shapes Localization, and Shapes Relations, using a single pipeline. The shared generation
+    ensures all three '
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -48,9 +48,9 @@ evidence:
   source_file_hash: 63a07114996dfdfd5a19f4a2790f78b7b42dc95ce54e14d1a8f32cbef00fc8fb
   page: 13
   role: introduced synthetic evaluation
-  excerpt: 'imental Setup A.1 Synthetic Shapes Datasets We generate three synthetic datasets: Shapes Recognition,
-    Shapes Localization, and Shapes Relations, using a single pipeline. The shared generation ensures
-    all three datasets are constru'
+  excerpt: 'imental Setup A.1 Synthetic Shapes Datasets We generate three synthetic datasets:
+    Shapes Recognition, Shapes Localization, and Shapes Relations, using a single pipeline. The
+    shared generation ensures all three datasets are constru'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -61,8 +61,8 @@ evidence:
   source_identity_status: author_generation_recipe_identified
 - kind: source_audit_release
   url: https://github.com/israfelsr/vlm-pathways
-  note: Paper p13 reports 400 generated examples; author repo offers `generate_shapes_dataset.py` example
-    command, but example `--n-samples 200` must be reconciled with paper count
+  note: Paper p13 reports 400 generated examples; author repo offers `generate_shapes_dataset.py`
+    example command, but example `--n-samples 200` must be reconciled with paper count
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_generation_recipe_identified
@@ -85,9 +85,50 @@ evidence:
   url: https://github.com/israfelsr/vlm-pathways/tree/470944b3f6b44901a9055cf8d91aef18cee21671
   checked_on: '2026-09-23'
   receipt: reports/shapes-live-verification.json
-  scope: All 400 examples from the pinned author README recipe (200 pairs, seed 42, 1024x1024 pixels,
-    80-pixel shapes, 3x3 grid). This is an author-recipe reconstruction, not an archived historical experiment
-    population. Source fields, paired identities, rendering versions and pixel hashes are retained.
+  scope: All 400 examples from the pinned author README recipe (200 pairs, seed 42, 1024x1024
+    pixels, 80-pixel shapes, 3x3 grid). This is an author-recipe reconstruction, not an archived
+    historical experiment population. Source fields, paired identities, rendering versions and
+    pixel hashes are retained.
+- kind: paper_usage_qualification
+  note: Available release identity is separate from historical paper use.
+  qualifications:
+  - Author-recipe reconstruction; historical experiment pixels are not available.
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  status: resolved_declared_source_population
+  release: pathways-shapes-470944b3f6b44901a9055cf8d91aef18cee21671-seed42-pillow12.3.0-python3.12
+  snapshot_id: shapes-recognition-081729164fe20329392e0a16
+  source_url: https://github.com/israfelsr/vlm-pathways/tree/470944b3f6b44901a9055cf8d91aef18cee21671
+  representation: author_recipe_reconstruction
+  record_count: 400
+  population: All 400 examples from the pinned author README recipe (200 pairs, seed 42, 1024x1024
+    pixels, 80-pixel shapes, 3x3 grid). This is an author-recipe reconstruction, not an archived
+    historical experiment population. Source fields, paired identities, rendering versions and
+    pixel hashes are retained.
+  basis: Existing checksum-pinned preparation and snapshot metadata; no record contents read during
+    this curation.
+  scope_note: Identifies the available source population. This is not human review, historical
+    paper-membership acceptance, publisher byte-equivalence proof, or permission to redistribute.
+  receipt: work/prepared/shapes-recognition/081729164fe20329392e0a164b901ba9bdcc93dbac0abd94092258285ae3745a/receipt.json
+  receipt_sha256: 54772d3a718e108b8012cbe3c945237ed5a424dd8e9adca20994a55c61f223ec
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: pathways-shapes-470944b3f6b44901a9055cf8d91aef18cee21671-seed42-pillow12.3.0-python3.12
+  snapshot_id: shapes-recognition-081729164fe20329392e0a16
+  source_url: https://github.com/israfelsr/vlm-pathways/tree/470944b3f6b44901a9055cf8d91aef18cee21671
+  record_count: 400
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 400 examples from the pinned author README recipe (200 pairs, seed 42, 1024x1024
+    pixels, 80-pixel shapes, 3x3 grid). This is an author-recipe reconstruction, not an archived
+    historical experiment population. Source fields, paired identities, rendering versions and
+    pixel hashes are retained.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/shapes-recognition.yaml
 source_url: https://github.com/israfelsr/vlm-pathways/tree/470944b3f6b44901a9055cf8d91aef18cee21671
 modalities:
 - image
@@ -95,3 +136,4 @@ modalities:
 tasks:
 - shape recognition
 - counterfactual pairs
+snapshot_id: shapes-recognition-081729164fe20329392e0a16

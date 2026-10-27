@@ -31,8 +31,11 @@ class RetainedArtifactIndex:
 
     def list(self, snapshot_ids=None, dataset_ids=None, artifact_ids=None):
         items = []
-        for dataset_id in dataset_ids if dataset_ids is not None else self.registry.ids():
-            for dataset, path, _ in self.registry.versions(dataset_id):
+        candidates=dataset_ids if dataset_ids is not None else self.registry.ids_for_snapshots(snapshot_ids)
+        for dataset_id in candidates:
+            versions=([item for snapshot in snapshot_ids for item in self.registry.versions(dataset_id,snapshot_id=snapshot)]
+                      if snapshot_ids else self.registry.versions(dataset_id))
+            for dataset, path, _ in versions:
                 if snapshot_ids is not None and dataset.snapshot_id not in snapshot_ids:
                     continue
                 if not path.is_file():continue

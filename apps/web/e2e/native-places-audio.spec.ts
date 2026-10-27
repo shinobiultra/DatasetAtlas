@@ -1,7 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { createHash } from 'node:crypto'
 import { writeFileSync } from 'node:fs'
-import { fileURLToPath } from 'node:url'
 
 test('Places365 native validation originals open in the browser', async ({ page }) => {
   test.skip(!process.env.ATLAS_LIVE_API, 'Requires the prepared native Places365 validation population.')
@@ -27,7 +26,7 @@ test('Places365 native validation originals open in the browser', async ({ page 
   await page.removeAllListeners('response', { behavior: 'wait' })
   const native = new Set(pack.records.flatMap((record: { assets: { sha256: string }[] }) => record.assets.map(asset => asset.sha256)))
   for (const hash of hashes) expect(native.has(hash)).toBeTruthy()
-  writeFileSync(fileURLToPath(new URL('../../../reports/browser-places365-20261007.json', import.meta.url)), JSON.stringify({
+  writeFileSync(test.info().outputPath('browser-places365-20261007.json'), JSON.stringify({
     verified_at_utc: new Date().toISOString(), dataset_id: 'places', snapshot_id: pack.dataset.snapshot_id,
     status: 'passed', native_records: 36500, preview_records: 100, original_hashes: hashes,
     scope: 'Publisher-prepared Places365 Standard256 validation originals; historical paper population remains unidentified.',
@@ -54,7 +53,7 @@ test('Spoken Wikipedia whole-article native audio plays and seeks', async ({ pag
   await audio.evaluate((item: HTMLAudioElement) => { item.pause(); item.currentTime = Math.min(30, item.duration / 3) })
   await expect.poll(() => audio.evaluate((item: HTMLAudioElement) => !item.seeking && item.currentTime > 0)).toBeTruthy()
   const technical = await audio.evaluate((item: HTMLAudioElement) => ({ duration_seconds: item.duration, seek_seconds: item.currentTime, ready_state: item.readyState }))
-  writeFileSync(fileURLToPath(new URL('../../../reports/browser-spoken-wikipedia-native-audio-20261007.json', import.meta.url)), JSON.stringify({
+  writeFileSync(test.info().outputPath('browser-spoken-wikipedia-native-audio-20261007.json'), JSON.stringify({
     verified_at_utc: new Date().toISOString(), dataset_id: 'spoken-wikipedia', snapshot_id: pack.dataset.snapshot_id,
     status: 'passed', native_sentence_records: pack.dataset.coverage.total_count, preview_records: pack.records.length,
     muted_playback_and_seek_checked: true, ...technical,
@@ -87,7 +86,7 @@ test('VOC2011 native images and palette masks open in the browser', async ({ pag
   await expect(page.locator('.sample-card').first()).toBeVisible()
   await page.locator('.sample-card .open').first().dblclick()
   await expect.poll(() => page.locator('.focus-stage img').first().evaluate((item: HTMLImageElement) => item.complete && item.naturalWidth > 0)).toBeTruthy()
-  writeFileSync(fileURLToPath(new URL('../../../reports/browser-pascal-voc2011-20261007.json', import.meta.url)), JSON.stringify({
+  writeFileSync(test.info().outputPath('browser-pascal-voc2011-20261007.json'), JSON.stringify({
     verified_at_utc: new Date().toISOString(), dataset_id: 'pascal-voc', snapshot_id: pack.dataset.snapshot_id,
     status: 'passed', native_image_xml_pairs: 14961, preview_records: 100, palette_mask_original_hashes: maskHashes,
     scope: 'VOC2011 native JPEG and palette PNG originals; main classification split and paper membership remain explicit.',

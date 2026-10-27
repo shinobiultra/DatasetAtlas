@@ -123,7 +123,7 @@ def test_gvil_pairs_keep_task_ids_answers_and_raw_annotations(tmp_path):
     with zipfile.ZipFile(path,'w') as z:
         for name,value in {'vqa_annotation.json':rows,'vg_annotation.json':vg,'pair_info.json':{'samediff_qa':[['a','b']],'localization':[['a','b']]},'raw_annotations.json':[{'img_file':'a.jpg','subjects':[]} ]}.items():z.writestr('dataset/'+name,json.dumps(value))
         for name in ['a.jpg','b.jpg']:z.writestr('dataset/images/'+name,b'fixture')
-    adapter=ClassicVisionAdapter(Dataset(id='gvil',name='Fixture',release='r',snapshot_id='s',adapter='classic_vision',adapter_config={
+    adapter=ClassicVisionAdapter(Dataset(id='paired-illusion-fixture',name='Fixture',release='r',snapshot_id='s',adapter='classic_vision',adapter_config={
         'path':str(path),'dataset_kind':'gvil','mapping':{'question':'question'}}))
     records=adapter.iter_records(adapter.prepare(adapter.plan(10,100000))).records
     assert len(records)==5 and len({r.id for r in records})==5

@@ -5,21 +5,21 @@ aliases: []
 description: Author-maintained repository includes puzzle data and evaluation; distinct from VisualPuzzles.
 paper_ids:
 - paper-20de77d4e60fd1bd
-release: unresolved
+release: 09290d05682a941782582ec8bbd5903347b2baff
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
-  blockers:
-  - Adapter and preview are not implemented.
+  blockers: []
+  total_count: 2000
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -33,8 +33,8 @@ evidence:
   source_file_hash: ccc6f6fee4214f0656c164535cbe29f1cbbce5769b311c93f08e1110437f29e0
   page: 8
   role: related-work comparison
-  excerpt: 1.5 40.92 40.84 29.45 29.75 sualPuzzle (Song et al., 2025), PuzzleVQA (Chia et al., InternVL3.5-8B
-    0.1 23.35 14.98 34.53 20.70 2024), and AlgopuzzleVQA (Ghosal
+  excerpt: 1.5 40.92 40.84 29.45 29.75 sualPuzzle (Song et al., 2025), PuzzleVQA (Chia et al.,
+    InternVL3.5-8B 0.1 23.35 14.98 34.53 20.70 2024), and AlgopuzzleVQA (Ghosal
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -53,9 +53,46 @@ evidence:
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in at
-    least one record. Not inferred from the name or description.'
-source_url: https://github.com/declare-lab/LLM-PuzzleTest
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in
+    at least one record. Not inferred from the name or description.'
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: 09290d05682a941782582ec8bbd5903347b2baff
+  snapshot_id: puzzlevqa-c2ccea1708af07e3a99bf5bc
+  source_url: https://huggingface.co/datasets/declare-lab/PuzzleVQA
+  record_count: 2000
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All Arrow/Parquet shards in the pinned repository; configuration and split retained
+    by source filename.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/puzzlevqa.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: 09290d05682a941782582ec8bbd5903347b2baff
+  snapshot_id: puzzlevqa-c2ccea1708af07e3a99bf5bc
+  source_url: https://huggingface.co/datasets/declare-lab/PuzzleVQA
+  record_count: 2000
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All Arrow/Parquet shards in the pinned repository; configuration and split retained
+    by source filename.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/puzzlevqa.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
+source_url: https://huggingface.co/datasets/declare-lab/PuzzleVQA
 modalities:
 - image
 - text
+snapshot_id: puzzlevqa-c2ccea1708af07e3a99bf5bc

@@ -150,3 +150,20 @@ def test_thumbnails_use_active_prepared_pack_and_follow_activation(workspace):
     (base / 'active.json').write_text(json.dumps({'version': 'second'}))
     tiles = app.get('/api/v1/catalogue/thumbnails').json()['datasets']['fixture']['tiles']
     assert tiles[0]['kind'] == 'text' and tiles[0]['text'] == 'New active preview'
+
+
+def test_cold_workspace_offers_every_supported_native_index_without_claiming_local_data():
+    from dataset_atlas.catalogue import with_availability
+    from dataset_atlas.models import Dataset
+    states=('supported','requires_preparation','indexed_metadata_partial_media','partial_media',
+            'wild_subset_complete','full_csv_indexed','presented_stimuli_indexed')
+    for state in states:
+        declared=Dataset(id='toy',name='Synthetic native source',coverage={
+            'preview':'complete_target','preview_count':100,'complete_data':state,'total_count':123})
+        cold=with_availability(declared,False,False)
+        assert cold.availability.complete_data=='on_request',state
+        assert cold.coverage.complete_data=='requires_preparation'
+        assert cold.coverage.preview_count==0 and cold.availability.upstream_preview_count==100
+        assert declared.coverage.complete_data==state
+    sampler=Dataset(id='sampler',name='Synthetic whole-source sampler',coverage={'complete_data':'exceeds_storage_budget'})
+    assert with_availability(sampler,False,False).availability.complete_data=='none'

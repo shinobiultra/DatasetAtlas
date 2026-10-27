@@ -18,6 +18,8 @@ credential profile (resolved at request time, never stored). A task is declared 
 the pinned query file(s) in `source_files`, their layout and the image templates. Joins are only those the query file
 itself carries (`join_basis: key_in_query_row`), a derived key, or an ordinal pairing that the authors' loader
 performs. A pairing that only exists at run time (a random pick, `os.listdir` order, a cross product) is not joined.
+Optional `inventory_tasks` expose the released images of such tasks and pools as independent native units, without
+inventing a prompt or a runtime pairing. Existing query-only snapshots retain their original row contract.
 """
 from __future__ import annotations
 
@@ -157,6 +159,9 @@ class MultiTrustAdapter(StructuredCollectionAdapter):
         if hasattr(self, "_annotation_rows"):
             return self._annotation_rows
         inventory = self._inventory()
+        inventory_tasks = self.config.get("inventory_tasks", [])
+        if not isinstance(inventory_tasks, list):
+            raise ValueError("MultiTrust inventory_tasks must be a list")
         paths = self._paths()
         rows, identities = [], set()
         stats = {"tasks": {}, "referenced": set(), "absent": {}}
@@ -216,10 +221,46 @@ class MultiTrustAdapter(StructuredCollectionAdapter):
                            "_atlas_origin": {"split": name, "row": flat, "file": file_name, "identity": identity, "group": aspect,
                                              **({"subset": subset} if subset is not None else {})},
                            "_atlas_media_refs": refs}
+                    if inventory_tasks:
+                        if {"unit_kind", "join_basis", "toolkit_tasks"} & set(native):
+                            raise ValueError("Native field collides with inventory-unit provenance")
+                        row.update(unit_kind="query_row", join_basis=task.get("join_basis"),
+                                   toolkit_tasks=task.get("toolkit_tasks", []))
                     if roles:
                         row["_atlas_media_conditions"] = roles
                     rows.append(row)
             stats["tasks"][name] = task_stats
+        stats["query_rows"] = len(rows)
+        stats["query_referenced"] = set(stats["referenced"])
+        stats["inventory_rows"] = 0
+        for spec in inventory_tasks:
+            name, aspect, kind = spec.get("task"), spec.get("aspect"), spec.get("unit_kind")
+            if (not isinstance(name, str) or not name or not isinstance(aspect, str) or not aspect
+                    or kind not in {"image_only_example", "unpaired_image", "source_pool_image"}
+                    or not isinstance(spec.get("join_basis"), str) or not spec["join_basis"]):
+                raise ValueError("Invalid MultiTrust inventory task provenance")
+            prefix = _safe_relative(spec["prefix"]).rstrip("/")
+            members = sorted(path for path in inventory if path.startswith(prefix + "/"))
+            if spec.get("unreferenced_only"):
+                members = [path for path in members if path not in stats["query_referenced"]]
+            if not members or set(members) & stats["referenced"]:
+                raise ValueError("Inventory task is empty or overlaps another native unit")
+            for ordinal, path in enumerate(members):
+                identity = f"inventory:{name}:{path}"
+                if identity in identities:
+                    raise ValueError("Duplicate inventory record identity")
+                identities.add(identity)
+                rows.append({"task": name, "aspect": aspect, "query_file": None, "image_file": path,
+                             "unit_kind": kind, "join_basis": spec["join_basis"], "source_pool": prefix,
+                             "source_category": str(Path(path).relative_to(prefix).parent),
+                             "toolkit_tasks": spec.get("toolkit_tasks", []),
+                             **({"related_query_task": spec["related_query_task"]} if spec.get("related_query_task") else {}),
+                             "_atlas_origin": {"split": name, "row": ordinal, "file": path, "identity": identity,
+                                               "group": aspect, "kind": "pinned_native_image_inventory",
+                                               "inventory_sha256": self.config["media_inventory_sha256"]},
+                             "_atlas_media_refs": [f"file/{path}"]})
+            stats["referenced"].update(members)
+            stats["inventory_rows"] += len(members)
         # An absent image is declared so that the inherited reader marks the asset absent instead of failing.
         self.config["declared_absent_media"] = sorted(f"file/{path}" for path in stats["absent"])
         self._join_stats = stats
@@ -233,10 +274,12 @@ class MultiTrustAdapter(StructuredCollectionAdapter):
         if stats is None:
             raise ValueError("MultiTrust rows were not built")
         inventory = self._inventory()
-        unreferenced = sorted(set(inventory) - stats["referenced"])
+        unreferenced = sorted(set(inventory) - stats["query_referenced"])
         return {"rows": len(self._annotation_rows), "tasks": stats["tasks"], "absent_image_paths": sorted(stats["absent"]),
+                "query_rows": stats["query_rows"], "inventory_rows": stats["inventory_rows"],
                 "inventory_images": len(inventory), "referenced_inventory_images": len(stats["referenced"] & set(inventory)),
-                "inventory_images_without_a_query_row": unreferenced}
+                "inventory_images_without_a_query_row": unreferenced,
+                "inventory_images_without_a_record": sorted(set(inventory) - stats["referenced"])}
 
     # -- media validation (no transfer) --------------------------------------------------------------------------------
 
@@ -244,7 +287,7 @@ class MultiTrustAdapter(StructuredCollectionAdapter):
         """Join every row to the pinned inventory without fetching an image. Absent images are counted, never dropped."""
         report = self.join_report()
         absent = report["absent_image_paths"]
-        rows_with = sum(task["rows_with_image_reference"] for task in report["tasks"].values())
+        rows_with = sum(task["rows_with_image_reference"] for task in report["tasks"].values()) + report["inventory_rows"]
         return {"referenced_images": report["referenced_inventory_images"], "archives": 0, "metadata_bytes_fetched": 0,
                 "rows": report["rows"], "rows_with_image_reference": rows_with, "rows_without_image_reference": report["rows"] - rows_with,
                 "absent_media_references": len(absent), "absent_media": [f"file/{path}" for path in absent[:200]],
@@ -272,26 +315,33 @@ class MultiTrustAdapter(StructuredCollectionAdapter):
         fetcher = HttpsFetcher(self.config["media_allowed_hosts"], max_bytes=remaining, credential_profile=self.config.get("credential_profile"))
         identity = CacheIdentity(self.revision, entry.get("sha256", entry.get("git_blob_sha1")), "source-image")
         path = None
-        for attempt in range(3):
-            try:
-                path = fetcher.fetch(url, cache, identity, expected_sha256=entry.get("sha256"), byte_budget=entry["bytes"])
-                break
-            except ValueError as error:
-                text = str(error)
-                status = re.search(r"HTTP (401|403)", text)
-                if status:
-                    raise ValueError(f"Source refused access (HTTP {status[1]}): this release is gated or the local sign-in is missing. "
-                                     "Accept its terms on your own Hugging Face account and sign in locally "
-                                     '(credential profile "huggingface"), then retry. Nothing was read.') from None
-                if attempt < 2 and any(code in text for code in TRANSIENT):
-                    time.sleep(1 + attempt)
-                    continue
-                raise
-            except TimeoutError:
-                if attempt == 2:
+        try:
+            for attempt in range(3):
+                # Failed attempts still transfer bytes. Conservatively reserve a
+                # whole original for each retry, even if the cache can resume it.
+                if (self.preparation_transfer_limit is not None
+                        and self.media_bytes_fetched + fetcher.bytes_fetched + entry["bytes"] > self.preparation_transfer_limit):
+                    raise ValueError("Original image transfer budget exhausted by earlier attempts")
+                try:
+                    path = fetcher.fetch(url, cache, identity, expected_sha256=entry.get("sha256"), byte_budget=entry["bytes"])
+                    break
+                except ValueError as error:
+                    text = str(error)
+                    status = re.search(r"HTTP (401|403)", text)
+                    if status:
+                        raise ValueError(f"Source refused access (HTTP {status[1]}): this release is gated or the local sign-in is missing. "
+                                         "Accept its terms on your own Hugging Face account and sign in locally "
+                                         '(credential profile "huggingface"), then retry. Nothing was read.') from None
+                    if attempt < 2 and any(code in text for code in TRANSIENT):
+                        time.sleep(1 + attempt)
+                        continue
                     raise
-                time.sleep(1 + attempt)
-        self.media_bytes_fetched += fetcher.bytes_fetched
+                except TimeoutError:
+                    if attempt == 2:
+                        raise
+                    time.sleep(1 + attempt)
+        finally:
+            self.media_bytes_fetched += fetcher.bytes_fetched
         if path is None:
             raise ValueError("Source image was not fetched")
         data = path.read_bytes()

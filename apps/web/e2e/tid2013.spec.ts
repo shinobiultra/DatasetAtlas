@@ -1,7 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { createHash } from 'node:crypto'
 import { writeFileSync } from 'node:fs'
-import { fileURLToPath } from 'node:url'
 
 test('TID2013 native BMP originals and their paired reference render', async ({ page }) => {
   test.skip(!process.env.ATLAS_LIVE_API, 'Requires the prepared native author archive.')
@@ -34,7 +33,7 @@ test('TID2013 native BMP originals and their paired reference render', async ({ 
     expect(result.headers()['content-type']).toContain('image/bmp')
     expect(createHash('sha256').update(await result.body()).digest('hex')).toBe(asset.sha256)
   }
-  writeFileSync(fileURLToPath(new URL('../../../reports/browser-tid2013-20261007.json', import.meta.url)), JSON.stringify({
+  writeFileSync(test.info().outputPath('browser-tid2013-20261007.json'), JSON.stringify({
     verified_at_utc: new Date().toISOString(), dataset_id: 'tid2013', snapshot_id: pack.dataset.snapshot_id,
     status: 'passed', native_records: 3000, preview_records: 100, original_hashes: hashes,
     paired_original_http_hashes_checked: record.assets.length, paired_reference_browser_render_checked: true,

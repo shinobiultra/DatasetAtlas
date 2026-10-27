@@ -22,6 +22,7 @@ def main(argv=None):
     usage.add_argument('--ceiling-bytes',type=int)
     clean=storage.add_parser('clean',help='Evict unpinned caches and test environments; hard-link checksum-identical acquired sources')
     clean.add_argument('--execute',action='store_true')
+    clean.add_argument('--deduplicate-only',action='store_true',help='Only hard-link checksum-identical immutable files; retain all caches, sources and environments')
     clean.add_argument('--idle-media-caches',action='store_true',help='Evict only unpinned media caches outside active preparation namespaces')
     clean.add_argument('--include-model-test-env',action='store_true',help='Also remove the reproducible isolated vLLM demonstration environment; retain model weights and evidence')
     configure=storage.add_parser('configure',help='Enable full-resolution on-demand compression and shared preparation admission limits')
@@ -101,6 +102,8 @@ def main(argv=None):
     validate=datasets.add_parser('validate');validate.add_argument('--all',action='store_true')
     prepare=datasets.add_parser('prepare');prepare.add_argument('--dataset',required=True);prepare.add_argument('--preview-size',type=int,default=100);prepare.add_argument('--max-bytes',type=int,default=20_000_000);prepare.add_argument('--dry-run',action='store_true')
     acquire=datasets.add_parser('acquire');acquire.add_argument('--dataset',required=True);acquire.add_argument('--max-download-bytes',type=int,required=True);acquire.add_argument('--max-output-bytes',type=int,required=True);acquire.add_argument('--execute',action='store_true');acquire.add_argument('--source-mode',choices=['download','selective','sample'],default='download')
+    acquire.add_argument('--no-activate',action='store_true',help='Prepare an immutable candidate without replacing the active dataset version')
+    acquire.add_argument('--sample-seed',type=int,help='Freeze an explicit seed for a native remote sample')
     preparation=datasets.add_parser('preparation');preparation.add_argument('--id',required=True);preparation.add_argument('--cancel',action='store_true');preparation.add_argument('--retry',action='store_true')
     preparation.add_argument('--refresh-metadata',metavar='DATASET_ID',help='Re-derive a completed version\'s coverage/evidence from its receipt');preparation.add_argument('--activate',action='store_true',help='With --refresh-metadata: make that version active')
     preparation.add_argument('--verify-remote-preview',metavar='DATASET_ID',help='Check a completed remote index and derive a preview with verified original images')
@@ -147,10 +150,12 @@ def main(argv=None):
         if args.command=='storage':
             if args.action=='clean':
                 from dataset_atlas.storage.maintenance import clean_workspace,evict_idle_media_caches
+                if args.deduplicate_only and (args.idle_media_caches or args.include_model_test_env):
+                    raise ValueError('--deduplicate-only cannot be combined with eviction options')
                 if args.idle_media_caches:
                     if args.include_model_test_env:raise ValueError('Idle media-cache cleanup cannot remove model environments')
                     emit(evict_idle_media_caches(root,execute=args.execute))
-                else:emit(clean_workspace(root,execute=args.execute,include_model_test_env=args.include_model_test_env))
+                else:emit(clean_workspace(root,execute=args.execute,include_model_test_env=args.include_model_test_env,deduplicate_only=args.deduplicate_only))
                 return 0
             if args.action=='status':
                 from dataset_atlas.storage.usage import workspace_usage
@@ -212,8 +217,8 @@ def main(argv=None):
                 emit(register_source(root,args.path,args.sha256,args.max_bytes))
             elif args.action=='acquire':
                 from dataset_atlas.preparation import PreparationManager
-                manager=PreparationManager(root);plan=manager.plan(args.dataset,args.max_download_bytes,args.max_output_bytes,args.source_mode);emit(plan)
-                if args.execute:emit(manager.start(plan['id']))
+                manager=PreparationManager(root);plan=manager.plan(args.dataset,args.max_download_bytes,args.max_output_bytes,args.source_mode,**({'sample_seed':args.sample_seed} if args.sample_seed is not None else {}));emit(plan)
+                if args.execute:emit(manager.start(plan['id'], activate=False if args.no_activate else None))
             elif args.action=='preparation':
                 from dataset_atlas.preparation import PreparationManager
                 manager=PreparationManager(root)

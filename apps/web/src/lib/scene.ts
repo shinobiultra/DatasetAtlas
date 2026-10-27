@@ -1,13 +1,32 @@
 export type Point = { x: number; y: number }
 
+/** Original projection row indices; an absent index draws the whole population. */
+export function membershipRows(count: number, membership?: Uint8Array | null): Uint32Array | undefined {
+  if (membership === undefined) return undefined
+  if (membership === null) return new Uint32Array(0)
+  if (membership.length !== count) throw new Error('Projection membership population length differs from the fitted projection')
+  let included = 0
+  for (const flag of membership) {
+    if (flag !== 0 && flag !== 1) throw new Error('Projection membership flags must be 0 or 1')
+    included += flag
+  }
+  if (included === count) return undefined
+  const rows = new Uint32Array(included)
+  for (let row = 0, at = 0; row < count; row++) if (membership[row]) rows[at++] = row
+  return rows
+}
+
 /**
  * Screen position of every point, from a column-major projection*view matrix (three.js `Matrix4.elements`).
  * Points behind the camera get NaN so picking and lasso selection skip them.
  */
-export function projectToScreen(positions: ArrayLike<number>, e: ArrayLike<number>, width: number, height: number): Float32Array {
+export function projectToScreen(positions: ArrayLike<number>, e: ArrayLike<number>, width: number, height: number, membership?: Uint8Array | null): Float32Array {
   const count = positions.length / 3
   const out = new Float32Array(count * 2)
   for (let row = 0; row < count; row++) {
+    if (membership === null || (membership !== undefined && membership[row] !== 1)) {
+      out[row * 2] = NaN; out[row * 2 + 1] = NaN; continue
+    }
     const x = positions[row * 3], y = positions[row * 3 + 1], z = positions[row * 3 + 2]
     const w = e[3] * x + e[7] * y + e[11] * z + e[15]
     if (w <= 0) { out[row * 2] = NaN; out[row * 2 + 1] = NaN; continue }

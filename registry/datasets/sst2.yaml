@@ -4,9 +4,9 @@ name: SST-2 (GLUE distribution)
 aliases:
 - GLUE SST-2
 - Stanford Sentiment Treebank binary
-description: Local, split-preserving conversion of the GLUE SST-2 ZIP hosted by the GLUE baseline download
-  script. This is the GLUE sentence-level binary release, not the full original Stanford Sentiment Treebank
-  or an unseen-label test set.
+description: Local, split-preserving conversion of the GLUE SST-2 ZIP hosted by the GLUE baseline
+  download script. This is the GLUE sentence-level binary release, not the full original Stanford
+  Sentiment Treebank or an unseen-label test set.
 paper_ids:
 - paper-25eaa8c74ce76800
 release: GLUE-SST-2-zip-2020-09-03
@@ -22,8 +22,8 @@ adapter_config:
   source_archive_sha256: d67e16fb55739c1b32cdce9877596db1c127dc322d93c082281f64057c16deaa
   source_archive_url: https://dl.fbaipublicfiles.com/glue/data/SST-2.zip
   source_archive_version_id: gAOv9nMgC092.oqzTRzZou2skIpI.QQJ
-  population: GLUE SST-2 original ZIP train, dev, and unlabeled test TSVs converted losslessly to Parquet,
-    70,042 rows
+  population: GLUE SST-2 original ZIP train, dev, and unlabeled test TSVs converted losslessly
+    to Parquet, 70,042 rows
   fields:
     split:
       dtype: category
@@ -65,8 +65,8 @@ coverage:
   total_count: 70042
   unit: example
   blockers:
-  - Source text redistribution rights are not stated in the GLUE ZIP or SST README; do not publish sentence
-    content without review.
+  - Source text redistribution rights are not stated in the GLUE ZIP or SST README; do not publish
+    sentence content without review.
   - GLUE test labels are withheld in the official archive.
 rights:
   records: not_reviewed
@@ -86,6 +86,22 @@ evidence:
   excerpt: MRPC, SST2, WNLI, QQP, (Kwon et al., 2024) RoBERTa / Llama-2-13B-chat, —
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: GLUE-SST-2-zip-2020-09-03
+  snapshot_id: sst2-glue-d67e16fb-914641ca
+  source_url: https://gluebenchmark.com/tasks
+  record_count: 70042
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: GLUE SST-2 original ZIP train, dev, and unlabeled test TSVs converted losslessly
+    to Parquet, 70,042 rows
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/sst2.yaml
 tasks:
 - binary sentiment classification
 modalities:

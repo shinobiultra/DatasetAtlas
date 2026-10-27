@@ -43,7 +43,6 @@ CURATED: dict[str, tuple] = {
     "alpaca": ("tatsu-lab/alpaca", None, "train", A, None),
     "wmdp": ("cais/wmdp", "wmdp-bio", "test", A, HARM),
     "realtoxicityprompts": ("allenai/real-toxicity-prompts", None, "train", A, HARM),
-    "mmmu-dev": ("MMMU/MMMU", "Accounting", "dev", A, None),
     "mmstar": ("Lin-Chen/MMStar", None, "val", A, None),
     "algopuzzlevqa": ("declare-lab/AlgoPuzzleVQA", None, None, A, None),
     "puzzlevqa": ("declare-lab/PuzzleVQA", None, None, A, None),
@@ -56,7 +55,6 @@ CURATED: dict[str, tuple] = {
     "hades": ("Monosail/HADES", None, None, A, HARM),
     "naturalbench": ("BaiqiL/NaturalBench", None, None, A, None),
     "realworldqa": ("xai-org/RealworldQA", None, "test", A, None),
-    "scienceqa-img": ("derek-thomas/ScienceQA", None, "test", A, None),
     "turing-eye-test": ("HongchengGao/TuringEyeTest", None, None, A, None),
     "vibeeval": ("RekaAI/VibeEval", None, "test", A, None),
     "visual-counterfact": ("mgolov/Visual-Counterfact", None, "color", A, None),
@@ -67,7 +65,6 @@ CURATED: dict[str, tuple] = {
     "medical-multimodal-evaluation-data": ("FreedomIntelligence/Medical_Multimodal_Evaluation_Data", None, None, A, None),
     "mm-safetybench": ("PKU-Alignment/MM-SafetyBench", "EconomicHarm", "SD", A, HARM),
     "mme": ("darkyarding/MME", None, "test", M, None),
-    "mme-perception": ("darkyarding/MME", None, "test", M, None),
     "causalgym": ("aryaman/causalgym", None, "test", A, None),
     "cebab": ("CEBaB/CEBaB", None, "test", A, None),
     "counterfact": ("azhx/counterfact", None, "test", M, None),
@@ -101,7 +98,6 @@ CURATED: dict[str, tuple] = {
     "flowers102": ("dpdl-benchmark/oxford_flowers102", None, "test", M, None),
     "oxfordpet": ("timm/oxford-iiit-pet", None, "test", M, None),
     "cub-200-2011": ("bentrevett/caltech-ucsd-birds-200-2011", None, "test", M, None),
-    "emnist-letters": ("tanganke/emnist_letters", "emnist-letters", "test", M, None),
     "imagenet-a": ("barkermrl/imagenet-a", None, "train", M, None),
     "imagenet-r": ("axiong/imagenet-r", "test", "test", M, None),
     "imagenet-v2": ("vaishaal/ImageNetV2", None, "train", A, None),
@@ -131,7 +127,6 @@ CURATED: dict[str, tuple] = {
     "pascal-voc": ("nateraw/pascal-voc-2012", None, "val", M, None),
     "what-s-up": ("amitakamath2/whatsup_vlms", None, "test", A, None),
     "vsr": ("cambridgeltl/vsr_random", None, "test", A, None),
-    "mmbench-en-dev": ("lmms-lab/MMBench_EN", None, "dev", M, None),
 }
 DISPLAYABLE = {"Image", "Audio", "Video", "Value", "ClassLabel", "List", "Sequence"}
 

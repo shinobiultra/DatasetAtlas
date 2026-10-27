@@ -6,21 +6,21 @@ description: Google publishes TSV URL-caption pairs; images remain third-party U
   Same source family as conceptual-captions candidate.
 paper_ids:
 - paper-25eaa8c74ce76800
-release: unresolved
+release: 0bb028f274446e0b102c1253d087a98eeb4519a3
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: indexed_metadata_partial_media
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
-  blockers:
-  - Adapter and preview are not implemented.
+  blockers: []
+  total_count: 3334173
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -34,15 +34,15 @@ evidence:
   source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
   page: 29
   role: cited-study dataset in survey table
-  excerpt: ) CLIP, ResNet-50 Concept Discovery CC3M (Basu et al., 2024c) Stable Diffusion, IMAGEN Knowledge
-    L
+  excerpt: ) CLIP, ResNet-50 Concept Discovery CC3M (Basu et al., 2024c) Stable Diffusion, IMAGEN
+    Knowledge L
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://github.com/google-research-datasets/conceptual-captions
-  note: 'Google publishes TSV URL-caption pairs; images remain third-party URLs and may disappear. Same
-    source family as conceptual-captions candidate. Release: Conceptual Captions train 3,318,333; validation
-    15,840 URL-caption pairs'
+  note: 'Google publishes TSV URL-caption pairs; images remain third-party URLs and may disappear.
+    Same source family as conceptual-captions candidate. Release: Conceptual Captions train 3,318,333;
+    validation 15,840 URL-caption pairs'
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
@@ -55,8 +55,47 @@ evidence:
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in at least
-    one record. Not inferred from the name or description.'
-source_url: https://github.com/google-research-datasets/conceptual-captions
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in
+    at least one record. Not inferred from the name or description.'
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: 0bb028f274446e0b102c1253d087a98eeb4519a3
+  snapshot_id: cc3m-d34368d5ed7fd8c61bb932b3
+  source_url: https://huggingface.co/datasets/google-research-datasets/conceptual_captions/tree/0bb028f274446e0b102c1253d087a98eeb4519a3
+  record_count: 3334173
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: indexed_metadata_partial_media
+  unit: example
+  population: Native unlabeled train and validation captions and image URLs in the pinned Google
+    Research repository. The separate machine-labeled configuration is excluded; third-party images
+    have not been acquired. No historical image-byte or paper-subset equality is claimed.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/cc3m.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: 0bb028f274446e0b102c1253d087a98eeb4519a3
+  snapshot_id: cc3m-d34368d5ed7fd8c61bb932b3
+  source_url: https://huggingface.co/datasets/google-research-datasets/conceptual_captions/tree/0bb028f274446e0b102c1253d087a98eeb4519a3
+  record_count: 3334173
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: indexed_metadata_partial_media
+  unit: example
+  population: Native unlabeled train and validation captions and image URLs in the pinned Google
+    Research repository. The separate machine-labeled configuration is excluded; third-party images
+    have not been acquired. No historical image-byte or paper-subset equality is claimed.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/cc3m.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
+source_url: https://huggingface.co/datasets/google-research-datasets/conceptual_captions/tree/0bb028f274446e0b102c1253d087a98eeb4519a3
 modalities:
 - text
+snapshot_id: cc3m-d34368d5ed7fd8c61bb932b3

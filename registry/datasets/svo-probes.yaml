@@ -2,10 +2,11 @@ schema_version: '1.0'
 id: svo-probes
 name: SVO-Probes
 aliases: []
-description: 'Official SVO-Probes benchmark CSV: 36,841 sentence pairs with positive and negative image
-  URLs, image IDs, subject-verb-object triplets, and negative-type flags. The URLs refer to third-party
-  Google Image Search photos; this local preview includes original CSV records and only the 119 source
-  images that passed bounded HTTPS retrieval and image validation from the first 100 pairs.'
+description: 'Official SVO-Probes benchmark CSV: 36,841 sentence pairs with positive and negative
+  image URLs, image IDs, subject-verb-object triplets, and negative-type flags. The URLs refer
+  to third-party Google Image Search photos; this local preview includes original CSV records
+  and only the 119 source images that passed bounded HTTPS retrieval and image validation from
+  the first 100 pairs.'
 paper_ids:
 - paper-2038cb87115b4fb0
 release: author-git-206219e2-csv
@@ -72,19 +73,19 @@ coverage:
   total_count: 36841
   unit: example
   blockers:
-  - All 36,841 source CSV rows are browsable, but only 119 of 196 unique selected image references were
-    retrieved; 41 of 100 preview pairs have both original photos locally. Remaining source image URLs
-    include HTTP-only, dead, restricted, redirected, and over-budget links.
-  - Third-party photo redistribution rights are unresolved; local retrieved images are excluded from public
-    export.
+  - All 36,841 source CSV rows are browsable, but only 119 of 196 unique selected image references
+    were retrieved; 41 of 100 preview pairs have both original photos locally. Remaining source
+    image URLs include HTTP-only, dead, restricted, redirected, and over-budget links.
+  - Third-party photo redistribution rights are unresolved; local retrieved images are excluded
+    from public export.
 rights:
   records: approved
   annotations: approved
   images: not_reviewed
   source: https://github.com/google-deepmind/svo_probes/blob/206219e2afd9640b8bbe6ef95f49b52b0d4ed350/README.md
   license: CC BY 4.0 for benchmark data
-  basis: Author README explicitly licenses data CC BY 4.0. It says photos come from Google Image Search;
-    that statement does not license photo bytes.
+  basis: Author README explicitly licenses data CC BY 4.0. It says photos come from Google Image
+    Search; that statement does not license photo bytes.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-d1084afb7ff886c22c93
@@ -92,8 +93,9 @@ evidence:
   source_file_hash: 51dcc13673e3b9b98e6b9cb67b07e584643259b69e50a0c028b1c7814a1ee676
   page: 4
   role: evaluation
-  excerpt: ' Design. We adapt the image (see Figure 1). We implement SIP in three SVO-Probes, MIT States,
-    and Facial Expressions diverse image-classification datasets: SVO-Probes image-classification da'
+  excerpt: ' Design. We adapt the image (see Figure 1). We implement SIP in three SVO-Probes,
+    MIT States, and Facial Expressions diverse image-classification datasets: SVO-Probes image-classification
+    da'
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -102,8 +104,9 @@ evidence:
   source_file_hash: 51dcc13673e3b9b98e6b9cb67b07e584643259b69e50a0c028b1c7814a1ee676
   page: 4
   role: direct base for VQA overlay
-  excerpt: 'ask Design. We adapt the image (see Figure 1). We implement SIP in three SVO-Probes, MIT States,
-    and Facial Expressions diverse image-classification datasets: SVO-Probes image-classification da'
+  excerpt: 'ask Design. We adapt the image (see Figure 1). We implement SIP in three SVO-Probes,
+    MIT States, and Facial Expressions diverse image-classification datasets: SVO-Probes image-classification
+    da'
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_release
@@ -111,8 +114,8 @@ evidence:
   note: Author README documents original CSV columns and third-party image URL approach.
 - kind: source_rights
   url: https://github.com/google-deepmind/svo_probes/blob/206219e2afd9640b8bbe6ef95f49b52b0d4ed350/README.md
-  note: Author CC BY 4.0 data license; source images retrieved from Google Image Search, photo rights
-    separate.
+  note: Author CC BY 4.0 data license; source images retrieved from Google Image Search, photo
+    rights separate.
 - kind: source_file
   url: https://raw.githubusercontent.com/google-deepmind/svo_probes/206219e2afd9640b8bbe6ef95f49b52b0d4ed350/svo_probes.csv
   size_bytes: 14172488
@@ -120,9 +123,25 @@ evidence:
   note: Pinned original CSV; 36,841 rows.
 - kind: source_media_probe
   path: work/sources/svo-probes/media_manifest.json
-  note: 'First 100 original CSV pairs: 196 unique image references, 119 verified local source images (17,048,851
-    bytes) under 1 MB per-image and 196 MB worst-case transfer cap; 62 failed HTTPS and 15 HTTP-only references.
-    Pair coverage: 41 both, 39 one, 20 none. No mirror or URL rewrite used.'
+  note: 'First 100 original CSV pairs: 196 unique image references, 119 verified local source
+    images (17,048,851 bytes) under 1 MB per-image and 196 MB worst-case transfer cap; 62 failed
+    HTTPS and 15 HTTP-only references. Pair coverage: 41 both, 39 one, 20 none. No mirror or URL
+    rewrite used.'
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: author-git-206219e2-csv
+  snapshot_id: author-git-206219e2afd9640b8bbe6ef95f49b52b0d4ed350-csv-sha256-9e17accb1555038ff0e5b2b14a5b46adbf66d540c2f27ee724c4340f489024ca
+  source_url: https://github.com/google-deepmind/svo_probes/tree/206219e2afd9640b8bbe6ef95f49b52b0d4ed350
+  record_count: 36841
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: partial_media
+  unit: example
+  population: complete original author CSV, 36,841 sentence/image-URL pair rows
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/svo-probes.yaml
 tasks:
 - subject-verb-object understanding
 - image-text matching

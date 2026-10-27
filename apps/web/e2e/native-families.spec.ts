@@ -1,6 +1,5 @@
 import { expect, test } from '@playwright/test'
 import { writeFileSync } from 'node:fs'
-import { fileURLToPath } from 'node:url'
 import { inspectRecord } from './helpers'
 
 for (const datasetId of ['fairface', 'seed-bench-2']) {
@@ -29,6 +28,6 @@ for (const datasetId of ['fairface', 'seed-bench-2']) {
       await expect(page.getByLabel('Selected image representation')).toContainText(record.assets[index].metadata.condition)
       await expect.poll(async () => page.locator('.focus-stage img').evaluate((image: HTMLImageElement) => image.complete && image.naturalWidth > 0), { timeout: 60_000 }).toBeTruthy()
     }
-    writeFileSync(fileURLToPath(new URL(`../../../reports/browser-${datasetId}.json`, import.meta.url)), JSON.stringify({ verified_at_utc: new Date().toISOString(), dataset_id: datasetId, snapshot_id: pack.dataset.snapshot_id, record_id: record.id, status: 'passed', labelled_conditions: record.assets.map((asset: { metadata: { condition: string } }) => asset.metadata.condition), first_and_last_native_image_displayed: true }, null, 2) + '\n')
+    writeFileSync(test.info().outputPath(`browser-${datasetId}.json`), JSON.stringify({ verified_at_utc: new Date().toISOString(), dataset_id: datasetId, snapshot_id: pack.dataset.snapshot_id, record_id: record.id, status: 'passed', labelled_conditions: record.assets.map((asset: { metadata: { condition: string } }) => asset.metadata.condition), first_and_last_native_image_displayed: true }, null, 2) + '\n')
   })
 }

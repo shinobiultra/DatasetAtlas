@@ -21,10 +21,10 @@ coverage:
   preview_count: 100
   unit: example
   blockers:
-  - Only one of 2664 native metadata shards is indexed; the other shards and paper-used
-    subset remain outside this prepared population.
-  - Third-party source images and NPZ embeddings are not acquired; URL/hash fields
-    are original metadata.
+  - Only one of 2664 native metadata shards is indexed; the other shards and paper-used subset
+    remain outside this prepared population.
+  - Third-party source images and NPZ embeddings are not acquired; URL/hash fields are original
+    metadata.
   - Native caption/image rights and publication attribution still require review.
   total_count: 532229
 rights:
@@ -32,8 +32,7 @@ rights:
   annotations: not_reviewed
   images: not_reviewed
   source: https://huggingface.co/datasets/mlfoundations/datacomp_1b
-  note: Dataset card CC BY 4.0 applies to metadata; linked images retain third-party
-    copyrights
+  note: Dataset card CC BY 4.0 applies to metadata; linked images retain third-party copyrights
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-86ba28b8ff56e3036a85
@@ -41,14 +40,13 @@ evidence:
   source_file_hash: d2750f355a25fcdcfcb221e5049a0aa41ec096b452772c73e1767e2d039a6545
   page: 5
   role: model-training lineage
-  excerpt: 56.7 34.2 45.9 54.0 77.6 ∆CLIP-H/14-336 DataComp-1B 74.8 66.7 46.1 91.3
-    63.3 68.3 49.2 68.4 75.5 90.7 OpenAI-L/
+  excerpt: 56.7 34.2 45.9 54.0 77.6 ∆CLIP-H/14-336 DataComp-1B 74.8 66.7 46.1 91.3 63.3 68.3 49.2
+    68.4 75.5 90.7 OpenAI-L/
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://huggingface.co/datasets/mlfoundations/datacomp_1b
-  note: DataComp-1B web image-text metadata index, not a bundled corpus of licensed
-    photos
+  note: DataComp-1B web image-text metadata index, not a bundled corpus of licensed photos
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
@@ -60,15 +58,14 @@ evidence:
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_access
   url: https://huggingface.co/datasets/mlfoundations/datacomp_1b
-  note: Public metadata on Hugging Face; retrieving linked images is a separate large
-    and unstable network operation; no media fetched
+  note: Public metadata on Hugging Face; retrieving linked images is a separate large and unstable
+    network operation; no media fetched
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_rights
   url: https://huggingface.co/datasets/mlfoundations/datacomp_1b
-  note: Dataset card CC BY 4.0 applies to metadata; linked images retain third-party
-    copyrights
+  note: Dataset card CC BY 4.0 applies to metadata; linked images retain third-party copyrights
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
@@ -77,13 +74,31 @@ evidence:
   snapshot_id: datacomp-1b-205fe73e2fa84d584b2ae3f6
   source_count: 532229
   recipe: registry/recipes/datacomp-1b.yaml
-  scope: All 532229 native metadata records from the first lexicographic Parquet shard,
-    0035af9f90f581816acf269df5eb37ad.parquet, at the pinned author revision. Caption,
-    original URL/dimensions, CLIP scores, face boxes and SHA-256 fields remain native.
-    This explicitly bounded shard is a subset of DataComp-1B; the other 2663 shards,
-    NPZ embeddings, linked source images and paper-used subset are not prepared. The
-    full-source acquisition plan is retained in registry/source-plans/datacomp-1b-all-shards.yaml.
+  scope: All 532229 native metadata records from the first lexicographic Parquet shard, 0035af9f90f581816acf269df5eb37ad.parquet,
+    at the pinned author revision. Caption, original URL/dimensions, CLIP scores, face boxes and
+    SHA-256 fields remain native. This explicitly bounded shard is a subset of DataComp-1B; the
+    other 2663 shards, NPZ embeddings, linked source images and paper-used subset are not prepared.
+    The full-source acquisition plan is retained in registry/source-plans/datacomp-1b-all-shards.yaml.
   publication_review_complete: false
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: 086ebeee20d4cc3b3e7c05ae703fcf278ae3a759-first-metadata-shard
+  snapshot_id: datacomp-1b-205fe73e2fa84d584b2ae3f6
+  source_url: https://huggingface.co/datasets/mlfoundations/datacomp_1b
+  record_count: 532229
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: indexed_metadata_partial_media
+  unit: example
+  population: All 532229 native metadata records from the first lexicographic Parquet shard, 0035af9f90f581816acf269df5eb37ad.parquet,
+    at the pinned author revision. Caption, original URL/dimensions, CLIP scores, face boxes and
+    SHA-256 fields remain native. This explicitly bounded shard is a subset of DataComp-1B; the
+    other 2663 shards, NPZ embeddings, linked source images and paper-used subset are not prepared.
+    The full-source acquisition plan is retained in registry/source-plans/datacomp-1b-all-shards.yaml.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/datacomp-1b.yaml
 source_url: https://huggingface.co/datasets/mlfoundations/datacomp_1b
 snapshot_id: datacomp-1b-205fe73e2fa84d584b2ae3f6
 tasks:

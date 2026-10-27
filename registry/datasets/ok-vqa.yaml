@@ -5,37 +5,37 @@ aliases:
 - OK-VQA
 - OKVQA
 - okvqa
-description: Original author site publishes questions and annotations separately from
-  COCO images; A-OKVQA is a different dataset.
+description: Original author site publishes questions and annotations separately from COCO images;
+  A-OKVQA is a different dataset.
 paper_ids:
 - paper-25eaa8c74ce76800
 - paper-6dbb0d4a7b949143
 - paper-392b0c393c06b48e
 - paper-7ed1979562251931
-release: unresolved
+release: ok-vqa-1.1
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
-  blockers:
-  - Adapter and preview are not implemented.
+  blockers: []
+  total_count: 14055
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://okvqa.allenai.org/download.html
-  note: Underlying COCO images require their own rights review; annotation terms not
-    independently pinned.
-  alias_note: Official page does not establish new rights to COCO image media; inspect
-    annotation terms separately
+  note: Underlying COCO images require their own rights review; annotation terms not independently
+    pinned.
+  alias_note: Official page does not establish new rights to COCO image media; inspect annotation
+    terms separately
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-bb367b7b46c19532cfbc
@@ -43,22 +43,21 @@ evidence:
   source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
   page: 29
   role: cited-study dataset in survey table
-  excerpt: Qwen-VL, Idefics2-8B Many-shot Learning VizWiz, OK-VQA (Zhou et al., 2024)
-    LLaVA, MiniGPT, Qwen-VL Image-Conte
+  excerpt: Qwen-VL, Idefics2-8B Many-shot Learning VizWiz, OK-VQA (Zhou et al., 2024) LLaVA, MiniGPT,
+    Qwen-VL Image-Conte
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://okvqa.allenai.org/download.html
-  note: 'Original author site publishes questions and annotations separately from
-    COCO images; A-OKVQA is a different dataset. Release: OK-VQA v1.1 annotation update
-    2020; paper split unpinned'
+  note: 'Original author site publishes questions and annotations separately from COCO images;
+    A-OKVQA is a different dataset. Release: OK-VQA v1.1 annotation update 2020; paper split unpinned'
   audit_file: work/sources/source-audit-jobs-batch3.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
 - kind: source_audit_rights
   url: https://okvqa.allenai.org/
-  note: Underlying COCO images require their own rights review; annotation terms not
-    independently pinned.
+  note: Underlying COCO images require their own rights review; annotation terms not independently
+    pinned.
   audit_file: work/sources/source-audit-jobs-batch3.json
   checked_on: '2026-09-22'
   source_identity_status: resolved
@@ -68,9 +67,9 @@ evidence:
   source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
   page: 6
   role: evaluation
-  excerpt: 017), TextVQA (Singh et al., 2019), VizWiz (Gurari et al., 2018), and OKVQA
-    (Marino 4.2. Robustness against Jailbreaking Attacks et al., 2019) dataset. Following
-    (Schlarmann et al., 202
+  excerpt: 017), TextVQA (Singh et al., 2019), VizWiz (Gurari et al., 2018), and OKVQA (Marino
+    4.2. Robustness against Jailbreaking Attacks et al., 2019) dataset. Following (Schlarmann
+    et al., 202
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
   merged_from_alias: okvqa
@@ -80,9 +79,9 @@ evidence:
   source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
   page: 9
   role: evaluation
-  excerpt: '[29], Flickr30k [44]) and VQA (VQAv2 [16], TextVQA [54], VizWiz [17],
-    OKVQA [39]), reporting results on 500 ran- domly sampled images per dataset using
-    CIDEr [58] for captioning and acc'
+  excerpt: '[29], Flickr30k [44]) and VQA (VQAv2 [16], TextVQA [54], VizWiz [17], OKVQA [39]),
+    reporting results on 500 ran- domly sampled images per dataset using CIDEr [58] for captioning
+    and acc'
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
   merged_from_alias: okvqa
@@ -92,9 +91,9 @@ evidence:
   source_file_hash: aec173a1458a692a9a4159f07664f759ab64d0f3cce6638cad56d9b76af663ec
   page: 9
   role: evaluation
-  excerpt: ts on several other datasets, including ImageNet (Deng et al., 2009), OKVQA
-    (Marino LQAVA (RSQ25 ) 44.07 ± 0.83 et al., 2019), NoCaps (Agrawal et al., 2019),
-    and Multi-layer LQAVA (RSQ2
+  excerpt: ts on several other datasets, including ImageNet (Deng et al., 2009), OKVQA (Marino
+    LQAVA (RSQ25 ) 44.07 ± 0.83 et al., 2019), NoCaps (Agrawal et al., 2019), and Multi-layer
+    LQAVA (RSQ2
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
   merged_from_alias: okvqa
@@ -104,9 +103,9 @@ evidence:
   source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
   page: 9
   role: VQA evaluation
-  excerpt: ptioning (COCO [29], Flickr30k [44]) and VQA (VQAv2 [16], TextVQA [54],
-    VizWiz [17], OKVQA [39]), reporting results on 500 ran- domly sampled images per
-    dataset using CIDEr [58] for captioning and accuracy for
+  excerpt: ptioning (COCO [29], Flickr30k [44]) and VQA (VQAv2 [16], TextVQA [54], VizWiz [17],
+    OKVQA [39]), reporting results on 500 ran- domly sampled images per dataset using CIDEr [58]
+    for captioning and accuracy for
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
   merged_from_alias: okvqa
@@ -116,9 +115,8 @@ evidence:
   source_file_hash: aec173a1458a692a9a4159f07664f759ab64d0f3cce6638cad56d9b76af663ec
   page: 9
   role: additional evaluation
-  excerpt: cores experiments on several other datasets, including ImageNet (Deng et
-    al., 2009), OKVQA (Marino LQAVA (RSQ25 ) 44.07 ± 0.83 et al., 2019), NoCaps (Agrawal
-    et al., 2019), and
+  excerpt: cores experiments on several other datasets, including ImageNet (Deng et al., 2009),
+    OKVQA (Marino LQAVA (RSQ25 ) 44.07 ± 0.83 et al., 2019), NoCaps (Agrawal et al., 2019), and
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
   merged_from_alias: okvqa
@@ -128,9 +126,9 @@ evidence:
   source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
   page: 6
   role: VQA evaluation
-  excerpt: Goyal et al., 2017), TextVQA (Singh et al., 2019), VizWiz (Gurari et al.,
-    2018), and OKVQA (Marino 4.2. Robustness against Jailbreaking Attacks et al.,
-    2019) dataset. Following (Schlarmann et al., 20
+  excerpt: Goyal et al., 2017), TextVQA (Singh et al., 2019), VizWiz (Gurari et al., 2018), and
+    OKVQA (Marino 4.2. Robustness against Jailbreaking Attacks et al., 2019) dataset. Following
+    (Schlarmann et al., 20
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
   merged_from_alias: okvqa
@@ -143,8 +141,8 @@ evidence:
   merged_from_alias: okvqa
 - kind: source_audit_release
   url: https://okvqa.allenai.org/download.html
-  note: Author page offers v1.1 annotations (2020-07-29) plus questions and COCO images;
-    paper-used version not specified
+  note: Author page offers v1.1 annotations (2020-07-29) plus questions and COCO images; paper-used
+    version not specified
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: source_and_terms_identified
@@ -160,8 +158,8 @@ evidence:
   merged_from_alias: okvqa
 - kind: source_audit_rights
   url: https://okvqa.allenai.org/download.html
-  note: Official page does not establish new rights to COCO image media; inspect annotation
-    terms separately
+  note: Official page does not establish new rights to COCO image media; inspect annotation terms
+    separately
   publication_decision: media_not_approved
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
@@ -171,24 +169,56 @@ evidence:
   url: https://okvqa.allenai.org/download.html
   checked_on: '2026-09-23'
   report: reports/selective-acquisition-20260923.md
-  note: Pinned acquired population and real preview exercised locally. Mirror and
-    selective-transfer limits remain in the acquisition receipts; this does not establish
-    publication rights or the exact paper-used subset.
+  note: Pinned acquired population and real preview exercised locally. Mirror and selective-transfer
+    limits remain in the acquisition receipts; this does not establish publication rights or the
+    exact paper-used subset.
   recipe: registry/recipes/ok-vqa.yaml
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: ok-vqa-1.1
+  snapshot_id: ok-vqa-c55a48ee7faf15021d4b26e8
+  source_url: https://okvqa.allenai.org/download.html
+  record_count: 14055
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 14055 native ok-vqa-1.1 questions, original answers and splits, joined to COCO
+    2014 images accessed on request. Paper-specific subsets are not inferred.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/ok-vqa.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: ok-vqa-1.1
+  snapshot_id: ok-vqa-c55a48ee7faf15021d4b26e8
+  source_url: https://okvqa.allenai.org/download.html
+  record_count: 14055
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 14055 native ok-vqa-1.1 questions, original answers and splits, joined to COCO
+    2014 images accessed on request. Paper-specific subsets are not inferred.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/ok-vqa.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
 source_url: https://okvqa.allenai.org/download.html
 relationships:
-- type: alias_resolved_from
-  target_id: okvqa
-  status: verified
-  scope: Same OK-VQA release from okvqa.allenai.org; both records point at the same
-    download page and describe the same knowledge-requiring VQA overlay on COCO 2014.
 - type: same_source_family_as
   target_id: coco
   status: asserted_from_source_review
-  scope: OK-VQA questions and answers are an overlay on COCO 2014 images; the local
-    base is COCO-2017-val, so images are not joinable without the 2014 release.
+  scope: OK-VQA questions and answers are an overlay on COCO 2014 images; the local base is COCO-2017-val,
+    so images are not joinable without the 2014 release.
 modalities:
 - image
 - text
 tasks:
 - knowledge-based visual question answering
+snapshot_id: ok-vqa-c55a48ee7faf15021d4b26e8

@@ -2,25 +2,26 @@ schema_version: '1.0'
 id: conceptarc
 name: ConceptARC
 aliases: []
-description: ConceptARC concept-group ARC benchmark. Author repository supplies ARC-format JSON tasks
-  organized by concept; corpus occurrence is bibliography title only
+description: ConceptARC concept-group ARC benchmark. Author repository supplies ARC-format JSON
+  tasks organized by concept; corpus occurrence is bibliography title only
 paper_ids:
 - paper-c941465e4095dbe8
-release: unresolved
+release: github-0e67da6af879e4bad3d7cd3c196e8d551b445725
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
   - Public data/media reuse rights require separate review.
+  total_count: 176
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -40,8 +41,8 @@ evidence:
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://github.com/victorvikram/ConceptARC
-  note: Author repository supplies ARC-format JSON tasks organized by concept; corpus occurrence is bibliography
-    title only
+  note: Author repository supplies ARC-format JSON tasks organized by concept; corpus occurrence
+    is bibliography title only
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: original_release_located
@@ -57,4 +58,41 @@ evidence:
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: original_release_located
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: github-0e67da6af879e4bad3d7cd3c196e8d551b445725
+  snapshot_id: conceptarc-f1a00e23a30566170d8df113
+  source_url: https://github.com/victorvikram/ConceptARC
+  record_count: 176
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All original corpus tasks and separately named MinimalTasks; each record preserves
+    complete train/test grids as one task.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/conceptarc.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: github-0e67da6af879e4bad3d7cd3c196e8d551b445725
+  snapshot_id: conceptarc-f1a00e23a30566170d8df113
+  source_url: https://github.com/victorvikram/ConceptARC
+  record_count: 176
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All original corpus tasks and separately named MinimalTasks; each record preserves
+    complete train/test grids as one task.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/conceptarc.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
 source_url: https://github.com/victorvikram/ConceptARC
+snapshot_id: conceptarc-f1a00e23a30566170d8df113

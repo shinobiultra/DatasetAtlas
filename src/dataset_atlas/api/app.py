@@ -47,6 +47,7 @@ class PreparationPlanRequest(BaseModel):
     max_download_bytes: int = Field(ge=1)
     max_output_bytes: int = Field(ge=1)
     source_mode: str = Field(default='download', pattern='^(auto|download|selective|sample)$')
+    sample_seed: int | None = Field(default=None, strict=True, ge=-(2**53-1), le=2**53-1)
 
 class LocalDatasetRequest(BaseModel):
     model_config=ConfigDict(extra='forbid')
@@ -243,10 +244,24 @@ class State:
     def put(self,selection):
         large=len(selection.ids)>INLINE_SELECTION_IDS
         stored=self.summary(selection)
+        body=json.dumps(stored.model_dump(mode='json'),sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False)
         with self.connection() as db:
             old=db.execute('SELECT body FROM selections WHERE id=?',(selection.id,)).fetchone()
-            body=stored.model_dump_json()
-            if old and old[0]!=body:raise ValueError('Selections are immutable; create a new selection')
+            if old:
+                previous=Selection.model_validate_json(old[0])
+                side=db.execute('SELECT sha256,count FROM selection_ids WHERE id=?',(selection.id,)).fetchone()
+                if side:
+                    if not re.fullmatch(r'[A-Za-z0-9_.-]{1,100}',selection.id):raise ValueError('Invalid selection id')
+                    payload=(self.ids_dir/f'{selection.id}.json').read_bytes()
+                    if hashlib.sha256(payload).hexdigest()!=side[0]:raise ValueError('Stored selection ids do not match their checksum')
+                    values=json.loads(payload)
+                    if not isinstance(values,list) or len(values)!=side[1]:raise ValueError('Stored selection id count disagrees with its record')
+                    previous=previous.model_copy(update={'ids':values})
+                normalized=json.dumps(self.summary(previous).model_dump(mode='json'),sort_keys=True,separators=(',',':'),ensure_ascii=False,allow_nan=False)
+                if normalized!=body or previous.ids!=selection.ids:raise ValueError('Selections are immutable; create a new selection')
+                # An idempotent import must preserve the original stored bytes,
+                # including legacy omitted defaults and retained side files.
+                return
             if large:
                 if not re.fullmatch(r'[A-Za-z0-9_.-]{1,100}',selection.id):raise ValueError('Invalid selection id')
                 payload=json.dumps(selection.ids,ensure_ascii=False,separators=(',',':')).encode()
@@ -418,17 +433,23 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
             asset.metadata['source_ref']=asset.uri
             asset.uri=str(cached)
         return resolved
+    def snapshot_versions(dataset_id,snapshot_ids=None):
+        if not snapshot_ids:return registry.versions(dataset_id)
+        return [item for snapshot in dict.fromkeys(snapshot_ids)
+                for item in registry.versions(dataset_id,snapshot_id=snapshot)]
     def find_record(record_id: str,prepare_media=True,snapshot_ids=None):
         # Record IDs are namespaced by dataset; only fall back to a catalogue sweep for foreign IDs.
         prefix=record_id.split(':',1)[0]
-        candidates=[prefix] if registry.has(prefix) else registry.ids()
+        if snapshot_ids:
+            candidates=registry.ids_for_snapshots(snapshot_ids)
+            if prefix in candidates:candidates=[prefix]
+        else:candidates=[prefix] if registry.has(prefix) else registry.ids()
         for dataset_id in candidates:
-            for dataset,pack_path,snapshot_path in registry.versions(dataset_id):
-                if snapshot_ids and dataset.snapshot_id not in snapshot_ids:continue
-                if not pack_path.is_file():continue
-                _,index=indexed_pack(pack_path)
-                record=index.get(record_id)
-                if record is not None:return prepared_record(record,dataset) if prepare_media else record.model_copy(deep=True)
+            for dataset,pack_path,snapshot_path in snapshot_versions(dataset_id,snapshot_ids):
+                if pack_path.is_file():
+                    _,index=indexed_pack(pack_path)
+                    record=index.get(record_id)
+                    if record is not None:return prepared_record(record,dataset) if prepare_media else record.model_copy(deep=True)
                 if (snapshot_path/'manifest.json').exists():
                     from dataset_atlas.queries.parquet import ParquetSnapshot
                     if str(snapshot_path) not in snapshot_cache:snapshot_cache[str(snapshot_path)]=ParquetSnapshot(snapshot_path.parent,snapshot_path)
@@ -440,9 +461,8 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         """Records of a large selection with one scan per dataset version, not one query per id."""
         wanted=list(selection.ids);found={}
         for dataset_id in selection.dataset_ids:
-            if not registry.has(dataset_id):continue
-            for dataset,pack_path,snapshot_path in registry.versions(dataset_id):
-                if dataset.snapshot_id not in selection.snapshot_ids:continue
+            if not selection.snapshot_ids and not registry.has(dataset_id):continue
+            for dataset,pack_path,snapshot_path in snapshot_versions(dataset_id,selection.snapshot_ids):
                 if pack_path.is_file():
                     _,index=indexed_pack(pack_path)
                     for identity in wanted:
@@ -480,11 +500,12 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
             from dataset_atlas.models import Pack
             from dataset_atlas.queries.results import attach_results
             joined={}
-            for dataset_id in selection.dataset_ids:
-                rows=[r for r in records if r.dataset_id==dataset_id]
+            versions={(r.dataset_id,r.release_id,r.snapshot_id) for r in records}
+            for dataset_id,release_id,snapshot_id in versions:
+                rows=[r for r in records if (r.dataset_id,r.release_id,r.snapshot_id)==(dataset_id,release_id,snapshot_id)]
                 if not rows:continue
-                dataset=registry.dataset(dataset_id).model_copy(update={'snapshot_id':rows[0].snapshot_id})
-                chosen=[a for a in selected_artifacts(result_ids) if rows[0].snapshot_id in a.snapshot_ids]
+                dataset=registry.dataset_version(dataset_id,release_id,snapshot_id)
+                chosen=[a for a in selected_artifacts(result_ids,selection.snapshot_ids) if rows[0].snapshot_id in a.snapshot_ids]
                 pack=attach_results(Pack(dataset=dataset,fields=[],records=rows),chosen)
                 joined.update({r.id:r for r in pack.records})
             records=[joined.get(r.id,r) for r in records]
@@ -506,12 +527,13 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
     preview_asset_ids={}
     def is_preview_asset(dataset_id, asset_id, snapshot_id):
         try:
-            preview = registry.pack(dataset_id)
-            if preview.dataset.snapshot_id == snapshot_id:
+            try:preview = registry.pack(dataset_id)
+            except (KeyError,FileNotFoundError):preview = None
+            if preview is not None and preview.dataset.id==dataset_id and preview.dataset.snapshot_id == snapshot_id:
                 path = None
                 signature = ('active', id(preview))
             else:
-                path = next(p for d,p,_ in registry.versions(dataset_id) if d.snapshot_id == snapshot_id)
+                path = next(p for d,p,_ in registry.versions(dataset_id,snapshot_id=snapshot_id) if p.is_file())
                 stat = path.stat()
                 signature = (str(path), stat.st_mtime_ns, stat.st_size)
             key = (dataset_id, snapshot_id)
@@ -597,7 +619,8 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
     preparation=PreparationManager(root)
     @app.post('/api/v1/datasets/{dataset_id}/preparation/plan')
     def preparation_plan(dataset_id:str, body:PreparationPlanRequest):
-        return preparation.plan(dataset_id,body.max_download_bytes,body.max_output_bytes,body.source_mode)
+        options={'sample_seed':body.sample_seed} if body.sample_seed is not None else {}
+        return preparation.plan(dataset_id,body.max_download_bytes,body.max_output_bytes,body.source_mode,**options)
     def describe_source(inspection):
         # Local paths stay server-side: the interface needs what was found, not where the files live.
         return {key:value for key,value in inspection.items() if key!='adapter_config'}
@@ -680,15 +703,19 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         return thumbnails_document(entries)
     @app.get('/api/v1/datasets/{dataset_id}')
     def dataset(dataset_id:str):return present(registry.dataset(dataset_id))
-    def selected_artifacts(ids):
+    def selected_artifacts(ids,snapshot_ids=None):
         if not ids:return []
-        available={a.id:a for a in artifacts(artifact_ids=set(ids))}
+        available={a.id:a for a in artifacts(set(snapshot_ids) if snapshot_ids is not None else None,artifact_ids=set(ids))}
         if len(set(ids))!=len(ids) or any(id not in available for id in ids):raise ValueError("Requested result snapshot is unavailable or duplicated")
         return [available[id] for id in ids]
     def complete_fields(dataset_id):
         snap=complete_snapshot(dataset_id)
         compatible=[a for a in artifacts({snap.snapshot_id}) if a.snapshot_ids==[snap.snapshot_id] and a.unit==snap.unit]
-        fields=[f.model_copy(deep=True) for f in snap.query_fields(compatible)]
+        # Field discovery describes all compatible runs; the 32-run limit belongs
+        # to a query's explicit joins, not the lifetime history of this dataset.
+        fields=[f.model_copy(deep=True) for f in snap.fields]
+        for offset in range(0,len(compatible),32):
+            fields.extend(f.model_copy(deep=True) for f in snap.result_fields(compatible[offset:offset+32]))
         try:
             descriptors={f.id:f for f in registry.pack(dataset_id).fields}
             for f in fields:
@@ -704,12 +731,12 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
     @app.get('/api/v1/datasets/{dataset_id}/fields')
     def fields(dataset_id:str,unit:str='example',population_scope:str='preview',snapshot_id:str|None=None):
         if snapshot_id is not None:
-            version=next((item for item in registry.versions(dataset_id) if item[0].snapshot_id==snapshot_id),None)
+            version=next(iter(registry.versions(dataset_id,snapshot_id=snapshot_id)),None)
             if version is None:raise KeyError('Requested snapshot metadata unavailable')
-            frozen=Pack.model_validate_json(version[1].read_text())
             if population_scope=='complete':
                 from dataset_atlas.queries.parquet import ParquetSnapshot
                 return ParquetSnapshot(version[2].parent,version[2]).query_fields([])
+            frozen=Pack.model_validate_json(version[1].read_text())
             if unit=='asset':
                 from dataset_atlas.models import FieldDescriptor
                 keys=sorted({key for row in materialize_records(frozen,'asset') for key in row.source})
@@ -744,6 +771,40 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         if body.query.population_scope=='preview':
             return aggregate_pack(browser_pack(dataset_id,body.query.result_snapshot_ids),body.query,body.field_ids,top=body.top)
         return complete_snapshot(dataset_id).aggregate(body.query,body.field_ids,selected_artifacts(body.query.result_snapshot_ids),top=body.top)
+    @app.post('/api/v1/datasets/{dataset_id}/membership/{artifact_id}')
+    def map_membership(dataset_id:str,artifact_id:str,query:Query):
+        """A query-aligned byte mask over a registered map, without record payloads."""
+        from dataset_atlas.queries.membership import membership_mask
+        from dataset_atlas.queries.embedding_space import bulk_directory
+        from dataset_atlas.storage import arrays as store
+        item=selected_artifacts([artifact_id])[0]
+        if query.snapshot_id not in dataset_snapshot_ids(dataset_id):
+            raise ValueError('The map snapshot is unavailable for this dataset')
+        result_artifacts=selected_artifacts(query.result_snapshot_ids)
+        ids=None
+        if isinstance(item.data.get('bulk'),dict):
+            if not jobs:raise ValueError('Array-backed map storage is unavailable')
+            ids=store.read_ids(bulk_directory(item,jobs.artifact_dir),item.data['bulk'])
+        if query.population_scope=='preview':
+            pack=registry.pack(dataset_id)
+            if pack.dataset.snapshot_id!=query.snapshot_id:
+                path=next((p for d,p,_ in registry.versions(dataset_id) if d.snapshot_id==query.snapshot_id and p.is_file()),None)
+                if path is None:raise ValueError('The inspected preview snapshot is unavailable')
+                pack,_=indexed_pack(path)
+            mask=membership_mask(query,item,ids=ids,pack=pack,artifacts=result_artifacts)
+        else:
+            snapshot=complete_snapshot(dataset_id)
+            if snapshot.snapshot_id!=query.snapshot_id:
+                path=next((p for d,_,p in registry.versions(dataset_id) if d.snapshot_id==query.snapshot_id and (p/'manifest.json').is_file()),None)
+                if path is None:raise ValueError('The inspected complete snapshot is unavailable')
+                if str(path) not in snapshot_cache:
+                    from dataset_atlas.queries.parquet import ParquetSnapshot
+                    snapshot_cache[str(path)]=ParquetSnapshot(path.parent,path)
+                snapshot=snapshot_cache[str(path)]
+            mask=membership_mask(query,item,ids=ids,snapshot=snapshot,artifacts=result_artifacts)
+        return Response(mask,media_type='application/octet-stream',headers={
+            'X-Atlas-Dtype':'uint8','X-Atlas-Shape':str(len(mask)),
+            'Access-Control-Expose-Headers':'X-Atlas-Dtype, X-Atlas-Shape','Cache-Control':'no-store'})
     @app.post('/api/v1/similarity/{dataset_id}')
     def similarity(dataset_id:str,body:SimilarityRequest):
         artifact=None
@@ -819,14 +880,13 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         # version. Resolve that pack before considering native remote references.
         if asset.uri and not urlparse(asset.uri).scheme and not Path(asset.uri).is_absolute():
             try: preview = registry.pack(dataset_id)
-            except FileNotFoundError: preview = None
+            except (KeyError,FileNotFoundError): preview = None
             snapshot_id = asset.metadata.get('_compact_snapshot_id')
-            if preview is not None and preview.dataset.release == asset.release_id and (not snapshot_id or preview.dataset.snapshot_id == snapshot_id):
+            if preview is not None and preview.dataset.id==dataset_id and preview.dataset.release == asset.release_id and (not snapshot_id or preview.dataset.snapshot_id == snapshot_id):
                 directory = registry.active_directory(dataset_id)
                 pack_path = directory/'pack/pack.json' if directory else work/'packs'/dataset_id/'pack.json'
             else:
-                version = next(((d, p) for d, p, _ in registry.versions(dataset_id)
-                                if d.release == asset.release_id and (not snapshot_id or d.snapshot_id == snapshot_id)), None)
+                version = next(((d, p) for d, p, _ in registry.versions(dataset_id,release_id=asset.release_id,snapshot_id=snapshot_id)), None)
                 if version is None: raise KeyError('Dataset preview version is not prepared')
                 pack_path = version[1]
                 if pack_path.is_file(): preview, _ = indexed_pack(pack_path)
@@ -1138,18 +1198,19 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
         try:snapshots.add(complete_snapshot(dataset_id).snapshot_id)
         except (ValueError,FileNotFoundError):pass
         return {s for s in snapshots if s}
-    def without_vectors(value):
-        if isinstance(value,dict):return {k:without_vectors(v) for k,v in value.items() if k!='vector'}
-        if isinstance(value,list):return [without_vectors(v) for v in value]
+    def without_vectors(value,omit_value=False):
+        if isinstance(value,dict):return {k:without_vectors(v,omit_value) for k,v in value.items() if k!='vector' and not (omit_value and k=='value' and isinstance(v,list))}
+        if isinstance(value,list):return [without_vectors(v,omit_value) for v in value]
         return value
     browse_views={}
     def browse_view(artifact):
         """Omit embedding vectors, which browsing never renders; the full artifact stays at /artifacts/{id}."""
-        if not artifact.kind.startswith('embed.') or not isinstance(artifact.data,dict):return artifact
+        imported=artifact.kind=='import.research' and artifact.provenance.get('processor_provenance',{}).get('kind')=='vector'
+        if not (artifact.kind.startswith('embed.') or imported) or not isinstance(artifact.data,dict):return artifact
         cached=browse_views.get(artifact.id)
         if cached is None or cached[0] is not artifact:
-            data={k:without_vectors(v) if k in {'items','points'} else v for k,v in artifact.data.items()}
-            data['omitted_fields']=['vector']
+            data={k:without_vectors(v,imported) if k in {'items','points'} else v for k,v in artifact.data.items()}
+            data['omitted_fields']=['vector','value'] if imported else ['vector']
             cached=(artifact,artifact.model_copy(update={'data':data}))
             browse_views[artifact.id]=cached
         return cached[1]
@@ -1246,7 +1307,7 @@ def create_app(root: str|Path|None=None, *, allowed_roots: list[Path]|None=None,
             if not context.result_snapshot_ids:return records
             from dataset_atlas.models import Pack
             from dataset_atlas.queries.results import attach_results
-            chosen=selected_artifacts(context.result_snapshot_ids)
+            chosen=selected_artifacts(context.result_snapshot_ids,{r.snapshot_id for r in records})
             if any(not any(record.snapshot_id in artifact.snapshot_ids and record.unit==artifact.unit for record in records) for artifact in chosen):
                 raise ValueError('Selected context result has an incompatible snapshot or unit')
             joined={}

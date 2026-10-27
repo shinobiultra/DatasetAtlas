@@ -2,8 +2,8 @@ schema_version: '1.0'
 id: sbbench-synthetic-age-crop-false
 name: SBBench synthetic age, crop no
 aliases: []
-description: 'Author VLMBias synthetic age uncropped source: all 333 original embedded PNG records. Separate
-  from the original gated SBBench benchmark and the other three synthetic configurations.'
+description: 'Author VLMBias synthetic age uncropped source: all 333 original embedded PNG records.
+  Separate from the original gated SBBench benchmark and the other three synthetic configurations.'
 paper_ids:
 - paper-32cea5e43d940514
 source_url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_age_crop_False/tree/95ac0c3020ff710295a6ed5c0216718f03383151
@@ -21,7 +21,8 @@ adapter_config:
   fields:
     label:
       dtype: number
-      description: Original source integer label; class semantics not inferred from the empty author card
+      description: Original source integer label; class semantics not inferred from the empty
+        author card
     image:
       dtype: object
       description: Original embedded PNG provenance and digest; bytes stay outside JSON records
@@ -47,17 +48,14 @@ rights:
   annotations: not_reviewed
   images: not_reviewed
   source: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_age_crop_False/tree/95ac0c3020ff710295a6ed5c0216718f03383151
-  note: Author dataset is publicly accessible, but the card is empty and supplies no explicit media redistribution
-    grant.
-relationships:
-- type: possible_source_for
-  target: sbbench-syn
-  status: candidate
+  note: Author dataset is publicly accessible, but the card is empty and supplies no explicit
+    media redistribution grant.
+relationships: []
 evidence:
 - kind: source_audit_release
   url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_age_crop_False/tree/95ac0c3020ff710295a6ed5c0216718f03383151
-  note: Author HF revision 95ac0c3020ff710295a6ed5c0216718f03383151; 333 rows in this configuration; no
-    card license text.
+  note: Author HF revision 95ac0c3020ff710295a6ed5c0216718f03383151; 333 rows in this configuration;
+    no card license text.
   checked_on: '2026-09-22'
 - kind: verified_source_acquisition
   source_url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_age_crop_False/tree/95ac0c3020ff710295a6ed5c0216718f03383151
@@ -69,7 +67,23 @@ evidence:
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in at least
-    one record. Not inferred from the name or description.'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in
+    at least one record. Not inferred from the name or description.'
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: hf-95ac0c3020ff710295a6ed5c0216718f03383151
+  snapshot_id: vlmbias-827f8c928bc1942a03eb93f2e8ea5a2198a4c9fd09465c16dcf3749da735e5e8
+  source_url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_age_crop_False/tree/95ac0c3020ff710295a6ed5c0216718f03383151
+  record_count: 333
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: original author train split; this exact author configuration retains native numeric
+    labels without inferring class semantics.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/sbbench-synthetic-age-crop-false.yaml
 modalities:
 - image

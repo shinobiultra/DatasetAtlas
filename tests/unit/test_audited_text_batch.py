@@ -10,6 +10,7 @@ import pytest
 
 from dataset_atlas.adapters import get_adapter
 from dataset_atlas.registry import Registry
+from native_source_assertions import assert_current_native_source
 
 ROOT = Path(__file__).parents[2]
 EXPECTED = {
@@ -43,13 +44,7 @@ def test_pinned_preview_and_full_source_pagination(dataset_id: str, count: int):
     assert len({record.id for record in pack.records}) == 100
     assert all(record.snapshot_id == dataset.snapshot_id for record in pack.records)
     assert dataset.coverage.total_count == count
-    receipt = json.loads((ROOT / "reports" / f"{dataset_id}-source.json").read_text())
-    assert hashlib.sha256((ROOT / receipt["preview_pack"]).read_bytes()).hexdigest() == receipt["preview_sha256"]
-    assert receipt["derived"]["rows"] == count
-    for item in receipt["original_files"]:
-        original = ROOT / item["file"]
-        assert original.stat().st_size == item["bytes"]
-        assert hashlib.sha256(original.read_bytes()).hexdigest() == item["sha256"]
+    assert_current_native_source(registry, dataset, pack, count)
 
 
 def test_tdc_released_dev_and_test_are_both_present(require_local_files):

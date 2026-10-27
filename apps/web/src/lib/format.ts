@@ -85,6 +85,7 @@ export type CoverageState = 'full' | 'preview' | 'on_request' | 'elsewhere' | 'm
 export function coverageState(dataset: Dataset, mode: 'static' | 'workbench'): CoverageState {
   const coverage = dataset.coverage ?? {}
   const previewCount = coverage.preview_count ?? 0
+  if (coverage.preview === 'metadata_only') return 'metadata'
   if (mode === 'static') {
     if (coverage.publication === 'approved' && previewCount > 0) return 'preview'
     return previewCount > 0 ? 'elsewhere' : 'metadata'
@@ -101,13 +102,18 @@ export const COVERAGE_STATE_LABEL: Record<CoverageState, string> = {
   preview: 'Preview available',
   on_request: 'Preview on request — not fetched here yet',
   elsewhere: 'Not published here — prepared in the workbench',
-  metadata: 'Metadata only — no adapter yet',
+  metadata: 'Metadata only',
 }
 
 export function coverageLine(dataset: Dataset, mode: 'static' | 'workbench'): { text: string; tone: 'ok' | 'warn' | 'default' } {
   const coverage = dataset.coverage ?? {}
   const previewCount = coverage.preview_count ?? 0
   const unit = coverage.unit ?? 'example'
+  if (coverage.preview === 'metadata_only') {
+    return { text: mode === 'workbench'
+      ? `${previewCount.toLocaleString()} native metadata records · media not acquired`
+      : `Metadata only here · ${previewCount.toLocaleString()} native records are prepared in the local workbench`, tone: 'warn' }
+  }
   switch (coverageState(dataset, mode)) {
     case 'full':
       return { text: `${previewCount.toLocaleString()} ${unit} preview · full population indexed`, tone: 'ok' }

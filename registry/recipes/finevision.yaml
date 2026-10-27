@@ -1,0 +1,20 @@
+source_url: https://huggingface.co/datasets/HuggingFaceM4/FineVision/tree/3c380a731a3429c1d04693d6ec16d7e683def84c
+release: 3c380a731a3429c1d04693d6ec16d7e683def84c
+description: FineVision's pinned whole native mixture. Original user/assistant pairs,
+  source-specific annotations, image slots, and configuration identities are retained.
+  This release population does not identify the citing papers' selected training or
+  evaluation mixtures.
+scope: Every row of all native Parquet shards at author revision
+  3c380a731a3429c1d04693d6ec16d7e683def84c. Sampling reads all shard footers;
+  only selected records and original images are retained, with no complete local index.
+sample_footers: all
+sample_seed: 0
+adapter_config:
+  mapping:
+    conversation_pairs: texts
+    configuration_from_path: true
+  remote_cache_bytes: 200000000
+resource_limits:
+  max_wall_seconds: 7200
+  max_cpu_seconds: 3600
+  max_rss_bytes: 4000000000

@@ -2,13 +2,13 @@ schema_version: '1.0'
 id: rs-vqa
 name: RS-VQA
 aliases: []
-description: 'RSVQA-LR: the author''s Zenodo Low Resolution remote-sensing VQA release (77,232 questions
-  over 772 Sentinel-2 images, native train/val/test splits). RSVQA-HR and RSVQAxBEN are separate releases
-  that are not prepared; the corpus''s survey-table mention of RS-VQA does not name a variant, so identity
-  stays a candidate.'
+description: 'RSVQA-LR: the author''s Zenodo Low Resolution remote-sensing VQA release (77,232
+  questions over 772 Sentinel-2 images, native train/val/test splits). RSVQA-HR and RSVQAxBEN
+  are separate releases that are not prepared; the corpus''s survey-table mention of RS-VQA does
+  not name a variant.'
 paper_ids:
 - paper-25eaa8c74ce76800
-release: unresolved
+release: zenodo-6344334-v1.0
 adapter: structured
 adapter_config:
   mapping:
@@ -49,18 +49,18 @@ adapter_config:
     media_path: Original TIFF extracted from Images_LR.zip
     image_sha256: SHA-256 of the original TIFF
 coverage:
-  identity: candidate
+  identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Survey table does not name an RSVQA variant; only the Low Resolution release is prepared.
   - 'Sentinel-2 imagery terms: no public redistribution review.'
+  total_count: 77232
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -80,30 +80,71 @@ evidence:
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://rsvqa.sylvainlobry.com/
-  note: 'Author page lists multiple remote-sensing VQA releases; paper mention does not identify variant.
-    Release: RSVQA LR/HR and later RSVQAxBEN variants'
+  note: 'Author page lists multiple remote-sensing VQA releases; paper mention does not identify
+    variant. Release: RSVQA LR/HR and later RSVQAxBEN variants'
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: family_only
 - kind: source_audit_rights
   url: https://rsvqa.sylvainlobry.com/
-  note: Satellite imagery and annotations may carry separate provider terms; no blanket license verified.
+  note: Satellite imagery and annotations may carry separate provider terms; no blanket license
+    verified.
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: family_only
 - kind: source_audit_release
   url: https://zenodo.org/records/6344334
   checked_on: '2026-10-06'
-  note: Author Zenodo record v1.0 (DOI 10.5281/zenodo.6344334), CC BY 4.0. All twelve files' MD5 checksums
-    were checked against the record's published values; ten are used. A 2026-10-06 fetch is not evidence
-    the paper's survey cited this variant.
+  note: Author Zenodo record v1.0 (DOI 10.5281/zenodo.6344334), CC BY 4.0. All twelve files' MD5
+    checksums were checked against the record's published values; ten are used. A 2026-10-06 fetch
+    is not evidence the paper's survey cited this variant.
   source_identity_status: author_release_variant_not_established_by_paper
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in at least
-    one record. Not inferred from the name or description.'
-source_url: https://rsvqa.sylvainlobry.com/
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in
+    at least one record. Not inferred from the name or description.'
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  status: resolved_declared_source_population
+  release: zenodo-6344334-v1.0
+  snapshot_id: rs-vqa-70bccdf9a169df9e133a76f9
+  source_url: https://zenodo.org/records/6344334
+  representation: pinned_source_population
+  record_count: 77232
+  population: 'All 77,232 questions of the author''s RSVQA-LR Zenodo release (record 6344334 v1.0,
+    CC BY 4.0): the 57,223 train, 10,005 validation and 10,004 test question/answer pairs over
+    the 772 Sentinel-2 images, each with its native question type, annotator IDs and image sensor/geolocation
+    fields. Images are the archive''s original 256x256 TIFFs, unchanged. RSVQA-HR and RSVQAxBEN
+    are separate releases and are not prepared; the survey table that cites RS-VQA does not say
+    which variant it means.'
+  basis: Existing checksum-pinned preparation and snapshot metadata; no record contents read during
+    this curation.
+  scope_note: Identifies the available source population. This is not human review, historical
+    paper-membership acceptance, publisher byte-equivalence proof, or permission to redistribute.
+  receipt: work/prepared/rs-vqa/a8316c3d60880c30b78a1d13c0ae1daabaf24dba74d5f5ca5205796b602ed1e3/receipt.json
+  receipt_sha256: 52dc6d19f7cb1241494ca4ec8cfe50b942318004295cccfb4467af2d97d76bc5
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: zenodo-6344334-v1.0
+  snapshot_id: rs-vqa-70bccdf9a169df9e133a76f9
+  source_url: https://zenodo.org/records/6344334
+  record_count: 77232
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: 'All 77,232 questions of the author''s RSVQA-LR Zenodo release (record 6344334 v1.0,
+    CC BY 4.0): the 57,223 train, 10,005 validation and 10,004 test question/answer pairs over
+    the 772 Sentinel-2 images, each with its native question type, annotator IDs and image sensor/geolocation
+    fields. Images are the archive''s original 256x256 TIFFs, unchanged. RSVQA-HR and RSVQAxBEN
+    are separate releases and are not prepared; the survey table that cites RS-VQA does not say
+    which variant it means.'
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/rs-vqa.yaml
+source_url: https://zenodo.org/records/6344334
 modalities:
 - image
 - text
@@ -113,3 +154,4 @@ labels:
 - answer
 - question_type
 - split
+snapshot_id: rs-vqa-70bccdf9a169df9e133a76f9

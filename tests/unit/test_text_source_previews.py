@@ -66,10 +66,12 @@ def test_sorrybench_fresh_install_is_gated_without_a_fake_pack(tmp_path):
     directory.mkdir(parents=True)
     shutil.copyfile(ROOT / 'registry/datasets/sorrybench.yaml', directory / 'sorrybench.yaml')
     registry = Registry(tmp_path)
-    dataset = registry.dataset("sorrybench")
+    from dataset_atlas.catalogue import with_availability
+    dataset = with_availability(registry.dataset("sorrybench"), False, False)
     assert dataset.coverage.access == "gated"
     assert dataset.coverage.preview_count == 0
-    assert dataset.coverage.complete_data == "externally_blocked"
+    assert dataset.coverage.complete_data == "requires_preparation"
+    assert dataset.availability.preview == "on_request"
     with pytest.raises(FileNotFoundError):
         registry.pack("sorrybench")
 

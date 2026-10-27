@@ -110,8 +110,11 @@ def _public_dataset(dataset: Dataset) -> dict[str, Any]:
     source_url = value.get("source_url")
     if source_url:
         parts = urlsplit(source_url)
-        if parts.scheme not in {"http", "https"} or not parts.hostname or parts.username or parts.password or parts.query or parts.fragment:
+        if parts.scheme not in {"http", "https"} or not parts.hostname or parts.username or parts.password or parts.query:
             raise PublicationError(f"Unsafe source URL: {dataset.id}")
+        # Publish a canonical landing-page link; fragments can carry private
+        # browser state and are unnecessary to identify the source.
+        value['source_url']=parts._replace(fragment='').geturl()
     scan_public({key: item for key, item in value.items() if key not in {"adapter_config", "evidence"}}, label=f"catalogue.{dataset.id}")
     return value
 

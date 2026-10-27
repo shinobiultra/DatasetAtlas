@@ -1,7 +1,6 @@
 import { expect, test } from '@playwright/test'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { createHash } from 'node:crypto'
-import { fileURLToPath } from 'node:url'
 import { inspectRecord } from './helpers'
 
 test('real TextVQA-X mask is labelled and its native array downloads unchanged', async ({ page }, testInfo) => {
@@ -29,5 +28,5 @@ test('real TextVQA-X mask is labelled and its native array downloads unchanged',
   const download = await downloadPromise, path = testInfo.outputPath('native-mask.npy')
   await download.saveAs(path)
   expect(readFileSync(path)).toEqual(original)
-  writeFileSync(fileURLToPath(new URL('../../../reports/browser-native-mask.json', import.meta.url)), JSON.stringify({ verified_at_utc: new Date().toISOString(), dataset_id: 'textvqa-x', record_id: record.id, status: 'passed', labelled_lossless_mask: true, native_array_download_bytes: original.length, native_array_sha256: createHash('sha256').update(original).digest('hex') }, null, 2) + '\n')
+  writeFileSync(test.info().outputPath('browser-native-mask.json'), JSON.stringify({ verified_at_utc: new Date().toISOString(), dataset_id: 'textvqa-x', record_id: record.id, status: 'passed', labelled_lossless_mask: true, native_array_download_bytes: original.length, native_array_sha256: createHash('sha256').update(original).digest('hex') }, null, 2) + '\n')
 })

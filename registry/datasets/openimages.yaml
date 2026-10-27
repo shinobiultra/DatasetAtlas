@@ -2,31 +2,32 @@ schema_version: '1.0'
 id: openimages
 name: OpenImages
 aliases: []
-description: Mention candidate from a focused page audit; the evidence receipts distinguish
-  direct use, comparison, related-work, and citation-only roles. Original source,
-  release, and rights still require independent verification.
+description: 'Open Images V7 validation metadata: 41,620 native image rows joined to original
+  image labels, boxes, visual relationships and segmentation annotations. Other source populations
+  and masks are outside this snapshot.'
 paper_ids:
 - paper-c65ee35ca47313c9
-release: unresolved
+release: open-images-v7-native-validation-tables-202210
 adapter: miap
 adapter_config: {}
 coverage:
-  identity: candidate
+  identity: resolved
   source: verified
   access: public
-  adapter: implemented
-  preview: none
-  complete_data: requires_preparation
+  adapter: tested
+  preview: complete_target
+  complete_data: indexed_metadata_partial_media
   publication: local_only
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - The paper cites Open Images as the dataset MIAP annotates a subset of and as a
-    dataset with gender-correlated features in prior studies; it names no release
-    (V4 to V7) or split and does not use Open Images directly.
-  - Native V7 validation metadata joins, 41,620-image index and 100 original previews
-    are verified. Mask media, localized narratives, point labels and train/test remain
-    outside this snapshot. Public redistribution rights are not approved.
+  - The paper cites Open Images as the dataset MIAP annotates a subset of and as a dataset with
+    gender-correlated features in prior studies; it names no release (V4 to V7) or split and does
+    not use Open Images directly.
+  - Native V7 validation metadata joins, 41,620-image index and 100 original previews are verified.
+    Mask media, localized narratives, point labels and train/test remain outside this snapshot.
+    Public redistribution rights are not approved.
+  total_count: 41620
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -38,40 +39,88 @@ evidence:
   source_file_hash: 8720667ee4191c5e834c8159661294785cc5f89cc2c793c5e5db0c562deb12d3
   page: 2
   role: source lineage
-  excerpt: te the influence of non-gender features ages. Meister et al. [34] showed
-    that in COCO and Open- on measured bias and distinguish between unbiased mod-
-    Images [26], non-gender features, such as color and objects,
+  excerpt: te the influence of non-gender features ages. Meister et al. [34] showed that in COCO
+    and Open- on measured bias and distinguish between unbiased mod- Images [26], non-gender features,
+    such as color and objects,
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_access
   checked_on: '2026-10-06'
   url: https://storage.googleapis.com/openimages/v5/validation-annotations-human-imagelabels.csv
-  note: Open Images annotation CSVs are served from storage.googleapis.com (for example
-    v5 validation human image labels, 24,824,095 bytes, MD5 ETag 1897fce9...; v6 and
-    v7 class descriptions also answer), and original images are served by object from
-    s3.amazonaws.com/open-images-dataset/validation/<ImageID>.jpg with an MD5 ETag.
-    The paper (p. 12) says MIAP annotates a subset of Open Images and that prior studies
-    found gender-correlated non-gender features in COCO and Open Images; it uses neither
+  note: Open Images annotation CSVs are served from storage.googleapis.com (for example v5 validation
+    human image labels, 24,824,095 bytes, MD5 ETag 1897fce9...; v6 and v7 class descriptions also
+    answer), and original images are served by object from s3.amazonaws.com/open-images-dataset/validation/<ImageID>.jpg
+    with an MD5 ETag. The paper (p. 12) says MIAP annotates a subset of Open Images and that prior
+    studies found gender-correlated non-gender features in COCO and Open Images; it uses neither
     Open Images directly.
   source_identity_status: official_files_reachable_version_not_named_by_paper
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'From the source inspected on 2026-10-06: annotation CSVs and S3 image objects
-    probed; photographs. Not inferred from the dataset name.'
+  note: 'From the source inspected on 2026-10-06: annotation CSVs and S3 image objects probed;
+    photographs. Not inferred from the dataset name.'
 - kind: native_source_integration
   checked_on: '2026-10-07'
   receipt: reports/openimages-native-source-audit-20261007.json
   source_identity_status: pinned_publisher_validation_files_paper_release_unidentified
-  note: All declared image keys and annotation rows joined locally. No native contents
-    transmitted to models; native previews are not yet activated.
+  note: All declared image keys and annotation rows joined locally. No native contents transmitted
+    to models; native previews are not yet activated.
+- kind: paper_usage_qualification
+  note: Available release identity is separate from historical paper use.
+  qualifications:
+  - The paper cites Open Images as the dataset MIAP annotates a subset of and as a dataset with
+    gender-correlated features in prior studies; it names no release (V4 to V7) or split and does
+    not use Open Images directly.
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  status: resolved_declared_source_population
+  release: open-images-v7-native-validation-tables-202210
+  snapshot_id: openimages-6d883481727ff1663f4528ba
+  source_url: https://storage.googleapis.com/openimages/web/download_v7.html
+  representation: pinned_source_population
+  record_count: 41620
+  population: All 41620 native validation image metadata rows joined to 595339 human image-label
+    rows, 303980 bounding boxes, 27243 visual relationships and 24730 segmentation annotation
+    rows from the tables linked by the V7 publisher page. Native strings, negative labels, empty
+    values and per-table ordinal identities are preserved. The V7 class table lacks names for
+    eight referenced native class/attribute IDs; these remain explicit null names. Original CVDF
+    JPEGs are fetched only for inspected examples. Mask PNGs, localized narratives, V7 point labels,
+    train/test and exact paper release memberships are outside this declared snapshot.
+  basis: Existing checksum-pinned preparation and snapshot metadata; no record contents read during
+    this curation.
+  scope_note: Identifies the available source population. This is not human review, historical
+    paper-membership acceptance, publisher byte-equivalence proof, or permission to redistribute.
+  receipt: work/prepared/openimages/3528ea6bb77f72a1256f2939929a825d762bc4f8dd03cb4a3d3b21e98f5af60f/receipt.json
+  receipt_sha256: 66f2a2b8cbe9961eccc1cf491d7c1cfa5963344a56982bd168aba75c263701fc
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: open-images-v7-native-validation-tables-202210
+  snapshot_id: openimages-6d883481727ff1663f4528ba
+  source_url: https://storage.googleapis.com/openimages/web/download_v7.html
+  record_count: 41620
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: indexed_metadata_partial_media
+  unit: example
+  population: All 41620 native validation image metadata rows joined to 595339 human image-label
+    rows, 303980 bounding boxes, 27243 visual relationships and 24730 segmentation annotation
+    rows from the tables linked by the V7 publisher page. Native strings, negative labels, empty
+    values and per-table ordinal identities are preserved. The V7 class table lacks names for
+    eight referenced native class/attribute IDs; these remain explicit null names. Original CVDF
+    JPEGs are fetched only for inspected examples. Mask PNGs, localized narratives, V7 point labels,
+    train/test and exact paper release memberships are outside this declared snapshot.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/openimages.yaml
 relationships:
 - type: same_source_family_as
   target_id: miap
   status: asserted_from_source_review
   checked_on: '2026-10-06'
-  scope: MIAP annotates a subset of Open Images (paper p. 12); the browsable MIAP
-    entry is that overlay, not the underlying Open Images release.
+  scope: MIAP annotates a subset of Open Images (paper p. 12); the browsable MIAP entry is that
+    overlay, not the underlying Open Images release.
 modalities:
 - image
 source_url: https://storage.googleapis.com/openimages/web/download_v7.html
+snapshot_id: openimages-6d883481727ff1663f4528ba

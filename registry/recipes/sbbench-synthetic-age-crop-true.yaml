@@ -1,0 +1,63 @@
+release: hf-43769ef07d9388ebb4c3dc74b548eea615d0c93b
+snapshot_id: vlmbias-41701bca3742c6151dc7b666a95eeb545bf8890c3d15f9149e5ca973ba6c1926
+source_url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_age_crop_True/tree/43769ef07d9388ebb4c3dc74b548eea615d0c93b
+adapter: embedded_parquet
+expected_count: 511
+scope: 'Author VLMBias synthetic age cropped source: all 511 original embedded PNG
+  records. Separate from the original gated SBBench benchmark and the other three
+  synthetic configurations.'
+adapter_config:
+  format: parquet
+  mapping:
+    media: image
+  media_columns:
+  - image
+  fields:
+    label:
+      dtype: number
+      description: Original source integer label; class semantics not inferred from
+        the empty author card
+    image:
+      dtype: object
+      description: Original embedded PNG provenance and digest; bytes stay outside
+        JSON records
+    source_shard:
+      dtype: category
+      description: Pinned author Parquet shard
+    source_row:
+      dtype: number
+      description: Zero-based row within pinned author shard
+  population: original author train split
+  selection_note: First 100 rows of this exact pinned synthetic configuration; numeric
+    label semantics unverified.
+convert:
+  name: retained_visual_parquet
+  params:
+    mode: sbbench_concat
+    sources:
+    - key: source_000
+      native_path: data/train-00000-of-00002.parquet
+    - key: source_001
+      native_path: data/train-00001-of-00002.parquet
+    max_output_bytes: 750000000
+  count: 511
+  rows_sha256: 8c6aa80b3da701ffabf8608f4bc0f0a30733c721745d830159a0e628007fa8c0
+files:
+- source_name: train-00000-of-00002.parquet
+  url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_age_crop_True/resolve/43769ef07d9388ebb4c3dc74b548eea615d0c93b/data/train-00000-of-00002.parquet
+  bytes: 343041741
+  sha256: cb8ac573bcf8c0b29e3164e90e144c3fac86eabf73961c1d18f6477f4dc63f1e
+  format: parquet
+  config_key: source_000
+- source_name: train-00001-of-00002.parquet
+  url: https://huggingface.co/datasets/vlmbias/sbbench_synthetic_age_crop_True/resolve/43769ef07d9388ebb4c3dc74b548eea615d0c93b/data/train-00001-of-00002.parquet
+  bytes: 342276597
+  sha256: c83a2c053cb877c41a6137086deacf2e251185317555643e84c37442203bfdd7
+  format: parquet
+  config_key: source_001
+allowed_hosts:
+- huggingface.co
+resource_limits:
+  max_rss_bytes: 3000000000
+  max_cpu_seconds: 900
+  max_wall_seconds: 1800

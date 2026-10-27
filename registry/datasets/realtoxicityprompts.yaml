@@ -62,8 +62,8 @@ rights:
   images: not_applicable
   external_provider: local_only
   source: https://huggingface.co/datasets/allenai/real-toxicity-prompts
-  note: Dataset card lists Apache 2.0 but the prompts are web text; public redistribution is
-    withheld pending rights and sensitive-content review.
+  note: Dataset card lists Apache 2.0 but the prompts are web text; public redistribution is withheld
+    pending rights and sensitive-content review.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-231c54a73e049ef96a75
@@ -83,8 +83,8 @@ evidence:
   page: 5
   role: evaluation
   excerpt: erturba- tion rates. Additionally, we scaled our evaluation using the RealToxicityPrompts
-    benchmark [21]. Following [9] and [29], we used the challenging subset containing 1,225
-    text prompts designed to trigge
+    benchmark [21]. Following [9] and [29], we used the challenging subset containing 1,225 text
+    prompts designed to trigge
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -124,9 +124,9 @@ evidence:
   source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
   page: 30
   role: jailbreak prompt source
-  excerpt: ation protocol combines adversarially perturbed images with harmful prompts from
-    the RealToxicityPrompts dataset [14]. This dataset comprises approximately 1,200 toxic in-
-    structions specifically designed to elicit harmful r
+  excerpt: ation protocol combines adversarially perturbed images with harmful prompts from the
+    RealToxicityPrompts dataset [14]. This dataset comprises approximately 1,200 toxic in- structions
+    specifically designed to elicit harmful r
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -158,6 +158,22 @@ evidence:
   url: https://huggingface.co/datasets/allenai/real-toxicity-prompts/blob/f21629712ffd6a3d13a54fd2807ccd521c55ef74/README.md
   note: Card describes original prompt/continuation objects, scores from Perspective API, and
     web-text origin.
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: hf-f21629712ffd6a3d13a54fd2807ccd521c55ef74
+  snapshot_id: hf-allenai-real-toxicity-prompts-f21629712ffd6a3d13a54fd2807ccd521c55ef74-4b680887
+  source_url: https://huggingface.co/datasets/allenai/real-toxicity-prompts
+  record_count: 99442
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: Official allenai prompts.jsonl, 99,442 rows; 1,199 challenging=true in this pinned
+    file
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/realtoxicityprompts.yaml
 tasks:
 - toxicity evaluation
 - language generation

@@ -1,9 +1,8 @@
-"""Prepare pinned original MMBench and RealWorldQA, no external model calls."""
+"""Reproduce the pinned original RealWorldQA consolidation without model calls."""
 from pathlib import Path
-import base64,collections,csv,hashlib,io,json
+import hashlib,json
 import pyarrow as pa
 import pyarrow.parquet as pq
-from PIL import Image
 import yaml
 from dataset_atlas.adapters import get_adapter,build_preview
 from dataset_atlas.registry import Registry
@@ -12,38 +11,7 @@ ROOT=Path(__file__).resolve().parents[1]
 
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 
-def resolve_reference(identity,images):
-    seen=set()
-    while True:
-        if identity in seen:raise ValueError('Cyclic image reference')
-        seen.add(identity)
-        if identity not in images:raise ValueError('Missing image reference')
-        value=images[identity]
-        if len(value)>64:return identity,base64.b64decode(value,validate=True)
-        identity=value
 
-def mmbench():
-    root=ROOT/'work/sources/mmbench-en-dev';original=root/'MMBench_DEV_EN.tsv'
-    if sha(original)!='64baa14c5ec650302f428212a0b3efc5c88fbf9236d0d6fdea45c555f0b02d7a':raise ValueError('MMBench source SHA mismatch')
-    if hashlib.md5(original.read_bytes()).hexdigest()!='b6caf1133a01c6bb705cf753bb527ed8':raise ValueError('MMBench differs from author VLMEvalKit MD5')
-    csv.field_size_limit(10_000_000)
-    with original.open() as stream:raw=list(csv.DictReader(stream,delimiter='\t'))
-    images={row['index']:row['image'] for row in raw}
-    if len(images)!=len(raw):raise ValueError('Duplicate source indices')
-    media=root/'images';media.mkdir(exist_ok=True);prepared=[];image_ids=set()
-    for row in raw:
-        original_image_index,data=resolve_reference(row['index'],images)
-        with Image.open(io.BytesIO(data)) as image:
-            if image.format not in {'JPEG','PNG'}:raise ValueError('Unsupported source image encoding')
-            suffix='.jpg' if image.format=='JPEG' else '.png';width,height=image.size;image.verify()
-        digest=hashlib.sha256(data).hexdigest();filename=digest+suffix
-        if not (media/filename).exists():(media/filename).write_bytes(data)
-        image_ids.add(original_image_index)
-        record={**row,'image':filename,'source_id':row['index'],'source_image_index':original_image_index,'image_sha256':digest,'image_width':width,'image_height':height,'choices':[f'{key}. {row[key]}' for key in 'ABCD' if row.get(key)]}
-        prepared.append(record)
-    if len(prepared)!=4329 or len(image_ids)!=1164:raise ValueError('MMBench CircularEval source counts changed')
-    output=root/'records.parquet';pq.write_table(pa.Table.from_pylist(prepared),output,compression='zstd')
-    return dict(identity='mmbench-en-dev',name='MMBench English dev v1.0 (CircularEval)',source_url='https://github.com/open-compass/MMBench',release='MMBench_DEV_EN-v1.0-md5-b6caf1133a01c6bb705cf753bb527ed8',output=output,count=4329,adapter='structured',media_root=str(media.relative_to(ROOT)),mapping={'id':'source_id','media':'image','question':'question','text':'hint','choices':'choices'},fields={'answer':{'dtype':'category','values':list('ABCD')},'category':{'dtype':'category'},'l2-category':{'dtype':'category'},'source':{'dtype':'category'},'split':{'dtype':'category','values':['dev']},'source_image_index':{'dtype':'string'},'index':{'dtype':'string'},'choices':{'dtype':'array'}},scope='Original English dev v1.0: 4,329 CircularEval choice-order variants of 1,164 questions/image entries, not 4,329 independent base questions. Base64 image references resolved to exact original bytes; all original question/hint/options/answers and categories retained. HTTPS endpoint certificate was expired; official HTTP bytes match MD5 published in author VLMEvalKit HTTPS source.',evidence={'source_download':'http://opencompass.openxlab.space/utils/benchmarks/MMBench/MMBench_DEV_EN.tsv','source_sha256':sha(original),'author_expected_md5':'b6caf1133a01c6bb705cf753bb527ed8','question_image_groups':1164,'variant_rows':4329,'distinct_image_hashes':len(list(media.iterdir()))},rights='Source aggregates public datasets and Internet images; code/repository license alone does not authorize media publication.')
 
 def realworld():
     root=ROOT/'work/sources/realworldqa';output=root/'records.parquet'
@@ -89,4 +57,6 @@ def prepare(config):
     (ROOT/'reports'/f'{identity}-source.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report),flush=True)
 if __name__=='__main__':
     import sys
-    for identity in sys.argv[1:] or ['mmbench-en-dev','realworldqa']:prepare(mmbench() if identity=='mmbench-en-dev' else realworld())
+    requested=sys.argv[1:] or ['realworldqa']
+    if requested!=['realworldqa']:raise SystemExit('This helper reproduces realworldqa only; use catalogue recipes for other datasets.')
+    prepare(realworld())

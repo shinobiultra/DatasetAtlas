@@ -85,9 +85,12 @@ def test_visu_text_catalogue_baseline_is_gated_without_vision_images() -> None:
     baseline = Dataset.model_validate(
         yaml.safe_load((ROOT / "registry/datasets/visu-text.yaml").read_text())
     )
+    from dataset_atlas.catalogue import with_availability
+    baseline = with_availability(baseline, False, False)
     assert baseline.coverage.access == "gated"
-    assert baseline.coverage.preview == "none"
-    assert baseline.coverage.complete_data == "externally_blocked"
+    assert baseline.coverage.preview == "none" and baseline.coverage.preview_count == 0
+    assert baseline.coverage.complete_data == "requires_preparation"
+    assert baseline.availability.preview == "on_request"
     assert "Unsafe vision images" in " ".join(baseline.coverage.blockers)
     merged = Registry(ROOT).dataset("visu-text")
     assert merged.coverage.access == "gated"

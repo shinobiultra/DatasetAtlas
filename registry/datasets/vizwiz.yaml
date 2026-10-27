@@ -2,38 +2,37 @@ schema_version: '1.0'
 id: vizwiz
 name: VizWiz
 aliases: []
-description: VizWiz visual question answering; 2019 and 2020 releases and paper-specific
-  test-dev splits must be distinguished.
+description: VizWiz visual question answering; 2019 and 2020 releases and paper-specific test-dev
+  splits must be distinguished.
 paper_ids:
 - paper-6dbb0d4a7b949143
 - paper-392b0c393c06b48e
 - paper-7ed1979562251931
 - paper-3e0db9c633ab204c
 - paper-25eaa8c74ce76800
-release: unresolved
+release: vizwiz-final-with-public-test-answers-2026
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
   - Source-family rights and any public media examples require dataset-specific review.
-  - Adapter and preview are not implemented.
+  total_count: 32842
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://vizwiz.org/tasks-and-datasets/vqa/
-  note: Project page marks the work CC BY 4.0; images may contain sensitive private
-    information, including obfuscated subset, so public display requires separate
-    review
+  note: Project page marks the work CC BY 4.0; images may contain sensitive private information,
+    including obfuscated subset, so public display requires separate review
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-7208f993812a16859457
@@ -41,9 +40,9 @@ evidence:
   source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
   page: 6
   role: evaluation
-  excerpt: 'ails. clude VQAv2 (Goyal et al., 2017), TextVQA (Singh et al., 2019),
-    VizWiz (Gurari et al., 2018), and OKVQA (Marino 4.2. Robustness against Jailbreaking
-    Attacks et al., 2019) dataset. '
+  excerpt: 'ails. clude VQAv2 (Goyal et al., 2017), TextVQA (Singh et al., 2019), VizWiz (Gurari
+    et al., 2018), and OKVQA (Marino 4.2. Robustness against Jailbreaking Attacks et al., 2019)
+    dataset. '
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -52,9 +51,9 @@ evidence:
   source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
   page: 9
   role: evaluation
-  excerpt: ioning (COCO [29], Flickr30k [44]) and VQA (VQAv2 [16], TextVQA [54], VizWiz
-    [17], OKVQA [39]), reporting results on 500 ran- domly sampled images per dataset
-    using CIDEr [58] for captio
+  excerpt: ioning (COCO [29], Flickr30k [44]) and VQA (VQAv2 [16], TextVQA [54], VizWiz [17],
+    OKVQA [39]), reporting results on 500 ran- domly sampled images per dataset using CIDEr [58]
+    for captio
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -63,9 +62,9 @@ evidence:
   source_file_hash: aec173a1458a692a9a4159f07664f759ab64d0f3cce6638cad56d9b76af663ec
   page: 5
   role: evaluation
-  excerpt: ' assess the applicability of QAVA, we conducted evaluations using the
-    VizWiz test-dev LQAVA (RSQN ) can further improve attack per- dataset (Gurari
-    et al., 2018, 2019), which consists fo'
+  excerpt: ' assess the applicability of QAVA, we conducted evaluations using the VizWiz test-dev
+    LQAVA (RSQN ) can further improve attack per- dataset (Gurari et al., 2018, 2019), which consists
+    fo'
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -74,8 +73,7 @@ evidence:
   source_file_hash: d2750f355a25fcdcfcb221e5049a0aa41ec096b452772c73e1767e2d039a6545
   page: 8
   role: evaluation
-  excerpt: POPE Model Vision Encoder VQAv2(val) GQA VizWiz SciQA-IMG TextVQA (val)
-    MME
+  excerpt: POPE Model Vision Encoder VQAv2(val) GQA VizWiz SciQA-IMG TextVQA (val) MME
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -84,8 +82,8 @@ evidence:
   source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
   page: 29
   role: cited-study dataset in survey table
-  excerpt: 2024a) LLaVA-v1.5 (13B/7B), InstructBLIP, Identifying Unanswerable VizWiz,
-    MM-SafetyBench mPLUG-owl
+  excerpt: 2024a) LLaVA-v1.5 (13B/7B), InstructBLIP, Identifying Unanswerable VizWiz, MM-SafetyBench
+    mPLUG-owl
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -94,9 +92,9 @@ evidence:
   source_file_hash: 8182e010fe6760e58a1b3cf381862cdbcf5c150932dee511f7508aad18f157ec
   page: 9
   role: VQA evaluation
-  excerpt: e on image captioning (COCO [29], Flickr30k [44]) and VQA (VQAv2 [16],
-    TextVQA [54], VizWiz [17], OKVQA [39]), reporting results on 500 ran- domly sampled
-    images per dataset using CIDEr [58] for captioning and a
+  excerpt: e on image captioning (COCO [29], Flickr30k [44]) and VQA (VQAv2 [16], TextVQA [54],
+    VizWiz [17], OKVQA [39]), reporting results on 500 ran- domly sampled images per dataset using
+    CIDEr [58] for captioning and a
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -105,8 +103,8 @@ evidence:
   source_file_hash: aec173a1458a692a9a4159f07664f759ab64d0f3cce6638cad56d9b76af663ec
   page: 5
   role: direct test-dev evaluation
-  excerpt: conducted evaluations using the VizWiz test-dev LQAVA (RSQN ) can further
-    improve attack per- dataset (Gurari et al., 2018, 2019), which consists f
+  excerpt: conducted evaluations using the VizWiz test-dev LQAVA (RSQN ) can further improve attack
+    per- dataset (Gurari et al., 2018, 2019), which consists f
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -115,22 +113,22 @@ evidence:
   source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
   page: 6
   role: VQA evaluation
-  excerpt: for further details. clude VQAv2 (Goyal et al., 2017), TextVQA (Singh et
-    al., 2019), VizWiz (Gurari et al., 2018), and OKVQA (Marino 4.2. Robustness against
-    Jailbreaking Attacks et al., 2019) dataset.
+  excerpt: for further details. clude VQAv2 (Goyal et al., 2017), TextVQA (Singh et al., 2019),
+    VizWiz (Gurari et al., 2018), and OKVQA (Marino 4.2. Robustness against Jailbreaking Attacks
+    et al., 2019) dataset.
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://vizwiz.org/tasks-and-datasets/vqa/
-  note: VizWiz visual question answering from blind users; 2020 expanded release distinct
-    from deprecated 2019 release
+  note: VizWiz visual question answering from blind users; 2020 expanded release distinct from
+    deprecated 2019 release
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_release
   url: https://vizwiz.org/tasks-and-datasets/vqa/
-  note: 2020 version, 20,523 train, 4,319 val, 8,000 test image-question pairs; 2023
-    label rename from unsuitable to unanswerable
+  note: 2020 version, 20,523 train, 4,319 val, 8,000 test image-question pairs; 2023 label rename
+    from unsuitable to unanswerable
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
@@ -143,9 +141,8 @@ evidence:
   source_identity_status: official_source_resolved_not_human_reviewed
 - kind: source_audit_rights
   url: https://vizwiz.org/tasks-and-datasets/vqa/
-  note: Project page marks the work CC BY 4.0; images may contain sensitive private
-    information, including obfuscated subset, so public display requires separate
-    review
+  note: Project page marks the work CC BY 4.0; images may contain sensitive private information,
+    including obfuscated subset, so public display requires separate review
   audit_file: work/sources/source-audit-jobs.json
   checked_on: '2026-09-22'
   source_identity_status: official_source_resolved_not_human_reviewed
@@ -154,11 +151,50 @@ evidence:
   checked_on: '2026-09-23'
   recipe: registry/recipes/vizwiz.yaml
   report: reports/selective-acquisition-20260923.md
-  note: Original source release and native records exercised locally. This is not
-    a claim of human rights review or an exact paper-used subset.
+  note: Original source release and native records exercised locally. This is not a claim of human
+    rights review or an exact paper-used subset.
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: vizwiz-final-with-public-test-answers-2026
+  snapshot_id: vizwiz-f2b6da52c62c9b263496cfef
+  source_url: https://vizwiz.org/tasks-and-datasets/vqa/
+  record_count: 32842
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 32,842 VizWiz-VQA train/val/test questions; the test answers are the author-published
+    April 2026 release, not a claim about paper-time access. Original images are fetched selectively
+    from official archives.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/vizwiz.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: vizwiz-final-with-public-test-answers-2026
+  snapshot_id: vizwiz-f2b6da52c62c9b263496cfef
+  source_url: https://vizwiz.org/tasks-and-datasets/vqa/
+  record_count: 32842
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 32,842 VizWiz-VQA train/val/test questions; the test answers are the author-published
+    April 2026 release, not a claim about paper-time access. Original images are fetched selectively
+    from official archives.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/vizwiz.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
 source_url: https://vizwiz.org/tasks-and-datasets/vqa/
 modalities:
 - image
 - text
 tasks:
 - visual question answering
+snapshot_id: vizwiz-f2b6da52c62c9b263496cfef

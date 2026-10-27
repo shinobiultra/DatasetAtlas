@@ -173,11 +173,30 @@ def _write_rooted_atomic(root: Path, relative: str, data: bytes) -> None:
 BROWSER_UNSUPPORTED_IMAGE_SUFFIXES = {".tif", ".tiff"}
 
 
-def _media_type(path: str) -> str:
+def _media_type(path: str, overrides=None) -> str:
+    if overrides is not None:
+        if not isinstance(overrides, dict):raise ValueError('Media type overrides require exact native paths')
+        if path in overrides:
+            entry=overrides[path]
+            if (not isinstance(entry, dict) or set(entry)!={'media_type','sha256'}
+                    or not isinstance(entry['media_type'],str) or entry['media_type'] not in {'image/jpeg','image/png','image/webp'}
+                    or not isinstance(entry['sha256'],str) or not re.fullmatch(r'[0-9a-f]{64}',entry['sha256'])):
+                raise ValueError('Native media type override requires an image type and pinned SHA-256')
+            return entry['media_type']
     suffix = PurePosixPath(path).suffix.lower()
     return {".png": "image/png", ".jpg": "image/jpeg", ".jpeg": "image/jpeg",
             ".webp": "image/webp", ".gif": "image/gif", ".tif": "image/tiff", ".tiff": "image/tiff", ".mp3": "audio/mpeg",
             ".wav": "audio/wav", ".mp4": "video/mp4"}.get(suffix, "application/octet-stream")
+
+
+def _verified_media_type(path: str, data: bytes, overrides=None) -> str:
+    media_type=_media_type(path,overrides)
+    if overrides and path in overrides:
+        header_valid = (data.startswith(b'RIFF') and data[8:12]==b'WEBP' if media_type=='image/webp' else
+                        data.startswith({'image/jpeg':b'\xff\xd8\xff','image/png':b'\x89PNG\r\n\x1a\n'}[media_type]))
+        if not header_valid or hashlib.sha256(data).hexdigest()!=overrides[path]['sha256']:
+            raise ValueError('Native media type override differs from its source header or SHA-256')
+    return media_type
 
 
 class DatasetAdapter:
@@ -465,9 +484,9 @@ class StructuredAdapter(DatasetAdapter):
             data = read_rooted_file(fetched, [cache.root], remaining)
             source.charge(len(data))
             _write_rooted_atomic(root, name, data)
-            return MediaHandle(data, _media_type(name), hashlib.sha256(data).hexdigest(), name)
+            return MediaHandle(data, _verified_media_type(name,data,self.config.get('media_type_overrides')), hashlib.sha256(data).hexdigest(), name)
         source.charge(len(data))
-        return MediaHandle(data, _media_type(name), hashlib.sha256(data).hexdigest(), name)
+        return MediaHandle(data, _verified_media_type(name,data,self.config.get('media_type_overrides')), hashlib.sha256(data).hexdigest(), name)
 
 
 class HTTPSStructuredAdapter(StructuredAdapter):
@@ -860,9 +879,6 @@ def get_adapter(dataset: Dataset) -> DatasetAdapter:
     if dataset.adapter == 'roco':
         from .roco import RocoAdapter
         return RocoAdapter(dataset)
-    if dataset.adapter == 'qava':
-        from .qava import QavaAdapter
-        return QavaAdapter(dataset)
     if dataset.adapter == 'covid_radiography':
         from .covid_radiography import CovidRadiographyAdapter
         return CovidRadiographyAdapter(dataset)
@@ -899,9 +915,6 @@ def get_adapter(dataset: Dataset) -> DatasetAdapter:
     if dataset.adapter == 'textvqa_x':
         from .textvqa_x import TextVQAXAdapter
         return TextVQAXAdapter(dataset)
-    if dataset.adapter == 'pathways':
-        from .pathways import PathwaysAdapter
-        return PathwaysAdapter(dataset)
     if dataset.adapter == 'sad_structs':
         from .sad import SADStructsAdapter
         return SADStructsAdapter(dataset)
@@ -1029,9 +1042,6 @@ def get_adapter(dataset: Dataset) -> DatasetAdapter:
     if dataset.adapter == "imagenet_segmentation":
         from .imagenet_segmentation import ImageNetSegmentationAdapter
         return ImageNetSegmentationAdapter(dataset)
-    if dataset.adapter == "broden":
-        from .broden import BrodenAdapter
-        return BrodenAdapter(dataset)
     if dataset.adapter == "objaverse":
         from .objaverse import ObjaverseAdapter
         return ObjaverseAdapter(dataset)
@@ -1041,6 +1051,9 @@ def get_adapter(dataset: Dataset) -> DatasetAdapter:
     if dataset.adapter == "embedded_parquet":
         from .embedded_parquet import EmbeddedParquetAdapter
         return EmbeddedParquetAdapter(dataset)
+    if dataset.adapter == 'retained_parquet_media':
+        from .retained_parquet_media import RetainedParquetMediaAdapter
+        return RetainedParquetMediaAdapter(dataset)
     if dataset.adapter == "svo_probes":
         from .svo_probes import SVOProbesAdapter
         return SVOProbesAdapter(dataset)

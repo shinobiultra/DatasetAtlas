@@ -1,19 +1,22 @@
 # Documentation
 
-| If you want to | Read |
+| Task | Guide |
 | --- | --- |
-| Install it, create a workspace, fetch previews | [Getting started](getting-started.md) |
-| Browse your own folder, table or Hugging Face dataset | [Adding your own datasets](adding-your-own-datasets.md) |
-| Fetch or prepare a catalogue dataset, and what the preparation limits mean | [On-demand preparation](on-demand-preparation.md), [Storage](storage.md) |
-| Get into a gated or licensed dataset | [Authorization links](dataset-authorization.md) |
-| Run it on another machine | [Remote workbench](remote-workbench.md) |
-| Connect a local model | [Model connections](model-connections.md) |
-| Embed, project (2D/3D), cluster and score outliers, and what is fast | [Analysis at scale](analysis-at-scale.md) |
-| Answer, tag, judge or embed with a local model server; chat with a dataset; score VQA answers | [Model-server runs](model-server-runs.md) |
-| Add a dataset to the catalogue (adapters, recipes, evidence) | [Adding catalogue datasets](adding-datasets.md), [Adding processors](adding-processors.md) |
-| Understand the interface and the shared schemas | [Interface](interface.md), [Contracts](contracts.md) |
-| Run, test and release from a checkout | [Development](development.md) |
-| Publish the static site | [Publication](publication.md), [GitHub Pages](github-pages.md) |
-| See what was decided and when | [history/](history/) and the root `ROADMAP.md` |
+| Start the sample browser or local workbench | [Getting started](getting-started.md) |
+| Give colleagues a portable sample | [Sharing](sharing.md) |
+| Add folders, tables or Hugging Face datasets | [Your own datasets](adding-your-own-datasets.md) |
+| Prepare source data within explicit budgets | [On-demand preparation](on-demand-preparation.md), [Storage](storage.md) |
+| Obtain gated or licensed source access | [Authorization](dataset-authorization.md) |
+| Use another machine through a tunnel | [Remote workbench](remote-workbench.md) |
+| Install optional models or connect a local provider | [Model connections](model-connections.md) |
+| Embed, project, cluster and score outliers | [Analysis at scale](analysis-at-scale.md) |
+| Run local-model analysis and conversations | [Model-server runs](model-server-runs.md) |
+| Add catalogue sources and analysis processors | [Datasets](adding-datasets.md), [Processors](adding-processors.md) |
+| Understand the interface and data contracts | [Interface](interface.md), [Contracts](contracts.md) |
+| Test and build a release | [Development](development.md) |
+| Build an approved static site | [Publication](publication.md), [GitHub Pages](github-pages.md) |
+| Inspect release scope and current proof | [Release scope](../ROADMAP.md), [Release evidence](../reports/release_evidence.md) |
 
-`acceptance-matrix.json` maps each acceptance row of `SPEC.md` to the tests and receipts that check it.
+[acceptance-matrix.json](acceptance-matrix.json) maps the SPEC acceptance rows to
+their automated checks. [Current coverage](../reports/dataset_coverage.csv) and
+[source qualifications](../reports/limitations.md) state what each release claim means.

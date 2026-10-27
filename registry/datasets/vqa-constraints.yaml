@@ -2,16 +2,16 @@ schema_version: '1.0'
 id: vqa-constraints
 name: VQA-Constraints
 aliases: []
-description: 'VQA-Constraints: all 9,463 released native constraint rows across Multimodal Known (1,204),
-  Multimodal Movies (3,214) and OK-VQA (5,045). Questions and visual/text constraint phrases remain exact;
-  every author-provided image candidate is available with the original pixels.'
+description: 'VQA-Constraints: all 9,463 released native constraint rows across Multimodal Known
+  (1,204), Multimodal Movies (3,214) and OK-VQA (5,045). Questions and visual/text constraint
+  phrases remain exact; every author-provided image candidate is available with the original pixels.'
 paper_ids:
 - paper-25eaa8c74ce76800
 release: vqa-constraints-0c74e01ea5fb02bbdd90e08f53777d271c44f639
 adapter: vqa_constraints
 adapter_config: {}
 coverage:
-  identity: candidate
+  identity: resolved
   source: verified
   access: public
   adapter: tested
@@ -34,20 +34,58 @@ evidence:
   source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
   page: 29
   role: cited-study dataset in survey table
-  excerpt: 4a) LLaVa VQA, Model Editing VQA-Constraints Causal Tracing (Basu et al., 2024b) SD-XL, DeepFloyd
-    Knowledge L
+  excerpt: 4a) LLaVa VQA, Model Editing VQA-Constraints Causal Tracing (Basu et al., 2024b) SD-XL,
+    DeepFloyd Knowledge L
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: native_population_live_verification
   url: https://github.com/microsoft/MLLMInterpret/tree/0c74e01ea5fb02bbdd90e08f53777d271c44f639
   checked_on: '2026-09-23'
   receipt: reports/vqa-constraints-live-verification.json
-  scope: All rows in the three native CSVs at the pinned author repository revision. Directory-based Known/Movies
-    questions retain every released candidate image; COCO references join to original val2014 images.
-    Blank CSV index fields and native strings are retained. Unannotated image folders are counted in the
-    receipt, not fabricated as questions. No unreleased multi-constraint rows, answer labels or historical
-    paper-used image choices are inferred.
+  scope: All rows in the three native CSVs at the pinned author repository revision. Directory-based
+    Known/Movies questions retain every released candidate image; COCO references join to original
+    val2014 images. Blank CSV index fields and native strings are retained. Unannotated image
+    folders are counted in the receipt, not fabricated as questions. No unreleased multi-constraint
+    rows, answer labels or historical paper-used image choices are inferred.
   source_identity_status: author_release_located_not_human_reviewed
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  status: resolved_declared_source_population
+  release: vqa-constraints-0c74e01ea5fb02bbdd90e08f53777d271c44f639
+  snapshot_id: vqa-constraints-7b84c7030382399b53869347
+  source_url: https://github.com/microsoft/MLLMInterpret/tree/0c74e01ea5fb02bbdd90e08f53777d271c44f639
+  representation: pinned_source_population
+  record_count: 9463
+  population: All rows in the three native CSVs at the pinned author repository revision. Directory-based
+    Known/Movies questions retain every released candidate image; COCO references join to original
+    val2014 images. Blank CSV index fields and native strings are retained. Unannotated image
+    folders are counted in the receipt, not fabricated as questions. No unreleased multi-constraint
+    rows, answer labels or historical paper-used image choices are inferred.
+  basis: Existing checksum-pinned preparation and snapshot metadata; no record contents read during
+    this curation.
+  scope_note: Identifies the available source population. This is not human review, historical
+    paper-membership acceptance, publisher byte-equivalence proof, or permission to redistribute.
+  receipt: work/prepared/vqa-constraints/7b84c7030382399b53869347c2d1e824064e1ff575ab76a9d42f6fc7a1ae9aa6/receipt.json
+  receipt_sha256: 3478d45976b522032bc725877880ab66f7d68edcbde32d8907e7647c9ac9ef0d
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: vqa-constraints-0c74e01ea5fb02bbdd90e08f53777d271c44f639
+  snapshot_id: vqa-constraints-7b84c7030382399b53869347
+  source_url: https://github.com/microsoft/MLLMInterpret/tree/0c74e01ea5fb02bbdd90e08f53777d271c44f639
+  record_count: 9463
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All rows in the three native CSVs at the pinned author repository revision. Directory-based
+    Known/Movies questions retain every released candidate image; COCO references join to original
+    val2014 images. Blank CSV index fields and native strings are retained. Unannotated image
+    folders are counted in the receipt, not fabricated as questions. No unreleased multi-constraint
+    rows, answer labels or historical paper-used image choices are inferred.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/vqa-constraints.yaml
 source_url: https://github.com/microsoft/MLLMInterpret/tree/0c74e01ea5fb02bbdd90e08f53777d271c44f639
 modalities:
 - image
@@ -55,3 +93,4 @@ modalities:
 tasks:
 - visual question answering
 - constraint inspection
+snapshot_id: vqa-constraints-7b84c7030382399b53869347

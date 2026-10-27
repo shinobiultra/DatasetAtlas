@@ -367,3 +367,49 @@ content-addressed image files use their decoded format for the HTTP media type.
 A missing or changed retained file is an error, not an automatic remote download.
 
 Model context requests may include `snapshot_ids`; the workbench resolves records and rights from those inspected versions and refuses unavailable bindings. Approved context policy records exact record versions, maximum completion tokens and optional `reasoning_effort`; configuration changes invalidate the approval digest.
+
+### Release 1.0 query and preparation bindings
+
+`POST /datasets/{dataset_id}/membership/{artifact_id}` accepts a `Query` and returns
+one raw `uint8` byte per artifact subject, in registered artifact-ID order. Headers
+`X-Atlas-Dtype: uint8` and `X-Atlas-Shape` describe the array. Values are exactly zero
+or one. The server binds dataset, snapshot and unit, validates unique artifact IDs,
+and applies filters, search and sampling before intersecting with artifact IDs;
+browsing pagination does not limit membership. Pending, invalid or mismatched masks
+render and select no points. A map point fetch passes its artifact snapshot explicitly.
+The static provider computes the same membership over its complete preview pack.
+
+Preparation plans accept optional `sample_seed`, an integer exactly representable
+in JavaScript. Whole-source remote samplers freeze the resolved seed in the plan and
+fingerprint. Changing a seed or a resource bound invalidates a prior browser plan.
+`atlas datasets acquire --no-activate` builds a candidate without changing the active
+pointer; durable `activate_on_success` survives retries and restarts. A candidate is
+not runtime coverage until independently checked and activated.
+
+Structured native collections may retain rows with unavailable media. Their source
+path remains intact, `uri` is null, and availability is `not_acquired`; these rows
+remain in the full index. Preview eligibility may require available originals without
+changing that index population. Pinned exceptional file extensions require exact
+size/hash/header checks and expose the detected MIME type; original bytes and source
+names remain unchanged.
+
+Current catalogue IDs and explicit friendly aliases resolve current cards only.
+Frozen record/tool requests with an explicit snapshot may discover matching retained
+prepared metadata even after a card is retired. Lookup is bounded to known local
+metadata, literal historical IDs and the requested snapshot; it never rebinds a
+retired ID to a different current dataset. Default catalogue listings exclude these
+archives. Result browsing omits both vector and activation-value arrays; full artifact
+retrieval preserves the exact original arrays.
+
+Future whole-source sample snapshots use `snapshot_identity` provenance with a
+versioned scheme, `source_population_sha256`, source population row/shard counts,
+`cohort_sha256` and actual `record_count`. The source binding covers pinned native
+files; the cohort binding covers ordered native envelopes, media hashes and
+availability plus the effective schema. It excludes the top-level envelope
+snapshot ID and generated cache paths, budgets and counters. Native source fields
+(including a source field named `snapshot_id`) remain part of the content. Final
+IDs are assigned to the dataset, records and receipt before persistence. Existing
+active snapshots and native record IDs remain unchanged.
+The source-population SHA is a fingerprint of pinned source descriptors and the
+observed footer row count; it does not claim a local hash verification of every
+byte in the remote source files.

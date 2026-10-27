@@ -2,9 +2,9 @@ schema_version: '1.0'
 id: cifar-10-1
 name: CIFAR-10.1 v6
 aliases: []
-description: "Author v6 release: 2,000 original 32\xD732 RGB images, 200 per CIFAR-10\
-  \ class. Distinct from the 2,021-image v4 release. Original NPY pixels are losslessly\
-  \ encoded as PNG for local browsing; source row indices are preserved."
+description: 'Author v6 release: 2,000 original 32×32 RGB images, 200 per CIFAR-10 class. Distinct
+  from the 2,021-image v4 release. Original NPY pixels are losslessly encoded as PNG for local
+  browsing; source row indices are preserved.'
 paper_ids:
 - paper-a47845c66d4a3f48
 - paper-63c3bd849356e00f
@@ -70,8 +70,7 @@ coverage:
   preview_count: 100
   unit: example
   blockers:
-  - Author MIT code license excludes dataset images; public media redistribution is
-    not approved.
+  - Author MIT code license excludes dataset images; public media redistribution is not approved.
   - CIFAR-10.1 v4 is a separate release and is not substituted.
   total_count: 2000
 rights:
@@ -80,8 +79,8 @@ rights:
   images: not_reviewed
   external_provider: local_only
   source: https://github.com/modestyachts/CIFAR-10.1/tree/d9982abb0bfc4846b8d13a11e66b887d946205d0
-  basis: Author repository distributes NPY data; MIT repository license applies to
-    code and explicitly excludes image/label data from Tiny Images.
+  basis: Author repository distributes NPY data; MIT repository license applies to code and explicitly
+    excludes image/label data from Tiny Images.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-e9ce2378357fa3f6b023
@@ -89,9 +88,9 @@ evidence:
   source_file_hash: f1108a17f3cbbba7a93256ee725d68092c9a6d25204ca4faab92f6f0cbe1a4df
   page: 7
   role: evaluation
-  excerpt: mmon image corruptions (CIFAR-10-C, [58]) to dataset resampling bias (CIFAR-10.1,
-    [112]) and image source shift (CINIC-10, [31]). For each of these datasets, we
-    measure standard accuracy, an
+  excerpt: mmon image corruptions (CIFAR-10-C, [58]) to dataset resampling bias (CIFAR-10.1, [112])
+    and image source shift (CINIC-10, [31]). For each of these datasets, we measure standard accuracy,
+    an
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -100,9 +99,9 @@ evidence:
   source_file_hash: 81c3715d1e256579071591f3bc61f55d63b32a33dcc981026209d14d32990f32
   page: 24
   role: evaluation
-  excerpt: t have strongly predictive non-robust features. D.7 Generalization to CIFAR-10.1
-    Recht et al. [Rec+19] have constructed an unseen but distribution-shifted test
-    set for CIFAR-10. They show th
+  excerpt: t have strongly predictive non-robust features. D.7 Generalization to CIFAR-10.1 Recht
+    et al. [Rec+19] have constructed an unseen but distribution-shifted test set for CIFAR-10.
+    They show th
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -111,9 +110,9 @@ evidence:
   source_file_hash: f1108a17f3cbbba7a93256ee725d68092c9a6d25204ca4faab92f6f0cbe1a4df
   page: 7
   role: distribution shift evaluation
-  excerpt: ranging from common image corruptions (CIFAR-10-C, [58]) to dataset resampling
-    bias (CIFAR-10.1, [112]) and image source shift (CINIC-10, [31]). For each of
-    these datasets, we measure standard accuracy, and Fig. 3 shows
+  excerpt: ranging from common image corruptions (CIFAR-10-C, [58]) to dataset resampling bias
+    (CIFAR-10.1, [112]) and image source shift (CINIC-10, [31]). For each of these datasets, we
+    measure standard accuracy, and Fig. 3 shows
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: verified_source_acquisition
@@ -132,8 +131,24 @@ evidence:
     horse: 200
     ship: 200
     truck: 200
-  pixel_validation: All 2,000 saved PNG arrays exactly equal original NPY rows; no
-    transformations
+  pixel_validation: All 2,000 saved PNG arrays exactly equal original NPY rows; no transformations
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: v6-d9982abb0bfc
+  snapshot_id: cifar101-v6-4ca1776fd68aae0807f8d6424be79e25d1a1c2bb5273bff88db875e3ddfd9b1b
+  source_url: https://github.com/modestyachts/CIFAR-10.1/tree/d9982abb0bfc4846b8d13a11e66b887d946205d0
+  record_count: 2000
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: 'Author v6 release: 2,000 original 32×32 RGB images, 200 per CIFAR-10 class. Distinct
+    from the 2,021-image v4 release. Original NPY pixels are losslessly encoded as PNG for local
+    browsing; source row indices are preserved.'
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/cifar-10-1.yaml
 snapshot_id: cifar101-v6-4ca1776fd68aae0807f8d6424be79e25d1a1c2bb5273bff88db875e3ddfd9b1b
 source_url: https://github.com/modestyachts/CIFAR-10.1/tree/d9982abb0bfc4846b8d13a11e66b887d946205d0
 modalities:

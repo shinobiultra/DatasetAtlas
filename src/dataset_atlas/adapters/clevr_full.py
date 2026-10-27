@@ -185,9 +185,17 @@ class CLEVRFullAdapter(DatasetAdapter):
         filename = row["image_filename"]
         if split not in self.SPLITS or not re.fullmatch(r"CLEVR_(train|val|test)_\d{6}\.png", filename):
             raise ValueError("invalid CLEVR source image filename")
-        key = f"{split}:{index}"
+        validation_identity = self.config.get("validation_identity", "split_question_index")
+        if validation_identity not in {"split_question_index", "question_index"}:
+            raise ValueError("Unknown CLEVR validation_identity")
+        # The original canonical CLEVR preview used the native validation question
+        # index and filename directly. Preserve those identities when integrating
+        # the full release; train/test retain their split-qualified identities.
+        legacy_validation = split == "val" and validation_identity == "question_index"
+        key = str(index) if legacy_validation else f"{split}:{index}"
         asset_ref = f"images/{split}/{filename}"
-        aid = stable_id(self.dataset.id, self.revision, "asset", asset_ref)
+        asset_key = filename if legacy_validation else asset_ref
+        aid = stable_id(self.dataset.id, self.revision, "asset", asset_key)
         rid = stable_id(self.dataset.id, self.revision, "example", key)
         asset = Asset(id=aid, dataset_id=self.dataset.id, release_id=self.revision,
                       modality="image", uri=asset_ref,

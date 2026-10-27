@@ -2,34 +2,35 @@ schema_version: '1.0'
 id: places
 name: Places
 aliases: []
-description: MIT Places family includes multiple versions and split sizes; original site may be intermittently
-  unavailable.
+description: 'Places365 Standard validation 256-pixel release: all 36,500 native JPEGs, 365 category
+  labels and exact validation joins. Other Places variants and training populations are outside
+  this snapshot.'
 paper_ids:
 - paper-25eaa8c74ce76800
 release: places365-standard-validation-256-native
 adapter: places365
 adapter_config: {}
 coverage:
-  identity: candidate
+  identity: resolved
   source: verified
   access: public
-  adapter: implemented
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: indexed_metadata_partial_media
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - The citing survey names only Places; release and split remain unidentified. Native Places365 Standard256validation
-    browsing does not resolve that paper membership.
-  - Training, Challenge and other native image variants remain unprepared. Source-image publication rights
-    remain unreviewed.
+  - Training, Challenge and other native image variants remain unprepared. Source-image publication
+    rights remain unreviewed.
+  total_count: 36500
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://places2.csail.mit.edu/
-  note: Authors retain third-party image copyrights; CC BY for pretrained models does not cover images.
+  note: Authors retain third-party image copyrights; CC BY for pretrained models does not cover
+    images.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-bdd04a8ffd2d3c64b2c0
@@ -37,7 +38,8 @@ evidence:
   source_file_hash: 4a7c9f03d1579f0e09c94024028a90a49f7f78ab552b4cd6913da0825aa59db6
   page: 30
   role: cited-study dataset in survey table
-  excerpt: CLIP Image Retrieval, Segmenta- Waterbirds, CUB, Places, ImageNet- Text-Explanations of tion
+  excerpt: CLIP Image Retrieval, Segmenta- Waterbirds, CUB, Places, ImageNet- Text-Explanations
+    of tion
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -49,23 +51,24 @@ evidence:
   source_identity_status: family_only
 - kind: source_audit_rights
   url: https://places2.csail.mit.edu/
-  note: Authors retain third-party image copyrights; CC BY for pretrained models does not cover images.
+  note: Authors retain third-party image copyrights; CC BY for pretrained models does not cover
+    images.
   audit_file: work/sources/source-audit-jobs-batch2.json
   checked_on: '2026-09-22'
   source_identity_status: family_only
 - kind: source_audit_access
   checked_on: '2026-10-06'
   url: https://data.csail.mit.edu/places/places365/val_256.tar
-  note: 'Official MIT host answers HTTPS range requests: val_256.tar is 525,158,400 bytes (strong ETag,
-    Last-Modified 2016-05-16) and filelist_places365-standard.tar is 67,498,496 bytes. The survey table
-    names only ''Places'' (no Places205, Places365 or Places2 version, split or size), so no release is
-    pinned. The list archive''s contents were not inspected and places365_val.txt is not served at the
-    top level (HTTP 404).'
+  note: 'Official MIT host answers HTTPS range requests: val_256.tar is 525,158,400 bytes (strong
+    ETag, Last-Modified 2016-05-16) and filelist_places365-standard.tar is 67,498,496 bytes. The
+    survey table names only ''Places'' (no Places205, Places365 or Places2 version, split or size),
+    so no release is pinned. The list archive''s contents were not inspected and places365_val.txt
+    is not served at the top level (HTTP 404).'
   source_identity_status: official_files_reachable_release_not_named_by_paper
 - kind: source_audit_release
   url: https://data.csail.mit.edu/places/places365/val_256.tar
-  note: Publisher validation archive and native label filelist verified against library/publisher MD5
-    and measured SHA256. All36500original JPEG members are retained or indexed.
+  note: Publisher validation archive and native label filelist verified against library/publisher
+    MD5 and measured SHA256. All36500original JPEG members are retained or indexed.
   checked_on: '2026-10-06'
   audit_file: reports/places365-native-source-acquisition-20261006.json
 - kind: derived_facet
@@ -73,6 +76,50 @@ evidence:
   checked_on: '2026-10-06'
   note: 'From the source inspected on 2026-10-06: official val_256.tar and filelist archive inspected
     by header only; scene images. Not inferred from the dataset name.'
+- kind: paper_usage_qualification
+  note: Available release identity is separate from historical paper use.
+  qualifications:
+  - The citing survey names only Places; release and split remain unidentified. Native Places365
+    Standard256validation browsing does not resolve that paper membership.
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  status: resolved_declared_source_population
+  release: places365-standard-validation-256-native
+  snapshot_id: places-0516b70aa6c24604d8f265db
+  source_url: https://places2.csail.mit.edu/
+  representation: pinned_source_population
+  record_count: 36500
+  population: All36500 native Places365 Standard validation images in the author val_256 release
+    with all365 native category labels and exact validation file-list joins. The256pixel release
+    is publisher-prepared; Atlas preserves its JPEG bytes. Places205, Challenge, training images,
+    larger image variants and the survey paper unspecified Places population are outside this
+    snapshot.
+  basis: Existing checksum-pinned preparation and snapshot metadata; no record contents read during
+    this curation.
+  scope_note: Identifies the available source population. This is not human review, historical
+    paper-membership acceptance, publisher byte-equivalence proof, or permission to redistribute.
+  receipt: work/prepared/places/c5a999c4e9ce824ae3ed7b00a88f244ad946c8873762c2384d3a13e7be36b2cf/receipt.json
+  receipt_sha256: 48fcd8adf9a5437127a5fe35b0c210e142c6c2ab8a3b4255f5422c7d08c666f4
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: places365-standard-validation-256-native
+  snapshot_id: places-0516b70aa6c24604d8f265db
+  source_url: https://places2.csail.mit.edu/
+  record_count: 36500
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: indexed_metadata_partial_media
+  unit: example
+  population: All36500 native Places365 Standard validation images in the author val_256 release
+    with all365 native category labels and exact validation file-list joins. The256pixel release
+    is publisher-prepared; Atlas preserves its JPEG bytes. Places205, Challenge, training images,
+    larger image variants and the survey paper unspecified Places population are outside this
+    snapshot.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/places.yaml
 source_url: https://places2.csail.mit.edu/
 modalities:
 - image
+snapshot_id: places-0516b70aa6c24604d8f265db

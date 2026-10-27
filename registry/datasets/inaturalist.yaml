@@ -2,33 +2,33 @@ schema_version: '1.0'
 id: inaturalist
 name: iNaturalist
 aliases: []
-description: iNaturalist taxonomy data; challenge release not established by the paper
-  citation alone.
+description: iNaturalist taxonomy data; challenge release not established by the paper citation
+  alone.
 paper_ids:
 - paper-9036b4eaa048dc21
-release: unresolved
+release: inat2021-validation
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: indexed_metadata_partial_media
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
   - The citing paper challenge release and exact SAE membership remain unidentified.
-  - Adapter and preview are not implemented.
+  total_count: 100000
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://www.inaturalist.org/pages/developers
-  note: Licenses are per observation/photo; platform default license is not a dataset-wide
-    grant or proof of photo rights
+  note: Licenses are per observation/photo; platform default license is not a dataset-wide grant
+    or proof of photo rights
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-6ab016b9aab1ff0f85b3
@@ -36,9 +36,9 @@ evidence:
   source_file_hash: 88586baf881cd37666b815d32164caaa8a344cf3272fea7a93bf642d320bca93
   page: 26
   role: evaluation
-  excerpt: ierarchies We train and evaluate the SAE on embeddings extracted from iNaturalist
-    [55] dataset using an expansion factor ε = 2 and groups of size M = {3, 16, 69,
-    359, 1536}. These group sizes
+  excerpt: ierarchies We train and evaluate the SAE on embeddings extracted from iNaturalist [55]
+    dataset using an expansion factor ε = 2 and groups of size M = {3, 16, 69, 359, 1536}. These
+    group sizes
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -47,22 +47,21 @@ evidence:
   source_file_hash: 88586baf881cd37666b815d32164caaa8a344cf3272fea7a93bf642d320bca93
   page: 26
   role: taxonomy evaluation
-  excerpt: Matryoshka hierarchies We train and evaluate the SAE on embeddings extracted
-    from iNaturalist [55] dataset using an expansion factor ε = 2 and groups of size
-    M = {3, 16, 69, 359, 1536}. These group sizes correspond to
+  excerpt: Matryoshka hierarchies We train and evaluate the SAE on embeddings extracted from iNaturalist
+    [55] dataset using an expansion factor ε = 2 and groups of size M = {3, 16, 69, 359, 1536}.
+    These group sizes correspond to
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://www.inaturalist.org/pages/developers
-  note: iNaturalist taxonomy data; challenge release not established by the paper
-    citation alone
+  note: iNaturalist taxonomy data; challenge release not established by the paper citation alone
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: project_identified_release_unpinned
 - kind: source_audit_release
   url: https://www.inaturalist.org/pages/developers
-  note: Official platform and 2021 challenge expose different changing/dated sources;
-    cited paper only says iNaturalist
+  note: Official platform and 2021 challenge expose different changing/dated sources; cited paper
+    only says iNaturalist
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: project_identified_release_unpinned
@@ -76,8 +75,8 @@ evidence:
   source_identity_status: project_identified_release_unpinned
 - kind: source_audit_rights
   url: https://www.inaturalist.org/pages/developers
-  note: Licenses are per observation/photo; platform default license is not a dataset-wide
-    grant or proof of photo rights
+  note: Licenses are per observation/photo; platform default license is not a dataset-wide grant
+    or proof of photo rights
   publication_decision: media_not_approved
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
@@ -85,15 +84,58 @@ evidence:
 - kind: source_audit_release
   url: https://github.com/visipedia/inat_comp/tree/master/2021
   checked_on: '2026-10-06'
-  note: 2021 native validation annotations locally acquired and SHA-256 verified;
-    100,000 images, 10,000 taxa and 7 native licence definitions. Image archive publisher
-    MD5 is pinned; full image preparation is still pending.
+  note: 2021 native validation annotations locally acquired and SHA-256 verified; 100,000 images,
+    10,000 taxa and 7 native licence definitions. Image archive publisher MD5 is pinned; full
+    image preparation is still pending.
   source_identity_status: native_available_validation_not_paper_membership
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 100-record prepared preview: asset kinds and text fields
-    present in at least one record. Not inferred from the name or description.'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in
+    at least one record. Not inferred from the name or description.'
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: inat2021-validation
+  snapshot_id: inaturalist-0e3e1ae705e36be4f9ded293
+  source_url: https://www.inaturalist.org/pages/developers
+  record_count: 100000
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: indexed_metadata_partial_media
+  unit: example
+  population: 'Complete native iNaturalist 2021 validation release: 100,000 original images, 10,000
+    native taxa, every taxonomy field, per-image licence, rights holder and native location metadata.
+    Original archives are checksum-verified then retired with bounded original access. The citing
+    paper challenge release and exact SAE membership remain unidentified. Observation coordinates
+    and media remain local-only.'
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/inaturalist.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: inat2021-validation
+  snapshot_id: inaturalist-0e3e1ae705e36be4f9ded293
+  source_url: https://www.inaturalist.org/pages/developers
+  record_count: 100000
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: indexed_metadata_partial_media
+  unit: example
+  population: 'Complete native iNaturalist 2021 validation release: 100,000 original images, 10,000
+    native taxa, every taxonomy field, per-image licence, rights holder and native location metadata.
+    Original archives are checksum-verified then retired with bounded original access. The citing
+    paper challenge release and exact SAE membership remain unidentified. Observation coordinates
+    and media remain local-only.'
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/inaturalist.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
 source_url: https://www.inaturalist.org/pages/developers
 modalities:
 - image
+snapshot_id: inaturalist-0e3e1ae705e36be4f9ded293

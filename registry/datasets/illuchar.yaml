@@ -2,36 +2,35 @@ schema_version: '1.0'
 id: illuchar
 name: IlluChar
 aliases: []
-description: SMSP IlluChar illusion-character benchmark. Author repo links HF release
-  showing 4.13k current rows, while paper describes 2.5k training and ~1.1k test;
-  scripts generate original/noise/semantic variants
+description: SMSP IlluChar illusion-character benchmark. Author repo links HF release showing
+  4.13k current rows, while paper describes 2.5k training and ~1.1k test; scripts generate original/noise/semantic
+  variants
 paper_ids:
 - paper-80b7ba2e277a20c5
-release: hf-d55c729918bda746f74d377a2f11c92389e44bf0
+release: d55c729918bda746f74d377a2f11c92389e44bf0
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: metadata_only
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Pinned HF Parquet source totals 2,794,689,321 bytes, above this task's 1 GB per-release
-    acquisition budget; no local preview or full index was built.
   - Current HF release and paper split/count correspondence remains unresolved.
   - Source media and font rights have not been reviewed for redistribution.
+  total_count: 4125
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://huggingface.co/datasets/Tujz/IlluChar
-  note: HF page showed no explicit license label in this check; font, source images
-    and generated background terms need review
+  note: HF page showed no explicit license label in this check; font, source images and generated
+    background terms need review
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-77b034f54b6c16d54b07
@@ -39,9 +38,9 @@ evidence:
   source_file_hash: 1b014c3d1e86a39f1c6a88d4e9b79c99df2e06c5c7c31bea224aa5da2ae0c46d
   page: 1
   role: introduction
-  excerpt: ' concerns. To systematically investigate this failure, we in- troduce
-    IlluChar, a comprehensive and challenging illusion dataset, and uncover a key
-    underlying mechanism for the models’ fai'
+  excerpt: ' concerns. To systematically investigate this failure, we in- troduce IlluChar, a
+    comprehensive and challenging illusion dataset, and uncover a key underlying mechanism for
+    the models’ fai'
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -50,29 +49,29 @@ evidence:
   source_file_hash: 1b014c3d1e86a39f1c6a88d4e9b79c99df2e06c5c7c31bea224aa5da2ae0c46d
   page: 2
   role: introduced benchmark
-  excerpt: tro- scene illusions [27], overlay-style illusions [5], and images with
-    duce IlluChar, an illusion dataset with commonly-used characters geometric transformations
-    [12]. as hidden patterns. Unlike pri
+  excerpt: tro- scene illusions [27], overlay-style illusions [5], and images with duce IlluChar,
+    an illusion dataset with commonly-used characters geometric transformations [12]. as hidden
+    patterns. Unlike pri
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
   url: https://huggingface.co/datasets/Tujz/IlluChar
-  note: Author repo links HF release showing 4.13k current rows, while paper describes
-    2.5k training and ~1.1k test; scripts generate original/noise/semantic variants
+  note: Author repo links HF release showing 4.13k current rows, while paper describes 2.5k training
+    and ~1.1k test; scripts generate original/noise/semantic variants
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_release_located_version_differs_from_paper
 - kind: source_audit_rights
   url: https://huggingface.co/datasets/Tujz/IlluChar
-  note: HF page showed no explicit license label in this check; font, source images
-    and generated background terms need review
+  note: HF page showed no explicit license label in this check; font, source images and generated
+    background terms need review
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_release_located_version_differs_from_paper
 - kind: source_audit_access
   url: https://huggingface.co/datasets/Tujz/IlluChar
-  note: public; Pin HF revision and reconcile current 4.13k rows with paper split/count
-    before coverage claims.
+  note: public; Pin HF revision and reconcile current 4.13k rows with paper split/count before
+    coverage claims.
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: author_release_located_version_differs_from_paper
@@ -86,8 +85,25 @@ evidence:
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 100-record prepared preview: asset kinds and text fields
-    present in at least one record. Not inferred from the name or description.'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in
+    at least one record. Not inferred from the name or description.'
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: d55c729918bda746f74d377a2f11c92389e44bf0
+  snapshot_id: illuchar-df53383aaaa234f3f95818ec
+  source_url: https://huggingface.co/datasets/Tujz/IlluChar/tree/d55c729918bda746f74d377a2f11c92389e44bf0
+  record_count: 4125
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 4125 rows of the author's pinned IlluChar release, preserving native size and
+    noise conditions; correspondence to the historical paper splits remains unresolved.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/illuchar.yaml
 source_url: https://huggingface.co/datasets/Tujz/IlluChar/tree/d55c729918bda746f74d377a2f11c92389e44bf0
 modalities:
 - image
+snapshot_id: illuchar-df53383aaaa234f3f95818ec

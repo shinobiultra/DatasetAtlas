@@ -2,31 +2,29 @@ schema_version: '1.0'
 id: ucf101
 name: UCF101
 aliases: []
-description: Mention candidate from a focused page audit; the evidence receipts distinguish
-  direct use, comparison, related-work, and citation-only roles. Original source,
-  release, and rights still require independent verification.
+description: 'UCF101 recognition representation from a pinned public ZIP mirror: all 13,320 native
+  AVI files, class labels and three recognition folds. Publisher byte equivalence is not established.'
 paper_ids:
 - paper-6dbb0d4a7b949143
 - paper-392b0c393c06b48e
-release: unresolved
+release: ucf101-recognition-mirror-04d4e5ca1dc93606cb58752b0c08331e598743a4
 adapter: structured
 adapter_config: {}
 coverage:
-  identity: candidate
+  identity: resolved
   source: verified
   access: public
-  adapter: implemented
-  preview: none
-  complete_data: requires_preparation
+  adapter: tested
+  preview: complete_target
+  complete_data: indexed_metadata_partial_media
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - Pinned public mirror population of 13,320 native AVI files, three recognition
-    folds and 100 retained original previews is verified. Bounded browser displays
-    retain decoded-frame parity; publisher byte equivalence remains unverified.
-  - Publisher byte equivalence, exact paper splits/subsets and redistribution rights
-    remain unverified.
+  - Pinned public mirror population of 13,320 native AVI files, three recognition folds and 100
+    retained original previews is verified. Bounded browser displays retain decoded-frame parity;
+    publisher byte equivalence remains unverified.
+  total_count: 13320
 rights:
   records: not_reviewed
   annotations: not_reviewed
@@ -38,9 +36,9 @@ evidence:
   source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
   page: 5
   role: evaluation
-  excerpt: . We focus on robust vision en- CIFAR100, Pets (Parkhi et al., 2012), UCF101
-    (Soomro, coders, specifically large-scale adversarially trained Ima- 2012), and
-    Caltech101 (Li et al., 2022).
+  excerpt: . We focus on robust vision en- CIFAR100, Pets (Parkhi et al., 2012), UCF101 (Soomro,
+    coders, specifically large-scale adversarially trained Ima- 2012), and Caltech101 (Li et al.,
+    2022).
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -58,32 +56,76 @@ evidence:
   source_file_hash: 564549e8c5e3d6ea8537a0a75301def0fdbffe10c908b5eee07e5ca25a1a969e
   page: 5
   role: zero-shot robustness evaluation
-  excerpt: t Vision Models. We focus on robust vision en- CIFAR100, Pets (Parkhi et
-    al., 2012), UCF101 (Soomro, coders, specifically large-scale adversaria
+  excerpt: t Vision Models. We focus on robust vision en- CIFAR100, Pets (Parkhi et al., 2012),
+    UCF101 (Soomro, coders, specifically large-scale adversaria
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_access
   checked_on: '2026-10-06'
   url: https://crcv.ucf.edu/data/UCF101/UCF101.rar
-  note: TCP connections to www.crcv.ucf.edu succeed, but TLS verification fails from
-    this machine with 'unable to get local issuer certificate' (curl error 60), so
-    neither UCF101.rar nor the train/test split archive could be probed. The server's
-    certificate (CN crcv.ucf.edu, expires 2027-01-25) is sent without a complete chain;
-    Atlas does not disable certificate checks. A third-party Hugging Face mirror exists
-    but is not the original release.
+  note: TCP connections to www.crcv.ucf.edu succeed, but TLS verification fails from this machine
+    with 'unable to get local issuer certificate' (curl error 60), so neither UCF101.rar nor the
+    train/test split archive could be probed. The server's certificate (CN crcv.ucf.edu, expires
+    2027-01-25) is sent without a complete chain; Atlas does not disable certificate checks. A
+    third-party Hugging Face mirror exists but is not the original release.
   source_identity_status: official_host_tls_chain_incomplete
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'From the source inspected on 2026-10-06: official host unreachable over TLS;
-    the dataset is a video archive per the citing papers and the authors. Not inferred
-    from the dataset name.'
+  note: 'From the source inspected on 2026-10-06: official host unreachable over TLS; the dataset
+    is a video archive per the citing papers and the authors. Not inferred from the dataset name.'
 - kind: source_audit_access
   checked_on: '2026-10-07'
   url: https://huggingface.co/datasets/quchenyuan/UCF101-ZIP
-  note: Pinned secure public mirror exposes 13,320 AVI members and seven native recognition
-    tables. One native AVI has verified MPEG4 yuv420p video and MP3 audio; content
-    is processed locally only.
+  note: Pinned secure public mirror exposes 13,320 AVI members and seven native recognition tables.
+    One native AVI has verified MPEG4 yuv420p video and MP3 audio; content is processed locally
+    only.
   source_identity_status: pinned_public_mirror_population
+- kind: paper_usage_qualification
+  note: Available release identity is separate from historical paper use.
+  qualifications:
+  - Publisher byte equivalence, exact paper splits/subsets and redistribution rights remain unverified.
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  status: resolved_declared_source_population
+  release: ucf101-recognition-mirror-04d4e5ca1dc93606cb58752b0c08331e598743a4
+  snapshot_id: ucf101-a3e52ccb183998304dd6e9e6
+  source_url: https://huggingface.co/datasets/quchenyuan/UCF101-ZIP
+  representation: pinned_mirror_representation
+  record_count: 13320
+  population: All 13,320 unchanged original AVI members in the pinned public UCF101 ZIP mirror,
+    joined to every native class-index row and all three train/test recognition folds. Exact ZIP
+    membership, source revision, strong ETag and per-member CRC are retained. Preview originals
+    decode locally; a separate browser display derivative verifies exact decoded-frame parity
+    and copies supported native audio packets. Publisher archive byte equivalence and citing-paper
+    subset identity remain unverified. No media redistribution approval.
+  basis: Existing checksum-pinned preparation and snapshot metadata; no record contents read during
+    this curation.
+  scope_note: Identifies the available source population. This is not human review, historical
+    paper-membership acceptance, publisher byte-equivalence proof, or permission to redistribute.
+  receipt: work/prepared/ucf101/5c848053d4bd204c5f7024972db0d1fe1a5a7b6ab792309c4ee379dade7e6b03/receipt.json
+  receipt_sha256: 1420a79e11f3fdf35f8fad9f4fd66bb378607517273fdebeb6dff08873bd08f4
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: ucf101-recognition-mirror-04d4e5ca1dc93606cb58752b0c08331e598743a4
+  snapshot_id: ucf101-a3e52ccb183998304dd6e9e6
+  source_url: https://huggingface.co/datasets/quchenyuan/UCF101-ZIP
+  record_count: 13320
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: indexed_metadata_partial_media
+  unit: example
+  population: All 13,320 unchanged original AVI members in the pinned public UCF101 ZIP mirror,
+    joined to every native class-index row and all three train/test recognition folds. Exact ZIP
+    membership, source revision, strong ETag and per-member CRC are retained. Preview originals
+    decode locally; a separate browser display derivative verifies exact decoded-frame parity
+    and copies supported native audio packets. Publisher archive byte equivalence and citing-paper
+    subset identity remain unverified. No media redistribution approval.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/ucf101.yaml
 modalities:
 - video
+snapshot_id: ucf101-a3e52ccb183998304dd6e9e6
+source_url: https://huggingface.co/datasets/quchenyuan/UCF101-ZIP

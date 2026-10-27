@@ -2,36 +2,38 @@ schema_version: '1.0'
 id: covid-19-radiography
 name: COVID-19 Radiography
 aliases: []
-description: COVID-19 Radiography Database. Original Qatar/Dhaka team Kaggle release provides CXR classes
-  and masks; corpus uses evaluation, exact Kaggle version/sample IDs unpinned
+description: 'Depositor''s Kaggle version 5: four native CXR classes, one original radiograph
+  and paired segmentation mask per example, with source metadata. This does not establish the
+  exact subset used by the citing paper or rights to republish underlying medical images.'
 tasks:
 - image classification
 modalities:
 - image
 paper_ids:
 - paper-f5da3ca03780a203
-release: unresolved
+release: kaggle-v5-2022-03-19
 adapter: structured
 adapter_config: {}
 coverage:
   identity: resolved
   source: verified
   access: public
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
   - Public data/media reuse rights require separate review.
+  total_count: 21165
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_reviewed
   source: https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database
-  note: Medical images draw on multiple underlying collections/publications; Kaggle record alone is not
-    a blanket patient/image redistribution grant
+  note: Medical images draw on multiple underlying collections/publications; Kaggle record alone
+    is not a blanket patient/image redistribution grant
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-6de94e8a7dfb07279059
@@ -40,8 +42,8 @@ evidence:
   page: 15
   role: evaluation
   excerpt: sis. Case Study on Medical Diagnostic. We conduct a case study on the COVID-19 Radiography
-    dataset [44] to demonstrate the real-world risks of adversarial attacks in safety-critical domains.
-    This case
+    dataset [44] to demonstrate the real-world risks of adversarial attacks in safety-critical
+    domains. This case
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: source_audit_identity
@@ -53,16 +55,53 @@ evidence:
   source_identity_status: depositor_release_located_version_unpinned
 - kind: source_audit_rights
   url: https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database
-  note: Medical images draw on multiple underlying collections/publications; Kaggle record alone is not
-    a blanket patient/image redistribution grant
+  note: Medical images draw on multiple underlying collections/publications; Kaggle record alone
+    is not a blanket patient/image redistribution grant
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: depositor_release_located_version_unpinned
 - kind: source_audit_access
   url: https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database
-  note: public; Pin Kaggle version and patient/source provenance; no public preview until source rights
-    reviewed.
+  note: public; Pin Kaggle version and patient/source provenance; no public preview until source
+    rights reviewed.
   audit_file: work/sources/source-audit-corpus.json
   checked_on: '2026-09-22'
   source_identity_status: depositor_release_located_version_unpinned
-source_url: https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: kaggle-v5-2022-03-19
+  snapshot_id: covid-19-radiography-d0955977002b7234b0a30974
+  source_url: https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database/versions/5
+  record_count: 21165
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 21,165 class-labelled radiographs and their 21,165 paired masks in Kaggle version
+    5.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/covid-19-radiography.yaml
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  release: kaggle-v5-2022-03-19
+  snapshot_id: covid-19-radiography-d0955977002b7234b0a30974
+  source_url: https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database/versions/5
+  record_count: 21165
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: All 21,165 class-labelled radiographs and their 21,165 paired masks in Kaggle version
+    5.
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/covid-19-radiography.yaml
+  status: resolved_declared_source_population
+  basis: Pinned source identity and successful current preparation metadata. Source population
+    is specified above; this resolves a software declaration without asserting historical paper
+    acceptance.
+source_url: https://www.kaggle.com/datasets/tawsifurrahman/covid19-radiography-database/versions/5
+snapshot_id: covid-19-radiography-d0955977002b7234b0a30974

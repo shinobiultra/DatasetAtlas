@@ -20,6 +20,7 @@ def main():
     parser.add_argument('--embedding',choices=['minilm','siglip2'],default='minilm',
         help='Embedding space that drives projection, clustering and outliers; siglip2 for image-only datasets, whose text is only a display label')
     parser.add_argument('--output',type=Path,required=True)
+    parser.add_argument('--device', choices=['auto','cpu','cuda'], default='auto')
     args=parser.parse_args()
     if not 6<=args.records<=100:raise ValueError('Verification uses 6..100 real preview records')
     client=httpx.Client(base_url=args.url,timeout=90,headers={'X-Atlas-Request':'1'})
@@ -43,7 +44,7 @@ def main():
     def run(processor,config):
         body={'selection_id':selection['id'],'processor_id':processor,'config':{
             'max_records':args.records,'max_wall_seconds':600,'max_cpu_seconds':600,'max_rss_bytes':8_000_000_000,
-            'device':'auto','validation_checkpoint':receipt['checked_at_utc'],**config}}
+            'device':args.device,'validation_checkpoint':receipt['checked_at_utc'],**config}}
         estimate=post('/runs/estimate',body)
         body['estimate_digest']=estimate['estimate_digest']
         started=post('/runs',body)

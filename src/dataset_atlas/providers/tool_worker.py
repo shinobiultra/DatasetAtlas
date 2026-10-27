@@ -38,6 +38,9 @@ def main():
     bindings=request.get('record_versions')
     if bindings is not None and (not isinstance(bindings,dict) or set(bindings)!=scope):
         raise ValueError('Invalid approved snapshot bindings')
+    if bindings is not None and any(not isinstance(value,dict) or any(not isinstance(value.get(key),str) or not value[key]
+            for key in ('dataset_id','release_id','snapshot_id')) for value in bindings.values()):
+        raise ValueError('Invalid approved snapshot bindings')
     packs = {}; snapshots = {}
     result_ids=request.get('result_snapshot_ids',[])
     if not isinstance(result_ids,list) or len(result_ids)>32 or len(set(result_ids))!=len(result_ids) or any(not isinstance(identity,str) for identity in result_ids):
@@ -63,19 +66,19 @@ def main():
         if identity not in scope: raise ValueError('Record outside approved tool scope')
         binding=bindings[identity] if bindings is not None else None
         prefix = identity.split(':',1)[0]
-        candidates = [prefix] if registry.has(prefix) else registry.ids()
+        candidates = [binding['dataset_id']] if binding is not None else ([prefix] if registry.has(prefix) else registry.ids())
         for dataset_id in candidates:
-            for dataset,pack_path,snapshot_path in registry.versions(dataset_id):
-                if binding is not None and (dataset.id,dataset.release,dataset.snapshot_id)!=(binding.get('dataset_id'),binding.get('release_id'),binding.get('snapshot_id')):continue
-                if not pack_path.is_file(): continue
-                key = str(pack_path)
-                if key not in packs:
-                    from dataset_atlas.models import Pack
-                    if pack_path.stat().st_size > 100_000_000:
-                        raise ValueError('Pack exceeds interactive size budget; prepare a bounded preview')
-                    pack = Pack.model_validate_json(pack_path.read_text())
-                    packs[key] = {record.id:record for record in pack.records}
-                if identity in packs[key]: return packs[key][identity]
+            versions=registry.versions(dataset_id,release_id=binding['release_id'],snapshot_id=binding['snapshot_id']) if binding is not None else registry.versions(dataset_id)
+            for dataset,pack_path,snapshot_path in versions:
+                if pack_path.is_file():
+                    key = str(pack_path)
+                    if key not in packs:
+                        from dataset_atlas.models import Pack
+                        if pack_path.stat().st_size > 100_000_000:
+                            raise ValueError('Pack exceeds interactive size budget; prepare a bounded preview')
+                        pack = Pack.model_validate_json(pack_path.read_text())
+                        packs[key] = {record.id:record for record in pack.records}
+                    if identity in packs[key]: return packs[key][identity]
                 if (snapshot_path/'manifest.json').is_file():
                     from dataset_atlas.queries.parquet import ParquetSnapshot
                     if str(snapshot_path) not in snapshots:

@@ -1,4 +1,4 @@
-"""SPEC 22.1 traceability: every acceptance row names a real test or a receipt."""
+"""Dataset Atlas 1.0 traceability: every acceptance row names a real test or a receipt."""
 import importlib.util
 import json
 from pathlib import Path

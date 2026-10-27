@@ -1,16 +1,15 @@
 import { expect, test } from '@playwright/test'
 import { createHash } from 'node:crypto'
 import { readFileSync, writeFileSync } from 'node:fs'
-import { fileURLToPath } from 'node:url'
 import { addFieldFilter, expectPanel, inspectRecord, pointToLiveWorkbench, scopeLine, selectionBar, switchView } from './helpers'
 
 test.use({ actionTimeout: 15_000 })
 
 test('current real analyses support linked filtering, projection, local image conversation and exchange', async ({ page, browser }, testInfo) => {
-  test.skip(!process.env.ATLAS_RUNTIME_JOURNEY || !process.env.ATLAS_LIVE_API, 'Requires real processor receipts and an explicitly enabled local model journey.')
+  test.skip(!process.env.ATLAS_RUNTIME_JOURNEY || !process.env.ATLAS_LIVE_API || !process.env.ATLAS_RUNTIME_RECEIPT, 'Requires a current private runtime receipt and an explicitly enabled local model journey.')
   test.setTimeout(240_000)
   const api = process.env.ATLAS_LIVE_API!
-  const runtime = JSON.parse(readFileSync(fileURLToPath(new URL('../../../reports/analysis-runtime-complete-20261006.json', import.meta.url)), 'utf8'))
+  const runtime = JSON.parse(readFileSync(process.env.ATLAS_RUNTIME_RECEIPT!, 'utf8'))
   expect(runtime.completed).toBe(true)
   const ids = Object.fromEntries(Object.entries(runtime.runs as Record<string, { artifact_ids: string[] }>).map(([key, run]) => [key, run.artifact_ids[0]]))
   const artifact = await (await fetch(`${api}/api/v1/artifacts/${ids['outlier.knn']}`)).json()
@@ -90,7 +89,7 @@ test('current real analyses support linked filtering, projection, local image co
   await page.getByLabel('Import exchange').setInputFiles(path)
   const importedHttp = await importResponse; expect(importedHttp.ok()).toBe(true)
   const imported = await importedHttp.json(); expect(imported.ids).toEqual(saved.ids)
-  writeFileSync(fileURLToPath(new URL('../../../reports/browser-runtime-linked-journey-20261007.json', import.meta.url)), JSON.stringify({
+  writeFileSync(test.info().outputPath('browser-runtime-linked-journey-20261007.json'), JSON.stringify({
     verified_at_utc: new Date().toISOString(), status: 'passed', browser: `Chromium ${browser.version()}`,
     dataset_id: 'clevr', source_snapshot_ids: runtime.snapshot_ids, parent_analysis_selection: runtime.selection_id,
     inspected_record_id: record.id, frozen_selection_id: saved.id, artifacts: ids,

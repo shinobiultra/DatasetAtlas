@@ -2,11 +2,10 @@ schema_version: '1.0'
 id: ring-a-bell
 name: Ring-a-Bell
 aliases: []
-description: 'Ring-A-Bell nudity InvPrompts: the authors'' Hugging Face release of
-  285 adversarial text prompts (three files of 95, one per K setting, eta=3), each
-  with a case number and evaluation seed. Only the nudity concept is released; the
-  corpus paper does not say which concept or setting it evaluated, so identity stays
-  a candidate.'
+description: 'Ring-A-Bell nudity InvPrompts: the authors'' Hugging Face release of 285 adversarial
+  text prompts (three files of 95, one per K setting, eta=3), each with a case number and evaluation
+  seed. Only the nudity concept is released; the corpus paper does not say which concept or setting
+  it evaluated.'
 paper_ids:
 - paper-09b2d7393fc75cf7
 release: hf-ce2df13b0ec372b2ca80460d5746ba8b933d6d17
@@ -37,29 +36,28 @@ adapter_config:
       dtype: number
     prompt: Original generated InvPrompt (adversarial text)
 coverage:
-  identity: candidate
+  identity: resolved
   source: verified
   access: gated
-  adapter: not_started
-  preview: none
-  complete_data: unimplemented
+  adapter: tested
+  preview: complete_target
+  complete_data: supported
   publication: not_reviewed
-  preview_count: 0
+  preview_count: 100
   unit: example
   blockers:
-  - The corpus paper does not state which concept or (K, eta) setting it evaluated;
-    only nudity prompts are released.
-  - 'Auto-gated on Hugging Face: each researcher must accept the dataset terms on
-    their own account. Atlas never accepts terms on a researcher''s behalf.'
-  - 'Prompts are adversarial text about explicit content: local browsing only; no
-    public redistribution review.'
+  - 'Auto-gated on Hugging Face: each researcher must accept the dataset terms on their own account.
+    Atlas never accepts terms on a researcher''s behalf.'
+  - 'Prompts are adversarial text about explicit content: local browsing only; no public redistribution
+    review.'
+  total_count: 285
 rights:
   records: not_reviewed
   annotations: not_reviewed
   images: not_applicable
   source: https://huggingface.co/datasets/Chia15/RingABell-Nudity
-  note: Auto-gated Hugging Face dataset; the code repository is MIT licensed but the
-    prompt release states no licence. Sensitive adversarial prompts stay local.
+  note: Auto-gated Hugging Face dataset; the code repository is MIT licensed but the prompt release
+    states no licence. Sensitive adversarial prompts stay local.
 evidence:
 - kind: corpus_mention
   evidence_id: evidence-9a354804eaef9ac3f719
@@ -67,9 +65,9 @@ evidence:
   source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
   page: 7
   role: evaluation
-  excerpt: ce-of-means procedure described in Equation (4). We evaluate on COCO [59]
-    annotations and Ring-a-Bell [60] Datasets. Under this setting, the attacker wishes
-    the steering prompts, both containing only safe descriptions. We also vect
+  excerpt: ce-of-means procedure described in Equation (4). We evaluate on COCO [59] annotations
+    and Ring-a-Bell [60] Datasets. Under this setting, the attacker wishes the steering prompts,
+    both containing only safe descriptions. We also vect
   review_scope: specific_page_evidence_checked
   paper_full_review_complete: true
 - kind: corpus_mention
@@ -78,23 +76,66 @@ evidence:
   source_file_hash: 44ac80b33c8ae1908e02cd215afb1e849d3a6e6b04c90679cdb6a0479f5c6a7b
   page: 7
   role: T2I evaluation
-  excerpt: We evaluate on COCO [59] annotations and Ring-a-Bell [60] Datasets. Under
-    this setting, the attacker wishes the steering
+  excerpt: We evaluate on COCO [59] annotations and Ring-a-Bell [60] Datasets. Under this setting,
+    the attacker wishes the steering
   review_scope: full_text_mention_inventory_checked
   paper_full_review_complete: true
 - kind: source_audit_release
   url: https://github.com/chiayi-hsu/Ring-A-Bell
   checked_on: '2026-10-06'
   note: The authors' repository README directs readers to https://huggingface.co/datasets/Chia15/RingABell-Nudity
-    for nudity InvPrompts. The pinned revision ce2df13b holds three CSVs of 95 rows
-    each (columns prompt, case_number, evaluation_seed). A researcher account already
-    authorized for the gate read all three; unauthenticated requests return HTTP 401.
+    for nudity InvPrompts. The pinned revision ce2df13b holds three CSVs of 95 rows each (columns
+    prompt, case_number, evaluation_seed). A researcher account already authorized for the gate
+    read all three; unauthenticated requests return HTTP 401.
   source_identity_status: author_release_concept_and_setting_not_established_by_paper
 - kind: derived_facet
   field: modalities
   checked_on: '2026-10-06'
-  note: 'Derived from the 100-record prepared preview: asset kinds and text fields
-    present in at least one record. Not inferred from the name or description.'
+  note: 'Derived from the 100-record prepared preview: asset kinds and text fields present in
+    at least one record. Not inferred from the name or description.'
+- kind: paper_usage_qualification
+  note: Available release identity is separate from historical paper use.
+  qualifications:
+  - The corpus paper does not state which concept or (K, eta) setting it evaluated; only nudity
+    prompts are released.
+- kind: source_release_resolution
+  checked_on: '2026-10-27'
+  status: resolved_declared_source_population
+  release: hf-ce2df13b0ec372b2ca80460d5746ba8b933d6d17
+  snapshot_id: ring-a-bell-27f2bb7cb5b62c59d0590559
+  source_url: https://huggingface.co/datasets/Chia15/RingABell-Nudity/tree/ce2df13b0ec372b2ca80460d5746ba8b933d6d17
+  representation: pinned_source_population
+  record_count: 285
+  population: 'All 285 author-released Ring-A-Bell nudity InvPrompts at the pinned Hugging Face
+    revision: three files of 95 prompts, one per (K, eta) setting (K=16, 38, 77; eta=3), each
+    with the author''s case number and evaluation seed. Only the nudity concept is released; the
+    corpus paper does not say which concept or setting it used. Prompts are adversarial text,
+    not images.'
+  basis: Existing checksum-pinned preparation and snapshot metadata; no record contents read during
+    this curation.
+  scope_note: Identifies the available source population. This is not human review, historical
+    paper-membership acceptance, publisher byte-equivalence proof, or permission to redistribute.
+  receipt: work/prepared/ring-a-bell/2942cdc33058bbe2f6af66db6980515f73ff1252fc8cb50f15517244a8500322/receipt.json
+  receipt_sha256: cb4036e8e0dbffe16799f7430fb6f5bc75692409aaacc98903c1e20c2d7c57fb
+- kind: source_current
+  checked_on: '2026-10-27'
+  release: hf-ce2df13b0ec372b2ca80460d5746ba8b933d6d17
+  snapshot_id: ring-a-bell-27f2bb7cb5b62c59d0590559
+  source_url: https://huggingface.co/datasets/Chia15/RingABell-Nudity/tree/ce2df13b0ec372b2ca80460d5746ba8b933d6d17
+  record_count: 285
+  preview_count: 100
+  adapter_verification: tested
+  complete_data: supported
+  unit: example
+  population: 'All 285 author-released Ring-A-Bell nudity InvPrompts at the pinned Hugging Face
+    revision: three files of 95 prompts, one per (K, eta) setting (K=16, 38, 77; eta=3), each
+    with the author''s case number and evaluation seed. Only the nudity concept is released; the
+    corpus paper does not say which concept or setting it used. Prompts are adversarial text,
+    not images.'
+  scope_note: Current verified preparation declares this available source population. Historical
+    paper-used membership, original-publisher byte equivalence where unproven, and public redistribution
+    rights are separate; no human review or new permission is claimed.
+  recipe: registry/recipes/ring-a-bell.yaml
 source_url: https://huggingface.co/datasets/Chia15/RingABell-Nudity/tree/ce2df13b0ec372b2ca80460d5746ba8b933d6d17
 modalities:
 - text
@@ -103,3 +144,4 @@ tasks:
 labels:
 - variant
 - evaluation_seed
+snapshot_id: ring-a-bell-27f2bb7cb5b62c59d0590559

@@ -310,29 +310,106 @@ def hc_bench(params, inputs, output_dir, check):
     written exactly as the maintainer's CSV (default `csv` dialect, CRLF line ends), so its file checksum matches too."""
     import csv
     subset, extension = params.get('subset', 'wild'), params.get('extension', 'png')
+    native_files = params.get('native_files')
+    if native_files is not None:
+        from dataset_atlas.adapters.core import _safe_relative
+        if not isinstance(native_files, list) or not native_files:
+            raise ValueError('HC-Bench native_files requires an ordered file inventory')
+        seen_keys, seen_paths = set(), set()
+        for entry in native_files:
+            if not isinstance(entry, dict) or set(entry) != {'key', 'path'}:
+                raise ValueError('HC-Bench native file needs an input key and exact native path')
+            key, path = entry['key'], _safe_relative(entry['path'])
+            if key not in inputs or key in seen_keys or path in seen_paths:
+                raise ValueError('HC-Bench native files contain a missing or duplicate input/path')
+            seen_keys.add(key); seen_paths.add(path)
+        if set(inputs) != seen_keys:
+            raise ValueError('HC-Bench native inventory must account for every source image')
+    else:
+        native_files = [{'key': key, 'path': f'{subset}/{key}.{extension}'}
+                        for key in sorted(k for k in inputs if k.startswith('image_'))]
+    declared_exceptions = params.get('native_extension_exceptions', [])
+    if (not isinstance(declared_exceptions, list) or any(not isinstance(path, str) for path in declared_exceptions)
+            or len(declared_exceptions) != len(set(declared_exceptions))):
+        raise ValueError('Native extension exceptions must be unique exact source paths')
+    observed_exceptions = {}
     media_dir = Path(output_dir) / 'media'
     columns = ['path', 'source_subset', 'source_bytes', 'source_sha256']
-    output = Path(output_dir) / 'wild_index.csv'
+    output = Path(output_dir) / ('native_index.csv' if params.get('native_files') is not None else 'wild_index.csv')
     output.parent.mkdir(parents=True, exist_ok=True)
     digest = RowDigest()
     with output.open('w', newline='') as stream:
         writer = csv.writer(stream)
         writer.writerow(columns)
-        for key in sorted(k for k in inputs if k.startswith('image_')):
+        for entry in native_files:
             check()
-            name = f'{key}.{extension}'
+            key, relative = entry['key'], entry['path']
             data = checked_image(Path(inputs[key]).read_bytes())
-            if image_extension(data) != '.' + extension:
-                raise ValueError(f'HC-Bench image is not a {extension}: {name}')
-            relative = f'{subset}/{name}'
+            suffix = Path(relative).suffix.lower()
+            actual_extension = image_extension(data)
+            if actual_extension != ('.jpg' if suffix == '.jpeg' else suffix):
+                if params.get('native_files') is None:
+                    raise ValueError(f'HC-Bench image is not a {extension}: {relative}')
+                if relative not in declared_exceptions:
+                    raise ValueError(f'HC-Bench image format differs from its native extension: {relative}')
+                observed_exceptions[relative] = {'media_type':{'.jpg':'image/jpeg','.png':'image/png','.webp':'image/webp'}[actual_extension],
+                                                 'sha256':hashlib.sha256(data).hexdigest()}
             store_image(media_dir, relative, data)
-            row = {'path': relative, 'source_subset': subset, 'source_bytes': str(len(data)), 'source_sha256': hashlib.sha256(data).hexdigest()}
+            row = {'path': relative, 'source_subset': str(Path(relative).parent), 'source_bytes': str(len(data)), 'source_sha256': hashlib.sha256(data).hexdigest()}
             writer.writerow([row[column] for column in columns])
             digest.add(row)
     if digest.count == 0:
         raise ValueError('HC-Bench conversion received no images')
+    if set(declared_exceptions) != set(observed_exceptions):
+        raise ValueError('Declared native extension exceptions differ from verified source bytes')
     return {'path': output, 'format': 'csv', 'count': digest.count, 'rows_sha256': digest.hexdigest(), 'file_sha256': file_sha256(output),
-            'columns': columns, 'media_dir': media_dir}
+            'columns': columns, 'media_dir': media_dir, 'media_type_overrides': observed_exceptions}
+
+
+@converter('hc_bench_complete')
+def hc_bench_complete(params, inputs, output_dir, check):
+    """Every released image plus independent native annotation rows/documents.
+
+    Annotation rows are deliberately not paired with images by filename guesses.
+    The source file and ordinal retain the exact released table order.
+    """
+    from dataset_atlas.adapters.core import _safe_relative
+    image_keys = [entry['key'] for entry in params['native_files']]
+    annotation_specs = params.get('native_annotations', [])
+    text_specs = params.get('native_texts', [])
+    all_keys = image_keys + [entry['key'] for entry in annotation_specs + text_specs]
+    if len(all_keys) != len(set(all_keys)) or set(all_keys) != set(inputs):
+        raise ValueError('HC-Bench complete inventory must account for every source exactly once')
+    images = hc_bench({'native_files': params['native_files'],
+                      'native_extension_exceptions': params.get('native_extension_exceptions', [])},
+                     {key: inputs[key] for key in image_keys}, output_dir, check)
+    def rows():
+        with images['path'].open(newline='') as stream:
+            for row in csv.DictReader(stream):
+                yield {**row, 'unit_kind': 'image', 'source_file': row['path'],
+                       'source_id': row['path'], 'media_available': True}
+        for spec in annotation_specs:
+            check(); name = _safe_relative(spec['path']); path = Path(inputs[spec['key']])
+            native = json.loads(path.read_text(encoding='utf-8-sig'))
+            if not isinstance(native, list) or any(not isinstance(row, dict) for row in native):
+                raise ValueError('HC-Bench native annotation table must contain objects')
+            digest = file_sha256(path)
+            for ordinal, row in enumerate(native):
+                check()
+                yield {'source_id': f'{name}:row:{ordinal}', 'unit_kind': 'annotation',
+                       'source_file': name, 'source_row': ordinal, 'source_file_sha256': digest,
+                       'native_annotation': row, 'media_available': False,
+                       'media_availability': 'No authoritative image-row join established; native row retained independently.'}
+        for spec in text_specs:
+            check(); name = _safe_relative(spec['path']); path = Path(inputs[spec['key']])
+            yield {'source_id': name, 'unit_kind': 'source_document', 'source_file': name,
+                   'source_file_sha256': file_sha256(path), 'text': path.read_text(encoding='utf-8'),
+                   'media_available': False, 'media_availability': 'Passive author source text; never executed.'}
+    result = write_rows(rows, Path(output_dir) / 'native_records.jsonl', 'jsonl', check)
+    result['media_dir'] = images['media_dir']
+    result['adapter_config'] = {'mapping': {'id': 'source_id', 'text': 'text', 'media': 'path', 'media_modality': 'image'},
+                                'media_type_overrides': images['media_type_overrides']}
+    return result
 
 
 # ---- MMBench (English dev, CircularEval variants) ------------------------------------------------------------------

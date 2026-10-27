@@ -16,6 +16,20 @@
 
 ## Quick start
 
+For colleagues with GitHub access, clone the repository and open the sample browser:
+
+```bash
+git clone https://github.com/shinobiultra/DatasetAtlas.git
+cd DatasetAtlas
+./start.sh
+```
+
+Install [uv](https://docs.astral.sh/uv/getting-started/installation/) and Node.js 22 or newer first. The command installs locked dependencies, validates the publication allowlist, builds the interface and opens a loopback-only browser. It includes **300 real examples from CLEVR, EuroSAT and PAIRS**, their approved original media and the catalogue guides. It needs no GPU, model weights or maintainer dataset directory. The included examples work offline after setup; fetching other datasets needs their publishers and any required access. Use `./start.sh --workbench` for the local research workbench and its own fetched datasets.
+
+For a smaller portable handoff, download **dataset-atlas-samples** from a successful [GitHub Actions run](https://github.com/shinobiultra/DatasetAtlas/actions), extract the enclosed ZIP, then run `python3 OPEN_ATLAS.py`. It verifies its file hashes and opens the sample browser using only Python's standard library. Build the same bundle from a clone with `uv run python scripts/build_sample_bundle.py`; provenance, scope and dataset notices travel with it. See [sharing with colleagues](docs/sharing.md).
+
+To install a release wheel instead:
+
 ```bash
 uv tool install ./dataset_atlas-0.2.0-py3-none-any.whl     # a release wheel; no Node, no checkout
 atlas init ~/atlas && cd ~/atlas                           # a workspace with the catalogue, no data yet
@@ -23,7 +37,7 @@ atlas serve                                                # open http://127.0.0
 atlas previews fetch --dataset mnist --execute             # plan, then fetch one preview from its publisher
 ```
 
-A fresh workspace holds the catalogue and no data. Each dataset page says what you can do with it, and nothing downloads until you have seen the size and approved the plan. From a checkout: `uv sync && npm --prefix apps/web ci && npm --prefix apps/web run build && uv run atlas serve`. Python 3.11 to 3.14 on Linux or macOS.
+A fresh workbench workspace holds the catalogue and no data. Each dataset page says what you can do with it, and nothing downloads until you have seen the size and approved the plan. Python 3.11 to 3.14 on Linux or macOS; use WSL on Windows for the workbench. The portable sample browser also runs with Python 3.11 or newer on Windows.
 
 ![A dataset without published examples still tells you how to get it, what a record holds and which papers cite it](docs/images/guide.png)
 

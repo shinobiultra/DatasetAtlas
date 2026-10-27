@@ -22,6 +22,7 @@ def main(argv=None):
     usage.add_argument('--ceiling-bytes',type=int)
     clean=storage.add_parser('clean',help='Evict unpinned caches and test environments; hard-link checksum-identical acquired sources')
     clean.add_argument('--execute',action='store_true')
+    clean.add_argument('--deduplicate-only',action='store_true',help='Only hard-link checksum-identical immutable files; retain all caches, sources and environments')
     clean.add_argument('--idle-media-caches',action='store_true',help='Evict only unpinned media caches outside active preparation namespaces')
     clean.add_argument('--include-model-test-env',action='store_true',help='Also remove the reproducible isolated vLLM demonstration environment; retain model weights and evidence')
     configure=storage.add_parser('configure',help='Enable full-resolution on-demand compression and shared preparation admission limits')
@@ -147,10 +148,12 @@ def main(argv=None):
         if args.command=='storage':
             if args.action=='clean':
                 from dataset_atlas.storage.maintenance import clean_workspace,evict_idle_media_caches
+                if args.deduplicate_only and (args.idle_media_caches or args.include_model_test_env):
+                    raise ValueError('--deduplicate-only cannot be combined with eviction options')
                 if args.idle_media_caches:
                     if args.include_model_test_env:raise ValueError('Idle media-cache cleanup cannot remove model environments')
                     emit(evict_idle_media_caches(root,execute=args.execute))
-                else:emit(clean_workspace(root,execute=args.execute,include_model_test_env=args.include_model_test_env))
+                else:emit(clean_workspace(root,execute=args.execute,include_model_test_env=args.include_model_test_env,deduplicate_only=args.deduplicate_only))
                 return 0
             if args.action=='status':
                 from dataset_atlas.storage.usage import workspace_usage

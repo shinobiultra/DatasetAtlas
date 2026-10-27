@@ -76,6 +76,8 @@ def inspect_archive(path: Path, *, sdist: bool) -> dict:
                     site_bytes += len(content)
     prefix = "src/dataset_atlas/web/" if sdist else "dataset_atlas/web/"
     required = {prefix + "index.html", prefix + "data/catalogue.json", prefix + "data/clevr.json", prefix + "data/eurosat.json", prefix + "data/pairs.json", prefix + "licenses/eurosat-MIT.txt"}
+    if sdist:
+        required.update({'start.sh', 'scripts/build_sample_bundle.py'})
     missing = required - members.keys()
     if missing:
         raise ValueError(f"Missing bundled public site entries in {path.name}: {sorted(missing)}")

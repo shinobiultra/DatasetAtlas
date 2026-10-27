@@ -3,6 +3,7 @@
 | If you want to | Read |
 | --- | --- |
 | Install it, create a workspace, fetch previews | [Getting started](getting-started.md) |
+| Give colleagues a simple GitHub or compact sample handoff | [Sharing](sharing.md) |
 | Browse your own folder, table or Hugging Face dataset | [Adding your own datasets](adding-your-own-datasets.md) |
 | Fetch or prepare a catalogue dataset, and what the preparation limits mean | [On-demand preparation](on-demand-preparation.md), [Storage](storage.md) |
 | Get into a gated or licensed dataset | [Authorization links](dataset-authorization.md) |

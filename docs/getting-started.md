@@ -18,10 +18,13 @@ atlas serve                                                 # then open http://1
 **From a repository checkout:**
 
 ```bash
-uv sync
-npm --prefix apps/web ci && npm --prefix apps/web run build    # once; needs Node 22
-uv run atlas serve
+./start.sh                  # approved sample browser; needs uv and Node 22+
+./start.sh --workbench      # optional local research workspace
 ```
+
+The sample browser includes 300 approved real examples and original media. It
+does not need the maintainer's stored datasets. A portable ZIP needs only Python;
+see [sharing with colleagues](sharing.md).
 
 The server listens on loopback only. To use it on another machine, run it there and tunnel the port: `ssh -L 8765:127.0.0.1:8765 host` (see [remote workbench](remote-workbench.md)).
 

@@ -121,6 +121,19 @@ recorded in `reports/food101-repacked-retention.json`.
 
 ## Cleanup
 
+For lossless consolidation without evicting anything:
+
+```bash
+atlas storage clean --deduplicate-only
+atlas storage clean --deduplicate-only --execute
+```
+
+Only checksum-identical immutable files with matching filesystem permissions and
+ownership share an inode. Every path and byte remains available. This mode keeps
+all caches, source archives, preview originals, models and environments, and
+refuses active work or held storage locks. Its receipt reports actual allocated
+bytes before and after. It cannot be combined with eviction options.
+
 ```bash
 atlas storage clean                             # inspect the proposed cleanup
 atlas storage clean --execute                  # evict unpinned caches and share duplicate immutable files

@@ -147,6 +147,12 @@ def test_asset_worker_batches_repeated_asset_once(tmp_path, monkeypatch):
     from dataset_atlas.jobs import worker
     import dataset_atlas.processors as processors
 
+    # main() normally runs in a dedicated subprocess. This unit probe runs it
+    # here, so installing its permanent watchdog would cap the whole pytest
+    # coordinator (and unrelated later tests). Real limits have subprocess tests
+    # in test_resource_and_display.py.
+    monkeypatch.setattr('dataset_atlas.jobs.limits.install', lambda config, stage: None)
+
     selection, records = fixture_records()
     shared = Asset(id="shared", dataset_id="dataset", release_id="release", modality="image", uri="shared.png")
     for record in records:

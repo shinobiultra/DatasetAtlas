@@ -98,6 +98,15 @@ jobs:
         run: |
           python scripts/build_release.py
           python scripts/verify_distribution.py
+      - name: Build compact sample handoff
+        run: python scripts/build_sample_bundle.py
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: dataset-atlas-samples
+          path: |
+            dist/dataset-atlas-samples.zip
+            dist/dataset-atlas-samples.zip.sha256
+          if-no-files-found: error
       # The wheel embeds the interface and the catalogue: `uv tool install` it, then `atlas init DIR` (docs/getting-started.md).
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
